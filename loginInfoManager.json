@@ -9,5 +9,25 @@
     "authenticationLevel" : {
       "authenticationLevel" : "ADMIN"
     }
+  }, {
+    "userName" : {
+      "userName" : "manager"
+    },
+    "password" : {
+      "password" : "Gcf70h4aWQ1T9NMxE03XM3nq3nCmFGihnO4xMzHMgP0="
+    },
+    "authenticationLevel" : {
+      "authenticationLevel" : "MANAGER"
+    }
+  }, {
+    "userName" : {
+      "userName" : "stock Taker"
+    },
+    "password" : {
+      "password" : "Gcf70h4aWQ1T9NMxE03XM3nq3nCmFGihnO4xMzHMgP0="
+    },
+    "authenticationLevel" : {
+      "authenticationLevel" : "STOCKTAKER"
+    }
   } ]
 }

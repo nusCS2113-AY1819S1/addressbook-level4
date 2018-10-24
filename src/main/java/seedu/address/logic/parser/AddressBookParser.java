@@ -24,8 +24,6 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.user.ChangePasswordCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.user.ChangePasswordCommandParser;
-import seedu.address.logic.parser.validation.check.UserAuthenticationCheck;
-import seedu.address.logic.parser.validation.check.UserAuthenticationCheckUtils;
 
 /**
  * Parses user input.
@@ -51,10 +49,6 @@ public class AddressBookParser {
         }
 
         String commandWord = matcher.group("commandWord");
-        //checker for unauthorised command
-        UserAuthenticationCheck userAuthenticationCheck = new UserAuthenticationCheckUtils (commandWord);
-        commandWord = userAuthenticationCheck.checkAuthentication ();
-
         final String arguments = matcher.group("arguments");
 
         switch (commandWord) {

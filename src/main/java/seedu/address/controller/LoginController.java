@@ -27,8 +27,8 @@ import seedu.address.model.LoginInfoManager;
 public class LoginController {
 
     protected static LoginInfoManager loginInfoManager;
-    private String username = "";
-    private String password = "";
+    private String username;
+    private String password;
     @FXML
     private TextField usernameField;
     @FXML
@@ -41,17 +41,17 @@ public class LoginController {
     private boolean isPasswordGoingToEnter = false;
     private final Logger logger = LogsCenter.getLogger(LoginController.class);
 
+    public LoginController(){
+        username = "";
+        password = "";
+    }
+
     /**
      * Get the input from the login command box
      * @param key key entered
      */
     @FXML
     public void handleInputFromCommandBox(KeyEvent key) {
-        //        commandInput = commandBox.getText ();
-        //        int caretPosition = commandBox.getCaretPosition();
-        //        setUserNameAndPassword();
-        //        //commandBox.setText (setPasswordToStar ());
-        //        commandBox.positionCaret (caretPosition);
         if (key.getCode() == KeyCode.ENTER) {
             commandInput = commandBox.getText ();
             setUserNameAndPassword();

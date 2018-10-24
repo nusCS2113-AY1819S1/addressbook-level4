@@ -1,6 +1,10 @@
 package seedu.address.logic.commands.user;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.authentication.AuthenticalLevel.AUTH_ACCOUNTANT;
+import static seedu.address.authentication.AuthenticalLevel.AUTH_ADMIN;
+import static seedu.address.authentication.AuthenticalLevel.AUTH_MANAGER;
+import static seedu.address.authentication.AuthenticalLevel.AUTH_STOCK_TAKER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AUTHENTICATION_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
@@ -25,12 +29,12 @@ public class CreateAccountCommand extends UserCommand {
             + PREFIX_PASSWORD + "Password: "
             + PREFIX_AUTHENTICATION_LEVEL + "authentication level: ";
 
-    public static final String MESSAGE_SUCCESS = "new account has been created";
+    public static final String MESSAGE_SUCCESS = "New account has been created";
     public static final String MESSAGE_WRONG_AUTHENTICATION_LEVEL = "Wrong authentication level : %1$s";
-    public static final String MESSAGE_AUTHENTICATION_LEVEL_FORMAT = " either " + AuthenticationLevel.ADMIN
-            + " or " + AuthenticationLevel.MANAGER
-            + " or " + AuthenticationLevel.ACCOUNTANT
-            + " or " + AuthenticationLevel.STOCK_TAKER;
+    public static final String MESSAGE_AUTHENTICATION_LEVEL_FORMAT = " either " + AUTH_ADMIN
+            + " or " + AUTH_MANAGER
+            + " or " + AUTH_STOCK_TAKER
+            + " or " + AUTH_ACCOUNTANT;
     private final String userName;
     private final String password;
     private final String authenticationLevel;
@@ -60,7 +64,7 @@ public class CreateAccountCommand extends UserCommand {
     }
 
     @Override
-    public CommandResult execute (Model model , CommandHistory history) throws CommandException {
+    public CommandResult execute (Model model , CommandHistory history) {
         return null;
     }
 
@@ -71,10 +75,10 @@ public class CreateAccountCommand extends UserCommand {
      * @return
      */
     private static boolean isAuthenticationLevelValid(String authenticationLevel) {
-        if (authenticationLevel.equals (AuthenticationLevel.ADMIN.toString ())
-                || authenticationLevel.equals (AuthenticationLevel.MANAGER.toString ())
-                || authenticationLevel.equals (AuthenticationLevel.ACCOUNTANT.toString ())
-                || authenticationLevel.equals (AuthenticationLevel.STOCK_TAKER.toString ())) {
+        if (authenticationLevel.equals (AUTH_ADMIN)
+                || authenticationLevel.equals (AUTH_MANAGER)
+                || authenticationLevel.equals (AUTH_STOCK_TAKER)
+                || authenticationLevel.equals (AUTH_ACCOUNTANT)) {
             return true;
         }
         return false;
