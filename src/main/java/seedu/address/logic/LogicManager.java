@@ -8,7 +8,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.LoginParser;
+import seedu.address.logic.parser.ProManageParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
@@ -22,19 +23,41 @@ public class LogicManager extends ComponentManager implements Logic {
 
     private final Model model;
     private final CommandHistory history;
-    private final AddressBookParser addressBookParser;
+    private ProManageParser proManageParser;
 
     public LogicManager(Model model) {
         this.model = model;
         history = new CommandHistory();
-        addressBookParser = new AddressBookParser();
     }
+
+    /**
+     * Login for the app
+     *
+     * @param commandText
+     * @return CommandResult if successfully login
+     * @throws CommandException
+     * @throws ParseException
+     */
+
+    private CommandResult loginCommand(String commandText) throws CommandException, ParseException {
+        logger.info("----------------[USER COMMAND][" + commandText + "]");
+        try {
+            this.proManageParser = LoginParser.loginCommand(commandText);
+            return new CommandResult(String.format("Successfully login as %s", proManageParser.getIdentity()));
+        } finally {
+            //history.add(commandText);
+        }
+    }
+
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
+        if (proManageParser == null) {
+            loginCommand("manager");
+        }
         try {
-            Command command = addressBookParser.parseCommand(commandText);
+            Command command = proManageParser.parseCommand(commandText);
             return command.execute(model, history);
         } finally {
             history.add(commandText);
