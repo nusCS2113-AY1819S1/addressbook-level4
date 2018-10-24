@@ -17,6 +17,9 @@ import seedu.address.model.event.Date;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Time;
 import seedu.address.model.eventContacts.EventContacts;
+import seedu.address.model.expense.ExpenseCategory;
+import seedu.address.model.expense.ExpenseDate;
+import seedu.address.model.expense.ExpenseValue;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -285,4 +288,51 @@ public class ParserUtil {
         }
         return eventContactsSet;
     }
+
+    //@@author ChenSongJian
+    /**
+     * Parses a {@code String expenseValue} into a {@code expenseValue}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static ExpenseCategory parseExpenseCategory(String expenseCategory) throws ParseException {
+        requireNonNull(expenseCategory);
+        String trimmedExpenseCategory = expenseCategory.trim();
+        if (!ExpenseCategory.isValidExpenseCategory(trimmedExpenseCategory)) {
+            throw new ParseException(ExpenseCategory.MESSAGE_EXPENSE_CATEGORY_CONSTRAINTS);
+        }
+        return new ExpenseCategory(trimmedExpenseCategory);
+    }
+
+    /**
+     * Parses a {@code String expenseDate} into a {@code expenseDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static ExpenseDate parseExpenseDate(String expenseDate) throws ParseException {
+        requireNonNull(expenseDate);
+        String trimmedExpenseDate = expenseDate.trim();
+        if (!ExpenseDate.isValidDate(trimmedExpenseDate)) {
+            throw new ParseException(ExpenseDate.MESSAGE_EXPENSE_DATE_CONSTRAINTS);
+        }
+        return new ExpenseDate(trimmedExpenseDate);
+    }
+
+    /**
+     * Parses a {@code String expenseValue} into a {@code expenseValue}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static ExpenseValue parseExpenseValue(String expenseValue) throws ParseException {
+        requireNonNull(expenseValue);
+        String trimmedExpenseValue = expenseValue.trim();
+        if (!ExpenseValue.isValidExpenseValue(trimmedExpenseValue)) {
+            throw new ParseException(ExpenseValue.MESSAGE_EXPENSE_VALUE_CONSTRAINTS);
+        }
+        return new ExpenseValue(trimmedExpenseValue);
+    }
+    //@@author
 }

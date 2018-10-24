@@ -5,7 +5,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.ExpenseBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyExpenseBook;
+import seedu.address.model.expense.Expense;
+import seedu.address.model.expense.ExpenseCategory;
+import seedu.address.model.expense.ExpenseDate;
+import seedu.address.model.expense.ExpenseValue;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -47,6 +53,33 @@ public class SampleDataUtil {
         }
         return sampleAb;
     }
+
+    //@@author ChenSongJian
+    public static Expense[] getSampleExpenses() {
+        return new Expense[] {
+            new Expense(new ExpenseCategory("Food"), new ExpenseDate("11/11/1111"), new ExpenseValue("11.11"),
+                    getTagSet("friends")),
+            new Expense(new ExpenseCategory("Food"), new ExpenseDate("11/11/1111"), new ExpenseValue("11.11"),
+                    getTagSet("friends")),
+            new Expense(new ExpenseCategory("Food"), new ExpenseDate("11/11/1111"), new ExpenseValue("11.11"),
+                    getTagSet("friends")),
+            new Expense(new ExpenseCategory("Food"), new ExpenseDate("11/11/1111"), new ExpenseValue("11.11"),
+                    getTagSet("friends")),
+            new Expense(new ExpenseCategory("Food"), new ExpenseDate("11/11/1111"), new ExpenseValue("11.11"),
+                    getTagSet("friends")),
+            new Expense(new ExpenseCategory("Food"), new ExpenseDate("11/11/1111"), new ExpenseValue("11.11"),
+                    getTagSet("friends"))
+        };
+    }
+
+    public static ReadOnlyExpenseBook getSampleExpenseBook() {
+        ExpenseBook sampleEb = new ExpenseBook();
+        for (Expense sampleExpense : getSampleExpenses()) {
+            sampleEb.addExpense(sampleExpense);
+        }
+        return sampleEb;
+    }
+    //@@author
 
     /**
      * Returns a tag set containing the list of strings given.

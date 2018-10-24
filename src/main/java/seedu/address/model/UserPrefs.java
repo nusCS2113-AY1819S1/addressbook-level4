@@ -15,6 +15,9 @@ public class UserPrefs {
     private Path addressBookFilePath;
     private Path addressBookBackupFilePath;
 
+    private Path expenseBookFilePath = Paths.get("data" , "expensebook.xml");
+    private Path expenseBookBackupFilePath = Paths.get("data", "expensebook.bak");
+
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
         setAddressBookFilePath(getAddressBookFilePath());
@@ -78,5 +81,17 @@ public class UserPrefs {
         sb.append("\nLocal data backup file location : " + addressBookBackupFilePath);
         return sb.toString();
     }
+
+    //=========== Expense =================================================================================
+
+    public Path getExpenseBookFilePath() {
+        return expenseBookFilePath;
+    }
+
+    public Path getExpenseBookBackupFilePath() {
+        return expenseBookBackupFilePath;
+    }
+
+
 
 }

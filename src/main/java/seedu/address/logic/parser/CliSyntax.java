@@ -20,5 +20,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_CONTACT = new Prefix("c/");
     public static final Prefix PREFIX_TIME = new Prefix("t/");
 
-
+    //@@author ChenSongJian
+    public static final Prefix PREFIX_EXPENSE_CATEGORY = new Prefix("c/");
+    public static final Prefix PREFIX_EXPENSE_DATE = new Prefix("d/");
+    public static final Prefix PREFIX_EXPENSE_VALUE = new Prefix("v/");
+    //@@author
 }

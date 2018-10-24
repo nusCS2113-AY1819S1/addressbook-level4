@@ -54,6 +54,13 @@
             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
 
+          <VBox fx:id="expenseList" minWidth="175" maxWidth="175" SplitPane.resizableWithParent="false">
+            <padding>
+              <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+            <StackPane fx:id="expenseListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          </VBox>
+
           <StackPane fx:id="browserPlaceholder" prefWidth="340" >
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />

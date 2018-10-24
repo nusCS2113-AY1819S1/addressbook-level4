@@ -16,6 +16,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.AddressBookLocalBackupEvent;
 import seedu.address.commons.events.model.AddressBookOnlineRestoreEvent;
+import seedu.address.commons.events.model.ExpenseBookChangedEvent;
+import seedu.address.commons.events.model.ExpenseBookLocalBackupEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.events.storage.OnlineBackupEvent;
 import seedu.address.commons.events.storage.OnlineRestoreEvent;
@@ -25,6 +27,7 @@ import seedu.address.commons.exceptions.OnlineBackupFailureException;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyExpenseBook;
 import seedu.address.model.UserPrefs;
 
 
@@ -35,13 +38,17 @@ public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
+    private ExpenseBookStorage expenseBookStorage;
     private UserPrefsStorage userPrefsStorage;
 
     private GitHubStorage gitHubStorage;
 
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage,
+                          ExpenseBookStorage expenseBookStorage,
+                          UserPrefsStorage userPrefsStorage) {
         super();
         this.addressBookStorage = addressBookStorage;
+        this.expenseBookStorage = expenseBookStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -211,5 +218,62 @@ public class StorageManager extends ComponentManager implements Storage {
             raise(new DataSavingExceptionEvent((Exception) task.getException()));
         });
         executorService.submit(task);
+    }
+
+
+    //============ Expense ===============================================================================
+
+    @Override
+    public Optional<ReadOnlyExpenseBook> readExpenseBook() throws DataConversionException, IOException {
+        return readExpenseBook(expenseBookStorage.getExpenseBookFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyExpenseBook> readExpenseBook(Path filePath) throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return expenseBookStorage.readExpenseBook(filePath);
+    }
+
+    @Override
+    public Path getExpenseBookFilePath() {
+        return expenseBookStorage.getExpenseBookFilePath();
+    }
+
+    @Override
+    public void saveExpenseBook(ReadOnlyExpenseBook expenseBook) throws IOException {
+        saveExpenseBook(expenseBook, expenseBookStorage.getExpenseBookFilePath());
+    }
+
+    @Override
+    public void saveExpenseBook(ReadOnlyExpenseBook expenseBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        expenseBookStorage.saveExpenseBook(expenseBook, filePath);
+    }
+
+    @Override
+    public void backupExpenseBook(ReadOnlyExpenseBook expenseBook, Path backupFilePath) throws IOException {
+        expenseBookStorage.backupExpenseBook(expenseBook, backupFilePath);
+    }
+
+    @Override
+    @Subscribe
+    public void handleExpenseBookChangedEvent(ExpenseBookChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
+        try {
+            saveExpenseBook(event.data);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    }
+
+    @Override
+    @Subscribe
+    public void handleExpenseBookLocalBackupEvent(ExpenseBookLocalBackupEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Saving student planner data as backup"));
+        try {
+            backupExpenseBook(event.data, event.filePath);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
     }
 }
