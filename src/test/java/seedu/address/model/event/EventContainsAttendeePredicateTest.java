@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import seedu.address.testutil.EventBuilder;
 
+//@@author jieliangang
 public class EventContainsAttendeePredicateTest {
 
     private Set<String> attendeesSetOne;

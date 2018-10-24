@@ -1,7 +1,8 @@
 package seedu.address.logic.commands;
 
+//@@author jieliangang
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,27 +21,27 @@ import seedu.address.model.event.Location;
 import seedu.address.model.event.StartTime;
 import seedu.address.model.person.Person;
 
-//@@author jieliangang
 /**
- * Invites an existing person to an existing event.
+ * Removes an existing person from an existing event.
  */
-public class InviteCommand extends Command {
+public class RemoveCommand extends Command {
 
-    public static final String COMMAND_WORD = "invite";
+    public static final String COMMAND_WORD = "remove";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Invites an existing person to an existing event "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes an existing person from an existing event "
             + "by the index number used in the displayed person list and displayed event list.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_TO + "INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TO + "2";
+            + PREFIX_FROM + "INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_FROM + "1";
 
-    public static final String MESSAGE_INVITE_PERSON_SUCCESS = "Invited Person: %1$s to %2$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the event.";
+    public static final String MESSAGE_REMOVE_PERSON_SUCCESS = "Removed Person: %1$s from %2$s";
+    public static final String MESSAGE_ABSENT_PERSON = "This person is not originally in the event's attendee list.";
+    public static final String MESSAGE_ATTENDEE_EMPTY = "The event selected has no invited persons.";
 
     private final Index indexEvent;
     private final Index indexPerson;
 
-    public InviteCommand(Index indexPerson, Index indexEvent) {
+    public RemoveCommand(Index indexPerson, Index indexEvent) {
         this.indexPerson = indexPerson;
         this.indexEvent = indexEvent;
     }
@@ -64,8 +65,10 @@ public class InviteCommand extends Command {
         String personName = person.getName().toString();
         Attendees attendeesList = event.getAttendees();
 
-        if (!attendeesList.isSetEmpty() && attendeesList.hasName(personName)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (attendeesList.isSetEmpty()) {
+            throw new CommandException(MESSAGE_ATTENDEE_EMPTY);
+        } else if (!attendeesList.hasName(personName)) {
+            throw new CommandException(MESSAGE_ABSENT_PERSON);
         }
 
         Event updatedEvent = updateList(event, personName);
@@ -73,19 +76,19 @@ public class InviteCommand extends Command {
         model.updateEvent(event, updatedEvent);
         model.commitAddressBook();
 
-        return new CommandResult(String.format(MESSAGE_INVITE_PERSON_SUCCESS, personName, event.getEventName()));
+        return new CommandResult(String.format(MESSAGE_REMOVE_PERSON_SUCCESS, personName, event.getEventName()));
     }
 
     /**
-     * Add new name to an event attendees list.
+     * Remove existing name from an event attendees list.
      *
      * @param event The event to be updated.
      * @param personName The person's name to be removed from the attendees list.
-     * @return An updated event with the person's name in the attendees list.
+     * @return An updated event with the person's name removed in the attendees list.
      */
     private static Event updateList(Event event, String personName) {
         assert event != null;
-        Attendees updatedAttendee = event.getAttendees().addName(personName);
+        Attendees updatedAttendee = event.getAttendees().removeName(personName);
         EventName eventName = event.getEventName();
         Description description = event.getDescription();
         Location location = event.getLocation();
@@ -99,9 +102,8 @@ public class InviteCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof InviteCommand // instanceof handles nulls
-                && indexEvent.equals(((InviteCommand) other).indexEvent))
-                && indexPerson.equals(((InviteCommand) other).indexPerson); // state check
+                || (other instanceof RemoveCommand // instanceof handles nulls
+                && indexEvent.equals(((RemoveCommand) other).indexEvent))
+                && indexPerson.equals(((RemoveCommand) other).indexPerson); // state check
     }
-
 }

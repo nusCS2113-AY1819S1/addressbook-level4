@@ -2,6 +2,7 @@ package seedu.address.model.event;
 
 import java.util.function.Predicate;
 
+//@@author jieliangang
 /**
  * Tests that a {@code Event}'s {@code Attendee} contains the person name given.
  */

@@ -14,6 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.event.EventContainsAttendeePredicate;
 import seedu.address.model.person.Person;
 
+//@@author jieliangang
 /**
  * Selects a person identified using it's displayed index from the address book.
  */
