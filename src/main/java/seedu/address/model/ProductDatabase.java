@@ -212,10 +212,10 @@ public class ProductDatabase implements ReadOnlyAddressBook {
      * @param reminder
      * @throws InvalidTimeFormatException
      */
-    public void addReminderToActiveShopDay(Reminder reminder) throws InvalidTimeFormatException,
+    public void addReminderToActiveBusinessDay(Reminder reminder) throws InvalidTimeFormatException,
             DuplicateReminderException {
 
-        if (!Transaction.isValidTransactionTime(reminder.getTime())) {
+        if (!TimeIdentifiedClass.isValidDateAndTime(reminder.getTime())) {
             throw new InvalidTimeFormatException();
         }
 
@@ -224,9 +224,23 @@ public class ProductDatabase implements ReadOnlyAddressBook {
         } catch (DuplicateReminderException e) {
             throw e;
         }
+    }
 
-
-
+    /**
+     * Removes a reminder from the acitve business day.
+     * @param reminder
+     * @throws InvalidTimeFormatException
+     * @throws NoSuchElementException
+     */
+    public void removeReminderFromActiveBusinessDay(Reminder reminder) throws InvalidTimeFormatException,
+            NoSuchElementException {
+        try {
+            salesHistory.removeReminder(reminder);
+        } catch (InvalidTimeFormatException e) {
+            throw e;
+        } catch (NoSuchElementException e) {
+            throw e;
+        }
     }
 
     /**

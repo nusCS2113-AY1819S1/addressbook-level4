@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -112,8 +113,7 @@ public class BusinessDay extends TimeIdentifiedClass {
      * @param reminder
      */
     public void addReminder(Reminder reminder) throws DuplicateReminderException {
-        if (reminderRecord.containsKey(reminder.getTime())
-                && reminderRecord.get(reminder.getTime()).getMessage().equalsIgnoreCase(reminder.getMessage())) {
+        if (reminderRecord.containsKey(reminder.getTime())) {
             throw new DuplicateReminderException();
         }
         reminderRecord.put(reminder.getTime(), reminder);
@@ -124,7 +124,12 @@ public class BusinessDay extends TimeIdentifiedClass {
      * @param reminder
      */
 
-    public void removeReminder(Reminder reminder) {
+    public void removeReminder(Reminder reminder)throws InvalidTimeFormatException, NoSuchElementException {
+        if (!reminderRecord.containsKey(reminder.getTime())) {
+            throw new NoSuchElementException();
+        } else if (!TimeIdentifiedClass.isValidDateAndTime(reminder.getTime())) {
+            throw new InvalidTimeFormatException();
+        }
         reminderRecord.remove(reminder.getTime());
     }
 

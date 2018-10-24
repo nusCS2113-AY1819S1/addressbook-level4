@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -141,30 +142,34 @@ public interface Model {
             DuplicateTransactionException, ClosedShopDayException;
 
     /**
-     * Adds a reminder to the active shop day.
+     * Adds a reminder to the active business day.
      * @param reminder
      * @throws InvalidTimeFormatException
      * @throws DuplicateReminderException
      */
-
     void addReminder(Reminder reminder) throws InvalidTimeFormatException, DuplicateReminderException;
+
+    /**
+     * Removes a reminder from the active business day.
+     * @param reminder
+     * @throws InvalidTimeFormatException
+     * @throws NoSuchElementException
+     */
+    void removeReminder(Reminder reminder) throws InvalidTimeFormatException, NoSuchElementException;
 
     /**
      * Returns the reminders due on the current active day.
      */
-
     ArrayList<Reminder> getDueRemindersInActiveBusinessDay();
 
     /**
      * Returns the reminders that have not been shown by the thread.
      */
-
     ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread();
 
     /**
      * Returns a given day's transaction history
      */
-
     String getDaysHistory(String day);
 
     /**
