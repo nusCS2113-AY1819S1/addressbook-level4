@@ -115,7 +115,7 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
     private void assertCommandSuccess(String command, Index expectedSelectedCardIndex) {
         Model expectedModel = getModel();
         String expectedResultMessage = String.format(
-                MESSAGE_SELECT_PERSON_SUCCESS_SINGLE, expectedSelectedCardIndex.getOneBased());
+                MESSAGE_SELECT_PERSON_SUCCESS_SINGLE, 1);
         int preExecutionSelectedCardIndex = getPersonListPanel().getSelectedCardIndex();
 
         executeCommand(command);
