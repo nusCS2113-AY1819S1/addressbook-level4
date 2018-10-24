@@ -20,10 +20,11 @@ import seedu.address.logic.commands.SelectCommand;
 public class SelectCommandParserTest {
 
     private SelectCommandParser parser = new SelectCommandParser();
+    private final String invalidMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE);
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a", invalidMessage);
     }
 
     //@@author lekoook
@@ -45,5 +46,25 @@ public class SelectCommandParserTest {
     @Test
     public void parse_validArgs_returnSelectCommandMultipleRange() {
         assertParseSuccess(parser, "1  -  3 , 5 -7", new SelectCommand(INDEX_LIST_SIX));
+    }
+
+    @Test
+    public void parse_invalidArgs_throwsParseException_SingleNegative() {
+        assertParseFailure(parser, "-1", invalidMessage);
+    }
+
+    @Test
+    public void parse_invalidArgs_throwsParseException_MultipleNegative() {
+        assertParseFailure(parser, "-1 -2 3", invalidMessage);
+    }
+
+    @Test
+    public void parse_invalidArgs_throwsParseException_InvalidRangeFormat() {
+        assertParseFailure(parser,"1 -- 3", invalidMessage);
+    }
+
+    @Test
+    public void parse_invalidArgs_throwsParseException_InvalidRangeIndex() {
+        assertParseFailure(parser, "-3 - 3", invalidMessage);
     }
 }
