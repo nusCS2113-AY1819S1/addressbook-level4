@@ -6,6 +6,7 @@ import java.util.TreeMap;
 import seedu.address.model.saleshistory.exceptions.DuplicateDayException;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
 import seedu.address.model.timeidentifiedclass.shopday.BusinessDay;
+import seedu.address.model.timeidentifiedclass.shopday.Reminder;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
@@ -112,6 +113,23 @@ public class SalesHistory {
         } catch (ClosedShopDayException e) {
             throw e;
         } catch (DuplicateTransactionException e) {
+            throw e;
+        }
+    }
+
+    /**
+     * Removes given {@code reminder} from the sales history.
+     * TODO Make this work for more than just the {@code activeDay}
+     * @param reminder
+     * @throws InvalidTimeFormatException
+     * @throws NoSuchElementException
+     */
+    public void removeReminder(Reminder reminder) throws InvalidTimeFormatException, NoSuchElementException {
+        try {
+            activeDay.removeReminder(reminder);
+        } catch (InvalidTimeFormatException e) {
+            throw e;
+        } catch (NoSuchElementException e) {
             throw e;
         }
     }
