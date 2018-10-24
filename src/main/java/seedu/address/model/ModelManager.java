@@ -254,6 +254,16 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void deleteEvent(Event target) {
+
+    }
+
+    @Override
+    public ObservableList<Event> getFilteredEventList() {
+        return null;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {
