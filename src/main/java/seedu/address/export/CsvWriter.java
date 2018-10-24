@@ -72,8 +72,8 @@ public class CsvWriter {
     // TODO: Implement a writeToCsv() with a specific filepath.
 
     /**
-     *
-     * @param person {@code Person} A single person from the addressbook.
+     * Returns a string array that contains the details of a {@code person}.
+     * @param person {@code Person} to be saved to the string array.
      * @return A string array containing the name, phone, address, and email of
      *          the {@code person}.
      */
