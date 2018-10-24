@@ -48,8 +48,8 @@ public class LoginUserIdPasswordRoleCommandParser implements Parser<LoginCommand
      * @return a LoginUserIdPasswordRoleCommand object
      * @throws ParseException if the user input does not conform the expected format
      */
-    public LoginUserIdPasswordRoleCommand setRoleReturnLoginCommandObject(String[] keywords,
-                                                                          List<String> keywordsList) throws ParseException {
+    public LoginUserIdPasswordRoleCommand setRoleReturnLoginCommandObject(
+            String[] keywords, List<String> keywordsList) throws ParseException {
         if (keywords.length < 3) {
             userLoginException.showMissingLoginError();
             userLoginException.showLoginUsage();
