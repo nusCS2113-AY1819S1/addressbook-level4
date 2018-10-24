@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.recruit.ui.testutil.GuiTestAssert.assertListMatching;
 
 import org.junit.Ignore;
@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import guitests.GuiRobot;
 import guitests.guihandles.HelpWindowHandle;
-import seedu.recruit.logic.commands.DeleteCommand;
+import seedu.recruit.logic.commands.DeleteCandidateCommand;
 import seedu.recruit.logic.commands.HelpCommand;
 import seedu.recruit.logic.commands.SelectCommand;
 import seedu.recruit.ui.BrowserPanel;
@@ -62,7 +62,7 @@ public class HelpCommandSystemTest extends CandidateBookSystemTest {
         getMainWindowHandle().focus();
 
         // assert that while the help window is open the UI updates correctly for a command execution
-        executeCommand(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        executeCommand(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
         assertNotEquals(HelpCommand.SHOWING_HELP_MESSAGE, getResultDisplay().getText());
@@ -71,7 +71,7 @@ public class HelpCommandSystemTest extends CandidateBookSystemTest {
 
         // assert that the status bar too is updated correctly while the help window is open
         // note: the select command tested above does not update the status bar
-        executeCommand(DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        executeCommand(DeleteCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
         assertNotEquals(StatusBarFooter.SYNC_CANDIDATE_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
     }
 

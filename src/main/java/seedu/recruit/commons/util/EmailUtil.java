@@ -1,4 +1,4 @@
-package seedu.recruit.commons.core;
+package seedu.recruit.commons.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -6,8 +6,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
@@ -28,19 +30,107 @@ import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.GmailScopes;
 import com.google.api.services.gmail.model.Message;
 
+import seedu.recruit.commons.core.EmailSettings;
+import seedu.recruit.model.candidate.Candidate;
+import seedu.recruit.model.joboffer.JobOffer;
+
 /**
- * Class for using GMAIL on RecruitBook
+ * Contains variables and functions pertaining to the Email Command
  */
-public class Email {
+public class EmailUtil {
     /**
      * Global instance of the scopes required by this quickstart.
      * If modifying these scopes, delete your previously saved tokens/ folder.
      */
+    public static final String DEFAULT_FROM = "cs2113.f09.4@gmail.com";
+    public static final String EMAIL_ADD_COMMAND = "add";
+    public static final String EMAIL_NEXT_COMMAND = "next";
+    public static final String EMAIL_BACK_COMMAND = "back";
+    public static final String EMAIL_SEND_COMMAND = "send";
     private static final String APPLICATION_NAME = "CS2113 F09 T04";
     private static final String TOKENS_DIRECTORY_PATH = "tokens";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     private static final List<String> SCOPES = Collections.singletonList(GmailScopes.GMAIL_COMPOSE);
     private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
+
+    /**
+     * Variables for Email Command
+     */
+    private static EmailSettings emailSettings;
+    private LinkedHashSet<Candidate> candidates;
+    private LinkedHashSet<JobOffer> jobOffers;
+    private boolean hasRecipientsAdded;
+    private boolean areRecipientsCandidates;
+
+    /**
+     * Constructor
+     */
+    public EmailUtil() {
+        candidates = new LinkedHashSet<>();
+        jobOffers = new LinkedHashSet<>();
+        hasRecipientsAdded = false;
+    }
+
+    /**
+     * Getters and Setters
+     */
+    public boolean isHasRecipientsAdded() {
+        return hasRecipientsAdded;
+    }
+
+    public void setHasRecipientsAdded(boolean hasRecipientsAdded) {
+        this.hasRecipientsAdded = hasRecipientsAdded;
+    }
+
+    public static void setEmailSettings(EmailSettings emailSettings) {
+        EmailUtil.emailSettings = emailSettings;
+    }
+
+    public LinkedHashSet<Candidate> getCandidates() {
+        return candidates;
+    }
+
+    public void setCandidates(LinkedHashSet<Candidate> candidates) {
+        this.candidates = candidates;
+    }
+
+    public LinkedHashSet<JobOffer> getJobOffers() {
+        return jobOffers;
+    }
+
+    public void setJobOffers(LinkedHashSet<JobOffer> jobOffers) {
+        this.jobOffers = jobOffers;
+    }
+
+    public boolean isAreRecipientsCandidates() {
+        return areRecipientsCandidates;
+    }
+
+    public void setAreRecipientsCandidates(boolean areRecipientsCandidates) {
+        this.areRecipientsCandidates = areRecipientsCandidates;
+    }
+
+    public EmailSettings getEmailSettings() {
+        return emailSettings;
+    }
+
+    /**
+     * Adds candidate to candidates ArrayList
+     * @param candidate
+     * @return boolean value whether value was added into linkedhashset
+     */
+    public boolean addCandidate(Candidate candidate) {
+        return candidates.add(candidate);
+    }
+
+    /**
+     * Adds jobOffer to jobOffers ArrayList
+     * @param jobOffer
+     * @return boolean value whether value was added into linkedhashset
+     */
+    public boolean addJobOffer(JobOffer jobOffer) {
+        return jobOffers.add(jobOffer);
+    }
 
     /**
      * Creates an authorized Credential object.
@@ -50,7 +140,7 @@ public class Email {
      */
     private static Credential getCredentials(final NetHttpTransport httpTransport) throws IOException {
         // Load client secrets.
-        InputStream in = Email.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
+        InputStream in = EmailUtil.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
         GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 
         // Build flow and trigger user authorization request.
@@ -62,10 +152,11 @@ public class Email {
                 .build();
         return new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
     }
+
     /**
      * Initialiser for Gmail Service
      */
-    public static Gmail init() throws IOException, GeneralSecurityException {
+    public static Gmail serviceInit() throws IOException, GeneralSecurityException {
         final NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
         // Create a new authorized Gmail API client
         return new Gmail.Builder(httpTransport, JSON_FACTORY, getCredentials(httpTransport))
@@ -76,7 +167,8 @@ public class Email {
     /**
      * Create a MimeMessage using the parameters provided.
      *
-     * @param to email recruit of the receiver
+     * @param from sender of the email
+     * @param to email of the receiver
      * @param subject subject of the email
      * @param bodyText body text of the email
      * @return the MimeMessage to be used to send email
@@ -94,8 +186,38 @@ public class Email {
         MimeMessage email = new MimeMessage(session);
 
         email.setFrom(new InternetAddress(from));
-        email.addRecipient(javax.mail.Message.RecipientType.TO,
-                new InternetAddress(to));
+        email.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(to));
+        email.setSubject(subject);
+        email.setText(bodyText);
+        return email;
+    }
+
+    /**
+     * Create a MimeMessage using the parameters provided.
+     *
+     * @param from sender of the email
+     * @param to ArrayList of the emails of the receivers
+     * @param subject subject of the email
+     * @param bodyText body text of the email
+     * @return the MimeMessage used to send an email
+     * @throws MessagingException
+     */
+    public static MimeMessage createEmail(String from,
+                                          Set<String> to,
+                                          String subject,
+                                          String bodyText)
+            throws MessagingException {
+        Properties props;
+        props = System.getProperties();
+        Session session = Session.getDefaultInstance(props, null);
+
+        MimeMessage email = new MimeMessage(session);
+
+        email.setFrom(new InternetAddress(from));
+
+        for (String recipient : to) {
+            email.addRecipient(javax.mail.Message.RecipientType.BCC, new InternetAddress(recipient));
+        }
         email.setSubject(subject);
         email.setText(bodyText);
         return email;

@@ -15,7 +15,7 @@ import seedu.recruit.model.joboffer.JobOffer;
 /**
  * A list of companies that enforces uniqueness between its elements and does not allow nulls.
  * A company is considered unique by comparing using {@code Company#isSameCompany(Company)}. As such, adding and
- * updating of companes uses Company#isSameCompany(Company) for equality so as to ensure that the company being
+ * updating of companies uses Company#isSameCompany(Company) for equality so as to ensure that the company being
  * added or updated is unique in terms of identity in the UniqueCompanyList. However, the removal of a company uses
  * Company#equals(Company) so as to ensure that the company with exactly the same fields will be removed.
  *
@@ -76,6 +76,18 @@ public class UniqueCompanyList implements Iterable<Company> {
     public void addJobOfferToCompany(CompanyName companyName, JobOffer jobOffer) {
         internalList.get(getCompanyIndexFromName(companyName)).addJobOffer(jobOffer);
     }
+
+    /**
+     * Delete @param jobOffer from the companyList
+     * jobOffer must exist inside the companyList
+     */
+    public void deleteJobOffer(JobOffer jobOffer) {
+        internalList.get(getCompanyIndexFromName(jobOffer.getCompanyName())).removeJobOffer(jobOffer);
+    }
+
+    /**
+     * Deletes @param jobOffer from the companylist
+     */
 
     /**
      * Replaces the company {@code target} in the list with {@code editedCompany}.

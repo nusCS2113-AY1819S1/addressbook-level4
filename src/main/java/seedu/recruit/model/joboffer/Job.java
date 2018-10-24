@@ -9,7 +9,7 @@ import static seedu.recruit.commons.util.AppUtil.checkArgument;
  */
 
 public class Job {
-    public static final String JOB_VALIDATION_REGEX = "[\\p{Alpha}]+";
+    public static final String JOB_VALIDATION_REGEX = "[\\p{Alpha}\\p{Blank}]+";
 
     public static final String MESSAGE_JOB_CONSTRAINTS =
             "Desired job should only contain alphabetical characters and should not be blank ";

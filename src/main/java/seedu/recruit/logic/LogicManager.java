@@ -5,8 +5,10 @@ import java.security.GeneralSecurityException;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+
 import seedu.recruit.commons.core.ComponentManager;
 import seedu.recruit.commons.core.LogsCenter;
+import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.logic.commands.exceptions.CommandException;
@@ -29,11 +31,13 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Model model;
     private final CommandHistory history;
     private final RecruitBookParser recruitBookParser;
+    private final EmailUtil emailUtil;
 
     public LogicManager(Model model) {
         this.model = model;
         history = new CommandHistory();
         recruitBookParser = new RecruitBookParser();
+        emailUtil = model.getEmailUtil();
     }
 
     @Override
@@ -41,7 +45,7 @@ public class LogicManager extends ComponentManager implements Logic {
             throws CommandException, ParseException, IOException, GeneralSecurityException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
-            Command command = recruitBookParser.parseCommand(commandText, state);
+            Command command = recruitBookParser.parseCommand(commandText, state, emailUtil);
             return command.execute(model, history);
         } finally {
             history.add(commandText);

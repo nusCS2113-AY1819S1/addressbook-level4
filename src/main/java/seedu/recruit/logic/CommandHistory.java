@@ -27,6 +27,10 @@ public class CommandHistory {
         userInputHistory.add(userInput);
     }
 
+    public String getLast() {
+        return this.userInputHistory.getLast();
+    }
+
     /**
      * Returns a defensive copy of {@code userInputHistory}.
      */

@@ -27,7 +27,6 @@ public class Company {
     private final Email email;
     private final Phone phone;
 
-
     // List of unique job offers
     private UniqueJobList jobOffers;
 
@@ -70,6 +69,10 @@ public class Company {
 
     public void addJobOffer(JobOffer jobOffer) {
         jobOffers.add(jobOffer);
+    }
+
+    public void removeJobOffer(JobOffer jobOffer) {
+        jobOffers.remove(jobOffer);
     }
 
     /**
@@ -117,7 +120,8 @@ public class Company {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getCompanyName())
+        builder.append("Company Name:")
+                .append(getCompanyName())
                 .append(" Address: ")
                 .append(getAddress())
                 .append(" Email: ")
