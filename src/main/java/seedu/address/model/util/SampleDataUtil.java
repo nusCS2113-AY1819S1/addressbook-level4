@@ -73,12 +73,18 @@ public class SampleDataUtil {
 
     public static Task[] getSampleTasks() {
         return new Task[] {
-            new Task(new TaskName("Milestone 3"), new TaskModule("CS2113"), new TaskDate("01-11"), new TaskPriority("1")),
-            new Task(new TaskName("Tutorial 7"), new TaskModule("CS2102"), new TaskDate("02-11"), new TaskPriority("3")),
-            new Task(new TaskName("Assignment 3"), new TaskModule("CG2027"), new TaskDate("23-10"), new TaskPriority("1")),
-            new Task(new TaskName("Essay"), new TaskModule("CG2028"), new TaskDate("10-11"), new TaskPriority("2")),
-            new Task(new TaskName("Forum Post"), new TaskModule("CS2101"), new TaskDate("20-11"), new TaskPriority("2")),
-            new Task(new TaskName("Webcast"), new TaskModule("CS1231"), new TaskDate("14-11"), new TaskPriority("3")),
+            new Task(new TaskName("Milestone 3"), new TaskModule("CS2113"), new TaskDate("01-11"),
+                    new TaskPriority("1"), false),
+            new Task(new TaskName("Tutorial 7"), new TaskModule("CS2102"), new TaskDate("02-11"),
+                    new TaskPriority("3"), true),
+            new Task(new TaskName("Assignment 3"), new TaskModule("CG2027"), new TaskDate("23-10"),
+                    new TaskPriority("1"), false),
+            new Task(new TaskName("Essay"), new TaskModule("CG2028"), new TaskDate("10-11"),
+                    new TaskPriority("2"), true),
+            new Task(new TaskName("Forum Post"), new TaskModule("CS2101"), new TaskDate("20-11"),
+                    new TaskPriority("2"), false),
+            new Task(new TaskName("Webcast"), new TaskModule("CS1231"), new TaskDate("14-11"),
+                    new TaskPriority("3"), true),
         };
     }
 

@@ -40,7 +40,7 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
         TaskDate taskDate = ParserUtil.parseTaskDate(argMultimap.getValue(PREFIX_DATE).get());
         TaskPriority taskPriority = ParserUtil.parseTaskPriority(argMultimap.getValue(PREFIX_PRIORITY).get());
 
-        Task task = new Task(taskName, taskModule, taskDate, taskPriority);
+        Task task = new Task(taskName, taskModule, taskDate, taskPriority, false);
 
         return new AddTaskCommand(task);
     }

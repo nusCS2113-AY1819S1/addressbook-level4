@@ -22,13 +22,13 @@ public class Task {
     /**
      * Every field must be present and not null.
      */
-    public Task(TaskName name, TaskModule module, TaskDate date, TaskPriority priority) {
+    public Task(TaskName name, TaskModule module, TaskDate date, TaskPriority priority, boolean isComplete) {
         requireAllNonNull(name, module, date, priority);
         this.name = name;
         this.module = module;
         this.date = date;
         this.priority = priority;
-        this.isComplete = false;
+        this.isComplete = isComplete;
     }
 
     public TaskName getName() {
@@ -91,13 +91,14 @@ public class Task {
         return otherTask.getName().equals(getName())
                 && otherTask.getModule().equals(getModule())
                 && otherTask.getDate().equals(getDate())
-                && otherTask.getPriority().equals(getPriority());
+                && otherTask.getPriority().equals(getPriority())
+                && otherTask.getComplete() == getComplete();
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, module, date, priority);
+        return Objects.hash(name, module, date, priority, isComplete);
     }
 
     @Override

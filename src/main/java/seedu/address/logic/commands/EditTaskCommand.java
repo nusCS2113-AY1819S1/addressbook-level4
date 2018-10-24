@@ -93,8 +93,9 @@ public class EditTaskCommand extends Command {
         TaskModule updatedModule = tdleditTaskDescriptor.getModule().orElse(taskToEdit.getModule());
         TaskDate updatedDate = tdleditTaskDescriptor.getDate().orElse(taskToEdit.getDate());
         TaskPriority updatedPriority = tdleditTaskDescriptor.getPriority().orElse(taskToEdit.getPriority());
+        boolean status = taskToEdit.getComplete();
 
-        return new Task(updatedName, updatedModule, updatedDate, updatedPriority);
+        return new Task(updatedName, updatedModule, updatedDate, updatedPriority, status);
     }
 
     @Override
