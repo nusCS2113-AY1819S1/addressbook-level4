@@ -136,13 +136,13 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFriendList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        friendList.setPredicate(combinedFriendPredicate(predicate, friendsPredicateFromPerson(UserStub.getUser())));
+        friendList.setPredicate(combinedFriendPredicate(predicate, friendsPredicateFromPerson(user)));
     }
 
     @Override
     public void updateOtherList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        otherList.setPredicate(combinedOtherPredicate(predicate, othersPredicateFromPerson(UserStub.getUser())));
+        otherList.setPredicate(combinedOtherPredicate(predicate, othersPredicateFromPerson(user)));
     }
 
     @Override
