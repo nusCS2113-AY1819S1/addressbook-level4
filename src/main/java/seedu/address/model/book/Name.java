@@ -15,7 +15,7 @@ public class Name {
     /*
      * The title should not be more than 200 characters and can contain any character.
      */
-    public static final String NAME_VALIDATION_REGEX = ".{0,200}";
+    public static final String NAME_VALIDATION_REGEX = "^.{3,200}$";
 
     public final String fullName;
 
