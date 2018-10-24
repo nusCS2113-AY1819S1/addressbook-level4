@@ -26,6 +26,7 @@ import com.t13g2.forum.logic.commands.HistoryCommand;
 import com.t13g2.forum.logic.commands.ListCommand;
 import com.t13g2.forum.logic.commands.ListModuleCommand;
 import com.t13g2.forum.logic.commands.LoginCommand;
+import com.t13g2.forum.logic.commands.LogoutCommand;
 import com.t13g2.forum.logic.commands.RedoCommand;
 import com.t13g2.forum.logic.commands.SelectCommand;
 import com.t13g2.forum.logic.commands.SelectModuleCommand;
@@ -139,6 +140,9 @@ public class AddressBookParser {
 
         case AddUserCommand.COMMAND_WORD:
             return new AddUserCommandParser().parse(arguments);
+
+        case LogoutCommand.COMMAND_WORD:
+            return new LogoutCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

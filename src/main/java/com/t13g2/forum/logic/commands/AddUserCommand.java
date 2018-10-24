@@ -46,26 +46,19 @@ public class AddUserCommand extends Command {
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             boolean exist = false;
             try {
-                unitOfWork.getUserRepository().getUserByUsername(userToAdd.getUsername());
-                exist = true;
+                if (userToAdd == unitOfWork.getUserRepository().getUserByUsername(userToAdd.getUsername())) {
+                    exist = true;
+                    new CommandResult(String.format(MESSAGE_DUPLICATE_PERSON));
+                }
+
             } catch (EntityDoesNotExistException ex) {
+                if (!exist) {
+                    unitOfWork.getUserRepository().addUser(userToAdd);
+                    unitOfWork.commit();
+                }
                 ex.printStackTrace();
             }
-            if (!exist) {
-                unitOfWork.getUserRepository().addUser(userToAdd);
-                unitOfWork.commit();
-            }
-            // try {
-            //     if(unitOfWork.getUserRepository().getUserByUsername(this.userToAdd.getUsername()) == null) {
-            //         unitOfWork.getUserRepository().addUser(userToAdd);
-            //         unitOfWork.commit();
-            //     }
-            //     else {
-            //         throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-            //     }
-            // } catch (Exception e) {
-            //     e.printStackTrace();
-            // }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
