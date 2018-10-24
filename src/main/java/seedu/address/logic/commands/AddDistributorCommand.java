@@ -6,8 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DIST_PHONE;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.distributor.Distributor;
 import seedu.address.model.Model;
+import seedu.address.model.distributor.Distributor;
 
 /**
  * Adds a product to the address book.

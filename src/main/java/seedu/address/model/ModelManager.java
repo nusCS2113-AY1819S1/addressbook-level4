@@ -82,12 +82,6 @@ public class ModelManager extends ComponentManager implements Model {
     // ============== ProductDatabase Modifiers =============================================================
 
     @Override
-    public void resetData(ReadOnlyAddressBook newData) {
-        versionedAddressBook.resetData(newData);
-        indicateAddressBookChanged();
-    }
-
-    @Override
     public ReadOnlyAddressBook getProductInfoBook() {
         return versionedAddressBook;
     }
@@ -135,6 +129,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     // ============== DistributorBook Modifiers =============================================================
+
+    @Override
+    public void resetData(ReadOnlyAddressBook newData) {
+        versionedAddressBook.resetData(newData);
+        indicateAddressBookChanged();
+    }
 
     @Override
     public void resetData(ReadOnlyDistributorBook newData) {

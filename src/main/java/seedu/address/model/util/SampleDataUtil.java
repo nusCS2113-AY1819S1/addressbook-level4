@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.ProductDatabase;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.product.Address;
 import seedu.address.model.product.Name;
 import seedu.address.model.product.Product;

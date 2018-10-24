@@ -8,8 +8,8 @@ import java.nio.file.Path;
 
 import org.junit.Test;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.person.Product;
+import seedu.address.model.ProductDatabase;
+import seedu.address.model.product.Product;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 

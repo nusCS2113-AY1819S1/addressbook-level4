@@ -54,6 +54,9 @@ public class User {
                 && !test.equals(Paths.get(""));
     }
 
+    /**
+     * Returns true if user of the same name has the correct distributor book extension field.
+     */
     public static boolean isValidDistributorBookFilePath(Path test, String username) {
         return test.equals(Paths.get(DB_FILEPATH_FOLDER + DB_FILEPATH_PREFIX + username + DB_FILEPATH_POSTFIX))
                 && !test.equals("");

@@ -51,7 +51,8 @@ public class XmlFileStorage {
     /**
      * Returns address book in the file or an empty distributor book
      */
-    public static XmlSerializableDistributorBook loadDistributorDataFromSaveFile(Path file) throws DataConversionException,
+    public static XmlSerializableDistributorBook loadDistributorDataFromSaveFile(Path file)
+            throws DataConversionException,
             FileNotFoundException {
         try {
             return XmlUtil.getDataFromFile(file, XmlSerializableDistributorBook.class);

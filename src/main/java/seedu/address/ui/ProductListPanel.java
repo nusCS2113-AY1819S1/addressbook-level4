@@ -79,5 +79,5 @@ public class ProductListPanel extends UiPart<Region> {
             }
         }
     }
-    
+
 }

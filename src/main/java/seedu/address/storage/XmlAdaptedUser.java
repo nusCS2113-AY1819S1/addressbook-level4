@@ -34,12 +34,12 @@ public class XmlAdaptedUser {
     /**
      * Constructs an {@code XmlAdaptedUser} with the given product details.
      */
-    public XmlAdaptedUser(String username, String password, String addressbookfilepath, String distributorbookfilepath)
-    {
+    public XmlAdaptedUser(String username, String password,
+                          String addressbookfilepath, String distributorbookfilepath) {
         this.username = username;
         this.password = password;
         this.addressbookfilepath = addressbookfilepath;
-        this.distributorbookfilepath =  distributorbookfilepath;
+        this.distributorbookfilepath = distributorbookfilepath;
     }
 
     /**

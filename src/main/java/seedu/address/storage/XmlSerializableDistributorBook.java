@@ -1,15 +1,15 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.DistributorBook;
 import seedu.address.model.ReadOnlyDistributorBook;
 import seedu.address.model.distributor.Distributor;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * An Immutable DistributorBook
@@ -36,7 +36,8 @@ public class XmlSerializableDistributorBook {
      */
     public XmlSerializableDistributorBook(ReadOnlyDistributorBook src) {
         this();
-        distributors.addAll(src.getDistributorList().stream().map(XmlAdaptedDistributor::new).collect(Collectors.toList()));
+        distributors.addAll(src.getDistributorList().stream().map(XmlAdaptedDistributor::new)
+                .collect(Collectors.toList()));
     }
 
     /**

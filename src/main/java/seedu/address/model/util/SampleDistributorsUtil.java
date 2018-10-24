@@ -6,10 +6,6 @@ import seedu.address.model.distributor.Distributor;
 import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.distributor.DistributorPhone;
 
-import java.util.Arrays;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 /**
  * Contains utility methods for populating {@code DistributorBook} with sample data.
  */

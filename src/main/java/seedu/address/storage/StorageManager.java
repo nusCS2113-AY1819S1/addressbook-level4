@@ -204,6 +204,10 @@ public class StorageManager extends ComponentManager implements Storage {
 
     // ============== Storage updater =====================
 
+    /** Arbitrary Javadoc
+     *
+     * @param user
+     */
     public void update(User user) {
         this.productDatabaseStorage = new XmlProductDatabaseStorage(user.getAddressBookFilePath());
         this.distributorBookStorage = new XmlDistributorBookStorage(user.getDistributorBookFilePath());
