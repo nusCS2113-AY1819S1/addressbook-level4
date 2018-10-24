@@ -12,7 +12,7 @@ import seedu.address.model.tag.Tag;
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class PersonCard extends UiPart<Region> {
+public class TimetableCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
     private static final String[] TAG_COLOR_STYLES = {"teal", "red", "yellow", "blue", "orange", "brown", "green",
@@ -42,8 +42,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane enrolledClasses;
-    @FXML
     private FlowPane header;
     @FXML
     private FlowPane monday;
@@ -56,20 +54,14 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane friday;
 
-    public PersonCard(Person person, int displayedIndex) {
+    public TimetableCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-
-       /* for(String tempEnrolledClassName : person.getEnrolledModules().keySet()){
-            Label enrolledModule = new Label(tempEnrolledClassName);
-            enrolledModule.setPrefSize(61, 10);
-            header.getChildren().add(enrolledModule);
-        }*/
+        phone.setText("");
+        address.setText(person.getAddress().toString());
+        email.setText("");
 
         for (String it : Tag.getHeader()) {
             Label day = new Label(it);
@@ -112,9 +104,7 @@ public class PersonCard extends UiPart<Region> {
         for (String it : mods) {
             Label slot = new Label(it);
             slot.setPrefSize(51, 25);
-            if (it.length() < 6) {
-                slot.getStyleClass().add(getColor(it));
-            } else if (it.equalsIgnoreCase("busy")) {
+            if (it.equalsIgnoreCase("busy")) {
                 slot.getStyleClass().add("black");
                 slot.setText(" ");
             } else if (it.equalsIgnoreCase("free")) {
@@ -169,12 +159,12 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof TimetableCard)) {
             return false;
         }
 
         // state check
-        PersonCard card = (PersonCard) other;
+        TimetableCard card = (TimetableCard) other;
         return id.getText().equals(card.id.getText())
                 && person.equals(card.person);
     }

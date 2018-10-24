@@ -8,8 +8,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.TreeMap;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -19,11 +26,12 @@ import seedu.address.model.Model;
 import seedu.address.model.enrolledModule.EnrolledModule;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.IsNotSelfOrMergedPredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.person.TimeSlots;
+import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -53,7 +61,7 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param index                of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
@@ -68,6 +76,7 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        lastShownList = ((ObservableList<Person>) lastShownList).filtered(new IsNotSelfOrMergedPredicate());
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -98,11 +107,14 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+
         Map<String, EnrolledModule> updatedEnrolledClasses = editPersonDescriptor.getEnrolledClasses()
                                                             .orElse(personToEdit.getEnrolledModules());
+        Map<String, List<TimeSlots>> updatedTimeSlots = personToEdit.getTimeSlots();
+
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedEnrolledClasses, TimeSlots.sampleTimeSlots());
+                updatedEnrolledClasses, updatedTimeSlots);
     }
 
     @Override
@@ -134,8 +146,11 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private Map<String, EnrolledModule> enrolledClasses;
+        private Map<String, List<TimeSlots>> timeslots;
 
-        public EditPersonDescriptor() {}
+
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -148,6 +163,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setEnrolledClasses(toCopy.enrolledClasses);
+            setTimeSlots(toCopy.timeslots);
 
         }
 
@@ -195,7 +211,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public void setTags(Set<Tag> tags) {
-            if (tags != null){
+            if (tags != null) {
                 this.tags = tags;
             } else {
                 this.tags = new HashSet<>();
@@ -208,7 +224,7 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
-            if (tags != null){
+            if (tags != null) {
                 return Optional.of(Collections.unmodifiableSet(tags));
             } else {
                 return Optional.empty();
@@ -219,6 +235,7 @@ public class EditCommand extends Command {
          * Sets {@code enrolledClasses} to this object's {@code enrolledClasses}.
          * A defensive copy of {@code enrolledClasses} is used internally.
          */
+
         public void setEnrolledClasses(Map<String, EnrolledModule> enrolledClasses) {
             if (enrolledClasses != null){
                 this.enrolledClasses = enrolledClasses;
@@ -232,12 +249,21 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code enrolledClasses} is null.
          */
+
         public Optional<Map<String, EnrolledModule>> getEnrolledClasses() {
             if (enrolledClasses != null){
                 return Optional.of(Collections.unmodifiableMap(enrolledClasses));
             } else {
                 return Optional.empty();
             }
+        }
+
+        public void setTimeSlots(Map<String, List<TimeSlots>> timeslots) {
+            this.timeslots = timeslots;
+        }
+
+        public Map<String, List<TimeSlots>> getTimeSlots() {
+            return timeslots;
         }
 
         @Override
@@ -260,7 +286,8 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags())
-                    && getEnrolledClasses().equals(e.getEnrolledClasses());
+                    && getEnrolledClasses().equals(e.getEnrolledClasses())
+                    && getTimeSlots().equals(e.getTimeSlots());
         }
     }
 }

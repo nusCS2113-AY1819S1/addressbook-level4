@@ -21,8 +21,8 @@ import seedu.address.model.person.Person;
 public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
-    public static final String SEARCH_PAGE_URL =
-            "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
+    public static final String SEARCH_PAGE_URL = "https://www.google.com.sg/webhp?hl=en&sa=X&ved=0ahUKEwj6i6PVlJ3eAhXNfn0KHRJ_DTAQPAgH";
+            //"https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
 
     private static final String FXML = "BrowserPanel.fxml";
 
@@ -42,7 +42,7 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     private void loadPersonPage(Person person) {
-        loadPage(SEARCH_PAGE_URL + person.getName().fullName);
+        loadPage(SEARCH_PAGE_URL );
     }
 
     public void loadPage(String url) {
