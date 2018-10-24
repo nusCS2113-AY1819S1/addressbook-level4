@@ -16,6 +16,7 @@ import seedu.address.model.drink.Drink;
 
 /**
  * Represents the in-memory model of the inventory list data.
+ * TODO: include transactions
  */
 public class DrinkModelManager extends ComponentManager implements DrinkModel {
     private static final Logger logger = LogsCenter.getLogger(DrinkModelManager.class);
