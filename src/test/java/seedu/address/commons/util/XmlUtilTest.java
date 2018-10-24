@@ -18,7 +18,7 @@ import org.junit.rules.ExpectedException;
 import seedu.address.model.AddressBook;
 import seedu.address.storage.XmlAdaptedProduct;
 import seedu.address.storage.XmlAdaptedTag;
-import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.address.storage.XmlSerializableProductDatabase;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.ProductBuilder;
 import seedu.address.testutil.TestUtil;
@@ -72,7 +72,7 @@ public class XmlUtilTest {
     /**
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
-        AddressBook dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableAddressBook.class).toModelType();
+        AddressBook dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableProductDatabase.class).toModelType();
         assertEquals(9, dataFromFile.getPersonList().size());
     }
      */
@@ -126,17 +126,17 @@ public class XmlUtilTest {
     @Test
     public void saveDataToFile_validFile_dataSaved() throws Exception {
         FileUtil.createFile(TEMP_FILE);
-        XmlSerializableAddressBook dataToWrite = new XmlSerializableAddressBook(new AddressBook());
+        XmlSerializableProductDatabase dataToWrite = new XmlSerializableProductDatabase(new AddressBook());
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);
+        XmlSerializableProductDatabase dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableProductDatabase.class);
         assertEquals(dataToWrite, dataFromFile);
 
         AddressBookBuilder builder = new AddressBookBuilder(new AddressBook());
-        dataToWrite = new XmlSerializableAddressBook(
+        dataToWrite = new XmlSerializableProductDatabase(
                 builder.withPerson(new ProductBuilder().build()).build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);
+        dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableProductDatabase.class);
         assertEquals(dataToWrite, dataFromFile);
     }
 
