@@ -29,7 +29,6 @@ public class CheckExpenditureCommand extends Command {
             + PREFIX_DATE + "09-10-2018";
 
     public static final String MESSAGE_SUCCESS = "Total money in this period %f";
-    private static final String MESSAGE_INVALID_FORMAT = "Invalid command format!";
 
     private final Date date1;
     private final Date date2;
@@ -68,14 +67,18 @@ public class CheckExpenditureCommand extends Command {
             int month = Integer.parseInt(editedExpenditure.getDate().toString().substring(3, 5));
             int day = Integer.parseInt(editedExpenditure.getDate().toString().substring(0, 2));
 
-            if ((year1 > year) || (year2 < year)) {
-            }
-            else if ((month1 > month) || (month2 < month)) {
-            }
-            else if ((day1 > day) || (day2 < day)) {
-            }
-            else {
+            if ((year1 < year) && (year2 > year)) {
                 total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
+            }
+            else if ((year1 == year) || (year2 == year)){
+                 if ((month1 < month) && (month2 > month)){
+                     total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
+                 }
+                 else if((month1 == month) || (month2 == month)){
+                     if((day1 < day) && (day2 > day)){
+                         total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
+                     }
+                 }
             }
             index++;
         }
