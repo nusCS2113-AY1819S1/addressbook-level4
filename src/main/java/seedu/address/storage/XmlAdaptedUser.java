@@ -21,15 +21,11 @@ public class XmlAdaptedUser {
     @XmlElement(required = true)
     private String password;
     @XmlElement(required = true)
-<<<<<<< HEAD
     private String addressbookfilepath;
     @XmlElement(required = true)
     private String distributorbookfilepath;
-=======
-    private String addressBookFilePath;
     @XmlElement(required = true)
     private String salesHistoryFilePath;
->>>>>>> upstream/master
 
     /**
      * Constructs an XmlAdaptedUser.
@@ -40,20 +36,14 @@ public class XmlAdaptedUser {
     /**
      * Constructs an {@code XmlAdaptedUser} with the given product details.
      */
-<<<<<<< HEAD
     public XmlAdaptedUser(String username, String password,
-                          String addressbookfilepath, String distributorbookfilepath) {
+                          String addressbookfilepath, String distributorbookfilepath,
+                          String salesHistoryFilePath) {
         this.username = username;
         this.password = password;
         this.addressbookfilepath = addressbookfilepath;
         this.distributorbookfilepath = distributorbookfilepath;
-=======
-    public XmlAdaptedUser(String username, String password, String addressBookFilePath, String salesHistoryFilePath) {
-        this.username = username;
-        this.password = password;
-        this.addressBookFilePath = addressBookFilePath;
         this.salesHistoryFilePath = salesHistoryFilePath;
->>>>>>> upstream/master
     }
 
     /**
@@ -64,13 +54,9 @@ public class XmlAdaptedUser {
     public XmlAdaptedUser(User source) {
         username = source.getUsername().fullUsername;
         password = source.getPassword().fullPassword;
-<<<<<<< HEAD
         addressbookfilepath = source.getAddressBookFilePath().toString();
         distributorbookfilepath = source.getDistributorBookFilePath().toString();
-=======
-        addressBookFilePath = source.getAddressBookFilePath().toString();
         salesHistoryFilePath = source.getSalesHistoryFilePath().toString();
->>>>>>> upstream/master
     }
 
     /**
@@ -97,41 +83,32 @@ public class XmlAdaptedUser {
         }
         final Password modelPassword = new Password(password);
 
-        if (addressBookFilePath == null) {
+        if (addressbookfilepath == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "ProductDatabase file path"));
         }
 
-<<<<<<< HEAD
         if (distributorbookfilepath == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "DistributorBook file path"));
         }
 
-        if (!User.isValidAddressBookFilePath(Paths.get(addressbookfilepath), this.username)) {
-            throw new IllegalValueException(User.MESSAGE_AB_FILEPATH_CONSTRAINTS);
-=======
-        if (!User.isValidAddressBookFilePath(Paths.get(addressBookFilePath), this.username)) {
-            throw new IllegalValueException(String.format(User.MESSAGE_AB_FILEPATH_CONSTRAINTS, "AddressBook"));
->>>>>>> upstream/master
-        }
-        final Path modelAddressBookFilePath = Paths.get(addressBookFilePath);
-
-<<<<<<< HEAD
-        final Path modelAddressBookFilePath = Paths.get(addressbookfilepath);
-        final Path modelDistributorBookFilePath = Paths.get(distributorbookfilepath);
-
-        return new User(modelUsername, modelPassword, modelAddressBookFilePath, modelDistributorBookFilePath);
-=======
         if (salesHistoryFilePath == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "SalesHistory file path"));
+        }
+
+        if (!User.isValidAddressBookFilePath(Paths.get(addressbookfilepath), this.username)) {
+            throw new IllegalValueException(User.MESSAGE_AB_FILEPATH_CONSTRAINTS);
         }
 
         if (!User.isValidSalesHistoryFilePath(Paths.get(salesHistoryFilePath), this.username)) {
             throw new IllegalValueException(String.format(User.MESSAGE_AB_FILEPATH_CONSTRAINTS, "SalesHistory"));
         }
+
+        final Path modelAddressBookFilePath = Paths.get(addressbookfilepath);
+        final Path modelDistributorBookFilePath = Paths.get(distributorbookfilepath);
         final Path modelSalesHistoryFilePath = Paths.get(salesHistoryFilePath);
 
-        return new User(modelUsername, modelPassword, modelAddressBookFilePath, modelSalesHistoryFilePath);
->>>>>>> upstream/master
+        return new User(modelUsername, modelPassword, modelAddressBookFilePath,
+                modelDistributorBookFilePath, modelSalesHistoryFilePath);
     }
 
     @Override
@@ -147,12 +124,8 @@ public class XmlAdaptedUser {
         XmlAdaptedUser otherUser = (XmlAdaptedUser) other;
         return Objects.equals(username, otherUser.username)
                 && Objects.equals(password, otherUser.password)
-<<<<<<< HEAD
                 && Objects.equals(addressbookfilepath, otherUser.addressbookfilepath)
-                && Objects.equals(distributorbookfilepath, otherUser.distributorbookfilepath);
-=======
-                && Objects.equals(addressBookFilePath, otherUser.addressBookFilePath);
->>>>>>> upstream/master
-
+                && Objects.equals(distributorbookfilepath, otherUser.distributorbookfilepath)
+                && Objects.equals(salesHistoryFilePath, otherUser.salesHistoryFilePath);
     }
 }
