@@ -29,6 +29,7 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.InviteCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -140,8 +141,16 @@ public class AddressBookParserTest {
     public void parseCommand_invite() throws Exception {
         InviteCommand command = (InviteCommand) parser.parseCommand(
                 InviteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
-                + EventsUtil.getEventIndex(INDEX_FIRST_EVENT));
+                + EventsUtil.getEventIndexForInvite(INDEX_FIRST_EVENT));
         assertEquals(new InviteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_EVENT), command);
+    }
+
+    @Test
+    public void parseCommand_remove() throws Exception {
+        RemoveCommand command = (RemoveCommand) parser.parseCommand(
+                RemoveCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + EventsUtil.getEventIndexForRemove(INDEX_FIRST_EVENT));
+        assertEquals(new RemoveCommand(INDEX_FIRST_PERSON, INDEX_FIRST_EVENT), command);
     }
 
     @Test
