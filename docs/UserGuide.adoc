@@ -98,6 +98,20 @@ Examples:
 
 * `defer 1 de/04012018`
 
+=== Delete a task : `delete`
+
+Removes a task from the task book
+Format: `delete [INDEX]`
+
+Examples:
+
+* `delete 1`
+
+=== Viewing today's date : `view`
+
+Shows the date today. +
+Format: `view`
+
 === Selecting a date: `select`
 
 Chooses a particular date. +
