@@ -228,18 +228,25 @@ public class ForumBook implements ReadOnlyForumBook {
      * creates a module.
      */
     public boolean createModule(Module module) {
+        boolean exist = false;
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
-            if (unitOfWork.getModuleRepository().getModuleByCode(module.getModuleCode()) == null) {
-                module.setCreatedByUserId(Context.getInstance().getCurrentUser().getId());
-                unitOfWork.getModuleRepository().addModule(module);
-                unitOfWork.commit();
-            } else {
-                throw new DuplicateModuleException("");
-            }
+            unitOfWork.getModuleRepository().getModuleByCode(module.getModuleCode());
+            exist = true;
+            throw new DuplicateModuleException("");
         } catch (DuplicateModuleException e) {
             return false;
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        if (!exist) {
+            try (UnitOfWork unitOfWork = new UnitOfWork()) {
+                module.setCreatedByUserId(Context.getInstance().getCurrentUser().getId());
+                unitOfWork.getModuleRepository().addModule(module);
+                unitOfWork.commit();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return true;
     }
