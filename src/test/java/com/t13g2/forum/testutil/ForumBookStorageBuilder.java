@@ -3,6 +3,9 @@ package com.t13g2.forum.testutil;
 import com.t13g2.forum.storage.IStorageStub;
 import com.t13g2.forum.storage.forum.ForumBookStorage;
 
+/**
+ *
+ */
 public class ForumBookStorageBuilder {
 
     public ForumBookStorageBuilder() {

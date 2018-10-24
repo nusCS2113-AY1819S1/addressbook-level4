@@ -10,20 +10,23 @@ import java.util.HashMap;
 import com.t13g2.forum.storage.forum.IEvent;
 import com.t13g2.forum.storage.forum.IStorage;
 
+/**
+ *
+ */
 public class IStorageStub implements IStorage {
     private static IStorageStub _instance;
+
+    private HashMap<Class, Object> storage;
+
+    private IStorageStub() {
+        storage = new HashMap<>();
+    }
 
     public static IStorageStub getInstance() {
         if (_instance == null) {
             _instance = new IStorageStub();
         }
         return _instance;
-    }
-
-    private HashMap<Class, Object> storage;
-
-    private IStorageStub() {
-        storage = new HashMap<>();
     }
 
     @Override
@@ -50,6 +53,9 @@ public class IStorageStub implements IStorage {
         _instance = new IStorageStub();
     }
 
+    /**
+     *
+     */
     private Object copyObject(Object objSource) {
         Object objDest = null;
         try {
