@@ -243,7 +243,7 @@ public class ParserUtil {
         if (StringUtil.isRangeIndexFormat(oneBasedIndex)) {
             return parseMultipleRangeIndex(oneBasedIndex);
         } else {
-            return  parseMultipleIndex(oneBasedIndex);
+            return parseMultipleIndex(oneBasedIndex);
         }
     }
 }

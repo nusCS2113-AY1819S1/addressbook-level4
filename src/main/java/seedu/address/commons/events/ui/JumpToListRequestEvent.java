@@ -21,6 +21,11 @@ public class JumpToListRequestEvent extends BaseEvent {
         return getClass().getSimpleName();
     }
 
+    /**
+     * Extracts out an array list of {@code Integer} from an array list of {@code Index}.
+     * @param indexArrayList array list of {@code Index} to extract from.
+     * @return extracted array list of {@code Integer}.
+     */
     private ArrayList<Integer> extractIndexAsIntegers(ArrayList<Index> indexArrayList) {
         ArrayList<Integer> output = new ArrayList<>();
         for (Index index : indexArrayList) {
