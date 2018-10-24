@@ -387,7 +387,6 @@ public class ModelManager extends ComponentManager implements Model {
                 && filteredProducts.equals(other.filteredProducts);
     }
 
-<<<<<<< HEAD
     //=========== Undo/Redo DB =================================================================================
 
     @Override
@@ -419,9 +418,8 @@ public class ModelManager extends ComponentManager implements Model {
 
 
     //=========== Transactions =================================================================================
-=======
+
     //=========================== SalesHistory accessories ===================================
->>>>>>> upstream/master
 
     @Override
     public String getActiveDayHistory() {

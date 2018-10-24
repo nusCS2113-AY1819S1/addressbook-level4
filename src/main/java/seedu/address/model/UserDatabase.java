@@ -112,12 +112,9 @@ public class UserDatabase implements ReadOnlyUserDatabase {
     public boolean checkAuthentication(Username username, Password password) throws AuthenticatedException {
         User toCheck = new User(username, password,
                 Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX),
-<<<<<<< HEAD
-                Paths.get(DB_FILEPATH_FOLDER, DB_FILEPATH_PREFIX + username + DB_FILEPATH_POSTFIX));
-
-=======
+                Paths.get(DB_FILEPATH_FOLDER, DB_FILEPATH_PREFIX + username + DB_FILEPATH_POSTFIX),
                 Paths.get(AB_FILEPATH_FOLDER, AB_SALESHISTORY_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX));
->>>>>>> upstream/master
+
         logger.fine("Attempting to check credentials for login");
         if (hasLoggedIn) {
             throw new AuthenticatedException();
@@ -142,11 +139,8 @@ public class UserDatabase implements ReadOnlyUserDatabase {
     public boolean checkCredentials(Username username, Password password) throws AuthenticatedException {
         User toCheck = new User(username, password,
                 Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX),
-<<<<<<< HEAD
-                Paths.get(DB_FILEPATH_FOLDER, DB_FILEPATH_PREFIX + username + DB_FILEPATH_POSTFIX));
-=======
+                Paths.get(DB_FILEPATH_FOLDER, DB_FILEPATH_PREFIX + username + DB_FILEPATH_POSTFIX),
                 Paths.get(AB_FILEPATH_FOLDER, AB_SALESHISTORY_FILEPATH_PREFIX + username + AB_FILEPATH_PREFIX));
->>>>>>> upstream/master
         logger.fine("Attempting to check credentials for permissions.");
         if (!hasLoggedIn) {
             return users.contains(toCheck);
