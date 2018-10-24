@@ -86,7 +86,7 @@ public class RemoveCommand extends Command {
      * @param personName The person's name to be removed from the attendees list.
      * @return An updated event with the person's name removed in the attendees list.
      */
-    private static Event updateList(Event event, String personName) {
+    public static Event updateList(Event event, String personName) {
         assert event != null;
         Attendees updatedAttendee = event.getAttendees().removeName(personName);
         EventName eventName = event.getEventName();
