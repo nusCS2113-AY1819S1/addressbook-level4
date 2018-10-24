@@ -24,9 +24,6 @@ public class ExportAllCommand extends Command {
 
     private Filetype filetype;
 
-    /**
-     * @param filetype of the export file
-     */
     public ExportAllCommand(Filetype filetype) {
         requireNonNull(filetype);
 
