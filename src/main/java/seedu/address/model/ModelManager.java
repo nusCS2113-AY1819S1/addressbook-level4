@@ -20,11 +20,10 @@ import seedu.address.commons.events.model.UserDeletedEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.distributor.Distributor;
 import seedu.address.model.login.Password;
-import seedu.address.model.login.UniqueUsersList;
+import seedu.address.model.login.UniqueUserList;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.AuthenticatedException;
-import seedu.address.model.login.exceptions.AuthenticationFailedException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 import seedu.address.model.product.Product;
@@ -44,7 +43,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final Storage storage;
-    private final VersionedAddressBook versionedAddressBook;
+    private final VersionedProductDatabase versionedAddressBook;
     private final VersionedUserDatabase versionedUserDatabase;
 
     private final FilteredList<Distributor> filteredDistributors;
@@ -62,17 +61,17 @@ public class ModelManager extends ComponentManager implements Model {
                 + " and user database " + userDatabase);
         this.storage = storage;
         versionedUserDatabase = new VersionedUserDatabase(userDatabase);
-        versionedAddressBook = new VersionedAddressBook(addressBook);
+        versionedAddressBook = new VersionedProductDatabase(addressBook);
 
         filteredDistributors = new FilteredList<>(versionedAddressBook.getDistributorList());
         filteredProducts = new FilteredList<>(versionedAddressBook.getPersonList());
     }
 
     public ModelManager(Storage storage) {
-        this(new AddressBook(), new UserPrefs(), new UserDatabase(), storage);
+        this(new ProductDatabase(), new UserPrefs(), new UserDatabase(), storage);
     }
 
-    // ============== AddressBook Modifiers =============================================================
+    // ============== ProductDatabase Modifiers =============================================================
 
     @Override
     public void resetData(ReadOnlyAddressBook newData) {
@@ -131,15 +130,15 @@ public class ModelManager extends ComponentManager implements Model {
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+                logger.info("Data file not found. Will be starting with a sample ProductDatabase");
             }
             newData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
-            newData = new AddressBook();
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            newData = new ProductDatabase();
+            logger.warning("Data file not in the correct format. Will be starting with an empty ProductDatabase");
         } catch (IOException e) {
-            newData = new AddressBook();
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            newData = new ProductDatabase();
+            logger.warning("Problem while reading from the file. Will be starting with an empty ProductDatabase");
         }
         versionedAddressBook.resetData(newData);
     }
@@ -185,7 +184,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean checkCredentials(Username username, Password password) throws AuthenticationFailedException {
+    public boolean checkCredentials(Username username, Password password) throws AuthenticatedException {
         return versionedUserDatabase.checkCredentials(username, password);
     }
 
@@ -219,7 +218,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void setUsersList(UniqueUsersList uniqueUserList) {
+    public void setUsersList(UniqueUserList uniqueUserList) {
         versionedUserDatabase.setUniqueUserList(uniqueUserList);
     }
 
@@ -325,7 +324,6 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         // state check
-        // MERGE CONFLICT HERE, INTEGRATED BOTH
         ModelManager other = (ModelManager) obj;
         return versionedAddressBook.equals(other.versionedAddressBook)
                 && filteredDistributors.equals(other.filteredDistributors)

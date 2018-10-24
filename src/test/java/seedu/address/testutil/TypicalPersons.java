@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.ProductDatabase;
 import seedu.address.model.product.Product;
 
 /**
@@ -42,10 +42,10 @@ public class TypicalPersons {
     private TypicalPersons() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code ProductDatabase} with all the typical persons.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static ProductDatabase getTypicalAddressBook() {
+        ProductDatabase ab = new ProductDatabase();
         for (Product product : getTypicalPersons()) {
             ab.addPerson(product);
         }

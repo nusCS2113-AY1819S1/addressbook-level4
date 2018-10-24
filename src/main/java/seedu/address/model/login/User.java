@@ -14,7 +14,7 @@ public class User {
 
     public static final String MESSAGE_AB_FILEPATH_CONSTRAINTS = "%s file path is incorrect.";
 
-    private static final String AB_FILEPATH_FOLDER = "data/";
+    private static final String AB_FILEPATH_FOLDER = "data";
     private static final String AB_FILEPATH_PREFIX = "addressbook-";
     private static final String AB_SALESHISTORY_FILEPATH_PREFIX = "saleshistory-";
     private static final String AB_FILEPATH_POSTFIX = ".xml";
@@ -23,6 +23,7 @@ public class User {
     private Password password;
     private Path addressBookFilePath;
     private Path salesHistoryFilePath;
+
 
     public User() {
         this.username = new Username("default");
@@ -56,8 +57,8 @@ public class User {
      * Returns true if user of the same name has the correct address book extension field.
      */
     public static boolean isValidAddressBookFilePath(Path test, String username) {
-        return test.equals(Paths.get(AB_FILEPATH_FOLDER + AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX))
-                && !test.equals("");
+        return test.equals(Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX))
+                && !test.equals(Paths.get(""));
     }
 
     /**
@@ -132,7 +133,7 @@ public class User {
                 .append(getUsername())
                 .append(" Password: ")
                 .append(getPassword())
-                .append(" Address Book File Path: ")
+                .append(" Product File Path: ")
                 .append(getAddressBookFilePath())
                 .append(" Sales History File Path: ")
                 .append(getSalesHistoryFilePath());

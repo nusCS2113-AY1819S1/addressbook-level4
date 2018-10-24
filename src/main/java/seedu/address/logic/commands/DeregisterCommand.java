@@ -8,13 +8,13 @@ import seedu.address.model.Model;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
-import seedu.address.model.login.exceptions.AuthenticationFailedException;
+import seedu.address.model.login.exceptions.AuthenticatedException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 
 /**
  * Deletes a user identified using it's username and password from the user database.
  */
-public class DeleteUserCommand extends Command {
+public class DeregisterCommand extends Command {
 
     public static final String COMMAND_WORD = "deregister";
 
@@ -30,9 +30,9 @@ public class DeleteUserCommand extends Command {
     private final Password password;
 
     /**
-     * Creates a DeleteUserCommand to remove the specified {@code User}
+     * Creates a DeregisterCommand to remove the specified {@code User}
      */
-    public DeleteUserCommand(Username username, Password password) {
+    public DeregisterCommand(Username username, Password password) {
         requireNonNull(username);
         requireNonNull(password);
         this.username = username;
@@ -50,7 +50,7 @@ public class DeleteUserCommand extends Command {
             } else {
                 return new CommandResult(MESSAGE_DELETE_FAILURE);
             }
-        } catch (AuthenticationFailedException e) {
+        } catch (AuthenticatedException e) {
             throw new CommandException(MESSAGE_NOT_LOGGED_OUT);
         } catch (UserNotFoundException pnfe) {
             throw new CommandException(MESSAGE_DELETE_FAILURE);
@@ -60,8 +60,8 @@ public class DeleteUserCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this
-                || (other instanceof DeleteUserCommand
-                && this.username.equals(((DeleteUserCommand) other).username)
-                && this.password.equals(((DeleteUserCommand) other).password));
+                || (other instanceof DeregisterCommand
+                && this.username.equals(((DeregisterCommand) other).username)
+                && this.password.equals(((DeregisterCommand) other).password));
     }
 }

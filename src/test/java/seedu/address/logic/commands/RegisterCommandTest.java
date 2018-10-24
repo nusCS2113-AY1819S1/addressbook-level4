@@ -19,7 +19,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.distributor.Distributor;
 import seedu.address.model.login.Password;
-import seedu.address.model.login.UniqueUsersList;
+import seedu.address.model.login.UniqueUserList;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.DuplicateUserException;
@@ -28,15 +28,15 @@ import seedu.address.model.product.Product;
 import seedu.address.model.timeidentifiedclass.shopday.Reminder;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
-public class RegisterUserCommandTest {
+public class RegisterCommandTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void execute_createUserAcceptedByModel_createSuccessful() throws Exception {
-        RegisterUserCommandTest.ModelStubAcceptingRegisterUser modelStub =
-                new RegisterUserCommandTest.ModelStubAcceptingRegisterUser();
+        RegisterCommandTest.ModelStubAcceptingRegisterUser modelStub =
+                new RegisterCommandTest.ModelStubAcceptingRegisterUser();
 
         User validUser = registerValidUser();
 
@@ -44,20 +44,20 @@ public class RegisterUserCommandTest {
                 getRegisterUserCommandForRegisterUserAttempt(validUser, modelStub)
                         .execute(modelStub, new CommandHistory());
 
-        assertEquals(String.format(RegisterUserCommand.MESSAGE_SUCCESS, validUser.getUsername().toString()),
+        assertEquals(String.format(RegisterCommand.MESSAGE_SUCCESS, validUser.getUsername().toString()),
                 commandResult.feedbackToUser);
     }
 
 
     @Test
     public void execute_duplicateUser_throwsCommandException() throws Exception {
-        RegisterUserCommandTest.ModelStubThrowingDuplicateUserException modelStub =
-                new RegisterUserCommandTest.ModelStubThrowingDuplicateUserException();
+        RegisterCommandTest.ModelStubThrowingDuplicateUserException modelStub =
+                new RegisterCommandTest.ModelStubThrowingDuplicateUserException();
 
         User validUser = registerValidUser();
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(RegisterUserCommand.MESSAGE_DUPLICATE_USER);
+        thrown.expectMessage(RegisterCommand.MESSAGE_DUPLICATE_USER);
 
         getRegisterUserCommandForRegisterUserAttempt(validUser, modelStub)
                 .execute(modelStub, new CommandHistory());
@@ -66,9 +66,9 @@ public class RegisterUserCommandTest {
     /**
      * Generates a new CreateUserCommand with the details of the given person.
      */
-    private RegisterUserCommand getRegisterUserCommandForRegisterUserAttempt(User user, Model model) throws Exception {
+    private RegisterCommand getRegisterUserCommandForRegisterUserAttempt(User user, Model model) throws Exception {
 
-        RegisterUserCommand command = new RegisterUserCommand(user);
+        RegisterCommand command = new RegisterCommand(user);
         command.execute(model, new CommandHistory());
         return command;
     }
@@ -142,7 +142,7 @@ public class RegisterUserCommandTest {
         }
 
         @Override
-        public void setUsersList(UniqueUsersList uniqueUsersList) {
+        public void setUsersList(UniqueUserList uniqueUserList) {
             fail("This method should not be called.");
         }
 
@@ -277,7 +277,7 @@ public class RegisterUserCommandTest {
     /**
      * A Model stub that always accepts the registration attempt.
      */
-    private class ModelStubAcceptingRegisterUser extends RegisterUserCommandTest.ModelStub {
+    private class ModelStubAcceptingRegisterUser extends RegisterCommandTest.ModelStub {
         final ArrayList<User> usersAdded = new ArrayList<>();
 
         @Override
@@ -296,7 +296,7 @@ public class RegisterUserCommandTest {
     /**
      * A Model stub that always throw a DuplicateUserException when trying to login.
      */
-    private class ModelStubThrowingDuplicateUserException extends RegisterUserCommandTest.ModelStub {
+    private class ModelStubThrowingDuplicateUserException extends RegisterCommandTest.ModelStub {
         @Override
         public ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread() {
             return null;

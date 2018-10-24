@@ -5,14 +5,14 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.ChangeUserPasswordCommand;
+import seedu.address.logic.commands.ChangePasswordCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.DeleteUserCommand;
+import seedu.address.logic.commands.DeregisterCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.LoginCommand;
-import seedu.address.logic.commands.RegisterUserCommand;
+import seedu.address.logic.commands.RegisterCommand;
 import seedu.address.logic.commands.ThreadDueRemindersCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
@@ -84,9 +84,9 @@ public class LogicManager extends ComponentManager implements Logic {
             if (commandText.split(" ")[0].equals(LoginCommand.COMMAND_WORD)
                     || commandText.split(" ")[0].equals(HelpCommand.COMMAND_WORD)
                     || commandText.split(" ")[0].equals(ExitCommand.COMMAND_WORD)
-                    || commandText.split(" ")[0].equals(RegisterUserCommand.COMMAND_WORD)
-                    || commandText.split(" ")[0].equals(DeleteUserCommand.COMMAND_WORD)
-                    || commandText.split(" ")[0].equals(ChangeUserPasswordCommand.COMMAND_WORD)) {
+                    || commandText.split(" ")[0].equals(RegisterCommand.COMMAND_WORD)
+                    || commandText.split(" ")[0].equals(DeregisterCommand.COMMAND_WORD)
+                    || commandText.split(" ")[0].equals(ChangePasswordCommand.COMMAND_WORD)) {
                 result = command.execute(model, history);
             } else {
                 result = null;

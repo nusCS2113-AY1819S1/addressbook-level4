@@ -18,14 +18,14 @@ import seedu.address.model.product.Product;
 /**
  * Panel containing the list of persons.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class ProductListPanel extends UiPart<Region> {
+    private static final String FXML = "ProductListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(ProductListPanel.class);
 
     @FXML
     private ListView<Product> personListView;
 
-    public PersonListPanel(ObservableList<Product> productList) {
+    public ProductListPanel(ObservableList<Product> productList) {
         super(FXML);
         setConnections(productList);
         registerAsAnEventHandler(this);

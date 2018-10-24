@@ -19,58 +19,58 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.distributor.Distributor;
 import seedu.address.model.login.Password;
-import seedu.address.model.login.UniqueUsersList;
+import seedu.address.model.login.UniqueUserList;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
-import seedu.address.model.login.exceptions.AuthenticationFailedException;
+import seedu.address.model.login.exceptions.AuthenticatedException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 import seedu.address.model.product.Product;
 import seedu.address.model.timeidentifiedclass.shopday.Reminder;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
-public class DeleteUserCommandTest {
+public class DeregisterCommandTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void execute_deleteAcceptedByModel_deleteSuccessful() throws Exception {
-        DeleteUserCommandTest.ModelStubAcceptingDeleteUser modelStub =
-                new DeleteUserCommandTest.ModelStubAcceptingDeleteUser();
+        DeregisterCommandTest.ModelStubAcceptingDeleteUser modelStub =
+                new DeregisterCommandTest.ModelStubAcceptingDeleteUser();
 
         User validUser = registerValidUser();
 
         CommandResult commandResult =
                 getDeleteUserCommandForDeleteUserAttempt(validUser, modelStub).execute(modelStub, new CommandHistory());
 
-        assertEquals(String.format(DeleteUserCommand.MESSAGE_SUCCESS, validUser.getUsername().toString()),
+        assertEquals(String.format(DeregisterCommand.MESSAGE_SUCCESS, validUser.getUsername().toString()),
                 commandResult.feedbackToUser);
     }
 
 
     @Test
     public void execute_userNotFound_throwsCommandException() throws Exception {
-        DeleteUserCommandTest.ModelStubThrowingUserNotFoundException modelStub =
-                new DeleteUserCommandTest.ModelStubThrowingUserNotFoundException();
+        DeregisterCommandTest.ModelStubThrowingUserNotFoundException modelStub =
+                new DeregisterCommandTest.ModelStubThrowingUserNotFoundException();
 
         User validUser = registerValidUser();
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(DeleteUserCommand.MESSAGE_DELETE_FAILURE);
+        thrown.expectMessage(DeregisterCommand.MESSAGE_DELETE_FAILURE);
 
         getDeleteUserCommandForDeleteUserAttempt(validUser, modelStub).execute(modelStub, new CommandHistory());
     }
 
     @Test
     public void execute_notLoggedOut_throwsCommandException() throws Exception {
-        DeleteUserCommandTest.ModelStubThrowingAuthenticationFailedException modelStub =
-                new DeleteUserCommandTest.ModelStubThrowingAuthenticationFailedException();
+        DeregisterCommandTest.ModelStubThrowingAuthenticationFailedException modelStub =
+                new DeregisterCommandTest.ModelStubThrowingAuthenticationFailedException();
 
         User validUser = registerValidUser();
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(DeleteUserCommand.MESSAGE_NOT_LOGGED_OUT);
+        thrown.expectMessage(DeregisterCommand.MESSAGE_NOT_LOGGED_OUT);
 
         getDeleteUserCommandForDeleteUserAttempt(validUser, modelStub).execute(modelStub, new CommandHistory());
     }
@@ -78,9 +78,9 @@ public class DeleteUserCommandTest {
     /**
      * Generates a new AddCommand with the details of the given person.
      */
-    private DeleteUserCommand getDeleteUserCommandForDeleteUserAttempt(User user, Model model) throws Exception {
+    private DeregisterCommand getDeleteUserCommandForDeleteUserAttempt(User user, Model model) throws Exception {
 
-        DeleteUserCommand command = new DeleteUserCommand(user.getUsername(), user.getPassword());
+        DeregisterCommand command = new DeregisterCommand(user.getUsername(), user.getPassword());
         command.execute(model, new CommandHistory());
         return command;
     }
@@ -125,7 +125,7 @@ public class DeleteUserCommandTest {
         }
 
         @Override
-        public boolean checkCredentials(Username username, Password password) throws AuthenticationFailedException {
+        public boolean checkCredentials(Username username, Password password) throws AuthenticatedException {
             return true;
         }
 
@@ -151,7 +151,7 @@ public class DeleteUserCommandTest {
         }
 
         @Override
-        public void setUsersList(UniqueUsersList uniqueUsersList) {
+        public void setUsersList(UniqueUserList uniqueUserList) {
             fail("This method should not be called.");
         }
 
@@ -286,7 +286,7 @@ public class DeleteUserCommandTest {
     /**
      * A Model stub that always accepts the login attempt.
      */
-    private class ModelStubAcceptingDeleteUser extends DeleteUserCommandTest.ModelStub {
+    private class ModelStubAcceptingDeleteUser extends DeregisterCommandTest.ModelStub {
         final ArrayList<User> usersAdded = new ArrayList<>();
 
         @Override
@@ -306,7 +306,7 @@ public class DeleteUserCommandTest {
     /**
      * A Model stub that always throw a DuplicatePersonException when trying to login.
      */
-    private class ModelStubThrowingUserNotFoundException extends DeleteUserCommandTest.ModelStub {
+    private class ModelStubThrowingUserNotFoundException extends DeregisterCommandTest.ModelStub {
         @Override
         public ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread() {
             return null;
@@ -320,9 +320,9 @@ public class DeleteUserCommandTest {
     }
 
     /**
-     * A Model stub that always throw a AuthenticationFailedException when trying to login.
+     * A Model stub that always throw a AuthenticatiedException when trying to login.
      */
-    private class ModelStubThrowingAuthenticationFailedException extends DeleteUserCommandTest.ModelStub {
+    private class ModelStubThrowingAuthenticationFailedException extends DeregisterCommandTest.ModelStub {
         @Override
         public ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread() {
             return null;
@@ -332,7 +332,6 @@ public class DeleteUserCommandTest {
         public boolean checkCredentials(Username username, Password password) throws AuthenticationFailedException {
             throw new AuthenticationFailedException();
         }
-
     }
 
     private User registerValidUser() {

@@ -10,12 +10,12 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddDistributorCommand;
 import seedu.address.logic.commands.AddReminderCommand;
 import seedu.address.logic.commands.AddTransactionCommand;
-import seedu.address.logic.commands.ChangeUserPasswordCommand;
+import seedu.address.logic.commands.ChangePasswordCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteDistributorCommand;
-import seedu.address.logic.commands.DeleteUserCommand;
+import seedu.address.logic.commands.DeregisterCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditDistributorCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -29,7 +29,7 @@ import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.LogoutCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RedoDistributorCommand;
-import seedu.address.logic.commands.RegisterUserCommand;
+import seedu.address.logic.commands.RegisterCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.ThreadDueRemindersCommand;
 import seedu.address.logic.commands.UndoCommand;
@@ -134,14 +134,14 @@ public class AddressBookParser {
         case LogoutCommand.COMMAND_WORD:
             return new LogoutCommand();
 
-        case RegisterUserCommand.COMMAND_WORD:
-            return new RegisterUserCommandParser().parse(arguments);
+        case RegisterCommand.COMMAND_WORD:
+            return new RegisterCommandParser().parse(arguments);
 
-        case DeleteUserCommand.COMMAND_WORD:
-            return new DeleteUserCommandParser().parse(arguments);
+        case DeregisterCommand.COMMAND_WORD:
+            return new DeregisterCommandParser().parse(arguments);
 
-        case ChangeUserPasswordCommand.COMMAND_WORD:
-            return new ChangeUserPasswordCommandParser().parse(arguments);
+        case ChangePasswordCommand.COMMAND_WORD:
+            return new ChangePasswordCommandParser().parse(arguments);
 
         case AddReminderCommand.COMMAND_WORD:
             return new AddReminderCommandParser().parse(arguments);
