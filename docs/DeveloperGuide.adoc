@@ -839,13 +839,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |organized student |sort tasks by decreasing importance/categorise in module codes| complete tasks with more urgent deadlines first/ focus on modules with heavier workloads
 
-|`* * *` |forgetful student |add project deadlines |view tasks which remind me to complete the assignments a few days before the deadline
-
 |`* * *` |busy student |defer deadlines |allow for a more flexible schedule when workload becomes too heavy
 
 |`* *` |flexible student |remove self imposed deadlines |shift my priorities to other tasks
-
-|`* * *` |messy student |view today's date |schedule tasks in an organised manner based on day, week, month
 
 |`* * *` |unorganised student |select a date |add/delete/complete tasks for that particular day
 
@@ -883,8 +879,6 @@ Use case resumes at step 2.
 Use case ends.
 
 [discrete]
-
-[discrete]
 === Use case: Add milestone
 
 *MSS*
@@ -912,19 +906,6 @@ Use case ends.
 Use case resumes at step 6.
 
 [discrete]
-
-=== Use case: Add important deadline
-
-*MSS*
-
-1. Student selects the date of deadline
-2. TB sets the date correspondingly
-3. Student requests to add new task with deadline included
-4. TB asks for the number of weeks before to remind about deadline e.g. 1 week earlier
-5. Student provides the number of weeks for reminder(s).
-6. TB adds the task and its reminder(s) to the list
-
-[discrete]
 === Use case: Complete task
 
 *MSS*
@@ -948,7 +929,6 @@ Use case resumes at step 2.
 Use case ends.
 
 [discrete]
-
 === Use case: Sort tasks
 
 *MSS*
@@ -974,7 +954,6 @@ Use case ends.
 Use case resumes at step 4.
 
 [discrete]
-
 === Use case: Defer deadlines
 
 *MSS*
@@ -992,7 +971,6 @@ Use case ends.
 Use case ends.
 
 [discrete]
-
 === Use case: Delete task
 
 *MSS*
@@ -1008,18 +986,6 @@ Use case ends.
 ** 1a1. TB outputs an error message
 
 [discrete]
-
-=== Use case: View date
-
-*MSS*
-
-1. Student requests to view date
-2. TB returns the date in d/DAY w/WEEK m/MONTH format
-+
-Use case ends.
-
-[discrete]
-
 === Use case: Select a date
 
 *MSS*
