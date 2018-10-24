@@ -25,6 +25,7 @@ import seedu.address.model.clubbudget.FinalClubBudget;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.person.Person;
 import seedu.address.model.searchhistory.SearchHistoryManager;
+import seedu.address.model.searchhistory.exceptions.EmptyHistoryException;
 import seedu.address.testutil.AccountBuilder;
 
 public class CreateAccountCommandTest {
@@ -219,6 +220,20 @@ public class CreateAccountCommandTest {
         }
 
         @Override
+        public void revertLastSearch() throws EmptyHistoryException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void executeSearch(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetSearchHistoryToInitialState() {
+            throw new AssertionError("This method should not be called.");
+        }
+
         public SearchHistoryManager getSearchHistoryManager() {
             throw new AssertionError("This method should not be called.");
         }

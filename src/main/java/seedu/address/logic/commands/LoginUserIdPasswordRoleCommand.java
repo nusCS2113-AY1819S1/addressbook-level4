@@ -21,15 +21,15 @@ import seedu.address.model.login.UserRoleContainsKeywordsPredicate;
  * Used for the login process.
  * Keyword matching is case insensitive for user ID but case sensitive for password.
  */
-public class LoginUserIdPasswordCommand extends LoginCommand {
+public class LoginUserIdPasswordRoleCommand extends LoginCommand {
 
     private final UserIdContainsKeywordsPredicate idPredicate;
     private final UserPasswordContainsKeywordsPredicate passwordPredicate;
     private final UserRoleContainsKeywordsPredicate rolePredicate;
 
-    public LoginUserIdPasswordCommand(UserIdContainsKeywordsPredicate idPredicate,
-                                      UserPasswordContainsKeywordsPredicate passwordPredicate,
-                                      UserRoleContainsKeywordsPredicate rolePredicate) {
+    public LoginUserIdPasswordRoleCommand(UserIdContainsKeywordsPredicate idPredicate,
+                                          UserPasswordContainsKeywordsPredicate passwordPredicate,
+                                          UserRoleContainsKeywordsPredicate rolePredicate) {
         super();
         this.idPredicate = idPredicate;
         this.passwordPredicate = passwordPredicate;
@@ -90,10 +90,10 @@ public class LoginUserIdPasswordCommand extends LoginCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof LoginUserIdPasswordCommand // instanceof handles nulls
-            && getIdPredicate().equals(((LoginUserIdPasswordCommand) other).getIdPredicate()))
-            && getPasswordPredicate().equals(((LoginUserIdPasswordCommand) other).getPasswordPredicate())
-            && getRolePredicate().equals(((LoginUserIdPasswordCommand) other).getRolePredicate()); // state check
+            || (other instanceof LoginUserIdPasswordRoleCommand // instanceof handles nulls
+            && getIdPredicate().equals(((LoginUserIdPasswordRoleCommand) other).getIdPredicate()))
+            && getPasswordPredicate().equals(((LoginUserIdPasswordRoleCommand) other).getPasswordPredicate())
+            && getRolePredicate().equals(((LoginUserIdPasswordRoleCommand) other).getRolePredicate()); // state check
     }
 
     public UserIdContainsKeywordsPredicate getIdPredicate() {

@@ -52,7 +52,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static LoginDetails[] getSampleLoginDetail() {
+    public static LoginDetails[] getSampleLoginDetails() {
         return new LoginDetails[] {
             new LoginDetails(new UserId("A1234567M"), new UserPassword("zaq1xsw2cde3"), new UserRole("treasurer")),
             new LoginDetails(new UserId("A1234568M"), new UserPassword("1qaz2wsx3edc"), new UserRole("president"))
@@ -69,7 +69,7 @@ public class SampleDataUtil {
 
     public static ReadOnlyLoginBook getSampleLoginBook() {
         LoginBook sampleLb = new LoginBook();
-        for (LoginDetails sampleAccount : getSampleLoginDetail()) {
+        for (LoginDetails sampleAccount : getSampleLoginDetails()) {
             sampleLb.createAccount(sampleAccount);
         }
         return sampleLb;

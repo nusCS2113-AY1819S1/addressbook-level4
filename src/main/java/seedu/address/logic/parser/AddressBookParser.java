@@ -62,7 +62,7 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
         case LoginCommand.COMMAND_WORD:
-            return new LoginUserIdPasswordCommandParser().parse(arguments);
+            return new LoginUserIdPasswordRoleCommandParser().parse(arguments);
 
         case CreateAccountCommand.COMMAND_WORD:
             return new CreateAccountCommandParser().parse(arguments);

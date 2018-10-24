@@ -8,7 +8,7 @@ import java.util.List;
 
 import seedu.address.logic.LoginManager;
 import seedu.address.logic.commands.LoginCommand;
-import seedu.address.logic.commands.LoginUserIdPasswordCommand;
+import seedu.address.logic.commands.LoginUserIdPasswordRoleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.exceptions.UserLoginException;
 import seedu.address.model.login.UserIdContainsKeywordsPredicate;
@@ -18,13 +18,13 @@ import seedu.address.model.login.UserRoleContainsKeywordsPredicate;
 /**
  * Parses input arguments and creates a new LoginUserIdCommand object
  */
-public class LoginUserIdPasswordCommandParser implements Parser<LoginCommand> {
+public class LoginUserIdPasswordRoleCommandParser implements Parser<LoginCommand> {
 
     private UserLoginException userLoginException = new UserLoginException();
 
     /**
-     * Parses the given {@code String} of arguments in the context of the LoginUserIdPasswordCommand
-     * and returns an LoginUserIdPasswordCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the LoginUserIdPasswordRoleCommand
+     * and returns an LoginUserIdPasswordRoleCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public LoginCommand parse(String args) throws ParseException {
@@ -42,14 +42,14 @@ public class LoginUserIdPasswordCommandParser implements Parser<LoginCommand> {
     }
 
     /**
-     * Sets the conditions for certain roles and returns a LoginUserIdPasswordCommand object.
+     * Sets the conditions for certain roles and returns a LoginUserIdPasswordRoleCommand object.
      * @param keywords string array representation of user login input
      * @param keywordsList array list representation of user login input
-     * @return a LoginUserIdPasswordCommand object
+     * @return a LoginUserIdPasswordRoleCommand object
      * @throws ParseException if the user input does not conform the expected format
      */
-    public LoginUserIdPasswordCommand setRoleReturnLoginCommandObject(String[] keywords,
-                                                                      List<String> keywordsList) throws ParseException {
+    public LoginUserIdPasswordRoleCommand setRoleReturnLoginCommandObject(String[] keywords,
+                                                                          List<String> keywordsList) throws ParseException {
         if (keywords.length < 3) {
             userLoginException.showMissingLoginError();
             userLoginException.showLoginUsage();
@@ -75,7 +75,7 @@ public class LoginUserIdPasswordCommandParser implements Parser<LoginCommand> {
                 break;
             }
         }
-        return new LoginUserIdPasswordCommand(new UserIdContainsKeywordsPredicate(keywordsList),
+        return new LoginUserIdPasswordRoleCommand(new UserIdContainsKeywordsPredicate(keywordsList),
                 new UserPasswordContainsKeywordsPredicate(keywordsList),
                 new UserRoleContainsKeywordsPredicate(keywordsList));
     }
