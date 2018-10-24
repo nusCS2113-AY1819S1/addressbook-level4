@@ -15,14 +15,14 @@ import seedu.address.model.login.exceptions.UserNotFoundException;
  * A list of users that enforces uniqueness between its elements and does not allow nulls.
  * A user is considered unique by comparing using {@code User#isSameUser(User)}. As such, adding and updating of
  * users uses User#isSameUser(User) for equality so as to ensure that the user being added or updated is
- * unique in terms of identity in the UniqueUsersList. However, the removal of a user uses User#equals(Object) so
+ * unique in terms of identity in the UniqueUserList. However, the removal of a user uses User#equals(Object) so
  * as to ensure that the user with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
  * @see User#isSameUser(User)
  */
-public class UniqueUsersList implements Iterable<User> {
+public class UniqueUserList implements Iterable<User> {
 
     private final ObservableList<User> internalList = FXCollections.observableArrayList();
 
@@ -31,7 +31,7 @@ public class UniqueUsersList implements Iterable<User> {
      */
     public boolean contains(User toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameUser);
+        return internalList.contains(toCheck);
     }
 
     /**
@@ -89,7 +89,7 @@ public class UniqueUsersList implements Iterable<User> {
         }
     }
 
-    public void setUsers(UniqueUsersList replacement) {
+    public void setUsers(UniqueUserList replacement) {
         requireNonNull(replacement);
         this.internalList.setAll(replacement.internalList);
     }
@@ -118,8 +118,8 @@ public class UniqueUsersList implements Iterable<User> {
     @Override
     public boolean equals(Object other) {
         return other == this
-                || (other instanceof UniqueUsersList
-                && this.internalList.equals(((UniqueUsersList) other).internalList));
+                || (other instanceof UniqueUserList
+                && this.internalList.equals(((UniqueUserList) other).internalList));
     }
 
     /**

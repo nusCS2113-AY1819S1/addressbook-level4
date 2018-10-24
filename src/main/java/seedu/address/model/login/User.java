@@ -14,19 +14,13 @@ public class User {
 
     public static final String MESSAGE_AB_FILEPATH_CONSTRAINTS = "ProductDatabase file path is incorrect.";
 
-    private static final String AB_FILEPATH_FOLDER = "data/";
+    private static final String AB_FILEPATH_FOLDER = "data";
     private static final String AB_FILEPATH_PREFIX = "addressbook-";
     private static final String AB_FILEPATH_POSTFIX = ".xml";
 
     private Username username;
     private Password password;
     private Path addressBookFilePath;
-
-    public User() {
-        this.username = new Username("default");
-        this.password = new Password("password");
-        this.addressBookFilePath = Paths.get(AB_FILEPATH_FOLDER, "addressbook-default.xml");
-    }
 
     /**
      * Creates a user instance
@@ -49,8 +43,8 @@ public class User {
      * Returns true if user of the same name has the correct address book extension field.
      */
     public static boolean isValidAddressBookFilePath(Path test, String username) {
-        return test.equals(Paths.get(AB_FILEPATH_FOLDER + AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX))
-                && !test.equals("");
+        return test.equals(Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX))
+                && !test.equals(Paths.get(""));
     }
 
     public Username getUsername() {
@@ -108,12 +102,12 @@ public class User {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getUsername())
-                .append(" Username: ")
-                .append(getPassword())
+        builder.append(" Username: ")
+                .append(getUsername())
                 .append(" Password: ")
-                .append(getAddressBookFilePath())
-                .append(" File Path: ");
+                .append(getPassword())
+                .append(" File Path: ")
+                .append(getAddressBookFilePath());
         return builder.toString();
     }
 }

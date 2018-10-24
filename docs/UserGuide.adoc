@@ -41,119 +41,14 @@ image::Ui.png[width="790"]
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
-
 === Viewing help : `help`
 
 Format: `help`
 
 All commands and information about it is displayed
 
-=== List all products: `inventory`
-
-Format: `inventory`
-
-Lists all products offered by the store in alphabetical order
-
-=== Search for a product: `find`
-
-Format: `find <product name>`or <Serial number of product>
-
-Displays the product and basic information related to it
-The search is case insensitive e.g ‘potato’ will match ‘POTATO’
-All products containing the name or having the same serial number that is serachedfor will appear.
-
-=== Add a transaction: `transaction`
-
-Format: `Transaction pr/<product name> pr/<product name> ... pr/<product name`
-
-Adds a transaction to the record for the given day.
-The time of the transaction, names of the products, and
-individual product quantities will be stored.
-
-=== View the latest transaction: `latest`
-
-Format: `latest`
-
-Displays the details of the latest transaction.
-
-=== Add a reminder: `setreminder`
-
-Format: `addreminder time/yyyy/MM/dd HH:mm:ss message/<The reminder message>`
-
-Sets and stores a reminder. In v1.2, this is only allowed for the current day.
-In future releases, reminders will be set in the current and future days.
-
-=== View due reminder notifcations: `duereminders`
-
-Format: `duereminders`
-
-Shows all reminders that are still due in the current day.
-
-=== Add a product: `add`
-
-Format: `add n/<product name> s/<serial no.> d/<distributor> i/<info.> t/<tags>`
-
-Adds a product to the list of products offered by the store
-
-=== Add a distributor: `addDistributor`
-
-Format: `addDistributor dn/<distributor name> dp/<distributor serialNumber>`
-
-Adds a distributor to the list of distributors engaged with the store.
-
-=== Edit a distributor: `editDistributor index`
-
-Format: `editDistributor index dn/<distributor name> dp/<distributor serialNumber>`
-
-Edits details of the indexed distributor from the list of distributors engaged with the store.
-
-=== Find a distributor: `findDistributor`
-
-Format: `findDistributor <some relevant field>`
-
-Finds distributors that are related to the <some relevant field> entered.
-
-=== Delete a distributor: `deleteDistributor`
-
-Format: `deleteDistributor index`
-
-Deletes the indexed distributor from the list of distributors engaged with the store.
-
-=== Find all stored contact information (distributors and customers): `contacts`
-
-Format: `contacts`
-
-This command lists all the contacts in alphabetical order of the first name, and whether they are distributors or customers.
-
-=== Show best selling product: `top selling`
-
-Format: `top selling`
-
-Lists the best selling products in order of the sales revenues from those products.
-
-=== Clearing all entries : `clear`
-
-Clears all entries from the address book. +
-Format: `clear`
-
-=== Exiting the program : `exit`
-
-Exits the program. +
-Format: `exit`
-
-=== Saving the data
-
-Address book data are saved in the hard disk automatically after any command that changes the data. +
-There is no need to save manually.
-
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
-
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
-
 // tag::authentication[]
-=== User Authentication
+=== Authentication
 
 ==== Register new user : `register`
 
@@ -180,18 +75,141 @@ e.g. `deregister u/John p/pass`
 
 // end::authentication[]
 
+// tag::inventorymanagement[]
+=== Inventory Management
+
+==== Add a product: `add`
+
+Format: `add n/<product name> s/<serial no.> d/<distributor> i/<info.> t/<tags>`
+
+Adds a product to the list of products offered by the store
+
+==== List all products: `inventory`
+
+Format: `inventory`
+
+Lists all products offered by the store in alphabetical order
+
+==== Search for a product: `find`
+
+Format: `find <product name>`or <Serial number of product>
+
+Displays the product and basic information related to it
+The search is case insensitive e.g ‘potato’ will match ‘POTATO’
+All products containing the name or having the same serial number that is serached for will appear.
+
+==== Show best selling product: `top selling`
+
+Format: `top selling`
+
+Lists the best selling products in order of the sales revenues from those products.
+
+// end::inventorymanagement[]
+
+// tag::distributormanagement[]
+=== Contacts
+
+==== Add a distributor: `addDistributor`
+
+Format: `addDistributor dn/<distributor name> dp/<distributor serialNumber>`
+
+Adds a distributor to the list of distributors engaged with the store.
+
+==== Edit a distributor: `editDistributor index`
+
+Format: `editDistributor index dn/<distributor name> dp/<distributor serialNumber>`
+
+Edits details of the indexed distributor from the list of distributors engaged with the store.
+
+==== Find a distributor: `findDistributor`
+
+Format: `findDistributor <some relevant field>`
+
+Finds distributors that are related to the <some relevant field> entered.
+
+==== Delete a distributor: `deleteDistributor`
+
+Format: `deleteDistributor index`
+
+Deletes the indexed distributor from the list of distributors engaged with the store.
+
+==== Find all stored contact information (distributors and customers): `contacts`
+
+Format: `contacts`
+
+This command lists all the contacts in alphabetical order of the first name, and whether they are distributors or customers.
+// end::distributormanagement[]
+
+// tag::journal[]
+
+=== Journal
+
+==== Add a transaction: `transaction`
+
+Format: `Transaction pr/<product name> pr/<product name> ... pr/<product name`
+
+Adds a transaction to the record for the given day.
+The time of the transaction, names of the products, and
+individual product quantities will be stored.
+
+==== View the latest transaction: `latest`
+
+Format: `latest`
+
+Displays the details of the latest transaction.
+
+==== Add a reminder: `setreminder`
+
+Format: `addreminder time/yyyy/MM/dd HH:mm:ss message/<The reminder message>`
+
+Sets and stores a reminder. In v1.2, this is only allowed for the current day.
+In future releases, reminders will be set in the current and future days.
+
+==== View due reminder notifcations: `duereminders`
+
+Format: `duereminders`
+
+Shows all reminders that are still due in the current day.
+
+// end::journal[]
+
+=== Clearing all entries : `clear`
+
+Clears all entries from the address book. +
+Format: `clear`
+
+=== Exiting the program : `exit`
+
+Exits the program. +
+Format: `exit`
+
+=== Saving the data
+
+All data are saved onto the hard disk automatically after any command that changes the data. +
+There is no need to save manually.
+
+// tag::dataencryption[]
+=== Encrypting data files `[coming in v2.0]`
+
+_{explain how the user can enable/disable data encryption}_
+// end::dataencryption[]
+
 == FAQ
 
 Q: Why is the product called Inventarie Pro?
-A: We have Swedish developer on our team. Inventarie is the Swedish word for inventory.
+
+A: We have Swedish developer on our team. `Inventarie` is the Swedish word for inventory.
 
 Q: How do I transfer my data to another computer?
-A: Install the application on another computer and copy the file “data”  from the old computer to the new computer and place it in the folder that belong to the program.
+
+A: Install the application on another computer and copy the folder “data”  from the old computer to the new computer and place it in the folder that belong to the program.
 
 Q: I see your screenshots are from a Windows computer. Will this software work on my Macbook?
+
 A: Yes, because Java is platform independent. However, please ensure that the latest version of Java is installed on your system.
 
 Q: Why can I not just use pen and paper to log my transactions, if I am a small provision store owner?
+
 A: There are numerous advantages to digitization of records. Do google ‘advantages of digitization’ for more information!
 
 

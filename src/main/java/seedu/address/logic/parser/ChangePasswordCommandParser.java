@@ -8,28 +8,28 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 import java.util.stream.Stream;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.ChangeUserPasswordCommand;
+import seedu.address.logic.commands.ChangePasswordCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.Username;
 
 /**
- * Parses input arguments and creates a new ChangeUserPasswordCommand object
+ * Parses input arguments and creates a new ChangePasswordCommand object
  */
-public class ChangeUserPasswordCommandParser implements Parser<ChangeUserPasswordCommand> {
+public class ChangePasswordCommandParser implements Parser<ChangePasswordCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the ChangeUserPasswordCommand
-     * and returns an ChangeUserPasswordCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the ChangePasswordCommand
+     * and returns an ChangePasswordCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public ChangeUserPasswordCommand parse(String args) throws ParseException {
+    public ChangePasswordCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_USERNAME, PREFIX_PASSWORD, PREFIX_NEW_PASSWORD);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_USERNAME, PREFIX_PASSWORD, PREFIX_NEW_PASSWORD)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ChangeUserPasswordCommand.MESSAGE_USAGE));
+                    ChangePasswordCommand.MESSAGE_USAGE));
         }
 
         try {
@@ -37,7 +37,7 @@ public class ChangeUserPasswordCommandParser implements Parser<ChangeUserPasswor
             Password password = ParserUtil.parsePassword(argMultimap.getValue(PREFIX_PASSWORD).get());
             Password newPassword = ParserUtil.parsePassword(argMultimap.getValue(PREFIX_NEW_PASSWORD).get());
 
-            return new ChangeUserPasswordCommand(username, password, newPassword);
+            return new ChangePasswordCommand(username, password, newPassword);
         } catch (IllegalValueException ive) {
             throw new ParseException(ive.getMessage(), ive);
         }
