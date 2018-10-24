@@ -22,7 +22,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_ACTIVITY = new Prefix("a/");
     public static final Prefix PREFIX_FILENAME = new Prefix("f/");
 
-
     /* Command keywords */
     public static final String COMMAND_ADD = "add";
     public static final String COMMAND_CLEAR = "clear";
