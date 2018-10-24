@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -42,6 +41,8 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListGroupCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.ScriptCommand;
+import seedu.address.logic.commands.ScriptCommandTest;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -50,6 +51,8 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.script.CommandType;
+import seedu.address.model.script.TextFile;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.GroupUtil;
@@ -190,6 +193,17 @@ public class AddressBookParserTest {
         SelectCommand command = (SelectCommand) parser.parseCommand(
                 SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new SelectCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_script() throws Exception {
+        assertTrue(parser.parseCommand(ScriptCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_TEXT_FILE
+                        + ScriptCommandTest.validAddTextFile + " " + CliSyntax.PREFIX_COMMAND
+                        + AddCommand.COMMAND_WORD) instanceof ScriptCommand);
+        assertTrue(parser.parseCommand(
+                ScriptCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_TEXT_FILE
+                        + ScriptCommandTest.missingTextFile + " " + CliSyntax.PREFIX_COMMAND
+                        + AddCommand.COMMAND_WORD) instanceof ScriptCommand);
     }
 
     @Test
