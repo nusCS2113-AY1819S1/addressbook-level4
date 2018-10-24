@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TOTAL_BUDGET;
 import java.util.List;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.arithmetic.CalculateTotalAttendees;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.budgetelements.ClubBudgetElements;
@@ -28,6 +29,7 @@ public class BudgetCalculationCommand extends Command {
 
     public static final String MESSAGE_CALCULATE_BUDGET_SUCCESS = "The budgets have been calculated.";
     public static final String MESSAGE_INVALID_TOTAL_BUDGET = "Please enter a valid total budget!";
+    public static final String MESSAGE_DUPLICATE_CLUB = "This is a duplicate club";
 
     private final TotalBudget totalBudget;
 
@@ -50,23 +52,11 @@ public class BudgetCalculationCommand extends Command {
         }
         int i;
 
-        int totalAttendees = 0;
-
         int budgetPerPerson;
 
-        for (i = 0; i < listOfClubs.size(); i++) {
+        CalculateTotalAttendees totalAttendees = new CalculateTotalAttendees(listOfClubs);
 
-            ClubBudgetElements currentClub = listOfClubs.get(i);
-
-            int currentExpectedTurnout = Integer.parseInt(currentClub.getExpectedTurnout().toString());
-
-            int currentNumberOfEvents = Integer.parseInt(currentClub.getNumberOfEvents().toString());
-
-            totalAttendees += (currentExpectedTurnout * currentNumberOfEvents);
-
-        }
-
-        budgetPerPerson = Integer.parseInt(totalBudget.toString()) / totalAttendees;
+        budgetPerPerson = Integer.parseInt(totalBudget.toString()) / totalAttendees.arithmeticTotalAttendees();
 
         for (i = 0; i < listOfClubs.size(); i++) {
 
@@ -83,14 +73,11 @@ public class BudgetCalculationCommand extends Command {
             FinalClubBudget toAdd = new FinalClubBudget(currentClubForBudget.getClubName(), currentClubsBudget);
 
             if (model.hasClubBudget(toAdd)) {
-                //throw new CommandException(MESSAGE_DUPLICATE_CLUB);
+                throw new CommandException(MESSAGE_DUPLICATE_CLUB);
             }
-
             model.addClubBudget(toAdd);
 
         }
-
-        //model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_CALCULATE_BUDGET_SUCCESS));
     }
