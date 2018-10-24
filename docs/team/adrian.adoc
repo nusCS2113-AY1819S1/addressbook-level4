@@ -1,0 +1,71 @@
+= Adrian Tan - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== Role: Team Lead, Developer, Git Expert
+
+Responsibilities: Devops, Integration, Scheduling and tracking
+
+== PROJECT: Student Planner
+
+---
+
+== Overview
+
+Student Planner is a all-in-one desktop manager application that allows students to manage their contacts, tasks, events and expenses. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to backup/restore user data*
+** What it does: allows the user to backup current user data both online and locally. Backups can be restored by using the restore command.
+** Justification: This feature improves the product significantly because a user may have the app on many desktops and this provides a convenient way to synchronise them among many devices.
+** Highlights: This enhancement enables a generic class that can be easily extended by developers to support more types of online backup services in future. It requires an in-depth analysis of design alternatives. The implementation too was challenging as the backing up of data online may take a long time, existing implementation will cause the application to freeze until any backup is completed. The current implementation exhibits a working knowledge of multithreading applications as well as event based asynchronous callbacks.
+** Credits: GitHub Api by kohsuke.
+
+* *Minor enhancement*: added a user prefences command that allows the user to customise their application preferences such as default backup locations, online backup data location and other application settings.
+
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+
+* *Other contributions*:
+
+** Project management:
+*** Managed all releases on GitHub
+*** Setup and modified most of the initial documentation prior to v1.1
+** Enhancements to existing features:
+*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
+*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
+** Tools:
+*** Integrated a third party library (Github Api by kohsuke) to the project (https://github.com/kohsuke/github-api)
+*** Integrated a new Github App (Travis.com) to the team repo
+**** This is different from other teams still using the old deprecated OAuth Flow used on the older Travis.org domain
+
+_{you can add/remove categories in the list above}_
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=databackup]
+
+include::../UserGuide.adoc[tag=datarestore]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=backuprestore]
+
+include::../DeveloperGuide.adoc[tag=dataencryption]

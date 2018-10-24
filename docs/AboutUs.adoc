@@ -13,7 +13,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 //TODO: Portfolio for everyone
 === Adrian Tan Guo Hua
 image::qzsg.png[width="150", align="left"]
-{empty}[https://qz.sg[homepage]] [https://github.com/qzsg[github]]
+{empty}[https://qz.sg[homepage]] [https://github.com/qzsg[github]] [<<adrian#, portfolio>>]
 
 Role: Team Lead, Developer, Git Expert +
 Responsibilities: Devops, Integration, Scheduling and tracking
