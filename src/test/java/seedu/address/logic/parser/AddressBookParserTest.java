@@ -29,10 +29,11 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.classroom.ClassModule;
+
 import seedu.address.model.classroom.ClassName;
 import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.Enrollment;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -140,10 +141,10 @@ public class AddressBookParserTest {
         final String maxEnrollment = "20";
         ClassAddCommand command = (ClassAddCommand) parser.parseCommand(ClassAddCommand.COMMAND_WORD
                 + " " + PREFIX_CLASSNAME + className
-                + " " + PREFIX_MODULECODE + moduleCode
+                + " " + PREFIX_MODULE_CODE + moduleCode
                 + " " + PREFIX_MAXENROLLMENT + maxEnrollment);
         assertEquals(new ClassAddCommand(new Classroom(new ClassName(className),
-                new ClassModule(moduleCode),
+                new ModuleCode(moduleCode),
                 new Enrollment(maxEnrollment))), command);
     }
 

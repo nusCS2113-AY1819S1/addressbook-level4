@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.classroom.ClassModule;
 import seedu.address.model.classroom.ClassName;
 import seedu.address.model.classroom.Enrollment;
 
@@ -23,21 +22,6 @@ public class ClassroomParserUtil {
             throw new ParseException(ClassName.MESSAGE_CLASSNAME_CONSTRAINTS);
         }
         return new ClassName(trimmedClassName);
-    }
-
-    /**
-     *
-     * Parses a {@code String moduleCode} into a {@code ClassModule}.
-     * Leading and trailing whitespaces will be trimmed.
-     * @throws ParseException if the given {@code className} is invalid.
-     */
-    public static ClassModule parseClassModule(String moduleCode) throws ParseException {
-        requireNonNull(moduleCode);
-        String trimmedModuleCode = moduleCode.trim();
-        if (!ClassModule.isValidClassModule(moduleCode)) {
-            throw new ParseException(ClassModule.MESSAGE_CLASSMODULE_CONSTRAINTS);
-        }
-        return new ClassModule(trimmedModuleCode);
     }
 
     /**
