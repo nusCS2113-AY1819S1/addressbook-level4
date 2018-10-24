@@ -25,7 +25,7 @@ public class ModuleEditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the module identified "
             + "by its module code. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: "
             + PREFIX_MODULE_CODE + "MODULE_CODE "
             + "[" + PREFIX_MODULE_NAME + "MODULE_NAME]\n"
             + "Example: " + COMMAND_WORD + " "
