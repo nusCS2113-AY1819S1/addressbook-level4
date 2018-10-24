@@ -39,7 +39,7 @@ public class MainWindow extends UiPart<Stage> {
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
-    private SummaryDisplay summaryDisplay;
+    private StatsDisplayPanel statsDisplayPanel;
 
     @FXML
     private StackPane detailedRecordCardPlaceholder;
@@ -120,8 +120,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        summaryDisplay = new SummaryDisplay();
-        detailedRecordCardPlaceholder.getChildren().add(summaryDisplay.getRoot());
+        statsDisplayPanel = new StatsDisplayPanel();
+        detailedRecordCardPlaceholder.getChildren().add(statsDisplayPanel.getRoot());
 
         detailedRecordCard = new DetailedRecordCard();
         detailedRecordCardPlaceholder.getChildren().add(detailedRecordCard.getRoot());
