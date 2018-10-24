@@ -26,16 +26,6 @@ public class User {
     private Path addressBookFilePath;
     private Path distributorBookFilePath;
 
-<<<<<<< HEAD
-    public User() {
-        this.username = new Username("default");
-        this.password = new Password("password");
-        this.addressBookFilePath = Paths.get(AB_FILEPATH_FOLDER, "addressbook-default.xml");
-        this.distributorBookFilePath=Paths.get(AB_FILEPATH_FOLDER, "distributorbook-default.xml");
-    }
-
-=======
->>>>>>> upstream/master
     /**
      * Creates a user instance
      */
@@ -133,16 +123,10 @@ public class User {
         builder.append(" Username: ")
                 .append(getUsername())
                 .append(" Password: ")
-<<<<<<< HEAD
                 .append(getAddressBookFilePath())
                 .append(" Address Book File Path: ")
                 .append(getDistributorBookFilePath())
                 .append(" Distributor Book File Path: ");
-=======
-                .append(getPassword())
-                .append(" File Path: ")
-                .append(getAddressBookFilePath());
->>>>>>> upstream/master
         return builder.toString();
     }
 }
