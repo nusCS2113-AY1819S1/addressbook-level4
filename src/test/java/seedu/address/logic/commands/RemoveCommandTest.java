@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-//@@author jieliangang
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -28,7 +27,7 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.EventBuilder;
 
 
-
+//@@author jieliangang
 public class RemoveCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalEventList(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();

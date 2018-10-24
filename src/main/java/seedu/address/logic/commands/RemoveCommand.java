@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-//@@author jieliangang
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 
@@ -21,6 +20,8 @@ import seedu.address.model.event.Location;
 import seedu.address.model.event.StartTime;
 import seedu.address.model.person.Person;
 
+
+//@@author jieliangang
 /**
  * Removes an existing person from an existing event.
  */
