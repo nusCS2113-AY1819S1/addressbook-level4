@@ -1,6 +1,10 @@
 package seedu.address.storage;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.testutil.TypicalBooks.ALICE;
+import static seedu.address.testutil.TypicalBooks.HOON;
+import static seedu.address.testutil.TypicalBooks.IDA;
 import static seedu.address.testutil.TypicalBooks.getTypicalBookInventory;
 
 import java.io.IOException;
@@ -15,8 +19,8 @@ import org.junit.rules.TemporaryFolder;
 import seedu.address.model.BookInventory;
 import seedu.address.model.ReadOnlyBookInventory;
 
-public class XmlBookInventoryRequestStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlBookInventoryRequestStorageTest");
+public class XmlBookInventoryStorageTest {
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlBookInventoryStorageTest");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -73,25 +77,24 @@ public class XmlBookInventoryRequestStorageTest {
         Path filePath = testFolder.getRoot().toPath().resolve("TempAddressBook.xml");
         BookInventory original = getTypicalBookInventory();
         XmlBookInventoryStorage xmlAddressBookStorage = new XmlBookInventoryStorage(filePath);
-        /*
+
         //Save in new file and read back
         xmlAddressBookStorage.saveAddressBook(original, filePath);
         ReadOnlyBookInventory readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
-        assertEquals(original, new BookInventory(readBack));
+        assertEquals(original.toString(), new BookInventory(readBack).toString());
 
         //Modify data, overwrite exiting file, and read back
         original.addBook(HOON);
         original.removeBook(ALICE);
         xmlAddressBookStorage.saveAddressBook(original, filePath);
         readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
-        assertEquals(original, new BookInventory(readBack));
+        assertEquals(original.toString(), new BookInventory(readBack).toString());
 
         //Save and read without specifying file path
         original.addBook(IDA);
         xmlAddressBookStorage.saveAddressBook(original); //file path not specified
         readBack = xmlAddressBookStorage.readAddressBook().get(); //file path not specified
-        assertEquals(original, new BookInventory(readBack));
-        */
+        assertEquals(original.toString(), new BookInventory(readBack).toString());
     }
 
     @Test
