@@ -1,11 +1,11 @@
 package com.t13g2.forum.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.storage.forum.Context;
-import static java.util.Objects.requireNonNull;
-
 /**
  *
  */
@@ -23,9 +23,8 @@ public class LogoutCommand extends Command {
         if (Context.getInstance().getCurrentUser() != null) {
             this.userName = Context.getInstance().getCurrentUser().getUsername();
             Context.getInstance().setCurrentUser(null);
-            canLogout =true;
-        }
-        else {
+            canLogout = true;
+        } else {
             canLogout = false;
         }
     }
