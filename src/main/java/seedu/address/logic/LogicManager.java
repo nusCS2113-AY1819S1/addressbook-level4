@@ -18,7 +18,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReminderRunnable;
 import seedu.address.model.distributor.Distributor;
 import seedu.address.model.login.User;
 import seedu.address.model.product.Product;
@@ -32,16 +31,11 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Model model;
     private final CommandHistory history;
     private final AddressBookParser addressBookParser;
-    private final ReminderRunnable reminderRunnable;
-    private final Thread reminderThread;
 
     public LogicManager(Model model) {
         this.model = model;
         history = new CommandHistory();
         addressBookParser = new AddressBookParser();
-        reminderRunnable = new ReminderRunnable(this);
-        reminderThread = new Thread(reminderRunnable);
-        reminderThread.start();
     }
 
     @Override

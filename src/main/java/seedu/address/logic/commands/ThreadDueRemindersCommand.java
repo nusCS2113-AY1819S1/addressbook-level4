@@ -22,7 +22,7 @@ public class ThreadDueRemindersCommand extends Command {
         ArrayList<Reminder> reminders = model.getDueRemindersInActiveBusinessDayForThread();
 
         if (reminders.size() == 0) {
-            throw new CommandException(NO_THREAD_REMINDERS);
+            return new CommandResult(NO_THREAD_REMINDERS);
         }
 
         StringBuilder allReminders = new StringBuilder();
