@@ -1,7 +1,9 @@
 package com.t13g2.forum.storage.forum;
 
+import java.util.Objects;
 import java.util.Optional;
 
+import com.sun.istack.NotNull;
 import com.t13g2.forum.model.forum.Announcement;
 
 /**
@@ -13,14 +15,16 @@ public class AnnouncementRepository extends BaseRepository implements IAnnouncem
     }
 
     @Override
-    public int addAnnouncement(Announcement announcement) {
+    public int addAnnouncement(@NotNull Announcement announcement) {
+        Objects.requireNonNull(announcement, "announcement can't be null");
         forumBookStorage.getAnnouncements().getList().add(announcement);
         forumBookStorage.getAnnouncements().setDirty();
         return announcement.getId();
     }
 
     @Override
-    public void deleteAnnouncement(Announcement announcement) {
+    public void deleteAnnouncement(@NotNull Announcement announcement) {
+        Objects.requireNonNull(announcement, "announcement can't be null");
         this.deleteAnnouncement(announcement.getId());
     }
 
@@ -31,8 +35,8 @@ public class AnnouncementRepository extends BaseRepository implements IAnnouncem
     }
 
     @Override
-    public Announcement getAnnouncement(int announcementId) {
-        return null;
+    public Announcement getAnnouncement(int announcementId) throws EntityDoesNotExistException {
+        return this.getById(forumBookStorage.getAnnouncements().getList(), announcementId);
     }
 
     @Override

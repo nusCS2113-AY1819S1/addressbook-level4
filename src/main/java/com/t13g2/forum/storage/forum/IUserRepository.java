@@ -14,7 +14,7 @@ public interface IUserRepository {
 
     void deleteUser(int userId);
 
-    User getUser(int userId);
+    User getUser(int userId) throws EntityDoesNotExistException;
 
     User getUserByUsername(String username) throws EntityDoesNotExistException;
 
