@@ -153,13 +153,32 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     //@@author LowGinWee
-    //TODO add description
+    /**
+     * Replaces the contents of the tag HashMap with {@code tagListMap}.
+     */
     public void setTags(ObservableMap<Tag, UniquePersonList> tagListMap) {
         this.tags.setTags(tagListMap);
     }
-    //TODO add description
+
+    /**
+     * Replaces the contents of the schedule with {@code activities}.
+     */
     public void setSchedule(List<Activity> activities) {
         this.schedule.setSchedule(activities);
+    }
+
+    /**
+     * Adds an Activity to the schedule in the address book.
+     */
+    public void addActivity(Activity activity) {
+        schedule.add(activity);
+    }
+
+    /**
+     * Deletes an Activity from the schedule in the address book.
+     */
+    public void deleteActivity(Activity activity) {
+        schedule.delete(activity);
     }
 
     @Override
@@ -167,15 +186,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         return schedule.getActivities();
     }
 
+    @Override
     public TreeMap<Date, ArrayList<Activity>> getSchedule() {
         return schedule.getSchedule();
-    }
-
-    public void addActivity(Activity activity) {
-        schedule.add(activity);
-    }
-
-    public void deleteActivity(Activity activity) {
-        schedule.delete(activity);
     }
 }
