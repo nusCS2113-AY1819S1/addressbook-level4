@@ -10,15 +10,15 @@ import seedu.address.security.UserStub;
  */
 public class FriendListPredicate implements Predicate<Person> {
 
-    private final Set<Friend> friendList;
-    private Person currentUser = UserStub.getUser();
+    private final Person currentUser;
 
-    public FriendListPredicate(Set<Friend> friendList) {
-        this.friendList = friendList;
+    public FriendListPredicate(Person currentUser) {
+        this.currentUser = currentUser;
     }
 
     @Override
     public boolean test(Person person) {
+        Set<Friend> friendList = currentUser.getFriends();
         for (Friend friend : friendList) {
             if (currentUser.getName().equals(person.getName())) {
                 return false;

@@ -217,11 +217,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     public FriendListPredicate friendsPredicateFromPerson(Person person) {
-        return new FriendListPredicate(person.getFriends());
+        return new FriendListPredicate(person);
     }
 
     public OtherListPredicate othersPredicateFromPerson(Person person) {
-        return new OtherListPredicate(person.getFriends());
+        return new OtherListPredicate(person);
     }
 
     /**

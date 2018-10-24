@@ -11,7 +11,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Friend;
 import seedu.address.model.person.Person;
-import seedu.address.security.UserStub;
 
 /**
  * Adds a user from the frined list to the others list
@@ -36,19 +35,19 @@ public class UnfriendCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        List<Person> otherList = model.getOtherList(UserStub.getUser());
+        List<Person> friendList = model.getFriendList(model.getUser());
 
-        if (targetIndex.getZeroBased() >= otherList.size()) {
+        if (targetIndex.getZeroBased() >= friendList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        Person personToEdit = otherList.get(targetIndex.getZeroBased());
+        Person personToEdit = friendList.get(targetIndex.getZeroBased());
         Person editedPerson = personToEdit;
-        Person editedUser = UserStub.getUser();
-        editedPerson.getFriends().remove(new Friend(UserStub.getUser().getName()));
-        editedUser.getFriends().remove(new Friend(personToEdit.getName()));
+        Person editedUser = model.getUser();
+        editedPerson.getFriends().remove(new Friend(personToEdit.getName()));
+        editedUser.getFriends().remove(new Friend(model.getUser().getName()));
 
         model.updatePerson(personToEdit, editedPerson);
-        model.updatePerson(UserStub.getUser(), editedUser);
+        model.updatePerson(model.getUser(), editedUser);
         model.commitAddressBook();
         return new CommandResult(MESSAGE_REMOVE_FRIEND_SUCCESS);
     }
