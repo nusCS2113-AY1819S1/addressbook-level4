@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
@@ -36,9 +37,12 @@ public class LostCommandParser implements Parser<LostCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LostCommand.MESSAGE_USAGE), pe);
         }
         LostDescriptor lostDescriptor = new LostDescriptor();
-        LostDescriptor.setQuantity(ParserUtil
+        lostDescriptor.setInitialQuantity(ParserUtil
                 .parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get()).toInteger());
-
+        /*lostDescriptor.setLostQuantity(ParserUtil
+                .parseStatus(argMultimap.getValue(PREFIX_QUANTITY).get()).toInteger());
+        lostDescriptor.setFinalQuantity(ParserUtil
+                .parseStatus(argMultimap.getValue(PREFIX_QUANTITY).get()).toInteger());*/
 
         return new LostCommand(targetIndex, lostDescriptor);
     }

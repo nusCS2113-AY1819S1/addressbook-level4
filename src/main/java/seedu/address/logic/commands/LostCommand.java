@@ -26,7 +26,7 @@ public class LostCommand extends Command{
             +"by the index number used in the displayed item list"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_QUANTITY + "QUANTITY\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_QUANTITY + "25";
 
 
@@ -73,7 +73,8 @@ public class LostCommand extends Command{
     private static Item createLostItem(Item itemToLost, LostDescriptor lostDescriptor) {
         assert itemToLost != null;
 
-        Quantity updatedQuantity = ((itemToLost.getQuantity())-(lostDescriptor.getQuantity())).orElse(itemToLost.getQuantity());
+        Integer updatedValue = lostDescriptor.getFinalQuantity();
+        Quantity updatedQuantity= new Quantity(Integer.toString(updatedValue));
 
 
         return new Item(itemToLost.getName(), updatedQuantity, itemToLost.getMinQuantity(), itemToLost.getTags());
@@ -81,14 +82,23 @@ public class LostCommand extends Command{
 
     public static class LostDescriptor {
         private Integer lostQuantity;
+        private Integer initialQuantity;
+        private Integer finalQuantity;
         public LostDescriptor(){}
 
         public LostDescriptor(LostDescriptor toCopy) {
-            setQuantity(toCopy.lostQuantity);
+            setLostQuantity(toCopy.lostQuantity);
+            setInitialQuantity(toCopy.initialQuantity);
+            setFinalQuantity(toCopy.lostQuantity,toCopy.initialQuantity);
+
 
         }
-        public void setQuantity(Integer lostQuantity) {this.lostQuantity=lostQuantity;}
-        public Integer getQuantity(){return lostQuantity;}
+        public void setLostQuantity(Integer lostQuantity) {this.lostQuantity=lostQuantity;}
+        public void setInitialQuantity(Integer initialQuantity){this.initialQuantity=initialQuantity;}
+        public void setFinalQuantity(Integer lostQuantity,Integer initialQuantity){this.finalQuantity=initialQuantity-lostQuantity;}
+        //public Integer getinitialQuantity(){return initialQuantity;}
+        //public Integer getLostQuantity(){return lostQuantity;}
+        public Integer getFinalQuantity(){return finalQuantity;}
     }
     @Override
     public boolean equals(Object other) {

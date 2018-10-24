@@ -315,8 +315,8 @@ e.g. `login u/jalil p/dontworrybrother`
 * *Undo* : `undo`
 * *Update* : `update n/NAME [q/QUANTITY] [m/MINIMUM_QUANTITY] [t/TAG]` +
 e.g. `update n/Arduino q/25 t/Lab7 t/Lab8`
-* *Lost* : `lost n/NAME [q/QUANTITY]` +
-e.g. `lost n/Arduino q/25`
+* *Lost* : `lost Index [q/QUANTITY]` +
+e.g. `lost 1 q/25`
 * *Found* : `found n/NAME [q/QUANTITY]` +
 e.g. `found n/Arduino q/25`
 * *Lost&Found List* : `lost&found`
