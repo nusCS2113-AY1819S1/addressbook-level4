@@ -1,5 +1,7 @@
 package seedu.address.security;
 
+import seedu.address.model.User;
+
 /***
  * API of Security Component
  */
@@ -28,4 +30,10 @@ public interface Security {
      * @return is authenticated for tests
      */
     boolean getAuthentication();
+
+    /**
+     *
+     * @return the current authenticated User
+     */
+    User getUser();
 }
