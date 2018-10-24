@@ -261,7 +261,7 @@ public class DeregisterCommandTest {
             fail("This method should not be called.");
         }
 
-        public ArrayList<Reminder> getDueRemindersInActiveShopDay() {
+        public ArrayList<Reminder> getDueRemindersInActiveBusinessDay() {
             fail("This method should not be called.");
             return null;
         }
@@ -290,6 +290,11 @@ public class DeregisterCommandTest {
         final ArrayList<User> usersAdded = new ArrayList<>();
 
         @Override
+        public ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread() {
+            return null;
+        }
+
+        @Override
         public void deleteUser(User user) throws UserNotFoundException {
             usersAdded.add(registerValidUser());
             requireNonNull(user);
@@ -303,6 +308,11 @@ public class DeregisterCommandTest {
      */
     private class ModelStubThrowingUserNotFoundException extends DeregisterCommandTest.ModelStub {
         @Override
+        public ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread() {
+            return null;
+        }
+
+        @Override
         public void deleteUser(User user) throws UserNotFoundException {
             throw new UserNotFoundException();
         }
@@ -314,10 +324,14 @@ public class DeregisterCommandTest {
      */
     private class ModelStubThrowingAuthenticationFailedException extends DeregisterCommandTest.ModelStub {
         @Override
+        public ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread() {
+            return null;
+        }
+
+        @Override
         public boolean checkCredentials(Username username, Password password) throws AuthenticatedException {
             throw new AuthenticatedException();
         }
-
     }
 
     private User registerValidUser() {

@@ -330,6 +330,8 @@ public class ModelManager extends ComponentManager implements Model {
                 && filteredProducts.equals(other.filteredProducts);
     }
 
+    //=========================== SalesHistory modifications ===================================
+
     @Override
     public String getActiveDayHistory() {
         return versionedAddressBook.getActiveDayHistory();
@@ -366,11 +368,16 @@ public class ModelManager extends ComponentManager implements Model {
         } catch (DuplicateReminderException e) {
             throw e;
         }
+
     }
 
     @Override
-    public ArrayList<Reminder> getDueRemindersInActiveShopDay() {
+    public ArrayList<Reminder> getDueRemindersInActiveBusinessDay() {
         return versionedAddressBook.getDueRemindersInActiveDay();
+    }
+
+    public ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread() {
+        return versionedAddressBook.getDueRemindersInActiveDayForThread();
     }
 
     @Override

@@ -258,7 +258,7 @@ public class LoginCommandTest {
             fail("This method should not be called.");
         }
 
-        public ArrayList<Reminder> getDueRemindersInActiveShopDay() {
+        public ArrayList<Reminder> getDueRemindersInActiveBusinessDay() {
             fail("This method should not be called.");
             return null;
         }
@@ -288,6 +288,11 @@ public class LoginCommandTest {
         private boolean loginStatus = false;
 
         @Override
+        public ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread() {
+            return null;
+        }
+
+        @Override
         public boolean checkAuthentication(Username username, Password password) {
             requireNonNull(username);
             requireNonNull(password);
@@ -310,6 +315,11 @@ public class LoginCommandTest {
      * A Model stub that always throw a AuthenticationException when trying to login.
      */
     private class ModelStubThrowingAuthenticatedException extends ModelStub {
+        @Override
+        public ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread() {
+            return null;
+        }
+
         @Override
         public boolean checkAuthentication(Username username, Password password)
                 throws AuthenticatedException {

@@ -12,31 +12,45 @@ import java.util.Objects;
  */
 public class User {
 
-    public static final String MESSAGE_AB_FILEPATH_CONSTRAINTS = "ProductDatabase file path is incorrect.";
+    public static final String MESSAGE_AB_FILEPATH_CONSTRAINTS = "%s file path is incorrect.";
 
     private static final String AB_FILEPATH_FOLDER = "data";
     private static final String AB_FILEPATH_PREFIX = "addressbook-";
+    private static final String AB_SALESHISTORY_FILEPATH_PREFIX = "saleshistory-";
     private static final String AB_FILEPATH_POSTFIX = ".xml";
 
     private Username username;
     private Password password;
     private Path addressBookFilePath;
+    private Path salesHistoryFilePath;
+
+
+    public User() {
+        this.username = new Username("default");
+        this.password = new Password("password");
+        this.addressBookFilePath = Paths.get(AB_FILEPATH_FOLDER, "addressbook-default.xml");
+        this.salesHistoryFilePath = Paths.get(AB_FILEPATH_FOLDER, "saleshistory-default.xml");
+    }
 
     /**
      * Creates a user instance
      */
     public User(Username username, Password password) {
-        this(username, password, Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX));
+        this(username,
+                password,
+                Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX),
+                Paths.get(AB_FILEPATH_FOLDER, AB_SALESHISTORY_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX));
     }
 
     /**
      * Every field must be present and not null.
      */
-    public User(Username username, Password password, Path addressBookFilePath) {
-        requireAllNonNull(username, password, addressBookFilePath);
+    public User(Username username, Password password, Path addressBookFilePath, Path salesHistoryFilePath) {
+        requireAllNonNull(username, password, addressBookFilePath, salesHistoryFilePath);
         this.username = username;
         this.password = password;
         this.addressBookFilePath = addressBookFilePath;
+        this.salesHistoryFilePath = salesHistoryFilePath;
     }
 
     /**
@@ -45,6 +59,15 @@ public class User {
     public static boolean isValidAddressBookFilePath(Path test, String username) {
         return test.equals(Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX))
                 && !test.equals(Paths.get(""));
+    }
+
+    /**
+     * Returns true if user of the same name has the correct sales history extension field.
+     */
+    public static boolean isValidSalesHistoryFilePath(Path test, String username) {
+        return test.equals(Paths.get(AB_FILEPATH_FOLDER, AB_SALESHISTORY_FILEPATH_PREFIX + username
+                + AB_FILEPATH_POSTFIX))
+                && !test.equals("");
     }
 
     public Username getUsername() {
@@ -57,6 +80,10 @@ public class User {
 
     public Path getAddressBookFilePath() {
         return addressBookFilePath;
+    }
+
+    public Path getSalesHistoryFilePath() {
+        return salesHistoryFilePath;
     }
 
     /**
@@ -96,7 +123,7 @@ public class User {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(username, password, addressBookFilePath);
+        return Objects.hash(username, password, addressBookFilePath, salesHistoryFilePath);
     }
 
     @Override
@@ -106,8 +133,10 @@ public class User {
                 .append(getUsername())
                 .append(" Password: ")
                 .append(getPassword())
-                .append(" File Path: ")
-                .append(getAddressBookFilePath());
+                .append(" Product File Path: ")
+                .append(getAddressBookFilePath())
+                .append(" Sales History File Path: ")
+                .append(getSalesHistoryFilePath());
         return builder.toString();
     }
 }
