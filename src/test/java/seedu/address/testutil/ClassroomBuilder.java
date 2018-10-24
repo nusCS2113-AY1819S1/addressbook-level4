@@ -20,7 +20,7 @@ public class ClassroomBuilder {
 
     public ClassroomBuilder() {
         className = new ClassName(DEFAULT_CLASSNAME);
-        moduleCode = new ModuleCode(DEFAULT_ModuleCode);
+        moduleCode = new ModuleCode(DEFAULT_MODULECODE);
         maxEnrollment = new Enrollment(DEFAULT_ENROLLMENT);
     }
 
