@@ -6,9 +6,11 @@ package seedu.address.model.gradebook;
 public class Gradebook {
     private String moduleCode;
     private String gradebookComponentName;
+    private String studentAdminNo;
     private String gradebookNewComponentName;
     private int gradebookMaxMarks;
     private int gradebookWeightage;
+    private int studentGrade;
 
     public Gradebook(
             String moduleCode,
@@ -34,20 +36,20 @@ public class Gradebook {
         this.gradebookWeightage = gradebookWeightage;
     }
 
+    public Gradebook(
+            String studentAdminNo,
+            String moduleCode,
+            String gradebookComponentName,
+            int studentGrade) {
+        this.studentAdminNo = studentAdminNo;
+        this.moduleCode = moduleCode;
+        this.gradebookComponentName = gradebookComponentName;
+        this.studentGrade = studentGrade;
+    }
+
     public Gradebook(String moduleCode, String gradebookComponentName) {
         this.moduleCode = moduleCode;
         this.gradebookComponentName = gradebookComponentName;
-    }
-
-    /**
-     This method checks if user inputs empty values for module code or gradebook component name.
-     */
-    public static boolean hasEmptyParams(String moduleCode, String gradebookComponentName) {
-        boolean empty = false;
-        if (moduleCode.equals("") || gradebookComponentName.equals("")) {
-            empty = true;
-        }
-        return empty;
     }
 
     public String getModuleCode() {
@@ -84,5 +86,21 @@ public class Gradebook {
 
     public void setgradebookWeightage (int gradebookWeightage) {
         this.gradebookWeightage = gradebookWeightage;
+    }
+
+    public String getStudentAdminNo() {
+        return this.studentAdminNo;
+    }
+
+    public void setStudentAdminNo (String studentAdminNo) {
+        this.studentAdminNo = studentAdminNo;
+    }
+
+    public int getStudentGrade() {
+        return this.studentGrade;
+    }
+
+    public void setStudentGrade (int studentGrade) {
+        this.studentGrade = studentGrade;
     }
 }

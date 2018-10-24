@@ -14,7 +14,7 @@ import seedu.address.model.gradebook.GradebookManager;
  * Parses input arguments and creates a new GradebookDeleteCommand object
  */
 public class GradebookDeleteCommandParser {
-    private static final String MESSAGE_EMPTY_INPUTS = "Module code and gradebook component name cannot be empty";
+    public static final String MESSAGE_EMPTY_INPUTS = "Module code and gradebook component name cannot be empty";
     /**
      * Parses the given {@code String args} of arguments in the context of the GradebookDeleteCommand
      * and returns a GradebookDeleteCommand object for execution.

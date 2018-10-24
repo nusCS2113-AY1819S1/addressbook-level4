@@ -65,7 +65,7 @@ public class GradebookEditCommandParser {
 
         String moduleCodeArg = argMultimap.getValue(PREFIX_MODULE_CODE).get();
         String gradeComponentNameArg = argMultimap.getValue(PREFIX_GRADEBOOK_ITEM).get();
-        boolean isEmpty = Gradebook.hasEmptyParams(moduleCodeArg, gradeComponentNameArg);
+        boolean isEmpty = gradebookManager.isEmpty(moduleCodeArg, gradeComponentNameArg);
         if (isEmpty) {
             throw new ParseException(MESSAGE_ERROR_EMPTY);
         }
