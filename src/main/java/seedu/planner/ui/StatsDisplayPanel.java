@@ -52,7 +52,6 @@ public class StatsDisplayPanel extends UiPart<Region> {
             }
             tabManager.getTabs().add(tab);
             tabManager.getSelectionModel().select(tab);
-            tab.getContent().setStyle("-fx-background-color: red");
         }
     }
 
@@ -66,13 +65,11 @@ public class StatsDisplayPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    //TODO: Refactor this to not hardcode, add exception throwing
     public void handleShowPieChartStatsEvent(ShowPieChartStatsEvent event) {
-        CustomTab tab = new CustomTab(event.data);
-        if (!tabManager.getTabs().stream().anyMatch(t -> t.getText() == "Category Breakdown for financial activity")) {
-            tabManager.getTabs().add(tab);
-            tabManager.getSelectionModel().select(tab);
-        }
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        Tab categoryTab = new Tab(SummaryDisplay.LABEL);
+        categoryTab.setContent(new CategoryBreakdown(event.data).getRoot());
+        createTabs(categoryTab);
         show();
     }
 }
