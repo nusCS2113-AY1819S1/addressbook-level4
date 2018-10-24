@@ -96,6 +96,15 @@ public interface Model {
      * @return
      */
     String generateLimitOutput (boolean isExceeded, Limit limit);
+
+    /**
+     * Return the limit which has the same dates as input.
+     * @param dateStart
+     * @param dateEnd
+     * @return
+     */
+    Limit getSameDatesLimit (Date dateStart, Date dateEnd);
+
     /** Returns an unmodifiable view of the filtered record list */
     ObservableList<Record> getFilteredRecordList();
 

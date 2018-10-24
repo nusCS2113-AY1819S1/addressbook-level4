@@ -27,8 +27,6 @@ public class LimitCommandParser implements Parser<LimitCommand> {
      */
 
     private String [] datesIn; //the string is used to divide two the whole strings into two substrings.
-    private String dateStartString;
-    private String getDateEndString;
 
     @Override
     public LimitCommand parse(String args) throws ParseException {

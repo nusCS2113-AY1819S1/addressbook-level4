@@ -125,7 +125,6 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
      */
     public void updateRecord(Record target, Record editedRecord) {
         requireNonNull(editedRecord);
-
         records.setRecord(target, editedRecord);
     }
     /**
@@ -209,6 +208,16 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         return (limit.isExceeded(recordsMoney));
     }
 
+    /**
+     * return the dates
+     */
+    public Limit getSameDatesLimit (Date dateStart, Date dateEnd) {
+        for (Limit i: limits.asUnmodifiableObservableList()) {
+            if (dateStart.equals(i.getDateStart()) && dateEnd.equals(i.getDateEnd()))
+                return i;
+        }
+        return null;
+    }
 
 
     /**

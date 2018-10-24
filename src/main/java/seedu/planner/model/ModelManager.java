@@ -18,8 +18,6 @@ import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
 import seedu.planner.commons.events.model.LimitListChangedEvent;
 import seedu.planner.commons.events.model.SummaryMapChangedEvent;
-import seedu.planner.logic.CommandHistory;
-import seedu.planner.logic.commands.LimitCommand;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
@@ -157,6 +155,12 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(target, editedLimit);
         versionedFinancialPlanner.updateLimit(target, editedLimit);
         indicateLimitListChanged();
+    }
+
+    @Override
+    public Limit getSameDatesLimit (Date dateStart, Date dateEnd) {
+        requireAllNonNull(dateStart, dateEnd);
+        return versionedFinancialPlanner.getSameDatesLimit(dateStart, dateEnd);
     }
 
     @Override

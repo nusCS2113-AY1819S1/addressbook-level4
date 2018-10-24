@@ -14,6 +14,7 @@ import seedu.planner.model.record.Limit;
 /**
 * This Command is used as a limit function, Currently the user can input two Dates and one MoneyFlow,
 * and the command will check whether the the total expense during this period has exceeded the limit.
+ * and the limit will be stored inside the limit storage.
 * */
 public class LimitCommand extends Command {
     public static final String COMMAND_WORD = "limit";
@@ -35,18 +36,13 @@ public class LimitCommand extends Command {
 
     private Limit limit;
     private String output;
-    private boolean isAutoCheck;
+
     public LimitCommand (Limit limitIn) {
         requireNonNull(limitIn);
         limit = limitIn;
-        isAutoCheck = false;
+
     }
 
-    public LimitCommand (String output) {
-        requireNonNull(output);
-        this.output = output;
-        isAutoCheck =true;
-    }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
@@ -55,23 +51,12 @@ public class LimitCommand extends Command {
             throw new CommandException(MESSAGE_LIMITS_SAME_DATE);
         }
 
-        if (!isAutoCheck){
         model.addLimit(limit);
         output = model.generateLimitOutput(model.isExceededLimit(limit), limit);
-        }
-      /*  if (model.isExceededLimit(limit)) {
-            output = String.format(MESSAGE_BASIC,
-                    limit.getDateStart(), limit.getDateEnd(), limit.getLimitMoneyFlow().toDouble())
-                    + MESSAGE_EXCEED;
-        } else {
-            output = String.format(MESSAGE_BASIC,
-                    limit.getDateStart(), limit.getDateEnd(), limit.getLimitMoneyFlow().toDouble())
-                    + MESSAGE_NOT_EXCEED;
-        }*/
 
         return new CommandResult(output);
-
     }
+
     @Override
     public boolean equals (Object other) {
         return other == this // short circuit if same object
