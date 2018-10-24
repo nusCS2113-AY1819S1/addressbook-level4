@@ -10,9 +10,10 @@ import seedu.address.model.login.UniqueUsersList;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.AuthenticatedException;
+import seedu.address.model.login.exceptions.AuthenticationFailedException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
-import seedu.address.model.person.Product;
+import seedu.address.model.product.Product;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
 import seedu.address.model.timeidentifiedclass.shopday.Reminder;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
@@ -87,7 +88,7 @@ public interface Model {
     void updateDistributor(Distributor target, Distributor editedDistributor);
 
 
-    /** Returns an unmodifiable view of the filtered person list
+    /** Returns an unmodifiable view of the filtered product list
      * The product identity of {@code editedProduct} must not be the same as another existing
      * product in the address book.
      */
@@ -96,7 +97,7 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered product list */
     ObservableList<Product> getFilteredProductList();
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /** Returns an unmodifiable view of the filtered product list */
     ObservableList<Distributor> getFilteredDistributorList();
 
     /**
@@ -221,9 +222,9 @@ public interface Model {
      */
     void addUser(User person) throws DuplicateUserException;
 
-    boolean checkLoginCredentials(Username username, Password password) throws AuthenticatedException;
+    boolean checkAuthentication(Username username, Password password) throws AuthenticatedException;
 
-    boolean checkCredentials(Username username, Password password) throws AuthenticatedException;
+    boolean checkCredentials(Username username, Password password) throws AuthenticationFailedException;
 
     boolean hasLoggedIn();
 

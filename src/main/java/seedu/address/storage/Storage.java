@@ -19,7 +19,8 @@ import seedu.address.model.login.User;
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, DistributorBookStorage, UserPrefsStorage, UserDatabaseStorage {
+public interface Storage extends ProductDatabaseStorage, DistributorBookStorage, UserPrefsStorage, UserDatabaseStorage {
+
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -31,10 +32,20 @@ public interface Storage extends AddressBookStorage, DistributorBookStorage, Use
     Path getProductInfoBookFilePath();
 
     @Override
+    Path getDistributorBookFilePath();
+
+    @Override
     Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
 
     @Override
+    Optional<ReadOnlyDistributorBook> readDistributorBook() throws DataConversionException, IOException;
+
+    @Override
     void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+
+    @Override
+    void saveDistributorBook(ReadOnlyDistributorBook distributorBook) throws IOException;
+
 
     /**
      * Saves the current version of the Address Book to the hard disk.
@@ -75,6 +86,9 @@ public interface Storage extends AddressBookStorage, DistributorBookStorage, Use
 
     @Override
     void deleteAddressBook(User user) throws IOException;
+
+    @Override
+    void deleteDistributorBook(User user) throws IOException;
 
     void update(User user);
 }

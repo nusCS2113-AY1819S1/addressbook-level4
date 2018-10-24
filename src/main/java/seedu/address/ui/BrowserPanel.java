@@ -14,8 +14,12 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.DistributorPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
+<<<<<<< HEAD
 import seedu.address.model.distributor.Distributor;
 import seedu.address.model.person.Product;
+=======
+import seedu.address.model.product.Product;
+>>>>>>> upstream/master
 
 /**
  * The Browser Panel of the App.

@@ -11,8 +11,11 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Product;
-import seedu.address.model.person.UniquePersonList;
+
+
+import seedu.address.model.product.Product;
+import seedu.address.model.product.UniquePersonList;
+
 import seedu.address.model.saleshistory.SalesHistory;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
 import seedu.address.model.timeidentifiedclass.shopday.Reminder;
@@ -21,7 +24,6 @@ import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayE
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateReminderException;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
-
 
 /**
  * Wraps all data at the address-book level
@@ -70,7 +72,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// product-level operations
 
     /**
-     * Resets the existing data of this {@code DistributorBook} with {@code newData}.
+     * Replaces the contents of the product list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
@@ -96,7 +99,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given product {@code target} in the list with {@code editedProduct}.
      * {@code target} must exist in the address book.
- product identity of {@code editedProduct} must not be the same as another existing product in the address book.
+     * product identity of {@code editedProduct} must not be the same as another existing product in the address book.
      */
     public void updatePerson(Product target, Product editedProduct) {
         requireNonNull(editedProduct);

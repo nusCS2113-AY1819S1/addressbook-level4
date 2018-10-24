@@ -27,17 +27,18 @@ import seedu.address.model.login.User;
 public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+
     private DistributorBookStorage distributorBookStorage;
+    private ProductDatabaseStorage productDatabaseStorage;
     private UserPrefsStorage userPrefsStorage;
     private UserDatabaseStorage userDatabaseStorage;
 
-
-    public StorageManager(AddressBookStorage addressBookStorage, DistributorBookStorage distributorBookStorage,
+    public StorageManager(ProductDatabaseStorage productDatabaseStorage, DistributorBookStorage distributorBookStorage,
                           UserPrefsStorage userPrefsStorage, UserDatabaseStorage userDatabaseStorage) {
         super();
-        this.addressBookStorage = addressBookStorage;
+        this.productDatabaseStorage = productDatabaseStorage;
         this.distributorBookStorage = distributorBookStorage;
+
         this.userPrefsStorage = userPrefsStorage;
         this.userDatabaseStorage = userDatabaseStorage;
     }
@@ -64,29 +65,29 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public Path getProductInfoBookFilePath() {
-        return addressBookStorage.getProductInfoBookFilePath();
+        return productDatabaseStorage.getProductInfoBookFilePath();
     }
 
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(addressBookStorage.getProductInfoBookFilePath());
+        return readAddressBook(productDatabaseStorage.getProductInfoBookFilePath());
     }
 
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return productDatabaseStorage.readAddressBook(filePath);
     }
 
     @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getProductInfoBookFilePath());
+        saveAddressBook(addressBook, productDatabaseStorage.getProductInfoBookFilePath());
     }
 
     @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        productDatabaseStorage.saveAddressBook(addressBook, filePath);
     }
 
 
@@ -180,7 +181,7 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     public void deleteAddressBook(User user) throws IOException {
         logger.fine("Attempting to delete to data file: " + user.getAddressBookFilePath());
-        addressBookStorage.deleteAddressBook(user);
+        productDatabaseStorage.deleteAddressBook(user);
     }
 
     @Override
@@ -204,7 +205,7 @@ public class StorageManager extends ComponentManager implements Storage {
     // ============== Storage updater =====================
 
     public void update(User user) {
-        this.addressBookStorage = new XmlAddressBookStorage(user.getAddressBookFilePath());
+        this.productDatabaseStorage = new XmlProductDatabaseStorage(user.getAddressBookFilePath());
         this.distributorBookStorage = new XmlDistributorBookStorage(user.getDistributorBookFilePath());
     }
 

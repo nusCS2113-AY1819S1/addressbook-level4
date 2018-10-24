@@ -10,11 +10,11 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.distributor.DistributorName;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Product;
+import seedu.address.model.product.Address;
+import seedu.address.model.product.Email;
+import seedu.address.model.product.Name;
+import seedu.address.model.product.Product;
+import seedu.address.model.product.SerialNumber;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -90,12 +90,13 @@ public class XmlAdaptedProduct {
         final Name modelName = new Name(name);
 
         if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, SerialNumber.class.getSimpleName()));
         }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_PHONE_CONSTRAINTS);
+        if (!SerialNumber.isValidPhone(phone)) {
+            throw new IllegalValueException(SerialNumber.MESSAGE_PHONE_CONSTRAINTS);
         }
-        final Phone modelPhone = new Phone(phone);
+        final SerialNumber modelSerialNumber = new SerialNumber(phone);
 
         if (distname == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
@@ -114,7 +115,7 @@ public class XmlAdaptedProduct {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Product(modelName, modelPhone, modelDistName, modelAddress, modelTags);
+        return new Product(modelName, modelSerialNumber, modelDistName, modelAddress, modelTags);
     }
 
     @Override

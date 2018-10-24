@@ -20,8 +20,13 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+<<<<<<< HEAD
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Product;
+=======
+import seedu.address.model.product.NameContainsKeywordsPredicate;
+import seedu.address.model.product.Product;
+>>>>>>> upstream/master
 import seedu.address.testutil.EditDistributorDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 

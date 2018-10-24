@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.product;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -18,7 +18,7 @@ public class Product {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
+    private final SerialNumber serialNumber;
     private final DistributorName distname;
 
     // Data fields
@@ -28,10 +28,10 @@ public class Product {
     /**
      * Every field must be present and not null.
      */
-    public Product(Name name, Phone phone, DistributorName distname, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, distname, address, tags);
+    public Product(Name name, SerialNumber serialNumber, DistributorName distname, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, serialNumber, distname, address, tags);
         this.name = name;
-        this.phone = phone;
+        this.serialNumber = serialNumber;
         this.distname = distname;
         this.address = address;
         this.tags.addAll(tags);
@@ -41,8 +41,8 @@ public class Product {
         return name;
     }
 
-    public Phone getSerialNumber() {
-        return phone;
+    public SerialNumber getSerialNumber() {
+        return serialNumber;
     }
 
     public DistributorName getDistributor() {
@@ -101,7 +101,7 @@ public class Product {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, distname, address, tags);
+        return Objects.hash(name, serialNumber, distname, address, tags);
     }
 
     @Override

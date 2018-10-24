@@ -10,7 +10,7 @@ import seedu.address.model.distributor.DistributorPhone;
 public class DistributorBuilder {
 
     public static final String DEFAULT_NAME = "Ah Bee Distributors";
-    public static final String DEFAULT_PHONE = "85355255";
+    public static final String DEFAULT_SERIAL_NUMBER = "85355255";
 
 
     private DistributorName name;
@@ -19,7 +19,7 @@ public class DistributorBuilder {
 
     public DistributorBuilder() {
         name = new DistributorName(DEFAULT_NAME);
-        phone = new DistributorPhone(DEFAULT_PHONE);
+        phone = new DistributorPhone(DEFAULT_SERIAL_NUMBER);
 
     }
 
@@ -41,7 +41,7 @@ public class DistributorBuilder {
 
 
     /**
-     * Sets the {@code Phone} of the {@code Distributor} that we are building.
+     * Sets the {@code SerialNumber} of the {@code Distributor} that we are building.
      */
     public DistributorBuilder withPhone(String phone) {
         this.phone = new DistributorPhone(phone);

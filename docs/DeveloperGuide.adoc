@@ -246,6 +246,8 @@ This section describes some noteworthy details on how certain features are imple
 ===== Login
 The following sequence diagram shows how the user authentication process works: +
 
+image::AuthenticationSequenceDiagram.png[width="800]
+
 ===== Logout
 
 ==== Design Considerations

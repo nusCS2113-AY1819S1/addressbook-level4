@@ -23,7 +23,16 @@ import seedu.address.logic.LogicManager;
 import seedu.address.model.*;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.model.util.SampleUsersUtil;
-import seedu.address.storage.*;
+import seedu.address.storage.DistributorBookStorage;
+import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.ProductDatabaseStorage;
+import seedu.address.storage.Storage;
+import seedu.address.storage.StorageManager;
+import seedu.address.storage.UserDatabaseStorage;
+import seedu.address.storage.UserPrefsStorage;
+import seedu.address.storage.XmlDistributorBookStorage;
+import seedu.address.storage.XmlProductDatabaseStorage;
+import seedu.address.storage.XmlUserDatabaseStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -52,13 +61,17 @@ public class MainApp extends Application {
         AppParameters appParameters = AppParameters.parse(getParameters());
         config = initConfig(appParameters.getConfigPath());
 
-        UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
+        UserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
-        UserDatabaseStorage usersStorage = new XmlUserDatabaseStorage(userPrefs.getUsersFilePath());
-        AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
+        UserDatabaseStorage usersStorage =
+                new XmlUserDatabaseStorage(userPrefs.getUsersFilePath());
+        ProductDatabaseStorage productDatabaseStorage =
+                new XmlProductDatabaseStorage(userPrefs.getAddressBookFilePath());
         DistributorBookStorage distributorBookStorage =
                 new XmlDistributorBookStorage(userPrefs.getDistributorBookFilePath());
-        storage = new StorageManager(addressBookStorage, distributorBookStorage, userPrefsStorage, usersStorage);
+        storage = new StorageManager(productDatabaseStorage, distributorBookStorage, userPrefsStorage, usersStorage);
+
 
         initLogging(config);
 

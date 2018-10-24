@@ -13,6 +13,7 @@ import seedu.address.model.login.UniqueUsersList;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.AuthenticatedException;
+import seedu.address.model.login.exceptions.AuthenticationFailedException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 
@@ -107,10 +108,12 @@ public class UserDatabase implements ReadOnlyUserDatabase {
      * @param password
      * @throws AuthenticatedException is the user is already logged in.
      */
-    public boolean checkLoginCredentials(Username username, Password password) throws AuthenticatedException {
+
+    public boolean checkAuthentication(Username username, Password password) throws AuthenticatedException {
         User toCheck = new User(username, password,
                 Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX),
                 Paths.get(DB_FILEPATH_FOLDER, DB_FILEPATH_PREFIX + username + DB_FILEPATH_POSTFIX));
+
         logger.fine("Attempting to check credentials for login");
 
         if (hasLoggedIn) {
@@ -133,7 +136,7 @@ public class UserDatabase implements ReadOnlyUserDatabase {
      * @return
      * @throws AuthenticatedException
      */
-    public boolean checkCredentials(Username username, Password password) throws AuthenticatedException {
+    public boolean checkCredentials(Username username, Password password) throws AuthenticationFailedException {
         User toCheck = new User(username, password,
                 Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX),
                 Paths.get(DB_FILEPATH_FOLDER, DB_FILEPATH_PREFIX + username + DB_FILEPATH_POSTFIX));
@@ -141,7 +144,7 @@ public class UserDatabase implements ReadOnlyUserDatabase {
         if (!hasLoggedIn) {
             return users.contains(toCheck);
         } else {
-            throw new AuthenticatedException();
+            throw new AuthenticationFailedException();
         }
     }
 
@@ -151,9 +154,8 @@ public class UserDatabase implements ReadOnlyUserDatabase {
 
     /**
      * Adds a user to the User Database.
-     * @throws DuplicateUserException if an equivalent user already exists.
      */
-    public void addUser(User user) throws DuplicateUserException {
+    public void addUser(User user) {
         users.add(user);
     }
 

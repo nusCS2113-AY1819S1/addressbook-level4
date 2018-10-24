@@ -11,7 +11,7 @@ import seedu.address.model.login.User;
 /**
  * Represents a storage for {@link seedu.address.model.AddressBook}.
  */
-public interface AddressBookStorage {
+public interface ProductDatabaseStorage {
 
     /**
      * Returns the file path of the data file.

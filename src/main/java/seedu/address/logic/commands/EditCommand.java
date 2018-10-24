@@ -21,10 +21,10 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.distributor.DistributorName;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Product;
+import seedu.address.model.product.Address;
+import seedu.address.model.product.Name;
+import seedu.address.model.product.Product;
+import seedu.address.model.product.SerialNumber;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -99,12 +99,13 @@ public class EditCommand extends Command {
 
 
         Name updatedName = editPersonDescriptor.getName().orElse(productToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getSerialNumber().orElse(productToEdit.getSerialNumber());
+        SerialNumber updatedSerialNumber =
+                editPersonDescriptor.getSerialNumber().orElse(productToEdit.getSerialNumber());
         DistributorName updatedDistName = editPersonDescriptor.getDistributor().orElse(productToEdit.getDistributor());
         Address updatedAddress = editPersonDescriptor.getProductInfo().orElse(productToEdit.getProductInfo());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(productToEdit.getTags());
 
-        return new Product(updatedName, updatedPhone, updatedDistName, updatedAddress, updatedTags);
+        return new Product(updatedName, updatedSerialNumber, updatedDistName, updatedAddress, updatedTags);
     }
 
     @Override
@@ -132,7 +133,7 @@ public class EditCommand extends Command {
 
     public static class EditPersonDescriptor {
         private Name name;
-        private Phone phone;
+        private SerialNumber serialNumber;
         private DistributorName distname;
         private Address address;
         private Set<Tag> tags;
@@ -145,7 +146,7 @@ public class EditCommand extends Command {
         */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
-            setPhone(toCopy.phone);
+            setSerialNumber(toCopy.serialNumber);
             setEmail(toCopy.distname);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
@@ -155,7 +156,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
         */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, distname, address, tags);
+            return CollectionUtil.isAnyNonNull(name, serialNumber, distname, address, tags);
         }
 
         public void setName(Name name) {
@@ -166,12 +167,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        public void setSerialNumber(SerialNumber serialNumber) {
+            this.serialNumber = serialNumber;
         }
 
-        public Optional<Phone> getSerialNumber() {
-            return Optional.ofNullable(phone);
+        public Optional<SerialNumber> getSerialNumber() {
+            return Optional.ofNullable(serialNumber);
         }
 
         public void setEmail(DistributorName distname) {

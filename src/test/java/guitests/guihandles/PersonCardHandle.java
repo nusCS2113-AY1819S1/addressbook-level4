@@ -8,7 +8,7 @@ import com.google.common.collect.ImmutableMultiset;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Product;
+import seedu.address.model.product.Product;
 
 /**
  * Provides a handle to a product card in the product list panel.
@@ -17,14 +17,19 @@ public class PersonCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
     private static final String NAME_FIELD_ID = "#name";
     private static final String ADDRESS_FIELD_ID = "#address";
+<<<<<<< HEAD
     private static final String PHONE_FIELD_ID = "#phone";
     private static final String EMAIL_FIELD_ID = "#email";
+=======
+    private static final String SERIAL_NUMBER_FIELD_ID = "#phone";
+    private static final String DIST_FIELD_ID = "#distname";
+>>>>>>> upstream/master
     private static final String TAGS_FIELD_ID = "#tags";
 
     private final Label idLabel;
     private final Label nameLabel;
     private final Label addressLabel;
-    private final Label phoneLabel;
+    private final Label serialNumberLabel;
     private final Label emailLabel;
     private final List<Label> tagLabels;
 
@@ -34,8 +39,13 @@ public class PersonCardHandle extends NodeHandle<Node> {
         idLabel = getChildNode(ID_FIELD_ID);
         nameLabel = getChildNode(NAME_FIELD_ID);
         addressLabel = getChildNode(ADDRESS_FIELD_ID);
+<<<<<<< HEAD
         phoneLabel = getChildNode(PHONE_FIELD_ID);
         emailLabel = getChildNode(EMAIL_FIELD_ID);
+=======
+        serialNumberLabel = getChildNode(SERIAL_NUMBER_FIELD_ID);
+        emailLabel = getChildNode(DIST_FIELD_ID);
+>>>>>>> upstream/master
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
         tagLabels = tagsContainer
@@ -58,7 +68,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
     }
 
     public String getSerialNumber() {
-        return phoneLabel.getText();
+        return serialNumberLabel.getText();
     }
 
     public String getDistributor() {
