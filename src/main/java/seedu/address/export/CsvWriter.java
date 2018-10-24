@@ -46,7 +46,7 @@ public class CsvWriter {
     /**
      * Writes to the .csv file as defined in {@code outputFilepath}.
      */
-    public void write() {
+    public void write() throws IOException {
         try {
 
             File file = new File(String.valueOf(outputFilepath));
@@ -65,7 +65,7 @@ public class CsvWriter {
             writer.close();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new IOException();
         }
     }
 

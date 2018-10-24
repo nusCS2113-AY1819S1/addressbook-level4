@@ -2,7 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.IOException;
+
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Filetype;
 import seedu.address.model.Model;
 
@@ -31,9 +34,15 @@ public class ExportAllCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        model.exportAddressBook();
+
+        try {
+            model.exportAddressBook();
+        } catch (IOException e) {
+            throw new CommandException(MESSAGE_FAILURE);
+        }
+
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
