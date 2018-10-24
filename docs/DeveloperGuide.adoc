@@ -398,6 +398,60 @@ Data are saved in ObjectStream
 `RunningId` does not work as the other entities do, it has its own logic to make sure IDs are consistent among processes
 if the user runs more than one instance of the program.
 
+=== User management
+
+==== Current Implementation
+The user management is facilitated by various commands. It extends `ForumBook` with a user management tool. Additionally, it implements the following operations:
+
+* `AddUserCommand` -- Add user to forum book.
+
+* `LoginCommand`: login to forum book.
+
+* `LogoutCommand`: logout from the forum book.
+
+* `UpdateCommand`: Update a certain user's password, email and/or phone.
+
+Given below is an example usage scenario and how the admin management behaves at each step.
+
+This Section below until Admin Management need to be edited :(
+
+Step 1. The admin launches the application, executes `announce aTitle/Urgent! aContent/System maintenance from 3PM to 6PM.` to add the announcement to storage file. The `announce` command calls `UnitOfWork.getAnnouncementRepository.addAnnouncement(announcement)` and then `UnitOfWork.commit()`, causing a modified forum book state to be saved into `ForumBookStorage`
+
+image::SDAnnounce.png[width="800"]
+
+Step 2. The admin/user executes `checkAnnounce` to check for the latest announcement in storage file. The `checkAnnounce` calls the `UnitOfWork.getAnnouncementRepository().getLatestAnnouncement()` which returns an announcement to be shown in the message dialog.
+
+image::SDCheckAnnounce.png[width="800"]
+
+Step 3. The admin executes `block uName/john` to block john from creating new threads or comments. The `block` calls `User.setIsBlock(true)` and then `UnitOfWork.commit()`, causing another modified forum book state to be saved into `ForumBookStorage`.
+
+image::SDBlockUserFromCreating.png[width="800"]
+
+Step 4. The admin executes `setAdmin uName/john set/true` to set a certain user as admin or to revert an admin to user. The `setAdmin` calls the `User.setAdmin(true)` and then `UnitOfWork.commit()`, causing another modified forum book state to be saved into `ForumBookStorage`.
+
+image::SDSetAdmin.png[width="800"]
+
+Step 5. The admin executes `createModule mCode/CS2113 mTitle/Software Engineering and OOP` to create the specific module. The `createModule` calls the `UnitOfWork.getModuleRepository().addModule(module)` and then `UnitOfWork.commit()`, causing another modified forum book state to be save into `ForumBookStorage`.
+
+image::SDCreateModule.png[width="800"]
+
+Step 6. The admin executes `deleteModule mCode/CS2113` to delete specific module. The `deleteModule` calls the `UnitOfWork.getModuleRepository().removeModule(module);` and then `UnitOfWork.commit()`, causing another modified forum book state to be save into `ForumBookStorage`.
+
+image::SDDeleteModule.png[width="800"]
+
+Step 7. The admin executes `updatePass uName/john uPass/098` to update the user john's password. The `updatePass` calls the `UnitOfWork.getUserRepository().updateUser(user)` and then `UnitOfWork.commit()`, causing another modified forum book state to be save into `ForumBookStorage`.
+
+image::SDUpdatePass.png[width="800"]
+
+Step 8. The admin executes `deleteUser uName/john` to delete the user john. The `deleteUser` calls the ` UnitOfWork.getUserRepository().deleteUser(userToDelete)` and then `UnitOfWork.commit()`, causing another modified forum book state to be save into `ForumBookStorage`.
+
+image::SDDeleteUser.png[width="800"]
+
+[NOTE]
+If the syntax of a command is wrong, the program will prompt the user to try again and show a suggested command format.
+
+// tag::dataencryption[]
+
 === Admin management
 
 ==== Current Implementation
