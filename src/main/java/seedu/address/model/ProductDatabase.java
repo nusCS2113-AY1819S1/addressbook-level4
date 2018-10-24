@@ -16,9 +16,10 @@ import seedu.address.model.product.Product;
 import seedu.address.model.product.UniquePersonList;
 
 import seedu.address.model.saleshistory.SalesHistory;
+import seedu.address.model.timeidentifiedclass.TimeIdentifiedClass;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
+import seedu.address.model.timeidentifiedclass.shopday.BusinessDay;
 import seedu.address.model.timeidentifiedclass.shopday.Reminder;
-import seedu.address.model.timeidentifiedclass.shopday.ShopDay;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateReminderException;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
@@ -111,7 +112,6 @@ public class ProductDatabase implements ReadOnlyAddressBook {
      * @throws ClosedShopDayException
      * @throws DuplicateTransactionException
      */
-
     public void addTransaction(Transaction transaction) throws InvalidTimeFormatException,
             ClosedShopDayException, DuplicateTransactionException {
         try {
@@ -127,7 +127,7 @@ public class ProductDatabase implements ReadOnlyAddressBook {
     }
 
     public String getDaysHistory(String day) {
-        ShopDay requiredDay;
+        BusinessDay requiredDay;
         try {
             requiredDay = salesHistory.getDaysHistory(day);
         } catch (NoSuchElementException e) {
@@ -137,7 +137,7 @@ public class ProductDatabase implements ReadOnlyAddressBook {
     }
 
     public String getActiveDayHistory() {
-        ShopDay activeDay = salesHistory.getActiveDay();
+        BusinessDay activeDay = salesHistory.getActiveDay();
         return activeDay.getDaysTransactions();
     }
 
@@ -150,10 +150,10 @@ public class ProductDatabase implements ReadOnlyAddressBook {
      * @param reminder
      * @throws InvalidTimeFormatException
      */
-    public void addReminderToActiveShopDay(Reminder reminder) throws InvalidTimeFormatException,
+    public void addReminderToActiveBusinessDay(Reminder reminder) throws InvalidTimeFormatException,
             DuplicateReminderException {
 
-        if (!Transaction.isValidTransactionTime(reminder.getTime())) {
+        if (!TimeIdentifiedClass.isValidDateAndTime(reminder.getTime())) {
             throw new InvalidTimeFormatException();
         }
 
@@ -162,7 +162,23 @@ public class ProductDatabase implements ReadOnlyAddressBook {
         } catch (DuplicateReminderException e) {
             throw e;
         }
+    }
 
+    /**
+     * Removes a reminder from the acitve business day.
+     * @param reminder
+     * @throws InvalidTimeFormatException
+     * @throws NoSuchElementException
+     */
+    public void removeReminderFromActiveBusinessDay(Reminder reminder) throws InvalidTimeFormatException,
+            NoSuchElementException {
+        try {
+            salesHistory.removeReminder(reminder);
+        } catch (InvalidTimeFormatException e) {
+            throw e;
+        } catch (NoSuchElementException e) {
+            throw e;
+        }
     }
 
     /**
@@ -171,10 +187,9 @@ public class ProductDatabase implements ReadOnlyAddressBook {
      */
     public ArrayList<Reminder> getDueRemindersInActiveDay() {
         final TreeMap<String, Reminder> reminderRecord = salesHistory.getActiveDay().getReminderRecord();
+        final String currentTime = TimeIdentifiedClass.getCurrentDateAndTime();
         ArrayList<Reminder> reminders = new ArrayList<>();
 
-        // To get time since transaction and reminder have the same time formats.
-        final String currentTime = (new Transaction()).getTransactionTime();
 
         // To iterate through the TreeMap.
         Set set = reminderRecord.entrySet();
@@ -189,6 +204,39 @@ public class ProductDatabase implements ReadOnlyAddressBook {
                 reminders.add((Reminder) entry.getValue());
             } else {
                 break;
+            }
+        }
+        return reminders;
+    }
+
+    /**
+     * Returns the reminders which are due in the active day.
+     * @return reminder list.
+     */
+    public ArrayList<Reminder> getDueRemindersInActiveDayForThread() {
+        final TreeMap<String, Reminder> reminderRecord = salesHistory.getActiveDay().getReminderRecord();
+        final String currentTime = TimeIdentifiedClass.getCurrentDateAndTime();
+        ArrayList<Reminder> reminders = new ArrayList<>();
+
+
+        // To iterate through the TreeMap.
+        Set set = reminderRecord.entrySet();
+        Iterator it = set.iterator();
+
+        // set to true to enter the following while block
+        boolean isLesserTime = true;
+
+        while (it.hasNext() && isLesserTime) {
+            Map.Entry entry = (Map.Entry) it.next();
+            String reminderTime = (String) entry.getKey();
+            Reminder reminder = (Reminder) entry.getValue();
+
+            // true if reminder time is lesser than or equal to the current time.
+            isLesserTime = (reminderTime.compareTo(currentTime) <= 0);
+
+            if (isLesserTime && !reminder.hasBeenShownByThread()) {
+                reminders.add(reminder);
+                reminder.declareAsShownByThread();
             }
         }
         return reminders;

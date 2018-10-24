@@ -13,6 +13,7 @@ import seedu.address.model.login.Username;
  */
 public class SampleUsersUtil {
 
+<<<<<<< HEAD
     public static final String ALEX_AB_PATH = "data/addressbook-alex.xml";
     public static final String BERNICE_AB_PATH = "data/addressbook-bernice.xml";
     public static final String ALEX_DB_PATH = "data/distributorbook-alex.xml";
@@ -24,6 +25,19 @@ public class SampleUsersUtil {
                     Paths.get(ALEX_AB_PATH), Paths.get(ALEX_DB_PATH)),
             new User(new Username("bernice"), new Password("99272758"),
                     Paths.get(BERNICE_AB_PATH), Paths.get(BERNICE_DB_PATH))
+=======
+    private static final String ALEX_AB_PATH = "data/addressbook-alex.xml";
+    private static final String ALEX_SALESHISTORY_PATH = "data/saleshistory-alex.xml";
+    private static final String BERNICE_AB_PATH = "data/addressbook-bernice.xml";
+    private static final String BERNICE_SALESHISTORY_PATH = "data/saleshistory-bernice.xml";
+
+    public static User[] getSampleUsers() {
+        return new User[] {
+            new User(new Username("alex"), new Password("87438807"), Paths.get(ALEX_AB_PATH),
+                    Paths.get(ALEX_SALESHISTORY_PATH)),
+            new User(new Username("bernice"), new Password("99272758"), Paths.get(BERNICE_AB_PATH),
+                    Paths.get(BERNICE_SALESHISTORY_PATH))
+>>>>>>> upstream/master
         };
     }
 

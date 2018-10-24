@@ -12,10 +12,11 @@ import java.util.Objects;
  */
 public class User {
 
-    public static final String MESSAGE_AB_FILEPATH_CONSTRAINTS = "ProductDatabase file path is incorrect.";
+    public static final String MESSAGE_AB_FILEPATH_CONSTRAINTS = "%s file path is incorrect.";
 
     private static final String AB_FILEPATH_FOLDER = "data";
     private static final String AB_FILEPATH_PREFIX = "addressbook-";
+    private static final String AB_SALESHISTORY_FILEPATH_PREFIX = "saleshistory-";
     private static final String AB_FILEPATH_POSTFIX = ".xml";
     private static final String DB_FILEPATH_FOLDER = "data/";
     private static final String DB_FILEPATH_PREFIX = "distributorbook-";
@@ -24,26 +25,54 @@ public class User {
     private Username username;
     private Password password;
     private Path addressBookFilePath;
+<<<<<<< HEAD
     private Path distributorBookFilePath;
+=======
+    private Path salesHistoryFilePath;
+
+
+    public User() {
+        this.username = new Username("default");
+        this.password = new Password("password");
+        this.addressBookFilePath = Paths.get(AB_FILEPATH_FOLDER, "addressbook-default.xml");
+        this.salesHistoryFilePath = Paths.get(AB_FILEPATH_FOLDER, "saleshistory-default.xml");
+    }
+>>>>>>> upstream/master
 
     /**
      * Creates a user instance
      */
     public User(Username username, Password password) {
+<<<<<<< HEAD
         this(username, password,
                 Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX),
                 Paths.get(DB_FILEPATH_FOLDER, DB_FILEPATH_PREFIX + username + DB_FILEPATH_POSTFIX));
+=======
+        this(username,
+                password,
+                Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX),
+                Paths.get(AB_FILEPATH_FOLDER, AB_SALESHISTORY_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX));
+>>>>>>> upstream/master
     }
 
     /**
      * Every field must be present and not null.
      */
+<<<<<<< HEAD
     public User(Username username, Password password, Path addressBookFilePath, Path distributorBookFilePath) {
         requireAllNonNull(username, password, addressBookFilePath);
         this.username = username;
         this.password = password;
         this.addressBookFilePath = addressBookFilePath;
         this.distributorBookFilePath = distributorBookFilePath;
+=======
+    public User(Username username, Password password, Path addressBookFilePath, Path salesHistoryFilePath) {
+        requireAllNonNull(username, password, addressBookFilePath, salesHistoryFilePath);
+        this.username = username;
+        this.password = password;
+        this.addressBookFilePath = addressBookFilePath;
+        this.salesHistoryFilePath = salesHistoryFilePath;
+>>>>>>> upstream/master
     }
 
     /**
@@ -55,10 +84,18 @@ public class User {
     }
 
     /**
+<<<<<<< HEAD
      * Returns true if user of the same name has the correct distributor book extension field.
      */
     public static boolean isValidDistributorBookFilePath(Path test, String username) {
         return test.equals(Paths.get(DB_FILEPATH_FOLDER + DB_FILEPATH_PREFIX + username + DB_FILEPATH_POSTFIX))
+=======
+     * Returns true if user of the same name has the correct sales history extension field.
+     */
+    public static boolean isValidSalesHistoryFilePath(Path test, String username) {
+        return test.equals(Paths.get(AB_FILEPATH_FOLDER, AB_SALESHISTORY_FILEPATH_PREFIX + username
+                + AB_FILEPATH_POSTFIX))
+>>>>>>> upstream/master
                 && !test.equals("");
     }
 
@@ -74,8 +111,13 @@ public class User {
         return addressBookFilePath;
     }
 
+<<<<<<< HEAD
     public Path getDistributorBookFilePath() {
         return distributorBookFilePath;
+=======
+    public Path getSalesHistoryFilePath() {
+        return salesHistoryFilePath;
+>>>>>>> upstream/master
     }
 
     /**
@@ -117,7 +159,11 @@ public class User {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
+<<<<<<< HEAD
         return Objects.hash(username, password, addressBookFilePath, distributorBookFilePath);
+=======
+        return Objects.hash(username, password, addressBookFilePath, salesHistoryFilePath);
+>>>>>>> upstream/master
     }
 
     @Override
@@ -126,10 +172,18 @@ public class User {
         builder.append(" Username: ")
                 .append(getUsername())
                 .append(" Password: ")
+<<<<<<< HEAD
                 .append(getAddressBookFilePath())
                 .append(" Address Book File Path: ")
                 .append(getDistributorBookFilePath())
                 .append(" Distributor Book File Path: ");
+=======
+                .append(getPassword())
+                .append(" Product File Path: ")
+                .append(getAddressBookFilePath())
+                .append(" Sales History File Path: ")
+                .append(getSalesHistoryFilePath());
+>>>>>>> upstream/master
         return builder.toString();
     }
 }

@@ -2,10 +2,9 @@ package seedu.address.model.timeidentifiedclass.shopday;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -20,11 +19,9 @@ import seedu.address.model.timeidentifiedclass.transaction.Transaction;
  * This class represents one day of operation in the store, and contains the transactions
  * and reminders of that day.
  */
-public class ShopDay extends TimeIdentifiedClass {
-    private static DateTimeFormatter dayFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-    private static LocalDateTime time;
+public class BusinessDay extends TimeIdentifiedClass {
 
-    private TreeMap<String, Transaction> shopDayRecord;
+    private TreeMap<String, Transaction> salesRecord;
     private TreeMap<String, Reminder> reminderRecord;
     private final String date;
     private boolean isActiveDay;
@@ -33,20 +30,20 @@ public class ShopDay extends TimeIdentifiedClass {
      * The following are the class constructors.
      */
 
-    public ShopDay() {
-        this.date = dayFormat.format(time.now());
+    public BusinessDay() {
+        this.date = super.getCurrentDate();
         this.initialise();
     }
 
     /**
-     * This constructor allows us to create a new ShopDay object using a date. It is to facilitate
+     * This constructor allows us to create a new BusinessDay object using a date. It is to facilitate
      * creation of reminders.
      * @param date
      * @throws InvalidTimeFormatException
      */
-    public ShopDay(String date) throws InvalidTimeFormatException {
+    public BusinessDay(String date) throws InvalidTimeFormatException {
         requireNonNull(date);
-        if (isValidDateFormat(date)) {
+        if (isValidDayFormat(date)) {
             this.date = date;
             this.initialise();
         } else {
@@ -57,16 +54,16 @@ public class ShopDay extends TimeIdentifiedClass {
     /**
      * The following constructor is to be used to facilitate reading from files.
      * @param date
-     * @param shopDayRecord
+     * @param salesRecord
      * @param reminderRecord
      * @throws InvalidTimeFormatException
      */
 
-    public ShopDay(String date, TreeMap<String, Transaction> shopDayRecord, TreeMap<String, Reminder> reminderRecord)
+    public BusinessDay(String date, TreeMap<String, Transaction> salesRecord, TreeMap<String, Reminder> reminderRecord)
             throws InvalidTimeFormatException {
-        if (isValidDateFormat(date)) {
+        if (isValidDayFormat(date)) {
             this.date = date;
-            this.shopDayRecord = shopDayRecord;
+            this.salesRecord = salesRecord;
             this.reminderRecord = reminderRecord;
         } else {
             throw new InvalidTimeFormatException();
@@ -78,7 +75,7 @@ public class ShopDay extends TimeIdentifiedClass {
      */
 
     private void initialise() {
-        this.shopDayRecord = new TreeMap<>();
+        this.salesRecord = new TreeMap<>();
         this.reminderRecord = new TreeMap<>();
         this.openDay();
     }
@@ -89,7 +86,7 @@ public class ShopDay extends TimeIdentifiedClass {
     }
 
     /**
-     * The following method adds a transaction to the given ShopDay object.
+     * The following method adds a transaction to the given BusinessDay object.
      * @param transaction
      * @throws InvalidTimeFormatException
      * @throws ClosedShopDayException
@@ -104,10 +101,10 @@ public class ShopDay extends TimeIdentifiedClass {
         }
         if (!this.isActiveDay) {
             throw new ClosedShopDayException();
-        } else if (shopDayRecord.containsKey(transactionTime)) {
+        } else if (salesRecord.containsKey(transactionTime)) {
             throw new DuplicateTransactionException();
         } else {
-            shopDayRecord.put(transactionTime, transaction);
+            salesRecord.put(transactionTime, transaction);
         }
     }
 
@@ -116,8 +113,7 @@ public class ShopDay extends TimeIdentifiedClass {
      * @param reminder
      */
     public void addReminder(Reminder reminder) throws DuplicateReminderException {
-        if (reminderRecord.containsKey(reminder.getTime())
-                && reminderRecord.get(reminder.getTime()).getMessage().equalsIgnoreCase(reminder.getMessage())) {
+        if (reminderRecord.containsKey(reminder.getTime())) {
             throw new DuplicateReminderException();
         }
         reminderRecord.put(reminder.getTime(), reminder);
@@ -128,7 +124,12 @@ public class ShopDay extends TimeIdentifiedClass {
      * @param reminder
      */
 
-    public void removeReminder(Reminder reminder) {
+    public void removeReminder(Reminder reminder)throws InvalidTimeFormatException, NoSuchElementException {
+        if (!reminderRecord.containsKey(reminder.getTime())) {
+            throw new NoSuchElementException();
+        } else if (!TimeIdentifiedClass.isValidDateAndTime(reminder.getTime())) {
+            throw new InvalidTimeFormatException();
+        }
         reminderRecord.remove(reminder.getTime());
     }
 
@@ -138,7 +139,7 @@ public class ShopDay extends TimeIdentifiedClass {
         ret.append("================== Day Record for " + this.getDay() + "==================\n");
         ret.append("TRANSACTION TIMINGS\n");
 
-        Set set = shopDayRecord.entrySet();
+        Set set = salesRecord.entrySet();
         Iterator it = set.iterator();
 
         while (it.hasNext()) {
@@ -175,12 +176,8 @@ public class ShopDay extends TimeIdentifiedClass {
      * @param date
      * @return true if valid format, false otherwise.
      */
-
-    public static boolean isValidDateFormat(String date) {
-        String[] splitDate = date.split("/");
-        if (isValidYear(splitDate[0]) && isValidMonth(splitDate[1]) && isValidDay(splitDate[2])) {
-            return true;
-        }
-        return false;
+    public static boolean isValidDayFormat(String date) {
+        date = date.trim();
+        return isValidDate(date);
     }
 }

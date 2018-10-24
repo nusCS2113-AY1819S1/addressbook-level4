@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -28,6 +29,7 @@ import seedu.address.model.login.exceptions.AuthenticatedException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 import seedu.address.model.product.Product;
+import seedu.address.model.timeidentifiedclass.TimeIdentifiedClass;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
 import seedu.address.model.timeidentifiedclass.shopday.Reminder;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
@@ -385,6 +387,7 @@ public class ModelManager extends ComponentManager implements Model {
                 && filteredProducts.equals(other.filteredProducts);
     }
 
+<<<<<<< HEAD
     //=========== Undo/Redo DB =================================================================================
 
     @Override
@@ -416,6 +419,9 @@ public class ModelManager extends ComponentManager implements Model {
 
 
     //=========== Transactions =================================================================================
+=======
+    //=========================== SalesHistory accessories ===================================
+>>>>>>> upstream/master
 
     @Override
     public String getActiveDayHistory() {
@@ -443,11 +449,11 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void addReminder(Reminder reminder) throws InvalidTimeFormatException, DuplicateReminderException {
-        if (!Transaction.isValidTransactionTime(reminder.getTime())) {
-            throw new InvalidTimeFormatException ();
+        if (!TimeIdentifiedClass.isValidDateAndTime(reminder.getTime())) {
+            throw new InvalidTimeFormatException();
         }
         try {
-            versionedAddressBook.addReminderToActiveShopDay(reminder);
+            versionedAddressBook.addReminderToActiveBusinessDay(reminder);
         } catch (InvalidTimeFormatException e) {
             throw e;
         } catch (DuplicateReminderException e) {
@@ -456,8 +462,24 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public ArrayList<Reminder> getDueRemindersInActiveShopDay() {
+    public void removeReminder(Reminder reminder) throws InvalidTimeFormatException, NoSuchElementException {
+        try {
+            versionedAddressBook.removeReminderFromActiveBusinessDay(reminder);
+        } catch (InvalidTimeFormatException e) {
+            throw e;
+        }
+        catch (NoSuchElementException e) {
+            throw e;
+        }
+    }
+
+    @Override
+    public ArrayList<Reminder> getDueRemindersInActiveBusinessDay() {
         return versionedAddressBook.getDueRemindersInActiveDay();
+    }
+
+    public ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread() {
+        return versionedAddressBook.getDueRemindersInActiveDayForThread();
     }
 
     @Override

@@ -26,6 +26,7 @@ public class UserDatabase implements ReadOnlyUserDatabase {
 
     private static final String AB_FILEPATH_FOLDER = "data";
     private static final String AB_FILEPATH_PREFIX = "addressbook-";
+    private static final String AB_SALESHISTORY_FILEPATH_PREFIX = "saleshistory-";
     private static final String AB_FILEPATH_POSTFIX = ".xml";
     private static final String DB_FILEPATH_FOLDER = "data/";
     private static final String DB_FILEPATH_PREFIX = "distributorbook-";
@@ -111,10 +112,13 @@ public class UserDatabase implements ReadOnlyUserDatabase {
     public boolean checkAuthentication(Username username, Password password) throws AuthenticatedException {
         User toCheck = new User(username, password,
                 Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX),
+<<<<<<< HEAD
                 Paths.get(DB_FILEPATH_FOLDER, DB_FILEPATH_PREFIX + username + DB_FILEPATH_POSTFIX));
 
+=======
+                Paths.get(AB_FILEPATH_FOLDER, AB_SALESHISTORY_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX));
+>>>>>>> upstream/master
         logger.fine("Attempting to check credentials for login");
-
         if (hasLoggedIn) {
             throw new AuthenticatedException();
         } else if (!users.contains(toCheck)) {
@@ -138,7 +142,11 @@ public class UserDatabase implements ReadOnlyUserDatabase {
     public boolean checkCredentials(Username username, Password password) throws AuthenticatedException {
         User toCheck = new User(username, password,
                 Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX),
+<<<<<<< HEAD
                 Paths.get(DB_FILEPATH_FOLDER, DB_FILEPATH_PREFIX + username + DB_FILEPATH_POSTFIX));
+=======
+                Paths.get(AB_FILEPATH_FOLDER, AB_SALESHISTORY_FILEPATH_PREFIX + username + AB_FILEPATH_PREFIX));
+>>>>>>> upstream/master
         logger.fine("Attempting to check credentials for permissions.");
         if (!hasLoggedIn) {
             return users.contains(toCheck);

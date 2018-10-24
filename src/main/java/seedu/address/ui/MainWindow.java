@@ -35,8 +35,11 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
+<<<<<<< HEAD
     private DistributorListPanel distributorListPanel;
     private ProductListPanel productListPanel;
+=======
+>>>>>>> upstream/master
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
@@ -126,12 +129,15 @@ public class MainWindow extends UiPart<Stage> {
         browserPanel = new BrowserPanel();
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
+<<<<<<< HEAD
         distributorListPanel = new DistributorListPanel(logic.getFilteredDistributorList());
         distributorListPanelPlaceholder.getChildren().add(distributorListPanel.getRoot());
 
         productListPanel = new ProductListPanel(logic.getFilteredProductList());
         productListPanelPlaceholder.getChildren().add(productListPanel.getRoot());
 
+=======
+>>>>>>> upstream/master
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -194,10 +200,13 @@ public class MainWindow extends UiPart<Stage> {
         raise(new ExitAppRequestEvent());
     }
 
+<<<<<<< HEAD
     public ProductListPanel getProductListPanel() {
         return productListPanel;
     }
 
+=======
+>>>>>>> upstream/master
     void releaseResources() {
         browserPanel.freeResources();
     }
