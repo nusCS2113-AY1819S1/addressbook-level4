@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.MailCommand.TYPE_ALL;
 import static seedu.address.logic.commands.MailCommand.TYPE_SELECTION;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -26,6 +27,16 @@ public class MailCommandTest {
 
         String expectedMessage = MailCommand.MESSAGE_SUCCESS
                 + buildRecipients(new ArrayList<>(model.getSelectedPersons()));
+
+        CommandTestUtil.assertCommandSuccess(mailCommand, model, commandHistory, expectedMessage, model);
+    }
+
+    @Test
+    public void execute_allPersons_success() {
+        MailCommand mailCommand = new MailCommand(TYPE_ALL);
+
+        String expectedMessage = MailCommand.MESSAGE_SUCCESS
+                + buildRecipients(new ArrayList<>(model.getFilteredPersonList()));
 
         CommandTestUtil.assertCommandSuccess(mailCommand, model, commandHistory, expectedMessage, model);
     }
