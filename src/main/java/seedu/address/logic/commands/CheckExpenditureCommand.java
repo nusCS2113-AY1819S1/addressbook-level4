@@ -8,8 +8,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.expenditureinfo.Date;
 import seedu.address.model.expenditureinfo.Expenditure;
-import seedu.address.model.task.Task;
+import seedu.address.storage.StorageManager;
 
 import java.util.List;
 
@@ -28,39 +29,58 @@ public class CheckExpenditureCommand extends Command {
             + "Examples:" + COMMAND_WORD + "27-09-2018"
             + "09-10-2018";
 
-    public static final String MESSAGE_SUCCESS = "Show expenditures in this period";
-    private final Index targetIndex;
+    public static final String MESSAGE_SUCCESS = "Show total expenditures in this period %f";
 
-    /**
-     * @param index of the task in the filtered task list to edit
-     */
-    public CheckExpenditureCommand(Index index) {
-        requireNonNull(index);
+    private final Date date1;
+    private final Date date2;
 
-        this.targetIndex = index;
+    public CheckExpenditureCommand(Date date1, Date date2) {
+        requireNonNull(date1);
+        requireNonNull(date2);
+        this.date1 = date1;
+        this.date2 = date2;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        requireNonNull(model);
         List<Expenditure> lastShownList = model.getFilteredExpenditureList();
+        Expenditure editedExpenditure = lastShownList.get(0);
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+
+        int index = 0;
+        float total = 0;
+        while (index <= lastShownList.size()) {
+
+
+            editedExpenditure = lastShownList.get(index);
+
+            int year1 = Integer.valueOf(date1.toString().substring(6, 10));
+            int month1 = Integer.valueOf(date1.toString().substring(3, 5));
+            int day1 = Integer.valueOf(date1.toString().substring(0, 2));
+
+            int year2 = Integer.valueOf(date2.toString().substring(6, 10));
+            int month2 = Integer.valueOf(date2.toString().substring(3, 5));
+            int day2 = Integer.valueOf(date2.toString().substring(0, 2));
+
+
+            int year = Integer.valueOf(editedExpenditure.getDate().toString().substring(6, 10));
+            int month = Integer.valueOf(editedExpenditure.getDate().toString().substring(3, 5));
+            int day = Integer.valueOf(editedExpenditure.getDate().toString().substring(0, 2));
+            if ((year1 >= year) || (year2 <= year));
+            else if ((month1 >= month) || (month2 <= month)) ;
+            else if ((day1 >= day) || (day2 <= day)) ;
+            else {
+                total = total + Integer.valueOf(editedExpenditure.getMoney().toString());
+            }
+            index++;
+
+
         }
-
-        Task taskToEdit = lastShownList.get(targetIndex.getZeroBased());
-        Task editedTask = taskToEdit;
-        editedTask.setAsUncompleted();
-
-        if (!taskToEdit.isSameTask(editedTask) && model.hasTask(editedTask)) {
-            throw new CommandException(MESSAGE_DUPLICATE_TASK);
-        }
-
-        model.updateTask(taskToEdit, editedTask);
-        model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
-        model.commitTodoList();
-        return new CommandResult(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, editedTask));
+        model.updateExpenditure(editedExpenditure, editedExpenditure);
+        model.updateFilteredExpenditureList(PREDICATE_SHOW_ALL_EXPENDITURES);
+        model.commitAddressBook();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, total));
     }
 }

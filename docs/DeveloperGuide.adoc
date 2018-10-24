@@ -1065,6 +1065,39 @@ Expenditure Tracker & Calendar
 3. User keys in `visual` command or `manual` command
 4. Calendar shows the expenditure / income for each day visually or Expenditure Tracker shows the expenditure / income status by displaying the amount of money.
 
+[discrete]
+=== Use case 14: Delete expenditure / income
+*System:*
+Expenditure Tracker & Calendar
+
+*MSS*
+
+1. User enters `ET_delete` command followed by index number
+2. Expenditure tracker confirms expenditure is present and deletes the expenditure
+
+*Extensions*
+
+   2a. The list is empty.
+   2b. The given index is invalid
+     2b1. Expenditure list shows an error message
+
+[discrete]
+=== Use case 15: Edit or Update expenditure
+*System:*
+Expenditure Tracker & Calendar
+
+*MSS*
+
+1.  User enters `ET_edit` command followed by index number
+2.  Expenditure tracker confirms expenditure is present in the list
+3.  User enter relevant contents
+4.  Expenditure tracker shows the updated expenditure in the list
+
+*Extensions*
+
+  2a. The list is empty.
+  2b. The given index is invalid.
+    2b1. To-do list shows an error message
 
 [appendix]
 == Non Functional Requirements

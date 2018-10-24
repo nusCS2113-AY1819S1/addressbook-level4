@@ -31,6 +31,7 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewTaskCommand;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.expenditureinfo.Date;
 
 /**
  * Parses user input.
@@ -113,7 +114,7 @@ public class AddressBookParser {
             return new ListCommand();
 
         case CheckExpenditureCommand.COMMAND_WORD:
-            return new CheckExpenditureCommand();
+            return new CheckExpenditureCommandParser().parse(arguments);
 
         case ViewTaskCommand.COMMAND_WORD:
             return new ViewTaskCommand();
