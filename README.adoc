@@ -3,7 +3,7 @@ ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 https://travis-ci.org/CS2113-AY1819S1-T13-4/main[image:https://travis-ci.org/CS2113-AY1819S1-T13-4/main.svg?branch=master[Build Status]]
 https://ci.appveyor.com/project/Tsuweiquan/main[image:https://ci.appveyor.com/api/projects/status/32r7s2skrgm9ubva?svg=true[Build status]]
-https://coveralls.io/github/CS2113-AY1819S1-T13-4/main?branch=master[image:https://coveralls.io/repos/github/CS2113-AY1819S1-T13-4/main/badge.svg?branch=master[Coverage Status]]
+https://coveralls.io/github/CS2113-AY1819S1-T13-4/main?branch=master&service=github[image:https://coveralls.io/repos/github/CS2113-AY1819S1-T13-4/main/badge.svg?branch=master&service=github[Coverage Status]]
 https://gitter.im/se-edu/Lobby[image:https://badges.gitter.im/se-edu/Lobby.svg[Gitter chat]]
 
 ifdef::env-github[]
