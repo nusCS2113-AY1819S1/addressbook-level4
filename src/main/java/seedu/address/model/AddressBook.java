@@ -92,8 +92,8 @@ public class AddressBook implements ReadOnlyTaskBook {
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void completeTask(Task key) {
-        tasks.complete(key);
+    public void completeTask(Task key, int hours) {
+        tasks.complete(key, hours);
     }
 
     //@@author ChanChunCheong
@@ -101,7 +101,7 @@ public class AddressBook implements ReadOnlyTaskBook {
      * Defer {@code key} previous deadline with (@code deadline) from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void deferDeadline(Task key, String deadline) {
+    public void deferDeadline(Task key, Deadline deadline) {
         requireNonNull(deadline);
         tasks.defer(key, deadline);
     }
@@ -123,7 +123,7 @@ public class AddressBook implements ReadOnlyTaskBook {
         requireNonNull(milestone);
         tasks.add(milestone);
     }
-
+    //@@author
     /**
      * Selects the date for Task Book.
      * Update the list.
@@ -133,6 +133,13 @@ public class AddressBook implements ReadOnlyTaskBook {
         currentDate = deadline;
     }
 
+    public boolean validDeadline(Deadline deadline) {
+        return currentDate.isValidDeadline(deadline.toString());
+    }
+
+    public Deadline getDeadline() {
+        return currentDate;
+    }
     // util methods
 
     @Override

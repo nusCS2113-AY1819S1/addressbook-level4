@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 
-//@@author Chelsey
+//@@author chelseyong
 /**
  * CommandParser is able to
  * pass in arguments

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- AddressBook save file which contains the same Task values as in TypicalPersons#getTypicalAddressBook() -->
+<addressbook>
+    <tasks>
+        <deadline>9/10/2018</deadline>
+        <title>Plan a OP2 meeting</title>
+        <description>OP2 is 40% of the grade</description>
+        <priorityLevel>high</priorityLevel>
+        <expectedNumOfHours>1</expectedNumOfHours>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <deadline>11/11/2018</deadline>
+        <title>Set up the backend framework</title>
+        <description>Using Flask</description>
+        <priorityLevel>medium</priorityLevel>
+        <expectedNumOfHours>1</expectedNumOfHours>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <deadline>1/1/2018</deadline>
+        <title>Complete code refactoring</title>
+        <description>Refer to notes!</description>
+        <priorityLevel>low</priorityLevel>
+        <expectedNumOfHours>1</expectedNumOfHours>
+        <isCompleted>false</isCompleted>
+    </tasks>
+</addressbook>

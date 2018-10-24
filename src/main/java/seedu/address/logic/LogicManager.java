@@ -18,6 +18,7 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectDeadlineCommand;
+import seedu.address.logic.commands.TrackProductivityCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.TaskBookParser;
@@ -34,7 +35,7 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Model model;
     private final CommandHistory history;
     private final TaskBookParser taskBookParser;
-
+    //@@author chelseyong
     public LogicManager(Model model) {
         this.model = model;
         history = new CommandHistory();
@@ -45,6 +46,7 @@ public class LogicManager extends ComponentManager implements Logic {
                 new DeferDeadlineCommand(),
                 new DeleteCommand(),
                 new ListCommand(),
+                new TrackProductivityCommand(),
                 new SelectDeadlineCommand(),
                 new HelpCommand(),
                 new ExitCommand(),
@@ -63,7 +65,7 @@ public class LogicManager extends ComponentManager implements Logic {
             history.add(commandText);
         }
     }
-
+    //@@author
     @Override
     public ObservableList<Task> getFilteredTaskList() {
         return model.getFilteredTaskList();

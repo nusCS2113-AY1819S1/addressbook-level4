@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
@@ -12,7 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.task.Task;
 
-// @@author Chelsey
+// @@author chelseyong
 /**
  * Adds a task to the task book
  */
@@ -23,11 +24,13 @@ public class AddTaskCommand extends Command implements CommandParser {
             + "Parameters: "
             + PREFIX_TITLE + "TITLE "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
-            + PREFIX_PRIORITY + "PRIORITY \n"
+            + PREFIX_PRIORITY + "PRIORITY "
+            + PREFIX_HOURS + "HOURS \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TITLE + "Complete code refactoring "
             + PREFIX_DESCRIPTION + "refer to notes "
-            + PREFIX_PRIORITY + "high";
+            + PREFIX_PRIORITY + "high "
+            + PREFIX_HOURS + "2";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task book";
@@ -53,6 +56,7 @@ public class AddTaskCommand extends Command implements CommandParser {
         }
 
         model.addTask(toAdd);
+        toAdd.setDeadline(model.getDeadline());
         model.commitTaskBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

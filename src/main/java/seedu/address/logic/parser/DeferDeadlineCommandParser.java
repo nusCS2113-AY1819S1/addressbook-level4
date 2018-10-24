@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.DeferDeadlineCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.task.Deadline;
 
 //@@ChanChunCheong
 /**
@@ -45,7 +46,8 @@ public class DeferDeadlineCommandParser implements Parser<DeferDeadlineCommand> 
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeferDeadlineCommand.MESSAGE_USAGE), ive);
         }
-        String deadline = argMultimap.getValue(PREFIX_DEADLINE).orElse("");
+        String deadlineInput = argMultimap.getValue(PREFIX_DEADLINE).orElse("");
+        Deadline deadline = new Deadline(deadlineInput);
         return new DeferDeadlineCommand(index, deadline);
     }
 

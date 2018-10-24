@@ -25,7 +25,7 @@ public interface Model {
      */
     boolean hasTask(Task task);
 
-    void deferTaskDeadline(Task task, String deadline);
+    void deferTaskDeadline(Task task, Deadline deadline);
     /**
      * Deletes the given task.
      * The task must exist in the task book.
@@ -36,7 +36,7 @@ public interface Model {
      * Completes the given task.
      * The task must exist in the task book.
      */
-    void completeTask(Task target);
+    void completeTask(Task target, int hours);
 
     /**
      * Adds the given task.
@@ -45,10 +45,14 @@ public interface Model {
     void addTask(Task task);
 
     //@@author emobeany
-    /**
-     * Selects the input date as deadline.
-     */
+    /** Selects the input date as deadline.*/
     void selectDeadline(Deadline deadline);
+
+    /** Gets deadline previously selected from the TaskBook.*/
+    Deadline getDeadline();
+
+    /** Returns true if input deadline is valid.*/
+    boolean validDeadline(Deadline deadline);
 
     /**
      * Replaces the given task {@code target} with {@code editedTask}.
@@ -62,7 +66,7 @@ public interface Model {
      * Adds the given milestone.
      */
     void addMilestone(Milestone milestone);
-
+    //@@author
     /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();
 
@@ -96,4 +100,10 @@ public interface Model {
      * Saves the current task book state for undo/redo.
      */
     void commitTaskBook();
+
+    /**
+     * Updates task list to
+     * contain only completed tasks
+     */
+    public void trackProductivity();
 }

@@ -89,15 +89,6 @@ Examples:
 
 * `sort t/Complete 2113 Tutorial d/Wed w/2`
 
-=== Adding a deadline: `deadline`
-
-Adds an important task with deadline to the task book +
-Format: `deadline t/ACTION d/DAY [w/WEEK] [m/MONTH]`
-
-Examples:
-
-* `deadline t/Complete 2113 Milestone w/1 m/8`
-
 === Deferring a deadline: `deadline`
 
 Defers a deadline for a task +
@@ -107,14 +98,14 @@ Examples:
 
 * `defer 1 de/04012018`
 
-=== Removing a deadline : `remove_deadline`
+=== Delete a task : `delete`
 
-Removes a deadline from an existing task
-Format: `remove_deadline t/ACTION d/DAY [w/WEEK] [m/MONTH]`
+Removes a task from the task book
+Format: `delete [INDEX]`
 
 Examples:
 
-* `remove_deadline t/Complete 2113 Milestone w/1 m/8`
+* `delete 1`
 
 === Viewing today's date : `view`
 
@@ -124,12 +115,13 @@ Format: `view`
 === Selecting a date: `select`
 
 Chooses a particular date. +
-Format: `select d/DAY [w/WEEK] [m/MONTH]`
+Format: `select dd/DAY [mm/MONTH] [yyyy/YEAR]`
 
 Examples:
 
-* `select d/Mon`
-* `select d/Mon w/2 m/1`
+* `select dd/1`
+* `select dd/1 mm/1`
+* `select dd/1 mm/1 yyyy/2018`
 
 === Listing entered commands : `history`
 
@@ -224,17 +216,13 @@ e.g. `add t/Complete 2113 Tutorial d/Wed w/2`
 * *Add Milestone* : `add_milestone t/TASK_TITLE m/MILESTONE r/RANK...` +
 e.g. `add_milestone t/Complete CS2113 W8 LO m/Complete Sections 8.1 to 8.5 r/1`
 * *Clear* : `clear`
-* *Deadline* : `deadline t/ACTION d/DAY [w/WEEK] [m/MONTH]...` +
 e.g. `deadline t/Complete 2113 Tutorial d/Wed w/2`
 * *Defer deadline* : `deadline t/ACTION w/WEEKS_OF_DEFERMENT` +
 e.g. `defer_deadline t/Complete 2113 Tutorial w/1`
 * *List* : `list`
 * *Help* : `help`
 * *History* : `history`
-* *Select* : `select d/DAY [w/WEEK] [m/MONTH]` +
-e.g. `select d/Mon w/2 m/1`
+* *Select* : `select dd/DAY [mm/MONTH] [yyyy/YEAR]` +
+e.g. `select dd/1 mm/1 yyyy/2018`
 * *Undo* : `undo`
 * *Redo* : `redo`
-* *Remove Deadline* : `remove_deadline t\ACTION d\DAY [w\WEEK] [m\MONTH]...` +
-e.g. `remove_deadline t\Complete 2113 Tutorial d\Wed w\2`
-* *View* : `view`

@@ -11,9 +11,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.DeferDeadlineCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Task;
 
-//@@ChanChunCheong
+//@@author ChanChunCheong
 /**
  * Defer deadline of a specific task in the taskbook.
  */
@@ -44,7 +45,7 @@ public class DeferDeadlineCommand extends Command implements CommandParser {
     //public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Defer deadline command not implemented yet";
 
     private final Index taskIndex;
-    private final String deadline;
+    private final Deadline deadline;
 
     public DeferDeadlineCommand() {
         // Null so that it can be initialized in LogicManager
@@ -56,7 +57,7 @@ public class DeferDeadlineCommand extends Command implements CommandParser {
     /**
      * Creates an DeferDeadlineCommand to add the specified {@code Task & @code Deadline}
      */
-    public DeferDeadlineCommand(Index taskIndex, String deadline) {
+    public DeferDeadlineCommand(Index taskIndex, Deadline deadline) {
         requireNonNull(taskIndex);
         requireNonNull(deadline);
         this.taskIndex = taskIndex;

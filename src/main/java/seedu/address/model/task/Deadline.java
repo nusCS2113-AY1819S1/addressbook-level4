@@ -54,6 +54,9 @@ public class Deadline {
 
     public static boolean isValidDeadline(String test) {
         String[] entries = test.split("/");
+        if (entries.length != 3) {
+            return false;
+        }
         String day = entries[0];
         String month = entries[1];
         String year = entries[2];
@@ -65,7 +68,7 @@ public class Deadline {
             return false;
         } else if (Integer.parseInt(month) < 0 || Integer.parseInt(month) > 12) {
             return false;
-        } else if (Integer.parseInt(year) < 1000 || Integer.parseInt(year) > 10000) {
+        } else if (Integer.parseInt(year) < 1000 || Integer.parseInt(year) > 9999) {
             return false;
         }
         return true;
@@ -96,5 +99,17 @@ public class Deadline {
     public static boolean isNumeric(String s) {
         //s.matches("[-+]?\\d*\\.?\\d+");
         return s != null && s.matches("-?\\d+(\\.\\d+)?");
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == this) {
+            return true;
+        } else if (object instanceof Deadline) {
+            Deadline otherDeadline = (Deadline) object;
+            return otherDeadline.day.equals(this.day) && otherDeadline.month.equals(this.month)
+                    && otherDeadline.year.equals(this.year);
+        }
+        return false;
     }
 }

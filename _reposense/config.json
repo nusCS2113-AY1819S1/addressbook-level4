@@ -1,0 +1,28 @@
+{
+  "formats": ["java", "fxml", "adoc"],
+  "authors":
+  [
+    {
+      "githubId": "Jeremyinelysium",
+      "displayName": "AW ...HEN",
+      "authorNames": ["Jeremyinelysium", "Jeremy Aw"]
+    },
+    {
+      "githubId": "emobeany",
+      "displayName": "BEH...SIM",
+      "authorNames": ["emobeany", "Kha Sim"]
+    },
+    {
+      "githubId": "ChanChunCheong",
+      "displayName": "CHA...ONG",
+      "authorNames": ["ChanChunCheong", "DESKTOP-UO2M0FH\\chanc"]
+    },
+    {
+      "githubId": "chelseyong",
+      "displayName": "CHE...HEE",
+      "authorNames": ["chelseyong"]
+    }
+  ]
+
+
+}
