@@ -9,9 +9,8 @@ import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_LIST_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_LIST_SECOND;
+import static seedu.address.testutil.TypicalIndexes.INDEX_LIST_SIX;
 import static seedu.address.testutil.TypicalIndexes.INDEX_LIST_THIRD;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
@@ -48,6 +47,7 @@ public class SelectCommandTest {
         assertExecutionSuccessSingle(INDEX_LIST_FIRST);
         assertExecutionSuccessSingle(INDEX_LIST_THIRD);
         assertExecutionSuccessSingle(lastPersonIndexList);
+        assertExecutionSuccessMultiple(INDEX_LIST_SIX);
     }
 
     @Test
@@ -102,6 +102,17 @@ public class SelectCommandTest {
     }
 
     /**
+     * Executes a {@code SelectCommand} with the given {@code index}, and checks that a {@code CommandException}
+     * is thrown with the {@code expectedMessage}.
+     */
+    private void assertExecutionFailure(ArrayList<Index> indexArrayList, String expectedMessage) {
+        SelectCommand selectCommand = new SelectCommand(indexArrayList);
+        assertCommandFailure(selectCommand, model, commandHistory, expectedMessage);
+        assertTrue(eventsCollectorRule.eventsCollector.isEmpty());
+    }
+
+    //@@author lekoook
+    /**
      * Executes a {@code SelectCommand} with the given {@code index}, and checks that {@code JumpToListRequestEvent}
      * is raised with the correct index.
      */
@@ -131,21 +142,16 @@ public class SelectCommandTest {
         assertEquals(extractIndexAsIntegers(indexArrayList), lastEvent.targetIndex);
     }
 
+    /**
+     * Extracts an array list of {@code Index} to an array list of {@code Integer}.
+     * @param indexArrayList the list of {@code Index} to extract from.
+     * @return the list of {@code Integer} extracted.
+     */
     private ArrayList<Integer> extractIndexAsIntegers(ArrayList<Index> indexArrayList) {
         ArrayList<Integer> output = new ArrayList<>();
         for (Index index : indexArrayList) {
             output.add(index.getZeroBased());
         }
         return output;
-    }
-
-    /**
-     * Executes a {@code SelectCommand} with the given {@code index}, and checks that a {@code CommandException}
-     * is thrown with the {@code expectedMessage}.
-     */
-    private void assertExecutionFailure(ArrayList<Index> indexArrayList, String expectedMessage) {
-        SelectCommand selectCommand = new SelectCommand(indexArrayList);
-        assertCommandFailure(selectCommand, model, commandHistory, expectedMessage);
-        assertTrue(eventsCollectorRule.eventsCollector.isEmpty());
     }
 }
