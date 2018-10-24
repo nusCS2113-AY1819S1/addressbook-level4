@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_DATE;
 
 import java.util.regex.Matcher;
@@ -37,7 +37,7 @@ public class NoteEditCommandParser implements Parser<NoteEditCommand> {
         final String optionalParams = matcher.group("optionalParams");
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(optionalParams, PREFIX_MODULECODE, PREFIX_NOTE_DATE);
+                ArgumentTokenizer.tokenize(optionalParams, PREFIX_MODULE_CODE, PREFIX_NOTE_DATE);
 
         if (!index.matches("\\d+") || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -46,8 +46,8 @@ public class NoteEditCommandParser implements Parser<NoteEditCommand> {
 
         String moduleCode = "";
         String date = "";
-        if (argMultimap.getValue(PREFIX_MODULECODE).isPresent()) {
-            moduleCode = argMultimap.getValue(PREFIX_MODULECODE).get();
+        if (argMultimap.getValue(PREFIX_MODULE_CODE).isPresent()) {
+            moduleCode = argMultimap.getValue(PREFIX_MODULE_CODE).get();
         }
 
         if (argMultimap.getValue(PREFIX_NOTE_DATE).isPresent()) {

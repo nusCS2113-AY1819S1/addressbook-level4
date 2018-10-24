@@ -92,16 +92,24 @@ public class NoteManager {
 
     public void setFilteredNotes(String moduleCode) {
         if (!moduleCode.trim().isEmpty()) {
-            currentFilter = moduleCode;
             filteredNotes = notes.stream()
                     .filter(p -> p.getModuleCode().equalsIgnoreCase(moduleCode)).collect(Collectors.toList());
+
+            if (filteredNotes.size() > 0) {
+                currentFilter = moduleCode;
+            }
         } else {
+            currentFilter = "";
             filteredNotes = notes;
         }
     }
 
     public List<Note> getFilteredNotes() {
         return filteredNotes;
+    }
+
+    public String getCurrentFilter() {
+        return this.currentFilter;
     }
 
     /**

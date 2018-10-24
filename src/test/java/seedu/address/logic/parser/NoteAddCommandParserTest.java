@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static org.junit.Assert.assertNotNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_DATE;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -37,13 +39,13 @@ public class NoteAddCommandParserTest {
     @Test
     public void parse_validArgs_success() throws ParseException {
         // valid arguments with optional arguments
-        String args = " m/CS2113 d/1/2/2020";
+        String args = " " + PREFIX_MODULE_CODE + "CS2113" + PREFIX_NOTE_DATE + "1/2/2020";
         NoteAddCommand noteAddCommand = parser.parse(args);
 
         assertNotNull(noteAddCommand);
 
         // valid arguments
-        args = " m/CS2040C";
+        args = " " + PREFIX_MODULE_CODE + "CS2040C";
         noteAddCommand = parser.parse(args);
 
         assertNotNull(noteAddCommand);
@@ -55,7 +57,7 @@ public class NoteAddCommandParserTest {
                 Messages.MESSAGE_INVALID_COMMAND_FORMAT, NoteAddCommand.MESSAGE_USAGE);
 
         // missing mandatory field argument
-        String args = " d/1/2/2020";
+        String args = " " + PREFIX_NOTE_DATE + "1/2/2020";
 
         thrown.expect(ParseException.class);
         thrown.expectMessage(expectedMessage);

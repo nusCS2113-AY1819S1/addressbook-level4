@@ -1,9 +1,6 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -20,9 +17,9 @@ public class NoteListCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists notes. "
             + "Parameters: "
-            + "[" + PREFIX_MODULECODE + "MODULE_CODE]\n"
+            + "[" + PREFIX_MODULE_CODE + "MODULE_CODE]\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_MODULECODE + "CS2113";
+            + PREFIX_MODULE_CODE + "CS2113";
 
     public static final String MESSAGE_SUCCESS = "Listed %1$s note(s).";
 
@@ -41,6 +38,11 @@ public class NoteListCommand extends Command {
 
         noteManager.setFilteredNotes(moduleCode);
 
+        if (noteManager.getFilteredNotes().size() == 0) {
+            noteManager.setFilteredNotes(noteManager.getCurrentFilter());
+            return new CommandResult(String.format(MESSAGE_NOT_FOUND));
+        }
+
         StringBuilder sb = new StringBuilder();
 
         int listId = 1;
@@ -57,12 +59,7 @@ public class NoteListCommand extends Command {
             listId++;
         }
 
-        if (sb.length() > 0) {
-            return new CommandResult(
-                    String.format(MESSAGE_SUCCESS, size)
-                            + "\n\n" + sb.toString());
-        } else {
-            return new CommandResult(String.format(MESSAGE_NOT_FOUND));
-        }
+        return new CommandResult(String.format(MESSAGE_SUCCESS, size)
+                        + "\n" + sb.toString());
     }
 }

@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_DATE;
 
 import seedu.address.logic.CommandHistory;
@@ -20,7 +20,7 @@ public class NoteEditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a note. "
             + "Parameters: "
             + "INDEX "
-            + "[" + PREFIX_MODULECODE
+            + "[" + PREFIX_MODULE_CODE
             + "NEW_MODULE_CODE] "
             + "[" + PREFIX_NOTE_DATE
             + "NEW_DATE]\n"

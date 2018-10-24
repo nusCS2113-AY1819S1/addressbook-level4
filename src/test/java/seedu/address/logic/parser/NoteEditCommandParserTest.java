@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.Assert.assertNotNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -53,7 +54,7 @@ public class NoteEditCommandParserTest {
 
         // valid args
         String args1 = " 1  ";
-        String args2 = "1 m/CS1010J";
+        String args2 = "1 " + PREFIX_MODULE_CODE + "CS1010J";
 
         NoteEditCommand noteEditCommand = parser.parse(args1);
         assertNotNull(noteEditCommand);
