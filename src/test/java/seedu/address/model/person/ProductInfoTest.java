@@ -1,7 +1,7 @@
 package seedu.address.model.product;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+//import static org.junit.Assert.assertFalse;
+//import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -19,6 +19,5 @@ public class ProductInfoTest {
         String invalidAddress = "";
         Assert.assertThrows(IllegalArgumentException.class, () -> new Address(invalidAddress));
     }
-
 
 }
