@@ -28,7 +28,6 @@ public class RegistrationWindow extends UiPart<Stage> {
     private TextField addressTextField;
     @FXML
     private Label label;
-    private Integer registerFlag;
 
     /**
      * Creates a new Registration Window.
@@ -104,12 +103,13 @@ public class RegistrationWindow extends UiPart<Stage> {
      * Runs whenever the register button is clicked
      */
     public void handleRegister() {
-        //TODO
-        registerFlag = user.register(usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(),
-             phoneTextField.getText(), addressTextField.getText());
-        System.out.println(registerFlag);
-        if (registerFlag == 1) {
+        switch(user.register(usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(),
+             phoneTextField.getText(), addressTextField.getText())) {
+        case SUCCESS:
             raise(new SuccessfulRegisterEvent());
+            break;
+        default:
+            break;
         }
     }
 

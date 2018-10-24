@@ -40,12 +40,15 @@ public class SecurityBox extends UiPart<Region> {
             security.login(command[1], command[2]);
         } else if (command[0].equals("register") && command.length == 6) {
             switch(security.register(command[1], command[2], command[3], command[4], command[5])) {
-            case 1:
+            case SUCCESS:
                 System.out.println("Success");
                 raise(new SuccessfulRegisterEvent());
                 break;
-            case 2:
+            case USER_ALREADY_EXISTS:
                 System.out.println("Failure: Username already used");
+                break;
+            case INCOMPLETE_FIELD:
+                System.out.println("Failure: Incomplete fields");
                 break;
             default:
                 break;

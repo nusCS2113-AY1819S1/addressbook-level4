@@ -57,16 +57,16 @@ public class SecurityManager extends ComponentManager implements Security {
     }
 
     @Override
-    public int register(String username, String password, String email, String phone, String address) {
+    public RegisterFlag register(String username, String password, String email, String phone, String address) {
         try {
             logic.execute("add n/" + username + " e/" + email + " p/" + phone + " a/" + address);
             this.isAuthenticated = true;
             model.matchUserToPerson(username);
-            return 1;
+            return RegisterFlag.SUCCESS;
         } catch (CommandException e) {
-            return 2;
+            return RegisterFlag.USER_ALREADY_EXISTS;
         } catch (ParseException e) {
-            return 3;
+            return RegisterFlag.INCOMPLETE_FIELD;
         }
         //TODO Use password to create a database tgt with username
     }
