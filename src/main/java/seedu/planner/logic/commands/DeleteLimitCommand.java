@@ -37,8 +37,8 @@ public class DeleteLimitCommand extends Command{
         if (!model.hasSameDateLimit(limit)) {
             throw new CommandException(MESSAGE_LIMITS_DO_NOT_EXIST);
         }
-       // model.deleteLimit(model.getSameDatesLimit(limit.getDateStart(), limit.getDateEnd()));
-        List<Limit> latestLimitList = model.getLimitList();
+        model.deleteLimit(model.getSameDatesLimit(limit.getDateStart(), limit.getDateEnd()));
+      /*  List<Limit> latestLimitList = model.getLimitList();
         for (Limit targetLimit : latestLimitList) {
 
             if (targetLimit.isSameLimitDates(limit)) {
@@ -46,7 +46,7 @@ public class DeleteLimitCommand extends Command{
                 model.commitFinancialPlanner();
 
             }
-        }
+        }*/
         return new CommandResult(MESSAGE_SUCCESS + model.autoLimitCheck());
     }
 
