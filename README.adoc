@@ -33,9 +33,8 @@ endif::[]
 * Send Email to Groups or Multiple Students
 * Add/Delete Tags to Students Name
 * Show a summary of Examination Scores of all Students in a particular module.
-* Calendar
-** Add/Remove Events
 * Student Attendance List Creation
+* A script that run multiple commands to read inputs from a file
 
 == Site Map
 

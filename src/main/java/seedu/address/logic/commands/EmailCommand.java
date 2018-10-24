@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MESSAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.address.model.email.Message.MESSAGE_MESSAGE_CONSTRAINTS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,10 +43,10 @@ public class EmailCommand extends Command {
             + PREFIX_MESSAGE + "Dear students, tutorial location has been changed to E01-04";
 
     public static final String MESSAGE_SUCCESS = "Email sent";
-    public static final String MESSAGE_FAIL = "Unable to send email due to unforeseen error.";
-    public static final String MESSAGE_FAIL_DUE_TO_SPAM = "Unable to use this account to send more emails due to spam.";
+    public static final String MESSAGE_FAIL = "Send failed";
     public static final String MESSAGE_NO_LOGIN = "No login credentials found. Please login using 'login' command";
     public static final String MESSAGE_AUTHENTICATION_FAIL = "Invalid login credentials entered";
+    public static final String SMTP_FAIL_EXCEPTION_MESSAGE = "Unable to send any more emails due to spam";
 
     private boolean isSingleTarget;
     private Index targetIndex;
@@ -105,11 +106,21 @@ public class EmailCommand extends Command {
         } catch (AuthenticationFailedException afe) {
             throw new CommandException(MESSAGE_AUTHENTICATION_FAIL);
         } catch (SMTPSendFailedException sfe) {
-            throw new CommandException(MESSAGE_FAIL_DUE_TO_SPAM);
+            throw new CommandException(setErrorMessageForSendFailedException(sfe.getMessage()));
         } catch (MessagingException e) {
             throw new CommandException(MESSAGE_FAIL);
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toSend));
+    }
+
+    private static String setErrorMessageForSendFailedException(String e) {
+        if (e.contains("MessageSubmissionExceededException")) {
+            return MESSAGE_FAIL + ", " + MESSAGE_MESSAGE_CONSTRAINTS;
+        } else if (e.contains("OutboundSpamException")) {
+            return MESSAGE_FAIL + ", " + SMTP_FAIL_EXCEPTION_MESSAGE;
+        } else {
+            return MESSAGE_FAIL;
+        }
     }
 }

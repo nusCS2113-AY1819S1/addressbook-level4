@@ -123,7 +123,7 @@ public class XmlAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName()));
         }
         if (!Gender.isInputAccepted(gender)) {
-            throw new IllegalValueException(Gender.MESSAGE_NAME_CONSTRAINTS);
+            throw new IllegalValueException(Gender.MESSAGE_GENDER_CONSTRAINTS);
         }
         final Gender modelGender = new Gender(gender);
 
@@ -132,7 +132,7 @@ public class XmlAdaptedPerson {
                     Nationality.class.getSimpleName()));
         }
         if (!Nationality.isValidCountryCode(nationality)) {
-            throw new IllegalValueException(Nationality.MESSAGE_NAME_CONSTRAINTS);
+            throw new IllegalValueException(Nationality.MESSAGE_NATIONALITY_CONSTRAINT);
         }
         final Nationality modelNationality = new Nationality(nationality);
 

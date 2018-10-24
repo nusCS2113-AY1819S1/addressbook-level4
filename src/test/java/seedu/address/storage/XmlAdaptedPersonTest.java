@@ -13,14 +13,16 @@ import org.junit.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Phone;
 import seedu.address.testutil.Assert;
 
 public class XmlAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_GENDER = "Shemale";
-    private static final String INVALID_NATIONALITY = "SK";
+    private static final String INVALID_NATIONALITY = "SF";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
@@ -78,11 +80,42 @@ public class XmlAdaptedPersonTest {
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
-    //TODO
     //TEST FOR INVALID GENDER
+    @Test
+    public void toModelType_invalidGender_throwsIllegalValueException() {
+        XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NAME, INVALID_GENDER, VALID_NATIONALITY, VALID_PHONE,
+                VALID_EMAIL, VALID_ADDRESS, VALID_GRADE, VALID_TAGS, VALID_TESTS);
+        String expectedMessage = Gender.MESSAGE_GENDER_CONSTRAINTS;
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
     //TEST FOR NULL GENDER
+    @Test
+    public void toModelType_nullGender_throwsIllegalValueException() {
+        XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NAME, null, VALID_NATIONALITY, VALID_PHONE,
+                VALID_EMAIL, VALID_ADDRESS, VALID_GRADE, VALID_TAGS, VALID_TESTS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName());
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
     //TEST FOR INVALID NATIONALITY
+
+    @Test
+    public void toModelType_invalidNationality_throwsIllegalValueException() {
+        XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NAME, VALID_GENDER, INVALID_NATIONALITY, VALID_PHONE,
+                VALID_EMAIL, VALID_ADDRESS, VALID_GRADE, VALID_TAGS, VALID_TESTS);
+        String expectedMessage = Nationality.MESSAGE_NATIONALITY_CONSTRAINT;
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
     //TEST FOR NULL NATIONALITY
+    @Test
+    public void toModelType_nullNationality_throwsIllegalValueException() {
+        XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NAME, VALID_GENDER, null, VALID_PHONE,
+                VALID_EMAIL, VALID_ADDRESS, VALID_GRADE, VALID_TAGS, VALID_TESTS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Nationality.class.getSimpleName());
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
 
     @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {

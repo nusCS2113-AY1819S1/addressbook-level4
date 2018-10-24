@@ -99,33 +99,44 @@ Example: scorefilter a/66
 This will list all the students who score above 56 in a new grade list
 
 
-=== Create N number of group, distributed equally based on nationality or gender or both: `distinto`
-Creates _n_ number of groups determined by the user, with a group name and user is able to select the condition to distribute equally via Gender & Nationally +
+=== Create N number of group, distributed equally based on nationality or gender or both: `distinto` `di`
+Creates _n_ number of groups determined by the user, with a group name and user is able to select the condition to distribute equally via Gender or Nationally +
 Format: `distinto NUM_OF_GROUPS n/GROUP_NAME g/true nat/true` +
 ****
 * NUM_OF_GROUPS is an positive integer value and must not be 0.
-* GROUP_NAME is specified in String format.
-* GROUP_NAME will include the NUM_OF_GROUP index where it will be concatenate behind the GROUP_NAME.
+** NUM_OF_GROUPS must not be more than the total number of persons in the address book.
+* Groups will be created with the GROUP_NAME + an index value starting from 1.
+** Eg: Group name Input: CS2113-T13-
+** Output: CS2113-T13-1
 * `g/` is the Gender Prefix which only takes in '1' or '0' or "true" or "false". It is a boolean type.
 ** '1' or "true" will trigger the software to distribute into group with balanced genders
-** '0' or "false" will ignore gender field and distribute
+** '0' or "false" will ignore gender field and distribute randomly
 * `nat/` is the nationality Prefix which only takes in '1' or '0'. It is a boolean type.
 ** '1' or "true" will trigger the software to distribute into group with balanced nationality.
-** '0' or "false" will ignore nationality field and distribute
+** '0' or "false" will ignore nationality field and distribute randomly
+* When both flags are "false" or '0', the distinto command will distribute all person randomly into _n_ number of groups.
 ****
 
 Examples:
 
-* distinto 5 n/T13- g/true nat/true
-* di 3 n/T11- g/1 nat/1
+* distinto 5 n/T13- g/true nat/false
+* di 3 n/T11- g/1 nat/0
+* di 2 n/T11- g/true nat/0
 
-=== Sending Email to Group of Persons: `sendmail`
+=== Sending Email to Single, Multiple or Group of Person(s): `sendmail`
+Sends an email to a single person in list+
+Format: `sendmail [Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
+
+Sends an email to multiple persons in list+
+Format: `sendmail [Index],..,[Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
+
 Sends an email to all persons belonging to a group +
-Format: `sendmail gn/GROUP_NAME t/EMAIL_TITLE [b/EMAIL_BODY]` +
+Format: `sendmail gn/GROUP_NAME s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
 
-Examples:
-
-* sendmail CS2113T Please be reminded to bring your calculator tomorrow.
+Examples: +
+* sendmail 1 s/Solution for Assignment m/Hi Bob, solution has been attached. +
+* sendmail 1,4,6 s/Tutorial Cancelled m/Tutorial class for Friday has been cancelled. +
+* sendmail gn/CS2113T s/Announcement m/Please bring your calculator tomorrow.
 
 === List a group of students: `scorefilter`
 List out the standard deviation of the score data set from all students +
@@ -389,6 +400,12 @@ e.g. `deletegroup 1`
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
+* *Send Email (Person)*: `sendmail [Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
+e.g. `sendmail 1 s/Solution for Assignment m/Hi Bob, solution has been attached.`
+* *Send Email (Persons)*: `sendmail [Index],..,[Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
+e.g. `sendmail 1,4,6 s/Tutorial Cancelled m/Tutorial class for Friday has been cancelled.`
+* *Send Email (Group)*: `sendmail gn/GROUP_NAME s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
+e.g. `sendmail gn/CS2113T s/Announcement m/Please bring your calculator tomorrow.`
 * *List* : `list`
 * *Help* : `help`
 * *Select* : `select INDEX` +

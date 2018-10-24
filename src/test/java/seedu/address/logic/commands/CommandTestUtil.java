@@ -56,8 +56,8 @@ public class CommandTestUtil {
 
     public static final String VALID_GENDER_MALE = "MALE";
     public static final String VALID_GENDER_FEMALE = "FEMALE";
-    public static final String VALID_GENDER_ABBREVATION_MALE = "M";
-    public static final String VALID_GENDER_ABBREVATION_FEMALE = "F";
+    public static final String VALID_GENDER_ABBREVIATION_MALE = "M";
+    public static final String VALID_GENDER_ABBREVIATION_FEMALE = "F";
 
     public static final String VALID_NATIONALITY_SG = "SG";
     public static final String VALID_NATIONALITY_CN = "CN";
@@ -70,6 +70,8 @@ public class CommandTestUtil {
     public static final String VALID_GENDER_FLAG_FALSE = "false";
     public static final String VALID_NATIONALITY_FLAG_TRUE = "true";
     public static final String VALID_NATIONALITY_FLAG_FALSE = "false";
+    public static final String VALID_FLAG_0 = "0";
+    public static final String VALID_FLAG_1 = "1";
     public static final String INVALID_GENDER_FLAG_NUMBER = "4";
     public static final String INVALID_GENDER_FLAG_WORD = "alsfe";
     public static final String INVALID_NATIONALITY_FLAG_NUMBER = "6";
@@ -82,6 +84,8 @@ public class CommandTestUtil {
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String GENDER_DESC_AMY = " " + PREFIX_GENDER + VALID_GENDER_FEMALE;
     public static final String GENDER_DESC_BOB = " " + PREFIX_GENDER + VALID_GENDER_MALE;
+    public static final String GENDER_ABBREVIATION_DESC_AMY = " " + PREFIX_GENDER + VALID_GENDER_ABBREVIATION_FEMALE;
+    public static final String GENDER_ABBREVIATION_DESC_BOB = " " + PREFIX_GENDER + VALID_GENDER_ABBREVIATION_MALE;
     public static final String NATIONALITY_DESC_AMY = " " + PREFIX_NATIONALITY + VALID_NATIONALITY_SG;
     public static final String NATIONALITY_DESC_BOB = " " + PREFIX_NATIONALITY + VALID_NATIONALITY_CN;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -112,6 +116,10 @@ public class CommandTestUtil {
     public static final String GENDER_FLAG_TRUE = " " + PREFIX_GENDER + VALID_GENDER_FLAG_TRUE;
     public static final String NATIONALITY_FLAG_FALSE = " " + PREFIX_NATIONALITY + VALID_NATIONALITY_FLAG_FALSE;
     public static final String NATIONALITY_FLAG_TRUE = " " + PREFIX_NATIONALITY + VALID_NATIONALITY_FLAG_TRUE;
+    public static final String GENDER_FLAG_BOOLEAN_FALSE = " " + PREFIX_GENDER + VALID_FLAG_0;
+    public static final String GENDER_FLAG_BOOLEAN_TRUE = " " + PREFIX_GENDER + VALID_FLAG_1;
+    public static final String NATIONALITY_FLAG_BOOLEAN_FALSE = " " + PREFIX_NATIONALITY + VALID_FLAG_0;
+    public static final String NATIONALITY_FLAG_BOOLEAN_TRUE = " " + PREFIX_NATIONALITY + VALID_FLAG_1;
 
     public static final String GENDER_FLAG_INVALID_NUMBER = " " + PREFIX_GENDER + INVALID_GENDER_FLAG_NUMBER;
     public static final String GENDER_FLAG_INVALID_WORD = " " + PREFIX_GENDER + INVALID_GENDER_FLAG_WORD;
@@ -121,7 +129,9 @@ public class CommandTestUtil {
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "Male1"; // '1' not allowed in Gender
-    public static final String INVALID_NATIONALITY_DESC = " " + PREFIX_GENDER + "SG1"; // '1' not allowed in Nationality
+    public static final String INVALID_GENDER_ABBREVIATED_DESC = " " + PREFIX_GENDER + "A"; // '1' not allowed in Gender
+    public static final String INVALID_NATIONALITY_DESC = " "
+            + PREFIX_NATIONALITY + "SG1"; // '1' not allowed in Nationality
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
