@@ -12,8 +12,7 @@ import seedu.address.model.login.Username;
  * Contains utility methods for populating {@code User Database} with sample data.
  */
 public class SampleUsersUtil {
-
-<<<<<<< HEAD
+    
     public static final String ALEX_AB_PATH = "data/addressbook-alex.xml";
     public static final String BERNICE_AB_PATH = "data/addressbook-bernice.xml";
     public static final String ALEX_DB_PATH = "data/distributorbook-alex.xml";
