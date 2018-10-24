@@ -37,7 +37,7 @@ public class ModuleAddCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         try {
-            ModuleManager moduleManager = new ModuleManager();
+            ModuleManager moduleManager = ModuleManager.getInstance();
             moduleManager.addModule(moduleToAdd);
             moduleManager.saveModuleList();
         } catch (DuplicateModuleException dme) {

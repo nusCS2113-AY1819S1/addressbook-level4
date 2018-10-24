@@ -51,7 +51,7 @@ public class ModuleEditCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        ModuleManager moduleManager = new ModuleManager();
+        ModuleManager moduleManager = ModuleManager.getInstance();
         Module moduleToEdit = moduleManager.getModuleByModuleCode(moduleCode);
         if (moduleToEdit == null) {
             throw new CommandException(String.format(MESSAGE_MODULE_NOT_FOUND, moduleCode));

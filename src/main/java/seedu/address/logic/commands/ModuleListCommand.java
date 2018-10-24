@@ -19,11 +19,9 @@ public class ModuleListCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
-        ModuleManager moduleManager = new ModuleManager();
-
         StringBuilder sb = new StringBuilder();
 
-        for (Iterator<Module> iter = moduleManager.getModules().iterator(); iter.hasNext();) {
+        for (Iterator<Module> iter = ModuleManager.getInstance().getModules().iterator(); iter.hasNext();) {
             Module m = iter.next();
             sb.append("Module Code: ");
             sb.append(m.getModuleCode()).append("\n");

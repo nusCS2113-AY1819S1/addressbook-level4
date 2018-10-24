@@ -19,10 +19,20 @@ public class ModuleManager {
 
     private static final Logger logger = LogsCenter.getLogger(ModuleManager.class);
 
-    private ArrayList<Module> modules = new ArrayList<>();
+    private static ModuleManager instance;
 
-    public ModuleManager() {
+    private ArrayList<Module> modules;
+
+    private ModuleManager() {
+        modules = new ArrayList<>();
         readModuleList();
+    }
+
+    public static ModuleManager getInstance() {
+        if (instance == null) {
+            instance = new ModuleManager();
+        }
+        return instance;
     }
 
     /**
