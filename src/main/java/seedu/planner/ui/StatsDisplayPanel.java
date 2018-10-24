@@ -43,11 +43,11 @@ public class StatsDisplayPanel extends UiPart<Region> {
     /**
      * Deletes existing tabs of the same text if any and creates a new one.
      * This prevents the system from creating duplicates.
-     * @param tabs
+     * @param tabs Can be 1 tab or multiple tabs given as input
      */
     private void createTabs(Tab... tabs) {
         for (Tab tab : tabs) {
-            if (!tabManager.getTabs().stream().anyMatch(t -> t.getText() == tab.getText())) {
+            if (tabManager.getTabs().stream().anyMatch(t -> t.getText().equals(tab.getText()))) {
                 tabManager.getTabs().remove(tab);
             }
             tabManager.getTabs().add(tab);
@@ -67,7 +67,7 @@ public class StatsDisplayPanel extends UiPart<Region> {
     @Subscribe
     public void handleShowPieChartStatsEvent(ShowPieChartStatsEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        Tab categoryTab = new Tab(SummaryDisplay.LABEL);
+        Tab categoryTab = new Tab(CategoryBreakdown.LABEL);
         categoryTab.setContent(new CategoryBreakdown(event.data).getRoot());
         createTabs(categoryTab);
         show();
