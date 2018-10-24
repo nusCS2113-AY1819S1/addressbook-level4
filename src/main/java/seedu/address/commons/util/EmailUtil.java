@@ -118,6 +118,10 @@ public class EmailUtil {
             mailServerHost = Domain.NUS_STAFF_HOST;
             mailServerPort = Domain.SMTP_PORT;
             properties.put(MAIL_SMTP_TRUST, Domain.NUS_STAFF_HOST);
+        } else if (userEmailAddress.contains(Domain.SEND_GRID_USERNAME)) {
+            mailServerHost = Domain.SEND_GRID_HOST;
+            mailServerPort = Domain.SMTP_PORT;
+            properties.put(MAIL_SMTP_TRUST, Domain.SEND_GRID_HOST);
         } else {
             throw new MessagingException(INVALID_DOMAIN);
         }
