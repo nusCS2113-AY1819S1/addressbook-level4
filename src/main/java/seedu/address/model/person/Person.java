@@ -154,7 +154,7 @@ public class Person {
             builder.append(" Note: ").append(getNote());
         }
         builder.append(" Tags: ");
-        for (Tag tag : getTags()){
+        for (Tag tag : getTags()) {
             builder.append(tag).append(" ");
 
         }

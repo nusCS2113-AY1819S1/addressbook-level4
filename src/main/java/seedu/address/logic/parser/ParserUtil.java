@@ -121,7 +121,7 @@ public class ParserUtil {
         StringTokenizer st = new StringTokenizer(trimmedTag);
         String tagName = st.nextToken();
         Index priority;
-        if (st.hasMoreTokens()){
+        if (st.hasMoreTokens()) {
             priority = Index.fromZeroBased(Integer.parseInt(st.nextToken()));
         } else {
             priority = Index.fromZeroBased(Tag.PRIORITY_LOW);

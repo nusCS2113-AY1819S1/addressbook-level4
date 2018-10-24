@@ -1,12 +1,11 @@
 package seedu.address.storage;
 
+import java.util.StringTokenizer;
 import javax.xml.bind.annotation.XmlValue;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
-
-import java.util.StringTokenizer;
 
 /**
  * JAXB-friendly adapted version of the Tag.

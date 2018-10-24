@@ -1,12 +1,10 @@
 //@@author LowGinWee
 package seedu.address.model.tag;
 
-import seedu.address.commons.core.index.Index;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.StringTokenizer;
+import seedu.address.commons.core.index.Index;
 
 /**
  * Represents a Tag in the address book.
