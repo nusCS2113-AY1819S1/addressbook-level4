@@ -16,7 +16,7 @@ public interface DistributorBookStorage {
     /**
      * Returns the file path of the data file.
      */
-    Path getDistributorInfoFilePath();
+    Path getDistributorBookFilePath();
 
     /**
      * Returns DistributorBook data as a {@link ReadOnlyDistributorBook}.
@@ -27,7 +27,7 @@ public interface DistributorBookStorage {
     Optional<ReadOnlyDistributorBook> readDistributorBook() throws DataConversionException, IOException;
 
     /**
-     * @see #getDistributorInfoFilePath()
+     * @see #getDistributorBookFilePath()
      */
     Optional<ReadOnlyDistributorBook> readDistributorBook(Path filePath) throws DataConversionException, IOException;
 

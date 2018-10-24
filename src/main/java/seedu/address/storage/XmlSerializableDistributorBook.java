@@ -12,12 +12,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * An Immutable DistributorBook that is serializable to XML format
+ * An Immutable DistributorBook
+ * that is serializable to XML format
  */
 @XmlRootElement(name = "distributorbook")
 public class XmlSerializableDistributorBook {
 
-    public static final String MESSAGE_DUPLICATE_DISTRIBUTOR = "Product list contains duplicate distributor(s).";
+    public static final String MESSAGE_DUPLICATE_DISTRIBUTOR = "Distributor list contains duplicate distributors(s).";
 
     @XmlElement
     private List<XmlAdaptedDistributor> distributors;
@@ -35,21 +36,20 @@ public class XmlSerializableDistributorBook {
      */
     public XmlSerializableDistributorBook(ReadOnlyDistributorBook src) {
         this();
-        distributors
-                .addAll(src.getDistributorList().stream().map(XmlAdaptedDistributor::new).collect(Collectors.toList()));
+        distributors.addAll(src.getDistributorList().stream().map(XmlAdaptedDistributor::new).collect(Collectors.toList()));
     }
 
     /**
      * Converts this distributorbook into the model's {@code DistributorBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
-     * {@code XmlAdaptedProduct}.
+     * {@code XmlAdaptedDistributor}.
      */
     public DistributorBook toModelType() throws IllegalValueException {
         DistributorBook distributorBook = new DistributorBook();
 
-        for (XmlAdaptedDistributor d : distributors) {
-            Distributor distributor = d.toModelType();
+        for (XmlAdaptedDistributor p : distributors) {
+            Distributor distributor = p.toModelType();
             if (distributorBook.hasDistributor(distributor)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_DISTRIBUTOR);
             }
@@ -67,6 +67,7 @@ public class XmlSerializableDistributorBook {
         if (!(other instanceof XmlSerializableDistributorBook)) {
             return false;
         }
+
         return distributors.equals(((XmlSerializableDistributorBook) other).distributors);
     }
 }

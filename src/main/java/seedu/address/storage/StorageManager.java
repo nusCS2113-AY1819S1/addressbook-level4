@@ -105,13 +105,13 @@ public class StorageManager extends ComponentManager implements Storage {
     // ================ DistributorBook methods ==============================
 
     @Override
-    public Path getDistributorInfoFilePath() {
-        return distributorBookStorage.getDistributorInfoFilePath();
+    public Path getDistributorBookFilePath() {
+        return distributorBookStorage.getDistributorBookFilePath();
     }
 
     @Override
     public Optional<ReadOnlyDistributorBook> readDistributorBook() throws DataConversionException, IOException {
-        return readDistributorBook(distributorBookStorage.getDistributorInfoFilePath());
+        return readDistributorBook(distributorBookStorage.getDistributorBookFilePath());
     }
 
     @Override
@@ -123,7 +123,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public void saveDistributorBook(ReadOnlyDistributorBook distributorBook) throws IOException {
-        saveDistributorBook(distributorBook, distributorBookStorage.getDistributorInfoFilePath());
+        saveDistributorBook(distributorBook, distributorBookStorage.getDistributorBookFilePath());
     }
 
     @Override

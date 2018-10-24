@@ -30,7 +30,7 @@ public class XmlDistributorBookStorage implements DistributorBookStorage {
     }
 
 
-    public Path getDistributorInfoFilePath() {
+    public Path getDistributorBookFilePath() {
         return filePath;
     }
 

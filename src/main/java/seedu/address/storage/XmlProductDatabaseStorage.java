@@ -33,10 +33,6 @@ public class XmlProductDatabaseStorage implements ProductDatabaseStorage {
         return filePath;
     }
 
-    public Path getDistributorInfoFilePath() {
-        return filePath;
-    }
-
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
         return readAddressBook(filePath);
