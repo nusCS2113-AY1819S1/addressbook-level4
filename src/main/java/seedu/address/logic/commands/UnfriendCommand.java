@@ -43,8 +43,8 @@ public class UnfriendCommand extends Command {
         Person personToEdit = friendList.get(targetIndex.getZeroBased());
         Person editedPerson = personToEdit;
         Person editedUser = model.getUser();
-        editedPerson.getFriends().remove(new Friend(personToEdit.getName()));
-        editedUser.getFriends().remove(new Friend(model.getUser().getName()));
+        editedPerson.getFriends().removeIf(p -> p.friendName.equals(model.getUser().getName()));
+        editedUser.getFriends().removeIf(p -> p.friendName.equals(editedPerson.getName()));
 
         model.updatePerson(personToEdit, editedPerson);
         model.updatePerson(model.getUser(), editedUser);
