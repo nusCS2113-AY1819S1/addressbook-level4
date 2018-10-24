@@ -221,6 +221,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void clearUser() {
+        this.user = null;
+    }
+
+    @Override
     public User getUser() {
         //TODO Can you do this? Must you create a new object to be returned instead?
         return this.user;

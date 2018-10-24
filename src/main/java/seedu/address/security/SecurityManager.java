@@ -53,7 +53,8 @@ public class SecurityManager extends ComponentManager implements Security {
     @Override
     public void logout() {
         this.isAuthenticated = false;
-        //TODO Do I clear the User since its logged out? I can just leave it there to be overwritten
+        //TODO Check below
+        model.clearUser();
         raise(new LogoutEvent());
     }
 
