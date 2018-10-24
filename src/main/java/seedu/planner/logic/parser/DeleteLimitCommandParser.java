@@ -36,7 +36,7 @@ public class DeleteLimitCommandParser implements Parser<DeleteLimitCommand>{
 
         Date dateStart = ParserUtil.parseDate(datesIn[0]);
         Date dateEnd = ParserUtil.parseDate(datesIn[1]);
-        Limit limit = new Limit(dateStart, dateEnd, null);
+        Limit limit = new Limit(dateStart, dateEnd, ParserUtil.parseMoneyFlow("-1"));
 
 
         return new DeleteLimitCommand(limit);
