@@ -92,10 +92,11 @@ public class SummaryDisplay extends UiPart<Region> {
     @Subscribe
     //TODO: Refactor this to not hardcode, add exception throwing
     public void handleShowPieChartStatsEvent(ShowPieChartStatsEvent event) {
-        CustomTab tab = new CustomTab();
+        CustomTab tab = new CustomTab(event.data);
         if (!tabManager.getTabs().stream().anyMatch(t -> t.getText() == "Category Breakdown for financial activity")) {
             tabManager.getTabs().add(tab);
             tabManager.getSelectionModel().select(tab);
         }
+        show();
     }
 }

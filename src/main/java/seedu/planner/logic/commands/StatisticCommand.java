@@ -12,7 +12,6 @@ import seedu.planner.model.Model;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
-import seedu.planner.model.summary.CategoryStatistic;
 import seedu.planner.model.summary.CategoryStatisticsList;
 
 /**
@@ -37,8 +36,7 @@ public class StatisticCommand extends Command {
         ObservableList<Record> recordList = model.getFinancialPlanner().getRecordList();
         List<Record> filteredList = filterRecordListByPredicate(recordList, predicate);
         CategoryStatisticsList categoryStats = new CategoryStatisticsList(filteredList);
-        ObservableList<CategoryStatistic> list = categoryStats.getReadOnlyStatsList();
-        EventsCenter.getInstance().post(new ShowPieChartStatsEvent());
+        EventsCenter.getInstance().post(new ShowPieChartStatsEvent(categoryStats.getReadOnlyStatsList()));
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

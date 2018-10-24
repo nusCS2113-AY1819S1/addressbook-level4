@@ -13,6 +13,7 @@ public class CategoryStatistic {
 
     private Set<Tag> tags;
     private double totalIncome = 0;
+
     private double totalExpense = 0;
 
     public CategoryStatistic(Record record) {
@@ -25,6 +26,18 @@ public class CategoryStatistic {
         } else {
             totalIncome = Math.abs(record.getMoneyFlow().toDouble());
         }
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public double getTotalIncome() {
+        return totalIncome;
+    }
+
+    public double getTotalExpense() {
+        return totalExpense;
     }
 
     /** Adds {@code MoneyFlow} of record to {@code CategoryStatistic} */
