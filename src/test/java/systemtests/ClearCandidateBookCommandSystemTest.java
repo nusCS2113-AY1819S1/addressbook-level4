@@ -8,8 +8,8 @@ import org.junit.Test;
 
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.logic.commands.ClearCandidateBookCommand;
-import seedu.recruit.logic.commands.RedoCommand;
-import seedu.recruit.logic.commands.UndoCommand;
+import seedu.recruit.logic.commands.RedoCandidateBookCommand;
+import seedu.recruit.logic.commands.UndoCandidateBookCommand;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.ModelManager;
 
@@ -27,25 +27,25 @@ public class ClearCandidateBookCommandSystemTest extends CandidateBookSystemTest
         assertSelectedCardUnchanged();
 
         /* Case: undo clearing recruit book -> original recruit book restored */
-        String command = UndoCommand.COMMAND_WORD;
-        String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
+        String command = UndoCandidateBookCommand.COMMAND_WORD;
+        String expectedResultMessage = UndoCandidateBookCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command,  expectedResultMessage, defaultModel);
         assertSelectedCardUnchanged();
 
         /* Case: redo clearing recruit book -> cleared */
-        command = RedoCommand.COMMAND_WORD;
-        expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
+        command = RedoCandidateBookCommand.COMMAND_WORD;
+        expectedResultMessage = RedoCandidateBookCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, expectedResultMessage, new ModelManager());
         assertSelectedCardUnchanged();
 
         /* Case: selects first card in candidate list and clears recruit book -> cleared and no card selected */
-        executeCommand(UndoCommand.COMMAND_WORD); // restores the original recruit book
+        executeCommand(UndoCandidateBookCommand.COMMAND_WORD); // restores the original recruit book
         selectPerson(Index.fromOneBased(1));
         assertCommandSuccess(ClearCandidateBookCommand.COMMAND_WORD);
         assertSelectedCardDeselected();
 
         /* Case: filters the candidate list before clearing -> entire recruit book cleared */
-        executeCommand(UndoCommand.COMMAND_WORD); // restores the original recruit book
+        executeCommand(UndoCandidateBookCommand.COMMAND_WORD); // restores the original recruit book
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         assertCommandSuccess(ClearCandidateBookCommand.COMMAND_WORD);
         assertSelectedCardUnchanged();

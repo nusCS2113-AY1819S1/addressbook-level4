@@ -32,7 +32,7 @@ import seedu.recruit.testutil.EditPersonDescriptorBuilder;
 import seedu.recruit.testutil.PersonBuilder;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand)
+ * Contains integration tests (interaction with the Model, UndoCandidateBookCommand and RedoCandidateBookCommand)
  * and unit tests for EditCandidateCommand.
  */
 @Ignore
@@ -181,11 +181,13 @@ public class EditCandidateCommandTest {
 
         // undo -> reverts Candidatebook back to previous state and filtered candidate list to show all persons
         expectedModel.undoCandidateBook();
-        assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new UndoCandidateBookCommand(), model, commandHistory,
+                UndoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first candidate edited again
         expectedModel.redoCandidateBook();
-        assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new RedoCandidateBookCommand(), model, commandHistory,
+                RedoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
@@ -199,8 +201,10 @@ public class EditCandidateCommandTest {
                 Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         // single recruit book state in model -> undoCommand and redoCommand fail
-        assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
-        assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new UndoCandidateBookCommand(), model, commandHistory,
+                UndoCandidateBookCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new RedoCandidateBookCommand(), model, commandHistory,
+                RedoCandidateBookCommand.MESSAGE_FAILURE);
     }
 
     /**
@@ -208,7 +212,8 @@ public class EditCandidateCommandTest {
      * 2. Undo the edit.
      * 3. The unfiltered list should be shown now. Verify that the index of the previously edited candidate in the
      * unfiltered list is different from the index at the filtered list.
-     * 4. Redo the edit. This ensures {@code RedoCommand} edits the candidate object regardless of indexing.
+     * 4. Redo the edit. This ensures {@code RedoCandidateBookCommand} edits the candidate object regardless of
+     * indexing.
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_samePersonEdited() throws Exception {
@@ -228,12 +233,14 @@ public class EditCandidateCommandTest {
 
         // undo -> reverts candidatebook back to previous state and filtered candidate list to show all persons
         expectedModel.undoCandidateBook();
-        assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new UndoCandidateBookCommand(), model, commandHistory,
+                UndoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
 
         assertNotEquals(model.getFilteredCandidateList().get(INDEX_FIRST.getZeroBased()), candidateToEdit);
         // redo -> edits same second candidate in unfiltered candidate list
         expectedModel.redoCandidateBook();
-        assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new RedoCandidateBookCommand(), model, commandHistory,
+                RedoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
