@@ -37,22 +37,16 @@ public class NoteListCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
 
-        NoteManager noteManager = new NoteManager();
-        List<Note> filteredNotes;
+        NoteManager noteManager = NoteManager.getInstance();
 
-        if (moduleCode.trim().length() > 0) {
-            filteredNotes = noteManager.getNotes().stream()
-                    .filter(p -> p.getModuleCode().equalsIgnoreCase(moduleCode)).collect(Collectors.toList());
-        } else {
-            filteredNotes = noteManager.getNotes();
-        }
+        noteManager.setFilteredNotes(moduleCode);
 
         StringBuilder sb = new StringBuilder();
 
         int listId = 1;
-        int size = filteredNotes.size();
+        int size = noteManager.getFilteredNotes().size();
 
-        for (Note n: filteredNotes) {
+        for (Note n: noteManager.getFilteredNotes()) {
             sb.append(listId + ":\n");
             sb.append("Module Code: ");
             sb.append(n.getModuleCode() + "\n");
@@ -65,7 +59,7 @@ public class NoteListCommand extends Command {
 
         if (sb.length() > 0) {
             return new CommandResult(
-                    String.format(MESSAGE_SUCCESS, filteredNotes.size())
+                    String.format(MESSAGE_SUCCESS, size)
                             + "\n\n" + sb.toString());
         } else {
             return new CommandResult(String.format(MESSAGE_NOT_FOUND));

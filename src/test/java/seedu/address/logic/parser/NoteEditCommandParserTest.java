@@ -19,7 +19,7 @@ import seedu.address.testutil.NoteBuilder;
  */
 public class NoteEditCommandParserTest {
 
-    private static NoteManager noteManager = new NoteManager();
+    private static NoteManager noteManager = NoteManager.getInstance();
 
     private NoteEditCommandParser parser = new NoteEditCommandParser();
 

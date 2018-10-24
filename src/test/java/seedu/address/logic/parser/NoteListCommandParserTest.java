@@ -23,7 +23,7 @@ import seedu.address.testutil.NoteBuilder;
  */
 public class NoteListCommandParserTest {
 
-    private static NoteManager noteManager = new NoteManager();
+    private static NoteManager noteManager = NoteManager.getInstance();
 
     private NoteListCommandParser parser = new NoteListCommandParser();
 

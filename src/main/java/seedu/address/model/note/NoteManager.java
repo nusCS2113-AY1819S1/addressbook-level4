@@ -1,8 +1,7 @@
 package seedu.address.model.note;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import seedu.address.model.StorageController;
@@ -13,10 +12,23 @@ import seedu.address.storage.adapter.XmlAdaptedNote;
  */
 public class NoteManager {
 
-    private ArrayList<Note> notes = new ArrayList<>();
+    private static NoteManager noteManager = null;
 
-    public NoteManager() {
+    private ArrayList<Note> notes = new ArrayList<>();
+    private List<Note> filteredNotes;
+
+    private String currentFilter = "";
+
+    private NoteManager() {
         readNoteList();
+        filteredNotes = notes;
+    }
+
+    public static NoteManager getInstance() {
+        if (noteManager == null) {
+            noteManager = new NoteManager();
+        }
+        return noteManager;
     }
 
     /**
@@ -24,40 +36,29 @@ public class NoteManager {
      */
     public void addNote(Note note) {
         notes.add(note);
+        setFilteredNotes(currentFilter);
     }
 
     /**
      * Deletes the specified note from the in-memory ArrayList.
+     * It also updates the filteredNotes list.
      */
     public void deleteNote(int index) {
-        if (index < notes.size()) {
-            notes.remove(index);
-        }
-    }
-
-    /**
-     * Replaces the note at the specified {@code index} with
-     * the {@code newNote}.
-     *
-     * @param index
-     * @param newNote
-     */
-    public void editNote(int index, Note newNote) {
-        requireAllNonNull(index, newNote);
-        notes.set(index, newNote);
+        notes.remove(getNoteAt(index));
+        setFilteredNotes(currentFilter);
     }
 
     /**
      * Retrieves the Note object at the specified {@code index}.
      *
-     * @param index index of the element to retrieve
+     * @param index index of the element to retrieve from the filteredNotes
      * @return Note object at the specified index, or null if index is out of bounds.
      */
     public Note getNoteAt(int index) {
         Note noteToGet;
 
         try {
-            noteToGet = notes.get(index);
+            noteToGet = filteredNotes.get(index);
             return noteToGet;
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
@@ -89,11 +90,26 @@ public class NoteManager {
         return this.notes;
     }
 
-    public void setModules(ArrayList<Note> notes) {
-        this.notes = notes;
+    public void setFilteredNotes(String moduleCode) {
+        if (!moduleCode.trim().isEmpty()) {
+            currentFilter = moduleCode;
+            filteredNotes = notes.stream()
+                    .filter(p -> p.getModuleCode().equalsIgnoreCase(moduleCode)).collect(Collectors.toList());
+        } else {
+            filteredNotes = notes;
+        }
     }
 
+    public List<Note> getFilteredNotes() {
+        return filteredNotes;
+    }
+
+    /**
+     * Removes all elements in notes list.
+     */
     public void clearNotes() {
         notes.clear();
+        filteredNotes.clear();
+        currentFilter = "";
     }
 }

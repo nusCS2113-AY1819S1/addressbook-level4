@@ -37,7 +37,7 @@ public class NoteAddCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        NoteManager noteManager = new NoteManager();
+        NoteManager noteManager = NoteManager.getInstance();
 
         NoteTextEditWindow noteTextEditWindow = new NoteTextEditWindow(noteToAdd);
         noteTextEditWindow.showAndWait();

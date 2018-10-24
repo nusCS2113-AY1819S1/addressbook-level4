@@ -30,9 +30,9 @@ public class NoteDeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
 
-        NoteManager noteManager = new NoteManager();
+        NoteManager noteManager = NoteManager.getInstance();
 
-        if (index > noteManager.getNotes().size() || index < 1) {
+        if (index > noteManager.getFilteredNotes().size() || index < 1) {
             throw new CommandException(String.format(MESSAGE_INVALID_INDEX, index));
         } else {
             noteManager.deleteNote(index - 1);
