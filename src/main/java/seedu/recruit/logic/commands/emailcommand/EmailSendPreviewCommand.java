@@ -16,7 +16,7 @@ import seedu.recruit.model.Model;
  */
 public class EmailSendPreviewCommand extends EmailSendCommand {
 
-    public static final String SHOWING_PREVIEW_MESSAGE = "Opened preview.";
+    public static final String SHOWING_PREVIEW_MESSAGE = "Opened preview.\n" + MESSAGE_USAGE;
 
     @Override
     @SuppressWarnings("Duplicates")
