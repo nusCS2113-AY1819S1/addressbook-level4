@@ -19,19 +19,19 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class LostCommandParser implements Parser<LostCommand> {
 
-    /**
-     * Parses the given {@code String} of arguments in the context of the LostCommand
-     * and returns an LostCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
-     */
+/**
+ * Parses the given {@code String} of arguments in the context of the LostCommand
+ * and returns an LostCommand object for execution.
+ * @throws ParseException if the user input does not conform the expected format
+ */
     public LostCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_QUANTITY);
 
-        Index index;
+        Index targetIndex;
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            targetIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LostCommand.MESSAGE_USAGE), pe);
         }
@@ -40,7 +40,7 @@ public class LostCommandParser implements Parser<LostCommand> {
                 .parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get()).toInteger());
 
 
-        return new LostCommand(index, LostDescriptor);
+        return new LostCommand(targetIndex, lostDescriptor);
     }
 
 }

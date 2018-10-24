@@ -7,7 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 
 import java.util.List;
-import java.util.ArrayList;
+import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -37,7 +37,7 @@ public class LostCommand extends Command{
     private final Index targetIndex;
     private final LostDescriptor lostDescriptor;
 
-    public LostCommand(Index targetIndex) {
+    public LostCommand(Index targetIndex, LostDescriptor lostDescriptor) {
         requireNonNull(targetIndex);
         requireNonNull(lostDescriptor);
         this.targetIndex = targetIndex;
@@ -55,7 +55,7 @@ public class LostCommand extends Command{
         }
 
         Item itemToLost = lastShownList.get(targetIndex.getZeroBased());
-        Item lostItem = createLostItem(itemToLost,LostDescriptor);
+        Item lostItem = createLostItem(itemToLost,lostDescriptor);
 
         if (!itemToLost.isSameItem(lostItem) && model.hasItem(lostItem)) {
             throw new CommandException(MESSAGE_INVALID_QUANTITY);
@@ -66,14 +66,14 @@ public class LostCommand extends Command{
         return new CommandResult(String.format(MESSAGE_LOST_ITEM_SUCCESS, lostItem));
     }
 
-    /**
-     * Creates and returns a {@code Item} with the details of {@code itemToLost}
-     * edited with {@code LostDescriptor}.
-     */
+/**
+ * Creates and returns a {@code Item} with the details of {@code itemToLost}
+ * edited with {@code LostDescriptor}.
+ */
     private static Item createLostItem(Item itemToLost, LostDescriptor lostDescriptor) {
         assert itemToLost != null;
 
-        Quantity updatedQuantity = (itemToLost.getQuantity()-LostDescriptor.getQuantity()).orElse(itemToLost.getQuantity());
+        Quantity updatedQuantity = ((itemToLost.getQuantity())-(lostDescriptor.getQuantity())).orElse(itemToLost.getQuantity());
 
 
         return new Item(itemToLost.getName(), updatedQuantity, itemToLost.getMinQuantity(), itemToLost.getTags());
@@ -87,7 +87,7 @@ public class LostCommand extends Command{
             setQuantity(toCopy.lostQuantity);
 
         }
-        public static void setQuantity(Integer lostQuantity) {this.lostQuantity=lostQuantity;}
+        public void setQuantity(Integer lostQuantity) {this.lostQuantity=lostQuantity;}
         public Integer getQuantity(){return lostQuantity;}
     }
     @Override
