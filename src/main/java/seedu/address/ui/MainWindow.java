@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -28,9 +27,7 @@ import seedu.address.commons.events.ui.ShowRegisterEvent;
 import seedu.address.commons.events.ui.SuccessfulRegisterEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
 import seedu.address.security.Security;
-import seedu.address.security.UserStub;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -56,8 +53,6 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private LoginWindow loginWindow;
     private RegistrationWindow registrationWindow;
-    private Person currentUser = UserStub.getUser();
-    private ObservableList<Person> meList = FXCollections.observableArrayList(currentUser);
 
     @FXML
     private Text meText;
@@ -183,13 +178,13 @@ public class MainWindow extends UiPart<Stage> {
         timetablePanel = new TimeTablePanel();
         timetablePlaceholder.getChildren().add(timetablePanel.getRoot());
 
-        mePanel = new MePanel(meList);
+        mePanel = new MePanel(FXCollections.observableArrayList(security.getUser()));
         mePanelPlaceholder.getChildren().add(mePanel.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getOtherList(currentUser));
+        personListPanel = new PersonListPanel(logic.getOtherList(security.getUser()));
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        friendListPanel = new FriendListPanel(logic.getFriendList(currentUser));
+        friendListPanel = new FriendListPanel(logic.getFriendList(security.getUser()));
         friendListPanelPlaceholder.getChildren().add(friendListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
