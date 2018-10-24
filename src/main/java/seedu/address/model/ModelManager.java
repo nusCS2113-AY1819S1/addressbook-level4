@@ -70,6 +70,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
+        //TODO Check whether this actually works when modifying your own data.
+        if (user != null) {
+            matchUserToPerson(user.getName().toString());
+        }
         raise(new AddressBookChangedEvent(versionedAddressBook));
     }
 
@@ -207,7 +211,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void matchUserToPerson(String name) {
-        list = getAddressBook().getPersonList();
+        list = versionedAddressBook.getPersonList();
         //Loops through personlist to get matched name Person Class
         for (Person person : list) {
             if (name.equals(person.getName().toString())) {
