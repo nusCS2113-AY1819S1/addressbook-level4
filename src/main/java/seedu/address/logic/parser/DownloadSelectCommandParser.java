@@ -25,14 +25,14 @@ public class DownloadSelectCommandParser implements Parser {
         String username = argMultimap.getValue(PREFIX_USERNAME).get();
         String password = argMultimap.getValue(PREFIX_PASSWORD).get();
         String moduleCode = argMultimap.getValue(PREFIX_MODULECODE).get();
-        try{
-            String fileSelect = argMultimap.getValue(PREFIX_SELECT_FILE).get();
-            return new DownloadSelectCommand( username, password ,moduleCode,fileSelect);
-        }
-        catch (NoSuchElementException e){
-            return new DownloadSelectCommand( username, password ,moduleCode);
-        }
 
+        if(argMultimap.getValue(PREFIX_SELECT_FILE).isPresent()){
+            String fileSelect = argMultimap.getValue(PREFIX_SELECT_FILE).get();
+            return new DownloadSelectCommand( username, password, moduleCode,fileSelect);
+        }
+        else{
+            return new DownloadSelectCommand( username, password, moduleCode);
+        }
 
     }
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {

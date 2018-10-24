@@ -36,13 +36,13 @@ public class DownloadAllCommand extends Command {
     private String downloadFilePath;
 
     public DownloadAllCommand(String username, String password, String moduleCode){
-        this.password=password;
+        this.password = password;
         this.username=username;
         this.moduleCode=moduleCode.toLowerCase();
     }
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
-        WebDriver driver=initializeWebDriver();
+        WebDriver driver = initializeWebDriver();
         loginIvle(driver);
         String returnMessage;
         if(!checkLoggedIn(driver)) {
