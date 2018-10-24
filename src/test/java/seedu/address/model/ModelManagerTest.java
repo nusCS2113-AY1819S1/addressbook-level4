@@ -16,6 +16,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.searchhistory.exceptions.EmptyHistoryException;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.LoginBookBuilder;
 
@@ -64,6 +65,12 @@ public class ModelManagerTest {
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         modelManager.getFilteredPersonList().remove(0);
+    }
+
+    @Test
+    public void revertLastSearch_emptySearchHistory_throwsEmptyHistoryException() {
+        thrown.expect(EmptyHistoryException.class);
+        modelManager.revertLastSearch();
     }
 
     @Test
