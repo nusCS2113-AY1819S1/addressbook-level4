@@ -1,5 +1,7 @@
 package seedu.address.security;
 
+import seedu.address.model.User;
+
 /***
  * API of Security Component
  */
@@ -21,11 +23,17 @@ public interface Security {
      * Registers the user
      * Returns 1 if successful, 2 if user exists, 3 if the fields are incomplete
      */
-    int register(String username, String password, String email, String phone, String address);
+    RegisterFlag register(String username, String password, String email, String phone, String address);
 
     /***
      *
      * @return is authenticated for tests
      */
-    public boolean getAuthentication();
+    boolean getAuthentication();
+
+    /**
+     *
+     * @return the current authenticated User
+     */
+    User getUser();
 }

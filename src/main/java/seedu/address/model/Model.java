@@ -77,7 +77,13 @@ public interface Model {
      * Instantiates the user with a Person in database
      * @param name
      */
-    public void matchUserToPerson(String name);
+    void matchUserToPerson(String name);
+
+    /**
+     *
+     * @return the current authenticated User
+     */
+    User getUser();
 
     /**
      * Returns true if the model has previous address book states to restore.
