@@ -17,7 +17,7 @@ import seedu.address.model.product.Product;
  * An Immutable AddressBook that is serializable to XML format
  */
 @XmlRootElement(name = "addressbook")
-public class XmlSerializableAddressBook {
+public class XmlSerializableProductDatabase {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Product list contains duplicate product(s).";
 
@@ -28,10 +28,10 @@ public class XmlSerializableAddressBook {
     private List<XmlAdaptedProduct> persons;
 
     /**
-     * Creates an empty XmlSerializableAddressBook.
+     * Creates an empty XmlSerializableProductDatabase.
      * This empty constructor is required for marshalling.
      */
-    public XmlSerializableAddressBook() {
+    public XmlSerializableProductDatabase() {
         distributors = new ArrayList<>();
         persons = new ArrayList<>();
     }
@@ -39,7 +39,7 @@ public class XmlSerializableAddressBook {
     /**
      * Conversion
      */
-    public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
+    public XmlSerializableProductDatabase(ReadOnlyAddressBook src) {
         this();
         distributors
                 .addAll(src.getDistributorList().stream().map(XmlAdaptedDistributor::new).collect(Collectors.toList()));
@@ -79,9 +79,9 @@ public class XmlSerializableAddressBook {
             return true;
         }
 
-        if (!(other instanceof XmlSerializableAddressBook)) {
+        if (!(other instanceof XmlSerializableProductDatabase)) {
             return false;
         }
-        return distributors.equals(((XmlSerializableAddressBook) other).distributors);
+        return distributors.equals(((XmlSerializableProductDatabase) other).distributors);
     }
 }
