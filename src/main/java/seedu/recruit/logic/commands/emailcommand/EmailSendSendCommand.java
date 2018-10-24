@@ -19,6 +19,7 @@ import seedu.recruit.model.Model;
  */
 public class EmailSendSendCommand extends EmailSendCommand {
     @Override
+    @SuppressWarnings("Duplicates")
     public CommandResult execute(Model model, CommandHistory history) throws IOException, GeneralSecurityException {
         EmailUtil emailUtil = model.getEmailUtil();
         String result;
