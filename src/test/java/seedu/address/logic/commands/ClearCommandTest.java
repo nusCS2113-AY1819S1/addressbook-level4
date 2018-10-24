@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.TypicalTasks.getTypicalTaskBook;
+import static seedu.address.testutil.TypicalTasks.getTypicalTaskBook;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.Test;

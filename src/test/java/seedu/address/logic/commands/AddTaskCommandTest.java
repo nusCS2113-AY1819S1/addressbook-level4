@@ -15,7 +15,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
-import seedu.address.TaskBuilder;
+import seedu.address.testutil.TaskBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;

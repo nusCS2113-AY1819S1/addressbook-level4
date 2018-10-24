@@ -54,6 +54,9 @@ public class Deadline {
 
     public static boolean isValidDeadline(String test) {
         String[] entries = test.split("/");
+        if (entries.length != 3) {
+            return false;
+        }
         String day = entries[0];
         String month = entries[1];
         String year = entries[2];

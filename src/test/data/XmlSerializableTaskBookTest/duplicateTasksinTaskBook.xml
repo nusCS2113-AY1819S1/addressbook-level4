@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+
+    <tasks>
+        <deadline>31/3/2018</deadline>
+        <title>Complete CS2113 Homework</title>
+        <description>Refer to notes</description>
+        <priorityLevel>low</priorityLevel>
+        <expectedNumOfHours>1</expectedNumOfHours>
+        <isCompleted>false</isCompleted>
+    </tasks>
+
+    <!-- Task with same identity as CS2113_TASK1 -->
+    <tasks>
+        <deadline>31/3/2018</deadline>
+        <title>Complete CS2113 Homework</title>
+        <description>Refer to notes</description>
+        <priorityLevel>low</priorityLevel>
+        <expectedNumOfHours>1</expectedNumOfHours>
+        <isCompleted>false</isCompleted>
+    </tasks>
+
+</addressbook>

@@ -7,7 +7,7 @@ import java.util.Objects;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Task {
-    private static final String PLACEHOLDER_DEADLINE = "1/1";
+    private static final String PLACEHOLDER_DEADLINE = "1/1/2018";
     private String deadline;
     private final String title;
     private final String description;
@@ -119,17 +119,19 @@ public class Task {
 
         Task otherTask = (Task) other;
         return otherTask.getTitle().equals(getTitle())
-                && otherTask.getDeadline().equals(getTitle())
+                && otherTask.getDeadline().equals(getDeadline())
                 && otherTask.getDescription().equals(getDescription())
                 && otherTask.getPriorityLevel().equals(getPriorityLevel())
                 && otherTask.isCompleted() == isCompleted()
-                && otherTask.expectedNumOfHours == expectedNumOfHours;
+                && otherTask.getExpectedNumOfHours() == getExpectedNumOfHours()
+                && otherTask.getCompletedNumOfHours() == getCompletedNumOfHours();
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(deadline, title, description, priorityLevel, expectedNumOfHours, isCompleted);
+        return Objects.hash(deadline, title, description, priorityLevel, expectedNumOfHours,
+                completedNumOfHours, isCompleted);
     }
 
     @Override
@@ -142,8 +144,6 @@ public class Task {
                 .append(getDescription())
                 .append(" Priority: ")
                 .append(getPriorityLevel());
-        //.append(" Completed: ")
-        //.append(isCompleted);
         return builder.toString();
     }
 }

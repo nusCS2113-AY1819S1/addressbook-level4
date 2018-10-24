@@ -1,20 +1,18 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.TypicalIndexes.INDEX_FIRST_TASK;
-import static seedu.address.TypicalTasks.getTypicalTaskBook;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+import static seedu.address.testutil.TypicalTasks.getTypicalTaskBook;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import java.util.logging.Logger;
 
 import org.junit.Test;
 
-import seedu.address.TaskBuilder;
+import seedu.address.testutil.TaskBuilder;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
