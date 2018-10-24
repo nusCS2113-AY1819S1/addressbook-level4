@@ -17,51 +17,51 @@ public class ProductCardTest extends GuiUnitTest {
     public void display() {
         // no tags
         Product productWithNoTags = new PersonBuilder().withTags(new String[0]).build();
-        PersonCard personCard = new PersonCard(productWithNoTags, 1);
-        uiPartRule.setUiPart(personCard);
-        assertCardDisplay(personCard, productWithNoTags, 1);
+        ProductCard productCard = new ProductCard(productWithNoTags, 1);
+        uiPartRule.setUiPart(productCard);
+        assertCardDisplay(productCard, productWithNoTags, 1);
 
         // with tags
         Product productWithTags = new PersonBuilder().build();
-        personCard = new PersonCard(productWithTags, 2);
-        uiPartRule.setUiPart(personCard);
-        assertCardDisplay(personCard, productWithTags, 2);
+        productCard = new ProductCard(productWithTags, 2);
+        uiPartRule.setUiPart(productCard);
+        assertCardDisplay(productCard, productWithTags, 2);
     }
 
     @Test
     public void equals() {
         Product product = new PersonBuilder().build();
-        PersonCard personCard = new PersonCard(product, 0);
+        ProductCard productCard = new ProductCard(product, 0);
 
         // same product, same index -> returns true
-        PersonCard copy = new PersonCard(product, 0);
-        assertTrue(personCard.equals(copy));
+        ProductCard copy = new ProductCard(product, 0);
+        assertTrue(productCard.equals(copy));
 
         // same object -> returns true
-        assertTrue(personCard.equals(personCard));
+        assertTrue(productCard.equals(productCard));
 
         // null -> returns false
-        assertFalse(personCard.equals(null));
+        assertFalse(productCard.equals(null));
 
         // different types -> returns false
-        assertFalse(personCard.equals(0));
+        assertFalse(productCard.equals(0));
 
         // different product, same index -> returns false
         Product differentProduct = new PersonBuilder().withName("differentName").build();
-        assertFalse(personCard.equals(new PersonCard(differentProduct, 0)));
+        assertFalse(productCard.equals(new ProductCard(differentProduct, 0)));
 
         // same product, different index -> returns false
-        assertFalse(personCard.equals(new PersonCard(product, 1)));
+        assertFalse(productCard.equals(new ProductCard(product, 1)));
     }
 
     /* Asserts that {@code personCard} displays the details of {@code expectedProduct} correctly and matches
      * {@code expectedId}.
      */
 
-    private void assertCardDisplay(PersonCard personCard, Product expectedProduct, int expectedId) {
+    private void assertCardDisplay(ProductCard productCard, Product expectedProduct, int expectedId) {
         guiRobot.pauseForHuman();
 
-        PersonCardHandle personCardHandle = new PersonCardHandle(personCard.getRoot());
+        PersonCardHandle personCardHandle = new PersonCardHandle(productCard.getRoot());
 
         // verify id is displayed correctly
         assertEquals(Integer.toString(expectedId) + ". ", personCardHandle.getId());

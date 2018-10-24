@@ -11,12 +11,12 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.ProductPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.product.Product;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of products.
  */
 public class ProductListPanel extends UiPart<Region> {
     private static final String FXML = "ProductListPanel.fxml";
@@ -24,7 +24,6 @@ public class ProductListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<Product> productListView;
-
 
     public ProductListPanel(ObservableList<Product> productList) {
         super(FXML);
@@ -34,7 +33,7 @@ public class ProductListPanel extends UiPart<Region> {
 
     private void setConnections(ObservableList<Product> productList) {
         productListView.setItems(productList);
-        productListView.setCellFactory(listView -> new PersonListViewCell());
+        productListView.setCellFactory(listView -> new ProductListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -43,13 +42,13 @@ public class ProductListPanel extends UiPart<Region> {
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in product list panel changed to : '" + newValue + "'");
-                        raise(new PersonPanelSelectionChangedEvent(newValue));
+                        raise(new ProductPanelSelectionChangedEvent(newValue));
                     }
                 });
     }
 
     /**
-     * Scrolls to the {@code PersonCard} at the {@code index} and selects it.
+     * Scrolls to the {@code ProductCard} at the {@code index} and selects it.
      */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
@@ -65,9 +64,9 @@ public class ProductListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Product} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Product} using a {@code ProductCard}.
      */
-    class PersonListViewCell extends ListCell<Product> {
+    class ProductListViewCell extends ListCell<Product> {
         @Override
         protected void updateItem(Product product, boolean empty) {
             super.updateItem(product, empty);
@@ -76,7 +75,7 @@ public class ProductListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(product, getIndex() + 1).getRoot());
+                setGraphic(new ProductCard(product, getIndex() + 1).getRoot());
             }
         }
     }

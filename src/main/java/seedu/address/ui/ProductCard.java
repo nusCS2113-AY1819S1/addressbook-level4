@@ -10,9 +10,9 @@ import seedu.address.model.product.Product;
 /**
  * An UI component that displays information of a {@code Product}.
  */
-public class PersonCard extends UiPart<Region> {
+public class ProductCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "ProductListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -31,22 +31,22 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label serialNumber;
     @FXML
-    private Label address;
+    private Label info;
     @FXML
-    private Label distname;
+    private Label distributor;
     @FXML
     private FlowPane tags;
 
-    public PersonCard(Product product, int displayedIndex) {
+    public ProductCard(Product product, int displayedIndex) {
         super(FXML);
         this.product = product;
         id.setText(displayedIndex + "." + "\n");
         name.setText("Name: " + product.getName().fullName);
-        phone.setText("Serial Number: " + product.getSerialNumber().value);
-        address.setText("Product Info: " + product.getProductInfo().value);
-        distname.setText("Distributor: " + product.getDistributor().fullDistName);
+        serialNumber.setText("Serial Number: " + product.getSerialNumber().value);
+        info.setText("Product Info: " + product.getProductInfo().value);
+        distributor.setText("Distributor: " + product.getDistributor().fullDistName);
         product.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
@@ -58,12 +58,12 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof ProductCard)) {
             return false;
         }
 
         // state check
-        PersonCard card = (PersonCard) other;
+        ProductCard card = (ProductCard) other;
         return id.getText().equals(card.id.getText())
                 && product.equals(card.product);
     }

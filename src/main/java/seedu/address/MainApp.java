@@ -30,6 +30,7 @@ import seedu.address.model.ReadOnlyUserDatabase;
 import seedu.address.model.UserDatabase;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
+import seedu.address.model.util.SampleDistributorsUtil;
 import seedu.address.model.util.SampleUsersUtil;
 import seedu.address.storage.DistributorBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -136,7 +137,7 @@ public class MainApp extends Application {
             if (!distributorBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample DistributorBook");
             }
-            initialDist = distributorBookOptional.orElseGet(SampleDataUtil::getSampleDistributorBook);
+            initialDist = distributorBookOptional.orElseGet(SampleDistributorsUtil::getSampleDistributorBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty DistributorBook");
             initialDist = new DistributorBook();

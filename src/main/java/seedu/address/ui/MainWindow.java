@@ -54,7 +54,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane productListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -126,11 +126,11 @@ public class MainWindow extends UiPart<Stage> {
         browserPanel = new BrowserPanel();
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
-        productListPanel = new ProductListPanel(logic.getFilteredProductList());
-        personListPanelPlaceholder.getChildren().add(productListPanel.getRoot());
-
         distributorListPanel = new DistributorListPanel(logic.getFilteredDistributorList());
         distributorListPanelPlaceholder.getChildren().add(distributorListPanel.getRoot());
+
+        productListPanel = new ProductListPanel(logic.getFilteredProductList());
+        productListPanelPlaceholder.getChildren().add(productListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

@@ -35,6 +35,7 @@ import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateRemin
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 import seedu.address.model.util.SampleDataUtil;
+import seedu.address.model.util.SampleDistributorsUtil;
 import seedu.address.storage.Storage;
 
 /**
@@ -177,7 +178,7 @@ public class ModelManager extends ComponentManager implements Model {
             if (!distributorBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
-            newData = distributorBookOptional.orElseGet(SampleDataUtil::getSampleDistributorBook);
+            newData = distributorBookOptional.orElseGet(SampleDistributorsUtil::getSampleDistributorBook);
         } catch (DataConversionException e) {
             newData = new DistributorBook();
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");

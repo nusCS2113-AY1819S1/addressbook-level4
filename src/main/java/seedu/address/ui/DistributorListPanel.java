@@ -41,14 +41,14 @@ public class DistributorListPanel extends UiPart<Region> {
         distributorListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
-                        logger.fine("Selection in product list panel changed to : '" + newValue + "'");
+                        logger.fine("Selection in distributor list panel changed to : '" + newValue + "'");
                         raise(new DistributorPanelSelectionChangedEvent(newValue));
                     }
                 });
     }
 
     /**
-     * Scrolls to the {@code PersonCard} at the {@code index} and selects it.
+     * Scrolls to the {@code DistributorCard} at the {@code index} and selects it.
      */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
@@ -79,5 +79,4 @@ public class DistributorListPanel extends UiPart<Region> {
             }
         }
     }
-
 }

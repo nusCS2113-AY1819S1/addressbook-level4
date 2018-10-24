@@ -6,12 +6,12 @@ import seedu.address.model.product.Product;
 /**
  * Represents a selection change in the Product List Panel
  */
-public class PersonPanelSelectionChangedEvent extends BaseEvent {
+public class ProductPanelSelectionChangedEvent extends BaseEvent {
 
 
     private final Product newSelection;
 
-    public PersonPanelSelectionChangedEvent(Product newSelection) {
+    public ProductPanelSelectionChangedEvent(Product newSelection) {
         this.newSelection = newSelection;
     }
 
