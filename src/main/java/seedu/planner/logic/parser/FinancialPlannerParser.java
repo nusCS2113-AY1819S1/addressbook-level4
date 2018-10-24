@@ -109,7 +109,7 @@ public class FinancialPlannerParser {
             return new SummaryCommandParser().parse(arguments);
 
         case StatisticCommand.COMMAND_WORD:
-            return new StatisticCommand();
+            return new StatisticCommandParser().parse(arguments);
 
         case ExportExcelCommand.COMMAND_WORD:
             return new ExportExcelCommandParser().parse(arguments);
