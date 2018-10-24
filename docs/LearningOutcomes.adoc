@@ -190,7 +190,6 @@ public void execute_invalidCommandFormat_throwsParseException() {
 
 == Write System Tests `[LO-SystemTesting]`
 
-Note how tests below `src/test/java/systemtests` package (e.g link:{repoURL}/src/test/java/systemtests/AddCommandSystemTest.java[`AddCommandSystemTest.java`]) are system tests because they test the entire system end-to-end.
 
 *Resources*
 

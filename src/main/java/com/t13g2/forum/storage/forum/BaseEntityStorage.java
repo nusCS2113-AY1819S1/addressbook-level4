@@ -10,16 +10,21 @@ import java.util.List;
  * @param <T>
  */
 public abstract class BaseEntityStorage<T> implements Serializable {
-    protected boolean dirty;
     protected List<T> list = new ArrayList<>();
+    private boolean dirty;
 
 
     public List<T> getList() {
         return list;
     }
 
+    public boolean isDirty() {
+        return dirty;
+    }
+
     public void setDirty() {
         dirty = true;
     }
+
 
 }
