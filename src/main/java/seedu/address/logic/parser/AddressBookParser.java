@@ -31,6 +31,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RedoDistributorCommand;
 import seedu.address.logic.commands.RegisterUserCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.ThreadDueRemindersCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UndoDistributorCommand;
 import seedu.address.logic.commands.ViewDueRemindersCommand;
@@ -147,6 +148,9 @@ public class AddressBookParser {
 
         case ViewDueRemindersCommand.COMMAND_WORD:
             return new ViewDueRemindersCommand();
+
+        case ThreadDueRemindersCommand.COMMAND_WORD:
+            return new ThreadDueRemindersCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

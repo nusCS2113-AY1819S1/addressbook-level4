@@ -11,23 +11,23 @@ import seedu.address.model.timeidentifiedclass.shopday.Reminder;
  * This command allows us to view all reminders in the active shop day that are due.
  */
 
-public class ViewDueRemindersCommand extends Command {
+public class ThreadDueRemindersCommand extends Command {
 
-    public static final String COMMAND_WORD = "duereminders";
+    public static final String COMMAND_WORD = "threadduereminders";
     public static final String MESSAGE_USAGE = ": Shows the reminders that are past their times.";
-    public static final String NO_REMINDERS_SET = "No reminders due yet.";
+    public static final String NO_THREAD_REMINDERS = "No threaded reminders due yet.";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        ArrayList<Reminder> reminders = model.getDueRemindersInActiveBusinessDay();
+        ArrayList<Reminder> reminders = model.getDueRemindersInActiveBusinessDayForThread();
 
         if (reminders.size() == 0) {
-            return new CommandResult(NO_REMINDERS_SET);
+            throw new CommandException(NO_THREAD_REMINDERS);
         }
 
         StringBuilder allReminders = new StringBuilder();
 
-        allReminders.append("Reminders due as of now today:\n");
+        allReminders.append("Reminders due:\n");
 
         for (Reminder reminder : reminders) {
             allReminders.append(reminder.getTime() + "\t\t" + reminder.getMessage() + "\n");
@@ -35,5 +35,4 @@ public class ViewDueRemindersCommand extends Command {
 
         return new CommandResult(allReminders.toString());
     }
-
 }

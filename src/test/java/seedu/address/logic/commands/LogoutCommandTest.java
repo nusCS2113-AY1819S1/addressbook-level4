@@ -227,7 +227,7 @@ public class LogoutCommandTest {
             fail("This method should not be called.");
         }
 
-        public ArrayList<Reminder> getDueRemindersInActiveShopDay() {
+        public ArrayList<Reminder> getDueRemindersInActiveBusinessDay() {
             fail("This method should not be called.");
             return null;
         }
@@ -255,6 +255,11 @@ public class LogoutCommandTest {
     private class ModelStubAcceptingLogout extends ModelStub {
 
         private boolean loginStatus = false;
+
+        @Override
+        public ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread() {
+            return null;
+        }
 
         @Override
         public boolean checkAuthentication(Username username, Password password) {

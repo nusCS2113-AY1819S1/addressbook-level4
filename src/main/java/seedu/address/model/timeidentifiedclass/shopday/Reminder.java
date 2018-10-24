@@ -15,6 +15,7 @@ public class Reminder extends TimeIdentifiedClass {
 
     private String time;
     private String reminderMessage;
+    private boolean hasShownByThread;
 
     /**
      * Constructor to set a reminder with time and reminder message.
@@ -31,6 +32,7 @@ public class Reminder extends TimeIdentifiedClass {
         }
         this.time = time;
         this.reminderMessage = reminderMessage.trim();
+        this.hasShownByThread = false;
     }
 
     public String getMessage() {
@@ -59,4 +61,11 @@ public class Reminder extends TimeIdentifiedClass {
         this.reminderMessage = newMessage;
     }
 
+    public boolean hasBeenShownByThread() {
+        return hasShownByThread;
+    }
+
+    public void declareAsShownByThread() {
+        hasShownByThread = true;
+    }
 }

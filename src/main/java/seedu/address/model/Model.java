@@ -152,10 +152,15 @@ public interface Model {
 
     /**
      * Returns the reminders due on the current active day.
-     * @return
      */
 
-    ArrayList<Reminder> getDueRemindersInActiveShopDay();
+    ArrayList<Reminder> getDueRemindersInActiveBusinessDay();
+
+    /**
+     * Returns the reminders that have not been shown by the thread.
+     */
+
+    ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread();
 
     /**
      * Returns a given day's transaction history

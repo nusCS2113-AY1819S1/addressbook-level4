@@ -134,9 +134,9 @@ public abstract class TimeIdentifiedClass {
         }
 
         // checks on the different components of the transaction time.
-        if (isValidYear(times[0])
+        if (isValidDay(times[0])
                 && isValidMonth(times[1])
-                && isValidDay(times[2])
+                && isValidYear(times[2])
                 && isValidHour(times[3])
                 && isValidMinute(times[4])
                 && isValidSecond(times[5])) {
@@ -154,9 +154,9 @@ public abstract class TimeIdentifiedClass {
         String[] splitDate = date.split("/");
 
         // checking the individual components of the date
-        if (isValidYear(splitDate[0])
+        if (isValidDay(splitDate[0])
                 && isValidMonth(splitDate[1])
-                && isValidDay(splitDate[2])) {
+                && isValidYear(splitDate[2])) {
             return true;
         }
         return false;

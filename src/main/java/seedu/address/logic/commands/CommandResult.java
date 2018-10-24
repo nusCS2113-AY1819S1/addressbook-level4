@@ -13,4 +13,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
     }
 
+    public String getFeedbackToUser() {
+        return feedbackToUser;
+    }
 }

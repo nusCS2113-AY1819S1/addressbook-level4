@@ -261,7 +261,7 @@ public class DeleteUserCommandTest {
             fail("This method should not be called.");
         }
 
-        public ArrayList<Reminder> getDueRemindersInActiveShopDay() {
+        public ArrayList<Reminder> getDueRemindersInActiveBusinessDay() {
             fail("This method should not be called.");
             return null;
         }
@@ -290,6 +290,11 @@ public class DeleteUserCommandTest {
         final ArrayList<User> usersAdded = new ArrayList<>();
 
         @Override
+        public ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread() {
+            return null;
+        }
+
+        @Override
         public void deleteUser(User user) throws UserNotFoundException {
             usersAdded.add(registerValidUser());
             requireNonNull(user);
@@ -303,6 +308,11 @@ public class DeleteUserCommandTest {
      */
     private class ModelStubThrowingUserNotFoundException extends DeleteUserCommandTest.ModelStub {
         @Override
+        public ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread() {
+            return null;
+        }
+
+        @Override
         public void deleteUser(User user) throws UserNotFoundException {
             throw new UserNotFoundException();
         }
@@ -313,6 +323,11 @@ public class DeleteUserCommandTest {
      * A Model stub that always throw a AuthenticationFailedException when trying to login.
      */
     private class ModelStubThrowingAuthenticationFailedException extends DeleteUserCommandTest.ModelStub {
+        @Override
+        public ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread() {
+            return null;
+        }
+
         @Override
         public boolean checkCredentials(Username username, Password password) throws AuthenticationFailedException {
             throw new AuthenticationFailedException();

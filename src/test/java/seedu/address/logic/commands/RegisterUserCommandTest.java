@@ -252,7 +252,7 @@ public class RegisterUserCommandTest {
             fail("This method should not be called.");
         }
 
-        public ArrayList<Reminder> getDueRemindersInActiveShopDay() {
+        public ArrayList<Reminder> getDueRemindersInActiveBusinessDay() {
             fail("This method should not be called.");
             return null;
         }
@@ -281,6 +281,11 @@ public class RegisterUserCommandTest {
         final ArrayList<User> usersAdded = new ArrayList<>();
 
         @Override
+        public ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread() {
+            return null;
+        }
+
+        @Override
         public void addUser(User user) throws DuplicateUserException {
             requireNonNull(user);
             usersAdded.add(user);
@@ -292,6 +297,11 @@ public class RegisterUserCommandTest {
      * A Model stub that always throw a DuplicateUserException when trying to login.
      */
     private class ModelStubThrowingDuplicateUserException extends RegisterUserCommandTest.ModelStub {
+        @Override
+        public ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread() {
+            return null;
+        }
+
         @Override
         public void addUser(User person) throws DuplicateUserException {
             throw new DuplicateUserException();
