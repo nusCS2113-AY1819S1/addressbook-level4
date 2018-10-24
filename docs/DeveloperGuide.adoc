@@ -16,7 +16,7 @@ endif::[]
 :repoURL: https://github.com/CS2113-AY1819S1-T12-3/main/tree/master
 
 
-By: `Team T12-3`      Since: `Sep 2018`      Licence: `NUS`
+By: `Team T12-3`      Since: `Sep 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -440,7 +440,7 @@ Step 2. The 'tag append' command calls `EditCommand` to all the items in the sto
 ** Cons: It is harder to implement and harder to use.
 
 
-// end::undoredo[]
+// end::tag[]
 
 === Lost and Found feature
 ==== Current Implementation

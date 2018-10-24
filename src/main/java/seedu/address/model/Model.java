@@ -57,10 +57,14 @@ public interface Model {
     void updateFilteredItemList(Predicate<Item> predicate);
 
     /**
+     * Updates the filter of the filtered item list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredItemListByTag(Predicate<Item> predicate);
+
+    /**
      * Returns true if the model has previous stock list states to restore.
      */
-
-    void updateFilteredItemListByTag(Predicate<Item> predicate);
 
     boolean canUndoStockList();
 
@@ -68,18 +72,6 @@ public interface Model {
      * Returns true if the model has undone stock list states to restore.
      */
     boolean canRedoStockList();
-
-    /**
-     * Lost the given item.
-     * The item must exist in the stock list.
-     */
-    void lostItem(Item target);
-
-    /**
-     * Found the given item.
-     * The item must exist in the stock list.
-     */
-    void foundItem(Item target);
 
     /**
      * Restores the model's stock list to its previous state.

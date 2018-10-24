@@ -1,7 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import seedu.address.logic.commands.SaveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -22,7 +20,7 @@ public class SaveCommandParser implements Parser<SaveCommand> {
             return new SaveCommand(fileName);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE), pe);
+                    String.format(SaveCommand.MESSAGE_INVALID_FILE_NAME, SaveCommand.MESSAGE_USAGE), pe);
         }
     }
 }

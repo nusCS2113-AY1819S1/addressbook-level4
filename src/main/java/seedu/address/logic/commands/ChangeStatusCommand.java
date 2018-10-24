@@ -1,20 +1,23 @@
 package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORIGINAL_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Name;
+import seedu.address.model.item.Status;
 
+
+//@@author ChewKinWhye
 
 /**
  * Updates the status of an existing item in the stock list.
@@ -23,8 +26,9 @@ import seedu.address.model.item.Item;
 public class ChangeStatusCommand extends Command {
     public static final String COMMAND_WORD = "changeStatus";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the status of the item identified "
-            + "by the index number used in the displayed item list. "
+            + "by the name of the item. "
             + "Parameters: INDEX (must be a positive integer) "
+            + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_QUANTITY + "QUANTITY] "
             + "[" + PREFIX_ORIGINAL_STATUS + "ORIGINAL STATUS] "
             + "[" + PREFIX_NEW_STATUS + "NEW STATUS] "
@@ -36,13 +40,10 @@ public class ChangeStatusCommand extends Command {
     public static final String MESSAGE_INVALID_STATUS_QUANTITY = "The change status quantity input is invalid";
     public static final String MESSAGE_INVALID_STATUS_FIELD = "The status description is invalid";
 
-
-    private final Index index;
+    private Index index;
     private final ChangeStatusDescriptor changeStatusDescriptor;
-    public ChangeStatusCommand(Index index, ChangeStatusDescriptor changeStatusDescriptor) {
-        requireNonNull(index);
+    public ChangeStatusCommand(ChangeStatusDescriptor changeStatusDescriptor) {
         requireNonNull(changeStatusDescriptor);
-        this.index = index;
         this.changeStatusDescriptor = new ChangeStatusDescriptor(changeStatusDescriptor);
     }
 
@@ -50,9 +51,12 @@ public class ChangeStatusCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Item> lastShownList = model.getFilteredItemList();
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
+        int counter = 0;
+        for (Item item:lastShownList) {
+            if (item.getName().equals(changeStatusDescriptor.getName())) {
+                index = Index.fromZeroBased(counter);
+            }
+            counter++;
         }
 
         Item itemToUpdate = lastShownList.get(index.getZeroBased());
@@ -76,11 +80,11 @@ public class ChangeStatusCommand extends Command {
     private static Item createUpdatedItem(Item itemToUpdate,
                                           ChangeStatusDescriptor changeStatusDescriptor) throws CommandException {
         assert itemToUpdate != null;
-        List<Integer> currentStatus = itemToUpdate.getStatus();
-        List<Integer> updatedStatus = new ArrayList<>();
-        Integer updatedReady = currentStatus.get(0);
-        Integer updatedOnLoan = currentStatus.get(1);
-        Integer updatedFaulty = currentStatus.get(2);
+        Status currentStatus = itemToUpdate.getStatus();
+        Status updatedStatus;
+        Integer updatedReady = currentStatus.getStatusReady();
+        Integer updatedOnLoan = currentStatus.getStatusOnLoan();
+        Integer updatedFaulty = currentStatus.getStatusFaulty();
 
         Integer changeStatusValue = changeStatusDescriptor.getQuantity();
         switch (changeStatusDescriptor.getInitialStatus()) {
@@ -110,9 +114,7 @@ public class ChangeStatusCommand extends Command {
         default:
             throw new CommandException(MESSAGE_INVALID_STATUS_FIELD);
         }
-        updatedStatus.add(updatedReady);
-        updatedStatus.add(updatedOnLoan);
-        updatedStatus.add(updatedFaulty);
+        updatedStatus = new Status(updatedReady, updatedOnLoan, updatedFaulty);
 
         return new Item(itemToUpdate.getName(), itemToUpdate.getQuantity(), itemToUpdate.getMinQuantity(),
                 updatedStatus, itemToUpdate.getTags());
@@ -121,6 +123,7 @@ public class ChangeStatusCommand extends Command {
      * Stores the details to update the item with.
      */
     public static class ChangeStatusDescriptor {
+        private Name name;
         private Integer changeStatusQuantity;
         private String initialStatus;
         private String updatedStatus;
@@ -131,11 +134,17 @@ public class ChangeStatusCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public ChangeStatusDescriptor (ChangeStatusDescriptor toCopy) {
+            setName(toCopy.name);
             setQuantity(toCopy.changeStatusQuantity);
             setInitialStatus(toCopy.initialStatus);
             setUpdatedStatus(toCopy.updatedStatus);
         }
-
+        public void setName(Name name) {
+            this.name = name;
+        }
+        public Name getName() {
+            return name;
+        }
         public void setQuantity(Integer changeStatusQuantity) {
             this.changeStatusQuantity = changeStatusQuantity;
         }
