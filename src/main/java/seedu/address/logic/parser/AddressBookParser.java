@@ -111,7 +111,7 @@ public class AddressBookParser {
             return new ListCommand();
 
         case ViewTaskCommand.COMMAND_WORD:
-            return new ViewTaskCommand();
+            return new ViewTaskCommandParser().parse(arguments);
 
         case HistoryCommand.COMMAND_WORD:
         case HistoryCommand.COMMAND_ALIAS:
