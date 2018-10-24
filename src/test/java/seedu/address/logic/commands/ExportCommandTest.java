@@ -23,7 +23,7 @@ class ExportCommandTest {
     @Test
     public void execute_success() {
         String directory = ExportCommandParser.DEFAULT_DIRECTORY.trim();
-        String fileName = ExportCommandParser.DEFAULT_FILE_NAME + ".xml";
+        String fileName = ExportCommandParser.DEFAULT_FILE_NAME + ".csv";
         fileName = fileName.trim();
         File file = new File(directory + "/" + fileName);
         try {
