@@ -2,27 +2,21 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONEY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERIOD;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
-import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.expenditureinfo.Expenditure;
 
 public class ExpenditureGetAdviceCommand extends Command {
     public static final String COMMAND_WORD = "ET_advice";
     public static final String COMMAND_ALIAS = "a";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gives user advice on how to save money based on last week record.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gives user advice on " +
+            "how to save money based on last week record.\n"
             + "Parameters: "
             + PREFIX_MONEY + "MONEY "
             + PREFIX_PERIOD + "PERIOD "
@@ -30,11 +24,12 @@ public class ExpenditureGetAdviceCommand extends Command {
             + PREFIX_MONEY + "1000 "
             + PREFIX_PERIOD + "30 ";
 
-    public static final String MESSAGE_SUCCESS = "Here's the advice on how to spend your money in the following period:\n%s";
+    public static final String MESSAGE_SUCCESS = "Here's the advice on how to " +
+            "spend your money in the following period:\n%s";
 
-    public static String ADVICE;
-    public static int money;
-    public static int numOfDays;
+    private String ADVICE;
+    private int money;
+    private int numOfDays;
 
     /**
      * Get advice on how to spend money

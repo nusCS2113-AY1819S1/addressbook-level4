@@ -2,21 +2,13 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONEY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERIOD;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddExpenditureCommand;
 import seedu.address.logic.commands.ExpenditureGetAdviceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.expenditureinfo.Category;
-import seedu.address.model.expenditureinfo.Date;
-import seedu.address.model.expenditureinfo.Description;
-import seedu.address.model.expenditureinfo.Expenditure;
 import seedu.address.model.expenditureinfo.Money;
 
 /**
