@@ -36,6 +36,10 @@ public class StorageMapping {
         return classMapFileName.get(clazz);
     }
 
+    public void addMapping(Class clazz, String path) {
+        classMapFileName.put(clazz, path);
+    }
+
     /**
      *
      */

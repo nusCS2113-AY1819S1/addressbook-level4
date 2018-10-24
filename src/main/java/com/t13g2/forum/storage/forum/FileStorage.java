@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  *
@@ -40,6 +42,15 @@ public class FileStorage implements IStorage {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public void remove(Class clazz) {
+        try {
+            Files.delete(Paths.get(StorageMapping.getInstance().getFileName(clazz)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
