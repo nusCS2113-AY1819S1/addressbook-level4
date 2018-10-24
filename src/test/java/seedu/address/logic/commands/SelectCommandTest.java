@@ -14,8 +14,8 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.Rule;
 import org.junit.Test;
 
-import oldcode.Model;
-import oldcode.ModelManager;
+import seedu.address.Model;
+import seedu.address.ModelManager;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
@@ -24,7 +24,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code SelectCommand}.
+ * Contains integration tests (interaction with the DrinkModel) for {@code SelectCommand}.
  */
 public class SelectCommandTest {
     @Rule

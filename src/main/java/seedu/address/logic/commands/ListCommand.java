@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static oldcode.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import oldcode.Model;
+import seedu.address.Model;
 import seedu.address.logic.CommandHistory;
 
 

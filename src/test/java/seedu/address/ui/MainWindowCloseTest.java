@@ -10,7 +10,7 @@ import org.testfx.api.FxToolkit;
 import guitests.guihandles.StageHandle;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import oldcode.ModelManager;
+import seedu.address.ModelManager;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.logic.LogicManager;

@@ -30,7 +30,7 @@ import guitests.guihandles.MainWindowHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
-import oldcode.Model;
+import seedu.address.Model;
 import seedu.address.MainApp;
 import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;

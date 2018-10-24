@@ -1,4 +1,4 @@
-package oldcode;
+package seedu.address;
 
 import java.util.function.Predicate;
 
@@ -7,7 +7,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 
 /**
- * The API of the Model component.
+ * The API of the DrinkModel component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */

@@ -3,7 +3,7 @@ package seedu.address.logic;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
-import oldcode.Model;
+import seedu.address.Model;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 //import seedu.address.logic.commands.AddCommand;

@@ -8,8 +8,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import oldcode.Model;
-import oldcode.ModelManager;
+import seedu.address.Model;
+import seedu.address.ModelManager;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;

@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static oldcode.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import oldcode.Model;
+import seedu.address.Model;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
