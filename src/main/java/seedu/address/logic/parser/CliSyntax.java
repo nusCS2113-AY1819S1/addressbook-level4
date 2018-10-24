@@ -20,6 +20,8 @@ public class CliSyntax {
 
     /* TODO: Reorder the prefixes above in alphabetical order using the foll
     owing template */
+    /* Student prefixes */
+    public static final Prefix PREFIX_STUDENT_ADMIN = new Prefix("a/");
     /* Class prefixes */
     public static final Prefix PREFIX_CLASSNAME = new Prefix("c/");
     public static final Prefix PREFIX_MAXENROLLMENT = new Prefix("e/");
@@ -33,6 +35,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_GRADEBOOK_MAXMARKS = new Prefix("mm/");
     public static final Prefix PREFIX_GRADEBOOK_WEIGHTAGE = new Prefix("w/");
     public static final Prefix PREFIX_GRADEBOOK_ITEM_EDIT = new Prefix("ei/");
+    public static final Prefix PREFIX_GRADEBOOK_STUDENT_MARKS = new Prefix("m/");
     /* Module prefixes */
     public static final Prefix PREFIX_MODULE_CODE = new Prefix("mc/");
     public static final Prefix PREFIX_MODULE_NAME = new Prefix("mn/");

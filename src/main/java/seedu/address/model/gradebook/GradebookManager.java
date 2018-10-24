@@ -39,6 +39,10 @@ public class GradebookManager {
         StorageController.storeData();
     }
 
+    public void clearGradebook() {
+        gradebooks.clear();
+    }
+
     /**
      This method adds gradebook component to a module in Trajectory.
      */
@@ -72,6 +76,17 @@ public class GradebookManager {
     public boolean isEmpty (String moduleCode, String gradebookComponentName) {
         boolean isEmpty = false;
         if (moduleCode.equals("") || gradebookComponentName.equals("")) {
+            isEmpty = true;
+        }
+        return isEmpty;
+    }
+
+    /**
+     This method checks if gradebook assign student grade have empty inputs.
+     */
+    public boolean isEmpty (String adminNo, String moduleCode, String gradebookComponentName, int studentMarks) {
+        boolean isEmpty = false;
+        if (adminNo.equals("") || moduleCode.equals("") || gradebookComponentName.equals("") || studentMarks == 0) {
             isEmpty = true;
         }
         return isEmpty;
