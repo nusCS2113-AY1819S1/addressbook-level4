@@ -1,9 +1,9 @@
 package systemtests;
 
-import static seedu.address.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -225,7 +225,8 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
     }
 
     /**
-     * Performs the same verification as {@code assertCommandSuccess(String, DrinkModel, String, Index)} and in addition,<br>
+     * Performs the same verification as {@code assertCommandSuccess(String, DrinkModel, String, Index)} and in
+     * addition,<br>
      * 1. Asserts that result display box displays the success message of executing {@code EditCommand}.<br>
      * 2. Asserts that the model related components are updated to reflect the person at index {@code toEdit} being
      * updated to values specified {@code editedPerson}.<br>

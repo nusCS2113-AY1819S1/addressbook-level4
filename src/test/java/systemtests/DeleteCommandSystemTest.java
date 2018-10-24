@@ -154,7 +154,8 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
     }
 
     /**
-     * Performs the same verification as {@code assertCommandSuccess(String, DrinkModel, String)} except that the browser url
+     * Performs the same verification as {@code assertCommandSuccess(String, DrinkModel, String)} except that the
+     * browser url
      * and selected card are expected to update accordingly depending on the card at {@code expectedSelectedCardIndex}.
      *
      * @see DeleteCommandSystemTest#assertCommandSuccess(String, Model, String)
