@@ -20,7 +20,15 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.*;
+import seedu.address.model.DistributorBook;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.ProductDatabase;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyDistributorBook;
+import seedu.address.model.ReadOnlyUserDatabase;
+import seedu.address.model.UserDatabase;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.model.util.SampleUsersUtil;
 import seedu.address.storage.DistributorBookStorage;
@@ -55,7 +63,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing Inventarie ]===========================");
+        logger.info("=============================[ Initializing Inventori PRO ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -103,37 +111,37 @@ public class MainApp extends Application {
             }
             initialUsers = userDatabaseOptional.orElseGet(SampleUsersUtil::getSampleUserDatabase);
         } catch (DataConversionException e) {
-            logger.warning("Users file not in the correct format. Will be starting with an empty Inventarie");
+            logger.warning("Users file not in the correct format. Will be starting with an empty ProductDatabase");
             initialUsers = new UserDatabase();
         } catch (IOException e) {
-            logger.warning("Users while reading from the file. Will be starting with an empty Inventarie");
+            logger.warning("Users while reading from the file. Will be starting with an empty ProductDatabase");
             initialUsers = new UserDatabase();
         }
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample Inventarie");
+                logger.info("Data file not found. Will be starting with a sample ProductDatabase");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty Inventarie");
-            initialData = new AddressBook();
+            logger.warning("Data file not in the correct format. Will be starting with an empty ProductDatabase");
+            initialData = new ProductDatabase();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty Inventarie");
-            initialData = new AddressBook();
+            logger.warning("Problem while reading from the file. Will be starting with an empty ProductDatabase");
+            initialData = new ProductDatabase();
         }
 
         try {
             distributorBookOptional = storage.readDistributorBook();
             if (!distributorBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample Inventarie");
+                logger.info("Data file not found. Will be starting with a sample DistributorBook");
             }
             initialDist = distributorBookOptional.orElseGet(SampleDataUtil::getSampleDistributorBook);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty Inventarie");
+            logger.warning("Data file not in the correct format. Will be starting with an empty DistributorBook");
             initialDist = new DistributorBook();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty Inventarie");
+            logger.warning("Problem while reading from the file. Will be starting with an empty DistributorBook");
             initialDist = new DistributorBook();
         }
 
@@ -198,7 +206,8 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty Inventarie");
+
+            logger.warning("Problem while reading from the file. Will be starting with an empty ProductDatabase");
             initializedPrefs = new UserPrefs();
         }
 
@@ -218,7 +227,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting Inventarie " + MainApp.VERSION);
+        logger.info("Starting Inventory PRO " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 

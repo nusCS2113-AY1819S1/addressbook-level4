@@ -4,8 +4,12 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+<<<<<<< HEAD
 import seedu.address.model.AddressBook;
 import seedu.address.model.DistributorBook;
+=======
+import seedu.address.model.ProductDatabase;
+>>>>>>> upstream/master
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyDistributorBook;
 import seedu.address.model.distributor.Distributor;
@@ -18,7 +22,7 @@ import seedu.address.model.product.SerialNumber;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code ProductDatabase} with sample data.
  */
 public class SampleDataUtil {
 
@@ -59,7 +63,7 @@ public class SampleDataUtil {
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+        ProductDatabase sampleAb = new ProductDatabase();
 
         for (Product sampleProduct : getSamplePersons()) {
             sampleAb.addPerson(sampleProduct);

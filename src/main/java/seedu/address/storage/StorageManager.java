@@ -22,7 +22,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.login.User;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of ProductDatabase data in local storage.
  */
 public class StorageManager extends ComponentManager implements Storage {
 
@@ -61,7 +61,7 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ ProductDatabase methods ==============================
 
     @Override
     public Path getProductInfoBookFilePath() {

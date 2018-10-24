@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * {@code AddressBook} that keeps track of its own history.
+ * {@code ProductDatabase} that keeps track of its own history.
  */
 public class VersionedUserDatabase extends UserDatabase {
 
@@ -20,7 +20,7 @@ public class VersionedUserDatabase extends UserDatabase {
     }
 
     /**
-     * Saves a copy of the current {@code AddressBook} state at the end of the state list.
+     * Saves a copy of the current {@code ProductDatabase} state at the end of the state list.
      * Undone states are removed from the state list.
      */
     public void commit() {

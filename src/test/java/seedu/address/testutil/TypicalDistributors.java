@@ -9,7 +9,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+<<<<<<< HEAD
 import seedu.address.model.DistributorBook;
+=======
+import seedu.address.model.ProductDatabase;
+>>>>>>> upstream/master
 import seedu.address.model.distributor.Distributor;
 
 /**
@@ -40,10 +44,17 @@ public class TypicalDistributors {
     private TypicalDistributors() {} // prevents instantiation
 
     /**
+<<<<<<< HEAD
      * Returns an {@code DistributorBook} with all the typical distributors.
      */
     public static DistributorBook getTypicalDistributorBook() {
         DistributorBook db = new DistributorBook();
+=======
+     * Returns an {@code ProductDatabase} with all the typical distributors.
+     */
+    public static ProductDatabase getTypicalAddressBook() {
+        ProductDatabase ab = new ProductDatabase();
+>>>>>>> upstream/master
         for (Distributor distributor : getTypicalDistributors()) {
             db.addDistributor(distributor);
         }

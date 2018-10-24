@@ -29,7 +29,7 @@ import seedu.address.model.timeidentifiedclass.transaction.Transaction;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class ProductDatabase implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final SalesHistory salesHistory;
@@ -48,12 +48,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         lastTransaction = null;
     }
 
-    public AddressBook() {}
+    public ProductDatabase() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an ProductDatabase using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public ProductDatabase(ReadOnlyAddressBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -72,8 +72,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// product-level operations
 
     /**
-     * Replaces the contents of the product list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Resets the existing data of this {@code ProductDatabase} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
@@ -197,13 +196,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code ProductDatabase}.
      * {@code key} must exist in the address book.
      */
     public void removePerson(Product key) {
         persons.remove(key);
     }
-
     //// util methods
 
     @Override
@@ -220,8 +218,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                || (other instanceof ProductDatabase // instanceof handles nulls
+                && persons.equals(((ProductDatabase) other).persons));
+
     }
 
     @Override

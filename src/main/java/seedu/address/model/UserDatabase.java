@@ -9,11 +9,10 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.login.Password;
-import seedu.address.model.login.UniqueUsersList;
+import seedu.address.model.login.UniqueUserList;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.AuthenticatedException;
-import seedu.address.model.login.exceptions.AuthenticationFailedException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 
@@ -32,13 +31,13 @@ public class UserDatabase implements ReadOnlyUserDatabase {
     private static final String DB_FILEPATH_PREFIX = "distributorbook-";
     private static final String DB_FILEPATH_POSTFIX = ".xml";
 
-    private UniqueUsersList users;
+    private UniqueUserList users;
 
     private boolean hasLoggedIn;
     private User loggedInUser;
 
     {
-        users = new UniqueUsersList();
+        users = new UniqueUserList();
     }
 
     public UserDatabase() {
@@ -46,20 +45,20 @@ public class UserDatabase implements ReadOnlyUserDatabase {
     }
 
     /**
-     * Creates an UserDatabase using the Users in the {@code toBeLoaded}
+     * Creates an UserDatabase using the Users in the {@code toBeCopied}
      */
-    public UserDatabase(ReadOnlyUserDatabase toBeLoaded) {
+    public UserDatabase(ReadOnlyUserDatabase toBeCopied) {
         this();
-        resetData(toBeLoaded);
+        resetData(toBeCopied);
     }
 
     /**
-     * Creates an UserDatabase using the Users  in the {@code toBeLoaded} and logged-in status
+     * Creates an UserDatabase using the Users  in the {@code toBeCopied} and logged-in status
      */
-    public UserDatabase(ReadOnlyUserDatabase toBeLoaded, boolean loggedin) {
+    public UserDatabase(ReadOnlyUserDatabase toBeCopied, boolean loggedIn) {
         this();
-        resetData(toBeLoaded);
-        hasLoggedIn = loggedin;
+        resetData(toBeCopied);
+        hasLoggedIn = loggedIn;
     }
 
     /**
@@ -97,7 +96,7 @@ public class UserDatabase implements ReadOnlyUserDatabase {
     /**
      * Sets the unique users list to {@code uniqueUserList}
      */
-    public void setUniqueUserList(UniqueUsersList uniqueUserList) {
+    public void setUniqueUserList(UniqueUserList uniqueUserList) {
         users = uniqueUserList;
     }
 
@@ -136,7 +135,7 @@ public class UserDatabase implements ReadOnlyUserDatabase {
      * @return
      * @throws AuthenticatedException
      */
-    public boolean checkCredentials(Username username, Password password) throws AuthenticationFailedException {
+    public boolean checkCredentials(Username username, Password password) throws AuthenticatedException {
         User toCheck = new User(username, password,
                 Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX),
                 Paths.get(DB_FILEPATH_FOLDER, DB_FILEPATH_PREFIX + username + DB_FILEPATH_POSTFIX));
@@ -144,7 +143,7 @@ public class UserDatabase implements ReadOnlyUserDatabase {
         if (!hasLoggedIn) {
             return users.contains(toCheck);
         } else {
-            throw new AuthenticationFailedException();
+            throw new AuthenticatedException();
         }
     }
 
