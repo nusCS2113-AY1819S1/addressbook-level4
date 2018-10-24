@@ -93,7 +93,7 @@ public class ExpenditureList implements Iterable<Expenditure> {
         int index = 0;
         String category;
         int money;
-        System.out.println("Now we are in expenditureList executing getExpenditureRecords.");
+        //System.out.println("Now we are in expenditureList executing getExpenditureRecords.");
         while (index < internalList.size()) {
             category = internalList.get(index).getCategory().categoryName;
             money = Integer.parseInt(internalList.get(index).getMoney().addingMoney);
