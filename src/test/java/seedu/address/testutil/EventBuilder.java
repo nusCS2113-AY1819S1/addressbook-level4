@@ -17,12 +17,12 @@ import seedu.address.model.event.StartTime;
  */
 public class EventBuilder {
 
-    public static final String DEFAULT_NAME = "CS2113 Meeting";
-    public static final String DEFAULT_DESCRIPTION = "Weekly Meetup";
-    public static final String DEFAULT_DATE = "2018-10-10";
+    public static final String DEFAULT_NAME = "Test Event 1";
+    public static final String DEFAULT_DESCRIPTION = "Test Description 1";
+    public static final String DEFAULT_DATE = "2018-09-18";
     public static final String DEFAULT_START_TIME = "12:00";
     public static final String DEFAULT_END_TIME = "16:00";
-    public static final String DEFAULT_LOCATION = "LT15";
+    public static final String DEFAULT_LOCATION = "Test Location 1";
 
     private EventName eventName;
     private Description description;

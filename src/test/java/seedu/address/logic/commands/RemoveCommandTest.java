@@ -12,6 +12,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_EVENT;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.Set;
+
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
@@ -20,8 +22,12 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.event.Attendees;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.EventBuilder;
+
+
 
 public class RemoveCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalEventList(), new UserPrefs());
@@ -38,11 +44,13 @@ public class RemoveCommandTest {
         String expectedMessage = String.format(RemoveCommand.MESSAGE_REMOVE_PERSON_SUCCESS,
                 personChosen.getName(), eventChosen.getEventName());
 
-        Event eventUpdated = eventChosen;
-        eventUpdated.getAttendees().removeName(personName);
+        Attendees attendeesChosen = eventChosen.getAttendees();
+        Attendees attendeesUpdated = attendeesChosen.removeName(personName);
+        Set<String> setUpdated = attendeesUpdated.attendeesSet;
+        Event eventUpdated = new EventBuilder(eventChosen).withAttendee(setUpdated).build();
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getEventList(), new UserPrefs());
-        expectedModel.updateEvent(eventUpdated, eventChosen);
+        expectedModel.updateEvent(eventChosen, eventUpdated);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(removeCommand, model, commandHistory, expectedMessage, expectedModel);
