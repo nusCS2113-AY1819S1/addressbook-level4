@@ -329,8 +329,8 @@ public class DeregisterCommandTest {
         }
 
         @Override
-        public boolean checkCredentials(Username username, Password password) throws AuthenticationFailedException {
-            throw new AuthenticationFailedException();
+        public boolean checkCredentials(Username username, Password password) throws AuthenticatedException {
+            throw new AuthenticatedException();
         }
     }
 

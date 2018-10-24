@@ -77,13 +77,8 @@ public class XmlAdaptedUser {
         }
         final Password modelPassword = new Password(password);
 
-<<<<<<< HEAD
         if (addressBookFilePath == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "AddressBook file path"));
-=======
-        if (addressbookfilepath == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "ProductDatabase file path"));
->>>>>>> e13363b6ad38561386f7be7e6005eb5cd6e60272
         }
 
         if (!User.isValidAddressBookFilePath(Paths.get(addressBookFilePath), this.username)) {
@@ -119,5 +114,4 @@ public class XmlAdaptedUser {
                 && Objects.equals(addressBookFilePath, otherUser.addressBookFilePath);
 
     }
-
 }

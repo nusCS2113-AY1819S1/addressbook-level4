@@ -65,7 +65,7 @@ public class User {
      * Returns true if user of the same name has the correct sales history extension field.
      */
     public static boolean isValidSalesHistoryFilePath(Path test, String username) {
-        return test.equals(Paths.get(AB_FILEPATH_FOLDER + AB_SALESHISTORY_FILEPATH_PREFIX + username
+        return test.equals(Paths.get(AB_FILEPATH_FOLDER, AB_SALESHISTORY_FILEPATH_PREFIX + username
                 + AB_FILEPATH_POSTFIX))
                 && !test.equals("");
     }
