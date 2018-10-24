@@ -35,6 +35,31 @@ public class XmlFileStorage {
             throw new DataConversionException(e);
         }
     }
+
+    /**
+     * Saves the given distributorbook data to the specified file.
+     */
+    public static void saveDistributorDataToFile(Path file, XmlSerializableDistributorBook distributorBook)
+            throws FileNotFoundException {
+        try {
+            XmlUtil.saveDataToFile(file, distributorBook);
+        } catch (JAXBException e) {
+            throw new AssertionError("Unexpected exception " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Returns address book in the file or an empty distributor book
+     */
+    public static XmlSerializableDistributorBook loadDistributorDataFromSaveFile(Path file) throws DataConversionException,
+            FileNotFoundException {
+        try {
+            return XmlUtil.getDataFromFile(file, XmlSerializableDistributorBook.class);
+        } catch (JAXBException e) {
+            throw new DataConversionException(e);
+        }
+    }
+
     /**
      * Saves the given user database data to the specified file.
      */

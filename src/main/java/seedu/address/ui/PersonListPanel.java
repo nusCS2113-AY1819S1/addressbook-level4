@@ -23,7 +23,8 @@ public class PersonListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
     @FXML
-    private ListView<Product> personListView;
+    private ListView<Product> productListView;
+
 
     public PersonListPanel(ObservableList<Product> productList) {
         super(FXML);
@@ -32,13 +33,13 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     private void setConnections(ObservableList<Product> productList) {
-        personListView.setItems(productList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        productListView.setItems(productList);
+        productListView.setCellFactory(listView -> new PersonListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        personListView.getSelectionModel().selectedItemProperty()
+        productListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in product list panel changed to : '" + newValue + "'");
@@ -52,8 +53,8 @@ public class PersonListPanel extends UiPart<Region> {
      */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
-            personListView.scrollTo(index);
-            personListView.getSelectionModel().clearAndSelect(index);
+            productListView.scrollTo(index);
+            productListView.getSelectionModel().clearAndSelect(index);
         });
     }
 
@@ -79,5 +80,4 @@ public class PersonListPanel extends UiPart<Region> {
             }
         }
     }
-
 }

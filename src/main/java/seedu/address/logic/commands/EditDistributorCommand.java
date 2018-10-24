@@ -69,7 +69,7 @@ public class EditDistributorCommand extends Command {
 
         model.updateDistributor(distributorToEdit, editedDistributor);
         model.updateFilteredDistributorList(PREDICATE_SHOW_ALL_DISTRIBUTORS);
-        model.commitAddressBook();
+        model.commitDistributorBook();
         return new CommandResult(String.format(MESSAGE_EDIT_DISTRIBUTOR_SUCCESS, editedDistributor));
     }
 

@@ -50,7 +50,7 @@ public class AddDistributorCommand extends Command {
         }
 
         model.addDistributor(toAdd);
-        model.commitAddressBook();
+        model.commitDistributorBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

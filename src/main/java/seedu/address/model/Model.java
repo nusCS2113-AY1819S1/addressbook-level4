@@ -33,11 +33,14 @@ public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
 
+    /** Clears existing backing model and replaces with the provided new data. */
+    void resetData(ReadOnlyDistributorBook newData);
+
     /** Returns the AddressBook */
     ReadOnlyAddressBook getProductInfoBook();
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getDistributorInfoBook();
+    /** Returns the DistributorBook */
+    ReadOnlyDistributorBook getDistributorInfoBook();
 
     /**
      * Returns true if a distributor with the same identity as {@code distributor} exists in the Inventarie.
@@ -91,7 +94,7 @@ public interface Model {
     void updatePerson(Product target, Product editedProduct);
 
     /** Returns an unmodifiable view of the filtered product list */
-    ObservableList<Product> getFilteredPersonList();
+    ObservableList<Product> getFilteredProductList();
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Distributor> getFilteredDistributorList();
@@ -111,9 +114,19 @@ public interface Model {
     boolean canUndoAddressBook();
 
     /**
+     * Returns true if the model has previous address book states to restore.
+     */
+    boolean canUndoDistributorBook();
+
+    /**
      * Returns true if the model has undone address book states to restore.
      */
     boolean canRedoAddressBook();
+
+    /**
+     * Returns true if the model has undone address book states to restore.
+     */
+    boolean canRedoDistributorBook();
 
     /**
      * Restores the model's address book to its previous state.
@@ -121,14 +134,30 @@ public interface Model {
     void undoAddressBook();
 
     /**
+     * Restores the model's address book to its previous state.
+     */
+    void undoDistributorBook();
+
+
+    /**
      * Restores the model's address book to its previously undone state.
      */
     void redoAddressBook();
 
     /**
+     * Restores the model's address book to its previously undone state.
+     */
+    void redoDistributorBook();
+
+    /**
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+
+    /**
+     * Saves the current address book state for undo/redo.
+     */
+    void commitDistributorBook();
 
     /**
      * Adds a transaction to the active shop day.
@@ -206,5 +235,8 @@ public interface Model {
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+
+    /** Returns the DistributorBook */
+    ReadOnlyDistributorBook getDistributorBook();
 
 }

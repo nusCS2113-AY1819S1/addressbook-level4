@@ -10,30 +10,25 @@ import javax.xml.bind.annotation.XmlRootElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.distributor.Distributor;
 import seedu.address.model.person.Product;
 
 /**
  * An Immutable AddressBook that is serializable to XML format
  */
-@XmlRootElement(name = "addressbook")
+@XmlRootElement(name = "productbook")
 public class XmlSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PRODUCT = "Product list contains duplicate product(s).";
 
     @XmlElement
-    private List<XmlAdaptedDistributor> distributors;
-
-    @XmlElement
-    private List<XmlAdaptedProduct> persons;
+    private List<XmlAdaptedProduct> products;
 
     /**
      * Creates an empty XmlSerializableAddressBook.
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableAddressBook() {
-        distributors = new ArrayList<>();
-        persons = new ArrayList<>();
+        products = new ArrayList<>();
     }
 
     /**
@@ -41,9 +36,7 @@ public class XmlSerializableAddressBook {
      */
     public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
         this();
-        distributors
-                .addAll(src.getDistributorList().stream().map(XmlAdaptedDistributor::new).collect(Collectors.toList()));
-        persons.addAll(src.getPersonList().stream().map(XmlAdaptedProduct::new).collect(Collectors.toList()));
+        products.addAll(src.getPersonList().stream().map(XmlAdaptedProduct::new).collect(Collectors.toList()));
     }
 
     /**
@@ -55,15 +48,7 @@ public class XmlSerializableAddressBook {
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
 
-        for (XmlAdaptedDistributor d : distributors) {
-            Distributor distributor = d.toModelType();
-            if (addressBook.hasDistributor(distributor)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PRODUCT);
-            }
-            addressBook.addDistributor(distributor);
-        }
-
-        for (XmlAdaptedProduct p : persons) {
+        for (XmlAdaptedProduct p : products) {
             Product product = p.toModelType();
             if (addressBook.hasPerson(product)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PRODUCT);
@@ -82,6 +67,6 @@ public class XmlSerializableAddressBook {
         if (!(other instanceof XmlSerializableAddressBook)) {
             return false;
         }
-        return distributors.equals(((XmlSerializableAddressBook) other).distributors);
+        return products.equals(((XmlSerializableAddressBook) other).products);
     }
 }

@@ -20,23 +20,10 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyUserDatabase;
-import seedu.address.model.UserDatabase;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.*;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.model.util.SampleUsersUtil;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonUserPrefsStorage;
-import seedu.address.storage.Storage;
-import seedu.address.storage.StorageManager;
-import seedu.address.storage.UserDatabaseStorage;
-import seedu.address.storage.UserPrefsStorage;
-import seedu.address.storage.XmlAddressBookStorage;
-import seedu.address.storage.XmlUserDatabaseStorage;
+import seedu.address.storage.*;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -59,7 +46,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing Inventarie ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -69,7 +56,9 @@ public class MainApp extends Application {
         userPrefs = initPrefs(userPrefsStorage);
         UserDatabaseStorage usersStorage = new XmlUserDatabaseStorage(userPrefs.getUsersFilePath());
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage, usersStorage);
+        DistributorBookStorage distributorBookStorage =
+                new XmlDistributorBookStorage(userPrefs.getDistributorBookFilePath());
+        storage = new StorageManager(addressBookStorage, distributorBookStorage, userPrefsStorage, usersStorage);
 
         initLogging(config);
 
@@ -92,6 +81,8 @@ public class MainApp extends Application {
         ReadOnlyAddressBook initialData;
         Optional<ReadOnlyUserDatabase> userDatabaseOptional;
         ReadOnlyUserDatabase initialUsers;
+        Optional<ReadOnlyDistributorBook> distributorBookOptional;
+        ReadOnlyDistributorBook initialDist;
         try {
             userDatabaseOptional = storage.readUserDatabase();
             if (!userDatabaseOptional.isPresent()) {
@@ -99,27 +90,41 @@ public class MainApp extends Application {
             }
             initialUsers = userDatabaseOptional.orElseGet(SampleUsersUtil::getSampleUserDatabase);
         } catch (DataConversionException e) {
-            logger.warning("Users file not in the correct format. Will be starting with an empty AddressBook");
+            logger.warning("Users file not in the correct format. Will be starting with an empty Inventarie");
             initialUsers = new UserDatabase();
         } catch (IOException e) {
-            logger.warning("Users while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Users while reading from the file. Will be starting with an empty Inventarie");
             initialUsers = new UserDatabase();
         }
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+                logger.info("Data file not found. Will be starting with a sample Inventarie");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            logger.warning("Data file not in the correct format. Will be starting with an empty Inventarie");
             initialData = new AddressBook();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty Inventarie");
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs, initialUsers, this.storage);
+        try {
+            distributorBookOptional = storage.readDistributorBook();
+            if (!distributorBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample Inventarie");
+            }
+            initialDist = distributorBookOptional.orElseGet(SampleDataUtil::getSampleDistributorBook);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty Inventarie");
+            initialDist = new DistributorBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty Inventarie");
+            initialDist = new DistributorBook();
+        }
+
+        return new ModelManager(initialData, initialDist, userPrefs, initialUsers, this.storage);
     }
 
     private void initLogging(Config config) {
@@ -180,7 +185,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty Inventarie");
             initializedPrefs = new UserPrefs();
         }
 
@@ -200,7 +205,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting Inventarie " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 

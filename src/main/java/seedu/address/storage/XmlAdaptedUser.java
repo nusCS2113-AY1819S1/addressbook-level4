@@ -22,6 +22,8 @@ public class XmlAdaptedUser {
     private String password;
     @XmlElement(required = true)
     private String addressbookfilepath;
+    @XmlElement(required = true)
+    private String distributorbookfilepath;
 
     /**
      * Constructs an XmlAdaptedUser.
@@ -32,10 +34,12 @@ public class XmlAdaptedUser {
     /**
      * Constructs an {@code XmlAdaptedUser} with the given person details.
      */
-    public XmlAdaptedUser(String username, String password, String addressbookfilepath) {
+    public XmlAdaptedUser(String username, String password, String addressbookfilepath, String distributorbookfilepath)
+    {
         this.username = username;
         this.password = password;
         this.addressbookfilepath = addressbookfilepath;
+        this.distributorbookfilepath =  distributorbookfilepath;
     }
 
     /**
@@ -47,6 +51,7 @@ public class XmlAdaptedUser {
         username = source.getUsername().fullUsername;
         password = source.getPassword().fullPassword;
         addressbookfilepath = source.getAddressBookFilePath().toString();
+        distributorbookfilepath = source.getDistributorBookFilePath().toString();
     }
 
     /**
@@ -77,13 +82,18 @@ public class XmlAdaptedUser {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "AddressBook file path"));
         }
 
+        if (distributorbookfilepath == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "DistributorBook file path"));
+        }
+
         if (!User.isValidAddressBookFilePath(Paths.get(addressbookfilepath), this.username)) {
             throw new IllegalValueException(User.MESSAGE_AB_FILEPATH_CONSTRAINTS);
         }
 
         final Path modelAddressBookFilePath = Paths.get(addressbookfilepath);
+        final Path modelDistributorBookFilePath = Paths.get(distributorbookfilepath);
 
-        return new User(modelUsername, modelPassword, modelAddressBookFilePath);
+        return new User(modelUsername, modelPassword, modelAddressBookFilePath, modelDistributorBookFilePath);
     }
 
     @Override

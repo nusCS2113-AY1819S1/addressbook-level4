@@ -19,12 +19,6 @@ public interface AddressBookStorage {
     Path getProductInfoBookFilePath();
 
     /**
-     * Returns the file path of the data file.
-     */
-
-    Path getDistributorInfoFilePath();
-
-    /**
      * Returns AddressBook data as a {@link ReadOnlyAddressBook}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.

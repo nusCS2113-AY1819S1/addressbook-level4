@@ -14,6 +14,7 @@ import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalDistributors.getTypicalDistributorBook;
 
 import org.junit.Test;
 
@@ -21,12 +22,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.TestStorage;
-import seedu.address.model.UserDatabase;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.*;
 import seedu.address.model.person.Product;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -36,7 +32,7 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalDistributorBook(), new UserPrefs(),
             new UserDatabase(), new TestStorage());
     private CommandHistory commandHistory = new CommandHistory();
 
@@ -47,9 +43,10 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedProduct);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
-                new UserDatabase(), new TestStorage());
-        expectedModel.updatePerson(model.getFilteredPersonList().get(0), editedProduct);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new DistributorBook(model.getDistributorBook()),
+                new UserPrefs(), new UserDatabase(), new TestStorage());
+        expectedModel.updatePerson(model.getFilteredProductList().get(0), editedProduct);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -57,8 +54,8 @@ public class EditCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        Product lastProduct = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredProductList().size());
+        Product lastProduct = model.getFilteredProductList().get(indexLastPerson.getZeroBased());
 
         PersonBuilder personInList = new PersonBuilder(lastProduct);
         Product editedProduct = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
@@ -70,8 +67,9 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedProduct);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
-                new UserDatabase(), new TestStorage());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new DistributorBook(model.getDistributorBook()),
+                new UserPrefs(), new UserDatabase(), new TestStorage());
         expectedModel.updatePerson(lastProduct, editedProduct);
         expectedModel.commitAddressBook();
 
@@ -81,12 +79,13 @@ public class EditCommandTest {
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
-        Product editedProduct = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Product editedProduct = model.getFilteredProductList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedProduct);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
-                new UserDatabase(), new TestStorage());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new DistributorBook(model.getDistributorBook()),
+                new UserPrefs(), new UserDatabase(), new TestStorage());
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -96,7 +95,7 @@ public class EditCommandTest {
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Product productInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Product productInFilteredList = model.getFilteredProductList().get(INDEX_FIRST_PERSON.getZeroBased());
         Product editedProduct = new PersonBuilder(productInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
@@ -104,8 +103,9 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedProduct);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new DistributorBook(model.getDistributorBook()),
                 new UserPrefs(), new UserDatabase(), new TestStorage());
-        expectedModel.updatePerson(model.getFilteredPersonList().get(0), editedProduct);
+        expectedModel.updatePerson(model.getFilteredProductList().get(0), editedProduct);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -113,7 +113,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
-        Product firstProduct = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Product firstProduct = model.getFilteredProductList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstProduct).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
 
@@ -134,7 +134,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredProductList().size() + 1);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
@@ -161,11 +161,12 @@ public class EditCommandTest {
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Product editedProduct = new PersonBuilder().build();
-        Product productToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Product productToEdit = model.getFilteredProductList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedProduct).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
-                new UserDatabase(), new TestStorage());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new DistributorBook(model.getDistributorBook()),
+                new UserPrefs(), new UserDatabase(), new TestStorage());
         expectedModel.updatePerson(productToEdit, editedProduct);
         expectedModel.commitAddressBook();
 
@@ -183,7 +184,7 @@ public class EditCommandTest {
 
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredProductList().size() + 1);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
@@ -207,11 +208,12 @@ public class EditCommandTest {
         Product editedProduct = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedProduct).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
-                new UserDatabase(), new TestStorage());
+        Model expectedModel = new ModelManager (new AddressBook(model.getAddressBook()),
+                new DistributorBook(model.getDistributorBook()),
+                new UserPrefs(), new UserDatabase(), new TestStorage());
 
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
-        Product productToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Product productToEdit = model.getFilteredProductList().get(INDEX_FIRST_PERSON.getZeroBased());
         expectedModel.updatePerson(productToEdit, editedProduct);
         expectedModel.commitAddressBook();
 
@@ -222,7 +224,7 @@ public class EditCommandTest {
         expectedModel.undoAddressBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        assertNotEquals(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), productToEdit);
+        assertNotEquals(model.getFilteredProductList().get(INDEX_FIRST_PERSON.getZeroBased()), productToEdit);
         // redo -> edits same second product in unfiltered product list
         expectedModel.redoAddressBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);

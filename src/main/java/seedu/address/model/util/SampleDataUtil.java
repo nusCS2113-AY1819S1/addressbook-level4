@@ -5,7 +5,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.DistributorBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyDistributorBook;
 import seedu.address.model.distributor.Distributor;
 import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.distributor.DistributorPhone;
@@ -59,13 +61,20 @@ public class SampleDataUtil {
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
 
-        for (Distributor sampleDistributor : getSampleDistributors()) {
-            sampleAb.addDistributor(sampleDistributor);
+        for (Product sampleProduct : getSamplePersons()) {
+            sampleAb.addPerson(sampleProduct);
         }
-        //    for (Product sampleProduct : getSamplePersons()) {
-        //        sampleAb.addPerson(sampleProduct);
-        //    }
         return sampleAb;
+    }
+
+    public static ReadOnlyDistributorBook getSampleDistributorBook() {
+        DistributorBook sampleDb = new DistributorBook();
+
+        for (Distributor sampleDistributor : getSampleDistributors()) {
+            sampleDb.addDistributor(sampleDistributor);
+        }
+
+        return sampleDb;
     }
 
     /**

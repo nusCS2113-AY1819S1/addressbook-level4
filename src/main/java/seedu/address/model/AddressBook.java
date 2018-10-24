@@ -11,9 +11,6 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.distributor.Distributor;
-import seedu.address.model.distributor.UniqueDistributorList;
-
 import seedu.address.model.person.Product;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.saleshistory.SalesHistory;
@@ -49,19 +46,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         lastTransaction = null;
     }
 
-    private final UniqueDistributorList distributors;
-
-    /*
-     * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
-     */
-    {
-        distributors = new UniqueDistributorList();
-    }
-
     public AddressBook() {}
 
     /**
@@ -83,28 +67,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(products);
     }
 
-
-    /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
-     */
-    public void setDistributors(List<Distributor> distributors) {
-        this.distributors.setDistributors(distributors);
-    }
-
-
-    /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
-    */
-    public void resetData(ReadOnlyAddressBook newData) {
-        requireNonNull(newData);
-
-        setPersons(newData.getPersonList());
-        setDistributors(newData.getDistributorList());
-    }
-
     //// product-level operations
 
+    /**
+     * Resets the existing data of this {@code DistributorBook} with {@code newData}.
+     */
+    public void resetData(ReadOnlyAddressBook newData) {
+        requireNonNull(newData);
+        setPersons(newData.getPersonList());
+    }
 
     /**
      * Returns true if a product with the same identity as {@code product} exists in the address book.
@@ -114,16 +85,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.contains(product);
     }
 
-
-    /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
-     */
-    public boolean hasDistributor(Distributor distributor) {
-        requireNonNull(distributor);
-        return distributors.contains(distributor);
-    }
-
-
     /**
      * Adds a product to the address book.
      * The product must not already exist in the address book.
@@ -131,17 +92,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addPerson(Product p) {
         persons.add(p);
     }
-
-
-    /**
-     * Adds a distributor to the address book.
-     * The distributor must not already exist in the address book.
-     */
-    public void addDistributor(Distributor d) {
-        distributors.add(d);
-    }
-
-
 
     /**
      * Replaces the given product {@code target} in the list with {@code editedProduct}.
@@ -152,20 +102,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedProduct);
         persons.setPerson(target, editedProduct);
     }
-
-
-    /**
-     * Replaces the given distrbutor {@code target} in the list with {@code editedDistributor}.
-     * {@code target} must exist in the address book.
-     * The distributor identity of {@code editedDistributor} must not be the same as another existing distributor
-     * in the Inventarie.
-     */
-    public void updateDistributor(Distributor target, Distributor editedDistributor) {
-        requireNonNull(editedDistributor);
-
-        distributors.setDistributor(target, editedDistributor);
-    }
-
 
     /**
      * Adds a transaction to the active shopday.
@@ -265,20 +201,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
-
-    /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
-     */
-    public void removeDistributor(Distributor key) {
-        distributors.remove(key);
-    }
-
     //// util methods
 
     @Override
     public String toString() {
-        return distributors.asUnmodifiableObservableList().size() + " distributors";
+        return persons.asUnmodifiableObservableList().size() + " distributors";
         // TODO: refine later
     }
 
@@ -288,19 +215,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Distributor> getDistributorList() {
-        return distributors.asUnmodifiableObservableList();
-    }
-
-    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && distributors.equals(((AddressBook) other).distributors));
+                && persons.equals(((AddressBook) other).persons));
     }
 
     @Override
     public int hashCode() {
-        return distributors.hashCode();
+        return persons.hashCode();
     }
 }
