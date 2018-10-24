@@ -12,15 +12,13 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 /**
- * A class to access UserAccount stored in the hard disk as a JSON file
+ * A class to access UserSession stored in the hard disk as a JSON file
  */
 public class JsonUserStorage implements UserStorage {
 
-    private Path folderPath;
     private String filePathString;
 
-    public JsonUserStorage(Path folderPath, Path filePath) throws IOException {
-        this.folderPath = folderPath;
+    public JsonUserStorage(Path filePath) throws IOException {
         filePathString = "./" + filePath.toString();
 
         if (Files.notExists(filePath)) {
@@ -55,10 +53,6 @@ public class JsonUserStorage implements UserStorage {
      * Creates a user account JSON file.
      */
     private void createUserFile() throws IOException {
-        if (Files.notExists(folderPath)) {
-            Files.createDirectory(folderPath);
-        }
-
         Gson gson = new Gson();
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("admin", "root");

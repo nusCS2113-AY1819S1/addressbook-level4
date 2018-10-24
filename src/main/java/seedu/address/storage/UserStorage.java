@@ -3,9 +3,10 @@ package seedu.address.storage;
 import java.io.IOException;
 
 import com.google.gson.JsonObject;
+import seedu.address.model.UserSession;
 
 /**
- * Represents a storage for {@link seedu.address.model.UserAccount}.
+ * Represents a storage for {@link UserSession}.
  */
 public interface UserStorage {
 

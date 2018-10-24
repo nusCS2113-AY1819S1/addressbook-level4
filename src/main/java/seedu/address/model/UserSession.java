@@ -15,16 +15,15 @@ import seedu.address.storage.JsonUserStorage;
 /**
  * Represents user account authentication
  */
-public class UserAccount {
+public class UserSession {
 
     private JsonUserStorage userStorage;
     private User user;
     private boolean loginStatus;
     private boolean adminStatus;
 
-    public UserAccount() {
-        final Path userFolderPath = Paths.get("data");
-        final Path userFilePath = Paths.get("data", "users.json");
+    public UserSession() {
+        final Path userFilePath = Paths.get("users.json");
         final Username username = new Username("stub");
         final Password password = new Password("stub");
         user = new User(username, password);
@@ -32,7 +31,7 @@ public class UserAccount {
         adminStatus = false;
 
         try {
-            userStorage = new JsonUserStorage(userFolderPath, userFilePath);
+            userStorage = new JsonUserStorage(userFilePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
