@@ -125,7 +125,7 @@ public class AddTaskCommandTest {
         }
 
         @Override
-        public void completeTask(Task target) {
+        public void completeTask(Task target, int hours) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -171,6 +171,11 @@ public class AddTaskCommandTest {
 
         @Override
         public void commitTaskBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void trackProductivity() {
             throw new AssertionError("This method should not be called.");
         }
     }

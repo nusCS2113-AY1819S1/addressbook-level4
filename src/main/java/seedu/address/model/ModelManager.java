@@ -24,6 +24,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedTaskBook versionedTaskBook;
     private final FilteredList<Task> filteredTasks;
+    private Predicate<Task> predicateShowCompletedTasks = task -> task.isCompleted();
 
     /**
      * Initializes a ModelManager with the given taskBook and userPrefs.
@@ -79,8 +80,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void completeTask(Task target) {
-        versionedTaskBook.completeTask(target);
+    public void completeTask(Task target, int hours) {
+        versionedTaskBook.completeTask(target, hours);
         indicateTaskBookChanged();
     }
 
@@ -185,4 +186,9 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean invalidDeadline(Deadline deadline);
     */
+
+    public void trackProductivity() {
+        updateFilteredTaskList(predicateShowCompletedTasks);
+        indicateTaskBookChanged();
+    }
 }

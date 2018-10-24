@@ -24,6 +24,10 @@ public class XmlAdaptedTask {
     private String priority;
     @XmlElement(required = true)
     private String expectedNumOfHours;
+    @XmlElement(required = true)
+    private String completedNumOfHours;
+    @XmlElement(required = true)
+    private boolean isCompleted;
 
     /**
      * Constructs an XmlAdaptedTask.
@@ -34,12 +38,14 @@ public class XmlAdaptedTask {
     /**
      * Constructs an {@code XmlAdaptedTask} with the given task details.
      */
-    public XmlAdaptedTask(String deadline, String title, String description, String priority, String expectedNumOfHours) {
+    public XmlAdaptedTask(String deadline, String title, String description, String priority, String expectedNumOfHours,
+                          String completedNumOfHours, boolean isCompleted) {
         this.deadline = deadline;
         this.title = title;
         this.description = description;
         this.priority = priority;
         this.expectedNumOfHours = expectedNumOfHours;
+
     }
 
     /**
@@ -53,6 +59,8 @@ public class XmlAdaptedTask {
         description = source.getDescription();
         priority = source.getPriorityLevel().toString();
         expectedNumOfHours = Integer.toString(source.getExpectedNumOfHours());
+        completedNumOfHours = Integer.toString(source.getCompletedNumOfHours());
+        isCompleted = source.isCompleted();
     }
 
     /**
@@ -92,11 +100,20 @@ public class XmlAdaptedTask {
 
         if (expectedNumOfHours == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    "Expected number of expectedNumOfHours"));
+                    "Number of hours expected to complete"));
         }
         final int modelExpectedNumOfHours = Integer.parseInt(expectedNumOfHours);
 
-        return new Task(modelDeadline, modelTitle, modelDescription, modelPriority, modelExpectedNumOfHours);
+        if (completedNumOfHours == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    "Number of hours taken to complete"));
+        }
+        final int modelCompletedNumOfHours = Integer.parseInt(expectedNumOfHours);
+
+        final boolean modelIsCompleted = isCompleted;
+
+        return new Task(modelDeadline, modelTitle, modelDescription, modelPriority, modelExpectedNumOfHours,
+                modelCompletedNumOfHours, modelIsCompleted);
     }
 
     @Override

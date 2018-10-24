@@ -12,8 +12,10 @@ public class Task {
     private final String title;
     private final String description;
     private final PriorityLevel priorityLevel;
-    private boolean isCompleted;
-    private int expectedNumOfHours;
+    private boolean isCompleted = false;
+    //TODO: change to double type for hours
+    private final int expectedNumOfHours;
+    private int completedNumOfHours;
 
     public Task(String deadline, String title, String description, PriorityLevel priorityLevel,
                 int expectedNumOfHours) {
@@ -26,12 +28,13 @@ public class Task {
     }
 
     public Task(String deadline, String title, String description, PriorityLevel priorityLevel,
-                int expectedNumOfHours, boolean isCompleted) {
+                int expectedNumOfHours, int completedNumOfHours, boolean isCompleted) {
         this.deadline = deadline;
         this.title = title;
         this.description = description;
         this.priorityLevel = priorityLevel;
         this.expectedNumOfHours = expectedNumOfHours;
+        this.completedNumOfHours = completedNumOfHours;
         this.isCompleted = isCompleted;
     }
 
@@ -62,6 +65,9 @@ public class Task {
     public int getExpectedNumOfHours() {
         return expectedNumOfHours;
     }
+    public int getCompletedNumOfHours() {
+        return completedNumOfHours;
+    }
     public boolean isCompleted() {
         return isCompleted;
     }
@@ -70,8 +76,9 @@ public class Task {
      * Marks the task as completed by
      * setting @code {isCompleted} to true
      */
-    public Task completed() {
+    public Task completed(int hours) {
         this.isCompleted = true;
+        this.completedNumOfHours = hours;
         return this;
     }
 

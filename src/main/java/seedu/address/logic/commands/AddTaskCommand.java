@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ACTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -22,12 +22,12 @@ public class AddTaskCommand extends Command implements CommandParser {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task book. "
             + "Parameters: "
-            + PREFIX_ACTION + "ACTION "
+            + PREFIX_TITLE + "TITLE "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_PRIORITY + "PRIORITY "
             + PREFIX_HOURS + "HOURS \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_ACTION + "Complete code refactoring "
+            + PREFIX_TITLE + "Complete code refactoring "
             + PREFIX_DESCRIPTION + "refer to notes "
             + PREFIX_PRIORITY + "high "
             + PREFIX_HOURS + "2";

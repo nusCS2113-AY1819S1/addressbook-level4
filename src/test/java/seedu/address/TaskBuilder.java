@@ -14,6 +14,7 @@ public class TaskBuilder {
     public static final String DEFAULT_PRIORITY = "high";
     public static final boolean DEFAULT_COMPLETE = false;
     public static final String DEFAULT_EXPECTED_NUM_OF_HOURS = "1";
+    public static final String DEFAULT_COMPLETED_NUM_OF_HOURS = "0";
 
     private String deadline;
     private String title;
@@ -21,6 +22,7 @@ public class TaskBuilder {
     private PriorityLevel priority;
     private boolean isCompleted;
     private int expectedNumOfHours;
+    private int completedNumOfHours;
 
     public TaskBuilder() {
         this.deadline = DEFAULT_DEADLINE;
@@ -28,6 +30,7 @@ public class TaskBuilder {
         this.description = DEFAULT_DESCRIPTION;
         this.priority = new PriorityLevel(DEFAULT_PRIORITY);
         this.isCompleted = DEFAULT_COMPLETE;
+        this.completedNumOfHours = Integer.parseInt(DEFAULT_COMPLETED_NUM_OF_HOURS);
         this.expectedNumOfHours = Integer.parseInt(DEFAULT_EXPECTED_NUM_OF_HOURS);
     }
 
@@ -91,6 +94,6 @@ public class TaskBuilder {
     }
 
     public Task build() {
-        return new Task(deadline, title, description, priority, expectedNumOfHours, isCompleted);
+        return new Task(deadline, title, description, priority, expectedNumOfHours, completedNumOfHours, isCompleted);
     }
 }

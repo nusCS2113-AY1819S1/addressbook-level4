@@ -36,7 +36,7 @@ public interface Model {
      * Completes the given task.
      * The task must exist in the task book.
      */
-    void completeTask(Task target);
+    void completeTask(Task target, int hours);
 
     /**
      * Adds the given task.
@@ -96,4 +96,10 @@ public interface Model {
      * Saves the current task book state for undo/redo.
      */
     void commitTaskBook();
+
+    /**
+     * Updates task list to
+     * contain only completed tasks
+     */
+    public void trackProductivity();
 }

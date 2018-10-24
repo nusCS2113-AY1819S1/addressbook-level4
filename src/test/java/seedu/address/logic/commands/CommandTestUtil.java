@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ACTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +36,9 @@ public class CommandTestUtil {
     public static final String DEADLINE_DESC_1ST_JAN = " " + PREFIX_DEADLINE + VALID_DEADLINE_1ST_JAN;
     public static final String DEADLINE_DESC_31ST_MARCH = " " + PREFIX_DEADLINE + VALID_DEADLINE_31ST_MARCH;
     public static final String DEADLINE_DESC_12TH_MAY = " " + PREFIX_DEADLINE + VALID_DEADLINE_12TH_MAY;
-    public static final String TITLE_DESC_1 = " " + PREFIX_ACTION + VALID_TITLE_1;
-    public static final String TITLE_DESC_2 = " " + PREFIX_ACTION + VALID_TITLE_2;
-    public static final String TITLE_DESC_3 = " " + PREFIX_ACTION + VALID_TITLE_3;
+    public static final String TITLE_DESC_1 = " " + PREFIX_TITLE + VALID_TITLE_1;
+    public static final String TITLE_DESC_2 = " " + PREFIX_TITLE + VALID_TITLE_2;
+    public static final String TITLE_DESC_3 = " " + PREFIX_TITLE + VALID_TITLE_3;
     public static final String DESCRIPTION_DESC_1 = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_1;
     public static final String DESCRIPTION_DESC_2 = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_2;
     public static final String DESCRIPTION_DESC_3 = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_3;

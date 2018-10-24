@@ -44,17 +44,26 @@ public class CompleteTaskCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
-        CompleteTaskCommand completeTaskCommand = new CompleteTaskCommand(outOfBoundIndex);
+        CompleteTaskCommand completeTaskCommand = new CompleteTaskCommand(outOfBoundIndex, 1);
 
         assertCommandFailure(completeTaskCommand, model, commandHistory, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_taskCompletedAlready_throwsCommandException() {
-        CompleteTaskCommand completeTaskCommand = new CompleteTaskCommand(INDEX_FIRST_TASK);
+        CompleteTaskCommand completeTaskCommand = new CompleteTaskCommand(INDEX_FIRST_TASK, 1);
         Task taskToComplete = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
         Task completedTask = new TaskBuilder(taskToComplete).withCompleted(true).build();
         model.updateTask(taskToComplete, completedTask);
         assertCommandFailure(completeTaskCommand, model, commandHistory, Messages.MESSAGE_COMPLETED_TASK);
     }
+
+    /*@Test
+    public void execute_taskCompleted_zeroHours_throwsCommandException() {
+        CompleteTaskCommand completeTaskCommand = new CompleteTaskCommand(INDEX_FIRST_TASK, 0);
+        Task taskToComplete = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
+        Task completedTask = new TaskBuilder(taskToComplete).withCompleted(true).build();
+        model.updateTask(taskToComplete, completedTask);
+        assertCommandFailure(completeTaskCommand, model, commandHistory, Messages.MESSAGE_COMPLETED_TASK);
+    }*/
 }

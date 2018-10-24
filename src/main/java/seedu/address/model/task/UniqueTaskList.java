@@ -96,13 +96,13 @@ public class UniqueTaskList implements Iterable<Task> {
      * Complete a task in the list.
      * The task must exist in the list.
      */
-    public void complete(Task toComplete) {
+    public void complete(Task toComplete, int hours) {
         requireNonNull(toComplete);
         int index = internalList.indexOf(toComplete);
         if (index == -1) {
             throw new TaskNotFoundException();
         }
-        Task completedTask = toComplete.completed();
+        Task completedTask = toComplete.completed(hours);
         internalList.set(index, completedTask);
     }
 
