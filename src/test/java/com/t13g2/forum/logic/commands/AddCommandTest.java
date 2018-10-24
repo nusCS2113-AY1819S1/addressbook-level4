@@ -203,6 +203,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean deleteModule(String module) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void adminUpdatePassword(User userToUpdate) {
             throw new AssertionError("This method should not be called.");
         }

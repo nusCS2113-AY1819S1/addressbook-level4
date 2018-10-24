@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import com.t13g2.forum.logic.commands.exceptions.DuplicateModuleException;
+import com.t13g2.forum.logic.commands.exceptions.InvalidModuleException;
 import com.t13g2.forum.model.forum.Announcement;
 import com.t13g2.forum.model.forum.Module;
 import com.t13g2.forum.model.forum.User;
@@ -227,15 +228,42 @@ public class ForumBook implements ReadOnlyForumBook {
      * creates a module.
      */
     public boolean createModule(Module module) {
+        boolean exist = false;
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
-            if (unitOfWork.getModuleRepository().getModuleByCode(module.getModuleCode()) == null) {
+            unitOfWork.getModuleRepository().getModuleByCode(module.getModuleCode());
+            exist = true;
+            throw new DuplicateModuleException("");
+        } catch (DuplicateModuleException e) {
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (!exist) {
+            try (UnitOfWork unitOfWork = new UnitOfWork()) {
                 module.setCreatedByUserId(Context.getInstance().getCurrentUser().getId());
                 unitOfWork.getModuleRepository().addModule(module);
                 unitOfWork.commit();
-            } else {
-                throw new DuplicateModuleException("");
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (DuplicateModuleException e) {
+        }
+        return true;
+    }
+
+    /**
+     * deletes a module.
+     */
+    public boolean deleteModule(String moduleCode) {
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            Module moduleToDelete = unitOfWork.getModuleRepository().getModuleByCode(moduleCode);
+            if (moduleToDelete != null) {
+                unitOfWork.getModuleRepository().removeModule(moduleToDelete);
+                unitOfWork.commit();
+            } else {
+                throw new InvalidModuleException("");
+            }
+        } catch (InvalidModuleException e) {
             return false;
         } catch (Exception e) {
             e.printStackTrace();

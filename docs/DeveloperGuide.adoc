@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= Forum Book - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -12,9 +12,9 @@ ifdef::env-github[]
 :note-caption: :information_source:
 :warning-caption: :warning:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4/tree/master
+:repoURL: https://github.com/CS2113-AY1819S1-T13-2/main/
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team CS2113 T13-2`      Since: `Aug 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -411,6 +411,11 @@ The admin management is facilitated by various commands. It extends `ForumBook` 
 
 * `SetAdminCommand`: Sets a user as admin or reverts an admin to user.
 
+* `CreateModuleCommand`: Creates a module by admin.
+
+* `AdminUpdatePasswordCommand`: Updates a certain user's password by admin.
+
+* `DeleteUserCommand`: Deletes a certain user by admin.
 
 Given below is an example usage scenario and how the admin management behaves at each step.
 
@@ -427,9 +432,25 @@ Step 3. The admin executes `block uName/john` to block john from creating new th
 
 image::SDBlockUserFromCreating.png[width="800"]
 
-Step 4. The admin executes `setAdmin uName/john set/true` to set a certain user as admin or to revert an admin to user. The `setAdmin` calls the `User.setAdmin(true)` and then `UnitOfWork.commit()`, cuasing another modified forum book state to be saved into `ForumBookStorage`.
+Step 4. The admin executes `setAdmin uName/john set/true` to set a certain user as admin or to revert an admin to user. The `setAdmin` calls the `User.setAdmin(true)` and then `UnitOfWork.commit()`, causing another modified forum book state to be saved into `ForumBookStorage`.
 
 image::SDSetAdmin.png[width="800"]
+
+Step 5. The admin executes `createModule mCode/CS2113 mTitle/Software Engineering and OOP` to create the specific module. The `createModule` calls the `UnitOfWork.getModuleRepository().addModule(module)` and then `UnitOfWork.commit()`, causing another modified forum book state to be save into `ForumBookStorage`.
+
+image::SDCreateModule.png[width="800"]
+
+Step 6. The admin executes `deleteModule mCode/CS2113` to delete specific module. The `deleteModule` calls the `UnitOfWork.getModuleRepository().removeModule(module);` and then `UnitOfWork.commit()`, causing another modified forum book state to be save into `ForumBookStorage`.
+
+image::SDDeleteModule.png[width="800"]
+
+Step 7. The admin executes `updatePass uName/john uPass/098` to update the user john's password. The `updatePass` calls the `UnitOfWork.getUserRepository().updateUser(user)` and then `UnitOfWork.commit()`, causing another modified forum book state to be save into `ForumBookStorage`.
+
+image::SDUpdatePass.png[width="800"]
+
+Step 8. The admin executes `deleteUser uName/john` to delete the user john. The `deleteUser` calls the ` UnitOfWork.getUserRepository().deleteUser(userToDelete)` and then `UnitOfWork.commit()`, causing another modified forum book state to be save into `ForumBookStorage`.
+
+image::SDDeleteUser.png[width="800"]
 
 [NOTE]
 If the syntax of a command is wrong, the program will prompt the user to try again and show a suggested command format.

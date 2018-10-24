@@ -117,14 +117,19 @@ public interface Model {
     boolean blockUser(User user);
 
     /**
-     * set or revert the user as admin.
+     * sets or revert the user as admin.
      */
     void setAdmin(User user);
 
     /**
-     * create module by admin.
+     * creates module by admin.
      */
     boolean createModule(Module module);
+
+    /**
+     * deletes module by admin.
+     */
+    boolean deleteModule(String moduleCode);
 
     /**
      * admin updates password.
