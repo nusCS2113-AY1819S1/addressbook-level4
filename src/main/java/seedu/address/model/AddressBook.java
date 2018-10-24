@@ -18,8 +18,8 @@ import seedu.address.model.product.Product;
 import seedu.address.model.product.UniquePersonList;
 import seedu.address.model.saleshistory.SalesHistory;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
+import seedu.address.model.timeidentifiedclass.shopday.BusinessDay;
 import seedu.address.model.timeidentifiedclass.shopday.Reminder;
-import seedu.address.model.timeidentifiedclass.shopday.ShopDay;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateReminderException;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
@@ -189,7 +189,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public String getDaysHistory(String day) {
-        ShopDay requiredDay;
+        BusinessDay requiredDay;
         try {
             requiredDay = salesHistory.getDaysHistory(day);
         } catch (NoSuchElementException e) {
@@ -199,7 +199,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public String getActiveDayHistory() {
-        ShopDay activeDay = salesHistory.getActiveDay();
+        BusinessDay activeDay = salesHistory.getActiveDay();
         return activeDay.getDaysTransactions();
     }
 

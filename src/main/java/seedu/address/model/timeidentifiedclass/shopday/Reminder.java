@@ -1,15 +1,17 @@
 package seedu.address.model.timeidentifiedclass.shopday;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import seedu.address.model.timeidentifiedclass.TimeIdentifiedClass;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
-import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
 /**
  * This represents a reminder that is set for a given day and time.
  */
 public class Reminder extends TimeIdentifiedClass {
 
-    public static final String REMINDER_TIME_CONSTRAINTS = "Reminder times must be in yyyy/MM/dd HH:mm:ss format.";
+    public static final String REMINDER_TIME_CONSTRAINTS = "Reminder times must be in dd/MM/yyyy HH:mm:ss format.";
 
     private String time;
     private String reminderMessage;
@@ -20,14 +22,14 @@ public class Reminder extends TimeIdentifiedClass {
      * @param reminderMessage
      * @throws InvalidTimeFormatException
      */
-
     public Reminder(String time, String reminderMessage) throws InvalidTimeFormatException {
-
-        // Reminders are set with the same time format as Transactions.
-        if (!Transaction.isValidTransactionTime(time)) {
+        requireAllNonNull(time, reminderMessage);
+        time = time.trim();
+        // Reminders are set with in date and time format.
+        if (!super.isValidDateAndTime(time)) {
             throw new InvalidTimeFormatException();
         }
-        this.time = time.trim();
+        this.time = time;
         this.reminderMessage = reminderMessage.trim();
     }
 
@@ -44,9 +46,10 @@ public class Reminder extends TimeIdentifiedClass {
      * @param time
      * @throws InvalidTimeFormatException
      */
-
     public void changeTime(String time) throws InvalidTimeFormatException {
-        if (!Transaction.isValidTransactionTime(time)) {
+        requireNonNull(time);
+        time = time.trim();
+        if (!super.isValidDateAndTime(time)) {
             throw new InvalidTimeFormatException();
         }
         this.time = time;

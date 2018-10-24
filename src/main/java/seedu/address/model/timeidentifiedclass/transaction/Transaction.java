@@ -1,7 +1,8 @@
 package seedu.address.model.timeidentifiedclass.transaction;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -11,20 +12,19 @@ import seedu.address.model.timeidentifiedclass.TimeIdentifiedClass;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
 import seedu.address.model.timeidentifiedclass.transaction.exceptions.ClosedTransactionException;
 
+
 /**
  * A basic Transaction class, where the Product is taken to be a string. This will be updated with actual Product
  * objects in a later version.
  */
 public class Transaction extends TimeIdentifiedClass {
-    private static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-    private static LocalDateTime time;
 
     private TreeMap<String, Integer> transactionRecord;
     private String transactionTime;
     private boolean isActiveTransaction;
 
     public Transaction() {
-        this.transactionTime = timeFormatter.format(time.now());
+        this.transactionTime = super.getCurrentDateAndTime();
         this.transactionRecord = new TreeMap<>();
         this.openTransaction();
     }
@@ -37,6 +37,9 @@ public class Transaction extends TimeIdentifiedClass {
      */
     public Transaction(String transactionTime, TreeMap<String, Integer> transactionRecord)
             throws InvalidTimeFormatException {
+
+        requireAllNonNull(transactionTime, transactionRecord);
+
         if (!isValidTransactionTime(transactionTime)) {
             throw new InvalidTimeFormatException();
         }
@@ -48,7 +51,13 @@ public class Transaction extends TimeIdentifiedClass {
         return transactionTime;
     }
 
+    /**
+     * This method adds a product to the transaction.
+     * @param itemName
+     * @throws ClosedTransactionException
+     */
     public void addProduct(String itemName) throws ClosedTransactionException {
+        requireNonNull(itemName);
         this.addProduct(itemName, 1);
     }
 
@@ -59,6 +68,7 @@ public class Transaction extends TimeIdentifiedClass {
      * @throws ClosedTransactionException
      */
     public void addProduct(String itemName, int quantity) throws ClosedTransactionException {
+        requireAllNonNull(itemName, quantity);
         if (!isActiveTransaction) {
             throw new ClosedTransactionException();
         } else if (transactionRecord.containsKey(itemName)) {
@@ -100,25 +110,8 @@ public class Transaction extends TimeIdentifiedClass {
      * @param transactionTime
      * @return true only if valid.
      */
-
     public static boolean isValidTransactionTime(String transactionTime) {
-        String[] times = transactionTime.split("[/ \\s+ :]");
-
-        for (int i = 0; i < 6; i++) {
-            times[i].trim();
-        }
-
-        // checks on the different components of the transaction time.
-
-        if (!isValidYear(times[0])
-                || !isValidMonth(times[1])
-                || !isValidDay(times[2])
-                || !isValidHour(times[3])
-                || !isValidMinute(times[4])
-                || !isValidSecond(times[5])) {
-            return false;
-        }
-
-        return true;
+        transactionTime = transactionTime.trim();
+        return isValidDateAndTime(transactionTime);
     }
 }

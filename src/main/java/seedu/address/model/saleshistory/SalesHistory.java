@@ -5,7 +5,7 @@ import java.util.TreeMap;
 
 import seedu.address.model.saleshistory.exceptions.DuplicateDayException;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
-import seedu.address.model.timeidentifiedclass.shopday.ShopDay;
+import seedu.address.model.timeidentifiedclass.shopday.BusinessDay;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
@@ -14,8 +14,8 @@ import seedu.address.model.timeidentifiedclass.transaction.Transaction;
  * This class stores all the shopDay objects, with their contained transactions. Each day must have a unique date.
  */
 public class SalesHistory {
-    private TreeMap<String, ShopDay> salesHistory;
-    private ShopDay activeDay;
+    private TreeMap<String, BusinessDay> salesHistory;
+    private BusinessDay activeDay;
 
     /**
      * The following constructor creates a blank sales history, with today automatically inserted.
@@ -23,7 +23,7 @@ public class SalesHistory {
 
     public SalesHistory() {
         this.salesHistory = new TreeMap<>();
-        activeDay = new ShopDay();
+        activeDay = new BusinessDay();
         salesHistory.put(activeDay.getDay(), activeDay);
     }
 
@@ -32,9 +32,9 @@ public class SalesHistory {
      * @param salesHistory
      */
 
-    public SalesHistory(TreeMap<String, ShopDay> salesHistory) {
+    public SalesHistory(TreeMap<String, BusinessDay> salesHistory) {
         this.salesHistory = salesHistory;
-        ShopDay today = new ShopDay();
+        BusinessDay today = new BusinessDay();
         if (!salesHistory.containsKey(today.getDay())) {
             salesHistory.put(today.getDay(), today);
         }
@@ -45,7 +45,7 @@ public class SalesHistory {
      * @param day
      * @throws DuplicateDayException
      */
-    public void addDay(ShopDay day) throws DuplicateDayException {
+    public void addDay(BusinessDay day) throws DuplicateDayException {
         if (salesHistory.containsKey(day.getDay())) {
             throw new DuplicateDayException();
         }
@@ -63,15 +63,15 @@ public class SalesHistory {
         if (salesHistory.containsKey(day)) {
             throw new DuplicateDayException();
         }
-        ShopDay toBeAdded = null;
+        BusinessDay toBeAdded = null;
         try {
-            toBeAdded = new ShopDay(day);
+            toBeAdded = new BusinessDay(day);
         } catch (InvalidTimeFormatException e) {
             throw e;
         }
     }
 
-    public ShopDay getDaysHistory(String day) throws NoSuchElementException {
+    public BusinessDay getDaysHistory(String day) throws NoSuchElementException {
         try {
             return salesHistory.get(day);
         } catch (NullPointerException e) {
@@ -79,7 +79,7 @@ public class SalesHistory {
         }
     }
 
-    public ShopDay getActiveDay() throws NoSuchElementException {
+    public BusinessDay getActiveDay() throws NoSuchElementException {
         try {
             return getDaysHistory(activeDay.getDay());
         } catch (NoSuchElementException e) {
@@ -87,7 +87,7 @@ public class SalesHistory {
         }
     }
 
-    public void setActiveDay(ShopDay day) {
+    public void setActiveDay(BusinessDay day) {
         try {
             addDay(day);
             activeDay = salesHistory.get(day.getDay());

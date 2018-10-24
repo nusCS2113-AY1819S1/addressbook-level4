@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.exceptions;
 
 /**
- * Sets a reminder in the active ShopDay.
+ * Sets a reminder in the active BusinessDay.
  */
 
 public class SetReminderCommand {
