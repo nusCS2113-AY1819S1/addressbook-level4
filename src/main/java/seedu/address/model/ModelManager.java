@@ -16,6 +16,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.DistributorBookChangedEvent;
 import seedu.address.commons.events.model.UserDatabaseChangedEvent;
 import seedu.address.commons.events.model.UserDeletedEvent;
 import seedu.address.commons.exceptions.DataConversionException;
@@ -36,6 +37,7 @@ import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateRemin
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 import seedu.address.model.util.SampleDataUtil;
+import seedu.address.model.util.SampleDistributorsUtil;
 import seedu.address.storage.Storage;
 
 /**
@@ -45,6 +47,8 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final Storage storage;
+
+    private final VersionedDistributorBook versionedDistributorBook;
     private final VersionedProductDatabase versionedAddressBook;
     private final VersionedUserDatabase versionedUserDatabase;
 
@@ -55,39 +59,32 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs,
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyDistributorBook distributorBook, UserPrefs userPrefs,
                         ReadOnlyUserDatabase userDatabase, Storage storage) {
         super();
         requireAllNonNull(addressBook, userPrefs, userDatabase);
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs
+        logger.fine("Initializing with address book: " + addressBook
+                + "and distributor book: " + distributorBook
+                + " and user prefs " + userPrefs
                 + " and user database " + userDatabase);
         this.storage = storage;
         versionedUserDatabase = new VersionedUserDatabase(userDatabase);
+        versionedDistributorBook = new VersionedDistributorBook(distributorBook);
         versionedAddressBook = new VersionedProductDatabase(addressBook);
 
-        filteredDistributors = new FilteredList<>(versionedAddressBook.getDistributorList());
+
+        filteredDistributors = new FilteredList<>(versionedDistributorBook.getDistributorList());
         filteredProducts = new FilteredList<>(versionedAddressBook.getPersonList());
     }
 
     public ModelManager(Storage storage) {
-        this(new ProductDatabase(), new UserPrefs(), new UserDatabase(), storage);
+        this(new ProductDatabase(), new DistributorBook(), new UserPrefs(), new UserDatabase(), storage);
     }
 
     // ============== ProductDatabase Modifiers =============================================================
 
     @Override
-    public void resetData(ReadOnlyAddressBook newData) {
-        versionedAddressBook.resetData(newData);
-        indicateAddressBookChanged();
-    }
-
-    @Override
     public ReadOnlyAddressBook getProductInfoBook() {
-        return versionedAddressBook;
-    }
-
-    @Override
-    public ReadOnlyAddressBook getDistributorInfoBook() {
         return versionedAddressBook;
     }
 
@@ -97,21 +94,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasDistributor(Distributor distributor) {
-        requireNonNull(distributor);
-        return versionedAddressBook.hasDistributor(distributor);
-    }
-
-    @Override
     public boolean hasPerson(Product product) {
         requireNonNull(product);
         return versionedAddressBook.hasPerson(product);
-    }
-
-    @Override
-    public void deleteDistributor(Distributor target) {
-        versionedAddressBook.removeDistributor(target);
-        indicateAddressBookChanged();
     }
 
     @Override
@@ -143,6 +128,67 @@ public class ModelManager extends ComponentManager implements Model {
             logger.warning("Problem while reading from the file. Will be starting with an empty ProductDatabase");
         }
         versionedAddressBook.resetData(newData);
+    }
+
+    // ============== DistributorBook Modifiers =============================================================
+
+    @Override
+    public void resetData(ReadOnlyAddressBook newData) {
+        versionedAddressBook.resetData(newData);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void resetData(ReadOnlyDistributorBook newData) {
+        versionedDistributorBook.resetData(newData);
+        indicateDistributorBookChanged();
+    }
+
+    @Override
+    public ReadOnlyDistributorBook getDistributorInfoBook() {
+        return versionedDistributorBook;
+    }
+
+    /** Raises an event to indicate the model has changed */
+    private void indicateDistributorBookChanged() {
+        raise(new DistributorBookChangedEvent(versionedDistributorBook));
+    }
+
+    @Override
+    public boolean hasDistributor(Distributor distributor) {
+        requireNonNull(distributor);
+        return versionedDistributorBook.hasDistributor(distributor);
+    }
+
+    @Override
+    public void deleteDistributor(Distributor target) {
+        versionedDistributorBook.removeDistributor(target);
+        indicateDistributorBookChanged();
+    }
+
+    /**
+     * Updates the distributorBook and its storage path using the {@code username} provided.
+     * @param username
+     */
+    private void reloadDistributorBook(Username username) {
+        Optional<ReadOnlyDistributorBook> distributorBookOptional;
+        ReadOnlyDistributorBook newData;
+
+        storage.update(versionedUserDatabase.getUser(username));
+        try {
+            distributorBookOptional = storage.readDistributorBook();
+            if (!distributorBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            }
+            newData = distributorBookOptional.orElseGet(SampleDistributorsUtil::getSampleDistributorBook);
+        } catch (DataConversionException e) {
+            newData = new DistributorBook();
+            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+        } catch (IOException e) {
+            newData = new DistributorBook();
+            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+        }
+        versionedDistributorBook.resetData(newData);
     }
 
     //============== UserDatabase Modifiers =============================================================
@@ -181,6 +227,7 @@ public class ModelManager extends ComponentManager implements Model {
         boolean result = versionedUserDatabase.checkAuthentication(username, password);
         if (hasLoggedIn() && result) {
             reloadAddressBook(username);
+            reloadDistributorBook(username);
         }
         return result;
     }
@@ -200,6 +247,11 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
+        return null;
+    }
+
+    @Override
+    public ReadOnlyDistributorBook getDistributorBook() {
         return null;
     }
 
@@ -224,14 +276,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedUserDatabase.setUniqueUserList(uniqueUserList);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
-
-    @Override
-    public void addDistributor(Distributor distributor) {
-        versionedAddressBook.addDistributor(distributor);
-        updateFilteredDistributorList(PREDICATE_SHOW_ALL_DISTRIBUTORS);
-        indicateAddressBookChanged();
-    }
+    //=========== Filtered Product List Modifiers =================================================================
 
     @Override
     public void addPerson(Product product) {
@@ -247,15 +292,37 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    //=========== Filtered Distributor List Modifiers =============================================================
+
+    @Override
+    public void addDistributor(Distributor distributor) {
+        versionedDistributorBook.addDistributor(distributor);
+        updateFilteredDistributorList(PREDICATE_SHOW_ALL_DISTRIBUTORS);
+        indicateDistributorBookChanged();
+    }
+
     @Override
     public void updateDistributor(Distributor target, Distributor editedDistributor) {
         requireAllNonNull(target, editedDistributor);
-
-        versionedAddressBook.updateDistributor(target, editedDistributor);
-        indicateAddressBookChanged();
+        versionedDistributorBook.updateDistributor(target, editedDistributor);
+        indicateDistributorBookChanged();
     }
 
-    //=========== Filtered Product List Accessors =============================================================
+    //=========== Filtered Product List Accessors =================================================================
+
+
+    @Override
+    public ObservableList<Product> getFilteredProductList() {
+        return FXCollections.unmodifiableObservableList(filteredProducts);
+    }
+
+    @Override
+    public void updateFilteredPersonList(Predicate<Product> predicate) {
+        requireNonNull(predicate);
+        filteredProducts.setPredicate(predicate);
+    }
+
+    //=========== Filtered Distributor List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Product} backed by the internal list of
@@ -272,19 +339,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredDistributors.setPredicate(predicate);
     }
 
-    @Override
-    public ObservableList<Product> getFilteredPersonList() {
-        return FXCollections.unmodifiableObservableList(filteredProducts);
-    }
-
-    @Override
-    public void updateFilteredPersonList(Predicate<Product> predicate) {
-        requireNonNull(predicate);
-        filteredProducts.setPredicate(predicate);
-
-    }
-
-    //=========== Undo/Redo =================================================================================
+    //=========== Undo/Redo AB =================================================================================
 
     @Override
     public boolean canUndoAddressBook() {
@@ -331,6 +386,38 @@ public class ModelManager extends ComponentManager implements Model {
                 && filteredDistributors.equals(other.filteredDistributors)
                 && filteredProducts.equals(other.filteredProducts);
     }
+
+    //=========== Undo/Redo DB =================================================================================
+
+    @Override
+    public boolean canUndoDistributorBook() {
+        return versionedDistributorBook.canUndo();
+    }
+
+    @Override
+    public boolean canRedoDistributorBook() {
+        return versionedDistributorBook.canRedo();
+    }
+
+    @Override
+    public void undoDistributorBook() {
+        versionedDistributorBook.undo();
+        indicateDistributorBookChanged();
+    }
+
+    @Override
+    public void redoDistributorBook() {
+        versionedDistributorBook.redo();
+        indicateDistributorBookChanged();
+    }
+
+    @Override
+    public void commitDistributorBook() {
+        versionedDistributorBook.commit();
+    }
+
+
+    //=========== Transactions =================================================================================
 
     //=========================== SalesHistory accessories ===================================
 

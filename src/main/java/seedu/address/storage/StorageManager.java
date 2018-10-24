@@ -10,11 +10,13 @@ import com.google.common.eventbus.Subscribe;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.DistributorBookChangedEvent;
 import seedu.address.commons.events.model.UserDatabaseChangedEvent;
 import seedu.address.commons.events.model.UserDeletedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyDistributorBook;
 import seedu.address.model.ReadOnlyUserDatabase;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.login.User;
@@ -25,15 +27,18 @@ import seedu.address.model.login.User;
 public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
+
+    private DistributorBookStorage distributorBookStorage;
     private ProductDatabaseStorage productDatabaseStorage;
     private UserPrefsStorage userPrefsStorage;
     private UserDatabaseStorage userDatabaseStorage;
 
-
-    public StorageManager(ProductDatabaseStorage productDatabaseStorage, UserPrefsStorage userPrefsStorage,
-                          UserDatabaseStorage userDatabaseStorage) {
+    public StorageManager(ProductDatabaseStorage productDatabaseStorage, DistributorBookStorage distributorBookStorage,
+                          UserPrefsStorage userPrefsStorage, UserDatabaseStorage userDatabaseStorage) {
         super();
         this.productDatabaseStorage = productDatabaseStorage;
+        this.distributorBookStorage = distributorBookStorage;
+
         this.userPrefsStorage = userPrefsStorage;
         this.userDatabaseStorage = userDatabaseStorage;
     }
@@ -61,11 +66,6 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     public Path getProductInfoBookFilePath() {
         return productDatabaseStorage.getProductInfoBookFilePath();
-    }
-
-    @Override
-    public Path getDistributorInfoFilePath() {
-        return productDatabaseStorage.getDistributorInfoFilePath();
     }
 
     @Override
@@ -97,6 +97,53 @@ public class StorageManager extends ComponentManager implements Storage {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
             saveAddressBook(event.data);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    }
+
+    // ================ DistributorBook methods ==============================
+
+    @Override
+    public Path getDistributorBookFilePath() {
+        return distributorBookStorage.getDistributorBookFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyDistributorBook> readDistributorBook() throws DataConversionException, IOException {
+        return readDistributorBook(distributorBookStorage.getDistributorBookFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyDistributorBook> readDistributorBook(Path filePath) throws DataConversionException,
+            IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return distributorBookStorage.readDistributorBook(filePath);
+    }
+
+    @Override
+    public void saveDistributorBook(ReadOnlyDistributorBook distributorBook) throws IOException {
+        saveDistributorBook(distributorBook, distributorBookStorage.getDistributorBookFilePath());
+    }
+
+    @Override
+    public void saveDistributorBook(ReadOnlyDistributorBook distributorBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        distributorBookStorage.saveDistributorBook(distributorBook, filePath);
+    }
+
+    @Override
+    public void deleteDistributorBook(User user) throws IOException {
+        logger.fine("Attempting to delete to data file: " + user.getDistributorBookFilePath());
+        distributorBookStorage.deleteDistributorBook(user);
+    }
+
+    @Override
+    @Subscribe
+    public void handleDistributorBookChangedEvent(DistributorBookChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
+        try {
+            saveDistributorBook(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
@@ -157,8 +204,13 @@ public class StorageManager extends ComponentManager implements Storage {
 
     // ============== Storage updater =====================
 
+    /** Arbitrary Javadoc
+     *
+     * @param user
+     */
     public void update(User user) {
         this.productDatabaseStorage = new XmlProductDatabaseStorage(user.getAddressBookFilePath());
+        this.distributorBookStorage = new XmlDistributorBookStorage(user.getDistributorBookFilePath());
     }
 
 }

@@ -42,7 +42,7 @@ public class DeleteDistributorCommand extends Command {
 
         Distributor distributorToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteDistributor(distributorToDelete);
-        model.commitAddressBook();
+        model.commitDistributorBook();
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, distributorToDelete));
     }
 

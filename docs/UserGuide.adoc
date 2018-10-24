@@ -120,6 +120,7 @@ Adds a distributor to the list of distributors engaged with the store.
 Format: `editDistributor index dn/<distributor name> dp/<distributor serialNumber>`
 
 Edits details of the indexed distributor from the list of distributors engaged with the store.
+Index should be a positive number.
 
 ==== Find a distributor: `findDistributor`
 
@@ -133,11 +134,6 @@ Format: `deleteDistributor index`
 
 Deletes the indexed distributor from the list of distributors engaged with the store.
 
-==== Find all stored contact information (distributors and customers): `contacts`
-
-Format: `contacts`
-
-This command lists all the contacts in alphabetical order of the first name, and whether they are distributors or customers.
 // end::distributormanagement[]
 
 // tag::journal[]

@@ -50,6 +50,7 @@ public class XmlSerializableProductDatabase {
 
         for (XmlAdaptedProduct p : products) {
             Product product = p.toModelType();
+
             if (productDatabase.hasPerson(product)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PRODUCT);
             }
@@ -67,6 +68,7 @@ public class XmlSerializableProductDatabase {
         if (!(other instanceof XmlSerializableProductDatabase)) {
             return false;
         }
+
         return products.equals(((XmlSerializableProductDatabase) other).products);
     }
 }

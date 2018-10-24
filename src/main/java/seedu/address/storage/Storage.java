@@ -5,11 +5,13 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.DistributorBookChangedEvent;
 import seedu.address.commons.events.model.UserDatabaseChangedEvent;
 import seedu.address.commons.events.model.UserDeletedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyDistributorBook;
 import seedu.address.model.ReadOnlyUserDatabase;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.login.User;
@@ -17,7 +19,8 @@ import seedu.address.model.login.User;
 /**
  * API of the Storage component
  */
-public interface Storage extends ProductDatabaseStorage, UserPrefsStorage, UserDatabaseStorage {
+public interface Storage extends ProductDatabaseStorage, DistributorBookStorage, UserPrefsStorage, UserDatabaseStorage {
+
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -29,10 +32,20 @@ public interface Storage extends ProductDatabaseStorage, UserPrefsStorage, UserD
     Path getProductInfoBookFilePath();
 
     @Override
+    Path getDistributorBookFilePath();
+
+    @Override
     Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
 
     @Override
+    Optional<ReadOnlyDistributorBook> readDistributorBook() throws DataConversionException, IOException;
+
+    @Override
     void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+
+    @Override
+    void saveDistributorBook(ReadOnlyDistributorBook distributorBook) throws IOException;
+
 
     /**
      * Saves the current version of the Address Book to the hard disk.
@@ -40,6 +53,13 @@ public interface Storage extends ProductDatabaseStorage, UserPrefsStorage, UserD
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleAddressBookChangedEvent(AddressBookChangedEvent abce);
+
+    /**
+     * Saves the current version of the Address Book to the hard disk.
+     *   Creates the data file if it is missing.
+     * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
+     */
+    void handleDistributorBookChangedEvent(DistributorBookChangedEvent abce);
 
     /**
      * Saves the current version of the User Database to the hard disk.
@@ -66,6 +86,9 @@ public interface Storage extends ProductDatabaseStorage, UserPrefsStorage, UserD
 
     @Override
     void deleteAddressBook(User user) throws IOException;
+
+    @Override
+    void deleteDistributorBook(User user) throws IOException;
 
     void update(User user);
 }

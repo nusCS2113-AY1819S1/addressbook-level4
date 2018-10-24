@@ -37,7 +37,7 @@ public class SelectCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        List<Product> filteredProductList = model.getFilteredPersonList();
+        List<Product> filteredProductList = model.getFilteredProductList();
 
         if (targetIndex.getZeroBased() >= filteredProductList.size()) {
 
