@@ -53,8 +53,6 @@ public class NoteDeleteCommandTest {
         noteManager.addNote(dummyNote.build());
         noteManager.saveNoteList();
 
-        System.out.println(noteManager.getFilteredNotes().size());
-
         int index = 3; // arraylist size: 3, accessed index = 2 (zero-based) -> OK
         NoteDeleteCommand noteDeleteCommand = new NoteDeleteCommand(index);
         CommandResult result = noteDeleteCommand.execute(new ModelManager(), new CommandHistory());
