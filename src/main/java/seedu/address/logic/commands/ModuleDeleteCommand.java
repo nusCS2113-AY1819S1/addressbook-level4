@@ -34,7 +34,7 @@ public class ModuleDeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        ModuleManager moduleManager = new ModuleManager();
+        ModuleManager moduleManager = ModuleManager.getInstance();
 
         Module moduleToDelete = moduleManager.getModuleByModuleCode(targetModuleCode);
         moduleManager.deleteModule(moduleToDelete);
