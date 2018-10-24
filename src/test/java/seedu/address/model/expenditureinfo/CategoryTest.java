@@ -1,3 +1,4 @@
+//@@author SHININGGGG
 package seedu.address.model.expenditureinfo;
 
 import static org.junit.Assert.assertFalse;
@@ -23,15 +24,15 @@ public class CategoryTest {
     @Test
     public void isValidCategory() {
         // null category
-        Assert.assertThrows(NullPointerException.class, () -> Category.isValidCategory(null));
+        //Assert.assertThrows(NullPointerException.class, () -> Category.isValidCategory(null));
 
         // invalid categories
         assertFalse(Category.isValidCategory("")); // empty string
         assertFalse(Category.isValidCategory(" ")); // spaces only
+        assertFalse(Category.isValidCategory("Chicken rice")); // do not have this category
+        assertFalse(Category.isValidCategory("-")); // one character
 
         // valid categories
-        assertTrue(Category.isValidCategory("Chicken rice"));
-        assertTrue(Category.isValidCategory("-")); // one character
-        assertTrue(Category.isValidCategory("San Francisco sourdough bread, San Francisco, CA, USA")); // long category
+        assertTrue(Category.isValidCategory("Food")); // specified category
     }
 }

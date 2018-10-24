@@ -1,3 +1,4 @@
+//@@author SHININGGGG
 package seedu.address.model.expenditureinfo;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -11,6 +12,7 @@ import java.util.Objects;
 public class Expenditure {
 
     // Data fields
+    private final Description description;
     private final Date date;
     private final Money money;
     private final Category category;
@@ -19,11 +21,16 @@ public class Expenditure {
     /**
      * Every field must be present and not null.
      */
-    public Expenditure(Date date, Money money, Category category) {
-        requireAllNonNull(date, money, category);
+    public Expenditure(Description description, Date date, Money money, Category category) {
+        requireAllNonNull(description, date, money, category);
+        this.description = description;
         this.date = date;
         this.money = money;
         this.category = category;
+    }
+
+    public Description getDescription() {
+        return description;
     }
 
     public Date getDate() {
@@ -40,7 +47,7 @@ public class Expenditure {
 
 
     /**
-     * Returns true if both tasks have the same identity fields.
+     * Returns true if both expenditures have the same identity fields.
      * This defines a weaker notion of equality between two expenditures.
      */
     public boolean isSameExpenditure(Expenditure otherExpenditure) {
@@ -49,6 +56,7 @@ public class Expenditure {
         }
 
         return otherExpenditure != null
+                && otherExpenditure.getDescription().equals(getDescription())
                 && otherExpenditure.getDate().equals(getDate())
                 && otherExpenditure.getMoney().equals(getMoney())
                 && otherExpenditure.getCategory().equals(getCategory());
@@ -63,7 +71,9 @@ public class Expenditure {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(" Date: ")
+        builder.append(" Description: ")
+                .append(getDescription())
+                .append(" Date: ")
                 .append(getDate())
                 .append(" Money: ")
                 .append(getMoney())

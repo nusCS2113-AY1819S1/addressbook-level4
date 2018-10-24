@@ -10,6 +10,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyExpenditureTracker;
 import seedu.address.model.expenditureinfo.Category;
 import seedu.address.model.expenditureinfo.Date;
+import seedu.address.model.expenditureinfo.Description;
 import seedu.address.model.expenditureinfo.Expenditure;
 import seedu.address.model.expenditureinfo.Money;
 import seedu.address.model.person.Address;
@@ -45,15 +46,21 @@ public class SampleDataUtil {
                     getTagSet("colleagues"))
         };
     }
-
+    //@@author SHININGGGG
     public static Expenditure[] getSampleExpenditures() {
         return new Expenditure[] {
-            new Expenditure(new Date("01-01-2018"), new Money("8.5"), new Category("Mcdonalds McFlurry")),
-            new Expenditure(new Date("02-01-2018"), new Money("4.2"), new Category("Chicken rice")),
-            new Expenditure(new Date("03-01-2018"), new Money("1680"), new Category("iPhoneX")),
-            new Expenditure(new Date("13-10-2018"), new Money("2135"), new Category("iPhoneXS MAX")),
-            new Expenditure(new Date("14-10-2018"), new Money("799.00"), new Category("Aircon")),
-            new Expenditure(new Date("15-10-2018"), new Money("135"), new Category("Nike hoodie"))
+            new Expenditure(new Description("Mcdonalds McFlurry"), new Date("01-01-2018"),
+                    new Money("8.5"), new Category("Food")),
+            new Expenditure(new Description("Chicken rice"), new Date("02-01-2018"),
+                    new Money("4.2"), new Category("Food")),
+            new Expenditure(new Description("iPhoneX"), new Date("03-01-2018"),
+                    new Money("1680"), new Category("Electronics")),
+            new Expenditure(new Description("iPhoneXS MAX"), new Date("13-10-2018"),
+                    new Money("2135"), new Category("Electronics")),
+            new Expenditure(new Description("Aircon"), new Date("14-10-2018"),
+                    new Money("799.00"), new Category("Furniture")),
+            new Expenditure(new Description("Nike hoodie"), new Date("15-10-2018"),
+                    new Money("135"), new Category("Clothing"))
         };
     }
 

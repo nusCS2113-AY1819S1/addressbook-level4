@@ -1,3 +1,4 @@
+//@@author SHININGGGG
 package seedu.address.ui;
 
 import javafx.fxml.FXML;
@@ -26,6 +27,8 @@ public class ExpenditureCard extends UiPart<Region> {
     @FXML
     private HBox expenditureCardPane;
     @FXML
+    private Label description;
+    @FXML
     private Label category;
     @FXML
     private Label date;
@@ -38,6 +41,7 @@ public class ExpenditureCard extends UiPart<Region> {
         super(FXML);
         this.expenditure = expenditure;
         id.setText(displayedIndex + ". ");
+        description.setText(expenditure.getDescription().descriptionName);
         category.setText(expenditure.getCategory().categoryName);
         date.setText(expenditure.getDate().addingDate);
         money.setText(expenditure.getMoney().addingMoney);

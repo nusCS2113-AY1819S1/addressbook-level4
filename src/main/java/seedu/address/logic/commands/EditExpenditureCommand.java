@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONEY;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.expenditureinfo.Category;
 import seedu.address.model.expenditureinfo.Date;
+import seedu.address.model.expenditureinfo.Description;
 import seedu.address.model.expenditureinfo.Expenditure;
 import seedu.address.model.expenditureinfo.Money;
 
@@ -33,12 +35,15 @@ public class EditExpenditureCommand extends Command {
             + "by the index number used in the displayed expenditure list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_MONEY + "MONEY] "
             + "[" + PREFIX_CATEGORY + "CATEGORY]\n"
             + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_DESCRIPTION + "Chicken rice"
             + PREFIX_DATE + "25/12/2017 "
-            + PREFIX_MONEY + "500";
+            + PREFIX_MONEY + "500"
+            + PREFIX_CATEGORY + "Food";
 
     public static final String MESSAGE_EDIT_EXPENDITURE_SUCCESS = "Edited Expenditure: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -85,11 +90,13 @@ public class EditExpenditureCommand extends Command {
             editExpenditureDescriptor) {
         assert expenditureToEdit != null;
 
+        Description updatedDescription = editExpenditureDescriptor.getDescription()
+                .orElse(expenditureToEdit.getDescription());
         Date updatedDate = editExpenditureDescriptor.getDate().orElse(expenditureToEdit.getDate());
         Money updatedMoney = editExpenditureDescriptor.getMoney().orElse(expenditureToEdit.getMoney());
         Category updatedCategory = editExpenditureDescriptor.getCategory().orElse(expenditureToEdit.getCategory());
 
-        return new Expenditure(updatedDate, updatedMoney, updatedCategory);
+        return new Expenditure(updatedDescription, updatedDate, updatedMoney, updatedCategory);
     }
 
     @Override
@@ -115,6 +122,7 @@ public class EditExpenditureCommand extends Command {
      * corresponding field value of the Expenditure.
      */
     public static class EditExpenditureDescriptor {
+        private Description description;
         private Date date;
         private Money money;
         private Category category;
@@ -128,6 +136,7 @@ public class EditExpenditureCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditExpenditureDescriptor(EditExpenditureDescriptor toCopy) {
+            setDescription(toCopy.description);
             setDate(toCopy.date);
             setMoney(toCopy.money);
             setCategory(toCopy.category);
@@ -138,7 +147,15 @@ public class EditExpenditureCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(date, money, category);
+            return CollectionUtil.isAnyNonNull(description, date, money, category);
+        }
+
+        public void setDescription(Description description) {
+            this.description = description;
+        }
+
+        public Optional<Description> getDescription() {
+            return Optional.ofNullable(description);
         }
 
         public void setDate(Date date) {
@@ -184,7 +201,8 @@ public class EditExpenditureCommand extends Command {
             // state check
             EditExpenditureDescriptor e = (EditExpenditureDescriptor) other;
 
-            return getDate().equals(e.getDate())
+            return getDescription().equals(e.getDescription())
+                    && getDate().equals(e.getDate())
                     && getMoney().equals(e.getMoney())
                     && getCategory().equals(e.getCategory());
 
