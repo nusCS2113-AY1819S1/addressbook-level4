@@ -87,7 +87,7 @@ public class ExpenditureList implements Iterable<Expenditure> {
         internalList.set(index, editedExpenditure);
     }
 
-    public Map getExpenditureRecords(){
+    public Map getExpenditureRecords() {
 
         Map <String, Integer> map = new HashMap <String, Integer> ();
         int index = 0;

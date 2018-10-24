@@ -11,6 +11,9 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
+/**
+ * Get advice on how to spend money
+ */
 public class ExpenditureGetAdviceCommand extends Command {
     public static final String COMMAND_WORD = "ET_advice";
     public static final String COMMAND_ALIAS = "a";
@@ -27,7 +30,7 @@ public class ExpenditureGetAdviceCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Here's the advice on how to "
             + "spend your money in the following period:\n%s";
 
-    private String MESSAGE_ADVICE;
+    private String advice;
     private int money;
     private int numOfDays;
 
@@ -53,9 +56,9 @@ public class ExpenditureGetAdviceCommand extends Command {
                 + "From the first day you used this app till now, you have spent\n");
         for (Map.Entry m : map.entrySet()) {
             x.append(m.getValue())
-            .append(" SGD on ")
-            .append(m.getKey())
-            .append("\n");
+                .append(" SGD on ")
+                .append(m.getKey())
+                .append("\n");
         }
 
 
@@ -67,9 +70,9 @@ public class ExpenditureGetAdviceCommand extends Command {
                 .append(" days, on average, the maximum amount of money that you can spend per day is ")
                 .append(dailyExpense);
 
-        MESSAGE_ADVICE = x.toString();
+        advice = x.toString();
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, MESSAGE_ADVICE));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, advice));
 
     }
 
