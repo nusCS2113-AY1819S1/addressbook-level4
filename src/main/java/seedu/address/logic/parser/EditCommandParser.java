@@ -37,7 +37,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_ENROLLED_CLASS);
+                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_ENROLLED_MODULE);
 
 
         Index index;
@@ -64,8 +64,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
 
-        parseEnrolledClassesForEdit(argMultimap.getAllValues(PREFIX_ENROLLED_MODULE))
-                                            .ifPresent(editPersonDescriptor::setEnrolledClasses);
+        parseEnrolledModulesForEdit(argMultimap.getAllValues(PREFIX_ENROLLED_MODULE))
+                                            .ifPresent(editPersonDescriptor::setEnrolledModules);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -90,28 +90,28 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> enrolledClasses} into a {@code Map<String, EnrolledModule>} if {@code tags}
+     * Parses {@code Collection<String> enrolledModules} into a {@code Map<String, EnrolledModule>} if {@code tags}
      * is non-empty.
-     * If {@code enrolledClasses} contain only one element which is an empty string, it will be parsed into a
-     * {@code Map<String, EnrolledModule>} containing zero enrolledClasses.
+     * If {@code enrolledModules} contain only one element which is an empty string, it will be parsed into a
+     * {@code Map<String, EnrolledModule>} containing zero enrolledModules.
      */
-    private Optional<Map<String, EnrolledModule>> parseEnrolledClassesForEdit(Collection<String> enrolledClasses)
+    private Optional<Map<String, EnrolledModule>> parseEnrolledModulesForEdit(Collection<String> enrolledModules)
             throws ParseException {
 
-        assert enrolledClasses != null;
+        assert enrolledModules != null;
 
-        if (enrolledClasses.isEmpty()) {
+        if (enrolledModules.isEmpty()) {
             return Optional.empty();
         }
 
-        Collection<String> enrolledClassesMap;
-        if (enrolledClasses.size() == 1 && enrolledClasses.contains("")) {
-            enrolledClassesMap = Collections.emptySet();
+        Collection<String> enrolledModulesMap;
+        if (enrolledModules.size() == 1 && enrolledModules.contains("")) {
+            enrolledModulesMap = Collections.emptySet();
         } else {
-            enrolledClassesMap = enrolledClasses;
+            enrolledModulesMap = enrolledModules;
         }
 
-        return Optional.of(ParserUtil.parseEnrolledModules(enrolledClassesMap));
+        return Optional.of(ParserUtil.parseEnrolledModules(enrolledModulesMap));
     }
 
 }

@@ -108,13 +108,13 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        Map<String, EnrolledModule> updatedEnrolledClasses = editPersonDescriptor.getEnrolledClasses()
+        Map<String, EnrolledModule> updatedEnrolledModules = editPersonDescriptor.getEnrolledModules()
                                                             .orElse(personToEdit.getEnrolledModules());
         Map<String, List<TimeSlots>> updatedTimeSlots = personToEdit.getTimeSlots();
 
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedEnrolledClasses, updatedTimeSlots);
+                updatedEnrolledModules, updatedTimeSlots);
     }
 
     @Override
@@ -145,7 +145,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
-        private Map<String, EnrolledModule> enrolledClasses;
+        private Map<String, EnrolledModule> enrolledModules;
         private Map<String, List<TimeSlots>> timeslots;
 
 
@@ -162,7 +162,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
-            setEnrolledClasses(toCopy.enrolledClasses);
+            setEnrolledModules(toCopy.enrolledModules);
             setTimeSlots(toCopy.timeslots);
 
         }
@@ -232,27 +232,27 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code enrolledClasses} to this object's {@code enrolledClasses}.
-         * A defensive copy of {@code enrolledClasses} is used internally.
+         * Sets {@code enrolledModules} to this object's {@code enrolledModules}.
+         * A defensive copy of {@code enrolledModules} is used internally.
          */
 
-        public void setEnrolledClasses(Map<String, EnrolledModule> enrolledClasses) {
-            if (enrolledClasses != null){
-                this.enrolledClasses = enrolledClasses;
+        public void setEnrolledModules(Map<String, EnrolledModule> enrolledModules) {
+            if (enrolledModules != null){
+                this.enrolledModules = enrolledModules;
             } else {
-                this.enrolledClasses = new TreeMap<>();
+                this.enrolledModules = new TreeMap<>();
             }
         }
 
         /**
-         * Returns an unmodifiable map of enrolled classes, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable map of enrolled modules, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code enrolledClasses} is null.
+         * Returns {@code Optional#empty()} if {@code enrolledModules} is null.
          */
 
-        public Optional<Map<String, EnrolledModule>> getEnrolledClasses() {
-            if (enrolledClasses != null){
-                return Optional.of(Collections.unmodifiableMap(enrolledClasses));
+        public Optional<Map<String, EnrolledModule>> getEnrolledModules() {
+            if (enrolledModules != null){
+                return Optional.of(Collections.unmodifiableMap(enrolledModules));
             } else {
                 return Optional.empty();
             }
@@ -286,7 +286,7 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags())
-                    && getEnrolledClasses().equals(e.getEnrolledClasses())
+                    && getEnrolledModules().equals(e.getEnrolledModules())
                     && getTimeSlots().equals(e.getTimeSlots());
         }
     }
