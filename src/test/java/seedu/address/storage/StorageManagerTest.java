@@ -32,7 +32,7 @@ public class StorageManagerTest {
 
     @Before
     public void setUp() {
-        XmlAddressBookStorage addressBookStorage = new XmlAddressBookStorage(getTempFilePath("ab"));
+        XmlProductDatabaseStorage addressBookStorage = new XmlProductDatabaseStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         XmlUserDatabaseStorage userStorage = new XmlUserDatabaseStorage(getTempFilePath("ub"));
         storageManager = new StorageManager(addressBookStorage, userPrefsStorage, userStorage);
@@ -61,7 +61,7 @@ public class StorageManagerTest {
     //public void addressBookReadSave() throws Exception {
     //    /*
     //     * Note: This is an integration test that verifies the StorageManager is properly wired to the
-    //     * {@link XmlAddressBookStorage} class.
+    //     * {@link XmlProductDatabaseStorage} class.
     //     * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
     //     */
     //    AddressBook original = getTypicalAddressBook();
@@ -77,7 +77,7 @@ public class StorageManagerTest {
     @Test
     public void handleAddressBookChangedEvent_exceptionThrown_eventRaised() {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
-        Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub(Paths.get("dummy")),
+        Storage storage = new StorageManager(new XmlProductDatabaseStorageExceptionThrowingStub(Paths.get("dummy")),
                 new JsonUserPrefsStorage(Paths.get("dummy")),
                 new XmlUserDatabaseStorageExceptionThrowingStub(Paths.get("dummy")));
         storage.handleAddressBookChangedEvent(new AddressBookChangedEvent(new AddressBook()));
@@ -88,9 +88,9 @@ public class StorageManagerTest {
     /**
      * A Stub class to throw an exception when the save method is called
      */
-    class XmlAddressBookStorageExceptionThrowingStub extends XmlAddressBookStorage {
+    class XmlProductDatabaseStorageExceptionThrowingStub extends XmlProductDatabaseStorage {
 
-        public XmlAddressBookStorageExceptionThrowingStub(Path filePath) {
+        public XmlProductDatabaseStorageExceptionThrowingStub(Path filePath) {
             super(filePath);
         }
 
