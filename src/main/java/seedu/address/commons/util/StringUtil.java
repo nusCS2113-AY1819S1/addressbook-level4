@@ -21,7 +21,7 @@ public class StringUtil {
      */
     private static final String REGEX_INTEGERS = "\\d+";
     private static final String REGEX_INDEX_RANGE_FORMAT =
-            "(?s)(\\d*\\s*-\\s*\\d*\\s*\\s*,?)?(\\s*,\\s*\\d*\\s*-\\s*\\d*\\s*\\s*,?)*";
+            "(?s)(\\d+\\s*-\\s*\\d+\\s*\\s*,?)?(\\s*,\\s*\\d+\\s*-\\s*\\d+\\s*\\s*,?)*";
 
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
@@ -128,7 +128,8 @@ public class StringUtil {
 
         StringTokenizer tokenizer = new StringTokenizer(input);
         while (tokenizer.hasMoreTokens()) {
-            if (!tokenizer.nextToken().matches(REGEX_INTEGERS)) {
+            String token = tokenizer.nextToken();
+            if (!token.matches(REGEX_INTEGERS) || Integer.valueOf(token) <= 0) {
                 return false;
             }
         }
@@ -152,7 +153,7 @@ public class StringUtil {
      * @return true if confirms, false otherwise.
      */
     public static boolean isValidSelectSyntax(String input) {
-        if (isRangeIndexFormat(input) || StringUtil.areNonZeroUnsignedInteger(input)) {
+        if (isRangeIndexFormat(input) || areNonZeroUnsignedInteger(input)) {
             return true;
         }
         return false;
