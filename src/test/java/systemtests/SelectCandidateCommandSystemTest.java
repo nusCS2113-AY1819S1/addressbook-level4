@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.recruit.logic.commands.SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS;
+import static seedu.recruit.logic.commands.SelectCandidateCommand.MESSAGE_SELECT_PERSON_SUCCESS;
 import static seedu.recruit.testutil.TestUtil.getLastIndex;
 import static seedu.recruit.testutil.TestUtil.getMidIndex;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
@@ -15,12 +15,12 @@ import org.junit.Test;
 
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.logic.commands.RedoCommand;
-import seedu.recruit.logic.commands.SelectCommand;
+import seedu.recruit.logic.commands.SelectCandidateCommand;
 import seedu.recruit.logic.commands.UndoCommand;
 import seedu.recruit.model.Model;
 
 @Ignore("not updated with new UI changes")
-public class SelectCommandSystemTest extends CandidateBookSystemTest {
+public class SelectCandidateCommandSystemTest extends CandidateBookSystemTest {
     @Test
     public void select() {
         /* ------------------------ Perform select operations on the shown unfiltered list -------------------------- */
@@ -28,12 +28,12 @@ public class SelectCommandSystemTest extends CandidateBookSystemTest {
         /* Case: select the first card in the candidate list, command with leading spaces and trailing spaces
          * -> selected
          */
-        String command = "   " + SelectCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased() + "   ";
+        String command = "   " + SelectCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased() + "   ";
         assertCommandSuccess(command, INDEX_FIRST);
 
         /* Case: select the last card in the candidate list -> selected */
         Index personCount = getLastIndex(getModel());
-        command = SelectCommand.COMMAND_WORD + " " + personCount.getOneBased();
+        command = SelectCandidateCommand.COMMAND_WORD + " " + personCount.getOneBased();
         assertCommandSuccess(command, personCount);
 
         /* Case: undo previous selection -> rejected */
@@ -48,7 +48,7 @@ public class SelectCommandSystemTest extends CandidateBookSystemTest {
 
         /* Case: select the middle card in the candidate list -> selected */
         Index middleIndex = getMidIndex(getModel());
-        command = SelectCommand.COMMAND_WORD + " " + middleIndex.getOneBased();
+        command = SelectCandidateCommand.COMMAND_WORD + " " + middleIndex.getOneBased();
         assertCommandSuccess(command, middleIndex);
 
         /* Case: select the current selected card -> selected */
@@ -61,42 +61,42 @@ public class SelectCommandSystemTest extends CandidateBookSystemTest {
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getCandidateBook().getCandidateList().size();
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(SelectCandidateCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         /* Case: filtered candidate list, select index within bounds of recruit book and candidate list -> selected */
         Index validIndex = Index.fromOneBased(1);
         assertTrue(validIndex.getZeroBased() < getModel().getFilteredCandidateList().size());
-        command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased();
+        command = SelectCandidateCommand.COMMAND_WORD + " " + validIndex.getOneBased();
         assertCommandSuccess(command, validIndex);
 
         /* ----------------------------------- Perform invalid select operations ------------------------------------ */
 
         /* Case: invalid index (0) -> rejected */
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + 0,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+        assertCommandFailure(SelectCandidateCommand.COMMAND_WORD + " " + 0,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCandidateCommand.MESSAGE_USAGE));
 
         /* Case: invalid index (-1) -> rejected */
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + -1,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+        assertCommandFailure(SelectCandidateCommand.COMMAND_WORD + " " + -1,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCandidateCommand.MESSAGE_USAGE));
 
         /* Case: invalid index (size + 1) -> rejected */
         invalidIndex = getModel().getFilteredCandidateList().size() + 1;
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(SelectCandidateCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         /* Case: invalid arguments (alphabets) -> rejected */
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " abc",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+        assertCommandFailure(SelectCandidateCommand.COMMAND_WORD + " abc",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCandidateCommand.MESSAGE_USAGE));
 
         /* Case: invalid arguments (extra argument) -> rejected */
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " 1 abc",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+        assertCommandFailure(SelectCandidateCommand.COMMAND_WORD + " 1 abc",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCandidateCommand.MESSAGE_USAGE));
 
         /* Case: mixed case command word -> rejected */
         assertCommandFailure("SeLeCt 1", MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: select from empty recruit book -> rejected */
         deleteAllPersons();
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(),
+        assertCommandFailure(SelectCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(),
                 MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 

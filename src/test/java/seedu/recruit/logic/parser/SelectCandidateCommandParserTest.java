@@ -7,23 +7,23 @@ import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.Test;
 
-import seedu.recruit.logic.commands.SelectCommand;
+import seedu.recruit.logic.commands.SelectCandidateCommand;
 
 /**
  * Test scope: similar to {@code DeleteCandidateCommandParserTest}.
  * @see DeleteCandidateCommandParserTest
  */
-public class SelectCommandParserTest {
+public class SelectCandidateCommandParserTest {
 
-    private SelectCommandParser parser = new SelectCommandParser();
+    private SelectCandidateCommandParser parser = new SelectCandidateCommandParser();
 
     @Test
     public void parse_validArgs_returnsSelectCommand() {
-        assertParseSuccess(parser, "1", new SelectCommand(INDEX_FIRST));
+        assertParseSuccess(parser, "1", new SelectCandidateCommand(INDEX_FIRST));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCandidateCommand.MESSAGE_USAGE));
     }
 }

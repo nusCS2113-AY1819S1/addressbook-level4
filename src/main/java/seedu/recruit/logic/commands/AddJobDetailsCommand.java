@@ -66,7 +66,8 @@ public class AddJobDetailsCommand extends Command {
         model.addJobOffer(toAdd.getCompanyName(), toAdd);
         model.commitCompanyBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-    };
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

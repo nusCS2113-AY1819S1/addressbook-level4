@@ -3,6 +3,7 @@ package seedu.recruit.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.recruit.logic.CommandHistory;
+import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 import seedu.recruit.ui.MainWindow;
 
@@ -21,7 +22,7 @@ public class SwitchBookCommand extends Command {
     public static final String MESSAGE_FAILURE = "Failed to switch book.";
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         switch (MainWindow.getDisplayedBook()) {
         case "companyBook":

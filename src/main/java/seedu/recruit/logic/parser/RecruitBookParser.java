@@ -31,7 +31,11 @@ import seedu.recruit.logic.commands.HistoryCommand;
 import seedu.recruit.logic.commands.ListCandidateCommand;
 import seedu.recruit.logic.commands.ListCompanyCommand;
 import seedu.recruit.logic.commands.RedoCommand;
-import seedu.recruit.logic.commands.SelectCommand;
+import seedu.recruit.logic.commands.SelectCandidateCommand;
+import seedu.recruit.logic.commands.SelectCompanyCommand;
+import seedu.recruit.logic.commands.SelectJobCommand;
+import seedu.recruit.logic.commands.ShortlistCandidateCommand;
+import seedu.recruit.logic.commands.ShortlistCommand;
 import seedu.recruit.logic.commands.SortCommand;
 import seedu.recruit.logic.commands.SwitchBookCommand;
 import seedu.recruit.logic.commands.UndoCommand;
@@ -89,6 +93,12 @@ public class RecruitBookParser {
             case EmailSendCommand.COMMAND_LOGIC_STATE:
                 return new EmailParser().parseCommand(commandWord, arguments, state, emailUtil);
 
+            case ShortlistCandidateCommand.COMMAND_LOGIC_STATE:
+            case SelectCompanyCommand.COMMAND_LOGIC_STATE:
+            case SelectJobCommand.COMMAND_LOGIC_STATE:
+            case SelectCandidateCommand.COMMAND_LOGIC_STATE:
+                return new ShortlistParser().parseCommand(commandWord, arguments, state);
+
             default:
                 LogicManager.setLogicState("primary");
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -110,8 +120,14 @@ public class RecruitBookParser {
             case EditCompanyCommand.COMMAND_WORD:
                 return new EditCompanyCommandParser().parse(arguments);
 
-            case SelectCommand.COMMAND_WORD:
-                return new SelectCommandParser().parse(arguments);
+            case SelectCandidateCommand.COMMAND_WORD:
+                return new SelectCandidateCommandParser().parse(arguments);
+
+            case SelectCompanyCommand.COMMAND_WORD:
+                return new SelectCompanyCommandParser().parse(arguments);
+
+            case SelectJobCommand.COMMAND_WORD:
+                return new SelectJobCommandParser().parse(arguments);
 
             case DeleteCandidateCommand.COMMAND_WORD:
                 return new DeleteCandidateCommandParser().parse(arguments);
@@ -151,6 +167,9 @@ public class RecruitBookParser {
 
             case SwitchBookCommand.COMMAND_WORD:
                 return new SwitchBookCommand();
+
+            case ShortlistCommand.COMMAND_WORD:
+                return new ShortlistCommand();
 
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
