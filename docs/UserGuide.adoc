@@ -56,11 +56,11 @@ Lists all products offered by the store in alphabetical order
 
 === Search for a product: `find`
 
-Format: `find <product name>`
+Format: `find <product name>`or <Serial number of product>
 
 Displays the product and basic information related to it
 The search is case insensitive e.g ‘potato’ will match ‘POTATO’
-All products containing the name searched for will appear.
+All products containing the name or having the same serial number that is serachedfor will appear.
 
 === Add a transaction: `transaction`
 
