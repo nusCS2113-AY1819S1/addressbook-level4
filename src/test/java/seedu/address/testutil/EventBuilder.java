@@ -1,7 +1,9 @@
 package seedu.address.testutil;
 
 import java.time.LocalDate;
+import java.util.Set;
 
+import seedu.address.model.event.Attendees;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.EndTime;
 import seedu.address.model.event.Event;
@@ -28,6 +30,7 @@ public class EventBuilder {
     private StartTime startTime;
     private EndTime endTime;
     private Location location;
+    private Attendees attendees;
 
     public EventBuilder() {
         eventName = new EventName(DEFAULT_NAME);
@@ -36,6 +39,7 @@ public class EventBuilder {
         startTime = new StartTime(DEFAULT_START_TIME);
         endTime = new EndTime(DEFAULT_END_TIME);
         location = new Location(DEFAULT_LOCATION);
+        attendees = new Attendees();
     }
 
     /**
@@ -47,6 +51,7 @@ public class EventBuilder {
         startTime = eventToCopy.getStartTime();
         endTime = eventToCopy.getEndTime();
         location = eventToCopy.getLocation();
+        attendees = eventToCopy.getAttendees();
     }
 
     /**
@@ -98,8 +103,16 @@ public class EventBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Attendees} of the {@code Event} that we are building.
+     */
+    public EventBuilder withAttendee(Set<String> attendeesSet) {
+        this.attendees = new Attendees(attendeesSet);
+        return this;
+    }
+
     public Event build() {
-        return new Event(eventName, description, date, startTime, endTime, location);
+        return new Event(eventName, description, date, startTime, endTime, location, attendees);
     }
 
 
