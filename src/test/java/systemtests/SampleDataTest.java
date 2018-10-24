@@ -51,4 +51,5 @@ public class SampleDataTest extends AddressBookSystemTest {
         Product[] expectedList = SampleDataUtil.getSamplePersons();
         assertListMatching(getPersonListPanel(), expectedList);
     }
+
 }

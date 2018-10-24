@@ -109,7 +109,8 @@ public class XmlAdaptedUser {
         XmlAdaptedUser otherUser = (XmlAdaptedUser) other;
         return Objects.equals(username, otherUser.username)
                 && Objects.equals(password, otherUser.password)
-                && Objects.equals(addressbookfilepath, otherUser.addressbookfilepath);
+                && Objects.equals(addressbookfilepath, otherUser.addressbookfilepath)
+                && Objects.equals(distributorbookfilepath, otherUser.distributorbookfilepath);
 
     }
 

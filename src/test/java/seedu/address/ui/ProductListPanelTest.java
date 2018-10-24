@@ -21,8 +21,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
-import seedu.address.model.person.Product;
-import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.address.model.product.Product;
+import seedu.address.storage.XmlSerializableProductDatabase;
 
 public class ProductListPanelTest extends GuiUnitTest {
     private static final ObservableList<Product> TYPICAL_PRODUCTS =
@@ -82,8 +82,8 @@ public class ProductListPanelTest extends GuiUnitTest {
 
     private ObservableList<Product> createBackingList(int personCount) throws Exception {
         Path xmlFile = createXmlFileWithPersons(personCount);
-        XmlSerializableAddressBook xmlAddressBook =
-                XmlUtil.getDataFromFile(xmlFile, XmlSerializableAddressBook.class);
+        XmlSerializableProductDatabase xmlAddressBook =
+                XmlUtil.getDataFromFile(xmlFile, XmlSerializableProductDatabase.class);
         return FXCollections.observableArrayList(xmlAddressBook.toModelType().getPersonList());
     }
 
@@ -118,7 +118,7 @@ public class ProductListPanelTest extends GuiUnitTest {
      */
 
     private void initUi(ObservableList<Product> backingList) {
-        PersonListPanel personListPanel = new PersonListPanel(backingList);
+        ProductListPanel personListPanel = new ProductListPanel(backingList);
         uiPartRule.setUiPart(personListPanel);
 
         personListPanelHandle = new PersonListPanelHandle(getChildNode(personListPanel.getRoot(),
