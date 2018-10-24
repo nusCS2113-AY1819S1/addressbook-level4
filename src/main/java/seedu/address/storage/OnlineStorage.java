@@ -14,7 +14,7 @@ public interface OnlineStorage {
     /**
      * Enum types for support online storage
      */
-    enum OnlineStorageType {
+    enum Type {
         GITHUB
     }
 
@@ -31,8 +31,9 @@ public interface OnlineStorage {
      * @param content cannot be null.
      * @param fileName cannot be null.
      * @param description can be null.
+     * @return Object representing the return of a successful online backup, can be a String or a URL
      * @throws OnlineBackupFailureException if there was any problem saving to online storage.
      */
-    String saveContentToStorage(String content, String fileName, String description)
+    Object saveContentToStorage(String content, String fileName, String description)
             throws IOException, OnlineBackupFailureException;
 }

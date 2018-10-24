@@ -100,15 +100,22 @@ public interface Model {
     void backupAddressBookLocal(Path backupPath);
 
     /**
-     * Restore address book from local storage.
+     * Backup current expense book to storage.
      */
-    void restoreAddressBookLocal(Path backupPath);
+    void backupExpenseBookLocal(Path backupPath);
 
     /**
      * Restore address book from storage.
      * @param restoredAddressBook
      */
     void restoreAddressBook(ReadOnlyAddressBook restoredAddressBook);
+
+    /**
+     * Restore address book from storage.
+     * @param restoredExpenseBook
+     */
+    void restoreExpenseBook(ReadOnlyExpenseBook restoredExpenseBook);
+
 
     //@@author luhan02
     /**

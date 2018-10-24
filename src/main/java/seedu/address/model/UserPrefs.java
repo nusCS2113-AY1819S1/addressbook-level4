@@ -14,14 +14,28 @@ public class UserPrefs {
     private GuiSettings guiSettings;
     private Path addressBookFilePath;
     private Path addressBookBackupFilePath;
+    private String addressBookGistId;
 
-    private Path expenseBookFilePath = Paths.get("data" , "expensebook.xml");
-    private Path expenseBookBackupFilePath = Paths.get("data", "expensebook.bak");
+    private Path expenseBookFilePath;
+    private Path expenseBookBackupFilePath;
+    private String expenseBookGistId;
+
 
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
         setAddressBookFilePath(getAddressBookFilePath());
         setAddressBookBackupFilePath(getAddressBookBackupFilePath());
+
+        setExpenseBookFilePath(getExpenseBookFilePath());
+        setExpenseBookBackupFilePath(getExpenseBookBackupFilePath());
+    }
+
+    /**
+     * Enum type used to identify specific data book to target
+     */
+    public enum TargetBook {
+        AddressBook,
+        ExpenseBook
     }
 
     public GuiSettings getGuiSettings() {
@@ -52,6 +66,22 @@ public class UserPrefs {
         this.addressBookBackupFilePath = addressBookBackupFilePath;
     }
 
+    public String getAddressBookGistId() {
+        return addressBookGistId;
+    }
+
+    public void setAddressBookGistId(String addressBookGistId) {
+        this.addressBookGistId = addressBookGistId;
+    }
+
+    public String getExpenseBookGistId() {
+        return expenseBookGistId;
+    }
+
+    public void setExpenseBookGistId(String expenseBookGistId) {
+        this.expenseBookGistId = expenseBookGistId;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -64,13 +94,16 @@ public class UserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return Objects.equals(guiSettings, o.guiSettings)
-                && Objects.equals(addressBookFilePath, o.addressBookFilePath)
-                && Objects.equals(addressBookBackupFilePath, o.addressBookBackupFilePath);
+                && Objects.equals(addressBookFilePath.toAbsolutePath(), o.addressBookFilePath.toAbsolutePath())
+                && Objects.equals(
+                        addressBookBackupFilePath.toAbsolutePath(), o.addressBookBackupFilePath.toAbsolutePath())
+                && Objects.equals(addressBookGistId, o.addressBookGistId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath, addressBookBackupFilePath);
+        return Objects.hash(guiSettings, addressBookFilePath,
+                addressBookBackupFilePath, addressBookGistId);
     }
 
     @Override
@@ -79,17 +112,26 @@ public class UserPrefs {
         sb.append("Gui Settings : " + guiSettings.toString());
         sb.append("\nLocal data file location : " + addressBookFilePath);
         sb.append("\nLocal data backup file location : " + addressBookBackupFilePath);
+        sb.append("\nOnline data backup gist id : " + addressBookGistId);
         return sb.toString();
     }
 
     //=========== Expense =================================================================================
 
     public Path getExpenseBookFilePath() {
-        return expenseBookFilePath;
+        return expenseBookFilePath == null ? Paths.get("data" , "expensebook.xml") : expenseBookFilePath;
+    }
+
+    public void setExpenseBookFilePath(Path expenseBookFilePath) {
+        this.expenseBookFilePath = expenseBookFilePath;
     }
 
     public Path getExpenseBookBackupFilePath() {
-        return expenseBookBackupFilePath;
+        return expenseBookBackupFilePath == null ? Paths.get("data" , "expensebook.bak") : expenseBookBackupFilePath;
+    }
+
+    public void setExpenseBookBackupFilePath(Path expenseBookBackupFilePath) {
+        this.expenseBookBackupFilePath = expenseBookBackupFilePath;
     }
 
 

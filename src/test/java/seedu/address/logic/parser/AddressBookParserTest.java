@@ -132,7 +132,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_backup() throws Exception {
         assertTrue(parser.parseCommand(BackupCommand.COMMAND_WORD) instanceof BackupCommand);
-        assertTrue(parser.parseCommand(BackupCommand.COMMAND_WORD + " data\\addressbook.bak") instanceof BackupCommand);
+        assertTrue(parser.parseCommand(BackupCommand.COMMAND_WORD + " github FAKE_TOKEN") instanceof BackupCommand);
     }
     //@@author
     @Test

@@ -44,13 +44,14 @@ public class RestoreCommandParser implements Parser<RestoreCommand> {
      */
     private RestoreCommand parseArguments(String args) throws ParseException {
         List<String> argumentList = Arrays.asList(args.split(" ", 0));
+        /* temp disable custom restore
         if (argumentList.size() == 1) {
             return new RestoreCommand(ParserUtil.parsePath(argumentList.get(0)), true,
                     Optional.empty(), Optional.empty());
-        }
+        }*/
         if (argumentList.size() == 2 && argumentList.get(0).toLowerCase().equals("github")) {
             return new RestoreCommand(Optional.empty(), false,
-                    Optional.ofNullable(OnlineStorage.OnlineStorageType.GITHUB),
+                    Optional.ofNullable(OnlineStorage.Type.GITHUB),
                     Optional.ofNullable(argumentList.get(1)));
         }
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BackupCommand.MESSAGE_USAGE));

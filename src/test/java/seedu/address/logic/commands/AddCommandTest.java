@@ -175,12 +175,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public void restoreAddressBookLocal(Path backupPath) {
+        public void backupExpenseBookLocal(Path backupPath) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void restoreAddressBook(ReadOnlyAddressBook restoredAddressBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void restoreExpenseBook(ReadOnlyExpenseBook restoredExpenseBook) {
             throw new AssertionError("This method should not be called.");
         }
 

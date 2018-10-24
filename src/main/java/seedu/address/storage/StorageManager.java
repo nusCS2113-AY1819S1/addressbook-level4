@@ -1,7 +1,9 @@
 package seedu.address.storage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Path;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -15,21 +17,29 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.AddressBookLocalBackupEvent;
+import seedu.address.commons.events.model.AddressBookLocalRestoreEvent;
 import seedu.address.commons.events.model.AddressBookOnlineRestoreEvent;
 import seedu.address.commons.events.model.ExpenseBookChangedEvent;
 import seedu.address.commons.events.model.ExpenseBookLocalBackupEvent;
+import seedu.address.commons.events.model.ExpenseBookLocalRestoreEvent;
+import seedu.address.commons.events.model.ExpenseBookOnlineRestoreEvent;
+import seedu.address.commons.events.model.UserPrefsChangedEvent;
+import seedu.address.commons.events.storage.DataRestoreExceptionEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
+import seedu.address.commons.events.storage.LocalRestoreEvent;
 import seedu.address.commons.events.storage.OnlineBackupEvent;
+import seedu.address.commons.events.storage.OnlineBackupSuccessResultEvent;
 import seedu.address.commons.events.storage.OnlineRestoreEvent;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.exceptions.OnlineBackupFailureException;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.AddressBook;
+import seedu.address.model.ExpenseBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyExpenseBook;
 import seedu.address.model.UserPrefs;
-
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -68,6 +78,13 @@ public class StorageManager extends ComponentManager implements Storage {
     public void saveUserPrefs(UserPrefs userPrefs) throws IOException {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
+
+    //@@author QzSG
+    @Subscribe
+    public void handleUserPrefsChangedEvent(UserPrefsChangedEvent event) throws IOException {
+        saveUserPrefs(event.data);
+    }
+    //@@author
 
 
     // ================ AddressBook methods ==============================
@@ -134,7 +151,7 @@ public class StorageManager extends ComponentManager implements Storage {
     @Subscribe
     public void handleOnlineBackupEvent(OnlineBackupEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Saving data to online storage"));
-        backupOnline(event.target, event.data, event.fileName, event.authToken);
+        backupOnline(event.target, event.addressData, event.expenseData, event.authToken);
     }
 
     /*
@@ -144,82 +161,181 @@ public class StorageManager extends ComponentManager implements Storage {
     @Subscribe
     public void handleOnlineRestoreEvent(OnlineRestoreEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Restoring data from online storage"));
-        restoreOnline(event.target, event.ref, event.authToken);
+        restoreOnline(event.target, event.targetBook, event.ref, event.authToken);
+    }
+
+    /*
+    Listens directly to RestoreCommand
+    */
+    @SuppressWarnings("unused")
+    @Subscribe
+    public void handleLocalRestoreEvent(LocalRestoreEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Retrieving student planner data from storage"));
+        try {
+            ReadOnlyAddressBook restoredReadOnlyAddressBook = readAddressBook(event.addressBookPath).get();
+            ReadOnlyExpenseBook restoredReadOnlyExpenseBook = readExpenseBook(event.expenseBookPath).get();
+            raise(new AddressBookLocalRestoreEvent(restoredReadOnlyAddressBook));
+            raise(new ExpenseBookLocalRestoreEvent(restoredReadOnlyExpenseBook));
+        } catch (IOException | DataConversionException | NoSuchElementException e) {
+            raise(new DataRestoreExceptionEvent(e));
+        }
     }
 
     /**
      * Performs online backup to supported online storage
-     * @param target
-     * @param data
-     * @param fileName
-     * @param authToken
-     * @throws IOException
-     * @throws OnlineBackupFailureException
-     * @throws JAXBException
+     * @param target {@code OnlineStorage.Type} such as GITHUB
+     * @param addressData  {@code ReadOnlyAddressBook} addressData
+     * @param expenseData  {@code ReadOnlyExpenseBook} expenseData
+     * @param authToken Personal Access Token for GitHub Authentication
      */
-    private void backupOnline(OnlineStorage.OnlineStorageType target, ReadOnlyAddressBook data,
-                              String fileName, Optional<String> authToken) {
+    private void backupOnline(OnlineStorage.Type target, ReadOnlyAddressBook addressData,
+                              ReadOnlyExpenseBook expenseData, Optional<String> authToken) {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-        Task task = new Task<Void>() {
-            @Override public Void call() throws Exception {
-                switch(target) {
-                    case GITHUB:
-                    default:
-                        gitHubStorage = new GitHubStorage(
-                                authToken.orElseThrow(() -> new OnlineBackupFailureException("Invalid auth "
-                                        + "token received")));
-                        String successMessage = gitHubStorage.saveContentToStorage(XmlUtil.convertDataToString(
-                                new XmlSerializableAddressBook(data)), fileName, "Address Book Backup");
-                        updateMessage(successMessage);
-                }
-                return null;
-            }
-        };
-        task.setOnSucceeded(event -> {
-            raise(new NewResultAvailableEvent(task.getMessage()));
-        });
-        task.setOnFailed(event -> {
-            raise(new DataSavingExceptionEvent((Exception) task.getException()));
-        });
-        executorService.submit(task);
+        executorService.submit(getOnlineBackupTask(target, addressData, "AddressBook.bak", authToken));
+        executorService.submit(getOnlineBackupTask(target, expenseData, "ExpenseBook.bak", authToken));
     }
 
     /**
      * Performs restoration from supported online storage
-     * @param target
-     * @param ref
-     * @param authToken
-     * @throws IOException
-     * @throws OnlineBackupFailureException
-     * @throws JAXBException
+     * @param target {@code OnlineStorage.Type} such as GITHUB
+     * @param ref   Reference String to uniquely identify a file or a url to the backup resource.
+     * @param authToken JWT or any other form of access token required by specific online backup service
      */
-    private void restoreOnline(OnlineStorage.OnlineStorageType target, String ref, Optional<String> authToken) {
+    private void restoreOnline(OnlineStorage.Type target, UserPrefs.TargetBook targetBook,
+                               String ref, Optional<String> authToken) {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-        Task task = new Task<AddressBook>() {
-            @Override public AddressBook call() throws Exception {
+        Task restoreTask = getOnlineRestoreTask(target, targetBook, ref, authToken);
+
+        executorService.submit(restoreTask);
+    }
+
+    /**
+     * Performs restoration from local storage
+     * @param path File path to local backup
+     */
+    private void restoreLocal(Path path) {
+        //TODO
+    }
+
+    private Task getOnlineRestoreTask(OnlineStorage.Type target, UserPrefs.TargetBook targetBook,
+                                      String ref, Optional<String> authToken) {
+        Task restoreTask = new Task<>() {
+            @Override public Object call() throws Exception {
                 switch(target) {
                     case GITHUB:
                     default:
                         gitHubStorage = new GitHubStorage(
                             authToken.orElseThrow(() -> new OnlineBackupFailureException("Invalid auth "
                                     + "token received")));
-                        AddressBook restoredAddressBook = XmlUtil.getDataFromString(
-                                gitHubStorage.readContentFromGist(ref), XmlSerializableAddressBook.class).toModelType();
-                        return restoredAddressBook;
+                        if (targetBook == UserPrefs.TargetBook.AddressBook) {
+                            AddressBook restoredAddressBook = XmlUtil.getDataFromString(
+                                    gitHubStorage.readContentFromGist(targetBook, ref),
+                                    XmlSerializableAddressBook.class).toModelType();
+                            return restoredAddressBook;
+                        }
+                        if (targetBook == UserPrefs.TargetBook.ExpenseBook) {
+                            ExpenseBook restoredExpenseBook = XmlUtil.getDataFromString(
+                                    gitHubStorage.readContentFromGist(targetBook, ref),
+                                    XmlSerializableExpenseBook.class).toModelType();
+                            return restoredExpenseBook;
+                        } else {
+                            throw (new IllegalValueException("Invalid book data"));
+                        }
                 }
             }
         };
-        task.setOnSucceeded(event -> {
-            raise(new AddressBookOnlineRestoreEvent(((Task<AddressBook>) task).getValue()));
+        restoreTask.setOnSucceeded(event -> {
+            if (targetBook == UserPrefs.TargetBook.AddressBook) {
+                raise(new AddressBookOnlineRestoreEvent(((Task<AddressBook>) restoreTask).getValue()));
+            } else if (targetBook == UserPrefs.TargetBook.ExpenseBook) {
+                raise(new ExpenseBookOnlineRestoreEvent(((Task<ExpenseBook>) restoreTask).getValue()));
+            }
+
         });
-        task.setOnFailed(event -> {
-            raise(new DataSavingExceptionEvent((Exception) task.getException()));
+        restoreTask.setOnFailed(event -> {
+            restoreTask.getException().printStackTrace();
+            raise(new DataRestoreExceptionEvent((Exception) restoreTask.getException()));
         });
-        executorService.submit(task);
+        return restoreTask;
     }
 
+    /**
+     * Creates an online backup tasks based on {@code OnlineStorage.Type} and returns the created task.
+     * @param target {@code OnlineStorage.Type} such as GITHUB
+     * @param data  {@code Object} data
+     * @param fileName Name of save backup file
+     * @param authToken Personal Access Token for GitHub Authentication
+     * @return
+     */
+    private Task getOnlineBackupTask(OnlineStorage.Type target, Object data, String fileName,
+                                     Optional<String> authToken) {
+        Task backupTask = new Task<OnlineBackupSuccessResultEvent>() {
+            @Override public OnlineBackupSuccessResultEvent call() throws Exception {
+                switch(target) {
+                    case GITHUB:
+                    default:
+                        gitHubStorage = new GitHubStorage(
+                                authToken.orElseThrow(() -> new OnlineBackupFailureException("Invalid auth "
+                                        + "token received")));
+                        URL url = gitHubStorage.saveContentToStorage(handleBookData(data), fileName,
+                                "Student Book Backup");
+                        String successMessage = String.format(GitHubStorage.SUCCESS_MESSAGE, url);
+                        updateMessage(successMessage);
+                        String ref = url.getPath().substring(1);
+                        return new OnlineBackupSuccessResultEvent(OnlineStorage.Type.GITHUB,
+                                handleUserPrefsUpdateField(data), ref);
+                }
+            }
+        };
+        backupTask.setOnSucceeded(event -> {
+            raise(new NewResultAvailableEvent(backupTask.getMessage()));
+            raise((OnlineBackupSuccessResultEvent) backupTask.getValue());
+        });
+        backupTask.setOnFailed(event -> {
+            raise(new DataSavingExceptionEvent((Exception) backupTask.getException()));
+        });
+        return backupTask;
+    }
+
+    /**
+     * Returns the proper xml to string content based on the type of book data
+     * @param data
+     * @return Book data serialised as a string
+     * @throws IllegalValueException
+     * @throws JAXBException
+     */
+    private String handleBookData(Object data) throws IllegalValueException, JAXBException {
+        if (data instanceof ReadOnlyAddressBook) {
+            return XmlUtil.convertDataToString(
+                    new XmlSerializableAddressBook((ReadOnlyAddressBook) data));
+        }
+        if (data instanceof ReadOnlyExpenseBook) {
+            return XmlUtil.convertDataToString(
+                    new XmlSerializableExpenseBook((ReadOnlyExpenseBook) data));
+        } else {
+            throw (new IllegalValueException("Invalid data provided"));
+        }
+    }
+
+    /**
+     * Converts data object to its book data type used to update specific User Preference fields
+     * @param data
+     * @return Type of data book
+     * @throws IllegalValueException
+     * @throws JAXBException
+     */
+    private UserPrefs.TargetBook handleUserPrefsUpdateField(Object data) throws IllegalValueException, JAXBException {
+        if (data instanceof ReadOnlyAddressBook) {
+            return UserPrefs.TargetBook.AddressBook;
+        }
+        if (data instanceof ReadOnlyExpenseBook) {
+            return UserPrefs.TargetBook.ExpenseBook;
+        } else {
+            throw (new IllegalValueException("Invalid data provided"));
+        }
+    }
 
     //============ Expense ===============================================================================
 
@@ -258,7 +374,7 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     @Subscribe
     public void handleExpenseBookChangedEvent(ExpenseBookChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local expense data changed, saving to file"));
         try {
             saveExpenseBook(event.data);
         } catch (IOException e) {
@@ -269,7 +385,7 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     @Subscribe
     public void handleExpenseBookLocalBackupEvent(ExpenseBookLocalBackupEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Saving student planner data as backup"));
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Saving expense data as backup"));
         try {
             backupExpenseBook(event.data, event.filePath);
         } catch (IOException e) {

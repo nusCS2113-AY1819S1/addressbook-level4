@@ -9,6 +9,9 @@ import seedu.address.commons.events.model.AddressBookLocalBackupEvent;
 import seedu.address.commons.events.model.ExpenseBookChangedEvent;
 import seedu.address.commons.events.model.ExpenseBookLocalBackupEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
+import seedu.address.commons.events.storage.LocalRestoreEvent;
+import seedu.address.commons.events.storage.OnlineBackupEvent;
+import seedu.address.commons.events.storage.OnlineRestoreEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyExpenseBook;
@@ -47,6 +50,12 @@ public interface Storage extends AddressBookStorage, ExpenseBookStorage, UserPre
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleAddressBookLocalBackupEvent(AddressBookLocalBackupEvent abce);
+
+    void handleOnlineBackupEvent(OnlineBackupEvent obe);
+
+    void handleOnlineRestoreEvent(OnlineRestoreEvent ore);
+
+    void handleLocalRestoreEvent(LocalRestoreEvent lre);
 
     //=========== Expense =================================================================================
     @Override

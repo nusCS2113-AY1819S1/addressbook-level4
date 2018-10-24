@@ -3,11 +3,9 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
-import javax.xml.bind.JAXBException;
 
 import com.google.common.eventbus.Subscribe;
 
@@ -19,18 +17,20 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.AddressBookLocalBackupEvent;
+import seedu.address.commons.events.model.AddressBookLocalRestoreEvent;
 import seedu.address.commons.events.model.AddressBookOnlineRestoreEvent;
 import seedu.address.commons.events.model.ExpenseBookChangedEvent;
 import seedu.address.commons.events.model.ExpenseBookLocalBackupEvent;
-import seedu.address.commons.events.storage.DataRestoreExceptionEvent;
+import seedu.address.commons.events.model.ExpenseBookLocalRestoreEvent;
+import seedu.address.commons.events.model.ExpenseBookOnlineRestoreEvent;
+import seedu.address.commons.events.model.UserPrefsChangedEvent;
+import seedu.address.commons.events.storage.OnlineBackupSuccessResultEvent;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.event.Event;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
-import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.address.storage.OnlineStorage;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -186,20 +186,35 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void restoreAddressBookLocal(Path backupPath) {
-        try {
-            AddressBook restoredAddressBook = XmlUtil.getDataFromFile(backupPath, XmlSerializableAddressBook.class)
-                    .toModelType();
-            restoreAddressBook(restoredAddressBook);
-        } catch (IllegalValueException | JAXBException | FileNotFoundException e) {
-            raise(new DataRestoreExceptionEvent(e));
-        }
+    public void backupExpenseBookLocal(Path backupPath) {
+        indicateExpenseBookBackupRequest(backupPath);
     }
+
 
     @Override
     public void restoreAddressBook(ReadOnlyAddressBook restoredAddressBook) {
         versionedAddressBook.resetData(restoredAddressBook);
-        Platform.runLater(() -> indicateAddressBookChanged("Address Book Data Restored"));
+        Platform.runLater(() -> indicateAddressBookChanged("Data Restored"));
+    }
+
+    @Override
+    public void restoreExpenseBook(ReadOnlyExpenseBook restoredExpenseBook) {
+        versionedExpenseBook.resetData(restoredExpenseBook);
+        Platform.runLater(() -> indicateExpenseBookChanged("Data Restored"));
+    }
+
+    @SuppressWarnings("unused")
+    @Subscribe
+    public void handleAddressBookLocalRestoreEvent(AddressBookLocalRestoreEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Restoring address book from local storage"));
+        restoreAddressBook(event.readOnlyAddressBook);
+    }
+
+    @SuppressWarnings("unused")
+    @Subscribe
+    public void handleExpenseBookLocalRestoreEvent(ExpenseBookLocalRestoreEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Restoring expense book from local storage"));
+        restoreExpenseBook(event.readOnlyExpenseBook);
     }
 
     @SuppressWarnings("unused")
@@ -207,6 +222,54 @@ public class ModelManager extends ComponentManager implements Model {
     public void handleAddressBookOnlineRestoreEvent(AddressBookOnlineRestoreEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Restoring address book from online storage"));
         restoreAddressBook(event.data);
+    }
+
+    @SuppressWarnings("unused")
+    @Subscribe
+    public void handleOnlineBackupSuccessResultEvent(OnlineBackupSuccessResultEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Restoring address book from online storage"));
+        handleOnlineBackupSuccessResult(event.target, event.targetBook, event.ref);
+    }
+
+    @SuppressWarnings("unused")
+    @Subscribe
+    public void handleExpenseBookOnlineRestoreEvent(ExpenseBookOnlineRestoreEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Restoring expense book from online storage"));
+        restoreExpenseBook(event.data);
+    }
+
+    /**
+     * Processes the success callback object returned from {@code OnlineBackupSuccessResultEvent}. Updates the relevant
+     * fields in UserPreferences and raises an event to Storage Manager.
+     * @param target {@code OnlineStorage.Type}
+     * @param ref Reference object returned from successful online backup callback
+     */
+    private void handleOnlineBackupSuccessResult(OnlineStorage.Type target, UserPrefs.TargetBook targetBook,
+                                                 String ref) {
+        switch (target) {
+        case GITHUB:
+        default:
+            updateGithubRelevantUserPrefs(targetBook, ref);
+        }
+        raise(new UserPrefsChangedEvent(userPrefs));
+    }
+
+    /**
+     * Updates the relevant fields inside User Preferences based on the {@code targetBook}
+     * @param targetBook AddressBook, ExpenseBook, etc
+     * @param ref Reference Field depending on online service
+     */
+    private void updateGithubRelevantUserPrefs(UserPrefs.TargetBook targetBook, String ref) {
+        switch (targetBook) {
+        case AddressBook:
+            userPrefs.setAddressBookGistId(ref);
+            break;
+        case ExpenseBook:
+            userPrefs.setExpenseBookGistId(ref);
+            break;
+        default:
+            throw (new IllegalStateException("Reached illegal flow of code."));
+        }
     }
     //@@author
 
@@ -294,10 +357,19 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new ExpenseBookChangedEvent(versionedExpenseBook));
     }
 
-    /** Raises an event to indicate the request to backup model to persistent storage*/
-    private void indicateExpenseBookBackupRequest() {
-        raise(new ExpenseBookLocalBackupEvent(versionedExpenseBook, userPrefs.getExpenseBookBackupFilePath()));
+    //@@author QzSG
+    /** Raises an event to indicate the model has changed with custom message*/
+    private void indicateExpenseBookChanged(String message) {
+        raise(new ExpenseBookChangedEvent(versionedExpenseBook));
+        raise(new NewResultAvailableEvent(message));
     }
+
+    /** Raises an event to indicate the request to backup model to persistent storage*/
+    private void indicateExpenseBookBackupRequest(Path backupPath) {
+        raise(new ExpenseBookLocalBackupEvent(versionedExpenseBook, backupPath));
+    }
+
+    //@@author ChenSongJian
 
     @Override
     public void addExpense(Expense expense) {

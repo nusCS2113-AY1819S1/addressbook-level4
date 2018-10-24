@@ -111,7 +111,6 @@ public class JsonUserPrefsStorageTest {
         }
     }
 
-    /*
     @Test
     public void saveUserPrefs_allInOrder_success() throws DataConversionException, IOException {
 
@@ -132,5 +131,4 @@ public class JsonUserPrefsStorageTest {
         readBack = jsonUserPrefsStorage.readUserPrefs().get();
         assertEquals(original, readBack);
     }
-    */
 }
