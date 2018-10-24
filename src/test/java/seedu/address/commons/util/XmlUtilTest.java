@@ -40,7 +40,8 @@ public class XmlUtilTest {
     private static final String VALID_PHONE = "9482424";
     private static final String VALID_EMAIL = "hans@example";
     private static final String VALID_ADDRESS = "4th street";
-    private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
+    private static final List<XmlAdaptedTag> VALID_TAGS =
+            Collections.singletonList(new XmlAdaptedTag("friends"));
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -72,7 +73,8 @@ public class XmlUtilTest {
     /**
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
-        AddressBook dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableProductDatabase.class).toModelType();
+        AddressBook dataFromFile =
+    XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableProductDatabase.class).toModelType();
         assertEquals(9, dataFromFile.getPersonList().size());
     }
      */
@@ -128,7 +130,8 @@ public class XmlUtilTest {
         FileUtil.createFile(TEMP_FILE);
         XmlSerializableProductDatabase dataToWrite = new XmlSerializableProductDatabase(new AddressBook());
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        XmlSerializableProductDatabase dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableProductDatabase.class);
+        XmlSerializableProductDatabase dataFromFile =
+                XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableProductDatabase.class);
         assertEquals(dataToWrite, dataFromFile);
 
         AddressBookBuilder builder = new AddressBookBuilder(new AddressBook());
