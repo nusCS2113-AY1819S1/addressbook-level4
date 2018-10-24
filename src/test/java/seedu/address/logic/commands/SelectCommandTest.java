@@ -22,6 +22,8 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.event.EventContainsAttendeePredicate;
+import seedu.address.model.person.Person;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
 /**
@@ -100,6 +102,12 @@ public class SelectCommandTest {
     private void assertExecutionSuccess(Index index) {
         SelectCommand selectCommand = new SelectCommand(index);
         String expectedMessage = String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, index.getOneBased());
+
+        //Update expectedModel
+        Person personChosen = expectedModel.getFilteredPersonList().get(index.getZeroBased());
+        String personName = personChosen.getName().toString();
+        EventContainsAttendeePredicate predicate = new EventContainsAttendeePredicate(personName);
+        expectedModel.updateFilteredEventList(predicate);
 
         assertCommandSuccess(selectCommand, model, commandHistory, expectedMessage, expectedModel);
 

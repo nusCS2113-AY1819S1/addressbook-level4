@@ -11,6 +11,7 @@ import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.event.EventContainsAttendeePredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -42,6 +43,11 @@ public class SelectCommand extends Command {
         if (targetIndex.getZeroBased() >= filteredPersonList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
+
+        Person person = filteredPersonList.get(targetIndex.getZeroBased());
+        String personName = person.getName().toString();
+        EventContainsAttendeePredicate predicate = new EventContainsAttendeePredicate(personName);
+        model.updateFilteredEventList(predicate);
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
         return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex.getOneBased()));
