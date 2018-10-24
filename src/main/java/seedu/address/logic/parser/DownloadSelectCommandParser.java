@@ -28,6 +28,10 @@ public class DownloadSelectCommandParser implements Parser {
 
         if(argMultimap.getValue(PREFIX_SELECT_FILE).isPresent()){
             String fileSelect = argMultimap.getValue(PREFIX_SELECT_FILE).get();
+            if(fileSelect.isEmpty()){
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DownloadSelectCommand.NO_FILES_SELECTED_MESSAGE));
+
+            }
             return new DownloadSelectCommand( username, password, moduleCode,fileSelect);
         }
         else{
