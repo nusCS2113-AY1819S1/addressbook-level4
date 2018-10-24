@@ -1,9 +1,7 @@
 package seedu.address.logic.commands;
 
-
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static java.util.Objects.requireNonNull;
-
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
 import java.util.List;
 
@@ -22,7 +20,6 @@ public class CheckExpenditureCommand extends Command {
 
     public static final String COMMAND_WORD = "ET_check";
     public static final String COMMAND_ALIAS = "c";
-    public static final String MESSAGE_INVALID_FORMAT = "Invalid command format!";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Check expenditures in a specific period\n"
             + "Parameters: Date1 ( must be a positive number)"
@@ -32,6 +29,7 @@ public class CheckExpenditureCommand extends Command {
             + PREFIX_DATE + "09-10-2018";
 
     public static final String MESSAGE_SUCCESS = "Total money in this period %f";
+    private static final String MESSAGE_INVALID_FORMAT = "Invalid command format!";
 
     private final Date date1;
     private final Date date2;
@@ -57,9 +55,9 @@ public class CheckExpenditureCommand extends Command {
         while (index <= lastShownList.size()) {
             editedExpenditure = lastShownList.get(index);
 
-            int year1 = Integer.valueOf(date1.toString().substring(6));
-            int month1 = Integer.valueOf(date1.toString().substring(3, 5));
-            int day1 = Integer.valueOf(date1.toString().substring(0, 2));
+            int year1 = Integer.parseInt(date1.toString().substring(6));
+            int month1 = Integer.parseInt(date1.toString().substring(3, 5));
+            int day1 = Integer.parseInt(date1.toString().substring(0, 2));
 
             int year2 = Integer.parseInt(date2.toString().substring(6));
             int month2 = Integer.parseInt(date2.toString().substring(3, 5));
@@ -71,13 +69,12 @@ public class CheckExpenditureCommand extends Command {
             int day = Integer.parseInt(editedExpenditure.getDate().toString().substring(0, 2));
 
             if ((year1 > year) || (year2 < year)) {
-                return new CommandResult(MESSAGE_INVALID_FORMAT);}
+            }
             else if ((month1 > month) || (month2 < month)) {
-                return new CommandResult(MESSAGE_INVALID_FORMAT);}
+            }
             else if ((day1 > day) || (day2 < day)) {
-                return new CommandResult(MESSAGE_INVALID_FORMAT);}
-            else {
-                total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
+            }
+            else { total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
             }
             index++;
         }

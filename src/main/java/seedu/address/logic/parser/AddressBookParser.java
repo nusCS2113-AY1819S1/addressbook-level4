@@ -31,7 +31,6 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewTaskCommand;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.expenditureinfo.Date;
 
 /**
  * Parses user input.
