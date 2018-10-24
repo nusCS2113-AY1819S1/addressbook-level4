@@ -19,11 +19,11 @@ public class CreateModuleCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a module. "
         + "Parameters: "
-        + PREFIX_MODULE_TITLE + "MODULE TITLE "
         + PREFIX_MODULE_CODE + "MODULE CODE "
+        + PREFIX_MODULE_TITLE + "MODULE TITLE "
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_MODULE_TITLE + "Software Engineering and OOP "
-        + PREFIX_MODULE_CODE + "CS2113";
+        + PREFIX_MODULE_CODE + "CS2113 "
+        + PREFIX_MODULE_TITLE + "Software Engineering and OOP";
 
     public static final String MESSAGE_SUCCESS = "%1$s now is added to module";
     public static final String MESSAGE_DUPLICATE_MODULE = "%1$s has been added previously";

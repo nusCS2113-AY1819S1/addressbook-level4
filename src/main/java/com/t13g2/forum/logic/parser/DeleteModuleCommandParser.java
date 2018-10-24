@@ -6,10 +6,8 @@ import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_MODULE_TITLE;
 import java.util.stream.Stream;
 
 import com.t13g2.forum.commons.core.Messages;
-import com.t13g2.forum.logic.commands.CreateModuleCommand;
 import com.t13g2.forum.logic.commands.DeleteModuleCommand;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
-import com.t13g2.forum.model.forum.Module;
 
 //@@xllx1
 /**

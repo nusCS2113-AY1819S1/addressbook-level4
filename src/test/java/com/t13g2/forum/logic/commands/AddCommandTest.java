@@ -91,8 +91,7 @@ public class AddCommandTest {
     /**
      * A default model stub that have all of the methods failing.
      */
-    private
-    class ModelStub implements Model {
+    private class ModelStub implements Model {
         @Override
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
@@ -204,7 +203,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean deleteModule(Module module) {
+        public boolean deleteModule(String module) {
             throw new AssertionError("This method should not be called.");
         }
 
