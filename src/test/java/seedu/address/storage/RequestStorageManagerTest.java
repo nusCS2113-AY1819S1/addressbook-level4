@@ -62,7 +62,7 @@ public class RequestStorageManagerTest {
          * Note: This is an integration test that verifies the InventoryStorageManager is properly wired to the
          * {@link XmlBookInventoryStorage} class.
          * More extensive testing of UserPref saving/reading is done in
-         * {@link XmlBookInventoryRequestStorageTest} class.
+         * {@link XmlBookInventoryStorageTest} class.
          */
         BookInventory original = getTypicalBookInventory();
         storageManager.saveAddressBook(original);
