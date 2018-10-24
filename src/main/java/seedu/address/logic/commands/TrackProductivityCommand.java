@@ -2,10 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.logging.Logger;
-
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -23,15 +20,18 @@ public class TrackProductivityCommand extends Command implements CommandParser {
 
     public static final String MESSAGE_SUCCESS = "Recent productvity: %1$s";
 
-    private static final Logger logger = LogsCenter.getLogger(TrackProductivityCommand.class);
+    public static final String MESSAGE_EMPTY_TASK_BOOK = "The task book is empty!";
+    //private static final Logger logger = LogsCenter.getLogger(TrackProductivityCommand.class);
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         // filter out Completed tasks
         model.trackProductivity();
-        ObservableList<Task> tasks = model.getAddressBook().getTaskList();
-        logger.info("No. of completed tasks: " + tasks.size());
+        ObservableList<Task> tasks = model.getFilteredTaskList();
+        if (tasks.size() == 0) {
+            throw new CommandException(MESSAGE_EMPTY_TASK_BOOK);
+        }
         double productivity = calculateProductivity(tasks);
         String result = Integer.toString((int) (productivity * 100)) + " %";
         return new CommandResult(String.format(MESSAGE_SUCCESS, result));
@@ -54,16 +54,14 @@ public class TrackProductivityCommand extends Command implements CommandParser {
      */
     public double calculateProductivity(ObservableList<Task> tasks) {
         double averageProductivity;
-        if (tasks.size() == 0) {
-            averageProductivity = 1;
-        } else {
-            double totalProductivity = 0;
-            for (Task task: tasks) {
-                double taskProductivity = (double) task.getExpectedNumOfHours() / task.getCompletedNumOfHours();
-                totalProductivity += taskProductivity;
-            }
-            averageProductivity = totalProductivity / tasks.size();
+        double totalProductivity = 0;
+        for (Task task: tasks) {
+            double taskProductivity = (double) task.getExpectedNumOfHours() / task.getCompletedNumOfHours();
+            totalProductivity += taskProductivity;
         }
+        //if (totalProductivity == 0)
+        averageProductivity = totalProductivity / tasks.size();
+
         return averageProductivity;
     }
 }

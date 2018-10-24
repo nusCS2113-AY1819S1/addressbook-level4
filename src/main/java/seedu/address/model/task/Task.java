@@ -23,7 +23,6 @@ public class Task {
         this.title = title;
         this.description = description;
         this.priorityLevel = priorityLevel;
-        this.isCompleted = false;
         this.expectedNumOfHours = expectedNumOfHours;
     }
 
@@ -44,7 +43,6 @@ public class Task {
         this.description = description;
         this.priorityLevel = priorityLevel;
         this.expectedNumOfHours = expectedNumOfHours;
-        this.isCompleted = false;
     }
 
     public String getDeadline() {
@@ -144,6 +142,8 @@ public class Task {
                 .append(getDescription())
                 .append(" Priority: ")
                 .append(getPriorityLevel());
+        //.append(" Completed: ")
+        //.append(isCompleted);
         return builder.toString();
     }
 }
