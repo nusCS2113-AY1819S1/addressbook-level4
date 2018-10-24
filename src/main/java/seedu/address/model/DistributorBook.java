@@ -1,13 +1,19 @@
 package seedu.address.model;
 
-import javafx.collections.ObservableList;
-import seedu.address.model.distributor.Distributor;
-import seedu.address.model.distributor.UniqueDistributorList;
-
-import java.util.*;
-
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Set;
+import java.util.TreeMap;
+
+import javafx.collections.ObservableList;
+
+import seedu.address.model.distributor.Distributor;
+import seedu.address.model.distributor.UniqueDistributorList;
 
 /**
  * Wraps all data at the distributor-book level

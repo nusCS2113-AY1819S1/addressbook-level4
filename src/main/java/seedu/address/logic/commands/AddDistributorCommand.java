@@ -1,17 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-//import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-//import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIST_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIST_PHONE;
-//import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-// import seedu.address.model.product.Person;
 import seedu.address.model.distributor.Distributor;
+import seedu.address.model.Model;
 
 /**
  * Adds a product to the address book.

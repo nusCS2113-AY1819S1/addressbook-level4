@@ -12,7 +12,6 @@ import java.util.TreeMap;
 
 import javafx.collections.ObservableList;
 
-
 import seedu.address.model.product.Product;
 import seedu.address.model.product.UniquePersonList;
 
