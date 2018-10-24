@@ -5,17 +5,21 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 /**
  * Represents a Test in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ *
+ * Guarantees: details are present and not null, field values are validate
+ * d, immutable.
  */
 
 public class Test {
     private final TestName testName;
     private final Marks marks;
+    private final Grade grade;
 
-    public Test(TestName testName, Marks marks) {
-        requireAllNonNull(testName, marks);
+    public Test(TestName testName, Marks marks, Grade grade) {
+        requireAllNonNull(testName, marks, grade);
         this.testName = testName;
         this.marks = marks;
+        this.grade = grade;
     }
 
     public TestName getTestName() {
@@ -23,6 +27,9 @@ public class Test {
     }
     public Marks getMarks() {
         return marks;
+    }
+    public Grade getGrade() {
+        return grade;
     }
     /**
      * Every field must be present and not null.
@@ -51,13 +58,14 @@ public class Test {
 
         Test otherTest = (Test) other;
         return otherTest.getTestName().equals(getTestName())
-                && otherTest.getMarks().equals(getMarks());
+                && otherTest.getMarks().equals(getMarks())
+                && otherTest.getGrade().equals(getGrade());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(testName, marks);
+        return Objects.hash(testName, marks, grade);
     }
 
     @Override
@@ -66,7 +74,9 @@ public class Test {
         builder.append(getTestName())
                 .append(" Test Name: ")
                 .append(getMarks())
-                .append(" Marks: ");
+                .append(" Marks: ")
+                .append(getGrade())
+                .append(" Grade: ");
         return builder.toString();
     }
 }

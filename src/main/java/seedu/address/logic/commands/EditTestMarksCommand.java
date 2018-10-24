@@ -14,13 +14,13 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.grade.Grade;
 import seedu.address.model.grade.Marks;
 import seedu.address.model.grade.Test;
 import seedu.address.model.grade.TestName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
-import seedu.address.model.person.Grade;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Nationality;
@@ -35,7 +35,7 @@ public class EditTestMarksCommand extends Command {
      * A command to edit person test marks
      */
     public static final String COMMAND_WORD = "edit_test";
-    public static final String COMMAND_WORD_2 = "et";
+    public static final String COMMAND_WORD_2 = "edt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add test to persons whose names"
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
@@ -47,12 +47,14 @@ public class EditTestMarksCommand extends Command {
     private final NameContainsKeywordsPredicate predicate;
     private final String testName;
     private final String testMarks;
+    private final String grade;
     private final EditPersonDescriptor editPersonDescriptor = null;
 
-    public EditTestMarksCommand(NameContainsKeywordsPredicate predicate, String testName, String testMarks) {
+    public EditTestMarksCommand(NameContainsKeywordsPredicate predicate, String testName, String testMarks, String grade) {
         this.predicate = predicate;
         this.testName = testName;
         this.testMarks = testMarks;
+        this.grade = grade;
     }
 
     @Override
@@ -65,7 +67,7 @@ public class EditTestMarksCommand extends Command {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         Person personToEdit = personListName.get(0);
 
-        Test test = new Test(new TestName(testName), new Marks(testMarks));
+        Test test = new Test(new TestName(testName), new Marks(testMarks), new Grade(grade));
 
         Set<Test> testList = new HashSet<>();
         testList.addAll(personToEdit.getTests());
@@ -107,11 +109,10 @@ public class EditTestMarksCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Grade updatedGrade = editPersonDescriptor.getGrade().orElse(personToEdit.getGrade());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Test> updatedTests = editPersonDescriptor.getTests().orElse(personToEdit.getTests());
         return new Person(updatedName, updateGender, updateNationality, updatedPhone,
-                updatedEmail, updatedAddress, updatedGrade, updatedTags, updatedTests);
+                updatedEmail, updatedAddress, updatedTags, updatedTests);
     }
 
 

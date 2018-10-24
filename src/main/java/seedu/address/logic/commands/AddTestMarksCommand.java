@@ -15,6 +15,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 import seedu.address.model.Model;
+import seedu.address.model.grade.Grade;
 import seedu.address.model.grade.Marks;
 import seedu.address.model.grade.Test;
 import seedu.address.model.grade.TestName;
@@ -29,21 +30,23 @@ public class AddTestMarksCommand extends Command {
      * A command to add person test name and marks
      */
     public static final String COMMAND_WORD = "add_testmarks";
-    public static final String COMMAND_WORD_2 = "addt";
+    public static final String COMMAND_WORD_2 = "adt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add test and marks to persons whose names"
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "the specified keywords (case-insensitive) and displays them in the pop-up windows.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice cs2113quiz1 67";
 
 
     public static final String MESSAGE_DUPLICATE_TEST = "This test already exists in the system";
+    public static final String MESSAGE_SUCCESS = "New test marks added";
     private final NameContainsKeywordsPredicate predicate;
     private final String testName;
     private final String testMarks;
     private final EditTestMarksCommand.EditPersonDescriptor editPersonDescriptor = null;
 
     public AddTestMarksCommand(NameContainsKeywordsPredicate predicate, String testName, String testMarks) {
+        requireNonNull(testMarks, testName);
         this.predicate = predicate;
         this.testName = testName;
         this.testMarks = testMarks;
@@ -58,7 +61,7 @@ public class AddTestMarksCommand extends Command {
                 new EditTestMarksCommand.EditPersonDescriptor();
         Person personToEdit = personListName.get(0);
 
-        Test test = new Test(new TestName(testName), new Marks(testMarks));
+        Test test = new Test(new TestName(testName), new Marks(testMarks), new Grade("Undefined"));
 
         Set<Test> testList = new HashSet<>();
         for (Test t : personToEdit.getTests()) {

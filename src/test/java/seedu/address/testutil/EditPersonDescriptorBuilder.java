@@ -1,10 +1,12 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.grade.Test;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
@@ -41,7 +43,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
-        descriptor.setGrade(person.getGrade());
+        descriptor.setTests(person.getTests());
     }
 
     /**
@@ -101,6 +103,16 @@ public class EditPersonDescriptorBuilder {
         descriptor.setTags(tagSet);
         return this;
     }
+    /**
+     * Parses the {@code test} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withTest(Test tests) {
+        Set<Test> testSet = new HashSet<>();
+        descriptor.setTests(testSet);
+        return this;
+    }
+
 
     public EditPersonDescriptor build() {
         return descriptor;

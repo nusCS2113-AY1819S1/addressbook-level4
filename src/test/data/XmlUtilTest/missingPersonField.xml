@@ -12,6 +12,8 @@
         <test>
             <testName>CS2113quiz</testName>
             <marks>77</marks>
+            <grade>A</grade>>
         </test>
     </scoreList>
+
 </person>

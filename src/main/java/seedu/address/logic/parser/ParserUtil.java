@@ -18,7 +18,7 @@ import seedu.address.model.group.GroupName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
-import seedu.address.model.person.Grade;
+
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Phone;
@@ -194,21 +194,21 @@ public class ParserUtil {
         }
         return new Tag(trimmedTag);
     }
-
-    /**
-     * Parses a {@code String Grade} into a {@code Grade}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code grade} is invalid.
-     */
-    public static Grade parseGrade(String grade) throws ParseException {
-        requireNonNull(grade);
-        String trimmedGrade = grade.trim();
-        if (!Grade.isValidGrade(trimmedGrade)) {
-            throw new ParseException(Grade.MESSAGE_GRADE_CONSTRAINTS);
-        }
-        return new Grade(trimmedGrade);
-    }
+//
+//    /**
+//     * Parses a {@code String Grade} into a {@code Grade}.
+//     * Leading and trailing whitespaces will be trimmed.
+//     *
+//     * @throws ParseException if the given {@code grade} is invalid.
+//     */
+//    public static Grade parseGrade(String grade) throws ParseException {
+//        requireNonNull(grade);
+//        String trimmedGrade = grade.trim();
+//        if (!Grade.isValidGrade(trimmedGrade)) {
+//            throw new ParseException(Grade.MESSAGE_GRADE_CONSTRAINTS);
+//        }
+//        return new Grade(trimmedGrade);
+//    }
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.

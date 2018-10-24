@@ -3,12 +3,13 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
+
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.grade.Grade;
+import seedu.address.model.grade.Marks;
 import seedu.address.model.grade.Test;
 import seedu.address.model.tag.Tag;
 
@@ -26,20 +27,36 @@ public class Person {
     private final Nationality nationality;
 
     // Data fields
-    private final Grade grade;
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final Map<String, String> scoresList = new HashMap<>();
     private final Set<Test> testList = new HashSet<>();
+    private Grade grade = new Grade("Undefined");
+    private Marks marks = new Marks("0");
+
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public Marks getMarks() {
+        return marks;
+    }
+
+    public void setGrade(Grade grade) {
+        this.grade = grade;
+    }
+
+    public void setMarks(Marks marks){
+        this.marks = marks;
+    }
 
     /**
      * Every field must be present and not null.
      */
 
     public Person(Name name, Gender gender, Nationality nationality, Phone phone,
-                  Email email, Address address, Grade grade, Set<Tag> tags, Set<Test> testList) {
+                  Email email, Address address, Set<Tag> tags, Set<Test> testList) {
 
-        requireAllNonNull(name, gender, nationality, phone, email, address, grade, tags, testList);
+        requireAllNonNull(name, gender, nationality, phone, email, address, tags, testList);
 
         this.name = name;
         this.gender = gender;
@@ -47,7 +64,6 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.grade = grade;
         this.tags.addAll(tags);
         this.testList.addAll(testList);
     }
@@ -64,10 +80,6 @@ public class Person {
         return email;
     }
 
-    public Grade getGrade() {
-        return grade;
-    }
-
     public Address getAddress() {
         return address;
     }
@@ -80,13 +92,6 @@ public class Person {
         return gender;
     }
 
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Map<String, String> getScoresList() {
-        return Collections.unmodifiableMap(scoresList);
-    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -136,7 +141,6 @@ public class Person {
                 && otherPerson.getNationality().equals(getNationality())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getGrade().equals(getGrade())
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getTests().equals(getTests());
 
@@ -145,7 +149,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, gender, nationality, phone, email, address, grade, tags);
+        return Objects.hash(name, gender, nationality, phone, email, address, tags, testList);
     }
 
     @Override
@@ -162,10 +166,10 @@ public class Person {
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress())
-                .append(" Grade: ")
-                .append(getGrade())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+        builder.append(" Tests: ");
+        getTests().forEach(builder::append);
         return builder.toString();
     }
 

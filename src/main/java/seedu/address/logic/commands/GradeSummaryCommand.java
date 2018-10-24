@@ -9,7 +9,12 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.util.Calculator;
+import seedu.address.model.util.Highest;
+import seedu.address.model.util.LastTwentyFivePercen;
+import seedu.address.model.util.Lowest;
+import seedu.address.model.util.Mean;
+import seedu.address.model.util.Median;
+import seedu.address.model.util.TopTwentyFivePercen;
 import seedu.address.ui.DisplayGrade;
 
 
@@ -42,10 +47,18 @@ public class GradeSummaryCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        Calculator calc = new Calculator();
+        Highest highest = new Highest();
+        Lowest lowest = new Lowest();
+        Mean mean = new Mean();
+        LastTwentyFivePercen lastTwentyFivePercen = new LastTwentyFivePercen();
+        Median median = new Median();
+        TopTwentyFivePercen topTwentyFivePercen = new TopTwentyFivePercen();
+
+
+
         DisplayGrade gradeDisplay;
         if ("25".equals(commandType)) {
-            ArrayList<Person> studentList = calc.find25th(model.getFilteredPersonList());
+            ArrayList<Person> studentList = topTwentyFivePercen.findTopTwentyFive(model.getFilteredPersonList(), null);
 
 
             if (studentList.isEmpty()) {
@@ -57,7 +70,7 @@ public class GradeSummaryCommand extends Command {
 
         }
         if ("75".equals(commandType)) {
-            ArrayList<Person> studentList = calc.find75th(model.getFilteredPersonList());
+            ArrayList<Person> studentList = lastTwentyFivePercen.findLastTwentyFive(model.getFilteredPersonList(), null);
 
 
             if (studentList.isEmpty()) {
@@ -69,15 +82,15 @@ public class GradeSummaryCommand extends Command {
 
         }
         if ("H".equals(commandType)) {
-            int highestScore = calc.findHighest(model.getFilteredPersonList());
+            double highestScore = highest.findHighest(model.getFilteredPersonList(), null);
             return new CommandResult(String.format("Highest Score in class is " + highestScore));
         }
         if ("MEAN".equals(commandType)) {
-            int mean = calc.calculateMean(model.getFilteredPersonList());
+            double meanVal = mean.calculateMean(model.getFilteredPersonList(), null);
             return new CommandResult(String.format("The mean is " + mean));
         }
         if ("MEDIAN".equals(commandType)) {
-            int median = calc.calculateMedian(model.getFilteredPersonList());
+            double medianVal = median.calculateMedian(model.getFilteredPersonList(), null);
             return new CommandResult(String.format("Median in class is " + median));
         }
 

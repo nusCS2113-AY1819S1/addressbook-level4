@@ -40,6 +40,6 @@ public class EditTestMarksCommandParser {
         nameKeywordsList.remove(PREFIX_TEST_MARK + argMultimap.getValue(PREFIX_TEST_MARK).get());
 
         return new EditTestMarksCommand(new NameContainsKeywordsPredicate(nameKeywordsList),
-                argMultimap.getValue(PREFIX_TEST_NAME).get(), argMultimap.getValue(PREFIX_TEST_MARK).get());
+                argMultimap.getValue(PREFIX_TEST_NAME).get(), argMultimap.getValue(PREFIX_TEST_MARK).get(), null);
     }
 }
