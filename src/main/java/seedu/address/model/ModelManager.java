@@ -161,7 +161,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void deleteDistributor(Distributor target) {
         versionedDistributorBook.removeDistributor(target);
-        indicateAddressBookChanged();
+        indicateDistributorBookChanged();
     }
 
     /**
@@ -225,6 +225,7 @@ public class ModelManager extends ComponentManager implements Model {
         boolean result = versionedUserDatabase.checkAuthentication(username, password);
         if (hasLoggedIn() && result) {
             reloadAddressBook(username);
+            reloadDistributorBook(username);
         }
         return result;
     }
@@ -295,15 +296,14 @@ public class ModelManager extends ComponentManager implements Model {
     public void addDistributor(Distributor distributor) {
         versionedDistributorBook.addDistributor(distributor);
         updateFilteredDistributorList(PREDICATE_SHOW_ALL_DISTRIBUTORS);
-        indicateAddressBookChanged();
+        indicateDistributorBookChanged();
     }
 
     @Override
     public void updateDistributor(Distributor target, Distributor editedDistributor) {
         requireAllNonNull(target, editedDistributor);
-
         versionedDistributorBook.updateDistributor(target, editedDistributor);
-        indicateAddressBookChanged();
+        indicateDistributorBookChanged();
     }
 
     //=========== Filtered Product List Accessors =================================================================
