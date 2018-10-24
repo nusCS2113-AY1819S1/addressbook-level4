@@ -92,4 +92,5 @@ public class XmlAdaptedDistributor {
         return Objects.equals(name, otherDistributor.name)
                 && Objects.equals(phone, otherDistributor.phone);
     }
+
 }
