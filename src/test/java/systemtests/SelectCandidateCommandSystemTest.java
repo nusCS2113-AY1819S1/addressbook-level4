@@ -61,7 +61,8 @@ public class SelectCandidateCommandSystemTest extends CandidateBookSystemTest {
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getCandidateBook().getCandidateList().size();
-        assertCommandFailure(SelectCandidateCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(SelectCandidateCommand.COMMAND_WORD + " " + invalidIndex,
+                MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         /* Case: filtered candidate list, select index within bounds of recruit book and candidate list -> selected */
         Index validIndex = Index.fromOneBased(1);
@@ -81,7 +82,8 @@ public class SelectCandidateCommandSystemTest extends CandidateBookSystemTest {
 
         /* Case: invalid index (size + 1) -> rejected */
         invalidIndex = getModel().getFilteredCandidateList().size() + 1;
-        assertCommandFailure(SelectCandidateCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(SelectCandidateCommand.COMMAND_WORD + " " + invalidIndex,
+                MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         /* Case: invalid arguments (alphabets) -> rejected */
         assertCommandFailure(SelectCandidateCommand.COMMAND_WORD + " abc",

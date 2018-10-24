@@ -94,12 +94,13 @@ public class SelectCandidateCommandTest {
     }
 
     /**
-     * Executes a {@code SelectCandidateCommand} with the given {@code index}, and checks that {@code JumpToListRequestEvent}
-     * is raised with the correct index.
+     * Executes a {@code SelectCandidateCommand} with the given {@code index},
+     * and checks that {@code JumpToListRequestEvent} is raised with the correct index.
      */
     private void assertExecutionSuccess(Index index) {
         SelectCandidateCommand selectCandidateCommand = new SelectCandidateCommand(index);
-        String expectedMessage = String.format(SelectCandidateCommand.MESSAGE_SELECT_PERSON_SUCCESS, index.getOneBased());
+        String expectedMessage = String.format
+                (SelectCandidateCommand.MESSAGE_SELECT_PERSON_SUCCESS, index.getOneBased());
 
         assertCommandSuccess(selectCandidateCommand, model, commandHistory, expectedMessage, expectedModel);
 
@@ -108,8 +109,8 @@ public class SelectCandidateCommandTest {
     }
 
     /**
-     * Executes a {@code SelectCandidateCommand} with the given {@code index}, and checks that a {@code CommandException}
-     * is thrown with the {@code expectedMessage}.
+     * Executes a {@code SelectCandidateCommand} with the given {@code index},
+     * and checks that a {@code CommandException} is thrown with the {@code expectedMessage}.
      */
     private void assertExecutionFailure(Index index, String expectedMessage) {
         SelectCandidateCommand selectCandidateCommand = new SelectCandidateCommand(index);
