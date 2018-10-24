@@ -36,7 +36,7 @@ public class ClassDeleteCommand extends Command {
      * Command deletes a classroom.
      */
     public ClassDeleteCommand(String className, String moduleCode) {
-        classroomManager = new ClassroomManager();
+        classroomManager = ClassroomManager.getInstance();
         this.classToDelete = classroomManager.findClassroom(className, moduleCode);
     }
 

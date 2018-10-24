@@ -28,11 +28,14 @@ public class ClassDeleteCommandParser implements Parser<ClassDeleteCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_CLASSNAME, PREFIX_MODULECODE)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClassDeleteCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ClassDeleteCommand.MESSAGE_USAGE));
         }
 
         String className = argMultimap.getValue(PREFIX_CLASSNAME).get();
+        ClassroomParserUtil.parseClassName(className);
         String moduleCode = argMultimap.getValue(PREFIX_MODULECODE).get();
+        ClassroomParserUtil.parseClassModule(moduleCode);
 
         return new ClassDeleteCommand(className, moduleCode);
     }

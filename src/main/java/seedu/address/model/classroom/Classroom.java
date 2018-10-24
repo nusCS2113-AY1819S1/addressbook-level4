@@ -47,7 +47,22 @@ public class Classroom {
     }
 
     /**
-     * Returns true if both classroom have the same class-specific fields.
+     * Returns true if both classrooms of the same className have the same moduleCode.
+     * This defines a weaker notion of equality between two classrooms.
+     */
+    public boolean isSameClassroom(Classroom otherClassroom) {
+        if (otherClassroom == this) {
+            return true;
+        }
+
+        return otherClassroom != null
+                && otherClassroom.getClassName().equals(getClassName())
+                && (otherClassroom.getModuleCode().equals(getModuleCode()));
+    }
+
+    /**
+     * Returns true if both classrooms have the same identity and data fields.
+     * This defines a stronger notion of equality between two classrooms.
      */
     @Override
     public boolean equals(Object other) {

@@ -19,7 +19,7 @@ public class ClassModuleTest {
         // null -> returns false
         assertFalse(moduleCode.equals(null));
         // different moduleCode -> returns false
-        ClassModule differentmoduleCode = new ClassModule("wrongmodule");
+        ClassModule differentmoduleCode = new ClassModule("CG1112");
         assertFalse(moduleCode.equals(differentmoduleCode));
     }
 }

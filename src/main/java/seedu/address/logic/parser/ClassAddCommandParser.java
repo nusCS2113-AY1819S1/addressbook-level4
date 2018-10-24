@@ -22,7 +22,7 @@ public class ClassAddCommandParser implements Parser<ClassAddCommand> {
     /**
      * Parses {@code userInput} into a command and returns it.
      *
-     * @param userInput
+     * @param args
      * @throws ParseException if {@code userInput} does not conform the expected format
      */
     @Override
@@ -36,9 +36,12 @@ public class ClassAddCommandParser implements Parser<ClassAddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClassAddCommand.MESSAGE_USAGE));
         }
 
-        String className = argMultimap.getValue(PREFIX_CLASSNAME).get();
-        String moduleCode = argMultimap.getValue(PREFIX_MODULECODE).get();
+        String className = argMultimap.getValue(PREFIX_CLASSNAME).get().toUpperCase();
+        ClassroomParserUtil.parseClassName(className);
+        String moduleCode = argMultimap.getValue(PREFIX_MODULECODE).get().toUpperCase();
+        ClassroomParserUtil.parseClassModule(moduleCode);
         String maxEnrollment = argMultimap.getValue(PREFIX_MAXENROLLMENT).get();
+        ClassroomParserUtil.parseEnrollment(maxEnrollment);
 
         Classroom classRoom = new Classroom(
                 new ClassName(className),
