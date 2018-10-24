@@ -20,11 +20,10 @@ import seedu.address.commons.events.model.UserDeletedEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.distributor.Distributor;
 import seedu.address.model.login.Password;
-import seedu.address.model.login.UniqueUsersList;
+import seedu.address.model.login.UniqueUserList;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.AuthenticatedException;
-import seedu.address.model.login.exceptions.AuthenticationFailedException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 import seedu.address.model.product.Product;
@@ -185,7 +184,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean checkCredentials(Username username, Password password) throws AuthenticationFailedException {
+    public boolean checkCredentials(Username username, Password password) throws AuthenticatedException {
         return versionedUserDatabase.checkCredentials(username, password);
     }
 
@@ -219,7 +218,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void setUsersList(UniqueUsersList uniqueUserList) {
+    public void setUsersList(UniqueUserList uniqueUserList) {
         versionedUserDatabase.setUniqueUserList(uniqueUserList);
     }
 
@@ -325,7 +324,6 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         // state check
-        // MERGE CONFLICT HERE, INTEGRATED BOTH
         ModelManager other = (ModelManager) obj;
         return versionedAddressBook.equals(other.versionedAddressBook)
                 && filteredDistributors.equals(other.filteredDistributors)

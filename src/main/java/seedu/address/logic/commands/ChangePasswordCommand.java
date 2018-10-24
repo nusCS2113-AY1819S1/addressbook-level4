@@ -8,13 +8,13 @@ import seedu.address.model.Model;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
-import seedu.address.model.login.exceptions.AuthenticationFailedException;
+import seedu.address.model.login.exceptions.AuthenticatedException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 
 /**
  *  Changes registered user password
  */
-public class ChangeUserPasswordCommand extends Command {
+public class ChangePasswordCommand extends Command {
 
     public static final String COMMAND_WORD = "change-pw";
 
@@ -32,9 +32,9 @@ public class ChangeUserPasswordCommand extends Command {
     private final Password newPassword;
 
     /**
-     * Creates a ChangeUserPasswordCommand to modify the specified {@code User} password.
+     * Creates a ChangePasswordCommand to modify the specified {@code User} password.
      */
-    public ChangeUserPasswordCommand(Username username, Password password, Password newPassword) {
+    public ChangePasswordCommand(Username username, Password password, Password newPassword) {
         requireNonNull(username);
         requireNonNull(password);
         requireNonNull(newPassword);
@@ -55,7 +55,7 @@ public class ChangeUserPasswordCommand extends Command {
             } else {
                 return new CommandResult(MESSAGE_UPDATE_FAILURE);
             }
-        } catch (AuthenticationFailedException e) {
+        } catch (AuthenticatedException e) {
             throw new CommandException(MESSAGE_NOT_LOGGED_OUT);
         } catch (UserNotFoundException e) {
             throw new CommandException(MESSAGE_UPDATE_FAILURE);
@@ -65,10 +65,10 @@ public class ChangeUserPasswordCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this
-                || (other instanceof ChangeUserPasswordCommand
-                && this.username.equals(((ChangeUserPasswordCommand) other).username)
-                && this.password.equals(((ChangeUserPasswordCommand) other).password))
-                && this.newPassword.equals(((ChangeUserPasswordCommand) other).newPassword);
+                || (other instanceof ChangePasswordCommand
+                && this.username.equals(((ChangePasswordCommand) other).username)
+                && this.password.equals(((ChangePasswordCommand) other).password))
+                && this.newPassword.equals(((ChangePasswordCommand) other).newPassword);
     }
 
 }

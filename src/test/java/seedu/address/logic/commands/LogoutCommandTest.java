@@ -18,7 +18,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.distributor.Distributor;
 import seedu.address.model.login.Password;
-import seedu.address.model.login.UniqueUsersList;
+import seedu.address.model.login.UniqueUserList;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.DuplicateUserException;
@@ -117,7 +117,7 @@ public class LogoutCommandTest {
         }
 
         @Override
-        public void setUsersList(UniqueUsersList uniqueUsersList) {
+        public void setUsersList(UniqueUserList uniqueUserList) {
             fail("This method should not be called.");
         }
 
