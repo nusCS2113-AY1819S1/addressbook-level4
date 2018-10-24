@@ -13,6 +13,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.TimeTableChangedEvent;
+import seedu.address.commons.events.security.LogoutEvent;
 import seedu.address.model.person.FriendListPredicate;
 import seedu.address.model.person.OtherListPredicate;
 import seedu.address.model.person.Person;
@@ -229,5 +230,10 @@ public class ModelManager extends ComponentManager implements Model {
     public User getUser() {
         //TODO Can you do this? Must you create a new object to be returned instead?
         return this.user;
+    }
+
+    @Override
+    public void commandLogout() {
+        raise(new LogoutEvent());
     }
 }

@@ -91,6 +91,11 @@ public interface Model {
     User getUser();
 
     /**
+     * For CLI Logout to call to raise event
+     */
+    void commandLogout();
+
+    /**
      * Returns true if the model has previous address book states to restore.
      */
     boolean canUndoAddressBook();

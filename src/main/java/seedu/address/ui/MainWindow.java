@@ -295,6 +295,8 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleLogout() {
         security.logout();
+        removeInnerParts();
+        fillSecurityCommandBox();
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -337,6 +339,7 @@ public class MainWindow extends UiPart<Stage> {
 
     @Subscribe
     public void handleLogoutEvent(LogoutEvent logout) {
+        security.logout();
         removeInnerParts();
         fillSecurityCommandBox();
     }

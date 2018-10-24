@@ -1,5 +1,7 @@
 package seedu.address.security;
 
+import com.google.common.eventbus.Subscribe;
+
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.events.security.LogoutEvent;
 import seedu.address.commons.events.security.SuccessfulLoginEvent;
@@ -27,6 +29,7 @@ public class SecurityManager extends ComponentManager implements Security {
         this.password = "test";
         this.model = model;
         this.logic = logic;
+
     }
 
     public boolean getAuthentication() {
@@ -53,9 +56,8 @@ public class SecurityManager extends ComponentManager implements Security {
     @Override
     public void logout() {
         this.isAuthenticated = false;
-        //TODO Check below
+        //TODO Check below is working?
         model.clearUser();
-        raise(new LogoutEvent());
     }
 
     @Override
@@ -76,5 +78,10 @@ public class SecurityManager extends ComponentManager implements Security {
     @Override
     public User getUser() {
         return model.getUser();
+    }
+
+    @Subscribe
+    public void handleCommandLogoutEvent(LogoutEvent logout) {
+        logout();
     }
 }
