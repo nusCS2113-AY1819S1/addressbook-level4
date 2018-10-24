@@ -48,7 +48,7 @@ public class StatsDisplayPanel extends UiPart<Region> {
     private void createTabs(Tab... tabs) {
         for (Tab tab : tabs) {
             if (tabManager.getTabs().stream().anyMatch(t -> t.getText().equals(tab.getText()))) {
-                tabManager.getTabs().remove(tab);
+                tabManager.getTabs().remove(tab.getText());
             }
             tabManager.getTabs().add(tab);
             tabManager.getSelectionModel().select(tab);
@@ -58,8 +58,7 @@ public class StatsDisplayPanel extends UiPart<Region> {
     @Subscribe
     public void handleShowSummaryTableEvent(ShowSummaryTableEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        Tab summaryTab = new Tab(SummaryDisplay.LABEL);
-        summaryTab.setContent(new SummaryDisplay(event.data).getRoot());
+        CustomTab summaryTab = new CustomTab(SummaryDisplay.LABEL , new SummaryDisplay(event.data).getRoot());
         createTabs(summaryTab);
         show();
     }
@@ -67,8 +66,7 @@ public class StatsDisplayPanel extends UiPart<Region> {
     @Subscribe
     public void handleShowPieChartStatsEvent(ShowPieChartStatsEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        Tab categoryTab = new Tab(CategoryBreakdown.LABEL);
-        categoryTab.setContent(new CategoryBreakdown(event.data).getRoot());
+        CustomTab categoryTab = new CustomTab(CategoryBreakdown.LABEL, new CategoryBreakdown(event.data).getRoot());
         createTabs(categoryTab);
         show();
     }

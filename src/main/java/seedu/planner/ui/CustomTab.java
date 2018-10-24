@@ -1,8 +1,7 @@
 package seedu.planner.ui;
 
-import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.control.Tab;
-import seedu.planner.model.summary.CategoryStatistic;
 
 /**
  * This represents a typical tab which can be used to display statistics or summary in the Financial Planner.
@@ -10,10 +9,9 @@ import seedu.planner.model.summary.CategoryStatistic;
  */
 public class CustomTab extends Tab {
 
-    public CustomTab(ObservableList<CategoryStatistic> toDisplay) {
-        setText("Category Breakdown for financial activity");
-        CategoryBreakdown categoryBreakdown = new CategoryBreakdown(toDisplay);
-        setContent(categoryBreakdown.getRoot());
+    public CustomTab(String tabName, Node node) {
+        setText(tabName);
+        setContent(node);
     }
 
     @Override
