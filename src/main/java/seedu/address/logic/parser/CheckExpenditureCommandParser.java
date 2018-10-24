@@ -6,10 +6,10 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.expenditureinfo.Date;
 import seedu.address.model.expenditureinfo.Expenditure;
 
+import java.util.stream.Stream;
+
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MONEY;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 public class CheckExpenditureCommandParser implements Parser<CheckExpenditureCommand>{
     /**
@@ -22,6 +22,11 @@ public class CheckExpenditureCommandParser implements Parser<CheckExpenditureCom
                     ArgumentTokenizer.tokenize(args, PREFIX_DATE);
 
 
+            if (!arePrefixesPresent(argMultimap, PREFIX_DATE)
+                    || !argMultimap.getPreamble().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        CheckExpenditureCommand.MESSAGE_USAGE));
+            }
            Date date1 = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
            Date date2 = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
 
@@ -29,7 +34,9 @@ public class CheckExpenditureCommandParser implements Parser<CheckExpenditureCom
             return new CheckExpenditureCommand(date1, date2);
         }
 
-
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
 
     }
 
