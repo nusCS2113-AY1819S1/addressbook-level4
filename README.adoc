@@ -18,9 +18,7 @@ NUSSU-Connect is an application for executive committee (exco) members of the NU
 
 * <<UserGuide#, User Guide>>
 * <<DeveloperGuide#, Developer Guide>>
-* <<LearningOutcomes#, Learning Outcomes>>
 * <<AboutUs#, About Us>>
-* <<ContactUs#, Contact Us>>
 
 == Acknowledgements
 
