@@ -8,22 +8,22 @@ import seedu.address.model.enrolledModule.EnrolledModule;
 /**
  * JAXB-friendly adapted version of the EnrolledModule.
  */
-public class XmlAdaptedEnrolledClass {
+public class XmlAdaptedEnrolledModule {
 
     @XmlValue
-    private String enrolledClassName;
+    private String enrolledModuleName;
 
     /**
-     * Constructs an XmlAdaptedEnrolledClass.
+     * Constructs an XmlAdaptedEnrolledModule.
      * This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedEnrolledClass() {}
+    public XmlAdaptedEnrolledModule() {}
 
     /**
-     * Constructs a {@code XmlAdaptedEnrolledClass} with the given {@code enrolledModuleName}.
+     * Constructs a {@code XmlAdaptedEnrolledModule} with the given {@code enrolledModuleName}.
      */
-    public XmlAdaptedEnrolledClass(String enrolledClassName) {
-        this.enrolledClassName = enrolledClassName;
+    public XmlAdaptedEnrolledModule(String enrolledModuleName) {
+        this.enrolledModuleName = enrolledModuleName;
     }
 
     /**
@@ -31,8 +31,8 @@ public class XmlAdaptedEnrolledClass {
      *
      * @param source future changes to this will not affect the created
      */
-    public XmlAdaptedEnrolledClass(EnrolledModule source) {
-        enrolledClassName = source.enrolledModuleName;
+    public XmlAdaptedEnrolledModule(EnrolledModule source) {
+        enrolledModuleName = source.enrolledModuleName;
     }
 
     /**
@@ -41,10 +41,10 @@ public class XmlAdaptedEnrolledClass {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
     public EnrolledModule toModelType() throws IllegalValueException {
-        if (!EnrolledModule.isValidEnRolledModuleName(enrolledClassName)) {
+        if (!EnrolledModule.isValidEnRolledModuleName(enrolledModuleName)) {
             throw new IllegalValueException(EnrolledModule.MESSAGE_ENROLLED_MODULE_CONSTRAINTS);
         }
-        return new EnrolledModule(enrolledClassName);
+        return new EnrolledModule(enrolledModuleName);
     }
 
     @Override
@@ -53,10 +53,10 @@ public class XmlAdaptedEnrolledClass {
             return true;
         }
 
-        if (!(other instanceof XmlAdaptedEnrolledClass)) {
+        if (!(other instanceof XmlAdaptedEnrolledModule)) {
             return false;
         }
 
-        return enrolledClassName.equals(((XmlAdaptedEnrolledClass) other).enrolledClassName);
+        return enrolledModuleName.equals(((XmlAdaptedEnrolledModule) other).enrolledModuleName);
     }
 }

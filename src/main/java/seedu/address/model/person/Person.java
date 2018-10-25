@@ -25,7 +25,7 @@ public class Person {
     private final Map<String, List<TimeSlots>> timeslots;
 
     /**
-     * Every field must be present and not null.
+     * Name, Phone, Email, Address and Tags are to be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
                   Set<Tag> tags, Map<String, EnrolledModule> enrolledModules, Map<String ,List<TimeSlots> > timeslots) {
@@ -41,7 +41,7 @@ public class Person {
             this.enrolledModules.put(tempModuleName, tempModule);
         }
 
-        if (timeslots!=null) {
+        if (timeslots != null) {
             this.timeslots = new HashMap<>(timeslots);
         }
         else{
@@ -78,10 +78,15 @@ public class Person {
      * Returns an immutable enrolled module map, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Map<String, EnrolledModule> getEnrolledModules() { return Collections.unmodifiableMap(enrolledModules); }
+    public Map<String, EnrolledModule> getEnrolledModules() {
+        return Collections.unmodifiableMap(enrolledModules); }
 
+    /**
+     * Returns an immutable timeslot map, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
     public Map<String, List<TimeSlots>> getTimeSlots() {
-        return timeslots;
+        return Collections.unmodifiableMap(timeslots);
     }
 
     /**
