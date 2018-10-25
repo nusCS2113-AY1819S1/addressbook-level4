@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +12,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Filetype;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 
 //@@author jitwei98
 /**
@@ -26,10 +28,8 @@ public class ExportAllCommandTest {
 
     @Before
     public void setUp() {
-        // model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        model = new ModelManager();
-        expectedModel = new ModelManager();
-        // expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
     }
 
     @Test
