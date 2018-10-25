@@ -2,8 +2,10 @@ package seedu.address.model.transaction;
 
 import java.util.Objects;
 
+import seedu.address.model.drink.Date;
 import seedu.address.model.drink.Drink;
 import seedu.address.model.drink.Price;
+import seedu.address.model.drink.Quantity;
 
 /**
  * Represents a transaction in the company.
@@ -23,16 +25,19 @@ public class Transaction {
      */
 
     private TransactionType transactionType;
-    // private Date transactionDate;    // TODO: will be added when XH's code is merged
+    private Date transactionDate; // TODO: will be added when XH's code is merged
     private Drink drinkTransacted;
-    // private Quantity quantityTransacted;
+    private Quantity quantityTransacted;
     private Price amountMoney;
 
     public Transaction() {}
 
-    public Transaction(TransactionType transactionType, Drink drinkTransacted, Price amountMoney) {
+    public Transaction(Date transactionDate, TransactionType transactionType, Drink drinkTransacted,
+                       Quantity quantityTransacted, Price amountMoney) {
+        this.transactionDate = transactionDate;
         this.transactionType = transactionType;
         this.drinkTransacted = drinkTransacted;
+        this.quantityTransacted = quantityTransacted;
         this.amountMoney = amountMoney;
     }
 
@@ -53,6 +58,14 @@ public class Transaction {
         return amountMoney;
     }
 
+    public Date getTransactionDate() {
+        return transactionDate;
+    }
+
+    public Quantity getQuantityTransacted() {
+        return quantityTransacted;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -70,6 +83,23 @@ public class Transaction {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTransactionType(), getDrinkTransacted(), getAmountMoney());
+        return Objects.hash(getTransactionType(), getTransactionDate(), getDrinkTransacted(),
+                getQuantityTransacted(), getAmountMoney());
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getTransactionDate())
+                .append(" Date: ")
+                .append(getTransactionType())
+                .append(" Type: ")
+                .append(getDrinkTransacted())
+                .append(" Drink: ")
+                .append(getQuantityTransacted())
+                .append(" Quantity: ")
+                .append(getAmountMoney())
+                .append(" Amount: ");
+        return builder.toString();
     }
 }
