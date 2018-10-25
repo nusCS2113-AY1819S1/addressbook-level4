@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.security.LogoutEvent;
 import seedu.address.commons.events.security.SuccessfulLoginEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ExitRegisterEvent;
@@ -145,7 +146,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Enables Security CLI
      */
-    void fillSecurityCommandBox() {
+    public void fillSecurityCommandBox() {
         SecurityBox commandBox = new SecurityBox(security);
         commandBoxPlaceholder.getChildren().clear();
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
@@ -156,9 +157,25 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Clear displays when user is logging out
+     */
+    private void removeInnerParts() {
+        commandBoxPlaceholder.getChildren().clear();
+        resultDisplayPlaceholder.getChildren().clear();
+        timetablePlaceholder.getChildren().clear();
+        personListPanelPlaceholder.getChildren().clear();
+        friendListPanelPlaceholder.getChildren().clear();
+        resultDisplayPlaceholder.getChildren().clear();
+        statusbarPlaceholder.getChildren().clear();
+        commandBoxPlaceholder.getChildren().clear();
+        friendText.setText("");
+        personText.setText("");
+    }
+
+    /**
      * Fills up all the placeholders of this window.
      */
-    void fillInnerParts() {
+    public void fillInnerParts() {
 
         friendText.setText("Friends");
         friendText.setFill(Color.LIGHTGOLDENRODYELLOW);
@@ -278,6 +295,8 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleLogout() {
         security.logout();
+        removeInnerParts();
+        fillSecurityCommandBox();
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -316,5 +335,12 @@ public class MainWindow extends UiPart<Stage> {
     private void handleSuccessfulRegisterEvent(SuccessfulRegisterEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleSuccessRegister();
+    }
+
+    @Subscribe
+    public void handleLogoutEvent(LogoutEvent logout) {
+        security.logout();
+        removeInnerParts();
+        fillSecurityCommandBox();
     }
 }

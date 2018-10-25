@@ -80,10 +80,20 @@ public interface Model {
     void matchUserToPerson(String name);
 
     /**
+     * Clears the user instance when logging out
+     */
+    void clearUser();
+
+    /**
      *
      * @return the current authenticated User
      */
     User getUser();
+
+    /**
+     * For CLI Logout to call to raise event
+     */
+    void commandLogout();
 
     /**
      * Returns true if the model has previous address book states to restore.

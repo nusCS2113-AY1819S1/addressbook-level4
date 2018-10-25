@@ -13,7 +13,6 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.security.LogoutEvent;
 import seedu.address.commons.events.security.SuccessfulLoginEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.util.StringUtil;
@@ -134,10 +133,5 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     public void handleSuccessfulLoginEvent(SuccessfulLoginEvent loginSuccess) {
         mainWindow.fillInnerParts();
-    }
-
-    @Subscribe
-    public void handleLogoutEvent(LogoutEvent logout) {
-        start(primaryStage);
     }
 }
