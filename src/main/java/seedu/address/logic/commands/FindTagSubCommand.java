@@ -2,8 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.function.Predicate;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
@@ -18,14 +16,21 @@ public class FindTagSubCommand extends FindCommand {
     private final TagContainsKeywordsPredicate predicate;
 
     public FindTagSubCommand(TagContainsKeywordsPredicate predicate) {
-        this.predicate = predicate;
+        this(predicate, false);
     }
 
+    public FindTagSubCommand(TagContainsKeywordsPredicate predicate, boolean isExcludeMode) {
+        this.predicate = predicate;
+        this.isExcludeMode = isExcludeMode;
+    }
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        Predicate updatedPredicate = getMostUpdatedPredicate(model.getSearchHistoryManager(), predicate);
-        model.updateFilteredPersonList(updatedPredicate);
+        if (isExcludeMode) {
+            model.executeSearch(predicate.negate());
+        } else {
+            model.executeSearch(predicate);
+        }
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
