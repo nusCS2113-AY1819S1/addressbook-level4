@@ -17,8 +17,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.testutil.TypicalTasks;
 
 //@@author chelseyong
-public class XmlSerializableAddressBookTest {
-    private static final Logger logger = LogsCenter.getLogger(XmlSerializableAddressBookTest.class);
+public class XmlSerializableTaskBookTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlSerializableTaskBookTest");
     private static final Path TYPICAL_TASKS_FILE = TEST_DATA_FOLDER.resolve("typicalTaskBook.xml");
     private static final Path INVALID_TASK_FILE = TEST_DATA_FOLDER.resolve("invalidTaskBook.xml");
@@ -33,8 +32,6 @@ public class XmlSerializableAddressBookTest {
                 XmlSerializableTaskBook.class);
         AddressBook addressBookFromFile = dataFromFile.toModelType();
         AddressBook typicalPersonsAddressBook = TypicalTasks.getTypicalTaskBook();
-        logger.info("Addressbook" + addressBookFromFile + "|");
-        logger.info("TypicalPersons" + typicalPersonsAddressBook + "|");
         assertEquals(addressBookFromFile, typicalPersonsAddressBook);
     }
 
