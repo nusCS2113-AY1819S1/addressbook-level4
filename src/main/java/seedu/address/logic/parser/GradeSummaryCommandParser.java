@@ -4,6 +4,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_HIGHEST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEAN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDIAN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEVENTY_FIVE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TEST_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TWENTY_FIVE;
 
 import seedu.address.logic.commands.GradeSummaryCommand;
@@ -27,12 +28,13 @@ public class GradeSummaryCommandParser implements Parser<GradeSummaryCommand> {
                         PREFIX_HIGHEST, PREFIX_MEAN, PREFIX_MEDIAN);
 
         String commandToRun = "";
+        String testName = "TEST";
 
         if (argMultimap.getValue(PREFIX_TWENTY_FIVE).isPresent()) {
-            commandToRun = "25";
+            commandToRun = "TTF";
         }
         if (argMultimap.getValue(PREFIX_SEVENTY_FIVE).isPresent()) {
-            commandToRun = "75";
+            commandToRun = "LTF";
         }
         if (argMultimap.getValue(PREFIX_HIGHEST).isPresent()) {
             commandToRun = "H";
@@ -44,7 +46,7 @@ public class GradeSummaryCommandParser implements Parser<GradeSummaryCommand> {
             commandToRun = "MEDIAN";
         }
 
-        return new GradeSummaryCommand(commandToRun);
+        return new GradeSummaryCommand(commandToRun, testName);
 
     }
 
