@@ -49,6 +49,7 @@ image:LogicClassDiagram.png[width="800"]
 
 == Use Assertions `[LO-Assertions]`
 
+
 Note how the AddressBook app uses Java ``assert``s to verify assumptions.
 
 *Resources*
