@@ -9,10 +9,15 @@ import static seedu.recruit.commons.util.AppUtil.checkArgument;
  */
 
 public class Education {
-    public static final String EDUCATION_VALIDATION_REGEX = "[\\p{ASCII}]+";
 
     public static final String MESSAGE_EDUCATION_CONSTRAINTS =
-            "Education level should not be blank ";
+            "Education level indicated should be one of the following: "
+            + "PRIMARY, "
+            + "OLEVELS, "
+            + "NLEVELS, "
+            + "ALEVELS, "
+            + "DEGREE, "
+            + "OTHERS";
 
     public final String value;
 
@@ -22,11 +27,25 @@ public class Education {
         value = educationInput;
     }
 
+    public enum EducationLevel{
+        PRIMARY,
+        OLEVELS,
+        NLEVELS,
+        ALEVELS,
+        DEGREE,
+        OTHERS
+    }
+
     /**
      * Returns true if a given string is a valid education.
      */
     public static boolean isValidEducation(String test) {
-        return test.matches(EDUCATION_VALIDATION_REGEX);
+        for(EducationLevel e: EducationLevel.values()) {
+            if(test.equals(e.name())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
