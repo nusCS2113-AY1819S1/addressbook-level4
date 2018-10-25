@@ -14,6 +14,7 @@ import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.security.AppUsers;
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -23,12 +24,15 @@ public class StorageManager extends ComponentManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private AppUsersStorage appUsersStorage;
     private TimeTableStorage timeTableStorageStorage;
 
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
+                          AppUsersStorage appUsersStorage) {
         super();
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.appUsersStorage = appUsersStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -48,6 +52,22 @@ public class StorageManager extends ComponentManager implements Storage {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
+    // ================ AppUsers methods ==============================
+
+    @Override
+    public Path getAppUsersFilePath() {
+        return appUsersStorage.getAppUsersFilePath();
+    }
+
+    @Override
+    public Optional<AppUsers> readAppUsers() throws DataConversionException, IOException {
+        return appUsersStorage.readAppUsers();
+    }
+
+    @Override
+    public void saveAppUsers(AppUsers appUsers) throws IOException {
+        appUsersStorage.saveAppUsers(appUsers);
+    }
 
     // ================ AddressBook methods ==============================
 
