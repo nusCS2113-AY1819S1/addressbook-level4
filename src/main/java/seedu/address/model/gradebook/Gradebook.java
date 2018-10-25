@@ -39,17 +39,6 @@ public class Gradebook {
         this.gradebookComponentName = gradebookComponentName;
     }
 
-    /**
-     This method checks if user inputs empty values for module code or gradebook component name.
-     */
-    public static boolean hasEmptyParams(String moduleCode, String gradebookComponentName) {
-        boolean empty = false;
-        if (moduleCode.equals("") || gradebookComponentName.equals("")) {
-            empty = true;
-        }
-        return empty;
-    }
-
     public String getModuleCode() {
         return this.moduleCode;
     }
