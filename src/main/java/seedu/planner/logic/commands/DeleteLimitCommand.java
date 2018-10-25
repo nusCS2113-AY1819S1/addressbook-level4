@@ -41,7 +41,7 @@ public class DeleteLimitCommand extends Command {
         }
         model.deleteLimit(model.getSameDatesLimit(limit.getDateStart(), limit.getDateEnd()));
         model.commitFinancialPlanner();
-        return new CommandResult(MESSAGE_SUCCESS);// + model.autoLimitCheck());
+        return new CommandResult(MESSAGE_SUCCESS); // + model.autoLimitCheck());
     }
 
     @Override
