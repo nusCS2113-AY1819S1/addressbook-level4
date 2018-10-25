@@ -4,13 +4,13 @@ import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.commons.events.BaseEvent;
 
 /**
- * Indicates a request to jump to the list of candidates or
+ * Indicates a request to jump to the list of job offers
  */
-public class JumpToListRequestEvent extends BaseEvent {
+public class JumpToCompanyJobListRequestEvent extends BaseEvent {
 
     public final int targetIndex;
 
-    public JumpToListRequestEvent(Index targetIndex) {
+    public JumpToCompanyJobListRequestEvent(Index targetIndex) {
         this.targetIndex = targetIndex.getZeroBased();
     }
 
