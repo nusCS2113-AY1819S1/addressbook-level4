@@ -24,6 +24,7 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.LostCommand;
+import seedu.address.logic.commands.FoundCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -85,6 +86,8 @@ public class StockListParser {
             return new SaveCommandParser().parse(arguments);
         case LostCommand.COMMAND_WORD:
             return new LostCommandParser().parse(arguments);
+        case FoundCommand.COMMAND_WORD:
+            return new FoundCommandParser().parse(arguments);
         case TagCommand.COMMAND_WORD:
             return new TagCommandParser().parse(arguments);
         default:
