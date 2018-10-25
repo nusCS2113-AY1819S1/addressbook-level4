@@ -2,9 +2,12 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.util.JsonUtil;
 
 /**
  * Represents User's preferences.
@@ -14,9 +17,17 @@ public class UserPrefs {
     private GuiSettings guiSettings;
     private Path addressBookFilePath = Paths.get("data" , "addressbook.xml");
 
+    //@@author lws803
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
+        try {
+            Map<String, String> configMap = JsonUtil.readJsonFile(Paths.get("preferences.json"), Map.class).get();
+            addressBookFilePath = Paths.get(configMap.get("addressBookFilePath"));
+        } catch (DataConversionException dce) {
+            // TODO: Add logger here
+        }
     }
+    //@@author
 
     public GuiSettings getGuiSettings() {
         return guiSettings == null ? new GuiSettings() : guiSettings;
