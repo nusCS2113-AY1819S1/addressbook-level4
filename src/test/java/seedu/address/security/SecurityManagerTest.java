@@ -1,6 +1,8 @@
 package seedu.address.security;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.testutil.TypicalPersons.TEST;
 
@@ -18,6 +20,7 @@ import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.User;
 import seedu.address.model.UserPrefs;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -132,5 +135,21 @@ public class SecurityManagerTest {
             testFlag = true;
         }
         assertTrue(testFlag);
+    }
+
+    @Test
+    public void getUser_correctUserReturned() {
+        securityManager.login("test", "test");
+        User currentUser = securityManager.getUser();
+        String userName = currentUser.getName().toString();
+        assertEquals("test", userName);
+    }
+
+    @Test
+    public void getUser_afterLoggedOut_nullReturnedInsteadOfUser() {
+        securityManager.login("test", "test");
+        securityManager.logout();
+        User currentUser = securityManager.getUser();
+        assertNull(currentUser);
     }
 }
