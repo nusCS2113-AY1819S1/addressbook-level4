@@ -67,6 +67,19 @@ public class FileUtil {
     }
 
     /**
+     * Returns false if the new folder has been created and return true if the folder is present
+     * Creates all the folder directory if it is missing
+     * @throws IOException if the file or directory cannot be created.
+     */
+    public static boolean createFolder(Path folder) throws IOException {
+        if (folder != null && Files.notExists(folder)) {
+            Files.createDirectories(folder);
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * Creates parent directories of file if it has a parent directory
      */
     public static void createParentDirsOfFile(Path file) throws IOException {
