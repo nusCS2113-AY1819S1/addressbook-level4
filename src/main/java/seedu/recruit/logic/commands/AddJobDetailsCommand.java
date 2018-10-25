@@ -36,7 +36,7 @@ public class AddJobDetailsCommand extends Command {
             + PREFIX_JOB + "cashier "
             + PREFIX_GENDER + "M "
             + PREFIX_AGE_RANGE + "20-30 "
-            + PREFIX_EDUCATION + "O levels "
+            + PREFIX_EDUCATION + "OLEVELS"
             + PREFIX_SALARY + "1200\n";
 
 

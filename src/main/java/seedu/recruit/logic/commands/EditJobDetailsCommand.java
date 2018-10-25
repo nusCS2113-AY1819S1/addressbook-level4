@@ -48,7 +48,7 @@ public class EditJobDetailsCommand extends Command {
             + PREFIX_COMPANY_NAME + "KFC "
             + PREFIX_GENDER + "M "
             + PREFIX_AGE_RANGE + "21-42"
-            + PREFIX_EDUCATION + "A LEVELS";
+            + PREFIX_EDUCATION + "ALEVELS";
 
     public static final String MESSAGE_EDIT_JOB_OFFER_SUCCESS = "Edited job offer: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be included";
