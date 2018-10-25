@@ -11,10 +11,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import seedu.address.authentication.PasswordUtils;
-import seedu.address.commons.login.authenication.AuthenticationLevel;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.LoginInfoManager;
 import seedu.address.model.Model;
 import seedu.address.model.user.AuthenticationLevel;

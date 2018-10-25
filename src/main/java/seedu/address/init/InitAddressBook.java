@@ -1,5 +1,10 @@
 package seedu.address.init;
 
+import static seedu.address.authentication.AuthenticalLevel.AUTH_ACCOUNTANT;
+import static seedu.address.authentication.AuthenticalLevel.AUTH_ADMIN;
+import static seedu.address.authentication.AuthenticalLevel.AUTH_MANAGER;
+import static seedu.address.authentication.AuthenticalLevel.AUTH_STOCK_TAKER;
+
 import java.io.IOException;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -33,11 +38,6 @@ import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.Storage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
-
-import static seedu.address.authentication.AuthenticalLevel.AUTH_ACCOUNTANT;
-import static seedu.address.authentication.AuthenticalLevel.AUTH_ADMIN;
-import static seedu.address.authentication.AuthenticalLevel.AUTH_MANAGER;
-import static seedu.address.authentication.AuthenticalLevel.AUTH_STOCK_TAKER;
 
 /**
  * Contain item that has to be init after login

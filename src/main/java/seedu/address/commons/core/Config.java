@@ -17,7 +17,7 @@ public class Config {
     private Level logLevel = Level.INFO;
     private Path userPrefsFilePath = Paths.get("preferences.json");
     private Path userLoginInfoFilePath = Paths.get("loginInfoManager.json");
-    private Path FXMLLoginPath = Paths.get ("LoginPage.fxml");
+    private Path loginPagePath = Paths.get ("LoginPage.fxml");
 
 
     public String getAppTitle() {
@@ -52,12 +52,12 @@ public class Config {
         this.userLoginInfoFilePath = userLoginInfoFilePath;
     };
 
-    public Path getFXMLLoginPath() {
-        return FXMLLoginPath;
+    public Path getLoginPagePath () {
+        return loginPagePath;
     }
 
-    public void setFXMLLoginPath(Path FXMLLoginPath) {
-        this.FXMLLoginPath = FXMLLoginPath;
+    public void setLoginPagePath (Path loginPagePath) {
+        this.loginPagePath = loginPagePath;
     };
 
     @Override

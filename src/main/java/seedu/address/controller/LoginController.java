@@ -41,7 +41,7 @@ public class LoginController {
     private boolean isPasswordGoingToEnter = false;
     private final Logger logger = LogsCenter.getLogger(LoginController.class);
 
-    public LoginController(){
+    public LoginController() {
         username = "";
         password = "";
     }

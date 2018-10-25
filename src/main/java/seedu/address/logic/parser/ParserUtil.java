@@ -39,7 +39,7 @@ public class ParserUtil {
      * Trim userName
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static String parseUserName(String userName) throws ParseException{
+    public static String parseUserName(String userName) throws ParseException {
         requireNonNull(userName);
         String trimmedUserName = userName.trim();
         if (!UserName.isValidUserName(trimmedUserName)) {

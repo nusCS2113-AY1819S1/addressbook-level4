@@ -64,9 +64,8 @@ public class MainApp extends Application {
     private FXMLLoader fxmlLoader;
     private LoginInfoManager loginInfoList;
     private LoginController loginController;
+    private String loginPathPath;
     private InitAddressBook initAddressBook;
-    private String FXML_LOGIN_PATH;
-
 
     @Override
     public void init() throws Exception {
@@ -79,7 +78,7 @@ public class MainApp extends Application {
         userPrefs = initPrefs(userPrefsStorage);
         LoginInfoStorage loginInfoStorage = new JsonLoginInfoStorage (config.getUserLoginInfoilePath ());
         loginInfoList = initLoginInfo (loginInfoStorage);
-        FXML_LOGIN_PATH = config.getFXMLLoginPath ().toString ();
+        loginPathPath = config.getLoginPagePath ().toString ();
 
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage, loginInfoStorage);
@@ -213,7 +212,7 @@ public class MainApp extends Application {
         settingUpLoginController();
     }
     private void settingUpLoginWindow() {
-        URL fxmlLoginFileUrl = UiPart.getFxmlFileUrl(FXML_LOGIN_PATH);
+        URL fxmlLoginFileUrl = UiPart.getFxmlFileUrl(loginPathPath);
         Parent root = loadFxmlFile(fxmlLoginFileUrl, loginWindow);
         //loginWindow.initStyle(StageStyle.UNDECORATED);
         loginWindow.setTitle("Login Page");
