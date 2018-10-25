@@ -78,6 +78,18 @@ public class UniqueCompanyList implements Iterable<Company> {
     }
 
     /**
+     * Delete @param jobOffer from the companyList
+     * jobOffer must exist inside the companyList
+     */
+    public void deleteJobOffer(JobOffer jobOffer) {
+        internalList.get(getCompanyIndexFromName(jobOffer.getCompanyName())).removeJobOffer(jobOffer);
+    }
+
+    /**
+     * Deletes @param jobOffer from the companylist
+     */
+
+    /**
      * Replaces the company {@code target} in the list with {@code editedCompany}.
      * {@code target} must exist in the list.
      * The company identity of {@code editedCompany} must not be the same as another existing company in the list.

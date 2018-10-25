@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
+import seedu.recruit.commons.core.EmailSettings;
 import seedu.recruit.commons.core.GuiSettings;
 
 /**
@@ -12,6 +13,7 @@ import seedu.recruit.commons.core.GuiSettings;
 public class UserPrefs {
 
     private GuiSettings guiSettings;
+    private final EmailSettings emailSettings = new EmailSettings();
     private Path candidateBookFilePath = Paths.get("data" , "candidatebook.xml");
     private Path companyBookFilePath = Paths.get("data" , "companybook.xml");
 
@@ -29,6 +31,10 @@ public class UserPrefs {
 
     public void setGuiSettings(double width, double height, int x, int y) {
         guiSettings = new GuiSettings(width, height, x, y);
+    }
+
+    public EmailSettings getEmailSettings() {
+        return emailSettings;
     }
 
     public Path getCandidateBookFilePath() {
@@ -72,6 +78,7 @@ public class UserPrefs {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings.toString());
+        sb.append("\nEmail Settings : " + emailSettings.toString());
         sb.append("\nLocal candidatebook file location : " + candidateBookFilePath);
         sb.append("\nLocal companybook file location : " + companyBookFilePath);
         return sb.toString();

@@ -71,6 +71,10 @@ public class Company {
         jobOffers.add(jobOffer);
     }
 
+    public void removeJobOffer(JobOffer jobOffer) {
+        jobOffers.remove(jobOffer);
+    }
+
     /**
      * Returns true if both companies is of the same name
      * This defines a weaker notion of equality between two companies.
@@ -116,7 +120,8 @@ public class Company {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getCompanyName())
+        builder.append("Company Name:")
+                .append(getCompanyName())
                 .append(" Address: ")
                 .append(getAddress())
                 .append(" Email: ")

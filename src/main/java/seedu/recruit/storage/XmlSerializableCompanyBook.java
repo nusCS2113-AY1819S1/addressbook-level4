@@ -48,11 +48,11 @@ public class XmlSerializableCompanyBook {
     public CompanyBook toModelType() throws IllegalValueException {
         CompanyBook companyBook = new CompanyBook();
         for (XmlAdaptedCompany p : companies) {
-            Company job = p.toModelType();
-            if (companyBook.hasCompany(job)) {
+            Company company = p.toModelType();
+            if (companyBook.hasCompany(company)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_COMPANY);
             }
-            companyBook.addCompany(job);
+            companyBook.addCompany(company);
         }
         return companyBook;
     }

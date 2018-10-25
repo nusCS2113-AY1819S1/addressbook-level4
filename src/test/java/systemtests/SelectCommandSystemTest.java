@@ -7,16 +7,16 @@ import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.recruit.logic.commands.SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS;
 import static seedu.recruit.testutil.TestUtil.getLastIndex;
 import static seedu.recruit.testutil.TestUtil.getMidIndex;
-import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.recruit.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.recruit.commons.core.index.Index;
-import seedu.recruit.logic.commands.RedoCommand;
+import seedu.recruit.logic.commands.RedoCandidateBookCommand;
 import seedu.recruit.logic.commands.SelectCommand;
-import seedu.recruit.logic.commands.UndoCommand;
+import seedu.recruit.logic.commands.UndoCandidateBookCommand;
 import seedu.recruit.model.Model;
 
 @Ignore("not updated with new UI changes")
@@ -28,8 +28,8 @@ public class SelectCommandSystemTest extends CandidateBookSystemTest {
         /* Case: select the first card in the candidate list, command with leading spaces and trailing spaces
          * -> selected
          */
-        String command = "   " + SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + "   ";
-        assertCommandSuccess(command, INDEX_FIRST_PERSON);
+        String command = "   " + SelectCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased() + "   ";
+        assertCommandSuccess(command, INDEX_FIRST);
 
         /* Case: select the last card in the candidate list -> selected */
         Index personCount = getLastIndex(getModel());
@@ -37,13 +37,13 @@ public class SelectCommandSystemTest extends CandidateBookSystemTest {
         assertCommandSuccess(command, personCount);
 
         /* Case: undo previous selection -> rejected */
-        command = UndoCommand.COMMAND_WORD;
-        String expectedResultMessage = UndoCommand.MESSAGE_FAILURE;
+        command = UndoCandidateBookCommand.COMMAND_WORD;
+        String expectedResultMessage = UndoCandidateBookCommand.MESSAGE_FAILURE;
         assertCommandFailure(command, expectedResultMessage);
 
         /* Case: redo selecting last card in the list -> rejected */
-        command = RedoCommand.COMMAND_WORD;
-        expectedResultMessage = RedoCommand.MESSAGE_FAILURE;
+        command = RedoCandidateBookCommand.COMMAND_WORD;
+        expectedResultMessage = RedoCandidateBookCommand.MESSAGE_FAILURE;
         assertCommandFailure(command, expectedResultMessage);
 
         /* Case: select the middle card in the candidate list -> selected */
@@ -96,7 +96,7 @@ public class SelectCommandSystemTest extends CandidateBookSystemTest {
 
         /* Case: select from empty recruit book -> rejected */
         deleteAllPersons();
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
+        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(),
                 MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
