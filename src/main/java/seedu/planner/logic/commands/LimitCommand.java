@@ -55,7 +55,7 @@ public class LimitCommand extends Command {
 
         model.addLimit(limit);
         output = model.generateLimitOutput(model.isExceededLimit(limit), limit);
-
+        model.commitFinancialPlanner();
         return new CommandResult(output);
     }
 

@@ -40,6 +40,7 @@ public class DeleteLimitCommand extends Command {
             throw new CommandException(MESSAGE_LIMITS_DO_NOT_EXIST);
         }
         model.deleteLimit(model.getSameDatesLimit(limit.getDateStart(), limit.getDateEnd()));
+        model.commitFinancialPlanner();
         return new CommandResult(MESSAGE_SUCCESS + model.autoLimitCheck());
     }
 
