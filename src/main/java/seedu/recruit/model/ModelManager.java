@@ -342,21 +342,18 @@ public class ModelManager extends ComponentManager implements Model {
      */
     @Override
     public String getFilteredRecipientJobOfferNames(ArrayList<JobOffer> duplicateJobOffers) {
-        boolean hasDuplicate;
+        boolean isDuplicate;
         StringBuilder output = new StringBuilder();
         for (JobOffer jobOffer : filteredJobs) {
-            hasDuplicate = false;
+            isDuplicate = false;
             for (JobOffer duplicateJobOffer : duplicateJobOffers) {
                 if (jobOffer.isSameJobOffer(duplicateJobOffer)) {
-                    hasDuplicate = true;
+                    isDuplicate = true;
                     break;
                 }
             }
-            if (!hasDuplicate) {
-                output.append(jobOffer.getCompanyName().toString());
-                output.append(" regarding job offer: ");
-                output.append(jobOffer.getJob().toString());
-                output.append("\n");
+            if (!isDuplicate) {
+                output.append(getFilteredRecipientJobOfferNames());
             }
         }
         return output.toString();
@@ -385,21 +382,18 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public String getFilteredContentJobOfferNames(ArrayList<JobOffer> duplicateJobOffers) {
-        boolean hasDuplicate;
+        boolean isDuplicate;
         StringBuilder output = new StringBuilder();
         for (JobOffer jobOffer : filteredJobs) {
-            hasDuplicate = false;
+            isDuplicate = false;
             for (JobOffer duplicateJobOffer : duplicateJobOffers) {
                 if (jobOffer.isSameJobOffer(duplicateJobOffer)) {
-                    hasDuplicate = true;
+                    isDuplicate = true;
                     break;
                 }
             }
-            if (!hasDuplicate) {
-                output.append(jobOffer.getJob().toString());
-                output.append(" at ");
-                output.append(jobOffer.getCompanyName().toString());
-                output.append("\n");
+            if (!isDuplicate) {
+                output.append(getFilteredContentJobOfferNames());
             }
         }
         return output.toString();
@@ -424,19 +418,18 @@ public class ModelManager extends ComponentManager implements Model {
      */
     @Override
     public String getFilteredCandidateNames(ArrayList<Candidate> duplicateCandidates) {
-        boolean hasDuplicate;
+        boolean isDuplicate;
         StringBuilder output = new StringBuilder();
         for (Candidate candidate : filteredCandidates) {
-            hasDuplicate = false;
+            isDuplicate = false;
             for (Candidate duplicateCandidate : duplicateCandidates) {
                 if (candidate.isSamePerson(duplicateCandidate)) {
-                    hasDuplicate = true;
+                    isDuplicate = true;
                     break;
                 }
             }
-            if (!hasDuplicate) {
-                output.append(candidate.getName().toString());
-                output.append("\n");
+            if (!isDuplicate) {
+                output.append(getFilteredCandidateNames());
             }
         }
         return output.toString();

@@ -20,6 +20,7 @@ import seedu.recruit.commons.core.LogsCenter;
 import seedu.recruit.commons.events.ui.ExitAppRequestEvent;
 import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
+import seedu.recruit.commons.events.ui.ShowEmailPreviewEvent;
 import seedu.recruit.commons.events.ui.ShowHelpRequestEvent;
 import seedu.recruit.logic.Logic;
 import seedu.recruit.model.UserPrefs;
@@ -53,6 +54,7 @@ public class MainWindow extends UiPart<Stage> {
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
+    private EmailPreview emailPreview;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -95,6 +97,8 @@ public class MainWindow extends UiPart<Stage> {
         registerAsAnEventHandler(this);
 
         helpWindow = new HelpWindow();
+        emailPreview = new EmailPreview();
+
         staticPanelViewPlaceholder = panelViewPlaceholder;
     }
 
@@ -224,6 +228,19 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the email preview window
+     */
+    public void handleEmailPreview(String preview) {
+        emailPreview.setEmailPreview(preview);
+
+        if (!emailPreview.isShowing()) {
+            emailPreview.show();
+        } else {
+            emailPreview.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -333,6 +350,12 @@ public class MainWindow extends UiPart<Stage> {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
+    }
+
+    @Subscribe
+    private void handleEmailPreviewEvent(ShowEmailPreviewEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleEmailPreview(event.getEmailPreview());
     }
 
     @Subscribe
