@@ -20,5 +20,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("e/");
     public static final Prefix PREFIX_MONEY = new Prefix("m/");
     public static final Prefix PREFIX_CATEGORY = new Prefix("c/");
+    public static final Prefix PREFIX_START = new Prefix("s/");
+    public static final Prefix PREFIX_END = new Prefix("n/");
 
 }
