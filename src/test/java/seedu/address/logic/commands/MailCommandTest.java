@@ -1,7 +1,7 @@
+//@@author lekoook
 package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
-
 import static seedu.address.logic.commands.MailCommand.MESSAGE_UNSUPPORTED;
 import static seedu.address.logic.commands.MailCommand.TYPE_ALL;
 import static seedu.address.logic.commands.MailCommand.TYPE_GROUPS;
@@ -10,7 +10,6 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

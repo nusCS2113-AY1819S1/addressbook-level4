@@ -1,3 +1,4 @@
+//@@author lekoook
 package seedu.address.model.trie;
 
 import static org.junit.Assert.assertEquals;
