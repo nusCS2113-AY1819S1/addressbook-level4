@@ -317,6 +317,11 @@ public class CommandTestUtil {
         }
 
         @Override
+        public void sortCompanies(Prefix prefix) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public int getCompanyIndexFromName(CompanyName companyName) {
             throw new AssertionError("This method should not be called.");
         };

@@ -233,6 +233,12 @@ public class ModelManager extends ComponentManager implements Model {
         indicateCompanyBookChanged();
     }
 
+    @Override
+    public void sortCompanies(Prefix prefix) {
+        versionedCompanyBook.sortCompanies(prefix);
+        indicateCompanyBookChanged();
+    }
+
     //=========== Filtered Company List Accessors =============================================================
 
     /**

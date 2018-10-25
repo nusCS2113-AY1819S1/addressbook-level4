@@ -45,6 +45,11 @@ public interface Model {
     void addCandidate(Candidate candidate);
 
     /**
+     * Sorts the candidates in CandidateBook
+     */
+    void sortCandidates(Prefix prefix);
+
+    /**
      * Replaces the given candidate {@code target} with {@code editedCandidate}.
      * {@code target} must exist in the CandidateBook.
      * The candidate identity of {@code editedCandidate} must not be the same as another existing candidate in the
@@ -113,6 +118,11 @@ public interface Model {
     void addCompany(Company company);
 
     /**
+     * Sorts the list of companies in CompanyBook
+     */
+    void sortCompanies(Prefix prefix);
+
+    /**
      * Replaces the given company {@code target} with {@code editedCompany}.
      * {@code target} must exist in the CompanyBook.
      * The company identity of {@code editedCompany} must not be the same as another existing company in the
@@ -138,11 +148,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredCompanyList(Predicate<Company> predicate);
-
-    /**
-     * Sorts the candidates in CandidateBook
-     */
-    void sortCandidates(Prefix prefix);
 
     /**
      * Returns true if the model has previous CompanyBook states to restore.

@@ -2,10 +2,12 @@ package seedu.recruit.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.recruit.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.recruit.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
 
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.recruit.logic.parser.Prefix;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
 import seedu.recruit.model.company.UniqueCompanyList;
@@ -109,6 +111,18 @@ public class CompanyBook implements ReadOnlyCompanyBook {
     public void updateCompany(Company target, Company editedCompany) {
         requireNonNull(editedCompany);
         companyList.setCompany(target, editedCompany);
+    }
+
+    /**
+     * Sorts the company list
+     */
+    public void sortCompanies(Prefix prefix) {
+        if (prefix == PREFIX_COMPANY_NAME) {
+            companyList.sortByCompanyName();
+        }
+        else {
+            companyList.sortByEmail();
+        }
     }
 
     /**

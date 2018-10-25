@@ -32,7 +32,7 @@ public class SortCandidateCommand extends Command {
 
     private static Prefix prefixToSort;
 
-    public SortCommand(Prefix prefix) {
+    public SortCandidateCommand(Prefix prefix) {
         this.prefixToSort = prefix;
     }
 
@@ -40,6 +40,7 @@ public class SortCandidateCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.sortCandidates(prefixToSort);
+        model.commitCandidateBook();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

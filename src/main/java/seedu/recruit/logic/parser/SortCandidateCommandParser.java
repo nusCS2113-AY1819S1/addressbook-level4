@@ -8,37 +8,37 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_SALARY;
 
-import seedu.recruit.logic.commands.SortCommand;
+import seedu.recruit.logic.commands.SortCandidateCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new SortByNameCommand object
+ * Parses input arguments and creates a new SortCandidateCommand object
  */
-public class SortCommandParser implements Parser<SortCommand> {
+public class SortCandidateCommandParser implements Parser<SortCandidateCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the SortByNameCommand
-     * and returns an SortByNameCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the SortCandidateCommand
+     * and returns an SortCandidateCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public SortCommand parse(String arg) throws ParseException {
+    public SortCandidateCommand parse(String arg) throws ParseException {
         requireNonNull(arg);
 
         switch(arg) {
         case " n/":
-            return new SortCommand(PREFIX_NAME);
+            return new SortCandidateCommand(PREFIX_NAME);
         case " x/":
-            return new SortCommand(PREFIX_AGE);
+            return new SortCandidateCommand(PREFIX_AGE);
         case " e/":
-            return new SortCommand(PREFIX_EMAIL);
+            return new SortCandidateCommand(PREFIX_EMAIL);
         case " j/":
-            return new SortCommand(PREFIX_JOB);
+            return new SortCandidateCommand(PREFIX_JOB);
         case " h/":
-            return new SortCommand(PREFIX_EDUCATION);
+            return new SortCandidateCommand(PREFIX_EDUCATION);
         case " s/":
-            return new SortCommand(PREFIX_SALARY);
+            return new SortCandidateCommand(PREFIX_SALARY);
         default:
-            throw new ParseException(SortCommand.MESSAGE_TAG_USAGE);
+            throw new ParseException(SortCandidateCommand.MESSAGE_TAG_USAGE);
         }
     }
 }
