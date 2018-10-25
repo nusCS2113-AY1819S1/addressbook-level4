@@ -2,15 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
+import static seedu.address.testutil.TypicalUsers.ALICE;
 
 import java.util.function.Predicate;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
@@ -19,7 +17,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyEventManager;
 import seedu.address.model.event.Event;
 import seedu.address.model.user.User;
-import seedu.address.storage.UserStorage;
 import seedu.address.testutil.UserBuilder;
 
 public class SignupCommandTest {
@@ -39,10 +36,9 @@ public class SignupCommandTest {
 
     @Test
     public void execute_successfulSignup() throws Exception {
-        User user = new UserBuilder().build();
-
-        JsonUserStorageStub jsonUserStorageStub = new JsonUserStorageStub();
-        ModelStubAcceptUser modelStubAcceptUser = new ModelStubAcceptUser(user, jsonUserStorageStub);
+        User user = new UserBuilder(ALICE).build();
+        User existingUser = new UserBuilder().build();
+        ModelStubAcceptUser modelStubAcceptUser = new ModelStubAcceptUser(existingUser);
 
         CommandResult commandResult = new SignupCommand(user).execute(modelStubAcceptUser, commandHistory);
 
@@ -54,37 +50,13 @@ public class SignupCommandTest {
     @Test
     public void execute_failedSignup_userExists() throws  Exception {
         User user = new UserBuilder().build();
-
-        JsonUserStorageStub jsonUserStorageStub = new JsonUserStorageStub();
-        jsonUserStorageStub.createUser(user.getUsername().toString(), user.getPassword().toString());
-        ModelStubAcceptUser modelStubAcceptUser = new ModelStubAcceptUser(user, jsonUserStorageStub);
+        ModelStubAcceptUser modelStubAcceptUser = new ModelStubAcceptUser(user);
 
         SignupCommand signupCommand = new SignupCommand(user);
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(SignupCommand.MESSAGE_EXISTS);
         signupCommand.execute(modelStubAcceptUser, commandHistory);
-    }
-
-    /**
-     * A default JsonUserStorage stub that contains mocks to all the methods.
-     */
-    private class JsonUserStorageStub implements UserStorage {
-        private JsonObject jsonObject;
-
-        JsonUserStorageStub() {
-            jsonObject = new JsonObject();
-        }
-
-        @Override
-        public void createUser(String username, String password) {
-            jsonObject.addProperty(username, password);
-        }
-
-        @Override
-        public JsonObject getUserAccounts() {
-            return jsonObject;
-        }
     }
 
     /**
@@ -190,33 +162,33 @@ public class SignupCommandTest {
      * A Model stub that simulates a signup.
      */
     private class ModelStubAcceptUser extends ModelStub {
-        private JsonUserStorageStub jsonUserStorage;
         private User user;
+        private boolean isLogged = false;
 
-        ModelStubAcceptUser(User user, JsonUserStorageStub jsonUserStorage) {
+        ModelStubAcceptUser(User user) {
             requireNonNull(user);
             this.user = user;
-            this.jsonUserStorage = jsonUserStorage;
         }
 
         @Override
         public boolean userExists(User user) {
             requireNonNull(user);
-            boolean isPresent = false;
-            String username = user.getUsername().toString();
+            return user.getUsername().equals(this.user.getUsername());
+        }
 
-            JsonObject userAccounts = jsonUserStorage.getUserAccounts();
-            if (userAccounts.has(username)) {
-                JsonElement password = userAccounts.get(username);
-                isPresent = user.getPassword().toString().equals(password.getAsString());
-            }
-
-            return isPresent;
+        @Override
+        public void logUser(User user) {
+            isLogged = user.equals(this.user);
         }
 
         @Override
         public void createUser(User user) {
-            jsonUserStorage.createUser(user.getUsername().toString(), user.getPassword().toString());
+            requireNonNull(user);
+        }
+
+        @Override
+        public boolean getLoginStatus() {
+            return isLogged;
         }
     }
 }
