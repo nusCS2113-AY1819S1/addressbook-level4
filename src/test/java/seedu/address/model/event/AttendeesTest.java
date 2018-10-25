@@ -20,12 +20,14 @@ public class AttendeesTest {
     private Set<String> attendeesSetOne;
     private Set<String> attendeesSetTwo;
     private Set<String> attendeesSetThree;
+    private Set<String> attendeesSetNull;
 
     @Before
     public void setup() {
         attendeesSetOne = new HashSet<>();
         attendeesSetTwo = new HashSet<>();
         attendeesSetThree = new HashSet<>();
+        attendeesSetNull = null;
 
         attendeesSetOne.add(VALID_NAME_AMY);
         attendeesSetTwo.add(VALID_NAME_BOB);
@@ -35,8 +37,13 @@ public class AttendeesTest {
 
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new Attendees(null, attendeesSetOne));
+    public void constructor_nullSingleSet_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> new Attendees(attendeesSetNull));
+    }
+
+    @Test
+    public void constructor_nullMultipleSet_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> new Attendees(attendeesSetOne, attendeesSetNull));
     }
 
     @Test
@@ -74,6 +81,7 @@ public class AttendeesTest {
         Attendees attendees1 = new Attendees(attendeesSetTwo);
         Attendees attendees2 = new Attendees(attendeesSetTwo);
 
+        // TODO: FIX use of attribute's method
         attendees1.addName(VALID_NAME_CALVIN);
         attendees2.attendeesSet.add(VALID_NAME_CALVIN);
 
