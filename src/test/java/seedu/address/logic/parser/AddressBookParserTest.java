@@ -168,22 +168,6 @@ public class AddressBookParserTest {
         assertEquals(new BudgetCommand(club), command);
     }
 
-    /**
-     * @Test
-     * public void parseCommand_calculatebudget() throws Exception {
-     *
-     * }
-
-
-    @Test
-    public void parseCommand_viewClubBudgets() throws Exception {
-      //probably need to first build a clubbudgetelements then run calculatebudgets and then do the following
-        assertTrue(parser.parseCommand(ViewClubBudgetsCommand.COMMAND_WORD) instanceof ViewClubBudgetsCommand);
-        assertTrue(parser.parseCommand(ViewClubBudgetsCommand.COMMAND_WORD
-                + "c/Computing Club") instanceof ListCommand);
-    }
-
-    */
     @Test
     public void parseCommand_addSkillLevelCommand() throws Exception {
         final Skill skill = new Skill("Photography");
