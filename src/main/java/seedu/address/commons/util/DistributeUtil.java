@@ -5,6 +5,7 @@ import static java.util.stream.Collectors.toMap;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -48,22 +49,28 @@ public class DistributeUtil {
      * @param allPerson
      * @return
      */
-    public LinkedList<Person> createNationalityList(LinkedList<Person> allPerson) {
-        //number of different nationality
+    public Map<Nationality, Integer> createNationalityMap(LinkedList<Person> allPerson) {
         Map<Nationality, Long> counts = numberOfDifferentNationality(allPerson);
-        Map<Nationality, Long> sortedCount = paxPerNationality(counts);
-        LinkedList<Person> nationalityLinkList = new LinkedList<>();
-
-        System.out.println(counts.size());
-        System.out.println(sortedCount);
-
+        counts = paxPerNationality(counts);
+        Map<Nationality, Integer> nationalityIntegerMap = new HashMap<>();
         for (int i = 0; i < counts.size(); i++) {
-            String[] parseValue = sortedCount.entrySet().toArray()[i].toString().split("=");
-            int value = Integer.parseInt(parseValue[1]);
-            System.out.print(sortedCount.keySet().toArray()[i] + " ");
-            System.out.println(value);
+            String[] parseValue = counts.entrySet().toArray()[i].toString().split("=");
+            Nationality nationalityCode = new Nationality(parseValue[0]);
+            int numOfSameNationality = Integer.parseInt(parseValue[1]);
+            nationalityIntegerMap.put(nationalityCode, numOfSameNationality);
         }
-        return nationalityLinkList;
+        return nationalityIntegerMap;
+    }
+
+    public Person findPerson(Nationality key, LinkedList<Person> randomAllPersonArrayList) {
+        for (Person p : randomAllPersonArrayList) {
+            if (p.getNationality().equals(key)) {
+                Person tempPerson = p;
+                randomAllPersonArrayList.remove(p);
+                return tempPerson;
+            }
+        }
+        return null;
     }
 
     /**
@@ -106,14 +113,13 @@ public class DistributeUtil {
     public void genderDistributionCheck(int index, ArrayList<ArrayList<Person>> groupArrayList,
                                          LinkedList<Person> genderLinkList,
                                          int loopCounter, int num, ArrayList<Person> temp) {
-        if (loopCounter >= index) {
-            temp = groupArrayList.get(num);
+        if (loopCounter < index) {
             temp.add(genderLinkList.getLast());
-            groupArrayList.remove(num);
             groupArrayList.add(num, temp);
         } else {
-            temp.add(genderLinkList.getLast());
-            groupArrayList.add(num, temp);
+            int z = loopCounter % index;
+            temp = groupArrayList.get(num);
+            groupArrayList.get(z).add(temp.size() - 1, genderLinkList.getLast());
         }
     }
 

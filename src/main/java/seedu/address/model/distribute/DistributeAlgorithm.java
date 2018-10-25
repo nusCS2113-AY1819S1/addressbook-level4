@@ -7,12 +7,14 @@ import static seedu.address.model.person.Gender.VALID_GENDER_MALE;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Random;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.DistributeUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Person;
 
 /**
@@ -140,8 +142,25 @@ public class DistributeAlgorithm {
     private void nationalityDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList,
                                          LinkedList<Person> randomAllPersonArrayList, String groupName)
             throws CommandException {
-        System.out.println("Nationality Distribution");
-
+        Map<Nationality, Integer> nationalityMap = distUtil.createNationalityMap(randomAllPersonArrayList);
+        int loopCounter = 0;
+        for (Map.Entry<Nationality, Integer> entry : nationalityMap.entrySet()) {
+            for (int x = 0; x < entry.getValue(); x++) {
+                ArrayList<Person> personArrayList = new ArrayList<>();
+                Person p = distUtil.findPerson(entry.getKey(), randomAllPersonArrayList);
+                if (loopCounter < index ) {
+                    personArrayList.add(p);
+                    groupArrayList.add(personArrayList);
+                } else {
+                    int z = loopCounter % index;
+                    ArrayList temp = groupArrayList.get(z);
+                    groupArrayList.get(z).add(temp.size() - 1, p);
+                }
+                loopCounter++;
+            }
+        }
+        distUtil.distributeProcess(groupArrayList, groupName);
+        groupArrayList.clear();
     }
 
     /**
