@@ -35,7 +35,7 @@ public class MailCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Mailing to: ";
     public static final String MESSAGE_UNSUPPORTED = "System mail application is unsupported.";
-    private static final String MESSAGE_EMPTY_SELECTION = "No contacts selected! Select one or more and try again.";
+    public static final String MESSAGE_EMPTY_SELECTION = "No contacts selected! Select one or more and try again.";
 
     /**
      * Instance variables
@@ -197,5 +197,19 @@ public class MailCommand extends Command {
             }
         }
         return output.toString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this.mailArgs == null) {
+            return other == this // short circuit if same object
+                    || (other instanceof MailCommand // instanceof handles nulls
+                    && this.mailType == ((MailCommand) other).mailType);
+        } else {
+            return other == this // short circuit if same object
+                    || (other instanceof MailCommand // instanceof handles nulls
+                    && this.mailType == ((MailCommand) other).mailType
+                    && this.mailArgs.equals(((MailCommand) other).mailArgs));
+        }
     }
 }

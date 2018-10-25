@@ -68,6 +68,16 @@ public class MailCommandTest {
     }
 
     @Test
+    public void execute_zeroRecipients_throwsCommandException() {
+        MailCommand mailCommand = new MailCommand(TYPE_SELECTION);
+
+        String expectedMessage = MailCommand.MESSAGE_EMPTY_SELECTION;
+        model.setSelectedPersons(new ArrayList<>());
+
+        CommandTestUtil.assertCommandFailure(mailCommand, model, commandHistory, expectedMessage);
+    }
+
+    @Test
     public void execute_unsupportedDesktops_throwsCommandException() throws CommandException{
         thrown.expect(CommandException.class);
         thrown.expectMessage(MESSAGE_UNSUPPORTED);
