@@ -33,13 +33,12 @@ public class LimitCommand extends Command {
     public static final String MESSAGE_EXCEED = "Your spend exceeded the limit !!! \n";
     public static final String MESSAGE_NOT_EXCEED = "Your spend did not exceed the limit ^o^\n";
     public static final String MESSAGE_LIMITS_SAME_DATE = "There already a same limit for that period of date\n";
-    public static final String MESSAGE_LIMIT_EDITED = "The limit has been modified\n ";
+
 
 
     private Limit limit;
-    private Limit orginalLimit;
+
     private String output;
-    private boolean isEdited = false;
 
     public LimitCommand (Limit limitIn) {
         requireNonNull(limitIn);
@@ -52,22 +51,16 @@ public class LimitCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
 
         if (model.hasSameDateLimit(limit)) {
-
-            orginalLimit = model.getSameDatesLimit(limit.getDateStart(), limit.getDateEnd());
-            if(limit.getLimitMoneyFlow().equals(orginalLimit.getLimitMoneyFlow())) {
                  throw new CommandException(MESSAGE_LIMITS_SAME_DATE);
-            }
-            model.deleteLimit(orginalLimit);
-            isEdited = true;
         }
 
         model.addLimit(limit);
         output = model.generateLimitOutput(model.isExceededLimit(limit), limit);
-        if (isEdited) {
+       /* if (isEdited) {
             output = MESSAGE_LIMIT_EDITED + "Original Limit:\n"
                     + model.generateLimitOutput(model.isExceededLimit(orginalLimit), orginalLimit)
                     + "Modified Limit: \n" + output;
-        }
+        }*/
         return new CommandResult(output);
     }
 
