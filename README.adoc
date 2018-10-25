@@ -2,6 +2,7 @@
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 https://travis-ci.org/CS2113-AY1819S1-F09-1/main[image:https://travis-ci.org/CS2113-AY1819S1-F09-1/main.svg?branch=master[Build Status]]
+https://ci.appveyor.com/project/Chocological/main-64rse[image:https://ci.appveyor.com/api/projects/status/rge5q76v8xnskc7p/branch/master?svg=true[Build status]]
 
 ifdef::env-github[]
 image::docs/images/Ui.png[width="600"]
