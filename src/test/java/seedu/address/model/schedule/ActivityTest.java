@@ -3,11 +3,11 @@ package seedu.address.model.schedule;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Date;
+
 import org.junit.Test;
 
 import seedu.address.testutil.Assert;
-
-import java.util.Date;
 
 public class ActivityTest {
 

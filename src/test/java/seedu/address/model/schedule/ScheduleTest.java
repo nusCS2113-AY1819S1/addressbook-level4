@@ -1,13 +1,9 @@
 package seedu.address.model.schedule;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static seedu.address.testutil.TypicalActivity.ACTIVITY_TASK_1;
-import static seedu.address.testutil.TypicalActivity.ACTIVITY_TASK_2;
 import static seedu.address.testutil.TypicalActivity.ACTIVITY_TASK_3;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
