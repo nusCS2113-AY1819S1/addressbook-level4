@@ -30,7 +30,7 @@ public class Status {
      * Returns true if a given string is a valid status.
      */
     public static boolean isValidStatus(String test) {
-        return test == "[UPCOMING]" || test == "[ONGOING]" || test == "[COMPLETED]" || test == "NULL";
+        return test == "UPCOMING" || test == "ONGOING" || test == "COMPLETED" || test == "NULL";
     }
 
     /**
@@ -45,9 +45,9 @@ public class Status {
         String currentStatus;
 
         if (eventDate.before(currentDate)) {
-            currentStatus = "[COMPLETED]";
+            currentStatus = "COMPLETED";
         } else if (eventDate.after(currentDate)) {
-            currentStatus = "[UPCOMING]";
+            currentStatus = "UPCOMING";
         } else {
             currentStatus = "NULL";
         }

@@ -28,35 +28,35 @@ public class EventCard extends UiPart<Region> {
     private HBox cardPane;
     @FXML
     private Label name;
-    @FXML
-    private Label contact;
+    //@FXML
+    //private Label contact;
     @FXML
     private Label id;
-    @FXML
-    private Label phone;
+    //@FXML
+    //private Label phone;
     @FXML
     private Label venue;
-    @FXML
-    private Label email;
+    //@FXML
+    //private Label email;
     @FXML
     private Label dateTime;
     @FXML
     private FlowPane tags;
-    //@FXML
-    //private FlowPane attendees;
+    @FXML
+    private Label status;
 
     public EventCard(Event event, int displayedIndex) {
         super(FXML);
         this.event = event;
         id.setText(displayedIndex + ". ");
         name.setText(event.getName().fullName);
-        contact.setText(event.getContact().fullContactName);
-        phone.setText(event.getPhone().value);
+        //contact.setText(event.getContact().fullContactName);
+        //phone.setText(event.getPhone().value);
         venue.setText(event.getVenue().value);
-        email.setText(event.getEmail().value);
+        //email.setText(event.getEmail().value);
         dateTime.setText(event.getDateTime().toString());
         event.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        //event.getAttendees().forEach(attendee -> attendees.getChildren().add(new Label(attendee.attendeeName)));
+        status.setText(event.getStatus().currentStatus);
     }
 
     @Override
