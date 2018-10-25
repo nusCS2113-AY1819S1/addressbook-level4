@@ -13,11 +13,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_MATRIC = new Prefix("i/");
 
-
-
-
-
-
     /* TODO: Reorder the prefixes above in alphabetical order using the foll
     owing template */
     /* Class prefixes */
@@ -38,6 +33,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_MODULE_NAME = new Prefix("mn/");
     /* Note prefixes */
     public static final Prefix PREFIX_NOTE_DATE = new Prefix("d/");
+    /* User prefixes */
+    public static final Prefix PREFIX_AUTH_PASSWORD = new Prefix("pw/");
     // temporarily unused prefixes
     public static final Prefix PREFIX_NOTE_END_DATE = new Prefix("ed/");
     public static final Prefix PREFIX_NOTE_END_TIME = new Prefix("et/");
