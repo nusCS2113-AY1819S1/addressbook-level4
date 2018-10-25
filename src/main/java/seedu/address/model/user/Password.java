@@ -11,7 +11,8 @@ public class Password {
      * The password must not contain a whitespace which include " "
      */
     public static final String PASSWORD_VALIDATION_REGEX = "[\\p{Alnum}]*";
-
+    public static final String MESSAGE_PASSWORD_CONSTRAINTS =
+            "Password should only contain alphanumeric characters and no space, and it should not be blank";
     private String password;
 
     public Password(){}

@@ -1,9 +1,9 @@
 package seedu.address.init;
 
-import static seedu.address.authentication.AuthenticalLevel.AUTH_ACCOUNTANT;
-import static seedu.address.authentication.AuthenticalLevel.AUTH_ADMIN;
-import static seedu.address.authentication.AuthenticalLevel.AUTH_MANAGER;
-import static seedu.address.authentication.AuthenticalLevel.AUTH_STOCK_TAKER;
+import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_ACCOUNTANT;
+import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_ADMIN;
+import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_MANAGER;
+import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_STOCK_TAKER;
 
 import java.io.IOException;
 import java.util.Optional;

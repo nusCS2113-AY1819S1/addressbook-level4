@@ -18,7 +18,6 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SellCommand;
-import seedu.address.logic.commands.UnAuthorisedCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.user.ChangePasswordCommand;
 import seedu.address.logic.parser.DeleteCommandParser;
@@ -57,14 +56,13 @@ public class StockTakerParser {
 
         switch (commandWord) {
 
-
         case SellCommand.COMMAND_WORD:
             return new SellCommandParser ().parse (arguments);
 
         case ChangePasswordCommand.COMMAND_WORD:
             return new ChangePasswordCommandParser ().parse(arguments);
 
-
+        //existing command
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser ().parse(arguments);
 
@@ -98,8 +96,6 @@ public class StockTakerParser {
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
-        case UnAuthorisedCommand.COMMAND_WORD:
-            return new UnAuthorisedCommand ();
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

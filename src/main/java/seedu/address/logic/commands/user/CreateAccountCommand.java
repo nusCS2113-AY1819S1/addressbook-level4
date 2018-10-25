@@ -1,10 +1,10 @@
 package seedu.address.logic.commands.user;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.authentication.AuthenticalLevel.AUTH_ACCOUNTANT;
-import static seedu.address.authentication.AuthenticalLevel.AUTH_ADMIN;
-import static seedu.address.authentication.AuthenticalLevel.AUTH_MANAGER;
-import static seedu.address.authentication.AuthenticalLevel.AUTH_STOCK_TAKER;
+import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_ACCOUNTANT;
+import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_ADMIN;
+import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_MANAGER;
+import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_STOCK_TAKER;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AUTHENTICATION_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
@@ -13,6 +13,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 import seedu.address.authentication.PasswordUtils;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.LoginInfoManager;
 import seedu.address.model.Model;
 import seedu.address.model.user.AuthenticationLevel;
@@ -24,7 +25,7 @@ import seedu.address.model.user.UserName;
 public class CreateAccountCommand extends UserCommand {
 
     public static final String COMMAND_WORD = "createAccount";
-
+    public static final String MESSAGE_DUPLICATE_USERNAME = "This userName already exists";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": change current user password "
             + "Parameters: "
             + PREFIX_USERNAME + "username: "
@@ -40,23 +41,26 @@ public class CreateAccountCommand extends UserCommand {
     private final UserName userName;
     private final Password password;
     private final AuthenticationLevel authenticationLevel;
-
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public CreateAccountCommand (String userName, String password, String authenticationLevel) {
+    public CreateAccountCommand (UserName userName, Password password, AuthenticationLevel authenticationLevel) {
         requireNonNull(userName);
         requireNonNull (password);
         requireNonNull (authenticationLevel);
-        String hashedPassword = PasswordUtils.generateSecurePassword (password);
+        String hashedPassword = PasswordUtils.generateSecurePassword (password.toString ());
 
-        this.userName = new UserName (userName);
-        this.password = new Password (hashedPassword);
-        this.authenticationLevel = new AuthenticationLevel (authenticationLevel.toUpperCase ());
+        this.userName = userName;
+        this.password = password;
+        this.authenticationLevel = authenticationLevel;
     }
     @Override
-    public CommandResult execute(LoginInfoManager loginInfoManager, CommandHistory history) {
+    public CommandResult execute(LoginInfoManager loginInfoManager, CommandHistory history) throws CommandException {
         requireNonNull(loginInfoManager);
+
+        if (loginInfoManager.isUserNameExist (userName.toString ())) {
+            throw new CommandException (MESSAGE_DUPLICATE_USERNAME);
+        }
         loginInfoManager.createNewAccount (userName, password, authenticationLevel);
         return new CommandResult(MESSAGE_SUCCESS);
     }

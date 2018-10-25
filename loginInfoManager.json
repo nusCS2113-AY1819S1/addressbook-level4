@@ -4,7 +4,17 @@
       "userName" : "tianhang"
     },
     "password" : {
-      "password" : "UgoydIK6V3t3iMXySCrbeFKlcUc/u3ylo1gmElyQAmQ="
+      "password" : "Gcf70h4aWQ1T9NMxE03XM3nq3nCmFGihnO4xMzHMgP0="
+    },
+    "authenticationLevel" : {
+      "authenticationLevel" : "ADMIN"
+    }
+  }, {
+    "userName" : {
+      "userName" : "tester"
+    },
+    "password" : {
+      "password" : "123"
     },
     "authenticationLevel" : {
       "authenticationLevel" : "ADMIN"
