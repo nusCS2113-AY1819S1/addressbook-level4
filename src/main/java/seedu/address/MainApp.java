@@ -26,6 +26,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
+import seedu.address.security.AppUsers;
 import seedu.address.security.Security;
 import seedu.address.security.SecurityManager;
 import seedu.address.storage.AddressBookStorage;
@@ -54,6 +55,7 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
+    protected AppUsers appUsers;
     protected Security security;
 
 
@@ -67,14 +69,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         AppUsersStorage appUsersStorage = new JsonAppUsersStorage(config.getAppUsersFilePath());
-        try {
-            appUsersStorage.readAppUsers();
-            System.out.println("Works");
-        } catch (DataConversionException e) {
-            System.out.println(e);
-        } catch (IOException e) {
-            System.out.println(e);
-        }
+
+        appUsers = initUsers(appUsersStorage);
         userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
@@ -155,6 +151,38 @@ public class MainApp extends Application {
             logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
         return initializedConfig;
+    }
+
+    /**
+     * Returns a {@code AppUsers} using the file at {@code storage}'s app users file path,
+     * or a new {@code AppUsers} with default configuration if errors occur when
+     * reading from the file.
+     */
+    protected AppUsers initUsers(AppUsersStorage storage) {
+        Path usersFilePath = storage.getAppUsersFilePath();
+        logger.info("Using users file : " + usersFilePath);
+
+        AppUsers initializedUsers;
+        try {
+            Optional<AppUsers> usersOptional = storage.readAppUsers();
+            initializedUsers = usersOptional.orElse(new AppUsers());
+        } catch (DataConversionException e) {
+            logger.warning("AppUsers file at " + usersFilePath + " is not in the correct format. "
+                    + "Using default user prefs");
+            initializedUsers = new AppUsers();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            initializedUsers = new AppUsers();
+        }
+
+        //Update users file in case it was missing to begin with or there are new/unused fields
+        try {
+            storage.saveAppUsers(initializedUsers);
+        } catch (IOException e) {
+            logger.warning("Failed to save user file : " + StringUtil.getDetails(e));
+        }
+
+        return initializedUsers;
     }
 
     /**

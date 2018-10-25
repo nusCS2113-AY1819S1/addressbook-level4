@@ -6,14 +6,24 @@ import java.io.Serializable;
  * A serializable class that contains username and hashed password
  */
 public class AccountCredential implements Serializable {
+    private static final String DEFAULT_USERNAME = "test";
+    private static final String DEFAULT_PASSWORD = "test";
+
     private String userName;
     private String hashedPassword;
 
-
+    public AccountCredential() {
+        this.userName = DEFAULT_USERNAME;
+        this.hashedPassword = hash(DEFAULT_PASSWORD);
+    }
 
     public AccountCredential(String userName, String Password) {
         this.userName = userName;
         this.hashedPassword = hash(Password);
+    }
+
+    public String getUserName() {
+        return userName;
     }
 
     /**

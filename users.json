@@ -1,11 +1,6 @@
 {
-  "guiSettings" : {
-    "windowWidth" : 1548.800048828125,
-    "windowHeight" : 836.7999877929688,
-    "windowCoordinates" : {
-      "x" : -6,
-      "y" : -6
-    }
-  },
-  "addressBookFilePath" : "data\\addressbook.xml"
+  "accountCredentials" : [ {
+    "userName" : "test",
+    "hashedPassword" : "test"
+  } ]
 }

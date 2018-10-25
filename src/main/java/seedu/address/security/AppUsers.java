@@ -11,6 +11,11 @@ public class AppUsers {
 
     private ArrayList<AccountCredential> accountCredentials;
 
+    public AppUsers() {
+        this.accountCredentials = new ArrayList<>();
+        //accountCredentials.add(new AccountCredential("test", "test"));
+    }
+
     public ArrayList<AccountCredential> getAccountCredentials() {
         return accountCredentials;
     }
