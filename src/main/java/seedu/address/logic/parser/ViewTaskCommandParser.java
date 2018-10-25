@@ -19,10 +19,9 @@ public class ViewTaskCommandParser implements Parser<ViewTaskCommand> {
     public ViewTaskCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        args = args.trim();
+        String filter = args.trim();
 
-        if (args.equals("uncompleted") || args.equals("completed") || args.equals("all")) {
-            String filter = args;
+        if (filter.equals("uncompleted") || filter.equals("completed") || filter.equals("all")) {
             return new ViewTaskCommand(filter);
         }
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewTaskCommand.MESSAGE_USAGE));
