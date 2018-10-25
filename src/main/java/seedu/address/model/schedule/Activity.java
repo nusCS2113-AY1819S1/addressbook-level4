@@ -1,6 +1,9 @@
 //@@author LowGinWee
 package seedu.address.model.schedule;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,6 +30,9 @@ public class Activity {
      * @param activity Activity string.
      */
     public Activity(Date date, String activity) {
+        requireNonNull(activity);
+        requireNonNull(date);
+        checkArgument(isValidActivity(activity), MESSAGE_ACTIVITY_CONSTRAINTS);
         this.date = date;
         this.activityName = activity;
     }

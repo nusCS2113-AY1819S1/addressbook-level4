@@ -57,6 +57,7 @@ public class Schedule {
      * @param activity A valid activity.
      */
     public void add(Activity activity) {
+        requireNonNull(activity);
         Date date = activity.getDate();
         if (!contains(date)) {
             schedule.put(date, new ArrayList<>());
@@ -69,6 +70,7 @@ public class Schedule {
      * @param activity A valid activity.
      */
     public void delete(Activity activity) {
+        requireNonNull(activity);
         schedule.get(activity.getDate()).remove(activity);
         if (schedule.get(activity.getDate()).isEmpty()) {
             schedule.remove(activity.getDate());
@@ -85,6 +87,13 @@ public class Schedule {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Schedule // instanceof handles nulls
+                && schedule.equals(((Schedule) other).schedule));
     }
 
 
