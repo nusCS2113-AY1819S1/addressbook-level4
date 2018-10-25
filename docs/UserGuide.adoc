@@ -62,8 +62,9 @@ Adds a task to the to-do list +
 Format: `TDL_add t/TASK m/MODULE d/DATE p/PRIORITY`
 
 ****
-* The format for `m/MODULE` tag is controlled by the list of modules availble in the application. Hence, only valid NUS module codes are allowed.
-* The format for `d/DATE` tag must be `DD-MM`.
+* The format for `m/MODULE` tag is controlled by the list of modules availble in the application. Hence, only valid NUS module codes are allowed. [Coming in v1.4]
+* Currently, the format for `m/MODULE` tag is strictly 2 alphabetic characters (upper or lower case) followed by 4 numbers.
+* The format for `d/DATE` tag must be `DD-MM`, where `DD` refers to the date and `MM` refers to the month in numbers.
 * The `p/PRIORITY` tag only accepts integer 1, 2 or 3, where `1` refers to highest importance and `3` refers to lowest importance.
 ****
 
@@ -80,7 +81,7 @@ Format: `TDL_edit INDEX [t/TASK] [m/MODULE] [d/DATE] [p/PRIORITY]`
 * Edits the task at the specified `INDEX`. The index refers to the index number shown in the displayed tasks list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields should be provided. There will not be any changes made if no optional fields are provided.
 * Existing values will be updated to the input values.
-* You can remove any task’s date or priority by typing `d/` or `p/` without specifying any fields after it. [coming in v2.0]
+* You can remove any task’s date or priority by typing `d/` or `p/` without specifying any fields after it. [Coming in v2.0]
 ****
 
 Examples:
