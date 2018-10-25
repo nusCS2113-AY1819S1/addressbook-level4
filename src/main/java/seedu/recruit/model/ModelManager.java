@@ -289,6 +289,25 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean hasJobOffer(CompanyName companyName, JobOffer jobOffer) {
+        requireAllNonNull(companyName, jobOffer);
+        return versionedCompanyBook.hasJobOffer(companyName, jobOffer);
+    }
+
+    @Override
+    public void updateJobOfferInCompany(Company company, JobOffer target, JobOffer editedJobOffer) {
+        requireAllNonNull(company, target, editedJobOffer);
+        versionedCompanyBook.updateJobOfferInCompany(company, target, editedJobOffer);
+        indicateCompanyBookChanged();
+    }
+
+    @Override
+    public void updateJobOffer(JobOffer target, JobOffer editedJobOffer) {
+        requireAllNonNull(target, editedJobOffer);
+        versionedCompanyBook.updateJobOffer(target, editedJobOffer);
+    }
+
+    @Override
     public void deleteJobOffer(JobOffer jobOffer) {
         requireNonNull(jobOffer);
         versionedCompanyBook.deleteJobOffer(jobOffer);

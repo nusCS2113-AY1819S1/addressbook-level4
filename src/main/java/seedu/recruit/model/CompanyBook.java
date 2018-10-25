@@ -1,6 +1,7 @@
 package seedu.recruit.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.recruit.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
@@ -107,7 +108,6 @@ public class CompanyBook implements ReadOnlyCompanyBook {
      */
     public void updateCompany(Company target, Company editedCompany) {
         requireNonNull(editedCompany);
-
         companyList.setCompany(target, editedCompany);
     }
 
@@ -130,13 +130,44 @@ public class CompanyBook implements ReadOnlyCompanyBook {
     }
 
     /**
+     * Returns true if a company has a job offer with the same identity as {@code jobOffer} exists in the company book.
+     */
+    public boolean hasJobOffer(CompanyName companyName, JobOffer jobOffer) {
+        requireAllNonNull(companyName, jobOffer);
+        Company company = getCompanyFromIndex(getCompanyIndexFromName(companyName));
+        return company.getUniqueJobList().contains(jobOffer);
+    }
+
+    /**
+     * Replaces the given job offer {@code target} in the list with {@code editedJobOffer}.
+     * {@code target} must exist in the company job list{@code company}.
+     * The job offer identity of {@code editedJobOffer} must not be the same as another existing job offer in the
+     * same company{@code company}.
+     */
+    public void updateJobOfferInCompany(Company company, JobOffer target, JobOffer editedJobOffer) {
+        requireAllNonNull(company, target, editedJobOffer);
+        company.getUniqueJobList().setJobOffer(target, editedJobOffer);
+    }
+
+    /**
+     * Replaces the given job offer {@code target} in the list with {@code editedJobOffer}.
+     * {@code target} must exist in the company book.
+     * The job offer identity of {@code editedJobOffer} must not be the same as another existing job offer in the
+     * company book.
+     */
+    public void updateJobOffer(JobOffer target, JobOffer editedJobOffer) {
+        requireAllNonNull(target, editedJobOffer);
+        companyJobList.setJobOffer(target, editedJobOffer);
+    }
+
+    /**
      * Deletes a job offer from an existing company in the CompanyBook.
      * @param jobOffer must exist inside the CompanyBook
      */
-
     public void deleteJobOffer(JobOffer jobOffer) {
         companyList.deleteJobOffer(jobOffer);
         companyJobList.remove(jobOffer);
+
     }
 
     //// util methods
