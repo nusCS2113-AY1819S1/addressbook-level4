@@ -83,7 +83,7 @@ public class LimitCommandTest {
         // null -> returns false
         assertFalse(limitCommand.equals(null));
 
-        // different record -> returns false
+        // different limit -> returns false
         assertFalse(limitCommand.equals(limitDCommand));
     }
 
