@@ -40,15 +40,10 @@ public class SecurityManager extends ComponentManager implements Security {
     public void login(String username, String password) {
         if (username.equals(this.username) && password.equals(this.password)) {
             this.isAuthenticated = true;
-            //Instantiates User in Model manager
+            //Instantiates User by matching it with a Person in database
             model.matchUserToPerson(username);
-            //TODO Implement logger
-            //System.out.println("Correct Password");
             raise(new SuccessfulLoginEvent());
         } else {
-            //TODO Raise an exception to prompt user to type again
-            //TODO implement logger
-            //System.out.println("Incorrect password");
             raise(new UnsuccessfulLoginEvent());
         }
     }
@@ -56,7 +51,7 @@ public class SecurityManager extends ComponentManager implements Security {
     @Override
     public void logout() {
         this.isAuthenticated = false;
-        //TODO Check below is working?
+        //Clears instance of User in model to prevent anyone accessing previously logged in user
         model.clearUser();
     }
 
