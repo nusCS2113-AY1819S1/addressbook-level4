@@ -12,6 +12,7 @@ import seedu.address.logic.commands.user.CreateAccountCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -34,7 +35,7 @@ public class CreateAccountCommandParser implements Parser<CreateAccountCommand> 
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateAccountCommand.MESSAGE_USAGE));
         }
 
-        String userName = argMultimap.getValue(PREFIX_USERNAME).get();
+        String userName = ParserUtil.parseUserName (argMultimap.getValue(PREFIX_USERNAME).get());
         String password = argMultimap.getValue (PREFIX_PASSWORD).get ();
         String authenticationLevel = argMultimap.getValue (PREFIX_AUTHENTICATION_LEVEL).get ();
 

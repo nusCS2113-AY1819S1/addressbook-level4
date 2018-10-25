@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import seedu.address.commons.core.LoginInfo;
+import seedu.address.model.user.AuthenticationLevel;
+import seedu.address.model.user.Password;
+import seedu.address.model.user.UserName;
 
 
 /**
@@ -44,7 +47,7 @@ public class LoginInfoManager {
      * @param password
      * @param authenticationLevel
      */
-    public void createNewAccount(String userName, String password, String authenticationLevel) {
+    public void createNewAccount(UserName userName, Password password, AuthenticationLevel authenticationLevel) {
         LoginInfo newAccount = new LoginInfo (userName, password, authenticationLevel);
         loginInfoList.add (newAccount);
     }

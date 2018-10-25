@@ -1,6 +1,10 @@
 package seedu.address.model.user;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.authentication.AuthenticalLevel.AUTH_ACCOUNTANT;
+import static seedu.address.authentication.AuthenticalLevel.AUTH_ADMIN;
+import static seedu.address.authentication.AuthenticalLevel.AUTH_MANAGER;
+import static seedu.address.authentication.AuthenticalLevel.AUTH_STOCK_TAKER;
 
 
 /**
@@ -25,8 +29,20 @@ public class AuthenticationLevel {
     /**
      * Returns true if a given string is a valid name.
      */
-    public static boolean isValidAuthenticationLevel(String test) {
-        return test.matches(USERNAME_VALIDATION_REGEX);
+    /**
+     * Returns true if authentication level is enum.
+     *
+     * @param authenticationLevel User input when create account
+     * @return
+     */
+    private static boolean isAuthenticationLevelValid(String authenticationLevel) {
+        if (authenticationLevel.equals (AUTH_ADMIN)
+                || authenticationLevel.equals (AUTH_MANAGER)
+                || authenticationLevel.equals (AUTH_STOCK_TAKER)
+                || authenticationLevel.equals (AUTH_ACCOUNTANT)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -42,4 +58,5 @@ public class AuthenticationLevel {
     public boolean equals(String userName) {
         return this.authenticationLevel.equals (authenticationLevel);
     }
+
 }

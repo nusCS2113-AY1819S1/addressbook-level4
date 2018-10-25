@@ -14,6 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.user.UserName;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -38,16 +39,19 @@ public class ParserUtil {
      * Trim userName
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static String userName(String userName) {
+    public static String parseUserName(String userName) throws ParseException{
         requireNonNull(userName);
-        String trimmedName = userName.trim();
-        return trimmedName;
+        String trimmedUserName = userName.trim();
+        if (!UserName.isValidUserName(trimmedUserName)) {
+            throw new ParseException(UserName.MESSAGE_USER_NAME_CONSTRAINTS);
+        }
+        return trimmedUserName;
     }
     /**
      * Trim passWord
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static String password(String password) {
+    public static String parsePassword(String password) {
         requireNonNull(password);
         String trimmedPassword = password.trim();
         return trimmedPassword;
