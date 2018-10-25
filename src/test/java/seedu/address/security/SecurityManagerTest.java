@@ -2,8 +2,7 @@ package seedu.address.security;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.TEST;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -57,7 +56,7 @@ public class SecurityManagerTest {
         succcessfulLoginEventCalled = false;
         unsuccessfulLoginEventCalled = false;
         userPrefs = new UserPrefs();
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withPerson(TEST).build();
 
         model = new ModelManager(addressBook, userPrefs);
         logic = new LogicManager(model);
@@ -103,5 +102,35 @@ public class SecurityManagerTest {
         securityManager.login("test", "test");
         securityManager.logout();
         assertFalse(securityManager.getAuthentication());
+    }
+
+    @Test
+    public void register_existingUser_returnExistingUserExists() {
+        boolean testFlag = false;
+        if (securityManager.register("test", "test",
+                "test@test.com", "88888888", "Lucky Road") == RegisterFlag.USER_ALREADY_EXISTS) {
+            testFlag = true;
+        }
+        assertTrue(testFlag);
+    }
+
+    @Test
+    public void register_incompleteAddress_returnIncompleteField() {
+        boolean testFlag = false;
+        if (securityManager.register("test1", "test",
+                "test", "8888888", "") == RegisterFlag.INCOMPLETE_FIELD) {
+            testFlag = true;
+        }
+        assertTrue(testFlag);
+    }
+
+    @Test
+    public void register_validCompleteFields_returnSuccess() {
+        boolean testFlag = false;
+        if (securityManager.register("test1", "test",
+                "test@test.com", "88888888", "Testy Road") == RegisterFlag.SUCCESS) {
+            testFlag = true;
+        }
+        assertTrue(testFlag);
     }
 }
