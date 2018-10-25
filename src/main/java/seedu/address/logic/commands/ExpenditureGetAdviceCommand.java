@@ -64,12 +64,12 @@ public class ExpenditureGetAdviceCommand extends Command {
         }
 
         for (Map.Entry m : map.entrySet()) {
-            percentageMap.put(m.getKey().toString(), (int) Math.round(100 * map.get(m.getKey())/totalExpenditure));
+            percentageMap.put(m.getKey().toString(), (int) Math.round(100 * map.get(m.getKey()) / totalExpenditure));
             x.append(m.getValue())
                 .append(" SGD on ")
                 .append(m.getKey())
                 .append(", which takes approximately ")
-                .append((int) Math.round(100 * map.get(m.getKey())/totalExpenditure))
+                .append((int) Math.round(100 * map.get(m.getKey()) / totalExpenditure))
                 .append("% percentage of the total expenditure you made")
                 .append("\n");
         }
@@ -84,8 +84,8 @@ public class ExpenditureGetAdviceCommand extends Command {
             .append(".\n")
             .append("According to your expenditure history record, here' a more detailed advice "
                     + "on how much money you can spend on each category in the following \nperiod and ")
-            .append("please note that the sum of adviced individual expenditure will not necessarily " +
-                    "be the same as the target money, there might be a slight \ndifference.\n");
+            .append("please note that the sum of adviced individual expenditure will not necessarily "
+                    + "be the same as the target money, there might be a slight \ndifference.\n");
 
         for (Map.Entry t : map.entrySet()) {
             x.append(t.getKey())
