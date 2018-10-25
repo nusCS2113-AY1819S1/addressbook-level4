@@ -11,7 +11,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Friend;
 import seedu.address.model.person.Person;
-import seedu.address.security.UserStub;
 
 /**
  * Allows user to befriend a user from the others list, add a user to their friend list
