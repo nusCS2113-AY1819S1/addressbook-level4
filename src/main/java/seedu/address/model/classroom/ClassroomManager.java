@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.StorageController;
@@ -14,7 +15,7 @@ import seedu.address.storage.adapter.XmlAdaptedClassroom;
 /**
  * This classroom manager stores classrooms for Trajectory.
  */
-public class ClassroomManager {
+public class ClassroomManager extends ComponentManager {
     private static final Logger logger = LogsCenter.getLogger(ClassroomManager.class);
 
     private static ClassroomManager classroomManager = null;
@@ -100,5 +101,13 @@ public class ClassroomManager {
         requireNonNull(classToCreate);
         return (findClassroom(classToCreate.getClassName().getValue(),
                 classToCreate.getModuleCode().moduleCode)) != null;
+    }
+
+    /**
+     * Replaces the classroom {@code classtoEdit} in the list with {@code editedClass}.
+     */
+    public void updateClassroom(Classroom classtoEdit, Classroom editedClass) {
+        int index = classroomList.indexOf(classtoEdit);
+        classroomList.set(index, editedClass);
     }
 }
