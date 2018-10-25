@@ -96,7 +96,7 @@ public class SignupCommandTest {
             throw new AssertionError("This method should not be called!");
         }
 
-        public boolean authenticate() {
+        public boolean getLoginStatus() {
             throw new AssertionError("This method should not be called!");
         }
 

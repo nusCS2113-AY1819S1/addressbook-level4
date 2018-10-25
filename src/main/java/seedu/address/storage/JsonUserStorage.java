@@ -42,6 +42,7 @@ public class JsonUserStorage implements UserStorage {
         jsonObject.addProperty(username, password);
 
         writeJson(gson, jsonObject);
+        setUserAccounts();
     }
 
     /**

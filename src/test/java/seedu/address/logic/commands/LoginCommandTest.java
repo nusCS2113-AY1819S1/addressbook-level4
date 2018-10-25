@@ -116,7 +116,7 @@ public class LoginCommandTest {
             throw new AssertionError("This method should not be called!");
         }
 
-        public boolean authenticate() {
+        public boolean getLoginStatus() {
             throw new AssertionError("This method should not be called!");
         }
 
@@ -242,7 +242,7 @@ public class LoginCommandTest {
         }
 
         @Override
-        public boolean authenticate() {
+        public boolean getLoginStatus() {
             return isLogged;
         }
     }
@@ -263,7 +263,7 @@ public class LoginCommandTest {
         }
 
         @Override
-        public boolean authenticate() {
+        public boolean getLoginStatus() {
             return isLogged;
         }
     }

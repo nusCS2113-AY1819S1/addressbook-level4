@@ -5,9 +5,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -43,38 +40,25 @@ public class UserSession {
      */
     public boolean userExists(User user) {
         String loggedUsername = user.getUsername().toString();
-        String loggedPassword = user.getPassword().toString();
-        boolean isPresent = false;
-
         Map<String, String> userAccounts = userStorage.getUserAccounts();
 
-        if (userAccounts.containsKey(loggedUsername)) {
-            String password = userAccounts.get(loggedUsername);
-            isPresent = loggedPassword.equals(password);
+        return userAccounts.containsKey(loggedUsername);
+    }
+
+    /**
+     * Sets the current user.
+     */
+    public void logUser(User user) {
+        String loggedUsername = user.getUsername().toString();
+        String loggedPassword = user.getPassword().toString();
+        Map<String, String> userAccounts = userStorage.getUserAccounts();
+
+        if (userAccounts.containsKey(loggedUsername)
+                && userAccounts.get(loggedUsername).equals(loggedPassword)) {
+            this.user = user;
+            loginStatus = true;
             adminStatus = loggedUsername.equals("admin");
         }
-
-        return isPresent;
-    }
-    /**
-     * Returns true if user is logged in.
-     */
-    public boolean authenticate() {
-        return loginStatus;
-    }
-
-    /**
-     * Returns true if admin is logged in.
-     */
-    public boolean getAdminStatus() {
-        return adminStatus;
-    }
-
-    /**
-     * Returns logged in user.
-     */
-    public User getUser(User user) {
-        return user;
     }
 
     /**
@@ -92,11 +76,10 @@ public class UserSession {
     }
 
     /**
-     * Sets the current user.
+     * Returns logged in user.
      */
-    public void logUser(User user) {
-        this.user = user;
-        loginStatus = true;
+    public User getUser(User user) {
+        return user;
     }
 
     /**
@@ -104,5 +87,19 @@ public class UserSession {
      */
     public void clearUser() {
         loginStatus = false;
+    }
+
+    /**
+     * Returns true if user is logged in.
+     */
+    public boolean getLoginStatus() {
+        return loginStatus;
+    }
+
+    /**
+     * Returns true if admin is logged in.
+     */
+    public boolean getAdminStatus() {
+        return adminStatus;
     }
 }

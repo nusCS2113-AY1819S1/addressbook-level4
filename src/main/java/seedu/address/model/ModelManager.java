@@ -61,8 +61,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean authenticate() {
-        return userSession.authenticate();
+    public boolean getLoginStatus() {
+        return userSession.getLoginStatus();
     }
 
     @Override
