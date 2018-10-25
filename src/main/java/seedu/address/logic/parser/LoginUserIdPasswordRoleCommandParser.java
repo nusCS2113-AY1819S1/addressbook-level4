@@ -10,7 +10,6 @@ import seedu.address.logic.LoginManager;
 import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.LoginUserIdPasswordRoleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.exceptions.UserLoginException;
 import seedu.address.model.login.UserIdContainsKeywordsPredicate;
 import seedu.address.model.login.UserPasswordContainsKeywordsPredicate;
 import seedu.address.model.login.UserRoleContainsKeywordsPredicate;
@@ -19,8 +18,6 @@ import seedu.address.model.login.UserRoleContainsKeywordsPredicate;
  * Parses input arguments and creates a new LoginUserIdCommand object
  */
 public class LoginUserIdPasswordRoleCommandParser implements Parser<LoginCommand> {
-
-    private UserLoginException userLoginException = new UserLoginException();
 
     /**
      * Parses the given {@code String} of arguments in the context of the LoginUserIdPasswordRoleCommand

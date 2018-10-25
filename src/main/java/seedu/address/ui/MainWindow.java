@@ -117,12 +117,19 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Starts a pop-up window which prompts the user for input of login credentials.
+     */
+    private void initializeLoginProcess() {
+        LoginWindow loginWindow = new LoginWindow();
+        loginWindow.initializeLogin(logic);
+    }
+
+    /**
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
         do {
-            LoginWindow loginWindow = new LoginWindow();
-            loginWindow.initializeLogin(logic);
+            initializeLoginProcess();
         } while(!(LoginManager.getIsLoginSuccessful()));
 
         CommandBox commandBox = new CommandBox(logic);
