@@ -83,9 +83,6 @@ public class AddressBookParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
-        case ViewClubBudgetsCommand.COMMAND_WORD:
-            return new ViewClubBudgetsCommand();
-
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();
 
@@ -116,6 +113,9 @@ public class AddressBookParser {
 
         case BudgetCalculationCommand.COMMAND_WORD:
             return new BudgetCalculationCommandParser().parse(arguments);
+
+        case ViewClubBudgetsCommand.COMMAND_WORD:
+            return new ViewClubBudgetsCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
