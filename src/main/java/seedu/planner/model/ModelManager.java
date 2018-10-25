@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +19,7 @@ import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
 import seedu.planner.commons.events.model.LimitListChangedEvent;
 import seedu.planner.commons.events.model.SummaryMapChangedEvent;
+import seedu.planner.commons.events.ui.RequestDataForWelcomePanelEvent;
 import seedu.planner.commons.events.ui.UpdateWelcomePanelEvent;
 import seedu.planner.commons.util.DateUtil;
 import seedu.planner.model.record.Date;
@@ -25,6 +28,7 @@ import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.summary.CategoryStatisticsList;
 import seedu.planner.model.summary.Summary;
+import seedu.planner.ui.WelcomePanel;
 
 /**
  * Represents the in-memory model of the financial planner data.
@@ -52,7 +56,6 @@ public class ModelManager extends ComponentManager implements Model {
         versionedFinancialPlanner = new VersionedFinancialPlanner(financialPlanner);
         filteredRecords = new FilteredList<>(versionedFinancialPlanner.getRecordList());
         limits = new FilteredList<Limit>(versionedFinancialPlanner.getLimitList());
-
         currentMonth = getCurrentMonth();
         recordsInCurrentMonth = new FilteredList<>(versionedFinancialPlanner.getRecordList(),
                 new DateIsWithinIntervalPredicate(DateUtil.generateFirstOfMonth(currentMonth),
@@ -61,6 +64,7 @@ public class ModelManager extends ComponentManager implements Model {
             CategoryStatisticsList statsList = new CategoryStatisticsList(recordsInCurrentMonth);
             EventsCenter.getInstance().post(new UpdateWelcomePanelEvent(statsList.getReadOnlyStatsList()));
         });
+        EventsCenter.getInstance().registerHandler(this);
     }
 
     public ModelManager() {
@@ -70,6 +74,12 @@ public class ModelManager extends ComponentManager implements Model {
     private Month getCurrentMonth() {
         Date currentDate = DateUtil.getDateToday();
         return new Month(currentDate.getMonth(), currentDate.getYear());
+    }
+
+    /** Initialises the pieChart values in {@link WelcomePanel} */
+    private void initCurrentMonthTracking() {
+        EventsCenter.getInstance().post(new UpdateWelcomePanelEvent(new CategoryStatisticsList(recordsInCurrentMonth)
+                .getReadOnlyStatsList()));
     }
 
     @Override
@@ -101,6 +111,11 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new LimitListChangedEvent(versionedFinancialPlanner));
     }
 
+    @Subscribe
+    public void handleRequestDataForWelcomePanelEvent(RequestDataForWelcomePanelEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        initCurrentMonthTracking();
+    }
 
     //=========== Financial planner standard operations ============================================
 

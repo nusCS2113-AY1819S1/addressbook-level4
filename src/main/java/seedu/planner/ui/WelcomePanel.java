@@ -7,7 +7,9 @@ import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import seedu.planner.commons.core.EventsCenter;
 import seedu.planner.commons.core.LogsCenter;
+import seedu.planner.commons.events.ui.RequestDataForWelcomePanelEvent;
 import seedu.planner.commons.events.ui.UpdateWelcomePanelEvent;
 
 /**
@@ -27,6 +29,7 @@ public class WelcomePanel extends UiPart<Region> {
 
     public WelcomePanel() {
         super(FXML);
+        EventsCenter.getInstance().post(new RequestDataForWelcomePanelEvent(this.getClass().getSimpleName()));
         registerAsAnEventHandler(this);
     }
 
