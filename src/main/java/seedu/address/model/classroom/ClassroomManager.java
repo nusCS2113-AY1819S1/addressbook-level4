@@ -101,4 +101,12 @@ public class ClassroomManager {
         return (findClassroom(classToCreate.getClassName().getValue(),
                 classToCreate.getModuleCode().moduleCode)) != null;
     }
+
+    /**
+     * Replaces the classroom {@code classtoEdit} in the list with {@code editedClass}.
+     */
+    public void updateClassroom(Classroom classtoEdit, Classroom editedClass) {
+        int index = classroomList.indexOf(classtoEdit);
+        classroomList.set(index, editedClass);
+    }
 }
