@@ -8,6 +8,7 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
@@ -28,6 +29,9 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CompanyJobDetailsPanel.class);
 
     @FXML
+    private Label numberOfJobOffers;
+
+    @FXML
     private ListView<Company> companyView;
 
     @FXML
@@ -44,6 +48,7 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
         companyView.setCellFactory(listView -> new CompanyViewCell());
         companyJobDetailsView.setItems(companyJobList);
         companyJobDetailsView.setCellFactory(listView -> new CompanyJobDetailsViewCell());
+        numberOfJobOffers.setText(String.valueOf(companyJobList.size()));
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -66,6 +71,7 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
         Company selectedCompany = companyView.getSelectionModel().getSelectedItem();
         companyJobDetailsView.setItems(selectedCompany.getUniqueJobList().getInternalList());
         companyJobDetailsView.setCellFactory(listView -> new CompanyJobDetailsViewCell());
+        numberOfJobOffers.setText(String.valueOf(selectedCompany.getUniqueJobList().getInternalList().size()));
     }
 
     /**

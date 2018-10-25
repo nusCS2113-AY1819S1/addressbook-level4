@@ -17,7 +17,9 @@ import seedu.recruit.logic.commands.CancelCommand;
 import seedu.recruit.logic.commands.ClearCandidateBookCommand;
 import seedu.recruit.logic.commands.ClearCompanyBookCommand;
 import seedu.recruit.logic.commands.Command;
-import seedu.recruit.logic.commands.DeleteCommand;
+import seedu.recruit.logic.commands.DeleteCandidateCommand;
+import seedu.recruit.logic.commands.DeleteCompanyCommand;
+import seedu.recruit.logic.commands.DeleteJobOfferCommand;
 import seedu.recruit.logic.commands.EditCandidateCommand;
 import seedu.recruit.logic.commands.EditCompanyCommand;
 import seedu.recruit.logic.commands.ExitCommand;
@@ -26,14 +28,18 @@ import seedu.recruit.logic.commands.FindCandidateCommand;
 import seedu.recruit.logic.commands.FindCompanyCommand;
 import seedu.recruit.logic.commands.HelpCommand;
 import seedu.recruit.logic.commands.HistoryCommand;
-import seedu.recruit.logic.commands.ListCommand;
-import seedu.recruit.logic.commands.RedoCommand;
+import seedu.recruit.logic.commands.ListCandidateCommand;
+import seedu.recruit.logic.commands.ListCompanyCommand;
+import seedu.recruit.logic.commands.RedoCandidateBookCommand;
+import seedu.recruit.logic.commands.RedoCompanyBookCommand;
 import seedu.recruit.logic.commands.SelectCommand;
 import seedu.recruit.logic.commands.SortCommand;
-import seedu.recruit.logic.commands.UndoCommand;
+import seedu.recruit.logic.commands.SwitchBookCommand;
+import seedu.recruit.logic.commands.UndoCandidateBookCommand;
+import seedu.recruit.logic.commands.UndoCompanyBookCommand;
+import seedu.recruit.logic.commands.emailcommand.EmailContentsSelectCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailInitialiseCommand;
-import seedu.recruit.logic.commands.emailcommand.EmailSelectContentsCommand;
-import seedu.recruit.logic.commands.emailcommand.EmailSelectRecipientsCommand;
+import seedu.recruit.logic.commands.emailcommand.EmailRecipientsSelectCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailSendCommand;
 
 import seedu.recruit.logic.parser.exceptions.ParseException;
@@ -80,8 +86,8 @@ public class RecruitBookParser {
             case AddJobDetailsCommand.COMMAND_WORD:
                 return new AddJobDetailsCommandParser().parse(userInput);
 
-            case EmailSelectContentsCommand.COMMAND_LOGIC_STATE:
-            case EmailSelectRecipientsCommand.COMMAND_LOGIC_STATE:
+            case EmailContentsSelectCommand.COMMAND_LOGIC_STATE:
+            case EmailRecipientsSelectCommand.COMMAND_LOGIC_STATE:
             case EmailSendCommand.COMMAND_LOGIC_STATE:
                 return new EmailParser().parseCommand(commandWord, arguments, state, emailUtil);
 
@@ -109,8 +115,14 @@ public class RecruitBookParser {
             case SelectCommand.COMMAND_WORD:
                 return new SelectCommandParser().parse(arguments);
 
-            case DeleteCommand.COMMAND_WORD:
-                return new DeleteCommandParser().parse(arguments);
+            case DeleteCandidateCommand.COMMAND_WORD:
+                return new DeleteCandidateCommandParser().parse(arguments);
+
+            case DeleteCompanyCommand.COMMAND_WORD:
+                return new DeleteCompanyCommandParser().parse(arguments);
+
+            case DeleteJobOfferCommand.COMMAND_WORD:
+                return new DeleteJobOfferCommandParser().parse(arguments);
 
             case ClearCandidateBookCommand.COMMAND_WORD:
                 return new ClearCandidateBookCommand();
@@ -133,8 +145,14 @@ public class RecruitBookParser {
             case SortCommand.COMMAND_WORD:
                 return new SortCommandParser().parse(arguments);
 
-            case ListCommand.COMMAND_WORD:
-                return new ListCommand();
+            case ListCandidateCommand.COMMAND_WORD:
+                return new ListCandidateCommand();
+
+            case ListCompanyCommand.COMMAND_WORD:
+                return new ListCompanyCommand();
+
+            case SwitchBookCommand.COMMAND_WORD:
+                return new SwitchBookCommand();
 
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
@@ -142,11 +160,17 @@ public class RecruitBookParser {
             case HelpCommand.COMMAND_WORD:
                 return new HelpCommand();
 
-            case UndoCommand.COMMAND_WORD:
-                return new UndoCommand();
+            case UndoCandidateBookCommand.COMMAND_WORD:
+                return new UndoCandidateBookCommand();
 
-            case RedoCommand.COMMAND_WORD:
-                return new RedoCommand();
+            case RedoCandidateBookCommand.COMMAND_WORD:
+                return new RedoCandidateBookCommand();
+
+            case UndoCompanyBookCommand.COMMAND_WORD:
+                return new UndoCompanyBookCommand();
+
+            case RedoCompanyBookCommand.COMMAND_WORD:
+                return new RedoCompanyBookCommand();
 
             case EmailInitialiseCommand.COMMAND_WORD:
                 return new EmailInitialiseCommand();

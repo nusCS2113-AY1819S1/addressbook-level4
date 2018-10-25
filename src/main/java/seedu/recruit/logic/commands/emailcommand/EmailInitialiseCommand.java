@@ -10,7 +10,7 @@ import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.model.Model;
 
 /**
- * Starts the 3-step process of Email
+ * Starts the 4-step process of Email
  */
 public class EmailInitialiseCommand extends Command {
     public static final String COMMAND_WORD = "email";
@@ -24,7 +24,7 @@ public class EmailInitialiseCommand extends Command {
         //Initiailising a fresh instance of EmailUtil
         EmailUtil emailUtil = new EmailUtil();
         model.setEmailUtil(emailUtil);
-        LogicManager.setLogicState(EmailSelectRecipientsCommand.COMMAND_LOGIC_STATE);
-        return new CommandResult(EmailSelectRecipientsCommand.MESSAGE_USAGE);
+        LogicManager.setLogicState(EmailRecipientsSelectCommand.COMMAND_LOGIC_STATE);
+        return new CommandResult(EmailRecipientsSelectCommand.MESSAGE_USAGE);
     }
 }
