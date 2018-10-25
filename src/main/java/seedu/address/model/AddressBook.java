@@ -140,6 +140,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableMap<Tag, UniquePersonList> getTagList() {
         return tags.asUnmodifiableObservableMap();
     }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
