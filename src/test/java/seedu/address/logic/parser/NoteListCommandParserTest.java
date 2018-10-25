@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.Assert.assertNotEquals;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -23,7 +24,7 @@ import seedu.address.testutil.NoteBuilder;
  */
 public class NoteListCommandParserTest {
 
-    private static NoteManager noteManager = new NoteManager();
+    private static NoteManager noteManager = NoteManager.getInstance();
 
     private NoteListCommandParser parser = new NoteListCommandParser();
 
@@ -67,7 +68,7 @@ public class NoteListCommandParserTest {
         assertNotEquals(unwantedMessage, result.feedbackToUser);
 
         // valid args with MODULE_CODE
-        String args2 = " m/CS2113";
+        String args2 = " " + PREFIX_MODULE_CODE + "CS2113";
         noteListCommand = parser.parse(args2);
         result = noteListCommand.execute(new ModelManager(), new CommandHistory());
         assertNotEquals(unwantedMessage, result.feedbackToUser);

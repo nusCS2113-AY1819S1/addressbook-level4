@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_DATE;
 
 import seedu.address.logic.CommandHistory;
@@ -20,7 +20,7 @@ public class NoteEditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a note. "
             + "Parameters: "
             + "INDEX "
-            + "[" + PREFIX_MODULECODE
+            + "[" + PREFIX_MODULE_CODE
             + "NEW_MODULE_CODE] "
             + "[" + PREFIX_NOTE_DATE
             + "NEW_DATE]\n"
@@ -44,9 +44,9 @@ public class NoteEditCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
 
-        NoteManager noteManager = new NoteManager();
+        NoteManager noteManager = NoteManager.getInstance();
 
-        if (index > noteManager.getNotes().size() || index < 1) {
+        if (index > noteManager.getFilteredNotes().size() || index < 1) {
             throw new CommandException(String.format(MESSAGE_INVALID_INDEX, index));
         }
 
@@ -64,7 +64,6 @@ public class NoteEditCommand extends Command {
         noteTextEditWindow.showAndWait();
 
         if (!noteTextEditWindow.isCancelled()) {
-            noteManager.editNote(index - 1, noteToEdit);
             noteManager.saveNoteList();
 
             return new CommandResult(MESSAGE_SUCCESS);

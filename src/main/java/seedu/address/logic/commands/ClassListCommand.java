@@ -20,7 +20,7 @@ public class ClassListCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
-        ClassroomManager classroomManager = new ClassroomManager();
+        ClassroomManager classroomManager = ClassroomManager.getInstance();
 
         final StringBuilder builder = new StringBuilder();
 

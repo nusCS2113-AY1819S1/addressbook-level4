@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.Assert.assertNotNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -19,7 +20,7 @@ import seedu.address.testutil.NoteBuilder;
  */
 public class NoteEditCommandParserTest {
 
-    private static NoteManager noteManager = new NoteManager();
+    private static NoteManager noteManager = NoteManager.getInstance();
 
     private NoteEditCommandParser parser = new NoteEditCommandParser();
 
@@ -53,7 +54,7 @@ public class NoteEditCommandParserTest {
 
         // valid args
         String args1 = " 1  ";
-        String args2 = "1 m/CS1010J";
+        String args2 = "1 " + PREFIX_MODULE_CODE + "CS1010J";
 
         NoteEditCommand noteEditCommand = parser.parse(args1);
         assertNotNull(noteEditCommand);

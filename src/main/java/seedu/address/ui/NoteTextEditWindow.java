@@ -16,6 +16,10 @@ import seedu.address.model.note.Note;
 public class NoteTextEditWindow {
 
     private static final String PATH = "/view/NoteEntryPromptWindow.fxml";
+    private static final String DEFAULT_WINDOW_TITLE = "Add/Edit note";
+    private static final double DEFAULT_MINIMUM_WIDTH = 380.0;
+    private static final double DEFAULT_MINIMUM_HEIGHT = 350.0;
+
 
     private Stage notePromptStage;
     private NoteEntryPrompt controller;
@@ -23,14 +27,14 @@ public class NoteTextEditWindow {
 
     public NoteTextEditWindow(Note note) {
         this.note = note;
-        setUpWindow();
+        setUpWindow(DEFAULT_MINIMUM_WIDTH, DEFAULT_MINIMUM_HEIGHT, DEFAULT_WINDOW_TITLE);
     }
 
     /**
      * This method sets up the window to be loaded and
      * handles its configuration and behaviour.
      */
-    private void setUpWindow() {
+    private void setUpWindow(double minWidth, double minHeight, String title) {
         try {
             controller = new NoteEntryPrompt();
 
@@ -41,9 +45,9 @@ public class NoteTextEditWindow {
             Scene scene = new Scene(layout);
 
             notePromptStage = new Stage();
-            notePromptStage.setMinHeight(380);
-            notePromptStage.setMinWidth(350);
-            notePromptStage.setTitle("Add/Edit note");
+            notePromptStage.setMinWidth(minWidth);
+            notePromptStage.setMinHeight(minHeight);
+            notePromptStage.setTitle(title);
             notePromptStage.initModality(Modality.APPLICATION_MODAL);
             notePromptStage.setScene(scene);
             notePromptStage.setOnCloseRequest(e -> {

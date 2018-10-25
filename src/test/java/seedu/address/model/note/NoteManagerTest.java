@@ -15,7 +15,7 @@ import seedu.address.testutil.NoteBuilder;
  */
 public class NoteManagerTest {
 
-    private static NoteManager noteManager = new NoteManager();
+    private static NoteManager noteManager = NoteManager.getInstance();
 
     private NoteBuilder note1 = new NoteBuilder("CS1010", "10/10/2018", "C");
     private NoteBuilder note2 = new NoteBuilder("CS2040C", "20/4/2018", "C++");
@@ -28,14 +28,6 @@ public class NoteManagerTest {
     public void setUp() {
         noteManager.clearNotes();
         noteManager.saveNoteList();
-    }
-
-    @Test
-    public void editNote_nullNote_throwsNullPointerException() throws NullPointerException {
-        int index = 1;
-
-        thrown.expect(NullPointerException.class);
-        noteManager.editNote(index, null);
     }
 
     @Test

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
+import seedu.address.model.module.ModuleCode;
 import seedu.address.ui.HtmlTableProcessor;
 
 /**
@@ -13,10 +14,10 @@ import seedu.address.ui.HtmlTableProcessor;
  */
 public class Classroom {
     private ClassName className;
-    private ClassModule moduleCode;
+    private ModuleCode moduleCode;
     private Enrollment maxEnrollment;
 
-    public Classroom(ClassName className, ClassModule moduleCode, Enrollment maxEnrollment) {
+    public Classroom(ClassName className, ModuleCode moduleCode, Enrollment maxEnrollment) {
         requireNonNull(className);
         this.className = className;
         this.moduleCode = moduleCode;
@@ -27,7 +28,7 @@ public class Classroom {
         return className;
     }
 
-    public ClassModule getModuleCode() {
+    public ModuleCode getModuleCode() {
         return moduleCode;
     }
 
@@ -41,13 +42,28 @@ public class Classroom {
         builder.append(HtmlTableProcessor
                 .renderTableItem(new ArrayList<String>(Arrays
                         .asList(className.getValue(),
-                                moduleCode.getValue(),
+                                moduleCode.moduleCode,
                                 maxEnrollment.getValue()))));
         return builder.toString();
     }
 
     /**
-     * Returns true if both classroom have the same class-specific fields.
+     * Returns true if both classrooms of the same className have the same moduleCode.
+     * This defines a weaker notion of equality between two classrooms.
+     */
+    public boolean isSameClassroom(Classroom otherClassroom) {
+        if (otherClassroom == this) {
+            return true;
+        }
+
+        return otherClassroom != null
+                && otherClassroom.getClassName().equals(getClassName())
+                && (otherClassroom.getModuleCode().equals(getModuleCode()));
+    }
+
+    /**
+     * Returns true if both classrooms have the same identity and data fields.
+     * This defines a stronger notion of equality between two classrooms.
      */
     @Override
     public boolean equals(Object other) {

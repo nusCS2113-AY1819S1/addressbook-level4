@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_DATE;
 
 import seedu.address.logic.CommandHistory;
@@ -20,10 +20,10 @@ public class NoteAddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a note. "
             + "Parameters: "
-            + PREFIX_MODULECODE + "MODULE_CODE "
+            + PREFIX_MODULE_CODE + "MODULE_CODE "
             + "[" + PREFIX_NOTE_DATE + "DATE]\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_MODULECODE + "CS2113";
+            + PREFIX_MODULE_CODE + "CS2113";
 
     public static final String MESSAGE_SUCCESS = "Note has been added to %1$s.";
     public static final String MESSAGE_CANCEL = "Note creation has been cancelled.";
@@ -37,7 +37,7 @@ public class NoteAddCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        NoteManager noteManager = new NoteManager();
+        NoteManager noteManager = NoteManager.getInstance();
 
         NoteTextEditWindow noteTextEditWindow = new NoteTextEditWindow(noteToAdd);
         noteTextEditWindow.showAndWait();

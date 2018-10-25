@@ -19,6 +19,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.GradebookAddCommand;
 import seedu.address.logic.commands.GradebookDeleteCommand;
+import seedu.address.logic.commands.GradebookEditCommand;
 import seedu.address.logic.commands.GradebookFindCommand;
 import seedu.address.logic.commands.GradebookListCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -56,7 +57,7 @@ public class AddressBookParser {
      * Used to separate multiple command words and args
      */
     private static final Pattern ADVANCED_COMMAND_FORMAT =
-            Pattern.compile("(?<commandWords>.*?\\S+((?<=find)|(?=(?:\\s+[0-9]|\\s+[a-z]\\/))|$))(?<arguments>.*)");
+            Pattern.compile("(?<commandWords>.*?\\S+((?<=find)|(?=(?:\\s+[0-9]|\\s+[a-z]+\\/))|$))(?<arguments>.*)");
 
     /**
      * Parses user input into command for execution.
@@ -99,6 +100,9 @@ public class AddressBookParser {
 
         case GradebookFindCommand.COMMAND_WORD:
             return new GradebookFindCommandParser().parse(arguments);
+
+        case GradebookEditCommand.COMMAND_WORD:
+            return new GradebookEditCommandParser().parse(arguments);
 
         case CourseAddCommand.COMMAND_WORD:
             return new CourseAddCommandParser().parse(arguments);
