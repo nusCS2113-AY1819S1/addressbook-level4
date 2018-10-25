@@ -7,9 +7,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.LoginParser;
 import seedu.address.logic.parser.ProManageParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -29,16 +27,13 @@ public class LogicManager extends ComponentManager implements Logic {
     public LogicManager(Model model) {
         this.model = model;
         history = new CommandHistory();
+        this.proManageParser = new ProManageParser();
     }
 
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-        if (proManageParser == null) {
-            LoginCommand loginCommand = LoginParser.loginCommand("manager");
-            //return loginCommand.execute(model, history);
-        }
         try {
             Command command = proManageParser.parseCommand(commandText);
             return command.execute(model, history);

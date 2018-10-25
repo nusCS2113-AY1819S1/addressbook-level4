@@ -22,7 +22,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses user input.
  */
-public class EmployeeParser extends ProManageParser {
+public class EmployeeParser extends CommandsParser {
 
     public static final String IDENTITY = "Employee";
 
