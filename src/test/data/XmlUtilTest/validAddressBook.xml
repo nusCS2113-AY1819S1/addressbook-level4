@@ -30,7 +30,7 @@
         <email isPrivate="false">heinz@example.com</email>
         <address isPrivate="false">wall street</address>
         <job>Waiter</job>
-        <education>O level</education>
+        <education>OLEVELS</education>
         <salary>1000</salary>
     </candidates>
     <candidates>
@@ -41,7 +41,7 @@
         <email isPrivate="false">cornelia@example.com</email>
         <address isPrivate="false">10th street</address>
         <job>Waiter</job>
-        <education>O level</education>
+        <education>OLEVELS</education>
         <salary>1000</salary>
     </candidates>
     <candidates>
@@ -52,7 +52,7 @@
         <email isPrivate="false">werner@example.com</email>
         <address isPrivate="false">michegan ave</address>
         <job>Waiter</job>
-        <education>O level</education>
+        <education>OLEVELS</education>
         <salary>1000</salary>
     </candidates>
     <candidates>
@@ -63,7 +63,7 @@
         <email isPrivate="false">lydia@example.com</email>
         <address isPrivate="false">little tokyo</address>
         <job>Waiter</job>
-        <education>O level</education>
+        <education>OLEVELS</education>
         <salary>1000</salary>
     </candidates>
     <candidates>
@@ -74,7 +74,7 @@
         <email isPrivate="false">anna@example.com</email>
         <address isPrivate="false">4th street</address>
         <job>Waiter</job>
-        <education>O level</education>
+        <education>OLEVELS</education>
         <salary>1000</salary>
     </candidates>
     <candidates>
@@ -85,7 +85,7 @@
         <email isPrivate="false">stefan@example.com</email>
         <address isPrivate="false">little india</address>
         <job>Waiter</job>
-        <education>O level</education>
+        <education>OLEVELS</education>
         <salary>1000</salary>
     </candidates>
     <candidates>
@@ -96,7 +96,7 @@
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">chicago ave</address>
         <job>Waiter</job>
-        <education>O level</education>
+        <education>OLEVELS</education>
         <salary>1000</salary>
     </candidates>
 </candidatebook>

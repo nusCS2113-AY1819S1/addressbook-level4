@@ -35,32 +35,32 @@ public class TypicalPersons {
 
     public static final Candidate ALICE = new PersonBuilder().withName("Alice Pauline").withGender("F").withAge("31")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com").withPhone("94351253")
-            .withJob("Waiter").withEducation("O level").withSalary("1000").withTags("friends").build();
+            .withJob("Waiter").withEducation("OLEVELS").withSalary("1000").withTags("friends").build();
     public static final Candidate BENSON = new PersonBuilder().withName("Benson Meier").withGender("M").withAge("32")
             .withAddress("311, Clementi Ave 2, #02-25").withEmail("johnd@example.com").withPhone("98765432")
-            .withJob("Waiter").withEducation("O level").withSalary("1000").withTags("owesMoney", "friends").build();
+            .withJob("Waiter").withEducation("OLEVELS").withSalary("1000").withTags("owesMoney", "friends").build();
     public static final Candidate CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563").withGender("M")
-            .withAge("33").withEmail("heinz@example.com").withJob("Waiter").withEducation("O level").withSalary("1000")
+            .withAge("33").withEmail("heinz@example.com").withJob("Waiter").withEducation("OLEVELS").withSalary("1000")
             .withAddress("wall street").build();
     public static final Candidate DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withAge("34").withGender("M").withEmail("cornelia@example.com").withAddress("10th street")
-            .withJob("Waiter").withEducation("O level").withSalary("1000").withTags("friends").build();
+            .withJob("Waiter").withEducation("OLEVELS").withSalary("1000").withTags("friends").build();
     public static final Candidate ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224").withAge("35")
-            .withGender("F").withEmail("werner@example.com").withJob("Waiter").withEducation("O level")
+            .withGender("F").withEmail("werner@example.com").withJob("Waiter").withEducation("OLEVELS")
             .withSalary("1000").withAddress("michegan ave").build();
     public static final Candidate FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427").withAge("36")
-            .withJob("Waiter").withEducation("O level").withSalary("1000").withGender("F")
+            .withJob("Waiter").withEducation("OLEVELS").withSalary("1000").withGender("F")
             .withEmail("lydia@example.com").withAddress("little tokyo").build();
     public static final Candidate GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withAge("37").withJob("Waiter").withEducation("O level").withSalary("1000")
+            .withAge("37").withJob("Waiter").withEducation("OLEVELS").withSalary("1000")
             .withGender("M").withEmail("anna@example.com").withAddress("4th street").build();
 
     // Manually added
     public static final Candidate HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424").withAge("38")
-            .withJob("Waiter").withEducation("O level").withSalary("1000")
+            .withJob("Waiter").withEducation("OLEVELS").withSalary("1000")
             .withEmail("stefan@example.com").withAddress("little india").build();
     public static final Candidate IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131").withAge("39")
-            .withJob("Waiter").withEducation("O level").withSalary("1000")
+            .withJob("Waiter").withEducation("OLEVELS").withSalary("1000")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
 
     // Manually added - Candidate's details found in {@code CommandTestUtil}

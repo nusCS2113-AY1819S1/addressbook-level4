@@ -29,10 +29,12 @@ public class Education {
         requireNonNull(educationInput);
         checkArgument(isValidEducation(educationInput), MESSAGE_EDUCATION_CONSTRAINTS);
         value = educationInput;
-        order = OrderOfEducation(educationInput);
+        order = orderOfEducation(educationInput);
     }
 
-    public enum EducationLevel{
+    /** The enums used to indicate the level of education
+     */
+    public enum EducationLevel {
         PhD,
         MASTER,
         BACHELOR,
@@ -48,8 +50,8 @@ public class Education {
      * Returns true if a given string is a valid education.
      */
     public static boolean isValidEducation(String test) {
-        for(EducationLevel e: EducationLevel.values()) {
-            if(test.equals(e.name())) {
+        for (EducationLevel e: EducationLevel.values()) {
+            if (test.equals(e.name())) {
                 return true;
             }
         }
@@ -59,8 +61,8 @@ public class Education {
     /** Determines the order of education input
      * @return order
      */
-    public int OrderOfEducation(String input) {
-        for(EducationLevel e: EducationLevel.values()) {
+    public int orderOfEducation(String input) {
+        for (EducationLevel e: EducationLevel.values()) {
             if (input.equals(e.name())) {
                 return e.ordinal();
             }
