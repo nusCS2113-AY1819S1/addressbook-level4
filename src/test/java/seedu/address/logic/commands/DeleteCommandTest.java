@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
-/*
+
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -27,7 +26,7 @@ import seedu.address.model.person.Person;
  * {@code DeleteCommand}.
  */
 public class DeleteCommandTest {
-/*
+
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalTodoList(),
             getTypicalExpenditureTracker(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
@@ -85,7 +84,7 @@ public class DeleteCommandTest {
 
         assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
-
+    /*
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -105,7 +104,7 @@ public class DeleteCommandTest {
         // redo -> same first person deleted again
         expectedModel.redoAddressBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
-    }
+    }*/
 
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
@@ -150,7 +149,7 @@ public class DeleteCommandTest {
         // redo -> deletes same second person in unfiltered person list
         expectedModel.redoAddressBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
-    }
+    }*/
 
     @Test
     public void equals() {
@@ -177,11 +176,11 @@ public class DeleteCommandTest {
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    /*
+
     private void showNoPerson(Model model) {
         model.updateFilteredPersonList(p -> false);
 
         assertTrue(model.getFilteredPersonList().isEmpty());
     }
-    */
+
 }

@@ -73,7 +73,7 @@ public class MainApp extends Application {
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
         ExpenditureTrackerStorage expenditureTrackerStorage =
                 new XmlExpenditureTrackerStorage(userPrefs.getExpenditureTrackerFilePath());
-        TodoListStorage todoListStorage = new XmlTodoListStorage(userPrefs.getAddressBookFilePath());
+        TodoListStorage todoListStorage = new XmlTodoListStorage(userPrefs.getTodoListFilePath());
         storage = new StorageManager(addressBookStorage, expenditureTrackerStorage, todoListStorage, userPrefsStorage);
 
         initLogging(config);
@@ -95,30 +95,38 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         Optional<ReadOnlyExpenditureTracker> expenditureTrackerOptional;
+        Optional<ReadOnlyTodoList> todoListOptional;
         ReadOnlyAddressBook initialData;
-        ReadOnlyTodoList initialTodoList = new TodoList();
+        ReadOnlyTodoList initialTodoListData;
         ReadOnlyExpenditureTracker initialExpenditureTracker;
 
         try {
             addressBookOptional = storage.readAddressBook();
             expenditureTrackerOptional = storage.readExpenditureTracker();
+            todoListOptional = storage.readTodoList();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
+            }
+            if (!todoListOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample TodoList");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
             initialExpenditureTracker = expenditureTrackerOptional
                     .orElseGet(SampleDataUtil::getSampleExpenditureTracker);
+            initialTodoListData = todoListOptional.orElseGet(SampleDataUtil::getSampleTodoList);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
             initialExpenditureTracker = new ExpenditureTracker();
+            initialTodoListData = new TodoList();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
             initialExpenditureTracker = new ExpenditureTracker();
+            initialTodoListData = new TodoList();
         }
 
-        return new ModelManager(initialData, initialTodoList, initialExpenditureTracker, userPrefs);
+        return new ModelManager(initialData, initialTodoListData, initialExpenditureTracker, userPrefs);
 
     }
 

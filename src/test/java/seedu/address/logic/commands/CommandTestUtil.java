@@ -23,6 +23,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -163,4 +164,12 @@ public class CommandTestUtil {
         model.commitAddressBook();
     }
 
+    /**
+     * Deletes the first task in {@code model}'s filtered list from {@code model}'s to-do list.
+     */
+    public static void deleteFirstTask(Model model) {
+        Task firstTask = model.getFilteredTaskList().get(0);
+        model.deleteTask(firstTask);
+        model.commitTodoList();
+    }
 }

@@ -26,6 +26,8 @@ public class XmlAdaptedTask {
     private String date;
     @XmlElement(required = true)
     private String priority;
+    @XmlElement(required = true)
+    private boolean status;
 
 
     /**
@@ -37,11 +39,12 @@ public class XmlAdaptedTask {
     /**
      * Constructs an {@code XmlAdaptedTask} with the given task details.
      */
-    public XmlAdaptedTask(String name, String module, String date, String priority) {
+    public XmlAdaptedTask(String name, String module, String date, String priority, boolean status) {
         this.name = name;
         this.module = module;
         this.date = date;
         this.priority = priority;
+        this.status = status;
     }
 
     /**
@@ -54,6 +57,7 @@ public class XmlAdaptedTask {
         module = source.getModule().value;
         date = source.getDate().value;
         priority = source.getPriority().value;
+        status = source.getComplete();
     }
 
     /**
@@ -98,7 +102,9 @@ public class XmlAdaptedTask {
         }
         final TaskPriority modelAddress = new TaskPriority(priority);
 
-        return new Task(modelName, modelPhone, modelEmail, modelAddress);
+        final boolean modelStatus = status;
+
+        return new Task(modelName, modelPhone, modelEmail, modelAddress, modelStatus);
     }
 
     @Override
@@ -115,6 +121,7 @@ public class XmlAdaptedTask {
         return Objects.equals(name, otherTask.name)
                 && Objects.equals(module, otherTask.module)
                 && Objects.equals(date, otherTask.date)
-                && Objects.equals(priority, otherTask.priority);
+                && Objects.equals(priority, otherTask.priority)
+                && Objects.equals(status, otherTask.status);
     }
 }
