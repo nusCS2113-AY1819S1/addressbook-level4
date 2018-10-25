@@ -18,6 +18,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddSkillLevelCommand;
+import seedu.address.logic.commands.BudgetCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CreateAccountCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -34,6 +35,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.budgetelements.ClubBudgetElements;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -42,6 +44,8 @@ import seedu.address.model.person.SkillLevel;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 import seedu.address.testutil.AccountBuilder;
 import seedu.address.testutil.AccountUtil;
+import seedu.address.testutil.ClubBudgetElementsBuilder;
+import seedu.address.testutil.ClubBudgetElementsUtil;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -175,6 +179,13 @@ public class AddressBookParserTest {
         thrown.expect(ParseException.class);
         thrown.expectMessage(MESSAGE_UNKNOWN_COMMAND);
         parser.parseCommand("unknownCommand");
+    }
+
+    @Test
+    public void parseCommand_budget() throws Exception {
+        ClubBudgetElements club = new ClubBudgetElementsBuilder().build();
+        BudgetCommand command = (BudgetCommand) parser.parseCommand(ClubBudgetElementsUtil.getBudgetCommand(club));
+        assertEquals(new BudgetCommand(club), command);
     }
 
     @Test
