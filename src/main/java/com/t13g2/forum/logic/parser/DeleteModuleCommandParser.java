@@ -1,7 +1,6 @@
 package com.t13g2.forum.logic.parser;
 
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_MODULE_TITLE;
 
 import java.util.stream.Stream;
 
