@@ -58,7 +58,6 @@ public class LoginUserIdPasswordRoleCommand extends LoginCommand {
      * @param model the current model being used to filter the accounts list
      */
     private void updateFilteredAccountList(Model model) {
-        LoginManager.setIsSensitiveInformation(true);
         Predicate updatedIdPredicate = getMostUpdatedIdPredicate(getIdPredicate());
         model.updateFilteredLoginDetailsList(updatedIdPredicate);
         Predicate updatedPasswordPredicate = getMostUpdatedPasswordPredicate(getPasswordPredicate());

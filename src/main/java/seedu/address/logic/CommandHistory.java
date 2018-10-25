@@ -25,12 +25,7 @@ public class CommandHistory {
      */
     public void add(String userInput) {
         requireNonNull(userInput);
-        if (LoginManager.getIsSensitiveInformation()) {
-            userInputHistory.add("Sensitive information!");
-            LoginManager.setIsSensitiveInformation(false);
-        } else {
-            userInputHistory.add(userInput);
-        }
+        userInputHistory.add(userInput);
     }
 
     /**
