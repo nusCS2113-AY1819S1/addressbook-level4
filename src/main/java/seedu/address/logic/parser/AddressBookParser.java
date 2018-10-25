@@ -51,10 +51,6 @@ public class AddressBookParser {
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            if (!LoginManager.getIsLoginSuccessful()) {
-                UserLoginException userLoginException = new UserLoginException();
-                userLoginException.showBlankLoginError();
-            }
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
@@ -123,11 +119,6 @@ public class AddressBookParser {
             return new BudgetCalculationCommandParser().parse(arguments);
 
         default:
-            if (!LoginManager.getIsLoginSuccessful()) {
-                UserLoginException userLoginException = new UserLoginException();
-                userLoginException.showInvalidLoginError();
-                userLoginException.showLoginUsage();
-            }
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }

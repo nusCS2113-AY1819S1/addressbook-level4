@@ -252,6 +252,8 @@ which is often used:
 * `FilteredList#setPredicate(predicate)` -- Filters the list of accounts in `filteredLoginDetails` according to the
 predicate determined after the user inputs their login credentials.
 
+
+
 The operation above is called when the method, `updateFilteredLoginDetailsList(Predicate<LoginDetails> predicate)`, is
 called in `ModelManager`. `ModelManager` implements `updateFilteredLoginDetailsList(Predicate<LoginDetails> predicate)` and
 `getFilteredLoginDetailsList()` found in the `Model` interface. `getFilteredLoginDetailsList()` is called when the
@@ -271,10 +273,10 @@ image::InitialLoginBookList.PNG[width="300"]
 Step 2. The user executes `login A1234567M zaq1xsw2cde3` command in the input box that matches an account in
 `LoginBook`. `LogicManager` then calls `ParseCommand(login A1234567M zaq1xsw2cde3)` in `AddressBookParser`.
 
-image::CorrectIdPassword.PNG[width="300"]
+image::CorrectIdPasswordRole.PNG[width="300"]
 
-Step 3. `AddressBookParser` instantiates the `LoginUserIdPasswordCommandParser` object and simultaneously calls the `parse(args)` method, returning
-an `LoginUserIdPasswordCommand` object with the user input, parsed, to `AddressBookParser` and `LogicManager`.
+Step 3. `AddressBookParser` instantiates the `LoginUserIdPasswordRoleCommandParser` object and simultaneously calls the `parse(args)` method, returning
+an `LoginUserIdPasswordRoleCommand` object with the user input, parsed, to `AddressBookParser` and `LogicManager`.
 
 Step 4. `LogicManager` calls the `execute()` method in `LoginUserIdPasswordCommand`. Next, `LoginUserIdPasswordCommand`
 calls `updateFilteredLoginDetailsList(updatedIdPredicate)` in `Model` with the computed predicate from user ID field input.
@@ -282,7 +284,7 @@ calls `updateFilteredLoginDetailsList(updatedIdPredicate)` in `Model` with the c
 Step 5. `Model` calls `setPredicate(updatedIdPredicate)` in `FilteredList`, which then filters out accounts whose user Id is a
 mismatch with updatedIdPredicate. `filteredLoginDetails` is updated as shown below.
 
-image::ParseCorrectIdList.PNG[width="300"]
+image::ParseCorrectLoginDetailList.PNG[width="300"]
 
 Step 6. `LoginUserIdPasswordCommand` calls `updateFilteredLoginDetailsList(updatedPasswordPredicate)` in `Model` with the
 computed predicate from user password field input.
@@ -290,7 +292,7 @@ computed predicate from user password field input.
 Step 7. `Model` calls `setPredicate(updatedPasswordPredicate)` in `FilteredList`, which then further filters out accounts
 whose password is a mismatch with updatedPasswordPredicate. `filteredLoginDetails` is further updated as shown below.
 
-image::ParseCorrectIdList.PNG[width="300"]
+image::ParseCorrectLoginDetailList.PNG[width="300"]
 
 [NOTE]
 In step 2, if the user executes `login A1234561M zaq1xsw2cde3` command instead, the application will continue with steps

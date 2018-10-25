@@ -6,11 +6,8 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ACCOUNTS;
 
 import java.util.function.Predicate;
 
-import javax.swing.JOptionPane;
-
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.LoginManager;
-import seedu.address.logic.parser.exceptions.UserLoginException;
 import seedu.address.model.Model;
 import seedu.address.model.login.UserIdContainsKeywordsPredicate;
 import seedu.address.model.login.UserPasswordContainsKeywordsPredicate;
@@ -77,13 +74,10 @@ public class LoginUserIdPasswordRoleCommand extends LoginCommand {
      */
     private void checkUpdatedAccountListSetLoginCondition(Model model) {
         if (model.getFilteredLoginDetailsList().size() != 0) {
-            JOptionPane.showMessageDialog(null, "Login successful!");
             LoginManager.setIsLoginSuccessful(true);
         } else {
             LoginManager.setAllRolesFalse();
             LoginManager.setIsLoginSuccessful(false);
-            UserLoginException userLoginException = new UserLoginException();
-            userLoginException.showLoginError();
         }
     }
 

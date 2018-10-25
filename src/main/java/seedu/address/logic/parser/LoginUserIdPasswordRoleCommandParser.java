@@ -30,8 +30,6 @@ public class LoginUserIdPasswordRoleCommandParser implements Parser<LoginCommand
     public LoginCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
-            userLoginException.showInvalidLoginError();
-            userLoginException.showLoginUsage();
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoginCommand.MESSAGE_USAGE));
         }
@@ -51,13 +49,9 @@ public class LoginUserIdPasswordRoleCommandParser implements Parser<LoginCommand
     public LoginUserIdPasswordRoleCommand setRoleReturnLoginCommandObject(
             String[] keywords, List<String> keywordsList) throws ParseException {
         if (keywords.length < 3) {
-            userLoginException.showMissingLoginError();
-            userLoginException.showLoginUsage();
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoginCommand.MESSAGE_USAGE));
         } else if (keywords.length > 3) {
-            userLoginException.showInvalidLoginError();
-            userLoginException.showLoginUsage();
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoginCommand.MESSAGE_USAGE));
         } else {
