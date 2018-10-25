@@ -301,14 +301,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateJobOfferInCompany(Company company, JobOffer target, JobOffer editedJobOffer) {
+    public void updateJobOfferInSelectedCompany(Company company, JobOffer target, JobOffer editedJobOffer) {
         requireAllNonNull(company, target, editedJobOffer);
         versionedCompanyBook.updateJobOfferInCompany(company, target, editedJobOffer);
         indicateCompanyBookChanged();
     }
 
     @Override
-    public void updateJobOffer(JobOffer target, JobOffer editedJobOffer) {
+    public void updateJobOfferInCompanyBook(JobOffer target, JobOffer editedJobOffer) {
         requireAllNonNull(target, editedJobOffer);
         versionedCompanyBook.updateJobOffer(target, editedJobOffer);
     }

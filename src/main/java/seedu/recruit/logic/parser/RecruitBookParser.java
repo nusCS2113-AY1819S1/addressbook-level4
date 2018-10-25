@@ -33,18 +33,13 @@ import seedu.recruit.logic.commands.ListCandidateCommand;
 import seedu.recruit.logic.commands.ListCompanyCommand;
 import seedu.recruit.logic.commands.RedoCandidateBookCommand;
 import seedu.recruit.logic.commands.RedoCompanyBookCommand;
-<<<<<<< HEAD
-import seedu.recruit.logic.commands.SelectCommand;
-import seedu.recruit.logic.commands.SortCandidateCommand;
-import seedu.recruit.logic.commands.SortCompanyCommand;
-=======
 import seedu.recruit.logic.commands.SelectCandidateCommand;
 import seedu.recruit.logic.commands.SelectCompanyCommand;
 import seedu.recruit.logic.commands.SelectJobCommand;
 import seedu.recruit.logic.commands.ShortlistCandidateCommand;
 import seedu.recruit.logic.commands.ShortlistCommand;
-import seedu.recruit.logic.commands.SortCommand;
->>>>>>> 3e9ad50107f729cdada2dac4d32017a0ce1e8f6c
+import seedu.recruit.logic.commands.SortCandidateCommand;
+import seedu.recruit.logic.commands.SortCompanyCommand;
 import seedu.recruit.logic.commands.SwitchBookCommand;
 import seedu.recruit.logic.commands.UndoCandidateBookCommand;
 import seedu.recruit.logic.commands.UndoCompanyBookCommand;

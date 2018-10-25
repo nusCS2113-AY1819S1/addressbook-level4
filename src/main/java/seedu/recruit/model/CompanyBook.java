@@ -119,8 +119,7 @@ public class CompanyBook implements ReadOnlyCompanyBook {
     public void sortCompanies(Prefix prefix) {
         if (prefix == PREFIX_COMPANY_NAME) {
             companyList.sortByCompanyName();
-        }
-        else {
+        } else {
             companyList.sortByEmail();
         }
     }

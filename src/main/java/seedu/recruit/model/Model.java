@@ -194,7 +194,7 @@ public interface Model {
      * The job offer identity of {@code editedJobOffer} must not be the same as another existing job offer in the
      * company book.
      */
-    void updateJobOffer(JobOffer target, JobOffer editedJobOffer);
+    void updateJobOfferInCompanyBook(JobOffer target, JobOffer editedJobOffer);
 
     /**
      * Replaces the given job offer {@code target} in the list with {@code editedJobOffer}.
@@ -202,7 +202,7 @@ public interface Model {
      * The job offer identity of {@code editedJobOffer} must not be the same as another existing job offer in the
      * same company{@code company}.
      */
-    void updateJobOfferInCompany(Company company, JobOffer target, JobOffer editedJobOffer);
+    void updateJobOfferInSelectedCompany(Company company, JobOffer target, JobOffer editedJobOffer);
 
     /**
      * Deletes the given job offer.

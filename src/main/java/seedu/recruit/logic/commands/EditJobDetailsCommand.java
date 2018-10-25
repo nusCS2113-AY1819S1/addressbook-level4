@@ -100,8 +100,8 @@ public class EditJobDetailsCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_JOB_OFFER);
         }
 
-        model.updateJobOffer(jobOfferToEdit, editedJobOffer);
-        model.updateJobOfferInCompany(companyToEdit, jobOfferToEdit, editedJobOffer);
+        model.updateJobOfferInCompanyBook(jobOfferToEdit, editedJobOffer);
+        model.updateJobOfferInSelectedCompany(companyToEdit, jobOfferToEdit, editedJobOffer);
         model.updateFilteredCompanyJobList(PREDICATE_SHOW_ALL_JOBOFFERS);
         model.commitCompanyBook();
         return new CommandResult(String.format(MESSAGE_EDIT_JOB_OFFER_SUCCESS, editedJobOffer));

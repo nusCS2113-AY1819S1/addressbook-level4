@@ -377,12 +377,12 @@ public class CommandTestUtil {
         }
 
         @Override
-        public void updateJobOfferInCompany(Company company, JobOffer target, JobOffer editedJobOffer) {
+        public void updateJobOfferInSelectedCompany(Company company, JobOffer target, JobOffer editedJobOffer) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateJobOffer(JobOffer target, JobOffer editedJobOffer) {
+        public void updateJobOfferInCompanyBook(JobOffer target, JobOffer editedJobOffer) {
             throw new AssertionError("This method should not be called.");
         }
 
