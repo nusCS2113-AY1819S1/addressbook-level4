@@ -11,7 +11,7 @@ import seedu.address.testutil.Assert;
 
 public class ActivityTest {
 
-	@Test
+    @Test
     public void constructor_null_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> new Activity(null, null));
     }
