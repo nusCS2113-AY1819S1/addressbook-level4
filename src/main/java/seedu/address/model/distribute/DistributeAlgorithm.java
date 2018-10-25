@@ -86,7 +86,6 @@ public class DistributeAlgorithm {
                 randomAllPersonArrayList.removeLast();
                 paxInAGroup--;
             }
-
             groupArrayList.add(addPerson);
         }
         distUtil.distributeProcess(groupArrayList, groupName);
@@ -119,11 +118,11 @@ public class DistributeAlgorithm {
                 }
                 ArrayList<Person> temp = new ArrayList<>();
                 if (maleLinkList.size() != 0) {
-                    distUtil.genderDistributionCheck(index, groupArrayList, maleLinkList, loopCounter, num, temp);
+                    distUtil.selectiveDistributionByGender(index, groupArrayList, maleLinkList, loopCounter, num, temp);
                     maleLinkList.removeLast();
 
                 } else if (femaleLinkList.size() != 0) {
-                    distUtil.genderDistributionCheck(index, groupArrayList, femaleLinkList, loopCounter, num, temp);
+                    distUtil.selectiveDistributionByGender(index, groupArrayList, femaleLinkList, loopCounter, num, temp);
                     femaleLinkList.removeLast();
                 }
                 num++;
@@ -148,14 +147,7 @@ public class DistributeAlgorithm {
             for (int x = 0; x < entry.getValue(); x++) {
                 ArrayList<Person> personArrayList = new ArrayList<>();
                 Person p = distUtil.findPerson(entry.getKey(), randomAllPersonArrayList);
-                if (loopCounter < index ) {
-                    personArrayList.add(p);
-                    groupArrayList.add(personArrayList);
-                } else {
-                    int z = loopCounter % index;
-                    ArrayList temp = groupArrayList.get(z);
-                    groupArrayList.get(z).add(temp.size() - 1, p);
-                }
+                distUtil.selectiveDistributionByNationality(index, groupArrayList, personArrayList, loopCounter, p);
                 loopCounter++;
             }
         }
