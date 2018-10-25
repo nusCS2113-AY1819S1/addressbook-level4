@@ -6,11 +6,9 @@ package seedu.address.model.gradebook;
 public class Gradebook {
     private String moduleCode;
     private String gradebookComponentName;
-    private String studentAdminNo;
     private String gradebookNewComponentName;
     private int gradebookMaxMarks;
     private int gradebookWeightage;
-    private int studentGrade;
 
     public Gradebook(
             String moduleCode,

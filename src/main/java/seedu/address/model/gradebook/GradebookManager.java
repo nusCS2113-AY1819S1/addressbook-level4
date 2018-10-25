@@ -82,17 +82,6 @@ public class GradebookManager {
     }
 
     /**
-     This method checks if gradebook assign student grade have empty inputs.
-     */
-    public boolean isEmpty (String adminNo, String moduleCode, String gradebookComponentName, int studentMarks) {
-        boolean isEmpty = false;
-        if (adminNo.equals("") || moduleCode.equals("") || gradebookComponentName.equals("") || studentMarks == 0) {
-            isEmpty = true;
-        }
-        return isEmpty;
-    }
-
-    /**
      This method checks if module code and component name already exist.
      */
     public boolean isDuplicate (String moduleCode, String gradebookComponentName) {
