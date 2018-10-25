@@ -1,15 +1,21 @@
 package seedu.address.logic.commands;
 
+import static org.junit.Assert.assertEquals;
+
+import static seedu.address.logic.commands.MailCommand.MESSAGE_UNSUPPORTED;
 import static seedu.address.logic.commands.MailCommand.TYPE_ALL;
 import static seedu.address.logic.commands.MailCommand.TYPE_GROUPS;
 import static seedu.address.logic.commands.MailCommand.TYPE_SELECTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
 
+import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -20,6 +26,9 @@ public class MailCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void execute_selectedPersons_success() {
@@ -59,6 +68,24 @@ public class MailCommandTest {
         CommandTestUtil.assertCommandSuccess(mailCommand, model, commandHistory, expectedMessage, model);
     }
 
+    @Test
+    public void execute_unsupportedDesktops_throwsCommandException() throws CommandException{
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(MESSAGE_UNSUPPORTED);
+
+        MailCommand mailCommand = new MailCommandStubThrowsException(TYPE_ALL);
+
+        String expectedMessage = MailCommand.MESSAGE_SUCCESS
+                + buildRecipients(new ArrayList<>(model.getFilteredPersonList()));
+
+        try {
+            CommandResult result = mailCommand.execute(model, commandHistory);
+            assertEquals(expectedMessage, result.feedbackToUser);
+        } catch (CommandException e) {
+            throw new CommandException(e.getMessage());
+        }
+    }
+
     /**
      * Builds the string of names of recipients mailed to.
      * @param mailingList the list of recipients.
@@ -74,4 +101,44 @@ public class MailCommandTest {
         }
         return output.toString();
     }
+
+    /**
+     * A MailCommand stub that throws CommandException
+     */
+    private class MailCommandStubThrowsException extends MailCommand {
+        public MailCommandStubThrowsException(int mailType) {
+            super(mailType);
+        }
+
+        public MailCommandStubThrowsException(int mailType, String mailArgs) {
+            super(mailType, mailArgs);
+        }
+
+        @Override
+        public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+            throw new CommandException(MESSAGE_UNSUPPORTED);
+        }
+    }
+
+//    /**
+//     * A MailCommand stub that runs successful without throwing CommandException
+//     */
+//    private class MailCommandStubSuccess extends MailCommand {
+//        public MailCommandStubSuccess(int mailType) {
+//            super(mailType);
+//        }
+//
+//        public MailCommandStubSuccess(int mailType, String mailArgs) {
+//            super(mailType, mailArgs);
+//        }
+//
+//        @Override
+//        public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+//
+//            ArrayList<Person> mailingList = mailToAll(model);
+//            String recipients = buildRecipients(mailingList);
+//
+//            return new CommandResult(MESSAGE_SUCCESS + recipients);
+//        }
+//    }
 }

@@ -34,7 +34,7 @@ public class MailCommand extends Command {
     public static final int TYPE_ALL = 3;
 
     public static final String MESSAGE_SUCCESS = "Mailing to: ";
-    private static final String MESSAGE_UNSUPPORTED = "System mail application is unsupported.";
+    public static final String MESSAGE_UNSUPPORTED = "System mail application is unsupported.";
     private static final String MESSAGE_EMPTY_SELECTION = "No contacts selected! Select one or more and try again.";
 
     /**
