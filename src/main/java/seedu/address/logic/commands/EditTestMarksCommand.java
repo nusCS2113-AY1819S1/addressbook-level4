@@ -31,7 +31,7 @@ import seedu.address.model.tag.Tag;
  * A command to edit person test marks
  */
 public class EditTestMarksCommand extends Command {
-    /**t
+    /**
      * A command to edit person test marks
      */
     public static final String COMMAND_WORD = "edit_test";
@@ -47,14 +47,14 @@ public class EditTestMarksCommand extends Command {
     private final NameContainsKeywordsPredicate predicate;
     private final String testName;
     private final String testMarks;
-    private final String grade;
+    private final String testGrade;
     private final EditPersonDescriptor editPersonDescriptor = null;
 
-    public EditTestMarksCommand(NameContainsKeywordsPredicate predicate, String testName, String testMarks, String grade) {
+    public EditTestMarksCommand(NameContainsKeywordsPredicate predicate, String testName, String testMarks, String testGrade) {
         this.predicate = predicate;
         this.testName = testName;
         this.testMarks = testMarks;
-        this.grade = grade;
+        this.testGrade = testGrade;
     }
 
     @Override
@@ -66,7 +66,11 @@ public class EditTestMarksCommand extends Command {
         List<Person> personListName = model.getFilteredPersonList();
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         Person personToEdit = personListName.get(0);
-
+        String grade = "Undefined";
+        if (testGrade != null)
+        {
+            grade = testGrade;
+        }
         Test test = new Test(new TestName(testName), new Marks(testMarks), new Grade(grade));
 
         Set<Test> testList = new HashSet<>();
@@ -212,6 +216,7 @@ public class EditTestMarksCommand extends Command {
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
         }
+
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
