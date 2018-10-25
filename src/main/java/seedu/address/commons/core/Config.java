@@ -19,6 +19,7 @@ public class Config {
     private Path userLoginInfoFilePath = Paths.get("loginInfoManager.json");
     private Path FXMLLoginPath = Paths.get ("LoginPage.fxml");
 
+
     public String getAppTitle() {
         return appTitle;
     }
@@ -58,6 +59,7 @@ public class Config {
     public void setFXMLLoginPath(Path FXMLLoginPath) {
         this.FXMLLoginPath = FXMLLoginPath;
     };
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

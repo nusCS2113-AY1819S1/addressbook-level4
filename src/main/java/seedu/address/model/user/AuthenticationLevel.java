@@ -7,6 +7,7 @@ import static seedu.address.authentication.AuthenticalLevel.AUTH_MANAGER;
 import static seedu.address.authentication.AuthenticalLevel.AUTH_STOCK_TAKER;
 
 
+
 /**
  * Represents a Username in the loginInfo list.
  */
@@ -58,5 +59,4 @@ public class AuthenticationLevel {
     public boolean equals(String userName) {
         return this.authenticationLevel.equals (authenticationLevel);
     }
-
 }

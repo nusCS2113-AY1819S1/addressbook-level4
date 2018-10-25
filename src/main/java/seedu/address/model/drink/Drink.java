@@ -20,7 +20,7 @@ public class Drink {
     // Data fields
     private Price costPrice;
     private Price retailPrice;
-    private Stock stock;
+    private Quantity quantity;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -56,12 +56,12 @@ public class Drink {
         this.retailPrice = retailPrice;
     }
 
-    public Stock getStock() {
-        return stock;
+    public Quantity getQuantity() {
+        return quantity;
     }
 
-    public void setStock(Stock stock) {
-        this.stock = stock;
+    public void setQuantity(Quantity quantity) {
+        this.quantity = quantity;
     }
 
     /**

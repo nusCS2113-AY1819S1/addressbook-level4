@@ -15,6 +15,7 @@ public class LoginInfo {
     protected Password password;
     protected AuthenticationLevel authenticationLevel;
 
+
     public LoginInfo(){}
     public LoginInfo (String userName, String authenticationLevel) {
         this.userName = new UserName (userName);

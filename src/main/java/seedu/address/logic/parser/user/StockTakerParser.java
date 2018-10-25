@@ -27,6 +27,10 @@ import seedu.address.logic.parser.FindCommandParser;
 import seedu.address.logic.parser.SelectCommandParser;
 import seedu.address.logic.parser.SellCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.validation.check.UserAuthenticationCheck;
+import seedu.address.logic.parser.validation.check.UserAuthenticationCheckUtils;
+
+
 /**
  * Parses user input.
  */
@@ -51,7 +55,6 @@ public class StockTakerParser {
         }
 
         String commandWord = matcher.group("commandWord");
-
         final String arguments = matcher.group("arguments");
 
         switch (commandWord) {

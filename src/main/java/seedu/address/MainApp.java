@@ -67,6 +67,7 @@ public class MainApp extends Application {
     private InitAddressBook initAddressBook;
     private String FXML_LOGIN_PATH;
 
+
     @Override
     public void init() throws Exception {
         logger.info("=============================[ Initializing AddressBook ]===========================");
@@ -79,6 +80,7 @@ public class MainApp extends Application {
         LoginInfoStorage loginInfoStorage = new JsonLoginInfoStorage (config.getUserLoginInfoilePath ());
         loginInfoList = initLoginInfo (loginInfoStorage);
         FXML_LOGIN_PATH = config.getFXMLLoginPath ().toString ();
+
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage, loginInfoStorage);
 
@@ -270,7 +272,6 @@ public class MainApp extends Application {
         }
         loginWindow.close ();
     }
-
     @Subscribe
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));

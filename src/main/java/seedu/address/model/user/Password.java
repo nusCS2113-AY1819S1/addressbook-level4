@@ -25,6 +25,7 @@ public class Password {
      */
     public static boolean isValidPassword(String test) {
         return test.matches(PASSWORD_VALIDATION_REGEX) && !test.isEmpty ();
+
     }
 
     @Override

@@ -15,6 +15,7 @@ import javax.crypto.spec.PBEKeySpec;
 public class PasswordUtils {
     //fixed salt for the seek for cs2113, can made dynamic when needed
     private static final String salt = "EqdmPh53c9x33EygXpTpcoJvc4VXLK";
+
     private static final int ITERATIONS = 10000;
     private static final int KEY_LENGTH = 256;
 

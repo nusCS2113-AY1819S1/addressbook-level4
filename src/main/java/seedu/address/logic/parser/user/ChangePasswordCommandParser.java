@@ -35,6 +35,7 @@ public class ChangePasswordCommandParser implements Parser< ChangePasswordComman
 
         String newPassword = ParserUtil.parsePassword (argMultimap.getValue(PREFIX_NEW_PASSWORD).get());
         String oldPassword = ParserUtil.parsePassword (argMultimap.getValue (PREFIX_OLD_PASSWORD).get ());
+
         return new ChangePasswordCommand(oldPassword, newPassword);
     }
 

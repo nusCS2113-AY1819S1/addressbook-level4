@@ -5,11 +5,13 @@ import static seedu.address.authentication.AuthenticalLevel.AUTH_ACCOUNTANT;
 import static seedu.address.authentication.AuthenticalLevel.AUTH_ADMIN;
 import static seedu.address.authentication.AuthenticalLevel.AUTH_MANAGER;
 import static seedu.address.authentication.AuthenticalLevel.AUTH_STOCK_TAKER;
+
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AUTHENTICATION_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import seedu.address.authentication.PasswordUtils;
+import seedu.address.commons.login.authenication.AuthenticationLevel;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -18,7 +20,6 @@ import seedu.address.model.Model;
 import seedu.address.model.user.AuthenticationLevel;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.UserName;
-
 /**
  * Adds a person to the address book.
  */
@@ -58,7 +59,6 @@ public class CreateAccountCommand extends UserCommand {
     @Override
     public CommandResult execute(LoginInfoManager loginInfoManager, CommandHistory history) {
         requireNonNull(loginInfoManager);
-
         loginInfoManager.createNewAccount (userName, password, authenticationLevel);
         return new CommandResult(MESSAGE_SUCCESS);
     }
