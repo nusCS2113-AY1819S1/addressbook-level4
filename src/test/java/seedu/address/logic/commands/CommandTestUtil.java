@@ -31,8 +31,9 @@ import seedu.address.testutil.EditEventDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-    public static final String VALID_USERNAME = "bob";
-    public static final String VALID_PASSWORD = "pass";
+
+    public static final String VALID_USERNAME = "Johnny Bravo";
+    public static final String VALID_PASSWORD = "pass@12345";
     public static final String VALID_ATTENDEE_TED = "Ted Bacan";
     public static final String VALID_ATTENDEE_HAN = "Han Christian";
     public static final String VALID_NAME_AMY = "Night Cycling";
@@ -69,8 +70,8 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
-    public static final String INVALID_USERNAME_DESC = " " + PREFIX_USERNAME + "_james_"; // Incorrect format
-    public static final String INVALID_PASSWORD_DESC = " " + PREFIX_PASSWORD + "hello world"; // cannot contain space
+    public static final String INVALID_USERNAME_DESC = " " + PREFIX_USERNAME + "j4!"; // '!' not allowed
+    public static final String INVALID_PASSWORD_DESC = " " + PREFIX_PASSWORD + "pass word"; // space not allowed
     public static final String INVALID_ATTENDEE_DESC = " " + PREFIX_ATTENDEE + "R@chel"; // '@' not allowed in attendees
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_CONTACT_DESC = " " + PREFIX_CONTACT + "James&"; // '&' not allowed in contact

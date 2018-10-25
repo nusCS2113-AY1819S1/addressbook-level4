@@ -33,7 +33,7 @@ class ReplyCommentTest {
                     + "<li>hello</li>\n"
                     + "<li>there</li>\n"
                     + "<li>hello</li>\n"
-                    + "</ol>";
+                    + "</ol>\n";
     @Test
     void replyComment_correctInput_success() throws Exception {
         ReplyComment test = new ReplyComment(comments);

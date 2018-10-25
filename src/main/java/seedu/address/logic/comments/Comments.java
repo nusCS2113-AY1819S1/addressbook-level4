@@ -60,9 +60,12 @@ public abstract class Comments {
     public static String rewrite(Vector commentsVector) {
         String comments = "<span>Comment Section</span>\n<ol>";
         for (int i = 0; i < commentsVector.size(); i++) {
+            if (commentsVector.get(i).toString().length() == 0) {
+                continue;
+            }
             comments += "\n" + "<li>" + commentsVector.get(i) + "</li>";
         }
-        comments += "\n</ol>";
+        comments += "\n</ol>\n";
         return comments;
     }
 
