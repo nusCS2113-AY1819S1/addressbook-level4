@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
-
 import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,7 +17,6 @@ import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
 import seedu.planner.commons.events.model.LimitListChangedEvent;
 import seedu.planner.commons.events.model.SummaryMapChangedEvent;
-import seedu.planner.commons.events.ui.RequestDataForWelcomePanelEvent;
 import seedu.planner.commons.events.ui.UpdateWelcomePanelEvent;
 import seedu.planner.commons.util.DateUtil;
 import seedu.planner.model.record.Date;
@@ -28,7 +25,6 @@ import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.summary.CategoryStatisticsList;
 import seedu.planner.model.summary.Summary;
-import seedu.planner.ui.WelcomePanel;
 
 /**
  * Represents the in-memory model of the financial planner data.
@@ -76,12 +72,6 @@ public class ModelManager extends ComponentManager implements Model {
         return new Month(currentDate.getMonth(), currentDate.getYear());
     }
 
-    /** Initialises the pieChart values in {@link WelcomePanel} */
-    private void initCurrentMonthTracking() {
-        EventsCenter.getInstance().post(new UpdateWelcomePanelEvent(new CategoryStatisticsList(recordsInCurrentMonth)
-                .getReadOnlyStatsList()));
-    }
-
     @Override
     public void resetData(ReadOnlyFinancialPlanner newData) {
         versionedFinancialPlanner.resetData(newData);
@@ -109,12 +99,6 @@ public class ModelManager extends ComponentManager implements Model {
     /** Raises an event to indicate the limit list has changed */
     private void indicateLimitListChanged() {
         raise(new LimitListChangedEvent(versionedFinancialPlanner));
-    }
-
-    @Subscribe
-    public void handleRequestDataForWelcomePanelEvent(RequestDataForWelcomePanelEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        initCurrentMonthTracking();
     }
 
     //=========== Financial planner standard operations ============================================
