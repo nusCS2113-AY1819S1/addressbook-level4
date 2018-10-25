@@ -3,13 +3,13 @@ package seedu.planner.ui;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.swing.plaf.synth.Region;
 
-import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
-import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import seedu.planner.logic.commands.AddCommand;
 import seedu.planner.logic.commands.ClearCommand;
@@ -35,6 +35,8 @@ public class AutoCompleteBox extends UiPart<Region> {
     private static final String FXML = "AutoCompleteBox.fxml";
     private static final int MAX_ROWS = 5;
 
+    private static TextField commandTextField;
+
     private static Set<String> commandWordSet =
             new HashSet<>(Arrays.asList(AddCommand.COMMAND_WORD, ClearCommand.COMMAND_WORD, DeleteCommand.COMMAND_WORD,
                     DeleteCommandByDateEntry.COMMAND_WORD, EditCommand.COMMAND_WORD, ExitCommand.COMMAND_WORD,
@@ -43,9 +45,17 @@ public class AutoCompleteBox extends UiPart<Region> {
                     ListCommand.COMMAND_WORD, RedoCommand.COMMAND_WORD, SelectCommand.COMMAND_WORD,
                     SortCommand.COMMAND_WORD, SummaryCommand.COMMAND_WORD, UndoCommand.COMMAND_WORD));
 
+    private Set<String> sortWordSet = Stream.concat(SortCommand.ORDER_SET.stream(),
+            SortCommand.CATEGORY_SET.stream()).collect(Collectors.toSet());
+
     public AutoCompleteBox(TextField commandTextField) {
         super(FXML);
+        this.commandTextField = commandTextField;
         TextFields.bindAutoCompletion(commandTextField, commandWordSet).setVisibleRowCount(MAX_ROWS);
+    }
+
+    public void bindNewSuggestions(String string){
+        commandWordSet.add(string);
     }
 
 }

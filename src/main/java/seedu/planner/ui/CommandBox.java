@@ -1,15 +1,6 @@
 package seedu.planner.ui;
 
-import static seedu.planner.logic.commands.AddCommand.COMMAND_WORD;
-import static seedu.planner.logic.commands.ClearCommand.COMMAND_WORD;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.logging.Logger;
-
-import org.controlsfx.control.textfield.AutoCompletionBinding;
-import org.controlsfx.control.textfield.TextFields;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -36,8 +27,6 @@ public class CommandBox extends UiPart<Region> {
     private final Logic logic;
     private ListElementPointer historySnapshot;
 
-    public AutoCompleteBox autoCompleteBox;
-
     @FXML
     private TextField commandTextField;
 
@@ -45,7 +34,6 @@ public class CommandBox extends UiPart<Region> {
         super(FXML);
         this.logic = logic;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
-        this.autoCompleteBox = new AutoCompleteBox(commandTextField);
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         historySnapshot = logic.getHistorySnapshot();
     }
@@ -55,12 +43,14 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     private void handleKeyPress(KeyEvent keyEvent) {
+        AutoCompleteBox autoCompleteBox = new AutoCompleteBox(commandTextField);
+        String item = commandTextField.getText();
+
         switch (keyEvent.getCode()) {
         case UP:
             // As up and down buttons will alter the position of the caret,
             // consuming it causes the caret's position to remain unchanged
             keyEvent.consume();
-
             navigateToPreviousInput();
             break;
         case DOWN:
@@ -99,6 +89,7 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
+     *
      * Sets {@code CommandBox}'s text field with {@code text} and
      * positions the caret to the end of the {@code text}.
      */
