@@ -7,7 +7,9 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.TreeMap;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -23,6 +25,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.autocomplete.CommandCompleter;
 import seedu.address.model.autocomplete.TextPrediction;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Activity;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -176,6 +179,28 @@ public class AddCommandTest {
         //@@author lws803
         @Override
         public void reinitAddressbook() {
+            throw new AssertionError("This method should not be called.");
+        }
+        //@@author
+
+        //@@author LowGinWee
+        @Override
+        public TreeMap<Date, ArrayList<Activity>> getSchedule() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addActivity(Activity activity) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteActivity(Activity activity) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Activity> getActivityList() {
             throw new AssertionError("This method should not be called.");
         }
         //@@author
