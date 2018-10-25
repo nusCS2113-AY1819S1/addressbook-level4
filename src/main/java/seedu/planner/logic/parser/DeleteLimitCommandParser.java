@@ -1,19 +1,19 @@
 package seedu.planner.logic.parser;
+import static seedu.planner.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
+
+import java.util.stream.Stream;
 
 import seedu.planner.logic.commands.DeleteLimitCommand;
 import seedu.planner.logic.parser.exceptions.ParseException;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
 
-import java.util.stream.Stream;
-
-import static seedu.planner.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 
 /**
- *
+ * This Parser will return the deleteLimitCommand according to the two dates.
  */
-public class DeleteLimitCommandParser implements Parser<DeleteLimitCommand>{
+public class DeleteLimitCommandParser implements Parser<DeleteLimitCommand> {
     /**
      * Parses the information required for the limit command.
      * and returns a limit object for execution.

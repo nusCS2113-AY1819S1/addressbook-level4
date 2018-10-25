@@ -56,7 +56,8 @@ public class DeleteCommandByDateEntry extends Command {
             throw new CommandException(Messages.MESSAGE_NONEXISTENT_RECORD_DISPLAYED_DATE);
         } else {
             model.commitFinancialPlanner();
-            return new CommandResult(String.format(MESSAGE_DELETE_RECORDS_SUCCESS, targetDate.value) + model.autoLimitCheck());
+            return new CommandResult(String.format(MESSAGE_DELETE_RECORDS_SUCCESS, targetDate.value)
+                    + model.autoLimitCheck());
 
 
 

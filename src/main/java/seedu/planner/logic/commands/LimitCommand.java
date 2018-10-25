@@ -21,10 +21,9 @@ public class LimitCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Check the limit for a period of time. "
             + "Parameters: "
             + PREFIX_DATE + "DATE_START " + "DATE_END "
-            + PREFIX_MONEYFLOW + "LIMIT_MONEY "
+            + PREFIX_MONEYFLOW + "LIMIT_MONEY " + "\n"
 
             + "Example: " + COMMAND_WORD + " "
-
             + PREFIX_DATE + "18-9-2018 " + "20-9-2018 "
             + PREFIX_MONEYFLOW + "100 ";
 
@@ -51,16 +50,12 @@ public class LimitCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
 
         if (model.hasSameDateLimit(limit)) {
-                 throw new CommandException(MESSAGE_LIMITS_SAME_DATE);
+            throw new CommandException(MESSAGE_LIMITS_SAME_DATE);
         }
 
         model.addLimit(limit);
         output = model.generateLimitOutput(model.isExceededLimit(limit), limit);
-       /* if (isEdited) {
-            output = MESSAGE_LIMIT_EDITED + "Original Limit:\n"
-                    + model.generateLimitOutput(model.isExceededLimit(orginalLimit), orginalLimit)
-                    + "Modified Limit: \n" + output;
-        }*/
+
         return new CommandResult(output);
     }
 

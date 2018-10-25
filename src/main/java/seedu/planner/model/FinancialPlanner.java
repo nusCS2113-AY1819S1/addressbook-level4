@@ -2,7 +2,6 @@ package seedu.planner.model;
 
 import static java.util.Objects.requireNonNull;
 
-
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -184,9 +183,14 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     public void addLimit(Limit limit) {
         limits.add(limit); }
 
+    /**
+     * edit an existing limit.
+     * Replace the limit the new limit given.
+     * @param target
+     * @param editedLimit
+     */
     public void updateLimit(Limit target, Limit editedLimit) {
         requireNonNull(editedLimit);
-
         limits.setLimit(target, editedLimit);
     }
     /**
@@ -210,8 +214,9 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
      */
     public Limit getSameDatesLimit (Date dateStart, Date dateEnd) {
         for (Limit i: limits.asUnmodifiableObservableList()) {
-            if (dateStart.equals(i.getDateStart()) && dateEnd.equals(i.getDateEnd()))
+            if (dateStart.equals(i.getDateStart()) && dateEnd.equals(i.getDateEnd())) {
                 return i;
+            }
         }
         return null;
     }

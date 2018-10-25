@@ -1,15 +1,20 @@
 package seedu.planner.logic.commands;
+import static java.util.Objects.requireNonNull;
+import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.planner.logic.parser.CliSyntax.PREFIX_MONEYFLOW;
 
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.Model;
 import seedu.planner.model.record.Limit;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.planner.logic.parser.CliSyntax.PREFIX_MONEYFLOW;
 
-public class EditLimitCommand extends Command{
+
+/**
+ * This command will allow user to modify the existing limit according to the two dates.
+ * The newly input limit will replace the old limit.
+ */
+public class EditLimitCommand extends Command {
     public static final String COMMAND_WORD = "editLimit";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edit an existing limit according to the dates. "
             + "Parameters: "
@@ -20,7 +25,7 @@ public class EditLimitCommand extends Command{
             + PREFIX_DATE + "18-9-2018 " + "20-9-2018 "
             + PREFIX_MONEYFLOW + "200";
 
-    public static final String MESSAGE_SUCCESS = "The limit has been edited. ";
+    public static final String MESSAGE_SUCCESS = "The limit has been edited. \n";
     public static final String MESSAGE_LIMITS_DO_NOT_EXIST = "There is no limit for that period of date";
 
     private Limit originalLimit;
@@ -37,14 +42,15 @@ public class EditLimitCommand extends Command{
         if (!model.hasSameDateLimit(limit)) {
             throw new CommandException(MESSAGE_LIMITS_DO_NOT_EXIST);
         }
-        originalLimit =model.getSameDatesLimit(limit.getDateStart(),limit.getDateEnd());
+        originalLimit = model.getSameDatesLimit(limit.getDateStart(), limit.getDateEnd());
         model.deleteLimit(originalLimit);
         model.addLimit(limit);
 
 
         output = MESSAGE_SUCCESS + "Original Limit:\n"
                 + model.generateLimitOutput(model.isExceededLimit(originalLimit), originalLimit)
-                + "Modified Limit: \n" + output;
+                + "Modified Limit: \n"
+                + model.generateLimitOutput(model.isExceededLimit(limit), limit);
 
         return new CommandResult(output);
     }

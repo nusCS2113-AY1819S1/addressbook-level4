@@ -1,21 +1,23 @@
 package seedu.planner.logic.commands;
+import static java.util.Objects.requireNonNull;
+import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.Model;
 import seedu.planner.model.record.Limit;
 
-import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
-
-
-public class DeleteLimitCommand extends Command{
+/**
+ * Delete an existing limit according to the dates input.
+ * If there is no limit for that period of time, the command will
+ * report an error.
+ */
+public class DeleteLimitCommand extends Command {
     public static final String COMMAND_WORD = "deleteLimit";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": delete certain limit according to the dates. "
             + "Parameters: "
-            + PREFIX_DATE + "DATE_START " + "DATE_END "
+            + PREFIX_DATE + "DATE_START " + "DATE_END " + "\n"
 
             + "Example: " + COMMAND_WORD + " "
 
@@ -38,15 +40,6 @@ public class DeleteLimitCommand extends Command{
             throw new CommandException(MESSAGE_LIMITS_DO_NOT_EXIST);
         }
         model.deleteLimit(model.getSameDatesLimit(limit.getDateStart(), limit.getDateEnd()));
-      /*  List<Limit> latestLimitList = model.getLimitList();
-        for (Limit targetLimit : latestLimitList) {
-
-            if (targetLimit.isSameLimitDates(limit)) {
-                model.deleteLimit(targetLimit);
-                model.commitFinancialPlanner();
-
-            }
-        }*/
         return new CommandResult(MESSAGE_SUCCESS + model.autoLimitCheck());
     }
 
