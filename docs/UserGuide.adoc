@@ -337,8 +337,7 @@ Format: `email`
     will be taken in as the recipients. +
         ..    You can use commands such as `listc`, `filterc`, `findc` to change the candidate shown.
         ..    You can also use commands such as `listj`, `filterj`, `findj` to change the job offer shown.
-
-Type `next` to move on to the next step.
+        ..    Type `next` to move on to the next step.
 
 [start=3]
 .   *Choose your contents.* On the RecruitBook application, what's shown on the main window
@@ -346,19 +345,17 @@ Type `next` to move on to the next step.
         ..  Depending on what what were the recipients, contents can only be the contrasting +
             eg. If recipients were candidates, only job offers can be the contents and vice versa. +
         ..  This is enforced by the program by limiting commands available in contents selection.
-
-Type `next` to move on to the next step.
+        ..  Type `next` to move on to the next step.
 
 [start=4]
-.   *Sending your email.* +
-    Type `preview` to preview your email. +
-    Type `send` to send the email. +
-    This step is a confirmation step before you actually send the email.
+.   *Sending your email.*  This step is a confirmation step before you actually send the email. +
+    ..  Type `preview` to preview your email. +
+    ..  Type `send` to send the email. +
 
-.Other notes
+._Other notes_
 .   `back` can be used to go back to the previous step.
 .   `cancel` can be used to cancel the email command entirely.
-.   Adding duplicate candidate/job offers will be caught and you will be informed of it.
+.   Adding duplicate candidate/job offers will be caught and will not be double counted.
 
 Examples:
 
@@ -409,4 +406,4 @@ _{explain how the user can enable/disable data encryption}_
             e.g. `deletec 1 `, `deletej 5`
 *	*Clear* : `clear`
 *	*Exit* : `exit`
-*           *Email* : `email`
+*   *Email* : `email`
