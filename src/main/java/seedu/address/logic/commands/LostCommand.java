@@ -16,6 +16,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Quantity;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditCommand.EditItemDescriptor;
 
 import java.util.List;
 
@@ -42,8 +44,8 @@ public class LostCommand extends Command{
         requireNonNull(lostDescriptor);
         this.targetIndex = targetIndex;
         this.lostDescriptor = new LostDescriptor(lostDescriptor);
-    }
 
+    }
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
@@ -73,8 +75,12 @@ public class LostCommand extends Command{
     private static Item createLostItem(Item itemToLost, LostDescriptor lostDescriptor) {
         assert itemToLost != null;
 
-        Integer updatedValue = lostDescriptor.getFinalQuantity();
-        Quantity updatedQuantity= new Quantity(Integer.toString(updatedValue));
+        //Integer updatedValue = lostDescriptor.getFinalQuantity();
+        Integer updatedValue = lostDescriptor.getLostQuantity();
+        Integer initialValue=itemToLost.getQuantity().toInteger();
+
+        Quantity updatedQuantity= new Quantity(Integer.toString(initialValue-updatedValue));
+
 
 
         return new Item(itemToLost.getName(), updatedQuantity, itemToLost.getMinQuantity(), itemToLost.getTags());
@@ -82,23 +88,23 @@ public class LostCommand extends Command{
 
     public static class LostDescriptor {
         private Integer lostQuantity;
-        private Integer initialQuantity;
-        private Integer finalQuantity;
+        //private Integer initialQuantity;
+        //private Integer finalQuantity;
         public LostDescriptor(){}
 
         public LostDescriptor(LostDescriptor toCopy) {
             setLostQuantity(toCopy.lostQuantity);
-            setInitialQuantity(toCopy.initialQuantity);
-            setFinalQuantity(toCopy.lostQuantity,toCopy.initialQuantity);
+           // setInitialQuantity(toCopy.initialQuantity);
+            //setFinalQuantity(toCopy.lostQuantity,toCopy.initialQuantity);
 
 
         }
         public void setLostQuantity(Integer lostQuantity) {this.lostQuantity=lostQuantity;}
-        public void setInitialQuantity(Integer initialQuantity){this.initialQuantity=initialQuantity;}
-        public void setFinalQuantity(Integer lostQuantity,Integer initialQuantity){this.finalQuantity=initialQuantity-lostQuantity;}
+        //public void setInitialQuantity(Integer initialQuantity){this.initialQuantity=initialQuantity;}
+        //public void setFinalQuantity(Integer lostQuantity,Integer initialQuantity){this.finalQuantity=initialQuantity-lostQuantity;}
         //public Integer getinitialQuantity(){return initialQuantity;}
-        //public Integer getLostQuantity(){return lostQuantity;}
-        public Integer getFinalQuantity(){return finalQuantity;}
+        public Integer getLostQuantity(){return lostQuantity;}
+        //public Integer getFinalQuantity(){return finalQuantity;}
     }
     @Override
     public boolean equals(Object other) {
