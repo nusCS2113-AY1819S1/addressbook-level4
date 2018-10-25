@@ -70,3 +70,51 @@ include::../DeveloperGuide.adoc[tag=dataencryption]
 ---
 
 _{Optionally, you may include other projects in your portfolio.}_
+
+
+[underline]#testing#
+
+[white]#DRINK I/O#
+
+[silver]#DRINK I/O#
+
+[gray]#DRINK I/O#
+
+[black]#DRINK I/O#
+
+[red]#DRINK I/O#
+
+[maroon]#DRINK I/O#
+
+[yellow]#DRINK I/O#
+
+[olive]#DRINK I/O#
+
+[lime]#DRINK I/O#
+
+[green]#DRINK I/O#
+
+[aqua]#DRINK I/O#
+
+[teal]#DRINK I/O#
+
+[blue]#DRINK I/O#
+
+[navy]#DRINK I/O#
+
+[fuchsia]#DRINK I/O#
+
+[purple]#DRINK I/O#
+
+<<DRINK I/O>>
+
+Bold:
+
+[Blue]*DRINK I/O*
+
+Even a mixture of bold italic colour
+
+[blue]#DRINK [red]*I*/[yellow]*O*#
+
+Chars: n__i__**b**++m++[red]##r##
+

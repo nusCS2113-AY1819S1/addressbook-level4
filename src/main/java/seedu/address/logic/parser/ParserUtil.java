@@ -9,7 +9,6 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -35,19 +34,52 @@ public class ParserUtil {
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
-    //@@author tianhang
+    /**
+     * Trim userName
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String userName(String userName) {
+        requireNonNull(userName);
+        String trimmedName = userName.trim();
+        return trimmedName;
+    }
+    /**
+     * Trim passWord
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String password(String password) {
+        requireNonNull(password);
+        String trimmedPassword = password.trim();
+        return trimmedPassword;
+    }
 
     /**
-     * Parse a {@code String ingredientName} into a {@code IngredientName}
-     * @throws ParseException if the given {@code ingredientName} is invalid.
+     * Parses a {@code String itemName} into a {@code String itenName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
      */
-    public static IngredientName parseIngredientName(String ingredientName) throws ParseException {
-        requireNonNull(ingredientName);
-        String trimmedName = ingredientName.trim();
-        if (!IngredientName.isValidName(trimmedName)) {
-            throw new ParseException(IngredientName.MESSAGE_NAME_CONSTRAINTS);
-        }
-        return new IngredientName(trimmedName);
+    public static String parseItemName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        //        if (!Name.isValidName(trimmedName)) {
+        //            throw new ParseException(Name.MESSAGE_NAME_CONSTRAINTS);
+        //        }
+        return name;
+    }
+    /**
+     * Parses a {@code String itemName} into a {@code String itenName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static String parseDefaultSellingPrice (String defaultSellingPrice) throws ParseException {
+        requireNonNull(defaultSellingPrice);
+        String trimmedName = defaultSellingPrice.trim();
+        //        if (!Name.isValidName(trimmedName)) {
+        //            throw new ParseException(Name.MESSAGE_NAME_CONSTRAINTS);
+        //        }
+        return defaultSellingPrice;
     }
     /**
      * Parses a {@code String name} into a {@code Name}.

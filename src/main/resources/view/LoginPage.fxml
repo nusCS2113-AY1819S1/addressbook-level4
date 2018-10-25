@@ -18,13 +18,13 @@
                 <Image url="@../images/login_page_pic_1.jpg" />
             </image>
         </ImageView>
-        <TextField fx:id="usernameField" layoutX="382.0" layoutY="200.0" />
+        <TextField fx:id="usernameField" layoutX="382.0" layoutY="200.0" onKeyPressed="#handleEnterPressed" />
         <Label layoutX="398.0" layoutY="85.0" text="Welcome to" textFill="#ed0505">
             <font>
                 <Font name="Lucida Console" size="20.0" />
             </font>
         </Label>
-        <Label layoutX="347.0" layoutY="114.0" text="FROZEN BOOK" textFill="#3b33e2">
+        <Label layoutX="388.0" layoutY="114.0" text="Drink I/O" textFill="#3b33e2">
             <font>
                 <Font name="Marlett" size="33.0" />
             </font>
@@ -40,7 +40,7 @@
                 <Font name="Arial Black" size="12.0" />
             </font>
         </Label>
-        <Button layoutX="420.0" layoutY="289.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="54.0" style="-fx-background-color: #6fa1f2;" text="Login" />
+        <Button layoutX="420.0" layoutY="289.0" mnemonicParsing="false" onAction="#handleLoginButtonClick" prefHeight="26.0" prefWidth="54.0" style="-fx-background-color: #6fa1f2;" text="Login" />
         <ImageView fitHeight="79.0" fitWidth="149.0" layoutX="383.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/login_page_pic_3.jpg" />
@@ -52,11 +52,12 @@
             </image>
         </ImageView>
         <Label fx:id="loginError" layoutX="460.0" layoutY="234.0" textFill="#fa0c0c" />
-        <PasswordField fx:id="passwordField" layoutX="381.0" layoutY="263.0" />
-        <Label layoutX="584.0" layoutY="1.0" onMouseClicked="#handleClose" prefHeight="18.0" prefWidth="19.0" text="x" textFill="#e20505">
+        <PasswordField fx:id="passwordField" layoutX="381.0" layoutY="263.0" onKeyPressed="#handleEnterPressed" />
+        <Label layoutX="576.0" layoutY="28.0" onMouseClicked="#handleClose" prefHeight="18.0" prefWidth="19.0" text="x" textFill="#e20505">
             <font>
                 <Font size="17.0" />
             </font>
         </Label>
+      <TextField fx:id="commandBox" layoutY="2.0" onKeyReleased="#handleInputFromCommandBox" prefHeight="26.0" prefWidth="600.0" />
     </children>
 </AnchorPane>

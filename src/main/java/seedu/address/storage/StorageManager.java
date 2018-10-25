@@ -12,8 +12,10 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.model.LoginInfoManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.storage.logininfo.LoginInfoStorage;
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -23,19 +25,37 @@ public class StorageManager extends ComponentManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private LoginInfoStorage loginInfoStorage;
 
-
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
+                          LoginInfoStorage loginInfoStorage) {
         super();
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.loginInfoStorage = loginInfoStorage;
     }
 
+    // ================ LoginInfoManager methods ==============================
+
+    @Override
+    public Path getLoginInfoFilePath() {
+        return userPrefsStorage.getUserPrefsFilePath();
+    }
+
+    @Override
+    public Optional<LoginInfoManager> readLoginInfo() throws DataConversionException, IOException {
+        return loginInfoStorage.readLoginInfo ();
+    }
+
+    @Override
+    public void saveLoginInfo(LoginInfoManager loginInfoManager) throws IOException {
+        loginInfoStorage.saveLoginInfo (loginInfoManager);
+    }
     // ================ UserPrefs methods ==============================
 
     @Override
     public Path getUserPrefsFilePath() {
-        return userPrefsStorage.getUserPrefsFilePath();
+        return loginInfoStorage.getLoginInfoFilePath ();
     }
 
     @Override
@@ -47,7 +67,6 @@ public class StorageManager extends ComponentManager implements Storage {
     public void saveUserPrefs(UserPrefs userPrefs) throws IOException {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
-
 
     // ================ AddressBook methods ==============================
 
@@ -79,7 +98,6 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
 
-    @Override
     @Subscribe
     public void handleAddressBookChangedEvent(AddressBookChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
