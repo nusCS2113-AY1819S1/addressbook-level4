@@ -63,7 +63,7 @@ public class Config {
 
         return Objects.equals(appTitle, o.appTitle)
                 && Objects.equals(logLevel, o.logLevel)
-                && Objects.equals(userPrefsFilePath, o.userPrefsFilePath);
+                && Objects.equals(userPrefsFilePath, o.userPrefsFilePath)
                 && Objects.equals(userFilePath, o.userFilePath);
     }
 
