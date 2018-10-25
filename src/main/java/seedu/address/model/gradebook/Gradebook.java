@@ -36,17 +36,6 @@ public class Gradebook {
         this.gradebookWeightage = gradebookWeightage;
     }
 
-    public Gradebook(
-            String studentAdminNo,
-            String moduleCode,
-            String gradebookComponentName,
-            int studentGrade) {
-        this.studentAdminNo = studentAdminNo;
-        this.moduleCode = moduleCode;
-        this.gradebookComponentName = gradebookComponentName;
-        this.studentGrade = studentGrade;
-    }
-
     public Gradebook(String moduleCode, String gradebookComponentName) {
         this.moduleCode = moduleCode;
         this.gradebookComponentName = gradebookComponentName;
@@ -86,21 +75,5 @@ public class Gradebook {
 
     public void setgradebookWeightage (int gradebookWeightage) {
         this.gradebookWeightage = gradebookWeightage;
-    }
-
-    public String getStudentAdminNo() {
-        return this.studentAdminNo;
-    }
-
-    public void setStudentAdminNo (String studentAdminNo) {
-        this.studentAdminNo = studentAdminNo;
-    }
-
-    public int getStudentGrade() {
-        return this.studentGrade;
-    }
-
-    public void setStudentGrade (int studentGrade) {
-        this.studentGrade = studentGrade;
     }
 }

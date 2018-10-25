@@ -33,30 +33,11 @@ public class XmlAdaptedGradebook {
     /**
      * Constructs an {@code XmlAdaptedGradebook} with the given gradebook component details
      */
-    public XmlAdaptedGradebook(String moduleCode, String gradeComponentName, int gradeComponentMaxMarks,
-                               int gradeComponentWeightage) {
-        this.moduleCode = moduleCode;
-        this.gradeComponentName = gradeComponentName;
-        this.gradeComponentMaxMarks = gradeComponentMaxMarks;
-        this.gradeComponentWeightage = gradeComponentWeightage;
-    }
-
-    /**
-     * Constructs an {@code XmlAdaptedGradebook} with the given gradebook component details
-     */
     public XmlAdaptedGradebook(Gradebook gradebook) {
         this.moduleCode = gradebook.getModuleCode();
         this.gradeComponentName = gradebook.getGradeComponentName();
         this.gradeComponentMaxMarks = gradebook.getGradeComponentMaxMarks();
         this.gradeComponentWeightage = gradebook.getGradeComponentWeightage();
-    }
-
-    /**
-     * Constructs an {@code XmlAdaptedGradebook} with the given gradebook componenet details
-     */
-    public XmlAdaptedGradebook(String moduleCode, String gradeComponentName) {
-        this.moduleCode = moduleCode;
-        this.gradeComponentName = gradeComponentName;
     }
 
     /**
