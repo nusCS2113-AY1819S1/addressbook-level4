@@ -436,11 +436,11 @@ In order to prevent brute force, a user has up to 3 tries to key in the correct 
 To maximize user friendliness, we have implemented predictive text which will appear
 familiar for phone users. BookInventory users may inadvertently misspell command words,
 e.g. lis (Expected command: list). This will now prompt a GUI log stating, "Did you mean,
-list?". To achieve this, we have utilized the Dice algorithm.
+list?". To achieve this, we have utilized the Dice Coefficient.
 
 ==== Design Considerations
 
-===== Aspect: How does Dice Algorithm works?
+===== Aspect: How does Dice Coefficient works?
 
 Dice's coefficient measures the similarity between two sets. It can also be used to help measure how
 similar two strings are in terms of the number of common bigrams (a bigram is a pair of adjacent
