@@ -25,7 +25,7 @@ public interface InventoryStorage extends BookInventoryStorage, UserPrefsStorage
     Path getAddressBookFilePath();
 
     @Override
-    Optional<ReadOnlyBookInventory> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyBookInventory> readBookInventory() throws DataConversionException, IOException;
 
     @Override
     void saveAddressBook(ReadOnlyBookInventory addressBook) throws IOException;
