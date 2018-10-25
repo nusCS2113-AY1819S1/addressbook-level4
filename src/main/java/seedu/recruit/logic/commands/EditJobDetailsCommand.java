@@ -78,7 +78,7 @@ public class EditJobDetailsCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<JobOffer> masterJobList = model.getFilteredCompanyJobList();
+
         int CompanyIndex = model.getCompanyIndexFromName(this.companyName);
 
         if (CompanyIndex == -1) {
