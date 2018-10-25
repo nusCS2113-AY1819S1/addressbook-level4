@@ -122,7 +122,8 @@ public class DistributeAlgorithm {
                     maleLinkList.removeLast();
 
                 } else if (femaleLinkList.size() != 0) {
-                    distUtil.selectiveDistributionByGender(index, groupArrayList, femaleLinkList, loopCounter, num, temp);
+                    distUtil.selectiveDistributionByGender(index, groupArrayList, femaleLinkList, loopCounter, num,
+                            temp);
                     femaleLinkList.removeLast();
                 }
                 num++;
