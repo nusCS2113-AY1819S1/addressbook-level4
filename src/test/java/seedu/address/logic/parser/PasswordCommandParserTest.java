@@ -13,6 +13,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class PasswordCommandParserTest {
     private PasswordCommandParser parser = new PasswordCommandParser();
 
+    /**
+     * Test to check throwables if no password is entered in the parser
+     */
     @Test
     public void noArgumentTest() {
         String expectedMessage = String.format(
@@ -24,6 +27,9 @@ public class PasswordCommandParserTest {
         }
     }
 
+    /**
+     * Test to check throwables if password is non alpha numeric
+     */
     @Test
     public void passwordNotAlphaNumeric () {
         String expectedMessage = String.format(
@@ -36,6 +42,9 @@ public class PasswordCommandParserTest {
         }
     }
 
+    /**
+     * Test to check throwables if multiple entries are key-ed into the parser
+     */
     @Test
     public void passwordWithMultipleEntries() {
         String expectedMessage = String.format(

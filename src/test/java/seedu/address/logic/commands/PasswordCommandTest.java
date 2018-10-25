@@ -64,6 +64,7 @@ public class PasswordCommandTest {
         try {
             String message = feEncrypt.process(password);
             assertEquals(FileEncryptor.MESSAGE_ENCRYPTED, message);
+            assertEquals(true, feEncrypt.isLocked());
         } catch (FileEncryptorException fex) {
             LOGGER.log(Level.WARNING, fex.getLocalizedMessage());
         }
@@ -71,6 +72,7 @@ public class PasswordCommandTest {
         try {
             String message = feEncrypt.process(password);
             assertEquals(FileEncryptor.MESSAGE_DECRYPTED, message);
+            assertEquals(false, feEncrypt.isLocked());
         } catch (FileEncryptorException fex) {
             LOGGER.log(Level.WARNING, fex.getLocalizedMessage());
         }
@@ -79,6 +81,7 @@ public class PasswordCommandTest {
         assertEquals(toWrite, reader.readLine());
         reader.close();
     }
+
 
     /**
      * PasswordCommand unit test
