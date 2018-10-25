@@ -10,7 +10,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.StorageController;
 import seedu.address.model.module.exceptions.DuplicateModuleException;
+import seedu.address.model.person.Person;
 import seedu.address.storage.adapter.XmlAdaptedModule;
+import seedu.address.storage.adapter.XmlAdaptedStudentModule;
 
 /**
  * This module manager stores modules for Trajectory.
@@ -61,6 +63,14 @@ public class ModuleManager {
         modules.remove(toDelete);
     }
 
+    public void assignStudentToModule(Person student, Module module) {
+        module.addStudent(student);
+    }
+
+    public void removeStudentFromModule(Person student, Module module) {
+        module.removeStudent(student);
+    }
+
     /**
      * Gets the module list from storage and converts it to a Module array list
      */
@@ -76,12 +86,25 @@ public class ModuleManager {
     }
 
     /**
-     * Converts the Module array list and invokes the StorageController to save the current module list to file
+     * Converts the Module array list and invokes the StorageController to save the current module list to file.
+     * Also passes info on the association between Student and Module to be saved to file.
      */
     public void saveModuleList() {
         ArrayList<XmlAdaptedModule> xmlAdaptedModules =
                 modules.stream().map(XmlAdaptedModule::new).collect(Collectors.toCollection(ArrayList::new));
         StorageController.setModuleStorage(xmlAdaptedModules);
+
+        ArrayList<XmlAdaptedStudentModule> xmlAdaptedStudentModuleList = new ArrayList<>();
+        for (Module m : modules) {
+            xmlAdaptedStudentModuleList.addAll(
+                    m.getEnrolledStudents()
+                            .stream()
+                            .map(s -> new XmlAdaptedStudentModule(s.getMatricNo(), m.getModuleCode().moduleCode))
+                            .collect(Collectors.toCollection(ArrayList::new))
+            );
+        }
+        StorageController.setStudentModuleStorage(xmlAdaptedStudentModuleList);
+
         StorageController.storeData();
     }
 

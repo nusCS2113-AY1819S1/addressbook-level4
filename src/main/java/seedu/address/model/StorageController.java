@@ -11,12 +11,14 @@ import seedu.address.storage.adapter.XmlAdaptedCourse;
 import seedu.address.storage.adapter.XmlAdaptedGradebook;
 import seedu.address.storage.adapter.XmlAdaptedModule;
 import seedu.address.storage.adapter.XmlAdaptedNote;
+import seedu.address.storage.adapter.XmlAdaptedStudentModule;
 import seedu.address.storage.adapter.XmlAdaptedUser;
 import seedu.address.storage.serializable.XmlSerializableClassroomList;
 import seedu.address.storage.serializable.XmlSerializableCourseList;
 import seedu.address.storage.serializable.XmlSerializableGradebookList;
 import seedu.address.storage.serializable.XmlSerializableModuleList;
 import seedu.address.storage.serializable.XmlSerializableNoteList;
+import seedu.address.storage.serializable.XmlSerializableStudentModuleList;
 import seedu.address.storage.serializable.XmlSerializableUserList;
 
 /**
@@ -31,12 +33,16 @@ public class StorageController {
     private static final String STORAGE_NOTES = BASE_DIRECTORY + "notes.xml";
     private static final String STORAGE_USERS = BASE_DIRECTORY + "users.xml";
 
-    private static ArrayList<XmlAdaptedCourse> courseStorage = new ArrayList<XmlAdaptedCourse>();
+    private static final String STORAGE_STUDENT_MODULE = BASE_DIRECTORY + "studentModule.xml";
+
+    private static ArrayList<XmlAdaptedCourse> courseStorage = new ArrayList<>();
     private static ArrayList<XmlAdaptedModule> moduleStorage = new ArrayList<>();
     private static ArrayList<XmlAdaptedClassroom> classesStorage = new ArrayList<>();
     private static ArrayList<XmlAdaptedGradebook> gradebookStorage = new ArrayList<>();
     private static ArrayList<XmlAdaptedNote> noteStorage = new ArrayList<>();
     private static ArrayList<XmlAdaptedUser> userStorage = new ArrayList<>();
+
+    private static ArrayList<XmlAdaptedStudentModule> studentModuleStorage = new ArrayList<>();
 
     /**
      * This method retrieves all datasets saved locally.
@@ -67,6 +73,10 @@ public class StorageController {
             XmlSerializableUserList ul = XmlUtil
                     .getDataFromFile(Paths.get(STORAGE_USERS), XmlSerializableUserList.class);
             userStorage = ul.getList();
+
+            XmlSerializableStudentModuleList studentModuleList =
+                    XmlUtil.getDataFromFile(Paths.get(STORAGE_STUDENT_MODULE), XmlSerializableStudentModuleList.class);
+            studentModuleStorage = studentModuleList.getStudentModuleList();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -82,6 +92,7 @@ public class StorageController {
         File notes = new File(STORAGE_NOTES);
         File gradebook = new File(STORAGE_GRADEBOOK);
         File users = new File(STORAGE_USERS);
+        File studentModule = new File(STORAGE_STUDENT_MODULE);
         try {
             classes.createNewFile();
             courses.createNewFile();
@@ -89,6 +100,7 @@ public class StorageController {
             notes.createNewFile();
             gradebook.createNewFile();
             users.createNewFile();
+            studentModule.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -123,6 +135,9 @@ public class StorageController {
             ul.setUserList(userStorage);
             XmlUtil.saveDataToFile(Paths.get(STORAGE_USERS), ul);
 
+            XmlSerializableStudentModuleList studentModuleList = new XmlSerializableStudentModuleList();
+            studentModuleList.setStudentModuleList(studentModuleStorage);
+            XmlUtil.saveDataToFile(Paths.get(STORAGE_STUDENT_MODULE), studentModuleList);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -174,5 +189,13 @@ public class StorageController {
 
     public static void setUserStorage(ArrayList<XmlAdaptedUser> userStorage) {
         StorageController.userStorage = userStorage;
+    }
+
+    public static ArrayList<XmlAdaptedStudentModule> getStudentModuleStorage() {
+        return studentModuleStorage;
+    }
+
+    public static void setStudentModuleStorage(ArrayList<XmlAdaptedStudentModule> studentModuleStorage) {
+        StorageController.studentModuleStorage = studentModuleStorage;
     }
 }
