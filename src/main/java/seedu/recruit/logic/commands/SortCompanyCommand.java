@@ -19,7 +19,8 @@ public class SortCompanyCommand extends Command {
 
     public static final String MESSAGE_TAG_USAGE = "Please sort by using one of the available tags: "
             + "Company Name " + PREFIX_COMPANY_NAME
-            + ", Email " + PREFIX_EMAIL + "\n"
+            + ", Email " + PREFIX_EMAIL
+            + " or sort the current order in reverse with /r \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_COMPANY_NAME;
 
     private static Prefix prefixToSort;

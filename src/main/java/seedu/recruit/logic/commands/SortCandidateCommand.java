@@ -27,7 +27,8 @@ public class SortCandidateCommand extends Command {
             + ", Email " + PREFIX_EMAIL
             + ", Job " + PREFIX_JOB
             + ", Education " + PREFIX_EDUCATION
-            + ", Salary " + PREFIX_SALARY + "\n"
+            + ", Salary " + PREFIX_SALARY
+            + " or sort the current order in reverse with /r \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME;
 
     private static Prefix prefixToSort;
