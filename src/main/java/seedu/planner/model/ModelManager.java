@@ -15,6 +15,7 @@ import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
 import seedu.planner.commons.events.model.LimitListChangedEvent;
 import seedu.planner.commons.events.model.SummaryMapChangedEvent;
+import seedu.planner.commons.util.DateUtil;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
@@ -29,6 +30,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedFinancialPlanner versionedFinancialPlanner;
     private final FilteredList<Record> filteredRecords;
     private final FilteredList<Limit> limits;
+    private final Month currentMonth;
     /**
      * Initializes a ModelManager with the given financialPlanner and userPrefs.
      */
@@ -42,10 +44,16 @@ public class ModelManager extends ComponentManager implements Model {
         versionedFinancialPlanner = new VersionedFinancialPlanner(financialPlanner);
         filteredRecords = new FilteredList<>(versionedFinancialPlanner.getRecordList());
         limits = new FilteredList<Limit>(versionedFinancialPlanner.getLimitList());
+        currentMonth = getCurrentMonth();
     }
 
     public ModelManager() {
         this(new FinancialPlanner(), new UserPrefs());
+    }
+
+    private Month getCurrentMonth() {
+        Date currentDate = DateUtil.getDateToday();
+        return new Month(currentDate.getMonth(), currentDate.getYear());
     }
 
     @Override
