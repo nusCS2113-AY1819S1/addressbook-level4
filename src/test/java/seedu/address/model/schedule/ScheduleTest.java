@@ -2,6 +2,7 @@ package seedu.address.model.schedule;
 
 import static org.junit.Assert.assertEquals;
 import static seedu.address.testutil.TypicalActivity.ACTIVITY_TASK_1;
+import static seedu.address.testutil.TypicalActivity.ACTIVITY_TASK_2;
 import static seedu.address.testutil.TypicalActivity.ACTIVITY_TASK_3;
 
 import java.util.Collections;
@@ -23,6 +24,14 @@ public class ScheduleTest {
     public void add_nullActivity_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         schedule.add(null);
+    }
+
+    @Test
+    public void delete_validActivity_success() {
+        schedule.add(ACTIVITY_TASK_2);
+        schedule.delete(ACTIVITY_TASK_2);
+        Schedule expectedSchedule = new Schedule();
+        assertEquals(schedule, expectedSchedule);
     }
 
     @Test
