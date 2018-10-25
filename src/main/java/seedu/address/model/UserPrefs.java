@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.DataConversionException;
@@ -21,8 +22,11 @@ public class UserPrefs {
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
         try {
-            Map<String, String> configMap = JsonUtil.readJsonFile(Paths.get("preferences.json"), Map.class).get();
-            addressBookFilePath = Paths.get(configMap.get("addressBookFilePath"));
+            Optional<Map> configMap = JsonUtil.readJsonFile(Paths.get("preferences.json"), Map.class);
+            if (configMap.isPresent()) {
+                Map<String, String> castedConfigMap = configMap.get();
+                addressBookFilePath = Paths.get(castedConfigMap.get("addressBookFilePath"));
+            }
         } catch (DataConversionException dce) {
             // TODO: Add logger here
         }
