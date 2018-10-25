@@ -1,12 +1,12 @@
 package seedu.address.requestmodel;
 
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
+
 import org.junit.Test;
 
 import seedu.address.model.book.Quantity;
 import seedu.address.testutil.Assert;
-
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertFalse;
 
 public class QuantityTest {
 
