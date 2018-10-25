@@ -114,12 +114,19 @@ public class DistributeUtil {
                         LinkedHashMap::new));
     }
 
+
     /**
-     * This function conducts the checks to add Persons into the group.
+     *
+     * @param index
+     * @param groupArrayList
+     * @param genderLinkList
+     * @param loopCounter
+     * @param num
+     * @param temp
      */
-    public void genderDistributionCheck(int index, ArrayList<ArrayList<Person>> groupArrayList,
-                                         LinkedList<Person> genderLinkList,
-                                         int loopCounter, int num, ArrayList<Person> temp) {
+    public void selectiveDistributionByGender(int index, ArrayList<ArrayList<Person>> groupArrayList,
+                                              LinkedList<Person> genderLinkList,
+                                              int loopCounter, int num, ArrayList<Person> temp) {
         if (loopCounter < index) {
             temp.add(genderLinkList.getLast());
             groupArrayList.add(num, temp);
@@ -130,6 +137,27 @@ public class DistributeUtil {
         }
     }
 
+    /**
+     *
+     * @param index
+     * @param groupArrayList
+     * @param personArrayList
+     * @param loopCounter
+     * @param p
+     */
+    public void selectiveDistributionByNationality(int index, ArrayList<ArrayList<Person>> groupArrayList,
+                                                   ArrayList<Person> personArrayList,
+                                                   int loopCounter, Person p ) {
+        if (loopCounter < index) {
+            personArrayList.add(p);
+            groupArrayList.add(personArrayList);
+        } else {
+            int z = loopCounter % index;
+            ArrayList temp = groupArrayList.get(z);
+            groupArrayList.get(z).add(temp.size() - 1, p);
+        }
+
+    }
     /**
      * This function runs through the allPerson list and add the specific gender required into an LinkedList
      * @param allPerson the list of allPerson in the addressbook
