@@ -1,5 +1,6 @@
 package seedu.planner.model.record;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -58,5 +59,15 @@ public class DateTest {
         // valid dates
         assertTrue(DateUtil.isValidDate(28, 2)); // There are 28 days in the month of February
 
+    }
+
+    /**
+     * Test whether different representations of date gives same object
+     */
+    @Test
+    public void constructor_differentRepresentationsForDate_sameObject() {
+        assertEquals(new Date("10-1-2018"), new Date("10-01-2018"));
+        assertEquals(new Date("1-10-2018"), new Date("01-10-2018"));
+        assertEquals(new Date("1-1-2018"), new Date("01-01-2018"));
     }
 }
