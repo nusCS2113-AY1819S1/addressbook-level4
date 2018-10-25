@@ -138,13 +138,12 @@ public class CompanyBook implements ReadOnlyCompanyBook {
 
     /**
      * Replaces the given job offer {@code target} in the list with {@code editedJobOffer}.
-     * {@code target} must exist in the company job list{@code companyName}.
+     * {@code target} must exist in the company job list{@code company}.
      * The job offer identity of {@code editedJobOffer} must not be the same as another existing job offer in the
-     * same company{@code companyName}.
+     * same company{@code company}.
      */
-    public void updateJobOfferInCompany(CompanyName companyName, JobOffer target, JobOffer editedJobOffer) {
-        requireAllNonNull(companyName, target, editedJobOffer);
-        Company company = getCompanyFromIndex(getCompanyIndexFromName(companyName));
+    public void updateJobOfferInCompany(Company company, JobOffer target, JobOffer editedJobOffer) {
+        requireAllNonNull(company, target, editedJobOffer);
         company.getUniqueJobList().setJobOffer(target, editedJobOffer);
     }
 

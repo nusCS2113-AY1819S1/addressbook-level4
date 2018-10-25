@@ -37,7 +37,7 @@ public class EditJobDetailsCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the job offer identified "
             + "by the company name and index number used in the displayed job offer list for that specific company. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer)"
+            + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_COMPANY_NAME + "Company Name] "
             + "[" + PREFIX_JOB + "Job Title] "
             + "[" + PREFIX_GENDER + "GENDER] "
@@ -53,6 +53,8 @@ public class EditJobDetailsCommand extends Command {
     public static final String MESSAGE_EDIT_JOB_OFFER_SUCCESS = "Edited job offer: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be included";
     public static final String MESSAGE_DUPLICATE_JOB_OFFER = "The edited job offer already exists within the company";
+    public static final String MESSAGE_COMPANY_NOT_FOUND = "Company not found in CompanyBook.\n"
+            + "Please add the company to CompanyBook first";
 
     private final Index index;
     private final CompanyName companyName;
@@ -78,10 +80,15 @@ public class EditJobDetailsCommand extends Command {
         requireNonNull(model);
         List<JobOffer> masterJobList = model.getFilteredCompanyJobList();
         int CompanyIndex = model.getCompanyIndexFromName(this.companyName);
-        Company CompanyToEdit = model.getCompanyFromIndex(CompanyIndex);
-        List<JobOffer> companyJobList = CompanyToEdit.getUniqueJobList().getInternalList();
 
-        if (index.getZeroBased() >= masterJobList.size()) {
+        if (CompanyIndex == -1) {
+            throw new CommandException(MESSAGE_COMPANY_NOT_FOUND);
+        }
+
+        Company companyToEdit = model.getCompanyFromIndex(CompanyIndex);
+        List<JobOffer> companyJobList = companyToEdit.getUniqueJobList().getInternalList();
+
+        if (index.getZeroBased() >= companyJobList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_JOB_OFFER_DISPLAYED_INDEX);
         }
 
@@ -93,7 +100,7 @@ public class EditJobDetailsCommand extends Command {
         }
 
         model.updateJobOffer(jobOfferToEdit, editedJobOffer);
-        model.updateJobOfferInCompany(companyName, jobOfferToEdit, editedJobOffer);
+        model.updateJobOfferInCompany(companyToEdit, jobOfferToEdit, editedJobOffer);
         model.updateFilteredCompanyJobList(PREDICATE_SHOW_ALL_JOBOFFERS);
         model.commitCompanyBook();
         return new CommandResult(String.format(MESSAGE_EDIT_JOB_OFFER_SUCCESS, editedJobOffer));
@@ -229,4 +236,3 @@ public class EditJobDetailsCommand extends Command {
     }
 }
 
-}

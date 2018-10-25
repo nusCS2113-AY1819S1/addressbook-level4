@@ -289,9 +289,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateJobOfferInCompany(CompanyName companyName, JobOffer target, JobOffer editedJobOffer) {
-        requireAllNonNull(companyName, target, editedJobOffer);
-        versionedCompanyBook.updateJobOfferInCompany(companyName, target, editedJobOffer);
+    public void updateJobOfferInCompany(Company company, JobOffer target, JobOffer editedJobOffer) {
+        requireAllNonNull(company, target, editedJobOffer);
+        versionedCompanyBook.updateJobOfferInCompany(company, target, editedJobOffer);
         indicateCompanyBookChanged();
     }
 

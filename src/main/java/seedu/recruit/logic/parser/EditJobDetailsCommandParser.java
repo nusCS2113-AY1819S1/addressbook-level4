@@ -27,7 +27,7 @@ public class EditJobDetailsCommandParser implements Parser<EditJobDetailsCommand
     public EditJobDetailsCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_COMPANY_NAME, PREFIX_GENDER, PREFIX_AGE_RANGE, 
+                ArgumentTokenizer.tokenize(args, PREFIX_COMPANY_NAME, PREFIX_JOB, PREFIX_GENDER, PREFIX_AGE_RANGE,
                         PREFIX_EDUCATION, PREFIX_SALARY);
 
         Index index;
