@@ -31,7 +31,7 @@ import seedu.address.model.tag.Tag;
  * A command to edit person test marks
  */
 public class EditTestMarksCommand extends Command {
-    /**
+    /**t
      * A command to edit person test marks
      */
     public static final String COMMAND_WORD = "edit_test";
@@ -134,7 +134,6 @@ public class EditTestMarksCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Grade grade;
         private Set<Tag> tags;
         private Set<Test> tests;
 
@@ -152,7 +151,6 @@ public class EditTestMarksCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setGrade(toCopy.grade);
             setTags(toCopy.tags);
             setTests(toCopy.tests);
         }
@@ -163,7 +161,7 @@ public class EditTestMarksCommand extends Command {
         public boolean isAnyFieldEdited() {
 
             return CollectionUtil.isAnyNonNull(name, phone, email,
-                    address, tags, grade, tests);
+                    address, tags, tests);
 
         }
 
@@ -214,15 +212,6 @@ public class EditTestMarksCommand extends Command {
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
         }
-
-        public void setGrade(Grade grade) {
-            this.grade = grade;
-        }
-
-        public Optional<Grade> getGrade() {
-            return Optional.ofNullable(grade);
-        }
-
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
@@ -279,7 +268,6 @@ public class EditTestMarksCommand extends Command {
                     && getNationality().equals(e.getNationality())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getGrade().equals(e.getGrade())
                     && getTags().equals(e.getTags())
                     && getTests().equals(e.getTests());
         }
