@@ -3,8 +3,11 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLUB_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_TURNOUT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NUMBER_OF_EVENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERID;
@@ -74,6 +77,29 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
+    public static final String VALID_CLUB_NAME_COMPUTING = "Computing Club";
+    public static final String VALID_CLUB_NAME_ECE = "ECE Club";
+    public static final String VALID_EXPECTED_TURNOUT_COMPUTING = "200";
+    public static final String VALID_EXPECTED_TURNOUT_ECE = "300";
+    public static final String VALID_NUMBER_OF_EVENTS_COMPUTING = "5";
+    public static final String VALID_NUMBER_OF_EVENTS_ECE = "7";
+
+    public static final String CLUB_NAME_DESC_COMPUTING = " " + PREFIX_CLUB_NAME + VALID_CLUB_NAME_COMPUTING;
+    public static final String CLUB_NAME_DESC_ECE = " " + PREFIX_CLUB_NAME + VALID_CLUB_NAME_ECE;
+    public static final String EXPECTED_TURNOUT_DESC_COMPUTING = " " + PREFIX_EXPECTED_TURNOUT
+            + VALID_EXPECTED_TURNOUT_COMPUTING;
+    public static final String EXPECTED_TURNOUT_DESC_ECE = " " + PREFIX_EXPECTED_TURNOUT + VALID_EXPECTED_TURNOUT_ECE;
+    public static final String NUMBER_OF_EVENTS_DESC_COMPUTING = " " + PREFIX_NUMBER_OF_EVENTS
+            + VALID_NUMBER_OF_EVENTS_COMPUTING;
+    public static final String NUMBER_OF_EVENTS_DESC_ECE = " " + PREFIX_NUMBER_OF_EVENTS + VALID_NUMBER_OF_EVENTS_ECE;
+
+    public static final String INVALID_CLUB_NAME_DESC = " " + PREFIX_CLUB_NAME
+            + "Comput!ng Club"; // '!' not allowed in club names
+    public static final String INVALID_EXPECTED_TURNOUT_DESC = " " + PREFIX_EXPECTED_TURNOUT
+            + "10a"; // 'a' not allowed in expected turnout
+    public static final String INVALID_NUMBER_OF_EVENTS_DESC = " " + PREFIX_NUMBER_OF_EVENTS
+            + "5!"; // '!' not allowed in number of events
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
