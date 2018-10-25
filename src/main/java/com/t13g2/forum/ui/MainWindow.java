@@ -193,7 +193,11 @@ public class MainWindow extends UiPart<Stage> {
     public void handleUserLogin(String userName, boolean isAdmin) {
         String userType = "(" + (isAdmin ? "Admin" : "User") + ")";
         statusBarUserName.setText("");
-        statusBarUserName.setText(userName + userType);
+        if (userName.equals("")) {
+            statusBarUserName.setText("Not login yet, please login!");
+        } else {
+            statusBarUserName.setText(userName + userType);
+        }
     }
 
     /**
