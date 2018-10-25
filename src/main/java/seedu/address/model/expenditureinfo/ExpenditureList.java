@@ -89,16 +89,16 @@ public class ExpenditureList implements Iterable<Expenditure> {
 
     public Map getExpenditureRecords() {
 
-        Map <String, Integer> map = new HashMap <String, Integer> ();
+        Map <String, Double> map = new HashMap <String, Double> ();
         int index = 0;
         String category;
-        int money;
+        double money;
         //System.out.println("Now we are in expenditureList executing getExpenditureRecords.");
         while (index < internalList.size()) {
             category = internalList.get(index).getCategory().categoryName;
             money = Integer.parseInt(internalList.get(index).getMoney().addingMoney);
             if (!map.containsKey(category)) {
-                map.put(category, 0);
+                map.put(category, 0.0);
             }
             map.put(category, map.get(category) + money);
             index++;
