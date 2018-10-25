@@ -8,6 +8,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents an Activity in the schedule.
  */
@@ -27,6 +30,9 @@ public class Activity {
      * @param activity Activity string.
      */
     public Activity(Date date, String activity) {
+        requireNonNull(activity);
+        requireNonNull(date);
+        checkArgument(isValidActivity(activity), MESSAGE_ACTIVITY_CONSTRAINTS);
         this.date = date;
         this.activityName = activity;
     }
