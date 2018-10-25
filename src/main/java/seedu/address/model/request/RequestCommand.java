@@ -44,7 +44,7 @@ public class RequestCommand extends CommandSecondary {
         requireNonNull(requestModel);
 
         //if (requestModel.hasRequest(toAdd)) {
-        //    throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        //    throw new CommandException(MESSAGE_DUPLICATE_BOOK);
         //}
 
         requestModel.addRequest(toAdd);

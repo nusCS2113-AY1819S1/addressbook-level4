@@ -16,6 +16,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.BookInventory;
 import seedu.address.model.ReadOnlyBookInventory;
 
@@ -29,13 +30,13 @@ public class XmlBookInventoryStorageTest {
     public TemporaryFolder testFolder = new TemporaryFolder();
 
     @Test
-    public void readAddressBook_nullFilePath_throwsNullPointerException() throws Exception {
+    public void readBookInventory_nullFilePath_throwsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);
-        readAddressBook(null);
+        readBookInventory(null);
     }
 
-    private java.util.Optional<ReadOnlyBookInventory> readAddressBook(String filePath) throws Exception {
-        return new XmlBookInventoryStorage(Paths.get(filePath)).readAddressBook(addToTestDataPathIfNotNull(filePath));
+    private java.util.Optional<ReadOnlyBookInventory> readBookInventory(String filePath) throws Exception {
+        return new XmlBookInventoryStorage(Paths.get(filePath)).readBookInventory(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -46,32 +47,33 @@ public class XmlBookInventoryStorageTest {
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
-        assertFalse(readAddressBook("NonExistentFile.xml").isPresent());
+        assertFalse(readBookInventory("NonExistentFile.xml").isPresent());
     }
-    /*
+
     @Test
     public void read_notXmlFormat_exceptionThrown() throws Exception {
 
         thrown.expect(DataConversionException.class);
-        readAddressBook("NotXmlFormatAddressBook.xml");
+        readBookInventory("NotXmlFormatBookInventory.xml");
 
         /* IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored.
          * That means you should not have more than one exception test in one method
          *
+         * */
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() throws Exception {
+    public void readBookInventory_invalidBookBookInventory_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
-        readAddressBook("invalidPersonAddressBook.xml");
+        readBookInventory("invalidBookBookInventory.xml");
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() throws Exception {
+    public void readBookInventory_invalidAndValidBookBookInventory_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
-        readAddressBook("invalidAndValidPersonAddressBook.xml");
+        readBookInventory("invalidAndValidBookBookInventory.xml");
     }
-    */
+
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.getRoot().toPath().resolve("TempAddressBook.xml");
@@ -80,20 +82,20 @@ public class XmlBookInventoryStorageTest {
 
         //Save in new file and read back
         xmlAddressBookStorage.saveAddressBook(original, filePath);
-        ReadOnlyBookInventory readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
+        ReadOnlyBookInventory readBack = xmlAddressBookStorage.readBookInventory(filePath).get();
         assertEquals(original.toString(), new BookInventory(readBack).toString());
 
         //Modify data, overwrite exiting file, and read back
         original.addBook(HOON);
         original.removeBook(ALICE);
         xmlAddressBookStorage.saveAddressBook(original, filePath);
-        readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
+        readBack = xmlAddressBookStorage.readBookInventory(filePath).get();
         assertEquals(original.toString(), new BookInventory(readBack).toString());
 
         //Save and read without specifying file path
         original.addBook(IDA);
         xmlAddressBookStorage.saveAddressBook(original); //file path not specified
-        readBack = xmlAddressBookStorage.readAddressBook().get(); //file path not specified
+        readBack = xmlAddressBookStorage.readBookInventory().get(); //file path not specified
         assertEquals(original.toString(), new BookInventory(readBack).toString());
     }
 

@@ -66,7 +66,7 @@ public class RequestStorageManagerTest {
          */
         BookInventory original = getTypicalBookInventory();
         storageManager.saveAddressBook(original);
-        ReadOnlyBookInventory retrieved = storageManager.readAddressBook().get();
+        ReadOnlyBookInventory retrieved = storageManager.readBookInventory().get();
         // assertEquals(original, new BookInventory(retrieved));
     }
 

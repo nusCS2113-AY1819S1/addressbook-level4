@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bookinventory>
+    <!-- Book with invalid name field -->
+    <books>
+        <name>@</name>
+        <isbn isPrivate="false">978-1-86197-876-9</isbn>
+        <price isPrivate="false">19.90</price>
+        <cost isPrivate="false">1.90</cost>
+        <quantity isPrivate="false">4th street</quantity>
+    </books>
+</bookinventory>

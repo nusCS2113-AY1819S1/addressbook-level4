@@ -100,7 +100,7 @@ public class MainApp extends Application {
         Optional<ReadOnlyBookInventory> addressBookOptional;
         ReadOnlyBookInventory initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readBookInventory();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample BookInventory");
             }

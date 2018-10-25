@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bookinventory>
+    <books>
+        <name>Alice Pauline</name>
+        <isbn>978-1-86197-876-9</isbn>
+        <price>19.50</price>
+        <cost>1.50</cost>
+        <quantity>123</quantity>
+        <tagged>friends</tagged>
+    </books>
+
+    <!-- Book with same identity as Alice Pauline -->
+    <books>
+        <name>Alice Pauline</name>
+        <isbn>978-1-86197-876-9</isbn>
+        <price>19.50</price>
+        <cost>1.50</cost>
+        <quantity>123</quantity>
+        <tagged>friends</tagged>
+    </books>
+
+</bookinventory>
