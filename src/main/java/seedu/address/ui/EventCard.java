@@ -28,16 +28,16 @@ public class EventCard extends UiPart<Region> {
     private HBox cardPane;
     @FXML
     private Label name;
-    //@FXML
-    //private Label contact;
+    @FXML
+    private Label contact;
     @FXML
     private Label id;
-    //@FXML
-    //private Label phone;
+    @FXML
+    private Label phone;
     @FXML
     private Label venue;
-    //@FXML
-    //private Label email;
+    @FXML
+    private Label email;
     @FXML
     private Label dateTime;
     @FXML
@@ -50,10 +50,10 @@ public class EventCard extends UiPart<Region> {
         this.event = event;
         id.setText(displayedIndex + ". ");
         name.setText(event.getName().fullName);
-        //contact.setText(event.getContact().fullContactName);
-        //phone.setText(event.getPhone().value);
+        contact.setText(event.getContact().fullContactName);
+        phone.setText(event.getPhone().value);
         venue.setText(event.getVenue().value);
-        //email.setText(event.getEmail().value);
+        email.setText(event.getEmail().value);
         dateTime.setText(event.getDateTime().toString());
         event.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         status.setText(event.getStatus().currentStatus);
