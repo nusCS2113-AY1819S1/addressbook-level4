@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
-
+/**
+ * find the top 25 percent student's list
+ */
 public class TopTwentyFivePercen {
     /**
      * find the top 25 percent student's list

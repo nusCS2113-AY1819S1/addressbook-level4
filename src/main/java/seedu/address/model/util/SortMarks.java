@@ -11,9 +11,8 @@ import seedu.address.model.person.Person;
  * sort student in ascending order by scores.
  */
 public class SortMarks { //from lowest to highest
-
     /**
-     * sort student in ascending order by their scores.
+     * sort student in ascending order by scores.
      */
     public static ArrayList<Person> sortingFromLowestToHighest(ObservableList<Person> personList, String testName) {
         ArrayList<Person> listToSort = new ArrayList<Person>();
