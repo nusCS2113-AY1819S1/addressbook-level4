@@ -13,7 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.User;
 
 /***
- *  Implements a Security authentication that identifies user
+ *  Implements a Security Module that handles authentication
  */
 
 public class SecurityManager extends ComponentManager implements Security {
