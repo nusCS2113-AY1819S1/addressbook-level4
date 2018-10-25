@@ -1,26 +1,26 @@
 package seedu.recruit.logic.commands.emailcommand;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 
+import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.events.ui.ShowEmailPreviewEvent;
 import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
-import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.model.Model;
 
 /**
- * This class handles the send sub command for email send phase
+ * This class handles the preview sub command of the send phase
  */
-public class EmailSendSendCommand extends EmailSendCommand {
+public class EmailSendPreviewCommand extends EmailSendCommand {
+
+    public static final String SHOWING_PREVIEW_MESSAGE = "Opened preview.\n" + MESSAGE_USAGE;
+
     @Override
     @SuppressWarnings("Duplicates")
-    public CommandResult execute(Model model, CommandHistory history) throws IOException, GeneralSecurityException {
+    public CommandResult execute(Model model, CommandHistory history) {
         EmailUtil emailUtil = model.getEmailUtil();
         String result;
         ArrayList<?> recipients;
@@ -35,15 +35,6 @@ public class EmailSendSendCommand extends EmailSendCommand {
             contents = new ArrayList<>(emailUtil.getCandidates());
         }
 
-        // for testing purposes
-        for (Object content : contents) {
-            System.out.println(content.toString());
-        }
-        System.out.println("-----------------------------");
-        for (Object recipient : recipients) {
-            System.out.println(recipient.toString());
-        }
-
         //Generating recipients
         Set<String> recipientEmails = new HashSet<>();
         generateRecipients(recipientEmails, model, emailUtil, recipients, contents);
@@ -54,16 +45,12 @@ public class EmailSendSendCommand extends EmailSendCommand {
         //Generate subject
         String subject = generateSubject(emailUtil);
 
-        //Sending the email
-        try {
-            MimeMessage mimeMessage = EmailUtil.createEmail(EmailUtil.DEFAULT_FROM, recipientEmails, subject, bodyText);
-            EmailUtil.sendMessage(EmailUtil.serviceInit(), EmailUtil.DEFAULT_FROM, mimeMessage);
-            result = EMAIL_SUCCESS;
-        } catch (MessagingException | GeneralSecurityException e) {
-            e.printStackTrace();
-            result = EMAIL_FAILURE;
-        }
-        LogicManager.setLogicState("primary");
-        return new CommandResult(result);
+        StringBuilder emailPreview = new StringBuilder();
+        emailPreview.append("To: " + recipientEmails.toString() + "\n");
+        emailPreview.append("Subject: " + subject + "\n");
+        emailPreview.append("Contents of the email:\n\n" + bodyText);
+
+        EventsCenter.getInstance().post(new ShowEmailPreviewEvent(emailPreview.toString()));
+        return new CommandResult(SHOWING_PREVIEW_MESSAGE);
     }
 }

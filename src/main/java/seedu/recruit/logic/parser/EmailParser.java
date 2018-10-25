@@ -23,6 +23,7 @@ import seedu.recruit.logic.commands.emailcommand.EmailRecipientsNextCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailRecipientsSelectCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailSendBackCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailSendCommand;
+import seedu.recruit.logic.commands.emailcommand.EmailSendPreviewCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailSendSendCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 
@@ -127,6 +128,9 @@ public class EmailParser {
 
             case EMAIL_BACK_COMMAND:
                 return new EmailSendBackCommand();
+
+            case "preview":
+                return new EmailSendPreviewCommand();
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
