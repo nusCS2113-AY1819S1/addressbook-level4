@@ -15,7 +15,7 @@ import seedu.recruit.model.Model;
 /**
  * Sorts all the candidates in the CandidateBook
  */
-public class SortCommand extends Command {
+public class SortCandidateCommand extends Command {
 
     public static final String COMMAND_WORD = "sortc";
 
