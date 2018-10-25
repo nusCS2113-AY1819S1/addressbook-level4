@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLUB_NAME;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -31,7 +30,6 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.commands.ViewClubBudgetsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.budgetelements.ClubBudgetElements;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -174,6 +172,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_viewClubBudgets() throws Exception {
+      //probably need to first build a clubbudgetelements then run calculatebudgets and then do the following
         assertTrue(parser.parseCommand(ViewClubBudgetsCommand.COMMAND_WORD) instanceof ViewClubBudgetsCommand);
         assertTrue(parser.parseCommand(ViewClubBudgetsCommand.COMMAND_WORD
                 + "c/Computing Club") instanceof ListCommand);
