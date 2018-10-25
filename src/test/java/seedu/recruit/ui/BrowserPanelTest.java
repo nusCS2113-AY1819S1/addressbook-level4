@@ -10,12 +10,14 @@ import static seedu.recruit.ui.UiPart.FXML_FILE_FOLDER;
 import java.net.URL;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import guitests.guihandles.BrowserPanelHandle;
 import seedu.recruit.MainApp;
 import seedu.recruit.commons.events.ui.CandidateDetailsPanelSelectionChangedEvent;
 
+@Ignore
 public class BrowserPanelTest extends GuiUnitTest {
     private CandidateDetailsPanelSelectionChangedEvent selectionChangedEventStub;
 

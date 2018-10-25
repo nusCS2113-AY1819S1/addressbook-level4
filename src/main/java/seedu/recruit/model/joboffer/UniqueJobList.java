@@ -28,7 +28,6 @@ public class UniqueJobList implements Iterable<JobOffer> {
 
     private final ObservableList<JobOffer> internalList = FXCollections.observableArrayList();
 
-
     public ObservableList<JobOffer> getInternalList() {
         return internalList;
     }
@@ -36,7 +35,6 @@ public class UniqueJobList implements Iterable<JobOffer> {
     /**
      * Returns size of list
      */
-
     public int size() {
         return internalList.size();
     }
@@ -48,6 +46,7 @@ public class UniqueJobList implements Iterable<JobOffer> {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameJobOffer);
     }
+
     /**
      * Adds a job offer to the list.
      * The job offer must not already exist in the list.
@@ -99,7 +98,7 @@ public class UniqueJobList implements Iterable<JobOffer> {
         internalList.set(index, editedJobOffer);
     }
 
-    public void setJobOffers (UniqueJobList replacement) {
+    public void setJobOffers(UniqueJobList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
