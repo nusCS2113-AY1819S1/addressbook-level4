@@ -45,9 +45,10 @@ public class DistributeUtil {
         this.model = model;
     }
 
-    /**
-     * @param allPerson
-     * @return
+    /** This method in an integration of numberOfDifferentNationality method and paxPerNationality method.
+     *  The primary function for this method is to create a Map of Nationality as key and Integer as value.
+     * @param allPerson Takes in the allPerson list in order to count the number of different nationalities.
+     * @return a Map for data processing in the nationality Distribution method.
      */
     public Map<Nationality, Integer> createNationalityMap(LinkedList<Person> allPerson) {
         Map<Nationality, Long> counts = numberOfDifferentNationality(allPerson);
@@ -62,6 +63,12 @@ public class DistributeUtil {
         return nationalityIntegerMap;
     }
 
+    /**
+     * This method does an exhaustive search in the all person list to find any person with the same nationality
+     * @param key The nationality to search for in all personlist
+     * @param randomAllPersonArrayList holds all person data.
+     * @return return the Person object when nationality matches.
+     */
     public Person findPerson(Nationality key, LinkedList<Person> randomAllPersonArrayList) {
         for (Person p : randomAllPersonArrayList) {
             if (p.getNationality().equals(key)) {
@@ -75,18 +82,18 @@ public class DistributeUtil {
 
     /**
      * This function shuffles all the person inside the LinkedList, with a specific seed.
-     * @param person
-     * @param seed
-     * @return
+     * @param allPerson contain all Person list that is not shuffled.
+     * @param seed the seed to perform shuffle. Reason for this is to conduct unit testing.
+     * @return return a shuffled Person List
      */
-    public LinkedList<Person> shuffle(LinkedList<Person> person, Random seed) {
-        requireNonNull(person);
+    public LinkedList<Person> shuffle(LinkedList<Person> allPerson, Random seed) {
+        requireNonNull(allPerson);
         try {
-            Collections.shuffle(person, seed);
+            Collections.shuffle(allPerson, seed);
         } catch (UnsupportedOperationException e) {
             throw new UnsupportedOperationException(MESSAGE_SHUFFLE_ERROR);
         }
-        return person;
+        return allPerson;
     }
 
 
