@@ -32,7 +32,9 @@ public class SellCommandParser implements Parser<SellCommand> {
         Index index;
         Isbn isbn;
 
-        if (!argMultimap.getValue(PREFIX_ISBN).isPresent()) {
+        if (argMultimap.getValue(PREFIX_ISBN).isPresent() && !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SellCommand.MESSAGE_USAGE));
+        } else if (!argMultimap.getValue(PREFIX_ISBN).isPresent()) {
             try {
                 index = ParserUtil.parseIndex(argMultimap.getPreamble());
             } catch (ParseException pe) {
