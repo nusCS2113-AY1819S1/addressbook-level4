@@ -26,6 +26,7 @@ import seedu.address.model.autocomplete.CommandCompleter;
 import seedu.address.model.autocomplete.TextPrediction;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Activity;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -185,10 +186,13 @@ public class AddCommandTest {
 
         //@@author LowGinWee
         @Override
+        public List<Tag> getUniqueTagList() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
         public TreeMap<Date, ArrayList<Activity>> getSchedule() {
             throw new AssertionError("This method should not be called.");
         }
-
         @Override
         public void addActivity(Activity activity) {
             throw new AssertionError("This method should not be called.");
