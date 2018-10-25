@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,6 +23,10 @@ public class StudentListCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
+
+        // TO RETAIN BACKWARDS COMPATIBILITY
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
         requireNonNull(model);
         StringBuilder sb = new StringBuilder();
 
