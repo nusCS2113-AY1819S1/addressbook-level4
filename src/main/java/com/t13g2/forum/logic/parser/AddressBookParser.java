@@ -14,9 +14,11 @@ import com.t13g2.forum.logic.commands.BlockUserFromCreatingCommand;
 import com.t13g2.forum.logic.commands.CheckAnnouncmentCommand;
 import com.t13g2.forum.logic.commands.ClearCommand;
 import com.t13g2.forum.logic.commands.Command;
+import com.t13g2.forum.logic.commands.CreateCommentCommand;
 import com.t13g2.forum.logic.commands.CreateModuleCommand;
 import com.t13g2.forum.logic.commands.CreateThreadCommand;
 import com.t13g2.forum.logic.commands.DeleteCommand;
+import com.t13g2.forum.logic.commands.DeleteCommentCommand;
 import com.t13g2.forum.logic.commands.DeleteModuleCommand;
 import com.t13g2.forum.logic.commands.DeleteThreadCommand;
 import com.t13g2.forum.logic.commands.EditCommand;
@@ -34,6 +36,7 @@ import com.t13g2.forum.logic.commands.SelectModuleCommand;
 import com.t13g2.forum.logic.commands.SelectThreadCommand;
 import com.t13g2.forum.logic.commands.SetAdminCommand;
 import com.t13g2.forum.logic.commands.UndoCommand;
+import com.t13g2.forum.logic.commands.UpdateCommentCommand;
 import com.t13g2.forum.logic.commands.UpdateThreadCommand;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
 
@@ -124,11 +127,20 @@ public class AddressBookParser {
         case CreateThreadCommand.COMMAND_WORD:
             return new CreateThreadCommandParser().parse(arguments);
 
+        case CreateCommentCommand.COMMAND_WORD:
+            return new CreateCommentCommandParser().parse(arguments);
+
         case UpdateThreadCommand.COMMAND_WORD:
             return new UpdateThreadCommandParser().parse(arguments);
 
+        case UpdateCommentCommand.COMMAND_WORD:
+            return new UpdateCommentCommandParser().parse(arguments);
+
         case DeleteThreadCommand.COMMAND_WORD:
             return new DeleteThreadCommandParser().parse(arguments);
+
+        case DeleteCommentCommand.COMMAND_WORD:
+            return new DeleteCommentCommandParser().parse(arguments);
 
         case ListModuleCommand.COMMAND_WORD:
             return new ListModuleCommand();

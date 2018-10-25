@@ -19,23 +19,21 @@ public class ListModuleCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": List all the modules in the forum book.\n"
             + "Example: " + COMMAND_WORD + " ";
 
-    public static final String MESSAGE_SUCCESS = "Listed all modules";
+    public static final String MESSAGE_SUCCESS = "Listed all modules:\n%s";
     private static String message;
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             List<Module> moduleList = unitOfWork.getModuleRepository().getAllModule();
+            message = "";
             for (Module module : moduleList) {
-                message = module.getModuleCode() + ": " + module.getTitle() + "\n";
+                message += module.getModuleCode() + ": " + module.getTitle() + "\n";
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, message));
     }
-
 }

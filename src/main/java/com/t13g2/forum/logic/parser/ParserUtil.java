@@ -232,6 +232,22 @@ public class ParserUtil {
     }
 
     /**
+     * commentId
+     */
+    public static String parseCommentId(String commentId) throws ParseException {
+        requireNonNull(commentId);
+        String trimmedCommentId = commentId.trim();
+        if (!isValidCommentId(trimmedCommentId)) {
+            throw new ParseException(Comment.MESSAGE_COMMENT_ID_CONSTRAINTS);
+        }
+        return trimmedCommentId;
+    }
+    //Returns true if a given string is a valid comment id.
+    public static boolean isValidCommentId(String trimmedCommentId) {
+        return trimmedCommentId.matches(Comment.COMMENT_ID_VALIDATION_REGEX);
+    }
+
+    /**
      * comment content
      */
     public static String parseComment(String comment) throws ParseException {

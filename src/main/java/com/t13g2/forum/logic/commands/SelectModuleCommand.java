@@ -28,18 +28,20 @@ public class SelectModuleCommand extends Command {
     private static String moduleCode;
 
     public SelectModuleCommand(String moduleCode) {
+        requireNonNull(moduleCode);
         this.moduleCode = moduleCode;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        String messageSuccess = "Listed all threads under module " + moduleCode + ":\n %1$s";
+        String messageSuccess = "Listed all threads under module " + moduleCode + ":\n%1$s";
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             Module module = unitOfWork.getModuleRepository().getModuleByCode(moduleCode);
             List<ForumThread> threadList = unitOfWork.getForumThreadRepository().getThreadsByModule(module);
+            message = "";
             for (ForumThread thread : threadList) {
-                message = thread.getId() + ": " + thread.getTitle() + "\n";
+                message += thread.getId() + ": " + thread.getTitle() + "\n";
             }
         } catch (Exception e) {
             e.printStackTrace();

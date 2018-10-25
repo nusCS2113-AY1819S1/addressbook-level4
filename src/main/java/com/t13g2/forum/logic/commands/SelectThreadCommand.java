@@ -27,17 +27,19 @@ public class SelectThreadCommand extends Command {
     private static int threadId;
 
     public SelectThreadCommand(int threadId) {
+        requireNonNull(threadId);
         this.threadId = threadId;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        String messageSuccess = "Listed all comments under Thread " + threadId + ":\n %1$s";
+        String messageSuccess = "Listed all comments under Thread " + threadId + ":\n%1$s";
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             List<Comment> commentList = unitOfWork.getCommentRepository().getCommentsByThread(threadId);
+            message = "";
             for (Comment comment : commentList) {
-                message = comment.getId() + ": " + comment.getContent() + "\n";
+                message += comment.getId() + ": " + comment.getContent() + "\n";
             }
         } catch (Exception e) {
             e.printStackTrace();

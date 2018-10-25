@@ -11,8 +11,8 @@ import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.model.forum.Module;
+import com.t13g2.forum.storage.forum.Context;
 import com.t13g2.forum.storage.forum.UnitOfWork;
-
 
 /**
  * Create a new thread to the forum book under certain module
@@ -32,6 +32,8 @@ public class CreateThreadCommand extends Command {
             + PREFIX_COMMENT_CONTENT + "Hi fellows, what is the topic coverage for the final?";
 
     public static final String MESSAGE_SUCCESS = "New thread added: %1$s";
+    public static final String MESSAGE_BLOCKED_USER = "You have been blocked for creating new thread and comment!";
+    public static final String MESSAGE_NOT_LOGIN = "Sorry! You have not login yet.";
     private String moduleCode;
     private ForumThread forumThread;
     private Comment comment;
@@ -41,6 +43,8 @@ public class CreateThreadCommand extends Command {
      */
     public CreateThreadCommand(String moduleCode, ForumThread forumThread, Comment comment) {
         requireNonNull(moduleCode);
+        requireNonNull(forumThread);
+        requireNonNull(comment);
         this.moduleCode = moduleCode;
         this.forumThread = forumThread;
         this.comment = comment;
@@ -50,10 +54,17 @@ public class CreateThreadCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            if (!model.checkIsLogin()) {
+                throw new CommandException(MESSAGE_NOT_LOGIN);
+            } else if (Context.getInstance().getCurrentUser().isBlock()) {
+                throw new CommandException(MESSAGE_BLOCKED_USER);
+            }
             //get the respective module by moduleCode
             Module module = unitOfWork.getModuleRepository().getModuleByCode(moduleCode);
             forumThread.setModuleId(module.getId()); //pass the module ID to this forum thread
+            forumThread.setCreatedByUserId(Context.getInstance().getCurrentUser().getId());
             comment.setThreadId(forumThread.getId()); //pass the thread ID to this comment
+            comment.setCreatedByUserId(Context.getInstance().getCurrentUser().getId());
             //add this forum thread to unitOfWork meaning save it to the memory repository
             unitOfWork.getForumThreadRepository().addThread(forumThread);
             //add this comment to unitOfWork meaning save it to the memory repository

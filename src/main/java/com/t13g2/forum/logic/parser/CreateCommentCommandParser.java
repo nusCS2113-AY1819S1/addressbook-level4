@@ -1,38 +1,39 @@
 package com.t13g2.forum.logic.parser;
 
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_COMMENT_CONTENT;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_ID;
 
 import java.util.stream.Stream;
 
 import com.t13g2.forum.commons.core.Messages;
-import com.t13g2.forum.logic.commands.DeleteThreadCommand;
+import com.t13g2.forum.logic.commands.CreateCommentCommand;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
-import com.t13g2.forum.storage.forum.UnitOfWork;
 
 /**
- * Parses input arguments and creates a new DeleteThreadCommand object
+ * Parses input arguments and creates a new CreateCommentCommand object
  */
-public class DeleteThreadCommandParser implements Parser<DeleteThreadCommand> {
+public class CreateCommentCommandParser implements Parser<CreateCommentCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns an DeleteCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the CreateCommentCommand
+     * and returns an CreateCommentCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public DeleteThreadCommand parse(String args) throws ParseException {
-
+    public CreateCommentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_THREAD_ID);
+                ArgumentTokenizer.tokenize(args, PREFIX_THREAD_ID, PREFIX_COMMENT_CONTENT);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_THREAD_ID)
+        if (!arePrefixesPresent(argMultimap, PREFIX_THREAD_ID, PREFIX_COMMENT_CONTENT)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                 DeleteThreadCommand.MESSAGE_USAGE));
+                    CreateCommentCommand.MESSAGE_USAGE));
         }
-        int threadId = Integer.parseInt(ParserUtil.parseThreadId(argMultimap.getValue(PREFIX_THREAD_ID).get()));
-        UnitOfWork unitOfWork = new UnitOfWork();
 
-        return new DeleteThreadCommand(threadId);
+        int threadId = Integer.parseInt(ParserUtil.parseThreadId(argMultimap.getValue(PREFIX_THREAD_ID).get()));
+        String commentToAdd = ParserUtil.parseComment(argMultimap.getValue(PREFIX_COMMENT_CONTENT).get());
+
+        return new CreateCommentCommand(threadId, commentToAdd);
+
     }
 
     /**

@@ -6,15 +6,12 @@ import static java.util.Objects.requireNonNull;
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.Model;
+import com.t13g2.forum.storage.forum.Context;
 import com.t13g2.forum.storage.forum.UnitOfWork;
 
 /**
  * Delete a certain thread. Only admin could delete threads from others,
- * user could only delete threads created by himself/herself.
- */
-
-/**
- * Example: deleteThread tId/1
+ * user could only delete threads created by his/her own.
  */
 public class DeleteThreadCommand extends Command {
     public static final String COMMAND_WORD = "deleteThread";
@@ -26,7 +23,7 @@ public class DeleteThreadCommand extends Command {
         + PREFIX_THREAD_ID + "1";
 
     public static final String MESSAGE_SUCCESS = "Thread deleted: %1$s";
-    public static final String MESSAGE_INVALID_THREAD_ID = "Invalid Thread id";
+    public static final String MESSAGE_NOT_THREAD_OWNER = "Sorry! You are not the owner of this thread.";
 
     private final int threadId;
 
@@ -34,6 +31,7 @@ public class DeleteThreadCommand extends Command {
      * Creates an DeleteThreadCommand to delete the specified {@code ForumThread}
      */
     public DeleteThreadCommand(int threadId) {
+        requireNonNull(threadId);
         this.threadId = threadId;
     }
 
@@ -41,13 +39,16 @@ public class DeleteThreadCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            if (Context.getInstance().getCurrentUser().getId()
+                    == unitOfWork.getForumThreadRepository().getThread(threadId).getCreatedByUserId()) {
+                throw new CommandException(MESSAGE_NOT_THREAD_OWNER);
+            }
             //delete the thread according to the threadId from the memory repository
             unitOfWork.getForumThreadRepository().deleteThread(threadId);
             //update to local database
             unitOfWork.commit();
         } catch (Exception e) {
             e.printStackTrace();
-            throw new CommandException(MESSAGE_INVALID_THREAD_ID);
         }
         String message = "\n"
             + "Thread ID: " + threadId + "\n";
