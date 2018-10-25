@@ -429,6 +429,34 @@ In order to prevent brute force, a user has up to 3 tries to key in the correct 
 
 // end::dataencryption[]
 
+// tag::commandprediction[]
+=== Command Prediction
+
+==== Current Implementation
+To maximize user friendliness, we have implemented predictive text which will appear
+familiar for phone users. BookInventory users may inadvertently misspell command words,
+e.g. lis (Expected command: list). This will now prompt a GUI log stating, "Did you mean,
+list?". To achieve this, we have utilized the Dice algorithm.
+
+==== Design Considerations
+
+===== Aspect: How does Dice Algorithm works?
+
+Dice's coefficient measures the similarity between two sets. It can also be used to help measure how
+similar two strings are in terms of the number of common bigrams (a bigram is a pair of adjacent
+letters in the string).The Coefficient result of 1 indicates identical vectors (completely equal strings) as
+where a 0 equals orthogonal vectors (completely unequal strings).
+
+Formula: Dice's coefficient = (2 * Common Terms) / (Number of terms in String1 + Number of terms in String2)
+
+===== Aspect: How well does this algorithm predicts?
+
+Our current implementation sets Dice's Coefficient to 0.5. Through our testing, this appears
+fine for most spelling errors. However, it will not predict too ridiculous errors because we
+do not wish to face a scenario where the suggestion offers another command word which is
+unintended by the user.
+
+// end::commandprediction[]
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
