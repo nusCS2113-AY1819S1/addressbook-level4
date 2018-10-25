@@ -48,10 +48,10 @@ public class CreateAccountCommand extends UserCommand {
         requireNonNull(userName);
         requireNonNull (password);
         requireNonNull (authenticationLevel);
-        String hashedPassword = PasswordUtils.generateSecurePassword (password.toString ());
+        Password hashedPassword = new Password (PasswordUtils.generateSecurePassword (password.toString ()));
 
         this.userName = userName;
-        this.password = password;
+        this.password = hashedPassword;
         this.authenticationLevel = authenticationLevel;
     }
     @Override
