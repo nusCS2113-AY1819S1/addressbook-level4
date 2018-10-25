@@ -51,7 +51,8 @@ public class EditJobDetailsCommandParser implements Parser<EditJobDetailsCommand
             editJobOfferDescriptor.setAgeRange(ParserUtil.parseAgeRange(argMultimap.getValue(PREFIX_AGE_RANGE).get()));
         }
         if (argMultimap.getValue(PREFIX_EDUCATION).isPresent()) {
-            editJobOfferDescriptor.setEducation(ParserUtil.parseEducation(argMultimap.getValue(PREFIX_EDUCATION).get()));
+            editJobOfferDescriptor.setEducation(ParserUtil.parseEducation(
+                    argMultimap.getValue(PREFIX_EDUCATION).get()));
         }
         if (argMultimap.getValue(PREFIX_SALARY).isPresent()) {
             editJobOfferDescriptor.setSalary(ParserUtil.parseSalary(argMultimap.getValue(PREFIX_SALARY).get()));
@@ -61,7 +62,8 @@ public class EditJobDetailsCommandParser implements Parser<EditJobDetailsCommand
             throw new ParseException(EditJobDetailsCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditJobDetailsCommand(ParserUtil.parseCompanyName(argMultimap.getValue(PREFIX_COMPANY_NAME).get()), index, editJobOfferDescriptor);
+        return new EditJobDetailsCommand(ParserUtil.parseCompanyName(argMultimap.getValue(PREFIX_COMPANY_NAME).get()),
+                index, editJobOfferDescriptor);
     }
 
 }

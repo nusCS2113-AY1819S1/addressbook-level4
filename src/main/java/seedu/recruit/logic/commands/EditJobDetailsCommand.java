@@ -65,7 +65,8 @@ public class EditJobDetailsCommand extends Command {
      * @param index of the job offer in the filtered company job list to edit
      * @param editJobOfferDescriptor details to edit the job offer with
      */
-    public EditJobDetailsCommand(CompanyName companyName, Index index, EditJobDetailsCommand.EditJobOfferDescriptor editJobOfferDescriptor) {
+    public EditJobDetailsCommand(CompanyName companyName, Index index,
+                                 EditJobDetailsCommand.EditJobOfferDescriptor editJobOfferDescriptor) {
         requireNonNull(companyName);
         requireNonNull(index);
         requireNonNull(editJobOfferDescriptor);
@@ -79,13 +80,13 @@ public class EditJobDetailsCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        int CompanyIndex = model.getCompanyIndexFromName(this.companyName);
+        int companyIndex = model.getCompanyIndexFromName(this.companyName);
 
-        if (CompanyIndex == -1) {
+        if (companyIndex == -1) {
             throw new CommandException(MESSAGE_COMPANY_NOT_FOUND);
         }
 
-        Company companyToEdit = model.getCompanyFromIndex(CompanyIndex);
+        Company companyToEdit = model.getCompanyFromIndex(companyIndex);
         List<JobOffer> companyJobList = companyToEdit.getUniqueJobList().getInternalList();
 
         if (index.getZeroBased() >= companyJobList.size()) {
@@ -110,7 +111,8 @@ public class EditJobDetailsCommand extends Command {
      * Creates and returns a {@code jobOffer} with the details of {@code jobOfferToEdit}
      * edited with {@code EditJobOfferDescriptor}.
      */
-    private static JobOffer createEditedJobOffer(JobOffer jobOfferToEdit, EditJobOfferDescriptor editJobOfferDescriptor) {
+    private static JobOffer createEditedJobOffer(JobOffer jobOfferToEdit,
+                                                 EditJobOfferDescriptor editJobOfferDescriptor) {
         assert jobOfferToEdit != null;
 
         CompanyName companyName = jobOfferToEdit.getCompanyName();
