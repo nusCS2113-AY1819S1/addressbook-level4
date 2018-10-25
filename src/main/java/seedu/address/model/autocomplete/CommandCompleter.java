@@ -225,8 +225,9 @@ public class CommandCompleter implements TextPrediction {
         }
         if (!personToEdit.getTags().equals(editedPerson.getTags())) {
             for (Tag tag : personToEdit.getTags()) {
-                if (!uniqueTagList.contains(tag))
-                    tagTrie.remove(tag.toString());
+                if (!uniqueTagList.contains(tag)) {
+					tagTrie.remove(tag.toString());
+				}
             }
             for (Tag tag : editedPerson.getTags()) {
                 tagTrie.insert(tag.toString());
