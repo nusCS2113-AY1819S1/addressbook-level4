@@ -338,6 +338,14 @@ image::CompleteUncompleteTaskSequenceDiagram.png[width="800"]
 ** Cons: We must ensure that the implementation of each individual methods are correct.
 // end::completeuncomplete[]
 
+// tag::expenditure[]
+=== Expenditure feature
+
+==== Current Implementation
+
+==== Design Considerations
+// end::expenditure[]
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
