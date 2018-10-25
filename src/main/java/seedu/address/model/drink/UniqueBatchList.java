@@ -4,6 +4,7 @@ package seedu.address.model.drink;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -82,8 +83,8 @@ public class UniqueBatchList implements Iterable<Batch> {
         if (internalList.isEmpty()) {
             throw new EmptyBatchListException();
         }
-        internalList.sort((Batch batch1, Batch batch2) -> batch1.getBatchDate().getBatchDate()
-                .compareTo(batch2.getBatchDate().getBatchDate()));
+        internalList.sort((Batch batch1, Batch batch2) -> batch1.getBatchDate().getDate()
+                .compareTo(batch2.getBatchDate().getDate()));
     }
 
     public void setBatches(UniqueBatchList replacement) {

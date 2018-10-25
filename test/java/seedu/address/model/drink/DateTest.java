@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.Assert;
 
-class BatchDateTest {
+class DateTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
