@@ -8,7 +8,7 @@
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
         <job>Waiter</job>
-        <education>O level</education>
+        <education>OLEVELS</education>
         <salary>1000</salary>
     </candidates>
     <candidates>
@@ -19,7 +19,7 @@
         <email isPrivate="false">ruth@example.com</email>
         <address isPrivate="false">81th street</address>
         <job>Waiter</job>
-        <education>O level</education>
+        <education>OLEVELS</education>
         <salary>1000</salary>
     </candidates>
     <candidates>

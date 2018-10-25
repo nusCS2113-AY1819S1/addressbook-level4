@@ -61,8 +61,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_JOB_AMY = "Dancer";
     public static final String VALID_JOB_BOB = "Manager";
-    public static final String VALID_EDUCATION_AMY = "A Level";
-    public static final String VALID_EDUCATION_BOB = "Business Masters";
+    public static final String VALID_EDUCATION_AMY = "ALEVELS";
+    public static final String VALID_EDUCATION_BOB = "MASTER";
     public static final String VALID_SALARY_AMY = "3000";
     public static final String VALID_SALARY_BOB = "3500";
     public static final String VALID_TAG_HUSBAND = "husband";

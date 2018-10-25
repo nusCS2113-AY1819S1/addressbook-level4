@@ -16,23 +16,31 @@ public class Education {
             + "OLEVELS, "
             + "NLEVELS, "
             + "ALEVELS, "
-            + "DEGREE, "
+            + "DIPLOMA, "
+            + "BACHELOR, "
+            + "MASTER, "
+            + "PhD, "
             + "OTHERS";
 
     public final String value;
+    public final int order;
 
     public Education(String educationInput) {
         requireNonNull(educationInput);
         checkArgument(isValidEducation(educationInput), MESSAGE_EDUCATION_CONSTRAINTS);
         value = educationInput;
+        order = OrderOfEducation(educationInput);
     }
 
     public enum EducationLevel{
-        PRIMARY,
-        OLEVELS,
-        NLEVELS,
+        PhD,
+        MASTER,
+        BACHELOR,
+        DIPLOMA,
         ALEVELS,
-        DEGREE,
+        NLEVELS,
+        OLEVELS,
+        PRIMARY,
         OTHERS
     }
 
@@ -46,6 +54,18 @@ public class Education {
             }
         }
         return false;
+    }
+
+    /** Determines the order of education input
+     * @return order
+     */
+    public int OrderOfEducation(String input) {
+        for(EducationLevel e: EducationLevel.values()) {
+            if (input.equals(e.name())) {
+                return e.ordinal();
+            }
+        }
+        return -1;
     }
 
     @Override
