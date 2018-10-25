@@ -1,0 +1,5 @@
+{
+  "appTitle" : "Trajectory",
+  "logLevel" : "INFO",
+  "userPrefsFilePath" : "preferences.json"
+}
