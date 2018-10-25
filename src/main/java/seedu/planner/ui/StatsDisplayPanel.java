@@ -40,6 +40,11 @@ public class StatsDisplayPanel extends UiPart<Region> {
         getRoot().setVisible(false);
     }
 
+    /** Removes all existing tabs from the {@code TabPane} */
+    private void clearTabs() {
+        tabManager.getTabs().clear();
+    }
+
     /**
      * Deletes existing tabs of the same text if any and creates a new one.
      * This prevents the system from creating duplicates.
@@ -47,9 +52,6 @@ public class StatsDisplayPanel extends UiPart<Region> {
      */
     private void createTabs(Tab... tabs) {
         for (Tab tab : tabs) {
-            if (tabManager.getTabs().stream().anyMatch(t -> t.getText().equals(tab.getText()))) {
-                tabManager.getTabs().remove(tab.getText());
-            }
             tabManager.getTabs().add(tab);
             tabManager.getSelectionModel().select(tab);
         }
@@ -59,6 +61,7 @@ public class StatsDisplayPanel extends UiPart<Region> {
     public void handleShowSummaryTableEvent(ShowSummaryTableEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         CustomTab summaryTab = new CustomTab(SummaryDisplay.LABEL , new SummaryDisplay(event.data).getRoot());
+        clearTabs();
         createTabs(summaryTab);
         show();
     }
@@ -67,6 +70,7 @@ public class StatsDisplayPanel extends UiPart<Region> {
     public void handleShowPieChartStatsEvent(ShowPieChartStatsEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         CustomTab categoryTab = new CustomTab(CategoryBreakdown.LABEL, new CategoryBreakdown(event.data).getRoot());
+        clearTabs();
         createTabs(categoryTab);
         show();
     }
