@@ -3,13 +3,16 @@ package seedu.address.storage;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * A class to access UserSession stored in the hard disk as a JSON file
@@ -17,6 +20,7 @@ import com.google.gson.JsonParser;
 public class JsonUserStorage implements UserStorage {
 
     private String filePathString;
+    private Map<String, String> userAccounts;
 
     public JsonUserStorage(Path filePath) throws IOException {
         filePathString = "./" + filePath.toString();
@@ -24,6 +28,8 @@ public class JsonUserStorage implements UserStorage {
         if (Files.notExists(filePath)) {
             createUserFile();
         }
+
+        setUserAccounts();
     }
 
     /**
@@ -32,17 +38,32 @@ public class JsonUserStorage implements UserStorage {
     @Override
     public void createUser(String username, String password) throws IOException {
         Gson gson = new Gson();
-        JsonObject jsonObject = getUserAccounts();
+        JsonObject jsonObject = getJsonObject();
         jsonObject.addProperty(username, password);
 
         writeJson(gson, jsonObject);
     }
 
     /**
-     * Returns the user account JSON as a hash map JSON object.
+     * Returns the user accounts as a map.
      */
     @Override
-    public JsonObject getUserAccounts() throws IOException {
+    public Map<String, String> getUserAccounts() {
+        return userAccounts;
+    }
+
+    /**
+     * Sets the user account.
+     */
+    private void setUserAccounts() throws IOException {
+        Type type = new TypeToken<Map<String, String>>(){}.getType();
+        userAccounts = new Gson().fromJson(new FileReader(filePathString), type);
+    }
+
+    /**
+     * Returns the user accounts as a JSON Object.
+     */
+    private JsonObject getJsonObject() throws IOException {
         JsonParser parser = new JsonParser();
         JsonElement jsonElement = parser.parse(new FileReader(filePathString));
 

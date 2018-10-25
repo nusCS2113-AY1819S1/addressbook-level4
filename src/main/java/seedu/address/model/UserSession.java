@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -45,16 +46,12 @@ public class UserSession {
         String loggedPassword = user.getPassword().toString();
         boolean isPresent = false;
 
-        try {
-            JsonObject userAccounts = userStorage.getUserAccounts();
+        Map<String, String> userAccounts = userStorage.getUserAccounts();
 
-            if (userAccounts.has(loggedUsername)) {
-                JsonElement password = userAccounts.get(loggedUsername);
-                isPresent = loggedPassword.equals(password.getAsString());
-                adminStatus = loggedUsername.equals("admin");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (userAccounts.containsKey(loggedUsername)) {
+            String password = userAccounts.get(loggedUsername);
+            isPresent = loggedPassword.equals(password);
+            adminStatus = loggedUsername.equals("admin");
         }
 
         return isPresent;
