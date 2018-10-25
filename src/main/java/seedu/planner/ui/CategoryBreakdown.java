@@ -1,17 +1,14 @@
 package seedu.planner.ui;
 
-import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
-import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import javafx.scene.text.Text;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.model.summary.CategoryStatistic;
 
@@ -36,15 +33,7 @@ public class CategoryBreakdown extends UiPart<Region> {
     public CategoryBreakdown(ObservableList<CategoryStatistic> toDisplay) {
         super(FXML);
         pieChartData = convertToPieChartList(toDisplay);
-        pieChart = new PieChart(pieChartData) {
-            @Override
-            protected void layoutChartChildren(double top, double left, double contentWidth, double contentHeight) {
-                if (getLabelsVisible()) {
-                    getData().forEach(data -> addPercentages(data, pieChart));
-                }
-                super.layoutChartChildren(top, left, contentWidth, contentHeight);
-            }
-        };
+        pieChart = new CustomPieChart(pieChartData);
         initPieChart();
         root.setStyle("-fx-background-color: grey");
         root.getChildren().add(pieChart);
@@ -55,7 +44,7 @@ public class CategoryBreakdown extends UiPart<Region> {
         pieChart.setTitle(LABEL);
         pieChart.setLabelsVisible(true);
         pieChart.setLabelLineLength(50);
-        pieChart.setLegendSide(Side.BOTTOM);
+        pieChart.setLegendSide(Side.RIGHT);
         pieChart.prefHeightProperty().bind(root.heightProperty());
         pieChart.prefWidthProperty().bind(root.widthProperty());
     }
@@ -69,17 +58,5 @@ public class CategoryBreakdown extends UiPart<Region> {
             }
         }
         return pieChartData;
-    }
-
-    /**
-     * Adds percentages to the PieChart labels.
-     */
-    private void addPercentages(PieChart.Data data, PieChart pieChart) {
-        Optional<Node> optionalNode = pieChart.lookupAll(".chart-pie-label")
-                .stream().filter(n -> n instanceof Text && ((Text) n).getText().equals(data.getName())).findAny();
-        if (optionalNode.isPresent()) {
-            Text optionalTextNode = ((Text) optionalNode.get());
-            optionalTextNode.setText(data.getName() + " " + data.getPieValue() + "%");
-        }
     }
 }
