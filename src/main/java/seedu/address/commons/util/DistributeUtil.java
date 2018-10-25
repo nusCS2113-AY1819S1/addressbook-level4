@@ -47,7 +47,7 @@ public class DistributeUtil {
 
     /** This method in an integration of numberOfDifferentNationality method and paxPerNationality method.
      *  The primary function for this method is to create a Map of Nationality as key and Integer as value.
-     * @param allPerson Takes in the allPerson list in order to count the number of different nationalities.
+     * @param allPerson : Takes in the allPerson list in order to count the number of different nationalities.
      * @return a Map for data processing in the nationality Distribution method.
      */
     public Map<Nationality, Integer> createNationalityMap(LinkedList<Person> allPerson) {
@@ -65,8 +65,8 @@ public class DistributeUtil {
 
     /**
      * This method does an exhaustive search in the all person list to find any person with the same nationality
-     * @param key The nationality to search for in all personlist
-     * @param randomAllPersonArrayList holds all person data.
+     * @param key : The nationality to search for in all personlist
+     * @param randomAllPersonArrayList : Holds all person data.
      * @return return the Person object when nationality matches.
      */
     public Person findPerson(Nationality key, LinkedList<Person> randomAllPersonArrayList) {
@@ -82,8 +82,8 @@ public class DistributeUtil {
 
     /**
      * This function shuffles all the person inside the LinkedList, with a specific seed.
-     * @param allPerson contain all Person list that is not shuffled.
-     * @param seed the seed to perform shuffle. Reason for this is to conduct unit testing.
+     * @param allPerson : Contain all Person list that is not shuffled.
+     * @param seed : The seed to perform shuffle. Reason for this is to conduct unit testing.
      * @return return a shuffled Person List
      */
     public LinkedList<Person> shuffle(LinkedList<Person> allPerson, Random seed) {
@@ -116,38 +116,39 @@ public class DistributeUtil {
 
 
     /**
-     *
-     * @param index
-     * @param groupArrayList
-     * @param genderLinkList
-     * @param loopCounter
-     * @param num
-     * @param temp
+     * This method does the selective distribution of all person to the group they shall be in.
+     * This method does the distribution for Male gender to every group first before repeating the process for female.
+     * @param index : The number of group. Acts as a pointer to which group should we add the person into.
+     * @param groupArrayList : Acts as a group with each elements are the group. The sub array are the persons.
+     * @param genderLinkList : The list of single-gender person.
+     * @param loopCounter : A counter to ensure Person are added incrementally to every group.
+     * @param personArrayList : A pointer that points to the group element.
+     * @param num : A pointer that points to the last index of the sub-arrayList
      */
     public void selectiveDistributionByGender(int index, ArrayList<ArrayList<Person>> groupArrayList,
                                               LinkedList<Person> genderLinkList,
-                                              int loopCounter, int num, ArrayList<Person> temp) {
+                                              int loopCounter, int num, ArrayList<Person> personArrayList) {
         if (loopCounter < index) {
-            temp.add(genderLinkList.getLast());
-            groupArrayList.add(num, temp);
+            personArrayList.add(genderLinkList.getLast());
+            groupArrayList.add(num, personArrayList);
         } else {
             int z = loopCounter % index;
-            temp = groupArrayList.get(num);
-            groupArrayList.get(z).add(temp.size() - 1, genderLinkList.getLast());
+            personArrayList = groupArrayList.get(num);
+            groupArrayList.get(z).add(personArrayList.size() - 1, genderLinkList.getLast());
         }
     }
 
     /**
      *
-     * @param index
-     * @param groupArrayList
-     * @param personArrayList
-     * @param loopCounter
-     * @param p
+     * @param index : The number of group. Acts as a pointer to which group should we add the person into.
+     * @param groupArrayList : Acts as a group with each elements are the group. The sub array are the persons.
+     * @param loopCounter : A counter to ensure Person are added incrementally to every group.
+     * @param personArrayList : A pointer that points to the group element.
+     * @param p : The person object to add into the sub-array
      */
     public void selectiveDistributionByNationality(int index, ArrayList<ArrayList<Person>> groupArrayList,
                                                    ArrayList<Person> personArrayList,
-                                                   int loopCounter, Person p ) {
+                                                   int loopCounter, Person p) {
         if (loopCounter < index) {
             personArrayList.add(p);
             groupArrayList.add(personArrayList);
@@ -160,7 +161,7 @@ public class DistributeUtil {
     }
     /**
      * This function runs through the allPerson list and add the specific gender required into an LinkedList
-     * @param allPerson the list of allPerson in the addressbook
+     * @param allPerson : The list of allPerson in the addressbook
      */
     public void filterGender(LinkedList<Person> allPerson,
                              LinkedList<Person> filteredGender, String gender) {
@@ -186,7 +187,7 @@ public class DistributeUtil {
 
     /**
      * This function checks if there is any other groups that have the same name.
-     * @param groupName check if groupName exist
+     * @param groupName : The string to be check if another groupname string exist.
      * @return false if there is no existing group.
      */
     private boolean existDuplicateGroup (String groupName) {
@@ -202,8 +203,8 @@ public class DistributeUtil {
 
     /**
      * This function will check all n number of groupName with the existing address book for existing groups.
-     * @param index : number of groups the user desire.
-     * @param groupName : the name of the group the user desire
+     * @param index : Number of groups the user desire.
+     * @param groupName : The name of the group the user desire
      * @throws CommandException if there exist a duplicate groupName
      */
     public void doesGroupNameExist(int index, String groupName) throws CommandException {
@@ -214,7 +215,7 @@ public class DistributeUtil {
 
     /**
      * This method will creates a new group with a given groupname.
-     * @param toCreateGroupName the groupName that has been concatenated with index
+     * @param toCreateGroupName : The groupName that has been concatenated with index
      * @return returns the group object that has been created.
      */
     private Group groupBuilder(String toCreateGroupName) {
@@ -234,7 +235,7 @@ public class DistributeUtil {
 
     /**
      * This method returns the index of the particular group in the address book.
-     * @param group The group to search for.
+     * @param group : The group to search for.
      * @return Return the Index value of the group.
      */
     private Index returnGroupIndex(Group group) {
@@ -251,8 +252,8 @@ public class DistributeUtil {
     /**
      * This Method Create the require group by the user and add the specific person into the group.
      * Works for multiple groups.
-     * @param groupArrayList Total number of groups
-     * @param groupName Groupname set by the User
+     * @param groupArrayList : Total number of groups
+     * @param groupName : Groupname set by the User
      * @throws CommandException if Index of a group was return as 0.
      */
     public void distributeProcess(ArrayList<ArrayList<Person>> groupArrayList,
