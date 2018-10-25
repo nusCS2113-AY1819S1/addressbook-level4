@@ -67,7 +67,7 @@ public class Limit {
      */
     public boolean isExceeded (Double money) {
 
-        return (money != null) && (money < 0) && (abs(limitMoneyFlow.toDouble()) <= abs(money));
+        return (money != null) && (money < 0) && (abs(limitMoneyFlow.toDouble()) < abs(money));
 
     }
 }

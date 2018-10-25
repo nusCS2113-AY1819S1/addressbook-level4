@@ -148,7 +148,7 @@ public class LimitCommandTest {
 
         @Override
         public boolean hasSameDateLimit(Limit limit) {
-            throw new AssertionError("This method should not be called.");
+            return false;
         }
 
         @Override
@@ -158,7 +158,7 @@ public class LimitCommandTest {
 
         @Override
         public boolean isExceededLimit (Limit limit) {
-            throw new AssertionError("This method should not be called.");
+           return false;
         }
 
 
@@ -174,7 +174,7 @@ public class LimitCommandTest {
 
         @Override
         public String generateLimitOutput(boolean isExceeded,Limit limit ) {
-            throw new AssertionError("This method should not be called.");
+            return "";
         }
 
         @Override
@@ -229,8 +229,8 @@ public class LimitCommandTest {
             this.limit = limit;
         }
 
-
-        public boolean hasSameDatesLimit(Limit limit) {
+        @Override
+        public boolean hasSameDateLimit(Limit limit) {
             requireNonNull(limit);
             return this.limit.isSameLimitDates(limit);
         }
