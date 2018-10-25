@@ -49,7 +49,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 6, 0, true);
+    public static final Version VERSION = new Version(1, 2, 1, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -100,7 +100,7 @@ public class MainApp extends Application {
         Optional<ReadOnlyBookInventory> addressBookOptional;
         ReadOnlyBookInventory initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readBookInventory();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample BookInventory");
             }

@@ -24,12 +24,12 @@ public interface BookInventoryStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyBookInventory> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyBookInventory> readBookInventory() throws DataConversionException, IOException;
 
     /**
      * @see #getAddressBookFilePath()
      */
-    Optional<ReadOnlyBookInventory> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyBookInventory> readBookInventory(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyBookInventory} to the storage.

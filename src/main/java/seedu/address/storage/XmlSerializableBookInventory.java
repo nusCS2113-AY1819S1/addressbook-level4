@@ -18,7 +18,7 @@ import seedu.address.model.book.Book;
 @XmlRootElement(name = "bookinventory")
 public class XmlSerializableBookInventory {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Book Inventory list contains duplicate book(s).";
+    public static final String MESSAGE_DUPLICATE_BOOK = "Book Inventory list contains duplicate book(s).";
 
     @XmlElement
     private List<XmlAdaptedBook> books;
@@ -50,7 +50,7 @@ public class XmlSerializableBookInventory {
         for (XmlAdaptedBook p : books) {
             Book book = p.toModelType();
             if (bookInventory.hasBook(book)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_BOOK);
             }
             bookInventory.addBook(book);
         }

@@ -934,17 +934,17 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |New user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |New user |See usage instructions |Refer to instructions when I forget how to use the App
 
-|`* * *` |Helpful user |add/remove books |Share my knowledge with others
+|`* * *` |Helpful user |Add/remove books |Share my knowledge with others
 
 |`* * *` |Student |Find for books related to my module |Easily access the correct materials
 
 |`* * *` |Overachiever |See peer reviews for books related to my module |Get access to helpful materials
 
-|`* *` |NSF |Find out what books are relevant to the modules I'm about to take in university |Read the books during my free time
+|`* *` |NSF |Find out which books are relevant to the modules I'm about to take in university |Read the books during my free time
 
-|`* *` |Professor |Add rating/review to books |Recommend this book to the rest                                      people
+|`* *` |Professor |Add rating/review to books |Recommend this book to others
 
 |`* *` |NUS Staff |Use the program as and when |Easily sieve out the books that i want to read
 
@@ -960,23 +960,23 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`*` |Exchange student |Use the program in my native language |Understand the program easily
 
-|`*` |Bookshop owner |Sell the books that people want |KNow which books are in demand
+|`*` |Bookshop owner |Sell the books that people want |Know which books are in demand
 
 |`*` |Underachiever |Have reviews for books which are easy to understand |Grasp on concepts quickly
 
 |`*` |Student nearing the exams |Have reviews for books which summarises the module |Recap on concepts quickly
 
-|`*` |Teaching assistant |Have a list of recommended books |Recommend my weaker students to read on those
+|`*` |Teaching assistant |Have a list of recommended books |Help underachieving students learn better
 
-|`*` |Author |Have the books listed neatly and visibly under users' module selection |Help students in their studies and also help them gain an appreciation to the module/
+|`*` |Author |Have the books listed neatly and visibly under users' module selection |Help students in their studies and also help them gain an appreciation to the module
 
 |`*` |Passionate student willing to help others |Have a moderately long word limit for the review |Share my personal experience with this book and how this book is recommended
 
 |`*` |Book enthusiast |Have a review for all the books I read |Allow people to acquire knowledge.
 
-|`*` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`*` |user |Hide <<private-contact-detail,private contact details>> by default |Minimize chance of someone else seeing them by accident
 
-|`*` |user with many books in the BookInventory |sort books by name |locate a book easily
+|`*` |user with many books in the BookInventory |Sort books by name |Locate a book easily
 |=======================================================================
 
 _{More to be added}_

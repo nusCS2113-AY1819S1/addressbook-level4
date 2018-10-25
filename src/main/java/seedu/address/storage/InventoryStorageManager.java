@@ -57,14 +57,15 @@ public class InventoryStorageManager extends ComponentManager implements Invento
     }
 
     @Override
-    public Optional<ReadOnlyBookInventory> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(bookInventoryStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyBookInventory> readBookInventory() throws DataConversionException, IOException {
+        return readBookInventory(bookInventoryStorage.getAddressBookFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyBookInventory> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyBookInventory> readBookInventory(Path filePath)
+            throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return bookInventoryStorage.readAddressBook(filePath);
+        return bookInventoryStorage.readBookInventory(filePath);
     }
 
     @Override

@@ -73,7 +73,7 @@ public class TestApp extends MainApp {
      */
     public BookInventory readStorageAddressBook() {
         try {
-            return new BookInventory(storage.readAddressBook().get());
+            return new BookInventory(storage.readBookInventory().get());
         } catch (DataConversionException dce) {
             throw new AssertionError("Data is not in the BookInventory format.", dce);
         } catch (IOException ioe) {
