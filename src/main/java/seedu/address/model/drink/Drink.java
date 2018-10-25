@@ -20,8 +20,8 @@ public class Drink {
     // Data fields
     private Price costPrice;
     private Price retailPrice;
-    private Stock stock;
     private UniqueBatchList uniqueBatchList;
+    private Quantity quantity;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -57,15 +57,19 @@ public class Drink {
         this.retailPrice = retailPrice;
     }
 
-    public Stock getStock() {
-        return stock;
+    public Quantity getQuantity() {
+        return quantity;
     }
 
-    public void setStock(Stock stock) {
-        this.stock = stock;
+    public void setQuantity(Quantity quantity) {
+        this.quantity = quantity;
     }
 
     public UniqueBatchList getUniqueBatchList() { return uniqueBatchList; }
+
+    public void setUniqueBatchList(UniqueBatchList uniqueBatchList) {
+        this.uniqueBatchList = uniqueBatchList;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
