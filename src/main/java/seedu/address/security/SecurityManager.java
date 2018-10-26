@@ -1,11 +1,12 @@
 package seedu.address.security;
 
+import java.util.ArrayList;
+
 import com.google.common.eventbus.Subscribe;
 
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.events.security.LogoutEvent;
 import seedu.address.commons.events.security.SuccessfulLoginEvent;
-import seedu.address.commons.events.security.UnsuccessfulLoginEvent;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -21,6 +22,8 @@ public class SecurityManager extends ComponentManager implements Security {
     private String password;
     private Logic logic;
     private AppUsers appUsers;
+    private ArrayList<AccountCredential> userlist;
+    private boolean incorrectPassWord = false;
 
     public SecurityManager(boolean isTest, Logic logic, AppUsers appUsers) {
         this.isAuthenticated = isTest; //Test for now
@@ -37,13 +40,23 @@ public class SecurityManager extends ComponentManager implements Security {
 
     @Override
     public void login(String username, String password) {
-        if (username.equals(this.username) && password.equals(this.password)) {
-            this.isAuthenticated = true;
-            //Instantiates User by matching it with a Person in database
-            logic.matchUserToPerson(username);
-            raise(new SuccessfulLoginEvent());
-        } else {
-            raise(new UnsuccessfulLoginEvent());
+        userlist = appUsers.getAccountCredentials();
+        for (AccountCredential acc : userlist) {
+            if (username.equals(acc.getUserName())) {
+                if (acc.passwordIsValid(password)) {
+                    this.isAuthenticated = true;
+                    logic.matchUserToPerson(username);
+                    raise(new SuccessfulLoginEvent());
+                } else {
+                    //THROW INCORRECT PASSWORD EXCEPTION
+                    incorrectPassWord = true;
+                }
+            }
+            //When username is not in the list
+            if (!incorrectPassWord && !this.isAuthenticated) {
+                //THROW USER NOT FOUND
+
+            }
         }
     }
 

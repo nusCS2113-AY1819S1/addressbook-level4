@@ -14,6 +14,7 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
+import seedu.address.commons.events.security.LogoutEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
@@ -81,7 +82,7 @@ public class MainApp extends Application {
 
         logic = new LogicManager(model);
 
-        security = new SecurityManager(false, logic);
+        security = new SecurityManager(false, logic, appUsers);
 
         ui = new UiManager(logic, config, userPrefs, security);
 
@@ -245,6 +246,18 @@ public class MainApp extends Application {
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         stop();
+    }
+
+    /**
+     * Saves new users whenever someone logs out (Superset of the new users and prexisting ones)
+     */
+    @Subscribe
+    public void handleLogoutEvent(LogoutEvent logout) {
+        try {
+            storage.saveAppUsers(appUsers);
+        } catch (IOException e) {
+            logger.severe("Failed to save users " + StringUtil.getDetails(e));
+        }
     }
 
     public static void main(String[] args) {
