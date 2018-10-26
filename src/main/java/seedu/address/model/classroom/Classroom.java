@@ -16,6 +16,7 @@ public class Classroom {
     private ClassName className;
     private ModuleCode moduleCode;
     private Enrollment maxEnrollment;
+    private ArrayList<String> students = new ArrayList<>();
 
     public Classroom(ClassName className, ModuleCode moduleCode, Enrollment maxEnrollment) {
         requireNonNull(className);
@@ -35,6 +36,15 @@ public class Classroom {
     public Enrollment getMaxEnrollment() {
         return maxEnrollment;
     }
+
+    public ArrayList<String> getStudents() {
+        return students;
+    }
+
+    public void setStudents(ArrayList<String> students) {
+        this.students = students;
+    }
+
 
     @Override
     public String toString() {

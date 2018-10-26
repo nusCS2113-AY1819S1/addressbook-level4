@@ -52,6 +52,16 @@ public class ClassroomManager {
     }
 
     /**
+     * Finds search for duplication of student assigned to classroom
+     */
+    public boolean findDuplicateClassroomStudent(Classroom classroom, String matricNo) {
+        if (!classroom.getStudents().isEmpty()) {
+            return classroom.getStudents().contains(matricNo);
+        }
+        return false;
+    }
+
+    /**
      * Removes a classroom from classroomList
      */
     public void deleteClassroom(Classroom classroom) {
@@ -108,5 +118,12 @@ public class ClassroomManager {
     public void updateClassroom(Classroom classtoEdit, Classroom editedClass) {
         int index = classroomList.indexOf(classtoEdit);
         classroomList.set(index, editedClass);
+    }
+
+    /**
+     * Assigns a student to the class
+     */
+    public void assignStudent(Classroom classToAssignStudent, String matricNo) {
+        classToAssignStudent.getStudents().add(matricNo);
     }
 }
