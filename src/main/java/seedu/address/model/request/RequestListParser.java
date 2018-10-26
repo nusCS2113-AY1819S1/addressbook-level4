@@ -41,6 +41,9 @@ public class RequestListParser {
         commandList = new ArrayList<>();
         commandList.add(ViewRequestCommand.COMMAND_WORD);
         commandList.add(RequestCommand.COMMAND_WORD);
+        commandList.add(UndoRequestCommand.COMMAND_WORD);
+        commandList.add(RedoRequestCommand.COMMAND_WORD);
+        commandList.add(DeleteRequestCommand.COMMAND_WORD);
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
