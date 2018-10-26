@@ -2,9 +2,9 @@ package seedu.address.model;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 import static seedu.address.testutil.TypicalTasks.CS2113_TASK_1;
 import static seedu.address.testutil.TypicalTasks.CS2113_TASK_2;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import java.nio.file.Paths;
 

@@ -27,23 +27,23 @@ import seedu.address.model.task.Task;
 public class TypicalTasks {
 
     // Manually added
-    public static final Task CS2113_homework = new TaskBuilder().withDeadline("1/1/2018")
+    public static final Task CS2113_HOMEWORK = new TaskBuilder().withDeadline("1/1/2018")
             .withTitle("Complete code refactoring").withDescription("Refer to notes!")
             .withPriority("low").build();
 
-    public static final Task CS2101_homework = new TaskBuilder().withDeadline("9/10/2018")
+    public static final Task CS2101_HOMEWORK = new TaskBuilder().withDeadline("9/10/2018")
         .withTitle("Plan a OP2 meeting").withDescription("OP2 is 40% of the grade")
         .withPriority("high").build();
 
-    public static final Task CS2102_homework = new TaskBuilder().withDeadline("11/11/2018")
+    public static final Task CS2102_HOMEWORK = new TaskBuilder().withDeadline("11/11/2018")
         .withTitle("Set up the backend framework").withDescription("Using Flask")
             .withPriority("medium").build();
 
-    public static final Task CG2271_homework = new TaskBuilder().withDeadline("5/6/2018")
+    public static final Task CG2271_HOMEWORK = new TaskBuilder().withDeadline("5/6/2018")
         .withTitle("Implement message passing").withDescription("Symmetric & indirect naming scheme")
             .withDescription("low").build();
 
-    public static final Task CG1112_homework = new TaskBuilder().withDeadline("2/5/2018")
+    public static final Task CG1112_HOMEWORK = new TaskBuilder().withDeadline("2/5/2018")
         .withTitle("Write buffer class").withDescription("refer to api")
             .withDescription("high").build();
 
@@ -74,6 +74,6 @@ public class TypicalTasks {
     }
 
     public static List<Task> getTypicalTasks() {
-        return new ArrayList<>(Arrays.asList(CS2101_homework, CS2102_homework, CS2113_homework));
+        return new ArrayList<>(Arrays.asList(CS2101_HOMEWORK, CS2102_HOMEWORK, CS2113_HOMEWORK));
     }
 }

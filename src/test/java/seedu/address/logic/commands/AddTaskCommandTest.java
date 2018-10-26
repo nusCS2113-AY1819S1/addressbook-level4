@@ -16,7 +16,6 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
-import seedu.address.testutil.TaskBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -24,6 +23,7 @@ import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Milestone;
 import seedu.address.model.task.Task;
+import seedu.address.testutil.TaskBuilder;
 
 public class AddTaskCommandTest {
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();

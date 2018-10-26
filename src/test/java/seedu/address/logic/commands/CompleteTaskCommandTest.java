@@ -1,15 +1,11 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.address.testutil.TypicalTasks.getTypicalTaskBook;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-
-import java.util.logging.Logger;
 
 import org.junit.Test;
 
-import seedu.address.testutil.TaskBuilder;
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
@@ -17,12 +13,12 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.task.Task;
+import seedu.address.testutil.TaskBuilder;
 
 public class CompleteTaskCommandTest {
 
     private Model model = new ModelManager(getTypicalTaskBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
-    private static final Logger logger = LogsCenter.getLogger(CompleteTaskCommandTest.class);
     /*@Test
     public void execute_validIndexUnfilteredList_success() {
         Task taskToComplete = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
