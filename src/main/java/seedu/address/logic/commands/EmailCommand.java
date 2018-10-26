@@ -7,6 +7,7 @@ import static seedu.address.model.email.Message.MESSAGE_MESSAGE_CONSTRAINTS;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.mail.AuthenticationFailedException;
 import javax.mail.MessagingException;
@@ -21,6 +22,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.email.Message;
 import seedu.address.model.email.Subject;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 
@@ -48,8 +50,11 @@ public class EmailCommand extends Command {
     public static final String MESSAGE_AUTHENTICATION_FAIL = "Invalid login credentials entered";
     public static final String SMTP_FAIL_EXCEPTION_MESSAGE = "Unable to send any more emails due to spam";
 
-    private boolean isSingleTarget;
+    private boolean isSingleTarget = false;
+    private boolean isMultipleTarget = false;
+    private boolean isGroupTarget = false;
     private Index targetIndex;
+    private Index targetGroup;
     private List<Index> targetMultipleIndex;
     private List<Person> toSend = new ArrayList<>();
     private Subject toSubject;
@@ -72,7 +77,17 @@ public class EmailCommand extends Command {
         this.targetMultipleIndex = targetMultipleIndex;
         this.toSubject = subject;
         this.toMessage = message;
-        this.isSingleTarget = false;
+        this.isMultipleTarget = true;
+    }
+
+    /**
+     * Creates a EmailCommand to add multiple {@code Persons} as the recipient
+     */
+    public EmailCommand(Index targetGroup, Subject subject, Message message, boolean isGroupTarget) {
+        this.targetGroup = targetGroup;
+        this.toSubject = subject;
+        this.toMessage = message;
+        this.isGroupTarget = isGroupTarget;
     }
 
     @Override
@@ -90,7 +105,9 @@ public class EmailCommand extends Command {
             }
             Person personToSend = lastShownList.get(targetIndex.getZeroBased());
             toSend.add(personToSend);
-        } else {
+        }
+
+        if (isMultipleTarget) {
             for (Index targetIndex : targetMultipleIndex) {
                 try {
                     Person personToSend = lastShownList.get(targetIndex.getZeroBased());
@@ -99,6 +116,16 @@ public class EmailCommand extends Command {
                     throw new CommandException(Messages.MESSAGE_INVALID_MULTIPLE_DISPLAYED_INDEX);
                 }
             }
+        }
+
+        if (isGroupTarget) {
+            List<Group> groupList = model.getFilteredGroupList();
+            if (targetGroup.getZeroBased() >= groupList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
+            }
+            Group groupToSend = groupList.get(targetGroup.getZeroBased());
+            Set<Person> personsInGroup = groupToSend.getPersons();
+            toSend.addAll(personsInGroup);
         }
 
         try {
