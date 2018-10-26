@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 
-
 import java.util.List;
 
 import seedu.address.logic.CommandHistory;
@@ -71,8 +70,8 @@ public class CheckExpenditureCommand extends Command {
             if ((year1 < year) && (year2 > year)) {
                 total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
             }
-            else if( ((year1 == year) && (year2 == year)) || ((year1 == year) && (year2 > year))
-                        || ((year1 < year) &&(year2 == year))) {
+            else if(((year1 == year) && (year2 == year)) || ((year1 == year) && (year2 > year))
+                        || ((year1 < year) && (year2 == year))) {
                 if ((month1 < month) && (month2 > month)) {
                     total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
                 }
