@@ -15,8 +15,6 @@ import seedu.address.model.user.Username;
  */
 public class ExportCalendarCommand extends Command {
 
-    private final String fileName;
-
     public static final String COMMAND_WORD = "export";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "filename"
@@ -27,8 +25,10 @@ public class ExportCalendarCommand extends Command {
     public static final String MESSAGE_EXPORT_SUCCESS =
             "Your %1$s iCalendar file has been successfully exported";
 
-    public static final String MESSAGE_FILE_ERROR = "File with %1$s.ics has existed in other folder\n"
+    public static final String MESSAGE_FILE_ERROR = "File %1$s.ics has existed in other folder\n"
             + "or file has errors and cannot be opened";
+
+    private final String fileName;
 
     public ExportCalendarCommand(String filename) {
         fileName = filename;
@@ -44,7 +44,7 @@ public class ExportCalendarCommand extends Command {
             return new CommandResult(String.format(MESSAGE_FILE_ERROR, fileName));
         }
 
-        return new CommandResult(String.format(MESSAGE_EXPORT_SUCCESS,fileName));
+        return new CommandResult(String.format(MESSAGE_EXPORT_SUCCESS, fileName));
     }
 }
 

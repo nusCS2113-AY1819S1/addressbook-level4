@@ -5,6 +5,9 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import seedu.address.logic.commands.ExportCalendarCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parser for export command
+ */
 public class ExportCalendarCommandParser {
 
     public static final String FILENAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";

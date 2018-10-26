@@ -40,8 +40,10 @@ public class DateTimeUtil {
 
     private static AttendanceContainsUserPredicate predicate;
 
-    //Utility method to access DateTime data
-    //Use to get computer current datetime,assuming computer date is set correctly
+    /**
+     * Utility method to get system current timestamp
+     * @return current Date
+     */
     public static Date getCurrentDateTime() {
         return new Date();
     }
@@ -121,7 +123,7 @@ public class DateTimeUtil {
         Calendar userCalendar = buildCalendar(filename);
         List<VEvent> userRegisteredEvents = convertEventListToVEventList(eventsList);
 
-        for(VEvent userRegisteredEvent : userRegisteredEvents) {
+        for (VEvent userRegisteredEvent : userRegisteredEvents) {
             userCalendar.getComponents().add(userRegisteredEvent);
         }
         return userCalendar;
@@ -153,7 +155,7 @@ public class DateTimeUtil {
                 String.format("%1$s.ics", fileName), false);
         CalendarOutputter outPutter = new CalendarOutputter();
 
-        Calendar calendar = writeToUserCalendar(getAttendingEventList(model, currentUser),fileName);
+        Calendar calendar = writeToUserCalendar(getAttendingEventList(model, currentUser), fileName);
 
         outPutter.output(calendar, fileOut);
     }
