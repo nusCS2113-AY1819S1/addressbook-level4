@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 import com.t13g2.forum.commons.core.Messages;
 import com.t13g2.forum.logic.commands.DeleteThreadCommand;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
-import com.t13g2.forum.storage.forum.UnitOfWork;
+import com.t13g2.forum.model.UnitOfWork;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object

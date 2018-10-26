@@ -15,7 +15,6 @@ import com.t13g2.forum.model.forum.Announcement;
 import com.t13g2.forum.model.forum.Module;
 import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.model.person.Person;
-import com.t13g2.forum.storage.forum.Context;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

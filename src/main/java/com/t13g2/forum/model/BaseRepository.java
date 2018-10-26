@@ -1,10 +1,12 @@
 //@@Meowzz95
-package com.t13g2.forum.storage.forum;
+package com.t13g2.forum.model;
 
 import java.util.List;
 import java.util.Optional;
 
 import com.t13g2.forum.model.forum.BaseModel;
+import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
+import com.t13g2.forum.storage.forum.IForumBookStorage;
 
 /**
  *
