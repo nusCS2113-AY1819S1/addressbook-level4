@@ -19,6 +19,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Activity;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.TypicalPersons;
 
 public class CommandCompleterTest {
@@ -222,6 +223,11 @@ public class CommandCompleterTest {
 
         @Override
         public ObservableList<Activity> getActivityList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Tag> getUniqueTagList() {
             throw new AssertionError("This method should not be called.");
         }
     }
