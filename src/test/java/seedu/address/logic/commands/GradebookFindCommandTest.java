@@ -34,14 +34,7 @@ public class GradebookFindCommandTest {
     public void execute_gradebookFind_success() throws CommandException {
         String moduleCode = "CS2113";
         String gradebookComponentName = "Finals";
-        int gradebookMaxMarks = 20;
-        int gradebookWeightage = 10;
-        String expectedMessage = String.format(
-                MESSAGE_FIND_SUCCESS,
-                moduleCode,
-                gradebookComponentName,
-                gradebookMaxMarks,
-                gradebookWeightage);
+        String expectedMessage = MESSAGE_FIND_SUCCESS + "\n";
 
         gradebookManager.addGradebookComponent(dummyGradebookComponent.build());
         gradebookManager.saveGradebookList();

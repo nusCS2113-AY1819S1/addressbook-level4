@@ -4,6 +4,10 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.gradebook.Gradebook;
 import seedu.address.model.gradebook.GradebookManager;
+import seedu.address.ui.HtmlTableProcessor;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Lists all gradebook components for module in Trajectory to the user.
@@ -20,18 +24,21 @@ public class GradebookListCommand extends Command {
         int count = gradebookManager.getGradebooks().size();
         int index = 1;
 
+        sb.append(HtmlTableProcessor.getH3Representation("Gradebook List"));
+        sb.append(HtmlTableProcessor.renderTableStart(new ArrayList<String>(
+                Arrays.asList("Index", "Module Code", "Component Name", "Maximum Marks", "Weightage"))));
+
+        sb.append(HtmlTableProcessor.getTableItemStart());
         for (Gradebook gradebook: gradebookManager.getGradebooks()) {
-            sb.append(index++ + ") ");
-            sb.append("Module Code: ");
-            sb.append(gradebook.getModuleCode() + "\n");
-            sb.append("Grade Component Name: ");
-            sb.append(gradebook.getGradeComponentName() + "\n");
-            sb.append("Maximum Marks: ");
-            sb.append(gradebook.getGradeComponentMaxMarks() + "\n");
-            sb.append("Weightage: ");
-            sb.append(gradebook.getGradeComponentWeightage() + "\n");
+            sb.append(HtmlTableProcessor
+                    .renderTableItem(new ArrayList<String>(Arrays
+                            .asList(Integer.toString(index++),
+                                    gradebook.getModuleCode(),
+                                    gradebook.getGradeComponentName(),
+                                    Integer.toString(gradebook.getGradeComponentMaxMarks()),
+                                    Integer.toString(gradebook.getGradeComponentWeightage())))));
         }
-        return new CommandResult(
-                String.format("\n" + (MESSAGE_LIST_SUCCESS) + count + "\n" + sb.toString()));
+        sb.append(HtmlTableProcessor.getTableItemEnd());
+        return new CommandResult(MESSAGE_LIST_SUCCESS + count + "\n" + "", sb.toString());
     }
 }
