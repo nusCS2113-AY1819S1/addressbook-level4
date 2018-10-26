@@ -19,8 +19,6 @@ public class SortMarks { //from lowest to highest
         for (int i = 0; i < personList.size(); i++) {
             for (Test test: personList.get(i).getTests()) {
                 if (test.getTestName().testName.equals(testName)) {
-                    personList.get(i).setGrade(test.getGrade());
-                    personList.get(i).setMarks(test.getMarks());
                     listToSort.add(personList.get(i));
                 }
             }
@@ -38,15 +36,14 @@ public class SortMarks { //from lowest to highest
         int i;
         int j;
         Person temp;
-
+        ArrayList<Test> listOfTest = new ArrayList<Test>();
         for (i = 0; i < n - 1; i++) {
-            //swapped = false;
             for (j = 0; j < n - i - 1; j++) {
+
                 if (Integer.parseInt(list.get(j).getTests().iterator().next().getMarks().toString())
                         > Integer.parseInt(list.get(j + 1).getTests().iterator().next().getMarks().toString())) {
                     temp = list.get(j);
                     list.set(j, list.get(j + 1));
-
                     list.set(j + 1, temp);
                 }
 

@@ -1,28 +1,26 @@
 package seedu.address.model.util;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 /**
- * somthing
+ * this is the class for calculate mean value of certain test
  */
 public class Mean {
     /**
-     * something
+     * Calculate the mean score of a test, the mean value should be double type
      */
-    public static double calculateMean(List<Person> personList, String testName) { //calculate the mean score of a test
+    public static double calculateMean(List<Person> personList, String testName) {
         double sum = 0;
 
-        ArrayList<Person> list = FormStudentListForGrade.formStudentlistForCalculation(personList, testName);
+        ArrayList<Person> list = FormStudentListForGrade.formStudentListForCalculation(personList, testName);
 
         for (int k = 0; k < list.size(); k++) {
 
-            sum += Double.parseDouble(list.get(k).getTests().iterator().next().getMarks().toString()); //string to integer then calculate
+            sum += Double.parseDouble(list.get(k).getTests().iterator().next().getMarks().toString());
         }
-        double mean = sum / personList.size() * 1.0;
+        double mean = sum / list.size() * 1.0;
         return mean;
     }
 }

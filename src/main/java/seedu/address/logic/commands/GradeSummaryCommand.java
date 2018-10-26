@@ -50,13 +50,13 @@ public class GradeSummaryCommand extends Command {
         Highest highest = new Highest();
         Lowest lowest = new Lowest();
         Mean mean = new Mean();
-        LastTwentyFivePercen lastTwentyFivePercen = new LastTwentyFivePercen();
         Median median = new Median();
+
         TopTwentyFivePercen topTwentyFivePercen = new TopTwentyFivePercen();
-
-
+        LastTwentyFivePercen lastTwentyFivePercen = new LastTwentyFivePercen();
 
         DisplayGrade gradeDisplay;
+
         if ("TTF".equals(commandType)) {
             ArrayList<Person> studentList = topTwentyFivePercen.findTopTwentyFive(model.getFilteredPersonList(), testName);
 
@@ -91,11 +91,11 @@ public class GradeSummaryCommand extends Command {
         }
         if ("MEAN".equals(commandType)) {
             double meanVal = mean.calculateMean(model.getFilteredPersonList(), testName);
-            return new CommandResult(String.format("The mean is " + mean));
+            return new CommandResult(String.format("The mean is " + meanVal));
         }
         if ("MEDIAN".equals(commandType)) {
             double medianVal = median.calculateMedian(model.getFilteredPersonList(), testName);
-            return new CommandResult(String.format("Median in class is " + median));
+            return new CommandResult(String.format("Median in class is " + medianVal));
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS));

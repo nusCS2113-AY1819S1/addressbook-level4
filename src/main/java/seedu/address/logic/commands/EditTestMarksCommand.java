@@ -67,6 +67,7 @@ public class EditTestMarksCommand extends Command {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         Person personToEdit = personListName.get(0);
         String grade = "Undefined";
+
         if (testGrade != null)
         {
             grade = testGrade;
@@ -118,8 +119,6 @@ public class EditTestMarksCommand extends Command {
         return new Person(updatedName, updateGender, updateNationality, updatedPhone,
                 updatedEmail, updatedAddress, updatedTags, updatedTests);
     }
-
-
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

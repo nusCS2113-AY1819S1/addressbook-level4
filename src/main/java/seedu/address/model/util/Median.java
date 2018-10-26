@@ -10,7 +10,8 @@ public class Median {
         double median = 0;
         ArrayList<Person> sortedList =
                 new ArrayList<Person>(SortMarks.sortingFromLowestToHighest(personList, testName));
-
+        for(int i = 0; i < sortedList.size();i++){
+        System.out.println(sortedList.get(i).getTests());}
         int size = sortedList.size();
         int index = (size / 2) - 1;
         if (size % 2 == 0) {

@@ -27,6 +27,9 @@ public class DisplayGrade extends UiPart<Stage> {
     private TableColumn<Person, String> nameColumn;
 
     @FXML
+    private TableColumn<Person, String> marksColumn;
+
+    @FXML
     private TableColumn<Person, String> gradeColumn;
 
 
@@ -58,6 +61,7 @@ public class DisplayGrade extends UiPart<Stage> {
 
         // Initialize the person table with all the data
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        marksColumn.setCellValueFactory(new PropertyValueFactory<>("marks"));
         gradeColumn.setCellValueFactory(new PropertyValueFactory<>("grade"));
         personTable.setItems(persons);
 
