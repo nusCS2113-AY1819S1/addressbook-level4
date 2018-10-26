@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.planner.commons.core.index.Index;
 import seedu.planner.commons.util.StringUtil;
 import seedu.planner.logic.parser.exceptions.ParseException;
+import seedu.planner.model.DirectoryPath;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Name;
@@ -107,4 +108,33 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Parses {@code Directory Path} into a {@code DirectoryPath}
+     */
+    public static DirectoryPath parseDirectory(String dirPath) throws ParseException {
+        requireNonNull(dirPath);
+        if (DirectoryPath.isValidDirectory(dirPath)) {
+            final DirectoryPath directoryPath = new DirectoryPath(dirPath);
+            return directoryPath;
+        }
+        return null;
+    }
+
+    /**
+     * Parses {@code Directory Path} into a {@code DirectoryPath}
+     */
+    public static DirectoryPath parseFilePath(String dirPath) throws ParseException {
+        requireNonNull(dirPath);
+        System.out.println(dirPath);
+        if (DirectoryPath.isValidFormat(dirPath)) {
+            System.out.println("TRUE FILE_PATH_FORMAT");
+        } else {
+            System.out.println("FALSE FILE_PATH_FORMAT");
+        }
+        if (DirectoryPath.isValidFilePath(dirPath)) {
+            final DirectoryPath directoryPath = new DirectoryPath(dirPath);
+            return directoryPath;
+        }
+        return null;
+    }
 }

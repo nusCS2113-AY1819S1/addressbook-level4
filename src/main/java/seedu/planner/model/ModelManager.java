@@ -95,18 +95,25 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void deleteListRecord(List<Record> targetList) {
-        for (Record target : targetList) {
-            versionedFinancialPlanner.removeRecord(target);
-        }
-        indicateFinancialPlannerChanged();
-    }
-
-    @Override
     public void addRecord(Record record) {
         requireNonNull(record);
         versionedFinancialPlanner.addRecord(record);
         versionedFinancialPlanner.addRecordToSummary(record);
+        updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
+        indicateFinancialPlannerChanged();
+        indicateSummaryMapChanged();
+    }
+
+    @Override
+    public void addListUniqueRecord(List<Record> records) {
+        requireNonNull(records);
+        for (Record record : records) {
+            if (hasRecord(record)) {
+                continue;
+            }
+            versionedFinancialPlanner.addRecord(record);
+            versionedFinancialPlanner.addRecordToSummary(record);
+        }
         updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
         indicateFinancialPlannerChanged();
         indicateSummaryMapChanged();

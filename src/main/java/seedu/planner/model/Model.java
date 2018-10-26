@@ -40,15 +40,18 @@ public interface Model {
      */
     void deleteRecord(Record target);
 
-    void deleteListRecord(List<Record> targetList);
-
     /**
      * Adds the given record.
      * {@code record} must not already exist in the financial planner.
      */
-
     void addRecord(Record record);
 
+    /**
+     * Adds the given list of records.
+     * Given a list of records, we will only add record which is not existing in the model.
+     * {@code record} must not already exist in the financial planner.
+     */
+    void addListUniqueRecord(List<Record> records);
     /**
      * To add the limit.
      * @param limitIn

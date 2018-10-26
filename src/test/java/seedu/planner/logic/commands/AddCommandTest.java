@@ -98,6 +98,10 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addListUniqueRecord(List<Record> records) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
         public void deleteRecord(Record target) {
             throw new AssertionError("This method should not be called.");
         }

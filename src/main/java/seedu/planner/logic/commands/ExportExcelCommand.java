@@ -1,9 +1,10 @@
 package seedu.planner.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-
+import static seedu.planner.model.Model.PREDICATE_SHOW_ALL_RECORDS;
+import java.io.FileNotFoundException;
 import java.util.List;
-import java.util.Map;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -12,10 +13,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.core.Messages;
 import seedu.planner.commons.util.ExcelUtil;
-import seedu.planner.commons.util.FileUtil;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.logic.commands.exceptions.CommandException;
+import seedu.planner.model.DirectoryPath;
 import seedu.planner.model.Model;
+import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
 
@@ -25,32 +27,59 @@ import seedu.planner.model.record.Record;
 public class ExportExcelCommand extends Command {
     public static final String COMMAND_WORD = "export_excel";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Export the records data into Excel file within specific period.\n"
-            + "The file will be named in format: Financial_Planner_STARTDATE_ENDDATE.\n"
-            + "Parameters: START_DATE END_DATE, START_DATE should be equal to or smaller than END_DATE.\n"
-            + "Example: " + COMMAND_WORD + " 31-03-1999 31-3-2018\n";
+            + ": Exports the records within specific period or all records in the Financial Planner into Excel file .\n"
+            + "Parameters: START_DATE END_DATE DIRECTORY_PATH,START_DATE should be equal to or smaller than END_DATE.\n"
+            + "You can specifically type what you want to confine. Date/period start with d/ "
+            + "and Directory path start with dir/.\n"
+            + "For example: You want to set Directory: " + COMMAND_WORD + " dir/" + DirectoryPath.HOME_DIRECTORY_STRING;
+    private final Date startDate;
+    private final Date endDate;
+    private final DirectoryPath directoryPath;
 
-    private final DateIsWithinIntervalPredicate predicate;
+    private final Predicate<Record> predicate;
     private Logger logger = LogsCenter.getLogger(ExportExcelCommand.class);
 
-    public ExportExcelCommand(DateIsWithinIntervalPredicate predicate) {
-        this.predicate = predicate;
+    public ExportExcelCommand() {
+        this.startDate = null;
+        this.endDate = null;
+        this.directoryPath = DirectoryPath.HOME_DIRECTORY;
+        this.predicate = PREDICATE_SHOW_ALL_RECORDS;
+    }
+
+    public ExportExcelCommand(DirectoryPath directoryPath) {
+        this.startDate = null;
+        this.endDate = null;
+        this.directoryPath = directoryPath;
+        this.predicate = PREDICATE_SHOW_ALL_RECORDS;
+    }
+
+    public ExportExcelCommand(Date startDate, Date endDate) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.directoryPath = DirectoryPath.HOME_DIRECTORY;
+        this.predicate = new DateIsWithinIntervalPredicate(startDate, endDate);
+    }
+
+    public ExportExcelCommand(Date startDate, Date endDate, DirectoryPath directoryPath) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.directoryPath = directoryPath;
+        this.predicate = new DateIsWithinIntervalPredicate(startDate, endDate);
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory)
+            throws CommandException {
         requireNonNull(this);
         model.updateFilteredRecordList(predicate);
         List<Record> recordList = model.getFilteredRecordList();
-        String nameFile = String.format("Financial_Planner_%1$s_%2$s.xlsx",
-                predicate.getStartDate().getValue(), predicate.getEndDate().getValue());
+        String nameFile = ExcelUtil.setNameExcelFile(startDate, endDate);
         logger.info(nameFile);
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet(nameFile);
-        Map<String, Object[]> mapData = ExcelUtil.exportData(recordList);
-        ExcelUtil.writeDataIntoExcelSheet(mapData, sheet);
-        FileUtil.writeWorkBookInFileSystem(nameFile, workbook);
-        return new CommandResult(String.format(Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY, nameFile));
+        String path = directoryPath.getDirectoryPath().getDirectoryPathValue();
+        path.replace("\\", System.getProperty("file.separator"));
+        return new CommandResult(ExcelUtil.writeExcelSheetIntoDirectory(recordList, sheet, workbook, path, nameFile));
     }
 
     @Override
