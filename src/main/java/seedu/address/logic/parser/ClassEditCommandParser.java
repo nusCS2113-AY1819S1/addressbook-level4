@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAXENROLLMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
@@ -25,19 +25,19 @@ public class ClassEditCommandParser implements Parser<ClassEditCommand> {
     public ClassEditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_CLASSNAME, PREFIX_MODULE_CODE, PREFIX_MAXENROLLMENT);
+                ArgumentTokenizer.tokenize(args, PREFIX_CLASS_NAME, PREFIX_MODULE_CODE, PREFIX_MAXENROLLMENT);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_CLASSNAME, PREFIX_MODULE_CODE, PREFIX_MAXENROLLMENT)
+        if (!arePrefixesPresent(argMultimap, PREFIX_CLASS_NAME, PREFIX_MODULE_CODE, PREFIX_MAXENROLLMENT)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClassEditCommand.MESSAGE_USAGE));
         }
 
-        String className = argMultimap.getValue(PREFIX_CLASSNAME).get().toUpperCase();
+        String className = argMultimap.getValue(PREFIX_CLASS_NAME).get().toUpperCase();
         String moduleCode = argMultimap.getValue(PREFIX_MODULE_CODE).get().toUpperCase();
         String maxEnrollment = argMultimap.getValue(PREFIX_MAXENROLLMENT).get();
 
         EditClassDescriptor editClassroomDescriptor = new EditClassDescriptor();
-        if (argMultimap.getValue(PREFIX_CLASSNAME).isPresent()) {
+        if (argMultimap.getValue(PREFIX_CLASS_NAME).isPresent()) {
             editClassroomDescriptor.setClassName(ClassroomParserUtil.parseClassName(className));
         }
         if (argMultimap.getValue(PREFIX_MODULE_CODE).isPresent()) {

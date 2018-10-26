@@ -140,7 +140,7 @@ public class AddressBookParserTest {
         final String moduleCode = "CG1111";
         final String maxEnrollment = "20";
         ClassAddCommand command = (ClassAddCommand) parser.parseCommand(ClassAddCommand.COMMAND_WORD
-                + " " + PREFIX_CLASSNAME + className
+                + " " + PREFIX_CLASS_NAME + className
                 + " " + PREFIX_MODULE_CODE + moduleCode
                 + " " + PREFIX_MAXENROLLMENT + maxEnrollment);
         assertEquals(new ClassAddCommand(new Classroom(new ClassName(className),

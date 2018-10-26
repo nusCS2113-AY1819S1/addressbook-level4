@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
@@ -16,7 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ClassAddStudentCommandParser implements Parser<ClassAddStudentCommand> {
     /**
-     * Parses {@code userInput} into a command and returns it.
+     * Parses {@code args} into a command and returns it.
      *
      * @param args
      * @throws ParseException if {@code userInput} does not conform the expected format
@@ -25,15 +25,15 @@ public class ClassAddStudentCommandParser implements Parser<ClassAddStudentComma
     public ClassAddStudentCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_CLASSNAME, PREFIX_MODULE_CODE, PREFIX_MATRIC);
+                ArgumentTokenizer.tokenize(args, PREFIX_CLASS_NAME, PREFIX_MODULE_CODE, PREFIX_MATRIC);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_CLASSNAME, PREFIX_MODULE_CODE, PREFIX_MATRIC)
+        if (!arePrefixesPresent(argMultimap, PREFIX_CLASS_NAME, PREFIX_MODULE_CODE, PREFIX_MATRIC)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ClassAddStudentCommand.MESSAGE_USAGE));
         }
 
-        String className = argMultimap.getValue(PREFIX_CLASSNAME).get().toUpperCase();
+        String className = argMultimap.getValue(PREFIX_CLASS_NAME).get().toUpperCase();
         ClassroomParserUtil.parseClassName(className);
         String moduleCode = argMultimap.getValue(PREFIX_MODULE_CODE).get().toUpperCase();
         ParserUtil.parseModuleCode(moduleCode);
