@@ -145,6 +145,7 @@ public class ModelManager extends ComponentManager implements Model {
             raise(new UserLoginEvent(userName, user.isAdmin()));
             return true;
         }
+        raise(new UserLoginEvent("", false));
         return false;
     }
 
@@ -217,7 +218,11 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void deleteUser(User userToDelete) {
+        String currentUserName = Context.getInstance().getCurrentUser().getUsername();
         versionedAddressBook.deleteUser(userToDelete);
+        if (userToDelete.getUsername().equals(currentUserName)) {
+            raise(new UserLoginEvent("", false));
+        }
     }
 
     //@@author
