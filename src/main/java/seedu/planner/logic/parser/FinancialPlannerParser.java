@@ -18,6 +18,7 @@ import seedu.planner.logic.commands.FindCommand;
 import seedu.planner.logic.commands.FindTagCommand;
 import seedu.planner.logic.commands.HelpCommand;
 import seedu.planner.logic.commands.HistoryCommand;
+import seedu.planner.logic.commands.ImportExcelCommand;
 import seedu.planner.logic.commands.LimitCommand;
 import seedu.planner.logic.commands.ListCommand;
 import seedu.planner.logic.commands.RedoCommand;
@@ -109,6 +110,9 @@ public class FinancialPlannerParser {
 
         case ExportExcelCommand.COMMAND_WORD:
             return new ExportExcelCommandParser().parse(arguments);
+
+        case ImportExcelCommand.COMMAND_WORD:
+            return new ImportExcelCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

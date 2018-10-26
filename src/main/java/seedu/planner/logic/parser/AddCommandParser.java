@@ -7,8 +7,10 @@ import static seedu.planner.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.logic.commands.AddCommand;
 import seedu.planner.logic.parser.exceptions.ParseException;
 import seedu.planner.model.record.Date;
@@ -21,6 +23,7 @@ import seedu.planner.model.tag.Tag;
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser implements Parser<AddCommand> {
+    private static Logger logger = LogsCenter.getLogger(AddCommandParser.class);
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
@@ -28,6 +31,14 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
+        return new AddCommand(parseArgumentsAddCommand(args));
+    }
+
+    /**
+     * Parse the arguments to create new Object Add Command (used for Reading Data from Excel file as well).
+     */
+    public static Record parseArgumentsAddCommand (String args) throws ParseException {
+        logger.info("The add command: " + args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE, PREFIX_MONEYFLOW, PREFIX_TAG);
 
@@ -42,15 +53,13 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Record record = new Record(name, date, moneyFlow, tagList);
-
-        return new AddCommand(record);
+        return record;
     }
-
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 

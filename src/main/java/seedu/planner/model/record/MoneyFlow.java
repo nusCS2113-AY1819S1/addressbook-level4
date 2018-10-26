@@ -54,6 +54,12 @@ public class MoneyFlow {
         valueDouble = Double.valueOf(moneyFlow);
     }
 
+    public MoneyFlow(Double moneyFlow) {
+        requireNonNull(moneyFlow);
+        checkArgument(isValidMoneyFlow(moneyFlow.toString()), MESSAGE_MONEY_FLOW_CONSTRAINTS);
+        this.valueDouble = moneyFlow;
+        value = moneyFlow.toString();
+    }
     /**
      * Returns if a given string is a valid moneyflow parameter.
      */
