@@ -25,10 +25,10 @@ public class GradeSummaryCommandParser implements Parser<GradeSummaryCommand> {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TWENTY_FIVE, PREFIX_SEVENTY_FIVE,
-                        PREFIX_HIGHEST, PREFIX_MEAN, PREFIX_MEDIAN);
+                        PREFIX_HIGHEST, PREFIX_MEAN, PREFIX_MEDIAN, PREFIX_TEST_NAME);
 
         String commandToRun = "";
-        String testName = "TEST";
+        String testName = "";
 
         if (argMultimap.getValue(PREFIX_TWENTY_FIVE).isPresent()) {
             commandToRun = "TTF";
@@ -45,7 +45,9 @@ public class GradeSummaryCommandParser implements Parser<GradeSummaryCommand> {
         if (argMultimap.getValue(PREFIX_MEDIAN).isPresent()) {
             commandToRun = "MEDIAN";
         }
-
+        if (argMultimap.getValue(PREFIX_TEST_NAME).isPresent()) {
+            testName = argMultimap.getValue(PREFIX_TEST_NAME).get();
+        }
         return new GradeSummaryCommand(commandToRun, testName);
 
     }
