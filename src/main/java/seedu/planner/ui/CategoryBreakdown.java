@@ -78,7 +78,8 @@ public class CategoryBreakdown extends UiPart<Region> {
     private ObservableList<PieChart.Data> convertToPieChartList(ObservableList<ChartData> data, Double total) {
         List<PieChart.Data> dataList;
         if (total > 0.0) {
-            dataList = data.stream().map(d -> new PieChart.Data(d.key, d.value / total * 100.0))
+            dataList = data.stream().map(d -> new PieChart.Data(d.key, Double.parseDouble(
+                    String.format("%.2f", d.value / total * 100.0))))
                     .collect(Collectors.toList());
         } else {
             dataList = data.stream().map(d -> new PieChart.Data(d.key, d.value)).collect(Collectors.toList());

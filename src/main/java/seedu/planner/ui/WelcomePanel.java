@@ -56,7 +56,7 @@ public class WelcomePanel extends UiPart<Region> {
         for (CategoryStatistic d : data) {
             if (d.getTotalIncome() > 0.0) {
                 chartDataList.add(new ChartData(d.getTags().toString(), d.getTotalIncome()));
-                totalIncome += totalIncome;
+                totalIncome += d.getTotalIncome();
             }
         }
         return new CategoryBreakdown(FXCollections.observableList(chartDataList), "Total Income for this month",
