@@ -9,6 +9,7 @@ import com.google.common.eventbus.Subscribe;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Side;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.planner.commons.core.LogsCenter;
@@ -69,12 +70,14 @@ public class WelcomePanel extends UiPart<Region> {
     /** Populates the welcome panel with its UI elements */
     private void populateUi(ObservableList<CategoryStatistic> toDisplay) {
         CategoryBreakdown categoryBreakdown = createTotalExpenseBreakdown(toDisplay);
-        categoryBreakdown.setPieChartSize(600.0, 300.0);
+        categoryBreakdown.setPieChartSize(450.0, 300.0);
         categoryBreakdown.disableLegend();
+        categoryBreakdown.setTitlePosition(Side.BOTTOM);
         expenseStats.getChildren().add(categoryBreakdown.getRoot());
         categoryBreakdown = createTotalIncomeBreakdown(toDisplay);
-        categoryBreakdown.setPieChartSize(600.0, 300.0);
+        categoryBreakdown.setPieChartSize(450.0, 300.0);
         categoryBreakdown.disableLegend();
+        categoryBreakdown.setTitlePosition(Side.BOTTOM);
         incomeStats.getChildren().add(categoryBreakdown.getRoot());
     }
 

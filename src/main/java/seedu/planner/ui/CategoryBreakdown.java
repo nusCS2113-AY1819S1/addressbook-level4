@@ -43,7 +43,7 @@ public class CategoryBreakdown extends UiPart<Region> {
     private void initPieChart(String label) {
         pieChart.setTitle(label);
         pieChart.setLabelsVisible(true);
-        pieChart.setLabelLineLength(10);
+        pieChart.setLabelLineLength(20);
         pieChart.setLegendSide(Side.RIGHT);
 
         pieChart.setPrefSize(800, 400);
@@ -71,6 +71,10 @@ public class CategoryBreakdown extends UiPart<Region> {
 
     public void disableLegend() {
         pieChart.setLegendVisible(false);
+    }
+
+    public void setTitlePosition(Side side) {
+        pieChart.setTitleSide(side);
     }
 
     /** Converts a given ObservableList containing {@see ChartData} to a list that can be read by {@link PieChart}

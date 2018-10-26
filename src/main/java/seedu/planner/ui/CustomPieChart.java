@@ -1,7 +1,6 @@
 package seedu.planner.ui;
 
-import java.util.Optional;
-
+import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
@@ -9,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
-import javafx.scene.text.Text;
 
 /**
  * This class is a custom PieChart class that can be used to display statistics in FinancialPlanner
@@ -18,33 +16,12 @@ public class CustomPieChart extends PieChart {
 
     public static final String CSS_FILE = "DarkTheme.css";
 
-    private final ObservableList<PieChart.Data> pieChartData;
-
     public CustomPieChart(ObservableList<Data> pieChartData) {
         super(pieChartData);
         getStylesheets().add(CSS_FILE);
         setLegend(new CustomLegend(this));
-        this.pieChartData = pieChartData;
-    }
-
-    @Override
-    protected void layoutChartChildren(double top, double left, double contentWidth, double contentHeight) {
-        if (getLabelsVisible()) {
-            getData().forEach(data -> addPercentages(data));
-        }
-        super.layoutChartChildren(top, left, contentWidth, contentHeight);
-    }
-
-    /**
-     * Adds percentages to the PieChart labels.
-     */
-    private void addPercentages(PieChart.Data data) {
-        Optional<Node> optionalNode = lookupAll(".chart-pie-label")
-                .stream().filter(n -> n instanceof Text && ((Text) n).getText().equals(data.getName())).findAny();
-        if (optionalNode.isPresent()) {
-            Text optionalTextNode = ((Text) optionalNode.get());
-            optionalTextNode.setText(data.getName() + " " + data.getPieValue() + "%");
-        }
+        pieChartData.forEach(data ->
+                data.nameProperty().bind(Bindings.concat(data.getName(), " ", data.pieValueProperty(), "%")));
     }
 
     class CustomLegend extends GridPane {
