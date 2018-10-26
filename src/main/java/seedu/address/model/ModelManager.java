@@ -14,6 +14,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.export.CsvWriter;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Schedule;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.todo.Todo;
 
@@ -25,6 +26,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
+//    private final FilteredList<Schedule> filteredSchedule;
     private final FilteredList<Todo> filteredTodos;
 
     /**
@@ -38,6 +40,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+//        filteredSchedule = new FilteredList<>(versionedAddressBook.getScheduleList());
         filteredTodos = new FilteredList<>(versionedAddressBook.getTodoList());
     }
 
@@ -195,4 +198,12 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTodoList(PREDICATE_SHOW_ALL_TODOS);
         indicateAddressBookChanged();
     }
+
+    //========== Schedule =====================================================================================
+//    @Override
+//    public void Schedule(Schedule schedule) {
+//        versionedAddressBook.addSchedule(schedule);
+//        updateFilteredSchedule(PREDICATE_SHOW_ALL_SCHEDULE);
+//        indicateAddressBookChanged();
+//    }
 }

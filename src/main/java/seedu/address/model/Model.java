@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Schedule;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.todo.Todo;
 
@@ -109,4 +110,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTodoList(Predicate<Todo> predicate);
+
+    /**
+     * Adds a schedule to a stated person
+     */
+//    void addSchedule(Schedule schedule);
 }

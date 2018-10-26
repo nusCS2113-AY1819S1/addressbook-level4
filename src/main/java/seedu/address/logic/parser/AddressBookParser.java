@@ -103,7 +103,7 @@ public class AddressBookParser {
 
         case ScheduleCommand.COMMAND_WORD:
         case ScheduleCommand.COMMAND_ALIAS:
-            return new ScheduleCommand();
+            return new ScheduleCommandParser().parse(arguments);
 
         case ExportAllCommand.COMMAND_WORD:
             return new ExportAllCommandParser().parse(arguments);
