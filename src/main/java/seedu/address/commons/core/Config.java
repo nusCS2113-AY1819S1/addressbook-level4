@@ -16,7 +16,6 @@ public class Config {
     private String appTitle = "Address App";
     private Level logLevel = Level.INFO;
     private Path userPrefsFilePath = Paths.get("preferences.json");
-    private String scriptFileDirectory = "/scripts/";
 
     public String getAppTitle() {
         return appTitle;
@@ -40,14 +39,6 @@ public class Config {
 
     public void setUserPrefsFilePath(Path userPrefsFilePath) {
         this.userPrefsFilePath = userPrefsFilePath;
-    }
-
-    public String getScriptFileDirectory() {
-        return scriptFileDirectory;
-    }
-
-    public void setScriptFileDirectory(String scriptFileDirectory) {
-        this.scriptFileDirectory = scriptFileDirectory;
     }
 
     @Override

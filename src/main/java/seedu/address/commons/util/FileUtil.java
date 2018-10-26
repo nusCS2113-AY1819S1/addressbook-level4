@@ -1,5 +1,6 @@
 package seedu.address.commons.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -9,6 +10,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
+
+import org.apache.commons.io.FileUtils;
 
 /**
  * Writes and reads files
@@ -44,6 +47,16 @@ public class FileUtil {
     }
 
     /**
+     * Copy all files and place it into another folder
+     * @param source the location of original file
+     * @param destination the new location of copied file
+     * @link https://stackoverflow.com/questions/1146153/copying-files-from-one-directory-to-another-in-java
+     */
+    public static void copyFile(File source, File destination) throws IOException {
+        FileUtils.copyDirectory(source, destination);
+    }
+
+    /**
      * Creates a file if it does not exist along with its missing parent directories.
      * @throws IOException if the file or directory cannot be created.
      */
@@ -60,9 +73,7 @@ public class FileUtil {
         if (Files.exists(file)) {
             return;
         }
-
         createParentDirsOfFile(file);
-
         Files.createFile(file);
     }
 
