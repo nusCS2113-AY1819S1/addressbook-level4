@@ -63,7 +63,7 @@ public abstract class FinancialPlannerSystemTest {
     public void setUp() {
         setupHelper = new SystemTestSetupHelper();
         testApp = setupHelper.setupApplication(this::getInitialData, getRecordListDataFileLocation(),
-                getLimitListDataFileLocation(), getSummaryMapDataFileLocation(), getDirectoryPathDataFileLocation());
+                getLimitListDataFileLocation(), getSummaryMapDataFileLocation());
         mainWindowHandle = setupHelper.setupMainWindowHandle();
 
         assertApplicationStartingStateIsCorrect();
@@ -92,18 +92,8 @@ public abstract class FinancialPlannerSystemTest {
         return TestApp.RECORD_LIST_LOCATION_FOR_TESTING;
     }
 
-    /**
-     * Returns the directory of the summary list data file.
-     */
     protected Path getSummaryMapDataFileLocation() {
         return TestApp.SUMMARY_MAP_LOCATION_FOR_TESTING;
-    }
-
-    /**
-     * Returns the directory of the directory path data file.
-     */
-    protected Path getDirectoryPathDataFileLocation() {
-        return TestApp.DIRECTORY_PATH_LOCATION_FOR_TESTING;
     }
 
     protected Path getLimitListDataFileLocation() {

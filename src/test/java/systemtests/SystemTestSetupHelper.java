@@ -14,8 +14,7 @@ import seedu.planner.model.ReadOnlyFinancialPlanner;
 /**
  * Contains helper methods that system tests require.
  */
-public class
-SystemTestSetupHelper {
+public class SystemTestSetupHelper {
     private TestApp testApp;
     private MainWindowHandle mainWindowHandle;
 
@@ -25,12 +24,11 @@ SystemTestSetupHelper {
     public TestApp setupApplication(Supplier<ReadOnlyFinancialPlanner> financialPlanner,
                                     Path recordListSaveFileLocation,
                                     Path limitListSaveFileLocation,
-                                    Path summaryListSaveFileLocation,
-                                    Path directoryPathSaveFileLocation) {
+                                    Path summaryListSaveFileLocation) {
         try {
             FxToolkit.registerStage(Stage::new);
             FxToolkit.setupApplication(() -> testApp = new TestApp(financialPlanner, recordListSaveFileLocation,
-                    limitListSaveFileLocation, summaryListSaveFileLocation, directoryPathSaveFileLocation));
+                    limitListSaveFileLocation, summaryListSaveFileLocation));
         } catch (TimeoutException te) {
             throw new AssertionError("Application takes too long to set up.", te);
         }

@@ -9,7 +9,6 @@ import com.google.common.eventbus.Subscribe;
 
 import seedu.planner.commons.core.ComponentManager;
 import seedu.planner.commons.core.LogsCenter;
-import seedu.planner.commons.events.model.DirectoryPathChangedEvent;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
 import seedu.planner.commons.events.model.LimitListChangedEvent;
 import seedu.planner.commons.events.model.SummaryMapChangedEvent;
@@ -18,7 +17,6 @@ import seedu.planner.commons.exceptions.DataConversionException;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.UserPrefs;
 import seedu.planner.model.record.DateBasedLimitList;
-import seedu.planner.model.record.DirectoryPath;
 import seedu.planner.model.record.UniqueRecordList;
 import seedu.planner.model.summary.SummaryMap;
 
@@ -68,10 +66,6 @@ public class StorageManager extends ComponentManager implements Storage {
         return financialPlannerStorage.getSummaryMapFilePath();
     }
 
-    @Override
-    public Path getDirectoryPathFilePath() {
-        return financialPlannerStorage.getDirectoryPathFilePath();
-    }
     //TODO: @ Oscar add your get filepath function here
 
     // ================ Financial Planner methods ===========================
@@ -79,34 +73,30 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     public Optional<ReadOnlyFinancialPlanner> readFinancialPlanner() throws DataConversionException, IOException {
         return readFinancialPlanner(financialPlannerStorage.getRecordListFilePath(),
-                financialPlannerStorage.getSummaryMapFilePath(), financialPlannerStorage.getDirectoryPathFilePath());
+                financialPlannerStorage.getSummaryMapFilePath());
     }
 
     @Override
     public Optional<ReadOnlyFinancialPlanner> readFinancialPlanner(Path recordListFilePath,
-                                                                   Path summaryMapFilePath,
-                                                                   Path directoryPathFilePath)
+                                                                   Path summaryMapFilePath)
             throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + recordListFilePath + " and "
                  + summaryMapFilePath);
-        return financialPlannerStorage.readFinancialPlanner(recordListFilePath,
-                                                            summaryMapFilePath,
-                                                            directoryPathFilePath);
+        return financialPlannerStorage.readFinancialPlanner(recordListFilePath, summaryMapFilePath);
     }
 
     @Override
     public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
         saveFinancialPlanner(financialPlanner, financialPlannerStorage.getRecordListFilePath(),
-                financialPlannerStorage.getSummaryMapFilePath(), financialPlannerStorage.getDirectoryPathFilePath());
+                financialPlannerStorage.getSummaryMapFilePath());
     }
 
     @Override
     public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner, Path recordListFilePath,
-                                     Path summaryMapFilePath, Path directoryPathFilePath) throws IOException {
+                                     Path summaryMapFilePath) throws IOException {
         logger.fine("Attempting to write to data file: " + recordListFilePath + " and "
                 + summaryMapFilePath);
-        financialPlannerStorage.saveFinancialPlanner(
-                financialPlanner, recordListFilePath, summaryMapFilePath, directoryPathFilePath);
+        financialPlannerStorage.saveFinancialPlanner(financialPlanner, recordListFilePath, summaryMapFilePath);
     }
 
     // ================ Record List methods ==============================
@@ -158,30 +148,6 @@ public class StorageManager extends ComponentManager implements Storage {
         financialPlannerStorage.saveSummaryMap(financialPlanner, filePath);
     }
 
-    // ================ DirectoryPath storage methods ==============================
-
-    @Override
-    public Optional<DirectoryPath> readDirectoryPath() throws DataConversionException, IOException {
-        return readDirectoryPath(financialPlannerStorage.getDirectoryPathFilePath());
-    }
-
-    @Override
-    public Optional<DirectoryPath> readDirectoryPath(Path filePath) throws DataConversionException, IOException {
-        logger.fine("Attempting to read data from file: " + filePath);
-        return financialPlannerStorage.readDirectoryPath(filePath);
-    }
-
-    @Override
-    public void saveDirectoryPath(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
-        saveDirectoryPath(financialPlanner, financialPlannerStorage.getDirectoryPathFilePath());
-    }
-
-    @Override
-    public void saveDirectoryPath(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException {
-        logger.fine("Attempting to write to data file: " + filePath);
-        financialPlannerStorage.saveDirectoryPath(financialPlanner, filePath);
-    }
-
     // ================================== Event management methods ================================
 
     @Override
@@ -206,16 +172,6 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
-    @Override
-    @Subscribe
-    public void handleDirectoryPathChangedEvent(DirectoryPathChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
-        try {
-            saveDirectoryPath(event.data);
-        } catch (IOException e) {
-            raise(new DataSavingExceptionEvent(e));
-        }
-    }
     // ================ LimitList storage methods ==============================
 
     @Override
