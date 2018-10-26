@@ -76,7 +76,7 @@ public class CheckExpenditureCommand extends Command {
                     total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
                 }
                 else if (((month1 == month) || (month2 == month)) && ((day1 <= day) && (day2 >= day))) {
-                        total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
+                    total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
                 }
             }
             index++;
