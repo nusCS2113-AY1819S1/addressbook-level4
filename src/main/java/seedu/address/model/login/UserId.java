@@ -3,6 +3,8 @@ package seedu.address.model.login;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.logic.LoginManager;
+
 /**
  * Represents an account's user ID in the login book.
  * Guarantees: immutable; is valid as declared in {@link #isValidUserId(String)}
@@ -28,6 +30,9 @@ public class UserId {
      */
     public UserId(String id) {
         requireNonNull(id);
+        if (LoginManager.getIsCreatingAccount()) {
+            checkArgument(isValidUserId(id), MESSAGE_USERID_CONSTRAINTS);
+        }
         checkArgument(isValidUserId(id), MESSAGE_USERID_CONSTRAINTS);
         fullUserId = id;
     }

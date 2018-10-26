@@ -333,6 +333,15 @@ image::LoginExtendedActivityDiagram.png[width="300"]
 * **Alternative 2:** Saves login credentials using JSON.
 ** Pros: Does not take up a lot of space.
 ** Cons: Harder to read.
+
+===== Aspect: Process flow of hashing of login details in the login process
+
+* **Alternative 1 (current choice):** Encodes input login details when the user is logging in to match the encoded state of login details in loginbook.xml.
+** Pros: Easier to read, and versioning is possible.
+** Cons: XML data file takes up more storage space.
+* **Alternative 2:** Decodes login details in loginbook.xml into normal strings to match the un-encoded state of login details from user input during login.
+** Pros: Does not take up a lot of space.
+** Cons: Harder to read.
 // end::login[]
 
 //tag::budget[]

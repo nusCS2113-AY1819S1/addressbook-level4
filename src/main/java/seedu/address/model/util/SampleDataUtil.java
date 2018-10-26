@@ -1,6 +1,8 @@
 package seedu.address.model.util;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -53,8 +55,18 @@ public class SampleDataUtil {
     }
 
     public static LoginDetails[] getSampleLoginDetails() {
+        String encryptedId = null;
+        String encryptedPassword = null;
+        String encryptedRole = null;
+        try {
+            encryptedId = Base64.getEncoder().encodeToString("A1234567M".getBytes("utf-8"));
+            encryptedPassword = Base64.getEncoder().encodeToString("zaq1xsw2cde3".getBytes("utf-8"));
+            encryptedRole = Base64.getEncoder().encodeToString("president".getBytes("utf-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         return new LoginDetails[] {
-            new LoginDetails(new UserId("A1234567M"), new UserPassword("zaq1xsw2cde3"), new UserRole("president"))
+            new LoginDetails(new UserId(encryptedId), new UserPassword(encryptedPassword), new UserRole(encryptedRole))
         };
     }
 

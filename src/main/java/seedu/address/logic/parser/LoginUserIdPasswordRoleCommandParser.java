@@ -2,8 +2,10 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 
 import seedu.address.logic.LoginManager;
@@ -30,8 +32,13 @@ public class LoginUserIdPasswordRoleCommandParser implements Parser<LoginCommand
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoginCommand.MESSAGE_USAGE));
         }
-
-        String[] keywords = trimmedArgs.split("\\s+");
+        String encryptedLoginInput = trimmedArgs;
+        try {
+            encryptedLoginInput = Base64.getEncoder().encodeToString(trimmedArgs.getBytes("utf-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        String[] keywords = encryptedLoginInput.split("\\s+");
         List<String> keywordsList = new ArrayList<>(Arrays.asList(keywords));
         return setRoleReturnLoginCommandObject(keywords, keywordsList);
     }

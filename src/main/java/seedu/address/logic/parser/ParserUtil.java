@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -41,7 +43,13 @@ public class ParserUtil {
         if (!UserId.isValidUserId(trimmeduserId)) {
             throw new ParseException(UserId.MESSAGE_USERID_CONSTRAINTS);
         }
-        return new UserId(trimmeduserId);
+        String encryptedId = trimmeduserId;
+        try {
+            encryptedId = Base64.getEncoder().encodeToString(trimmeduserId.getBytes("utf-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return new UserId(encryptedId);
     }
 
     /**
@@ -56,7 +64,13 @@ public class ParserUtil {
         if (!UserPassword.isValidUserPassword(trimmeduserPassword)) {
             throw new ParseException(UserPassword.MESSAGE_USERPASSWORD_CONSTRAINTS);
         }
-        return new UserPassword(trimmeduserPassword);
+        String encryptedPassword = trimmeduserPassword;
+        try {
+            encryptedPassword = Base64.getEncoder().encodeToString(trimmeduserPassword.getBytes("utf-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return new UserPassword(encryptedPassword);
     }
 
     /**
@@ -70,7 +84,13 @@ public class ParserUtil {
         if (!UserRole.isValidUserRole(trimmeduserRole)) {
             throw new ParseException(UserRole.MESSAGE_USERROLE_CONSTRAINTS);
         }
-        return new UserRole(trimmeduserRole);
+        String encryptedRole = trimmeduserRole;
+        try {
+            encryptedRole = Base64.getEncoder().encodeToString(trimmeduserRole.getBytes("utf-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return new UserRole(encryptedRole);
     }
 
     /**

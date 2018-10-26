@@ -5,12 +5,17 @@ package seedu.address.logic;
  */
 public class LoginManager {
 
+    private static boolean isCreatingAccount = false;
     private static boolean isLoginSuccessful = false;
     private static boolean isMember = false;
     private static boolean isPresident = false;
     private static boolean isTreasurer = false;
 
     public LoginManager() {}
+
+    public static boolean getIsCreatingAccount() {
+        return isCreatingAccount;
+    }
 
     public static boolean getIsLoginSuccessful() {
         return isLoginSuccessful;
@@ -26,6 +31,10 @@ public class LoginManager {
 
     public static boolean getIsTreasurer() {
         return isTreasurer;
+    }
+
+    public static void setIsCreatingAccount(boolean setCreatingAccount) {
+        isCreatingAccount = setCreatingAccount;
     }
 
     public static void setIsLoginSuccessful(boolean setLoginSuccessful) {
