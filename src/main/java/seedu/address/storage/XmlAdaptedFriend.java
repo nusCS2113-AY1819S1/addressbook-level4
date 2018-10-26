@@ -7,7 +7,7 @@ import seedu.address.model.person.Friend;
 import seedu.address.model.person.Name;
 
 /**
- * Constructs a Friend
+ * Constructs a friend
  */
 public class XmlAdaptedFriend {
     @XmlValue
