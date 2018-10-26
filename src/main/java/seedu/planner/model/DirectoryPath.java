@@ -177,7 +177,7 @@ public class DirectoryPath {
     }
 
     public String getDirectoryPathValue() {
-        return value;
+        return (value == null) ? HOME_DIRECTORY_STRING : value;
     }
 
     public static String getDefaultWorkingDirectoryValue() {

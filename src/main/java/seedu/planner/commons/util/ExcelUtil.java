@@ -112,6 +112,8 @@ public class ExcelUtil {
         if (nameString == null || dateString == null || moneyString == null) {
             throw new ParseException(Messages.MESSAGE_INVALID_ENTRY_EXCEL_FILE);
         }
+        // For positive number, the "+" will be discarded when you try to add money into Financial Planner --> error.
+        moneyString = (moneyString.charAt(0) == '-') ? (moneyString) : ("+" + moneyString);
         logger.info(nameString + " " + dateString + " " + moneyString + " " + tagsString);
         return createRecord(nameString, dateString, moneyString, tagsString);
     }

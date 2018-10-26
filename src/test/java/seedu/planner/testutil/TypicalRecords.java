@@ -33,7 +33,7 @@ public class TypicalRecords {
     public static final Record MALA = new RecordBuilder().withName("Payment for mala")
             .withMoneyFlow("-10.50").withDate("26-9-2018").build();
     public static final Record CHICKENRICE = new RecordBuilder().withName("Payment for chicken rice")
-            .withMoneyFlow("-0.90").withDate("27-9-2018").build();
+            .withMoneyFlow("-0.00").withDate("27-9-2018").build();
     public static final Record RANDOM = new RecordBuilder().withName("Random income")
             .withMoneyFlow("+14.50").withDate("31-03-2018").build();
 
@@ -56,7 +56,9 @@ public class TypicalRecords {
     public static final Date TYPICAL_END_DATE = new Date("26-9-2018");
 
     public static final Date TYPICAL_START_DATE1 = new Date ("31-03-1999");
-    public static final Date TYPICAL_END_DATE1 = new Date ("31-3-2019");
+    public static final Date TYPICAL_END_DATE1 = new Date ("31-3-2000");
+    public static final Date TYPICAL_START_FAR_DATE = new Date("1-1-0000");
+    public static final Date TYPICAL_END_FAR_DATE = new Date ("31-12-9999");
 
     public static final Date OUT_OF_BOUND_DATE = new Date ("30-03-2018");
 

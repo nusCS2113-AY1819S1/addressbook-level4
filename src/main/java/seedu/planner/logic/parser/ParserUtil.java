@@ -139,13 +139,12 @@ public class ParserUtil {
     /**
      * Parses {@code Directory Path} into a {@code DirectoryPath}
      */
-    public static DirectoryPath parseDirectory(String dirPath) throws ParseException {
+    public static String parseDirectoryString(String dirPath) throws ParseException {
         requireNonNull(dirPath);
         if (DirectoryPath.isValidDirectory(dirPath)) {
-            final DirectoryPath directoryPath = new DirectoryPath(dirPath);
-            return directoryPath;
+            return dirPath;
         }
-        return null;
+        return DirectoryPath.HOME_DIRECTORY_STRING;
     }
 
     /**

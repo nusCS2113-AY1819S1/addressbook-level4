@@ -1,12 +1,8 @@
 package seedu.planner.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.planner.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.planner.testutil.TypicalRecords.CAIFAN;
-import static seedu.planner.testutil.TypicalRecords.CHICKENRICE;
-import static seedu.planner.testutil.TypicalRecords.MALA;
-import static seedu.planner.testutil.TypicalRecords.WORK;
-import static seedu.planner.testutil.TypicalRecords.ZT;
 import static seedu.planner.testutil.TypicalRecords.getTypicalFinancialPlanner;
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,11 +11,15 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import seedu.planner.commons.core.Messages;
+import seedu.planner.commons.util.ExcelUtil;
 import seedu.planner.logic.CommandHistory;
+import seedu.planner.model.DirectoryPath;
 import seedu.planner.model.Model;
 import seedu.planner.model.ModelManager;
 import seedu.planner.model.UserPrefs;
+import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
+import seedu.planner.testutil.TypicalRecords;
 
 public class ExportExcelCommandTest {
     private Model model = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());
@@ -28,64 +28,78 @@ public class ExportExcelCommandTest {
 
     @Test
     public void equals() {
-        DateIsWithinIntervalPredicate firstPredicate = new DateIsWithinIntervalPredicate("26-09-2018", "27-09-2018");
-        DateIsWithinIntervalPredicate firstPredicateCopy = new DateIsWithinIntervalPredicate("26-9-2018", "27-9-2018");
-        DateIsWithinIntervalPredicate secondPredicate = new DateIsWithinIntervalPredicate("15-06-1987", "15-06-2019");
+        Date startDate_1 = TypicalRecords.TYPICAL_START_DATE1;
+        Date startDate_2 = TypicalRecords.TYPICAL_START_DATE1;
+        Date endDate_1 = TypicalRecords.TYPICAL_END_DATE;
+        Date endDate_2 = TypicalRecords.TYPICAL_END_DATE1;
+        DirectoryPath directoryPath = DirectoryPath.HOME_DIRECTORY;
+        DirectoryPath directoryPath1 = DirectoryPath.WORKING_DIRECTORY;
 
-        ExportExcelCommand firstExportExcelCommand = new ExportExcelCommand(firstPredicate);
-        ExportExcelCommand secondExportExcelCommand = new ExportExcelCommand(secondPredicate);
+        ExportExcelCommand exportExcelCommand_1_1 = new ExportExcelCommand();
+        ExportExcelCommand exportExcelCommand_2_1 = new ExportExcelCommand(directoryPath);
+        ExportExcelCommand exportExcelCommand_3_1 = new ExportExcelCommand(startDate_1, endDate_1);
+        ExportExcelCommand exportExcelCommand_4_1 = new ExportExcelCommand(startDate_1, endDate_1, directoryPath);
+
+        ExportExcelCommand exportExcelCommand_2_2 = new ExportExcelCommand(directoryPath1);
+        ExportExcelCommand exportExcelCommand_3_2 = new ExportExcelCommand(startDate_2, endDate_2);
+        ExportExcelCommand exportExcelCommand_4_2 = new ExportExcelCommand(startDate_2, endDate_2, directoryPath1);
 
         // same object -> returns true
-        Assert.assertTrue(firstPredicate.equals(firstPredicate));
-
-        // same value expression -> returns true
-        Assert.assertTrue(firstPredicate.equals(firstPredicateCopy));
+        Assert.assertTrue(exportExcelCommand_1_1.equals(exportExcelCommand_1_1));
+        Assert.assertTrue(exportExcelCommand_2_1.equals(exportExcelCommand_2_1));
+        Assert.assertTrue(exportExcelCommand_3_1.equals(exportExcelCommand_3_1));
+        Assert.assertTrue(exportExcelCommand_4_1.equals(exportExcelCommand_4_1));
 
         // same value -> returns true
-        ExportExcelCommand firstExportExcelCommandCopy = new ExportExcelCommand(firstPredicate);
-        Assert.assertTrue(firstExportExcelCommand.equals(firstExportExcelCommandCopy));
+        ExportExcelCommand exportExcelCommand_1_1_Copy = new ExportExcelCommand();
+        ExportExcelCommand exportExcelCommand_2_1_Copy = new ExportExcelCommand(directoryPath);
+        ExportExcelCommand exportExcelCommand_3_1_Copy = new ExportExcelCommand(startDate_1, endDate_1);
+        ExportExcelCommand exportExcelCommand_4_1_Copy = new ExportExcelCommand(startDate_1, endDate_1, directoryPath);
+
+        Assert.assertTrue(exportExcelCommand_1_1.equals(exportExcelCommand_1_1_Copy));
+        Assert.assertTrue(exportExcelCommand_2_1.equals(exportExcelCommand_2_1_Copy));
+        Assert.assertTrue(exportExcelCommand_3_1.equals(exportExcelCommand_3_1_Copy));
+        Assert.assertTrue(exportExcelCommand_4_1.equals(exportExcelCommand_4_1_Copy));
 
         //different value -> returns false
-        Assert.assertFalse(firstExportExcelCommand.equals(secondExportExcelCommand));
+        Assert.assertFalse(exportExcelCommand_3_1.equals(exportExcelCommand_3_2));
+        Assert.assertFalse(exportExcelCommand_4_1.equals(exportExcelCommand_4_2));
 
         // different types -> returns false
-        Assert.assertFalse(firstPredicate.equals(Arrays.asList("31-03-1999", "31-3-2019")));
+        Assert.assertFalse(exportExcelCommand_4_1.equals(Arrays.asList(startDate_1, endDate_1, directoryPath)));
 
         // null -> returns false
-        Assert.assertFalse(firstPredicate.equals(null));
-
-        // different predicate -> return false
-        Assert.assertFalse(firstPredicate.equals(secondPredicate));
+        Assert.assertFalse(exportExcelCommand_1_1.equals(null));
     }
 
     @Test
     public void execute_zeroRecordFound_noRecordFound() {
-        DateIsWithinIntervalPredicate predicate = preparePredicate("31-3-1999", "31-03-1999");
-        String nameFile = String.format("Financial_Planner_%1$s_%2$s.xlsx",
-                predicate.getStartDate().getValue(), predicate.getEndDate().getValue());
-        String expectedMessage = String.format(Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY, nameFile);
-        ExportExcelCommand command = new ExportExcelCommand(predicate);
-        expectedModel.updateFilteredRecordList(predicate);
+        String nameFile = ExcelUtil.setNameExcelFile(
+                TypicalRecords.TYPICAL_START_DATE1, TypicalRecords.TYPICAL_END_DATE1);
+        DirectoryPath directoryPath = DirectoryPath.HOME_DIRECTORY;
+        String expectedMessage = String.format(
+                Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY,
+                nameFile, DirectoryPath.HOME_DIRECTORY.getDirectoryPathValue());
+        ExportExcelCommand command = new ExportExcelCommand(
+                TypicalRecords.TYPICAL_START_DATE1, TypicalRecords.TYPICAL_END_DATE1, directoryPath);
+        expectedModel.updateFilteredRecordList(new DateIsWithinIntervalPredicate(
+                TypicalRecords.TYPICAL_START_DATE1, TypicalRecords.TYPICAL_END_DATE1));
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredRecordList());
     }
 
     @Test
     public void execute_multipleRecordsFound() {
-        DateIsWithinIntervalPredicate predicate = preparePredicate("26-09-1999", "27-9-2019");
-        String nameFile = String.format("Financial_Planner_%1$s_%2$s.xlsx",
-                predicate.getStartDate().getValue(), predicate.getEndDate().getValue());
-        String expectedMessage = String.format(Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY, nameFile);
-        ExportExcelCommand command = new ExportExcelCommand(predicate);
-        expectedModel.updateFilteredRecordList(predicate);
+        String nameFile = ExcelUtil.setNameExcelFile(
+                TypicalRecords.TYPICAL_START_FAR_DATE, TypicalRecords.TYPICAL_END_FAR_DATE);
+        DirectoryPath directoryPath = DirectoryPath.HOME_DIRECTORY;
+        String expectedMessage = String.format(
+                Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY,
+                nameFile, DirectoryPath.HOME_DIRECTORY.getDirectoryPath().getDirectoryPathValue());
+        ExportExcelCommand command = new ExportExcelCommand(
+                TypicalRecords.TYPICAL_START_FAR_DATE, TypicalRecords.TYPICAL_END_FAR_DATE, directoryPath);
+        expectedModel.updateFilteredRecordList(new DateIsWithinIntervalPredicate(
+                TypicalRecords.TYPICAL_START_FAR_DATE, TypicalRecords.TYPICAL_END_FAR_DATE));
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(expectedModel.getFilteredRecordList(), model.getFilteredRecordList());
-    }
-
-    /**
-     * Parses {@code userInput} into a {@code DateIsWithinIntervalPredicate}.
-     */
-    private DateIsWithinIntervalPredicate preparePredicate(String startDate, String endDate) {
-        return new DateIsWithinIntervalPredicate(startDate, endDate);
     }
 }

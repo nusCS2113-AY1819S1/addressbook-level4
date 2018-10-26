@@ -10,7 +10,6 @@ import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.core.Messages;
 import seedu.planner.logic.commands.ExportExcelCommand;
 import seedu.planner.logic.parser.exceptions.ParseException;
-import seedu.planner.model.DirectoryPath;
 import seedu.planner.model.record.Date;
 
 /**
@@ -25,51 +24,63 @@ public class ExportExcelCommandParser implements Parser<ExportExcelCommand> {
      * @throws ParseException if the user input does not conform the expected format.
      */
     public ExportExcelCommand parse(String args) throws ParseException {
-        Date startDate;
-        Date endDate;
+        String stringDate = " ";
+        String stringPath = " ";
         String trimmedArgs = args.trim();
         logger.info(trimmedArgs);
         if (args.isEmpty()) {
             return new ExportExcelCommand();
         } else {
             ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_DIR);
-            String stringDate = null;
-            String stringPath = null;
             if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-                stringDate = argMultimap.getValue(PREFIX_DATE).get().trim();
+                stringDate += argMultimap.getValue(PREFIX_DATE).get();
             }
             if (argMultimap.getValue(PREFIX_DIR).isPresent()) {
-                stringPath = argMultimap.getValue(PREFIX_DIR).get().trim();
+                stringPath += argMultimap.getValue(PREFIX_DIR).get();
             }
-            if (stringDate == null && stringPath == null) {
+            logger.info("stringDate: " + stringDate + " stringPath: " + stringPath);
+        }
+        return parseArgumentsModeIntoCommand(args, stringDate, stringPath);
+    }
+
+    /**
+     * Parse the arguments into different argument mode, hence, we will have different command mode.
+     */
+    private static ExportExcelCommand parseArgumentsModeIntoCommand (String args, String stringDate, String stringPath)
+            throws ParseException {
+        Date startDate;
+        Date endDate;
+        String directoryPath;
+        if (stringDate == null && stringPath == null) {
                 return new ExportExcelCommand();
-            } else if (stringDate == null) {
-                DirectoryPath directoryPath = ParserUtil.parseDirectory(stringPath.trim());
-                return new ExportExcelCommand(directoryPath);
+        } else if (stringDate == null) {
+            directoryPath = ParserUtil.parseDirectoryString(stringPath.trim());
+            return new ExportExcelCommand(directoryPath);
+        } else {
+            String[] dates = splitByWhitespace(stringDate.trim());
+            int dateNum = Arrays.asList(dates).size();
+            if (dateNum > 2) {
+                throw new ParseException(
+                        String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT
+                                + Messages.MESSAGE_INVALID_DATE_REQUIRED, ExportExcelCommand.MESSAGE_USAGE));
+            } else if (dateNum == 1) {
+                logger.info("HELLO :) BEFORE PARSE");
+                startDate = ParserUtil.parseDate(Arrays.asList(dates).get(0).trim());
+                endDate = ParserUtil.parseDate(Arrays.asList(dates).get(0).trim());
             } else {
-                String[] dates = splitByWhitespace(stringDate);
-                int dateNum = Arrays.asList(dates).size();
-                if (dateNum > 2) {
-                    throw new ParseException(
-                            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT
-                                    + Messages.MESSAGE_INVALID_DATE_REQUIRED, ExportExcelCommand.MESSAGE_USAGE));
-                } else if (dateNum == 1) {
-                    startDate = ParserUtil.parseDate(Arrays.asList(dates).get(0));
-                    endDate = ParserUtil.parseDate(Arrays.asList(dates).get(0));
+                logger.info("HELLO :) BEFORE PARSE");
+                startDate = ParserUtil.parseDate(Arrays.asList(dates).get(0).trim());
+                endDate = ParserUtil.parseDate(Arrays.asList(dates).get(1).trim());
+            }
+            if (isDateOrderValid(startDate, endDate)) {
+                if (stringPath == null) {
+                    return new ExportExcelCommand(startDate, endDate);
                 } else {
-                    startDate = ParserUtil.parseDate(Arrays.asList(dates).get(0));
-                    endDate = ParserUtil.parseDate(Arrays.asList(dates).get(1));
+                    directoryPath = ParserUtil.parseDirectoryString(stringPath.trim());
+                    return new ExportExcelCommand(startDate, endDate, directoryPath);
                 }
-                if (isDateOrderValid(startDate, endDate)) {
-                    if (stringPath == null) {
-                        return new ExportExcelCommand(startDate, endDate);
-                    } else {
-                        DirectoryPath directoryPath = ParserUtil.parseDirectory(stringPath.trim());
-                        return new ExportExcelCommand(startDate, endDate, directoryPath);
-                    }
-                } else {
-                    throw new ParseException(Messages.MESSAGE_INVALID_STARTDATE_ENDDATE);
-                }
+            } else {
+                throw new ParseException(Messages.MESSAGE_INVALID_STARTDATE_ENDDATE);
             }
         }
     }
