@@ -12,8 +12,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalBooks.getTypicalBookInventory;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_BOOK;
 
 import org.junit.Test;
 
@@ -41,7 +41,7 @@ public class EditCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Book editedBook = new BookBuilder().build();
         EditCommand.EditBookDescriptor descriptor = new EditBookDescriptorBuilder(editedBook).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_BOOK, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BOOK_SUCCESS, editedBook);
 
@@ -76,8 +76,8 @@ public class EditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditBookDescriptor());
-        Book editedBook = model.getFilteredBookList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_BOOK, new EditBookDescriptor());
+        Book editedBook = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BOOK_SUCCESS, editedBook);
 
@@ -89,11 +89,11 @@ public class EditCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST_BOOK);
 
-        Book bookInFilteredList = model.getFilteredBookList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Book bookInFilteredList = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
         Book editedBook = new BookBuilder(bookInFilteredList).withName(VALID_NAME_BOB).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_BOOK,
                 new EditBookDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BOOK_SUCCESS, editedBook);
@@ -107,19 +107,19 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
-        Book firstBook = model.getFilteredBookList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Book firstBook = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
         EditBookDescriptor descriptor = new EditBookDescriptorBuilder(firstBook).build();
-        EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_BOOK, descriptor);
         assertCommandFailure(editCommand, model, commandHistory, EditCommand.MESSAGE_DUPLICATE_BOOK);
     }
 
     @Test
     public void execute_duplicatePersonFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST_BOOK);
 
         // edit book in filtered list into a duplicate in BookInventory
-        Book bookInList = model.getBookInventory().getBookList().get(INDEX_SECOND_PERSON.getZeroBased());
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
+        Book bookInList = model.getBookInventory().getBookList().get(INDEX_SECOND_BOOK.getZeroBased());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_BOOK,
                 new EditBookDescriptorBuilder(bookInList).build());
 
         assertCommandFailure(editCommand, model, commandHistory, EditCommand.MESSAGE_DUPLICATE_BOOK);
@@ -140,8 +140,8 @@ public class EditCommandTest {
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        showPersonAtIndex(model, INDEX_FIRST_BOOK);
+        Index outOfBoundIndex = INDEX_SECOND_BOOK;
         // ensures that outOfBoundIndex is still in bounds of BookInventory list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getBookInventory().getBookList().size());
 
@@ -154,9 +154,9 @@ public class EditCommandTest {
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Book editedBook = new BookBuilder().build();
-        Book bookToEdit = model.getFilteredBookList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Book bookToEdit = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
         EditBookDescriptor descriptor = new EditBookDescriptorBuilder(editedBook).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_BOOK, descriptor);
         Model expectedModel = new ModelManager(new BookInventory(model.getBookInventory()), new UserPrefs());
         expectedModel.updateBook(bookToEdit, editedBook);
         expectedModel.commitBookInventory();
@@ -198,11 +198,11 @@ public class EditCommandTest {
     public void executeUndoRedo_validIndexFilteredList_samePersonEdited() throws Exception {
         Book editedBook = new BookBuilder().build();
         EditCommand.EditBookDescriptor descriptor = new EditBookDescriptorBuilder(editedBook).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_BOOK, descriptor);
         Model expectedModel = new ModelManager(new BookInventory(model.getBookInventory()), new UserPrefs());
 
-        showPersonAtIndex(model, INDEX_SECOND_PERSON);
-        Book bookToEdit = model.getFilteredBookList().get(INDEX_FIRST_PERSON.getZeroBased());
+        showPersonAtIndex(model, INDEX_SECOND_BOOK);
+        Book bookToEdit = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
         expectedModel.updateBook(bookToEdit, editedBook);
         expectedModel.commitBookInventory();
 
@@ -213,7 +213,7 @@ public class EditCommandTest {
         expectedModel.undoAddressBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        assertNotEquals(model.getFilteredBookList().get(INDEX_FIRST_PERSON.getZeroBased()), bookToEdit);
+        assertNotEquals(model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased()), bookToEdit);
         // redo -> edits same second book in unfiltered book list
         expectedModel.redoAddressBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
@@ -221,11 +221,11 @@ public class EditCommandTest {
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_AMY);
+        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_BOOK, DESC_AMY);
 
         // same values -> returns true
         EditBookDescriptor copyDescriptor = new EditCommand.EditBookDescriptor(DESC_AMY);
-        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_PERSON, copyDescriptor);
+        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_BOOK, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -238,10 +238,10 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_PERSON, DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_BOOK, DESC_AMY)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_BOB)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_BOOK, DESC_BOB)));
     }
 
 }

@@ -8,7 +8,7 @@
 //import static seedu.address.testutil.TestUtil.getLastIndex;
 //import static seedu.address.testutil.TestUtil.getMidIndex;
 //import static seedu.address.testutil.TypicalBooks.KEYWORD_MATCHING_MEIER;
-//import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+//import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
 //
 //import org.junit.Test;
 //
@@ -26,8 +26,8 @@
 //        /* Case: select the first card in the book list, command with leading spaces and trailing spaces
 //         * -> selected
 //         */
-//        String command = "   " + SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + "   ";
-//        assertCommandSuccess(command, INDEX_FIRST_PERSON);
+//        String command = "   " + SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_BOOK.getOneBased() + "   ";
+//        assertCommandSuccess(command, INDEX_FIRST_BOOK);
 //
 //        /* Case: select the last card in the book list -> selected */
 //        Index personCount = getLastIndex(getModel());
@@ -94,7 +94,7 @@
 //
 //        /* Case: select from empty BookInventory -> rejected */
 //        deleteAllPersons();
-//        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
+//        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_BOOK.getOneBased(),
 //                MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
 //    }
 //

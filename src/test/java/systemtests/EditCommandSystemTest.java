@@ -28,8 +28,8 @@
 //import static seedu.address.testutil.TypicalBooks.AMY;
 //import static seedu.address.testutil.TypicalBooks.BOB;
 //import static seedu.address.testutil.TypicalBooks.KEYWORD_MATCHING_MEIER;
-//import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-//import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+//import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
+//import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_BOOK;
 //
 //import org.junit.Test;
 //
@@ -60,7 +60,7 @@
 //        /* Case: edit all fields, command with leading spaces, trailing spaces and multiple spaces between each field
 //         * -> edited
 //         */
-//        Index index = INDEX_FIRST_PERSON;
+//        Index index = INDEX_FIRST_BOOK;
 //        String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_BOB + "  "
 //                + ISBN_DESC_BOB + " " + PRICE_DESC_BOB + "  " + QUANTITY_DESC_BOB + " " + TAG_DESC_HUSBAND + " ";
 //        Book editedBook = new BookBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
@@ -75,7 +75,7 @@
 //        command = RedoCommand.COMMAND_WORD;
 //        expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
 //        model.updateBook(
-//                getModel().getFilteredBookList().get(INDEX_FIRST_PERSON.getZeroBased()), editedBook);
+//                getModel().getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased()), editedBook);
 //        assertCommandSuccess(command, model, expectedResultMessage);
 //
 //        /* Case: edit a book with new values same as existing values -> edited */
@@ -86,7 +86,7 @@
 //
 //        /* Case: edit a book with new values same as another book's values but with different name -> edited */
 //        assertTrue(getModel().getBookInventory().getBookList().contains(BOB));
-//        index = INDEX_SECOND_PERSON;
+//        index = INDEX_SECOND_BOOK;
 //        assertNotEquals(getModel().getFilteredBookList().get(index.getZeroBased()), BOB);
 //        command = EditCommand.COMMAND_WORD + " " + index.getOneBased()
 // + NAME_DESC_AMY + ISBN_DESC_BOB + PRICE_DESC_BOB
@@ -97,7 +97,7 @@
 //        /* Case: edit a book with new values same as another book's values but with different phone and email
 //         * -> edited
 //         */
-//        index = INDEX_SECOND_PERSON;
+//        index = INDEX_SECOND_BOOK;
 //        command = EditCommand.COMMAND_WORD + " " + index.getOneBased()
 // + NAME_DESC_BOB + ISBN_DESC_AMY + PRICE_DESC_AMY
 //                + QUANTITY_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
@@ -105,7 +105,7 @@
 //        assertCommandSuccess(command, index, editedBook);
 //
 //        /* Case: clear tags -> cleared */
-//        index = INDEX_FIRST_PERSON;
+//        index = INDEX_FIRST_BOOK;
 //        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_TAG.getPrefix();
 //        Book bookToEdit = getModel().getFilteredBookList().get(index.getZeroBased());
 //        editedBook = new BookBuilder(bookToEdit).withTags().build();
@@ -116,7 +116,7 @@
 //
 //        /* Case: filtered book list, edit index within bounds of BookInventory and book list -> edited */
 //        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-//        index = INDEX_FIRST_PERSON;
+//        index = INDEX_FIRST_BOOK;
 //        assertTrue(index.getZeroBased() < getModel().getFilteredBookList().size());
 //        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_BOB;
 //        bookToEdit = getModel().getFilteredBookList().get(index.getZeroBased());
@@ -137,7 +137,7 @@
 //         * browser url changes
 //         */
 //        showAllPersons();
-//        index = INDEX_FIRST_PERSON;
+//        index = INDEX_FIRST_BOOK;
 //        selectPerson(index);
 //        command = EditCommand.COMMAND_WORD + " " + index.getOneBased()
 // + NAME_DESC_AMY + ISBN_DESC_AMY + PRICE_DESC_AMY
@@ -167,34 +167,34 @@
 //                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
 //
 //        /* Case: missing all fields -> rejected */
-//        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
+//        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_BOOK.getOneBased(),
 //                EditCommand.MESSAGE_NOT_EDITED);
 //
 //        /* Case: invalid name -> rejected */
-//        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_NAME_DESC,
+//        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_BOOK.getOneBased() + INVALID_NAME_DESC,
 //                Name.MESSAGE_NAME_CONSTRAINTS);
 //
 //        /* Case: invalid phone -> rejected */
-//        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_ISBN_DESC,
+//        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_BOOK.getOneBased() + INVALID_ISBN_DESC,
 //                Isbn.MESSAGE_ISBN_CONSTRAINTS);
 //
 //        /* Case: invalid email -> rejected */
-//        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_PRICE_DESC,
+//        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_BOOK.getOneBased() + INVALID_PRICE_DESC,
 //                Price.MESSAGE_PRICE_CONSTRAINTS);
 //
 //        /* Case: invalid address -> rejected */
 //        assertCommandFailure(EditCommand.COMMAND_WORD + " " +
-// INDEX_FIRST_PERSON.getOneBased() + INVALID_QUANTITY_DESC,
+// INDEX_FIRST_BOOK.getOneBased() + INVALID_QUANTITY_DESC,
 //                Quantity.MESSAGE_QUANTITY_CONSTRAINTS);
 //
 //        /* Case: invalid tag -> rejected */
-//        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_TAG_DESC,
+//        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_BOOK.getOneBased() + INVALID_TAG_DESC,
 //                Tag.MESSAGE_TAG_CONSTRAINTS);
 //
 //        /* Case: edit a book with new values same as another book's values -> rejected */
 //        executeCommand(BookUtil.getAddCommand(BOB));
 //        assertTrue(getModel().getBookInventory().getBookList().contains(BOB));
-//        index = INDEX_FIRST_PERSON;
+//        index = INDEX_FIRST_BOOK;
 //        assertFalse(getModel().getFilteredBookList().get(index.getZeroBased()).equals(BOB));
 //        command = EditCommand.COMMAND_WORD + " " + index.getOneBased()
 // + NAME_DESC_BOB + ISBN_DESC_BOB + PRICE_DESC_BOB
