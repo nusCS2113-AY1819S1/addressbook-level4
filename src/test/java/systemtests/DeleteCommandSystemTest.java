@@ -8,7 +8,7 @@
 //import static seedu.address.testutil.TestUtil.getMidIndex;
 //import static seedu.address.testutil.TestUtil.getPerson;
 //import static seedu.address.testutil.TypicalBooks.KEYWORD_MATCHING_MEIER;
-//import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+//import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
 //
 //import org.junit.Test;
 //
@@ -33,8 +33,8 @@
 //        /* Case: delete the first book in the list, command with leading spaces and trailing spaces -> deleted */
 //        Model expectedModel = getModel();
 //        String command = "     " + DeleteCommand.COMMAND_WORD + "      " +
-// INDEX_FIRST_PERSON.getOneBased() + "       ";
-//        Book deletedBook = removeBook(expectedModel, INDEX_FIRST_PERSON);
+// INDEX_FIRST_BOOK.getOneBased() + "       ";
+//        Book deletedBook = removeBook(expectedModel, INDEX_FIRST_BOOK);
 //        String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedBook);
 //        // assertCommandSuccess(command, expectedModel, expectedResultMessage);
 //
@@ -63,7 +63,7 @@
 //
 //        /* Case: filtered book list, delete index within bounds of BookInventory and book list -> deleted */
 //        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-//        Index index = INDEX_FIRST_PERSON;
+//        Index index = INDEX_FIRST_BOOK;
 //        assertTrue(index.getZeroBased() < getModel().getFilteredBookList().size());
 //        assertCommandSuccess(index);
 //
