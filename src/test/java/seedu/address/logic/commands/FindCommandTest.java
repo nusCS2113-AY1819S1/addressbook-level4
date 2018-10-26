@@ -5,7 +5,14 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
@@ -16,6 +23,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import org.junit.Test;
 
@@ -24,8 +32,15 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.ClosestMatchList;
+import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.NoteContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.PhoneContainsKeywordPredicate;
+import seedu.address.model.person.PositionContainsKeywordsPredicate;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -100,6 +115,76 @@ public class FindCommandTest {
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
     }
+
+    //@@author lws803
+    @Test
+    public void execute_multipleAttributes_multiplePersonsFound() {
+        Map<Prefix, String[]> prefixKeywordMap = new HashMap<>();
+        String[] names = {"Kurz", "Kunz"};
+        String[] phones = {"95352563"};
+        prefixKeywordMap.put(PREFIX_NAME, names);
+        prefixKeywordMap.put(PREFIX_PHONE, phones);
+
+        Set<Prefix> keys = prefixKeywordMap.keySet();
+        Prefix[] types = keys.toArray(new Prefix[0]);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+
+        Predicate<Person> combinedPredicate = PREDICATE_SHOW_ALL_PERSONS;
+        FindCommand command = new FindCommand(prefixKeywordMap, keys.toArray(new Prefix[0]));
+
+        combinedPredicate = getPersonPredicate(prefixKeywordMap, types, combinedPredicate);
+
+        expectedModel.updateFilteredPersonList(combinedPredicate);
+        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL), model.getFilteredPersonList());
+    }
+
+    /**
+     * Gets the person's predicate based on attributes
+     * @param prefixKeywordMap
+     * @param types
+     * @param combinedPredicate
+     * @return
+     */
+    private Predicate<Person> getPersonPredicate(Map<Prefix, String[]> prefixKeywordMap, Prefix[] types, Predicate<Person> combinedPredicate) {
+        for (Prefix type : types) {
+            ClosestMatchList closestMatch = new ClosestMatchList(model, type, prefixKeywordMap.get(type));
+            String[] approvedList = closestMatch.getApprovedList();
+
+            if (type == PREFIX_PHONE) {
+                combinedPredicate = combinedPredicate.and(
+                        new PhoneContainsKeywordPredicate(Arrays.asList(approvedList))
+                );
+            } else if (type == PREFIX_NAME) {
+                combinedPredicate = combinedPredicate.and(
+                        new NameContainsKeywordsPredicate(Arrays.asList(approvedList))
+                );
+            } else if (type == PREFIX_ADDRESS) {
+                combinedPredicate = combinedPredicate.and(
+                        new AddressContainsKeywordsPredicate(Arrays.asList(approvedList))
+                );
+            } else if (type == PREFIX_EMAIL) {
+                combinedPredicate = combinedPredicate.and(
+                        new EmailContainsKeywordsPredicate(Arrays.asList(approvedList))
+                );
+            } else if (type == PREFIX_NOTE) {
+                combinedPredicate = combinedPredicate.and(
+                        new NoteContainsKeywordsPredicate(Arrays.asList(approvedList))
+                );
+            } else if (type == PREFIX_POSITION) {
+                combinedPredicate = combinedPredicate.and(
+                        new PositionContainsKeywordsPredicate(Arrays.asList(approvedList))
+                );
+            } else if (type == PREFIX_TAG) {
+                combinedPredicate = combinedPredicate.and(
+                        new TagContainsKeywordsPredicate(Arrays.asList(approvedList))
+                );
+            }
+        }
+        return combinedPredicate;
+    }
+    //@@author
+
 
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.

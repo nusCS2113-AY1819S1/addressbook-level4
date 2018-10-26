@@ -69,6 +69,21 @@ public class FindCommand extends Command {
 
         Predicate<Person> combinedPredicate = PREDICATE_SHOW_ALL_PERSONS;
 
+        combinedPredicate = getPersonPredicate(model, combinedPredicate);
+
+        model.updateFilteredPersonList(combinedPredicate);
+
+        return new CommandResult(
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+    }
+
+    /**
+     * Gets the person's predicate based on attributes
+     * @param model
+     * @param combinedPredicate
+     * @return
+     */
+    private Predicate<Person> getPersonPredicate(Model model, Predicate<Person> combinedPredicate) {
         for (Prefix type : types) {
             ClosestMatchList closestMatch = new ClosestMatchList(model, type, prefixKeywordMap.get(type));
             String[] approvedList = closestMatch.getApprovedList();
@@ -103,11 +118,7 @@ public class FindCommand extends Command {
                 );
             }
         }
-
-        model.updateFilteredPersonList(combinedPredicate);
-
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+        return combinedPredicate;
     }
 
     @Override
