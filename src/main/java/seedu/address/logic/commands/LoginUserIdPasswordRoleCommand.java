@@ -58,10 +58,14 @@ public class LoginUserIdPasswordRoleCommand extends LoginCommand {
      * @param model the current model being used to filter the accounts list
      */
     private void updateFilteredAccountList(Model model) {
+        System.out.println(model.getFilteredLoginDetailsList().size());
         Predicate updatedIdPredicate = getMostUpdatedIdPredicate(getIdPredicate());
+        System.out.println(updatedIdPredicate);
         model.updateFilteredLoginDetailsList(updatedIdPredicate);
+        System.out.println(model.getFilteredLoginDetailsList().size());
         Predicate updatedPasswordPredicate = getMostUpdatedPasswordPredicate(getPasswordPredicate());
         model.updateFilteredLoginDetailsList(updatedPasswordPredicate);
+        System.out.println(model.getFilteredLoginDetailsList().size());
         Predicate updatedRolePredicate = getMostUpdatedRolePredicate(getRolePredicate());
         model.updateFilteredLoginDetailsList(updatedRolePredicate);
     }

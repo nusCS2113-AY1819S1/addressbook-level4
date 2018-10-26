@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Base64;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -37,19 +36,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code userId} is invalid.
      */
-    public static UserId parseUserId(String userId) throws ParseException {
+    public static UserId parseUserId(String userId) throws ParseException, UnsupportedEncodingException {
         requireNonNull(userId);
         String trimmeduserId = userId.trim();
         if (!UserId.isValidUserId(trimmeduserId)) {
             throw new ParseException(UserId.MESSAGE_USERID_CONSTRAINTS);
         }
-        String encryptedId = trimmeduserId;
-        try {
-            encryptedId = Base64.getEncoder().encodeToString(trimmeduserId.getBytes("utf-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return new UserId(encryptedId);
+        return new UserId(trimmeduserId);
     }
 
     /**
@@ -58,19 +51,14 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code userPassword} is invalid.
      */
-    public static UserPassword parseUserPassword(String userPassword) throws ParseException {
+    public static UserPassword parseUserPassword(String userPassword) throws ParseException,
+            UnsupportedEncodingException {
         requireNonNull(userPassword);
         String trimmeduserPassword = userPassword.trim();
         if (!UserPassword.isValidUserPassword(trimmeduserPassword)) {
             throw new ParseException(UserPassword.MESSAGE_USERPASSWORD_CONSTRAINTS);
         }
-        String encryptedPassword = trimmeduserPassword;
-        try {
-            encryptedPassword = Base64.getEncoder().encodeToString(trimmeduserPassword.getBytes("utf-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return new UserPassword(encryptedPassword);
+        return new UserPassword(trimmeduserPassword);
     }
 
     /**
@@ -78,19 +66,13 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      * @throws ParseException if the given {@code userRole} is invalid.
      */
-    public static UserRole parseUserRole(String userRole) throws ParseException {
+    public static UserRole parseUserRole(String userRole) throws ParseException, UnsupportedEncodingException {
         requireNonNull(userRole);
         String trimmeduserRole = userRole.trim();
         if (!UserRole.isValidUserRole(trimmeduserRole)) {
             throw new ParseException(UserRole.MESSAGE_USERROLE_CONSTRAINTS);
         }
-        String encryptedRole = trimmeduserRole;
-        try {
-            encryptedRole = Base64.getEncoder().encodeToString(trimmeduserRole.getBytes("utf-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return new UserRole(encryptedRole);
+        return new UserRole(trimmeduserRole);
     }
 
     /**

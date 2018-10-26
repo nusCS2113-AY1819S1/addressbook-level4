@@ -32,14 +32,33 @@ public class LoginUserIdPasswordRoleCommandParser implements Parser<LoginCommand
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoginCommand.MESSAGE_USAGE));
         }
-        String encryptedLoginInput = trimmedArgs;
+
+        String[] keywords = trimmedArgs.split("\\s+");
+        if (keywords.length < 3) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoginCommand.MESSAGE_USAGE));
+        } else if (keywords.length > 3) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoginCommand.MESSAGE_USAGE));
+        }
+        String encryptedLoginId = null;
+        String encryptedLoginPassword = null;
+        String encryptedLoginRole = null;
         try {
-            encryptedLoginInput = Base64.getEncoder().encodeToString(trimmedArgs.getBytes("utf-8"));
+            encryptedLoginId = Base64.getEncoder().encodeToString(keywords[0].getBytes("utf-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String[] keywords = encryptedLoginInput.split("\\s+");
-        List<String> keywordsList = new ArrayList<>(Arrays.asList(keywords));
+        try {
+            encryptedLoginPassword = Base64.getEncoder().encodeToString(keywords[1].getBytes("utf-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        try {
+            encryptedLoginRole = Base64.getEncoder().encodeToString(keywords[2].getBytes("utf-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        List<String> keywordsList = new ArrayList<>(Arrays.asList(encryptedLoginId,
+                encryptedLoginPassword, encryptedLoginRole));
         return setRoleReturnLoginCommandObject(keywords, keywordsList);
     }
 
@@ -53,12 +72,11 @@ public class LoginUserIdPasswordRoleCommandParser implements Parser<LoginCommand
     public LoginUserIdPasswordRoleCommand setRoleReturnLoginCommandObject(
             String[] keywords, List<String> keywordsList) throws ParseException {
         if (keywords.length < 3) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoginCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoginCommand.MESSAGE_USAGE));
         } else if (keywords.length > 3) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoginCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoginCommand.MESSAGE_USAGE));
         } else {
+            //String encryptedMember = Base64.getEncoder().encodeToString("member".getBytes("utf-8"));
             switch(keywords[2]) {
             case "member":
                 LoginManager.setIsMember(true);

@@ -1,10 +1,12 @@
 package seedu.address.storage;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Objects;
 
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.LoginManager;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.login.UserId;
 import seedu.address.model.login.UserPassword;
@@ -56,14 +58,12 @@ public class XmlAccount {
      *
      * @throws IllegalValueException if there were any data constraints violated in the account
      */
-    public LoginDetails toModelType() throws IllegalValueException {
+    public LoginDetails toModelType() throws IllegalValueException, UnsupportedEncodingException {
         if (userId == null) {
             throw new IllegalValueException(String.format(MISSING_ACCOUNT_FIELD_MESSAGE_FORMAT,
                     UserId.class.getSimpleName()));
         }
-        if (!UserId.isValidUserId(userId)) {
-            throw new IllegalValueException(UserId.MESSAGE_USERID_CONSTRAINTS);
-        }
+
         final UserId modelUserId = new UserId(userId);
 
         if (userPassword == null) {
@@ -75,9 +75,6 @@ public class XmlAccount {
         }
         final UserPassword modelUserPassword = new UserPassword(userPassword);
 
-        if (!UserRole.isValidUserRole(userRole)) {
-            throw new IllegalValueException(UserRole.MESSAGE_USERROLE_CONSTRAINTS);
-        }
         final UserRole modelUserRole = new UserRole(userRole);
 
         return new LoginDetails(modelUserId, modelUserPassword, modelUserRole);

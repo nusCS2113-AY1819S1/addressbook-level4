@@ -3,6 +3,11 @@ package seedu.address.model.login;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Base64;
+
+import seedu.address.logic.LoginManager;
+
 /**
  * Represents an account's user role in the login book.
  * Guarantees: immutable; is valid as declared in {@link #isValidUserRole(String)}
@@ -25,10 +30,12 @@ public class UserRole {
      *
      * @param role A valid userrole.
      */
-    public UserRole(String role) {
+    public UserRole(String role) throws UnsupportedEncodingException {
         requireNonNull(role);
-        checkArgument(isValidUserRole(role), MESSAGE_USERROLE_CONSTRAINTS);
-        fullUserRole = role;
+        if (!LoginManager.getisCurrentlyLoggingIn()) {
+            checkArgument(isValidUserRole(role), MESSAGE_USERROLE_CONSTRAINTS);
+        }
+        fullUserRole = Base64.getEncoder().encodeToString(role.getBytes("utf-8"));
     }
 
     /**
