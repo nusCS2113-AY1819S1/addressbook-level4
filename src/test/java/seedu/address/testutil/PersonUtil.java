@@ -2,9 +2,11 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_KPI;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -35,7 +37,15 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        sb.append(PREFIX_NOTE + person.getNote().value + " ");
+        if (person.positionDoesExist()) {
+            sb.append(PREFIX_POSITION + person.getPosition().value + " ");
+        }
+        if (person.kpiDoesExist()) {
+            sb.append(PREFIX_KPI + person.getKpi().value + " ");
+        }
+        if (person.noteDoesExist()) {
+            sb.append(PREFIX_NOTE + person.getNote().value + " ");
+        }
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
