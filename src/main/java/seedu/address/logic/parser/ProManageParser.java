@@ -1,33 +1,35 @@
 package seedu.address.logic.parser;
 
-import java.util.regex.Pattern;
-
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.LoginCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses user input.
  */
-public abstract class ProManageParser {
-
+public class ProManageParser {
     /**
      * Used for initial separation of command word and args.
      */
-    protected static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
+    private CommandsParser commandsParser;
 
-    /**
-     * Parses user input into command for execution.
-     *
-     * @param userInput full user input string
-     * @return the command based on the user input
-     * @throws ParseException if the user input does not conform the expected format
-     */
-    public abstract Command parseCommand(String userInput) throws ParseException;
+    public ProManageParser() {
+        this.commandsParser = new DefaultParser();
+    }
 
     /**
-     * Returns identity of the parser type
+     * @param userInput
+     * @return Command
+     * @throws ParseException
      */
-    public abstract String getIdentity();
 
+    public Command parseCommand(String userInput) throws CommandException, ParseException {
+        Command command = commandsParser.parseCommand(userInput);
+        if (command instanceof LoginCommand) {
+            this.commandsParser = ((LoginCommand) command).getParser();
+        }
+        return command;
+    }
 }
