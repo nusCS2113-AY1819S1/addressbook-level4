@@ -146,6 +146,7 @@ public class FindCommandTest {
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL), model.getFilteredPersonList());
 
+        // TODO: Add more flexibility tests, test when we only consider email, or etc etc
     }
 
     /**
