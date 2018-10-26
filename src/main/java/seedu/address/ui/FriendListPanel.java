@@ -39,7 +39,6 @@ public class FriendListPanel extends UiPart<Region> {
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        friendListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         friendListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
