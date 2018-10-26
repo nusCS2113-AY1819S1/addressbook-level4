@@ -208,8 +208,12 @@ image::ModelClassDiagram.png[width="800"]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the Student Planner data consisting of
+** Address Book
+** Expense Book
+** Task Book
+** Event Book
+* exposes unmodifiable `ObservableList<T>` where `T` is of type `Person`, `Expense`, `Event`, or `Task` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 [NOTE]
@@ -228,7 +232,24 @@ image::StorageClassDiagram.png[width="800"]
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the Student Planner data in xml format and read it back.
+
+==== Design Consideration
+The Student Planner data consists of Addresses, Events, Expenses and Task data
+
+===== Aspect: How data is being stored
+
+* **Alternative 1:** Saves the entire student planner data as one gigantic xml file.
+** Pros: Easy to implement.
+** Cons: May have performance issues in terms of memory usage.
+Negatively impacts requirements of allowing user to still be able to manually modify data as it may be
+ difficult to navigate and modify a single huge file.
+* **Alternative 2: (current choice)** Separation into individual storage files.
+** Pros: Allows for easy modification of data by end user as each file can be easily modified even if it is
+large as there is no tight coupling with other files. Also allows for faster backup of data online as we can utilize
+ multithreading to upload all the xml files at the same time instead of one large file.
+** Cons: We must ensure that the implementation of each individual storage are correct, especially
+for files which when converted to their respectively objects may have some dependencies from the other features.
 
 [[Design-Commons]]
 === Common classes

@@ -23,9 +23,9 @@ public class RestoreCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Restore student planner data from location specified "
-            + "(restores from default backup data path if not provided)\n"
-            + "Parameters: [github authToken] OR [PATH] (must be a writable path)\n"
-            + "Example: " + COMMAND_WORD + " data\\addressbook.bak OR\n"
+            + "(restores from default backup data path if no parameters provided)\n"
+            + "Parameters: [github authToken]\n"
+            + "Example: " + COMMAND_WORD + "\n"
             + "Example: " + COMMAND_WORD + " github my_personal_access_token";
 
     public static final String MESSAGE_SUCCESS = "Restoring Backup from %s";

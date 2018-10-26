@@ -23,8 +23,8 @@ public class BackupCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Backups student planner data to location specified (backups to default data path if not provided)\n"
-            + "Parameters: [github authToken] OR [PATH] (must be a writable path)\n"
-            + "Example: " + COMMAND_WORD + " data\\addressbook.bak OR\n"
+            + "Parameters: [github authToken]\n"
+            + "Example: " + COMMAND_WORD + "\n"
             + "Example: " + COMMAND_WORD + " github my_personal_access_token";
 
     public static final String MESSAGE_SUCCESS = "Initiating Backup to %s";
@@ -51,9 +51,8 @@ public class BackupCommand extends Command {
         requireNonNull(model);
         if (isLocal) {
             //model.backupAddressBookLocal(retrievePath(model));
-            model.backupAddressBookLocal(retrieveAddressBookPath(model));
-            model.backupExpenseBookLocal(retrieveExpenseBookPath(model));
-            return new CommandResult(String.format(MESSAGE_SUCCESS, retrievePath(model).toString()));
+            model.backupBooksLocal();
+            return new CommandResult(String.format(MESSAGE_SUCCESS, "local storage"));
         } else {
             onlineBackupTask(model.getAddressBook(), model.getExpenseBook());
             return new CommandResult(String.format(MESSAGE_SUCCESS, "GitHub Gists"));

@@ -19,7 +19,7 @@ import seedu.address.model.UserPrefs;
  */
 public class GitHubStorage implements OnlineStorage {
 
-    public static final String SUCCESS_MESSAGE = "Successfully saved to Github Gists\nGists can be found at: %s";
+    public static final String SUCCESS_MESSAGE = "Successfully saved to Github Gists";
     private static GitHub github_ = null;
 
     private String authToken = null;

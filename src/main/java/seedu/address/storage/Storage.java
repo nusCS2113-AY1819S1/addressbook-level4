@@ -5,9 +5,8 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.events.model.AddressBookChangedEvent;
-import seedu.address.commons.events.model.AddressBookLocalBackupEvent;
+import seedu.address.commons.events.model.BooksLocalBackupEvent;
 import seedu.address.commons.events.model.ExpenseBookChangedEvent;
-import seedu.address.commons.events.model.ExpenseBookLocalBackupEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.events.storage.LocalRestoreEvent;
 import seedu.address.commons.events.storage.OnlineBackupEvent;
@@ -49,9 +48,11 @@ public interface Storage extends AddressBookStorage, ExpenseBookStorage, UserPre
      *   Creates the backup file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleAddressBookLocalBackupEvent(AddressBookLocalBackupEvent abce);
+    //void handleAddressBookLocalBackupEvent(AddressBookLocalBackupEvent abce);
 
     void handleOnlineBackupEvent(OnlineBackupEvent obe);
+
+    void handleBooksLocalBackupEvent(BooksLocalBackupEvent blbe);
 
     void handleOnlineRestoreEvent(OnlineRestoreEvent ore);
 
@@ -75,10 +76,12 @@ public interface Storage extends AddressBookStorage, ExpenseBookStorage, UserPre
      */
     void handleExpenseBookChangedEvent(ExpenseBookChangedEvent abce);
 
+
     /**
      * Saves the current version of the Expense Book to the hard disk as a backup.
      *   Creates the backup file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleExpenseBookLocalBackupEvent(ExpenseBookLocalBackupEvent abce);
+    //void handleExpenseBookLocalBackupEvent(ExpenseBookLocalBackupEvent abce);
+
 }

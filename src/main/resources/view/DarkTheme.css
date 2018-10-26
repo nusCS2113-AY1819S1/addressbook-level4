@@ -358,3 +358,19 @@
     -fx-text-fill: white;
     -fx-background-color: #383838 !important;
 }
+
+/******************************************************************************
+ Notifications style
+ *****************************************************************************/
+
+.notification-bar > .pane {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+.notification-bar > .pane .label {
+    -fx-padding: 0 0 10 0;
+    -fx-font-size: 1.166667em; /*15px;*/
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-alignment: top-left;
+}
