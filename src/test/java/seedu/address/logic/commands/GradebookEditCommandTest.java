@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -8,14 +7,14 @@ import org.junit.rules.ExpectedException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ModelManager;
+import seedu.address.model.gradebook.Gradebook;
 import seedu.address.model.gradebook.GradebookManager;
 import seedu.address.testutil.GradebookBuilder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.commands.GradebookDeleteCommand.MESSAGE_DELETE_SUCCESS;
+import static seedu.address.logic.commands.GradebookEditCommand.MESSAGE_EDIT_GRADEBOOK_SUCCESS;
 
-
-public class GradebookDeleteCommandTest {
+public class GradebookEditCommandTest {
     private static GradebookManager gradebookManager = new GradebookManager();
     private static GradebookBuilder dummyGradebookComponent = new GradebookBuilder();
 
@@ -29,23 +28,20 @@ public class GradebookDeleteCommandTest {
     }
 
     @Test
-    public void execute_gradebookDelete_success() throws CommandException {
+    public void execute_gradebookEdit_success() throws CommandException {
         String moduleCode = "CS2113";
         String gradebookComponentName = "Finals";
-        String expectedMessage = String.format(MESSAGE_DELETE_SUCCESS, moduleCode, gradebookComponentName);
+        int gradebookMaxMarks = 10;
+        int gradebookWeightage = 20;
+        String expectedMessage = MESSAGE_EDIT_GRADEBOOK_SUCCESS;
+
+        Gradebook gradebook = new Gradebook(moduleCode, gradebookComponentName, gradebookMaxMarks, gradebookWeightage);
+        GradebookEditCommand gradebookEditCommand = new GradebookEditCommand(gradebook);
 
         gradebookManager.addGradebookComponent(dummyGradebookComponent.build());
         gradebookManager.saveGradebookList();
 
-        GradebookDeleteCommand gradebookDeleteCommand = new GradebookDeleteCommand(moduleCode, gradebookComponentName);
-        CommandResult result = gradebookDeleteCommand.execute(new ModelManager(), new CommandHistory());
-
+        CommandResult result = gradebookEditCommand.execute(new ModelManager(), new CommandHistory());
         assertEquals(expectedMessage, result.feedbackToUser);
-    }
-
-    @AfterClass
-    public static void tearDown() {
-        gradebookManager.clearGradebook();
-        gradebookManager.saveGradebookList();
     }
 }
