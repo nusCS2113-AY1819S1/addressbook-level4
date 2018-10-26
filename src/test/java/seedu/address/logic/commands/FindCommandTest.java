@@ -141,12 +141,17 @@ public class FindCommandTest {
 
     /**
      * Gets the person's predicate based on attributes
-     * @param prefixKeywordMap
-     * @param types
-     * @param combinedPredicate
+     * @param prefixKeywordMap obtains the keywordMap of PREFIX_TYPE and arguments
+     * @param types is a list of PREFIX types
+     * @param combinedPredicate Combined predicate of all persons
      * @return
      */
-    private Predicate<Person> getPersonPredicate(Map<Prefix, String[]> prefixKeywordMap, Prefix[] types, Predicate<Person> combinedPredicate) {
+    private Predicate<Person> getPersonPredicate(
+            Map<Prefix,
+            String[]> prefixKeywordMap,
+            Prefix[] types,
+            Predicate<Person> combinedPredicate) {
+
         for (Prefix type : types) {
             ClosestMatchList closestMatch = new ClosestMatchList(model, type, prefixKeywordMap.get(type));
             String[] approvedList = closestMatch.getApprovedList();
