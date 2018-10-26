@@ -1,6 +1,11 @@
 package seedu.address.commons.util;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Collections;
@@ -10,15 +15,24 @@ import java.util.Random;
 import org.junit.Test;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Person;
 
 public class DistributeUtilTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private ObservableList<Person> allPersons = model.getFilteredPersonList();
+    private DistributeUtil distUtil = new DistributeUtil();
+
+    private Model setUpModelStub() {
+        AddressBook stubAddressBook = getTypicalAddressBook();
+        UserPrefs stubUserPrefs = new UserPrefs();
+        return new ModelManager(stubAddressBook, stubUserPrefs);
+    }
 
     @Test
     public void shuffleTest() {
@@ -37,10 +51,28 @@ public class DistributeUtilTest {
 
     @Test
     public void findPersonTest() {
-        // put a stub typical book
-        // find for Alice
-        // assert equal Alice object with actual object
+        Model model = setUpModelStub();
+        ObservableList<Person> allPersonStub = model.getFilteredPersonList();
+        LinkedList<Person> allPersonLLStub = new LinkedList<>(allPersonStub);
 
+        Nationality sgNationality = new Nationality("SG");
+        Person actualPerson = distUtil.findPerson(sgNationality, allPersonLLStub);
+
+        // testing if it return the first person it found with SG nationality
+        assertEquals(ALICE, actualPerson);
+
+        // testing that it should not be equal since daniel is the 2nd person with SG
+        assertNotEquals(DANIEL, actualPerson);
+
+        //remove ALICE and check if it is able to find DANIEL now.
+        allPersonLLStub.removeFirst();
+        actualPerson = distUtil.findPerson(sgNationality, allPersonLLStub);
+        assertEquals(DANIEL, actualPerson);
+
+        // testing if there is no person with SK nationality is not found
+        Nationality skNationality = new Nationality("SK");
+        actualPerson = distUtil.findPerson(skNationality, allPersonLLStub);
+        assertNull(actualPerson);
     }
 
     @Test
