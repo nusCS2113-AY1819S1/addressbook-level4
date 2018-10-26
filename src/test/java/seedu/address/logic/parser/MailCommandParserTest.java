@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.MailCommand.TYPE_SELECTION;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.Test;
+
 import seedu.address.logic.commands.MailCommand;
 
 public class MailCommandParserTest {

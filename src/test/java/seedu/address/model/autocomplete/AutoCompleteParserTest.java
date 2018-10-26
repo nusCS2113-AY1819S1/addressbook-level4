@@ -3,6 +3,7 @@ package seedu.address.model.autocomplete;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
 import seedu.address.logic.parser.CliSyntax;
 
 public class AutoCompleteParserTest {

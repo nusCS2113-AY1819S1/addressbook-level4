@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -22,12 +23,11 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 public class MailCommandTest {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void execute_selectedPersons_success() {
@@ -78,7 +78,7 @@ public class MailCommandTest {
     }
 
     @Test
-    public void execute_unsupportedDesktops_throwsCommandException() throws CommandException{
+    public void execute_unsupportedDesktops_throwsCommandException() throws CommandException {
         thrown.expect(CommandException.class);
         thrown.expectMessage(MESSAGE_UNSUPPORTED);
 
@@ -128,26 +128,28 @@ public class MailCommandTest {
             throw new CommandException(MESSAGE_UNSUPPORTED);
         }
     }
+    /*
+    /**
+     * A MailCommand stub that runs successful without throwing CommandException
+     */
+    /*
+    private class MailCommandStubSuccess extends MailCommand {
+        public MailCommandStubSuccess(int mailType) {
+            super(mailType);
+        }
 
-//    /**
-//     * A MailCommand stub that runs successful without throwing CommandException
-//     */
-//    private class MailCommandStubSuccess extends MailCommand {
-//        public MailCommandStubSuccess(int mailType) {
-//            super(mailType);
-//        }
-//
-//        public MailCommandStubSuccess(int mailType, String mailArgs) {
-//            super(mailType, mailArgs);
-//        }
-//
-//        @Override
-//        public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-//
-//            ArrayList<Person> mailingList = mailToAll(model);
-//            String recipients = buildRecipients(mailingList);
-//
-//            return new CommandResult(MESSAGE_SUCCESS + recipients);
-//        }
-//    }
+        public MailCommandStubSuccess(int mailType, String mailArgs) {
+            super(mailType, mailArgs);
+        }
+
+        @Override
+        public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+
+            ArrayList<Person> mailingList = mailToAll(model);
+            String recipients = buildRecipients(mailingList);
+
+            return new CommandResult(MESSAGE_SUCCESS + recipients);
+        }
+    }
+    */
 }

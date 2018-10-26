@@ -11,8 +11,9 @@ import java.util.List;
 import java.util.TreeMap;
 import java.util.function.Predicate;
 
-import javafx.collections.ObservableList;
 import org.junit.Test;
+
+import javafx.collections.ObservableList;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -37,10 +38,12 @@ public class CommandCompleterTest {
         ArrayList<String> expectedAddressPredictions = new ArrayList<>(Arrays.asList(" street "));
 
         ArrayList<String> actualPhonePredictions = commandCompleter.predictText("find p/9");
-        ArrayList<String> expectedPhonePredictions = new ArrayList<>(Arrays.asList("4351253 ", "482224 ", "482427 ", "482442 ", "8765432 ", "5352563 "));
+        ArrayList<String> expectedPhonePredictions =
+                new ArrayList<>(Arrays.asList("4351253 ", "482224 ", "482427 ", "482442 ", "8765432 ", "5352563 "));
 
         ArrayList<String> actualEmailPredictions = commandCompleter.predictText("find e/a");
-        ArrayList<String> expectedEmailPredictions = new ArrayList<>(Arrays.asList("lice@example.com ", "nna@example.com "));
+        ArrayList<String> expectedEmailPredictions =
+                new ArrayList<>(Arrays.asList("lice@example.com ", "nna@example.com "));
 
         ArrayList<String> actualTagPredictions = commandCompleter.predictText("list t/f");
         ArrayList<String> expectedTagPredictions = new ArrayList<>(Arrays.asList("riends "));
@@ -53,7 +56,7 @@ public class CommandCompleterTest {
         assertEquals(expectedNamePredictions, actualNamePredictions);
         assertEquals(expectedAddressPredictions, actualAddressPredictions);
         assertEquals(expectedPhonePredictions, actualPhonePredictions);
-//        assertEquals(expectedEmailPredictions, actualEmailPredictions);
+        //assertEquals(expectedEmailPredictions, actualEmailPredictions);
         assertEquals(expectedTagPredictions, actualTagPredictions);
         assertEquals(expectedEmptyPredictions, actualEmptyPredictions);
     }
@@ -75,7 +78,8 @@ public class CommandCompleterTest {
         ArrayList<String> expectedAddressPredictions = new ArrayList<>(Arrays.asList("onroe, Connecticut "));
 
         ArrayList<String> actualEmailPredictions = commandCompleter.predictText("find e/a");
-        ArrayList<String> expectedEmailPredictions = new ArrayList<>(Arrays.asList("lice@example.com", "nna@example.com", "nnabelle@warren.com"));
+        ArrayList<String> expectedEmailPredictions =
+                new ArrayList<>(Arrays.asList("lice@example.com", "nna@example.com", "nnabelle@warren.com"));
 
         ArrayList<String> actualTagPredictions = commandCompleter.predictText("list t/s");
         ArrayList<String> expectedTagPredictions = new ArrayList<>(Arrays.asList("carer "));
@@ -83,7 +87,7 @@ public class CommandCompleterTest {
         assertEquals(expectedNamePredictions, actualNamePredictions);
         assertEquals(expectedPhonePredictions, actualPhonePredictions);
         assertEquals(expectedAddressPredictions, actualAddressPredictions);
-//        assertEquals(expectedEmailPredictions, actualEmailPredictions);
+        //assertEquals(expectedEmailPredictions, actualEmailPredictions);
         assertEquals(expectedTagPredictions, actualTagPredictions);
     }
 

@@ -31,7 +31,7 @@ public class AutoCompleteParserPair {
 
     @Override
     public boolean equals(Object other) {
-        return this.predictionType.equals(((AutoCompleteParserPair )other).predictionType)
+        return this.predictionType.equals(((AutoCompleteParserPair) other).predictionType)
                 && this.prefixValue.equals(((AutoCompleteParserPair) other).prefixValue);
     }
 }

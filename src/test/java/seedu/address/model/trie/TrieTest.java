@@ -10,8 +10,7 @@ import org.junit.Test;
 
 public class TrieTest {
 
-    ArrayList<String> testStrings = new ArrayList<>(Arrays.asList(
-            "hello", "hell", "helipad", "world", "help"));
+    private ArrayList<String> testStrings = new ArrayList<>(Arrays.asList("hello", "hell", "helipad", "world", "help"));
 
     @Test
     public void constructor_validArgs_success() {
@@ -72,7 +71,7 @@ public class TrieTest {
      * @param expectedOutput the expected values from the prediction using the prefix string.
      */
     public static void assertPredictSuccess(String prefix, Trie trieUnderTest, ArrayList<String> expectedOutput) {
-            ArrayList<String> actualOutput = trieUnderTest.getPredictList(prefix);
-            assertEquals(expectedOutput, actualOutput);
+        ArrayList<String> actualOutput = trieUnderTest.getPredictList(prefix);
+        assertEquals(expectedOutput, actualOutput);
     }
 }
