@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
@@ -74,6 +73,8 @@ public interface Model {
      * @return
      */
     boolean isExceededLimit (Limit limitIn);
+
+    ObservableList<Record> getRecordsThisMonth();
 
     /** Returns an unmodifiable view of the filtered record list */
     ObservableList<Record> getFilteredRecordList();

@@ -1,5 +1,6 @@
 package seedu.planner.commons.util;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -61,5 +62,15 @@ public class DateUtil {
         String dateString = maxDaysInEachMonth.get(month.getMonth() - 1).toString()
                 + String.format("-%d-%d", month.getMonth(), month.getYear());
         return new Date(dateString);
+    }
+
+    /**
+     * Computes today's date using Java library {@link LocalDate} by processing the date in yyyy-mm-dd into dd-mm-yyyy.
+     * @return Date
+     */
+    public static Date getDateToday() {
+        String dateToday = LocalDate.now().toString();
+        String[] args = dateToday.split("-");
+        return new Date(String.format("%s-%s-%s", args[2], args[1], args[0]));
     }
 }
