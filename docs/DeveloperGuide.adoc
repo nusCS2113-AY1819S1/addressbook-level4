@@ -429,6 +429,34 @@ In order to prevent brute force, a user has up to 3 tries to key in the correct 
 
 // end::dataencryption[]
 
+// tag::commandprediction[]
+=== Command Prediction
+
+==== Current Implementation
+To maximize user friendliness, we have implemented predictive text which will appear
+familiar for phone users. BookInventory users may inadvertently misspell command words,
+e.g. lis (Expected command: list). This will now prompt a GUI log stating, "Did you mean,
+list?". To achieve this, we have utilized the Dice Coefficient.
+
+==== Design Considerations
+
+===== Aspect: How does Dice Coefficient works?
+
+Dice's coefficient measures the similarity between two sets. It can also be used to help measure how
+similar two strings are in terms of the number of common bigrams (a bigram is a pair of adjacent
+letters in the string).The Coefficient result of 1 indicates identical vectors (completely equal strings) as
+where a 0 equals orthogonal vectors (completely unequal strings).
+
+Formula: Dice's coefficient = (2 * Common Terms) / (Number of terms in String1 + Number of terms in String2)
+
+===== Aspect: How well does this algorithm predicts?
+
+Our current implementation sets Dice's Coefficient to 0.5. Through our testing, this appears
+fine for most spelling errors. However, it will not predict too ridiculous errors because we
+do not wish to face a scenario where the suggestion offers another command word which is
+unintended by the user.
+
+// end::commandprediction[]
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
@@ -934,17 +962,17 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |New user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |New user |See usage instructions |Refer to instructions when I forget how to use the App
 
-|`* * *` |Helpful user |add/remove books |Share my knowledge with others
+|`* * *` |Helpful user |Add/remove books |Share my knowledge with others
 
 |`* * *` |Student |Find for books related to my module |Easily access the correct materials
 
 |`* * *` |Overachiever |See peer reviews for books related to my module |Get access to helpful materials
 
-|`* *` |NSF |Find out what books are relevant to the modules I'm about to take in university |Read the books during my free time
+|`* *` |NSF |Find out which books are relevant to the modules I'm about to take in university |Read the books during my free time
 
-|`* *` |Professor |Add rating/review to books |Recommend this book to the rest                                      people
+|`* *` |Professor |Add rating/review to books |Recommend this book to others
 
 |`* *` |NUS Staff |Use the program as and when |Easily sieve out the books that i want to read
 
@@ -960,23 +988,23 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`*` |Exchange student |Use the program in my native language |Understand the program easily
 
-|`*` |Bookshop owner |Sell the books that people want |KNow which books are in demand
+|`*` |Bookshop owner |Sell the books that people want |Know which books are in demand
 
 |`*` |Underachiever |Have reviews for books which are easy to understand |Grasp on concepts quickly
 
 |`*` |Student nearing the exams |Have reviews for books which summarises the module |Recap on concepts quickly
 
-|`*` |Teaching assistant |Have a list of recommended books |Recommend my weaker students to read on those
+|`*` |Teaching assistant |Have a list of recommended books |Help underachieving students learn better
 
-|`*` |Author |Have the books listed neatly and visibly under users' module selection |Help students in their studies and also help them gain an appreciation to the module/
+|`*` |Author |Have the books listed neatly and visibly under users' module selection |Help students in their studies and also help them gain an appreciation to the module
 
 |`*` |Passionate student willing to help others |Have a moderately long word limit for the review |Share my personal experience with this book and how this book is recommended
 
 |`*` |Book enthusiast |Have a review for all the books I read |Allow people to acquire knowledge.
 
-|`*` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`*` |user |Hide <<private-contact-detail,private contact details>> by default |Minimize chance of someone else seeing them by accident
 
-|`*` |user with many books in the BookInventory |sort books by name |locate a book easily
+|`*` |user with many books in the BookInventory |Sort books by name |Locate a book easily
 |=======================================================================
 
 _{More to be added}_
