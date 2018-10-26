@@ -8,7 +8,10 @@ import seedu.address.model.person.exceptions.TimeSlotNotOverlapException;
 /**
  * Represents a deconflicted {@code TimeTable}
  *
- * Unlike {@code TimeTable}, supports adding overlapping {@code TimeSlot}s by merging conflicting {@code TimeSlot}s
+ * Unlike {@code TimeTable}, any {@code TimeSlot}s added to {@code DeconflictTimeTable} will merge with any
+ * {@code TimeSlot}s that it overlaps with.
+ *
+ * As such, the overwritten method {@code addTimeSlot()} does not throw {@code TimeSlotOverlapException}
  */
 public class DeconflictTimeTable extends TimeTable {
 
@@ -17,26 +20,38 @@ public class DeconflictTimeTable extends TimeTable {
     }
 
     public DeconflictTimeTable(TimeTable input) {
-        super(input);
+        this();
+        addTimeTable(input);
     }
 
     /**
-     * Merges {@code toMerge} with all {@code TimeSlot}s that overlap with it
-     * @param toMerge {@code TimeSlot} to merge
+     * Adds {@code toAdd} to the {@code DeconflictTimeTable}
+     * @param toAdd {@code TimeTable} to add
      */
-    public void mergeOverlap(TimeSlot toMerge) {
-        TimeSlot toAdd = new TimeSlot(toMerge);
+    public void addTimeTable(TimeTable toAdd) {
+        for (TimeSlot timeSlot : toAdd.getTimeSlots()) {
+            addTimeSlot(timeSlot);
+        }
+    }
 
-        for (TimeSlot overlap : findOverlapOrAdjacent(toMerge)) {
+    @Override
+    /**
+     * Adds {@code toAdd} to the {@code DeconflictTimeTable}
+     * @param toAdd {@code TimeSlot} to add
+     */
+    public void addTimeSlot(TimeSlot toAdd) {
+        TimeSlot merged = new TimeSlot(toAdd);
+
+        for (TimeSlot overlap : findOverlapOrAdjacent(toAdd)) {
             try {
-                toAdd.mergeInto(overlap);
+                merged.mergeInto(overlap);
             } catch (TimeSlotNotOverlapException e) {
-                // This should not happen since findOverlapOrAdjacent() only returns valid timeslots to be merged
+                // This should not happen since findOverlapOrAdjacent() only returns timeslots that can be merged
             }
             removeTimeSlot(overlap);
         }
 
-        addTimeSlot(toAdd);
+        super.addTimeSlot(merged);
     }
 
     /**
