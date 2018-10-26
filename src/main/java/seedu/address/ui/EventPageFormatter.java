@@ -74,7 +74,7 @@ public class EventPageFormatter {
 
     }
 
-    private static void formatVenue(Venue Venue) {
+    private static void formatVenue(Venue venue) {
 
     }
 

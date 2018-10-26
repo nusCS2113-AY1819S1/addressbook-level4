@@ -56,5 +56,7 @@ public class Status {
     }
 
     @Override
-    public int hashCode() { return currentStatus.hashCode(); }
+    public int hashCode() {
+        return currentStatus.hashCode();
+    }
 }

@@ -28,7 +28,6 @@ public class Event {
     private final DateTime dateTime;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Attendee> attendees = new HashSet<>();
-
     private final Status status;
 
     /**
