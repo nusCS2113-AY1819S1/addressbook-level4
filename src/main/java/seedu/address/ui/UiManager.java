@@ -54,14 +54,14 @@ public class UiManager extends ComponentManager implements Ui {
         this.primaryStage = primaryStage;
         logger.info("Starting UI...");
 
-        //Set the application icon.
+        //Set the application icon
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
             mainWindow = new MainWindow(primaryStage, config, prefs, logic, security);
             mainWindow.show(); //This should be called before creating other UI parts
             //Gets rid of the login window when testing
-            if (security.getAuthentication()) { //
+            if (security.getAuthentication()) {
                 mainWindow.fillInnerParts();
             } else {
                 //CLI Transition

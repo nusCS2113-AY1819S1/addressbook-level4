@@ -187,13 +187,9 @@ public class MainWindow extends UiPart<Stage> {
         timetablePanel = new TimeTablePanel();
         timetablePlaceholder.getChildren().add(timetablePanel.getRoot());
 
-        // Implemented with UserStub, commented out to preserve tests
-        // personListPanel = new PersonListPanel(logic.getOtherList(person));
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        // Implemented with UserStub, commented out to preserve tests
-        // friendListPanel = new FriendListPanel(logic.getFriendList(person));
         friendListPanel = new FriendListPanel(logic.getFilteredPersonList());
         friendListPanelPlaceholder.getChildren().add(friendListPanel.getRoot());
 
