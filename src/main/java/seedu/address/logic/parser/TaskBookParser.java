@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandParser;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -41,7 +43,7 @@ public class TaskBookParser {
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseCommand(String userInput) throws ParseException {
+    public Command parseCommand(String userInput) throws ParseException, CommandException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -49,22 +51,16 @@ public class TaskBookParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-
-        //@@author emobeany
-        /*case SelectDeadlineCommand.COMMAND_WORD:
-            return new SelectDeadlineCommandParser().parse(arguments);
-         */
         Command commandToReturn = null;
         for (CommandParser command : commands) {
             if (command.getCommandWord().equals(commandWord)) {
-                //For e.g AddTaskCommand.parse returns AddTaskCommandParser.parse(argument)
-                // AddTaskCommandParser.parse(argument) returns AddTaskCommand(task) which will be returned to
-                // Logic Manager CommandResult execute to call AddTaskCommand.execute
                 commandToReturn = command.parse(arguments);
                 break;
             }
         }
-        // JUNIT: test commandToReturn != null
+        if (commandToReturn == null) {
+            throw new CommandException(MESSAGE_UNKNOWN_COMMAND);
+        }
         return commandToReturn;
     }
 

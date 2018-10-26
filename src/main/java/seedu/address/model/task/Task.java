@@ -1,9 +1,6 @@
 package seedu.address.model.task;
 
 import java.util.Objects;
-import java.util.logging.Logger;
-
-import seedu.address.commons.core.LogsCenter;
 
 /**
  * Represents a Task in the address book.
