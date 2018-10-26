@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -28,6 +29,8 @@ import seedu.address.model.login.LoginDetails;
 
 import seedu.address.model.person.Person;
 
+import seedu.address.model.searchhistory.KeywordType;
+import seedu.address.model.searchhistory.ReadOnlyKeywordsRecord;
 import seedu.address.model.searchhistory.exceptions.EmptyHistoryException;
 import seedu.address.testutil.PersonBuilder;
 
@@ -174,11 +177,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void updateFilteredClubBudgetsList(Predicate<FinalClubBudget> predicate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -238,6 +236,16 @@ public class AddCommandTest {
 
         @Override
         public void resetSearchHistoryToInitialState() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void recordKeywords(KeywordType type, List<String> keywords) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyKeywordsRecord getReadOnlyKeywordsRecord() {
             throw new AssertionError("This method should not be called.");
         }
     }
