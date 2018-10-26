@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.User;
 import seedu.address.model.person.Person;
 
 /**
@@ -30,4 +31,21 @@ public interface Logic {
 
     /** Returns the list of input entered by the user, encapsulated in a {@code ListElementPointer} object */
     ListElementPointer getHistorySnapshot();
+
+    /**
+     * Instantiates the user with a Person in database
+     * @param name
+     */
+    void matchUserToPerson(String name);
+
+    /**
+     * Clears the user instance when logging out
+     */
+    void clearUser();
+
+    /**
+     *
+     * @return the current authenticated User
+     */
+    User getUser();
 }
