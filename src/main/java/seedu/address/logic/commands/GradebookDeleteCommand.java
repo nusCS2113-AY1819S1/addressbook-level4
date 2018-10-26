@@ -19,13 +19,13 @@ public class GradebookDeleteCommand extends Command {
 //            + "Successfully deleted!";
 //    private static final String MESSAGE_DELETE_FAIL = "\nUnsuccessful Deletion";
 
-    private static final String MESSAGE_DELETE_SUCCESS = ""
+    public static final String MESSAGE_DELETE_SUCCESS = ""
             + "\nSuccessfully deleted!"
             + "\nModule Code: %1$s"
             + "\nGradebook Component: %2$s"
             + "\nMaximum Marks: %3$s"
             + "\nWeightage: %4$s";
-    private static final String MESSAGE_DELETE_FAIL = "\nGradebook component not found!";
+    public static final String MESSAGE_DELETE_FAIL = "\nGradebook component not found!";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a gradebook component to Trajectory. "
             + "Parameters: "

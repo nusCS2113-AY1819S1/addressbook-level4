@@ -20,19 +20,18 @@ public class GradebookFindCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_MODULE_CODE + "CS2113 "
             + PREFIX_GRADEBOOK_ITEM + "Assignment 1";
-    private static final String MESSAGE_FIND_FAIL = "\nUnsuccessful find";
-    private static final String MESSAGE_FIND_SUCCESS = "\nSuccessfully found!"
+    public static final String MESSAGE_FIND_SUCCESS = "\nSuccessfully found!"
             + "\nModule Code: %1$s"
             + "\nComponent Name: %2$s"
             + "\nMaximum Marks: %3$d"
             + "\nWeightage: %4$d";
+    public static final String MESSAGE_FIND_FAIL = "\nUnsuccessful find";
 
 
     private final Gradebook toFindGradebookComponent;
     public GradebookFindCommand (Gradebook gradebookComponent) {
         toFindGradebookComponent = gradebookComponent;
     }
-
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {

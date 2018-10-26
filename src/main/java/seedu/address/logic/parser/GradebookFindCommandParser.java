@@ -15,7 +15,7 @@ import seedu.address.model.gradebook.GradebookManager;
  * Parses input arguments and creates a new GradebookFindCommand object
  */
 public class GradebookFindCommandParser {
-    private static final String MESSAGE_EMPTY_INPUTS = "Module code and gradebook component name cannot be empty";
+    public static final String MESSAGE_EMPTY_INPUTS = "Module code and gradebook component name cannot be empty";
     /**
      * Parses the given {@code String args} of arguments in the context of the GradebookFindCommand
      * and returns a GradebookFindCommand object for execution.
