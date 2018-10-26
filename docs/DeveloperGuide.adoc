@@ -876,9 +876,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |student with multiple tasks |tag each task with different levels of importance/priority |identify all tasks that requires more attention
 
-|`* * *` |student with multiple tasks |sort the todo list by deadline |view which task is due the earliest
-
-|`* * *` |student with multiple tasks |sort the todo list by importance/priority |view which tasks are more important than the other
+|`* * *` |student with multiple tasks |filter the todo list by completion status |obtain a list of tasks based on their completion status
 
 |`* * *` |student |add a new expenditure to the expenditure tracker |
 
@@ -889,6 +887,12 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |student who is not capable of managing expenditure |see and check where did I spend my money and how much did I spend for each expenditure with the corresponding date |better understand my spending habits
 
 |`* * *` |student who wants to know how much money did I spend and how much income did I get for a certain period |see the amount of spendings and income respectively by keying in the starting date and end date of a particular period |
+
+|`* *` |student with multiple tasks |sort the todo list by module |view all tasks specific to a particular module
+
+|`* *` |student with multiple tasks |sort the todo list by deadline |view which task is due the earliest
+
+|`* *` |student with multiple tasks |sort the todo list by importance/priority |view which tasks are more important than the other
 
 |`* *` |student with tasks that may last for a long time |easily record and view my progress with progress bar |
 
@@ -986,7 +990,7 @@ To-do list
 2. To-do list shows a sorted list of tasks grouped by priority level in descending order
 
 [discrete]
-=== Use case 7: Check completed tasks
+=== Use case 7: View all completed tasks
 *System:*
 To-do list
 
@@ -996,7 +1000,7 @@ To-do list
 2. To-do list shows a list of tasks that has been marked as completed
 
 [discrete]
-=== Use case 8: Check uncompleted tasks
+=== Use case 8: View all uncompleted tasks
 *System:*
 To-do list
 
@@ -1006,14 +1010,24 @@ To-do list
 2. To-do list shows a list of tasks that have not been marked as completed
 
 [discrete]
-=== Use case 9: Marking a task as completed
+=== Use case 9: View all tasks
+*System:*
+To-do list
+
+*MSS*
+
+1. User enters `TDL_view all` command
+2. To-do list shows a list of tasks regardless of its completion status
+
+[discrete]
+=== Use case 10: Marking a task as completed
 *System:*
 To-do list
 
 *MSS*
 
 1. User enters `TDL_complete` command followed by index number
-2. To-do list marks task as completed and moves the task to a separate list of completed tasks
+2. To-do list marks task as completed
 
 *Extensions*
 
@@ -1022,14 +1036,14 @@ To-do list
      2b1. To-do list shows an error message
 
 [discrete]
-=== Use case 10: Marking a task as uncompleted
+=== Use case 11: Marking a task as uncompleted
 *System:*
 To-do list
 
 *MSS*
 
 1. User enters `TDL_uncomplete` command followed by index number
-2. To-do list marks task as uncompleted and moves the task to a separate list of uncompleted tasks
+2. To-do list marks task as uncompleted
 
 *Extensions*
 
@@ -1038,7 +1052,7 @@ To-do list
      2b1. To-do list shows an error message
 
 [discrete]
-=== Use case 11: Receiving reminders for a task
+=== Use case 12: Receiving reminders for a task
 *System:*
 To-do list
 
@@ -1048,7 +1062,7 @@ To-do list
 2. User receives and acknowledges the reminder
 
 [discrete]
-=== Use case 12: Add expenditure / income
+=== Use case 13: Add expenditure / income
 *System:*
 Expenditure Tracker & Calendar
 
@@ -1062,7 +1076,7 @@ Expenditure Tracker & Calendar
 6. Expenditure Tracker record and display the income / outcome on calendar
 
 [discrete]
-=== Use case 13: Check expenditure / income status
+=== Use case 14: Check expenditure / income status
 *System:*
 Expenditure Tracker & Calendar
 
@@ -1074,7 +1088,7 @@ Expenditure Tracker & Calendar
 4. Calendar shows the expenditure / income for each day visually or Expenditure Tracker shows the expenditure / income status by displaying the amount of money.
 
 [discrete]
-=== Use case 14: Delete expenditure / income
+=== Use case 15: Delete expenditure / income
 *System:*
 Expenditure Tracker & Calendar
 
@@ -1090,7 +1104,7 @@ Expenditure Tracker & Calendar
      2b1. Expenditure list shows an error message
 
 [discrete]
-=== Use case 15: Edit or Update expenditure
+=== Use case 16: Edit or Update expenditure
 *System:*
 Expenditure Tracker & Calendar
 
