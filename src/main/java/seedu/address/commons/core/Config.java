@@ -54,12 +54,7 @@ public class Config {
 
         return Objects.equals(appTitle, o.appTitle)
                 && Objects.equals(logLevel, o.logLevel)
-<<<<<<< HEAD
-                && Objects.equals(userPrefsFilePath, o.userPrefsFilePath)
-                && Objects.equals(userFilePath, o.userFilePath);
-=======
                 && Objects.equals(userPrefsFilePath, o.userPrefsFilePath);
->>>>>>> parent of 17cb12d8... Updated config
     }
 
     @Override
