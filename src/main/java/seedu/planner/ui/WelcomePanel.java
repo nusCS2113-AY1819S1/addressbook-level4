@@ -13,14 +13,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.ui.UpdateWelcomePanelEvent;
+import seedu.planner.model.Model;
 import seedu.planner.model.summary.CategoryStatistic;
+import seedu.planner.model.summary.CategoryStatisticsList;
 
 /**
  * UI component that displays the default welcome page with statistic of the current month and a welcome message
  */
 public class WelcomePanel extends UiPart<Region> {
 
-    private static final Logger logger = LogsCenter.getLogger(UiManager.class);
+    private static final Logger logger = LogsCenter.getLogger(WelcomePanel.class);
 
     private static final String FXML = "WelcomePanel.fxml";
 
@@ -30,8 +32,9 @@ public class WelcomePanel extends UiPart<Region> {
     @FXML
     private AnchorPane incomeStats;
 
-    public WelcomePanel() {
+    public WelcomePanel(Model model) {
         super(FXML);
+        populateUi(new CategoryStatisticsList(model.getRecordsThisMonth()).getReadOnlyStatsList());
         registerAsAnEventHandler(this);
     }
 
@@ -69,18 +72,10 @@ public class WelcomePanel extends UiPart<Region> {
         categoryBreakdown.setPieChartSize(600.0, 300.0);
         categoryBreakdown.disableLegend();
         expenseStats.getChildren().add(categoryBreakdown.getRoot());
-        expenseStats.setTopAnchor(categoryBreakdown.getRoot(), 0.0);
-        expenseStats.setBottomAnchor(categoryBreakdown.getRoot(), 0.0);
-        expenseStats.setRightAnchor(categoryBreakdown.getRoot(), 0.0);
-        expenseStats.setLeftAnchor(categoryBreakdown.getRoot(), 0.0);
         categoryBreakdown = createTotalIncomeBreakdown(toDisplay);
         categoryBreakdown.setPieChartSize(600.0, 300.0);
         categoryBreakdown.disableLegend();
         incomeStats.getChildren().add(categoryBreakdown.getRoot());
-        incomeStats.setTopAnchor(categoryBreakdown.getRoot(), 0.0);
-        incomeStats.setBottomAnchor(categoryBreakdown.getRoot(), 0.0);
-        incomeStats.setRightAnchor(categoryBreakdown.getRoot(), 0.0);
-        incomeStats.setLeftAnchor(categoryBreakdown.getRoot(), 0.0);
     }
 
     @Subscribe

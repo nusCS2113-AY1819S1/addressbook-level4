@@ -84,6 +84,10 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedFinancialPlanner;
     }
 
+    public ObservableList<Record> getRecordsThisMonth() {
+        return recordsInCurrentMonth;
+    }
+
     //=========== Event management methods =========================================================
 
     /** Raises an event to indicate the model has changed */

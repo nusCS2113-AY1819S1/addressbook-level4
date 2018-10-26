@@ -8,7 +8,8 @@
 <?import javafx.scene.layout.VBox?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1">
    <children>
-      <VBox prefHeight="48.0" prefWidth="200.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox prefHeight="48.0" prefWidth="200.0" style="-fx-background-color: black;"
+            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <GridPane gridLinesVisible="true">
               <columnConstraints>
@@ -19,8 +20,10 @@
                 <RowConstraints vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <AnchorPane fx:id="expenseStats" style="-fx-background-color: pink" />
-                  <AnchorPane fx:id="incomeStats" style="-fx-background-color: red" GridPane.columnIndex="1" />
+                  <AnchorPane fx:id="expenseStats"
+                              AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                  <AnchorPane fx:id="incomeStats" GridPane.columnIndex="1"
+                              AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
                </children>
             </GridPane>
             <Label text="Label" />
