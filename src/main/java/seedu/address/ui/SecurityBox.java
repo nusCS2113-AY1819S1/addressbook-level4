@@ -47,10 +47,11 @@ public class SecurityBox extends UiPart<Region> {
                 raise(new SuccessfulRegisterEvent());
                 break;
             case USER_ALREADY_EXISTS:
-                raise(new NewResultAvailableEvent("Failure: Username already used"));
+                raise(new NewResultAvailableEvent("Username already used"));
                 System.out.println("Failure: Username already used");
                 break;
             case INCOMPLETE_FIELD:
+                raise(new NewResultAvailableEvent("Incomplete fields"));
                 System.out.println("Failure: Incomplete fields");
                 break;
             default:

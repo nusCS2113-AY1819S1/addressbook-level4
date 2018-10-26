@@ -7,6 +7,7 @@ import com.google.common.eventbus.Subscribe;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.events.security.LogoutEvent;
 import seedu.address.commons.events.security.SuccessfulLoginEvent;
+import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -50,14 +51,16 @@ public class SecurityManager extends ComponentManager implements Security {
                 } else {
                     //THROW INCORRECT PASSWORD EXCEPTION
                     incorrectPassWord = true;
+                    raise(new NewResultAvailableEvent("Incorrect Password"));
                 }
             }
-            //When username is not in the list
-            if (!incorrectPassWord && !this.isAuthenticated) {
-                //THROW USER NOT FOUND
-
-            }
         }
+        //When username is not in the list
+        if (!incorrectPassWord && !this.isAuthenticated) {
+            //THROW USER NOT FOUND
+            raise(new NewResultAvailableEvent("Username not found"));
+        }
+        incorrectPassWord = false;
     }
 
     @Override
