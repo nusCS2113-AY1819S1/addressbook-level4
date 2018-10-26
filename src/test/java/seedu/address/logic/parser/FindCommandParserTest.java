@@ -78,25 +78,25 @@ public class FindCommandParserTest {
         FindCommand expectedFindCommand =
                 new FindCommand(prefixKeywordsMap, keys.toArray(new Prefix[0]));
 
-        String userInput = " " +
-                PREFIX_NAME +
-                "Bob Alice " +
-                PREFIX_EMAIL +
-                Alice.getEmail().value +
-                " " +
-                PREFIX_PHONE +
-                Alice.getPhone().value +
-                " " +
-                PREFIX_ADDRESS +
-                Alice.getAddress().value +
-                " " +
-                PREFIX_NOTE +
-                Alice.getNote().value +
-                " " +
-                PREFIX_TAG +
-                Alice.getStringTags();
+        String userInput = " "
+                + PREFIX_NAME
+                + "Bob Alice "
+                + PREFIX_EMAIL
+                + Alice.getEmail().value
+                + " "
+                + PREFIX_PHONE
+                + Alice.getPhone().value
+                + " "
+                + PREFIX_ADDRESS
+                + Alice.getAddress().value
+                + " "
+                + PREFIX_NOTE
+                + Alice.getNote().value
+                + " "
+                + PREFIX_TAG
+                + Alice.getStringTags();
 
-        assertParseSuccess(parser,  userInput, expectedFindCommand);
+        assertParseSuccess(parser, userInput, expectedFindCommand);
 
     }
     //@@author
