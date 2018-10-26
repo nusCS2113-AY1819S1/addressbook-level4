@@ -1,5 +1,10 @@
 package seedu.address.init;
 
+import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_ACCOUNTANT;
+import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_ADMIN;
+import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_MANAGER;
+import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_STOCK_TAKER;
+
 import java.io.IOException;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -104,19 +109,20 @@ public class InitAddressBook {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
         }
-        if (CurrentUser.getAuthenticationLevel ().equals ("admin")) {
+        if (CurrentUser.getAuthenticationLevel ().equals (AUTH_ADMIN)) {
             return new AdminModelManager (initialData , userPrefs);
         }
-        if (CurrentUser.getAuthenticationLevel ().equals ("STOCK_TAKER")) {
+        if (CurrentUser.getAuthenticationLevel ().equals (AUTH_MANAGER)) {
+            return new ManagerModelManager (initialData, userPrefs);
+        }
+        if (CurrentUser.getAuthenticationLevel ().equals (AUTH_STOCK_TAKER)) {
             return new StockTakerModelManager (initialData , userPrefs);
         }
 
-        if (CurrentUser.getAuthenticationLevel ().equals ("ACCOUNTANT")) {
+        if (CurrentUser.getAuthenticationLevel ().equals (AUTH_ACCOUNTANT)) {
             return new AccountantModelManager (initialData, userPrefs);
         }
-        if (CurrentUser.getAuthenticationLevel ().equals ("MANAGER")) {
-            return new ManagerModelManager (initialData, userPrefs);
-        }
+
         return new ModelManager (initialData, userPrefs);
     }
 

@@ -121,7 +121,6 @@ public class UiManager extends ComponentManager implements Ui {
     }
     @Subscribe
     private void handleStopUiEvent(StopUiEvent event) {
-        System.out.println ("at handleStopUiEvent");
         stop ();
     }
 }
