@@ -24,12 +24,15 @@ public class CustomPieChart extends PieChart {
                 data.nameProperty().bind(Bindings.concat(data.getName(), " ", data.pieValueProperty(), "%")));
     }
 
+    /**
+     * This class represents a customized legend panel for the pieChart
+     */
     class CustomLegend extends GridPane {
 
         CustomLegend(PieChart chart) {
             setHgap(10);
             setVgap(10);
-            int index= 0;
+            int index = 0;
             ObservableList<PieChart.Data> dataList = chart.getData();
             for (PieChart.Data d : dataList) {
                 addRow(index, createSymbol(dataList.indexOf(d)), new Label(d.getName()), new Label(convertToMoney(d)));
