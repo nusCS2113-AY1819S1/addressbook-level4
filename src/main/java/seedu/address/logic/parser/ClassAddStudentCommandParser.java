@@ -12,7 +12,7 @@ import seedu.address.logic.commands.ClassAddStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new ClassAddCommand object
+ * Parses input arguments and creates a new ClassAddStudentCommand object
  */
 public class ClassAddStudentCommandParser implements Parser<ClassAddStudentCommand> {
     /**
