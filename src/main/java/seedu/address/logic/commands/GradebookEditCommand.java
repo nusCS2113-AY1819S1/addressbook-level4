@@ -25,7 +25,7 @@ public class GradebookEditCommand extends Command {
             + "\nParameters: "
             + PREFIX_MODULE_CODE + "MODULE CODE  "
             + PREFIX_GRADEBOOK_ITEM + "COMPONENT NAME "
-            + PREFIX_GRADEBOOK_ITEM_EDIT + "[EDITED COMPONENT NAME]"
+            + PREFIX_GRADEBOOK_ITEM_EDIT + "[EDITED COMPONENT NAME] "
             + PREFIX_GRADEBOOK_MAXMARKS + "[EDITED MAX MARKS] "
             + PREFIX_GRADEBOOK_WEIGHTAGE + "[EDITED WEIGHTAGE]"
             + "\nExample: " + COMMAND_WORD + " "

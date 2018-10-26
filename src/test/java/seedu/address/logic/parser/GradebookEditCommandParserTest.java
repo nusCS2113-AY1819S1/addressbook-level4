@@ -9,6 +9,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import static org.junit.Assert.assertNotNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.GradebookEditCommand.MESSAGE_USAGE;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.logic.parser.GradebookEditCommandParser.*;
 
 public class GradebookEditCommandParserTest {
@@ -30,9 +31,58 @@ public class GradebookEditCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_success() throws ParseException {
-        //valid arguments
-        String args = " mc/CS2113 i/Finals m/50 w/50";
+    public void parse_validArgsWithNewComponentName_success() throws ParseException {
+        //valid arguments with optional new gradebook component name
+        String moduleCode = "CS2113";
+        String gradebookComponentName = "Finals";
+        String newGradebookComponentName = "Test";
+        String args = " "
+                + PREFIX_MODULE_CODE
+                + moduleCode
+                + " "
+                + PREFIX_GRADEBOOK_ITEM
+                + gradebookComponentName
+                + " "
+                + PREFIX_GRADEBOOK_ITEM_EDIT
+                + newGradebookComponentName;
+        GradebookEditCommand gradebookEditCommand = parser.parse(args);
+        assertNotNull(gradebookEditCommand);
+    }
+
+    @Test
+    public void parse_validArgsWithNewMaxMarks_success() throws ParseException {
+        //valid arguments with optional new max marks
+        String moduleCode = "CS2113";
+        String gradebookComponentName = "Finals";
+        int newMaxMarks = 50;
+        String args = " "
+                + PREFIX_MODULE_CODE
+                + moduleCode
+                + " "
+                + PREFIX_GRADEBOOK_ITEM
+                + gradebookComponentName
+                + " "
+                + PREFIX_GRADEBOOK_MAXMARKS
+                + newMaxMarks;
+        GradebookEditCommand gradebookEditCommand = parser.parse(args);
+        assertNotNull(gradebookEditCommand);
+    }
+
+    @Test
+    public void parse_validArgsWithNewWeightage_success() throws ParseException {
+        //valid arguments with optional new weightage
+        String moduleCode = "CS2113";
+        String gradebookComponentName = "Finals";
+        int newWeightage = 20;
+        String args = " "
+                + PREFIX_MODULE_CODE
+                + moduleCode
+                + " "
+                + PREFIX_GRADEBOOK_ITEM
+                + gradebookComponentName
+                + " "
+                + PREFIX_GRADEBOOK_WEIGHTAGE
+                + newWeightage;
         GradebookEditCommand gradebookEditCommand = parser.parse(args);
         assertNotNull(gradebookEditCommand);
     }
@@ -40,24 +90,20 @@ public class GradebookEditCommandParserTest {
     @Test
     public void parse_validArgsDifferentPositions_success() throws ParseException {
         //valid arguments
-        String args = " mc/CS2113 m/50 i/Finals w/50";
+        String moduleCode = "CS2113";
+        String gradebookComponentName = "Finals";
+        int newMaxMarks = 90;
+        String args = " "
+                + PREFIX_MODULE_CODE
+                + moduleCode
+                + " "
+                + PREFIX_GRADEBOOK_MAXMARKS
+                + newMaxMarks
+                + " "
+                + PREFIX_GRADEBOOK_ITEM
+                + gradebookComponentName;
+
         GradebookEditCommand gradebookEditCommand = parser.parse(args);
-        assertNotNull(gradebookEditCommand);
-    }
-
-    @Test
-    public void parse_validArgsWithMaxMarks_success() throws ParseException {
-        //valid arguments with maximum marks
-        String argsWithMaxMarks = " mc/CS2113 i/Finals mm/50";
-        GradebookEditCommand gradebookEditCommand = parser.parse(argsWithMaxMarks);
-        assertNotNull(gradebookEditCommand);
-    }
-
-    @Test
-    public void parse_validArgsWithWeightage_success() throws ParseException {
-        //valid arguments with maximum marks
-        String argsWithWeightage = " mc/CS2113 i/Finals w/50";
-        GradebookEditCommand gradebookEditCommand = parser.parse(argsWithWeightage);
         assertNotNull(gradebookEditCommand);
     }
 
@@ -65,7 +111,14 @@ public class GradebookEditCommandParserTest {
     public void parse_emptyModuleArgs_throwsParseException() throws ParseException {
         String expectedMessage = String.format(MESSAGE_ERROR_EMPTY);
         //component name empty
-        String argWithoutModule = " mc/ i/Test";
+        String moduleCode = "CS2113";
+        String gradebookComponentName = "";
+        String argWithoutModule = " "
+                + PREFIX_MODULE_CODE
+                + moduleCode
+                + " "
+                + PREFIX_GRADEBOOK_ITEM
+                + gradebookComponentName;
         thrown.expect(ParseException.class);
         thrown.expectMessage(expectedMessage);
         parser.parse(argWithoutModule);
@@ -76,7 +129,14 @@ public class GradebookEditCommandParserTest {
     public void parse_emptyComponentNameArgs_throwsParseException() throws ParseException {
         String expectedMessage = String.format(MESSAGE_ERROR_EMPTY);
         //component name empty
-        String argWithoutComponentName = " mc/ST2334 i/";
+        String moduleCode = "";
+        String gradebookComponentName = "Finals";
+        String argWithoutComponentName = " "
+                + PREFIX_MODULE_CODE
+                + moduleCode
+                + " "
+                + PREFIX_GRADEBOOK_ITEM
+                + gradebookComponentName;
         thrown.expect(ParseException.class);
         thrown.expectMessage(expectedMessage);
         parser.parse(argWithoutComponentName);
@@ -85,7 +145,18 @@ public class GradebookEditCommandParserTest {
     @Test
     public void parse_invalidMaxMarksArgs_throwsParseException() throws ParseException {
         String expectedMessage = String.format(MESSAGE_MAX_MARKS_INVALID);
-        String argWithInvalidMaxMarks = " mc/CG2271 i/Finals mm/101";
+        String moduleCode = "CS2113";
+        String gradebookComponentName = "Finals";
+        int newMaxMarks = 101;
+        String argWithInvalidMaxMarks = " "
+                + PREFIX_MODULE_CODE
+                + moduleCode
+                + " "
+                + PREFIX_GRADEBOOK_ITEM
+                + gradebookComponentName
+                + " "
+                + PREFIX_GRADEBOOK_MAXMARKS
+                + newMaxMarks;
         thrown.expect(ParseException.class);
         thrown.expectMessage(expectedMessage);
         parser.parse(argWithInvalidMaxMarks);
@@ -94,7 +165,18 @@ public class GradebookEditCommandParserTest {
     @Test
     public void parse_invalidWeightageArgs_throwsParseException() throws ParseException {
         String expectedMessage = String.format(MESSAGE_WEIGHTAGE_INVALID);
-        String argWithInvalidWeightage = " mc/CG2271 i/Finals w/101";
+        String moduleCode = "CS2113";
+        String gradebookComponentName = "Finals";
+        int newWeightage = 111;
+        String argWithInvalidWeightage = " "
+                + PREFIX_MODULE_CODE
+                + moduleCode
+                + " "
+                + PREFIX_GRADEBOOK_ITEM
+                + gradebookComponentName
+                + " "
+                + PREFIX_GRADEBOOK_WEIGHTAGE
+                + newWeightage;
         thrown.expect(ParseException.class);
         thrown.expectMessage(expectedMessage);
         parser.parse(argWithInvalidWeightage);
@@ -103,7 +185,18 @@ public class GradebookEditCommandParserTest {
     @Test
     public void parse_invalidMaxMarksTypeArgs_throwsParseException() throws ParseException {
         String expectedMessage = String.format(MESSAGE_MAX_MARKS_ERROR);
-        String argWithInvalidMaxMarksType = " mc/CG2271 i/Finals mm/10a";
+        String moduleCode = "CS2113";
+        String gradebookComponentName = "Finals";
+        String newMaxMarks = "11a";
+        String argWithInvalidMaxMarksType = " "
+                + PREFIX_MODULE_CODE
+                + moduleCode
+                + " "
+                + PREFIX_GRADEBOOK_ITEM
+                + gradebookComponentName
+                + " "
+                + PREFIX_GRADEBOOK_MAXMARKS
+                + newMaxMarks;
         thrown.expect(ParseException.class);
         thrown.expectMessage(expectedMessage);
         parser.parse(argWithInvalidMaxMarksType);
@@ -112,7 +205,18 @@ public class GradebookEditCommandParserTest {
     @Test
     public void parse_invalidWeightageTypeArgs_throwsParseException() throws ParseException {
         String expectedMessage = String.format(MESSAGE_WEIGHTAGE_ERROR);
-        String argWithInvalidWeightageType = " mc/CG2271 i/Finals w/10a";
+        String moduleCode = "CS2113";
+        String gradebookComponentName = "Finals";
+        String newWeightage = "11b";
+        String argWithInvalidWeightageType = " "
+                + PREFIX_MODULE_CODE
+                + moduleCode
+                + " "
+                + PREFIX_GRADEBOOK_ITEM
+                + gradebookComponentName
+                + " "
+                + PREFIX_GRADEBOOK_WEIGHTAGE
+                + newWeightage;
         thrown.expect(ParseException.class);
         thrown.expectMessage(expectedMessage);
         parser.parse(argWithInvalidWeightageType);
