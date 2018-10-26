@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import org.apache.commons.io.FileUtils;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.FileUtil;
+import seedu.address.logic.ValidCommandList;
 
 /**
  * Load the and add default scripts into in the default directory of the Application.
@@ -31,7 +33,7 @@ public class ScriptSetup {
         try {
             boolean isScriptFolderPresent = FileUtil.createFolder(scriptPath);
             if (!isScriptFolderPresent) {
-                addSampleTextFiles(scriptFolder);
+                addSampleTextFiles(scriptFolder, defaultLocation);
             }
         } catch (IOException ioe) {
             logger.info(scriptPath + " is not a valid directory "
@@ -43,13 +45,16 @@ public class ScriptSetup {
     /**
      * Add some sample text files
      */
-    public void addSampleTextFiles(String newFileDir) {
-        File source = new File(defaultLocation + DIR_SAMPLE_TEXT);
-        File destination = new File(defaultLocation + newFileDir);
+    public void addSampleTextFiles(String scriptFolder, String defaultLocation) {
+        File file = new File(defaultLocation + scriptFolder + "AddPersons.txt");
+        File file2 = new File(defaultLocation + scriptFolder + "AddGroups.txt");
         try {
-            FileUtil.copyFile(source, destination);
-        } catch (IOException e) {
-            e.printStackTrace();
+            FileUtils.writeStringToFile(file, ValidCommandList.getAddCommand(), true);
+            FileUtils.writeStringToFile(file2, ValidCommandList.getGroupCommand(), true);
+        } catch (IOException ioe) {
+            logger.info("Sample Text cannot be created");
         }
     }
+
+
 }

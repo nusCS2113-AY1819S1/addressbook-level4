@@ -140,6 +140,4 @@ public class FileUtil {
         Path currentRelativePath = Paths.get("");
         return currentRelativePath.toAbsolutePath().toString();
     }
-
-
 }
