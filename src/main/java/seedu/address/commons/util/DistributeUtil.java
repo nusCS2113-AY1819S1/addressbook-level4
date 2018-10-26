@@ -225,14 +225,22 @@ public class DistributeUtil {
         return new Group(parseGroupName, parseGroupLocation, tags);
     }
 
-    public void createGroup(Group group) throws CommandException {
+    /** This method creates a group. However it does not do a commit after addition of group.
+     * @param group : Group object to be created.
+     * @throws CommandException : if there exist another group with the same object.
+     */
+    public void createGroupWithoutCommit(Group group) throws CommandException {
         CreateGroupCommand createGroupCommand = new CreateGroupCommand(group);
         createGroupCommand.setShouldCommit(false);
         createGroupCommand.execute(model, commandHistory);
         createGroupCommand.setShouldCommit(true);
     }
 
-    public void addPersonIntoGroup(AddGroup addGroup) throws CommandException {
+    /** This method add a Person into a group. However it does not do a commit after addition into group.
+     * @param addGroup : AddGroup Object to be executed.
+     * @throws CommandException : When there is an Invalid Group or Person Index found.
+     */
+    public void addPersonIntoGroupWithoutCommit(AddGroup addGroup) throws CommandException {
         AddGroupCommand personToAdd = new AddGroupCommand(addGroup);
         personToAdd.setShouldCommit(false);
         personToAdd.execute(model, commandHistory);
@@ -268,7 +276,7 @@ public class DistributeUtil {
         for (int i = 0; i < groupArrayList.size(); i++) {
             String toCreateGroupName = groupNameConcatenation(i, groupName);
             Group newGroup = groupBuilder(toCreateGroupName);
-            createGroup(newGroup);
+            createGroupWithoutCommit(newGroup);
             Index groupIndex = returnGroupIndex(newGroup);
             if (groupIndex.getOneBased() == 0) {
                 throw new CommandException(MESSAGE_MISSING_GROUP);
@@ -282,7 +290,7 @@ public class DistributeUtil {
                         Set<Index> personIndices = new HashSet<>();
                         personIndices.add(Index.fromZeroBased(k));
                         AddGroup addSinglePersonIntoGroup = new AddGroup(groupIndex, personIndices);
-                        addPersonIntoGroup(addSinglePersonIntoGroup);
+                        addPersonIntoGroupWithoutCommit(addSinglePersonIntoGroup);
                     }
                 }
             }
