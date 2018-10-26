@@ -1,9 +1,13 @@
 package seedu.planner.ui;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -11,6 +15,7 @@ import javafx.scene.layout.Region;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.ui.ShowPieChartStatsEvent;
 import seedu.planner.commons.events.ui.ShowSummaryTableEvent;
+import seedu.planner.model.summary.CategoryStatistic;
 
 /**
  * This UI component is responsible for managing the tabs where the statistics will be displayed
@@ -57,6 +62,34 @@ public class StatsDisplayPanel extends UiPart<Region> {
         }
     }
 
+    /** Creates the CategoryBreakdown object with the total expense and tag of each CategoryStatistic */
+    private CategoryBreakdown createTotalExpenseBreakdown(ObservableList<CategoryStatistic> data) {
+        List<ChartData> chartDataList = new ArrayList();
+        Double totalExpense = 0.0;
+        for (CategoryStatistic d : data) {
+            if (d.getTotalExpense() > 0.0) {
+                chartDataList.add(new ChartData(d.getTags().toString(), d.getTotalExpense()));
+                totalExpense += d.getTotalExpense();
+            }
+        }
+        return new CategoryBreakdown(FXCollections.observableList(chartDataList), "Total Expense for the period",
+                totalExpense);
+    }
+
+    /** Creates the CategoryBreakdown object with the total income and tag of each CategoryStatistic */
+    private CategoryBreakdown createTotalIncomeBreakdown(ObservableList<CategoryStatistic> data) {
+        List<ChartData> chartDataList = new ArrayList();
+        Double totalIncome = 0.0;
+        for (CategoryStatistic d : data) {
+            if (d.getTotalIncome() > 0.0) {
+                chartDataList.add(new ChartData(d.getTags().toString(), d.getTotalIncome()));
+                totalIncome += d.getTotalIncome();
+            }
+        }
+        return new CategoryBreakdown(FXCollections.observableList(chartDataList), "Total Income for the period",
+                totalIncome);
+    }
+
     @Subscribe
     public void handleShowSummaryTableEvent(ShowSummaryTableEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
@@ -69,10 +102,12 @@ public class StatsDisplayPanel extends UiPart<Region> {
     @Subscribe
     public void handleShowPieChartStatsEvent(ShowPieChartStatsEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        CustomTab categoryTab = new CustomTab("Financial Activity breakdown",
-                new CategoryBreakdown(event.data, "Expense only").getRoot());
+        CustomTab categoryExpenseTab = new CustomTab("Category Breakdown For Expenses", createTotalExpenseBreakdown(
+                event.data).getRoot());
+        CustomTab categoryIncomeTab = new CustomTab("Category Breakdown For Income", createTotalIncomeBreakdown(
+                event.data).getRoot());
         clearTabs();
-        createTabs(categoryTab);
+        createTabs(categoryExpenseTab, categoryIncomeTab);
         show();
     }
 }

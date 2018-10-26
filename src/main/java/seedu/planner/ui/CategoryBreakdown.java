@@ -1,6 +1,8 @@
 package seedu.planner.ui;
 
+import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,7 +13,6 @@ import javafx.scene.control.Control;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.planner.commons.core.LogsCenter;
-import seedu.planner.model.summary.CategoryStatistic;
 
 /**
  * This UI component is responsible for displaying the breakdown of total income and expenses into categories
@@ -29,9 +30,9 @@ public class CategoryBreakdown extends UiPart<Region> {
     private ObservableList<PieChart.Data> pieChartData;
     private PieChart pieChart;
 
-    public CategoryBreakdown(ObservableList<CategoryStatistic> toDisplay, String label) {
+    public CategoryBreakdown(ObservableList<ChartData> toDisplay, String label, Double total) {
         super(FXML);
-        pieChartData = convertToPieChartList(toDisplay);
+        pieChartData = convertToPieChartList(toDisplay, total);
         pieChart = new CustomPieChart(pieChartData);
         initPieChart(label);
         root.setStyle("-fx-background-color: grey");
@@ -42,10 +43,10 @@ public class CategoryBreakdown extends UiPart<Region> {
     private void initPieChart(String label) {
         pieChart.setTitle(label);
         pieChart.setLabelsVisible(true);
-        pieChart.setLabelLineLength(50);
+        pieChart.setLabelLineLength(10);
         pieChart.setLegendSide(Side.RIGHT);
 
-        pieChart.setPrefSize(400, 800);
+        pieChart.setPrefSize(800, 400);
         pieChart.setMinSize(Control.USE_PREF_SIZE, Control.USE_PREF_SIZE);
         pieChart.maxHeight(Double.MAX_VALUE);
         pieChart.maxWidth(Double.MAX_VALUE);
@@ -72,14 +73,16 @@ public class CategoryBreakdown extends UiPart<Region> {
         pieChart.setLegendVisible(false);
     }
 
-    /** Converts a given ObservableList to a list that can be read by {@link PieChart}*/
-    private ObservableList<PieChart.Data> convertToPieChartList(ObservableList<CategoryStatistic> toDisplay) {
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
-        for (CategoryStatistic stat : toDisplay) {
-            if (stat.getTotalExpense() != 0) {
-                pieChartData.add(new PieChart.Data(stat.getTags().toString(), stat.getTotalExpense()));
-            }
+    /** Converts a given ObservableList containing {@see ChartData} to a list that can be read by {@link PieChart}
+     * */
+    private ObservableList<PieChart.Data> convertToPieChartList(ObservableList<ChartData> data, Double total) {
+        List<PieChart.Data> dataList;
+        if (total > 0.0) {
+            dataList = data.stream().map(d -> new PieChart.Data(d.key, d.value / total * 100.0))
+                    .collect(Collectors.toList());
+        } else {
+            dataList = data.stream().map(d -> new PieChart.Data(d.key, d.value)).collect(Collectors.toList());
         }
-        return pieChartData;
+        return FXCollections.observableList(dataList);
     }
 }
