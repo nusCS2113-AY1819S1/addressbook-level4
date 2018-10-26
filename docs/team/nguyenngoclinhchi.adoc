@@ -17,36 +17,31 @@ FinancialPlanner - Level 4 is a desktop expense book application used for teachi
 ** Justification: This feature improves the product significantly because a user can make mistakes in date keyed for records and the app should provide a convenient way to rectify them.
 ** Highlights: This enhancement affects existing commands, commands to be added in future, and records stored. It required an in-depth analysis of design alternatives.
 
+==== `completed`  *Minor enhancement #1*: added the ability to set-directory for the Excel file. `sub-part of Major enhancement #2`
+
+** What it does: allows user to store Excel file they want to export in directory they want or default Home directory.
+** Justification: The implementation was challenging as it required Developer to access various private information from the user computer.
+
+==== `ongoing` *Minor enhancement #2*: added the ability to color the cells whose date exceeds the limit of the day. `sub-part of Major enhancement #2`
+** What it does: allows user to choose the color they want to color for the cells which exceed limit.
+** Justification: This enhancement will combine with Limit Command and help the user to justify their expense for the future as they see the amount of money exceeded.
+
 === `completed` *Major enhancement #2*: added the ability to export the data of records into Excel file.
 
 ** What it does: allows the user to export data into Excel file for the summary purpose.
 ** Justification: This feature improves the product significantly because a user can export data into Excel file and the app should provide a convenient way to rectify them. The implementation was challenging as it required Developer to get used to third-party Library in the short time as this project is time-restricted.
-** Highlights: This enhancement is the foundation for other minor enhancements below. It required in-depth analysis of design alternative.
+** Highlights: This enhancement is one of `advanced` features.
 ** Credits: I would like to extend my thank you to the Third-party library: Apache poi.
 
-=== `ongoing` *Minor enhancement #1*: added the ability to achieve the data into Excel file
-===== `sub-part of Major enhancement #2`
+=== `ongoing` *Major enhancement #3*: added the ability to achieve the data into Excel file
 
 ** What it does: In case your Financial planner storage too large, and you want to archive based on year, month or period. This feature is designed specifically for you.
 ** Justification: This feature improves the product significantly because a user can export data into Excel file for the purpose of reducing the storage and planning systematically (archive based on year, month, or day).
 
-=== `ongoing`  *Minor enhancement #2*: added the ability to set-directory for the Excel file.
-===== `sub-part of Major enhancement #2`
+=== `completed` *Major enhancement #4*: added the ability to import the Excel sheet.
 
-** What it does: allows user to store Excel file they want to export in directory they want or default Home directory.
-** Justification: The implementation was challenging as it required Developer make global change in the project.
-
-=== `ongoing` *Minor enhancement #3*: added the ability to create Excel sheet.
-===== `sub-part of Major enhancement #2`
-
-** What it does: helps the user to calculate the sum of money spent/received within period/month/year.
-** Justification: This implementation will help the user to manage their expense more effectively and have more overview look for their financial planner by summarizing the data from the exporting Excel file and calculating the sum of money flow (money spent/received) of the records.
-
-=== `ongoing` *Minor enhancement #4*: added the ability to color the cells whose date exceeds the limit of the day.
-===== `sub-part of Major enhancement #2`
-** What it does: allows user to choose the color they want to color for the cells which exceed limit.
-** Justification: This enhancement will combine with Limit Command and help the user to justify their expense for the future as they see the amount of money exceeded.
-
+** What it does: helps the user to read the Excel sheet and add all the data, store them in Financial Planner.
+** Justification: This implementation will help the user transfer all the data from Excel sheet to Financial Planner automatically without typing data again.
 
 * *Code contributed*:
 
@@ -77,9 +72,9 @@ _{you can add/remove categories in the list above}_
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
+include::../UserGuide.adoc[tag=delete_by_date_entry]
 
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=export_excel]
 
 == Contributions to the Developer Guide
 
@@ -87,9 +82,9 @@ include::../UserGuide.adoc[tag=dataencryption]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=delete_by_date_entry]
 
-include::../DeveloperGuide.adoc[tag=dataencryption]
+include::../DeveloperGuide.adoc[tag=export_excel]
 
 
 == PROJECT: PowerPointLabs

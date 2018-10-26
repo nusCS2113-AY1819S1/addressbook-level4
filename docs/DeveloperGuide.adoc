@@ -458,6 +458,8 @@ The following sequence diagram shows how the limit operation works:
 
 image::LimitSequenceDiagram.png[width:800]
 
+// tag::delete_by_date_entry[]
+
 === Delete By Date Entry
 ==== Current implementation
 The delete by date entry mechanism is facilitated by `ModelManager`.
@@ -477,6 +479,9 @@ The following sequence diagram shows how the list operation works:
 
 image::DeleteByDateEntrySequenceDiagram.png[width:800]
 
+// end::delete_by_date_entry[]
+
+// tag::export_excel[]
 === Export into Excel file
 ==== Current implementation
 The export into excel file mechanism is facilitated by `ModelManager`.
@@ -509,6 +514,8 @@ For simplicity, interactions with the UI is not shown in the diagram above. +
 The update of the UI `RecordListPanel` is done through the event system. `FilteredList` is a type of ObservableList
 implemented by the Java 8 API and it will propagate any changes to the list to any listeners listening to it. This
 listener is present in `RecordListPanel` and will update the UI list automatically.
+
+// end::export_excel[]
 
 === Design Considerations
 ==== Aspect: Data structure to support listing of records

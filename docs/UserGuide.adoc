@@ -218,6 +218,8 @@ Deletes the 2nd record in the expense book.
 `delete 1` +
 Deletes the 1st record in the results of the `find` command.
 
+// tag::delete_by_date_entry[]
+
 === Delete records in same date. `delete_date`
 
 Deletes the records whose date is required from the expense book. +
@@ -233,6 +235,10 @@ Examples:
 
 * `delete_date 31-03-1999` +
 Deletes the records whose date is 31-03-1999.
+
+// end::delete_by_date_entry[]
+
+// tag::export_excel[]
 
 === Export the records into the Excel file. `export_excel`
 
@@ -257,6 +263,8 @@ Examples:
 * `export_excel`
 * `export_excel 31-3-1999`
 * `export_excel 31-3-1999 31-03-2019`
+
+// end::export_excel[]
 
 === Selecting a record : `select`
 
