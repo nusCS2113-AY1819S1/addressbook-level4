@@ -64,7 +64,7 @@ public class SecurityManagerTest {
         model = new ModelManager(addressBook, userPrefs);
         logic = new LogicManager(model);
 
-        securityManager = new SecurityManager(false, model, logic);
+        securityManager = new SecurityManager(false, logic);
     }
 
     @Before

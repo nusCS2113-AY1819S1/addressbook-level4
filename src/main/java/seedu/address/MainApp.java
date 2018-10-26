@@ -73,7 +73,7 @@ public class MainApp extends Application {
         appUsers = initUsers(appUsersStorage);
         userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, appUsersStorage);
 
         initLogging(config);
 
@@ -81,7 +81,7 @@ public class MainApp extends Application {
 
         logic = new LogicManager(model);
 
-        security = new SecurityManager(false, model, logic);
+        security = new SecurityManager(false, logic);
 
         ui = new UiManager(logic, config, userPrefs, security);
 

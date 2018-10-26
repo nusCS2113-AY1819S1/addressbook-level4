@@ -9,7 +9,6 @@ import seedu.address.commons.events.security.UnsuccessfulLoginEvent;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model;
 import seedu.address.model.User;
 
 /***
@@ -18,16 +17,14 @@ import seedu.address.model.User;
 
 public class SecurityManager extends ComponentManager implements Security {
     private boolean isAuthenticated;
-    private Model model;
     private String username;
     private String password;
     private Logic logic;
 
-    public SecurityManager(boolean isTest, Model model, Logic logic) {
+    public SecurityManager(boolean isTest, Logic logic) {
         this.isAuthenticated = isTest; //Test for now
         this.username = "test";
         this.password = "test";
-        this.model = model;
         this.logic = logic;
 
     }
@@ -41,7 +38,7 @@ public class SecurityManager extends ComponentManager implements Security {
         if (username.equals(this.username) && password.equals(this.password)) {
             this.isAuthenticated = true;
             //Instantiates User by matching it with a Person in database
-            model.matchUserToPerson(username);
+            logic.matchUserToPerson(username);
             raise(new SuccessfulLoginEvent());
         } else {
             raise(new UnsuccessfulLoginEvent());
@@ -52,7 +49,7 @@ public class SecurityManager extends ComponentManager implements Security {
     public void logout() {
         this.isAuthenticated = false;
         //Clears instance of User in model to prevent anyone accessing previously logged in user
-        model.clearUser();
+        logic.clearUser();
     }
 
     @Override
@@ -60,7 +57,7 @@ public class SecurityManager extends ComponentManager implements Security {
         try {
             logic.execute("add n/" + username + " e/" + email + " p/" + phone + " a/" + address);
             this.isAuthenticated = true;
-            model.matchUserToPerson(username);
+            logic.matchUserToPerson(username);
             return RegisterFlag.SUCCESS;
         } catch (CommandException e) {
             return RegisterFlag.USER_ALREADY_EXISTS;
@@ -72,7 +69,7 @@ public class SecurityManager extends ComponentManager implements Security {
 
     @Override
     public User getUser() {
-        return model.getUser();
+        return logic.getUser();
     }
 
     @Subscribe
