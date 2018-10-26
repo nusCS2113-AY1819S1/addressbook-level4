@@ -2,8 +2,8 @@ package seedu.address.model.login;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD_ACCOUNT2;
-import static seedu.address.testutil.TypicalAccounts.LOGINDETAIL1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD_ACCOUNT_2;
+import static seedu.address.testutil.TypicalAccounts.LOGINDETAIL_1;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -26,19 +26,19 @@ public class UniqueAccountListTest {
 
     @Test
     public void contains_accountNotInList_returnsFalse() {
-        assertFalse(uniqueAccountList.contains(LOGINDETAIL1));
+        assertFalse(uniqueAccountList.contains(LOGINDETAIL_1));
     }
 
     @Test
     public void contains_accountInList_returnsTrue() {
-        uniqueAccountList.add(LOGINDETAIL1);
-        assertTrue(uniqueAccountList.contains(LOGINDETAIL1));
+        uniqueAccountList.add(LOGINDETAIL_1);
+        assertTrue(uniqueAccountList.contains(LOGINDETAIL_1));
     }
 
     @Test
     public void contains_accountWithSameUserIdInList_returnsTrue() {
-        uniqueAccountList.add(LOGINDETAIL1);
-        LoginDetails editedLoginDetail1 = new AccountBuilder(LOGINDETAIL1).withUserPassword(VALID_PASSWORD_ACCOUNT2)
+        uniqueAccountList.add(LOGINDETAIL_1);
+        LoginDetails editedLoginDetail1 = new AccountBuilder(LOGINDETAIL_1).withUserPassword(VALID_PASSWORD_ACCOUNT_2)
                 .build();
         assertTrue(uniqueAccountList.contains(editedLoginDetail1));
     }
@@ -51,9 +51,9 @@ public class UniqueAccountListTest {
 
     @Test
     public void add_duplicateAccount_throwsDuplicateAccountException() {
-        uniqueAccountList.add(LOGINDETAIL1);
+        uniqueAccountList.add(LOGINDETAIL_1);
         thrown.expect(DuplicateAccountException.class);
-        uniqueAccountList.add(LOGINDETAIL1);
+        uniqueAccountList.add(LOGINDETAIL_1);
     }
 
     @Test

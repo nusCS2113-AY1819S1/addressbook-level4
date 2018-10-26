@@ -54,8 +54,7 @@ public class SampleDataUtil {
 
     public static LoginDetails[] getSampleLoginDetails() {
         return new LoginDetails[] {
-            new LoginDetails(new UserId("A1234567M"), new UserPassword("zaq1xsw2cde3"), new UserRole("treasurer")),
-            new LoginDetails(new UserId("A1234568M"), new UserPassword("1qaz2wsx3edc"), new UserRole("president"))
+            new LoginDetails(new UserId("A1234567M"), new UserPassword("zaq1xsw2cde3"), new UserRole("president"))
         };
     }
 

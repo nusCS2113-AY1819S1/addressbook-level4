@@ -73,11 +73,16 @@ Format: `login USERID PASSWORD ROLE`
 
 Examples:
 
-* `login X1234567X zaq1xsw2cde3 member` +
-Logs into Address book with user ID as X1234567X, password as zaq1xsw2cde3 and role as member.
+* `login A1234568M zaq1xsw2cde3 member` +
+Logs into Address book with user ID as A1234568M, password as zaq1xsw2cde3 and role as member.
 
 image::CorrectIdPasswordRole.PNG[width="300"]
-image::LoginSuccessMessage.PNG[width="300"]
+image::Ui.png[width="300"]
+
+[NOTE]
+====
+Password is case-sensitive!
+====
 
 [NOTE]
 ====
@@ -105,7 +110,7 @@ Format: `createaccount USERID PASSWORD ROLE`
 
 Examples:
 
-* `createaccount X1234567X aq1xsw2cde3 member` +
+* `createaccount X1234567X zaq1xsw2cde3 member` +
 Creates a new account with user ID as X1234567X, password as zaq1xsw2cde3 and role as member in the address book.
 
 image::CreateAccountSuccess.PNG[width="300"]

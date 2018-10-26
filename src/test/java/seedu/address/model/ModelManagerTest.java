@@ -3,8 +3,8 @@ package seedu.address.model;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.testutil.TypicalAccounts.LOGINDETAIL1;
-import static seedu.address.testutil.TypicalAccounts.LOGINDETAIL2;
+import static seedu.address.testutil.TypicalAccounts.LOGINDETAIL_1;
+import static seedu.address.testutil.TypicalAccounts.LOGINDETAIL_2;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
@@ -45,8 +45,8 @@ public class ModelManagerTest {
 
     @Test
     public void hasAccount_accountInLoginBook_returnsTrue() {
-        modelManager.createAccount(LOGINDETAIL1);
-        assertTrue(modelManager.hasAccount(LOGINDETAIL1));
+        modelManager.createAccount(LOGINDETAIL_1);
+        assertTrue(modelManager.hasAccount(LOGINDETAIL_1));
     }
 
     @Test
@@ -75,8 +75,8 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        LoginBook loginBook = new LoginBookBuilder().withLoginDetails(LOGINDETAIL1)
-                .withLoginDetails(LOGINDETAIL2).build();
+        LoginBook loginBook = new LoginBookBuilder().withLoginDetails(LOGINDETAIL_1)
+                .withLoginDetails(LOGINDETAIL_2).build();
         LoginBook differentLoginBook = new LoginBook();
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();

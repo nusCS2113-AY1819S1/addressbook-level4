@@ -6,7 +6,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_LOGIN_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalAccounts.LOGINDETAIL1;
+import static seedu.address.testutil.TypicalAccounts.LOGINDETAIL_1;
 import static seedu.address.testutil.TypicalAccounts.getTypicalLoginBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalTaggedAddressBook;
 
@@ -117,7 +117,7 @@ public class LoginUserIdPasswordRoleCommandTest {
         Predicate updatedRolePredicate = getMostUpdatedRolePredicate(rolePredicate);
         expectedModel.updateFilteredLoginDetailsList(updatedRolePredicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(LOGINDETAIL1), model.getFilteredLoginDetailsList());
+        assertEquals(Arrays.asList(LOGINDETAIL_1), model.getFilteredLoginDetailsList());
     }
 
     @Test
@@ -136,7 +136,7 @@ public class LoginUserIdPasswordRoleCommandTest {
         Predicate updatedRolePredicate = getMostUpdatedRolePredicate(rolePredicate);
         expectedModel.updateFilteredLoginDetailsList(updatedRolePredicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertNotEquals(Arrays.asList(LOGINDETAIL1), model.getFilteredLoginDetailsList());
+        assertNotEquals(Arrays.asList(LOGINDETAIL_1), model.getFilteredLoginDetailsList());
     }
 
     @Test
@@ -155,7 +155,7 @@ public class LoginUserIdPasswordRoleCommandTest {
         Predicate updatedRolePredicate = getMostUpdatedRolePredicate(rolePredicate);
         expectedModel.updateFilteredLoginDetailsList(updatedRolePredicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertNotEquals(Arrays.asList(LOGINDETAIL1), model.getFilteredLoginDetailsList());
+        assertNotEquals(Arrays.asList(LOGINDETAIL_1), model.getFilteredLoginDetailsList());
     }
 
     @Test
@@ -174,7 +174,7 @@ public class LoginUserIdPasswordRoleCommandTest {
         Predicate updatedRolePredicate = getMostUpdatedRolePredicate(rolePredicate);
         expectedModel.updateFilteredLoginDetailsList(updatedRolePredicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertNotEquals(Arrays.asList(LOGINDETAIL1), model.getFilteredLoginDetailsList());
+        assertNotEquals(Arrays.asList(LOGINDETAIL_1), model.getFilteredLoginDetailsList());
     }
 
     @Test
@@ -193,7 +193,7 @@ public class LoginUserIdPasswordRoleCommandTest {
         Predicate updatedFirstRolePredicate = getMostUpdatedRolePredicate(firstRolePredicate);
         expectedModel.updateFilteredLoginDetailsList(updatedFirstRolePredicate);
         assertCommandSuccess(firstCommand, model, commandHistory, expectedMessage, expectedModel);
-        assertNotEquals(Arrays.asList(LOGINDETAIL1), model.getFilteredLoginDetailsList());
+        assertNotEquals(Arrays.asList(LOGINDETAIL_1), model.getFilteredLoginDetailsList());
 
         UserIdContainsKeywordsPredicate secondIdPredicate = prepareUserIdContainsKeywordsPredicate("A1234561M");
         UserPasswordContainsKeywordsPredicate secondPasswordPredicate = prepareUserPasswordContainsKeywordsPredicate(
@@ -208,7 +208,7 @@ public class LoginUserIdPasswordRoleCommandTest {
         Predicate updatedSecondRolePredicate = getMostUpdatedRolePredicate(secondRolePredicate);
         expectedModel.updateFilteredLoginDetailsList(updatedSecondRolePredicate);
         assertCommandSuccess(secondCommand, model, commandHistory, expectedMessage, expectedModel);
-        assertNotEquals(Arrays.asList(LOGINDETAIL1), model.getFilteredLoginDetailsList());
+        assertNotEquals(Arrays.asList(LOGINDETAIL_1), model.getFilteredLoginDetailsList());
     }
 
     @Test
@@ -227,7 +227,7 @@ public class LoginUserIdPasswordRoleCommandTest {
         Predicate updatedFirstRolePredicate = getMostUpdatedRolePredicate(firstRolePredicate);
         expectedModel.updateFilteredLoginDetailsList(updatedFirstRolePredicate);
         assertCommandSuccess(firstCommand, model, commandHistory, expectedMessage, expectedModel);
-        assertNotEquals(Arrays.asList(LOGINDETAIL1), model.getFilteredLoginDetailsList());
+        assertNotEquals(Arrays.asList(LOGINDETAIL_1), model.getFilteredLoginDetailsList());
 
         UserIdContainsKeywordsPredicate secondIdPredicate = prepareUserIdContainsKeywordsPredicate("A1234561M");
         UserPasswordContainsKeywordsPredicate secondPasswordPredicate = prepareUserPasswordContainsKeywordsPredicate(
@@ -242,7 +242,7 @@ public class LoginUserIdPasswordRoleCommandTest {
         Predicate updatedSecondRolePredicate = getMostUpdatedRolePredicate(secondRolePredicate);
         expectedModel.updateFilteredLoginDetailsList(updatedSecondRolePredicate);
         assertCommandSuccess(secondCommand, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(LOGINDETAIL1), model.getFilteredLoginDetailsList());
+        assertEquals(Arrays.asList(LOGINDETAIL_1), model.getFilteredLoginDetailsList());
     }
 
     private Predicate getMostUpdatedIdPredicate(Predicate idPredicate) {
