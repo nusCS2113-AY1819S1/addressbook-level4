@@ -124,10 +124,10 @@ Examples:
 * di 2 n/T11- g/true nat/0
 
 === Sending Email to Single, Multiple or Group of Person(s): `sendmail`
-Sends an email to a single person in list+
+Sends an email to a single person in list +
 Format: `sendmail [Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
 
-Sends an email to multiple persons in list+
+Sends an email to multiple persons in list +
 Format: `sendmail [Index],..,[Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
 
 Sends an email to all persons belonging to a group +
