@@ -50,12 +50,59 @@ public class NoteListCommand extends Command {
 
         for (Note n: noteManager.getFilteredNotes()) {
             sb.append(listId + ":\n");
+
             sb.append("Module Code: ");
-            sb.append(n.getModuleCode() + "\n");
-            sb.append("Date: ");
-            sb.append(n.getDate() + "\n");
+            if (!n.getModuleCode().isEmpty()) {
+                sb.append(n.getModuleCode() + "\n");
+            } else {
+                sb.append("Not assigned\n");
+            }
+
+            sb.append("Title: ");
+            if (!n.getTitle().isEmpty()) {
+                sb.append(n.getTitle() + "\n");
+            } else {
+                sb.append("Not specified\n");
+            }
+
+            sb.append("Start Date: ");
+            if (!n.getStartDate().isEmpty()) {
+                sb.append(n.getStartDate() + "\n");
+            } else {
+                sb.append("Not specified\n");
+            }
+
+            sb.append("Start Time: ");
+            if (!n.getStartTime().isEmpty()) {
+                sb.append(n.getStartTime() + "\n");
+            } else {
+                sb.append("Not specified\n");
+            }
+
+            sb.append("End Date: ");
+            if (!n.getEndDate().isEmpty()) {
+                sb.append(n.getEndDate() + "\n");
+            } else {
+                sb.append("Not specified\n");
+            }
+
+            sb.append("End Time: ");
+            if (!n.getEndTime().isEmpty()) {
+                sb.append(n.getEndTime() + "\n");
+            } else {
+                sb.append("Not specified\n");
+            }
+
+            sb.append("Location: ");
+            if (!n.getLocation().isEmpty()) {
+                sb.append(n.getLocation() + "\n");
+            } else {
+                sb.append("Not specified\n");
+            }
+
             sb.append("Note:\n");
             sb.append(n.getNoteText() + ((listId < size) ? "\n\n" : "\n"));
+
             listId++;
         }
 
