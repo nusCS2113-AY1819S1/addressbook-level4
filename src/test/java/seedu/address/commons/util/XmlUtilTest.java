@@ -51,6 +51,7 @@ public class XmlUtilTest {
 
     private static final String VALID_USERID = "A1234567M";
     private static final String VALID_USERPASSWORD = "zaq1xsw2cde3";
+    private static final String VALID_USERROLE = "member";
     private static final String VALID_NAME = "Hans Muster";
     private static final String VALID_PHONE = "9482424";
     private static final String VALID_EMAIL = "hans@example";
@@ -101,7 +102,7 @@ public class XmlUtilTest {
     public void xmlAccountFromFile_fileWithMissingLoginDetailsField_validResult() throws Exception {
         XmlAccount actualLoginDetail = XmlUtil.getDataFromFile(
                 MISSING_LOGINDETAILS_FIELD_FILE, XmlAccountWithRootElement.class);
-        XmlAccount expectedLoginDetail = new XmlAccount(null, VALID_USERPASSWORD);
+        XmlAccount expectedLoginDetail = new XmlAccount(null, VALID_USERPASSWORD, VALID_USERROLE);
         assertEquals(expectedLoginDetail, actualLoginDetail);
     }
 
@@ -118,7 +119,7 @@ public class XmlUtilTest {
     public void xmlAccountFromFile_fileWithInvalidLoginDetailsField_validResult() throws Exception {
         XmlAccount actualLoginDetail = XmlUtil.getDataFromFile(
                 INVALID_LOGINDETAILS_FIELD_FILE, XmlAccountWithRootElement.class);
-        XmlAccount expectedLoginDetail = new XmlAccount(INVALID_USERID, VALID_USERPASSWORD);
+        XmlAccount expectedLoginDetail = new XmlAccount(INVALID_USERID, VALID_USERPASSWORD, VALID_USERROLE);
         assertEquals(expectedLoginDetail, actualLoginDetail);
     }
 
@@ -135,7 +136,7 @@ public class XmlUtilTest {
     public void xmlAccountFromFile_fileWithValidLoginDetails_validResult() throws Exception {
         XmlAccount actualLoginDetail = XmlUtil.getDataFromFile(
                 VALID_LOGINDETAILS_FILE, XmlAccountWithRootElement.class);
-        XmlAccount expectedLoginDetail = new XmlAccount(VALID_USERID, VALID_USERPASSWORD);
+        XmlAccount expectedLoginDetail = new XmlAccount(VALID_USERID, VALID_USERPASSWORD, VALID_USERROLE);
         assertEquals(expectedLoginDetail, actualLoginDetail);
     }
 

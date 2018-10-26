@@ -17,18 +17,19 @@ public class XmlAccountTest {
 
     private static final String VALID_USERID = LOGINDETAIL2.getUserId().toString();
     private static final String VALID_USERPASSWORD = LOGINDETAIL2.getUserPassword().toString();
+    private static final String VALID_USERROLE = LOGINDETAIL2.getUserRole().toString();
 
     @Test
     public void toModelType_invalidUserId_throwsIllegalValueException() {
         XmlAccount account =
-                new XmlAccount(INVALID_USERID, VALID_USERPASSWORD);
+                new XmlAccount(INVALID_USERID, VALID_USERPASSWORD, VALID_USERROLE);
         String expectedMessage = UserId.MESSAGE_USERID_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, account::toModelType);
     }
 
     @Test
     public void toModelType_nullUserId_throwsIllegalValueException() {
-        XmlAccount account = new XmlAccount(null, VALID_USERPASSWORD);
+        XmlAccount account = new XmlAccount(null, VALID_USERPASSWORD, VALID_USERROLE);
         String expectedMessage = String.format(MISSING_ACCOUNT_FIELD_MESSAGE_FORMAT, UserId.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, account::toModelType);
     }
@@ -36,14 +37,14 @@ public class XmlAccountTest {
     @Test
     public void toModelType_invalidUserPassword_throwsIllegalValueException() {
         XmlAccount account =
-                new XmlAccount("A1234567M", INVALID_USERPASSWORD);
+                new XmlAccount("A1234567M", INVALID_USERPASSWORD, VALID_USERROLE);
         String expectedMessage = UserPassword.MESSAGE_USERPASSWORD_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, account::toModelType);
     }
 
     @Test
     public void toModelType_nullUserPassword_throwsIllegalValueException() {
-        XmlAccount account = new XmlAccount("A1234567M", null);
+        XmlAccount account = new XmlAccount("A1234567M", null, VALID_USERROLE);
         String expectedMessage = String.format(MISSING_ACCOUNT_FIELD_MESSAGE_FORMAT,
                 UserPassword.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, account::toModelType);

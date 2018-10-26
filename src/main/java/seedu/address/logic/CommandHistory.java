@@ -6,9 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import seedu.address.ui.MainWindow;
-
-
 /**
  * Stores the history of commands executed.
  */
@@ -28,12 +25,7 @@ public class CommandHistory {
      */
     public void add(String userInput) {
         requireNonNull(userInput);
-        if (MainWindow.getIsSensitiveInformation()) {
-            userInputHistory.add("Sensitive information!");
-            MainWindow.setIsSensitiveInformation(false);
-        } else {
-            userInputHistory.add(userInput);
-        }
+        userInputHistory.add(userInput);
     }
 
     /**
