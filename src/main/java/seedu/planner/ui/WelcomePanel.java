@@ -32,9 +32,24 @@ public class WelcomePanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    /** Populates the welcome panel with its UI elements */
     private void populateUi(ObservableList<CategoryStatistic> toDisplay) {
-        CategoryBreakdown categoryBreakdown = new CategoryBreakdown(toDisplay);
+        CategoryBreakdown categoryBreakdown = new CategoryBreakdown(toDisplay, "expense");
+        categoryBreakdown.setPieChartSize(600.0, 300.0);
+        categoryBreakdown.disableLegend();
         expenseStats.getChildren().add(categoryBreakdown.getRoot());
+        expenseStats.setTopAnchor(categoryBreakdown.getRoot(), 0.0);
+        expenseStats.setBottomAnchor(categoryBreakdown.getRoot(), 0.0);
+        expenseStats.setRightAnchor(categoryBreakdown.getRoot(), 0.0);
+        expenseStats.setLeftAnchor(categoryBreakdown.getRoot(), 0.0);
+        categoryBreakdown = new CategoryBreakdown(toDisplay, "income");
+        categoryBreakdown.setPieChartSize(600.0, 300.0);
+        categoryBreakdown.disableLegend();
+        incomeStats.getChildren().add(categoryBreakdown.getRoot());
+        incomeStats.setTopAnchor(categoryBreakdown.getRoot(), 0.0);
+        incomeStats.setBottomAnchor(categoryBreakdown.getRoot(), 0.0);
+        incomeStats.setRightAnchor(categoryBreakdown.getRoot(), 0.0);
+        incomeStats.setLeftAnchor(categoryBreakdown.getRoot(), 0.0);
     }
 
     @Subscribe

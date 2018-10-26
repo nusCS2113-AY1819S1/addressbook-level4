@@ -19,8 +19,6 @@ import seedu.planner.model.summary.CategoryStatistic;
  */
 public class CategoryBreakdown extends UiPart<Region> {
 
-    public static final String LABEL = "Category Breakdown for financial activity";
-
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
 
     private static final String FXML = "CategoryBreakdown.fxml";
@@ -31,31 +29,47 @@ public class CategoryBreakdown extends UiPart<Region> {
     private ObservableList<PieChart.Data> pieChartData;
     private PieChart pieChart;
 
-    public CategoryBreakdown(ObservableList<CategoryStatistic> toDisplay) {
+    public CategoryBreakdown(ObservableList<CategoryStatistic> toDisplay, String label) {
         super(FXML);
         pieChartData = convertToPieChartList(toDisplay);
         pieChart = new CustomPieChart(pieChartData);
-        initPieChart();
+        initPieChart(label);
         root.setStyle("-fx-background-color: grey");
         root.getChildren().add(pieChart);
     }
 
     /** Sets up the pieChart's format */
-    private void initPieChart() {
-        pieChart.setTitle(LABEL);
+    private void initPieChart(String label) {
+        pieChart.setTitle(label);
         pieChart.setLabelsVisible(true);
         pieChart.setLabelLineLength(50);
         pieChart.setLegendSide(Side.RIGHT);
 
-        pieChart.setPrefSize(800, 400);
+        pieChart.setPrefSize(400, 800);
         pieChart.setMinSize(Control.USE_PREF_SIZE, Control.USE_PREF_SIZE);
-        pieChart.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        pieChart.maxHeight(Double.MAX_VALUE);
+        pieChart.maxWidth(Double.MAX_VALUE);
+        pieChart.minHeight(Control.USE_PREF_SIZE);
+        pieChart.minHeight(Control.USE_PREF_SIZE);
 
         root.setTopAnchor(pieChart, 0.0);
         root.setBottomAnchor(pieChart, 0.0);
         root.setRightAnchor(pieChart, 0.0);
         root.setLeftAnchor(pieChart, 0.0);
 
+    }
+
+    public void setPieChartSize(Double prefWidth, Double prefHeight) {
+        if (prefWidth != null) {
+            pieChart.setPrefWidth(prefWidth);
+        }
+        if (prefHeight != null) {
+            pieChart.setPrefHeight(prefHeight);
+        }
+    }
+
+    public void disableLegend() {
+        pieChart.setLegendVisible(false);
     }
 
     /** Converts a given ObservableList to a list that can be read by {@link PieChart}*/

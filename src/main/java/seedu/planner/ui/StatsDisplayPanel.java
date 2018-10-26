@@ -69,7 +69,8 @@ public class StatsDisplayPanel extends UiPart<Region> {
     @Subscribe
     public void handleShowPieChartStatsEvent(ShowPieChartStatsEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        CustomTab categoryTab = new CustomTab(CategoryBreakdown.LABEL, new CategoryBreakdown(event.data).getRoot());
+        CustomTab categoryTab = new CustomTab("Financial Activity breakdown",
+                new CategoryBreakdown(event.data, "Expense only").getRoot());
         clearTabs();
         createTabs(categoryTab);
         show();
