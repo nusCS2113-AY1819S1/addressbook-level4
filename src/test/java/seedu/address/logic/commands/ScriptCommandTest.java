@@ -22,6 +22,8 @@ import seedu.address.testutil.PersonBuilder;
  * Contains tests for ScriptCommand.
  */
 public class ScriptCommandTest {
+    public static final String validAddTextFile = "ValidAddScriptCommand";
+    public static final String missingTextFile = "MissingTextFile";
 
     private Model model;
     private CommandHistory commandHistory = new CommandHistory();
@@ -35,8 +37,6 @@ public class ScriptCommandTest {
             .withGrade("99").withPhone("66666666").withTags("owesMoney").build();
 
     private final String testFilesLocation = "/src/test/data/ScriptCommandTest/";
-    private final String validAddTextFile = "ValidAddScriptCommand";
-    private final String missingTextFile = "MissingTextFile";
     private final String invalidTextFile = "InvalidAddCommand";
     private final String invalidLinesNumbers = "1,2";
     private final String addCommand = AddCommand.COMMAND_WORD;
