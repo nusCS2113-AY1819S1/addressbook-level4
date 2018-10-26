@@ -122,8 +122,16 @@ public class FindCommandTest {
         Map<Prefix, String[]> prefixKeywordMap = new HashMap<>();
         String[] names = {"Kurz", "Kunz"};
         String[] phones = {"95352563"};
+        String[] emails = {"heinz@example.com"};
+        String[] addresses = {"wall street"};
+        String[] notes = {"Carl sample note"};
+
         prefixKeywordMap.put(PREFIX_NAME, names);
         prefixKeywordMap.put(PREFIX_PHONE, phones);
+        prefixKeywordMap.put(PREFIX_EMAIL, emails);
+        prefixKeywordMap.put(PREFIX_NOTE, notes);
+        prefixKeywordMap.put(PREFIX_ADDRESS, addresses);
+
 
         Set<Prefix> keys = prefixKeywordMap.keySet();
         Prefix[] types = keys.toArray(new Prefix[0]);
@@ -137,6 +145,7 @@ public class FindCommandTest {
         expectedModel.updateFilteredPersonList(combinedPredicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL), model.getFilteredPersonList());
+
     }
 
     /**
