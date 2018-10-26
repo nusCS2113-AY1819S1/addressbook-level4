@@ -101,14 +101,14 @@ public class DistributeUtil {
      * This function takes in the list of all person and calculate the total number of different nationalities.
      * Returns a integer value which represent the number of different nationalities
      */
-    private Map<Nationality, Long> numberOfDifferentNationality(LinkedList<Person> allPerson) {
+    public Map<Nationality, Long> numberOfDifferentNationality(LinkedList<Person> allPerson) {
         return allPerson.stream().collect(Collectors.groupingBy(e -> e.getNationality(), Collectors.counting()));
     }
 
     /**
      * This function will sort the map that holds the number of people with different nationalities.
      */
-    private Map<Nationality, Long> paxPerNationality(Map<Nationality, Long> numberOfNationality) {
+    public Map<Nationality, Long> paxPerNationality(Map<Nationality, Long> numberOfNationality) {
         return numberOfNationality.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
                 .collect(toMap(e -> e.getKey(), e -> e.getValue(), (e1, e2) -> e2,
                         LinkedHashMap::new));
@@ -176,7 +176,7 @@ public class DistributeUtil {
      * This function concatenates the group index count behind the given group name.
      * Index shown to user will start from 1.
      */
-    private String groupNameConcatenation (int index, String groupName) throws CommandException {
+    public String groupNameConcatenation (int index, String groupName) throws CommandException {
         index = index + 1;
         groupName = groupName + String.valueOf(index);
         if (existDuplicateGroup(groupName)) {
@@ -190,7 +190,7 @@ public class DistributeUtil {
      * @param groupName : The string to be check if another groupname string exist.
      * @return false if there is no existing group.
      */
-    private boolean existDuplicateGroup (String groupName) {
+    public boolean existDuplicateGroup (String groupName) {
         ObservableList<Group> allGroups = model.getFilteredGroupList();
         requireNonNull(allGroups);
         for (Group gN : allGroups) {
@@ -218,7 +218,7 @@ public class DistributeUtil {
      * @param toCreateGroupName : The groupName that has been concatenated with index
      * @return returns the group object that has been created.
      */
-    private Group groupBuilder(String toCreateGroupName) {
+    public Group groupBuilder(String toCreateGroupName) {
         GroupName parseGroupName = new GroupName(toCreateGroupName);
         GroupLocation parseGroupLocation = new GroupLocation(GROUP_LOCATION);
         Set<Tag> tags = new HashSet<>();
@@ -226,11 +226,17 @@ public class DistributeUtil {
     }
 
     public void createGroup(Group group) throws CommandException {
-        new CreateGroupCommand(group).execute(model, commandHistory);
+        CreateGroupCommand createGroupCommand = new CreateGroupCommand(group);
+        createGroupCommand.setShouldCommit(false);
+        createGroupCommand.execute(model, commandHistory);
+        createGroupCommand.setShouldCommit(true);
     }
 
-    private void addPersonIntoGroup(AddGroup addGroup) throws CommandException {
-        new AddGroupCommand(addGroup).execute(model, commandHistory);
+    public void addPersonIntoGroup(AddGroup addGroup) throws CommandException {
+        AddGroupCommand personToAdd = new AddGroupCommand(addGroup);
+        personToAdd.setShouldCommit(false);
+        personToAdd.execute(model, commandHistory);
+        personToAdd.setShouldCommit(true);
     }
 
     /**
@@ -238,7 +244,7 @@ public class DistributeUtil {
      * @param group : The group to search for.
      * @return Return the Index value of the group.
      */
-    private Index returnGroupIndex(Group group) {
+    public Index returnGroupIndex(Group group) {
         ObservableList<Group> allGroups = model.getFilteredGroupList();
         for (int i = 0; i < allGroups.size(); i++) {
             if (group.isSameGroup(allGroups.get(i))) {

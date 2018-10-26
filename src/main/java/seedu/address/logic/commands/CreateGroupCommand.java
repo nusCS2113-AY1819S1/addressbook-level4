@@ -34,6 +34,7 @@ public class CreateGroupCommand extends Command {
     public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the student management system";
 
     private final Group toCreate;
+    private boolean shouldCommit;
 
     /**
      * Creates an CreateGroupCommand to add the specified {@code Group}
@@ -41,6 +42,7 @@ public class CreateGroupCommand extends Command {
     public CreateGroupCommand(Group group) {
         requireNonNull(group);
         toCreate = group;
+        this.shouldCommit = true;
     }
 
     @Override
@@ -49,9 +51,11 @@ public class CreateGroupCommand extends Command {
         if (model.hasGroup(toCreate)) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
-
+        System.out.println("Command History == " + history.toString());
         model.createGroup(toCreate);
-        model.commitAddressBook();
+        if (shouldCommit) {
+            model.commitAddressBook();
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toCreate));
     }
 
@@ -62,4 +66,7 @@ public class CreateGroupCommand extends Command {
                 && toCreate.equals(((CreateGroupCommand) other).toCreate));
     }
 
+    public void setShouldCommit(boolean shouldCommit) {
+        this.shouldCommit = shouldCommit;
+    }
 }

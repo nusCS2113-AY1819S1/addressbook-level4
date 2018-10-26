@@ -35,6 +35,7 @@ public class AddGroupCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSONS = "Person(s) already exist in group";
 
     private final AddGroup toAdd;
+    private boolean shouldCommit;
 
     /**
      * Creates an AddGroupCommand to add persons to group
@@ -43,6 +44,7 @@ public class AddGroupCommand extends Command {
     public AddGroupCommand(AddGroup toAdd) {
         requireAllNonNull(toAdd);
         this.toAdd = toAdd;
+        this.shouldCommit = true;
     }
 
     @Override
@@ -66,7 +68,9 @@ public class AddGroupCommand extends Command {
         }
 
         model.addGroup(toAdd);
-        model.commitAddressBook();
+        if (shouldCommit) {
+            model.commitAddressBook();
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
 
     }
@@ -78,4 +82,7 @@ public class AddGroupCommand extends Command {
                 && toAdd.equals(((AddGroupCommand) other).toAdd));
     }
 
+    public void setShouldCommit(boolean shouldCommit) {
+        this.shouldCommit = shouldCommit;
+    }
 }
