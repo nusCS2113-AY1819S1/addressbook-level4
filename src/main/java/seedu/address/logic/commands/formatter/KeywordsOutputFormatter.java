@@ -11,8 +11,8 @@ public class KeywordsOutputFormatter {
     private static final int EXTRA_PADDING_LENGTH = 2;
     private static final char INCLUDE_PREFIX = '+';
     private static final char EXCLUDE_PREFIX = '-';
-    private static final String TAG_KEYWORDS_HEADING = "\n=================== Tag Keywords History ====================\n";
-    private static final String NAME_KEYWORDS_HEADING = "\n=================== Name Keywords History ===================\n";
+    private static final String TAG_KEYWORDS_HEADING = "\n=============== Tag Keywords History ================\n";
+    private static final String NAME_KEYWORDS_HEADING = "\n=============== Name Keywords History ===============\n";
     private static final String PREFIXED_KEYWORD_FORMAT = "%c%s ";
     private StringBuffer outputString = new StringBuffer();
     private ReadOnlyKeywordsRecord record;
