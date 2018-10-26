@@ -120,7 +120,7 @@ public class AddressBookParser {
             return new CheckExpenditureCommandParser().parse(arguments);
 
         case ViewTaskCommand.COMMAND_WORD:
-            return new ViewTaskCommand();
+            return new ViewTaskCommandParser().parse(arguments);
 
         case HistoryCommand.COMMAND_WORD:
         case HistoryCommand.COMMAND_ALIAS:

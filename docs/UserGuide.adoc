@@ -62,8 +62,9 @@ Adds a task to the to-do list +
 Format: `TDL_add t/TASK m/MODULE d/DATE p/PRIORITY`
 
 ****
-* The format for `m/MODULE` tag is controlled by the list of modules availble in the application. Hence, only valid NUS module codes are allowed.
-* The format for `d/DATE` tag must be `DD-MM`.
+* The format for `m/MODULE` tag is controlled by the list of modules availble in the application. Hence, only valid NUS module codes are allowed. [Coming in v1.4]
+* Currently, the format for `m/MODULE` tag is strictly 2 alphabetic characters (upper or lower case) followed by 4 numbers.
+* The format for `d/DATE` tag must be `DD-MM`, where `DD` refers to the date and `MM` refers to the month in numbers.
 * The `p/PRIORITY` tag only accepts integer 1, 2 or 3, where `1` refers to highest importance and `3` refers to lowest importance.
 ****
 
@@ -77,10 +78,10 @@ Edits an existing task in the to-do list. +
 Format: `TDL_edit INDEX [t/TASK] [m/MODULE] [d/DATE] [p/PRIORITY]`
 
 ****
-* Edits the task at the specified `INDEX`. The index refers to the index number shown in the displayed uncompleted tasks list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
+* Edits the task at the specified `INDEX`. The index refers to the index number shown in the displayed tasks list. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields should be provided. There will not be any changes made if no optional fields are provided.
 * Existing values will be updated to the input values.
-* You can remove any task’s date or priority by typing `d/` or `p/` without specifying any fields after it.
+* You can remove any task’s date or priority by typing `d/` or `p/` without specifying any fields after it. [Coming in v2.0]
 ****
 
 Examples:
@@ -88,7 +89,7 @@ Examples:
 * `TDL_edit 1 t/Tutorial 2 m/CS2113` +
 Edits the task name and module code of the 1st task to be `Tutorial 2` and `CS2113` respectively.
 * `TDL_edit 2 t/Tutorial 2 d/ p/` +
-Edits the task name of the 2nd task to be `Tutorial 2` and clears all existing deadlines and priority tags associated with this task.
+[Coming in v2.0] Edits the task name of the 2nd task to be `Tutorial 2` and clears all existing deadlines and priority tags associated with this task.
 
 === Deleting a task : `TDL_delete`
 
@@ -97,7 +98,7 @@ Format: `TDL_delete INDEX`
 
 ****
 * Deletes the task at the specified `INDEX`.
-* The index refers to the index number shown in the displayed uncompleted tasks list.
+* The index refers to the index number shown in the displayed tasks list.
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
 
@@ -115,14 +116,14 @@ Format: `TDL_complete INDEX`
 
 ****
 * Mark the task at the specified `INDEX` as `completed`.
-* The index refers to the index number shown in the displayed uncompleted tasks list.
+* The index refers to the index number shown in the displayed tasks list.
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
 
 Examples:
 
 * `TDL_complete 3` +
-The 3rd task in the to-do list is now marked as completed and will be moved to the _completed tasks_ list.
+The 3rd task in the to-do list is now marked as completed.
 
 === Marking a task as uncompleted: `TDL_uncomplete`
 
@@ -131,24 +132,24 @@ Format: `TDL_uncomplete INDEX`
 
 ****
 * Mark the task at the specified `INDEX` as `uncompleted`.
-* The index refers to the index number shown in the displayed completed tasks list.
+* The index refers to the index number shown in the displayed tasks list.
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
 
 Examples:
 
 * `TDL_uncomplete 3` +
-The 3rd task in the to-do list is now marked as uncompleted and will be moved to the _uncompleted tasks_ list.
+The 3rd task in the to-do list is now marked as uncompleted.
 
-=== View all tasks : `TDL_view`
+=== View tasks : `TDL_view`
 
-Shows a list of uncompleted or completed tasks in the to-do list. +
+Shows a filtered list of tasks in the to-do list. +
 Format: `TDL_view PARAMETER`
 
 ****
-* PARAMETER is either `completed` or `uncompleted`.
-* The default view for the todo list is _uncompleted tasks_.
-* Performing `TDL_view uncompleted` on to-do list with the list already at _uncompleted tasks_ will not result in any changes. The same is applied to _completed tasks_ list with `TDL_view completed` command.
+* PARAMETER is either `completed`, `uncompleted` or `all`.
+* The default view for the to-do list upon starting up is _all tasks_.
+* Performing `TDL_view uncompleted` with the to-do list displaying _uncompleted tasks_ will not result in any changes. The same is applied to _completed tasks_ list with `TDL_view completed` command.
 * The GUI should allow the user to understand which list they are currently looking at.
 ****
 
@@ -156,6 +157,9 @@ Examples:
 
 * `TDL_view completed` +
 The list is now populated with tasks marked as completed.
+
+* `TDL_view all` +
+The list is now populated with all tasks regardless of their completion status.
 
 === Sort all tasks listed : `TDL_sort`
 
