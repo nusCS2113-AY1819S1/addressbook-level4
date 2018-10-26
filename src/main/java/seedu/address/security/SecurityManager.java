@@ -73,6 +73,9 @@ public class SecurityManager extends ComponentManager implements Security {
             logic.execute("add n/" + username + " e/" + email + " p/" + phone + " a/" + address);
             this.isAuthenticated = true;
             logic.matchUserToPerson(username);
+            userlist = appUsers.getAccountCredentials();
+            userlist.add(new AccountCredential(username, password));
+            appUsers.updateAccountCredentials(userlist);
             return RegisterFlag.SUCCESS;
         } catch (CommandException e) {
             return RegisterFlag.USER_ALREADY_EXISTS;

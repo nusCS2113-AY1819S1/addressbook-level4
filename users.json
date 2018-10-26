@@ -2,5 +2,8 @@
   "accountCredentials" : [ {
     "userName" : "test",
     "hashedPassword" : "test"
+  }, {
+    "userName" : "test3",
+    "hashedPassword" : "test"
   } ]
 }
