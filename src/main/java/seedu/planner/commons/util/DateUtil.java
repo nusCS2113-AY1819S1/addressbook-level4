@@ -1,5 +1,6 @@
 package seedu.planner.commons.util;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -138,5 +139,15 @@ public class DateUtil {
     public static boolean isWithinPeriod(Date startDate, Date endDate, Date target) {
         return target.equals(startDate) || target.equals(endDate)
                 || (target.isLaterThan(startDate) && target.isEarlierThan(endDate));
+    }
+
+    /**
+     * Computes today's date using Java library {@link LocalDate} by processing the date in yyyy-mm-dd into dd-mm-yyyy.
+     * @return Date
+     */
+    public static Date getDateToday() {
+        String dateToday = LocalDate.now().toString();
+        String[] args = dateToday.split("-");
+        return new Date(String.format("%s-%s-%s", args[2], args[1], args[0]));
     }
 }
