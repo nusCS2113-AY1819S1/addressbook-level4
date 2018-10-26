@@ -41,7 +41,7 @@ public class ExportCalendarCommand extends Command {
         try {
             DateTimeUtil.exportICalenderFile(model, currentUser, fileName);
         } catch (IOException e) {
-            return new CommandResult(String.format(MESSAGE_FILE_ERROR,fileName));
+            return new CommandResult(String.format(MESSAGE_FILE_ERROR, fileName));
         }
 
         return new CommandResult(String.format(MESSAGE_EXPORT_SUCCESS,fileName));

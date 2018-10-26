@@ -20,7 +20,7 @@ public class DateTime {
                     + "Date: 1 - 31\n"
                     + "Hour: 0-23\n"
                     + "Minute: 0-59\n";
-    private static final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    public static final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
     public final Date dateTime;
 
