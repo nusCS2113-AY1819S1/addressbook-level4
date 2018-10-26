@@ -107,11 +107,6 @@ Examples:
 
 * `delete 1`
 
-=== Viewing today's date : `view`
-
-Shows the date today. +
-Format: `view`
-
 === Selecting a date: `select`
 
 Chooses a particular date. +
@@ -141,7 +136,7 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the address book's content (`add`, `delete`, and `clear`).
 ====
 
 Examples:

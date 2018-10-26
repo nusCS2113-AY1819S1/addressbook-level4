@@ -1,13 +1,15 @@
 package seedu.address.model.task;
 
 import java.util.Objects;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 
 /**
  * Represents a Task in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Task {
-    private static final Deadline PLACEHOLDER_DEADLINE = new Deadline("1/1/2018");
     private Deadline deadline;
     private final String title;
     private final String description;
@@ -39,8 +41,6 @@ public class Task {
     }
 
     public Task(String title, String description, PriorityLevel priorityLevel, int expectedNumOfHours) {
-        this.deadline = PLACEHOLDER_DEADLINE;
-        //this.deadline = getDeadline();
         this.title = title;
         this.description = description;
         this.priorityLevel = priorityLevel;
@@ -94,7 +94,6 @@ public class Task {
         if (otherTask == this) {
             return true;
         }
-
         return otherTask != null
                 && otherTask.getDeadline().equals(getDeadline())
                 && otherTask.getTitle().equals(getTitle());
