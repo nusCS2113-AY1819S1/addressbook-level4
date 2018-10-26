@@ -16,7 +16,7 @@ import seedu.address.authentication.LoginUtils;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.InitInventoryListEvent;
-import seedu.address.commons.events.ui.ChangeMainStageEvent;
+import seedu.address.commons.events.ui.StartUiEvent;
 import seedu.address.model.LoginInfoManager;
 
 
@@ -175,7 +175,7 @@ public class LoginController {
         primaryStage.hide();
         Stage stage = new Stage ();
         EventsCenter.getInstance().post(new InitInventoryListEvent ());
-        EventsCenter.getInstance().post(new ChangeMainStageEvent (stage));
+        EventsCenter.getInstance().post(new StartUiEvent (stage));
     }
     /**
      * pass in LoginInfo list

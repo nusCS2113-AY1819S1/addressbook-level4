@@ -27,7 +27,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.controller.LoginController;
-import seedu.address.init.InitAddressBook;
+import seedu.address.init.InventoryListInitializer;
 import seedu.address.logic.Logic;
 import seedu.address.model.LoginInfoManager;
 import seedu.address.model.Model;
@@ -65,7 +65,7 @@ public class MainApp extends Application {
     private LoginInfoManager loginInfoList;
     private LoginController loginController;
     private String loginPathPath;
-    private InitAddressBook initAddressBook;
+    private InventoryListInitializer inventoryListInitializer;
 
     @Override
     public void init() throws Exception {
@@ -83,7 +83,7 @@ public class MainApp extends Application {
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage, loginInfoStorage);
 
-        initAddressBook = new InitAddressBook (config, storage, userPrefs, loginInfoList);
+        inventoryListInitializer = new InventoryListInitializer (config, storage, userPrefs, loginInfoList);
         initLogging(config);
         fxmlLoader = new FXMLLoader();
         initEventsCenter();

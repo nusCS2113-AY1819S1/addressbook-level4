@@ -20,7 +20,6 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.events.model.InitInventoryListEvent;
-import seedu.address.commons.events.ui.ChangeMainStageEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
@@ -42,7 +41,7 @@ import seedu.address.ui.UiManager;
 /**
  * Contain item that has to be init after login
  */
-public class InitAddressBook {
+public class InventoryListInitializer {
     public static final Version VERSION = new Version(0, 6, 0, true);
     public static final String FXML_LOGIN_PATH = "LoginPage.fxml";
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
@@ -58,7 +57,7 @@ public class InitAddressBook {
     private LoginInfoManager loginInfoList;
 
 
-    public InitAddressBook(Config config, Storage storage, UserPrefs userPrefs, LoginInfoManager loginInfoList) {
+    public InventoryListInitializer (Config config, Storage storage, UserPrefs userPrefs, LoginInfoManager loginInfoList) {
         this.storage = storage;
         this.userPrefs = userPrefs;
         this.loginInfoList = loginInfoList;
@@ -83,10 +82,6 @@ public class InitAddressBook {
         initAfterLogin ();
     }
 
-    @Subscribe
-    public void handleChangeMainStageEvent(ChangeMainStageEvent event) {
-        ui.start(event.mainStage);
-    }
 
     /**
      * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
