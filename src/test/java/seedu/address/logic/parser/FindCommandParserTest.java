@@ -45,24 +45,24 @@ public class FindCommandParserTest {
         prefixKeywordsMap.put(PREFIX_NAME, names);
         Set<Prefix> keys = prefixKeywordsMap.keySet();
 
-         FindCommand expectedFindCommand =
+        FindCommand expectedFindCommand =
                 new FindCommand(prefixKeywordsMap, keys.toArray(new Prefix[0]));
 
-         String userInput = " " + PREFIX_NAME + "Bob Alice";
+        String userInput = " " + PREFIX_NAME + "Bob Alice";
 
-         assertParseSuccess(parser,  userInput, expectedFindCommand);
+        assertParseSuccess(parser, userInput, expectedFindCommand);
     }
 
     //@@author lws803
     @Test
     public void parse_validMultipleArgs_returnsFindCommand () {
-        Person Alice = TypicalPersons.ALICE;
+        Person alice = TypicalPersons.ALICE;
         String[] names = {"Alice", "Bob"};
-        String[] emails = {Alice.getEmail().value};
-        String[] addresses = {Alice.getAddress().value};
-        String[] notes = {Alice.getNote().value};
-        String[] tags = {Alice.getStringTags()};
-        String[] phones = {Alice.getPhone().value};
+        String[] emails = {alice.getEmail().value};
+        String[] addresses = {alice.getAddress().value};
+        String[] notes = {alice.getNote().value};
+        String[] tags = {alice.getStringTags()};
+        String[] phones = {alice.getPhone().value};
         // Refine search result to Alice
 
         Map<Prefix, String[]> prefixKeywordsMap = new HashMap<>();
@@ -82,19 +82,19 @@ public class FindCommandParserTest {
                 + PREFIX_NAME
                 + "Bob Alice "
                 + PREFIX_EMAIL
-                + Alice.getEmail().value
+                + alice.getEmail().value
                 + " "
                 + PREFIX_PHONE
-                + Alice.getPhone().value
+                + alice.getPhone().value
                 + " "
                 + PREFIX_ADDRESS
-                + Alice.getAddress().value
+                + alice.getAddress().value
                 + " "
                 + PREFIX_NOTE
-                + Alice.getNote().value
+                + alice.getNote().value
                 + " "
                 + PREFIX_TAG
-                + Alice.getStringTags();
+                + alice.getStringTags();
 
         assertParseSuccess(parser, userInput, expectedFindCommand);
 
