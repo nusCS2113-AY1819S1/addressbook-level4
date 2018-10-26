@@ -16,7 +16,6 @@ public class Config {
     private String appTitle = "Event Manager App";
     private Level logLevel = Level.INFO;
     private Path userPrefsFilePath = Paths.get("preferences.json");
-    private Path userFilePath = Paths.get("users.json");
 
     public String getAppTitle() {
         return appTitle;
@@ -42,14 +41,6 @@ public class Config {
         this.userPrefsFilePath = userPrefsFilePath;
     }
 
-    public Path getUserFilePath() {
-        return userFilePath;
-    }
-
-    public void setUserFilePath(Path userFilePath) {
-        this.userFilePath = userFilePath;
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -63,8 +54,12 @@ public class Config {
 
         return Objects.equals(appTitle, o.appTitle)
                 && Objects.equals(logLevel, o.logLevel)
+<<<<<<< HEAD
                 && Objects.equals(userPrefsFilePath, o.userPrefsFilePath)
                 && Objects.equals(userFilePath, o.userFilePath);
+=======
+                && Objects.equals(userPrefsFilePath, o.userPrefsFilePath);
+>>>>>>> parent of 17cb12d8... Updated config
     }
 
     @Override
@@ -78,7 +73,6 @@ public class Config {
         sb.append("App title : " + appTitle);
         sb.append("\nCurrent log level : " + logLevel);
         sb.append("\nPreference file location : " + userPrefsFilePath);
-        sb.append("\nUser file location : " + userFilePath);
         return sb.toString();
     }
 
