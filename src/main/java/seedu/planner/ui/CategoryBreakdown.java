@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Control;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.planner.commons.core.LogsCenter;
@@ -45,8 +46,16 @@ public class CategoryBreakdown extends UiPart<Region> {
         pieChart.setLabelsVisible(true);
         pieChart.setLabelLineLength(50);
         pieChart.setLegendSide(Side.RIGHT);
-        pieChart.prefHeightProperty().bind(root.heightProperty());
-        pieChart.prefWidthProperty().bind(root.widthProperty());
+
+        pieChart.setPrefSize(800, 400);
+        pieChart.setMinSize(Control.USE_PREF_SIZE, Control.USE_PREF_SIZE);
+        pieChart.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+
+        root.setTopAnchor(pieChart, 0.0);
+        root.setBottomAnchor(pieChart, 0.0);
+        root.setRightAnchor(pieChart, 0.0);
+        root.setLeftAnchor(pieChart, 0.0);
+
     }
 
     /** Converts a given ObservableList to a list that can be read by {@link PieChart}*/
