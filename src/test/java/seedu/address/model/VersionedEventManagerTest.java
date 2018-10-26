@@ -225,7 +225,8 @@ public class VersionedEventManagerTest {
         assertFalse(versionedEventManager.equals(1));
 
         // different state list -> returns false
-        VersionedEventManager differentEManagerList = prepareEventManagerList(eventManagerWithBob, eventManagerWithCarl);
+        VersionedEventManager differentEManagerList = prepareEventManagerList(eventManagerWithBob,
+                eventManagerWithCarl);
         assertFalse(versionedEventManager.equals(differentEManagerList));
 
         // different current pointer index -> returns false
@@ -238,7 +239,8 @@ public class VersionedEventManagerTest {
     /**
      * Asserts that {@code versionedEventManager} is currently pointing at {@code expectedCurrentState},
      * states before {@code versionedEventManager#currentStatePointer} is equal to {@code expectedStatesBeforePointer},
-     * and states after {@code versionedEventManager#currentStatePointer} is equal to {@code expectedStatesAfterPointer}.
+     * and states after {@code versionedEventManager#currentStatePointer} is equal to {@code expectedStatesAfterPointer}
+     * .
      */
     private void assertEventManagerListStatus(VersionedEventManager versionedEventManager,
                                              List<ReadOnlyEventManager> expectedStatesBeforePointer,
