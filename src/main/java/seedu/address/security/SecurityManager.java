@@ -20,12 +20,14 @@ public class SecurityManager extends ComponentManager implements Security {
     private String username;
     private String password;
     private Logic logic;
+    private AppUsers appUsers;
 
-    public SecurityManager(boolean isTest, Logic logic) {
+    public SecurityManager(boolean isTest, Logic logic, AppUsers appUsers) {
         this.isAuthenticated = isTest; //Test for now
         this.username = "test";
         this.password = "test";
         this.logic = logic;
+        this.appUsers = appUsers;
 
     }
 

@@ -94,7 +94,7 @@ public class TestApp extends MainApp {
 
         logic = new LogicManager(model);
 
-        user = new SecurityManager(true, logic);
+        user = new SecurityManager(true, logic, appUsers);
 
         ui = new UiManager(logic, config, userPrefs, user);
 

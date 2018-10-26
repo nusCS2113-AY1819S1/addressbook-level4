@@ -31,6 +31,7 @@ public class SecurityManagerTest {
     private static Model model;
     private static Logic logic;
     private static UserPrefs userPrefs;
+    private static AppUsers appUsers;
 
     private static boolean succcessfulLoginEventCalled;
     private static boolean unsuccessfulLoginEventCalled;
@@ -59,12 +60,13 @@ public class SecurityManagerTest {
         succcessfulLoginEventCalled = false;
         unsuccessfulLoginEventCalled = false;
         userPrefs = new UserPrefs();
+        appUsers = new AppUsers(); //TODO Create a stub for this?
         AddressBook addressBook = new AddressBookBuilder().withPerson(TEST).build();
 
         model = new ModelManager(addressBook, userPrefs);
         logic = new LogicManager(model);
 
-        securityManager = new SecurityManager(false, logic);
+        securityManager = new SecurityManager(false, logic, appUsers);
     }
 
     @Before
