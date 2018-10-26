@@ -12,7 +12,7 @@ import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.ClassroomManager;
 
 /**
- * Creates a class for a module.
+ * Assigns a student to an existing class.
  */
 public class ClassAddStudentCommand extends Command {
     public static final String COMMAND_WORD = "class addstudent";
