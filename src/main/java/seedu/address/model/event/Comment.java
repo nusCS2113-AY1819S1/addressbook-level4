@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Comment {
 
-    public static final String MESSAGE_COMMENTS_CONSTRAINTS =
+    public static final String MESSAGE_COMMENT_CONSTRAINTS =
             "Comment should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
@@ -27,7 +27,7 @@ public class Comment {
      */
     public Comment(String comment) {
         requireNonNull(comment);
-        checkArgument(isValidComment(comment), MESSAGE_COMMENTS_CONSTRAINTS);
+        checkArgument(isValidComment(comment), MESSAGE_COMMENT_CONSTRAINTS);
         value = comment;
     }
 
