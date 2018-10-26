@@ -32,6 +32,6 @@ public class GradebookListCommand extends Command {
             sb.append(gradebook.getGradeComponentWeightage() + "\n");
         }
         return new CommandResult(
-                String.format(MESSAGE_LIST_SUCCESS) + count + "\n" + sb.toString());
+                String.format("\n" + (MESSAGE_LIST_SUCCESS) + count + "\n" + sb.toString()));
     }
 }
