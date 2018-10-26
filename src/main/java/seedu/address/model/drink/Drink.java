@@ -65,7 +65,9 @@ public class Drink {
         this.quantity = quantity;
     }
 
-    public UniqueBatchList getUniqueBatchList() { return uniqueBatchList; }
+    public UniqueBatchList getUniqueBatchList() {
+        return uniqueBatchList;
+    }
 
     public void setUniqueBatchList(UniqueBatchList uniqueBatchList) {
         this.uniqueBatchList = uniqueBatchList;

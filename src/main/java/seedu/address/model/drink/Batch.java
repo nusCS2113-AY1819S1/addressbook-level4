@@ -53,13 +53,10 @@ public class Batch {
         batchQuantity.setValue(value);
     }
 
-    public boolean isAfter(Batch otherBatch) {
-        return this.batchDate.isAfter(otherBatch.getBatchDate());
+    public int compareDateTo(Batch otherBatch) {
+        return this.batchDate.compareTo(otherBatch.getBatchDate());
     }
 
-    public boolean isBefore(Batch otherBatch) {
-        return this.batchDate.isAfter(otherBatch.getBatchDate());
-    }
 
     /**
      * Returns true if both batches have the same identity and data fields.

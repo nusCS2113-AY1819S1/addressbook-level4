@@ -54,19 +54,14 @@ public class Date {
 
     /**
      * @param other a valid BatchDate object
-     * @return Returns true if other holds a date after that of the current object
+     * @return Returns positive integer if other holds a date before that of the current object
+     *         Returns negative integer if other holds a date after that of the current object
+     *         Returns 0 if other holds a date same as the current object
      */
-    public boolean isAfter(Date other) {
-        return this.date.isAfter(other.date);
+    public int compareTo(Date other) {
+        return this.date.compareTo(other.date);
     }
 
-    /**
-     * @param other a valid BatchDate object
-     * @return Returns true if other holds a date before that of the current object
-     */
-    public boolean isBefore(Date other) {
-        return this.date.isBefore(other.date);
-    }
 
     @Override
     public String toString() {
