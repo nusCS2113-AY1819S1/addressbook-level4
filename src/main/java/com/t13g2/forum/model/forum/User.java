@@ -47,9 +47,6 @@ public class User extends BaseModel {
         return (testUserName.matches(USER_PASSWORD_VALIDATION_REGEX));
     }
 
-    public boolean getIsBlock() {
-        return isBlock;
-    }
 
     public void setIsBlock(boolean block) {
         isBlock = block;
