@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -105,6 +106,11 @@ public class AddCommandTest {
 
         @Override
         public void addExpenditure(Expenditure expenditure) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Map getExpenditureRecords () {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -4,8 +4,10 @@ package seedu.address.model.expenditureinfo;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -85,6 +87,24 @@ public class ExpenditureList implements Iterable<Expenditure> {
         internalList.set(index, editedExpenditure);
     }
 
+    public Map getExpenditureRecords() {
+
+        Map <String, Double> map = new HashMap <String, Double> ();
+        int index = 0;
+        String category;
+        double money;
+        //System.out.println("Now we are in expenditureList executing getExpenditureRecords.");
+        while (index < internalList.size()) {
+            category = internalList.get(index).getCategory().categoryName;
+            money = Integer.parseInt(internalList.get(index).getMoney().addingMoney);
+            if (!map.containsKey(category)) {
+                map.put(category, 0.0);
+            }
+            map.put(category, map.get(category) + money);
+            index++;
+        }
+        return map;
+    }
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
