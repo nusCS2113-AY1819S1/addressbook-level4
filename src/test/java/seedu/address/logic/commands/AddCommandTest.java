@@ -94,7 +94,8 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called!");
         }
 
-        public boolean authenticate() {
+        @Override
+        public boolean getLoginStatus() {
             throw new AssertionError("This method should not be called!");
         }
 

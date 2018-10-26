@@ -367,10 +367,10 @@ image::UndoRedoActivityDiagram.png[width="650"]
 // tag::comments[]
 === Comments
 ==== Current Implementation
-`
-The Comments feature is facilitated by `Comments` class in the Logic/Comments folder. `AddComment`, `DeleteComment` and `ReplyComment` classes extend the `Comments` class. The features of the following classes are as such:
 
-* `Comments` -- Handles storage of commenents, contains `parseCommentSection()` to retrieve the comment section from eventmanager.xml and `rewrite()` to store the edited comment section into the eventmanager.xml.
+The Comments features are facilitated by `Comments` class in the Logic/Comments folder. `AddComment`, `DeleteComment` and `ReplyComment` classes extend the `Comments` class. The features of the following classes are as such:
+
+* `Comments` -- Handles storage of comments, contains `parseCommentSection()` to retrieve the comment section from eventmanager.xml and `rewrite()` to store the edited comment section into the eventmanager.xml.
 
 * `AddComment` -- Adds a new comment to the end of the comment section with the `addComment(String comment)` function.
 
@@ -391,7 +391,7 @@ Step 4. The admin executes `deleteComment 1 L/1` to reply the comment in step 2.
 
 
 [NOTE]
-If a command's syntax is wrong, it will prompt the user to try again and suggest a relevant format to abide to. In the case a false indexed event is not present, the functions will return an invalid index message.
+If a command's syntax is wrong, the application will prompt the user to try again and suggest a relevant format to follow. In the case a false indexed event is not present, the functions will return an invalid index message.
 
 The following sequence diagram shows how the addComment operation works:
 
