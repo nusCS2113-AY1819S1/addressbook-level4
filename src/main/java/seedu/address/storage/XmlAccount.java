@@ -8,6 +8,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.login.UserId;
 import seedu.address.model.login.UserPassword;
+import seedu.address.model.login.UserRole;
 
 /**
  * JAXB-friendly version of the Account.
@@ -20,6 +21,8 @@ public class XmlAccount {
     private String userId;
     @XmlElement(required = true)
     private String userPassword;
+    @XmlElement(required = true)
+    private String userRole;
 
     /**
      * Constructs an XmlAccount.
@@ -30,9 +33,10 @@ public class XmlAccount {
     /**
      * Constructs an {@code XmlAccount} with the given account details.
      */
-    public XmlAccount(String userId, String userPassword) {
+    public XmlAccount(String userId, String userPassword, String userRole) {
         this.userId = userId;
         this.userPassword = userPassword;
+        this.userRole = userRole;
     }
 
     /**
@@ -43,6 +47,8 @@ public class XmlAccount {
     public XmlAccount(LoginDetails source) {
         userId = source.getUserId().fullUserId;
         userPassword = source.getUserPassword().fullUserPassword;
+        userRole = source.getUserRole().fullUserRole;
+
     }
 
     /**
@@ -69,7 +75,12 @@ public class XmlAccount {
         }
         final UserPassword modelUserPassword = new UserPassword(userPassword);
 
-        return new LoginDetails(modelUserId, modelUserPassword);
+        if (!UserRole.isValidUserRole(userRole)) {
+            throw new IllegalValueException(UserRole.MESSAGE_USERROLE_CONSTRAINTS);
+        }
+        final UserRole modelUserRole = new UserRole(userRole);
+
+        return new LoginDetails(modelUserId, modelUserPassword, modelUserRole);
     }
 
     @Override
@@ -84,6 +95,7 @@ public class XmlAccount {
 
         XmlAccount otherLoginDetails = (XmlAccount) other;
         return Objects.equals(userId, otherLoginDetails.userId)
-                && Objects.equals(userPassword, otherLoginDetails.userPassword);
+                && Objects.equals(userPassword, otherLoginDetails.userPassword)
+                && Objects.equals(userRole, otherLoginDetails.userRole);
     }
 }

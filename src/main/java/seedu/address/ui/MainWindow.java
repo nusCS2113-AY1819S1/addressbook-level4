@@ -18,6 +18,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
+import seedu.address.logic.LoginManager;
 import seedu.address.model.UserPrefs;
 
 /**
@@ -27,9 +28,6 @@ import seedu.address.model.UserPrefs;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-
-    private static boolean isSensitiveInformation = false;
-    private static boolean isLoginSuccessful = true;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -118,20 +116,12 @@ public class MainWindow extends UiPart<Stage> {
         });
     }
 
-    public static boolean getIsSensitiveInformation() {
-        return isSensitiveInformation;
-    }
-
-    public static boolean getIsLoginSuccessful() {
-        return isLoginSuccessful;
-    }
-
-    public static void setIsSensitiveInformation(boolean setSensitiveInformation) {
-        isSensitiveInformation = setSensitiveInformation;
-    }
-
-    public static void setIsLoginSuccessful(boolean setLoginSuccessful) {
-        isLoginSuccessful = setLoginSuccessful;
+    /**
+     * Starts a pop-up window which prompts the user for input of login credentials.
+     */
+    private void initializeLoginProcess() {
+        LoginWindow loginWindow = new LoginWindow();
+        loginWindow.initializeLogin(logic);
     }
 
     /**
@@ -139,9 +129,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         do {
-            LoginWindow loginWindow = new LoginWindow();
-            loginWindow.initializeLogin(logic);
-        } while(!(MainWindow.getIsLoginSuccessful()));
+            initializeLoginProcess();
+        } while(!(LoginManager.getIsLoginSuccessful()));
 
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
