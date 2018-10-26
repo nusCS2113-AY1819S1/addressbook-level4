@@ -33,7 +33,14 @@ public class GradebookDeleteCommandTest {
     public void execute_gradebookDelete_success() throws CommandException {
         String moduleCode = "CS2113";
         String gradebookComponentName = "Finals";
-        String expectedMessage = String.format(MESSAGE_DELETE_SUCCESS, moduleCode, gradebookComponentName);
+        int gradebookMaxMarks = 20;
+        int gradebookWeightage = 10;
+        String expectedMessage = String.format(
+                MESSAGE_DELETE_SUCCESS,
+                moduleCode,
+                gradebookComponentName,
+                gradebookMaxMarks,
+                gradebookWeightage);
 
         gradebookManager.addGradebookComponent(dummyGradebookComponent.build());
         gradebookManager.saveGradebookList();
