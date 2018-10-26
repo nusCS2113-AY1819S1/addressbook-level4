@@ -109,4 +109,13 @@ public class FileUtil {
         return list;
     }
 
+    /**
+     * Return the root location folder of the program is located in
+     */
+    public static String getRootLocation() {
+        Path currentRelativePath = Paths.get("");
+        return currentRelativePath.toAbsolutePath().toString();
+    }
+
+
 }

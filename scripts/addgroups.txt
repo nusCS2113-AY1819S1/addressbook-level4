@@ -1,0 +1,9 @@
+n/tut[01] l/e1-11-20 t/ma1301
+n/tut[02] l/e3-11-20 t/ma1301
+n/tut[03] l/e5-11-20 t/ma1301
+n/tut[04] l/e11-11-20 t/ma1301
+n/tut[05] l/s22-11-20 t/ma1301
+n/tut[06] l/as4-11-20 t/ma1301
+n/tut[07] l/e9-3-2 t/ma1301
+n/tut[08] l/e1-1-0 t/ma1301
+n/tut[09] l/e5-1-0 t/ma1301

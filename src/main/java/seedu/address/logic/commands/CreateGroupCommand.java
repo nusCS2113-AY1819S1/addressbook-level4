@@ -1,3 +1,5 @@
+//@@author rajdeepsh
+
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
@@ -15,8 +17,8 @@ import seedu.address.model.group.Group;
  */
 public class CreateGroupCommand extends Command {
 
-    public static final String COMMAND_WORD = "group";
-    public static final String COMMAND_WORD_2 = "grp";
+    public static final String COMMAND_WORD = "creategroup";
+    public static final String COMMAND_WORD_2 = "cg";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new group in the address book. "
             + "Parameters: "

@@ -1,3 +1,5 @@
+//@@author rajdeepsh
+
 package seedu.address.model.group;
 
 import static java.util.Objects.requireNonNull;
@@ -9,8 +11,10 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.group.exceptions.DuplicateGroupException;
+import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+
 
 /**
  * A list of groups that enforces uniqueness between its elements and does not allow nulls.
@@ -76,6 +80,17 @@ public class UniqueGroupList implements Iterable<Group> {
             throw new DuplicateGroupException();
         }
         internalList.add(toCreate);
+    }
+
+    /**
+     * Removes the equivalent group from the list.
+     * The group must exist in the list.
+     */
+    public void remove(Group toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new GroupNotFoundException();
+        }
     }
 
     /**

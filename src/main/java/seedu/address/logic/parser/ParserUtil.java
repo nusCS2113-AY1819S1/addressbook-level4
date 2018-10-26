@@ -3,8 +3,11 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.person.Gender.inputTransform;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -22,6 +25,8 @@ import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Phone;
+import seedu.address.model.script.CommandType;
+import seedu.address.model.script.TextFile;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -44,6 +49,26 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses multiple {@code oneBasedIndex} into a list of {@code Index} and returns it. Leading and trailing white
+     * spaces will be trimmed.
+     *
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static List<Index> parseMultipleIndex(String oneBasedIndex) throws ParseException {
+        List<Index> indexList = new ArrayList<>();
+        String trimmedIndex = oneBasedIndex.trim();
+        List<String> items = Arrays.asList(trimmedIndex.split(","));
+        for (String string : items) {
+            if (!StringUtil.isNonZeroUnsignedInteger(string)) {
+                throw new ParseException(MESSAGE_INVALID_INDEX);
+            } else {
+                indexList.add(Index.fromOneBased(Integer.parseInt(string)));
+            }
+        }
+        return indexList;
     }
 
     /**
@@ -83,7 +108,7 @@ public class ParserUtil {
         requireNonNull(gender);
         String trimmedGender = gender.trim();
         if (!Gender.isInputAccepted(trimmedGender)) {
-            throw new ParseException(Gender.MESSAGE_NAME_CONSTRAINTS);
+            throw new ParseException(Gender.MESSAGE_GENDER_CONSTRAINTS);
         }
         trimmedGender = inputTransform(trimmedGender);
         requireNonNull(trimmedGender);
@@ -100,7 +125,7 @@ public class ParserUtil {
         requireNonNull(countryCode);
         String trimmedCountryCode = countryCode.trim();
         if (!Nationality.isValidCountryCode(trimmedCountryCode)) {
-            throw new ParseException(Nationality.MESSAGE_NAME_CONSTRAINTS);
+            throw new ParseException(Nationality.MESSAGE_NATIONALITY_CONSTRAINT);
         }
         return new Nationality(trimmedCountryCode);
     }
@@ -148,6 +173,15 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_EMAIL_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String password}
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String parsePassword(String password) {
+        requireNonNull(password);
+        return password.trim();
     }
 
     /**
@@ -252,7 +286,39 @@ public class ParserUtil {
         return new Message(trimmedMessage);
     }
 
-    /** Checks if input value by the user is not Null or not 0
+    /**
+     * Parses {@code String textFile} into a {@code textFile}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code textFile} is invalid.
+     */
+    public static TextFile parseTextFile(String textFile) throws ParseException {
+        requireNonNull(textFile);
+        String trimmedMessage = textFile.trim();
+        if (!TextFile.isValidTextFile(trimmedMessage)) {
+            throw new ParseException(TextFile.MESSAGE_MESSAGE_CONSTRAINTS);
+        }
+        return new TextFile(trimmedMessage);
+    }
+
+    /**
+     * Parses {@code String commandType} into a {@code commandType}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code commandType} is invalid.
+     */
+    public static CommandType parseCommandType(String commandType) throws ParseException {
+        requireNonNull(commandType);
+        String trimmedMessage = commandType.trim();
+        if (!CommandType.isValidCommand(trimmedMessage)) {
+            throw new ParseException(CommandType.MESSAGE_MESSAGE_CONSTRAINTS);
+        }
+        return new CommandType(trimmedMessage);
+    }
+
+    /**
+     * Checks if input value by the user is not Null or not 0
+     *
      * @param value
      * @return
      * @throws ParseException
@@ -270,6 +336,7 @@ public class ParserUtil {
      * Conducts the check of flags during user command input
      * Accepts "true" or '1' to assert true
      * Accepts "false" or '0' to assert false
+     *
      * @param isFlagged
      * @return
      * @throws ParseException
@@ -277,7 +344,7 @@ public class ParserUtil {
     public static Boolean parseIsFlagged(String isFlagged) throws ParseException {
         requireNonNull(isFlagged);
         String trimmedFlaggedValue = isFlagged.trim().toLowerCase();
-        switch(trimmedFlaggedValue) {
+        switch (trimmedFlaggedValue) {
         case "false":
         case "0":
             trimmedFlaggedValue = "false";

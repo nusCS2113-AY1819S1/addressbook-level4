@@ -109,6 +109,10 @@ image::Architecture.png[width="600"]
 The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
 
 [TIP]
+
+
+
+
 The `.pptx` files used to create diagrams in this document can be found in the link:{repoURL}/docs/diagrams/[diagrams] folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
 `Main` has only one class called link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp`]. It is responsible for,
@@ -319,52 +323,79 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
-// tag::undoredo[]
+// tag::group[]
 === Group feature
 ==== Current Implementation
 
-The `group` mechanism is facilitated by `AddressBook`.
+The group mechanism is facilitated by `AddressBook`.
 Additionally, it implements the following operations:
 
-* `AddressBook#createGroup()` -- Creates a group in the address book.
-* `AddressBook#hasGroup()` -- Checks to see if the address book has a particular group.
+* `AddressBook#createGroup()` -- Creates a group in the student management system.
+* `AddressBook#hasGroup()` -- Checks to see if the student management system has a particular group.
 * `AddressBook#hasPersonInGroup()` -- Checks to see if a particular person is in a group.
 * `AddressBook#addGroup()` -- Add's persons to a group.
-* `AddressBook#getGroupList()` -- Returns a list of groups in the address book.
+* `AddressBook#removeGroup()` -- Removes a group form the student management system.
 
-These operations are exposed in the `Model` interface as `Model#createGroup()`, `Model#hasGroup()`, `Model#hasPersonInGroup()`, `Model#addGroup()` and `Model#getFilteredGroupList()` respectively.
+These operations are exposed in the `Model` interface as `Model#createGroup()`, `Model#hasGroup()`,
+`Model#hasPersonInGroup()`, `Model#addGroup()` and `Model#deleteGroup()` respectively.
 
-Given below is an example usage scenario and how the `group` mechanism behaves at each step.
+Given below is an example usage scenario and how the group mechanism behaves at each step.
 
-Step 1. User executes `group n/CS2113 l/LT15` command to add a group to the address book. The address book detects `group` as a command word will use `CreateGroupCommandParser` to
-parse the input given. `CreateGroupCommandParser` will then create a `Group` object after parsing and pass it to `GroupCommand` which will then execute creating a group in the address book.
+Step 1. User inputs `creategroup n/CS1231 l/LT15` to create a group in the student management system.
+The `AddressBookParser` detects `creategroup` as a command word to use `CreateGroupCommandParser` to parse the input given.
+`CreateGroupCommandParser` will then create a `Group` object containing all of the group's given information after parsing and pass it to `GroupCommand` which will then
+execute adding the group created to the student management system.
   +
 [NOTE]
-If a duplicate groups are found in the address book during its execution, it will not create a group or override the existing group but throw a `CommandException : Duplicate Group` which will notify the user of the issue.
+If a duplicate groups are found in the student management system during its execution,
+it will not create a group nor will it override the existing group but instead, it will throw a `DuplicateGroupException`
+which will then notify the user of the issue.
 
-Step 2. The user executes `addgroup g/1 p/1` command to add the first person in the address book to the first group in address book. The address book detects `addgroup` as a command word will use `AddGroupCommandParser` to
-parse the input given. `AddGroupCommandParser` will then create a `AddGroup` object after parsing and pass it to `AddGroupCommand` which will then execute adding persons to a group in the address book. +
+The following sequence diagram shows how the create group operation works within both `Model` and `Logic` components where `g` is the `Group` object created:
 
+.Interactions Inside the Logic and Model Component for the `creategroup n/CS1231 l/LT15` Command
+image::CreateGroupSequenceDiagram.png[width="800"]
 
-
+Step 2. The user inputs `addgroup g/1 p/1` to add the first person in the student management system to the first group
+in the student management system. The `AddressBookParser` detects `addgroup` as a command word will use `AddGroupCommandParser`
+to parse the input given. `AddGroupCommandParser` will then create an `AddGroup` object containing all relevant group and person indexes after parsing and pass it to `AddGroupCommand`
+which will then execute adding persons to the specified group in the student management system.
+ +
 [NOTE]
-If a duplicate persons are found in the group of the address book during its execution, it will not create a group or override the existing group but throw a `CommandException : Duplicate Persons` which will notify the user of the issue.
+If a duplicate persons are found in the group of the student management system during its execution,
+it will not create a group nor will it override the existing group but instead, it will throw a `DuplicatePersonException` which will notify the user of the issue.
+
+The following sequence diagram shows how the add persons to group operation works within both `Model` and `Logic` components where `ag` is the `AddGroup` object created:
+
+.Interactions Inside the Logic and Model Component for the `addgroup g/1 p/1` Command
+image::AddGroupSequenceDiagram.png[width="800"]
+
+Step 3. The user inputs `deletegroup 1` to delete the first group in the student management system. The `AddressBookParser` detects `deletegroup` as a command word will use `DeleteGroupCommandParser`
+to parse the input given. `DeleteGroupCommandParser` will then create an `Index` object after parsing and pass it to `DeleteGroupCommand`
+which will then execute deleting the specified group from the student management system.
+ +
+
+The following sequence diagram shows how the delete group operation works within both `Model` and `Logic` components:
+
+.Interactions Inside the Logic and Model Component's for the `deletegroup 1` Command
+image::DeleteGroupSequenceDiagram.png[width="800"]
+
 
 ==== Design Considerations
 
-===== Aspect: Create groups
+===== Aspect: Storage
 
-* **Alternative 1 (current choice):** Creates a group and writes it to `addressbook.xml`.
+* **Alternative 1 (current choice):** Stores groups in `addressbook.xml`.
 ** Pros: Easy to implement.
 ** Cons: Share same database as persons, not modular in terms of future expansions.
-* **Alternative 2:** Creates a group and writes it to a different file `addressbook2.xml`.
-** Pros: Modular as groups are stored in a different file, makes extraction of data easier.
+* **Alternative 2:** Stores groups in a different file `addressbookgroups.xml`.
+** Pros: Modular as groups are stored in a different file, makes data extraction easier.
 ** Cons: Harder to implement.
 
-// end::undoredo[]
+// end::group[]
 
 // tag::AddScriptCommand[]
-=== AddScriptCommand Feature
+=== AddScriptCommand feature
 ==== Current Implementation
 The AddScriptCommand Feature is executed by AddressBook when the user enter the specific command.
 
@@ -386,22 +417,190 @@ Each Algorithm serve different purposes.
 
 Every Algorithm will require inputs such as:
 ****
-* Number of Groups to be created
+* Number of Groups to be created of Integer Data Type
 * 2D ArrayList of Person Type
-* LinkList containing all person data from the address book
+* LinkList containing all person data from the current address book
 * Group Name in String Type
 ****
 
 From these 4 inputs, each algorithm will run necessary checks, create the required number of groups with the `Group Name` parsed in and add the Students assigned to the group.
 
+[NOTE]
+Before any Algorithm execute, the system will check if there exist any duplicate group name.
+If such an event occur, the command will stop and throw a `CommandException : Duplicate Groups Found` which will notify the user of the issue.
+
 ==== Sequence Diagrams
 
 ==== Design Considerations
+Before any Algorithm is execute, there are some checks and functions to be performed.
+
+. Check if _n_ number of groups to be created must be less than number of persons in the address book.
+.. throw `Command Exception` if _n_ groups is more than > number of persons in address book.
+. Check if there exist a group with the same group name as the ones to be created.
+.. throw `Command Exception` if there exist another group with the intended name to be created.
+. Shuffle the Address Book with a time seed.
+.. A Better Distribution
+. Place All Persons ArrayList into an LinkList.
 
 ===== Aspect: Distribute Students Equally Algorithm Explanation
+
+*Allocation Process*
+
+Firstly, I have created a 2D ArrayList of Person Type to allocate person to groups.
+
+The 2D ArrayList act as a group which contains groups of selected persons.
+Next, I have created an for loop to iterate _n_ times, where _n_ is the number of required groups to be created.
+In the for loop, i have created an ArrayList of Person Type which stores all selected Persons.
+In each for loop, the system will calculate the required number of person to be in a group and add them into the ArrayList.
+
+Once the required number of person to be in a group is fulfilled, this ArrayList is stored into the 2D Array List.
+This process loops for _n_ times.
+
+The 2D Array List should now store _n_ Elements with (_a_) number of persons in each Element.
+
+*Distribution Process*
+
+Once the allocation process of person to groups. The `distributeProcess` method will access the 2D ArrayList.
+In each ArrayList of the 2D ArrayList, the distributeProcess Method will create a group and add all the person allocated
+to that ArrayList into the group.
+This process loops until the 2D ArrayList if fully accessed.
+
+*The process is now complete with all person distributed randomly into _n_ number of groups.*
+
 ===== Aspect: Distribute Students Equally with Balanced Gender Explanation
+
+The process is similar to the Algorithm used above. However, the key difference is that I had separate all female person into a list
+and all males into a list. After separation, I distribute 1 male person to each group and does this loop until there are no males left.
+
+This process repeats for the female students.
+
+Once the groupArrayList is allocated, we will run the same Distribution Process mentioned in the Algorithm above.
+
+*The process is now complete with all person distributed randomly with balanced genders into _n_ number of groups.*
+
 ===== Aspect: Distribute Students Equally with Balanced Nationality Explanation
 ===== Aspect: Distribute Students Equally with Balanced Gender & Nationality Explanation
+// end::distribute[]
+
+// tag::sendemail[]
+=== Send Email feature
+==== Current Implementation
+The send email feature is facilitated by `JavaMail` API. It provides a platform-independent and protocol-independent framework to build mail and messaging applications.
+
+In the current version, the following operations have been implemented:
+
+* `EmailCommand` -- The command to send an email to single or multiple indexes of persons.
+* `EmailUtil` -- The helper function that interacts with `JavaMail` for sending email.
+* `EmailLoginCommand` -- The command to enter credentials for the email account to be used for sending emails.
+
+The feature currently supports the following mail servers:
+
+1. `Google Mail` -- @gmail.com
+
+2. `Microsoft Outlook` -- @outlook.com
+
+3. `Hotmail` -- @hotmail.com
+
+4. `Live` -- @live.com
+
+5. `NUS Student` -- @u.nus.edu
+
+6. `NUS Staff` -- @nus.edu.sg
+
+Given below is an example usage scenario and how the EmailCommand behaves at each step.
+
+Step 1. The user types in the command to send email.
+
+* Single Person Index
+
+image::EmailCommandSingleIndexDiagram.png[width="500"]
+
+* Single Person Index w/ Command Alias
+
+image::AliasEmailCommandSingleIndexDiagram.png[width="500"]
+
+* Multiple Persons Index
+
+image::EmailCommandMultipleIndexDiagram.png[width="500"]
+
+* Multiple Persons Index w/ Command Alias
+
+image::AliasEmailCommandMultipleIndexDiagram.png[width="500"]
+
+
+[NOTE]
+If a login credential is not found in the system, the following message will be shown.
+
+image::EmailCommandNoLoginFound.png[width="500"]
+
+In order for an email to be sent, there must be a sender account.
+
+[NOTE]
+If subject title exceeds 78 characters, the following message will be shown.
+
+image::EmailCommandExceedSubjectLength.png[width="700"]
+
+Although it is possible for subject field to contain more than 78 characters, the system
+sets a limit to prevent subject title folding.
+
+==== Sequence Diagrams
+
+image::EmailCommandSequenceDiagram.png[width="800"]
+
+==== Design Considerations
+
+===== Aspect: How to send email to a single person
+Initially, the idea was to identify the recipient by their full name, but after awhile, we found
+that using the pre-existing `Index` class to be a better way to select our recipient.
+
+To send an email to a single person, we simply identify the `Index` of the person we want to send
+to from any list (full listing or filtered list) and enter it into the sendmail command.
+
+
+===== Aspect: How to send email to multiple person
+Since we are able to send email to a single person using their index, we can identify more recipients
+using their associated Index in the listing.
+
+To send an email to multiple persons, we simply identify all their `Index` and enter them into the
+sendmail command separated by a comma. We then add a parser to identify that this is an email command
+for multiple persons and add them all into the recipient list.
+
+===== Aspect: How to send email to a group of persons
+
+Similar idea for sending email to single or multiple person(s). Instead of identifying `Index` of persons,
+now we simply identify an entire list of person using their `Group` name, add a parser to identify that
+it is an email command for sending to a group and then add all of the persons into the recipient list.
+
+===== Aspect: How to allow email login from different mail servers
+
+To support more mail servers (initially only Google mail was supported through hardcoding), we maintain a list
+of mail servers under `Domain`. To add a new mail server support, we need primarily three information:
+
+* The SMTP Hostname
+
+image::EmailCommandDomainHost.png[width="400"]
+
+* The SMTP Port (465 or 587)
+
+image::EmailCommandDomainPort.png[width="300"]
+
+* Is it TLS or SSL (if SSL, we need to add trust into `Properties`)
+
+image::EmailCommandDomainTrust.png[width="450"]
+
+When the user enter their email credentials using `login` command, we will be able to identify which mail
+server their email uses by looking at the domain (@example.com). We then set `Properties` with the relevant
+domain information.
+
+
+
+===== Aspect: How to send email with attachments
+
+To send emails with attachment, we consider allowing the user to specify a path to the attachment or we can
+ fix a specific folder where the attachments has to be in to be included in the email.
+
+We then make use of MimeMessage provided by `JavaMail` API and create a Multipart message.
+// end::sendmail[]
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
@@ -927,7 +1126,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |university lecturer |add students to groups |have a list of all my students in a particular module/group
 
-|`* * *` |university lecturer |send an email to all students in any group |make module specific announcements
+|`* * *` |university lecturer |delete groups |edit my student management system
+
+|`* * *` |university lecturer |send an email to a student, a group of students or students belonging to a group |make module specific announcements
 
 |`* * *` |university lecturer |print an attendance sheet of all persons in a specific group |
 
@@ -991,7 +1192,7 @@ Use case ends
 *Extensions*
 
 [none]
-* 1a. Student management system detects incorrect format of data entered.
+* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
 +
 
 [none]
@@ -1021,7 +1222,7 @@ Use case ends
 *Extensions*
 
 [none]
-* 1a. Student management system detects incorrect format of in data entered.
+* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
 +
 
 [none]
@@ -1032,6 +1233,30 @@ Use case ends
 
 [none]
 ** 1b1. Student management system rejects command entered with relevant error message.
++
+
+
+[discrete]
+=== Use case: Delete Groups
+*Precondition*
+
+1.  Student management system has group(s)
+
+*MSS*
+
+1.  Lecturer deletes group
+2.  AddressBook confirms group is deleted
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
++
+
+[none]
+** 1a1. Student management system rejects command entered with relevant error message.
 +
 
 
@@ -1074,32 +1299,41 @@ Use case ends
 === Use case: Mass Email Communication
 *Precondition*
 
-1.  Group's exist in the AddressBook
+1.  Student(s) or group's exist in the AddressBook
 
 *MSS*
 
-1.  User requests to send email with specified content to a group
-2.  AddressBook confirms with user that email was sent
+1.  User requests to send email with specified content to student(s) or group.
+2.  AddressBook sends email with specified content student(s) or group.
 +
 Use case ends
 
 *Extensions*
 
 [none]
-* 1a. AddressBook detects error in data entered.
+* 1a. AddressBook detects subject exceeds imposed word limit.
 +
 
 [none]
-** 1a1. AddressBook rejects command.
+** 1a1. AddressBook rejects command and displays error message.
 +
 Use case ends
 
 [none]
-* 1b. AddressBook detects email content exceeds word limit.
+* 1b. AddressBook detects email content exceeds size limit of 25mb.
 +
 
 [none]
 ** 1b1. AddressBook rejects command and displays error message.
++
+Use case ends
+
+[none]
+* 1c. AddressBook detects no login credential found in system.
++
+
+[none]
+** 1c1. AddressBook rejects command and displays error message.
 +
 Use case ends
 

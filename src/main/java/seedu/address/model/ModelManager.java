@@ -117,6 +117,12 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedAddressBook.hasPersonInGroup(addGroup);
     }
 
+    @Override
+    public void deleteGroup(Group target) {
+        versionedAddressBook.removeGroup(target);
+        indicateAddressBookChanged();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

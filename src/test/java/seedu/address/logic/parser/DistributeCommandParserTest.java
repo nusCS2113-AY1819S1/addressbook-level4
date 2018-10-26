@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.GENDER_FLAG_BOOLEAN_FALSE;
+import static seedu.address.logic.commands.CommandTestUtil.GENDER_FLAG_BOOLEAN_TRUE;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_FLAG_FALSE;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_FLAG_INVALID_NUMBER;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_FLAG_INVALID_WORD;
@@ -9,6 +11,8 @@ import static seedu.address.logic.commands.CommandTestUtil.GROUP_NAME_DESC_CS101
 import static seedu.address.logic.commands.CommandTestUtil.GROUP_NAME_DESC_TUT_1;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUP_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUP_NUMBER_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.NATIONALITY_FLAG_BOOLEAN_FALSE;
+import static seedu.address.logic.commands.CommandTestUtil.NATIONALITY_FLAG_BOOLEAN_TRUE;
 import static seedu.address.logic.commands.CommandTestUtil.NATIONALITY_FLAG_FALSE;
 import static seedu.address.logic.commands.CommandTestUtil.NATIONALITY_FLAG_INVALID_NUMBER;
 import static seedu.address.logic.commands.CommandTestUtil.NATIONALITY_FLAG_INVALID_WORD;
@@ -47,13 +51,31 @@ public class DistributeCommandParserTest {
         assertParseSuccess(parser, NUMBER_OF_GROUPS + GROUP_NAME_DESC_TUT_1 + GROUP_NAME_DESC_CS1010
                 + GENDER_FLAG_FALSE + NATIONALITY_FLAG_FALSE, new DistributeCommand(expectedDistribution));
 
-        // multiple gender flag - last gender flag is accepted
+        // multiple gender flag - last gender flag is accepted (both flags in word)
         assertParseSuccess(parser, NUMBER_OF_GROUPS + GROUP_NAME_DESC_CS1010 + GENDER_FLAG_TRUE
                 + GENDER_FLAG_FALSE + NATIONALITY_FLAG_FALSE, new DistributeCommand(expectedDistribution));
 
-        // multiple nationality flag - last gender flag is accepted
+        // multiple gender flag - last gender flag is accepted (both flags in boolean)
+        assertParseSuccess(parser, NUMBER_OF_GROUPS + GROUP_NAME_DESC_CS1010 + GENDER_FLAG_BOOLEAN_TRUE
+                + GENDER_FLAG_BOOLEAN_FALSE + NATIONALITY_FLAG_BOOLEAN_FALSE,
+                new DistributeCommand(expectedDistribution));
+
+        // multiple nationality flag - last nationality flag is accepted (both flags in word)
         assertParseSuccess(parser, NUMBER_OF_GROUPS + GROUP_NAME_DESC_CS1010 + GENDER_FLAG_FALSE
                 + NATIONALITY_FLAG_TRUE + NATIONALITY_FLAG_FALSE, new DistributeCommand(expectedDistribution));
+
+        // multiple gender flag - last nationality flag is accepted (both flags in boolean
+        assertParseSuccess(parser, NUMBER_OF_GROUPS + GROUP_NAME_DESC_CS1010 + GENDER_FLAG_BOOLEAN_FALSE
+                + NATIONALITY_FLAG_BOOLEAN_TRUE + NATIONALITY_FLAG_BOOLEAN_FALSE,
+                new DistributeCommand(expectedDistribution));
+
+        //Different types of flag input. Gender flag in boolean, Nationality flag in Word
+        assertParseSuccess(parser, NUMBER_OF_GROUPS + GROUP_NAME_DESC_CS1010 + GENDER_FLAG_BOOLEAN_FALSE
+                + NATIONALITY_FLAG_FALSE, new DistributeCommand(expectedDistribution));
+
+        //Different types of flag input. Gender flag in Word, Nationality flag in boolean
+        assertParseSuccess(parser, NUMBER_OF_GROUPS + GROUP_NAME_DESC_CS1010 + GENDER_FLAG_FALSE
+                + NATIONALITY_FLAG_BOOLEAN_FALSE, new DistributeCommand(expectedDistribution));
 
     }
 
@@ -95,7 +117,7 @@ public class DistributeCommandParserTest {
         assertParseFailure(parser, NUMBER_OF_GROUPS + INVALID_GROUP_NAME_DESC + GENDER_FLAG_FALSE
                 + NATIONALITY_FLAG_FALSE, GroupName.MESSAGE_GROUP_NAME_CONSTRAINTS);
 
-        // invalid gender flag (numbers that are not 1 or 0)
+        // invalid gender flag (boolean that are not 1 or 0)
         assertParseFailure(parser, NUMBER_OF_GROUPS + GROUP_NAME_DESC_CS1010 + GENDER_FLAG_INVALID_NUMBER
                 + NATIONALITY_FLAG_FALSE, DistributeAlgorithm.MESSAGE_FLAG_ERROR);
 
@@ -103,14 +125,13 @@ public class DistributeCommandParserTest {
         assertParseFailure(parser, NUMBER_OF_GROUPS + GROUP_NAME_DESC_CS1010 + GENDER_FLAG_INVALID_WORD
                 + NATIONALITY_FLAG_FALSE, DistributeAlgorithm.MESSAGE_FLAG_ERROR);
 
-        // invalid nationality flag (numbers that are not 1 or 0)
+        // invalid nationality flag (boolean that are not 1 or 0)
         assertParseFailure(parser, NUMBER_OF_GROUPS + GROUP_NAME_DESC_CS1010 + GENDER_FLAG_FALSE
                 + NATIONALITY_FLAG_INVALID_NUMBER, DistributeAlgorithm.MESSAGE_FLAG_ERROR);
 
         // invalid nationality flag (word that is not true or false)
         assertParseFailure(parser, NUMBER_OF_GROUPS + GROUP_NAME_DESC_CS1010 + GENDER_FLAG_FALSE
                 + NATIONALITY_FLAG_INVALID_WORD, DistributeAlgorithm.MESSAGE_FLAG_ERROR);
-
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_GROUP_NUMBER_DESC + INVALID_GROUP_NAME_DESC + GENDER_FLAG_FALSE

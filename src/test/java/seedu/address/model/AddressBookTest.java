@@ -27,6 +27,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.exceptions.DuplicateGroupException;
+import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.GroupBuilder;
@@ -141,6 +142,20 @@ public class AddressBookTest {
                 .withTags(VALID_GROUP_TAG_TUT_1)
                 .build();
         assertTrue(addressBook.hasGroup(editedTut1));
+    }
+
+    @Test
+    public void removeGroup_groupInAddressBook_removesGroup() {
+        AddressBook expected = new AddressBook();
+        addressBook.createGroup(getTut1());
+        addressBook.removeGroup(getTut1());
+        assertEquals(expected, addressBook);
+    }
+
+    @Test
+    public void removeGroup_groupNotInAddressBook_throwsGroupNotFoundException() {
+        thrown.expect(GroupNotFoundException.class);
+        addressBook.removeGroup(getTut1());
     }
 
     @Test

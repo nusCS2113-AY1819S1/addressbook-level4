@@ -21,7 +21,7 @@ import seedu.address.model.person.Person;
  */
 public class AddGroupCommand extends Command {
     public static final String COMMAND_WORD = "addgroup";
-    public static final String COMMAND_WORD_2 = "addgrp";
+    public static final String COMMAND_WORD_2 = "ag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds persons to a group specified. "
             + "Parameters: "

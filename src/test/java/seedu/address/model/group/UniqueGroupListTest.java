@@ -22,6 +22,7 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.group.exceptions.DuplicateGroupException;
+import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.GroupBuilder;
 
@@ -121,6 +122,26 @@ public class UniqueGroupListTest {
     public void addPersons_nullParameter_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniqueGroupList.addPersons(null);
+    }
+
+    @Test
+    public void remove_nullGroup_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        uniqueGroupList.remove(null);
+    }
+
+    @Test
+    public void remove_groupDoesNotExist_throwsGroupNotFoundException() {
+        thrown.expect(GroupNotFoundException.class);
+        uniqueGroupList.remove(getTut1());
+    }
+
+    @Test
+    public void remove_existingGroup_removesGroup() {
+        uniqueGroupList.createGroup(getTut1());
+        uniqueGroupList.remove(getTut1());
+        UniqueGroupList expectedUniqueGroupList = new UniqueGroupList();
+        assertEquals(expectedUniqueGroupList, uniqueGroupList);
     }
 
     @Test
