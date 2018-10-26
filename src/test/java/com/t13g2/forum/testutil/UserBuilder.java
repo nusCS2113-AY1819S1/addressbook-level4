@@ -38,7 +38,7 @@ public class UserBuilder {
         this.username = userToCopy.getUsername();
         this.password = userToCopy.getPassword();
         this.isAdmin = userToCopy.isAdmin();
-        this.isBlock = userToCopy.getIsBlock();
+        this.isBlock = userToCopy.isBlock();
         this.email = userToCopy.getEmail();
         this.phone = userToCopy.getPhone();
     }
