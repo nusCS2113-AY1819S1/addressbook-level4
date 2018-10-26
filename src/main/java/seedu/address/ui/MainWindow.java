@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -15,6 +17,8 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.DisplayExpenseTrendEvent;
+import seedu.address.commons.events.ui.DisplayMonthlyExpenseEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
@@ -41,6 +45,9 @@ public class MainWindow extends UiPart<Stage> {
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
+    private ExpenseTrendWindow expenseTrendWindow;
+    private MonthlyExpenseWindow monthlyExpenseWindow;
+
 
     @FXML
     private StackPane browserPlaceholder;
@@ -83,6 +90,8 @@ public class MainWindow extends UiPart<Stage> {
         registerAsAnEventHandler(this);
 
         helpWindow = new HelpWindow();
+        expenseTrendWindow = new ExpenseTrendWindow();
+        monthlyExpenseWindow = new MonthlyExpenseWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -220,5 +229,46 @@ public class MainWindow extends UiPart<Stage> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
     }
+
+    // ============ Expense ===========================================================
+
+    @Subscribe
+    private void handleDisplayExpenseTrendEvent(DisplayExpenseTrendEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleDisplayExpenseTrend(event.getexEenseTrendData());
+    }
+
+    /**
+     * Display the expense trend window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleDisplayExpenseTrend(TreeMap<String, Double> expenseTrend) {
+        expenseTrendWindow.setExpenseTrendData(expenseTrend);
+        if (!expenseTrendWindow.isShowing()) {
+            expenseTrendWindow.show();
+        } else {
+            expenseTrendWindow.focus();
+        }
+    }
+
+    @Subscribe
+    private void handleDisplayMonthlyExpenseEvent(DisplayMonthlyExpenseEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleDisplayMonthlyExpense(event.getMonthlyData());
+    }
+
+    /**
+     * Display the monthly expense window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleDisplayMonthlyExpense(HashMap<String, String> monthlyData) {
+        monthlyExpenseWindow.setMonthlyData(monthlyData);
+        if (!monthlyExpenseWindow.isShowing()) {
+            monthlyExpenseWindow.show();
+        } else {
+            monthlyExpenseWindow.focus();
+        }
+    }
+
 }
 

@@ -20,7 +20,6 @@ public class UserPrefs {
     private Path expenseBookBackupFilePath;
     private String expenseBookGistId;
 
-
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
         setAddressBookFilePath(getAddressBookFilePath());

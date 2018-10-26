@@ -21,6 +21,7 @@ import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditExpenseCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ExpenseTrendCommand;
 import seedu.address.logic.commands.FindAddressCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindNameCommand;
@@ -29,6 +30,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListTaskCommand;
+import seedu.address.logic.commands.MonthlyExpenseCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RedoExpenseCommand;
 import seedu.address.logic.commands.RestoreCommand;
@@ -144,12 +146,18 @@ public class AddressBookParser {
         case EditExpenseCommand.COMMAND_WORD:
             return new EditExpenseCommandParser().parse(arguments);
 
+        case ExpenseTrendCommand.COMMAND_WORD:
+            return new ExpenseTrendCommand();
+
+        case MonthlyExpenseCommand.COMMAND_WORD:
+            return new MonthlyExpenseCommand(arguments);
+
         case RedoExpenseCommand.COMMAND_WORD:
             return new RedoExpenseCommand();
 
         case UndoExpenseCommand.COMMAND_WORD:
             return new UndoExpenseCommand();
-
+        //@@author
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

@@ -370,7 +370,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //@@author ChenSongJian
-
     @Override
     public void addExpense(Expense expense) {
         versionedExpenseBook.addExpense(expense);

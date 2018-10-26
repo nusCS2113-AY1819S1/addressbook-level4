@@ -28,6 +28,7 @@ import seedu.address.logic.commands.DeleteExpenseCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditExpenseCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ExpenseTrendCommand;
 import seedu.address.logic.commands.FindAddressCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindNameCommand;
@@ -35,6 +36,7 @@ import seedu.address.logic.commands.FindPhoneCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MonthlyExpenseCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RedoExpenseCommand;
 import seedu.address.logic.commands.SelectCommand;
@@ -93,7 +95,6 @@ public class LogicManager extends ComponentManager implements Logic {
         return model.getFilteredExpenseList();
     }
 
-
     @Override
     public ArrayList<String> getCommandList() {
         ArrayList<String> commandList = new ArrayList<>();
@@ -131,6 +132,7 @@ public class LogicManager extends ComponentManager implements Logic {
                 + PREFIX_EXPENSE_VALUE + " "
                 + PREFIX_TAG);
         commandList.add(ExitCommand.COMMAND_WORD);
+        commandList.add(ExpenseTrendCommand.COMMAND_WORD);
         commandList.add(FindAddressCommand.COMMAND_WORD);
         commandList.add(FindCommand.COMMAND_WORD);
         commandList.add(FindCommand.COMMAND_WORD + " KEYWORD");
@@ -139,6 +141,8 @@ public class LogicManager extends ComponentManager implements Logic {
         commandList.add(HelpCommand.COMMAND_WORD);
         commandList.add(HistoryCommand.COMMAND_WORD);
         commandList.add(ListCommand.COMMAND_WORD);
+        commandList.add(MonthlyExpenseCommand.COMMAND_WORD);
+        commandList.add(MonthlyExpenseCommand.COMMAND_WORD + " MM/YYYY");
         commandList.add(RedoCommand.COMMAND_WORD);
         commandList.add(RedoExpenseCommand.COMMAND_WORD);
         commandList.add(SelectCommand.COMMAND_WORD);

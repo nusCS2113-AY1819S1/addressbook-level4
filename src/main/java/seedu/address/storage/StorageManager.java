@@ -374,7 +374,7 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     @Subscribe
     public void handleExpenseBookChangedEvent(ExpenseBookChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local expense data changed, saving to file"));
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
             saveExpenseBook(event.data);
         } catch (IOException e) {
@@ -385,7 +385,7 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     @Subscribe
     public void handleExpenseBookLocalBackupEvent(ExpenseBookLocalBackupEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Saving expense data as backup"));
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Saving student planner data as backup"));
         try {
             backupExpenseBook(event.data, event.filePath);
         } catch (IOException e) {
