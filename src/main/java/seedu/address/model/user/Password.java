@@ -8,11 +8,11 @@ import static java.util.Objects.requireNonNull;
  */
 public class Password {
     /*
-     * The first character of the password must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * The password must not contain a whitespace which include " "
      */
     public static final String PASSWORD_VALIDATION_REGEX = "[\\p{Alnum}]*";
-
+    public static final String MESSAGE_PASSWORD_CONSTRAINTS =
+            "Password should only contain alphanumeric characters and no space, and it should not be blank";
     private String password;
 
     public Password(){}
@@ -25,7 +25,8 @@ public class Password {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidPassword(String test) {
-        return test.matches(PASSWORD_VALIDATION_REGEX);
+        return test.matches(PASSWORD_VALIDATION_REGEX) && !test.isEmpty ();
+
     }
 
     @Override

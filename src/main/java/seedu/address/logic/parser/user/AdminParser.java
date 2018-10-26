@@ -60,13 +60,13 @@ public class AdminParser {
         case AddItemCommand.COMMAND_WORD:
             return new AddItemCommandParser ().parse (arguments);
 
-
         case ChangePasswordCommand.COMMAND_WORD:
             return new ChangePasswordCommandParser ().parse(arguments);
 
         case CreateAccountCommand.COMMAND_WORD:
             return new CreateAccountCommandParser ().parse (arguments);
 
+        //existing command
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser ().parse(arguments);
 

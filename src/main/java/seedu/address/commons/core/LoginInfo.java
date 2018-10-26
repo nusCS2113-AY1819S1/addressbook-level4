@@ -15,15 +15,16 @@ public class LoginInfo {
     protected Password password;
     protected AuthenticationLevel authenticationLevel;
 
-    public LoginInfo(){ }
+
+    public LoginInfo(){}
     public LoginInfo (String userName, String authenticationLevel) {
         this.userName = new UserName (userName);
         this.authenticationLevel = new AuthenticationLevel (authenticationLevel);
     }
-    public LoginInfo (String userName, String password, String authenticationLevel) {
-        this.userName = new UserName (userName);
-        this.password = new Password (password);
-        this.authenticationLevel = new AuthenticationLevel (authenticationLevel);
+    public LoginInfo (UserName userName, Password password, AuthenticationLevel authenticationLevel) {
+        this.userName = userName;
+        this.password = password;
+        this.authenticationLevel = authenticationLevel;
     }
 
     public void setPassword (String password) {

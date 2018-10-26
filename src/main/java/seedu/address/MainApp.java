@@ -51,7 +51,6 @@ import seedu.address.ui.UiPart;
 public class MainApp extends Application {
 
     public static final Version VERSION = new Version(0, 6, 0, true);
-    public static final String FXML_LOGIN_PATH = "LoginPage.fxml";
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
 
@@ -61,14 +60,12 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
-    //author @tianhang
     protected Stage loginWindow;
     private FXMLLoader fxmlLoader;
     private LoginInfoManager loginInfoList;
     private LoginController loginController;
+    private String loginPathPath;
     private InitAddressBook initAddressBook;
-    private Stage mainWindow;
-    //author @tianhang
 
     @Override
     public void init() throws Exception {
@@ -81,6 +78,8 @@ public class MainApp extends Application {
         userPrefs = initPrefs(userPrefsStorage);
         LoginInfoStorage loginInfoStorage = new JsonLoginInfoStorage (config.getUserLoginInfoilePath ());
         loginInfoList = initLoginInfo (loginInfoStorage);
+        loginPathPath = config.getLoginPagePath ().toString ();
+
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage, loginInfoStorage);
 
@@ -213,7 +212,7 @@ public class MainApp extends Application {
         settingUpLoginController();
     }
     private void settingUpLoginWindow() {
-        URL fxmlLoginFileUrl = UiPart.getFxmlFileUrl(FXML_LOGIN_PATH);
+        URL fxmlLoginFileUrl = UiPart.getFxmlFileUrl(loginPathPath);
         Parent root = loadFxmlFile(fxmlLoginFileUrl, loginWindow);
         //loginWindow.initStyle(StageStyle.UNDECORATED);
         loginWindow.setTitle("Login Page");
@@ -234,7 +233,7 @@ public class MainApp extends Application {
     /**
      * loads the file from {@code location} and set {@code root}
      * @param location
-     * @param root
+     * @param stage
      * @return root of primary stage
      */
     private Parent loadFxmlFile(URL location, Stage stage) {
@@ -246,7 +245,7 @@ public class MainApp extends Application {
             root = fxmlLoader.load ();
 
         } catch (IOException e) {
-            //System.out.println("the exception is " + e);
+
             throw new AssertionError(e);
         }
         return root;
