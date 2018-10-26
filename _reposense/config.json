@@ -1,0 +1,33 @@
+{
+  "ignoreGlobList": ["about-us/**", "**index.html"],
+  "formats": ["adoc", "cs", "css", "fxml",  "gradle", "html", "java", "js", "json", "jsp", "md", "py", "tag", "xml"],
+  "ignoreCommitList":,
+  "authors":
+  [
+    {
+      "githubId": "tenvinc",
+      "displayName": "Vincent Neo",
+      "authorNames": ["tenvinc", "Vincent"],
+      "ignoreGlobList": ["**.css"]
+    },
+    {
+      "githubId": "tztzt",
+      "displayName": "Teh Zhi Thon",
+      "authorNames": ["tztzt"],
+      "ignoreGlobList": ["**.css"]
+    },
+    {
+      "githubId": "OscarZeng",
+      "displayName": "Oscar Zeng",
+      "authorNames": ["OscarZeng"],
+      "ignoreGlobList": ["**.css"]
+    },
+    {
+      "githubId": "nguyenngoclinhchi",
+      "displayName": "Nguyen Ngoc Linh Chi",
+      "authorNames": ["nguyenngoclinhchi"],
+      "ignoreGlobList": ["**.css"]
+    }
+
+  ]
+}

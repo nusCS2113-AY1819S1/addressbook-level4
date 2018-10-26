@@ -1,12 +1,10 @@
 package seedu.planner.model.record;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.planner.commons.util.AppUtil.checkArgument;
+
 import java.util.logging.Logger;
 
 import seedu.planner.commons.core.LogsCenter;
-import seedu.planner.commons.core.Messages;
-import seedu.planner.commons.util.FileUtil;
 
 /**
  * File path is used to store the preferable location to store the Excel File when user want to export the Data
@@ -32,10 +30,6 @@ public class DirectoryPath {
 
     public DirectoryPath(String dirPath) {
         requireNonNull(dirPath);
-        checkArgument(isValidFormat(removeWhiteSpace(dirPath)),
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_DIRECTORYPATH_CONSTRAINTS));
-        checkArgument(FileUtil.isValidDirectory(dirPath),
-                String.format(Messages.MESSAGE_UNREALISTIC_DIRECTORY, MESSAGE_DIRECTORYPATH_CONSTRAINTS));
         this.dirPath = dirPath;
     }
 
