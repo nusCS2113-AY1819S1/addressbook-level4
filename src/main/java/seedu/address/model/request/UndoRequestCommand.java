@@ -1,11 +1,11 @@
 package seedu.address.model.request;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.model.request.RequestModel.PREDICATE_SHOW_ALL_REQUESTS;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.request.RequestModel.PREDICATE_SHOW_ALL_REQUESTS;
 
 /**
  * Reverts the {@code model}'s BookInventory to its previous state.

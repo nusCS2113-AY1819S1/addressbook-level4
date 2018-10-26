@@ -17,7 +17,14 @@ import seedu.address.logic.parser.DiceCoefficient;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.book.Book;
-import seedu.address.model.request.*;
+import seedu.address.model.request.CommandSecondary;
+import seedu.address.model.request.DeleteRequestCommand;
+import seedu.address.model.request.Request;
+import seedu.address.model.request.RequestCommand;
+import seedu.address.model.request.RequestListParser;
+import seedu.address.model.request.RequestModel;
+import seedu.address.model.request.UndoRequestCommand;
+import seedu.address.model.request.ViewRequestCommand;
 
 /**
  * The main LogicManager of the app.
@@ -48,7 +55,7 @@ public class LogicManager extends ComponentManager implements Logic {
         String[] string = commandText.trim().split("\\s+", 8);
         if (diceCoefficient(string[0], RequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_THRESHOLD
             || diceCoefficient(string[0], ViewRequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_THRESHOLD
-            || diceCoefficient(string[0], DeleteRequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_THRESHOLD
+            || diceCoefficient(string[0], DeleteRequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_THRESHOLD + 0.2
             || ((diceCoefficient(string[0], UndoRequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_THRESHOLD)
             && (history.getHistory().get(getHistoryList().size() - 1).contains("request")))) {
             CommandSecondary command = requestListParser.parseCommandRequest(commandText);
