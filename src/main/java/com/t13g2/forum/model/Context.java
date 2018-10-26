@@ -40,16 +40,25 @@ public class Context {
         return currentUser != null;
     }
 
+    /**
+     * check if current user a admin.
+     */
     public boolean isCurrentUserAdmin() throws NotLoggedInException {
         ensureLoggedIn();
         return currentUser.isAdmin();
     }
 
+    /**
+     * check if current user is blocked.
+     */
     public boolean isCurrentUserBlocked() throws NotLoggedInException {
         ensureLoggedIn();
         return currentUser.isBlock();
     }
 
+    /**
+     * ensure that a user is logged in.
+     */
     private void ensureLoggedIn() throws NotLoggedInException {
         if (!isLoggedIn()) {
             throw new NotLoggedInException();
