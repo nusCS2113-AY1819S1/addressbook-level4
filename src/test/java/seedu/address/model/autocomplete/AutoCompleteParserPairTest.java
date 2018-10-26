@@ -14,6 +14,11 @@ public class AutoCompleteParserPairTest {
         AutoCompleteParserPair pair = new AutoCompleteParserPair(CliSyntax.PREFIX_NAME, "  john");
         assertEquals(CliSyntax.PREFIX_NAME, pair.predictionType);
         assertEquals("john", pair.prefixValue);
+
+        // argument contains only white space
+        AutoCompleteParserPair emptyPair = new AutoCompleteParserPair(CliSyntax.PREFIX_NAME, "    ");
+        assertEquals(CliSyntax.PREFIX_NAME, emptyPair.predictionType);
+        assertEquals("    ", emptyPair.prefixValue);
     }
 
     @Test
