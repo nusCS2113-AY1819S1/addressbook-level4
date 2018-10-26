@@ -16,7 +16,7 @@ public class CliSyntax {
     /* TODO: Reorder the prefixes above in alphabetical order using the foll
     owing template */
     /* Class prefixes */
-    public static final Prefix PREFIX_CLASSNAME = new Prefix("cn/");
+    public static final Prefix PREFIX_CLASS_NAME = new Prefix("cn/");
     public static final Prefix PREFIX_MAXENROLLMENT = new Prefix("e/");
     /* Course prefixes */
     public static final Prefix PREFIX_COURSE_CODE = new Prefix("c/");

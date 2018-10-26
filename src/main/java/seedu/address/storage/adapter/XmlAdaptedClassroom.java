@@ -30,7 +30,7 @@ public class XmlAdaptedClassroom {
     private String maxEnrollment;
     @XmlElementWrapper(name = "students")
     @XmlElement(name = "matricNo", required = true, nillable = true)
-    private ArrayList<String> studentsList;
+    private ArrayList<String> studentList;
 
     /**
      * Constructs an XmlAdaptedClassroom.
@@ -47,7 +47,7 @@ public class XmlAdaptedClassroom {
         this.className = className;
         this.moduleCode = moduleCode;
         this.maxEnrollment = maxEnrollment;
-        this.studentsList = studentsList;
+        this.studentList = studentsList;
     }
 
     /**
@@ -57,7 +57,7 @@ public class XmlAdaptedClassroom {
         this.className = classroom.getClassName().getValue();
         this.moduleCode = classroom.getModuleCode().moduleCode;
         this.maxEnrollment = classroom.getMaxEnrollment().getValue();
-        this.studentsList = classroom.getStudents();
+        this.studentList = classroom.getStudents();
     }
 
     /**
@@ -91,7 +91,7 @@ public class XmlAdaptedClassroom {
         }
         final Enrollment modelEnrollment = new Enrollment(maxEnrollment);
         Classroom classroom = new Classroom(modelClassName, modelModuleCode, modelEnrollment);
-        classroom.setStudents(studentsList);
+        classroom.setStudents(studentList);
         return classroom;
     }
 
