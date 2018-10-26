@@ -14,7 +14,7 @@ public class ExportCommandParserTest {
 
     @Test
     public void parse_emptyOrInvalidArgs_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser,"  ",
+        CommandParserTestUtil.assertParseFailure(parser,"\t",
                 String.format
                         (Messages.MESSAGE_INVALID_COMMAND_FORMAT, ExportExcelCommand.MESSAGE_USAGE));
 

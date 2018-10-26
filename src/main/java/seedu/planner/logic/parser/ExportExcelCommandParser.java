@@ -17,7 +17,7 @@ import seedu.planner.model.record.Date;
  * Parses input arguments and create ExportExcelCommand object.
  */
 public class ExportExcelCommandParser implements Parser<ExportExcelCommand> {
-    private Logger logger = LogsCenter.getLogger(ExportExcelCommandParser.class);
+    private static Logger logger = LogsCenter.getLogger(ExportExcelCommandParser.class);
 
     /**
      * Parses the given code {@code String} of arguments in the context of the ExportExcelCommand
@@ -29,30 +29,18 @@ public class ExportExcelCommandParser implements Parser<ExportExcelCommand> {
         Date endDate;
         String trimmedArgs = args.trim();
         logger.info(trimmedArgs);
-        return parseTheArguments(trimmedArgs);
-    }
-
-    /**
-     * Parse the input and sort in into different category of Export Excel Command.
-     */
-    public static ExportExcelCommand parseTheArguments(String args) throws ParseException {
-        Date startDate;
-        Date endDate;
         if (args.isEmpty()) {
             return new ExportExcelCommand();
         } else {
             ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_DIR);
             String stringDate = null;
             String stringPath = null;
-
             if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
                 stringDate = argMultimap.getValue(PREFIX_DATE).get().trim();
             }
-
             if (argMultimap.getValue(PREFIX_DIR).isPresent()) {
                 stringPath = argMultimap.getValue(PREFIX_DIR).get().trim();
             }
-
             if (stringDate == null && stringPath == null) {
                 return new ExportExcelCommand();
             } else if (stringDate == null) {
@@ -72,7 +60,6 @@ public class ExportExcelCommandParser implements Parser<ExportExcelCommand> {
                     startDate = ParserUtil.parseDate(Arrays.asList(dates).get(0));
                     endDate = ParserUtil.parseDate(Arrays.asList(dates).get(1));
                 }
-
                 if (isDateOrderValid(startDate, endDate)) {
                     if (stringPath == null) {
                         return new ExportExcelCommand(startDate, endDate);

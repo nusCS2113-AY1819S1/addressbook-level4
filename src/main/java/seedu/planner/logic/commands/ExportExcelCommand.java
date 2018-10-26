@@ -12,7 +12,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.core.Messages;
 import seedu.planner.commons.util.ExcelUtil;
-import seedu.planner.commons.util.FileUtil;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.DirectoryPath;

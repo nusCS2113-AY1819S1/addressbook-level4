@@ -41,7 +41,7 @@ public class Messages {
                     + "NAME DATE MONEY SPENT/RECEIVED TAGS (case in-sensitive).\n";
 
     public static final String MESSAGE_RECORD_ADDED_SUCCESSFULLY = "All records from the %1$s is read"
-            + "and only non-existing records are added to the current Financial Planner.\n";
+            + " and only non-existing records are added to the current Financial Planner.\n";
 
     public static final String MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY =
             "The Excel file named %1$s has been written successfully in path: %2$s.\n";
