@@ -1,5 +1,5 @@
 //@@Meowzz95
-package com.t13g2.forum.storage.forum;
+package com.t13g2.forum.model;
 
 import java.util.List;
 import java.util.Objects;
@@ -10,6 +10,8 @@ import com.sun.istack.NotNull;
 import com.t13g2.forum.commons.util.Extensions;
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.model.forum.Module;
+import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
+import com.t13g2.forum.storage.forum.IForumBookStorage;
 
 /**
  *

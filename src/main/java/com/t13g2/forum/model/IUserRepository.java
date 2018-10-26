@@ -1,7 +1,8 @@
 //@@Meowzz95
-package com.t13g2.forum.storage.forum;
+package com.t13g2.forum.model;
 
 import com.t13g2.forum.model.forum.User;
+import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 
 /**
  *

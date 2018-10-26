@@ -7,12 +7,12 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import com.t13g2.forum.logic.CommandHistory;
+import com.t13g2.forum.model.Context;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.ModelManager;
 import com.t13g2.forum.model.UserPrefs;
 import com.t13g2.forum.model.forum.Announcement;
 import com.t13g2.forum.model.forum.User;
-import com.t13g2.forum.storage.forum.Context;
 import com.t13g2.forum.testutil.AnnouncementBuilder;
 import com.t13g2.forum.testutil.TypicalPersons;
 import com.t13g2.forum.testutil.UserBuilder;
