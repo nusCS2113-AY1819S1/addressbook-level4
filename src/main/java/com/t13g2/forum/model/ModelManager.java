@@ -15,7 +15,6 @@ import com.t13g2.forum.model.forum.Announcement;
 import com.t13g2.forum.model.forum.Module;
 import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.model.person.Person;
-import com.t13g2.forum.storage.forum.Context;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -145,6 +144,7 @@ public class ModelManager extends ComponentManager implements Model {
             raise(new UserLoginEvent(userName, user.isAdmin()));
             return true;
         }
+        raise(new UserLoginEvent("", false));
         return false;
     }
 
@@ -217,7 +217,11 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void deleteUser(User userToDelete) {
+        String currentUserName = Context.getInstance().getCurrentUser().getUsername();
         versionedAddressBook.deleteUser(userToDelete);
+        if (userToDelete.getUsername().equals(currentUserName)) {
+            raise(new UserLoginEvent("", false));
+        }
     }
 
     //@@author

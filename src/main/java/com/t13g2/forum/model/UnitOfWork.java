@@ -1,5 +1,10 @@
 //@@Meowzz95
-package com.t13g2.forum.storage.forum;
+package com.t13g2.forum.model;
+
+import com.t13g2.forum.storage.forum.FileStorage;
+import com.t13g2.forum.storage.forum.ForumBookStorage;
+import com.t13g2.forum.storage.forum.IForumBookStorage;
+import com.t13g2.forum.storage.forum.IStorage;
 
 /**
  *

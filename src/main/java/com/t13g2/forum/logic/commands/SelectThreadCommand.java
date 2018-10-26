@@ -8,8 +8,8 @@ import java.util.List;
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.Model;
+import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.model.forum.Comment;
-import com.t13g2.forum.storage.forum.UnitOfWork;
 
 /**
  * List out all the comments under certain thread in the forum book.

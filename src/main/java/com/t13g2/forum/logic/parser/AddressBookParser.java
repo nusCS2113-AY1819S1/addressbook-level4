@@ -21,6 +21,7 @@ import com.t13g2.forum.logic.commands.DeleteCommand;
 import com.t13g2.forum.logic.commands.DeleteCommentCommand;
 import com.t13g2.forum.logic.commands.DeleteModuleCommand;
 import com.t13g2.forum.logic.commands.DeleteThreadCommand;
+import com.t13g2.forum.logic.commands.DeleteUserCommand;
 import com.t13g2.forum.logic.commands.EditCommand;
 import com.t13g2.forum.logic.commands.ExitCommand;
 import com.t13g2.forum.logic.commands.FindCommand;
@@ -123,6 +124,9 @@ public class AddressBookParser {
 
         case DeleteModuleCommand.COMMAND_WORD:
             return new DeleteModuleCommandParser().parse(arguments);
+
+        case DeleteUserCommand.COMMAND_WORD:
+            return new DeleteUserCommandParser().parse(arguments);
 
         case CreateThreadCommand.COMMAND_WORD:
             return new CreateThreadCommandParser().parse(arguments);

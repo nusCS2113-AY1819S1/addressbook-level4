@@ -5,15 +5,12 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import com.t13g2.forum.logic.commands.exceptions.DuplicateModuleException;
-import com.t13g2.forum.logic.commands.exceptions.InvalidModuleException;
 import com.t13g2.forum.model.forum.Announcement;
 import com.t13g2.forum.model.forum.Module;
 import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.model.person.Person;
 import com.t13g2.forum.model.person.UniquePersonList;
-import com.t13g2.forum.storage.forum.Context;
 import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
-import com.t13g2.forum.storage.forum.UnitOfWork;
 
 import javafx.collections.ObservableList;
 
@@ -203,6 +200,7 @@ public class ForumBook implements ReadOnlyForumBook {
                 return false;
             } else {
                 user.setIsBlock(true);
+                unitOfWork.getUserRepository().updateUser(user);
                 unitOfWork.commit();
             }
         } catch (Exception e) {
@@ -257,13 +255,9 @@ public class ForumBook implements ReadOnlyForumBook {
     public boolean deleteModule(String moduleCode) {
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             Module moduleToDelete = unitOfWork.getModuleRepository().getModuleByCode(moduleCode);
-            if (moduleToDelete != null) {
-                unitOfWork.getModuleRepository().removeModule(moduleToDelete);
-                unitOfWork.commit();
-            } else {
-                throw new InvalidModuleException("");
-            }
-        } catch (InvalidModuleException e) {
+            unitOfWork.getModuleRepository().removeModule(moduleToDelete);
+            unitOfWork.commit();
+        } catch (EntityDoesNotExistException e) {
             return false;
         } catch (Exception e) {
             e.printStackTrace();
