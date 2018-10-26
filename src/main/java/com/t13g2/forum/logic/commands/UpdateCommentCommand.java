@@ -47,12 +47,10 @@ public class UpdateCommentCommand extends Command {
             if (Context.getInstance().getCurrentUser().getId() == comment.getCreatedByUserId()) {
                 throw new CommandException(MESSAGE_NOT_COMMENT_OWNER);
             }
-            comment.setContent(contentToUpdate);
-//            unitOfWork.getCommentRepository().updateComment(comment);
+            comment.setContent(contentToUpdate); //            unitOfWork.getCommentRepository().updateComment(comment);
             unitOfWork.commit();
         } catch (Exception e) {
-            e.printStackTrace();
-//            throw new CommandException(MESSAGE_INVALID_COMMENT_ID);
+            e.printStackTrace(); //            throw new CommandException(MESSAGE_INVALID_COMMENT_ID);
         }
         return new CommandResult(String.format(messageSuccess, contentToUpdate));
     }

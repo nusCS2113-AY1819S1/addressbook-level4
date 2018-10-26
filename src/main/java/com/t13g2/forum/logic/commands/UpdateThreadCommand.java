@@ -51,8 +51,7 @@ public class UpdateThreadCommand extends Command {
             unitOfWork.getForumThreadRepository().updateThread(forumThread);
             unitOfWork.commit();
         } catch (Exception e) {
-            e.printStackTrace();
-//            throw new CommandException(MESSAGE_INVALID_THREAD_ID);
+            e.printStackTrace(); //            throw new CommandException(MESSAGE_INVALID_THREAD_ID);
         }
         return new CommandResult(String.format(messageSuccess, threadTitleToUpdate));
     }
