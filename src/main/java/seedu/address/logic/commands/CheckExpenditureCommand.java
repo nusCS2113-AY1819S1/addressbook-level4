@@ -55,29 +55,32 @@ public class CheckExpenditureCommand extends Command {
         while (index < lastShownList.size()) {
             editedExpenditure = lastShownList.get(index);
 
-            int year1 = Integer.parseInt(date1.substring(8));
-            int month1 = Integer.parseInt(date1.substring(5, 7));
-            int day1 = Integer.parseInt(date1.substring(2, 4));
+            int year1 = Integer.parseInt(date1.substring(6));
+            int month1 = Integer.parseInt(date1.substring(3, 5));
+            int day1 = Integer.parseInt(date1.substring(0, 2));
 
-            int year2 = Integer.parseInt(date2.substring(8));
-            int month2 = Integer.parseInt(date2.substring(5, 7));
-            int day2 = Integer.parseInt(date2.substring(2, 4));
+            int year2 = Integer.parseInt(date2.substring(6));
+            int month2 = Integer.parseInt(date2.substring(3, 5));
+            int day2 = Integer.parseInt(date2.substring(0, 2));
 
 
-            int year = Integer.parseInt(editedExpenditure.getDate().toString().substring(8));
-            int month = Integer.parseInt(editedExpenditure.getDate().toString().substring(5, 7));
-            int day = Integer.parseInt(editedExpenditure.getDate().toString().substring(2, 4));
+            int year = Integer.parseInt(editedExpenditure.getDate().toString().substring(6));
+            int month = Integer.parseInt(editedExpenditure.getDate().toString().substring(3, 5));
+            int day = Integer.parseInt(editedExpenditure.getDate().toString().substring(0, 2));
 
             if ((year1 < year) && (year2 > year)) {
                 total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
             }
             else if ((year1 == year) || (year2 == year)) {
+                System.out.println("Month checkinggggggg");
                 if ((month1 < month) && (month2 > month)) {
                     total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
+                    System.out.println("Month checking1");
                 }
                 else if ((month1 == month) || (month2 == month)) {
                     if ((day1 < day) && (day2 > day)) {
                         total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
+                        System.out.println("Month checking1");
                     }
                 }
             }

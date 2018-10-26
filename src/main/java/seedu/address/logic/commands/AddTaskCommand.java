@@ -22,7 +22,7 @@ public class AddTaskCommand extends Command {
             + "Parameters: "
             + PREFIX_TASK + "TASK "
             + PREFIX_MODULE + "MODULE "
-            + PREFIX_DATE + "DATE"
+            + PREFIX_DATE + "DATE "
             + PREFIX_PRIORITY + "PRIORITY\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TASK + "Tutorial 5 "

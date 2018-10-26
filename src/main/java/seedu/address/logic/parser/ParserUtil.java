@@ -150,7 +150,6 @@ public class ParserUtil {
         return new Date(trimmedDate);
     }
 
-
     /**
      * Parses a {@code String money} into a {@code Money}.
      * Leading and trailing whitespaces will be trimmed.
