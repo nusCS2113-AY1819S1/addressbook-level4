@@ -31,6 +31,7 @@ import seedu.address.testutil.EditEventDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+
     public static final String VALID_USERNAME = "Johnny Bravo";
     public static final String VALID_PASSWORD = "pass@12345";
     public static final String VALID_ATTENDEE_TED = "Ted Bacan";

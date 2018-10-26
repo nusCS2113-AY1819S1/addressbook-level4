@@ -37,6 +37,5 @@ public class UsernameTest {
         assertTrue(Username.isValidUsername("J")); // one character
         assertTrue(Username.isValidUsername("12345")); // numbers only
         assertTrue(Username.isValidUsername("Richard the 2nd")); // letters and numbers
-
     }
 }
