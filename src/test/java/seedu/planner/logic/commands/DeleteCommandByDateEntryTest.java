@@ -82,11 +82,9 @@ public class DeleteCommandByDateEntryTest {
                 new DeleteCommandByDateEntry(TypicalDates.DATE_FIRST_INDEX_DATE);
 
         Model expectedModel = new ModelManager(model.getFinancialPlanner(), new UserPrefs());
-
         for (Record record : recordsToDelete) {
             expectedModel.deleteRecord(record);
         }
-
         expectedModel.commitFinancialPlanner();
 
         //delete the Records have required date

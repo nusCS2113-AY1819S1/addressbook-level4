@@ -1,7 +1,6 @@
 package seedu.planner.model.record;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.planner.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.planner.commons.util.AppUtil.checkArgument;
 
 import java.util.logging.Logger;
@@ -41,46 +40,12 @@ public class Date {
      */
     public Date(String date) {
         requireNonNull(date);
-        checkArgument(isValidDateFormat(date), String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                MESSAGE_DATE_CONSTRAINTS));
+        checkArgument(isValidDateFormat(date), MESSAGE_DATE_CONSTRAINTS);
         value = date;
         splitDate(date);
-        checkArgument(DateUtil.isValidDate(day, month), String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                MESSAGE_DATE_LOGICAL_CONSTRAINTS));
+        checkArgument(DateUtil.isValidDate(day, month, year), MESSAGE_DATE_LOGICAL_CONSTRAINTS);
     }
 
-    /**
-     * Change the (String)value to some Standard Value (follow the format dd-mm-yyyy)
-     * @return standard value Date
-     */
-    public String getStandardValue () {
-        String standardDay;
-        String standardMonth;
-        String standardYear;
-        if (day > 0 && day < 10 && String.valueOf(day).length() == 1) {
-            standardDay = "0" + String.valueOf(day);
-        } else {
-            standardDay = String.valueOf(day);
-        }
-        if (month > 0 && month < 10 && String.valueOf(month).length() == 1) {
-            standardMonth = "0" + String.valueOf(month);
-        } else {
-            standardMonth = String.valueOf(month);
-        }
-        standardYear = String.valueOf(year);
-        String standardValue =
-                String.format(standardDay + "-" + standardMonth + "-" + standardYear);
-        logger.info("Standard value is " + standardDay + "\n");
-        return standardValue;
-    }
-
-    /**
-     * Transform the Date into standard Date following the format dd-mm-yyyy
-     * @return standard Date
-     */
-    public Date getStandardDate() {
-        return new Date (getStandardValue());
-    }
     /**
      * Splits a date into the different parameters and assigns them to day,month,year
      * Format specified: dd-mm-yyyy
@@ -91,44 +56,6 @@ public class Date {
         day = Integer.parseInt(dateParams[0]);
         month = Integer.parseInt(dateParams[1]);
         year = Integer.parseInt(dateParams[2]);
-    }
-
-
-    /**
-     * Returns true if a given string is in a valid date format.
-     */
-    public static boolean isValidDate (String test) {
-        if (test.matches(DATE_VALIDATION_REGEX)) {
-            String[] dateParams = test.split("-");
-            int day = Integer.parseInt(dateParams[0]);
-            int month = Integer.parseInt(dateParams[1]);
-            int year = Integer.parseInt(dateParams[2]);
-            if (day <= 0 || day > 31 || month <= 0 || month > 12 || year <= 0) {
-                return false;
-            } else if (month == 2 || month == 4 || month == 6 || month == 9 || month == 11) {
-                if (day <= 30) {
-                    return month != 2 || day <= 28 || !isLeapYear(year);
-                }
-            } else {
-                return false;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Checks if the year is Leap Year or not.
-     * @param year
-     * @return the result whether the year is Leap year.
-     */
-    public static boolean isLeapYear (int year) {
-        if (year % 400 == 0) {
-            return true;
-        } else if (year % 100 == 0) {
-            return false;
-        } else {
-            return year % 4 == 0;
-        }
     }
 
     public static boolean isValidDateFormat(String test) {
@@ -231,5 +158,4 @@ public class Date {
                 && month == ((Date) other).getMonth()
                 && year == ((Date) other).getYear()); // state check
     }
-
 }

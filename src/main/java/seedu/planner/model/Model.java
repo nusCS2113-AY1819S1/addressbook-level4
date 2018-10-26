@@ -40,6 +40,8 @@ public interface Model {
      */
     void deleteRecord(Record target);
 
+    int deleteListRecordSameDate(List<Record> targetList, Date targetDate);
+
     /**
      * Adds the given record.
      * {@code record} must not already exist in the financial planner.

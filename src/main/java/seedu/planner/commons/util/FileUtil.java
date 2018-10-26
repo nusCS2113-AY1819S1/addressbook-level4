@@ -1,10 +1,14 @@
 package seedu.planner.commons.util;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  * Writes and reads files
@@ -18,7 +22,7 @@ public class FileUtil {
     }
 
     /**
-     * Returns true if {@code path} can be converted into a {@code Path} via {@link Paths#get(String)},
+     * Returns true if {@code path} can be converted into a {@code Path} via {@link Paths#get(String, String...)},
      * otherwise returns false.
      * @param path A string representing the file path. Cannot be null.
      */
@@ -48,9 +52,7 @@ public class FileUtil {
         if (Files.exists(file)) {
             return;
         }
-
         createParentDirsOfFile(file);
-
         Files.createFile(file);
     }
 
@@ -59,7 +61,6 @@ public class FileUtil {
      */
     public static void createParentDirsOfFile(Path file) throws IOException {
         Path parentDir = file.getParent();
-
         if (parentDir != null) {
             Files.createDirectories(parentDir);
         }
@@ -78,5 +79,20 @@ public class FileUtil {
      */
     public static void writeToFile(Path file, String content) throws IOException {
         Files.write(file, content.getBytes(CHARSET));
+    }
+
+    /**
+     * Write the Excel workbook in the file system, or you can customise the location of the Excel workbook.
+     * @param fileName name of the file
+     * @param workbook the Excel Workbook we want to produce.
+     */
+    public static void writeWorkBookInFileSystem (String fileName, XSSFWorkbook workbook, String path) {
+        try {
+            FileOutputStream fileOut = new FileOutputStream(new File(path));
+            workbook.write(fileOut);
+            fileOut.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

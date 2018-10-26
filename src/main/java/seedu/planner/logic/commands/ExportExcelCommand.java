@@ -2,7 +2,6 @@ package seedu.planner.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.model.Model.PREDICATE_SHOW_ALL_RECORDS;
-import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -13,6 +12,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.core.Messages;
 import seedu.planner.commons.util.ExcelUtil;
+import seedu.planner.commons.util.FileUtil;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.DirectoryPath;
@@ -35,7 +35,6 @@ public class ExportExcelCommand extends Command {
     private final Date startDate;
     private final Date endDate;
     private final DirectoryPath directoryPath;
-
     private final Predicate<Record> predicate;
     private Logger logger = LogsCenter.getLogger(ExportExcelCommand.class);
 
@@ -72,14 +71,20 @@ public class ExportExcelCommand extends Command {
             throws CommandException {
         requireNonNull(this);
         model.updateFilteredRecordList(predicate);
+
         List<Record> recordList = model.getFilteredRecordList();
         String nameFile = ExcelUtil.setNameExcelFile(startDate, endDate);
         logger.info(nameFile);
+
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet(nameFile);
-        String path = directoryPath.getDirectoryPath().getDirectoryPathValue();
-        path.replace("\\", System.getProperty("file.separator"));
-        return new CommandResult(ExcelUtil.writeExcelSheetIntoDirectory(recordList, sheet, workbook, path, nameFile));
+
+        ExcelUtil.writeExcelSheetIntoDirectory(
+                recordList, sheet, workbook, directoryPath.getDirectoryPath().getDirectoryPathValue(), nameFile);
+
+        return new CommandResult(
+                String.format(Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY,
+                        nameFile, directoryPath.getDirectoryPath().getDirectoryPathValue()));
     }
 
     @Override

@@ -139,7 +139,7 @@ public class ExcelUtil {
     /**
      * Write the map of data into Excel sheet.
      */
-    private static void writeDataIntoExcelSheet (List<Record> recordList, XSSFSheet sheet) {
+    public static void writeDataIntoExcelSheet (List<Record> recordList, XSSFSheet sheet) {
         Map<String, Object[]> data = exportData(recordList);
         Set<String> keySet = data.keySet();
         for (String key : keySet) {
@@ -160,7 +160,7 @@ public class ExcelUtil {
     /**
      * Export the records into map of data.
      */
-    private static final Map<String, Object[]> exportData (List<Record> recordList) {
+    public static final Map<String, Object[]> exportData (List<Record> recordList) {
         Map<String, Object[]> data = new TreeMap<String, Object[]>();
         int id = STARTING_ROW;
         data.put(String.valueOf(id), new Object[]{"NAME", "DATE", "MONEY SPENT/RECEIVED", "TAGS"});

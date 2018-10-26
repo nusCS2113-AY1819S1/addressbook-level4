@@ -95,6 +95,17 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public int deleteListRecordSameDate(List<Record> targetList, Date targetDate) {
+        int count = 0;
+        requireNonNull(targetList);
+        count = versionedFinancialPlanner.removeRecordsSameDate(targetList, targetDate);
+        versionedFinancialPlanner.removeRecordsFromSummarySameDate(targetList, targetDate);
+        indicateFinancialPlannerChanged();
+        indicateSummaryMapChanged();
+        return count;
+    }
+
+    @Override
     public void addRecord(Record record) {
         requireNonNull(record);
         versionedFinancialPlanner.addRecord(record);

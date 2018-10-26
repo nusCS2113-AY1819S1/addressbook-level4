@@ -25,6 +25,8 @@ public class ExportExcelCommandParser implements Parser<ExportExcelCommand> {
      * @throws ParseException if the user input does not conform the expected format.
      */
     public ExportExcelCommand parse(String args) throws ParseException {
+        Date startDate;
+        Date endDate;
         String trimmedArgs = args.trim();
         logger.info(trimmedArgs);
         return parseTheArguments(trimmedArgs);
