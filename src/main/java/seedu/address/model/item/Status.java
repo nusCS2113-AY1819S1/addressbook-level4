@@ -9,7 +9,7 @@ import java.util.List;
 //@@author ChewKinWhye
 public class Status {
     public static final int STATUS_READY = 0;
-    public static final int STATUS_ONLOAN = 1;
+    public static final int STATUS_ON_LOAN = 1;
     public static final int STATUS_FAULTY = 2;
     private final List<Integer> status = new ArrayList<>(3);
 
@@ -25,7 +25,7 @@ public class Status {
         return status.get(STATUS_READY);
     }
     public Integer getStatusOnLoan() {
-        return status.get(STATUS_ONLOAN);
+        return status.get(STATUS_ON_LOAN);
     }
     public Integer getStatusFaulty() {
         return status.get(STATUS_FAULTY);
@@ -35,14 +35,14 @@ public class Status {
         status.set(STATUS_READY, ready);
     }
     public void setStatusOnLoan(Integer onLoan) {
-        status.set(STATUS_ONLOAN, onLoan);
+        status.set(STATUS_ON_LOAN, onLoan);
     }
     public void setStatusFaulty(Integer faulty) {
         status.set(STATUS_FAULTY, faulty);
     }
     public void setDefaultValues(int quantity) {
         status.set(STATUS_READY, quantity);
-        status.set(STATUS_ONLOAN, 0);
+        status.set(STATUS_ON_LOAN, 0);
         status.set(STATUS_FAULTY, 0);
     }
 }
