@@ -3,8 +3,8 @@ package seedu.address.model;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BOOKS;
-import static seedu.address.testutil.TypicalBooks.ALICE;
-import static seedu.address.testutil.TypicalBooks.BENSON;
+import static seedu.address.testutil.TypicalBooks.ART;
+import static seedu.address.testutil.TypicalBooks.BIOLOGY;
 
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -30,13 +30,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasBook(ALICE));
+        assertFalse(modelManager.hasBook(ART));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addBook(ALICE);
-        assertTrue(modelManager.hasBook(ALICE));
+        modelManager.addBook(ART);
+        assertTrue(modelManager.hasBook(ART));
     }
 
     @Test
@@ -47,7 +47,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        BookInventory bookInventory = new BookInventoryBuilder().withBook(ALICE).withBook(BENSON).build();
+        BookInventory bookInventory = new BookInventoryBuilder().withBook(ART).withBook(BIOLOGY).build();
         BookInventory differentBookInventory = new BookInventory();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -69,7 +69,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentBookInventory, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
+        String[] keywords = ART.getName().fullName.split("\\s+");
         modelManager.updateFilteredBookList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(bookInventory, userPrefs)));
 

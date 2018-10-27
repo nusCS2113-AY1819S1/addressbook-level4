@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.XmlAdaptedBook.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.address.testutil.TypicalBooks.BENSON;
+import static seedu.address.testutil.TypicalBooks.BIOLOGY;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,19 +26,19 @@ public class XmlAdaptedBookTest {
     private static final String INVALID_COST = "0.124";
     private static final String INVALID_TAG = "#friend";
 
-    private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_ISBN = BENSON.getIsbn().toString();
-    private static final String VALID_PRICE = BENSON.getPrice().toString();
-    private static final String VALID_COST = BENSON.getCost().toString();
-    private static final String VALID_QUANTITY = BENSON.getQuantity().toString();
-    private static final List<XmlAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
+    private static final String VALID_NAME = BIOLOGY.getName().toString();
+    private static final String VALID_ISBN = BIOLOGY.getIsbn().toString();
+    private static final String VALID_PRICE = BIOLOGY.getPrice().toString();
+    private static final String VALID_COST = BIOLOGY.getCost().toString();
+    private static final String VALID_QUANTITY = BIOLOGY.getQuantity().toString();
+    private static final List<XmlAdaptedTag> VALID_TAGS = BIOLOGY.getTags().stream()
             .map(XmlAdaptedTag::new)
             .collect(Collectors.toList());
 
     @Test
     public void toModelType_validBookDetails_returnsBook() throws Exception {
-        XmlAdaptedBook book = new XmlAdaptedBook(BENSON);
-        assertEquals(BENSON.toString(), book.toModelType().toString());
+        XmlAdaptedBook book = new XmlAdaptedBook(BIOLOGY);
+        assertEquals(BIOLOGY.toString(), book.toModelType().toString());
     }
 
     @Test
