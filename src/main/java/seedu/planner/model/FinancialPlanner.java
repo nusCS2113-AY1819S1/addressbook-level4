@@ -67,21 +67,16 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         requireNonNull(newData);
 
         setRecords(newData.getRecordList());
-        setSummaryMap(newData.getSummaryMap());
         //setLimits(newData.getLimitList());
     }
 
     /**
      * Resets the existing data of this {@code FinancialPlanner} with the given parameters
      * @param recordList
-     * @param summaryMap
      */
-    public void resetData(UniqueRecordList recordList, SummaryMap summaryMap) {
+    public void resetData(UniqueRecordList recordList) {
         requireNonNull(recordList);
-        requireNonNull(summaryMap);
-
         setRecords(recordList.asUnmodifiableObservableList());
-        setSummaryMap(summaryMap);
     }
 
     //// record-level operations
