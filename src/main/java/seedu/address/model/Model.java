@@ -45,6 +45,11 @@ public interface Model {
     void logUser(User user);
 
     /**
+     * Returns logged in user.
+     */
+    User getUser();
+
+    /**
      * Logs user out of the Event Manager.
      */
     void clearUser();

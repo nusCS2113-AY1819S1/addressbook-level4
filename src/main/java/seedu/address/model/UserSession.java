@@ -1,10 +1,17 @@
 package seedu.address.model;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.Map;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.PasswordUtil;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -15,6 +22,8 @@ import seedu.address.storage.JsonUserStorage;
  */
 public class UserSession {
 
+    private static final Logger logger = LogsCenter.getLogger(UserSession.class);
+
     private JsonUserStorage userStorage;
     private User user;
     private boolean loginStatus;
@@ -22,8 +31,8 @@ public class UserSession {
 
     public UserSession() {
         final Path userFilePath = Paths.get("users.json");
-        final Username username = new Username("stub");
-        final Password password = new Password("stub");
+        final Username username = new Username("admin");
+        final Password password = new Password("root");
         user = new User(username, password);
         loginStatus = false;
         adminStatus = false;
@@ -33,6 +42,8 @@ public class UserSession {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        createUser(user);
     }
 
     /**
@@ -53,11 +64,21 @@ public class UserSession {
         String loggedPassword = user.getPassword().toString();
         Map<String, String> userAccounts = userStorage.getUserAccounts();
 
-        if (userAccounts.containsKey(loggedUsername)
-                && userAccounts.get(loggedUsername).equals(loggedPassword)) {
-            this.user = user;
-            loginStatus = true;
-            adminStatus = loggedUsername.equals("admin");
+        if (userAccounts.containsKey(loggedUsername)) {
+            boolean passwordsMatch = false;
+            String storedPassword = userAccounts.get(loggedUsername);
+
+            try {
+                passwordsMatch = PasswordUtil.validatePassword(loggedPassword, storedPassword);
+            } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+                logger.warning("PasswordUtil could not validate password : " + StringUtil.getDetails(e));
+            }
+
+            if (passwordsMatch) {
+                this.user = user;
+                loginStatus = true;
+                adminStatus = loggedUsername.equals("admin");
+            }
         }
     }
 
@@ -69,16 +90,21 @@ public class UserSession {
         String loggedPassword = user.getPassword().toString();
 
         try {
-            userStorage.createUser(loggedUsername, loggedPassword);
+            String encryptedPassword = PasswordUtil.getEncryptedPassword(loggedPassword);
+            userStorage.createUser(loggedUsername, encryptedPassword);
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            logger.warning("PasswordUtil could not generate encrypted password : " + StringUtil.getDetails(e));
+        } catch (FileNotFoundException e) {
+            logger.warning("users.json not found in file path : " + StringUtil.getDetails(e));
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.warning("JSONUserStorage could not read or write to users.json : " + StringUtil.getDetails(e));
         }
     }
 
     /**
      * Returns logged in user.
      */
-    public User getUser(User user) {
+    public User getUser() {
         return user;
     }
 
