@@ -2,15 +2,12 @@ package seedu.address.model.task;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalTasks.CS2113_TASK_1;
-import static seedu.address.testutil.TypicalTasks.CS2113_TASK_2;
-import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_2;
-import static seedu.address.logic.commands.CommandTestUtil.PRIORITY_LEVEL_DESC_HIGH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_1ST_JAN;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_31ST_MARCH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_LEVEL_HIGH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TITLE_2;
+import static seedu.address.testutil.TypicalTasks.CS2113_TASK_1;
+import static seedu.address.testutil.TypicalTasks.CS2113_TASK_2;
 
 import java.util.logging.Logger;
 

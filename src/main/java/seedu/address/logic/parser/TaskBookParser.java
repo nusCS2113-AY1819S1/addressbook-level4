@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,26 +47,18 @@ public class TaskBookParser {
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
-
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-
-        //@@author emobeany
-        /*case SelectDeadlineCommand.COMMAND_WORD:
-            return new SelectDeadlineCommandParser().parse(arguments);
-         */
         Command commandToReturn = null;
         for (CommandParser command : commands) {
             if (command.getCommandWord().equals(commandWord)) {
-                //For e.g AddTaskCommand.parse returns AddTaskCommandParser.parse(argument)
-                // AddTaskCommandParser.parse(argument) returns AddTaskCommand(task) which will be returned to
-                // Logic Manager CommandResult execute to call AddTaskCommand.execute
                 commandToReturn = command.parse(arguments);
                 break;
             }
         }
-        // JUNIT: test commandToReturn != null
+        if (commandToReturn == null) {
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
         return commandToReturn;
     }
-
 }

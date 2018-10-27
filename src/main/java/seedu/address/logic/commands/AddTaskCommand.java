@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_MAX_HOURS;
+import static seedu.address.commons.core.Messages.MESSAGE_ZERO_HOURS_COMPLETION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
@@ -19,7 +21,6 @@ import seedu.address.model.task.Task;
  */
 public class AddTaskCommand extends Command implements CommandParser {
     public static final String COMMAND_WORD = "add";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task book. "
             + "Parameters: "
             + PREFIX_TITLE + "TITLE "
@@ -34,6 +35,7 @@ public class AddTaskCommand extends Command implements CommandParser {
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task book";
+    public static final int MAX_HOURS_TO_COMPLETE = 24;
 
     private final Task toAdd;
     public AddTaskCommand() {
@@ -50,9 +52,12 @@ public class AddTaskCommand extends Command implements CommandParser {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
         if (model.hasTask(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        } else if (toAdd.getExpectedNumOfHours() == 0) {
+            throw new CommandException(MESSAGE_ZERO_HOURS_COMPLETION);
+        } else if (toAdd.getExpectedNumOfHours() >= MAX_HOURS_TO_COMPLETE) {
+            throw new CommandException(MESSAGE_MAX_HOURS);
         }
 
         model.addTask(toAdd);

@@ -3,10 +3,10 @@ package seedu.address.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalTasks.CS2113_TASK_1;
-import static seedu.address.testutil.TypicalTasks.getTypicalTaskBook;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_LEVEL_HIGH;
+import static seedu.address.testutil.TypicalTasks.CS2113_TASK_1;
+import static seedu.address.testutil.TypicalTasks.getTypicalTaskBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -16,11 +16,12 @@ import java.util.List;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.testutil.TaskBuilder;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.exceptions.DuplicateTaskException;
+import seedu.address.testutil.TaskBuilder;
 
 //@@author chelseyong
 public class AddressBookTest {
@@ -51,8 +52,8 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateTasks_throwsDuplicateTaskException() {
         // Two tasks with the same title and deadline fields
-        Task editedTask1 = new TaskBuilder(CS2113_TASK_1).withDescription(VALID_DESCRIPTION_2).withPriority(VALID_PRIORITY_LEVEL_HIGH)
-                .build();
+        Task editedTask1 = new TaskBuilder(CS2113_TASK_1).withDescription(VALID_DESCRIPTION_2)
+                .withPriority(VALID_PRIORITY_LEVEL_HIGH).build();
         List<Task> newTasks = Arrays.asList(CS2113_TASK_1, editedTask1);
         TaskBookStub newData = new TaskBookStub(newTasks);
 
@@ -80,8 +81,8 @@ public class AddressBookTest {
     @Test
     public void hasTask_taskWithSameTitleAndSameDeadlineInTaskBook_returnsTrue() {
         addressBook.addTask(CS2113_TASK_1);
-        Task editedTask1 = new TaskBuilder(CS2113_TASK_1).withDescription(VALID_DESCRIPTION_2).withPriority(VALID_PRIORITY_LEVEL_HIGH)
-                .build();
+        Task editedTask1 = new TaskBuilder(CS2113_TASK_1).withDescription(VALID_DESCRIPTION_2)
+                .withPriority(VALID_PRIORITY_LEVEL_HIGH).build();
         assertTrue(addressBook.hasTask(editedTask1));
     }
 

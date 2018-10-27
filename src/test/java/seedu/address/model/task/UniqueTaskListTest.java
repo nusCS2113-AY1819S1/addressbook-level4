@@ -3,11 +3,10 @@ package seedu.address.model.task;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalTasks.CS2113_TASK_1;
-import static seedu.address.testutil.TypicalTasks.CS2113_TASK_2;
-import static seedu.address.logic.commands.CommandTestUtil.DEADLINE_DESC_31ST_MARCH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_LEVEL_HIGH;
+import static seedu.address.testutil.TypicalTasks.CS2113_TASK_1;
+import static seedu.address.testutil.TypicalTasks.CS2113_TASK_2;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,9 +16,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.testutil.TaskBuilder;
 import seedu.address.model.task.exceptions.DuplicateTaskException;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
+import seedu.address.testutil.TaskBuilder;
 
 public class UniqueTaskListTest {
     @Rule
