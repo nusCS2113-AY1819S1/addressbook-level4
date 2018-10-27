@@ -102,7 +102,7 @@ public class UserSession {
     }
 
     /**
-     * Returns logged in user.
+     * Returns logged in user's username.
      */
     public Username getUsername() {
         return user.getUsername();
