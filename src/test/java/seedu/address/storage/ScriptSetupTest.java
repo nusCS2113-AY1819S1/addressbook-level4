@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -57,5 +58,4 @@ public class ScriptSetupTest {
 
         assertEquals(isTwoEqual, true);
     }
-
 }

@@ -18,8 +18,6 @@ public class ScriptSetup {
 
     private static final Logger logger = LogsCenter.getLogger(ScriptSetup.class);
 
-    private static final String DIR_SAMPLE_TEXT = "/src/main/resources/defaultScripts";
-
     private String defaultLocation;
 
     public ScriptSetup() {
