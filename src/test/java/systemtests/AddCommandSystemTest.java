@@ -45,8 +45,8 @@ public class AddCommandSystemTest extends EventManagerSystemTest {
         /* Case: add an event without tags to a non-empty event manager, command with leading spaces and trailing spaces
          * -> added
          */
-        User toLogin = new UserBuilder().withUsername(VALID_USERNAME).withPassword(VALID_PASSWORD).build();
-        String command = "   " + LoginCommand.COMMAND_WORD + "  " + USERNAME_DESC + "  " + PASSWORD_DESC + "  ";
+        User toLogin = new UserBuilder().withUsername("admin").withPassword("root").build();
+        String command = "   " + LoginCommand.COMMAND_WORD + "  " + "u/admin" + "  " + "p/root" + "  ";
         assertCommandSuccess(command, toLogin);
 
         Event toAdd = AMY;
@@ -247,12 +247,29 @@ public class AddCommandSystemTest extends EventManagerSystemTest {
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
     }
 
+    /**
+     * Performs a verification as {@code assertCommandSuccess(User)}. Executes {@code command}.
+     */
     private void assertCommandSuccess(String command, User toLogin) {
         Model expectedModel = getModel();
         expectedModel.logUser(toLogin);
         String expectedResultMessage = String.format(LoginCommand.MESSAGE_SUCCESS, toLogin.getUsername().toString());
 
-        assertCommandSuccess(command, expectedModel, expectedResultMessage);
+        assertCommandSuccessLogin(command, expectedModel, expectedResultMessage);
+    }
+
+    /**
+     * Performs the same verification as {@code assertCommandSuccess(String, Event)} except asserts that
+     * the,<br>
+     * 1. Result display box displays {@code expectedResultMessage}.<br>
+     * 2. {@code Storage} and {@code EventListPanel} equal to the corresponding components in
+     * {@code expectedModel}.<br>
+     */
+    private void assertCommandSuccessLogin(String command, Model expectedModel, String expectedResultMessage) {
+        executeCommand(command);
+        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
+        assertSelectedCardUnchanged();
+        assertCommandBoxShowsDefaultStyle();
     }
 
     /**
