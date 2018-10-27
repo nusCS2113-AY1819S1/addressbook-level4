@@ -194,6 +194,16 @@ public class AddCommandTest {
         public User getUser() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void clearUser() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commandLogout() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

@@ -13,6 +13,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.TimeTableChangedEvent;
+import seedu.address.commons.events.security.LogoutEvent;
 import seedu.address.model.person.CombinedFriendPredicate;
 import seedu.address.model.person.CombinedOtherPredicate;
 import seedu.address.model.person.FriendListPredicate;
@@ -251,8 +252,18 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void clearUser() {
+        this.user = null;
+    }
+
+    @Override
     public User getUser() {
         //TODO Can you do this? Must you create a new object to be returned instead?
         return this.user;
+    }
+
+    @Override
+    public void commandLogout() {
+        raise(new LogoutEvent());
     }
 }
