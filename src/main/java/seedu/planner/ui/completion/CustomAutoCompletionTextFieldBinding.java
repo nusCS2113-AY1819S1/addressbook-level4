@@ -62,6 +62,24 @@ public class CustomAutoCompletionTextFieldBinding<T> extends AutoCompletionBindi
         };
     }
 
+    @Override
+    public TextField getCompletionTarget() {
+        return (TextField) super.getCompletionTarget();
+    }
+
+    @Override
+    public void dispose() {
+        getCompletionTarget().caretPositionProperty().removeListener(caretChangeListener);
+        getCompletionTarget().focusedProperty().removeListener(focusChangedListener);
+    }
+
+    @Override
+    protected void completeUserInput(T completion) {
+        String newText = oldText + converter.toString(completion);
+        getCompletionTarget().setText(newText);
+        getCompletionTarget().positionCaret(newText.length());
+    }
+
     private final ChangeListener<Number> caretChangeListener = (obs, oldNumber, newNumber) -> {
         String text = getCompletionTarget().getText().substring(0, newNumber.intValue());
         int index;
@@ -82,23 +100,5 @@ public class CustomAutoCompletionTextFieldBinding<T> extends AutoCompletionBindi
             hidePopup();
         }
     };
-
-    @Override
-    public TextField getCompletionTarget() {
-        return (TextField) super.getCompletionTarget();
-    }
-
-    @Override
-    public void dispose() {
-        getCompletionTarget().caretPositionProperty().removeListener(caretChangeListener);
-        getCompletionTarget().focusedProperty().removeListener(focusChangedListener);
-    }
-
-    @Override
-    protected void completeUserInput(T completion) {
-        String newText = oldText + converter.toString(completion);
-        getCompletionTarget().setText(newText);
-        getCompletionTarget().positionCaret(newText.length());
-    }
 
 }
