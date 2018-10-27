@@ -4,6 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.planner.logic.parser.CliSyntax.PREFIX_MONEYFLOW;
+import static seedu.planner.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.planner.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.planner.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.planner.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
 import static seedu.planner.ui.testutil.GuiTestAssert.assertListMatching;
@@ -32,12 +36,22 @@ import javafx.collections.ObservableList;
 import seedu.planner.TestApp;
 import seedu.planner.commons.core.EventsCenter;
 import seedu.planner.commons.core.index.Index;
+import seedu.planner.logic.commands.AddCommand;
 import seedu.planner.logic.commands.ClearCommand;
+import seedu.planner.logic.commands.DeleteCommand;
+import seedu.planner.logic.commands.DeleteCommandByDateEntry;
+import seedu.planner.logic.commands.EditCommand;
 import seedu.planner.logic.commands.FindCommand;
 import seedu.planner.logic.commands.ListCommand;
+import seedu.planner.logic.commands.RedoCommand;
 import seedu.planner.logic.commands.SelectCommand;
+import seedu.planner.logic.commands.UndoCommand;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.Model;
+import seedu.planner.model.record.NameContainsKeywordsPredicate;
+import seedu.planner.model.record.Record;
+import seedu.planner.model.tag.Tag;
+import seedu.planner.testutil.EditRecordDescriptorBuilder;
 import seedu.planner.testutil.TypicalRecords;
 import seedu.planner.ui.CommandBox;
 import seedu.planner.ui.SummaryEntry;
@@ -305,6 +319,95 @@ public abstract class FinancialPlannerSystemTest {
      */
     protected Model getModel() {
         return testApp.getModel();
+    }
+
+    /* ----------------------- Methods for child classes to use when testing with other components ------------------*/
+
+    /**
+     * Executes the UndoCommand on the ui and updates the expected model
+     * @param model expectedModel to update
+     */
+    protected void undoModel(Model model) throws Exception {
+        new UndoCommand().execute(model, null);
+        executeCommand(UndoCommand.COMMAND_WORD);
+    }
+
+    /**
+     * Executes the RedoCommand on the ui and updates the expected model
+     * @param model expectedModel to update
+     */
+    protected void redoModel(Model model) throws Exception {
+        new RedoCommand().execute(model, null);
+        executeCommand(RedoCommand.COMMAND_WORD);
+    }
+
+    /**
+     * Executes the AddCommand on the ui with the given record and updates the expected model
+     * @param model expectedModel to update
+     * @param toAdd record to be added
+     */
+    protected void addRecord(Model model, Record toAdd) throws Exception {
+        AddCommand addCommand = new AddCommand(toAdd);
+        addCommand.execute(model, null);
+        String command = "   " + AddCommand.COMMAND_WORD + "  " + PREFIX_NAME + toAdd.getName().fullName
+                + " " + PREFIX_DATE + toAdd.getDate().value + " " + PREFIX_MONEYFLOW + toAdd.getMoneyFlow().value;
+        for (Tag t : toAdd.getTags()) {
+            command += " " + PREFIX_TAG + t.tagName;
+        }
+        executeCommand(command);
+    }
+
+    /**
+     * Executes the FindCommand on the ui to find the given record and updates the expected model
+     * @param model expectedModel to update
+     * @param toFind record to be found
+     */
+    protected void findRecord(Model model, Record toFind) {
+        FindCommand findCommand = new FindCommand(new NameContainsKeywordsPredicate(
+                Arrays.asList(toFind.getName().fullName.split("\\s"))));
+        findCommand.execute(model, null);
+        String command = "   " + FindCommand.COMMAND_WORD + " " + toFind.getName().fullName;
+        executeCommand(command);
+    }
+
+    /**
+     * Executes the EditCommand with the index to edit and the corresponding date to edit
+     * @param model expectedModel to update
+     * @param toEditIndex index of the record to be editted
+     * @param date the resulting date after editting
+     */
+    protected void editRecord(Model model, int toEditIndex, String date) throws Exception {
+        Record target = model.getFilteredRecordList().get(toEditIndex - 1);
+        EditCommand.EditRecordDescriptor editRecordDescriptor = new EditRecordDescriptorBuilder(target)
+                .withDate(date).build();
+        EditCommand editCommand = new EditCommand(Index.fromOneBased(toEditIndex), editRecordDescriptor);
+        editCommand.execute(model, null);
+        String command = "   " + EditCommand.COMMAND_WORD + " " + toEditIndex + " " + PREFIX_DATE + date;
+        executeCommand(command);
+    }
+
+    /**
+     * Deletes all records of a single date using the ui and updates the model
+     * @param model expectedModel to update
+     * @param date date to be deleted
+     */
+    protected void deleteRecordByDate(Model model, String date) throws Exception {
+        DeleteCommandByDateEntry commandObject = new DeleteCommandByDateEntry(
+                new seedu.planner.model.record.Date(date));
+        commandObject.execute(model, null);
+        String command = "   " + DeleteCommandByDateEntry.COMMAND_WORD + " " + date;
+        executeCommand(command);
+    }
+
+    /**
+     * Deletes record at the given index using the ui and updates the model
+     * @param model expectedModel to update
+     */
+    protected void deleteRecord(Model model, int indexToDelete) throws Exception {
+        DeleteCommand deleteCommand = new DeleteCommand(Index.fromOneBased(indexToDelete));
+        deleteCommand.execute(model, null);
+        String command = "   " + DeleteCommand.COMMAND_WORD + " " + indexToDelete;
+        executeCommand(command);
     }
 
 }
