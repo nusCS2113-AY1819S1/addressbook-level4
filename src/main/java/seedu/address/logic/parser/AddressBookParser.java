@@ -87,6 +87,9 @@ public class AddressBookParser {
             case DownloadSelectCommand.COMMAND_WORD:
                 return new DownloadSelectCommandParser().parse(arguments);
 
+            case FreeCommand.COMMAND_WORD:
+                return new FreeCommandParser().parse(arguments);
+
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
