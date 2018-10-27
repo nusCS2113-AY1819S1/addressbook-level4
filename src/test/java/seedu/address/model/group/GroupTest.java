@@ -124,6 +124,11 @@ public class GroupTest {
         // different tags -> returns false
         editedGroup = new GroupBuilder(group).withTags(VALID_GROUP_TAG_CS1010).build();
         assertFalse(group.equals(editedGroup));
+
+        //different persons -> returns false
+        editedGroup = getTypicalGroupsWithPersons();
+        assertFalse(group.equals(editedGroup));
+
     }
 
     @Test
