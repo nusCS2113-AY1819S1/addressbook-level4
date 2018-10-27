@@ -2,37 +2,45 @@ package seedu.address.logic;
 
 import java.util.HashMap;
 
+/**
+ * @author elstonayx
+ * Trie data structure for quick searching of valid strings
+ */
 public class Trie {
 
+    /**
+     * @author elstonayx
+     * Node data structure. Component of a Trie data structure.
+     */
     private static class Node {
-        HashMap<Character, Node> children;
-        Node parent;
-        boolean isEndOfWord;
+        private HashMap<Character, Node> children;
+        private Node parent;
+        private boolean isEndOfWord;
 
-        Node() {
+        private Node() {
             children = new HashMap<>();
             isEndOfWord = false;
             parent = null;
         }
 
-        Node getChild(char key) {
+        private Node getChild(char key) {
             return children.get(key);
         }
 
-        void putChild(char key, Node childNode) {
+        private void putChild(char key, Node childNode) {
             children.put(key, childNode);
             childNode.parent = this;
         }
 
-        void setEndOfWord() {
+        private void setEndOfWord() {
             this.isEndOfWord = true;
         }
     }
 
     private Node rootNode;
     private Node searchCrawler;
-
-    Trie() {
+    
+    public Trie() {
         rootNode = new Node();
         searchCrawler = rootNode;
     }
