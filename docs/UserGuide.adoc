@@ -34,7 +34,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : lists all tasks for that day
-* **`add`**`t/Complete 2113 Tutorial d/Wed` : adds a new task to the Task Book.
+* **`add`**`t/Complete 2113 Tutorial d/finish the code p/low h/2` : adds a new task to the Task Book.
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -55,12 +55,12 @@ Format: `help`
 
 === Adding a task: `add`
 
-Adds a task to the task book +
-Format: `add t/ACTION d/DAY [w/WEEK] [m/MONTH]...`
+Adds a task with its title, description, priority level (low, medium, high) and the number of hours (integers only) expected to complete this task, to the task book +
+Format: `add t/TITLE d/DESCRIPTION p/PRIORITY h/HOURS`
 
 Examples:
 
-* `add t/Complete 2113 Tutorial d/Wed w/2`
+* `add t/Complete 2113 Tutorial d/with code done p/high h/1`
 
 === Adding a milestone: `add_milestone`
 
@@ -73,12 +73,12 @@ Examples:
 
 === Complete a task: `complete`
 
-Complete a task in the task book +
-Format: `complete t/ACTION d/DAY [w/WEEK] [m/MONTH]...`
+Complete a task in the task book by providing its index and the actual number of hours taken to complete the task +
+Format: `complete i/INDEX h/HOURS_TO_COMPLETE`
 
 Examples:
 
-* `complete t/Complete 2113 Tutorial d/Wed w/2`
+* `complete i/1 h/2`
 
 === Sort the taskbook: `sort`
 
@@ -107,11 +107,6 @@ Examples:
 
 * `delete 1`
 
-=== Viewing today's date : `view`
-
-Shows the date today. +
-Format: `view`
-
 === Selecting a date: `select`
 
 Chooses a particular date. +
@@ -122,6 +117,10 @@ Examples:
 * `select dd/1`
 * `select dd/1 mm/1`
 * `select dd/1 mm/1 yyyy/2018`
+
+=== Tracking productivity : `track`
+Tracks your productivity for all completed tasks, by returning an average productivity (in percentage). +
+Format: `track`
 
 === Listing entered commands : `history`
 
@@ -141,7 +140,7 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the address book's content (`add`, `delete`, and `clear`).
 ====
 
 Examples:
@@ -198,12 +197,6 @@ Format: `exit`
 Address book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
-
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
-
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
@@ -211,18 +204,21 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
-* *Add* : `add t/ACTION d/DAY [w/WEEK] [m/MONTH]...` +
-e.g. `add t/Complete 2113 Tutorial d/Wed w/2`
-* *Add Milestone* : `add_milestone t/TASK_TITLE m/MILESTONE r/RANK...` +
+* *Add task* : `add t/ACTION d/DESCRIPTION p/PRIORITY_LEVEL h/HOURS_TO_COMPLETE` +
+e.g. `add t/Complete 2113 Tutorial d/with code done p/high h/2`
+* *Add milestone* : `add_milestone t/TASK_TITLE m/MILESTONE r/RANK...` +
 e.g. `add_milestone t/Complete CS2113 W8 LO m/Complete Sections 8.1 to 8.5 r/1`
 * *Clear* : `clear`
-e.g. `deadline t/Complete 2113 Tutorial d/Wed w/2`
-* *Defer deadline* : `deadline t/ACTION w/WEEKS_OF_DEFERMENT` +
+* *Complete* : `complete i/INDEX h/HOURS_COMPLETED`
+e.g. `complete i/1 h/2`
+* *Defer deadline* : `defer_deadline t/ACTION w/WEEKS_OF_DEFERMENT` +
 e.g. `defer_deadline t/Complete 2113 Tutorial w/1`
+* *Delete* : `delete INDEX`
+e.g. `delete 1`
 * *List* : `list`
 * *Help* : `help`
 * *History* : `history`
-* *Select* : `select dd/DAY [mm/MONTH] [yyyy/YEAR]` +
+* *Select* : `select dd/DAY mm/MONTH yyyy/YEAR` +
 e.g. `select dd/1 mm/1 yyyy/2018`
 * *Undo* : `undo`
 * *Redo* : `redo`

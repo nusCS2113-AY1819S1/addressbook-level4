@@ -2,12 +2,9 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static seedu.address.testutil.TypicalTasks.CG1112_homework;
-import static seedu.address.testutil.TypicalTasks.CG2271_homework;
-import static seedu.address.testutil.TypicalTasks.CS2101_homework;
-import static seedu.address.testutil.TypicalTasks.CS2113_TASK_1;
-import static seedu.address.testutil.TypicalTasks.CS2113_TASK_2;
-import static seedu.address.testutil.TypicalTasks.CS2113_homework;
+import static seedu.address.testutil.TypicalTasks.CG1112_HOMEWORK;
+import static seedu.address.testutil.TypicalTasks.CG2271_HOMEWORK;
+import static seedu.address.testutil.TypicalTasks.CS2113_HOMEWORK;
 import static seedu.address.testutil.TypicalTasks.getTypicalTaskBook;
 
 import java.io.IOException;
@@ -88,14 +85,14 @@ public class XmlTaskBookStorageTest {
         assertEquals(original, new AddressBook(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addTask(CG2271_homework);
-        original.removeTask(CS2113_homework);
+        original.addTask(CG2271_HOMEWORK);
+        original.removeTask(CS2113_HOMEWORK);
         xmlTaskBookStorage.saveTaskBook(original, filePath);
         readBack = xmlTaskBookStorage.readTaskBook(filePath).get();
         assertEquals(original, new AddressBook(readBack));
 
         //Save and read without specifying file path
-        original.addTask(CG1112_homework);
+        original.addTask(CG1112_HOMEWORK);
         xmlTaskBookStorage.saveTaskBook(original); //file path not specified
         readBack = xmlTaskBookStorage.readTaskBook().get(); //file path not specified
         assertEquals(original, new AddressBook(readBack));

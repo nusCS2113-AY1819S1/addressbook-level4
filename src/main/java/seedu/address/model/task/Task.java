@@ -7,7 +7,6 @@ import java.util.Objects;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Task {
-    private static final Deadline PLACEHOLDER_DEADLINE = new Deadline("1/1/2018");
     private Deadline deadline;
     private final String title;
     private final String description;
@@ -39,12 +38,20 @@ public class Task {
     }
 
     public Task(String title, String description, PriorityLevel priorityLevel, int expectedNumOfHours) {
-        this.deadline = PLACEHOLDER_DEADLINE;
-        //this.deadline = getDeadline();
         this.title = title;
         this.description = description;
         this.priorityLevel = priorityLevel;
         this.expectedNumOfHours = expectedNumOfHours;
+    }
+
+    public Task(Task other) {
+        this.deadline = other.deadline;
+        this.title = other.title;
+        this.description = other.description;
+        this.priorityLevel = other.priorityLevel;
+        this.isCompleted = other.isCompleted;
+        this.expectedNumOfHours = other.expectedNumOfHours;
+        this.completedNumOfHours = other.completedNumOfHours;
     }
 
     public Deadline getDeadline() {
@@ -81,9 +88,10 @@ public class Task {
      * setting @code {isCompleted} to true
      */
     public Task completed(int hours) {
-        this.isCompleted = true;
-        this.completedNumOfHours = hours;
-        return this;
+        Task completedTask = new Task(this);
+        completedTask.isCompleted = true;
+        completedTask.completedNumOfHours = hours;
+        return completedTask;
     }
 
     /**
@@ -94,7 +102,6 @@ public class Task {
         if (otherTask == this) {
             return true;
         }
-
         return otherTask != null
                 && otherTask.getDeadline().equals(getDeadline())
                 && otherTask.getTitle().equals(getTitle());
@@ -106,8 +113,9 @@ public class Task {
      * @return the new Task
      */
     public Task deferred(Deadline deadline) {
-        this.deadline = deadline;
-        return this;
+        Task deferredTask = new Task(this);
+        deferredTask.deadline = deadline;
+        return deferredTask;
     }
     /**
      * Returns true if both tasks have the same data fields.
@@ -150,6 +158,12 @@ public class Task {
                 .append(getDescription())
                 .append(" Priority: ")
                 .append(getPriorityLevel());
+        /*builder.append(" Expected: ");
+        builder.append(expectedNumOfHours);
+        builder.append(" completed? ");
+        builder.append(isCompleted);
+        builder.append(" completed hours? ");
+        builder.append(completedNumOfHours);*/
         return builder.toString();
     }
 }

@@ -14,6 +14,7 @@ import seedu.address.model.task.PriorityLevel;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_HOURS = "Hour(s) must be an integer!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -27,21 +28,6 @@ public class ParserUtil {
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
-
-    //    /**
-    //     * Parses a {@code String name} into a {@code Name}.
-    //     * Leading and trailing whitespaces will be trimmed.
-    //     *
-    //     * @throws ParseException if the given {@code name} is invalid.
-    //     */
-    //    public static Name parseName(String name) throws ParseException {
-    //        requireNonNull(name);
-    //        String trimmedName = name.trim();
-    //        if (!Name.isValidName(trimmedName)) {
-    //            throw new ParseException(Name.MESSAGE_NAME_CONSTRAINTS);
-    //        }
-    //        return new Name(trimmedName);
-    //    }
 
     /**
      * Parses a {@code String deadline} into an {@code Deadline}.
@@ -127,6 +113,9 @@ public class ParserUtil {
     public static int parseHours(String hours) throws ParseException {
         requireNonNull(hours);
         String trimmedHours = hours.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedHours)) {
+            throw new ParseException(MESSAGE_INVALID_HOURS);
+        }
         return Integer.parseInt(trimmedHours);
     }
 }

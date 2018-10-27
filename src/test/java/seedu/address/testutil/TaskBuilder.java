@@ -82,8 +82,9 @@ public class TaskBuilder {
     /**
      * Sets the completed status of the {@code Task} that we are building.
      */
-    public TaskBuilder withCompleted(boolean completed) {
-        this.isCompleted = completed;
+    public TaskBuilder withCompletedNumOfHours(int hours) {
+        this.isCompleted = true;
+        this.completedNumOfHours = hours;
         return this;
     }
 

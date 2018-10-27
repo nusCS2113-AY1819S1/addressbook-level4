@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_MAX_HOURS;
+import static seedu.address.logic.commands.AddTaskCommand.MAX_HOURS_TO_COMPLETE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 
@@ -21,7 +23,6 @@ import seedu.address.model.task.Task;
  */
 public class CompleteTaskCommand extends Command implements CommandParser {
     public static final String COMMAND_WORD = "complete";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Completes the task identified by the index number used in the displayed task list,"
             + " under a certain number of hours\n"
@@ -30,7 +31,6 @@ public class CompleteTaskCommand extends Command implements CommandParser {
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_HOURS + "2";
 
     public static final String MESSAGE_SUCCESS = "Task completed: %1$s";
-    public static final String MESSAGE_NONEXISTENT_TASK = "This task does not exist in the task book";
 
     private final Index targetIndex;
     private final int completedNumOfHours;
@@ -55,15 +55,19 @@ public class CompleteTaskCommand extends Command implements CommandParser {
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        } else if (completedNumOfHours == 0) {
+            throw new CommandException(Messages.MESSAGE_ZERO_HOURS_COMPLETION);
+        } else if (completedNumOfHours >= MAX_HOURS_TO_COMPLETE) {
+            throw new CommandException(MESSAGE_MAX_HOURS);
         }
-
         Task taskToComplete = lastShownList.get(targetIndex.getZeroBased());
         if (taskToComplete.isCompleted()) {
             throw new CommandException(Messages.MESSAGE_COMPLETED_TASK);
         }
         model.completeTask(taskToComplete, completedNumOfHours);
         model.commitTaskBook();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, taskToComplete));
+        Task completedTask = lastShownList.get(targetIndex.getZeroBased());
+        return new CommandResult(String.format(MESSAGE_SUCCESS, completedTask));
     }
 
     @Override
