@@ -21,6 +21,28 @@ public class PasswordUtil {
     }
 
     /**
+     * Returns true if {@param plainPassword} is equal to {@param encryptedPassword} decrypted.
+     */
+    public boolean validatePassword(String plainPassword, String encryptedPassword)
+            throws NoSuchAlgorithmException, InvalidKeySpecException {
+        String [] splits = encryptedPassword.split(":");
+        int iterations = Integer.parseInt(splits[0]);
+        byte[] salt = convertFromHex(splits[1]);
+        byte[] hash = convertFromHex(splits[2]);
+
+        PBEKeySpec pbeKeySpec = new PBEKeySpec(plainPassword.toCharArray(), salt, iterations, HASH_BYTE_SIZE);
+        SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+        byte[] testHash = secretKeyFactory.generateSecret(pbeKeySpec).getEncoded();
+
+        int diff = hash.length ^ testHash.length;
+        for (int i = 0; i < hash.length && i < testHash.length; i++) {
+            diff |= hash[i] ^ testHash[i];
+        }
+
+        return diff == 0;
+    }
+
+    /**
      * Generates the encrypted password using PBKDF2WithHmacSHA1.
      */
     private String generateHash(String plainPassword) throws NoSuchAlgorithmException, InvalidKeySpecException {
@@ -30,7 +52,7 @@ public class PasswordUtil {
         PBEKeySpec pbeKeySpec = new PBEKeySpec(chars, salt, PKBDF2_ITERATIONS, HASH_BYTE_SIZE);
         SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
         byte[] hash = secretKeyFactory.generateSecret(pbeKeySpec).getEncoded();
-        return PKBDF2_ITERATIONS + ":" + convertToHex(salt) + convertToHex(hash);
+        return PKBDF2_ITERATIONS + ":" + convertToHex(salt) + ":" + convertToHex(hash);
     }
 
     /**
@@ -44,7 +66,7 @@ public class PasswordUtil {
     }
 
     /**
-     * Converts an array of bytes to hexadecimal string.
+     * Converts an array of bytes to a hexadecimal string.
      */
     private String convertToHex(byte[] array) {
         BigInteger bigInteger = new BigInteger(1, array);
@@ -56,5 +78,17 @@ public class PasswordUtil {
         }
 
         return hex;
+    }
+
+    /**
+     * Converts a hexadecimal string into an array of bytes.
+     */
+    private byte[] convertFromHex(String hex) {
+        byte[] bytes = new byte[hex.length() / 2];
+        for (int i = 0; i < bytes.length; i++) {
+            bytes[i] = (byte)Integer.parseInt(hex.substring(2 * i, 2 * i + 2), SALT_BYTE_SIZE);
+        }
+
+        return bytes;
     }
 }
