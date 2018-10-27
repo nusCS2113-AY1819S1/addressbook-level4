@@ -89,6 +89,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public User getUser() {
+        return userSession.getUser();
+    }
+
+    @Override
     public void clearUser() {
         userSession.clearUser();
     }

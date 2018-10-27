@@ -104,7 +104,7 @@ public class UserSession {
     /**
      * Returns logged in user.
      */
-    public User getUser(User user) {
+    public User getUser() {
         return user;
     }
 
