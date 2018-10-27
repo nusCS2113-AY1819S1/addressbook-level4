@@ -6,9 +6,13 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
-
+import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -36,15 +40,16 @@ public class ScriptCommandTest {
     private final String validAddTextFile = "ValidAddScriptCommand";
     private final String missingTextFile = "MissingTextFile";
     private final String testFilesLocation = "/src/test/data/ScriptCommandTest/";
-    private final String invalidTextFile = "InvalidAddCommand";
+    private final String scriptsFolder = "/scripts/";
     private final String invalidLinesNumbers = "1,2";
     private final String addCommand = AddCommand.COMMAND_WORD;
     private final String deleteCommand = DeleteCommand.COMMAND_WORD;
 
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
+        FileUtils.copyDirectory( new File(FileUtil.getRootLocation() + testFilesLocation),
+                new File(FileUtil.getRootLocation() + scriptsFolder));
     }
 
     @Test

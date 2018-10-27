@@ -140,4 +140,8 @@ public class FileUtil {
         Path currentRelativePath = Paths.get("");
         return currentRelativePath.toAbsolutePath().toString();
     }
+
+    public static void writetoTextFile(File file, String text) throws IOException {
+        FileUtils.writeStringToFile(file, text, CHARSET, true);
+    }
 }
