@@ -17,8 +17,8 @@
                                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                         <columns>
                             <TableColumn prefWidth="300" text="Name" fx:id="nameColumn"/>
-                            <TableColumn prefWidth="300" text="marks" fx:id="marksColumn"/>
-                            <TableColumn prefWidth="300" text="grade" fx:id="gradeColumn"/>
+                            <TableColumn prefWidth="300" text="Marks" fx:id="marksColumn"/>
+                            <TableColumn prefWidth="300" text="Test Name" fx:id="testNameColumn"/>
                         </columns>
                     </TableView>
                 </children>

@@ -35,11 +35,19 @@ public class EditTestMarksCommandParser {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TEST_NAME, PREFIX_TEST_MARK);
+        if (!argMultimap.getValue(PREFIX_TEST_NAME).isPresent()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTestMarksCommand.MESSAGE_USAGE));
+        }
 
+        if (!argMultimap.getValue(PREFIX_TEST_MARK).isPresent()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTestMarksCommand.MESSAGE_USAGE));
+        }
         nameKeywordsList.remove(PREFIX_TEST_NAME + argMultimap.getValue(PREFIX_TEST_NAME).get());
         nameKeywordsList.remove(PREFIX_TEST_MARK + argMultimap.getValue(PREFIX_TEST_MARK).get());
 
         return new EditTestMarksCommand(new NameContainsKeywordsPredicate(nameKeywordsList),
-                argMultimap.getValue(PREFIX_TEST_NAME).get(), argMultimap.getValue(PREFIX_TEST_MARK).get(), null);
+                argMultimap.getValue(PREFIX_TEST_NAME).get(), argMultimap.getValue(PREFIX_TEST_MARK).get(), null, nameKeywordsList);
     }
 }

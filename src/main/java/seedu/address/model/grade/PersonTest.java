@@ -3,42 +3,48 @@ package seedu.address.model.grade;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+
+import seedu.address.model.person.Name;
+
 /**
- * Represents a Test in the address book.
+ * Represents an object that has person name and test name and marks in the address book.
  *
  * Guarantees: details are present and not null, field values are validate
  * d, immutable.
  */
 
-public class Test {
+public class PersonTest {
+
+    private final Name personName;
     private final TestName testName;
     private final Marks marks;
-    private final Grade grade;
 
-    public Test(TestName testName, Marks marks, Grade grade) {
-        requireAllNonNull(testName, marks, grade);
+    public PersonTest(Name personName, TestName testName, Marks marks) {
+        requireAllNonNull(personName, testName, marks);
+        this.personName = personName;
         this.testName = testName;
         this.marks = marks;
-        this.grade = grade;
     }
 
+    public Name getName() {
+        return personName;
+    }
     public TestName getTestName() {
         return testName;
     }
     public Marks getMarks() {
         return marks;
     }
-    public Grade getGrade() {
-        return grade;
-    }
+
     /**
      * Every field must be present and not null.
      */
-    public boolean isSameTest(Test otherTest) {
+    public boolean isSamePersonTest(PersonTest otherTest) {
         if (otherTest == this) {
             return true;
         }
         return otherTest != null
+                && otherTest.getName().equals(getName())
                 && otherTest.getTestName().equals(getTestName())
                 && otherTest.getMarks().equals(getMarks());
     }
@@ -52,31 +58,32 @@ public class Test {
             return true;
         }
 
-        if (!(other instanceof Test)) {
+        if (!(other instanceof PersonTest)) {
             return false;
         }
 
-        Test otherTest = (Test) other;
-        return otherTest.getTestName().equals(getTestName())
-                && otherTest.getMarks().equals(getMarks())
-                && otherTest.getGrade().equals(getGrade());
+        PersonTest otherTest = (PersonTest) other;
+        return otherTest.getName().equals(getName())
+                && otherTest.getTestName().equals(getTestName())
+                && otherTest.getMarks().equals(getMarks());
+
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(testName, marks, grade);
+        return Objects.hash(personName, testName, marks);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getTestName())
+        builder.append(getName())
+                .append(" Person Name: ")
+                .append(getTestName())
                 .append(" Test Name: ")
                 .append(getMarks())
-                .append(" Marks: ")
-                .append(getGrade())
-                .append(" Grade: ");
+                .append(" Marks: ");
         return builder.toString();
     }
 }

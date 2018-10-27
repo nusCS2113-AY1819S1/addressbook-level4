@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.AddTestMarksCommand.MESSAGE_PERSON_DUPLICATE_FOUND;
+import static seedu.address.logic.commands.AddTestMarksCommand.MESSAGE_PERSON_NOT_FOUND;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -48,13 +50,15 @@ public class EditTestMarksCommand extends Command {
     private final String testName;
     private final String testMarks;
     private final String testGrade;
+    private final List<String> nameList;
     private final EditPersonDescriptor editPersonDescriptor = null;
 
-    public EditTestMarksCommand(NameContainsKeywordsPredicate predicate, String testName, String testMarks, String testGrade) {
+    public EditTestMarksCommand(NameContainsKeywordsPredicate predicate, String testName, String testMarks, String testGrade, List<String> nameList) {
         this.predicate = predicate;
         this.testName = testName;
         this.testMarks = testMarks;
         this.testGrade = testGrade;
+        this.nameList = nameList;
     }
 
     @Override
@@ -65,15 +69,55 @@ public class EditTestMarksCommand extends Command {
 
         List<Person> personListName = model.getFilteredPersonList();
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        Person personToEdit = personListName.get(0);
         String grade = "Undefined";
-
         if (testGrade != null)
         {
             grade = testGrade;
         }
-        Test test = new Test(new TestName(testName), new Marks(testMarks), new Grade(grade));
+        if (personListName.isEmpty()) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+        } else {
+            if (personListName.size() > 1) {
+                String fullName = "";
+                for (String name :nameList) {
+                    fullName += name + " ";
+                }
+                fullName = fullName.substring(0, fullName.length() - 1);
+                boolean checked = false;
+                for (Person person: personListName) {
 
+                    if (fullName.equals(person.getName().fullName)) {
+                        return editPersonMarks(person, model, grade);
+                    } else {
+                        checked = true;
+                    }
+                }
+                if (checked) {
+                    model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+                    throw new CommandException(MESSAGE_PERSON_DUPLICATE_FOUND);
+                }
+            } else {
+                return editPersonMarks(personListName.get(0), model, grade);
+            }
+        }
+
+        return new CommandResult(
+                String.format(Messages.MESSAGE_PERSONS_NOT_FOUND, model.getFilteredPersonList().size()));
+    }
+    /**
+     * createEditedPerson
+     */
+    private CommandResult editPersonMarks(Person person, Model model, String grade) throws CommandException {
+        Person personToEdit = person;
+
+        Test test = null;
+        try {
+            test = new Test(new TestName(testName), new Marks(testMarks), new Grade("Undefined"));
+        } catch (IllegalArgumentException e) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            throw new CommandException(e.getMessage());
+        }
         Set<Test> testList = new HashSet<>();
         testList.addAll(personToEdit.getTests());
 
@@ -87,6 +131,7 @@ public class EditTestMarksCommand extends Command {
         }
 
         if (!checkExists) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             throw new CommandException(MESSAGE_NOT_FOUND_TEST);
         }
 

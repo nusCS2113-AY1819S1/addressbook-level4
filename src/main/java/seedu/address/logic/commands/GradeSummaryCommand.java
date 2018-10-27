@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.grade.PersonTest;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.Highest;
 import seedu.address.model.util.LastTwentyFivePercen;
@@ -16,6 +17,7 @@ import seedu.address.model.util.Mean;
 import seedu.address.model.util.Median;
 import seedu.address.model.util.TopTwentyFivePercen;
 import seedu.address.ui.DisplayGrade;
+//import seedu.address.ui.DisplayGrade;
 
 /**
  * GradeSummary Command for Students, to display the highest, lowest, mean, median of certain test
@@ -34,7 +36,7 @@ public class GradeSummaryCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Success Showing List";
     public static final String MESSAGE_ERROR = "ERROR showing List";
-
+    public static final String MESSAGE_ERROR_COMMAND = "Invalid Command";
     private final String commandType;
     private final String testName;
 
@@ -58,7 +60,7 @@ public class GradeSummaryCommand extends Command {
         DisplayGrade gradeDisplay;
 
         if ("TTF".equals(commandType)) {
-            ArrayList<Person> studentList = topTwentyFivePercen.findTopTwentyFive(model.getFilteredPersonList(), testName);
+            ArrayList<PersonTest> studentList = topTwentyFivePercen.findTopTwentyFive(model.getFilteredPersonList(), testName);
 
 
             if (studentList.isEmpty()) {
@@ -70,7 +72,7 @@ public class GradeSummaryCommand extends Command {
 
         }
         if ("LTF".equals(commandType)) {
-            ArrayList<Person> studentList = lastTwentyFivePercen.findLastTwentyFive(model.getFilteredPersonList(), testName );
+            ArrayList<PersonTest> studentList = lastTwentyFivePercen.findLastTwentyFive(model.getFilteredPersonList(), testName );
 
 
             if (studentList.isEmpty()) {
@@ -98,7 +100,7 @@ public class GradeSummaryCommand extends Command {
             return new CommandResult(String.format("Median in class is " + medianVal));
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS));
+        return new CommandResult(String.format(MESSAGE_ERROR_COMMAND));
 
     }
 

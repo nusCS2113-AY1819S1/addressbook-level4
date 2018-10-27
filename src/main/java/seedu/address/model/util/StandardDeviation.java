@@ -13,7 +13,7 @@ public class StandardDeviation {
     /**
      * calculate the Standard Deviation values of student's scores.
      */
-    public static double calculateStandardDeviation(List<Person> personList, String testName)
+    public static double calculateStandardDeviation(ObservableList<Person> personList, String testName)
     {
         double sum = 0.0;
         double standardDeviation = 0.0;

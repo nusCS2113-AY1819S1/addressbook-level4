@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HIGHEST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOWEST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEAN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDIAN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEVENTY_FIVE;
@@ -25,7 +26,7 @@ public class GradeSummaryCommandParser implements Parser<GradeSummaryCommand> {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TWENTY_FIVE, PREFIX_SEVENTY_FIVE,
-                        PREFIX_HIGHEST, PREFIX_MEAN, PREFIX_MEDIAN, PREFIX_TEST_NAME);
+                        PREFIX_HIGHEST, PREFIX_MEAN, PREFIX_MEDIAN, PREFIX_TEST_NAME, PREFIX_LOWEST);
 
         String commandToRun = "";
         String testName = "";
@@ -44,6 +45,9 @@ public class GradeSummaryCommandParser implements Parser<GradeSummaryCommand> {
         }
         if (argMultimap.getValue(PREFIX_MEDIAN).isPresent()) {
             commandToRun = "MEDIAN";
+        }
+        if (argMultimap.getValue(PREFIX_LOWEST).isPresent()) {
+            commandToRun = "L";
         }
         if (argMultimap.getValue(PREFIX_TEST_NAME).isPresent()) {
             testName = argMultimap.getValue(PREFIX_TEST_NAME).get();

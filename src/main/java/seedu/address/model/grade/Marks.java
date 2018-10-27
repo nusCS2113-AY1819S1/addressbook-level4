@@ -12,7 +12,7 @@ public class Marks {
 
     public static final String MESSAGE_MARKS_CONSTRAINTS =
             "marks should be >=0 && <= 100";
-    public static final String MARKS_VALIDATION_REGEX = "^([0-9]|[1-9][0-9]|100)$";
+    public static final String MARKS_VALIDATION_REGEX = "^(?:100(?:\\.00?)?|\\d?\\d(?:\\.\\d\\d?)?)$";
     public final String value;
 
     /**

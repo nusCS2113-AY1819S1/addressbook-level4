@@ -152,12 +152,12 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
 
         // Case: missing Gender -> Rejected
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + NATIONALITY_DESC_AMY
-                + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + GRADE_DESC_AMY;
+                + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         // Case: missing Nationality -> Rejected
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + GENDER_DESC_AMY
-                + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + GRADE_DESC_AMY;
+                + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: missing phone -> rejected */
@@ -186,12 +186,12 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
 
         // Case: invalid gender -> rejected
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + INVALID_GENDER_DESC + NATIONALITY_DESC_AMY
-                + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + GRADE_DESC_AMY;
+                + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
         assertCommandFailure(command, Gender.MESSAGE_GENDER_CONSTRAINTS);
 
         // Case: invalid Nationality -> rejected
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + GENDER_DESC_AMY + INVALID_NATIONALITY_DESC
-                + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + GRADE_DESC_AMY;
+                + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
         assertCommandFailure(command, Nationality.MESSAGE_NATIONALITY_CONSTRAINT);
 
         /* Case: invalid phone -> rejected */
