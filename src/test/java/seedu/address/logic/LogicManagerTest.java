@@ -11,6 +11,7 @@ import org.junit.rules.ExpectedException;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -27,23 +28,32 @@ public class LogicManagerTest {
 
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
+        String loginCommand = "login u/admin p/root";
         String invalidCommand = "uicfhmowqewca";
+
+        assertCommandSuccess(loginCommand, String.format(LoginCommand.MESSAGE_SUCCESS, "admin"), model);
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
-        assertHistoryCorrect(invalidCommand);
+        assertHistoryCorrect(invalidCommand, loginCommand);
     }
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
+        String loginCommand = "login u/admin p/root";
         String deleteCommand = "delete 9";
+
+        assertCommandSuccess(loginCommand, String.format(LoginCommand.MESSAGE_SUCCESS, "admin"), model);
         assertCommandException(deleteCommand, MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
-        assertHistoryCorrect(deleteCommand);
+        assertHistoryCorrect(deleteCommand, loginCommand);
     }
 
     @Test
     public void execute_validCommand_success() {
+        String loginCommand = "login u/admin p/root";
         String listCommand = ListCommand.COMMAND_WORD;
+
+        assertCommandSuccess(loginCommand, String.format(LoginCommand.MESSAGE_SUCCESS, "admin"), model);
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
-        assertHistoryCorrect(listCommand);
+        assertHistoryCorrect(listCommand, loginCommand);
     }
 
     @Test
