@@ -54,20 +54,20 @@ public class DistributeAlgorithm {
         distUtil.doesGroupNameExist(numOfGroups, groupName, model);
 
         //Convert ObservableList into ArrayList to use Randomizer via Collections
-        LinkedList<Person> randomAllPersonArrayList = new LinkedList<>(allPerson);
+        LinkedList<Person> personLinkedList = new LinkedList<>(allPerson);
 
         //Randomizer function
         Instant instant = Instant.now();
-        distUtil.shuffle(randomAllPersonArrayList, new Random(instant.getEpochSecond()));
+        distUtil.shuffle(personLinkedList, new Random(instant.getEpochSecond()));
 
         if (!genderFlag && !nationalityFlag) {
-            normalDistribution(numOfGroups, groupArrayList, randomAllPersonArrayList, groupName);
+            normalDistribution(numOfGroups, groupArrayList, personLinkedList, groupName);
         } else if (!genderFlag && nationalityFlag) {
-            nationalityDistribution(numOfGroups, groupArrayList, randomAllPersonArrayList, groupName);
+            nationalityDistribution(numOfGroups, groupArrayList, personLinkedList, groupName);
         } else if (genderFlag && !nationalityFlag) {
-            genderDistribution(numOfGroups, groupArrayList, randomAllPersonArrayList, groupName);
+            genderDistribution(numOfGroups, groupArrayList, personLinkedList, groupName);
         } else {
-            strictDistribution(numOfGroups, groupArrayList, randomAllPersonArrayList, groupName);
+            strictDistribution(numOfGroups, groupArrayList, personLinkedList, groupName);
         }
     }
 
@@ -76,14 +76,14 @@ public class DistributeAlgorithm {
      * Distribution is random.
      */
     private void normalDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList,
-                                    LinkedList<Person> randomAllPersonArrayList,
+                                    LinkedList<Person> personLinkedList,
                                     String groupName) throws CommandException {
         for (int i = index; i > 0; i--) { //number of groups to add into the groupArrayList
             ArrayList<Person> addPerson = new ArrayList<>();
-            int paxInAGroup = randomAllPersonArrayList.size() / i;
+            int paxInAGroup = personLinkedList.size() / i;
             while (paxInAGroup > 0) {
-                addPerson.add(randomAllPersonArrayList.getLast());
-                randomAllPersonArrayList.removeLast();
+                addPerson.add(personLinkedList.getLast());
+                personLinkedList.removeLast();
                 paxInAGroup--;
             }
             groupArrayList.add(addPerson);
@@ -98,15 +98,15 @@ public class DistributeAlgorithm {
      * Distribution is Random
      */
     private void genderDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList,
-                                    LinkedList<Person> randomAllPersonArrayList, String groupName)
+                                    LinkedList<Person> allPersonLinkList, String groupName)
             throws CommandException {
         LinkedList<Person> maleLinkList = new LinkedList<>();
         LinkedList<Person> femaleLinkList = new LinkedList<>();
         int loopCounter = 0;
         int num = 0;
 
-        distUtil.filterGender(randomAllPersonArrayList, maleLinkList, VALID_GENDER_MALE);
-        distUtil.filterGender(randomAllPersonArrayList, femaleLinkList, VALID_GENDER_FEMALE);
+        distUtil.filterGender(allPersonLinkList, maleLinkList, VALID_GENDER_MALE);
+        distUtil.filterGender(allPersonLinkList, femaleLinkList, VALID_GENDER_FEMALE);
 
         while (maleLinkList.size() != 0 || femaleLinkList.size() != 0) {
             if (loopCounter % index == 0) {
@@ -140,14 +140,14 @@ public class DistributeAlgorithm {
      * Distribution is Random.
      */
     private void nationalityDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList,
-                                         LinkedList<Person> randomAllPersonArrayList, String groupName)
+                                         LinkedList<Person> personLinkedList, String groupName)
             throws CommandException {
-        Map<Nationality, Integer> nationalityMap = distUtil.createNationalityMap(randomAllPersonArrayList);
+        Map<Nationality, Integer> nationalityMap = distUtil.createNationalityMap(personLinkedList);
         int loopCounter = 0;
         for (Map.Entry<Nationality, Integer> entry : nationalityMap.entrySet()) {
             for (int x = 0; x < entry.getValue(); x++) {
                 ArrayList<Person> personArrayList = new ArrayList<>();
-                Person p = distUtil.findPerson(entry.getKey(), randomAllPersonArrayList);
+                Person p = distUtil.findPerson(entry.getKey(), personLinkedList);
                 distUtil.selectiveDistributionByNationality(index, groupArrayList, personArrayList, loopCounter, p);
                 loopCounter++;
             }
@@ -161,7 +161,7 @@ public class DistributeAlgorithm {
      * Distribution will try to include balanced gender and include multi-national students.
      */
     private void strictDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList,
-                                    LinkedList<Person> randomAllPersonArrayList, String groupName)
+                                    LinkedList<Person> personLinkedList, String groupName)
             throws CommandException {
         System.out.println("Gender & Nationality Distribution");
     }
