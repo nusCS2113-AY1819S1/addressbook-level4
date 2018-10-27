@@ -3,8 +3,11 @@ package seedu.address.model;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.Map;
 
+import seedu.address.commons.util.PasswordUtil;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -53,11 +56,21 @@ public class UserSession {
         String loggedPassword = user.getPassword().toString();
         Map<String, String> userAccounts = userStorage.getUserAccounts();
 
-        if (userAccounts.containsKey(loggedUsername)
-                && userAccounts.get(loggedUsername).equals(loggedPassword)) {
-            this.user = user;
-            loginStatus = true;
-            adminStatus = loggedUsername.equals("admin");
+        if (userAccounts.containsKey(loggedUsername)) {
+            boolean passwordsMatch = false;
+            String storedPassword = userAccounts.get(loggedUsername);
+
+            try {
+                passwordsMatch = PasswordUtil.validatePassword(loggedPassword, storedPassword);
+            } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+                e.printStackTrace();
+            }
+
+            if (passwordsMatch) {
+                this.user = user;
+                loginStatus = true;
+                adminStatus = loggedUsername.equals("admin");
+            }
         }
     }
 
@@ -69,8 +82,9 @@ public class UserSession {
         String loggedPassword = user.getPassword().toString();
 
         try {
-            userStorage.createUser(loggedUsername, loggedPassword);
-        } catch (IOException e) {
+            String encryptedPassword = PasswordUtil.getEncryptedPassword(loggedPassword);
+            userStorage.createUser(loggedUsername, encryptedPassword);
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException | IOException e) {
             e.printStackTrace();
         }
     }

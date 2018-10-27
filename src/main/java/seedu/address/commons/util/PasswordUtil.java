@@ -16,14 +16,14 @@ public class PasswordUtil {
     /**
      * Returns the password encrypted using PBKDF2WithHmacSHA1.
      */
-    public String getEncryptedPassword(String plainPassword) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public static String getEncryptedPassword(String plainPassword) throws NoSuchAlgorithmException, InvalidKeySpecException {
         return generateHash(plainPassword);
     }
 
     /**
      * Returns true if {@param plainPassword} is equal to {@param encryptedPassword} decrypted.
      */
-    public boolean validatePassword(String plainPassword, String encryptedPassword)
+    public static boolean validatePassword(String plainPassword, String encryptedPassword)
             throws NoSuchAlgorithmException, InvalidKeySpecException {
 
         String [] splits = encryptedPassword.split(":");
@@ -47,7 +47,7 @@ public class PasswordUtil {
     /**
      * Generates the encrypted password using PBKDF2WithHmacSHA1.
      */
-    private String generateHash(String plainPassword) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    private static String generateHash(String plainPassword) throws NoSuchAlgorithmException, InvalidKeySpecException {
         char[] chars = plainPassword.toCharArray();
         byte[] salt = generateSalt();
 
@@ -60,7 +60,7 @@ public class PasswordUtil {
     /**
      * Generates the salt used in password encryption.
      */
-    private byte[] generateSalt() throws NoSuchAlgorithmException {
+    private static byte[] generateSalt() throws NoSuchAlgorithmException {
         SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
         byte[] salt = new byte[SALT_BYTE_SIZE];
         secureRandom.nextBytes(salt);
@@ -70,7 +70,7 @@ public class PasswordUtil {
     /**
      * Converts an array of bytes to a hexadecimal string.
      */
-    private String convertToHex(byte[] array) {
+    private static String convertToHex(byte[] array) {
         BigInteger bigInteger = new BigInteger(1, array);
         String hex = bigInteger.toString(SALT_BYTE_SIZE);
         int paddingLength = (array.length * 2) - hex.length();
@@ -85,7 +85,7 @@ public class PasswordUtil {
     /**
      * Converts a hexadecimal string into an array of bytes.
      */
-    private byte[] convertFromHex(String hex) {
+    private static byte[] convertFromHex(String hex) {
         byte[] bytes = new byte[hex.length() / 2];
         for (int i = 0; i < bytes.length; i++) {
             bytes[i] = (byte)Integer.parseInt(hex.substring(2 * i, 2 * i + 2), SALT_BYTE_SIZE);
