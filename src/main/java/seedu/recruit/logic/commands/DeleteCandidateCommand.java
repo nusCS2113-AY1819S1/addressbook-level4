@@ -11,6 +11,7 @@ import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.candidate.Candidate;
+import seedu.recruit.ui.MainWindow;
 
 /**
  * Deletes a candidate identified using it's displayed index from the recruit book.
@@ -35,6 +36,9 @@ public class DeleteCandidateCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        if (MainWindow.isExisting() && !MainWindow.getDisplayedBook().equals("candidatebook")) {
+            MainWindow.switchToCandidateBook();
+        }
         List<Candidate> lastShownList = model.getFilteredCandidateList();
         StringBuilder deletedCandidates = new StringBuilder();
 
