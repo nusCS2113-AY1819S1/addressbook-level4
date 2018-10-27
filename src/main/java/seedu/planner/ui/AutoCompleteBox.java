@@ -42,7 +42,7 @@ public class AutoCompleteBox extends UiPart<Region> {
 
     private static TextField commandTextField;
 
-    private static Set<String> commandWordSet =
+    private static Set<String> commandKeywordsSet =
             new HashSet<>(Arrays.asList(AddCommand.COMMAND_WORD, ClearCommand.COMMAND_WORD, DeleteCommand.COMMAND_WORD,
                     DeleteCommandByDateEntry.COMMAND_WORD, EditCommand.COMMAND_WORD, ExitCommand.COMMAND_WORD,
                     ExportExcelCommand.COMMAND_WORD, FindCommand.COMMAND_WORD, FindTagCommand.COMMAND_WORD,
@@ -50,13 +50,15 @@ public class AutoCompleteBox extends UiPart<Region> {
                     ListCommand.COMMAND_WORD, RedoCommand.COMMAND_WORD, SelectCommand.COMMAND_WORD,
                     SortCommand.COMMAND_WORD, SummaryCommand.COMMAND_WORD, UndoCommand.COMMAND_WORD));
 
-    private Set<String> sortWordSet = Stream.concat(SortCommand.ORDER_SET.stream(),
+    private Set<String> sortKeywordsSet = Stream.concat(SortCommand.ORDER_SET.stream(),
             SortCommand.CATEGORY_SET.stream()).collect(Collectors.toSet());
+
+    private Set<String> tagKeywordsSet = new HashSet<>();
 
     public AutoCompleteBox(TextField commandTextField) {
         super(FXML);
         this.commandTextField = commandTextField;
-        CustomAutoCompleteTextField.bindAutoCompletion(commandTextField, commandWordSet).setVisibleRowCount(MAX_ROWS);
+        CustomAutoCompleteTextField.bindAutoCompletion(commandTextField, commandKeywordsSet).setVisibleRowCount(MAX_ROWS);
     }
 
 }

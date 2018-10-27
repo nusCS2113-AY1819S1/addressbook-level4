@@ -12,11 +12,7 @@ import javafx.util.StringConverter;
 
 public class CustomAutoCompletionTextFieldBinding<T> extends AutoCompletionBinding<T>{
 
-    /***************************************************************************
-     *                                                                         *
-     * Static properties and methods                                           *
-     *                                                                         *
-     **************************************************************************/
+    private String oldText = "";
 
     private static <T> StringConverter<T> defaultStringConverter() {
         return new StringConverter<T>() {
@@ -30,24 +26,11 @@ public class CustomAutoCompletionTextFieldBinding<T> extends AutoCompletionBindi
         };
     }
 
-    /***************************************************************************
-     *                                                                         *
-     * Private fields                                                          *
-     *                                                                         *
-     **************************************************************************/
-
     /**
      * String converter to be used to convert suggestions to strings.
      */
     private StringConverter<T> converter;
 
-
-    /***************************************************************************
-     *                                                                         *
-     * Constructors                                                            *
-     *                                                                         *
-     **************************************************************************/
-
     /**
      * Creates a new auto-completion binding between the given textField
      * and the given suggestion provider.
@@ -56,21 +39,16 @@ public class CustomAutoCompletionTextFieldBinding<T> extends AutoCompletionBindi
      * @param suggestionProvider
      */
     public CustomAutoCompletionTextFieldBinding(final TextField textField,
-                                          Callback<AutoCompletionBinding.ISuggestionRequest, Collection<T>> suggestionProvider) {
+                                                Callback<AutoCompletionBinding.ISuggestionRequest, Collection<T>>
+                                                        suggestionProvider) {
 
         this(textField, suggestionProvider, CustomAutoCompletionTextFieldBinding
                 .<T>defaultStringConverter());
     }
 
-    /**
-     * Creates a new auto-completion binding between the given textField
-     * and the given suggestion provider.
-     *
-     * @param textField
-     * @param suggestionProvider
-     */
     public CustomAutoCompletionTextFieldBinding(final TextField textField,
-                                          Callback<AutoCompletionBinding.ISuggestionRequest, Collection<T>> suggestionProvider,
+                                          Callback<AutoCompletionBinding.ISuggestionRequest, Collection<T>>
+                                                  suggestionProvider,
                                           final StringConverter<T> converter) {
 
         super(textField, suggestionProvider, converter);
@@ -80,54 +58,48 @@ public class CustomAutoCompletionTextFieldBinding<T> extends AutoCompletionBindi
         getCompletionTarget().focusedProperty().addListener(focusChangedListener);
     }
 
-
-    /***************************************************************************
-     *                                                                         *
-     * Public API                                                              *
-     *                                                                         *
-     **************************************************************************/
-
-    /** {@inheritDoc} */
-    @Override public TextField getCompletionTarget(){
+    @Override
+    public TextField getCompletionTarget(){
         return (TextField)super.getCompletionTarget();
     }
 
-    /** {@inheritDoc} */
-    @Override public void dispose(){
+    @Override
+    public void dispose(){
         getCompletionTarget().caretPositionProperty().removeListener(caretChangeListener);
         getCompletionTarget().focusedProperty().removeListener(focusChangedListener);
     }
 
-    /** {@inheritDoc} */
-    @Override protected void completeUserInput(T completion){
-        String newText = converter.toString(completion);
+    @Override
+    protected void completeUserInput(T completion){
+        String newText = oldText + converter.toString(completion);
         getCompletionTarget().setText(newText);
         getCompletionTarget().positionCaret(newText.length());
     }
 
-
-    /***************************************************************************
-     *                                                                         *
-     * Event Listeners                                                         *
-     *                                                                         *
-     **************************************************************************/
-
     private final ChangeListener<Number> caretChangeListener = new ChangeListener<Number>() {
-        @Override public void changed(ObservableValue<? extends Number> obs, Number oldNumber, Number newNumber) {
+        @Override
+        public void changed(ObservableValue<? extends Number> obs, Number oldNumber, Number newNumber) {
             String text = getCompletionTarget().getText().substring(0, newNumber.intValue());
             int index ;
             for (index = text.length() - 1; index >= 0 && ! Character.isWhitespace(text.charAt(index)); index--);
-            String prefix = text.substring(index+1, text.length());
+            if (index > 0) {
+                oldText = text.substring(0, index) + " ";
+            } else {
+                oldText = "";
+            }
+            String newText = text.substring(index+1, text.length());
             if (getCompletionTarget().isFocused()) {
-                setUserInput(prefix);
+                setUserInput(newText);
             }
         }
     };
 
     private final ChangeListener<Boolean> focusChangedListener = new ChangeListener<Boolean>() {
-        @Override public void changed(ObservableValue<? extends Boolean> obs, Boolean oldFocused, Boolean newFocused) {
-            if(newFocused == false)
+        @Override
+        public void changed(ObservableValue<? extends Boolean> obs, Boolean oldFocused, Boolean newFocused) {
+            if (newFocused == false){
                 hidePopup();
+            }
         }
     };
 

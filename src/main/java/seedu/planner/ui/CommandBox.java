@@ -33,6 +33,7 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(Logic logic) {
         super(FXML);
         this.logic = logic;
+        AutoCompleteBox autoCompleteBox = new AutoCompleteBox(commandTextField);
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         historySnapshot = logic.getHistorySnapshot();
@@ -43,9 +44,6 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     private void handleKeyPress(KeyEvent keyEvent) {
-        AutoCompleteBox autoCompleteBox = new AutoCompleteBox(commandTextField);
-        String item = commandTextField.getText();
-
         switch (keyEvent.getCode()) {
         case UP:
             // As up and down buttons will alter the position of the caret,
