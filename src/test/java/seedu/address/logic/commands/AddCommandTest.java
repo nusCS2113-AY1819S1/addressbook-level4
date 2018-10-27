@@ -202,6 +202,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean getLoginStatus() {
+            return true;
+        }
+
+        @Override
         public boolean hasEvent(Event event) {
             requireNonNull(event);
             return this.event.isSameEvent(event);
@@ -213,6 +218,11 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Event> personsAdded = new ArrayList<>();
+
+        @Override
+        public boolean getLoginStatus() {
+            return true;
+        }
 
         @Override
         public boolean hasEvent(Event event) {
