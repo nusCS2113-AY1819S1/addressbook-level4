@@ -15,7 +15,6 @@ import seedu.planner.commons.core.LogsCenter;
 /**
  * This UI component is responsible for displaying the summary requested by the user
  */
-//TODO: refactor this into 2 components
 public class SummaryDisplay extends UiPart<Region> {
 
     public static final String LABEL = "Summary Table";
@@ -26,9 +25,8 @@ public class SummaryDisplay extends UiPart<Region> {
 
     private ObservableList<SummaryEntry> data = FXCollections.emptyObservableList();
 
-
     @FXML
-    private TableView<SummaryEntry> table;
+    private TableView<SummaryEntry> summaryTable;
 
     @FXML
     private AnchorPane summaryDisplay;
@@ -62,6 +60,7 @@ public class SummaryDisplay extends UiPart<Region> {
                 new PropertyValueFactory<SummaryEntry, String>("totalExpense"));
         totalColumn.setCellValueFactory(
                 new PropertyValueFactory<SummaryEntry, String>("total"));
-        table.setItems(toDisplay);
+        summaryTable.setItems(toDisplay);
+        summaryTable.getItems().get(0);
     }
 }

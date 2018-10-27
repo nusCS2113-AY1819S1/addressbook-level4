@@ -1,6 +1,7 @@
 package guitests.guihandles;
 
 import javafx.stage.Stage;
+import seedu.planner.ui.SummaryDisplay;
 
 /**
  * Provides a handle for {@code MainWindow}.
@@ -47,5 +48,19 @@ public class MainWindowHandle extends StageHandle {
 
     public DetailedRecordCardHandle getDetailedRecordCard() {
         return detailedRecordCard;
+    }
+
+    /**
+     * Finds the SummaryDisplay node and instantiates the SummaryDisplayHandle before returning its reference
+     * @return SummaryDisplayHandle
+     */
+    public SummaryDisplayHandle getSummaryDisplay() {
+        SummaryDisplayHandle summaryDisplayHandle;
+        try {
+            summaryDisplayHandle = new SummaryDisplayHandle(getChildNode(SummaryDisplayHandle.SUMMARY_DISPLAY_ID));
+        } catch (Exception e) {
+            return null;
+        }
+        return summaryDisplayHandle;
     }
 }

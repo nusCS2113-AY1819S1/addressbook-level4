@@ -25,15 +25,15 @@ public class TypicalRecords {
     public static final Record INDO = new RecordBuilder().withName("Indo")
             .withMoneyFlow("-5.6").withDate("28-2-2018").withTags("friends").build();
     public static final Record CAIFAN = new RecordBuilder().withName("caifan")
-            .withMoneyFlow("-3.80").withDate("26-9-2018").withTags("owesMoney", "friends").build();
+            .withMoneyFlow("-3.80").withDate("26-4-2018").withTags("owesMoney", "friends").build();
     public static final Record WORK = new RecordBuilder().withName("Income from work")
-            .withMoneyFlow("+60.0").withDate("26-9-2018").build();
+            .withMoneyFlow("+60.0").withDate("26-4-2018").build();
     public static final Record ZT = new RecordBuilder().withName("Payment from ZT")
-            .withMoneyFlow("+5.90").withDate("25-9-2018").withTags("friends").build();
+            .withMoneyFlow("+5.90").withDate("25-5-2018").withTags("friends").build();
     public static final Record MALA = new RecordBuilder().withName("Payment for mala")
-            .withMoneyFlow("-10.50").withDate("26-9-2018").build();
+            .withMoneyFlow("-10.50").withDate("26-5-2018").build();
     public static final Record CHICKENRICE = new RecordBuilder().withName("Payment for chicken rice")
-            .withMoneyFlow("-0.90").withDate("27-9-2018").build();
+            .withMoneyFlow("-0.90").withDate("27-5-2018").build();
     public static final Record RANDOM = new RecordBuilder().withName("Random income")
             .withMoneyFlow("+14.50").withDate("31-03-2018").build();
 

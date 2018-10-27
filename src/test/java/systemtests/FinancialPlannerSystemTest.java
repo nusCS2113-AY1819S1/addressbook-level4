@@ -2,6 +2,7 @@ package systemtests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static seedu.planner.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.planner.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
@@ -26,6 +27,7 @@ import guitests.guihandles.RecordCardHandle;
 import guitests.guihandles.RecordListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
+import guitests.guihandles.SummaryDisplayHandle;
 import seedu.planner.TestApp;
 import seedu.planner.commons.core.EventsCenter;
 import seedu.planner.commons.core.index.Index;
@@ -128,6 +130,7 @@ public abstract class FinancialPlannerSystemTest {
         return mainWindowHandle.getResultDisplay();
     }
 
+    public SummaryDisplayHandle getSummaryDisplay() { return mainWindowHandle.getSummaryDisplay(); }
     /**
      * Executes {@code command} in the application's {@code CommandBox}.
      * Method returns after UI components have been updated.
@@ -284,6 +287,7 @@ public abstract class FinancialPlannerSystemTest {
         assertEquals(Paths.get(".").resolve(testApp.getRecordStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());
         assertEquals(SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
+        assertNull(getSummaryDisplay());
     }
 
     /**
