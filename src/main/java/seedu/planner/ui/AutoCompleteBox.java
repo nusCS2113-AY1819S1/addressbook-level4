@@ -1,20 +1,14 @@
 package seedu.planner.ui;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javax.swing.plaf.synth.Region;
 
-import org.controlsfx.control.textfield.TextFields;
-
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import seedu.planner.logic.commands.AddCommand;
 import seedu.planner.logic.commands.ClearCommand;
 import seedu.planner.logic.commands.DeleteCommand;
@@ -35,6 +29,10 @@ import seedu.planner.logic.commands.SummaryCommand;
 import seedu.planner.logic.commands.UndoCommand;
 import seedu.planner.ui.completion.CustomAutoCompleteTextField;
 
+/**
+ * The UI component that is responsible for displaying the possible auto complete text inputs
+ * under the CommandBox UI component.
+ */
 public class AutoCompleteBox extends UiPart<Region> {
 
     private static final String FXML = "AutoCompleteBox.fxml";
