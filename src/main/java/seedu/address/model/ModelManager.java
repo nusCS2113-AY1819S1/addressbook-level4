@@ -19,7 +19,6 @@ import seedu.address.model.person.FriendListPredicate;
 import seedu.address.model.person.OtherListPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.TimeTable;
-import seedu.address.security.UserStub;
 
 /**
  * Represents the in-memory model of the address book data.

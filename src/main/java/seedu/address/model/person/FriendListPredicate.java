@@ -3,8 +3,6 @@ package seedu.address.model.person;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import seedu.address.security.UserStub;
-
 /**
  * Creates a predicate from the Person to be used to create the friend list
  */
