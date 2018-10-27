@@ -7,6 +7,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.note.Note;
 import seedu.address.model.note.NoteManager;
+import seedu.address.ui.HtmlCardProcessor;
 
 /**
  * Lists notes based on given predicate.
@@ -48,65 +49,24 @@ public class NoteListCommand extends Command {
         int listId = 1;
         int size = noteManager.getFilteredNotes().size();
 
-        for (Note n: noteManager.getFilteredNotes()) {
-            sb.append(listId + ":\n");
-
-            sb.append("Module Code: ");
-            if (!n.getModuleCode().isEmpty()) {
-                sb.append(n.getModuleCode() + "\n");
-            } else {
-                sb.append("Not assigned\n");
-            }
-
-            sb.append("Title: ");
-            if (!n.getTitle().isEmpty()) {
-                sb.append(n.getTitle() + "\n");
-            } else {
-                sb.append("Not specified\n");
-            }
-
-            sb.append("Start Date: ");
-            if (!n.getStartDate().isEmpty()) {
-                sb.append(n.getStartDate() + "\n");
-            } else {
-                sb.append("Not specified\n");
-            }
-
-            sb.append("Start Time: ");
-            if (!n.getStartTime().isEmpty()) {
-                sb.append(n.getStartTime() + "\n");
-            } else {
-                sb.append("Not specified\n");
-            }
-
-            sb.append("End Date: ");
-            if (!n.getEndDate().isEmpty()) {
-                sb.append(n.getEndDate() + "\n");
-            } else {
-                sb.append("Not specified\n");
-            }
-
-            sb.append("End Time: ");
-            if (!n.getEndTime().isEmpty()) {
-                sb.append(n.getEndTime() + "\n");
-            } else {
-                sb.append("Not specified\n");
-            }
-
-            sb.append("Location: ");
-            if (!n.getLocation().isEmpty()) {
-                sb.append(n.getLocation() + "\n");
-            } else {
-                sb.append("Not specified\n");
-            }
-
-            sb.append("Note:\n");
-            sb.append(n.getNoteText() + ((listId < size) ? "\n\n" : "\n"));
-
-            listId++;
+        for (Note note: noteManager.getFilteredNotes()) {
+            sb.append(HtmlCardProcessor.getCardStartV2());
+            sb.append(HtmlCardProcessor.renderCardHeader(
+                    "h4", "#" + listId++ + "&nbsp;&nbsp;" + note.getTitle()));
+            sb.append(HtmlCardProcessor.getCardBodyStart());
+            sb.append(HtmlCardProcessor.renderCardTitle(note.getModuleCode()));
+            sb.append(HtmlCardProcessor.renderCardSubtitle(
+                    "From " + note.getStartDate() + " " + note.getStartTime()
+                            + " to " + note.getEndDate() + " " + note.getEndTime()));
+            sb.append(HtmlCardProcessor.renderCardSubtitle(note.getLocation()));
+            sb.append(HtmlCardProcessor.renderCardText(note.getNoteText()
+                    .replaceAll(" ", "&nbsp;")
+                    .replaceAll("\n", "<br>")
+                    .replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")));
+            sb.append(HtmlCardProcessor.getDivEndTag());
+            sb.append(HtmlCardProcessor.getDivEndTag());
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, size)
-                        + "\n" + sb.toString());
+        return new CommandResult(String.format(MESSAGE_SUCCESS + "\n", size), sb.toString());
     }
 }
