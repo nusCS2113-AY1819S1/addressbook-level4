@@ -10,9 +10,12 @@ public class Password {
     /*
      * The password must not contain a whitespace which include " "
      */
+    public static final int MAX_LENGTH_FOR_PASSWORD = 50;
     public static final String PASSWORD_VALIDATION_REGEX = "[\\p{Alnum}]*";
     public static final String MESSAGE_PASSWORD_CONSTRAINTS =
             "Password should only contain alphanumeric characters and no space, and it should not be blank";
+    public static final String MESSAGE_PASSWORD_LENGTH_CONSTRAINTS =
+            "Password should only be less than 50 words";
     private String password;
 
     public Password(){}
@@ -27,6 +30,15 @@ public class Password {
     public static boolean isValidPassword(String test) {
         return test.matches(PASSWORD_VALIDATION_REGEX) && !test.isEmpty ();
 
+    }
+    /**
+     *Return true if userName is longer than {@code MAX_LENGTH_FOR_USERNAME}
+     */
+    public static boolean isPasswordTooLong(String test){
+        if (test.length () > MAX_LENGTH_FOR_PASSWORD){
+            return true;
+        }
+        return false;
     }
 
     @Override

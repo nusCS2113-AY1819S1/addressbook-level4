@@ -41,13 +41,16 @@ public class ParserUtil {
      * Parses a {@code String userName} into a {@code UserName}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code UserName} is invalid.
+     * @throws ParseException if the given {@code UserName} is invalid .
      */
     public static UserName parseUserName(String userName) throws ParseException {
         requireNonNull(userName);
         String trimmedUserName = userName.trim();
         if (!UserName.isValidUserName(trimmedUserName)) {
             throw new ParseException(UserName.MESSAGE_USER_NAME_CONSTRAINTS);
+        }
+        if (UserName.isUserNameTooLong (trimmedUserName)){
+            throw new ParseException(UserName.MESSAGE_USER_NAME_LENGTH_CONSTRAINTS);
         }
         return new UserName (trimmedUserName);
     }
@@ -62,6 +65,9 @@ public class ParserUtil {
         String trimmedPassword = password.trim();
         if (!Password.isValidPassword (trimmedPassword)) {
             throw new ParseException(Password.MESSAGE_PASSWORD_CONSTRAINTS);
+        }
+        if (Password.isPasswordTooLong (trimmedPassword)){
+            throw new ParseException(Password.MESSAGE_PASSWORD_LENGTH_CONSTRAINTS);
         }
         return new Password (trimmedPassword);
     }

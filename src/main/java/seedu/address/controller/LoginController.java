@@ -19,6 +19,8 @@ import seedu.address.commons.events.model.InitInventoryListEvent;
 import seedu.address.commons.events.ui.StartUiEvent;
 import seedu.address.model.LoginInfoManager;
 
+import static seedu.address.model.user.Password.MAX_LENGTH_FOR_PASSWORD;
+import static seedu.address.model.user.UserName.MAX_LENGTH_FOR_USERNAME;
 
 
 /**
@@ -27,6 +29,7 @@ import seedu.address.model.LoginInfoManager;
 public class LoginController {
 
     protected static LoginInfoManager loginInfoManager;
+
     private String username;
     private String password;
     @FXML
@@ -38,7 +41,6 @@ public class LoginController {
     @FXML
     private TextField commandBox;
     private String commandInput;
-    private boolean isPasswordGoingToEnter = false;
     private final Logger logger = LogsCenter.getLogger(LoginController.class);
 
     public LoginController() {
@@ -58,6 +60,12 @@ public class LoginController {
             verifyLoginInfo ();
         }
     }
+
+    /**
+     * Set userName and password according to space
+     * The string before the first space is username and after is password
+     * Error message when space is more than one
+     */
     private void setUserNameAndPassword() {
         String[] splited = commandInput.split("\\s");
         int count = 0;
@@ -105,9 +113,7 @@ public class LoginController {
         verifyLoginInfo ();
     }
     /**
-     * Close loginWindow
-     *
-     * @param e
+     * Close loginWindow when clicked
      */
     @FXML
     private void handleClose(MouseEvent e) {
@@ -122,6 +128,9 @@ public class LoginController {
      * @throws Exception
      */
     public void verifyLoginInfo () {
+        if (!isLengthOfUserNameValid () || !isLengthOfPasswordValid ()){
+            return;
+        }
         LoginUtils loginUtils = new LoginUtils (username, password, loginInfoManager);
         if (!loginUtils.isUsernameEmpty ()) {
             loginError.setText("Please enter username");
@@ -137,6 +146,28 @@ public class LoginController {
             clearLoginInput();
             loginError.setText("wrong username or password");
         }
+    }
+
+    /**
+     *Return false if userName length is more than {@code MAX_LENGTH_FOR_USERNAME}
+     *
+     */
+    private boolean isLengthOfUserNameValid(){
+        if (username.length ()> MAX_LENGTH_FOR_USERNAME){
+            loginError.setText("UserName Length should not be more than 30");
+            return false;
+        }
+        return true;
+    }
+    /**
+     * Return false if password length is more than {@code MAX_LENGTH_FOR_PASSWORD}
+     */
+    private boolean isLengthOfPasswordValid(){
+        if (password.length ()> MAX_LENGTH_FOR_PASSWORD){
+            loginError.setText("Password Length should not be more than 30");
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -158,6 +189,7 @@ public class LoginController {
         username = usernameField.getText();
         username = username.trim ();
     }
+
 
     /**
      * gets the password from passwordField.

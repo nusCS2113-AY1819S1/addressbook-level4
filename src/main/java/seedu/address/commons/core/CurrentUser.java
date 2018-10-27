@@ -1,19 +1,22 @@
 package seedu.address.commons.core;
 
+import seedu.address.model.user.AuthenticationLevel;
+import seedu.address.model.user.UserName;
+
 /**
  * Current user info used by the app
  */
 public class CurrentUser {
 
-    private static String userName;
-    private static String authenticationLevel;
+    private static UserName userName;
+    private static AuthenticationLevel authenticationLevel;
 
     public static String getUserName () {
-        return userName;
+        return userName.toString ();
     }
 
     public static String getAuthenticationLevel () {
-        return authenticationLevel;
+        return authenticationLevel.toString ();
     }
 
     public static LoginInfo getCurrentUser () {
@@ -21,7 +24,7 @@ public class CurrentUser {
         return currentUser;
     }
 
-    public static void setLoginInfo (String userName, String authenticationLevel) {
+    public static void setLoginInfo (UserName userName, AuthenticationLevel authenticationLevel) {
         CurrentUser.userName = userName;
         CurrentUser.authenticationLevel = authenticationLevel;
     }

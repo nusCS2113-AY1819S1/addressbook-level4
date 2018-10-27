@@ -57,17 +57,18 @@ public class LoginUtils {
         if (userInfoInStorage == null) {
             return false;
         }
-        boolean usernameMatch = username.toString ().matches (userInfoInStorage.getUserName ());
+        boolean usernameMatch = username.toString ().matches (userInfoInStorage.getUserNameString ());
 
-        String securePassword = userInfoInStorage.getPassword ();
+        String securePassword = userInfoInStorage.getPasswordString ();
         boolean passwordMatch = PasswordUtils.verifyUserPassword(password.toString (), securePassword);
 
         if (passwordMatch && usernameMatch) {
-            CurrentUser.setLoginInfo (username.toString (), userInfoInStorage.getAuthenticationLevel ());
+            CurrentUser.setLoginInfo (username, userInfoInStorage.getAuthenticationLevel ());
             logger.info (String.format ("User has login with user name : " + CurrentUser.getUserName ()));
             return true;
         }
         return false;
     }
+
 
 }

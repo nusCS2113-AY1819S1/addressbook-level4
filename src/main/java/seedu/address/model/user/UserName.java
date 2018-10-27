@@ -11,8 +11,10 @@ public class UserName {
      */
     public static final String USERNAME_VALIDATION_REGEX = "[\\p{Alnum}]*";
     public static final String MESSAGE_USER_NAME_CONSTRAINTS =
-            "UserName should only contain alphanumeric characters and no space, and it should not be blank";
-
+            "UserName should only contain alphanumeric characters and no space,\nand should not be blank";
+    public static final int MAX_LENGTH_FOR_USERNAME = 30;
+    public static final String MESSAGE_USER_NAME_LENGTH_CONSTRAINTS =
+            "UserName should only be less than 30 words";
     private String userName;
 
     public UserName(){}
@@ -27,6 +29,16 @@ public class UserName {
      */
     public static boolean isValidUserName(String test) {
         return test.matches(USERNAME_VALIDATION_REGEX) && !test.isEmpty ();
+    }
+
+    /**
+     *Return true if userName is longer than {@code MAX_LENGTH_FOR_USERNAME}
+     */
+    public static boolean isUserNameTooLong(String test){
+        if (test.length () > MAX_LENGTH_FOR_USERNAME){
+            return true;
+        }
+        return false;
     }
 
     @Override
