@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
@@ -16,6 +17,7 @@ import seedu.address.testutil.UserBuilder;
 public class ClearCommandTest {
 
     private CommandHistory commandHistory = new CommandHistory();
+
 
     @Test
     public void execute_emptyAddressBook_success() {
@@ -33,6 +35,7 @@ public class ClearCommandTest {
     public void execute_nonEmptyAddressBook_success() {
         Model model = new ModelManager(getTypicalEventManager(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalEventManager(), new UserPrefs());
+        model.logUser(new UserBuilder().build());
         expectedModel.resetData(new EventManager());
         expectedModel.commitEventManager();
 

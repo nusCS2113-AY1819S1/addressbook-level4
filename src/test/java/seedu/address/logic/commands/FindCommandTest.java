@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 import java.util.Arrays;
 import java.util.Collections;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
@@ -27,9 +28,16 @@ import seedu.address.testutil.UserBuilder;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalEventManager(), new UserPrefs());
+    private Model model;
     private Model expectedModel = new ModelManager(getTypicalEventManager(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
+
+    @Before
+    public void setUp() {
+        User user = new UserBuilder().build();
+        model = new ModelManager(getTypicalEventManager(), new UserPrefs());
+        model.logUser(user);
+    }
 
     @Test
     public void equals() {
@@ -60,9 +68,6 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-        User user = new UserBuilder().build();
-        model.logUser(user);
-
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 0);
         EventContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
@@ -73,9 +78,6 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        User user = new UserBuilder().build();
-        model.logUser(user);
-
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 3);
         EventContainsKeywordsPredicate predicate = preparePredicate("Frisbee Music Dark");
 
