@@ -196,7 +196,7 @@ public class ForumBook implements ReadOnlyForumBook {
      */
     public boolean blockUser(User user) {
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
-            if (user.getIsBlock()) {
+            if (user.isBlock()) {
                 return false;
             } else {
                 user.setIsBlock(true);
