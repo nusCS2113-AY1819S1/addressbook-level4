@@ -73,15 +73,19 @@ Format: `login USERID PASSWORD ROLE`
 
 Examples:
 
-* `login A1234568M zaq1xsw2cde3 member` +
-Logs into Address book with user ID as A1234568M, password as zaq1xsw2cde3 and role as member.
+* `login A1234567M zaq1xsw2cde3 president` +
+Logs into Address book with user ID as A1234567M, password as zaq1xsw2cde3 and role as president.
 
-image::CorrectIdPasswordRole.PNG[width="300"]
-image::Ui.png[width="300"]
+image::DefaultAccountDetails.PNG[width="300"]
 
 [NOTE]
 ====
-Password is case-sensitive!
+The default account login details for logging in when the application is launched for the very first time, can be illustrated in the picture
+below. Enter the login details shown in the picture exactly, as all the login parameters are case-sensitive. Thus, any difference
+in casing between the actual and expected input characters will lead to failure in logging into the application.
+image::DefaultAccountDetails.PNG[width="300"]
+After the user logs in successfully, they should expect to see the main window of the application as shown below.
+image::LoginSuccess.png[width="300"]
 ====
 
 [NOTE]
@@ -110,8 +114,8 @@ Format: `createaccount USERID PASSWORD ROLE`
 
 Examples:
 
-* `createaccount X1234567X zaq1xsw2cde3 member` +
-Creates a new account with user ID as X1234567X, password as zaq1xsw2cde3 and role as member in the address book.
+* `createaccount A1234569M zaq1xsw2cde3 member` +
+Creates a new account with user ID as A1234569M, password as zaq1xsw2cde3 and role as member in the address book.
 
 image::CreateAccountSuccess.PNG[width="300"]
 

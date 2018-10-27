@@ -268,7 +268,7 @@ a list of all the accounts in `LoginBook`.
 
 image::InitialLoginBookList.PNG[width="300"]
 
-Step 2. The user executes `login A1234567M zaq1xsw2cde3 member` command in the input box that matches an account in
+Step 2. The user executes `login A1234568M zaq1xsw2cde3 member` command in the input box that matches an account in
 `LoginBook`. `LogicManager` then calls `ParseCommand(login A1234568M zaq1xsw2cde3 member)` in `AddressBookParser`.
 
 image::CorrectIdPasswordRole.PNG[width="300"]
@@ -299,6 +299,11 @@ Step 9. `Model` calls `setPredicate(updatedRolePredicate)` in `FilteredList`, wh
 whose role is a mismatch with updatedRolePredicate. `filteredLoginDetails` is further updated as shown below.
 
 image::ParseCorrectLoginDetailList.PNG[width="300"]
+
+[NOTE]
+After step 9 is done, there should only be one account left in the list, assuming that the user input the correct login
+details. As the loginbook does not allow duplicate accounts with the same user ID field as another account, there should
+not be two or more accounts left in the list.
 
 [NOTE]
 In step 2, if the user executes `login A1234566M zaq1xsw2cde janitor` command instead, the application will continue with steps
@@ -334,14 +339,14 @@ image::LoginExtendedActivityDiagram.png[width="300"]
 ** Pros: Does not take up a lot of space.
 ** Cons: Harder to read.
 
-===== Aspect: Process flow of hashing of login details in the login process
+===== Aspect: Choice of hashing algorithms to hash login details securely
 
-* **Alternative 1 (current choice):** Encodes input login details when the user is logging in to match the encoded state of login details in loginbook.xml.
-** Pros: Easier to read, and versioning is possible.
-** Cons: XML data file takes up more storage space.
-* **Alternative 2:** Decodes login details in loginbook.xml into normal strings to match the un-encoded state of login details from user input during login.
-** Pros: Does not take up a lot of space.
-** Cons: Harder to read.
+* **Alternative 1 (current choice):** Using Base64 as the encoding and decoding scheme for login details
+** Pros: Easier to implement, in the context of project time constraints
+** Cons: Not as secure compared to other regular hashing algorithms like MD5 with added salt
+* **Alternative 2:** Using MD5 with added salt as a hashing algorithm
+** Pros: More secure than using Base64 as a hashing algorithm
+** Cons: Harder and takes a longer time to implement
 // end::login[]
 
 //tag::budget[]
