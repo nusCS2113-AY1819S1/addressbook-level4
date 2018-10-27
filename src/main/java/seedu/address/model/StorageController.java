@@ -20,7 +20,7 @@ import seedu.address.storage.serializable.XmlSerializableNoteList;
 import seedu.address.storage.serializable.XmlSerializableUserList;
 
 /**
- * This class is a storage controller for the other datasets that work alongside the main person list.
+ * This class is a storage controller for the other datasets that work alongside the main student list.
  */
 public class StorageController {
     private static final String BASE_DIRECTORY = "data/";

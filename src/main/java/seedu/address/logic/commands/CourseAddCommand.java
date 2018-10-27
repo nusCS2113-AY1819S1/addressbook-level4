@@ -13,7 +13,7 @@ import seedu.address.model.course.Course;
 import seedu.address.model.course.CourseManager;
 
 /**
- * Adds a person to the address book.
+ * Adds a student to the address book.
  */
 public class CourseAddCommand extends Command {
 

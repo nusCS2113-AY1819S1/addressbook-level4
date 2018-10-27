@@ -18,7 +18,7 @@ public class ClassListCommand extends Command {
     public static final String COMMAND_WORD = "class list";
 
     public static final String MESSAGE_SUCCESS = "Listed all classes";
-    private static final String HTML_TABLE_TITLE_STUDENT = "Assigned person(s) - %1$s";
+    private static final String HTML_TABLE_TITLE_STUDENT = "Assigned student(s) - %1$s";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {

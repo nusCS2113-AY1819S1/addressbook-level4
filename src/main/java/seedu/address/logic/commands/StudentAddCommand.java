@@ -19,9 +19,9 @@ import seedu.address.model.person.Person;
  */
 public class StudentAddCommand extends Command {
 
-    public static final String COMMAND_WORD = "person add";
+    public static final String COMMAND_WORD = "student add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person into Trajectory. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student into Trajectory. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_MATRIC + "MATRIC_NO"
@@ -39,8 +39,8 @@ public class StudentAddCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 ";
 
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in Trajectory";
+    public static final String MESSAGE_SUCCESS = "New student added: %1$s";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in Trajectory";
 
     private final Person toAdd;
 
@@ -57,7 +57,7 @@ public class StudentAddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
         model.addPerson(toAdd);

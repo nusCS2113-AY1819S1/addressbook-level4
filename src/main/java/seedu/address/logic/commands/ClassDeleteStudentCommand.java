@@ -12,12 +12,12 @@ import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.ClassroomManager;
 
 /**
- * Unassigns an existing person from an existing class.
+ * Unassigns an existing student from an existing class.
  */
 public class ClassDeleteStudentCommand extends Command {
     public static final String COMMAND_WORD = "class delstudent";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unassigns a person from a class"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unassigns a student from a class"
             + " for the system. "
             + "Parameters: "
             + PREFIX_CLASS_NAME + "CLASS_NAME "
@@ -33,7 +33,7 @@ public class ClassDeleteStudentCommand extends Command {
             + ", Module code: %3$s";
     private static final String MESSAGE_FAIL = "Class belonging to module not found!";
 
-    private static final String MESSAGE_CLASSROOM_STUDENT_NOT_FOUND = "This person doesn't exists in class: %1$s";
+    private static final String MESSAGE_CLASSROOM_STUDENT_NOT_FOUND = "This student doesn't exists in class: %1$s";
 
     private Classroom classToUnassignStudent;
     private final String className;
