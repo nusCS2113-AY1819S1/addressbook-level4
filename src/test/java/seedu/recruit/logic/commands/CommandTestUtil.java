@@ -61,8 +61,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_JOB_AMY = "Dancer";
     public static final String VALID_JOB_BOB = "Manager";
-    public static final String VALID_EDUCATION_AMY = "A Level";
-    public static final String VALID_EDUCATION_BOB = "Business Masters";
+    public static final String VALID_EDUCATION_AMY = "ALEVELS";
+    public static final String VALID_EDUCATION_BOB = "MASTER";
     public static final String VALID_SALARY_AMY = "3000";
     public static final String VALID_SALARY_BOB = "3500";
     public static final String VALID_TAG_HUSBAND = "husband";
@@ -317,6 +317,11 @@ public class CommandTestUtil {
         }
 
         @Override
+        public void sortCompanies(Prefix prefix) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public int getCompanyIndexFromName(CompanyName companyName) {
             throw new AssertionError("This method should not be called.");
         };
@@ -367,6 +372,21 @@ public class CommandTestUtil {
         }
 
         @Override
+        public boolean hasJobOffer(CompanyName companyName, JobOffer jobOffer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateJobOfferInSelectedCompany(Company company, JobOffer target, JobOffer editedJobOffer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateJobOfferInCompanyBook(JobOffer target, JobOffer editedJobOffer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteJobOffer(JobOffer jobOffer) {
             throw new AssertionError("This method should not be called.");
         }
@@ -397,12 +417,27 @@ public class CommandTestUtil {
         }
 
         @Override
+        public String getFilteredRecipientJobOfferNames(ArrayList<JobOffer> duplicateJobOffer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public String getFilteredContentJobOfferNames() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
+        public String getFilteredContentJobOfferNames(ArrayList<JobOffer> duplicateJobOffer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public String getFilteredCandidateNames() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getFilteredCandidateNames(ArrayList<Candidate> duplicateCandidates) {
             throw new AssertionError("This method should not be called.");
         }
     }

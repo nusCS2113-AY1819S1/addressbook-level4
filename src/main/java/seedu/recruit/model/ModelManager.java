@@ -3,6 +3,7 @@ package seedu.recruit.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.recruit.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -88,7 +89,9 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedCandidateBook;
     }
 
-    /** Raises an event to indicate the model has changed */
+    /**
+     * Raises an event to indicate the model has changed
+     */
     private void indicateCandidateBookChanged() {
         raise(new CandidateBookChangedEvent(versionedCandidateBook));
     }
@@ -186,7 +189,9 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedCompanyBook;
     }
 
-    /** Raises an event to indicate the model has changed */
+    /**
+     * Raises an event to indicate the model has changed
+     */
     private void indicateCompanyBookChanged() {
         raise(new CompanyBookChangedEvent(versionedCompanyBook));
     }
@@ -225,6 +230,12 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(target, editedCompany);
 
         versionedCompanyBook.updateCompany(target, editedCompany);
+        indicateCompanyBookChanged();
+    }
+
+    @Override
+    public void sortCompanies(Prefix prefix) {
+        versionedCompanyBook.sortCompanies(prefix);
         indicateCompanyBookChanged();
     }
 
@@ -284,11 +295,31 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean hasJobOffer(CompanyName companyName, JobOffer jobOffer) {
+        requireAllNonNull(companyName, jobOffer);
+        return versionedCompanyBook.hasJobOffer(companyName, jobOffer);
+    }
+
+    @Override
+    public void updateJobOfferInSelectedCompany(Company company, JobOffer target, JobOffer editedJobOffer) {
+        requireAllNonNull(company, target, editedJobOffer);
+        versionedCompanyBook.updateJobOfferInCompany(company, target, editedJobOffer);
+        indicateCompanyBookChanged();
+    }
+
+    @Override
+    public void updateJobOfferInCompanyBook(JobOffer target, JobOffer editedJobOffer) {
+        requireAllNonNull(target, editedJobOffer);
+        versionedCompanyBook.updateJobOffer(target, editedJobOffer);
+    }
+
+    @Override
     public void deleteJobOffer(JobOffer jobOffer) {
         requireNonNull(jobOffer);
         versionedCompanyBook.deleteJobOffer(jobOffer);
         indicateCompanyBookChanged();
     }
+
     /**
      * Returns an unmodifiable view of the job lists of all companies {@code Company} backed by the internal list of
      * {@code versionedCompanyBook}
@@ -330,6 +361,30 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /**
+     * @param duplicateJobOffers arraylist of duplicate job offers
+     * @return concatenated string of names of job offers for
+     * email select recipients command minus specified job offers
+     */
+    @Override
+    public String getFilteredRecipientJobOfferNames(ArrayList<JobOffer> duplicateJobOffers) {
+        boolean isDuplicate;
+        StringBuilder output = new StringBuilder();
+        for (JobOffer jobOffer : filteredJobs) {
+            isDuplicate = false;
+            for (JobOffer duplicateJobOffer : duplicateJobOffers) {
+                if (jobOffer.isSameJobOffer(duplicateJobOffer)) {
+                    isDuplicate = true;
+                    break;
+                }
+            }
+            if (!isDuplicate) {
+                output.append(getFilteredRecipientJobOfferNames());
+            }
+        }
+        return output.toString();
+    }
+
+    /**
      * Returns a concatenated string of names of job offers for email select contents command
      */
     @Override
@@ -345,6 +400,31 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /**
+     * @param duplicateJobOffers arraylist of duplicate joboffers
+     * @return a concatenated string of names of job offers
+     * for email select contents command minus specified job offers
+     */
+
+    @Override
+    public String getFilteredContentJobOfferNames(ArrayList<JobOffer> duplicateJobOffers) {
+        boolean isDuplicate;
+        StringBuilder output = new StringBuilder();
+        for (JobOffer jobOffer : filteredJobs) {
+            isDuplicate = false;
+            for (JobOffer duplicateJobOffer : duplicateJobOffers) {
+                if (jobOffer.isSameJobOffer(duplicateJobOffer)) {
+                    isDuplicate = true;
+                    break;
+                }
+            }
+            if (!isDuplicate) {
+                output.append(getFilteredContentJobOfferNames());
+            }
+        }
+        return output.toString();
+    }
+
+    /**
      * Returns a concatenated string of names of candidates for email command
      */
     @Override
@@ -353,6 +433,29 @@ public class ModelManager extends ComponentManager implements Model {
         for (Candidate candidate : filteredCandidates) {
             output.append(candidate.getName().toString());
             output.append("\n");
+        }
+        return output.toString();
+    }
+
+    /**
+     * @param duplicateCandidates Arraylist of duplicate candidates
+     * @return a concatenated string of names of candidates for email command minus duplicate candidates
+     */
+    @Override
+    public String getFilteredCandidateNames(ArrayList<Candidate> duplicateCandidates) {
+        boolean isDuplicate;
+        StringBuilder output = new StringBuilder();
+        for (Candidate candidate : filteredCandidates) {
+            isDuplicate = false;
+            for (Candidate duplicateCandidate : duplicateCandidates) {
+                if (candidate.isSamePerson(duplicateCandidate)) {
+                    isDuplicate = true;
+                    break;
+                }
+            }
+            if (!isDuplicate) {
+                output.append(getFilteredCandidateNames());
+            }
         }
         return output.toString();
     }

@@ -25,7 +25,7 @@ public class AddJobCommand extends Command {
         requireNonNull(model);
         LogicManager.setLogicState("AddJobDetails");
         return new CommandResult(AddJobDetailsCommand.MESSAGE_USAGE);
-    };
+    }
 
 
 

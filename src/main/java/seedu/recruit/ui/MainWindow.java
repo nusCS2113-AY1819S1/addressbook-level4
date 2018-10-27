@@ -20,6 +20,7 @@ import seedu.recruit.commons.core.LogsCenter;
 import seedu.recruit.commons.events.ui.ExitAppRequestEvent;
 import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
+import seedu.recruit.commons.events.ui.ShowEmailPreviewEvent;
 import seedu.recruit.commons.events.ui.ShowHelpRequestEvent;
 import seedu.recruit.logic.Logic;
 import seedu.recruit.model.UserPrefs;
@@ -38,6 +39,8 @@ public class MainWindow extends UiPart<Stage> {
 
     private static CompanyJobDetailsPanel companyJobDetailsPanel;
 
+    private static ShortlistPanel shortlistPanel;
+
     private static StackPane staticPanelViewPlaceholder;
 
     private static Logic logic;
@@ -51,6 +54,7 @@ public class MainWindow extends UiPart<Stage> {
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
+    private EmailPreview emailPreview;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -66,6 +70,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane panelViewPlaceholder;
+
+    @FXML
+    private StackPane shortlistPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -90,6 +97,8 @@ public class MainWindow extends UiPart<Stage> {
         registerAsAnEventHandler(this);
 
         helpWindow = new HelpWindow();
+        emailPreview = new EmailPreview();
+
         staticPanelViewPlaceholder = panelViewPlaceholder;
     }
 
@@ -219,6 +228,19 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the email preview window
+     */
+    public void handleEmailPreview(String preview) {
+        emailPreview.setEmailPreview(preview);
+
+        if (!emailPreview.isShowing()) {
+            emailPreview.show();
+        } else {
+            emailPreview.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -240,6 +262,12 @@ public class MainWindow extends UiPart<Stage> {
         companyJobDetailsPanel = new CompanyJobDetailsPanel(logic.getFilteredCompanyList(),
                 logic.getFilteredCompanyJobList());
         return companyJobDetailsPanel;
+    }
+
+    public static ShortlistPanel getShortlistPanel() {
+        shortlistPanel = new ShortlistPanel(logic.getFilteredPersonList(), logic.getFilteredCompanyList(),
+                logic.getFilteredCompanyJobList());
+        return shortlistPanel;
     }
 
     public static String getDisplayedBook() {
@@ -280,6 +308,40 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Switches the view on panelViewPlaceholder
+     * to the last viewed book.
+     */
+    public static void switchToLastViewedBook() {
+        switch (currentBook) {
+        case "companyBook":
+            if (!getStaticPanelViewPlaceholder().getChildren().isEmpty()) {
+                getStaticPanelViewPlaceholder().getChildren().remove(0);
+                getStaticPanelViewPlaceholder().getChildren().add(getCompanyJobDetailsPanel().getRoot());
+            }
+            break;
+
+        case "candidateBook":
+            if (!getStaticPanelViewPlaceholder().getChildren().isEmpty()) {
+                getStaticPanelViewPlaceholder().getChildren().remove(0);
+                getStaticPanelViewPlaceholder().getChildren().add(getCandidateDetailsPanel().getRoot());
+            }
+            break;
+        default:
+        }
+    }
+
+    /**
+     * Switches the view on panelViewPlaceholder
+     * from Candidate/Company Book to carry out the Shortlist command.
+     */
+    public static void switchToShortlistPanel() {
+        if (!getStaticPanelViewPlaceholder().getChildren().isEmpty()) {
+            getStaticPanelViewPlaceholder().getChildren().remove(0);
+            getStaticPanelViewPlaceholder().getChildren().add(getShortlistPanel().getRoot());
+        }
+    }
+
     void releaseResources() {
         browserPanel.freeResources();
     }
@@ -288,6 +350,12 @@ public class MainWindow extends UiPart<Stage> {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
+    }
+
+    @Subscribe
+    private void handleEmailPreviewEvent(ShowEmailPreviewEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleEmailPreview(event.getEmailPreview());
     }
 
     @Subscribe

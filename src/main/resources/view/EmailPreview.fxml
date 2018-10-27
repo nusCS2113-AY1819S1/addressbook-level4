@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Scene?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.ScrollPane?>
+
+<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+         title="Email Preview" maximized="false">
+    <icons>
+        <Image url="@/images/address_book_32.png" />
+    </icons>
+    <scene>
+        <Scene>
+            <ScrollPane fx:id="scrollPane" />
+        </Scene>
+    </scene>
+</fx:root>

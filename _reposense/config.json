@@ -1,0 +1,30 @@
+{
+  "authors":
+  [
+    {
+      "githubId": "andrewome",
+      "displayName": "AND... EN",
+      "authorNames": ["andrewome"]
+    },
+    {
+      "githubId": "leerachel",
+      "displayName": "RAC...ING",
+      "authorNames": ["leerachel"]
+    },
+    {
+      "githubId": "MingXunSeah",
+      "displayName": "SEA...XUN",
+      "authorNames": ["MingXunSeah"]
+    },
+    {
+      "githubId": "sxqnicholas96",
+      "displayName": "SEA...LAS",
+      "authorNames": ["sxqnicholas96"]
+    },
+    {
+      "githubId": "kianmengtan",
+      "displayName": "TAN...ENG",
+      "authorNames": ["kianmengtan"]
+    }
+  ]
+}

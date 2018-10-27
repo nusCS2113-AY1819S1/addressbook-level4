@@ -3,6 +3,8 @@ package seedu.recruit.model.company;
 import static java.util.Objects.requireNonNull;
 import static seedu.recruit.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -118,6 +120,32 @@ public class UniqueCompanyList implements Iterable<Company> {
         if (!internalList.remove(toRemove)) {
             throw new CompanyNotFoundException();
         }
+    }
+
+    /**
+     * Sorts the companies by name
+     */
+    public void sortByCompanyName() {
+
+        Collections.sort(internalList, new Comparator<Company>() {
+            @Override
+            public int compare(Company o1, Company o2) {
+                return (o1.getCompanyName().toString()).compareTo(o2.getCompanyName().toString());
+            }
+        });
+    }
+
+    /**
+     * Sorts the companies by email
+     */
+    public void sortByEmail() {
+
+        Collections.sort(internalList, new Comparator<Company>() {
+            @Override
+            public int compare(Company o1, Company o2) {
+                return (o1.getEmail().toString()).compareTo(o2.getEmail().toString());
+            }
+        });
     }
 
     public void setCompanyList (UniqueCompanyList replacement) {
