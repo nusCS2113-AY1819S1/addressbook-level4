@@ -57,6 +57,10 @@ Format: `creategroup n/NAME l/LOCATION [t/TAG] ...`  +
 Shortcut Format: `cg n/NAME l/LOCATION [t/TAG] ...` +
 ****
 * Creates a group with the specified NAME, LOCATION and TAG(s)
+* NAME should only contain alphanumeric characters, '-', '[' and ']', and should not be blank
+* LOCATION should only contain alphanumeric characters and '-', and should not be blank
+* TAG(s) are optional and should only contain alphanumeric characters if used
+* TAG(s) should not be blank if used
 * This command is undoable
 ****
 
@@ -65,7 +69,7 @@ Examples:
 * `creategroup n/CS2113 l/LT15 t/java`
 * `cg n/CS2113 l/LT01 t/c t/cpp`
 
-=== Add students a group: `addgroup` `ag`
+=== Add students to a group: `addgroup` `ag`
 Adds student(s) to a group in the student management system +
 Format: `addgroup g/INDEX p/INDEX ...` +
 Shortcut Format: `ag g/INDEX p/INDEX ...` +
