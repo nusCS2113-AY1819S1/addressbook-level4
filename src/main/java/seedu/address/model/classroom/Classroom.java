@@ -45,16 +45,27 @@ public class Classroom {
         this.students = students;
     }
 
-
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(HtmlTableProcessor
-                .renderTableItem(new ArrayList<String>(Arrays
+        builder.append("Class name: ")
+                .append(getClassName())
+                .append(" Module code: ")
+                .append(getModuleCode())
+                .append(" Max Enrollment: ")
+                .append(getMaxEnrollment());
+        return builder.toString();
+    }
+
+    /**
+     * Converts class into html string
+     */
+    public String toClassHtmlString() {
+        return HtmlTableProcessor
+                .renderTableItem(new ArrayList<>(Arrays
                         .asList(className.getValue(),
                                 moduleCode.moduleCode,
-                                maxEnrollment.getValue()))));
-        return builder.toString();
+                                maxEnrollment.getValue())));
     }
 
     /**

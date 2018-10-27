@@ -12,12 +12,12 @@ import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.ClassroomManager;
 
 /**
- * Assigns a student to an existing class.
+ * Unassigns an existing student from an existing class.
  */
-public class ClassAddStudentCommand extends Command {
-    public static final String COMMAND_WORD = "class addstudent";
+public class ClassDeleteStudentCommand extends Command {
+    public static final String COMMAND_WORD = "class delstudent";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a student to a class"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unassigns a student from a class"
             + " for the system. "
             + "Parameters: "
             + PREFIX_CLASS_NAME + "CLASS_NAME "
@@ -28,19 +28,19 @@ public class ClassAddStudentCommand extends Command {
             + PREFIX_MODULE_CODE + "CG1111 "
             + PREFIX_MATRIC + "A6942069M";
 
-    public static final String MESSAGE_SUCCESS = "New student assigned to class: %1$s"
+    public static final String MESSAGE_SUCCESS = "Student unassigned from class: %1$s"
             + ", Class: %2$s"
             + ", Module code: %3$s";
     private static final String MESSAGE_FAIL = "Class belonging to module not found!";
 
-    private static final String MESSAGE_DUPLICATE_CLASSROOM_STUDENT = "This student already exists in class: %1$s";
+    private static final String MESSAGE_CLASSROOM_STUDENT_NOT_FOUND = "This student doesn't exists in class: %1$s";
 
-    private Classroom classToAssignStudent;
+    private Classroom classToUnassignStudent;
     private final String className;
     private final String moduleCode;
     private final String matricNo;
 
-    public ClassAddStudentCommand(String className, String moduleCode, String matricNo) {
+    public ClassDeleteStudentCommand(String className, String moduleCode, String matricNo) {
         requireAllNonNull(className, moduleCode);
         this.className = className;
         this.moduleCode = moduleCode;
@@ -59,27 +59,27 @@ public class ClassAddStudentCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         ClassroomManager classroomManager = ClassroomManager.getInstance();
 
-        classToAssignStudent = classroomManager.findClassroom(className, moduleCode);
-        if (classToAssignStudent == null) {
+        classToUnassignStudent = classroomManager.findClassroom(className, moduleCode);
+        if (classToUnassignStudent == null) {
             return new CommandResult(MESSAGE_FAIL);
         }
 
-        if (classroomManager.isDuplicateClassroomStudent(classToAssignStudent, matricNo)) {
-            throw new CommandException(String.format(MESSAGE_DUPLICATE_CLASSROOM_STUDENT, matricNo));
+        if (!classroomManager.hasClassroomStudent(classToUnassignStudent, matricNo)) {
+            throw new CommandException(String.format(MESSAGE_CLASSROOM_STUDENT_NOT_FOUND, matricNo));
         }
 
-        classroomManager.assignStudent(classToAssignStudent, matricNo);
+        classroomManager.unassignStudent(classToUnassignStudent, matricNo);
         classroomManager.saveClassroomList();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, matricNo,
-                classToAssignStudent.getClassName(), classToAssignStudent.getModuleCode()));
+                classToUnassignStudent.getClassName(), classToUnassignStudent.getModuleCode()));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ClassAddStudentCommand // instanceof handles nulls
-                && classToAssignStudent.equals(((ClassAddStudentCommand) other).classToAssignStudent));
+                || (other instanceof ClassDeleteStudentCommand // instanceof handles nulls
+                && classToUnassignStudent.equals(((ClassDeleteStudentCommand) other).classToUnassignStudent));
 
     }
 }

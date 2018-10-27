@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAXENROLLMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
@@ -20,11 +20,11 @@ public class ClassAddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a class and assigns it to a module"
             + " for the system. "
             + "Parameters: "
-            + PREFIX_CLASSNAME + "CLASS_NAME "
+            + PREFIX_CLASS_NAME + "CLASS_NAME "
             + PREFIX_MODULE_CODE + "MODULE_NAME "
             + PREFIX_MAXENROLLMENT + "ENROLLMENT_SIZE\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_CLASSNAME + "T16 "
+            + PREFIX_CLASS_NAME + "T16 "
             + PREFIX_MODULE_CODE + "CG1111 "
             + PREFIX_MAXENROLLMENT + "20";
 
