@@ -114,6 +114,8 @@ public class Drink {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append(" Selling price: ")
+                .append(getRetailPrice())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
