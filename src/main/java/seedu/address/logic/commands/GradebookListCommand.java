@@ -1,13 +1,13 @@
 package seedu.address.logic.commands;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.gradebook.Gradebook;
 import seedu.address.model.gradebook.GradebookManager;
 import seedu.address.ui.HtmlTableProcessor;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Lists all gradebook components for module in Trajectory to the user.

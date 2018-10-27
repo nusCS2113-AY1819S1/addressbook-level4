@@ -3,14 +3,14 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADEBOOK_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.gradebook.Gradebook;
 import seedu.address.model.gradebook.GradebookManager;
 import seedu.address.ui.HtmlTableProcessor;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Finds gradebook component for module in Trajectory to the user.
@@ -25,11 +25,6 @@ public class GradebookFindCommand extends Command {
             + PREFIX_MODULE_CODE + "CS2113 "
             + PREFIX_GRADEBOOK_ITEM + "Assignment 1";
     public static final String MESSAGE_FIND_SUCCESS = "\nSuccessfully found!";
-//    public static final String MESSAGE_FIND_SUCCESS = "\nSuccessfully found!"
-//            + "\nModule Code: %1$s"
-//            + "\nComponent Name: %2$s"
-//            + "\nMaximum Marks: %3$d"
-//            + "\nWeightage: %4$d";
     public static final String MESSAGE_FIND_FAIL = "\nUnsuccessful find";
 
 
@@ -54,8 +49,7 @@ public class GradebookFindCommand extends Command {
                 Arrays.asList("Module Code", "Component Name", "Maximum Marks", "Weightage"))));
 
         sb.append(HtmlTableProcessor.getTableItemStart());
-            sb.append(HtmlTableProcessor
-                    .renderTableItem(new ArrayList<String>(Arrays
+        sb.append(HtmlTableProcessor.renderTableItem(new ArrayList<String>(Arrays
                             .asList(gradebook.getModuleCode(),
                                     gradebook.getGradeComponentName(),
                                     Integer.toString(gradebook.getGradeComponentMaxMarks()),
