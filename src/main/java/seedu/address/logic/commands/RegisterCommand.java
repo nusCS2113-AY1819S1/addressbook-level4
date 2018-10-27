@@ -53,8 +53,9 @@ public class RegisterCommand extends Command {
 
         Event eventToRegister = filteredEventList.get(targetIndex.getZeroBased());
 
+        String attendeeName = model.getUsername().toString();
         Set<Attendee> attendeeSet = new HashSet<>((Collection) eventToRegister.getAttendees());
-        attendeeSet.add(new Attendee("test")); //TODO
+        attendeeSet.add(new Attendee(attendeeName));
 
         EditEventDescriptor registerEventDescriptor = new EditEventDescriptor();
         registerEventDescriptor.setAttendees(attendeeSet);
