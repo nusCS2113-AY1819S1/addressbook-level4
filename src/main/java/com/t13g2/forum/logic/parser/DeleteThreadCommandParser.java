@@ -7,7 +7,6 @@ import java.util.stream.Stream;
 import com.t13g2.forum.commons.core.Messages;
 import com.t13g2.forum.logic.commands.DeleteThreadCommand;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
-import com.t13g2.forum.model.UnitOfWork;
 
 /**
  * Parses input arguments and creates a new DeleteThreadCommand object
@@ -30,7 +29,6 @@ public class DeleteThreadCommandParser implements Parser<DeleteThreadCommand> {
                  DeleteThreadCommand.MESSAGE_USAGE));
         }
         int threadId = Integer.parseInt(ParserUtil.parseThreadId(argMultimap.getValue(PREFIX_THREAD_ID).get()));
-        UnitOfWork unitOfWork = new UnitOfWork();
 
         return new DeleteThreadCommand(threadId);
     }

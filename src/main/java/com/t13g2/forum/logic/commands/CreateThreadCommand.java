@@ -1,5 +1,8 @@
 package com.t13g2.forum.logic.commands;
 
+import static com.t13g2.forum.commons.core.Messages.MESSAGE_BLOCKED_USER;
+import static com.t13g2.forum.commons.core.Messages.MESSAGE_INVALID_MODULE_CODE;
+import static com.t13g2.forum.commons.core.Messages.MESSAGE_NOT_LOGIN;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_COMMENT_CONTENT;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_TITLE;
@@ -7,12 +10,13 @@ import static java.util.Objects.requireNonNull;
 
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
+import com.t13g2.forum.model.Context;
 import com.t13g2.forum.model.Model;
+import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.model.forum.Module;
-import com.t13g2.forum.storage.forum.Context;
-import com.t13g2.forum.storage.forum.UnitOfWork;
+import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 
 /**
  * Create a new thread to the forum book under certain module
@@ -32,8 +36,6 @@ public class CreateThreadCommand extends Command {
             + PREFIX_COMMENT_CONTENT + "Hi fellows, what is the topic coverage for the final?";
 
     public static final String MESSAGE_SUCCESS = "New thread added: %1$s";
-    public static final String MESSAGE_BLOCKED_USER = "You have been blocked for creating new thread and comment!";
-    public static final String MESSAGE_NOT_LOGIN = "Sorry! You have not login yet.";
     private String moduleCode;
     private ForumThread forumThread;
     private Comment comment;
@@ -53,10 +55,11 @@ public class CreateThreadCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        if (!Context.getInstance().isLoggedIn()) {
+            throw new CommandException(MESSAGE_NOT_LOGIN);
+        }
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
-            if (!model.checkIsLogin()) {
-                throw new CommandException(MESSAGE_NOT_LOGIN);
-            } else if (Context.getInstance().getCurrentUser().isBlock()) {
+            if (Context.getInstance().isCurrentUserBlocked()) {
                 throw new CommandException(MESSAGE_BLOCKED_USER);
             }
             //get the respective module by moduleCode
@@ -70,6 +73,10 @@ public class CreateThreadCommand extends Command {
             //add this comment to unitOfWork meaning save it to the memory repository
             unitOfWork.getCommentRepository().addComment(comment);
             unitOfWork.commit(); //commit meaning add the forum thread update to local database
+        } catch (EntityDoesNotExistException e) {
+            throw new CommandException(MESSAGE_INVALID_MODULE_CODE);
+        } catch (CommandException e) {
+            throw e;
         } catch (Exception e) {
             e.printStackTrace();
         }
