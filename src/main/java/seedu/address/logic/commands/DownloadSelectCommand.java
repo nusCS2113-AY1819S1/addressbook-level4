@@ -1,8 +1,11 @@
 package seedu.address.logic.commands;
 import org.openqa.selenium.*;
+import seedu.address.commons.util.UnzipUtil;
 import seedu.address.logic.*;
 import seedu.address.logic.commands.exceptions.*;
 import seedu.address.model.*;
+
+import java.io.IOException;
 import java.util.*;
 
 public class DownloadSelectCommand extends DownloadAbstract{
@@ -63,13 +66,22 @@ public class DownloadSelectCommand extends DownloadAbstract{
                     downloadFiles(driver);
                     dynamicWaiting();
                     driver.close();
-                    return new CommandResult(moduleCode + "\r\n" + "DOWNLOADED AT: " + downloadFilePath);
 
+                    try{
+                        UnzipUtil.unzipFile(downloadTemporaryPath, UNZIP_FILE_KEYWORD,
+                                currentDirectory, DOWNLOAD_FILE_PATH, moduleCode);
+
+                    } catch (IOException ioe) {
+                        throw new CommandException(MESSAGE_FILE_CORRUPTED);
+                    }
+
+                    return new CommandResult(moduleCode + MESSAGE_SUCCESS
+                            + currentDirectory + DOWNLOAD_FILE_PATH);
                 }
             }
             else{
                 driver.close();
-                throw new CommandException(MODULE_NOT_FOUND_MESSAGE);
+                throw new CommandException(MESSAGE_MODULE_NOT_FOUND);
             }
         }
     }

@@ -11,13 +11,16 @@ public abstract class DownloadAbstract extends Command{
     protected String username;
     protected String password;
     protected String moduleCode;
-    protected String downloadFilePath;
+    protected String currentDirectory;
+    protected String downloadTemporaryPath;
 
     protected static final String CHROMEDRIVER_PATH_WINDOWS = "/chromeDrivers/windows/chromedriver.exe";
 
     protected static final String CHROMEDRIVER_PATH_MAC = "/chromeDrivers/mac/chromedriver";
 
-    protected static final String DOWNLOAD_RELATIVE_PATH = "/notesDownload";
+    protected static final String DOWNLOAD_RELATIVE_PATH = "/tempDownloadStorage";
+
+    protected static final String DOWNLOAD_FILE_PATH = "/notes";
 
     protected static final String IVLE_TITLE = "IVLE";
 
@@ -39,21 +42,29 @@ public abstract class DownloadAbstract extends Command{
 
     protected static final String IVLE_MODULE_LIST_FIELD_ID = "ctl00_ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_ContentPlaceHolder1_ddlModule";
 
-    protected static final String MODULE_NOT_FOUND_MESSAGE = "MODULE CODE NOT FOUND";
+    protected static final String MESSAGE_MODULE_NOT_FOUND = "MODULE CODE NOT FOUND";
+
+    protected static final String MESSAGE_FILE_CORRUPTED = "Downloaded file was corrupted";
+
+    protected static final String MESSAGE_SUCCESS = "\r\n Downloaded file at ";
+
+    protected static final String UNZIP_FILE_KEYWORD = "part";
+
+    protected static final String PARAM_CURRENT_DIRECTORY = "user.dir";
 
     /**
      * initializePaths dynamically sets the download path of the files and location of chromeDriver
      * so that its relative to where this project is stored and what OS the user is using.
      */
     protected void initializePaths(){
-        downloadFilePath = new File("").getAbsolutePath();
+        downloadTemporaryPath = currentDirectory;
         if(System.getProperty("os.name").contains(WINDOWS_OS_NAME)) {
-            System.setProperty("webdriver.chrome.driver",downloadFilePath + CHROMEDRIVER_PATH_WINDOWS);
+            System.setProperty("webdriver.chrome.driver", downloadTemporaryPath + CHROMEDRIVER_PATH_WINDOWS);
         }
         else if(System.getProperty("os.name").contains(MAC_OS_NAME)) {
-            System.setProperty("webdriver.chrome.driver",downloadFilePath + CHROMEDRIVER_PATH_MAC);
+            System.setProperty("webdriver.chrome.driver", downloadTemporaryPath + CHROMEDRIVER_PATH_MAC);
         }
-        downloadFilePath += DOWNLOAD_RELATIVE_PATH;
+        downloadTemporaryPath += DOWNLOAD_RELATIVE_PATH;
     }
 
     /**
@@ -65,7 +76,7 @@ public abstract class DownloadAbstract extends Command{
     protected WebDriver initializeWebDriver(){
         HashMap<String,Object> chromePrefs = new HashMap<>();
         chromePrefs.put("profile.default_content_settings.popups",0);
-        chromePrefs.put("download.default_directory",downloadFilePath);
+        chromePrefs.put("download.default_directory", downloadTemporaryPath);
         chromePrefs.put("browser.setDownloadBehavior", "allow");
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("prefs",chromePrefs);
@@ -149,7 +160,7 @@ public abstract class DownloadAbstract extends Command{
             do {
                 Thread.sleep(100);
             } while(!org.apache.commons.io.FileUtils.listFiles
-                    (new File(downloadFilePath), keyExtentions,false).isEmpty());
+                    (new File(downloadTemporaryPath), keyExtentions,false).isEmpty());
         }
         catch(InterruptedException e){
         }
@@ -161,7 +172,7 @@ public abstract class DownloadAbstract extends Command{
      */
 
     protected void initializeDownloadFolder(){
-        File folder = new File(downloadFilePath);
+        File folder = new File(downloadTemporaryPath);
         File[] filesList = folder.listFiles();
 
         for (int i = 0; i < filesList.length; i++) {
