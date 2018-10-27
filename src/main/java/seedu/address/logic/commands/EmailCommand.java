@@ -141,7 +141,7 @@ public class EmailCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, toSend));
     }
 
-    private static String setErrorMessageForSendFailedException(String e) {
+    public static String setErrorMessageForSendFailedException(String e) {
         if (e.contains("MessageSubmissionExceededException")) {
             return MESSAGE_FAIL + ", " + MESSAGE_MESSAGE_CONSTRAINTS;
         } else if (e.contains("OutboundSpamException")) {
