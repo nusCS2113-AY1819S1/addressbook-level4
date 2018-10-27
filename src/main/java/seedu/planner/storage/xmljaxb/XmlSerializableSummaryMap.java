@@ -36,7 +36,7 @@ public class XmlSerializableSummaryMap extends XmlSerializableClass<SummaryMap> 
         Map<Date, Summary> map = financialPlanner.getSummaryMap().getMap();
         for (Date key : map.keySet()) {
             Summary summary = map.get(key);
-            this.summaryMap.put(key.toString(), new XmlAdaptedSummary(summary));
+            //this.summaryMap.put(key.toString(), new XmlAdaptedSummary(summary));
         }
     }
 
@@ -45,8 +45,8 @@ public class XmlSerializableSummaryMap extends XmlSerializableClass<SummaryMap> 
         SummaryMap summaryMap = new SummaryMap();
         for (String key : this.summaryMap.keySet()) {
             if (key == null) {
-                throw new IllegalValueException(String.format(XmlAdaptedSummary.MISSING_FIELD_MESSAGE_FORMAT,
-                        Date.class.getSimpleName()));
+                //throw new IllegalValueException(String.format(XmlAdaptedSummary.MISSING_FIELD_MESSAGE_FORMAT,
+                        //Date.class.getSimpleName()));
             }
             Summary summary = this.summaryMap.get(key).toModelType();
             summaryMap.add(summary);
