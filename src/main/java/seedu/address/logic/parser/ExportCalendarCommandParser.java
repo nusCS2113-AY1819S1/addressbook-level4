@@ -10,13 +10,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ExportCalendarCommandParser {
 
-    public static final String FILENAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
     /**
      * Parse the given {@code arguments} of Export Command
      */
     public ExportCalendarCommand parse(String args) throws ParseException {
         String filename = args.trim();
-        if (filename.isEmpty() && !filename.matches(FILENAME_VALIDATION_REGEX)) {
+        if (filename.isEmpty() || filename.length() > 255) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                             ExportCalendarCommand.MESSAGE_USAGE));
         }

@@ -47,11 +47,11 @@ public class ExportCalendarCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "filename"
             + "export current user registered event as an iCalender file\n"
-            + "filename should be alpha numerical\n"
+            + "filename should not be empty or longer than 255 character\n"
             + "Example: export myCalendar";
 
     public static final String MESSAGE_EXPORT_SUCCESS =
-            "Your %1$s iCalendar file has been successfully exported";
+            "%1$s event that you registered has been successfully exported to your %1$s iCalendar file";
 
     public static final String MESSAGE_FILE_ERROR = "File %1$s.ics has existed in other folder\n"
             + "or file has errors and cannot be opened";
@@ -71,12 +71,12 @@ public class ExportCalendarCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         User currentUser = new User(new Username("John"), new Password("12345678"));
         try {
-            exportICalenderFile(model, currentUser, fileName);
+            exportICalenderFile(getAttendingEventList(model,currentUser), fileName);
         } catch (IOException e) {
             return new CommandResult(String.format(MESSAGE_FILE_ERROR, fileName));
         }
 
-        return new CommandResult(String.format(MESSAGE_EXPORT_SUCCESS, fileName));
+        return new CommandResult(String.format(MESSAGE_EXPORT_SUCCESS, fileName, model.getFilteredEventList()));
     }
 
     //*****************************Method related to the new export calendar command********************************
@@ -186,17 +186,18 @@ public class ExportCalendarCommand extends Command {
 
     /**
      * Export an iCalendar from user registered event list
-     * @param  model current Event Manager model
-     * @param  currentUser current logged in user
+     *
+     * @param registeredEventList
      * @param  fileName user preferences file name
      * @throws IOException when file stream have problems
      */
-    public static void exportICalenderFile(Model model, User currentUser, String fileName) throws IOException {
+    public static void exportICalenderFile(ObservableList<Event> registeredEventList, String fileName)
+            throws IOException {
         FileOutputStream fileOut = new FileOutputStream(CALENDAR_FILE_PATH
                 + String.format("%1$s.ics", fileName), false);
         CalendarOutputter outPutter = new CalendarOutputter();
 
-        Calendar calendar = writeToUserCalendar(getAttendingEventList(model, currentUser), fileName);
+        Calendar calendar = writeToUserCalendar(registeredEventList, fileName);
 
         outPutter.output(calendar, fileOut);
     }
