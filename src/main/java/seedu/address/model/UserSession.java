@@ -25,8 +25,8 @@ public class UserSession {
 
     public UserSession() {
         final Path userFilePath = Paths.get("users.json");
-        final Username username = new Username("stub");
-        final Password password = new Password("stub");
+        final Username username = new Username("admin");
+        final Password password = new Password("root");
         user = new User(username, password);
         loginStatus = false;
         adminStatus = false;
@@ -36,6 +36,8 @@ public class UserSession {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        createUser(user);
     }
 
     /**

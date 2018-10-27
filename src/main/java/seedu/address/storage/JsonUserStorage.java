@@ -37,11 +37,10 @@ public class JsonUserStorage implements UserStorage {
      */
     @Override
     public void createUser(String username, String password) throws IOException {
-        Gson gson = new Gson();
         JsonObject jsonObject = getJsonObject();
         jsonObject.addProperty(username, password);
 
-        writeJson(gson, jsonObject);
+        writeJson(new Gson(), jsonObject);
         setUserAccounts();
     }
 
@@ -75,11 +74,8 @@ public class JsonUserStorage implements UserStorage {
      * Creates a user account JSON file.
      */
     private void createUserFile() throws IOException {
-        Gson gson = new Gson();
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("admin", "root");
-
-        writeJson(gson, jsonObject);
+        writeJson(new Gson(), jsonObject);
     }
 
     /**
