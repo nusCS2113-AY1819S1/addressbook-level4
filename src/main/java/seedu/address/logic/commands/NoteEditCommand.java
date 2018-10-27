@@ -30,15 +30,35 @@ public class NoteEditCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Note has been edited.";
     public static final String MESSAGE_CANCEL = "Edit note operation has been cancelled.";
     public static final String MESSAGE_INVALID_INDEX = "Invalid input!\nINDEX %1$s is out of bounds.";
+    public static final String MESSAGE_INVALID_DATE_TIME_DIFFERENCE =
+            "Invalid input! Please make sure the start date/time is earlier than the end date/time.";
 
     private final int index;
     private final String moduleCode;
-    private final String date;
+    private final String title;
+    private final String startDate;
+    private final String startTime;
+    private final String endDate;
+    private final String endTime;
+    private final String location;
 
-    public NoteEditCommand(int index, String moduleCode, String date) {
+    public NoteEditCommand(
+            int index,
+            String moduleCode,
+            String title,
+            String startDate,
+            String startTime,
+            String endDate,
+            String endTime,
+            String location) {
         this.index = index;
         this.moduleCode = moduleCode;
-        this.date = date;
+        this.title = title;
+        this.startDate = startDate;
+        this.startTime = startTime;
+        this.endDate = endDate;
+        this.endTime = endTime;
+        this.location = location;
     }
 
     @Override
@@ -52,21 +72,45 @@ public class NoteEditCommand extends Command {
 
         Note noteToEdit = noteManager.getNoteAt(index - 1);
 
-        if (!moduleCode.isEmpty()) {
-            noteToEdit.setModuleCode(moduleCode);
-        }
-
-        if (!date.isEmpty()) {
-            noteToEdit.setDate(date);
-        }
+        // TODO: Validate date & time difference for 'start' and 'end' here
 
         NoteTextEditWindow noteTextEditWindow = new NoteTextEditWindow(noteToEdit);
         noteTextEditWindow.showAndWait();
 
         if (!noteTextEditWindow.isCancelled()) {
+            if (!moduleCode.isEmpty()) {
+                noteToEdit.setModuleCode(moduleCode);
+            }
+
+            if (!title.isEmpty()) {
+                noteToEdit.setTitle(title);
+            }
+
+            if (!startDate.isEmpty()) {
+                noteToEdit.setStartDate(startDate);
+            }
+
+            if (!startTime.isEmpty()) {
+                noteToEdit.setStartTime(startTime);
+            }
+
+            if (!endDate.isEmpty()) {
+                noteToEdit.setEndDate(endDate);
+            }
+
+            if (!endTime.isEmpty()) {
+                noteToEdit.setEndTime(endTime);
+            }
+
+            if (!location.isEmpty()) {
+                noteToEdit.setLocation(location);
+            }
+
             noteManager.saveNoteList();
 
-            return new CommandResult(MESSAGE_SUCCESS);
+            String noteList = noteManager.getHtmlNoteList();
+
+            return new CommandResult(MESSAGE_SUCCESS, noteList);
         } else {
             return new CommandResult(MESSAGE_CANCEL);
         }

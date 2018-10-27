@@ -50,18 +50,4 @@ public class NoteAddCommandParserTest {
 
         assertNotNull(noteAddCommand);
     }
-
-    @Test
-    public void parse_missingMandatoryFields_throwsParseException() throws ParseException {
-        String expectedMessage = String.format(
-                Messages.MESSAGE_INVALID_COMMAND_FORMAT, NoteAddCommand.MESSAGE_USAGE);
-
-        // missing mandatory field argument
-        String args = " " + PREFIX_NOTE_DATE + "1/2/2020";
-
-        thrown.expect(ParseException.class);
-        thrown.expectMessage(expectedMessage);
-
-        parser.parse(args);
-    }
 }
