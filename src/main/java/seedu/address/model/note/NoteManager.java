@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.StorageController;
 import seedu.address.storage.adapter.XmlAdaptedNote;
+import seedu.address.ui.HtmlCardProcessor;
 
 /**
  * Represents the in-memory model of the Note data.
@@ -46,6 +47,40 @@ public class NoteManager {
     public void deleteNote(int index) {
         notes.remove(getNoteAt(index));
         setFilteredNotes(currentFilter);
+    }
+
+    public String getHtmlNoteList() {
+        StringBuilder sb = new StringBuilder();
+
+        int listId = 1;
+
+        for (Note note: filteredNotes) {
+            sb.append(HtmlCardProcessor.getCardStart());
+
+            if (note.getTitle().trim().isEmpty()) {
+                sb.append(HtmlCardProcessor.renderCardHeader(
+                        "h4", "#" + listId + "&nbsp;&nbsp;" + HtmlCardProcessor.CARD_NO_TITLE));
+            } else {
+                sb.append(HtmlCardProcessor.renderCardHeader(
+                        "h4", "#" + listId + "&nbsp;&nbsp;" + note.getTitle()));
+            }
+
+            sb.append(HtmlCardProcessor.getCardBodyStart());
+            sb.append(HtmlCardProcessor.renderCardTitle(note.getModuleCode()));
+            // TODO: Check if note contains a date, otherwise do not render date subtitle
+            sb.append(HtmlCardProcessor.renderCardSubtitle(
+                    "From " + note.getStartDate() + " " + note.getStartTime()
+                            + " to " + note.getEndDate() + " " + note.getEndTime()));
+            sb.append(HtmlCardProcessor.renderCardSubtitle(note.getLocation()));
+            sb.append(HtmlCardProcessor.renderCardText(HtmlCardProcessor.adaptToHtml(note.getNoteText())));
+            sb.append(HtmlCardProcessor.getDivEndTag()); // end of card-body
+
+            sb.append(HtmlCardProcessor.getDivEndTag()); // end of card
+
+            listId++;
+        }
+
+        return sb.toString();
     }
 
     /**

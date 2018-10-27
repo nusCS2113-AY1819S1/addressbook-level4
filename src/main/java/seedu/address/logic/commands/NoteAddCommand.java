@@ -37,7 +37,7 @@ public class NoteAddCommand extends Command {
             + PREFIX_NOTE_START_DATE + "30-10-2020 "
             + PREFIX_NOTE_LOCATION + "Columbia, Schermerhorn 614";
 
-    public static final String MESSAGE_SUCCESS = "Note has been added to %1$s.";
+    public static final String MESSAGE_SUCCESS = "Note has been added.";
     public static final String MESSAGE_CANCEL = "Note creation has been cancelled.";
 
     private Note noteToAdd;
@@ -58,7 +58,9 @@ public class NoteAddCommand extends Command {
             noteManager.addNote(noteToAdd);
             noteManager.saveNoteList();
 
-            return new CommandResult(String.format(MESSAGE_SUCCESS, noteToAdd.getModuleCode()));
+            String noteList = noteManager.getHtmlNoteList();
+
+            return new CommandResult(MESSAGE_SUCCESS, noteList);
         } else {
             return new CommandResult(MESSAGE_CANCEL);
         }

@@ -5,9 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.note.Note;
 import seedu.address.model.note.NoteManager;
-import seedu.address.ui.HtmlCardProcessor;
 
 /**
  * Lists notes based on given predicate.
@@ -44,29 +42,9 @@ public class NoteListCommand extends Command {
             return new CommandResult(String.format(MESSAGE_NOT_FOUND));
         }
 
-        StringBuilder sb = new StringBuilder();
-
-        int listId = 1;
         int size = noteManager.getFilteredNotes().size();
+        String noteList = noteManager.getHtmlNoteList();
 
-        for (Note note: noteManager.getFilteredNotes()) {
-            sb.append(HtmlCardProcessor.getCardStartV2());
-            sb.append(HtmlCardProcessor.renderCardHeader(
-                    "h4", "#" + listId++ + "&nbsp;&nbsp;" + note.getTitle()));
-            sb.append(HtmlCardProcessor.getCardBodyStart());
-            sb.append(HtmlCardProcessor.renderCardTitle(note.getModuleCode()));
-            sb.append(HtmlCardProcessor.renderCardSubtitle(
-                    "From " + note.getStartDate() + " " + note.getStartTime()
-                            + " to " + note.getEndDate() + " " + note.getEndTime()));
-            sb.append(HtmlCardProcessor.renderCardSubtitle(note.getLocation()));
-            sb.append(HtmlCardProcessor.renderCardText(note.getNoteText()
-                    .replaceAll(" ", "&nbsp;")
-                    .replaceAll("\n", "<br>")
-                    .replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")));
-            sb.append(HtmlCardProcessor.getDivEndTag());
-            sb.append(HtmlCardProcessor.getDivEndTag());
-        }
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS + "\n", size), sb.toString());
+        return new CommandResult(String.format(MESSAGE_SUCCESS, size), noteList);
     }
 }

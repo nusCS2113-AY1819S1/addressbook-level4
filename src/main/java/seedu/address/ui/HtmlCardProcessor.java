@@ -5,16 +5,23 @@ package seedu.address.ui;
  */
 public class HtmlCardProcessor {
 
-    public static String getCardStart() {
-        return "<div class=\"card\">";
-    }
+    public static final String CARD_NO_TITLE = "&lt;No Title&gt;";
 
-    public static String getCardStartV2() {
+    /**
+     * The top-most tag required to render a card in HTML.
+     */
+    public static String getCardStart() {
         return "<div class=\"card text-white bg-primary mb-3\">";
     }
 
     /**
-     * This method renders an h3 header to the card.
+     * Constructs a card header section in the card.
+     *
+     * Uses the header style {@code headingType} specified.
+     *
+     * @param headingType
+     * @param header
+     * @return string containing the HTML card header tag
      */
     public static String renderCardHeader(String headingType, String header) {
         StringBuilder sb = new StringBuilder();
@@ -26,6 +33,12 @@ public class HtmlCardProcessor {
         return sb.toString();
     }
 
+    /**
+     * Constructs a card title section in the card.
+     *
+     * @param title
+     * @return string containing the HTML card title tag
+     */
     public static String renderCardTitle(String title) {
         StringBuilder sb = new StringBuilder();
 
@@ -36,6 +49,12 @@ public class HtmlCardProcessor {
         return sb.toString();
     }
 
+    /**
+     * Constructs a card subtitle section in the card.
+     *
+     * @param subtitle
+     * @return string containing the HTML card subtitle tag
+     */
     public static String renderCardSubtitle(String subtitle) {
         StringBuilder sb = new StringBuilder();
 
@@ -46,14 +65,12 @@ public class HtmlCardProcessor {
         return sb.toString();
     }
 
-    public static String getCardBodyStart() {
-        return "<div class=\"card-body\">\n";
-    }
-
-    public static String getDivEndTag() {
-        return "</div>\n";
-    }
-
+    /**
+     * Constructs a card text section in the card.
+     *
+     * @param text
+     * @return string containing the HTML card text tag
+     */
     public static String renderCardText(String text) {
         StringBuilder sb = new StringBuilder();
 
@@ -75,5 +92,32 @@ public class HtmlCardProcessor {
         sb.append(getDivEndTag());
 
         return sb.toString();
+    }
+
+    public static String getCardBodyStart() {
+        return "<div class=\"card-body\">\n";
+    }
+
+    public static String getDivEndTag() {
+        return "</div>\n";
+    }
+
+    /**
+     * This method converts the string's escape characters to
+     * HTML readable escape characters.
+     *
+     * Characters '<' and '>' are replaced first to prevent
+     * user input to be identified as HTML tags.
+     *
+     * @param text
+     * @return an HTM adapted string
+     */
+    public static String adaptToHtml(String text) {
+        return text
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll(" ", "&nbsp;")
+                .replaceAll("\t", "&emsp;&emsp;")
+                .replaceAll("\n", "<br>");
     }
 }

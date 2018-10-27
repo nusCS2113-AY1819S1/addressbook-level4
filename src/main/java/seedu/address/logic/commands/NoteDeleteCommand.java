@@ -38,7 +38,9 @@ public class NoteDeleteCommand extends Command {
             noteManager.deleteNote(index - 1);
             noteManager.saveNoteList();
 
-            return new CommandResult(MESSAGE_SUCCESS);
+            String noteList = noteManager.getHtmlNoteList();
+
+            return new CommandResult(MESSAGE_SUCCESS, noteList);
         }
     }
 }

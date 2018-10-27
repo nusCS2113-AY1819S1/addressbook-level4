@@ -108,7 +108,9 @@ public class NoteEditCommand extends Command {
 
             noteManager.saveNoteList();
 
-            return new CommandResult(MESSAGE_SUCCESS);
+            String noteList = noteManager.getHtmlNoteList();
+
+            return new CommandResult(MESSAGE_SUCCESS, noteList);
         } else {
             return new CommandResult(MESSAGE_CANCEL);
         }
