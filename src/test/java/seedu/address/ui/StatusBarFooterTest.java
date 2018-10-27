@@ -5,7 +5,7 @@ import static seedu.address.testutil.EventsUtil.postNow;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
-import static seedu.address.ui.StatusBarFooter.TOTAL_PERSONS_STATUS;
+import static seedu.address.ui.StatusBarFooter.TOTAL_PERSONS_GROUPS_STATUS;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -32,6 +32,7 @@ public class StatusBarFooterTest extends GuiUnitTest {
             new AddressBookBuilder().withPerson(ALICE).build());
 
     private static final int INITIAL_TOTAL_PERSONS = 0;
+    private static final int INITIAL_TOTAL_GROUPS = 0;
 
     private static final Clock originalClock = StatusBarFooter.getClock();
     private static final Clock injectedClock = Clock.fixed(Instant.now(), ZoneId.systemDefault());
@@ -52,7 +53,7 @@ public class StatusBarFooterTest extends GuiUnitTest {
 
     @Before
     public void setUp() {
-        StatusBarFooter statusBarFooter = new StatusBarFooter(STUB_SAVE_LOCATION, INITIAL_TOTAL_PERSONS);
+        StatusBarFooter statusBarFooter = new StatusBarFooter(STUB_SAVE_LOCATION, INITIAL_TOTAL_PERSONS, INITIAL_TOTAL_GROUPS);
         uiPartRule.setUiPart(statusBarFooter);
 
         statusBarFooterHandle = new StatusBarFooterHandle(statusBarFooter.getRoot());
@@ -62,25 +63,25 @@ public class StatusBarFooterTest extends GuiUnitTest {
     public void display() {
         // initial state
         assertStatusBarContent(RELATIVE_PATH.resolve(STUB_SAVE_LOCATION).toString(), SYNC_STATUS_INITIAL,
-                String.format(TOTAL_PERSONS_STATUS, INITIAL_TOTAL_PERSONS));
+                String.format(TOTAL_PERSONS_GROUPS_STATUS, INITIAL_TOTAL_PERSONS, INITIAL_TOTAL_PERSONS));
 
         // after address book is updated
         postNow(EVENT_STUB);
         assertStatusBarContent(RELATIVE_PATH.resolve(STUB_SAVE_LOCATION).toString(),
                 String.format(SYNC_STATUS_UPDATED, new Date(injectedClock.millis()).toString()),
-                String.format(TOTAL_PERSONS_STATUS, EVENT_STUB.data.getPersonList().size()));
+                String.format(TOTAL_PERSONS_GROUPS_STATUS, EVENT_STUB.data.getPersonList().size(), EVENT_STUB.data.getGroupList().size()));
     }
 
     /**
      * Asserts that the save location matches that of {@code expectedSaveLocation}, the
      * sync status matches that of {@code expectedSyncStatus}, and the total persons matches that of
-     * {@code expectedTotalPersonsStatus}.
+     * {@code expectedTotalPersonsGroupsStatus}.
      */
     private void assertStatusBarContent(String expectedSaveLocation, String expectedSyncStatus,
-                                        String expectedTotalPersonsStatus) {
+                                        String expectedTotalPersonsGroupsStatus) {
         assertEquals(expectedSaveLocation, statusBarFooterHandle.getSaveLocation());
         assertEquals(expectedSyncStatus, statusBarFooterHandle.getSyncStatus());
-        assertEquals(expectedTotalPersonsStatus, statusBarFooterHandle.getTotalPersonsStatus());
+        assertEquals(expectedTotalPersonsGroupsStatus, statusBarFooterHandle.getTotalPersonsGroupsStatus());
         guiRobot.pauseForHuman();
     }
 

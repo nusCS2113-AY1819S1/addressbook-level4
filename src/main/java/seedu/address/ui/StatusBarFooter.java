@@ -23,7 +23,7 @@ public class StatusBarFooter extends UiPart<Region> {
 
     public static final String SYNC_STATUS_INITIAL = "Not updated yet in this session";
     public static final String SYNC_STATUS_UPDATED = "Last Updated: %s";
-    public static final String TOTAL_PERSONS_STATUS = "%d person(s) total";
+    public static final String TOTAL_PERSONS_GROUPS_STATUS = "%d person(s) total  |  %d group(s) total";
 
     /**
      * Used to generate time stamps.
@@ -42,16 +42,16 @@ public class StatusBarFooter extends UiPart<Region> {
     @FXML
     private StatusBar syncStatus;
     @FXML
-    private StatusBar totalPersonsStatus;
+    private StatusBar totalPersonsGroupsStatus;
     @FXML
     private StatusBar saveLocationStatus;
 
 
-    public StatusBarFooter(Path saveLocation, int totalPersons) {
+    public StatusBarFooter(Path saveLocation, int totalPersons, int totalGroups) {
         super(FXML);
         setSyncStatus(SYNC_STATUS_INITIAL);
         setSaveLocation(Paths.get(".").resolve(saveLocation).toString());
-        setTotalPersons(totalPersons);
+        setTotalPersonsGroups(totalPersons, totalGroups);
         registerAsAnEventHandler(this);
     }
 
@@ -77,8 +77,8 @@ public class StatusBarFooter extends UiPart<Region> {
         Platform.runLater(() -> syncStatus.setText(status));
     }
 
-    private void setTotalPersons(int totalPersons) {
-        Platform.runLater(() -> totalPersonsStatus.setText(String.format(TOTAL_PERSONS_STATUS, totalPersons)));
+    private void setTotalPersonsGroups(int totalPersons, int totalGroups) {
+        Platform.runLater(() -> totalPersonsGroupsStatus.setText(String.format(TOTAL_PERSONS_GROUPS_STATUS, totalPersons, totalGroups)));
     }
 
     @Subscribe
@@ -87,6 +87,6 @@ public class StatusBarFooter extends UiPart<Region> {
         String lastUpdated = new Date(now).toString();
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
         setSyncStatus(String.format(SYNC_STATUS_UPDATED, lastUpdated));
-        setTotalPersons(abce.data.getPersonList().size());
+        setTotalPersonsGroups(abce.data.getPersonList().size(), abce.data.getGroupList().size());
     }
 }
