@@ -23,11 +23,21 @@ public class Revenue {
         return test.matches(QUANTITY_VALIDATION_REGEX);
     }
 
+    /**
+     * Increase revenue
+     * @param price
+     * @param quantity
+     */
     public void increase(String price, String quantity) {
         this.value = Float.toString(
                 Float.parseFloat(value) + (Float.parseFloat(price) * Float.parseFloat(quantity)));
     }
 
+    /**
+     * decrease revenue
+     * @param price
+     * @param quantity
+     */
     public void decrease(String price, String quantity) {
         this.value = Float.toString(
                 Float.parseFloat(value) - (Float.parseFloat(price) * Float.parseFloat(quantity)));

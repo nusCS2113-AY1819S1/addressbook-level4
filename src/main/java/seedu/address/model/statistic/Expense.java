@@ -1,5 +1,9 @@
 package seedu.address.model.statistic;
 
+
+/**
+ * Represents Inventory in the month's Statistic
+ */
 public class Expense {
     private static final String QUANTITY_VALIDATION_REGEX = "[-+]?[0-9]*\\.?[0-9]+";
     private volatile String value;
@@ -15,7 +19,9 @@ public class Expense {
         value = revenue;
     }
 
-    public String getValue() { return value; }
+    public String getValue() {
+        return value;
+    }
 
     public void setValue(String value) {
         this.value = value;
@@ -25,11 +31,21 @@ public class Expense {
         return test.matches(QUANTITY_VALIDATION_REGEX);
     }
 
+    /**
+     * Increase expense
+     * @param price
+     * @param quantity
+     */
     public void increase(String price, String quantity) {
         this.value = Float.toString(
                 Float.parseFloat(value) + (Float.parseFloat(price) * Float.parseFloat(quantity)));
     }
 
+    /**
+     * Decrease expense
+     * @param price
+     * @param quantity
+     */
     public void decrease(String price, String quantity) {
         this.value = Float.toString(
                 Float.parseFloat(value) - (Float.parseFloat(price) * Float.parseFloat(quantity)));

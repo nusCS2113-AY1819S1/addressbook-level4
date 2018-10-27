@@ -19,7 +19,9 @@ public class Inventory {
         value = revenue;
     }
 
-    public String getValue() { return value; }
+    public String getValue() {
+        return value;
+    }
 
     public void setValue(String value) {
         this.value = value;
@@ -29,11 +31,21 @@ public class Inventory {
         return test.matches(QUANTITY_VALIDATION_REGEX);
     }
 
+    /**
+     * increase inventory
+     * @param price
+     * @param quantity
+     */
     public void increase(String price, String quantity) {
         this.value = Float.toString(
                 Float.parseFloat(value) + (Float.parseFloat(price) * Float.parseFloat(quantity)));
     }
 
+    /**
+     * decrease inventory
+     * @param price
+     * @param quantity
+     */
     public void decrease(String price, String quantity) {
         this.value = Float.toString(
                 Float.parseFloat(value) - (Float.parseFloat(price) * Float.parseFloat(quantity)));

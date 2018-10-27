@@ -47,9 +47,13 @@ public class Statistic {
         return revenue;
     }
 
-    public Inventory getInventory() { return inventory; }
+    public Inventory getInventory() {
+        return inventory;
+    }
 
-    public Expense getExpense() { return expense; }
+    public Expense getExpense() {
+        return expense;
+    }
 
     /**
      * Increases the Revenue
