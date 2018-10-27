@@ -2,6 +2,7 @@ package seedu.address.commons.util;
 
 import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.toMap;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,9 +36,9 @@ import seedu.address.model.tag.Tag;
 public class DistributeUtil {
 
     public static final String MESSAGE_DUPLICATE_GROUP = "There exist another group with the same name.";
-    private static final String MESSAGE_MISSING_GROUP = "Group is not found.";
-    private static final String MESSAGE_SHUFFLE_ERROR = "There is a problem shuffling the people in the address book.";
-    private static final String GROUP_LOCATION = "UNKNOWN";
+    public static final String MESSAGE_INDEX_NEGATIVE = "Index should be positive.";
+    public static final String MESSAGE_MISSING_GROUP = "Group is not found.";
+    public static final String GROUP_LOCATION = "UNKNOWN";
     private Model model;
     private CommandHistory commandHistory = new CommandHistory();
 
@@ -70,6 +71,7 @@ public class DistributeUtil {
      * @return return the Person object when nationality matches.
      */
     public Person findPerson(Nationality key, LinkedList<Person> randomAllPersonArrayList) {
+        requireAllNonNull(key, randomAllPersonArrayList);
         for (Person p : randomAllPersonArrayList) {
             if (p.getNationality().equals(key)) {
                 Person tempPerson = p;
@@ -87,12 +89,8 @@ public class DistributeUtil {
      * @return return a shuffled Person List
      */
     public LinkedList<Person> shuffle(LinkedList<Person> allPerson, Random seed) {
-        requireNonNull(allPerson);
-        try {
-            Collections.shuffle(allPerson, seed);
-        } catch (UnsupportedOperationException e) {
-            throw new UnsupportedOperationException(MESSAGE_SHUFFLE_ERROR);
-        }
+        requireAllNonNull(allPerson, seed);
+        Collections.shuffle(allPerson, seed);
         return allPerson;
     }
 
@@ -102,6 +100,7 @@ public class DistributeUtil {
      * Returns a integer value which represent the number of different nationalities
      */
     public Map<Nationality, Long> numberOfDifferentNationality(LinkedList<Person> allPerson) {
+        requireNonNull(allPerson);
         return allPerson.stream().collect(Collectors.groupingBy(e -> e.getNationality(), Collectors.counting()));
     }
 
@@ -109,6 +108,7 @@ public class DistributeUtil {
      * This function will sort the map that holds the number of people with different nationalities.
      */
     public Map<Nationality, Long> paxPerNationality(Map<Nationality, Long> numberOfNationality) {
+        requireNonNull(numberOfNationality);
         return numberOfNationality.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
                 .collect(toMap(e -> e.getKey(), e -> e.getValue(), (e1, e2) -> e2,
                         LinkedHashMap::new));
@@ -165,6 +165,7 @@ public class DistributeUtil {
      */
     public void filterGender(LinkedList<Person> allPerson,
                              LinkedList<Person> filteredGender, String gender) {
+        requireAllNonNull(allPerson, filteredGender, gender);
         for (Person p : allPerson) {
             if (p.getGender().toString().equals(gender)) {
                 filteredGender.add(p);
@@ -177,6 +178,10 @@ public class DistributeUtil {
      * Index shown to user will start from 1.
      */
     public String groupNameConcatenation (int index, String groupName, Model model) throws CommandException {
+        requireAllNonNull(index, groupName, model);
+        if (index < 0) {
+            throw new CommandException(MESSAGE_INDEX_NEGATIVE);
+        }
         index = index + 1;
         groupName = groupName + String.valueOf(index);
         if (existDuplicateGroup(groupName, model)) {
@@ -208,6 +213,7 @@ public class DistributeUtil {
      * @throws CommandException if there exist a duplicate groupName
      */
     public void doesGroupNameExist(int index, String groupName, Model model) throws CommandException {
+        requireAllNonNull(index, groupName, model);
         for (int i = index; i > 0; i--) {
             groupNameConcatenation(i, groupName, model);
         }
@@ -219,6 +225,7 @@ public class DistributeUtil {
      * @return returns the group object that has been created.
      */
     public Group groupBuilder(String toCreateGroupName) {
+        requireNonNull(toCreateGroupName);
         GroupName parseGroupName = new GroupName(toCreateGroupName);
         GroupLocation parseGroupLocation = new GroupLocation(GROUP_LOCATION);
         Set<Tag> tags = new HashSet<>();
@@ -229,7 +236,8 @@ public class DistributeUtil {
      * @param group : Group object to be created.
      * @throws CommandException : if there exist another group with the same object.
      */
-    public void createGroupWithoutCommit(Group group) throws CommandException {
+    public void createGroupWithoutCommit(Group group, Model model) throws CommandException {
+        requireAllNonNull(group, model);
         CreateGroupCommand createGroupCommand = new CreateGroupCommand(group);
         createGroupCommand.setShouldCommit(false);
         createGroupCommand.execute(model, commandHistory);
@@ -240,7 +248,8 @@ public class DistributeUtil {
      * @param addGroup : AddGroup Object to be executed.
      * @throws CommandException : When there is an Invalid Group or Person Index found.
      */
-    public void addPersonIntoGroupWithoutCommit(AddGroup addGroup) throws CommandException {
+    public void addPersonIntoGroupWithoutCommit(AddGroup addGroup, Model model) throws CommandException {
+        requireAllNonNull(addGroup, model);
         AddGroupCommand personToAdd = new AddGroupCommand(addGroup);
         personToAdd.setShouldCommit(false);
         personToAdd.execute(model, commandHistory);
@@ -253,6 +262,7 @@ public class DistributeUtil {
      * @return Return the Index value of the group.
      */
     public Index returnGroupIndex(Group group, Model model) {
+        requireAllNonNull(group, model);
         ObservableList<Group> allGroups = model.getFilteredGroupList();
         for (int i = 0; i < allGroups.size(); i++) {
             if (group.isSameGroup(allGroups.get(i))) {
@@ -276,7 +286,7 @@ public class DistributeUtil {
         for (int i = 0; i < groupArrayList.size(); i++) {
             String toCreateGroupName = groupNameConcatenation(i, groupName, model);
             Group newGroup = groupBuilder(toCreateGroupName);
-            createGroupWithoutCommit(newGroup);
+            createGroupWithoutCommit(newGroup, model);
             Index groupIndex = returnGroupIndex(newGroup, model);
             if (groupIndex.getOneBased() == 0) {
                 throw new CommandException(MESSAGE_MISSING_GROUP);
@@ -290,7 +300,7 @@ public class DistributeUtil {
                         Set<Index> personIndices = new HashSet<>();
                         personIndices.add(Index.fromZeroBased(k));
                         AddGroup addSinglePersonIntoGroup = new AddGroup(groupIndex, personIndices);
-                        addPersonIntoGroupWithoutCommit(addSinglePersonIntoGroup);
+                        addPersonIntoGroupWithoutCommit(addSinglePersonIntoGroup, model);
                     }
                 }
             }
