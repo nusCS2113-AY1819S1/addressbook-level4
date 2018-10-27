@@ -16,14 +16,17 @@ public class EmailContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("wow@gmail.com");
         List<String> secondPredicateKeywordList = Arrays.asList("wow@gmail.com", "wow2@gmail.com");
 
-        EmailContainsKeywordsPredicate firstPredicate = new EmailContainsKeywordsPredicate(firstPredicateKeywordList);
-        EmailContainsKeywordsPredicate secondPredicate = new EmailContainsKeywordsPredicate(secondPredicateKeywordList);
+        EmailContainsKeywordsPredicate firstPredicate =
+                new EmailContainsKeywordsPredicate(firstPredicateKeywordList);
+        EmailContainsKeywordsPredicate secondPredicate =
+                new EmailContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        EmailContainsKeywordsPredicate firstPredicateCopy = new EmailContainsKeywordsPredicate(firstPredicateKeywordList);
+        EmailContainsKeywordsPredicate firstPredicateCopy =
+                new EmailContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
