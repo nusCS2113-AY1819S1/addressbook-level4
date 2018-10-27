@@ -274,7 +274,7 @@ public class DistributeUtilTest {
 
         //check if model is null
         Group expectedGroup = new Group(new GroupName("TestGroup"), new GroupLocation("UNKNOWN"), new HashSet<>());
-        Assert.assertThrows(NullPointerException.class, () -> distUtil.createGroupWithoutCommit(expectedGroup, model));
+        Assert.assertThrows(NullPointerException.class, () -> distUtil.createGroupWithoutCommit(expectedGroup, null));
         //TODO
     }
 
