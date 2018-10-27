@@ -43,6 +43,13 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     private void handleKeyPress(KeyEvent keyEvent) {
+        // TODO: keyEvent.getCode() where you can get the values here
+        /*
+        if (!keyEvent.getText().isEmpty()) {
+            System.out.println(keyEvent.getText().charAt(0));
+        }
+        */
+
         switch (keyEvent.getCode()) {
         case UP:
             // As up and down buttons will alter the position of the caret,
