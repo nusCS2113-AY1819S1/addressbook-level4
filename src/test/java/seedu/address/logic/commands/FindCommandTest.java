@@ -20,6 +20,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.EventContainsKeywordsPredicate;
+import seedu.address.model.user.User;
+import seedu.address.testutil.UserBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -58,6 +60,9 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
+        User user = new UserBuilder().build();
+        model.logUser(user);
+
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 0);
         EventContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
@@ -68,6 +73,9 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
+        User user = new UserBuilder().build();
+        model.logUser(user);
+
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 3);
         EventContainsKeywordsPredicate predicate = preparePredicate("Frisbee Music Dark");
 
