@@ -45,6 +45,10 @@ public class Trie {
         searchCrawler = rootNode;
     }
 
+    /**
+     * allows insertion of a new String into the data structure
+     * @param key Word to be stored into the data structure
+     */
     public void insert(String key) {
         Node crawler = rootNode;
         char curChar;
@@ -61,6 +65,11 @@ public class Trie {
         crawler.setEndOfWord();
     }
 
+    /**
+     * Searches whether a key character exists in the data structure at that position of the key
+     * @param key character to check if word exists at that character order
+     * @return true if it exists, false if it doesn't exist
+     */
     public boolean search(char key) {
         if (searchCrawler.getChild(key) == null) {
             return false;
@@ -70,6 +79,9 @@ public class Trie {
         }
     }
 
+    /**
+     * Moves the search crawler back to its parent.
+     */
     public void moveSearchCrawlerToParent() {
         if (searchCrawler.parent != null) {
             searchCrawler = searchCrawler.parent;
