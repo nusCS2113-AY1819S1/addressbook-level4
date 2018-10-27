@@ -39,7 +39,7 @@ public class Trie {
 
     private Node rootNode;
     private Node searchCrawler;
-    
+
     public Trie() {
         rootNode = new Node();
         searchCrawler = rootNode;
