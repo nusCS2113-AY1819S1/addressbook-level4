@@ -6,9 +6,7 @@ https://ci.appveyor.com/project/Tsuweiquan/main[image:https://ci.appveyor.com/ap
 https://coveralls.io/github/CS2113-AY1819S1-T13-4/main?branch=master&service=github[image:https://coveralls.io/repos/github/CS2113-AY1819S1-T13-4/main/badge.svg?branch=master&service=github[Coverage Status]]
 https://gitter.im/se-edu/Lobby[image:https://badges.gitter.im/se-edu/Lobby.svg[Gitter chat]]
 
-ifndef::env-github[]
-image::docs/images/Ui.PNG[width="800"]
-endif::[]
+image::docs/images/Ui.png[width="600"]
 
 * *Student Management System* is a Java application that runs on the Desktop.
 * It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
