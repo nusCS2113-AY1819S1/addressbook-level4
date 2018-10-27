@@ -7,6 +7,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIE
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_KPI;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -35,6 +36,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.ClosestMatchList;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.KpiContainsKeywordPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.NoteContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -125,12 +127,16 @@ public class FindCommandTest {
         String[] emails = {"heinz@example.com"};
         String[] addresses = {"wall street"};
         String[] notes = {"Carl sample note"};
+        String[] kpis = {"4.0"};
+        String[] positions = {"Worker"};
 
         prefixKeywordMap.put(PREFIX_NAME, names);
         prefixKeywordMap.put(PREFIX_PHONE, phones);
         prefixKeywordMap.put(PREFIX_EMAIL, emails);
         prefixKeywordMap.put(PREFIX_NOTE, notes);
         prefixKeywordMap.put(PREFIX_ADDRESS, addresses);
+        prefixKeywordMap.put(PREFIX_KPI, kpis);
+        prefixKeywordMap.put(PREFIX_POSITION, positions);
 
 
         Set<Prefix> keys = prefixKeywordMap.keySet();
@@ -193,6 +199,10 @@ public class FindCommandTest {
             } else if (type == PREFIX_TAG) {
                 combinedPredicate = combinedPredicate.and(
                         new TagContainsKeywordsPredicate(Arrays.asList(approvedList))
+                );
+            } else if (type == PREFIX_KPI) {
+                combinedPredicate = combinedPredicate.and(
+                        new KpiContainsKeywordPredicate(Arrays.asList(approvedList))
                 );
             }
         }

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_KPI;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -25,6 +26,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.ClosestMatchList;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.KpiContainsKeywordPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.NoteContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -115,6 +117,10 @@ public class FindCommand extends Command {
             } else if (type == PREFIX_TAG) {
                 combinedPredicate = combinedPredicate.and(
                         new TagContainsKeywordsPredicate(Arrays.asList(approvedList))
+                );
+            } else if (type == PREFIX_KPI) {
+                combinedPredicate = combinedPredicate.and(
+                        new KpiContainsKeywordPredicate(Arrays.asList(approvedList))
                 );
             }
         }

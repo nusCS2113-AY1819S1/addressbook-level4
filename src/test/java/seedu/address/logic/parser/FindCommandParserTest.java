@@ -3,9 +3,11 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_KPI;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -63,6 +65,8 @@ public class FindCommandParserTest {
         String[] notes = {alice.getNote().value};
         String[] tags = {alice.getStringTags()};
         String[] phones = {alice.getPhone().value};
+        String[] kpis = {alice.getKpi().value};
+        String[] positions = {alice.getPosition().value};
         // Refine search result to Alice
 
         Map<Prefix, String[]> prefixKeywordsMap = new HashMap<>();
@@ -72,6 +76,8 @@ public class FindCommandParserTest {
         prefixKeywordsMap.put(PREFIX_ADDRESS, addresses);
         prefixKeywordsMap.put(PREFIX_NOTE, notes);
         prefixKeywordsMap.put(PREFIX_PHONE, phones);
+        prefixKeywordsMap.put(PREFIX_POSITION, positions);
+        prefixKeywordsMap.put(PREFIX_KPI, kpis);
 
         Set<Prefix> keys = prefixKeywordsMap.keySet();
 
@@ -94,7 +100,13 @@ public class FindCommandParserTest {
                 + alice.getNote().value
                 + " "
                 + PREFIX_TAG
-                + alice.getStringTags();
+                + alice.getStringTags()
+                + " "
+                + PREFIX_POSITION
+                + alice.getPosition().value
+                + " "
+                + PREFIX_KPI
+                + alice.getKpi().value;
 
         assertParseSuccess(parser, userInput, expectedFindCommand);
 
