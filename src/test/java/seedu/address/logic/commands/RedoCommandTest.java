@@ -12,6 +12,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.testutil.UserBuilder;
 
 public class RedoCommandTest {
 
@@ -35,6 +36,9 @@ public class RedoCommandTest {
 
     @Test
     public void execute() {
+        assertCommandSuccess(new LoginCommand(new UserBuilder().build()), model, commandHistory,
+                String.format(LoginCommand.MESSAGE_SUCCESS, "admin"), expectedModel);
+
         // multiple redoable states in model
         expectedModel.redoEventManager();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
