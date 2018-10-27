@@ -14,8 +14,10 @@ import seedu.address.model.Filetype;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EventName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Time;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.todo.Content;
 import seedu.address.model.todo.Title;
@@ -182,5 +184,23 @@ public class ParserUtil {
             throw new ParseException(Date.MESSAGE_DATE_CONSTRAINTS);
         }
         return new Date(trimmedDate);
+    }
+
+    public static Time parseTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+        if (!Time.isValidTime(trimmedTime)) {
+            throw new ParseException(Time.MESSAGE_TIME_CONSTRAINTS);
+        }
+        return new Time(trimmedTime);
+    }
+
+    public static EventName parseEventName(String eventName) throws ParseException {
+        requireNonNull(eventName);
+        String trimmedEventName = eventName.trim();
+        if (!EventName.isValidEventName(trimmedEventName)) {
+            throw new ParseException(EventName.MESSAGE_EVENT_NAME_CONSTRAINTS);
+        }
+        return new EventName(trimmedEventName);
     }
 }

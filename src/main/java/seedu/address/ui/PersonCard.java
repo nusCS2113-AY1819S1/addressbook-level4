@@ -1,11 +1,14 @@
 package seedu.address.ui;
 
+import com.sun.xml.bind.XmlAccessorFactory;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Schedule;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -23,6 +26,7 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Person person;
+//    public final Schedule schedule;
 
     @FXML
     private HBox cardPane;
@@ -38,6 +42,11 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label scheduleHeader;
+    //TODO: ADD TAG STUFF
+    @FXML
+    private FlowPane schedules;
 
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
@@ -48,6 +57,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        scheduleHeader.setText("\nSchedule of " + person.getName().fullName + ": ");
     }
 
     @Override

@@ -45,7 +45,7 @@ public class ScheduleCommand extends Command {
         toSchedule = schedule;
     }
 
-    public final String MESSAGE_FAILURE = "THIS IS A NEW TEST MESSAGE";
+    public static final String MESSAGE_FAILURE = "Unable to add schedule";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {

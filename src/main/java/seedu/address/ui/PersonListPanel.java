@@ -24,6 +24,7 @@ public class PersonListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<Person> personListView;
+//    private ListView<Schedule> scheduleListView;
 
     public PersonListPanel(ObservableList<Person> personList) {
         super(FXML);
