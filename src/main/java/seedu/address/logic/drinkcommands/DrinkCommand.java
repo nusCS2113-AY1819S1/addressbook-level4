@@ -1,8 +1,7 @@
 package seedu.address.logic.drinkcommands;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.drinkcommands.exceptions.DrinkCommandException;
 import seedu.address.model.DrinkModel;
 
 /**
@@ -12,11 +11,11 @@ public abstract class DrinkCommand {
     /**
      * Executes the command and returns the result message.
      *
-     * @param model {@code DrinkModel} which the command should operate on.
+     * @param model   {@code DrinkModel} which the command should operate on.
      * @param history {@code CommandHistory} which the command should operate on.
      * @return feedback message of the operation result for display
-     * @throws CommandException If an error occurs during command execution.
+     * @throws DrinkCommandException If an error occurs during command execution.
      */
-    public abstract DrinkCommandResult execute(DrinkModel model, CommandHistory history) throws CommandException;
+    public abstract DrinkCommandResult execute(DrinkModel model, CommandHistory history) throws DrinkCommandException;
 
 }
