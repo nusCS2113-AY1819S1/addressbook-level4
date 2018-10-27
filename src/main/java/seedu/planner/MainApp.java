@@ -66,7 +66,7 @@ public class MainApp extends Application {
         userPrefs = initPrefs(userPrefsStorage);
         FinancialPlannerStorage financialPlannerStorage =
                 new XmlFinancialPlannerStorage(userPrefs.getFinancialPlannerFilePath(),
-                        userPrefs.getSummaryMapFilePath(), userPrefs.getFinancialPlannerLimitFilePath());
+                        userPrefs.getFinancialPlannerLimitFilePath());
         storage = new StorageManager(financialPlannerStorage, userPrefsStorage);
 
         initLogging(config);
@@ -101,11 +101,6 @@ public class MainApp extends Application {
                 logger.info("Data file not found. Will be starting with a sample FinancialPlanner");
             }
             initialData = financialPlannerOptional.orElseGet(SampleDataUtil::getSampleFinancialPlanner);
-
-            summaryMapOptional = storage.readSummaryMap();
-            if (!summaryMapOptional.isPresent()) {
-                logger.info("Summary data file not found. Will start based on the sample FinancialPlanner");
-            }
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty FinancialPlanner");
             initialData = new FinancialPlanner();

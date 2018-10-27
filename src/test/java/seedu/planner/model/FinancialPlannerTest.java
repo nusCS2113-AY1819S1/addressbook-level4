@@ -22,6 +22,7 @@ import javafx.collections.ObservableList;
 import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
+import seedu.planner.model.record.UniqueRecordList;
 import seedu.planner.model.record.exceptions.DuplicateRecordException;
 import seedu.planner.model.summary.SummaryMap;
 import seedu.planner.testutil.RecordBuilder;
@@ -41,7 +42,7 @@ public class FinancialPlannerTest {
     @Test
     public void resetData_null_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        financialPlanner.resetData(null);
+        financialPlanner.resetData((UniqueRecordList) null);
     }
 
     @Test
