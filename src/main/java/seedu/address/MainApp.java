@@ -10,7 +10,11 @@ import com.google.common.eventbus.Subscribe;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import seedu.address.commons.core.*;
+import seedu.address.commons.core.Config;
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.StatisticCenter;
+import seedu.address.commons.core.Version;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
@@ -32,8 +36,8 @@ import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.BookInventoryStorage;
 import seedu.address.storage.InventoryStorage;
 import seedu.address.storage.InventoryStorageManager;
-import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.JsonStatisticStorage;
+import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.RequestListStorage;
 import seedu.address.storage.RequestListStorageManager;
 import seedu.address.storage.RequestStorage;
@@ -45,7 +49,6 @@ import seedu.address.ui.SubmitBox;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
-import static javafx.scene.input.KeyCode.T;
 
 /**
  * The main entry point to the application.
@@ -60,6 +63,7 @@ public class MainApp extends Application {
     protected Logic logic;
     protected InventoryStorage storage;
     protected RequestStorage requestStorage;
+    protected StatisticsStorage statisticsStorage;
     protected Model model;
     protected RequestModel requestModel;
     protected Config config;
@@ -80,7 +84,7 @@ public class MainApp extends Application {
         storage = new InventoryStorageManager(bookInventoryStorage, userPrefsStorage);
         RequestListStorage requestListStorage = new XmlRequestListStorage(userPrefs.getRequestListFilePath());
         requestStorage = new RequestListStorageManager(requestListStorage, userPrefsStorage);
-        StatisticsStorage statisticsStorage = new JsonStatisticStorage(userPrefs.getStatisticFilePath());
+        statisticsStorage = new JsonStatisticStorage(userPrefs.getStatisticFilePath());
         initLogging(config);
 
         model = initModelManager(storage, userPrefs);
@@ -93,7 +97,7 @@ public class MainApp extends Application {
         ui = new UiManager(logic, config, userPrefs);
 
         initEventsCenter();
-        initStatisticCenter(statisticsStorage);
+        initStatisticCenter();
     }
 
     /**
@@ -226,8 +230,8 @@ public class MainApp extends Application {
     /**
      * Loads copy of statistic from json
      **/
-    private void initStatisticCenter(StatisticsStorage statisticsStorage) {
-        Path statisticFilePath = userPrefs.getStatisticFilePath();
+    private void initStatisticCenter() {
+        Path statisticFilePath = statisticsStorage.getStatisticFilePath();
         logger.info("Using statistic file : " + statisticFilePath);
 
         try {
@@ -263,12 +267,14 @@ public class MainApp extends Application {
         try {
             storage.saveUserPrefs(userPrefs);
             requestStorage.saveUserPrefs(userPrefs);
+
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
 
         try {
-            JsonUtil.saveJsonFile(StatisticCenter.getInstance().getStatistic(), userPrefs.getStatisticFilePath());
+            JsonUtil.saveJsonFile(
+                    StatisticCenter.getInstance().getStatistic(), statisticsStorage.getStatisticFilePath());
         } catch (IOException e) {
             logger.warning("Failed to save statistic file : " + StringUtil.getDetails(e));
         }

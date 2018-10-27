@@ -40,7 +40,9 @@ public class UserPrefs {
         return requestListFilePath;
     }
 
-    public Path getStatisticFilePath() { return statisticFilePath; }
+    public Path getStatisticFilePath() {
+        return statisticFilePath;
+    }
 
     public void setBookInventoryFilePath(Path addressBookFilePath) {
         this.bookInventoryFilePath = addressBookFilePath;

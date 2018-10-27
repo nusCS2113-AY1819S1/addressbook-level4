@@ -11,7 +11,7 @@ import seedu.address.model.statistic.Statistic;
 /**
  * A class to access Statistics stored in the hard disk as a json file
  */
-public class JsonStatisticStorage implements StatisticsStorage{
+public class JsonStatisticStorage implements StatisticsStorage {
     private Path filePath;
 
     public JsonStatisticStorage(Path filePath) {
