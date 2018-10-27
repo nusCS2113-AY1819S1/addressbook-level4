@@ -57,10 +57,10 @@ Format: `creategroup n/NAME l/LOCATION [t/TAG] ...`  +
 Shortcut Format: `cg n/NAME l/LOCATION [t/TAG] ...` +
 ****
 * Creates a group with the specified NAME, LOCATION and TAG(s)
-* NAME should only contain alphanumeric characters, '-', '[' and ']', and should not be blank
-* LOCATION should only contain alphanumeric characters and '-', and should not be blank
-* TAG(s) are optional and should only contain alphanumeric characters if used
-* TAG(s) should not be blank if used
+* NAME *should only contain alphanumeric characters, '-', '[' and ']', and should not be blank*
+* LOCATION *should only contain alphanumeric characters and '-', and should not be blank*
+* TAG(s) are optional and *should only contain alphanumeric characters* if used
+* TAG(s) *should not be blank* if used
 * This command is undoable
 ****
 
@@ -76,6 +76,7 @@ Shortcut Format: `ag g/INDEX p/INDEX ...` +
 ****
 * Adds student(s) at specified INDEX(s) to group at specified at INDEX.
 * The index refers to the index number shown in the displayed group/student list.
+* The index *must be a positive integer* 1, 2, 3, ...
 * This command is undoable
 ****
 
@@ -90,6 +91,7 @@ Format: `deletegroup INDEX`  +
 Shortcut Format: `dg INDEX` +
 ****
 * Removes the group with the specified INDEX from the student management systsm
+* The index *must be a positive integer* 1, 2, 3, ...
 * This command is undoable
 ****
 
@@ -105,6 +107,7 @@ Shortcut Format: `dgs g/INDEX p/INDEX ...` +
 ****
 * Removes studnets at specifed INDEX(s) from the group at specified INDEX in the student management systsm
 * The index refers to the index number shown in the displayed group/student in group list.
+* The index *must be a positive integer* 1, 2, 3, ...
 * This command is undoable
 ****
 
@@ -274,13 +277,14 @@ Returns any person having names `Betsy`, `Tim`, or `John`
 
 === Deleting a person : `delete` `d`
 
-Deletes the specified person from the address book. +
+Deletes the specified student from the student management system. +
 Format: `delete INDEX` +
 Shortcut Format: `d INDEX`
 
 ****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student list.
+* Deletes student in all groups [_Coming in v1.4_]
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
 
@@ -288,10 +292,10 @@ Examples:
 
 * `list` +
 `delete 2` +
-Deletes the 2nd person in the address book.
+Deletes the 2nd student in the address book.
 * `find Betsy` +
 `d 1` +
-Deletes the 1st person in the results of the `find` command.
+Deletes the 1st student in the results of the `find` command.
 
 === Selecting a person : `select` `s`
 
