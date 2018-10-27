@@ -12,6 +12,8 @@ import seedu.address.model.item.Item;
 import seedu.address.model.item.Quantity;
 import seedu.address.model.item.SimpleItem;
 
+//@@author ChewKinWhye
+
 /**
  * Lists all items in the stock list to the user grouped by the status.
  */

@@ -2,6 +2,8 @@ package seedu.address.model.item;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+//@@author ChewKinWhye
+
 /**
  * Simplified item with fields removed to be used in the status command
  */
