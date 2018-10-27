@@ -1,8 +1,10 @@
 package seedu.planner.ui;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -10,7 +12,9 @@ import javax.swing.plaf.synth.Region;
 
 import org.controlsfx.control.textfield.TextFields;
 
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import seedu.planner.logic.commands.AddCommand;
 import seedu.planner.logic.commands.ClearCommand;
 import seedu.planner.logic.commands.DeleteCommand;
@@ -29,6 +33,7 @@ import seedu.planner.logic.commands.SelectCommand;
 import seedu.planner.logic.commands.SortCommand;
 import seedu.planner.logic.commands.SummaryCommand;
 import seedu.planner.logic.commands.UndoCommand;
+import seedu.planner.ui.completion.CustomAutoCompleteTextField;
 
 public class AutoCompleteBox extends UiPart<Region> {
 
@@ -51,11 +56,7 @@ public class AutoCompleteBox extends UiPart<Region> {
     public AutoCompleteBox(TextField commandTextField) {
         super(FXML);
         this.commandTextField = commandTextField;
-        TextFields.bindAutoCompletion(commandTextField, commandWordSet).setVisibleRowCount(MAX_ROWS);
-    }
-
-    public void bindNewSuggestions(String string){
-        commandWordSet.add(string);
+        CustomAutoCompleteTextField.bindAutoCompletion(commandTextField, commandWordSet).setVisibleRowCount(MAX_ROWS);
     }
 
 }
