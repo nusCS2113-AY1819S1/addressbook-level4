@@ -17,6 +17,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyEventManager;
 import seedu.address.model.event.Event;
 import seedu.address.model.user.User;
+import seedu.address.model.user.Username;
 import seedu.address.testutil.UserBuilder;
 
 public class LoginCommandTest {
@@ -103,7 +104,7 @@ public class LoginCommandTest {
         }
 
         @Override
-        public User getUser() {
+        public Username getUsername() {
             throw new AssertionError("This method should not be called");
         }
 
