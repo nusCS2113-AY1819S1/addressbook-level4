@@ -5,9 +5,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_BOOKS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalBooks.CARL;
-import static seedu.address.testutil.TypicalBooks.ELLE;
-import static seedu.address.testutil.TypicalBooks.FIONA;
+import static seedu.address.testutil.TypicalBooks.CHEMISTRY;
+import static seedu.address.testutil.TypicalBooks.ELEMENTARY;
+import static seedu.address.testutil.TypicalBooks.FINANCIAL;
 import static seedu.address.testutil.TypicalBooks.getTypicalBookInventory;
 
 import java.util.Arrays;
@@ -69,11 +69,11 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_BOOKS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        NameContainsKeywordsPredicate predicate = preparePredicate("Chemistry Elementary Financial");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredBookList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredBookList());
+        assertEquals(Arrays.asList(CHEMISTRY, ELEMENTARY, FINANCIAL), model.getFilteredBookList());
     }
 
     /**

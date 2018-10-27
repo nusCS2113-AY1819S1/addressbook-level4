@@ -14,15 +14,15 @@ import static seedu.address.logic.commands.CommandTestUtil.QUANTITY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.QUANTITY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_ADD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_BIOLOGY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ADD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_ADD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_BIOLOGY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_ADD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_BIOLOGY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SCIENCE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_STUDIES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -53,7 +53,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_NAME_ADD, MESSAGE_INVALID_FORMAT);
 
         // no field specified
         assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
@@ -101,8 +101,8 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_TAG_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        // assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_PRICE_DESC + VALID_QUANTITY_AMY
-        // + VALID_ISBN_AMY, Name.MESSAGE_NAME_CONSTRAINTS);
+        // assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_PRICE_DESC + VALID_QUANTITY_ADD
+        // + VALID_ISBN_ADD, Name.MESSAGE_NAME_CONSTRAINTS);
     }
 
     @Test
@@ -111,9 +111,9 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + ISBN_DESC_BOB + TAG_DESC_HUSBAND
                 + PRICE_DESC_AMY + QUANTITY_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
-        EditCommand.EditBookDescriptor descriptor = new EditBookDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withIsbn(VALID_ISBN_BOB).withPrice(VALID_PRICE_AMY).withQuantity(VALID_QUANTITY_AMY)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        EditCommand.EditBookDescriptor descriptor = new EditBookDescriptorBuilder().withName(VALID_NAME_ADD)
+                .withIsbn(VALID_ISBN_BIOLOGY).withPrice(VALID_PRICE_ADD).withQuantity(VALID_QUANTITY_ADD)
+                .withTags(VALID_TAG_SCIENCE, VALID_TAG_STUDIES).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -124,8 +124,8 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_FIRST_BOOK;
         String userInput = targetIndex.getOneBased() + ISBN_DESC_BOB + PRICE_DESC_AMY;
 
-        EditCommand.EditBookDescriptor descriptor = new EditBookDescriptorBuilder().withIsbn(VALID_ISBN_BOB)
-                .withPrice(VALID_PRICE_AMY).build();
+        EditCommand.EditBookDescriptor descriptor = new EditBookDescriptorBuilder().withIsbn(VALID_ISBN_BIOLOGY)
+                .withPrice(VALID_PRICE_ADD).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -136,31 +136,31 @@ public class EditCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_BOOK;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        EditBookDescriptor descriptor = new EditBookDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        EditBookDescriptor descriptor = new EditBookDescriptorBuilder().withName(VALID_NAME_ADD).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
         userInput = targetIndex.getOneBased() + ISBN_DESC_AMY;
-        descriptor = new EditBookDescriptorBuilder().withIsbn(VALID_ISBN_AMY).build();
+        descriptor = new EditBookDescriptorBuilder().withIsbn(VALID_ISBN_ADD).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
         userInput = targetIndex.getOneBased() + PRICE_DESC_AMY;
-        descriptor = new EditBookDescriptorBuilder().withPrice(VALID_PRICE_AMY).build();
+        descriptor = new EditBookDescriptorBuilder().withPrice(VALID_PRICE_ADD).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // address
         userInput = targetIndex.getOneBased() + QUANTITY_DESC_AMY;
-        descriptor = new EditBookDescriptorBuilder().withQuantity(VALID_QUANTITY_AMY).build();
+        descriptor = new EditBookDescriptorBuilder().withQuantity(VALID_QUANTITY_ADD).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
-        descriptor = new EditBookDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
+        descriptor = new EditBookDescriptorBuilder().withTags(VALID_TAG_STUDIES).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -172,9 +172,9 @@ public class EditCommandParserTest {
                 + TAG_DESC_FRIEND + ISBN_DESC_AMY + QUANTITY_DESC_AMY + PRICE_DESC_AMY + TAG_DESC_FRIEND
                 + ISBN_DESC_BOB + QUANTITY_DESC_BOB + PRICE_DESC_BOB + TAG_DESC_HUSBAND;
 
-        EditCommand.EditBookDescriptor descriptor = new EditBookDescriptorBuilder().withIsbn(VALID_ISBN_BOB)
-                .withPrice(VALID_PRICE_BOB).withQuantity(VALID_QUANTITY_BOB).withTags(
-                        VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        EditCommand.EditBookDescriptor descriptor = new EditBookDescriptorBuilder().withIsbn(VALID_ISBN_BIOLOGY)
+                .withPrice(VALID_PRICE_BIOLOGY).withQuantity(VALID_QUANTITY_BIOLOGY).withTags(
+                        VALID_TAG_STUDIES, VALID_TAG_SCIENCE)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -186,15 +186,16 @@ public class EditCommandParserTest {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST_BOOK;
         String userInput = targetIndex.getOneBased() + INVALID_ISBN_DESC + ISBN_DESC_BOB;
-        EditCommand.EditBookDescriptor descriptor = new EditBookDescriptorBuilder().withIsbn(VALID_ISBN_BOB).build();
+        EditCommand.EditBookDescriptor descriptor =
+                new EditBookDescriptorBuilder().withIsbn(VALID_ISBN_BIOLOGY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
         userInput = targetIndex.getOneBased() + PRICE_DESC_BOB + INVALID_ISBN_DESC + QUANTITY_DESC_BOB
                 + ISBN_DESC_BOB;
-        descriptor = new EditBookDescriptorBuilder().withIsbn(VALID_ISBN_BOB).withPrice(VALID_PRICE_BOB)
-                .withQuantity(VALID_QUANTITY_BOB).build();
+        descriptor = new EditBookDescriptorBuilder().withIsbn(VALID_ISBN_BIOLOGY).withPrice(VALID_PRICE_BIOLOGY)
+                .withQuantity(VALID_QUANTITY_BIOLOGY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

@@ -18,14 +18,14 @@
 //import static seedu.address.logic.commands.CommandTestUtil.QUANTITY_DESC_BOB;
 //import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 //import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_AMY;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_AMY;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_ADD;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ADD;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BIOLOGY;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_ADD;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SCIENCE;
 //import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 //import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BOOKS;
-//import static seedu.address.testutil.TypicalBooks.AMY;
+//import static seedu.address.testutil.TypicalBooks.ADD;
 //import static seedu.address.testutil.TypicalBooks.BOB;
 //import static seedu.address.testutil.TypicalBooks.KEYWORD_MATCHING_MEIER;
 //import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
@@ -63,7 +63,7 @@
 //        Index index = INDEX_FIRST_BOOK;
 //        String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_BOB + "  "
 //                + ISBN_DESC_BOB + " " + PRICE_DESC_BOB + "  " + QUANTITY_DESC_BOB + " " + TAG_DESC_HUSBAND + " ";
-//        Book editedBook = new BookBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
+//        Book editedBook = new BookBuilder(BOB).withTags(VALID_TAG_SCIENCE).build();
 //        assertCommandSuccess(command, index, editedBook);
 //
 //        /* Case: undo editing the last book in the list -> last book restored */
@@ -91,7 +91,7 @@
 //        command = EditCommand.COMMAND_WORD + " " + index.getOneBased()
 // + NAME_DESC_AMY + ISBN_DESC_BOB + PRICE_DESC_BOB
 //                + QUANTITY_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-//        editedBook = new BookBuilder(BOB).withName(VALID_NAME_AMY).build();
+//        editedBook = new BookBuilder(BOB).withName(VALID_NAME_ADD).build();
 //        assertCommandSuccess(command, index, editedBook);
 //
 //        /* Case: edit a book with new values same as another book's values but with different phone and email
@@ -101,7 +101,7 @@
 //        command = EditCommand.COMMAND_WORD + " " + index.getOneBased()
 // + NAME_DESC_BOB + ISBN_DESC_AMY + PRICE_DESC_AMY
 //                + QUANTITY_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-//        editedBook = new BookBuilder(BOB).withIsbn(VALID_ISBN_AMY).withPrice(VALID_PRICE_AMY).build();
+//        editedBook = new BookBuilder(BOB).withIsbn(VALID_ISBN_ADD).withPrice(VALID_PRICE_ADD).build();
 //        assertCommandSuccess(command, index, editedBook);
 //
 //        /* Case: clear tags -> cleared */
@@ -120,7 +120,7 @@
 //        assertTrue(index.getZeroBased() < getModel().getFilteredBookList().size());
 //        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_BOB;
 //        bookToEdit = getModel().getFilteredBookList().get(index.getZeroBased());
-//        editedBook = new BookBuilder(bookToEdit).withName(VALID_NAME_BOB).build();
+//        editedBook = new BookBuilder(bookToEdit).withName(VALID_NAME_BIOLOGY).build();
 //        assertCommandSuccess(command, index, editedBook);
 //
 //        /* Case: filtered book list, edit index within bounds of BookInventory but out of bounds of book list
@@ -144,7 +144,7 @@
 //                + QUANTITY_DESC_AMY + TAG_DESC_FRIEND;
 //        // this can be misleading: card selection actually remains unchanged but the
 //        // browser's url is updated to reflect the new book's name
-//        assertCommandSuccess(command, index, AMY, index);
+//        assertCommandSuccess(command, index, ADD, index);
 //
 //        /* --------------------------------- Performing invalid edit operation
 // -------------------------------------- */

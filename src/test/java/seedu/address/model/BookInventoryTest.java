@@ -3,9 +3,9 @@ package seedu.address.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalBooks.ALICE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_BIOLOGY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SCIENCE;
+import static seedu.address.testutil.TypicalBooks.ART;
 import static seedu.address.testutil.TypicalBooks.getTypicalBookInventory;
 
 import java.util.Arrays;
@@ -51,9 +51,9 @@ public class BookInventoryTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two books with the same identity fields
-        Book editedAlice = new BookBuilder(ALICE).withQuantity(VALID_QUANTITY_BOB).withTags(VALID_TAG_HUSBAND)
+        Book editedAlice = new BookBuilder(ART).withQuantity(VALID_QUANTITY_BIOLOGY).withTags(VALID_TAG_SCIENCE)
                 .build();
-        List<Book> newBooks = Arrays.asList(ALICE, editedAlice);
+        List<Book> newBooks = Arrays.asList(ART, editedAlice);
         BookInventoryStub newData = new BookInventoryStub(newBooks);
 
         thrown.expect(DuplicateBookException.class);
@@ -68,19 +68,19 @@ public class BookInventoryTest {
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(bookInventory.hasBook(ALICE));
+        assertFalse(bookInventory.hasBook(ART));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        bookInventory.addBook(ALICE);
-        assertTrue(bookInventory.hasBook(ALICE));
+        bookInventory.addBook(ART);
+        assertTrue(bookInventory.hasBook(ART));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        bookInventory.addBook(ALICE);
-        Book editedAlice = new BookBuilder(ALICE).withQuantity(VALID_QUANTITY_BOB).withTags(VALID_TAG_HUSBAND)
+        bookInventory.addBook(ART);
+        Book editedAlice = new BookBuilder(ART).withQuantity(VALID_QUANTITY_BIOLOGY).withTags(VALID_TAG_SCIENCE)
                 .build();
         assertTrue(bookInventory.hasBook(editedAlice));
     }

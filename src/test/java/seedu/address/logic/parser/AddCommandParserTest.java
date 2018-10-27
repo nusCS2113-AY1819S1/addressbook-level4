@@ -12,13 +12,13 @@ import static seedu.address.logic.commands.CommandTestUtil.PRICE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.QUANTITY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_BIOLOGY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BIOLOGY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_BIOLOGY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_BIOLOGY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_STUDIES;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.testutil.TypicalBooks.AMY;
+import static seedu.address.testutil.TypicalBooks.ADD;
 
 import org.junit.Test;
 
@@ -35,7 +35,7 @@ public class AddCommandParserTest {
     /*
     @Test
     public void parse_allFieldsPresent_success() {
-        Book expectedBook = new BookBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Book expectedBook = new BookBuilder(BOB).withTags(VALID_TAG_STUDIES).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + ISBN_DESC_BOB + PRICE_DESC_BOB
@@ -58,7 +58,7 @@ public class AddCommandParserTest {
                 + QUANTITY_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedBook));
 
         // multiple tags - all accepted
-        Book expectedBookMultipleTags = new BookBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Book expectedBookMultipleTags = new BookBuilder(BOB).withTags(VALID_TAG_STUDIES, VALID_TAG_SCIENCE)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + ISBN_DESC_BOB + PRICE_DESC_BOB + COST_DESC_BOB + QUANTITY_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedBookMultipleTags));
@@ -67,7 +67,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Book expectedBook = new BookBuilder(AMY).withTags().build();
+        Book expectedBook = new BookBuilder(ADD).withTags().build();
         // assertParseSuccess(parser, NAME_DESC_AMY + ISBN_DESC_AMY + PRICE_DESC_AMY
         // + COST_DESC_AMY + QUANTITY_DESC_AMY + TAG_DESC_FRIEND,
         // new AddCommand(expectedBook));
@@ -78,24 +78,24 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + ISBN_DESC_BOB + PRICE_DESC_BOB + COST_DESC_BOB + QUANTITY_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, VALID_NAME_BIOLOGY + ISBN_DESC_BOB + PRICE_DESC_BOB + COST_DESC_BOB
+                + QUANTITY_DESC_BOB, expectedMessage);
 
         // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_ISBN_BOB + PRICE_DESC_BOB + COST_DESC_BOB + QUANTITY_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + VALID_ISBN_BIOLOGY + PRICE_DESC_BOB + COST_DESC_BOB
+                + QUANTITY_DESC_BOB, expectedMessage);
 
         // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + ISBN_DESC_BOB + VALID_PRICE_BOB + QUANTITY_DESC_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + ISBN_DESC_BOB + VALID_PRICE_BIOLOGY + QUANTITY_DESC_BOB,
                 expectedMessage);
 
         // missing address prefix
-        assertParseFailure(parser, NAME_DESC_BOB + ISBN_DESC_BOB + PRICE_DESC_BOB + VALID_QUANTITY_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + ISBN_DESC_BOB + PRICE_DESC_BOB + VALID_QUANTITY_BIOLOGY,
                 expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB + VALID_ISBN_BOB + VALID_PRICE_BOB + VALID_QUANTITY_BOB,
-                expectedMessage);
+        assertParseFailure(parser, VALID_NAME_BIOLOGY + VALID_ISBN_BIOLOGY + VALID_PRICE_BIOLOGY
+                + VALID_QUANTITY_BIOLOGY, expectedMessage);
     }
 
     @Test
@@ -123,7 +123,7 @@ public class AddCommandParserTest {
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + ISBN_DESC_BOB
                 + PRICE_DESC_BOB + COST_DESC_BOB + QUANTITY_DESC_BOB
-                + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_TAG_CONSTRAINTS);
+                + INVALID_TAG_DESC + VALID_TAG_STUDIES, Tag.MESSAGE_TAG_CONSTRAINTS);
         /*
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + ISBN_DESC_BOB
