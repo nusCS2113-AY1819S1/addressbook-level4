@@ -128,4 +128,23 @@ public class UserSession {
     public boolean getAdminStatus() {
         return adminStatus;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        // short circuit if same object
+        if (obj == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(obj instanceof UserSession)) {
+            return false;
+        }
+
+        // state check
+        UserSession other = (UserSession) obj;
+        return user.equals(other.user)
+                && loginStatus == other.loginStatus
+                && adminStatus == other.adminStatus;
+    }
 }
