@@ -16,7 +16,7 @@ public class Comment {
      * The first character of the comment must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String COMMENT_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String COMMENT_VALIDATION_REGEX = "\\{span\\}[\\p{Alnum}][\\p{Alnum} ]*\\{/span\\}";
 
     public final String value;
 

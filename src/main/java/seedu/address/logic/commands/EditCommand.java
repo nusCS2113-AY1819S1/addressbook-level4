@@ -115,7 +115,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editEventDescriptor.getEmail().orElse(eventToEdit.getEmail());
         Venue updatedVenue = editEventDescriptor.getVenue().orElse(eventToEdit.getVenue());
         DateTime updatedDateTime = editEventDescriptor.getDateTime().orElse(eventToEdit.getDateTime());
-        Comment updatedComment = editEventDescriptor.getComment();
+        Comment updatedComment = eventToEdit.getComment();
         Set<Tag> updatedTags = editEventDescriptor.getTags().orElse(eventToEdit.getTags());
         Set<Attendee> updatedAttendees = editEventDescriptor.getAttendees().orElse(eventToEdit.getAttendees());
 
@@ -170,7 +170,6 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setVenue(toCopy.venue);
             setDate(toCopy.dateTime);
-            setComment(toCopy.comment);
             setTags(toCopy.tags);
             setAttendees(toCopy.attendees);
         }
@@ -293,7 +292,6 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getVenue().equals(e.getVenue())
                     && getDateTime().equals(e.getDateTime())
-                    && getComment().equals(e.getComment())
                     && getTags().equals(e.getTags())
                     && getAttendees().equals(e.getAttendees());
         }

@@ -32,10 +32,10 @@ public class CommentTest {
         assertFalse(Comment.isValidComment("peter*")); // contains non-alphanumeric characters
 
         // valid comment
-        assertTrue(Comment.isValidComment("peter jack")); // alphabets only
-        assertTrue(Comment.isValidComment("12345")); // numbers only
-        assertTrue(Comment.isValidComment("peter the 2nd")); // alphanumeric characters
-        assertTrue(Comment.isValidComment("Capital Tan")); // with capital letters
-        assertTrue(Comment.isValidComment("David Roger Jackson Ray Jr 2nd")); // long comments
+        assertTrue(Comment.isValidComment("{span}peter jack{/span}")); // alphabets only
+        assertTrue(Comment.isValidComment("{span}12345{/span}")); // numbers only
+        assertTrue(Comment.isValidComment("{span}peter the 2nd{/span}")); // alphanumeric characters
+        assertTrue(Comment.isValidComment("{span}Capital Tan{/span}")); // with capital letters
+        assertTrue(Comment.isValidComment("{span}David Roger Jackson Ray Jr 2nd{/span}")); // long comments
     }
 }

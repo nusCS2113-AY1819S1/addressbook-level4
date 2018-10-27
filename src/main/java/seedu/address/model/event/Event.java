@@ -139,7 +139,6 @@ public class Event {
                 && otherEvent.getEmail().equals(getEmail())
                 && otherEvent.getVenue().equals(getVenue())
                 && otherEvent.getDateTime().equals(getDateTime())
-                && otherEvent.getComment().equals(getComment())
                 && otherEvent.getTags().equals(getTags())
                 && otherEvent.getAttendees().equals(getAttendees());
     }
