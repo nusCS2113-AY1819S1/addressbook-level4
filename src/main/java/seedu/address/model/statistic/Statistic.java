@@ -1,22 +1,27 @@
 package seedu.address.model.statistic;
 
-import java.util.Calendar;
 import java.util.Objects;
-import java.util.TimeZone;
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 /**
  * Represents a Statistic in a month.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Statistic {
     private static final String STARTING_FIGURE = "0";
     // Data fields
-    private static Calendar localCalendar = Calendar.getInstance(TimeZone.getDefault());
     private volatile Revenue revenue;
-    private final int month;
-    private final int year;
+    private int month;
+    private int year;
 
-
+    /**
+     * Constructor for Json Jackson
+     */
+    public Statistic() {
+        super();
+    }
     /**
      * Every field must be present and not null.
      */
@@ -26,12 +31,12 @@ public class Statistic {
         this.year = year;
     }
 
-    public int getMonth() {
-        return month;
+    public String getMonth() {
+        return Integer.toString(month);
     }
 
-    public int getYear() {
-        return year;
+    public String getYear() {
+        return Integer.toString(year);
     }
 
     public Revenue getRevenue() {

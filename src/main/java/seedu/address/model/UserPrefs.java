@@ -14,6 +14,7 @@ public class UserPrefs {
     private GuiSettings guiSettings;
     private Path bookInventoryFilePath = Paths.get("data" , "bookinventory.xml");
     private Path requestListFilePath = Paths.get("data" , "requestlist.xml");
+    private Path statisticFilePath = Paths.get("data" , "statisticlist.json");
 
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
@@ -37,6 +38,10 @@ public class UserPrefs {
 
     public Path getRequestListFilePath() {
         return requestListFilePath;
+    }
+
+    public Path getStatisticFilePath() {
+        return statisticFilePath;
     }
 
     public void setBookInventoryFilePath(Path addressBookFilePath) {

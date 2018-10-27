@@ -4,12 +4,15 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.TimeZone;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
 import seedu.address.model.statistic.Statistic;
 
 
 /**
  * Manages the statistics' version the app.
  */
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class StatisticCenter implements Serializable {
 
     private static Calendar localCalendar = Calendar.getInstance(TimeZone.getDefault());
@@ -42,5 +45,9 @@ public class StatisticCenter implements Serializable {
     }
     public Statistic getStatistic() {
         return statistic;
+    }
+
+    public void loadStatistic(Statistic copy) {
+        this.statistic = copy;
     }
 }
