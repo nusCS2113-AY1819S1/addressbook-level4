@@ -86,7 +86,8 @@ public class StatusBarFooter extends UiPart<Region> {
     }
 
     private void setTotalPersonsGroups(int totalPersons, int totalGroups) {
-        Platform.runLater(() -> totalPersonsGroupsStatus.setText(String.format(TOTAL_PERSONS_GROUPS_STATUS, totalPersons, totalGroups)));
+        Platform.runLater(() -> totalPersonsGroupsStatus
+                .setText(String.format(TOTAL_PERSONS_GROUPS_STATUS, totalPersons, totalGroups)));
     }
 
     @Subscribe

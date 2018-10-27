@@ -123,6 +123,12 @@ public class UniqueGroupList implements Iterable<Group> {
         internalList.set(index, editedGroup);
     }
 
+    /**
+     * Creates a new group object to replace existing group
+     * @param target Group object to be replaced
+     * @param personSet
+     * @return
+     */
     public Group createEditedGroup(Group target, Set<Person> personSet) {
         requireAllNonNull(target, personSet);
         Set<Tag> editedGroupTagSet = new HashSet<>();
