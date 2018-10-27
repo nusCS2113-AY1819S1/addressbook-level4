@@ -21,6 +21,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.TodoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -106,6 +107,9 @@ public class AddressBookParser {
 
         case ExportAllCommand.COMMAND_WORD:
             return new ExportAllCommandParser().parse(arguments);
+
+        case TodoCommand.COMMAND_WORD:
+            return new TodoCommandParser().parse(arguments);
 
         default:
             String suggestion = new CommandSuggestion().getSuggestion(commandWord);

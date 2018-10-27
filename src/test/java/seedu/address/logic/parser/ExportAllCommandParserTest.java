@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.Test;
 
 import seedu.address.logic.commands.ExportAllCommand;
+import seedu.address.model.Filetype;
 
 //@@author jitwei98
 public class ExportAllCommandParserTest {
@@ -16,8 +17,8 @@ public class ExportAllCommandParserTest {
     @Test
     public void parseFiletypeSuccess() {
         final String userInput = "csv";
-        ExportAllCommand expectedCommand = new ExportAllCommand(userInput);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        final Filetype filetype = new Filetype(userInput);
+        assertParseSuccess(parser, userInput, new ExportAllCommand(filetype));
     }
 
     @Test

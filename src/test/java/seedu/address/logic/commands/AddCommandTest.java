@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.todo.Todo;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -161,6 +162,26 @@ public class AddCommandTest {
 
         @Override
         public void exportAddressBook() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public ObservableList<Todo> getFilteredTodoList() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public boolean hasTodo(Todo todo) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void addTodo(Todo todo) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void updateFilteredTodoList(Predicate<Todo> predicate) {
             throw new AssertionError("This method should not be called");
         }
     }

@@ -16,6 +16,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.todo.Content;
+import seedu.address.model.todo.Title;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -124,19 +126,51 @@ public class ParserUtil {
         return tagSet;
     }
 
+    //@@author jitwei98
     /**
      * Parses a {@code String filetype} into a {@code Filetype}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code String filetype} is invalid.
      */
-    public static String parseFiletype(String filetype) throws ParseException {
+    public static Filetype parseFiletype(String filetype) throws ParseException {
         requireNonNull(filetype);
 
         String trimmedFiletype = filetype.trim();
         if (!isValidFiletype(trimmedFiletype)) {
             throw new ParseException(Filetype.MESSAGE_FILETYPE_CONSTRAINTS);
         }
-        return trimmedFiletype;
+        return new Filetype(trimmedFiletype);
+    }
+
+    //@@author linnnruo
+    /**
+     * Parses a {@code String title} into a {@code Title}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code title} is invalid.
+     */
+    public static Title parseTitle(String title) throws ParseException {
+        requireNonNull(title);
+        String trimmedTitle = title.trim();
+        if (!Title.isValidTitle(trimmedTitle)) {
+            throw new ParseException(Title.MESSAGE_TITLE_CONSTRAINTS);
+        }
+        return new Title(trimmedTitle);
+    }
+
+    /**
+     * Parses a {@code String content} into a {@code Content}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code content} is invalid.
+     */
+    public static Content parseContent(String content) throws ParseException {
+        requireNonNull(content);
+        String trimmedContent = content.trim();
+        if (!Content.isValidContent(trimmedContent)) {
+            throw new ParseException(Content.MESSAGE_CONTENT_CONSTRAINTS);
+        }
+        return new Content(trimmedContent);
     }
 }
