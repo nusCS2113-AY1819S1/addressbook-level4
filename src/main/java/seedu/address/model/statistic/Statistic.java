@@ -1,5 +1,7 @@
 package seedu.address.model.statistic;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
 import java.util.Calendar;
 import java.util.Objects;
 import java.util.TimeZone;
@@ -8,30 +10,42 @@ import java.util.TimeZone;
  * Represents a Statistic in a month.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Statistic {
     private static final String STARTING_FIGURE = "0";
     // Data fields
     private static Calendar localCalendar = Calendar.getInstance(TimeZone.getDefault());
     private volatile Revenue revenue;
-    private final int month;
-    private final int year;
+    private int month;
+    private int year;
 
 
     /**
      * Every field must be present and not null.
      */
+
+    public Statistic(){
+        super();
+    }
+
+    public Statistic(Revenue revenue, int month, int year) {
+        this.revenue = revenue;
+        this.month = month;
+        this.year = year;
+    }
+
     public Statistic(int month, int year) {
         this.revenue = new Revenue(STARTING_FIGURE);
         this.month = month;
         this.year = year;
     }
 
-    public int getMonth() {
-        return month;
+    public String getMonth() {
+        return Integer.toString(month);
     }
 
-    public int getYear() {
-        return year;
+    public String getYear() {
+        return Integer.toString(year);
     }
 
     public Revenue getRevenue() {

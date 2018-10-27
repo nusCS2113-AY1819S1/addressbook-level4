@@ -1,15 +1,22 @@
 package seedu.address.commons.core;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Optional;
 import java.util.TimeZone;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.util.JsonUtil;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.statistic.Statistic;
 
 
 /**
  * Manages the statistics' version the app.
  */
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class StatisticCenter implements Serializable {
 
     private static Calendar localCalendar = Calendar.getInstance(TimeZone.getDefault());
@@ -42,5 +49,9 @@ public class StatisticCenter implements Serializable {
     }
     public Statistic getStatistic() {
         return statistic;
+    }
+
+    public void loadStatistic(Statistic copy) {
+        this.statistic = copy;
     }
 }
