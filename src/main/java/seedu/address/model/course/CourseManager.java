@@ -1,10 +1,12 @@
 package seedu.address.model.course;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import seedu.address.model.StorageController;
 import seedu.address.storage.adapter.XmlAdaptedCourse;
+import seedu.address.ui.HtmlTableProcessor;
 
 /**
  * This class represents the model-level layer for course management.
@@ -40,9 +42,31 @@ public class CourseManager {
         }
         return initCM;
     }
+
+    public boolean hasCourse(Course course) {
+        return courseList.contains(course);
+    }
+
+    public String getTableRepresentation() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(HtmlTableProcessor.getH3Representation("Course List"));
+        sb.append(HtmlTableProcessor.renderTableStart(new ArrayList<String>(
+                Arrays.asList("Course Name", "Course Code", "School/Faculty"))));
+
+        sb.append(HtmlTableProcessor.getTableItemStart());
+        for (Course c : courseList) {
+            sb.append(HtmlTableProcessor
+                    .renderTableItem(new ArrayList<String>(Arrays
+                            .asList(c.getCourseName().toString(),
+                                    c.getCourseCode().toString(), c.getFacultyName().toString()))));
+        }
+        sb.append(HtmlTableProcessor.getTableItemEnd());
+        return sb.toString();
+    }
     public Course getCourse(String courseCode) {
         for (Course c: courseList) {
-            if (courseCode.equalsIgnoreCase(c.getCourseCode())) {
+            if (courseCode.equalsIgnoreCase(c.getCourseCode().toString())) {
                 return c;
             }
         }
