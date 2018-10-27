@@ -17,7 +17,6 @@ import static seedu.address.logic.commands.GradebookDeleteCommand.MESSAGE_DELETE
 
 public class GradebookDeleteCommandTest {
     private static GradebookManager gradebookManager = new GradebookManager();
-
     private static GradebookBuilder dummyGradebookComponent = new GradebookBuilder();
 
     @Rule
