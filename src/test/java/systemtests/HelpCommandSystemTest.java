@@ -13,6 +13,7 @@ import guitests.GuiRobot;
 import guitests.guihandles.HelpWindowHandle;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.StatusBarFooter;
@@ -69,6 +70,7 @@ public class HelpCommandSystemTest extends EventManagerSystemTest {
 
         // assert that the status bar too is updated correctly while the help window is open
         // note: the select command tested above does not update the status bar
+        executeCommand(LoginCommand.COMMAND_WORD + " " + "u/admin" + " " + "p/root");
         executeCommand(DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_EVENT.getOneBased());
         assertNotEquals(StatusBarFooter.SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
     }
