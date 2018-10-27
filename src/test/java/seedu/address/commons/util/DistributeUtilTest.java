@@ -256,7 +256,15 @@ public class DistributeUtilTest {
 
     @Test
     public void groupBuilderTest() {
+        //check if groupName is null
+        Assert.assertThrows(NullPointerException.class, () -> distUtil.groupBuilder(null));
 
+        //check if creation of group is same as expected
+        String groupName = "CS2113-T13-04";
+        Set<Tag> tags = new HashSet<>();
+        Group actualGroup = distUtil.groupBuilder(groupName);
+        Group expectedGroup = new Group(new GroupName(groupName), new GroupLocation(GROUP_LOCATION), tags);
+        assertEquals(expectedGroup, actualGroup);
     }
 
     @Test
