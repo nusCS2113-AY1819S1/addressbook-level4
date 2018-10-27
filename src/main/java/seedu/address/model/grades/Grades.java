@@ -7,9 +7,9 @@ public class Grades {
     private String moduleCode;
     private String gradeComponentName;
     private String adminNo;
-    private int marks;
+    private float marks;
 
-    public Grades(String moduleCode, String gradeComponentName, String adminNo, int marks) {
+    public Grades(String moduleCode, String gradeComponentName, String adminNo, float marks) {
         this.moduleCode = moduleCode;
         this.gradeComponentName = gradeComponentName;
         this.adminNo = adminNo;
@@ -40,11 +40,11 @@ public class Grades {
         this.adminNo = adminNo;
     }
 
-    public int getMarks() {
+    public float getMarks() {
         return this.marks;
     }
 
-    public void setMarks(int marks) {
+    public void setMarks(float marks) {
         this.marks = marks;
     }
 

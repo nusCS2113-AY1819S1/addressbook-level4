@@ -93,7 +93,7 @@ public class GradesManager {
     /**
      This method checks if marks are within acceptable range.
      */
-    public boolean isMarksValid (int studentMarks) {
+    public boolean isMarksValid (float studentMarks) {
         boolean isMarksValid = false;
         if (studentMarks >= 0 && studentMarks <= 100) {
             isMarksValid = true;

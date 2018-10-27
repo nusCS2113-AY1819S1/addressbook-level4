@@ -20,7 +20,7 @@ public class XmlAdaptedGrades {
     @XmlElement(name = "adminNo", required = true, nillable = true)
     private String adminNo;
     @XmlElement(name = "studentMarks", required = true, nillable = true)
-    private int studentMarks;
+    private float studentMarks;
 
     /**
      * Constructs an XmlAdaptedGrades
@@ -59,7 +59,7 @@ public class XmlAdaptedGrades {
         return adminNo;
     }
 
-    public int getStudentMarks() {
+    public float getStudentMarks() {
         return studentMarks;
     }
 }

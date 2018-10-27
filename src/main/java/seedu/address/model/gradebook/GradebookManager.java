@@ -134,7 +134,7 @@ public class GradebookManager {
     /**
      This method checks if marks assigned is within range of max marks of grade component.
      */
-    public boolean hasMarksExceed (String moduleCode, String gradebookComponentName, int studentMarks) {
+    public boolean hasMarksExceed (String moduleCode, String gradebookComponentName, float studentMarks) {
         boolean isMarksValid = true;
         GradebookManager gradebookManager = new GradebookManager();
         Gradebook gradebook = gradebookManager.findGradebookComponent(moduleCode, gradebookComponentName);
