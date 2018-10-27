@@ -18,9 +18,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Person;
 
 /**
@@ -129,5 +132,13 @@ public class TypicalPersons {
 
     public static List<Person> getMultipleValidTypicalPerson() {
         return new ArrayList<>(Arrays.asList(JOEL, WEIQUAN, NOVIN, JOELTAN, TSURAJOVIN));
+    }
+
+    public static Map<Nationality, Long> getTypicalPersonNationalityMap() {
+        Map<Nationality, Long> typicalPersonMap = new HashMap<>();
+        typicalPersonMap.put(new Nationality("SG"), Long.parseLong("4"));
+        typicalPersonMap.put(new Nationality("US"), Long.parseLong("2"));
+        typicalPersonMap.put(new Nationality("MY"), Long.parseLong("1"));
+        return typicalPersonMap;
     }
 }
