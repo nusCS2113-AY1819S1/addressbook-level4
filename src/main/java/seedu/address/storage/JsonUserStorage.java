@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -37,11 +38,10 @@ public class JsonUserStorage implements UserStorage {
      */
     @Override
     public void createUser(String username, String password) throws IOException {
-        Gson gson = new Gson();
         JsonObject jsonObject = getJsonObject();
         jsonObject.addProperty(username, password);
 
-        writeJson(gson, jsonObject);
+        writeJson(new Gson(), jsonObject);
         setUserAccounts();
     }
 
@@ -64,7 +64,7 @@ public class JsonUserStorage implements UserStorage {
     /**
      * Returns the user accounts as a JSON Object.
      */
-    private JsonObject getJsonObject() throws IOException {
+    private JsonObject getJsonObject() throws FileNotFoundException {
         JsonParser parser = new JsonParser();
         JsonElement jsonElement = parser.parse(new FileReader(filePathString));
 
@@ -75,11 +75,8 @@ public class JsonUserStorage implements UserStorage {
      * Creates a user account JSON file.
      */
     private void createUserFile() throws IOException {
-        Gson gson = new Gson();
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("admin", "root");
-
-        writeJson(gson, jsonObject);
+        writeJson(new Gson(), jsonObject);
     }
 
     /**
