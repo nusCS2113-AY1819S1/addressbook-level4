@@ -279,12 +279,39 @@ public class DistributeUtilTest {
     }
 
     @Test
-    public void addPersonIntoGroupTest() {
+    public void addPersonIntoGroupWithoutCommitTest() {
+        //check if addGroup is null
+        Assert.assertThrows(NullPointerException.class, () -> distUtil.addPersonIntoGroupWithoutCommit(null, model));
 
+        //check if model is null
+        //Group newGroup = distUtil.groupBuilder();
+        //AddGroup expectedGroup = new AddGroup(distUtil.returnGroupIndex(newGroup, model)
+        // , new HashSet<>().add(Index.fromZeroBased(3)));
+        //Assert.assertThrows(NullPointerException.class, () -> distUtil
+        // .addPersonIntoGroupWithoutCommit(expectedGroup, null));
+        //TODO
     }
 
     @Test
     public void returnGroupIndexTest() {
+        //check if group is null
+        Assert.assertThrows(NullPointerException.class, () -> distUtil.returnGroupIndex(null, model));
+
+        //check if model is null
+        Group testGroup = distUtil.groupBuilder("testGroup");
+        Assert.assertThrows(NullPointerException.class, () -> distUtil.returnGroupIndex(testGroup, null));
+
+        //check is Index match with stub address book
+        Index expectedIndex = Index.fromZeroBased(0);
+        Group expectedGroup = new GroupBuilder().withGroupName("TUT[1]").withGroupLocation("E1-01-01")
+                .withTags("morning").build();
+        assertEquals(distUtil.returnGroupIndex(expectedGroup, model), expectedIndex);
+
+        //check if index is 0 if no group is found.
+        expectedIndex = Index.fromZeroBased(0);
+        Group missingGroup = new GroupBuilder().withGroupName("TUT[1]").withGroupLocation("E1-01-01")
+                .withTags("morning").build();
+        assertEquals(distUtil.returnGroupIndex(missingGroup, model), expectedIndex);
 
     }
 
