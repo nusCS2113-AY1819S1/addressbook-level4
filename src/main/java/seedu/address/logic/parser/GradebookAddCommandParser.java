@@ -21,8 +21,8 @@ public class GradebookAddCommandParser implements Parser<GradebookAddCommand> {
     public static final String MESSAGE_MAX_MARKS_ERROR = "Invalid input. \nMaximum marks should only be an integer";
     public static final String MESSAGE_WEIGHTAGE_ERROR = "Invalid input. \nWeightage should only be an integer";
     public static final String MESSAGE_MAX_MARKS_INVALID = "Max marks should be within 0-100 range";
-    private static final String MESSAGE_DUPLICATE = "Gradebook component already exist in Trajectory";
     private static final String MESSAGE_WEIGHTAGE_INVALID = "Weightage should be within 0-100 range";
+    private static final String MESSAGE_DUPLICATE = "Gradebook component already exist in Trajectory";
     private static final String MESSAGE_WEIGHTAGE_EXCEED = "The accumulated weightage for module stated has exceeded!";
 
     /**

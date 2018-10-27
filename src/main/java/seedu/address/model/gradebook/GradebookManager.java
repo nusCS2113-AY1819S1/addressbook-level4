@@ -130,5 +130,33 @@ public class GradebookManager {
         }
         return hasWeightageExceed;
     }
+
+    /**
+     This method checks if marks assigned is within range of max marks of grade component.
+     */
+    public boolean hasMarksExceed (String moduleCode, String gradebookComponentName, int studentMarks) {
+        boolean isMarksValid = true;
+        GradebookManager gradebookManager = new GradebookManager();
+        Gradebook gradebook = gradebookManager.findGradebookComponent(moduleCode, gradebookComponentName);
+
+        if (studentMarks > gradebook.getGradeComponentMaxMarks()) {
+            isMarksValid = false;
+        }
+
+        return isMarksValid;
+    }
+
+    /**
+     This method checks if gradebook component exist.
+     */
+    public boolean isGradeComponentValid (String moduleCode, String gradebookComponentName) {
+        boolean isGradeComponentValid = true;
+        GradebookManager gradebookManager = new GradebookManager();
+        Gradebook gradebook = gradebookManager.findGradebookComponent(moduleCode, gradebookComponentName);
+        if (gradebook == null) {
+            isGradeComponentValid = false;
+        }
+        return isGradeComponentValid;
+    }
 }
 

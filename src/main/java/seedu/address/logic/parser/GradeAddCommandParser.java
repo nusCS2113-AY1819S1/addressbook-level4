@@ -8,25 +8,31 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_MARKS;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.StudentGradeAddCommand;
+import seedu.address.logic.commands.GradeAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.gradebook.GradebookManager;
 import seedu.address.model.grades.Grades;
 import seedu.address.model.grades.GradesManager;
 
 /**
- * Parses input arguments and creates a new StudentGradeAddCommand object
+ * Parses input arguments and creates a new GradeAddCommand object
  */
-public class StudentGradeAddCommandParser implements Parser<StudentGradeAddCommand> {
+public class GradeAddCommandParser implements Parser<GradeAddCommand> {
     public static final String MESSAGE_MARKS_ERROR = "Invalid input. \nMaximum marks should only be an integer";
-    public static final String MESSAGE_EMPTY_INPUTS = "Module code and gradebook component name cannot be empty";
+    public static final String MESSAGE_MARKS_INVALID = "Marks should be within 0-100 range";
+    public static final String MESSAGE_MARKS_EXCEED = "Marks assigned is above maximum marks.";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "Student has already been assigned a grade";
+    public static final String MESSAGE_GRADEBOOK_INVALID = "Gradebook component does not exist";
+    public static final String MESSAGE_MISSING_PARAMS = "All parameters must be filled";
     /**
-     * Parses the given {@code String args} of arguments in the context of the GradebookAddCommand
-     * and returns a GradebookAddCommand object for execution.
+     * Parses the given {@code String args} of arguments in the context of the GradeAddCommand
+     * and returns a GradeAddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public StudentGradeAddCommand parse(String args) throws ParseException {
+    public GradeAddCommand parse(String args) throws ParseException {
         GradesManager gradesManager = new GradesManager();
-        int studentMarks = 0;
+        GradebookManager gradebookManager = new GradebookManager();
+        int studentMarksArg = 0;
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULE_CODE, PREFIX_GRADEBOOK_ITEM,
                 PREFIX_STUDENT_ADMIN_NO, PREFIX_STUDENT_MARKS);
@@ -39,12 +45,12 @@ public class StudentGradeAddCommandParser implements Parser<StudentGradeAddComma
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(
                     MESSAGE_INVALID_COMMAND_FORMAT,
-                    StudentGradeAddCommand.MESSAGE_USAGE));
+                    GradeAddCommand.MESSAGE_USAGE));
         }
 
         if (arePrefixesPresent(argMultimap, PREFIX_STUDENT_MARKS) || !argMultimap.getPreamble().isEmpty()) {
             try {
-                studentMarks = Integer.parseInt(argMultimap.getValue(PREFIX_STUDENT_MARKS).get());
+                studentMarksArg = Integer.parseInt(argMultimap.getValue(PREFIX_STUDENT_MARKS).get());
             } catch (NumberFormatException nme) {
                 throw new ParseException(MESSAGE_MARKS_ERROR);
             }
@@ -55,14 +61,30 @@ public class StudentGradeAddCommandParser implements Parser<StudentGradeAddComma
         String gradeComponentNameArg = argMultimap.getValue(PREFIX_GRADEBOOK_ITEM).get();
         boolean isEmpty = gradesManager.isEmpty(moduleCodeArg, gradeComponentNameArg, studentAdminNoArg);
         if (isEmpty) {
-            throw new ParseException(MESSAGE_EMPTY_INPUTS);
+            throw new ParseException(MESSAGE_MISSING_PARAMS);
+        }
+        boolean isGradeComponentValid = gradebookManager.isGradeComponentValid(moduleCodeArg, gradeComponentNameArg);
+        if (!isGradeComponentValid) {
+            throw new ParseException(MESSAGE_GRADEBOOK_INVALID);
+        }
+        boolean isDuplicate = gradesManager.isDuplicate(moduleCodeArg, gradeComponentNameArg, studentAdminNoArg);
+        if (isDuplicate) {
+            throw new ParseException(MESSAGE_DUPLICATE_STUDENT);
+        }
+        boolean isMarksValid = gradesManager.isMarksValid(studentMarksArg);
+        if (!isMarksValid) {
+            throw new ParseException(MESSAGE_MARKS_INVALID);
+        }
+        boolean hasMarksExceed = gradebookManager.hasMarksExceed(moduleCodeArg, gradeComponentNameArg, studentMarksArg);
+        if (!hasMarksExceed) {
+            throw new ParseException(MESSAGE_MARKS_EXCEED);
         }
         Grades grade = new Grades(
                 moduleCodeArg,
                 gradeComponentNameArg,
                 studentAdminNoArg,
-                studentMarks);
-        return new StudentGradeAddCommand(grade);
+                studentMarksArg);
+        return new GradeAddCommand(grade);
     }
 
     /**

@@ -14,8 +14,8 @@ import seedu.address.model.grades.GradesManager;
 /**
  * Adds student grade to Trajectory.
  */
-public class StudentGradeAddCommand extends Command {
-    public static final String COMMAND_WORD = "student grade add";
+public class GradeAddCommand extends Command {
+    public static final String COMMAND_WORD = "grade add";
     public static final String MESSAGE_ADD_GRADE_SUCCESS = "\nSuccessfully assign! \nModule Code: %1$s"
             + "\nGradebook Component Name: %2$s" + "\nAdmin No.: %3$s" + "\nMarks: %4$s";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds grade to Trajectory. "
@@ -30,7 +30,7 @@ public class StudentGradeAddCommand extends Command {
             + PREFIX_STUDENT_ADMIN_NO + "A0167789S "
             + PREFIX_STUDENT_MARKS + "50";
     private final Grades toAddGrade;
-    public StudentGradeAddCommand(Grades grade) {
+    public GradeAddCommand(Grades grade) {
         this.toAddGrade = grade;
     }
 
@@ -50,7 +50,7 @@ public class StudentGradeAddCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this //short circuit if same object
-                || (other instanceof StudentGradeAddCommand //instanceof handles nulls
-                && toAddGrade.equals(((StudentGradeAddCommand) other).toAddGrade));
+                || (other instanceof GradeAddCommand //instanceof handles nulls
+                && toAddGrade.equals(((GradeAddCommand) other).toAddGrade));
     }
 }

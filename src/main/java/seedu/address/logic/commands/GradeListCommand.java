@@ -8,8 +8,8 @@ import seedu.address.model.grades.GradesManager;
 /**
  * Lists all gradebook components for module in Trajectory to the user.
  */
-public class StudentGradeListCommand extends Command {
-    public static final String COMMAND_WORD = "student grade list";
+public class GradeListCommand extends Command {
+    public static final String COMMAND_WORD = "grade list";
     private static final String MESSAGE_LIST_GRADE_SUCCESS = "Number of Student Grades Listed: ";
 
     @Override

@@ -1,6 +1,9 @@
 package seedu.address.model.grades;
 
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.StorageController;
+import seedu.address.model.gradebook.Gradebook;
+import seedu.address.model.gradebook.GradebookManager;
 import seedu.address.storage.adapter.XmlAdaptedGrades;
 
 import java.util.ArrayList;
@@ -60,6 +63,44 @@ public class GradesManager {
         }
         return isEmpty;
     }
+
+    /**
+     This method checks if admin no already assigned a grade.
+     */
+    public boolean isDuplicate (String moduleCode, String gradebookComponentName, String adminNo) {
+        boolean isDuplicate = false;
+        Grades grade = findAdminNo(moduleCode, gradebookComponentName, adminNo);
+        if (grade != null) {
+            isDuplicate = true;
+        }
+        return isDuplicate;
+    }
+
+    /**
+     This method finds admin no to an assigned grade item in Trajectory.
+     */
+    public Grades findAdminNo (String moduleCode, String gradebookComponentName, String adminNo) {
+        for (Grades grade : grades) {
+            if (grade.getModuleCode().equals(moduleCode)
+                    && grade.getGradeComponentName().equals(gradebookComponentName)
+                    && grade.getAdminNo().equals(adminNo)) {
+                return grade;
+            }
+        }
+        return null;
+    }
+
+    /**
+     This method checks if marks are within acceptable range.
+     */
+    public boolean isMarksValid (int studentMarks) {
+        boolean isMarksValid = false;
+        if (studentMarks >= 0 && studentMarks <= 100) {
+            isMarksValid = true;
+        }
+        return isMarksValid;
+    }
+
 
 
 }
