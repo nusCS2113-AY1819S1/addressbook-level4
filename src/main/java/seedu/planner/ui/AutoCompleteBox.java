@@ -56,7 +56,8 @@ public class AutoCompleteBox extends UiPart<Region> {
     public AutoCompleteBox(TextField commandTextField) {
         super(FXML);
         this.commandTextField = commandTextField;
-        CustomAutoCompleteTextField.bindAutoCompletion(commandTextField, commandKeywordsSet).setVisibleRowCount(MAX_ROWS);
+        CustomAutoCompleteTextField.bindAutoCompletion(commandTextField, commandKeywordsSet)
+                .setVisibleRowCount(MAX_ROWS);
     }
 
 }

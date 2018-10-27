@@ -16,22 +16,6 @@ import javafx.util.StringConverter;
 public class CustomAutoCompletionTextFieldBinding<T> extends AutoCompletionBinding<T> {
 
     private String oldText = "";
-
-    /**
-     * String converter to be used to convert suggestions to strings.
-     */
-    private static <T> StringConverter<T> defaultStringConverter() {
-        return new StringConverter<T>() {
-            @Override public String toString(T t) {
-                return t == null ? null : t.toString();
-            }
-            @SuppressWarnings("unchecked")
-            @Override public T fromString(String string) {
-                return (T) string;
-            }
-        };
-    }
-
     private StringConverter<T> converter;
 
     /**
@@ -61,50 +45,60 @@ public class CustomAutoCompletionTextFieldBinding<T> extends AutoCompletionBindi
                 .<T>defaultStringConverter());
     }
 
+    /**
+     * String converter to be used to convert suggestions to strings.
+     */
+    private static <T> StringConverter<T> defaultStringConverter() {
+        return new StringConverter<T>() {
+            @Override
+            public String toString(T t) {
+                return t == null ? null : t.toString();
+            }
 
-
-    @Override
-    public TextField getCompletionTarget(){
-        return (TextField)super.getCompletionTarget();
+            @SuppressWarnings("unchecked")
+            @Override
+            public T fromString(String string) {
+                return (T) string;
+            }
+        };
     }
 
     @Override
-    public void dispose(){
+    public TextField getCompletionTarget() {
+        return (TextField) super.getCompletionTarget();
+    }
+
+    @Override
+    public void dispose() {
         getCompletionTarget().caretPositionProperty().removeListener(caretChangeListener);
         getCompletionTarget().focusedProperty().removeListener(focusChangedListener);
     }
 
     @Override
-    protected void completeUserInput(T completion){
+    protected void completeUserInput(T completion) {
         String newText = oldText + converter.toString(completion);
         getCompletionTarget().setText(newText);
         getCompletionTarget().positionCaret(newText.length());
     }
 
-    private final ChangeListener<Number> caretChangeListener = new ChangeListener<Number>() {
-        @Override
-        public void changed(ObservableValue<? extends Number> obs, Number oldNumber, Number newNumber) {
-            String text = getCompletionTarget().getText().substring(0, newNumber.intValue());
-            int index ;
-            for (index = text.length() - 1; index >= 0 && ! Character.isWhitespace(text.charAt(index)); index--);
-            if (index > 0) {
-                oldText = text.substring(0, index) + " ";
-            } else {
-                oldText = "";
-            }
-            String newText = text.substring(index+1, text.length());
-            if (getCompletionTarget().isFocused()) {
-                setUserInput(newText);
-            }
+    private final ChangeListener<Number> caretChangeListener = (obs, oldNumber, newNumber) -> {
+        String text = getCompletionTarget().getText().substring(0, newNumber.intValue());
+        int index;
+        for (index = text.length() - 1; index >= 0 && !Character.isWhitespace(text.charAt(index)); index--);
+        if (index > 0) {
+            oldText = text.substring(0, index) + " ";
+        } else {
+            oldText = "";
+        }
+        String newText = text.substring(index + 1, text.length());
+        if (getCompletionTarget().isFocused()) {
+            setUserInput(newText);
         }
     };
 
-    private final ChangeListener<Boolean> focusChangedListener = new ChangeListener<Boolean>() {
-        @Override
-        public void changed(ObservableValue<? extends Boolean> obs, Boolean oldFocused, Boolean newFocused) {
-            if (newFocused == false){
-                hidePopup();
-            }
+    private final ChangeListener<Boolean> focusChangedListener = (obs, oldFocused, newFocused) -> {
+        if (newFocused == false){
+            hidePopup();
         }
     };
 
