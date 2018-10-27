@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 import javax.swing.plaf.synth.Region;
 
+import impl.org.controlsfx.autocompletion.SuggestionProvider;
 import javafx.scene.control.TextField;
 import seedu.planner.logic.commands.AddCommand;
 import seedu.planner.logic.commands.ClearCommand;
@@ -27,7 +28,6 @@ import seedu.planner.logic.commands.SelectCommand;
 import seedu.planner.logic.commands.SortCommand;
 import seedu.planner.logic.commands.SummaryCommand;
 import seedu.planner.logic.commands.UndoCommand;
-import seedu.planner.ui.completion.CustomAutoCompleteTextField;
 
 /**
  * The UI component that is responsible for displaying the possible auto complete text inputs
@@ -48,16 +48,15 @@ public class AutoCompleteBox extends UiPart<Region> {
                     ListCommand.COMMAND_WORD, RedoCommand.COMMAND_WORD, SelectCommand.COMMAND_WORD,
                     SortCommand.COMMAND_WORD, SummaryCommand.COMMAND_WORD, UndoCommand.COMMAND_WORD));
 
-    private Set<String> sortKeywordsSet = Stream.concat(SortCommand.ORDER_SET.stream(),
+    private static Set<String> sortKeywordsSet = Stream.concat(SortCommand.ORDER_SET.stream(),
             SortCommand.CATEGORY_SET.stream()).collect(Collectors.toSet());
 
-    private Set<String> tagKeywordsSet = new HashSet<>();
+    private static SuggestionProvider<String> suggestionProvider = SuggestionProvider.create(commandKeywordsSet);
 
     public AutoCompleteBox(TextField commandTextField) {
         super(FXML);
         this.commandTextField = commandTextField;
-        CustomAutoCompleteTextField.bindAutoCompletion(commandTextField, commandKeywordsSet)
-                .setVisibleRowCount(MAX_ROWS);
+        new CustomAutoCompletionTextFieldBinding<>(commandTextField, suggestionProvider).setVisibleRowCount(MAX_ROWS);
     }
 
 }

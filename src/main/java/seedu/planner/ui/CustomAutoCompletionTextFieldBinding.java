@@ -1,4 +1,4 @@
-package seedu.planner.ui.completion;
+package seedu.planner.ui;
 
 import java.util.Collection;
 
