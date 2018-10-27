@@ -18,281 +18,283 @@ import seedu.address.testutil.EventManagerBuilder;
 
 public class VersionedEventManagerTest {
 
-    private final ReadOnlyEventManager addressBookWithAmy = new EventManagerBuilder().withEvent(AMY).build();
-    private final ReadOnlyEventManager addressBookWithBob = new EventManagerBuilder().withEvent(BOB).build();
-    private final ReadOnlyEventManager addressBookWithCarl = new EventManagerBuilder().withEvent(CARL).build();
-    private final ReadOnlyEventManager emptyAddressBook = new EventManagerBuilder().build();
+    private final ReadOnlyEventManager eventManagerWithAmy = new EventManagerBuilder().withEvent(AMY).build();
+    private final ReadOnlyEventManager eventManagerWithBob = new EventManagerBuilder().withEvent(BOB).build();
+    private final ReadOnlyEventManager eventManagerWithCarl = new EventManagerBuilder().withEvent(CARL).build();
+    private final ReadOnlyEventManager emptyEventManager = new EventManagerBuilder().build();
 
     @Test
-    public void commit_singleAddressBook_noStatesRemovedCurrentStateSaved() {
-        VersionedEventManager versionedAddressBook = prepareAddressBookList(emptyAddressBook);
+    public void commit_singleEventManager_noStatesRemovedCurrentStateSaved() {
+        VersionedEventManager versionedEventManager = prepareEventManagerList(emptyEventManager);
 
-        versionedAddressBook.commit();
-        assertAddressBookListStatus(versionedAddressBook,
-                Collections.singletonList(emptyAddressBook),
-                emptyAddressBook,
+        versionedEventManager.commit();
+        assertEventManagerListStatus(versionedEventManager,
+                Collections.singletonList(emptyEventManager),
+                emptyEventManager,
                 Collections.emptyList());
     }
 
     @Test
-    public void commit_multipleAddressBookPointerAtEndOfStateList_noStatesRemovedCurrentStateSaved() {
-        VersionedEventManager versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+    public void commit_multipleEventManagerPointerAtEndOfStateList_noStatesRemovedCurrentStateSaved() {
+        VersionedEventManager versionedEventManager = prepareEventManagerList(
+                emptyEventManager, eventManagerWithAmy, eventManagerWithBob);
 
-        versionedAddressBook.commit();
-        assertAddressBookListStatus(versionedAddressBook,
-                Arrays.asList(emptyAddressBook, addressBookWithAmy, addressBookWithBob),
-                addressBookWithBob,
+        versionedEventManager.commit();
+        assertEventManagerListStatus(versionedEventManager,
+                Arrays.asList(emptyEventManager, eventManagerWithAmy, eventManagerWithBob),
+                eventManagerWithBob,
                 Collections.emptyList());
     }
 
     @Test
-    public void commit_multipleAddressBookPointerNotAtEndOfStateList_statesAfterPointerRemovedCurrentStateSaved() {
-        VersionedEventManager versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 2);
+    public void commit_multipleEventManagerPointerNotAtEndOfStateList_statesAfterPointerRemovedCurrentStateSaved() {
+        VersionedEventManager versionedEventManager = prepareEventManagerList(
+                emptyEventManager, eventManagerWithAmy, eventManagerWithBob);
+        shiftCurrentStatePointerLeftwards(versionedEventManager, 2);
 
-        versionedAddressBook.commit();
-        assertAddressBookListStatus(versionedAddressBook,
-                Collections.singletonList(emptyAddressBook),
-                emptyAddressBook,
+        versionedEventManager.commit();
+        assertEventManagerListStatus(versionedEventManager,
+                Collections.singletonList(emptyEventManager),
+                emptyEventManager,
                 Collections.emptyList());
     }
 
     @Test
-    public void canUndo_multipleAddressBookPointerAtEndOfStateList_returnsTrue() {
-        VersionedEventManager versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+    public void canUndo_multipleEventManagerPointerAtEndOfStateList_returnsTrue() {
+        VersionedEventManager versionedEventManager = prepareEventManagerList(
+                emptyEventManager, eventManagerWithAmy, eventManagerWithBob);
 
-        assertTrue(versionedAddressBook.canUndo());
+        assertTrue(versionedEventManager.canUndo());
     }
 
     @Test
-    public void canUndo_multipleAddressBookPointerAtStartOfStateList_returnsTrue() {
-        VersionedEventManager versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 1);
+    public void canUndo_multipleEventManagerPointerAtStartOfStateList_returnsTrue() {
+        VersionedEventManager versionedEventManager = prepareEventManagerList(
+                emptyEventManager, eventManagerWithAmy, eventManagerWithBob);
+        shiftCurrentStatePointerLeftwards(versionedEventManager, 1);
 
-        assertTrue(versionedAddressBook.canUndo());
+        assertTrue(versionedEventManager.canUndo());
     }
 
     @Test
-    public void canUndo_singleAddressBook_returnsFalse() {
-        VersionedEventManager versionedAddressBook = prepareAddressBookList(emptyAddressBook);
+    public void canUndo_singleEventManager_returnsFalse() {
+        VersionedEventManager versionedEventManager = prepareEventManagerList(emptyEventManager);
 
-        assertFalse(versionedAddressBook.canUndo());
+        assertFalse(versionedEventManager.canUndo());
     }
 
     @Test
-    public void canUndo_multipleAddressBookPointerAtStartOfStateList_returnsFalse() {
-        VersionedEventManager versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 2);
+    public void canUndo_multipleEventManagerPointerAtStartOfStateList_returnsFalse() {
+        VersionedEventManager versionedEventManager = prepareEventManagerList(
+                emptyEventManager, eventManagerWithAmy, eventManagerWithBob);
+        shiftCurrentStatePointerLeftwards(versionedEventManager, 2);
 
-        assertFalse(versionedAddressBook.canUndo());
+        assertFalse(versionedEventManager.canUndo());
     }
 
     @Test
-    public void canRedo_multipleAddressBookPointerNotAtEndOfStateList_returnsTrue() {
-        VersionedEventManager versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 1);
+    public void canRedo_multipleEventManagerPointerNotAtEndOfStateList_returnsTrue() {
+        VersionedEventManager versionedEventManager = prepareEventManagerList(
+                emptyEventManager, eventManagerWithAmy, eventManagerWithBob);
+        shiftCurrentStatePointerLeftwards(versionedEventManager, 1);
 
-        assertTrue(versionedAddressBook.canRedo());
+        assertTrue(versionedEventManager.canRedo());
     }
 
     @Test
-    public void canRedo_multipleAddressBookPointerAtStartOfStateList_returnsTrue() {
-        VersionedEventManager versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 2);
+    public void canRedo_multipleEventManagerPointerAtStartOfStateList_returnsTrue() {
+        VersionedEventManager versionedEventManager = prepareEventManagerList(
+                emptyEventManager, eventManagerWithAmy, eventManagerWithBob);
+        shiftCurrentStatePointerLeftwards(versionedEventManager, 2);
 
-        assertTrue(versionedAddressBook.canRedo());
+        assertTrue(versionedEventManager.canRedo());
     }
 
     @Test
-    public void canRedo_singleAddressBook_returnsFalse() {
-        VersionedEventManager versionedAddressBook = prepareAddressBookList(emptyAddressBook);
+    public void canRedo_singleEventManager_returnsFalse() {
+        VersionedEventManager versionedEventManager = prepareEventManagerList(emptyEventManager);
 
-        assertFalse(versionedAddressBook.canRedo());
+        assertFalse(versionedEventManager.canRedo());
     }
 
     @Test
-    public void canRedo_multipleAddressBookPointerAtEndOfStateList_returnsFalse() {
-        VersionedEventManager versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+    public void canRedo_multipleEventManagerPointerAtEndOfStateList_returnsFalse() {
+        VersionedEventManager versionedEventManager = prepareEventManagerList(
+                emptyEventManager, eventManagerWithAmy, eventManagerWithBob);
 
-        assertFalse(versionedAddressBook.canRedo());
+        assertFalse(versionedEventManager.canRedo());
     }
 
     @Test
-    public void undo_multipleAddressBookPointerAtEndOfStateList_success() {
-        VersionedEventManager versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+    public void undo_multipleEventManagerPointerAtEndOfStateList_success() {
+        VersionedEventManager versionedEventManager = prepareEventManagerList(
+                emptyEventManager, eventManagerWithAmy, eventManagerWithBob);
 
-        versionedAddressBook.undo();
-        assertAddressBookListStatus(versionedAddressBook,
-                Collections.singletonList(emptyAddressBook),
-                addressBookWithAmy,
-                Collections.singletonList(addressBookWithBob));
+        versionedEventManager.undo();
+        assertEventManagerListStatus(versionedEventManager,
+                Collections.singletonList(emptyEventManager),
+                eventManagerWithAmy,
+                Collections.singletonList(eventManagerWithBob));
     }
 
     @Test
-    public void undo_multipleAddressBookPointerNotAtStartOfStateList_success() {
-        VersionedEventManager versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 1);
+    public void undo_multipleEventManagerPointerNotAtStartOfStateList_success() {
+        VersionedEventManager versionedEventManager = prepareEventManagerList(
+                emptyEventManager, eventManagerWithAmy, eventManagerWithBob);
+        shiftCurrentStatePointerLeftwards(versionedEventManager, 1);
 
-        versionedAddressBook.undo();
-        assertAddressBookListStatus(versionedAddressBook,
+        versionedEventManager.undo();
+        assertEventManagerListStatus(versionedEventManager,
                 Collections.emptyList(),
-                emptyAddressBook,
-                Arrays.asList(addressBookWithAmy, addressBookWithBob));
+                emptyEventManager,
+                Arrays.asList(eventManagerWithAmy, eventManagerWithBob));
     }
 
     @Test
-    public void undo_singleAddressBook_throwsNoUndoableStateException() {
-        VersionedEventManager versionedAddressBook = prepareAddressBookList(emptyAddressBook);
+    public void undo_singleEventManager_throwsNoUndoableStateException() {
+        VersionedEventManager versionedEventManager = prepareEventManagerList(emptyEventManager);
 
-        assertThrows(VersionedEventManager.NoUndoableStateException.class, versionedAddressBook::undo);
+        assertThrows(VersionedEventManager.NoUndoableStateException.class, versionedEventManager::undo);
     }
 
     @Test
-    public void undo_multipleAddressBookPointerAtStartOfStateList_throwsNoUndoableStateException() {
-        VersionedEventManager versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 2);
+    public void undo_multipleEventManagerPointerAtStartOfStateList_throwsNoUndoableStateException() {
+        VersionedEventManager versionedEventManager = prepareEventManagerList(
+                emptyEventManager, eventManagerWithAmy, eventManagerWithBob);
+        shiftCurrentStatePointerLeftwards(versionedEventManager, 2);
 
-        assertThrows(VersionedEventManager.NoUndoableStateException.class, versionedAddressBook::undo);
+        assertThrows(VersionedEventManager.NoUndoableStateException.class, versionedEventManager::undo);
     }
 
     @Test
-    public void redo_multipleAddressBookPointerNotAtEndOfStateList_success() {
-        VersionedEventManager versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 1);
+    public void redo_multipleEventManagerPointerNotAtEndOfStateList_success() {
+        VersionedEventManager versionedEventManager = prepareEventManagerList(
+                emptyEventManager, eventManagerWithAmy, eventManagerWithBob);
+        shiftCurrentStatePointerLeftwards(versionedEventManager, 1);
 
-        versionedAddressBook.redo();
-        assertAddressBookListStatus(versionedAddressBook,
-                Arrays.asList(emptyAddressBook, addressBookWithAmy),
-                addressBookWithBob,
+        versionedEventManager.redo();
+        assertEventManagerListStatus(versionedEventManager,
+                Arrays.asList(emptyEventManager, eventManagerWithAmy),
+                eventManagerWithBob,
                 Collections.emptyList());
     }
 
     @Test
-    public void redo_multipleAddressBookPointerAtStartOfStateList_success() {
-        VersionedEventManager versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 2);
+    public void redo_multipleEventManagerPointerAtStartOfStateList_success() {
+        VersionedEventManager versionedEventManager = prepareEventManagerList(
+                emptyEventManager, eventManagerWithAmy, eventManagerWithBob);
+        shiftCurrentStatePointerLeftwards(versionedEventManager, 2);
 
-        versionedAddressBook.redo();
-        assertAddressBookListStatus(versionedAddressBook,
-                Collections.singletonList(emptyAddressBook),
-                addressBookWithAmy,
-                Collections.singletonList(addressBookWithBob));
+        versionedEventManager.redo();
+        assertEventManagerListStatus(versionedEventManager,
+                Collections.singletonList(emptyEventManager),
+                eventManagerWithAmy,
+                Collections.singletonList(eventManagerWithBob));
     }
 
     @Test
-    public void redo_singleAddressBook_throwsNoRedoableStateException() {
-        VersionedEventManager versionedAddressBook = prepareAddressBookList(emptyAddressBook);
+    public void redo_singleEventManager_throwsNoRedoableStateException() {
+        VersionedEventManager versionedEventManager = prepareEventManagerList(emptyEventManager);
 
-        assertThrows(VersionedEventManager.NoRedoableStateException.class, versionedAddressBook::redo);
+        assertThrows(VersionedEventManager.NoRedoableStateException.class, versionedEventManager::redo);
     }
 
     @Test
-    public void redo_multipleAddressBookPointerAtEndOfStateList_throwsNoRedoableStateException() {
-        VersionedEventManager versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+    public void redo_multipleEventManagerPointerAtEndOfStateList_throwsNoRedoableStateException() {
+        VersionedEventManager versionedEventManager = prepareEventManagerList(
+                emptyEventManager, eventManagerWithAmy, eventManagerWithBob);
 
-        assertThrows(VersionedEventManager.NoRedoableStateException.class, versionedAddressBook::redo);
+        assertThrows(VersionedEventManager.NoRedoableStateException.class, versionedEventManager::redo);
     }
 
     @Test
     public void equals() {
-        VersionedEventManager versionedAddressBook = prepareAddressBookList(addressBookWithAmy, addressBookWithBob);
+        VersionedEventManager versionedEventManager = prepareEventManagerList(eventManagerWithAmy, eventManagerWithBob);
 
         // same values -> returns true
-        VersionedEventManager copy = prepareAddressBookList(addressBookWithAmy, addressBookWithBob);
-        assertTrue(versionedAddressBook.equals(copy));
+        VersionedEventManager copy = prepareEventManagerList(eventManagerWithAmy, eventManagerWithBob);
+        assertTrue(versionedEventManager.equals(copy));
 
         // same object -> returns true
-        assertTrue(versionedAddressBook.equals(versionedAddressBook));
+        assertTrue(versionedEventManager.equals(versionedEventManager));
 
         // null -> returns false
-        assertFalse(versionedAddressBook.equals(null));
+        assertFalse(versionedEventManager.equals(null));
 
         // different types -> returns false
-        assertFalse(versionedAddressBook.equals(1));
+        assertFalse(versionedEventManager.equals(1));
 
         // different state list -> returns false
-        VersionedEventManager differentEManagerList = prepareAddressBookList(addressBookWithBob, addressBookWithCarl);
-        assertFalse(versionedAddressBook.equals(differentEManagerList));
+        VersionedEventManager differentEManagerList = prepareEventManagerList(eventManagerWithBob,
+                eventManagerWithCarl);
+        assertFalse(versionedEventManager.equals(differentEManagerList));
 
         // different current pointer index -> returns false
-        VersionedEventManager differentCurrentStatePointer = prepareAddressBookList(
-                addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 1);
-        assertFalse(versionedAddressBook.equals(differentCurrentStatePointer));
+        VersionedEventManager differentCurrentStatePointer = prepareEventManagerList(
+                eventManagerWithAmy, eventManagerWithBob);
+        shiftCurrentStatePointerLeftwards(versionedEventManager, 1);
+        assertFalse(versionedEventManager.equals(differentCurrentStatePointer));
     }
 
     /**
-     * Asserts that {@code versionedAddressBook} is currently pointing at {@code expectedCurrentState},
-     * states before {@code versionedAddressBook#currentStatePointer} is equal to {@code expectedStatesBeforePointer},
-     * and states after {@code versionedAddressBook#currentStatePointer} is equal to {@code expectedStatesAfterPointer}.
+     * Asserts that {@code versionedEventManager} is currently pointing at {@code expectedCurrentState},
+     * states before {@code versionedEventManager#currentStatePointer} is equal to {@code expectedStatesBeforePointer},
+     * and states after {@code versionedEventManager#currentStatePointer} is equal to {@code expectedStatesAfterPointer}
+     * .
      */
-    private void assertAddressBookListStatus(VersionedEventManager versionedAddressBook,
+    private void assertEventManagerListStatus(VersionedEventManager versionedEventManager,
                                              List<ReadOnlyEventManager> expectedStatesBeforePointer,
                                              ReadOnlyEventManager expectedCurrentState,
                                              List<ReadOnlyEventManager> expectedStatesAfterPointer) {
         // check state currently pointing at is correct
-        assertEquals(new EventManager(versionedAddressBook), expectedCurrentState);
+        assertEquals(new EventManager(versionedEventManager), expectedCurrentState);
 
         // shift pointer to start of state list
-        while (versionedAddressBook.canUndo()) {
-            versionedAddressBook.undo();
+        while (versionedEventManager.canUndo()) {
+            versionedEventManager.undo();
         }
 
         // check states before pointer are correct
-        for (ReadOnlyEventManager expectedAddressBook : expectedStatesBeforePointer) {
-            assertEquals(expectedAddressBook, new EventManager(versionedAddressBook));
-            versionedAddressBook.redo();
+        for (ReadOnlyEventManager expectedEventManager : expectedStatesBeforePointer) {
+            assertEquals(expectedEventManager, new EventManager(versionedEventManager));
+            versionedEventManager.redo();
         }
 
         // check states after pointer are correct
-        for (ReadOnlyEventManager expectedAddressBook : expectedStatesAfterPointer) {
-            versionedAddressBook.redo();
-            assertEquals(expectedAddressBook, new EventManager(versionedAddressBook));
+        for (ReadOnlyEventManager expectedEventManager : expectedStatesAfterPointer) {
+            versionedEventManager.redo();
+            assertEquals(expectedEventManager, new EventManager(versionedEventManager));
         }
 
         // check that there are no more states after pointer
-        assertFalse(versionedAddressBook.canRedo());
+        assertFalse(versionedEventManager.canRedo());
 
         // revert pointer to original position
-        expectedStatesAfterPointer.forEach(unused -> versionedAddressBook.undo());
+        expectedStatesAfterPointer.forEach(unused -> versionedEventManager.undo());
     }
 
     /**
-     * Creates and returns a {@code VersionedEventManager} with the {@code addressBookStates} added into it, and the
+     * Creates and returns a {@code VersionedEventManager} with the {@code eventManagerStates} added into it, and the
      * {@code VersionedEventManager#currentStatePointer} at the end of list.
      */
-    private VersionedEventManager prepareAddressBookList(ReadOnlyEventManager... addressBookStates) {
-        assertFalse(addressBookStates.length == 0);
+    private VersionedEventManager prepareEventManagerList(ReadOnlyEventManager... eventManagerStates) {
+        assertFalse(eventManagerStates.length == 0);
 
-        VersionedEventManager versionedAddressBook = new VersionedEventManager(addressBookStates[0]);
-        for (int i = 1; i < addressBookStates.length; i++) {
-            versionedAddressBook.resetData(addressBookStates[i]);
-            versionedAddressBook.commit();
+        VersionedEventManager versionedEventManager = new VersionedEventManager(eventManagerStates[0]);
+        for (int i = 1; i < eventManagerStates.length; i++) {
+            versionedEventManager.resetData(eventManagerStates[i]);
+            versionedEventManager.commit();
         }
 
-        return versionedAddressBook;
+        return versionedEventManager;
     }
 
     /**
-     * Shifts the {@code versionedAddressBook#currentStatePointer} by {@code count} to the left of its list.
+     * Shifts the {@code versionedEventManager#currentStatePointer} by {@code count} to the left of its list.
      */
-    private void shiftCurrentStatePointerLeftwards(VersionedEventManager versionedAddressBook, int count) {
+    private void shiftCurrentStatePointerLeftwards(VersionedEventManager versionedEventManager, int count) {
         for (int i = 0; i < count; i++) {
-            versionedAddressBook.undo();
+            versionedEventManager.undo();
         }
     }
 }

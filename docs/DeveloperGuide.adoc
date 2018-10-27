@@ -275,10 +275,6 @@ image::AuthenticationDiagram.png[width="800"]
 If an authentication fails, i.e. credentials are wrong or do not exist in the JSON file, the `login` command will throw a `CommandException`.
 
 ==== Future Improvements
-===== Making `JsonUserStorage` more OCP-compliant
-* As of now, `JsonUserStorage` does not abide to the Open-Closed Principle.
-* In the future, `Storage` will implement `JsonUserStorage`.
-
 ===== Password encryption
 * Stores encrypted password instead of plain text.
 // end::authentication[]

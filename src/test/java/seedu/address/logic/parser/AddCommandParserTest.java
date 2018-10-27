@@ -100,7 +100,7 @@ public class AddCommandParserTest {
                 + ATTENDEE_DESC_TED, new AddCommand(expectedEvent));
 
         // multiple tags - all accepted
-        Event expectedEventMultipleTags = new EventBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Event expectedEventMultipleTags = new EventBuilder(BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + CONTACT_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + VENUE_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + ATTENDEE_DESC_TED
