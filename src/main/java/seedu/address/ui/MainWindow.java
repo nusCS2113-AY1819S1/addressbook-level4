@@ -198,11 +198,13 @@ public class MainWindow extends UiPart<Stage> {
         mePanel = new MePanel(FXCollections.observableArrayList(security.getUser()));
         mePanelPlaceholder.getChildren().add(mePanel.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getOtherList(security.getUser()));
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-
-        friendListPanel = new FriendListPanel(logic.getFriendList(security.getUser()));
+        // friendListPanel = new FriendListPanel(logic.getFriendList(security.getUser()));
+        friendListPanel = new FriendListPanel(logic.getFilteredPersonList());
         friendListPanelPlaceholder.getChildren().add(friendListPanel.getRoot());
+
+        // personListPanel = new PersonListPanel(logic.getOtherList(security.getUser()));
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().clear();
