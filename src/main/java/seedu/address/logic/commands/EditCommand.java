@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -51,7 +52,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_VENUE + "VENUE] "
             + "[" + PREFIX_DATETIME + "DD/MM/YYYY HH:MM "
             + "[" + PREFIX_TAG + "TAG]... "
-            + "\nExample: " + COMMAND_WORD + " 1 "
+            + "[" + PREFIX_ATTENDEE + "ATTENDEE]...\n"
+            + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
