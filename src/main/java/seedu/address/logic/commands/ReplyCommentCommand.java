@@ -74,6 +74,10 @@ public class ReplyCommentCommand extends Command {
         requireNonNull(model);
         List<Event> filteredEventList = model.getFilteredEventList();
 
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGIN);
+        }
+
         if (index.getZeroBased() >= filteredEventList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
