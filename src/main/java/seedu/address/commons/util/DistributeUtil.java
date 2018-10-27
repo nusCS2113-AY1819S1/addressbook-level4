@@ -176,10 +176,10 @@ public class DistributeUtil {
      * This function concatenates the group index count behind the given group name.
      * Index shown to user will start from 1.
      */
-    public String groupNameConcatenation (int index, String groupName) throws CommandException {
+    public String groupNameConcatenation (int index, String groupName, Model model) throws CommandException {
         index = index + 1;
         groupName = groupName + String.valueOf(index);
-        if (existDuplicateGroup(groupName)) {
+        if (existDuplicateGroup(groupName, model)) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
         return groupName;
@@ -190,7 +190,7 @@ public class DistributeUtil {
      * @param groupName : The string to be check if another groupname string exist.
      * @return false if there is no existing group.
      */
-    public boolean existDuplicateGroup (String groupName) {
+    public boolean existDuplicateGroup (String groupName, Model model) {
         ObservableList<Group> allGroups = model.getFilteredGroupList();
         requireNonNull(allGroups);
         for (Group gN : allGroups) {
@@ -207,9 +207,9 @@ public class DistributeUtil {
      * @param groupName : The name of the group the user desire
      * @throws CommandException if there exist a duplicate groupName
      */
-    public void doesGroupNameExist(int index, String groupName) throws CommandException {
+    public void doesGroupNameExist(int index, String groupName, Model model) throws CommandException {
         for (int i = index; i > 0; i--) {
-            groupNameConcatenation(i, groupName);
+            groupNameConcatenation(i, groupName, model);
         }
     }
 
@@ -252,7 +252,7 @@ public class DistributeUtil {
      * @param group : The group to search for.
      * @return Return the Index value of the group.
      */
-    public Index returnGroupIndex(Group group) {
+    public Index returnGroupIndex(Group group, Model model) {
         ObservableList<Group> allGroups = model.getFilteredGroupList();
         for (int i = 0; i < allGroups.size(); i++) {
             if (group.isSameGroup(allGroups.get(i))) {
@@ -274,10 +274,10 @@ public class DistributeUtil {
                                    String groupName) throws CommandException {
         ObservableList<Person> allPerson = model.getFilteredPersonList();
         for (int i = 0; i < groupArrayList.size(); i++) {
-            String toCreateGroupName = groupNameConcatenation(i, groupName);
+            String toCreateGroupName = groupNameConcatenation(i, groupName, model);
             Group newGroup = groupBuilder(toCreateGroupName);
             createGroupWithoutCommit(newGroup);
-            Index groupIndex = returnGroupIndex(newGroup);
+            Index groupIndex = returnGroupIndex(newGroup, model);
             if (groupIndex.getOneBased() == 0) {
                 throw new CommandException(MESSAGE_MISSING_GROUP);
             }

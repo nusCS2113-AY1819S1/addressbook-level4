@@ -51,7 +51,7 @@ public class DistributeAlgorithm {
         if (allPerson.size() < numOfGroups) {
             throw new CommandException(MESSAGE_INVALID_SIZE);
         }
-        distUtil.doesGroupNameExist(numOfGroups, groupName);
+        distUtil.doesGroupNameExist(numOfGroups, groupName, model);
 
         //Convert ObservableList into ArrayList to use Randomizer via Collections
         LinkedList<Person> randomAllPersonArrayList = new LinkedList<>(allPerson);
