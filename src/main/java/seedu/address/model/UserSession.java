@@ -104,8 +104,8 @@ public class UserSession {
     /**
      * Returns logged in user.
      */
-    public User getUser() {
-        return user;
+    public Username getUsername() {
+        return user.getUsername();
     }
 
     /**

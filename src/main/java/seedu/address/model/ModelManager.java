@@ -14,6 +14,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.EventManagerChangedEvent;
 import seedu.address.model.event.Event;
 import seedu.address.model.user.User;
+import seedu.address.model.user.Username;
 
 /**
  * Represents the in-memory model of the event manager data.
@@ -89,8 +90,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public User getUser() {
-        return userSession.getUser();
+    public Username getUsername() {
+        return userSession.getUsername();
     }
 
     @Override
