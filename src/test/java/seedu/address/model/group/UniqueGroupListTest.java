@@ -125,6 +125,18 @@ public class UniqueGroupListTest {
     }
 
     @Test
+    public void addPersons_noGroup_throwsGroupNotFoundException() {
+        thrown.expect(GroupNotFoundException.class);
+        uniqueGroupList.addPersons(getAddGroupWithGroupAndPerson());
+    }
+
+    @Test
+    public void createEditedGroup_nullParameter_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        uniqueGroupList.createEditedGroup(null, null);
+    }
+
+    @Test
     public void remove_nullGroup_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniqueGroupList.remove(null);

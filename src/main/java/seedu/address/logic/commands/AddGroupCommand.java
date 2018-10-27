@@ -1,3 +1,5 @@
+//@@author rajdeepsh
+
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
@@ -17,7 +19,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
- * Add persons to a group via their respective indices
+ * Add persons to a group via their respective indexes
  */
 public class AddGroupCommand extends Command {
     public static final String COMMAND_WORD = "addgroup";

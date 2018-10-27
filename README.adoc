@@ -24,10 +24,12 @@ endif::[]
 == Functionalities
 * Add/Delete Students
 * View Students Data
-* Add/Delete Tutorial Groups
-** Add/Delete Students into Tutorial Groups
-* View Students in Tutorial Groups
-* Create _n_ number of Evenly Distributed Groups
+* Create/Delete Groups
+** Add Students to Groups
+** Delete Students from Groups [_Coming in v1.4_]
+* View Groups
+* View Students in Groups
+* Student Distribution
 ** Can be based on *Gender*
 ** Can be based on *Nationality*
 * Send Email to Groups or Multiple Students
