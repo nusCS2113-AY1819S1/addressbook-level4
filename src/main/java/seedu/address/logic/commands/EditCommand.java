@@ -80,6 +80,11 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGIN);
+        }
+
         List<Event> lastShownList = model.getFilteredEventList();
 
         if (index.getZeroBased() >= lastShownList.size()) {

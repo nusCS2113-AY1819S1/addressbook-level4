@@ -26,8 +26,10 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
+import seedu.address.model.user.User;
 import seedu.address.testutil.EditEventDescriptorBuilder;
 import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.UserBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
@@ -39,6 +41,9 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
+        User user = new UserBuilder().build();
+        model.logUser(user);
+
         Event editedEvent = new EventBuilder().build();
         EditEventDescriptor descriptor = new EditEventDescriptorBuilder(editedEvent).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_EVENT, descriptor);
@@ -54,6 +59,9 @@ public class EditCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
+        User user = new UserBuilder().build();
+        model.logUser(user);
+
         Index indexLastPerson = Index.fromOneBased(model.getFilteredEventList().size());
         Event lastEvent = model.getFilteredEventList().get(indexLastPerson.getZeroBased());
 
@@ -76,6 +84,9 @@ public class EditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
+        User user = new UserBuilder().build();
+        model.logUser(user);
+
         EditCommand editCommand = new EditCommand(INDEX_FIRST_EVENT, new EditEventDescriptor());
         Event editedEvent = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
 
@@ -89,6 +100,9 @@ public class EditCommandTest {
 
     @Test
     public void execute_filteredList_success() {
+        User user = new UserBuilder().build();
+        model.logUser(user);
+
         showEventAtIndex(model, INDEX_FIRST_EVENT);
 
         Event eventInFilteredList = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
@@ -107,6 +121,9 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
+        User user = new UserBuilder().build();
+        model.logUser(user);
+
         Event firstEvent = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
         EditEventDescriptor descriptor = new EditEventDescriptorBuilder(firstEvent).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_EVENT, descriptor);
@@ -116,6 +133,9 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicatePersonFilteredList_failure() {
+        User user = new UserBuilder().build();
+        model.logUser(user);
+
         showEventAtIndex(model, INDEX_FIRST_EVENT);
 
         // edit event in filtered list into a duplicate in address book
@@ -128,6 +148,9 @@ public class EditCommandTest {
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
+        User user = new UserBuilder().build();
+        model.logUser(user);
+
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredEventList().size() + 1);
         EditEventDescriptor descriptor = new EditEventDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
@@ -141,6 +164,9 @@ public class EditCommandTest {
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
+        User user = new UserBuilder().build();
+        model.logUser(user);
+
         showEventAtIndex(model, INDEX_FIRST_EVENT);
         Index outOfBoundIndex = INDEX_SECOND_EVENT;
         // ensures that outOfBoundIndex is still in bounds of address book list
@@ -154,6 +180,9 @@ public class EditCommandTest {
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
+        User user = new UserBuilder().build();
+        model.logUser(user);
+
         Event editedEvent = new EventBuilder().build();
         Event eventToEdit = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
         EditEventDescriptor descriptor = new EditEventDescriptorBuilder(editedEvent).build();
@@ -176,6 +205,9 @@ public class EditCommandTest {
 
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
+        User user = new UserBuilder().build();
+        model.logUser(user);
+
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredEventList().size() + 1);
         EditEventDescriptor descriptor = new EditEventDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
@@ -197,6 +229,9 @@ public class EditCommandTest {
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_samePersonEdited() throws Exception {
+        User user = new UserBuilder().build();
+        model.logUser(user);
+
         Event editedEvent = new EventBuilder().build();
         EditEventDescriptor descriptor = new EditEventDescriptorBuilder(editedEvent).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_EVENT, descriptor);

@@ -35,11 +35,12 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Event> lastShownList = model.getFilteredEventList();
 
         if (!model.getLoginStatus()) {
             throw new CommandException(MESSAGE_LOGIN);
         }
+
+        List<Event> lastShownList = model.getFilteredEventList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
