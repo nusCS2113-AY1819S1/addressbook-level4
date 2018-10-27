@@ -1,6 +1,8 @@
 package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static seedu.address.storage.XmlAdaptedGroup.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.TypicalGroups.TUT_1;
 import static seedu.address.testutil.TypicalGroups.getTypicalGroupsWithPersons;
@@ -75,6 +77,20 @@ public class XmlAdaptedGroupTest {
         XmlAdaptedGroup group =
                 new XmlAdaptedGroup(VALID_GROUP_NAME, VALID_GROUP_LOCATION, invalidGroupTags, VALID_GROUP_PERSONS);
         Assert.assertThrows(IllegalValueException.class, group::toModelType);
+    }
+
+    @Test public void equals() {
+        XmlAdaptedGroup group = new XmlAdaptedGroup(TUT_1);
+        XmlAdaptedGroup groupCopy = new XmlAdaptedGroup(TUT_1);
+
+        // same object -> return true
+        assertTrue(group.equals(group));
+
+        // different type -> return false
+        assertFalse(group.equals(0));
+
+        // different object same values -> returns true
+        assertTrue(group.equals(groupCopy));
     }
 
 }
