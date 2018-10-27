@@ -356,6 +356,7 @@ The following sequence diagram shows how the create group operation works within
 .Interactions Inside the Logic and Model Component for the `creategroup n/CS1231 l/LT15` Command
 image::CreateGroupSequenceDiagram.png[width="800"]
 
+
 Step 2. The user inputs `addgroup g/1 p/1` to add the first person in the student management system to the first group
 in the student management system. The `AddressBookParser` detects `addgroup` as a command word will use `AddGroupCommandParser`
 to parse the input given. `AddGroupCommandParser` will then create an `AddGroup` object containing all relevant group and person indexes after parsing and pass it to `AddGroupCommand`
@@ -370,6 +371,7 @@ The following sequence diagram shows how the add persons to group operation work
 .Interactions Inside the Logic and Model Component for the `addgroup g/1 p/1` Command
 image::AddGroupSequenceDiagram.png[width="800"]
 
+
 Step 3. The user inputs `deletegroup 1` to delete the first group in the student management system. The `AddressBookParser` detects `deletegroup` as a command word will use `DeleteGroupCommandParser`
 to parse the input given. `DeleteGroupCommandParser` will then create an `Index` object after parsing and pass it to `DeleteGroupCommand`
 which will then execute deleting the specified group from the student management system.
@@ -379,6 +381,7 @@ The following sequence diagram shows how the delete group operation works within
 
 .Interactions Inside the Logic and Model Component's for the `deletegroup 1` Command
 image::DeleteGroupSequenceDiagram.png[width="800"]
+
 
 
 ==== Design Considerations
@@ -1126,6 +1129,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |university lecturer |add students to groups |have a list of all my students in a particular module/group
 
+|`* * *` |university lecturer |delete students from groups |edit my student management system
+
 |`* * *` |university lecturer |delete groups |edit my student management system
 
 |`* * *` |university lecturer |send an email to a student, a group of students or students belonging to a group |make module specific announcements
@@ -1215,7 +1220,7 @@ Use case ends
 *MSS*
 
 1.  Lecturer adds student(s) to a group
-2.  AddressBook confirms student is added
+2.  AddressBook confirms student(s) are added
 +
 Use case ends
 
@@ -1229,6 +1234,36 @@ Use case ends
 ** 1a1. Student management system rejects command entered with relevant error message.
 [none]
 * 1b. Student management system detects student(s) is already in the group.
++
+
+[none]
+** 1b1. Student management system rejects command entered with relevant error message.
++
+
+
+[discrete]
+=== Use case: Delete Students From Groups
+*Precondition*
+
+1.  Student management system has group(s)
+
+*MSS*
+
+1.  Lecturer deletes student(s) from a group
+2.  AddressBook confirms student(s) are deleted
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
++
+
+[none]
+** 1a1. Student management system rejects command entered with relevant error message.
+[none]
+* 1b. Student management system detects student(s) not in the group.
 +
 
 [none]
