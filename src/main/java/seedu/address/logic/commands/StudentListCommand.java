@@ -16,7 +16,7 @@ import seedu.address.ui.HtmlTableProcessor;
  */
 public class StudentListCommand extends Command {
 
-    public static final String COMMAND_WORD = "student list";
+    public static final String COMMAND_WORD = "person list";
 
     public static final String MESSAGE_SUCCESS = "Listed all students";
 

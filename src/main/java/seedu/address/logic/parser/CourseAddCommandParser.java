@@ -10,7 +10,9 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.CourseAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.course.Course;
-
+import seedu.address.model.course.CourseCode;
+import seedu.address.model.course.CourseName;
+import seedu.address.model.course.FacultyName;
 
 
 /**
@@ -32,11 +34,9 @@ public class CourseAddCommandParser implements Parser<CourseAddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CourseAddCommand.MESSAGE_USAGE));
         }
 
-        String courseCode = argMultimap.getValue(PREFIX_COURSE_CODE).get();
-        String courseName = argMultimap.getValue(PREFIX_COURSE_NAME).get();
-        String originFaculty = argMultimap.getValue(PREFIX_COURSE_FACULTY).get();
-
-
+        CourseCode courseCode = ParserUtil.parseCourseCode(argMultimap.getValue(PREFIX_COURSE_CODE).get());
+        CourseName courseName = ParserUtil.parseCourseName(argMultimap.getValue(PREFIX_COURSE_NAME).get());
+        FacultyName originFaculty = ParserUtil.parseFacultyName(argMultimap.getValue(PREFIX_COURSE_FACULTY).get());
 
         Course course = new Course(courseCode, courseName, originFaculty);
         return new CourseAddCommand(course);

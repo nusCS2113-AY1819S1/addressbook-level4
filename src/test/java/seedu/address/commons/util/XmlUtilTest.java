@@ -40,8 +40,8 @@ public class XmlUtilTest {
     private static final String VALID_PHONE = "9482424";
     private static final String VALID_EMAIL = "hans@example";
     private static final String VALID_ADDRESS = "4th street";
-    private static final String VALID_CC = "1";
-    private static final String VALID_MATRIC_NO = "1";
+    private static final String VALID_CC = "CEG";
+    private static final String VALID_MATRIC_NO = "A0168412C";
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
 
     @Rule

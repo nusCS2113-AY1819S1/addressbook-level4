@@ -52,7 +52,7 @@ public class ClassroomManager {
     }
 
     /**
-     * Search for duplication of student assigned to classroom
+     * Search for duplication of person assigned to classroom
      */
     public boolean isDuplicateClassroomStudent(Classroom classroom, String matricNo) {
         if (!classroom.getStudents().isEmpty()) {
@@ -121,21 +121,21 @@ public class ClassroomManager {
     }
 
     /**
-     * Assigns a student by matricNo to the class
+     * Assigns a person by matricNo to the class
      */
     public void assignStudent(Classroom classToAssignStudent, String matricNo) {
         classToAssignStudent.getStudents().add(matricNo);
     }
 
     /**
-     * Unassigns a student by matricNo from the class
+     * Unassigns a person by matricNo from the class
      */
     public void unassignStudent(Classroom classToUnassignStudent, String matricNo) {
         classToUnassignStudent.getStudents().remove(matricNo);
     }
 
     /**
-     * Checks if there exist this student matricNo from the classroom
+     * Checks if there exist this person matricNo from the classroom
      */
     public boolean hasClassroomStudent(Classroom classToUnassignStudent, String matricNo) {
         return (classToUnassignStudent.getStudents().contains(matricNo));

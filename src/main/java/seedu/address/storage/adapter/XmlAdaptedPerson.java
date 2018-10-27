@@ -11,8 +11,10 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.course.CourseCode;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.MatricNo;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -73,8 +75,8 @@ public class XmlAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        matricNo = source.getMatricNo();
-        courseCode = source.getCourseCode();
+        matricNo = source.getMatricNo().matricNo;
+        courseCode = source.getCourseCode().courseCode;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -123,8 +125,27 @@ public class XmlAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+
+        if (matricNo == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    MatricNo.class.getSimpleName()));
+        }
+        if (!MatricNo.isValidMatricNo(matricNo)) {
+            throw new IllegalValueException(MatricNo.MESSAGE_MATRIC_NO_CONSTRAINTS);
+        }
+        final MatricNo modelMatricNo = new MatricNo(matricNo);
+
+        if (courseCode == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    CourseCode.class.getSimpleName()));
+        }
+        if (!CourseCode.isValidCourseCode(courseCode)) {
+            throw new IllegalValueException(CourseCode.MESSAGE_COURSE_CODE_CONSTRAINTS);
+        }
+        final CourseCode modelCourseCode = new CourseCode(courseCode);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, courseCode, matricNo);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelCourseCode, modelMatricNo);
     }
 
     @Override

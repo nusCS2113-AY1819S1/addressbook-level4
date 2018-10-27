@@ -36,8 +36,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-    public static final String VALID_TAG_CC = "1";
-    public static final String VALID_TAG_MATRIC_NO = "1";
+    public static final String VALID_TAG_CC = "CEG";
+    public static final String VALID_TAG_MATRIC_NO = "A0168412C";
     public static final String VALID_CLASS_T16 = "T16";
     public static final String VALID_MODULE_CODE = "CG1111";
     public static final String VALID_MAX_ENROLLMENT = "20";

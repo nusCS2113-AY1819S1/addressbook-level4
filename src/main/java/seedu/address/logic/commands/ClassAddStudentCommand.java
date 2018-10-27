@@ -12,12 +12,12 @@ import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.ClassroomManager;
 
 /**
- * Assigns a student to an existing class.
+ * Assigns a person to an existing class.
  */
 public class ClassAddStudentCommand extends Command {
     public static final String COMMAND_WORD = "class addstudent";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a student to a class"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a person to a class"
             + " for the system. "
             + "Parameters: "
             + PREFIX_CLASS_NAME + "CLASS_NAME "
@@ -28,12 +28,12 @@ public class ClassAddStudentCommand extends Command {
             + PREFIX_MODULE_CODE + "CG1111 "
             + PREFIX_MATRIC + "A6942069M";
 
-    public static final String MESSAGE_SUCCESS = "New student assigned to class: %1$s"
+    public static final String MESSAGE_SUCCESS = "New person assigned to class: %1$s"
             + ", Class: %2$s"
             + ", Module code: %3$s";
     private static final String MESSAGE_FAIL = "Class belonging to module not found!";
 
-    private static final String MESSAGE_DUPLICATE_CLASSROOM_STUDENT = "This student already exists in class: %1$s";
+    private static final String MESSAGE_DUPLICATE_CLASSROOM_STUDENT = "This person already exists in class: %1$s";
 
     private Classroom classToAssignStudent;
     private final String className;

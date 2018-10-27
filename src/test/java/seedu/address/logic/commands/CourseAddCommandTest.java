@@ -5,6 +5,9 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.course.Course;
+import seedu.address.model.course.CourseCode;
+import seedu.address.model.course.CourseName;
+import seedu.address.model.course.FacultyName;
 
 import static org.junit.Assert.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -27,9 +30,9 @@ public class CourseAddCommandTest {
 
     @Test
     public void execute_addSuccessful() {
-       final String courseCode = "CEG1";
-       final String courseName = "Computer Engineering";
-       final String faculty = "School of Computing";
+       final CourseCode courseCode = new CourseCode("CEG");
+       final CourseName courseName = new CourseName("Computer Engineering");
+       final FacultyName faculty = new FacultyName("School of Computing");
 
        assertCommandSuccess(new CourseAddCommand(new Course(courseCode,courseName,faculty)), new CommandHistory(),
                 String.format(MESSAGE_SUCCESS, courseName));

@@ -19,9 +19,9 @@ import seedu.address.model.person.Person;
  */
 public class StudentAddCommand extends Command {
 
-    public static final String COMMAND_WORD = "student add";
+    public static final String COMMAND_WORD = "person add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student into Trajectory. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person into Trajectory. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_MATRIC + "MATRIC_NO"
@@ -31,18 +31,16 @@ public class StudentAddCommand extends Command {
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_MATRIC + "A0168000A"
-            + PREFIX_COURSE_CODE + "CEG1"
+            + PREFIX_NAME + "Megan Nicole "
+            + PREFIX_MATRIC + "A0168000B "
+            + PREFIX_COURSE_CODE + "CEG "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 ";
 
 
-    public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in Trajectory";
+    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in Trajectory";
 
     private final Person toAdd;
 
