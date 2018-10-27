@@ -7,6 +7,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.clubbudget.exceptions.DuplicateFinalClubBudgetException;
 
 /**
  * A list of final club budgets that enforces uniqueness between its elements and does not allow nulls.
@@ -36,7 +37,7 @@ public class UniqueClubBudgetList implements Iterable<FinalClubBudget> {
         requireNonNull(toAdd);
 
         if (contains(toAdd)) {
-            //throw new DuplicateFinalClubBudgetException();
+            throw new DuplicateFinalClubBudgetException();
         }
 
         internalList.add(toAdd);

@@ -5,10 +5,16 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.ClubBudgetElementsBook;
 import seedu.address.model.LoginBook;
 import seedu.address.model.ReadOnlyAddressBook;
 
+import seedu.address.model.ReadOnlyClubBudgetElementsBook;
 import seedu.address.model.ReadOnlyLoginBook;
+import seedu.address.model.budgetelements.ClubBudgetElements;
+import seedu.address.model.budgetelements.ClubName;
+import seedu.address.model.budgetelements.ExpectedTurnout;
+import seedu.address.model.budgetelements.NumberOfEvents;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.login.UserId;
 import seedu.address.model.login.UserPassword;
@@ -24,7 +30,8 @@ import seedu.address.model.person.SkillLevel;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} and {@code LoginBook} with sample data.
+ * Contains utility methods for populating {@code AddressBook}, {@code LoginBook} and {@code ClubBudgetElementsBook}
+ * with sample data.
  */
 public class SampleDataUtil {
     public static final Skill EMPTY_SKILL = new Skill("");
@@ -59,6 +66,13 @@ public class SampleDataUtil {
         };
     }
 
+    public static ClubBudgetElements[] getSampleClubBudgetElements() {
+        return new ClubBudgetElements[] {
+            new ClubBudgetElements(new ClubName("Computing Club"), new ExpectedTurnout("200"), new NumberOfEvents("5")),
+            new ClubBudgetElements(new ClubName("ECE Club"), new ExpectedTurnout("500"), new NumberOfEvents("2"))
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
@@ -73,6 +87,14 @@ public class SampleDataUtil {
             sampleLb.createAccount(sampleAccount);
         }
         return sampleLb;
+    }
+
+    public static ReadOnlyClubBudgetElementsBook getSampleClubBudgetElementsBook() {
+        ClubBudgetElementsBook sampleCBb = new ClubBudgetElementsBook();
+        for (ClubBudgetElements sampleClubBudgetElements : getSampleClubBudgetElements()) {
+            sampleCBb.addClub(sampleClubBudgetElements);
+        }
+        return sampleCBb;
     }
 
     /**
