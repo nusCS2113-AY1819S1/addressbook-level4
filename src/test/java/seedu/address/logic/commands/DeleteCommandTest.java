@@ -19,6 +19,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
+import seedu.address.model.user.User;
+import seedu.address.testutil.UserBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -31,6 +33,9 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
+        User user = new UserBuilder().build();
+        model.logUser(user);
+
         Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_EVENT);
 
@@ -45,6 +50,9 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+        User user = new UserBuilder().build();
+        model.logUser(user);
+
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredEventList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
@@ -54,6 +62,9 @@ public class DeleteCommandTest {
     @Test
     public void execute_validIndexFilteredList_success() {
         showEventAtIndex(model, INDEX_FIRST_EVENT);
+
+        User user = new UserBuilder().build();
+        model.logUser(user);
 
         Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_EVENT);
@@ -70,6 +81,8 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
+        User user = new UserBuilder().build();
+        model.logUser(user);
         showEventAtIndex(model, INDEX_FIRST_EVENT);
 
         Index outOfBoundIndex = INDEX_SECOND_EVENT;
@@ -83,6 +96,9 @@ public class DeleteCommandTest {
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
+        User user = new UserBuilder().build();
+        model.logUser(user);
+
         Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_EVENT);
         Model expectedModel = new ModelManager(model.getEventManager(), new UserPrefs());
@@ -103,6 +119,9 @@ public class DeleteCommandTest {
 
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
+        User user = new UserBuilder().build();
+        model.logUser(user);
+
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredEventList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
@@ -123,6 +142,9 @@ public class DeleteCommandTest {
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_samePersonDeleted() throws Exception {
+        User user = new UserBuilder().build();
+        model.logUser(user);
+
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_EVENT);
         Model expectedModel = new ModelManager(model.getEventManager(), new UserPrefs());
 
@@ -170,6 +192,9 @@ public class DeleteCommandTest {
      * Updates {@code model}'s filtered list to show no one.
      */
     private void showNoPerson(Model model) {
+        User user = new UserBuilder().build();
+        model.logUser(user);
+
         model.updateFilteredEventList(p -> false);
 
         assertTrue(model.getFilteredEventList().isEmpty());

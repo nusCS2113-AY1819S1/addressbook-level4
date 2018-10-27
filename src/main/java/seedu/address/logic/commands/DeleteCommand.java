@@ -37,6 +37,10 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Event> lastShownList = model.getFilteredEventList();
 
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGIN);
+        }
+
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
