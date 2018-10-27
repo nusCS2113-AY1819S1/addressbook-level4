@@ -17,6 +17,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
+import static seedu.address.testutil.TypicalPersons.WILSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -59,15 +60,12 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate secondPredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        String[] namesFirst = {"first"};
-        String[] namesSecond = {"second"};
+        String[] namesFirst = {"first", "second"};
         Prefix[] prefixArray = {PREFIX_NAME};
         Map<Prefix, String[]> prefixKeywordsMap = new HashMap<>();
         prefixKeywordsMap.put(PREFIX_NAME, namesFirst);
-        prefixKeywordsMap.put(PREFIX_NAME, namesSecond);
 
         FindCommand findFirstCommand = new FindCommand(prefixKeywordsMap, prefixArray);
-        FindCommand findSecondCommand = new FindCommand(prefixKeywordsMap, prefixArray);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
@@ -151,8 +149,26 @@ public class FindCommandTest {
         expectedModel.updateFilteredPersonList(combinedPredicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL), model.getFilteredPersonList());
+    }
 
-        // TODO: Add more flexibility tests, test when we only consider email, or etc etc
+    @Test
+    public void execute_emailSearch_multiplePersonsFound() {
+        Map<Prefix, String[]> prefixKeywordMap = new HashMap<>();
+        String[] emails = {"wow@gmail.com"};
+        prefixKeywordMap.put(PREFIX_EMAIL, emails);
+
+        Set<Prefix> keys = prefixKeywordMap.keySet();
+        Prefix[] types = keys.toArray(new Prefix[0]);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+
+        Predicate<Person> combinedPredicate = PREDICATE_SHOW_ALL_PERSONS;
+        FindCommand command = new FindCommand(prefixKeywordMap, keys.toArray(new Prefix[0]));
+
+        combinedPredicate = getPersonPredicate(prefixKeywordMap, types, combinedPredicate);
+
+        expectedModel.updateFilteredPersonList(combinedPredicate);
+        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(WILSON), model.getFilteredPersonList());
     }
 
     /**

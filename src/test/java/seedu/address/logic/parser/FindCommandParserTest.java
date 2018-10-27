@@ -109,7 +109,7 @@ public class FindCommandParserTest {
                 + alice.getKpi().value;
 
         assertParseSuccess(parser, userInput, expectedFindCommand);
-
+        // TODO: Add more test cases
     }
     //@@author
 
