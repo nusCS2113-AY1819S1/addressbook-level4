@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
@@ -19,7 +20,7 @@ import seedu.address.model.task.Task;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
-
+    //@@author chelseyong
     public static final String VALID_DEADLINE_1ST_JAN = "1/1/2018";
     public static final String VALID_DEADLINE_31ST_MARCH = "31/3/2018";
     public static final String VALID_DEADLINE_12TH_MAY = "12/5/2018";
@@ -32,6 +33,8 @@ public class CommandTestUtil {
     public static final String VALID_PRIORITY_LEVEL_LOW = "low";
     public static final String VALID_PRIORITY_LEVEL_HIGH = "high";
     public static final String VALID_PRIORITY_LEVEL_MEDIUM = "medium";
+    public static final String VALID_1_HOUR = "1";
+    public static final String VALID_2_HOURS = "2";
 
     public static final String DEADLINE_DESC_1ST_JAN = " " + PREFIX_DEADLINE + VALID_DEADLINE_1ST_JAN;
     public static final String DEADLINE_DESC_31ST_MARCH = " " + PREFIX_DEADLINE + VALID_DEADLINE_31ST_MARCH;
@@ -45,9 +48,12 @@ public class CommandTestUtil {
     public static final String PRIORITY_LEVEL_DESC_LOW = " " + PREFIX_PRIORITY + VALID_PRIORITY_LEVEL_LOW;
     public static final String PRIORITY_LEVEL_DESC_HIGH = " " + PREFIX_PRIORITY + VALID_PRIORITY_LEVEL_HIGH;
     public static final String PRIORITY_LEVEL_DESC_MEDIUM = " " + PREFIX_PRIORITY + VALID_PRIORITY_LEVEL_MEDIUM;
+    public static final String HOURS_DESC_1 = " " + PREFIX_HOURS + VALID_1_HOUR;
+    public static final String HOURS_DESC_2 = " " + PREFIX_HOURS + VALID_2_HOURS;
 
     public static final String INVALID_DEADLINE_DESC = " " + PREFIX_DEADLINE + "31/2"; // No 31st February in calendar
     public static final String INVALID_PRIORITY_LEVEL_DESC = " " + PREFIX_PRIORITY + "mid"; // not a priority level
+    public static final String INVALID_HOURS_DESC = " " + PREFIX_HOURS + "one"; // not an integer
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -65,7 +71,7 @@ public class CommandTestUtil {
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
     */
-
+    //@@author
     /**
      * Executes the given {@code command}, confirms that <br>
      * - the result message matches {@code expectedMessage} <br>
