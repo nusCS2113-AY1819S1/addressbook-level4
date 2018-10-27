@@ -10,6 +10,8 @@ import seedu.address.model.EventManager;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.user.User;
+import seedu.address.testutil.UserBuilder;
 
 public class ClearCommandTest {
 
@@ -17,8 +19,11 @@ public class ClearCommandTest {
 
     @Test
     public void execute_emptyAddressBook_success() {
+        User user = new UserBuilder().build();
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
+        model.logUser(user);
+        expectedModel.logUser(user);
         expectedModel.commitEventManager();
 
         assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);

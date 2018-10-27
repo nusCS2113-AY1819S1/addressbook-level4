@@ -45,8 +45,9 @@ public class AddCommandSystemTest extends EventManagerSystemTest {
         /* Case: add an event without tags to a non-empty event manager, command with leading spaces and trailing spaces
          * -> added
          */
-        User toLogin = new UserBuilder().withUsername("admin").withPassword("root").build();
-        String command = "   " + LoginCommand.COMMAND_WORD + "  " + "u/admin" + "  " + "p/root" + "  ";
+        User toLogin = new UserBuilder().withUsername(VALID_ADMIN_USERNAME).withPassword(VALID_ADMIN_PASSWORD).build();
+        String command = "   " + LoginCommand.COMMAND_WORD + "  "
+                + ADMIN_USERNAME_DESC + "  " + ADMIN_PASSWORD_DESC + "  ";
         assertCommandSuccess(command, toLogin);
 
         Event toAdd = AMY;

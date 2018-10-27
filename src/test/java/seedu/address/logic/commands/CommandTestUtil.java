@@ -31,7 +31,8 @@ import seedu.address.testutil.EditEventDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-
+    public static final String VALID_ADMIN_USERNAME = "admin";
+    public static final String VALID_ADMIN_PASSWORD = "root";
     public static final String VALID_USERNAME = "Johnny Bravo";
     public static final String VALID_PASSWORD = "pass@12345";
     public static final String VALID_ATTENDEE_TED = "Ted Bacan";
@@ -51,6 +52,8 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
+    public static final String ADMIN_USERNAME_DESC = " " + PREFIX_USERNAME + VALID_ADMIN_USERNAME;
+    public static final String ADMIN_PASSWORD_DESC = " " + PREFIX_PASSWORD + VALID_ADMIN_PASSWORD;
     public static final String USERNAME_DESC = " " + PREFIX_USERNAME + VALID_USERNAME;
     public static final String PASSWORD_DESC = " " + PREFIX_PASSWORD + VALID_PASSWORD;
     public static final String ATTENDEE_DESC_TED = " " + PREFIX_ATTENDEE + VALID_ATTENDEE_TED;
