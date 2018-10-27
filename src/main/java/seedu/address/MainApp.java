@@ -149,6 +149,9 @@ public class MainApp extends Application {
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Please find ADMIN");
             initLoginInfoManager = new LoginInfoManager ();
+        } catch (Exception e){
+            e.fillInStackTrace ();
+            initLoginInfoManager = new LoginInfoManager ();
         }
 
         //Update prefs file in case it was missing to begin with or there are new/unused fields
