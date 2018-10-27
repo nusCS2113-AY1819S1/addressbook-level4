@@ -115,6 +115,10 @@ public class DateUtil {
     }
 
     /**
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 7255623e65c3488bdc3e7c2d9685615ddf332747
      * Checks if the year is Leap Year or not.
      * @param year
      * @return the result whether the year is Leap year.
@@ -140,7 +144,6 @@ public class DateUtil {
         return target.equals(startDate) || target.equals(endDate)
                 || (target.isLaterThan(startDate) && target.isEarlierThan(endDate));
     }
-
     /**
      * Computes today's date using Java library {@link LocalDate} by processing the date in yyyy-mm-dd into dd-mm-yyyy.
      * @return Date
