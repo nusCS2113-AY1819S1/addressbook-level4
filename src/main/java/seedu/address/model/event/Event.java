@@ -73,7 +73,9 @@ public class Event {
         return dateTime;
     }
 
-    public Status getStatus () { return status; }
+    public Status getStatus () {
+        return status;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

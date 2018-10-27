@@ -2,13 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 import static seedu.address.logic.commands.EditCommand.createEditedEvent;
 import static seedu.address.logic.commands.EditCommand.EditEventDescriptor;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.EventsCenter;
@@ -54,7 +53,7 @@ public class RegisterCommand extends Command {
         Event eventToRegister = filteredEventList.get(targetIndex.getZeroBased());
 
         String attendeeName = model.getUsername().toString();
-        Set<Attendee> attendeeSet = new HashSet<>((Collection) eventToRegister.getAttendees());
+        Set<Attendee> attendeeSet = new HashSet<>(eventToRegister.getAttendees());
         attendeeSet.add(new Attendee(attendeeName));
 
         EditEventDescriptor registerEventDescriptor = new EditEventDescriptor();
