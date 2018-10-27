@@ -21,7 +21,7 @@ public class PasswordUtil {
     }
 
     /**
-     * Returns true if {@param plainPassword} is equal to {@param encryptedPassword} decrypted.
+     * Returns true if plainPassword is equal to encryptedPassword decrypted.
      */
     public static boolean validatePassword(String plainPassword, String encryptedPassword)
             throws NoSuchAlgorithmException, InvalidKeySpecException {
@@ -76,7 +76,7 @@ public class PasswordUtil {
         int paddingLength = (array.length * 2) - hex.length();
 
         if (paddingLength > 0) {
-            return String.format("%0"  +paddingLength + "d", 0) + hex;
+            return String.format("%0" + paddingLength + "d", 0) + hex;
         }
 
         return hex;
@@ -88,7 +88,7 @@ public class PasswordUtil {
     private static byte[] convertFromHex(String hex) {
         byte[] bytes = new byte[hex.length() / 2];
         for (int i = 0; i < bytes.length; i++) {
-            bytes[i] = (byte)Integer.parseInt(hex.substring(2 * i, 2 * i + 2), SALT_BYTE_SIZE);
+            bytes[i] = (byte) Integer.parseInt(hex.substring(2 * i, 2 * i + 2), SALT_BYTE_SIZE);
         }
 
         return bytes;
