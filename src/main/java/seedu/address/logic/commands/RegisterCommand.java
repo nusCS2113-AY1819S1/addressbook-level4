@@ -2,7 +2,14 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
+import static seedu.address.logic.commands.EditCommand.createEditedEvent;
+import static seedu.address.logic.commands.EditCommand.EditEventDescriptor;
+
+import java.util.Collection;
 import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
@@ -11,6 +18,7 @@ import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.attendee.Attendee;
 import seedu.address.model.event.Event;
 
 /**
@@ -43,9 +51,21 @@ public class RegisterCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
+        Event eventToRegister = filteredEventList.get(targetIndex.getZeroBased());
+
+        Set<Attendee> attendeeSet = new HashSet<>((Collection) eventToRegister.getAttendees());
+        attendeeSet.add(new Attendee("test")); //TODO
+
+        EditEventDescriptor registerEventDescriptor = new EditEventDescriptor();
+        registerEventDescriptor.setAttendees(attendeeSet);
+        Event registeredEvent = createEditedEvent(eventToRegister, registerEventDescriptor);
+
+        model.updateEvent(eventToRegister, registeredEvent);
+        model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+        model.commitEventManager();
+
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
         return new CommandResult(String.format(MESSAGE_REGISTER_EVENT_SUCCESS, targetIndex.getOneBased()));
-
     }
 
     @Override
