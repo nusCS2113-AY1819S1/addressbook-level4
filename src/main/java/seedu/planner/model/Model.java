@@ -39,7 +39,17 @@ public interface Model {
      */
     void deleteRecord(Record target);
 
+    /**
+     * Deletes the record whose date is required.
+     * The record must exist in the financial planner.
+     */
     int deleteListRecordSameDate(List<Record> targetList, Date targetDate);
+
+    /**
+     * Deletes the given list of records.
+     * The record must exist in the financial planner.
+     */
+    void deleteListRecord(List<Record> records);
 
     /**
      * Adds the given record.
@@ -53,11 +63,13 @@ public interface Model {
      * {@code record} must not already exist in the financial planner.
      */
     void addListUniqueRecord(List<Record> records);
+
     /**
      * To add the limit.
      * @param limitIn
      */
     void addLimit(Limit limitIn);
+
     /**
      * Replaces the given record {@code target} with {@code editedRecord}.
      * {@code target} must exist in the financial planner.

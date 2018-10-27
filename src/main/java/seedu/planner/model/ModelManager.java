@@ -31,6 +31,7 @@ import seedu.planner.model.summary.Summary;
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private static final int STARTING_ELEMENT = 0;
 
     private final VersionedFinancialPlanner versionedFinancialPlanner;
     private final FilteredList<Record> filteredRecords;
@@ -124,13 +125,24 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public int deleteListRecordSameDate(List<Record> targetList, Date targetDate) {
-        int count = 0;
+        int count;
         requireNonNull(targetList);
         count = versionedFinancialPlanner.removeRecordsSameDate(targetList, targetDate);
         versionedFinancialPlanner.removeRecordsFromSummarySameDate(targetList, targetDate);
         indicateFinancialPlannerChanged();
         indicateSummaryMapChanged();
         return count;
+    }
+
+    @Override
+    public void deleteListRecord(List<Record> records) {
+        requireNonNull(records);
+        for (Record record : records) {
+            versionedFinancialPlanner.removeRecord(record);
+            versionedFinancialPlanner.removeRecordFromSummary(record);
+        }
+        indicateFinancialPlannerChanged();
+        indicateSummaryMapChanged();
     }
 
     @Override

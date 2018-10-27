@@ -2,7 +2,6 @@ package seedu.planner.logic.parser;
 
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DIR;
-
 import java.util.Arrays;
 import java.util.logging.Logger;
 
@@ -30,58 +29,65 @@ public class ExportExcelCommandParser implements Parser<ExportExcelCommand> {
         logger.info(trimmedArgs);
         if (args.isEmpty()) {
             return new ExportExcelCommand();
-        } else {
-            ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_DIR);
-            if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-                stringDate += argMultimap.getValue(PREFIX_DATE).get();
-            }
-            if (argMultimap.getValue(PREFIX_DIR).isPresent()) {
-                stringPath += argMultimap.getValue(PREFIX_DIR).get();
-            }
-            logger.info("stringDate: " + stringDate + " stringPath: " + stringPath);
         }
-        return parseArgumentsModeIntoCommand(args, stringDate, stringPath);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_DIR);
+        stringDate += retrieveDataFromPrefix(argMultimap, PREFIX_DATE);
+        stringPath += retrieveDataFromPrefix(argMultimap, PREFIX_DIR);
+        logger.info("stringDate: " + stringDate + " stringPath: " + stringPath);
+        return parseArgumentsModeIntoCommand(args, stringDate.trim(), stringPath.trim());
     }
 
     /**
+     * Return the String value after retrieve data from prefix.
+     */
+    public static String retrieveDataFromPrefix (ArgumentMultimap argumentMultimap, Prefix prefix) {
+        if (argumentMultimap.getValue(prefix).isPresent()) {
+            return argumentMultimap.getValue(prefix).get();
+        }
+        return null;
+    }
+    /**
      * Parse the arguments into different argument mode, hence, we will have different command mode.
      */
-    private static ExportExcelCommand parseArgumentsModeIntoCommand (String args, String stringDate, String stringPath)
+    public static ExportExcelCommand parseArgumentsModeIntoCommand (String args, String stringDate, String stringPath)
+            throws ParseException {
+        String directoryPath;
+        if (stringDate.isEmpty() && stringPath.isEmpty()) {
+            return new ExportExcelCommand();
+        } else if (stringDate.isEmpty()) {
+            directoryPath = ParserUtil.parseDirectoryString(stringPath);
+            return new ExportExcelCommand(directoryPath);
+        } else {
+            String[] dates = splitByWhitespace(stringDate);
+            return parseDateIntoDifferentMode(dates, stringPath);
+        }
+    }
+    private static ExportExcelCommand parseDateIntoDifferentMode (String[] dates, String stringPath)
             throws ParseException {
         Date startDate;
         Date endDate;
         String directoryPath;
-        if (stringDate == null && stringPath == null) {
-                return new ExportExcelCommand();
-        } else if (stringDate == null) {
-            directoryPath = ParserUtil.parseDirectoryString(stringPath.trim());
-            return new ExportExcelCommand(directoryPath);
+        int dateNum = Arrays.asList(dates).size();
+        if (dateNum > ExportExcelCommand.DUO_MODE) {
+            throw new ParseException(
+                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT
+                            + Messages.MESSAGE_INVALID_DATE_REQUIRED, ExportExcelCommand.MESSAGE_USAGE));
+        } else if (dateNum == ExportExcelCommand.SINGLE_MODE) {
+            startDate = ParserUtil.parseDate(Arrays.asList(dates).get(ExportExcelCommand.FIRST_ELEMENT).trim());
+            endDate = ParserUtil.parseDate(Arrays.asList(dates).get(ExportExcelCommand.FIRST_ELEMENT).trim());
         } else {
-            String[] dates = splitByWhitespace(stringDate.trim());
-            int dateNum = Arrays.asList(dates).size();
-            if (dateNum > 2) {
-                throw new ParseException(
-                        String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT
-                                + Messages.MESSAGE_INVALID_DATE_REQUIRED, ExportExcelCommand.MESSAGE_USAGE));
-            } else if (dateNum == 1) {
-                logger.info("HELLO :) BEFORE PARSE");
-                startDate = ParserUtil.parseDate(Arrays.asList(dates).get(0).trim());
-                endDate = ParserUtil.parseDate(Arrays.asList(dates).get(0).trim());
+            startDate = ParserUtil.parseDate(Arrays.asList(dates).get(ExportExcelCommand.FIRST_ELEMENT).trim());
+            endDate = ParserUtil.parseDate(Arrays.asList(dates).get(ExportExcelCommand.SECOND_ELEMENT).trim());
+        }
+        if (isDateOrderValid(startDate, endDate)) {
+            if (stringPath.isEmpty()) {
+                return new ExportExcelCommand(startDate, endDate);
             } else {
-                logger.info("HELLO :) BEFORE PARSE");
-                startDate = ParserUtil.parseDate(Arrays.asList(dates).get(0).trim());
-                endDate = ParserUtil.parseDate(Arrays.asList(dates).get(1).trim());
+                directoryPath = ParserUtil.parseDirectoryString(stringPath);
+                return new ExportExcelCommand(startDate, endDate, directoryPath);
             }
-            if (isDateOrderValid(startDate, endDate)) {
-                if (stringPath == null) {
-                    return new ExportExcelCommand(startDate, endDate);
-                } else {
-                    directoryPath = ParserUtil.parseDirectoryString(stringPath.trim());
-                    return new ExportExcelCommand(startDate, endDate, directoryPath);
-                }
-            } else {
-                throw new ParseException(Messages.MESSAGE_INVALID_STARTDATE_ENDDATE);
-            }
+        } else {
+            throw new ParseException(Messages.MESSAGE_INVALID_STARTDATE_ENDDATE);
         }
     }
     /**
@@ -89,17 +95,16 @@ public class ExportExcelCommandParser implements Parser<ExportExcelCommand> {
      * @param args String arguments that have 2 dates.
      * @return array of split strings
      */
-    private static String[] splitByWhitespace(String args) {
+    public static String[] splitByWhitespace(String args) {
         if (args.isEmpty()) {
             return null;
         }
-        String[] argList = args.split("\\s+");
-        return argList;
+        return args.split("\\s+");
     }
     /**
      * Check whether the Dates are valid period or not.
      */
-    private static boolean isDateOrderValid(Date startDate, Date endDate) {
+    public static boolean isDateOrderValid(Date startDate, Date endDate) {
         return startDate.isEarlierThan(endDate) || startDate.equals(endDate);
     }
 }

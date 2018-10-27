@@ -150,18 +150,12 @@ public class ParserUtil {
     /**
      * Parses {@code Directory Path} into a {@code DirectoryPath}
      */
-    public static DirectoryPath parseFilePath(String dirPath) throws ParseException {
+    public static String parseFilePathString(String dirPath) throws ParseException {
         requireNonNull(dirPath);
         System.out.println(dirPath);
-        if (DirectoryPath.isValidFormat(dirPath)) {
-            System.out.println("TRUE FILE_PATH_FORMAT");
-        } else {
-            System.out.println("FALSE FILE_PATH_FORMAT");
-        }
         if (DirectoryPath.isValidFilePath(dirPath)) {
-            final DirectoryPath directoryPath = new DirectoryPath(dirPath);
-            return directoryPath;
+            return dirPath;
         }
-        return null;
+        return DirectoryPath.HOME_DIRECTORY_STRING;
     }
 }

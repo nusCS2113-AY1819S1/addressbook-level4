@@ -40,7 +40,7 @@ public class Messages {
                     + " The first row of your table should come with"
                     + "NAME DATE MONEY SPENT/RECEIVED TAGS (case in-sensitive).\n";
 
-    public static final String MESSAGE_RECORD_ADDED_SUCCESSFULLY = "All records from the %1$s is read"
+    public static final String MESSAGE_RECORD_ADDED_SUCCESSFULLY = "All records from the %1$s are read"
             + " and only non-existing records are added to the current Financial Planner.\n";
 
     public static final String MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY =
@@ -48,4 +48,10 @@ public class Messages {
 
     public static final String MESSAGE_NO_RECORDS_TO_EXPORT =
             "There is no record to export.\n";
+
+    public static final String MESSAGE_NO_RECORDS_TO_ACHIEVE =
+            "There is no record to achieve.\n";
+
+    public static final String MESSAGE_ACHIEVE_SUCCESSFULLY =
+            " The records in the Excel file will be no longer in the current Financial Planner.\n";
 }

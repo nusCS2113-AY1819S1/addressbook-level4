@@ -1,11 +1,12 @@
 package seedu.planner.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.planner.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.planner.testutil.TypicalRecords.getTypicalFinancialPlanner;
+
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,7 @@ import seedu.planner.model.ModelManager;
 import seedu.planner.model.UserPrefs;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
+import seedu.planner.model.record.Record;
 import seedu.planner.testutil.TypicalRecords;
 
 public class ExportExcelCommandTest {
@@ -32,8 +34,8 @@ public class ExportExcelCommandTest {
         Date startDate_2 = TypicalRecords.TYPICAL_START_DATE1;
         Date endDate_1 = TypicalRecords.TYPICAL_END_DATE;
         Date endDate_2 = TypicalRecords.TYPICAL_END_DATE1;
-        DirectoryPath directoryPath = DirectoryPath.HOME_DIRECTORY;
-        DirectoryPath directoryPath1 = DirectoryPath.WORKING_DIRECTORY;
+        String directoryPath = DirectoryPath.HOME_DIRECTORY_STRING;
+        String directoryPath1 = DirectoryPath.WORKING_DIRECTORY_STRING;
 
         ExportExcelCommand exportExcelCommand_1_1 = new ExportExcelCommand();
         ExportExcelCommand exportExcelCommand_2_1 = new ExportExcelCommand(directoryPath);
@@ -76,14 +78,20 @@ public class ExportExcelCommandTest {
     public void execute_zeroRecordFound_noRecordFound() {
         String nameFile = ExcelUtil.setNameExcelFile(
                 TypicalRecords.TYPICAL_START_DATE1, TypicalRecords.TYPICAL_END_DATE1);
-        DirectoryPath directoryPath = DirectoryPath.HOME_DIRECTORY;
-        String expectedMessage = String.format(
-                Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY,
-                nameFile, DirectoryPath.HOME_DIRECTORY.getDirectoryPathValue());
+        String directoryPath = DirectoryPath.HOME_DIRECTORY_STRING;
         ExportExcelCommand command = new ExportExcelCommand(
                 TypicalRecords.TYPICAL_START_DATE1, TypicalRecords.TYPICAL_END_DATE1, directoryPath);
+        String expectedMessage;
         expectedModel.updateFilteredRecordList(new DateIsWithinIntervalPredicate(
                 TypicalRecords.TYPICAL_START_DATE1, TypicalRecords.TYPICAL_END_DATE1));
+        List<Record> records = expectedModel.getFilteredRecordList();
+        if (records.size() > 0) {
+            expectedMessage = String.format(
+                    Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY,
+                    nameFile, DirectoryPath.HOME_DIRECTORY.getDirectoryPathValue());
+        } else {
+            expectedMessage = Messages.MESSAGE_NO_RECORDS_TO_EXPORT;
+        }
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredRecordList());
     }
@@ -92,7 +100,7 @@ public class ExportExcelCommandTest {
     public void execute_multipleRecordsFound() {
         String nameFile = ExcelUtil.setNameExcelFile(
                 TypicalRecords.TYPICAL_START_FAR_DATE, TypicalRecords.TYPICAL_END_FAR_DATE);
-        DirectoryPath directoryPath = DirectoryPath.HOME_DIRECTORY;
+        String directoryPath = DirectoryPath.HOME_DIRECTORY_STRING;
         String expectedMessage = String.format(
                 Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY,
                 nameFile, DirectoryPath.HOME_DIRECTORY.getDirectoryPath().getDirectoryPathValue());

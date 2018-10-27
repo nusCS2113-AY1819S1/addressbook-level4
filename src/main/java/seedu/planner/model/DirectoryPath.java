@@ -13,14 +13,14 @@ import seedu.planner.commons.core.Messages;
  * in Excel or the user want to achieve the data.
  */
 public class DirectoryPath {
-    public static final String USER_DIRECTORY_STRING = System.getProperty("user.dir");
+    public static final String WORKING_DIRECTORY_STRING = System.getProperty("user.dir");
     public static final String HOME_DIRECTORY_STRING = System.getProperty("user.home");
 
     public static final String DIRECTORY_REGREX = "([a-zA-Z]:)?(\\\\[a-zA-Z0-9_.-]+)+\\\\?";
 
     public static final DirectoryPath HOME_DIRECTORY = new DirectoryPath(HOME_DIRECTORY_STRING);
 
-    public static final DirectoryPath WORKING_DIRECTORY = new DirectoryPath(USER_DIRECTORY_STRING);
+    public static final DirectoryPath WORKING_DIRECTORY = new DirectoryPath(WORKING_DIRECTORY_STRING);
 
     public static final String FILE_SEPERATOR = System.getProperty("file.separator");
 
@@ -36,7 +36,7 @@ public class DirectoryPath {
                     + "For e.g., the appropriate directory is "
                     + HOME_DIRECTORY_STRING
                     + "  or  "
-                    + USER_DIRECTORY_STRING;
+                    + WORKING_DIRECTORY_STRING;
 
     private static Logger loggerStatic = LogsCenter.getLogger(DirectoryPath.class);
 
@@ -181,7 +181,7 @@ public class DirectoryPath {
     }
 
     public static String getDefaultWorkingDirectoryValue() {
-        return USER_DIRECTORY_STRING;
+        return WORKING_DIRECTORY_STRING;
     }
 
     public static String getDefaultHomeDirectoryValue() {

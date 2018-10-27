@@ -1,6 +1,8 @@
 package seedu.planner.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.planner.logic.parser.CliSyntax.PREFIX_DIR;
+import static seedu.planner.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -21,21 +23,24 @@ public class ImportExcelCommand extends Command {
     public static final String COMMAND_WORD = "import_excel";
     public static final String MESSAGE_USAGE =
             ": Imports all the records data in Excel file and add them into the current Financial Planner.\n"
+            + "You MUST include your directory path, starting with prefix: " + PREFIX_DIR + "\n"
             + "If record has already existed in the Financial Planner, it wil be ignored.\n"
-            + "Parameters: FILE_PATH.\n"
-            + "Example: " + COMMAND_WORD + " " + DirectoryPath.HOME_DIRECTORY_STRING + DirectoryPath.FILE_SEPERATOR
-            + "Book1.xlsx\n";
-    private DirectoryPath directoryPath;
+            + "Parameters: (FILE_PATH) or (DIRECTORY PATH and FILE NAME)\n"
+            + "Example 1: " + COMMAND_WORD + " " + PREFIX_DIR
+            + DirectoryPath.HOME_DIRECTORY_STRING + DirectoryPath.FILE_SEPERATOR + "Book1.xlsx (MUST end with .xlsx)\n"
+            + "Example 2: " + COMMAND_WORD + " " + PREFIX_DIR
+            + DirectoryPath.HOME_DIRECTORY_STRING + " " + PREFIX_NAME + " Book1\n";
+    private String directoryPath;
     private Logger logger = LogsCenter.getLogger(ImportExcelCommand.class);
 
-    public ImportExcelCommand(DirectoryPath directoryPath) {
+    public ImportExcelCommand(String directoryPath) {
         this.directoryPath = directoryPath;
     }
     @Override
     public CommandResult execute (Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(this);
-        logger.info(directoryPath.getDirectoryPath().getDirectoryPathValue());
-        String filePath = directoryPath.getDirectoryPath().getDirectoryPathValue();
+        logger.info(directoryPath);
+        String filePath = directoryPath;
         try {
             List<Record> records = ExcelUtil.readExcelSheet(filePath);
             model.addListUniqueRecord(records);

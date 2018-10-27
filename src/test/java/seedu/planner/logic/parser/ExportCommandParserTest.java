@@ -44,7 +44,7 @@ public class ExportCommandParserTest {
     public void parse_validArgs_returnsExportExcelCommand() {
         String startDate = TypicalRecords.TYPICAL_START_DATE.getValue();
         String endDate = TypicalRecords.TYPICAL_END_DATE.getValue();
-        DirectoryPath directoryPath = DirectoryPath.HOME_DIRECTORY;
+        String directoryPath = DirectoryPath.HOME_DIRECTORY_STRING;
         ExportExcelCommand expectedExportExcelCommand_1 = new ExportExcelCommand();
         // no leading and trailing whitespaces
         assertParseSuccess(parser,
@@ -99,11 +99,11 @@ public class ExportCommandParserTest {
         ExportExcelCommand expectedExportExcelCommand_3 = new ExportExcelCommand(directoryPath);
         // no leading and trailing whitespaces
         assertParseSuccess(parser,
-                WHITE_SPACE + PREFIX_DIR + directoryPath.getDirectoryPathValue(),
+                WHITE_SPACE + PREFIX_DIR + directoryPath,
                 expectedExportExcelCommand_3);
         // multiple whitespaces between keywords
         assertParseSuccess(parser,
-                    WHITE_SPACE + PREFIX_DIR + WHITE_SPACE + directoryPath.getDirectoryPathValue(),
+                    WHITE_SPACE + PREFIX_DIR + WHITE_SPACE + directoryPath,
                 expectedExportExcelCommand_3);
 
         ExportExcelCommand expectedExportExcelCommand_4 =
@@ -111,12 +111,12 @@ public class ExportCommandParserTest {
         // no leading and trailing whitespaces
         assertParseSuccess(parser,
                 WHITE_SPACE + PREFIX_DATE + startDate + " " + endDate + PREFIX_DIR
-                + directoryPath.getDirectoryPathValue(),
+                + directoryPath,
                 expectedExportExcelCommand_4);
         // multiple whitespaces between keywords
         assertParseSuccess(parser,
                 WHITE_SPACE + PREFIX_DATE + WHITE_SPACE + startDate + " " + endDate + PREFIX_DIR + WHITE_SPACE
-                + WHITE_SPACE + directoryPath.getDirectoryPathValue(),
+                + WHITE_SPACE + directoryPath,
                 expectedExportExcelCommand_4);
     }
 }
