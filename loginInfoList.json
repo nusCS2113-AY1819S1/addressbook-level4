@@ -1,30 +1,10 @@
 {
   "loginInfoList" : [ {
     "userName" : {
-      "userName" : "tianhang"
-    },
-    "password" : {
-      "password" : "Gcf70h4aWQ1T9NMxE03XM3nq3nCmFGihnO4xMzHMgP0="
-    },
-    "authenticationLevel" : {
-      "authenticationLevel" : "ADMIN"
-    }
-  }, {
-    "userName" : {
       "userName" : "tester"
     },
     "password" : {
       "password" : "Gcf70h4aWQ1T9NMxE03XM3nq3nCmFGihnO4xMzHMgP0="
-    },
-    "authenticationLevel" : {
-      "authenticationLevel" : "ADMIN"
-    }
-  }, {
-    "userName" : {
-      "userName" : "th"
-    },
-    "password" : {
-      "password" : "4yt4w98rW0do5l3iEKLv0pUaPHHsRToiQgcsz/BL41c="
     },
     "authenticationLevel" : {
       "authenticationLevel" : "ADMIN"

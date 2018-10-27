@@ -10,7 +10,7 @@ import seedu.address.model.user.Password;
 import seedu.address.model.user.UserName;
 
 /**
- * Contains utility methods used for login check d
+ * Contains utility methods used for login check
  */
 public class LoginUtils {
     private LoginInfoManager loginInfoManager;
@@ -26,7 +26,7 @@ public class LoginUtils {
     }
     /**
      * Returns validity of username
-     * If usernameField is empty, return false else return true
+     * If usernameField is empty, return false.
      *
      * @return boolean value
      */
@@ -50,7 +50,7 @@ public class LoginUtils {
     }
 
     /**
-     * check the password and username with logininfo list
+     * Check the password and username with logininfo list
      */
     public boolean isPasswordAndUserNameValid () {
         LoginInfo userInfoInStorage = loginInfoManager.getLoginInfo (username.toString ());

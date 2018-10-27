@@ -1,6 +1,7 @@
 package seedu.address.model.user;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Username in the loginInfo list.
@@ -21,6 +22,8 @@ public class UserName {
 
     public UserName(String userName) {
         requireNonNull(userName);
+        checkArgument(isValidUserName (userName), MESSAGE_USER_NAME_CONSTRAINTS);
+        checkArgument(!isUserNameTooLong (userName), MESSAGE_USER_NAME_LENGTH_CONSTRAINTS);
         this.userName = userName;
     }
 
