@@ -5,7 +5,6 @@ import java.util.Collection;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
@@ -63,6 +62,27 @@ public class CustomAutoCompletionTextFieldBinding<T> extends AutoCompletionBindi
         };
     }
 
+    private final ChangeListener<Number> caretChangeListener = (obs, oldNumber, newNumber) -> {
+        String text = getCompletionTarget().getText().substring(0, newNumber.intValue());
+        int index;
+        for (index = text.length() - 1; index >= 0 && !Character.isWhitespace(text.charAt(index)); index--);
+        if (index > 0) {
+            oldText = text.substring(0, index) + " ";
+        } else {
+            oldText = "";
+        }
+        String newText = text.substring(index + 1, text.length());
+        if (getCompletionTarget().isFocused()) {
+            setUserInput(newText);
+        }
+    };
+
+    private final ChangeListener<Boolean> focusChangedListener = (obs, oldFocused, newFocused) -> {
+        if (newFocused == false) {
+            hidePopup();
+        }
+    };
+
     @Override
     public TextField getCompletionTarget() {
         return (TextField) super.getCompletionTarget();
@@ -80,26 +100,5 @@ public class CustomAutoCompletionTextFieldBinding<T> extends AutoCompletionBindi
         getCompletionTarget().setText(newText);
         getCompletionTarget().positionCaret(newText.length());
     }
-
-    private final ChangeListener<Number> caretChangeListener = (obs, oldNumber, newNumber) -> {
-        String text = getCompletionTarget().getText().substring(0, newNumber.intValue());
-        int index;
-        for (index = text.length() - 1; index >= 0 && !Character.isWhitespace(text.charAt(index)); index--);
-        if (index > 0) {
-            oldText = text.substring(0, index) + " ";
-        } else {
-            oldText = "";
-        }
-        String newText = text.substring(index + 1, text.length());
-        if (getCompletionTarget().isFocused()) {
-            setUserInput(newText);
-        }
-    };
-
-    private final ChangeListener<Boolean> focusChangedListener = (obs, oldFocused, newFocused) -> {
-        if (newFocused == false){
-            hidePopup();
-        }
-    };
 
 }
