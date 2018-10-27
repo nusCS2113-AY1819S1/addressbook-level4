@@ -33,7 +33,7 @@ public class RegisterCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_REGISTER_EVENT_SUCCESS = "Registered for event: %1$s";
-    public static final String MESSAGE_REGISTER_EVENT_REGISTERED = "Already registered for event: %1$s";
+    public static final String MESSAGE_ALREADY_REGISTERED = "Already registered for event.";
 
     private final Index targetIndex;
 
@@ -59,21 +59,20 @@ public class RegisterCommand extends Command {
         int numAttendees = attendeeSet.size();
         attendeeSet.add(new Attendee(attendeeName));
 
-        if (attendeeSet.size() == numAttendees + 1) {
-            EditEventDescriptor registerEventDescriptor = new EditEventDescriptor();
-            registerEventDescriptor.setAttendees(attendeeSet);
-            Event registeredEvent = createEditedEvent(eventToRegister, registerEventDescriptor);
-
-            model.updateEvent(eventToRegister, registeredEvent);
-            model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
-            model.commitEventManager();
-
-            EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
-            return new CommandResult(String.format(MESSAGE_REGISTER_EVENT_SUCCESS, targetIndex.getOneBased()));
-        } else {
-            EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
-            return new CommandResult(String.format(MESSAGE_REGISTER_EVENT_REGISTERED, targetIndex.getOneBased()));
+        if (attendeeSet.size() == numAttendees) {
+            throw new CommandException(MESSAGE_ALREADY_REGISTERED);
         }
+
+        EditEventDescriptor registerEventDescriptor = new EditEventDescriptor();
+        registerEventDescriptor.setAttendees(attendeeSet);
+        Event registeredEvent = createEditedEvent(eventToRegister, registerEventDescriptor);
+
+        model.updateEvent(eventToRegister, registeredEvent);
+        model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+        model.commitEventManager();
+
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
+        return new CommandResult(String.format(MESSAGE_REGISTER_EVENT_SUCCESS, targetIndex.getOneBased()));
     }
 
     @Override
