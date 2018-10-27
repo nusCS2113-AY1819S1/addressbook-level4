@@ -41,7 +41,7 @@ public class CreateGroupCommand extends Command {
      */
     public CreateGroupCommand(Group group) {
         requireNonNull(group);
-        toCreate = group;
+        this.toCreate = group;
         this.shouldCommit = true;
     }
 
