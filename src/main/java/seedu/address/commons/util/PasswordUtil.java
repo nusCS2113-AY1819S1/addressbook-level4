@@ -1,11 +1,11 @@
 package seedu.address.commons.util;
 
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 public class PasswordUtil {
 
@@ -25,12 +25,14 @@ public class PasswordUtil {
      */
     public boolean validatePassword(String plainPassword, String encryptedPassword)
             throws NoSuchAlgorithmException, InvalidKeySpecException {
+
         String [] splits = encryptedPassword.split(":");
         int iterations = Integer.parseInt(splits[0]);
         byte[] salt = convertFromHex(splits[1]);
         byte[] hash = convertFromHex(splits[2]);
+        char[] chars = plainPassword.toCharArray();
 
-        PBEKeySpec pbeKeySpec = new PBEKeySpec(plainPassword.toCharArray(), salt, iterations, HASH_BYTE_SIZE);
+        PBEKeySpec pbeKeySpec = new PBEKeySpec(chars, salt, iterations, HASH_BYTE_SIZE);
         SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
         byte[] testHash = secretKeyFactory.generateSecret(pbeKeySpec).getEncoded();
 
