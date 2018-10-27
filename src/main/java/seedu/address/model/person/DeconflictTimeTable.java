@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import java.util.Collection;
 import java.util.HashSet;
 
+import javafx.scene.paint.Color;
 import seedu.address.model.person.exceptions.TimeSlotNotOverlapException;
 
 /**
@@ -14,6 +15,8 @@ import seedu.address.model.person.exceptions.TimeSlotNotOverlapException;
  * As such, the overwritten method {@code addTimeSlot()} does not throw {@code TimeSlotOverlapException}
  */
 public class DeconflictTimeTable extends TimeTable {
+
+    public static final Color DECONFLICT_TIMESLOT_COLOR = Color.RED;
 
     public DeconflictTimeTable() {
         super();
@@ -51,7 +54,8 @@ public class DeconflictTimeTable extends TimeTable {
             removeTimeSlot(overlap);
         }
 
-        super.addTimeSlot(merged);
+        merged.setColor(DECONFLICT_TIMESLOT_COLOR);
+        timeSlots.add(merged);
     }
 
     /**
