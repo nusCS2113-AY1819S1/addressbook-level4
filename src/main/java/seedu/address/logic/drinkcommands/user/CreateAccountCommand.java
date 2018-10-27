@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.user;
+package seedu.address.logic.drinkcommands.user;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_ACCOUNTANT;
@@ -14,6 +14,9 @@ import seedu.address.authentication.PasswordUtils;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.drinkcommands.DrinkCommandResult;
+import seedu.address.logic.drinkcommands.exceptions.DrinkCommandException;
+import seedu.address.model.DrinkModel;
 import seedu.address.model.LoginInfoManager;
 import seedu.address.model.Model;
 import seedu.address.model.user.AuthenticationLevel;
@@ -55,18 +58,19 @@ public class CreateAccountCommand extends UserCommand {
         this.authenticationLevel = authenticationLevel;
     }
     @Override
-    public CommandResult execute(LoginInfoManager loginInfoManager, CommandHistory history) throws CommandException {
+    public DrinkCommandResult execute(LoginInfoManager loginInfoManager, CommandHistory history)
+            throws DrinkCommandException {
         requireNonNull(loginInfoManager);
 
         if (loginInfoManager.isUserNameExist (userName.toString ())) {
-            throw new CommandException (MESSAGE_DUPLICATE_USERNAME);
+            throw new DrinkCommandException(MESSAGE_DUPLICATE_USERNAME);
         }
         loginInfoManager.createNewAccount (userName, password, authenticationLevel);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new DrinkCommandResult(MESSAGE_SUCCESS);
     }
 
     @Override
-    public CommandResult execute (Model model , CommandHistory history) {
+    public DrinkCommandResult execute (DrinkModel model , CommandHistory history) {
         return null;
     }
 

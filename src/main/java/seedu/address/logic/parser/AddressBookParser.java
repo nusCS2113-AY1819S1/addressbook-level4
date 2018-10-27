@@ -20,7 +20,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SellCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.commands.user.ChangePasswordCommand;
+import seedu.address.logic.drinkcommands.user.ChangePasswordCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.user.ChangePasswordCommandParser;
 

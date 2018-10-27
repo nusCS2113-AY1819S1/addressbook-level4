@@ -55,13 +55,13 @@ public class AddItemCommand extends DrinkCommand {
         } else {
             System.out.println("not rights");
         }
-        return new DrinkCommandResult(String.format(MESSAGE_SUCCESS, toAdd);
+        return new DrinkCommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddItemCommand // instanceof handles nulls
-                && toAdd.equals(((AddItemCommand) other).toAdd);
+                && toAdd.equals(((AddItemCommand) other).toAdd));
     }
 }

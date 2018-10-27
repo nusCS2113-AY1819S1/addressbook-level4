@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DRINK_ITEM;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddItemCommand;
+import seedu.address.logic.drinkcommands.AddItemCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

@@ -8,7 +8,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.user.UserCommand;
+import seedu.address.logic.drinkcommands.DrinkCommand;
+import seedu.address.logic.drinkcommands.DrinkCommandResult;
+import seedu.address.logic.drinkcommands.user.UserCommand;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.ManagerParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -50,10 +52,11 @@ public class DrinkLogicManager extends ComponentManager implements DrinkLogic {
     }
 
     @Override
-    public CommandResult execute(String commandText) throws CommandException, ParseException {
+    public DrinkCommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
-            Command command;
+            DrinkCommand command;
+            /*
             if (model instanceof AdminModel) {
                 command = adminParser.parseCommand (commandText);
             } else if (model instanceof StockTakerModel) {
@@ -65,6 +68,7 @@ public class DrinkLogicManager extends ComponentManager implements DrinkLogic {
             } else {
                 command = addressBookParser.parseCommand (commandText);
             }
+            */
             if (command instanceof UserCommand) {
                 UserCommand userCommand = (UserCommand) command;
                 return userCommand.execute (loginInfoManager, history);
