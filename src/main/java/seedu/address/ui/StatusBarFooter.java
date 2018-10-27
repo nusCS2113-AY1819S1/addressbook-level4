@@ -23,7 +23,8 @@ public class StatusBarFooter extends UiPart<Region> {
 
     public static final String SYNC_STATUS_INITIAL = "Not updated yet in this session";
     public static final String SYNC_STATUS_UPDATED = "Last Updated: %s";
-    public static final String TOTAL_PERSONS_GROUPS_STATUS = "%d person(s) total  |  %d group(s) total";
+    public static final String LIST_ORDER = "panel order: students  |  groups  |  students in selected group";
+    public static final String TOTAL_PERSONS_GROUPS_STATUS = "%d student(s) total  |  %d group(s) total    ";
 
     /**
      * Used to generate time stamps.
@@ -42,6 +43,8 @@ public class StatusBarFooter extends UiPart<Region> {
     @FXML
     private StatusBar syncStatus;
     @FXML
+    private StatusBar listOrder;
+    @FXML
     private StatusBar totalPersonsGroupsStatus;
     @FXML
     private StatusBar saveLocationStatus;
@@ -50,6 +53,7 @@ public class StatusBarFooter extends UiPart<Region> {
     public StatusBarFooter(Path saveLocation, int totalPersons, int totalGroups) {
         super(FXML);
         setSyncStatus(SYNC_STATUS_INITIAL);
+        setListOrder(LIST_ORDER);
         setSaveLocation(Paths.get(".").resolve(saveLocation).toString());
         setTotalPersonsGroups(totalPersons, totalGroups);
         registerAsAnEventHandler(this);
@@ -75,6 +79,10 @@ public class StatusBarFooter extends UiPart<Region> {
 
     private void setSyncStatus(String status) {
         Platform.runLater(() -> syncStatus.setText(status));
+    }
+
+    private void setListOrder(String listOrder) {
+        Platform.runLater(() -> this.listOrder.setText(listOrder));
     }
 
     private void setTotalPersonsGroups(int totalPersons, int totalGroups) {
