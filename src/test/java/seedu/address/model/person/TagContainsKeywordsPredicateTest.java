@@ -1,14 +1,15 @@
 //@@author lws803
 package seedu.address.model.person;
 
-import org.junit.Test;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
+import seedu.address.testutil.PersonBuilder;
 
 public class TagContainsKeywordsPredicateTest {
     @Test
@@ -35,5 +36,15 @@ public class TagContainsKeywordsPredicateTest {
         // different person -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
+
+    @Test
+    public void nonExistenceTest() {
+        TagContainsKeywordsPredicate predicate =
+                new TagContainsKeywordsPredicate(Collections.singletonList("friends"));
+        // New person with no position predicate
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+
+    }
+
 
 }
