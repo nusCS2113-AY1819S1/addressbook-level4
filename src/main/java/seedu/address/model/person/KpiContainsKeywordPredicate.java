@@ -1,3 +1,4 @@
+//@@author lws803
 package seedu.address.model.person;
 
 import java.util.List;
@@ -5,6 +6,9 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 
+/**
+ * Tests that a {@code Person}'s {@code Kpi} matches any of the keywords given.
+ */
 public class KpiContainsKeywordPredicate implements Predicate<Person> {
 
     private final List<String> keywords;
