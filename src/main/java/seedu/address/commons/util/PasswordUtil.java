@@ -7,6 +7,9 @@ import java.security.spec.InvalidKeySpecException;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
+/**
+ * Utility class to encrypt and decrypt passwords.
+ */
 public class PasswordUtil {
 
     private static final int SALT_BYTE_SIZE = 16;
@@ -16,7 +19,8 @@ public class PasswordUtil {
     /**
      * Returns the password encrypted using PBKDF2WithHmacSHA1.
      */
-    public static String getEncryptedPassword(String plainPassword) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public static String getEncryptedPassword(String plainPassword)
+            throws NoSuchAlgorithmException, InvalidKeySpecException {
         return generateHash(plainPassword);
     }
 
