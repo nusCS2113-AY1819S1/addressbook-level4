@@ -1,13 +1,17 @@
 package seedu.address.model;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Map;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.PasswordUtil;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -17,6 +21,8 @@ import seedu.address.storage.JsonUserStorage;
  * Represents user account authentication
  */
 public class UserSession {
+
+    private static final Logger logger = LogsCenter.getLogger(UserSession.class);
 
     private JsonUserStorage userStorage;
     private User user;
@@ -65,7 +71,7 @@ public class UserSession {
             try {
                 passwordsMatch = PasswordUtil.validatePassword(loggedPassword, storedPassword);
             } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-                e.printStackTrace();
+                logger.warning("PasswordUtil could not validate password : " + StringUtil.getDetails(e));
             }
 
             if (passwordsMatch) {
@@ -86,8 +92,12 @@ public class UserSession {
         try {
             String encryptedPassword = PasswordUtil.getEncryptedPassword(loggedPassword);
             userStorage.createUser(loggedUsername, encryptedPassword);
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException | IOException e) {
-            e.printStackTrace();
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            logger.warning("PasswordUtil could not generate encrypted password : " + StringUtil.getDetails(e));
+        } catch (FileNotFoundException e) {
+            logger.warning("users.json not found in file path : " + StringUtil.getDetails(e));
+        } catch (IOException e) {
+            logger.warning("JSONUserStorage could not read or write to users.json : " + StringUtil.getDetails(e));
         }
     }
 
