@@ -31,6 +31,7 @@ public class FreeCommand extends Command {
     private final Collection<Index> targetIndices;
 
     public FreeCommand(Collection <Index> targetIndices) {
+        requireNonNull(targetIndices);
         this.targetIndices = targetIndices;
     }
 
