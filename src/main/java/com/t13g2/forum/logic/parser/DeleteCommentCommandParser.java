@@ -1,36 +1,35 @@
 package com.t13g2.forum.logic.parser;
 
-import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_ID;
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_COMMENT_ID;
 
 import java.util.stream.Stream;
 
 import com.t13g2.forum.commons.core.Messages;
-import com.t13g2.forum.logic.commands.DeleteThreadCommand;
+import com.t13g2.forum.logic.commands.DeleteCommentCommand;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new DeleteThreadCommand object
+ * Parses input arguments and creates a new DeleteCommentCommand object
  */
-public class DeleteThreadCommandParser implements Parser<DeleteThreadCommand> {
-
+public class DeleteCommentCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns an DeleteCommand object for execution.
+     * and returns an DeleteCommentCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public DeleteThreadCommand parse(String args) throws ParseException {
+    public DeleteCommentCommand parse(String args) throws ParseException {
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_THREAD_ID);
+                ArgumentTokenizer.tokenize(args, PREFIX_COMMENT_ID);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_THREAD_ID)
+        if (!arePrefixesPresent(argMultimap, PREFIX_COMMENT_ID)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                 DeleteThreadCommand.MESSAGE_USAGE));
+                    DeleteCommentCommand.MESSAGE_USAGE));
         }
-        int threadId = Integer.parseInt(ParserUtil.parseThreadId(argMultimap.getValue(PREFIX_THREAD_ID).get()));
+        int commentId = Integer.parseInt(ParserUtil.parseCommentId(argMultimap.getValue(PREFIX_COMMENT_ID).get()));
 
-        return new DeleteThreadCommand(threadId);
+        return new DeleteCommentCommand(commentId);
     }
 
     /**

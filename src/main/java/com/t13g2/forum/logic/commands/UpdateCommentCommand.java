@@ -3,6 +3,7 @@ package com.t13g2.forum.logic.commands;
 import static com.t13g2.forum.commons.core.Messages.MESSAGE_INVALID_COMMENT_ID;
 import static com.t13g2.forum.commons.core.Messages.MESSAGE_NOT_COMMENT_OWNER;
 import static com.t13g2.forum.commons.core.Messages.MESSAGE_NOT_LOGIN;
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_COMMENT_CONTENT;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_COMMENT_ID;
 import static java.util.Objects.requireNonNull;
 
@@ -15,27 +16,27 @@ import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 
 /**
- * Delete a certain comment. Only admin could delete comments from others,
- * user could only delete comment created by his/her own.
+ * Update a existing comment content in the forum book
+ * User could only update comment content created by his/her own.
  */
-public class DeleteCommentCommand extends Command {
-    public static final String COMMAND_WORD = "deleteComment";
+public class UpdateCommentCommand extends Command {
+    public static final String COMMAND_WORD = "updateComment";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete a certain comment \n"
-            + "Parameters: "
-            + PREFIX_COMMENT_ID + "COMMENT ID \n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_COMMENT_ID + "1";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Update a existing comment title created by its user in the forum book.\n"
+            + "Example: "
+            + COMMAND_WORD + " "
+            + PREFIX_COMMENT_ID + "123 "
+            + PREFIX_COMMENT_CONTENT + "This is a new title";
 
-    public static final String MESSAGE_SUCCESS = "Comment deleted: %1$s";
-    private static String commentContentToDelete;
-    private final int commentId;
-    /**
-     * Creates an DeleteCommentCommand to delete the specified {@code Comment}
-     */
-    public DeleteCommentCommand(int commentId) {
+    private static int commentId;
+    private static String contentToUpdate;
+
+    public UpdateCommentCommand(int commentId, String contentToUpdate) {
         requireNonNull(commentId);
+        requireNonNull(contentToUpdate);
         this.commentId = commentId;
+        this.contentToUpdate = contentToUpdate;
     }
 
     @Override
@@ -44,16 +45,13 @@ public class DeleteCommentCommand extends Command {
         if (!Context.getInstance().isLoggedIn()) {
             throw new CommandException(MESSAGE_NOT_LOGIN);
         }
-        commentContentToDelete = "";
+        String messageSuccess = "Updated comment " + commentId + " to a new title: %1$s";
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             Comment comment = unitOfWork.getCommentRepository().getComment(commentId);
-            commentContentToDelete = comment.getContent();
             if (Context.getInstance().getCurrentUser().getId() != comment.getCreatedByUserId()) {
                 throw new CommandException(MESSAGE_NOT_COMMENT_OWNER);
             }
-            //delete the comment according to the commentId from the memory repository
-            unitOfWork.getCommentRepository().deleteComment(commentId);
-            //update to local database
+            comment.setContent(contentToUpdate);
             unitOfWork.commit();
         } catch (EntityDoesNotExistException e) {
             throw new CommandException(MESSAGE_INVALID_COMMENT_ID);
@@ -62,10 +60,6 @@ public class DeleteCommentCommand extends Command {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String message = "\n"
-                + "Comment ID: " + commentId + "\n"
-                + "Comment Content: " + commentContentToDelete + "\n";
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, message));
+        return new CommandResult(String.format(messageSuccess, contentToUpdate));
     }
 }

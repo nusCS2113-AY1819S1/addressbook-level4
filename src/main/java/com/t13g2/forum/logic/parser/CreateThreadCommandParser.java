@@ -39,8 +39,8 @@ public class CreateThreadCommandParser implements Parser<CreateThreadCommand> {
         ForumThread forumThread = new ForumThread(); //instantiate a new forum thread
         forumThread.setTitle(threadTitle); //pass the thread title to this new forum thread
 
-        Comment comment = new Comment();
-        comment.setContent(commentContent);
+        Comment comment = new Comment(); //instantiate a new comment
+        comment.setContent(commentContent); //pass the comment content to this new comment
 
         return new CreateThreadCommand(moduleCode, forumThread, comment);
 
@@ -53,5 +53,4 @@ public class CreateThreadCommandParser implements Parser<CreateThreadCommand> {
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
-
 }
