@@ -415,12 +415,34 @@ The user is able to control if the distribution process should take into conside
 
 In the current version, the following operations have been implemented:
 
-* Distribute
-* DistributeCommand
-* DistributeCommandParser
-* DistributeAlgorithm
-* DistributeUtils
-  
+* `DistributeCommand` -- Execute the command to start the Distribution process.
+* `DistributeAlgorithm` -- Handles the different types of algorithm depending on the user input flags.
+* `DistributeUtils` -- Contains the methods that work closely with DistributeAlgorithm class.
+
+This feature also work with `CreateGroupCommand` and `AddGroupCommand` as Distribute functionality consist of creating groups and adding person into groups.
+
+Given below is an example usage scenario and how the Distribute mechanism behave at each step.
+
+Step 1: User inputs `distinto 3 n/CS2113-T13- g/0 nat/0` to distribute all students in the student management system randomly into 3 groups. By setting '0' to 'g/' and 'nat/',
+user does not want to take gender and nationality into account. The AddressBookParser detects `distinto` or `di` as a command word and proceed to call `DistributeCommandParser`.
+The `DistributeCommandParser` will take in the rest of the input and parse the necessary information out. The information that were parsed out are `INDEX`, `GROUP_NAME`, `GENDER_FLAG` and `NATIONALITY FLAG`.
+`DistributeCommandParser` will now create a `DistributeCommand` object containing all the Distribute's information extracted after parsing.
+`DistributeCommand` receives the inputs and execute the Distribution Command.
+
+[NOTE]
+====
+- If the `INDEX` value entered by the user is *less than* the number of student in the management system or `INDEX` is *0* or is blank, the command will be rejected and it will
+throw a `CommandException` which will notify the user of the issue.
+- If the `GROUP_NAME` string entered by the user does not adhere to only contain alphanumeric characters, '-', '[' and ']', and should not be blank, the command will be rejected and it will
+throw a `CommandException` which will notify the user of the issue.
+- The `GENDER_FLAG` and `NATIONALITY_FLAG` only accepts `1`, `0`, `true` and `false` else the command will be rejected and will throw a `CommandException` which will notify the user of the issue.
+====
+
+INSERT SEQUENCE DIAGRAM HERE
+
+Step 2: The `DistributeCommand` creates a new `DistributeAlgorithm` Object and fed in an input parameter of a `Distribute` Object which contains the extracted information in Step 1.
+
+
 
 ==== FlowDiagram Diagrams
 
