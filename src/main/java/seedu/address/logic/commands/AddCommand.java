@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -24,7 +23,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the event manager. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the event manager.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_CONTACT + "CONTACT "
@@ -33,8 +32,7 @@ public class AddCommand extends Command {
             + PREFIX_VENUE + "VENUE "
             + PREFIX_DATETIME + "DATETIME "
             + "[" + PREFIX_TAG + "TAG]... "
-            + "[" + PREFIX_ATTENDEE + "ATTENDEE]...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_NAME + "New Year Party "
             + PREFIX_CONTACT + "Amy Tan "
             + PREFIX_PHONE + "98765432 "
@@ -42,8 +40,7 @@ public class AddCommand extends Command {
             + PREFIX_VENUE + "311, Clementi Ave 2, #02-25 "
             + PREFIX_DATETIME + "31/12/2018 4:30 "
             + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney "
-            + PREFIX_ATTENDEE + "Jason Derulo";
+            + PREFIX_TAG + "party";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the event manager";
