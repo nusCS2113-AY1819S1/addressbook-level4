@@ -408,81 +408,169 @@ with `StudentList.txt` for the above case.
 // end::AddScriptCommand[]
 
 // tag::distribute[]
-=== Distribute Students Equally feature
+=== Distribute All Students feature
 ==== Current Implementation
+The Distribute feature assist the user in distributing all students in the address book to specific number of groups randomly.
+The user is able to control if the distribution process should take into consideration of balanced gender or balanced nationality.
+
+In the current version, the following operations have been implemented:
+
+* Distribute
+* DistributeCommand
+* DistributeCommandParser
+* DistributeAlgorithm
+* DistributeUtils
+  
+
+==== FlowDiagram Diagrams
+
+==== UML Diagrams
+
+==== Sequence Diagrams
+
+==== Algorithm Implementation
 The Distribute Students Equally feature holds 4 different algorithms.
 Each Algorithm serve different purposes.
 
-* Distribute Students Equally
-* Distribute Students Equally with Balanced Gender
-* Distribute Students Equally with Balanced Nationality
-* Distribute Students Equally with Balanced Gender & Nationality
+* Distribute Students Randomly with equal numbers
+* Distribute Students Randomly with Balanced Gender
+* Distribute Students Randomly with Balanced Nationality
+* Distribute Students Randomly with Balanced Gender & Nationality (Coming in v1.4)
 
 Every Algorithm will require inputs such as:
 ****
-* Number of Groups to be created of Integer Data Type
-* 2D ArrayList of Person Type
-* LinkList containing all person data from the current address book
-* Group Name in String Type
+* int _n_ : Number of Groups to be created of Integer Data Type
+* ArrayList<ArrayList<Person>> groupArrayList : 2D ArrayList of Person Type
+* LinkList<Person> allPerson : LinkList containing all person data from the current address book
+* String groupName : Group Name in String Type
 ****
 
-From these 4 inputs, each algorithm will run necessary checks, create the required number of groups with the `Group Name` parsed in and add the Students assigned to the group.
+From these 4 inputs, every algorithm will run necessary checks, create the required number of groups with the `Group Name` parsed in and add the Students assigned to the group.
 
 [NOTE]
 Before any Algorithm execute, the system will check if there exist any duplicate group name.
 If such an event occur, the command will stop and throw a `CommandException : Duplicate Groups Found` which will notify the user of the issue.
 
-==== Sequence Diagrams
-
-==== Design Considerations
+==== Pre Execution Checks and Operations
 Before any Algorithm is execute, there are some checks and functions to be performed.
 
-. Check if _n_ number of groups to be created must be less than number of persons in the address book.
+. Check if _n_ number of groups to be created must be *less than* number of persons in the address book.
 .. throw `Command Exception` if _n_ groups is more than > number of persons in address book.
-. Check if there exist a group with the same group name as the ones to be created.
+. Check if there exist a group with the *same group name* as the ones to be created.
 .. throw `Command Exception` if there exist another group with the intended name to be created.
 . Shuffle the Address Book with a time seed.
 .. A Better Distribution
-. Place All Persons ArrayList into an LinkList.
+. Place All Persons into an LinkList.
+
+==== Algorithm Design Input Parameters
+
+. int _n_
+.. Number of Groups to be created
+. ArrayList<ArrayList<Person>> groupArrayList
+.. A 2D Array List where the *Outer Array List* acts as a group while the *Inner Array List* stores the *Person Object*.
+. LinkList<Person> allPerson
+.. A LinkList containing all person data from the current address book. Meant for distribution into the 2D ArrayList.
+. String groupName
+.. The group name required to create the groups.
 
 ===== Aspect: Distribute Students Equally Algorithm Explanation
 
+To ensure a balanced number of persons in each group, we have to calculate the minimum number of people to place in a group.
+This process of recalculation has to be executed as we access the next group. This allows the distribution to be balanced.
+
 *Allocation Process*
 
-Firstly, I have created a 2D ArrayList of Person Type to allocate person to groups.
-
-The 2D ArrayList act as a group which contains groups of selected persons.
-Next, I have created an for loop to iterate _n_ times, where _n_ is the number of required groups to be created.
-In the for loop, i have created an ArrayList of Person Type which stores all selected Persons.
-In each for loop, the system will calculate the required number of person to be in a group and add them into the ArrayList.
-
-Once the required number of person to be in a group is fulfilled, this ArrayList is stored into the 2D Array List.
-This process loops for _n_ times.
-
-The 2D Array List should now store _n_ Elements with (_a_) number of persons in each Element.
+. Creates a For Loop of _n_ number of times. Starting with i equals to _n_ and count down to 0.
+. Creates an ArrayList of Person Object.
+.. This ArrayList acts as the inner array list to hold all Persons.
+. Calculates the number of Person should be in a group.
+.. This can be done by having the *total number of Person* in the LinkList divided by *i* from the for loop.
+.. Lets label this as _paxInAGroup_
+. Creates a While Loop with the condition of _paxInAGroup_ more than 0.
+.. In the while loop, we will load a person object from the LinkList into the ArrayList.
+. Once the while loop is complete, the array list will be filled with _paxInAGroup_ Persons.
+. Now, we add this ArrayList with _paxInAGroup_ of Persons into the 2D ArrayList where the outer acts as a group.
+. This process is repeated until the total number of group required to be allocated is complete.
 
 *Distribution Process*
 
-Once the allocation process of person to groups. The `distributeProcess` method will access the 2D ArrayList.
-In each ArrayList of the 2D ArrayList, the distributeProcess Method will create a group and add all the person allocated
-to that ArrayList into the group.
-This process loops until the 2D ArrayList if fully accessed.
+. The `distributeProcess` method will access the 2D ArrayList.
+. In each ArrayList of the 2D ArrayList, the distributeProcess Method will access the outer ArrayList and creates a group.
+.. The group is created with the given Group Name that the user specified in the Command.
+. Next, it will access the inner ArrayList and add all the person allocated inside into the group.
+. This process is repeated until the 2D ArrayList is fully accessed.
 
-*The process is now complete with all person distributed randomly into _n_ number of groups.*
+We will now be able to achieve _n_ groups with all students distributed randomly into them. +
 
 ===== Aspect: Distribute Students Equally with Balanced Gender Explanation
 
-The process is similar to the Algorithm used above. However, the key difference is that I had separate all female person into a list
-and all males into a list. After separation, I distribute 1 male person to each group and does this loop until there are no males left.
+The process is quite different from the Algorithm used above. The key difference is that we had separate all female person into a list
+and all male persons into another list. After separation, we start the allocation of 1 male person to each group and process repeats until there are no males left.
+At that same pointer where the male list turns empty, we will start the allocation of 1 female person to each group. This process continues until all female persons are allocated.
 
-This process repeats for the female students.
+*Allocation Process*
 
-Once the groupArrayList is allocated, we will run the same Distribution Process mentioned in the Algorithm above.
+. Creates a For Loop of _n_ number of times. Starting with i equals to _n_ and counts down to 0.
+. Creates 2 LinkedList of Person Object.
+.. 1 LinkedList to store all male persons
+.. 1 LinkedList to store all female persons
+. Iterate through allPersonLinkList, store male persons into maleLinkList and store female persons into femaleLinkList.
+. Creates a while loops to check if maleLinkList or femaleLinkList is not empty
+.. Create a pointer to point to the group number.
+.. Creates another while loop to allow the group pointer to iterate infinitely.
+... if the group pointer points to the last group, it will reset its pointer back to the first group.
+. In the inner While Loop from 4b.
+.. Creates an ArrayList of Person Object.
+.. Allocate 1 male person from the male LinkList into the inner ArrayList.
+... This process is done in the selectiveDistributionByGender method.
+.. Add the inner ArrayList into the outer ArrayList of the 2D ArrayList.
+.. Move the group pointer to the next group and repeat from Step 5
+. Once maleLinkList is exhausted, repeat Step 5 with the female LinkList.
 
-*The process is now complete with all person distributed randomly with balanced genders into _n_ number of groups.*
+*Distribution Process*
+
+. The `distributeProcess` method will access the 2D ArrayList.
+. In each ArrayList of the 2D ArrayList, the distributeProcess Method will access the outer ArrayList and creates a group.
+.. The group is created with the given Group Name that the user specified in the Command.
+. Next, it will access the inner ArrayList and add all the person allocated inside into the group.
+. This process is repeated until the 2D ArrayList is fully accessed.
+
+We will now be able to achieve _n_ groups with all students distributed randomly with balanced gender. +
 
 ===== Aspect: Distribute Students Equally with Balanced Nationality Explanation
+
+The process is quite similar to the Algorithm used above. The key difference is that we had to collect the total number of different nationalities in the Person list.
+We can achieve this by using a Map to filter out the different nationalities as the key and the number of persons belonging to that nationality as the values.
+We have to also sort the map by the values decreasingly to ensure the highest pax of a single nationality is distributed first.
+Once we have the Map of different nationalities and the number of values in each nationality, we can follow the previous algorithm and allocate 1 person from the same nationality to 1 group at a time.
+After exhausting all person from the same nationality, we can repeat the same process for the next nationality. This ensure all groups to have a balanced and mixed nationality.
+
+*Allocation Process*
+
+. Initialize a group pointer.
+. Creates a for loop that iterates based on the Map's number of key which is the number of different nationality.
+. Creates another for loop that iterates based on the key's values which is the number of person that has the same nationality.
+.. Creates an ArrayList of Person Object.
+.. In each iteration, we locate a person with the specific Nationality (key) and add into inner ArrayList.
+... This process is done by the selectiveDistributionByNationality method.
+.. Next, we will add the inner ArrayList into the outer ArrayList of the 2D ArrayList.
+.. A group pointer will be moved to the next group and the process is repeated from Step 3b.
+. Once the value in the particular nationality is exhausted, the for loop in Step 2 will point to the next Nationality.
+. The process now repeats from Step 3 until the For Loop in Step 2 is exhausted.
+
+*Distribution Process*
+
+. The `distributeProcess` method will access the 2D ArrayList.
+. In each ArrayList of the 2D ArrayList, the distributeProcess Method will access the outer ArrayList and creates a group.
+.. The group is created with the given Group Name that the user specified in the Command.
+. Next, it will access the inner ArrayList and add all the person allocated inside into the group.
+. This process is repeated until the 2D ArrayList is fully accessed.
+
+We will now be able to achieve _n_ groups with all students distributed randomly with balanced nationality. +
+
 ===== Aspect: Distribute Students Equally with Balanced Gender & Nationality Explanation
+Coming in v1.4
+
 // end::distribute[]
 
 // tag::sendemail[]
