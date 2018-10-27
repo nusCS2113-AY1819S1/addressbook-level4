@@ -20,10 +20,8 @@ import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.Model;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
-import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
-import seedu.planner.model.summary.Summary;
 import seedu.planner.testutil.RecordBuilder;
 
 public class AddCommandTest {

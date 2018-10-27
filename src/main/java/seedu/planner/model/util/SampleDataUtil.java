@@ -51,7 +51,6 @@ public class SampleDataUtil {
         FinancialPlanner sampleAb = new FinancialPlanner();
         for (Record sampleRecord : getSampleRecords()) {
             sampleAb.addRecord(sampleRecord);
-            sampleAb.addRecordToSummary(sampleRecord);
         }
         return sampleAb;
     }

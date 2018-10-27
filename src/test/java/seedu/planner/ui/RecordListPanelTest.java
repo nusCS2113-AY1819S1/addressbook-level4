@@ -23,7 +23,6 @@ import seedu.planner.commons.util.FileUtil;
 import seedu.planner.commons.util.XmlUtil;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.record.Record;
-import seedu.planner.model.summary.SummaryMap;
 import seedu.planner.storage.xmljaxb.XmlSerializableFinancialPlanner;
 
 public class RecordListPanelTest extends GuiUnitTest {

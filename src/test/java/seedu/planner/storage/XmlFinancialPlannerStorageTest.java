@@ -154,14 +154,13 @@ public class XmlFinancialPlannerStorageTest {
 
         //Modify data, overwrite exiting file, and read back
         original.addRecord(BURSARY);
-        original.addRecordToSummary(BURSARY);
         original.removeRecord(INDO);
-        original.removeRecordFromSummary(INDO);
         xmlFinancialPlannerStorage.saveRecordList(original, recordListFilePath);
         xmlFinancialPlannerStorage.saveLimitList(original, limitListFilePath);
         recordList = xmlFinancialPlannerStorage.readRecordList(recordListFilePath).get();
         limitList = xmlFinancialPlannerStorage.readLimitList(limitListFilePath).get();
         readBack = new FinancialPlanner();
+        readBack.resetData(recordList);
         assertEquals(original, new FinancialPlanner(readBack));
 
         //Save and read without specifying file path
@@ -171,6 +170,7 @@ public class XmlFinancialPlannerStorageTest {
         recordList = xmlFinancialPlannerStorage.readRecordList(recordListFilePath).get();
         limitList = xmlFinancialPlannerStorage.readLimitList(limitListFilePath).get();
         readBack = new FinancialPlanner();
+        readBack.resetData(recordList);
         assertEquals(original, new FinancialPlanner(readBack));
     }
 

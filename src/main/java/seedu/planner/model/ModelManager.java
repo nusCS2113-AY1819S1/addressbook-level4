@@ -16,7 +16,6 @@ import seedu.planner.commons.core.EventsCenter;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
 import seedu.planner.commons.events.model.LimitListChangedEvent;
-import seedu.planner.commons.events.model.SummaryMapChangedEvent;
 import seedu.planner.commons.events.ui.UpdateWelcomePanelEvent;
 import seedu.planner.commons.util.DateUtil;
 import seedu.planner.model.record.Date;

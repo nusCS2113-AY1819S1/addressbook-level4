@@ -71,7 +71,6 @@ public class TypicalRecords {
         FinancialPlanner ab = new FinancialPlanner();
         for (Record record : getTypicalRecords()) {
             ab.addRecord(record);
-            ab.addRecordToSummary(record);
         }
         return ab;
     }
