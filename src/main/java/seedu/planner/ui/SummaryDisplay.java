@@ -61,6 +61,5 @@ public class SummaryDisplay extends UiPart<Region> {
         totalColumn.setCellValueFactory(
                 new PropertyValueFactory<SummaryEntry, String>("total"));
         summaryTable.setItems(toDisplay);
-        summaryTable.getItems().get(0);
     }
 }

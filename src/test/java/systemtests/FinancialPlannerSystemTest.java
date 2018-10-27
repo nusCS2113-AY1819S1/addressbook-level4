@@ -28,6 +28,7 @@ import guitests.guihandles.RecordListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import guitests.guihandles.SummaryDisplayHandle;
+import javafx.collections.ObservableList;
 import seedu.planner.TestApp;
 import seedu.planner.commons.core.EventsCenter;
 import seedu.planner.commons.core.index.Index;
@@ -39,6 +40,7 @@ import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.Model;
 import seedu.planner.testutil.TypicalRecords;
 import seedu.planner.ui.CommandBox;
+import seedu.planner.ui.SummaryEntry;
 
 /**
  * A system test class for FinancialPlanner, which provides access to handles of GUI components and helper methods
@@ -130,7 +132,9 @@ public abstract class FinancialPlannerSystemTest {
         return mainWindowHandle.getResultDisplay();
     }
 
-    public SummaryDisplayHandle getSummaryDisplay() { return mainWindowHandle.getSummaryDisplay(); }
+    public SummaryDisplayHandle getSummaryDisplay() {
+        return mainWindowHandle.getSummaryDisplay();
+    }
     /**
      * Executes {@code command} in the application's {@code CommandBox}.
      * Method returns after UI components have been updated.
@@ -274,6 +278,12 @@ public abstract class FinancialPlannerSystemTest {
         String expectedSyncStatus = String.format(SYNC_STATUS_UPDATED, timestamp);
         assertEquals(expectedSyncStatus, handle.getSyncStatus());
         assertFalse(handle.isSaveLocationChanged());
+    }
+
+    protected void assertSummaryDisplayShownCorrectly(ObservableList<SummaryEntry> expected) {
+        SummaryDisplayHandle summaryDisplayHandle = getSummaryDisplay();
+        assertTrue(summaryDisplayHandle.isPanelVisible());
+        assertEquals(expected, summaryDisplayHandle.getSummaryTableList());
     }
 
     /**
