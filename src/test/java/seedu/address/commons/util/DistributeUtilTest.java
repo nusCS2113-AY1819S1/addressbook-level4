@@ -268,8 +268,14 @@ public class DistributeUtilTest {
     }
 
     @Test
-    public void createGroupTest() {
+    public void createGroupWithoutCommitTest() throws CommandException {
+        //check if Group is null
+        Assert.assertThrows(NullPointerException.class, () -> distUtil.createGroupWithoutCommit(null, model));
 
+        //check if model is null
+        Group expectedGroup = new Group(new GroupName("TestGroup"), new GroupLocation("UNKNOWN"), new HashSet<>());
+        Assert.assertThrows(NullPointerException.class, () -> distUtil.createGroupWithoutCommit(expectedGroup, model));
+        //TODO
     }
 
     @Test
