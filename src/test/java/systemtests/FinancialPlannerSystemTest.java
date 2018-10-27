@@ -306,4 +306,5 @@ public abstract class FinancialPlannerSystemTest {
     protected Model getModel() {
         return testApp.getModel();
     }
+
 }

@@ -36,11 +36,15 @@ public class TypicalRecords {
             .withMoneyFlow("-0.90").withDate("27-5-2018").build();
     public static final Record RANDOM = new RecordBuilder().withName("Random income")
             .withMoneyFlow("+14.50").withDate("31-03-2018").build();
+    public static final Record JAP = new RecordBuilder().withName("Japanese food")
+            .withMoneyFlow("-5.40").withDate("25-5-2018").withTags("Deck").build();
+    public static final Record KOREAN = new RecordBuilder().withName("Korean food")
+            .withMoneyFlow("-4.50").withDate("25-5-2018").withTags("Terrace").build();
 
     // Manually added
     public static final Record BURSARY = new RecordBuilder().withName("Income from bursary")
-            .withMoneyFlow("+11.50").withDate("26-9-2018").build();
-    public static final Record IDA = new RecordBuilder().withName("Payment to Lalaa")
+            .withMoneyFlow("+11.50").withDate("26-9-2018").withTags("School").build();
+    public static final Record IDA = new RecordBuilder().withName("Payment to Ida")
             .withMoneyFlow("-12.30").withDate("27-9-2018").withTags("work").build();
 
     // Manually added - Record's details found in {@code CommandTestUtil}
@@ -73,6 +77,6 @@ public class TypicalRecords {
     }
 
     public static List<Record> getTypicalRecords() {
-        return new ArrayList<>(Arrays.asList(INDO, CAIFAN, WORK, ZT, MALA, CHICKENRICE, RANDOM));
+        return new ArrayList<>(Arrays.asList(INDO, CAIFAN, WORK, ZT, MALA, CHICKENRICE, RANDOM, JAP, KOREAN));
     }
 }
