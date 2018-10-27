@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Base64;
 import java.util.Objects;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -59,23 +60,48 @@ public class XmlAccount {
      * @throws IllegalValueException if there were any data constraints violated in the account
      */
     public LoginDetails toModelType() throws IllegalValueException, UnsupportedEncodingException {
+        UserId modelUserId;
+        UserPassword modelUserPassword;
+        UserRole modelUserRole;
         if (userId == null) {
             throw new IllegalValueException(String.format(MISSING_ACCOUNT_FIELD_MESSAGE_FORMAT,
                     UserId.class.getSimpleName()));
         }
-
-        final UserId modelUserId = new UserId(userId);
-
+        if (!UserId.isValidUserId(userId) && LoginManager.getisCurrentlyLoggingInCreatingAccount()) {
+            throw new IllegalValueException(UserId.MESSAGE_USERID_CONSTRAINTS);
+        }
+        if (!LoginManager.getisCurrentlyLoggingInCreatingAccount()) {
+            String decodedUserId = new String(Base64.getDecoder().decode(userId));
+            modelUserId = new UserId(decodedUserId);
+        } else {
+            modelUserId = new UserId(userId);
+        }
         if (userPassword == null) {
             throw new IllegalValueException(String.format(MISSING_ACCOUNT_FIELD_MESSAGE_FORMAT,
                                                           UserPassword.class.getSimpleName()));
         }
-        if (!UserPassword.isValidUserPassword(userPassword)) {
+        if (!UserPassword.isValidUserPassword(userPassword) && LoginManager.getisCurrentlyLoggingInCreatingAccount()) {
             throw new IllegalValueException(UserPassword.MESSAGE_USERPASSWORD_CONSTRAINTS);
         }
-        final UserPassword modelUserPassword = new UserPassword(userPassword);
-
-        final UserRole modelUserRole = new UserRole(userRole);
+        if (!LoginManager.getisCurrentlyLoggingInCreatingAccount()) {
+            String decodedUserPassword = new String(Base64.getDecoder().decode(userPassword));
+            modelUserPassword = new UserPassword(decodedUserPassword);
+        } else {
+            modelUserPassword = new UserPassword(userPassword);
+        }
+        if (userRole == null) {
+            throw new IllegalValueException(String.format(MISSING_ACCOUNT_FIELD_MESSAGE_FORMAT,
+                    UserRole.class.getSimpleName()));
+        }
+        if (!UserRole.isValidUserRole(userRole) && LoginManager.getisCurrentlyLoggingInCreatingAccount()) {
+            throw new IllegalValueException(UserRole.MESSAGE_USERROLE_CONSTRAINTS);
+        }
+        if (!LoginManager.getisCurrentlyLoggingInCreatingAccount()) {
+            String decodedUserRole = new String(Base64.getDecoder().decode(userRole));
+            modelUserRole = new UserRole(decodedUserRole);
+        } else {
+            modelUserRole = new UserRole(userRole);
+        }
 
         return new LoginDetails(modelUserId, modelUserPassword, modelUserRole);
     }

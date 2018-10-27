@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.LoginManager;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.login.LoginDetails;
@@ -41,6 +42,7 @@ public class CreateAccountCommand extends Command {
         }
 
         model.createAccount(toAdd);
+        LoginManager.setIsCurrentlyLoggingInCreatingAccount(false);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

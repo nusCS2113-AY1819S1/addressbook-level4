@@ -16,6 +16,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.logic.LoginManager;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddSkillLevelCommand;
 import seedu.address.logic.commands.BudgetCommand;
@@ -65,18 +66,22 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_login() throws Exception {
+        LoginManager.setIsTesting(true);
         LoginDetails loginDetails = new AccountBuilder().build();
         CreateAccountCommand command = (CreateAccountCommand) parser.parseCommand(AccountUtil
                 .getCreateAccountCommand(loginDetails));
         assertEquals(new CreateAccountCommand(loginDetails), command);
+        LoginManager.setIsTesting(false);
     }
 
     @Test
     public void parseCommand_createaccount() throws Exception {
+        LoginManager.setIsTesting(true);
         LoginDetails loginDetails = new AccountBuilder().build();
         CreateAccountCommand command = (CreateAccountCommand) parser.parseCommand(AccountUtil
                                                                         .getCreateAccountCommand(loginDetails));
         assertEquals(new CreateAccountCommand(loginDetails), command);
+        LoginManager.setIsTesting(false);
     }
 
     @Test

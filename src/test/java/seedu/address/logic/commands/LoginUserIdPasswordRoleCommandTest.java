@@ -10,7 +10,9 @@ import static seedu.address.testutil.TypicalAccounts.LOGINDETAIL_1;
 import static seedu.address.testutil.TypicalAccounts.getTypicalLoginBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalTaggedAddressBook;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.function.Predicate;
 
@@ -211,40 +213,6 @@ public class LoginUserIdPasswordRoleCommandTest {
         assertNotEquals(Arrays.asList(LOGINDETAIL_1), model.getFilteredLoginDetailsList());
     }
 
-    @Test
-    public void updateFilteredAccountList_multipleLoginTriesFirstWrongSecondCorrect_loginSuccessful() {
-        String expectedMessage = String.format(MESSAGE_LOGIN_LISTED_OVERVIEW);
-        UserIdContainsKeywordsPredicate firstIdPredicate = prepareUserIdContainsKeywordsPredicate("A1234561M");
-        UserPasswordContainsKeywordsPredicate firstPasswordPredicate = prepareUserPasswordContainsKeywordsPredicate(
-                "zaq1xsw2cde3");
-        UserRoleContainsKeywordsPredicate firstRolePredicate = prepareUserRoleContainsKeywordsPredicate("treasurer");
-        LoginUserIdPasswordRoleCommand firstCommand = new LoginUserIdPasswordRoleCommand(firstIdPredicate,
-                firstPasswordPredicate, firstRolePredicate);
-        Predicate updatedFirstIdPredicate = getMostUpdatedIdPredicate(firstIdPredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedFirstIdPredicate);
-        Predicate updatedFirstPasswordPredicate = getMostUpdatedPasswordPredicate(firstPasswordPredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedFirstPasswordPredicate);
-        Predicate updatedFirstRolePredicate = getMostUpdatedRolePredicate(firstRolePredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedFirstRolePredicate);
-        assertCommandSuccess(firstCommand, model, commandHistory, expectedMessage, expectedModel);
-        assertNotEquals(Arrays.asList(LOGINDETAIL_1), model.getFilteredLoginDetailsList());
-
-        UserIdContainsKeywordsPredicate secondIdPredicate = prepareUserIdContainsKeywordsPredicate("A1234561M");
-        UserPasswordContainsKeywordsPredicate secondPasswordPredicate = prepareUserPasswordContainsKeywordsPredicate(
-                "zaq1xsw2cde3");
-        UserRoleContainsKeywordsPredicate secondRolePredicate = prepareUserRoleContainsKeywordsPredicate("member");
-        LoginUserIdPasswordRoleCommand secondCommand = new LoginUserIdPasswordRoleCommand(secondIdPredicate,
-                secondPasswordPredicate, secondRolePredicate);
-        Predicate updatedSecondIdPredicate = getMostUpdatedIdPredicate(secondIdPredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedSecondIdPredicate);
-        Predicate updatedSecondPasswordPredicate = getMostUpdatedPasswordPredicate(secondPasswordPredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedSecondPasswordPredicate);
-        Predicate updatedSecondRolePredicate = getMostUpdatedRolePredicate(secondRolePredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedSecondRolePredicate);
-        assertCommandSuccess(secondCommand, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(LOGINDETAIL_1), model.getFilteredLoginDetailsList());
-    }
-
     private Predicate getMostUpdatedIdPredicate(Predicate idPredicate) {
         searchHistoryManager.clearSearchHistory();
         return searchHistoryManager.executeNewSearch(idPredicate);
@@ -262,20 +230,38 @@ public class LoginUserIdPasswordRoleCommandTest {
      * Parses {@code userInput} into a {@code UserIdContainsKeywordsPredicate}.
      */
     private UserIdContainsKeywordsPredicate prepareUserIdContainsKeywordsPredicate(String userInput) {
-        return new UserIdContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+        String encodedUserInput = null;
+        try {
+            encodedUserInput = Base64.getEncoder().encodeToString(userInput.getBytes("utf-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return new UserIdContainsKeywordsPredicate(Arrays.asList(encodedUserInput.split("\\s+")));
     }
 
     /**
      * Parses {@code userInput} into a {@code UserPasswordContainsKeywordsPredicate}.
      */
     private UserPasswordContainsKeywordsPredicate prepareUserPasswordContainsKeywordsPredicate(String userInput) {
-        return new UserPasswordContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+        String encodedUserInput = null;
+        try {
+            encodedUserInput = Base64.getEncoder().encodeToString(userInput.getBytes("utf-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return new UserPasswordContainsKeywordsPredicate(Arrays.asList(encodedUserInput.split("\\s+")));
     }
 
     /**
      * Parses {@code userInput} into a {@code UserRoleContainsKeywordsPredicate}.
      */
     private UserRoleContainsKeywordsPredicate prepareUserRoleContainsKeywordsPredicate(String userInput) {
-        return new UserRoleContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+        String encodedUserInput = null;
+        try {
+            encodedUserInput = Base64.getEncoder().encodeToString(userInput.getBytes("utf-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return new UserRoleContainsKeywordsPredicate(Arrays.asList(encodedUserInput.split("\\s+")));
     }
 }
