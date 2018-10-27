@@ -47,16 +47,6 @@ public class FileUtil {
     }
 
     /**
-     * Copy all files and place it into another folder
-     * @param source the location of original file
-     * @param destination the new location of copied file
-     * @link https://stackoverflow.com/questions/1146153/copying-files-from-one-directory-to-another-in-java
-     */
-    public static void copyFile(File source, File destination) throws IOException {
-        FileUtils.copyDirectory(source, destination);
-    }
-
-    /**
      * Creates a file if it does not exist along with its missing parent directories.
      * @throws IOException if the file or directory cannot be created.
      */
@@ -141,6 +131,11 @@ public class FileUtil {
         return currentRelativePath.toAbsolutePath().toString();
     }
 
+    /**
+     * Write String to Text File
+     * @file is the location of the file
+     * @text is the string to be written to the text fi;e
+     */
     public static void writetoTextFile(File file, String text) throws IOException {
         FileUtils.writeStringToFile(file, text, CHARSET, true);
     }

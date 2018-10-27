@@ -20,5 +20,4 @@ public class FileUtilTest {
         // null path -> throws NullPointerException
         Assert.assertThrows(NullPointerException.class, () -> FileUtil.isValidPath(null));
     }
-
 }
