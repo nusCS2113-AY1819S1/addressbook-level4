@@ -316,7 +316,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void deleteJobOffer(JobOffer jobOffer) {
         requireNonNull(jobOffer);
-        versionedCompanyBook.deleteJobOffer(jobOffer);
+        versionedCompanyBook.removeJobOffer(jobOffer);
         indicateCompanyBookChanged();
     }
 
