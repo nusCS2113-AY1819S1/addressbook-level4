@@ -18,11 +18,6 @@ public interface ReadOnlyFinancialPlanner {
      */
     ObservableList<Record> getRecordList();
 
-    SummaryMap getSummaryMap();
-
-    //TODO: to be removed when storage is combined
-    void setSummaryMap(SummaryMap summaryMap);
-
     ObservableList<Limit> getLimitList();
 
     void setLimitList (DateBasedLimitList limitList);
