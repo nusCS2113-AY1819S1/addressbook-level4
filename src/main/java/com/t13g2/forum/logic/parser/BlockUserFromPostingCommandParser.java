@@ -1,5 +1,6 @@
 package com.t13g2.forum.logic.parser;
 
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_BLOCK;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_USER_NAME;
 
 import java.util.stream.Stream;
@@ -21,15 +22,24 @@ public class BlockUserFromPostingCommandParser implements Parser<BlockUserFromCr
      */
     public BlockUserFromCreatingCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_USER_NAME);
-        if (!arePrefixesPresent(argMultimap, PREFIX_USER_NAME)
+            ArgumentTokenizer.tokenize(args, PREFIX_USER_NAME, PREFIX_BLOCK);
+        if (!arePrefixesPresent(argMultimap, PREFIX_USER_NAME, PREFIX_BLOCK)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                 BlockUserFromCreatingCommand.MESSAGE_USAGE));
         }
         String userName = ParserUtil.parseUserName(argMultimap.getValue(PREFIX_USER_NAME).get());
+        boolean block;
+        if (argMultimap.getValue(PREFIX_BLOCK).get().equals("true")) {
+            block = true;
+        } else if (argMultimap.getValue(PREFIX_BLOCK).get().equals("false")) {
+            block = false;
+        } else {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                BlockUserFromCreatingCommand.MESSAGE_USAGE));
+        }
 
-        return new BlockUserFromCreatingCommand(userName);
+        return new BlockUserFromCreatingCommand(userName, block);
     }
 
     /**

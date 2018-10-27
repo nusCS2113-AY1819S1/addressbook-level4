@@ -2,6 +2,7 @@ package com.t13g2.forum.ui;
 
 import java.util.logging.Logger;
 
+import javafx.scene.control.Label;
 import org.controlsfx.control.StatusBar;
 
 import com.google.common.eventbus.Subscribe;
@@ -64,7 +65,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane statusbarPlaceholder;
 
     @FXML
-    private StatusBar statusBarUserName;
+    private Label statusBarUserName;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML, primaryStage);

@@ -18,9 +18,6 @@ import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.ForumBook;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.ReadOnlyForumBook;
-import com.t13g2.forum.model.forum.Announcement;
-import com.t13g2.forum.model.forum.Module;
-import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.model.person.Person;
 import com.t13g2.forum.testutil.PersonBuilder;
 
@@ -154,66 +151,6 @@ public class AddCommandTest {
 
         @Override
         public void commitForumBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean userLogin(String userName, String userPassword) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean checkIsLogin() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean checkIsAdmin() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addAnnouncement(Announcement toAnnounce) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Announcement showLatestAnnouncement() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public User doesUserExist(String userName) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean blockUser(User user) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAdmin(User user) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean createModule(Module module) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean deleteModule(String module) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void adminUpdatePassword(User userToUpdate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteUser(User user) {
             throw new AssertionError("This method should not be called.");
         }
     }

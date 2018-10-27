@@ -4,9 +4,15 @@ import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_USER_NAME;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_USER_PASSWORD;
 import static java.util.Objects.requireNonNull;
 
+import com.t13g2.forum.commons.core.EventsCenter;
+import com.t13g2.forum.commons.events.model.UserLoginEvent;
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
+import com.t13g2.forum.model.Context;
 import com.t13g2.forum.model.Model;
+import com.t13g2.forum.model.UnitOfWork;
+import com.t13g2.forum.model.forum.User;
+import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 
 /**
  *
@@ -38,11 +44,21 @@ public class LoginCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        boolean loggedInSuccess = model.userLogin(userName, userPassword);
-        if (loggedInSuccess) {
+        User exist = null;
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            exist = unitOfWork.getUserRepository().authenticate(userName, userPassword);
+        } catch (EntityDoesNotExistException e) {
+            exist = null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Context.getInstance().setCurrentUser(exist);
+        if (exist != null) {
+            EventsCenter.getInstance().post(new UserLoginEvent(userName, exist.isAdmin()));
             return new CommandResult(String.format(MESSAGE_SUCCESS, userName));
         } else {
-            return new CommandResult(String.format(MESSAGE_FAIL, userName));
+            EventsCenter.getInstance().post(new UserLoginEvent("", false));
+            throw new CommandException(String.format(MESSAGE_FAIL, userName));
         }
     }
 }

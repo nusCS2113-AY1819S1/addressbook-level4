@@ -3,10 +3,15 @@ package com.t13g2.forum.logic.commands;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static java.util.Objects.requireNonNull;
 
+import com.t13g2.forum.commons.exceptions.NotLoggedInException;
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
+import com.t13g2.forum.model.Context;
 import com.t13g2.forum.model.Model;
+import com.t13g2.forum.model.UnitOfWork;
+import com.t13g2.forum.model.forum.Module;
 import com.t13g2.forum.model.forum.User;
+import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 
 //@@xllx1
 
@@ -39,17 +44,26 @@ public class DeleteModuleCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         // if user has not login or is not admin, then throw exception
-        if (!model.checkIsLogin()) {
+        try {
+            if (!Context.getInstance().isCurrentUserAdmin()) {
+                throw new CommandException(User.MESSAGE_NOT_ADMIN);
+            }
+        } catch (CommandException e) {
+            throw e;
+        } catch (NotLoggedInException e) {
             throw new CommandException(User.MESSAGE_NOT_LOGIN);
         }
-        if (!model.checkIsAdmin()) {
-            throw new CommandException(User.MESSAGE_NOT_ADMIN);
-        }
-        if (model.deleteModule(moduleCodeToDelete)) {
-            return new CommandResult(String.format(MESSAGE_SUCCESS, moduleCodeToDelete));
-        } else {
+
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            Module moduleToDelete = unitOfWork.getModuleRepository().getModuleByCode(moduleCodeToDelete);
+            unitOfWork.getModuleRepository().removeModule(moduleToDelete);
+            unitOfWork.commit();
+        } catch (EntityDoesNotExistException e) {
             throw new CommandException(String.format(MESSAGE_INVALID_MODULE,
                 moduleCodeToDelete));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return new CommandResult(String.format(MESSAGE_SUCCESS, moduleCodeToDelete));
     }
 }

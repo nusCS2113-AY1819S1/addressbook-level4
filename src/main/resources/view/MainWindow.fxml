@@ -11,10 +11,10 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.Label?>
 <?import org.controlsfx.control.StatusBar?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.control.Label?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
          minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <icons>
@@ -37,12 +37,9 @@
               <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
             </Menu>
           </MenuBar>
-          <GridPane styleClass="grid-pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-            <columnConstraints>
-              <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="100" />
-            </columnConstraints>
-            <StatusBar styleClass="stack-pane" fx:id="statusBarUserName" GridPane.columnIndex="0" nodeOrientation="RIGHT_TO_LEFT" />
-          </GridPane>
+
+            <Label minHeight="15" style="-fx-font-size: 20; -fx-text-fill: white" textAlignment="RIGHT" fx:id="statusBarUserName" text="Not login yet. Please login!" StackPane.alignment="CENTER_RIGHT" />
+
         </StackPane>
 
         <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
