@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_2;
 import static seedu.address.logic.commands.CommandTestUtil.HOURS_DESC_1;
 import static seedu.address.logic.commands.CommandTestUtil.HOURS_DESC_2;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_HOURS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_HOURS_OVERFLOW;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PRIORITY_LEVEL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
@@ -107,6 +108,9 @@ public class AddTaskCommandParserTest {
                 PriorityLevel.MESSAGE_PRIORITY_CONSTRAINTS);
         // invalid Hours
         assertParseFailure(parser, TITLE_DESC_1 + DESCRIPTION_DESC_1 + PRIORITY_LEVEL_DESC_LOW + INVALID_HOURS_DESC,
+                MESSAGE_INVALID_HOURS);
+        // hours > INT_MAX
+        assertParseFailure(parser, TITLE_DESC_1 + DESCRIPTION_DESC_1 + PRIORITY_LEVEL_DESC_LOW + INVALID_HOURS_OVERFLOW,
                 MESSAGE_INVALID_HOURS);
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + TITLE_DESC_1 + DESCRIPTION_DESC_1

@@ -113,10 +113,9 @@ public class ParserUtil {
     public static int parseHours(String hours) throws ParseException {
         requireNonNull(hours);
         String trimmedHours = hours.trim();
-        try {
-            return Integer.parseInt(trimmedHours);
-        } catch (NumberFormatException e) {
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedHours)) {
             throw new ParseException(MESSAGE_INVALID_HOURS);
         }
+        return Integer.parseInt(trimmedHours);
     }
 }

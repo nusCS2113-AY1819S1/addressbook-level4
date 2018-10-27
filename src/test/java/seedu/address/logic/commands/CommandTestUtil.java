@@ -54,6 +54,11 @@ public class CommandTestUtil {
     public static final String INVALID_DEADLINE_DESC = " " + PREFIX_DEADLINE + "31/2"; // No 31st February in calendar
     public static final String INVALID_PRIORITY_LEVEL_DESC = " " + PREFIX_PRIORITY + "mid"; // not a priority level
     public static final String INVALID_HOURS_DESC = " " + PREFIX_HOURS + "one"; // not an integer
+    public static final int OVERFLOW_INT = Integer.MAX_VALUE;
+    public static final String INVALID_HOURS_OVERFLOW = " " + PREFIX_HOURS
+            + Long.toString((long) OVERFLOW_INT + 1); // integer overflow
+    public static final int MAX_HOURS = 24; // integer overflow
+    public static final String INVALID_MAX_HOURS = " " + PREFIX_HOURS + Integer.toString(24); // integer overflow
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

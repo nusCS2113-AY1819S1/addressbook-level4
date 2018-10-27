@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
+import static seedu.address.testutil.TypicalTasks.getTypicalTaskBook;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,7 +13,6 @@ import org.junit.rules.ExpectedException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.AddressBook;
-import seedu.address.testutil.TypicalTasks;
 
 //@@author chelseyong
 public class XmlSerializableTaskBookTest {
@@ -29,7 +29,7 @@ public class XmlSerializableTaskBookTest {
         XmlSerializableTaskBook dataFromFile = XmlUtil.getDataFromFile(TYPICAL_TASKS_FILE,
                 XmlSerializableTaskBook.class);
         AddressBook addressBookFromFile = dataFromFile.toModelType();
-        AddressBook typicalPersonsAddressBook = TypicalTasks.getTypicalTaskBook();
+        AddressBook typicalPersonsAddressBook = getTypicalTaskBook();
         assertEquals(addressBookFromFile, typicalPersonsAddressBook);
     }
 

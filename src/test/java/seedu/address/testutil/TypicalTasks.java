@@ -25,7 +25,6 @@ import seedu.address.model.task.Task;
  * A utility class containing a list of {@code Task} objects to be used in tests.
  */
 public class TypicalTasks {
-
     // Manually added
     public static final Task CS2113_HOMEWORK = new TaskBuilder().withDeadline("1/1/2018")
             .withTitle("Complete code refactoring").withDescription("Refer to notes!")
@@ -57,7 +56,6 @@ public class TypicalTasks {
     public static final Task CS2113_TASK_3 = new TaskBuilder().withDeadline(VALID_DEADLINE_12TH_MAY)
         .withTitle(VALID_TITLE_3).withDescription(VALID_DESCRIPTION_3)
         .withPriority(VALID_PRIORITY_LEVEL_MEDIUM).build();
-
     // public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalTasks() {} // prevents instantiation

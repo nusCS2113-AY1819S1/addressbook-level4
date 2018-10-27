@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static seedu.address.logic.commands.AddTaskCommand.MESSAGE_DUPLICATE_TASK;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +19,6 @@ import seedu.address.model.task.Task;
  */
 @XmlRootElement(name = "addressbook")
 public class XmlSerializableTaskBook {
-
     public static final String MESSAGE_DUPLICATE_TASK = "Task list contains duplicate task(s).";
 
     @XmlElement
