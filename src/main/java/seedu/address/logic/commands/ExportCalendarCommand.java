@@ -71,7 +71,7 @@ public class ExportCalendarCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         User currentUser = new User(new Username("John"), new Password("12345678"));
         try {
-            exportICalenderFile(getAttendingEventList(model,currentUser), fileName);
+            exportICalenderFile(getAttendingEventList(model, currentUser), fileName);
         } catch (IOException e) {
             return new CommandResult(String.format(MESSAGE_FILE_ERROR, fileName));
         }
