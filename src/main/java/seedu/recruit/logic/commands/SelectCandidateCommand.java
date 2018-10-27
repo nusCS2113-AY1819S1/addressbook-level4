@@ -51,7 +51,7 @@ public class SelectCandidateCommand extends Command {
         selectedCandidate = filteredCandidateList.get(targetIndex.getZeroBased());
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
 
-        if (ShortlistCommand.isProcessing()) {
+        if (ShortlistCandidateInitializationCommand.isShortlisting()) {
             LogicManager.setLogicState(ShortlistCandidateCommand.COMMAND_LOGIC_STATE);
             return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS,
                     targetIndex.getOneBased()) + ShortlistCandidateCommand.MESSAGE_USAGE);

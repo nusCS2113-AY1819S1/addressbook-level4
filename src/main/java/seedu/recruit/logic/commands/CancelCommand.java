@@ -23,9 +23,9 @@ public class CancelCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        if (ShortlistCommand.isProcessing()) {
-            ShortlistCommand.isDoneProcessing();
-            this.cancelledCommand = ShortlistCommand.COMMAND_WORD;
+        if (ShortlistCandidateInitializationCommand.isProcessing()) {
+            ShortlistCandidateInitializationCommand.isDoneProcessing();
+            this.cancelledCommand = ShortlistCandidateInitializationCommand.COMMAND_WORD;
             MainWindow.switchToLastViewedBook();
         }
         LogicManager.setLogicState("primary");

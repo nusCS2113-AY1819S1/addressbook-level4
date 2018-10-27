@@ -30,8 +30,8 @@ public class ShortlistCandidateCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        if (ShortlistCommand.isProcessing()) {
-            ShortlistCommand.isDoneProcessing();
+        if (ShortlistCandidateInitializationCommand.isShortlisting()) {
+            ShortlistCandidateInitializationCommand.isDoneShortlisting();
         }
         Company selectedCompany = SelectCompanyCommand.getSelectedCompany();
         JobOffer selectedJobOffer = SelectJobCommand.getSelectedJobOffer();

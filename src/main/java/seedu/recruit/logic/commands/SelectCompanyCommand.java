@@ -51,7 +51,7 @@ public class SelectCompanyCommand extends Command {
         selectedCompany = filteredCompanyList.get(targetIndex.getZeroBased());
         EventsCenter.getInstance().post(new JumpToCompanyListRequestEvent(targetIndex));
 
-        if (ShortlistCommand.isProcessing()) {
+        if (ShortlistCandidateInitializationCommand.isShortlisting()) {
             LogicManager.setLogicState(SelectJobCommand.COMMAND_LOGIC_STATE);
             return new CommandResult(String.format(MESSAGE_SELECT_COMPANY_SUCCESS,
                     targetIndex.getOneBased()) + SelectJobCommand.MESSAGE_USAGE);

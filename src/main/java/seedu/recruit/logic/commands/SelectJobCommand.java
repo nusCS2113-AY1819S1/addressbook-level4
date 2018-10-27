@@ -57,7 +57,7 @@ public class SelectJobCommand extends Command {
          * If user is inside Shortlist command,
          * user can only select jobs from a selected company.
          */
-        if (ShortlistCommand.isProcessing()) {
+        if (ShortlistCandidateInitializationCommand.isShortlisting()) {
             filteredCompanyJobList = SelectCompanyCommand.getSelectedCompany().getUniqueJobList().getInternalList();
 
             if (targetIndex.getZeroBased() >= filteredCompanyJobList.size()) {
