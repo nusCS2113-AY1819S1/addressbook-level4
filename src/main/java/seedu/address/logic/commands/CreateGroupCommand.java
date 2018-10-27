@@ -51,7 +51,6 @@ public class CreateGroupCommand extends Command {
         if (model.hasGroup(toCreate)) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
-        System.out.println("Command History == " + history.toString());
         model.createGroup(toCreate);
         if (shouldCommit) {
             model.commitAddressBook();
