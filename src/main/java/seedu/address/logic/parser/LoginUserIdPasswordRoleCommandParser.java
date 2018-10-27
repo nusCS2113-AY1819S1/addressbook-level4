@@ -57,9 +57,6 @@ public class LoginUserIdPasswordRoleCommandParser implements Parser<LoginCommand
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        System.out.println(encryptedLoginId);
-        System.out.println(encryptedLoginPassword);
-        System.out.println(encryptedLoginRole);
         List<String> keywordsList = new ArrayList<>(Arrays.asList(encryptedLoginId,
                 encryptedLoginPassword, encryptedLoginRole));
         return setRoleReturnLoginCommandObject(keywords, keywordsList);
