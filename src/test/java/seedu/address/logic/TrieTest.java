@@ -8,7 +8,8 @@ import org.junit.Test;
 import seedu.address.logic.commands.AddCommand;
 
 public class TrieTest {
-    Trie dictionary;
+    private Trie dictionary;
+
     @Before
     public void setUp() {
         dictionary = new Trie();
