@@ -9,6 +9,8 @@ import seedu.address.model.Model;
  */
 public abstract class Command {
 
+    public static final String MESSAGE_LOGIN = "Please login to an account!";
+
     /**
      * Executes the command and returns the result message.
      *
