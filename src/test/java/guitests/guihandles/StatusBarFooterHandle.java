@@ -66,7 +66,8 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
     }
 
     /**
-     * Returns true if the current content of the 'total persons and total groups' is different from the value remembered by the most
+     * Returns true if the current content of the 'total persons and total groups'
+     * is different from the value remembered by the most
      * recent {@code rememberTotalPersonsGroupsStatus()} call.
      */
     public boolean isTotalPersonsGroupsStatusChanged() {

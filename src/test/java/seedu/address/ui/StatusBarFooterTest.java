@@ -53,7 +53,8 @@ public class StatusBarFooterTest extends GuiUnitTest {
 
     @Before
     public void setUp() {
-        StatusBarFooter statusBarFooter = new StatusBarFooter(STUB_SAVE_LOCATION, INITIAL_TOTAL_PERSONS, INITIAL_TOTAL_GROUPS);
+        StatusBarFooter statusBarFooter = new StatusBarFooter(STUB_SAVE_LOCATION,
+                INITIAL_TOTAL_PERSONS, INITIAL_TOTAL_GROUPS);
         uiPartRule.setUiPart(statusBarFooter);
 
         statusBarFooterHandle = new StatusBarFooterHandle(statusBarFooter.getRoot());
@@ -69,7 +70,8 @@ public class StatusBarFooterTest extends GuiUnitTest {
         postNow(EVENT_STUB);
         assertStatusBarContent(RELATIVE_PATH.resolve(STUB_SAVE_LOCATION).toString(),
                 String.format(SYNC_STATUS_UPDATED, new Date(injectedClock.millis()).toString()),
-                String.format(TOTAL_PERSONS_GROUPS_STATUS, EVENT_STUB.data.getPersonList().size(), EVENT_STUB.data.getGroupList().size()));
+                String.format(TOTAL_PERSONS_GROUPS_STATUS,
+                        EVENT_STUB.data.getPersonList().size(), EVENT_STUB.data.getGroupList().size()));
     }
 
     /**

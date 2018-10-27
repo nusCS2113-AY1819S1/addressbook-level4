@@ -290,7 +290,8 @@ public abstract class AddressBookSystemTest {
         assertEquals(expectedSyncStatus, handle.getSyncStatus());
         final int totalPersons = testApp.getModel().getAddressBook().getPersonList().size();
         final int totalGroups = testApp.getModel().getAddressBook().getGroupList().size();
-        assertEquals(String.format(TOTAL_PERSONS_GROUPS_STATUS, totalPersons, totalGroups), handle.getTotalPersonsGroupsStatus());
+        assertEquals(String.format(TOTAL_PERSONS_GROUPS_STATUS,
+                totalPersons, totalGroups), handle.getTotalPersonsGroupsStatus());
         assertFalse(handle.isSaveLocationChanged());
     }
 
