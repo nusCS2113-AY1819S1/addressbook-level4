@@ -10,10 +10,16 @@ import javafx.scene.control.TextField;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 
-public class CustomAutoCompletionTextFieldBinding<T> extends AutoCompletionBinding<T>{
+/**
+ * Class that represents the binding between a text field and a auto-completion popup
+ */
+public class CustomAutoCompletionTextFieldBinding<T> extends AutoCompletionBinding<T> {
 
     private String oldText = "";
 
+    /**
+     * String converter to be used to convert suggestions to strings.
+     */
     private static <T> StringConverter<T> defaultStringConverter() {
         return new StringConverter<T>() {
             @Override public String toString(T t) {
@@ -26,9 +32,6 @@ public class CustomAutoCompletionTextFieldBinding<T> extends AutoCompletionBindi
         };
     }
 
-    /**
-     * String converter to be used to convert suggestions to strings.
-     */
     private StringConverter<T> converter;
 
     /**
@@ -40,16 +43,8 @@ public class CustomAutoCompletionTextFieldBinding<T> extends AutoCompletionBindi
      */
     public CustomAutoCompletionTextFieldBinding(final TextField textField,
                                                 Callback<AutoCompletionBinding.ISuggestionRequest, Collection<T>>
-                                                        suggestionProvider) {
-
-        this(textField, suggestionProvider, CustomAutoCompletionTextFieldBinding
-                .<T>defaultStringConverter());
-    }
-
-    public CustomAutoCompletionTextFieldBinding(final TextField textField,
-                                          Callback<AutoCompletionBinding.ISuggestionRequest, Collection<T>>
-                                                  suggestionProvider,
-                                          final StringConverter<T> converter) {
+                                                        suggestionProvider,
+                                                final StringConverter<T> converter) {
 
         super(textField, suggestionProvider, converter);
         this.converter = converter;
@@ -57,6 +52,16 @@ public class CustomAutoCompletionTextFieldBinding<T> extends AutoCompletionBindi
         getCompletionTarget().caretPositionProperty().addListener(caretChangeListener);
         getCompletionTarget().focusedProperty().addListener(focusChangedListener);
     }
+
+    public CustomAutoCompletionTextFieldBinding(final TextField textField,
+                                                Callback<AutoCompletionBinding.ISuggestionRequest, Collection<T>>
+                                                        suggestionProvider) {
+
+        this(textField, suggestionProvider, CustomAutoCompletionTextFieldBinding
+                .<T>defaultStringConverter());
+    }
+
+
 
     @Override
     public TextField getCompletionTarget(){
