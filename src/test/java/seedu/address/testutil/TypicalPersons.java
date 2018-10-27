@@ -135,6 +135,10 @@ public class TypicalPersons {
         return new ArrayList<>(Arrays.asList(JOEL, WEIQUAN, NOVIN, JOELTAN, TSURAJOVIN));
     }
 
+    /**
+     * This method creates an LinkListed of Person where it only contains Male Persons from the stub address book.
+     * @return : a Linklist of male persons
+     */
     public static LinkedList<Person> allMalePerson() {
         LinkedList<Person> maleList = new LinkedList<>();
         maleList.add(BENSON);
@@ -144,6 +148,10 @@ public class TypicalPersons {
         return maleList;
     }
 
+    /**
+     * This method creates an LinkListed of Person where it only contains female Persons from the stub address book.
+     * @return : a Linklist of female persons
+     */
     public static LinkedList<Person> allFemalePerson() {
         LinkedList<Person> femaleList = new LinkedList<>();
         femaleList.add(ALICE);

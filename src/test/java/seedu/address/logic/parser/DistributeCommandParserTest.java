@@ -27,7 +27,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NATIONALITY_FLA
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NUMBER_OF_GROUPS;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.model.distribute.DistributeAlgorithm.MESSAGE_INVALID_SIZE;
 
 import org.junit.Test;
 
@@ -107,7 +106,8 @@ public class DistributeCommandParserTest {
 
         // first input arg is a letter instead of an digit
         assertParseFailure(parser, INVALID_GROUP_NUMBER_STRING_DESC + VALID_GROUP_NAME_CS1010 + GENDER_FLAG_FALSE
-                        + NATIONALITY_FLAG_FALSE, String.format(MESSAGE_INVALID_COMMAND_FORMAT, DistributeCommand.MESSAGE_USAGE));
+                        + NATIONALITY_FLAG_FALSE, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DistributeCommand.MESSAGE_USAGE));
 
         // invalid numberOfGroups Eg. 0
         assertParseFailure(parser, INVALID_GROUP_NUMBER_DESC + VALID_GROUP_NAME_CS1010 + GENDER_FLAG_FALSE
