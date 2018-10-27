@@ -38,7 +38,8 @@ public class CourseDeleteCommand extends Command {
         Course foundCourse = cm.getCourse(courseCode);
         cm.deleteCourse(foundCourse);
         cm.saveCourseList();
-        return new CommandResult(String.format(MESSAGE_DELETE_COURSE_SUCCESS, foundCourse.getCourseName()));
+        return new CommandResult(String.format(MESSAGE_DELETE_COURSE_SUCCESS,
+                foundCourse.getCourseName(), cm.getTableRepresentation()));
     }
 
 
