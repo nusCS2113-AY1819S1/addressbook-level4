@@ -12,6 +12,7 @@ import java.io.IOException;
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
+
 import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
@@ -48,7 +49,7 @@ public class ScriptCommandTest {
     @Before
     public void setUp() throws IOException {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        FileUtils.copyDirectory( new File(FileUtil.getRootLocation() + testFilesLocation),
+        FileUtils.copyDirectory(new File(FileUtil.getRootLocation() + testFilesLocation),
                 new File(FileUtil.getRootLocation() + scriptsFolder));
     }
 

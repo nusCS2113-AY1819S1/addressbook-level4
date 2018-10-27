@@ -13,8 +13,8 @@ import seedu.address.model.UserPrefs;
 import seedu.address.storage.scripts.ScriptSetup;
 
 public class ScriptSetupTest {
-    private String TEST_FILES_LOCATION = "/src/test/data/ScriptFiles/";
-    private String SCRIPTS_LOCATION = "/scripts/";
+    private static final String TEST_FILES_LOCATION = "/src/test/data/ScriptFiles/";
+    private static final String SCRIPTS_LOCATION = "/scripts/";
 
     private File addGroupsFile;
     private File addPersonsFile;
