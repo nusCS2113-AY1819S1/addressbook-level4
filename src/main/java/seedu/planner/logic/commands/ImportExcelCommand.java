@@ -25,6 +25,7 @@ public class ImportExcelCommand extends Command {
             ": Imports all the records data in Excel file and add them into the current Financial Planner.\n"
             + "You MUST include your directory path, starting with prefix: " + PREFIX_DIR + "\n"
             + "If record has already existed in the Financial Planner, it wil be ignored.\n"
+            + Messages.MESSAGE_INVALID_ENTRY_EXCEL_FILE
             + "Parameters: (FILE_PATH) or (DIRECTORY PATH and FILE NAME)\n"
             + "Example 1: " + COMMAND_WORD + " " + PREFIX_DIR
             + DirectoryPath.HOME_DIRECTORY_STRING + DirectoryPath.FILE_SEPERATOR + "Book1.xlsx (MUST end with .xlsx)\n"

@@ -36,23 +36,29 @@ import seedu.planner.model.tag.Tag;
  * Transfer data into Excel file utilities.
  */
 public class ExcelUtil {
-    //TODO TOMORROW: check whether the first row detected is name, date, money, tags or not
-    //TODO: coloring the over-limit records.
-    //TODO: create a summary for the records on the excel file in a different sheet.
-    //TODO: fix all the Check style.
-    //TODO: Achieve all the wanted records.
     private static final int FIRST_COLUMN = 0;
     private static final int SECOND_COLUMN = 1;
     private static final int THIRD_COLUMN = 2;
     private static final int FOURTH_COLUMN = 3;
     private static final int MAXIMUM_GAP_BETWEEN_COLUMN = 4;
     private static final int LEFT_OUT_CHARACTER = 4;
-    private static final int STARTING_COLUMN = 0;
-    private static final int STARTING_ROW = 0;
+    private static final int STARTING_INDEX = 0;
     private static final int STARTING_ROW_DATA = 1;
     private static final int STARTING_SHEET = 0;
+    private static final int RECORD_EMPTY = 0;
+    private static final Double CHANGE_TO_DOUBLE = 1.0;
+    private static final char MINUS_SIGN = '-';
+    private static final String PLUS_SIGN = "+";
+    private static final String WHITE_SPACE = " ";
+    private static final String NAME_TITLE = "NAME";
+    private static final String DATE_TITLE = "DATE";
+    private static final String MONEY_TITLE = "MONEY SPENT/RECEIVED";
+    private static final String TAG_TITLE = "TAGS";
+    public static final String TAG_SEPARATOR = " ... ";
 
     private static Logger logger = LogsCenter.getLogger(ExcelUtil.class);
+
+    //==========================================MAIN METHOD============================================================
 
     /**
      * Read the Excel file.
@@ -86,6 +92,33 @@ public class ExcelUtil {
     }
 
     /**
+     * Write the excel sheet into Directory.
+     */
+    public static void writeExcelSheetIntoDirectory (List<Record> recordList, XSSFSheet sheet,
+                                                       XSSFWorkbook workbook, String path, String nameFile) {
+        writeDataIntoExcelSheet(recordList, sheet);
+        try {
+            //Write the workbook in file system
+            path += (System.getProperty("file.separator") + nameFile);
+            FileOutputStream out = new FileOutputStream(path);
+            workbook.write(out);
+            out.close();
+            readExcelSheet(path);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //==========================================SUB METHOD=============================================================
+    //TODO TOMORROW: check whether the first row detected is name, date, money, tags or not
+    //TODO: coloring the over-limit records.
+    //TODO: create a summary for the records on the excel file in a different sheet.
+    //TODO: fix all the Check style.
+    //TODO: Achieve all the wanted records.
+
+    //private static Boolean isFirstRowTitleExist();
+
+    /**
      * Retrieve Date on 1 row and change them into String.
      */
     private static Record retrieveDataForEachRow (Row row) throws ParseException {
@@ -101,7 +134,7 @@ public class ExcelUtil {
                 dateString = cell.getStringCellValue().trim();
             } else if (cell.getColumnIndex() == row.getFirstCellNum() + THIRD_COLUMN) {
                 if (cell.getCellTypeEnum() == CellType.NUMERIC) {
-                    moneyString = Double.toString(cell.getNumericCellValue() * 1.0);
+                    moneyString = Double.toString(cell.getNumericCellValue() * CHANGE_TO_DOUBLE);
                 } else {
                     moneyString = cell.getStringCellValue();
                 }
@@ -113,29 +146,9 @@ public class ExcelUtil {
             throw new ParseException(Messages.MESSAGE_INVALID_ENTRY_EXCEL_FILE);
         }
         // For positive number, the "+" will be discarded when you try to add money into Financial Planner --> error.
-        moneyString = (moneyString.charAt(0) == '-') ? (moneyString) : ("+" + moneyString);
-        logger.info(nameString + " " + dateString + " " + moneyString + " " + tagsString);
+        moneyString = (moneyString.charAt(STARTING_INDEX) == MINUS_SIGN) ? (moneyString) : (PLUS_SIGN + moneyString);
+        logger.info(nameString + WHITE_SPACE + dateString + WHITE_SPACE + moneyString + WHITE_SPACE + tagsString);
         return createRecord(nameString, dateString, moneyString, tagsString);
-    }
-
-    /**
-     * Write the excel sheet into Directory.
-     */
-    public static String writeExcelSheetIntoDirectory (List<Record> recordList, XSSFSheet sheet,
-                                                       XSSFWorkbook workbook, String path, String nameFile) {
-        writeDataIntoExcelSheet(recordList, sheet);
-        try {
-            //Write the workbook in file system
-            path += (System.getProperty("file.separator") + nameFile);
-            FileOutputStream out = new FileOutputStream(path);
-            workbook.write(out);
-            out.close();
-            readExcelSheet(path);
-            return String.format(Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY_NAME_PATH, nameFile, path);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     /**
@@ -147,7 +160,7 @@ public class ExcelUtil {
         for (String key : keySet) {
             Row row = sheet.createRow(Integer.parseInt(key));
             Object[] objects = data.get(key);
-            int col = STARTING_COLUMN;
+            int col = STARTING_INDEX;
             for (Object object : objects) {
                 Cell cell = row.createCell(col++);
                 if (object instanceof String) {
@@ -164,21 +177,20 @@ public class ExcelUtil {
      */
     public static final Map<String, Object[]> exportData (List<Record> recordList) {
         Map<String, Object[]> data = new TreeMap<String, Object[]>();
-        int id = STARTING_ROW;
-        data.put(String.valueOf(id), new Object[]{"NAME", "DATE", "MONEY SPENT/RECEIVED", "TAGS"});
+        int id = STARTING_INDEX;
+        data.put(String.valueOf(id), new Object[]{NAME_TITLE, DATE_TITLE, MONEY_TITLE, TAG_TITLE});
         for (Record record : recordList) {
-            String tags = "; ";
             StringBuilder stringBuilder = new StringBuilder();
-            if (record.getTags().size() > 0) {
+            if (record.getTags().size() > RECORD_EMPTY) {
                 for (Tag tag : record.getTags()) {
-                    stringBuilder.append(tag.tagName + " ... ");
+                    stringBuilder.append(tag.tagName + TAG_SEPARATOR);
                 }
                 data.put(String.valueOf(++id), new Object[]{
                             record.getName().fullName,
                             record.getDate().value,
                             record.getMoneyFlow().valueDouble,
                             stringBuilder.toString()
-                                    .substring(0, stringBuilder.toString().length() - LEFT_OUT_CHARACTER)});
+                                .substring(STARTING_INDEX, stringBuilder.toString().length() - LEFT_OUT_CHARACTER)});
             } else {
                 data.put(String.valueOf(++id), new Object[]{
                         record.getName().fullName,
@@ -199,7 +211,7 @@ public class ExcelUtil {
         MoneyFlow moneyFlow = ParserUtil.parseMoneyFlow(moneyString);
         Set<Tag> tagList = new HashSet<>();
         if (tagsString != null) {
-            String processedTags = tagsString.replace(" ... ", " t/");
+            String processedTags = tagsString.replace(TAG_SEPARATOR, WHITE_SPACE + PREFIX_TAG);
             ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(processedTags, PREFIX_TAG);
             tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         }

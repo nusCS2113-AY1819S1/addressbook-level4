@@ -3,12 +3,10 @@ package seedu.planner.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.logic.commands.ExportExcelCommand.exportDataIntoExcelSheetWithGivenRecords;
 import static seedu.planner.model.Model.PREDICATE_SHOW_ALL_RECORDS;
+
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
-
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.core.Messages;
@@ -21,6 +19,9 @@ import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
 
+/**
+ * Achieve the records into Excel file and then deletes all the records exported.
+ */
 public class AchieveCommand extends Command {
     public static final String COMMAND_WORD = "achieve";
     public static final String MESSAGE_USAGE = COMMAND_WORD

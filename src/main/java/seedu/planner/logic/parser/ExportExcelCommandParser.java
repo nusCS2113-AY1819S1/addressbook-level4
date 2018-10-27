@@ -2,6 +2,7 @@ package seedu.planner.logic.parser;
 
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DIR;
+
 import java.util.Arrays;
 import java.util.logging.Logger;
 
@@ -62,6 +63,10 @@ public class ExportExcelCommandParser implements Parser<ExportExcelCommand> {
             return parseDateIntoDifferentMode(dates, stringPath);
         }
     }
+
+    /**
+     * Parse the string Date into different mode, hence return different commands.
+     */
     private static ExportExcelCommand parseDateIntoDifferentMode (String[] dates, String stringPath)
             throws ParseException {
         Date startDate;

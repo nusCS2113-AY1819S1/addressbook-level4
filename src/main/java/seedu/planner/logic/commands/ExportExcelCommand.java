@@ -2,6 +2,7 @@ package seedu.planner.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.model.Model.PREDICATE_SHOW_ALL_RECORDS;
+
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -90,10 +91,6 @@ public class ExportExcelCommand extends Command {
         } else {
             message = Messages.MESSAGE_NO_RECORDS_TO_EXPORT;
         }
-        for (Record record : recordList) {
-            model.deleteRecord(record);
-        }
-        model.commitFinancialPlanner();
         return new CommandResult(message);
     }
 
