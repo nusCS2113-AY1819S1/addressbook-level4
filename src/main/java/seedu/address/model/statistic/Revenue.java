@@ -1,18 +1,26 @@
 package seedu.address.model.statistic;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
 /**
  * Represents Revenue in the month's Statistic
  * Guarantees: immutable
  */
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Revenue {
     private static final String QUANTITY_VALIDATION_REGEX = "[-+]?[0-9]*\\.?[0-9]+";
-    private static volatile String value;
+    private volatile String value;
 
     /**
      * Constructs an {@code Revenue}.
      *
      * @param revenue
      */
+
+    public Revenue () {
+        super();
+    }
+
     public Revenue(String revenue) {
         value = revenue;
     }
@@ -27,6 +35,14 @@ public class Revenue {
 
     public void decrease(float amount) {
         value = Float.toString(Float.parseFloat(value) - amount);
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     @Override
