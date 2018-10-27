@@ -229,7 +229,24 @@ public class DistributeUtilTest {
 
     @Test
     public void groupNameConcatenationTest() throws CommandException {
+        String expectedGroupName = "T13-04-04";
+        String actualGroupName = distUtil.groupNameConcatenation(3, "T13-04-0", model);
 
+        // checks if the actual process will return me the same expectedGN
+        assertEquals(expectedGroupName, actualGroupName);
+
+        //check if group is null
+        Assert.assertThrows(NullPointerException.class, () -> distUtil.groupNameConcatenation(1,
+                null, model));
+
+        //check if model is null
+        Assert.assertThrows(NullPointerException.class, () -> distUtil.groupNameConcatenation(1,
+                expectedGroupName, null));
+
+        //check if index is negative
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(DistributeUtil.MESSAGE_INDEX_NEGATIVE);
+        distUtil.groupNameConcatenation(-1, expectedGroupName, model);
     }
 
     @Test
