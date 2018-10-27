@@ -17,9 +17,9 @@ public class AccountCredential implements Serializable {
         this.hashedPassword = hash(DEFAULT_PASSWORD);
     }
 
-    public AccountCredential(String userName, String Password) {
+    public AccountCredential(String userName, String password) {
         this.userName = userName;
-        this.hashedPassword = hash(Password);
+        this.hashedPassword = hash(password);
     }
 
     public String getUserName() {
@@ -46,7 +46,6 @@ public class AccountCredential implements Serializable {
      * @return a hashed password
      */
     private String hash(String password) {
-        //TODO FIND A GOOD HASHING LIBRARY
-        return password;
+        return Hasher.hashPassword(password, Hasher.mySalt, "SHA-512");
     }
 }
