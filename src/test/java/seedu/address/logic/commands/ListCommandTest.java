@@ -12,8 +12,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.user.User;
-import seedu.address.testutil.UserBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
@@ -26,9 +24,7 @@ public class ListCommandTest {
 
     @Before
     public void setUp() {
-        User user = new UserBuilder().build();
         model = new ModelManager(getTypicalEventManager(), new UserPrefs());
-        model.logUser(user);
         expectedModel = new ModelManager(model.getEventManager(), new UserPrefs());
     }
 
