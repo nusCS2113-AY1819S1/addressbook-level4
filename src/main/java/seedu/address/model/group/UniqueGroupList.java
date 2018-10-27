@@ -5,8 +5,10 @@ package seedu.address.model.group;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +16,7 @@ import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.tag.Tag;
 
 
 /**
@@ -110,13 +113,26 @@ public class UniqueGroupList implements Iterable<Group> {
      */
     public void addPersons(AddGroup toAdd) {
         requireNonNull(toAdd);
-        for (Group g : internalList) {
-            if (g.isSameGroup(toAdd.getGroup())) {
-                for (Person p : toAdd.getPersonSet()) {
-                    g.addPersons(p);
-                }
-            }
+        Group target = toAdd.getGroup();
+        Group editedGroup = createEditedGroup(target, toAdd.getPersonSet());
+        int index = internalList.indexOf(target);
+
+        if (index == -1) {
+            throw new GroupNotFoundException();
         }
+        internalList.set(index, editedGroup);
+    }
+
+    public Group createEditedGroup(Group target, Set<Person> personSet) {
+        requireAllNonNull(target, personSet);
+        Set<Tag> editedGroupTagSet = new HashSet<>();
+        editedGroupTagSet.addAll(target.getTags());
+        Group editedGroup = new Group (new GroupName(target.getGroupName().groupName),
+                new GroupLocation(target.getGroupLocation().groupLocation), editedGroupTagSet);
+        editedGroup.addPersons(target.getPersons());
+        editedGroup.addPersons(personSet);
+
+        return editedGroup;
     }
 
     /**
