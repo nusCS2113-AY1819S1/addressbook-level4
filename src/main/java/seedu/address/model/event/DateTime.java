@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * DateTime field for event
+ * Represents an Event's DateTime field in the event manager.
  */
 public class DateTime {
     public static final String MESSAGE_DATETIME_CONSTRAINTS =

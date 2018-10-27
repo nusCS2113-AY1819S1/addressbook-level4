@@ -4,7 +4,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
-//import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -13,7 +12,6 @@ import java.util.TreeSet;
 
 import seedu.address.model.attendee.Attendee;
 import seedu.address.model.tag.Tag;
-
 
 /**
  * Represents an Event in the event manager.
@@ -31,6 +29,7 @@ public class Event {
     private final DateTime dateTime;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Attendee> attendees = new HashSet<>();
+    private final Status status;
 
     /**
      * Every field must be present and not null.
@@ -47,6 +46,7 @@ public class Event {
         this.dateTime = datetime;
         this.tags.addAll(tags);
         this.attendees.addAll(attendees);
+        this.status = new Status(datetime);
     }
 
     public Name getName() {
@@ -72,6 +72,8 @@ public class Event {
     public DateTime getDateTime () {
         return dateTime;
     }
+
+    public Status getStatus () { return status; }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

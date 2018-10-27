@@ -2,11 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static seedu.address.testutil.TypicalUsers.ALICE;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -16,14 +13,13 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.EventManager;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyEventManager;
 import seedu.address.model.event.Event;
 import seedu.address.model.user.User;
-import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.UserBuilder;
 
-public class AddCommandTest {
+public class LoginCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
@@ -33,56 +29,48 @@ public class AddCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullUser_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new AddCommand(null);
+        new LoginCommand(null);
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Event validEvent = new EventBuilder().build();
+    public void execute_successfulLogin() throws Exception {
+        User user = new UserBuilder().build();
+        ModelStubAcceptUser modelStubAcceptUser;
+        modelStubAcceptUser = new ModelStubAcceptUser(user);
 
-        CommandResult commandResult = new AddCommand(validEvent).execute(modelStub, commandHistory);
+        CommandResult commandResult = new LoginCommand(user).execute(modelStubAcceptUser, commandHistory);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validEvent), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validEvent), modelStub.personsAdded);
+        assertEquals(String.format(LoginCommand.MESSAGE_SUCCESS,
+                user.getUsername().toString()), commandResult.feedbackToUser);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() throws Exception {
-        Event validEvent = new EventBuilder().build();
-        AddCommand addCommand = new AddCommand(validEvent);
-        ModelStub modelStub = new ModelStubWithPerson(validEvent);
+    public void execute_failedLogin_noUser() throws Exception {
+        User user = new UserBuilder(ALICE).build();
+        User loggedUser = new UserBuilder().build();
+        ModelStubAcceptUser modelStubAcceptUser;
+        modelStubAcceptUser = new ModelStubAcceptUser(loggedUser);
+
+        LoginCommand loginCommand = new LoginCommand(user);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_EVENT);
-        addCommand.execute(modelStub, commandHistory);
+        thrown.expectMessage(LoginCommand.MESSAGE_FAILURE);
+        loginCommand.execute(modelStubAcceptUser, commandHistory);
     }
 
     @Test
-    public void equals() {
-        Event alice = new EventBuilder().withName("Alice").build();
-        Event bob = new EventBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+    public void execute_failedLogin_alreadyLogged() throws Exception {
+        User user = new UserBuilder().build();
+        ModelStubWithUser modelStubWithUser;
+        modelStubWithUser = new ModelStubWithUser();
+        LoginCommand loginCommand = new LoginCommand(user);
 
-        // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
-
-        // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
-
-        // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
-
-        // different event -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(LoginCommand.MESSAGE_LOGGED);
+        loginCommand.execute(modelStubWithUser, commandHistory);
     }
 
     /**
@@ -186,50 +174,52 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single event.
+     * A Model stub that simulates a login.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Event event;
+    private class ModelStubAcceptUser extends ModelStub {
+        private User user;
+        private boolean isLogged = false;
 
-        ModelStubWithPerson(Event event) {
-            requireNonNull(event);
-            this.event = event;
+        ModelStubAcceptUser(User user) {
+            requireNonNull(user);
+            this.user = user;
         }
 
         @Override
-        public boolean hasEvent(Event event) {
-            requireNonNull(event);
-            return this.event.isSameEvent(event);
+        public boolean userExists(User user) {
+            requireNonNull(user);
+            return user.getUsername().equals(this.user.getUsername());
+        }
+
+        @Override
+        public void logUser(User user) {
+            isLogged = user.equals(this.user);
+        }
+
+        @Override
+        public boolean getLoginStatus() {
+            return isLogged;
         }
     }
 
-    /**
-     * A Model stub that always accept the event being added.
-     */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Event> personsAdded = new ArrayList<>();
+    private class ModelStubWithUser extends ModelStub {
+        private boolean isLogged;
+        private boolean isPresent;
 
-        @Override
-        public boolean hasEvent(Event event) {
-            requireNonNull(event);
-            return personsAdded.stream().anyMatch(event::isSameEvent);
+        ModelStubWithUser() {
+            isLogged = true;
+            isPresent = true;
         }
 
         @Override
-        public void addEvent(Event event) {
-            requireNonNull(event);
-            personsAdded.add(event);
+        public boolean userExists(User user) {
+            requireNonNull(user);
+            return isPresent;
         }
 
         @Override
-        public void commitEventManager() {
-            // called by {@code AddCommand#execute()}
-        }
-
-        @Override
-        public ReadOnlyEventManager getEventManager() {
-            return new EventManager();
+        public boolean getLoginStatus() {
+            return isLogged;
         }
     }
-
 }

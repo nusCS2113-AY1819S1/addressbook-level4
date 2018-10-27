@@ -9,6 +9,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+import org.jsoup.Jsoup;
+
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -61,23 +63,24 @@ public class AddCommentCommand extends Command {
         requireNonNull(model);
         List<Event> filteredEventList = model.getFilteredEventList();
 
-
         if (index.getZeroBased() >= filteredEventList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
-        String test =
-                "<span>Comment Section</span>\n"
-                        + "<ol>\n"
-                        + "<li>hello</li>\n"
-                        + "<li>My name is Gerald</li>\n"
-                        + "<li>What is your name?</li>\n"
-                        + "</ol>";
+        String test;
+        String test2 = "src/main/java/seedu/address/logic/comments/dummy.html";
+        File file = new File(test2);
+        test2 = file.getAbsolutePath();
+        test2 = test2.replace(File.separator, "/");
+        try {
+            test = Jsoup.parse(new File(test2), null).toString();
+        } catch (Exception e) {
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+        }
 
         AddComment comments = new AddComment(test);
         test = comments.addComment(getComment());
-
-        File savingFile = new File("C:/Users/Gerald/Desktop/test/1.html");
+        File savingFile = new File(test2);
         FileOutputStream fop = null;
         try {
             fop = new FileOutputStream(savingFile);
@@ -93,7 +96,6 @@ public class AddCommentCommand extends Command {
         }
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
-
         Event eventToEdit = filteredEventList.get(index.getZeroBased());
         Event editedEvent = EditCommand.createEditedEvent(eventToEdit, editCommentDescriptor);
 

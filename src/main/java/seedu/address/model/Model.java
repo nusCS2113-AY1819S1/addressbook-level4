@@ -32,7 +32,7 @@ public interface Model {
     /**
      * Returns true if a user is logged in.
      */
-    boolean authenticate();
+    boolean getLoginStatus();
 
     /**
      * Returns true if an admin is logged in.

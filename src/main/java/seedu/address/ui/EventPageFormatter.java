@@ -54,7 +54,6 @@ public class EventPageFormatter {
     public static void formatEvent(Event event) throws IOException, URISyntaxException {
         SEARCH_PAGE_PATH = BrowserPanel.getSearchPageUrlWithoutName().toURI();
         SEARCH_PAGE_STRING = readFile(SEARCH_PAGE_PATH);
-        //formatName(event.getName());
         writeFile(SEARCH_PAGE_PATH);
     }
 
@@ -75,7 +74,7 @@ public class EventPageFormatter {
 
     }
 
-    private static void formatVenue(Venue Venue) {
+    private static void formatVenue(Venue venue) {
 
     }
 
