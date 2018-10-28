@@ -27,7 +27,9 @@ import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.logic.parser.Prefix;
+import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.CandidateBook;
+import seedu.recruit.model.CompanyBook;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.ReadOnlyCandidateBook;
 import seedu.recruit.model.ReadOnlyCompanyBook;
@@ -59,8 +61,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_JOB_AMY = "Dancer";
     public static final String VALID_JOB_BOB = "Manager";
-    public static final String VALID_EDUCATION_AMY = "A Level";
-    public static final String VALID_EDUCATION_BOB = "Business Masters";
+    public static final String VALID_EDUCATION_AMY = "ALEVELS";
+    public static final String VALID_EDUCATION_BOB = "MASTER";
     public static final String VALID_SALARY_AMY = "3000";
     public static final String VALID_SALARY_BOB = "3500";
     public static final String VALID_TAG_HUSBAND = "husband";
@@ -149,7 +151,7 @@ public class CommandTestUtil {
             assertEquals(expectedMessage, result.feedbackToUser);
             assertEquals(expectedModel, actualModel);
             assertEquals(expectedCommandHistory, actualCommandHistory);
-        } catch (IOException | GeneralSecurityException | CommandException ce) {
+        } catch (IOException | GeneralSecurityException | CommandException | ParseException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
         }
     }
@@ -166,17 +168,21 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         CandidateBook expectedCandidateBook = new CandidateBook(actualModel.getCandidateBook());
-        List<Candidate> expectedFilteredList = new ArrayList<>(actualModel.getFilteredCandidateList());
+        List<Candidate> expectedFilteredCandidateList = new ArrayList<>(actualModel.getFilteredCandidateList());
+        CompanyBook expectedCompanyBook = new CompanyBook(actualModel.getCompanyBook());
+        List<Company> expectedFilteredCompanyList = new ArrayList<>(actualModel.getFilteredCompanyList());
 
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
 
         try {
             command.execute(actualModel, actualCommandHistory);
             throw new AssertionError("The expected CommandException was not thrown.");
-        } catch (IOException | GeneralSecurityException | CommandException e) {
+        } catch (IOException | GeneralSecurityException | CommandException | ParseException e) {
             assertEquals(expectedMessage, e.getMessage());
             assertEquals(expectedCandidateBook, actualModel.getCandidateBook());
-            assertEquals(expectedFilteredList, actualModel.getFilteredCandidateList());
+            assertEquals(expectedFilteredCandidateList, actualModel.getFilteredCandidateList());
+            assertEquals(expectedCompanyBook, actualModel.getCompanyBook());
+            assertEquals(expectedFilteredCompanyList, actualModel.getFilteredCompanyList());
             assertEquals(expectedCommandHistory, actualCommandHistory);
         }
     }
@@ -194,6 +200,7 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredCandidateList().size());
     }
+
 
     /**
      * Deletes the first candidate in {@code model}'s filtered list from {@code model}'s recruit book.
@@ -310,6 +317,11 @@ public class CommandTestUtil {
         }
 
         @Override
+        public void sortCompanies(Prefix prefix) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public int getCompanyIndexFromName(CompanyName companyName) {
             throw new AssertionError("This method should not be called.");
         };
@@ -360,6 +372,26 @@ public class CommandTestUtil {
         }
 
         @Override
+        public boolean hasJobOffer(CompanyName companyName, JobOffer jobOffer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateJobOfferInSelectedCompany(Company company, JobOffer target, JobOffer editedJobOffer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateJobOfferInCompanyBook(JobOffer target, JobOffer editedJobOffer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteJobOffer(JobOffer jobOffer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<JobOffer> getFilteredCompanyJobList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -376,6 +408,36 @@ public class CommandTestUtil {
 
         @Override
         public void setEmailUtil(EmailUtil emailUtil) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getFilteredRecipientJobOfferNames() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getFilteredRecipientJobOfferNames(ArrayList<JobOffer> duplicateJobOffer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getFilteredContentJobOfferNames() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getFilteredContentJobOfferNames(ArrayList<JobOffer> duplicateJobOffer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getFilteredCandidateNames() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getFilteredCandidateNames(ArrayList<Candidate> duplicateCandidates) {
             throw new AssertionError("This method should not be called.");
         }
     }

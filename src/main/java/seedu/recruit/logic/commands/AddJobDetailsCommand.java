@@ -10,7 +10,6 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_SALARY;
 
 import seedu.recruit.logic.CommandHistory;
-import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.joboffer.JobOffer;
@@ -31,12 +30,13 @@ public class AddJobDetailsCommand extends Command {
             + PREFIX_AGE_RANGE + "AGE_RANGE "
             + PREFIX_EDUCATION + "EDUCATION "
             + PREFIX_SALARY + "SALARY\n"
+            + "(Enter 'cancel' to stop adding jobs)\n"
             + "Example: "
             + PREFIX_COMPANY_NAME + "McDonalds "
             + PREFIX_JOB + "cashier "
             + PREFIX_GENDER + "M "
             + PREFIX_AGE_RANGE + "20-30 "
-            + PREFIX_EDUCATION + "O levels "
+            + PREFIX_EDUCATION + "OLEVELS"
             + PREFIX_SALARY + "1200\n";
 
 
@@ -44,7 +44,8 @@ public class AddJobDetailsCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New added job offer: %1$s";
     public static final String MESSAGE_DUPLICATE_JOB_OFFER = "This job offer already exists in the Company";
     public static final String MESSAGE_COMPANY_NOT_FOUND = "Company not found in CompanyBook.\n"
-                                                          + "Please add the company to CompanyBook first";
+            + "Please add the company to CompanyBook first";
+
     private final JobOffer toAdd;
 
 
@@ -65,9 +66,9 @@ public class AddJobDetailsCommand extends Command {
         }
         model.addJobOffer(toAdd.getCompanyName(), toAdd);
         model.commitCompanyBook();
-        LogicManager.setLogicState("primary");
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-    };
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

@@ -2,9 +2,13 @@ package seedu.recruit.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.commons.util.StringUtil;
@@ -29,6 +33,7 @@ import seedu.recruit.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX_ARGS = "Index arguments are not valid.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -36,11 +41,69 @@ public class ParserUtil {
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
-        String trimmedIndex = oneBasedIndex.trim();
+        return Index.fromOneBased(parseIndexStringToInteger(oneBasedIndex));
+    }
+
+    /**
+     * Parses an Array {@code indexArgs} into an {@code Set<Index>} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+
+    public static Set<Index> parseIndexSet(String[] indexArgs) throws ParseException {
+        Set<Index> orderedIndexSet = new TreeSet<Index> (new LargestToSmallestIndexComparator());
+        for (String index : indexArgs) {
+            String[] indexRange = index.split("-");
+            orderedIndexSet.addAll(parseIndexRange(indexRange));
+        }
+        return orderedIndexSet;
+    }
+
+    /**
+     * Parses {@code indexRange} into a  {@code indexSet} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     *         or if user enters an invalid format of arguments.
+     */
+    private static Set<Index> parseIndexRange (String ...indexRange) throws ParseException {
+        ArrayList<Integer> integerList = new ArrayList<>();
+        Set<Index> indexSet = new HashSet<>();
+
+        for (int i = 0; i < indexRange.length; i++) {
+            if (i == 2) {
+                throw new ParseException(MESSAGE_INVALID_INDEX_ARGS);
+            }
+            integerList.add(parseIndexStringToInteger(indexRange[i]));
+        }
+
+        for (int index = Collections.min(integerList); index <= Collections.max(integerList); index++) {
+            indexSet.add(Index.fromOneBased(index));
+        }
+        return indexSet;
+    }
+
+    /**
+     * Parses String @param index to an integer and returns it
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    private static Integer parseIndexStringToInteger(String index) throws ParseException {
+        String trimmedIndex = index.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+        return Integer.parseInt(trimmedIndex);
+    }
+
+
+    /**
+     * Comparator for returning Index Sets
+     */
+
+    private static class LargestToSmallestIndexComparator implements Comparator<Index> {
+        @Override
+        public int compare(Index a, Index b) {
+            return a.getZeroBased() < b.getZeroBased() ? 1 : a.getZeroBased() == b.getZeroBased() ? 0 : -1;
+        }
     }
 
     /**

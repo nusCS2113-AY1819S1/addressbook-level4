@@ -5,6 +5,7 @@ import java.security.GeneralSecurityException;
 
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
+import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.Model;
 
 /**
@@ -23,6 +24,6 @@ public abstract class Command {
      * @throws GeneralSecurityException Something to do with email command
      */
     public abstract CommandResult execute(Model model, CommandHistory history)
-            throws CommandException, IOException, GeneralSecurityException;
+            throws CommandException, IOException, GeneralSecurityException, ParseException;
 
 }

@@ -8,8 +8,10 @@ import java.util.List;
 
 import seedu.recruit.logic.commands.FindCandidateCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
+import seedu.recruit.model.candidate.AddressContainsKeywordsPredicate;
+import seedu.recruit.model.candidate.EmailContainsKeywordsPredicate;
 import seedu.recruit.model.candidate.NameContainsKeywordsPredicate;
-
+import seedu.recruit.model.candidate.PhoneContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCandidateCommand object
@@ -31,7 +33,10 @@ public class FindCandidateCommandParser implements Parser<FindCandidateCommand> 
         String[] keywords = trimmedArgs.split("\\s+");
         List<String> keywordsList = new ArrayList<String> (Arrays.asList(keywords));
 
-        return new FindCandidateCommand(new NameContainsKeywordsPredicate(keywordsList));
+        return new FindCandidateCommand(new NameContainsKeywordsPredicate(keywordsList),
+                new AddressContainsKeywordsPredicate(keywordsList),
+                new EmailContainsKeywordsPredicate(keywordsList),
+                new PhoneContainsKeywordsPredicate(keywordsList));
 
     }
 

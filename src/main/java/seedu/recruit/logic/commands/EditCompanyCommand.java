@@ -41,7 +41,7 @@ public class EditCompanyCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_COMPANY_NAME + "KFC "
-            + PREFIX_PHONE + "6222 6111 "
+            + PREFIX_PHONE + "62226111 "
             + PREFIX_EMAIL + "kfc.ops.feedback@kfc.com.sg";
 
     public static final String MESSAGE_EDIT_COMPANY_SUCCESS = "Edited Company: %1$s";
@@ -96,9 +96,9 @@ public class EditCompanyCommand extends Command {
         Phone updatedPhone = editCompanyDescriptor.getPhone().orElse(companyToEdit.getPhone());
         Email updatedEmail = editCompanyDescriptor.getEmail().orElse(companyToEdit.getEmail());
         Address updatedAddress = editCompanyDescriptor.getAddress().orElse(companyToEdit.getAddress());
-        UniqueJobList updatedJobList = new UniqueJobList();
+        UniqueJobList sameJobList = companyToEdit.getUniqueJobList();
 
-        return new Company(updatedName, updatedAddress, updatedEmail, updatedPhone, updatedJobList);
+        return new Company(updatedName, updatedAddress, updatedEmail, updatedPhone, sameJobList);
     }
 
     @Override

@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Comparator;
+import java.util.Set;
+import java.util.TreeSet;
 
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.model.Model;
@@ -52,4 +55,28 @@ public class TestUtil {
     public static Candidate getPerson(Model model, Index index) {
         return model.getFilteredCandidateList().get(index.getZeroBased());
     }
+
+    /**
+     * Parse an array {@code indexes} into a set sorted in descending order
+     */
+
+    public static Set<Index> getIndexSet(Index ... indexes) {
+        Set<Index> indexSet = new TreeSet<Index>(new LargestToSmallestIndexComparator());
+        for (int i = 0; i < indexes.length; i++) {
+            indexSet.add(indexes[i]);
+        }
+        return indexSet;
+    }
+
+    /**
+     * Comparator for returning Index Sets
+     */
+
+    private static class LargestToSmallestIndexComparator implements Comparator<Index> {
+        @Override
+        public int compare(Index a, Index b) {
+            return a.getZeroBased() < b.getZeroBased() ? 1 : a.getZeroBased() == b.getZeroBased() ? 0 : -1;
+        }
+    }
+
 }

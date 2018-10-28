@@ -1,5 +1,6 @@
 package seedu.recruit.model;
 
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -33,7 +34,7 @@ public interface Model {
 
     /**
      * Deletes the given candidate.
-     * The candidate must exist in the recruit book.
+     * The candidate must exist in the candidate book.
      */
     void deleteCandidate(Candidate target);
 
@@ -44,6 +45,11 @@ public interface Model {
     void addCandidate(Candidate candidate);
 
     /**
+     * Sorts the candidates in CandidateBook
+     */
+    void sortCandidates(Prefix prefix);
+
+    /**
      * Replaces the given candidate {@code target} with {@code editedCandidate}.
      * {@code target} must exist in the CandidateBook.
      * The candidate identity of {@code editedCandidate} must not be the same as another existing candidate in the
@@ -51,7 +57,7 @@ public interface Model {
      */
     void updateCandidate(Candidate target, Candidate editedCandidate);
 
-    /** Returns an unmodifiable view of the filtered candidate list */
+    /** Returns an unmodifiable view of the filtered candidate list. */
     ObservableList<Candidate> getFilteredCandidateList();
 
     /**
@@ -112,6 +118,11 @@ public interface Model {
     void addCompany(Company company);
 
     /**
+     * Sorts the list of companies in CompanyBook
+     */
+    void sortCompanies(Prefix prefix);
+
+    /**
      * Replaces the given company {@code target} with {@code editedCompany}.
      * {@code target} must exist in the CompanyBook.
      * The company identity of {@code editedCompany} must not be the same as another existing company in the
@@ -137,11 +148,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredCompanyList(Predicate<Company> predicate);
-
-    /**
-     * Sorts the candidates in CandidateBook
-     */
-    void sortCandidates(Prefix prefix);
 
     /**
      * Returns true if the model has previous CompanyBook states to restore.
@@ -177,6 +183,33 @@ public interface Model {
      */
     void addJobOffer(CompanyName companyName, JobOffer jobOffer);
 
+    /**
+     * Returns true if a company has a job offer with the same identity as {@code jobOffer} exists in the CompanyBook.
+     */
+    boolean hasJobOffer(CompanyName companyName, JobOffer jobOffer);
+
+    /**
+     * Replaces the given job offer {@code target} in the list with {@code editedJobOffer}.
+     * {@code target} must exist in the company book.
+     * The job offer identity of {@code editedJobOffer} must not be the same as another existing job offer in the
+     * company book.
+     */
+    void updateJobOfferInCompanyBook(JobOffer target, JobOffer editedJobOffer);
+
+    /**
+     * Replaces the given job offer {@code target} in the list with {@code editedJobOffer}.
+     * {@code target} must exist in the company's job list {@code company}.
+     * The job offer identity of {@code editedJobOffer} must not be the same as another existing job offer in the
+     * same company{@code company}.
+     */
+    void updateJobOfferInSelectedCompany(Company company, JobOffer target, JobOffer editedJobOffer);
+
+    /**
+     * Deletes the given job offer.
+     * The job offer must exist in the CompanyBook.
+     */
+    void deleteJobOffer(JobOffer target);
+
     /** Returns an unmodifiable view of the filtered job lists of all companies */
     ObservableList<JobOffer> getFilteredCompanyJobList();
 
@@ -186,7 +219,49 @@ public interface Model {
      */
     void updateFilteredCompanyJobList(Predicate<JobOffer> predicate);
 
+    // ================================== Email Command functions ===================================== //
+
+    /**
+     * Returns emailUtil in model
+     */
     EmailUtil getEmailUtil();
 
+    /**
+     * Setter for emailUtil in model
+     */
     void setEmailUtil(EmailUtil emailUtil);
+
+    /**
+     * Returns a concatenated string of names of job offers for email select recipients command
+     */
+    String getFilteredRecipientJobOfferNames();
+
+    /**
+     * @param duplicateJobOffers arraylist of duplicate joboffers
+     * @return a concatenated string of names of job offers
+     *         for email select recipients command minus specified job offers
+     */
+    String getFilteredRecipientJobOfferNames(ArrayList<JobOffer> duplicateJobOffers);
+
+    /**
+     * Returns a concatendated string of names of job offers for email select contents command
+     */
+    String getFilteredContentJobOfferNames();
+
+    /**
+     * @param duplicateJobOffers arraylist of duplicate joboffers
+     * @return a concatenated string of names of job offers
+     *         for email select contents command minus specified job offers
+     */
+    String getFilteredContentJobOfferNames(ArrayList<JobOffer> duplicateJobOffers);
+
+    /**
+     * Returns a concatenated string of names of candidates for email command
+     */
+    String getFilteredCandidateNames();
+
+    /**
+     * Returns a concatenated string of names of candidates for email command minus specified candidates
+     */
+    String getFilteredCandidateNames(ArrayList<Candidate> duplicateCandidates);
 }

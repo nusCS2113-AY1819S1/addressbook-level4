@@ -37,8 +37,8 @@ import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.logic.commands.ClearCandidateBookCommand;
 import seedu.recruit.logic.commands.FindCandidateCommand;
-import seedu.recruit.logic.commands.ListCommand;
-import seedu.recruit.logic.commands.SelectCommand;
+import seedu.recruit.logic.commands.ListCandidateCommand;
+import seedu.recruit.logic.commands.SelectCandidateCommand;
 import seedu.recruit.model.CandidateBook;
 import seedu.recruit.model.Model;
 import seedu.recruit.testutil.TypicalPersons;
@@ -143,7 +143,7 @@ public abstract class CandidateBookSystemTest {
      * Displays all persons in the recruit book.
      */
     protected void showAllPersons() {
-        executeCommand(ListCommand.COMMAND_WORD);
+        executeCommand(ListCandidateCommand.COMMAND_WORD);
         assertEquals(getModel().getCandidateBook().getCandidateList().size(),
                 getModel().getFilteredCandidateList().size());
     }
@@ -161,7 +161,7 @@ public abstract class CandidateBookSystemTest {
      * Selects the candidate at {@code index} of the displayed list.
      */
     protected void selectPerson(Index index) {
-        executeCommand(SelectCommand.COMMAND_WORD + " " + index.getOneBased());
+        executeCommand(SelectCandidateCommand.COMMAND_WORD + " " + index.getOneBased());
         assertEquals(index.getZeroBased(), getPersonListPanel().getSelectedCardIndex());
     }
 
