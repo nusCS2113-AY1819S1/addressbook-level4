@@ -2,6 +2,7 @@ package seedu.address.model.task;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 /**
@@ -73,6 +74,27 @@ public class Task {
                 && otherTask.getName().equals(getName())
                 && otherTask.getModule().equals(getModule());
     }
+    /*
+     *Compare two tasks based on their deadlines
+     */
+    public static Comparator<Task>compareDeadlines
+            =(Task a, Task b) -> a.getDate().toString().compareTo(b.getDate().toString());
+    /*
+     *Compare two tasks based on their module codes
+     */
+    public static Comparator<Task>compareModule = new Comparator<Task>() {
+        public int compare (Task a, Task b) {
+            return a.getModule().toString().compareToIgnoreCase(b.getModule().toString());
+        }
+    };
+    /*
+     *Compare two tasks based on their priority
+     */
+    public static Comparator<Task>comparePriority = new Comparator<Task>() {
+        public int compare (Task a, Task b) {
+            return a.getPriority().toString().compareToIgnoreCase(b.getPriority().toString());
+        }
+    };
 
     /**
      * Returns true if both tasks have the same identity and data fields.

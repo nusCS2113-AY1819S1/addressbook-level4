@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Person;
 import seedu.address.model.task.exceptions.DuplicateTaskException;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
 
@@ -100,6 +101,24 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public ObservableList<Task> asUnmodifiableObservableList() {
         return FXCollections.unmodifiableObservableList(internalList);
+    }
+
+    public List<Task> sortDeadline() {
+        List<Task> sortedList = internalList;
+        sortedList.sort(Task.compareDeadlines);
+        return sortedList;
+    }
+
+    public List<Task> sortModule() {
+        List<Task> sortedList = internalList;
+        sortedList.sort(Task.compareModule);
+        return sortedList;
+    }
+
+    public List<Task> sortPriority() {
+        List<Task> sortedList = internalList;
+        sortedList.sort(Task.comparePriority);
+        return sortedList;
     }
 
     @Override
