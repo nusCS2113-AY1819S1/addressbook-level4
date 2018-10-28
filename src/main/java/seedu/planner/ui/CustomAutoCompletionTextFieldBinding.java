@@ -18,7 +18,6 @@ public class CustomAutoCompletionTextFieldBinding<T> extends AutoCompletionBindi
 
     private String oldText = "";
     private StringConverter<T> converter;
-    private static String possiblePrefix = "";
 
     /**
      * Creates a new auto-completion binding between the given textField

@@ -35,7 +35,7 @@ import seedu.planner.logic.commands.UndoCommand;
  */
 public class CustomSuggestionProvider {
 
-    private static String patternStr = "t/(.*)";
+    private static String patternStr = "t/(.*)"; // TODO: ZHITHON autocomplete by tags soon
     private static Pattern pattern = Pattern.compile(patternStr);
 
     private static Set<String> commandKeywordsSet =
@@ -84,7 +84,7 @@ public class CustomSuggestionProvider {
             } else {
                 updateSuggestions(sortKeywordsSet);
             }
-        } /*else if (possibleTagKeywordsSet.contains(inputs[0])) { // either add or edit
+        } /*else if (possibleTagKeywordsSet.contains(inputs[0])) { // either add or edit TODO: MAKE IT WORK BY t/
             if (pattern.matcher(inputs[inputs.length-1]).matches()){
                 updateSuggestions(tagKeywordsMap.keySet());
             }
