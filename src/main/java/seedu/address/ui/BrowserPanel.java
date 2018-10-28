@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.Person;
@@ -24,6 +25,8 @@ public class BrowserPanel extends UiPart<Region> {
     private static final String FXML = "BrowserPanel.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
+
+    private Person person;
 
     @FXML
     private Label nameLabel;
@@ -39,6 +42,8 @@ public class BrowserPanel extends UiPart<Region> {
     private Label noteLabel;
     @FXML
     private FlowPane tagPanel;
+    @FXML
+    private VBox welcomePane;
 
     public BrowserPanel() {
         super(FXML);
@@ -46,7 +51,6 @@ public class BrowserPanel extends UiPart<Region> {
         // To prevent triggering events for typing inside the loaded Web page.
         getRoot().setOnKeyPressed(Event::consume);
 
-        loadDefaultPage();
         registerAsAnEventHandler(this);
     }
 
@@ -54,6 +58,8 @@ public class BrowserPanel extends UiPart<Region> {
      * updates panel based on selected person.
      */
     private void loadPersonPage(Person person) {
+        this.person = person;
+        welcomePane.setOpacity(0);
         tagPanel.getChildren().clear();
         String nameText = person.getName().toString();
         if (person.positionDoesExist()) {
@@ -107,13 +113,6 @@ public class BrowserPanel extends UiPart<Region> {
         for (Label label : lowPriorityTags) {
             tagPanel.getChildren().add(label);
         }
-    }
-
-
-    /**
-     * Loads a default HTML file with a background that matches the general theme.
-     */
-    private void loadDefaultPage() {
     }
 
     /**
