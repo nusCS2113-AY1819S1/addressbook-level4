@@ -37,10 +37,10 @@ public class EmailCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sends an email to the recipient identified "
             + "by the index number used in the displayed person list\n"
             + "Parameters: "
-            + "INDEX (must be a positive integer) "
+            + "INDEX (must be a positive integer) or multiple INDEX separated by comma or g/INDEX "
             + PREFIX_SUBJECT + "SUBJECT "
             + PREFIX_MESSAGE + "MESSAGE\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD + " 1 or 1,2,3 or g/2 "
             + PREFIX_SUBJECT + "Tutorial location "
             + PREFIX_MESSAGE + "Dear students, tutorial location has been changed to E01-04";
 
