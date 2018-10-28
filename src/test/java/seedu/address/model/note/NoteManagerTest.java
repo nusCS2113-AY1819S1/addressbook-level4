@@ -17,6 +17,9 @@ public class NoteManagerTest {
 
     private static NoteManager noteManager = NoteManager.getInstance();
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     private NoteBuilder note1 = new NoteBuilder(
             "CS1010",
             "First note",
@@ -47,8 +50,6 @@ public class NoteManagerTest {
             "",
             "Java");
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @Before
     public void setUp() {

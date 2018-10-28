@@ -17,10 +17,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class NoteAddCommandParserTest {
 
-    private NoteAddCommandParser parser = new NoteAddCommandParser();
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    private NoteAddCommandParser parser = new NoteAddCommandParser();
+
 
     @Test
     public void parse_invalidArgs_throwsParseException() throws ParseException {

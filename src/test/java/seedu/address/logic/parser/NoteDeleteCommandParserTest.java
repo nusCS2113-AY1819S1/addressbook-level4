@@ -24,12 +24,12 @@ import seedu.address.testutil.NoteBuilder;
  */
 public class NoteDeleteCommandParserTest {
 
-    private static NoteManager noteManager = NoteManager.getInstance();
-
-    private NoteDeleteCommandParser parser = new NoteDeleteCommandParser();
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    private static NoteManager noteManager = NoteManager.getInstance();
+    private NoteDeleteCommandParser parser = new NoteDeleteCommandParser();
+
 
     @Before
     public void setUp() {

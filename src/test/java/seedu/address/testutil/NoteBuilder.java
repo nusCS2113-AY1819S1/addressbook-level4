@@ -2,6 +2,9 @@ package seedu.address.testutil;
 
 import seedu.address.model.note.Note;
 
+/**
+ * Creates dummy notes for testing.
+ */
 public class NoteBuilder {
     public static final String DEFAULT_MODULE_CODE = "CS2113";
     public static final String DEFAULT_TITLE = "My note";
@@ -135,6 +138,11 @@ public class NoteBuilder {
         this.noteText = noteText;
     }
 
+    /**
+     * Creates a note from the data in the NoteBuilder object.
+     *
+     * @return Note object
+     */
     public Note build() {
         return new Note(
                 moduleCode,
