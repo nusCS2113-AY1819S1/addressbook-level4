@@ -16,8 +16,8 @@ import seedu.address.model.UserPrefs;
 import seedu.address.storage.scripts.ScriptSetup;
 
 public class ScriptSetupTest {
-    private static final String TEST_FILES_LOCATION = "/src/test/data/ScriptFiles/";
-    private static final String SCRIPTS_LOCATION = "/scripts/";
+    public static final String TEST_FILES_LOCATION = "/src/test/data/ScriptFiles/";
+    public static final String SCRIPTS_LOCATION = "/scripts/";
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -25,8 +25,8 @@ public class ScriptSetupTest {
     private File addGroupsFile;
     private File addPersonsFile;
 
-    private File testaddGroupsFile;
-    private File testaddPersonsFile;
+    private File testAddGroupsFile;
+    private File testAddPersonsFile;
 
     private UserPrefs userPrefs;
     private ScriptSetup scriptSetup;
@@ -36,10 +36,10 @@ public class ScriptSetupTest {
         userPrefs = new UserPrefs();
         scriptSetup = new ScriptSetup();
 
-        testaddGroupsFile = new File(scriptSetup.getDefaultLocation() + TEST_FILES_LOCATION
+        testAddGroupsFile = new File(scriptSetup.getDefaultLocation() + TEST_FILES_LOCATION
                 + scriptSetup.ADD_GROUPS_FILE);
 
-        testaddPersonsFile = new File(scriptSetup.getDefaultLocation() + TEST_FILES_LOCATION
+        testAddPersonsFile = new File(scriptSetup.getDefaultLocation() + TEST_FILES_LOCATION
                 + scriptSetup.ADD_PERSONS_FILE);
 
         /*Remove the scripts directory
@@ -59,8 +59,23 @@ public class ScriptSetupTest {
         addPersonsFile = new File(scriptSetup.getDefaultLocation() + userPrefs.getScriptFileDirectory()
                 + scriptSetup.ADD_PERSONS_FILE);
 
-        boolean isTwoEqual = FileUtils.contentEquals(addGroupsFile, testaddGroupsFile)
-                && FileUtils.contentEquals(addPersonsFile, testaddPersonsFile);
+        boolean isTwoEqual = FileUtils.contentEquals(addGroupsFile, testAddGroupsFile)
+                && FileUtils.contentEquals(addPersonsFile, testAddPersonsFile);
+
+        assertEquals(isTwoEqual, true);
+    }
+
+    @Test
+    public void addSampleTextFile_success() throws IOException {
+        scriptSetup.addSampleTextFiles(userPrefs.getScriptFileDirectory(), scriptSetup.getDefaultLocation());
+        addGroupsFile = new File(scriptSetup.getDefaultLocation() + userPrefs.getScriptFileDirectory()
+                + scriptSetup.ADD_GROUPS_FILE);
+
+        addPersonsFile = new File(scriptSetup.getDefaultLocation() + userPrefs.getScriptFileDirectory()
+                + scriptSetup.ADD_PERSONS_FILE);
+
+        boolean isTwoEqual = FileUtils.contentEquals(addGroupsFile, testAddGroupsFile)
+                && FileUtils.contentEquals(addPersonsFile, testAddPersonsFile);
 
         assertEquals(isTwoEqual, true);
     }
