@@ -79,7 +79,6 @@ public class CustomSuggestionProvider {
     }
 
     public CustomSuggestionProvider() {
-        createTagSet();
     }
 
     private void createTagSet(){
