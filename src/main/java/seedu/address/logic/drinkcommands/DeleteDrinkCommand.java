@@ -11,6 +11,9 @@ import seedu.address.logic.drinkcommands.exceptions.DrinkCommandException;
 import seedu.address.model.DrinkModel;
 import seedu.address.model.drink.Drink;
 
+/**
+ * Deletes a drink identified using its displayed index from the inventory list.
+ */
 public class DeleteDrinkCommand extends DrinkCommand {
     public static final String COMMAND_WORD = "delete";
 

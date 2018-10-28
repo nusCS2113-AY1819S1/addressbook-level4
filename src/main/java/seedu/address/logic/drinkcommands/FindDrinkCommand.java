@@ -7,6 +7,10 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.DrinkModel;
 import seedu.address.model.drink.NameContainsKeywordsPredicate;
 
+/**
+ * Finds and lists all drinks in the inventory list whose name contains any of the argument keywords.
+ * Keyword matching is case insensitive.
+ */
 public class FindDrinkCommand extends DrinkCommand {
     public static final String COMMAND_WORD = "find";
 
