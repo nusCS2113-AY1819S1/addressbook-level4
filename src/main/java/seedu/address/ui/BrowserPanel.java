@@ -1,20 +1,16 @@
 package seedu.address.ui;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
-import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
-import javafx.scene.web.WebView;
-import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.Person;
@@ -54,38 +50,53 @@ public class BrowserPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    /**
+     * updates panel based on selected person.
+     */
     private void loadPersonPage(Person person) {
         tagPanel.getChildren().clear();
-        nameLabel.setText(person.getName().toString() + "\n" + person.getPosition().toString());
+        String nameText = person.getName().toString();
+        if (person.positionDoesExist()) {
+            nameText += "\n" + person.getPosition().toString();
+        }
+        nameLabel.setText(nameText);
         addressLabel.setText(person.getAddress().toString());
         phoneLabel.setText(person.getPhone().toString());
         emailLabel.setText(person.getEmail().toString());
-        kpiLabel.setText("KPI: " + person.getKpi().toString());
-        noteLabel.setText(person.getNote().toString());
+        if (person.kpiDoesExist()) {
+            kpiLabel.setText("KPI: " + person.getKpi().toString());
+        } else {
+            kpiLabel.setText("KPI: ");
+        }
+        if (person.noteDoesExist()) {
+            noteLabel.setText(person.getNote().toString());
+        } else {
+            noteLabel.setText("");
+        }
         List<Label> highPriorityTags = new ArrayList<>();
         List<Label> mediumPriorityTags = new ArrayList<>();
         List<Label> lowPriorityTags = new ArrayList<>();
         person.getTags().forEach(tag -> {
-                    Label newLabel = new Label(tag.tagName);
-                    if (tag.priority.getZeroBased() == Tag.PRIORITY_HIGH) {
-                        newLabel.setStyle("-fx-text-fill:Black; -fx-border-color:red; -fx-background-color: red; "
-                                + "-fx-border-radius: 5 5 5 5;"
-                                + "-fx-background-radius: 5 5 5 5; ");
-                        highPriorityTags.add(newLabel);
-                    }
-                    if (tag.priority.getZeroBased() == Tag.PRIORITY_MEDIUM) {
-                        newLabel.setStyle("-fx-text-fill:Black; -fx-border-color:yellow; -fx-background-color: yellow; "
-                                + "-fx-border-radius: 5 5 5 5;"
-                                + "-fx-background-radius: 5 5 5 5;");
-                        mediumPriorityTags.add(newLabel);
-                    }
-                    if (tag.priority.getZeroBased() == Tag.PRIORITY_LOW) {
-                        newLabel.setStyle("-fx-text-fill:Black; -fx-border-color:green; -fx-background-color: green;"
-                                + "-fx-border-radius: 5 5 5 5;"
-                                + "-fx-background-radius: 5 5 5 5;");
-                        lowPriorityTags.add(newLabel);
-                    }
-                }
+            Label newLabel = new Label(tag.tagName);
+            if (tag.priority.getZeroBased() == Tag.PRIORITY_HIGH) {
+                newLabel.setStyle("-fx-text-fill:Black; -fx-border-color:red; -fx-background-color: red; "
+                        + "-fx-border-radius: 5 5 5 5;"
+                        + "-fx-background-radius: 5 5 5 5; ");
+                highPriorityTags.add(newLabel);
+            }
+            if (tag.priority.getZeroBased() == Tag.PRIORITY_MEDIUM) {
+                newLabel.setStyle("-fx-text-fill:Black; -fx-border-color:yellow; -fx-background-color: yellow; "
+                        + "-fx-border-radius: 5 5 5 5;"
+                        + "-fx-background-radius: 5 5 5 5;");
+                mediumPriorityTags.add(newLabel);
+            }
+            if (tag.priority.getZeroBased() == Tag.PRIORITY_LOW) {
+                newLabel.setStyle("-fx-text-fill:Black; -fx-border-color:green; -fx-background-color: green;"
+                        + "-fx-border-radius: 5 5 5 5;"
+                        + "-fx-background-radius: 5 5 5 5;");
+                lowPriorityTags.add(newLabel);
+            }
+        }
         );
         for (Label label : highPriorityTags) {
             tagPanel.getChildren().add(label);
