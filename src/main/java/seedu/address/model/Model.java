@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -7,6 +8,8 @@ import seedu.address.model.budgetelements.ClubBudgetElements;
 import seedu.address.model.clubbudget.FinalClubBudget;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.person.Person;
+import seedu.address.model.searchhistory.KeywordType;
+import seedu.address.model.searchhistory.ReadOnlyKeywordsRecord;
 import seedu.address.model.searchhistory.exceptions.EmptyHistoryException;
 
 /**
@@ -86,12 +89,6 @@ public interface Model {
     void updateFilteredLoginDetailsList(Predicate<LoginDetails> predicate);
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredPersonList(Predicate<Person> predicate);
-
-    /**
      * Updates the filter of the filtered club budgets list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
@@ -158,4 +155,14 @@ public interface Model {
      * Resets all search history and returns filtered person list to initial state.
      */
     void resetSearchHistoryToInitialState();
+
+    /**
+     * Records keywords into history.
+     */
+    void recordKeywords(KeywordType type, List<String> keywords);
+
+    /**
+     * Returns only the readable version of KeywordsRecord.
+     */
+    ReadOnlyKeywordsRecord getReadOnlyKeywordsRecord();
 }
