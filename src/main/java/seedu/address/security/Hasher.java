@@ -6,6 +6,7 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * Implements hashing methods
+ * (Ref: https://stackoverflow.com/questions/33085493/how-to-hash-a-password-with-sha-512-in-java)
  */
 public class Hasher {
 
