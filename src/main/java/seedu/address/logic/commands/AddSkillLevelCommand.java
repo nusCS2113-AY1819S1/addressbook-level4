@@ -34,6 +34,8 @@ public class AddSkillLevelCommand extends Command {
 
     public static final String MESSAGE_ADD_SKILL_SUCCESS = "Added skill to Person: %1$s";
     public static final String MESSAGE_DELETE_SKILL_SUCCESS = "Removed skill from Person: %1$s";
+    public static final String MESSAGE_SKILLLEVEL_CONSTRAINTS = "This skill level is not valid. "
+            + "Please enter a whole number between 0 to 100.";
     private final Index index;
     private final Skill skill;
     private final SkillLevel skillLevel;
@@ -55,7 +57,13 @@ public class AddSkillLevelCommand extends Command {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
+
         Person personToEdit = lastShownList.get(index.getZeroBased());
+
+        if (!skillLevel.isValidSkillLevel()) {
+            throw new CommandException(MESSAGE_SKILLLEVEL_CONSTRAINTS);
+        }
+
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), skill, skillLevel, personToEdit.getTags());
         model.updatePerson(personToEdit, editedPerson);
