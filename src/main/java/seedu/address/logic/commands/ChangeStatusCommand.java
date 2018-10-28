@@ -27,20 +27,24 @@ public class ChangeStatusCommand extends Command {
     public static final String COMMAND_WORD = "changeStatus";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the status of the item identified "
             + "by the name of the item. "
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_QUANTITY + "QUANTITY] "
-            + "[" + PREFIX_ORIGINAL_STATUS + "ORIGINAL STATUS] "
-            + "[" + PREFIX_NEW_STATUS + "NEW STATUS] "
-            + "Example: " + COMMAND_WORD + "1"
+            + "Parameters: "
+            + PREFIX_NAME + "NAME  "
+            + PREFIX_QUANTITY + "QUANTITY "
+            + PREFIX_ORIGINAL_STATUS + "ORIGINAL STATUS "
+            + PREFIX_NEW_STATUS + "NEW STATUS "
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_QUANTITY + "5 "
-            + PREFIX_ORIGINAL_STATUS + "Ready"
+            + PREFIX_ORIGINAL_STATUS + "Ready "
             + PREFIX_NEW_STATUS + "Faulty";
     public static final String MESSAGE_CHANG_STATUS_SUCCESS = "Changed Status: %1$s";
     public static final String MESSAGE_INVALID_STATUS_QUANTITY = "The change status quantity input is invalid";
     public static final String MESSAGE_INVALID_STATUS_FIELD = "The status description is invalid";
+    public static final String MESSAGE_INVALID_NAME_FIELD = "The item does not exist";
+    public static final String MESSAGE_STATUS_CONSTRAINTS =
+            "The updated value of each status field has to be positive";
 
     private Index index;
+    private boolean hasItem = false;
     private final ChangeStatusDescriptor changeStatusDescriptor;
     public ChangeStatusCommand(ChangeStatusDescriptor changeStatusDescriptor) {
         requireNonNull(changeStatusDescriptor);
@@ -55,8 +59,12 @@ public class ChangeStatusCommand extends Command {
         for (Item item:lastShownList) {
             if (item.getName().equals(changeStatusDescriptor.getName())) {
                 index = Index.fromZeroBased(counter);
+                hasItem = true;
             }
             counter++;
+        }
+        if (!hasItem) {
+            throw new CommandException(MESSAGE_INVALID_NAME_FIELD);
         }
 
         Item itemToUpdate = lastShownList.get(index.getZeroBased());
@@ -113,6 +121,9 @@ public class ChangeStatusCommand extends Command {
             break;
         default:
             throw new CommandException(MESSAGE_INVALID_STATUS_FIELD);
+        }
+        if (updatedReady < 0 || updatedOnLoan < 0 || updatedFaulty < 0) {
+            throw new CommandException(MESSAGE_STATUS_CONSTRAINTS);
         }
         updatedStatus = new Status(updatedReady, updatedOnLoan, updatedFaulty);
 

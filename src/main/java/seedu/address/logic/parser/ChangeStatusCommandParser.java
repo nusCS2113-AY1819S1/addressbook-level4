@@ -1,10 +1,13 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORIGINAL_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
+
+import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ChangeStatusCommand;
 import seedu.address.logic.commands.ChangeStatusCommand.ChangeStatusDescriptor;
@@ -26,6 +29,10 @@ public class ChangeStatusCommandParser implements Parser<ChangeStatusCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME,
                         PREFIX_QUANTITY, PREFIX_ORIGINAL_STATUS, PREFIX_NEW_STATUS);
 
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_ORIGINAL_STATUS, PREFIX_NEW_STATUS)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ChangeStatusCommand.MESSAGE_USAGE));
+        }
         ChangeStatusDescriptor changeStatusDescriptor = new ChangeStatusDescriptor();
         changeStatusDescriptor.setName(ParserUtil
                 .parseName(argMultimap.getValue(PREFIX_NAME).get()));
@@ -37,6 +44,8 @@ public class ChangeStatusCommandParser implements Parser<ChangeStatusCommand> {
                 .parseStatus(argMultimap.getValue(PREFIX_NEW_STATUS).get()));
 
         return new ChangeStatusCommand(changeStatusDescriptor);
-
+    }
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
