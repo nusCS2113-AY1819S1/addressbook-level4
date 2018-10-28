@@ -58,7 +58,7 @@ public class HtmlTableProcessor {
      */
     public static String renderCard(String text) {
         return "<div class=\"container-fluid\"><div class=\"row\"> <div class=\"col-xl\">"
-                + "<div class=\"card border-primary mb-3\" style=\"margin-top:30px;\">\n"
+                + "<div class=\"card border-primary bg-primary mb-3\" style=\"margin-top:30px;\">\n"
                 + "  <div class=\"card-header\">Info</div>\n"
                 + "  <div class=\"card-body\">\n"
                 + "    <h4 class=\"card-title\">" + text + "</h4>\n"

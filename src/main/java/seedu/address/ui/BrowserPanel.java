@@ -39,6 +39,7 @@ public class BrowserPanel extends UiPart<Region> {
         getRoot().setOnKeyPressed(Event::consume);
 
         loadDefaultPage();
+        initializeCss();
         registerAsAnEventHandler(this);
 
     }
@@ -57,6 +58,8 @@ public class BrowserPanel extends UiPart<Region> {
     private void loadDefaultPage() {
         URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
         loadPage(defaultPage.toExternalForm());
+        browser.getEngine().loadContent(HtmlTableProcessor
+                .renderCard("Welcome to Trajectory. Please login to use the platform."));
     }
 
     /**
@@ -64,6 +67,11 @@ public class BrowserPanel extends UiPart<Region> {
      */
     public void freeResources() {
         browser = null;
+    }
+
+    private void initializeCss() {
+        browser.getEngine().setUserStyleSheetLocation(getClass()
+                .getResource("/rendering/bootstrap.min.css").toString());
     }
 
     @Subscribe
@@ -76,7 +84,5 @@ public class BrowserPanel extends UiPart<Region> {
     private void handleNewInfo(NewInfoMessageEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         browser.getEngine().loadContent(event.message);
-        browser.getEngine().setUserStyleSheetLocation(getClass()
-            .getResource("/rendering/bootstrap.min.css").toString());
     }
 }
