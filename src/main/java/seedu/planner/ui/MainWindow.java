@@ -130,14 +130,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        statsDisplayPanel = new StatsDisplayPanel();
-        mainUiPanelPlaceholder.getChildren().add(statsDisplayPanel.getRoot());
-
-        detailedRecordCard = new DetailedRecordCard();
-        mainUiPanelPlaceholder.getChildren().add(detailedRecordCard.getRoot());
-
-        welcomePanel = new WelcomePanel(model);
-        mainUiPanelPlaceholder.getChildren().add(welcomePanel.getRoot());
+        fillMainUiPanel();
 
         recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
         recordListPanelPlaceholder.getChildren().add(recordListPanel.getRoot());
@@ -150,6 +143,21 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
+     * Fills the main Ui Panel which will be used for all ui output like welcomePanel,statistics,
+     * summary or selection
+     */
+    private void fillMainUiPanel() {
+        statsDisplayPanel = new StatsDisplayPanel();
+        mainUiPanelPlaceholder.getChildren().add(statsDisplayPanel.getRoot());
+
+        detailedRecordCard = new DetailedRecordCard();
+        mainUiPanelPlaceholder.getChildren().add(detailedRecordCard.getRoot());
+
+        welcomePanel = new WelcomePanel(model);
+        mainUiPanelPlaceholder.getChildren().add(welcomePanel.getRoot());
     }
 
     void hide() {
