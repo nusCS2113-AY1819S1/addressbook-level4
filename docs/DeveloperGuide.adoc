@@ -397,15 +397,35 @@ image::DeleteGroupSequenceDiagram.png[width="800"]
 
 // end::group[]
 
-// tag::AddScriptCommand[]
-=== AddScriptCommand feature
+// tag::ScriptCommand[]
+=== ScriptCommand feature
 ==== Current Implementation
-The AddScriptCommand Feature is executed by AddressBook when the user enter the specific command.
+The `ScriptCommand` Feature allows the user to run `scripts` that execute the same command multiples time by importing
+all Command arguments from a specific text file.
 
-Step 1: The User executes `AddScript StudentList`, the default constructor of the AddScriptCommand
-will be executed and a new `Path` will be generated based on the parameters of the command. The path will be assign
-with `StudentList.txt` for the above case.
-// end::AddScriptCommand[]
+Before the `ScriptCommand` can be executed, there are some prerequisites:
+
+* There must be a default folder for which all the scripts need to be stored
+* The default location of scripts folder is `root program location` + `/scripts/`
+* All scripts must be of `text file format/txt`
+
+If the scripts folder is missing whenever the program run, the program will automatically generate the folder through
+the `ScriptSetup` Class
+
+.Sequence Diagram for the `ScriptSetup` Function
+image::ScriptSetupSequenceDiagram.png[width="800"]
+
+* Procedure for ScriptSetup
+
+Step 1: 
+
+
+Future Implementation:
+****
+* Provide feedback and logging to users on which command has failed to executed
+* Allow the program to change the scripts default location
+****
+// end::ScriptCommand[]
 
 // tag::distribute[]
 === Distribute Students Equally feature
