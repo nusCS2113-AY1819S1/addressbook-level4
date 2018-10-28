@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.NoSuchElementException;
 
 import seedu.address.commons.core.index.Index;

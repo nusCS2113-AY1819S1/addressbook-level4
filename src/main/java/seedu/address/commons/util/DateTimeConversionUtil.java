@@ -57,7 +57,7 @@ public class DateTimeConversionUtil {
         localDateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
         return localDateTime;
     }
-    
+
     /**
      * Converts the ics-formatted dateString into DayOfWeek object.
      * @param dateString    is in format yyyyMMdd (as in .ics)

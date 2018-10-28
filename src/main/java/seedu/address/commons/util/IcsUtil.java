@@ -205,7 +205,7 @@ public class IcsUtil {
 
         File file = filePath.toFile();
         try {
-            Files.createFile(filePath); //strangely enough, biweekly will throw IOException if the file does not exist already
+            Files.createFile(filePath); //biweekly will throw IOException if the file does not exist already
             Biweekly.write(iCalendar).go(file);
         } catch (IOException e) {
             throw new IOException();
@@ -232,7 +232,7 @@ public class IcsUtil {
             throw new IOException(e);
         }
 
-        if (iCalendar == null){
+        if (iCalendar == null) {
             return new ICalendar();
         } else {
             return iCalendar;

@@ -237,15 +237,13 @@ public class ParserUtil {
      * Parses a {@code String filePath} into a {@code Path}
      */
     public static Path parseImportFileLocation (String fileLocation) throws ParseException {
-        Path DEFAULT_PATH = Paths.get("import_export" , "import.ics");
-
         requireNonNull(fileLocation);
         String trimmedFileLocation = fileLocation.trim();
 
         //default import path.
         if (trimmedFileLocation.length() == 0) {
             Path path;
-            path = DEFAULT_PATH;
+            path = Paths.get("import_export" , "import.ics");
             return path;
         }
 
@@ -257,26 +255,22 @@ public class ParserUtil {
      * Parses a {@code String filePath} into a {@code Path}
      */
     public static Path parseExportFileLocation (String fileLocation) throws ParseException {
-        Path DEFAULT_PATH = Paths.get("import_export" , "export.ics");
-
         requireNonNull(fileLocation);
         String trimmedFileLocation = fileLocation.trim();
 
         //default export path.
         if (trimmedFileLocation.length() == 0) {
             Path path;
-            path = DEFAULT_PATH;
+            path = Paths.get("import_export" , "export.ics");
             return path;
         }
         return parseImportExportFileLocation(trimmedFileLocation);
-
     }
 
     /**
      * Parses a (non-empty) {@code String fileLocation} into a {@code Path}
      */
     private static Path parseImportExportFileLocation(String trimmedFileLocation) throws ParseException {
-
         //ensure the filePath ends in .ics
         String pattern = "^.+\\.(?:(?:[iI][cC][sS]))$"; //ending in .ics
         if (!Pattern.matches(pattern, trimmedFileLocation)) {
