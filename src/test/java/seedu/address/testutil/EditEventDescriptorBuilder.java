@@ -42,7 +42,7 @@ public class EditEventDescriptorBuilder {
         descriptor.setVenue(event.getVenue());
         descriptor.setDate(event.getDateTime());
         descriptor.setTags(event.getTags());
-        descriptor.setAttendees(event.getAttendees());
+        descriptor.setAttendees(event.getAttendance());
     }
 
     /**

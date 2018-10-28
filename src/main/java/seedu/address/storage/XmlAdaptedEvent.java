@@ -90,7 +90,7 @@ public class XmlAdaptedEvent {
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
-        attending = source.getAttendees().stream()
+        attending = source.getAttendance().stream()
                 .map(XmlAdaptedAttendee::new)
                 .collect(Collectors.toList());
     }

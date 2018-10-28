@@ -59,7 +59,7 @@ public class EventBuilder {
         datetime = eventToCopy.getDateTime();
 
         tags = new HashSet<>(eventToCopy.getTags());
-        attendees = new HashSet<>(eventToCopy.getAttendees());
+        attendees = new HashSet<>(eventToCopy.getAttendance());
     }
 
     /**

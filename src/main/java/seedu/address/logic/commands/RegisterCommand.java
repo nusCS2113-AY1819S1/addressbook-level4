@@ -55,7 +55,7 @@ public class RegisterCommand extends Command {
 
         String attendeeName = model.getUsername().toString();
 
-        Set<Attendee> attendeeSet = new HashSet<>(eventToRegister.getAttendees());
+        Set<Attendee> attendeeSet = new HashSet<>(eventToRegister.getAttendance());
         int numAttendees = attendeeSet.size();
         attendeeSet.add(new Attendee(attendeeName));
 

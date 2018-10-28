@@ -115,7 +115,7 @@ public class EditCommand extends Command {
         Venue updatedVenue = editEventDescriptor.getVenue().orElse(eventToEdit.getVenue());
         DateTime updatedDateTime = editEventDescriptor.getDateTime().orElse(eventToEdit.getDateTime());
         Set<Tag> updatedTags = editEventDescriptor.getTags().orElse(eventToEdit.getTags());
-        Set<Attendee> updatedAttendees = editEventDescriptor.getAttendees().orElse(eventToEdit.getAttendees());
+        Set<Attendee> updatedAttendees = editEventDescriptor.getAttendees().orElse(eventToEdit.getAttendance());
 
         return new Event(updatedName, updatedContact, updatedPhone, updatedEmail, updatedVenue, updatedDateTime,
                 updatedTags, updatedAttendees);
