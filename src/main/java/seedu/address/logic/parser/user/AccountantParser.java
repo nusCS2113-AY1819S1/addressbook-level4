@@ -10,6 +10,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.user.ChangePasswordCommand;
+import seedu.address.logic.commands.user.LogoutCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -49,6 +50,8 @@ public class AccountantParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        case LogoutCommand.COMMAND_WORD:
+            return new LogoutCommand ();
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

@@ -39,7 +39,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public Path getLoginInfoFilePath() {
-        return userPrefsStorage.getUserPrefsFilePath();
+        return loginInfoStorage.getLoginInfoFilePath ();
     }
 
     @Override
@@ -55,7 +55,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public Path getUserPrefsFilePath() {
-        return loginInfoStorage.getLoginInfoFilePath ();
+        return userPrefsStorage.getUserPrefsFilePath();
     }
 
     @Override

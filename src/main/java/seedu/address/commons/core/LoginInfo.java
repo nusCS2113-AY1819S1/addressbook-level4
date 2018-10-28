@@ -17,9 +17,10 @@ public class LoginInfo {
 
 
     public LoginInfo(){}
-    public LoginInfo (String userName, String authenticationLevel) {
-        this.userName = new UserName (userName);
-        this.authenticationLevel = new AuthenticationLevel (authenticationLevel);
+
+    public LoginInfo (UserName userName, AuthenticationLevel authenticationLevel) {
+        this.userName = userName;
+        this.authenticationLevel = authenticationLevel;
     }
     public LoginInfo (UserName userName, Password password, AuthenticationLevel authenticationLevel) {
         this.userName = userName;
@@ -27,8 +28,8 @@ public class LoginInfo {
         this.authenticationLevel = authenticationLevel;
     }
 
-    public void setPassword (String password) {
-        this.password = new Password (password);
+    public void setPassword (Password password) {
+        this.password = password;
     }
 
 
@@ -46,16 +47,32 @@ public class LoginInfo {
         return sb.toString();
     }
 
-    public String getUserName () {
+    public String getUserNameString () {
         return userName.toString ();
     }
-
-    public String getPassword () {
+    public String getPasswordString () {
         return password.toString ();
     }
 
-    public String getAuthenticationLevel () {
+    public String getAuthenticationLevelString () {
         return authenticationLevel.toString ();
+    }
+
+    public AuthenticationLevel getAuthenticationLevel () {
+        return authenticationLevel;
+    }
+
+    public UserName getUserName(){
+        return userName;
+    }
+    /**
+     * Returns true is {@code test} is equal to {@code userName}
+     */
+    public boolean isUserNameMatched(UserName test){
+        if (userName.equals (test)){
+            return true;
+        }
+        return false;
     }
 
 }

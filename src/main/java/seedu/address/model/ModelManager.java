@@ -10,9 +10,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
+import seedu.address.commons.core.LoginInfo;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.person.Person;
+import seedu.address.model.user.Password;
+import seedu.address.model.user.UserName;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -20,24 +23,26 @@ import seedu.address.model.person.Person;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedAddressBook versionedAddressBook;
-    private final FilteredList<Person> filteredPersons;
+    protected final VersionedAddressBook versionedAddressBook;
+    protected final FilteredList<Person> filteredPersons;
+    protected LoginInfoManager loginInfoManager;
 
     /**
      * Initializes a DrinkModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs, LoginInfoManager loginInfoManager) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(addressBook, userPrefs, loginInfoManager);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        this.loginInfoManager = loginInfoManager;
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new LoginInfoManager ());
     }
 
     @Override
@@ -145,6 +150,23 @@ public class ModelManager extends ComponentManager implements Model {
         ModelManager other = (ModelManager) obj;
         return versionedAddressBook.equals(other.versionedAddressBook)
                 && filteredPersons.equals(other.filteredPersons);
+    }
+
+    //=========== Login feature command =================================================================================
+
+    @Override
+    public void changePassword (UserName userName, Password newHashedPassword) {
+        loginInfoManager.changePassword (userName, newHashedPassword);
+    }
+
+    @Override
+    public LoginInfo getLoginInfo (UserName userName) {
+        return loginInfoManager.getLoginInfo (userName);
+    }
+
+    @Override
+    public boolean isUserNameExist (UserName userName) {
+        return loginInfoManager.isUserNameExist (userName);
     }
 
 }

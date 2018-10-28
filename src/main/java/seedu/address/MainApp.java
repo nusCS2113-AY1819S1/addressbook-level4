@@ -23,11 +23,12 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.LogoutEvent;
+import seedu.address.commons.events.ui.StopUiEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.controller.LoginController;
-import seedu.address.init.InitAddressBook;
+import seedu.address.init.InventoryListInitializer;
 import seedu.address.logic.Logic;
 import seedu.address.model.LoginInfoManager;
 import seedu.address.model.Model;
@@ -65,7 +66,7 @@ public class MainApp extends Application {
     private LoginInfoManager loginInfoList;
     private LoginController loginController;
     private String loginPathPath;
-    private InitAddressBook initAddressBook;
+    private InventoryListInitializer inventoryListInitializer;
 
     @Override
     public void init() throws Exception {
@@ -83,7 +84,7 @@ public class MainApp extends Application {
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage, loginInfoStorage);
 
-        initAddressBook = new InitAddressBook (config, storage, userPrefs, loginInfoList);
+        inventoryListInitializer = new InventoryListInitializer (config, storage, userPrefs, loginInfoList);
         initLogging(config);
         fxmlLoader = new FXMLLoader();
         initEventsCenter();
@@ -148,6 +149,9 @@ public class MainApp extends Application {
             initLoginInfoManager = new LoginInfoManager ();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Please find ADMIN");
+            initLoginInfoManager = new LoginInfoManager ();
+        } catch (Exception e){
+            e.fillInStackTrace ();
             initLoginInfoManager = new LoginInfoManager ();
         }
 
@@ -262,14 +266,15 @@ public class MainApp extends Application {
      */
     private void closeUiWindow() {
         logger.info("============================ [ Stopping DRINK I/O ] =============================");
-        //EventsCenter.getInstance().post(new StopUiEvent ());
+        EventsCenter.getInstance().post(new StopUiEvent ());
         try {
             storage.saveLoginInfo (loginInfoList);
             storage.saveUserPrefs(userPrefs);
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
-        loginWindow.close ();
+        //EventsCenter.clearSubscribers ();
+        //initEventsCenter();
     }
     @Subscribe
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
@@ -280,6 +285,7 @@ public class MainApp extends Application {
     public void handleLogoutEvent(LogoutEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         Window currentStage = Stage.getWindows().filtered(window -> window.isShowing()).get (0);
+        closeUiWindow();
         currentStage.hide ();
         loginWindow.show ();
     }

@@ -7,16 +7,20 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_OLD_PASSWORD;
 import seedu.address.authentication.PasswordUtils;
 import seedu.address.commons.core.CurrentUser;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.LoginInfoManager;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.user.Password;
+import seedu.address.model.user.UserName;
 
 /**
  * Adds a person to the address book.
  */
-public class ChangePasswordCommand extends UserCommand {
+public class ChangePasswordCommand extends Command {
 
     public static final String COMMAND_WORD = "changePassword";
 
@@ -40,23 +44,24 @@ public class ChangePasswordCommand extends UserCommand {
         this.oldPassword = oldPassword;
     }
     @Override
-    public CommandResult execute(LoginInfoManager loginInfoManager, CommandHistory history) {
-        requireNonNull(loginInfoManager);
+    public CommandResult execute (Model model , CommandHistory history) {
+        requireNonNull(model);
 
-        String username = CurrentUser.getUserName ();
-        String hashedOldPassword = loginInfoManager.getLoginInfo (username).getPassword ();
+        UserName username = CurrentUser.getUserName ();
+        String hashedOldPassword = model.getLoginInfo (username).getPasswordString ();
         boolean isPasswordCorrect = PasswordUtils.verifyUserPassword (oldPassword.toString (), hashedOldPassword);
         if (isPasswordCorrect) {
-            String newHashedPassword = PasswordUtils.generateSecurePassword (newPassword.toString ());
-            loginInfoManager.changePassword (username, newHashedPassword);
+            Password newHashedPassword = getHashedPassword();
+
+            model.changePassword (username, newHashedPassword);
         } else {
             return new CommandResult(MESSAGE_WRONG_PASSWORD);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, newPassword));
     }
 
-    @Override
-    public CommandResult execute (Model model , CommandHistory history) throws CommandException {
-        return null;
+    private Password getHashedPassword(){
+        String hashedPassword = PasswordUtils.generateSecurePassword (newPassword.toString ());
+        return new Password (hashedPassword);
     }
 }

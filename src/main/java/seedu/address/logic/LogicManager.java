@@ -9,12 +9,11 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.user.UserCommand;
 import seedu.address.logic.parser.AddressBookParser;
-import seedu.address.logic.parser.ManagerParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.user.AccountantParser;
 import seedu.address.logic.parser.user.AdminParser;
+import seedu.address.logic.parser.user.ManagerParser;
 import seedu.address.logic.parser.user.StockTakerParser;
 import seedu.address.model.LoginInfoManager;
 import seedu.address.model.Model;
@@ -37,8 +36,7 @@ public class LogicManager extends ComponentManager implements Logic {
     private final StockTakerParser stockTakerParser;
     private final ManagerParser managerParser;
     private final AccountantParser accountantParser;
-    public LogicManager(Model model, LoginInfoManager loginInfoManager) {
-        this.loginInfoManager = loginInfoManager;
+    public LogicManager(Model model) {
         this.model = model;
         history = new CommandHistory();
         addressBookParser = new AddressBookParser();
@@ -63,10 +61,6 @@ public class LogicManager extends ComponentManager implements Logic {
                 command = managerParser.parseCommand (commandText);
             } else {
                 command = addressBookParser.parseCommand (commandText);
-            }
-            if (command instanceof UserCommand) {
-                UserCommand userCommand = (UserCommand) command;
-                return userCommand.execute (loginInfoManager, history);
             }
             return command.execute(model, history);
         } finally {

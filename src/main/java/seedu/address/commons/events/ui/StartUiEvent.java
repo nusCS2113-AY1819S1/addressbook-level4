@@ -6,11 +6,11 @@ import seedu.address.commons.events.BaseEvent;
 /**
  * Indicates a request from login page to main app
  */
-public class ChangeMainStageEvent extends BaseEvent {
+public class StartUiEvent extends BaseEvent {
 
     public final Stage mainStage;
 
-    public ChangeMainStageEvent (Stage stage) {
+    public StartUiEvent (Stage stage) {
         this.mainStage = stage;
     }
     @Override
