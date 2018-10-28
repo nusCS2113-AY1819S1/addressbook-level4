@@ -17,9 +17,9 @@ public class AccountCredential implements Serializable {
         this.hashedPassword = hash(DEFAULT_PASSWORD);
     }
 
-    public AccountCredential(String userName, String Password) {
+    public AccountCredential(String userName, String password) {
         this.userName = userName;
-        this.hashedPassword = hash(Password);
+        this.hashedPassword = hash(password);
     }
 
     public String getUserName() {

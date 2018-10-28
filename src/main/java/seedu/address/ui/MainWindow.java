@@ -167,12 +167,14 @@ public class MainWindow extends UiPart<Stage> {
     private void removeInnerParts() {
         commandBoxPlaceholder.getChildren().clear();
         resultDisplayPlaceholder.getChildren().clear();
+        mePanelPlaceholder.getChildren().clear();
         timetablePlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().clear();
         friendListPanelPlaceholder.getChildren().clear();
         statusbarPlaceholder.getChildren().clear();
         friendText.setText("");
         personText.setText("");
+        meText.setText("");
     }
 
     /**
