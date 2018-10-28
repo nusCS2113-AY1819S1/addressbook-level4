@@ -7,6 +7,7 @@ public class Gradebook {
     private String moduleCode;
     private String gradebookComponentName;
     private String gradebookNewComponentName;
+    private int index;
     private int gradebookMaxMarks;
     private int gradebookWeightage;
 
@@ -37,17 +38,6 @@ public class Gradebook {
     public Gradebook(String moduleCode, String gradebookComponentName) {
         this.moduleCode = moduleCode;
         this.gradebookComponentName = gradebookComponentName;
-    }
-
-    /**
-     This method checks if user inputs empty values for module code or gradebook component name.
-     */
-    public static boolean hasEmptyParams(String moduleCode, String gradebookComponentName) {
-        boolean empty = false;
-        if (moduleCode.equals("") || gradebookComponentName.equals("")) {
-            empty = true;
-        }
-        return empty;
     }
 
     public String getModuleCode() {

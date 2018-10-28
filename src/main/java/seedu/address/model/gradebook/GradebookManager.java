@@ -39,6 +39,10 @@ public class GradebookManager {
         StorageController.storeData();
     }
 
+    public void clearGradebook() {
+        gradebooks.clear();
+    }
+
     /**
      This method adds gradebook component to a module in Trajectory.
      */

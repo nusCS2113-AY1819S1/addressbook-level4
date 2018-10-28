@@ -19,12 +19,12 @@ import seedu.address.model.gradebook.GradebookManager;
  * Parses input arguments and creates a new GradebookEditCommand object
  */
 public class GradebookEditCommandParser {
-    private static final String MESSAGE_MAX_MARKS_ERROR = "Invalid input. \nMaximum marks should only be an integer";
-    private static final String MESSAGE_WEIGHTAGE_ERROR = "Invalid input. \nWeightage should only be an integer";
-    private static final String MESSAGE_MAX_MARKS_INVALID = "Max marks should be within 0-100 range";
-    private static final String MESSAGE_WEIGHTAGE_INVALID = "Weightage should be within 0-100 range";
-    private static final String MESSAGE_ERROR_EMPTY = "Module code and gradebook component name cannot be empty";
-    private static final String MESSAGE_WEIGHTAGE_EXCEED = "The accumulated weightage for module stated has exceeded!";
+    public static final String MESSAGE_ERROR_EMPTY = "Module code and gradebook component name cannot be empty";
+    public static final String MESSAGE_MAX_MARKS_INVALID = "Max marks should be within 0-100 range";
+    public static final String MESSAGE_MAX_MARKS_ERROR = "Invalid input. \nMaximum marks should only be an integer";
+    public static final String MESSAGE_WEIGHTAGE_ERROR = "Invalid input. \nWeightage should only be an integer";
+    public static final String MESSAGE_WEIGHTAGE_INVALID = "Weightage should be within 0-100 range";
+    public static final String MESSAGE_WEIGHTAGE_EXCEED = "The accumulated weightage for module stated has exceeded!";
 
     /**
      * Parses the given {@code String args} of arguments in the context of the GradebookFindCommand
@@ -65,7 +65,7 @@ public class GradebookEditCommandParser {
 
         String moduleCodeArg = argMultimap.getValue(PREFIX_MODULE_CODE).get();
         String gradeComponentNameArg = argMultimap.getValue(PREFIX_GRADEBOOK_ITEM).get();
-        boolean isEmpty = Gradebook.hasEmptyParams(moduleCodeArg, gradeComponentNameArg);
+        boolean isEmpty = gradebookManager.isEmpty(moduleCodeArg, gradeComponentNameArg);
         if (isEmpty) {
             throw new ParseException(MESSAGE_ERROR_EMPTY);
         }

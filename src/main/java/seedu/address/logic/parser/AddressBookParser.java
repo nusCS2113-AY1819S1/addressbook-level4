@@ -7,17 +7,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.ClassAddCommand;
+import seedu.address.logic.commands.ClassAddStudentCommand;
 import seedu.address.logic.commands.ClassDeleteCommand;
+import seedu.address.logic.commands.ClassDeleteStudentCommand;
+import seedu.address.logic.commands.ClassEditCommand;
 import seedu.address.logic.commands.ClassListCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CourseAddCommand;
 import seedu.address.logic.commands.CourseDeleteCommand;
 import seedu.address.logic.commands.CourseListCommand;
+import seedu.address.logic.commands.DebugCommand;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GradebookAddCommand;
 import seedu.address.logic.commands.GradebookDeleteCommand;
 import seedu.address.logic.commands.GradebookEditCommand;
@@ -25,7 +27,7 @@ import seedu.address.logic.commands.GradebookFindCommand;
 import seedu.address.logic.commands.GradebookListCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.ModuleAddCommand;
 import seedu.address.logic.commands.ModuleDeleteCommand;
 import seedu.address.logic.commands.ModuleEditCommand;
@@ -38,8 +40,12 @@ import seedu.address.logic.commands.NoteListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.StudentAddCommand;
+import seedu.address.logic.commands.StudentEditCommand;
+import seedu.address.logic.commands.StudentFindCommand;
+import seedu.address.logic.commands.StudentListCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.user.UserManager;
 
 /**
  * Parses user input.
@@ -72,7 +78,21 @@ public class AddressBookParser {
 
         final String commandWord = matcher.group("commandWords").trim().replaceAll(" +", " ");
         final String arguments = matcher.group("arguments");
+
+        // halts command execution if user is not currently logged in.
+        if (!commandWord.equals(LoginCommand.COMMAND_WORD) && !UserManager.getInstance().isAuthenticated()
+                && !UserManager.getInstance().isDisarmAuthSystem()) {
+            throw new ParseException("You need to be logged in to use Trajectory.");
+        }
+
         switch (commandWord) {
+
+        case "debug": // DEBUG USE  ONLY
+            return new DebugCommand();
+
+        case LoginCommand.COMMAND_WORD:
+            return new LoginCommandParser().parse(arguments);
+
         case GradebookAddCommand.COMMAND_WORD:
             return new GradebookAddCommandParser().parse(arguments);
 
@@ -115,7 +135,7 @@ public class AddressBookParser {
         case NoteExportCommand.COMMAND_WORD:
             return new NoteExportCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
+        case StudentEditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
@@ -127,11 +147,11 @@ public class AddressBookParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
+        case StudentFindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case StudentListCommand.COMMAND_WORD:
+            return new StudentListCommand();
 
         case ModuleAddCommand.COMMAND_WORD:
             return new ModuleAddCommandParser().parse(arguments);
@@ -166,8 +186,17 @@ public class AddressBookParser {
         case ClassListCommand.COMMAND_WORD:
             return new ClassListCommand();
 
+        case ClassEditCommand.COMMAND_WORD:
+            return new ClassEditCommandParser().parse(arguments);
+
         case ClassDeleteCommand.COMMAND_WORD:
             return new ClassDeleteCommandParser().parse(arguments);
+
+        case ClassAddStudentCommand.COMMAND_WORD:
+            return new ClassAddStudentCommandParser().parse(arguments);
+
+        case ClassDeleteStudentCommand.COMMAND_WORD:
+            return new ClassDeleteStudentCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

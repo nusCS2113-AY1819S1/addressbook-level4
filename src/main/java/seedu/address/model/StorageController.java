@@ -11,11 +11,13 @@ import seedu.address.storage.adapter.XmlAdaptedCourse;
 import seedu.address.storage.adapter.XmlAdaptedGradebook;
 import seedu.address.storage.adapter.XmlAdaptedModule;
 import seedu.address.storage.adapter.XmlAdaptedNote;
+import seedu.address.storage.adapter.XmlAdaptedUser;
 import seedu.address.storage.serializable.XmlSerializableClassroomList;
 import seedu.address.storage.serializable.XmlSerializableCourseList;
 import seedu.address.storage.serializable.XmlSerializableGradebookList;
 import seedu.address.storage.serializable.XmlSerializableModuleList;
 import seedu.address.storage.serializable.XmlSerializableNoteList;
+import seedu.address.storage.serializable.XmlSerializableUserList;
 
 /**
  * This class is a storage controller for the other datasets that work alongside the main student list.
@@ -27,12 +29,14 @@ public class StorageController {
     private static final String STORAGE_CLASSES = BASE_DIRECTORY + "classes.xml";
     private static final String STORAGE_GRADEBOOK = BASE_DIRECTORY + "gradebook.xml";
     private static final String STORAGE_NOTES = BASE_DIRECTORY + "notes.xml";
+    private static final String STORAGE_USERS = BASE_DIRECTORY + "users.xml";
 
     private static ArrayList<XmlAdaptedCourse> courseStorage = new ArrayList<XmlAdaptedCourse>();
     private static ArrayList<XmlAdaptedModule> moduleStorage = new ArrayList<>();
     private static ArrayList<XmlAdaptedClassroom> classesStorage = new ArrayList<>();
     private static ArrayList<XmlAdaptedGradebook> gradebookStorage = new ArrayList<>();
     private static ArrayList<XmlAdaptedNote> noteStorage = new ArrayList<>();
+    private static ArrayList<XmlAdaptedUser> userStorage = new ArrayList<>();
 
     /**
      * This method retrieves all datasets saved locally.
@@ -59,6 +63,10 @@ public class StorageController {
             XmlSerializableGradebookList gradebookSerializable = XmlUtil.getDataFromFile(Paths.get(STORAGE_GRADEBOOK),
                     XmlSerializableGradebookList.class);
             gradebookStorage = gradebookSerializable.getGradebookList();
+
+            XmlSerializableUserList ul = XmlUtil
+                    .getDataFromFile(Paths.get(STORAGE_USERS), XmlSerializableUserList.class);
+            userStorage = ul.getList();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -73,12 +81,14 @@ public class StorageController {
         File modules = new File(STORAGE_MODULES);
         File notes = new File(STORAGE_NOTES);
         File gradebook = new File(STORAGE_GRADEBOOK);
+        File users = new File(STORAGE_USERS);
         try {
             classes.createNewFile();
             courses.createNewFile();
             modules.createNewFile();
             notes.createNewFile();
             gradebook.createNewFile();
+            users.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -108,6 +118,11 @@ public class StorageController {
             XmlSerializableGradebookList gradebookList = new XmlSerializableGradebookList();
             gradebookList.setGradebookList(gradebookStorage);
             XmlUtil.saveDataToFile(Paths.get(STORAGE_GRADEBOOK), gradebookList);
+
+            XmlSerializableUserList ul = new XmlSerializableUserList();
+            ul.setUserList(userStorage);
+            XmlUtil.saveDataToFile(Paths.get(STORAGE_USERS), ul);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -151,5 +166,13 @@ public class StorageController {
 
     public static void setNoteStorage(ArrayList<XmlAdaptedNote> noteList) {
         noteStorage = noteList;
+    }
+
+    public static ArrayList<XmlAdaptedUser> getUserStorage() {
+        return userStorage;
+    }
+
+    public static void setUserStorage(ArrayList<XmlAdaptedUser> userStorage) {
+        StorageController.userStorage = userStorage;
     }
 }

@@ -50,6 +50,22 @@ public class HtmlTableProcessor {
         return "<th scope=\"col\">" + item + "</th>\n";
     }
 
+    public static String getH1Representation(String text) {
+        return "<h1>" + text + "</h1>\n";
+    }
+    /**
+     * This method returns HTML in a card form.
+     */
+    public static String renderCard(String text) {
+        return "<div class=\"container-fluid\"><div class=\"row\"> <div class=\"col-xl\">"
+                + "<div class=\"card border-primary mb-3\" style=\"margin-top:30px;\">\n"
+                + "  <div class=\"card-header\">Info</div>\n"
+                + "  <div class=\"card-body\">\n"
+                + "    <h4 class=\"card-title\">" + text + "</h4>\n"
+                + "<p class=\"card-text\">" + "" + "</p>\n" + "  </div>\n"
+                + "</div></div></div></div>";
+    }
+
     public static String getH3Representation(String text) {
         return "<h3>" + text + "</h3>\n";
     }
