@@ -28,6 +28,8 @@ public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
 
     private static final String FXML = "StatsDisplayPanel.fxml";
 
+    private static final String untaggedLabel = "<<untagged>>";
+
     @FXML
     private TabPane tabManager;
 
@@ -71,6 +73,7 @@ public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
         Pair< ObservableList<ChartData>, Double> chartData = extractExpenseChartData(data);
         if (chartData.getKey().size() == 0) {
             Label label = new Label("Nothing has been found! Please input a more appropriate range:)");
+            label.getStyleClass().add("label-bright");
             return new AnchorPane(label);
         }
         return new CategoryBreakdown(chartData.getKey(), "Total Expense for the period",
@@ -84,7 +87,13 @@ public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
         Double totalExpense = 0.0;
         for (CategoryStatistic d : data) {
             if (d.getTotalExpense() > 0.0) {
-                chartDataList.add(new ChartData(d.getTags().toString(), d.getTotalExpense()));
+                String label;
+                if (d.getTags().isEmpty()) {
+                    label = untaggedLabel;
+                } else {
+                    label = d.getTags().toString();
+                }
+                chartDataList.add(new ChartData(label, d.getTotalExpense()));
                 totalExpense += d.getTotalExpense();
             }
         }
@@ -96,6 +105,7 @@ public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
         Pair< ObservableList<ChartData>, Double> chartData = extractIncomeChartData(data);
         if (chartData.getKey().size() == 0) {
             Label label = new Label("Nothing has been found! Please input a more appropriate range:)");
+            label.getStyleClass().add("label-bright");
             return new AnchorPane(label);
         }
         return new CategoryBreakdown(chartData.getKey(), "Total Income for the period",
@@ -108,7 +118,13 @@ public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
         Double totalIncome = 0.0;
         for (CategoryStatistic d : data) {
             if (d.getTotalIncome() > 0.0) {
-                chartDataList.add(new ChartData(d.getTags().toString(), d.getTotalIncome()));
+                String label;
+                if (d.getTags().isEmpty()) {
+                    label = untaggedLabel;
+                } else {
+                    label = d.getTags().toString();
+                }
+                chartDataList.add(new ChartData(label, d.getTotalIncome()));
                 totalIncome += d.getTotalIncome();
             }
         }

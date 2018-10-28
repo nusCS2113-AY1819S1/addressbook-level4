@@ -54,13 +54,14 @@ public class CustomPieChart extends PieChart {
             setVgap(10);
             int index = 0;
             for (ChartData d : pieChartData) {
-                addRow(index, createSymbol(pieChartData.indexOf(d)), createLabel(d.key),
-                        createLabel(convertToMoney(d.value)));
+                Label legendText = createLabel(d.key + "   " + convertToMoney(d.value));
+                legendText.setWrapText(true);
+                addRow(index, createSymbol(pieChartData.indexOf(d)), legendText);
                 index++;
             }
         }
 
-        private Node createLabel(String text) {
+        private Label createLabel(String text) {
             Label label = new Label(text);
             label.getStyleClass().add("default-legend-text");
             return label;

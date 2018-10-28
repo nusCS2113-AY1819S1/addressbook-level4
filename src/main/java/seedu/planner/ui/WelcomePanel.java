@@ -28,6 +28,9 @@ public class WelcomePanel extends UiPart<Region> implements Switchable {
 
     private static final String FXML = "WelcomePanel.fxml";
 
+    private final double prefPieChartWidth = 300.0;
+    private final double prefPieChartHeight = 300.0;
+
     @FXML
     private AnchorPane expenseStats;
 
@@ -65,7 +68,7 @@ public class WelcomePanel extends UiPart<Region> implements Switchable {
         }
         CategoryBreakdown categoryBreakdown = new CategoryBreakdown(chartData.getKey(), "Total Expense for the period",
                 chartData.getValue());
-        categoryBreakdown.setPieChartSize(300.0, 300.0);
+        categoryBreakdown.setPieChartSize(prefPieChartWidth, prefPieChartHeight);
         categoryBreakdown.disableLegend();
         categoryBreakdown.setTitlePosition(Side.BOTTOM);
         return categoryBreakdown.getRoot();
@@ -93,7 +96,7 @@ public class WelcomePanel extends UiPart<Region> implements Switchable {
         }
         CategoryBreakdown categoryBreakdown = new CategoryBreakdown(chartData.getKey(), "Total Income for the period",
                 chartData.getValue());
-        categoryBreakdown.setPieChartSize(300.0, 300.0);
+        categoryBreakdown.setPieChartSize(prefPieChartWidth, prefPieChartHeight);
         categoryBreakdown.disableLegend();
         categoryBreakdown.setTitlePosition(Side.BOTTOM);
         return categoryBreakdown.getRoot();
