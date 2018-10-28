@@ -363,6 +363,9 @@ For this command, 3 classes were created, ChangeStatusDescriptor, ChangeStatusCo
 * The ChangeStatusCommand has the execute method. Using the index, the item to update is obtained from the model class. A copy is created and changes are made to the copy. The copy then replaces the original item.
 
 The updated item list and success message is shown to the user. Updates are committed to the storage.
+
+image::ChangeStatus.png[width="800"]
+
 // end::changestatus[]
 
 // tag::login[]
