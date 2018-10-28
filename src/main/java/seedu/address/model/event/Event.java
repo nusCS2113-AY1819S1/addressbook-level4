@@ -163,6 +163,31 @@ public class Event implements Comparable<Event> {
         return builder.toString();
     }
 
+    /**
+     * Add new name to an event attendees list.
+     *
+     * @param personName The person's name to be removed from the attendees list.
+     * @return An updated event with the person's name in the attendees list.
+     */
+    public Event addPersonToAttendee(String personName) {
+        assert personName != null;
+        Attendees updatedAttendee = attendees.addName(personName);
+        return new Event(eventName, description, date, startTime, endTime, location, updatedAttendee);
+    }
+
+
+    /**
+     * Remove existing name from an event attendees list.
+     *
+     * @param personName The person's name to be removed from the attendees list.
+     * @return An updated event with the person's name removed in the attendees list.
+     */
+    public Event removePersonFromAttendee(String personName) {
+        assert personName != null;
+        Attendees updatedAttendee = attendees.removeName(personName);
+        return new Event(eventName, description, date, startTime, endTime, location, updatedAttendee);
+    }
+
 
     @Override
     public int compareTo(Event other) {
