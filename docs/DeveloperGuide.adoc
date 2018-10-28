@@ -438,17 +438,21 @@ throw a `CommandException` which will notify the user of the issue.
 - The `GENDER_FLAG` and `NATIONALITY_FLAG` only accepts `1`, `0`, `true` and `false` else the command will be rejected and will throw a `CommandException` which will notify the user of the issue.
 ====
 
-INSERT SEQUENCE DIAGRAM HERE
+Step 2: The `DistributeCommand` creates a new `DistributeAlgorithm` Object with an input parameter of a `Distribute` Object which contains the extracted information in Step 1 and a `model` object..
+The `DistributeAlgorithm` constructor will proceed to run and check for non null inputs. Once it is completed, it will set `DistributeUtils` to have the same model as the input model.
+Next, the method will gather a list of all person in the management system and check if the desired number of groups to be create is lesser than the number of people in the management system.
+Once the checks are complete, the `DistributeAlgorithm` method will shuffle all person in it list check the gender and nationality flags. Different combination of flags input results in different distribution algorithm to be run.
 
-Step 2: The `DistributeCommand` creates a new `DistributeAlgorithm` Object and fed in an input parameter of a `Distribute` Object which contains the extracted information in Step 1.
+Step 3: In every algorithm, the allocation process is different. However, the *Distribution process* is the same throughout all algorithm.
 
+The following sequence diagram shows how the distribution process works within `Logic`, `Commons` components:
 
+.Interactions Inside the Logic and Model Component for the `distinto 3 n/CS2113- g/0 nat/0` Command
+image::DistributeSequenceDiagram.png[width="800"]
 
 ==== FlowDiagram Diagrams
 
 ==== UML Diagrams
-
-==== Sequence Diagrams
 
 ==== Algorithm Implementation
 The Distribute Students Equally feature holds 4 different algorithms.
