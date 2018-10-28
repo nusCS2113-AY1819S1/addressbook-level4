@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DEFAULT_SELLING_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DRINK_ITEM;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.drinkcommands.exceptions.DrinkCommandException;
 import seedu.address.model.DrinkModel;
 import seedu.address.model.drink.Drink;
