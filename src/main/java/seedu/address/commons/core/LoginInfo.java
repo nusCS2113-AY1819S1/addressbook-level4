@@ -27,8 +27,8 @@ public class LoginInfo {
         this.authenticationLevel = authenticationLevel;
     }
 
-    public void setPassword (String password) {
-        this.password = new Password (password);
+    public void setPassword (Password password) {
+        this.password = password;
     }
 
 
@@ -49,7 +49,6 @@ public class LoginInfo {
     public String getUserNameString () {
         return userName.toString ();
     }
-
     public String getPasswordString () {
         return password.toString ();
     }
@@ -62,11 +61,14 @@ public class LoginInfo {
         return authenticationLevel;
     }
 
+    public UserName getUserName(){
+        return userName;
+    }
     /**
      * Returns true is {@code test} is equal to {@code userName}
      */
-    public boolean isUserNameMatched(String test){
-        if (userName.toString ().equals (test)){
+    public boolean isUserNameMatched(UserName test){
+        if (userName.equals (test)){
             return true;
         }
         return false;

@@ -69,7 +69,7 @@ public class InventoryListInitializer {
      * init Drink I/O after login
      */
     public void initAfterLogin() {
-        model = initModelManager(storage, userPrefs);
+        model = initModelManager(storage, userPrefs, loginInfoList);
         logic = new LogicManager (model, loginInfoList);
         ui = new UiManager (logic, config, userPrefs);
 
@@ -88,7 +88,7 @@ public class InventoryListInitializer {
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
-    private Model initModelManager(Storage storage, UserPrefs userPrefs) {
+    private Model initModelManager(Storage storage, UserPrefs userPrefs, LoginInfoManager loginInfoManager) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
         try {
@@ -105,20 +105,20 @@ public class InventoryListInitializer {
             initialData = new AddressBook();
         }
         if (CurrentUser.getAuthenticationLevel ().equals (AUTH_ADMIN)) {
-            return new AdminModelManager (initialData , userPrefs);
+            return new AdminModelManager (initialData , userPrefs, loginInfoManager);
         }
         if (CurrentUser.getAuthenticationLevel ().equals (AUTH_MANAGER)) {
-            return new ManagerModelManager (initialData, userPrefs);
+            return new ManagerModelManager (initialData, userPrefs, loginInfoManager);
         }
         if (CurrentUser.getAuthenticationLevel ().equals (AUTH_STOCK_TAKER)) {
-            return new StockTakerModelManager (initialData , userPrefs);
+            return new StockTakerModelManager (initialData , userPrefs, loginInfoManager);
         }
 
         if (CurrentUser.getAuthenticationLevel ().equals (AUTH_ACCOUNTANT)) {
-            return new AccountantModelManager (initialData, userPrefs);
+            return new AccountantModelManager (initialData, userPrefs, loginInfoManager);
         }
 
-        return new ModelManager (initialData, userPrefs);
+        return new ModelManager (initialData, userPrefs, loginInfoManager);
     }
 
 

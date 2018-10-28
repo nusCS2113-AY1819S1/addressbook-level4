@@ -11,8 +11,8 @@ public class CurrentUser {
     private static UserName userName;
     private static AuthenticationLevel authenticationLevel;
 
-    public static String getUserName () {
-        return userName.toString ();
+    public static UserName getUserName () {
+        return userName;
     }
 
     public static String getAuthenticationLevel () {

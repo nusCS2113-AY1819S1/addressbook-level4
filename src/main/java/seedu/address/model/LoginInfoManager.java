@@ -24,9 +24,9 @@ public class LoginInfoManager {
         loginInfoList.add (loginInfo);
     }
 
-    public LoginInfo getLoginInfo(String userName) {
+    public LoginInfo getLoginInfo(UserName userName) {
         for (LoginInfo loginInfo : loginInfoList) {
-            if (loginInfo.getUserNameString ().equals (userName)) {
+            if (loginInfo.isUserNameMatched (userName)) {
                 return loginInfo;
             }
         }
@@ -38,7 +38,7 @@ public class LoginInfoManager {
      * @param userName
      * @return
      */
-    public boolean isUserNameExist(String userName) {
+    public boolean isUserNameExist(UserName userName) {
         LoginInfo user = getLoginInfo (userName);
         if (user == null) {
             return false;
@@ -48,10 +48,20 @@ public class LoginInfoManager {
     /**
      * Change password in the list with {@code userName} and {@code newHashedPassword}
      */
-    public void changePassword(String userName, String newHashedPassword) {
+    public void changePassword(UserName userName, Password newHashedPassword) {
         for (int i = 0; i < loginInfoList.size (); i++) {
             if (loginInfoList.get (i).isUserNameMatched(userName)) {
                 loginInfoList.get (i).setPassword (newHashedPassword);
+            }
+        }
+    }
+    /**
+     * Delete according in the list contains{@code userName}
+     */
+    public void deleteAccount(UserName userName){
+        for (int i = 0; i < loginInfoList.size (); i++) {
+            if (loginInfoList.get (i).isUserNameMatched(userName)) {
+                loginInfoList.remove (i);
             }
         }
     }

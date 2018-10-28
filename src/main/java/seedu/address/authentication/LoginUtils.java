@@ -53,7 +53,7 @@ public class LoginUtils {
      * Check the password and username with logininfo list
      */
     public boolean isPasswordAndUserNameValid () {
-        LoginInfo userInfoInStorage = loginInfoManager.getLoginInfo (username.toString ());
+        LoginInfo userInfoInStorage = loginInfoManager.getLoginInfo (username);
         if (userInfoInStorage == null) {
             return false;
         }

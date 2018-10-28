@@ -21,6 +21,7 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.user.ChangePasswordCommand;
 import seedu.address.logic.commands.user.CreateAccountCommand;
+import seedu.address.logic.commands.user.DeleteAccountCommand;
 import seedu.address.logic.commands.user.LogoutCommand;
 import seedu.address.logic.parser.AddItemCommandParser;
 import seedu.address.logic.parser.DeleteCommandParser;
@@ -66,6 +67,8 @@ public class AdminParser {
         case CreateAccountCommand.COMMAND_WORD:
             return new CreateAccountCommandParser ().parse (arguments);
 
+        case DeleteAccountCommand.COMMAND_WORD:
+            return new DeleteAccountCommandParser ().parse (arguments);
         //existing command
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser ().parse(arguments);
