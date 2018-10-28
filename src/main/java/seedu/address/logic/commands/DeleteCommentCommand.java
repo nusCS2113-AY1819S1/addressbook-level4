@@ -17,6 +17,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.comments.DeleteComment;
 import seedu.address.model.Model;
+import seedu.address.model.event.Comment;
 import seedu.address.model.event.Event;
 
 /**
@@ -68,35 +69,15 @@ public class DeleteCommentCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
-
         Event eventToEdit = filteredEventList.get(index.getZeroBased());
+        DeleteComment comments = new DeleteComment(eventToEdit.getComment().toString());
+        Comment newComments = new Comment(comments.deleteComment(getLine()));
+        editCommentDescriptor.setComment(newComments);
         Event editedEvent = EditCommand.createEditedEvent(eventToEdit, editCommentDescriptor);
 
         model.updateEvent(eventToEdit, editedEvent);
         model.commitEventManager();
-
-        String test =
-                "<span>Comment Section</span>\n"
-                        + "<ol>\n"
-                        + "</ol>";
-        DeleteComment comments = new DeleteComment(test);
-        test = comments.deleteComment(getLine());
-        File savingFile = new File("C:/Users/Gerald/Desktop/test/1.html");
-        FileOutputStream fop = null;
-        try {
-            fop = new FileOutputStream(savingFile);
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        try {
-            fop.write(test.getBytes());
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
         return new CommandResult(String.format(MESSAGE_DELETE_COMMENT, index.getOneBased(), getLine()));
     }
 
