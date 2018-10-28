@@ -18,7 +18,6 @@ public class EventCardHandle extends NodeHandle<Node> {
     private static final String NAME_FIELD_ID = "#name";
     private static final String CONTACT_FIELD_ID = "#contact";
     private static final String VENUE_FIELD_ID = "#venue";
-    private static final String COMMENT_FIELD_ID = "#comment";
     private static final String PHONE_FIELD_ID = "#phone";
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String DATETIME_FIELD_ID = "#dateTime";
@@ -31,7 +30,6 @@ public class EventCardHandle extends NodeHandle<Node> {
     private final Label phoneLabel;
     private final Label emailLabel;
     private final Label datetimeLabel;
-    private final Label commentLabel;
     private final List<Label> tagLabels;
 
     public EventCardHandle(Node cardNode) {
@@ -43,7 +41,6 @@ public class EventCardHandle extends NodeHandle<Node> {
         venueLabel = getChildNode(VENUE_FIELD_ID);
         phoneLabel = getChildNode(PHONE_FIELD_ID);
         emailLabel = getChildNode(EMAIL_FIELD_ID);
-        commentLabel = getChildNode(COMMENT_FIELD_ID);
         datetimeLabel = getChildNode(DATETIME_FIELD_ID);
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
@@ -78,10 +75,6 @@ public class EventCardHandle extends NodeHandle<Node> {
         return emailLabel.getText();
     }
 
-    public String getComment() {
-        return commentLabel.getText();
-    }
-
     public String getDatetime() {
         return datetimeLabel.getText();
     }
@@ -108,7 +101,6 @@ public class EventCardHandle extends NodeHandle<Node> {
                 && getVenue().equals(event.getVenue().value)
                 && getPhone().equals(event.getPhone().value)
                 && getEmail().equals(event.getEmail().value)
-                && getComment().equals(event.getComment().value)
                 && getDatetime().equals(event.getDateTime().toString())
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(event.getTags().stream()
                         .map(tag -> tag.tagName)
