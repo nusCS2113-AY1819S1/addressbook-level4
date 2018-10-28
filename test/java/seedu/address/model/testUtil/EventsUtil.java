@@ -1,4 +1,4 @@
-package seedu.address.testutil;
+package seedu.address.model.testutil;
 
 import guitests.GuiRobot;
 import javafx.application.Platform;

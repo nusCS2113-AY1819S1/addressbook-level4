@@ -14,6 +14,9 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.user.AuthenticationLevel;
+import seedu.address.model.user.Password;
+import seedu.address.model.user.UserName;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -35,24 +38,47 @@ public class ParserUtil {
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
     /**
-     * Trim userName
+     * Parses a {@code String userName} into a {@code UserName}.
      * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code UserName} is invalid.
      */
-    public static String userName(String userName) {
+    public static UserName parseUserName(String userName) throws ParseException {
         requireNonNull(userName);
-        String trimmedName = userName.trim();
-        return trimmedName;
+        String trimmedUserName = userName.trim();
+        if (!UserName.isValidUserName(trimmedUserName)) {
+            throw new ParseException(UserName.MESSAGE_USER_NAME_CONSTRAINTS);
+        }
+        return new UserName (trimmedUserName);
     }
     /**
-     * Trim passWord
+     * Parses a {@code String password} into a {@code Password}.
      * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Password} is invalid.
      */
-    public static String password(String password) {
+    public static Password parsePassword(String password) throws ParseException {
         requireNonNull(password);
         String trimmedPassword = password.trim();
-        return trimmedPassword;
+        if (!Password.isValidPassword (trimmedPassword)) {
+            throw new ParseException(Password.MESSAGE_PASSWORD_CONSTRAINTS);
+        }
+        return new Password (trimmedPassword);
     }
-
+    /**
+     * Parses a {@code String authenticationLevel } into a {@code AuthenticationLevel}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code AuthenticationLevel} is invalid.
+     */
+    public static AuthenticationLevel parseAuthenticationLevel(String authenticationLevel) throws ParseException {
+        requireNonNull(authenticationLevel);
+        String trimmedAuthenticationLevel = authenticationLevel.trim().toUpperCase ();
+        if (!AuthenticationLevel.isAuthenticationLevelValid (trimmedAuthenticationLevel)) {
+            throw new ParseException(AuthenticationLevel.MESSAGE_AUTHENTICATIONLEVEL_CONSTRAINTS);
+        }
+        return new AuthenticationLevel (trimmedAuthenticationLevel);
+    }
     /**
      * Parses a {@code String itemName} into a {@code String itenName}.
      * Leading and trailing whitespaces will be trimmed.

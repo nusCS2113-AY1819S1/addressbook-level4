@@ -29,4 +29,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_OLD_PASSWORD = new Prefix("o/");
     public static final Prefix PREFIX_NEW_PASSWORD = new Prefix("n/");
 
+
 }

@@ -7,14 +7,15 @@ import static java.util.Objects.requireNonNull;
  */
 public class UserName {
     /*
-     * The first character of the username must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * The  username must not have a whitespace include "";
      */
     public static final String USERNAME_VALIDATION_REGEX = "[\\p{Alnum}]*";
+    public static final String MESSAGE_USER_NAME_CONSTRAINTS =
+            "UserName should only contain alphanumeric characters and no space, and it should not be blank";
 
     private String userName;
 
-    public UserName(){ }
+    public UserName(){}
 
     public UserName(String userName) {
         requireNonNull(userName);
@@ -25,7 +26,7 @@ public class UserName {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidUserName(String test) {
-        return test.matches(USERNAME_VALIDATION_REGEX);
+        return test.matches(USERNAME_VALIDATION_REGEX) && !test.isEmpty ();
     }
 
     @Override

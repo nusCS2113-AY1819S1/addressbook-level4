@@ -7,20 +7,20 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents an Drink's total stock (i.e. quantity) in terms of unit.
  * Guarantees: TODO
  */
-public class Stock {
+public class Quantity {
     public static final String MESSAGE_QUANTITY_CONSTRAINTS =
-            "Stock should only contain numbers";
+            "Quantity should only contain numbers";
     public static final String STOCK_VALIDATION_REGEX = "\\d+";
     public static final String UNIT = "carton";
 
     private int value;
 
     /**
-     * Constructs an {@code Stock}.
+     * Constructs a {@code Quantity}.
      *
      * @param quantity A valid stock value expressed as a string.
      */
-    public Stock(String quantity) {
+    public Quantity(String quantity) {
         requireNonNull(quantity);
         checkArgument(isValidStock(quantity), MESSAGE_QUANTITY_CONSTRAINTS);
         this.value = Integer.parseInt(quantity);
@@ -49,8 +49,8 @@ public class Stock {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Stock // instanceof handles nulls
-                && value == (((Stock) other).value)); // state check
+                || (other instanceof Quantity // instanceof handles nulls
+                && value == (((Quantity) other).value)); // state check
     }
 
     @Override
