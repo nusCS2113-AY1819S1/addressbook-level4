@@ -489,7 +489,7 @@ The send email feature is facilitated by `JavaMail` API. It provides a platform-
 
 In the current version, the following operations have been implemented:
 
-* `EmailCommand` -- The command to send an email to single or multiple indexes of persons.
+* `EmailCommand` -- The command to send an email to single and multiple indexes of persons, or to persons belonging to a group.
 * `EmailUtil` -- The helper function that interacts with `JavaMail` for sending email.
 * `EmailLoginCommand` -- The command to enter credentials for the email account to be used for sending emails.
 
@@ -527,6 +527,14 @@ image::EmailCommandMultipleIndexDiagram.png[width="500"]
 
 image::AliasEmailCommandMultipleIndexDiagram.png[width="500"]
 
+* Group Index
+
+image::EmailCommandGroupIndexDiagram.png[width="500"]
+
+* Group Index w/ Command Alias
+
+image::AliasEmailCommandGroupIndexDiagram.png[width="500"]
+
 
 [NOTE]
 If a login credential is not found in the system, the following message will be shown.
@@ -545,7 +553,7 @@ sets a limit to prevent subject title folding.
 
 ==== Sequence Diagrams
 
-image::EmailCommandSequenceDiagram.png[width="800"]
+image::EmailCommandSequenceDiagram.png[width="1200"]
 
 ==== Design Considerations
 
@@ -559,7 +567,7 @@ to from any list (full listing or filtered list) and enter it into the sendmail 
 
 ===== Aspect: How to send email to multiple person
 Since we are able to send email to a single person using their index, we can identify more recipients
-using their associated Index in the listing.
+using their associated `Index` in the listing.
 
 To send an email to multiple persons, we simply identify all their `Index` and enter them into the
 sendmail command separated by a comma. We then add a parser to identify that this is an email command
@@ -568,7 +576,7 @@ for multiple persons and add them all into the recipient list.
 ===== Aspect: How to send email to a group of persons
 
 Similar idea for sending email to single or multiple person(s). Instead of identifying `Index` of persons,
-now we simply identify an entire list of person using their `Group` name, add a parser to identify that
+now we simply identify an entire list of person using their `Group` `Index`, add a parser to identify that
 it is an email command for sending to a group and then add all of the persons into the recipient list.
 
 ===== Aspect: How to allow email login from different mail servers
