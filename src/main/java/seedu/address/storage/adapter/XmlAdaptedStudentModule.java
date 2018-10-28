@@ -26,4 +26,12 @@ public class XmlAdaptedStudentModule {
         this.studentMatricNo = studentMatricNo;
         this.moduleCode = moduleCode;
     }
+
+    public String getStudentMatricNo() {
+        return studentMatricNo;
+    }
+
+    public String getModuleCode() {
+        return moduleCode;
+    }
 }

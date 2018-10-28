@@ -11,6 +11,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.StorageController;
 import seedu.address.model.module.exceptions.DuplicateModuleException;
 import seedu.address.model.person.Person;
+import seedu.address.model.student.StudentManager;
+import seedu.address.storage.Storage;
 import seedu.address.storage.adapter.XmlAdaptedModule;
 import seedu.address.storage.adapter.XmlAdaptedStudentModule;
 
@@ -63,23 +65,37 @@ public class ModuleManager {
         modules.remove(toDelete);
     }
 
-    public void enrolStudentInModule(Person student, Module module) {
+    public void enrolStudentInModule(Module module, Person student) {
         module.addStudent(student);
     }
 
-    public void removeStudentFromModule(Person student, Module module) {
+    public void removeStudentFromModule(Module module, Person student) {
         module.removeStudent(student);
     }
 
     /**
-     * Gets the module list from storage and converts it to a Module array list
+     * Gets the module list from storage and converts it to a Module array list.
+     * Also reads the association data between Student and Module and stores it in-memory in the module.
      */
     private void readModuleList() {
         ArrayList<XmlAdaptedModule> xmlModuleList = StorageController.getModuleStorage();
+        ArrayList<XmlAdaptedStudentModule> xmlAdaptedStudentModuleList = StorageController.getStudentModuleStorage();
         try {
             for (XmlAdaptedModule xmlModule : xmlModuleList) {
-                modules.add(xmlModule.toModelType());
+                Module m = xmlModule.toModelType();
+
+                // Look for associations between this module and any students (i.e. any enrolled students?)
+                for (XmlAdaptedStudentModule xmlStudentModule : xmlAdaptedStudentModuleList) {
+                    if (xmlStudentModule.getModuleCode().equals(m.getModuleCode().moduleCode)) {
+                        Person student = StudentManager.getInstance()
+                                .retrieveStudentByMatricNo(xmlStudentModule.getStudentMatricNo());
+
+                        m.addStudent(student);
+                    }
+                }
             }
+        } catch (NullPointerException npe) {
+            logger.info("Illegal values found when reading enrolled students: " + npe.getMessage());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found when reading module list: " + ive.getMessage());
         }

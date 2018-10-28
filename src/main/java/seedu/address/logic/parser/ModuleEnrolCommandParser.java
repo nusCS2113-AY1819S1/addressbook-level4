@@ -11,6 +11,9 @@ import seedu.address.logic.commands.ModuleEnrolCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleCode;
 
+/**
+ * Parses input arguments and creates a new ModuleEnrolCommand object.
+ */
 public class ModuleEnrolCommandParser implements Parser<ModuleEnrolCommand> {
 
     /**
