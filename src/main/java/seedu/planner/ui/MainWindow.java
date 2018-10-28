@@ -36,16 +36,17 @@ public class MainWindow extends UiPart<Stage> {
     private Model model;
 
     // Independent Ui parts residing in this Ui container
-    private DetailedRecordCard detailedRecordCard;
     private RecordListPanel recordListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
+    // Panels in the main Ui Panel
+    private DetailedRecordCard detailedRecordCard;
     private StatsDisplayPanel statsDisplayPanel;
     private WelcomePanel welcomePanel;
 
     @FXML
-    private StackPane detailedRecordCardPlaceholder;
+    private StackPane mainUiPanelPlaceholder;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -125,13 +126,13 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         statsDisplayPanel = new StatsDisplayPanel();
-        detailedRecordCardPlaceholder.getChildren().add(statsDisplayPanel.getRoot());
+        mainUiPanelPlaceholder.getChildren().add(statsDisplayPanel.getRoot());
 
         detailedRecordCard = new DetailedRecordCard();
-        detailedRecordCardPlaceholder.getChildren().add(detailedRecordCard.getRoot());
+        mainUiPanelPlaceholder.getChildren().add(detailedRecordCard.getRoot());
 
         welcomePanel = new WelcomePanel(model);
-        detailedRecordCardPlaceholder.getChildren().add(welcomePanel.getRoot());
+        mainUiPanelPlaceholder.getChildren().add(welcomePanel.getRoot());
 
         recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
         recordListPanelPlaceholder.getChildren().add(recordListPanel.getRoot());
@@ -200,11 +201,6 @@ public class MainWindow extends UiPart<Stage> {
 
     public RecordListPanel getRecordListPanel() {
         return recordListPanel;
-    }
-
-    // TODO: [UI] Modify this next time
-    void releaseResources() {
-        //browserPanel.freeResources();
     }
 
     @Subscribe

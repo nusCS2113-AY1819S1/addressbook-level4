@@ -24,7 +24,7 @@ import seedu.planner.model.summary.CategoryStatistic;
 /**
  * This UI component is responsible for managing the tabs where the statistics will be displayed
  */
-public class StatsDisplayPanel extends UiPart<Region> {
+public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
 
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
 
@@ -39,12 +39,14 @@ public class StatsDisplayPanel extends UiPart<Region> {
         hide();
     }
 
-    private void show() {
+    @Override
+    public void show() {
         getRoot().toFront();
         getRoot().setVisible(true);
     }
 
-    private void hide() {
+    @Override
+    public void hide() {
         getRoot().toBack();
         getRoot().setVisible(false);
     }

@@ -16,7 +16,7 @@ import seedu.planner.model.record.Record;
 /**
  * This UI component is responsible for displaying detailed information for each record
  */
-public class DetailedRecordCard extends UiPart<Region> {
+public class DetailedRecordCard extends UiPart<Region> implements Switchable {
 
     private static final String FXML = "DetailedRecordCard.fxml";
     private static final String DATE_LABEL = "Date:";
@@ -70,12 +70,14 @@ public class DetailedRecordCard extends UiPart<Region> {
         }
     }
 
-    private void show() {
+    @Override
+    public void show() {
         getRoot().toFront();
         detailedCard.setVisible(true);
     }
 
-    private void hide() {
+    @Override
+    public void hide() {
         getRoot().toBack();
         detailedCard.setVisible(false);
     }

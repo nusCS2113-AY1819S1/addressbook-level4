@@ -24,7 +24,7 @@ import seedu.planner.model.summary.CategoryStatisticsList;
 /**
  * UI component that displays the default welcome page with statistic of the current month and a welcome message
  */
-public class WelcomePanel extends UiPart<Region> {
+public class WelcomePanel extends UiPart<Region> implements Switchable {
 
     private static final Logger logger = LogsCenter.getLogger(WelcomePanel.class);
 
@@ -36,10 +36,27 @@ public class WelcomePanel extends UiPart<Region> {
     @FXML
     private AnchorPane incomeStats;
 
+    @FXML
+    private Label welcomeMessage;
+
     public WelcomePanel(Model model) {
         super(FXML);
+        welcomeMessage.setText("Welcome to FinancialPlanner!\n"
+                + "To start off, press F1 or type help into the command box above for the help windows! Enjoy!");
         populateUi(new CategoryStatisticsList(model.getRecordsThisMonth()).getReadOnlyStatsList());
         registerAsAnEventHandler(this);
+    }
+
+    @Override
+    public void show() {
+        getRoot().toFront();
+        getRoot().setVisible(true);
+    }
+
+    @Override
+    public void hide() {
+        getRoot().toBack();
+        getRoot().setVisible(false);
     }
 
     /** Creates the CategoryBreakdown object with the total expense and tag of each CategoryStatistic */
@@ -50,7 +67,7 @@ public class WelcomePanel extends UiPart<Region> {
         }
         CategoryBreakdown categoryBreakdown = new CategoryBreakdown(chartData.getKey(), "Total Expense for the period",
                 chartData.getValue());
-        categoryBreakdown.setPieChartSize(450.0, 300.0);
+        categoryBreakdown.setPieChartSize(300.0, 300.0);
         categoryBreakdown.disableLegend();
         categoryBreakdown.setTitlePosition(Side.BOTTOM);
         return categoryBreakdown.getRoot();
@@ -78,7 +95,7 @@ public class WelcomePanel extends UiPart<Region> {
         }
         CategoryBreakdown categoryBreakdown = new CategoryBreakdown(chartData.getKey(), "Total Income for the period",
                 chartData.getValue());
-        categoryBreakdown.setPieChartSize(450.0, 300.0);
+        categoryBreakdown.setPieChartSize(300.0, 300.0);
         categoryBreakdown.disableLegend();
         categoryBreakdown.setTitlePosition(Side.BOTTOM);
         return categoryBreakdown.getRoot();

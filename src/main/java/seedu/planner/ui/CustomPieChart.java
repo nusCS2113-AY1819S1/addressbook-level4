@@ -14,7 +14,7 @@ import javafx.scene.shape.Shape;
  */
 public class CustomPieChart extends PieChart {
 
-    public static final String CSS_FILE = "DarkTheme.css";
+    public static final String CSS_FILE = "view/DarkTheme.css";
 
     public CustomPieChart(ObservableList<Data> pieChartData) {
         super(pieChartData);

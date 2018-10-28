@@ -54,7 +54,7 @@
             <StackPane fx:id="recordListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
 
-          <StackPane fx:id="detailedRecordCardPlaceholder" minWidth="800.0">
+          <StackPane fx:id="mainUiPanelPlaceholder" minWidth="800.0">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
