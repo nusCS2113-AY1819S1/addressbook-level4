@@ -233,8 +233,14 @@ public class ModelManager extends ComponentManager implements Model {
         versionedCompanyBook.updateCompany(target, editedCompany);
         indicateCompanyBookChanged();
     }
-
+  
     // =========== Filtered Company List Accessors ===================================================== //
+
+    @Override
+    public void sortCompanies(Prefix prefix) {
+        versionedCompanyBook.sortCompanies(prefix);
+        indicateCompanyBookChanged();
+    }
 
     /**
      * Returns an unmodifiable view of the list of {@code Company} backed by the internal list of
@@ -287,6 +293,25 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(companyName, jobOffer);
         versionedCompanyBook.addJobOfferToCompany(companyName, jobOffer);
         indicateCompanyBookChanged();
+    }
+
+    @Override
+    public boolean hasJobOffer(CompanyName companyName, JobOffer jobOffer) {
+        requireAllNonNull(companyName, jobOffer);
+        return versionedCompanyBook.hasJobOffer(companyName, jobOffer);
+    }
+
+    @Override
+    public void updateJobOfferInSelectedCompany(Company company, JobOffer target, JobOffer editedJobOffer) {
+        requireAllNonNull(company, target, editedJobOffer);
+        versionedCompanyBook.updateJobOfferInCompany(company, target, editedJobOffer);
+        indicateCompanyBookChanged();
+    }
+
+    @Override
+    public void updateJobOfferInCompanyBook(JobOffer target, JobOffer editedJobOffer) {
+        requireAllNonNull(target, editedJobOffer);
+        versionedCompanyBook.updateJobOffer(target, editedJobOffer);
     }
 
     @Override

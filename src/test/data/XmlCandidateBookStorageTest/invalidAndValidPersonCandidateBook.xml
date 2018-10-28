@@ -7,7 +7,7 @@
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
         <job>Waiter</job>
-        <education>O level</education>
+        <education>OLEVELS</education>
         <salary>1000</salary>
     </candidates>
     <!-- Candidate with invalid phone field -->
@@ -17,7 +17,7 @@
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
         <job>Waiter</job>
-        <education>O level</education>
+        <education>OLEVELS</education>
         <salary>1000</salary>
     </candidates>
 </candidatebook>

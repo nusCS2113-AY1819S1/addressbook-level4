@@ -9,24 +9,65 @@ import static seedu.recruit.commons.util.AppUtil.checkArgument;
  */
 
 public class Education {
-    public static final String EDUCATION_VALIDATION_REGEX = "[\\p{ASCII}]+";
 
     public static final String MESSAGE_EDUCATION_CONSTRAINTS =
-            "Education level should not be blank ";
+            "Education level indicated should be one of the following: "
+            + "PRIMARY, "
+            + "OLEVELS, "
+            + "NLEVELS, "
+            + "ALEVELS, "
+            + "DIPLOMA, "
+            + "BACHELOR, "
+            + "MASTER, "
+            + "PhD, "
+            + "OTHERS";
 
     public final String value;
+    public final int order;
 
     public Education(String educationInput) {
         requireNonNull(educationInput);
         checkArgument(isValidEducation(educationInput), MESSAGE_EDUCATION_CONSTRAINTS);
         value = educationInput;
+        order = orderOfEducation(educationInput);
+    }
+
+    /** The enums used to indicate the level of education
+     */
+    public enum EducationLevel {
+        PhD,
+        MASTER,
+        BACHELOR,
+        DIPLOMA,
+        ALEVELS,
+        NLEVELS,
+        OLEVELS,
+        PRIMARY,
+        OTHERS
     }
 
     /**
      * Returns true if a given string is a valid education.
      */
     public static boolean isValidEducation(String test) {
-        return test.matches(EDUCATION_VALIDATION_REGEX);
+        for (EducationLevel e: EducationLevel.values()) {
+            if (test.equals(e.name())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Determines the order of education input
+     * @return order
+     */
+    public int orderOfEducation(String input) {
+        for (EducationLevel e: EducationLevel.values()) {
+            if (input.equals(e.name())) {
+                return e.ordinal();
+            }
+        }
+        return -1;
     }
 
     @Override

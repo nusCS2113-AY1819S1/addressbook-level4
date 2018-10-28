@@ -139,7 +139,7 @@ public class UniqueCandidateList implements Iterable<Candidate> {
         Collections.sort(internalList, new Comparator<Candidate>() {
             @Override
             public int compare(Candidate o1, Candidate o2) {
-                return (o1.getEducation().toString()).compareTo(o2.getEducation().toString());
+                return (o1.getEducation().order - o2.getEducation().order);
             }
         });
     }

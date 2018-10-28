@@ -45,6 +45,11 @@ public interface Model {
     void addCandidate(Candidate candidate);
 
     /**
+     * Sorts the candidates in CandidateBook
+     */
+    void sortCandidates(Prefix prefix);
+
+    /**
      * Replaces the given candidate {@code target} with {@code editedCandidate}.
      * {@code target} must exist in the CandidateBook.
      * The candidate identity of {@code editedCandidate} must not be the same as another existing candidate in the
@@ -113,6 +118,11 @@ public interface Model {
     void addCompany(Company company);
 
     /**
+     * Sorts the list of companies in CompanyBook
+     */
+    void sortCompanies(Prefix prefix);
+
+    /**
      * Replaces the given company {@code target} with {@code editedCompany}.
      * {@code target} must exist in the CompanyBook.
      * The company identity of {@code editedCompany} must not be the same as another existing company in the
@@ -138,11 +148,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredCompanyList(Predicate<Company> predicate);
-
-    /**
-     * Sorts the candidates in CandidateBook
-     */
-    void sortCandidates(Prefix prefix);
 
     /**
      * Returns true if the model has previous CompanyBook states to restore.
@@ -177,6 +182,27 @@ public interface Model {
      * @code jobOffer must not already exist inside the job list of companyName
      */
     void addJobOffer(CompanyName companyName, JobOffer jobOffer);
+
+    /**
+     * Returns true if a company has a job offer with the same identity as {@code jobOffer} exists in the CompanyBook.
+     */
+    boolean hasJobOffer(CompanyName companyName, JobOffer jobOffer);
+
+    /**
+     * Replaces the given job offer {@code target} in the list with {@code editedJobOffer}.
+     * {@code target} must exist in the company book.
+     * The job offer identity of {@code editedJobOffer} must not be the same as another existing job offer in the
+     * company book.
+     */
+    void updateJobOfferInCompanyBook(JobOffer target, JobOffer editedJobOffer);
+
+    /**
+     * Replaces the given job offer {@code target} in the list with {@code editedJobOffer}.
+     * {@code target} must exist in the company's job list {@code company}.
+     * The job offer identity of {@code editedJobOffer} must not be the same as another existing job offer in the
+     * same company{@code company}.
+     */
+    void updateJobOfferInSelectedCompany(Company company, JobOffer target, JobOffer editedJobOffer);
 
     /**
      * Deletes the given job offer.
