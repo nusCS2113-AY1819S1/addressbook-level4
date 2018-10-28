@@ -258,11 +258,12 @@ Examples:
 * `export_excel 31-3-1999`
 * `export_excel 31-3-1999 31-03-2019`
 
-=== Showing a summary table of all financial activity in a given time
+=== Showing a summary table of all financial activity in a given time: `summary`
 
-Shows a table which contains a summary for each day or month within a given time specified by the user. +
-A summary is an item that contains information on the date or month that is represented, the total expense calculated, the total income calculated and
-the net money flow calculated. +
+Shows a summary table listing each day or month within a given time specified by the user. +
+A `summary` is an item that contains information on the *date or month that is represented*, the *total expense calculated*, the *total income calculated* and
+the *net money flow calculated.* +
+
 The summary command supports both listing by date and by month. +
 Format: +
 
@@ -281,7 +282,7 @@ yyyy represents the year in its numerical form.
 
 Examples:
 
-* 'summary date d/1-1-2018 12-12-2018`
+* `summary date d/1-1-2018 12-12-2018`
 * `summary month d/apr-2018 sep-2018`
 * `summary month d/APR-2018 SeP-2018`
 
