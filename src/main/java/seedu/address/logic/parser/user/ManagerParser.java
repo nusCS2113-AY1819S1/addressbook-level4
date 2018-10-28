@@ -12,6 +12,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.drinkcommands.user.ChangePasswordCommand;
 import seedu.address.logic.drinkcommands.user.CreateAccountCommand;
+import seedu.address.logic.drinkparser.AddDrinkCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.user.ChangePasswordCommandParser;
 import seedu.address.logic.parser.user.CreateAccountCommandParser;
@@ -45,7 +46,7 @@ public class ManagerParser {
 
         switch (commandWord) {
         case AddItemCommand.COMMAND_WORD:
-            return new AddItemCommandParser ().parse (arguments);
+            return new AddDrinkCommandParser().parse (arguments);
 
         case CreateAccountCommand.COMMAND_WORD:
             return new CreateAccountCommandParser ().parse (arguments);

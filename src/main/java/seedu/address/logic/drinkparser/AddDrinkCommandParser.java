@@ -1,18 +1,17 @@
 package seedu.address.logic.drinkparser;
 
+
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DEFAULT_SELLING_PRICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DRINK_ITEM;
+import static seedu.address.logic.drinkparser.CliSyntax.PREFIX_DEFAULT_SELLING_PRICE;
+import static seedu.address.logic.drinkparser.CliSyntax.PREFIX_DRINK_NAME;
 
 import java.util.stream.Stream;
 
 import seedu.address.logic.drinkcommands.AddDrinkCommand;
-import seedu.address.logic.drinkcommands.AddDrinkCommand;
 import seedu.address.logic.drinkparser.exceptions.DrinkParseException;
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.drink.Drink;
 
 /**
  * Parses input arguments and creates a new AddDrinkCommand object
@@ -27,18 +26,20 @@ public class AddDrinkCommandParser implements DrinkParser<AddDrinkCommand> {
      */
     public AddDrinkCommand parse(String args) throws DrinkParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DRINK_ITEM, PREFIX_DEFAULT_SELLING_PRICE);
+                ArgumentTokenizer.tokenize(args, PREFIX_DRINK_NAME, PREFIX_DEFAULT_SELLING_PRICE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_DRINK_ITEM, PREFIX_DEFAULT_SELLING_PRICE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_DRINK_NAME, PREFIX_DEFAULT_SELLING_PRICE)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new DrinkParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddItemCommand.MESSAGE_USAGE));
+            throw new DrinkParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddDrinkCommand.MESSAGE_USAGE));
         }
 
-        String drinkName = ParserUtil.parseItemName(argMultimap.getValue(PREFIX_DRINK_ITEM).get());
-        String defaultSellingPrice = ParserUtil.parseDefaultSellingPrice(
+        String drinkName = DrinkParserUtil.parseItemName(argMultimap.getValue(PREFIX_DRINK_NAME).get());
+        String defaultSellingPrice = DrinkParserUtil.parseDefaultSellingPrice(
                 argMultimap.getValue(PREFIX_DEFAULT_SELLING_PRICE).get());
 
-        return new AddItemCommand(drinkName, defaultSellingPrice);
+        Drink drink = new Drink(drinkName, )
+
+        return new AddDrinkCommand(drinkName, defaultSellingPrice);
     }
 
     /**

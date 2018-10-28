@@ -8,25 +8,25 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.SellCommand;
+import seedu.address.logic.drinkcommands.SellDrinkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new AddCommand object
  */
-public class SellCommandParser implements Parser<SellCommand> {
+public class SellCommandParser implements Parser<SellDrinkCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public SellCommand parse(String args) throws ParseException {
+    public SellDrinkCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DRINK_ITEM, PREFIX_DATE, PREFIX_QUANTITY, PREFIX_PRICE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DRINK_ITEM, PREFIX_DATE, PREFIX_QUANTITY, PREFIX_PRICE)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SellCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SellDrinkCommand.MESSAGE_USAGE));
         }
 
         String drinkItem = ParserUtil.parseItemName (argMultimap.getValue (PREFIX_DRINK_ITEM).get());
@@ -40,7 +40,7 @@ public class SellCommandParser implements Parser<SellCommand> {
         //        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         //        Person person = new Person(name, phone, email, address, tagList);
 
-        return new SellCommand(drinkItem, date, quantitySold, totalRevenue);
+        return new SellDrinkCommand(drinkItem, date, quantitySold, totalRevenue);
     }
 
     /**
