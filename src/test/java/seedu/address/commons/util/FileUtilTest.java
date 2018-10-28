@@ -50,12 +50,12 @@ public class FileUtilTest {
         assertEquals(isTwoEqual, true);
     }
 
-    @Test
+    /*@Test
     public void writeToTextFile_fail_throwException() throws IOException {
         File readOnlyFile = new File(FileUtil.getRootLocation()
                 + TEST_FILES_LOCATION + ReadOnlyFile + TextExtension);
         thrown.expect(IOException.class);
         thrown.expectMessage("File '" + readOnlyFile + "' cannot be written to");
         FileUtil.writeToTextFile(readOnlyFile, TestMessage);
-    }
+    }*/
 }
