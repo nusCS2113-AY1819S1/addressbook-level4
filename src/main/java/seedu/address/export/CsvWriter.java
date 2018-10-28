@@ -32,8 +32,27 @@ public class CsvWriter {
     private static final int INDEX_PERSON_EMAIL = 3;
 
     private final String[] header = { "Name", "Phone", "Address", "Email" };
-    private final ObservableList<Person> persons;
+    private final ObservableList<Person> listOfPersons;
     private final Path outputFilepath = Paths.get("data" , "pineapple.csv");
+    private final Person person;
+
+    public CsvWriter(Person person) {
+        requireAllNonNull(person);
+
+        // TODO: Refactor this to a exportFileWriter interface
+        if (!FileUtil.isFileExists(outputFilepath)) {
+            try {
+                FileUtil.createFile(outputFilepath);
+            } catch (IOException e) {
+                logger.severe("Error creating output file: " + outputFilepath.toString());
+            }
+        } else {
+            logger.fine("Initializing with output file: " + outputFilepath.toString());
+        }
+
+        this.person = person;
+        this.listOfPersons = null;
+    }
 
     public CsvWriter(ObservableList<Person> persons) {
         requireAllNonNull(persons);
@@ -49,7 +68,8 @@ public class CsvWriter {
             logger.fine("Initializing with output file: " + outputFilepath.toString());
         }
 
-        this.persons = persons;
+        this.listOfPersons = persons;
+        this.person = null;
     }
 
     /**
@@ -64,18 +84,40 @@ public class CsvWriter {
 
             writer.writeNext(header);
 
-            List<String[]> data = new ArrayList<>();
-            persons.forEach(person -> {
-                String[] personDetails = convertToStringArray(person);
-                data.add(personDetails);
-            });
+            // TODO: think of a better way to minimize LOC
+            if (listOfPersons != null) {
+                writeMultiplePersons(writer);
+            } else if (person != null) {
+                writeSinglePerson(writer);
+            }
 
-            writer.writeAll(data);
             writer.close();
 
         } catch (IOException e) {
             throw new IOException();
         }
+    }
+
+    /**
+     * Writes the {@code listOfPersons} to the csv file.
+     */
+    private void writeMultiplePersons(CSVWriter writer) {
+        List<String[]> data = new ArrayList<>();
+        listOfPersons.forEach(person -> {
+            String[] personDetails = convertToStringArray(person);
+            data.add(personDetails);
+        });
+
+        writer.writeAll(data);
+    }
+
+    /**
+     * Writes the {@code person} to the csv file.
+     */
+    private void writeSinglePerson(CSVWriter writer) {
+        String[] personDetails = convertToStringArray(person);
+
+        writer.writeNext(personDetails);
     }
 
     // TODO: Implement a writeToCsv() with a specific filepath.

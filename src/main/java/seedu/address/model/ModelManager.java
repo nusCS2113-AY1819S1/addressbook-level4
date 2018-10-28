@@ -183,6 +183,12 @@ public class ModelManager extends ComponentManager implements Model {
         csvWriter.write();
     }
 
+    @Override
+    public void exportPerson(Person person) throws IOException {
+        CsvWriter csvWriter = new CsvWriter(person);
+        csvWriter.write();
+    }
+
     //=========== Todo ========================================================================================
     @Override
     public boolean hasTodo(Todo todo) {
