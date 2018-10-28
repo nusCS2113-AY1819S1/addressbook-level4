@@ -237,8 +237,8 @@ Examples:
 
 [NOTE]
 ====
-1.  The csv/vcf file will be located in `/data/pineapple.csv`.
-2.  This command overwrites the previous `/data/pineapple.csv`.
+1.  The csv/vcf file will be located in `/data/addressbook.csv`.
+2.  This command overwrites the previous `/data/addressbook.csv`.
 ====
 
 === Exporting contacts : `export` [coming in v1.4]
