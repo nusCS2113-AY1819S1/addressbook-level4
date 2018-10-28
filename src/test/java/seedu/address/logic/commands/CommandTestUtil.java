@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
@@ -24,7 +25,8 @@ public class CommandTestUtil {
     public static final String VALID_DEADLINE_1ST_JAN = "1/1/2018";
     public static final String VALID_DEADLINE_31ST_MARCH = "31/3/2018";
     public static final String VALID_DEADLINE_12TH_MAY = "12/5/2018";
-    public static final String VALID_MODULECODE_1 = "CS2113";
+    public static final String VALID_MODULE_CODE_CS2113 = "CS2113";
+    public static final String VALID_MODULE_CODE_CG2271 = "CG2271";
     public static final String VALID_TITLE_1 = "Complete CS2113 Homework";
     public static final String VALID_TITLE_2 = "Start coding test units";
     public static final String VALID_TITLE_3 = "Prepare OP2";
@@ -40,6 +42,8 @@ public class CommandTestUtil {
     public static final String DEADLINE_DESC_1ST_JAN = " " + PREFIX_DEADLINE + VALID_DEADLINE_1ST_JAN;
     public static final String DEADLINE_DESC_31ST_MARCH = " " + PREFIX_DEADLINE + VALID_DEADLINE_31ST_MARCH;
     public static final String DEADLINE_DESC_12TH_MAY = " " + PREFIX_DEADLINE + VALID_DEADLINE_12TH_MAY;
+    public static final String MODULE_CODE_CS2113_DESC = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_CS2113;
+    public static final String MODULE_CODE_CG2271_DESC = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_CG2271;
     public static final String TITLE_DESC_1 = " " + PREFIX_TITLE + VALID_TITLE_1;
     public static final String TITLE_DESC_2 = " " + PREFIX_TITLE + VALID_TITLE_2;
     public static final String TITLE_DESC_3 = " " + PREFIX_TITLE + VALID_TITLE_3;

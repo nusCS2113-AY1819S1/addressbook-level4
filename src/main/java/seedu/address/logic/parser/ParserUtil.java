@@ -109,6 +109,8 @@ public class ParserUtil {
 
     /**
      * Leading and trailing whitespaces will be trimmed from {@code String hours}
+     * If hours is not an integer or is too big to be an integer,
+     * @throws ParseException
      */
     public static int parseHours(String hours) throws ParseException {
         requireNonNull(hours);
@@ -117,5 +119,14 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_HOURS);
         }
         return Integer.parseInt(trimmedHours);
+    }
+
+    /**
+     * Leading and trailing whitespaces will be trimmed from {@code String moduleCode}
+     */
+    public static String parseModuleCode(String moduleCode) {
+        requireNonNull(moduleCode);
+        String trimmedModuleCode = moduleCode.trim();
+        return trimmedModuleCode;
     }
 }

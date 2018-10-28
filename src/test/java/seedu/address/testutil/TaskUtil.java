@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
@@ -25,6 +26,7 @@ public class TaskUtil {
      */
     public static String getTaskDetails(Task task) {
         StringBuilder sb = new StringBuilder();
+        sb.append(PREFIX_MODULE_CODE + task.getModuleCode() + " ");
         sb.append(PREFIX_TITLE + task.getTitle() + " ");
         sb.append(PREFIX_DESCRIPTION + task.getDescription() + " ");
         sb.append(PREFIX_PRIORITY + task.getPriorityLevel().priorityLevel + " ");

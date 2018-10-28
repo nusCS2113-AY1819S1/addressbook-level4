@@ -6,7 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_31ST_M
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_3;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULECODE_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2113;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_LEVEL_HIGH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_LEVEL_LOW;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_LEVEL_MEDIUM;
@@ -49,13 +49,13 @@ public class TypicalTasks {
 
     // Manually added - Task's details found in {@code CommandTestUtil}
     public static final Task CS2113_TASK_1 = new TaskBuilder().withDeadline(VALID_DEADLINE_31ST_MARCH)
-        .withModuleCode(VALID_MODULECODE_1).withTitle(VALID_TITLE_1).withDescription(VALID_DESCRIPTION_1)
+        .withModuleCode(VALID_MODULE_CODE_CS2113).withTitle(VALID_TITLE_1).withDescription(VALID_DESCRIPTION_1)
         .withPriority(VALID_PRIORITY_LEVEL_LOW).build();
     public static final Task CS2113_TASK_2 = new TaskBuilder().withDeadline(VALID_DEADLINE_1ST_JAN)
-        .withModuleCode(VALID_MODULECODE_1).withTitle(VALID_TITLE_2).withDescription(VALID_DESCRIPTION_2)
+        .withModuleCode(VALID_MODULE_CODE_CS2113).withTitle(VALID_TITLE_2).withDescription(VALID_DESCRIPTION_2)
         .withPriority(VALID_PRIORITY_LEVEL_HIGH).build();
     public static final Task CS2113_TASK_3 = new TaskBuilder().withDeadline(VALID_DEADLINE_12TH_MAY)
-        .withModuleCode(VALID_MODULECODE_1).withTitle(VALID_TITLE_3).withDescription(VALID_DESCRIPTION_3)
+        .withModuleCode(VALID_MODULE_CODE_CS2113).withTitle(VALID_TITLE_3).withDescription(VALID_DESCRIPTION_3)
         .withPriority(VALID_PRIORITY_LEVEL_MEDIUM).build();
     // public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

@@ -8,6 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.HOURS_DESC_2;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_HOURS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_HOURS_OVERFLOW;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PRIORITY_LEVEL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.MODULE_CODE_CG2271_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.MODULE_CODE_CS2113_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.PRIORITY_LEVEL_DESC_HIGH;
@@ -17,10 +19,12 @@ import static seedu.address.logic.commands.CommandTestUtil.TITLE_DESC_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_1_HOUR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_1ST_JAN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2113;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_LEVEL_LOW;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TITLE_1;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -53,29 +57,34 @@ public class AddTaskCommandParserTest {
         ParserWithDate parser = new ParserWithDate();
         Deadline selectedDeadline = new Deadline(VALID_DEADLINE_1ST_JAN);
         Task expectedTask = new TaskBuilder(CS2113_TASK_2).withDeadline(VALID_DEADLINE_1ST_JAN).build();
-        AddTaskCommand commandWithDate = new AddTaskCommand(expectedTask);
-
-
+        //AddTaskCommand commandWithDate = new AddTaskCommand(expectedTask);
         // whitespace only preamble
-        assertParseSuccessWithDate(parser, selectedDeadline, PREAMBLE_WHITESPACE + TITLE_DESC_2
-                + DESCRIPTION_DESC_2 + PRIORITY_LEVEL_DESC_HIGH + HOURS_DESC_1, new AddTaskCommand(expectedTask));
+        assertParseSuccessWithDate(parser, selectedDeadline, PREAMBLE_WHITESPACE
+                        + MODULE_CODE_CS2113_DESC + TITLE_DESC_2 + DESCRIPTION_DESC_2
+                        + PRIORITY_LEVEL_DESC_HIGH + HOURS_DESC_1,
+                new AddTaskCommand(expectedTask));
+
+        // multiple module codes - last module code accepted
+        assertParseSuccessWithDate(parser, selectedDeadline, MODULE_CODE_CG2271_DESC + MODULE_CODE_CS2113_DESC
+                + TITLE_DESC_2 + DESCRIPTION_DESC_2 + PRIORITY_LEVEL_DESC_HIGH + HOURS_DESC_1,
+                new AddTaskCommand(expectedTask));
 
         // multiple titles - last title accepted
-        assertParseSuccessWithDate(parser, selectedDeadline, TITLE_DESC_1 + TITLE_DESC_2
+        assertParseSuccessWithDate(parser, selectedDeadline, MODULE_CODE_CS2113_DESC + TITLE_DESC_1 + TITLE_DESC_2
                 + DESCRIPTION_DESC_2 + PRIORITY_LEVEL_DESC_HIGH + HOURS_DESC_1, new AddTaskCommand(expectedTask));
 
         // multiple descriptions - last description accepted
-        assertParseSuccessWithDate(parser, selectedDeadline, TITLE_DESC_2
+        assertParseSuccessWithDate(parser, selectedDeadline, MODULE_CODE_CS2113_DESC + TITLE_DESC_2
                 + DESCRIPTION_DESC_1 + DESCRIPTION_DESC_2 + PRIORITY_LEVEL_DESC_HIGH + HOURS_DESC_1,
                 new AddTaskCommand(expectedTask));
 
         // multiple priorities - last priority accepted
-        assertParseSuccessWithDate(parser, selectedDeadline, TITLE_DESC_2
+        assertParseSuccessWithDate(parser, selectedDeadline, MODULE_CODE_CS2113_DESC + TITLE_DESC_2
                 + DESCRIPTION_DESC_2 + PRIORITY_LEVEL_DESC_LOW + PRIORITY_LEVEL_DESC_HIGH + HOURS_DESC_1,
                 new AddTaskCommand(expectedTask));
 
         // multiple hours - last hour accepted
-        assertParseSuccessWithDate(parser, selectedDeadline, TITLE_DESC_2
+        assertParseSuccessWithDate(parser, selectedDeadline, MODULE_CODE_CS2113_DESC + TITLE_DESC_2
                         + DESCRIPTION_DESC_2 + PRIORITY_LEVEL_DESC_HIGH + HOURS_DESC_2 + HOURS_DESC_1,
                 new AddTaskCommand(expectedTask));
     }
@@ -84,37 +93,41 @@ public class AddTaskCommandParserTest {
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTaskCommand.MESSAGE_USAGE);
 
+        // missing module code prefix
+        assertParseFailure(parser, VALID_MODULE_CODE_CS2113 + VALID_TITLE_1 + DESCRIPTION_DESC_1
+                + PRIORITY_LEVEL_DESC_LOW + HOURS_DESC_1, expectedMessage);
+
         // missing title prefix
-        assertParseFailure(parser, VALID_TITLE_1 + DESCRIPTION_DESC_1 + PRIORITY_LEVEL_DESC_LOW
-                + HOURS_DESC_1, expectedMessage);
+        assertParseFailure(parser, MODULE_CODE_CS2113_DESC + VALID_TITLE_1 + DESCRIPTION_DESC_1
+                + PRIORITY_LEVEL_DESC_LOW + HOURS_DESC_1, expectedMessage);
 
         // missing description prefix
-        assertParseFailure(parser, TITLE_DESC_1 + VALID_DESCRIPTION_1 + PRIORITY_LEVEL_DESC_LOW
-                + HOURS_DESC_1, expectedMessage);
+        assertParseFailure(parser, MODULE_CODE_CS2113_DESC + TITLE_DESC_1 + VALID_DESCRIPTION_1
+                + PRIORITY_LEVEL_DESC_LOW + HOURS_DESC_1, expectedMessage);
 
         // missing priority prefix
-        assertParseFailure(parser, TITLE_DESC_1 + DESCRIPTION_DESC_1 + VALID_PRIORITY_LEVEL_LOW
-                + HOURS_DESC_1, expectedMessage);
+        assertParseFailure(parser, MODULE_CODE_CS2113_DESC + TITLE_DESC_1 + DESCRIPTION_DESC_1
+                + VALID_PRIORITY_LEVEL_LOW + HOURS_DESC_1, expectedMessage);
 
         // missing hour prefix
-        assertParseFailure(parser, TITLE_DESC_1 + DESCRIPTION_DESC_1 + PRIORITY_LEVEL_DESC_LOW
-                + VALID_1_HOUR, expectedMessage);
+        assertParseFailure(parser, MODULE_CODE_CS2113_DESC + TITLE_DESC_1 + DESCRIPTION_DESC_1
+                + PRIORITY_LEVEL_DESC_LOW + VALID_1_HOUR, expectedMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // invalid Priority Level
-        assertParseFailure(parser, TITLE_DESC_1 + DESCRIPTION_DESC_1 + INVALID_PRIORITY_LEVEL_DESC + HOURS_DESC_1,
-                PriorityLevel.MESSAGE_PRIORITY_CONSTRAINTS);
+        assertParseFailure(parser, MODULE_CODE_CS2113_DESC + TITLE_DESC_1 + DESCRIPTION_DESC_1
+                + INVALID_PRIORITY_LEVEL_DESC + HOURS_DESC_1, PriorityLevel.MESSAGE_PRIORITY_CONSTRAINTS);
         // invalid Hours
-        assertParseFailure(parser, TITLE_DESC_1 + DESCRIPTION_DESC_1 + PRIORITY_LEVEL_DESC_LOW + INVALID_HOURS_DESC,
-                MESSAGE_INVALID_HOURS);
+        assertParseFailure(parser, MODULE_CODE_CS2113_DESC + TITLE_DESC_1 + DESCRIPTION_DESC_1
+                        + PRIORITY_LEVEL_DESC_LOW + INVALID_HOURS_DESC, MESSAGE_INVALID_HOURS);
         // hours > INT_MAX
-        assertParseFailure(parser, TITLE_DESC_1 + DESCRIPTION_DESC_1 + PRIORITY_LEVEL_DESC_LOW + INVALID_HOURS_OVERFLOW,
-                MESSAGE_INVALID_HOURS);
+        assertParseFailure(parser, MODULE_CODE_CS2113_DESC + TITLE_DESC_1 + DESCRIPTION_DESC_1
+                        + PRIORITY_LEVEL_DESC_LOW + INVALID_HOURS_OVERFLOW, MESSAGE_INVALID_HOURS);
         // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + TITLE_DESC_1 + DESCRIPTION_DESC_1
-                + PRIORITY_LEVEL_DESC_LOW,
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + MODULE_CODE_CS2113_DESC + TITLE_DESC_1
+                        + DESCRIPTION_DESC_1 + PRIORITY_LEVEL_DESC_LOW,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTaskCommand.MESSAGE_USAGE));
 
     }
@@ -135,10 +148,10 @@ public class AddTaskCommandParserTest {
         public Command parse(String userInput, Deadline date) throws ParseException {
             logger.info(userInput);
             ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(userInput, PREFIX_TITLE, PREFIX_DESCRIPTION, PREFIX_PRIORITY,
-                            PREFIX_HOURS);
-            if (!arePrefixesPresent(argMultimap, PREFIX_TITLE, PREFIX_DESCRIPTION, PREFIX_PRIORITY, PREFIX_HOURS)
-                    || !argMultimap.getPreamble().isEmpty()) {
+                    ArgumentTokenizer.tokenize(userInput, PREFIX_MODULE_CODE, PREFIX_TITLE, PREFIX_DESCRIPTION,
+                            PREFIX_PRIORITY, PREFIX_HOURS);
+            if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE, PREFIX_TITLE, PREFIX_DESCRIPTION,
+                    PREFIX_PRIORITY, PREFIX_HOURS) || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTaskCommand.MESSAGE_USAGE));
             }
 
@@ -146,7 +159,8 @@ public class AddTaskCommandParserTest {
             String description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
             PriorityLevel priority = ParserUtil.parsePriorityLevel(argMultimap.getValue(PREFIX_PRIORITY).get());
             int expectedNumOfHours = ParserUtil.parseHours(argMultimap.getValue(PREFIX_HOURS).get());
-            Task task = new Task(title, description, priority, expectedNumOfHours);
+            String moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
+            Task task = new Task(moduleCode, title, description, priority, expectedNumOfHours);
             task.setDeadline(date);
             return new AddTaskCommand(task);
         }

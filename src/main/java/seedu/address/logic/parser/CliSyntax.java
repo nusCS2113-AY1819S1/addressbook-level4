@@ -18,6 +18,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_PRIORITY = new Prefix("p/");
     public static final Prefix PREFIX_HOURS = new Prefix("h/");
     public static final Prefix PREFIX_MILESTONE = new Prefix("m/");
+    public static final Prefix PREFIX_MODULE_CODE = new Prefix("c/");
     public static final Prefix PREFIX_RANK = new Prefix("r/");
     public static final Prefix PREFIX_SORT = new Prefix("s/");
     public static final Prefix PREFIX_DEADLINE = new Prefix("de/");

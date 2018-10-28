@@ -40,7 +40,9 @@ public class Task {
         this.isCompleted = isCompleted;
     }
 
-    public Task(String title, String description, PriorityLevel priorityLevel, int expectedNumOfHours) {
+    public Task(String moduleCode, String title, String description,
+                PriorityLevel priorityLevel, int expectedNumOfHours) {
+        this.moduleCode = moduleCode;
         this.title = title;
         this.description = description;
         this.priorityLevel = priorityLevel;
@@ -86,6 +88,7 @@ public class Task {
     public int getPriorityLevelInt() {
         return priorityLevel.priorityLevelInt;
     }
+    //@@author
 
     public int getExpectedNumOfHours() {
         return expectedNumOfHours;
@@ -133,6 +136,7 @@ public class Task {
         deferredTask.deadline = deadline;
         return deferredTask;
     }
+    //@@author
     /**
      * Returns true if both tasks have the same data fields.
      * This defines a stronger notion of equality between two tasks.
@@ -179,7 +183,9 @@ public class Task {
         builder.append(" completed? ");
         builder.append(isCompleted);
         builder.append(" completed hours? ");
-        builder.append(completedNumOfHours);*/
+        builder.append(completedNumOfHours);
+        builder.append(" Module code: ");
+        builder.append(moduleCode);*/
         return builder.toString();
     }
 }

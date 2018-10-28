@@ -23,17 +23,17 @@ public class SortTaskList {
             public int compare(Task self, Task other) {
                 switch(method) {
                     case ("modules"): {
-                        return self.getModuleCode().compareTo(other.getModuleCode());
+                        return self.getModuleCode().toLowerCase().compareTo(other.getModuleCode().toLowerCase());
                     }
                     case ("deadlines"): {
-                        return self.getDeadline().toString().compareTo(other.getDeadline().toString());
+                        return self.getDeadline().toString().toLowerCase().compareTo(other.getDeadline()
+                                .toString().toLowerCase());
                     }
                     case ("priority"): {
-                        return Integer.valueOf(self.getPriorityLevelInt())
-                                .compareTo(Integer.valueOf(other.getPriorityLevelInt()));
+                        return self.getPriorityLevelInt() - other.getPriorityLevelInt();
                     }
                     case ("title"): {
-                        return self.getTitle().compareTo(other.getTitle());
+                        return self.getTitle().toLowerCase().compareTo(other.getTitle().toLowerCase());
                     }
                     default:
                         return 0;
