@@ -48,7 +48,7 @@ public class SampleDataTest extends EventManagerSystemTest {
     }
 
     @Test
-    public void addressBook_dataFileDoesNotExist_loadSampleData() {
+    public void eventManager_dataFileDoesNotExist_loadSampleData() {
         Event[] expectedList = SampleDataUtil.getSampleEvents();
         ObservableList<Event> sortList = FXCollections.observableArrayList();
         sortList.addAll(expectedList);

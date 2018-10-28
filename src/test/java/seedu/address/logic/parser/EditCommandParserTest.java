@@ -177,7 +177,7 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        //TODO for attendance
+        // TODO for attendance
         userInput = targetIndex.getOneBased() + ATTENDEE_DESC_TED;
         descriptor = new EditEventDescriptorBuilder().withAttendees(VALID_ATTENDEE_TED).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
