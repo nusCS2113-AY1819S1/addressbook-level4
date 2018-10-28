@@ -53,6 +53,11 @@ public class Batch {
         batchQuantity.setValue(value);
     }
 
+    public int compareDateTo(Batch otherBatch) {
+        return this.batchDate.compareTo(otherBatch.getBatchDate());
+    }
+
+
     /**
      * Returns true if both batches have the same identity and data fields.
      * This defines a stronger notion of equality between two batches.
