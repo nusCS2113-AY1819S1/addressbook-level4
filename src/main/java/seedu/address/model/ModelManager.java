@@ -111,12 +111,15 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(predicate);
         filteredItems.setPredicate(predicate);
     }
+
+    //@@author gaoqikai
     @Override
+    //update the stock list that is filtered by tag
     public void updateFilteredItemListByTag(Predicate<Item> predicate) {
         requireNonNull(predicate);
         filteredItems.setPredicate(predicate);
-
     }
+    //@@author
 
     //=========== Undo/Redo =================================================================================
 
