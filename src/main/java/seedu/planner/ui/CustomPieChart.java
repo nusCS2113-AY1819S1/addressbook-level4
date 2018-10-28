@@ -54,16 +54,25 @@ public class CustomPieChart extends PieChart {
             setVgap(10);
             int index = 0;
             for (ChartData d : pieChartData) {
-                addRow(index, createSymbol(pieChartData.indexOf(d)), new Label(d.key),
-                        new Label(convertToMoney(d.value)));
+                addRow(index, createSymbol(pieChartData.indexOf(d)), createLabel(d.key),
+                        createLabel(convertToMoney(d.value)));
                 index++;
             }
+        }
+
+        private Node createLabel(String text) {
+            Label label = new Label(text);
+            label.getStyleClass().add("default-legend-text");
+            return label;
         }
 
         private String convertToMoney(Double data) {
             return String.format("$%.2f", data);
         }
 
+        /**
+         * Creates the symbol to be placed at the side of the label
+         */
         private Node createSymbol(int index) {
             Shape symbol = new Rectangle(10, 10, 10, 10);
             symbol.getStyleClass().add(String.format("default-color%d-chart-pie-legend", index % 8));
