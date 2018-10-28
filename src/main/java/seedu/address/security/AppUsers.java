@@ -13,7 +13,7 @@ public class AppUsers {
 
     public AppUsers() {
         this.accountCredentials = new ArrayList<>();
-        //accountCredentials.add(new AccountCredential("test", "test"));
+        accountCredentials.add(new AccountCredential());
     }
 
     public ArrayList<AccountCredential> getAccountCredentials() {
