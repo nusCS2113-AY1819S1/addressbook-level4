@@ -112,17 +112,16 @@ public class IcsUtil {
             LocalTime timeSlotEndTime = DateTimeConversionUtil.getInstance().timeStringToLocalTime(timeEndStr);
             DayOfWeek timeSlotDay = DateTimeConversionUtil.getInstance().dateStringToDayOfWeek(dateStartStr);
 
-            logger.info("TimeSlot read:" + timeSlotStartTime + " to " + timeSlotEndTime + " on " + timeSlotDay + ": " + summaryStr);
-
             //Add timeslot to timetable
             //TODO: Add (summary/label) to timetable object.
             TimeSlot timeSlot = new TimeSlot(timeSlotDay, timeSlotStartTime, timeSlotEndTime);
             timeTable.addTimeSlot(timeSlot);
-
         }
         if (timeTable.isEmpty()) {
+            logger.info("No timeslots found in file.");
             return Optional.empty();
         } else {
+            logger.info("Some (>1) timeslots have been read from file.");
             return Optional.of(timeTable);
         }
     }
