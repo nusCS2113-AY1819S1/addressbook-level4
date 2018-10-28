@@ -110,15 +110,15 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears current positio
 * `edit all/ t/friends k/1.0` +
 Replaces all listed persons' tag to be `friends` and edits their KPI to be `1.0`. +
 
-=== Locating persons by attribute: `find`
+=== Finding persons by attribute: `find`
 
 Finds persons whose names contain any of the given keywords. +
 Format: `find PREFIX KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The search is not case insensitive.
+* The search is not case sensitive.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* You can search by name, email, address, key performance index, position, phone number and tags
 * Partial words or words with typos will be matched too eg. 'Hangs' will be matched to 'Hans'
 * Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
@@ -131,6 +131,21 @@ Returns `john` and `John Doe`
 Returns any person having names `Betsy`, `Tim`, or `John`
 * `find e/example@domain.com` +
 Returns any person having the email `example@domain.com`
+* `find p/912311231` +
+Returns any person having the phone number `912311231`
+* `find r/secretary` +
+Returns any person who holds a `secretary` position
+* `find a/jurong west ave` +
+Returns any person who lives in `jurong west ave`
+* `find k/4.0` +
+Returns any person who has a KPI of `4.0`
+* `find d/John is forgetful` +
+Returns any person who has a note containing `John is forgetful`
+* `find t/friends` +
+Returns any person who is tagged as `friends`
+* `find n/John Betsy r/secretary a/jurong west ave` +
+Returns any person having names `John` and `Betsy` who is a `secretary` and lives in `jurong west ave`
+
 
 
 === Deleting a person : `delete`
@@ -259,11 +274,6 @@ Format: `clear`
 Exits the program. +
 Format: `exit`
 
-=== Saving the data
-
-Address book data are saved in the hard disk automatically after any command that changes the data. +
-There is no need to save manually.
-
 // tag::dataencryption[]
 === Encrypting data files : `password`
 
@@ -310,13 +320,19 @@ Note: +
 * If there are multiple predicted values, they will be listed down. +
 * If no argument flags are specified, the default value predicted is based on the command's default argument. +
 
+=== Saving the data
+
+Address book data are saved in the hard disk automatically after any command that changes the data. +
+There is no need to save manually.
+
+
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
 
 *Q*: What happens if I forget my password? +
-*A*: Your Address book will not be recoverable. Just delete XML.decrypted
+*A*: Your Address book will not be recoverable. You will have to delete addressbook.xml.encrypted and choose a backup to restore from.
 
 == Command Summary
 
@@ -327,7 +343,7 @@ e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 123466
 e.g. `delete 3`
 * *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
+* *Find* : `find n/ KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
 * *List* : `list`
 * *Help* : `help`
