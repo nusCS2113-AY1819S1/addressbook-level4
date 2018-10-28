@@ -1,9 +1,6 @@
 package seedu.address.logic.commands;
 
-import java.util.function.Predicate;
-
 import seedu.address.logic.parser.FindCommandParser;
-import seedu.address.model.searchhistory.SearchHistoryManager;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -21,10 +18,4 @@ public abstract class FindCommand extends Command {
             + "Example3: " + COMMAND_WORD + " " + FindCommandParser.TAG_OPTION_STRING + " President";
 
     protected boolean isExcludeMode = false;
-    protected Predicate getMostUpdatedPredicate(SearchHistoryManager manager, Predicate predicate) {
-        if (isExcludeMode) {
-            predicate = predicate.negate();
-        }
-        return manager.executeNewSearch(predicate);
-    }
 }

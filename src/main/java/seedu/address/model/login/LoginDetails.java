@@ -11,14 +11,16 @@ import java.util.Objects;
 public class LoginDetails {
     private final UserId userId;
     private final UserPassword userPassword;
+    private final UserRole userRole;
 
     /**
      * Every field must be present and not null.
      */
-    public LoginDetails(UserId userId, UserPassword userPassword) {
+    public LoginDetails(UserId userId, UserPassword userPassword, UserRole userRole) {
         requireAllNonNull(userId, userPassword);
         this.userId = userId;
         this.userPassword = userPassword;
+        this.userRole = userRole;
     }
 
     public UserId getUserId() {
@@ -27,6 +29,10 @@ public class LoginDetails {
 
     public UserPassword getUserPassword() {
         return userPassword;
+    }
+
+    public UserRole getUserRole() {
+        return userRole;
     }
 
     /**
@@ -61,14 +67,15 @@ public class LoginDetails {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(userId, userPassword);
+        return Objects.hash(userId, userPassword, userRole);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getUserId())
-                .append(getUserPassword());
+                .append(getUserPassword())
+                .append(getUserRole());
         return builder.toString();
     }
 }

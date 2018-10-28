@@ -31,15 +31,15 @@ public class LoginBook implements ReadOnlyLoginBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the account list with {@code loginDetails}.
+     * {@code loginDetails} must not contain duplicate login details.
      */
     public void setLoginDetails(List<LoginDetails> accounts) {
         this.accounts.setLoginDetails(accounts);
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code LoginBook} with {@code newData}.
      */
     public void resetData(ReadOnlyLoginBook newData) {
         requireNonNull(newData);

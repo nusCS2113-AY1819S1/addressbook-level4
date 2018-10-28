@@ -17,7 +17,6 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
-import seedu.address.model.LoginBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 
@@ -28,7 +27,7 @@ import seedu.address.model.login.LoginDetails;
 
 import seedu.address.model.person.Person;
 
-import seedu.address.model.searchhistory.SearchHistoryManager;
+import seedu.address.model.searchhistory.exceptions.EmptyHistoryException;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -39,12 +38,6 @@ public class AddCommandTest {
     public ExpectedException thrown = ExpectedException.none();
 
     private CommandHistory commandHistory = new CommandHistory();
-
-    @Test
-    public void constructor_nullAccount_throwsNullPointerException() {
-        thrown.expect(NullPointerException.class);
-        new CreateAccountCommand(null, null);
-    }
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
@@ -227,50 +220,18 @@ public class AddCommandTest {
         }
 
         @Override
-        public SearchHistoryManager getSearchHistoryManager() {
+        public void revertLastSearch() throws EmptyHistoryException {
             throw new AssertionError("This method should not be called.");
         }
-    }
 
-    /**
-     * A Model stub that contains a single account.
-     */
-    private class ModelStubWithAccount extends ModelStub {
-        private final LoginDetails loginDetails;
-
-        ModelStubWithAccount(LoginDetails loginDetails) {
-            requireNonNull(loginDetails);
-            this.loginDetails = loginDetails;
+        @Override
+        public void executeSearch(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasAccount(LoginDetails loginDetails) {
-            requireNonNull(loginDetails);
-            return this.loginDetails.isSameAccount(loginDetails);
-        }
-    }
-
-    /**
-     * A Model stub that always accept the account being added.
-     */
-    private class ModelStubAcceptingAccountAdded extends ModelStub {
-        final ArrayList<LoginDetails> accountsAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasAccount(LoginDetails loginDetails) {
-            requireNonNull(loginDetails);
-            return accountsAdded.stream().anyMatch(loginDetails::isSameAccount);
-        }
-
-        @Override
-        public void createAccount(LoginDetails loginDetails) {
-            requireNonNull(loginDetails);
-            accountsAdded.add(loginDetails);
-        }
-
-        @Override
-        public ReadOnlyLoginBook getLoginBook() {
-            return new LoginBook();
+        public void resetSearchHistoryToInitialState() {
+            throw new AssertionError("This method should not be called.");
         }
     }
 

@@ -4,10 +4,12 @@
     <accounts>
         <userId>A1234567M</userId>
         <userPassword>zaq1xsw2cde3</userPassword>
+        <userRole>member</userRole>
     </accounts>
     <!-- account with invalid user ID field -->
     <accounts>
         <userId>AA234567M</userId>
         <userPassword>zaq1xsw2cde3</userPassword>
+        <userRole>member</userRole>
     </accounts>
 </loginbook>

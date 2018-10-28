@@ -12,6 +12,7 @@ import seedu.address.model.ReadOnlyLoginBook;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.login.UserId;
 import seedu.address.model.login.UserPassword;
+import seedu.address.model.login.UserRole;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -51,10 +52,10 @@ public class SampleDataUtil {
         };
     }
 
-    public static LoginDetails[] getSampleLoginDetail() {
+    public static LoginDetails[] getSampleLoginDetails() {
         return new LoginDetails[] {
-            new LoginDetails(new UserId("A1234567M"), new UserPassword("zaq1xsw2cde3")),
-            new LoginDetails(new UserId("A1234568M"), new UserPassword("1qaz2wsx3edc"))
+            new LoginDetails(new UserId("A1234567M"), new UserPassword("zaq1xsw2cde3"), new UserRole("treasurer")),
+            new LoginDetails(new UserId("A1234568M"), new UserPassword("1qaz2wsx3edc"), new UserRole("president"))
         };
     }
 
@@ -68,7 +69,7 @@ public class SampleDataUtil {
 
     public static ReadOnlyLoginBook getSampleLoginBook() {
         LoginBook sampleLb = new LoginBook();
-        for (LoginDetails sampleAccount : getSampleLoginDetail()) {
+        for (LoginDetails sampleAccount : getSampleLoginDetails()) {
             sampleLb.createAccount(sampleAccount);
         }
         return sampleLb;

@@ -43,6 +43,11 @@ public class TypicalPersons {
             .withEmail("lydia@example.com").withAddress("little tokyo").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street").build();
+    public static final Person KHOR = new PersonBuilder().withName("Khor Amy").withPhone("81234567")
+            .withEmail("ren@example.com").withAddress("kampong glam").withTags(VALID_TAG_FRIEND).build();
+    public static final Person SEGWIT = new PersonBuilder().withName("Segwit Choo").withPhone("99939995")
+            .withEmail("geegee@example.com").withAddress("homeless").withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
@@ -51,11 +56,6 @@ public class TypicalPersons {
             .withEmail("hans@example.com").withAddress("chicago ave").build();
     public static final Person JOHN = new PersonBuilder().withName("John Choo").withPhone("84823231")
             .withEmail("hong@example.com").withAddress("china town").build();
-    public static final Person KHOR = new PersonBuilder().withName("Khor Amy").withPhone("81234567")
-            .withEmail("ren@example.com").withAddress("kampong glam").withTags(VALID_TAG_FRIEND).build();
-    public static final Person SEGWIT = new PersonBuilder().withName("Segwit Choo").withPhone("99939995")
-            .withEmail("geegee@example.com").withAddress("homeless").withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-            .build();
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
