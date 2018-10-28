@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.net.URL;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -9,6 +10,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
+import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.NewInfoMessageEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
@@ -54,6 +56,8 @@ public class BrowserPanel extends UiPart<Region> {
      * Loads a default HTML file with a background that matches the general theme.
      */
     private void loadDefaultPage() {
+        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
+        loadPage(defaultPage.toExternalForm());
         browser.getEngine().loadContent(HtmlTableProcessor
                 .renderCard("Welcome to Trajectory. Please login to use the platform."));
     }
