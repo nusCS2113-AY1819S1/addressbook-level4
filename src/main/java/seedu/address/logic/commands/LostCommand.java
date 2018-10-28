@@ -66,10 +66,10 @@ public class LostCommand extends Command{
         return new CommandResult(String.format(MESSAGE_LOST_ITEM_SUCCESS, lostItem));
     }
 
-/**
- * Creates and returns a {@code Item} with the details of {@code itemToLost}
- * edited with {@code LostDescriptor}.
- */
+    /**
+     * Creates and returns a {@code Item} with the details of {@code itemToLost}
+     * edited with {@code LostDescriptor}.
+     */
     private static Item createLostItem(Item itemToLost, LostDescriptor lostDescriptor) {
         assert itemToLost != null;
 
@@ -92,7 +92,7 @@ public class LostCommand extends Command{
 
         public LostDescriptor(LostDescriptor toCopy) {
             setLostQuantity(toCopy.lostQuantity);
-           // setInitialQuantity(toCopy.initialQuantity);
+            // setInitialQuantity(toCopy.initialQuantity);
             //setFinalQuantity(toCopy.lostQuantity,toCopy.initialQuantity);
 
 

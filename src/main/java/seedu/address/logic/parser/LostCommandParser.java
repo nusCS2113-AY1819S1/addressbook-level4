@@ -22,11 +22,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class LostCommandParser implements Parser<LostCommand> {
 
-/**
- * Parses the given {@code String} of arguments in the context of the LostCommand
- * and returns an LostCommand object for execution.
- * @throws ParseException if the user input does not conform the expected format
- */
+    /**
+     * Parses the given {@code String} of arguments in the context of the LostCommand
+     * and returns an LostCommand object for execution.
+     *
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public LostCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
@@ -48,5 +49,5 @@ public class LostCommandParser implements Parser<LostCommand> {
 
         return new LostCommand(targetIndex, lostDescriptor);
     }
-
 }
+
