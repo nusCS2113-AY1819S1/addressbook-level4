@@ -21,6 +21,7 @@ public class Drink {
     private Price costPrice;
     private Price retailPrice;
     private Stock stock;
+    private UniqueBatchList uniqueBatchList;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -63,6 +64,8 @@ public class Drink {
     public void setStock(Stock stock) {
         this.stock = stock;
     }
+
+    public UniqueBatchList getUniqueBatchList() { return uniqueBatchList; }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
