@@ -1,7 +1,5 @@
 package seedu.address.logic.drinkparser;
 
-import seedu.address.logic.parser.Prefix;
-
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
  */
