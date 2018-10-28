@@ -15,7 +15,7 @@ import seedu.recruit.model.Model;
 /**
  * Sorts all the candidates in the CandidateBook
  */
-public class SortCommand extends Command {
+public class SortCandidateCommand extends Command {
 
     public static final String COMMAND_WORD = "sortc";
 
@@ -27,12 +27,13 @@ public class SortCommand extends Command {
             + ", Email " + PREFIX_EMAIL
             + ", Job " + PREFIX_JOB
             + ", Education " + PREFIX_EDUCATION
-            + ", Salary " + PREFIX_SALARY + "\n"
+            + ", Salary " + PREFIX_SALARY
+            + " or sort the current order in reverse with /r \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME;
 
     private static Prefix prefixToSort;
 
-    public SortCommand(Prefix prefix) {
+    public SortCandidateCommand(Prefix prefix) {
         this.prefixToSort = prefix;
     }
 
@@ -40,6 +41,7 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.sortCandidates(prefixToSort);
+        model.commitCandidateBook();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
