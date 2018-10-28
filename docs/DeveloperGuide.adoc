@@ -358,15 +358,25 @@ Step 4. The `ReadOnlyStockList` is saved as an xml file.
 === Change Status command
 For this command, 3 classes were created, ChangeStatusDescriptor, ChangeStatusCommandParser and ChangeStatusCommand.
 
-* The ChangeStatusDescriptor consists of the quantity, originalStatus, and updatedStatus.
-* The ChangeStatusCommandParser takes in the input string from the user and parses it into the index and the ChangeStatusDescriptor.
-* The ChangeStatusCommand has the execute method. Using the index, the item to update is obtained from the model class. A copy is created and changes are made to the copy. The copy then replaces the original item.
+* The ChangeStatusDescriptor class consists of the itemName, quantity, originalStatus, and updatedStatus.
+* The ChangeStatusCommandParser class takes in the input string from the user, parses it into the ChangeStatusDescriptor, and returns a new ChangeStatusCommand.
+* The ChangeStatusCommand class has the execute method. Using the itemName, the item to update is obtained from the model class. A copy is created and changes are made to the copy. The copy then replaces the original item.
 
 The updated item list and success message is shown to the user. Updates are committed to the storage.
+
+The following sequence diagram shows how the changeStatus operation works:
 
 image::ChangeStatus.png[width="800"]
 
 // end::changestatus[]
+
+// tag::status[]
+=== Status command
+For this command, 2 classes were created, SimpleItem and StatusCommand.
+* The SimpleItem class is a simplified version of the item class, consisting of only the itemName and quantity. These aer the only two fields relevant for the loan list.
+* For the StatusCommand class, it sorts the items into the 3 categories, Ready, OnLoan and Faulty. The items are then shown to the user, sorted by their status.
+
+image::Status.png[width="800"]
 
 // tag::login[]
 === Login feature
