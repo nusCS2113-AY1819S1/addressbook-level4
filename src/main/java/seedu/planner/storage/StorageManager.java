@@ -79,7 +79,8 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner, Path recordListFilePath) throws IOException {
+    public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner, Path recordListFilePath)
+            throws IOException {
         logger.fine("Attempting to write to data file: " + recordListFilePath);
         financialPlannerStorage.saveFinancialPlanner(financialPlanner, recordListFilePath);
     }
