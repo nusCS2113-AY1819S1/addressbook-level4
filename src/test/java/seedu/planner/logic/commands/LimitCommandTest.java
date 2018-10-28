@@ -120,8 +120,12 @@ public class LimitCommandTest {
         }
 
         @Override
-
         public ObservableList<Summary> getSummaryList(Date date1, Date date2) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Record> getRecordsThisMonth() {
             throw new AssertionError("This method should not be called.");
         }
 
