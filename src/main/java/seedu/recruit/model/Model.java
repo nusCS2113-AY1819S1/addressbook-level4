@@ -57,7 +57,7 @@ public interface Model {
      */
     void updateCandidate(Candidate target, Candidate editedCandidate);
 
-    /** Returns an unmodifiable view of the filtered candidate list */
+    /** Returns an unmodifiable view of the filtered candidate list. */
     ObservableList<Candidate> getFilteredCandidateList();
 
     /**

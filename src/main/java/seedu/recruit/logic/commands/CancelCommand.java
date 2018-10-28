@@ -1,10 +1,11 @@
 package seedu.recruit.logic.commands;
 
+import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.events.ui.ShowLastViewedBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
-import seedu.recruit.ui.MainWindow;
 
 /**
  * Cancels any intermediate commands
@@ -23,10 +24,10 @@ public class CancelCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        if (ShortlistCommand.isProcessing()) {
-            ShortlistCommand.isDoneProcessing();
-            this.cancelledCommand = ShortlistCommand.COMMAND_WORD;
-            MainWindow.switchToLastViewedBook();
+        if (ShortlistCandidateInitializationCommand.isShortlisting()) {
+            ShortlistCandidateInitializationCommand.isDoneShortlisting();
+            this.cancelledCommand = ShortlistCandidateInitializationCommand.COMMAND_WORD;
+            EventsCenter.getInstance().post(new ShowLastViewedBookRequestEvent());
         }
         LogicManager.setLogicState("primary");
         return new CommandResult(String.format(MESSAGE_SUCCESS, cancelledCommand));

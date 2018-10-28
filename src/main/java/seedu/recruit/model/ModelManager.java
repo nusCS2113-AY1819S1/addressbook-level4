@@ -129,7 +129,8 @@ public class ModelManager extends ComponentManager implements Model {
         indicateCandidateBookChanged();
     }
 
-    //=========== Filtered Candidate List Accessors =============================================================
+
+    // =========== Filtered Candidate List Accessors =================================================== //
 
     /**
      * Returns an unmodifiable view of the list of {@code Candidate} backed by the internal list of
@@ -146,7 +147,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredCandidates.setPredicate(predicate);
     }
 
-    //=========== Undo/Redo =================================================================================
+    // =========== Undo/Redo Candidate Book ============================================================ //
 
     @Override
     public boolean canUndoCandidateBook() {
@@ -176,7 +177,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
 
-    // ================================== CompanyBook functions ===================================== //
+    // ================================== CompanyBook functions ======================================== //
 
     @Override
     public void resetCompanyData(ReadOnlyCompanyBook newData) {
@@ -233,13 +234,13 @@ public class ModelManager extends ComponentManager implements Model {
         indicateCompanyBookChanged();
     }
 
+    // =========== Filtered Company List Accessors ===================================================== //
+
     @Override
     public void sortCompanies(Prefix prefix) {
         versionedCompanyBook.sortCompanies(prefix);
         indicateCompanyBookChanged();
     }
-
-    //=========== Filtered Company List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Company} backed by the internal list of
@@ -256,7 +257,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredCompanies.setPredicate(predicate);
     }
 
-    //=========== Undo/Redo =================================================================================
+    // ========== Undo/Redo Company Book =============================================================== //
 
     @Override
     public boolean canUndoCompanyBook() {
@@ -285,7 +286,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedCompanyBook.commit();
     }
 
-    // ================================== Job Offer functions ===================================== //
+    // ================================== Job Offer functions ========================================== //
 
     @Override
     public void addJobOffer(CompanyName companyName, JobOffer jobOffer) {
@@ -335,7 +336,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredJobs.setPredicate(predicate);
     }
 
-    // ================================== Email Command functions ===================================== //
+    // ================================== Email Command functions ====================================== //
 
     public EmailUtil getEmailUtil() {
         return emailUtil;
@@ -460,3 +461,5 @@ public class ModelManager extends ComponentManager implements Model {
         return output.toString();
     }
 }
+
+
