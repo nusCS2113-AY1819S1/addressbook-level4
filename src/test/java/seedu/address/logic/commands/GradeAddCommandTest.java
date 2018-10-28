@@ -21,7 +21,7 @@ public class GradeAddCommandTest {
         final String moduleCode = "PC1222";
         final String gradebookComponentName = "Finals";
         final String adminNo = "A0177898T";
-        final int studentMarks = 20;
+        final float studentMarks = 20;
 
         assertCommandSuccess(new GradeAddCommand(new Grades(
                         moduleCode,

@@ -18,12 +18,12 @@ import seedu.address.model.grades.GradesManager;
  * Parses input arguments and creates a new GradeAddCommand object
  */
 public class GradeAddCommandParser implements Parser<GradeAddCommand> {
-    private static final String MESSAGE_MARKS_ERROR = "Invalid input. \nMaximum marks should only be an integer";
+    public static final String MESSAGE_MISSING_PARAMS = "All parameters must be filled";
+    public static final String MESSAGE_MARKS_ERROR = "Invalid input. \nMaximum marks should only be an integer";
+    public static final String MESSAGE_GRADEBOOK_INVALID = "Gradebook component does not exist";
     private static final String MESSAGE_MARKS_INVALID = "Marks should be within 0-100 range";
     private static final String MESSAGE_MARKS_EXCEED = "Marks assigned is above maximum marks.";
     private static final String MESSAGE_DUPLICATE_STUDENT = "Student has already been assigned a grade";
-    private static final String MESSAGE_GRADEBOOK_INVALID = "Gradebook component does not exist";
-    private static final String MESSAGE_MISSING_PARAMS = "All parameters must be filled";
     /**
      * Parses the given {@code String args} of arguments in the context of the GradeAddCommand
      * and returns a GradeAddCommand object for execution.

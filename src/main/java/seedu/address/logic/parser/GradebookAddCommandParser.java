@@ -74,7 +74,7 @@ public class GradebookAddCommandParser implements Parser<GradebookAddCommand> {
         if (!isWeightageValid) {
             throw new ParseException(MESSAGE_WEIGHTAGE_INVALID);
         }
-        boolean hasWeightageExceed = gradebookManager.hasWeightageExceed(moduleCodeArg, gradeComponentWeightageArg);
+        boolean hasWeightageExceed = gradebookManager.hasAddWeightageExceed(moduleCodeArg, gradeComponentWeightageArg);
         if (hasWeightageExceed) {
             throw new ParseException(MESSAGE_WEIGHTAGE_EXCEED);
         }

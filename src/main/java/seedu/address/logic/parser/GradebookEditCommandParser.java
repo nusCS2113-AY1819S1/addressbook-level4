@@ -25,6 +25,7 @@ public class GradebookEditCommandParser {
     public static final String MESSAGE_WEIGHTAGE_ERROR = "Invalid input. \nWeightage should only be an integer";
     public static final String MESSAGE_WEIGHTAGE_INVALID = "Weightage should be within 0-100 range";
     public static final String MESSAGE_WEIGHTAGE_EXCEED = "The accumulated weightage for module stated has exceeded!";
+    private static final String MESSAGE_DUPLICATE = "Gradebook component already exist in Trajectory";
 
     /**
      * Parses the given {@code String args} of arguments in the context of the GradebookFindCommand
@@ -77,9 +78,13 @@ public class GradebookEditCommandParser {
         if (!isWeightageValid) {
             throw new ParseException(MESSAGE_WEIGHTAGE_INVALID);
         }
-        boolean hasWeightageExceed = gradebookManager.hasWeightageExceed(moduleCodeArg, gradeComponentWeightageArg);
+        boolean hasWeightageExceed = gradebookManager.hasEditWeightageExceed(moduleCodeArg, gradeComponentNameArg, gradeComponentWeightageArg);
         if (hasWeightageExceed) {
             throw new ParseException(MESSAGE_WEIGHTAGE_EXCEED);
+        }
+        boolean isDuplicate = gradebookManager.isDuplicate(moduleCodeArg, newGradeComponentNameArg);
+        if (isDuplicate) {
+            throw new ParseException(MESSAGE_DUPLICATE);
         }
 
         Gradebook gradebook = new Gradebook(
