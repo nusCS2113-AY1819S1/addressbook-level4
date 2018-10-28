@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.task.Task;
@@ -39,6 +40,9 @@ public class TaskCard extends UiPart<Region> {
     private Label expectedNumOfHours;
     @FXML
     private Label status;
+    @FXML
+    private FlowPane milestones;
+
     /*
     @FXML
     private Label email;
@@ -55,6 +59,9 @@ public class TaskCard extends UiPart<Region> {
         description.setText(task.getDescription());
         priorityLevel.setText(task.getPriorityLevel().priorityLevel);
         expectedNumOfHours.setText(Integer.toString(task.getExpectedNumOfHours()) + " hours");
+        task.getMilestoneList().forEach(milestone -> milestones.getChildren()
+                .add(new Label(milestone.getMilestoneDescriptionString())));
+
         if (task.isCompleted()) {
             status.setText("Completed!");
         } else {

@@ -5,10 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.task.Deadline;
-import seedu.address.model.task.Milestone;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.UniqueTaskList;
+import seedu.address.model.task.*;
 
 /**
  * Wraps all data at the address-book level
@@ -18,6 +15,7 @@ public class AddressBook implements ReadOnlyTaskBook {
 
     private static final Deadline PLACEHOLDER_DEADLINE = new Deadline("1/1/2018");
     private final UniqueTaskList tasks;
+    private final UniqueMilestoneList milestones;
     private Deadline currentDate;
 
     /*
@@ -29,6 +27,7 @@ public class AddressBook implements ReadOnlyTaskBook {
      */
     {
         tasks = new UniqueTaskList();
+        milestones = new UniqueMilestoneList();
     }
 
     public AddressBook() {}
@@ -120,9 +119,10 @@ public class AddressBook implements ReadOnlyTaskBook {
      * Adds a milestone to a selected task in the Task Book.
      * The task must already exist in the Task Book.
      */
+
     public void addMilestone(Milestone milestone) {
         requireNonNull(milestone);
-        tasks.add(milestone);
+        milestones.add(milestone);
     }
     //@@author
     /**
@@ -168,4 +168,5 @@ public class AddressBook implements ReadOnlyTaskBook {
     public int hashCode() {
         return tasks.hashCode();
     }
+
 }

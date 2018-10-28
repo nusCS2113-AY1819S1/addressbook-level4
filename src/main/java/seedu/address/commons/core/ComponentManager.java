@@ -1,6 +1,7 @@
 package seedu.address.commons.core;
 
 import seedu.address.commons.events.BaseEvent;
+import seedu.address.model.task.Milestone;
 
 /**
  * Base class for *Manager classes
@@ -25,4 +26,5 @@ public abstract class ComponentManager {
     protected void raise(BaseEvent event) {
         eventsCenter.post(event);
     }
+
 }

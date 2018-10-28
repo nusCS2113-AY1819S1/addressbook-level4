@@ -106,7 +106,7 @@ public class ParserUtil {
         String trimmedYear = year.trim();
         return trimmedYear;
     }
-
+    //@@author chelseyong
     /**
      * Leading and trailing whitespaces will be trimmed from {@code String hours}
      */
@@ -118,4 +118,24 @@ public class ParserUtil {
         }
         return Integer.parseInt(trimmedHours);
     }
+
+    //@@author JeremyInElysium
+    /**
+     * Leading and trailing whitespaces will be trimmed from {@code String milestoneDescription}
+     */
+    public static String parseMilestoneDescription(String milestoneDescription) throws ParseException {
+        requireNonNull(milestoneDescription);
+        String trimmedMilestoneDescription = milestoneDescription.trim();
+        return trimmedMilestoneDescription;
+    }
+
+    /**
+     * Leading and trailing whitespaces will be trimmed from {@code String rank}
+     */
+    public static String parseRank(String rank) throws ParseException {
+        requireNonNull(rank);
+        String trimmedRank = rank.trim();
+        return trimmedRank;
+    }
+
 }

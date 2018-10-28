@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
+import com.google.common.eventbus.Subscribe;
+import seedu.address.commons.events.model.AddMilestoneChangedEvent;
 import seedu.address.commons.events.model.TaskBookChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
@@ -36,4 +38,12 @@ public interface Storage extends TaskBookStorage, UserPrefsStorage {
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleAddressBookChangedEvent(TaskBookChangedEvent abce);
+
+
+    /**
+     *
+     * @param event
+     */
+    @Subscribe
+    void handleAddMilestoneChangedEvent(AddMilestoneChangedEvent event);
 }
