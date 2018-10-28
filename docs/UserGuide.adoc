@@ -124,29 +124,46 @@ Example: scorefilter a/66
 This will list all the students who score above 56 in a new grade list
 
 
-=== Create N number of group, distributed equally based on nationality or gender or both: `distinto` `di`
-Creates _n_ number of groups determined by the user, with a group name and user is able to select the condition to distribute equally via Gender or Nationally +
-Format: `distinto NUM_OF_GROUPS n/GROUP_NAME g/true nat/true` +
+=== Distributed all students into _n_ groups with balanced number of Nationality or Gender: `distinto` `di`
+This functionality creates _n_ number of groups determined by the user, with a general group name specified and randomly distribute all students in the system into _n_ groups. +
+User must choose to either distribute all students equally via Gender or Nationally or Neither. +
 ****
-* NUM_OF_GROUPS is an positive integer value and must not be 0.
+* *Distribution Modes*
+** `g/0 nat/0` -> Distribution all students randomly into _n_ groups.
+** `g/1 nat/0` -> Distribution all students randomly into _n_ groups with balanced Gender.
+** `g/0 nat/1` -> Distribution all students randomly into _n_ groups with balanced Nationality.
+** `g/1 nat/1` -> Distribution all students randomly into _n_ groups with balanced Gender and Nationality. (Coming in v1.4)
+****
+Format: `distinto NUM_OF_GROUPS n/GROUP_NAME g/true nat/true` +
+Shortcut Format: `di NUM_OF_GROUPS n/GROUP_NAME g/1 nat/1` +
+
+==== Command Input Guide ====
+****
+* *NUM_OF_GROUPS*
+** NUM_OF_GROUPS must be a *positive integer* value and must not be *0*.
 ** NUM_OF_GROUPS must not be more than the total number of persons in the address book.
-* Groups will be created with the GROUP_NAME + an index value starting from 1.
-** Eg: Group name Input: CS2113-T13-
-** Output: CS2113-T13-1
-* `g/` is the Gender Prefix which only takes in '1' or '0' or "true" or "false". It is a boolean type.
-** '1' or "true" will trigger the software to distribute into group with balanced genders
-** '0' or "false" will ignore gender field and distribute randomly
-* `nat/` is the nationality Prefix which only takes in '1' or '0'. It is a boolean type.
-** '1' or "true" will trigger the software to distribute into group with balanced nationality.
-** '0' or "false" will ignore nationality field and distribute randomly
-* When both flags are "false" or '0', the distinto command will distribute all person randomly into _n_ number of groups.
+* *GROUP_NAME*
+** All _n_ number of groups will have the same GROUP_NAME but every GROUP_NAME will be *concatenated with an index behind it*.
+** Index concatenated behind the GROUP_NAME starts from 1.
+** GROUP_NAME should only contain alphanumeric characters, '-', '[' and ']', and should not be blank
+** Eg: Group name Input: g/CS2113-T13-
+*** 1st Group Name: CS2113-T13-1
+*** 2nd Group Name: CS2113-T13-2
+* *Gender Flag `g/`*
+** `g/` is the Gender Prefix which only takes in '1' or '0' or "true" or "false". It should not be blank.
+** `g/1` or `g/true` will trigger the software to distribute all students into groups with balanced genders.
+** `g/0` or `g/false` will ignore gender field.
+* *Nationality Flag `nat/`*
+** `nat/` is the nationality Prefix which only takes in '1' or '0' or "true" or "false". It should not be blank.
+** `nat/1` or `nat/true` will trigger the software to distribute all students into groups with balanced nationality.
+** `nat/0` or `nat/false` will ignore nationality field.
 ****
 
 Examples:
 
-* distinto 5 n/T13- g/true nat/false
-* di 3 n/T11- g/1 nat/0
-* di 2 n/T11- g/true nat/0
+* `distinto 5 n/CS2113-T13-0 g/true nat/false`
+* `di 3 n/CS2113-T09- g/1 nat/0`
+* `di 2 n/CS2113-T14- g/true nat/0`
 
 === Entering email credential into the Student Management System: `login`
 Enters account credential for sending email +
