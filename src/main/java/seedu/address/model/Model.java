@@ -105,7 +105,7 @@ public interface Model {
      */
     void updateFilteredDistributorList(Predicate<Distributor> predicate);
 
-    void updateFilteredPersonList(Predicate<Product> predicate);
+    void updateFilteredProductList(Predicate<Product> predicate);
 
 
     /**

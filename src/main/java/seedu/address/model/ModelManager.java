@@ -156,7 +156,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public boolean hasDistributor(Distributor distributor) {
-        requireNonNull(distributor);
         return versionedDistributorBook.hasDistributor(distributor);
     }
 
@@ -281,7 +280,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addPerson(Product product) {
         versionedAddressBook.addPerson(product);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredProductList(PREDICATE_SHOW_ALL_PERSONS);
         indicateAddressBookChanged();
     }
 
@@ -317,7 +316,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Product> predicate) {
+    public void updateFilteredProductList(Predicate<Product> predicate) {
         requireNonNull(predicate);
         filteredProducts.setPredicate(predicate);
     }
@@ -465,8 +464,7 @@ public class ModelManager extends ComponentManager implements Model {
             versionedAddressBook.removeReminderFromActiveBusinessDay(reminder);
         } catch (InvalidTimeFormatException e) {
             throw e;
-        }
-        catch (NoSuchElementException e) {
+        } catch (NoSuchElementException e) {
             throw e;
         }
     }

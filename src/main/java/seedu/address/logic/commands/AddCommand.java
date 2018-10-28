@@ -61,8 +61,13 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        model.addDistributor(distToAdd);
+
+        if (!(model.hasDistributor(distToAdd))) {
+            model.addDistributor(distToAdd);
+        }
+
         model.commitAddressBook();
+        model.commitDistributorBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

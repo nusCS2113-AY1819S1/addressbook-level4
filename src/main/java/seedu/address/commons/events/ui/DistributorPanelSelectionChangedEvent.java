@@ -4,7 +4,7 @@ import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.distributor.Distributor;
 
 /**
- * Represents a selection change in the Product List Panel
+ * Represents a selection change in the Distributor List Panel
  */
 public class DistributorPanelSelectionChangedEvent extends BaseEvent {
 
