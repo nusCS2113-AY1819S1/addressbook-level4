@@ -1,5 +1,6 @@
 package seedu.address.commons.core;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.EventBus;
@@ -13,9 +14,10 @@ public class EventsCenter {
     private static final Logger logger = LogsCenter.getLogger(EventsCenter.class);
     private static EventsCenter instance;
     private final EventBus eventBus;
-
+    private ArrayList<Object> eventsHandler;
     private EventsCenter() {
         eventBus = new EventBus();
+        eventsHandler = new ArrayList <> ();
     }
 
     public static EventsCenter getInstance() {
@@ -30,6 +32,10 @@ public class EventsCenter {
     }
 
     public void registerHandler(Object handler) {
+//        if (checkForDuplicateHandler(handler)){
+//            System.out.println ("repeated");
+//            return;
+//        }
         eventBus.register(handler);
     }
 
@@ -41,5 +47,13 @@ public class EventsCenter {
         eventBus.post(event);
         return this;
     }
+    private boolean checkForDuplicateHandler(Object handler){
+        if (eventsHandler.contains (handler)){
+            return true;
+        }
+        eventsHandler.add (handler);
+        return false;
+    }
+
 
 }

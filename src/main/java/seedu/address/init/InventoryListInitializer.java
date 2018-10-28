@@ -20,6 +20,7 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.events.model.InitInventoryListEvent;
+import seedu.address.commons.events.ui.LogoutEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
@@ -70,7 +71,7 @@ public class InventoryListInitializer {
      */
     public void initAfterLogin() {
         model = initModelManager(storage, userPrefs, loginInfoList);
-        logic = new LogicManager (model, loginInfoList);
+        logic = new LogicManager (model);
         ui = new UiManager (logic, config, userPrefs);
 
         fxmlLoader = new FXMLLoader();
@@ -81,7 +82,6 @@ public class InventoryListInitializer {
     public void handleinitInventoryListEvent(InitInventoryListEvent event) {
         initAfterLogin ();
     }
-
 
     /**
      * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>

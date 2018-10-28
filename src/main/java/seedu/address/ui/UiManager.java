@@ -66,7 +66,6 @@ public class UiManager extends ComponentManager implements Ui {
 
     @Override
     public void stop() {
-        System.out.println ("here");
         prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
         mainWindow.hide();
         mainWindow.releaseResources();
@@ -123,6 +122,7 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
 
     public void handleStartUiEvent(StartUiEvent event) {
+        System.out.println ("reveieved startUievent in UI MANAGER");
         start(event.mainStage);
     }
     @Subscribe

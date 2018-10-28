@@ -20,6 +20,7 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SellCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.user.ChangePasswordCommand;
+import seedu.address.logic.commands.user.LogoutCommand;
 import seedu.address.logic.parser.DeleteCommandParser;
 import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.logic.parser.FindCommandParser;
@@ -62,6 +63,8 @@ public class StockTakerParser {
         case ChangePasswordCommand.COMMAND_WORD:
             return new ChangePasswordCommandParser ().parse(arguments);
 
+        case LogoutCommand.COMMAND_WORD:
+            return new LogoutCommand ();
         //existing command
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser ().parse(arguments);

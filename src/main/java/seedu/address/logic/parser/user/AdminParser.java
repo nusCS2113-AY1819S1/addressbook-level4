@@ -69,6 +69,9 @@ public class AdminParser {
 
         case DeleteAccountCommand.COMMAND_WORD:
             return new DeleteAccountCommandParser ().parse (arguments);
+
+        case LogoutCommand.COMMAND_WORD:
+            return new LogoutCommand ();
         //existing command
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser ().parse(arguments);
@@ -103,8 +106,6 @@ public class AdminParser {
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
-        case LogoutCommand.COMMAND_WORD:
-            return new LogoutCommand ();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

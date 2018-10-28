@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.user;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -13,10 +13,9 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.user.ChangePasswordCommand;
 import seedu.address.logic.commands.user.CreateAccountCommand;
 import seedu.address.logic.commands.user.DeleteAccountCommand;
+import seedu.address.logic.commands.user.LogoutCommand;
+import seedu.address.logic.parser.AddItemCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.user.ChangePasswordCommandParser;
-import seedu.address.logic.parser.user.CreateAccountCommandParser;
-import seedu.address.logic.parser.user.DeleteAccountCommandParser;
 
 /**
  * Parses user input.
@@ -56,6 +55,9 @@ public class ManagerParser {
 
         case DeleteAccountCommand.COMMAND_WORD:
             return new DeleteAccountCommandParser ().parse (arguments);
+
+        case LogoutCommand.COMMAND_WORD:
+            return new LogoutCommand ();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

@@ -23,6 +23,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.LogoutEvent;
+import seedu.address.commons.events.ui.StopUiEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
@@ -265,14 +266,15 @@ public class MainApp extends Application {
      */
     private void closeUiWindow() {
         logger.info("============================ [ Stopping DRINK I/O ] =============================");
-        //EventsCenter.getInstance().post(new StopUiEvent ());
+        EventsCenter.getInstance().post(new StopUiEvent ());
         try {
             storage.saveLoginInfo (loginInfoList);
             storage.saveUserPrefs(userPrefs);
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
-        loginWindow.close ();
+        //EventsCenter.clearSubscribers ();
+        //initEventsCenter();
     }
     @Subscribe
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
@@ -283,6 +285,7 @@ public class MainApp extends Application {
     public void handleLogoutEvent(LogoutEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         Window currentStage = Stage.getWindows().filtered(window -> window.isShowing()).get (0);
+        closeUiWindow();
         currentStage.hide ();
         loginWindow.show ();
     }

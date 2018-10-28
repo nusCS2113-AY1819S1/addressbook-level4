@@ -19,6 +19,15 @@ public class CurrentUser {
         return authenticationLevel.toString ();
     }
 
+    /**
+     * Return true if {@code test} is equal to the authenticationLevel
+     */
+    public static boolean checkAuthenticationLevel(String test){
+        if (authenticationLevel.toString ().equals (test)){
+            return true;
+        }
+        return false;
+    }
     public static LoginInfo getCurrentUser () {
         LoginInfo currentUser = new LoginInfo (userName, authenticationLevel);
         return currentUser;

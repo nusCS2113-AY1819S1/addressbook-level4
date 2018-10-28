@@ -26,6 +26,7 @@ public class ModelManager extends ComponentManager implements Model {
     protected final VersionedAddressBook versionedAddressBook;
     protected final FilteredList<Person> filteredPersons;
     protected LoginInfoManager loginInfoManager;
+
     /**
      * Initializes a DrinkModelManager with the given addressBook and userPrefs.
      */
