@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
-
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -15,6 +14,13 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Quantity;
+
+
+//@@author He Haowei
+
+/**
+ * Found an existing item in the stock list.
+ */
 
 public class FoundCommand extends Command{
     public static final String COMMAND_WORD = "found";
@@ -70,27 +76,31 @@ public class FoundCommand extends Command{
         assert itemToFound != null;
 
         Integer updatedValue = foundDescriptor.getFoundQuantity();
-        Integer initialValue=itemToFound.getQuantity().toInteger();
+        Integer initialValue = itemToFound.getQuantity().toInteger();
 
-        Quantity updatedQuantity= new Quantity(Integer.toString(initialValue+updatedValue));
+        Quantity updatedQuantity = new Quantity(Integer.toString(initialValue + updatedValue));
 
 
 
         return new Item(itemToFound.getName(), updatedQuantity, itemToFound.getMinQuantity(), itemToFound.getTags());
     }
 
+    /**
+     * Stores the details to lost the item with.
+     */
+
     public static class FoundDescriptor {
         private Integer foundQuantity;
 
-        public FoundDescriptor(){}
+        public FoundDescriptor() {}
 
         public FoundDescriptor(FoundDescriptor toCopy) {
             setFoundQuantity(toCopy.foundQuantity);
 
         }
-        public void setFoundQuantity(Integer foundQuantity) {this.foundQuantity=foundQuantity;}
+        public void setFoundQuantity(Integer foundQuantity) {this.foundQuantity=foundQuantity; }
 
-        public Integer getFoundQuantity(){return foundQuantity;}
+        public Integer getFoundQuantity(){return foundQuantity; }
 
     }
     @Override

@@ -17,6 +17,12 @@ import seedu.address.model.item.Item;
 import seedu.address.model.item.Quantity;
 
 
+//@@author He Haowei
+
+/**
+ * Lost an existing item in the stock list.
+ */
+
 public class LostCommand extends Command{
     public static final String COMMAND_WORD = "lost";
 
@@ -71,14 +77,18 @@ public class LostCommand extends Command{
         assert itemToLost != null;
 
         Integer updatedValue = lostDescriptor.getLostQuantity();
-        Integer initialValue=itemToLost.getQuantity().toInteger();
+        Integer initialValue = itemToLost.getQuantity().toInteger();
 
-        Quantity updatedQuantity= new Quantity(Integer.toString(initialValue-updatedValue));
+        Quantity updatedQuantity = new Quantity(Integer.toString(initialValue - updatedValue));
 
 
 
         return new Item(itemToLost.getName(), updatedQuantity, itemToLost.getMinQuantity(), itemToLost.getTags());
     }
+
+    /**
+     * Stores the details to lost the item with.
+     */
 
     public static class LostDescriptor {
         private Integer lostQuantity;
@@ -88,9 +98,9 @@ public class LostCommand extends Command{
         public LostDescriptor(LostDescriptor toCopy) {
             setLostQuantity(toCopy.lostQuantity);
         }
-        public void setLostQuantity(Integer lostQuantity) {this.lostQuantity=lostQuantity;}
+        public void setLostQuantity(Integer lostQuantity) {this.lostQuantity = lostQuantity; }
 
-        public Integer getLostQuantity(){return lostQuantity;}
+        public Integer getLostQuantity(){return lostQuantity; }
 
     }
     @Override
