@@ -249,21 +249,27 @@ Examples:
 * `add n/John Doe g/M nat/SG p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `a n/Betsy Crowe g/female nat/MY t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-=== Adding multiple persons into the Addressbook : `addscript` `as`
+=== Execute multiples of the same Command using text file : `script` `scr`
 
-Get all the add commands from a text file and execute them +
-Format: `addscript TextFileName` +
-Shortcut Format: `as TextFileName` +
+Get all the commands parameters from a text file and execute them +
+Format: `script txt/TextFile c/CommandType` +
+Shortcut Format: `scr txt/TextFile c/CommandType` +
 
 ****
-* TextFileName is the text file name that is located at base of the project.
-* The TextFileName *must contain .txt* extension at the end of the String.
+* Default scripts folder is located at the /scripts/ where the main program is located at.
+* If the scripts folder is missing, the program will automatically generate the folder when the program starts
+* txt/ is the TextFile Prefix which is used to indicate the following parameter is a TextFile parameter
+** TextFile is the text file which contains all the command arguments that you want to execute.
+** TextFile should consist of the name of the file without the extension E.g "StudentList" is a valid TextFile but
+"StudentList.txt" is also valid TextFile but it will search for "StudentList.txt.txt" in the folder.
+* c/ is the CommandType Prefix which is used to indicate the following parameter is a CommandType parameter
+** CommandType is the command that you want to execute E.g add, delete, creategroup, etc
 ****
 
 Examples:
 
-* `addscript abc.txt`
-* `as abc.txt`
+* `script txt/addgroups c/creategroup`
+* `scr txt/addpersons c/add`
 
 === Listing all persons : `list` `l`
 
