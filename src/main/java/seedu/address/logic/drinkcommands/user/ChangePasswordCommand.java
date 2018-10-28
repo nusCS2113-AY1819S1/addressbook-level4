@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_OLD_PASSWORD;
 import seedu.address.authentication.PasswordUtils;
 import seedu.address.commons.core.CurrentUser;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.drinkcommands.DrinkCommandResult;
 import seedu.address.model.DrinkModel;
 import seedu.address.model.LoginInfoManager;
@@ -46,7 +45,9 @@ public class ChangePasswordCommand extends UserCommand {
 
         String username = CurrentUser.getUserName();
         String hashedOldPassword = loginInfoManager.getLoginInfo(username).getPassword();
+
         boolean isPasswordCorrect = PasswordUtils.verifyUserPassword(oldPassword.toString(), hashedOldPassword);
+
         if (isPasswordCorrect) {
             String newHashedPassword = PasswordUtils.generateSecurePassword(newPassword.toString());
             loginInfoManager.changePassword(username, newHashedPassword);
@@ -57,7 +58,7 @@ public class ChangePasswordCommand extends UserCommand {
     }
 
     @Override
-    public DrinkCommandResult execute(DrinkModel model, CommandHistory history) throws CommandException {
+    public DrinkCommandResult execute(DrinkModel model, CommandHistory history) {
         return null;
     }
 }
