@@ -12,7 +12,6 @@ import seedu.address.model.StorageController;
 import seedu.address.model.module.exceptions.DuplicateModuleException;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.StudentManager;
-import seedu.address.storage.Storage;
 import seedu.address.storage.adapter.XmlAdaptedModule;
 import seedu.address.storage.adapter.XmlAdaptedStudentModule;
 
@@ -115,7 +114,8 @@ public class ModuleManager {
             xmlAdaptedStudentModuleList.addAll(
                     m.getEnrolledStudents()
                             .stream()
-                            .map(s -> new XmlAdaptedStudentModule(s.getMatricNo(), m.getModuleCode().moduleCode))
+                            .map(s -> new XmlAdaptedStudentModule(
+                                    s.getMatricNo().matricNo, m.getModuleCode().moduleCode))
                             .collect(Collectors.toCollection(ArrayList::new))
             );
         }
