@@ -235,7 +235,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
     
     // =========== Filtered Company List Accessors ===================================================== //
-
+    
     @Override
     public void sortCompanies(Prefix prefix) {
         versionedCompanyBook.sortCompanies(prefix);
