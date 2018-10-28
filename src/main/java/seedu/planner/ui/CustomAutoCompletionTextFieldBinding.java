@@ -1,10 +1,11 @@
 package seedu.planner.ui;
 
+import static seedu.planner.ui.CustomSuggestionProvider.updateSuggestions;
+
 import java.util.Collection;
 
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 
-import impl.org.controlsfx.autocompletion.SuggestionProvider;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.control.TextField;
 import javafx.util.Callback;
@@ -83,18 +84,13 @@ public class CustomAutoCompletionTextFieldBinding<T> extends AutoCompletionBindi
 
     private final ChangeListener<Number> caretChangeListener = (obs, oldNumber, newNumber) -> {
         String text = getCompletionTarget().getText().substring(0, newNumber.intValue());
+        updateSuggestions(text);
         int index;
         for (index = text.length() - 1; index >= 0 && !Character.isWhitespace(text.charAt(index)); index--);
         if (index > 0) {
             oldText = text.substring(0, index) + " ";
-            if (oldText.contains("sort")){
-                AutoCompleteBox.suggestionProvider.clearSuggestions();
-                AutoCompleteBox.suggestionProvider.addPossibleSuggestions(AutoCompleteBox.sortKeywordsSet);
-            }
         } else {
             oldText = "";
-            AutoCompleteBox.suggestionProvider.clearSuggestions();
-            AutoCompleteBox.suggestionProvider.addPossibleSuggestions(AutoCompleteBox.commandKeywordsSet);
         }
 
         String newText = text.substring(index + 1, text.length());
