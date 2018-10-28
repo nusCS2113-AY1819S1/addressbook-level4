@@ -58,10 +58,9 @@
         <note>No notes for this contact</note>
     </persons>
     <persons>
-        <name>George Best</name>
-        <phone>9482442</phone>
-        <email>anna@example.com</email>
-        <address>4th street</address>
-        <note>No notes for this contact</note>
+        <name>Wilson</name>
+        <phone>9667777</phone>
+        <email>wow@gmail.com</email>
+        <address>wow street</address>
     </persons>
 </addressbook>
