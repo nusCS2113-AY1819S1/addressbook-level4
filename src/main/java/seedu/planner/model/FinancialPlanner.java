@@ -5,11 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.planner.model.record.Date;
-import seedu.planner.model.record.DateBasedLimitList;
-import seedu.planner.model.record.Limit;
-import seedu.planner.model.record.Record;
-import seedu.planner.model.record.UniqueRecordList;
+import seedu.planner.model.record.*;
 import seedu.planner.model.summary.Summary;
 import seedu.planner.model.summary.SummaryMap;
 
@@ -207,6 +203,16 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
             }
         }
         return (limit.isExceeded(recordsMoney));
+    }
+
+    public Double getTotalSpend (Limit limit) {
+        Double recordsMoney = 0.0;
+        for (Record i: records) {
+            if (limit.isInsideDatePeriod(i)) {
+                recordsMoney += i.getMoneyFlow().toDouble();
+            }
+        }
+        return recordsMoney;
     }
 
     /**

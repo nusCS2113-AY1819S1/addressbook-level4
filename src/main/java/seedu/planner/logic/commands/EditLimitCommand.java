@@ -48,9 +48,11 @@ public class EditLimitCommand extends Command {
 
 
         output = MESSAGE_SUCCESS + "Original Limit:\n"
-                + model.generateLimitOutput(model.isExceededLimit(originalLimit), originalLimit)
+                + model.generateLimitOutput(model.isExceededLimit(originalLimit),
+                model.getTotalSpend(originalLimit), originalLimit)
                 + "Modified Limit: \n"
-                + model.generateLimitOutput(model.isExceededLimit(limit), limit);
+                + model.generateLimitOutput(model.isExceededLimit(limit),
+                model.getTotalSpend(limit), limit);
         model.commitFinancialPlanner();
         return new CommandResult(output);
     }

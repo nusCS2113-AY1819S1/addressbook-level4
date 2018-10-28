@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
+import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.summary.Summary;
 
@@ -94,8 +95,14 @@ public interface Model {
      * @param limit
      * @return
      */
-    String generateLimitOutput (boolean isExceeded, Limit limit);
+    String generateLimitOutput (boolean isExceeded, Double totalMoney, Limit limit);
 
+    /**
+     * This function will return the total money spent during that period of limit time.
+     * @param limitIn
+     * @return
+     */
+    Double getTotalSpend (Limit limitIn);
     /**
      * Return the limit which has the same dates as input.
      * @param dateStart
