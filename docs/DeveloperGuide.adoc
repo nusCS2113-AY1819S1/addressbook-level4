@@ -327,8 +327,8 @@ image::UndoRedoActivityDiagram.png[width="650"]
 === Group feature
 ==== Current Implementation
 
-The group mechanism is facilitated by `AddressBook`.
-Additionally, it implements the following operations:
+The group mechanism is facilitated by `AddressBook`
+and implements the following operations:
 
 * `AddressBook#createGroup()` -- Creates a group in the student management system.
 * `AddressBook#hasGroup()` -- Checks to see if the student management system has a particular group.
@@ -372,17 +372,30 @@ The following sequence diagram shows how the add persons to group operation work
 image::AddGroupSequenceDiagram.png[width="800"]
 
 
-Step 3. The user inputs `deletegroup 1` to delete the first group in the student management system. The `AddressBookParser` detects `deletegroup` as a command word will use `DeleteGroupCommandParser`
+Step 3. The user inputs `deletegroup 1` to delete the first group in the student management system. The `AddressBookParser` detects `deletegroup` as a command word and will use `DeleteGroupCommandParser`
 to parse the input given. `DeleteGroupCommandParser` will then create an `Index` object after parsing and pass it to `DeleteGroupCommand`
 which will then execute deleting the specified group from the student management system.
  +
 
 The following sequence diagram shows how the delete group operation works within both `Model` and `Logic` components:
 
-.Interactions Inside the Logic and Model Component's for the `deletegroup 1` Command
+.Interactions Inside the Logic and Model Component's for the `deletegroup 1` Command +
 image::DeleteGroupSequenceDiagram.png[width="800"]
 
+Additional Operations:
 
+* `SelectGroupCommand` -- Selects a group on the student management system's GUI which will in turn display all
+students in that group on the `StudentsInGroup` panel. +
+
+Step 1. The user inputs `selectgroup 1` to select the first group listed on the student management system's GUI. The `AddressBookParser` detects `selectgroup` as a command word and will use `SelectGroupCommandParser`
+        to parse the input given. `SelectGroupCommandParser` will then create an `Index` object after parsing and pass it to `SelectGroupCommand`
+        which will then execute selecting the specified group on the student management system by posting a new `JumpToGroupListRequestEvent` object coupled with the Index created to the `EventsCenter`.
+         +
+
+The following sequence diagram shows how the select group operation works within both `EventsCenter` and `Logic` components:
+
+.Interactions Inside the Logic and EventsCenter Component's for the `selectgroup 1` Command +
+image::SelectGroupSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 
