@@ -35,7 +35,7 @@ public class UserRole {
         if (!LoginManager.getisCurrentlyLoggingInCreatingAccount()) {
             checkArgument(isValidUserRole(role), MESSAGE_USERROLE_CONSTRAINTS);
         }
-        if (LoginManager.getIsTesting()) {
+        if (LoginManager.getisCurrentlyLoggingInCreatingAccount()) {
             fullUserRole = role;
         } else {
             fullUserRole = Base64.getEncoder().encodeToString(role.getBytes("utf-8"));

@@ -66,22 +66,22 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_login() throws Exception {
-        LoginManager.setIsTesting(true);
+        LoginManager.setIsCurrentlyLoggingInCreatingAccount(true);
         LoginDetails loginDetails = new AccountBuilder().build();
         CreateAccountCommand command = (CreateAccountCommand) parser.parseCommand(AccountUtil
                 .getCreateAccountCommand(loginDetails));
         assertEquals(new CreateAccountCommand(loginDetails), command);
-        LoginManager.setIsTesting(false);
+        LoginManager.setIsCurrentlyLoggingInCreatingAccount(false);
     }
 
     @Test
     public void parseCommand_createaccount() throws Exception {
-        LoginManager.setIsTesting(true);
+        LoginManager.setIsCurrentlyLoggingInCreatingAccount(true);
         LoginDetails loginDetails = new AccountBuilder().build();
         CreateAccountCommand command = (CreateAccountCommand) parser.parseCommand(AccountUtil
                                                                         .getCreateAccountCommand(loginDetails));
         assertEquals(new CreateAccountCommand(loginDetails), command);
-        LoginManager.setIsTesting(false);
+        LoginManager.setIsCurrentlyLoggingInCreatingAccount(false);
     }
 
     @Test

@@ -36,7 +36,7 @@ public class UserId {
         if (!LoginManager.getisCurrentlyLoggingInCreatingAccount()) {
             checkArgument(isValidUserId(id), MESSAGE_USERID_CONSTRAINTS);
         }
-        if (LoginManager.getIsTesting()) {
+        if (LoginManager.getisCurrentlyLoggingInCreatingAccount()) {
             fullUserId = id;
         } else {
             fullUserId = Base64.getEncoder().encodeToString(id.getBytes("utf-8"));

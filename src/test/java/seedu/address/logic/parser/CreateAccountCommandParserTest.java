@@ -14,6 +14,7 @@ import static seedu.address.testutil.TypicalAccounts.ACCOUNT_1;
 
 import org.junit.Test;
 
+import seedu.address.logic.LoginManager;
 import seedu.address.logic.commands.CreateAccountCommand;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.login.UserId;
@@ -25,11 +26,13 @@ public class CreateAccountCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
+        LoginManager.setIsCurrentlyLoggingInCreatingAccount(true);
         LoginDetails expectedAccount = new AccountBuilder(ACCOUNT_1).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + ID_ACCOUNT_1_DESC
                 + PASSWORD_ACCOUNT_1_DESC + ROLE_ACCOUNT_1_DESC , new CreateAccountCommand(expectedAccount));
+        LoginManager.setIsCurrentlyLoggingInCreatingAccount(false);
     }
 
     @Test

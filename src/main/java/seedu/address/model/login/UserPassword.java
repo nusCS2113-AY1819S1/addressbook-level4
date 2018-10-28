@@ -34,7 +34,7 @@ public class UserPassword {
         if (!LoginManager.getisCurrentlyLoggingInCreatingAccount()) {
             checkArgument(isValidUserPassword(pass), MESSAGE_USERPASSWORD_CONSTRAINTS);
         }
-        if (LoginManager.getIsTesting()) {
+        if (LoginManager.getisCurrentlyLoggingInCreatingAccount()) {
             fullUserPassword = pass;
         } else {
             fullUserPassword = Base64.getEncoder().encodeToString(pass.getBytes("utf-8"));
