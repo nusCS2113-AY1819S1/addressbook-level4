@@ -14,8 +14,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 
 import seedu.recruit.commons.core.LogsCenter;
-import seedu.recruit.commons.events.ui.CompanyDetailsPanelSelectionChangedEvent;
-import seedu.recruit.commons.events.ui.JumpToListRequestEvent;
+import seedu.recruit.commons.events.ui.CompanyJobListDetailsPanelSelectionChangedEvent;
+import seedu.recruit.commons.events.ui.CompanyListDetailsPanelSelectionChangedEvent;
+import seedu.recruit.commons.events.ui.JumpToCompanyJobListRequestEvent;
+import seedu.recruit.commons.events.ui.JumpToCompanyListRequestEvent;
+import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.joboffer.JobOffer;
 
@@ -37,6 +40,9 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
     @FXML
     private ListView<JobOffer> companyJobDetailsView;
 
+    @FXML
+    private ListView<Candidate> companyJobShortlistView;
+
     public CompanyJobDetailsPanel(ObservableList<Company> companyList, ObservableList<JobOffer> companyJobList) {
         super(FXML);
         setConnections(companyList, companyJobList);
@@ -49,50 +55,101 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
         companyJobDetailsView.setItems(companyJobList);
         companyJobDetailsView.setCellFactory(listView -> new CompanyJobDetailsViewCell());
         numberOfJobOffers.setText(String.valueOf(companyJobList.size()));
-        setEventHandlerForSelectionChangeEvent();
+        setEventHandlerForCompanySelectionChangeEvent();
+        setEventHandlerForJobSelectionChangeEvent();
     }
 
-    private void setEventHandlerForSelectionChangeEvent() {
+    private void setEventHandlerForCompanySelectionChangeEvent() {
         companyView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
-                        logger.fine("Selection in company job details panel changed to : '" + newValue + "'");
-                        raise(new CompanyDetailsPanelSelectionChangedEvent(newValue));
-                        showJobDetailsOfSelectedCompany();
+                        logger.fine("Selection in company list changed to : '" + newValue + "'");
+                        raise(new CompanyListDetailsPanelSelectionChangedEvent(newValue));
+                        showJobDetailsOfSelectedCompany(newValue);
+                    }
+                });
+    }
+
+    private void setEventHandlerForJobSelectionChangeEvent() {
+        companyJobDetailsView.getSelectionModel().selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> {
+                    if (newValue != null) {
+                        logger.fine("Selection in company's job list changed to : '" + newValue + "'");
+                        raise(new CompanyJobListDetailsPanelSelectionChangedEvent(newValue));
+                        showShortlistOfSelectedJob(newValue);
                     }
                 });
     }
 
     /**
      * Right side of {@code CompanyJobDetailsPanel} shows the list of jobs
-     * and their details {@code JobCard} of the selected Company
+     * and their details {@code JobCard} of the selected Company.
      */
-    private void showJobDetailsOfSelectedCompany() {
-        Company selectedCompany = companyView.getSelectionModel().getSelectedItem();
+    private void showJobDetailsOfSelectedCompany(Company selectedCompany) {
         companyJobDetailsView.setItems(selectedCompany.getUniqueJobList().getInternalList());
         companyJobDetailsView.setCellFactory(listView -> new CompanyJobDetailsViewCell());
         numberOfJobOffers.setText(String.valueOf(selectedCompany.getUniqueJobList().getInternalList().size()));
     }
 
     /**
+     * Right side of {@code CompanyJobDetailsPanel} shows the shortlisted candidates
+     * of the selected Job Offer of the selected Company.
+     * and their details {@code ShortlistCard} of the selected Company
+     */
+    private void showShortlistOfSelectedJob(JobOffer selectedJob) {
+        companyJobShortlistView.setItems(selectedJob.getShortlistedCandidateList());
+        companyJobShortlistView.setCellFactory(listView -> new CompanyJobShortlistViewCell());
+    }
+
+    /**
      * Scrolls to the {@code CompanyCard} at the {@code index} and selects it.
      */
-    private void scrollTo(int index) {
+    private void scrollToCompanyCard(int index) {
         Platform.runLater(() -> {
             companyView.scrollTo(index);
             companyView.getSelectionModel().clearAndSelect(index);
         });
     }
 
+    /**
+     * Scrolls to the {@code JobCard} at the {@code index} and selects it.
+     */
+    private void scrollToJobCard(int index) {
+        Platform.runLater(() -> {
+            companyJobDetailsView.scrollTo(index);
+            companyJobDetailsView.getSelectionModel().clearAndSelect(index);
+        });
+    }
+
     @Subscribe
-    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
+    private void handleJumpToCompanyListRequestEvent(JumpToCompanyListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        scrollTo(event.targetIndex);
+        scrollToCompanyCard(event.targetIndex);
+    }
+
+    @Subscribe
+    private void handleJumpToCompanyJobListRequestEvent(JumpToCompanyJobListRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        scrollToJobCard(event.targetIndex);
+    }
+
+    @Subscribe
+    private void handleCompanyListDetailsPanelSelectionChangedEvent(CompanyListDetailsPanelSelectionChangedEvent
+                                                                                event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event,
+                "Selection Changed to " + event.getNewSelection().getCompanyName().value));
+    }
+
+    @Subscribe
+    private void handleCompanyJobListDetailsPanelSelectionChangedEvent(CompanyJobListDetailsPanelSelectionChangedEvent
+                                                                                   event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event,
+                "Selection Changed to " + event.getNewSelection().getJob().value));
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a company in {@code companyView}
-     * on the left side of {@code CompanyJobDetailsPanel}
+     * Custom {@code ListCell} that displays the graphics of a company in companyView
+     * on the left side of CompanyJobDetailsPanel
      * using a {@code CompanyCard}.
      */
     class CompanyViewCell extends ListCell<Company> {
@@ -110,10 +167,10 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a job in {@code companyJobDetailsView}
-     * on the right side of {@code CompanyJobDetailsPanel}
+     * Custom {@code ListCell} that displays the graphics of a job in companyJobDetailsView
+     * on the right side of CompanyJobDetailsPanel
      * using a {@code JobCard}.
-    */
+     */
     class CompanyJobDetailsViewCell extends ListCell<JobOffer> {
         @Override
         protected void updateItem(JobOffer job, boolean empty) {
@@ -124,6 +181,25 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
                 setText(null);
             } else {
                 setGraphic(new JobCard(job, getIndex() + 1).getRoot());
+            }
+        }
+    }
+
+    /**
+     * Custom {@code ListCell} that displays the graphics of a shortlisted candidate in companyJobShortlistView
+     * on the right side of CompanyJobDetailsPanel
+     * using a {@code CandidateCard}.
+     */
+    class CompanyJobShortlistViewCell extends ListCell<Candidate> {
+        @Override
+        protected void updateItem(Candidate shortlistedCandidate, boolean empty) {
+            super.updateItem(shortlistedCandidate, empty);
+
+            if (empty || shortlistedCandidate == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(new CandidateCard(shortlistedCandidate, getIndex() + 1).getRoot());
             }
         }
     }

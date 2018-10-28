@@ -66,7 +66,7 @@ public class CandidateDetailsPanel extends UiPart<Region> {
                     if (newValue != null) {
                         logger.fine("Selection in candidate details panel changed to : '" + newValue + "'");
                         raise(new CandidateDetailsPanelSelectionChangedEvent(newValue));
-                        showDetailsOfSelectedCandidate();
+                        showDetailsOfSelectedCandidate(newValue);
                     }
                 });
     }
@@ -74,8 +74,7 @@ public class CandidateDetailsPanel extends UiPart<Region> {
     /**
      * Expands {@code CandidateCard} by listing all the details of the selected Candidate
      */
-    private void showDetailsOfSelectedCandidate() {
-        Candidate selectedCandidate = candidateDetailsView.getSelectionModel().getSelectedItem();
+    private void showDetailsOfSelectedCandidate(Candidate selectedCandidate) {
         name.setText(selectedCandidate.getName().fullName);
         gender.setText(selectedCandidate.getGender().value);
         age.setText(selectedCandidate.getAge().value);
@@ -103,8 +102,14 @@ public class CandidateDetailsPanel extends UiPart<Region> {
         scrollTo(event.targetIndex);
     }
 
+    @Subscribe
+    private void handleCandidateDetailsPanelSelectionChangedEvent(CandidateDetailsPanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event,
+                "Selection Changed to " + event.getNewSelection().getName().fullName));
+    }
+
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Candidate} using a {@code CandidateCard}.
+     * Custom {@code ListCell} that displays the graphics of a Candidate using a {@code CandidateCard}.
      */
     class CandidateDetailsViewCell extends ListCell<Candidate> {
         @Override

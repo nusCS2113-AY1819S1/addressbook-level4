@@ -129,7 +129,7 @@ public class DeleteCandidateCommandTest {
         // delete -> first candidate deleted
         deleteCandidateCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered candidate list to show all persons
+        // undo -> reverts Candidatebook back to previous state and filtered candidate list to show all persons
         expectedModel.undoCandidateBook();
         assertCommandSuccess(new UndoCandidateBookCommand(), model, commandHistory,
                 UndoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);

@@ -2,6 +2,9 @@ package seedu.recruit.model.joboffer;
 
 import java.util.Objects;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.candidate.Education;
 import seedu.recruit.model.candidate.Gender;
 import seedu.recruit.model.company.CompanyName;
@@ -12,6 +15,8 @@ import seedu.recruit.model.company.CompanyName;
  */
 
 public class JobOffer {
+
+    private final ObservableList<Candidate> shortlistedCandidateList = FXCollections.observableArrayList();
 
     // Job Identity fields
     private final CompanyName companyName;
@@ -55,6 +60,14 @@ public class JobOffer {
 
     public Gender getGender() {
         return gender;
+    }
+
+    public ObservableList<Candidate> getShortlistedCandidateList() {
+        return shortlistedCandidateList;
+    }
+
+    public void addToShortlistedCandidateList(Candidate shortlistedCandidate) {
+        shortlistedCandidateList.add(shortlistedCandidate);
     }
 
     /**
