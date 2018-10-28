@@ -75,7 +75,7 @@ public class SummaryListTest {
 
     @Test
     public void constructor_recordListWithUniqueDatesNoFilter_success() {
-        HashMap<Date, SummaryAbs> expectedMap = new HashMap<>();
+        HashMap<Date, Summary> expectedMap = new HashMap<>();
         for (Record r : recordListAllUniqueDates) {
             expectedMap.put(r.getDate(), new DaySummary(r));
         }
@@ -85,7 +85,7 @@ public class SummaryListTest {
 
     @Test
     public void constructor_recordListWithUniqueMonthsNoFilter_success() {
-        HashMap<Month, SummaryAbs> expectedMap = new HashMap<>();
+        HashMap<Month, Summary> expectedMap = new HashMap<>();
         for (Record r : recordListAllUniqueDates) {
             Month month = new Month(r.getDate().getMonth(), r.getDate().getYear());
             expectedMap.put(month, new MonthSummary(r));
@@ -105,7 +105,7 @@ public class SummaryListTest {
         List<DaySummary> summaryListOverLappingDates = Arrays.asList(summaryJan, new DaySummary(RANDOM_MAR), summaryApr,
                 new DaySummary(ZT_JUN), new DaySummary(CHICKEN_RICE_JUL));
 
-        HashMap<Date, SummaryAbs> expectedMap = new HashMap<>();
+        HashMap<Date, Summary> expectedMap = new HashMap<>();
         for (DaySummary s : summaryListOverLappingDates) {
             expectedMap.put(s.getDate(), s);
         }
@@ -124,7 +124,7 @@ public class SummaryListTest {
         List<MonthSummary> summaryListOverLappingDates = Arrays.asList(summaryJan, new MonthSummary(RANDOM_MAR),
                 summaryApr, new MonthSummary(ZT_JUN), new MonthSummary(CHICKEN_RICE_JUL));
 
-        HashMap<Month, SummaryAbs> expectedMap = new HashMap<>();
+        HashMap<Month, Summary> expectedMap = new HashMap<>();
         for (MonthSummary s : summaryListOverLappingDates) {
             expectedMap.put(s.getMonth(), s);
         }
@@ -142,7 +142,7 @@ public class SummaryListTest {
         DateIsWithinIntervalPredicate predicate = new DateIsWithinIntervalPredicate(startTestDate, endTestDate);
         FilteredList<Record> filteredList = new FilteredList(FXCollections.observableList(recordListAllUniqueDates));
         filteredList.setPredicate(predicate);
-        HashMap<Date, SummaryAbs> expectedMap = new HashMap<>();
+        HashMap<Date, Summary> expectedMap = new HashMap<>();
         for (Record r : filteredList) {
             expectedMap.put(r.getDate(), new DaySummary(r));
         }
@@ -160,7 +160,7 @@ public class SummaryListTest {
         DateIsWithinIntervalPredicate predicate = new DateIsWithinIntervalPredicate(startTestDate, endTestDate);
         FilteredList<Record> filteredList = new FilteredList(FXCollections.observableList(recordListAllUniqueDates));
         filteredList.setPredicate(predicate);
-        HashMap<Month, SummaryAbs> expectedMap = new HashMap<>();
+        HashMap<Month, Summary> expectedMap = new HashMap<>();
         for (Record r : filteredList) {
             Month month = new Month(r.getDate().getMonth(), r.getDate().getYear());
             expectedMap.put(month, new MonthSummary(r));

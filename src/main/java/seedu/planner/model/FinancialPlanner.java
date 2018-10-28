@@ -5,13 +5,10 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.record.UniqueRecordList;
-import seedu.planner.model.summary.Summary;
-import seedu.planner.model.summary.SummaryMap;
 
 /**
  * Wraps all data at the planner-book level
@@ -20,7 +17,6 @@ import seedu.planner.model.summary.SummaryMap;
 public class FinancialPlanner implements ReadOnlyFinancialPlanner {
 
     private final UniqueRecordList records;
-    private SummaryMap summaryMap;
     private DateBasedLimitList limits;
 
     /*
@@ -32,7 +28,6 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
      */
     {
         records = new UniqueRecordList();
-        summaryMap = new SummaryMap();
         limits = new DateBasedLimitList();
     }
 
@@ -67,21 +62,16 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         requireNonNull(newData);
 
         setRecords(newData.getRecordList());
-        setSummaryMap(newData.getSummaryMap());
         //setLimits(newData.getLimitList());
     }
 
     /**
      * Resets the existing data of this {@code FinancialPlanner} with the given parameters
      * @param recordList
-     * @param summaryMap
      */
-    public void resetData(UniqueRecordList recordList, SummaryMap summaryMap) {
+    public void resetData(UniqueRecordList recordList) {
         requireNonNull(recordList);
-        requireNonNull(summaryMap);
-
         setRecords(recordList.asUnmodifiableObservableList());
-        setSummaryMap(summaryMap);
     }
 
     //// record-level operations
@@ -138,38 +128,6 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         records.sortRecords(category, ascending);
     }
 
-    //// summary related operations
-    /**
-     * Add the record in the summary map
-     */
-    public void addRecordToSummary(Record p) {
-        summaryMap.add(p);
-    }
-
-    /**
-     * Remove the record from the summary map
-     */
-    public void removeRecordFromSummary(Record key) {
-        summaryMap.remove(key);
-    }
-
-    /**
-     * Update summary map to reflect change in {@code records}
-     */
-    public void updateSummary(Record target, Record editedRecord) {
-        summaryMap.update(target, editedRecord);
-    }
-
-    //TODO: Remove this once fixed bug in storage and combined all 3
-
-    public void setSummaryMap(SummaryMap summaryMap) {
-        this.summaryMap = summaryMap;
-    }
-
-    public ObservableList<Summary> getSummaryList(Date startDate, Date endDate) {
-        return summaryMap.getSummaryList(startDate, endDate);
-    }
-
     public void setLimitList(DateBasedLimitList limitList) {
         this.limits = limitList;
     }
@@ -220,11 +178,6 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         return records.asUnmodifiableObservableList();
     }
 
-    // TODO make it return a read only map
-    @Override
-    public SummaryMap getSummaryMap() {
-        return summaryMap; }
-
     @Override
     public ObservableList<Limit> getLimitList () {
         return limits.asUnmodifiableObservableList(); }
@@ -233,8 +186,7 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FinancialPlanner // instanceof handles nulls
-                && records.equals(((FinancialPlanner) other).records))
-                && summaryMap.equals(((FinancialPlanner) other).summaryMap);
+                && records.equals(((FinancialPlanner) other).records));
     }
 
     @Override

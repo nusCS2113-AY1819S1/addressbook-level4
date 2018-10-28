@@ -23,12 +23,11 @@ public class SystemTestSetupHelper {
      */
     public TestApp setupApplication(Supplier<ReadOnlyFinancialPlanner> financialPlanner,
                                     Path recordListSaveFileLocation,
-                                    Path limitListSaveFileLocation,
-                                    Path summaryListSaveFileLocation) {
+                                    Path limitListSaveFileLocation) {
         try {
             FxToolkit.registerStage(Stage::new);
             FxToolkit.setupApplication(() -> testApp = new TestApp(financialPlanner, recordListSaveFileLocation,
-                    limitListSaveFileLocation, summaryListSaveFileLocation));
+                    limitListSaveFileLocation));
         } catch (TimeoutException te) {
             throw new AssertionError("Application takes too long to set up.", te);
         }
