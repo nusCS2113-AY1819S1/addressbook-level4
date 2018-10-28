@@ -18,7 +18,6 @@ import seedu.address.model.item.Item;
 import seedu.address.model.item.Quantity;
 
 import java.util.List;
-
 public class FoundCommand extends Command{
     public static final String COMMAND_WORD = "found";
 
