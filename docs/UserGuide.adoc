@@ -165,20 +165,41 @@ Examples:
 * `di 3 n/CS2113-T09- g/1 nat/0`
 * `di 2 n/CS2113-T14- g/true nat/0`
 
-=== Sending Email to Single, Multiple or Group of Person(s): `sendmail`
-Sends an email to a single person in list+
-Format: `sendmail [Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
+=== Entering email credential into the Student Management System: `login`
+Enters account credential for sending email +
+Format: `login e/EmailAddress pw/Password`
 
-Sends an email to multiple persons in list+
+Example:
+
+* login e/tsurajovin@hotmail.com pw/password!@#
+
+For the purpose of user testing, please use the provided email account +
+if you do not wish to use your personal account.
+
+Email Address: tsurajovin@hotmail.com +
+Password: password!@#
+
+=== Sending Email to Single, Multiple or Group of Person(s): `sendmail` `sm`
+Sends an email to a single person in list +
+Format: `sendmail [Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
+Shortcut Format: `sm [Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
+
+Sends an email to multiple persons in list +
 Format: `sendmail [Index],..,[Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
+Shortcut Format: `sm [Index],..,[Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
 
 Sends an email to all persons belonging to a group +
-Format: `sendmail gn/GROUP_NAME s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
+Format: `sendmail g/[Group_Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
+Shortcut Format: `sm g/[Group_Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
 
 Examples: +
+
 * sendmail 1 s/Solution for Assignment m/Hi Bob, solution has been attached. +
+* sm 1 s/Solution for Assignment m/Hi Bob, solution has been attached. +
 * sendmail 1,4,6 s/Tutorial Cancelled m/Tutorial class for Friday has been cancelled. +
-* sendmail gn/CS2113T s/Announcement m/Please bring your calculator tomorrow.
+* sm 1,4,6 s/Tutorial Cancelled m/Tutorial Class for Friday has been cancelled. +
+* sendmail g/2 s/Announcement m/Please bring your calculator tomorrow. +
+* sm g/2 s/Announcement m/Please bring your calculator tomorrow.
 
 === List a group of students: `scorefilter`
 List out the standard deviation of the score data set from all students +
@@ -445,12 +466,14 @@ e.g. `deletegroupstudents g/1 p/1 p/2`
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
+* *Login* : `login e/EmailAddress pw/Password` +
+e.g. `login e/tsurajovin@hotmail.com pw/password!@#`
 * *Send Email (Person)*: `sendmail [Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
 e.g. `sendmail 1 s/Solution for Assignment m/Hi Bob, solution has been attached.`
 * *Send Email (Persons)*: `sendmail [Index],..,[Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
 e.g. `sendmail 1,4,6 s/Tutorial Cancelled m/Tutorial class for Friday has been cancelled.`
-* *Send Email (Group)*: `sendmail gn/GROUP_NAME s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
-e.g. `sendmail gn/CS2113T s/Announcement m/Please bring your calculator tomorrow.`
+* *Send Email (Group)*: `sendmail g/[Group_Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
+e.g. `sendmail g/2 s/Announcement m/Please bring your calculator tomorrow.`
 * *List* : `list`
 * *Help* : `help`
 * *Select* : `select INDEX` +
