@@ -3,7 +3,10 @@ package systemtests;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.ADMIN_PASSWORD_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.ADMIN_USERNAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADMIN_PASSWORD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADMIN_USERNAME;
 import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_EVENT_SUCCESS;
 import static seedu.address.testutil.TestUtil.getEvent;
 import static seedu.address.testutil.TestUtil.getLastIndex;
@@ -171,27 +174,13 @@ public class DeleteCommandSystemTest extends EventManagerSystemTest {
     }
 
     /**
-     * Performs the same verification as {@code assertCommandSuccess(String, Event)} except asserts that
-     * the,<br>
-     * 1. Result display box displays {@code expectedResultMessage}.<br>
-     * 2. {@code Storage} and {@code EventListPanel} equal to the corresponding components in
-     * {@code expectedModel}.<br>
-     */
-    private void assertCommandSuccessLogin(String command, Model expectedModel, String expectedResultMessage) {
-        executeCommand(command);
-        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
-        assertSelectedCardUnchanged();
-        assertCommandBoxShowsDefaultStyle();
-    }
-
-    /**
      * Performs the same verification as {@code assertCommandSuccess(String, Model, String)} except that the browser url
      * and selected card are expected to update accordingly depending on the card at {@code expectedSelectedCardIndex}.
      * @see DeleteCommandSystemTest#assertCommandSuccess(String, Model, String)
      * @see EventManagerSystemTest#assertSelectedCardChanged(Index)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
-            Index expectedSelectedCardIndex) {
+                                      Index expectedSelectedCardIndex) {
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
 
@@ -203,6 +192,20 @@ public class DeleteCommandSystemTest extends EventManagerSystemTest {
 
         assertCommandBoxShowsDefaultStyle();
         assertStatusBarUnchangedExceptSyncStatus();
+    }
+
+    /**
+     * Performs the same verification as {@code assertCommandSuccess(String, Event)} except asserts that
+     * the,<br>
+     * 1. Result display box displays {@code expectedResultMessage}.<br>
+     * 2. {@code Storage} and {@code EventListPanel} equal to the corresponding components in
+     * {@code expectedModel}.<br>
+     */
+    private void assertCommandSuccessLogin(String command, Model expectedModel, String expectedResultMessage) {
+        executeCommand(command);
+        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
+        assertSelectedCardUnchanged();
+        assertCommandBoxShowsDefaultStyle();
     }
 
     /**
