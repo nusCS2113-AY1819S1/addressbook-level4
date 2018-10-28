@@ -11,10 +11,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.course.Course;
 import seedu.address.model.course.CourseManager;
-import seedu.address.ui.HtmlTableProcessor;
 
 /**
- * Adds a person to the address book.
+ * Adds a student to the address book.
  */
 public class CourseAddCommand extends Command {
 
@@ -33,11 +32,11 @@ public class CourseAddCommand extends Command {
             + PREFIX_COURSE_FACULTY + "School of Computing ";
 
     public static final String MESSAGE_SUCCESS = "New course added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This course already exists in Trajectory";
+    public static final String MESSAGE_DUPLICATE_COURSE = "This course already exists in Trajectory";
 
     private Course internalCourse;
     /**
-     * Creates an StudentAddCommand to add the specified {@code Person}
+     * Creates an CourseAddCommand to add the specified {@code Course}
      */
     public CourseAddCommand(Course course) {
         requireNonNull(course);
@@ -47,11 +46,14 @@ public class CourseAddCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         CourseManager cm = CourseManager.getInstance();
+        if (cm.hasCourse(internalCourse.getCourseCode().toString())) {
+            throw new CommandException(MESSAGE_DUPLICATE_COURSE);
+        }
+
         cm.addCourse(internalCourse);
         cm.saveCourseList();
         return new CommandResult(String.format(MESSAGE_SUCCESS,
-                internalCourse.getCourseName()),
-                HtmlTableProcessor.getH3Representation(String.format(MESSAGE_SUCCESS, internalCourse.getCourseName())));
+                internalCourse.getCourseName()), cm.getTableRepresentation());
     }
 
 }

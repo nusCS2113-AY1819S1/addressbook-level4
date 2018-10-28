@@ -43,7 +43,7 @@ public class StudentAddCommandIntegrationTest {
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getAddressBook().getPersonList().get(0);
         assertCommandFailure(new StudentAddCommand(personInList), model, commandHistory,
-                StudentAddCommand.MESSAGE_DUPLICATE_PERSON);
+                StudentAddCommand.MESSAGE_DUPLICATE_STUDENT);
     }
 
 }

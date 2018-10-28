@@ -3,8 +3,10 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.course.CourseCode;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.MatricNo;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -20,15 +22,15 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_MATRIC_NO = "A0001";
-    public static final String DEFAULT_COURSE_CODE = "CEG1";
+    public static final String DEFAULT_MATRIC_NO = "A0168347B";
+    public static final String DEFAULT_COURSE_CODE = "CEG";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
-    private String courseCode;
-    private String matricNo;
+    private CourseCode courseCode;
+    private MatricNo matricNo;
     private Set<Tag> tags;
 
     public PersonBuilder() {
@@ -36,8 +38,8 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        courseCode = DEFAULT_COURSE_CODE;
-        matricNo = DEFAULT_MATRIC_NO;
+        courseCode = new CourseCode(DEFAULT_COURSE_CODE);
+        matricNo = new MatricNo(DEFAULT_MATRIC_NO);
         tags = new HashSet<>();
     }
 
@@ -98,14 +100,17 @@ public class PersonBuilder {
      * Sets the {@code CourseCocde} of the {@code Person} that we are building.
      */
     public PersonBuilder withCourseCode(String courseCode) {
-        this.courseCode = courseCode;
+
+        this.courseCode = new CourseCode(courseCode);
+
+
         return this;
     }
     /**
      * Sets the {@code MatricNo} of the {@code Person} that we are building.
      */
-    public PersonBuilder withMatricNo(String phone) {
-        this.matricNo = matricNo;
+    public PersonBuilder withMatricNo(String matricNo) {
+        this.matricNo = new MatricNo(matricNo);
         return this;
     }
     public Person build() {

@@ -9,10 +9,14 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.course.CourseCode;
+import seedu.address.model.course.CourseName;
+import seedu.address.model.course.FacultyName;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModuleName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.MatricNo;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -83,27 +87,63 @@ public class ParserUtil {
     }
 
     /**
-     * TBC
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String matricNo} into an {@code MatricNo}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code matricNo} is invalid.
      */
-    public static String parseMatric(String matricNo) throws ParseException {
+    public static MatricNo parseMatric(String matricNo) throws ParseException {
         requireNonNull(matricNo);
-        return matricNo.trim();
+        String trimmedMatricNo = matricNo.trim();
+        if (!MatricNo.isValidMatricNo(trimmedMatricNo)) {
+            throw new ParseException(MatricNo.MESSAGE_MATRIC_NO_CONSTRAINTS);
+        }
+        return new MatricNo(trimmedMatricNo);
     }
 
     /**
-     * TBC
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String courseName} into an {@code CourseName}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code courseName} is invalid.
      */
-    public static String parseCourseCode(String courseCode) throws ParseException {
+    public static CourseName parseCourseName(String courseName) throws ParseException {
+        requireNonNull(courseName);
+        String trimmedCourseName = courseName.trim();
+        if (!CourseName.isValidCourseName(trimmedCourseName)) {
+            throw new ParseException(CourseName.MESSAGE_COURSE_NAME_CONSTRAINTS);
+        }
+        return new CourseName(trimmedCourseName);
+    }
+
+    /**
+     * Parses a {@code String facultyName} into an {@code FacultyName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code facultyName} is invalid.
+     */
+    public static FacultyName parseFacultyName(String facultyName) throws ParseException {
+        requireNonNull(facultyName);
+        String trimmedFacultyName = facultyName.trim();
+        if (!FacultyName.isValidFacultyName(trimmedFacultyName)) {
+            throw new ParseException(FacultyName.MESSAGE_COURSE_FACULTY_NAME_CONSTRAINTS);
+        }
+        return new FacultyName(trimmedFacultyName);
+    }
+
+    /**
+     * Parses a {@code String courseCode} into an {@code CourseCode}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code courseCode} is invalid.
+     */
+    public static CourseCode parseCourseCode(String courseCode) throws ParseException {
         requireNonNull(courseCode);
-        return courseCode.trim();
+        String trimmedCourseCode = courseCode.trim();
+        if (!CourseCode.isValidCourseCode(trimmedCourseCode)) {
+            throw new ParseException(CourseCode.MESSAGE_COURSE_CODE_CONSTRAINTS);
+        }
+        return new CourseCode(trimmedCourseCode);
     }
 
     /**

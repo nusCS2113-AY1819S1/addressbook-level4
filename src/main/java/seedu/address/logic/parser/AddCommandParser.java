@@ -14,8 +14,10 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.StudentAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.course.CourseCode;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.MatricNo;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -48,11 +50,9 @@ public class AddCommandParser implements Parser<StudentAddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        System.out.println(ParserUtil.parseMatric(argMultimap.getValue(PREFIX_ADDRESS).get()));
-        String matricNo = ParserUtil.parseMatric(argMultimap.getValue(PREFIX_MATRIC).get());
-        String courseCode = ParserUtil.parseCourseCode(argMultimap.getValue(PREFIX_COURSE_CODE).get());
+        MatricNo matricNo = ParserUtil.parseMatric(argMultimap.getValue(PREFIX_MATRIC).get());
+        CourseCode courseCode = ParserUtil.parseCourseCode(argMultimap.getValue(PREFIX_COURSE_CODE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
 
 
         Person person = new Person(name, phone, email, address, tagList, courseCode, matricNo);

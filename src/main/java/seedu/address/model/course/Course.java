@@ -5,37 +5,37 @@ package seedu.address.model.course;
  */
 public class Course {
 
-    private String courseCode;
-    private String courseName;
-    private String facultyName;
+    private CourseCode courseCode;
+    private CourseName courseName;
+    private FacultyName facultyName;
 
-    public Course(String courseCode, String courseName, String facultyName) {
+    public Course(CourseCode courseCode, CourseName courseName, FacultyName facultyName) {
         this.courseCode = courseCode;
         this.courseName = courseName;
         this.facultyName = facultyName;
     }
 
-    public String getCourseCode() {
+    public CourseCode getCourseCode() {
         return courseCode;
     }
 
-    public void setCourseCode(String courseCode) {
+    public void setCourseCode(CourseCode courseCode) {
         this.courseCode = courseCode;
     }
 
-    public String getCourseName() {
+    public CourseName getCourseName() {
         return courseName;
     }
 
-    public void setCourseName(String courseName) {
+    public void setCourseName(CourseName courseName) {
         this.courseName = courseName;
     }
 
-    public String getFacultyName() {
+    public FacultyName getFacultyName() {
         return facultyName;
     }
 
-    public void setFacultyName(String facultyName) {
+    public void setFacultyName(FacultyName facultyName) {
         this.facultyName = facultyName;
     }
 }
