@@ -24,7 +24,15 @@ public class Friend {
         return friendName.toString();
     }
 
-    private Boolean isValidFriendName(String friendName) {
-        return true;
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Friend // instanceof handles nulls
+                && friendName.equals(((Friend) other).friendName)); // state check
+    }
+
+    @Override
+    public int hashCode() {
+        return friendName.hashCode();
     }
 }
