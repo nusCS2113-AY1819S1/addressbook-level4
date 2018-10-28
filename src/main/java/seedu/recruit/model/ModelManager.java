@@ -233,9 +233,9 @@ public class ModelManager extends ComponentManager implements Model {
         versionedCompanyBook.updateCompany(target, editedCompany);
         indicateCompanyBookChanged();
     }
-    
+
     // =========== Filtered Company List Accessors ===================================================== //
-    
+
     @Override
     public void sortCompanies(Prefix prefix) {
         versionedCompanyBook.sortCompanies(prefix);
