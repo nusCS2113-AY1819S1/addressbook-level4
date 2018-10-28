@@ -41,7 +41,7 @@ public class FileUtilTest {
 
     @Test
     public void writeToTextFile_success() throws IOException {
-        File helloWorldTestFile = new File( FileUtil.getRootLocation()
+        File helloWorldTestFile = new File(FileUtil.getRootLocation()
                 + TEST_FILES_LOCATION + helloWorldText + TextExtension);
         File helloWorldFile = new File(FileUtil.getRootLocation()
                 + SCRIPTS_LOCATION + helloWorldText + TextExtension);
@@ -51,7 +51,7 @@ public class FileUtilTest {
     }
 
     @Test
-    public void writeToTextFile_fail_throwIOException() throws IOException {
+    public void writeToTextFile_fail_throwException() throws IOException {
         File readOnlyFile = new File(FileUtil.getRootLocation()
                 + TEST_FILES_LOCATION + ReadOnlyFile + TextExtension);
         thrown.expect(IOException.class);
