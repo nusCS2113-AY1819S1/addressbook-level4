@@ -8,15 +8,19 @@ import java.util.function.Predicate;
  */
 public class OtherListPredicate implements Predicate<Person> {
 
-    private final Set<Friend> otherList;
+    private final Person currentUser;
 
-    public OtherListPredicate(Set<Friend> friendList) {
-        this.otherList = friendList;
+    public OtherListPredicate(Person currentUser) {
+        this.currentUser = currentUser;
     }
 
     @Override
     public boolean test(Person person) {
+        Set<Friend> otherList = currentUser.getFriends();
         for (Friend other : otherList) {
+            if (currentUser.getName().equals(person.getName())) {
+                return false;
+            }
             if (person.getName().equals(other.getFriendName())) {
                 return false;
             }

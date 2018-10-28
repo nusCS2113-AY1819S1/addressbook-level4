@@ -62,6 +62,16 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
+     * Update the friend list to show the current
+     */
+    void updateFriendList(Predicate<Person> predicate);
+
+    /**
+     * Updates the others list to show current
+     */
+    void updateOtherList(Predicate<Person> predicate);
+
+    /**
      * Return the friends list of the current user
      * @param person
      */
