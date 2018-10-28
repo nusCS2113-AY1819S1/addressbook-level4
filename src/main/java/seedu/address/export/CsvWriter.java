@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 
 //@@author jitwei98
@@ -33,11 +34,12 @@ public class CsvWriter {
 
     private final String[] header = { "Name", "Phone", "Address", "Email" };
     private final ObservableList<Person> listOfPersons;
-    private final Path outputFilepath = Paths.get("data" , "pineapple.csv");
+    // private final Path outputFilepath = Paths.get("data" , "pineapple.csv");
+    private final Path outputFilepath;
     private final Person person;
 
-    public CsvWriter(Person person) {
-        requireAllNonNull(person);
+    public CsvWriter(Person person, Path outputFilepath) {
+        requireAllNonNull(person, outputFilepath);
 
         // TODO: Refactor this to a exportFileWriter interface
         if (!FileUtil.isFileExists(outputFilepath)) {
@@ -52,9 +54,11 @@ public class CsvWriter {
 
         this.person = person;
         this.listOfPersons = null;
+        // TODO: Customize outputFilepath based on person name exported
+        this.outputFilepath = outputFilepath;
     }
 
-    public CsvWriter(ObservableList<Person> persons) {
+    public CsvWriter(ObservableList<Person> persons, Path outputFilepath) {
         requireAllNonNull(persons);
 
         // TODO: Refactor this to a exportFileWriter interface
@@ -70,6 +74,7 @@ public class CsvWriter {
 
         this.listOfPersons = persons;
         this.person = null;
+        this.outputFilepath = outputFilepath;
     }
 
     /**
