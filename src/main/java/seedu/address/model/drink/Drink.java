@@ -27,9 +27,21 @@ public class Drink {
     /**
      * Every field must be present and not null.
      */
-    public Drink(Name name, Set<Tag> tags) {
-        requireAllNonNull(name, tags);
+    public Drink(Name name, Price costPrice, Price retailPrice, Set<Tag> tags) {
+        requireAllNonNull(name, costPrice, retailPrice, tags);
         this.name = name;
+        this.costPrice = costPrice;
+        this.retailPrice = retailPrice;
+        quantity = new Quantity("0");
+        this.tags.addAll(tags);
+    }
+
+    public Drink(Name name, Price costPrice, Price retailPrice, Quantity quantity, Set<Tag> tags) {
+        requireAllNonNull(name, costPrice, retailPrice, quantity, tags);
+        this.name = name;
+        this.costPrice = costPrice;
+        this.retailPrice = retailPrice;
+        this.quantity = quantity;
         this.tags.addAll(tags);
     }
 
