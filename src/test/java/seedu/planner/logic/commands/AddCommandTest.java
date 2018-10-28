@@ -134,6 +134,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Record> getRecordsThisMonth() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
         public void addLimit(Limit limit) {
             throw new AssertionError("This method should not be called.");
         }

@@ -10,17 +10,23 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.planner.commons.core.ComponentManager;
+import seedu.planner.commons.core.EventsCenter;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
 import seedu.planner.commons.events.model.LimitListChangedEvent;
 import seedu.planner.commons.events.model.SummaryMapChangedEvent;
+import seedu.planner.commons.events.ui.UpdateWelcomePanelEvent;
+import seedu.planner.commons.util.DateUtil;
 import seedu.planner.model.record.Date;
+import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
+import seedu.planner.model.summary.CategoryStatisticsList;
 import seedu.planner.model.summary.Summary;
 
 /**
@@ -32,6 +38,10 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedFinancialPlanner versionedFinancialPlanner;
     private final FilteredList<Record> filteredRecords;
     private final FilteredList<Limit> limits;
+
+    private final Month currentMonth;
+    private final FilteredList<Record> recordsInCurrentMonth;
+
     /**
      * Initializes a ModelManager with the given financialPlanner and userPrefs.
      */
@@ -45,10 +55,24 @@ public class ModelManager extends ComponentManager implements Model {
         versionedFinancialPlanner = new VersionedFinancialPlanner(financialPlanner);
         filteredRecords = new FilteredList<>(versionedFinancialPlanner.getRecordList());
         limits = new FilteredList<Limit>(versionedFinancialPlanner.getLimitList());
+        currentMonth = getCurrentMonth();
+        recordsInCurrentMonth = new FilteredList<>(versionedFinancialPlanner.getRecordList(),
+                new DateIsWithinIntervalPredicate(DateUtil.generateFirstOfMonth(currentMonth),
+                        DateUtil.generateLastOfMonth(currentMonth)));
+        recordsInCurrentMonth.addListener((InvalidationListener) observable -> {
+            CategoryStatisticsList statsList = new CategoryStatisticsList(recordsInCurrentMonth);
+            EventsCenter.getInstance().post(new UpdateWelcomePanelEvent(statsList.getReadOnlyStatsList()));
+        });
+        EventsCenter.getInstance().registerHandler(this);
     }
 
     public ModelManager() {
         this(new FinancialPlanner(), new UserPrefs());
+    }
+
+    private Month getCurrentMonth() {
+        Date currentDate = DateUtil.getDateToday();
+        return new Month(currentDate.getMonth(), currentDate.getYear());
     }
 
     @Override
@@ -61,6 +85,10 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public ReadOnlyFinancialPlanner getFinancialPlanner() {
         return versionedFinancialPlanner;
+    }
+
+    public ObservableList<Record> getRecordsThisMonth() {
+        return recordsInCurrentMonth;
     }
 
     //=========== Event management methods =========================================================

@@ -18,6 +18,7 @@ import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.ui.ExitAppRequestEvent;
 import seedu.planner.commons.events.ui.ShowHelpRequestEvent;
 import seedu.planner.logic.Logic;
+import seedu.planner.model.Model;
 import seedu.planner.model.UserPrefs;
 
 /**
@@ -32,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    private Model model;
 
     // Independent Ui parts residing in this Ui container
     private DetailedRecordCard detailedRecordCard;
@@ -39,7 +41,8 @@ public class MainWindow extends UiPart<Stage> {
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
-    private SummaryDisplay summaryDisplay;
+    private StatsDisplayPanel statsDisplayPanel;
+    private WelcomePanel welcomePanel;
 
     @FXML
     private StackPane detailedRecordCardPlaceholder;
@@ -59,7 +62,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
-    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
+    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, Model model) {
         super(FXML, primaryStage);
 
         // Set dependencies
@@ -67,6 +70,7 @@ public class MainWindow extends UiPart<Stage> {
         this.logic = logic;
         this.config = config;
         this.prefs = prefs;
+        this.model = model;
 
         // Configure the UI
         setTitle(config.getAppTitle());
@@ -120,11 +124,14 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        summaryDisplay = new SummaryDisplay();
-        detailedRecordCardPlaceholder.getChildren().add(summaryDisplay.getRoot());
+        statsDisplayPanel = new StatsDisplayPanel();
+        detailedRecordCardPlaceholder.getChildren().add(statsDisplayPanel.getRoot());
 
         detailedRecordCard = new DetailedRecordCard();
         detailedRecordCardPlaceholder.getChildren().add(detailedRecordCard.getRoot());
+
+        welcomePanel = new WelcomePanel(model);
+        detailedRecordCardPlaceholder.getChildren().add(welcomePanel.getRoot());
 
         recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
         recordListPanelPlaceholder.getChildren().add(recordListPanel.getRoot());

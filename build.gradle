@@ -105,7 +105,6 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.apache.poi/poi-examples
     compile group: 'org.apache.poi', name: 'poi-examples', version: '3.9'
-
 }
 
 shadowJar {
