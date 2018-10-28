@@ -23,7 +23,6 @@ import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
-import seedu.planner.model.summary.Summary;
 import seedu.planner.testutil.LimitBuilder;
 
 
@@ -50,7 +49,7 @@ public class LimitCommandTest {
         CommandResult commandResult = new LimitCommand(validLimit).execute(modelStub, commandHistory);
 
         assertEquals(modelStub.generateLimitOutput(false,
-                modelStub.getTotalSpend(validLimit),validLimit), commandResult.feedbackToUser);
+                modelStub.getTotalSpend(validLimit), validLimit), commandResult.feedbackToUser);
         assertEquals(Arrays.asList(validLimit), modelStub.limitsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
