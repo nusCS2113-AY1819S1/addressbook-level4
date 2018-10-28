@@ -110,7 +110,7 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears current positio
 * `edit all/ t/friends k/1.0` +
 Replaces all listed persons' tag to be `friends` and edits their KPI to be `1.0`. +
 
-=== Finding persons by attribute: `find`
+=== Finding persons by attribute : `find`
 
 Finds persons whose names contain any of the given keywords. +
 Format: `find PREFIX KEYWORD [MORE_KEYWORDS]`
