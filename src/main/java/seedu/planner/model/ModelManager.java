@@ -22,9 +22,9 @@ import seedu.planner.commons.events.model.LimitListChangedEvent;
 import seedu.planner.commons.events.ui.UpdateWelcomePanelEvent;
 import seedu.planner.commons.util.DateUtil;
 import seedu.planner.model.record.Date;
+import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
-import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.summary.CategoryStatisticsList;
 
 /**
