@@ -4,19 +4,13 @@ import static biweekly.util.DayOfWeek.valueOfAbbr;
 import static java.util.Objects.requireNonNull;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZoneId;
-import java.time.temporal.TemporalAdjusters;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -38,7 +32,6 @@ import seedu.address.model.person.TimeTable;
  * Utility functions for the reading and writing of {@code TimeTable} objects to disk as .ics file. (and vice versa)
  */
 public class IcsUtil {
-    public static final String DEFAULT_ZONE_ID = "Asia/Shanghai";
     private static final Logger logger = LogsCenter.getLogger(IcsUtil.class);
     private static IcsUtil instance;
 
@@ -54,11 +47,12 @@ public class IcsUtil {
     }
 
     /**
-     * Returns the TimeTable object from the .ics file.
-     * Returns {@code Optional.empty()} object if the file is not found.
-     * Missing or corrupted or incompatible entries in the .ics file will silently fail, for now.
+     * Returns the {@code TimeTable} from the .ics file specified.
+     * Returns {@code Optional.empty()} object if the file is not found, or it did not contain iCalendar data.
+     *
      * @param filePath cannot be null.
      * @throws IOException if the file format is not as expected.
+     *
      */
     public Optional<TimeTable> readTimeTableFromFile(Path filePath)
             throws IOException {
@@ -66,13 +60,11 @@ public class IcsUtil {
 
         ICalendar iCalendar = new ICalendar();
         try {
-            iCalendar = readICalendarFromFile(filePath);
+            iCalendar = readICalendarFromFile(filePath); //does not return null.
         } catch (IOException e) {
             throw new IOException(e);
         }
-        if (iCalendar == null) {
-            throw new IOException();
-        }
+
         Optional<TimeTable> optionalTimeTable = iCalendarToTimeTable(iCalendar);
 
         return optionalTimeTable;
@@ -80,16 +72,13 @@ public class IcsUtil {
 
     /**
      * Converts {@code ICalendar} to {@code TimeTable}
-     * Returns {@code Optional.empty()} object if the file is not found.
-     * Missing or corrupted or incompatible entries in the .ics file will silently fail, for now.
-
-     * @throws IOException if the file format is not as expected.
+     *
      */
     private Optional<TimeTable> iCalendarToTimeTable(ICalendar iCalendar) {
         TimeTable timeTable = new TimeTable();
         /*
-        In the for-loop, we go through all the VEvents (logical equivalent to TimeSlots)
-        in the iCalendar (logical equivalent to TimeTable)
+        In the forloop, we go through all the VEvents (logically equivalent to TimeSlots)
+        in the iCalendar (logically equivalent to TimeTable)
 
         Then we get all the properties of each VEvent, and Instantiate a TimeSlot using these properties as parameters.
         Then we add this TimeSlot to the TimeTable.
@@ -105,17 +94,15 @@ public class IcsUtil {
             String timeStartStr = (dateStart == null) ? null : timeFormat.format(dateStart.getValue());
 
             DateEnd dateEnd = event.getDateEnd();
-            //we assume event ends on same day.
+            //dateEndStr omitted; we assume event ends on the same day.
             String timeEndStr = (dateEnd == null) ? null : timeFormat.format(dateEnd.getValue());
 
             Summary summary = event.getSummary();
             String summaryStr = (summary == null) ? null : summary.getValue();
-            //TODO: add this parameter to timetable object.
 
-            RecurrenceRule recurrenceRule = event.getRecurrenceRule();
-            String recurrenceRuleStr = (recurrenceRule == null) ? null : "hasrecurrance";
+            RecurrenceRule recurrenceRule = event.getRecurrenceRule(); //is the event recurring every X-weeks/X-days?
             if (recurrenceRule == null) {
-                continue; //TODO: this is currently hacky. pls make proper.
+                continue; //TODO: (optional) add "recurrence" variable into the TimeSlot object.
             }
 
             //after the above information extraction, we instantiate a TimeSlot with these info.
@@ -123,9 +110,10 @@ public class IcsUtil {
             LocalTime timeSlotEndTime = DateTimeConversionUtil.getInstance().timeStringToLocalTime(timeEndStr);
             DayOfWeek timeSlotDay = DateTimeConversionUtil.getInstance().dateStringToDayOfWeek(dateStartStr);
 
-            System.out.println(timeSlotStartTime + " to " + timeSlotEndTime + " on " + timeSlotDay + ": " + summaryStr);
+            logger.info("TimeSlot read:" + timeSlotStartTime + " to " + timeSlotEndTime + " on " + timeSlotDay + ": " + summaryStr);
 
             //Add timeslot to timetable
+            //TODO: Add (summary/label) to timetable object.
             TimeSlot timeSlot = new TimeSlot(timeSlotDay, timeSlotStartTime, timeSlotEndTime);
             timeTable.addTimeSlot(timeSlot);
 
@@ -138,15 +126,12 @@ public class IcsUtil {
     }
 
     /**
-     * Saves TimeTable object data to the .ics file specified
+     * Saves {@code TimeTable} data to the .ics file specified.
      *
-     * @param filePath Points to a .ics file containing data {@code TimeTable}.
-     *             Cannot be null.
-     * @throws FileNotFoundException    Thrown if the file is missing.
+     * @param filePath Location to save the file to. Cannot be null.
      * @throws IOException  Thrown if there is an error during converting the data
-     *                                  into .ics and writing to the file.
+     *                                  into .ics or writing to the file.
      */
-
     public void saveTimeTableToFile(TimeTable timeTable, Path filePath)
             throws IOException {
         requireNonNull(filePath);
@@ -160,8 +145,7 @@ public class IcsUtil {
     }
 
     /**
-     * Converts TimeTable to ICalendar object.
-     *
+     * Converts {@code TimeTable} to {@code ICalendar}.
      */
     private ICalendar timeTableToICalendar(TimeTable timeTable) {
         Collection<TimeSlot> timeSlots = timeTable.getTimeSlots();
@@ -197,10 +181,10 @@ public class IcsUtil {
         vEvent.setRecurrenceRule(recurrenceRule);
 
         //write data to {@code VEvent}: set the DateStart
-        vEvent.setDateStart(getPreviousDateOfDay(startTime, dayOfWeek));
+        vEvent.setDateStart(DateTimeConversionUtil.getInstance().getPreviousDateOfDay(startTime, dayOfWeek));
 
         //write data to {@code VEvent}: set the DateEnd
-        vEvent.setDateEnd(getPreviousDateOfDay(endTime, dayOfWeek));
+        vEvent.setDateEnd(DateTimeConversionUtil.getInstance().getPreviousDateOfDay(endTime, dayOfWeek));
 
         //write data to {@code VEvent}: set summary (Module Name)
         vEvent.setSummary(label);
@@ -208,24 +192,15 @@ public class IcsUtil {
         return vEvent;
     }
 
-    /**
-     * Get the Date of the previous dayOfWeek.
-     * ie: if dayOfWeek is monday, then the return last monday's Date.
-     */
-    private Date getPreviousDateOfDay(LocalTime startTime, DayOfWeek dayOfWeek) {
-        LocalDate previousDay =
-                LocalDate.now(ZoneId.of(DEFAULT_ZONE_ID))
-                        .with(TemporalAdjusters.previous(dayOfWeek));
-
-        LocalDateTime localDateTime = startTime.atDate(previousDay);
-        return DateTimeConversionUtil.getInstance().localDateTimeToDate(localDateTime);
-    }
 
     /**
-     * Writes ICalendar object to file specified
+     * Writes {@code ICalendar} object to file specified
      * @throws IOException if any error occurs during write.
      */
     private void writeICalendarToFile(ICalendar iCalendar, Path filePath) throws IOException {
+        requireNonNull(filePath);
+        requireNonNull(iCalendar);
+
         File file = filePath.toFile();
         try {
             Biweekly.write(iCalendar).go(file);
@@ -235,24 +210,29 @@ public class IcsUtil {
     }
 
     /**
-     * Reads {@code ICalendar} object from file specified
-     * Will return an empty ICalendar if the .ics file is empty.
+     * Reads {@code ICalendar} object from {@code Path} specified
      *
-     * This function will only read the 1st {@code ICalendar} in an .ics file
+     * Will return an empty {@code ICalendar} if the .ics file is empty or has no related information.
+     *
+     * @throws IOException if any IO error occurs during read.
+     *
+     * TODO: This function currently only reads the 1st {@code ICalendar} in an .ics file
      * the other {@code ICalendar} are simply not read! (silent failure)
-     * NUSMODS export only has 1 VCalendar in an .ics file; all good.
-     *
-     * @throws IOException if any error occurs during read.
+     * NUSMODS export only has 1 VCalendar in an .ics file; all good for now.
      */
     private ICalendar readICalendarFromFile(Path filePath) throws IOException {
+        requireNonNull(filePath);
         ICalendar iCalendar;
         try {
             iCalendar = Biweekly.parse(filePath.toFile()).first();
         } catch (IOException e) {
             throw new IOException(e);
         }
-        return iCalendar;
+
+        if (iCalendar == null){
+            return new ICalendar();
+        } else {
+            return iCalendar;
+        }
     }
-
-
 }

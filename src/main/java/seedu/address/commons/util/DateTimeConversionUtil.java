@@ -1,11 +1,16 @@
 package seedu.address.commons.util;
 
+import static java.util.Objects.requireNonNull;
+
+import java.time.DateTimeException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 
 /**
@@ -16,6 +21,7 @@ import java.util.Date;
  */
 public class DateTimeConversionUtil {
     private static DateTimeConversionUtil instance;
+    private static final String DEFAULT_ZONE_ID = "Asia/Shanghai";
 
     private DateTimeConversionUtil() {
 
@@ -31,16 +37,24 @@ public class DateTimeConversionUtil {
     /**
      * Utility function to convert {@code LocalDateTime} to {@code Date}
      */
-    Date localDateTimeToDate(LocalDateTime localDateTime) {
-        Date out = Date.from(localDateTime.atZone(ZoneId.of(IcsUtil.DEFAULT_ZONE_ID)).toInstant());
+    public Date localDateTimeToDate(LocalDateTime localDateTime) throws IllegalArgumentException {
+        requireNonNull(localDateTime);
+        Date out;
+        try {
+            out = Date.from(localDateTime.atZone(ZoneId.of(DEFAULT_ZONE_ID)).toInstant());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException (e);
+        }
         return out;
     }
 
     /**
      *  Utility function to convert {@code Date} to {@code LocalDateTime}
      */
-    LocalDateTime dateToLocalDateTime(Date date) {
-        LocalDateTime localDateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+    public LocalDateTime dateToLocalDateTime(Date date) throws DateTimeException {
+        requireNonNull(date);
+        LocalDateTime localDateTime;
+        localDateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
         return localDateTime;
     }
     
@@ -48,8 +62,8 @@ public class DateTimeConversionUtil {
      * Converts the ics-formatted dateString into DayOfWeek object.
      * @param dateString    is in format yyyyMMdd (as in .ics)
      */
-    public DayOfWeek dateStringToDayOfWeek(String dateString) {
-        //TODO: defensive coding
+    public DayOfWeek dateStringToDayOfWeek(String dateString) throws DateTimeParseException {
+        requireNonNull(dateString);
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyyMMdd");
         LocalDate date = LocalDate.parse(dateString, fmt);
         DayOfWeek day = date.getDayOfWeek();
@@ -61,7 +75,8 @@ public class DateTimeConversionUtil {
      * Converts the ics-formatted timeString into a LocalTime object.
      * @param timeString    is in format HHmmss (as in .ics)
      */
-    public LocalTime timeStringToLocalTime(String timeString) {
+    public LocalTime timeStringToLocalTime(String timeString) throws DateTimeParseException, IllegalArgumentException {
+        requireNonNull(timeString);
         //TODO: defensive coding
         int timeInt = Integer.parseInt(timeString);
         String formattedTime = String.format("%06d", timeInt);
@@ -71,4 +86,18 @@ public class DateTimeConversionUtil {
 
         return time;
     }
+
+    /**
+     * Get the {@code Date} of the previous {@code DayOfWeek} from the given {@code LocalTime}.
+     * ie: if dayOfWeek is monday, then the return last monday's Date.
+     */
+    public Date getPreviousDateOfDay(LocalTime startTime, DayOfWeek dayOfWeek) {
+        LocalDate previousDay =
+                LocalDate.now(ZoneId.of(DEFAULT_ZONE_ID))
+                        .with(TemporalAdjusters.previous(dayOfWeek));
+
+        LocalDateTime localDateTime = startTime.atDate(previousDay);
+        return DateTimeConversionUtil.getInstance().localDateTimeToDate(localDateTime);
+    }
+
 }
