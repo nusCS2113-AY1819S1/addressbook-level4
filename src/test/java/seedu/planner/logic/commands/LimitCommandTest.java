@@ -49,7 +49,8 @@ public class LimitCommandTest {
 
         CommandResult commandResult = new LimitCommand(validLimit).execute(modelStub, commandHistory);
 
-        assertEquals(modelStub.generateLimitOutput(false, validLimit), commandResult.feedbackToUser);
+        assertEquals(modelStub.generateLimitOutput(false,
+                modelStub.getTotalSpend(validLimit),validLimit), commandResult.feedbackToUser);
         assertEquals(Arrays.asList(validLimit), modelStub.limitsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
@@ -119,10 +120,6 @@ public class LimitCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
-        public ObservableList<Summary> getSummaryList(Date date1, Date date2) {
-            throw new AssertionError("This method should not be called.");
-        }
 
         @Override
         public ObservableList<Record> getRecordsThisMonth() {
@@ -143,6 +140,10 @@ public class LimitCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public Double getTotalSpend(Limit limit) {
+            return 0.0;
+        }
         @Override
         public void deleteLimit(Limit limit) {
             throw new AssertionError("This method should not be called.");
@@ -179,7 +180,7 @@ public class LimitCommandTest {
         }
 
         @Override
-        public String generateLimitOutput(boolean isExceeded, Limit limit) {
+        public String generateLimitOutput(boolean isExceeded, Double totalSpend, Limit limit) {
             return "";
         }
 
@@ -239,6 +240,12 @@ public class LimitCommandTest {
         public boolean hasSameDateLimit(Limit limit) {
             requireNonNull(limit);
             return this.limit.isSameLimitDates(limit);
+        }
+
+        @Override
+        public Double getTotalSpend(Limit limit) {
+            requireNonNull(limit);
+            return this.getTotalSpend(limit);
         }
     }
 

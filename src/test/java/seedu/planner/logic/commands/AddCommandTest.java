@@ -139,6 +139,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public Double getTotalSpend(Limit limit) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteLimit(Limit limit) {
             throw new AssertionError("This method should not be called.");
         }
@@ -146,6 +151,7 @@ public class AddCommandTest {
         public boolean hasRecord(Record record) {
             throw new AssertionError("This method should not be called.");
         }
+
 
         @Override
         public boolean hasSameDateLimit(Limit limit) {
@@ -166,7 +172,7 @@ public class AddCommandTest {
 
         @Override
         public String autoLimitCheck() {
-            throw new AssertionError("This method should not be called.");
+            return "";
         }
 
         @Override

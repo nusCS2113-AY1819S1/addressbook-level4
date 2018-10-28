@@ -179,11 +179,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
     @Override
     public String autoLimitCheck () {
-        String output = "\n";
+        String output = "";
         int count = 1;
         for (Limit i: limits) {
             if (isExceededLimit(i)) {
-                output += String.format("%d.", count++) + generateLimitOutput(true, getTotalSpend(i), i) + "\n";
+                output += "\n" + String.format("%d.", count++) + generateLimitOutput(true, getTotalSpend(i), i);
             }
         }
         return output;
