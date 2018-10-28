@@ -423,6 +423,7 @@
     -fx-fill: -fx-text-base-color;
     -fx-font-size: 15px;
     -fx-font-family: Georgia;
+    -fx-text-wrap: true;
 }
 .chart-pie-label-line {
     -fx-stroke: derive(-fx-background,-20%);
