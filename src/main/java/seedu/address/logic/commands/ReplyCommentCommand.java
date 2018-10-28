@@ -1,13 +1,10 @@
+//@@author  Geraldcdx
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINE;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
 
 import seedu.address.commons.core.EventsCenter;
@@ -20,7 +17,6 @@ import seedu.address.logic.comments.ReplyComment;
 import seedu.address.model.Model;
 import seedu.address.model.event.Comment;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.Phone;
 
 /**
  * Replies a comment in the comment section of the event
