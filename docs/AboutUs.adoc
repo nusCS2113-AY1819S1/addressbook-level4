@@ -28,6 +28,7 @@ Group Feature - Create Group(s) +
 Group Feature - Add Student(s) to Group(s) +
 Group Feature - Delete Group(s) +
 Group Feature - Delete Student(s) from Group(s) +
+Group Feature - Select Group +
 Development of features and ensuring document correctness
 
 '''
