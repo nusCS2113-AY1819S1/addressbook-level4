@@ -18,7 +18,7 @@ import guitests.guihandles.GroupCardHandle;
 import guitests.guihandles.GroupListPanelHandle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
+import seedu.address.commons.events.ui.JumpToGroupListRequestEvent;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.group.Group;
@@ -28,7 +28,7 @@ public class GroupListPanelTest extends GuiUnitTest {
     private static final ObservableList<Group> TYPICAL_GROUPS =
             FXCollections.observableList(getTypicalGroups());
 
-    private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToListRequestEvent(INDEX_SECOND_GROUP);
+    private static final JumpToGroupListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToGroupListRequestEvent(INDEX_SECOND_GROUP);
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "sandbox");
 
@@ -51,7 +51,7 @@ public class GroupListPanelTest extends GuiUnitTest {
     }
 
     @Test
-    public void handleJumpToListRequestEvent() {
+    public void handleJumpToGroupListRequestEvent() {
         initUi(TYPICAL_GROUPS);
         postNow(JUMP_TO_SECOND_EVENT);
         guiRobot.pauseForHuman();
