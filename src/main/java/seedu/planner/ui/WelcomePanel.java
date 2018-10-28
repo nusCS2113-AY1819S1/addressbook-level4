@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -130,7 +128,10 @@ public class WelcomePanel extends UiPart<Region> implements Switchable {
         incomeStats.getChildren().add(incomeNode);
     }
 
-    @Subscribe
+    /**
+     * Handles UpdateWelcomePanelEvent passed from MainWindow's delegate function
+     * @param event event to be handled
+     */
     public void handleUpdateWelcomePanelEvent(UpdateWelcomePanelEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         populateUi(event.data);

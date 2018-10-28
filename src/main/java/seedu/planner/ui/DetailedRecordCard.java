@@ -2,8 +2,6 @@ package seedu.planner.ui;
 
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -82,8 +80,11 @@ public class DetailedRecordCard extends UiPart<Region> implements Switchable {
         detailedCard.setVisible(false);
     }
 
-    @Subscribe
-    private void handleRecordPanelSelectionChangedEvent(RecordPanelSelectionChangedEvent event) {
+    /**
+     * Handles RecordPanelSelectionChangedEvent passed from MainWindow's delegate function
+     * @param event event to be handled
+     */
+    public void handleRecordPanelSelectionChangedEvent(RecordPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadRecordPage(event.getNewSelection());
     }

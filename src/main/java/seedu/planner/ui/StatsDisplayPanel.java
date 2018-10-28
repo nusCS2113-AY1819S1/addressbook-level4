@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -117,16 +115,21 @@ public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
         return new Pair<>(FXCollections.observableList(chartDataList), totalIncome);
     }
 
-    @Subscribe
+    /**
+     * Handles the ShowSummaryTableEvent that is passed from MainWindow's delegate function.
+     * @param event event to be handled
+     */
     public void handleShowSummaryTableEvent(ShowSummaryTableEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         Tab summaryTab = new Tab(SummaryDisplay.LABEL , new SummaryDisplay(event.data).getRoot());
         clearTabs();
         createTabs(summaryTab);
-        show();
     }
 
-    @Subscribe
+    /**
+     * Handles the ShowPieChartStatsEvent that is passed from MainWindow's delegate function.
+     * @param event event to be handled
+     */
     public void handleShowPieChartStatsEvent(ShowPieChartStatsEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         Tab categoryExpenseTab = new Tab("Category Breakdown For Expenses", createTotalExpenseBreakdown(
@@ -135,6 +138,5 @@ public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
                 event.data));
         clearTabs();
         createTabs(categoryExpenseTab, categoryIncomeTab);
-        show();
     }
 }

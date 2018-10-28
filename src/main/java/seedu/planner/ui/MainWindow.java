@@ -6,6 +6,7 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -16,7 +17,11 @@ import seedu.planner.commons.core.Config;
 import seedu.planner.commons.core.GuiSettings;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.ui.ExitAppRequestEvent;
+import seedu.planner.commons.events.ui.RecordPanelSelectionChangedEvent;
 import seedu.planner.commons.events.ui.ShowHelpRequestEvent;
+import seedu.planner.commons.events.ui.ShowPieChartStatsEvent;
+import seedu.planner.commons.events.ui.ShowSummaryTableEvent;
+import seedu.planner.commons.events.ui.UpdateWelcomePanelEvent;
 import seedu.planner.logic.Logic;
 import seedu.planner.model.Model;
 import seedu.planner.model.UserPrefs;
@@ -207,5 +212,46 @@ public class MainWindow extends UiPart<Stage> {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
+    }
+
+    /* ------------------ Delegates for event management system for switching of panels ----------------------------- */
+    @Subscribe
+    private void handleShowSummaryTableEvent(ShowSummaryTableEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        for (Node node: mainUiPanelPlaceholder.getChildren()) {
+            node.setVisible(false);
+        }
+        statsDisplayPanel.handleShowSummaryTableEvent(event);
+        statsDisplayPanel.show();
+    }
+
+    @Subscribe
+    private void handleShowPieCharStatsEvent(ShowPieChartStatsEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        for (Node node: mainUiPanelPlaceholder.getChildren()) {
+            node.setVisible(false);
+        }
+        statsDisplayPanel.handleShowPieChartStatsEvent(event);
+        statsDisplayPanel.show();
+    }
+
+    @Subscribe
+    private void handleRecordPanelSelectionChangedEvent(RecordPanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        for (Node node: mainUiPanelPlaceholder.getChildren()) {
+            node.setVisible(false);
+        }
+        detailedRecordCard.handleRecordPanelSelectionChangedEvent(event);
+        detailedRecordCard.show();
+    }
+
+    @Subscribe
+    private void handleUpdateWelcomePanelEvent(UpdateWelcomePanelEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        for (Node node: mainUiPanelPlaceholder.getChildren()) {
+            node.setVisible(false);
+        }
+        welcomePanel.handleUpdateWelcomePanelEvent(event);
+        welcomePanel.show();
     }
 }
