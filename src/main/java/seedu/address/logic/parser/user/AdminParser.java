@@ -6,7 +6,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.drinkcommands.AddItemCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -19,10 +18,6 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.drinkcommands.user.ChangePasswordCommand;
-import seedu.address.logic.drinkcommands.user.CreateAccountCommand;
-import seedu.address.logic.drinkcommands.user.LogoutCommand;
-import seedu.address.logic.drinkparser.AddDrinkCommandParser;
 import seedu.address.logic.parser.DeleteCommandParser;
 import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.logic.parser.FindCommandParser;
@@ -57,54 +52,53 @@ public class AdminParser {
 
         switch (commandWord) {
 
-        case AddItemCommand.COMMAND_WORD:
-            return new AddDrinkCommandParser().parse (arguments);
+            // case AddItemCommand.COMMAND_WORD:
+            //    return new AddDrinkCommandParser().parse (arguments);
 
-        case ChangePasswordCommand.COMMAND_WORD:
-            return new ChangePasswordCommandParser ().parse(arguments);
+            //case ChangePasswordCommand.COMMAND_WORD:
+            //    return new ChangePasswordCommandParser ().parse(arguments);
 
-        case CreateAccountCommand.COMMAND_WORD:
-            return new CreateAccountCommandParser ().parse (arguments);
+            //case CreateAccountCommand.COMMAND_WORD:
+            //    return new CreateAccountCommandParser ().parse (arguments);
+            // existing command
+            case EditCommand.COMMAND_WORD:
+                return new EditCommandParser().parse(arguments);
 
-        //existing command
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser ().parse(arguments);
+            case SelectCommand.COMMAND_WORD:
+                return new SelectCommandParser().parse(arguments);
 
-        case SelectCommand.COMMAND_WORD:
-            return new SelectCommandParser ().parse(arguments);
+            case DeleteCommand.COMMAND_WORD:
+                return new DeleteCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser ().parse(arguments);
+            case ClearCommand.COMMAND_WORD:
+                return new ClearCommand();
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            case FindCommand.COMMAND_WORD:
+                return new FindCommandParser().parse(arguments);
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser ().parse(arguments);
+            case ListCommand.COMMAND_WORD:
+                return new ListCommand();
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            case HistoryCommand.COMMAND_WORD:
+                return new HistoryCommand();
 
-        case HistoryCommand.COMMAND_WORD:
-            return new HistoryCommand();
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
 
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            case UndoCommand.COMMAND_WORD:
+                return new UndoCommand();
 
-        case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();
+            case RedoCommand.COMMAND_WORD:
+                return new RedoCommand();
 
-        case RedoCommand.COMMAND_WORD:
-            return new RedoCommand();
+            //case LogoutCommand.COMMAND_WORD:
+            //    return new LogoutCommand();
 
-        case LogoutCommand.COMMAND_WORD:
-            return new LogoutCommand ();
-
-        default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 
