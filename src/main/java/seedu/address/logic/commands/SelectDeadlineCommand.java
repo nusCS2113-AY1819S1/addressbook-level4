@@ -60,6 +60,13 @@ public class SelectDeadlineCommand extends Command implements CommandParser {
     }
 
     @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof SelectDeadlineCommand // instanceof handles nulls
+                && toSelect.equals(((SelectDeadlineCommand) other).toSelect));
+    }
+
+    @Override
     public Command parse(String arguments) throws ParseException {
         return new SelectDeadlineCommandParser().parse(arguments);
     }

@@ -64,11 +64,11 @@ public class Deadline {
         // Check that all the characters are numeric first.
         if (!isNumeric(day) || !isNumeric(month) || !isNumeric(year)) {
             return false;
-        } else if (Integer.parseInt(day) < 0 || Integer.parseInt(day) > 31) {
+        } else if (Integer.parseInt(day) < 1 || Integer.parseInt(day) > 31) {
             return false;
-        } else if (Integer.parseInt(month) < 0 || Integer.parseInt(month) > 12) {
+        } else if (Integer.parseInt(month) < 1 || Integer.parseInt(month) > 12) {
             return false;
-        } else if (Integer.parseInt(year) < 1000 || Integer.parseInt(year) > 9999) {
+        } else if (Integer.parseInt(year) < 2018 || Integer.parseInt(year) > 9999) {
             return false;
         }
         return true;
