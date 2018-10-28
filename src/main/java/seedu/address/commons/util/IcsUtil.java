@@ -31,6 +31,9 @@ import seedu.address.model.person.TimeTable;
 
 /**
  * Utility functions for the reading and writing of {@code TimeTable} objects to disk as .ics file. (and vice versa)
+ * Classes available for public access:
+ * 1) readTimeTableFromFile ()
+ * 2) saveTimeTableToFile ()
  */
 public class IcsUtil {
     private static final Logger logger = LogsCenter.getLogger(IcsUtil.class);
@@ -73,60 +76,6 @@ public class IcsUtil {
     }
 
     /**
-     * Converts {@code ICalendar} to {@code TimeTable}
-     *
-     */
-    private Optional<TimeTable> iCalendarToTimeTable(ICalendar iCalendar) {
-        TimeTable timeTable = new TimeTable();
-        /*
-        In the forloop, we go through all the VEvents (logically equivalent to TimeSlots)
-        in the iCalendar (logically equivalent to TimeTable)
-
-        Then we get all the properties of each VEvent, and Instantiate a TimeSlot using these properties as parameters.
-        Then we add this TimeSlot to the TimeTable.
-         */
-        for (VEvent event : iCalendar.getEvents()) { //foreach TimeSlot in TimeTable
-            //formatter
-            DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-            DateFormat timeFormat = new SimpleDateFormat("HHmmss");
-
-            // this part extracts the vital information
-            DateStart dateStart = event.getDateStart();
-            String dateStartStr = (dateStart == null) ? null : dateFormat.format(dateStart.getValue());
-            String timeStartStr = (dateStart == null) ? null : timeFormat.format(dateStart.getValue());
-
-            DateEnd dateEnd = event.getDateEnd();
-            //dateEndStr omitted; we assume event ends on the same day.
-            String timeEndStr = (dateEnd == null) ? null : timeFormat.format(dateEnd.getValue());
-
-            Summary summary = event.getSummary();
-            String summaryStr = (summary == null) ? null : summary.getValue();
-
-            RecurrenceRule recurrenceRule = event.getRecurrenceRule(); //is the event recurring every X-weeks/X-days?
-            if (recurrenceRule == null) {
-                continue; //TODO: (optional) add "recurrence" variable into the TimeSlot object.
-            }
-
-            //after the above information extraction, we instantiate a TimeSlot with these info.
-            LocalTime timeSlotStartTime = DateTimeConversionUtil.getInstance().timeStringToLocalTime(timeStartStr);
-            LocalTime timeSlotEndTime = DateTimeConversionUtil.getInstance().timeStringToLocalTime(timeEndStr);
-            DayOfWeek timeSlotDay = DateTimeConversionUtil.getInstance().dateStringToDayOfWeek(dateStartStr);
-
-            //Add timeslot to timetable
-            //TODO: Add (summary/label) to timetable object.
-            TimeSlot timeSlot = new TimeSlot(timeSlotDay, timeSlotStartTime, timeSlotEndTime);
-            timeTable.addTimeSlot(timeSlot);
-        }
-        if (timeTable.isEmpty()) {
-            logger.info("No timeslots found in file.");
-            return Optional.empty();
-        } else {
-            logger.info("Some (>1) timeslots have been read from file.");
-            return Optional.of(timeTable);
-        }
-    }
-
-    /**
      * Saves {@code TimeTable} data to the .ics file specified.
      *
      * @param filePath Location to save the file to. Cannot be null.
@@ -144,6 +93,76 @@ public class IcsUtil {
             logger.info("Failed to write to: " + filePath.toString());
             throw new IOException (e);
         }
+    }
+
+    /**
+     * Converts {@code ICalendar} to {@code TimeTable}
+     *
+     */
+    private Optional<TimeTable> iCalendarToTimeTable(ICalendar iCalendar) {
+        TimeTable timeTable = new TimeTable();
+        /*
+        In the forloop, we go through all the VEvents (logically equivalent to TimeSlots)
+        in the iCalendar (logically equivalent to TimeTable)
+
+        Then we get all the properties of each VEvent, and Instantiate a TimeSlot using these properties as parameters.
+        Then we add this TimeSlot to the TimeTable.
+         */
+        for (VEvent vEvent : iCalendar.getEvents()) { //foreach TimeSlot in TimeTable
+            Optional<TimeSlot> optionalTimeSlot = vEventToTimeSlot(vEvent);
+            if (optionalTimeSlot.isPresent()) {
+                timeTable.addTimeSlot(optionalTimeSlot.get());
+            }
+        }
+        if (timeTable.isEmpty()) {
+            logger.info("No timeslots found in file.");
+            return Optional.empty();
+        } else {
+            logger.info("Some (>1) timeslots have been read from file.");
+            return Optional.of(timeTable);
+        }
+    }
+
+    /**
+     * Converts {@code VEvent} to {@code Optional<TimeSlot>}.
+     * Only allow VEvents that are recurring to be added.
+     */
+    private Optional<TimeSlot> vEventToTimeSlot(VEvent vEvent) {
+        //formatter
+        DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        DateFormat timeFormat = new SimpleDateFormat("HHmmss");
+
+        // this part extracts the vital information
+        DateStart dateStart = vEvent.getDateStart();
+        String dateStartStr = (dateStart == null) ? null : dateFormat.format(dateStart.getValue());
+        String timeStartStr = (dateStart == null) ? null : timeFormat.format(dateStart.getValue());
+
+        DateEnd dateEnd = vEvent.getDateEnd();
+        //dateEndStr omitted; we assume event ends on the same day.
+        String timeEndStr = (dateEnd == null) ? null : timeFormat.format(dateEnd.getValue());
+
+        Summary summary = vEvent.getSummary();
+        String summaryStr = (summary == null) ? null : summary.getValue();
+
+        RecurrenceRule recurrenceRule = vEvent.getRecurrenceRule(); //is the event recurring every X-weeks/X-days?
+        if (recurrenceRule == null) {
+            return Optional.empty();
+        }
+
+        //if any of out essential TimeSlot variables are missing, ignore the VEvent and do not add it.
+        if ((dateStartStr == null) || (timeStartStr == null) || (timeEndStr == null) || (summaryStr == null)) {
+            return Optional.empty();
+        }
+
+        //after the above information extraction, we instantiate a TimeSlot with these info.
+        LocalTime timeSlotStartTime = DateTimeConversionUtil.getInstance().timeStringToLocalTime(timeStartStr);
+        LocalTime timeSlotEndTime = DateTimeConversionUtil.getInstance().timeStringToLocalTime(timeEndStr);
+        DayOfWeek timeSlotDay = DateTimeConversionUtil.getInstance().dateStringToDayOfWeek(dateStartStr);
+
+        //Add timeslot to timetable
+        //TODO: Add (summary/label) to timetable object.
+        TimeSlot timeSlot = new TimeSlot(timeSlotDay, timeSlotStartTime, timeSlotEndTime);
+        return Optional.of(timeSlot);
     }
 
     /**
