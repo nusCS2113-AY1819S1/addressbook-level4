@@ -224,10 +224,10 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
 
     /**
      * Removes a limit from the list,
-     * @param limitin must already existed.
+     * @param limitLn must already existed.
      */
-    public void removeLimit(Limit limitin) {
-        limits.remove(limitin); }
+    public void removeLimit(Limit limitLn) {
+        limits.remove(limitLn); }
 
 
     @Override
