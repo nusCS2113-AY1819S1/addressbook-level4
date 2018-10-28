@@ -457,6 +457,9 @@ Same as the other commands, see <<Events-Driven-Nature,*`Events-Driven nature of
 
 === Security Implementation
 To begin this section, we would need to introduce the idea of a Authenticated User instance.
+Everytime a user successfully logs in, or creates a new account, the application will create an Authenticated User in
+Model. This User is an extension of the Person Class, which different UI and commands will access it. One example would
+be the friend's UI panel, where it has to know the current user to know his friends
 
 ==== Current Implementation
 This section will be broken down into +
@@ -465,12 +468,26 @@ This section will be broken down into +
 
 ===== Front-End Implementation
 1. CLI +
+SecurityBox Class handles the command line interface, and passes every commands to
+SecurityManager through the Security API.
 2. UI Prompt +
-Inside the UI package, there are two new windows created, LoginWindow and RegistrationWindow. Whenever login or register
-process is successful, it raises their respective SuccessEvent to the event bus. The preexisting UIManager is subscribed
-to this events, and will display the content of the UI and closing the respective boxes.
+Inside the UI package, there are two new windows created, LoginWindow and RegistrationWindow. Each Window would handle
+UI events such as clicks and passing relevant information to the SecurityManager
+similar to above. +
 
-===== Back-End Implmentation
+Whenever login or register is called through the Security API, this raises their respective Events to the event bus. The preexisting UIManager is subscribed
+to this events, and will react accordingly to the events raised.
+
+===== Back-End Implementation
+Users credentials are stored in a json file called users.json at root. The class managing the reading and writing of
+this file is JsonAppUserStorage. +
+
+The object that it is storing is the AppUsers class implemented in the Security Package. It contains an array of
+AccountCredentials, which has the attribute of Username and Password, and methods such isPasswordValid(). Here it also
+calls the static Hasher class, which takes the password and a salt to create the hash of the password to store.
+
+Whenever a user logs in, the username is searched inside AppUsers. Once it matches the username, the input pasword is
+then salted and hashed (SHA-512), and finally compared to the stored hashed password.
 
 ==== Design Considerations
 
