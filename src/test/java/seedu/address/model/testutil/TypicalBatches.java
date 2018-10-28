@@ -1,11 +1,11 @@
 package seedu.address.model.testutil;
 
-import seedu.address.model.drink.Batch;
-import seedu.address.model.drink.UniqueBatchList;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import seedu.address.model.drink.Batch;
+import seedu.address.model.drink.UniqueBatchList;
 
 /**
  * A utility class containing a list of {@code Batch} objects to be used in tests.
