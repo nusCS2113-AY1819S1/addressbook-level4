@@ -15,7 +15,7 @@ import seedu.address.model.Filetype;
  */
 public class ExportCommandParser implements Parser<ExportCommand> {
 
-    private static final int INDEX_OF_FILETYPE = 2;
+    private static final int LENGTH_OF_FILETYPE = 3;
 
     /**
      * Parses the given {@code String} of arguments in the context of the {@code ExportCommand}
@@ -37,11 +37,11 @@ public class ExportCommandParser implements Parser<ExportCommand> {
     }
 
     private String getIndexFrom(String args) {
-        return args.substring(0, INDEX_OF_FILETYPE);
+        return args.substring(0, args.length() - LENGTH_OF_FILETYPE);
     }
 
     private String getFiletypeFrom(String args) {
-        return args.substring(INDEX_OF_FILETYPE);
+        return args.substring(args.length() - LENGTH_OF_FILETYPE);
     }
 
 }
