@@ -52,6 +52,20 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code oneBasedIndex} containing group prefix and returns the index. Leading and trailing whitespaces
+     * will be trimmed.
+     *
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static Index parseGroupIndex(String oneBasedIndex) throws ParseException {
+        String trimmedIndex = oneBasedIndex.replaceAll("[g/]", "").trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
      * Parses multiple {@code oneBasedIndex} into a list of {@code Index} and returns it. Leading and trailing white
      * spaces will be trimmed.
      *

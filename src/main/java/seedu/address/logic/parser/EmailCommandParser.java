@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MESSAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
@@ -28,17 +29,18 @@ public class EmailCommandParser implements Parser<EmailCommand> {
      */
     public EmailCommand parse(String args) throws ParseException {
         requireNonNull(args);
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_SUBJECT, PREFIX_MESSAGE);
-
         if (!arePrefixesPresent(argMultimap, PREFIX_SUBJECT, PREFIX_MESSAGE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EmailCommand.MESSAGE_USAGE));
         }
-
+        boolean isGroupCommand = isGroup(args);
+        boolean isMultipleIndex = isMultipleIndex(argMultimap.getPreamble());
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         Message message = ParserUtil.parseMessage(argMultimap.getValue(PREFIX_MESSAGE).get());
 
-        if (!isMultipleIndex(argMultimap.getPreamble())) {
+        if (!isMultipleIndex && !isGroupCommand) {
             Index index;
             try {
                 index = ParserUtil.parseIndex(argMultimap.getPreamble());
@@ -46,7 +48,7 @@ public class EmailCommandParser implements Parser<EmailCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EmailCommand.MESSAGE_USAGE), pe);
             }
             return new EmailCommand(index, subject, message);
-        } else {
+        } else if (isMultipleIndex && !isGroupCommand) {
             List<Index> indexList;
             try {
                 indexList = ParserUtil.parseMultipleIndex(argMultimap.getPreamble());
@@ -54,7 +56,16 @@ public class EmailCommandParser implements Parser<EmailCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EmailCommand.MESSAGE_USAGE), pe);
             }
             return new EmailCommand(indexList, subject, message);
+        } else {
+            Index index;
+            try {
+                index = ParserUtil.parseGroupIndex(argMultimap.getPreamble());
+            } catch (ParseException pe) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EmailCommand.MESSAGE_USAGE), pe);
+            }
+            return new EmailCommand(index, subject, message, isGroupCommand);
         }
+
     }
 
     /**
@@ -70,5 +81,12 @@ public class EmailCommandParser implements Parser<EmailCommand> {
      */
     private static boolean isMultipleIndex(String arg) {
         return (arg.contains(","));
+    }
+
+    /**
+     * Returns true if index argument contains prefix for group.
+     */
+    private static boolean isGroup(String arg) {
+        return (arg.contains(PREFIX_GROUP_INDEX.toString()));
     }
 }
