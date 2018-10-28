@@ -11,6 +11,7 @@ import java.util.Set;
 
 import javax.mail.AuthenticationFailedException;
 import javax.mail.MessagingException;
+import javax.mail.SendFailedException;
 
 import com.sun.mail.smtp.SMTPSendFailedException;
 
@@ -46,6 +47,8 @@ public class EmailCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Email sent";
     public static final String MESSAGE_FAIL = "Send failed";
+    public static final String MESSAGE_INVALID_ADDRESSES = "Invalid address found";
+    public static final String MESSAGE_NO_RECIPIENT = "Group contains no recipient";
     public static final String MESSAGE_NO_LOGIN = "No login credentials found. Please login using 'login' command";
     public static final String MESSAGE_AUTHENTICATION_FAIL = "Invalid login credentials entered";
     public static final String SMTP_FAIL_EXCEPTION_MESSAGE = "Unable to send any more emails due to spam";
@@ -132,7 +135,9 @@ public class EmailCommand extends Command {
             EmailUtil.sendEmail(toSend, toSubject, toMessage);
         } catch (AuthenticationFailedException afe) {
             throw new CommandException(MESSAGE_AUTHENTICATION_FAIL);
-        } catch (SMTPSendFailedException sfe) {
+        } catch (SMTPSendFailedException ssfe) {
+            throw new CommandException(setErrorMessageForSendFailedException(ssfe.getMessage()));
+        } catch (SendFailedException sfe) {
             throw new CommandException(setErrorMessageForSendFailedException(sfe.getMessage()));
         } catch (MessagingException e) {
             throw new CommandException(MESSAGE_FAIL);
@@ -143,9 +148,13 @@ public class EmailCommand extends Command {
 
     public static String setErrorMessageForSendFailedException(String e) {
         if (e.contains("MessageSubmissionExceededException")) {
-            return MESSAGE_FAIL + ", " + MESSAGE_MESSAGE_CONSTRAINTS;
+            return MESSAGE_FAIL + ": " + MESSAGE_MESSAGE_CONSTRAINTS;
         } else if (e.contains("OutboundSpamException")) {
-            return MESSAGE_FAIL + ", " + SMTP_FAIL_EXCEPTION_MESSAGE;
+            return MESSAGE_FAIL + ": " + SMTP_FAIL_EXCEPTION_MESSAGE;
+        } else if (e.contains("Invalid Addresses")) {
+            return MESSAGE_FAIL + ": " + MESSAGE_INVALID_ADDRESSES;
+        } else if (e.contains("No recipient addresses")) {
+            return MESSAGE_FAIL + ": " + MESSAGE_NO_RECIPIENT;
         } else {
             return MESSAGE_FAIL;
         }
