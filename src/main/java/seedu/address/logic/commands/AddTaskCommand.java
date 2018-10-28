@@ -60,8 +60,8 @@ public class AddTaskCommand extends Command implements CommandParser {
             throw new CommandException(MESSAGE_MAX_HOURS);
         }
 
-        model.addTask(toAdd);
         toAdd.setDeadline(model.getDeadline());
+        model.addTask(toAdd);
         model.commitTaskBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

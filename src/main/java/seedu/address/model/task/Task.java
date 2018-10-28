@@ -128,8 +128,10 @@ public class Task {
     /**
      * Add a milestone to the task.
      */
-    public void addMilestone(Milestone milestone) {
-        milestoneList.add(milestone);
+    public Task addMilestone(Milestone milestone) {
+        Task taskWithMilestones = new Task(this);
+        taskWithMilestones.milestoneList.add(milestone);
+        return taskWithMilestones;
     }
 
     /**

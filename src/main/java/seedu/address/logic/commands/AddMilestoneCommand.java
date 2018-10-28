@@ -74,9 +74,9 @@ public class AddMilestoneCommand extends Command implements CommandParser {
         }
         */
 
-        taskToEdit.addMilestone(toAdd);
-
-        model.addMilestone(toAdd);
+        Task editedTask = taskToEdit.addMilestone(toAdd);
+        model.updateTask(taskToEdit, editedTask);
+        //model.addMilestone(toAdd);
         model.commitTaskBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.toString()));
     }

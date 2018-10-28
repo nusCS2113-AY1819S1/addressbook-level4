@@ -135,7 +135,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void addMilestone(Milestone milestone) {
         versionedTaskBook.addMilestone(milestone);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
-        indicateMilestoneChanged();
+        indicateTaskBookChanged();
     }
     //@@author
     //=========== Filtered Task List Accessors =============================================================
