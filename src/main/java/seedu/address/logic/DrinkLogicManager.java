@@ -8,12 +8,11 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.drinkcommands.DrinkCommand;
 import seedu.address.logic.drinkcommands.DrinkCommandResult;
-import seedu.address.logic.drinkcommands.user.UserCommand;
 import seedu.address.logic.parser.AddressBookParser;
-import seedu.address.logic.parser.user.ManagerParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.user.AccountantParser;
 import seedu.address.logic.parser.user.AdminParser;
+import seedu.address.logic.parser.user.ManagerParser;
 import seedu.address.logic.parser.user.StockTakerParser;
 import seedu.address.model.DrinkModel;
 import seedu.address.model.LoginInfoManager;
@@ -62,16 +61,19 @@ public class DrinkLogicManager extends ComponentManager implements DrinkLogic {
             } else {
                 command = addressBookParser.parseCommand (commandText);
             }
-            */
+
             if (command instanceof UserCommand) {
                 UserCommand userCommand = (UserCommand) command;
-                return userCommand.execute (loginInfoManager, history);
+                return userCommand.execute(loginInfoManager, history);
             }
             return command.execute(model, history);
+            */
+            return null; // TODO: add this part back in
         } finally {
             history.add(commandText);
         }
     }
+
     @Override
     public ObservableList<Drink> getFilteredDrinkList() {
         return model.getFilteredDrinkList();
