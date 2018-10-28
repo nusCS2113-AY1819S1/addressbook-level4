@@ -36,9 +36,9 @@ public class TypicalDistributors {
 
     /**
      * Returns an {@code DistributorBook} with all the typical distributors.
-     */
-        public static DistributorBook getTypicalDistributorBook() {
-                DistributorBook db = new DistributorBook();
+     * */
+    public static DistributorBook getTypicalDistributorBook() {
+        DistributorBook db = new DistributorBook();
         for (Distributor distributor : getTypicalDistributors()) {
             db.addDistributor(distributor);
         }

@@ -465,8 +465,7 @@ public class ModelManager extends ComponentManager implements Model {
             versionedAddressBook.removeReminderFromActiveBusinessDay(reminder);
         } catch (InvalidTimeFormatException e) {
             throw e;
-        }
-        catch (NoSuchElementException e) {
+        } catch (NoSuchElementException e) {
             throw e;
         }
     }
