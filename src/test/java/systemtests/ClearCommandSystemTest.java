@@ -1,7 +1,10 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.ADMIN_PASSWORD_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.ADMIN_USERNAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADMIN_PASSWORD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADMIN_USERNAME;
 import static seedu.address.testutil.TypicalEvents.KEYWORD_MATCHING_TRYOUTS;
 
 import org.junit.Test;
@@ -89,6 +92,18 @@ public class ClearCommandSystemTest extends EventManagerSystemTest {
     }
 
     /**
+     * Performs the same verification as {@code assertCommandSuccess(String)} except that the result box displays
+     * {@code expectedResultMessage} and the model related components equal to {@code expectedModel}.
+     * @see ClearCommandSystemTest#assertCommandSuccess(String)
+     */
+    private void assertCommandSuccess(String command, String expectedResultMessage, Model expectedModel) {
+        executeCommand(command);
+        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
+        assertCommandBoxShowsDefaultStyle();
+        assertStatusBarUnchangedExceptSyncStatus();
+    }
+
+    /**
      * Performs the same verification as {@code assertCommandSuccess(String, Event)} except asserts that
      * the,<br>
      * 1. Result display box displays {@code expectedResultMessage}.<br>
@@ -100,18 +115,6 @@ public class ClearCommandSystemTest extends EventManagerSystemTest {
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertSelectedCardUnchanged();
         assertCommandBoxShowsDefaultStyle();
-    }
-
-    /**
-     * Performs the same verification as {@code assertCommandSuccess(String)} except that the result box displays
-     * {@code expectedResultMessage} and the model related components equal to {@code expectedModel}.
-     * @see ClearCommandSystemTest#assertCommandSuccess(String)
-     */
-    private void assertCommandSuccess(String command, String expectedResultMessage, Model expectedModel) {
-        executeCommand(command);
-        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
-        assertCommandBoxShowsDefaultStyle();
-        assertStatusBarUnchangedExceptSyncStatus();
     }
 
     /**
