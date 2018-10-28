@@ -1,4 +1,6 @@
-//@@author lws803-unused
+# lws803-unused
+###### /java/seedu/address/unused/HammingDistanceUtil.java
+``` java
 
 // Deprecated because of new distance technique - Levenshtein distance
 package seedu.address.unused;
@@ -35,3 +37,4 @@ public class HammingDistanceUtil {
         return distance;
     }
 }
+```
