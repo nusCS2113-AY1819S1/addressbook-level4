@@ -20,7 +20,7 @@ import seedu.address.commons.exceptions.FileEncryptorException;
 
 /**
  * File encryptor:
- * @author Esailija
+ * @author lws803
  * Solution below adapted from:
  * https://stackoverflow.com/questions/13673556/using-password-based-encryption-on-a-file-in-java
  * Description: Encrypts the data file using PBEWithMD5AndDES
