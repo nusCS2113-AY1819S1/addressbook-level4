@@ -1133,6 +1133,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |university lecturer |delete groups |edit my student management system
 
+|`* * *` |university lecturer |view all students in a group by typing a command to select a group instead of clicking |have flexibility over input methods
+
 |`* * *` |university lecturer |send an email to a student, a group of students or students belonging to a group |make module specific announcements
 
 |`* * *` |university lecturer |print an attendance sheet of all persons in a specific group |
@@ -1280,7 +1282,32 @@ Use case ends
 *MSS*
 
 1.  Lecturer deletes group
-2.  AddressBook confirms group is deleted
+2.  Student management system confirms group is deleted
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
++
+
+[none]
+** 1a1. Student management system rejects command entered with relevant error message.
++
+
+
+[discrete]
+=== Use case: Select Group
+*Precondition*
+
+1.  Student management system has group(s)
+
+*MSS*
+
+1.  Lecturer selects group
+2.  Student management system confirms group is selected
+3.  Student management system displays students in group selected on the *students in group panel*
 +
 Use case ends
 
