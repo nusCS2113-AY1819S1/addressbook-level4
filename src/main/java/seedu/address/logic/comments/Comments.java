@@ -1,4 +1,3 @@
-//@@author Geraldcdx
 package seedu.address.logic.comments;
 
 import java.util.Vector;
@@ -21,7 +20,7 @@ public abstract class Comments {
      *  Constructor to make sure that used Vector and path is initialised
      */
     public Comments (String input) {
-        this.input = replaceBrackets(input);
+        this.input = input;
         this.comments = this.parseCommentSection(input);
     }
 
@@ -34,21 +33,12 @@ public abstract class Comments {
     }
 
     /**
-     *  Constructor to make sure that used Vector and path is initialised
-     */
-    public String replaceBrackets (String input) {
-        input = input.replace("{", "<");
-        input = input.replace("}", ">");
-        return input;
-    }
-
-    /**
      *  Runs a pre-processing to ensure that strings can be stored as a vector
      */
     public Vector parseCommentSection(String input) {
         Vector comments = new Vector();
         Document htmlfile = null;
-        htmlfile = Jsoup.parse(getInput());
+        htmlfile = Jsoup.parse(input);
         Element element = htmlfile.select("ol").first();
         Elements divChildren = element.children();
 
@@ -68,14 +58,14 @@ public abstract class Comments {
      *  Rewrites String to after a change has happened
      */
     public static String rewrite(Vector commentsVector) {
-        String comments = "{span}Comment Section{/span}{ol}";
+        String comments = "<span>Comment Section</span>\n<ol>";
         for (int i = 0; i < commentsVector.size(); i++) {
             if (commentsVector.get(i).toString().length() == 0) {
                 continue;
             }
-            comments += "{li}" + commentsVector.get(i) + "{/li}";
+            comments += "\n" + "<li>" + commentsVector.get(i) + "</li>";
         }
-        comments += "{/ol}";
+        comments += "\n</ol>\n";
         return comments;
     }
 
