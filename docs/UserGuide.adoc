@@ -69,6 +69,27 @@ Examples:
 * `creategroup n/CS2113 l/LT15 t/java`
 * `cg n/CS2113 l/LT01 t/c t/cpp`
 
+=== Selecting a group : `selectgroup` `sg`
+
+Selects the group identified by the index number used in the displayed group list. +
+Format: `selectgroup INDEX` +
+Shortcut Format: `sg INDEX`
+
+****
+* Selects group and loads the *students in group panel* with students of the group at specified `INDEX`.
+* Selects the group and loads the Google search page of the group at the specified `INDEX`.
+* The index refers to the index number shown in the displayed group list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+* This command is *NOT* undoable
+****
+
+Examples:
+
+* `selectgroup 2` +
+Selects the 2nd group in the student management system.
+* `sg 1` +
+Selects the 1st group in the student management system.
+
 === Add students to a group: `addgroup` `ag`
 Adds student(s) to a group in the student management system +
 Format: `addgroup g/INDEX p/INDEX ...` +
@@ -418,6 +439,8 @@ e.g. `add n/James Ho g/M nat/CN p/22224444 e/jamesho@example.com a/123, Clementi
 e.g. `delete 3`
 * *Create Group* : `creategroup n/NAME l/LOCATION [t/TAG] ...` +
 e.g. `creategroup n/CS2040C l/LT15 t/cpp`
+* *Select Group* : `selectgroup INDEX` +
+e.g. `selectgroup 1`
 * *Add to Group* : `addgroup g/INDEX p/INDEX ...` +
 e.g. `addgroup g/1 p/1 p/2`
 * *Delete Group* : `deletegroup INDEX` +
