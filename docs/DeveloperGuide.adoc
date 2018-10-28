@@ -353,7 +353,7 @@ which will then notify the user of the issue.
 
 The following sequence diagram shows how the create group operation works within both `Model` and `Logic` components where `g` is the `Group` object created:
 
-.Interactions Inside the Logic and Model Component for the `creategroup n/CS1231 l/LT15` Command
+.Interactions Inside the Logic and Model Component for the `creategroup n/CS1231 l/LT15` Command +
 image::CreateGroupSequenceDiagram.png[width="800"]
 
 
@@ -368,7 +368,7 @@ it will not create a group nor will it override the existing group but instead, 
 
 The following sequence diagram shows how the add persons to group operation works within both `Model` and `Logic` components where `ag` is the `AddGroup` object created:
 
-.Interactions Inside the Logic and Model Component for the `addgroup g/1 p/1` Command
+.Interactions Inside the Logic and Model Component for the `addgroup g/1 p/1` Command +
 image::AddGroupSequenceDiagram.png[width="800"]
 
 
