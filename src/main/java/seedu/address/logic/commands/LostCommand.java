@@ -7,7 +7,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -17,7 +16,6 @@ import seedu.address.model.Model;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Quantity;
 
-import java.util.List;
 
 public class LostCommand extends Command{
     public static final String COMMAND_WORD = "lost";
@@ -32,7 +30,6 @@ public class LostCommand extends Command{
 
     public static final String MESSAGE_LOST_ITEM_SUCCESS = "Lost Item: %1$s";
     public static final String MESSAGE_INVALID_QUANTITY = "The lost quantity input is invalid";
-    public static final String MESSAGE_INVALID_LOST_FIELD = "The lost description is invalid";
 
     private final Index targetIndex;
     private final LostDescriptor lostDescriptor;
@@ -73,7 +70,6 @@ public class LostCommand extends Command{
     private static Item createLostItem(Item itemToLost, LostDescriptor lostDescriptor) {
         assert itemToLost != null;
 
-        //Integer updatedValue = lostDescriptor.getFinalQuantity();
         Integer updatedValue = lostDescriptor.getLostQuantity();
         Integer initialValue=itemToLost.getQuantity().toInteger();
 
@@ -86,23 +82,16 @@ public class LostCommand extends Command{
 
     public static class LostDescriptor {
         private Integer lostQuantity;
-        //private Integer initialQuantity;
-        //private Integer finalQuantity;
+
         public LostDescriptor(){}
 
         public LostDescriptor(LostDescriptor toCopy) {
             setLostQuantity(toCopy.lostQuantity);
-            // setInitialQuantity(toCopy.initialQuantity);
-            //setFinalQuantity(toCopy.lostQuantity,toCopy.initialQuantity);
-
-
         }
         public void setLostQuantity(Integer lostQuantity) {this.lostQuantity=lostQuantity;}
-        //public void setInitialQuantity(Integer initialQuantity){this.initialQuantity=initialQuantity;}
-        //public void setFinalQuantity(Integer lostQuantity,Integer initialQuantity){this.finalQuantity=initialQuantity-lostQuantity;}
-        //public Integer getinitialQuantity(){return initialQuantity;}
+
         public Integer getLostQuantity(){return lostQuantity;}
-        //public Integer getFinalQuantity(){return finalQuantity;}
+
     }
     @Override
     public boolean equals(Object other) {
