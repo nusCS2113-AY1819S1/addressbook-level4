@@ -1,15 +1,21 @@
 package seedu.address.model.module;
 
+import java.util.ArrayList;
+
+import seedu.address.model.person.Person;
+
 /**
  * Represents a module in Trajectory
  */
 public class Module {
     private ModuleCode moduleCode;
     private ModuleName moduleName;
+    private ArrayList<Person> students;
 
     public Module(ModuleCode moduleCode, ModuleName moduleName) {
         this.moduleCode = moduleCode;
         this.moduleName = moduleName;
+        this.students = new ArrayList<>();
     }
 
     public ModuleCode getModuleCode() {
@@ -18,6 +24,18 @@ public class Module {
 
     public ModuleName getModuleName() {
         return this.moduleName;
+    }
+
+    public ArrayList<Person> getEnrolledStudents() {
+        return this.students;
+    }
+
+    public void addStudent(Person student) {
+        this.students.add(student);
+    }
+
+    public void removeStudent(Person student) {
+        this.students.remove(student);
     }
 
     /**
