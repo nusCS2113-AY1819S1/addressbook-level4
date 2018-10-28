@@ -6,45 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.ClassAddCommand;
-import seedu.address.logic.commands.ClassAddStudentCommand;
-import seedu.address.logic.commands.ClassDeleteCommand;
-import seedu.address.logic.commands.ClassDeleteStudentCommand;
-import seedu.address.logic.commands.ClassEditCommand;
-import seedu.address.logic.commands.ClassListCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CourseAddCommand;
-import seedu.address.logic.commands.CourseDeleteCommand;
-import seedu.address.logic.commands.CourseListCommand;
-import seedu.address.logic.commands.DebugCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.GradebookAddCommand;
-import seedu.address.logic.commands.GradebookDeleteCommand;
-import seedu.address.logic.commands.GradebookEditCommand;
-import seedu.address.logic.commands.GradebookFindCommand;
-import seedu.address.logic.commands.GradebookListCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.HistoryCommand;
-import seedu.address.logic.commands.LoginCommand;
-import seedu.address.logic.commands.ModuleAddCommand;
-import seedu.address.logic.commands.ModuleDeleteCommand;
-import seedu.address.logic.commands.ModuleEditCommand;
-import seedu.address.logic.commands.ModuleListCommand;
-import seedu.address.logic.commands.NoteAddCommand;
-import seedu.address.logic.commands.NoteDeleteCommand;
-import seedu.address.logic.commands.NoteEditCommand;
-import seedu.address.logic.commands.NoteListCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.StudentAddCommand;
-import seedu.address.logic.commands.StudentEditCommand;
-import seedu.address.logic.commands.StudentFindCommand;
-import seedu.address.logic.commands.GradeAddCommand;
-import seedu.address.logic.commands.GradeListCommand;
-import seedu.address.logic.commands.StudentListCommand;
-import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.*;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.user.UserManager;
 
@@ -201,6 +163,9 @@ public class AddressBookParser {
 
         case GradeListCommand.COMMAND_WORD:
             return new GradeListCommand();
+
+        case GradeGraphCommand.COMMAND_WORD:
+            return new GradeGraphCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

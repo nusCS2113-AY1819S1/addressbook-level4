@@ -16,6 +16,11 @@ public class Grades {
         this.marks = marks;
     }
 
+    public Grades(String moduleCode, String gradeComponentName) {
+        this.moduleCode = moduleCode;
+        this.gradeComponentName = gradeComponentName;
+    }
+
     public String getModuleCode() {
         return this.moduleCode;
     }

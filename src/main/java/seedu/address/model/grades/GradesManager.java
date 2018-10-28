@@ -1,13 +1,13 @@
 package seedu.address.model.grades;
 
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.StorageController;
-import seedu.address.model.gradebook.Gradebook;
-import seedu.address.model.gradebook.GradebookManager;
-import seedu.address.storage.adapter.XmlAdaptedGrades;
-
-import java.util.ArrayList;
+import java.util.*;
 import java.util.stream.Collectors;
+
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import seedu.address.model.StorageController;
+import seedu.address.storage.adapter.XmlAdaptedGrades;
 
 /**
  * The API of the GradesManager component.
@@ -46,12 +46,42 @@ public class GradesManager {
         grades.clear();
     }
 
+
     /**
-     This method adds gradebook component to a module in Trajectory.
+     This method adds grade component to a module in Trajectory.
      */
     public void addGrade (Grades grade) {
         grades.add(grade);
     }
+
+    /**
+     This method shows grades of students for one grade component in module.
+     */
+    public LineChart<Number, Number> createGraph (Grades grade) {
+        NumberAxis xAxis = new NumberAxis(); xAxis.setLabel("Marks");
+        NumberAxis yAxis = new NumberAxis(); yAxis.setLabel("No. Of Students");
+        LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
+        XYChart.Series<Number, Number> series = new XYChart.Series<>();
+        lineChart.setTitle("Results of Students");
+
+        // hashmap to store the frequency of element
+        Map<Float, Integer> hashMapOfGrades = new HashMap<>();
+        for (Grades gradesList : grades) {
+            if (gradesList.getModuleCode().equals(grade.getModuleCode())
+                    && gradesList.getGradeComponentName().equals(grade.getGradeComponentName())) {
+                Integer count = hashMapOfGrades.get(gradesList.getMarks());
+                hashMapOfGrades.put(gradesList.getMarks(), (count == null) ? 1 : count + 1);
+            }
+        }
+        // displaying the occurrence of elements in the arraylist
+        for (Map.Entry<Float, Integer> val : hashMapOfGrades.entrySet()) {
+            series.getData().add(new XYChart.Data<>(val.getKey(), val.getValue()));
+        }
+        lineChart.getData().add(series);
+
+        return lineChart;
+    }
+
 
     /**
      This method checks if module code and component name have empty inputs.
