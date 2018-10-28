@@ -95,7 +95,7 @@ public class CustomAutoCompletionTextFieldBinding<T> extends AutoCompletionBindi
 
         String newText = text.substring(index + 1, text.length());
         if (getCompletionTarget().isFocused()) {
-            setUserInput(newText);
+            setUserInput(newText); // updates the input text to new user input
         }
     };
 
