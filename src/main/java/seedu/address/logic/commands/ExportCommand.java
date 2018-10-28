@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FILELOCATION;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -25,19 +24,17 @@ public class ExportCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "ex";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Exports timetable for the person identified by the "
-            + " number used in the displayed person list. "
+            + ": Exports your timetable at the default location, unless otherwise specified."
             + "Parameters: "
-            + "INDEX (must be a positive integer) "
-            + PREFIX_FILELOCATION + "FILE_LOCATION \n"
+            + "[FILE_LOCATION] \n"
             + "Example: " + COMMAND_WORD
-            + " 1 "
-            + PREFIX_FILELOCATION + "C:\\export_folder\\nusmods_calendar.ics";
+            + " | Example: " + COMMAND_WORD
+            + " C:\\export_folder\\nusmods.ics";
 
     public static final String MESSAGE_SUCCESS = "Exported timetable to %1$s.";
-    public static final String MESSAGE_EMPTY = "Timetable is empty. Why would you want to export an empty timetable?";
+    public static final String MESSAGE_EMPTY = "Timetable is empty. Export failed.";
     public static final String MESSAGE_IO_ERROR =
-            "Failed to write the timetable to the path specified.";
+            "Failed to write the timetable to the path: ";
     private final Index index;
     private final Path filePath;
 
@@ -70,7 +67,7 @@ public class ExportCommand extends Command {
         try {
             IcsUtil.getInstance().saveTimeTableToFile(timeTable, filePath);
         } catch (IOException e) {
-            throw new CommandException(MESSAGE_IO_ERROR);
+            throw new CommandException(MESSAGE_IO_ERROR + filePath.toString());
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, filePath.toString()));
     }
@@ -87,8 +84,8 @@ public class ExportCommand extends Command {
             return false;
         }
 
-        return true;
+        //TODO: Not sure if this is good enough?
+        return filePath.equals(((ExportCommand) other).filePath)
+                && index.equals(((ExportCommand) other).index);
     }
-
-
 }

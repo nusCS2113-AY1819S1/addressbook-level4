@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -62,6 +63,7 @@ public class IcsUtil {
         try {
             iCalendar = readICalendarFromFile(filePath); //does not return null.
         } catch (IOException e) {
+            logger.info("Failed to read: " + filePath.toString());
             throw new IOException(e);
         }
 
@@ -140,6 +142,7 @@ public class IcsUtil {
         try {
             writeICalendarToFile(iCalendar, filePath);
         } catch (IOException e) {
+            logger.info("Failed to write to: " + filePath.toString());
             throw new IOException (e);
         }
     }
@@ -203,6 +206,7 @@ public class IcsUtil {
 
         File file = filePath.toFile();
         try {
+            Files.createFile(filePath); //strangely enough, biweekly will throw IOException if the file does not exist already
             Biweekly.write(iCalendar).go(file);
         } catch (IOException e) {
             throw new IOException();

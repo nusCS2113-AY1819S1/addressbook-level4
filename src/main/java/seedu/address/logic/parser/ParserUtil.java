@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.DayOfWeek;
@@ -12,6 +13,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -232,29 +234,62 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String fileLocation} into a {@code fileLocation}
+     * Parses a {@code String filePath} into a {@code Path}
      */
-    public static Path parseFileLocation (String fileLocation) throws ParseException {
+    public static Path parseImportFileLocation (String fileLocation) throws ParseException {
+        Path DEFAULT_PATH = Paths.get("import_export" , "import.ics");
+
         requireNonNull(fileLocation);
         String trimmedFileLocation = fileLocation.trim();
 
-        //FileLocation newFileLocation = new FileLocation(fileLocation);
-        Path newFilePath = Paths.get(trimmedFileLocation);
-
-        //check file exists in the disk //does not check the validity of file!
-        /*
-        if (!FileUtil.isFileExists(newFilePath)) {
-            throw new ParseException(FileLocation.MESSAGE_CONSTRAINTS);
-        }*/
-
-        //check file ends in .ics //does not check the validity of file!
-        /*
-        String pattern = "^.*\\.(ics|ICS)$";
-        if (Pattern.matches(pattern, fileLocation)) {
-            throw new ParseException(FileLocation.MESSAGE_CONSTRAINTS);
+        //default import path.
+        if (trimmedFileLocation.length() == 0) {
+            Path path;
+            path = DEFAULT_PATH;
+            return path;
         }
-        */
 
-        return newFilePath;
+        //ensure the filePath ends in .ics
+        return parseImportExportFileLocation(trimmedFileLocation);
+    }
+
+    /**
+     * Parses a {@code String filePath} into a {@code Path}
+     */
+    public static Path parseExportFileLocation (String fileLocation) throws ParseException {
+        Path DEFAULT_PATH = Paths.get("import_export" , "export.ics");
+
+        requireNonNull(fileLocation);
+        String trimmedFileLocation = fileLocation.trim();
+
+        //default export path.
+        if (trimmedFileLocation.length() == 0) {
+            Path path;
+            path = DEFAULT_PATH;
+            return path;
+        }
+        return parseImportExportFileLocation(trimmedFileLocation);
+
+    }
+
+    /**
+     * Parses a (non-empty) {@code String fileLocation} into a {@code Path}
+     */
+    private static Path parseImportExportFileLocation(String trimmedFileLocation) throws ParseException {
+
+        //ensure the filePath ends in .ics
+        String pattern = "^.+\\.(?:(?:[iI][cC][sS]))$"; //ending in .ics
+        if (!Pattern.matches(pattern, trimmedFileLocation)) {
+            throw new ParseException("The path must end in .ics");
+        }
+
+        //create the Path
+        Path path;
+        try {
+            path = Paths.get(trimmedFileLocation);
+        } catch (InvalidPathException e) {
+            throw new ParseException("The path you entered is invalid.");
+        }
+        return path;
     }
 }
