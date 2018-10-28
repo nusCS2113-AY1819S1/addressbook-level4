@@ -417,10 +417,40 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
-=== Expense feature
-==== Current Implementation
+//@@author ChenSongJian
+// tag::expensefeature[]
+=== Expense tracker feature
+The implementation of expense feature is similar to the Address Book, it has similar basic functions such as: `addExpense` `clearExpense` `deleteExpense` `editExpense` `redoExpense` `undoExpense`.
+In addition, `expenseTrend` and `monthlyExpense` functions were implemented to assist the user in analysing his/her spending habit.
 
+==== Expense trend
+This function displays the total expense value for the past 6 months in a new window.
+This function is facilitated by `ExpenseTrendCommand`, it extends the `Command`.
 
+When user executes `expenseTrend` command, the command calls `Model#getFilteredExpenseList()` to obtain the list of expense, it then creates a `TreeMap` containing the expense trend data by calling `getExpenseTrendData()`.
+
+The list of expense will be filtered by the month of expense occurred in the `getExpenseTrendData()`, `java.time.YearMonth` is imported to obtain the current month and `TreeMap` is used to ensure that the months are sorted in ascending order.
+
+The command then calls `EventsCenter#post(new DisplayExpenseTrendEvent(expenseTrendData))` to create an display expense trend event with the expense trend data, and pass the event to the EventCenter.
+
+`MainWindow` will subscribe and handle the event, the expense trend data is passed to `ExpenseTrendWindow` by calling `ExpenseTrendWindow#setExpenseTrendData()`.
+
+`ExpenseTrendWindow` creates a bar chart with the data and open a new window to display the bar chart.
+
+==== Monthly expense
+This function displays the expense value of each category for the selected month in a new window.
+This function is facilitated by `MonthlyExpenseCommand`, it extends the `Command`.
+
+When user executes `monthlyExpense` command, the `MonthlyExpenseCommandParser` will check if the parameter entered are in correct format and is a valid month. An error message is displayed if the parameter is incorrect, else a `MonthlyExpenseCommand` with the selected month will be instantiated.
+the command then calls `Model#getFilteredExpenseList()` to obtain the list of expense, it also creates a `HashMap` containing the monthly expense data by calling `getMonthlyData()`.
+
+The list of expense will be filtered by the selected month in the `getMonthlyExpenseData()`, `HashMap` is used to ensure that to associate the expense value and its category.
+
+The command then calls `EventsCenter#post(new DisplayMonthlyExpenseEvent(monthlyData))` to create an display monthly expense event with the monthly expense data, and pass the event to the EventCenter.
+
+The rest are similar to the Expense Trend but the data were represented in a pie chart instead of a bar chart.
+// end::expensefeature[]
+//@@author
 
 == Documentation
 

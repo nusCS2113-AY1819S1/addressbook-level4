@@ -150,7 +150,7 @@ public class AddressBookParser {
             return new ExpenseTrendCommand();
 
         case MonthlyExpenseCommand.COMMAND_WORD:
-            return new MonthlyExpenseCommand(arguments);
+            return new MonthlyExpenseCommandParser().parse(arguments);
 
         case RedoExpenseCommand.COMMAND_WORD:
             return new RedoExpenseCommand();

@@ -1,11 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
 import javafx.collections.ObservableList;
@@ -26,7 +22,7 @@ public class MonthlyExpenseCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Display monthly expense";
 
     public static final String MESSAGE_MONTHLY_EXPENSE_COMMAND_CONSTRAINTS =
-            "Argument should be in MM/YYYY format!";
+            "Argument should be a valid month and in MM/YYYY format!";
 
     private final String selectedMonth;
 
@@ -35,27 +31,7 @@ public class MonthlyExpenseCommand extends Command {
      */
     public MonthlyExpenseCommand(String selectedMonth) {
         requireNonNull(selectedMonth);
-        selectedMonth = selectedMonth.trim();
-        checkArgument(isValidMonth(selectedMonth), MESSAGE_MONTHLY_EXPENSE_COMMAND_CONSTRAINTS);
         this.selectedMonth = selectedMonth;
-    }
-
-    /**
-     * Returns true if a given string is a valid month.
-     */
-    public static boolean isValidMonth(String test) {
-        String pattern = "MM/yyyy";
-        if (test.length() != pattern.length()) {
-            return false;
-        }
-        DateFormat dateFormat = new SimpleDateFormat (pattern);
-        dateFormat.setLenient(false);
-        try {
-            dateFormat.parse(test);
-            return true;
-        } catch (ParseException pe) {
-            return false;
-        }
     }
 
     @Override
@@ -63,7 +39,8 @@ public class MonthlyExpenseCommand extends Command {
         requireNonNull(model);
         requireNonNull(this.selectedMonth);
         ObservableList<Expense> expenseList = model.getFilteredExpenseList();
-        EventsCenter.getInstance().post(new DisplayMonthlyExpenseEvent(getMonthlyData(expenseList)));
+        HashMap<String, String> monthlyData = getMonthlyData(expenseList);
+        EventsCenter.getInstance().post(new DisplayMonthlyExpenseEvent(monthlyData));
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

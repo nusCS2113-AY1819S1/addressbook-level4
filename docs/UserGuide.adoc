@@ -263,6 +263,128 @@ Format: `clear`
 Exits the program. +
 Format: `exit`
 
+//@@author ChenSongJian
+// tag::expense[]
+=== Adding an expense: `addExpense`
+
+Adds an expense to the expense book +
+Format: `addExpense c/CATEGORY v/VALUE d/DATE [t/TAG]...`
+
+[TIP]
+An expense can have any number of tags (including 0)
+
+Examples:
+
+* `addExpense c/taobao v/1111.11 d/11/11/2018`
+* `addExpense c/Lunch v/6.66 d/10/10/2018 t/nomorecaipng t/fishtooexpensive`
+
+=== Editing an expense : `editExpense`
+
+Edits an existing expense in the Expense book. +
+Format: `edit INDEX [c/CATEGORY] [v/VALUE] [d/DATE] [t/TAG]...`
+
+****
+* Edits the expense at the specified `INDEX`. The index refers to the index number shown in the displayed expense list. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the expense's tags by typing `t/` without specifying any tags after it.
+****
+
+Examples:
+
+* `editExpense 1 v/998.00 +
+Edits the value of expense of the 1st expense
+* `editExpense 2 c/food t/lunch` +
+Edits the category of the 2nd person to be `food`, remove the existing tags and add new tag.
+
+=== Deleting an expense : `deleteExpense`
+
+Deletes the specified expense from the expense book. +
+Format: `deleteExpense INDEX`
+
+****
+* Deletes the expense at the specified `INDEX`.
+* The index refers to the index number shown in the displayed expense list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `delete 2` +
+Deletes the 2nd expense in the expense book.
+
+=== Undoing previous command : `undoExpense`
+
+Restores the expense book to the state before the previous _undoable_ command was executed. +
+Format: `undoExpense`
+
+[NOTE]
+====
+Undoable commands: those commands that modify the expense book's content (`addExpense`, `deleteExpense`, `editExpense` and `clearExpense`).
+====
+
+Examples:
+
+* `deleteExpense 1` +
+`undoExpense` (reverses the `deleteExpense 1` command) +
+
+* `expenseTrend` +
+`undoExpense` +
+The `undoExpense` command fails as there are no undoable commands executed previously.
+
+* `deleteExpense 1` +
+`clearExpense` +
+`undoExpense` (reverses the `clearExpense` command) +
+`undoExpense` (reverses the `deleteExpense 1` command) +
+
+=== Redoing the previously undone command : `redoExpense`
+
+Reverses the most recent `undoExpense` command. +
+Format: `redoExpense`
+
+Examples:
+
+* `deleteExpense 1` +
+`undoExpense` (reverses the `deleteExpense 1` command) +
+`redoExpense` (reapplies the `deleteExpense 1` command) +
+
+* `deleteExpense 1` +
+`redoExpense` +
+The `redoExpense` command fails as there are no `undoExpense` commands executed previously.
+
+* `deleteExpense 1` +
+`clearExpense` +
+`undoExpense` (reverses the `clearExpense` command) +
+`undoExpense` (reverses the `deleteExpense 1` command) +
+`redoExpense` (reapplies the `deleteExpense 1` command) +
+`redoExpense` (reapplies the `clearExpense` command)
+
+=== Clearing all expense entries : `clearExpense`
+
+Clears all entries from the expense book. +
+Format: `clearExpense
+
+=== Displaying expense trend : `expenseTrend`
+Displays a bar chart of the monthly expense value occurred the past 6 months in a new window +
+Format: `expenseTrend`
+
+=== Displaying monthly expense : `monthlyExpense`
+Displays a pie chart of the expense value for each category occurred in the selected month in a new window +
+format: `monthlyExpense MM/YYYY`
+
+****
+* Displays the monthly expense for the specified `MM/YYYY`.
+* The month *must be a valid month and in MM/YYYY format* 01/0001, 10/2018 ...
+****
+
+Examples:
+
+* `monthlyExpense 11/2018` +
+Displays the monthly expense data for November 2018 in a new window
+// end::expense[]
+//@@author
+
 === Saving the data
 
 Schedule planner data are saved in the hard disk automatically after any command that changes the data. +
@@ -348,3 +470,19 @@ e.g.`select 2`
 e.g. `backup GITHUB MY_ACCESS_TOKEN`
 * *Restore* : `restore | [GITHUB ACCESS_TOKEN]`
 e.g. `restore GITHUB MY_ACCESS_TOKEN`
+
+//@@author ChenSongJian
+* *AddExpense* : `addExpense c/CATEGORY v/VALUE d/DATE [t/TAG]...` +
+e.g. `addExpense c/Food v/11.11 d/11/11/2018 t/KFC t/lunch t/fat`
+* *ClearExpense* : `clearExpense`
+* *DeleteExpense* : `deleteExpense INDEX` +
+e.g. `deleteExpense 3`
+* *EditExpense* : `editExpense INDEX [c/CATEGORY] [v/VALUE] [d/DATE] [t/TAG]...` +
+e.g. `editExpense 2 c/Travel v/998.00`
+* *UndoExpense* : `undoExpense`
+* *RedoExpense* : `redoExpense`
+* *ExpenseTrend* : `expenseTrend`
+* *MonthlyExpense* : `monthlyExpense MM/YYYY` +
+e.g. `monthlyExpense 11/2018`
+//@@author
+

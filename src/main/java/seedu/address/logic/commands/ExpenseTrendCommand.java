@@ -28,7 +28,8 @@ public class ExpenseTrendCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         ObservableList<Expense> expenseList = model.getFilteredExpenseList();
-        EventsCenter.getInstance().post(new DisplayExpenseTrendEvent(getExpenseTrendData(expenseList)));
+        TreeMap<String, Double> expenseTrendData = getExpenseTrendData(expenseList);
+        EventsCenter.getInstance().post(new DisplayExpenseTrendEvent(expenseTrendData));
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

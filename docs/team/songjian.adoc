@@ -1,0 +1,47 @@
+= Chen Songjian - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== Role: Developer
+
+Responsibilities: Developing
+
+== PROJECT: Student Planner
+
+---
+
+== Overview
+
+Student Planner is a all-in-one desktop manager application that allows students to manage their contacts, tasks, events and expenses. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the Expense tracker feature*
+** What it does: allows the user to track the expenses and assist the user to analyse his/her spending habit
+** Justification: This feature improves the product significantly because a user may overspent but may not realise which category of his/her spending can be reduced.
+The user can use `monthlyExpense` command to determine the expenses in which category can be cut down and use `expenseTrend` command to check whether the monthly expenses has decreased.
+These commands assist the user to analyse his/her spending habit and make a better planing for the following month.
+
+* *Minor enhancement*: added autocomplete that allows the user to enter the command faster and provides a pre-filled format for the commands with parameter(s).
+
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+
+* *Other contributions*:
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=expense]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=expensefeature]
