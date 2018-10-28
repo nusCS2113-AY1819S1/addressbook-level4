@@ -34,6 +34,10 @@ public class EmailCommandTest {
             + ".MessageSubmissionExceededException.MessageIsATest";
     private static final String TEST_MESSAGE_CONTAINS_OUTBOUND_SPAM = "ThisIsATestMessage"
             + ".OutboundSpamException.MessageIsATest";
+    private static final String TEST_MESSAGE_CONTAINS_NO_RECIPIENT = "ThisIsATestMessage"
+            + ".No recipient addresses.MessageIsATest";
+    private static final String TEST_MESSAGE_CONTAINS_INVALID_ADDRESS = "ThisIsATestMessage"
+            + ".Invalid Addresses.MessageIsATest";
     private static final String TEST_MESSAGE_GENERAL_FAIL = "ThisIsAFailMessage";
 
     @Rule
@@ -179,13 +183,21 @@ public class EmailCommandTest {
 
     @Test
     public void setErrorMessageForSendFailedExceptionTest() {
-        String messageConstraint = EmailCommand.MESSAGE_FAIL + ", " + Message.MESSAGE_MESSAGE_CONSTRAINTS;
-        String messageFailException = EmailCommand.MESSAGE_FAIL + ", " + EmailCommand.SMTP_FAIL_EXCEPTION_MESSAGE;
+        String messageConstraint = EmailCommand.MESSAGE_FAIL + ": " + Message.MESSAGE_MESSAGE_CONSTRAINTS;
+        String messageFailException = EmailCommand.MESSAGE_FAIL + ": " + EmailCommand.SMTP_FAIL_EXCEPTION_MESSAGE;
+        String messageFailExceptionNoRecipient = EmailCommand.MESSAGE_FAIL + ": " + EmailCommand.MESSAGE_NO_RECIPIENT;
+        String messageFailExceptionInvalidAddress = EmailCommand.MESSAGE_FAIL + ": "
+                + EmailCommand.MESSAGE_INVALID_ADDRESSES;
         String messageGenericFail = EmailCommand.MESSAGE_FAIL;
+
         assertEquals(EmailCommand.setErrorMessageForSendFailedException(TEST_MESSAGE_CONTAINS_SUBMISSION_EXCEEDED),
                 messageConstraint);
         assertEquals(EmailCommand.setErrorMessageForSendFailedException(TEST_MESSAGE_CONTAINS_OUTBOUND_SPAM),
                 messageFailException);
+        assertEquals(EmailCommand.setErrorMessageForSendFailedException(TEST_MESSAGE_CONTAINS_INVALID_ADDRESS),
+                messageFailExceptionInvalidAddress);
+        assertEquals(EmailCommand.setErrorMessageForSendFailedException(TEST_MESSAGE_CONTAINS_NO_RECIPIENT),
+                messageFailExceptionNoRecipient);
         assertEquals(EmailCommand.setErrorMessageForSendFailedException(TEST_MESSAGE_GENERAL_FAIL),
                 messageGenericFail);
     }
