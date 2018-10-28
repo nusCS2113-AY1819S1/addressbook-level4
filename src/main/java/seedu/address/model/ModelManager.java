@@ -12,6 +12,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.ClubBudgetElementsBookChangedEvent;
+import seedu.address.commons.events.model.FinalBudgetsBookChangedEvent;
 import seedu.address.commons.events.model.LoginBookChangedEvent;
 import seedu.address.model.budgetelements.ClubBudgetElements;
 import seedu.address.model.clubbudget.FinalClubBudget;
@@ -29,30 +31,39 @@ public class ModelManager extends ComponentManager implements Model {
     private final SearchHistoryManager<Person> searchHistoryManager = new SearchHistoryManager<>();
     private final VersionedLoginBook versionedLoginBook;
     private final VersionedAddressBook versionedAddressBook;
+    private final VersionedClubBudgetElementsBook versionedClubBudgetElementsBook;
+    private final VersionedFinalBudgetsBook versionedFinalBudgetsBook;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<LoginDetails> filteredLoginDetails;
     private final FilteredList<ClubBudgetElements> filteredClubs;
     private final FilteredList<FinalClubBudget> filteredClubBudgets;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBook, clubBudgetElementsBook, finalBudgetsBook and userPrefs.
      */
-    public ModelManager(ReadOnlyLoginBook loginBook, ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyLoginBook loginBook, ReadOnlyAddressBook addressBook,
+                        ReadOnlyClubBudgetElementsBook clubBudgetElementsBook,
+                        ReadOnlyFinalBudgetBook finalBudgetsBook, UserPrefs userPrefs) {
         super();
-        requireAllNonNull(loginBook, addressBook, userPrefs);
+        requireAllNonNull(loginBook, addressBook, clubBudgetElementsBook, finalBudgetsBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook
+                + "club budget elements book: " + clubBudgetElementsBook
+                + "final budgets book: " + finalBudgetsBook + " and user prefs " + userPrefs);
 
         versionedLoginBook = new VersionedLoginBook(loginBook);
         versionedAddressBook = new VersionedAddressBook(addressBook);
+        versionedClubBudgetElementsBook = new VersionedClubBudgetElementsBook(clubBudgetElementsBook);
+        versionedFinalBudgetsBook = new VersionedFinalBudgetsBook(finalBudgetsBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
-        filteredClubs = new FilteredList<>(versionedAddressBook.getClubsList());
+        filteredClubs = new FilteredList<>(versionedClubBudgetElementsBook.getClubsList());
         filteredLoginDetails = new FilteredList<>(versionedLoginBook.getLoginDetailsList());
-        filteredClubBudgets = new FilteredList<>(versionedAddressBook.getClubBudgetsList());
+        filteredClubBudgets = new FilteredList<>(versionedFinalBudgetsBook.getClubBudgetsList());
     }
 
     public ModelManager() {
-        this(new LoginBook(), new AddressBook(), new UserPrefs());
+        this(new LoginBook(), new AddressBook(), new ClubBudgetElementsBook(), new FinalBudgetsBook(),
+                new UserPrefs());
     }
 
     @Override
@@ -60,6 +71,20 @@ public class ModelManager extends ComponentManager implements Model {
         searchHistoryManager.clearSearchHistory();
         versionedAddressBook.resetData(newData);
         indicateAddressBookChanged();
+    }
+
+    @Override
+    public void resetData(ReadOnlyClubBudgetElementsBook newData) {
+        searchHistoryManager.clearSearchHistory();
+        versionedClubBudgetElementsBook.resetData(newData);
+        indicateClubBudgetElementsBookChanged();
+    }
+
+    @Override
+    public void resetData(ReadOnlyFinalBudgetBook newData) {
+        searchHistoryManager.clearSearchHistory();
+        versionedFinalBudgetsBook.resetData(newData);
+        indicateFinalBudgetsBookChanged();
     }
 
     @Override
@@ -72,9 +97,30 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedAddressBook;
     }
 
+    @Override
+    public ReadOnlyClubBudgetElementsBook getClubBudgetElementsBook() {
+        return versionedClubBudgetElementsBook;
+    }
+
+    @Override
+    public ReadOnlyFinalBudgetBook getFinalBudgetsBook() {
+        return versionedFinalBudgetsBook;
+    }
+
+
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
         raise(new AddressBookChangedEvent(versionedAddressBook));
+    }
+
+    /** Raises an event to indicate the model has changed */
+    private void indicateClubBudgetElementsBookChanged() {
+        raise(new ClubBudgetElementsBookChangedEvent(versionedClubBudgetElementsBook));
+    }
+
+    /** Raises an event to indicate the model has changed */
+    private void indicateFinalBudgetsBookChanged() {
+        raise(new FinalBudgetsBookChangedEvent(versionedFinalBudgetsBook));
     }
 
     private void indicateLoginBookChanged() {
@@ -126,13 +172,13 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean hasClub(ClubBudgetElements club) {
         requireNonNull(club);
-        return versionedAddressBook.hasClub(club);
+        return versionedClubBudgetElementsBook.hasClub(club);
     }
 
     @Override
     public void addClub(ClubBudgetElements club) {
-        versionedAddressBook.addClub(club);
-        indicateAddressBookChanged();
+        versionedClubBudgetElementsBook.addClub(club);
+        indicateClubBudgetElementsBookChanged();
     }
 
     //=========== Filtered Account List Accessors =============================================================
@@ -153,13 +199,13 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean hasClubBudget(FinalClubBudget clubBudget) {
         requireNonNull(clubBudget);
-        return versionedAddressBook.hasClubBudget(clubBudget);
+        return versionedFinalBudgetsBook.hasClubBudget(clubBudget);
     }
 
     @Override
     public void addClubBudget(FinalClubBudget clubBudget) {
-        versionedAddressBook.addClubBudget(clubBudget);
-        indicateAddressBookChanged();
+        versionedFinalBudgetsBook.addClubBudget(clubBudget);
+        indicateFinalBudgetsBookChanged();
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -183,7 +229,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code ClubBudgetElements} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedClubBudgetElementsBook}
      */
     @Override
     public ObservableList<ClubBudgetElements> getFilteredClubsList() {
@@ -207,7 +253,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredClubBudgets.setPredicate(predicate);
     }
 
-    //=========== Undo/Redo =================================================================================
+    //=========== Undo/Redo AddressBook ================================================================================
 
     @Override
     public boolean canUndoAddressBook() {
@@ -234,6 +280,65 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void commitAddressBook() {
         versionedAddressBook.commit();
+    }
+
+    //=========== Undo/Redo ClubBudgetElementsBook =====================================================================
+
+    @Override
+    public boolean canUndoClubBudgetElementsBook() {
+        return versionedClubBudgetElementsBook.canUndo();
+    }
+
+    @Override
+    public boolean canRedoClubBudgetElementsBook() {
+        return versionedClubBudgetElementsBook.canRedo();
+    }
+
+    @Override
+    public void undoClubBudgetElementsBook() {
+        versionedClubBudgetElementsBook.undo();
+        indicateClubBudgetElementsBookChanged();
+    }
+
+    @Override
+    public void redoClubBudgetElementsBook() {
+        versionedClubBudgetElementsBook.redo();
+        indicateClubBudgetElementsBookChanged();
+    }
+
+    @Override
+    public void commitClubBudgetElementsBook() {
+        versionedClubBudgetElementsBook.commit();
+    }
+
+
+    //=========== Undo/Redo FinalBudgetsBook =====================================================================
+
+    @Override
+    public boolean canUndoFinalBudgetsBook() {
+        return versionedFinalBudgetsBook.canUndo();
+    }
+
+    @Override
+    public boolean canRedoFinalBudgetsBook() {
+        return versionedFinalBudgetsBook.canRedo();
+    }
+
+    @Override
+    public void undoFinalBudgetsBook() {
+        versionedFinalBudgetsBook.undo();
+        indicateFinalBudgetsBookChanged();
+    }
+
+    @Override
+    public void redoFinalBudgetsBook() {
+        versionedFinalBudgetsBook.redo();
+        indicateFinalBudgetsBookChanged();
+    }
+
+    @Override
+    public void commitFinalBudgetsBook() {
+        versionedFinalBudgetsBook.commit();
     }
 
     //=========== Persons Search Pruning ====================================================
@@ -274,8 +379,11 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedAddressBook.equals(other.versionedAddressBook)
+        return (versionedAddressBook.equals(other.versionedAddressBook)
+                || versionedFinalBudgetsBook.equals(other.versionedFinalBudgetsBook))
                 && filteredPersons.equals(other.filteredPersons)
+                && filteredClubs.equals(other.filteredClubs)
+                && filteredClubBudgets.equals(other.filteredClubBudgets)
                 && searchHistoryManager.equals(other.searchHistoryManager);
     }
 }
