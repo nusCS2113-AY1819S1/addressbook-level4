@@ -31,9 +31,9 @@ public class ScriptCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Run multiple commands based on the text file selected.\n"
-            + "Parameters: TEXTFILE\n"
-            + "Example: " + COMMAND_WORD + " StudentList\n"
-            + "Example: " + COMMAND_WORD_2 + " Studentlist";
+            + "Parameters: TEXTFILE CommandType\n"
+            + "Example: " + COMMAND_WORD + " txt/StudentList c/add\n"
+            + "Example: " + COMMAND_WORD_2 + " txt/Studentlist c/group";
 
     public static final String MESSAGE_SUCCESS = "All persons from the text file %s has been added";
     public static final String MESSAGE_ADD_ERROR = "Line %s of %s cannot be executed";

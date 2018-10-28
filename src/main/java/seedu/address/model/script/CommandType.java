@@ -10,9 +10,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class CommandType {
     public static final String MESSAGE_MESSAGE_CONSTRAINTS =
             "Command string is not valid";
-    public static final String MESSAGE_VALIDATION_REGEX = "^(add|a|addgroup|addgrp|add_testmarks|addt|clear|c|group|"
-            + "grp|delete|d|distinto|di|edit|e|edit_test|et|sendmail|sm|exit|ex|find|f|genlist|gl|display|disp|"
-            + "help|h|history|his|list|l|listgroup|lg|redo|r|select|s|undo|u)$";
+    public static final String MESSAGE_VALIDATION_REGEX = "^(add|a|addgroup|addgrp|add_testmarks|addt|clear|c|"
+            + "creategroup|cg|delete|d|distinto|di|edit|e|edit_test|et|sendmail|sm|exit|ex|find|f|genlist|"
+            + "gl|display|disp|help|h|history|his|list|l|listgroup|lg|redo|r|select|s|undo|u)$";
+
     public final String value;
     /**
      * Constructs a {@code CommandType}.

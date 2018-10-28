@@ -32,6 +32,7 @@ import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlAddressBookStorage;
+import seedu.address.storage.scripts.ScriptSetup;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -50,6 +51,7 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
+    protected ScriptSetup scriptSetup;
 
 
     @Override
@@ -64,6 +66,9 @@ public class MainApp extends Application {
         userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
+
+        scriptSetup = new ScriptSetup();
+        scriptSetup.execute(userPrefs.getScriptFileDirectory());
 
         initLogging(config);
 
