@@ -19,12 +19,10 @@ import seedu.planner.commons.core.EventsCenter;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
 import seedu.planner.commons.events.model.LimitListChangedEvent;
-import seedu.planner.commons.events.model.SummaryMapChangedEvent;
 import seedu.planner.commons.events.ui.UpdateWelcomePanelEvent;
 import seedu.planner.commons.util.DateUtil;
 import seedu.planner.model.record.*;
 import seedu.planner.model.summary.CategoryStatisticsList;
-import seedu.planner.model.summary.Summary;
 
 /**
  * Represents the in-memory model of the financial planner data.
@@ -76,7 +74,6 @@ public class ModelManager extends ComponentManager implements Model {
     public void resetData(ReadOnlyFinancialPlanner newData) {
         versionedFinancialPlanner.resetData(newData);
         indicateFinancialPlannerChanged();
-        indicateSummaryMapChanged();
     }
 
     @Override
@@ -96,12 +93,6 @@ public class ModelManager extends ComponentManager implements Model {
         autoLimitCheck();
     }
 
-    /** Raises an event to indicate the summary map has changed */
-    private void indicateSummaryMapChanged() {
-        raise(new SummaryMapChangedEvent(versionedFinancialPlanner));
-    }
-
-
     /** Raises an event to indicate the limit list has changed */
     private void indicateLimitListChanged() {
         raise(new LimitListChangedEvent(versionedFinancialPlanner));
@@ -119,9 +110,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void deleteRecord(Record target) {
         requireNonNull(target);
         versionedFinancialPlanner.removeRecord(target);
-        versionedFinancialPlanner.removeRecordFromSummary(target);
         indicateFinancialPlannerChanged();
-        indicateSummaryMapChanged();
     }
 
     @Override
@@ -136,10 +125,8 @@ public class ModelManager extends ComponentManager implements Model {
     public void addRecord(Record record) {
         requireNonNull(record);
         versionedFinancialPlanner.addRecord(record);
-        versionedFinancialPlanner.addRecordToSummary(record);
         updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
         indicateFinancialPlannerChanged();
-        indicateSummaryMapChanged();
     }
 
     @Override
@@ -147,9 +134,7 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(target, editedRecord);
 
         versionedFinancialPlanner.updateRecord(target, editedRecord);
-        versionedFinancialPlanner.updateSummary(target, editedRecord);
         indicateFinancialPlannerChanged();
-        indicateSummaryMapChanged();
     }
 
     //=========== Limit related methods =====================================================
@@ -274,7 +259,6 @@ public class ModelManager extends ComponentManager implements Model {
     public void undoFinancialPlanner() {
         versionedFinancialPlanner.undo();
         indicateFinancialPlannerChanged();
-        indicateSummaryMapChanged();
         indicateLimitListChanged();
     }
 
@@ -282,19 +266,12 @@ public class ModelManager extends ComponentManager implements Model {
     public void redoFinancialPlanner() {
         versionedFinancialPlanner.redo();
         indicateFinancialPlannerChanged();
-        indicateSummaryMapChanged();
         indicateLimitListChanged();
     }
 
     @Override
     public void commitFinancialPlanner() {
         versionedFinancialPlanner.commit();
-    }
-
-    //=========== Summary Display =================================================================================
-
-    public ObservableList<Summary> getSummaryList(Date startDate, Date endDate) {
-        return versionedFinancialPlanner.getSummaryList(startDate, endDate);
     }
 
     @Override

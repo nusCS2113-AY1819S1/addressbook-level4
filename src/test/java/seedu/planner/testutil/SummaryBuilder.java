@@ -5,7 +5,7 @@ import seedu.planner.model.record.Date;
 import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.summary.DaySummary;
 import seedu.planner.model.summary.MonthSummary;
-import seedu.planner.model.summary.SummaryAbs;
+import seedu.planner.model.summary.Summary;
 
 /**
  * A utility class to help buildDaySummary Summary objects for testing
@@ -86,11 +86,11 @@ public class SummaryBuilder {
         return this;
     }
 
-    public SummaryAbs buildDaySummary() {
+    public Summary buildDaySummary() {
         return new DaySummary(date, totalExpense, totalIncome, total);
     }
 
-    public SummaryAbs buildMonthSummary() {
+    public Summary buildMonthSummary() {
         return new MonthSummary(month, totalExpense, totalIncome, total);
     }
 

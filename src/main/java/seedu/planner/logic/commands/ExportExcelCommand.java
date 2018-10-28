@@ -14,7 +14,6 @@ import seedu.planner.commons.core.Messages;
 import seedu.planner.commons.util.ExcelUtil;
 import seedu.planner.commons.util.FileUtil;
 import seedu.planner.logic.CommandHistory;
-import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.Model;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
@@ -38,7 +37,7 @@ public class ExportExcelCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory) {
         requireNonNull(this);
         model.updateFilteredRecordList(predicate);
         List<Record> recordList = model.getFilteredRecordList();

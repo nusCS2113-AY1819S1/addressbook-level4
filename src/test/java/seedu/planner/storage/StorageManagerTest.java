@@ -16,7 +16,6 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
 import seedu.planner.commons.events.model.LimitListChangedEvent;
-import seedu.planner.commons.events.model.SummaryMapChangedEvent;
 import seedu.planner.commons.events.storage.DataSavingExceptionEvent;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
@@ -36,8 +35,8 @@ public class StorageManagerTest {
     public void setUp() {
 
         XmlFinancialPlannerStorage financialPlannerStorage = new XmlFinancialPlannerStorage(
-                getTempFilePath("ab"), getTempFilePath("summaryMap"),
-                getTempFilePath("limitList"));
+
+                getTempFilePath("ab"), getTempFilePath("limitList"));
 
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         storageManager = new StorageManager(financialPlannerStorage, userPrefsStorage);
@@ -81,11 +80,6 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void getSummaryMapFilePath() {
-        assertNotNull(storageManager.getSummaryMapFilePath());
-    }
-
-    @Test
     public void getLimitListFilePath() {
         assertNotNull(storageManager.getLimitListFilePath());
     }
@@ -95,19 +89,9 @@ public class StorageManagerTest {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
 
         Storage storage = new StorageManager(new XmlFinancialPlannerStorageExceptionThrowingStub(
-                Paths.get("dummy"), Paths.get("dummy"), Paths.get("dummy")),
+                Paths.get("dummy"), Paths.get("dummy")),
                 new JsonUserPrefsStorage(Paths.get("dummy")));
         storage.handleFinancialPlannerChangedEvent(new FinancialPlannerChangedEvent(new FinancialPlanner()));
-        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
-    }
-
-    @Test
-    public void handleSummaryMapChangedEvent_exceptionThrown_eventRaised() {
-        // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
-        Storage storage = new StorageManager(new XmlFinancialPlannerStorageExceptionThrowingStub(
-                Paths.get("dummy"), Paths.get("dummy"), Paths.get("dummy")),
-                new JsonUserPrefsStorage(Paths.get("dummy")));
-        storage.handleSummaryMapChangedEvent(new SummaryMapChangedEvent(new FinancialPlanner()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
 
@@ -115,7 +99,7 @@ public class StorageManagerTest {
     public void handleLimitListChangedEvent_exceptionThrown_eventRaised() {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlFinancialPlannerStorageExceptionThrowingStub(
-                Paths.get("dummy"), Paths.get("dummy"), Paths.get("dummy")),
+                Paths.get("dummy"), Paths.get("dummy")),
                 new JsonUserPrefsStorage(Paths.get("dummy")));
         storage.handleLimitListChangedEvent(new LimitListChangedEvent(new FinancialPlanner()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
@@ -127,9 +111,9 @@ public class StorageManagerTest {
     class XmlFinancialPlannerStorageExceptionThrowingStub extends XmlFinancialPlannerStorage {
 
 
-        public XmlFinancialPlannerStorageExceptionThrowingStub(Path recordListFilePath, Path limitListFilePath,
-                                                               Path summaryMapFilePath) {
-            super(recordListFilePath, summaryMapFilePath, limitListFilePath);
+        public XmlFinancialPlannerStorageExceptionThrowingStub(Path recordListFilePath, Path limitListFilePath) {
+            super(recordListFilePath, limitListFilePath);
+
         }
 
         @Override
@@ -145,12 +129,6 @@ public class StorageManagerTest {
 
         @Override
         public void saveLimitList(ReadOnlyFinancialPlanner financialPlanner, Path limitListFilePath)
-                throws IOException {
-            throw new IOException("dummy exception");
-        }
-
-        @Override
-        public void saveSummaryMap(ReadOnlyFinancialPlanner financialPlanner, Path summaryMapFilePath)
                 throws IOException {
             throw new IOException("dummy exception");
         }

@@ -1,14 +1,12 @@
 package seedu.planner.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_MONEYFLOW;
 
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.Model;
-
 import seedu.planner.model.record.Limit;
 
 /**
@@ -32,7 +30,7 @@ public class LimitCommand extends Command {
 
     public static final String MESSAGE_EXCEED = "Your spend exceeded the limit !!! \n";
     public static final String MESSAGE_NOT_EXCEED = "Your spend did not exceed the limit ^o^\n";
-    public static final String MESSAGE_LIMITS_SAME_DATE = "There already a same limit for that period of date\n";
+    public static final String MESSAGE_LIMITS_SAME_DATE = "There already a limit for that period of date\n";
 
 
 

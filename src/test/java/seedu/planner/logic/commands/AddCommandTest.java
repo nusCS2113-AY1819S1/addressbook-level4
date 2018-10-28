@@ -17,13 +17,12 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.ObservableList;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.logic.commands.exceptions.CommandException;
+import seedu.planner.model.record.Date;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.Model;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
-import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
-import seedu.planner.model.summary.Summary;
 import seedu.planner.testutil.RecordBuilder;
 
 public class AddCommandTest {
@@ -118,11 +117,7 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
 
-        public ObservableList<Summary> getSummaryList(Date date1, Date date2) {
-            throw new AssertionError("This method should not be called.");
-        }
 
         @Override
         public ObservableList<Limit> getLimitList() {
@@ -175,7 +170,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public String generateLimitOutput(boolean isExceeded, Limit limit) {
+        public String generateLimitOutput(boolean isExceeded, Double totalSpend, Limit limit) {
             throw new AssertionError("This method should not be called.");
         }
 

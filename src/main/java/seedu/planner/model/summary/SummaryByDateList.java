@@ -31,6 +31,7 @@ public class SummaryByDateList {
     }
 
     public ObservableList<SummaryEntry> getSummaryList() {
+
         List<SummaryEntry> list = summaryMap.keySet().stream().map(k -> convertToUiFriendly(summaryMap.get(k)))
                 .collect(Collectors.toList());
         return FXCollections.observableList(list);
