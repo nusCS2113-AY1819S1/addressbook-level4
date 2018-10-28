@@ -9,6 +9,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.drinkcommands.exceptions.DrinkCommandException;
 import seedu.address.model.DrinkModel;
+import seedu.address.model.drink.Date;
+import seedu.address.model.drink.Name;
+import seedu.address.model.drink.Quantity;
 
 /**
  * Adds a person to the address book.
@@ -34,20 +37,18 @@ public class SellDrinkCommand extends DrinkCommand {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
     public static final String MESSAGE_FAILURE = "The quantity entered exceed the stock";
 
-    private final String drinkName;
-    private final String date;
-    private final String quantity;
-    private final String price;
+    private final Name drinkName;
+    private final Date date;
+    private final Quantity quantity;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public SellDrinkCommand(String drinkName, String date, String quantity, String price) {
-        requireAllNonNull(drinkName, date, quantity, price);
+    public SellDrinkCommand(Name drinkName, Quantity quantity) {
+        requireAllNonNull(drinkName, quantity);
         this.drinkName = drinkName;
-        this.date = date;
         this.quantity = quantity;
-        this.price = price;
+        // date =
     }
 
     @Override

@@ -156,14 +156,16 @@ public class DrinkParserUtil {
         return tagSet;
     }
 
-
+    /**
+     * Parses {@code String quantity} into a {@code Quantity}.
+     */
     public static Quantity parseQuantity(String quantity) throws DrinkParseException {
         requireNonNull(quantity);
         String trimmedQuantity = quantity.trim();
-        if (!Tag.isValidQuantity(trimmedQuantity)) {
-            throw new DrinkParseException(Tag.MESSAGE_TAG_CONSTRAINTS);
+        if (!Quantity.isValidQuantity(trimmedQuantity)) {
+            throw new DrinkParseException(Quantity.MESSAGE_QUANTITY_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Quantity(trimmedQuantity);
     }
 
 
