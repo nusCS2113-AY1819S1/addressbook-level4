@@ -63,11 +63,11 @@ public class TimeTablePanelMainGrid extends UiPart<Region> {
         }
 
         if (input.getStartTime().isBefore(currStart)) {
-            trimmedTimeSlot = new TimeSlot(input.getDayOfWeek(), currStart, input.getEndTime());
+            trimmedTimeSlot = new TimeSlot(input.getDayOfWeek(), currStart, input.getEndTime(), input.getColor());
         }
 
         if (input.getEndTime().isAfter(currEnd)) {
-            trimmedTimeSlot = new TimeSlot(input.getDayOfWeek(), input.getStartTime(), currEnd);
+            trimmedTimeSlot = new TimeSlot(input.getDayOfWeek(), input.getStartTime(), currEnd, input.getColor());
         }
 
         TimeTablePanelTimeSlot panelTimeSlot = new TimeTablePanelTimeSlot(

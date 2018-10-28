@@ -4,10 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.List;
-
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -32,15 +28,13 @@ public class DeleteTimeCommand extends Command {
     public static final String MESSAGE_TIMESLOT_DOES_NOT_EXIST = "The timeslot to be deleted does not exist!";
 
     private final TimeSlot toDelete;
-    private final Index index;
 
     /**
      * Creates an {@code DeleteTimeCommand} to delete the specified timeSlot
      */
-    public DeleteTimeCommand(Index index, TimeSlot timeSlot) {
-        requireAllNonNull(index, timeSlot);
+    public DeleteTimeCommand(TimeSlot timeSlot) {
+        requireNonNull(timeSlot);
 
-        this.index = index;
         this.toDelete = timeSlot;
     }
 
@@ -48,13 +42,7 @@ public class DeleteTimeCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person personToEdit = model.getUser();
         Person editedPerson;
 
         try {
@@ -103,7 +91,6 @@ public class DeleteTimeCommand extends Command {
 
         // state check
         DeleteTimeCommand e = (DeleteTimeCommand) other;
-        return index.equals(e.index)
-                && toDelete.equals(e.toDelete);
+        return toDelete.equals(e.toDelete);
     }
 }
