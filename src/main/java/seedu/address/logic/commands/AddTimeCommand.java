@@ -4,10 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.List;
-
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -31,15 +27,13 @@ public class AddTimeCommand extends Command {
     public static final String MESSAGE_OVERLAP_TIMESLOT = "The timeslot added overlaps with an existing timeslot!";
 
     private final TimeSlot toAdd;
-    private final Index index;
 
     /**
      * Creates an {@code AddTimeCommand} to add the specified {@code TimeSlot}
      */
-    public AddTimeCommand(Index index, TimeSlot timeSlot) {
-        requireAllNonNull(index, timeSlot);
+    public AddTimeCommand(TimeSlot timeSlot) {
+        requireNonNull(timeSlot);
 
-        this.index = index;
         this.toAdd = timeSlot;
     }
 
@@ -47,13 +41,7 @@ public class AddTimeCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person personToEdit = model.getUser();
         Person editedPerson;
 
         try {
@@ -102,7 +90,6 @@ public class AddTimeCommand extends Command {
 
         // state check
         AddTimeCommand e = (AddTimeCommand) other;
-        return index.equals(e.index)
-                && toAdd.equals(e.toAdd);
+        return toAdd.equals(e.toAdd);
     }
 }
