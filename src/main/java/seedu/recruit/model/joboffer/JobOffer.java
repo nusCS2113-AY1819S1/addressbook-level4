@@ -2,11 +2,11 @@ package seedu.recruit.model.joboffer;
 
 import java.util.Objects;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.candidate.Education;
 import seedu.recruit.model.candidate.Gender;
+import seedu.recruit.model.candidate.UniqueCandidateList;
 import seedu.recruit.model.company.CompanyName;
 
 /**
@@ -16,7 +16,6 @@ import seedu.recruit.model.company.CompanyName;
 
 public class JobOffer {
 
-    private final ObservableList<Candidate> shortlistedCandidateList = FXCollections.observableArrayList();
 
     // Job Identity fields
     private final CompanyName companyName;
@@ -27,15 +26,17 @@ public class JobOffer {
     // Data fields
     private final AgeRange ageRange;
     private final Education education;
+    private final UniqueCandidateList candidateList;
 
     public JobOffer(CompanyName companyName, Job job, Gender gender, AgeRange ageRange, Education education,
-                    Salary salary) {
+                    Salary salary, UniqueCandidateList candidateList) {
         this.companyName = companyName;
         this.job = job;
         this.ageRange = ageRange;
         this.education = education;
         this.salary = salary;
         this.gender = gender;
+        this.candidateList = candidateList;
     }
 
     public CompanyName getCompanyName() {
@@ -62,12 +63,16 @@ public class JobOffer {
         return gender;
     }
 
-    public ObservableList<Candidate> getShortlistedCandidateList() {
-        return shortlistedCandidateList;
+    public UniqueCandidateList getUniqueCandidateList() {
+        return candidateList;
     }
 
-    public void addToShortlistedCandidateList(Candidate shortlistedCandidate) {
-        shortlistedCandidateList.add(shortlistedCandidate);
+    public ObservableList<Candidate> getObservableCandidateList() {
+        return candidateList.asUnmodifiableObservableList();
+    }
+
+    public void shortlistCandidate(Candidate shortlistedCandidate) {
+        candidateList.add(shortlistedCandidate);
     }
 
     /**

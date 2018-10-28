@@ -219,6 +219,13 @@ public interface Model {
      */
     void updateFilteredCompanyJobList(Predicate<JobOffer> predicate);
 
+    /**
+     * Adds a candidate to the candidateList of the jobOffer
+     * @param jobOffer job offer to shortlist to
+     * @param candidate candidate to be shortlisted
+     */
+    void shortListCandidateToJobOffer(Candidate candidate, JobOffer jobOffer );
+
     // ================================== Email Command functions ===================================== //
 
     /**

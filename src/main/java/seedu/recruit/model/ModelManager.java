@@ -104,7 +104,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void deleteCandidate(Candidate target) {
-        versionedCandidateBook.removePerson(target);
+        versionedCandidateBook.removeCandidate(target);
         indicateCandidateBookChanged();
     }
 
@@ -335,6 +335,12 @@ public class ModelManager extends ComponentManager implements Model {
         filteredJobs.setPredicate(predicate);
     }
 
+    @Override
+    public void shortListCandidateToJobOffer(Candidate candidate, JobOffer jobOffer) {
+        jobOffer.shortlistCandidate(candidate);
+        indicateCompanyBookChanged();
+    };
+
     // ================================== Email Command functions ===================================== //
 
     public EmailUtil getEmailUtil() {
@@ -448,7 +454,7 @@ public class ModelManager extends ComponentManager implements Model {
         for (Candidate candidate : filteredCandidates) {
             isDuplicate = false;
             for (Candidate duplicateCandidate : duplicateCandidates) {
-                if (candidate.isSamePerson(duplicateCandidate)) {
+                if (candidate.isSameCandidate(duplicateCandidate)) {
                     isDuplicate = true;
                     break;
                 }

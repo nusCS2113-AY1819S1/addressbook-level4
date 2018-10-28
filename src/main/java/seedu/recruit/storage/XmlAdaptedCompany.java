@@ -33,7 +33,7 @@ public class XmlAdaptedCompany {
     @XmlElement(required = true)
     private String phone;
     @XmlElement(required = true)
-    private List<XmlAdaptedJobOffer> jobOffer;
+    private List<XmlAdaptedJobOffer> jobList;
 
     /**
      * Constructs an XmlAdaptedCompany.
@@ -46,12 +46,12 @@ public class XmlAdaptedCompany {
      */
 
     public XmlAdaptedCompany(String companyName, String address, String email, String phone,
-                             List<XmlAdaptedJobOffer> jobOffer) {
+                             List<XmlAdaptedJobOffer> jobList) {
         this.companyName = companyName;
         this.address = address;
         this.email = email;
         this.phone = phone;
-        this.jobOffer = jobOffer;
+        this.jobList = jobList;
 
     }
 
@@ -66,7 +66,7 @@ public class XmlAdaptedCompany {
         address = source.getAddress().value;
         email = source.getEmail().value;
         phone = source.getPhone().value;
-        jobOffer = source.getJobOffers().stream().map(XmlAdaptedJobOffer::new).collect(Collectors.toList());
+        jobList = source.getJobOffers().stream().map(XmlAdaptedJobOffer::new).collect(Collectors.toList());
 
     }
 
@@ -78,8 +78,8 @@ public class XmlAdaptedCompany {
 
     public Company toModelType() throws IllegalValueException {
         final List<JobOffer> companyJobOffers = new ArrayList<>();
-        if (jobOffer != null) {
-            for (XmlAdaptedJobOffer jobOffer : jobOffer) {
+        if (jobList != null) {
+            for (XmlAdaptedJobOffer jobOffer : jobList) {
                 companyJobOffers.add(jobOffer.toModelType());
             }
         }

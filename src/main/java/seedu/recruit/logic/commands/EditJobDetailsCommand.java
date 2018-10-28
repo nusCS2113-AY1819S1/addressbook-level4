@@ -20,6 +20,7 @@ import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.candidate.Education;
 import seedu.recruit.model.candidate.Gender;
+import seedu.recruit.model.candidate.UniqueCandidateList;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
 import seedu.recruit.model.joboffer.AgeRange;
@@ -121,7 +122,9 @@ public class EditJobDetailsCommand extends Command {
         AgeRange updatedAgeRange = editJobOfferDescriptor.getAgeRange().orElse(jobOfferToEdit.getAgeRange());
         Education updatedEducation = editJobOfferDescriptor.getEducation().orElse(jobOfferToEdit.getEducation());
         Salary updatedSalary = editJobOfferDescriptor.getSalary().orElse(jobOfferToEdit.getSalary());
-        return new JobOffer(companyName, updatedJob, updatedGender, updatedAgeRange, updatedEducation, updatedSalary);
+        UniqueCandidateList candidateList = jobOfferToEdit.getUniqueCandidateList();
+        return new JobOffer(companyName, updatedJob, updatedGender, updatedAgeRange, updatedEducation, updatedSalary,
+                candidateList);
     }
 
     @Override

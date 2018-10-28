@@ -95,7 +95,7 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
      */
     private void showShortlistOfSelectedJob() {
         JobOffer selectedJob = companyJobDetailsView.getSelectionModel().getSelectedItem();
-        companyJobShortlistView.setItems(selectedJob.getShortlistedCandidateList());
+        companyJobShortlistView.setItems(selectedJob.getObservableCandidateList());
         companyJobShortlistView.setCellFactory(listView -> new CompanyJobShortlistViewCell());
     }
 
