@@ -120,7 +120,7 @@ public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
     @Subscribe
     public void handleShowSummaryTableEvent(ShowSummaryTableEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        CustomTab summaryTab = new CustomTab(SummaryDisplay.LABEL , new SummaryDisplay(event.data).getRoot());
+        Tab summaryTab = new Tab(SummaryDisplay.LABEL , new SummaryDisplay(event.data).getRoot());
         clearTabs();
         createTabs(summaryTab);
         show();
@@ -129,9 +129,9 @@ public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
     @Subscribe
     public void handleShowPieChartStatsEvent(ShowPieChartStatsEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        CustomTab categoryExpenseTab = new CustomTab("Category Breakdown For Expenses", createTotalExpenseBreakdown(
+        Tab categoryExpenseTab = new Tab("Category Breakdown For Expenses", createTotalExpenseBreakdown(
                 event.data));
-        CustomTab categoryIncomeTab = new CustomTab("Category Breakdown For Income", createTotalIncomeBreakdown(
+        Tab categoryIncomeTab = new Tab("Category Breakdown For Income", createTotalIncomeBreakdown(
                 event.data));
         clearTabs();
         createTabs(categoryExpenseTab, categoryIncomeTab);
