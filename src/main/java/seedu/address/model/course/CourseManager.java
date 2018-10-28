@@ -43,8 +43,18 @@ public class CourseManager {
         return initCM;
     }
 
-    public boolean hasCourse(Course course) {
-        return courseList.contains(course);
+    /**
+     * Checks if a course code already exists in Trajectory.
+     * @param courseCode
+     * @return
+     */
+    public boolean hasCourse(String courseCode) {
+        for (Course c: courseList) {
+            if (c.getCourseCode().toString().equals(courseCode)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public String getTableRepresentation() {

@@ -46,7 +46,7 @@ public class CourseAddCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         CourseManager cm = CourseManager.getInstance();
-        if (cm.hasCourse(internalCourse)) {
+        if (cm.hasCourse(internalCourse.getCourseCode().toString())) {
             throw new CommandException(MESSAGE_DUPLICATE_COURSE);
         }
 
