@@ -22,11 +22,11 @@ import seedu.address.model.item.Quantity;
  * Found an existing item in the stock list.
  */
 
-public class FoundCommand extends Command{
+public class FoundCommand extends Command {
     public static final String COMMAND_WORD = "found";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Found a item from the stock list identified  "
-            +"by the index number used in the displayed item list"
+            + "by the index number used in the displayed item list"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_QUANTITY + "QUANTITY\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -57,12 +57,12 @@ public class FoundCommand extends Command{
         }
 
         Item itemToFound = lastShownList.get(targetIndex.getZeroBased());
-        Item foundItem = createFoundItem(itemToFound,foundDescriptor);
+        Item foundItem = createFoundItem(itemToFound, foundDescriptor);
 
         if (!itemToFound.isSameItem(foundItem) && model.hasItem(foundItem)) {
             throw new CommandException(MESSAGE_INVALID_QUANTITY);
         }
-        model.updateItem(itemToFound,foundItem);
+        model.updateItem(itemToFound, foundItem);
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitStockList();
         return new CommandResult(String.format(MESSAGE_FOUND_ITEM_SUCCESS, foundItem));
@@ -98,9 +98,11 @@ public class FoundCommand extends Command{
             setFoundQuantity(toCopy.foundQuantity);
 
         }
-        public void setFoundQuantity(Integer foundQuantity) {this.foundQuantity=foundQuantity; }
+        public void setFoundQuantity(Integer foundQuantity) {
+            this.foundQuantity = foundQuantity; }
 
-        public Integer getFoundQuantity(){return foundQuantity; }
+        public Integer getFoundQuantity() {
+            return foundQuantity; }
 
     }
     @Override

@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
-
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -23,11 +22,11 @@ import seedu.address.model.item.Quantity;
  * Lost an existing item in the stock list.
  */
 
-public class LostCommand extends Command{
+public class LostCommand extends Command {
     public static final String COMMAND_WORD = "lost";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lost a item from the stock list identified  "
-            +"by the index number used in the displayed item list"
+            + "by the index number used in the displayed item list"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_QUANTITY + "QUANTITY\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -58,12 +57,12 @@ public class LostCommand extends Command{
         }
 
         Item itemToLost = lastShownList.get(targetIndex.getZeroBased());
-        Item lostItem = createLostItem(itemToLost,lostDescriptor);
+        Item lostItem = createLostItem(itemToLost, lostDescriptor);
 
         if (!itemToLost.isSameItem(lostItem) && model.hasItem(lostItem)) {
             throw new CommandException(MESSAGE_INVALID_QUANTITY);
         }
-        model.updateItem(itemToLost,lostItem);
+        model.updateItem(itemToLost, lostItem);
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitStockList();
         return new CommandResult(String.format(MESSAGE_LOST_ITEM_SUCCESS, lostItem));
@@ -98,9 +97,11 @@ public class LostCommand extends Command{
         public LostDescriptor(LostDescriptor toCopy) {
             setLostQuantity(toCopy.lostQuantity);
         }
-        public void setLostQuantity(Integer lostQuantity) {this.lostQuantity = lostQuantity; }
+        public void setLostQuantity(Integer lostQuantity) {
+            this.lostQuantity = lostQuantity; }
 
-        public Integer getLostQuantity(){return lostQuantity; }
+        public Integer getLostQuantity() {
+            return lostQuantity; }
 
     }
     @Override
