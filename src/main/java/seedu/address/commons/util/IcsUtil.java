@@ -14,7 +14,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Collection;
 import java.util.Date;
@@ -36,15 +35,10 @@ import seedu.address.model.person.TimeSlot;
 import seedu.address.model.person.TimeTable;
 
 /**
- * Converts a TimeTable object instance to .ics and vice versa.
- *
- * Usage:
- * 1) Mainly used to read and write the TimeTable(s) of FreeTime into the disk for permanent storage.
- * 2) Also used during import and export commands.
+ * Utility functions for the reading and writing of {@code TimeTable} objects to disk as .ics file. (and vice versa)
  */
 public class IcsUtil {
     public static final String DEFAULT_ZONE_ID = "Asia/Shanghai";
-
     private static final Logger logger = LogsCenter.getLogger(IcsUtil.class);
     private static IcsUtil instance;
 
@@ -76,7 +70,9 @@ public class IcsUtil {
         } catch (IOException e) {
             throw new IOException(e);
         }
-
+        if (iCalendar == null) {
+            throw new IOException();
+        }
         Optional<TimeTable> optionalTimeTable = iCalendarToTimeTable(iCalendar);
 
         return optionalTimeTable;
@@ -98,7 +94,7 @@ public class IcsUtil {
         Then we get all the properties of each VEvent, and Instantiate a TimeSlot using these properties as parameters.
         Then we add this TimeSlot to the TimeTable.
          */
-        for (VEvent event : iCalendar.getEvents()) { //for-each TimeSlot in TimeTable
+        for (VEvent event : iCalendar.getEvents()) { //foreach TimeSlot in TimeTable
             //formatter
             DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
             DateFormat timeFormat = new SimpleDateFormat("HHmmss");
@@ -123,9 +119,9 @@ public class IcsUtil {
             }
 
             //after the above information extraction, we instantiate a TimeSlot with these info.
-            LocalTime timeSlotStartTime = timeStringToLocalTime(timeStartStr);
-            LocalTime timeSlotEndTime = timeStringToLocalTime(timeEndStr);
-            DayOfWeek timeSlotDay = dateStringToDayOfWeek(dateStartStr);
+            LocalTime timeSlotStartTime = DateTimeConversionUtil.getInstance().timeStringToLocalTime(timeStartStr);
+            LocalTime timeSlotEndTime = DateTimeConversionUtil.getInstance().timeStringToLocalTime(timeEndStr);
+            DayOfWeek timeSlotDay = DateTimeConversionUtil.getInstance().dateStringToDayOfWeek(dateStartStr);
 
             System.out.println(timeSlotStartTime + " to " + timeSlotEndTime + " on " + timeSlotDay + ": " + summaryStr);
 
@@ -222,7 +218,7 @@ public class IcsUtil {
                         .with(TemporalAdjusters.previous(dayOfWeek));
 
         LocalDateTime localDateTime = startTime.atDate(previousDay);
-        return LocalDateTimeAndDateConversionUtil.getInstance().localDateTimeToDate(localDateTime);
+        return DateTimeConversionUtil.getInstance().localDateTimeToDate(localDateTime);
     }
 
     /**
@@ -242,9 +238,9 @@ public class IcsUtil {
      * Reads {@code ICalendar} object from file specified
      * Will return an empty ICalendar if the .ics file is empty.
      *
-     * This function will silently fail if there are more than 1 {@code ICalendar} in a .ics file
-     * the other {@code ICalendar} are simply not read!
-     * Thankfully, NUSMODS export only has 1 VCalendar in an .ics file, so all is good.
+     * This function will only read the 1st {@code ICalendar} in an .ics file
+     * the other {@code ICalendar} are simply not read! (silent failure)
+     * NUSMODS export only has 1 VCalendar in an .ics file; all good.
      *
      * @throws IOException if any error occurs during read.
      */
@@ -258,31 +254,5 @@ public class IcsUtil {
         return iCalendar;
     }
 
-    /**
-     * Converts the ics-formatted dateString into DayOfWeek object.
-     * @param dateString    is in format yyyyMMdd
-     */
-    private DayOfWeek dateStringToDayOfWeek(String dateString) {
-        //TODO: defensive coding
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyyMMdd");
-        LocalDate date = LocalDate.parse(dateString, fmt);
-        DayOfWeek day = date.getDayOfWeek();
 
-        return day;
-    }
-
-    /**
-     * Converts the ics-formatted timeString into a LocalTime object.
-     * @param timeString    is in format HHmmss
-     */
-    private LocalTime timeStringToLocalTime(String timeString) {
-        //TODO: defensive coding
-        int timeInt = Integer.parseInt(timeString);
-        String formattedTime = String.format("%06d", timeInt);
-
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("HHmmss");
-        LocalTime time = LocalTime.parse(formattedTime, fmt);
-
-        return time;
-    }
 }
