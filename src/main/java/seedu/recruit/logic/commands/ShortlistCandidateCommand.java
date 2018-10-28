@@ -2,6 +2,8 @@ package seedu.recruit.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.events.ui.ShowLastViewedBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.exceptions.CommandException;
@@ -9,7 +11,6 @@ import seedu.recruit.model.Model;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.joboffer.JobOffer;
-import seedu.recruit.ui.MainWindow;
 
 /**
  * Last stage of Shortlist Command.
@@ -40,7 +41,7 @@ public class ShortlistCandidateCommand extends Command {
         selectedJobOffer.addToShortlistedCandidateList(selectedCandidate);
 
         LogicManager.setLogicState("primary");
-        MainWindow.switchToLastViewedBook();
+        EventsCenter.getInstance().post(new ShowLastViewedBookRequestEvent());
         return new CommandResult(String.format(MESSAGE_SUCCESS, selectedCandidate.getName().fullName,
                 selectedJobOffer.getJob().value, selectedCompany.getCompanyName().value));
     }

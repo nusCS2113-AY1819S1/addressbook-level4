@@ -2,14 +2,15 @@ package seedu.recruit.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.events.ui.ShowShortlistPanelRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
-import seedu.recruit.ui.MainWindow;
 
 /**
- * First stage of Shortlist command.
+ * First stage of the 4-stage Shortlist command.
  * Shortlists selected candidates for a job offer
  */
 public class ShortlistCandidateInitializationCommand extends Command {
@@ -28,7 +29,9 @@ public class ShortlistCandidateInitializationCommand extends Command {
     private static boolean shortlistStatus;
 
     /** Returns the status of the shortlist process */
-    public static boolean isShortlisting() { return shortlistStatus; }
+    public static boolean isShortlisting() {
+        return shortlistStatus;
+    }
 
     /** Sets the status of the shortlist process as the end */
     public static void isDoneShortlisting() {
@@ -38,7 +41,7 @@ public class ShortlistCandidateInitializationCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        MainWindow.switchToShortlistPanel();
+        EventsCenter.getInstance().post(new ShowShortlistPanelRequestEvent());
         shortlistStatus = true;
         LogicManager.setLogicState(SelectCompanyCommand.COMMAND_LOGIC_STATE);
         return new CommandResult(MESSAGE_USAGE + MESSAGE_ENTERING_SHORTLIST_PROCESS

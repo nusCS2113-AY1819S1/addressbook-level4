@@ -4,7 +4,7 @@ import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.commons.events.BaseEvent;
 
 /**
- * Indicates a request to jump to the list of candidates or
+ * Indicates a request to jump to the list of candidates
  */
 public class JumpToListRequestEvent extends BaseEvent {
 

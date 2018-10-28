@@ -8,6 +8,7 @@ import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.commons.events.ui.JumpToListRequestEvent;
+import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.exceptions.CommandException;
@@ -38,9 +39,14 @@ public class SelectCandidateCommand extends Command {
         this.targetIndex = targetIndex;
     }
 
+    public static Candidate getSelectedCandidate() {
+        return selectedCandidate;
+    }
+
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
 
         List<Candidate> filteredCandidateList = model.getFilteredCandidateList();
 
@@ -65,9 +71,5 @@ public class SelectCandidateCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof SelectCandidateCommand // instanceof handles nulls
                 && targetIndex.equals(((SelectCandidateCommand) other).targetIndex)); // state check
-    }
-
-    public static Candidate getSelectedCandidate() {
-        return selectedCandidate;
     }
 }

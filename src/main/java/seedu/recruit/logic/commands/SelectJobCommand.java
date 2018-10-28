@@ -8,6 +8,7 @@ import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.commons.events.ui.JumpToCompanyJobListRequestEvent;
+import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.exceptions.CommandException;
@@ -40,9 +41,14 @@ public class SelectJobCommand extends Command {
         this.targetIndex = targetIndex;
     }
 
+    public static JobOffer getSelectedJobOffer() {
+        return selectedJobOffer;
+    }
+
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
 
         List<JobOffer> filteredCompanyJobList = model.getFilteredCompanyJobList();
 
@@ -78,9 +84,5 @@ public class SelectJobCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof SelectJobCommand // instanceof handles nulls
                 && targetIndex.equals(((SelectJobCommand) other).targetIndex)); // state check
-    }
-
-    public static JobOffer getSelectedJobOffer() {
-        return selectedJobOffer;
     }
 }

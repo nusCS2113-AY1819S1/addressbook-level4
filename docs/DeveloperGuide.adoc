@@ -147,6 +147,16 @@ image::UiClassDiagram.png[width="800"]
 
 As illustrated in Figure 5, the UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CandidateDetailsPanel`, `CompanyJobDetailsPanel`, `ShortlistPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
+There are 4 placeholders inside `MainWindow` that fills the screen along with the menu bar.
+
+|============
+|Placeholder | Parts of `MainWindow`
+|commandBoxPlaceholder | `CommandBox`
+| resultDisplayPlaceholder | `ResultDisplay`
+| panelViewPlaceholder | `CandidateDetailsPanel` `CompanyJobDetailsPanel` `ShortlistPanel`
+| statusbarPlaceholder | `StatusBarFooter`
+|============
+
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/recruit/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
 The `UI` component,
@@ -224,16 +234,98 @@ This section describes some noteworthy details on how certain features are imple
 ==== Current Implementation
 The shortlist mechanism is facilitated by `select`, `selectCompany` and `selectJob` command.
 It extends `CompanyBook` with a list of shortlisted candidate(s) for each job offer, stored internally as a `shortlistedCandidateList`.
-Additionally, it implements the f
-// end::shortlist[]
+Given below is an example usage scenario and how the shortlist mechanism behaves at each step.
 
+[NOTE]
+x refers to the index from user input.
+
+. User launches the application. RecruitBook sets up the Candidate Book and Company Book respectively.
+[NOTE]
+Assume that there are candidates and companies present in the data of RecruitBook, but no job offer.
+
+. User adds a new job offer `Cashier` under the existing company `KFC`.
+. RecruitBook creates a new object `Cashier` with `JobOffer` class. Hence, `Cashier` has `shortlistedCandidateList` as one of its attributes.
+[NOTE]
+`shortlistedCandidateList` is empty upon creation of the `Cashier` object.
+
+. User executes `shortlist` command. RecruitBook enters a 4-stage process to shortlist a candidate for a job offer.
+This is implemented by `LogicManager` where `setLogicState` is called in each stage to connect one after another. User will need to execute
+`cancel` command to exit from the shortlist process. The 4-stage process is described in order below.
+.. `selectCompany x` -> User selects the company of the job offer.
+.. `selectJob x` -> User selects the job offer.
+.. `select x` -> User selects the candidate to shortlist.
+.. `confirm` -> User confirms the above inputs.
+
+. RecruitBook proceeds to add shortlisted candidate into `shortlistedCandidateList` of the job offer through `addToShortlistedCandidateList` method in `JobOffer` class.
+. `shortlistedCandidateList` is linked to the job offer.
+[NOTE]
+You can access this list by calling `selectedJob.getShortlistedCandidateList()`.
+
+
+==== Design Considerations
+
+===== Aspect: How shortlist feature executes
+
+* **Alternative 1 (current choice):** Use existing `select`, `selectCompany` and `selectJob` commands.
+** Pros: Easy to implement.
+** Cons: May have performance issues in terms of memory usage.
+* **Alternative 2:** Shortlist command executes the 4-stage process by itself.
+** Pros: Does not need to rely on `LogicManager` to facilitate the process.
+** Cons: We must implement 3 fields for user input `shortlist Candidate/[input] Company/[input] Job/[input]` and store separately from the
+Candidate Book and Company Book. Furthermore, we have to filter by job offer and store the data into an observable list on the UI
+when the user wants to view the shortlisted candidates for a certain job offer.
+
+===== Aspect: Data structure to support the shortlist feature
+
+* **Alternative 1 (current choice):** Use a list to store the shortlisted candidates and attach this list to the respective job offer.
+** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
+** Cons: Increases coupling between `JobOffer` and `ShortlistCandidateCommand`.
+* **Alternative 2:** Use a HashMap to store the shortlisted candidates as the `key` and the respective job offers as the `value`.
+** Pros: We do not need to set `shortlistedCandidateList` as an attribute in each the `JobOffer` object. This would use less memory as it only takes a HashMap to store
+all the shortlisted candidates along with the job offers. Furthermore, this reduces coupling between `JobOffer` and `ShortlistCandidateCommand`.
+** Cons: HashMap only allows unique `keys`. In other words, HashMap does not allow duplicates of candidates to be stored. However, in RecruitBook, user should
+be able to shortlist a candidate for multiple job offers. Hence, we need to further implement a list of job offers to be stored as the `value` for each candidate so as
+to store multiple job offers under the same candidate `key`.
+// end::shortlist[]
 
 // tag::switchbook[]
 === Switch Book Feature
 ==== Current Implementation
-The switching mechanism is facilitated by `MainWindow`, with the methods `switchToCandidateBook` and `switchToCompanyBook`.
+The switching mechanism is facilitated by `MainWindow`, with the latter's `switchToCandidateBook` and `switchToCompanyBook` methods.
 
-It extends `Command` with. [RACHEL]
+It extends `Command` with `EventsCenter`, where it uses `EventsCenter` to post a new `SwitchBookRequestEvent` so that
+MainWindow will handle the event with its `handleSwitchBookEvent` method.
+
+[NOTE]
+MainWindow knows an event is posted because it is subscribed to the event bus `com.google.common.eventbus.Subscribe`. It will
+handle any event that matches the parameter of the handling methods in `MainWindow` class.
+For example, `SwitchBookRequestEvent` will match with the `handleSwitchBookEvent(*SwitchBookRequestEvent* event)` as the parameter matches.
+
+As mentioned <<UI component, above>>, inside MainWindow, there are 4 placeholders and the panelViewPlaceholder holds the panels `CandidateDetailsPanel` and `CompanyJobDetailsPanel`.
+
+The methods `switchToCandidateBook` and `switchToCompanyBook` work by placing the desired panel in panelViewPlaceholder, to be shown on the MainWindow.
+
+Given below is an example usage scenario for switching from `Company Book` to `Candidate Book` and how the switching mechanism behaves at each step.
+
+. User launches the application. `MainWindow` initialises the panelViewPlaceholder with `CompanyJobDetailsPanel`.
+[NOTE]
+This means the default view of RecruitBook is the `Company Book`.
+
+. User executes `switch` command, which posts a `SwitchBookRequestEvent`.
+
+. MainWindow handles the posted `SwitchBookRequestEvent` with its method `handleSwitchBookEvent`.
+
+. Inside this method, it checks which book is currently displayed by calling the method `getDisplayedBook`.
+
+. `getDisplayedBook` returns `companyBook` as a string.
+
+. Using a switch statement, case `companyBook` will execute and call for `switchToCandidateBook` method.
+
+. `switchToCandidateBook` method places the `CandidateDetailsPanel` into panelViewPlaceholder to switch the view
+[TIP]
+In order to add a panel into panelViewPlaceholder, the existing panel needs to be removed so that there will not be duplicated panels
+inside panelViewPlaceholder. If there a panel is duplicated, it will give errors.
+
 // end::switchbook[]
 
 // tag::undoredo[]
@@ -474,7 +566,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |User |Sort jobs of different nature (such as internships, part-time jobs) |There are more options for employees to choose.
 
-|`* * *` |User |Find relevant details to a specific job candidate |Assign the most suitable job to him/her
+|`* * *` |User |Find relevant details to a specific job candidate |Assign the most suitable job to the candidate.
 
 |`* *` |User |Undo/Redo changes to CompanyBook and CandidateBook |Revert unwanted changes job candidates and offers
 
@@ -504,417 +596,397 @@ _{More to be added}_
 
 (For all use cases below, the *System* is the `RecruitBook` and the *Actor* is the `user`, unless specified otherwise)
 
-[discrete]
-=== Use case: Add Candidate
+|===
+[big]#*Use case: Add Candidate*#
 
 *MSS*
 
 1.  User requests to add a candidate
+
 2.  RecruitBook prompts user to enter relevant details of job candidate
+
 3.  User enters the relevant details
+
 4.  RecruitBook prompts user to enter relevant job experience of job candidate
+
 5.  User enters the relevant details
-+
-Use case ends.
+
++ Use case ends.
 
 *Extensions*
 
-[none]
-* 3a. User enters invalid details or used the wrong format.
-+
-[none]
-** 3a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
-** 3a2. Prompts user to reenter fields in correct format or to exit add command
-+
-Use case resumes at step 3.
+3a. User enters invalid details or used the wrong format.
 
-[none]
-* 3b. User enters a duplicate entry.
-+
-[none]
-** 3b1. RecruitBook informs user of existing entry
-** 3b2. Prompts user to enter a new entry or to exit add command
-+
-Use case resumes at step 3.
+3a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
 
-[discrete]
-=== Use case: Add Job Offer
+3a2. Prompts user to reenter fields in correct format or to exit add command
+
++ Use case resumes at step 3.
+
+3b. User enters a duplicate entry.
+
+3b1. RecruitBook informs user of existing entry
+
+3b2. Prompts user to enter a new entry or to exit add command
+
++ Use case resumes at step 3.
+|
+[big]#*Use case: Add Job Offer*#
 
 *MSS*
 
 1.  User requests to add a job offer
+
 2.  RecruitBook prompts user to enter relevant details of job offer
+
 3.  User enters the relevant details
+
 4.  RecruitBook prompts user to enter job requirements
+
 5.  User enters the relevant details
-+
-Use case ends.
+
++ Use case ends.
 
 *Extensions*
 
-[none]
-* 3a. User enters invalid details or used the wrong format.
-+
-[none]
-** 3a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
-+
-Use case resumes at step 3.
+3a. User enters invalid details or used the wrong format.
 
-[none]
-* 3a. User enters a duplicate entry
-+
-[none]
-** 3a1. RecruitBook informs user of existing entry
-+
-Use case resumes at step 3.
 
-[discrete]
+3a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
 
-=== Use case: Add Company
++ Use case resumes at step 3.
+
+3a. User enters a duplicate entry
+
+3a1. RecruitBook informs user of existing entry
+
++ Use case resumes at step 3.
+|
+[big]#*Use case: Add Company*#
 
 *MSS*
 
 1.  User requests to add a company
+
 2.  RecruitBook adds company to CompanyBook
-+
-Use case ends.
+
++ Use case ends.
 
 *Extensions*
 
-[none]
-* 1a. User enters invalid details or used the wrong format.
-+
-[none]
-** 1a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
-** 1a2. Prompts user to re-enter fields in correct format or to exit add command
-+
-Use case resumes at step 1.
+1a. User enters invalid details or used the wrong format.
 
-[none]
-* 1b. User enters a duplicate entry
-+
-[none]
-** 1b1. RecruitBook informs user of existing entry
-** 1b2. Prompts user to enter a new entry or to exit add command
-+
-Use case resumes at step 1.
+1a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
 
-[discrete]
+1a2. Prompts user to re-enter fields in correct format or to exit add command
 
-=== Use case: List All Candidates
++ Use case resumes at step 1.
+
+1b. User enters a duplicate entry
+
+1b1. RecruitBook informs user of existing entry
+
+1b2. Prompts user to enter a new entry or to exit add command
+
++ Use case resumes at step 1.
+|
+[big]#*Use case: List All Candidates*#
 
 *MSS*
 
 1.  User requests to list all candidates.
+
 2.  RecruitBook displays a list of all candidates.
-+
-Use case ends.
+
++ Use case ends.
 
 *Extensions*
 
-[none]
-* 2a. The list is empty.
-+
-Use case ends.
+2a. The list is empty.
 
-[discrete]
-=== Use case: List all Companies and all Job Offers
++ Use case ends.
+|
+[big]#*Use case: List all Companies and all Job Offers*#
 
 *MSS*
 
 1.  User requests to list all companies and all job offers.
+
 2.  RecruitBook displays a list of all companies and all jobs.
-+
-Use case ends.
+
++ Use case ends.
 
 *Extensions*
 
-[none]
-* 2a. The company list is empty.
-* 2b. The job offer list is empty.
-* 2c. Both lists are empty.
-+
-Use case ends.
+2a. The company list is empty.
 
-[discrete]
-=== Use case: Switch Book View
+2b. The job offer list is empty.
+
+2c. Both lists are empty.
+
++ Use case ends.
+|
+[big]#*Use case: Switch Book View*#
 
 *MSS*
 
 1.  User requests to switch view.
+
 2.  RecruitBook displays the other book.
-+
-Use case ends.
+
++ Use case ends.
 
 *Extensions*
 
-[none]
-* 2a. The other book is empty.
-+
-Use case ends.
+2a. The other book is empty.
 
-[discrete]
-=== Use case: Shortlist Candidate
++ Use case ends.
+|
+[big]#*Use case: Shortlist Candidate*#
 
 *MSS*
 
 1.  User requests to shortlist a candidate.
+
 2.  RecruitBook displays the shortlist panel view.
+
 3.  RecruitBook requests for the company's index.
+
 4.  User enters the index of the company of her choice.
+
 5.  RecruitBook requests for the job offer's index.
+
 6.  User enters the index of the job offer of her choice.
+
 7.  RecruitBook requests for the index of the candidate to shortlist.
+
 8.  User enters the index of the candidate of her choice.
+
 9.  RecruitBook requests for confirmation.
+
 10. User confirms.
-+
-Use case ends.
+
++ Use case ends.
 
 *Extensions*
 
-[none]
-* 4a. The index of company to select is invalid.
-+
-[none]
-** 4a1. RecruitBook displays an error message.
-** 4a2. RecruitBook requests for a valid index.
-** 4a3. User enters new index.
-** Steps 4a1-4a3 are repeated until the index entered is valid.
+4a. The index of company to select is invalid.
 
-+
-Use case resumes from Step 5.
+4a1. RecruitBook displays an error message.
 
-[none]
-* 6a. The index of job offer to select is invalid.
-+
-[none]
-** 6a1. RecruitBook displays an error message.
-** 6a2. RecruitBook requests for a valid index.
-** 6a3. User enters new index.
-** Steps 6a1-6a3 are repeated until the index entered is valid.
+4a2. RecruitBook requests for a valid index.
 
-+
-Use case resumes from Step 7.
+4a3. User enters new index.
 
-[none]
-* 8a. The index of candidate to select is invalid.
-+
-[none]
-** 8a1. RecruitBook displays an error message.
-** 8a2. RecruitBook requests for a valid index.
-** 8a3. User enters new index.
-** Steps 8a1-8a3 are repeated until the index entered is valid.
+Steps 4a1-4a3 are repeated until the index entered is valid.
 
-+
-Use case resumes from Step 9.
++ Use case resumes from Step 5.
 
-[none]
-* a. At any time, user chooses to cancel the shortlisting process.
-+
-[none]
-** a1. RecruitBook cancels the shortlisting process.
+6a. The index of job offer to select is invalid.
 
-+
-Use case ends.
+6a1. RecruitBook displays an error message.
 
-[discrete]
-=== Use case: Edit Candidate
+6a2. RecruitBook requests for a valid index.
+
+6a3. User enters new index.
+
+Steps 6a1-6a3 are repeated until the index entered is valid.
+
++ Use case resumes from Step 7.
+
+8a. The index of candidate to select is invalid.
+
+8a1. RecruitBook displays an error message.
+
+8a2. RecruitBook requests for a valid index.
+
+8a3. User enters new index.
+
+Steps 8a1-8a3 are repeated until the index entered is valid.
+
++ Use case resumes from Step 9.
+
+a. At any time, user chooses to cancel the shortlisting process.
+
+a1. RecruitBook cancels the shortlisting process.
+
++ Use case ends.
+|
+[big]#*Use case: Edit Candidate*#
 
 *MSS*
 
 1.  User requests to edit details of a candidate based on the candidate's index
+
 2.  RecruitBook displays successful edit message
-+
-Use case ends.
+
++ Use case ends.
 
 *Extensions*
 
-[none]
-* 1a. The index of candidate to edit is invalid
-+
-[none]
-** 1a1.  RecruitBook displays an error message
-+
-Use case ends.
+1a. The index of candidate to edit is invalid
 
-[none]
-* 1b. The tags to edit are invalid
-+
-[none]
-** 1b1. RecruitBook displays an error message
-+
-Use case ends.
+1a1.  RecruitBook displays an error message
 
-[none]
-* 1c. No fields are entered for editing
-+
-[none]
-** 1c1. RecruitBook displays an error message
-+
-Use case ends.
++ Use case ends.
 
-[discrete]
-=== Use case: Edit Job Offer
+1b. The tags to edit are invalid
+
+1b1. RecruitBook displays an error message
+
++ Use case ends.
+
+1c. No fields are entered for editing
+
+1c1. RecruitBook displays an error message
+
++ Use case ends.
+
+|
+[big]#*Use case: Edit Job Offer*#
 
 *MSS*
 
 1.  User requests to edit a job offer
+
 2.  RecruitBook displays successful edit message
-+
-Use case ends.
+
++ Use case ends.
 
 *Extensions*
 
-[none]
-* 1a. The list is empty.
-+
-Use case ends.
+1a. The list is empty.
 
-[none]
-* 1b. The index number requested for edit is invalid
-+
-[none]
-** 1b1.  RecruitBook displays an error message
-+
-Use case ends.
++ Use case ends.
 
-[none]
-* 1c. The tags to edit are invalid
-+
-[none]
-** 1c1.  RecruitBook displays an error message
-+
-Use case ends.
+1b. The index number requested for edit is invalid
 
-[none]
-* 1d. No fields are entered for editing
-+
-[none]
-** 1d1. RecruitBook displays an error message
-+
-Use case ends.
+1b1.  RecruitBook displays an error message
 
-[discrete]
-=== Use case: Find Candidate
++ Use case ends.
+
+1c. The tags to edit are invalid
+
+1c1.  RecruitBook displays an error message
+
++ Use case ends.
+
+1d. No fields are entered for editing
+
+1d1. RecruitBook displays an error message
+
++ Use case ends.
+|
+[big]#*Use case: Find Candidate*#
 
 *MSS*
 
 1.  User requests to find a candidate based on a keyword of their attributes (name/email/phone number/address)
+
 2.  RecruitBook lists out people whose keyword matches the attribute criteria
-+
-Use case ends.
+
++ Use case ends.
 
 *Extensions*
 
-[none]
-* 2a. Filter tag is invalid
-+
-[none]
-** 2a1. RecruitBook informs the user of the tag error
-+
-** 2a2. If there is only one tag in the search request and it is invalid
-+
-[none]
-*** 2a2.1. Inform the user of the invalid filter tag, do not search anything
-+
-*** Use case ends
-+
-** 2a3. If there are other valid tags in the search request as well
-+
-[none]
-*** 2a3.1. Inform the user of the invalid filter tag, ignore the invalid filter tag, but still search based on the valid filter tags
-+
-*** 2a3.2. List out people whose keyword matches the criteria
-+
-*** Use case ends
-+
-[none]
-* 2b. No candidates matches with the find criteria
-+
-[none]
-** 2b1. Inform the user that no users have been matched with the search criteria.
+2a. Filter tag is invalid
 
-Use case ends.
+2a1. RecruitBook informs the user of the tag error
 
-[discrete]
-=== Use case: Filter Candidate
+2a2. If there is only one tag in the search request and it is invalid
+
+2a2.1. Inform the user of the invalid filter tag, do not search anything
+
++ Use case ends
+
+2a3. If there are other valid tags in the search request as well
+
+2a3.1. Inform the user of the invalid filter tag, ignore the invalid filter tag, but still search based on the valid filter tags
+
+2a3.2. List out people whose keyword matches the criteria
+
++ Use case ends
+
+2b. No candidates matches with the find criteria
+
+2b1. Inform the user that no users have been matched with the search criteria.
+
++ Use case ends.
+|
+[big]#*Use case: Filter Candidate*#
 
 *MSS*
 
 1.  User requests the details of the candidates to sorted by a specified tag
+
 2.  RecruitBook shows all the names of the candidates that fit into the searched criteria
-+
-Use case ends.
+
++ Use case ends.
 
 *Extensions*
 
-[none]
-* 1a. The filter tag is invalid
-+
-[none]
-** 1a1. RecruitBook informs user of the error and show the specified tags that the filter function supports together with examples
-+
-** 1a2. RecruitBook then prompts user to re-enter fields that is supported or to exit filter command
-+
-[none]
-* 1b. The searched field is invalid
-+
-[none]
-** 1a1. RecruitBook informs user of the error and shows the specified fields that is currently being recorded in the system
-+
-Use case resumes at step 1.
+1a. The filter tag is invalid
 
-[discrete]
-=== Use case: Delete Candidate
+1a1. RecruitBook informs user of the error and show the specified tags that the filter function supports together with examples
+
+1a2. RecruitBook then prompts user to re-enter fields that is supported or to exit filter command
+
+1b. The searched field is invalid
+
+1a1. RecruitBook informs user of the error and shows the specified fields that is currently being recorded in the system
+
++ Use case resumes at step 1.
+|
+[big]#*Use case: Delete Candidate*#
 
 *MSS*
 
 1.  User  requests to delete a candidate
+
 2.  RecruitBook prompts user to enter the index of candidate to be deleted
+
 3.  User enters index of candidate from the list
+
 4.  RecruitBook displays message that name of candidate is successfully deleted
-+
-Use case ends.
+
++ Use case ends.
 
 *Extensions*
 
-[none]
-* 3a. User enters invalid format or details
-+
-[none]
-** 3a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
-+
-** 3a2. RecruitBook prompts user to re-enter fields in correct format or to exit delete command
-+
-Use case resumes at step 3.
+3a. User enters invalid format or details
 
-[discrete]
-=== Use case: Delete Job Offer
+3a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
+
+3a2. RecruitBook prompts user to re-enter fields in correct format or to exit delete command
+
++ Use case resumes at step 3.
+|
+[big]#*Use case: Delete Job Offer*#
 
 *MSS*
 
 1.  User requests to delete a job offer
+
 2.  RecruitBook lists all the job offers available together with the index number of the job offer
+
 3.  User proceeds to delete the index of the job offer that is to be deleted
+
 4.  RecruitBook displays message that the job offer is successfully deleted
-+
-Use case ends.
+
++ Use case ends.
 
 *Extensions*
-[none]
 
-* 3a. User enters invalid format or details
-+
-[none]
-** 3a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
-+
-** 3a2. RecruitBook prompts user to re-enter fields in correct format or to exit delete command
-+
-Use case resumes at step 3.
+3a. User enters invalid format or details
 
+3a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
+
+3a2. RecruitBook prompts user to re-enter fields in correct format or to exit delete command
+
++ Use case resumes at step 3.
+|
 _{More to be added}_
-
+|===
 [appendix]
 == Non Functional Requirements
 
