@@ -185,6 +185,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void exportPerson(Person person) throws IOException {
+        requireNonNull(person);
         CsvWriter csvWriter = new CsvWriter(person);
         csvWriter.write();
     }
