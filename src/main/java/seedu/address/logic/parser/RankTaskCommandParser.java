@@ -21,7 +21,7 @@ public class RankTaskCommandParser implements Parser<RankTaskCommand> {
 
         String filter = args.trim();
 
-        if (filter.equals("module") || filter.equals("date")||filter.equals("priority")) {
+        if ("module".equals(filter) || "date".equals(filter) || "priority".equals(filter)) {
             return new RankTaskCommand(filter);
         }
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RankTaskCommand.MESSAGE_USAGE));

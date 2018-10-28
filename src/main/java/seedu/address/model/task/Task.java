@@ -21,6 +21,22 @@ public class Task {
 
     private boolean isComplete;
 
+    /*
+     *Compare two tasks based on their deadlines
+     */
+    public static Comparator<Task>compareDeadlines
+            =(Task a, Task b) -> a.getDate().value.compareTo(b.getDate().value);
+    /*
+     *Compare two tasks based on their module codes
+     */
+    public static Comparator<Task>compareModule
+            =(Task a, Task b) -> a.getModule().value.compareTo(b.getModule().value);
+    /*
+     *Compare two tasks based on their priority
+     */
+    public static Comparator<Task>comparePriority
+            =(Task a, Task b) -> a.getPriority().value.compareTo(b.getPriority().value);
+
     /**
      * Every field must be present and not null.
      */
@@ -74,21 +90,6 @@ public class Task {
                 && otherTask.getName().equals(getName())
                 && otherTask.getModule().equals(getModule());
     }
-    /*
-     *Compare two tasks based on their deadlines
-     */
-    public static Comparator<Task>compareDeadlines
-            =(Task a, Task b) -> a.getDate().value.compareTo(b.getDate().value);
-    /*
-     *Compare two tasks based on their module codes
-     */
-    public static Comparator<Task>compareModule
-            =(Task a, Task b) -> a.getModule().value.compareTo(b.getModule().value);
-    /*
-     *Compare two tasks based on their priority
-     */
-    public static Comparator<Task>comparePriority
-            =(Task a, Task b) -> a.getPriority().value.compareTo(b.getPriority().value);
 
     /**
      * Returns true if both tasks have the same identity and data fields.

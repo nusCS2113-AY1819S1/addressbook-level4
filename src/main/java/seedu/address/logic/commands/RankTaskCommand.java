@@ -36,11 +36,11 @@ public class RankTaskCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
 
-        if (filter.equals("date")) {
+        if ("date".equals(filter)) {
             model.rankFilteredTaskDeadline();
             return new CommandResult(MESSAGE_SUCCESS_DATE);
         }
-        else if (filter.equals("module")) {
+        else if ("module".equals(filter)) {
             model.rankFilteredTaskModule();
             return new CommandResult(MESSAGE_SUCCESS_MODULE);
         }

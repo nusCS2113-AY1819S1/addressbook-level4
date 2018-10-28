@@ -8,7 +8,6 @@ import seedu.address.model.expenditureinfo.Expenditure;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskPriority;
 
 /**
  * The API of the Model component.
