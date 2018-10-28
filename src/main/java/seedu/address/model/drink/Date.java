@@ -62,6 +62,22 @@ public class Date {
         return this.date.compareTo(other.date);
     }
 
+    /**
+     * @param other a valid BatchDate object
+     * @return Returns true if other holds a date before that of the current object
+     */
+    public boolean isBefore(Date other) {
+        return this.date.isBefore(other.date);
+    }
+
+    /**
+     * @param other a valid BatchDate object
+     * @return Returns true if other holds a date after that of the current object
+     */
+    public boolean isAfter(Date other) {
+        return this.date.isAfter(other.date);
+    }
+
 
     @Override
     public String toString() {

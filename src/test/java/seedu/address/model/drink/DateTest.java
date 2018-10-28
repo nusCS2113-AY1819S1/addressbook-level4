@@ -8,7 +8,7 @@ import java.time.format.DateTimeParseException;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.Assert;
+import seedu.address.model.testutil.Assert;
 
 class DateTest {
 
@@ -59,6 +59,7 @@ class DateTest {
         BatchDate batchDateBefore = new BatchDate("21/10/2018");
         BatchDate batchDateAfter = new BatchDate("23/10/2018");
         BatchDate batchDateEquals = new BatchDate(validDate);
+
         // not before
         assertFalse(batchDate.isBefore(batchDateBefore));
         assertFalse(batchDate.isBefore(batchDateEquals));

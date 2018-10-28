@@ -1,17 +1,17 @@
 //@@author Lunastryke
 package seedu.address.model.drink;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Iterator;
+import java.util.List;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.drink.exceptions.BatchNotFoundException;
 import seedu.address.model.drink.exceptions.DuplicateBatchException;
 import seedu.address.model.drink.exceptions.EmptyBatchListException;
-
-import java.util.Iterator;
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * A list of batches of a particular drink that enforces uniqueness between its elements and does not allow nulls.
@@ -48,6 +48,26 @@ public class UniqueBatchList implements Iterable<Batch> {
     }
 
     /**
+     * Replaces the batch {@code target} in the list with {@code editedBatch}.
+     * {@code target} must exist in the list.
+     * The batch identity of {@code editedBatch} must not be the same as another existing batch in the list.
+     */
+    public void setBatch(Batch target, Batch editedBatch) {
+        requireAllNonNull(target, editedBatch);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new BatchNotFoundException();
+        }
+
+        if (!target.isSameBatch(editedBatch) && contains(editedBatch)) {
+            throw new DuplicateBatchException();
+        }
+
+        internalList.set(index, editedBatch);
+    }
+
+    /**
      * Removes the equivalent batch from the list.
      * The batch must exist in the list.
      */
@@ -62,7 +82,7 @@ public class UniqueBatchList implements Iterable<Batch> {
      * @return the batch with the oldest import date in the list
      */
     public Batch getOldestBatch() {
-        sortBatches(internalList);
+        sortBatches();
         return internalList.get(0);
     }
 
@@ -78,11 +98,11 @@ public class UniqueBatchList implements Iterable<Batch> {
      * Sorts the Batch list by date
      * The batch list must not be empty
      */
-    public void sortBatches(ObservableList<Batch> internalList) {
-        if (internalList.isEmpty()) {
+    public void sortBatches() {
+        if (this.internalList.isEmpty()) {
             throw new EmptyBatchListException();
         }
-        internalList.sort(Comparators.BATCHDATE);
+        this.internalList.sort(Comparators.BATCHDATE);
     }
 
     public void setBatches(UniqueBatchList replacement) {
@@ -107,7 +127,7 @@ public class UniqueBatchList implements Iterable<Batch> {
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Batch> asUnmodifiableObservableList() {
-        sortBatches(internalList);
+        sortBatches();
         return FXCollections.unmodifiableObservableList(internalList);
     }
 
