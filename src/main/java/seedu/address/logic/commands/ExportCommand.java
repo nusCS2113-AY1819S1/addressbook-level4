@@ -73,6 +73,6 @@ public class ExportCommand extends Command {
 
         // checks state
         ExportCommand e = (ExportCommand) other;
-        return filetype.equals(e.filetype);
+        return targetIndex.equals(e.targetIndex) && filetype.equals(e.filetype);
     }
 }
