@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<LoanList>
+    <Loaner>
+        <itemName>
+            <fullName>Arduino</fullName>
+        </itemName>
+        <loanerName>
+            <fullName>KinWHye</fullName>
+        </loanerName>
+        <quantity>
+            <quantity>3</quantity>
+        </quantity>
+    </Loaner>
+</LoanList>

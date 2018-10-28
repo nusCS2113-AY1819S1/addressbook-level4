@@ -29,6 +29,7 @@ public class StatusCommand extends Command {
         ArrayList<SimpleItem> faultyItems = new ArrayList<>();
         List<Item> lastShownList = model.getFilteredItemList();
         sortSimpleItems(lastShownList, readyItems, onLoanItems, faultyItems);
+
         String messageOutput = getMessageOutput(readyItems, onLoanItems, faultyItems);
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         return new CommandResult(messageOutput);

@@ -2,18 +2,18 @@ package seedu.address.model.item;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-public class Loaner {
+public class LoanerDescription {
     private final Name itemName;
     private final Name loanerName;
     private final Quantity quantity;
 
-    public Loaner(Name itemName, Name loanerName, Quantity quantity) {
+    public LoanerDescription(Name itemName, Name loanerName, Quantity quantity) {
         requireAllNonNull(itemName, loanerName, quantity);
         this.itemName = itemName;
         this.loanerName = loanerName;
         this.quantity = quantity;
     }
-    public Loaner(Loaner loaner) {
+    public LoanerDescription(LoanerDescription loaner) {
         itemName = loaner.getItemName();
         loanerName = loaner.getLoanerName();
         quantity = loaner.getQuantity();
