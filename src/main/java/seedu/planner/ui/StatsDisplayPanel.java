@@ -9,9 +9,13 @@ import com.google.common.eventbus.Subscribe;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import javafx.util.Pair;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.ui.ShowPieChartStatsEvent;
 import seedu.planner.commons.events.ui.ShowSummaryTableEvent;
@@ -63,7 +67,19 @@ public class StatsDisplayPanel extends UiPart<Region> {
     }
 
     /** Creates the CategoryBreakdown object with the total expense and tag of each CategoryStatistic */
-    private CategoryBreakdown createTotalExpenseBreakdown(ObservableList<CategoryStatistic> data) {
+    private Node createTotalExpenseBreakdown(ObservableList<CategoryStatistic> data) {
+        Pair< ObservableList<ChartData>, Double> chartData = extractExpenseChartData(data);
+        if (chartData.getKey().size() == 0) {
+            Label label = new Label("Nothing has been found! Please input a more appropriate range:)");
+            return new AnchorPane(label);
+        }
+        return new CategoryBreakdown(chartData.getKey(), "Total Expense for the period",
+                chartData.getValue()).getRoot();
+    }
+
+
+    /** Extracts the label and expense information and places it in a list of ChartData */
+    private Pair< ObservableList<ChartData>, Double> extractExpenseChartData(ObservableList<CategoryStatistic> data) {
         List<ChartData> chartDataList = new ArrayList();
         Double totalExpense = 0.0;
         for (CategoryStatistic d : data) {
@@ -72,12 +88,22 @@ public class StatsDisplayPanel extends UiPart<Region> {
                 totalExpense += d.getTotalExpense();
             }
         }
-        return new CategoryBreakdown(FXCollections.observableList(chartDataList), "Total Expense for the period",
-                totalExpense);
+        return new Pair<>(FXCollections.observableList(chartDataList), totalExpense);
     }
 
     /** Creates the CategoryBreakdown object with the total income and tag of each CategoryStatistic */
-    private CategoryBreakdown createTotalIncomeBreakdown(ObservableList<CategoryStatistic> data) {
+    private Node createTotalIncomeBreakdown(ObservableList<CategoryStatistic> data) {
+        Pair< ObservableList<ChartData>, Double> chartData = extractIncomeChartData(data);
+        if (chartData.getKey().size() == 0) {
+            Label label = new Label("Nothing has been found! Please input a more appropriate range:)");
+            return new AnchorPane(label);
+        }
+        return new CategoryBreakdown(chartData.getKey(), "Total Income for the period",
+                chartData.getValue()).getRoot();
+    }
+
+    /** Extracts the label and income information and places it in a list of ChartData */
+    private Pair< ObservableList<ChartData>, Double> extractIncomeChartData(ObservableList<CategoryStatistic> data) {
         List<ChartData> chartDataList = new ArrayList();
         Double totalIncome = 0.0;
         for (CategoryStatistic d : data) {
@@ -86,8 +112,7 @@ public class StatsDisplayPanel extends UiPart<Region> {
                 totalIncome += d.getTotalIncome();
             }
         }
-        return new CategoryBreakdown(FXCollections.observableList(chartDataList), "Total Income for the period",
-                totalIncome);
+        return new Pair<>(FXCollections.observableList(chartDataList), totalIncome);
     }
 
     @Subscribe
@@ -103,9 +128,9 @@ public class StatsDisplayPanel extends UiPart<Region> {
     public void handleShowPieChartStatsEvent(ShowPieChartStatsEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         CustomTab categoryExpenseTab = new CustomTab("Category Breakdown For Expenses", createTotalExpenseBreakdown(
-                event.data).getRoot());
+                event.data));
         CustomTab categoryIncomeTab = new CustomTab("Category Breakdown For Income", createTotalIncomeBreakdown(
-                event.data).getRoot());
+                event.data));
         clearTabs();
         createTabs(categoryExpenseTab, categoryIncomeTab);
         show();
