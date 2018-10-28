@@ -1,43 +1,46 @@
 package seedu.address.logic.drinkparser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DRINK_ITEM;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
+import static seedu.address.logic.drinkparser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.drinkparser.CliSyntax.PREFIX_DRINK_ITEM;
+import static seedu.address.logic.drinkparser.CliSyntax.PREFIX_DRINK_NAME;
+import static seedu.address.logic.drinkparser.CliSyntax.PREFIX_PRICE;
+import static seedu.address.logic.drinkparser.CliSyntax.PREFIX_QUANTITY;
 
 import java.util.stream.Stream;
 
 import seedu.address.logic.drinkcommands.SellDrinkCommand;
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
-import seedu.address.logic.parser.Parser;
+import seedu.address.logic.drinkparser.Parser;
+import seedu.address.logic.drinkparser.exceptions.DrinkParseException;
 import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.drink.Drink;
+import seedu.address.model.drink.Name;
+
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new SellDrinkCommand object
  */
-public class SellCommandParser implements Parser<SellDrinkCommand> {
+public class SellDrinkCommandParser implements DrinkParser<SellDrinkCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @throws DrinkParseException if the user input does not conform the expected format
      */
-    public SellDrinkCommand parse(String args) throws ParseException {
-        seedu.address.logic.parser.ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DRINK_ITEM, PREFIX_DATE, PREFIX_QUANTITY, PREFIX_PRICE);
+    public SellDrinkCommand parse(String args) throws DrinkParseException {
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_DRINK_NAME, PREFIX_QUANTITY);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_DRINK_ITEM, PREFIX_DATE, PREFIX_QUANTITY, PREFIX_PRICE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_DRINK_NAME, PREFIX_QUANTITY)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SellDrinkCommand.MESSAGE_USAGE));
+            throw new DrinkParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SellDrinkCommand.MESSAGE_USAGE));
         }
 
-        String drinkItem = ParserUtil.parseItemName (argMultimap.getValue (PREFIX_DRINK_ITEM).get());
-        String date = argMultimap.getValue (PREFIX_DATE).get ();
-        String quantitySold = argMultimap.getValue (PREFIX_QUANTITY).get();
-        String totalRevenue = argMultimap.getValue (PREFIX_PRICE).get ();
+        Name drinkName = DrinkParserUtil.parseDrinkName(argMultimap.getValue(PREFIX_DRINK_NAME).get());
+        String quantitySold = DrinkParserUtil.parseargMultimap.getValue(PREFIX_QUANTITY).get();
+        String totalRevenue = argMultimap.getValue(PREFIX_PRICE).get();
         //        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         //        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         //        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());

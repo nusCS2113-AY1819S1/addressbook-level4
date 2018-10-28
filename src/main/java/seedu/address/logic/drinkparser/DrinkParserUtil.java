@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.drinkparser.exceptions.DrinkParseException;
 import seedu.address.model.drink.Name;
 import seedu.address.model.drink.Price;
+import seedu.address.model.drink.Quantity;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.user.AuthenticationLevel;
 import seedu.address.model.user.Password;
@@ -154,4 +155,18 @@ public class DrinkParserUtil {
         }
         return tagSet;
     }
+
+
+    public static Quantity parseQuantity(String quantity) throws DrinkParseException {
+        requireNonNull(quantity);
+        String trimmedQuantity = quantity.trim();
+        if (!Tag.isValidQuantity(trimmedQuantity)) {
+            throw new DrinkParseException(Tag.MESSAGE_TAG_CONSTRAINTS);
+        }
+        return new Tag(trimmedTag);
+    }
+
+
+
+    // ===================== transaction-related parsing ====================
 }
