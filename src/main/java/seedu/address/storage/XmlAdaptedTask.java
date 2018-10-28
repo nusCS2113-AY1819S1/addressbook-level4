@@ -1,11 +1,17 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Milestone;
 import seedu.address.model.task.PriorityLevel;
 import seedu.address.model.task.Task;
 
@@ -31,6 +37,8 @@ public class XmlAdaptedTask {
     private String completedNumOfHours;
     @XmlElement(required = true)
     private boolean isCompleted;
+    @XmlElement
+    private List<XmlAdaptedMilestone> milestonelist;
 
     /**
      * Constructs an XmlAdaptedTask.
@@ -41,9 +49,9 @@ public class XmlAdaptedTask {
     /**
      * Constructs an {@code XmlAdaptedTask} with the given task details.
      */
-
     public XmlAdaptedTask(String deadline, String moduleCode, String title, String description, String priorityLevel,
-                          String expectedNumOfHours, String completedNumOfHours, boolean isCompleted) {
+                          String expectedNumOfHours, String completedNumOfHours,
+                          boolean isCompleted, List<XmlAdaptedTask> milestoneList) {
         this.deadline = deadline;
         this.moduleCode = moduleCode;
         this.title = title;
@@ -52,6 +60,25 @@ public class XmlAdaptedTask {
         this.expectedNumOfHours = expectedNumOfHours;
         this.completedNumOfHours = completedNumOfHours;
         this.isCompleted = isCompleted;
+        this.milestonelist = new ArrayList<>();
+        if (milestoneList != null) {
+            this.milestonelist = new ArrayList<>(milestonelist);
+        }
+    }
+    /**
+     * Constructs an {@code XmlAdaptedTask} with the given task details.
+     */
+    public XmlAdaptedTask(String deadline, String moduleCode, String title, String description, String priorityLevel,
+                          String expectedNumOfHours) {
+        this.deadline = deadline;
+        this.moduleCode = moduleCode;
+        this.title = title;
+        this.description = description;
+        this.priorityLevel = priorityLevel;
+        this.expectedNumOfHours = expectedNumOfHours;
+        this.completedNumOfHours = "0";
+        this.isCompleted = false;
+        this.milestonelist = new ArrayList<>();
     }
 
     /**
@@ -68,6 +95,7 @@ public class XmlAdaptedTask {
         expectedNumOfHours = Integer.toString(source.getExpectedNumOfHours());
         completedNumOfHours = Integer.toString(source.getCompletedNumOfHours());
         isCompleted = source.isCompleted();
+        milestonelist = source.getMilestoneList().stream().map(XmlAdaptedMilestone::new).collect(Collectors.toList());
     }
 
     /**
@@ -128,8 +156,17 @@ public class XmlAdaptedTask {
         //Boolean cannot be checked for null --> if (isCompleted == null)
         final boolean modelIsCompleted = isCompleted;
 
-        return new Task(modelDeadline, modelModuleCode, modelTitle, modelDescription, modelPriority,
-                modelExpectedNumOfHours, modelCompletedNumOfHours, modelIsCompleted);
+        final Set<Milestone> milestoneEntries = new HashSet<>();
+        if (milestonelist != null && !milestonelist.isEmpty()) {
+            for (XmlAdaptedMilestone entry : milestonelist) {
+                milestoneEntries.add(entry.toModelType());
+            }
+
+        }
+
+        return new Task(modelDeadline, modelModuleCode, modelTitle, modelDescription,
+                modelPriority, modelExpectedNumOfHours,
+                modelCompletedNumOfHours, modelIsCompleted, milestoneEntries);
     }
 
     @Override

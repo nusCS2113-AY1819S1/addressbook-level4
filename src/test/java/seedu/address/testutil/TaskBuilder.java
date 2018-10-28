@@ -1,6 +1,10 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Milestone;
 import seedu.address.model.task.PriorityLevel;
 import seedu.address.model.task.Task;
 
@@ -17,6 +21,7 @@ public class TaskBuilder {
     public static final boolean DEFAULT_COMPLETE = false;
     public static final String DEFAULT_EXPECTED_NUM_OF_HOURS = "1";
     public static final String DEFAULT_COMPLETED_NUM_OF_HOURS = "0";
+    public static final Set<Milestone> DEFAULT_MILESTONES = new HashSet<>();
 
     private Deadline deadline;
     private String moduleCode;
@@ -26,6 +31,7 @@ public class TaskBuilder {
     private boolean isCompleted;
     private int expectedNumOfHours;
     private int completedNumOfHours;
+    private Set<Milestone> milestones;
 
     public TaskBuilder() {
         this.deadline = new Deadline(DEFAULT_DEADLINE);
@@ -36,6 +42,7 @@ public class TaskBuilder {
         this.isCompleted = DEFAULT_COMPLETE;
         this.completedNumOfHours = Integer.parseInt(DEFAULT_COMPLETED_NUM_OF_HOURS);
         this.expectedNumOfHours = Integer.parseInt(DEFAULT_EXPECTED_NUM_OF_HOURS);
+        this.milestones = DEFAULT_MILESTONES;
     }
 
     /**
@@ -50,6 +57,7 @@ public class TaskBuilder {
         this.isCompleted = taskToCopy.isCompleted();
         this.expectedNumOfHours = taskToCopy.getExpectedNumOfHours();
         this.completedNumOfHours = taskToCopy.getCompletedNumOfHours();
+        this.milestones = taskToCopy.getMilestoneList();
     }
     /**
      * Sets the {@code Deadline} of the {@code Task} that we are building.
@@ -109,11 +117,19 @@ public class TaskBuilder {
     }
 
     /**
+     * Sets the milestones of the {@code Task} that we are building.
+     */
+    public TaskBuilder withMilestones(Set<Milestone> milestones) {
+        this.milestones = milestones;
+        return this;
+    }
+
+    /**
      * Build the task with the parameters set
      * @return Task
      */
     public Task build() {
-        return new Task(deadline, moduleCode, title, description, priority, expectedNumOfHours, completedNumOfHours,
-                isCompleted);
+        return new Task(deadline, moduleCode, title, description, priority,
+                expectedNumOfHours, completedNumOfHours, isCompleted, milestones);
     }
 }

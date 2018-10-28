@@ -28,6 +28,29 @@ public class ParserUtil {
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
+    //@@author chelseyong
+    /**
+     * Leading and trailing whitespaces will be trimmed from {@code String hours}
+     * If hours is not an integer or is too big to be an integer,
+     * @throws ParseException
+     */
+    public static int parseHours(String hours) throws ParseException {
+        requireNonNull(hours);
+        String trimmedHours = hours.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedHours)) {
+            throw new ParseException(MESSAGE_INVALID_HOURS);
+        }
+        return Integer.parseInt(trimmedHours);
+    }
+
+    /**
+     * Leading and trailing whitespaces will be trimmed from {@code String moduleCode}
+     */
+    public static String parseModuleCode(String moduleCode) {
+        requireNonNull(moduleCode);
+        String trimmedModuleCode = moduleCode.trim();
+        return trimmedModuleCode;
+    }
 
     /**
      * Parses a {@code String deadline} into an {@code Deadline}.
@@ -106,27 +129,23 @@ public class ParserUtil {
         String trimmedYear = year.trim();
         return trimmedYear;
     }
-
+    //@@author JeremyInElysium
     /**
-     * Leading and trailing whitespaces will be trimmed from {@code String hours}
-     * If hours is not an integer or is too big to be an integer,
-     * @throws ParseException
+     * Leading and trailing whitespaces will be trimmed from {@code String milestoneDescription}
      */
-    public static int parseHours(String hours) throws ParseException {
-        requireNonNull(hours);
-        String trimmedHours = hours.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedHours)) {
-            throw new ParseException(MESSAGE_INVALID_HOURS);
-        }
-        return Integer.parseInt(trimmedHours);
+    public static String parseMilestoneDescription(String milestoneDescription) throws ParseException {
+        requireNonNull(milestoneDescription);
+        String trimmedMilestoneDescription = milestoneDescription.trim();
+        return trimmedMilestoneDescription;
     }
 
     /**
-     * Leading and trailing whitespaces will be trimmed from {@code String moduleCode}
+     * Leading and trailing whitespaces will be trimmed from {@code String rank}
      */
-    public static String parseModuleCode(String moduleCode) {
-        requireNonNull(moduleCode);
-        String trimmedModuleCode = moduleCode.trim();
-        return trimmedModuleCode;
+    public static String parseRank(String rank) throws ParseException {
+        requireNonNull(rank);
+        String trimmedRank = rank.trim();
+        return trimmedRank;
     }
+
 }

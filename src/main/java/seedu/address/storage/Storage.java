@@ -36,4 +36,5 @@ public interface Storage extends TaskBookStorage, UserPrefsStorage {
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleAddressBookChangedEvent(TaskBookChangedEvent abce);
+
 }

@@ -23,7 +23,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.task.Deadline;
-import seedu.address.model.task.Milestone;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.TaskBuilder;
 
@@ -171,11 +170,6 @@ public class AddTaskCommandTest {
 
         @Override
         public void updateTask(Task target, Task editedTask) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addMilestone(Milestone milestone) {
             throw new AssertionError("This method should not be called.");
         }
 
