@@ -34,7 +34,8 @@ public class XmlClubBudgetElementsBookStorage implements ClubBudgetElementsBookS
     }
 
     @Override
-    public Optional<ReadOnlyClubBudgetElementsBook> readClubBudgetElementsBook() throws DataConversionException, IOException {
+    public Optional<ReadOnlyClubBudgetElementsBook> readClubBudgetElementsBook() throws DataConversionException,
+            IOException {
         return readClubBudgetElementsBook(filePath);
     }
 
@@ -43,8 +44,8 @@ public class XmlClubBudgetElementsBookStorage implements ClubBudgetElementsBookS
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyClubBudgetElementsBook> readClubBudgetElementsBook(Path filePath) throws DataConversionException,
-                                                                                 FileNotFoundException {
+    public Optional<ReadOnlyClubBudgetElementsBook> readClubBudgetElementsBook(Path filePath)
+            throws DataConversionException, FileNotFoundException {
         requireNonNull(filePath);
 
         if (!Files.exists(filePath)) {
@@ -52,7 +53,8 @@ public class XmlClubBudgetElementsBookStorage implements ClubBudgetElementsBookS
             return Optional.empty();
         }
 
-        XmlSerializableClubBudgetElementsBook xmlClubBudgetElementsBook = XmlClubBudgetElementsFileStorage.loadDataFromSaveFile(filePath);
+        XmlSerializableClubBudgetElementsBook xmlClubBudgetElementsBook = XmlClubBudgetElementsFileStorage
+                .loadDataFromSaveFile(filePath);
         try {
             return Optional.of(xmlClubBudgetElementsBook.toModelType());
         } catch (IllegalValueException ive) {
@@ -70,12 +72,14 @@ public class XmlClubBudgetElementsBookStorage implements ClubBudgetElementsBookS
      * Similar to {@link #saveClubBudgetElementsBook(ReadOnlyClubBudgetElementsBook)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveClubBudgetElementsBook(ReadOnlyClubBudgetElementsBook clubBudgetElementsBook, Path filePath) throws IOException {
+    public void saveClubBudgetElementsBook(ReadOnlyClubBudgetElementsBook clubBudgetElementsBook, Path filePath)
+            throws IOException {
         requireNonNull(clubBudgetElementsBook);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlClubBudgetElementsFileStorage.saveDataToFile(filePath, new XmlSerializableClubBudgetElementsBook(clubBudgetElementsBook));
+        XmlClubBudgetElementsFileStorage.saveDataToFile(filePath,
+                new XmlSerializableClubBudgetElementsBook(clubBudgetElementsBook));
     }
 
 }

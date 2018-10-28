@@ -51,7 +51,8 @@ public class XmlAdaptedFinalClubBudget {
      */
     public FinalClubBudget toModelType() throws IllegalValueException {
         if (clubName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ClubName.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ClubName.class.getSimpleName()));
         }
         if (!ClubName.isValidClubName(clubName)) {
             throw new IllegalValueException(ClubName.MESSAGE_CLUB_NAME_CONSTRAINTS);

@@ -29,7 +29,8 @@ public interface ClubBudgetElementsBookStorage {
     /**
      * @see #getClubBudgetElementsBookFilePath()
      */
-    Optional<ReadOnlyClubBudgetElementsBook> readClubBudgetElementsBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyClubBudgetElementsBook> readClubBudgetElementsBook(Path filePath) throws DataConversionException,
+            IOException;
 
     /**
      * Saves the given {@link ReadOnlyClubBudgetElementsBook} to the storage.
@@ -41,6 +42,7 @@ public interface ClubBudgetElementsBookStorage {
     /**
      * @see #saveClubBudgetElementsBook(ReadOnlyClubBudgetElementsBook)
      */
-    void saveClubBudgetElementsBook(ReadOnlyClubBudgetElementsBook clubBudgetElementsBook, Path filePath) throws IOException;
+    void saveClubBudgetElementsBook(ReadOnlyClubBudgetElementsBook clubBudgetElementsBook, Path filePath)
+            throws IOException;
 
 }
