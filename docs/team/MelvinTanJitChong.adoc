@@ -52,10 +52,14 @@ Other team members working on this project are Jonathan Ng Hian Leong, Sanjukta,
 This section shows the various contributions made to the project, covering aspects such as enhancement features, codes contributed and other forms of contributions.
 
 * *Major enhancement*: added *the ability to securely log into the application with the relevant login credentials with a specific level of access to the application features associated with the login credentials*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+** What it does: allows the user to login into the application with a specific role so that the user is only able to access role-specific features within the application.
+** Justification: This feature improves the product in terms of security significantly because it prevents any random user who does not possess the correct login credentials to be able to access the application.
+Due to the fact that the user can only log into the application with their relevant role, it prevents any unauthorized access to other features that are only accessible for other roles.
+** Highlights: This enhancement is first designed, taking into consideration the security and practicality aspects that are highly specific to NUSSU committee members, which is our target user group.
+There were a few challenges, namely the addition of new commands within the enhancement itself such as deletion of accounts and changing of account passwords, and
+the way account credentials are encrypted. Owing to the project time constraints, a simpler encryption algorithm, compared to traditional encryption algorithms which are stronger, is used.
+The current choice of the encryption methodology of login credentials ensures the security enhancement is still feasibly robust, yet does not demand an excess of time spent working on it.
+** Credits:
 
 * *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
 

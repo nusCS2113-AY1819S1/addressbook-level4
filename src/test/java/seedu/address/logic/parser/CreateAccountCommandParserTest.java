@@ -10,7 +10,8 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.ROLE_ACCOUNT_1_DESC;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalAccounts.ACCOUNT_1;
+
+import java.io.UnsupportedEncodingException;
 
 import org.junit.Test;
 
@@ -18,16 +19,17 @@ import seedu.address.logic.LoginManager;
 import seedu.address.logic.commands.CreateAccountCommand;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.login.UserId;
+import seedu.address.model.login.UserPassword;
 import seedu.address.model.login.UserRole;
-import seedu.address.testutil.AccountBuilder;
 
 public class CreateAccountCommandParserTest {
     private CreateAccountCommandParser parser = new CreateAccountCommandParser();
 
     @Test
-    public void parse_allFieldsPresent_success() {
+    public void parse_allFieldsPresent_success() throws UnsupportedEncodingException {
         LoginManager.setIsCurrentlyLoggingInCreatingAccount(true);
-        LoginDetails expectedAccount = new AccountBuilder(ACCOUNT_1).build();
+        LoginDetails expectedAccount = new LoginDetails(new UserId("A1234567M"), new UserPassword("zaq1xsw2cde3"),
+                new UserRole("member"));
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + ID_ACCOUNT_1_DESC
