@@ -26,8 +26,8 @@ public class SearchHistoryManager<T> {
         }
     }
 
-    /** Updates system search logic to its next state given a Predicate containing user-defined search logic
-     * @param newPredicate a Predicate containing user-defined search logic
+    /** Updates system search logic to its next state given a Predicate containing user-defined search logic.
+     * @param newPredicate a Predicate containing user-defined search logic.
      **/
     private void addNewPredicateToStack(Predicate<T> newPredicate) {
         if (searchHistoryStack.isEmpty()) {
@@ -46,9 +46,9 @@ public class SearchHistoryManager<T> {
     /** Returns a Predicate containing system search logic after reverting to its previous state.
      * If search history is empty after revert, a predicate that defaults to true is returned.
      * @return a Predicate containing the system search logic after reverting.
-     * @throws EmptyStackException If search history is empty after revert.
+     * @throws EmptyHistoryException If search history is empty before revert.
      */
-    public Predicate<T> revertLastSearch() throws EmptyStackException {
+    public Predicate<T> revertLastSearch() throws EmptyHistoryException {
         try {
             removeLastPredicateFromStack();
         } catch (EmptyStackException e) {
@@ -68,7 +68,7 @@ public class SearchHistoryManager<T> {
     }
 
     /**
-     * Returns true if search history is empty
+     * Returns true if search history is empty.
      */
     public boolean isEmpty() {
         return searchHistoryStack.empty();

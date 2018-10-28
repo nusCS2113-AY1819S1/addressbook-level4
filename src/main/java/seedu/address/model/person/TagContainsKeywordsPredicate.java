@@ -1,9 +1,14 @@
 package seedu.address.model.person;
 
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
+
+import com.google.common.collect.ImmutableList;
 
 import seedu.address.model.tag.Tag;
 
@@ -15,6 +20,12 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
 
     public TagContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
+    }
+
+    public List<String> getLowerCaseKeywords() {
+        return keywords.stream()
+                .map(String::toLowerCase)
+                .collect(collectingAndThen(toList(), ImmutableList::copyOf));
     }
 
     @Override
