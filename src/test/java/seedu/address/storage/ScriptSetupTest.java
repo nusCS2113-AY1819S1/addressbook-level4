@@ -10,8 +10,8 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
 import org.junit.rules.ExpectedException;
+
 import seedu.address.model.UserPrefs;
 import seedu.address.storage.scripts.ScriptSetup;
 

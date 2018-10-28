@@ -136,7 +136,7 @@ public class FileUtil {
      * @file is the location of the file
      * @text is the string to be written to the text fi;e
      */
-    public static void writetoTextFile(File file, String text) throws IOException {
-        FileUtils.writeStringToFile(file, text, CHARSET, true);
+    public static void writeToTextFile(File file, String text) throws IOException {
+        FileUtils.writeStringToFile(file, text, CHARSET);
     }
 }
