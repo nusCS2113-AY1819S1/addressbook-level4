@@ -38,11 +38,7 @@ public class ClearCommandTest {
         Model expectedModel = new ModelManager(getTypicalLoginBook(), getTypicalAddressBook(),
                 getTypicalClubBudgetElementsBook(), getTypicalFinalBudgetsBook(), new UserPrefs());
         expectedModel.resetData(new AddressBook());
-        expectedModel.resetData(new ClubBudgetElementsBook());
-        expectedModel.resetData(new FinalBudgetsBook());
         expectedModel.commitAddressBook();
-        expectedModel.commitClubBudgetElementsBook();
-        expectedModel.commitFinalBudgetsBook();
 
         assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
