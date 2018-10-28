@@ -17,6 +17,9 @@ import seedu.address.testutil.NoteBuilder;
  */
 public class NoteEditCommandTest {
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     private static NoteManager noteManager = NoteManager.getInstance();
 
     private NoteBuilder note1 = new NoteBuilder(
@@ -49,8 +52,6 @@ public class NoteEditCommandTest {
             "",
             "Java");
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @Before
     public void setUp() {

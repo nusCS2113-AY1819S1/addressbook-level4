@@ -1,6 +1,7 @@
 package seedu.address.model.note;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,6 +13,11 @@ import seedu.address.ui.HtmlCardProcessor;
  * Represents the in-memory model of the Note data.
  */
 public class NoteManager {
+
+    private static final ArrayList<String> NOTE_CSV_HEADERS =
+            new ArrayList<>(Arrays.asList(
+                    "subject", "startDate", "startTime", "endDate", "endTime", "description", "location"
+            ));
 
     private static NoteManager noteManager = null;
 
@@ -59,10 +65,12 @@ public class NoteManager {
 
             if (note.getTitle().trim().isEmpty()) {
                 sb.append(HtmlCardProcessor.renderCardHeader(
-                        "h4", "#" + listId + "&nbsp;&nbsp;" + HtmlCardProcessor.CARD_NO_TITLE));
+                        "h4", "#" + listId + "&nbsp;&nbsp;"
+                                + HtmlCardProcessor.CARD_NO_TITLE));
             } else {
                 sb.append(HtmlCardProcessor.renderCardHeader(
-                        "h4", "#" + listId + "&nbsp;&nbsp;" + note.getTitle()));
+                        "h4", "#" + listId + "&nbsp;&nbsp;"
+                                + HtmlCardProcessor.adaptToHtml(note.getTitle())));
             }
 
             sb.append(HtmlCardProcessor.getCardBodyStart());
@@ -71,7 +79,7 @@ public class NoteManager {
             sb.append(HtmlCardProcessor.renderCardSubtitle(
                     "From " + note.getStartDate() + " " + note.getStartTime()
                             + " to " + note.getEndDate() + " " + note.getEndTime()));
-            sb.append(HtmlCardProcessor.renderCardSubtitle(note.getLocation()));
+            sb.append(HtmlCardProcessor.renderCardSubtitle(HtmlCardProcessor.adaptToHtml(note.getLocation())));
             sb.append(HtmlCardProcessor.renderCardText(HtmlCardProcessor.adaptToHtml(note.getNoteText())));
             sb.append(HtmlCardProcessor.getDivEndTag()); // end of card-body
 
@@ -154,5 +162,18 @@ public class NoteManager {
         notes.clear();
         filteredNotes.clear();
         currentFilter = "";
+    }
+
+    public ArrayList<String> getCsvHeaders() {
+        return NOTE_CSV_HEADERS;
+    }
+
+    public ArrayList<Note> getExportableNotes() {
+        ArrayList<Note> exportableNotes;
+
+        exportableNotes = notes.stream()
+                .filter(p -> (!p.getStartDate().isEmpty())).collect(Collectors.toCollection(ArrayList::new));
+
+        return exportableNotes;
     }
 }

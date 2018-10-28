@@ -26,6 +26,9 @@ public class NoteListCommandParserTest {
 
     private static NoteManager noteManager = NoteManager.getInstance();
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     private NoteListCommandParser parser = new NoteListCommandParser();
 
     private NoteBuilder note1 = new NoteBuilder(
@@ -58,8 +61,6 @@ public class NoteListCommandParserTest {
             "",
             "Java");
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @Before
     public void setUp() {

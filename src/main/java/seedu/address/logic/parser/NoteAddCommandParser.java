@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_LOCATION;
@@ -31,7 +30,6 @@ public class NoteAddCommandParser implements Parser<NoteAddCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args,
                         PREFIX_MODULE_CODE,
-                        PREFIX_NOTE_DATE,
                         PREFIX_NOTE_TITLE,
                         PREFIX_NOTE_START_DATE,
                         PREFIX_NOTE_START_TIME,

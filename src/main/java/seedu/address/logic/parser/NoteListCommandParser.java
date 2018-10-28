@@ -1,10 +1,10 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import java.util.stream.Stream;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.NoteListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -27,7 +27,7 @@ public class NoteListCommandParser implements Parser<NoteListCommand> {
         } else if (args.trim().isEmpty()) {
             return new NoteListCommand("");
         } else {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     NoteListCommand.MESSAGE_USAGE));
         }
     }
