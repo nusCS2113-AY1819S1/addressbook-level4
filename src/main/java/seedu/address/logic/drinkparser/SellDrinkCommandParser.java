@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.drinkparser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
@@ -9,6 +9,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import java.util.stream.Stream;
 
 import seedu.address.logic.drinkcommands.SellDrinkCommand;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -21,7 +26,7 @@ public class SellCommandParser implements Parser<SellDrinkCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public SellDrinkCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
+        seedu.address.logic.parser.ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DRINK_ITEM, PREFIX_DATE, PREFIX_QUANTITY, PREFIX_PRICE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DRINK_ITEM, PREFIX_DATE, PREFIX_QUANTITY, PREFIX_PRICE)
