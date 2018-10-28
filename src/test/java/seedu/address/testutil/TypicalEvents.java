@@ -38,7 +38,7 @@ public class TypicalEvents {
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withDateTime("22/10/2018 9:30")
-            .withComment("{span}Comments Section{/span}{ol}{/ol}")
+            .withComment("{span}Comment Section{/span}{ol}{/ol}")
             .withTags("friends")
             .withAttendees("Peter Parker").build();
     public static final Event BENSON = new EventBuilder().withName("Dancing Tryouts")
@@ -47,7 +47,7 @@ public class TypicalEvents {
             .withEmail("johnd@example.com")
             .withPhone("98765432")
             .withDateTime("2/10/2018 19:30")
-            .withComment("{span}Comments Section{/span}{ol}{/ol}")
+            .withComment("{span}Comment Section{/span}{ol}{/ol}")
             .withTags("owesMoney", "friends")
             .withAttendees("Mary Kate").build();
 
@@ -57,14 +57,14 @@ public class TypicalEvents {
             .withEmail("heinz@example.com")
             .withVenue("wall street")
             .withDateTime("22/1/2018 9:30")
-            .withComment("{span}Comments Section{/span}{ol}{/ol}").build();
+            .withComment("{span}Comment Section{/span}{ol}{/ol}").build();
     public static final Event DANIEL = new EventBuilder().withName("Art and Crafts")
             .withContact("Daniel Meier")
             .withPhone("87652533")
             .withEmail("cornelia@example.com")
             .withVenue("10th street")
             .withDateTime("22/10/2017 9:30")
-            .withComment("{span}Comments Section{/span}{ol}{/ol}")
+            .withComment("{span}Comment Section{/span}{ol}{/ol}")
             .withTags("friends")
             .withAttendees("Scarlet Witch").build();
     public static final Event ELLE = new EventBuilder().withName("Music Tryouts")
@@ -73,21 +73,21 @@ public class TypicalEvents {
             .withEmail("werner@example.com")
             .withVenue("michegan ave")
             .withDateTime("12/8/2018 17:30")
-            .withComment("{span}Comments Section{/span}{ol}{/ol}").build();
+            .withComment("{span}Comment Section{/span}{ol}{/ol}").build();
     public static final Event FIONA = new EventBuilder().withName("Dining In The Dark")
             .withContact("Fiona Kunz")
             .withPhone("9482427")
             .withEmail("lydia@example.com")
             .withVenue("little tokyo")
             .withDateTime("22/10/2018 15:15")
-            .withComment("{span}Comments Section{/span}{ol}{/ol}").build();
+            .withComment("{span}Comment Section{/span}{ol}{/ol}").build();
     public static final Event GEORGE = new EventBuilder().withName("College Games")
             .withContact("George Best")
             .withPhone("9482442")
             .withEmail("anna@example.com")
             .withVenue("4th street")
             .withDateTime("30/10/2018 14:30")
-            .withComment("{span}Comments Section{/span}{ol}{/ol}").build();
+            .withComment("{span}Comment Section{/span}{ol}{/ol}").build();
 
     // Manually added
     public static final Event HOON = new EventBuilder().withName("Eating Competition")
