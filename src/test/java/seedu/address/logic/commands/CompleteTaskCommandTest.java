@@ -26,6 +26,7 @@ import seedu.address.testutil.TaskBuilder;
 
 //@@author chelseyong
 public class CompleteTaskCommandTest {
+
     private static final Logger logger = LogsCenter.getLogger(CompleteTaskCommand.class);
     private Model model = new ModelManager(getTypicalTaskBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();

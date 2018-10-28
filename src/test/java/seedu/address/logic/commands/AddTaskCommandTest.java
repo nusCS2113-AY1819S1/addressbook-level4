@@ -125,6 +125,11 @@ public class AddTaskCommandTest {
         }
 
         @Override
+        public void sortTask(String method) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Deadline getDeadline() {
             return new Deadline(DEFAULT_DEADLINE);
         }

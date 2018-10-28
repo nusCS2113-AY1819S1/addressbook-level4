@@ -48,6 +48,9 @@ public interface Model {
     /** Selects the input date as deadline.*/
     void selectDeadline(Deadline deadline);
 
+    //@@author ChanChunCheong
+    void sortTask(String method);
+
     /** Gets deadline previously selected from the TaskBook.*/
     Deadline getDeadline();
 

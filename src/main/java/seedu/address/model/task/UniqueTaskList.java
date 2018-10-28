@@ -45,7 +45,7 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.add(toAdd);
     }
 
-    //@@ChanChunCheong
+    //@@author ChanChunCheong
     /**
      * Defer the deadline of the task (@code target) in the list with (@code deadline).
      * (@code target) must exist in the list.
@@ -77,7 +77,6 @@ public class UniqueTaskList implements Iterable<Task> {
         if (!target.isSameTask(editedPerson) && contains(editedPerson)) {
             throw new DuplicateTaskException();
         }
-
         internalList.set(index, editedPerson);
     }
 
@@ -120,15 +119,18 @@ public class UniqueTaskList implements Iterable<Task> {
         if (!tasksAreUnique(tasks)) {
             throw new DuplicateTaskException();
         }
-
         internalList.setAll(tasks);
     }
-
-    /**
+    /*
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Task> asUnmodifiableObservableList() {
         return FXCollections.unmodifiableObservableList(internalList);
+    }
+
+
+    public ObservableList<Task> obtainObservableList() {
+        return internalList;
     }
 
     @Override

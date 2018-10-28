@@ -10,6 +10,7 @@ import seedu.address.model.task.Task;
 public class TaskBuilder {
 
     public static final String DEFAULT_DEADLINE = "1/1/2018";
+    public static final String DEFAULT_MODULECODE = "CS2113T";
     public static final String DEFAULT_TITLE = "Complete code refactoring";
     public static final String DEFAULT_DESCRIPTION = "refer to notes";
     public static final String DEFAULT_PRIORITY = "high";
@@ -18,6 +19,7 @@ public class TaskBuilder {
     public static final String DEFAULT_COMPLETED_NUM_OF_HOURS = "0";
 
     private Deadline deadline;
+    private String moduleCode;
     private String title;
     private String description;
     private PriorityLevel priority;
@@ -27,6 +29,7 @@ public class TaskBuilder {
 
     public TaskBuilder() {
         this.deadline = new Deadline(DEFAULT_DEADLINE);
+        this.moduleCode = DEFAULT_MODULECODE;
         this.title = DEFAULT_TITLE;
         this.description = DEFAULT_DESCRIPTION;
         this.priority = new PriorityLevel(DEFAULT_PRIORITY);
@@ -40,6 +43,7 @@ public class TaskBuilder {
      */
     public TaskBuilder(Task taskToCopy) {
         this.deadline = taskToCopy.getDeadline();
+        this.moduleCode = taskToCopy.getModuleCode();
         this.title = taskToCopy.getTitle();
         this.description = taskToCopy.getDescription();
         this.priority = taskToCopy.getPriorityLevel();
@@ -52,6 +56,14 @@ public class TaskBuilder {
      */
     public TaskBuilder withDeadline(String deadline) {
         this.deadline = new Deadline(deadline);
+        return this;
+    }
+
+    /**
+     * Sets the ModuleCode of the {@code Task} that we are building.
+     */
+    public TaskBuilder withModuleCode(String moduleCode) {
+        this.moduleCode = moduleCode;
         return this;
     }
 
@@ -96,7 +108,12 @@ public class TaskBuilder {
         return this;
     }
 
+    /**
+     * Build the task with the parameters set
+     * @return Task
+     */
     public Task build() {
-        return new Task(deadline, title, description, priority, expectedNumOfHours, completedNumOfHours, isCompleted);
+        return new Task(deadline, moduleCode, title, description, priority, expectedNumOfHours, completedNumOfHours,
+                isCompleted);
     }
 }

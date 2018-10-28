@@ -7,7 +7,10 @@ import java.util.Objects;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Task {
+
+    //private static final String PLACEHOLDER_MODULECODE = "A2113";
     private Deadline deadline;
+    private String moduleCode;
     private final String title;
     private final String description;
     private final PriorityLevel priorityLevel;
@@ -25,10 +28,10 @@ public class Task {
         this.expectedNumOfHours = expectedNumOfHours;
     }
 
-
-    public Task(Deadline deadline, String title, String description, PriorityLevel priorityLevel,
+    public Task(Deadline deadline, String moduleCode, String title, String description, PriorityLevel priorityLevel,
                 int expectedNumOfHours, int completedNumOfHours, boolean isCompleted) {
         this.deadline = deadline;
+        this.moduleCode = moduleCode;
         this.title = title;
         this.description = description;
         this.priorityLevel = priorityLevel;
@@ -46,6 +49,7 @@ public class Task {
 
     public Task(Task other) {
         this.deadline = other.deadline;
+        this.moduleCode = other.moduleCode;
         this.title = other.title;
         this.description = other.description;
         this.priorityLevel = other.priorityLevel;
@@ -56,6 +60,10 @@ public class Task {
 
     public Deadline getDeadline() {
         return deadline;
+    }
+
+    public String getModuleCode() {
+        return moduleCode;
     }
 
     public void setDeadline(Deadline deadline) {
@@ -73,12 +81,19 @@ public class Task {
     public PriorityLevel getPriorityLevel() {
         return priorityLevel;
     }
+
+    //@@author ChanChunCheong
+    public int getPriorityLevelInt() {
+        return priorityLevel.priorityLevelInt;
+    }
+
     public int getExpectedNumOfHours() {
         return expectedNumOfHours;
     }
     public int getCompletedNumOfHours() {
         return completedNumOfHours;
     }
+
     public boolean isCompleted() {
         return isCompleted;
     }
@@ -107,6 +122,7 @@ public class Task {
                 && otherTask.getTitle().equals(getTitle());
     }
 
+    //@@author ChanChunCheong
     /**
      * Defers the task to a later
      * @param deadline

@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Milestone;
+import seedu.address.model.task.SortTaskList;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
@@ -134,6 +135,20 @@ public class AddressBook implements ReadOnlyTaskBook {
         currentDate = deadline;
     }
 
+    //@@ ChanChunCheong
+    /**
+     * Sorts the Task Book based on the method chosen.
+     * Update the list.
+     */
+    public void sortTask(String method) {
+        requireNonNull(method);
+        SortTaskList sortList = new SortTaskList();
+        ObservableList<Task> copyList = sortList.sortTask(obtainModifiableObservableList(), method);
+        UniqueTaskList updateList = new UniqueTaskList();
+        updateList.setTasks(copyList);
+        tasks.setTasks(updateList);
+    }
+
     public boolean validDeadline(Deadline deadline) {
         return currentDate.isValidDeadline(deadline.toString());
     }
@@ -155,6 +170,10 @@ public class AddressBook implements ReadOnlyTaskBook {
     @Override
     public ObservableList<Task> getTaskList() {
         return tasks.asUnmodifiableObservableList();
+    }
+
+    public ObservableList<Task> obtainModifiableObservableList() {
+        return tasks.obtainObservableList();
     }
 
     @Override

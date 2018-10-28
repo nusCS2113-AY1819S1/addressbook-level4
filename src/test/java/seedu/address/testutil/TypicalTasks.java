@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_31ST_M
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_3;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULECODE_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_LEVEL_HIGH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_LEVEL_LOW;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_LEVEL_MEDIUM;
@@ -26,35 +27,35 @@ import seedu.address.model.task.Task;
  */
 public class TypicalTasks {
     // Manually added
-    public static final Task CS2113_HOMEWORK = new TaskBuilder().withDeadline("1/1/2018")
+    public static final Task CS2113_HOMEWORK = new TaskBuilder().withDeadline("1/1/2018").withModuleCode("CS2113")
             .withTitle("Complete code refactoring").withDescription("Refer to notes!")
             .withPriority("low").build();
 
-    public static final Task CS2101_HOMEWORK = new TaskBuilder().withDeadline("9/10/2018")
+    public static final Task CS2101_HOMEWORK = new TaskBuilder().withDeadline("9/10/2018").withModuleCode("CS2101")
         .withTitle("Plan a OP2 meeting").withDescription("OP2 is 40% of the grade")
         .withPriority("high").build();
 
-    public static final Task CS2102_HOMEWORK = new TaskBuilder().withDeadline("11/11/2018")
+    public static final Task CS2102_HOMEWORK = new TaskBuilder().withDeadline("11/11/2018").withModuleCode("CS2102")
         .withTitle("Set up the backend framework").withDescription("Using Flask")
             .withPriority("medium").build();
 
-    public static final Task CG2271_HOMEWORK = new TaskBuilder().withDeadline("5/6/2018")
+    public static final Task CG2271_HOMEWORK = new TaskBuilder().withDeadline("5/6/2018").withModuleCode("CG2271")
         .withTitle("Implement message passing").withDescription("Symmetric & indirect naming scheme")
             .withDescription("low").build();
 
-    public static final Task CG1112_HOMEWORK = new TaskBuilder().withDeadline("2/5/2018")
+    public static final Task CG1112_HOMEWORK = new TaskBuilder().withDeadline("2/5/2018").withModuleCode("CG1112")
         .withTitle("Write buffer class").withDescription("refer to api")
             .withDescription("high").build();
 
     // Manually added - Task's details found in {@code CommandTestUtil}
     public static final Task CS2113_TASK_1 = new TaskBuilder().withDeadline(VALID_DEADLINE_31ST_MARCH)
-        .withTitle(VALID_TITLE_1).withDescription(VALID_DESCRIPTION_1)
+        .withModuleCode(VALID_MODULECODE_1).withTitle(VALID_TITLE_1).withDescription(VALID_DESCRIPTION_1)
         .withPriority(VALID_PRIORITY_LEVEL_LOW).build();
     public static final Task CS2113_TASK_2 = new TaskBuilder().withDeadline(VALID_DEADLINE_1ST_JAN)
-        .withTitle(VALID_TITLE_2).withDescription(VALID_DESCRIPTION_2)
+        .withModuleCode(VALID_MODULECODE_1).withTitle(VALID_TITLE_2).withDescription(VALID_DESCRIPTION_2)
         .withPriority(VALID_PRIORITY_LEVEL_HIGH).build();
     public static final Task CS2113_TASK_3 = new TaskBuilder().withDeadline(VALID_DEADLINE_12TH_MAY)
-        .withTitle(VALID_TITLE_3).withDescription(VALID_DESCRIPTION_3)
+        .withModuleCode(VALID_MODULECODE_1).withTitle(VALID_TITLE_3).withDescription(VALID_DESCRIPTION_3)
         .withPriority(VALID_PRIORITY_LEVEL_MEDIUM).build();
     // public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

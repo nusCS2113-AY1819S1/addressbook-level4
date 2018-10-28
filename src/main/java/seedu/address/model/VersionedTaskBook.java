@@ -26,6 +26,7 @@ public class VersionedTaskBook extends AddressBook {
     public void commit() {
         removeStatesAfterCurrentPointer();
         taskBookStateList.add(new AddressBook(this));
+        System.out.println("Oh yea 1");
         currentStatePointer++;
     }
 

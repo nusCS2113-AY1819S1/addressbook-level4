@@ -18,6 +18,7 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectDeadlineCommand;
+import seedu.address.logic.commands.SortTaskCommand;
 import seedu.address.logic.commands.TrackProductivityCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -48,6 +49,7 @@ public class LogicManager extends ComponentManager implements Logic {
                 new ListCommand(),
                 new TrackProductivityCommand(),
                 new SelectDeadlineCommand(),
+                new SortTaskCommand(),
                 new HelpCommand(),
                 new ExitCommand(),
                 new HistoryCommand(),

@@ -92,11 +92,19 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         indicateTaskBookChanged();
     }
+
+    //@@author ChanChunCheong
+    @Override
+    public void sortTask(String method) {
+        versionedTaskBook.sortTask(method);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        indicateTaskBookChanged();
+    }
+
     //@@author
     @Override
     public void updateTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
-
         versionedTaskBook.updateTask(target, editedTask);
         indicateTaskBookChanged();
     }

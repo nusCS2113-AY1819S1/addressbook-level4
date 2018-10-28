@@ -12,6 +12,7 @@ public class PriorityLevel {
             "Priority can only be of low, medium or high level";
 
     public final String priorityLevel;
+    public final int priorityLevelInt;
 
     /**
      * Constructs a {@code PriorityLevel}.
@@ -22,6 +23,24 @@ public class PriorityLevel {
         requireNonNull(priority);
         checkArgument(isValidPriorityLevel(priority), MESSAGE_PRIORITY_CONSTRAINTS);
         priorityLevel = priority.toLowerCase();
+
+        //@@author ChanChunCheong
+        switch(priority) {
+        case ("low"): {
+            priorityLevelInt = 3;
+            break;
+        }
+        case ("medium"): {
+            priorityLevelInt = 2;
+            break;
+        }
+        case ("high"): {
+            priorityLevelInt = 1;
+            break;
+        }
+        default:
+            priorityLevelInt = 0;
+        }
     }
 
     /**
