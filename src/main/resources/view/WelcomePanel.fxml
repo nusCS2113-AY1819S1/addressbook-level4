@@ -10,7 +10,7 @@
    <children>
       <VBox style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <GridPane gridLinesVisible="true" style="-fx-background-color: pink;">
+            <GridPane gridLinesVisible="true">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" prefWidth="50.0"/>
                 <ColumnConstraints hgrow="SOMETIMES" prefWidth="50.0"/>
