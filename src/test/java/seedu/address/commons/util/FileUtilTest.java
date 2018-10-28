@@ -58,16 +58,4 @@ public class FileUtilTest {
         thrown.expectMessage("File '" + readOnlyFile + "' cannot be written to");
         FileUtil.writeToTextFile(readOnlyFile, TestMessage);
     }
-
-
-    @AfterClass
-    public static void deleteFiles() {
-        File dir = new File(FileUtil.getRootLocation() + SCRIPTS_LOCATION);
-        if (dir.exists()) {
-            for (File file:dir.listFiles()) {
-                file.delete();
-            }
-            dir.delete();
-        }
-    }
 }
