@@ -39,7 +39,7 @@ public class NoteListCommand extends Command {
 
         if (noteManager.getFilteredNotes().size() == 0) {
             noteManager.setFilteredNotes(noteManager.getCurrentFilter());
-            return new CommandResult(String.format(MESSAGE_NOT_FOUND));
+            return new CommandResult(MESSAGE_NOT_FOUND);
         }
 
         int size = noteManager.getFilteredNotes().size();
