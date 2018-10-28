@@ -6,6 +6,9 @@ package seedu.address.model.drink;
  * Guarantees: TODO
  */
 public class BatchDate extends Date {
+    public BatchDate() {
+        super();
+    }
     public BatchDate(String input) {
         super(input);
     }

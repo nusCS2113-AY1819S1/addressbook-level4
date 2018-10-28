@@ -27,8 +27,14 @@ public class Date {
     private LocalDate date;
 
     /**
+     * Constructs an {@code Date} with the current real time date.
+     */
+    public Date() {
+        this.date = LocalDate.now();
+    }
+
+    /**
      * Constructs an {@code Date}.
-     *
      * @param date A valid quantity value expressed as a string.
      */
     public Date(String date) {

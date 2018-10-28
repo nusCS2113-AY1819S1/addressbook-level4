@@ -20,6 +20,17 @@ public class Batch {
         this.batchDate = date;
     }
 
+    /**
+     * Alternative constructor for the batch class, with the date attribute filled by the current date
+     */
+    public Batch(BatchId id, BatchQuantity quantity, BatchPrice price) {
+        requireAllNonNull(id, quantity, price);
+        this.batchId = id;
+        this.batchQuantity = quantity;
+        this.batchPrice = price;
+        this.batchDate = new BatchDate();
+    }
+
     public BatchId getBatchId() {
         return batchId;
     }
