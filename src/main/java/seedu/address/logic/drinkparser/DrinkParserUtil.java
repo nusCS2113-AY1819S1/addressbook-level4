@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.drinkparser.exceptions.DrinkParseException;
 import seedu.address.model.drink.Name;
+import seedu.address.model.drink.Price;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.user.AuthenticationLevel;
 import seedu.address.model.user.Password;
@@ -34,6 +35,8 @@ public class DrinkParserUtil {
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
+
+    // =============== User-related parsing ========================
     /**
      * Parses a {@code String userName} into a {@code UserName}.
      * Leading and trailing whitespaces will be trimmed.
@@ -48,6 +51,7 @@ public class DrinkParserUtil {
         }
         return new UserName (trimmedUserName);
     }
+
     /**
      * Parses a {@code String password} into a {@code Password}.
      * Leading and trailing whitespaces will be trimmed.
@@ -62,6 +66,7 @@ public class DrinkParserUtil {
         }
         return new Password (trimmedPassword);
     }
+
     /**
      * Parses a {@code String authenticationLevel } into a {@code AuthenticationLevel}.
      * Leading and trailing whitespaces will be trimmed.
@@ -76,41 +81,15 @@ public class DrinkParserUtil {
         }
         return new AuthenticationLevel (trimmedAuthenticationLevel);
     }
+
+    // ================== Drink-related parsing ===================
     /**
      * Parses a {@code String itemName} into a {@code String itenName}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws DrinkParseException if the given {@code name} is invalid.
      */
-    public static String parseItemName(String name) throws DrinkParseException {
-        requireNonNull(name);
-        String trimmedName = name.trim();
-        //        if (!Name.isValidName(trimmedName)) {
-        //            throw new ParseException(Name.MESSAGE_NAME_CONSTRAINTS);
-        //        }
-        return name;
-    }
-    /**
-     * Parses a {@code String itemName} into a {@code String itenName}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws DrinkParseException if the given {@code name} is invalid.
-     */
-    public static String parseDefaultSellingPrice (String defaultSellingPrice) throws DrinkParseException {
-        requireNonNull(defaultSellingPrice);
-        String trimmedName = defaultSellingPrice.trim();
-        //        if (!Name.isValidName(trimmedName)) {
-        //            throw new ParseException(Name.MESSAGE_NAME_CONSTRAINTS);
-        //        }
-        return defaultSellingPrice;
-    }
-    /**
-     * Parses a {@code String name} into a {@code Name}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws DrinkParseException if the given {@code name} is invalid.
-     */
-    public static Name parseName(String name) throws DrinkParseException {
+    public static Name parseDrinkName(String name) throws DrinkParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
@@ -119,6 +98,35 @@ public class DrinkParserUtil {
         return new Name(trimmedName);
     }
 
+    /**
+     * Parses a {@code String price} into a {@code Price}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws DrinkParseException if the given {@code price} is invalid.
+     */
+    public static Price parseDrinkCostPrice (String price) throws DrinkParseException {
+        requireNonNull(price);
+        String trimmedCostPrice = price.trim();
+        if (!Price.isValidPrice(trimmedCostPrice)) {
+            throw new DrinkParseException(Price.MESSAGE_PRICE_CONSTRAINTS);
+        }
+        return new Price(trimmedCostPrice);
+    }
+
+    /**
+     * Parses a {@code String price} into a {@code Price}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws DrinkParseException if the given {@code price} is invalid.
+     */
+    public static Price parseDrinkDefaultSellingPrice (String defaultSellingPrice) throws DrinkParseException {
+        requireNonNull(defaultSellingPrice);
+        String trimmedDefaultSellingPrice = defaultSellingPrice.trim();
+        if (!Price.isValidPrice(trimmedDefaultSellingPrice)) {
+            throw new DrinkParseException(Price.MESSAGE_PRICE_CONSTRAINTS);
+        }
+        return new Price(trimmedDefaultSellingPrice);
+    }
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.
