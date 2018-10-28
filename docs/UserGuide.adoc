@@ -135,14 +135,14 @@ Returns `Arduino` and `Arduino Uno`
 * `find Arduino Pi` +
 Returns any items having names `Arduino` or `Pi`
 
-=== Listing item status: `status`
+=== Listing item according to status: `status`
 
 Shows the quantity of every item in each status category (Ready, On_Loan, Faulty) +
 Format: `status`
 
 === Changing status of item: `changeStatus`
 
-The status of the items can be changed +
+The status of the items can be changed (Ready, On_Loan, Faulty) +
 Format: `changeStatus n/NAME q/QUANTITY os/ORIGINALSTATUS ns/NEWSTATUS`
 
 Examples:

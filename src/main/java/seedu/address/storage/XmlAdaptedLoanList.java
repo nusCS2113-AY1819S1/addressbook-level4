@@ -14,20 +14,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 public class XmlAdaptedLoanList {
     @XmlElement(name = "Loaner")
-    private List<XmlAdaptedLoanerDescription> xmlAdaptedLoanList = null;
+    private ArrayList<XmlAdaptedLoanerDescription> xmlAdaptedLoanList = null;
 
     public XmlAdaptedLoanList() {
         xmlAdaptedLoanList = new ArrayList<>();
     }
-    public List<XmlAdaptedLoanerDescription> getLoanList() {
-        return xmlAdaptedLoanList;
-    }
-    public void setLoanList(List<XmlAdaptedLoanerDescription> xmlAdaptedLoanList) {
+    public XmlAdaptedLoanList(ArrayList<XmlAdaptedLoanerDescription> xmlAdaptedLoanList) {
         this.xmlAdaptedLoanList = xmlAdaptedLoanList;
     }
+    public ArrayList<XmlAdaptedLoanerDescription> getLoanList() {
+        return xmlAdaptedLoanList;
+    }
+
     public void addLoaner(XmlAdaptedLoanerDescription toAdd) {
         xmlAdaptedLoanList.add(toAdd);
     }
-
 
 }

@@ -18,26 +18,32 @@ public class ViewLoanListCommand extends Command{
     public static final String MESSAGE_EMPTY = "Loan list is currently empty";
 
     @Override
-        public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         File loanListFile = new File("C:/Users/ckinw/OneDrive/Documents/JalilEnterprisesCKW/data/LoanList.xml");
         if(!loanListFile.exists()) {
             throw new CommandException(MESSAGE_EMPTY);
         }
-        String messageOutput = getMessageOutput();
+        String messageOutput = getMessageOutput(loanListFile);
             return new CommandResult(messageOutput);
         }
-        private String getMessageOutput() {
+        private String getMessageOutput(File loanListFile) throws CommandException {
             try {
+                Integer counter = 1;
                 String messageOutput = new String();
                 messageOutput += MESSAGE_SUCCESS + "\n";
                 JAXBContext context = JAXBContext.newInstance(XmlAdaptedLoanList.class);
                 Unmarshaller unmarshaller = context.createUnmarshaller();
                 XmlAdaptedLoanList xmlAdaptedLoanList = (XmlAdaptedLoanList) unmarshaller
-                        .unmarshal(new File("C:/Users/ckinw/OneDrive/Documents/JalilEnterprisesCKW/data/LoanList.xml"));
+                        .unmarshal(loanListFile);
+                if(xmlAdaptedLoanList.getLoanList().size()==0) {
+                    throw new CommandException(MESSAGE_EMPTY);
+                }
                 for(XmlAdaptedLoanerDescription loanerDescription : xmlAdaptedLoanList.getLoanList()) {
+                    messageOutput += counter + ". ";
                     messageOutput += loanerDescription.getLoanerName() + ": ";
                     messageOutput += loanerDescription.getItemName() + " ";
                     messageOutput += loanerDescription.getQuantity() + "\n";
+                    counter++;
                 }
                 return messageOutput;
             }

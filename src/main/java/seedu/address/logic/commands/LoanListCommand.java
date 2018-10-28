@@ -39,6 +39,14 @@ public class LoanListCommand extends Command {
         this.loaner = loaner;
     }
 
+    public static void addToFile(XmlAdaptedLoanList xmlAdaptedLoanList) throws JAXBException {
+        JAXBContext jaxbContext = JAXBContext.newInstance(XmlAdaptedLoanList.class);
+        Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+        jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        jaxbMarshaller.marshal(xmlAdaptedLoanList, System.out);
+        jaxbMarshaller.marshal(xmlAdaptedLoanList, new File("C:/Users/ckinw/OneDrive/Documents/JalilEnterprisesCKW/data/LoanList.xml"));
+    }
+
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
 
@@ -49,6 +57,7 @@ public class LoanListCommand extends Command {
         catch (JAXBException e) {
             System.out.println(e.toString());
         }
+
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
@@ -70,14 +79,7 @@ public class LoanListCommand extends Command {
             addToFile(xmlAdaptedLoanList);
         }
     }
-    private void addToFile(XmlAdaptedLoanList xmlAdaptedLoanList) throws JAXBException {
-        JAXBContext jaxbContext = JAXBContext.newInstance(XmlAdaptedLoanList.class);
-        Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-        jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        jaxbMarshaller.marshal(xmlAdaptedLoanList, System.out);
-        jaxbMarshaller.marshal(xmlAdaptedLoanList, new File("C:/Users/ckinw/OneDrive/Documents/JalilEnterprisesCKW/data/LoanList.xml"));
 
-    }
     private void updateStatus(Model model, CommandHistory history) throws CommandException {
         ChangeStatusCommand.ChangeStatusDescriptor changeStatusDescriptor = new ChangeStatusCommand.ChangeStatusDescriptor();
         changeStatusDescriptor.setName(loaner.getItemName());
