@@ -1,9 +1,20 @@
 package seedu.planner.logic.commands;
 
-import javafx.collections.ObservableList;
+import static java.util.Objects.requireNonNull;
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Predicate;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import javafx.collections.ObservableList;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.FinancialPlanner;
@@ -15,15 +26,6 @@ import seedu.planner.model.record.Record;
 import seedu.planner.model.summary.Summary;
 import seedu.planner.testutil.LimitBuilder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LimitCommandTest {
 
@@ -158,7 +160,7 @@ public class LimitCommandTest {
 
         @Override
         public boolean isExceededLimit (Limit limit) {
-           return false;
+            return false;
         }
 
 
@@ -173,7 +175,7 @@ public class LimitCommandTest {
         }
 
         @Override
-        public String generateLimitOutput(boolean isExceeded,Limit limit ) {
+        public String generateLimitOutput(boolean isExceeded, Limit limit) {
             return "";
         }
 

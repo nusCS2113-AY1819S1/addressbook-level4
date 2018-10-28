@@ -1,6 +1,5 @@
 package seedu.planner.model.record;
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static seedu.planner.testutil.TypicalLimits.LIMIT_100;
 
@@ -25,7 +24,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.planner.testutil.LimitBuilder;
 import seedu.planner.testutil.RecordBuilder;
 
 
