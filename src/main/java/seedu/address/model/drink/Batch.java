@@ -97,10 +97,10 @@ public class Batch {
                 .append(getBatchId().toString())
                 .append(" Batch Quantity: ")
                 .append(getBatchQuantity().toString())
-                .append(" Batch Date: ")
-                .append(getBatchDate().toString())
                 .append(" Batch Price: $")
-                .append(getBatchPrice().toString());
+                .append(getBatchPrice().toString())
+                .append(" Batch Date: ")
+                .append(getBatchDate().toString());
         return builder.toString();
     }
 }

@@ -5,7 +5,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import org.junit.jupiter.api.Test;
@@ -64,32 +63,32 @@ class DateTest {
     @Test
     void isBefore() {
         String validDate = "22/10/2018";
-        Date Date = new Date(validDate);
-        Date DateBefore = new Date("21/10/2018");
-        Date DateAfter = new Date("23/10/2018");
-        Date DateEquals = new Date(validDate);
+        Date date = new Date(validDate);
+        Date dateBefore = new Date("21/10/2018");
+        Date dateAfter = new Date("23/10/2018");
+        Date dateEquals = new Date(validDate);
 
         // not before
-        assertFalse(Date.isBefore(DateBefore));
-        assertFalse(Date.isBefore(DateEquals));
+        assertFalse(date.isBefore(dateBefore));
+        assertFalse(date.isBefore(dateEquals));
 
         // is before
-        assertTrue(Date.isBefore(DateAfter));
+        assertTrue(date.isBefore(dateAfter));
     }
 
     @Test
     void isAfter() {
         String validDate = "22/10/2018";
-        Date Date = new Date(validDate);
-        Date DateBefore = new Date("21/10/2018");
-        Date DateAfter = new Date("23/10/2018");
-        Date DateEquals = new Date(validDate);
+        Date date = new Date(validDate);
+        Date dateBefore = new Date("21/10/2018");
+        Date dateAfter = new Date("23/10/2018");
+        Date dateEquals = new Date(validDate);
 
         // not after
-        assertFalse(Date.isAfter(DateAfter));
-        assertFalse(Date.isAfter(DateEquals));
+        assertFalse(date.isAfter(dateAfter));
+        assertFalse(date.isAfter(dateEquals));
 
         // is after
-        assertTrue(Date.isAfter(DateBefore));
+        assertTrue(date.isAfter(dateBefore));
     }
 }
