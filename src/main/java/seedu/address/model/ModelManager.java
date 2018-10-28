@@ -21,6 +21,7 @@ import seedu.address.commons.events.model.UserDatabaseChangedEvent;
 import seedu.address.commons.events.model.UserDeletedEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.distributor.Distributor;
+import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.UniqueUserList;
 import seedu.address.model.login.User;
@@ -156,7 +157,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public boolean hasDistributor(Distributor distributor) {
-        requireNonNull(distributor);
         return versionedDistributorBook.hasDistributor(distributor);
     }
 
