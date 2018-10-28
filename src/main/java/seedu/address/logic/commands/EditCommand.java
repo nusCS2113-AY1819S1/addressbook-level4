@@ -115,7 +115,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editEventDescriptor.getEmail().orElse(eventToEdit.getEmail());
         Venue updatedVenue = editEventDescriptor.getVenue().orElse(eventToEdit.getVenue());
         DateTime updatedDateTime = editEventDescriptor.getDateTime().orElse(eventToEdit.getDateTime());
-        Comment updatedComment = eventToEdit.getComment();
+        Comment updatedComment = editEventDescriptor.getComment();
         Set<Tag> updatedTags = editEventDescriptor.getTags().orElse(eventToEdit.getTags());
         Set<Attendee> updatedAttendees = editEventDescriptor.getAttendees().orElse(eventToEdit.getAttendees());
 
