@@ -1,3 +1,4 @@
+//@@author gaoqikai
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -24,9 +25,8 @@ public class TagCommandParser implements Parser<TagCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+        String[] tagKeywords = trimmedArgs.split("\\s+");
 
-        return new TagCommand(new TagContainsKeywordsPredicate (Arrays.asList(nameKeywords)));
+        return new TagCommand(new TagContainsKeywordsPredicate (Arrays.asList(tagKeywords)));
     }
-
 }
