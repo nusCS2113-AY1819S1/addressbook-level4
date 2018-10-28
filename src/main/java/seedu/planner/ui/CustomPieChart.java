@@ -66,7 +66,7 @@ public class CustomPieChart extends PieChart {
 
         private Node createSymbol(int index) {
             Shape symbol = new Rectangle(10, 10, 10, 10);
-            symbol.getStyleClass().add(String.format("default-color%d-chart-pie-legend", index));
+            symbol.getStyleClass().add(String.format("default-color%d-chart-pie-legend", index % 8));
             return symbol;
         }
 
