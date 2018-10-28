@@ -108,8 +108,7 @@ public class Event implements Comparable<Event> {
                 && (event.getDescription().equals(getDescription())
                 || event.getLocation().equals(getLocation())
                 || event.getStartTime().equals(getStartTime())
-                || event.getEndTime().equals(getEndTime()))
-                || event.getDate().equals(getDate());
+                || event.getEndTime().equals(getEndTime()));
     }
 
     /**
@@ -173,6 +172,7 @@ public class Event implements Comparable<Event> {
      */
     public Event addPersonToAttendee(String personName) {
         assert personName != null;
+        assert !attendees.hasName(personName);
         Attendees updatedAttendee = attendees.addName(personName);
         return new Event(eventName, description, date, startTime, endTime, location, updatedAttendee);
     }
@@ -186,6 +186,7 @@ public class Event implements Comparable<Event> {
      */
     public Event removePersonFromAttendee(String personName) {
         assert personName != null;
+        assert attendees.hasName(personName);
         Attendees updatedAttendee = attendees.removeName(personName);
         return new Event(eventName, description, date, startTime, endTime, location, updatedAttendee);
     }

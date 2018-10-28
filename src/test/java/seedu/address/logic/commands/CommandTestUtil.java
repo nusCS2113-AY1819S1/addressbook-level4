@@ -44,6 +44,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
 
     public static final String VALID_EVENT_NAME_BIRTHDAY = "Birthday";
+    public static final String VALID_DATE = "2018-10-28";
     public static final String VALID_DESCRIPTION_PUNCTUAL = "Please be punctual.";
     public static final String VALID_LOCATION_LT = "LT15";
     public static final String VALID_LOCATION_UT = "University Town";
