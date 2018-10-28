@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.function.Supplier;
 
+import javax.xml.crypto.Data;
+
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import seedu.recruit.commons.core.Config;
@@ -12,9 +14,11 @@ import seedu.recruit.commons.exceptions.DataConversionException;
 import seedu.recruit.commons.util.FileUtil;
 import seedu.recruit.commons.util.XmlUtil;
 import seedu.recruit.model.CandidateBook;
+import seedu.recruit.model.CompanyBook;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.ModelManager;
 import seedu.recruit.model.ReadOnlyCandidateBook;
+import seedu.recruit.model.ReadOnlyCompanyBook;
 import seedu.recruit.model.UserPrefs;
 import seedu.recruit.storage.UserPrefsStorage;
 import seedu.recruit.storage.XmlSerializableCandidateBook;
@@ -71,7 +75,7 @@ public class TestApp extends MainApp {
     /**
      * Returns a defensive copy of the recruit book data stored inside the storage file.
      */
-    public CandidateBook readStorageAddressBook() {
+    public CandidateBook readStorageCandidateBook() {
         try {
             return new CandidateBook(storage.readCandidateBook().get());
         } catch (DataConversionException dce) {
@@ -82,10 +86,30 @@ public class TestApp extends MainApp {
     }
 
     /**
-     * Returns the file path of the storage file.
+     * Returns a defensive copy of the recruit book data stored inside the storage file.
      */
-    public Path getStorageSaveLocation() {
+    public CompanyBook readStorageCompanyBook() {
+        try {
+            return new CompanyBook(storage.readCompanyBook().get());
+        } catch (DataConversionException dce) {
+            throw new AssertionError("Data is not in the CompanyBook format.", dce);
+        } catch (IOException ioe) {
+            throw new AssertionError("Storage file cannot be found", ioe);
+        }
+    }
+
+    /**
+     * Returns the file path of the candidate book in the storage file.
+     */
+    public Path getCandidateStorageSaveLocation() {
         return storage.getCandidateBookFilePath();
+    }
+
+    /**
+     * Returns the file path of the company book in the storage file
+     */
+    public Path getCompanyStorageSaveLocation() {
+        return storage.getCompanyBookFilePath();
     }
 
     /**
@@ -93,7 +117,7 @@ public class TestApp extends MainApp {
      */
     public Model getModel() {
         Model copy = new ModelManager((model.getCandidateBook()), model.getCompanyBook(), new UserPrefs());
-        ModelHelper.setFilteredList(copy, model.getFilteredCandidateList());
+        ModelHelper.setCandidateFilteredList(copy, model.getFilteredCandidateList());
         return copy;
     }
 

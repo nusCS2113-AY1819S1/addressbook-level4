@@ -16,8 +16,6 @@ import java.util.List;
 import seedu.recruit.model.CompanyBook;
 import seedu.recruit.model.company.Company;
 
-
-
 /**
  * A utility class containing a list of {@code Company} objects to be used in tests.
  */
@@ -41,6 +39,8 @@ public class TypicalCompanies {
             .withAddress(VALID_ADDRESS_ALFA).withEmail(VALID_EMAIL_ALFA).withPhone(VALID_PHONE_ALFA).build();
     public static final Company BMW = new CompanyBuilder().withCompanyName(VALID_NAME_BMW)
             .withAddress(VALID_ADDRESS_BMW).withEmail(VALID_EMAIL_BMW).withPhone(VALID_PHONE_BMW).build();
+
+    public static final String KEYWORD_MATCHING_WHEELER = "Wheeler"; // A keyword that matches WHEELER
 
     private TypicalCompanies() {}
 
