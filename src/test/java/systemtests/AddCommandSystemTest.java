@@ -1,7 +1,40 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.ADMIN_PASSWORD_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.ADMIN_USERNAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.ATTENDEE_DESC_HAN;
+import static seedu.address.logic.commands.CommandTestUtil.ATTENDEE_DESC_TED;
+import static seedu.address.logic.commands.CommandTestUtil.CONTACT_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.CONTACT_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ATTENDEE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CONTACT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATETIME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_VENUE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADMIN_PASSWORD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADMIN_USERNAME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTACT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_VENUE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VENUE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VENUE_DESC_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.TypicalEvents.ALICE;
 import static seedu.address.testutil.TypicalEvents.AMY;
@@ -265,20 +298,6 @@ public class AddCommandSystemTest extends EventManagerSystemTest {
      * 1. Result display box displays {@code expectedResultMessage}.<br>
      * 2. {@code Storage} and {@code EventListPanel} equal to the corresponding components in
      * {@code expectedModel}.<br>
-     */
-    private void assertCommandSuccessLogin(String command, Model expectedModel, String expectedResultMessage) {
-        executeCommand(command);
-        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
-        assertSelectedCardUnchanged();
-        assertCommandBoxShowsDefaultStyle();
-    }
-
-    /**
-     * Performs the same verification as {@code assertCommandSuccess(String, Event)} except asserts that
-     * the,<br>
-     * 1. Result display box displays {@code expectedResultMessage}.<br>
-     * 2. {@code Storage} and {@code EventListPanel} equal to the corresponding components in
-     * {@code expectedModel}.<br>
      * @see AddCommandSystemTest#assertCommandSuccess(String, Event)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
@@ -287,6 +306,20 @@ public class AddCommandSystemTest extends EventManagerSystemTest {
         assertSelectedCardUnchanged();
         assertCommandBoxShowsDefaultStyle();
         assertStatusBarUnchangedExceptSyncStatus();
+    }
+
+    /**
+     * Performs the same verification as {@code assertCommandSuccess(String, Event)} except asserts that
+     * the,<br>
+     * 1. Result display box displays {@code expectedResultMessage}.<br>
+     * 2. {@code Storage} and {@code EventListPanel} equal to the corresponding components in
+     * {@code expectedModel}.<br>
+     */
+    private void assertCommandSuccessLogin(String command, Model expectedModel, String expectedResultMessage) {
+        executeCommand(command);
+        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
+        assertSelectedCardUnchanged();
+        assertCommandBoxShowsDefaultStyle();
     }
 
     /**
