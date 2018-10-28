@@ -25,12 +25,12 @@ public class CsvWriterTest {
     // CsvWriter csvWriter = new CsvWriter(new AddressBookStub.getPersonList());
 
     @Test
-    public void getOutputFilepathNotNull() {
+    public void getOutputFilepath_notNull() {
         assertNotNull(csvWriter.getOutputFilepath());
     }
 
     @Test
-    public void getOutputFilepathEqualsDefault() {
+    public void getOutputFilepath_equalsDefault() {
         assertEquals(csvWriter.getOutputFilepath(), expectedPath);
     }
 
