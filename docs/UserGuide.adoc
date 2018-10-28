@@ -302,6 +302,8 @@ opens your email application with all accountants as recipients. +
 `mail` +
 opens your email application with person (3rd person in the list panel) as recipient.
 
+== Appendix
+
 === Text prediction
 
 Text prediction feature allows you to complete your command faster with less typing. +
