@@ -28,13 +28,20 @@
         </Label>
         <Label fx:id="title" styleClass="cell_big_label" text="\$title" />
       </HBox>
-      <FlowPane fx:id="tags" />
+      <!--<FlowPane fx:id="tags" />-->
+      <!--<FlowPane fx:id="milestones" hgap="10.0" />-->
       <Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline" />
       <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
+         <VBox spacing="10.0">
+            <children>
+            <FlowPane fx:id="milestones" hgap="10.0" rowValignment="TOP" VBox.vgrow="ALWAYS" />
+            </children>
+         </VBox>
       <Label fx:id="priorityLevel" styleClass="cell_small_label" text="\$priorityLevel" />
       <Label fx:id="status" styleClass="cell_small_label" text="\$status" />
     </VBox>
       <rowConstraints>
+         <RowConstraints />
          <RowConstraints />
       </rowConstraints>
   </GridPane>

@@ -1,10 +1,12 @@
 package seedu.address.storage;
 
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.task.Milestone;
 import seedu.address.model.task.PriorityLevel;
 import seedu.address.model.task.Task;
 
@@ -22,6 +24,8 @@ public class XmlAdaptedTask {
     private String description;
     @XmlElement(required = true)
     private String priority;
+    @XmlElement
+    private List<XmlAdaptedMilestone> milestonelist = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedTask.
@@ -32,11 +36,13 @@ public class XmlAdaptedTask {
     /**
      * Constructs an {@code XmlAdaptedTask} with the given task details.
      */
-    public XmlAdaptedTask(String deadline, String title, String description, String priority) {
+    public XmlAdaptedTask(String deadline, String title, String description, String priority,
+                          List<XmlAdaptedMilestone> milestonelist) {
         this.deadline = deadline;
         this.title = title;
         this.description = description;
         this.priority = priority;
+        this.milestonelist = milestonelist;
     }
 
     /**
@@ -49,6 +55,7 @@ public class XmlAdaptedTask {
         title = source.getTitle();
         description = source.getDescription();
         priority = source.getPriorityLevel().toString();
+        milestonelist = source.getMilestoneList().stream().map(XmlAdaptedMilestone::new).collect(Collectors.toList());
     }
 
     /**
@@ -86,7 +93,11 @@ public class XmlAdaptedTask {
         }
         final PriorityLevel modelPriority = new PriorityLevel(priority);
 
-        return new Task(modelDeadline, modelTitle, modelDescription, modelPriority);
+        final Set<Milestone> milestoneEntries = new HashSet<>();
+        for (XmlAdaptedMilestone entry : milestonelist) {
+            milestoneEntries.add(entry.toModelType());
+        }
+        return new Task(modelDeadline, modelTitle, modelDescription, modelPriority, milestoneEntries);
     }
 
     @Override

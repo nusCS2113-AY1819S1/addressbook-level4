@@ -1,7 +1,9 @@
 package seedu.address.ui;
 
+import com.sun.xml.bind.XmlAccessorFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.task.Task;
@@ -37,6 +39,9 @@ public class TaskCard extends UiPart<Region> {
     private Label priorityLevel;
     @FXML
     private Label status;
+    @FXML
+    private FlowPane milestones;
+
     /*
     @FXML
     private Label email;
@@ -52,11 +57,14 @@ public class TaskCard extends UiPart<Region> {
         deadline.setText(task.getDeadline());
         description.setText(task.getDescription());
         priorityLevel.setText(task.getPriorityLevel().priorityLevel);
+        task.getMilestoneList().forEach(milestone -> milestones.getChildren().
+                add(new Label(milestone.getMilestoneDescriptionString())));
         if (task.isCompleted()) {
             status.setText("Completed!");
         } else {
             status.setText("Not completed :(");
         }
+
         //email.setText(task.getEmail().value);
         //task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }

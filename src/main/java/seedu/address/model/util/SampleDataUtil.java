@@ -2,8 +2,13 @@ package seedu.address.model.util;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyTaskBook;
+import seedu.address.model.task.Milestone;
 import seedu.address.model.task.PriorityLevel;
 import seedu.address.model.task.Task;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -12,7 +17,7 @@ import seedu.address.model.task.Task;
 public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         return new Task[] {
-            new Task("1/1", "Complete code refactoring", "refer to notes", new PriorityLevel("high")),
+            new Task("1/1", "Complete code refactoring", "refer to notes", new PriorityLevel("high"), new HashSet<>()),
         };
     }
 

@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddTaskCommand;
@@ -39,7 +41,7 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
         String description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         PriorityLevel priority = ParserUtil.parsePriorityLevel(argMultimap.getValue(PREFIX_PRIORITY).get());
 
-        Task task = new Task(title, description, priority);
+        Task task = new Task(title, description, priority, new HashSet<>());
 
         return new AddTaskCommand(task);
     }

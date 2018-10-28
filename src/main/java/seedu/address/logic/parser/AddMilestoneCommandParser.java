@@ -9,6 +9,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddMilestoneCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.task.Milestone;
+import seedu.address.model.task.MilestoneDescription;
+import seedu.address.model.task.Rank;
 
 //@@author JeremyInElysium
 /**
@@ -39,7 +41,7 @@ public class AddMilestoneCommandParser implements Parser<AddMilestoneCommand> {
                 argMultimap.getValue(PREFIX_MILESTONE).get());
         String rank = ParserUtil.parseRank(argMultimap.getValue(PREFIX_RANK).get());
 
-        Milestone milestone = new Milestone(milestoneDescription, rank);
+        Milestone milestone = new Milestone(new MilestoneDescription(milestoneDescription), new Rank(rank));
 
         return new AddMilestoneCommand(index, milestone);
     }

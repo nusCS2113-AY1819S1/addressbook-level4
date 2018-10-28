@@ -6,21 +6,46 @@ package seedu.address.model.task;
  */
 public class Milestone {
     //private final String title;
-    private final String milestoneDescription;
-    private final String rank;
+    private final MilestoneDescription milestoneDescription;
+    private final Rank rank;
 
-    public Milestone(String milestoneDescription, String rank) {
+
+    public Milestone(MilestoneDescription milestoneDescription, Rank rank) {
         //super(title, milestoneDescription, new PriorityLevel("high"));
         this.milestoneDescription = milestoneDescription;
         this.rank = rank;
     }
 
-    public String getMilestoneDescription() {
+    public MilestoneDescription getMilestoneDescription() {
         return milestoneDescription;
     }
 
-    public String getRank() {
+    public String getMilestoneDescriptionString() {
+        return milestoneDescription.milestoneDescription;
+    }
+
+
+    public Rank getRank() {
         return rank;
+    }
+
+    public String getRankString() {
+        return rank.rank;
+    }
+
+
+    /**
+     * Returns true if both tasks have the same deadline and title.
+     * This defines a weaker notion of equality between two tasks.
+     */
+    public boolean isSameMilestone(Milestone otherMilestone) {
+        if (otherMilestone == this) {
+            return true;
+        }
+
+        return otherMilestone != null
+                && otherMilestone.getMilestoneDescription().equals(getMilestoneDescription())
+                && otherMilestone.getRank().equals(getRank());
     }
 
     //need to edit this also

@@ -1,8 +1,6 @@
 package seedu.address.model.task;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.model.task.exceptions.TaskCompletedException;
 
@@ -17,24 +15,26 @@ public class Task {
     private final String description;
     private final PriorityLevel priorityLevel;
     private boolean isCompleted;
-    private final Set<Milestone> milestoneSet;
+    //TODO: change data structure to ensure milestoneSet is ordered by rank of milestones and does not allow duplicates
+    private final Set<Milestone> milestoneList = new HashSet<>();
 
-    public Task(String deadline, String title, String description, PriorityLevel priorityLevel) {
+    public Task(String deadline, String title, String description, PriorityLevel priorityLevel,
+                Set<Milestone> milestoneList) {
         this.deadline = deadline;
         this.title = title;
         this.description = description;
         this.priorityLevel = priorityLevel;
         this.isCompleted = false;
-        milestoneSet = new HashSet<>();
+        this.milestoneList.addAll(milestoneList);
     }
 
-    public Task(String title, String description, PriorityLevel priorityLevel) {
+    public Task(String title, String description, PriorityLevel priorityLevel, Set<Milestone> milestoneList) {
         this.deadline = PLACEHOLDER_DEADLINE;
         this.title = title;
         this.description = description;
         this.priorityLevel = priorityLevel;
         this.isCompleted = false;
-        milestoneSet = new HashSet<>();
+        this.milestoneList.addAll(milestoneList);
     }
 
     public String getDeadline() {
@@ -52,6 +52,7 @@ public class Task {
     public PriorityLevel getPriorityLevel() {
         return priorityLevel;
     }
+
     public boolean isCompleted() {
         return isCompleted;
     }
@@ -98,7 +99,14 @@ public class Task {
      * Add a milestone to the task.
      */
     public void addMilestone(Milestone milestone) {
-        milestoneSet.add(milestone);
+        milestoneList.add(milestone);
+    }
+
+    /**
+     * @return list of milestones for the task.
+     */
+    public Set<Milestone> getMilestoneList() {
+        return Collections.unmodifiableSet(milestoneList);
     }
 
     /**
