@@ -37,7 +37,7 @@ public class DistributorCard extends UiPart<Region> {
         this.distributor = distributor;
         id.setText(displayedIndex + "." + "\n");
         name.setText("Name: " + distributor.getDistName().fullDistName);
-        phone.setText("Serial Number: " + distributor.getDistPhone().value);
+        phone.setText("Phone: " + distributor.getDistPhone().value);
     }
 
     @Override

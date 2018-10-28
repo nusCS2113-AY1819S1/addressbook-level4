@@ -34,6 +34,7 @@ public class User {
         this.username = new Username("default");
         this.password = new Password("password");
         this.addressBookFilePath = Paths.get(AB_FILEPATH_FOLDER, "addressbook-default.xml");
+        this.distributorBookFilePath = Paths.get(DB_FILEPATH_FOLDER, "distributorbook-default.xml");
         this.salesHistoryFilePath = Paths.get(AB_FILEPATH_FOLDER, "saleshistory-default.xml");
     }
 
