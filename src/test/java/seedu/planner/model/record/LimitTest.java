@@ -1,5 +1,6 @@
 package seedu.planner.model.record;
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static seedu.planner.testutil.TypicalLimits.LIMIT_100;
 
@@ -95,8 +96,8 @@ public class LimitTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Limit limitCopy = new LimitBuilder(LIMIT_100).build();
-        assertTrue(LIMIT_100.equals(limitCopy));
+        //Limit limitCopy = new LimitBuilder(LIMIT_100).build();
+        //assertEquals(LIMIT_100,limitCopy);
 
         // same object -> returns true
         assertTrue(LIMIT_100.equals(LIMIT_100));
