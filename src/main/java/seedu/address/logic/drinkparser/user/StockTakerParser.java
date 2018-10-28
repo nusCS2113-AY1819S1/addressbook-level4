@@ -24,7 +24,7 @@ import seedu.address.logic.parser.DeleteCommandParser;
 import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.logic.parser.FindCommandParser;
 import seedu.address.logic.parser.SelectCommandParser;
-import seedu.address.logic.parser.SellCommandParser;
+import seedu.address.logic.drinkparser.SellCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 
