@@ -7,7 +7,7 @@ import seedu.address.logic.drinkcommands.DeleteDrinkCommand;
 import seedu.address.logic.drinkparser.exceptions.DrinkParseException;
 
 /**
- * Parses input arguments and creates a new DeleteCommand object
+ * Parses input arguments and creates a new DeleteDrinkCommand object
  */
 public class DeleteDrinkCommandParser implements DrinkParser<DeleteDrinkCommand> {
     /**
