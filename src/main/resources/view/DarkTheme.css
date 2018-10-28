@@ -98,6 +98,8 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-background-insets: 5;
+    -fx-background-color: #e4e2e5;
 }
 
 .list-cell:filled:even {
@@ -115,10 +117,6 @@
 .list-cell:filled:selected #cardPane {
     -fx-border-color: #a09abc;
     -fx-border-width: 1;
-}
-
-.list-cell .label {
-    -fx-text-fill: white;
 }
 
 .cell_big_label {
@@ -140,7 +138,6 @@
 .pane-with-border {
      -fx-background-color: #e4e2e5;
      -fx-border-color: #e4e2e5;
-     -fx-border-top-width: 1px;
 }
 
 .status-bar {
@@ -289,6 +286,7 @@
 .scroll-bar .thumb {
     -fx-background-color: #b6a6ca;
     -fx-background-radius: 10;
+    -fx-background-insets: 4;
 }
 
 .scroll-bar .increment-button, .scroll-bar .decrement-button {
@@ -327,9 +325,10 @@
     -fx-font-family: "Lucida Console";
     -fx-font-size: 13pt;
     -fx-text-fill: #535353;
+    -fx-prompt-text-fill: #b8b8b9;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #tagListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
