@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;

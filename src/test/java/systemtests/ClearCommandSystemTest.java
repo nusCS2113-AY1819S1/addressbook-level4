@@ -9,7 +9,6 @@ import static seedu.address.testutil.TypicalEvents.KEYWORD_MATCHING_TRYOUTS;
 
 import org.junit.Test;
 
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.LoginCommand;
