@@ -6,8 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 
-import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.record.Date;
+import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.record.UniqueRecordList;
@@ -79,6 +79,10 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         setRecords(recordList.asUnmodifiableObservableList());
     }
 
+    /**
+     * Resets LimitList
+     * @param dateBasedLimitList
+     */
     public void resetLimit(DateBasedLimitList dateBasedLimitList) {
         requireNonNull(dateBasedLimitList);
         setLimitList(dateBasedLimitList);
