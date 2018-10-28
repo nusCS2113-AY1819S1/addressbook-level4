@@ -27,7 +27,7 @@ public class ReplyComment extends Comments {
         Vector comments = new Vector();
         try {
             comments = getComments();
-            comments.add(line, "REPLY--->" + comment);
+            comments.add(line, "(REPLY)" + comment);
         } catch (Exception e) {
             throw new CommandException(ReplyCommentCommand.MESSAGE_LINE_INVALID);
         }
