@@ -407,8 +407,9 @@ Before the `ScriptCommand` can be executed, there are some prerequisites:
 
 * There must be a default folder for which all the scripts need to be stored
 * The default location of scripts folder is `root program location` + `/scripts/`
-* All scripts must be of `text file format/txt`
+* All scripts must be of `Text File Format/txt`
 
+==== ScriptSetup feature
 If the scripts folder is missing whenever the program run, the program will automatically generate the folder through
 the `ScriptSetup` Class
 
@@ -417,8 +418,21 @@ image::ScriptSetupSequenceDiagram.png[width="800"]
 
 * Procedure for ScriptSetup
 
-Step 1: 
+Step 1: ScriptSetup will be executed by `MainApp` when the program is initialized and the `ScriptSetup` will be
+execute with the parameter containing the default `scripts` folder location.
 
+[NOTE]
+ The default scripts folder location is
+ obtained from the `preferences.json` file in the main directory
+
+Step 2: `ScriptSetup` will obtain the path of the default script folder by calling `getPath` from the `FileUtil`
+
+Step 3: The `createFolder` function will be called to create a new folder if the `path` does not exist.
+A boolean `isScriptFolderPresent` will be return true if the script folder is present in the project folder and false
+if it is not present inside the project folder
+
+Step 4: If `isScriptFolderPresent` is false, `scriptSetup` will call `addSampleTextFile` which will add some Sample
+Text Files into the scripts folder
 
 Future Implementation:
 ****
