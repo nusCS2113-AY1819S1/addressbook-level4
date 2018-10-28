@@ -88,6 +88,17 @@ public class TypicalPersons {
             .withNote("No notes for this contact")
             .build();
 
+    //@@author lws803
+    // Sample created with no notes, just the barebones
+    public static final Person WILSON = new PersonBuilder()
+            .withName("Wilson")
+            .withPhone("9667777")
+            .withEmail("wow@gmail.com")
+            .withAddress("wow street")
+            .build();
+    //@@author
+
+
     // Manually added
     public static final Person HOON = new PersonBuilder()
             .withName("Hoon Meier")
@@ -137,6 +148,6 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, WILSON));
     }
 }
