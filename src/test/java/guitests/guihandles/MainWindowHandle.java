@@ -1,7 +1,6 @@
 package guitests.guihandles;
 
 import javafx.stage.Stage;
-import seedu.planner.ui.SummaryDisplay;
 
 /**
  * Provides a handle for {@code MainWindow}.

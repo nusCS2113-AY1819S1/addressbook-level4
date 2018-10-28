@@ -54,10 +54,10 @@ public class CategoryBreakdown extends UiPart<Region> {
         pieChart.minHeight(Control.USE_PREF_SIZE);
         pieChart.minHeight(Control.USE_PREF_SIZE);
 
-        root.setTopAnchor(pieChart, 0.0);
-        root.setBottomAnchor(pieChart, 0.0);
-        root.setRightAnchor(pieChart, 0.0);
-        root.setLeftAnchor(pieChart, 0.0);
+        AnchorPane.setTopAnchor(pieChart, 0.0);
+        AnchorPane.setBottomAnchor(pieChart, 0.0);
+        AnchorPane.setRightAnchor(pieChart, 0.0);
+        AnchorPane.setLeftAnchor(pieChart, 0.0);
 
     }
 
