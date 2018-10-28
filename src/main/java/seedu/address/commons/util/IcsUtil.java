@@ -232,8 +232,8 @@ public class IcsUtil {
             throw new IOException(e);
         }
 
-        if (iCalendar == null) {
-            return new ICalendar();
+        if (iCalendar == null) { //either file not found, or no timetable data in file.
+            throw new IOException();
         } else {
             return iCalendar;
         }
