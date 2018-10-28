@@ -1,10 +1,7 @@
 package seedu.planner.ui;
 
-import java.util.List;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
@@ -33,8 +30,7 @@ public class CategoryBreakdown extends UiPart<Region> {
 
     public CategoryBreakdown(ObservableList<ChartData> toDisplay, String label, Double total) {
         super(FXML);
-        pieChartData = convertToPieChartList(toDisplay, total);
-        pieChart = new CustomPieChart(pieChartData);
+        pieChart = new CustomPieChart(toDisplay, total);
         initPieChart(label);
         root.setStyle("-fx-background-color: grey");
         root.getChildren().add(pieChart);
@@ -76,19 +72,5 @@ public class CategoryBreakdown extends UiPart<Region> {
 
     public void setTitlePosition(Side side) {
         pieChart.setTitleSide(side);
-    }
-
-    /** Converts a given ObservableList containing {@see ChartData} to a list that can be read by {@link PieChart}
-     * */
-    private ObservableList<PieChart.Data> convertToPieChartList(ObservableList<ChartData> data, Double total) {
-        List<PieChart.Data> dataList;
-        if (total > 0.0) {
-            dataList = data.stream().map(d -> new PieChart.Data(d.key, Double.parseDouble(
-                    String.format("%.2f", d.value / total * 100.0))))
-                    .collect(Collectors.toList());
-        } else {
-            dataList = data.stream().map(d -> new PieChart.Data(d.key, d.value)).collect(Collectors.toList());
-        }
-        return FXCollections.observableList(dataList);
     }
 }

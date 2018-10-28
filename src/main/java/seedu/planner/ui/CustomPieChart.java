@@ -1,6 +1,10 @@
 package seedu.planner.ui;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
@@ -16,12 +20,28 @@ public class CustomPieChart extends PieChart {
 
     public static final String CSS_FILE = "view/DarkTheme.css";
 
-    public CustomPieChart(ObservableList<Data> pieChartData) {
-        super(pieChartData);
+    public CustomPieChart(ObservableList<ChartData> pieChartData, Double total) {
+        super();
+        ObservableList<Data> dataAsPercentages = convertToPercentages(pieChartData, total);
         getStylesheets().add(CSS_FILE);
-        setLegend(new CustomLegend(this));
-        pieChartData.forEach(data ->
+        setLegend(new CustomLegend(this, pieChartData));
+        setData(dataAsPercentages);
+        dataAsPercentages.forEach(data ->
                 data.nameProperty().bind(Bindings.concat(data.getName(), " ", data.pieValueProperty(), "%")));
+    }
+
+    /** Converts a given ObservableList containing {@see ChartData} to a list that can be read by {@link PieChart}
+     * */
+    private ObservableList<PieChart.Data> convertToPercentages(ObservableList<ChartData> data, Double total) {
+        List<Data> dataList;
+        if (total > 0.0) {
+            dataList = data.stream().map(d -> new PieChart.Data(d.key, Double.parseDouble(
+                    String.format("%.2f", d.value / total * 100.0))))
+                    .collect(Collectors.toList());
+        } else {
+            dataList = data.stream().map(d -> new PieChart.Data(d.key, d.value)).collect(Collectors.toList());
+        }
+        return FXCollections.observableList(dataList);
     }
 
     /**
@@ -29,19 +49,19 @@ public class CustomPieChart extends PieChart {
      */
     class CustomLegend extends GridPane {
 
-        CustomLegend(PieChart chart) {
+        CustomLegend(PieChart chart, ObservableList<ChartData> pieChartData) {
             setHgap(10);
             setVgap(10);
             int index = 0;
-            ObservableList<PieChart.Data> dataList = chart.getData();
-            for (PieChart.Data d : dataList) {
-                addRow(index, createSymbol(dataList.indexOf(d)), new Label(d.getName()), new Label(convertToMoney(d)));
+            for (ChartData d : pieChartData) {
+                addRow(index, createSymbol(pieChartData.indexOf(d)), new Label(d.key),
+                        new Label(convertToMoney(d.value)));
                 index++;
             }
         }
 
-        private String convertToMoney(PieChart.Data data) {
-            return String.format("$%.2f", data.getPieValue());
+        private String convertToMoney(Double data) {
+            return String.format("$%.2f", data);
         }
 
         private Node createSymbol(int index) {
