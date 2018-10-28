@@ -63,7 +63,7 @@ public class ModuleManager {
         modules.remove(toDelete);
     }
 
-    public void assignStudentToModule(Person student, Module module) {
+    public void enrolStudentInModule(Person student, Module module) {
         module.addStudent(student);
     }
 
