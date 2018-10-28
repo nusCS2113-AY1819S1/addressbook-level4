@@ -6,7 +6,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.drinkcommands.AddItemCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -19,6 +18,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.drinkcommands.AddItemCommand;
 import seedu.address.logic.drinkcommands.user.ChangePasswordCommand;
 import seedu.address.logic.drinkcommands.user.CreateAccountCommand;
 import seedu.address.logic.drinkcommands.user.LogoutCommand;
@@ -61,10 +61,10 @@ public class AdminParser {
             return new AddDrinkCommandParser().parse (arguments);
 
         case ChangePasswordCommand.COMMAND_WORD:
-            return new ChangePasswordCommandParser ().parse(arguments);
+            return new ChangePasswordCommandParser().parse(arguments);
 
         case CreateAccountCommand.COMMAND_WORD:
-            return new CreateAccountCommandParser ().parse (arguments);
+            return new CreateAccountCommandParser().parse (arguments);
 
         //existing command
         case EditCommand.COMMAND_WORD:

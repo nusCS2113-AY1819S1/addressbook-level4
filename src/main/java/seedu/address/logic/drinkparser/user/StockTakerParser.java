@@ -6,7 +6,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.drinkcommands.AddItemCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -19,20 +18,20 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.drinkcommands.SellDrinkCommand;
 import seedu.address.logic.drinkcommands.user.ChangePasswordCommand;
-import seedu.address.logic.drinkcommands.user.CreateAccountCommand;
-import seedu.address.logic.drinkcommands.user.LogoutCommand;
-import seedu.address.logic.drinkparser.AddDrinkCommandParser;
 import seedu.address.logic.parser.DeleteCommandParser;
 import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.logic.parser.FindCommandParser;
 import seedu.address.logic.parser.SelectCommandParser;
+import seedu.address.logic.parser.SellCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+
 
 /**
  * Parses user input.
  */
-public class AdminParser {
+public class StockTakerParser {
 
     /**
      * Used for initial separation of command word and args.
@@ -57,14 +56,11 @@ public class AdminParser {
 
         switch (commandWord) {
 
-        case AddItemCommand.COMMAND_WORD:
-            return new AddDrinkCommandParser().parse (arguments);
+        case SellDrinkCommand.COMMAND_WORD:
+            return new SellCommandParser ().parse (arguments);
 
         case ChangePasswordCommand.COMMAND_WORD:
-            return new ChangePasswordCommandParser ().parse(arguments);
-
-        case CreateAccountCommand.COMMAND_WORD:
-            return new CreateAccountCommandParser ().parse (arguments);
+            return new ChangePasswordCommandParser().parse(arguments);
 
         //existing command
         case EditCommand.COMMAND_WORD:
@@ -99,9 +95,6 @@ public class AdminParser {
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
-
-        case LogoutCommand.COMMAND_WORD:
-            return new LogoutCommand ();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

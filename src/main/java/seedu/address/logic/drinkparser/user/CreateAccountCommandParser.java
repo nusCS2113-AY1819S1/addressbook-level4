@@ -1,24 +1,25 @@
 package seedu.address.logic.drinkparser.user;
 //@@author tianhang
+
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AUTHENTICATION_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import java.util.stream.Stream;
-//@@author tianhang
 
 import seedu.address.logic.drinkcommands.user.CreateAccountCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
-
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.user.AuthenticationLevel;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.UserName;
+
+//@@author tianhang
 
 /**
  * Parses input arguments and creates a new AddCommand object
