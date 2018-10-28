@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 import java.util.stream.Stream;
 //@@author tianhang
 
-import seedu.address.logic.drinkcommands.user.CreateAccountCommand;
+import seedu.address.logic.commands.user.CreateAccountCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
