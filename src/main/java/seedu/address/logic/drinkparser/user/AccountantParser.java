@@ -6,14 +6,11 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.drinkcommands.DrinkCommand;
+import seedu.address.logic.drinkcommands.ExitCommand;
 import seedu.address.logic.drinkcommands.HelpCommand;
 import seedu.address.logic.drinkcommands.user.ChangePasswordCommand;
 import seedu.address.logic.drinkparser.exceptions.DrinkParseException;
-import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses user input.
@@ -43,8 +40,8 @@ public class AccountantParser {
 
         switch (commandWord) {
 
-        case ChangePasswordCommand.COMMAND_WORD:
-            return new ChangePasswordCommandParser().parse(arguments);
+        //case ChangePasswordCommand.COMMAND_WORD:
+        //    return new ChangePasswordCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

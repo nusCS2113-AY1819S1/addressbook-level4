@@ -15,16 +15,11 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.drinkcommands.SellDrinkCommand;
-import seedu.address.logic.drinkcommands.user.ChangePasswordCommand;
 import seedu.address.logic.parser.DeleteCommandParser;
 import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.logic.parser.FindCommandParser;
 import seedu.address.logic.parser.SelectCommandParser;
-import seedu.address.logic.drinkparser.SellCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 
@@ -56,27 +51,27 @@ public class StockTakerParser {
 
         switch (commandWord) {
 
-        case SellDrinkCommand.COMMAND_WORD:
-            return new SellCommandParser ().parse (arguments);
+        //case SellDrinkCommand.COMMAND_WORD:
+        //    return new SellCommandParser().parse(arguments);
 
-        case ChangePasswordCommand.COMMAND_WORD:
-            return new ChangePasswordCommandParser().parse(arguments);
+        //case ChangePasswordCommand.COMMAND_WORD:
+        //    return new ChangePasswordCommandParser().parse(arguments);
 
         //existing command
         case EditCommand.COMMAND_WORD:
-            return new EditCommandParser ().parse(arguments);
+            return new EditCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
-            return new SelectCommandParser ().parse(arguments);
+            return new SelectCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser ().parse(arguments);
+            return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
-            return new FindCommandParser ().parse(arguments);
+            return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -89,12 +84,6 @@ public class StockTakerParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-
-        case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();
-
-        case RedoCommand.COMMAND_WORD:
-            return new RedoCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
