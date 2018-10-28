@@ -10,6 +10,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalAccounts.getTypicalLoginBook;
+import static seedu.address.testutil.TypicalClubBudgetElements.getTypicalClubBudgetElementsBook;
+import static seedu.address.testutil.TypicalFinalClubBudget.getTypicalFinalBudgetsBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -20,6 +22,8 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.AddressBook;
+import seedu.address.model.ClubBudgetElementsBook;
+import seedu.address.model.FinalBudgetsBook;
 import seedu.address.model.LoginBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -41,7 +45,8 @@ import seedu.address.testutil.PersonBuilder;
 public class AddSkillLevelCommandTest {
     private static final String SKILL_STUB = "Some skill";
     private static final int SKILLLEVEL_STUB = 99;
-    private Model model = new ModelManager(getTypicalLoginBook(), getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalLoginBook(), getTypicalAddressBook(),
+            getTypicalClubBudgetElementsBook(), getTypicalFinalBudgetsBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
     @Test
     public void execute_addAddSkillLevelUnfilteredList_success() {
@@ -54,7 +59,8 @@ public class AddSkillLevelCommandTest {
         );
         String expectedMessage = String.format(AddSkillLevelCommand.MESSAGE_ADD_SKILL_SUCCESS, editedPerson);
         Model expectedModel = new ModelManager(new LoginBook(model.getLoginBook()),
-                new AddressBook(model.getAddressBook()), new UserPrefs());
+                new AddressBook(model.getAddressBook()), new ClubBudgetElementsBook(model.getClubBudgetElementsBook()),
+                new FinalBudgetsBook(model.getFinalBudgetsBook()), new UserPrefs());
         expectedModel.updatePerson(firstPerson, editedPerson);
         expectedModel.commitAddressBook();
         assertCommandSuccess(addSkillCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -70,7 +76,8 @@ public class AddSkillLevelCommandTest {
         );
         String expectedMessage = String.format(AddSkillLevelCommand.MESSAGE_DELETE_SKILL_SUCCESS, editedPerson);
         Model expectedModel = new ModelManager(new LoginBook(model.getLoginBook()),
-                new AddressBook(model.getAddressBook()), new UserPrefs());
+                new AddressBook(model.getAddressBook()), new ClubBudgetElementsBook(model.getClubBudgetElementsBook()),
+                new FinalBudgetsBook(model.getFinalBudgetsBook()), new UserPrefs());
         expectedModel.updatePerson(firstPerson, editedPerson);
         expectedModel.commitAddressBook();
         assertCommandSuccess(addSkillCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -88,7 +95,8 @@ public class AddSkillLevelCommandTest {
         );
         String expectedMessage = String.format(AddSkillLevelCommand.MESSAGE_ADD_SKILL_SUCCESS, editedPerson);
         Model expectedModel = new ModelManager(new LoginBook(model.getLoginBook()),
-                new AddressBook(model.getAddressBook()), new UserPrefs());
+                new AddressBook(model.getAddressBook()), new ClubBudgetElementsBook(model.getClubBudgetElementsBook()),
+                new FinalBudgetsBook(model.getFinalBudgetsBook()), new UserPrefs());
         expectedModel.updatePerson(firstPerson, editedPerson);
         expectedModel.commitAddressBook();
         assertCommandSuccess(addSkillCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -122,7 +130,8 @@ public class AddSkillLevelCommandTest {
         AddSkillLevelCommand addSkillCommand = new AddSkillLevelCommand(INDEX_FIRST_PERSON,
                 new Skill(SKILL_STUB), new SkillLevel(SKILLLEVEL_STUB));
         Model expectedModel = new ModelManager(new LoginBook(model.getLoginBook()),
-                new AddressBook(model.getAddressBook()), new UserPrefs());
+                new AddressBook(model.getAddressBook()), new ClubBudgetElementsBook(model.getClubBudgetElementsBook()),
+                new FinalBudgetsBook(model.getFinalBudgetsBook()), new UserPrefs());
         expectedModel.updatePerson(personToModify, modifiedPerson);
         expectedModel.commitAddressBook();
         // skill -> first person skill changed
@@ -157,7 +166,8 @@ public class AddSkillLevelCommandTest {
         AddSkillLevelCommand addSkillCommand = new AddSkillLevelCommand(INDEX_FIRST_PERSON,
                 new Skill(SKILL_STUB), new SkillLevel(SKILLLEVEL_STUB));
         Model expectedModel = new ModelManager(new LoginBook(model.getLoginBook()),
-                new AddressBook(model.getAddressBook()), new UserPrefs());
+                new AddressBook(model.getAddressBook()), new ClubBudgetElementsBook(model.getClubBudgetElementsBook()),
+                new FinalBudgetsBook(model.getFinalBudgetsBook()), new UserPrefs());
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Person personToModify = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person modifiedPerson = new PersonBuilder(personToModify).withSkill(SKILL_STUB).build();

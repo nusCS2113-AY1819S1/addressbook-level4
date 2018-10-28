@@ -111,15 +111,5 @@ public class AddressBookTest {
         public ObservableList<Person> getPersonList() {
             return persons;
         }
-
-        @Override
-        public ObservableList<ClubBudgetElements> getClubsList() {
-            return clubs;
-        }
-
-        @Override
-        public ObservableList<FinalClubBudget> getClubBudgetsList() {
-            return clubBudgets;
-        }
     }
 }

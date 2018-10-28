@@ -8,6 +8,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_LOGIN_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalAccounts.LOGINDETAIL1;
 import static seedu.address.testutil.TypicalAccounts.getTypicalLoginBook;
+import static seedu.address.testutil.TypicalClubBudgetElements.getTypicalClubBudgetElementsBook;
+import static seedu.address.testutil.TypicalFinalClubBudget.getTypicalFinalBudgetsBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalTaggedAddressBook;
 
 import java.util.Arrays;
@@ -29,9 +31,11 @@ import seedu.address.model.searchhistory.SearchHistoryManager;
  * Contains integration tests (interaction with the Model) for {@code LoginUserIdPasswordRoleCommand}.
  */
 public class LoginUserIdPasswordRoleCommandTest {
-    private Model model = new ModelManager(getTypicalLoginBook(), getTypicalTaggedAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalLoginBook(), getTypicalTaggedAddressBook(),
+            getTypicalClubBudgetElementsBook(), getTypicalFinalBudgetsBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalLoginBook(),
-            getTypicalTaggedAddressBook(), new UserPrefs());
+            getTypicalTaggedAddressBook(), getTypicalClubBudgetElementsBook(), getTypicalFinalBudgetsBook(),
+            new UserPrefs());
 
     private CommandHistory commandHistory = new CommandHistory();
     private SearchHistoryManager searchHistoryManager = new SearchHistoryManager();
