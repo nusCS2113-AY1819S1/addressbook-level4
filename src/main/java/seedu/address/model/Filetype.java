@@ -15,7 +15,7 @@ public class Filetype {
     public static final String MESSAGE_FILETYPE_CONSTRAINTS =
             "Filetype can take either \"csv\" or \"vcf\", and it should not be blank";
 
-    /*
+    /**
      * The first character of the filetype must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
@@ -29,12 +29,7 @@ public class Filetype {
     }
 
     private final String value;
-
-    /**
-     * Constructs an {@code Filetype}.
-     *
-     * @param filetype A valid filetype.
-     */
+    
     public Filetype(String filetype) {
         requireNonNull(filetype);
         checkArgument(isValidFiletype(filetype), MESSAGE_FILETYPE_CONSTRAINTS);
@@ -58,11 +53,8 @@ public class Filetype {
     // Reused from
     // http://www.java2s.com/Tutorials/Java/Data_Type_How_to/String/
     // Check_if_enum_contains_a_given_string.html with minor modifications
-
     /**
      * Returns true if an {@code enumClass} contains a specific {@code value}.
-     * @param enumClass
-     * @param value
      */
     private static <E extends Enum<E>> boolean contains(Class<E> enumClass,
                                                        String value) {
