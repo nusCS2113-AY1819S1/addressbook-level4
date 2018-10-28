@@ -7,11 +7,11 @@ https://coveralls.io/github/CS2113-AY1819S1-T13-4/main?branch=master&service=git
 https://gitter.im/se-edu/Lobby[image:https://badges.gitter.im/se-edu/Lobby.svg[Gitter chat]]
 
 ifdef::env-github[]
-image::docs/images/Ui.png[width="600"]
+image::docs/images/Ui.png.jpg[width="600"]
 endif::[]
 
 ifndef::env-github[]
-image::docs/images/Ui.png[width="600"]
+image::docs/images/Ui.png.jpg[width="600"]
 endif::[]
 
 * *Student Management System* is a Java application that runs on the Desktop.
