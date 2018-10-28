@@ -23,6 +23,7 @@ import seedu.recruit.model.joboffer.JobOffer;
 public class EmailSendCommand extends Command {
     public static final String COMMAND_WORD = "send";
     public static final String MESSAGE_USAGE = "Type \"send\" to send the message\n"
+            + "Type \"preview\" to preview the email.\n"
             + "Type \"back\" to go back to select contents command.\n"
             + "Type \"cancel\" to cancel the email command.";
     public static final String COMMAND_LOGIC_STATE = "EmailSend";

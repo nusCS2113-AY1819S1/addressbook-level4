@@ -129,7 +129,8 @@ public class ModelManager extends ComponentManager implements Model {
         indicateCandidateBookChanged();
     }
 
-    //=========== Filtered Candidate List Accessors =============================================================
+
+    // =========== Filtered Candidate List Accessors =================================================== //
 
     /**
      * Returns an unmodifiable view of the list of {@code Candidate} backed by the internal list of
@@ -146,7 +147,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredCandidates.setPredicate(predicate);
     }
 
-    //=========== Undo/Redo =================================================================================
+    // =========== Undo/Redo Candidate Book ============================================================ //
 
     @Override
     public boolean canUndoCandidateBook() {
@@ -176,7 +177,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
 
-    // ================================== CompanyBook functions ===================================== //
+    // ================================== CompanyBook functions ======================================== //
 
     @Override
     public void resetCompanyData(ReadOnlyCompanyBook newData) {
@@ -233,7 +234,13 @@ public class ModelManager extends ComponentManager implements Model {
         indicateCompanyBookChanged();
     }
 
-    //=========== Filtered Company List Accessors =============================================================
+    // =========== Filtered Company List Accessors ===================================================== //
+
+    @Override
+    public void sortCompanies(Prefix prefix) {
+        versionedCompanyBook.sortCompanies(prefix);
+        indicateCompanyBookChanged();
+    }
 
     /**
      * Returns an unmodifiable view of the list of {@code Company} backed by the internal list of
@@ -250,7 +257,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredCompanies.setPredicate(predicate);
     }
 
-    //=========== Undo/Redo =================================================================================
+    // ========== Undo/Redo Company Book =============================================================== //
 
     @Override
     public boolean canUndoCompanyBook() {
@@ -279,13 +286,32 @@ public class ModelManager extends ComponentManager implements Model {
         versionedCompanyBook.commit();
     }
 
-    // ================================== Job Offer functions ===================================== //
+    // ================================== Job Offer functions ========================================== //
 
     @Override
     public void addJobOffer(CompanyName companyName, JobOffer jobOffer) {
         requireAllNonNull(companyName, jobOffer);
         versionedCompanyBook.addJobOfferToCompany(companyName, jobOffer);
         indicateCompanyBookChanged();
+    }
+
+    @Override
+    public boolean hasJobOffer(CompanyName companyName, JobOffer jobOffer) {
+        requireAllNonNull(companyName, jobOffer);
+        return versionedCompanyBook.hasJobOffer(companyName, jobOffer);
+    }
+
+    @Override
+    public void updateJobOfferInSelectedCompany(Company company, JobOffer target, JobOffer editedJobOffer) {
+        requireAllNonNull(company, target, editedJobOffer);
+        versionedCompanyBook.updateJobOfferInCompany(company, target, editedJobOffer);
+        indicateCompanyBookChanged();
+    }
+
+    @Override
+    public void updateJobOfferInCompanyBook(JobOffer target, JobOffer editedJobOffer) {
+        requireAllNonNull(target, editedJobOffer);
+        versionedCompanyBook.updateJobOffer(target, editedJobOffer);
     }
 
     @Override
@@ -310,7 +336,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredJobs.setPredicate(predicate);
     }
 
-    // ================================== Email Command functions ===================================== //
+    // ================================== Email Command functions ====================================== //
 
     public EmailUtil getEmailUtil() {
         return emailUtil;
@@ -342,21 +368,18 @@ public class ModelManager extends ComponentManager implements Model {
      */
     @Override
     public String getFilteredRecipientJobOfferNames(ArrayList<JobOffer> duplicateJobOffers) {
-        boolean hasDuplicate;
+        boolean isDuplicate;
         StringBuilder output = new StringBuilder();
         for (JobOffer jobOffer : filteredJobs) {
-            hasDuplicate = false;
+            isDuplicate = false;
             for (JobOffer duplicateJobOffer : duplicateJobOffers) {
                 if (jobOffer.isSameJobOffer(duplicateJobOffer)) {
-                    hasDuplicate = true;
+                    isDuplicate = true;
                     break;
                 }
             }
-            if (!hasDuplicate) {
-                output.append(jobOffer.getCompanyName().toString());
-                output.append(" regarding job offer: ");
-                output.append(jobOffer.getJob().toString());
-                output.append("\n");
+            if (!isDuplicate) {
+                output.append(getFilteredRecipientJobOfferNames());
             }
         }
         return output.toString();
@@ -385,21 +408,18 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public String getFilteredContentJobOfferNames(ArrayList<JobOffer> duplicateJobOffers) {
-        boolean hasDuplicate;
+        boolean isDuplicate;
         StringBuilder output = new StringBuilder();
         for (JobOffer jobOffer : filteredJobs) {
-            hasDuplicate = false;
+            isDuplicate = false;
             for (JobOffer duplicateJobOffer : duplicateJobOffers) {
                 if (jobOffer.isSameJobOffer(duplicateJobOffer)) {
-                    hasDuplicate = true;
+                    isDuplicate = true;
                     break;
                 }
             }
-            if (!hasDuplicate) {
-                output.append(jobOffer.getJob().toString());
-                output.append(" at ");
-                output.append(jobOffer.getCompanyName().toString());
-                output.append("\n");
+            if (!isDuplicate) {
+                output.append(getFilteredContentJobOfferNames());
             }
         }
         return output.toString();
@@ -424,21 +444,22 @@ public class ModelManager extends ComponentManager implements Model {
      */
     @Override
     public String getFilteredCandidateNames(ArrayList<Candidate> duplicateCandidates) {
-        boolean hasDuplicate;
+        boolean isDuplicate;
         StringBuilder output = new StringBuilder();
         for (Candidate candidate : filteredCandidates) {
-            hasDuplicate = false;
+            isDuplicate = false;
             for (Candidate duplicateCandidate : duplicateCandidates) {
                 if (candidate.isSamePerson(duplicateCandidate)) {
-                    hasDuplicate = true;
+                    isDuplicate = true;
                     break;
                 }
             }
-            if (!hasDuplicate) {
-                output.append(candidate.getName().toString());
-                output.append("\n");
+            if (!isDuplicate) {
+                output.append(getFilteredCandidateNames());
             }
         }
         return output.toString();
     }
 }
+
+

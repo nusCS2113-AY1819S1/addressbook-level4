@@ -45,7 +45,7 @@ public class AddCandidateCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_JOB + "Waiter "
-            + PREFIX_EDUCATION + "O Level "
+            + PREFIX_EDUCATION + "OLEVELS "
             + PREFIX_SALARY + "1000 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";

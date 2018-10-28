@@ -4,9 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.recruit.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
 import static seedu.recruit.model.Model.PREDICATE_SHOW_ALL_JOBOFFERS;
 
+import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.model.Model;
-import seedu.recruit.ui.MainWindow;
 
 /**
  * Lists all companies, as well as all job offers, in the recruit book to the user.
@@ -23,7 +24,7 @@ public class ListCompanyCommand extends Command {
         requireNonNull(model);
         model.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
         model.updateFilteredCompanyJobList(PREDICATE_SHOW_ALL_JOBOFFERS);
-        MainWindow.switchToCompanyBook();
+        EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

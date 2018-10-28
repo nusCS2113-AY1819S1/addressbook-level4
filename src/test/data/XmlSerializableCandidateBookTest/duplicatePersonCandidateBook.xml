@@ -9,7 +9,7 @@
         <email>alice@example.com</email>
         <address>123, Jurong West Ave 6, #08-111</address>
         <job>Waiter</job>
-        <education>O level</education>
+        <education>OLEVELS</education>
         <salary>1000</salary>
         <tagged>friends</tagged>
     </candidates>
@@ -23,7 +23,7 @@
         <email>pauline@example.com</email>
         <address>4th street</address>
         <job>Waiter</job>
-        <education>O level</education>
+        <education>OLEVELS</education>
         <salary>1000</salary>
     </candidates>
 
