@@ -29,7 +29,11 @@ public class Filetype {
     }
 
     private final String value;
-    
+
+    /**
+     * Constructs a {@code Filetype} object.
+     * @param filetype a string representing the filetype.
+     */
     public Filetype(String filetype) {
         requireNonNull(filetype);
         checkArgument(isValidFiletype(filetype), MESSAGE_FILETYPE_CONSTRAINTS);
