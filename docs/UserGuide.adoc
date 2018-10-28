@@ -273,9 +273,9 @@ Format: +
 ****
 * Note that there are specific formats required for the dates and months entered.
 * For *summary by date*, START_DATE/END_DATE must be in the format of
-dd-mm-yyyy where dd represents day, mm represents month, yyyy represents year. All parameters should be specified in numerical form.
-* For *summary by month*, START_MONTH/END_MONTH must in the format of mmm-yyyy, mmm represents the month with its three letter representations, and
-yyyy represents the year in its numerical form.
+`dd-mm-yyyy` where `dd` represents day, `mm` represents month, `yyyy` represents year. All parameters should be specified in numerical form.
+* For *summary by month*, START_MONTH/END_MONTH must in the format of `mmm-yyyy`, `mmm` represents the month with its three letter representations, and
+`yyyy` represents the year in its numerical form.
 * Note that for mmm, it is case-insensitive, meaning both *"APR"* and *"apr"* are accepted
 *
 ****
