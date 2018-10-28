@@ -1,4 +1,4 @@
-package seedu.address.logic.parser.user;
+package seedu.address.logic.drinkparser.user;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -6,15 +6,27 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HistoryCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.parser.DeleteCommandParser;
+import seedu.address.logic.parser.EditCommandParser;
+import seedu.address.logic.parser.FindCommandParser;
+import seedu.address.logic.parser.SelectCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+
 
 /**
  * Parses user input.
  */
-public class ManagerParser {
+public class StockTakerParser {
 
     /**
      * Used for initial separation of command word and args.
@@ -35,18 +47,37 @@ public class ManagerParser {
         }
 
         String commandWord = matcher.group("commandWord");
-
         final String arguments = matcher.group("arguments");
 
         switch (commandWord) {
-        //case AddItemCommand.COMMAND_WORD:
-        //    return new AddDrinkCommandParser().parse(arguments);
 
-        // case CreateAccountCommand.COMMAND_WORD:
-        //    return new CreateAccountCommandParser().parse(arguments);
+        //case SellDrinkCommand.COMMAND_WORD:
+        //    return new SellCommandParser().parse(arguments);
+
         //case ChangePasswordCommand.COMMAND_WORD:
         //    return new ChangePasswordCommandParser().parse(arguments);
 
+        //existing command
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments);
+
+        case SelectCommand.COMMAND_WORD:
+            return new SelectCommandParser().parse(arguments);
+
+        case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommandParser().parse(arguments);
+
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
+
+        case FindCommand.COMMAND_WORD:
+            return new FindCommandParser().parse(arguments);
+
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
+
+        case HistoryCommand.COMMAND_WORD:
+            return new HistoryCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

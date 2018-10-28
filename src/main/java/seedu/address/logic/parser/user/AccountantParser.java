@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.user.ChangePasswordCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -40,8 +39,8 @@ public class AccountantParser {
 
         switch (commandWord) {
 
-        case ChangePasswordCommand.COMMAND_WORD:
-            return new ChangePasswordCommandParser ().parse(arguments);
+        //case ChangePasswordCommand.COMMAND_WORD:
+        //    return new ChangePasswordCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

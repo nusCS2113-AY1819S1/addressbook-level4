@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.drinkcommands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
@@ -7,13 +7,16 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
+import seedu.address.logic.drinkcommands.exceptions.DrinkCommandException;
+import seedu.address.model.DrinkModel;
+import seedu.address.model.drink.Name;
+import seedu.address.model.drink.Quantity;
 
 /**
  * Adds a person to the address book.
+ * // TODO: STUB
  */
-public class SellCommand extends Command {
+public class SellDrinkCommand extends DrinkCommand {
 
     public static final String COMMAND_WORD = "sell";
 
@@ -33,24 +36,24 @@ public class SellCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
     public static final String MESSAGE_FAILURE = "The quantity entered exceed the stock";
 
-    private final String itemName;
-    private final String date;
-    private final String quantity;
-    private final String price;
+    private final Name drinkName;
+    // private final Date date; // TODO: add date support
+    private final Quantity quantity;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates a SellDrinkCommand to sell the specified drink {@code Name}
      */
-    public SellCommand(String itemName, String date, String quantity, String price) {
-        requireAllNonNull(itemName, date, quantity, price);
-        this.itemName = itemName;
-        this.date = date;
+    public SellDrinkCommand(Name drinkName, Quantity quantity) {
+        requireAllNonNull(drinkName, quantity);
+        this.drinkName = drinkName;
         this.quantity = quantity;
-        this.price = price;
+        // date =
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public DrinkCommandResult execute(DrinkModel model, CommandHistory history) throws DrinkCommandException {
+        requireAllNonNull(model);
+
         //        requireNonNull(model);
         //
         //        if (model.hasPerson(toAdd)) {
@@ -59,12 +62,12 @@ public class SellCommand extends Command {
         //
         //        model.addPerson(toAdd);
         //        model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, itemName, date, quantity, price));
+        return new DrinkCommandResult(String.format(MESSAGE_SUCCESS, drinkName, quantity));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof SellCommand); // instanceof handles nulls;
+                || (other instanceof SellDrinkCommand); // instanceof handles nulls;
     }
 }

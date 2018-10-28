@@ -1,4 +1,4 @@
-package seedu.address.logic.parser.user;
+package seedu.address.logic.drinkparser.user;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -6,10 +6,12 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.drinkcommands.AddDrinkCommand;
+import seedu.address.logic.drinkcommands.DrinkCommand;
+import seedu.address.logic.drinkcommands.ExitCommand;
+import seedu.address.logic.drinkcommands.HelpCommand;
+import seedu.address.logic.drinkparser.AddDrinkCommandParser;
+import seedu.address.logic.drinkparser.exceptions.DrinkParseException;
 
 /**
  * Parses user input.
@@ -26,12 +28,12 @@ public class ManagerParser {
      *
      * @param userInput full user input string
      * @return the command based on the user input
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws DrinkParseException if the user input does not conform the expected format
      */
-    public Command parseCommand(String userInput) throws ParseException {
+    public DrinkCommand parseCommand(String userInput) throws DrinkParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            throw new DrinkParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
         String commandWord = matcher.group("commandWord");
@@ -39,11 +41,11 @@ public class ManagerParser {
         final String arguments = matcher.group("arguments");
 
         switch (commandWord) {
-        //case AddItemCommand.COMMAND_WORD:
-        //    return new AddDrinkCommandParser().parse(arguments);
+        case AddDrinkCommand.COMMAND_WORD:
+            return new AddDrinkCommandParser().parse(arguments);
 
-        // case CreateAccountCommand.COMMAND_WORD:
-        //    return new CreateAccountCommandParser().parse(arguments);
+        //case CreateAccountCommand.COMMAND_WORD:
+        //    return new CreateAccountCommandParser().parse (arguments);
         //case ChangePasswordCommand.COMMAND_WORD:
         //    return new ChangePasswordCommandParser().parse(arguments);
 
@@ -55,7 +57,7 @@ public class ManagerParser {
             return new HelpCommand();
 
         default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            throw new DrinkParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 
