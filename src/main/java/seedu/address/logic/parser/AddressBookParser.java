@@ -97,26 +97,20 @@ public class AddressBookParser {
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
-<<<<<<< HEAD
         case UndoSearchCommand.COMMAND_WORD:
             return new UndoSearchCommand();
-=======
+
         case AddSkillCommand.COMMAND_WORD:
             return new AddSkillCommandParser().parse(arguments);
 
-
         case AddSkillLevelCommand.COMMAND_WORD:
             return new AddSkillLevelCommandParser().parse(arguments);
-
-        case UndoSearchCommand.COMMAND_WORD:
-            return new UndoSearchCommand();
 
         case BudgetCommand.COMMAND_WORD:
             return new BudgetCommandParser().parse(arguments);
 
         case BudgetCalculationCommand.COMMAND_WORD:
             return new BudgetCalculationCommandParser().parse(arguments);
->>>>>>> f9374283a72493067a0bda36ce277c57c3445d3c
 
         case ViewClubBudgetsCommand.COMMAND_WORD:
             return new ViewClubBudgetsCommandParser().parse(arguments);
