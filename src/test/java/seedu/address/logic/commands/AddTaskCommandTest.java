@@ -170,11 +170,6 @@ public class AddTaskCommandTest {
         }
 
         @Override
-        public void addMilestone(Milestone milestone) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ObservableList<Task> getFilteredTaskList() {
             throw new AssertionError("This method should not be called.");
         }

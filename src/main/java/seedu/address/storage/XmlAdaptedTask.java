@@ -57,7 +57,9 @@ public class XmlAdaptedTask {
         this.expectedNumOfHours = expectedNumOfHours;
         this.completedNumOfHours = completedNumOfHours;
         this.isCompleted = isCompleted;
-        this.milestonelist = milestonelist;
+        if (milestoneList != null) {
+            this.milestonelist = new ArrayList<>(milestonelist);
+        }
     }
     /**
      * Constructs an {@code XmlAdaptedTask} with the given task details.
@@ -143,11 +145,10 @@ public class XmlAdaptedTask {
         final boolean modelIsCompleted = isCompleted;
 
         final Set<Milestone> milestoneEntries = new HashSet<>();
-        if (milestonelist != null && !milestonelist.isEmpty()) {
-            for (XmlAdaptedMilestone entry : milestonelist) {
-                milestoneEntries.add(entry.toModelType());
-            }
+        for (XmlAdaptedMilestone entry : milestonelist) {
+            milestoneEntries.add(entry.toModelType());
         }
+
         return new Task(modelDeadline, modelTitle, modelDescription, modelPriority, modelExpectedNumOfHours,
                 modelCompletedNumOfHours, modelIsCompleted, milestoneEntries);
     }

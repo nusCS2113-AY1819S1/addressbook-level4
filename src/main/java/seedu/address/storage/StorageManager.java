@@ -9,11 +9,9 @@ import com.google.common.eventbus.Subscribe;
 
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.AddMilestoneChangedEvent;
 import seedu.address.commons.events.model.TaskBookChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.logic.commands.AddMilestoneCommand;
 import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.UserPrefs;
 
@@ -91,17 +89,4 @@ public class StorageManager extends ComponentManager implements Storage {
             raise(new DataSavingExceptionEvent(e));
         }
     }
-
-    //@@author JeremyInElysium
-    @Override
-    @Subscribe
-    public void handleAddMilestoneChangedEvent(AddMilestoneChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
-        try {
-            saveTaskBook(event.data);
-        } catch (IOException e) {
-            raise(new DataSavingExceptionEvent(e));
-        }
-    }
-
 }

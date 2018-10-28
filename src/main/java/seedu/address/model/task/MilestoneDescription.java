@@ -1,7 +1,6 @@
 package seedu.address.model.task;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 //@@author JeremyInElysium
 /**
@@ -37,7 +36,8 @@ public class MilestoneDescription {
      * @return true if valid
      */
     public static boolean isValidMilestoneDescription(String milestoneDescription) {
-        return milestoneDescription.matches(MILESTONEDESCRIPTION_VALIDATION_REGEX);
+        return true;
+        //milestoneDescription.matches(MILESTONEDESCRIPTION_VALIDATION_REGEX);
     }
 
     public String getMilestoneDescription() {

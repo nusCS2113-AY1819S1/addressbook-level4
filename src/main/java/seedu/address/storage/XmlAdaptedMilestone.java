@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import java.util.Objects;
+
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -7,7 +9,6 @@ import seedu.address.model.task.Milestone;
 import seedu.address.model.task.MilestoneDescription;
 import seedu.address.model.task.Rank;
 
-import java.util.Objects;
 
 //@@author JeremyInElysium
 /**
@@ -29,10 +30,9 @@ public class XmlAdaptedMilestone {
 
     public XmlAdaptedMilestone() {}
 
-     /**
+    /**
      * Constructs a {@code XmlAdaptedMilestone} with the given {@code milestone}.
      */
-
     public XmlAdaptedMilestone(MilestoneDescription milestoneDescription, Rank rank) {
         this.descrip = milestoneDescription.getMilestoneDescription();
         this.rank = rank.getRank();
@@ -55,7 +55,7 @@ public class XmlAdaptedMilestone {
      */
 
     public Milestone toModelType() throws IllegalValueException {
-        if (descrip == null){
+        if (descrip == null) {
             throw new IllegalValueException(String.format(
                     MISSING_FIELD_MESSAGE_FORMAT, MilestoneDescription.class.getSimpleName()));
         }
@@ -65,7 +65,7 @@ public class XmlAdaptedMilestone {
         }
         final MilestoneDescription modelMilestoneDescription = new MilestoneDescription(descrip);
 
-        if (rank == null){
+        if (rank == null) {
             throw new IllegalValueException(String.format(
                     MISSING_FIELD_MESSAGE_FORMAT, Rank.class.getSimpleName()));
         }
