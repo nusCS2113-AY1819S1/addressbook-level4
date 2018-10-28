@@ -1,8 +1,11 @@
 package seedu.planner.ui;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -25,9 +28,15 @@ import seedu.planner.logic.commands.SelectCommand;
 import seedu.planner.logic.commands.SortCommand;
 import seedu.planner.logic.commands.SummaryCommand;
 import seedu.planner.logic.commands.UndoCommand;
-import seedu.planner.model.tag.Tag;
 
+/**
+ *  This object is responsible for the logic behind the {@code AutoCompleteBox} that decides the range of possible
+ *  suggested texts that are to appear whenever a user enters a new word.
+ */
 public class CustomSuggestionProvider {
+
+    private static String patternStr = "t/(.*)";
+    private static Pattern pattern = Pattern.compile(patternStr);
 
     private static Set<String> commandKeywordsSet =
             new HashSet<>(Arrays.asList(AddCommand.COMMAND_WORD, ClearCommand.COMMAND_WORD, DeleteCommand.COMMAND_WORD,
@@ -37,12 +46,15 @@ public class CustomSuggestionProvider {
                     ListCommand.COMMAND_WORD, RedoCommand.COMMAND_WORD, SelectCommand.COMMAND_WORD,
                     SortCommand.COMMAND_WORD, SummaryCommand.COMMAND_WORD, UndoCommand.COMMAND_WORD));
 
+    private static Set<String> possibleTagKeywordsSet = new HashSet<>(Arrays.asList(AddCommand.COMMAND_WORD,
+            EditCommand.COMMAND_WORD));
+
     private static Set<String> sortKeywordsSet = Stream.concat(SortCommand.ORDER_SET.stream(),
             SortCommand.CATEGORY_SET.stream()).collect(Collectors.toSet());
 
     private static Set<String> emptySet = new HashSet<>();
 
-    private static Set<String> tagKeywordsSet = new HashSet<>();
+    private static Map<String, Integer> tagKeywordsMap = new HashMap<>();
 
     private static SuggestionProvider<String> suggestionProvider = SuggestionProvider.create(commandKeywordsSet);
 
@@ -58,9 +70,10 @@ public class CustomSuggestionProvider {
         return suggestionProvider;
     }
 
-    public static void updateSuggestions(String inputString) {
-        String[] inputs = inputString.split(" ");
+    public static void updateSuggestions(String userInput){
+        String[] inputs = userInput.split(" ");
         clearSuggestions();
+
         if (inputs[0].equals(SortCommand.COMMAND_WORD) && inputs.length > 1) {
             if (SortCommand.ORDER_SET.contains(inputs[1])) {
                 updateSuggestions(SortCommand.CATEGORY_SET);
@@ -71,22 +84,22 @@ public class CustomSuggestionProvider {
             } else {
                 updateSuggestions(sortKeywordsSet);
             }
+        } /*else if (possibleTagKeywordsSet.contains(inputs[0])) { // either add or edit
+            if (pattern.matcher(inputs[inputs.length-1]).matches()){
+                updateSuggestions(tagKeywordsMap.keySet());
+            }
+        }*/ else if (inputs[0].equals(FindTagCommand.COMMAND_WORD) && inputs.length > 1) {
+            updateSuggestions(tagKeywordsMap.keySet());
         } else if (commandKeywordsSet.contains(inputs[0]) || inputs.length > 1) {
             updateSuggestions(emptySet);
         } else {
             updateSuggestions(commandKeywordsSet);
         }
-    }
-
-    public CustomSuggestionProvider() {
-    }
-
-    private void createTagSet(){
 
     }
 
-    public static void addTagToAutoCompleteTagSet(Tag tag) {
-        tagKeywordsSet.add(tag.tagName);
+    public static void updateTagSet(HashMap<String, Integer> newTagKeywordsMap) {
+        tagKeywordsMap = newTagKeywordsMap;
     }
 
 }

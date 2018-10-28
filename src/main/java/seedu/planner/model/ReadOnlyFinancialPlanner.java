@@ -1,5 +1,7 @@
 package seedu.planner.model;
 
+import java.util.HashMap;
+
 import javafx.collections.ObservableList;
 
 import seedu.planner.model.record.DateBasedLimitList;
@@ -19,6 +21,8 @@ public interface ReadOnlyFinancialPlanner {
     ObservableList<Record> getRecordList();
 
     SummaryMap getSummaryMap();
+
+    HashMap<String, Integer> getTagMap();
 
     //TODO: to be removed when storage is combined
     void setSummaryMap(SummaryMap summaryMap);

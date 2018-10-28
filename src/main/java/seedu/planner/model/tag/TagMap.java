@@ -1,0 +1,67 @@
+package seedu.planner.model.tag;
+
+import java.util.HashMap;
+
+import javafx.collections.ObservableList;
+import seedu.planner.model.record.Record;
+import seedu.planner.model.record.UniqueRecordList;
+
+/**
+ *  This object represents the in memory model of a Hashmap containing integers as values which can be retrieved with
+ *  Strings as the key. It keeps track of the usage of each unique tag in the model.
+ *  It supports creation from scratch, addition, deletion, updating and finding the size of the Hashmap.
+ */
+public class TagMap {
+
+    private HashMap<String, Integer> tagMap = new HashMap<>();
+
+    public TagMap(){
+    }
+
+    public int size(){
+        return tagMap.size();
+    }
+
+    public HashMap<String, Integer> makeTagMapFromRecordList(UniqueRecordList internalList){
+        return tagMap = internalList.makeTagMap();
+    }
+
+    public void addRecordToTagMap(Record record){
+        for (Tag tag : record.getTags()){
+            if (tagMap.containsKey(tag.tagName)){
+                tagMap.replace(tag.tagName, tagMap.get(tag.tagName) + 1);
+            } else {
+                tagMap.put(tag.tagName, 1);
+            }
+        }
+    }
+
+    public void removeRecordFromTagMap(Record record){
+        for (Tag tag : record.getTags()){
+            if (tagMap.containsKey(tag.tagName)){
+                tagMap.replace(tag.tagName, tagMap.get(tag.tagName) - 1);
+                if (tagMap.get(tag.tagName) == 0){
+                    tagMap.remove(tag.tagName);
+                }
+            }
+        }
+    }
+
+    public void updateRecordInTagMap(Record initialRecord, Record editedRecord){
+        removeRecordFromTagMap(initialRecord);
+        addRecordToTagMap(editedRecord);
+    }
+
+    public void setTagMap(HashMap<String, Integer> tagMap){
+        this.tagMap = tagMap;
+    }
+
+    public HashMap<String, Integer> getAsReadOnlyTagMap(){
+        return this.tagMap;
+    }
+
+    @Override
+    public String toString() {
+        return tagMap.size() + " Key Values in Map";
+    }
+}
