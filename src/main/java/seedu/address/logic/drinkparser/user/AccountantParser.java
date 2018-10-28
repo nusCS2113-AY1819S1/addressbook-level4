@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 import seedu.address.logic.drinkcommands.DrinkCommand;
 import seedu.address.logic.drinkcommands.ExitCommand;
 import seedu.address.logic.drinkcommands.HelpCommand;
-import seedu.address.logic.drinkcommands.user.ChangePasswordCommand;
 import seedu.address.logic.drinkparser.exceptions.DrinkParseException;
 
 /**

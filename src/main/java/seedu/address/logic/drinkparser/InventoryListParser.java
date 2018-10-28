@@ -38,9 +38,9 @@ public class InventoryListParser {
 
         switch (commandWord) {
 
-            case AddDrinkCommand.COMMAND_WORD:
-                return new AddDrinkCommandParser().parse(arguments);
-/*
+        case AddDrinkCommand.COMMAND_WORD:
+            return new AddDrinkCommandParser().parse(arguments);
+        /*
             case SellDrinkCommand.COMMAND_WORD:
                 return new SellDrinkCommandParser ().parse (arguments);
 
@@ -80,9 +80,9 @@ public class InventoryListParser {
 
             case RedoCommand.COMMAND_WORD:
                 return new RedoCommand();
-*/
-            default:
-                throw new DrinkParseException(MESSAGE_UNKNOWN_COMMAND);
+        */
+        default:
+            throw new DrinkParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 }
