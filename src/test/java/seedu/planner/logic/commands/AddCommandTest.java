@@ -20,10 +20,8 @@ import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.Model;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
-import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
-import seedu.planner.model.summary.Summary;
 import seedu.planner.testutil.RecordBuilder;
 
 public class AddCommandTest {
@@ -113,17 +111,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Summary> getSummaryList(Date date1, Date date2) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ObservableList<Limit> getLimitList() {
             throw new AssertionError("This method should not be called.");
         }
         @Override
         public ReadOnlyFinancialPlanner getFinancialPlanner() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Record> getRecordsThisMonth() {
+            throw new AssertionError("This method should not be called");
         }
 
         @Override

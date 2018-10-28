@@ -7,19 +7,23 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.planner.commons.core.ComponentManager;
+import seedu.planner.commons.core.EventsCenter;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
 import seedu.planner.commons.events.model.LimitListChangedEvent;
-import seedu.planner.commons.events.model.SummaryMapChangedEvent;
 import seedu.planner.commons.events.model.TagMapChangedEvent;
+import seedu.planner.commons.events.ui.UpdateWelcomePanelEvent;
+import seedu.planner.commons.util.DateUtil;
 import seedu.planner.model.record.Date;
+import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
-import seedu.planner.model.summary.Summary;
+import seedu.planner.model.summary.CategoryStatisticsList;
 
 /**
  * Represents the in-memory model of the financial planner data.
@@ -30,6 +34,9 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedFinancialPlanner versionedFinancialPlanner;
     private final FilteredList<Record> filteredRecords;
     private final FilteredList<Limit> limits;
+
+    private final Month currentMonth;
+    private final FilteredList<Record> recordsInCurrentMonth;
 
     /**
      * Initializes a ModelManager with the given financialPlanner and userPrefs.
@@ -44,17 +51,30 @@ public class ModelManager extends ComponentManager implements Model {
         versionedFinancialPlanner = new VersionedFinancialPlanner(financialPlanner);
         filteredRecords = new FilteredList<>(versionedFinancialPlanner.getRecordList());
         limits = new FilteredList<Limit>(versionedFinancialPlanner.getLimitList());
+        currentMonth = getCurrentMonth();
+        recordsInCurrentMonth = new FilteredList<>(versionedFinancialPlanner.getRecordList(),
+                new DateIsWithinIntervalPredicate(DateUtil.generateFirstOfMonth(currentMonth),
+                        DateUtil.generateLastOfMonth(currentMonth)));
+        recordsInCurrentMonth.addListener((InvalidationListener) observable -> {
+            CategoryStatisticsList statsList = new CategoryStatisticsList(recordsInCurrentMonth);
+            EventsCenter.getInstance().post(new UpdateWelcomePanelEvent(statsList.getReadOnlyStatsList()));
+        });
+        EventsCenter.getInstance().registerHandler(this);
     }
 
     public ModelManager() {
         this(new FinancialPlanner(), new UserPrefs());
     }
 
+    private Month getCurrentMonth() {
+        Date currentDate = DateUtil.getDateToday();
+        return new Month(currentDate.getMonth(), currentDate.getYear());
+    }
+
     @Override
     public void resetData(ReadOnlyFinancialPlanner newData) {
         versionedFinancialPlanner.resetData(newData);
         indicateFinancialPlannerChanged();
-        indicateSummaryMapChanged();
         indicateTagMapChanged();
     }
 
@@ -63,16 +83,15 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedFinancialPlanner;
     }
 
+    public ObservableList<Record> getRecordsThisMonth() {
+        return recordsInCurrentMonth;
+    }
+
     //=========== Event management methods =========================================================
 
     /** Raises an event to indicate the model has changed */
     private void indicateFinancialPlannerChanged() {
         raise(new FinancialPlannerChangedEvent(versionedFinancialPlanner));
-    }
-
-    /** Raises an event to indicate the summary map has changed */
-    private void indicateSummaryMapChanged() {
-        raise(new SummaryMapChangedEvent(versionedFinancialPlanner));
     }
 
     /** Raises an event to indicate the limit list has changed */
@@ -97,10 +116,8 @@ public class ModelManager extends ComponentManager implements Model {
     public void deleteRecord(Record target) {
         requireNonNull(target);
         versionedFinancialPlanner.removeRecord(target);
-        versionedFinancialPlanner.removeRecordFromSummary(target);
         versionedFinancialPlanner.removeRecordFromTagMap(target);
         indicateFinancialPlannerChanged();
-        indicateSummaryMapChanged();
         indicateTagMapChanged();
     }
 
@@ -116,11 +133,9 @@ public class ModelManager extends ComponentManager implements Model {
     public void addRecord(Record record) {
         requireNonNull(record);
         versionedFinancialPlanner.addRecord(record);
-        versionedFinancialPlanner.addRecordToSummary(record);
         versionedFinancialPlanner.addRecordToTagMap(record);
         updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
         indicateFinancialPlannerChanged();
-        indicateSummaryMapChanged();
         indicateTagMapChanged();
     }
 
@@ -128,10 +143,8 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateRecord(Record target, Record editedRecord) {
         requireAllNonNull(target, editedRecord);
         versionedFinancialPlanner.updateRecord(target, editedRecord);
-        versionedFinancialPlanner.updateSummary(target, editedRecord);
         versionedFinancialPlanner.updateRecordInTagMap(target, editedRecord);
         indicateFinancialPlannerChanged();
-        indicateSummaryMapChanged();
         indicateTagMapChanged();
     }
 
@@ -205,7 +218,6 @@ public class ModelManager extends ComponentManager implements Model {
     public void undoFinancialPlanner() {
         versionedFinancialPlanner.undo();
         indicateFinancialPlannerChanged();
-        indicateSummaryMapChanged();
         indicateLimitListChanged();
         indicateTagMapChanged();
     }
@@ -214,7 +226,6 @@ public class ModelManager extends ComponentManager implements Model {
     public void redoFinancialPlanner() {
         versionedFinancialPlanner.redo();
         indicateFinancialPlannerChanged();
-        indicateSummaryMapChanged();
         indicateLimitListChanged();
         indicateTagMapChanged();
     }
@@ -222,12 +233,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void commitFinancialPlanner() {
         versionedFinancialPlanner.commit();
-    }
-
-    //=========== Summary Display =================================================================================
-
-    public ObservableList<Summary> getSummaryList(Date startDate, Date endDate) {
-        return versionedFinancialPlanner.getSummaryList(startDate, endDate);
     }
 
     @Override

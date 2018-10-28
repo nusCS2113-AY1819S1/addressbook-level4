@@ -6,6 +6,7 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -16,8 +17,13 @@ import seedu.planner.commons.core.Config;
 import seedu.planner.commons.core.GuiSettings;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.ui.ExitAppRequestEvent;
+import seedu.planner.commons.events.ui.RecordPanelSelectionChangedEvent;
 import seedu.planner.commons.events.ui.ShowHelpRequestEvent;
+import seedu.planner.commons.events.ui.ShowPieChartStatsEvent;
+import seedu.planner.commons.events.ui.ShowSummaryTableEvent;
+import seedu.planner.commons.events.ui.UpdateWelcomePanelEvent;
 import seedu.planner.logic.Logic;
+import seedu.planner.model.Model;
 import seedu.planner.model.UserPrefs;
 
 /**
@@ -32,17 +38,20 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    private Model model;
 
     // Independent Ui parts residing in this Ui container
-    private DetailedRecordCard detailedRecordCard;
     private RecordListPanel recordListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
-    private SummaryDisplay summaryDisplay;
+    // Panels in the main Ui Panel
+    private DetailedRecordCard detailedRecordCard;
+    private StatsDisplayPanel statsDisplayPanel;
+    private WelcomePanel welcomePanel;
 
     @FXML
-    private StackPane detailedRecordCardPlaceholder;
+    private StackPane mainUiPanelPlaceholder;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -59,7 +68,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
-    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
+    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, Model model) {
         super(FXML, primaryStage);
 
         // Set dependencies
@@ -67,6 +76,7 @@ public class MainWindow extends UiPart<Stage> {
         this.logic = logic;
         this.config = config;
         this.prefs = prefs;
+        this.model = model;
 
         // Configure the UI
         setTitle(config.getAppTitle());
@@ -120,11 +130,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        summaryDisplay = new SummaryDisplay();
-        detailedRecordCardPlaceholder.getChildren().add(summaryDisplay.getRoot());
-
-        detailedRecordCard = new DetailedRecordCard();
-        detailedRecordCardPlaceholder.getChildren().add(detailedRecordCard.getRoot());
+        fillMainUiPanel();
 
         recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
         recordListPanelPlaceholder.getChildren().add(recordListPanel.getRoot());
@@ -137,6 +143,21 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
+     * Fills the main Ui Panel which will be used for all ui output like welcomePanel,statistics,
+     * summary or selection
+     */
+    private void fillMainUiPanel() {
+        statsDisplayPanel = new StatsDisplayPanel();
+        mainUiPanelPlaceholder.getChildren().add(statsDisplayPanel.getRoot());
+
+        detailedRecordCard = new DetailedRecordCard();
+        mainUiPanelPlaceholder.getChildren().add(detailedRecordCard.getRoot());
+
+        welcomePanel = new WelcomePanel(model);
+        mainUiPanelPlaceholder.getChildren().add(welcomePanel.getRoot());
     }
 
     void hide() {
@@ -195,14 +216,46 @@ public class MainWindow extends UiPart<Stage> {
         return recordListPanel;
     }
 
-    // TODO: [UI] Modify this next time
-    void releaseResources() {
-        //browserPanel.freeResources();
-    }
-
     @Subscribe
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
+    }
+
+    /* ------------------ Delegates for event management system for switching of panels ----------------------------- */
+    @Subscribe
+    private void handleShowSummaryTableEvent(ShowSummaryTableEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        for (Node node: mainUiPanelPlaceholder.getChildren()) {
+            node.setVisible(false);
+        }
+        statsDisplayPanel.handleShowSummaryTableEvent(event);
+    }
+
+    @Subscribe
+    private void handleShowPieCharStatsEvent(ShowPieChartStatsEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        for (Node node: mainUiPanelPlaceholder.getChildren()) {
+            node.setVisible(false);
+        }
+        statsDisplayPanel.handleShowPieChartStatsEvent(event);
+    }
+
+    @Subscribe
+    private void handleRecordPanelSelectionChangedEvent(RecordPanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        for (Node node: mainUiPanelPlaceholder.getChildren()) {
+            node.setVisible(false);
+        }
+        detailedRecordCard.handleRecordPanelSelectionChangedEvent(event);
+    }
+
+    @Subscribe
+    private void handleUpdateWelcomePanelEvent(UpdateWelcomePanelEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        for (Node node: mainUiPanelPlaceholder.getChildren()) {
+            node.setVisible(false);
+        }
+        welcomePanel.handleUpdateWelcomePanelEvent(event);
     }
 }

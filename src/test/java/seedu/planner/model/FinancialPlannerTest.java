@@ -22,8 +22,8 @@ import javafx.collections.ObservableList;
 import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
+import seedu.planner.model.record.UniqueRecordList;
 import seedu.planner.model.record.exceptions.DuplicateRecordException;
-import seedu.planner.model.summary.SummaryMap;
 import seedu.planner.testutil.RecordBuilder;
 
 public class FinancialPlannerTest {
@@ -41,7 +41,7 @@ public class FinancialPlannerTest {
     @Test
     public void resetData_null_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        financialPlanner.resetData(null);
+        financialPlanner.resetData((UniqueRecordList) null);
     }
 
     @Test
@@ -100,7 +100,7 @@ public class FinancialPlannerTest {
     private static class FinancialPlannerStub implements ReadOnlyFinancialPlanner {
         private final ObservableList<Record> records = FXCollections.observableArrayList();
         private final ObservableList<Limit> limits = FXCollections.observableArrayList();
-        private final SummaryMap summaryMap = new SummaryMap();
+
         FinancialPlannerStub(Collection<Record> records) {
             this.records.setAll(records);
         }
@@ -114,14 +114,6 @@ public class FinancialPlannerTest {
         public ObservableList<Limit> getLimitList() {
             return limits;
         }
-
-        @Override
-        public SummaryMap getSummaryMap() {
-            return summaryMap;
-        } //Dummy test to pass the check.
-
-        @Override
-        public void setSummaryMap(SummaryMap summaryMap) {} //see as above
 
         @Override
         public void setLimitList(DateBasedLimitList limitList) {} //see as above
