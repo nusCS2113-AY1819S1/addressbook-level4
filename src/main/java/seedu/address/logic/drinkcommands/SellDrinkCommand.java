@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.drinkcommands.exceptions.DrinkCommandException;
 import seedu.address.model.DrinkModel;
-import seedu.address.model.drink.Date;
 import seedu.address.model.drink.Name;
 import seedu.address.model.drink.Quantity;
 
@@ -38,11 +37,11 @@ public class SellDrinkCommand extends DrinkCommand {
     public static final String MESSAGE_FAILURE = "The quantity entered exceed the stock";
 
     private final Name drinkName;
-    private final Date date;
+    // private final Date date; // TODO: add date support
     private final Quantity quantity;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates a SellDrinkCommand to sell the specified drink {@code Name}
      */
     public SellDrinkCommand(Name drinkName, Quantity quantity) {
         requireAllNonNull(drinkName, quantity);
@@ -53,6 +52,8 @@ public class SellDrinkCommand extends DrinkCommand {
 
     @Override
     public DrinkCommandResult execute(DrinkModel model, CommandHistory history) throws DrinkCommandException {
+        requireAllNonNull(model);
+
         //        requireNonNull(model);
         //
         //        if (model.hasPerson(toAdd)) {
@@ -61,7 +62,7 @@ public class SellDrinkCommand extends DrinkCommand {
         //
         //        model.addPerson(toAdd);
         //        model.commitAddressBook();
-        return new DrinkCommandResult(String.format(MESSAGE_SUCCESS, drinkName, date, quantity, price));
+        return new DrinkCommandResult(String.format(MESSAGE_SUCCESS, drinkName, quantity));
     }
 
     @Override
