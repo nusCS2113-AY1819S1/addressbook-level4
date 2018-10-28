@@ -29,6 +29,8 @@ public class HelpCommandSystemTest extends EventManagerSystemTest {
 
     private final GuiRobot guiRobot = new GuiRobot();
 
+
+
     @Test
     public void openHelpWindow() {
         //use accelerator
@@ -61,6 +63,7 @@ public class HelpCommandSystemTest extends EventManagerSystemTest {
         getMainWindowHandle().focus();
 
         // assert that while the help window is open the UI updates correctly for a command execution
+        executeCommand(LoginCommand.COMMAND_WORD + " " + "u/admin" + " " + "p/root");
         executeCommand(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_EVENT.getOneBased());
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
@@ -70,7 +73,6 @@ public class HelpCommandSystemTest extends EventManagerSystemTest {
 
         // assert that the status bar too is updated correctly while the help window is open
         // note: the select command tested above does not update the status bar
-        executeCommand(LoginCommand.COMMAND_WORD + " " + "u/admin" + " " + "p/root");
         executeCommand(DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_EVENT.getOneBased());
         assertNotEquals(StatusBarFooter.SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
     }
