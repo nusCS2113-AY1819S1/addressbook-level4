@@ -31,6 +31,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.testutil.KeywordsOutputUtil;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -88,7 +89,8 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW
+                + KeywordsOutputUtil.getOutputString(null, null, null, null), 0);
         NameContainsKeywordsPredicate predicate = prepareNameContainsKeywordsPredicate(" ");
         FindCommand command = new FindPersonSubCommand(predicate);
         expectedModel.executeSearch(predicate);
@@ -98,7 +100,8 @@ public class FindCommandTest {
 
     @Test
     public void execute_excludeMultipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW
+                + KeywordsOutputUtil.getOutputString(null, null, null, Arrays.asList("kurz", "elle", "kunz")), 7);
         NameContainsKeywordsPredicate predicate = prepareNameContainsKeywordsPredicate("Kurz Elle Kunz");
         FindCommand command = new FindPersonSubCommand(predicate, true);
         expectedModel.executeSearch(predicate.negate());
@@ -108,7 +111,8 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW
+                + KeywordsOutputUtil.getOutputString(null, Arrays.asList("kurz", "elle", "kunz"), null, null), 3);
         NameContainsKeywordsPredicate predicate = prepareNameContainsKeywordsPredicate("Kurz Elle Kunz");
         FindCommand command = new FindPersonSubCommand(predicate);
         expectedModel.executeSearch(predicate);
@@ -118,7 +122,8 @@ public class FindCommandTest {
 
     @Test
     public void execute_searchByTag_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW
+                + KeywordsOutputUtil.getOutputString(Arrays.asList(VALID_TAG_FRIEND), null, null, null), 2);
         TagContainsKeywordsPredicate predicate = prepareTagContainsKeywordsPredicate(VALID_TAG_FRIEND);
         FindCommand command = new FindTagSubCommand(predicate);
         expectedModel.executeSearch(predicate);
@@ -128,7 +133,9 @@ public class FindCommandTest {
 
     @Test
     public void execute_excludeSearchByTag_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 9);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW
+                + KeywordsOutputUtil.getOutputString(null, null,
+                Collections.singletonList(VALID_TAG_HUSBAND), null), 9);
         TagContainsKeywordsPredicate predicate = prepareTagContainsKeywordsPredicate(VALID_TAG_HUSBAND);
         FindCommand command = new FindTagSubCommand(predicate, true);
         expectedModel.executeSearch(predicate.negate());
@@ -139,7 +146,9 @@ public class FindCommandTest {
 
     @Test
     public void execute_searchByTag_onePersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW
+                + KeywordsOutputUtil.getOutputString(Collections.singletonList(VALID_TAG_HUSBAND),
+                null, null, null), 1);
         TagContainsKeywordsPredicate predicate = prepareTagContainsKeywordsPredicate(VALID_TAG_HUSBAND);
         FindCommand command = new FindTagSubCommand(predicate);
         expectedModel.executeSearch(predicate);
@@ -149,14 +158,19 @@ public class FindCommandTest {
 
     @Test
     public void execute_twoBackToBackFindCommand_onePersonFound() {
-        String firstExpectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        String firstExpectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW
+                + KeywordsOutputUtil.getOutputString(Collections.singletonList(VALID_TAG_FRIEND),
+                null, null, null), 2);
+        String secondExpectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW
+                + KeywordsOutputUtil.getOutputString(Collections.singletonList(VALID_TAG_FRIEND),
+                Collections.singletonList("choo"), null, null), 1);
+
         TagContainsKeywordsPredicate firstPredicate = prepareTagContainsKeywordsPredicate(VALID_TAG_FRIEND);
         FindCommand firstCommand = new FindTagSubCommand(firstPredicate);
         expectedModel.executeSearch(firstPredicate);
         assertCommandSuccess(firstCommand, model, commandHistory, firstExpectedMessage, expectedModel);
         assertEquals(Arrays.asList(SEGWIT, KHOR), model.getFilteredPersonList());
 
-        String secondExpectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         NameContainsKeywordsPredicate secondPredicate = prepareNameContainsKeywordsPredicate("Choo");
         FindCommand secondCommand = new FindPersonSubCommand(secondPredicate);
         expectedModel.executeSearch(secondPredicate);
