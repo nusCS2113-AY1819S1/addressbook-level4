@@ -239,17 +239,17 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void rankFilteredTaskDeadline() {
-        filteredTasks.sort(Task.compareDeadlines);
+        versionedTodoList.sortTaskDate();
     }
 
     @Override
     public void rankFilteredTaskModule() {
-        filteredTasks.sort(Task.compareModule);
+        versionedTodoList.sortTaskModule();
     }
 
     @Override
     public void rankFilteredTaskPriority() {
-        filteredTasks.sort(Task.comparePriority);
+        versionedTodoList.sortTaskPriority();
     }
 
     //=========== Undo/Redo =================================================================================

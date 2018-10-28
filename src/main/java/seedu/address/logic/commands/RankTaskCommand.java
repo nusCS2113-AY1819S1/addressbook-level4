@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
@@ -18,9 +17,9 @@ public class RankTaskCommand extends Command {
             + "Parameters: date, module or priority\n"
             + "Example: " + COMMAND_WORD + " date";
 
-    public static final String MESSAGE_SUCCESS_DATE = "Listed uncompleted tasks in the rank of deadline date";
-    public static final String MESSAGE_SUCCESS_PRIORITY = "Listed tasks in the rank of priority";
-    public static final String MESSAGE_SUCCESS_MODULE = "Listed tasks in the rank of module code";
+    public static final String MESSAGE_SUCCESS_DATE = "Listed all tasks in the rank of deadline date";
+    public static final String MESSAGE_SUCCESS_PRIORITY = "Listed all tasks in the rank of priority";
+    public static final String MESSAGE_SUCCESS_MODULE = "Listed all tasks in the rank of module code";
 
     private final String filter;
 

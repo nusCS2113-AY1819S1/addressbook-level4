@@ -78,23 +78,17 @@ public class Task {
      *Compare two tasks based on their deadlines
      */
     public static Comparator<Task>compareDeadlines
-            =(Task a, Task b) -> a.getDate().toString().compareTo(b.getDate().toString());
+            =(Task a, Task b) -> a.getDate().value.compareTo(b.getDate().value);
     /*
      *Compare two tasks based on their module codes
      */
-    public static Comparator<Task>compareModule = new Comparator<Task>() {
-        public int compare (Task a, Task b) {
-            return a.getModule().toString().compareToIgnoreCase(b.getModule().toString());
-        }
-    };
+    public static Comparator<Task>compareModule
+            =(Task a, Task b) -> a.getModule().value.compareTo(b.getModule().value);
     /*
      *Compare two tasks based on their priority
      */
-    public static Comparator<Task>comparePriority = new Comparator<Task>() {
-        public int compare (Task a, Task b) {
-            return a.getPriority().toString().compareToIgnoreCase(b.getPriority().toString());
-        }
-    };
+    public static Comparator<Task>comparePriority
+            =(Task a, Task b) -> a.getPriority().value.compareTo(b.getPriority().value);
 
     /**
      * Returns true if both tasks have the same identity and data fields.

@@ -103,6 +103,18 @@ public class UniqueTaskList implements Iterable<Task> {
         return FXCollections.unmodifiableObservableList(internalList);
     }
 
+    public void sortDate() {
+        internalList.sort(Task.compareDeadlines);
+    }
+
+    public void sortModule() {
+        internalList.sort(Task.compareModule);
+    }
+
+    public void sortPriority() {
+        internalList.sort(Task.comparePriority);
+    }
+/*
     public List<Task> sortDeadline() {
         List<Task> sortedList = internalList;
         sortedList.sort(Task.compareDeadlines);
@@ -120,7 +132,7 @@ public class UniqueTaskList implements Iterable<Task> {
         sortedList.sort(Task.comparePriority);
         return sortedList;
     }
-
+*/
     @Override
     public Iterator<Task> iterator() {
         return internalList.iterator();
