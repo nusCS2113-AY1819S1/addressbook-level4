@@ -1,7 +1,12 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_END_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_START_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_START_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_TITLE;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -22,10 +27,22 @@ public class NoteEditCommand extends Command {
             + "INDEX "
             + "[" + PREFIX_MODULE_CODE
             + "NEW_MODULE_CODE] "
-            + "[" + PREFIX_NOTE_DATE
-            + "NEW_DATE]\n"
+            + "[" + PREFIX_NOTE_TITLE
+            + "NEW_TITLE] "
+            + "[" + PREFIX_NOTE_START_DATE
+            + "NEW_START_DATE] "
+            + "[" + PREFIX_NOTE_START_TIME
+            + "NEW_START_TIME] "
+            + "[" + PREFIX_NOTE_END_DATE
+            + "NEW_END_DATE] "
+            + "[" + PREFIX_NOTE_END_TIME
+            + "NEW_END_TIME] "
+            + "[" + PREFIX_NOTE_LOCATION
+            + "NEW_LOCATION]\n"
             + "Example: " + COMMAND_WORD + " "
-            + "4";
+            + "4 "
+            + PREFIX_NOTE_TITLE + "My second note "
+            + PREFIX_NOTE_START_TIME + "10:45 AM";
 
     public static final String MESSAGE_SUCCESS = "Note has been edited.";
     public static final String MESSAGE_CANCEL = "Edit note operation has been cancelled.";

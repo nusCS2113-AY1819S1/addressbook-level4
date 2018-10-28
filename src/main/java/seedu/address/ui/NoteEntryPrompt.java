@@ -17,7 +17,7 @@ import seedu.address.model.note.Note;
  */
 public class NoteEntryPrompt {
 
-    private static final String FXML = "NoteEntryPrompt.fxml";
+    private static final String NOTE_TAB_OVERWRITE = "    ";
     private static final String NOTE_TEXT_EMPTY_MESSAGE = "Saving failed! The field is empty.";
     private final KeyCombination keyCombinationSave = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN);
     private final KeyCombination keyCombinationCancel = new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN);
@@ -61,6 +61,8 @@ public class NoteEntryPrompt {
     /**
      * Handles the key press event, {@code keyEvent}.
      *
+     * Changes the behaviour of TAB key to add four spaces instead.
+     *
      * Key combination CTRL+S will save the note if the TextArea is not blank,
      * otherwise, displays an error message.
      *
@@ -68,6 +70,15 @@ public class NoteEntryPrompt {
      */
     @FXML
     private void handleKeyPress(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.TAB) {
+            String tempStr = noteContent.getText();
+
+            tempStr = tempStr.substring(0, tempStr.length() - 1);
+
+            noteContent.setText(tempStr);
+            noteContent.appendText(NOTE_TAB_OVERWRITE);
+        }
+
         if (feedbackLabelIsDisplayed && !keyEvent.getCode().isModifierKey()) {
             feedbackLabel.setText("");
             feedbackLabelIsDisplayed = false;

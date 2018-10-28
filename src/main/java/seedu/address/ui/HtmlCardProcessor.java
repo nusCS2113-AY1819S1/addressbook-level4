@@ -103,21 +103,27 @@ public class HtmlCardProcessor {
     }
 
     /**
-     * This method converts the string's escape characters to
-     * HTML readable escape characters.
+     * This method converts HTML special characters in the string to
+     * its literal character representation.
      *
-     * Characters '<' and '>' are replaced first to prevent
+     * The character '&' is replaced first so that HTML character entities in the string
+     * will be escaped.
+     *
+     * It is followed by replacing '<', and '>', to prevent
      * user input to be identified as HTML tags.
      *
+     * String escape characters are converted to their HTML counterparts.
+     *
      * @param text
-     * @return an HTM adapted string
+     * @return an HTML adapted string
      */
     public static String adaptToHtml(String text) {
         return text
+                .replaceAll("&", "&amp;")
                 .replaceAll("<", "&lt;")
                 .replaceAll(">", "&gt;")
                 .replaceAll(" ", "&nbsp;")
                 .replaceAll("\t", "&emsp;&emsp;")
-                .replaceAll("\n", "<br>");
+                .replaceAll("(\r\n|\n)", "<br />");
     }
 }

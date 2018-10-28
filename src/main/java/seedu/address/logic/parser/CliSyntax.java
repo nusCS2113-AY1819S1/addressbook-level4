@@ -37,12 +37,11 @@ public class CliSyntax {
     public static final Prefix PREFIX_MODULE_CODE = new Prefix("mc/");
     public static final Prefix PREFIX_MODULE_NAME = new Prefix("mn/");
     /* Note prefixes */
-    public static final Prefix PREFIX_NOTE_DATE = new Prefix("d/");
-    // temporarily unused prefixes
     public static final Prefix PREFIX_NOTE_END_DATE = new Prefix("ed/");
     public static final Prefix PREFIX_NOTE_END_TIME = new Prefix("et/");
-    public static final Prefix PREFIX_NOTE_LOCATION = new Prefix("l/");
+    public static final Prefix PREFIX_NOTE_FILE_NAME = new Prefix("fn/");
+    public static final Prefix PREFIX_NOTE_LOCATION = new Prefix("lc/");
     public static final Prefix PREFIX_NOTE_START_DATE = new Prefix("sd/");
     public static final Prefix PREFIX_NOTE_START_TIME = new Prefix("st/");
-    public static final Prefix PREFIX_NOTE_TITLE = new Prefix("t/");
+    public static final Prefix PREFIX_NOTE_TITLE = new Prefix("tt/");
 }
