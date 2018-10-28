@@ -58,14 +58,14 @@ public abstract class Comments {
      *  Rewrites String to after a change has happened
      */
     public static String rewrite(Vector commentsVector) {
-        String comments = "<span>Comment Section</span>\n<ol>";
+        String comments = "<span>Comment Section</span><ol>";
         for (int i = 0; i < commentsVector.size(); i++) {
             if (commentsVector.get(i).toString().length() == 0) {
                 continue;
             }
-            comments += "\n" + "<li>" + commentsVector.get(i) + "</li>";
+            comments +=  "<li>" + commentsVector.get(i) + "</li>";
         }
-        comments += "\n</ol>\n";
+        comments += "</ol>";
         return comments;
     }
 
