@@ -11,7 +11,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Friend;
 import seedu.address.model.person.Person;
-import seedu.address.security.UserStub;
 
 /**
  * Allows user to befriend a user from the others list, add a user to their friend list
@@ -36,20 +35,25 @@ public class FriendCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        List<Person> otherList = model.getOtherList(UserStub.getUser());
+        List<Person> otherList = model.getOtherList(model.getUser());
 
         if (targetIndex.getZeroBased() >= otherList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToEdit = otherList.get(targetIndex.getZeroBased());
         Person editedPerson = personToEdit;
-        Person editedUser = UserStub.getUser();
-        editedPerson.getFriends().add(new Friend(UserStub.getUser().getName()));
+        Person editedUser = model.getUser();
+        addFriendToPerson(editedPerson, model.getUser());
+        addFriendToPerson(editedUser, personToEdit);
+        editedPerson.getFriends().add(new Friend(model.getUser().getName()));
         editedUser.getFriends().add(new Friend(personToEdit.getName()));
 
         model.updatePerson(personToEdit, editedPerson);
-        model.updatePerson(UserStub.getUser(), editedUser);
+        model.updatePerson(model.getUser(), editedUser);
         model.commitAddressBook();
         return new CommandResult(MESSAGE_ADD_FRIEND_SUCCESS);
+    }
+
+    private void addFriendToPerson(Person editedPerson, Person person) {
     }
 }

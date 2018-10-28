@@ -9,17 +9,24 @@ import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.security.AppUsers;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage {
+public interface Storage extends AddressBookStorage, UserPrefsStorage, AppUsersStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
 
     @Override
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
+
+    @Override
+    Optional<AppUsers> readAppUsers() throws DataConversionException, IOException;
+
+    @Override
+    void saveAppUsers(AppUsers appUsers) throws IOException;
 
     @Override
     Path getAddressBookFilePath();

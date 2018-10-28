@@ -10,6 +10,7 @@ import java.time.format.TextStyle;
 import java.util.Locale;
 import java.util.Objects;
 
+import javafx.scene.paint.Color;
 import seedu.address.model.person.exceptions.TimeSlotNotOverlapException;
 
 /**
@@ -27,9 +28,12 @@ public class TimeSlot {
     public static final String VALIDATION_REGEX =
             "\\w+(\\s*)([0-9]|[0-1][0-9]|[2][0-3])[:]?[0]?[0]?(\\s*)[-](\\s*)([0-9]|[0-1][0-9]|[2][0-3])[:]?[0]?[0]?";
 
+    private static final Color DEFAULT_COLOR = Color.BLACK;
+
     private DayOfWeek dayOfWeek;
     private LocalTime startTime;
     private LocalTime endTime;
+    private Color color;
     private String label;
 
     public TimeSlot(DayOfWeek day, LocalTime start, LocalTime end) {
@@ -40,12 +44,25 @@ public class TimeSlot {
         dayOfWeek = day;
         startTime = start;
         endTime = end;
+        color = DEFAULT_COLOR;
+    }
+
+    public TimeSlot(DayOfWeek day, LocalTime start, LocalTime end, Color col) {
+        requireAllNonNull(day, start, end);
+
+        checkArgument(isValidTimeSlot(start, end), MESSAGE_INVALID_TIME_SLOT);
+
+        dayOfWeek = day;
+        startTime = start;
+        endTime = end;
+        color = col;
     }
 
     public TimeSlot(TimeSlot input) {
         dayOfWeek = input.dayOfWeek;
         startTime = input.startTime;
         endTime = input.endTime;
+        color = input.color;
     }
 
     public LocalTime getStartTime() {
@@ -66,6 +83,14 @@ public class TimeSlot {
 
     public String getLabel() {
         return label;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     public static boolean isValidTimeSlot(String test) {
@@ -188,5 +213,4 @@ public class TimeSlot {
     public int hashCode() {
         return Objects.hash(dayOfWeek, startTime, endTime);
     }
-
 }

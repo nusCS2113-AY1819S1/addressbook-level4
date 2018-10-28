@@ -11,6 +11,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.User;
 import seedu.address.model.person.Person;
 
 /**
@@ -57,5 +58,20 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ListElementPointer getHistorySnapshot() {
         return new ListElementPointer(history.getHistory());
+    }
+
+    @Override
+    public void matchUserToPerson(String name) {
+        model.matchUserToPerson(name);
+    }
+
+    @Override
+    public void clearUser() {
+        model.clearUser();
+    }
+
+    @Override
+    public User getUser() {
+        return model.getUser();
     }
 }

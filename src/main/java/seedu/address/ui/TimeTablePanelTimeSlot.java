@@ -18,6 +18,10 @@ public class TimeTablePanelTimeSlot {
         this.timeSlot = timeSlot;
 
         box = new Rectangle(currColDimensions * timeSlot.getDuration().toHours(), currRowDimensions);
+        box.setFill(timeSlot.getColor());
+        box.setOpacity(0.5);
+        box.setArcHeight(10);
+        box.setArcWidth(10);
     }
 
     @Override

@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -27,9 +28,7 @@ import seedu.address.commons.events.ui.ShowRegisterEvent;
 import seedu.address.commons.events.ui.SuccessfulRegisterEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
 import seedu.address.security.Security;
-import seedu.address.security.UserStub;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -47,6 +46,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private TimeTablePanel timetablePanel;
+    private MePanel mePanel;
     private PersonListPanel personListPanel;
     private FriendListPanel friendListPanel;
     private Config config;
@@ -54,7 +54,9 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private LoginWindow loginWindow;
     private RegistrationWindow registrationWindow;
-    private Person person = UserStub.getUser();
+
+    @FXML
+    private Text meText;
 
     @FXML
     private Text friendText;
@@ -70,6 +72,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private StackPane mePanelPlaceholder;
 
     @FXML
     private StackPane friendListPanelPlaceholder;
@@ -165,9 +170,7 @@ public class MainWindow extends UiPart<Stage> {
         timetablePlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().clear();
         friendListPanelPlaceholder.getChildren().clear();
-        resultDisplayPlaceholder.getChildren().clear();
         statusbarPlaceholder.getChildren().clear();
-        commandBoxPlaceholder.getChildren().clear();
         friendText.setText("");
         personText.setText("");
     }
@@ -177,6 +180,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     public void fillInnerParts() {
 
+        meText.setText("Me");
+        meText.setFill(Color.LIGHTGOLDENRODYELLOW);
+        meText.setStyle("-fx-font-size: 20px;");
         friendText.setText("Friends");
         friendText.setFill(Color.LIGHTGOLDENRODYELLOW);
         friendText.setStyle("-fx-font-size: 20px;");
@@ -187,11 +193,16 @@ public class MainWindow extends UiPart<Stage> {
         timetablePanel = new TimeTablePanel();
         timetablePlaceholder.getChildren().add(timetablePanel.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        mePanel = new MePanel(FXCollections.observableArrayList(security.getUser()));
+        mePanelPlaceholder.getChildren().add(mePanel.getRoot());
 
+        // friendListPanel = new FriendListPanel(logic.getFriendList(security.getUser()));
         friendListPanel = new FriendListPanel(logic.getFilteredPersonList());
         friendListPanelPlaceholder.getChildren().add(friendListPanel.getRoot());
+
+        // personListPanel = new PersonListPanel(logic.getOtherList(security.getUser()));
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().clear();

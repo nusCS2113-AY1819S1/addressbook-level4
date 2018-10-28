@@ -14,6 +14,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.TimeTableChangedEvent;
 import seedu.address.commons.events.security.LogoutEvent;
+import seedu.address.model.person.CombinedFriendPredicate;
+import seedu.address.model.person.CombinedOtherPredicate;
 import seedu.address.model.person.FriendListPredicate;
 import seedu.address.model.person.OtherListPredicate;
 import seedu.address.model.person.Person;
@@ -105,7 +107,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updatePerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         versionedAddressBook.updatePerson(target, editedPerson);
         indicateAddressBookChanged();
     }
@@ -133,6 +134,18 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFriendList(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        friendList.setPredicate(combinedFriendPredicate(predicate, friendsPredicateFromPerson(user)));
+    }
+
+    @Override
+    public void updateOtherList(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        otherList.setPredicate(combinedOtherPredicate(predicate, othersPredicateFromPerson(user)));
     }
 
     @Override
@@ -203,11 +216,27 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     public FriendListPredicate friendsPredicateFromPerson(Person person) {
-        return new FriendListPredicate(person.getFriends());
+        return new FriendListPredicate(person);
     }
 
     public OtherListPredicate othersPredicateFromPerson(Person person) {
-        return new OtherListPredicate(person.getFriends());
+        return new OtherListPredicate(person);
+    }
+
+    /**
+     * Combines the predicates to allow SetPredicate to be called
+     * @param predicate
+     * @param friendListPredicate
+     * @return
+     */
+    public CombinedFriendPredicate combinedFriendPredicate(Predicate<Person> predicate,
+                                                           FriendListPredicate friendListPredicate) {
+        return new CombinedFriendPredicate(predicate, friendListPredicate);
+    }
+
+    public CombinedOtherPredicate combinedOtherPredicate(Predicate<Person> predicate,
+                                                         OtherListPredicate otherListPredicate) {
+        return new CombinedOtherPredicate(predicate, otherListPredicate);
     }
 
     @Override

@@ -23,10 +23,10 @@ public class UserStub {
         HashSet<Friend> friendSetStub = new HashSet<>();
         Friend friend1 = new Friend(new Name("Julian Tan"));
         Friend friend2 = new Friend(new Name("Chun Teck"));
-        Friend friend3 = new Friend(new Name("Julian Lim"));
+        Friend friend3 = new Friend(new Name("Chun Lin"));
         friendSetStub.addAll(Arrays.asList(friend1, friend2, friend3));
 
-        Person personStub = new Person(new Name("Chun Lin"),
+        Person personStub = new Person(new Name("Julian Lim"),
                 new Phone("98765432"), new Email("johnd@example.com"),
                 new Address("311, Clementi Ave 2, #02-25"),
                 new HashSet<Tag>(), new TimeTable(), friendSetStub);
