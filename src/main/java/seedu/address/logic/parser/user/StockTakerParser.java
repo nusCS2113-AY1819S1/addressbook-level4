@@ -1,4 +1,4 @@
-package seedu.address.logic.drinkparser.user;
+package seedu.address.logic.parser.user;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -24,7 +24,7 @@ import seedu.address.logic.parser.DeleteCommandParser;
 import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.logic.parser.FindCommandParser;
 import seedu.address.logic.parser.SelectCommandParser;
-import seedu.address.logic.parser.SellCommandParser;
+import seedu.address.logic.drinkparser.SellCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 

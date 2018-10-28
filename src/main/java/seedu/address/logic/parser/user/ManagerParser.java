@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.user;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -14,8 +14,6 @@ import seedu.address.logic.drinkcommands.user.ChangePasswordCommand;
 import seedu.address.logic.drinkcommands.user.CreateAccountCommand;
 import seedu.address.logic.drinkparser.AddDrinkCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.drinkparser.user.ChangePasswordCommandParser;
-import seedu.address.logic.drinkparser.user.CreateAccountCommandParser;
 
 /**
  * Parses user input.

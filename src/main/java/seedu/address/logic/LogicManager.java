@@ -11,7 +11,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.drinkcommands.user.UserCommand;
 import seedu.address.logic.parser.AddressBookParser;
-import seedu.address.logic.parser.ManagerParser;
+import seedu.address.logic.parser.user.ManagerParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.user.AccountantParser;
 import seedu.address.logic.parser.user.AdminParser;

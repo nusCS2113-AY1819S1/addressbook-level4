@@ -1,7 +1,6 @@
 package seedu.address.logic.drinkcommands.user;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.drinkcommands.DrinkCommand;
 import seedu.address.logic.drinkcommands.DrinkCommandResult;
 import seedu.address.logic.drinkcommands.exceptions.DrinkCommandException;
@@ -18,7 +17,7 @@ public abstract class UserCommand extends DrinkCommand {
      * @param loginInfoManager {@code Model} which the command should operate on.
      * @param history          {@code CommandHistory} which the command should operate on.
      * @return feedback message of the operation result for display
-     * @throws CommandException If an error occurs during command execution.
+     * @throws DrinkCommandException If an error occurs during command execution.
      */
     public abstract DrinkCommandResult execute(LoginInfoManager loginInfoManager,
                                                CommandHistory history) throws DrinkCommandException;

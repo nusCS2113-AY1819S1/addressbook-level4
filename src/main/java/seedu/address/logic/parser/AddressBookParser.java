@@ -21,6 +21,7 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.drinkcommands.SellDrinkCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.drinkcommands.user.ChangePasswordCommand;
+import seedu.address.logic.drinkparser.SellCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.user.ChangePasswordCommandParser;
 
@@ -56,7 +57,7 @@ public class AddressBookParser {
             return new AddCommandParser().parse(arguments);
 
         case SellDrinkCommand.COMMAND_WORD:
-            return new SellCommandParser ().parse (arguments);
+            return new SellCommandParser().parse (arguments);
 
         case ChangePasswordCommand.COMMAND_WORD:
             return new ChangePasswordCommandParser ().parse(arguments);

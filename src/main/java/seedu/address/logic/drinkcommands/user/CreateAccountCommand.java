@@ -6,19 +6,17 @@ import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_ADMI
 import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_MANAGER;
 import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_STOCK_TAKER;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_AUTHENTICATION_LEVEL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
+import static seedu.address.logic.drinkparser.CliSyntax.PREFIX_AUTHENTICATION_LEVEL;
+import static seedu.address.logic.drinkparser.CliSyntax.PREFIX_PASSWORD;
+import static seedu.address.logic.drinkparser.CliSyntax.PREFIX_USERNAME;
 
 import seedu.address.authentication.PasswordUtils;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.drinkcommands.DrinkCommandResult;
 import seedu.address.logic.drinkcommands.exceptions.DrinkCommandException;
+
 import seedu.address.model.DrinkModel;
 import seedu.address.model.LoginInfoManager;
-import seedu.address.model.Model;
 import seedu.address.model.user.AuthenticationLevel;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.UserName;
