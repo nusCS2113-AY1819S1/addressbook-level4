@@ -15,6 +15,7 @@ import seedu.address.model.Filetype;
  */
 public class ExportCommandParser implements Parser<ExportCommand> {
 
+    private static final int MINIMUM_ARGS_LENGTH = 5;
     private static final int LENGTH_OF_FILETYPE = 3;
 
     /**
@@ -25,6 +26,11 @@ public class ExportCommandParser implements Parser<ExportCommand> {
     @Override
     public ExportCommand parse(String args) throws ParseException {
         requireNonNull(args);
+
+        if (args.length() < MINIMUM_ARGS_LENGTH) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
+        }
 
         try {
             Index index = ParserUtil.parseIndex(this.getIndexFrom(args));
