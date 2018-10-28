@@ -4,7 +4,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.task.Deadline;
-import seedu.address.model.task.Milestone;
 import seedu.address.model.task.Task;
 
 /**
@@ -64,12 +63,6 @@ public interface Model {
      */
     void updateTask(Task target, Task editedTask);
 
-    //@@author JeremyInElysium
-    /**
-     * Adds the given milestone.
-     */
-    void addMilestone(Milestone milestone);
-    //@@author
     /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();
 

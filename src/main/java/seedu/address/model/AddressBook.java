@@ -6,7 +6,6 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.task.Deadline;
-import seedu.address.model.task.Milestone;
 import seedu.address.model.task.SortTaskList;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -116,15 +115,6 @@ public class AddressBook implements ReadOnlyTaskBook {
         tasks.remove(key);
     }
 
-    //@@author JeremyInElysium
-    /**
-     * Adds a milestone to a selected task in the Task Book.
-     * The task must already exist in the Task Book.
-     */
-    public void addMilestone(Milestone milestone) {
-        requireNonNull(milestone);
-        tasks.add(milestone);
-    }
     //@@author
     /**
      * Selects the date for Task Book.
@@ -164,7 +154,6 @@ public class AddressBook implements ReadOnlyTaskBook {
     @Override
     public String toString() {
         return tasks.asUnmodifiableObservableList().size() + " tasks";
-        // TODO: refine later
     }
 
     @Override
@@ -187,4 +176,5 @@ public class AddressBook implements ReadOnlyTaskBook {
     public int hashCode() {
         return tasks.hashCode();
     }
+
 }

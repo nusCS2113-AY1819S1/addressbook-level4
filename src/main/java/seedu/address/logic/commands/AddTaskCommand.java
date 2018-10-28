@@ -32,6 +32,7 @@ public class AddTaskCommand extends Command implements CommandParser {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TITLE + "Complete code refactoring "
             + PREFIX_DESCRIPTION + "refer to notes "
+            + PREFIX_MODULE_CODE + "CS2113 "
             + PREFIX_PRIORITY + "high "
             + PREFIX_HOURS + "2";
 
@@ -61,8 +62,8 @@ public class AddTaskCommand extends Command implements CommandParser {
             throw new CommandException(MESSAGE_MAX_HOURS);
         }
 
-        model.addTask(toAdd);
         toAdd.setDeadline(model.getDeadline());
+        model.addTask(toAdd);
         model.commitTaskBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
