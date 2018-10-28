@@ -7,8 +7,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import java.util.ArrayList;
@@ -29,6 +31,9 @@ import seedu.address.testutil.EditEventDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+
+    public static final String VALID_USERNAME = "Johnny Bravo";
+    public static final String VALID_PASSWORD = "pass@12345";
     public static final String VALID_ATTENDEE_TED = "Ted Bacan";
     public static final String VALID_ATTENDEE_HAN = "Han Christian";
     public static final String VALID_NAME_AMY = "Night Cycling";
@@ -43,9 +48,13 @@ public class CommandTestUtil {
     public static final String VALID_VENUE_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_DATETIME_AMY = "17/8/2018 21:15";
     public static final String VALID_DATETIME_BOB = "7/7/2017 7:07";
+    public static final String VALID_COMMENT_AMY = "{span}This is a comment{/span}"; //TODO for Comment
+    public static final String VALID_COMMENT_BOB = "{span}This is a comment{/span}"; //TODO for Comment
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
+    public static final String USERNAME_DESC = " " + PREFIX_USERNAME + VALID_USERNAME;
+    public static final String PASSWORD_DESC = " " + PREFIX_PASSWORD + VALID_PASSWORD;
     public static final String ATTENDEE_DESC_TED = " " + PREFIX_ATTENDEE + VALID_ATTENDEE_TED;
     public static final String ATTENDEE_DESC_HAN = " " + PREFIX_ATTENDEE + VALID_ATTENDEE_HAN;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -63,6 +72,8 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
+    public static final String INVALID_USERNAME_DESC = " " + PREFIX_USERNAME + "j4!"; // '!' not allowed
+    public static final String INVALID_PASSWORD_DESC = " " + PREFIX_PASSWORD + "pass word"; // space not allowed
     public static final String INVALID_ATTENDEE_DESC = " " + PREFIX_ATTENDEE + "R@chel"; // '@' not allowed in attendees
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_CONTACT_DESC = " " + PREFIX_CONTACT + "James&"; // '&' not allowed in contact
@@ -81,11 +92,12 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditEventDescriptorBuilder().withName(VALID_NAME_AMY).withContact(VALID_CONTACT_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withVenue(VALID_VENUE_AMY)
-                .withDateTime(VALID_DATETIME_AMY).withTags(VALID_TAG_FRIEND)
+                .withDateTime(VALID_DATETIME_AMY).withComment(VALID_COMMENT_AMY).withTags(VALID_TAG_FRIEND)
                 .withAttendees(VALID_ATTENDEE_HAN).build();
         DESC_BOB = new EditEventDescriptorBuilder().withName(VALID_NAME_BOB).withContact(VALID_CONTACT_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withVenue(VALID_VENUE_BOB)
-                .withDateTime(VALID_DATETIME_AMY).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withDateTime(VALID_DATETIME_AMY).withComment(VALID_COMMENT_BOB)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
     /**

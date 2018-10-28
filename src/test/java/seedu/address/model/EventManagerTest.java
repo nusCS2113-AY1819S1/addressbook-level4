@@ -42,7 +42,7 @@ public class EventManagerTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
+    public void resetData_withValidReadOnlyEventManager_replacesData() {
         EventManager newData = getTypicalEventManager();
         eventManager.resetData(newData);
         assertEquals(newData, eventManager);
@@ -67,18 +67,18 @@ public class EventManagerTest {
     }
 
     @Test
-    public void hasEvent_eventNotInAddressBook_returnsFalse() {
+    public void hasEvent_eventNotInEventManager_returnsFalse() {
         assertFalse(eventManager.hasEvent(ALICE));
     }
 
     @Test
-    public void hasEvent_eventInAddressBook_returnsTrue() {
+    public void hasEvent_eventInEventManager_returnsTrue() {
         eventManager.addEvent(ALICE);
         assertTrue(eventManager.hasEvent(ALICE));
     }
 
     @Test
-    public void hasEvent_eventWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasEvent_eventWithSameIdentityFieldsInEventManager_returnsTrue() {
         eventManager.addEvent(ALICE);
         Event editedAlice = new EventBuilder(ALICE).withVenue(VALID_VENUE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();

@@ -4,7 +4,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
-//import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -12,7 +11,6 @@ import java.util.Set;
 
 import seedu.address.model.attendee.Attendee;
 import seedu.address.model.tag.Tag;
-
 
 /**
  * Represents an Event in the event manager.
@@ -30,12 +28,14 @@ public class Event {
     private final DateTime dateTime;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Attendee> attendees = new HashSet<>();
+    private final Status status;
+    private final Comment comment;
 
     /**
      * Every field must be present and not null.
      */
-    public Event(Name name, Contact contact, Phone phone, Email email, Venue venue, DateTime datetime, Set<Tag> tags,
-                 Set<Attendee> attendees) {
+    public Event(Name name, Contact contact, Phone phone, Email email, Venue venue, DateTime datetime, Comment comment,
+                 Set<Tag> tags, Set<Attendee> attendees) {
         requireAllNonNull(name, contact, phone, email, venue, datetime);
 
         this.name = name;
@@ -46,6 +46,8 @@ public class Event {
         this.dateTime = datetime;
         this.tags.addAll(tags);
         this.attendees.addAll(attendees);
+        this.status = new Status(datetime);
+        this.comment = comment;
     }
 
     public Name getName() {
@@ -71,6 +73,10 @@ public class Event {
     public DateTime getDateTime () {
         return dateTime;
     }
+
+    public Status getStatus () { return status; }
+
+    public Comment getComment () { return comment; }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -140,7 +146,7 @@ public class Event {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, contact, phone, email, venue, dateTime, tags, attendees);
+        return Objects.hash(name, contact, phone, email, venue, dateTime, comment, tags, attendees);
     }
 
     @Override
@@ -157,6 +163,8 @@ public class Event {
                 .append(getVenue())
                 .append(" Time: ")
                 .append(getDateTime())
+                .append(" Comment: ")
+                .append(getComment())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
 

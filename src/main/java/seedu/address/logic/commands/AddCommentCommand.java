@@ -20,7 +20,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.comments.AddComment;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.Venue;
 
 /**
  * Adds a comment to the end comment section of the event
@@ -96,25 +95,13 @@ public class AddCommentCommand extends Command {
             e.printStackTrace();
         }
 
-
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
         Event eventToEdit = filteredEventList.get(index.getZeroBased());
-
-        String x = eventToEdit.getVenue().toString();
-        x = x.replace("{", "<");
-        x = x.replace("}", ">");
-        System.out.println(x);
-        AddComment comment = new AddComment(x);
-        x = comment.addComment(getComment());
-        x = x.replace("<", "{");
-        x = x.replace(">", "}");
-        System.out.println(x);
-        Venue a = new Venue(x);
-        editCommentDescriptor.setVenue(a);
-
         Event editedEvent = EditCommand.createEditedEvent(eventToEdit, editCommentDescriptor);
+
         model.updateEvent(eventToEdit, editedEvent);
         model.commitEventManager();
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
+
         return new CommandResult(String.format(MESSAGE_ADD_COMMENT, getComment(), index.getOneBased()));
     }
 

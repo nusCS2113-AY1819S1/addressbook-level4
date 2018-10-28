@@ -25,6 +25,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.attendee.Attendee;
+import seedu.address.model.event.Comment;
 import seedu.address.model.event.Contact;
 import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Email;
@@ -114,11 +115,12 @@ public class EditCommand extends Command {
         Email updatedEmail = editEventDescriptor.getEmail().orElse(eventToEdit.getEmail());
         Venue updatedVenue = editEventDescriptor.getVenue().orElse(eventToEdit.getVenue());
         DateTime updatedDateTime = editEventDescriptor.getDateTime().orElse(eventToEdit.getDateTime());
+        Comment updatedComment = eventToEdit.getComment();
         Set<Tag> updatedTags = editEventDescriptor.getTags().orElse(eventToEdit.getTags());
         Set<Attendee> updatedAttendees = editEventDescriptor.getAttendees().orElse(eventToEdit.getAttendees());
 
         return new Event(updatedName, updatedContact, updatedPhone, updatedEmail, updatedVenue, updatedDateTime,
-                updatedTags, updatedAttendees);
+                updatedComment, updatedTags, updatedAttendees);
     }
 
     @Override
@@ -150,6 +152,7 @@ public class EditCommand extends Command {
         private Email email;
         private Venue venue;
         private DateTime dateTime;
+        private Comment comment;
 
         private Set<Tag> tags;
         private Set<Attendee> attendees;
@@ -166,8 +169,8 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setVenue(toCopy.venue);
-            setTags(toCopy.tags);
             setDate(toCopy.dateTime);
+            setTags(toCopy.tags);
             setAttendees(toCopy.attendees);
         }
 
@@ -224,6 +227,14 @@ public class EditCommand extends Command {
 
         public Optional<DateTime> getDateTime() {
             return Optional.ofNullable(dateTime);
+        }
+
+        public void setComment(Comment comment) {
+            this.comment = comment;
+        }
+
+        public Comment getComment() {
+            return comment;
         }
 
         /**
