@@ -60,12 +60,11 @@ public class UiManager extends ComponentManager implements Ui {
         try {
             mainWindow = new MainWindow(primaryStage, config, prefs, logic, security);
             mainWindow.show(); //This should be called before creating other UI parts
-            //Gets rid of the login window when testing
+            //Gets rid of the login window when testing, can remove this once released
             if (security.getAuthentication()) {
                 mainWindow.fillInnerParts();
             } else {
-                //CLI Transition
-                // Save this for later mainWindow.handleLogin();
+                //CLI for Authentication
                 mainWindow.fillSecurityCommandBox();
             }
         } catch (Throwable e) {

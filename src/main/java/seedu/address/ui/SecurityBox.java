@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.commons.events.ui.ShowLoginEvent;
 import seedu.address.commons.events.ui.SuccessfulRegisterEvent;
 import seedu.address.security.Security;
@@ -45,9 +47,11 @@ public class SecurityBox extends UiPart<Region> {
                 raise(new SuccessfulRegisterEvent());
                 break;
             case USER_ALREADY_EXISTS:
+                raise(new NewResultAvailableEvent("Username already used"));
                 System.out.println("Failure: Username already used");
                 break;
             case INCOMPLETE_FIELD:
+                raise(new NewResultAvailableEvent("Incomplete fields"));
                 System.out.println("Failure: Incomplete fields");
                 break;
             default:
@@ -55,6 +59,8 @@ public class SecurityBox extends UiPart<Region> {
             }
         } else if (command[0].equals("ui")) {
             raise(new ShowLoginEvent());
+        } else if (command[0].equals("exit")) {
+            raise (new ExitAppRequestEvent());
         }
     }
 

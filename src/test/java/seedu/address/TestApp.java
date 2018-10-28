@@ -25,6 +25,8 @@ import seedu.address.model.UserPrefs;
 import seedu.address.security.Security;
 import seedu.address.security.SecurityManager;
 import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.AppUsersStorage;
+import seedu.address.storage.JsonAppUsersStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
@@ -83,14 +85,16 @@ public class TestApp extends MainApp {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
+        AppUsersStorage appUsersStorage = new JsonAppUsersStorage(config.getAppUsersFilePath());
+        appUsers = initUsers(appUsersStorage);
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, appUsersStorage);
 
         model = initModelManager(storage, userPrefs);
 
         logic = new LogicManager(model);
 
-        user = new SecurityManager(true, model, logic);
+        user = new SecurityManager(true, logic, appUsers);
 
         ui = new UiManager(logic, config, userPrefs, user);
 

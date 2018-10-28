@@ -170,9 +170,7 @@ public class MainWindow extends UiPart<Stage> {
         timetablePlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().clear();
         friendListPanelPlaceholder.getChildren().clear();
-        resultDisplayPlaceholder.getChildren().clear();
         statusbarPlaceholder.getChildren().clear();
-        commandBoxPlaceholder.getChildren().clear();
         friendText.setText("");
         personText.setText("");
     }
