@@ -37,7 +37,7 @@ public class ClassDeleteStudentCommandParser implements Parser<ClassDeleteStuden
         ClassroomParserUtil.parseClassName(className);
         String moduleCode = argMultimap.getValue(PREFIX_MODULE_CODE).get().toUpperCase();
         ParserUtil.parseModuleCode(moduleCode);
-        String matricNo = ParserUtil.parseMatric(argMultimap.getValue(PREFIX_MATRIC).get());
+        String matricNo = ParserUtil.parseMatric(argMultimap.getValue(PREFIX_MATRIC).get()).toString(); // TBC
         ParserUtil.parseMatric(matricNo);
 
         return new ClassDeleteStudentCommand(className, moduleCode, matricNo);

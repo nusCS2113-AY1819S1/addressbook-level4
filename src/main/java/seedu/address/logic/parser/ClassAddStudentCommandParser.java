@@ -37,7 +37,7 @@ public class ClassAddStudentCommandParser implements Parser<ClassAddStudentComma
         ClassroomParserUtil.parseClassName(className);
         String moduleCode = argMultimap.getValue(PREFIX_MODULE_CODE).get().toUpperCase();
         ParserUtil.parseModuleCode(moduleCode);
-        String matricNo = ParserUtil.parseMatric(argMultimap.getValue(PREFIX_MATRIC).get());
+        String matricNo = ParserUtil.parseMatric(argMultimap.getValue(PREFIX_MATRIC).get()).toString();
         ParserUtil.parseMatric(matricNo);
 
         return new ClassAddStudentCommand(className, moduleCode, matricNo);

@@ -4,6 +4,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.model.course.Course;
+import seedu.address.model.course.CourseCode;
+import seedu.address.model.course.CourseName;
+import seedu.address.model.course.FacultyName;
 
 /**
  * This represents a course in Trajectory.
@@ -26,9 +29,9 @@ public class XmlAdaptedCourse {
     }
 
     public XmlAdaptedCourse(Course course) {
-        this.courseCode = course.getCourseCode();
-        this.courseName = course.getCourseName();
-        this.facultyName = course.getFacultyName();
+        this.courseCode = course.getCourseCode().toString();
+        this.courseName = course.getCourseName().toString();
+        this.facultyName = course.getFacultyName().toString();
     }
 
     @XmlElement(name = "courseCode")
@@ -59,6 +62,6 @@ public class XmlAdaptedCourse {
     }
 
     public Course toModelType() {
-        return new Course(courseCode, courseName, facultyName);
+        return new Course(new CourseCode(courseCode), new CourseName(courseName), new FacultyName(facultyName));
     }
 }

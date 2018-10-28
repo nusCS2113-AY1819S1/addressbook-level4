@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.course.CourseCode;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,14 +26,14 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     // Student-specific fields
-    private final String courseCode;
-    private final String matricNo;
+    private final CourseCode courseCode;
+    private final MatricNo matricNo;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Set<Tag> tags, String courseCode, String matricNo) {
+                  Set<Tag> tags, CourseCode courseCode, MatricNo matricNo) {
         requireAllNonNull(name, phone, email, address, tags, courseCode, matricNo);
         this.name = name;
         this.phone = phone;
@@ -59,11 +60,11 @@ public class Person {
         return address;
     }
 
-    public String getCourseCode() {
+    public CourseCode getCourseCode() {
         return courseCode;
     }
 
-    public String getMatricNo() {
+    public MatricNo getMatricNo() {
         return matricNo;
     }
 
@@ -132,7 +133,7 @@ public class Person {
                 .append(getAddress())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
-        builder.append("XmlAdaptedCourse Code: ").append(getCourseCode()).append("Matric No: ").append(getMatricNo());
+        builder.append("Course Code: ").append(getCourseCode()).append("Matric No: ").append(getMatricNo());
         return builder.toString();
     }
 
