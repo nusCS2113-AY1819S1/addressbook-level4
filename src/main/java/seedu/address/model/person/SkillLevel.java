@@ -1,6 +1,6 @@
 package seedu.address.model.person;
 
-import static seedu.address.commons.util.AppUtil.checkArgument;
+// import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Skill's Level in the address book.
