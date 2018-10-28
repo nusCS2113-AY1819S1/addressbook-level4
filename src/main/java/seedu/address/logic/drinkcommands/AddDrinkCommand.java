@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DRINK_ITEM;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.drinkcommands.exceptions.DrinkCommandException;
 import seedu.address.model.DrinkModel;
 import seedu.address.model.drink.Drink;
 import seedu.address.model.user.admin.AdminModel;
@@ -27,7 +28,7 @@ public class AddDrinkCommand extends DrinkCommand {
             + PREFIX_DEFAULT_SELLING_PRICE + "20.00 ";
 
     public static final String MESSAGE_SUCCESS = "New drink added: %1$s with default price of %2$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This drink already exists in the inventory list";
+    public static final String MESSAGE_DUPLICATE_DRINK = "This drink already exists in the inventory list";
 
     private final Drink toAdd;
 
@@ -40,11 +41,11 @@ public class AddDrinkCommand extends DrinkCommand {
     }
 
     @Override
-    public DrinkCommandResult execute(DrinkModel model, CommandHistory history) throws CommandException {
+    public DrinkCommandResult execute(DrinkModel model, CommandHistory history) throws DrinkCommandException {
         requireNonNull(model);
 
         if (model.hasDrink(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new DrinkCommandException(MESSAGE_DUPLICATE_DRINK);
         }
 
         model.addDrink(toAdd);
