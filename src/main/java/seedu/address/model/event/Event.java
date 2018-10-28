@@ -108,7 +108,8 @@ public class Event implements Comparable<Event> {
                 && (event.getDescription().equals(getDescription())
                 || event.getLocation().equals(getLocation())
                 || event.getStartTime().equals(getStartTime())
-                || event.getEndTime().equals(getEndTime()));
+                || event.getEndTime().equals(getEndTime()))
+                || event.getDate().equals(getDate());
     }
 
     /**
@@ -130,7 +131,8 @@ public class Event implements Comparable<Event> {
                 && otherEvent.getDescription().equals(getDescription())
                 && otherEvent.getLocation().equals(getLocation())
                 && otherEvent.getStartTime().equals(getStartTime())
-                && otherEvent.getEndTime().equals(getEndTime());
+                && otherEvent.getEndTime().equals(getEndTime())
+                && otherEvent.getDate().equals(getDate());
     }
 
     @Override
