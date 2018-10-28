@@ -80,8 +80,10 @@ public class XmlUtilTest {
     public void xmlAdaptedItemFromFile_fileWithMissingItemField_validResult() throws Exception {
         XmlAdaptedItem actualItem = XmlUtil.getDataFromFile(
                 MISSING_ITEM_FIELD_FILE, XmlAdaptedItemWithRootElement.class);
+
         XmlAdaptedItem expectedItem = new XmlAdaptedItem(
                 null, VALID_QUANTITY, VALID_MIN_QUANTITY, VALID_STATUS, VALID_TAGS);
+
         assertEquals(expectedItem, actualItem);
     }
 
@@ -100,11 +102,6 @@ public class XmlUtilTest {
                 VALID_ITEM_FILE, XmlAdaptedItemWithRootElement.class);
         XmlAdaptedItem expectedItem = new XmlAdaptedItem(
                 VALID_NAME, VALID_QUANTITY, VALID_MIN_QUANTITY, VALID_STATUS, VALID_TAGS);
-        Status status = expectedItem.getStatus();
-        System.out.print(status.getStatusFaulty());
-        System.out.print(status.getStatusOnLoan());
-        System.out.print(status.getStatusReady());
-
         assertEquals(expectedItem, actualItem);
     }
     */

@@ -3,8 +3,10 @@
 <item>
     <quantity>20</quantity>
     <minQuantity>5</minQuantity>
-    <statusReady>20</statusReady>
-    <statusOnLoan>0</statusOnLoan>
-    <statusFaulty>0</statusFaulty>
+    <status>
+        <statusFaulty>0</statusFaulty>
+        <statusOnLoan>0</statusOnLoan>
+        <statusReady>20</statusReady>
+    </status>
     <tagged>Lab1</tagged>
 </item>
