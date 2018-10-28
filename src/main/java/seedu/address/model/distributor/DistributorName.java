@@ -11,7 +11,6 @@ public class DistributorName {
 
     public static final String MESSAGE_NAME_CONSTRAINTS =
             "Distributor names should only contain alphanumeric characters and spaces, and it should not be blank";
-    
     public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String fullDistName;
