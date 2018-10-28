@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static org.junit.Assert.assertNotNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_START_TIME;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -17,10 +17,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class NoteAddCommandParserTest {
 
-    private NoteAddCommandParser parser = new NoteAddCommandParser();
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    private NoteAddCommandParser parser = new NoteAddCommandParser();
+
 
     @Test
     public void parse_invalidArgs_throwsParseException() throws ParseException {
@@ -38,30 +39,16 @@ public class NoteAddCommandParserTest {
 
     @Test
     public void parse_validArgs_success() throws ParseException {
-        // valid arguments with optional arguments
-        String args = " " + PREFIX_MODULE_CODE + "CS2113" + PREFIX_NOTE_DATE + "1/2/2020";
+        // valid arguments with multiple fields
+        String args = " " + PREFIX_MODULE_CODE + "CS2113" + PREFIX_NOTE_START_TIME + "1/2/2020";
         NoteAddCommand noteAddCommand = parser.parse(args);
 
         assertNotNull(noteAddCommand);
 
-        // valid arguments
-        args = " " + PREFIX_MODULE_CODE + "CS2040C";
+        // empty arguments
+        args = "";
         noteAddCommand = parser.parse(args);
 
         assertNotNull(noteAddCommand);
-    }
-
-    @Test
-    public void parse_missingMandatoryFields_throwsParseException() throws ParseException {
-        String expectedMessage = String.format(
-                Messages.MESSAGE_INVALID_COMMAND_FORMAT, NoteAddCommand.MESSAGE_USAGE);
-
-        // missing mandatory field argument
-        String args = " " + PREFIX_NOTE_DATE + "1/2/2020";
-
-        thrown.expect(ParseException.class);
-        thrown.expectMessage(expectedMessage);
-
-        parser.parse(args);
     }
 }

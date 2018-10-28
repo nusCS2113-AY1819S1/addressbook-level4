@@ -1,7 +1,6 @@
 package seedu.address.testutil;
 
 import seedu.address.model.gradebook.Gradebook;
-import seedu.address.model.module.ModuleCode;
 
 public class GradebookBuilder {
 

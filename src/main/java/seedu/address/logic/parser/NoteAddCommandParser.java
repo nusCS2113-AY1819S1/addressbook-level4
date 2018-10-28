@@ -2,7 +2,12 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_END_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_START_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_START_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_TITLE;
 
 import java.util.stream.Stream;
 
@@ -23,22 +28,73 @@ public class NoteAddCommandParser implements Parser<NoteAddCommand> {
      */
     public NoteAddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_MODULE_CODE, PREFIX_NOTE_DATE);
+                ArgumentTokenizer.tokenize(args,
+                        PREFIX_MODULE_CODE,
+                        PREFIX_NOTE_TITLE,
+                        PREFIX_NOTE_START_DATE,
+                        PREFIX_NOTE_START_TIME,
+                        PREFIX_NOTE_END_DATE,
+                        PREFIX_NOTE_END_TIME,
+                        PREFIX_NOTE_LOCATION);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteAddCommand.MESSAGE_USAGE));
+        String moduleCode = "";
+        String title = "";
+        String startDate = "";
+        String startTime = "";
+        String endDate = "";
+        String endTime = "";
+        String location = "";
+
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    NoteAddCommand.MESSAGE_USAGE));
         }
 
-        String moduleCode = argMultimap.getValue(PREFIX_MODULE_CODE).get();
-        String noteDate = (argMultimap.getValue(PREFIX_NOTE_DATE).isPresent())
-                ? argMultimap.getValue(PREFIX_NOTE_DATE).get() : "No Date";
-
-        if (noteDate.trim().length() == 0) {
-            noteDate = "No Date";
+        if (argMultimap.getValue(PREFIX_MODULE_CODE).isPresent()) {
+            // TODO: Check validity of input moduleCode value
+            moduleCode = argMultimap.getValue(PREFIX_MODULE_CODE).get();
         }
 
-        Note note = new Note(moduleCode, noteDate);
+        if (argMultimap.getValue(PREFIX_NOTE_TITLE).isPresent()) {
+            title = argMultimap.getValue(PREFIX_NOTE_TITLE).get();
+        }
+
+        if (argMultimap.getValue(PREFIX_NOTE_START_DATE).isPresent()) {
+            // TODO: Check validity of input startDate value
+            startDate = argMultimap.getValue(PREFIX_NOTE_START_DATE).get();
+        }
+
+        if (argMultimap.getValue(PREFIX_NOTE_START_TIME).isPresent()) {
+            // TODO: Check validity of input startTime value
+            startTime = argMultimap.getValue(PREFIX_NOTE_START_TIME).get();
+        }
+
+        if (argMultimap.getValue(PREFIX_NOTE_END_DATE).isPresent()) {
+            // TODO: Check validity of input endDate value
+            endDate = argMultimap.getValue(PREFIX_NOTE_END_DATE).get();
+        }
+
+        if (argMultimap.getValue(PREFIX_NOTE_END_TIME).isPresent()) {
+            // TODO: Check validity of input endTime value
+            endTime = argMultimap.getValue(PREFIX_NOTE_END_TIME).get();
+        }
+
+        if (argMultimap.getValue(PREFIX_NOTE_LOCATION).isPresent()) {
+            location = argMultimap.getValue(PREFIX_NOTE_LOCATION).get();
+        }
+
+        // TODO: Validate date & time difference for 'start' and 'end' here
+
+        Note note = new Note(
+                moduleCode,
+                title,
+                startDate,
+                startTime,
+                endDate,
+                endTime,
+                location,
+                "");
+
         return new NoteAddCommand(note);
     }
 

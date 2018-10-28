@@ -26,10 +26,41 @@ public class NoteListCommandParserTest {
 
     private static NoteManager noteManager = NoteManager.getInstance();
 
-    private NoteListCommandParser parser = new NoteListCommandParser();
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    private NoteListCommandParser parser = new NoteListCommandParser();
+
+    private NoteBuilder note1 = new NoteBuilder(
+            "CS1010",
+            "First note",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "C");
+
+    private NoteBuilder note2 = new NoteBuilder(
+            "CS2040C",
+            "Second note",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "C++");
+
+    private NoteBuilder note3 = new NoteBuilder(
+            "CS2113",
+            "Third note",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "Java");
+
 
     @Before
     public void setUp() {
@@ -55,10 +86,9 @@ public class NoteListCommandParserTest {
     public void parse_validArgs_success() throws ParseException, CommandException {
         String unwantedMessage = NoteListCommand.MESSAGE_NOT_FOUND;
 
-        NoteBuilder note1 = new NoteBuilder("CS2113", "30/03/2030", "Java");
-        NoteBuilder note2 = new NoteBuilder("CS2040C", "03/03/2040", "C++");
         noteManager.addNote(note1.build());
         noteManager.addNote(note2.build());
+        noteManager.addNote(note3.build());
         noteManager.saveNoteList();
 
         // valid empty args

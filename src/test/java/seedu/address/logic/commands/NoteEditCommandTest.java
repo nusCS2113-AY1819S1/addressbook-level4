@@ -17,14 +17,41 @@ import seedu.address.testutil.NoteBuilder;
  */
 public class NoteEditCommandTest {
 
-    private static NoteManager noteManager = NoteManager.getInstance();
-
-    private NoteBuilder note1 = new NoteBuilder("CS1010", "10/10/2018", "C");
-    private NoteBuilder note2 = new NoteBuilder("CS2040C", "20/4/2018", "C++");
-    private NoteBuilder note3 = new NoteBuilder("CS2113", "31/12/2018", "Java");
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    private static NoteManager noteManager = NoteManager.getInstance();
+
+    private NoteBuilder note1 = new NoteBuilder(
+            "CS1010",
+            "First note",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "C");
+
+    private NoteBuilder note2 = new NoteBuilder(
+            "CS2040C",
+            "Second note",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "C++");
+
+    private NoteBuilder note3 = new NoteBuilder(
+            "CS2113",
+            "Third note",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "Java");
+
 
     @Before
     public void setUp() {
@@ -41,8 +68,24 @@ public class NoteEditCommandTest {
 
         int index = 5; // arraylist size: 3, accessed index = 4 (zero-based) -> out of bounds
         String newModuleCode = "CS5000";
-        String newDate = "1/1/2019";
-        NoteEditCommand noteEditCommand = new NoteEditCommand(index, newModuleCode, newDate);
+        String newTitle = "My new title";
+        String newStartDate = "1/1/2019";
+        String newStartTime = "11:00 AM";
+        String newEndDate = "1/1/2019";
+        String newEndTime = "1:00 PM";
+        String newLocation = "National University of Singapore";
+
+        NoteEditCommand noteEditCommand =
+                new NoteEditCommand(
+                        index,
+                        newModuleCode,
+                        newTitle,
+                        newStartDate,
+                        newStartTime,
+                        newEndDate,
+                        newEndTime,
+                        newLocation
+                );
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(String.format(NoteEditCommand.MESSAGE_INVALID_INDEX, index));

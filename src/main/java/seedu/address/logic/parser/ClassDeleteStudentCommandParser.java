@@ -3,17 +3,18 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.ClassDeleteCommand;
+import seedu.address.logic.commands.ClassDeleteStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new ClassDeleteCommand object
+ * Parses input arguments and creates a new ClassDeleteStudentCommand object
  */
-public class ClassDeleteCommandParser implements Parser<ClassDeleteCommand> {
+public class ClassDeleteStudentCommandParser implements Parser<ClassDeleteStudentCommand> {
     /**
      * Parses {@code args} into a command and returns it.
      *
@@ -21,23 +22,25 @@ public class ClassDeleteCommandParser implements Parser<ClassDeleteCommand> {
      * @throws ParseException if {@code args} does not conform the expected format
      */
     @Override
-    public ClassDeleteCommand parse(String args) throws ParseException {
+    public ClassDeleteStudentCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_CLASS_NAME, PREFIX_MODULE_CODE);
+                ArgumentTokenizer.tokenize(args, PREFIX_CLASS_NAME, PREFIX_MODULE_CODE, PREFIX_MATRIC);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_CLASS_NAME, PREFIX_MODULE_CODE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_CLASS_NAME, PREFIX_MODULE_CODE, PREFIX_MATRIC)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ClassDeleteCommand.MESSAGE_USAGE));
+                    ClassDeleteStudentCommand.MESSAGE_USAGE));
         }
 
-        String className = argMultimap.getValue(PREFIX_CLASS_NAME).get();
+        String className = argMultimap.getValue(PREFIX_CLASS_NAME).get().toUpperCase();
         ClassroomParserUtil.parseClassName(className);
-        String moduleCode = argMultimap.getValue(PREFIX_MODULE_CODE).get();
+        String moduleCode = argMultimap.getValue(PREFIX_MODULE_CODE).get().toUpperCase();
         ParserUtil.parseModuleCode(moduleCode);
+        String matricNo = ParserUtil.parseMatric(argMultimap.getValue(PREFIX_MATRIC).get());
+        ParserUtil.parseMatric(matricNo);
 
-        return new ClassDeleteCommand(className, moduleCode);
+        return new ClassDeleteStudentCommand(className, moduleCode, matricNo);
     }
 
     /**

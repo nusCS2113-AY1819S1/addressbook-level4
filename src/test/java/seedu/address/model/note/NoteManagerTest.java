@@ -17,12 +17,39 @@ public class NoteManagerTest {
 
     private static NoteManager noteManager = NoteManager.getInstance();
 
-    private NoteBuilder note1 = new NoteBuilder("CS1010", "10/10/2018", "C");
-    private NoteBuilder note2 = new NoteBuilder("CS2040C", "20/4/2018", "C++");
-    private NoteBuilder note3 = new NoteBuilder("CS2113", "31/12/2018", "Java");
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    private NoteBuilder note1 = new NoteBuilder(
+            "CS1010",
+            "First note",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "C");
+
+    private NoteBuilder note2 = new NoteBuilder(
+            "CS2040C",
+            "Second note",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "C++");
+
+    private NoteBuilder note3 = new NoteBuilder(
+            "CS2113",
+            "Third note",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "Java");
+
 
     @Before
     public void setUp() {

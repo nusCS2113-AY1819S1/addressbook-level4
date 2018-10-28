@@ -7,6 +7,7 @@ public class Gradebook {
     private String moduleCode;
     private String gradebookComponentName;
     private String gradebookNewComponentName;
+    private int index;
     private int gradebookMaxMarks;
     private int gradebookWeightage;
 

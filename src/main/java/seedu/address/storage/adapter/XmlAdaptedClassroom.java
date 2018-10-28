@@ -1,8 +1,10 @@
 package seedu.address.storage.adapter;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -26,6 +28,9 @@ public class XmlAdaptedClassroom {
     private String moduleCode;
     @XmlElement(name = "maxEnrollment", required = true, nillable = true)
     private String maxEnrollment;
+    @XmlElementWrapper(name = "students")
+    @XmlElement(name = "matricNo", required = true, nillable = true)
+    private ArrayList<String> studentList;
 
     /**
      * Constructs an XmlAdaptedClassroom.
@@ -37,10 +42,12 @@ public class XmlAdaptedClassroom {
     /**
      * Constructs an {@code XmlAdaptedClassroom} with the given classroom details
      */
-    public XmlAdaptedClassroom(String className, String moduleCode, String maxEnrollment) {
+    public XmlAdaptedClassroom(String className, String moduleCode, String maxEnrollment,
+                               ArrayList<String> studentsList) {
         this.className = className;
         this.moduleCode = moduleCode;
         this.maxEnrollment = maxEnrollment;
+        this.studentList = studentsList;
     }
 
     /**
@@ -50,6 +57,7 @@ public class XmlAdaptedClassroom {
         this.className = classroom.getClassName().getValue();
         this.moduleCode = classroom.getModuleCode().moduleCode;
         this.maxEnrollment = classroom.getMaxEnrollment().getValue();
+        this.studentList = classroom.getStudents();
     }
 
     /**
@@ -82,8 +90,9 @@ public class XmlAdaptedClassroom {
             throw new IllegalValueException(Enrollment.MESSAGE_ENROLLMENT_CONSTRAINTS);
         }
         final Enrollment modelEnrollment = new Enrollment(maxEnrollment);
-
-        return new Classroom(modelClassName, modelModuleCode, modelEnrollment);
+        Classroom classroom = new Classroom(modelClassName, modelModuleCode, modelEnrollment);
+        classroom.setStudents(studentList);
+        return classroom;
     }
 
     @Override

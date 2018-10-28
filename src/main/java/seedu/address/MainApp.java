@@ -26,6 +26,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.StorageController;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.student.StudentManager;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -41,7 +42,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(1, 3, 0, true);
+    public static final Version VERSION = new Version(1, 2, 1, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -71,6 +72,8 @@ public class MainApp extends Application {
         StorageController.retrieveData();
 
         model = initModelManager(storage, userPrefs);
+        StudentManager sm = StudentManager.getInstance();
+        sm.initializeModel(model);
 
         logic = new LogicManager(model);
 

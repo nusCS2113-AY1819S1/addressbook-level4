@@ -7,7 +7,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.ClassAddCommand;
+import seedu.address.logic.commands.ClassAddStudentCommand;
 import seedu.address.logic.commands.ClassDeleteCommand;
+import seedu.address.logic.commands.ClassDeleteStudentCommand;
 import seedu.address.logic.commands.ClassEditCommand;
 import seedu.address.logic.commands.ClassListCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -33,6 +35,7 @@ import seedu.address.logic.commands.ModuleListCommand;
 import seedu.address.logic.commands.NoteAddCommand;
 import seedu.address.logic.commands.NoteDeleteCommand;
 import seedu.address.logic.commands.NoteEditCommand;
+import seedu.address.logic.commands.NoteExportCommand;
 import seedu.address.logic.commands.NoteListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
@@ -129,6 +132,9 @@ public class AddressBookParser {
         case NoteEditCommand.COMMAND_WORD:
             return new NoteEditCommandParser().parse(arguments);
 
+        case NoteExportCommand.COMMAND_WORD:
+            return new NoteExportCommandParser().parse(arguments);
+
         case StudentEditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
@@ -185,6 +191,12 @@ public class AddressBookParser {
 
         case ClassDeleteCommand.COMMAND_WORD:
             return new ClassDeleteCommandParser().parse(arguments);
+
+        case ClassAddStudentCommand.COMMAND_WORD:
+            return new ClassAddStudentCommandParser().parse(arguments);
+
+        case ClassDeleteStudentCommand.COMMAND_WORD:
+            return new ClassDeleteStudentCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

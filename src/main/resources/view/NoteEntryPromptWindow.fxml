@@ -5,18 +5,28 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane styleClass="background" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <Label alignment="BOTTOM_LEFT" maxHeight="45.0" prefHeight="45.0" prefWidth="350.0" styleClass="label-bright" stylesheets="@DarkTheme.css" text="Enter note:">
-         <font>
-            <Font size="13.0" />
-         </font>
-         <padding>
-            <Insets left="10.0" />
-         </padding>
-      </Label>
+      <HBox>
+         <children>
+            <Label alignment="BOTTOM_LEFT" maxHeight="158.0" prefHeight="13.0" prefWidth="102.0" styleClass="label-bright" stylesheets="@DarkTheme.css" text="Enter note:" HBox.hgrow="NEVER">
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <Label fx:id="feedbackLabel" alignment="BOTTOM_RIGHT" prefHeight="28.0" prefWidth="250.0" textFill="RED">
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
+         </children>
+      </HBox>
    </top>
    <center>
       <AnchorPane BorderPane.alignment="CENTER">
