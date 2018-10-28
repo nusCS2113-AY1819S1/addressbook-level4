@@ -18,9 +18,10 @@ public class CsvWriterTest {
     //  model.getFilteredPersonList();
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private CsvWriter csvWriter = new CsvWriter(model.getFilteredPersonList());
+    private Path outputFilepath = Paths.get("data", "addressbook.csv");
+    private CsvWriter csvWriter = new CsvWriter(model.getFilteredPersonList(), outputFilepath);
 
-    private Path expectedPath = Paths.get("data" , "pineapple.csv");
+    private Path expectedPath = Paths.get("data" , "addressbook.csv");
     // AddressBookStub addressBookStub = new AddressBookStub();
     // CsvWriter csvWriter = new CsvWriter(new AddressBookStub.getPersonList());
 
