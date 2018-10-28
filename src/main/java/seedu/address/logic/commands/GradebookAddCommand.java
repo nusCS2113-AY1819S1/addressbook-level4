@@ -12,7 +12,7 @@ import seedu.address.model.gradebook.Gradebook;
 import seedu.address.model.gradebook.GradebookManager;
 
 /**
- * Adds a gradebook component to the address book.
+ * Adds a gradebook component to Trajectory.
  */
 public class GradebookAddCommand extends Command {
 

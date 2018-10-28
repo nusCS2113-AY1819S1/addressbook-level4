@@ -23,7 +23,7 @@ public class XmlAdaptedGradebook {
     private int gradeComponentWeightage;
 
     /**
-     * Constructs an XmlAdaptedModule.
+     * Constructs an XmlAdaptedGradebook
      * This is the no-arg constructor that is required by JAXB.
      */
     public XmlAdaptedGradebook() {

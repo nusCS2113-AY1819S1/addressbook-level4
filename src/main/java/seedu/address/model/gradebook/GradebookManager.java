@@ -115,20 +115,66 @@ public class GradebookManager {
         return isWeightageValid;
     }
     /**
-     This method checks if weightage adds up to a maximum of 100.
+     This method checks if edited weightage adds up to a maximum of 100.
      */
-    public boolean hasWeightageExceed (String moduleCode, int gradebookWeightage) {
-        boolean hasWeightageExceed = false;
+    public boolean hasEditWeightageExceed (String moduleCode, String gradeComponentName, int gradebookWeightage) {
+        boolean hasEditWeightageExceed = false;
+        int totalWeightage = 0;
+        for (Gradebook gradebook : gradebooks) {
+            if (gradebook.getModuleCode().equals(moduleCode)
+                    && !gradebook.getGradeComponentName().equals(gradeComponentName)) {
+                totalWeightage += gradebook.getGradeComponentWeightage();
+            }
+        }
+        if (totalWeightage + gradebookWeightage > 100) {
+            hasEditWeightageExceed = true;
+        }
+        return hasEditWeightageExceed;
+    }
+
+    /**
+     This method checks if added weightage adds up to a maximum of 100.
+     */
+    public boolean hasAddWeightageExceed (String moduleCode, int gradebookWeightage) {
+        boolean hasAddWeightageExceed = false;
         int totalWeightage = 0;
         for (Gradebook gradebook : gradebooks) {
             if (gradebook.getModuleCode().equals(moduleCode)) {
                 totalWeightage += gradebook.getGradeComponentWeightage();
             }
         }
-        if (totalWeightage + gradebookWeightage > 101) {
-            hasWeightageExceed = true;
+        if (totalWeightage + gradebookWeightage > 100) {
+            hasAddWeightageExceed = true;
         }
-        return hasWeightageExceed;
+        return hasAddWeightageExceed;
+    }
+
+    /**
+     This method checks if marks assigned is within range of max marks of grade component.
+     */
+    public boolean hasMarksExceed (String moduleCode, String gradebookComponentName, float studentMarks) {
+        boolean isMarksValid = true;
+        GradebookManager gradebookManager = new GradebookManager();
+        Gradebook gradebook = gradebookManager.findGradebookComponent(moduleCode, gradebookComponentName);
+
+        if (studentMarks > gradebook.getGradeComponentMaxMarks()) {
+            isMarksValid = false;
+        }
+
+        return isMarksValid;
+    }
+
+    /**
+     This method checks if gradebook component exist.
+     */
+    public boolean isGradeComponentValid (String moduleCode, String gradebookComponentName) {
+        boolean isGradeComponentValid = true;
+        GradebookManager gradebookManager = new GradebookManager();
+        Gradebook gradebook = gradebookManager.findGradebookComponent(moduleCode, gradebookComponentName);
+        if (gradebook == null) {
+            isGradeComponentValid = false;
+        }
+        return isGradeComponentValid;
     }
 }
 

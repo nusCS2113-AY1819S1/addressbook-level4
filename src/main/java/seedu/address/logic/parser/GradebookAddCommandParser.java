@@ -20,9 +20,9 @@ public class GradebookAddCommandParser implements Parser<GradebookAddCommand> {
     public static final String MESSAGE_EMPTY_INPUTS = "Module code and gradebook component name cannot be empty";
     public static final String MESSAGE_MAX_MARKS_ERROR = "Invalid input. \nMaximum marks should only be an integer";
     public static final String MESSAGE_WEIGHTAGE_ERROR = "Invalid input. \nWeightage should only be an integer";
-    public static final String MESSAGE_MAX_MARKS_INVALID = "Max marks should be within 0-100 range";
-    private static final String MESSAGE_DUPLICATE = "Gradebook component already exist in Trajectory";
+    public static final String MESSAGE_MAX_MARKS_INVALID = "Marks should be within 0-100 range";
     private static final String MESSAGE_WEIGHTAGE_INVALID = "Weightage should be within 0-100 range";
+    private static final String MESSAGE_DUPLICATE = "Gradebook component already exist in Trajectory";
     private static final String MESSAGE_WEIGHTAGE_EXCEED = "The accumulated weightage for module stated has exceeded!";
 
     /**
@@ -74,14 +74,14 @@ public class GradebookAddCommandParser implements Parser<GradebookAddCommand> {
         if (!isWeightageValid) {
             throw new ParseException(MESSAGE_WEIGHTAGE_INVALID);
         }
-        boolean hasWeightageExceed = gradebookManager.hasWeightageExceed(moduleCodeArg, gradeComponentWeightageArg);
+        boolean hasWeightageExceed = gradebookManager.hasAddWeightageExceed(moduleCodeArg, gradeComponentWeightageArg);
         if (hasWeightageExceed) {
             throw new ParseException(MESSAGE_WEIGHTAGE_EXCEED);
         }
 
         Gradebook gradebook = new Gradebook(
-                moduleCodeArg,
-                gradeComponentNameArg,
+                moduleCodeArg.replaceAll("\\s+", " "),
+                gradeComponentNameArg.replaceAll("\\s+", " "),
                 gradeComponentMaxMarksArg,
                 gradeComponentWeightageArg);
         return new GradebookAddCommand(gradebook);

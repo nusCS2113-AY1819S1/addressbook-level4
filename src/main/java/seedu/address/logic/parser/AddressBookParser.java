@@ -20,6 +20,9 @@ import seedu.address.logic.commands.CourseListCommand;
 import seedu.address.logic.commands.DebugCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.GradeAddCommand;
+import seedu.address.logic.commands.GradeGraphCommand;
+import seedu.address.logic.commands.GradeListCommand;
 import seedu.address.logic.commands.GradebookAddCommand;
 import seedu.address.logic.commands.GradebookDeleteCommand;
 import seedu.address.logic.commands.GradebookEditCommand;
@@ -201,6 +204,15 @@ public class AddressBookParser {
 
         case ClassDeleteStudentCommand.COMMAND_WORD:
             return new ClassDeleteStudentCommandParser().parse(arguments);
+
+        case GradeAddCommand.COMMAND_WORD:
+            return new GradeAddCommandParser().parse(arguments);
+
+        case GradeListCommand.COMMAND_WORD:
+            return new GradeListCommand();
+
+        case GradeGraphCommand.COMMAND_WORD:
+            return new GradeGraphCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
