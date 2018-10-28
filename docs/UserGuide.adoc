@@ -209,24 +209,24 @@ The `undo` command fails as there are no undoable commands executed previously.
 === Lost an item: `lost`
 
 Lost an item From the stock list +
-Format: `lost n/NAME [q/QUANTITY]`
+Format: `lost INDEX [q/QUANTITY]`
 
 
 
 Examples:
 
-* `lost n/Arduino q/25`
+* `lost 1 q/25`
 
 === Found an item: `found`
 
 Found an item From the Lost&Found List +
-Format: `found n/NAME [q/QUANTITY]`
+Format: `found INDEX [q/QUANTITY]`
 
 
 
 Examples:
 
-* `found n/Arduino q/25`
+* `found index q/25`
 
 === Listing Lost&Found List: `lost&found`
 
@@ -317,10 +317,10 @@ e.g. `login u/jalil p/dontworrybrother`
 * *Undo* : `undo`
 * *Update* : `update INDEX n/NAME [q/QUANTITY] [m/MINIMUM_QUANTITY] [t/TAG]` +
 e.g. `update 1 n/Arduino q/25 t/Lab7 t/Lab8`
-* *Lost* : `lost n/NAME [q/QUANTITY]` +
-e.g. `lost n/Arduino q/25`
-* *Found* : `found n/NAME [q/QUANTITY]` +
-e.g. `found n/Arduino q/25`
+* *Lost* : `lost INDEX [q/QUANTITY]` +
+e.g. `lost 1 q/25`
+* *Found* : `found INDEX [q/QUANTITY]` +
+e.g. `found 1 q/25`
 * *Lost&Found List* : `lost&found`
 * *Tag* : `tag KEYWORD [MORE_KEYWORDS]` +
 e.g. `tag Lab1`
