@@ -20,6 +20,7 @@ public class Drink {
     // Data fields
     private Price costPrice;
     private Price retailPrice;
+    private UniqueBatchList uniqueBatchList;
     private Quantity quantity;
     private final Set<Tag> tags = new HashSet<>();
 
@@ -62,6 +63,14 @@ public class Drink {
 
     public void setQuantity(Quantity quantity) {
         this.quantity = quantity;
+    }
+
+    public UniqueBatchList getUniqueBatchList() {
+        return uniqueBatchList;
+    }
+
+    public void setUniqueBatchList(UniqueBatchList uniqueBatchList) {
+        this.uniqueBatchList = uniqueBatchList;
     }
 
     /**
