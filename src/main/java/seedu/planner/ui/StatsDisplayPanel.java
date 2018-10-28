@@ -124,6 +124,7 @@ public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
         Tab summaryTab = new Tab(SummaryDisplay.LABEL , new SummaryDisplay(event.data).getRoot());
         clearTabs();
         createTabs(summaryTab);
+        show();
     }
 
     /**
@@ -138,5 +139,6 @@ public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
                 event.data));
         clearTabs();
         createTabs(categoryExpenseTab, categoryIncomeTab);
+        show();
     }
 }

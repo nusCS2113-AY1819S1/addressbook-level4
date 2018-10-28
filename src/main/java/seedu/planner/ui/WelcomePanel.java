@@ -135,5 +135,6 @@ public class WelcomePanel extends UiPart<Region> implements Switchable {
     public void handleUpdateWelcomePanelEvent(UpdateWelcomePanelEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         populateUi(event.data);
+        show();
     }
 }

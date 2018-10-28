@@ -230,7 +230,6 @@ public class MainWindow extends UiPart<Stage> {
             node.setVisible(false);
         }
         statsDisplayPanel.handleShowSummaryTableEvent(event);
-        statsDisplayPanel.show();
     }
 
     @Subscribe
@@ -240,7 +239,6 @@ public class MainWindow extends UiPart<Stage> {
             node.setVisible(false);
         }
         statsDisplayPanel.handleShowPieChartStatsEvent(event);
-        statsDisplayPanel.show();
     }
 
     @Subscribe
@@ -250,7 +248,6 @@ public class MainWindow extends UiPart<Stage> {
             node.setVisible(false);
         }
         detailedRecordCard.handleRecordPanelSelectionChangedEvent(event);
-        detailedRecordCard.show();
     }
 
     @Subscribe
@@ -260,6 +257,5 @@ public class MainWindow extends UiPart<Stage> {
             node.setVisible(false);
         }
         welcomePanel.handleUpdateWelcomePanelEvent(event);
-        welcomePanel.show();
     }
 }
