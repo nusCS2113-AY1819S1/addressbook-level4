@@ -233,7 +233,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedCompanyBook.updateCompany(target, editedCompany);
         indicateCompanyBookChanged();
     }
-  
+    
     // =========== Filtered Company List Accessors ===================================================== //
 
     @Override
