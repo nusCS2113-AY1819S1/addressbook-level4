@@ -115,6 +115,11 @@ sourceSets {
             srcDirs "src/main/resources", "src/main/configs"
         }
     }
+    test {
+        resources {
+            srcDir "test"
+        }
+    }
 }
 
 coveralls {
