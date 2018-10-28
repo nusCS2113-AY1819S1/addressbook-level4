@@ -15,7 +15,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 
     /* Common prefix*/
-    public static final Prefix PREFIX_DRINK_ITEM = new Prefix ("n/");
+    public static final Prefix PREFIX_DRINK_NAME = new Prefix ("n/");
     /* Manger prefix */
     public static final Prefix PREFIX_DEFAULT_SELLING_PRICE = new Prefix("p/");
     /* Stock taker prefix*/
@@ -24,7 +24,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_PRICE = new Prefix("p/");
 
     /* Prefix definition for change password and create account*/
-
     public static final Prefix PREFIX_USERNAME = new Prefix("u/");
     public static final Prefix PREFIX_PASSWORD = new Prefix("p/");
     public static final Prefix PREFIX_AUTHENTICATION_LEVEL = new Prefix("a/");
