@@ -172,7 +172,7 @@ public class IcsUtil {
 
         ICalendar iCalendar = new ICalendar();
         for (TimeSlot timeSlot : timeSlots) {
-            VEvent vEvent = toWeeklyVEvent(timeSlot, 14);
+            VEvent vEvent = timeSlotToWeeklyVEvent(timeSlot, 14);
             iCalendar.addEvent(vEvent);
         }
         return iCalendar;
@@ -183,7 +183,7 @@ public class IcsUtil {
      * Converts {@code TimeSlot} to a {@code VEvent} that has a {@code Recurrence} of {@code Frequency.WEEKLY}.
      * Note that the exported data will only stretch for 1 week, the current week. (as of now)
      */
-    private VEvent toWeeklyVEvent(TimeSlot timeSlot, int count) {
+    private VEvent timeSlotToWeeklyVEvent(TimeSlot timeSlot, int count) {
         //extract data from {@code TimeSlot}
         LocalTime startTime = timeSlot.getStartTime();
         LocalTime endTime = timeSlot.getEndTime();
@@ -222,23 +222,7 @@ public class IcsUtil {
                         .with(TemporalAdjusters.previous(dayOfWeek));
 
         LocalDateTime localDateTime = startTime.atDate(previousDay);
-        return localDateTimeToDate(localDateTime);
-    }
-
-    /**
-     * Utility function to convert {@code LocalDateTime} to {@code Date}
-     */
-    private Date localDateTimeToDate(LocalDateTime localDateTime) {
-        Date out = Date.from(localDateTime.atZone(ZoneId.of(DEFAULT_ZONE_ID)).toInstant());
-        return out;
-    }
-
-    /*
-     * Utility function to convert {@code Date} to {@code LocalDateTime}
-     */
-    private LocalDateTime dateToLocalDateTime(Date date) {
-        LocalDateTime localDateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
-        return localDateTime;
+        return LocalDateTimeAndDateConversionUtil.getInstance().localDateTimeToDate(localDateTime);
     }
 
     /**
