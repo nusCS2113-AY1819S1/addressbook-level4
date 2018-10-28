@@ -452,11 +452,11 @@ The find function has been revamped to support prioritisation of search similari
 ** Pros: Easy to implement.
 ** Cons: Can only search by name of addressees
 
-* **Alternative 2:** Search by attributes
+* **Alternative 2:** Find by attributes
 ** Pros: Can search by email, phone, address, etc instead of just the name of addressees
 ** Cons: Can only search for one attribute at a time (i.e find by name or find by email)
 
-* **Alternative 3 (current choice):** Search by attributes
+* **Alternative 3 (current choice):** Chain-able find attributes
 ** Pros: Can search by email and phone and address, etc instead of just one at a time
 ** Cons: Added complexities in find command
 
