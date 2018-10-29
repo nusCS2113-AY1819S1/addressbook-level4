@@ -422,7 +422,7 @@ If the user uses the `find` command, the following functions will follow the ind
 // tag::rsvp[]
 === RSVP
 ==== Current Implementation
-The RSVP feature consists of the `register` & `unregister` command. Attendees of an event are stored in the `eventmanager.xml` file, in a similar fashion to the storage of tags.
+The RSVP feature consists of the `register` & `unregister` command. The implementations of the commands use the `EditEventDescriptor` class and `createEditedEvent` method from `EditCommand` to aid in updating event attendance. Attendees of an event are stored in the `eventmanager.xml` file, in a similar fashion to the storage of tags.
 
 Below is an example usage scenario and how the RSVP mechanism behaves:
 
@@ -449,13 +449,21 @@ Step 7: The model is updated and committed as in Step 3, and the event page is a
 ** Pros: Easier to implement, user can easily see whether they are registered
 ** Cons: New methods will need to be implemented to make many fields for comments.
 
-===== Aspect: How to store attendance
+===== Aspect: Where to store attendance
 * **Alternative 1 (current choice):** Attendance stored in `eventmanager.xml` in similar fashion to tags.
 ** Pros: Methods for parsing tags can be applied to parse attendance
 ** Cons: Inefficient to retrieve list of events which a user has registered for
 * **Alternative 2:** Store with user details
 ** Pros: Can easily check which events a user has registered for.
 ** Cons: Inefficient to check which users are attending an event.
+
+===== Aspect: How to store attendance
+* **Alternative 1 (current choice):** Attendance stored in unsorted order.
+** Pros: Easy to add new attendee to attendance.
+** Cons: Requires sorting whenever attendance is displayed.
+* **Alternative 2:** Attendance stored in sorted order.
+** Pros: No need to sort each time an event is reloaded.
+** Cons: More complexity for inserting in correct location.
 
 ==== Future Improvements
 ===== Adding `attending` command.
