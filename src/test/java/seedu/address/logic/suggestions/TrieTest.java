@@ -135,6 +135,12 @@ public class TrieTest {
         assertTrue(eWordList.containsAll(dictionary.getListOfWords("e")));
         assertFalse(eWordList.containsAll(dictionary.getListOfWords("a")));
 
+        List<String> exWordList = new ArrayList<>();
+        exWordList.add(ExitCommand.COMMAND_WORD);
+        exWordList.add(ExportAllCommand.COMMAND_WORD);
+        assertTrue(exWordList.containsAll(dictionary.getListOfWords("ex")));
+        assertFalse(exWordList.containsAll(dictionary.getListOfWords("e")));
+
     }
 
 }

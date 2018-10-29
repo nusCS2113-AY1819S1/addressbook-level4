@@ -1,5 +1,7 @@
 package seedu.address.logic.suggestions;
 
+import java.util.ArrayList;
+
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -98,5 +100,15 @@ public class InputCommandSuggestion {
      */
     public boolean getIsEndOfWord() {
         return commandList.getIsEndOfWord();
+    }
+
+    /**
+     * Gets a list of suggested commands
+     * TODO: chop off input after whitespace
+     * @param prefix the current string to check for suggested commands
+     * @return ArrayList of possible commands
+     */
+    public ArrayList<String> getSuggestedCommands(String prefix) {
+        return commandList.getListOfWords(prefix);
     }
 }

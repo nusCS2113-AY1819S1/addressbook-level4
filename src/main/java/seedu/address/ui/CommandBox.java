@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import org.apache.commons.lang3.StringUtils;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -14,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.suggestions.InputCommandSuggestion;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -23,10 +26,12 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
 
+    private static InputCommandSuggestion ics = new InputCommandSuggestion();
+
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
     private ListElementPointer historySnapshot;
-    // private static InputCommandSuggestion ics = new InputCommandSuggestion();
+
 
     @FXML
     private TextField commandTextField;
@@ -72,6 +77,10 @@ public class CommandBox extends UiPart<Region> {
         case DOWN:
             keyEvent.consume();
             navigateToNextInput();
+            break;
+        case TAB:
+            keyEvent.consume();
+            handleTabPressed();
             break;
         default:
             // let JavaFx handle the keypress
@@ -136,6 +145,16 @@ public class CommandBox extends UiPart<Region> {
             logger.info("Invalid command: " + commandTextField.getText());
             raise(new NewResultAvailableEvent(e.getMessage()));
         }
+    }
+
+    /**
+     * Handles when the tab button is pressed
+     */
+    private void handleTabPressed() {
+        commandTextField.requestFocus();
+        String suggestions = StringUtils.join(ics.getSuggestedCommands(commandTextField.getText()), ',');
+        logger.info("Tab Pressed. Suggestions: " + suggestions);
+        raise(new NewResultAvailableEvent(suggestions));
     }
 
     /**
