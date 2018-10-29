@@ -210,6 +210,26 @@ public class AddCommandTest {
         }
 
         @Override
+        public void rankFilteredTaskDeadline() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void rankFilteredTaskModule() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void rankFilteredTaskPriority() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void reverseTodoList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean canUndoAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
