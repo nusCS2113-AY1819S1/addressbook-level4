@@ -17,7 +17,7 @@ public class ExportCalendarCommandTest {
 
     //********************************************Success test case**************************************************
     @Test
-    public void excuteCommand_success() {
+    public void excute_exportCommand_success() {
 
     }
 
@@ -32,29 +32,26 @@ public class ExportCalendarCommandTest {
     }
 
     @Test
-    public void excuteCommand_with_filteredList_success() {
+    public void execute_exportCommand_with_filteredList_success() {
 
     }
 
     //**********************************************Fail test case***************************************************
     @Test
-    public void excuteCommand_IOinput_failure() {
+    public void execute_exportCommand_IOinput_failure() {
 
     }
 
     @Test
-    public void excuteCommand_syntax_failure() {
+    public void execute_exportCommand_syntax_failure() {
 
     }
 
     @Test
-    public void excuteCommand_FileNameViolation_failure() {
+    public void execute_exportCommand_FileNameViolation_failure() {
 
     }
-
-
-
-
+    
     public static void assertCommandSuccess(Command command, Model actualModel, CommandHistory actualCommandHistory,
                                             String expectedMessage) {
         try {
