@@ -88,6 +88,7 @@ public class EditCommand extends Command {
         }
 
         Event eventToEdit = lastShownList.get(index.getZeroBased());
+        //editEventDescriptor.setComment(eventToEdit.getComment());
         Event editedEvent = createEditedEvent(eventToEdit, editEventDescriptor);
 
         if (!eventToEdit.isSameEvent(editedEvent) && model.hasEvent(editedEvent)) {
