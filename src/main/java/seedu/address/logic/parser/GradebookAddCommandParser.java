@@ -12,12 +12,14 @@ import seedu.address.logic.commands.GradebookAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.gradebook.Gradebook;
 import seedu.address.model.gradebook.GradebookManager;
+import seedu.address.model.module.ModuleManager;
 
 /**
  * Parses input arguments and creates a new GradebookAddCommand object
  */
 public class GradebookAddCommandParser implements Parser<GradebookAddCommand> {
     public static final String MESSAGE_EMPTY_INPUTS = "Module code and gradebook component name cannot be empty";
+    public static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
     public static final String MESSAGE_MAX_MARKS_ERROR = "Invalid input. \nMaximum marks should only be an integer";
     public static final String MESSAGE_WEIGHTAGE_ERROR = "Invalid input. \nWeightage should only be an integer";
     public static final String MESSAGE_MAX_MARKS_INVALID = "Marks should be within 0-100 range";
@@ -34,6 +36,7 @@ public class GradebookAddCommandParser implements Parser<GradebookAddCommand> {
         int gradeComponentMaxMarksArg = 0;
         int gradeComponentWeightageArg = 0;
         GradebookManager gradebookManager = new GradebookManager();
+        ModuleManager moduleManager = ModuleManager.getInstance();
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULE_CODE, PREFIX_GRADEBOOK_ITEM,
                 PREFIX_GRADEBOOK_MAXMARKS, PREFIX_GRADEBOOK_WEIGHTAGE);
@@ -78,7 +81,10 @@ public class GradebookAddCommandParser implements Parser<GradebookAddCommand> {
         if (hasWeightageExceed) {
             throw new ParseException(MESSAGE_WEIGHTAGE_EXCEED);
         }
-
+        boolean doesModuleExist = moduleManager.doesModuleExist(moduleCodeArg);
+        if (!doesModuleExist) {
+            throw new ParseException(MESSAGE_MODULE_CODE_INVALID);
+        }
         Gradebook gradebook = new Gradebook(
                 moduleCodeArg.replaceAll("\\s+", " "),
                 gradeComponentNameArg.replaceAll("\\s+", " "),
