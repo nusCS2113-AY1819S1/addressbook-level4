@@ -34,7 +34,6 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : lists all tasks for that day
-* **`add`**`t/Complete 2113 Tutorial d/finish the code p/low h/2` : adds a new task to the Task Book.
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -55,21 +54,21 @@ Format: `help`
 
 === Adding a task: `add`
 
-Adds a task with its title, description, priority level (low, medium, high) and the number of hours (integers only) expected to complete this task, to the task book +
-Format: `add t/TITLE d/DESCRIPTION p/PRIORITY h/HOURS`
+Adds a task with its module code, title, description, priority level (low, medium, high) and the number of hours (integers only) expected to complete this task, to the task book +
+Format: `add c/MODULE_CODE t/TITLE d/DESCRIPTION p/PRIORITY h/HOURS`
 
 Examples:
 
-* `add t/Complete 2113 Tutorial d/with code done p/high h/1`
+* `add c/CS2113 t/Complete 2113 Tutorial d/with code done p/high h/1`
 
 === Adding a milestone: `add_milestone`
 
 Adds a milestone to selected task from the task book +
-Format: `add_milestone t/TASK_TITLE m/MILESTONE r/RANK...`
+Format: `add_milestone i/INDEX m/MILESTONE r/RANK...`
 
 Examples:
 
-* `add_milestone t/Complete CS2113 W8 LO m/Complete Sections 8.1 to 8.5 r/1`
+* `add_milestone i/1 m/Complete Sections 8.1 to 8.5 r/1`
 
 === Complete a task: `complete`
 
@@ -82,12 +81,12 @@ Examples:
 
 === Sort the taskbook: `sort`
 
-Sort the tasks in the task book +
-Format: `sort t/ACTION d/DAY [w/WEEK] [m/MONTH]...`
+Sort the tasks in the task book by certain method +
+Format: `sort s/METHOD`
 
 Examples:
 
-* `sort t/Complete 2113 Tutorial d/Wed w/2`
+* `sort s/priority`
 
 === Deferring a deadline: `deadline`
 
@@ -140,7 +139,7 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, and `clear`).
+Undoable commands: those commands that modify the address book's content (`add`, `complete`, `sort`, `add_milestone`, `defer_deadline`, `delete`, and `clear`).
 ====
 
 Examples:
