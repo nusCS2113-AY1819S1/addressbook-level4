@@ -51,7 +51,7 @@ public class ExportCalendarCommand extends Command {
             + "Example: export myCalendar";
 
     public static final String MESSAGE_EXPORT_SUCCESS =
-            "%1$s event that you registered has been successfully exported to your %1$s iCalendar file";
+            "%1$d event(s) that you registered for has been successfully exported to your %2$s.ics";
 
     public static final String MESSAGE_FILE_ERROR = "File %1$s.ics has existed in other folder\n"
             + "or file has errors and cannot be opened";
@@ -76,7 +76,7 @@ public class ExportCalendarCommand extends Command {
             return new CommandResult(String.format(MESSAGE_FILE_ERROR, fileName));
         }
 
-        return new CommandResult(String.format(MESSAGE_EXPORT_SUCCESS, fileName, model.getFilteredEventList()));
+        return new CommandResult(String.format(MESSAGE_EXPORT_SUCCESS, model.getFilteredEventList().size(), fileName));
     }
 
     //*****************************Method related to the new export calendar command********************************
