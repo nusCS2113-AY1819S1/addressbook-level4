@@ -23,6 +23,7 @@ public class EventCardHandle extends NodeHandle<Node> {
     private static final String DATETIME_FIELD_ID = "#dateTime";
     private static final String TAGS_FIELD_ID = "#tags";
     private static final String ATTENDANCE_FIELD_ID = "#attendance";
+    private static final String COMMENT_FIELD_ID = "#comment";
 
     private final Label idLabel;
     private final Label nameLabel;
@@ -31,6 +32,7 @@ public class EventCardHandle extends NodeHandle<Node> {
     private final Label phoneLabel;
     private final Label emailLabel;
     private final Label datetimeLabel;
+    private final Label commentLabel;
     private final List<Label> tagLabels;
     private final List<Label> attendanceLabels;
 
@@ -43,6 +45,7 @@ public class EventCardHandle extends NodeHandle<Node> {
         venueLabel = getChildNode(VENUE_FIELD_ID);
         phoneLabel = getChildNode(PHONE_FIELD_ID);
         emailLabel = getChildNode(EMAIL_FIELD_ID);
+        commentLabel = getChildNode(COMMENT_FIELD_ID);
         datetimeLabel = getChildNode(DATETIME_FIELD_ID);
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
@@ -86,6 +89,10 @@ public class EventCardHandle extends NodeHandle<Node> {
 
     public String getDatetime() {
         return datetimeLabel.getText();
+    }
+
+    public String getComment() {
+        return commentLabel.getText();
     }
 
     public List<String> getTags() {
