@@ -41,6 +41,8 @@ public class BrowserPanel extends UiPart<Region> {
         getRoot().setOnKeyPressed(Event::consume);
 
         loadDefaultPage();
+        initializeCss();
+        initializeWorkerStateListener();
         registerAsAnEventHandler(this);
 
     }
@@ -59,6 +61,8 @@ public class BrowserPanel extends UiPart<Region> {
     private void loadDefaultPage() {
         URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
         loadPage(defaultPage.toExternalForm());
+        browser.getEngine().loadContent(HtmlTableProcessor
+                .renderCard("Welcome to Trajectory. Please login to use the platform."));
     }
 
     /**
@@ -66,6 +70,25 @@ public class BrowserPanel extends UiPart<Region> {
      */
     public void freeResources() {
         browser = null;
+    }
+
+    private void initializeCss() {
+        browser.getEngine().setUserStyleSheetLocation(getClass()
+                .getResource("/rendering/bootstrap.min.css").toString());
+    }
+
+    /**
+     * Adds a listener to automatically scroll to
+     * the bottom of the page whenever the WebView page fully loads.
+     */
+    private void initializeWorkerStateListener() {
+        browser.getEngine().getLoadWorker().stateProperty()
+                .addListener((ObservableValue<? extends Worker.State> observable,
+                              Worker.State oldValue, Worker.State newValue) -> {
+                    if (newValue == Worker.State.SUCCEEDED) {
+                        browser.getEngine().executeScript("window.scrollTo(0, document.body.scrollHeight);");
+                    }
+                });
     }
 
     @Subscribe
@@ -78,15 +101,5 @@ public class BrowserPanel extends UiPart<Region> {
     private void handleNewInfo(NewInfoMessageEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         browser.getEngine().loadContent(event.message);
-        browser.getEngine().setUserStyleSheetLocation(getClass()
-            .getResource("/rendering/bootstrap.min.css").toString());
-        browser.getEngine().getLoadWorker().stateProperty()
-                .addListener((ObservableValue<? extends Worker.State> observable,
-                              Worker.State oldValue, Worker.State newValue) -> {
-                    if (newValue == Worker.State.SUCCEEDED) {
-                        browser.getEngine().executeScript("window.scrollTo(0, document.body.scrollHeight);");
-                    }
-                }
-        );
     }
 }
