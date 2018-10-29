@@ -16,6 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.events.ui.StopUiEvent;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.DrinkLogic;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 
@@ -33,12 +34,12 @@ public class UiManager extends ComponentManager implements Ui {
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
     private static final String ICON_APPLICATION = "/images/address_book_32.png";
 
-    private Logic logic;
+    private DrinkLogic logic;
     private Config config;
     private UserPrefs prefs;
     private MainWindow mainWindow;
 
-    public UiManager(Logic logic, Config config, UserPrefs prefs) {
+    public UiManager(DrinkLogic logic, Config config, UserPrefs prefs) {
         super();
         this.logic = logic;
         this.config = config;
