@@ -119,7 +119,7 @@ public class AddressBookParser {
             }
 
         case BudgetCalculationCommand.COMMAND_WORD:
-            if (LoginManager.getIsMember()) {
+            if (LoginManager.getIsTreasurer()) {
                 return new BudgetCalculationCommandParser().parse(arguments);
             } else {
                 throw new ParseException(MESSAGE_CALCULATE_BUDGET_COMMAND_INVALID_USER);
