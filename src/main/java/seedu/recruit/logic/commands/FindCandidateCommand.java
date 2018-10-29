@@ -2,17 +2,20 @@ package seedu.recruit.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.recruit.logic.parser.CliSyntax.PREFIX_AGE;
+import static seedu.recruit.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.recruit.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.recruit.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.recruit.logic.parser.CliSyntax.PREFIX_SALARY;
+import static seedu.recruit.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.model.Model;
-import seedu.recruit.model.candidate.AddressContainsKeywordsPredicate;
-import seedu.recruit.model.candidate.EmailContainsKeywordsPredicate;
-import seedu.recruit.model.candidate.NameContainsKeywordsPredicate;
-import seedu.recruit.model.candidate.PhoneContainsKeywordsPredicate;
+import seedu.recruit.model.candidate.CandidateContainsKeywordsPredicate;
 
 
 /**
@@ -29,32 +32,25 @@ public class FindCandidateCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS \n"
+            + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_AGE + "AGE "
+            + PREFIX_EDUCATION + "EDUCATION "
+            + PREFIX_GENDER + "GENDER "
+            + PREFIX_JOB + "JOB "
+            + PREFIX_SALARY + "SALARY "
+            + PREFIX_TAG + "TAG " + "\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + " alice bob charlie";
 
-    private final AddressContainsKeywordsPredicate addressPredicate;
-    private final EmailContainsKeywordsPredicate emailPredicate;
-    private final NameContainsKeywordsPredicate namePredicate;
-    private final PhoneContainsKeywordsPredicate phonePredicate;
+    private final CandidateContainsKeywordsPredicate candidatePredicate;
 
-
-    public FindCandidateCommand(NameContainsKeywordsPredicate namePredicate,
-                                AddressContainsKeywordsPredicate addressPredicate,
-                                EmailContainsKeywordsPredicate emailPredicate,
-                                PhoneContainsKeywordsPredicate phonePredicate) {
-        this.namePredicate = namePredicate;
-        this.addressPredicate = addressPredicate;
-        this.emailPredicate = emailPredicate;
-        this.phonePredicate = phonePredicate;
+    public FindCandidateCommand(CandidateContainsKeywordsPredicate candidatePredicate) {
+        this.candidatePredicate = candidatePredicate;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.updateFilteredCandidateList(namePredicate);
-        model.updateFilteredCandidateList(addressPredicate);
-        model.updateFilteredCandidateList(emailPredicate);
-        model.updateFilteredCandidateList(phonePredicate);
+        model.updateFilteredCandidateList(candidatePredicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredCandidateList().size()));
     }
@@ -63,12 +59,6 @@ public class FindCandidateCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FindCandidateCommand // instanceof handles nulls
-                && namePredicate.equals(((FindCandidateCommand) other).namePredicate)) // state check
-                || (other instanceof FindCandidateCommand
-                && addressPredicate.equals(((FindCandidateCommand) other).addressPredicate))
-                || (other instanceof FindCandidateCommand
-                && emailPredicate.equals(((FindCandidateCommand) other).emailPredicate))
-                || (other instanceof FindCandidateCommand
-                && phonePredicate.equals(((FindCandidateCommand) other).phonePredicate));
+                && candidatePredicate.equals(((FindCandidateCommand) other).candidatePredicate)); // state check
     }
 }

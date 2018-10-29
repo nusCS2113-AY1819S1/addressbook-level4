@@ -9,7 +9,7 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_SALARY;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.model.Model;
-import seedu.recruit.model.candidate.NameContainsKeywordsPredicate;
+import seedu.recruit.model.candidate.CandidateContainsKeywordsPredicate;
 
 /**
  * Filters and lists all persons in recruit book whose tags falls under the searched category.
@@ -31,9 +31,9 @@ public class FilterCommand extends Command {
             + System.lineSeparator()
             + "Example: " + COMMAND_WORD + " " + PREFIX_EDUCATION + "O Level";
 
-    private final NameContainsKeywordsPredicate educationPredicate;
+    private final CandidateContainsKeywordsPredicate educationPredicate;
 
-    public FilterCommand(NameContainsKeywordsPredicate predicate) {
+    public FilterCommand(CandidateContainsKeywordsPredicate predicate) {
         this.educationPredicate = predicate;
     }
 

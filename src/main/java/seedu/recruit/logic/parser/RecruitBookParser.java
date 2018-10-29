@@ -151,9 +151,6 @@ public class RecruitBookParser {
             case ClearCompanyBookCommand.COMMAND_WORD:
                 return new ClearCompanyBookCommand();
 
-            case FilterCommand.COMMAND_WORD:
-                return new FilterCommandParser().parse(arguments);
-
             case FindCandidateCommand.COMMAND_WORD:
                 return new FindCandidateCommandParser().parse(arguments);
 
