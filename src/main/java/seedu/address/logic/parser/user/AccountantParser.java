@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.user.LogoutCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -35,7 +36,6 @@ public class AccountantParser {
         }
 
         String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
 
         switch (commandWord) {
 

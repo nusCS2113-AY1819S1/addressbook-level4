@@ -1,8 +1,8 @@
 package seedu.address.logic;
 
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.drinkcommands.DrinkCommandResult;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.drink.Drink;
 
@@ -18,7 +18,7 @@ public interface DrinkLogic {
      * @throws CommandException If an error occurs during command execution.
      * @throws ParseException   If an error occurs during parsing.
      */
-    DrinkCommandResult execute(String commandText) throws CommandException, ParseException;
+    CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
      * Returns an unmodifiable view of the filtered list of persons

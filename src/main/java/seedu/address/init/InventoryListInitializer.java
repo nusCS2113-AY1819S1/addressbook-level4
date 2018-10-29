@@ -25,6 +25,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.InventoryList;
 import seedu.address.model.LoginInfoManager;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -105,20 +106,21 @@ public class InventoryListInitializer {
             initialData = new AddressBook();
         }
         if (CurrentUser.getAuthenticationLevel ().equals (AUTH_ADMIN)) {
-            return new AdminModelManager (initialData , userPrefs, loginInfoManager);
+            return new AdminModelManager (new InventoryList (), userPrefs, loginInfoManager);
         }
         if (CurrentUser.getAuthenticationLevel ().equals (AUTH_MANAGER)) {
-            return new ManagerModelManager (initialData, userPrefs, loginInfoManager);
+            return new ManagerModelManager (new InventoryList (), userPrefs, loginInfoManager);
         }
         if (CurrentUser.getAuthenticationLevel ().equals (AUTH_STOCK_TAKER)) {
-            return new StockTakerModelManager (initialData , userPrefs, loginInfoManager);
+            return new StockTakerModelManager (new InventoryList () , userPrefs, loginInfoManager);
         }
 
         if (CurrentUser.getAuthenticationLevel ().equals (AUTH_ACCOUNTANT)) {
-            return new AccountantModelManager (initialData, userPrefs, loginInfoManager);
+            return new AccountantModelManager (new InventoryList (), userPrefs, loginInfoManager);
         }
 
-        return new ModelManager (initialData, userPrefs, loginInfoManager);
+        //TODO: need change InventoryList () to storage when storage is done
+        return new ModelManager (new InventoryList () , userPrefs, loginInfoManager);
     }
 
 

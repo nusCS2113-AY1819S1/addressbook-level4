@@ -122,7 +122,7 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
 
     public void handleStartUiEvent(StartUiEvent event) {
-        System.out.println ("reveieved startUievent in UI MANAGER");
+        System.out.println ("Uievent in UI MANAGER");
         start(event.mainStage);
     }
     @Subscribe

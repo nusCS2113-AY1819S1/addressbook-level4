@@ -5,9 +5,9 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.drinkcommands.DrinkCommand;
-import seedu.address.logic.drinkcommands.DrinkCommandResult;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.user.AccountantParser;
@@ -45,10 +45,10 @@ public class DrinkLogicManager extends ComponentManager implements DrinkLogic {
     }
 
     @Override
-    public DrinkCommandResult execute(String commandText) throws CommandException, ParseException {
+    public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
-            DrinkCommand command;
+            Command command;
             /*
             if (model instanceof AdminModel) {
                 command = adminParser.parseCommand (commandText);

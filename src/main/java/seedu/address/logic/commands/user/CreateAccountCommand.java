@@ -17,6 +17,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.LoginInfoManager;
 import seedu.address.model.Model;
 import seedu.address.model.user.AuthenticationLevel;
 import seedu.address.model.user.Password;
@@ -63,20 +64,18 @@ public class CreateAccountCommand extends Command {
 
 
     @Override
-    public CommandResult execute(LoginInfoManager loginInfoManager, CommandHistory history)
-            throws CommandException {
-        requireNonNull(loginInfoManager);
+    public CommandResult execute (Model model, CommandHistory history) throws CommandException {
+        requireNonNull(model);
+        assert model instanceof ManagerModel;
 
-        if (loginInfoManager.isUserNameExist(userName.toString())) {
-            throw new CommandException(MESSAGE_DUPLICATE_USERNAME);
+        ManagerModel managerModel = (ManagerModel) model;
+
+        if (managerModel.isUserNameExist (userName)) {
+            throw new CommandException (MESSAGE_DUPLICATE_USERNAME);
         }
-        loginInfoManager.createNewAccount(userName, password, authenticationLevel);
+        managerModel.createNewAccount (userName, password, authenticationLevel);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
-    @Override
-    public CommandResult execute(Model model, CommandHistory history) {
-        return null;
-    }
 
 }

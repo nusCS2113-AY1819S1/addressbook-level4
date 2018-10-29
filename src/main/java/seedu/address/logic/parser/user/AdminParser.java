@@ -6,27 +6,26 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.commands.AddDrinkCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.user.ChangePasswordCommand;
 import seedu.address.logic.commands.user.CreateAccountCommand;
 import seedu.address.logic.commands.user.DeleteAccountCommand;
 import seedu.address.logic.commands.user.LogoutCommand;
-import seedu.address.logic.parser.AddItemCommandParser;
+import seedu.address.logic.commands.SellDrinkCommand;
+import seedu.address.logic.parser.AddDrinkCommandParser;
 import seedu.address.logic.parser.DeleteCommandParser;
-import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.logic.parser.FindCommandParser;
 import seedu.address.logic.parser.SelectCommandParser;
+import seedu.address.logic.parser.SellDrinkCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -57,11 +56,15 @@ public class AdminParser {
 
         switch (commandWord) {
 
-        // case AddItemCommand.COMMAND_WORD:
-        //    return new AddDrinkCommandParser().parse (arguments);
+         case AddDrinkCommand.COMMAND_WORD:
+            return new AddDrinkCommandParser ().parse (arguments);
 
-        //case ChangePasswordCommand.COMMAND_WORD:
-        //    return new ChangePasswordCommandParser ().parse(arguments);
+        case SellDrinkCommand.COMMAND_WORD:
+            return new SellDrinkCommandParser ().parse (arguments);
+            //==========login related command===============//
+
+        case ChangePasswordCommand.COMMAND_WORD:
+            return new ChangePasswordCommandParser ().parse(arguments);
 
 
         case CreateAccountCommand.COMMAND_WORD:
@@ -73,9 +76,6 @@ public class AdminParser {
 
         case LogoutCommand.COMMAND_WORD:
             return new LogoutCommand ();
-        //existing command
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
@@ -100,13 +100,6 @@ public class AdminParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-
-        case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();
-
-        case RedoCommand.COMMAND_WORD:
-            return new RedoCommand();
-
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
