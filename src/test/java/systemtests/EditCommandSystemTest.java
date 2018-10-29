@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import static seedu.address.logic.commands.CommandTestUtil.ATTENDEE_DESC_HAN;
 import static seedu.address.logic.commands.CommandTestUtil.ATTENDEE_DESC_TED;
+import static seedu.address.logic.commands.CommandTestUtil.COMMENT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.CONTACT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.CONTACT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_AMY;
@@ -27,6 +28,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDEE_TED;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMMENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTACT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
@@ -80,8 +82,9 @@ public class EditCommandSystemTest extends EventManagerSystemTest {
         Index index = INDEX_FIRST_EVENT;
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_BOB + "  "
                 + CONTACT_DESC_BOB + " " + PHONE_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + VENUE_DESC_BOB + " "
-                + DATETIME_DESC_BOB + " " + TAG_DESC_HUSBAND + " " + ATTENDEE_DESC_TED;
-        Event editedEvent = new EventBuilder(BOB).withTags(VALID_TAG_HUSBAND).withAttendees(VALID_ATTENDEE_TED).build();
+                + DATETIME_DESC_BOB + " " + COMMENT_DESC_BOB + " " + TAG_DESC_HUSBAND + " " + ATTENDEE_DESC_TED;
+        Event editedEvent = new EventBuilder(BOB).withTags(VALID_TAG_HUSBAND).withAttendees(VALID_ATTENDEE_TED)
+                .withComment(VALID_COMMENT_BOB).build();
         assertCommandSuccess(command, index, editedEvent);
 
         /* Case: undo editing the last event in the list -> last event restored */

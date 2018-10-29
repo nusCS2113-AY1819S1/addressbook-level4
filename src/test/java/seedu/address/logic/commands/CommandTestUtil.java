@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -48,8 +49,8 @@ public class CommandTestUtil {
     public static final String VALID_VENUE_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_DATETIME_AMY = "17/8/2018 21:15";
     public static final String VALID_DATETIME_BOB = "7/7/2017 7:07";
-    public static final String VALID_COMMENT_AMY = "{span}This is a comment{/span}"; //TODO for Comment
-    public static final String VALID_COMMENT_BOB = "{span}This is a comment{/span}"; //TODO for Comment
+    public static final String VALID_COMMENT_AMY = "{span}Comment Section{/span}{ol}{/ol}";
+    public static final String VALID_COMMENT_BOB = "{span}Comment Section{/span}{ol}{/ol}";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -69,6 +70,8 @@ public class CommandTestUtil {
     public static final String VENUE_DESC_BOB = " " + PREFIX_VENUE + VALID_VENUE_BOB;
     public static final String DATETIME_DESC_AMY = " " + PREFIX_DATETIME + VALID_DATETIME_AMY;
     public static final String DATETIME_DESC_BOB = " " + PREFIX_DATETIME + VALID_DATETIME_BOB;
+    public static final String COMMENT_DESC_AMY = " " + PREFIX_COMMENT + VALID_COMMENT_AMY;
+    public static final String COMMENT_DESC_BOB = " " + PREFIX_COMMENT + VALID_COMMENT_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -156,7 +159,6 @@ public class CommandTestUtil {
         Event event = model.getFilteredEventList().get(targetIndex.getZeroBased());
         final String[] splitName = event.getName().fullName.split("\\s+");
         model.updateFilteredEventList(new EventContainsKeywordsPredicate(Arrays.asList(splitName[0])));
-
         assertEquals(1, model.getFilteredEventList().size());
     }
 
@@ -168,5 +170,4 @@ public class CommandTestUtil {
         model.deleteEvent(firstEvent);
         model.commitEventManager();
     }
-
 }
