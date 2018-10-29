@@ -61,11 +61,7 @@ public class ImportCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
+        Person personToEdit = model.getUser();
 
         Optional<TimeTable> optionalTimeTable;
         TimeTable timeTable;
@@ -80,7 +76,6 @@ public class ImportCommand extends Command {
         }
         timeTable = optionalTimeTable.get();
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
         Person modifiedPerson = createModifiedPerson(personToEdit, timeTable);
 
         model.updatePerson(personToEdit, modifiedPerson);
