@@ -17,17 +17,17 @@ public class ExportCalendarCommandTest {
 
     //********************************************Success test case**************************************************
     @Test
-    public void excute_exportCommand_success() {
+    public void execute_exportCommand_success() {
 
     }
 
     @Test
-    public void excute_undoCommand_success() {
+    public void execute_undoCommand_success() {
 
     }
 
     @Test
-    public void excute_redoCommand_success() {
+    public void execute_redoCommand_success() {
 
     }
 
@@ -51,7 +51,7 @@ public class ExportCalendarCommandTest {
     public void execute_exportCommand_FileNameViolation_failure() {
 
     }
-    
+
     public static void assertCommandSuccess(Command command, Model actualModel, CommandHistory actualCommandHistory,
                                             String expectedMessage) {
         try {
