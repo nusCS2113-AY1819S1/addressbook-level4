@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import com.t13g2.forum.commons.core.EventsCenter;
 import com.t13g2.forum.commons.events.model.ShowAnnouncementEvent;
-import com.t13g2.forum.commons.exceptions.NotLoggedInException;
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.Context;

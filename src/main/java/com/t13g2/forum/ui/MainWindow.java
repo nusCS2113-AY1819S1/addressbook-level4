@@ -2,9 +2,6 @@ package com.t13g2.forum.ui;
 
 import java.util.logging.Logger;
 
-import javafx.scene.control.Label;
-import org.controlsfx.control.StatusBar;
-
 import com.google.common.eventbus.Subscribe;
 import com.t13g2.forum.commons.core.Config;
 import com.t13g2.forum.commons.core.GuiSettings;
@@ -18,6 +15,7 @@ import com.t13g2.forum.model.UserPrefs;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -65,7 +63,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane statusbarPlaceholder;
 
     @FXML
-    private Label statusBarUserName;
+    private Label lblUserName;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML, primaryStage);
@@ -193,11 +191,11 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleUserLogin(String userName, boolean isAdmin) {
         String userType = "(" + (isAdmin ? "Admin" : "User") + ")";
-        statusBarUserName.setText("");
+        lblUserName.setText("");
         if (userName.equals("")) {
-            statusBarUserName.setText("Not login yet, please login!");
+            lblUserName.setText("Not login yet, please login!");
         } else {
-            statusBarUserName.setText(userName + userType);
+            lblUserName.setText(userName + userType);
         }
     }
 
