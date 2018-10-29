@@ -15,6 +15,7 @@ import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 
+//@@author HansKoh
 /**
  * Update a existing comment content in the forum book
  * User could only update comment content created by his/her own.

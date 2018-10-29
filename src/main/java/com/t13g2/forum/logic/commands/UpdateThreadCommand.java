@@ -15,6 +15,7 @@ import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 
+//@@author HansKoh
 /**
  * Update a existing thread title in the forum book
  * User could only update thread title created by his/her own.

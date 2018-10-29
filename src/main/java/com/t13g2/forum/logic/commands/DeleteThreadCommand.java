@@ -13,6 +13,7 @@ import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 
+//@@author HansKoh
 /**
  * Delete a certain thread. Only admin could delete threads from others,
  * user could only delete threads created by his/her own.

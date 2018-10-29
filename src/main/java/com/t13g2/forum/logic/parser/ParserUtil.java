@@ -182,7 +182,7 @@ public class ParserUtil {
         return new Module(trimmedModuleTitle, trimmedModuleCode);
     }
 
-    //@@author
+    //@@author HansKoh
     /**
      * moduleCode
      */
