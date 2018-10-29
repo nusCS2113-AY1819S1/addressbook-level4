@@ -38,8 +38,8 @@ public class XmlAdaptedTaskTest {
     @Test
     public void toModelType_invalidDeadline_throwsIllegalValueException() {
         XmlAdaptedTask task =
-                new XmlAdaptedTask(INVALID_DEADLINE, VALID_MODULECODE, VALID_TITLE, VALID_DESCRIPTION, VALID_PRIORITY_LEVEL,
-                        VALID_EXPECTED_NUM_OF_HOURS);
+                new XmlAdaptedTask(INVALID_DEADLINE, VALID_MODULECODE, VALID_TITLE, VALID_DESCRIPTION,
+                        VALID_PRIORITY_LEVEL, VALID_EXPECTED_NUM_OF_HOURS);
         String expectedMessage = Deadline.MESSAGE_DEADLINE_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
@@ -97,7 +97,7 @@ public class XmlAdaptedTaskTest {
 
     @Test
     public void toModelType_nullDescription_throwsIllegalValueException() {
-        XmlAdaptedTask task = new XmlAdaptedTask(VALID_DEADLINE,VALID_MODULECODE, VALID_TITLE, null,
+        XmlAdaptedTask task = new XmlAdaptedTask(VALID_DEADLINE, VALID_MODULECODE, VALID_TITLE, null,
                 VALID_PRIORITY_LEVEL, VALID_EXPECTED_NUM_OF_HOURS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "Description");
         Assert.assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);

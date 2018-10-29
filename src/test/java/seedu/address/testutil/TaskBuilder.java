@@ -116,7 +116,9 @@ public class TaskBuilder {
         return this;
     }
 
-
+    /**
+     * Sets the milestones of the {@code Task} that we are building.
+     */
     public TaskBuilder withMilestones(Set<Milestone> milestones) {
         this.milestones = milestones;
         return this;
@@ -127,6 +129,7 @@ public class TaskBuilder {
      * @return Task
      */
     public Task build() {
-        return new Task(deadline, moduleCode, title, description, priority, expectedNumOfHours, completedNumOfHours, isCompleted, milestones);
+        return new Task(deadline, moduleCode, title, description, priority, expectedNumOfHours,
+                completedNumOfHours, isCompleted, milestones);
     }
 }

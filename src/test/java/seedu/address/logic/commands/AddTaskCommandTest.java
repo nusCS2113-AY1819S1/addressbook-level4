@@ -23,7 +23,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.task.Deadline;
-import seedu.address.model.task.Milestone;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.TaskBuilder;
 
