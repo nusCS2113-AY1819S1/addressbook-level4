@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -105,15 +106,15 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     public void sortDate() {
-        internalList.sort(SortComparator.compareDeadlines);
+        Collections.sort(internalList, Comparator.comparing(Task::getMonth).thenComparing(Task::getDay));
     }
 
     public void sortModule() {
-        internalList.sort(SortComparator.compareModule);
+        internalList.sort(SortComparator.compareModule());
     }
 
     public void sortPriority() {
-        internalList.sort(SortComparator.comparePriority);
+        internalList.sort(SortComparator.comparePriority());
     }
 
     public void reverseTask() {

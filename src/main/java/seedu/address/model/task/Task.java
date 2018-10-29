@@ -60,6 +60,14 @@ public class Task {
         isComplete = false;
     }
 
+    public String getMonth() {
+        return date.toString().substring(3, 5);
+    }
+
+    public String getDay() {
+        return date.toString().substring(0, 2);
+    }
+
     /**
      * Returns true if both tasks are totally the same.
      * This defines a weaker notion of equality between two tasks.
