@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import static seedu.address.testutil.TypicalGroups.getTypicalGroups;
+import static seedu.address.testutil.TypicalGroups.getTypicalGroupsValidEmailPersons;
 import static seedu.address.testutil.TypicalPersons.getMultipleValidTypicalPerson;
 import static seedu.address.testutil.TypicalPersons.getSingleValidTypicalPerson;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
@@ -39,6 +40,15 @@ public class TypicalAddressBook {
         for (Person person : getMultipleValidTypicalPerson()) {
             ab.addPerson(person);
         }
+        return ab;
+    }
+
+    public static AddressBook getGroupTypicalAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getMultipleValidTypicalPerson()) {
+            ab.addPerson(person);
+        }
+        ab.createGroup(getTypicalGroupsValidEmailPersons());
         return ab;
     }
 }

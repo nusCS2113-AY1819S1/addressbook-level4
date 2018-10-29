@@ -7,18 +7,18 @@ https://coveralls.io/github/CS2113-AY1819S1-T13-4/main?branch=master&service=git
 https://gitter.im/se-edu/Lobby[image:https://badges.gitter.im/se-edu/Lobby.svg[Gitter chat]]
 
 ifdef::env-github[]
-image::docs/images/Ui.png[width="600"]
+image::docs/images/Ui.png.jpg[width="600"]
 endif::[]
 
 ifndef::env-github[]
-image::docs/images/Ui.png[width="600"]
+image::docs/images/Ui.png.jpg[width="600"]
 endif::[]
 
 * *Student Management System* is a Java application that runs on the Desktop.
 * It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
-* *Student Management System* is suitable for any Lecturers who has students under their supervision.
-* *Student Management System* will organize all students in his or her teaching module to be in their respective tutorial class.
-* *Student Management System* also contains multiple useful functionalities to assist Lecturer in his teaching activities.
+* *Student Management System* is suitable University Lecturers with students under their supervision.
+* *Student Management System* is capable of adding students to its record and grouping these students into their respective module/tutorial groups.
+* *Student Management System* also contains multiple useful functionalities to assist Lecturers on day to day tasks.
 
 '''
 == Functionalities
