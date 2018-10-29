@@ -39,7 +39,7 @@ public class XmlAdaptedEventTest {
     private static final List<XmlAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(XmlAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final List<XmlAdaptedAttendee> VALID_ATTENDEES = BENSON.getAttendees().stream()
+    private static final List<XmlAdaptedAttendee> VALID_ATTENDEES = BENSON.getAttendance().stream()
             .map(XmlAdaptedAttendee::new)
             .collect(Collectors.toList());
 

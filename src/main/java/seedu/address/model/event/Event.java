@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
 import seedu.address.model.attendee.Attendee;
 import seedu.address.model.tag.Tag;
@@ -74,7 +75,9 @@ public class Event {
         return dateTime;
     }
 
-    public Status getStatus () { return status; }
+    public Status getStatus () {
+        return status;
+    }
 
     public Comment getComment () { return comment; }
 
@@ -86,6 +89,9 @@ public class Event {
         return Collections.unmodifiableSet(tags);
     }
 
+    /**
+     * Returns tags formatted as a string to be passed into Event Page HTML as query string parameter
+     */
     public String getTagsString() {
         List<String> tagsList = new ArrayList<>();
         for (Tag t: tags) {
@@ -99,8 +105,20 @@ public class Event {
      * Returns an immutable attendee set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Attendee> getAttendees() {
+    public Set<Attendee> getAttendance() {
         return Collections.unmodifiableSet(attendees);
+    }
+
+    /**
+     * Returns attendee list formatted as a string to be passed into Event Page HTML as query string parameter
+     */
+    public String getAttendanceString() {
+        TreeSet<String> attendeesSet = new TreeSet<>();
+        for (Attendee a: attendees) {
+            attendeesSet.add(a.attendeeName);
+        }
+        String attendeesString = String.join("<br>", attendeesSet);
+        return attendeesString;
     }
 
     /**
@@ -140,7 +158,7 @@ public class Event {
                 && otherEvent.getVenue().equals(getVenue())
                 && otherEvent.getDateTime().equals(getDateTime())
                 && otherEvent.getTags().equals(getTags())
-                && otherEvent.getAttendees().equals(getAttendees());
+                && otherEvent.getAttendance().equals(getAttendance());
     }
 
     @Override
@@ -169,7 +187,7 @@ public class Event {
         getTags().forEach(builder::append);
 
         builder.append(" Attendees: ");
-        getAttendees().forEach(builder::append);
+        getAttendance().forEach(builder::append);
         return builder.toString();
     }
 
