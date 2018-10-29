@@ -28,7 +28,7 @@ import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.summary.SummaryByDateList;
 import seedu.planner.model.summary.SummaryByMonthList;
 import seedu.planner.ui.SummaryEntry;
-
+//@@author tenvinc
 public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
 
     private static final String START_DATE = "25-3-2018";

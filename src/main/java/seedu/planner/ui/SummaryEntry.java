@@ -2,6 +2,7 @@ package seedu.planner.ui;
 
 import javafx.beans.property.SimpleStringProperty;
 
+//@@author tenvinc
 /**
  * This represents a UI friendly summary entry.
  */

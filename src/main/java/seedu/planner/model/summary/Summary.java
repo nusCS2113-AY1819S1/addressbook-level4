@@ -3,6 +3,7 @@ package seedu.planner.model.summary;
 import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Record;
 
+//@@author tenvinc
 /**
  * This class represents a summary in FinancialPlanner which records can be added to.
  */

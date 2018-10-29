@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-
+//@@ author tenvinc
 /**
  * A handle to the {@code DetailedRecordCard} in the GUI
  */

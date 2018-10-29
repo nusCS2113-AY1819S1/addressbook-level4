@@ -25,7 +25,7 @@ import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
 import seedu.planner.testutil.RecordBuilder;
 import seedu.planner.testutil.SummaryBuilder;
-
+//@@author tenvinc
 /**
  * This test tests both SummaryByDateList and SummaryByMonthList because this 2 classes
  * share a great number of similarities

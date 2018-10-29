@@ -17,6 +17,7 @@ import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.summary.SummaryByMonthList;
 
+//@@author tenvinc
 /** List all the summary of records within a period of time specified */
 public class SummaryByMonthCommand extends SummaryCommand {
 

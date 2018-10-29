@@ -10,7 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.ui.RecordPanelSelectionChangedEvent;
 import seedu.planner.model.record.Record;
-
+//@@author tenvinc
 /**
  * This UI component is responsible for displaying detailed information for each record
  */
