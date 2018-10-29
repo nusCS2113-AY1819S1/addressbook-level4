@@ -36,7 +36,7 @@ public class TestUtil {
      */
     /*
     public static Index getMidIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredPersonList().size() / 2);
+        return Index.fromOneBased(model.getFilteredDrinkList().size() / 2);
     }
     */
 
@@ -45,7 +45,7 @@ public class TestUtil {
      */
     /*
     public static Index getLastIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredPersonList().size());
+        return Index.fromOneBased(model.getFilteredDrinkList().size());
     }
     */
 
@@ -54,7 +54,7 @@ public class TestUtil {
      */
     /*
     public static Person getPerson(Model model, Index index) {
-        return model.getFilteredPersonList().get(index.getZeroBased());
+        return model.getFilteredDrinkList().get(index.getZeroBased());
     }
     */
 }

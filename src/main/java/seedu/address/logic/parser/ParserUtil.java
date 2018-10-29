@@ -9,6 +9,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.drink.Price;
+import seedu.address.model.drink.Quantity;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -41,13 +43,18 @@ public class ParserUtil {
      * Parses a {@code String userName} into a {@code UserName}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code UserName} is invalid.
+
+     * @throws ParseException if the given {@code UserName} is invalid .
      */
     public static UserName parseUserName(String userName) throws ParseException {
         requireNonNull(userName);
         String trimmedUserName = userName.trim();
         if (!UserName.isValidUserName(trimmedUserName)) {
             throw new ParseException(UserName.MESSAGE_USER_NAME_CONSTRAINTS);
+        }
+
+        if (UserName.isUserNameTooLong (trimmedUserName)) {
+            throw new ParseException(UserName.MESSAGE_USER_NAME_LENGTH_CONSTRAINTS);
         }
         return new UserName (trimmedUserName);
     }
@@ -63,6 +70,10 @@ public class ParserUtil {
         if (!Password.isValidPassword (trimmedPassword)) {
             throw new ParseException(Password.MESSAGE_PASSWORD_CONSTRAINTS);
         }
+        if (Password.isPasswordTooLong (trimmedPassword)) {
+            throw new ParseException(Password.MESSAGE_PASSWORD_LENGTH_CONSTRAINTS);
+        }
+
         return new Password (trimmedPassword);
     }
     /**
@@ -79,33 +90,62 @@ public class ParserUtil {
         }
         return new AuthenticationLevel (trimmedAuthenticationLevel);
     }
+    // ================== Drink-related parsing ===================
     /**
      * Parses a {@code String itemName} into a {@code String itenName}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static String parseItemName(String name) throws ParseException {
+    public static seedu.address.model.drink.Name parseDrinkName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        //        if (!Name.isValidName(trimmedName)) {
-        //            throw new ParseException(Name.MESSAGE_NAME_CONSTRAINTS);
-        //        }
-        return name;
+        if (!seedu.address.model.drink.Name.isValidName(trimmedName)) {
+            throw new ParseException(seedu.address.model.drink.Name.MESSAGE_NAME_CONSTRAINTS);
+        }
+        return new seedu.address.model.drink.Name (trimmedName);
     }
+
     /**
-     * Parses a {@code String itemName} into a {@code String itenName}.
+     * Parses a {@code String price} into a {@code Price}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code name} is invalid.
+     * @throws ParseException if the given {@code price} is invalid.
      */
-    public static String parseDefaultSellingPrice (String defaultSellingPrice) throws ParseException {
+    public static Price parseDrinkCostPrice (String price) throws ParseException {
+        requireNonNull(price);
+        String trimmedCostPrice = price.trim();
+        if (!Price.isValidPrice(trimmedCostPrice)) {
+            throw new ParseException(Price.MESSAGE_PRICE_CONSTRAINTS);
+        }
+        return new Price(trimmedCostPrice);
+    }
+
+    /**
+     * Parses a {@code String price} into a {@code Price}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code price} is invalid.
+     */
+    public static Price parseDrinkDefaultSellingPrice (String defaultSellingPrice) throws ParseException {
         requireNonNull(defaultSellingPrice);
-        String trimmedName = defaultSellingPrice.trim();
-        //        if (!Name.isValidName(trimmedName)) {
-        //            throw new ParseException(Name.MESSAGE_NAME_CONSTRAINTS);
-        //        }
-        return defaultSellingPrice;
+        String trimmedDefaultSellingPrice = defaultSellingPrice.trim();
+        if (!Price.isValidPrice(trimmedDefaultSellingPrice)) {
+            throw new ParseException(Price.MESSAGE_PRICE_CONSTRAINTS);
+        }
+        return new Price(trimmedDefaultSellingPrice);
+    }
+
+    /**
+     * Parses {@code String quantity} into a {@code Quantity}.
+     */
+    public static Quantity parseQuantity(String quantity) throws ParseException {
+        requireNonNull(quantity);
+        String trimmedQuantity = quantity.trim();
+        if (!Quantity.isValidQuantity(trimmedQuantity)) {
+            throw new ParseException(Quantity.MESSAGE_QUANTITY_CONSTRAINTS);
+        }
+        return new Quantity(trimmedQuantity);
     }
     /**
      * Parses a {@code String name} into a {@code Name}.

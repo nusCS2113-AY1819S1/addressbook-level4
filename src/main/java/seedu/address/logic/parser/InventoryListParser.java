@@ -1,4 +1,4 @@
-package seedu.address.logic.drinkparser;
+package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -6,10 +6,10 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.drinkcommands.AddDrinkCommand;
-import seedu.address.logic.drinkcommands.DrinkCommand;
-import seedu.address.logic.drinkcommands.HelpCommand;
-import seedu.address.logic.drinkparser.exceptions.DrinkParseException;
+import seedu.address.logic.commands.AddDrinkCommand;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses user input.
@@ -25,12 +25,12 @@ public class InventoryListParser {
      *
      * @param userInput full user input string
      * @return the command based on the user input
-     * @throws DrinkParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform the expected format
      */
-    public DrinkCommand parseCommand(String userInput) throws DrinkParseException {
+    public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new DrinkParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
         String commandWord = matcher.group("commandWord");
@@ -43,46 +43,33 @@ public class InventoryListParser {
         /*
             case SellDrinkCommand.COMMAND_WORD:
                 return new SellDrinkCommandParser ().parse (arguments);
-
             case ChangePasswordCommand.COMMAND_WORD:
                 return new ChangePasswordCommandParser().parse(arguments);
-
-
             case EditCommand.COMMAND_WORD:
                 return new EditCommandParser().parse(arguments);
-
             case SelectCommand.COMMAND_WORD:
                 return new SelectCommandParser().parse(arguments);
-
             case DeleteCommand.COMMAND_WORD:
                 return new DeleteCommandParser().parse(arguments);
-
             case ClearCommand.COMMAND_WORD:
                 return new ClearCommand();
-
             case FindCommand.COMMAND_WORD:
                 return new FindCommandParser().parse(arguments);
-
             case ListCommand.COMMAND_WORD:
                 return new ListCommand();
-
             case HistoryCommand.COMMAND_WORD:
                 return new HistoryCommand();
-
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
-
             case HelpCommand.COMMAND_WORD:
                 return new HelpCommand();
-
             case UndoCommand.COMMAND_WORD:
                 return new UndoCommand();
-
             case RedoCommand.COMMAND_WORD:
                 return new RedoCommand();
         */
         default:
-            throw new DrinkParseException(MESSAGE_UNKNOWN_COMMAND);
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 }
