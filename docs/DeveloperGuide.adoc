@@ -444,8 +444,6 @@ Step 2. The 'addTag' command calls `updateFilteredItemList();` in `model` show t
 
 ==== Design Considerations
 
-===== Aspect: How add tag executes
-
 * **Alternative 1 (current choice):** Add tags to one item in the stock list.
 ** Pros: Easy to implement.
 ** Cons: May be complicated when the user want to add same tags to multiple items.
