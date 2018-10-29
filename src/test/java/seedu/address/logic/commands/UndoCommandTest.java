@@ -28,6 +28,7 @@ public class UndoCommandTest {
 
         deleteFirstEvent(expectedModel);
         deleteFirstEvent(expectedModel);
+        expectedModel.logUser(new UserBuilder().build());
     }
 
     @Test

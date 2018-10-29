@@ -41,6 +41,7 @@ public class SelectCommandTest {
     public void setUp() {
         User user = new UserBuilder().build();
         model.logUser(user);
+        expectedModel.logUser(new UserBuilder().build());
     }
 
     @Test

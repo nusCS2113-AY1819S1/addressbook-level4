@@ -36,6 +36,7 @@ public class AddCommandIntegrationTest {
         Event validEvent = new EventBuilder().build();
 
         Model expectedModel = new ModelManager(model.getEventManager(), new UserPrefs());
+        expectedModel.logUser(new UserBuilder().build());
         expectedModel.addEvent(validEvent);
         expectedModel.commitEventManager();
 

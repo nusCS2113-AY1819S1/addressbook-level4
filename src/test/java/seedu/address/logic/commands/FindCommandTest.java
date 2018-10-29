@@ -37,6 +37,7 @@ public class FindCommandTest {
         User user = new UserBuilder().build();
         model = new ModelManager(getTypicalEventManager(), new UserPrefs());
         model.logUser(user);
+        expectedModel.logUser(new UserBuilder().build());
     }
 
     @Test

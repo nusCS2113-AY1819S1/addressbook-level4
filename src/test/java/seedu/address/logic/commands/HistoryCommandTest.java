@@ -19,6 +19,7 @@ public class HistoryCommandTest {
     public void execute() {
         User user = new UserBuilder().build();
         model.logUser(user);
+        expectedModel.logUser(new UserBuilder().build());
 
         assertCommandSuccess(new HistoryCommand(), model, history, HistoryCommand.MESSAGE_NO_HISTORY, expectedModel);
 

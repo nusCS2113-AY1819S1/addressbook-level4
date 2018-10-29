@@ -47,6 +47,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getEventManager(), new UserPrefs());
+        expectedModel.logUser(new UserBuilder().build());
         expectedModel.deleteEvent(eventToDelete);
         expectedModel.commitEventManager();
 
@@ -76,6 +77,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete);
 
         Model expectedModel = new ModelManager(model.getEventManager(), new UserPrefs());
+        expectedModel.logUser(new UserBuilder().build());
         expectedModel.deleteEvent(eventToDelete);
         expectedModel.commitEventManager();
         showNoPerson(expectedModel);
@@ -85,8 +87,6 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        User user = new UserBuilder().build();
-        model.logUser(user);
         showEventAtIndex(model, INDEX_FIRST_EVENT);
 
         Index outOfBoundIndex = INDEX_SECOND_EVENT;
@@ -100,12 +100,10 @@ public class DeleteCommandTest {
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
-        User user = new UserBuilder().build();
-        model.logUser(user);
-
         Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_EVENT);
         Model expectedModel = new ModelManager(model.getEventManager(), new UserPrefs());
+        expectedModel.logUser(new UserBuilder().build());
         expectedModel.deleteEvent(eventToDelete);
         expectedModel.commitEventManager();
 
@@ -148,6 +146,7 @@ public class DeleteCommandTest {
 
         showEventAtIndex(model, INDEX_SECOND_EVENT);
         Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
+        expectedModel.logUser(new UserBuilder().build());
         expectedModel.deleteEvent(eventToDelete);
         expectedModel.commitEventManager();
 

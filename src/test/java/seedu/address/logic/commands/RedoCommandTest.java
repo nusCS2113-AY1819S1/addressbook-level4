@@ -32,6 +32,7 @@ public class RedoCommandTest {
         deleteFirstEvent(expectedModel);
         expectedModel.undoEventManager();
         expectedModel.undoEventManager();
+        expectedModel.logUser(new UserBuilder().build());
     }
 
     @Test

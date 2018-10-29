@@ -34,7 +34,10 @@ public class ClearCommandTest {
     public void execute_nonEmptyAddressBook_success() {
         Model model = new ModelManager(getTypicalEventManager(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalEventManager(), new UserPrefs());
-        model.logUser(new UserBuilder().build());
+
+        User user = new UserBuilder().build();
+        model.logUser(user);
+        expectedModel.logUser(user);
         expectedModel.resetData(new EventManager());
         expectedModel.commitEventManager();
 
