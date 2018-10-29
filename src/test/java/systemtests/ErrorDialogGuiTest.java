@@ -8,7 +8,6 @@ import static seedu.planner.ui.UiManager.FILE_OPS_ERROR_DIALOG_STAGE_TITLE;
 
 import java.io.IOException;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import guitests.GuiRobot;
@@ -20,7 +19,7 @@ public class ErrorDialogGuiTest extends FinancialPlannerSystemTest {
     private static final IOException IO_EXCEPTION_STUB = new IOException("Stub");
     private final GuiRobot guiRobot = new GuiRobot();
 
-    @Ignore
+    @Test
     public void showErrorDialogs() {
         postLater(new DataSavingExceptionEvent(IO_EXCEPTION_STUB));
 

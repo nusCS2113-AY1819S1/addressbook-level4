@@ -8,7 +8,6 @@ import static seedu.planner.testutil.TypicalRecords.IDA;
 import static seedu.planner.testutil.TypicalRecords.INDO;
 import static seedu.planner.testutil.TypicalRecords.ZT;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.planner.commons.core.index.Index;
@@ -20,7 +19,7 @@ import seedu.planner.model.Model;
 
 public class FindTagCommandSystemTest extends FinancialPlannerSystemTest {
 
-    @Ignore
+    @Test
     public void find() {
         /* Case: find multiple records in planner book, command with leading spaces and trailing spaces
          * -> 2 records found

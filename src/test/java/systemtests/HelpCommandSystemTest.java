@@ -7,7 +7,6 @@ import static org.junit.Assert.assertTrue;
 import static seedu.planner.testutil.TypicalIndexes.INDEX_FIRST_RECORD;
 import static seedu.planner.ui.testutil.GuiTestAssert.assertListMatching;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import guitests.GuiRobot;
@@ -28,7 +27,7 @@ public class HelpCommandSystemTest extends FinancialPlannerSystemTest {
 
     private final GuiRobot guiRobot = new GuiRobot();
 
-    @Ignore
+    @Test
     public void openHelpWindow() {
         //use accelerator
         getCommandBox().click();
@@ -73,7 +72,7 @@ public class HelpCommandSystemTest extends FinancialPlannerSystemTest {
         assertNotEquals(StatusBarFooter.SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
     }
 
-    @Ignore
+    @Test
     public void help_multipleCommands_onlyOneHelpWindowOpen() {
         getMainMenu().openHelpWindowUsingMenu();
 

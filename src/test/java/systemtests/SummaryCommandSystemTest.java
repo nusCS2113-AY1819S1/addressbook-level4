@@ -13,7 +13,6 @@ import static seedu.planner.testutil.TypicalRecords.ZT;
 import static systemtests.SummaryCommandSystemTest.Mode.BY_DATE;
 import static systemtests.SummaryCommandSystemTest.Mode.BY_MONTH;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import javafx.collections.FXCollections;
@@ -37,7 +36,7 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
     private static final String START_MONTH = "MAR-2018";
     private static final String END_MONTH = "MAY-2018";
 
-    @Ignore
+    @Test
     public void summary() throws Exception {
         Model model = getModel();
         SummaryByDateList summariesByDate;

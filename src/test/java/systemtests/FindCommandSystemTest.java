@@ -12,7 +12,6 @@ import static seedu.planner.testutil.TypicalRecords.ZT;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.planner.commons.core.index.Index;
@@ -25,7 +24,7 @@ import seedu.planner.model.tag.Tag;
 
 public class FindCommandSystemTest extends FinancialPlannerSystemTest {
 
-    @Ignore
+    @Test
     public void find() {
         /* Case: find multiple records in planner book, command with leading spaces and trailing spaces
          * -> 2 records found
