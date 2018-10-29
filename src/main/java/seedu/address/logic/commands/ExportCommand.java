@@ -4,12 +4,15 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.IcsUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.TimeTable;
 
 /**
@@ -36,7 +39,7 @@ public class ExportCommand extends Command {
     private final Path filePath;
 
     /**
-     * Creates an ExportCommand to export the currently-displayed timetable to an .ics file
+     * Creates an ExportCommand to export the specified person's timetable as .ics file
      */
     public ExportCommand(Index index, Path filePath) {
         requireNonNull(index);
@@ -50,7 +53,14 @@ public class ExportCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        TimeTable timeTable = model.getDisplayedTimeTable();
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        TimeTable timeTable;
+        timeTable = model.getDisplayedTimeTable();
         if (timeTable.isEmpty()) {
             throw new CommandException(MESSAGE_EMPTY);
         }

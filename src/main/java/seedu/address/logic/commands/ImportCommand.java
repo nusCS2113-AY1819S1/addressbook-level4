@@ -5,9 +5,11 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.IcsUtil;
 import seedu.address.logic.CommandHistory;
@@ -59,9 +61,15 @@ public class ImportCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        Person personToEdit = model.getUser();
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
 
         Optional<TimeTable> optionalTimeTable;
+        TimeTable timeTable;
+
         try {
             optionalTimeTable = IcsUtil.getInstance().readTimeTableFromFile(filePath);
         } catch (IOException e) {
@@ -70,8 +78,9 @@ public class ImportCommand extends Command {
         if (!optionalTimeTable.isPresent()) {
             return new CommandResult(String.format(MESSAGE_EMPTY));
         }
-        TimeTable timeTable = optionalTimeTable.get();
+        timeTable = optionalTimeTable.get();
 
+        Person personToEdit = lastShownList.get(index.getZeroBased());
         Person modifiedPerson = createModifiedPerson(personToEdit, timeTable);
 
         model.updatePerson(personToEdit, modifiedPerson);
