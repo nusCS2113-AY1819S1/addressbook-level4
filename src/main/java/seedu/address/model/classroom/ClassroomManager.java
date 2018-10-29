@@ -62,6 +62,16 @@ public class ClassroomManager {
     }
 
     /**
+     * Search for duplication of student attendance marked for classroom
+     */
+    public boolean isDuplicateClassroomStudentAttendance(Classroom classroom, String matricNo, String date) {
+        return classroom.getAttendanceList()
+                .stream()
+                .anyMatch(attendance -> attendance.getDate().equalsIgnoreCase(date)
+                            && attendance.getStudentsPresent().contains(matricNo));
+    }
+
+    /**
      * Removes a classroom from classroomList
      */
     public void deleteClassroom(Classroom classroom) {
@@ -139,5 +149,12 @@ public class ClassroomManager {
      */
     public boolean hasClassroomStudent(Classroom classToUnassignStudent, String matricNo) {
         return (classToUnassignStudent.getStudents().contains(matricNo));
+    }
+
+    /**
+     * Marks the attendance for a student for the class in the given day.
+     */
+    public void markStudentAttendance(Classroom classToMarkAttendance, Attendance attendance) {
+        classToMarkAttendance.getAttendanceList().add(attendance);
     }
 }
