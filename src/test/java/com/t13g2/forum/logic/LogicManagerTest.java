@@ -1,6 +1,5 @@
 package com.t13g2.forum.logic;
 
-import static com.t13g2.forum.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static com.t13g2.forum.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static org.junit.Assert.assertEquals;
 
@@ -9,13 +8,17 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import com.t13g2.forum.logic.commands.CommandResult;
+import com.t13g2.forum.logic.commands.DeleteUserCommand;
 import com.t13g2.forum.logic.commands.HistoryCommand;
-import com.t13g2.forum.logic.commands.ListCommand;
+import com.t13g2.forum.logic.commands.ListModuleCommand;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
+import com.t13g2.forum.model.Context;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.ModelManager;
 import com.t13g2.forum.model.UserPrefs;
+import com.t13g2.forum.model.forum.User;
+import com.t13g2.forum.testutil.UserBuilder;
 
 
 public class LogicManagerTest {
@@ -34,16 +37,24 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        assertHistoryCorrect(deleteCommand);
+        //set the current logged in user as an admin.
+        User loginUser = new UserBuilder().build();
+        Context.getInstance().setCurrentUser(loginUser);
+
+        String deleteUserCommand = "deleteUser uName/jane";
+        assertCommandException(deleteUserCommand, String.format(DeleteUserCommand.MESSAGE_INVALID_USER, "jane"));
+        assertHistoryCorrect(deleteUserCommand);
     }
 
     @Test
     public void execute_validCommand_success() {
-        String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
-        assertHistoryCorrect(listCommand);
+        //set the current logged in user as an admin.
+        User loginUser = new UserBuilder().build();
+        Context.getInstance().setCurrentUser(loginUser);
+
+        String listModuleCommand = ListModuleCommand.COMMAND_WORD;
+        assertCommandSuccess(listModuleCommand, String.format(ListModuleCommand.MESSAGE_SUCCESS, ""), model);
+        assertHistoryCorrect(listModuleCommand);
     }
 
     @Test
