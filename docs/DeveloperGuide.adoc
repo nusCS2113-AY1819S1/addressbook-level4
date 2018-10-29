@@ -450,7 +450,7 @@ The Lost and Found mechanism is facilitated by `LostCommand` and `FoundCommand`.
 
 Given below are example usage scenarios and how the Lost and Found mechanism behaves at each step.
 
-Scenario 1.
+Scenario 1：
 
 Step 1. The user executes `lost 1 q/20` command to indicate 20 Arduinos are lost from the Stock List.
 
@@ -466,7 +466,7 @@ Step 6. A copy is created and the change of the quantity is made to the copy. Th
 
 Step 7. The updated item list and success message is shown to the user. Updates are committed to the storage.
 
-Scenario 2.
+Scenario 2：
 
 Step 1. The user executes `found 1 q/20` command to indicate 20 lost Arduinos from the Stock List are found.
 
