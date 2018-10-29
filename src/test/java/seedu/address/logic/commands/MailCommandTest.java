@@ -2,6 +2,8 @@
 package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.MailCommand.MESSAGE_UNSUPPORTED;
 import static seedu.address.logic.commands.MailCommand.TYPE_ALL;
 import static seedu.address.logic.commands.MailCommand.TYPE_GROUPS;
@@ -93,6 +95,22 @@ public class MailCommandTest {
         } catch (CommandException e) {
             throw new CommandException(e.getMessage());
         }
+    }
+
+    @Test
+    public void equals() {
+        MailCommand mailAllCommand = new MailCommand(TYPE_ALL, "");
+        MailCommand mailAllCommandCopy = new MailCommand(TYPE_ALL, "");
+        MailCommand mailSelectionCommand = new MailCommand(TYPE_SELECTION, "");
+        MailCommand mailFirstSpecifiedTagCommand = new MailCommand(TYPE_GROUPS, "accountants");
+        MailCommand mailSecondSpecifiedTagCommand = new MailCommand(TYPE_GROUPS, "hr");
+
+        // Equal commands -> return true
+        assertTrue(mailAllCommand.equals(mailAllCommandCopy));
+
+        // Unequal commands -> return false
+        assertFalse(mailAllCommand.equals(mailSelectionCommand));
+        assertFalse(mailFirstSpecifiedTagCommand.equals(mailSecondSpecifiedTagCommand));
     }
 
     /**

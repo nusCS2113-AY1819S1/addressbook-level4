@@ -7,6 +7,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import seedu.address.commons.util.FileEncryptor;
 import seedu.address.logic.CommandHistory;
@@ -201,15 +202,9 @@ public class MailCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        if (this.mailArgs == null) {
-            return other == this // short circuit if same object
-                    || (other instanceof MailCommand // instanceof handles nulls
-                    && this.mailType == ((MailCommand) other).mailType);
-        } else {
-            return other == this // short circuit if same object
-                    || (other instanceof MailCommand // instanceof handles nulls
-                    && this.mailType == ((MailCommand) other).mailType
-                    && this.mailArgs.equals(((MailCommand) other).mailArgs));
-        }
+        return other == this || (other instanceof MailCommand
+                && this.mailType == ((MailCommand) other).mailType
+                && Objects.equals(this.mailArgs, ((MailCommand) other).mailArgs)
+                && Objects.equals(this.desktop, ((MailCommand) other).desktop));
     }
 }
