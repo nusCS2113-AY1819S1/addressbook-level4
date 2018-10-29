@@ -422,17 +422,23 @@ If the user uses the `find` command, the following functions will follow the ind
 // tag::rsvp[]
 === RSVP
 ==== Current Implementation
-The RSVP feature consists the `register` command. Attendees of an event are stored in the `eventmanager.xml` file, in a similar fashion to the storage of tags.
+The RSVP feature consists of the `register` & `unregister` command. Attendees of an event are stored in the `eventmanager.xml` file, in a similar fashion to the storage of tags.
 
 Below is an example usage scenario and how the RSVP mechanism behaves:
 
 Step 1: The user launches the application, clicks on an event or types `select 2` into the CLI. Details of the 2nd event including event attendance are displayed.
 
-Step 2: The user executes `register 2` to register for the 2nd event. The `register` command gets the username of the current user, and adds it into the event data.
+Step 2: The user executes `register 2` to register for the 2nd event. The `register` command takes in the current model and event at index 2, getting the username of the current user via `Model#getUsername()`, and the current attendance of the event as a `HashSet` with `Event#getAttendance`.
 
-Step 3: An `EventManagerChangedEvent` event is raised by `Model`. `EventCenter` handles the event, calling for `Storage` to update `eventmanager.xml`.
+Step 3: The `register` command tries to add the username into the current attendance with `add()`. If the username already exists in the attendance, a `CommandException` is thrown. Else, `EditCommand#EditEventDescriptor` is used with the new attendance to create an edited event.
 
-Step 4: The event page is reloaded to display the new event attendance.
+Step 4: The model is updated and committed, overwriting `eventmanager.xml`. The event page is reloaded to display the new event attendance.
+
+Step 5: If the user decides to unregister from the event, the user executes `unregister 2`, and the `unregister` command gets the username and attendance in the same manner as the `register` command in Step 2.
+
+Step 6: The `unregister` command command tries to remove the username from the current attendance with `remove()`. If the username does not exist in the attendance, a `CommandException` is thrown. Else, `EditCommand#EditEventDescriptor` is used with the new attendance to create an edited event.
+
+Step 7: The model is updated and committed as in Step 3, and the event page is again reloaded.
 
 ==== Design Considerations
 ===== Aspect: How to display attendance
@@ -452,10 +458,7 @@ Step 4: The event page is reloaded to display the new event attendance.
 ** Cons: Inefficient to check which users are attending an event.
 
 ==== Future Improvements
-===== Adding `unregister` command.
-* Allows users to unregister for events.
-
-===== Adding `listAttending` command.
+===== Adding `attending` command.
 * Allows users to view events they have registered for.
 // end::rsvp[]
 
