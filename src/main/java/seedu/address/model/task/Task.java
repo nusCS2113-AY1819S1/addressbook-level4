@@ -21,9 +21,10 @@ public class Task {
     private final int expectedNumOfHours;
     private int completedNumOfHours;
     private final Set<Milestone> milestoneList = new HashSet<>();
-    public Task(Deadline deadline, String title, String description, PriorityLevel priorityLevel,
+    public Task(Deadline deadline, String moduleCode, String title, String description, PriorityLevel priorityLevel,
                 int expectedNumOfHours) {
         this.deadline = deadline;
+        this.moduleCode = moduleCode;
         this.title = title;
         this.description = description;
         this.priorityLevel = priorityLevel;
