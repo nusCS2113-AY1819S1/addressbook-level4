@@ -31,9 +31,9 @@ public class NoteExportCommandTest {
     public void execute_containsExportableNotes_success() throws CommandException {
         String expectedMessage = NoteExportCommand.MESSAGE_SUCCESS;
 
-        noteManager.addNote(note1.build());
-        noteManager.addNote(note1.build());
-        noteManager.addNote(note1.build());
+        noteManager.addNote(new NoteBuilder().build());
+        noteManager.addNote(new NoteBuilder().build());
+        noteManager.addNote(new NoteBuilder().build());
         noteManager.saveNoteList(); // three exportable notes
 
         NoteExportCommand noteExportCommand = new NoteExportCommand("valid_file_name");
