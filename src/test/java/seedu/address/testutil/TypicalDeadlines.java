@@ -39,7 +39,7 @@ public class TypicalDeadlines {
             .withMonth(VALID_MONTH_FEB).withYear(VALID_YEAR_2018).build();
 
     public static final Deadline INVALID_29TH_FEB_2018 = new DeadlineBuilder()
-            .withDay(INVALID_DAY_FOR_COMMON_YEAR_FEB).withMonth(VALID_MONTH_JAN).withYear(VALID_YEAR_2018).build();
+            .withDay(INVALID_DAY_FOR_COMMON_YEAR_FEB).withMonth(VALID_MONTH_FEB).withYear(VALID_YEAR_2018).build();
 
     // For leap year
     public static final Deadline VALID_29TH_FEB_2020 = new DeadlineBuilder().withDay(VALID_DAY_FOR_LEAP_YEAR_FEB)
