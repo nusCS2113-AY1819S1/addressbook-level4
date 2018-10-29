@@ -8,7 +8,6 @@ import org.junit.Test;
 import seedu.address.logic.commands.ExportAllCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ScheduleCommand;
-import seedu.address.logic.suggestions.WrongCommandSuggestion;
 
 public class WrongCommandSuggestionTest {
     private WrongCommandSuggestion wrongCommandSuggestion = new WrongCommandSuggestion();

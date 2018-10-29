@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import seedu.address.logic.suggestions.StringSimilarity;
-
 public class StringSimilarityTest {
     private StringSimilarity stringsimilarity = new StringSimilarity();
 
