@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.Date;
+import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Name;
 import seedu.planner.model.record.Record;
@@ -16,6 +17,13 @@ import seedu.planner.model.tag.Tag;
  * Contains utility methods for populating {@code FinancialPlanner} with sample data.
  */
 public class SampleDataUtil {
+    public static Limit[] getSampleLimits() {
+        return new Limit[] {
+           new Limit(new Date("21-9-2018"), new Date("27-9-2018"), new MoneyFlow("-100")),
+           new Limit(new Date("20-5-2017"), new Date("27-9-2018"), new MoneyFlow("-200")),
+        };
+    }
+
     public static Record[] getSampleRecords() {
         return new Record[] {
             new Record(new Name("Shopping with girlfriend"), new Date("21-9-2018"), new MoneyFlow("-101.30"),
@@ -51,6 +59,9 @@ public class SampleDataUtil {
         FinancialPlanner sampleAb = new FinancialPlanner();
         for (Record sampleRecord : getSampleRecords()) {
             sampleAb.addRecord(sampleRecord);
+        }
+        for (Limit sampleLimit : getSampleLimits()) {
+            sampleAb.addLimit(sampleLimit);
         }
         return sampleAb;
     }

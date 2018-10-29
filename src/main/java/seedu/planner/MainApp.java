@@ -102,12 +102,12 @@ public class MainApp extends Application {
 
 
             limitListOptional = storage.readLimitList();
-            initialData.setLimitList(limitListOptional.get());
-            if (limitListOptional.isPresent()) {
+
+            if (!limitListOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample LimitList");
+            } else {
                 initialData.setLimitList(limitListOptional.get());
             }
-
-
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty FinancialPlanner");
             initialData = new FinancialPlanner();
