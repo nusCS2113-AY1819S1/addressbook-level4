@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import seedu.address.model.task.Task;
 
 /**
@@ -65,6 +66,21 @@ public class TaskCard extends UiPart<Region> {
         task.getMilestoneList().forEach(milestone -> milestones.getChildren()
                 .add(new Label(milestone.getMilestoneDescriptionString())));
 
+        setTextForStatus(task);
+        setColorForPriorityLevel(task);
+    }
+
+    private void setColorForPriorityLevel(Task task) {
+        if (task.getPriorityLevel().priorityLevel.equals("high")) {
+            priorityLevel.setStyle("-fx-text-fill: red;");
+        } else if (task.getPriorityLevel().priorityLevel.equals("medium")) {
+            priorityLevel.setStyle("-fx-text-fill: #f45713;");
+        } else {
+            priorityLevel.setStyle("-fx-text-fill: orange;");
+        }
+    }
+
+    private void setTextForStatus(Task task) {
         if (task.isCompleted()) {
             StringBuilder result = new StringBuilder();
             result.append("Completed in ");
