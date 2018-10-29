@@ -111,4 +111,22 @@ public class ListCommand extends Command {
     private Predicate<Person> showKpiPredicate(List<String> predicatesList) {
         return p -> predicatesList.contains(p.getKpi().value);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (predicatesList == null) {
+            return other == this
+                    || (other instanceof ListCommand
+                    && this.inputTags.equals(((ListCommand) other).inputTags));
+        } else if (inputTags == null) {
+            return other == this
+                    || (other instanceof ListCommand)
+                    && this.predicatesList.equals(((ListCommand) other).predicatesList);
+        } else {
+            return other == this
+                    || (other instanceof ListCommand
+                    && this.predicatesList.equals(((ListCommand) other).predicatesList)
+                    && this.inputTags.equals(((ListCommand) other).inputTags));
+        }
+    }
 }
