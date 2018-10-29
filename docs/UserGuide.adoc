@@ -76,7 +76,7 @@ Format: `selectgroup INDEX` +
 Shortcut Format: `sg INDEX`
 
 ****
-* Selects group and loads the *students in group panel* with students of the group at specified `INDEX`.
+* Selects group and loads the *students in selected group panel* with students of the group at specified `INDEX`.
 * Selects the group and loads the Google search page of the group at the specified `INDEX`.
 * The index refers to the index number shown in the displayed group list.
 * The index *must be a positive integer* `1, 2, 3, ...`

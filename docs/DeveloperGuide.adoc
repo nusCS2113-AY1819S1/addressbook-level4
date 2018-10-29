@@ -385,7 +385,7 @@ image::DeleteGroupSequenceDiagram.png[width="800"]
 Additional Operations:
 
 * `SelectGroupCommand` -- Selects a group on the student management system's GUI which will in turn display all
-students in that group on the `StudentsInGroup` panel. +
+students in that group on the `GroupPersonList` panel. +
 
 Step 1. The user inputs `selectgroup 1` to select the first group listed on the student management system's GUI. The `AddressBookParser` detects `selectgroup` as a command word and will use `SelectGroupCommandParser`
         to parse the input given. `SelectGroupCommandParser` will then create an `Index` object after parsing and pass it to `SelectGroupCommand`
