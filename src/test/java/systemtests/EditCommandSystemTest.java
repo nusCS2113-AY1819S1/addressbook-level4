@@ -34,6 +34,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VENUE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VENUE_DESC_BOB;
