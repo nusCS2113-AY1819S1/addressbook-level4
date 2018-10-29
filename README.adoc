@@ -1,4 +1,4 @@
-= Jalil Enterprise
+= JalilEnterprises
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 https://travis-ci.org/CS2113-AY1819S1-T12-3/main[image:https://travis-ci.org/CS2113-AY1819S1-T12-3/main.svg?branch=master[Build Status]]
