@@ -13,6 +13,7 @@ public class UserPrefs {
 
     private GuiSettings guiSettings;
     private Path addressBookFilePath = Paths.get("data", "addressbook.xml");
+    private String scriptFileDirectory = "/scripts/";
 
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
@@ -36,6 +37,14 @@ public class UserPrefs {
 
     public void setAddressBookFilePath(Path addressBookFilePath) {
         this.addressBookFilePath = addressBookFilePath;
+    }
+
+    public String getScriptFileDirectory() {
+        return scriptFileDirectory;
+    }
+
+    public void setScriptFileDirectory(String scriptFileDirectory) {
+        this.scriptFileDirectory = scriptFileDirectory;
     }
 
     @Override
@@ -63,6 +72,7 @@ public class UserPrefs {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings.toString());
         sb.append("\nLocal data file location : " + addressBookFilePath);
+        sb.append("\nLocal Scripts file location : " + scriptFileDirectory);
         return sb.toString();
     }
 

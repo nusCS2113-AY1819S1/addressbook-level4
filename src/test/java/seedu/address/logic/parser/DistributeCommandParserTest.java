@@ -11,6 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.GROUP_NAME_DESC_CS101
 import static seedu.address.logic.commands.CommandTestUtil.GROUP_NAME_DESC_TUT_1;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUP_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUP_NUMBER_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUP_NUMBER_STRING_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NATIONALITY_FLAG_BOOLEAN_FALSE;
 import static seedu.address.logic.commands.CommandTestUtil.NATIONALITY_FLAG_BOOLEAN_TRUE;
 import static seedu.address.logic.commands.CommandTestUtil.NATIONALITY_FLAG_FALSE;
@@ -102,6 +103,11 @@ public class DistributeCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+
+        // first input arg is a letter instead of an digit
+        assertParseFailure(parser, INVALID_GROUP_NUMBER_STRING_DESC + VALID_GROUP_NAME_CS1010 + GENDER_FLAG_FALSE
+                        + NATIONALITY_FLAG_FALSE, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DistributeCommand.MESSAGE_USAGE));
 
         // invalid numberOfGroups Eg. 0
         assertParseFailure(parser, INVALID_GROUP_NUMBER_DESC + VALID_GROUP_NAME_CS1010 + GENDER_FLAG_FALSE

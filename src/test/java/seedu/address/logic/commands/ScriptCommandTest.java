@@ -6,9 +6,14 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
 
+import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -22,7 +27,6 @@ import seedu.address.testutil.PersonBuilder;
  * Contains tests for ScriptCommand.
  */
 public class ScriptCommandTest {
-
     private Model model;
     private CommandHistory commandHistory = new CommandHistory();
 
@@ -34,18 +38,19 @@ public class ScriptCommandTest {
             .withAddress("Tampines street 82,#02-33").withEmail("TsuTheBoss@gmail.com")
             .withGrade("99").withPhone("66666666").withTags("owesMoney").build();
 
-    private final String testFilesLocation = "/src/test/data/ScriptCommandTest/";
     private final String validAddTextFile = "ValidAddScriptCommand";
     private final String missingTextFile = "MissingTextFile";
-    private final String invalidTextFile = "InvalidAddCommand";
+    private final String testFilesLocation = "/src/test/data/ScriptCommandTest/";
+    private final String scriptsFolder = "/scripts/";
     private final String invalidLinesNumbers = "1,2";
     private final String addCommand = AddCommand.COMMAND_WORD;
     private final String deleteCommand = DeleteCommand.COMMAND_WORD;
 
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
+        FileUtils.copyDirectory(new File(FileUtil.getRootLocation() + testFilesLocation),
+                new File(FileUtil.getRootLocation() + scriptsFolder));
     }
 
     @Test

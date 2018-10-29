@@ -46,8 +46,8 @@ public class CommandTypeTest {
         assertTrue(CommandType.isValidCommand("addt"));
         assertTrue(CommandType.isValidCommand("clear"));
         assertTrue(CommandType.isValidCommand("c"));
-        assertTrue(CommandType.isValidCommand("group"));
-        assertTrue(CommandType.isValidCommand("grp"));
+        assertTrue(CommandType.isValidCommand("creategroup"));
+        assertTrue(CommandType.isValidCommand("cg"));
         assertTrue(CommandType.isValidCommand("delete"));
         assertTrue(CommandType.isValidCommand("d"));
         assertTrue(CommandType.isValidCommand("distinto"));
