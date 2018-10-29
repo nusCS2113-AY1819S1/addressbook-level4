@@ -302,6 +302,33 @@ opens your email application with all accountants as recipients. +
 `mail` +
 opens your email application with person (3rd person in the list panel) as recipient.
 
+=== Schedule
+
+The Schedule feature helps you remember important activities by listing out important events and dates! +
+
+To add an activity to your schedule: +
+Format: `schedule`  `add` `d/DATE` `a/ACTIVITY` +
+****
+* Date specified must be in the "DD/MM/YYYY" format. +
+* The activity name *must contain only* letters, numbers, spaces and fullstops.
+****
+To edit an activity from your schedule: +
+Format: `schedule` `edit` `INDEX` `a/ACTIVITY` +
+****
+* Edits the activity at the specified `INDEX`.
+* The index refers to the index number shown in the displayed schedule.
+* The index *must be a positive integer* 1, 2, 3, ...
+* The activity name *must contain only* letters, numbers, spaces and fullstops.
+****
+To delete an activity from your schedule: +
+Format: `schedule` `delete` `INDEX` +
+****
+* Deletes the activity at the specified `INDEX`.
+* The index refers to the index number shown in the displayed schedule.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+
 == Appendix
 
 === Text prediction
@@ -322,11 +349,11 @@ Note: +
 * If there are multiple predicted values, they will be listed down. +
 * If no argument flags are specified, the default value predicted is based on the command's default argument. +
 
+
 === Saving the data
 
 Address book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
-
 
 == FAQ
 

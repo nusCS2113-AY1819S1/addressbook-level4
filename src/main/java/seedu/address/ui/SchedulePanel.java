@@ -10,8 +10,10 @@ import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -51,26 +53,28 @@ public class SchedulePanel extends UiPart<Region> {
         title.setPadding(new Insets(5, 5, 5, 5));
         title.setFont(new Font(25));
         schedulePanel.getChildren().add(title);
-        VBox contents = new VBox();
+        ListView contents = new ListView();
+        VBox.setVgrow(contents, Priority.ALWAYS);
         int count = 1;
         for (Date date : schedule.keySet()) {
             FlowPane datePane = new FlowPane();
-            datePane.setStyle("-fx-background-color: #eeeff1;");
+            datePane.setStyle("-fx-background-color: #7f7f7f;");
             datePane.setPadding(new Insets(5, 5, 5, 5));
             Label dateLabel = new Label();
-            dateLabel.setStyle("-fx-text-fill:Black;");
+            dateLabel.setStyle("-fx-text-fill:white;");
             dateLabel.setText(Activity.getDateString(date));
             datePane.getChildren().add(dateLabel);
-            contents.getChildren().add(datePane);
+            contents.getItems().add(datePane);
             for (Activity activity : schedule.get(date)) {
                 Label activityLabel = new Label();
                 activityLabel.setText(count + ". " + activity.getActivityName());
                 activityLabel.setPadding(new Insets(5, 5, 5, 5));
-                contents.getChildren().add(activityLabel);
+                contents.getItems().add(activityLabel);
                 count++;
             }
         }
         scrollPane.setContent(contents);
+        VBox.setVgrow(scrollPane, Priority.ALWAYS);
         schedulePanel.getChildren().add(scrollPane);
     }
 
