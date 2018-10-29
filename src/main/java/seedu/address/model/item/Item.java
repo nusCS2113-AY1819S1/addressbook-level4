@@ -76,7 +76,8 @@ public class Item {
         return status;
     }
 
-    public Loststatus getLoststatus() { return loststatus;}
+    public Loststatus getLoststatus() {
+        return loststatus; }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

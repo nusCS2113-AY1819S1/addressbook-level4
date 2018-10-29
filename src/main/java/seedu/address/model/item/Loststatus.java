@@ -12,12 +12,14 @@ public class Loststatus {
     public static final int LOSTSTATUS_FOUND = 1;
     private final List<Integer> loststatus = new ArrayList<>(2);
 
-    public Loststatus() { this(0,0); }
+    public Loststatus() {
+        this(0, 0); }
     public Loststatus(int lost, int found) {
         loststatus.add(lost);
         loststatus.add(found);
     }
-    public Integer getLoststatusLost() { return loststatus.get(LOSTSTATUS_LOST); };
+    public Integer getLoststatusLost() {
+        return loststatus.get(LOSTSTATUS_LOST); }
     public Integer getLoststatusFound() {
         return loststatus.get(LOSTSTATUS_FOUND);
     }
@@ -35,3 +37,4 @@ public class Loststatus {
     }
 
 }
+
