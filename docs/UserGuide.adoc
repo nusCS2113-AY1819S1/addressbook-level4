@@ -329,7 +329,7 @@ Format: `addComment INDEX C/STRING`
 
 ****
 * Adds comment at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index *must be a positive integer* 1, 2, 3, ...
-* String can be empty but no comment will be added.
+* Comment cannot be blank,. For C/String, String cannot be empty
 ****
 
 Examples:
@@ -346,7 +346,8 @@ Format: `replyComment INDEX L/LINE C/STRING`
 
 ****
 * Replies a comment to the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index *must be a positive integer* 1, 2, 3, ...
-* Comment
+* Comment cannot be blank. For C/String, String cannot be empty
+* Line has to be a non-zero integer and exist within the comment section
 ****
 Examples:
 
@@ -362,10 +363,7 @@ Format: `deleteComment INDEX L/LINE`
 
 ****
 * Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the event will be removed i.e adding of tags is not cumulative.
-* You can remove all the event's tags by typing `t/` without specifying any tags after it.
+* Line has to be a non-zero integer and exist within the comment section
 ****
 
 Examples:
