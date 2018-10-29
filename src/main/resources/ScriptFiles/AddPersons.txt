@@ -1,4 +1,0 @@
-n/Novin Tong Yong Kang g/M nat/SG p/99999999 e/novin@example.com a/Pasir Ris street 99,#02-25 d/69 t/friends
-n/Tsu Wei Quan g/F nat/SG p/66666666 e/tsuTheBoss@gmail.com a/Tampines street 82,#02-33 d/99 t/owesMoney
-n/Rajdeep g/M nat/SG p/98743546 e/rajthenewb@gmail.com a/Bedok street 32 d/82 t/rich
-n/Joel g/M nat/SG p/9784230 e/JoeltheHacker@gmail.com a/Jurong West Street 52 d/76 t/pro

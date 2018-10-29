@@ -15,13 +15,16 @@ import seedu.address.logic.ValidCommandList;
 public class ScriptSetup {
     public static final String ADD_GROUPS_FILE = "AddGroups.txt";
     public static final String ADD_PERSONS_FILE = "AddPersons.txt";
+    public static final String DEFAULT_SCRIPT_FOLDER = "/scripts/";
 
     private static final Logger logger = LogsCenter.getLogger(ScriptSetup.class);
 
     private String defaultLocation;
+    private PathName pathName;
 
     public ScriptSetup() {
         this.defaultLocation = FileUtil.getRootLocation();
+        this.pathName = new PathName();
     }
 
     /**
@@ -30,21 +33,27 @@ public class ScriptSetup {
      * @param scriptFolder is the directory of the script folder
      */
     public void execute(String scriptFolder) {
-        Path scriptPath = FileUtil.getPath(defaultLocation + scriptFolder);
-        boolean isScriptFolderPresent = false;
-        try {
-            isScriptFolderPresent = FileUtil.createFolder(scriptPath);
-        } catch (IOException ioe) {
-            logger.info(scriptPath + " is not a valid directory "
-                    + "and a default script folder will be automatically generated");
+        boolean isScriptFolderPresent = true;
+        Path scriptPath;
+        boolean isPathValid = pathName.isValidPath(scriptFolder);
+        if (isPathValid) {
+            scriptPath = FileUtil.getPath(defaultLocation + scriptFolder);
+        } else {
+            scriptPath = FileUtil.getPath(defaultLocation + DEFAULT_SCRIPT_FOLDER);
         }
-        if (!isScriptFolderPresent) {
+        try {
+            FileUtil.createFolder(scriptPath);
             addSampleTextFiles(scriptFolder, defaultLocation);
+        } catch (IOException ioe) {
+            logger.info(scriptFolder + " is not a valid directory "
+                    + "and a default script folder will be automatically generated");
         }
     }
 
     /**
      * Add some sample text files
+     * @param scriptFolder is the folder name for scripts
+     * @param defaultLocation root folder of program
      */
     public void addSampleTextFiles(String scriptFolder, String defaultLocation) {
         File file = new File(defaultLocation + scriptFolder + ADD_PERSONS_FILE);

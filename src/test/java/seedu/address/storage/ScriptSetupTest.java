@@ -12,15 +12,16 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.commons.util.FileUtil;
+import seedu.address.commons.util.FileUtilTest;
+import seedu.address.logic.ValidCommandList;
 import seedu.address.model.UserPrefs;
 import seedu.address.storage.scripts.ScriptSetup;
 
 public class ScriptSetupTest {
-    public static final String TEST_FILES_LOCATION = "ScriptFiles/";
     public static final String SCRIPTS_LOCATION = "/scripts/";
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    private static final String invalidPath = "/?scripts";
 
     private File addGroupsFile;
     private File addPersonsFile;
@@ -31,31 +32,29 @@ public class ScriptSetupTest {
     private UserPrefs userPrefs;
     private ScriptSetup scriptSetup;
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
         userPrefs = new UserPrefs();
         scriptSetup = new ScriptSetup();
 
-        testAddGroupsFile = new File(scriptSetup.getDefaultLocation() + userPrefs.getScriptFileDirectory()
+        testAddGroupsFile = new File(FileUtil.getRootLocation() + FileUtilTest.TestFileLocation
                 + scriptSetup.ADD_GROUPS_FILE);
 
-        testAddPersonsFile = new File(scriptSetup.getDefaultLocation() + userPrefs.getScriptFileDirectory()
+        FileUtil.writeToTextFile(testAddGroupsFile, ValidCommandList.getGroupCommand());
+
+        testAddPersonsFile = new File(FileUtil.getRootLocation() + FileUtilTest.TestFileLocation
                 + scriptSetup.ADD_PERSONS_FILE);
 
-        /* There is error comparing the text file in another folder
-        ClassLoader classLoader = getClass().getClassLoader();
-        testAddGroupsFile = new File(classLoader.getResource(TEST_FILES_LOCATION
-                + scriptSetup.ADD_GROUPS_FILE).getFile());
-
-        testAddPersonsFile = new File(classLoader.getResource(TEST_FILES_LOCATION
-                + scriptSetup.ADD_PERSONS_FILE).getFile());*/
+        FileUtil.writeToTextFile(testAddPersonsFile, ValidCommandList.getAddCommand());
 
         /*Remove the scripts directory
         File dir = new File(scriptSetup.getDefaultLocation() + SCRIPTS_LOCATION);
         for (File file:dir.listFiles()) {
             file.delete();
         }
-
         dir.delete();*/
     }
 
@@ -73,7 +72,7 @@ public class ScriptSetupTest {
 
         assertEquals(isTwoEqual, true);
     }
-
+    
     @Test
     public void addSampleTextFile_success() throws IOException {
         scriptSetup.addSampleTextFiles(userPrefs.getScriptFileDirectory(), scriptSetup.getDefaultLocation());
