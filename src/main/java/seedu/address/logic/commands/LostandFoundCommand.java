@@ -33,7 +33,7 @@ public class LostandFoundCommand extends Command {
     }
 
     /**
-     * Sorts the item in the item list into lost.
+     * Sorts the lost item from the Stock List.
      */
     void sortSimpleItems (List<Item> lastShownList, ArrayList<SimpleItem> lostItems
                           ) {
