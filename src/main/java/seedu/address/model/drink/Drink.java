@@ -45,6 +45,13 @@ public class Drink {
         this.tags.addAll(tags);
     }
 
+    public Drink(Name name) {
+        this.name = name;
+        this.costPrice = new Price("0");
+        this.retailPrice = new Price("0");
+        this.quantity = new Quantity("0");
+    }
+
     public Name getName() {
         return name;
     }
