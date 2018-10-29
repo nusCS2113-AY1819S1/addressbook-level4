@@ -38,7 +38,7 @@
             </Menu>
           </MenuBar>
 
-            <Label minHeight="15" style="-fx-font-size: 20; -fx-text-fill: white" textAlignment="RIGHT" fx:id="statusBarUserName" text="Not login yet. Please login!" StackPane.alignment="CENTER_RIGHT" />
+            <Label minHeight="15" style="-fx-font-size: 20; -fx-text-fill: white" textAlignment="RIGHT" fx:id="statusBarUserName" text="Welcome to Forum Book. Please login to proceed! " StackPane.alignment="CENTER_RIGHT" />
 
         </StackPane>
 

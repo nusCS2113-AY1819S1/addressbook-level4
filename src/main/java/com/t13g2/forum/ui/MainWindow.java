@@ -184,7 +184,7 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    //@@xllx1
+    //@@author xllx1
     /**
      * show user name and user type in the label
      */
@@ -193,7 +193,7 @@ public class MainWindow extends UiPart<Stage> {
         String userType = "(" + (isAdmin ? "Admin" : "User") + ")";
         lblUserName.setText("");
         if (userName.equals("")) {
-            lblUserName.setText("Not login yet, please login!");
+            lblUserName.setText("Welcome to Forum Book. Please login to proceed! ");
         } else {
             lblUserName.setText(userName + userType);
         }
@@ -239,7 +239,7 @@ public class MainWindow extends UiPart<Stage> {
         handleHelp();
     }
 
-    //@@xllx1
+    //@@author xllx1
     @Subscribe
     private void handleUserLoginEvent(UserLoginEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));

@@ -17,6 +17,9 @@ import com.t13g2.forum.testutil.AnnouncementBuilder;
 import com.t13g2.forum.testutil.TypicalPersons;
 import com.t13g2.forum.testutil.UserBuilder;
 
+/**
+ * integration test for AnnounceCommand.
+ */
 public class AnnounceCommandTest {
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
@@ -34,7 +37,7 @@ public class AnnounceCommandTest {
     }
 
     @Test
-    public void execute_announcementAcceptedByModel_announceSuccessful() throws Exception {
+    public void execute_announcementAccepted_announceSuccessful() throws Exception {
         //set the current logged in user as an admin.
         User loginUser = new UserBuilder().build();
         Context.getInstance().setCurrentUser(loginUser);
@@ -43,7 +46,31 @@ public class AnnounceCommandTest {
 
         CommandResult commandResult = new AnnounceCommand(validAnnouncement).execute(model, commandHistory);
 
-        assertEquals(String.format(AnnounceCommand.MESSAGE_SUCCESS, validAnnouncement), commandResult.feedbackToUser);
+        assertEquals(String.format(AnnounceCommand.MESSAGE_SUCCESS, validAnnouncement),
+            commandResult.feedbackToUser);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+    }
+
+    @Test
+    public void userLoggedIn() {
+        //set the current logged in user as a user.
+        User loginUser = new UserBuilder().buildUser(false, false);
+        Context.getInstance().setCurrentUser(loginUser);
+
+        Announcement validAnnouncement = new AnnouncementBuilder().build();
+
+        CommandTestUtil.assertCommandFailure(new AnnounceCommand(validAnnouncement), model, commandHistory,
+            User.MESSAGE_NOT_ADMIN);
+    }
+
+    @Test
+    public void notLoggedIn() {
+        //set the current logged in user as null.
+        Context.getInstance().setCurrentUser(null);
+
+        Announcement validAnnouncement = new AnnouncementBuilder().build();
+
+        CommandTestUtil.assertCommandFailure(new AnnounceCommand(validAnnouncement), model, commandHistory,
+            User.MESSAGE_NOT_LOGIN);
     }
 }

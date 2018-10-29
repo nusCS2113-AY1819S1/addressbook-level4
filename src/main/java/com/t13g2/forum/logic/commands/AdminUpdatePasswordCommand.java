@@ -13,7 +13,7 @@ import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 
-//@@xllx1
+//@@author xllx1
 /**
  * Updates a certain user's password.
  */
