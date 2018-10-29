@@ -141,6 +141,8 @@ test {
         if (System.env.'CI') {
             events << TestLogEvent.STARTED
         }
+
+        exceptionFormat "full"
     }
 
     jacoco {
