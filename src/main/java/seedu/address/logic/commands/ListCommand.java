@@ -5,6 +5,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -114,19 +115,9 @@ public class ListCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        if (predicatesList == null) {
-            return other == this
-                    || (other instanceof ListCommand
-                    && this.inputTags.equals(((ListCommand) other).inputTags));
-        } else if (inputTags == null) {
-            return other == this
-                    || (other instanceof ListCommand)
-                    && this.predicatesList.equals(((ListCommand) other).predicatesList);
-        } else {
-            return other == this
-                    || (other instanceof ListCommand
-                    && this.predicatesList.equals(((ListCommand) other).predicatesList)
-                    && this.inputTags.equals(((ListCommand) other).inputTags));
-        }
+        return other == this || (other instanceof ListCommand
+                && this.listType == ((ListCommand) other).listType
+                && Objects.equals(this.predicatesList, ((ListCommand) other).predicatesList)
+                && Objects.equals(this.inputTags, ((ListCommand) other).inputTags));
     }
 }

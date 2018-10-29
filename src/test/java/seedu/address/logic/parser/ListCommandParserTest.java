@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.Assert.assertEquals;
+import static seedu.address.logic.commands.ListCommand.TYPE_ALL;
 import static seedu.address.logic.commands.ListCommand.TYPE_KPI;
 import static seedu.address.logic.commands.ListCommand.TYPE_TAG;
 
@@ -41,7 +42,7 @@ public class ListCommandParserTest {
         ListCommandParser parserUnderTest = new ListCommandParser();
         ListCommand actualListCommand = parserUnderTest.parse("list all/");
         ListCommand expectedListCommand =
-                new ListCommand(TYPE_KPI, new ArrayList<>());
+                new ListCommand(TYPE_ALL, new ArrayList<>());
 
         assertEquals(expectedListCommand, actualListCommand);
     }
