@@ -21,6 +21,9 @@ public interface Model {
     //@@author kelvintankaiboon
     /** Saves the current version of the StockList */
     void saveStockList(String fileName);
+
+    /** Opens the .xml file indicated by user in the browser pane*/
+    void openStockList(String fileName);
     //@@author
 
     /**
