@@ -12,7 +12,7 @@ import seedu.recruit.logic.commands.ShortlistCandidateCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new ShortlistCommand object
+ * Parses input arguments and creates a new ShortlistCandidateInitializationCommand object
  */
 public class ShortlistParser {
 

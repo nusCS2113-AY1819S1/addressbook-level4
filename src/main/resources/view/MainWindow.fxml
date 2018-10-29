@@ -29,11 +29,11 @@
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
-            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelpMenuItem" text="Help" />
           </Menu>
           <Menu mnemonicParsing="false" text="Switch Book">
-            <MenuItem fx:id="companyBook" mnemonicParsing="false" onAction="#handleChangeToCompanyJobDetailsPanel" text="Company Book" />
-              <MenuItem fx:id="candidateBook" mnemonicParsing="false" onAction="#handleChangeToCandidateDetailsPanel" text="Candidate Book" />
+            <MenuItem fx:id="companyBookMenuItem" mnemonicParsing="false" onAction="#handleChangeToCompanyBookMenuItem" text="Company Book" />
+              <MenuItem fx:id="candidateBookMenuItem" mnemonicParsing="false" onAction="#handleChangeToCandidateBookMenuItem" text="Candidate Book" />
           </Menu>
         </MenuBar>
 
