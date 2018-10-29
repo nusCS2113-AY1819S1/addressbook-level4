@@ -31,6 +31,7 @@ public class ModuleEnrolCommand extends Command {
 
     public static final String MESSAGE_MODULE_NOT_FOUND = "Module with code %s doesn't exist in Trajectory!";
     public static final String MESSAGE_STUDENT_NOT_FOUND = "Student with matric no. %s doesn't exist in Trajectory!";
+    public static final String MESSAGE_ALREADY_ENROLLED = "%1$s (%2$s) is already enrolled in %3$s %4$s.";
     public static final String MESSAGE_ENROL_SUCCESS = "Enrolled %1$s (%2$s) in %3$s %4$s.";
 
     private final ModuleCode moduleCode;
@@ -56,6 +57,14 @@ public class ModuleEnrolCommand extends Command {
 
         Module moduleToEnrol = moduleManager.getModuleByModuleCode(moduleCode.moduleCode);
         Person studentToEnrol = StudentManager.getInstance().retrieveStudentByMatricNo(studentMatricNo);
+
+        if (moduleManager.isStudentEnrolledInModule(moduleToEnrol, studentToEnrol)) {
+            throw new CommandException(String.format(MESSAGE_ALREADY_ENROLLED,
+                    studentToEnrol.getName().fullName,
+                    studentToEnrol.getMatricNo().matricNo,
+                    moduleToEnrol.getModuleCode().moduleCode,
+                    moduleToEnrol.getModuleName().moduleName));
+        }
 
         moduleManager.enrolStudentInModule(moduleToEnrol, studentToEnrol);
         moduleManager.saveModuleList();
