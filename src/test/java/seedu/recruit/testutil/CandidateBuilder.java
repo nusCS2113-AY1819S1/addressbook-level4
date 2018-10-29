@@ -19,7 +19,7 @@ import seedu.recruit.model.util.SampleDataUtil;
 /**
  * A utility class to help with building Candidate objects.
  */
-public class PersonBuilder {
+public class CandidateBuilder {
 
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_GENDER = "F";
@@ -42,7 +42,7 @@ public class PersonBuilder {
     private Salary salary;
     private Set<Tag> tags;
 
-    public PersonBuilder() {
+    public CandidateBuilder() {
         name = new Name(DEFAULT_NAME);
         gender = new Gender(DEFAULT_GENDER);
         age = new Age(DEFAULT_AGE);
@@ -56,9 +56,9 @@ public class PersonBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code candidateToCopy}.
+     * Initializes the CandidateBuilder with the data of {@code candidateToCopy}.
      */
-    public PersonBuilder(Candidate candidateToCopy) {
+    public CandidateBuilder(Candidate candidateToCopy) {
         name = candidateToCopy.getName();
         gender = candidateToCopy.getGender();
         age = candidateToCopy.getAge();
@@ -74,7 +74,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Name} of the {@code Candidate} that we are building.
      */
-    public PersonBuilder withName(String name) {
+    public CandidateBuilder withName(String name) {
         this.name = new Name(name);
         return this;
     }
@@ -82,7 +82,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Gender} of the {@code Candidate} that we are building.
      */
-    public PersonBuilder withGender(String gender) {
+    public CandidateBuilder withGender(String gender) {
         this.gender = new Gender(gender);
         return this;
     }
@@ -90,7 +90,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Age} of the {@code Candidate} that we are building.
      */
-    public PersonBuilder withAge(String age) {
+    public CandidateBuilder withAge(String age) {
         this.age = new Age(age);
         return this;
     }
@@ -98,7 +98,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Candidate} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public CandidateBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -106,7 +106,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Address} of the {@code Candidate} that we are building.
      */
-    public PersonBuilder withAddress(String address) {
+    public CandidateBuilder withAddress(String address) {
         this.address = new Address(address);
         return this;
     }
@@ -114,7 +114,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Job} of the {@code Candidate} that we are building.
      */
-    public PersonBuilder withJob(String job) {
+    public CandidateBuilder withJob(String job) {
         this.job = new Job(job);
         return this;
     }
@@ -122,7 +122,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Education} of the {@code Candidate} that we are building.
      */
-    public PersonBuilder withEducation(String education) {
+    public CandidateBuilder withEducation(String education) {
         this.education = new Education(education);
         return this;
     }
@@ -130,7 +130,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Salary} of the {@code Candidate} that we are building.
      */
-    public PersonBuilder withSalary(String salary) {
+    public CandidateBuilder withSalary(String salary) {
         this.salary = new Salary(salary);
         return this;
     }
@@ -138,7 +138,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Phone} of the {@code Candidate} that we are building.
      */
-    public PersonBuilder withPhone(String phone) {
+    public CandidateBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
         return this;
     }
@@ -146,7 +146,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Email} of the {@code Candidate} that we are building.
      */
-    public PersonBuilder withEmail(String email) {
+    public CandidateBuilder withEmail(String email) {
         this.email = new Email(email);
         return this;
     }

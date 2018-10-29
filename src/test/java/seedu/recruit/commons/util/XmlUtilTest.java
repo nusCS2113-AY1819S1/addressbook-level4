@@ -20,7 +20,7 @@ import seedu.recruit.storage.XmlAdaptedCandidate;
 import seedu.recruit.storage.XmlAdaptedTag;
 import seedu.recruit.storage.XmlSerializableCandidateBook;
 import seedu.recruit.testutil.AddressBookBuilder;
-import seedu.recruit.testutil.PersonBuilder;
+import seedu.recruit.testutil.CandidateBuilder;
 import seedu.recruit.testutil.TestUtil;
 
 public class XmlUtilTest {
@@ -143,7 +143,7 @@ public class XmlUtilTest {
 
         AddressBookBuilder builder = new AddressBookBuilder(new CandidateBook());
         dataToWrite = new XmlSerializableCandidateBook(
-                builder.withPerson(new PersonBuilder().build()).build());
+                builder.withPerson(new CandidateBuilder().build()).build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableCandidateBook.class);

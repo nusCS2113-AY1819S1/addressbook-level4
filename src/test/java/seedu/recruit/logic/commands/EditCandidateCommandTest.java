@@ -28,8 +28,8 @@ import seedu.recruit.model.Model;
 import seedu.recruit.model.ModelManager;
 import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.candidate.Candidate;
+import seedu.recruit.testutil.CandidateBuilder;
 import seedu.recruit.testutil.EditPersonDescriptorBuilder;
-import seedu.recruit.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCandidateBookCommand and RedoCandidateBookCommand)
@@ -43,7 +43,7 @@ public class EditCandidateCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Candidate editedCandidate = new PersonBuilder().build();
+        Candidate editedCandidate = new CandidateBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedCandidate).build();
         EditCandidateCommand editCandidateCommand = new EditCandidateCommand(INDEX_FIRST, descriptor);
 
@@ -62,7 +62,7 @@ public class EditCandidateCommandTest {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredCandidateList().size());
         Candidate lastCandidate = model.getFilteredCandidateList().get(indexLastPerson.getZeroBased());
 
-        PersonBuilder personInList = new PersonBuilder(lastCandidate);
+        CandidateBuilder personInList = new CandidateBuilder(lastCandidate);
         Candidate editedCandidate = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
@@ -100,7 +100,7 @@ public class EditCandidateCommandTest {
         showPersonAtIndex(model, INDEX_FIRST);
 
         Candidate candidateInFilteredList = model.getFilteredCandidateList().get(INDEX_FIRST.getZeroBased());
-        Candidate editedCandidate = new PersonBuilder(candidateInFilteredList).withName(VALID_NAME_BOB).build();
+        Candidate editedCandidate = new CandidateBuilder(candidateInFilteredList).withName(VALID_NAME_BOB).build();
         EditCandidateCommand editCandidateCommand = new EditCandidateCommand(INDEX_FIRST,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
@@ -167,7 +167,7 @@ public class EditCandidateCommandTest {
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
-        Candidate editedCandidate = new PersonBuilder().build();
+        Candidate editedCandidate = new CandidateBuilder().build();
         Candidate candidateToEdit = model.getFilteredCandidateList().get(INDEX_FIRST.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedCandidate).build();
         EditCandidateCommand editCandidateCommand = new EditCandidateCommand(INDEX_FIRST, descriptor);
@@ -217,7 +217,7 @@ public class EditCandidateCommandTest {
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_samePersonEdited() throws Exception {
-        Candidate editedCandidate = new PersonBuilder().build();
+        Candidate editedCandidate = new CandidateBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedCandidate).build();
         EditCandidateCommand editCandidateCommand = new EditCandidateCommand(INDEX_FIRST, descriptor);
         Model expectedModel = new ModelManager(new CandidateBook(model.getCandidateBook()), new CompanyBook(),

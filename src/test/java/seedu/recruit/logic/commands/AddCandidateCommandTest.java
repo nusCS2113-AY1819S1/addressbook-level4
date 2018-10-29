@@ -17,7 +17,7 @@ import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.CandidateBook;
 import seedu.recruit.model.ReadOnlyCandidateBook;
 import seedu.recruit.model.candidate.Candidate;
-import seedu.recruit.testutil.PersonBuilder;
+import seedu.recruit.testutil.CandidateBuilder;
 
 public class AddCandidateCommandTest {
 
@@ -37,7 +37,7 @@ public class AddCandidateCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Candidate validCandidate = new PersonBuilder().build();
+        Candidate validCandidate = new CandidateBuilder().build();
 
         CommandResult commandResult = new AddCandidateCommand(validCandidate).execute(modelStub, commandHistory);
 
@@ -48,7 +48,7 @@ public class AddCandidateCommandTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() throws Exception {
-        Candidate validCandidate = new PersonBuilder().build();
+        Candidate validCandidate = new CandidateBuilder().build();
         AddCandidateCommand addCommand = new AddCandidateCommand(validCandidate);
         CommandTestUtil.ModelStub modelStub = new ModelStubWithPerson(validCandidate);
 
@@ -59,8 +59,8 @@ public class AddCandidateCommandTest {
 
     @Test
     public void equals() {
-        Candidate alice = new PersonBuilder().withName("Alice").build();
-        Candidate bob = new PersonBuilder().withName("Bob").build();
+        Candidate alice = new CandidateBuilder().withName("Alice").build();
+        Candidate bob = new CandidateBuilder().withName("Bob").build();
         AddCandidateCommand addAliceCommand = new AddCandidateCommand(alice);
         AddCandidateCommand addBobCommand = new AddCandidateCommand(bob);
 
@@ -95,7 +95,7 @@ public class AddCandidateCommandTest {
         @Override
         public boolean hasCandidate(Candidate candidate) {
             requireNonNull(candidate);
-            return this.candidate.isSamePerson(candidate);
+            return this.candidate.isSameCandidate(candidate);
         }
     }
 
@@ -108,7 +108,7 @@ public class AddCandidateCommandTest {
         @Override
         public boolean hasCandidate(Candidate candidate) {
             requireNonNull(candidate);
-            return candidatesAdded.stream().anyMatch(candidate::isSamePerson);
+            return candidatesAdded.stream().anyMatch(candidate::isSameCandidate);
         }
 
         @Override

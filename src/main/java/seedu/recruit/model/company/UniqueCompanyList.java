@@ -83,7 +83,7 @@ public class UniqueCompanyList implements Iterable<Company> {
      * Delete @param jobOffer from the companyList
      * jobOffer must exist inside the companyList
      */
-    public void deleteJobOffer(JobOffer jobOffer) {
+    public void removeJobOffer(JobOffer jobOffer) {
         internalList.get(getCompanyIndexFromName(jobOffer.getCompanyName())).removeJobOffer(jobOffer);
     }
 
