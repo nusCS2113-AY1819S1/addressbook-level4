@@ -46,7 +46,7 @@ import seedu.recruit.model.commons.Address;
 import seedu.recruit.model.commons.Email;
 import seedu.recruit.model.commons.Phone;
 import seedu.recruit.model.tag.Tag;
-import seedu.recruit.testutil.PersonBuilder;
+import seedu.recruit.testutil.CandidateBuilder;
 import seedu.recruit.testutil.PersonUtil;
 
 @Ignore
@@ -65,7 +65,7 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
         String command = " " + EditCandidateCommand.COMMAND_WORD + "  " + index.getOneBased() + "  "
                 + NAME_DESC_BOB + "  " + PHONE_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + ADDRESS_DESC_BOB + " "
                 + TAG_DESC_HUSBAND + " ";
-        Candidate editedCandidate = new PersonBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
+        Candidate editedCandidate = new CandidateBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
         assertCommandSuccess(command, index, editedCandidate);
 
         /* Case: undo editing the last candidate in the list -> last candidate restored */
@@ -91,7 +91,7 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
         assertNotEquals(getModel().getFilteredCandidateList().get(index.getZeroBased()), BOB);
         command = EditCandidateCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        editedCandidate = new PersonBuilder(BOB).withName(VALID_NAME_AMY).build();
+        editedCandidate = new CandidateBuilder(BOB).withName(VALID_NAME_AMY).build();
         assertCommandSuccess(command, index, editedCandidate);
 
         /* Case: edit a candidate with new values same as another candidate's values but with different phone and email
@@ -100,14 +100,14 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
         index = INDEX_SECOND;
         command = EditCandidateCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        editedCandidate = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
+        editedCandidate = new CandidateBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
         assertCommandSuccess(command, index, editedCandidate);
 
         /* Case: clear tags -> cleared */
         index = INDEX_FIRST;
         command = EditCandidateCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_TAG.getPrefix();
         Candidate candidateToEdit = getModel().getFilteredCandidateList().get(index.getZeroBased());
-        editedCandidate = new PersonBuilder(candidateToEdit).withTags().build();
+        editedCandidate = new CandidateBuilder(candidateToEdit).withTags().build();
         assertCommandSuccess(command, index, editedCandidate);
 
         /* ------------------ Performing edit operation while a filtered list is being shown ------------------------ */
@@ -118,7 +118,7 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
         assertTrue(index.getZeroBased() < getModel().getFilteredCandidateList().size());
         command = EditCandidateCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_BOB;
         candidateToEdit = getModel().getFilteredCandidateList().get(index.getZeroBased());
-        editedCandidate = new PersonBuilder(candidateToEdit).withName(VALID_NAME_BOB).build();
+        editedCandidate = new CandidateBuilder(candidateToEdit).withName(VALID_NAME_BOB).build();
         assertCommandSuccess(command, index, editedCandidate);
 
         /* Case: filtered candidate list, edit index within bounds of recruit book but out of bounds of candidate list

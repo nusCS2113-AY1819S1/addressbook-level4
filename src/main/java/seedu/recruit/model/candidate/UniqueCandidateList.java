@@ -10,8 +10,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.recruit.model.candidate.exceptions.DuplicatePersonException;
-import seedu.recruit.model.candidate.exceptions.PersonNotFoundException;
+import seedu.recruit.model.candidate.exceptions.CandidateNotFoundException;
+import seedu.recruit.model.candidate.exceptions.DuplicateCandidateException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -22,7 +22,7 @@ import seedu.recruit.model.candidate.exceptions.PersonNotFoundException;
  *
  * Supports a minimal set of list operations.
  *
- * @see Candidate#isSamePerson(Candidate)
+ * @see Candidate#isSameCandidate(Candidate)
  */
 public class UniqueCandidateList implements Iterable<Candidate> {
 
@@ -33,7 +33,7 @@ public class UniqueCandidateList implements Iterable<Candidate> {
      */
     public boolean contains(Candidate toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().anyMatch(toCheck::isSameCandidate);
     }
 
     /**
@@ -43,7 +43,7 @@ public class UniqueCandidateList implements Iterable<Candidate> {
     public void add(Candidate toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateCandidateException();
         }
         internalList.add(toAdd);
     }
@@ -53,16 +53,16 @@ public class UniqueCandidateList implements Iterable<Candidate> {
      * {@code target} must exist in the list.
      * The candidate identity of {@code editedCandidate} must not be the same as another existing candidate in the list.
      */
-    public void setPerson(Candidate target, Candidate editedCandidate) {
+    public void setCandidate(Candidate target, Candidate editedCandidate) {
         requireAllNonNull(target, editedCandidate);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new CandidateNotFoundException();
         }
 
-        if (!target.isSamePerson(editedCandidate) && contains(editedCandidate)) {
-            throw new DuplicatePersonException();
+        if (!target.isSameCandidate(editedCandidate) && contains(editedCandidate)) {
+            throw new DuplicateCandidateException();
         }
 
         internalList.set(index, editedCandidate);
@@ -75,7 +75,7 @@ public class UniqueCandidateList implements Iterable<Candidate> {
     public void remove(Candidate toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new CandidateNotFoundException();
         }
     }
 
@@ -174,10 +174,10 @@ public class UniqueCandidateList implements Iterable<Candidate> {
      * Replaces the contents of this list with {@code candidates}.
      * {@code candidates} must not contain duplicate candidates.
      */
-    public void setPersons(List<Candidate> candidates) {
+    public void setCandidates(List<Candidate> candidates) {
         requireAllNonNull(candidates);
-        if (!personsAreUnique(candidates)) {
-            throw new DuplicatePersonException();
+        if (!candidatesAreUnique(candidates)) {
+            throw new DuplicateCandidateException();
         }
 
         internalList.setAll(candidates);
@@ -210,10 +210,10 @@ public class UniqueCandidateList implements Iterable<Candidate> {
     /**
      * Returns true if {@code candidates} contains only unique candidates.
      */
-    private boolean personsAreUnique(List<Candidate> candidates) {
+    private boolean candidatesAreUnique(List<Candidate> candidates) {
         for (int i = 0; i < candidates.size() - 1; i++) {
             for (int j = i + 1; j < candidates.size(); j++) {
-                if (candidates.get(i).isSamePerson(candidates.get(j))) {
+                if (candidates.get(i).isSameCandidate(candidates.get(j))) {
                     return false;
                 }
             }

@@ -2,12 +2,14 @@ package seedu.recruit.logic.commands.emailcommand;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
+import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.model.Model;
-import seedu.recruit.ui.MainWindow;
 
 /**
  * This class handles the next sub command for email recipients phase
@@ -35,9 +37,9 @@ public class EmailRecipientsNextCommand extends EmailRecipientsSelectCommand {
                     + EmailRecipientsSelectCommand.MESSAGE_USAGE);
         } else {
             if (emailUtil.isAreRecipientsCandidates()) {
-                MainWindow.switchToCompanyBook();
+                EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
             } else {
-                MainWindow.switchToCandidateBook();
+                EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
             }
 
             LogicManager.setLogicState(EmailContentsSelectCommand.COMMAND_LOGIC_STATE);

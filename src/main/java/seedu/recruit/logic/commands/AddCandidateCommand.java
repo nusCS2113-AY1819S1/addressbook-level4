@@ -13,10 +13,13 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_TAG;
 
+import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.candidate.Candidate;
+import seedu.recruit.ui.MainWindow;
 
 /**
  * Adds a candidate to the CandidateBook.
@@ -67,6 +70,9 @@ public class AddCandidateCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        if (!MainWindow.getDisplayedBook().equals("candidatebook")) {
+            EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
+        }
 
         if (model.hasCandidate(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);

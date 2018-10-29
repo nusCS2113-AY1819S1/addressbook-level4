@@ -20,8 +20,8 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.recruit.model.candidate.Candidate;
-import seedu.recruit.model.candidate.exceptions.DuplicatePersonException;
-import seedu.recruit.testutil.PersonBuilder;
+import seedu.recruit.model.candidate.exceptions.DuplicateCandidateException;
+import seedu.recruit.testutil.CandidateBuilder;
 
 public class CandidateBookTest {
 
@@ -51,12 +51,12 @@ public class CandidateBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two candidates with the same identity fields
-        Candidate editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Candidate editedAlice = new CandidateBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Candidate> newCandidates = Arrays.asList(ALICE, editedAlice);
         CandidateBookStub newData = new CandidateBookStub(newCandidates);
 
-        thrown.expect(DuplicatePersonException.class);
+        thrown.expect(DuplicateCandidateException.class);
         candidateBook.resetData(newData);
     }
 
@@ -80,7 +80,7 @@ public class CandidateBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         candidateBook.addPerson(ALICE);
-        Candidate editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Candidate editedAlice = new CandidateBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(candidateBook.hasPerson(editedAlice));
     }

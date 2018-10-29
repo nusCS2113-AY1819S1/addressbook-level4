@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.recruit.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -61,6 +62,7 @@ public class CompanyBook implements ReadOnlyCompanyBook {
         requireNonNull(newData);
 
         setCompanyList(newData.getCompanyList());
+
         companyJobList.setJobOffers(newData.getCompanyJobList());
     }
 
@@ -130,6 +132,13 @@ public class CompanyBook implements ReadOnlyCompanyBook {
      */
     public void removeCompany(Company key) {
         companyList.remove(key);
+        List<JobOffer> jobOffersToRemove = new ArrayList<>();
+        for (JobOffer jobOffer: companyJobList) {
+            if (jobOffer.getCompanyName().equals(key.getCompanyName())) {
+                jobOffersToRemove.add(jobOffer);
+            }
+        }
+        companyJobList.removeAll(jobOffersToRemove);
     }
 
     // job offer level operations
@@ -177,8 +186,8 @@ public class CompanyBook implements ReadOnlyCompanyBook {
      * Deletes a job offer from an existing company in the CompanyBook.
      * @param jobOffer must exist inside the CompanyBook
      */
-    public void deleteJobOffer(JobOffer jobOffer) {
-        companyList.deleteJobOffer(jobOffer);
+    public void removeJobOffer(JobOffer jobOffer) {
+        companyList.removeJobOffer(jobOffer);
         companyJobList.remove(jobOffer);
 
     }

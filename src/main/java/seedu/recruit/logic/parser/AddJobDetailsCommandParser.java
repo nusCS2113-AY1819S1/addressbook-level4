@@ -14,6 +14,7 @@ import seedu.recruit.logic.commands.AddJobDetailsCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.candidate.Education;
 import seedu.recruit.model.candidate.Gender;
+import seedu.recruit.model.candidate.UniqueCandidateList;
 import seedu.recruit.model.company.CompanyName;
 import seedu.recruit.model.joboffer.AgeRange;
 import seedu.recruit.model.joboffer.Job;
@@ -49,7 +50,8 @@ public class AddJobDetailsCommandParser implements Parser<AddJobDetailsCommand> 
         Education education = ParserUtil.parseEducation(argMultimap.getValue(PREFIX_EDUCATION).get());
         Salary salary = ParserUtil.parseSalary(argMultimap.getValue(PREFIX_SALARY).get());
 
-        JobOffer jobOffer = new JobOffer(companyName, job, gender, ageRange, education, salary);
+        JobOffer jobOffer = new JobOffer(companyName, job, gender, ageRange, education, salary,
+                new UniqueCandidateList());
 
         return new AddJobDetailsCommand(jobOffer);
     }

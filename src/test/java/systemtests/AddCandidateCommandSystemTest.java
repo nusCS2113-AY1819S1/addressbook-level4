@@ -54,7 +54,7 @@ import seedu.recruit.model.commons.Address;
 import seedu.recruit.model.commons.Email;
 import seedu.recruit.model.commons.Phone;
 import seedu.recruit.model.tag.Tag;
-import seedu.recruit.testutil.PersonBuilder;
+import seedu.recruit.testutil.CandidateBuilder;
 import seedu.recruit.testutil.PersonUtil;
 
 @Ignore("not updated with new UI changes")
@@ -87,7 +87,7 @@ public class AddCandidateCommandSystemTest extends CandidateBookSystemTest {
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: add a candidate with all fields same as another candidate in the recruit book except name -> added */
-        toAdd = new PersonBuilder(AMY).withName(VALID_NAME_BOB).build();
+        toAdd = new CandidateBuilder(AMY).withName(VALID_NAME_BOB).build();
         command = AddCandidateCommand.COMMAND_WORD + NAME_DESC_BOB + GENDER_DESC_AMY + AGE_DESC_AMY +  PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + JOB_DESC_AMY + EDUCATION_DESC_AMY + SALARY_DESC_AMY
                 + TAG_DESC_FRIEND;
@@ -96,7 +96,7 @@ public class AddCandidateCommandSystemTest extends CandidateBookSystemTest {
         /* Case: add a candidate with all fields same as another candidate in the recruit book except phone and email
          * -> added
          */
-        toAdd = new PersonBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
+        toAdd = new CandidateBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
         command = PersonUtil.getAddCandidateCommand(toAdd);
         assertCommandSuccess(command, toAdd);
 
@@ -134,17 +134,17 @@ public class AddCandidateCommandSystemTest extends CandidateBookSystemTest {
         assertCommandFailure(command, AddCandidateCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: add a duplicate candidate except with different phone -> rejected */
-        toAdd = new PersonBuilder(HOON).withPhone(VALID_PHONE_BOB).build();
+        toAdd = new CandidateBuilder(HOON).withPhone(VALID_PHONE_BOB).build();
         command = PersonUtil.getAddCandidateCommand(toAdd);
         assertCommandFailure(command, AddCandidateCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: add a duplicate candidate except with different email -> rejected */
-        toAdd = new PersonBuilder(HOON).withEmail(VALID_EMAIL_BOB).build();
+        toAdd = new CandidateBuilder(HOON).withEmail(VALID_EMAIL_BOB).build();
         command = PersonUtil.getAddCandidateCommand(toAdd);
         assertCommandFailure(command, AddCandidateCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: add a duplicate candidate except with different recruit -> rejected */
-        toAdd = new PersonBuilder(HOON).withAddress(VALID_ADDRESS_BOB).build();
+        toAdd = new CandidateBuilder(HOON).withAddress(VALID_ADDRESS_BOB).build();
         command = PersonUtil.getAddCandidateCommand(toAdd);
         assertCommandFailure(command, AddCandidateCommand.MESSAGE_DUPLICATE_PERSON);
 

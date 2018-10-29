@@ -9,10 +9,13 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_SALARY;
 
+import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.joboffer.JobOffer;
+import seedu.recruit.ui.MainWindow;
 
 /**
  * Intermediate Command of AddJobCommand
@@ -36,7 +39,7 @@ public class AddJobDetailsCommand extends Command {
             + PREFIX_JOB + "cashier "
             + PREFIX_GENDER + "M "
             + PREFIX_AGE_RANGE + "20-30 "
-            + PREFIX_EDUCATION + "OLEVELS"
+            + PREFIX_EDUCATION + "OLEVELS "
             + PREFIX_SALARY + "1200\n";
 
 
@@ -57,6 +60,9 @@ public class AddJobDetailsCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        if (!MainWindow.getDisplayedBook().equals("companybook")) {
+            EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
+        }
         int companyIndex = model.getCompanyIndexFromName(toAdd.getCompanyName());
         if (companyIndex == -1) {
             throw new CommandException(MESSAGE_COMPANY_NOT_FOUND);

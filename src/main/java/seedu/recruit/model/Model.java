@@ -57,7 +57,7 @@ public interface Model {
      */
     void updateCandidate(Candidate target, Candidate editedCandidate);
 
-    /** Returns an unmodifiable view of the filtered candidate list */
+    /** Returns an unmodifiable view of the filtered candidate list. */
     ObservableList<Candidate> getFilteredCandidateList();
 
     /**
@@ -218,6 +218,13 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredCompanyJobList(Predicate<JobOffer> predicate);
+
+    /**
+     * Adds a candidate to the candidateList of the jobOffer
+     * @param jobOffer job offer to shortlist to
+     * @param candidate candidate to be shortlisted
+     */
+    void shortListCandidateToJobOffer(Candidate candidate, JobOffer jobOffer );
 
     // ================================== Email Command functions ===================================== //
 

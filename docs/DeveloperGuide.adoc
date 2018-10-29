@@ -16,17 +16,39 @@ endif::[]
 
 By: `Team F09-4`      Since: `Sept 2018`      Licence: `MIT`
 
-== Setting up
+[big]#*Welcome to RecruitBook!*#
+
+RecruitBook is an offline desktop application that allows you to manage job candidates and job offers
+throughout the process of recruiting. Designed specifically to ease the recruitment process, you can use RecruitBook
+to add, edit, find, filter, shortlist, email and delete candidates, as well as job offers, to help you efficiently link
+potential candidates to the job offer that is best suited for them. Hence, you can organise and sift out your desired
+information with just a few clicks due to the meticulous data handling in RecruitBook.
+
+This guide provides information that will not only help you get started as a RecruitBook contributor, but also get
+a better understanding of data handling and code implementation if you are interested in coding.
+
+We welcome feedback and queries, and you can contact us at cs2113.f09.4@gmail.com.
+
+
+== Getting Started
+
+Follow the simple list below to get RecruitBook up and running with Java.
 
 === Prerequisites
 
-. *JDK `9`* or later
+If you have Java 9 and IntelliJ set up, you may skip to <<Setting up the project in your computer, 1.2>>.
+
+. Install *JDK `9`* or later
++
+You may download it https://www.oracle.com/technetwork/java/javase/downloads/java-archive-javase9-3934878.html[here].
 +
 [WARNING]
 JDK `10` on Windows will fail to run tests in <<UsingGradle#Running-Tests, headless mode>> due to a https://github.com/javafxports/openjdk-jfx/issues/66[JavaFX bug].
 Windows developers are highly recommended to use JDK `9`.
 
-. *IntelliJ* IDE
+. Install *IntelliJ* IDE
++
+You may download it https://www.jetbrains.com/idea/download/#section=windows[here].
 +
 [NOTE]
 IntelliJ by default has Gradle and JavaFx plugins installed. +
@@ -35,7 +57,7 @@ Do not disable them. If you have disabled them, go to `File` > `Settings` > `Plu
 
 === Setting up the project in your computer
 
-. Fork this repo, and clone the fork to your computer
+. Fork https://github.com/CS2113-AY1819S1-F09-4/main[this] repo, and clone the fork to your computer
 . Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
 . Set up the correct JDK version for Gradle
 .. Click `Configure` > `Project Defaults` > `Project Structure`
@@ -49,44 +71,9 @@ This will generate all resources required by the application and tests.
 
 === Verifying the setup
 
-. Run the `seedu.recruit.MainApp` and try a few commands
+. Run `seedu.recruit.MainApp` and try a few commands
 . <<Testing,Run the tests>> to ensure they all pass.
 
-=== Configurations to do before writing code
-
-==== Configuring the coding style
-
-This project follows https://github.com/oss-generic/process/blob/master/docs/CodingStandards.adoc[oss-generic coding standards]. IntelliJ's default style is mostly compliant with ours but it uses a different import order from ours. To rectify,
-
-. Go to `File` > `Settings...` (Windows/Linux), or `IntelliJ IDEA` > `Preferences...` (macOS)
-. Select `Editor` > `Code Style` > `Java`
-. Click on the `Imports` tab to set the order
-
-* For `Class count to use import with '\*'` and `Names count to use static import with '*'`: Set to `999` to prevent IntelliJ from contracting the import statements
-* For `Import Layout`: The order is `import static all other imports`, `import java.\*`, `import javax.*`, `import org.\*`, `import com.*`, `import all other imports`. Add a `<blank line>` between each `import`
-
-Optionally, you can follow the <<UsingCheckstyle#, UsingCheckstyle.adoc>> document to configure Intellij to check style-compliance as you write code.
-
-==== Setting up CI
-
-Set up Travis to perform Continuous Integration (CI) for your fork. See <<UsingTravis#, UsingTravis.adoc>> to learn how to set it up.
-
-After setting up Travis, you can optionally set up coverage reporting for your team fork (see <<UsingCoveralls#, UsingCoveralls.adoc>>).
-
-[NOTE]
-Coverage reporting could be useful for a team repository that hosts the final version but it is not that useful for your personal fork.
-
-Optionally, you can set up AppVeyor as a second CI (see <<UsingAppVeyor#, UsingAppVeyor.adoc>>).
-
-[NOTE]
-Having both Travis and AppVeyor ensures your App works on both Unix-based platforms and Windows-based platforms (Travis is Unix-based and AppVeyor is Windows-based)
-
-==== Getting started with coding
-
-When you are ready to start coding,
-
-1. Get some sense of the overall design by reading <<Design-Architecture>>.
-2. Take a look at <<GetStartedProgramming>>.
 
 == Design
 
@@ -97,6 +84,7 @@ When you are ready to start coding,
 image::Architecture.png[width="600"]
 
 The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
+
 
 [TIP]
 The `.pptx` files used to create diagrams in this document can be found in the link:{repoURL}/docs/diagrams/[diagrams] folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
@@ -123,7 +111,7 @@ Each of the four components
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
 
-For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
+For example, the `Logic` component in Figure 2 defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
 
 .Class Diagram of the Logic Component
 image::LogicClassDiagram.png[width="800"]
@@ -131,7 +119,7 @@ image::LogicClassDiagram.png[width="800"]
 [discrete]
 ==== Events-Driven nature of the design
 
-The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the command `delete 1`.
+The _Sequence Diagram_ in Figure 3 shows how the components interact for the scenario where the user issues the command `delete 1`.
 
 .Component interactions for `delete 1` command (part 1)
 image::SDforDeletePerson.png[width="800"]
@@ -139,7 +127,7 @@ image::SDforDeletePerson.png[width="800"]
 [NOTE]
 Note how the `Model` simply raises a `CandidateBookChangedEvent` when the Recruit Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
 
-The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
+The diagram in Figure 4 shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
 .Component interactions for `delete 1` command (part 2)
 image::SDforDeletePersonEventHandling.png[width="800"]
@@ -157,7 +145,17 @@ image::UiClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/recruit/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+As illustrated in Figure 5, the UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CandidateDetailsPanel`, `CompanyJobDetailsPanel`, `ShortlistPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+
+There are 4 placeholders inside `MainWindow` that fills the screen along with the menu bar.
+
+|============
+|Placeholder | Parts of `MainWindow`
+|commandBoxPlaceholder | `CommandBox`
+| resultDisplayPlaceholder | `ResultDisplay`
+| panelViewPlaceholder | `CandidateDetailsPanel` `CompanyJobDetailsPanel` `ShortlistPanel`
+| statusbarPlaceholder | `StatusBarFooter`
+|============
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/recruit/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -177,12 +175,14 @@ image::LogicClassDiagram.png[width="800"]
 *API* :
 link:{repoURL}/src/main/java/seedu/recruit/logic/Logic.java[`Logic.java`]
 
+As illustrated in Figure 6,
+
 .  `Logic` uses the `RecruitBookParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
 .  The command execution can affect the `Model` (e.g. adding a candidate) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+Given below in Figure 7 is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 .Interactions Inside the Logic Component for the `delete 1` Command
 image::DeletePersonSdForLogic.png[width="800"]
@@ -228,6 +228,136 @@ Classes used by multiple components are in the `seedu.recruit.commons` package.
 == Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
+
+// tag::shortlist[]
+=== Shortlist Feature
+==== Current Implementation
+The shortlist mechanism is facilitated by `select`, `selectCompany` and `selectJob` command.
+It extends `CompanyBook` with a list of shortlisted candidate(s) for each job offer, stored internally as a `shortlistedCandidateList`.
+
+It is a 5-stage process supported by `LogicManager` by keeping track of the `LogicState`.
+
+. `primary`
+. `SelectCompany`
+. `SelectJob`
+. `SelectCandidate`
+. `ShortlistCandidate`
+
+Given below is an example usage scenario and how the shortlist mechanism behaves at each step.
+
+[NOTE]
+x refers to the index from user input.
+
+. User launches the application. RecruitBook sets up the Candidate Book and Company Book respectively.
+[NOTE]
+Assume that there are candidates and companies present in the data of RecruitBook, but no job offer.
+
+. User adds a new job offer `Cashier` under the existing company `KFC`.
+. RecruitBook creates a new object `Cashier` with `JobOffer` class. Hence, `Cashier` has `shortlistedCandidateList` as one of its attributes.
+[NOTE]
+`shortlistedCandidateList` is empty upon creation of the `Cashier` object.
+
+. User executes `shortlist` command. RecruitBook enters Stage 2 of the shortlisting process to shortlist a candidate for a job offer.
+This is implemented by `LogicManager` where `setLogicState` is called in each stage to connect one after another. User will need to execute
+`cancel` command to exit from the shortlist process. The 5-stage process is described in order below.
+.. `shortlist` -> User initializes the shortlisting process.
+.. `selectCompany x` -> User selects the company of the job offer.
+.. `selectJob x` -> User selects the job offer.
+.. `select x` -> User selects the candidate to shortlist.
+.. `confirm` -> User confirms the above inputs.
+
+. RecruitBook proceeds to add shortlisted candidate into `shortlistedCandidateList` of the job offer through `addToShortlistedCandidateList` method in `JobOffer` class.
+. `shortlistedCandidateList` is linked to the job offer.
+[NOTE]
+You can access this list by calling `selectedJob.getShortlistedCandidateList()`.
+
+
+==== Design Considerations
+
+===== Aspect: How shortlist feature executes
+
+* **Alternative 1 (current choice):** Use existing `select`, `selectCompany` and `selectJob` commands.
+** Pros: Easy to implement.
+** Cons: May have performance issues in terms of memory usage.
+* **Alternative 2:** Shortlist command executes the 5-stage process by itself.
+** Pros: Does not need to rely on `LogicManager` to facilitate the process.
+** Cons: We must implement 3 fields for user input `shortlist Candidate/[input] Company/[input] Job/[input]` and store separately from the
+Candidate Book and Company Book. Furthermore, we have to filter by job offer and store the data into an observable list on the UI
+when the user wants to view the shortlisted candidates for a certain job offer.
+
+===== Aspect: Data structure to support the shortlist feature
+
+* **Alternative 1 (current choice):** Use a list to store the shortlisted candidates and attach this list to the respective job offer.
+** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
+** Cons: Increases coupling between `JobOffer` and `ShortlistCandidateCommand`.
+* **Alternative 2:** Use a HashMap to store the shortlisted candidates as the `key` and the respective job offers as the `value`.
+** Pros: We do not need to set `shortlistedCandidateList` as an attribute in each the `JobOffer` object. This would use less memory as it only takes a HashMap to store
+all the shortlisted candidates along with the job offers. Furthermore, this reduces coupling between `JobOffer` and `ShortlistCandidateCommand`.
+** Cons: HashMap only allows unique `keys`. In other words, HashMap does not allow duplicates of candidates to be stored. However, in RecruitBook, user should
+be able to shortlist a candidate for multiple job offers. Hence, we need to further implement a list of job offers to be stored as the `value` for each candidate so as
+to store multiple job offers under the same candidate `key`.
+// end::shortlist[]
+
+// tag::switchbook[]
+=== Switch Book Feature
+==== Current Implementation
+The switching mechanism is facilitated by `MainWindow`, with the latter's `switchToCandidateBook` and `switchToCompanyBook` methods.
+
+It extends `Command` with `EventsCenter`, where it uses `EventsCenter` to post a new `SwitchBookRequestEvent` so that
+MainWindow will handle the event with its `handleSwitchBookEvent` method.
+
+[NOTE]
+MainWindow knows an event is posted because it is subscribed to the event bus `com.google.common.eventbus.Subscribe`. It will
+handle any event that matches the parameter of the handling methods in `MainWindow` class.
+For example, `SwitchBookRequestEvent` will match with the `handleSwitchBookEvent(*SwitchBookRequestEvent* event)` as the parameter matches.
+
+As mentioned <<UI component, above>>, inside MainWindow, there are 4 placeholders and the panelViewPlaceholder holds the panels `CandidateDetailsPanel` and `CompanyJobDetailsPanel`.
+
+The methods `switchToCandidateBook` and `switchToCompanyBook` work by placing the desired panel in panelViewPlaceholder, to be shown on the MainWindow.
+
+Given below is an example usage scenario for switching from `Company Book` to `Candidate Book` and how the switching mechanism behaves at each step.
+
+. User launches the application. `MainWindow` initialises the panelViewPlaceholder with `CompanyJobDetailsPanel`.
+[NOTE]
+This means the default view of RecruitBook is the `Company Book`.
+
+. User executes `switch` command, which posts a `SwitchBookRequestEvent`.
+
+. MainWindow handles the posted `SwitchBookRequestEvent` with its method `handleSwitchBookEvent`.
+
+. Inside this method, it checks which book is currently displayed by calling the method `getDisplayedBook`.
+
+. `getDisplayedBook` returns `companyBook` as a string.
+
+. Using a switch statement, case `companyBook` will execute and call for `switchToCandidateBook` method.
+
+. `switchToCandidateBook` method places the `CandidateDetailsPanel` into panelViewPlaceholder to switch the view
+[TIP]
+In order to add a panel into `panelViewPlaceholder`, the existing panel needs to be removed so that there will not be duplicated panels
+inside `panelViewPlaceholder`. There will be a compilation error if there are duplicated panels.
+
+==== Design Considerations
+
+===== Aspect: How switch feature executes
+
+* **Alternative 1 (current choice):** Use `EventsCenter` to post events and `MainWindow` to handle these events.
+** Pros: Easy to implement. Neat and clean code with less coupling. `MainWindow` has private methods and variables to prevent unauthorised access
+for better integrity purposes.
+** Cons: -
+* **Alternative 2:** Allow all methods in MainWindow to be static and public.
+** Pros: Other classes can have easy access to the switching methods and their variables.
+** Cons: May face integrity issues due to public access of MainWindow. Increases unnecessary coupling.
+
+===== Aspect: Data structure to support the switch feature
+* **Alternative 1 (current choice):** The only variable that `MainWindow` has to keep track of is `currentBook`.
+** Pros: Easy to keep track as `currentBook` is set to `candidateBook` or `companyBook` accordingly.
+** Cons: `currentBook` is a string variable. Misspelling of `candidateBook` or `companyBook` in code may result in a bug.
+* **Alternative 2:** Store `currentBook` as boolean `isCandidateBook`, with the boolean returning true if the current book is Candidate Book,
+and returning false if the current book is Company Book.
+** Pros: Eliminates the possibility of misspelling the books.
+** Cons: Can be confusing for multiple contributors. There is also an assumption that there are only 2 distinct
+cases of the view of `panelViewPlaceholder`, which is not the case as we introduced another view `shortlistPanel`.
+// end::switchbook[]
 
 // tag::undoredo[]
 === Undo/Redo feature
@@ -336,110 +466,6 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
-== Documentation
-
-We use asciidoc for writing documentation.
-
-[NOTE]
-We chose asciidoc over Markdown because asciidoc, although a bit more complex than Markdown, provides more flexibility in formatting.
-
-=== Editing Documentation
-
-See <<UsingGradle#rendering-asciidoc-files, UsingGradle.adoc>> to learn how to render `.adoc` files locally to preview the end result of your edits.
-Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows you to preview the changes you have made to your `.adoc` files in real-time.
-
-=== Publishing Documentation
-
-See <<UsingTravis#deploying-github-pages, UsingTravis.adoc>> to learn how to deploy GitHub Pages using Travis.
-
-=== Converting Documentation to PDF format
-
-We use https://www.google.com/chrome/browser/desktop/[Google Chrome] for converting documentation to PDF format, as Chrome's PDF engine preserves hyperlinks used in webpages.
-
-Here are the steps to convert the project documentation files to PDF format.
-
-.  Follow the instructions in <<UsingGradle#rendering-asciidoc-files, UsingGradle.adoc>> to convert the AsciiDoc files in the `docs/` directory to HTML format.
-.  Go to your generated HTML files in the `build/docs` folder, right click on them and select `Open with` -> `Google Chrome`.
-.  Within Chrome, click on the `Print` option in Chrome's menu.
-.  Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. For best results, use the settings indicated in the screenshot below.
-
-.Saving documentation as PDF files in Chrome
-image::chrome_save_as_pdf.png[width="300"]
-
-[[Docs-SiteWideDocSettings]]
-=== Site-wide Documentation Settings
-
-The link:{repoURL}/build.gradle[`build.gradle`] file specifies some project-specific https://asciidoctor.org/docs/user-manual/#attributes[asciidoc attributes] which affects how all documentation files within this project are rendered.
-
-[TIP]
-Attributes left unset in the `build.gradle` file will use their *default value*, if any.
-
-[cols="1,2a,1", options="header"]
-.List of site-wide attributes
-|===
-|Attribute name |Description |Default value
-
-|`site-name`
-|The name of the website.
-If set, the name will be displayed near the top of the page.
-|_not set_
-
-|`site-githuburl`
-|URL to the site's repository on https://github.com[GitHub].
-Setting this will add a "View on GitHub" link in the navigation bar.
-|_not set_
-
-|`site-seedu`
-|Define this attribute if the project is an official SE-EDU project.
-This will render the SE-EDU navigation bar at the top of the page, and add some SE-EDU-specific navigation items.
-|_not set_
-
-|===
-
-[[Docs-PerFileDocSettings]]
-=== Per-file Documentation Settings
-
-Each `.adoc` file may also specify some file-specific https://asciidoctor.org/docs/user-manual/#attributes[asciidoc attributes] which affects how the file is rendered.
-
-Asciidoctor's https://asciidoctor.org/docs/user-manual/#builtin-attributes[built-in attributes] may be specified and used as well.
-
-[TIP]
-Attributes left unset in `.adoc` files will use their *default value*, if any.
-
-[cols="1,2a,1", options="header"]
-.List of per-file attributes, excluding Asciidoctor's built-in attributes
-|===
-|Attribute name |Description |Default value
-
-|`site-section`
-|Site section that the document belongs to.
-This will cause the associated item in the navigation bar to be highlighted.
-One of: `UserGuide`, `DeveloperGuide`, ``LearningOutcomes``{asterisk}, `AboutUs`, `ContactUs`
-
-_{asterisk} Official SE-EDU projects only_
-|_not set_
-
-|`no-site-header`
-|Set this attribute to remove the site navigation bar.
-|_not set_
-
-|===
-
-=== Site Template
-
-The files in link:{repoURL}/docs/stylesheets[`docs/stylesheets`] are the https://developer.mozilla.org/en-US/docs/Web/CSS[CSS stylesheets] of the site.
-You can modify them to change some properties of the site's design.
-
-The files in link:{repoURL}/docs/templates[`docs/templates`] controls the rendering of `.adoc` files into HTML5.
-These template files are written in a mixture of https://www.ruby-lang.org[Ruby] and http://slim-lang.com[Slim].
-
-[WARNING]
-====
-Modifying the template files in link:{repoURL}/docs/templates[`docs/templates`] requires some knowledge and experience with Ruby and Asciidoctor's API.
-You should only modify them if you need greater control over the site's layout than what stylesheets can provide.
-The SE-EDU team does not provide support for modified template files.
-====
-
 [[Testing]]
 == Testing
 
@@ -522,285 +548,6 @@ A project often depends on third-party libraries. For example, candidate book de
 a. Include those libraries in the repo (this bloats the repo size) +
 b. Require developers to download those libraries manually (this creates extra work for developers)
 
-[[GetStartedProgramming]]
-[appendix]
-== Suggested Programming Tasks to Get Started
-
-Suggested path for new programmers:
-
-1. First, add small local-impact (i.e. the impact of the change does not go beyond the component) enhancements to one component at a time. Some suggestions are given in <<GetStartedProgramming-EachComponent>>.
-
-2. Next, add a feature that touches multiple components to learn how to implement an end-to-end feature across all components. <<GetStartedProgramming-RemarkCommand>> explains how to go about adding such a feature.
-
-[[GetStartedProgramming-EachComponent]]
-=== Improving each component
-
-Each individual exercise in this section is component-based (i.e. you would not need to modify the other components to get it to work).
-
-[discrete]
-==== `Logic` component
-
-*Scenario:* You are in charge of `logic`. During dog-fooding, your team realize that it is troublesome for the user to type the whole command in order to execute a command. Your team devise some strategies to help cut down the amount of typing necessary, and one of the suggestions was to implement aliases for the command words. Your job is to implement such aliases.
-
-[TIP]
-Do take a look at <<Design-Logic>> before attempting to modify the `Logic` component.
-
-. Add a shorthand equivalent alias for each of the individual commands. For example, besides typing `clear`, the user can also type `c` to remove all candidates in the list.
-+
-****
-* Hints
-** Just like we store each individual command word constant `COMMAND_WORD` inside `*Command.java` (e.g.  link:{repoURL}/src/main/java/seedu/recruit/logic/commands/FindCommand.java[`FindCommand#COMMAND_WORD`], link:{repoURL}/src/main/java/seedu/recruit/logic/commands/DeleteCommand.java[`DeleteCommand#COMMAND_WORD`]), you need a new constant for aliases as well (e.g. `FindCommand#COMMAND_ALIAS`).
-** link:{repoURL}/src/main/java/seedu/recruit/logic/parser/RecruitBookParser.java[`RecruitBookParser`] is responsible for analyzing command words.
-* Solution
-** Modify the switch statement in link:{repoURL}/src/main/java/seedu/recruit/logic/parser/RecruitBookParser.java[`RecruitBookParser#parseCommand(String)`] such that both the proper command word and alias can be used to execute the same intended command.
-** Add new tests for each of the aliases that you have added.
-** Update the user guide to document the new aliases.
-** See this https://github.com/se-edu/addressbook-level4/pull/785[PR] for the full solution.
-****
-
-[discrete]
-==== `Model` component
-
-*Scenario:* You are in charge of `model`. One day, the `logic`-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the candidate book, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.
-
-[TIP]
-Do take a look at <<Design-Model>> before attempting to modify the `Model` component.
-
-. Add a `removeTag(Tag)` method. The specified tag will be removed from everyone in the candidate book.
-+
-****
-* Hints
-** The link:{repoURL}/src/main/java/seedu/recruit/model/Model.java[`Model`] and the link:{repoURL}/src/main/java/seedu/recruit/model/CandidateBook.java[`CandidateBook`] API need to be updated.
-** Think about how you can use SLAP to design the method. Where should we place the main logic of deleting tags?
-**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/recuit/model/CandidateBook.java[`CandidateBook`] and link:{repoURL}/src/main/java/seedu/recruit/model/candidate/Person.java[`Candidate`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/recruit/model/AddressBook.java[`CandidateBook`] allows you to update a candidate, and link:{repoURL}/src/main/java/seedu/recruit/model/candidate/Candidate.java[`Candidate`] allows you to update the tags.
-* Solution
-** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/recruit/model/AddressBook.java[`AddressBook`]. Loop through each candidate, and remove the `tag` from each candidate.
-** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/recruit/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/recruit/model/ModelManager.java[`ModelManager`] should call `AddressBook#removeTag(Tag)`.
-** Add new tests for each of the new public methods that you have added.
-** See this https://github.com/se-edu/addressbook-level4/pull/790[PR] for the full solution.
-****
-
-[discrete]
-==== `Ui` component
-
-*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your candidate book application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last candidate in the list. Your job is to implement improvements to the UI to solve all these problems.
-
-[TIP]
-Do take a look at <<Design-Ui>> before attempting to modify the `UI` component.
-
-. Use different colors for different tags inside candidate cards. For example, `friends` tags can be all in brown, and `colleagues` tags can be all in yellow.
-+
-**Before**
-+
-image::getting-started-ui-tag-before.png[width="300"]
-+
-**After**
-+
-image::getting-started-ui-tag-after.png[width="300"]
-+
-****
-* Hints
-** The tag labels are created inside link:{repoURL}/src/main/java/seedu/recruit/ui/CandidateCard.java[the `CandidateCard` constructor] (`new Label(tag.tagName)`). https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html[JavaFX's `Label` class] allows you to modify the style of each Label, such as changing its color.
-** Use the .css attribute `-fx-background-color` to add a color.
-** You may wish to modify link:{repoURL}/src/main/resources/view/DarkTheme.css[`DarkTheme.css`] to include some pre-defined colors using css, especially if you have experience with web-based css.
-* Solution
-** You can modify the existing test methods for `CandidateCard` 's to include testing the tag's color as well.
-** See this https://github.com/se-edu/addressbook-level4/pull/798[PR] for the full solution.
-*** The PR uses the hash code of the tag names to generate a color. This is deliberately designed to ensure consistent colors each time the application runs. You may wish to expand on this design to include additional features, such as allowing users to set their own tag colors, and directly saving the colors to storage, so that tags retain their colors even if the hash code algorithm changes.
-****
-
-. Modify link:{repoURL}/src/main/java/seedu/recruit/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] such that link:{repoURL}/src/main/java/seedu/recruit/ui/ResultDisplay.java[`ResultDisplay`] can show a different style on error (currently it shows the same regardless of errors).
-+
-**Before**
-+
-image::getting-started-ui-result-before.png[width="200"]
-+
-**After**
-+
-image::getting-started-ui-result-after.png[width="200"]
-+
-****
-* Hints
-** link:{repoURL}/src/main/java/seedu/recruit/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] is raised by link:{repoURL}/src/main/java/seedu/recruit/ui/CommandBox.java[`CommandBox`] which also knows whether the result is a success or failure, and is caught by link:{repoURL}/src/main/java/seedu/recruit/ui/ResultDisplay.java[`ResultDisplay`] which is where we want to change the style to.
-** Refer to link:{repoURL}/src/main/java/seedu/recruit/ui/CommandBox.java[`CommandBox`] for an example on how to display an error.
-* Solution
-** Modify link:{repoURL}/src/main/java/seedu/recruit/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] 's constructor so that users of the event can indicate whether an error has occurred.
-** Modify link:{repoURL}/src/main/java/seedu/recruit/ui/ResultDisplay.java[`ResultDisplay#handleNewResultAvailableEvent(NewResultAvailableEvent)`] to react to this event appropriately.
-** You can write two different kinds of tests to ensure that the functionality works:
-*** The unit tests for `ResultDisplay` can be modified to include verification of the color.
-*** The system tests link:{repoURL}/src/test/java/systemtests/AddressBookSystemTest.java[`AddressBookSystemTest#assertCommandBoxShowsDefaultStyle() and AddressBookSystemTest#assertCommandBoxShowsErrorStyle()`] to include verification for `ResultDisplay` as well.
-** See this https://github.com/se-edu/addressbook-level4/pull/799[PR] for the full solution.
-*** Do read the commits one at a time if you feel overwhelmed.
-****
-
-. Modify the link:{repoURL}/src/main/java/seedu/recruit/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of people in the candidate book.
-+
-**Before**
-+
-image::getting-started-ui-status-before.png[width="500"]
-+
-**After**
-+
-image::getting-started-ui-status-after.png[width="500"]
-+
-****
-* Hints
-** link:{repoURL}/src/main/resources/view/StatusBarFooter.fxml[`StatusBarFooter.fxml`] will need a new `StatusBar`. Be sure to set the `GridPane.columnIndex` properly for each `StatusBar` to avoid misalignment!
-** link:{repoURL}/src/main/java/seedu/recruit/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the candidate book is updated.
-* Solution
-** Modify the constructor of link:{repoURL}/src/main/java/seedu/recruit/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of candidates when the application just started.
-** Use link:{repoURL}/src/main/java/seedu/recruit/ui/StatusBarFooter.java[`StatusBarFooter#handleAddressBookChangedEvent(AddressBookChangedEvent)`] to update the number of candidates whenever there are new changes to the addressbook.
-** For tests, modify link:{repoURL}/src/test/java/guitests/guihandles/StatusBarFooterHandle.java[`StatusBarFooterHandle`] by adding a state-saving functionality for the total number of people status, just like what we did for save location and sync status.
-** For system tests, modify link:{repoURL}/src/test/java/systemtests/AddressBookSystemTest.java[`AddressBookSystemTest`] to also verify the new total number of candidates status bar.
-** See this https://github.com/se-edu/addressbook-level4/pull/803[PR] for the full solution.
-****
-
-[discrete]
-==== `Storage` component
-
-*Scenario:* You are in charge of `storage`. For your next project milestone, your team plans to implement a new feature of saving the candidate book to the cloud. However, the current implementation of the application constantly saves the candidate book after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the candidate book storage.
-
-[TIP]
-Do take a look at <<Design-Storage>> before attempting to modify the `Storage` component.
-
-. Add a new method `backupAddressBook(ReadOnlyAddressBook)`, so that the candidate book can be saved in a fixed temporary location.
-+
-****
-* Hint
-** Add the API method in link:{repoURL}/src/main/java/seedu/recruit/storage/AddressBookStorage.java[`AddressBookStorage`] interface.
-** Implement the logic in link:{repoURL}/src/main/java/seedu/recruit/storage/StorageManager.java[`StorageManager`] and link:{repoURL}/src/main/java/seedu/recruit/storage/XmlAddressBookStorage.java[`XmlAddressBookStorage`] class.
-* Solution
-** See this https://github.com/se-edu/addressbook-level4/pull/594[PR] for the full solution.
-****
-
-[[GetStartedProgramming-RemarkCommand]]
-=== Creating a new command: `remark`
-
-By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.
-
-*Scenario:* You are a software maintainer for `addressbook`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
-
-==== Description
-Edits the remark for a candidate specified in the `INDEX`. +
-Format: `remark INDEX r/[REMARK]`
-
-Examples:
-
-* `remark 1 r/Likes to drink coffee.` +
-Edits the remark for the first candidate to `Likes to drink coffee.`
-* `remark 1 r/` +
-Removes the remark for the first candidate.
-
-==== Step-by-step Instructions
-
-===== [Step 1] Logic: Teach the app to accept 'remark' which does nothing
-Let's start by teaching the application how to parse a `remark` command. We will add the logic of `remark` later.
-
-**Main:**
-
-. Add a `RemarkCommand` that extends link:{repoURL}/src/main/java/seedu/recruit/logic/commands/Command.java[`Command`]. Upon execution, it should just throw an `Exception`.
-. Modify link:{repoURL}/src/main/java/seedu/recruit/logic/parser/RecruitBookParser.java[`RecruitBookParser`] to accept a `RemarkCommand`.
-
-**Tests:**
-
-. Add `RemarkCommandTest` that tests that `execute()` throws an Exception.
-. Add new test method to link:{repoURL}/src/test/java/seedu/recruit/logic/parser/RecruitBookParserTest.java[`RecruitBookParserTest`], which tests that typing "remark" returns an instance of `RemarkCommand`.
-
-===== [Step 2] Logic: Teach the app to accept 'remark' arguments
-Let's teach the application to parse arguments that our `remark` command will accept. E.g. `1 r/Likes to drink coffee.`
-
-**Main:**
-
-. Modify `RemarkCommand` to take in an `Index` and `String` and print those two parameters as the error message.
-. Add `RemarkCommandParser` that knows how to parse two arguments, one index and one with prefix 'r/'.
-. Modify link:{repoURL}/src/main/java/seedu/recruit/logic/parser/RecruitBookParser.java[`RecruitBookParser`] to use the newly implemented `RemarkCommandParser`.
-
-**Tests:**
-
-. Modify `RemarkCommandTest` to test the `RemarkCommand#equals()` method.
-. Add `RemarkCommandParserTest` that tests different boundary values
-for `RemarkCommandParser`.
-. Modify link:{repoURL}/src/test/java/seedu/recruit/logic/parser/RecruitBookParserTest.java[`RecruitBookParserTest`] to test that the correct command is generated according to the user input.
-
-===== [Step 3] Ui: Add a placeholder for remark in `CandidateCard`
-Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/recruit/ui/CandidateCard.java[`CandidateCard`] s to display a remark for each candidate later.
-
-**Main:**
-
-. Add a `Label` with any random text inside link:{repoURL}/src/main/resources/view/PersonListCard.fxml[`PersonListCard.fxml`].
-. Add FXML annotation in link:{repoURL}/src/main/java/seedu/recruit/ui/CandidateCard.java[`CandidateCard`] to tie the variable to the actual label.
-
-**Tests:**
-
-. Modify link:{repoURL}/src/test/java/guitests/guihandles/CandidateCardHandle.java[`CandidateCardHandle`] so that future tests can read the contents of the remark label.
-
-===== [Step 4] Model: Add `Remark` class
-We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/seedu/recruit/model/candidate/Person.java[`Person`] class. Instead of just using a `String`, let's follow the conventional class structure that the codebase already uses by adding a `Remark` class.
-
-**Main:**
-
-. Add `Remark` to model component (you can copy from link:{repoURL}/src/main/java/seedu/recruit/model/candidate/Address.java[`Address`], remove the regex and change the names accordingly).
-. Modify `RemarkCommand` to now take in a `Remark` instead of a `String`.
-
-**Tests:**
-
-. Add test for `Remark`, to test the `Remark#equals()` method.
-
-===== [Step 5] Model: Modify `Person` to support a `Remark` field
-Now we have the `Remark` class, we need to actually use it inside link:{repoURL}/src/main/java/seedu/recruit/model/candidate/Person.java[`Person`].
-
-**Main:**
-
-. Add `getRemark()` in link:{repoURL}/src/main/java/seedu/recruit/model/candidate/Person.java[`Person`].
-. You may assume that the user will not be able to use the `addc` and `editc` commands to modify the remarks field (i.e. the candidate will be created without a remark).
-. Modify link:{repoURL}/src/main/java/seedu/recruit/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `candidateBook.xml` so that the application will load the sample data when you launch it.)
-
-===== [Step 6] Storage: Add `Remark` field to `XmlAdaptedPerson` class
-We now have `Remark` s for `Person` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/src/main/java/seedu/recruit/storage/XmlAdaptedPerson.java[`XmlAdaptedPerson`] to include a `Remark` field so that it will be saved.
-
-**Main:**
-
-. Add a new Xml field for `Remark`.
-
-**Tests:**
-
-. Fix `invalidAndValidPersonAddressBook.xml`, `typicalPersonsCandidateBook.xml`, `validAddressBook.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
-
-===== [Step 6b] Test: Add withRemark() for `PersonBuilder`
-Since `Person` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/recruit/testutil/PersonBuilder.java[`PersonBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/recruit/model/candidate/Person.java[`Person`].
-
-**Tests:**
-
-. Add a new method `withRemark()` for link:{repoURL}/src/test/java/seedu/recruit/testutil/PersonBuilder.java[`PersonBuilder`]. This method will create a new `Remark` for the candidate that it is currently building.
-. Try and use the method on any sample `Person` in link:{repoURL}/src/test/java/seedu/recruit/testutil/TypicalPersons.java[`TypicalPersons`].
-
-===== [Step 7] Ui: Connect `Remark` field to `CandidateCard`
-Our remark label in link:{repoURL}/src/main/java/seedu/recruit/ui/CandidateCard.java[`CandidateCard`] is still a placeholder. Let's bring it to life by binding it with the actual `remark` field.
-
-**Main:**
-
-. Modify link:{repoURL}/src/main/java/seedu/recruit/ui/CandidateCard.java[`CandidateCard`]'s constructor to bind the `Remark` field to the `Person` 's remark.
-
-**Tests:**
-
-. Modify link:{repoURL}/src/test/java/seedu/recruit/ui/testutil/GuiTestAssert.java[`GuiTestAssert#assertCardDisplaysPerson(...)`] so that it will compare the now-functioning remark label.
-
-===== [Step 8] Logic: Implement `RemarkCommand#execute()` logic
-We now have everything set up... but we still can't modify the remarks. Let's finish it up by adding in actual logic for our `remark` command.
-
-**Main:**
-
-. Replace the logic in `RemarkCommand#execute()` (that currently just throws an `Exception`), with the actual logic to modify the remarks of a candidate.
-
-**Tests:**
-
-. Update `RemarkCommandTest` to test that the `execute()` logic works.
-
-==== Full Solution
-
-See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-by-step solution.
-
-[appendix]
 == Product Scope
 
 *Target user profile*: Job Agents, Recruit executives, Human Resources executives
@@ -850,7 +597,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |User |Sort jobs of different nature (such as internships, part-time jobs) |There are more options for employees to choose.
 
-|`* * *` |User |Find relevant details to a specific job candidate |Assign the most suitable job to him/her
+|`* * *` |User |Find relevant details to a specific job candidate |Assign the most suitable job to the candidate.
 
 |`* *` |User |Undo/Redo changes to CompanyBook and CandidateBook |Revert unwanted changes job candidates and offers
 
@@ -880,333 +627,397 @@ _{More to be added}_
 
 (For all use cases below, the *System* is the `RecruitBook` and the *Actor* is the `user`, unless specified otherwise)
 
-[discrete]
-=== Use case: Add candidate
+|===
+[big]#*Use case: Add Candidate*#
 
 *MSS*
 
 1.  User requests to add a candidate
+
 2.  RecruitBook prompts user to enter relevant details of job candidate
+
 3.  User enters the relevant details
+
 4.  RecruitBook prompts user to enter relevant job experience of job candidate
+
 5.  User enters the relevant details
-+
-Use case ends.
+
++ Use case ends.
 
 *Extensions*
 
-[none]
-* 3a. User enters invalid details or used the wrong format.
-+
-[none]
-** 3a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
-** 3a2. Prompts user to reenter fields in correct format or to exit add command
-+
-Use case resumes at step 3.
+3a. User enters invalid details or used the wrong format.
 
-[none]
-* 3b. User enters a duplicate entry.
-+
-[none]
-** 3b1. RecruitBook informs user of existing entry
-** 3b2. Prompts user to enter a new entry or to exit add command
-+
-Use case resumes at step 3.
+3a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
 
-[discrete]
-=== Use case: Add job
+3a2. Prompts user to reenter fields in correct format or to exit add command
+
++ Use case resumes at step 3.
+
+3b. User enters a duplicate entry.
+
+3b1. RecruitBook informs user of existing entry
+
+3b2. Prompts user to enter a new entry or to exit add command
+
++ Use case resumes at step 3.
+|
+[big]#*Use case: Add Job Offer*#
 
 *MSS*
 
 1.  User requests to add a job offer
+
 2.  RecruitBook prompts user to enter relevant details of job offer
+
 3.  User enters the relevant details
+
 4.  RecruitBook prompts user to enter job requirements
+
 5.  User enters the relevant details
-+
-Use case ends.
+
++ Use case ends.
 
 *Extensions*
 
-[none]
-* 3a. User enters invalid details or used the wrong format.
-+
-[none]
-** 3a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
-+
-Use case resumes at step 3.
+3a. User enters invalid details or used the wrong format.
 
-[none]
-* 3a. User enters a duplicate entry
-+
-[none]
-** 3a1. RecruitBook informs user of existing entry
-+
-Use case resumes at step 3.
 
-[discrete]
+3a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
 
-=== Use case: Add Company
++ Use case resumes at step 3.
+
+3a. User enters a duplicate entry
+
+3a1. RecruitBook informs user of existing entry
+
++ Use case resumes at step 3.
+|
+[big]#*Use case: Add Company*#
 
 *MSS*
 
 1.  User requests to add a company
+
 2.  RecruitBook adds company to CompanyBook
-+
-Use case ends.
+
++ Use case ends.
 
 *Extensions*
 
-[none]
-* 1a. User enters invalid details or used the wrong format.
-+
-[none]
-** 1a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
-** 1a2. Prompts user to re-enter fields in correct format or to exit add command
-+
-Use case resumes at step 1.
+1a. User enters invalid details or used the wrong format.
 
-[none]
-* 1b. User enters a duplicate entry
-+
-[none]
-** 1b1. RecruitBook informs user of existing entry
-** 1b2. Prompts user to enter a new entry or to exit add command
-+
-Use case resumes at step 1.
+1a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
 
-[discrete]
+1a2. Prompts user to re-enter fields in correct format or to exit add command
 
-=== Use case: List candidate
++ Use case resumes at step 1.
+
+1b. User enters a duplicate entry
+
+1b1. RecruitBook informs user of existing entry
+
+1b2. Prompts user to enter a new entry or to exit add command
+
++ Use case resumes at step 1.
+|
+[big]#*Use case: List All Candidates*#
 
 *MSS*
 
-1.  User requests to list candidates
-2.  RecruitBook displays a list of all candidates
-+
-Use case ends.
+1.  User requests to list all candidates.
+
+2.  RecruitBook displays a list of all candidates.
+
++ Use case ends.
 
 *Extensions*
 
-[none]
-* 2a. The list is empty.
-+
-Use case ends.
+2a. The list is empty.
 
-[discrete]
-=== Use case: List job
++ Use case ends.
+|
+[big]#*Use case: List all Companies and all Job Offers*#
 
 *MSS*
 
-1.  User requests to list jobs
-2.  RecruitBook displays a list of all jobs
-+
-Use case ends.
+1.  User requests to list all companies and all job offers.
+
+2.  RecruitBook displays a list of all companies and all jobs.
+
++ Use case ends.
 
 *Extensions*
 
-[none]
-* 2a. The list is empty.
-+
-Use case ends.
+2a. The company list is empty.
 
-[discrete]
-=== Use case: Edit candidate
+2b. The job offer list is empty.
+
+2c. Both lists are empty.
+
++ Use case ends.
+|
+[big]#*Use case: Switch Book View*#
+
+*MSS*
+
+1.  User requests to switch view.
+
+2.  RecruitBook displays the other book.
+
++ Use case ends.
+
+*Extensions*
+
+2a. The other book is empty.
+
++ Use case ends.
+|
+[big]#*Use case: Shortlist Candidate*#
+
+*MSS*
+
+1.  User requests to shortlist a candidate.
+
+2.  RecruitBook displays the shortlist panel view.
+
+3.  RecruitBook requests for the company's index.
+
+4.  User enters the index of the company of her choice.
+
+5.  RecruitBook requests for the job offer's index.
+
+6.  User enters the index of the job offer of her choice.
+
+7.  RecruitBook requests for the index of the candidate to shortlist.
+
+8.  User enters the index of the candidate of her choice.
+
+9.  RecruitBook requests for confirmation.
+
+10. User confirms.
+
++ Use case ends.
+
+*Extensions*
+
+4a. The index of company to select is invalid.
+
+4a1. RecruitBook displays an error message.
+
+4a2. RecruitBook requests for a valid index.
+
+4a3. User enters new index.
+
+Steps 4a1-4a3 are repeated until the index entered is valid.
+
++ Use case resumes from Step 5.
+
+6a. The index of job offer to select is invalid.
+
+6a1. RecruitBook displays an error message.
+
+6a2. RecruitBook requests for a valid index.
+
+6a3. User enters new index.
+
+Steps 6a1-6a3 are repeated until the index entered is valid.
+
++ Use case resumes from Step 7.
+
+8a. The index of candidate to select is invalid.
+
+8a1. RecruitBook displays an error message.
+
+8a2. RecruitBook requests for a valid index.
+
+8a3. User enters new index.
+
+Steps 8a1-8a3 are repeated until the index entered is valid.
+
++ Use case resumes from Step 9.
+
+a. At any time, user chooses to cancel the shortlisting process.
+
+a1. RecruitBook cancels the shortlisting process.
+
++ Use case ends.
+|
+[big]#*Use case: Edit Candidate*#
 
 *MSS*
 
 1.  User requests to edit details of a candidate based on the candidate's index
+
 2.  RecruitBook displays successful edit message
-+
-Use case ends.
+
++ Use case ends.
 
 *Extensions*
 
-[none]
-* 1a. The index of candidate to edit is invalid
-+
-[none]
-** 1a1.  RecruitBook displays an error message
-+
-Use case ends.
+1a. The index of candidate to edit is invalid
 
-[none]
-* 1b. The tags to edit are invalid
-+
-[none]
-** 1b1. RecruitBook displays an error message
-+
-Use case ends.
+1a1.  RecruitBook displays an error message
 
-[none]
-* 1c. No fields are entered for editing
-+
-[none]
-** 1c1. RecruitBook displays an error message
-+
-Use case ends.
++ Use case ends.
 
-[discrete]
-=== Use case: Edit job
+1b. The tags to edit are invalid
+
+1b1. RecruitBook displays an error message
+
++ Use case ends.
+
+1c. No fields are entered for editing
+
+1c1. RecruitBook displays an error message
+
++ Use case ends.
+
+|
+[big]#*Use case: Edit Job Offer*#
 
 *MSS*
 
 1.  User requests to edit a job offer
+
 2.  RecruitBook displays successful edit message
-+
-Use case ends.
+
++ Use case ends.
 
 *Extensions*
 
-[none]
-* 1a. The list is empty.
-+
-Use case ends.
+1a. The list is empty.
 
-[none]
-* 1b. The index number requested for edit is invalid
-+
-[none]
-** 1b1.  RecruitBook displays an error message
-+
-Use case ends.
++ Use case ends.
 
-[none]
-* 1c. The tags to edit are invalid
-+
-[none]
-** 1c1.  RecruitBook displays an error message
-+
-Use case ends.
+1b. The index number requested for edit is invalid
 
-[none]
-* 1d. No fields are entered for editing
-+
-[none]
-** 1d1. RecruitBook displays an error message
-+
-Use case ends.
+1b1.  RecruitBook displays an error message
 
-[discrete]
-=== Use case: Find Candidate
++ Use case ends.
+
+1c. The tags to edit are invalid
+
+1c1.  RecruitBook displays an error message
+
++ Use case ends.
+
+1d. No fields are entered for editing
+
+1d1. RecruitBook displays an error message
+
++ Use case ends.
+|
+[big]#*Use case: Find Candidate*#
 
 *MSS*
 
 1.  User requests to find a candidate based on a keyword of their attributes (name/email/phone number/address)
+
 2.  RecruitBook lists out people whose keyword matches the attribute criteria
-+
-Use case ends.
+
++ Use case ends.
 
 *Extensions*
 
-[none]
-* 2a. Filter tag is invalid
-+
-[none]
-** 2a1. RecruitBook informs the user of the tag error
-+
-** 2a2. If there is only one tag in the search request and it is invalid
-+
-[none]
-*** 2a2.1. Inform the user of the invalid filter tag, do not search anything
-+
-*** Use case ends
-+
-** 2a3. If there are other valid tags in the search request as well
-+
-[none]
-*** 2a3.1. Inform the user of the invalid filter tag, ignore the invalid filter tag, but still search based on the valid filter tags
-+
-*** 2a3.2. List out people whose keyword matches the criteria
-+
-*** Use case ends
-+
-[none]
-* 2b. No candidates matches with the find criteria
-+
-[none]
-** 2b1. Inform the user that no users have been matched with the search criteria.
+2a. Filter tag is invalid
 
-Use case ends.
+2a1. RecruitBook informs the user of the tag error
 
-[discrete]
-=== Use case: Filter Candidate
+2a2. If there is only one tag in the search request and it is invalid
+
+2a2.1. Inform the user of the invalid filter tag, do not search anything
+
++ Use case ends
+
+2a3. If there are other valid tags in the search request as well
+
+2a3.1. Inform the user of the invalid filter tag, ignore the invalid filter tag, but still search based on the valid filter tags
+
+2a3.2. List out people whose keyword matches the criteria
+
++ Use case ends
+
+2b. No candidates matches with the find criteria
+
+2b1. Inform the user that no users have been matched with the search criteria.
+
++ Use case ends.
+|
+[big]#*Use case: Filter Candidate*#
 
 *MSS*
 
 1.  User requests the details of the candidates to sorted by a specified tag
+
 2.  RecruitBook shows all the names of the candidates that fit into the searched criteria
-+
-Use case ends.
+
++ Use case ends.
 
 *Extensions*
 
-[none]
-* 1a. The filter tag is invalid
-+
-[none]
-** 1a1. RecruitBook informs user of the error and show the specified tags that the filter function supports together with examples
-+
-** 1a2. RecruitBook then prompts user to re-enter fields that is supported or to exit filter command
-+
-[none]
-* 1b. The searched field is invalid
-+
-[none]
-** 1a1. RecruitBook informs user of the error and shows the specified fields that is currently being recorded in the system
-+
-Use case resumes at step 1.
+1a. The filter tag is invalid
 
-[discrete]
-=== Use case: Delete Candidate
+1a1. RecruitBook informs user of the error and show the specified tags that the filter function supports together with examples
+
+1a2. RecruitBook then prompts user to re-enter fields that is supported or to exit filter command
+
+1b. The searched field is invalid
+
+1a1. RecruitBook informs user of the error and shows the specified fields that is currently being recorded in the system
+
++ Use case resumes at step 1.
+|
+[big]#*Use case: Delete Candidate*#
 
 *MSS*
 
 1.  User  requests to delete a candidate
+
 2.  RecruitBook prompts user to enter the index of candidate to be deleted
+
 3.  User enters index of candidate from the list
+
 4.  RecruitBook displays message that name of candidate is successfully deleted
-+
-Use case ends.
+
++ Use case ends.
 
 *Extensions*
 
-[none]
-* 3a. User enters invalid format or details
-+
-[none]
-** 3a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
-+
-** 3a2. RecruitBook prompts user to re-enter fields in correct format or to exit delete command
-+
-Use case resumes at step 3.
+3a. User enters invalid format or details
 
-[discrete]
-=== Use case: Delete Job
+3a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
+
+3a2. RecruitBook prompts user to re-enter fields in correct format or to exit delete command
+
++ Use case resumes at step 3.
+|
+[big]#*Use case: Delete Job Offer*#
 
 *MSS*
 
-1.  User requests to delete a job
-2.  RecruitBook lists all the job available together with the index number of the job
-3.  User proceeds to delete the index of the job that is to be deleted
-4.  RecruitBook displays message that the job is successfully deleted
-+
-Use case ends.
+1.  User requests to delete a job offer
+
+2.  RecruitBook lists all the job offers available together with the index number of the job offer
+
+3.  User proceeds to delete the index of the job offer that is to be deleted
+
+4.  RecruitBook displays message that the job offer is successfully deleted
+
++ Use case ends.
 
 *Extensions*
-[none]
 
-* 3a. User enters invalid format or details
-+
-[none]
-** 3a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
-+
-** 3a2. RecruitBook prompts user to re-enter fields in correct format or to exit delete command
-+
-Use case resumes at step 3.
+3a. User enters invalid format or details
 
+3a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
+
+3a2. RecruitBook prompts user to re-enter fields in correct format or to exit delete command
+
++ Use case resumes at step 3.
+|
 _{More to be added}_
-
+|===
 [appendix]
 == Non Functional Requirements
 
