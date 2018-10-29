@@ -29,7 +29,9 @@ public class Trie {
             return children.get(key);
         }
 
-        private Set<Character> getChildren() { return children.keySet(); }
+        private Set<Character> getChildren() {
+            return children.keySet();
+        }
 
         private void putChild(char key, Node childNode) {
             children.put(key, childNode);
@@ -87,6 +89,11 @@ public class Trie {
         }
     }
 
+    /**
+     * Overloaded operator, allows for searching a string whether it exists in the data structure
+     * @param key string to be searched
+     * @return whether the string exists
+     */
     public boolean search(String key) {
         Node crawler = rootNode;
         char curChar;
