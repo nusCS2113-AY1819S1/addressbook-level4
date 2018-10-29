@@ -8,16 +8,17 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 
 /**
- * Terminate Ui and return user to login sceen
+ * Terminate Ui and return user to login sceen.
+ * This functions as the exit command.
  */
 public class LogoutCommand extends Command {
     public static final String COMMAND_WORD = "logout";
 
-    public static final String MESSAGE_LOGOUT_ACKNOWLEDGEMENT = "Logout Address Book as requested ...";
+    public static final String MESSAGE_LOGOUT_ACKNOWLEDGEMENT = "Logging out Address Book as requested ...";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
-        EventsCenter.getInstance().post(new LogoutEvent ());
+        EventsCenter.getInstance().post(new LogoutEvent());
         return new CommandResult(MESSAGE_LOGOUT_ACKNOWLEDGEMENT);
     }
 }

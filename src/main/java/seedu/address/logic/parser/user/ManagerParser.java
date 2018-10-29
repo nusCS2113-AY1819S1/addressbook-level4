@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.user;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -6,15 +6,10 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddItemCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.user.ChangePasswordCommand;
-import seedu.address.logic.commands.user.CreateAccountCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.user.ChangePasswordCommandParser;
-import seedu.address.logic.parser.user.CreateAccountCommandParser;
 
 /**
  * Parses user input.
@@ -44,13 +39,13 @@ public class ManagerParser {
         final String arguments = matcher.group("arguments");
 
         switch (commandWord) {
-        case AddItemCommand.COMMAND_WORD:
-            return new AddItemCommandParser ().parse (arguments);
+        //case AddItemCommand.COMMAND_WORD:
+        //    return new AddDrinkCommandParser().parse(arguments);
 
-        case CreateAccountCommand.COMMAND_WORD:
-            return new CreateAccountCommandParser ().parse (arguments);
-        case ChangePasswordCommand.COMMAND_WORD:
-            return new ChangePasswordCommandParser ().parse(arguments);
+        // case CreateAccountCommand.COMMAND_WORD:
+        //    return new CreateAccountCommandParser().parse(arguments);
+        //case ChangePasswordCommand.COMMAND_WORD:
+        //    return new ChangePasswordCommandParser().parse(arguments);
 
 
         case ExitCommand.COMMAND_WORD:

@@ -291,7 +291,7 @@ The controller of the fxml page named `LoginController` at `seedu.address\contro
 
 Given below is a class diagram for logout function
 
-image::LoginUMLDiagram/Login_Class_diagram.png[width="800"]
+image::LoginUMLDiagram/Login_Class_Diagram.png[width="800"]
 
 
 Given below is an example usage scenario and how logout mechanism behave at each step.
@@ -302,8 +302,8 @@ Once the username and password is correct, it will continue to `initAddressBook`
 It will also start the ui.
 
 
-image::LoginUMLDiagram/LoginUtils_sequence_diagram.png[width="800"]
-
+image::LoginUMLDiagram/LoginUtils_Sequence_Diagram.png[width="800"]
+image::LoginUMLDiagram/LoginList_Read_Sequence_Diagram.png[width="800"]
 ==== Design Considerations
 ===== Aspect: How to store the data
 * **Alternative 1 (current choice):** Saves the login detail in a json file called `loginInfoList.json`.

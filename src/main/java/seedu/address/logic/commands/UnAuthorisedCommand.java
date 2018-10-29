@@ -7,7 +7,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * A command for any unAuthorised Command.
+ * A command for any unAuthorised DrinkCommand.
  */
 public class UnAuthorisedCommand extends Command {
     public static final String COMMAND_WORD = "UnAuthorised";

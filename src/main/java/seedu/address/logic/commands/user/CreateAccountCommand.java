@@ -5,10 +5,9 @@ import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_ACCO
 import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_ADMIN;
 import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_MANAGER;
 import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_STOCK_TAKER;
-
-import static seedu.address.logic.parser.CliSyntax.PREFIX_AUTHENTICATION_LEVEL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
+import static seedu.address.logic.drinkparser.CliSyntax.PREFIX_AUTHENTICATION_LEVEL;
+import static seedu.address.logic.drinkparser.CliSyntax.PREFIX_PASSWORD;
+import static seedu.address.logic.drinkparser.CliSyntax.PREFIX_USERNAME;
 
 import seedu.address.authentication.PasswordUtils;
 import seedu.address.logic.CommandHistory;
@@ -19,6 +18,7 @@ import seedu.address.model.Model;
 import seedu.address.model.user.AuthenticationLevel;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.UserName;
+
 /**
  * Adds a person to the address book.
  */
@@ -41,35 +41,37 @@ public class CreateAccountCommand extends UserCommand {
     private final UserName userName;
     private final Password password;
     private final AuthenticationLevel authenticationLevel;
+
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public CreateAccountCommand (UserName userName, Password password, AuthenticationLevel authenticationLevel) {
+    public CreateAccountCommand(UserName userName, Password password, AuthenticationLevel authenticationLevel) {
         requireNonNull(userName);
-        requireNonNull (password);
-        requireNonNull (authenticationLevel);
-        Password hashedPassword = new Password (PasswordUtils.generateSecurePassword (password.toString ()));
+        requireNonNull(password);
+        requireNonNull(authenticationLevel);
+        Password hashedPassword = new Password(PasswordUtils.generateSecurePassword(password.toString()));
 
         this.userName = userName;
         this.password = hashedPassword;
         this.authenticationLevel = authenticationLevel;
     }
+
     @Override
-    public CommandResult execute(LoginInfoManager loginInfoManager, CommandHistory history) throws CommandException {
+    public CommandResult execute(LoginInfoManager loginInfoManager, CommandHistory history)
+            throws CommandException {
         requireNonNull(loginInfoManager);
 
-        if (loginInfoManager.isUserNameExist (userName.toString ())) {
-            throw new CommandException (MESSAGE_DUPLICATE_USERNAME);
+        if (loginInfoManager.isUserNameExist(userName.toString())) {
+            throw new CommandException(MESSAGE_DUPLICATE_USERNAME);
         }
-        loginInfoManager.createNewAccount (userName, password, authenticationLevel);
+        loginInfoManager.createNewAccount(userName, password, authenticationLevel);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
     @Override
-    public CommandResult execute (Model model , CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history) {
         return null;
     }
-
 
 
 }
