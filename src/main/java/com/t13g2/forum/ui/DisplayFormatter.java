@@ -6,7 +6,7 @@ import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.model.forum.ForumThread;
 
-
+//@@author HansKoh
 /**
  * To format the message of a threadList and commentList
  */

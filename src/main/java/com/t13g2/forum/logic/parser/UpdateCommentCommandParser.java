@@ -9,6 +9,7 @@ import com.t13g2.forum.commons.core.Messages;
 import com.t13g2.forum.logic.commands.UpdateCommentCommand;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
 
+//@@author HansKoh
 /**
  * Parses input arguments and creates a new UpdateCommentCommand object
  */

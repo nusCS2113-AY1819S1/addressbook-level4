@@ -14,6 +14,7 @@ import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 
+//@@author HansKoh
 /**
  * Delete a certain comment. Only admin could delete comments from others,
  * user could only delete comment created by his/her own.

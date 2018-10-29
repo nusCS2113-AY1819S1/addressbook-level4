@@ -16,6 +16,7 @@ import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 
+//@@author HansKoh
 /**
  * Create a new comment to the forum book under certain module
  */

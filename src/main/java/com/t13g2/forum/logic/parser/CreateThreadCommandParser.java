@@ -12,6 +12,7 @@ import com.t13g2.forum.logic.parser.exceptions.ParseException;
 import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.model.forum.ForumThread;
 
+//@@author HansKoh
 /**
  * Parses input arguments and creates a new CreateThreadCommand object
  */

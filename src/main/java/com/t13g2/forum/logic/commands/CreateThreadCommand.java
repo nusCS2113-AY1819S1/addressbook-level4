@@ -18,6 +18,7 @@ import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.model.forum.Module;
 import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 
+//@@author HansKoh
 /**
  * Create a new thread to the forum book under certain module
  */

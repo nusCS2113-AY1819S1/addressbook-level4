@@ -121,6 +121,7 @@ public class AddressBookParser {
         case DeleteUserCommand.COMMAND_WORD:
             return new DeleteUserCommandParser().parse(arguments);
 
+        //@@author HansKoh
         case CreateThreadCommand.COMMAND_WORD:
             return new CreateThreadCommandParser().parse(arguments);
 
