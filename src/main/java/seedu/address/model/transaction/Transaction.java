@@ -31,6 +31,7 @@ public class Transaction {
     private Drink drinkTransacted;
     private Quantity quantityTransacted;
     private Price amountMoney;
+    // TODO: create unique id based on time?
 
     public Transaction(TransactionType transactionType, Drink drinkTransacted,
                        Quantity quantityTransacted, Price amountMoney) {
@@ -78,7 +79,9 @@ public class Transaction {
 
         Transaction that = (Transaction) other;
         return getTransactionType() == that.getTransactionType()
+                && getTransactionDate().equals(that.getTransactionDate())
                 && getDrinkTransacted().isSameDrink(that.getDrinkTransacted())
+                && getQuantityTransacted().equals(that.getQuantityTransacted())
                 && getAmountMoney().equals(that.getAmountMoney());
     }
 
