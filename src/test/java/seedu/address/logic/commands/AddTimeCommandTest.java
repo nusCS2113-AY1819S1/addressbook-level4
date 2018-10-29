@@ -67,7 +67,7 @@ public class AddTimeCommandTest {
         AddTimeCommand command = new AddTimeCommand(toAdd);
         expectedModel.updatePerson(lastPerson, editedPerson);
         expectedModel.commitAddressBook();
-        expectedModel.updateTimeTable(expectedTimeTable);
+        expectedModel.updateDisplayedTimeTable(expectedTimeTable);
 
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
     }

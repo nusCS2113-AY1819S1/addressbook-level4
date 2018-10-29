@@ -50,7 +50,7 @@ public interface Model {
      * Replaces the timetable shown with a new timetable
      * @param timeTable Timetable to replace
      */
-    void updateTimeTable(TimeTable timeTable);
+    void updateDisplayedTimeTable(TimeTable timeTable);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
