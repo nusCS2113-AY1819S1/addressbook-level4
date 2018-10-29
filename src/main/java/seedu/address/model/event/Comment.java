@@ -9,14 +9,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Comment {
 
-    public static final String MESSAGE_COMMENTS_CONSTRAINTS =
+    public static final String MESSAGE_COMMENT_CONSTRAINTS =
             "Comment should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
      * The first character of the comment must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String COMMENT_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String COMMENT_VALIDATION_REGEX = "\\{span\\}[\\p{Alnum}][\\p{Alnum} ]*\\{/span\\}";
 
     public final String value;
 
@@ -27,7 +27,7 @@ public class Comment {
      */
     public Comment(String comment) {
         requireNonNull(comment);
-        checkArgument(isValidComment(comment), MESSAGE_COMMENTS_CONSTRAINTS);
+        checkArgument(isValidComment(comment), MESSAGE_COMMENT_CONSTRAINTS);
         value = comment;
     }
 

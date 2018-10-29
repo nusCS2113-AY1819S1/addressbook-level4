@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditEventDescriptor;
 import seedu.address.model.attendee.Attendee;
+import seedu.address.model.event.Comment;
 import seedu.address.model.event.Contact;
 import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Email;
@@ -41,6 +42,7 @@ public class EditEventDescriptorBuilder {
         descriptor.setEmail(event.getEmail());
         descriptor.setVenue(event.getVenue());
         descriptor.setDate(event.getDateTime());
+        descriptor.setComment(event.getComment());
         descriptor.setTags(event.getTags());
         descriptor.setAttendees(event.getAttendees());
     }
@@ -90,6 +92,14 @@ public class EditEventDescriptorBuilder {
      */
     public EditEventDescriptorBuilder withDateTime(String datetimeAsString) {
         descriptor.setDate(new DateTime(datetimeAsString));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Comment} of the {@code EditEventDescriptor} that we are building.
+     */
+    public EditEventDescriptorBuilder withComment(String comment) {
+        descriptor.setComment(new Comment(comment));
         return this;
     }
 

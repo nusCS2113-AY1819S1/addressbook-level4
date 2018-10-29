@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.user.User;
+import seedu.address.model.user.Username;
 
 /**
  * The API of the Model component.
@@ -47,7 +48,7 @@ public interface Model {
     /**
      * Returns logged in user.
      */
-    User getUser();
+    Username getUsername();
 
     /**
      * Logs user out of the Event Manager.

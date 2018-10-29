@@ -49,6 +49,8 @@ public class CommandTestUtil {
     public static final String VALID_VENUE_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_DATETIME_AMY = "17/8/2018 21:15";
     public static final String VALID_DATETIME_BOB = "7/7/2017 7:07";
+    public static final String VALID_COMMENT_AMY = "{span}This is a comment{/span}"; //TODO for Comment
+    public static final String VALID_COMMENT_BOB = "{span}This is a comment{/span}"; //TODO for Comment
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -93,11 +95,12 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditEventDescriptorBuilder().withName(VALID_NAME_AMY).withContact(VALID_CONTACT_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withVenue(VALID_VENUE_AMY)
-                .withDateTime(VALID_DATETIME_AMY).withTags(VALID_TAG_FRIEND)
+                .withDateTime(VALID_DATETIME_AMY).withComment(VALID_COMMENT_AMY).withTags(VALID_TAG_FRIEND)
                 .withAttendees(VALID_ATTENDEE_HAN).build();
         DESC_BOB = new EditEventDescriptorBuilder().withName(VALID_NAME_BOB).withContact(VALID_CONTACT_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withVenue(VALID_VENUE_BOB)
-                .withDateTime(VALID_DATETIME_AMY).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withDateTime(VALID_DATETIME_AMY).withComment(VALID_COMMENT_BOB)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
     /**
