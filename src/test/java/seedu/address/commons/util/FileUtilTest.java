@@ -4,27 +4,27 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.storage.ScriptSetupTest.SCRIPTS_LOCATION;
-import static seedu.address.storage.ScriptSetupTest.TEST_FILES_LOCATION;
 
 import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
-
 import org.junit.Rule;
 import org.junit.Test;
-
 import org.junit.rules.ExpectedException;
-
+import seedu.address.storage.ScriptSetupTest;
+import seedu.address.storage.scripts.ScriptSetup;
 import seedu.address.testutil.Assert;
 
 public class FileUtilTest {
     private static final String TestMessage = "HelloWorld\n";
     private static final String helloWorldText = "HelloWorld";
     private static final String ReadOnlyFile = "ReadOnly";
+    private static final String HelloWorldTest = "ScriptFiles/HelloWorld.txt";
     private static final String TextExtension = ".txt";
 
     @Rule
+
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
@@ -41,8 +41,9 @@ public class FileUtilTest {
 
     @Test
     public void writeToTextFile_success() throws IOException {
-        File helloWorldTestFile = new File(FileUtil.getRootLocation()
-                + TEST_FILES_LOCATION + helloWorldText + TextExtension);
+        ClassLoader classLoader = getClass().getClassLoader();
+        File helloWorldTestFile = new File(classLoader.getResource(ScriptSetupTest.TEST_FILES_LOCATION
+                + helloWorldText + TextExtension).getFile());
         File helloWorldFile = new File(FileUtil.getRootLocation()
                 + SCRIPTS_LOCATION + helloWorldText + TextExtension);
         FileUtil.writeToTextFile(helloWorldFile, TestMessage);

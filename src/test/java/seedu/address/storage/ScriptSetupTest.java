@@ -16,7 +16,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.storage.scripts.ScriptSetup;
 
 public class ScriptSetupTest {
-    public static final String TEST_FILES_LOCATION = "/src/test/data/ScriptFiles/";
+    public static final String TEST_FILES_LOCATION = "ScriptFiles/";
     public static final String SCRIPTS_LOCATION = "/scripts/";
 
     @Rule
@@ -36,11 +36,13 @@ public class ScriptSetupTest {
         userPrefs = new UserPrefs();
         scriptSetup = new ScriptSetup();
 
-        testAddGroupsFile = new File(scriptSetup.getDefaultLocation() + TEST_FILES_LOCATION
-                + scriptSetup.ADD_GROUPS_FILE);
+        ClassLoader classLoader = getClass().getClassLoader();
 
-        testAddPersonsFile = new File(scriptSetup.getDefaultLocation() + TEST_FILES_LOCATION
-                + scriptSetup.ADD_PERSONS_FILE);
+        testAddGroupsFile = new File(classLoader.getResource(TEST_FILES_LOCATION
+                + scriptSetup.ADD_GROUPS_FILE).getFile());
+
+        testAddPersonsFile = new File(classLoader.getResource(TEST_FILES_LOCATION
+                + scriptSetup.ADD_PERSONS_FILE).getFile());
 
         /*Remove the scripts directory
         File dir = new File(scriptSetup.getDefaultLocation() + SCRIPTS_LOCATION);
