@@ -5,9 +5,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
-
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -17,12 +15,18 @@ import seedu.address.model.Model;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Quantity;
 
-import java.util.List;
-public class FoundCommand extends Command{
+
+//@@author He Haowei
+
+/**
+ * Found an existing item in the stock list.
+ */
+
+public class FoundCommand extends Command {
     public static final String COMMAND_WORD = "found";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Found a item from the stock list identified  "
-            +"by the index number used in the displayed item list"
+            + "by the index number used in the displayed item list"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_QUANTITY + "QUANTITY\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -31,7 +35,6 @@ public class FoundCommand extends Command{
 
     public static final String MESSAGE_FOUND_ITEM_SUCCESS = "Found Item: %1$s";
     public static final String MESSAGE_INVALID_QUANTITY = "The found quantity input is invalid";
-    public static final String MESSAGE_INVALID_FOUND_FIELD = "The found description is invalid";
 
     private final Index targetIndex;
     private final FoundDescriptor foundDescriptor;
@@ -54,12 +57,12 @@ public class FoundCommand extends Command{
         }
 
         Item itemToFound = lastShownList.get(targetIndex.getZeroBased());
-        Item foundItem = createFoundItem(itemToFound,foundDescriptor);
+        Item foundItem = createFoundItem(itemToFound, foundDescriptor);
 
         if (!itemToFound.isSameItem(foundItem) && model.hasItem(foundItem)) {
             throw new CommandException(MESSAGE_INVALID_QUANTITY);
         }
-        model.updateItem(itemToFound,foundItem);
+        model.updateItem(itemToFound, foundItem);
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitStockList();
         return new CommandResult(String.format(MESSAGE_FOUND_ITEM_SUCCESS, foundItem));
@@ -72,36 +75,35 @@ public class FoundCommand extends Command{
     private static Item createFoundItem(Item itemToFound, FoundDescriptor foundDescriptor) {
         assert itemToFound != null;
 
-        //Integer updatedValue = foundDescriptor.getFinalQuantity();
         Integer updatedValue = foundDescriptor.getFoundQuantity();
-        Integer initialValue=itemToFound.getQuantity().toInteger();
+        Integer initialValue = itemToFound.getQuantity().toInteger();
 
-        Quantity updatedQuantity= new Quantity(Integer.toString(initialValue+updatedValue));
+        Quantity updatedQuantity = new Quantity(Integer.toString(initialValue + updatedValue));
 
 
 
         return new Item(itemToFound.getName(), updatedQuantity, itemToFound.getMinQuantity(), itemToFound.getTags());
     }
 
+    /**
+     * Stores the details to lost the item with.
+     */
+
     public static class FoundDescriptor {
         private Integer foundQuantity;
-        //private Integer initialQuantity;
-        //private Integer finalQuantity;
-        public FoundDescriptor(){}
+
+        public FoundDescriptor() {}
 
         public FoundDescriptor(FoundDescriptor toCopy) {
             setFoundQuantity(toCopy.foundQuantity);
-            // setInitialQuantity(toCopy.initialQuantity);
-            //setFinalQuantity(toCopy.foundQuantity,toCopy.initialQuantity);
-
 
         }
-        public void setFoundQuantity(Integer foundQuantity) {this.foundQuantity=foundQuantity;}
-        //public void setInitialQuantity(Integer initialQuantity){this.initialQuantity=initialQuantity;}
-        //public void setFinalQuantity(Integer foundQuantity,Integer initialQuantity){this.finalQuantity=initialQuantity-foundQuantity;}
-        //public Integer getinitialQuantity(){return initialQuantity;}
-        public Integer getFoundQuantity(){return foundQuantity;}
-        //public Integer getFinalQuantity(){return finalQuantity;}
+        public void setFoundQuantity(Integer foundQuantity) {
+            this.foundQuantity = foundQuantity; }
+
+        public Integer getFoundQuantity() {
+            return foundQuantity; }
+
     }
     @Override
     public boolean equals(Object other) {

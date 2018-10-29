@@ -5,9 +5,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
-
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -17,13 +15,18 @@ import seedu.address.model.Model;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Quantity;
 
-import java.util.List;
 
-public class LostCommand extends Command{
+//@@author He Haowei
+
+/**
+ * Lost an existing item in the stock list.
+ */
+
+public class LostCommand extends Command {
     public static final String COMMAND_WORD = "lost";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lost a item from the stock list identified  "
-            +"by the index number used in the displayed item list"
+            + "by the index number used in the displayed item list"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_QUANTITY + "QUANTITY\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -32,7 +35,6 @@ public class LostCommand extends Command{
 
     public static final String MESSAGE_LOST_ITEM_SUCCESS = "Lost Item: %1$s";
     public static final String MESSAGE_INVALID_QUANTITY = "The lost quantity input is invalid";
-    public static final String MESSAGE_INVALID_LOST_FIELD = "The lost description is invalid";
 
     private final Index targetIndex;
     private final LostDescriptor lostDescriptor;
@@ -55,12 +57,12 @@ public class LostCommand extends Command{
         }
 
         Item itemToLost = lastShownList.get(targetIndex.getZeroBased());
-        Item lostItem = createLostItem(itemToLost,lostDescriptor);
+        Item lostItem = createLostItem(itemToLost, lostDescriptor);
 
         if (!itemToLost.isSameItem(lostItem) && model.hasItem(lostItem)) {
             throw new CommandException(MESSAGE_INVALID_QUANTITY);
         }
-        model.updateItem(itemToLost,lostItem);
+        model.updateItem(itemToLost, lostItem);
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitStockList();
         return new CommandResult(String.format(MESSAGE_LOST_ITEM_SUCCESS, lostItem));
@@ -73,36 +75,34 @@ public class LostCommand extends Command{
     private static Item createLostItem(Item itemToLost, LostDescriptor lostDescriptor) {
         assert itemToLost != null;
 
-        //Integer updatedValue = lostDescriptor.getFinalQuantity();
         Integer updatedValue = lostDescriptor.getLostQuantity();
-        Integer initialValue=itemToLost.getQuantity().toInteger();
+        Integer initialValue = itemToLost.getQuantity().toInteger();
 
-        Quantity updatedQuantity= new Quantity(Integer.toString(initialValue-updatedValue));
+        Quantity updatedQuantity = new Quantity(Integer.toString(initialValue - updatedValue));
 
 
 
         return new Item(itemToLost.getName(), updatedQuantity, itemToLost.getMinQuantity(), itemToLost.getTags());
     }
 
+    /**
+     * Stores the details to lost the item with.
+     */
+
     public static class LostDescriptor {
         private Integer lostQuantity;
-        //private Integer initialQuantity;
-        //private Integer finalQuantity;
+
         public LostDescriptor(){}
 
         public LostDescriptor(LostDescriptor toCopy) {
             setLostQuantity(toCopy.lostQuantity);
-            // setInitialQuantity(toCopy.initialQuantity);
-            //setFinalQuantity(toCopy.lostQuantity,toCopy.initialQuantity);
-
-
         }
-        public void setLostQuantity(Integer lostQuantity) {this.lostQuantity=lostQuantity;}
-        //public void setInitialQuantity(Integer initialQuantity){this.initialQuantity=initialQuantity;}
-        //public void setFinalQuantity(Integer lostQuantity,Integer initialQuantity){this.finalQuantity=initialQuantity-lostQuantity;}
-        //public Integer getinitialQuantity(){return initialQuantity;}
-        public Integer getLostQuantity(){return lostQuantity;}
-        //public Integer getFinalQuantity(){return finalQuantity;}
+        public void setLostQuantity(Integer lostQuantity) {
+            this.lostQuantity = lostQuantity; }
+
+        public Integer getLostQuantity() {
+            return lostQuantity; }
+
     }
     @Override
     public boolean equals(Object other) {
