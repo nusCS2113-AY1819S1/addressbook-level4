@@ -157,7 +157,15 @@ public class UniqueCandidateList implements Iterable<Candidate> {
         });
     }
 
-    public void setCandidates(UniqueCandidateList replacement) {
+    /**
+     * Sorts the candidates in the displayed list in reverse order
+     */
+    public void sortInReverse() {
+
+        Collections.reverse(internalList);
+    }
+
+    public void setPersons(UniqueCandidateList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
