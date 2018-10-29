@@ -2,6 +2,8 @@ package com.t13g2.forum.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import com.t13g2.forum.commons.core.EventsCenter;
+import com.t13g2.forum.commons.events.model.UserLoginEvent;
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.Context;
@@ -33,6 +35,7 @@ public class LogoutCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         if (canLogout) {
+            EventsCenter.getInstance().post(new UserLoginEvent("", false));
             return new CommandResult(String.format(MESSAGE_SUCCESS, userName));
         } else {
             return new CommandResult(String.format(MESSAGE_FAIL, userName));

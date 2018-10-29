@@ -2,11 +2,16 @@ package com.t13g2.forum.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import com.t13g2.forum.commons.core.EventsCenter;
+import com.t13g2.forum.commons.events.model.ShowAnnouncementEvent;
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
+import com.t13g2.forum.model.Context;
 import com.t13g2.forum.model.Model;
+import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.model.forum.Announcement;
 import com.t13g2.forum.model.forum.User;
+import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 
 //@@xllx1
 /**
@@ -22,14 +27,26 @@ public class CheckAnnouncmentCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         Announcement announcement = null;
-        // if user has not login, then throw exception
-        if (!model.checkIsLogin()) {
+        // if user has not login or is not admin, then throw exception
+        if (!Context.getInstance().isLoggedIn()) {
             throw new CommandException(User.MESSAGE_NOT_LOGIN);
         }
-        announcement = model.showLatestAnnouncement();
-        if (announcement == null) {
+
+        Announcement latestAnnouncement = null;
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            latestAnnouncement = unitOfWork.getAnnouncementRepository().getLatestAnnouncement();
+        } catch (EntityDoesNotExistException e) {
+            latestAnnouncement = null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (latestAnnouncement != null) {
+            EventsCenter.getInstance().post(new ShowAnnouncementEvent(latestAnnouncement.getTitle(),
+                latestAnnouncement.getContent()));
+        } else {
             throw new CommandException(MESSAGE_FAIL);
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, announcement));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, latestAnnouncement));
     }
 }

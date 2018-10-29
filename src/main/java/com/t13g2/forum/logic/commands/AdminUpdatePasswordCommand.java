@@ -4,10 +4,14 @@ import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_USER_NAME;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_USER_PASSWORD;
 import static java.util.Objects.requireNonNull;
 
+import com.t13g2.forum.commons.exceptions.NotLoggedInException;
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
+import com.t13g2.forum.model.Context;
 import com.t13g2.forum.model.Model;
+import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.model.forum.User;
+import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 
 //@@xllx1
 /**
@@ -46,19 +50,26 @@ public class AdminUpdatePasswordCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         // if user has not login or is not admin, then throw exception
-        if (!model.checkIsLogin()) {
+        try {
+            if (!Context.getInstance().isCurrentUserAdmin()) {
+                throw new CommandException(User.MESSAGE_NOT_ADMIN);
+            }
+        } catch (CommandException e) {
+            throw e;
+        } catch (NotLoggedInException e) {
             throw new CommandException(User.MESSAGE_NOT_LOGIN);
         }
-        if (!model.checkIsAdmin()) {
-            throw new CommandException(User.MESSAGE_NOT_ADMIN);
-        }
-        User userToUpdate = model.doesUserExist(userNameToUpdate);
-        if (userToUpdate == null) {
-            throw new CommandException(String.format(MESSAGE_INVALID_USER, userNameToUpdate));
-        }
-        userToUpdate.setPassword(userPassToUpdate);
 
-        model.adminUpdatePassword(userToUpdate);
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            User userToUpdate = unitOfWork.getUserRepository().getUserByUsername(userNameToUpdate);
+            userToUpdate.setPassword(userPassToUpdate);
+            unitOfWork.getUserRepository().updateUser(userToUpdate);
+            unitOfWork.commit();
+        } catch (EntityDoesNotExistException e) {
+            throw new CommandException(String.format(MESSAGE_INVALID_USER, userNameToUpdate));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, userNameToUpdate, userPassToUpdate));
     }
 }

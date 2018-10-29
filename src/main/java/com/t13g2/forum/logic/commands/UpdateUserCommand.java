@@ -5,9 +5,12 @@ import static java.util.Objects.requireNonNull;
 
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
+import com.t13g2.forum.model.Context;
 import com.t13g2.forum.model.Model;
+import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.model.person.Person;
+import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 
 /**
  * Deletes a specific user by admin
@@ -38,16 +41,19 @@ public class UpdateUserCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         // if user has not login or is not admin, then throw exception
-        if (!model.checkIsLogin()) {
+        // if user has not login or is not admin, then throw exception
+        if (!Context.getInstance().isLoggedIn()) {
             throw new CommandException(User.MESSAGE_NOT_LOGIN);
         }
-        User userToDelete = model.doesUserExist(userNameToUpdate);
-        if (userToDelete == null) {
-            throw new CommandException(String.format(MESSAGE_INVALID_USER, userNameToUpdate));
-        } else {
 
-            //model.updatePerson(userNameToUpdate);
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            User userToUpdate = unitOfWork.getUserRepository().getUserByUsername(userNameToUpdate);
+        } catch (EntityDoesNotExistException e) {
+            throw new CommandException(String.format(MESSAGE_INVALID_USER, userNameToUpdate));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        //model.updatePerson(userNameToUpdate);
         return new CommandResult(String.format(MESSAGE_SUCCESS, userNameToUpdate));
     }
 }

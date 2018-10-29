@@ -6,33 +6,26 @@ import static com.t13g2.forum.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.t13g2.forum.logic.commands.AddCommand;
 import com.t13g2.forum.logic.commands.AddUserCommand;
 import com.t13g2.forum.logic.commands.AdminUpdatePasswordCommand;
 import com.t13g2.forum.logic.commands.AnnounceCommand;
 import com.t13g2.forum.logic.commands.BlockUserFromCreatingCommand;
 import com.t13g2.forum.logic.commands.CheckAnnouncmentCommand;
-import com.t13g2.forum.logic.commands.ClearCommand;
 import com.t13g2.forum.logic.commands.Command;
 import com.t13g2.forum.logic.commands.CreateCommentCommand;
 import com.t13g2.forum.logic.commands.CreateModuleCommand;
 import com.t13g2.forum.logic.commands.CreateThreadCommand;
-import com.t13g2.forum.logic.commands.DeleteCommand;
 import com.t13g2.forum.logic.commands.DeleteCommentCommand;
 import com.t13g2.forum.logic.commands.DeleteModuleCommand;
 import com.t13g2.forum.logic.commands.DeleteThreadCommand;
 import com.t13g2.forum.logic.commands.DeleteUserCommand;
-import com.t13g2.forum.logic.commands.EditCommand;
 import com.t13g2.forum.logic.commands.ExitCommand;
-import com.t13g2.forum.logic.commands.FindCommand;
 import com.t13g2.forum.logic.commands.HelpCommand;
 import com.t13g2.forum.logic.commands.HistoryCommand;
-import com.t13g2.forum.logic.commands.ListCommand;
 import com.t13g2.forum.logic.commands.ListModuleCommand;
 import com.t13g2.forum.logic.commands.LoginCommand;
 import com.t13g2.forum.logic.commands.LogoutCommand;
 import com.t13g2.forum.logic.commands.RedoCommand;
-import com.t13g2.forum.logic.commands.SelectCommand;
 import com.t13g2.forum.logic.commands.SelectModuleCommand;
 import com.t13g2.forum.logic.commands.SelectThreadCommand;
 import com.t13g2.forum.logic.commands.SetAdminCommand;
@@ -68,26 +61,26 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
-
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
-
-        case SelectCommand.COMMAND_WORD:
-            return new SelectCommandParser().parse(arguments);
-
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        // case AddCommand.COMMAND_WORD:
+        //     return new AddCommandParser().parse(arguments);
+        //
+        // case EditCommand.COMMAND_WORD:
+        //     return new EditCommandParser().parse(arguments);
+        //
+        // case SelectCommand.COMMAND_WORD:
+        //     return new SelectCommandParser().parse(arguments);
+        //
+        // case DeleteCommand.COMMAND_WORD:
+        //     return new DeleteCommandParser().parse(arguments);
+        //
+        // case ClearCommand.COMMAND_WORD:
+        //     return new ClearCommand();
+        //
+        // case FindCommand.COMMAND_WORD:
+        //     return new FindCommandParser().parse(arguments);
+        //
+        // case ListCommand.COMMAND_WORD:
+        //     return new ListCommand();
 
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();

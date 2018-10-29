@@ -35,7 +35,8 @@ public class CliSyntax {
     /* Prefix for Comment */
     public static final Prefix PREFIX_COMMENT_CONTENT = new Prefix("cContent/");
     public static final Prefix PREFIX_COMMENT_ID = new Prefix("cId/");
-    /* Prefix for Comment */
+    /* Prefix for setAdmin */
     public static final Prefix PREFIX_ADMIN_SET = new Prefix("set/");
-
+    /* Prefix for blockUser */
+    public static final Prefix PREFIX_BLOCK = new Prefix("block/");
 }

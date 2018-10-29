@@ -2,9 +2,6 @@ package com.t13g2.forum.model;
 
 import java.util.function.Predicate;
 
-import com.t13g2.forum.model.forum.Announcement;
-import com.t13g2.forum.model.forum.Module;
-import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.model.person.Person;
 
 import javafx.collections.ObservableList;
@@ -79,65 +76,4 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitForumBook();
-
-    //@@xllx1
-    /**
-     * user login and update ui label
-     */
-    boolean userLogin(String userName, String userPassword);
-
-    /**
-     * checks if user has logged in.
-     */
-    boolean checkIsLogin();
-
-    /**
-     * checks if current user is admin.
-     */
-    boolean checkIsAdmin();
-
-    /**
-     * adds new announcement to storage.
-     */
-    void addAnnouncement(Announcement toAnnounce);
-
-    /**
-     * shows latest announcement.
-     */
-    Announcement showLatestAnnouncement();
-
-    /**
-     * checks if user exist in forum book.
-     */
-    User doesUserExist(String userName);
-
-    /**
-     * blocks user.
-     */
-    boolean blockUser(User user);
-
-    /**
-     * sets or revert the user as admin.
-     */
-    void setAdmin(User user);
-
-    /**
-     * creates module by admin.
-     */
-    boolean createModule(Module module);
-
-    /**
-     * deletes module by admin.
-     */
-    boolean deleteModule(String moduleCode);
-
-    /**
-     * admin updates password.
-     */
-    void adminUpdatePassword(User userToUpdate);
-
-    /**
-     * deletes a certain user.
-     */
-    void deleteUser(User userToDelete);
 }

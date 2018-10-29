@@ -48,7 +48,7 @@ public class AddUserCommand extends Command {
             try {
                 if (userToAdd == unitOfWork.getUserRepository().getUserByUsername(userToAdd.getUsername())) {
                     exist = true;
-                    new CommandResult(String.format(MESSAGE_DUPLICATE_PERSON));
+                    throw new CommandException(String.format(MESSAGE_DUPLICATE_PERSON));
                 }
 
             } catch (EntityDoesNotExistException ex) {

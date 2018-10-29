@@ -4,9 +4,14 @@ import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_ANNOUNCE_CONTENT;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_ANNOUNCE_TITLE;
 import static java.util.Objects.requireNonNull;
 
+import com.t13g2.forum.commons.core.EventsCenter;
+import com.t13g2.forum.commons.events.model.ShowAnnouncementEvent;
+import com.t13g2.forum.commons.exceptions.NotLoggedInException;
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
+import com.t13g2.forum.model.Context;
 import com.t13g2.forum.model.Model;
+import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.model.forum.Announcement;
 import com.t13g2.forum.model.forum.User;
 
@@ -42,13 +47,24 @@ public class AnnounceCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         // if user has not login or is not admin, then throw exception
-        if (!model.checkIsLogin()) {
+        try {
+            if (!Context.getInstance().isCurrentUserAdmin()) {
+                throw new CommandException(User.MESSAGE_NOT_ADMIN);
+            }
+        } catch (CommandException e) {
+            throw e;
+        } catch (NotLoggedInException e) {
             throw new CommandException(User.MESSAGE_NOT_LOGIN);
         }
-        if (!model.checkIsAdmin()) {
-            throw new CommandException(User.MESSAGE_NOT_ADMIN);
+
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            toAnnounce.setCreatedByUserId(Context.getInstance().getCurrentUser().getId());
+            unitOfWork.getAnnouncementRepository().addAnnouncement(toAnnounce);
+            unitOfWork.commit();
+            EventsCenter.getInstance().post(new ShowAnnouncementEvent(toAnnounce.getTitle(), toAnnounce.getContent()));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        model.addAnnouncement(toAnnounce);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAnnounce));
     }
 }
