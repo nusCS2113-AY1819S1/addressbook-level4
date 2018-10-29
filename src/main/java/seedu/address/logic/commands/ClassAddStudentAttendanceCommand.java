@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.classroom.Attendance;
 import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.ClassroomManager;
 
@@ -44,8 +45,6 @@ public class ClassAddStudentAttendanceCommand extends Command {
     private final String moduleCode;
     private final String matricNo;
     private final String date;
-    private DateTimeFormatter dtf;
-    private LocalDate localDate;
     private Attendance attendance;
 
 
@@ -54,8 +53,8 @@ public class ClassAddStudentAttendanceCommand extends Command {
         this.className = className;
         this.moduleCode = moduleCode;
         this.matricNo = matricNo;
-        dtf = DateTimeFormatter.ofPattern("dd-MMMMM-yyyy");
-        localDate = LocalDate.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate localDate = LocalDate.now();
         date = dtf.format(localDate);
     }
 
@@ -76,24 +75,20 @@ public class ClassAddStudentAttendanceCommand extends Command {
             return new CommandResult(MESSAGE_FAIL);
         }
 
+        attendance = classroomManager.findAttendanceForClass(classToMarkAttendance, date);
+        if (attendance == null) {
+            attendance = new Attendance(date);
+        }
+
         if (classroomManager.isDuplicateClassroomStudentAttendance(classToMarkAttendance, matricNo, date)) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_CLASSROOM_STUDENT_ATTENDANCE, matricNo));
         }
 
+        attendance.getStudentsPresent().add(matricNo);
         classroomManager.markStudentAttendance(classToMarkAttendance, attendance);
-
-        classroomManager.assignStudent(classToMarkAttendance, matricNo);
-        classroomManager.saveClassroomList();
+        classroomManager.saveClassroomAttendanceList();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, matricNo,
                 classToMarkAttendance.getClassName(), classToMarkAttendance.getModuleCode()));
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof ClassAddStudentAttendanceCommand // instanceof handles nulls
-                && classToMarkAttendance.equals(((ClassAddStudentAttendanceCommand) other).classToMarkAttendance));
-
     }
 }

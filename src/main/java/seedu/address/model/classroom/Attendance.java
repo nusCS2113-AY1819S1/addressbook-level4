@@ -7,9 +7,15 @@ import java.util.ArrayList;
  */
 public class Attendance {
     private String date;
-    private ArrayList<String> studentsPresent = new ArrayList<>();
+    private ArrayList<String> studentsPresent;
 
     public Attendance() {
+        studentsPresent = new ArrayList<>();
+    }
+
+    public Attendance(String date) {
+        this.date = date;
+        studentsPresent = new ArrayList<>();
     }
 
     public Attendance(String date, ArrayList<String> studentsPresent) {
