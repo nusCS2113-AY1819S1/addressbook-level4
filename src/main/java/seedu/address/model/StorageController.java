@@ -9,12 +9,14 @@ import seedu.address.commons.util.XmlUtil;
 import seedu.address.storage.adapter.XmlAdaptedClassroom;
 import seedu.address.storage.adapter.XmlAdaptedCourse;
 import seedu.address.storage.adapter.XmlAdaptedGradebook;
+import seedu.address.storage.adapter.XmlAdaptedGrades;
 import seedu.address.storage.adapter.XmlAdaptedModule;
 import seedu.address.storage.adapter.XmlAdaptedNote;
 import seedu.address.storage.adapter.XmlAdaptedStudentModule;
 import seedu.address.storage.adapter.XmlAdaptedUser;
 import seedu.address.storage.serializable.XmlSerializableClassroomList;
 import seedu.address.storage.serializable.XmlSerializableCourseList;
+import seedu.address.storage.serializable.XmlSerializableGradeList;
 import seedu.address.storage.serializable.XmlSerializableGradebookList;
 import seedu.address.storage.serializable.XmlSerializableModuleList;
 import seedu.address.storage.serializable.XmlSerializableNoteList;
@@ -32,6 +34,7 @@ public class StorageController {
     private static final String STORAGE_GRADEBOOK = BASE_DIRECTORY + "gradebook.xml";
     private static final String STORAGE_NOTES = BASE_DIRECTORY + "notes.xml";
     private static final String STORAGE_USERS = BASE_DIRECTORY + "users.xml";
+    private static final String STORAGE_GRADES = BASE_DIRECTORY + "grades.xml";
 
     private static final String STORAGE_STUDENT_MODULE = BASE_DIRECTORY + "studentModule.xml";
 
@@ -41,6 +44,7 @@ public class StorageController {
     private static ArrayList<XmlAdaptedGradebook> gradebookStorage = new ArrayList<>();
     private static ArrayList<XmlAdaptedNote> noteStorage = new ArrayList<>();
     private static ArrayList<XmlAdaptedUser> userStorage = new ArrayList<>();
+    private static ArrayList<XmlAdaptedGrades> gradesStorage = new ArrayList<>();
 
     private static ArrayList<XmlAdaptedStudentModule> studentModuleStorage = new ArrayList<>();
 
@@ -77,6 +81,11 @@ public class StorageController {
             XmlSerializableStudentModuleList studentModuleList =
                     XmlUtil.getDataFromFile(Paths.get(STORAGE_STUDENT_MODULE), XmlSerializableStudentModuleList.class);
             studentModuleStorage = studentModuleList.getStudentModuleList();
+
+            XmlSerializableGradeList gradeSerializable = XmlUtil.getDataFromFile(Paths.get(STORAGE_GRADES),
+                    XmlSerializableGradeList.class);
+            gradesStorage = gradeSerializable.getGradeList();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -93,6 +102,8 @@ public class StorageController {
         File gradebook = new File(STORAGE_GRADEBOOK);
         File users = new File(STORAGE_USERS);
         File studentModule = new File(STORAGE_STUDENT_MODULE);
+        File grades = new File(STORAGE_GRADES);
+
         try {
             classes.createNewFile();
             courses.createNewFile();
@@ -101,6 +112,7 @@ public class StorageController {
             gradebook.createNewFile();
             users.createNewFile();
             studentModule.createNewFile();
+            grades.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -138,6 +150,10 @@ public class StorageController {
             XmlSerializableStudentModuleList studentModuleList = new XmlSerializableStudentModuleList();
             studentModuleList.setStudentModuleList(studentModuleStorage);
             XmlUtil.saveDataToFile(Paths.get(STORAGE_STUDENT_MODULE), studentModuleList);
+
+            XmlSerializableGradeList gradeList = new XmlSerializableGradeList();
+            gradeList.setGradeList(gradesStorage);
+            XmlUtil.saveDataToFile(Paths.get(STORAGE_GRADES), gradeList);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -197,5 +213,13 @@ public class StorageController {
 
     public static void setStudentModuleStorage(ArrayList<XmlAdaptedStudentModule> studentModuleStorage) {
         StorageController.studentModuleStorage = studentModuleStorage;
+    }
+
+    public static ArrayList<XmlAdaptedGrades> getGradeStorage() {
+        return gradesStorage;
+    }
+
+    public static void setGradeStorage(ArrayList<XmlAdaptedGrades> gradesStorage) {
+        StorageController.gradesStorage = gradesStorage;
     }
 }
