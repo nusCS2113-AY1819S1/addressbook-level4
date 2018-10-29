@@ -3,6 +3,7 @@ package seedu.address.model.task;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -112,6 +113,10 @@ public class UniqueTaskList implements Iterable<Task> {
 
     public void sortPriority() {
         internalList.sort(Task.comparePriority);
+    }
+
+    public void reverseTask() {
+        Collections.reverse(internalList);
     }
 /*
     public List<Task> sortDeadline() {

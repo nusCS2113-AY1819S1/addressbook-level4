@@ -149,6 +149,8 @@ public interface Model {
 
     void rankFilteredTaskPriority();
 
+    void reverseTodoList();
+
 
     /**
      * Returns true if the model has previous address book states to restore.

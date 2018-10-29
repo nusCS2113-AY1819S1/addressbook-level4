@@ -77,8 +77,8 @@ public class AddressBookParser {
         case UncompleteTaskCommand.COMMAND_WORD:
             return new UncompleteTaskCommandParser().parse(arguments);
 
-        case RankTaskCommand.COMMAND_WORD:
-            return new RankTaskCommandParser().parse(arguments);
+        case SortTaskCommand.COMMAND_WORD:
+            return new SortTaskCommandParser().parse(arguments);
 
         case ExpenditureGetAdviceCommand.COMMAND_WORD:
             return new ExpenditureGetAdviceCommandParser().parse(arguments);
