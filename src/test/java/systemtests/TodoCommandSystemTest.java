@@ -18,8 +18,8 @@ import static seedu.address.testutil.TypicalTodos.TASKB;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.logic.CommandSuggestion;
 import seedu.address.logic.commands.TodoCommand;
+import seedu.address.logic.suggestions.WrongCommandSuggestion;
 import seedu.address.model.Model;
 import seedu.address.model.todo.Content;
 import seedu.address.model.todo.Title;
@@ -75,7 +75,7 @@ public class TodoCommandSystemTest extends AddressBookSystemTest {
         /* Case: invalid keyword -> rejected */
         command = "todos " + TodoUtil.getTodoDetails(toAdd);
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND
-                + "\n" + String.format(CommandSuggestion.SUGGESTION_HEADER, TodoCommand.COMMAND_WORD));
+                + "\n" + String.format(WrongCommandSuggestion.SUGGESTION_HEADER, TodoCommand.COMMAND_WORD));
 
         /* Case: invalid content -> rejected */
         command = TodoCommand.COMMAND_WORD + TITLE_DESC_TASK1 + INVALID_CONTENT_DESC;
