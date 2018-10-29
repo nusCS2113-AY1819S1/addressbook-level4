@@ -85,7 +85,7 @@ public class AchieveCommand extends Command {
         List<Record> recordList = model.getFilteredRecordList();
         String nameFile = ExcelUtil.setNameExcelFile(startDate, endDate);
         String message;
-        if (exportDataIntoExcelSheetWithGivenRecords(recordList, startDate, endDate, nameFile, directoryPath)) {
+        if (exportDataIntoExcelSheetWithGivenRecords(recordList, null, startDate, endDate, nameFile, directoryPath)) {
             message = String.format(Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY,
                     nameFile, directoryPath);
         } else {
@@ -100,6 +100,9 @@ public class AchieveCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AchieveCommand // instanceof handles nulls
-                && predicate.equals(((AchieveCommand) other).predicate)); // state check
+                && predicate.equals(((AchieveCommand) other).predicate)
+                && startDate.equals(((AchieveCommand) other).startDate)
+                && endDate.equals(((AchieveCommand) other).startDate)
+                && directoryPath.equals(((AchieveCommand) other).directoryPath)); // state check
     }
 }

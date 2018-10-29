@@ -4,18 +4,32 @@ import static seedu.planner.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.logging.Logger;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Chart;
+import org.apache.poi.ss.usermodel.ClientAnchor;
+import org.apache.poi.ss.usermodel.Drawing;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.charts.AxisCrosses;
+import org.apache.poi.ss.usermodel.charts.AxisPosition;
+import org.apache.poi.ss.usermodel.charts.ChartAxis;
+import org.apache.poi.ss.usermodel.charts.ChartDataSource;
+import org.apache.poi.ss.usermodel.charts.ChartLegend;
+import org.apache.poi.ss.usermodel.charts.DataSources;
+import org.apache.poi.ss.usermodel.charts.LegendPosition;
+import org.apache.poi.ss.usermodel.charts.LineChartData;
+import org.apache.poi.ss.usermodel.charts.ValueAxis;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -31,6 +45,7 @@ import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Name;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.tag.Tag;
+import seedu.planner.ui.SummaryEntry;
 
 /**
  * Transfer data into Excel file utilities.
@@ -40,21 +55,30 @@ public class ExcelUtil {
     private static final int SECOND_COLUMN = 1;
     private static final int THIRD_COLUMN = 2;
     private static final int FOURTH_COLUMN = 3;
+    private static final int FIRST_ROW = 0;
+    private static final int SECOND_ROW = 1;
+    private static final int THIRD_ROW = 2;
+    private static final int FOURTH_ROW = 3;
     private static final int MAXIMUM_GAP_BETWEEN_COLUMN = 4;
     private static final int LEFT_OUT_CHARACTER = 4;
     private static final int STARTING_INDEX = 0;
-    private static final int STARTING_ROW_DATA = 1;
     private static final int STARTING_SHEET = 0;
     private static final int RECORD_EMPTY = 0;
+    private static final int STARTING_CURRENCY = 2;
+    private static final char MINUS_SIGN_CHAR = '-';
+    private static final char PLUS_SIGN_CHAR = '+';
     private static final Double CHANGE_TO_DOUBLE = 1.0;
-    private static final char MINUS_SIGN = '-';
-    private static final String PLUS_SIGN = "+";
+    private static final String PLUS_SIGN_STRING = "+";
+    private static final String MINUS_SIGN_STRING = "-";
     private static final String WHITE_SPACE = " ";
     private static final String NAME_TITLE = "NAME";
     private static final String DATE_TITLE = "DATE";
     private static final String MONEY_TITLE = "MONEY SPENT/RECEIVED";
     private static final String TAG_TITLE = "TAGS";
-    public static final String TAG_SEPARATOR = " ... ";
+    private static final String INCOME_TITLE = "TOTAL INCOME";
+    private static final String OUTCOME_TITLE = "TOTAL EXPENSE";
+    private static final String TOTAL_MONEY = "NET MONEYFLOW";
+    private static final String TAG_SEPARATOR = " ... ";
 
     private static Logger logger = LogsCenter.getLogger(ExcelUtil.class);
 
@@ -68,20 +92,60 @@ public class ExcelUtil {
             if (!DirectoryPath.isValidFilePath(filePath)) {
                 throw new ParseException(Messages.MESSAGE_UNREALISTIC_DIRECTORY);
             }
+
             FileInputStream file = new FileInputStream(new File(filePath));
             XSSFWorkbook workbook = new XSSFWorkbook(file);
+
+            CellStyle cellStyle = workbook.createCellStyle();
+            cellStyle.setWrapText(true);
+            cellStyle.setAlignment(HorizontalAlignment.CENTER);
+
+            boolean isRightSheet = true;
             List<Record> records = new ArrayList<>();
             workbook.setMissingCellPolicy(Row.MissingCellPolicy.RETURN_BLANK_AS_NULL);
+
             for (int sn = STARTING_SHEET; sn < workbook.getNumberOfSheets(); sn++) {
                 XSSFSheet sheet = workbook.getSheetAt(sn);
-                for (int rn = sheet.getFirstRowNum() + STARTING_ROW_DATA; rn <= sheet.getLastRowNum(); rn++) {
+                isRightSheet = true;
+                for (int rn = sheet.getFirstRowNum(); rn <= sheet.getLastRowNum() && isRightSheet; rn++) {
                     Row row = sheet.getRow(rn);
-                    if (row != null) {
-                        if (row.getLastCellNum() - row.getFirstCellNum() > MAXIMUM_GAP_BETWEEN_COLUMN) {
-                            throw new ParseException(Messages.MESSAGE_INVALID_ENTRY_EXCEL_FILE);
-                        }
-                        records.add(retrieveDataForEachRow(row));
+                    if (row == null) {
+                        continue;
                     }
+                    if (row.getLastCellNum() - row.getFirstCellNum() > MAXIMUM_GAP_BETWEEN_COLUMN) {
+                        throw new ParseException(Messages.MESSAGE_INVALID_ENTRY_EXCEL_FILE);
+                    }
+                    String nameString = null;
+                    String dateString = null;
+                    String tagsString = null;
+                    String moneyString = null;
+
+                    for (int cn = row.getFirstCellNum(); cn < row.getLastCellNum(); cn++) {
+                        Cell cell = row.getCell(cn);
+                        cell.setCellStyle(cellStyle);
+                        if (cn == row.getFirstCellNum() + FIRST_COLUMN) {
+                            nameString = retrieveDataFromOneRow(row, cell, FIRST_COLUMN);
+                        } else if (cn == row.getFirstCellNum() + SECOND_COLUMN) {
+                            dateString = retrieveDataFromOneRow(row, cell, SECOND_COLUMN);
+                        } else if (cn == row.getFirstCellNum() + THIRD_COLUMN) {
+                            moneyString = retrieveDataFromOneRow(row, cell, THIRD_COLUMN);
+                        } else if (cn == row.getFirstCellNum() + FOURTH_COLUMN) {
+                            tagsString = retrieveDataFromOneRow(row, cell, FOURTH_COLUMN);
+                        }
+                    }
+                    logger.info(String.format("RECORD: %1$s %2$s %3$s %4$s",
+                            nameString, dateString, moneyString, tagsString));
+                    if (nameString == null || dateString == null || moneyString == null) {
+                        throw new ParseException(Messages.MESSAGE_INVALID_ENTRY_EXCEL_FILE);
+                    }
+                    if (rn == sheet.getFirstRowNum()) {
+                        if (!isFirstRowTitleExist(nameString, dateString, moneyString, tagsString)) {
+                            isRightSheet = false;
+                        }
+                        continue;
+                    }
+                    moneyString = checkMoneyString(moneyString);
+                    records.add(createRecord(nameString, dateString, moneyString, tagsString));
                 }
             }
             return records;
@@ -94,111 +158,118 @@ public class ExcelUtil {
     /**
      * Write the excel sheet into Directory.
      */
-    public static void writeExcelSheetIntoDirectory (List<Record> recordList, XSSFSheet sheet,
-                                                       XSSFWorkbook workbook, String path, String nameFile) {
-        writeDataIntoExcelSheet(recordList, sheet);
+    public static void writeExcelSheetIntoDirectory (List<Record> recordList,
+                                                     List<SummaryEntry> daySummaryEntryList,
+                                                     XSSFSheet recordDataSheet, XSSFSheet summaryDataSheet,
+                                                     XSSFWorkbook workbook, String directoryPath, String nameFile) {
+        writeDataIntoExcelSheetRecord(recordList, recordDataSheet);
+        writeDataIntoExcelSheetSummary(daySummaryEntryList, summaryDataSheet);
         try {
             //Write the workbook in file system
-            path += (System.getProperty("file.separator") + nameFile);
-            FileOutputStream out = new FileOutputStream(path);
+            String filePath = setPathFile(nameFile, directoryPath);
+            FileOutputStream out = new FileOutputStream(filePath);
             workbook.write(out);
             out.close();
-            readExcelSheet(path);
+            readExcelSheet(filePath);
+            drawChart(summaryDataSheet, filePath, workbook);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    //==========================================SUB METHOD=============================================================
-    //TODO TOMORROW: check whether the first row detected is name, date, money, tags or not
+    /**
+     * Draw the line chart.
+     */
+    public static void drawChart (XSSFSheet sheet, String filePath, XSSFWorkbook workbook)
+                                                                                        throws FileNotFoundException {
+        try {
+            final int firstRowSheet = sheet.getFirstRowNum() + SECOND_ROW;
+            final int lastRowSheet = sheet.getLastRowNum();
+            final int firstColumnSheet = sheet.getRow(firstRowSheet).getFirstCellNum();
+            final int lastColumnSheet = firstColumnSheet;
+            final int firstColumnIncome = firstColumnSheet + FIRST_COLUMN;
+            final int lastColumnIncome = firstColumnIncome;
+            final int firstColumnOutcome = firstColumnSheet + SECOND_COLUMN;
+            final int lastColumnOutcome = firstColumnOutcome;
+            final int firstColumnNet = firstColumnSheet + THIRD_COLUMN;
+            final int lastColumnNet = firstColumnNet;
+
+            if (!DirectoryPath.isValidFilePath(filePath)) {
+                throw new ParseException(Messages.MESSAGE_UNREALISTIC_DIRECTORY);
+            }
+
+            Drawing drawing = sheet.createDrawingPatriarch();
+            ClientAnchor anchor = drawing.createAnchor(0, 0, 0, 0, 0, 6, 12, 18);
+
+            Chart chart = drawing.createChart(anchor);
+            ChartLegend legend = chart.getOrCreateLegend();
+            legend.setPosition(LegendPosition.TOP_RIGHT);
+
+            LineChartData data = chart.getChartDataFactory().createLineChartData();
+
+            // Use a category axis for the bottom axis.
+            ChartAxis bottomAxis = chart.getChartAxisFactory().createCategoryAxis(AxisPosition.BOTTOM);
+            ValueAxis leftAxis = chart.getChartAxisFactory().createValueAxis(AxisPosition.LEFT);
+            leftAxis.setCrosses(AxisCrosses.AUTO_ZERO);
+
+            ChartDataSource<String> xDate = DataSources.fromStringCellRange(
+                    sheet, new CellRangeAddress(firstRowSheet, lastRowSheet, firstColumnSheet, lastColumnSheet));
+            ChartDataSource<Number> yIncome = DataSources.fromNumericCellRange(
+                    sheet, new CellRangeAddress(firstRowSheet, lastRowSheet, firstColumnIncome, lastColumnIncome));
+            ChartDataSource<Number> yOutcome = DataSources.fromNumericCellRange(
+                    sheet, new CellRangeAddress(firstRowSheet, lastRowSheet, firstColumnOutcome, lastColumnOutcome));
+            ChartDataSource<Number> yNet = DataSources.fromNumericCellRange(
+                    sheet, new CellRangeAddress(firstRowSheet, lastRowSheet, firstColumnNet, lastColumnNet));
+
+            data.addSeries(xDate, yIncome);
+            data.addSeries(xDate, yOutcome);
+            data.addSeries(xDate, yNet);
+
+            chart.plot(data, bottomAxis, leftAxis);
+
+            FileOutputStream fileOut = new FileOutputStream(filePath);
+            workbook.write(fileOut);
+            fileOut.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    //==========================================SUB METHOD FOR READ EXCEL===============================================
     //TODO: coloring the over-limit records.
-    //TODO: create a summary for the records on the excel file in a different sheet.
-    //TODO: fix all the Check style.
-    //TODO: Achieve all the wanted records.
-
-    //private static Boolean isFirstRowTitleExist();
-
     /**
-     * Retrieve Date on 1 row and change them into String.
+     * Check if the first row has the appropriate title.
      */
-    private static Record retrieveDataForEachRow (Row row) throws ParseException {
-        String nameString = null;
-        String dateString = null;
-        String tagsString = null;
-        String moneyString = null;
-        for (int cn = row.getFirstCellNum(); cn < row.getLastCellNum(); cn++) {
-            Cell cell = row.getCell(cn);
-            if (cell.getColumnIndex() == row.getFirstCellNum() + FIRST_COLUMN) {
-                nameString = cell.getStringCellValue().trim();
-            } else if (cell.getColumnIndex() == row.getFirstCellNum() + SECOND_COLUMN) {
-                dateString = cell.getStringCellValue().trim();
-            } else if (cell.getColumnIndex() == row.getFirstCellNum() + THIRD_COLUMN) {
-                if (cell.getCellTypeEnum() == CellType.NUMERIC) {
-                    moneyString = Double.toString(cell.getNumericCellValue() * CHANGE_TO_DOUBLE);
-                } else {
-                    moneyString = cell.getStringCellValue();
-                }
-            } else if (cell != null && cell.getColumnIndex() == row.getFirstCellNum() + FOURTH_COLUMN) {
-                tagsString = cell.getStringCellValue().trim();
-            }
-        }
-        if (nameString == null || dateString == null || moneyString == null) {
-            throw new ParseException(Messages.MESSAGE_INVALID_ENTRY_EXCEL_FILE);
-        }
-        // For positive number, the "+" will be discarded when you try to add money into Financial Planner --> error.
-        moneyString = (moneyString.charAt(STARTING_INDEX) == MINUS_SIGN) ? (moneyString) : (PLUS_SIGN + moneyString);
-        logger.info(nameString + WHITE_SPACE + dateString + WHITE_SPACE + moneyString + WHITE_SPACE + tagsString);
-        return createRecord(nameString, dateString, moneyString, tagsString);
+    private static Boolean isFirstRowTitleExist(String nameString,
+                                                String dateString,
+                                                String moneyString,
+                                                String tagsString) {
+        return (nameString.equalsIgnoreCase(NAME_TITLE)
+                && dateString.equalsIgnoreCase(DATE_TITLE)
+                && moneyString.equalsIgnoreCase(MONEY_TITLE)
+                && tagsString.equalsIgnoreCase(TAG_TITLE));
     }
 
     /**
-     * Write the map of data into Excel sheet.
+     * Change the String of Money into appropriate format, as positive number won't have + sign, so we have to add it.
+     * For positive number, the "+" will be discarded when you try to add money into Financial Planner --> error.
      */
-    public static void writeDataIntoExcelSheet (List<Record> recordList, XSSFSheet sheet) {
-        Map<String, Object[]> data = exportData(recordList);
-        Set<String> keySet = data.keySet();
-        for (String key : keySet) {
-            Row row = sheet.createRow(Integer.parseInt(key));
-            Object[] objects = data.get(key);
-            int col = STARTING_INDEX;
-            for (Object object : objects) {
-                Cell cell = row.createCell(col++);
-                if (object instanceof String) {
-                    cell.setCellValue((String) object);
-                } else {
-                    cell.setCellValue((Double) object);
-                }
-            }
-        }
+    public static String checkMoneyString (String moneyString) {
+        return (moneyString.charAt(STARTING_INDEX) == MINUS_SIGN_CHAR)
+                || moneyString.charAt(STARTING_INDEX) == PLUS_SIGN_CHAR
+                ? (moneyString) : (PLUS_SIGN_STRING + moneyString);
     }
 
     /**
-     * Export the records into map of data.
+     * Return string for each specific cell, as different method for different column of 1 row.
      */
-    public static final Map<String, Object[]> exportData (List<Record> recordList) {
-        Map<String, Object[]> data = new TreeMap<String, Object[]>();
-        int id = STARTING_INDEX;
-        data.put(String.valueOf(id), new Object[]{NAME_TITLE, DATE_TITLE, MONEY_TITLE, TAG_TITLE});
-        for (Record record : recordList) {
-            StringBuilder stringBuilder = new StringBuilder();
-            if (record.getTags().size() > RECORD_EMPTY) {
-                for (Tag tag : record.getTags()) {
-                    stringBuilder.append(tag.tagName + TAG_SEPARATOR);
-                }
-                data.put(String.valueOf(++id), new Object[]{
-                            record.getName().fullName,
-                            record.getDate().value,
-                            record.getMoneyFlow().valueDouble,
-                            stringBuilder.toString()
-                                .substring(STARTING_INDEX, stringBuilder.toString().length() - LEFT_OUT_CHARACTER)});
-            } else {
-                data.put(String.valueOf(++id), new Object[]{
-                        record.getName().fullName,
-                        record.getDate().value,
-                        record.getMoneyFlow().valueDouble});
-            }
+    public static String retrieveDataFromOneRow (Row row, Cell cell, int columnIndex) {
+        if (isStringCellType(cell) && cell != null) {
+            return cell.getStringCellValue().trim();
         }
-        return data;
+        if (isNumericCellType(cell) && cell != null && columnIndex == THIRD_COLUMN) {
+            return Double.toString(cell.getNumericCellValue() * CHANGE_TO_DOUBLE);
+        }
+        return null;
     }
 
     /**
@@ -218,6 +289,110 @@ public class ExcelUtil {
         return new Record(nameParse, dateParse, moneyFlow, tagList);
     }
 
+    /**
+     * Check if the Cell type is String.
+     */
+    private static Boolean isStringCellType(Cell cell) {
+        return (cell.getCellTypeEnum() == CellType.STRING);
+    }
+
+    /**
+     * Check if the Cell type is Numeric.
+     */
+    private static Boolean isNumericCellType(Cell cell) {
+        return (cell.getCellTypeEnum() == CellType.NUMERIC);
+    }
+
+    //==========================================SUB METHOD FOR EXPORT EXCEL=============================================
+
+    /**
+     * Write Record data into Excel Sheet.
+     */
+    private static void writeDataIntoExcelSheetRecord (List<Record> records, XSSFSheet sheet) {
+        int rowNum = STARTING_INDEX;
+        Row startingRow = sheet.createRow(rowNum);
+        writeDataIntoCell(startingRow, FIRST_COLUMN, NAME_TITLE);
+        writeDataIntoCell(startingRow, SECOND_COLUMN, DATE_TITLE);
+        writeDataIntoCell(startingRow, THIRD_COLUMN, MONEY_TITLE);
+        writeDataIntoCell(startingRow, FOURTH_COLUMN, TAG_TITLE);
+
+        for (Record record : records) {
+            Row row = sheet.createRow(++rowNum);
+            StringBuilder stringBuilder = new StringBuilder();
+            writeDataIntoCell(row, FIRST_COLUMN, record.getName().fullName);
+            writeDataIntoCell(row, SECOND_COLUMN, record.getDate().value);
+            writeDataIntoCell(row, THIRD_COLUMN, record.getMoneyFlow().valueDouble);
+            if (record.getTags().size() > RECORD_EMPTY) {
+                for (Tag tag : record.getTags()) {
+                    stringBuilder.append(tag.tagName + TAG_SEPARATOR);
+                }
+                writeDataIntoCell(row, FOURTH_COLUMN, stringBuilder.toString()
+                        .substring(STARTING_INDEX, stringBuilder.toString().length() - LEFT_OUT_CHARACTER));
+            }
+        }
+    }
+
+    /**
+     * Write Summary data into Excel Sheet.
+     */
+    private static void writeDataIntoExcelSheetSummary (List<SummaryEntry> daySummaryEntryList, XSSFSheet sheet) {
+        int rowNum = STARTING_INDEX;
+        Row startingRow = sheet.createRow(rowNum);
+        writeDataIntoCell(startingRow, FIRST_COLUMN, DATE_TITLE);
+        writeDataIntoCell(startingRow, SECOND_COLUMN, INCOME_TITLE);
+        writeDataIntoCell(startingRow, THIRD_COLUMN, OUTCOME_TITLE);
+        writeDataIntoCell(startingRow, FOURTH_COLUMN, TOTAL_MONEY);
+        daySummaryEntryList.sort(SortUtil.compareTimeStampAttribute());
+        for (SummaryEntry summaryEntry : daySummaryEntryList) {
+            Row row = sheet.createRow(++rowNum);
+            writeDataIntoCell(row, FIRST_COLUMN,
+                    summaryEntry.getTimeStamp());
+            writeDataIntoCell(row, SECOND_COLUMN,
+                    Double.parseDouble(removeCurrencySign(summaryEntry.getTotalIncome())));
+            writeDataIntoCell(row, THIRD_COLUMN,
+                    Double.parseDouble(removeCurrencySign((summaryEntry.getTotalExpense()))));
+            writeDataIntoCell(row, FOURTH_COLUMN,
+                    Double.parseDouble(removeCurrencySign(summaryEntry.getTotal())));
+            logger.info("SUMMARY WITHOUT REMOVE ANYTHING: " + summaryEntry.getTimeStamp() + " "
+                        + summaryEntry.getTotalIncome() + " "
+                        + summaryEntry.getTotalExpense() + " "
+                        + summaryEntry.getTotal());
+            logger.info("SUMMARY: " + summaryEntry.getTimeStamp() + " "
+                    + Double.parseDouble(removeCurrencySign(summaryEntry.getTotalIncome())) + " "
+                    + Double.parseDouble(removeCurrencySign((summaryEntry.getTotalExpense()))) + " "
+                    + Double.parseDouble(removeCurrencySign(summaryEntry.getTotal())));
+        }
+    }
+
+    /**
+     * Remove the character of $ in the String money retrieved.
+     */
+    private static String removeCurrencySign (String money) {
+        String moneyString = (money.contains(MINUS_SIGN_STRING) || money.contains(PLUS_SIGN_STRING))
+                ? (money.charAt(STARTING_INDEX) == MINUS_SIGN_CHAR
+                ? MINUS_SIGN_STRING + money.substring(STARTING_CURRENCY)
+                : PLUS_SIGN_STRING + money.substring(STARTING_CURRENCY))
+                : money;
+        return (moneyString.length() == 1) ? moneyString + "0.0" : moneyString;
+    }
+
+    /**
+     * Write data into cell.
+     */
+    private static void writeDataIntoCell (Row row, int colNum, Object object) {
+        if (object instanceof String) {
+            row.createCell(colNum).setCellValue((String) object);
+        } else {
+            row.createCell(colNum).setCellValue((Double) object);
+        }
+    }
+
+    /**
+     * Create the fileName path.
+     */
+    public static String setPathFile (String nameFile, String directoryPath) {
+        return directoryPath + (System.getProperty("file.separator") + nameFile);
+    }
     /**
      * Set the name for the Excel file based on type of inputs.
      */

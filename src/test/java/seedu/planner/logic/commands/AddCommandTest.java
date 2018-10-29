@@ -112,6 +112,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteListRecord(List<Record> records) {
+            throw new AssertionError("This method should not be called.");
+
+        }
+        @Override
         public void resetData(ReadOnlyFinancialPlanner newData) {
             throw new AssertionError("This method should not be called.");
         }

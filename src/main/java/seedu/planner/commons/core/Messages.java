@@ -29,12 +29,14 @@ public class Messages {
             "Please choose existing directory.\n";
 
     public static final String MESSAGE_INVALID_ENTRY_EXCEL_FILE =
-            "The cell for Name, Date, Money Received/Spent, Tags should be in correct order."
+            "The cells for Name, Date, Money Received/Spent, Tags should be in correct order."
+                    + " The Cell should only be String or Numeric type."
                     + " The first row of your table should come with 4 columns, namely, "
                     + "NAME, DATE,  MONEY SPENT/RECEIVED and TAGS (case in-sensitive).\n";
 
-    public static final String MESSAGE_RECORD_ADDED_SUCCESSFULLY = "All records from the %1$s are read"
-            + " and only non-existing records are added to the current Financial Planner.\n";
+    public static final String MESSAGE_RECORD_ADDED_SUCCESSFULLY =
+            "All records from the %1$s are read"
+                    + " and only non-existing records are added to the current Financial Planner.\n";
 
     public static final String MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY =
             "The Excel file named %1$s has been written successfully in path: %2$s.\n";
@@ -46,5 +48,5 @@ public class Messages {
             "There is no record to achieve.\n";
 
     public static final String MESSAGE_ACHIEVE_SUCCESSFULLY =
-            " The records in the Excel file will be no longer in the current Financial Planner.\n";
+            "The records in the Excel file will be no longer in the current Financial Planner.\n";
 }

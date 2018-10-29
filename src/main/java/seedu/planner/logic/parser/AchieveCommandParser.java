@@ -40,6 +40,7 @@ public class AchieveCommandParser implements Parser<AchieveCommand> {
         logger.info("stringDate: " + stringDate + " stringPath: " + stringPath);
         return parseArgumentsModeIntoCommand(args, stringDate, stringPath);
     }
+
     /**
      * Parse the arguments into different argument mode, hence, we will have different command mode.
      */

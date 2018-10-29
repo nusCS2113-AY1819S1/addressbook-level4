@@ -145,6 +145,11 @@ public class Date {
         return year;
     }
 
+    public int hashDateStringCode(String dateString) {
+        Date date = new Date(dateString);
+        return date.getDay() + date.getMonth() * 100 + date.getYear() * 10000;
+    }
+
     @Override
     public String toString() {
         return value;

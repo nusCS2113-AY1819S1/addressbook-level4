@@ -2,8 +2,13 @@ package seedu.planner.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.model.Model.PREDICATE_SHOW_ALL_RECORDS;
-
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedMap;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -17,9 +22,13 @@ import seedu.planner.logic.CommandHistory;
 import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.DirectoryPath;
 import seedu.planner.model.Model;
+import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
+import seedu.planner.model.summary.DaySummary;
+import seedu.planner.model.summary.SummaryByDateList;
+import seedu.planner.ui.SummaryEntry;
 
 /**
  * Export the data of the records within specific period.
@@ -82,12 +91,16 @@ public class ExportExcelCommand extends Command {
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(this);
         model.updateFilteredRecordList(predicate);
+        ReadOnlyFinancialPlanner financialPlanner = model.getFinancialPlanner();
+        SummaryByDateList summaryList = new SummaryByDateList(financialPlanner.getRecordList(), predicate);
         List<Record> recordList = model.getFilteredRecordList();
+        List<SummaryEntry> daySummaryEntryList = summaryList.getSummaryList();
         String nameFile = ExcelUtil.setNameExcelFile(startDate, endDate);
         String message;
-        if (exportDataIntoExcelSheetWithGivenRecords(recordList, startDate, endDate, nameFile, directoryPath)) {
-            message = String.format(Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY,
-                    nameFile, directoryPath) + Messages.MESSAGE_ACHIEVE_SUCCESSFULLY;
+        if (exportDataIntoExcelSheetWithGivenRecords(recordList, daySummaryEntryList,
+                                                     startDate, endDate,
+                                                     nameFile, directoryPath)) {
+            message = String.format(Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY, nameFile, directoryPath);
         } else {
             message = Messages.MESSAGE_NO_RECORDS_TO_EXPORT;
         }
@@ -98,16 +111,19 @@ public class ExportExcelCommand extends Command {
      * Export the records into Excel File.
      */
     public static Boolean exportDataIntoExcelSheetWithGivenRecords (
-            List<Record> recordList, Date startDate, Date endDate, String nameFile, String directoryPath) {
+            List<Record> recordList, List<SummaryEntry> daySummaryEntryList,
+            Date startDate, Date endDate, String nameFile, String directoryPath) {
         logger.info(nameFile);
 
         XSSFWorkbook workbook = new XSSFWorkbook();
-        XSSFSheet sheet = workbook.createSheet(nameFile);
+        XSSFSheet recordData = workbook.createSheet("RECORD DATA");
+        XSSFSheet summaryData = workbook.createSheet("SUMMARY DATA");
+
 
         logger.info("START DATE : " + startDate + " END DATE: " + endDate);
         if (recordList.size() > 0) {
             ExcelUtil.writeExcelSheetIntoDirectory(
-                    recordList, sheet, workbook, directoryPath, nameFile);
+                    recordList, daySummaryEntryList, recordData, summaryData, workbook, directoryPath, nameFile);
             return true;
         }
         return false;
@@ -117,6 +133,9 @@ public class ExportExcelCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ExportExcelCommand // instanceof handles nulls
-                && predicate.equals(((ExportExcelCommand) other).predicate)); // state check
+                && predicate.equals(((ExportExcelCommand) other).predicate)
+                && startDate.equals(((ExportExcelCommand) other).startDate)
+                && endDate.equals(((ExportExcelCommand) other).endDate)
+                && directoryPath.equals(((ExportExcelCommand) other).directoryPath)); // state check
     }
 }

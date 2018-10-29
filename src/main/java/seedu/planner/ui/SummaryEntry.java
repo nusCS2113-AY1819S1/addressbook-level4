@@ -1,6 +1,7 @@
 package seedu.planner.ui;
 
 import javafx.beans.property.SimpleStringProperty;
+import seedu.planner.model.record.Date;
 
 /**
  * This represents a UI friendly summary entry.
@@ -50,4 +51,5 @@ public class SummaryEntry {
     public void setTotal(String total) {
         this.total.set(total);
     }
+
 }
