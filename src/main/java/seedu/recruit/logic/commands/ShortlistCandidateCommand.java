@@ -38,7 +38,8 @@ public class ShortlistCandidateCommand extends Command {
         JobOffer selectedJobOffer = SelectJobCommand.getSelectedJobOffer();
         Candidate selectedCandidate = SelectCandidateCommand.getSelectedCandidate();
 
-        selectedJobOffer.addToShortlistedCandidateList(selectedCandidate);
+        model.shortListCandidateToJobOffer(selectedCandidate, selectedJobOffer);
+        model.commitCompanyBook();
 
         LogicManager.setLogicState("primary");
         EventsCenter.getInstance().post(new ShowLastViewedBookRequestEvent());

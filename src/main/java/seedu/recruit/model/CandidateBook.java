@@ -15,7 +15,7 @@ import seedu.recruit.model.candidate.UniqueCandidateList;
  */
 public class CandidateBook implements ReadOnlyCandidateBook {
 
-    private final UniqueCandidateList persons;
+    private final UniqueCandidateList candidates;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -25,7 +25,7 @@ public class CandidateBook implements ReadOnlyCandidateBook {
      *   among constructors.
      */
     {
-        persons = new UniqueCandidateList();
+        candidates = new UniqueCandidateList();
     }
 
     public CandidateBook() {}
@@ -44,8 +44,8 @@ public class CandidateBook implements ReadOnlyCandidateBook {
      * Replaces the contents of the candidate list with {@code candidates}.
      * {@code candidates} must not contain duplicate candidates.
      */
-    public void setPersons(List<Candidate> candidates) {
-        this.persons.setPersons(candidates);
+    public void setCandidates(List<Candidate> candidates) {
+        this.candidates.setCandidates(candidates);
     }
 
     /**
@@ -54,7 +54,7 @@ public class CandidateBook implements ReadOnlyCandidateBook {
     public void resetData(ReadOnlyCandidateBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getCandidateList());
+        setCandidates(newData.getCandidateList());
     }
 
     //// candidate-level operations
@@ -64,7 +64,7 @@ public class CandidateBook implements ReadOnlyCandidateBook {
      */
     public boolean hasPerson(Candidate candidate) {
         requireNonNull(candidate);
-        return persons.contains(candidate);
+        return candidates.contains(candidate);
     }
 
     /**
@@ -72,7 +72,7 @@ public class CandidateBook implements ReadOnlyCandidateBook {
      * The candidate must not already exist in the recruit book.
      */
     public void addPerson(Candidate p) {
-        persons.add(p);
+        candidates.add(p);
     }
 
     /**
@@ -84,7 +84,7 @@ public class CandidateBook implements ReadOnlyCandidateBook {
     public void updatePerson(Candidate target, Candidate editedCandidate) {
         requireNonNull(editedCandidate);
 
-        persons.setPerson(target, editedCandidate);
+        candidates.setCandidate(target, editedCandidate);
     }
 
     /**
@@ -94,22 +94,22 @@ public class CandidateBook implements ReadOnlyCandidateBook {
         String prefixString = prefix.toString();
         switch(prefixString) {
         case "n/":
-            persons.sortByName();
+            candidates.sortByName();
             break;
         case "x/":
-            persons.sortByAge();
+            candidates.sortByAge();
             break;
         case "e/":
-            persons.sortByEmail();
+            candidates.sortByEmail();
             break;
         case "j/":
-            persons.sortByJob();
+            candidates.sortByJob();
             break;
         case "h/":
-            persons.sortByEducation();
+            candidates.sortByEducation();
             break;
         default:
-            persons.sortBySalary();
+            candidates.sortBySalary();
 
         }
 
@@ -119,32 +119,32 @@ public class CandidateBook implements ReadOnlyCandidateBook {
      * Removes {@code key} from this {@code CandidateBook}.
      * {@code key} must exist in the recruit book.
      */
-    public void removePerson(Candidate key) {
-        persons.remove(key);
+    public void removeCandidate(Candidate key) {
+        candidates.remove(key);
     }
 
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return candidates.asUnmodifiableObservableList().size() + " candidates";
         // TODO: refine later
     }
 
     @Override
     public ObservableList<Candidate> getCandidateList() {
-        return persons.asUnmodifiableObservableList();
+        return candidates.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof CandidateBook // instanceof handles nulls
-                && persons.equals(((CandidateBook) other).persons));
+                && candidates.equals(((CandidateBook) other).candidates));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return candidates.hashCode();
     }
 }

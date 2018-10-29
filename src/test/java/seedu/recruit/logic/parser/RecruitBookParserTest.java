@@ -33,8 +33,8 @@ import seedu.recruit.logic.commands.UndoCandidateBookCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.candidate.NameContainsKeywordsPredicate;
+import seedu.recruit.testutil.CandidateBuilder;
 import seedu.recruit.testutil.EditPersonDescriptorBuilder;
-import seedu.recruit.testutil.PersonBuilder;
 import seedu.recruit.testutil.PersonUtil;
 
 public class RecruitBookParserTest {
@@ -45,11 +45,12 @@ public class RecruitBookParserTest {
     // dummy LogicState stub
     private LogicState state = new LogicState("primary");
     private EmailUtil emailUtil = new EmailUtil();
+
     private final RecruitBookParser parser = new RecruitBookParser();
 
     @Test
     public void parseCommand_add() throws Exception {
-        Candidate candidate = new PersonBuilder().build();
+        Candidate candidate = new CandidateBuilder().build();
         AddCandidateCommand command =
                 (AddCandidateCommand) parser.parseCommand(PersonUtil.getAddCandidateCommand(candidate), state,
                         emailUtil);
@@ -73,7 +74,7 @@ public class RecruitBookParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Candidate candidate = new PersonBuilder().build();
+        Candidate candidate = new CandidateBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(candidate).build();
         EditCandidateCommand command = (EditCandidateCommand) parser.parseCommand(
                 EditCandidateCommand.COMMAND_WORD + " "

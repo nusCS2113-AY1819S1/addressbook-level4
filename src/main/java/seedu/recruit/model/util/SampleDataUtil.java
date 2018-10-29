@@ -13,6 +13,7 @@ import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.candidate.Education;
 import seedu.recruit.model.candidate.Gender;
 import seedu.recruit.model.candidate.Name;
+import seedu.recruit.model.candidate.UniqueCandidateList;
 import seedu.recruit.model.commons.Address;
 import seedu.recruit.model.commons.Email;
 import seedu.recruit.model.commons.Phone;
@@ -66,10 +67,10 @@ public class SampleDataUtil {
         UniqueJobList jobList = new UniqueJobList();
         jobList.add(new JobOffer(new CompanyName("McDonalds"), new Job("Cashier"), new Gender("M"),
                 new AgeRange("20-30"), new Education("OLEVELS"),
-                new Salary("1000")));
+                new Salary("1000"), new UniqueCandidateList()));
         jobList.add(new JobOffer(new CompanyName("McDonalds"), new Job("Cook"), new Gender("F"),
                 new AgeRange("20-30"), new Education("OLEVELS"),
-                new Salary("1000")));
+                new Salary("1000"), new UniqueCandidateList()));
         return jobList;
     }
 

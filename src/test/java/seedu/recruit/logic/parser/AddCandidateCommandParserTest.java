@@ -48,14 +48,14 @@ import seedu.recruit.model.commons.Address;
 import seedu.recruit.model.commons.Email;
 import seedu.recruit.model.commons.Phone;
 import seedu.recruit.model.tag.Tag;
-import seedu.recruit.testutil.PersonBuilder;
+import seedu.recruit.testutil.CandidateBuilder;
 
 public class AddCandidateCommandParserTest {
     private AddCandidateCommandParser parser = new AddCandidateCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Candidate expectedCandidate = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Candidate expectedCandidate = new CandidateBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + GENDER_DESC_BOB + AGE_DESC_BOB
@@ -83,7 +83,8 @@ public class AddCandidateCommandParserTest {
                 + SALARY_DESC_BOB + TAG_DESC_FRIEND, new AddCandidateCommand(expectedCandidate));
 
         // multiple tags - all accepted
-        Candidate expectedCandidateMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Candidate expectedCandidateMultipleTags = new CandidateBuilder(BOB)
+                                                    .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + GENDER_DESC_BOB + AGE_DESC_BOB  + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + JOB_DESC_BOB + EDUCATION_DESC_BOB + SALARY_DESC_BOB
@@ -94,7 +95,7 @@ public class AddCandidateCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Candidate expectedCandidate = new PersonBuilder(AMY).withTags().build();
+        Candidate expectedCandidate = new CandidateBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + GENDER_DESC_AMY + AGE_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + JOB_DESC_AMY + EDUCATION_DESC_AMY + SALARY_DESC_AMY,
                 new AddCandidateCommand(expectedCandidate));

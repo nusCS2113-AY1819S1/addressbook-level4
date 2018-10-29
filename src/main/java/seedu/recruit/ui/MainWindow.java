@@ -35,6 +35,9 @@ import seedu.recruit.model.UserPrefs;
  */
 public class MainWindow extends UiPart<Stage> {
 
+    //Tracks whether an instance of MainWindow exists
+    private static boolean exists = false;
+
     private static final String FXML = "MainWindow.fxml";
     private static String currentBook = "companyBook";
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -75,6 +78,7 @@ public class MainWindow extends UiPart<Stage> {
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML, primaryStage);
+        this.exists = true;
 
         // Set dependencies
         this.primaryStage = primaryStage;
@@ -340,6 +344,13 @@ public class MainWindow extends UiPart<Stage> {
             getPanelViewPlaceholder().getChildren().remove(0);
             getPanelViewPlaceholder().getChildren().add(getShortlistPanel().getRoot());
         }
+    }
+
+    /**
+     * Returns true if an instance of MainWindow exists, false otherwise
+     */
+    public static boolean isExisting() {
+        return exists;
     }
 
     void releaseResources() {

@@ -104,7 +104,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void deleteCandidate(Candidate target) {
-        versionedCandidateBook.removePerson(target);
+        versionedCandidateBook.removeCandidate(target);
         indicateCandidateBookChanged();
     }
 
@@ -317,7 +317,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void deleteJobOffer(JobOffer jobOffer) {
         requireNonNull(jobOffer);
-        versionedCompanyBook.deleteJobOffer(jobOffer);
+        versionedCompanyBook.removeJobOffer(jobOffer);
         indicateCompanyBookChanged();
     }
 
@@ -335,6 +335,12 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(predicate);
         filteredJobs.setPredicate(predicate);
     }
+
+    @Override
+    public void shortListCandidateToJobOffer(Candidate candidate, JobOffer jobOffer) {
+        jobOffer.shortlistCandidate(candidate);
+        indicateCompanyBookChanged();
+    };
 
     // ================================== Email Command functions ====================================== //
 
@@ -449,7 +455,7 @@ public class ModelManager extends ComponentManager implements Model {
         for (Candidate candidate : filteredCandidates) {
             isDuplicate = false;
             for (Candidate duplicateCandidate : duplicateCandidates) {
-                if (candidate.isSamePerson(duplicateCandidate)) {
+                if (candidate.isSameCandidate(duplicateCandidate)) {
                     isDuplicate = true;
                     break;
                 }
@@ -461,5 +467,3 @@ public class ModelManager extends ComponentManager implements Model {
         return output.toString();
     }
 }
-
-

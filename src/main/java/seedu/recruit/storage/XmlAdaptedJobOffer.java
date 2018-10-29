@@ -1,12 +1,17 @@
 package seedu.recruit.storage;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.recruit.commons.exceptions.IllegalValueException;
+import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.candidate.Education;
 import seedu.recruit.model.candidate.Gender;
+import seedu.recruit.model.candidate.UniqueCandidateList;
 import seedu.recruit.model.company.CompanyName;
 import seedu.recruit.model.joboffer.AgeRange;
 import seedu.recruit.model.joboffer.Job;
@@ -32,6 +37,8 @@ public class XmlAdaptedJobOffer {
     private String education;
     @XmlElement(required = true)
     private String salary;
+    @XmlElement(required = true)
+    private List<XmlAdaptedCandidate> candidateList;
 
 
     /**
@@ -45,13 +52,14 @@ public class XmlAdaptedJobOffer {
      */
 
     public XmlAdaptedJobOffer(String companyName, String job, String gender, String ageRange, String education,
-                              String salary) {
+                              String salary, List<XmlAdaptedCandidate> candidateList) {
         this.companyName = companyName;
         this.job = job;
         this.gender = gender;
         this.ageRange = ageRange;
         this.education = education;
         this.salary = salary;
+        this.candidateList = candidateList;
 
     }
 
@@ -69,6 +77,8 @@ public class XmlAdaptedJobOffer {
         ageRange = source.getAgeRange().value;
         education = source.getEducation().value;
         salary = source.getSalary().value;
+        candidateList = source.getUniqueCandidateList().asUnmodifiableObservableList()
+                .stream().map(XmlAdaptedCandidate::new).collect(Collectors.toList());
     }
 
 
@@ -79,6 +89,12 @@ public class XmlAdaptedJobOffer {
      */
 
     public JobOffer toModelType() throws IllegalValueException {
+        final List<Candidate> jobCandidateList = new ArrayList<>();
+        if (candidateList != null) {
+            for (XmlAdaptedCandidate candidate : candidateList) {
+                jobCandidateList.add(candidate.toModelType());
+            }
+        }
 
         if (companyName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Job.class.getSimpleName()));
@@ -143,8 +159,13 @@ public class XmlAdaptedJobOffer {
 
         final Salary modelSalary = new Salary(salary);
 
+        final UniqueCandidateList modelCandidateList = new UniqueCandidateList();
 
-        return new JobOffer(modelCompanyName, modelJob, modelGender, modelAgeRange, modelEducation, modelSalary);
+        modelCandidateList.setCandidates(jobCandidateList);
+
+
+        return new JobOffer(modelCompanyName, modelJob, modelGender, modelAgeRange, modelEducation, modelSalary,
+                modelCandidateList);
     }
 
 

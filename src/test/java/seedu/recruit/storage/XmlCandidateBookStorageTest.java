@@ -86,7 +86,7 @@ public class XmlCandidateBookStorageTest {
 
         //Modify data, overwrite exiting file, and read back
         original.addPerson(HOON);
-        original.removePerson(ALICE);
+        original.removeCandidate(ALICE);
         xmlCandidateBookStorage.saveCandidateBook(original, filePath);
         readBack = xmlCandidateBookStorage.readCandidateBook(filePath).get();
         assertEquals(original, new CandidateBook(readBack));
