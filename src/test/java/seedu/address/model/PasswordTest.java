@@ -37,10 +37,12 @@ public class PasswordTest {
     }
 
     @Test
-    public void isUserNameTooLong(){
+    public void isUserNameTooLong() {
         Assert.assertThrows(NullPointerException.class, () -> Password.isPasswordTooLong (null));
         //invalid userName
-        assertTrue (Password.isPasswordTooLong ("sjkflasdhfjklashfjklashfjklashfjklashfjklsdhafjklhasdkflhaslfjkhaslkfsdfggdfsgs")); // longer than 30 words
+        assertTrue (Password.isPasswordTooLong
+                ("sjkflasdhfjklashfjklashfjklashfjklashfjklsdhafjklhasdkflhaslfjkhaslkfsdfggdfsgs"));
+        // longer than 30 words
 
         //valid userName
         assertFalse (Password.isPasswordTooLong("tester123tester123tester123")); //long name that is less than 30 char

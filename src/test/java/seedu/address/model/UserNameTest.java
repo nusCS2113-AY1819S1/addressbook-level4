@@ -1,27 +1,29 @@
 package seedu.address.model;
 
-
-import org.junit.Test;
-import seedu.address.model.user.UserName;
-import seedu.address.testutil.Assert;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
+
+import seedu.address.model.user.UserName;
+import seedu.address.testutil.Assert;
 
 public class UserNameTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new UserName (null));
+        Assert.assertThrows(NullPointerException.class, () -> new UserName(null));
     }
+
     @Test
     public void constructor_invalidUserName_throwsIllegalArgumentException() {
         String invalidUserName = "";
-        Assert.assertThrows(IllegalArgumentException.class, () -> new UserName (invalidUserName));
+        Assert.assertThrows(IllegalArgumentException.class, () -> new UserName(invalidUserName));
     }
+
     @Test
     public void isValidUserName() {
         // null name
-        Assert.assertThrows(NullPointerException.class, () -> UserName.isValidUserName (null));
+        Assert.assertThrows(NullPointerException.class, () -> UserName.isValidUserName(null));
 
         // invalid userName
         assertFalse(UserName.isValidUserName("")); // empty string
@@ -36,13 +38,15 @@ public class UserNameTest {
     }
 
     @Test
-    public void isUserNameTooLong(){
-        Assert.assertThrows(NullPointerException.class, () -> UserName.isUserNameTooLong (null));
+    public void isUserNameTooLong() {
+        Assert.assertThrows(NullPointerException.class, () -> UserName.isUserNameTooLong(null));
         //invalid userName
-        assertTrue (UserName.isUserNameTooLong ("sjkflasdhfjklashfjklashfjklashfjklashfjklsdhafjklhasdkflhaslfjkhaslkfsdfggdfsgs")); // longer than 30 words
+        assertTrue(UserName.isUserNameTooLong
+                ("sjkflasdhfjklashfjklashfjklashfjklashfjklsdhafjklhasdkflhaslfjkhaslkfsdfggdfsgs"));
+        // longer than 30 words
 
         //valid userName
-        assertFalse (UserName.isUserNameTooLong("tester123tester123tester123")); //long name that is less than 30 char
+        assertFalse(UserName.isUserNameTooLong("tester123tester123tester123")); //long name that is less than 30 char
 
 
     }
