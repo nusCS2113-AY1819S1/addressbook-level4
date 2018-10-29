@@ -6,15 +6,18 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ClubBudgetElementsBook;
+import seedu.address.model.FinalBudgetsBook;
 import seedu.address.model.LoginBook;
 import seedu.address.model.ReadOnlyAddressBook;
 
 import seedu.address.model.ReadOnlyClubBudgetElementsBook;
+import seedu.address.model.ReadOnlyFinalBudgetBook;
 import seedu.address.model.ReadOnlyLoginBook;
 import seedu.address.model.budgetelements.ClubBudgetElements;
 import seedu.address.model.budgetelements.ClubName;
 import seedu.address.model.budgetelements.ExpectedTurnout;
 import seedu.address.model.budgetelements.NumberOfEvents;
+import seedu.address.model.clubbudget.FinalClubBudget;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.login.UserId;
 import seedu.address.model.login.UserPassword;
@@ -73,6 +76,15 @@ public class SampleDataUtil {
         };
     }
 
+    public static FinalClubBudget[] getSampleFinalClubBudget() {
+        String allocatedBudget1 = "1000";
+        String allocatedBudget2 = "1000";
+        return new FinalClubBudget[] {
+            new FinalClubBudget(new ClubName("Computing Club"), Integer.parseInt(allocatedBudget1)),
+            new FinalClubBudget(new ClubName("ECE Club"), Integer.parseInt(allocatedBudget2))
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
@@ -95,6 +107,14 @@ public class SampleDataUtil {
             sampleCBb.addClub(sampleClubBudgetElements);
         }
         return sampleCBb;
+    }
+
+    public static ReadOnlyFinalBudgetBook getSampleFinalBudgetsBook() {
+        FinalBudgetsBook sampleFBb = new FinalBudgetsBook();
+        for (FinalClubBudget sampleFinalClubBudget : getSampleFinalClubBudget()) {
+            sampleFBb.addClubBudget(sampleFinalClubBudget);
+        }
+        return sampleFBb;
     }
 
     /**

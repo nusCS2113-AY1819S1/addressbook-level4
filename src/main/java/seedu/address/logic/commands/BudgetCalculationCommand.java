@@ -78,7 +78,7 @@ public class BudgetCalculationCommand extends Command {
             model.addClubBudget(toAdd);
 
         }
-        model.commitAddressBook();
+        model.commitFinalBudgetsBook();
         return new CommandResult(String.format(MESSAGE_CALCULATE_BUDGET_SUCCESS));
     }
 }

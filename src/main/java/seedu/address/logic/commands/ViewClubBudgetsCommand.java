@@ -8,6 +8,7 @@ import java.util.List;
 import seedu.address.logic.CommandHistory;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+//import seedu.address.model.FinalBudgetsBook;
 import seedu.address.model.Model;
 import seedu.address.model.budgetelements.ClubName;
 import seedu.address.model.clubbudget.FinalClubBudget;
@@ -44,8 +45,8 @@ public class ViewClubBudgetsCommand extends Command {
         requireNonNull(model);
 
         /**if (!(model.hasClubBudget(toShow))) {
-            throw new CommandException(MESSAGE_INVALID_CLUB);
-        }*/
+         throw new CommandException(MESSAGE_INVALID_CLUB);
+         }*/
 
 
         List<FinalClubBudget> listOfBudgets = model.getFilteredClubBudgetsList();
@@ -60,9 +61,10 @@ public class ViewClubBudgetsCommand extends Command {
 
             if (currentBudget.getClubName().equals(toShow)) {
                 budgetToShow = Integer.toString(currentBudget.getAllocatedBudget());
-                System.out.println("the budget is " + budgetToShow);
+                //System.out.println("the budget is " + budgetToShow);
                 return new CommandResult(String.format(MESSAGE_SUCCESS, budgetToShow));
             }
+
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, budgetToShow));
     }
