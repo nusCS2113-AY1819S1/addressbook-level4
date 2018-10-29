@@ -1,9 +1,11 @@
 package seedu.address.ui;
 
+import java.time.LocalDate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
@@ -30,12 +32,68 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private TextField commandTextField;
 
+    @FXML
+    private DatePicker date;
+
     public CommandBox(Logic logic) {
         super(FXML);
         this.logic = logic;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         historySnapshot = logic.getHistorySnapshot();
+
+        DatePicker datePicker = new DatePicker();
+
+    }
+
+    /**
+     * Converts
+     * @param date from datePicker in UI
+     * @return deadline in correct parsing format
+     */
+    private String convertToDeadline(LocalDate date) {
+        int year = date.getYear();
+        int month = date.getMonthValue();
+        int day = date.getDayOfMonth();
+        StringBuilder deadline = new StringBuilder();
+        deadline.append(day);
+        deadline.append("/");
+        deadline.append(month);
+        deadline.append("/");
+        deadline.append(year);
+        return deadline.toString();
+    }
+
+    /**
+     * When user picks a date,
+     * that deadline will be selected,
+     * using selectDeadlineCommand
+     */
+    @FXML
+    public void selectDate() {
+        StringBuilder commandEntered = new StringBuilder();
+        LocalDate deadlineFromInput = date.getValue();
+        String deadlineParsed = convertToDeadline(deadlineFromInput);
+
+        commandEntered.append("select ");
+        commandEntered.append(deadlineParsed);
+        //logger.info("Command entered ====" + commandEntered.toString());
+        try {
+            CommandResult commandResult = logic.execute(commandEntered.toString());
+            initHistory();
+            historySnapshot.next();
+            // process result of the command
+            commandTextField.setText("");
+            logger.info("Result: " + commandResult.feedbackToUser); // feedbackToUser returns a string.
+            raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
+
+        } catch (CommandException | ParseException e) {
+            initHistory();
+            // handle command failure
+            setStyleToIndicateCommandFailure();
+            logger.info("Invalid command: " + commandTextField.getText());
+            raise(new NewResultAvailableEvent(e.getMessage()));
+        }
     }
 
     /**
