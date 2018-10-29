@@ -12,11 +12,11 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.logic.commands.BackupCommand;
+import seedu.address.logic.commands.RestoreCommand;
 import seedu.address.storage.OnlineStorage;
 
 //@@author QzSG
-public class BackupCommandParserTest {
+public class RestoreCommandParserTest {
 
     @Rule
     public TemporaryFolder testFolder = new TemporaryFolder();
@@ -24,40 +24,40 @@ public class BackupCommandParserTest {
     @Rule
     public final ExpectedException thrown = ExpectedException.none();
 
-    private BackupCommandParser parser = new BackupCommandParser();
+    private RestoreCommandParser parser = new RestoreCommandParser();
 
-    private BackupCommand expectedValidOnlineBackupCommand =
-            new BackupCommand(Optional.empty(), false,
+    private RestoreCommand expectedValidOnlineRestoreCommand =
+            new RestoreCommand(Optional.empty(), false,
                     Optional.ofNullable(OnlineStorage.Type.GITHUB),
                     Optional.ofNullable("VALID_TOKEN"));
 
 
     @Test
     public void parse_emptyArg_parsesPasses() {
-        BackupCommand expectedBackupCommand =
-                new BackupCommand(Optional.empty(), true, Optional.empty(), Optional.empty());
+        RestoreCommand expectedBackupCommand =
+                new RestoreCommand(Optional.empty(), true, Optional.empty(), Optional.empty());
 
         assertParseSuccess(parser, "  ", expectedBackupCommand);
     }
 
     @Test
-    public void parse_onlineBackupNoTokenArg_throws() {
-        thrown.expect(IllegalArgumentException.class);
-        assertParseSuccess(parser, " github", expectedValidOnlineBackupCommand);
+    public void parse_onlineBackupNoTokenArg_parsesFails() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, RestoreCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, " github", expectedMessage);
     }
 
     @Test
     public void parse_onlineBackupHasTokenArg_parsesPasses() {
-        assertParseSuccess(parser, " github AUTH_TOKEN", expectedValidOnlineBackupCommand);
+        assertParseSuccess(parser, " github AUTH_TOKEN", expectedValidOnlineRestoreCommand);
     }
 
     @Test
     public void parse_invalidArgs_parsesFails() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, BackupCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, RestoreCommand.MESSAGE_USAGE);
 
-        Path tempBackupFilePath = testFolder.getRoot().toPath().resolve("Temp.bak");
+        Path tempRestoreFilePath = testFolder.getRoot().toPath().resolve("Temp.bak");
         // invalid arguments
-        assertParseFailure(parser, tempBackupFilePath.toString(), expectedMessage);
+        assertParseFailure(parser, tempRestoreFilePath.toString(), expectedMessage);
 
     }
 }

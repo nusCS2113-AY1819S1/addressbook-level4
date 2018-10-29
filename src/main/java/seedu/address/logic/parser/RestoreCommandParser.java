@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import seedu.address.logic.commands.BackupCommand;
 import seedu.address.logic.commands.RestoreCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.storage.OnlineStorage;
@@ -32,7 +31,7 @@ public class RestoreCommandParser implements Parser<RestoreCommand> {
             }
         } catch (Exception pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, BackupCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, RestoreCommand.MESSAGE_USAGE), pe);
         }
     }
 
@@ -54,6 +53,6 @@ public class RestoreCommandParser implements Parser<RestoreCommand> {
                     Optional.ofNullable(OnlineStorage.Type.GITHUB),
                     Optional.ofNullable(argumentList.get(1)));
         }
-        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BackupCommand.MESSAGE_USAGE));
+        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RestoreCommand.MESSAGE_USAGE));
     }
 }

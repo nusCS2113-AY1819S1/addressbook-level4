@@ -5,9 +5,9 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.events.model.AddressBookChangedEvent;
-import seedu.address.commons.events.model.BooksLocalBackupEvent;
 import seedu.address.commons.events.model.ExpenseBookChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
+import seedu.address.commons.events.storage.LocalBackupEvent;
 import seedu.address.commons.events.storage.LocalRestoreEvent;
 import seedu.address.commons.events.storage.OnlineBackupEvent;
 import seedu.address.commons.events.storage.OnlineRestoreEvent;
@@ -43,16 +43,9 @@ public interface Storage extends AddressBookStorage, ExpenseBookStorage, UserPre
      */
     void handleAddressBookChangedEvent(AddressBookChangedEvent abce);
 
-    /**
-     * Saves the current version of the Address Book to the hard disk as a backup.
-     *   Creates the backup file if it is missing.
-     * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
-     */
-    //void handleAddressBookLocalBackupEvent(AddressBookLocalBackupEvent abce);
-
     void handleOnlineBackupEvent(OnlineBackupEvent obe);
 
-    void handleBooksLocalBackupEvent(BooksLocalBackupEvent blbe);
+    void handleLocalBackupEvent(LocalBackupEvent lbe);
 
     void handleOnlineRestoreEvent(OnlineRestoreEvent ore);
 

@@ -431,8 +431,8 @@ Restores Student Planner data using local backups in backup paths inside `prefer
 * `restore github ACCESS_TOKEN_HERE` +
 Restores Student Planner data on GitHub Gists using the provided personal access token.
 
-=== Setup or restore backup data `[coming in v1.3]`
-Allow user to setup backup settings (setup cloud services like GitHub gists or Google Drive, backup location) by calling `backup doctor`
+=== Configure backup and restore settings `[coming in v2.0]`
+Allow user to configure backup settings (configure and save cloud services authentication tokens like GitHub gists or Google Drive, backup location) by calling `backup doctor`
 
 // end::datarestore[]
 
@@ -485,4 +485,3 @@ e.g. `editExpense 2 c/Travel v/998.00`
 * *MonthlyExpense* : `monthlyExpense MM/YYYY` +
 e.g. `monthlyExpense 11/2018`
 //@@author
-

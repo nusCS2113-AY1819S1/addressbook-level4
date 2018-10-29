@@ -31,9 +31,10 @@ public class RestoreCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Restoring Backup from %s";
     public static final String MESSAGE_FAILURE = "Please perform an online backup using %s first or set relevant"
              + " settings in user prefs";
+    public static final String MESSAGE_FAILURE_SAMPLE = ": backup github [personal_access_token]";
     public static final String MESSAGE_INVALID = "Invalid online service provided";
     private Optional<Path> backupPath;
-    private boolean isLocal = true;
+    private boolean isLocal;
     private OnlineStorage.Type target;
     private Optional<String> authToken;
 
@@ -42,6 +43,12 @@ public class RestoreCommand extends Command {
      */
     public RestoreCommand(Optional<Path> backupPath, boolean isLocal,
                           Optional<OnlineStorage.Type> target, Optional<String> authToken) {
+        if (isLocal && authToken.isPresent()) {
+            throw new AssertionError("This should never happen. authToken should not exist if isLocal is true.");
+        }
+        if (!isLocal && !authToken.isPresent()) {
+            throw new AssertionError("This should never happen. authToken should always exist if isLocal is false.");
+        }
         this.backupPath = backupPath;
         this.isLocal = isLocal;
         this.target = target.orElse(OnlineStorage.Type.GITHUB);
@@ -53,25 +60,43 @@ public class RestoreCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         if (isLocal) {
-            EventsCenter.getInstance().post(new LocalRestoreEvent(
-                    retrieveAddressBookPath(model), retrieveExpenseBookPath(model)));
-            return new CommandResult(String.format(MESSAGE_SUCCESS, retrievePath(model).getParent().toString()));
+            return localRestoreCommand(model);
         } else {
-            if (target == OnlineStorage.Type.GITHUB) {
-                String gistId = model.getUserPrefs().getAddressBookGistId();
-                if (gistId == null) {
-                    return new CommandResult(String.format(MESSAGE_FAILURE, ": backup github [personal_access_token]"));
-                }
-                EventsCenter.getInstance().post(new OnlineRestoreEvent(target, UserPrefs.TargetBook.AddressBook,
-                        model.getUserPrefs().getAddressBookGistId(), authToken));
-                EventsCenter.getInstance().post(new OnlineRestoreEvent(target, UserPrefs.TargetBook.ExpenseBook,
-                        model.getUserPrefs().getExpenseBookGistId(), authToken));
-                return new CommandResult(String.format(MESSAGE_SUCCESS, "GitHub Gists"));
-            } else {
-                return new CommandResult(MESSAGE_INVALID);
-            }
+            return onlineRestoreCommand(model);
         }
 
+    }
+
+    /**
+     * Raises event to indicate new local restore command
+     * @param model
+     * @return
+     */
+    private CommandResult localRestoreCommand(Model model) {
+        EventsCenter.getInstance().post(new LocalRestoreEvent(
+                retrieveAddressBookPath(model), retrieveExpenseBookPath(model)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, retrievePath(model).getParent().toString()));
+    }
+
+    /**
+     * Raises event to indicate new online restore command
+     * @param model
+     * @return
+     */
+    private CommandResult onlineRestoreCommand(Model model) {
+        if (target == OnlineStorage.Type.GITHUB) {
+            String gistId = model.getUserPrefs().getAddressBookGistId();
+            if (gistId == null) {
+                return new CommandResult(String.format(MESSAGE_FAILURE, MESSAGE_FAILURE_SAMPLE));
+            }
+            EventsCenter.getInstance().post(new OnlineRestoreEvent(target, UserPrefs.TargetBook.AddressBook,
+                    model.getUserPrefs().getAddressBookGistId(), authToken));
+            EventsCenter.getInstance().post(new OnlineRestoreEvent(target, UserPrefs.TargetBook.ExpenseBook,
+                    model.getUserPrefs().getExpenseBookGistId(), authToken));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, "GitHub Gists"));
+        } else {
+            return new CommandResult(MESSAGE_INVALID);
+        }
     }
 
     private Path retrievePath(Model model) {

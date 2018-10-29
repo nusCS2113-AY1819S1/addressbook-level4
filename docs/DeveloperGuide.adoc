@@ -375,20 +375,87 @@ Step 6. The user now decides that the task added was a mistake, and decides to r
 The application supports both local and online backups
 
 ==== Backup Implementation
-A generic `OnlineStorage` interface must be implemented by all forms of Online backup services. This allows developers to easily add and extend the list of supported backup services by implementing a common set of methods.
-The current minimum set of methods that must be implemented is for backup, namely `OnlineStorage#saveContentToStorage`. Future iterations of code will enforce implementation of `OnlineStorage#loadContentFromStorage`.
+A `OnlineStorage` interface must be implemented by all forms of Online backup services. This allows developers to easily add and extend the list of supported backup services by implementing a common set of methods.
+The current minimum set of methods that must be implemented are
 
-For local backups, the existing classes provided by `XmlAddressBookStorage` are reused
+* `OnlineStorage#saveContentToStorage`.
+* `OnlineStorage#readContentFromStorage`.
+
+For local backups, the book specific `{Book}Storage` interface adapted from `AddressBookStorage` are implemented and used.
+
+==== Design Considerations
+===== Aspect: How is the backup command initiated
+The backup mechanism is unique from the other command implementation as the execution of a `BackupCommand` uses an event driven approach to activate a backup request instead of going through the model manager. Backup command is executed this way
+because of the following reason.
+
+Backup requires the current in memory book data inside the `Model`, however the `execute` function is actually passed our `model` containing the required books data. We can raise a backup event directly with the books data provided in the model we have access too
+
+The raised event is observed and handled by the storage manager which performs the backup (either local or through supported online services) using the books from the `model` passed in through the `OnlineBackupEvent` or `LocalBackupEvent`
+
+===== Aspect: Implementation of performing backup
+
+* **Alternative 1 (current choice):** Performing backup of data files using worker threads.
+** Pros: Solves the age old problem of a graphical application appearing to freeze which can away end user experience as when the main JavaFX thread is blocked as is the case in the inherited default AB4 codebase
+** Cons: Difficult to ensure that threads have no unsafe threads operations especially since we are dealing with file storage. Cross thread exception is difficult to handle.
+   Difficult to ensure that no two threads attempt to access the same resource.
+   Inter-thread synchronisation and cross thread exception handling is difficult too.
+   we have to implement a way to check when all threads are complete and signal the main ui thread to provide user with a proper success or failure notification
+* **Alternative 2:** Utilise the existing implementation of blocking the main GUI thread whenever a file storage operation is being performed
+** Pros: No work needed in implementation.
+** Cons: Notable freezes in Student Planner application even for small files. User cannot perform any other operation while backup is being performed
+
+====== Further justification
+
+Concurrency is not a topic commonly taught in beginning software engineering classes. The class that this application was created for is no exception. The common reason for this is that concurrency and multithreading
+are two slightly advanced topics that students will not usually touch in beginning modules. However, one can consider this to be a paradox as most beginner software engineering modules will involve the creation of an
+application with graphical output which usually consists of long running operations which should not be handled or performed on the main GUI thread. This is the best time to teach students about using worker or
+ background threads to prevent main GUI thread from blocking operations such as file I/O, it is also the most succinct demonstration of the need for concurrency.
 
 ==== Command Flow
-When a user enters a backup or restore command for local backups or restoration. `Model#backupAddressBookLocal` will be called which calls `indicateAddressBookBackupRequest` that raises a `Model#AddressBookLocalBackupEvent`.
-The `StorageManager` subscribes to the event and will perform the backup of the address book in the event handler. This allows us to seperate backup concerns from the Model as the model should not know how to perform backup,
-also in this manner, the storage manager will not need to know about the model to perform backup.
 
-For online backups, in this case the example of saving backup data to GitHub. After a correct backup command is entered by the user, an `OnlineBackupEvent` is immediately raised and handled by the `StorageManager`.
-To prevent the main JavaFX UI thread from freezing during the entire duration of the online backup. We utilize a worker thread that performs the online backup without blocking the main thread. We set up the Task handlers so that
-exceptions thrown in the worker thread can be captured and shown to the user in the form of a popup. This multi-threaded approach allows us to perform long running tasks on worker threads and at the same time allows us to perform
-and show feedback to the UI for the user as the Task event handlers are performed on the main JavaFX thread.
+image::backup-example.png[]
+
+When a user enters a backup command to perform data backup. `BackupCommand#execute` raises a `LocalBackupEvent` or a `OnlineBackupEvent`.
+The `StorageManager` subscribes to the events and will perform the backup of the various books such as `ReadOnlyAddressBook`, `ReadOnlyExpenseBook` etc provided in the event payload. This allows us to separate
+backup concerns from the Model as explain above earlier, in a similar manner, the storage component is also decoupled from the model component with regards to backup operations.
+
+For example in the case of saving backup data to GitHub. We have the flow of steps.
+
+. After a correct backup command is entered by the user, `BackupCommand#execute` raises a `OnlineBackupEvent` with the payload consisting of `OnlineStorage.Type` , the various book models, and a authentication token.
+. `StorageManager#handleOnlineBackupEvent` calls `backupOnline` which starts an `ExecutorService` to perform data backup to Github storage with worker tasks from `getOnlineBackupTask`
++
+To prevent the main JavaFX UI thread from freezing during the entire duration of the online backup, worker threads are used to performs the online backup without blocking the main thread.
++
+Tasks created using `javafx.concurrent.tasks` allows us to use task handlers which run in the context of the main JavaFX application thread.
++
+This allows us to capture any thrown exceptions in the worker thread and show to the user in the form of a error popup.
++
+
+```
+backupTask.setOnFailed(event -> {
+    raise(new DataSavingExceptionEvent((Exception) backupTask.getException()));
+});
+```
++
+This multi-threaded approach allows us to perform long running tasks on worker threads while still waiting for all backup threads
+to complete before showing success notification for the user.
++
+```
+backupTask.setOnSucceeded(event -> {
+    raise(new NewResultAvailableEvent(backupTask.getMessage()));
+    raise((OnlineBackupSuccessResultEvent) backupTask.getValue());
+});
+```
+. The specific online service that implements the `OnlineStorage` interface will be called.
+In this example, `GithubStorage#saveContentToStorage` is called for the respective data books which utilises a third party Github API Library
+ to create and save gists to GitHub.
+. When each backup task for each book data is completed, a `OnlineBackupSuccessResultEvent` is raised by the `setOnSucceeded` task handler.
+. `Model#handleOnlineBackupSuccessResultEvent` receives the event and updates the `UserPrefs` model based on the gist id returned from the successful backup
+. A `UserPrefsChangedEvent` is fired which is handled by `Storage` which saves the updated `UserPrefs` to storage.
+. A `NewNotificationAvailableEvent` is also fired. This event is handled by the `UiManager` which calls `showNotification` that creates a new notification and shows
+ it to the user.
+// end::backuprestore[]
+//author
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption

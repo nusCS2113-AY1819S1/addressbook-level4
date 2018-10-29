@@ -5,6 +5,7 @@ package seedu.address.storage;
 import java.io.IOException;
 
 import seedu.address.commons.exceptions.OnlineBackupFailureException;
+import seedu.address.model.UserPrefs;
 
 /**
  * API of the OnlineStorage component
@@ -36,4 +37,14 @@ public interface OnlineStorage {
      */
     Object saveContentToStorage(String content, String fileName, String description)
             throws IOException, OnlineBackupFailureException;
+
+    /**
+     * Reads the given {@code targetBook} with reference id from online storage and returns contents as a string.
+     * @param targetBook {@code UserPrefs.TargetBook} book type of backup content
+     * @param ref Reference string used to identity backup content on online service, example would
+     *            be gists id from Github
+     * @return Contents of backup returned as a string
+     * @throws IOException
+     */
+    String readContentFromStorage(UserPrefs.TargetBook targetBook, String ref) throws IOException;
 }

@@ -20,10 +20,12 @@ Student Planner is a all-in-one desktop manager application that allows students
 * *Major enhancement*: added *the ability to backup/restore user data*
 ** What it does: allows the user to backup current user data both online and locally. Backups can be restored by using the restore command.
 ** Justification: This feature improves the product significantly because a user may have the app on many desktops and this provides a convenient way to synchronise them among many devices.
-** Highlights: This enhancement enables a generic class that can be easily extended by developers to support more types of online backup services in future. It requires an in-depth analysis of design alternatives. The implementation too was challenging as the backing up of data online may take a long time, existing implementation will cause the application to freeze until any backup is completed. The current implementation exhibits a working knowledge of multithreading applications as well as event based asynchronous callbacks.
+** Highlights: This enhancement enables a generic class that can be easily extended by developers to support more types of online backup services in future. It requires an in-depth analysis of design alternatives.
+The implementation too was challenging as the backing up of data online may take a long time, existing implementation will cause the application to freeze until any backup is completed.
+The current implementation exhibits a working knowledge of multithreading applications, concurrency as well as event driven programming.
 ** Credits: GitHub Api by kohsuke.
 
-* *Minor enhancement*: added a user prefences command that allows the user to customise their application preferences such as default backup locations, online backup data location and other application settings.
+* *Minor enhancement*: added a user preferences command that allows the user to customise their application preferences such as default backup locations, online backup data location and other application settings.
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
@@ -33,21 +35,17 @@ Student Planner is a all-in-one desktop manager application that allows students
 *** Managed all releases on GitHub
 *** Setup and modified most of the initial documentation prior to v1.1
 ** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Wrote additional tests for existing features (Pull requests https://github.com[#36], https://github.com[#38])
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Did cosmetic tweaks to existing contents of the User Guide
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-T13-1/main/pull/42[1], https://github.com/CS2113-AY1819S1-T13-1/main/pull/72[2]
+*** Contributed to forum discussions (examples:  https://github.com/nusCS2113-AY1819S1/forum/issues/30[1], https://github.com/nusCS2113-AY1819S1/forum/issues/4[2], https://github.com/nusCS2113-AY1819S1/forum/issues/27[3], https://github.com/nusCS2113-AY1819S1/forum/issues/16[4] , https://github.com/nusCS2113-AY1819S1/forum/issues?q=commenter%3AQzSG[full list])
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/nusCS2113-AY1819S1/forum/issues/4[1], https://github.com/nusCS2113-AY1819S1/forum/issues/27[2])
 ** Tools:
 *** Integrated a third party library (Github Api by kohsuke) to the project (https://github.com/kohsuke/github-api)
 *** Integrated a new Github App (Travis.com) to the team repo
 **** This is different from other teams still using the old deprecated OAuth Flow used on the older Travis.org domain
-
-_{you can add/remove categories in the list above}_
 
 == Contributions to the User Guide
 

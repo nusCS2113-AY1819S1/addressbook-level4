@@ -21,7 +21,6 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.AddressBookLocalBackupEvent;
 import seedu.address.commons.events.model.AddressBookLocalRestoreEvent;
 import seedu.address.commons.events.model.AddressBookOnlineRestoreEvent;
-import seedu.address.commons.events.model.BooksLocalBackupEvent;
 import seedu.address.commons.events.model.ExpenseBookChangedEvent;
 import seedu.address.commons.events.model.ExpenseBookLocalBackupEvent;
 import seedu.address.commons.events.model.ExpenseBookLocalRestoreEvent;
@@ -196,19 +195,6 @@ public class ModelManager extends ComponentManager implements Model {
     public void backupExpenseBookLocal(Path backupPath) {
         indicateExpenseBookBackupRequest(backupPath);
     }*/
-
-    @Override
-    public void backupBooksLocal() {
-        indicateBooksLocalBackupRequest(userPrefs.getAddressBookBackupFilePath(),
-                userPrefs.getExpenseBookBackupFilePath());
-    }
-
-    /** Raises an event to indicate the request to backup model to persistent storage*/
-    private void indicateBooksLocalBackupRequest(Path addressBookPath, Path expenseBookPath) {
-        //raise(new AddressBookLocalBackupEvent(versionedAddressBook, addressBookPath));
-        //raise(new ExpenseBookLocalBackupEvent(versionedExpenseBook, expenseBookPath));
-        raise(new BooksLocalBackupEvent(versionedAddressBook, addressBookPath, versionedExpenseBook, expenseBookPath));
-    }
 
     @Override
     public void restoreAddressBook(ReadOnlyAddressBook restoredAddressBook) {

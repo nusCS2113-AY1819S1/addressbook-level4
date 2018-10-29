@@ -94,11 +94,6 @@ public interface Model {
     void commitAddressBook();
 
     /**
-     * Backup current books to storage.
-     */
-    void backupBooksLocal();
-
-    /**
      * Restore address book from storage.
      * @param restoredAddressBook
      */
