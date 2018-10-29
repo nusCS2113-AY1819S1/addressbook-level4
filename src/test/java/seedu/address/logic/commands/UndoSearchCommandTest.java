@@ -6,12 +6,16 @@ import static seedu.address.testutil.TypicalClubBudgetElements.getTypicalClubBud
 import static seedu.address.testutil.TypicalFinalClubBudget.getTypicalFinalBudgetsBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.Collections;
+
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.searchhistory.KeywordType;
 
 public class UndoSearchCommandTest {
     private final Model model = new ModelManager(getTypicalLoginBook(), getTypicalAddressBook(),
@@ -36,6 +40,7 @@ public class UndoSearchCommandTest {
     }
 
     private void prepareSearchedModel() {
-        model.executeSearch(person -> true);
+        model.executeSearch(new NameContainsKeywordsPredicate(Collections.singletonList("Alice")));
+        model.recordKeywords(KeywordType.IncludeNames, Collections.singletonList("Alice"));
     }
 }

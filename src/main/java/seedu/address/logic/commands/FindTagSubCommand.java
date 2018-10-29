@@ -6,6 +6,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.model.searchhistory.KeywordType;
 
 /**
  * Finds and lists all persons in address book whose tags contains any of the argument keywords.
@@ -27,12 +28,15 @@ public class FindTagSubCommand extends FindCommand {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         if (isExcludeMode) {
+            model.recordKeywords(KeywordType.ExcludeTags, predicate.getLowerCaseKeywords());
             model.executeSearch(predicate.negate());
         } else {
+            model.recordKeywords(KeywordType.IncludeTags, predicate.getLowerCaseKeywords());
             model.executeSearch(predicate);
         }
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size())
+                        + formatter.getOutputString(model.getReadOnlyKeywordsRecord()));
     }
 
     @Override
