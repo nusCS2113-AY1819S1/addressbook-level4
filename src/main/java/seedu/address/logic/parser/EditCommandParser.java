@@ -33,7 +33,7 @@ public class EditCommandParser implements Parser
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CONTACT, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_VENUE, PREFIX_COMMENT, PREFIX_DATETIME, PREFIX_TAG, PREFIX_ATTENDEE);
+                        PREFIX_VENUE, PREFIX_DATETIME, PREFIX_TAG, PREFIX_ATTENDEE);
 
         Index index;
 
@@ -63,7 +63,7 @@ public class EditCommandParser implements Parser
             editEventDescriptor.setDate(ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get()));
         }
 
-        editEventDescriptor.setComment(new Comment("{span}Comment Section{/span}{ol}{/ol}")); //TODO for Comment
+        //editEventDescriptor.setComment(new Comment("{span}Comment Section{/span}{ol}{/ol}")); //TODO for Comment
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editEventDescriptor::setTags);
         parseAttendeesForEdit(argMultimap.getAllValues(PREFIX_ATTENDEE)).ifPresent(editEventDescriptor::setAttendees);
 

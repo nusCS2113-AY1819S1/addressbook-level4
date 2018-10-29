@@ -4,38 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
-import static seedu.address.logic.commands.CommandTestUtil.ATTENDEE_DESC_HAN;
-import static seedu.address.logic.commands.CommandTestUtil.ATTENDEE_DESC_TED;
-import static seedu.address.logic.commands.CommandTestUtil.CONTACT_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.CONTACT_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ATTENDEE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_CONTACT_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATETIME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_VENUE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDEE_TED;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTACT_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VENUE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VENUE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
@@ -80,8 +49,9 @@ public class EditCommandSystemTest extends EventManagerSystemTest {
         Index index = INDEX_FIRST_EVENT;
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_BOB + "  "
                 + CONTACT_DESC_BOB + " " + PHONE_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + VENUE_DESC_BOB + " "
-                + DATETIME_DESC_BOB + " " + TAG_DESC_HUSBAND + " " + ATTENDEE_DESC_TED;
-        Event editedEvent = new EventBuilder(BOB).withTags(VALID_TAG_HUSBAND).withAttendees(VALID_ATTENDEE_TED).build();
+                + DATETIME_DESC_BOB + " " + COMMENT_DESC_BOB + " " + TAG_DESC_HUSBAND + " " + ATTENDEE_DESC_TED;
+        Event editedEvent = new EventBuilder(BOB).withTags(VALID_TAG_HUSBAND).withAttendees(VALID_ATTENDEE_TED)
+                .withComment(VALID_COMMENT_BOB).build();
         assertCommandSuccess(command, index, editedEvent);
 
         /* Case: undo editing the last event in the list -> last event restored */
