@@ -22,6 +22,7 @@ public class EventCardHandle extends NodeHandle<Node> {
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String DATETIME_FIELD_ID = "#dateTime";
     private static final String TAGS_FIELD_ID = "#tags";
+    private static final String ATTENDANCE_FIELD_ID = "#attendance";
     private static final String COMMENT_FIELD_ID = "#comment";
 
     private final Label idLabel;
@@ -32,6 +33,7 @@ public class EventCardHandle extends NodeHandle<Node> {
     private final Label emailLabel;
     private final Label datetimeLabel;
     private final List<Label> tagLabels;
+    private final List<Label> attendanceLabels;
 
     public EventCardHandle(Node cardNode) {
         super(cardNode);
@@ -46,6 +48,13 @@ public class EventCardHandle extends NodeHandle<Node> {
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
         tagLabels = tagsContainer
+                .getChildrenUnmodifiable()
+                .stream()
+                .map(Label.class::cast)
+                .collect(Collectors.toList());
+
+        Region attendanceContainer = getChildNode(ATTENDANCE_FIELD_ID);
+        attendanceLabels = attendanceContainer
                 .getChildrenUnmodifiable()
                 .stream()
                 .map(Label.class::cast)
@@ -91,6 +100,19 @@ public class EventCardHandle extends NodeHandle<Node> {
         List<String> tagsList = getTags();
         String tagsString = String.join(" ", tagsList);
         return tagsString;
+    }
+
+    public List<String> getAttendance() {
+        return attendanceLabels
+                .stream()
+                .map(Label::getText)
+                .collect(Collectors.toList());
+    }
+
+    public String getAttendanceString() {
+        List<String> attendanceList = getAttendance();
+        String attendanceString = String.join("<br>", attendanceList);
+        return attendanceString;
     }
 
     /**
