@@ -176,6 +176,10 @@ public class AddCommandTest {
         }
 
         @Override
+        public String manualLimitCheck() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
         public String generateLimitOutput(boolean isExceeded, Double totalSpend, Limit limit) {
             throw new AssertionError("This method should not be called.");
         }
