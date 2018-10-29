@@ -158,41 +158,6 @@ Examples:
 *	`c/Subway j/Cashier g/M xr/20-30 h/O levels s/1200`
 *	`c/KFC j/Cook g/F xr/20-30 h/O levels s/1400`
 
-=== Listing details of candidates / companies / jobs: `listc` `listC`
-
-==== Shows a list of all candidates
-
-Format: `listc`
-
-[NOTE]
-If you are viewing the Company Book, this command will automatically bring you to the Candidate Book.
-
-.Listing of all Candidates
-image::candidatePanel.png[width="790", align="left"]
-
-==== Shows a list of all companies and all job offers
-
-Format: `listC`
-
-[NOTE]
-If you are viewing the Candidate Book, this command will automatically bring you to the Company Book.
-
-.Listing of all Companies and all job offers
-image::candidatePanel.png[width="790", align="left"]
-
-==== Shows a list of job offers based on a selected company
-
-Company Book allows you to easily see the list of job offers based on the company you selected.
-
-GUI (refer to examples shown on Figure 6, 7 and 8): Select a company on the left of the screen.
-
-.Selecting KFC to show the available job offers
-image::companyPanel1.png[width="790", align="left"]
-.Selecting SingTel to show the available job offers
-image::companyPanel2.png[width="790", align="left"]
-.Selecting MOE to show the available job offers
-image::companyPanel3.png[width="790", align="left"]
-
 === Editing a candidate / company / job : `edit`
 
 ==== Edits attributes of the candidate at the specified index `INDEX`
@@ -231,11 +196,96 @@ Examples:
 *	`editj 1 x/20-30` +
 (Edits the `MIN_AGE-MAX_AGE` attribute of the 1st job offer to be of 20 to 30 years of age)
 
+=== Deleting candidates / companies / job offers : `delete`
+
+==== Deleting candidate(s)
+Format: `deletec <INDEX>,<INDEX>-<INDEX> ...`
+
+*	Deletes the candidate(s) with the specified `INDEX`(s)
+*	This index must be an index number shown in the displayed candidate list.
+*	The full name can be found using the find function when a partial keyword is entered
+
+
+Example to delete candidate(s):
+
+Step 1. `find Betsy` +
+(Shows all saved candidates named Betsy)
+
+Step 2. `deletec 1,2-3` +
+(Deletes the 1st, 2nd and 3rd candidate on most recent list)
+
+==== Deleting company(s)
+Format: `deleteC <INDEX>,<INDEX>-<INDEX> ...`
+
+* Deletes the company(s) with the specified `INDEX`(s)
+* The index must be an index number shown in the displayed company list.
+
+Example to delete company(s):
+
+Step 1. `listC` +
+(Shows all available companies)
+
+Step 2. `deleteC 1,6,2-3` +
+(Deletes the 1st, 2nd, 3rd and 6th job in the job list)
+
+
+==== Deleting job offer(s)
+Format: `deletej <INDEX>,<INDEX>-<INDEX> ...`
+
+* Deletes the job(s) with the specified `INDEX`(s)
+* The index must be an index number shown in the displayed job list.
+
+Example to delete job(s):
+
+Step 1. `listj` +
+(Shows all available jobs)
+
+Step 2. `deletej 5-4,6` +
+(Deletes the 4th, 5th and 6th job in the job list)
+
+=== Listing details of candidates / companies / jobs: `listc` `listC`
+
+==== Shows a list of all candidates
+
+Format: `listc`
+
+[NOTE]
+If you are viewing the Company Book, this command will automatically bring you to the Candidate Book.
+
+.Listing of all Candidates
+image::candidatePanel.png[width="790", align="left"]
+
+==== Shows a list of all companies and all job offers
+
+Format: `listC`
+
+[NOTE]
+If you are viewing the Candidate Book, this command will automatically bring you to the Company Book.
+
+.Listing of all Companies and all job offers
+image::candidatePanel.png[width="790", align="left"]
+
+==== Shows a list of job offers based on a selected company
+
+Company Book allows you to easily see the list of job offers based on the company you selected.
+
+GUI (refer to examples shown on Figure 6, 7 and 8): Select a company on the left of the screen.
+
+.Selecting KFC to show the available job offers
+image::companyPanel1.png[width="790", align="left"]
+.Selecting SingTel to show the available job offers
+image::companyPanel2.png[width="790", align="left"]
+.Selecting MOE to show the available job offers
+image::companyPanel3.png[width="790", align="left"]
+
 === Selecting a candidate : `select`
+Format: `select` `<INDEX>`
 
 === Selecting a company : `selectCompany`
+Format: `selectCompany` `<INDEX>`
 
 === Selecting a job offer : `selectJob`
+Format: `selectJob` `<INDEX>`
 
 === Locating candidates by search parameter : `find`
 ==== Finds names of candidates from RecruitBook based on the search parameter.
@@ -317,53 +367,6 @@ Examples:
 *   `sortc s/` +
 (Sorts all candidates by their salary)
 
-=== Deleting candidates / companies / job offers : `delete`
-
-==== Deleting candidate(s)
-Format: `deletec <INDEX>,<INDEX>-<INDEX> ...`
-
-*	Deletes the candidate(s) with the specified `INDEX`(s)
-*	This index must be an index number shown in the displayed candidate list.
-*	The full name can be found using the find function when a partial keyword is entered
-
-
-Example to delete candidate(s):
-
-Step 1. `find Betsy` +
-(Shows all saved candidates named Betsy)
-
-Step 2. `deletec 1,2-3` +
-(Deletes the 1st, 2nd and 3rd candidate on most recent list)
-
-==== Deleting company(s)
-Format: `deleteC <INDEX>,<INDEX>-<INDEX> ...`
-
-* Deletes the company(s) with the specified `INDEX`(s)
-* The index must be an index number shown in the displayed company list.
-
-Example to delete company(s):
-
-Step 1. `listC` +
-(Shows all available companies)
-
-Step 2. `deleteC 1,6,2-3` +
-(Deletes the 1st, 2nd, 3rd and 6th job in the job list)
-
-
-==== Deleting job offer(s)
-Format: `deletej <INDEX>,<INDEX>-<INDEX> ...`
-
-* Deletes the job(s) with the specified `INDEX`(s)
-* The index must be an index number shown in the displayed job list.
-
-Example to delete job(s):
-
-Step 1. `listj` +
-(Shows all available jobs)
-
-Step 2. `deletej 5-4,6` +
-(Deletes the 4th, 5th and 6th job in the job list)
-
 === Shortlisting candidates for a job offer : `shortlist`
 
 [IMPORTANT]
@@ -438,6 +441,10 @@ Examples:
 .   `send` +
     (To send the email)
 
+=== Exits from any intermediate command: `cancel`
+
+Format : `cancel`
+
 === Clearing all entries : `clear`
 
 Clears all entries from the Candidate Book. +
@@ -445,10 +452,6 @@ Format: `clearc`
 
 Clears all entries from the Company Book. +
 Format: `clearC`
-
-=== Exits from any intermediate command: `cancel`
-
-Format : `cancel`
 
 === Exiting the program : `exit`
 
