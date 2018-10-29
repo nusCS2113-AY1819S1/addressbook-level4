@@ -1,6 +1,9 @@
 package seedu.address.model.task;
 
 //@@author JeremyInElysium
+
+import seedu.address.logic.commands.AddMilestoneCommand;
+
 /**
  * Represents a Milestone for any Task in the TaskBook
  */
@@ -47,7 +50,13 @@ public class Milestone {
                 && otherMilestone.getRank().equals(getRank());
     }
 
-    //need to edit this also
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Milestone // instanceof handles nulls
+                && rank.equals(((Milestone) other).rank));
+    }
+
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

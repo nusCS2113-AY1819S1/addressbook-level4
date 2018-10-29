@@ -44,6 +44,13 @@ public class Rank {
     }
 
     @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Rank // instanceof handles nulls
+                && rank.equals(((Rank) other).rank));
+    }
+
+    @Override
     public String toString() {
         return rank;
     }

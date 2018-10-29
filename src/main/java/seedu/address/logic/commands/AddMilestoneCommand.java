@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MILESTONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RANK;
 
+import java.util.Iterator;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -66,8 +67,13 @@ public class AddMilestoneCommand extends Command implements CommandParser {
         }
 
         Task taskToEdit = lastShownList.get(index.getZeroBased());
+        
+        for (Milestone temp: taskToEdit.getMilestoneList()) {
+            if (temp.getRank().equals(toAdd.getRank())) {
+                throw new CommandException(MESSAGE_DUPLICATE_RANK);
+            }
+        }
 
-        //TODO: ensure rank of milestone that is being added does not collide with existing milestones' ranks
         /*
         if(taskToEdit.milestoneSet.size() <= rank) {
             throw new CommandException(MESSAGE_DUPLICATE_RANK);
