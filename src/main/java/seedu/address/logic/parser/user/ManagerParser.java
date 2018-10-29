@@ -9,6 +9,8 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.user.DeleteAccountCommand;
+import seedu.address.logic.commands.user.LogoutCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -47,6 +49,11 @@ public class ManagerParser {
         //case ChangePasswordCommand.COMMAND_WORD:
         //    return new ChangePasswordCommandParser().parse(arguments);
 
+        case DeleteAccountCommand.COMMAND_WORD:
+            return new DeleteAccountCommandParser ().parse (arguments);
+
+        case LogoutCommand.COMMAND_WORD:
+            return new LogoutCommand ();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

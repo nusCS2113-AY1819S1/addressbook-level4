@@ -16,12 +16,17 @@ public class LoginInfoManager {
     private ArrayList< LoginInfo > loginInfoList;
 
     public LoginInfoManager () {
-        loginInfoList = null;
+        UserName userName = new UserName ("tester");
+        Password password = new Password ("Gcf70h4aWQ1T9NMxE03XM3nq3nCmFGihnO4xMzHMgP0=");
+        AuthenticationLevel authenticationLevel = new AuthenticationLevel ("ADMIN");
+        LoginInfo loginInfo = new LoginInfo (userName, password, authenticationLevel);
+        this.loginInfoList = new ArrayList<>();
+        loginInfoList.add (loginInfo);
     }
 
-    public LoginInfo getLoginInfo(String userName) {
+    public LoginInfo getLoginInfo(UserName userName) {
         for (LoginInfo loginInfo : loginInfoList) {
-            if (loginInfo.getUserName ().equals (userName)) {
+            if (loginInfo.isUserNameMatched (userName)) {
                 return loginInfo;
             }
         }
@@ -33,7 +38,7 @@ public class LoginInfoManager {
      * @param userName
      * @return
      */
-    public boolean isUserNameExist(String userName) {
+    public boolean isUserNameExist(UserName userName) {
         LoginInfo user = getLoginInfo (userName);
         if (user == null) {
             return false;
@@ -43,15 +48,25 @@ public class LoginInfoManager {
     /**
      * Change password in the list with {@code userName} and {@code newHashedPassword}
      */
-    public void changePassword(String userName, String newHashedPassword) {
+    public void changePassword(UserName userName, Password newHashedPassword) {
         for (int i = 0; i < loginInfoList.size (); i++) {
-            if (loginInfoList.get (i).getUserName ().equals (userName)) {
+            if (loginInfoList.get (i).isUserNameMatched(userName)) {
                 loginInfoList.get (i).setPassword (newHashedPassword);
             }
         }
     }
+    /**
+     * Delete according in the list contains{@code userName}
+     */
+    public void deleteAccount(UserName userName) {
+        for (int i = 0; i < loginInfoList.size (); i++) {
+            if (loginInfoList.get (i).isUserNameMatched(userName)) {
+                loginInfoList.remove (i);
+            }
+        }
+    }
     //    private boolean checkUserName (LoginInfo listItem, String userNameWanted){
-    //        if (listItem.getUserName ().equals (userNameWanted)){
+    //        if (listItem.getUserNameString ().equals (userNameWanted)){
     //            return true;
     //        }
     //        return false;
@@ -82,9 +97,9 @@ public class LoginInfoManager {
         StringBuilder sb = new StringBuilder();
         for (LoginInfo loginInfo: loginInfoList) {
 
-            sb.append("\nuserName : " + loginInfo.getUserName ());
-            sb.append ("\npassword : " + loginInfo.getPassword ());
-            sb.append ("\nauthenticationLevel : " + loginInfo.getAuthenticationLevel ());
+            sb.append("\nuserName : " + loginInfo.getUserNameString ());
+            sb.append ("\npassword : " + loginInfo.getPasswordString ());
+            sb.append ("\nauthenticationLevel : " + loginInfo.getAuthenticationLevelString ());
         }
         return sb.toString();
     }

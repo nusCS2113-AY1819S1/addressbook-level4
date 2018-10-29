@@ -10,9 +10,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
+import seedu.address.commons.core.LoginInfo;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
-import seedu.address.model.person.Person;
+import seedu.address.commons.events.model.InventoryListChangedEvent;
+import seedu.address.model.drink.Drink;
+import seedu.address.model.user.Password;
+import seedu.address.model.user.UserName;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -20,113 +23,88 @@ import seedu.address.model.person.Person;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedAddressBook versionedAddressBook;
-    private final FilteredList<Person> filteredPersons;
+    protected LoginInfoManager loginInfoManager;
+    private final FilteredList<Drink> filteredDrinks;
+    private final InventoryList inventoryList;
 
     /**
-     * Initializes a DrinkModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given inventoryList and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyInventoryList inventoryList, UserPrefs userPrefs, LoginInfoManager loginInfoManager) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(inventoryList, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with inventory list: " + inventoryList + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedAddressBook(addressBook);
-        filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        this.inventoryList = new InventoryList(inventoryList);
+        filteredDrinks = new FilteredList<>(inventoryList.getDrinkList());
+        this.loginInfoManager = loginInfoManager;
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new InventoryList(), new UserPrefs() , new LoginInfoManager ());
     }
 
     @Override
-    public void resetData(ReadOnlyAddressBook newData) {
-        versionedAddressBook.resetData(newData);
-        indicateAddressBookChanged();
+    public void resetData(ReadOnlyInventoryList newData) {
+        inventoryList.resetData(newData);
+        indicateInventoryListChanged();
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return versionedAddressBook;
+    public ReadOnlyInventoryList getInventoryList() {
+        return inventoryList;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(versionedAddressBook));
+    private void indicateInventoryListChanged() {
+        raise(new InventoryListChangedEvent (inventoryList));
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return versionedAddressBook.hasPerson(person);
+    public boolean hasDrink(Drink drink) {
+        requireNonNull(drink);
+        return inventoryList.hasDrink(drink);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        versionedAddressBook.removePerson(target);
-        indicateAddressBookChanged();
+    public void deleteDrink(Drink target) {
+        inventoryList.removeDrink(target);
+        indicateInventoryListChanged();
     }
 
     @Override
-    public void addPerson(Person person) {
-        versionedAddressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        indicateAddressBookChanged();
+    public void addDrink(Drink drink) {
+        inventoryList.addDrink(drink);
+        updateFilteredDrinkList(PREDICATE_SHOW_ALL_DRINKS);
+        indicateInventoryListChanged();
     }
 
+    /*
     @Override
-    public void updatePerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void updateDrink(Drink target, Drink editedDrink) {
+        requireAllNonNull(target, editedDrink);
 
-        versionedAddressBook.updatePerson(target, editedPerson);
-        indicateAddressBookChanged();
+        inventoryList.updateDrink(target, editedDrink);
+        indicateInventoryListChanged();
     }
+    */
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Drink List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Drink} backed by the internal list of
+     * {@code inventoryList}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return FXCollections.unmodifiableObservableList(filteredPersons);
+    public ObservableList<Drink> getFilteredDrinkList() {
+        return FXCollections.unmodifiableObservableList(filteredDrinks);
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredDrinkList(Predicate<Drink> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
-    }
-
-    //=========== Undo/Redo =================================================================================
-
-    @Override
-    public boolean canUndoAddressBook() {
-        return versionedAddressBook.canUndo();
-    }
-
-    @Override
-    public boolean canRedoAddressBook() {
-        return versionedAddressBook.canRedo();
-    }
-
-    @Override
-    public void undoAddressBook() {
-        versionedAddressBook.undo();
-        indicateAddressBookChanged();
-    }
-
-    @Override
-    public void redoAddressBook() {
-        versionedAddressBook.redo();
-        indicateAddressBookChanged();
-    }
-
-    @Override
-    public void commitAddressBook() {
-        versionedAddressBook.commit();
+        filteredDrinks.setPredicate(predicate);
     }
 
     @Override
@@ -143,8 +121,25 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedAddressBook.equals(other.versionedAddressBook)
-                && filteredPersons.equals(other.filteredPersons);
+        return inventoryList.equals(other.inventoryList)
+                && inventoryList.equals(other.inventoryList);
+    }
+
+    //=========== Login feature command ==============================================//
+
+    @Override
+    public void changePassword (UserName userName, Password newHashedPassword) {
+        loginInfoManager.changePassword (userName, newHashedPassword);
+    }
+
+    @Override
+    public LoginInfo getLoginInfo (UserName userName) {
+        return loginInfoManager.getLoginInfo (userName);
+    }
+
+    @Override
+    public boolean isUserNameExist (UserName userName) {
+        return loginInfoManager.isUserNameExist (userName);
     }
 
 }
