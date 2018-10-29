@@ -206,10 +206,24 @@ _{explain how the user can enable/disable data encryption}_
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Forum Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Forum Book folder.`
 
 == Command Summary
-
+* *Announce* : `announce aTitle/ANNOUNCEMENT_TITLE aContent/ANNOUNCEMENT_CONTENT` +
+e.g `announce aTitle/Urgent! aContent/System maintenance from 4pm to 5pm.`
+* *CheckAnnounce* : `checkAnnounce`
+* *Block* : `block uName/USER_NAME` +
+e.g `block uName/john`
+* *SetAdmin* : `setAdmin uName/USER_NAME set/SET_OR_REVERT` +
+e.g `setAdmin uName/john set/true`
+* *CreateModule* : `createModule mCode/MODULE_CODE mTitle/MODULE_TITLE` +
+e.g `createModule mCode/CS2113 mTitle/Software Engineering and OOP`
+* *DeleteModule* : `deleteModule mCode/MODULE_CODE` +
+e.g `deleteModule mCode/CS2113`
+* *UpdatePass* : `updatePass uName/USER_NAME uPass/USER_PASSWORD` +
+e.g `updatePass uName/john uPass/098`
+* *DeleteUser* : `deleteUser uName/USER_NAME` +
+e.g `deleteUser uName/john`
 * *Help*
 * *Create* : `create m/MODULE_NAME t/THREAD_NAME [c/REPLY_MESSAGE]` +
 e.g `create m/CS2113 t/what is this module like? c/I heard that the workload is very heavy`
