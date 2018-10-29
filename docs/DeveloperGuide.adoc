@@ -444,6 +444,7 @@ Step 7: The model is updated and committed as in Step 3, and the event page is a
 `TreeSet` is used when retrieving the attendance for display for easy sorting of attendee usernames. Usernames are sorted in case-insensitive order.
 
 The following sequence diagram shows how the register operation works:
+
 image::registerSD.png[width="800"]
 
 ==== Design Considerations
