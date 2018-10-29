@@ -21,41 +21,19 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
-//        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(trimmedArgs, PREFIX_KEYWORD, PREFIX_NAME,
-//                PREFIX_CONTACT, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_VENUE, PREFIX_DATETIME, PREFIX_TAG);
-//
-        if (trimmedArgs.isEmpty()) { //|| !anyPrefixesPresent(argMultimap, PREFIX_KEYWORD, PREFIX_NAME, PREFIX_CONTACT,
-                //PREFIX_PHONE, PREFIX_EMAIL, PREFIX_VENUE, PREFIX_DATETIME, PREFIX_TAG)) {
+
+        if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-//        String keywords = argMultimap.getValue(PREFIX_KEYWORD).get().trim();
-//        String nameKeywords = argMultimap.getValue(PREFIX_NAME).get().trim();
-//        String contactKeywords = argMultimap.getValue(PREFIX_CONTACT).get().trim();
-//        String emailKeywords = argMultimap.getValue(PREFIX_EMAIL).get().trim();
-//        String phoneKeywords = argMultimap.getValue(PREFIX_PHONE).get().trim();
-//        String addressKeywords = argMultimap.getValue(PREFIX_VENUE).get().trim();
-//        String datetimeKeywords = argMultimap.getValue(PREFIX_DATETIME).get().trim();
-//        String tagKeywords = argMultimap.getValue(PREFIX_TAG).get().trim();
 
-//        String[] keywordsArray = keywords.split("\\s+");
-//        String[] nameKeywordsArray = nameKeywords.split("\\s+");
-//        String[] contactKeywordsArray = contactKeywords.split("\\s+");
-//        String[] emailKeywordsArray = emailKeywords.split("\\s+");
-//        String[] phoneKeywordsArray = phoneKeywords.split("\\s+");
-//        String[] addressKeywordsArray = addressKeywords.split("\\s+");
-//        String[] datetimeKeywordsArray = datetimeKeywords.split("\\s+");
-//        String[] tagKeywordsArray = tagKeywords.split("\\s+");
         String[] keywords = trimmedArgs.split("\\s+");
 
 
         //TODO: Deal with optional value
         return new FindCommand(
-                new EventContainsKeywordsPredicate(Arrays.asList(keywords)));//, Arrays.asList(nameKeywordsArray),
-                        //Arrays.asList(contactKeywordsArray), Arrays.asList(emailKeywordsArray),
-                        //Arrays.asList(phoneKeywordsArray), Arrays.asList(addressKeywordsArray),
-                        //Arrays.asList(datetimeKeywordsArray), Arrays.asList(tagKeywordsArray)));
+                new EventContainsKeywordsPredicate(Arrays.asList(keywords)));
     }
 
     /**

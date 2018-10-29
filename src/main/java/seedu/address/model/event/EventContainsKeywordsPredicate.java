@@ -11,30 +11,9 @@ import seedu.address.commons.util.StringUtil;
  */
 public class EventContainsKeywordsPredicate implements Predicate<Event> {
     private final List<String> keywords;
-//    private final List<String> nameKeywords;
-//    private final List<String> contactKeywords;
-//    private final List<String> emailKeywords;
-//    private final List<String> phoneKeywords;
-//    private final List<String> addresKeywords;
-//    private final List<String> datetimeKeywords;
-//    private final List<String> tagKeywords;
 
     public EventContainsKeywordsPredicate(List<String> keywords) {
-                                          //List<String> nameKeywords,
-                                          //List<String> contactKeywords,
-                                          //List<String> emailKeywords,
-                                          //List<String> phoneKeywords,
-                                          //List<String> addressKeywords,
-                                          //List<String> datetimeKeywords,
-                                          //List<String> tagKeywords) {
         this.keywords = keywords;
-//        this.nameKeywords = nameKeywords;
-//        this.contactKeywords = contactKeywords;
-//        this.emailKeywords = emailKeywords;
-//        this.phoneKeywords = phoneKeywords;
-//        this.addresKeywords = addressKeywords;
-//        this.datetimeKeywords = datetimeKeywords;
-//        this.tagKeywords = tagKeywords;
     }
 
     //TODO: update when contact is added
