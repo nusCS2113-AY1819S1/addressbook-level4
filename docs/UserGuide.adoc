@@ -257,6 +257,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Admin: Clears all entries from the Event Manager. +
 Format: `clear`
 
+// tag::rsvp[]
 === Register for event : `register`
 
 User: Registers for an event, adding current user's username to attendance list. +
@@ -284,6 +285,7 @@ Unregisters user from the 1st event of the Event Manager.
 * `find Sports` +
 `register 2` +
 Unregisters User from the 2nd event in the results of the `find` command.
+// end::rsvp[]
 
 === Set reminders : `setReminder`
 
