@@ -31,7 +31,8 @@ public class Transaction {
     private Drink drinkTransacted;
     private Quantity quantityTransacted;
     private Price amountMoney;
-    // TODO: create unique id based on time?
+    private long id;
+
 
     public Transaction(TransactionType transactionType, Drink drinkTransacted,
                        Quantity quantityTransacted, Price amountMoney) {
@@ -41,6 +42,7 @@ public class Transaction {
         this.quantityTransacted = quantityTransacted;
         this.amountMoney = amountMoney;
         transactionDate = new Date();
+        id = new java.util.Date().getTime();
     }
 
     /*
@@ -68,6 +70,11 @@ public class Transaction {
         return quantityTransacted;
     }
 
+    private long getId() {
+        return id;
+    }
+
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -82,28 +89,31 @@ public class Transaction {
                 && getTransactionDate().equals(that.getTransactionDate())
                 && getDrinkTransacted().isSameDrink(that.getDrinkTransacted())
                 && getQuantityTransacted().equals(that.getQuantityTransacted())
-                && getAmountMoney().equals(that.getAmountMoney());
+                && getAmountMoney().equals(that.getAmountMoney())
+                && getId() == (that.getId());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getTransactionType(), getTransactionDate(), getDrinkTransacted(),
-                getQuantityTransacted(), getAmountMoney());
+                getQuantityTransacted(), getAmountMoney(), getId());
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(" Date: ")
+        builder.append("Date: ")
                 .append(getTransactionDate())
-                .append(" Type: ")
+                .append(", Type: ")
                 .append(getTransactionType())
-                .append(" Drink: ")
+                .append(", Drink: ")
                 .append(getDrinkTransacted())
-                .append(" Quantity: ")
+                .append(", Quantity: ")
                 .append(getQuantityTransacted())
-                .append(" Amount: ")
-                .append(getAmountMoney());
+                .append(", Amount: ")
+                .append(getAmountMoney())
+                .append(", ID: ")
+                .append(getId());
 
         return builder.toString();
     }

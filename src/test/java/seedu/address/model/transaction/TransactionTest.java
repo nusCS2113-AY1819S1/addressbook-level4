@@ -1,10 +1,14 @@
 package seedu.address.model.transaction;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.model.testutil.Assert.assertThrows;
 import static seedu.address.model.transaction.TransactionType.IMPORT;
 import static seedu.address.model.transaction.TransactionType.SALE;
-import static seedu.address.model.transaction.testUtil.TypicalTransactions.SALE_COKE;
+import static seedu.address.model.transaction.testUtil.TypicalTransactions.SALE_COKE_1;
+import static seedu.address.model.transaction.testUtil.TypicalTransactions.SALE_COKE_2;
+import static seedu.address.model.transaction.testUtil.TypicalTransactions.SALE_PEPSI;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -40,20 +44,17 @@ public class TransactionTest {
                 new Drink(new Name("bla")), null, null));
     }
 
-    // TODO: constructor
-//    @Test
-//    public void constructor_invalidInput_throwIllegalArgumentException() {
-//        assertThrows(IllegalArgumentException.class, new Transaction(TransactionType.valueOf("bla"),
-//                new Drink(new Name(VALID_DRINK_NAME)), new Quantity(VALID_DRINK_QUANTITY),
-//                new Price(VALID_TRANSACTION_AMOUNT_MONEY)));
-//}
 
     @Test
     public void equals() {
-        // same values -> return false
-        Transaction transactionA = SALE_COKE;
-        assertFalse(transactionA.equals(SALE_COKE));
+        // same values, same id -> return true
+        assertEquals(SALE_COKE_1, SALE_COKE_1);
 
+        // same values , but different id based on time -> return false
+        assertNotEquals(SALE_COKE_1, SALE_COKE_2);
+
+        // different drink -> return false
+        assertNotEquals(SALE_COKE_1, SALE_PEPSI);
     }
 
 

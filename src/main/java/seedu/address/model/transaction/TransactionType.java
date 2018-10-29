@@ -21,7 +21,7 @@ public enum TransactionType {
 
     @Override
     public String toString() {
-        return "Sale, Import";
+        return value;
     }
 
 
