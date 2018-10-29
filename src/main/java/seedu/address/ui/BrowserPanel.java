@@ -6,6 +6,8 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Platform;
+import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Worker;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
@@ -78,5 +80,13 @@ public class BrowserPanel extends UiPart<Region> {
         browser.getEngine().loadContent(event.message);
         browser.getEngine().setUserStyleSheetLocation(getClass()
             .getResource("/rendering/bootstrap.min.css").toString());
+        browser.getEngine().getLoadWorker().stateProperty()
+                .addListener((ObservableValue<? extends Worker.State> observable,
+                              Worker.State oldValue, Worker.State newValue) -> {
+                    if (newValue == Worker.State.SUCCEEDED) {
+                        browser.getEngine().executeScript("window.scrollTo(0, document.body.scrollHeight);");
+                    }
+                }
+        );
     }
 }
