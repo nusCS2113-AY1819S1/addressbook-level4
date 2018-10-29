@@ -8,10 +8,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class LoginCommandParser {
     public static final String KEY_MANAGER = "manager";
+    public static final String KEY_DEPARTMENTHEAD = "departmentHead";
     public static final String KEY_EMPLOYEE = "employee";
 
     private static final String MESSAGE_INVALID_LOGIN = "Login identity should be either the following:"
-            + "\nmanager\nemployee"
+            + "\nmanager\ndepartmentHead\nemployee"
             + "\nExample: login manager";
 
 
@@ -28,6 +29,9 @@ public class LoginCommandParser {
 
         case KEY_MANAGER:
             return new LoginCommand(KEY_MANAGER);
+
+        case KEY_DEPARTMENTHEAD:
+            return new LoginCommand(KEY_DEPARTMENTHEAD);
 
         case KEY_EMPLOYEE:
             return new LoginCommand(KEY_EMPLOYEE);

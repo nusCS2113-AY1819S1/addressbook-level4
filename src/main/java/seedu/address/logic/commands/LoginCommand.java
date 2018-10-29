@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CommandsParser;
+import seedu.address.logic.parser.DepartmentHeadParser;
 import seedu.address.logic.parser.EmployeeParser;
 import seedu.address.logic.parser.ManagerParser;
 import seedu.address.model.Model;
@@ -13,6 +14,7 @@ import seedu.address.model.Model;
 public class LoginCommand extends Command {
     public static final String COMMAND_WORD = "login";
     private static final String KEY_MANAGER = "manager";
+    private static final String KEY_DEPARTMENTHEAD = "departmentHead";
     private static final String KEY_EMPLOYEE = "employee";
     private static final String MESSAGE_INVALID_LOGIN = "Login identity should be either the following:"
             + "\nmanager\nempolyee";
@@ -28,6 +30,8 @@ public class LoginCommand extends Command {
         switch (loginIdentity) {
         case KEY_MANAGER:
             return new ManagerParser();
+        case KEY_DEPARTMENTHEAD:
+            return new DepartmentHeadParser();
         case KEY_EMPLOYEE:
             return new EmployeeParser();
         default:
