@@ -19,8 +19,8 @@ import seedu.planner.model.tag.Tag;
 public class SampleDataUtil {
     public static Limit[] getSampleLimits() {
         return new Limit[] {
-           new Limit(new Date("21-9-2018"), new Date("27-9-2018"), new MoneyFlow("-100")),
-           new Limit(new Date("20-5-2017"), new Date("27-9-2018"), new MoneyFlow("-200")),
+            new Limit(new Date("21-9-2018"), new Date("27-9-2018"), new MoneyFlow("-100")),
+            new Limit(new Date("20-5-2017"), new Date("27-9-2018"), new MoneyFlow("-200")),
         };
     }
 
