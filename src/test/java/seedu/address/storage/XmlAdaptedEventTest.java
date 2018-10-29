@@ -35,7 +35,7 @@ public class XmlAdaptedEventTest {
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_VENUE = BENSON.getVenue().toString();
     private static final String VALID_DATETIME = BENSON.getDateTime().toString();
-    private static final String VALID_COMMENT = "This is a comment"; //TODO for Comment
+    private static final String VALID_COMMENT = "{span}Comment Section{/span}{ol}{/ol}"; //TODO for Comment
     private static final List<XmlAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(XmlAdaptedTag::new)
             .collect(Collectors.toList());
