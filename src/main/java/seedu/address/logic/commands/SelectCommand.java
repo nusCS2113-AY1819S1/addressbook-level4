@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import seedu.address.commons.core.EventsCenter;
@@ -13,6 +12,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.EventContainsAttendeePredicate;
+import seedu.address.model.event.EventDate;
 import seedu.address.model.person.Person;
 
 //@@author jieliangang
@@ -32,14 +32,14 @@ public class SelectCommand extends Command {
     public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Selected Person: %1$s";
 
     private final Index targetIndex;
-    private final LocalDate date;
+    private final EventDate date;
 
     public SelectCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
         this.date = null;
     }
 
-    public SelectCommand(Index targetIndex, LocalDate date) {
+    public SelectCommand(Index targetIndex, EventDate date) {
         this.targetIndex = targetIndex;
         this.date = date;
     }

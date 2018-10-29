@@ -4,13 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static seedu.address.storage.XmlAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.TypicalEvents.EVENT_1;
 
-import java.time.format.DateTimeParseException;
-
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.EndTime;
+import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Location;
 import seedu.address.model.event.StartTime;
@@ -19,7 +18,7 @@ import seedu.address.testutil.Assert;
 public class XmlAdaptedEventTest {
     private static final String INVALID_EVENT_NAME = "CS@3$%?/>21";
     private static final String INVALID_DESCRIPTION = "LOL $$$$ ";
-    private static final String INVALID_DATE = "2018-9-28";
+    private static final String INVALID_DATE = "2018-13-28";
     private static final String INVALID_STARTTIME = "25:00";
     private static final String INVALID_ENDTIME = "25:00";
     private static final String INVALID_LOCATION = "G!0 home sleep";
@@ -62,7 +61,8 @@ public class XmlAdaptedEventTest {
         XmlAdaptedEvent event =
                 new XmlAdaptedEvent(VALID_EVENT_NAME, VALID_DESCRIPTION, INVALID_DATE, VALID_STARTTIME, VALID_ENDTIME,
                         VALID_LOCATION);
-        Assert.assertThrows(DateTimeParseException.class, event::toModelType);
+        String expectedMessage = EventDate.MESSAGE_DATE_CONSTRAINTS;
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
     }
 
 

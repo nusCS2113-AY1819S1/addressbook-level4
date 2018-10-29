@@ -4,11 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
-import java.time.LocalDate;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.EventDate;
 
 
 /**
@@ -36,7 +35,7 @@ public class SelectCommandParser implements Parser<SelectCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            LocalDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+            EventDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
             return new SelectCommand(index, date);
         }
 
