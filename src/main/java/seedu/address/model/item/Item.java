@@ -10,7 +10,7 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Item in the address book.
+ * Represents a Item in the Stock List.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Item {
@@ -121,7 +121,7 @@ public class Item {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, quantity, minQuantity, status, tags);
+        return Objects.hash(name, quantity, minQuantity, status, loststatus, tags);
     }
 
     @Override
