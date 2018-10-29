@@ -2,8 +2,8 @@ package seedu.planner.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.planner.logic.commands.LimitCommand.MESSAGE_BASIC_SPEND;
 import static seedu.planner.logic.commands.LimitCommand.MESSAGE_BASIC_EARNED;
+import static seedu.planner.logic.commands.LimitCommand.MESSAGE_BASIC_SPEND;
 import static seedu.planner.logic.commands.LimitCommand.MESSAGE_EXCEED;
 import static seedu.planner.logic.commands.LimitCommand.MESSAGE_NOT_EXCEED;
 
@@ -218,7 +218,7 @@ public class ModelManager extends ComponentManager implements Model {
                     limit.getDateStart(), limit.getDateEnd(),
                     -1 * limit.getLimitMoneyFlow().toDouble(), totalMoney)
                     + MESSAGE_NOT_EXCEED;
-        }else if (isExceeded) {
+        } else if (isExceeded) {
             output = String.format(MESSAGE_BASIC_SPEND,
                     limit.getDateStart(), limit.getDateEnd(),
                     -1 * limit.getLimitMoneyFlow().toDouble(), -1 * totalMoney)
