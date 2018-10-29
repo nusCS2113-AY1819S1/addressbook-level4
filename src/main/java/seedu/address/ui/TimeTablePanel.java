@@ -12,7 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.TimeTableChangedEvent;
+import seedu.address.commons.events.model.DisplayedTimeTableChangedEvent;
 import seedu.address.model.person.TimeSlot;
 import seedu.address.model.person.TimeTable;
 
@@ -148,7 +148,7 @@ public class TimeTablePanel extends UiPart<Region> {
 
 
     @Subscribe
-    private void handleTimeTableChangedEvent(TimeTableChangedEvent event) {
+    private void handleTimeTableChangedEvent(DisplayedTimeTableChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadTimeTable(event.getNewTimeTable());
     }

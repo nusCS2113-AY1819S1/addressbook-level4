@@ -12,7 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
-import seedu.address.commons.events.model.TimeTableChangedEvent;
+import seedu.address.commons.events.model.DisplayedTimeTableChangedEvent;
 import seedu.address.commons.events.security.LogoutEvent;
 import seedu.address.model.person.CombinedFriendPredicate;
 import seedu.address.model.person.CombinedOtherPredicate;
@@ -81,8 +81,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /** Raises an event to indicate the timetable has changed */
-    private void indicateTimeTableChanged() {
-        raise(new TimeTableChangedEvent(timeTable));
+    private void indicateDisplayedTimeTableChanged() {
+        raise(new DisplayedTimeTableChangedEvent(timeTable));
     }
 
     @Override
@@ -116,7 +116,7 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(timeTable);
 
         this.timeTable.updateTimeTable(timeTable);
-        indicateTimeTableChanged();
+        indicateDisplayedTimeTableChanged();
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -179,7 +179,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
 
         // TODO: Implement after user comes online
-        // indicateTimeTableChanged(user.getTimeTable());
+        // indicateDisplayedTimeTableChanged(user.getTimeTable());
     }
 
     @Override
@@ -188,7 +188,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
 
         // TODO: Implement after user comes online
-        // indicateTimeTableChanged(user.getTimeTable());
+        // indicateDisplayedTimeTableChanged(user.getTimeTable());
     }
 
     @Override
