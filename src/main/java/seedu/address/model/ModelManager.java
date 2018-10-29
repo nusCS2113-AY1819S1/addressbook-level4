@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -19,6 +20,9 @@ import seedu.address.model.budgetelements.ClubBudgetElements;
 import seedu.address.model.clubbudget.FinalClubBudget;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.person.Person;
+import seedu.address.model.searchhistory.KeywordType;
+import seedu.address.model.searchhistory.KeywordsRecord;
+import seedu.address.model.searchhistory.ReadOnlyKeywordsRecord;
 import seedu.address.model.searchhistory.SearchHistoryManager;
 import seedu.address.model.searchhistory.exceptions.EmptyHistoryException;
 
@@ -29,6 +33,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final SearchHistoryManager<Person> searchHistoryManager = new SearchHistoryManager<>();
+    private final KeywordsRecord keywordsRecord = new KeywordsRecord();
     private final VersionedLoginBook versionedLoginBook;
     private final VersionedAddressBook versionedAddressBook;
     private final VersionedClubBudgetElementsBook versionedClubBudgetElementsBook;
@@ -68,7 +73,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyAddressBook newData) {
-        searchHistoryManager.clearSearchHistory();
+        resetSearchHistoryToInitialState();
         versionedAddressBook.resetData(newData);
         indicateAddressBookChanged();
     }
@@ -155,14 +160,13 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addPerson(Person person) {
         versionedAddressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        resetSearchHistoryToInitialState();
         indicateAddressBookChanged();
     }
 
     @Override
     public void updatePerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         versionedAddressBook.updatePerson(target, editedPerson);
         indicateAddressBookChanged();
     }
@@ -217,12 +221,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return FXCollections.unmodifiableObservableList(filteredPersons);
-    }
-
-    @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
-        requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
     }
 
     //=========== Filtered Clubs List Accessors =============================================================
@@ -350,6 +348,7 @@ public class ModelManager extends ComponentManager implements Model {
         } else {
             filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
         }
+        keywordsRecord.undoKeywordsHistory();
     }
 
     @Override
@@ -363,6 +362,18 @@ public class ModelManager extends ComponentManager implements Model {
     public void resetSearchHistoryToInitialState() {
         searchHistoryManager.clearSearchHistory();
         filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
+        keywordsRecord.clearKeywordsHistory();
+    }
+
+    @Override
+    public void recordKeywords(KeywordType type, List<String> keywords) {
+        requireAllNonNull(keywords);
+        keywordsRecord.recordKeywords(type, keywords);
+    }
+
+    @Override
+    public ReadOnlyKeywordsRecord getReadOnlyKeywordsRecord() {
+        return keywordsRecord;
     }
 
     @Override
