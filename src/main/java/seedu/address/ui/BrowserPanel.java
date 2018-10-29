@@ -12,6 +12,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.OpenStockListVersionEvent;
 import seedu.address.commons.events.ui.ItemPanelSelectionChangedEvent;
 import seedu.address.model.item.Item;
 
@@ -21,6 +22,7 @@ import seedu.address.model.item.Item;
 public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
+    public static final String FILE_PAGE = "fileaspage.html";
     public static final String SEARCH_PAGE_URL =
             "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
 
@@ -58,6 +60,14 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     /**
+     * Loads the specified .xml file as a .html page.
+     */
+    private void loadFileAsPage() {
+        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + FILE_PAGE);
+        loadPage(defaultPage.toExternalForm());
+    }
+
+    /**
      * Frees resources allocated to the browser.
      */
     public void freeResources() {
@@ -68,5 +78,11 @@ public class BrowserPanel extends UiPart<Region> {
     private void handleItemPanelSelectionChangedEvent(ItemPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadItemPage(event.getNewSelection());
+    }
+
+    @Subscribe
+    private void handleOpenStockListVersionEvent (OpenStockListVersionEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        loadFileAsPage();
     }
 }
