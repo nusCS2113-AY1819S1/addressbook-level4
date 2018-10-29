@@ -31,5 +31,7 @@ public class Loststatus {
     public void setDefaultValues(int quantity) {
         loststatus.set(LOSTSTATUS_FOUND, quantity);
         loststatus.set(LOSTSTATUS_LOST, 0);
+
     }
+
 }
