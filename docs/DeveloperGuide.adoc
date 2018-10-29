@@ -444,20 +444,56 @@ Step 2. The 'tag append' command calls `EditCommand` to all the items in the sto
 
 === Lost and Found feature
 ==== Current Implementation
+The Lost and Found mechanism is facilitated by `LostCommand` and `FoundCommand`. These two commands extend `Command`. And two class: LostDescriptor and Found Descriptor are created as well. The 2 commands implement the following operations:
+* `LostCommand#lost()` -- Lost an item with its number from the Stock List.
+* `FoundCommand#found()` --  Found a number of lost items from the Stock List.
+
+Given below are example usage scenarios and how the Lost and Found mechanism behaves at each step.
+
+Scenario 1.
+
+Step 1. The user executes `lost 1 q/20` command to indicate 20 Arduinos are lost from the Stock List.
+
+Step 2. The `LostDescriptor` consists of the lost quantity of the item.
+
+Step 3. The `lost` command firstly calls `getFilteredItemList()` to get the item of the given index and its original quantity.
+
+Step 4. Then `LostDescriptor` will be called and the lost quantity of the item will be returned.
+
+Step 5. By using the original quantity of the item minus the lost quantity, the updated quantity of the item will be got.
+
+Step 6. A copy is created and the change of the quantity is made to the copy. The copy then replaces the original item.
+
+Step 7. The updated item list and success message is shown to the user. Updates are committed to the storage.
+
+Scenario 2.
+
+Step 1. The user executes `found 1 q/20` command to indicate 20 lost Arduinos from the Stock List are found.
+
+Step 2. The `FoundDescriptor` consists of the found quantity of the item.
+
+Step 3. The `found` command firstly calls `getFilteredItemList()` to get the item of the given index and its original quantity.
+
+Step 4. Then `FoundDescriptor` will be called and the found quantity of the item will be returned.
+
+Step 5. By using the original quantity of the item adds the found quantity, the updated quantity of the item will be got.
+
+Step 6. A copy is created and the change of the quantity is made to the copy. The copy then replaces the original item.
+
+Step 7. The updated item list and success message is shown to the user. Updates are committed to the storage.
 
 ==== Design Considerations
 
 ===== Aspect: How Lost and Found executes
 
-* **Alternative 1** (current choice) Create a lost&found list to record the lost&found history.
-** Pros: Able to list all the lost&found records and history.
-** Cons: May have performance issues in terms of usage.
 
-* **Alternative 2** Just do the same way as Change Status to change the quantity of the item in the StockList.
+* **Alternative 1** (current choice) When executing lost or found command, update the quantity of the item in the StockList.
 ** Pros: Easy to handle while only increasing and decreasing the quantity will be used and no need to record all the lost history.
 ** Cons: Unable to list all the lost and found history.
-// end::lostcommand[],foundcommand[],lost&foundcommand[]
 
+* **Alternative 2** Create a lost&found list to record the lost&found history.
+** Pros: Able to list all the lost&found records and history.
+** Cons: May have performance issues in terms of usage.
 
 === Logging
 
