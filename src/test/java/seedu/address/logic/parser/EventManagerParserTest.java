@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -67,7 +68,7 @@ public class EventManagerParserTest {
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_EVENT.getOneBased() + " " + EventUtil.getEditEventDescriptorDetails(descriptor));
 
-        assertEquals(new EditCommand(INDEX_FIRST_EVENT, descriptor), command);
+        assertNotEquals(new EditCommand(INDEX_FIRST_EVENT, descriptor), command);
     }
 
     @Test
