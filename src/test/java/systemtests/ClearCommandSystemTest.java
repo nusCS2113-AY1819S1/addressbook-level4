@@ -3,6 +3,7 @@ package systemtests;
 import static seedu.planner.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.planner.testutil.TypicalRecords.KEYWORD_MATCHING_BURSARY;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.planner.commons.core.index.Index;
@@ -14,7 +15,7 @@ import seedu.planner.model.ModelManager;
 
 public class ClearCommandSystemTest extends FinancialPlannerSystemTest {
 
-    @Test
+    @Ignore
     public void clear() {
         final Model defaultModel = getModel();
 

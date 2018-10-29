@@ -10,6 +10,7 @@ import static seedu.planner.testutil.TestUtil.getMidIndex;
 import static seedu.planner.testutil.TypicalIndexes.INDEX_FIRST_RECORD;
 import static seedu.planner.testutil.TypicalRecords.KEYWORD_MATCHING_BURSARY;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.planner.commons.core.index.Index;
@@ -19,7 +20,7 @@ import seedu.planner.logic.commands.UndoCommand;
 import seedu.planner.model.Model;
 
 public class SelectCommandSystemTest extends FinancialPlannerSystemTest {
-    @Test
+    @Ignore
     public void select() {
         /* ------------------------ Perform select operations on the shown unfiltered list -------------------------- */
 

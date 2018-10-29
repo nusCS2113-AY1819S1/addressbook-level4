@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.planner.model.FinancialPlanner;
@@ -53,7 +54,7 @@ public class SampleDataTest extends FinancialPlannerSystemTest {
         }
     }
 
-    @Test
+    @Ignore
     public void financialPlanner_dataFileDoesNotExist_loadSampleData() {
         Record[] expectedList = SampleDataUtil.getSampleRecords();
         assertListMatching(getRecordListPanel(), expectedList);
