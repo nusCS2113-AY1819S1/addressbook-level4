@@ -234,6 +234,15 @@ This section describes some noteworthy details on how certain features are imple
 ==== Current Implementation
 The shortlist mechanism is facilitated by `select`, `selectCompany` and `selectJob` command.
 It extends `CompanyBook` with a list of shortlisted candidate(s) for each job offer, stored internally as a `shortlistedCandidateList`.
+
+It is a 5-stage process supported by `LogicManager` by keeping track of the `LogicState`.
+
+. `primary`
+. `SelectCompany`
+. `SelectJob`
+. `SelectCandidate`
+. `ShortlistCandidate`
+
 Given below is an example usage scenario and how the shortlist mechanism behaves at each step.
 
 [NOTE]
@@ -248,9 +257,10 @@ Assume that there are candidates and companies present in the data of RecruitBoo
 [NOTE]
 `shortlistedCandidateList` is empty upon creation of the `Cashier` object.
 
-. User executes `shortlist` command. RecruitBook enters a 4-stage process to shortlist a candidate for a job offer.
+. User executes `shortlist` command. RecruitBook enters Stage 2 of the shortlisting process to shortlist a candidate for a job offer.
 This is implemented by `LogicManager` where `setLogicState` is called in each stage to connect one after another. User will need to execute
-`cancel` command to exit from the shortlist process. The 4-stage process is described in order below.
+`cancel` command to exit from the shortlist process. The 5-stage process is described in order below.
+.. `shortlist` -> User initializes the shortlisting process.
 .. `selectCompany x` -> User selects the company of the job offer.
 .. `selectJob x` -> User selects the job offer.
 .. `select x` -> User selects the candidate to shortlist.
@@ -269,7 +279,7 @@ You can access this list by calling `selectedJob.getShortlistedCandidateList()`.
 * **Alternative 1 (current choice):** Use existing `select`, `selectCompany` and `selectJob` commands.
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
-* **Alternative 2:** Shortlist command executes the 4-stage process by itself.
+* **Alternative 2:** Shortlist command executes the 5-stage process by itself.
 ** Pros: Does not need to rely on `LogicManager` to facilitate the process.
 ** Cons: We must implement 3 fields for user input `shortlist Candidate/[input] Company/[input] Job/[input]` and store separately from the
 Candidate Book and Company Book. Furthermore, we have to filter by job offer and store the data into an observable list on the UI
@@ -323,9 +333,30 @@ This means the default view of RecruitBook is the `Company Book`.
 
 . `switchToCandidateBook` method places the `CandidateDetailsPanel` into panelViewPlaceholder to switch the view
 [TIP]
-In order to add a panel into panelViewPlaceholder, the existing panel needs to be removed so that there will not be duplicated panels
-inside panelViewPlaceholder. If there a panel is duplicated, it will give errors.
+In order to add a panel into `panelViewPlaceholder`, the existing panel needs to be removed so that there will not be duplicated panels
+inside `panelViewPlaceholder`. There will be a compilation error if there are duplicated panels.
 
+==== Design Considerations
+
+===== Aspect: How switch feature executes
+
+* **Alternative 1 (current choice):** Use `EventsCenter` to post events and `MainWindow` to handle these events.
+** Pros: Easy to implement. Neat and clean code with less coupling. `MainWindow` has private methods and variables to prevent unauthorised access
+for better integrity purposes.
+** Cons: -
+* **Alternative 2:** Allow all methods in MainWindow to be static and public.
+** Pros: Other classes can have easy access to the switching methods and their variables.
+** Cons: May face integrity issues due to public access of MainWindow. Increases unnecessary coupling.
+
+===== Aspect: Data structure to support the switch feature
+* **Alternative 1 (current choice):** The only variable that `MainWindow` has to keep track of is `currentBook`.
+** Pros: Easy to keep track as `currentBook` is set to `candidateBook` or `companyBook` accordingly.
+** Cons: `currentBook` is a string variable. Misspelling of `candidateBook` or `companyBook` in code may result in a bug.
+* **Alternative 2:** Store `currentBook` as boolean `isCandidateBook`, with the boolean returning true if the current book is Candidate Book,
+and returning false if the current book is Company Book.
+** Pros: Eliminates the possibility of misspelling the books.
+** Cons: Can be confusing for multiple contributors. There is also an assumption that there are only 2 distinct
+cases of the view of `panelViewPlaceholder`, which is not the case as we introduced another view `shortlistPanel`.
 // end::switchbook[]
 
 // tag::undoredo[]
