@@ -13,7 +13,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.storage.ScriptSetupTest;
 import seedu.address.testutil.Assert;
 
 public class FileUtilTest {
@@ -44,7 +43,7 @@ public class FileUtilTest {
 
         //By checking with a text file in another location, there seems to be a difference in length of the files
         //File helloWorldTestFile = new File(classLoader.getResource(ScriptSetupTest.TEST_FILES_LOCATION
-               // + helloWorldText + TextExtension).getFile());
+        // + helloWorldText + TextExtension).getFile());
 
         File helloWorldTestFile = new File(FileUtil.getRootLocation()
                 + SCRIPTS_LOCATION + helloWorldText + TextExtension);
