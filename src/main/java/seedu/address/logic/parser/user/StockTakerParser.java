@@ -17,7 +17,6 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.SellCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.user.ChangePasswordCommand;
 import seedu.address.logic.commands.user.LogoutCommand;
@@ -25,7 +24,6 @@ import seedu.address.logic.parser.DeleteCommandParser;
 import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.logic.parser.FindCommandParser;
 import seedu.address.logic.parser.SelectCommandParser;
-import seedu.address.logic.parser.SellCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 
@@ -57,30 +55,30 @@ public class StockTakerParser {
 
         switch (commandWord) {
 
-        case SellCommand.COMMAND_WORD:
-            return new SellCommandParser ().parse (arguments);
+        //case SellDrinkCommand.COMMAND_WORD:
+        //    return new SellCommandParser().parse(arguments);
 
-        case ChangePasswordCommand.COMMAND_WORD:
-            return new ChangePasswordCommandParser ().parse(arguments);
+        //case ChangePasswordCommand.COMMAND_WORD:
+        //    return new ChangePasswordCommandParser().parse(arguments);
 
 
         case LogoutCommand.COMMAND_WORD:
             return new LogoutCommand ();
         //existing command
         case EditCommand.COMMAND_WORD:
-            return new EditCommandParser ().parse(arguments);
+            return new EditCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
-            return new SelectCommandParser ().parse(arguments);
+            return new SelectCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser ().parse(arguments);
+            return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
-            return new FindCommandParser ().parse(arguments);
+            return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();

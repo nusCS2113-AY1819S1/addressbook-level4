@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.user;
+package seedu.address.logic.drinkcommands.user;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_ACCOUNTANT;
@@ -6,28 +6,24 @@ import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_ADMI
 import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_MANAGER;
 import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_STOCK_TAKER;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_AUTHENTICATION_LEVEL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
-
+import static seedu.address.logic.drinkparser.CliSyntax.PREFIX_AUTHENTICATION_LEVEL;
+import static seedu.address.logic.drinkparser.CliSyntax.PREFIX_PASSWORD;
+import static seedu.address.logic.drinkparser.CliSyntax.PREFIX_USERNAME;
 
 import seedu.address.authentication.PasswordUtils;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
+import seedu.address.logic.drinkcommands.DrinkCommandResult;
+import seedu.address.logic.drinkcommands.exceptions.DrinkCommandException;
+
+import seedu.address.model.DrinkModel;
+import seedu.address.model.LoginInfoManager;
 import seedu.address.model.user.AuthenticationLevel;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.UserName;
-import seedu.address.model.user.manager.ManagerModel;
-
-
 /**
  * Adds a person to the address book.
  */
-public class CreateAccountCommand extends Command {
+public class CreateAccountCommand extends UserCommand {
 
     public static final String COMMAND_WORD = "createAccount";
     public static final String MESSAGE_DUPLICATE_USERNAME = "This userName already exists";
@@ -46,37 +42,36 @@ public class CreateAccountCommand extends Command {
     private final UserName userName;
     private final Password password;
     private final AuthenticationLevel authenticationLevel;
-
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-
     public CreateAccountCommand (UserName userName, Password password, AuthenticationLevel authenticationLevel) {
-        requireAllNonNull (userName, password, authenticationLevel);
-
+        requireNonNull(userName);
+        requireNonNull (password);
+        requireNonNull (authenticationLevel);
         Password hashedPassword = new Password (PasswordUtils.generateSecurePassword (password.toString ()));
 
         this.userName = userName;
         this.password = hashedPassword;
         this.authenticationLevel = authenticationLevel;
     }
-
-
     @Override
-    public CommandResult execute(LoginInfoManager loginInfoManager, CommandHistory history)
-            throws CommandException {
+    public DrinkCommandResult execute(LoginInfoManager loginInfoManager, CommandHistory history)
+            throws DrinkCommandException {
         requireNonNull(loginInfoManager);
 
-        if (loginInfoManager.isUserNameExist(userName.toString())) {
-            throw new CommandException(MESSAGE_DUPLICATE_USERNAME);
+        if (loginInfoManager.isUserNameExist (userName.toString ())) {
+            throw new DrinkCommandException(MESSAGE_DUPLICATE_USERNAME);
         }
-        loginInfoManager.createNewAccount(userName, password, authenticationLevel);
-        return new CommandResult(MESSAGE_SUCCESS);
+        loginInfoManager.createNewAccount (userName, password, authenticationLevel);
+        return new DrinkCommandResult(MESSAGE_SUCCESS);
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public DrinkCommandResult execute (DrinkModel model , CommandHistory history) {
         return null;
     }
+
+
 
 }

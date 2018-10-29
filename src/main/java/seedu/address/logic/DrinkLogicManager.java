@@ -5,29 +5,26 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.drinkcommands.DrinkCommand;
+import seedu.address.logic.drinkcommands.DrinkCommandResult;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.user.AccountantParser;
 import seedu.address.logic.parser.user.AdminParser;
 import seedu.address.logic.parser.user.ManagerParser;
 import seedu.address.logic.parser.user.StockTakerParser;
+import seedu.address.model.DrinkModel;
 import seedu.address.model.LoginInfoManager;
-import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.user.accountant.AccountantModel;
-import seedu.address.model.user.admin.AdminModel;
-import seedu.address.model.user.manager.ManagerModel;
-import seedu.address.model.user.stocktaker.StockTakerModel;
+import seedu.address.model.drink.Drink;
+
 
 /**
  * The main LogicManager of the app.
  */
-public class LogicManager extends ComponentManager implements Logic {
+public class DrinkLogicManager extends ComponentManager implements DrinkLogic {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
-    private final Model model;
+    private final DrinkModel model;
     private LoginInfoManager loginInfoManager;
     private final CommandHistory history;
     private final AddressBookParser addressBookParser;
@@ -36,8 +33,8 @@ public class LogicManager extends ComponentManager implements Logic {
     private final ManagerParser managerParser;
     private final AccountantParser accountantParser;
 
-    public LogicManager(Model model) {
-
+    public DrinkLogicManager(DrinkModel model, LoginInfoManager loginInfoManager) {
+        this.loginInfoManager = loginInfoManager;
         this.model = model;
         history = new CommandHistory();
         addressBookParser = new AddressBookParser();
@@ -48,30 +45,38 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public CommandResult execute(String commandText) throws CommandException, ParseException {
+    public DrinkCommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
-            Command command;
+            DrinkCommand command;
+            /*
             if (model instanceof AdminModel) {
-                command = adminParser.parseCommand(commandText);
+                command = adminParser.parseCommand (commandText);
             } else if (model instanceof StockTakerModel) {
-                command = stockTakerParser.parseCommand(commandText);
+                command = stockTakerParser.parseCommand (commandText);
             } else if (model instanceof AccountantModel) {
-                command = accountantParser.parseCommand(commandText);
+                command = accountantParser.parseCommand (commandText);
             } else if (model instanceof ManagerModel) {
-                command = managerParser.parseCommand(commandText);
+                command = managerParser.parseCommand (commandText);
             } else {
-                command = addressBookParser.parseCommand(commandText);
+                command = addressBookParser.parseCommand (commandText);
+            }
+
+            if (command instanceof UserCommand) {
+                UserCommand userCommand = (UserCommand) command;
+                return userCommand.execute(loginInfoManager, history);
             }
             return command.execute(model, history);
+            */
+            return null; // TODO: add this part back in
         } finally {
             history.add(commandText);
         }
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Drink> getFilteredDrinkList() {
+        return model.getFilteredDrinkList();
     }
 
     @Override
@@ -79,3 +84,4 @@ public class LogicManager extends ComponentManager implements Logic {
         return new ListElementPointer(history.getHistory());
     }
 }
+

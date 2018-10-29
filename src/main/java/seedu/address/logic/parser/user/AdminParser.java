@@ -6,7 +6,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddItemCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -58,11 +57,12 @@ public class AdminParser {
 
         switch (commandWord) {
 
-        case AddItemCommand.COMMAND_WORD:
-            return new AddItemCommandParser ().parse (arguments);
+        // case AddItemCommand.COMMAND_WORD:
+        //    return new AddDrinkCommandParser().parse (arguments);
 
-        case ChangePasswordCommand.COMMAND_WORD:
-            return new ChangePasswordCommandParser ().parse(arguments);
+        //case ChangePasswordCommand.COMMAND_WORD:
+        //    return new ChangePasswordCommandParser ().parse(arguments);
+
 
         case CreateAccountCommand.COMMAND_WORD:
             return new CreateAccountCommandParser ().parse (arguments);
@@ -75,19 +75,19 @@ public class AdminParser {
             return new LogoutCommand ();
         //existing command
         case EditCommand.COMMAND_WORD:
-            return new EditCommandParser ().parse(arguments);
+            return new EditCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
-            return new SelectCommandParser ().parse(arguments);
+            return new SelectCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser ().parse(arguments);
+            return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
-            return new FindCommandParser ().parse(arguments);
+            return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
