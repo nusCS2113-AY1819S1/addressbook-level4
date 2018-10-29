@@ -183,7 +183,7 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Import/ Export ==============================================================================
     @Override
     public void exportAddressBook() throws IOException {
-        CsvWriter csvWriter = new CsvWriter(getFilteredPersonList(), userPrefs.getExportCsvFilePath());
+        CsvWriter csvWriter = new CsvWriter(versionedAddressBook.getPersonList(), userPrefs.getExportCsvFilePath());
         csvWriter.write();
     }
 
