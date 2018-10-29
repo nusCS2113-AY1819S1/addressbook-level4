@@ -337,7 +337,7 @@ Adds "What is the attire to wear for this event?" into event 5 comment section
 === Reply Comment : `replyComment`
 
 Admin/User: Replies a comment +
-Format: `replyComment INDEX LINE STRING`
+Format: `replyComment INDEX L/LINE C/STRING`
 
 Examples:
 
@@ -349,7 +349,7 @@ Adds the comment "What is the attire to wear for the event?" into event 2 commen
 === Delete Comment : `deleteComment`
 
 Admin: Deletes a comment +
-Format: `deleteComment INDEX LINE`
+Format: `deleteComment INDEX L/LINE`
 
 Examples:
 
@@ -409,11 +409,9 @@ e.g. `unregister 1`
 e.g. `setReminder 1`
 * *View Reminders* : `reminders` +
 e.g. `reminder`
-* *showComments* : `showComments INDEX` +
-e.g. `showComments 1`
-* *addComment* : `addCeomment INDEX STRING` +
-e.g. `add Comments 1 "HELLO"`
-* *replyComment* : `replyComment EVENTINDEX LINEINDEX STRING` +
-e.g. `replyComments 1 2 "Hello"`
-* *deleteComment* : `deleteComment EVENT INDEX LINEINDEX STRING` +
-e.g. `deleteComment 1 2`
+* *addComment* : `addComment INDEX C/STRING` +
+e.g. `add Comments 1 C/HELLO`
+* *replyComment* : `replyComment INDEX L/LINEINDEX C/STRING` +
+e.g. `replyComment 1 L/2 C/Hello
+* *deleteComment* : `deleteComment INDEX L/LINEINDEX` +
+e.g. `deleteComment 1 L/2`
