@@ -337,7 +337,6 @@ Format: +
 * For *summary by month*, START_MONTH/END_MONTH must in the format of `mmm-yyyy`, `mmm` represents the month with its three letter representations, and
 `yyyy` represents the year in its numerical form.
 * Note that for mmm, it is case-insensitive, meaning both *"APR"* and *"apr"* are accepted
-*
 ****
 
 Examples:
@@ -353,6 +352,33 @@ Screenshot of app when `summary date d/1-1-2018 12-12-2018` is run
 
 image::UiSummaryByMonthTable.png[width="790"]
 Screenshot of app when `summary month d/apr-2018 sep-2018` is run
+
+=== Showing a breakdown of total expenses and income into categories: `stats`
+
+Shows a breakdown of total expenses and income into categories and displays these information in a pie chart. +
+Format:`stats d/START_DATE END_DATE`
+
+****
+* START_DATE/END_DATE follow the same configurations as date parameters required when adding records. It is in the form of
+*dd-mm-yyyy* where *dd* represents day, *mm* represents month and *yyyy* represents the year. *dd* and *mm* both require 1 to 2 digits while
+*yyyy* requires exactly 4 digits.
+****
+
+Once the command has been executed, 2 tabs will appear showing a pie chart containing data that is relevant in the range. +
+Note that due to label constraints, some labels may not be displaying correctly if they are overlapping with other labels. This happens when the pie slice
+is too small. To improve readability, we have decided to hide some labels in such scenarios.
+
+Examples:
+
+* `stats d/1-1-2018 12-12-2018`
+
+Below are some screenshots of what you can see when the command has been accepted.
+
+image::UiPieChartExpense.png[width="790"]
+Screenshot of app displaying expense breakdown when `stats d/1-1-2018 12-12-2018` is run
+
+image::UiPieChartIncome.png[width="790"]
+Screenshot of app displaying income breakdown when `stats d/1-1-2018 12-12-2018` is run
 
 === Selecting a record : `select`
 
