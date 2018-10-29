@@ -31,8 +31,8 @@ public class UnregisterCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_REGISTER_EVENT_SUCCESS = "Unregistered for event: %1$s";
-    public static final String MESSAGE_ALREADY_REGISTERED = "Not registered for event.";
+    public static final String MESSAGE_UNREGISTER_EVENT_SUCCESS = "Unregistered for event: %1$s";
+    public static final String MESSAGE_NOT_REGISTERED = "Not registered for event.";
 
     private final Index targetIndex;
 
@@ -50,28 +50,26 @@ public class UnregisterCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
-        /*Event eventToRegister = filteredEventList.get(targetIndex.getZeroBased());
+        Event eventToUnregister = filteredEventList.get(targetIndex.getZeroBased());
 
         String attendeeName = model.getUsername().toString();
 
-        Set<Attendee> attendeeSet = new HashSet<>(eventToRegister.getAttendance());
-        int numAttendees = attendeeSet.size();
-        attendeeSet.add(new Attendee(attendeeName));
+        Set<Attendee> attendeeSet = new HashSet<>(eventToUnregister.getAttendance());
 
-        if (attendeeSet.size() == numAttendees) {
-            throw new CommandException(MESSAGE_ALREADY_REGISTERED);
+        if (!attendeeSet.remove(new Attendee(attendeeName))) {
+            throw new CommandException(MESSAGE_NOT_REGISTERED);
         }
 
         EditEventDescriptor registerEventDescriptor = new EditEventDescriptor();
         registerEventDescriptor.setAttendees(attendeeSet);
-        Event registeredEvent = createEditedEvent(eventToRegister, registerEventDescriptor);
+        Event registeredEvent = createEditedEvent(eventToUnregister, registerEventDescriptor);
 
-        model.updateEvent(eventToRegister, registeredEvent);
+        model.updateEvent(eventToUnregister, registeredEvent);
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
-        model.commitEventManager();*/
+        model.commitEventManager();
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
-        return new CommandResult(String.format(MESSAGE_REGISTER_EVENT_SUCCESS, targetIndex.getOneBased()));
+        return new CommandResult(String.format(MESSAGE_UNREGISTER_EVENT_SUCCESS, targetIndex.getOneBased()));
     }
 
     @Override
