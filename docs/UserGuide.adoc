@@ -83,10 +83,10 @@ Examples:
 * `add n/Arduino q/20 m/5 t/Lab1 t/Lab2`
 
 
-=== Updating an item : `update`
+=== Editing an item : `edit`
 
-Updates an existing item in the stock list +
-Format: `update INDEX n/NAME [q/QUANTITY] [m/MINIMUM_QUANTITY] [t/TAG]`
+Edits an existing item in the stock list +
+Format: `edit INDEX n/NAME [q/QUANTITY] [m/MINIMUM_QUANTITY] [t/TAG]`
 
 ****
 * Edits the person at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​
@@ -97,7 +97,7 @@ Format: `update INDEX n/NAME [q/QUANTITY] [m/MINIMUM_QUANTITY] [t/TAG]`
 ****
 Examples:
 
-* `update 1 n/Arduino q/25 t/Lab7 t/Lab8` +
+* `edit 1 n/Arduino q/25 t/Lab7 t/Lab8` +
 Edits the name, quantity and tags of the 1st item to be `Arduino`, `25` and `Lab7`, `Lab8` respectively.
 
 === Deleting an item : `delete`
@@ -110,9 +110,9 @@ Examples:
 * `delete 1 q/20` +
 Decreases the quantity of the 1st item by 20
 
-=== Listing all items : `all`
+=== Listing all items : `list`
 Shows all items in the stock list +
-Format: `all`
+Format: `list`
 
 
 === Locating items by name: `find`
@@ -150,15 +150,25 @@ Examples:
 * `changeStatus 1 q/20 os/Ready ns/Faulty` +
 The status of 20 arduinos would be changed from Ready to Faulty
 
-=== Listing items under a specific tag: `tag`
+=== Listing items under specific tags: `tag`
 
 Finds and lists items whose tags contain any of the given keywords. This command is case insensitive +
 Format: `tag KEYWORD [MORE_KEYWORDS]
 
 Examples:
 
-* `tag Lab1` +
-Returns the items whose tags includes "Lab1"
+* `tag Lab1 Lab2` +
+Returns the items whose tags includes "Lab1" or "Lab2"
+
+=== Add tags to one item: `addTag`
+
+Add one or multiple tags to one item in the stock list by its index. +
+Format: `addTag INDEX t/ TAG [MORE_TAGS]`
+
+Examples:
+
+* `addTag 1 t/ Lab3 t/ Lab4` +
+Add tags "Lab3" and "Lab4" to the item with index 1
 
 === Creating a loan list: `loanList`
 A loan list can be created whenever a list of items loaned out needs to be kept tracked on +
