@@ -46,7 +46,6 @@ public class EventBuilder {
         venue = new Venue(DEFAULT_VENUE);
         datetime = new DateTime(DEFAULT_DATETIME);
         comment = new Comment(DEFAULT_COMMENT);
-
         tags = new HashSet<>();
         attendees = new HashSet<>();
     }
