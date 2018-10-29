@@ -4,12 +4,10 @@ import java.util.ArrayList;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * JAXB-friendly adapted version of the ClassroomAttendance.
  */
-@XmlRootElement(name = "class")
 public class XmlAdaptedClassroomAttendance {
     //class-attendance fields
     @XmlElement(name = "date", required = true, nillable = true)

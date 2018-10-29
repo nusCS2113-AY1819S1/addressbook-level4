@@ -40,20 +40,17 @@ public class ClassAddStudentAttendanceCommand extends Command {
     private static final String MESSAGE_DUPLICATE_CLASSROOM_STUDENT_ATTENDANCE = "This student already"
             + " present in class: %1$s";
 
-    private Classroom classToMarkAttendance;
     private final String className;
     private final String moduleCode;
     private final String matricNo;
     private final String date;
-    private Attendance attendance;
-
 
     public ClassAddStudentAttendanceCommand(String className, String moduleCode, String matricNo) {
-        requireAllNonNull(className, moduleCode);
+        requireAllNonNull(className, moduleCode, matricNo);
         this.className = className;
         this.moduleCode = moduleCode;
         this.matricNo = matricNo;
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(Attendance.DATE_FORMAT);
         LocalDate localDate = LocalDate.now();
         date = dtf.format(localDate);
     }
@@ -70,12 +67,12 @@ public class ClassAddStudentAttendanceCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         ClassroomManager classroomManager = ClassroomManager.getInstance();
 
-        classToMarkAttendance = classroomManager.findClassroom(className, moduleCode);
+        Classroom classToMarkAttendance = classroomManager.findClassroom(className, moduleCode);
         if (classToMarkAttendance == null) {
             return new CommandResult(MESSAGE_FAIL);
         }
 
-        attendance = classroomManager.findAttendanceForClass(classToMarkAttendance, date);
+        Attendance attendance = classroomManager.findAttendanceForClass(classToMarkAttendance, date);
         if (attendance == null) {
             attendance = new Attendance(date);
         }

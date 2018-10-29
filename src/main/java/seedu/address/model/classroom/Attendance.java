@@ -6,6 +6,8 @@ import java.util.ArrayList;
  * Represents an attendance for a classroom in the app.
  */
 public class Attendance {
+    public static final String DATE_FORMAT = "dd-MM-yyyy";
+
     private String date;
     private ArrayList<String> studentsPresent;
 
