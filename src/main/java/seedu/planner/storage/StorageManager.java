@@ -123,6 +123,18 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
+
+    @Override
+    @Subscribe
+    public void handleLimitListChangedEvent(LimitListChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
+        try {
+            saveLimitList(event.data);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    }
+
     // ================ LimitList storage methods ==============================
 
     @Override
@@ -152,14 +164,8 @@ public class StorageManager extends ComponentManager implements Storage {
         financialPlannerStorage.saveLimitList(limitList, filePath);
     }
 
-    @Override
-    @Subscribe
-    public void handleLimitListChangedEvent(LimitListChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
-        try {
-            saveLimitList(event.data);
-        } catch (IOException e) {
-            raise(new DataSavingExceptionEvent(e));
-        }
-    }
+
+
+
+
 }

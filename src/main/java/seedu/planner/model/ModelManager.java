@@ -2,6 +2,9 @@ package seedu.planner.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.planner.logic.commands.LimitCommand.MESSAGE_BASIC;
+import static seedu.planner.logic.commands.LimitCommand.MESSAGE_EXCEED;
+import static seedu.planner.logic.commands.LimitCommand.MESSAGE_NOT_EXCEED;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -90,6 +93,7 @@ public class ModelManager extends ComponentManager implements Model {
     /** Raises an event to indicate the model has changed */
     private void indicateFinancialPlannerChanged() {
         raise(new FinancialPlannerChangedEvent(versionedFinancialPlanner));
+        autoLimitCheck();
     }
 
     /** Raises an event to indicate the limit list has changed */
@@ -159,6 +163,69 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(limitIn);
         return (versionedFinancialPlanner.isExceededLimit(limitIn));
     }
+    @Override
+    public void updateLimit(Limit target, Limit editedLimit) {
+        requireAllNonNull(target, editedLimit);
+        versionedFinancialPlanner.updateLimit(target, editedLimit);
+        indicateLimitListChanged();
+    }
+
+    @Override
+    public Limit getSameDatesLimit (Date dateStart, Date dateEnd) {
+        requireAllNonNull(dateStart, dateEnd);
+        return versionedFinancialPlanner.getSameDatesLimit(dateStart, dateEnd);
+    }
+    @Override
+    public Double getTotalSpend (Limit limitIn) {
+        requireNonNull(limitIn);
+        return versionedFinancialPlanner.getTotalSpend(limitIn);
+    }
+    @Override
+    public String autoLimitCheck () {
+        String output = "";
+        int count = 1;
+        for (Limit i: limits) {
+            if (isExceededLimit(i)) {
+                output += "\n" + String.format("%d.", count++) + generateLimitOutput(true, getTotalSpend(i), i);
+            }
+        }
+        return output;
+    }
+
+    @Override
+    public String manualLimitCheck () {
+        String output = "";
+        int count = 1;
+        for (Limit i: limits) {
+            output += "\n" + String.format("%d.", count++)
+                    + generateLimitOutput(isExceededLimit(i), getTotalSpend(i), i);
+
+        }
+        return output;
+    }
+
+    /**
+     * This function is to do the auto check whenever the record changed.
+     * @param isExceeded
+     * @param limit
+     * @return
+     */
+    public String generateLimitOutput (boolean isExceeded, Double totalMoney, Limit limit) {
+        String output;
+        if (isExceeded) {
+            output = String.format(MESSAGE_BASIC,
+                    limit.getDateStart(), limit.getDateEnd(),
+                    limit.getLimitMoneyFlow().toDouble(), totalMoney)
+                    + MESSAGE_EXCEED;
+        } else {
+            output = String.format(MESSAGE_BASIC,
+                    limit.getDateStart(), limit.getDateEnd(),
+                    limit.getLimitMoneyFlow().toDouble(), totalMoney)
+                    + MESSAGE_NOT_EXCEED;
+        }
+        return output;
+    }
+
 
     //=========== Filtered Record List Accessors =============================================================
 

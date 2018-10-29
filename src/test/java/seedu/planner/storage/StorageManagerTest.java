@@ -33,8 +33,11 @@ public class StorageManagerTest {
 
     @Before
     public void setUp() {
+
         XmlFinancialPlannerStorage financialPlannerStorage = new XmlFinancialPlannerStorage(
+
                 getTempFilePath("ab"), getTempFilePath("limitList"));
+
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         storageManager = new StorageManager(financialPlannerStorage, userPrefsStorage);
     }
@@ -84,6 +87,7 @@ public class StorageManagerTest {
     @Test
     public void handleFinancialPlannerChangedEvent_exceptionThrown_eventRaised() {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
+
         Storage storage = new StorageManager(new XmlFinancialPlannerStorageExceptionThrowingStub(
                 Paths.get("dummy"), Paths.get("dummy")),
                 new JsonUserPrefsStorage(Paths.get("dummy")));
@@ -106,8 +110,10 @@ public class StorageManagerTest {
      */
     class XmlFinancialPlannerStorageExceptionThrowingStub extends XmlFinancialPlannerStorage {
 
+
         public XmlFinancialPlannerStorageExceptionThrowingStub(Path recordListFilePath, Path limitListFilePath) {
             super(recordListFilePath, limitListFilePath);
+
         }
 
         @Override

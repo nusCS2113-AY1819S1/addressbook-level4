@@ -131,6 +131,7 @@ public class XmlFinancialPlannerStorageTest {
     //TODO: Refactor the storage into 3 different storage
     @Test
     public void readAndSaveFinancialPlanner_allInOrder_success() throws Exception {
+
         Path recordListFilePath = testFolder.getRoot().toPath().resolve("TempFinancialPlanner.xml");
         Path limitListFilePath = testFolder.getRoot().toPath().resolve("TempLimitList.xml");
 
@@ -149,17 +150,21 @@ public class XmlFinancialPlannerStorageTest {
         //Recreate the readback financial planner
         FinancialPlanner readBack = new FinancialPlanner();
         //TODO: @Oscar add your limit in resetdata
+
         readBack.resetData(recordList);
+        readBack.resetLimit(limitList);
         assertEquals(original, new FinancialPlanner(readBack));
 
         //Modify data, overwrite exiting file, and read back
         original.addRecord(BURSARY);
         original.removeRecord(INDO);
+
         xmlFinancialPlannerStorage.saveRecordList(original, recordListFilePath);
         xmlFinancialPlannerStorage.saveLimitList(original, limitListFilePath);
         recordList = xmlFinancialPlannerStorage.readRecordList(recordListFilePath).get();
         limitList = xmlFinancialPlannerStorage.readLimitList(limitListFilePath).get();
         readBack = new FinancialPlanner();
+        readBack.resetLimit(limitList);
         readBack.resetData(recordList);
         assertEquals(original, new FinancialPlanner(readBack));
 
@@ -171,6 +176,7 @@ public class XmlFinancialPlannerStorageTest {
         limitList = xmlFinancialPlannerStorage.readLimitList(limitListFilePath).get();
         readBack = new FinancialPlanner();
         readBack.resetData(recordList);
+        readBack.resetLimit(limitList);
         assertEquals(original, new FinancialPlanner(readBack));
     }
 
@@ -194,8 +200,11 @@ public class XmlFinancialPlannerStorageTest {
      */
     private void saveRecordList(ReadOnlyFinancialPlanner financialPlanner, String filePath) {
         try {
+
             new XmlFinancialPlannerStorage(Paths.get(filePath), Paths.get(filePath))
+
                     .saveRecordList(financialPlanner, addToTestDataPathIfNotNull(filePath));
+
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

@@ -1,9 +1,9 @@
 package seedu.planner.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.Assert.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,9 +23,10 @@ import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
-import seedu.planner.testutil.RecordBuilder;
+import seedu.planner.testutil.LimitBuilder;
 
-public class AddCommandTest {
+
+public class LimitCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
@@ -35,56 +36,57 @@ public class AddCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void constructor_nullRecord_throwsNullPointerException() {
+    public void constructor_nullLimit_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new AddCommand(null);
+        new LimitCommand(null);
     }
 
     @Test
-    public void execute_recordAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingRecordAdded modelStub = new ModelStubAcceptingRecordAdded();
-        Record validRecord = new RecordBuilder().build();
+    public void execute_limitAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingLimitAdded modelStub = new ModelStubAcceptingLimitAdded();
+        Limit validLimit = new LimitBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validRecord).execute(modelStub, commandHistory);
+        CommandResult commandResult = new LimitCommand(validLimit).execute(modelStub, commandHistory);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validRecord), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validRecord), modelStub.recordsAdded);
+        assertEquals(modelStub.generateLimitOutput(false,
+                modelStub.getTotalSpend(validLimit), validLimit), commandResult.feedbackToUser);
+        assertEquals(Arrays.asList(validLimit), modelStub.limitsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
-    public void execute_duplicateRecord_throwsCommandException() throws Exception {
-        Record validRecord = new RecordBuilder().build();
-        AddCommand addCommand = new AddCommand(validRecord);
-        ModelStub modelStub = new ModelStubWithRecord(validRecord);
+    public void execute_sameDatesLimit_throwsCommandException() throws Exception {
+        Limit validLimit = new LimitBuilder().build();
+        LimitCommand limitCommand = new LimitCommand(validLimit);
+        ModelStub modelStub = new ModelStubWithLimit(validLimit);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_RECORD);
-        addCommand.execute(modelStub, commandHistory);
+        thrown.expectMessage(LimitCommand.MESSAGE_LIMITS_SAME_DATE);
+        limitCommand.execute(modelStub, commandHistory);
     }
 
     @Test
     public void equals() {
-        Record alice = new RecordBuilder().withName("Alice").build();
-        Record bob = new RecordBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Limit limit = new LimitBuilder().withMoneyFlow("-100").build();
+        Limit limitD = new LimitBuilder().withDateStart("16-12-1998").build();
+        LimitCommand limitCommand = new LimitCommand(limit);
+        LimitCommand limitDCommand = new LimitCommand(limitD);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(limitCommand.equals(limitCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        LimitCommand limitCommandCopy = new LimitCommand(limit);
+        assertTrue(limitCommand.equals(limitCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(limitCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(limitCommand.equals(null));
 
-        // different record -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // different limit -> returns false
+        assertFalse(limitCommand.equals(limitDCommand));
     }
 
     /**
@@ -118,6 +120,10 @@ public class AddCommandTest {
         }
 
 
+        @Override
+        public ObservableList<Record> getRecordsThisMonth() {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public ObservableList<Limit> getLimitList() {
@@ -129,20 +135,14 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Record> getRecordsThisMonth() {
-            throw new AssertionError("This method should not be called");
-        }
-
-        @Override
         public void addLimit(Limit limit) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public Double getTotalSpend(Limit limit) {
-            throw new AssertionError("This method should not be called.");
+            return 0.0;
         }
-
         @Override
         public void deleteLimit(Limit limit) {
             throw new AssertionError("This method should not be called.");
@@ -152,16 +152,19 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-
         @Override
         public boolean hasSameDateLimit(Limit limit) {
+            return false;
+        }
+
+        @Override
+        public Limit getSameDatesLimit(Date dateStart, Date dateEnd) {
             throw new AssertionError("This method should not be called.");
         }
 
-
         @Override
         public boolean isExceededLimit (Limit limit) {
-            throw new AssertionError("This method should not be called.");
+            return false;
         }
 
 
@@ -172,21 +175,17 @@ public class AddCommandTest {
 
         @Override
         public String autoLimitCheck() {
-            return "";
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public String manualLimitCheck() {
             throw new AssertionError("This method should not be called.");
         }
-        @Override
-        public String generateLimitOutput(boolean isExceeded, Double totalSpend, Limit limit) {
-            throw new AssertionError("This method should not be called.");
-        }
 
         @Override
-        public Limit getSameDatesLimit(Date dateStart, Date dateEnd) {
-            throw new AssertionError("This method should not be called.");
+        public String generateLimitOutput(boolean isExceeded, Double totalSpend, Limit limit) {
+            return "";
         }
 
         @Override
@@ -231,39 +230,45 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single record.
+     * A Model stub that contains a single limit.
      */
-    private class ModelStubWithRecord extends ModelStub {
-        private final Record record;
+    private class ModelStubWithLimit extends ModelStub {
+        private final Limit limit;
 
-        ModelStubWithRecord(Record record) {
-            requireNonNull(record);
-            this.record = record;
+        ModelStubWithLimit(Limit limit) {
+            requireNonNull(limit);
+            this.limit = limit;
         }
 
         @Override
-        public boolean hasRecord(Record record) {
-            requireNonNull(record);
-            return this.record.isSameRecord(record);
+        public boolean hasSameDateLimit(Limit limit) {
+            requireNonNull(limit);
+            return this.limit.isSameLimitDates(limit);
+        }
+
+        @Override
+        public Double getTotalSpend(Limit limit) {
+            requireNonNull(limit);
+            return this.getTotalSpend(limit);
         }
     }
 
     /**
      * A Model stub that always accept the record being added.
      */
-    private class ModelStubAcceptingRecordAdded extends ModelStub {
-        final ArrayList<Record> recordsAdded = new ArrayList<>();
+    private class ModelStubAcceptingLimitAdded extends ModelStub {
+        final ArrayList<Limit> limitsAdded = new ArrayList<>();
 
-        @Override
-        public boolean hasRecord(Record record) {
-            requireNonNull(record);
-            return recordsAdded.stream().anyMatch(record::isSameRecord);
+
+        public boolean hasSameDatesLimit(Limit limit) {
+            requireNonNull(limit);
+            return limitsAdded.stream().anyMatch(limit::isSameLimitDates);
         }
 
         @Override
-        public void addRecord(Record record) {
-            requireNonNull(record);
-            recordsAdded.add(record);
+        public void addLimit(Limit limit) {
+            requireNonNull(limit);
+            limitsAdded.add(limit);
         }
 
         @Override
@@ -276,5 +281,4 @@ public class AddCommandTest {
             return new FinancialPlanner();
         }
     }
-
 }

@@ -7,11 +7,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.planner.logic.commands.AddCommand;
+import seedu.planner.logic.commands.CheckLimitCommand;
 import seedu.planner.logic.commands.ClearCommand;
 import seedu.planner.logic.commands.Command;
 import seedu.planner.logic.commands.DeleteCommand;
 import seedu.planner.logic.commands.DeleteCommandByDateEntry;
+import seedu.planner.logic.commands.DeleteLimitCommand;
 import seedu.planner.logic.commands.EditCommand;
+import seedu.planner.logic.commands.EditLimitCommand;
 import seedu.planner.logic.commands.ExitCommand;
 import seedu.planner.logic.commands.ExportExcelCommand;
 import seedu.planner.logic.commands.FindCommand;
@@ -26,6 +29,7 @@ import seedu.planner.logic.commands.SortCommand;
 import seedu.planner.logic.commands.StatisticCommand;
 import seedu.planner.logic.commands.SummaryCommand;
 import seedu.planner.logic.commands.UndoCommand;
+
 import seedu.planner.logic.parser.exceptions.ParseException;
 
 
@@ -105,6 +109,13 @@ public class FinancialPlannerParser {
         case LimitCommand.COMMAND_WORD:
             return new LimitCommandParser().parse(arguments);
 
+        case DeleteLimitCommand.COMMAND_WORD:
+            return new DeleteLimitCommandParser().parse(arguments);
+
+        case EditLimitCommand.COMMAND_WORD:
+            return new EditLimitCommandParser().parse(arguments);
+        case CheckLimitCommand.COMMAND_WORD:
+            return new CheckLimitCommand();
         case SummaryCommand.COMMAND_WORD:
             return new SummaryCommandParser().parse(arguments);
 
@@ -113,6 +124,7 @@ public class FinancialPlannerParser {
 
         case ExportExcelCommand.COMMAND_WORD:
             return new ExportExcelCommandParser().parse(arguments);
+
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

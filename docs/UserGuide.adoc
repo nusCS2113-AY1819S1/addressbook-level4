@@ -107,6 +107,66 @@ Examples:
 * `list d/10-11-2018`
 * `list d/10-11-2018 11-11-2018`
 
+=== Adding a limit: `limit` [Oscar]
+
+Adds a limit to the FinancialPlanner +
+Format: `limit d/DATE_START DATE_END m/MONEYFLOW` +
+
+DATE_START and DATE_END indicates the starting date and ending date for the limit.
+MONEYFLOW denotes the money limit for that period of time. It only contains number(without "-" or "+"),
+which indicates that during this period of time,
+the program will warn the user once the total money spend exceeds the limit money.
+For each period of time, there is only one limit. If there is a limit which has the same
+dates with the input, the program will throw error.
+Once the limit has been set, the program will keep updating the latest information about
+each limit.
+****
+* Typical format for a Limit MONEYFLOW parameter :"100"
+** Typical example of *expense*: limit d/24-9-2018 25-9-2018 m/*100*
+****
+
+[TIP]
+The Limit MONEYFLOW can not be negative number.
+
+Examples:
+
+* `limit d/20-8-2018 30-8-2018 m/100`
+
+=== Deleting a limit: `deleteLimit` [Oscar]
+
+Adds a limit to the FinancialPlanner +
+Format: `deleteLimit d/DATE_START DATE_END +
+
+The DATE_START and DATE_END are the two elements for limit searching. Since all the limits have
+unique dates, once user input the two dates, the limit with same dates inside the
+limit list will be deleted. If there is no limit sharing the same dates, it will throw error.
+
+
+Examples:
+
+* `deleteLimit d/20-8-2018 30-8-2018`
+
+=== Editing a limit: `editLimit` [Oscar]
+
+Edit a limit to the FinancialPlanner +
+Format: `editLimit d/DATE_START DATE_END m/MONEYFLOW` +
+
+This command will edit an existing limit inside the limit list according to the
+two dates. The newly input Money will replace the original money limit. If there is no limit
+for that period of time, the program will return error.
+****
+* Typical format for a Limit MONEYFLOW parameter :"200"
+** Typical example of *expense*: editLimit d/24-9-2018 25-9-2018 m/*200*
+****
+
+[TIP]
+The editLimit MONEYFLOW can not be negative number.
+
+Examples:
+
+* `editLimit d/20-8-2018 30-8-2018 m/200`
+
+
 === Sorting displayed records : `sort`
 
 Sorts the list of records in the record book by a category.
