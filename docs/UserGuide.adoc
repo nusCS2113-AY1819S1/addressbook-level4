@@ -426,7 +426,7 @@ e.g. `setReminder 1`
 e.g. `reminder`
 * *addComment* : `addComment INDEX C/STRING` +
 e.g. `add Comments 1 C/HELLO`
-* *replyComment* : `replyComment INDEX L/LINEINDEX C/STRING` +
+* *replyComment* : `replyComment INDEX L/LINE C/STRING` +
 e.g. `replyComment 1 L/2 C/Hello`
-* *deleteComment* : `deleteComment INDEX L/LINEINDEX` +
+* *deleteComment* : `deleteComment INDEX L/LINE` +
 e.g. `deleteComment 1 L/2`
