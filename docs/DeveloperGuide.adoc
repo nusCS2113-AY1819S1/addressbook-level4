@@ -410,15 +410,49 @@ image::SelectGroupSequenceDiagram.png[width="800"]
 
 // end::group[]
 
-// tag::AddScriptCommand[]
-=== AddScriptCommand feature
+// tag::ScriptCommand[]
+=== ScriptCommand feature
 ==== Current Implementation
-The AddScriptCommand Feature is executed by AddressBook when the user enter the specific command.
+The `ScriptCommand` Feature allows the user to run `scripts` that execute the same command multiples time by importing
+all Command arguments from a specific text file.
 
-Step 1: The User executes `AddScript StudentList`, the default constructor of the AddScriptCommand
-will be executed and a new `Path` will be generated based on the parameters of the command. The path will be assign
-with `StudentList.txt` for the above case.
-// end::AddScriptCommand[]
+Before the `ScriptCommand` can be executed, there are some prerequisites:
+
+* There must be a default folder for which all the scripts need to be stored
+* The default location of scripts folder is `root program location` + `/scripts/`
+* All scripts must be of `Text File Format/txt`
+
+==== ScriptSetup feature
+If the scripts folder is missing whenever the program run, the program will automatically generate the folder through
+the `ScriptSetup` Class
+
+.Sequence Diagram for the `ScriptSetup` Function
+image::ScriptSetupSequenceDiagram.png[width="800"]
+
+* Procedure for ScriptSetup
+
+Step 1: ScriptSetup will be executed by `MainApp` when the program is initialized and the `ScriptSetup` will be
+execute with the parameter containing the default `scripts` folder location.
+
+[NOTE]
+ The default scripts folder location is
+ obtained from the `preferences.json` file in the main directory
+
+Step 2: `ScriptSetup` will obtain the path of the default script folder by calling `getPath` from the `FileUtil`
+
+Step 3: The `createFolder` function will be called to create a new folder if the `path` does not exist.
+A boolean `isScriptFolderPresent` will be return true if the script folder is present in the project folder and false
+if it is not present inside the project folder
+
+Step 4: If `isScriptFolderPresent` is false, `scriptSetup` will call `addSampleTextFile` which will add some Sample
+Text Files into the scripts folder
+
+Future Implementation:
+****
+* Provide feedback and logging to users on which command has failed to executed
+* Allow the program to change the scripts default location
+****
+// end::ScriptCommand[]
 
 // tag::distribute[]
 === Distribute All Students feature
