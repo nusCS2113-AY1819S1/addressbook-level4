@@ -10,16 +10,14 @@ import static seedu.address.logic.commands.CommandTestUtil.TITLE_DESC_TASK2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_TASK2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TITLE_TASK2;
 
+import static seedu.address.testutil.TypicalTodos.KEYWORD_MATCHING_TASKC;
 import static seedu.address.testutil.TypicalTodos.TASK1;
 import static seedu.address.testutil.TypicalTodos.TASK2;
-import static seedu.address.testutil.TypicalTodos.TASKA;
 import static seedu.address.testutil.TypicalTodos.TASKB;
-import static seedu.address.testutil.TypicalTodos.KEYWORD_MATCHING_TASKC;
 
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandSuggestion;
 import seedu.address.logic.commands.TodoCommand;
 import seedu.address.model.Model;
@@ -34,7 +32,7 @@ public class TodoCommandSystemTest extends AddressBookSystemTest {
 
     @Test
     public void add() {
-        /* ------------------------ Perform todo operations on the shown unfiltered list ----------------------------- */
+        /* ------------------------ Perform todo operations on the shown unfiltered list --------------------------- */
 
         /* Case: add a todo
          * -> added
@@ -58,13 +56,13 @@ public class TodoCommandSystemTest extends AddressBookSystemTest {
         command = TodoCommand.COMMAND_WORD + TITLE_DESC_TASK1 + CONTENT_DESC_TASK2;
         assertCommandSuccess(command, toAdd);
 
-        /* -------------------------- Perform todo operation on the shown filtered list ------------------------------ */
+        /* -------------------------- Perform todo operation on the shown filtered list ---------------------------- */
 
         /* Case: filters the person list before adding -> added */
         showPersonsWithName(KEYWORD_MATCHING_TASKC);
         assertCommandSuccess(TASKB);
 
-        /* ----------------------------------- Perform invalid todo operations --------------------------------------- */
+        /* ----------------------------------- Perform invalid todo operations ------------------------------------- */
 
         /* Case: missing title -> rejected */
         command = TodoCommand.COMMAND_WORD + TITLE_DESC_TASK2;

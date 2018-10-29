@@ -22,7 +22,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.todo.Todo;
-import seedu.address.testutil.TodoBuilder;;
+import seedu.address.testutil.TodoBuilder;
 
 //@@author linnnruoo
 public class TodoCommandTest {
@@ -55,12 +55,12 @@ public class TodoCommandTest {
     @Test
     public void execute_duplicateTodo_throwsCommandException() throws Exception {
         Todo validTodo = new TodoBuilder().build();
-        TodoCommand TodoCommand = new TodoCommand(validTodo);
+        TodoCommand todoCommand = new TodoCommand(validTodo);
         ModelStub modelStub = new ModelStubWithTodo(validTodo);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(TodoCommand.MESSAGE_DUPLICATE_TODO);
-        TodoCommand.execute(modelStub, commandHistory);
+        thrown.expectMessage(todoCommand.MESSAGE_DUPLICATE_TODO);
+        todoCommand.execute(modelStub, commandHistory);
     }
 
     @Test

@@ -7,9 +7,9 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_TITLE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TITLE_DESC_TASK1;
 import static seedu.address.logic.commands.CommandTestUtil.TITLE_DESC_TASK2;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TITLE_TASK1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_TASK1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_TASK2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TITLE_TASK1;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalTodos.TASK1;
@@ -33,10 +33,12 @@ public class TodoCommandParserTest {
                 new TodoCommand(expectedTodo));
 
         // multiple titles - last title accepted
-        assertParseSuccess(parser, TITLE_DESC_TASK2 + CONTENT_DESC_TASK1 + TITLE_DESC_TASK1, new TodoCommand(expectedTodo));
+        assertParseSuccess(parser, TITLE_DESC_TASK2 + CONTENT_DESC_TASK1 + TITLE_DESC_TASK1,
+                new TodoCommand(expectedTodo));
 
         // multiple content - last content accepted
-        assertParseSuccess(parser, TITLE_DESC_TASK1 + CONTENT_DESC_TASK2 + CONTENT_DESC_TASK1, new TodoCommand(expectedTodo));
+        assertParseSuccess(parser, TITLE_DESC_TASK1 + CONTENT_DESC_TASK2 + CONTENT_DESC_TASK1,
+                new TodoCommand(expectedTodo));
     }
 
     @Test
