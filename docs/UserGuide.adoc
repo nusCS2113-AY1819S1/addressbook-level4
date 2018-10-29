@@ -289,7 +289,7 @@ Adds a to-do task, the to-do list panel will display the task's title and its co
 Format: `todo tt/TITLE c/CONTENT`
 
 [TIP]
-Keying the index is optional, without keying it, it will list all the mail items in the user’s current mailbox.
+The user is unable to edit the content of the to-do task
 
 Examples:
 
@@ -342,7 +342,7 @@ e.g.`select 2`
 * *Undo* : `undo`
 * *Redo* : `redo`
 * *ExportAll* : `exportall FILETYPE`
-* *Mail* : `mail [i/INDEX]` (to be added)
+* *Todo* : `todo tt/TITLE c/CONTENT`
 * *List Schedule* : `commonschedule p/PERSON…[PERSON] sd/START-DATE-DDMMYYYY` * *Mail* : `mail [i/INDEX]` +
 (to be added)
 * *Add Schedule* : `addschedule d/DDMMYYYY st/START-TIME et/END-TIME en/EVENT-NAME` * *Mail* : `mail [i/INDEX]` +
