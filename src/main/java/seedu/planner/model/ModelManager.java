@@ -192,6 +192,17 @@ public class ModelManager extends ComponentManager implements Model {
         return output;
     }
 
+    @Override
+    public String manualLimitCheck () {
+        String output = "";
+        int count = 1;
+        for (Limit i: limits) {
+                output += "\n" + String.format("%d.", count++) + generateLimitOutput(isExceededLimit(i), getTotalSpend(i), i);
+
+        }
+        return output;
+    }
+
     /**
      * This function is to do the auto check whenever the record changed.
      * @param isExceeded

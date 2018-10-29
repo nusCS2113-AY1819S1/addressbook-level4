@@ -80,12 +80,21 @@ public interface Model {
      */
     boolean isExceededLimit (Limit limitIn);
     /**
+     *This function will execute all the limits stored inside storage right now.
+     * However, only exceeded limits will be displayed.
+     * The final output will be in one string
+     * and it will return this string to limit command and display.
+     * @return
+     */
+    String autoLimitCheck ();
+
+    /**
      *This function will execute all the limits stored inside
      * storage right now. The final output will be in one string
      * and it will return this string to limit command and display.
      * @return
      */
-    String autoLimitCheck ();
+    String manualLimitCheck ();
     /**
      * This will generate the output string according to the
      * exceeding condition and limit information.

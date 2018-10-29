@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.planner.logic.commands.AddCommand;
+import seedu.planner.logic.commands.CheckLimitCommand;
 import seedu.planner.logic.commands.ClearCommand;
 import seedu.planner.logic.commands.Command;
 import seedu.planner.logic.commands.DeleteCommand;
@@ -113,7 +114,8 @@ public class FinancialPlannerParser {
 
         case EditLimitCommand.COMMAND_WORD:
             return new EditLimitCommandParser().parse(arguments);
-
+        case CheckLimitCommand.COMMAND_WORD:
+            return new CheckLimitCommand();
         case SummaryCommand.COMMAND_WORD:
             return new SummaryCommandParser().parse(arguments);
 
