@@ -410,15 +410,49 @@ image::SelectGroupSequenceDiagram.png[width="800"]
 
 // end::group[]
 
-// tag::AddScriptCommand[]
-=== AddScriptCommand feature
+// tag::ScriptCommand[]
+=== ScriptCommand feature
 ==== Current Implementation
-The AddScriptCommand Feature is executed by AddressBook when the user enter the specific command.
+The `ScriptCommand` Feature allows the user to run `scripts` that execute the same command multiples time by importing
+all Command arguments from a specific text file.
 
-Step 1: The User executes `AddScript StudentList`, the default constructor of the AddScriptCommand
-will be executed and a new `Path` will be generated based on the parameters of the command. The path will be assign
-with `StudentList.txt` for the above case.
-// end::AddScriptCommand[]
+Before the `ScriptCommand` can be executed, there are some prerequisites:
+
+* There must be a default folder for which all the scripts need to be stored
+* The default location of scripts folder is `root program location` + `/scripts/`
+* All scripts must be of `Text File Format/txt`
+
+==== ScriptSetup feature
+If the scripts folder is missing whenever the program run, the program will automatically generate the folder through
+the `ScriptSetup` Class
+
+.Sequence Diagram for the `ScriptSetup` Function
+image::ScriptSetupSequenceDiagram.png[width="800"]
+
+* Procedure for ScriptSetup
+
+Step 1: ScriptSetup will be executed by `MainApp` when the program is initialized and the `ScriptSetup` will be
+execute with the parameter containing the default `scripts` folder location.
+
+[NOTE]
+ The default scripts folder location is
+ obtained from the `preferences.json` file in the main directory
+
+Step 2: `ScriptSetup` will obtain the path of the default script folder by calling `getPath` from the `FileUtil`
+
+Step 3: The `createFolder` function will be called to create a new folder if the `path` does not exist.
+A boolean `isScriptFolderPresent` will be return true if the script folder is present in the project folder and false
+if it is not present inside the project folder
+
+Step 4: If `isScriptFolderPresent` is false, `scriptSetup` will call `addSampleTextFile` which will add some Sample
+Text Files into the scripts folder
+
+Future Implementation:
+****
+* Provide feedback and logging to users on which command has failed to executed
+* Allow the program to change the scripts default location
+****
+// end::ScriptCommand[]
 
 // tag::distribute[]
 === Distribute All Students feature
@@ -460,8 +494,10 @@ Step 3: In every algorithm, the allocation process is different. However, the *D
 
 The following sequence diagram shows how the distribution process works within `Logic`, `Commons` components:
 
-.Interactions Inside the Logic and Model Component for the `distinto 3 n/CS2113- g/0 nat/0` Command
+.(Part 1) Interactions Inside the Logic and Commons Component for the `distinto 3 n/CS2113- g/0 nat/0` Command
 image::DistributeSequenceDiagram.png[width="800"]
+.(Part 2) Interactions Inside the Commons and Logic Component for the `distinto 3 n/CS2113- g/0 nat/0` Command
+image::DistributeSequenceDiagram_2.png[width="800"]
 
 ==== FlowDiagram Diagrams
 
@@ -1535,40 +1571,75 @@ Use case ends
 Use case ends
 
 [discrete]
-=== Use case: Group Distribution
+=== Use case: Distribution of Students into Groups
+
 *Precondition*
 
-1.  Student must exist in the AddressBook
-2.  Number of groups must be less than number of Students
+1.  Student must exist in the AddressBook.
+2.  Number of groups must be less than number of Students.
+3.  Number of groups to be created must be more than 0.
+4.  Group name specified can only contain alphanumeric characters, '-', '[' and ']', and should not be blank.
+5.  Duplicate group name is invalid.
+6.  Gender flags and Nationality flags must be declared
+7.  Gender flags and Nationality flags can only accept input such as '1' or '0' or "true" or "false".
 
 *MSS*
 
-1.  User requests to create N groups of students distributed via gender or nationality
-2.  AddressBook confirms with user that N groups have been created
+1.  User requests to create _n_ groups of students, randomly distributed with balanced gender, with a given specific group name.
+2.  Student Management System creates _n_ groups with the specific group name given, allocates all students into groups with a balanced ratio of gender across all groups.
 +
 Use case ends
 
 *Extensions*
 
 [none]
-* 1a. AddressBook detects error in data entered.
+* 1a. Student Management System detects the _n_ groups to be created input is less than or equal to 0.
 +
-
 [none]
-** 1a1. AddressBook rejects command.
+** 1a1. AddressBook rejects command with an error message of "Invalid command format!" followed by the instructions of the commands input.
 +
 Use case ends
-
 [none]
-* 1b. AddressBook detects student count < N.
+* 2b. Student Management System detects the _n_ groups to be created input is less than total number of students in the system.
 +
-
 [none]
-** 1b1. AddressBook outputs results using best-fit N value.
+** 2b1. AddressBook rejects command with an error message of "Number of groups should not be more than number of students"
 +
 Use case ends
+[none]
+* 3c. Student Management System has 0 number of students in the system.
++
+[none]
+** 3c1. AddressBook rejects command with an error message of "Number of groups should not be more than number of students"
++
+Use case ends
+[none]
+* 4d. Student Management System detects the group name specified does not fit the Group Naming criteria.
++
+[none]
+** 4d1. AddressBook rejects command with an error message of "Group names should only contain alphanumeric characters, '-', '[' and ']', and it should not be blank.".
+Use case ends
+[none]
+* 5e. Student Management System detects the group name specified will cause a group to have a duplicate name.
++
 
+[none]
+** 5e1. AddressBook rejects command with an error message of "There exist another group with the same name.".
+Use case ends
+[none]
+* 6f. Student Management System detects the command is not properly written. Either Gender or Nationality or both flags are missing.
++
+[none]
+** 6f1. AddressBook rejects command with an error message of "Invalid command format!" followed by the instructions of the commands input.
+Use case ends
+[none]
+* 7g. Student Management System detects the command for gender or nationality flag is not properly written. Either Gender or Nationality or both flags have invalid inputs.
++
+[none]
+** 7g1. AddressBook rejects command with an error message of "Gender and Nationality flags only accept '1' or '0' or "true" or "false".
+Use case ends
 [discrete]
+
 === Use case: Attendance List Creation
 *Precondition*
 
