@@ -9,7 +9,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the event-manager level
  * Duplicates are not allowed (by .isSameEvent comparison)
  */
 public class EventManager implements ReadOnlyEventManager {
@@ -59,7 +59,7 @@ public class EventManager implements ReadOnlyEventManager {
     //// event-level operations
 
     /**
-     * Returns true if a event with the same identity as {@code event} exists in the address book.
+     * Returns true if a event with the same identity as {@code event} exists in the event manager.
      */
     public boolean hasEvent(Event event) {
         requireNonNull(event);

@@ -37,11 +37,22 @@ public class LoginCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        if (!model.userExists(toLogin)) {
-            throw new CommandException(MESSAGE_FAILURE);
+        if (model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGGED);
         }
 
         model.logUser(toLogin);
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_FAILURE);
+        }
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, toLogin.getUsername().toString()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof LoginCommand // instanceof handles nulls
+                && toLogin.equals(((LoginCommand) other).toLogin));
     }
 }

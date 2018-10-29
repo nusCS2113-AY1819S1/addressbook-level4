@@ -1,13 +1,10 @@
+//@@author  Geraldcdx
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINE;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
 
 import seedu.address.commons.core.EventsCenter;
@@ -18,6 +15,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.comments.ReplyComment;
 import seedu.address.model.Model;
+import seedu.address.model.event.Comment;
 import seedu.address.model.event.Event;
 
 /**
@@ -77,40 +75,14 @@ public class ReplyCommentCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
-        String test =
-                "<span>Comment Section</span>\n"
-                        + "<ol>\n"
-                        + "<li>hello</li>\n"
-                        + "<li>My name is Gerald</li>\n"
-                        + "<li>What is your name?</li>\n"
-                        + "</ol>";
-
-        ReplyComment comments = new ReplyComment(test);
-        test = comments.replyComment(getComment(), getLine());
-
-        File savingFile = new File("C:/Users/Gerald/Desktop/test/1.html");
-        FileOutputStream fop = null;
-        try {
-            fop = new FileOutputStream(savingFile);
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        try {
-            fop.write(test.getBytes());
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
-
         Event eventToEdit = filteredEventList.get(index.getZeroBased());
+        ReplyComment comments = new ReplyComment(eventToEdit.getComment().toString());
+        Comment newComments = new Comment(comments.replyComment(getComment(), getLine()));
+        editCommentDescriptor.setComment(newComments);
         Event editedEvent = EditCommand.createEditedEvent(eventToEdit, editCommentDescriptor);
-
         model.updateEvent(eventToEdit, editedEvent);
         model.commitEventManager();
-
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
         return new CommandResult(String.format(MESSAGE_REPLY_COMMENT, getComment(), index.getOneBased(), getLine()));
     }
 

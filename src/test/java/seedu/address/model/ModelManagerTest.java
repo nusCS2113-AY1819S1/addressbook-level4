@@ -29,12 +29,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInEventManager_returnsFalse() {
         assertFalse(modelManager.hasEvent(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInEventManager_returnsTrue() {
         modelManager.addEvent(ALICE);
         assertTrue(modelManager.hasEvent(ALICE));
     }

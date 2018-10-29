@@ -22,7 +22,7 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
         return keywords.stream()
                 .anyMatch(keyword ->
                         StringUtil.containsWordIgnoreCase(event.getName().fullName, keyword)
-                        || StringUtil.containsWordIgnoreCase(event.getAddress().value, keyword)
+                        || StringUtil.containsWordIgnoreCase(event.getVenue().value, keyword)
                         || StringUtil.containsWordIgnoreCase(event.getDateTime().toString(), keyword)
                         || event.getTags().stream()
                                 .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword)));
