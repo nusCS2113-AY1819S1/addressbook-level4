@@ -171,7 +171,7 @@ image::UiClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `GroupListPanel`, `GroupPersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -213,7 +213,7 @@ The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Address Book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* exposes an unmodifiable `ObservableList<Person>` and `ObservableList<Group>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 [NOTE]
@@ -327,8 +327,8 @@ image::UndoRedoActivityDiagram.png[width="650"]
 === Group feature
 ==== Current Implementation
 
-The group mechanism is facilitated by `AddressBook`.
-Additionally, it implements the following operations:
+The group mechanism is facilitated by `AddressBook`
+and implements the following operations:
 
 * `AddressBook#createGroup()` -- Creates a group in the student management system.
 * `AddressBook#hasGroup()` -- Checks to see if the student management system has a particular group.
@@ -353,7 +353,7 @@ which will then notify the user of the issue.
 
 The following sequence diagram shows how the create group operation works within both `Model` and `Logic` components where `g` is the `Group` object created:
 
-.Interactions Inside the Logic and Model Component for the `creategroup n/CS1231 l/LT15` Command
+.Interactions Inside the Logic and Model Component for the `creategroup n/CS1231 l/LT15` Command +
 image::CreateGroupSequenceDiagram.png[width="800"]
 
 
@@ -368,21 +368,34 @@ it will not create a group nor will it override the existing group but instead, 
 
 The following sequence diagram shows how the add persons to group operation works within both `Model` and `Logic` components where `ag` is the `AddGroup` object created:
 
-.Interactions Inside the Logic and Model Component for the `addgroup g/1 p/1` Command
+.Interactions Inside the Logic and Model Component for the `addgroup g/1 p/1` Command +
 image::AddGroupSequenceDiagram.png[width="800"]
 
 
-Step 3. The user inputs `deletegroup 1` to delete the first group in the student management system. The `AddressBookParser` detects `deletegroup` as a command word will use `DeleteGroupCommandParser`
+Step 3. The user inputs `deletegroup 1` to delete the first group in the student management system. The `AddressBookParser` detects `deletegroup` as a command word and will use `DeleteGroupCommandParser`
 to parse the input given. `DeleteGroupCommandParser` will then create an `Index` object after parsing and pass it to `DeleteGroupCommand`
 which will then execute deleting the specified group from the student management system.
  +
 
 The following sequence diagram shows how the delete group operation works within both `Model` and `Logic` components:
 
-.Interactions Inside the Logic and Model Component's for the `deletegroup 1` Command
+.Interactions Inside the Logic and Model Component's for the `deletegroup 1` Command +
 image::DeleteGroupSequenceDiagram.png[width="800"]
 
+Additional Operations:
 
+* `SelectGroupCommand` -- Selects a group on the student management system's GUI which will in turn display all
+students in that group on the `GroupPersonList` panel. +
+
+Step 1. The user inputs `selectgroup 1` to select the first group listed on the student management system's GUI. The `AddressBookParser` detects `selectgroup` as a command word and will use `SelectGroupCommandParser`
+        to parse the input given. `SelectGroupCommandParser` will then create an `Index` object after parsing and pass it to `SelectGroupCommand`
+        which will then execute selecting the specified group on the student management system by posting a new `JumpToGroupListRequestEvent` object coupled with the Index created to the `EventsCenter`.
+         +
+
+The following sequence diagram shows how the select group operation works within both `EventsCenter` and `Logic` components:
+
+.Interactions Inside the Logic and EventsCenter Component's for the `selectgroup 1` Command +
+image::SelectGroupSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 
@@ -1255,6 +1268,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |university lecturer |delete groups |edit my student management system
 
+|`* * *` |university lecturer |view all students in a group by typing a command to select a group instead of clicking |have flexibility over input methods
+
 |`* * *` |university lecturer |send an email to a student, a group of students or students belonging to a group |make module specific announcements
 
 |`* * *` |university lecturer |print an attendance sheet of all persons in a specific group |
@@ -1402,7 +1417,32 @@ Use case ends
 *MSS*
 
 1.  Lecturer deletes group
-2.  AddressBook confirms group is deleted
+2.  Student management system confirms group is deleted
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
++
+
+[none]
+** 1a1. Student management system rejects command entered with relevant error message.
++
+
+
+[discrete]
+=== Use case: Select Group
+*Precondition*
+
+1.  Student management system has group(s)
+
+*MSS*
+
+1.  Lecturer selects group
+2.  Student management system confirms group is selected
+3.  Student management system displays students in group selected on the *students in group panel*
 +
 Use case ends
 
