@@ -2,7 +2,8 @@ package seedu.planner.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.planner.logic.commands.LimitCommand.MESSAGE_BASIC;
+import static seedu.planner.logic.commands.LimitCommand.MESSAGE_BASIC_EARNED;
+import static seedu.planner.logic.commands.LimitCommand.MESSAGE_BASIC_SPEND;
 import static seedu.planner.logic.commands.LimitCommand.MESSAGE_EXCEED;
 import static seedu.planner.logic.commands.LimitCommand.MESSAGE_NOT_EXCEED;
 
@@ -212,15 +213,20 @@ public class ModelManager extends ComponentManager implements Model {
      */
     public String generateLimitOutput (boolean isExceeded, Double totalMoney, Limit limit) {
         String output;
-        if (isExceeded) {
-            output = String.format(MESSAGE_BASIC,
+        if (totalMoney > 0) {
+            output = String.format(MESSAGE_BASIC_EARNED,
                     limit.getDateStart(), limit.getDateEnd(),
-                    limit.getLimitMoneyFlow().toDouble(), totalMoney)
+                    -1 * limit.getLimitMoneyFlow().toDouble(), totalMoney)
+                    + MESSAGE_NOT_EXCEED;
+        } else if (isExceeded) {
+            output = String.format(MESSAGE_BASIC_SPEND,
+                    limit.getDateStart(), limit.getDateEnd(),
+                    -1 * limit.getLimitMoneyFlow().toDouble(), -1 * totalMoney)
                     + MESSAGE_EXCEED;
         } else {
-            output = String.format(MESSAGE_BASIC,
+            output = String.format(MESSAGE_BASIC_SPEND,
                     limit.getDateStart(), limit.getDateEnd(),
-                    limit.getLimitMoneyFlow().toDouble(), totalMoney)
+                    -1 * limit.getLimitMoneyFlow().toDouble(), -1 * totalMoney)
                     + MESSAGE_NOT_EXCEED;
         }
         return output;
