@@ -12,8 +12,8 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
 import seedu.address.storage.ScriptSetupTest;
-import seedu.address.storage.scripts.ScriptSetup;
 import seedu.address.testutil.Assert;
 
 public class FileUtilTest {
@@ -24,7 +24,6 @@ public class FileUtilTest {
     private static final String TextExtension = ".txt";
 
     @Rule
-
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
