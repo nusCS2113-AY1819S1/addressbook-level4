@@ -16,8 +16,18 @@ public class CheckCommandParserTest {
     private CheckCommandParser parser = new CheckCommandParser();
 
     @Test
-    public void parse_emptyArg_throwsParseException() {
+    public void parse_invalidArg_throwsParseException() {
+        // empty arguments
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_USAGE));
+
+        // multiple arguments
+        assertParseFailure(parser, "4 5", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_USAGE));
+
+        // negative argument
+        assertParseFailure(parser, "-1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_USAGE));
+
+        // not numeric argument
+        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_USAGE));
     }
 
     @Test

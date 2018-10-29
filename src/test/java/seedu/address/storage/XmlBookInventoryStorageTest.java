@@ -2,9 +2,9 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.TypicalBooks.ALICE;
-import static seedu.address.testutil.TypicalBooks.HOON;
-import static seedu.address.testutil.TypicalBooks.IDA;
+import static seedu.address.testutil.TypicalBooks.ART;
+import static seedu.address.testutil.TypicalBooks.HISTORY;
+import static seedu.address.testutil.TypicalBooks.IT;
 import static seedu.address.testutil.TypicalBooks.getTypicalBookInventory;
 
 import java.io.IOException;
@@ -86,14 +86,14 @@ public class XmlBookInventoryStorageTest {
         assertEquals(original.toString(), new BookInventory(readBack).toString());
 
         //Modify data, overwrite exiting file, and read back
-        original.addBook(HOON);
-        original.removeBook(ALICE);
+        original.addBook(HISTORY);
+        original.removeBook(ART);
         xmlAddressBookStorage.saveAddressBook(original, filePath);
         readBack = xmlAddressBookStorage.readBookInventory(filePath).get();
         assertEquals(original.toString(), new BookInventory(readBack).toString());
 
         //Save and read without specifying file path
-        original.addBook(IDA);
+        original.addBook(IT);
         xmlAddressBookStorage.saveAddressBook(original); //file path not specified
         readBack = xmlAddressBookStorage.readBookInventory().get(); //file path not specified
         assertEquals(original.toString(), new BookInventory(readBack).toString());

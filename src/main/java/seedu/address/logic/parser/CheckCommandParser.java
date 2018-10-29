@@ -22,7 +22,7 @@ public class CheckCommandParser implements Parser<CheckCommand> {
      */
     public CheckCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+        if (isNotNumeric(trimmedArgs) || trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_USAGE));
         }
@@ -34,5 +34,9 @@ public class CheckCommandParser implements Parser<CheckCommand> {
         }
 
         return new CheckCommand(new QuantityContainsNumberPredicate(quantities));
+    }
+
+    public boolean isNotNumeric(String trimmedArgs) {
+        return trimmedArgs != null && !trimmedArgs.matches("[+]?\\d*");
     }
 }

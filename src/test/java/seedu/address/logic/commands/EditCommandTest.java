@@ -5,9 +5,9 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_BIOLOGY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BIOLOGY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SCIENCE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -58,11 +58,11 @@ public class EditCommandTest {
         Book lastBook = model.getFilteredBookList().get(indexLastPerson.getZeroBased());
 
         BookBuilder personInList = new BookBuilder(lastBook);
-        Book editedBook = personInList.withName(VALID_NAME_BOB).withIsbn(VALID_ISBN_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        Book editedBook = personInList.withName(VALID_NAME_BIOLOGY).withIsbn(VALID_ISBN_BIOLOGY)
+                .withTags(VALID_TAG_SCIENCE).build();
 
-        EditCommand.EditBookDescriptor descriptor = new EditBookDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withIsbn(VALID_ISBN_BOB).withTags(VALID_TAG_HUSBAND).build();
+        EditCommand.EditBookDescriptor descriptor = new EditBookDescriptorBuilder().withName(VALID_NAME_BIOLOGY)
+                .withIsbn(VALID_ISBN_BIOLOGY).withTags(VALID_TAG_SCIENCE).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BOOK_SUCCESS, editedBook);
@@ -92,9 +92,9 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_BOOK);
 
         Book bookInFilteredList = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
-        Book editedBook = new BookBuilder(bookInFilteredList).withName(VALID_NAME_BOB).build();
+        Book editedBook = new BookBuilder(bookInFilteredList).withName(VALID_NAME_BIOLOGY).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_BOOK,
-                new EditBookDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditBookDescriptorBuilder().withName(VALID_NAME_BIOLOGY).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BOOK_SUCCESS, editedBook);
 
@@ -128,7 +128,8 @@ public class EditCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredBookList().size() + 1);
-        EditCommand.EditBookDescriptor descriptor = new EditBookDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditCommand.EditBookDescriptor descriptor =
+                new EditBookDescriptorBuilder().withName(VALID_NAME_BIOLOGY).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
@@ -146,7 +147,7 @@ public class EditCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getBookInventory().getBookList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                new EditBookDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditBookDescriptorBuilder().withName(VALID_NAME_BIOLOGY).build());
 
         assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
     }
@@ -176,7 +177,7 @@ public class EditCommandTest {
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredBookList().size() + 1);
-        EditBookDescriptor descriptor = new EditBookDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditBookDescriptor descriptor = new EditBookDescriptorBuilder().withName(VALID_NAME_BIOLOGY).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         // execution failed -> BookInventory state not added into model

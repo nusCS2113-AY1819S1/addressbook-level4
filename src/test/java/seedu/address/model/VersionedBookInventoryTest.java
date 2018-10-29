@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.testutil.TypicalBooks.AMY;
+import static seedu.address.testutil.TypicalBooks.ADD;
 import static seedu.address.testutil.TypicalBooks.BOB;
-import static seedu.address.testutil.TypicalBooks.CARL;
+import static seedu.address.testutil.TypicalBooks.CHEMISTRY;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,9 +18,9 @@ import seedu.address.testutil.BookInventoryBuilder;
 
 public class VersionedBookInventoryTest {
 
-    private final ReadOnlyBookInventory addressBookWithAmy = new BookInventoryBuilder().withBook(AMY).build();
+    private final ReadOnlyBookInventory addressBookWithAmy = new BookInventoryBuilder().withBook(ADD).build();
     private final ReadOnlyBookInventory addressBookWithBob = new BookInventoryBuilder().withBook(BOB).build();
-    private final ReadOnlyBookInventory addressBookWithCarl = new BookInventoryBuilder().withBook(CARL).build();
+    private final ReadOnlyBookInventory addressBookWithCarl = new BookInventoryBuilder().withBook(CHEMISTRY).build();
     private final ReadOnlyBookInventory emptyAddressBook = new BookInventoryBuilder().build();
 
     @Test

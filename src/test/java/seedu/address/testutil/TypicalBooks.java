@@ -1,17 +1,17 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_COST_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_COST_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COST_ADD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COST_BIOLOGY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_ADD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_BIOLOGY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ADD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BIOLOGY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_ADD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_BIOLOGY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_ADD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_BIOLOGY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SCIENCE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_STUDIES;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,81 +25,81 @@ import seedu.address.model.book.Book;
  */
 public class TypicalBooks {
 
-    public static final Book ALICE = new BookBuilder()
-            .withName("Biology: A Global Approach")
+    public static final Book ART = new BookBuilder()
+            .withName("Art")
             .withIsbn("9780748137992")
             .withPrice("73.76")
             .withCost("19.99")
-            .withQuantity("4")
-            .withTags("friends").build();
-    public static final Book BENSON = new BookBuilder()
-            .withName("Elementary Statistics: Picturing the World")
+            .withQuantity("5")
+            .withTags("studies").build();
+    public static final Book BIOLOGY = new BookBuilder()
+            .withName("Biology")
             .withIsbn("9781401309572")
             .withPrice("58.98")
             .withCost("19.99")
-            .withQuantity("11")
-            .withTags("owesMoney", "friends").build();
-    public static final Book CARL = new BookBuilder()
-            .withName("Carl Kurz")
+            .withQuantity("10")
+            .withTags("science", "studies").build();
+    public static final Book CHEMISTRY = new BookBuilder()
+            .withName("Chemistry")
             .withIsbn("9780062294432")
             .withPrice("6.66")
             .withCost("6.66")
-            .withQuantity("111").build();
-    public static final Book DANIEL = new BookBuilder()
-            .withName("Daniel Meier")
+            .withQuantity("15").build();
+    public static final Book DARWIN = new BookBuilder()
+            .withName("Digital Darwinism")
             .withIsbn("9780062472601")
             .withPrice("5.55")
             .withCost("6.66")
-            .withQuantity("10")
+            .withQuantity("20")
             .withTags("friends").build();
-    public static final Book ELLE = new BookBuilder()
-            .withName("Elle Meyer")
+    public static final Book ELEMENTARY = new BookBuilder()
+            .withName("Elementary Statistics: Picturing the World")
             .withIsbn("9780767905923")
             .withPrice("4.44")
             .withCost("6.66")
-            .withQuantity("1").build();
-    public static final Book FIONA = new BookBuilder()
-            .withName("Fiona Kunz")
+            .withQuantity("25").build();
+    public static final Book FINANCIAL = new BookBuilder()
+            .withName("Financial Accounting")
             .withIsbn("9781401310462")
             .withPrice("3.33")
             .withCost("6.66")
-            .withQuantity("2").build();
-    public static final Book GEORGE = new BookBuilder()
-            .withName("George Best")
+            .withQuantity("30").build();
+    public static final Book GEOGRAPHY = new BookBuilder()
+            .withName("Geography")
             .withIsbn("9781401312855")
             .withPrice("2.22")
             .withCost("6.66")
-            .withQuantity("4").build();
+            .withQuantity("35").build();
 
     // Manually added
-    public static final Book HOON = new BookBuilder()
-            .withName("Hoon Meier")
+    public static final Book HISTORY = new BookBuilder()
+            .withName("History")
             .withIsbn("9781401308582")
             .withPrice("1.11")
             .withCost("6.66")
-            .withQuantity("2").build();
-    public static final Book IDA = new BookBuilder()
-            .withName("Ida Mueller")
+            .withQuantity("40").build();
+    public static final Book IT = new BookBuilder()
+            .withName("Introduction to IT")
             .withIsbn("9780062294449")
             .withPrice("0.11")
             .withCost("6.66")
-            .withQuantity("1").build();
+            .withQuantity("45").build();
 
     // Manually added - Book's details found in {@code CommandTestUtil}
-    public static final Book AMY = new BookBuilder()
-            .withName(VALID_NAME_AMY)
-            .withIsbn(VALID_ISBN_AMY)
-            .withPrice(VALID_PRICE_AMY)
-            .withCost(VALID_COST_AMY)
-            .withQuantity(VALID_QUANTITY_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
+    public static final Book ADD = new BookBuilder()
+            .withName(VALID_NAME_ADD)
+            .withIsbn(VALID_ISBN_ADD)
+            .withPrice(VALID_PRICE_ADD)
+            .withCost(VALID_COST_ADD)
+            .withQuantity(VALID_QUANTITY_ADD)
+            .withTags(VALID_TAG_STUDIES).build();
     public static final Book BOB = new BookBuilder()
-            .withName(VALID_NAME_BOB)
-            .withIsbn(VALID_ISBN_BOB)
-            .withPrice(VALID_PRICE_BOB)
-            .withCost(VALID_COST_BOB)
-            .withQuantity(VALID_QUANTITY_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withName(VALID_NAME_BIOLOGY)
+            .withIsbn(VALID_ISBN_BIOLOGY)
+            .withPrice(VALID_PRICE_BIOLOGY)
+            .withCost(VALID_COST_BIOLOGY)
+            .withQuantity(VALID_QUANTITY_BIOLOGY)
+            .withTags(VALID_TAG_SCIENCE, VALID_TAG_STUDIES).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
@@ -117,6 +117,6 @@ public class TypicalBooks {
     }
 
     public static List<Book> getTypicalBooks() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ART, BIOLOGY, CHEMISTRY, DARWIN, ELEMENTARY, FINANCIAL, GEOGRAPHY));
     }
 }

@@ -17,17 +17,17 @@
 //import static seedu.address.logic.commands.CommandTestUtil.QUANTITY_DESC_BOB;
 //import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 //import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_BOB;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_BOB;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_BOB;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_BIOLOGY;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BIOLOGY;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_BIOLOGY;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_BIOLOGY;
 //import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-//import static seedu.address.testutil.TypicalBooks.ALICE;
-//import static seedu.address.testutil.TypicalBooks.AMY;
+//import static seedu.address.testutil.TypicalBooks.ART;
+//import static seedu.address.testutil.TypicalBooks.ADD;
 //import static seedu.address.testutil.TypicalBooks.BOB;
-//import static seedu.address.testutil.TypicalBooks.CARL;
-//import static seedu.address.testutil.TypicalBooks.HOON;
-//import static seedu.address.testutil.TypicalBooks.IDA;
+//import static seedu.address.testutil.TypicalBooks.CHEMISTRY;
+//import static seedu.address.testutil.TypicalBooks.HISTORY;
+//import static seedu.address.testutil.TypicalBooks.IT;
 //import static seedu.address.testutil.TypicalBooks.KEYWORD_MATCHING_MEIER;
 //
 //import org.junit.Test;
@@ -58,7 +58,7 @@
 //        /* Case: add a book without tags to a non-empty BookInventory, command with leading spaces and trailing spaces
 //         * -> added
 //         */
-//        Book toAdd = AMY;
+//        Book toAdd = ADD;
 //        String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + ISBN_DESC_AMY + " "
 //                + PRICE_DESC_AMY + "   " + COST_DESC_AMY + " " + QUANTITY_DESC_AMY + "   " + TAG_DESC_FRIEND + " ";
 //        assertCommandSuccess(command, toAdd);
@@ -74,7 +74,7 @@
 //        assertCommandSuccess(command, model, expectedResultMessage);
 //
 //        /* Case: add a book with all fields same as another book in the BookInventory except name -> added */
-//        toAdd = new BookBuilder(AMY).withName(VALID_NAME_BOB).build();
+//        toAdd = new BookBuilder(ADD).withName(VALID_NAME_BIOLOGY).build();
 //        command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + ISBN_DESC_AMY
 //                + PRICE_DESC_AMY + COST_DESC_AMY + QUANTITY_DESC_AMY
 //                + TAG_DESC_FRIEND;
@@ -83,13 +83,13 @@
 //        /* Case: add a book with all fields same as another book in the BookInventory except phone and email
 //         * -> added
 //         */
-//        toAdd = new BookBuilder(AMY).withIsbn(VALID_ISBN_BOB).withPrice(VALID_PRICE_BOB).build();
+//        toAdd = new BookBuilder(ADD).withIsbn(VALID_ISBN_BIOLOGY).withPrice(VALID_PRICE_BIOLOGY).build();
 //        command = BookUtil.getAddCommand(toAdd);
 //        assertCommandSuccess(command, toAdd);
 //
 //        /* Case: add to empty BookInventory -> added */
 //        deleteAllPersons();
-//        assertCommandSuccess(ALICE);
+//        assertCommandSuccess(ART);
 //
 //        /* Case: add a book with tags, command with parameters in random order -> added */
 //        toAdd = BOB;
@@ -98,45 +98,45 @@
 //        assertCommandSuccess(command, toAdd);
 //
 //        /* Case: add a book, missing tags -> added */
-//        assertCommandSuccess(HOON);
+//        assertCommandSuccess(HISTORY);
 //
 //        /* -------------------------- Perform add operation on the shown filtered list
 // ------------------------------ */
 //
 //        /* Case: filters the book list before adding -> added */
 //        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-//        assertCommandSuccess(IDA);
+//        assertCommandSuccess(IT);
 //
 //        /* ------------------------ Perform add operation while a book card is selected --------------------------- */
 //
 //        /* Case: selects first card in the book list, add a book -> added, card selection remains unchanged */
 //        selectPerson(Index.fromOneBased(1));
-//        assertCommandSuccess(CARL);
+//        assertCommandSuccess(CHEMISTRY);
 //
 //        /* ----------------------------------- Perform invalid add operations
 // --------------------------------------- */
 //
 //        /* Case: add a duplicate book -> rejected */
-//        command = BookUtil.getAddCommand(HOON);
+//        command = BookUtil.getAddCommand(HISTORY);
 //        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_BOOK);
 //
 //        /* Case: add a duplicate book except with different phone -> rejected */
-//        toAdd = new BookBuilder(HOON).withIsbn(VALID_ISBN_BOB).build();
+//        toAdd = new BookBuilder(HISTORY).withIsbn(VALID_ISBN_BIOLOGY).build();
 //        command = BookUtil.getAddCommand(toAdd);
 //        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_BOOK);
 //
 //        /* Case: add a duplicate book except with different email -> rejected */
-//        toAdd = new BookBuilder(HOON).withPrice(VALID_PRICE_BOB).build();
+//        toAdd = new BookBuilder(HISTORY).withPrice(VALID_PRICE_BIOLOGY).build();
 //        command = BookUtil.getAddCommand(toAdd);
 //        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_BOOK);
 //
 //        /* Case: add a duplicate book except with different address -> rejected */
-//        toAdd = new BookBuilder(HOON).withQuantity(VALID_QUANTITY_BOB).build();
+//        toAdd = new BookBuilder(HISTORY).withQuantity(VALID_QUANTITY_BIOLOGY).build();
 //        command = BookUtil.getAddCommand(toAdd);
 //        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_BOOK);
 //
 //        /* Case: add a duplicate book except with different tags -> rejected */
-//        command = BookUtil.getAddCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
+//        command = BookUtil.getAddCommand(HISTORY) + " " + PREFIX_TAG.getPrefix() + "friends";
 //        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_BOOK);
 //
 //        /* Case: missing name -> rejected */
