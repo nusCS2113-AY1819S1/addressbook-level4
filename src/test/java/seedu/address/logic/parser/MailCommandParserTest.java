@@ -28,7 +28,7 @@ public class MailCommandParserTest {
 
     @Test
     public void parse_selectedTags_success() {
-        MailCommand expectedCommand = new MailCommand(TYPE_GROUPS);
+        MailCommand expectedCommand = new MailCommand(TYPE_GROUPS, "");
         assertParseSuccess(parser, "mail " + CliSyntax.PREFIX_TAG, expectedCommand);
     }
 }
