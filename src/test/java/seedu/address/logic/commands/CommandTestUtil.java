@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPENSE_CATEGORY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPENSE_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPENSE_VALUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -17,21 +20,16 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.expense.Expense;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.EditExpenseDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
-
-    public static final String VALID_EXPENSE_CATEGORY_YOO = "yoo";
-    public static final String VALID_EXPENSE_CATEGORY_HII = "hii";
-    public static final String VALID_EXPENSE_DATE_YOO = "11/11/2011";
-    public static final String VALID_EXPENSE_DATE_HII = "11/11/2011";
-    public static final String VALID_EXPENSE_VALUE_YOO = "11.11";
-    public static final String VALID_EXPENSE_VALUE_HII = "11.11";
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
@@ -64,8 +62,42 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
+
+    public static final String VALID_EXPENSE_CATEGORY_SHOPPING = "shopping";
+    public static final String VALID_EXPENSE_CATEGORY_MRT = "MRT";
+    public static final String VALID_EXPENSE_DATE_SHOPPING = "11/11/2011";
+    public static final String VALID_EXPENSE_DATE_MRT = "11/11/2011";
+    public static final String VALID_EXPENSE_VALUE_SHOPPING = "11.11";
+    public static final String VALID_EXPENSE_VALUE_MRT = "11.11";
+    public static final String VALID_TAG_TAOBAO = "taobao";
+
+    public static final String EXPENSE_CATEGORY_DESC_SHOPPING =
+            " " + PREFIX_EXPENSE_CATEGORY + VALID_EXPENSE_CATEGORY_SHOPPING;
+    public static final String EXPENSE_CATEGORY_DESC_MRT =
+            " " + PREFIX_EXPENSE_CATEGORY + VALID_EXPENSE_CATEGORY_MRT;
+    public static final String EXPENSE_DATE_DESC_SHOPPING =
+            " " + PREFIX_EXPENSE_DATE + VALID_EXPENSE_DATE_SHOPPING;
+    public static final String EXPENSE_DATE_DESC_MRT =
+            " " + PREFIX_EXPENSE_DATE + VALID_EXPENSE_DATE_MRT;
+    public static final String EXPENSE_VALUE_DESC_SHOPPING =
+            " " + PREFIX_EXPENSE_VALUE + VALID_EXPENSE_VALUE_SHOPPING;
+    public static final String EXPENSE_VALUE_DESC_MRT =
+            " " + PREFIX_EXPENSE_VALUE + VALID_EXPENSE_VALUE_MRT;
+    public static final String TAG_DESC_TAOBAO = " " + PREFIX_TAG + VALID_TAG_TAOBAO;
+
+    public static final String INVALID_EXPENSE_CATEGORY_DESC =
+            " " + PREFIX_EXPENSE_CATEGORY + "James&"; // '&' not allowed in expense category
+    public static final String INVALID_EXPENSE_DATE_DESC =
+            " " + PREFIX_EXPENSE_DATE + "1/1/2019"; // not in DD/MM/YYYY format
+    public static final String INVALID_EXPENSE_VALUE_DESC =
+            " " + PREFIX_EXPENSE_VALUE; // empty string not allowed for expense value
+
+
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+
+    public static final EditExpenseCommand.EditExpenseDescriptor DESC_SHOPPING;
+    public static final EditExpenseCommand.EditExpenseDescriptor DESC_MRT;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -74,6 +106,12 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_MRT = new EditExpenseDescriptorBuilder().withExpenseCategory(VALID_EXPENSE_CATEGORY_MRT)
+                .withExpenseDate(VALID_EXPENSE_DATE_MRT).withExpenseValue(VALID_EXPENSE_VALUE_MRT)
+                .withTags(VALID_TAG_FRIEND).build();
+        DESC_SHOPPING = new EditExpenseDescriptorBuilder().withExpenseCategory(VALID_EXPENSE_CATEGORY_SHOPPING)
+                .withExpenseDate(VALID_EXPENSE_DATE_SHOPPING).withExpenseValue(VALID_EXPENSE_VALUE_SHOPPING)
+                .withTags(VALID_TAG_TAOBAO, VALID_TAG_HUSBAND).build();
     }
 
     /**
@@ -145,4 +183,12 @@ public class CommandTestUtil {
         model.commitAddressBook();
     }
 
+    /**
+     * Deletes the first expense in {@code model}'s filtered list from {@code model}'s expense book.
+     */
+    public static void deleteFirstExpense(Model model) {
+        Expense firstExpense = model.getFilteredExpenseList().get(0);
+        model.deleteExpense(firstExpense);
+        model.commitExpenseBook();
+    }
 }

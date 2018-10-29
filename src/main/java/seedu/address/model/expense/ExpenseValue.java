@@ -9,8 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class ExpenseValue {
     public static final String MESSAGE_EXPENSE_VALUE_CONSTRAINTS =
-            "Expense value should only contain numbers, and it should 2 decimal points.";
+            "Expense value should only contain numbers, in 2 decimal points and more than 0.00.";
 
+    public static final double ZERO_EXPENSE_VALUE = 0.00;
     public static final String EXPENSE_VALUE_VALIDATION_REGEX = "\\d+\\.\\d{2}";
     public final String expenseValue;
 
@@ -29,7 +30,10 @@ public class ExpenseValue {
      * Returns true if a given string is a valid value with 2 decimal places.
      */
     public static boolean isValidExpenseValue(String test) {
-        return test.matches(EXPENSE_VALUE_VALIDATION_REGEX);
+        if (test.matches(EXPENSE_VALUE_VALIDATION_REGEX)) {
+            return Double.parseDouble(test) != ZERO_EXPENSE_VALUE;
+        }
+        return false;
     }
 
     @Override

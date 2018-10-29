@@ -49,4 +49,10 @@ public class AddExpenseCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AddExpenseCommand // instanceof handles nulls
+                && toAdd.equals(((AddExpenseCommand) other).toAdd));
+    }
 }

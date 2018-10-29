@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
  */
 public class ExpenseDate {
     public static final String MESSAGE_EXPENSE_DATE_CONSTRAINTS =
-            "Expense date should be in DD/MM/YYYY format.";
+            "Expense date should be a valid date in DD/MM/YYYY format.";
 
     public final String expenseDate;
 
