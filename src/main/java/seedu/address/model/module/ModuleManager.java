@@ -82,6 +82,7 @@ public class ModuleManager {
         try {
             for (XmlAdaptedModule xmlModule : xmlModuleList) {
                 Module m = xmlModule.toModelType();
+                modules.add(m);
 
                 // Look for associations between this module and any students (i.e. any enrolled students?)
                 for (XmlAdaptedStudentModule xmlStudentModule : xmlAdaptedStudentModuleList) {
