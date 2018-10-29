@@ -22,14 +22,14 @@ public class Quantity {
      */
     public Quantity(String quantity) {
         requireNonNull(quantity);
-        checkArgument(isValidStock(quantity), MESSAGE_QUANTITY_CONSTRAINTS);
+        checkArgument(isValidQuantity(quantity), MESSAGE_QUANTITY_CONSTRAINTS);
         this.value = Integer.parseInt(quantity);
     }
 
     /**
      * Returns true if a given string is a valid quantity value.
      */
-    public static boolean isValidStock(String test) {
+    public static boolean isValidQuantity(String test) {
         return test.matches(STOCK_VALIDATION_REGEX);
     }
 

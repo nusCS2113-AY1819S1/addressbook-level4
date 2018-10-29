@@ -20,15 +20,28 @@ public class Drink {
     // Data fields
     private Price costPrice;
     private Price retailPrice;
+    private UniqueBatchList uniqueBatchList;
     private Quantity quantity;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Drink(Name name, Set<Tag> tags) {
-        requireAllNonNull(name, tags);
+    public Drink(Name name, Price costPrice, Price retailPrice, Set<Tag> tags) {
+        requireAllNonNull(name, costPrice, retailPrice, tags);
         this.name = name;
+        this.costPrice = costPrice;
+        this.retailPrice = retailPrice;
+        quantity = new Quantity("0");
+        this.tags.addAll(tags);
+    }
+
+    public Drink(Name name, Price costPrice, Price retailPrice, Quantity quantity, Set<Tag> tags) {
+        requireAllNonNull(name, costPrice, retailPrice, quantity, tags);
+        this.name = name;
+        this.costPrice = costPrice;
+        this.retailPrice = retailPrice;
+        this.quantity = quantity;
         this.tags.addAll(tags);
     }
 
@@ -62,6 +75,14 @@ public class Drink {
 
     public void setQuantity(Quantity quantity) {
         this.quantity = quantity;
+    }
+
+    public UniqueBatchList getUniqueBatchList() {
+        return uniqueBatchList;
+    }
+
+    public void setUniqueBatchList(UniqueBatchList uniqueBatchList) {
+        this.uniqueBatchList = uniqueBatchList;
     }
 
     /**
@@ -114,6 +135,8 @@ public class Drink {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append(" Selling price: ")
+                .append(getRetailPrice())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 /**
- * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
+ * Contains DrinkCommand Line Interface (CLI) syntax definitions common to multiple commands
  */
 public class CliSyntax {
 
@@ -28,5 +28,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_AUTHENTICATION_LEVEL = new Prefix("a/");
     public static final Prefix PREFIX_OLD_PASSWORD = new Prefix("o/");
     public static final Prefix PREFIX_NEW_PASSWORD = new Prefix("n/");
+
 
 }
