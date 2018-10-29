@@ -13,6 +13,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Lost_status;
 import seedu.address.model.item.Quantity;
 
 
@@ -74,15 +75,23 @@ public class LostCommand extends Command {
      */
     private static Item createLostItem(Item itemToLost, LostDescriptor lostDescriptor) {
         assert itemToLost != null;
+        Lost_status currentLost_status = itemToLost.getLost_status();
+        Lost_status updatedLost_status;
+        Integer updatedLost = currentLost_status.getLost_statusLost();
+        Integer updatedFound = currentLost_status.getLost_statusFound();
 
         Integer updatedValue = lostDescriptor.getLostQuantity();
         Integer initialValue = itemToLost.getQuantity().toInteger();
+
+        updatedLost += updatedValue;
+        updatedFound -= updatedValue;
+        updatedLost_status = new Lost_status(updatedLost,updatedFound);
 
         Quantity updatedQuantity = new Quantity(Integer.toString(initialValue - updatedValue));
 
 
 
-        return new Item(itemToLost.getName(), updatedQuantity, itemToLost.getMinQuantity(), itemToLost.getTags());
+        return new Item(itemToLost.getName(), updatedQuantity, itemToLost.getMinQuantity(), updatedLost_status, itemToLost.getTags());
     }
 
     /**
