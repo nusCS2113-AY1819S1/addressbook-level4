@@ -22,6 +22,7 @@ timetable of your group mates.
 * The original addressbook application provides a *reasonably well-written* code example. We hope we don't screw it up.
 * What's different from the original https://github.com/se-edu/addressbook-level4[Addressbook]:
 ** Meeting scheduling [coming in v1.4]
+** Add to-do tasks
 ** Natural language processing
 ** Auto complete for commands
 ** Export contacts
@@ -30,7 +31,6 @@ timetable of your group mates.
 
 * <<UserGuide#, User Guide>>
 * <<DeveloperGuide#, Developer Guide>>
-* <<LearningOutcomes#, Learning Outcomes>>
 * <<AboutUs#, About Us>>
 * <<ContactUs#, Contact Us>>
 
