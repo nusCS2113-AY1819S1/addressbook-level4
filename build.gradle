@@ -109,19 +109,6 @@ task coverage(type: JacocoReport) {
     }
 }
 
-sourceSets {
-    main {
-        resources {
-            srcDirs "src/main/resources", "src/main/configs"
-        }
-    }
-    test {
-        resources {
-            srcDir "test"
-        }
-    }
-}
-
 coveralls {
     sourceDirs = sourceSets.main.allSource.srcDirs.absolutePath
     jacocoReportPath = "${buildDir}/reports/jacoco/coverage/coverage.xml"
