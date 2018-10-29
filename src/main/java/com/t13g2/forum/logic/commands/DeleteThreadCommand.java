@@ -46,13 +46,15 @@ public class DeleteThreadCommand extends Command {
         }
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             if (Context.getInstance().getCurrentUser().getId()
-                    != unitOfWork.getForumThreadRepository().getThread(threadId).getCreatedByUserId()) {
+                    == unitOfWork.getForumThreadRepository().getThread(threadId).getCreatedByUserId()
+                    || Context.getInstance().isCurrentUserAdmin()) {
+                //delete the thread according to the threadId from the memory repository
+                unitOfWork.getForumThreadRepository().deleteThread(threadId);
+                //update to local database
+                unitOfWork.commit();
+            } else {
                 throw new CommandException(MESSAGE_NOT_THREAD_OWNER);
             }
-            //delete the thread according to the threadId from the memory repository
-            unitOfWork.getForumThreadRepository().deleteThread(threadId);
-            //update to local database
-            unitOfWork.commit();
         } catch (EntityDoesNotExistException e) {
             throw new CommandException(MESSAGE_INVALID_THREAD_ID);
         } catch (CommandException e) {

@@ -49,13 +49,15 @@ public class DeleteCommentCommand extends Command {
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             Comment comment = unitOfWork.getCommentRepository().getComment(commentId);
             commentContentToDelete = comment.getContent();
-            if (Context.getInstance().getCurrentUser().getId() != comment.getCreatedByUserId()) {
+            if (Context.getInstance().getCurrentUser().getId() == comment.getCreatedByUserId()
+                    || Context.getInstance().isCurrentUserAdmin()) {
+                //delete the comment according to the commentId from the memory repository
+                unitOfWork.getCommentRepository().deleteComment(commentId);
+                //update to local database
+                unitOfWork.commit();
+            } else {
                 throw new CommandException(MESSAGE_NOT_COMMENT_OWNER);
             }
-            //delete the comment according to the commentId from the memory repository
-            unitOfWork.getCommentRepository().deleteComment(commentId);
-            //update to local database
-            unitOfWork.commit();
         } catch (EntityDoesNotExistException e) {
             throw new CommandException(MESSAGE_INVALID_COMMENT_ID);
         } catch (CommandException e) {

@@ -55,67 +55,102 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Format: `help`
 
-=== Creating a new forumThread : `create`
+=== Creating a new forumThread : `createThread`
 
-Create a new forumThread under a specific module +
-Format: `create m/MODULE_NAME t/THREAD_NAME [c/REPLY_MESSAGE]...`
-
-Examples:
-
-* `create m/CS2113 t/what is this module like? c/I heard that the workload is very heavy`
-* `create m/CS2113 t/Is there mid-terms?`
-
-=== Replying to a forumThread : `reply`
-
-Reply to a forumThread under a specific forumThread. +
-Format: `reply m/MODULE_NAME i/THREAD_INDEX c/REPLY_MESSAGE`
+Create a new forumThread under a specific module that exists +
+Format: `createThread mCode/MODULE CODE tTitle/THREAD TITLE cContent/COMMENT CONTENT`
 
 Examples:
 
-* `reply m/CS2113 i/1 c/It is Heavy but you get to learn a lot for it.`
-* `reply m/CS2113 i/2 c/I'm not too sure. I'm confused too!`
+* `createThread mCode/CS2113 tTitle/Exam Information cContent/All the best for the final guys`
 
-=== Finding a forumThread : `find`
+=== Creating a new comment : `createComment`
 
-Finds a list of threads that match the given arguments. +
-Format: `find [m/MOD_CODE] keywords`
+Create a new comment under a specific forumThread that exists. +
+Format: `createComment tId/THREAD ID cContent/COMMENT CONTENT`
+
+Examples:
+
+* `createComment tId/1 cContent/This is a new comment`
+
+=== Updating a forumThread title : `updateThread`
+
+Update an existing forumThread title in the forum book. +
+Format: `updateThread tId/THREAD ID tTitle/NEW THREAD TITLE`
 
 ****
-* The search is case insensitive. e.g CS2113 will match cs2113
+*  Only admin and the forumThread creator are allowed to update the title.
 ****
 
 Examples:
 
-* `find m/CS2113 java`
-* `find fun`
+* `updateThread tId/123 tTitle/This is a new title`
 
-=== Liking a forumThread : `like`
+=== Updating a comment title : `updateComment`
 
-Gives like to a forumThread under a specific module +
-Format: `like m/MODULE_NAME i/THREAD_INDEX`
+Update an existing comment title in the forum book. +
+Format: `updateComment cId/COMMENT ID cContent/NEW COMMENT CONTENT`
 
-Examples:
-
-* `like m/CS2113 i/1` +
-give like to forumThread index 1 under module CS2113
-
-=== Sorting a forumThread by most like : `sortdate`
-
-Sort the threads under a specific module by date. +
-Format: `sortdate m/MODULE_NAME`
+****
+*  Only admin and the comment creator are allowed to update the content.
+****
 
 Examples:
 
-* `sortdate m/CS2113`
+* `updateComment tId/123 tTitle/This is a new title`
 
-=== Sorting a forumThread by most like : `sortlike`
+=== deleting a forumThread : `deleteThread`
 
-Sort the threads under a specific module by most like. +
-Format: `sortlike m/MODULE_NAME`
+Delete an existing forumThread in the forum book. +
+Format: `deleteThread tId/THREAD ID`
+
+****
+*  Only admin and the forumThread creator are allowed to delete the forumThread.
+****
 
 Examples:
 
-* `sortlike m/CS2113`
+* `deleteThread tId/1`
+
+=== deleting a comment : `deleteComment`
+
+Delete an existing comment in the forum book. +
+Format: `deleteComment cId/COMMENT ID`
+
+****
+*  Only admin and the comment creator are allowed to delete the comment.
+****
+
+Examples:
+
+* `deleteComment cId/1`
+
+=== Listing all the modules : 'listModule'
+
+List all the existing modules in the forum book. +
+Format: `listModule`
+
+Examples:
+
+* `listModule`
+
+=== Listing all the forumThreads : 'selectModule'
+
+List all the existing forumThreads under a specific module that exists as well. +
+Format: `selectModule mCode/MODULE CODE`
+
+Examples:
+
+* `selectModule mCode/CS2113`
+
+=== Listing all the comments : 'selectThread'
+
+List all the existing comments under a specific forumThread that exists as well. +
+Format: `selectThread tId/THREAD ID`
+
+Examples:
+
+* `selectThread tId/123`
 
 === Announcing new command : `announce`
 
@@ -225,15 +260,20 @@ e.g `updatePass uName/john uPass/098`
 * *DeleteUser* : `deleteUser uName/USER_NAME` +
 e.g `deleteUser uName/john`
 * *Help*
-* *Create* : `create m/MODULE_NAME t/THREAD_NAME [c/REPLY_MESSAGE]` +
-e.g `create m/CS2113 t/what is this module like? c/I heard that the workload is very heavy`
-* *Reply* : `reply m/MODULE_NAME i/THREAD_INDEX c/REPLY_MESSAGE` +
-e.g. `reply m/CS2113 i/1 c/It's Heavy but you get to learn a lot for it.`
-* *Find* : `find [m/MOD_CODE] keywords` +
-e.g. `find m/CS2113 java`
-* *Like* : `like m/MODULE_NAME i/THREAD_INDEX` +
-e.g. `like m/CS2113 i/1`
-* *Sortdate* : `sortdate m/MODULE_NAME` +
-e.g `sortdate m/CS2113`
-* *Sortlike* : `sortlike m/CS2113` +
-e.g `sortdate m/CS2113`
+* *createThread* : `createThread mCode/MODULE CODE tTitle/THREAD TITLE cContent/COMMENT CONTENT` +
+e.g `createThread mCode/CS2113 tTitle/Exam Information cContent/All the best for the final guys`
+* *createComment* : `createComment tId/THREAD ID cContent/COMMENT CONTENT` +
+e.g `createComment tId/1 cContent/This is a new comment`
+* *updateThread* : `updateThread tId/THREAD ID tTitle/NEW THREAD TITLE`+
+e.g `updateThread tId/123 tTitle/This is a new title`
+* *updateComment* : `updateComment cId/COMMENT ID cContent/NEW COMMENT CONTENT`+
+e.g `updateComment tId/123 tTitle/This is a new title`
+* *deleteThread* : `deleteThread tId/THREAD ID`+
+e.g `deleteThread tId/1`
+* *deleteComment* : `deleteComment cId/COMMENT ID`+
+e.g `deleteComment cId/1`
+* *listModule*
+* *selectModule* : `selectModule mCode/MODULE CODE`+
+e.g `selectModule mCode/CS2113`
+* *selectThread* : `selectThread tId/THREAD ID`+
+e.g `selectThread tId/123`
