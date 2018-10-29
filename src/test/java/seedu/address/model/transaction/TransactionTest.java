@@ -1,6 +1,5 @@
 package seedu.address.model.transaction;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.model.testutil.Assert.assertThrows;
