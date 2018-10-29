@@ -301,8 +301,8 @@ public abstract class AddressBookSystemTest {
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());
         assertEquals(SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
-        final int totalPersons = testApp.getModel().getAddressBook().getPersonList().size();
-        assertEquals(String.format(TOTAL_PERSONS_STATUS, totalPersons), getStatusBarFooter().getTotalPersonsStatus());
+        assertEquals(String.format(TOTAL_PERSONS_STATUS, getModel().getAddressBook().getPersonList().size()),
+                 getStatusBarFooter().getTotalPersonsStatus());
     }
 
     /**
