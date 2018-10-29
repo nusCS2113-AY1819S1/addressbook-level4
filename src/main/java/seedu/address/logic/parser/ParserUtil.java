@@ -180,7 +180,7 @@ public class ParserUtil {
         }
 
         try {
-            TimeSlot toReturn = new TimeSlot(day, startTime, endTime, "NF can you add the label here in ParserUtil");
+            TimeSlot toReturn = new TimeSlot(day, startTime, endTime, "to be implemented!");
             return toReturn;
         } catch (IllegalArgumentException e) {
             throw new ParseException(TimeSlot.MESSAGE_INVALID_TIME_SLOT);

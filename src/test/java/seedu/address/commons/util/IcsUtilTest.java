@@ -3,7 +3,6 @@ package seedu.address.commons.util;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.DayOfWeek;
@@ -27,7 +26,8 @@ public class IcsUtilTest {
     private static final Path VALID_FILE_11_TIMESLOTS = TEST_DATA_FOLDER.resolve("valid.ics");
     private static final Path TEMP_FILE = TestUtil.getFilePathInSandboxFolder("temp.ics");
 
-    private static final TimeSlot VALID_TIMESLOT = new TimeSlot(DayOfWeek.MONDAY, LocalTime.parse("10:00:00"), LocalTime.parse("12:00:00"), LABEL);
+    private static final TimeSlot VALID_TIMESLOT =
+            new TimeSlot(DayOfWeek.MONDAY, LocalTime.parse("10:00:00"), LocalTime.parse("12:00:00"), LABEL);
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -109,7 +109,7 @@ public class IcsUtilTest {
     /**
      * Util function
      */
-    private TimeTable getValidTimeTable(){
+    private TimeTable getValidTimeTable() {
         TimeTable timeTable = new TimeTable();
         timeTable.addTimeSlot(VALID_TIMESLOT);
         return timeTable;
@@ -118,7 +118,7 @@ public class IcsUtilTest {
     /**
      * Util function
      */
-    private void writeBlankTempFile(){
+    private void writeBlankTempFile() {
         try {
             FileUtil.writeToFile(TEMP_FILE, "");
         } catch (IOException e) {
