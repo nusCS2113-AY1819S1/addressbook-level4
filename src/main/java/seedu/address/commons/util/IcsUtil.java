@@ -142,15 +142,16 @@ public class IcsUtil {
         String timeEndStr = (dateEnd == null) ? null : timeFormat.format(dateEnd.getValue());
 
         Summary summary = vEvent.getSummary();
-        String summaryStr = (summary == null) ? null : summary.getValue();
+        String label = (summary == null) ? null : summary.getValue();
 
-        RecurrenceRule recurrenceRule = vEvent.getRecurrenceRule(); //is the event recurring every X-weeks/X-days?
+        RecurrenceRule recurrenceRule = vEvent.getRecurrenceRule();
+        //if the event is non-recurring, ignore the VEvent and do not add it.
         if (recurrenceRule == null) {
             return Optional.empty();
         }
 
         //if any of out essential TimeSlot variables are missing, ignore the VEvent and do not add it.
-        if ((dateStartStr == null) || (timeStartStr == null) || (timeEndStr == null) || (summaryStr == null)) {
+        if ((dateStartStr == null) || (timeStartStr == null) || (timeEndStr == null) ) {
             return Optional.empty();
         }
 
@@ -161,7 +162,7 @@ public class IcsUtil {
 
         //Add timeslot to timetable
         //TODO: Add (summary/label) to timetable object.
-        TimeSlot timeSlot = new TimeSlot(timeSlotDay, timeSlotStartTime, timeSlotEndTime);
+        TimeSlot timeSlot = new TimeSlot(timeSlotDay, timeSlotStartTime, timeSlotEndTime, label);
         return Optional.of(timeSlot);
     }
 
@@ -216,7 +217,9 @@ public class IcsUtil {
 
     /**
      * Writes {@code ICalendar} object to file specified
-     * @throws IOException if any error occurs during write.
+     * @throws IOException if any IO error occurs during write.
+     * if file already exists: overwrite.
+     * if directory not found: create directory.
      */
     private void writeICalendarToFile(ICalendar iCalendar, Path filePath) throws IOException {
         requireNonNull(filePath);
@@ -224,7 +227,7 @@ public class IcsUtil {
 
         File file = filePath.toFile();
         try {
-            Files.createFile(filePath); //biweekly will throw IOException if the file does not exist already
+            FileUtil.createIfMissing(filePath);
             Biweekly.write(iCalendar).go(file);
         } catch (IOException e) {
             throw new IOException();
@@ -234,7 +237,7 @@ public class IcsUtil {
     /**
      * Reads {@code ICalendar} object from {@code Path} specified
      *
-     * Will return an empty {@code ICalendar} if the .ics file is empty or has no related information.
+     * Will return an empty {@code ICalendar} if the .ics file is empty or has no {@code ICalendar} information.
      *
      * @throws IOException if any IO error occurs during read.
      *

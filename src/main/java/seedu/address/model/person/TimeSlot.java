@@ -29,6 +29,7 @@ public class TimeSlot {
             "\\w+(\\s*)([0-9]|[0-1][0-9]|[2][0-3])[:]?[0]?[0]?(\\s*)[-](\\s*)([0-9]|[0-1][0-9]|[2][0-3])[:]?[0]?[0]?";
 
     private static final Color DEFAULT_COLOR = Color.BLACK;
+    private static final String DEFAULT_LABEL = "<No Label>";
 
     private DayOfWeek dayOfWeek;
     private LocalTime startTime;
@@ -45,6 +46,7 @@ public class TimeSlot {
         startTime = start;
         endTime = end;
         color = DEFAULT_COLOR;
+        label = DEFAULT_LABEL;
     }
 
     public TimeSlot(DayOfWeek day, LocalTime start, LocalTime end, Color col) {
@@ -56,6 +58,18 @@ public class TimeSlot {
         startTime = start;
         endTime = end;
         color = col;
+        label = DEFAULT_LABEL;
+    }
+
+    public TimeSlot(DayOfWeek day, LocalTime start, LocalTime end, String label) {
+        requireAllNonNull(day, start, end);
+        checkArgument(isValidTimeSlot(start, end), MESSAGE_INVALID_TIME_SLOT);
+
+        dayOfWeek = day;
+        startTime = start;
+        endTime = end;
+        color = DEFAULT_COLOR;
+        this.label = label;
     }
 
     public TimeSlot(TimeSlot input) {
@@ -63,6 +77,7 @@ public class TimeSlot {
         startTime = input.startTime;
         endTime = input.endTime;
         color = input.color;
+        label = input.getLabel();
     }
 
     public LocalTime getStartTime() {
@@ -149,6 +164,7 @@ public class TimeSlot {
         this.startTime = merged.startTime;
         this.endTime = merged.endTime;
         this.dayOfWeek = merged.dayOfWeek;
+        this.label = merged.label;
     }
 
     /**
@@ -167,8 +183,9 @@ public class TimeSlot {
         LocalTime toReturnStart = this.startTime.isBefore(toMerge.startTime) ? this.startTime : toMerge.startTime;
         LocalTime toReturnEnd = this.endTime.isAfter(toMerge.endTime) ? this.endTime : toMerge.endTime;
         DayOfWeek toReturnDay = this.dayOfWeek;
+        String toReturnLabel = this.label;
 
-        return new TimeSlot(toReturnDay, toReturnStart, toReturnEnd);
+        return new TimeSlot(toReturnDay, toReturnStart, toReturnEnd, toReturnLabel);
     }
 
     @Override

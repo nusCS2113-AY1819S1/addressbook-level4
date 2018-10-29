@@ -51,8 +51,9 @@ public class XmlAdaptedTimeSlot {
         DayOfWeek dayOfWeek = DayOfWeek.of(Integer.parseInt(this.dayOfWeek));
         LocalTime startTime = LocalTime.parse(this.startTime);
         LocalTime endTime = LocalTime.parse(this.endTime);
+        String label = this.label;
 
-        return new TimeSlot(dayOfWeek, startTime, endTime);
+        return new TimeSlot(dayOfWeek, startTime, endTime, label);
     }
 
     @Override

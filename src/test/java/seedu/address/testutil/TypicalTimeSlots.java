@@ -13,43 +13,52 @@ import seedu.address.model.person.TimeTable;
  * A utility class containing a list of {@code TimeSlot} objects to be used in tests.
  */
 public class TypicalTimeSlots {
+    private static final String LABEL = "InsertFunnyLabelName";
     // In typical timetable
     public static final TimeSlot MON_8_TO_10 = new TimeSlot(DayOfWeek.MONDAY,
             LocalTime.parse("08:00"),
-            LocalTime.parse("10:00"));
+            LocalTime.parse("10:00"),
+            LABEL );
 
     public static final TimeSlot MON_10_TO_12 = new TimeSlot(DayOfWeek.MONDAY,
             LocalTime.parse("10:00"),
-            LocalTime.parse("12:00"));
+            LocalTime.parse("12:00"),
+            LABEL );
 
     public static final TimeSlot TUE_10_TO_12 = new TimeSlot(DayOfWeek.TUESDAY,
             LocalTime.parse("10:00"),
-            LocalTime.parse("12:00"));
+            LocalTime.parse("12:00"),
+            LABEL );
 
     // Not in typical timetable, will overlap
     public static final TimeSlot MON_9_TO_11 = new TimeSlot(DayOfWeek.MONDAY,
             LocalTime.parse("09:00"),
-            LocalTime.parse("11:00"));
+            LocalTime.parse("11:00"),
+            LABEL );
 
     // Not in typical timetable, will not overlap
     public static final TimeSlot TUE_12_TO_14 = new TimeSlot(DayOfWeek.TUESDAY,
             LocalTime.parse("12:00"),
-            LocalTime.parse("14:00"));
+            LocalTime.parse("14:00"),
+            LABEL );
 
     // Not in typical timetable, will not overlap
     public static final TimeSlot WED_10_TO_12 = new TimeSlot(DayOfWeek.WEDNESDAY,
             LocalTime.parse("10:00"),
-            LocalTime.parse("12:00"));
+            LocalTime.parse("12:00"),
+            LABEL );
 
     // Not in typical timetable, for merge testing
     public static final TimeSlot MON_8_TO_12 = new TimeSlot(DayOfWeek.MONDAY,
             LocalTime.parse("08:00"),
-            LocalTime.parse("12:00"));
+            LocalTime.parse("12:00"),
+            LABEL );
 
     // Not in typical timetable, for merge testing
     public static final TimeSlot MON_8_TO_11 = new TimeSlot(DayOfWeek.MONDAY,
             LocalTime.parse("08:00"),
-            LocalTime.parse("11:00"));
+            LocalTime.parse("11:00"),
+            LABEL );
 
     public static TimeTable getTypicalTimeTable() {
         TimeTable t = new TimeTable();
