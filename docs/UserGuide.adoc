@@ -53,6 +53,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
+// tag::logincreateaccount[]
 === Logging into system: `login`
 
 Logs into application using relevant credentials. +
@@ -62,8 +63,9 @@ Format: `login USERID PASSWORD ROLE`
 * USERID refers to student matriculation number
 * PASSWORD refers to the password associated with the existing account
 * ROLE refers to the role in NUSSU associated with the existing account
-* The USERID must be in the `X1234567X` format, where X can be any lower or upper case letter alphabet, and there must be exactly 7 digits between the two `X`
+* The USERID must be in the `X1234567X` format, where X can only be upper case letter alphabets, and there must be exactly 7 digits between the two `X`
 * USERID must belong to an existing account
+* ROLE can only contain lower-case letter alphabets, and be only either `member`, `president` or `treasurer`
 * There must be at least 1 space between USERID and PASSWORD, and between PASSWORD and ROLE
 * There must be at least 1 space between `login` keyword and USERID
 * The 3 parameters, USERID, PASSWORD and ROLE must be present in user input during the login process
@@ -83,14 +85,25 @@ image::DefaultAccountDetails.PNG[width="300"]
 The default account login details for logging in when the application is launched for the very first time, can be illustrated in the picture
 below. Enter the login details shown in the picture exactly, as all the login parameters are case-sensitive. Thus, any difference
 in casing between the actual and expected input characters will lead to failure in logging into the application.
-image::DefaultAccountDetails.PNG[width="300"]
-After the user logs in successfully, they should expect to see the main window of the application as shown below.
-image::LoginSuccess.png[width="300"]
 ====
+image::DefaultAccountDetails.PNG[width="300"]
 
 [NOTE]
 ====
-Password is case-sensitive!
+After the user logs in successfully, they should expect to see the main window of the application as shown below.
+====
+image::LoginSuccess.png[width="300"]
+
+[NOTE]
+====
+If the user is unable to log in successfully, they should expect to see the login input field in a pop-up box again, asking the user
+to input their login credentials again.
+====
+image::BlankLoginInput.png[width="300"]
+
+[NOTE]
+====
+User Id, Password and Role inputs are all case-sensitive!
 ====
 
 === Creating a new user account: `createaccount`
@@ -102,11 +115,11 @@ Format: `createaccount USERID PASSWORD ROLE`
 * USERID refers to student matriculation number
 * PASSWORD refers to any desired passphrases the new user wishes to have
 * ROLE refers to the role in NUSSU associated with the existing account
-* The USERID must be in the `X1234567X` format, where X can only be upper-case letter alphabet, and there must be exactly 7 digits between the two `X`
+* The USERID must be in the `X1234567X` format, where X can only be upper-case letter alphabets, and there must be exactly 7 digits between the two `X`
 * USERID must not belong to an existing account
 * ROLE can only contain lower-case letter alphabets, and be only either `member`, `president` or `treasurer`
 * There must be at least 1 space between USERID and PASSWORD, and between PASSWORD and ROLE
-* There must be at least 1 space between `login` keyword and USERID
+* There must be at least 1 space between `createaccount` keyword and USERID
 * The 3 parameters, USERID, PASSWORD and ROLE must be present in user input during the account creation process
 * There must not be any additional unnecessary parameters in user input during the account creation process
 * There must not be any spaces in USERID, PASSWORD and ROLE
@@ -116,8 +129,14 @@ Examples:
 
 * `createaccount A1234569M zaq1xsw2cde3 member` +
 Creates a new account with user ID as A1234569M, password as zaq1xsw2cde3 and role as member in the address book.
+The image below shows the outcome of a successful creation of a new account.
 
 image::CreateAccountSuccess.PNG[width="300"]
+
+The image below shows the outcome of an unsuccessful creation of a new account due to an account already existing.
+
+image::CreateAccountFailure.PNG[width="300"]
+// end::logincreateaccount[]
 
 === Viewing help : `help`
 

@@ -32,13 +32,13 @@ public class UserRole {
      */
     public UserRole(String role) throws UnsupportedEncodingException {
         requireNonNull(role);
-        if (!LoginManager.getisCurrentlyLoggingInCreatingAccount()) {
+        if (LoginManager.getIsCurrentlyCreatingAccount() && !LoginManager.getIsCurrentlyTesting()) {
             checkArgument(isValidUserRole(role), MESSAGE_USERROLE_CONSTRAINTS);
         }
-        if (LoginManager.getisCurrentlyLoggingInCreatingAccount()) {
-            fullUserRole = role;
-        } else {
+        if (LoginManager.getIsCurrentlyCreatingAccount()) {
             fullUserRole = Base64.getEncoder().encodeToString(role.getBytes("utf-8"));
+        } else {
+            fullUserRole = role;
         }
     }
 

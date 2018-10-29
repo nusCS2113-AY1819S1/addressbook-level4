@@ -31,13 +31,13 @@ public class UserPassword {
      */
     public UserPassword(String pass) throws UnsupportedEncodingException {
         requireNonNull(pass);
-        if (!LoginManager.getisCurrentlyLoggingInCreatingAccount()) {
+        if (LoginManager.getIsCurrentlyCreatingAccount() && !LoginManager.getIsCurrentlyTesting()) {
             checkArgument(isValidUserPassword(pass), MESSAGE_USERPASSWORD_CONSTRAINTS);
         }
-        if (LoginManager.getisCurrentlyLoggingInCreatingAccount()) {
-            fullUserPassword = pass;
-        } else {
+        if (LoginManager.getIsCurrentlyCreatingAccount()) {
             fullUserPassword = Base64.getEncoder().encodeToString(pass.getBytes("utf-8"));
+        } else {
+            fullUserPassword = pass;
         }
     }
 

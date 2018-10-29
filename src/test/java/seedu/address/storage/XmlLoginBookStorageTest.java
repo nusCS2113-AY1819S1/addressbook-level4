@@ -59,18 +59,6 @@ public class XmlLoginBookStorageTest {
     }
 
     @Test
-    public void readLoginBook_invalidAccountLoginBook_throwIllegalArgumentException() throws Exception {
-        thrown.expect(IllegalArgumentException.class);
-        readLoginBook("invalidAccountLoginBook.xml");
-    }
-
-    @Test
-    public void readLoginBook_invalidAndValidAccountLoginBook_throwIllegalArgumentException() throws Exception {
-        thrown.expect(IllegalArgumentException.class);
-        readLoginBook("invalidAndValidAccountLoginBook.xml");
-    }
-
-    @Test
     public void saveLoginBook_nullLoginBook_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         saveLoginBook(null, "SomeFile.xml");

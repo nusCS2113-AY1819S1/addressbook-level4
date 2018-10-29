@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.LoginManager;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.budgetelements.ClubName;
 import seedu.address.model.budgetelements.ExpectedTurnout;
@@ -39,7 +40,7 @@ public class ParserUtil {
     public static UserId parseUserId(String userId) throws ParseException, UnsupportedEncodingException {
         requireNonNull(userId);
         String trimmeduserId = userId.trim();
-        if (!UserId.isValidUserId(trimmeduserId)) {
+        if (!UserId.isValidUserId(trimmeduserId) && !LoginManager.getIsCurrentlyTesting()) {
             throw new ParseException(UserId.MESSAGE_USERID_CONSTRAINTS);
         }
         return new UserId(trimmeduserId);
@@ -55,7 +56,7 @@ public class ParserUtil {
             UnsupportedEncodingException {
         requireNonNull(userPassword);
         String trimmeduserPassword = userPassword.trim();
-        if (!UserPassword.isValidUserPassword(trimmeduserPassword)) {
+        if (!UserPassword.isValidUserPassword(trimmeduserPassword) && !LoginManager.getIsCurrentlyTesting()) {
             throw new ParseException(UserPassword.MESSAGE_USERPASSWORD_CONSTRAINTS);
         }
         return new UserPassword(trimmeduserPassword);
@@ -69,7 +70,7 @@ public class ParserUtil {
     public static UserRole parseUserRole(String userRole) throws ParseException, UnsupportedEncodingException {
         requireNonNull(userRole);
         String trimmeduserRole = userRole.trim();
-        if (!UserRole.isValidUserRole(trimmeduserRole)) {
+        if (!UserRole.isValidUserRole(trimmeduserRole) && !LoginManager.getIsCurrentlyTesting()) {
             throw new ParseException(UserRole.MESSAGE_USERROLE_CONSTRAINTS);
         }
         return new UserRole(trimmeduserRole);

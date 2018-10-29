@@ -314,21 +314,41 @@ image::WrongIdPasswordRole.PNG[width="300"]
 image::WrongIdOrPasswordOrRoleList.PNG[width="300"]
 
 [NOTE]
+In step 2, if the user does not type in anything and gives a blank input for the login command instead, the application will throw a new ParseException
+and consider the login attempt as unsuccessful and initiate a new pop-up window asking the user for input of login
+credentials again, as shown in the image below.
+
+image::BlankLoginInput.PNG[width="300"]
+
+[NOTE]
+In step 2, if the user types in a string of login input that has either the id, password or role parameters missing instead, the application will
+throw a new ParseException and consider the login attempt as unsuccessful and initiate a new pop-up window asking the user
+for input of login credentials again, as shown in the image below.
+
+image::MissingLoginInput.PNG[width="300"]
+
+[NOTE]
 In all cases where the user inputs either the wrong ID, password, role, any combination of two or all three, there will
 be no account left in the account list when `getFilteredLoginDetailsList` method in `Model` is called. The
 `isLoginSuccessful` boolean in `LoginManager` will be set to false via the setter method, `setIsLoginSuccessful`
 in `LoginManager`. This is done by the `checkUpdatedAccountListSetLoginCondition` method in `LoginUserIdPasswordRoleCommand`.
 The `initializeLoginProcess` method in `MainWindow` will be called repeatedly until `isLoginSuccessful` is set to true.
-The sequence diagram below shows the high level workflow of the login mechanism.
+The sequence diagram below shows the high level workflow of the login mechanism in the event of log-in failure.
 
 image::RepeatLoginSequenceDiagram.png[width="300"]
 
 The activity diagram below shows the overall picture of how the login mechanism works.
 
 image::LoginActivityDiagram.png[width="300"]
+The activity diagram below is an extension of the activity diagram above.
+
 image::LoginExtendedActivityDiagram.png[width="300"]
 
 ==== Design Considerations
+
+===== Preface
+This section touches on the different aspects of design considerations encountered during the project in the implementation of the login feature.
+It will also talk about the different alternatives in different design aspects, and its advantages and disadvantages.
 
 ===== Aspect: How login data is stored
 

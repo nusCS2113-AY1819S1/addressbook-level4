@@ -10,9 +10,7 @@ import static seedu.address.testutil.TypicalAccounts.LOGINDETAIL_1;
 import static seedu.address.testutil.TypicalAccounts.getTypicalLoginBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalTaggedAddressBook;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.Collections;
 import java.util.function.Predicate;
 
@@ -230,38 +228,20 @@ public class LoginUserIdPasswordRoleCommandTest {
      * Parses {@code userInput} into a {@code UserIdContainsKeywordsPredicate}.
      */
     private UserIdContainsKeywordsPredicate prepareUserIdContainsKeywordsPredicate(String userInput) {
-        String encodedUserInput = null;
-        try {
-            encodedUserInput = Base64.getEncoder().encodeToString(userInput.getBytes("utf-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return new UserIdContainsKeywordsPredicate(Arrays.asList(encodedUserInput.split("\\s+")));
+        return new UserIdContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 
     /**
      * Parses {@code userInput} into a {@code UserPasswordContainsKeywordsPredicate}.
      */
     private UserPasswordContainsKeywordsPredicate prepareUserPasswordContainsKeywordsPredicate(String userInput) {
-        String encodedUserInput = null;
-        try {
-            encodedUserInput = Base64.getEncoder().encodeToString(userInput.getBytes("utf-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return new UserPasswordContainsKeywordsPredicate(Arrays.asList(encodedUserInput.split("\\s+")));
+        return new UserPasswordContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 
     /**
      * Parses {@code userInput} into a {@code UserRoleContainsKeywordsPredicate}.
      */
     private UserRoleContainsKeywordsPredicate prepareUserRoleContainsKeywordsPredicate(String userInput) {
-        String encodedUserInput = null;
-        try {
-            encodedUserInput = Base64.getEncoder().encodeToString(userInput.getBytes("utf-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return new UserRoleContainsKeywordsPredicate(Arrays.asList(encodedUserInput.split("\\s+")));
+        return new UserRoleContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }

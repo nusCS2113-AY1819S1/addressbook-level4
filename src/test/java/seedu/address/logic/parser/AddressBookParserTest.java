@@ -6,6 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILLLEVEL;
+import static seedu.address.testutil.AccountUtil.buildLogin;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -32,6 +33,7 @@ import seedu.address.logic.commands.FindTagSubCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LoginUserIdPasswordRoleCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
@@ -66,22 +68,20 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_login() throws Exception {
-        LoginManager.setIsCurrentlyLoggingInCreatingAccount(true);
         LoginDetails loginDetails = new AccountBuilder().build();
-        CreateAccountCommand command = (CreateAccountCommand) parser.parseCommand(AccountUtil
-                .getCreateAccountCommand(loginDetails));
-        assertEquals(new CreateAccountCommand(loginDetails), command);
-        LoginManager.setIsCurrentlyLoggingInCreatingAccount(false);
+        LoginUserIdPasswordRoleCommand command = (LoginUserIdPasswordRoleCommand) parser.parseCommand(AccountUtil
+                .getLoginCommand(loginDetails));
+        assertEquals(buildLogin(), command);
     }
 
     @Test
     public void parseCommand_createaccount() throws Exception {
-        LoginManager.setIsCurrentlyLoggingInCreatingAccount(true);
+        LoginManager.setIsCurrentlyTesting(true);
         LoginDetails loginDetails = new AccountBuilder().build();
         CreateAccountCommand command = (CreateAccountCommand) parser.parseCommand(AccountUtil
                                                                         .getCreateAccountCommand(loginDetails));
         assertEquals(new CreateAccountCommand(loginDetails), command);
-        LoginManager.setIsCurrentlyLoggingInCreatingAccount(false);
+        LoginManager.setIsCurrentlyTesting(false);
     }
 
     @Test

@@ -23,62 +23,32 @@ public class XmlAccountTest {
     private static final String VALID_USERROLE = LOGINDETAIL_2.getUserRole().toString();
 
     @Test
-    public void toModelType_invalidUserId_throwsIllegalValueException() {
-        LoginManager.setIsCurrentlyLoggingInCreatingAccount(true);
-        XmlAccount account =
-                new XmlAccount(INVALID_USERID, VALID_USERPASSWORD, VALID_USERROLE);
-        String expectedMessage = UserId.MESSAGE_USERID_CONSTRAINTS;
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, account::toModelType);
-        LoginManager.setIsCurrentlyLoggingInCreatingAccount(false);
-    }
-
-    @Test
     public void toModelType_nullUserId_throwsIllegalValueException() {
-        LoginManager.setIsCurrentlyLoggingInCreatingAccount(true);
+        LoginManager.setIsCurrentlyTesting(true);
         XmlAccount account = new XmlAccount(null, VALID_USERPASSWORD, VALID_USERROLE);
         String expectedMessage = String.format(MISSING_ACCOUNT_FIELD_MESSAGE_FORMAT, UserId.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, account::toModelType);
-        LoginManager.setIsCurrentlyLoggingInCreatingAccount(false);
-    }
-
-    @Test
-    public void toModelType_invalidUserPassword_throwsIllegalValueException() {
-        LoginManager.setIsCurrentlyLoggingInCreatingAccount(true);
-        XmlAccount account =
-                new XmlAccount("A1234567M", INVALID_USERPASSWORD, VALID_USERROLE);
-        String expectedMessage = UserPassword.MESSAGE_USERPASSWORD_CONSTRAINTS;
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, account::toModelType);
-        LoginManager.setIsCurrentlyLoggingInCreatingAccount(false);
+        LoginManager.setIsCurrentlyTesting(false);
     }
 
     @Test
     public void toModelType_nullUserPassword_throwsIllegalValueException() {
-        LoginManager.setIsCurrentlyLoggingInCreatingAccount(true);
+        LoginManager.setIsCurrentlyTesting(true);
         XmlAccount account = new XmlAccount("A1234567M", null, VALID_USERROLE);
         String expectedMessage = String.format(MISSING_ACCOUNT_FIELD_MESSAGE_FORMAT,
                 UserPassword.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, account::toModelType);
-        LoginManager.setIsCurrentlyLoggingInCreatingAccount(false);
-    }
-
-    @Test
-    public void toModelType_invalidUserRole_throwsIllegalValueException() {
-        LoginManager.setIsCurrentlyLoggingInCreatingAccount(true);
-        XmlAccount account =
-                new XmlAccount("A1234567M", VALID_USERPASSWORD, INVALID_USERROLE);
-        String expectedMessage = UserRole.MESSAGE_USERROLE_CONSTRAINTS;
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, account::toModelType);
-        LoginManager.setIsCurrentlyLoggingInCreatingAccount(false);
+        LoginManager.setIsCurrentlyTesting(false);
     }
 
     @Test
     public void toModelType_nullUserRole_throwsIllegalValueException() {
-        LoginManager.setIsCurrentlyLoggingInCreatingAccount(true);
+        LoginManager.setIsCurrentlyTesting(true);
         XmlAccount account = new XmlAccount("A1234567M", VALID_USERPASSWORD, null);
         String expectedMessage = String.format(MISSING_ACCOUNT_FIELD_MESSAGE_FORMAT,
                 UserRole.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, account::toModelType);
-        LoginManager.setIsCurrentlyLoggingInCreatingAccount(false);
+        LoginManager.setIsCurrentlyTesting(false);
     }
 
 }

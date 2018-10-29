@@ -22,7 +22,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.LoginCommand;
+import seedu.address.logic.commands.LoginUserIdPasswordRoleCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
@@ -56,12 +56,13 @@ public class AddressBookParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
-        case LoginCommand.COMMAND_WORD:
-            LoginManager.setIsCurrentlyLoggingInCreatingAccount(true);
+        case LoginUserIdPasswordRoleCommand.COMMAND_WORD:
             return new LoginUserIdPasswordRoleCommandParser().parse(arguments);
 
         case CreateAccountCommand.COMMAND_WORD:
-            LoginManager.setIsCurrentlyLoggingInCreatingAccount(true);
+            if (!LoginManager.getIsCurrentlyTesting()) {
+                LoginManager.setIsCurrentlyCreatingAccount(true);
+            }
             return new CreateAccountCommandParser().parse(arguments);
 
         case AddCommand.COMMAND_WORD:

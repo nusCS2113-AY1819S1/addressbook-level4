@@ -42,7 +42,7 @@ public class CreateAccountCommand extends Command {
         }
 
         model.createAccount(toAdd);
-        LoginManager.setIsCurrentlyLoggingInCreatingAccount(false);
+        LoginManager.setIsCurrentlyCreatingAccount(false);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

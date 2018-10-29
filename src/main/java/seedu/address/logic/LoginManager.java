@@ -5,7 +5,8 @@ package seedu.address.logic;
  */
 public class LoginManager {
 
-    private static boolean isCurrentlyLoggingInCreatingAccount = false;
+    private static boolean isCurrentlyCreatingAccount = false;
+    private static boolean isCurrentlyTesting = false;
     private static boolean isLoginSuccessful = false;
     private static boolean isMember = false;
     private static boolean isPresident = false;
@@ -13,10 +14,13 @@ public class LoginManager {
 
     public LoginManager() {}
 
-    public static boolean getisCurrentlyLoggingInCreatingAccount() {
-        return isCurrentlyLoggingInCreatingAccount;
+    public static boolean getIsCurrentlyCreatingAccount() {
+        return isCurrentlyCreatingAccount;
     }
 
+    public static boolean getIsCurrentlyTesting() {
+        return isCurrentlyTesting;
+    }
 
     public static boolean getIsLoginSuccessful() {
         return isLoginSuccessful;
@@ -34,8 +38,12 @@ public class LoginManager {
         return isTreasurer;
     }
 
-    public static void setIsCurrentlyLoggingInCreatingAccount(boolean setCurrentlyLoggingInCreatingAccount) {
-        isCurrentlyLoggingInCreatingAccount = setCurrentlyLoggingInCreatingAccount;
+    public static void setIsCurrentlyCreatingAccount(boolean setCurrentlyCreatingAccount) {
+        isCurrentlyCreatingAccount = setCurrentlyCreatingAccount;
+    }
+
+    public static void setIsCurrentlyTesting(boolean setCurrentlyTesting) {
+        isCurrentlyTesting = setCurrentlyTesting;
     }
 
     public static void setIsLoginSuccessful(boolean setLoginSuccessful) {

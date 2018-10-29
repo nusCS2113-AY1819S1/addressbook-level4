@@ -92,7 +92,7 @@ public class XmlUtilTest {
 
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
-        LoginManager.setIsCurrentlyLoggingInCreatingAccount(true);
+        LoginManager.setIsCurrentlyTesting(true);
         LoginBook dataFromLoginFile = XmlUtil.getDataFromFile(VALID_LOGIN_FILE,
                 XmlSerializableLoginBook.class).toModelType();
         assertEquals(2, dataFromLoginFile.getLoginDetailsList().size());

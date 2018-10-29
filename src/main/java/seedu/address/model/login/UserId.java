@@ -33,13 +33,13 @@ public class UserId {
      */
     public UserId(String id) throws UnsupportedEncodingException {
         requireNonNull(id);
-        if (!LoginManager.getisCurrentlyLoggingInCreatingAccount()) {
+        if (LoginManager.getIsCurrentlyCreatingAccount() && !LoginManager.getIsCurrentlyTesting()) {
             checkArgument(isValidUserId(id), MESSAGE_USERID_CONSTRAINTS);
         }
-        if (LoginManager.getisCurrentlyLoggingInCreatingAccount()) {
-            fullUserId = id;
-        } else {
+        if (LoginManager.getIsCurrentlyCreatingAccount()) {
             fullUserId = Base64.getEncoder().encodeToString(id.getBytes("utf-8"));
+        } else {
+            fullUserId = id;
         }
 
     }

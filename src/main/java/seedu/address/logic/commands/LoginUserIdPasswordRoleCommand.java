@@ -74,7 +74,6 @@ public class LoginUserIdPasswordRoleCommand extends LoginCommand {
     private void checkUpdatedAccountListSetLoginCondition(Model model) {
         if (model.getFilteredLoginDetailsList().size() != 0) {
             LoginManager.setIsLoginSuccessful(true);
-            LoginManager.setIsCurrentlyLoggingInCreatingAccount(false);
         } else {
             LoginManager.setAllRolesFalse();
             LoginManager.setIsLoginSuccessful(false);

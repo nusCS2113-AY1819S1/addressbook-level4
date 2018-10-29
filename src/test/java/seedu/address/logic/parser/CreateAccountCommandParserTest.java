@@ -27,14 +27,14 @@ public class CreateAccountCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() throws UnsupportedEncodingException {
-        LoginManager.setIsCurrentlyLoggingInCreatingAccount(true);
+        LoginManager.setIsCurrentlyTesting(true);
         LoginDetails expectedAccount = new LoginDetails(new UserId("A1234567M"), new UserPassword("zaq1xsw2cde3"),
                 new UserRole("member"));
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + ID_ACCOUNT_1_DESC
                 + PASSWORD_ACCOUNT_1_DESC + ROLE_ACCOUNT_1_DESC , new CreateAccountCommand(expectedAccount));
-        LoginManager.setIsCurrentlyLoggingInCreatingAccount(false);
+        LoginManager.setIsCurrentlyTesting(false);
     }
 
     @Test
