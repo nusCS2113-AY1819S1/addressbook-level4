@@ -5,8 +5,10 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 import java.util.Set;
 
+import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
+import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
@@ -36,8 +38,8 @@ public class DeleteCandidateCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        if (MainWindow.isExisting() && !MainWindow.getDisplayedBook().equals("candidatebook")) {
-            MainWindow.switchToCandidateBook();
+        if (!MainWindow.getDisplayedBook().equals("candidatebook")) {
+            EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
         }
         List<Candidate> lastShownList = model.getFilteredCandidateList();
         StringBuilder deletedCandidates = new StringBuilder();

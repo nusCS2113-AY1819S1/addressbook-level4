@@ -9,6 +9,8 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_SALARY;
 
+import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
@@ -58,8 +60,8 @@ public class AddJobDetailsCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        if (MainWindow.isExisting() && !MainWindow.getDisplayedBook().equals("companybook")) {
-            MainWindow.switchToCompanyBook();
+        if (!MainWindow.getDisplayedBook().equals("companybook")) {
+            EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
         }
         int companyIndex = model.getCompanyIndexFromName(toAdd.getCompanyName());
         if (companyIndex == -1) {

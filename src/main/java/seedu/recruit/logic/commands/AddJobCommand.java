@@ -2,6 +2,8 @@ package seedu.recruit.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.exceptions.CommandException;
@@ -25,7 +27,7 @@ public class AddJobCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         if (!MainWindow.getDisplayedBook().equals("companybook")) {
-            MainWindow.switchToCompanyBook();
+            EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
         }
         LogicManager.setLogicState("AddJobDetails");
         return new CommandResult(AddJobDetailsCommand.MESSAGE_USAGE);
