@@ -4,7 +4,6 @@ import java.util.Iterator;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
-import seedu.address.model.StorageController;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleManager;
 
