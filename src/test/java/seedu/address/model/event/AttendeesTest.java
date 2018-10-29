@@ -20,75 +20,93 @@ public class AttendeesTest {
     private Set<String> attendeesSetOne;
     private Set<String> attendeesSetTwo;
     private Set<String> attendeesSetThree;
+    private Set<String> attendeesSetNull;
+    private Attendees attendeesOne;
+    private Attendees attendeesTwo;
+    private Attendees attendeesThree;
 
     @Before
     public void setup() {
         attendeesSetOne = new HashSet<>();
         attendeesSetTwo = new HashSet<>();
         attendeesSetThree = new HashSet<>();
+        attendeesSetNull = null;
 
         attendeesSetOne.add(VALID_NAME_AMY);
         attendeesSetTwo.add(VALID_NAME_BOB);
         attendeesSetThree.add(VALID_NAME_BOB);
         attendeesSetThree.add(VALID_NAME_CALVIN);
+
+        attendeesOne = new Attendees(attendeesSetOne);
+        attendeesTwo = new Attendees(attendeesSetTwo);
+        attendeesThree = new Attendees(attendeesSetThree);
     }
 
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new Attendees(null, attendeesSetOne));
+    public void constructor_nullSingleSet_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> new Attendees(attendeesSetNull));
+    }
+
+    @Test
+    public void constructor_nullMultipleSet_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> new Attendees(attendeesSetOne,
+                attendeesSetTwo, attendeesSetNull));
     }
 
     @Test
     public void equals() {
-        Attendees listOne = new Attendees(attendeesSetOne);
-        Attendees listOneCopy = new Attendees(attendeesSetOne);
-        Attendees listTwo = new Attendees(attendeesSetTwo);
-        Attendees listThree = new Attendees(attendeesSetThree);
 
         // Attendees equal to itself
-        assertTrue(listOne.equals(listOne));
+        assertTrue(attendeesOne.equals(attendeesOne));
 
+        Attendees attendeesOneCopy = attendeesOne;
         // Attendees equal to one with same content
-        assertTrue(listOne.equals(listOneCopy));
+        assertTrue(attendeesOne.equals(attendeesOneCopy));
 
         // Attendees not equal to one with different content
-        assertFalse(listOne.equals(listTwo));
-        assertFalse(listOne.equals(listThree));
-        assertFalse(listTwo.equals(listThree));
+        assertFalse(attendeesOne.equals(attendeesTwo));
+        assertFalse(attendeesOne.equals(attendeesThree));
+        assertFalse(attendeesTwo.equals(attendeesThree));
     }
 
     @Test
-    public void hasName() {
-        Attendees attendees = new Attendees(attendeesSetOne);
-
+    public void hasName_presentName_success() {
         // Attendees has names it contain
-        assertTrue(attendees.hasName(VALID_NAME_AMY));
+        assertTrue(attendeesOne.hasName(VALID_NAME_AMY));
 
-        // Attendees does not have names absent in list
-        assertFalse(attendees.hasName(VALID_NAME_BOB));
     }
+
+    @Test
+    public void hasName_absentName_success() {
+        // Attendees does not have names absent in list
+        assertFalse(attendeesOne.hasName(VALID_NAME_BOB));
+    }
+
 
     @Test
     public void addName() {
-        Attendees attendees1 = new Attendees(attendeesSetTwo);
-        Attendees attendees2 = new Attendees(attendeesSetTwo);
-
-        attendees1.addName(VALID_NAME_CALVIN);
-        attendees2.attendeesSet.add(VALID_NAME_CALVIN);
-
-        assertEquals(attendees1, attendees2);
+        Attendees attendeesTwoNew = attendeesTwo.addName(VALID_NAME_CALVIN);
+        assertEquals(attendeesTwoNew, attendeesThree);
     }
 
     @Test
-    public void isSetEmpty() {
-        Attendees attendeesFilled = new Attendees(attendeesSetOne);
-        Attendees attendeesEmpty = new Attendees();
-
-        assertTrue(attendeesEmpty.isSetEmpty());
-
-        assertFalse(attendeesFilled.isSetEmpty());
+    public void removeName() {
+        Attendees attendeesThreeNew = attendeesThree.removeName(VALID_NAME_CALVIN);
+        assertEquals(attendeesTwo, attendeesThreeNew);
     }
+
+    @Test
+    public void isSetEmpty_attendeeIsEmpty_success() {
+        Attendees attendeesNull = new Attendees();
+        assertTrue(attendeesNull.isSetEmpty());
+    }
+
+    @Test
+    public void isSetEmpty_attendeeIsFilled_success() {
+        assertFalse(attendeesOne.isSetEmpty());
+    }
+
 
 
 }

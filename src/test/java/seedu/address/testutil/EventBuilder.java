@@ -48,6 +48,7 @@ public class EventBuilder {
     public EventBuilder(Event eventToCopy) {
         eventName = eventToCopy.getEventName();
         description = eventToCopy.getDescription();
+        date = eventToCopy.getDate();
         startTime = eventToCopy.getStartTime();
         endTime = eventToCopy.getEndTime();
         location = eventToCopy.getLocation();

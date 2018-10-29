@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -12,12 +11,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Attendees;
-import seedu.address.model.event.Description;
-import seedu.address.model.event.EndTime;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventName;
-import seedu.address.model.event.Location;
-import seedu.address.model.event.StartTime;
 import seedu.address.model.person.Person;
 
 //@@author jieliangang
@@ -68,7 +62,7 @@ public class InviteCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        Event updatedEvent = updateList(event, personName);
+        Event updatedEvent = event.addPersonToAttendee(personName);
 
         model.updateEvent(event, updatedEvent);
         model.commitAddressBook();
@@ -76,25 +70,6 @@ public class InviteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_INVITE_PERSON_SUCCESS, personName, event.getEventName()));
     }
 
-    /**
-     * Add new name to an event attendees list.
-     *
-     * @param event The event to be updated.
-     * @param personName The person's name to be removed from the attendees list.
-     * @return An updated event with the person's name in the attendees list.
-     */
-    public static Event updateList(Event event, String personName) {
-        assert event != null;
-        Attendees updatedAttendee = event.getAttendees().addName(personName);
-        EventName eventName = event.getEventName();
-        Description description = event.getDescription();
-        Location location = event.getLocation();
-        StartTime startTime = event.getStartTime();
-        EndTime endTime = event.getEndTime();
-        LocalDate date = event.getDate();
-
-        return new Event(eventName, description, date, startTime, endTime, location, updatedAttendee);
-    }
 
     @Override
     public boolean equals(Object other) {

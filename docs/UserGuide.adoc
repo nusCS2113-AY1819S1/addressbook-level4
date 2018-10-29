@@ -95,12 +95,13 @@ Enter a command: `list`
 
 Edits the details of the employee: +
 Format/Prompts: +
-Enter a command: `edit LIST_INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT t/TAG…​`
+Enter a command: `edit LIST_INDEX p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT t/TAG…​`
 
 ****
 * Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The
 index *must be a positive integer* 1, 2, 3, ... +
 * At least one of the optional fields must be provided.
+* Name is not editable
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing t/ without specifying any tags after it.
@@ -356,7 +357,7 @@ index must be a positive integer 1, 2, 3... +
 Input nil if it is not the field to be changed. +
 Format/Prompts: +
 Enter a command: `editEvent SCHEDULE_INDEX` +
-Enter event details: `n/NAME d/DESCRIPTION l/LOCATION date/DATE(DDMMYY) s/START TIME e/END TIME`  +
+Enter event details: `d/DESCRIPTION l/LOCATION date/DATE(DDMMYY) s/START TIME e/END TIME`  +
 
 ****
 * Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The
@@ -558,7 +559,7 @@ Task with id 1 is submitted as complete.
 
 * *List* : `list`
 
-* *Edit* : `edit LIST_INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT t/TAG…​`
+* *Edit* : `edit LIST_INDEX p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT t/TAG…​`
 
 * *Delete* : `delete LIST_INDEX`
 

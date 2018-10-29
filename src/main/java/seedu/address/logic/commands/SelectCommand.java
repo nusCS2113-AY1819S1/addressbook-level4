@@ -50,6 +50,7 @@ public class SelectCommand extends Command {
         String personName = person.getName().toString();
         EventContainsAttendeePredicate predicate = new EventContainsAttendeePredicate(personName);
         model.updateFilteredEventList(predicate);
+        model.sortByDate();
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
         return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex.getOneBased()));

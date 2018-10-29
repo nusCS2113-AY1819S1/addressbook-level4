@@ -9,7 +9,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 
@@ -106,7 +105,7 @@ public class UniqueEventList implements Iterable<Event> {
         for (Event event: internalList) {
             if (event.getAttendees().hasName(personName)) {
                 int index = internalList.indexOf(event);
-                Event updatedEvent = RemoveCommand.updateList(event, personName);
+                Event updatedEvent = event.removePersonFromAttendee(personName);
                 internalList.set(index, updatedEvent);
             }
         }
