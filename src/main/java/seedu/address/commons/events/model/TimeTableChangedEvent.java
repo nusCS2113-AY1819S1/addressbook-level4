@@ -4,11 +4,11 @@ import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.person.TimeTable;
 
 /** Indicates the TimeTable in the model has changed*/
-public class DisplayedTimeTableChangedEvent extends BaseEvent {
+public class TimeTableChangedEvent extends BaseEvent {
 
     public final TimeTable data;
 
-    public DisplayedTimeTableChangedEvent(TimeTable data) {
+    public TimeTableChangedEvent(TimeTable data) {
         this.data = data;
     }
 
