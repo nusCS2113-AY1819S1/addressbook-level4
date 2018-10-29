@@ -9,6 +9,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.util.SortComparator;
 import seedu.address.model.task.exceptions.DuplicateTaskException;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
 
@@ -104,39 +105,21 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     public void sortDate() {
-        internalList.sort(Task.compareDeadlines);
+        internalList.sort(SortComparator.compareDeadlines);
     }
 
     public void sortModule() {
-        internalList.sort(Task.compareModule);
+        internalList.sort(SortComparator.compareModule);
     }
 
     public void sortPriority() {
-        internalList.sort(Task.comparePriority);
+        internalList.sort(SortComparator.comparePriority);
     }
 
     public void reverseTask() {
         Collections.reverse(internalList);
     }
-/*
-    public List<Task> sortDeadline() {
-        List<Task> sortedList = internalList;
-        sortedList.sort(Task.compareDeadlines);
-        return sortedList;
-    }
 
-    public List<Task> sortModule() {
-        List<Task> sortedList = internalList;
-        sortedList.sort(Task.compareModule);
-        return sortedList;
-    }
-
-    public List<Task> sortPriority() {
-        List<Task> sortedList = internalList;
-        sortedList.sort(Task.comparePriority);
-        return sortedList;
-    }
-*/
     @Override
     public Iterator<Task> iterator() {
         return internalList.iterator();
