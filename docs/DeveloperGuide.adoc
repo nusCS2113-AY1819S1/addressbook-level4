@@ -406,7 +406,9 @@ Step 6. Close the OpenCSV writer.
 // tag::todo[]
 === Todo Feature
 Add a to-do task.
+
 ==== Current Implementation
+
 The todo mechanism is facilitated by the `TodoComand` from the `Logic` component. A `Todo` object is instantiated to add a to-do task and each `Todo` object consists of  a `Title` and `Content` object.
 
 ==== Design Considerations
