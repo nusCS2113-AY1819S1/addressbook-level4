@@ -170,8 +170,8 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setVenue(toCopy.venue);
             setDate(toCopy.dateTime);
-            setTags(toCopy.tags);
             setComment(toCopy.comment);
+            setTags(toCopy.tags);
             setAttendees(toCopy.attendees);
         }
 
@@ -179,7 +179,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, contact, phone, email, comment, venue, dateTime, tags, attendees);
+            return CollectionUtil.isAnyNonNull(name, contact, phone, email, venue, dateTime, comment, tags, attendees);
         }
 
         public void setName(Name name) {
