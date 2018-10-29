@@ -20,12 +20,13 @@ public class ModuleEnrolCommand extends Command {
 
     public static final String COMMAND_WORD = "module enrol";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Enrols students into the specified module using "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Enrols a student into the specified module using "
             + "their matriculation number.\n"
             + "Parameters: "
             + PREFIX_MODULE_CODE + "MODULE_CODE "
             + PREFIX_MATRIC + "MATRIC_NUMBER\n"
             + "Example: " + COMMAND_WORD + " "
+            + PREFIX_MODULE_CODE + "CS2113 "
             + PREFIX_MATRIC + "A0161234B";
 
     public static final String MESSAGE_MODULE_NOT_FOUND = "Module with code %s doesn't exist in Trajectory!";
