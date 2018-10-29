@@ -40,7 +40,7 @@ public class CommandCompleterTest {
 
         ArrayList<String> actualPhonePredictions = commandCompleter.predictText("find p/9");
         ArrayList<String> expectedPhonePredictions =
-                new ArrayList<>(Arrays.asList("4351253 ", "482224 ", "482427 ", "482442 ", "8765432 ", "5352563 "));
+                new ArrayList<>(Arrays.asList("4351253 ", "482224 ", "482427 ", "8765432 ", "5352563 ", "667777 "));
 
         ArrayList<String> actualEmailPredictions = commandCompleter.predictText("find e/a");
         ArrayList<String> expectedEmailPredictions =
@@ -218,6 +218,11 @@ public class CommandCompleterTest {
 
         @Override
         public void deleteActivity(Activity activity) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateActivity(Activity target, Activity editedActivity) {
             throw new AssertionError("This method should not be called.");
         }
 
