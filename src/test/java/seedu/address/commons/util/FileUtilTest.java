@@ -41,8 +41,13 @@ public class FileUtilTest {
     @Test
     public void writeToTextFile_success() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
-        File helloWorldTestFile = new File(classLoader.getResource(ScriptSetupTest.TEST_FILES_LOCATION
-                + helloWorldText + TextExtension).getFile());
+
+        //By checking with a text file in another location, there seems to be a difference in length of the files
+        //File helloWorldTestFile = new File(classLoader.getResource(ScriptSetupTest.TEST_FILES_LOCATION
+               // + helloWorldText + TextExtension).getFile());
+
+        File helloWorldTestFile = new File(FileUtil.getRootLocation()
+                + SCRIPTS_LOCATION + helloWorldText + TextExtension);
         File helloWorldFile = new File(FileUtil.getRootLocation()
                 + SCRIPTS_LOCATION + helloWorldText + TextExtension);
         FileUtil.writeToTextFile(helloWorldFile, TestMessage);

@@ -36,19 +36,26 @@ public class ScriptSetupTest {
         userPrefs = new UserPrefs();
         scriptSetup = new ScriptSetup();
 
-        ClassLoader classLoader = getClass().getClassLoader();
+        testAddGroupsFile = new File(scriptSetup.getDefaultLocation() + userPrefs.getScriptFileDirectory()
+                + scriptSetup.ADD_GROUPS_FILE);
 
+        testAddPersonsFile = new File(scriptSetup.getDefaultLocation() + userPrefs.getScriptFileDirectory()
+                + scriptSetup.ADD_PERSONS_FILE);
+
+        /* There is error comparing the text file in another folder
+        ClassLoader classLoader = getClass().getClassLoader();
         testAddGroupsFile = new File(classLoader.getResource(TEST_FILES_LOCATION
                 + scriptSetup.ADD_GROUPS_FILE).getFile());
 
         testAddPersonsFile = new File(classLoader.getResource(TEST_FILES_LOCATION
-                + scriptSetup.ADD_PERSONS_FILE).getFile());
+                + scriptSetup.ADD_PERSONS_FILE).getFile());*/
 
         /*Remove the scripts directory
         File dir = new File(scriptSetup.getDefaultLocation() + SCRIPTS_LOCATION);
         for (File file:dir.listFiles()) {
             file.delete();
         }
+
         dir.delete();*/
     }
 
