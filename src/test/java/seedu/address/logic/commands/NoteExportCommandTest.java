@@ -1,12 +1,12 @@
 package seedu.address.logic.commands;
 
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ModelManager;
-import seedu.address.model.module.ModuleCode;
 import seedu.address.model.note.NoteManager;
 import seedu.address.testutil.NoteBuilder;
 
@@ -64,5 +64,11 @@ public class NoteExportCommandTest {
         CommandResult result = noteExportCommand.execute(new ModelManager(), new CommandHistory());
 
         assertEquals(expectedMessage, result.feedbackToUser);
+    }
+
+    @AfterClass
+    public static void tearDown() {
+        noteManager.clearNotes();
+        noteManager.saveNoteList();
     }
 }
