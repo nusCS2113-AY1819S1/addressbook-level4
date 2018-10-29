@@ -70,8 +70,7 @@ public class TimeSlotTest {
         assertTrue(timeSlot.isOverlap(new TimeSlot(DayOfWeek.MONDAY, LocalTime.parse("06:00"), LocalTime.MAX, LABEL)));
 
         // Overlapping, not subset, is before
-        assertTrue(timeSlot.isOverlap(
-                new TimeSlot(DayOfWeek.MONDAY, LocalTime.MIDNIGHT, LocalTime.parse("02:00"), LABEL)));
+        assertTrue(timeSlot.isOverlap(new TimeSlot(DayOfWeek.MONDAY, LocalTime.MIDNIGHT, LocalTime.parse("02:00"), LABEL)));
 
         // Not overlapping, different day
         assertFalse(timeSlot.isOverlap(new TimeSlot(DayOfWeek.TUESDAY, LocalTime.MIDNIGHT, LocalTime.MAX, LABEL)));
