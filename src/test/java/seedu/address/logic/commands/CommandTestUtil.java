@@ -133,7 +133,6 @@ public class CommandTestUtil {
             assertEquals(expectedMessage, e.getMessage());
             assertEquals(expectedAddressBook, actualModel.getAddressBook());
             assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
-            assertEquals(expectedFilteredList, actualModel.getFilteredTodoList());
             assertEquals(expectedCommandHistory, actualCommandHistory);
         }
     }

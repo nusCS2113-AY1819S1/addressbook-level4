@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -39,12 +38,4 @@ public class TodoCommandIntegrationTest {
         assertCommandSuccess(new TodoCommand(validTodo), model, commandHistory,
                 String.format(TodoCommand.MESSAGE_SUCCESS, validTodo), expectedModel);
     }
-
-    @Test
-    public void execute_duplicateTodo_throwsCommandException() {
-        Todo todoInList = model.getAddressBook().getTodoList().get(0);
-        assertCommandFailure(new TodoCommand(todoInList), model, commandHistory,
-                TodoCommand.MESSAGE_DUPLICATE_TODO);
-    }
-
 }
