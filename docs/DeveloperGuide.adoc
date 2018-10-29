@@ -372,7 +372,7 @@ day, that is, the active `ShopDay` in the `SalesHistory` of `AddressBook`.
 
 [NOTE]
 It is important to note that the `ShopDay` class stores each `Transaction` on a `TreeMap`, where each `Transaction` has
-its `transactionTime` as its key. This is to facilitate quick access to any transaction on a given day, and to maintain
+its `reminderTime` as its key. This is to facilitate quick access to any transaction on a given day, and to maintain
 the `Transaction` objects in order of their creation times within memory.
 
 ==== Alternative Implementations

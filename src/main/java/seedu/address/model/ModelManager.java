@@ -28,13 +28,12 @@ import seedu.address.model.login.exceptions.AuthenticatedException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 import seedu.address.model.product.Product;
+import seedu.address.model.timeidentifiedclass.Reminder;
 import seedu.address.model.timeidentifiedclass.TimeIdentifiedClass;
+import seedu.address.model.timeidentifiedclass.Transaction;
+import seedu.address.model.timeidentifiedclass.exceptions.DuplicateReminderException;
+import seedu.address.model.timeidentifiedclass.exceptions.DuplicateTransactionException;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
-import seedu.address.model.timeidentifiedclass.shopday.Reminder;
-import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
-import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateReminderException;
-import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
-import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.Storage;
 
@@ -335,36 +334,33 @@ public class ModelManager extends ComponentManager implements Model {
     //=========================== SalesHistory accessories ===================================
 
     @Override
-    public String getActiveDayHistory() {
-        return versionedAddressBook.getActiveDayHistory();
-    }
-
-    @Override
-    public String getDaysHistory(String day) {
-        return versionedAddressBook.getDaysHistory(day);
+    public String getDaysTransactions(String day) throws InvalidTimeFormatException {
+        try {
+            return versionedAddressBook.getDaysTransactions(day);
+        } catch (InvalidTimeFormatException e) {
+            throw e;
+        }
     }
 
     @Override
     public void addTransaction(Transaction transaction) throws InvalidTimeFormatException,
-            ClosedShopDayException, DuplicateTransactionException {
+            DuplicateTransactionException {
         try {
             versionedAddressBook.addTransaction(transaction);
         } catch (DuplicateTransactionException e) {
             throw e;
         } catch (InvalidTimeFormatException e) {
             throw e;
-        } catch (ClosedShopDayException e) {
-            throw e;
         }
     }
 
     @Override
     public void addReminder(Reminder reminder) throws InvalidTimeFormatException, DuplicateReminderException {
-        if (!TimeIdentifiedClass.isValidDateAndTime(reminder.getTime())) {
+        if (!TimeIdentifiedClass.isValidDateAndTime(reminder.getReminderTime())) {
             throw new InvalidTimeFormatException();
         }
         try {
-            versionedAddressBook.addReminderToActiveBusinessDay(reminder);
+            versionedAddressBook.addReminder(reminder);
         } catch (InvalidTimeFormatException e) {
             throw e;
         } catch (DuplicateReminderException e) {
@@ -373,24 +369,23 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void removeReminder(Reminder reminder) throws InvalidTimeFormatException, NoSuchElementException {
+    public void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException {
         try {
-            versionedAddressBook.removeReminderFromActiveBusinessDay(reminder);
+            versionedAddressBook.removeReminder(reminderTime);
         } catch (InvalidTimeFormatException e) {
             throw e;
-        }
-        catch (NoSuchElementException e) {
+        } catch (NoSuchElementException e) {
             throw e;
         }
     }
 
     @Override
-    public ArrayList<Reminder> getDueRemindersInActiveBusinessDay() {
-        return versionedAddressBook.getDueRemindersInActiveDay();
+    public ArrayList<Reminder> getOverdueReminders() {
+        return versionedAddressBook.getOverdueReminders();
     }
 
-    public ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread() {
-        return versionedAddressBook.getDueRemindersInActiveDayForThread();
+    public ArrayList<Reminder> getOverdueRemindersForThread() {
+        return versionedAddressBook.getOverDueRemindersForThread();
     }
 
     @Override

@@ -8,14 +8,12 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddReminderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.timeidentifiedclass.Reminder;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
-import seedu.address.model.timeidentifiedclass.shopday.Reminder;
-
 
 /**
  * Parses input arguments and creates new AddReminderCommand object.
  */
-
 public class AddReminderCommandParser implements Parser<AddReminderCommand> {
 
     /**
