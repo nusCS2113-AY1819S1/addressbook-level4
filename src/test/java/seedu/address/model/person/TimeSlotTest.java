@@ -16,32 +16,30 @@ import seedu.address.testutil.Assert;
 import seedu.address.testutil.TypicalTimeSlots;
 
 public class TimeSlotTest {
-    private static final String LABEL = "InsertFunnyLabelName";
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void constructor_null_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, ()
-            -> new TimeSlot(null, LocalTime.MIDNIGHT, LocalTime.NOON, LABEL));
+            -> new TimeSlot(null, LocalTime.MIDNIGHT, LocalTime.NOON));
 
         Assert.assertThrows(NullPointerException.class, ()
-            -> new TimeSlot(DayOfWeek.MONDAY, null, LocalTime.NOON, LABEL));
+            -> new TimeSlot(DayOfWeek.MONDAY, null, LocalTime.NOON));
 
         Assert.assertThrows(NullPointerException.class, ()
-            -> new TimeSlot(DayOfWeek.MONDAY, LocalTime.MIDNIGHT, null, LABEL));
+            -> new TimeSlot(DayOfWeek.MONDAY, LocalTime.MIDNIGHT, null));
     }
 
     @Test
     public void constructor_invalidTimeSlot_throwsIllegalArgumentException() {
         Assert.assertThrows(IllegalArgumentException.class, ()
-            -> new TimeSlot(DayOfWeek.MONDAY, LocalTime.NOON, LocalTime.NOON, LABEL));
+            -> new TimeSlot(DayOfWeek.MONDAY, LocalTime.NOON, LocalTime.NOON));
     }
 
     @Test
     public void equals() {
-        TimeSlot toTest = new TimeSlot(DayOfWeek.MONDAY, LocalTime.parse("08:00"), LocalTime.parse("10:00"), LABEL);
+        TimeSlot toTest = new TimeSlot(DayOfWeek.MONDAY, LocalTime.parse("08:00"), LocalTime.parse("10:00"));
         assertEquals(toTest, TypicalTimeSlots.MON_8_TO_10);
     }
 
@@ -58,28 +56,28 @@ public class TimeSlotTest {
 
     @Test
     public void isOverlap() {
-        TimeSlot timeSlot = new TimeSlot(DayOfWeek.MONDAY, LocalTime.parse("01:00"), LocalTime.NOON, LABEL);
+        TimeSlot timeSlot = new TimeSlot(DayOfWeek.MONDAY, LocalTime.parse("01:00"), LocalTime.NOON);
 
         // Overlapping, subset with same start time
-        assertTrue(timeSlot.isOverlap(new TimeSlot(DayOfWeek.MONDAY, LocalTime.parse("01:00"), LocalTime.MAX, LABEL)));
+        assertTrue(timeSlot.isOverlap(new TimeSlot(DayOfWeek.MONDAY, LocalTime.parse("01:00"), LocalTime.MAX)));
 
         // Overlapping, subset with same end time
-        assertTrue(timeSlot.isOverlap(new TimeSlot(DayOfWeek.MONDAY, LocalTime.parse("06:00"), LocalTime.NOON, LABEL)));
+        assertTrue(timeSlot.isOverlap(new TimeSlot(DayOfWeek.MONDAY, LocalTime.parse("06:00"), LocalTime.NOON)));
 
         // Overlapping, not subset, is after
-        assertTrue(timeSlot.isOverlap(new TimeSlot(DayOfWeek.MONDAY, LocalTime.parse("06:00"), LocalTime.MAX, LABEL)));
+        assertTrue(timeSlot.isOverlap(new TimeSlot(DayOfWeek.MONDAY, LocalTime.parse("06:00"), LocalTime.MAX)));
 
         // Overlapping, not subset, is before
-        assertTrue(timeSlot.isOverlap(new TimeSlot(DayOfWeek.MONDAY, LocalTime.MIDNIGHT, LocalTime.parse("02:00"), LABEL)));
+        assertTrue(timeSlot.isOverlap(new TimeSlot(DayOfWeek.MONDAY, LocalTime.MIDNIGHT, LocalTime.parse("02:00"))));
 
         // Not overlapping, different day
-        assertFalse(timeSlot.isOverlap(new TimeSlot(DayOfWeek.TUESDAY, LocalTime.MIDNIGHT, LocalTime.MAX, LABEL)));
+        assertFalse(timeSlot.isOverlap(new TimeSlot(DayOfWeek.TUESDAY, LocalTime.MIDNIGHT, LocalTime.MAX)));
 
         // Not overlapping, end time of first = start time of second
-        assertFalse(timeSlot.isOverlap(new TimeSlot(DayOfWeek.MONDAY, LocalTime.NOON, LocalTime.MAX, LABEL)));
+        assertFalse(timeSlot.isOverlap(new TimeSlot(DayOfWeek.MONDAY, LocalTime.NOON, LocalTime.MAX)));
 
         // Not overlapping, general case
-        assertFalse(timeSlot.isOverlap(new TimeSlot(DayOfWeek.MONDAY, LocalTime.parse("13:00"), LocalTime.MAX, LABEL)));
+        assertFalse(timeSlot.isOverlap(new TimeSlot(DayOfWeek.MONDAY, LocalTime.parse("13:00"), LocalTime.MAX)));
     }
 
     @Test
