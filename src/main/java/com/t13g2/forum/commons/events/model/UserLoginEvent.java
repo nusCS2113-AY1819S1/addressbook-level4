@@ -2,7 +2,7 @@ package com.t13g2.forum.commons.events.model;
 
 import com.t13g2.forum.commons.events.BaseEvent;
 
-//@@xllx1
+//@@author xllx1
 /** Indicates the user has logged in*/
 public class UserLoginEvent extends BaseEvent {
 

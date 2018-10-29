@@ -13,7 +13,7 @@ import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 
-//@@xllx1
+//@@author xllx1
 /**
  * Allow admin to block user from posting a new thread.
  */

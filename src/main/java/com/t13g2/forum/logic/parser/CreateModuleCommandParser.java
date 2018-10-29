@@ -10,7 +10,7 @@ import com.t13g2.forum.logic.commands.CreateModuleCommand;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
 import com.t13g2.forum.model.forum.Module;
 
-//@@xllx1
+//@@author xllx1
 /**
  * Parses input arguments and create a module to forum book.
  */

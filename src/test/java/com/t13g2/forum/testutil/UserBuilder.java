@@ -30,7 +30,6 @@ public class UserBuilder {
         this.phone = DEFAULT_USER_PHONE;
     }
 
-
     /**
      * Initializes the UserBuilder with the data of {@code userToCopy}.
      */
@@ -90,6 +89,10 @@ public class UserBuilder {
 
     public User build() {
         return new User(username, password, isAdmin, isBlock, email, phone);
+    }
+
+    public User buildUser(boolean isAdmin, boolean isBlock) {
+        return new User("john", "123", isAdmin, isBlock, "john@test.com", "87654321");
     }
 
 }

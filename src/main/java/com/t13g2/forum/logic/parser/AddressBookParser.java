@@ -25,11 +25,9 @@ import com.t13g2.forum.logic.commands.HistoryCommand;
 import com.t13g2.forum.logic.commands.ListModuleCommand;
 import com.t13g2.forum.logic.commands.LoginCommand;
 import com.t13g2.forum.logic.commands.LogoutCommand;
-import com.t13g2.forum.logic.commands.RedoCommand;
 import com.t13g2.forum.logic.commands.SelectModuleCommand;
 import com.t13g2.forum.logic.commands.SelectThreadCommand;
 import com.t13g2.forum.logic.commands.SetAdminCommand;
-import com.t13g2.forum.logic.commands.UndoCommand;
 import com.t13g2.forum.logic.commands.UpdateCommentCommand;
 import com.t13g2.forum.logic.commands.UpdateThreadCommand;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
@@ -91,11 +89,11 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();
-
-        case RedoCommand.COMMAND_WORD:
-            return new RedoCommand();
+        // case UndoCommand.COMMAND_WORD:
+        //     return new UndoCommand();
+        //
+        // case RedoCommand.COMMAND_WORD:
+        //     return new RedoCommand();
 
         case AnnounceCommand.COMMAND_WORD:
             return new AnnounceCommandParser().parse(arguments);

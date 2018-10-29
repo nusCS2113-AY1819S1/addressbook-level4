@@ -13,7 +13,7 @@ import com.t13g2.forum.model.forum.Announcement;
 import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 
-//@@xllx1
+//@@author xllx1
 /**
  * Allow user to check if there is any announcement
  */

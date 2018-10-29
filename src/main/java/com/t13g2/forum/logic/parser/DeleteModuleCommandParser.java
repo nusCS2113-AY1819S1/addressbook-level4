@@ -8,7 +8,7 @@ import com.t13g2.forum.commons.core.Messages;
 import com.t13g2.forum.logic.commands.DeleteModuleCommand;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
 
-//@@xllx1
+//@@author xllx1
 /**
  * Parses input arguments and deletes a module from forum book.
  */

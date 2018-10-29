@@ -15,7 +15,7 @@ import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.model.forum.Announcement;
 import com.t13g2.forum.model.forum.User;
 
-//@@xllx1
+//@@author xllx1
 /**
  * Announce new announcement.
  */

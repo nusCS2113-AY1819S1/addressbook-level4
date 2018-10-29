@@ -153,7 +153,7 @@ public class ParserUtil {
         return tagSet;
     }
 
-    //@@xllx1
+    //@@author xllx1
     /**
      * Parses {@code title, content} into a {@code Announcement}
      */
@@ -163,7 +163,7 @@ public class ParserUtil {
         String trimmedTitle = title.trim();
         String trimmedContent = content.trim();
         if (!Announcement.isValidAnnouncement(trimmedTitle, trimmedContent)) {
-            throw new ParseException(Address.MESSAGE_ADDRESS_CONSTRAINTS);
+            throw new ParseException(Announcement.MESSAGE_ANNOUNCEMENT_CONSTRAINTS);
         }
         return new Announcement(trimmedTitle, trimmedContent);
     }
