@@ -20,7 +20,7 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /** Returns the TimeTable */
-    TimeTable getTimeTable();
+    TimeTable getDisplayedTimeTable();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.

@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -151,7 +150,7 @@ public class IcsUtil {
         }
 
         //if any of out essential TimeSlot variables are missing, ignore the VEvent and do not add it.
-        if ((dateStartStr == null) || (timeStartStr == null) || (timeEndStr == null) ) {
+        if ((dateStartStr == null) || (timeStartStr == null) || (timeEndStr == null)) {
             return Optional.empty();
         }
 
