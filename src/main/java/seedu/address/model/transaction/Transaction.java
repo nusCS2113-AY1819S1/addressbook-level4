@@ -94,16 +94,17 @@ public class Transaction {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getTransactionDate())
-                .append(" Date: ")
-                .append(getTransactionType())
+        builder.append(" Date: ")
+                .append(getTransactionDate())
                 .append(" Type: ")
-                .append(getDrinkTransacted())
+                .append(getTransactionType())
                 .append(" Drink: ")
-                .append(getQuantityTransacted())
+                .append(getDrinkTransacted())
                 .append(" Quantity: ")
-                .append(getAmountMoney())
-                .append(" Amount: ");
+                .append(getQuantityTransacted())
+                .append(" Amount: ")
+                .append(getAmountMoney());
+
         return builder.toString();
     }
 }
