@@ -115,7 +115,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editEventDescriptor.getEmail().orElse(eventToEdit.getEmail());
         Venue updatedVenue = editEventDescriptor.getVenue().orElse(eventToEdit.getVenue());
         DateTime updatedDateTime = editEventDescriptor.getDateTime().orElse(eventToEdit.getDateTime());
-        Comment updatedComment = editEventDescriptor.getComment();
+        Comment updatedComment = editEventDescriptor.getComment().orElse(eventToEdit.getComment());
         Set<Tag> updatedTags = editEventDescriptor.getTags().orElse(eventToEdit.getTags());
         Set<Attendee> updatedAttendees = editEventDescriptor.getAttendees().orElse(eventToEdit.getAttendees());
 
@@ -234,9 +234,10 @@ public class EditCommand extends Command {
             this.comment = comment;
         }
 
-        public Comment getComment() {
-            return comment;
+        public Optional<Comment> getComment() {
+            return Optional.ofNullable(comment);
         }
+
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
