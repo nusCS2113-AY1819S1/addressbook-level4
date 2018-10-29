@@ -50,12 +50,14 @@ public class BrowserPanelTest extends GuiUnitTest {
                 + ALICE.getPhone()
                 + "&email="
                 + ALICE.getEmail()
-                + "&address="
-                + ALICE.getAddress().value.replaceAll(" ", "%20").replaceAll("#", "%23")
+                + "&venue="
+                + ALICE.getVenue().value.replaceAll(" ", "%20").replaceAll("#", "%23")
                 + "&dateTime="
                 + PAGE_DATE_FORMAT.format(ALICE.getDateTime().dateTime).replaceAll(" ", "%20")
                 + "&tags="
-                + ALICE.getTagsString());
+                + ALICE.getTagsString().replaceAll(" ", "%20")
+                + "&attendance="
+                + ALICE.getAttendanceString().replaceAll(" ", "%20"));
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedPersonUrl, browserPanelHandle.getLoadedUrl());

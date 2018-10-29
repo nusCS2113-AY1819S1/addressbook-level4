@@ -52,16 +52,17 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/EVENT p/PHONE_NUMBER`, `p/PHONE_NUMBER n/EVENT` is also acceptable.
 ====
 
+// tag::authentication[]
 === Signing up for an account : `signup`
 
 User: Creates a *user* account +
-Format: `signup n/USERdetails p/PASSWORD c/CONFIRM-PASSWORD` +
+Format: `signup u/USERNAME p/PASSWORD +
 Examples:
 
-* `signup u/Gerald Chua p/password12345 c/password12345` +
-Creates account for Gerald Chua
-* `signup u/James Yaputra p/drowssap12345 c/drowssap12345` +
-Creates account for James Yaputra
+* `signup u/Gerald Chua p/password12345` +
+Creates account with the username Gerald Chua
+* `signup u/James Yaputra p/drowssap12345` +
+Creates account with the username James Yaputra
 
 === Logging into an account : `login`
 
@@ -80,21 +81,11 @@ User: Logs out of an account +
 Format: `logout` +
 Examples:
 
-* `login n/Gerald Chua p/password12345` +
+* `login u/Gerald Chua p/password12345` +
 Logs in Gerald Chua +
 * `logout` +
 Logs out from Gerald Chua
-
-=== Signing up for an account : `signup`
-
-User: Creates a new account +
-Format: `signup u/USERNAME p/PASSWORD` +
-Examples:
-
-* `signup n/Gerald Chua p/password12345` +
-Creates Gerald Chua +
-* `signup u/James Yaputra p/drowssap12345` +
-Creates James Yaputra
+// end::authentication[]
 
 === Viewing help : `help`
 
@@ -338,6 +329,11 @@ Format: `showReminders`
 Admin/User: Add comment into event comment section +
 Format: `addComment INDEX C/STRING`
 
+****
+* Adds comment at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index *must be a positive integer* 1, 2, 3, ...
+* Comment cannot be blank,. For C/String, String cannot be empty
+****
+
 Examples:
 
 * `addComment 1 C/What is the attire to wear for the event?` +
@@ -348,8 +344,13 @@ Adds "What is the attire to wear for this event?" into event 5 comment section
 === Reply Comment : `replyComment`
 
 Admin/User: Replies a comment +
-Format: `replyComment INDEX LINE STRING`
+Format: `replyComment INDEX L/LINE C/STRING`
 
+****
+* Replies a comment to the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index *must be a positive integer* 1, 2, 3, ...
+* Comment cannot be blank. For C/String, String cannot be empty
+* Line has to be a non-zero integer and exist within the comment section
+****
 Examples:
 
 * `replyComment 1 L/5 C/What is the attire to wear for the event?` +
@@ -360,7 +361,12 @@ Adds the comment "What is the attire to wear for the event?" into event 2 commen
 === Delete Comment : `deleteComment`
 
 Admin: Deletes a comment +
-Format: `deleteComment INDEX LINE`
+Format: `deleteComment INDEX L/LINE`
+
+****
+* Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index *must be a positive integer* 1, 2, 3, ...
+* Line has to be a non-zero integer and exist within the comment section
+****
 
 Examples:
 
@@ -435,13 +441,12 @@ e.g. `unregister 1`
 e.g. `setReminder 1`
 * *View Reminders* : `reminders` +
 e.g. `reminder`
-* *showComments* : `showComments INDEX` +
-e.g. `showComments 1`
-* *addComment* : `addCeomment INDEX STRING` +
-e.g. `add Comments 1 "HELLO"`
-* *replyComment* : `replyComment EVENTINDEX LINEINDEX STRING` +
-e.g. `replyComments 1 2 "Hello"`
-* *deleteComment* : `deleteComment EVENT INDEX LINEINDEX STRING` +
-e.g. `deleteComment 1 2`
+* *addComment* : `addComment INDEX C/STRING` +
+e.g. `add Comments 1 C/HELLO`
+* *replyComment* : `replyComment INDEX L/LINE C/STRING` +
+e.g. `replyComment 1 L/2 C/Hello`
+* *deleteComment* : `deleteComment INDEX L/LINE` +
+e.g. `deleteComment 1 L/2`
 * *exportCalendarCommand* : export filename +
 e.g. `export BobCalendar`
+

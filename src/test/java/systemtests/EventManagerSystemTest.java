@@ -232,12 +232,14 @@ public abstract class EventManagerSystemTest {
                     + selectedCardHandle.getPhone()
                     + "&email="
                     + selectedCardHandle.getEmail()
-                    + "&address="
-                    + selectedCardHandle.getAddress().replaceAll(" ", "%20").replaceAll("#", "%23")
+                    + "&venue="
+                    + selectedCardHandle.getVenue().replaceAll(" ", "%20").replaceAll("#", "%23")
                     + "&dateTime="
                     + PAGE_DATE_FORMAT.format(selectedCardHandleDateTime.dateTime).replaceAll(" ", "%20")
                     + "&tags="
-                    + selectedCardHandle.getTagsString().replaceAll(" ", "%20"));
+                    + selectedCardHandle.getTagsString().replaceAll(" ", "%20")
+                    + "&attendance="
+                    + selectedCardHandle.getAttendanceString().replaceAll(" ", "%20"));
         } catch (MalformedURLException mue) {
             throw new AssertionError("URL expected to be valid.", mue);
         }

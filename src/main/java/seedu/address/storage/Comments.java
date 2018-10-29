@@ -46,7 +46,7 @@ public class Comments {
             }
             fWriter = new FileWriter(commentsDirectoryString + "/" + Integer.toString(index) + ".html");
             writer = new BufferedWriter(fWriter);
-            writer.write("<span>Comments Section</span>");
+            writer.write("<span>Comment Section</span>");
             writer.newLine(); //this is not actually needed for html files - can make your code more readable though
             writer.close(); //make sure you close the writer object
         } catch (Exception e) {

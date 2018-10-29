@@ -71,9 +71,9 @@ public class EventContainsKeywordsPredicateTest {
         predicate = new EventContainsKeywordsPredicate(Arrays.asList("Carol"));
         assertFalse(predicate.test(new EventBuilder().withName("Alice Bob").build()));
 
-        // Keywords match phone and email , but does not match name, date time and tag
+        // Keywords match phone and email, but does not match name, venue and dateTime
         predicate = new EventContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com"));
         assertFalse(predicate.test(new EventBuilder().withName("Alice").withPhone("12345")
-                .withEmail("alice@email.com").withAddress("Main Street").withDateTime("10/10/2010 10:10").build()));
+                .withEmail("alice@email.com").withVenue("Main Street").withDateTime("10/10/2010 10:10").build()));
     }
 }

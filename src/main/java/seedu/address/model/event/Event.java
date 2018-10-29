@@ -8,7 +8,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
+import seedu.address.model.attendee.Attendee;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -16,7 +18,6 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Event {
-    //Todo: add contact field
     // Identity fields
     private final Name name;
     private final Contact contact;
@@ -24,25 +25,30 @@ public class Event {
     private final Email email;
 
     // Data fields
+    private final Venue venue;
     private final DateTime dateTime;
-    private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Attendee> attendees = new HashSet<>();
+    private final Status status;
+    private final Comment comment;
 
     /**
      * Every field must be present and not null.
      */
-
-    public Event(Name name, Contact contact, Phone phone, Email email, Address address,
-                DateTime datetime, Set<Tag> tags) {
-        requireAllNonNull(name, contact, phone, email, address, datetime);
+    public Event(Name name, Contact contact, Phone phone, Email email, Venue venue, DateTime datetime, Comment comment,
+                 Set<Tag> tags, Set<Attendee> attendees) {
+        requireAllNonNull(name, contact, phone, email, venue, datetime);
 
         this.name = name;
         this.contact = contact;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.venue = venue;
         this.dateTime = datetime;
         this.tags.addAll(tags);
+        this.attendees.addAll(attendees);
+        this.status = new Status(datetime);
+        this.comment = comment;
     }
 
     public Name getName() {
@@ -61,13 +67,19 @@ public class Event {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Venue getVenue() {
+        return venue;
     }
 
     public DateTime getDateTime () {
         return dateTime;
     }
+
+    public Status getStatus () {
+        return status;
+    }
+
+    public Comment getComment () { return comment; }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -77,6 +89,9 @@ public class Event {
         return Collections.unmodifiableSet(tags);
     }
 
+    /**
+     * Returns tags formatted as a string to be passed into Event Page HTML as query string parameter
+     */
     public String getTagsString() {
         List<String> tagsList = new ArrayList<>();
         for (Tag t: tags) {
@@ -84,6 +99,26 @@ public class Event {
         }
         String tagsString = String.join(" ", tagsList);
         return tagsString;
+    }
+
+    /**
+     * Returns an immutable attendee set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Attendee> getAttendance() {
+        return Collections.unmodifiableSet(attendees);
+    }
+
+    /**
+     * Returns attendee list formatted as a string to be passed into Event Page HTML as query string parameter
+     */
+    public String getAttendanceString() {
+        TreeSet<String> attendeesSet = new TreeSet<>();
+        for (Attendee a: attendees) {
+            attendeesSet.add(a.attendeeName);
+        }
+        String attendeesString = String.join("<br>", attendeesSet);
+        return attendeesString;
     }
 
     /**
@@ -120,16 +155,16 @@ public class Event {
                 && otherEvent.getContact().equals(getContact())
                 && otherEvent.getPhone().equals(getPhone())
                 && otherEvent.getEmail().equals(getEmail())
-                && otherEvent.getAddress().equals(getAddress())
+                && otherEvent.getVenue().equals(getVenue())
                 && otherEvent.getDateTime().equals(getDateTime())
-                && otherEvent.getTags().equals(getTags());
+                && otherEvent.getTags().equals(getTags())
+                && otherEvent.getAttendance().equals(getAttendance());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, contact, phone, email, address, dateTime, tags);
-
+        return Objects.hash(name, contact, phone, email, venue, dateTime, comment, tags, attendees);
     }
 
     @Override
@@ -142,12 +177,17 @@ public class Event {
                 .append(getPhone())
                 .append(" Email: ")
                 .append(getEmail())
-                .append(" Address: ")
-                .append(getAddress())
+                .append(" Venue: ")
+                .append(getVenue())
                 .append(" Time: ")
                 .append(getDateTime())
+                .append(" Comment: ")
+                .append(getComment())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+
+        builder.append(" Attendees: ");
+        getAttendance().forEach(builder::append);
         return builder.toString();
     }
 

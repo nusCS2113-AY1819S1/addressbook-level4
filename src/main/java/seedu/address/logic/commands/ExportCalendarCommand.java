@@ -123,7 +123,7 @@ public class ExportCalendarCommand extends Command {
                 event.getName().toString());
 
         //Event properties
-        Location eventLocation = new Location(event.getAddress().value);
+        Location eventLocation = new Location(event.getVenue().value);
         Uid eventUid;
         try {
             eventUid = new Uid(UUID.randomUUID() + "@" + InetAddress.getLocalHost().getHostName());
