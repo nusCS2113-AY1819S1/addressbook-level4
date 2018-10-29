@@ -38,9 +38,9 @@ public class LostandFoundCommand extends Command {
     void sortSimpleItems (List<Item> lastShownList, ArrayList<SimpleItem> lostItems
                           ) {
         for (Item item : lastShownList) {
-            if (item.getLost_status().getLost_statusLost() > 0) {
+            if (item.getLoststatus().getLoststatusLost() > 0) {
                 lostItems.add(new SimpleItem(item.getName(),
-                        new Quantity(Integer.toString(item.getLost_status().getLost_statusLost()))));
+                        new Quantity(Integer.toString(item.getLoststatus().getLoststatusLost()))));
             }
 
         }

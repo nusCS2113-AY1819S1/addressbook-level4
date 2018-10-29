@@ -13,7 +13,7 @@ public class ConfigTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void toString_defaultObject_stringReturned() {
+    public void toString_defaultObjectstringReturned() {
         String defaultConfigAsString = "App title : Jalil Enterprise\n"
                 + "Current log level : INFO\n"
                 + "Preference file Location : preferences.json";

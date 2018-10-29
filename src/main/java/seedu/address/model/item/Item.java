@@ -23,7 +23,7 @@ public class Item {
 
     // Data fields
     private final Status status = new Status();
-    private final Lost_status lost_status = new Lost_status();
+    private final Loststatus loststatus = new Loststatus();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -35,7 +35,7 @@ public class Item {
         this.quantity = quantity;
         this.minQuantity = minQuantity;
         this.status.setDefaultValues(quantity.toInteger());
-        this.lost_status.setDefaultValues(quantity.toInteger());
+        this.loststatus.setDefaultValues(quantity.toInteger());
         this.tags.addAll(tags);
     }
 
@@ -50,13 +50,13 @@ public class Item {
         this.tags.addAll(tags);
     }
 
-    public Item(Name name, Quantity quantity, Quantity minQuantity, Lost_status lost_status, Set<Tag> tags) {
+    public Item(Name name, Quantity quantity, Quantity minQuantity, Loststatus loststatus, Set<Tag> tags) {
         requireAllNonNull(name, quantity, minQuantity, tags);
         this.name = name;
         this.quantity = quantity;
         this.minQuantity = minQuantity;
-        this.lost_status.setLost_statusFound(lost_status.getLost_statusFound());
-        this.lost_status.setLost_statusLost(lost_status.getLost_statusLost());
+        this.loststatus.setLoststatusFound(loststatus.getLoststatusFound());
+        this.loststatus.setLoststatusLost(loststatus.getLoststatusLost());
         this.tags.addAll(tags);
     }
 
@@ -76,7 +76,7 @@ public class Item {
         return status;
     }
 
-    public Lost_status getLost_status() { return lost_status;}
+    public Loststatus getLoststatus() { return loststatus;}
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -140,7 +140,7 @@ public class Item {
                 .append(", Faulty | ")
                 .append(getStatus().getStatusFaulty())
                 .append(", Lost | ")
-                .append(getLost_status().getLost_statusLost())
+                .append(getLoststatus().getLoststatusLost())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
