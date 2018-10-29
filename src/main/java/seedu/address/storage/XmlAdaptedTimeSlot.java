@@ -35,7 +35,7 @@ public class XmlAdaptedTimeSlot {
      */
     public XmlAdaptedTimeSlot(TimeSlot source) {
         this.label = source.getLabel();
-        this.dayOfWeek = Integer.toString(source.getDayOfWeek().getValue());
+        this.dayOfWeek = source.getDayOfWeek().toString();
         this.startTime = source.getStartTime().toString();
         this.endTime = source.getEndTime().toString();
     }

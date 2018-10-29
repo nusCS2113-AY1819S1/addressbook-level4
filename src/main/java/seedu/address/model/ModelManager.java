@@ -67,7 +67,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public TimeTable getDisplayedTimeTable() {
+    public TimeTable getTimeTable() {
         return timeTable;
     }
 
@@ -179,7 +179,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
 
         // TODO: Implement after user comes online
-        // indicateDisplayedTimeTableChanged(user.getDisplayedTimeTable());
+        // indicateDisplayedTimeTableChanged(user.getTimeTable());
     }
 
     @Override
@@ -188,7 +188,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
 
         // TODO: Implement after user comes online
-        // indicateDisplayedTimeTableChanged(user.getDisplayedTimeTable());
+        // indicateDisplayedTimeTableChanged(user.getTimeTable());
     }
 
     @Override

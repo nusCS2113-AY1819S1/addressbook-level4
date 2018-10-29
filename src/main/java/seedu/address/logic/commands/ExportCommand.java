@@ -60,7 +60,7 @@ public class ExportCommand extends Command {
         }
 
         TimeTable timeTable;
-        timeTable = model.getDisplayedTimeTable();
+        timeTable = model.getTimeTable();
         if (timeTable.isEmpty()) {
             throw new CommandException(MESSAGE_EMPTY);
         }

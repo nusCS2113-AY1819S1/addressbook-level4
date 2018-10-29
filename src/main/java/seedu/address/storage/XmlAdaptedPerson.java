@@ -43,7 +43,7 @@ public class XmlAdaptedPerson {
     private List<XmlAdaptedFriend> friendList = new ArrayList<>();
 
     @XmlElement
-    private XmlAdaptedTimeTable xmlAdaptedTimeTable;
+    private XmlAdaptedTimeTable timeTable;
 
     /**
      * Constructs an XmlAdaptedPerson.
@@ -81,7 +81,7 @@ public class XmlAdaptedPerson {
         friendList = source.getFriends().stream()
                 .map(XmlAdaptedFriend::new)
                 .collect(Collectors.toList());
-        xmlAdaptedTimeTable = new XmlAdaptedTimeTable(source.getTimeTable());
+        timeTable = new XmlAdaptedTimeTable(source.getTimeTable());
     }
 
     /**
@@ -137,10 +137,6 @@ public class XmlAdaptedPerson {
         final Set<Friend> friendList = new HashSet<>(friendSet);
 
         TimeTable timeTable = new TimeTable();
-        if (xmlAdaptedTimeTable != null) {
-            timeTable = this.xmlAdaptedTimeTable.toModelType();
-        }
-
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, timeTable, friendList);
     }
 
