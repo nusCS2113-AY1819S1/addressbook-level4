@@ -22,6 +22,7 @@ public class EventCardHandle extends NodeHandle<Node> {
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String DATETIME_FIELD_ID = "#dateTime";
     private static final String TAGS_FIELD_ID = "#tags";
+    private static final String COMMENT_FIELD_ID = "#comment";
 
     private final Label idLabel;
     private final Label nameLabel;
