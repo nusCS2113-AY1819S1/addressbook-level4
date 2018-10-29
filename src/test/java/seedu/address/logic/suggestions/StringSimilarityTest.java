@@ -1,8 +1,10 @@
-package seedu.address.logic;
+package seedu.address.logic.suggestions;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
+import seedu.address.logic.suggestions.StringSimilarity;
 
 public class StringSimilarityTest {
     private StringSimilarity stringsimilarity = new StringSimilarity();

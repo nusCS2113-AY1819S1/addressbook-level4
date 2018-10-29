@@ -14,7 +14,7 @@ import java.util.List;
 import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.CommandSuggestion;
+import seedu.address.logic.suggestions.WrongCommandSuggestion;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.RedoCommand;
@@ -153,7 +153,7 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         /* Case: mixed case command word -> rejected */
         command = "FiNd Meier";
         assertCommandFailure(command, MESSAGE_UNKNOWN_COMMAND
-            + "\n" + String.format(CommandSuggestion.SUGGESTION_HEADER, FindCommand.COMMAND_WORD));
+            + "\n" + String.format(WrongCommandSuggestion.SUGGESTION_HEADER, FindCommand.COMMAND_WORD));
     }
 
     /**

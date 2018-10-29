@@ -13,6 +13,7 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.suggestions.WrongCommandSuggestion;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -29,7 +30,7 @@ public class LogicManagerTest {
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND
-                + System.lineSeparator() + CommandSuggestion.NO_SUGGESTION);
+                + System.lineSeparator() + WrongCommandSuggestion.NO_SUGGESTION);
         assertHistoryCorrect(invalidCommand);
     }
 

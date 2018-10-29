@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
@@ -14,6 +15,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.suggestions.InputCommandSuggestion;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -26,6 +28,7 @@ public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
     private ListElementPointer historySnapshot;
+    private static InputCommandSuggestion ics = new InputCommandSuggestion();
 
     @FXML
     private TextField commandTextField;
@@ -43,19 +46,29 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     private void handleKeyPress(KeyEvent keyEvent) {
-        // TODO: keyEvent.getCode() where you can get the values here
+        // TODO: figure out how to fix on demand type checking
         /*
-        if (!keyEvent.getText().isEmpty()) {
-            System.out.println(keyEvent.getText().charAt(0));
-        }
-        */
+        String keyInput = keyEvent.getText();
+
+        System.out.println(keyEvent.getCode());
+        if (keyEvent.getCode() == KeyCode.BACK_SPACE) {
+            boolean isCurSubstringValid = ics.removeSearchCharacter();
+            if (isCurSubstringValid) {
+                //setStyleToDefault();
+            }
+        } else if (!keyInput.isEmpty()) {
+            if (!ics.checkValidCharacter(keyInput.charAt(0)))  {
+                //setStyleToIndicateCommandFailure();
+            } else {
+                //setStyleToDefault();
+            }
+        }*/
 
         switch (keyEvent.getCode()) {
         case UP:
             // As up and down buttons will alter the position of the caret,
             // consuming it causes the caret's position to remain unchanged
             keyEvent.consume();
-
             navigateToPreviousInput();
             break;
         case DOWN:
@@ -115,6 +128,8 @@ public class CommandBox extends UiPart<Region> {
             commandTextField.setText("");
             logger.info("Result: " + commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
+            // setStyleToDefault();
+            // ics.resetSearchCrawler();
 
         } catch (CommandException | ParseException e) {
             initHistory();
