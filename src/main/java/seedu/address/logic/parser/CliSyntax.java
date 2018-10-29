@@ -13,7 +13,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_VENUE = new Prefix("v/");
     public static final Prefix PREFIX_DATETIME = new Prefix("d/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
-    public static final Prefix PREFIX_ATTENDEE = new Prefix("p/");
+    public static final Prefix PREFIX_ATTENDEE = new Prefix("a/");
     public static final Prefix PREFIX_USERNAME = new Prefix("u/");
     public static final Prefix PREFIX_PASSWORD = new Prefix("p/");
     public static final Prefix PREFIX_LINE = new Prefix("L/");
