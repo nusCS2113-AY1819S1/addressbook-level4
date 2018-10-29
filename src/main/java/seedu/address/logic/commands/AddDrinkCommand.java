@@ -2,14 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-<<<<<<< HEAD:src/main/java/seedu/address/logic/drinkcommands/AddDrinkCommand.java
-import static seedu.address.logic.drinkparser.CliSyntax.PREFIX_DRINK_DEFAULT_SELLING_PRICE;
-import static seedu.address.logic.drinkparser.CliSyntax.PREFIX_DRINK_NAME;
-=======
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DRINK_COST_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DRINK_DEFAULT_SELLING_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DRINK_NAME;
->>>>>>> 526e117a13613069c57a80bc39898616582b3f8d:src/main/java/seedu/address/logic/commands/AddDrinkCommand.java
+
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
