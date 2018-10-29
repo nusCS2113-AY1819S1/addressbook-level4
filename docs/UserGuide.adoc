@@ -298,18 +298,19 @@ Shows a list of all persons in the address book. +
 Format: `list` +
 Shortcut Format: `l`
 
-=== Editing a person : `edit` `e`
+=== Editing a student : `edit` `e`
 
-Edits an existing person in the address book. +
+Edits an existing student in the student management system. +
 Format: `edit INDEX [n/NAME] [g/GENDER] [nat/NATIONALITY] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [g/GRADE]...`
 
 
 ****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
+* When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
+* You can remove all the student's tags by typing `t/` without specifying any tags after it.
+* Edits the student at specified `INDEX` in all groups which the student is in [_Coming in v1.4_]
 ****
 
 Examples:
