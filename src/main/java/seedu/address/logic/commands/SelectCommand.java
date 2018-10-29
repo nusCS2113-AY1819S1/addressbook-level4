@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import seedu.address.commons.core.EventsCenter;
@@ -31,9 +32,16 @@ public class SelectCommand extends Command {
     public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Selected Person: %1$s";
 
     private final Index targetIndex;
+    private final LocalDate date;
 
     public SelectCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
+        this.date = null;
+    }
+
+    public SelectCommand(Index targetIndex, LocalDate date) {
+        this.targetIndex = targetIndex;
+        this.date = date;
     }
 
     @Override
