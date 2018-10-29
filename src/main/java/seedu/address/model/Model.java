@@ -9,7 +9,7 @@ import seedu.address.model.user.Password;
 import seedu.address.model.user.UserName;
 
 /**
- * The API of the DrinkModel component.
+ * The API of the Model component.
  */
 public interface Model {
 

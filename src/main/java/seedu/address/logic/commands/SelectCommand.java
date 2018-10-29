@@ -14,7 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.drink.Drink;
 
 /**
- * Selects a person identified using it's displayed index from the address book.
+ * Selects a drink identified using its displayed index from the inventory list.
  */
 public class SelectCommand extends Command {
 

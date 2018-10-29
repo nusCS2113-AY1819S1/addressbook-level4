@@ -13,7 +13,7 @@ import seedu.address.model.drink.Name;
 import seedu.address.model.drink.Quantity;
 
 /**
- * Adds a person to the address book.
+ * Sell a drink from inventory.
  * // TODO: STUB
  */
 public class SellDrinkCommand extends Command {

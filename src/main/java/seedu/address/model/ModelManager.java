@@ -28,7 +28,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final InventoryList inventoryList;
 
     /**
-     * Initializes a DrinkModelManager with the given inventoryList and userPrefs.
+     * Initializes a ModelManager with the given inventoryList and userPrefs.
      */
     public ModelManager(ReadOnlyInventoryList inventoryList, UserPrefs userPrefs, LoginInfoManager loginInfoManager) {
         super();
@@ -115,7 +115,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         // instanceof handles nulls
-        if (!(obj instanceof DrinkModelManager)) {
+        if (!(obj instanceof ModelManager)) {
             return false;
         }
 
