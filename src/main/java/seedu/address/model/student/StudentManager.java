@@ -34,7 +34,7 @@ public class StudentManager {
      */
     public boolean doesStudentExistForGivenMatricNo(String matricNo) {
         for (Person p:studentModel.getAddressBook().getPersonList()) {
-            if (p.getMatricNo().equals(matricNo)) {
+            if (p.getMatricNo().matricNo.equals(matricNo)) {
                 return true;
             }
         }
@@ -49,7 +49,7 @@ public class StudentManager {
      */
     public boolean doesStudentExistForGivenEmail(String email) {
         for (Person p:studentModel.getAddressBook().getPersonList()) {
-            if (p.getEmail().equals(email)) {
+            if (p.getEmail().value.equals(email)) {
                 return true;
             }
         }
