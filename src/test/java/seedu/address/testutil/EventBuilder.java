@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.attendee.Attendee;
+import seedu.address.model.event.Comment;
 import seedu.address.model.event.Contact;
 import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Email;
@@ -25,6 +26,7 @@ public class EventBuilder {
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_VENUE = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_DATETIME = "31/12/2018 12:00";
+    public static final String DEFAULT_COMMENT = "{span}This is a comment{/span}";
 
     private Name name;
     private Contact contact;
@@ -32,6 +34,7 @@ public class EventBuilder {
     private Email email;
     private Venue venue;
     private DateTime datetime;
+    private Comment comment;
     private Set<Tag> tags;
     private Set<Attendee> attendees;
 
@@ -42,6 +45,7 @@ public class EventBuilder {
         email = new Email(DEFAULT_EMAIL);
         venue = new Venue(DEFAULT_VENUE);
         datetime = new DateTime(DEFAULT_DATETIME);
+        comment = new Comment(DEFAULT_COMMENT);
 
         tags = new HashSet<>();
         attendees = new HashSet<>();
@@ -57,6 +61,7 @@ public class EventBuilder {
         email = eventToCopy.getEmail();
         venue = eventToCopy.getVenue();
         datetime = eventToCopy.getDateTime();
+        comment = eventToCopy.getComment();
 
         tags = new HashSet<>(eventToCopy.getTags());
         attendees = new HashSet<>(eventToCopy.getAttendance());
@@ -126,7 +131,15 @@ public class EventBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Comment} of the {@code Event} that we are building.
+     */
+    public EventBuilder withComment(String comment) {
+        this.comment = new Comment(comment);
+        return this;
+    }
+
     public Event build() {
-        return new Event(name, contact, phone, email, venue, datetime, tags, attendees);
+        return new Event(name, contact, phone, email, venue, datetime, comment, tags, attendees);
     }
 }
