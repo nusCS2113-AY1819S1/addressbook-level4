@@ -37,8 +37,8 @@ public class UserName {
     /**
      *Return true if userName is longer than {@code MAX_LENGTH_FOR_USERNAME}
      */
-    public static boolean isUserNameTooLong(String test){
-        if (test.length () > MAX_LENGTH_FOR_USERNAME){
+    public static boolean isUserNameTooLong(String test) {
+        if (test.length () > MAX_LENGTH_FOR_USERNAME) {
             return true;
         }
         return false;

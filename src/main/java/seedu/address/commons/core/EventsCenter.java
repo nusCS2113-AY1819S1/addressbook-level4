@@ -32,10 +32,6 @@ public class EventsCenter {
     }
 
     public void registerHandler(Object handler) {
-//        if (checkForDuplicateHandler(handler)){
-//            System.out.println ("repeated");
-//            return;
-//        }
         eventBus.register(handler);
     }
 
@@ -47,8 +43,14 @@ public class EventsCenter {
         eventBus.post(event);
         return this;
     }
-    private boolean checkForDuplicateHandler(Object handler){
-        if (eventsHandler.contains (handler)){
+
+    /**
+     * Check for duplicated handlers
+     * @param handler
+     * @return
+     */
+    private boolean checkForDuplicateHandler(Object handler) {
+        if (eventsHandler.contains (handler)) {
             return true;
         }
         eventsHandler.add (handler);

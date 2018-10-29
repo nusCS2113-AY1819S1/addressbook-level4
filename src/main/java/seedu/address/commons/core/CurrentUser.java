@@ -22,8 +22,8 @@ public class CurrentUser {
     /**
      * Return true if {@code test} is equal to the authenticationLevel
      */
-    public static boolean checkAuthenticationLevel(String test){
-        if (authenticationLevel.toString ().equals (test)){
+    public static boolean checkAuthenticationLevel(String test) {
+        if (authenticationLevel.toString ().equals (test)) {
             return true;
         }
         return false;

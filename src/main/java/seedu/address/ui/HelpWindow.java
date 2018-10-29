@@ -1,5 +1,10 @@
 package seedu.address.ui;
 
+import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_ACCOUNTANT;
+import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_ADMIN;
+import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_MANAGER;
+import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_STOCK_TAKER;
+
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -8,10 +13,6 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.CurrentUser;
 import seedu.address.commons.core.LogsCenter;
 
-import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_ACCOUNTANT;
-import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_ADMIN;
-import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_MANAGER;
-import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_STOCK_TAKER;
 
 /**
  * Controller for a help page
@@ -88,17 +89,17 @@ public class HelpWindow extends UiPart<Stage> {
     /**
      * Return {@code filepath}based on CurrentUser
      */
-    private String setFilePathAccordingToRole(){
-        if (CurrentUser.checkAuthenticationLevel (AUTH_ADMIN)){
+    private String setFilePathAccordingToRole() {
+        if (CurrentUser.checkAuthenticationLevel (AUTH_ADMIN)) {
             return USERGUIDE_FILE_PATH_ADMIN;
         }
-        if (CurrentUser.checkAuthenticationLevel (AUTH_ACCOUNTANT)){
+        if (CurrentUser.checkAuthenticationLevel (AUTH_ACCOUNTANT)) {
             return USERGUIDE_FILE_PATH_ACCOUNTANT;
         }
-        if (CurrentUser.checkAuthenticationLevel (AUTH_MANAGER)){
+        if (CurrentUser.checkAuthenticationLevel (AUTH_MANAGER)) {
             return USERGUIDE_FILE_PATH_MANAGER;
         }
-        if (CurrentUser.checkAuthenticationLevel (AUTH_STOCK_TAKER)){
+        if (CurrentUser.checkAuthenticationLevel (AUTH_STOCK_TAKER)) {
             return USERGUIDE_FILE_PATH_STOCK_TAKER;
         }
         return USERGUIDE_FILE_PATH;

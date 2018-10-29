@@ -6,7 +6,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.drink.Drink;
-import seedu.address.model.person.Person;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -45,11 +44,11 @@ public class PersonCard extends UiPart<Region> {
         this.drink = drink;
         id.setText(displayedIndex + ". ");
         name.setText(drink.getName().toString ());
-//        name.setText(person.getName().fullName);
-//        phone.setText(person.getPhone().value);
-//        address.setText(person.getAddress().value);
-//        email.setText(person.getEmail().value);
-//        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        //        name.setText(person.getName().fullName);
+        //        phone.setText(person.getPhone().value);
+        //        address.setText(person.getAddress().value);
+        //        email.setText(person.getEmail().value);
+        //        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override

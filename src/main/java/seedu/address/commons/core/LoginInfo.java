@@ -62,14 +62,14 @@ public class LoginInfo {
         return authenticationLevel;
     }
 
-    public UserName getUserName(){
+    public UserName getUserName() {
         return userName;
     }
     /**
      * Returns true is {@code test} is equal to {@code userName}
      */
-    public boolean isUserNameMatched(UserName test){
-        if (userName.equals (test)){
+    public boolean isUserNameMatched(UserName test) {
+        if (userName.equals (test)) {
             return true;
         }
         return false;

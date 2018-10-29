@@ -16,11 +16,11 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.SellDrinkCommand;
 import seedu.address.logic.commands.user.ChangePasswordCommand;
 import seedu.address.logic.commands.user.CreateAccountCommand;
 import seedu.address.logic.commands.user.DeleteAccountCommand;
 import seedu.address.logic.commands.user.LogoutCommand;
-import seedu.address.logic.commands.SellDrinkCommand;
 import seedu.address.logic.parser.AddDrinkCommandParser;
 import seedu.address.logic.parser.DeleteCommandParser;
 import seedu.address.logic.parser.FindCommandParser;
@@ -56,7 +56,7 @@ public class AdminParser {
 
         switch (commandWord) {
 
-         case AddDrinkCommand.COMMAND_WORD:
+        case AddDrinkCommand.COMMAND_WORD:
             return new AddDrinkCommandParser ().parse (arguments);
 
         case SellDrinkCommand.COMMAND_WORD:

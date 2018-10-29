@@ -125,7 +125,7 @@ public class ModelManager extends ComponentManager implements Model {
                 && inventoryList.equals(other.inventoryList);
     }
 
-    //=========== Login feature command =================================================================================
+    //=========== Login feature command ==============================================//
 
     @Override
     public void changePassword (UserName userName, Password newHashedPassword) {

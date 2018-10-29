@@ -14,7 +14,6 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.drink.Drink;
-import seedu.address.model.person.Person;
 
 /**
  * The Browser Panel of the App.

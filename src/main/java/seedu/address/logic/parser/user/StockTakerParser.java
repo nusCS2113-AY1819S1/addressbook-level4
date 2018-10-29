@@ -60,8 +60,8 @@ public class StockTakerParser {
         case LogoutCommand.COMMAND_WORD:
             return new LogoutCommand ();
         //existing command
-//        case EditCommand.COMMAND_WORD:
-//            return new EditCommandParser().parse(arguments);
+        //        case EditCommand.COMMAND_WORD:
+        //            return new EditCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);

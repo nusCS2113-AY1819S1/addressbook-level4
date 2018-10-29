@@ -58,7 +58,8 @@ public class AddDrinkCommand extends Command {
         } else {
             System.out.println("not rights");
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getName ().toString (), toAdd.getRetailPrice ().toString ()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS,
+                toAdd.getName ().toString (), toAdd.getRetailPrice ().toString ()));
     }
 
     @Override

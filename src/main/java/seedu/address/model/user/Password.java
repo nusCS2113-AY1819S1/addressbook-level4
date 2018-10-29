@@ -40,8 +40,8 @@ public class Password {
     /**
      *Return true if userName is longer than {@code MAX_LENGTH_FOR_USERNAME}
      */
-    public static boolean isPasswordTooLong(String test){
-        if (test.length () > MAX_LENGTH_FOR_PASSWORD){
+    public static boolean isPasswordTooLong(String test) {
+        if (test.length () > MAX_LENGTH_FOR_PASSWORD) {
             return true;
         }
         return false;

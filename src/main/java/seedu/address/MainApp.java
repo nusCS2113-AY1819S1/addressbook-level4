@@ -150,7 +150,7 @@ public class MainApp extends Application {
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Please find ADMIN");
             initLoginInfoManager = new LoginInfoManager ();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.fillInStackTrace ();
             initLoginInfoManager = new LoginInfoManager ();
         }

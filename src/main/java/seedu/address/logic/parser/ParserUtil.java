@@ -8,7 +8,6 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.drinkparser.exceptions.DrinkParseException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.drink.Price;
 import seedu.address.model.drink.Quantity;
@@ -54,7 +53,7 @@ public class ParserUtil {
             throw new ParseException(UserName.MESSAGE_USER_NAME_CONSTRAINTS);
         }
 
-        if (UserName.isUserNameTooLong (trimmedUserName)){
+        if (UserName.isUserNameTooLong (trimmedUserName)) {
             throw new ParseException(UserName.MESSAGE_USER_NAME_LENGTH_CONSTRAINTS);
         }
         return new UserName (trimmedUserName);
@@ -71,7 +70,7 @@ public class ParserUtil {
         if (!Password.isValidPassword (trimmedPassword)) {
             throw new ParseException(Password.MESSAGE_PASSWORD_CONSTRAINTS);
         }
-        if (Password.isPasswordTooLong (trimmedPassword)){
+        if (Password.isPasswordTooLong (trimmedPassword)) {
             throw new ParseException(Password.MESSAGE_PASSWORD_LENGTH_CONSTRAINTS);
         }
 
@@ -96,7 +95,7 @@ public class ParserUtil {
      * Parses a {@code String itemName} into a {@code String itenName}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws DrinkParseException if the given {@code name} is invalid.
+     * @throws ParseException if the given {@code name} is invalid.
      */
     public static seedu.address.model.drink.Name parseDrinkName(String name) throws ParseException {
         requireNonNull(name);
@@ -111,7 +110,7 @@ public class ParserUtil {
      * Parses a {@code String price} into a {@code Price}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws DrinkParseException if the given {@code price} is invalid.
+     * @throws ParseException if the given {@code price} is invalid.
      */
     public static Price parseDrinkCostPrice (String price) throws ParseException {
         requireNonNull(price);
@@ -126,7 +125,7 @@ public class ParserUtil {
      * Parses a {@code String price} into a {@code Price}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws DrinkParseException if the given {@code price} is invalid.
+     * @throws ParseException if the given {@code price} is invalid.
      */
     public static Price parseDrinkDefaultSellingPrice (String defaultSellingPrice) throws ParseException {
         requireNonNull(defaultSellingPrice);

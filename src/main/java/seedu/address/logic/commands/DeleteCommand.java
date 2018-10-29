@@ -7,11 +7,7 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.drinkcommands.exceptions.DrinkCommandException;
-import seedu.address.model.DrinkModel;
 import seedu.address.model.Model;
 import seedu.address.model.drink.Drink;
 

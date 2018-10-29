@@ -58,7 +58,7 @@ public class LoginInfoManager {
     /**
      * Delete according in the list contains{@code userName}
      */
-    public void deleteAccount(UserName userName){
+    public void deleteAccount(UserName userName) {
         for (int i = 0; i < loginInfoList.size (); i++) {
             if (loginInfoList.get (i).isUserNameMatched(userName)) {
                 loginInfoList.remove (i);

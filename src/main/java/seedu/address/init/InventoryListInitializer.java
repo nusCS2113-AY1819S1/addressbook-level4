@@ -20,7 +20,6 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.events.model.InitInventoryListEvent;
-import seedu.address.commons.events.ui.LogoutEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
@@ -59,7 +58,8 @@ public class InventoryListInitializer {
     private LoginInfoManager loginInfoList;
 
 
-    public InventoryListInitializer (Config config, Storage storage, UserPrefs userPrefs, LoginInfoManager loginInfoList) {
+    public InventoryListInitializer (Config config, Storage storage,
+                                     UserPrefs userPrefs, LoginInfoManager loginInfoList) {
         this.storage = storage;
         this.userPrefs = userPrefs;
         this.loginInfoList = loginInfoList;

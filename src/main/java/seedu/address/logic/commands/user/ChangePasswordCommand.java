@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OLD_PASSWORD;
 
-
 import seedu.address.authentication.PasswordUtils;
 import seedu.address.commons.core.CurrentUser;
 import seedu.address.logic.CommandHistory;
@@ -59,7 +58,7 @@ public class ChangePasswordCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, newPassword));
     }
 
-    private Password getHashedPassword(){
+    private Password getHashedPassword() {
         String hashedPassword = PasswordUtils.generateSecurePassword (newPassword.toString ());
         return new Password (hashedPassword);
 

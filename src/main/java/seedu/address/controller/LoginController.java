@@ -1,5 +1,8 @@
 package seedu.address.controller;
 
+import static seedu.address.model.user.Password.MAX_LENGTH_FOR_PASSWORD;
+import static seedu.address.model.user.UserName.MAX_LENGTH_FOR_USERNAME;
+
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -19,8 +22,6 @@ import seedu.address.commons.events.model.InitInventoryListEvent;
 import seedu.address.commons.events.ui.StartUiEvent;
 import seedu.address.model.LoginInfoManager;
 
-import static seedu.address.model.user.Password.MAX_LENGTH_FOR_PASSWORD;
-import static seedu.address.model.user.UserName.MAX_LENGTH_FOR_USERNAME;
 
 
 /**
@@ -127,7 +128,7 @@ public class LoginController {
      * @throws Exception
      */
     public void verifyLoginInfo () {
-        if (!isLengthOfUserNameValid () || !isLengthOfPasswordValid ()){
+        if (!isLengthOfUserNameValid () || !isLengthOfPasswordValid ()) {
             return;
         }
         LoginUtils loginUtils = new LoginUtils (username, password, loginInfoManager);
@@ -151,8 +152,8 @@ public class LoginController {
      *Return false if userName length is more than {@code MAX_LENGTH_FOR_USERNAME}
      *
      */
-    private boolean isLengthOfUserNameValid(){
-        if (username.length ()> MAX_LENGTH_FOR_USERNAME){
+    private boolean isLengthOfUserNameValid() {
+        if (username.length () > MAX_LENGTH_FOR_USERNAME) {
             loginError.setText("UserName Length should not be more than 30");
             return false;
         }
@@ -161,8 +162,8 @@ public class LoginController {
     /**
      * Return false if password length is more than {@code MAX_LENGTH_FOR_PASSWORD}
      */
-    private boolean isLengthOfPasswordValid(){
-        if (password.length ()> MAX_LENGTH_FOR_PASSWORD){
+    private boolean isLengthOfPasswordValid() {
+        if (password.length () > MAX_LENGTH_FOR_PASSWORD) {
             loginError.setText("Password Length should not be more than 30");
             return false;
         }
