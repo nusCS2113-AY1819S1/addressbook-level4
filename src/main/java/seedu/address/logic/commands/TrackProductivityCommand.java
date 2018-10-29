@@ -8,7 +8,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.task.Task;
-
+//@@author chelseyong
 /**
  * Tracks the productivity of tasks
  * for the previous week based on hours
@@ -20,7 +20,7 @@ public class TrackProductivityCommand extends Command implements CommandParser {
 
     public static final String MESSAGE_SUCCESS = "Recent productvity: %1$s";
 
-    public static final String MESSAGE_EMPTY_TASK_BOOK = "The task book is empty!";
+    public static final String MESSAGE_NO_COMPLETED_TASK = "There are no completed tasks yet. Start working!";
     //private static final Logger logger = LogsCenter.getLogger(TrackProductivityCommand.class);
 
     @Override
@@ -30,7 +30,7 @@ public class TrackProductivityCommand extends Command implements CommandParser {
         model.trackProductivity();
         ObservableList<Task> tasks = model.getFilteredTaskList();
         if (tasks.size() == 0) {
-            throw new CommandException(MESSAGE_EMPTY_TASK_BOOK);
+            throw new CommandException(MESSAGE_NO_COMPLETED_TASK);
         }
         double productivity = calculateProductivity(tasks);
         String result = Integer.toString((int) (productivity * 100)) + " %";
@@ -61,7 +61,6 @@ public class TrackProductivityCommand extends Command implements CommandParser {
         }
         //if (totalProductivity == 0)
         averageProductivity = totalProductivity / tasks.size();
-
         return averageProductivity;
     }
 }

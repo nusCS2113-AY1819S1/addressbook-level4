@@ -4,8 +4,8 @@ import javafx.fxml.FXML;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.task.Task;
 
 /**
@@ -25,7 +25,7 @@ public class TaskCard extends UiPart<Region> {
     public final Task task;
 
     @FXML
-    private HBox cardPane;
+    private VBox cardPane;
     @FXML
     private Label title;
     @FXML
@@ -56,7 +56,7 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         this.task = task;
         id.setText(displayedIndex + ". ");
-        title.setText(task.getTitle());
+        title.setText(task.getTitle().toUpperCase());
         deadline.setText(task.getDeadline().toString());
         moduleCodes.setText(task.getModuleCode());
         description.setText(task.getDescription());
@@ -65,8 +65,27 @@ public class TaskCard extends UiPart<Region> {
         task.getMilestoneList().forEach(milestone -> milestones.getChildren()
                 .add(new Label(milestone.getMilestoneDescriptionString())));
 
+        setTextForStatus(task);
+        setColorForPriorityLevel(task);
+    }
+
+    private void setColorForPriorityLevel(Task task) {
+        if (task.getPriorityLevel().priorityLevel.equals("high")) {
+            priorityLevel.setStyle("-fx-text-fill: red;");
+        } else if (task.getPriorityLevel().priorityLevel.equals("medium")) {
+            priorityLevel.setStyle("-fx-text-fill: #f45713;");
+        } else {
+            priorityLevel.setStyle("-fx-text-fill: orange;");
+        }
+    }
+
+    private void setTextForStatus(Task task) {
         if (task.isCompleted()) {
-            status.setText("Completed!");
+            StringBuilder result = new StringBuilder();
+            result.append("Completed in ");
+            result.append(task.getCompletedNumOfHours());
+            result.append(" hours!");
+            status.setText(result.toString());
         } else {
             status.setText("Not completed :(");
         }

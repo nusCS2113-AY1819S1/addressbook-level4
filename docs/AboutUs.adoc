@@ -15,7 +15,7 @@ image::chelseyong.png[width="150", align="left"]
 {empty} [https://github.com/chelseyong[github]] [<<johndoe#, portfolio>>]
 
 Role: Team Lead +
-Responsibilities: Deadline & Task features
+Responsibilities: Task features
 
 '''
 
@@ -24,7 +24,7 @@ image::jeremyinelysium.png[width="150", align="left"]
 {empty}[http://github.com/jeremyinelysium[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Deadline features
+Responsibilities: Milestone features
 
 '''
 
@@ -33,7 +33,7 @@ image::emobeany.png[width="150", align="left"]
 {empty}[https://github.com/emobeany[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Date features
+Responsibilities: Deadline features
 
 '''
 
@@ -42,7 +42,7 @@ image::chanchuncheong.png[width="150", align="left"]
 {empty}[https://github.com/ChanChunCheong[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Task features
+Responsibilities: Task & Deadline features
 
 '''
 
