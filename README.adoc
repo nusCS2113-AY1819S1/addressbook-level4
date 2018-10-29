@@ -1,4 +1,5 @@
 = JalilEnterprises
+ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 https://travis-ci.org/CS2113-AY1819S1-T12-3/main[image:https://travis-ci.org/CS2113-AY1819S1-T12-3/main.svg?branch=master[Build Status]]
 https://ci.appveyor.com/project/gaoqikai/main[image:https://ci.appveyor.com/api/projects/status/436ch41il0wo8259/branch/master?svg=true[Build status]]
@@ -6,6 +7,9 @@ https://app.codacy.com/project/CS2113-AY1819S1-T12-3/main/dashboard[image:https:
 https://coveralls.io/github/se-edu/addressbook-level4?branch=master[image:https://coveralls.io/repos/github/se-edu/addressbook-level4/badge.svg?branch=master[Coverage Status]]
 https://gitter.im/se-edu/Lobby[image:https://badges.gitter.im/se-edu/Lobby.svg[Gitter chat]]
 
+ifndef::env-github[]
+image::docs/images/Ui.png[width="600"]
+endif::[]
 
 ifndef::env-github[]
 image::images/Ui.png[width="600"]
