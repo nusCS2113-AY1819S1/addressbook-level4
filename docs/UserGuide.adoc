@@ -264,16 +264,16 @@ e.g `deleteUser uName/john`
 e.g `createThread mCode/CS2113 tTitle/Exam Information cContent/All the best for the final guys`
 * *createComment* : `createComment tId/THREAD ID cContent/COMMENT CONTENT` +
 e.g `createComment tId/1 cContent/This is a new comment`
-* *updateThread* : `updateThread tId/THREAD ID tTitle/NEW THREAD TITLE`+
+* *updateThread* : `updateThread tId/THREAD ID tTitle/NEW THREAD TITLE` +
 e.g `updateThread tId/123 tTitle/This is a new title`
-* *updateComment* : `updateComment cId/COMMENT ID cContent/NEW COMMENT CONTENT`+
+* *updateComment* : `updateComment cId/COMMENT ID cContent/NEW COMMENT CONTENT` +
 e.g `updateComment tId/123 tTitle/This is a new title`
-* *deleteThread* : `deleteThread tId/THREAD ID`+
+* *deleteThread* : `deleteThread tId/THREAD ID` +
 e.g `deleteThread tId/1`
-* *deleteComment* : `deleteComment cId/COMMENT ID`+
+* *deleteComment* : `deleteComment cId/COMMENT ID` +
 e.g `deleteComment cId/1`
 * *listModule*
-* *selectModule* : `selectModule mCode/MODULE CODE`+
+* *selectModule* : `selectModule mCode/MODULE CODE` +
 e.g `selectModule mCode/CS2113`
-* *selectThread* : `selectThread tId/THREAD ID`+
+* *selectThread* : `selectThread tId/THREAD ID` +
 e.g `selectThread tId/123`
