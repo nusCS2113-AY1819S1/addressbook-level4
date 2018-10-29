@@ -56,7 +56,7 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         this.task = task;
         id.setText(displayedIndex + ". ");
-        title.setText(task.getTitle());
+        title.setText(task.getTitle().toUpperCase());
         deadline.setText(task.getDeadline().toString());
         moduleCodes.setText(task.getModuleCode());
         description.setText(task.getDescription());
@@ -66,7 +66,11 @@ public class TaskCard extends UiPart<Region> {
                 .add(new Label(milestone.getMilestoneDescriptionString())));
 
         if (task.isCompleted()) {
-            status.setText("Completed!");
+            StringBuilder result = new StringBuilder();
+            result.append("Completed in ");
+            result.append(task.getCompletedNumOfHours());
+            result.append(" hours!");
+            status.setText(result.toString());
         } else {
             status.setText("Not completed :(");
         }
