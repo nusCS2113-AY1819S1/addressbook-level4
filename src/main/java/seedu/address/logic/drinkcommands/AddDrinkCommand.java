@@ -2,8 +2,8 @@ package seedu.address.logic.drinkcommands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DEFAULT_SELLING_PRICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DRINK_ITEM;
+import static seedu.address.logic.drinkparser.CliSyntax.PREFIX_DRINK_DEFAULT_SELLING_PRICE;
+import static seedu.address.logic.drinkparser.CliSyntax.PREFIX_DRINK_NAME;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.drinkcommands.exceptions.DrinkCommandException;
@@ -20,11 +20,11 @@ public class AddDrinkCommand extends DrinkCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new item to the drink I/0. "
             + "Parameters: "
-            + PREFIX_DRINK_ITEM + "Drink item "
-            + PREFIX_DEFAULT_SELLING_PRICE + "Default salling price \n"
+            + PREFIX_DRINK_NAME + "Drink item "
+            + PREFIX_DRINK_DEFAULT_SELLING_PRICE + "Default salling price \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_DRINK_ITEM + "Coca Cola Original "
-            + PREFIX_DEFAULT_SELLING_PRICE + "20.00 ";
+            + PREFIX_DRINK_NAME + "Coca Cola Original "
+            + PREFIX_DRINK_DEFAULT_SELLING_PRICE + "20.00 ";
 
     public static final String MESSAGE_SUCCESS = "New drink added: %1$s with default price of %2$s";
     public static final String MESSAGE_DUPLICATE_DRINK = "This drink already exists in the inventory list";

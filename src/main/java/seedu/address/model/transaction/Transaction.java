@@ -1,5 +1,7 @@
 package seedu.address.model.transaction;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Objects;
 
 import seedu.address.model.drink.Date;
@@ -25,20 +27,19 @@ public class Transaction {
      */
 
     private TransactionType transactionType;
-    private Date transactionDate; // TODO: will be added when XH's code is merged
+    private Date transactionDate;
     private Drink drinkTransacted;
     private Quantity quantityTransacted;
     private Price amountMoney;
 
-    public Transaction() {}
-
-    public Transaction(Date transactionDate, TransactionType transactionType, Drink drinkTransacted,
+    public Transaction(TransactionType transactionType, Drink drinkTransacted,
                        Quantity quantityTransacted, Price amountMoney) {
-        this.transactionDate = transactionDate;
+        requireAllNonNull(transactionType, drinkTransacted, quantityTransacted, amountMoney);
         this.transactionType = transactionType;
         this.drinkTransacted = drinkTransacted;
         this.quantityTransacted = quantityTransacted;
         this.amountMoney = amountMoney;
+        transactionDate = new Date();
     }
 
     /*
