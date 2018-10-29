@@ -197,7 +197,8 @@ public class ModelManager extends ComponentManager implements Model {
         String output = "";
         int count = 1;
         for (Limit i: limits) {
-                output += "\n" + String.format("%d.", count++) + generateLimitOutput(isExceededLimit(i), getTotalSpend(i), i);
+            output += "\n" + String.format("%d.", count++)
+                    + generateLimitOutput(isExceededLimit(i), getTotalSpend(i), i);
 
         }
         return output;
