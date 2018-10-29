@@ -2,7 +2,6 @@ package seedu.planner.model.tag;
 
 import java.util.HashMap;
 
-import javafx.collections.ObservableList;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.record.UniqueRecordList;
 
@@ -22,13 +21,17 @@ public class TagMap {
         return tagMap.size();
     }
 
-    public HashMap<String, Integer> makeTagMapFromRecordList(UniqueRecordList internalList){
+    public HashMap<String, Integer> makeTagMapFromRecordList(UniqueRecordList internalList) {
         return tagMap = internalList.makeTagMap();
     }
 
-    public void addRecordToTagMap(Record record){
-        for (Tag tag : record.getTags()){
-            if (tagMap.containsKey(tag.tagName)){
+    /**
+     * Adds the tags of a record to the tag map
+     * @param record
+     */
+    public void addRecordToTagMap(Record record) {
+        for (Tag tag : record.getTags()) {
+            if (tagMap.containsKey(tag.tagName)) {
                 tagMap.replace(tag.tagName, tagMap.get(tag.tagName) + 1);
             } else {
                 tagMap.put(tag.tagName, 1);
@@ -36,18 +39,28 @@ public class TagMap {
         }
     }
 
-    public void removeRecordFromTagMap(Record record){
-        for (Tag tag : record.getTags()){
-            if (tagMap.containsKey(tag.tagName)){
+    /**
+     * Removes the tags of a record from the tag map
+     * @param record
+     */
+    public void removeRecordFromTagMap(Record record) {
+        for (Tag tag : record.getTags()) {
+            if (tagMap.containsKey(tag.tagName)) {
                 tagMap.replace(tag.tagName, tagMap.get(tag.tagName) - 1);
-                if (tagMap.get(tag.tagName) == 0){
+                if (tagMap.get(tag.tagName) == 0) {
                     tagMap.remove(tag.tagName);
                 }
             }
         }
     }
 
-    public void updateRecordInTagMap(Record initialRecord, Record editedRecord){
+    /**
+     * Updates the tags of a target record by removing the previous record's tags
+     * and adding the tags of the new record
+     * @param initialRecord
+     * @param editedRecord
+     */
+    public void updateRecordInTagMap(Record initialRecord, Record editedRecord) {
         removeRecordFromTagMap(initialRecord);
         addRecordToTagMap(editedRecord);
     }

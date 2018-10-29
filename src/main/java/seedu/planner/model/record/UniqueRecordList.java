@@ -143,7 +143,7 @@ public class UniqueRecordList implements Iterable<Record> {
      */
     public HashMap<String, Integer> makeTagMap() {
         TagMap tagMap = new TagMap();
-        for (Record record : internalList){
+        for (Record record : internalList) {
             tagMap.addRecordToTagMap(record);
         }
         return tagMap.getAsReadOnlyTagMap();

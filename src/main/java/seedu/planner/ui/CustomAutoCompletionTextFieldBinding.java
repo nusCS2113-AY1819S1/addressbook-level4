@@ -17,14 +17,11 @@ import javafx.util.StringConverter;
 public class CustomAutoCompletionTextFieldBinding<T> extends AutoCompletionBinding<T> {
 
     private String oldText = "";
-    private StringConverter<T> converter;
+    private final StringConverter<T> converter;
 
     /**
      * Creates a new auto-completion binding between the given textField
      * and the given suggestion provider.
-     *
-     * @param textField
-     * @param suggestionProvider
      */
     public CustomAutoCompletionTextFieldBinding(final TextField textField,
                                                 Callback<AutoCompletionBinding.ISuggestionRequest, Collection<T>>
@@ -93,7 +90,7 @@ public class CustomAutoCompletionTextFieldBinding<T> extends AutoCompletionBindi
             oldText = "";
         }
 
-        String newText = text.substring(index + 1, text.length());
+        String newText = text.substring(index + 1);
         if (getCompletionTarget().isFocused()) {
             setUserInput(newText); // updates the input text to new user input
         }
