@@ -126,7 +126,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateDisplayedTimeTable(TimeTable timeTable) {
+        public void updateTimeTable(TimeTable timeTable) {
             throw new AssertionError("This method should not be called.");
         }
 

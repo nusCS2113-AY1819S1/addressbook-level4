@@ -38,7 +38,7 @@ public class SelectCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Index lastPersonIndex = Index.fromOneBased(model.getFilteredPersonList().size());
-        expectedModel.updateDisplayedTimeTable(TypicalTimeSlots.getTypicalTimeTable());
+        expectedModel.updateTimeTable(TypicalTimeSlots.getTypicalTimeTable());
 
         assertExecutionSuccess(INDEX_FIRST_PERSON);
         assertExecutionSuccess(INDEX_THIRD_PERSON);
@@ -57,7 +57,7 @@ public class SelectCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
 
-        expectedModel.updateDisplayedTimeTable(TypicalTimeSlots.getTypicalTimeTable());
+        expectedModel.updateTimeTable(TypicalTimeSlots.getTypicalTimeTable());
         assertExecutionSuccess(INDEX_FIRST_PERSON);
     }
 

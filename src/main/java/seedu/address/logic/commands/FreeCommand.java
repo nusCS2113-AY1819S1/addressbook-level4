@@ -53,7 +53,7 @@ public class FreeCommand extends Command {
             deconflict.addTimeTable(person.getTimeTable());
         }
 
-        model.updateDisplayedTimeTable(deconflict);
+        model.updateTimeTable(deconflict);
 
         StringBuilder resultString = new StringBuilder(MESSAGE_FREE_SUCCESS);
 

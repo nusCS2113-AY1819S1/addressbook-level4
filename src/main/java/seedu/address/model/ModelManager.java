@@ -80,7 +80,7 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new AddressBookChangedEvent(versionedAddressBook));
     }
 
-    /** Raises an event to indicate the displayed timetable has changed */
+    /** Raises an event to indicate the timetable has changed */
     private void indicateDisplayedTimeTableChanged() {
         raise(new DisplayedTimeTableChangedEvent(timeTable));
     }
@@ -112,7 +112,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateDisplayedTimeTable(TimeTable timeTable) {
+    public void updateTimeTable(TimeTable timeTable) {
         requireNonNull(timeTable);
 
         this.timeTable.updateTimeTable(timeTable);

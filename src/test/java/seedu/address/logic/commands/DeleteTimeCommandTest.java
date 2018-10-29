@@ -67,7 +67,7 @@ public class DeleteTimeCommandTest {
         DeleteTimeCommand command = new DeleteTimeCommand(toDelete);
         expectedModel.updatePerson(lastPerson, editedPerson);
         expectedModel.commitAddressBook();
-        expectedModel.updateDisplayedTimeTable(expectedTimeTable);
+        expectedModel.updateTimeTable(expectedTimeTable);
 
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
     }
