@@ -6,10 +6,10 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showGroupAtIndex;
+import static seedu.address.testutil.TypicalGroups.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GROUP;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_GROUP;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_GROUP;
-import static seedu.address.testutil.TypicalGroups.getTypicalAddressBook;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -94,7 +94,8 @@ public class SelectGroupCommandTest {
 
 
     /**
-     * Executes a {@code SelectGroupCommand} with the given {@code index}, and checks that {@code JumpToGroupListRequestEvent}
+     * Executes a {@code SelectGroupCommand} with the given {@code index},
+     * and checks that {@code JumpToGroupListRequestEvent}
      * is raised with the correct index.
      */
     private void assertExecutionSuccess(Index index) {
@@ -103,7 +104,8 @@ public class SelectGroupCommandTest {
 
         assertCommandSuccess(selectGroupCommand, model, commandHistory, expectedMessage, expectedModel);
 
-        JumpToGroupListRequestEvent lastEvent = (JumpToGroupListRequestEvent) eventsCollectorRule.eventsCollector.getMostRecent();
+        JumpToGroupListRequestEvent lastEvent =
+                (JumpToGroupListRequestEvent) eventsCollectorRule.eventsCollector.getMostRecent();
         assertEquals(index, Index.fromZeroBased(lastEvent.targetIndex));
     }
 

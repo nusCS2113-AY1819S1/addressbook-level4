@@ -28,7 +28,8 @@ public class GroupListPanelTest extends GuiUnitTest {
     private static final ObservableList<Group> TYPICAL_GROUPS =
             FXCollections.observableList(getTypicalGroups());
 
-    private static final JumpToGroupListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToGroupListRequestEvent(INDEX_SECOND_GROUP);
+    private static final JumpToGroupListRequestEvent JUMP_TO_SECOND_EVENT =
+            new JumpToGroupListRequestEvent(INDEX_SECOND_GROUP);
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "sandbox");
 
