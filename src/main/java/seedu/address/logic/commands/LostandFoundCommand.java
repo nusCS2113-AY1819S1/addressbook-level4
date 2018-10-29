@@ -53,9 +53,14 @@ public class LostandFoundCommand extends Command {
         int counter = 0;
         for (SimpleItem simpleItem : lostItems) {
             counter++;
-            messageOutput += counter + ". " +
-                    simpleItem.getName() +
-                    ": " + simpleItem.getQuantity().toString() + "\n" + "      ";
+            messageOutput += counter + ". "
+                    +
+                    simpleItem.getName()
+                    +
+                    ": "
+                    + simpleItem.getQuantity().toString()
+                    + "\n"
+                    + "      ";
             if (counter != lostItems.size()) {
                 messageOutput += ", ";
             }
