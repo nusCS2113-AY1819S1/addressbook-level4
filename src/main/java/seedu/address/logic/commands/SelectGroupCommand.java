@@ -8,7 +8,6 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.ui.JumpToGroupListRequestEvent;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -17,7 +16,7 @@ import seedu.address.model.group.Group;
 /**
  * Selects a group identified using it's displayed index from the address book.
  */
-public class SelectGroupCommand extends Command{
+public class SelectGroupCommand extends Command {
     public static final String COMMAND_WORD = "selectgroup";
     public static final String COMMAND_WORD_2 = "sg";
 
