@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
@@ -17,8 +16,8 @@ public class OpenCommand extends Command {
 
     public static final String MESSAGE_INVALID_FILE_NAME = "Invalid file name! \n%1$s";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Opens current version of stock list "
-            + "as an xml file with the specified file name.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Opens specified .xml file version of stock list "
+            + "\n"
             + "Parameters: FILENAME \n"
             + "Example: " + COMMAND_WORD + " backup";
 
@@ -31,7 +30,7 @@ public class OpenCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+        model.openStockList(fileName);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
