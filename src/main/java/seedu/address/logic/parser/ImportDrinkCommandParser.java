@@ -12,6 +12,10 @@ import seedu.address.model.drink.Drink;
 import seedu.address.model.drink.Name;
 import seedu.address.model.drink.Quantity;
 
+
+/**
+ * Parses input arguments and creates a new ImportDrinkCommand object
+ */
 public class ImportDrinkCommandParser implements Parser<ImportDrinkCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand

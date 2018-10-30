@@ -150,10 +150,16 @@ public class Drink {
     }
 
 
+    /**
+     * Decreases the quantity of the drink, using {@code quantity} as the value to decrease
+     */
     public void decreaseQuantity(Quantity quantity) {
 
     }
 
+    /**
+     * Increases the quantity of the drink, using {@code quantity} as the value to increase
+     */
     public void increaseQuantity(Quantity quantity) {
         // Batch batch = new Batch
 
