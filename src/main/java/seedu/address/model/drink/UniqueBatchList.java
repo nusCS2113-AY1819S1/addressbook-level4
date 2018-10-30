@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.drink.exceptions.BatchNotFoundException;
 import seedu.address.model.drink.exceptions.DuplicateBatchException;
 import seedu.address.model.drink.exceptions.EmptyBatchListException;
+import seedu.address.model.drink.exceptions.InsufficientQuantityException;
 
 /**
  * A list of batches of a particular drink that enforces uniqueness between its elements and does not allow nulls.
@@ -26,6 +27,7 @@ import seedu.address.model.drink.exceptions.EmptyBatchListException;
  */
 public class UniqueBatchList implements Iterable<Batch> {
     private final ObservableList<Batch> internalList = FXCollections.observableArrayList();
+    private Quantity totalQuantity;
 
     /**
      * Returns true if the list contains an equivalent batch as the given argument.
@@ -45,6 +47,7 @@ public class UniqueBatchList implements Iterable<Batch> {
             throw new DuplicateBatchException();
         }
         internalList.add(toAdd);
+        increaseTotalQuantity(toAdd.getBatchQuantity().getValue());
     }
 
     /**
@@ -79,21 +82,84 @@ public class UniqueBatchList implements Iterable<Batch> {
     }
 
     /**
-     * @return the batch with the oldest import date in the list
+     * Sets total quantity with the specified amount
+     * @param value a valid quantity value expressed as an integer
      */
-    public Batch getOldestBatch() {
-        sortBatches();
-        return internalList.get(0);
+    public void setTotalQuantity(int value) {
+        this.totalQuantity.setValue(value);
+    }
+
+    public void increaseTotalQuantity(int value) {
+        this.totalQuantity.increaseValue(value);
     }
 
     /**
-     * Sets the quantity for the batch with the oldest date
+     * Decreases total quantity by value specified
      * @param value a valid quantity value expressed as an integer
      */
-    public void setOldestBatchQuantity(int value) {
-        getOldestBatch().setBatchQuantity(value);
+    public void decreaseTotalQuantity(int value) {
+        if (value > this.totalQuantity.getValue()) {
+            throw new InsufficientQuantityException();
+        }
+        this.totalQuantity.decreaseValue(value);
     }
 
+    /**
+     * Updates the total quantity of stock from all the batches in the list
+     */
+    public void updateQuantity() {
+        if (internalList.isEmpty()) {
+            throw new EmptyBatchListException();
+        }
+        totalQuantity.setValue(0);
+        for (Batch b : internalList) {
+            totalQuantity.increaseValue(b.getBatchQuantity().getValue());
+        }
+    }
+
+    /**
+     * Updates the quantities in the batches whenever a transaction is made
+     * @param value a valid quantity value expressed as an integer
+     */
+    public void updateBatchTransaction(int value) {
+        int toDecrease = value;
+        decreaseTotalQuantity(toDecrease);
+        sortBatches();
+        for (Batch b : internalList) {
+            int batchQuantity = b.getBatchQuantity().getValue();
+            if (toDecrease == 0) {
+                break;
+            }
+            if (toDecrease >= batchQuantity) {
+                setBatchQuantity( b, 0);
+            } else {
+                decreaseBatchQuantity( b, toDecrease);
+            }
+            toDecrease -= batchQuantity;
+        }
+    }
+
+    /**
+     * @param index  a valid index value expressed as an integer
+     * @return the batch with the specified index in the list
+     */
+    public Batch getBatch(int index) {
+        sortBatches();
+        return internalList.get(index);
+    }
+
+    /**
+     * Sets the quantity for the indicated batch
+     * @param batchToEdit a valid batch object
+     * @param value a valid quantity value expressed as an integer
+     */
+    public void setBatchQuantity(Batch batchToEdit, int value) {
+        batchToEdit.setBatchQuantity(value);
+    }
+
+    public void decreaseBatchQuantity(Batch batchToEdit, int value) {
+        batchToEdit.decreaseBatchQuantity(value);
+    }
     /**
      * Sorts the Batch list by date
      * The batch list must not be empty
@@ -119,7 +185,6 @@ public class UniqueBatchList implements Iterable<Batch> {
         if (!batchesAreUnique(batches)) {
             throw new DuplicateBatchException();
         }
-
         internalList.setAll(batches);
     }
 
