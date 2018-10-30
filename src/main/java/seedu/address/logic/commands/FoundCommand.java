@@ -13,10 +13,11 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Loststatus;
 import seedu.address.model.item.Quantity;
 
 
-//@@author He Haowei
+//@@author HeHaowei
 
 /**
  * Found an existing item in the stock list.
@@ -74,15 +75,24 @@ public class FoundCommand extends Command {
      */
     private static Item createFoundItem(Item itemToFound, FoundDescriptor foundDescriptor) {
         assert itemToFound != null;
+        Loststatus currentLoststatus = itemToFound.getLoststatus();
+        Loststatus updatedLoststatus;
+        Integer updatedLost = currentLoststatus.getLoststatusLost();
+        Integer updatedFound = currentLoststatus.getLoststatusFound();
 
         Integer updatedValue = foundDescriptor.getFoundQuantity();
         Integer initialValue = itemToFound.getQuantity().toInteger();
+
+        updatedLost -= updatedValue;
+        updatedFound += updatedValue;
+        updatedLoststatus = new Loststatus(updatedLost, updatedFound);
 
         Quantity updatedQuantity = new Quantity(Integer.toString(initialValue + updatedValue));
 
 
 
-        return new Item(itemToFound.getName(), updatedQuantity, itemToFound.getMinQuantity(), itemToFound.getTags());
+        return new Item(itemToFound.getName(), updatedQuantity,
+                itemToFound.getMinQuantity(), updatedLoststatus, itemToFound.getTags());
     }
 
     /**

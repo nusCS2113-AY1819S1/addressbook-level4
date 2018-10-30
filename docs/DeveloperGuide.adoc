@@ -463,9 +463,10 @@ _{Explain here how the data encryption feature will be implemented}_
 
 === Lost and Found feature
 ==== Current Implementation
-The Lost and Found mechanism is facilitated by `LostCommand` and `FoundCommand`. These two commands extend `Command`. And two class: LostDescriptor and Found Descriptor are created as well. The 2 commands implement the following operations:
+The Lost and Found mechanism is facilitated by `LostCommand`, `FoundCommand` and `LostandFoundCommand`. These three commands extend `Command`. And two class: LostDescriptor and Found Descriptor are created as well. The 3 commands implement the following operations:
 * `LostCommand#lost()` -- Lost an item with its number from the Stock List.
 * `FoundCommand#found()` --  Found a number of lost items from the Stock List.
+* `LostandFoundCommand#lost&found()` -- List the lost items and the lost number.
 
 Given below are example usage scenarios and how the Lost and Found mechanism behaves at each step.
 
@@ -501,19 +502,32 @@ Step 6. A copy is created and the change of the quantity is made to the copy. Th
 
 Step 7. The updated item list and success message is shown to the user. Updates are committed to the storage.
 
+Scenario 3:
+
+Step 1. The user executes `lost 1 q/5` command to indicate 5 Arduinos are lost.
+
+Step 2. The user executes `lost 2 q/3` command to indicate 3 Rasperry Pis are lost.
+
+Step 3. The user executes `found 1 q/2` command to indicate 2 lost Arduinos are found.
+
+Step 4. The user executes `lost&found`.
+
+Step 5. The lost list will be shown to the user.
+
 ==== Design Considerations
 
 ===== Aspect: How Lost and Found executes
 
 
-* **Alternative 1** (current choice) When executing lost or found command, update the quantity of the item in the StockList.
+* **Alternative 1** (current choice) Create a lost&found list to record the lost&found history.
+** Pros: Able to list all the lost&found records and history.
+** Cons: May have performance issues in terms of usage and require more memory.
+
+* **Alternative 2** When executing lost or found command, update the quantity of the item in the StockList.
 ** Pros: Easy to handle while only increasing and decreasing the quantity will be used and no need to record all the lost history.
 ** Cons: Unable to list all the lost and found history.
 
-* **Alternative 2** Create a lost&found list to record the lost&found history.
-** Pros: Able to list all the lost&found records and history.
-** Cons: May have performance issues in terms of usage.
-// end::lostcommand[],foundcommand[],lost&foundcommand[]
+// end::lostcommand[],foundcommand[],lostandfoundcommand[]
 
 
 === Logging
