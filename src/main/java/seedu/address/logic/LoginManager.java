@@ -5,7 +5,7 @@ package seedu.address.logic;
  */
 public class LoginManager {
 
-    private static boolean isLoginSuccessful = true;
+    private static boolean isLoginSuccessful = false;
     private static boolean isMember = false;
     private static boolean isPresident = false;
     private static boolean isTreasurer = false;
