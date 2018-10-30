@@ -23,11 +23,13 @@ public class SelectDeadlineCommand extends Command implements CommandParser {
             + "Parameters: "
             + PREFIX_DAY + "DAY "
             + PREFIX_MONTH + "MONTH "
-            + PREFIX_YEAR + "YEAR \n"
+            + PREFIX_YEAR + "YEAR "
+            + " or DAY/MONTH/YEAR\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DAY + "01 "
             + PREFIX_MONTH + "01 "
-            + PREFIX_YEAR + "2018 ";
+            + PREFIX_YEAR + "2018 "
+            + "or 1/1/2018";
 
     public static final String MESSAGE_SUCCESS = "New date selected: %1$s";
     public static final String MESSAGE_INVALID_DEADLINE = "The date selected does not exist";
