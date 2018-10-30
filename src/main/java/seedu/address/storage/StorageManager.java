@@ -32,7 +32,6 @@ public class StorageManager extends ComponentManager implements Storage {
     private UserDatabaseStorage userDatabaseStorage;
     private SalesHistoryStorage salesHistoryStorage;
 
-
     public StorageManager(ProductDatabaseStorage productDatabaseStorage, UserPrefsStorage userPrefsStorage,
                           UserDatabaseStorage userDatabaseStorage, SalesHistoryStorage salesHistoryStorage) {
         super();
@@ -161,6 +160,7 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     //================ Sales History methods =======================
+
     @Override
     public Path getSalesHistoryFilePath() {
         return salesHistoryStorage.getSalesHistoryFilePath();
@@ -194,6 +194,7 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
+    @Subscribe
     public void handleSalesHistoryChangedEvent(SalesHistoryChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Sales history data changed, saving to file"));
         try {
@@ -207,6 +208,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     public void update(User user) {
         this.productDatabaseStorage = new XmlProductDatabaseStorage(user.getAddressBookFilePath());
+        this.salesHistoryStorage = new XmlSalesHistoryStorage(user.getSalesHistoryFilePath());
     }
 
 }

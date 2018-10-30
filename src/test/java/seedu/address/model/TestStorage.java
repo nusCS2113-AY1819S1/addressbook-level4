@@ -7,11 +7,13 @@ import java.util.Optional;
 
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.SalesHistoryChangedEvent;
 import seedu.address.commons.events.model.UserDatabaseChangedEvent;
 import seedu.address.commons.events.model.UserDeletedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.login.User;
+import seedu.address.model.saleshistory.ReadOnlySalesHistory;
 import seedu.address.storage.Storage;
 
 /**
@@ -109,9 +111,44 @@ public class TestStorage extends ComponentManager implements Storage {
     public void deleteAddressBook(User user) {
     }
 
+    @Override
+    public Path getSalesHistoryFilePath() {
+        return null;
+    }
+
+    @Override
+    public Optional<ReadOnlySalesHistory> readSalesHistory() throws DataConversionException, IOException {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<ReadOnlySalesHistory> readSalesHistory(Path filePath) throws DataConversionException, IOException {
+        return Optional.empty();
+    }
+
+    @Override
+    public void saveSalesHistory(ReadOnlySalesHistory salesHistory) throws IOException {
+
+    }
+
+    @Override
+    public void saveSalesHistory(ReadOnlySalesHistory salesHistory, Path filePath) throws IOException {
+
+    }
+
+    @Override
+    public void deleteSalesHistory() throws IOException {
+
+    }
 
     @Override
     public void handleUserDeletedEvent(UserDeletedEvent event) {
+
+    }
+
+    @Override
+    public void handleSalesHistoryChangedEvent(SalesHistoryChangedEvent event) {
+
     }
 
 

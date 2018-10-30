@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -61,13 +62,18 @@ public class XmlAdaptedTransaction {
 
     public XmlAdaptedTransaction(Transaction transaction) {
         transactionTime = transaction.getTransactionTime();
+        productNames = new ArrayList<>();
+        productQuantities = new ArrayList<>();
 
         Set transactionSet = transaction.getTransactionRecord().entrySet();
         Iterator it = transactionSet.iterator();
         while (it.hasNext()) {
             Map.Entry entry = (Map.Entry) it.next();
-            productNames.add((String) entry.getKey());
-            productQuantities.add(entry.getValue().toString());
+            String productName = (String) entry.getKey();
+            if (productName != null && !productName.equals("")) {
+                productNames.add((String) entry.getKey());
+                productQuantities.add(entry.getValue().toString());
+            }
         }
     }
 

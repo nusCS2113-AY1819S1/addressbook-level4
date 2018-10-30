@@ -13,7 +13,13 @@ import seedu.address.model.product.Address;
 import seedu.address.model.product.Name;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.SerialNumber;
+import seedu.address.model.saleshistory.ReadOnlySalesHistory;
+import seedu.address.model.saleshistory.SalesHistory;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.timeidentifiedclass.Transaction;
+import seedu.address.model.timeidentifiedclass.exceptions.ClosedTransactionException;
+import seedu.address.model.timeidentifiedclass.exceptions.DuplicateTransactionException;
+import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
 
 /**
  * Contains utility methods for populating {@code ProductDatabase} with sample data.
@@ -66,6 +72,27 @@ public class SampleDataUtil {
         //        sampleAb.addPerson(sampleProduct);
         //    }
         return sampleAb;
+    }
+
+    public static ReadOnlySalesHistory getSampleSalesHistory() {
+        SalesHistory sampleSh = new SalesHistory();
+        Transaction toAdd = new Transaction();
+        try {
+            toAdd.addProduct("Apples");
+        } catch (ClosedTransactionException e) {
+            // should not happen AT ALL. Stack trace will help debug if this occurs.
+            e.printStackTrace();
+        }
+        try {
+            sampleSh.addTransaction(toAdd);
+        } catch (InvalidTimeFormatException e) {
+            // should not happen AT ALL. Stack trace will help debug if this occurs.
+            e.printStackTrace();
+        } catch (DuplicateTransactionException e) {
+            // should not happen AT ALL. Stack trace will help debug if this occurs.
+            e.printStackTrace();
+        }
+        return sampleSh;
     }
 
     /**

@@ -28,6 +28,7 @@ public class SalesHistory implements ReadOnlySalesHistory {
     private TreeMap<String, Reminder> reminderRecord;
     private ObservableList<Transaction> transactionObservableList;
     private ObservableList<Reminder> reminderObservableList;
+
     /**
      * The following constructor creates a blank sales history.
      */
@@ -68,7 +69,11 @@ public class SalesHistory implements ReadOnlySalesHistory {
     public SalesHistory(ReadOnlySalesHistory toBeCopied) {
         this();
         requireNonNull(toBeCopied);
+        copyReadOnlySalesHistory(toBeCopied);
+    }
 
+    private void copyReadOnlySalesHistory(ReadOnlySalesHistory toBeCopied) {
+        requireNonNull(toBeCopied);
         for (Transaction transaction : toBeCopied.getTransactionsAsObservableList()) {
             try {
                 addTransaction(transaction);
@@ -78,7 +83,6 @@ public class SalesHistory implements ReadOnlySalesHistory {
                 e.printStackTrace();
             }
         }
-
         for (Reminder reminder : toBeCopied.getRemindersAsObservableList()) {
             try {
                 addReminder(reminder);
@@ -179,6 +183,12 @@ public class SalesHistory implements ReadOnlySalesHistory {
         Reminder toRemove = reminderRecord.get(reminderTime);
         reminderRecord.remove(reminderTime);
         reminderObservableList.remove(toRemove);
+    }
+
+    public void resetData(ReadOnlySalesHistory src) {
+        transactionRecord.clear();
+        reminderRecord.clear();
+        copyReadOnlySalesHistory(src);
     }
 
     @Override

@@ -5,22 +5,12 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.distributor.Distributor;
 import seedu.address.model.distributor.UniqueDistributorList;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.UniquePersonList;
-import seedu.address.model.saleshistory.SalesHistory;
-import seedu.address.model.timeidentifiedclass.Reminder;
-import seedu.address.model.timeidentifiedclass.TimeIdentifiedClass;
-import seedu.address.model.timeidentifiedclass.Transaction;
-import seedu.address.model.timeidentifiedclass.exceptions.DuplicateReminderException;
-import seedu.address.model.timeidentifiedclass.exceptions.DuplicateTransactionException;
-import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
 
 /**
  * Wraps all data at the address-book level
@@ -29,8 +19,7 @@ import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatExcep
 public class ProductDatabase implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private final SalesHistory salesHistory;
-    private Transaction lastTransaction;
+
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -41,8 +30,6 @@ public class ProductDatabase implements ReadOnlyAddressBook {
 
     {
         persons = new UniquePersonList();
-        salesHistory = new SalesHistory();
-        lastTransaction = null;
     }
 
     private final UniqueDistributorList distributors;
@@ -160,148 +147,6 @@ public class ProductDatabase implements ReadOnlyAddressBook {
         requireNonNull(editedDistributor);
 
         distributors.setDistributor(target, editedDistributor);
-    }
-
-    /**
-     * Getter for {@code salesHistory}
-     */
-    public SalesHistory getSalesHistory() {
-        return salesHistory;
-    }
-
-    /**
-     * Adds a transaction to the active {@code salesHistory}.
-     * @param transaction
-     * @throws InvalidTimeFormatException
-     * @throws DuplicateTransactionException
-     */
-    public void addTransaction(Transaction transaction) throws InvalidTimeFormatException,
-            DuplicateTransactionException {
-        try {
-            salesHistory.addTransaction(transaction);
-        } catch (InvalidTimeFormatException e) {
-            throw e;
-        } catch (DuplicateTransactionException e) {
-            throw e;
-        }
-        lastTransaction = transaction;
-    }
-
-    public String getDaysTransactions(String day) throws InvalidTimeFormatException {
-        ArrayList<Transaction> daysTransactions;
-        try {
-            daysTransactions = salesHistory.getDaysTransactions(day);
-        } catch (InvalidTimeFormatException e) {
-            throw e;
-        }
-        if (daysTransactions == null || daysTransactions.isEmpty()) {
-            return "No transactions found on the specified date!";
-        }
-
-        StringBuilder ret = new StringBuilder();
-        ret.append("TIMINGS FOR TRANSACTIONS ON " + day + "\n");
-        for (Transaction transaction : daysTransactions) {
-            ret.append(transaction.getTransactionTime() + "\n");
-        }
-
-        return ret.toString();
-    }
-
-    public Transaction getLastTransaction() {
-        return lastTransaction;
-    }
-
-    /**
-     * This method adds a reminder to the {@code salesHistory}.
-     * @param reminder
-     * @throws InvalidTimeFormatException
-     * @throws DuplicateReminderException
-     */
-    public void addReminder(Reminder reminder) throws InvalidTimeFormatException, DuplicateReminderException {
-        try {
-            salesHistory.addReminder(reminder);
-        } catch (InvalidTimeFormatException e) {
-            throw e;
-        } catch (DuplicateReminderException e) {
-            throw e;
-        }
-    }
-
-    /**
-     * Removes a reminder from the {@code salesHistory}.
-     * @param reminderTime
-     * @throws InvalidTimeFormatException
-     * @throws NoSuchElementException
-     */
-    public void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException {
-        try {
-            salesHistory.removeReminder(reminderTime);
-        } catch (InvalidTimeFormatException e) {
-            throw e;
-        } catch (NoSuchElementException e) {
-            throw e;
-        }
-    }
-
-    /**
-     * Returns the reminders which are due in the active day.
-     * @return reminder list.
-     */
-    public ArrayList<Reminder> getOverdueReminders() {
-        final String currentTime = TimeIdentifiedClass.getCurrentDateAndTime();
-
-        Set reminderSet = salesHistory.getReminderRecord().entrySet();
-        Iterator it = reminderSet.iterator();
-
-        ArrayList<Reminder> remindersToReturn = new ArrayList<>();
-
-        // set to true in order to enter subsequent while-loop
-        boolean isLesserTime = true;
-
-        while (it.hasNext() && isLesserTime) {
-            Map.Entry reminderEntry = (Map.Entry) it.next();
-            String reminderTime = (String) reminderEntry.getKey();
-            Reminder reminderToAdd = (Reminder) reminderEntry.getValue();
-
-            // checking if reminder time is lesser than current time
-            isLesserTime = (reminderTime.compareTo(currentTime) <= 0);
-            if (isLesserTime) {
-                remindersToReturn.add(reminderToAdd);
-            }
-        }
-        return remindersToReturn;
-    }
-
-    /**
-     * Returns the reminders which are due and have not been shown by the thread, and declares them as shown by the
-     * thread.
-     * @return reminder list.
-     */
-    public ArrayList<Reminder> getOverDueRemindersForThread() {
-        final String currentTime = TimeIdentifiedClass.getCurrentDateAndTime();
-
-        Set reminderSet = salesHistory.getReminderRecord().entrySet();
-        Iterator it = reminderSet.iterator();
-
-        ArrayList<Reminder> remindersToReturn = new ArrayList<>();
-
-        // set to true to enter the following while block
-        boolean isLesserTime = true;
-
-        while (it.hasNext() && isLesserTime) {
-            Map.Entry entry = (Map.Entry) it.next();
-            String reminderTime = (String) entry.getKey();
-            Reminder reminderToAdd = (Reminder) entry.getValue();
-
-            // true if reminder time is lesser than or equal to the current time.
-            isLesserTime = (reminderTime.compareTo(currentTime) <= 0);
-
-            if (isLesserTime && !reminderToAdd.hasBeenShownByThread()) {
-                remindersToReturn.add(reminderToAdd);
-                reminderToAdd.declareAsShownByThread();
-            }
-        }
-        return remindersToReturn;
     }
 
     /**

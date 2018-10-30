@@ -5,11 +5,12 @@ import java.util.List;
 
 import seedu.address.model.saleshistory.ReadOnlySalesHistory;
 import seedu.address.model.saleshistory.SalesHistory;
+import seedu.address.model.saleshistory.SalesHistoryManager;
 
 /**
- * {@link SalesHistory} that keeps track fo its own history.
+ * {@link SalesHistoryManager} that keeps track fo its own history.
  */
-public class VersionedSalesHistory extends SalesHistory {
+public class VersionedSalesHistory extends SalesHistoryManager {
     private final List<ReadOnlySalesHistory> salesHistoriesStateList;
     private int currentStatePointer;
 
