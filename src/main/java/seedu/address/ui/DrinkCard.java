@@ -11,7 +11,7 @@ import seedu.address.model.drink.Drink;
  * An UI component that displays information of a {@code Drink}.
  */
 public class DrinkCard extends UiPart<Region> {
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "DrinkListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -23,7 +23,7 @@ public class DrinkCard extends UiPart<Region> {
 
     public final Drink drink;
 
-    @javafx.fxml.FXML
+    @FXML
     private HBox cardPane;
     @FXML
     private Label name;
@@ -33,6 +33,10 @@ public class DrinkCard extends UiPart<Region> {
     private Label stock;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label costPrice;
+    @FXML
+    private Label retailPrice;
 
     public DrinkCard(Drink drink, int displayedIndex) {
         super(FXML);
@@ -40,6 +44,8 @@ public class DrinkCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(drink.getName().name);
         stock.setText(Integer.toString(drink.getQuantity().getValue()));
+        costPrice.setText("$" + drink.getCostPrice().toString());
+        retailPrice.setText("$" + drink.getRetailPrice().toString());
         drink.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
