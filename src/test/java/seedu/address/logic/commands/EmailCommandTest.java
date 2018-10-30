@@ -184,7 +184,7 @@ public class EmailCommandTest {
     }
 
     @Test
-    public void execute_sendEmailWithSMTPSendFailedException() throws Exception {
+    public void execute_sendEmailWithSmtpSendFailedException() throws Exception {
         setValidLogin();
         try {
             index = ParserUtil.parseGroupIndex("g/1");
