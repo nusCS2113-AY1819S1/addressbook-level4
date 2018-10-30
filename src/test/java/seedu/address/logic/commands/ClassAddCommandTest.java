@@ -4,7 +4,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import static seedu.address.logic.commands.ClassAddCommand.MESSAGE_SUCCESS;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASS_T16;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MAX_ENROLLMENT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Rule;
@@ -21,8 +25,13 @@ import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.Enrollment;
 import seedu.address.model.module.ModuleCode;
 
-
+/**
+ * Provides a test for the class add command
+ */
 public class ClassAddCommandTest {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
@@ -37,8 +46,6 @@ public class ClassAddCommandTest {
                 model);
     }
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
@@ -48,8 +55,8 @@ public class ClassAddCommandTest {
 
     @Test
     public void equals() {
-        final ClassAddCommand standardCommand = new ClassAddCommand
-                (new Classroom(new ClassName(VALID_CLASS_T16),
+        final ClassAddCommand standardCommand = new ClassAddCommand(new Classroom(
+                new ClassName(VALID_CLASS_T16),
                         new ModuleCode(VALID_MODULE_CODE),
                         new Enrollment(VALID_MAX_ENROLLMENT)));
         // same values -> returns true

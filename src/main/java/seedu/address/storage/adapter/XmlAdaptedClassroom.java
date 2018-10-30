@@ -5,7 +5,6 @@ import java.util.Objects;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.classroom.ClassName;
@@ -16,7 +15,6 @@ import seedu.address.model.module.ModuleCode;
 /**
  * JAXB-friendly adapted version of the Classroom.
  */
-@XmlRootElement(name = "class")
 public class XmlAdaptedClassroom {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Classroom's %s field is missing!";

@@ -10,6 +10,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.StorageController;
 import seedu.address.storage.adapter.XmlAdaptedClassroom;
+import seedu.address.storage.adapter.XmlAdaptedClassroomAttendance;
 
 /**
  * This classroom manager stores classrooms for Trajectory.
@@ -59,6 +60,16 @@ public class ClassroomManager {
             return classroom.getStudents().contains(matricNo);
         }
         return false;
+    }
+
+    /**
+     * Search for duplication of student attendance marked for classroom
+     */
+    public boolean isDuplicateClassroomStudentAttendance(Classroom classroom, String matricNo, String date) {
+        return classroom.getAttendanceList()
+                .stream()
+                .anyMatch(attendance -> attendance.getDate().equalsIgnoreCase(date)
+                            && attendance.getStudentsPresent().contains(matricNo));
     }
 
     /**
@@ -139,5 +150,53 @@ public class ClassroomManager {
      */
     public boolean hasClassroomStudent(Classroom classToUnassignStudent, String matricNo) {
         return (classToUnassignStudent.getStudents().contains(matricNo));
+    }
+
+    /**
+     * Marks the attendance for a student for the class in the given day.
+     * If an attendance is available for the class, append the student to the attendance, otherwise
+     * add the attendance to the class attendance list.
+     */
+    public void markStudentAttendance(Classroom classToMarkAttendance, Attendance attendance) {
+        for (Attendance attend : classToMarkAttendance.getAttendanceList()) {
+            if (attend.getDate().equalsIgnoreCase(attendance.getDate())) {
+                int index = classToMarkAttendance.getAttendanceList().indexOf(attend);
+                classToMarkAttendance.getAttendanceList().set(index, attendance);
+                return;
+            }
+        }
+        classToMarkAttendance.getAttendanceList().add(attendance);
+    }
+
+    /**
+     * Returns the attendance for a classroom for the given date
+     */
+    public Attendance findAttendanceForClass(Classroom classroom, String date) {
+        for (Attendance attendance : classroom.getAttendanceList()) {
+            if (attendance.getDate().equalsIgnoreCase(date)) {
+                return attendance;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Saves the classroom attendance list
+     */
+    public void saveClassroomAttendanceList() {
+        ArrayList<XmlAdaptedClassroomAttendance> xmlClassroomAttendanceList = new ArrayList<>();
+        for (Classroom classroom : classroomList) {
+            xmlClassroomAttendanceList.addAll(
+                    classroom.getAttendanceList()
+                            .stream()
+                            .map(attendance -> new XmlAdaptedClassroomAttendance(
+                                    classroom.getClassName().getValue(),
+                                    classroom.getModuleCode().moduleCode,
+                                    attendance.getDate(), attendance.getStudentsPresent()))
+                            .collect(Collectors.toCollection(ArrayList::new))
+            );
+        }
+        StorageController.setClassAttendanceStorage(xmlClassroomAttendanceList);
+        StorageController.storeData();
     }
 }

@@ -6,6 +6,9 @@ import static seedu.address.logic.commands.CommandTestUtil.*;
 
 import org.junit.Test;
 
+/**
+ * Provides a test for the class delete command
+ */
 public class ClassDeleteCommandTest {
 
     @Test

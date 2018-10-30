@@ -7,6 +7,9 @@ import org.junit.Test;
 
 import seedu.address.testutil.Assert;
 
+/**
+ * Provides a test for the classroom name
+ */
 public class ClassNameTest {
 
     @Test
@@ -21,7 +24,7 @@ public class ClassNameTest {
     }
 
     @Test
-    public void isValidClassName(){
+    public void isValidClassName() {
         // null className
         Assert.assertThrows(NullPointerException.class, () -> ClassName.isValidClassName(null));
 
