@@ -85,8 +85,8 @@ public class XmlAdaptedSchedule {
         final Time modelEndTime = new Time(endTime);
 
         if (eventName == null) {
-            throw new IllegalValueException
-                    (String.format(MISSING_FIELD_MESSAGE_FORMAT, EventName.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    EventName.class.getSimpleName()));
         }
         if (!EventName.isValidEventName(eventName)) {
             throw new IllegalValueException(EventName.MESSAGE_EVENT_NAME_CONSTRAINTS);
