@@ -10,8 +10,10 @@ import static seedu.recruit.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
+import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.commons.util.CollectionUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
@@ -23,6 +25,7 @@ import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
 import seedu.recruit.model.joboffer.JobOffer;
 import seedu.recruit.model.joboffer.UniqueJobList;
+import seedu.recruit.ui.MainWindow;
 
 /**
  * Edits the details of an existing company in the company book.
@@ -67,6 +70,10 @@ public class EditCompanyCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        if (!MainWindow.getDisplayedBook().equals("companyBook")) {
+            EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
+        }
+
         List<Company> lastShownList = model.getFilteredCompanyList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -111,9 +118,9 @@ public class EditCompanyCommand extends Command {
             return companyToEdit.getUniqueJobList();
         } else {
             UniqueJobList updatedJobList = new UniqueJobList();
-            for(JobOffer offer : companyToEdit.getUniqueJobList()) {
-                JobOffer updatedOffer = new JobOffer(updatedName, offer.getJob(), offer.getGender(), offer.getAgeRange()
-                        , offer.getEducation(), offer.getSalary());
+            for (JobOffer offer : companyToEdit.getUniqueJobList()) {
+                JobOffer updatedOffer = new JobOffer(updatedName, offer.getJob(), offer.getGender(),
+                        offer.getAgeRange(), offer.getEducation(), offer.getSalary(), offer.getUniqueCandidateList());
                 updatedJobList.add(updatedOffer);
             }
             return updatedJobList;

@@ -165,7 +165,7 @@ public class UniqueCandidateList implements Iterable<Candidate> {
         Collections.reverse(internalList);
     }
 
-    public void setPersons(UniqueCandidateList replacement) {
+    public void setCandidates(UniqueCandidateList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
