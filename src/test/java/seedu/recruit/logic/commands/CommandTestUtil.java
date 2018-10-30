@@ -17,7 +17,6 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_TAG;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -34,10 +33,10 @@ import seedu.recruit.model.Model;
 import seedu.recruit.model.ReadOnlyCandidateBook;
 import seedu.recruit.model.ReadOnlyCompanyBook;
 import seedu.recruit.model.candidate.Candidate;
-import seedu.recruit.model.candidate.NameContainsKeywordsPredicate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
 import seedu.recruit.model.joboffer.JobOffer;
+import seedu.recruit.testutil.CandidateContainsKeywordsPredicateBuilder;
 import seedu.recruit.testutil.EditCompanyDescriptorBuilder;
 import seedu.recruit.testutil.EditPersonDescriptorBuilder;
 
@@ -193,10 +192,10 @@ public class CommandTestUtil {
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredCandidateList().size());
-
         Candidate candidate = model.getFilteredCandidateList().get(targetIndex.getZeroBased());
         final String[] splitName = candidate.getName().fullName.split("\\s+");
-        model.updateFilteredCandidateList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredCandidateList(
+                new CandidateContainsKeywordsPredicateBuilder(splitName[0]).getCandidatePredicate());
 
         assertEquals(1, model.getFilteredCandidateList().size());
     }

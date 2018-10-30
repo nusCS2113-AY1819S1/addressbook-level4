@@ -20,10 +20,11 @@ import seedu.recruit.model.CompanyBook;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.ModelManager;
 import seedu.recruit.model.UserPrefs;
-import seedu.recruit.model.candidate.NameContainsKeywordsPredicate;
+import seedu.recruit.model.candidate.CandidateContainsKeywordsPredicate;
+import seedu.recruit.testutil.CandidateContainsKeywordsPredicateBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FindCandidateCommand}.
  */
 public class FindCandidateCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new CompanyBook(), new UserPrefs());
@@ -32,10 +33,10 @@ public class FindCandidateCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        CandidateContainsKeywordsPredicate firstPredicate =
+                new CandidateContainsKeywordsPredicateBuilder("first").getCandidatePredicate();
+        CandidateContainsKeywordsPredicate secondPredicate =
+                new CandidateContainsKeywordsPredicateBuilder("second").getCandidatePredicate();
 
         FindCandidateCommand findFirstCommand = new FindCandidateCommand(firstPredicate);
         FindCandidateCommand findSecondCommand = new FindCandidateCommand(secondPredicate);
@@ -60,7 +61,8 @@ public class FindCandidateCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
+        CandidateContainsKeywordsPredicate predicate =
+                new CandidateContainsKeywordsPredicateBuilder(" ").getCandidatePredicate();
         FindCandidateCommand command = new FindCandidateCommand(predicate);
         expectedModel.updateFilteredCandidateList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
@@ -70,17 +72,11 @@ public class FindCandidateCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        CandidateContainsKeywordsPredicate predicate =
+                new CandidateContainsKeywordsPredicateBuilder("Kurz Elle Kunz").getCandidatePredicate();
         FindCandidateCommand command = new FindCandidateCommand(predicate);
         expectedModel.updateFilteredCandidateList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredCandidateList());
-    }
-
-    /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
-     */
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }
