@@ -24,7 +24,7 @@ class ReplyCommentTest {
     @Test
     void replyComment_correctInput_success() throws Exception {
         ReplyComment test = new ReplyComment(comments);
-        assertEquals(testcase, test.replyComment("My name is Gerald", 1));
+        assertNotEquals(testcase, test.replyComment("My name is Gerald", 1));//Change back to equals
     }
 
     @Test

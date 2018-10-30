@@ -34,6 +34,9 @@ public class DeleteCommandSystemTest extends EventManagerSystemTest {
         String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_EVENT.getOneBased() + "       ";
         Event deletedEvent = removeEvent(expectedModel, INDEX_FIRST_EVENT);
         String expectedResultMessage = String.format(MESSAGE_DELETE_EVENT_SUCCESS, deletedEvent);
+        System.out.println(command);
+        System.out.println(expectedModel);
+        System.out.println(expectedResultMessage);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
         /* Case: delete the last event in the list -> deleted */

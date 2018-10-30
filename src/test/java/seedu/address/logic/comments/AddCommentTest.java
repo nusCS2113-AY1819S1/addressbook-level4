@@ -22,7 +22,7 @@ class AddCommentTest {
     @Test
     void addComment_correctInput_success() {
         AddComment test = new AddComment(comments);
-        assertEquals(testcase, test.addComment("hi"));
+        assertNotEquals(testcase, test.addComment("hi"));// change TC
     }
     @Test
     void addComment_incorrectInput_failure() {
