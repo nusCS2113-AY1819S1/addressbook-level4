@@ -410,8 +410,8 @@ image::TimeTableSequenceDiagram.png[width="800"]
 
 {nbsp}
 
-// tag::import[]
-=== Import timetable feature
+// tag::import_export_timetable[]
+=== Import timetable and Export timetable feature
 ==== Current implementation
 
 The import timetable feature allows users to import their timetables from NUSMODS, as an .ics file.
