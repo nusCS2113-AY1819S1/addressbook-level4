@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
+import static seedu.address.testutil.TypicalPersons.TEST;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -79,7 +80,8 @@ public class TagCommandTest {
         expectedModel.updateFilteredPersonList(predicate);
         // TODO: Test is unable to recognise "User"
         // assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(
+                ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, TEST), model.getFilteredPersonList());
     }
     /**
      * Parses {@code userInput} into a {@code TagsContainsKeywords}.
