@@ -18,23 +18,49 @@ By: `Team F09-4`      Since: `Sept 2018`      Licence: `MIT`
 
 == Introduction
 
-RecruitBook is a tool to help manage job candidates and available job offers for job agents and HR (Human Resources) department. RecruitBook is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). RecruitBook can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+[big]#*Welcome to RecruitBook User Guide!*#
+
+RecruitBook v2.0 is an offline desktop application that allows you to manage job candidates and job offers
+throughout the process of recruiting. Designed specifically to ease the recruitment process, you can use RecruitBook
+to add, edit, find, filter, shortlist, email and delete candidates, as well as job offers, to help you efficiently link
+potential candidates to the job offer that is best suited for them.
+
+RecruitBook is optimized for people who prefer to work with a Command Line Interface (CLI), while enjoying the benefits
+of a Graphical User Interface (GUI). RecruitBook can get your contact management tasks done faster than traditional GUI apps.
+
+RecruitBook is available for the Linux, Unix, Windows XP, and Mac OS X operating systems.
+
+== About
+This user guide provides in-depth documentation on the RecruitBook installation process, the step-by-step instructions for its features,
+and Frequently Asked Questions (FAQ). In addition, <<Quick Start>> provides an end-to-end setup process to get you started.
+
+In order to understand the step-by-step instructions, it is important to know the difference between Command Line Interface (CLI) and
+Graphical User Interface (GUI).
+
+|=====================================================
+|Command Line Interface (CLI) |Entering commands via keyboard input into the command box.
+|Graphical User Interface (GUI) |Clicking on-screen via mouse input.
+|=====================================================
 
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Download the latest `recruitbook.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your Recruit Book.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
-+
+.  Double-click the file to start the app. The GUI (as shown in Figure 1) should appear in a few seconds.
+[NOTE]
+RecruitBook opens Company Book by default.
+
+.Ui of RecruitBook
 image::Ui.png[width="790"]
-+
-.  Type the command in the command box and press kbd:[Enter] to execute it. +
+
+.  Type a command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list candidates`* : lists the names of all the candidates available
-* *`addc`* : add a job candidate to RecruitBook
+* *`switch`* : switches the view from one book to another
+* *`listc`* : lists the summary of all the candidates
+* *`addc`* : adds a job candidate to RecruitBook
 * *`addj`* : adds an available job to RecruitBook
 * **`deleteC`**`3` : deletes the 3rd company shown in the list of companies
 * *`exit`* : exits the app
@@ -43,33 +69,48 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 [[Features]]
 == Features
-
+Before you get started on the features, there is a certain command format that RecruitBook
+follows.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the fields to be specified by you! e.g. in `addc n/NAME`, `NAME` is a parameter which can be used as `addc n/John Doe`.
-* Details labelled with “if any” must be filled in at least with `NA` if you find it not applicable.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Words in `UPPER_CASE` are the fields to be specified by *you*.
+[TIP]
+In `addc n/NAME`, `NAME` is a parameter which can be used as `addc n/John Doe`.
+
+* Details labelled with *“if any”* [underline]#_must_# be filled in at least with *`NA`* if you find it not applicable.
+* Parameters can be in [green]#*any*# order.
+[TIP]
+If the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also [green]#_acceptable_#.
 ====
 
 === Viewing help : `help`
 
-Views help information of the various commands in RecruitBook. +
-Format: `help`
+Views help information of the various commands in RecruitBook.
+
+* Format in CLI: `help` or press kbd:[F1]
+
+* GUI (refer to Figure 2) : At the top of the application, locate the menu bar and click `Help` > `Help F1`.
+
+.GUI of Help on Menu Bar
+image::help.png[width="390"]
 
 === Switching Books : `switch`
 
 Toggles between Candidate Book and Company Book according to your viewing needs.
 
-==== Switching to Candidate Book +
-Format: `switchc`
+[NOTE]
+You do not need to specify which book to switch to because RecruitBook automatically detects which book you are looking at,
+and does the switch to the other book for you when you enter the `switch` command.
 
-==== Switching to Company Book +
-Format: `switchC`
+* Format in CLI: `switch`
 
-image::switchBook.png[width="790"]
+* GUI (refer to Figure 3) : At the top of the application, locate the menu bar and click `Switch Book` > `Candidate Book` or `Company Book`.
 
-=== Adding a candidate / company / job  : `add`
+.GUI of Switch Book on Menu Bar
+image::switchBook.png[width="390"]
+
+=== Adding a candidate / company / job  : `addc` `addC`
 
 ==== Adds a candidate to the RecruitBook
 Format: `addc` +
@@ -117,30 +158,6 @@ Examples:
 *	`c/Subway j/Cashier g/M xr/20-30 h/O levels s/1200`
 *	`c/KFC j/Cook g/F xr/20-30 h/O levels s/1400`
 
-=== Exits from any intermediate command
-Format: `cancel`
-
-=== Listing details of candidates / jobs : `list`
-
-==== Shows a list of all candidates present in the RecruitBook +
-Format: `listc`
-
-Examples:
-
-image::candidatePanel.png[width="790", align="left"]
-
-==== Shows a list of all job offers of a selected company available at the moment +
-Format: `listC<INDEX>`
-
-Shows the list of job offers of the company with the specified `INDEX`.
-The index must be an index number shown in the displayed company list.
-
-Examples:
-
-image::companyPanel1.png[width="790", align="left"]
-image::companyPanel2.png[width="790", align="left"]
-image::companyPanel3.png[width="790", align="left"]
-
 === Editing a candidate / company / job : `edit`
 
 ==== Edits attributes of the candidate at the specified index `INDEX`
@@ -178,6 +195,97 @@ Examples:
 
 *	`editj 1 x/20-30` +
 (Edits the `MIN_AGE-MAX_AGE` attribute of the 1st job offer to be of 20 to 30 years of age)
+
+=== Deleting candidates / companies / job offers : `delete`
+
+==== Deleting candidate(s)
+Format: `deletec <INDEX>,<INDEX>-<INDEX> ...`
+
+*	Deletes the candidate(s) with the specified `INDEX`(s)
+*	This index must be an index number shown in the displayed candidate list.
+*	The full name can be found using the find function when a partial keyword is entered
+
+
+Example to delete candidate(s):
+
+Step 1. `find Betsy` +
+(Shows all saved candidates named Betsy)
+
+Step 2. `deletec 1,2-3` +
+(Deletes the 1st, 2nd and 3rd candidate on most recent list)
+
+==== Deleting company(s)
+Format: `deleteC <INDEX>,<INDEX>-<INDEX> ...`
+
+* Deletes the company(s) with the specified `INDEX`(s)
+* The index must be an index number shown in the displayed company list.
+
+Example to delete company(s):
+
+Step 1. `listC` +
+(Shows all available companies)
+
+Step 2. `deleteC 1,6,2-3` +
+(Deletes the 1st, 2nd, 3rd and 6th job in the job list)
+
+
+==== Deleting job offer(s)
+Format: `deletej <INDEX>,<INDEX>-<INDEX> ...`
+
+* Deletes the job(s) with the specified `INDEX`(s)
+* The index must be an index number shown in the displayed job list.
+
+Example to delete job(s):
+
+Step 1. `listj` +
+(Shows all available jobs)
+
+Step 2. `deletej 5-4,6` +
+(Deletes the 4th, 5th and 6th job in the job list)
+
+=== Listing details of candidates / companies / jobs: `listc` `listC`
+
+==== Shows a list of all candidates
+
+Format: `listc`
+
+[NOTE]
+If you are viewing the Company Book, this command will automatically bring you to the Candidate Book.
+
+.Listing of all Candidates
+image::candidatePanel.png[width="790", align="left"]
+
+==== Shows a list of all companies and all job offers
+
+Format: `listC`
+
+[NOTE]
+If you are viewing the Candidate Book, this command will automatically bring you to the Company Book.
+
+.Listing of all Companies and all job offers
+image::candidatePanel.png[width="790", align="left"]
+
+==== Shows a list of job offers based on a selected company
+
+Company Book allows you to easily see the list of job offers based on the company you selected.
+
+GUI (refer to examples shown on Figure 6, 7 and 8): Select a company on the left of the screen.
+
+.Selecting KFC to show the available job offers
+image::companyPanel1.png[width="790", align="left"]
+.Selecting SingTel to show the available job offers
+image::companyPanel2.png[width="790", align="left"]
+.Selecting MOE to show the available job offers
+image::companyPanel3.png[width="790", align="left"]
+
+=== Selecting a candidate : `select`
+Format: `select` `<INDEX>`
+
+=== Selecting a company : `selectCompany`
+Format: `selectCompany` `<INDEX>`
+
+=== Selecting a job offer : `selectJob`
+Format: `selectJob` `<INDEX>`
 
 === Locating candidates by search parameter : `find`
 ==== Finds names of candidates from RecruitBook based on the search parameter.
@@ -259,65 +367,23 @@ Examples:
 *   `sortc s/` +
 (Sorts all candidates by their salary)
 
-=== Deleting candidates / companies / job offers : `delete`
+=== Shortlisting candidates for a job offer : `shortlist`
 
-==== Deleting candidate(s)
-Format: `deletec <INDEX>,<INDEX>-<INDEX> ...`
+[IMPORTANT]
+Shortlisting process is a 5-stage process. To exit from this process, enter `cancel` command as explained in <<Exits from any intermediate command: `cancel`>>.
 
-*	Deletes the candidate(s) with the specified `INDEX`(s)
-*	This index must be an index number shown in the displayed candidate list.
-*	The full name can be found using the find function when a partial keyword is entered
+Format: `shortlist`
 
-
-Example to delete candidate(s):
-
-Step 1. `find Betsy` +
-(Shows all saved candidates named Betsy)
-
-Step 2. `deletec 1,2-3` +
-(Deletes the 1st, 2nd and 3rd candidate on most recent list)
-
-==== Deleting company(s)
-Format: `deleteC <INDEX>,<INDEX>-<INDEX> ...`
-
-* Deletes the company(s) with the specified `INDEX`(s)
-* The index must be an index number shown in the displayed company list.
-
-Example to delete company(s):
-
-Step 1. `listC` +
-(Shows all available companies)
-
-Step 2. `deleteC 1,6,2-3` +
-(Deletes the 1st, 2nd, 3rd and 6th job in the job list)
-
-
-==== Deleting job offer(s)
-Format: `deletej <INDEX>,<INDEX>-<INDEX> ...`
-
-* Deletes the job(s) with the specified `INDEX`(s)
-* The index must be an index number shown in the displayed job list.
-
-Example to delete job(s):
-
-Step 1. `listj` +
-(Shows all available jobs)
-
-Step 2. `deletej 5-4,6` +
-(Deletes the 4th, 5th and 6th job in the job list)
-
-=== Clearing all entries : `clear`
-
-Clears all entries from the Candidate Book. +
-Format: `clearc`
-
-Clears all entries from the Company Book. +
-Format: `clearC`
-
-=== Exiting the program : `exit`
-
-Exits the program. +
-Format: `exit`
+. *Initialization*
+.. Type `shortlist` and press kbd:[Enter] to initialize the shortlist process.
+. *Choose the company*
+.. Type `selectCompany` `<INDEX>` and press kbd:[Enter] to select the company.
+. *Choose the job offer*
+.. Type `selectJob` `<INDEX>` and press kbd:[Enter] to select the job offer.
+. *Choose the candidate*
+.. Type `select` `<INDEX>` and press kbd:[Enter] to select the candidate to shortlist.
+. *Confirm the details*
+.. Type `confirm` and press kbd:[Enter] to confirm.
 
 === Sending emails : `email`
 
@@ -374,6 +440,29 @@ Examples:
     (To preview email)
 .   `send` +
     (To send the email)
+
+=== Exits from any intermediate command: `cancel`
+
+Format : `cancel`
+
+=== Clearing all entries : `clear`
+
+Clears all entries from the Candidate Book. +
+Format: `clearc`
+
+Clears all entries from the Company Book. +
+Format: `clearC`
+
+=== Exiting the program : `exit`
+
+Exits the program. +
+
+* Format in CLI : `exit`
+
+* GUI (refer to Figure 4) : At the top of the application, locate the menu bar and click `File` > `exit`.
+
+.GUI of Exit on Menu Bar
+image::exit.png[width="390"]
 
 === Saving the data
 

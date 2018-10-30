@@ -2,6 +2,7 @@ package seedu.recruit.testutil;
 
 import seedu.recruit.model.candidate.Education;
 import seedu.recruit.model.candidate.Gender;
+import seedu.recruit.model.candidate.UniqueCandidateList;
 import seedu.recruit.model.company.CompanyName;
 import seedu.recruit.model.joboffer.AgeRange;
 import seedu.recruit.model.joboffer.Job;
@@ -27,6 +28,7 @@ public class JobOfferBuilder {
     private Gender gender;
     private Job job;
     private Salary salary;
+    private UniqueCandidateList candidateList;
 
     public JobOfferBuilder() {
         ageRange = new AgeRange(DEFAULT_AGE_RANGE);
@@ -35,6 +37,7 @@ public class JobOfferBuilder {
         gender = new Gender(DEFAULT_GENDER);
         job = new Job(DEFAULT_JOB);
         salary = new Salary(DEFAULT_SALARY);
+        candidateList = new UniqueCandidateList();
     }
 
     /**
@@ -48,6 +51,7 @@ public class JobOfferBuilder {
         gender = jobOfferToCopy.getGender();
         job = jobOfferToCopy.getJob();
         salary = jobOfferToCopy.getSalary();
+        candidateList = jobOfferToCopy.getUniqueCandidateList();
     }
 
     /**
@@ -98,7 +102,11 @@ public class JobOfferBuilder {
         return this;
     }
 
+    /**
+     * Builds the JobOffer objects with the instantiated parameters
+     */
     public JobOffer build() {
-        return new JobOffer(this.companyName, this.job, this.gender, this.ageRange, this.education, this.salary);
+        return new JobOffer(this.companyName, this.job, this.gender, this.ageRange, this.education, this.salary,
+                this.candidateList);
     }
 }

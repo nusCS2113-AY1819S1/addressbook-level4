@@ -402,6 +402,11 @@ public class CommandTestUtil {
         }
 
         @Override
+        public void shortListCandidateToJobOffer(Candidate candidate, JobOffer jobOffer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public EmailUtil getEmailUtil() {
             throw new AssertionError("This method should not be called.");
         }

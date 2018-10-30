@@ -71,6 +71,15 @@ public class UniqueJobList implements Iterable<JobOffer> {
     }
 
     /**
+     * Removes the equivalent job offers in toRemove from the list.
+     * The job offers must exist in the list.
+     */
+    public void removeAll(List<JobOffer> toRemove) {
+        requireNonNull(toRemove);
+        internalList.removeAll(toRemove);
+    }
+
+    /**
      * Removes all job offers from the list.
      */
     public void clear() {

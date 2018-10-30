@@ -13,7 +13,7 @@ import seedu.recruit.model.Model;
 import seedu.recruit.model.ModelManager;
 import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.candidate.Candidate;
-import seedu.recruit.testutil.PersonBuilder;
+import seedu.recruit.testutil.CandidateBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCandidateCommand}.
@@ -30,7 +30,7 @@ public class AddCandidateCommandIntegrationTest {
 
     @Test
     public void execute_newCandidate_success() {
-        Candidate validCandidate = new PersonBuilder().build();
+        Candidate validCandidate = new CandidateBuilder().build();
 
         Model expectedModel = new ModelManager(model.getCandidateBook(), new CompanyBook(), new UserPrefs());
         expectedModel.addCandidate(validCandidate);

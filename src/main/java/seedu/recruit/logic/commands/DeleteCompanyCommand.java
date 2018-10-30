@@ -5,12 +5,15 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 import java.util.Set;
 
+import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
+import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.company.Company;
+import seedu.recruit.ui.MainWindow;
 
 /**
  * Deletes a company identified using it's displayed index from the recruit book.
@@ -36,6 +39,9 @@ public class DeleteCompanyCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        if (!MainWindow.getDisplayedBook().equals("companybook")) {
+            EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
+        }
         List<Company> lastShownList = model.getFilteredCompanyList();
         StringBuilder deletedCompanies = new StringBuilder();
 

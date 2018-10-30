@@ -97,7 +97,7 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
      * and their details {@code ShortlistCard} of the selected Company
      */
     private void showShortlistOfSelectedJob(JobOffer selectedJob) {
-        companyJobShortlistView.setItems(selectedJob.getShortlistedCandidateList());
+        companyJobShortlistView.setItems(selectedJob.getObservableCandidateList());
         companyJobShortlistView.setCellFactory(listView -> new CompanyJobShortlistViewCell());
     }
 
