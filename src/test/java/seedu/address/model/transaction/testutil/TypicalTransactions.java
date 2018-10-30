@@ -1,4 +1,4 @@
-package seedu.address.model.transaction.testUtil;
+package seedu.address.model.transaction.testutil;
 
 import seedu.address.model.transaction.Transaction;
 

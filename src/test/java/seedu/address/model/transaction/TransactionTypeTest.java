@@ -1,7 +1,5 @@
 package seedu.address.model.transaction;
 
-import static seedu.address.model.testutil.Assert.assertThrows;
-
 import org.junit.Assert;
 import org.junit.Test;
 

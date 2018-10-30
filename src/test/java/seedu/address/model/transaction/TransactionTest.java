@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.model.testutil.Assert.assertThrows;
 import static seedu.address.model.transaction.TransactionType.IMPORT;
 import static seedu.address.model.transaction.TransactionType.SALE;
-import static seedu.address.model.transaction.testUtil.TypicalTransactions.SALE_COKE_1;
-import static seedu.address.model.transaction.testUtil.TypicalTransactions.SALE_COKE_2;
-import static seedu.address.model.transaction.testUtil.TypicalTransactions.SALE_PEPSI;
+import static seedu.address.model.transaction.testutil.TypicalTransactions.SALE_COKE_1;
+import static seedu.address.model.transaction.testutil.TypicalTransactions.SALE_COKE_2;
+import static seedu.address.model.transaction.testutil.TypicalTransactions.SALE_PEPSI;
 
 import org.junit.Rule;
 import org.junit.Test;
