@@ -47,7 +47,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private TimeTablePanel timetablePanel;
     private MePanel mePanel;
-    private PersonListPanel personListPanel;
+    private OtherListPanel otherListPanel;
     private FriendListPanel friendListPanel;
     private Config config;
     private UserPrefs prefs;
@@ -201,8 +201,8 @@ public class MainWindow extends UiPart<Stage> {
         friendListPanel = new FriendListPanel(logic.getFriendList(security.getUser()));
         friendListPanelPlaceholder.getChildren().add(friendListPanel.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getOtherList(security.getUser()));
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        otherListPanel = new OtherListPanel(logic.getOtherList(security.getUser()));
+        personListPanelPlaceholder.getChildren().add(otherListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().clear();
@@ -306,8 +306,8 @@ public class MainWindow extends UiPart<Stage> {
         fillSecurityCommandBox();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public OtherListPanel getOtherListPanel() {
+        return otherListPanel;
     }
 
     void releaseResources() {

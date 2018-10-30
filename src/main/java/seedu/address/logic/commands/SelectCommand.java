@@ -30,6 +30,10 @@ public class SelectCommand extends Command {
 
     private final Index targetIndex;
 
+    public SelectCommand() {
+        this.targetIndex = null;
+    }
+
     public SelectCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
@@ -38,16 +42,20 @@ public class SelectCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        List<Person> filteredPersonList = model.getFilteredPersonList();
+        if (targetIndex == null) {
+            model.updateTimeTable(model.getUser().getTimeTable());
+            return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, "me"));
+        } else {
+            List<Person> friendList = model.getFriendList(model.getUser());
 
-        if (targetIndex.getZeroBased() >= filteredPersonList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            if (targetIndex.getZeroBased() >= friendList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+
+            model.updateTimeTable(friendList.get(targetIndex.getZeroBased()).getTimeTable());
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
+            return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex.getOneBased()));
         }
-
-        model.updateTimeTable(filteredPersonList.get(targetIndex.getZeroBased()).getTimeTable());
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
-        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex.getOneBased()));
-
     }
 
     @Override

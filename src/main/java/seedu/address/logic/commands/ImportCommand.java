@@ -1,16 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FILELOCATION;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.IcsUtil;
 import seedu.address.logic.CommandHistory;
@@ -34,21 +31,16 @@ public class ImportCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "im";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Imports and overwrites timetable for the person identified by the "
-            + " number used in the displayed person list. "
+            + ": Imports and overwrites your timetable at the default location, unless otherwise specified. "
             + "Parameters: "
-            + "INDEX (must be a positive integer) "
-            + PREFIX_FILELOCATION + "FILE_LOCATION \n"
+            + "[FILE_LOCATION] \n"
             + "Example: " + COMMAND_WORD
-            + " 1 "
-            + PREFIX_FILELOCATION + "C:\\import_folder\\nusmods.ics";
+            + " | Example: " + COMMAND_WORD
+            + " C:\\import_folder\\nusmods.ics";
 
-    public static final String MESSAGE_SUCCESS = "Imported timetable for %1$s.";
+    public static final String MESSAGE_SUCCESS = "Imported timetable at %1$s.";
     public static final String MESSAGE_EMPTY = "Timetable file empty.";
-    public static final String MESSAGE_IO_ERROR =
-            "Failed to read the file specified. Check if it is corrupted/ incompatible/ inaccessible/ exists?";
-
-
+    public static final String MESSAGE_IO_ERROR = "Failed to read the file at: ";
     private final Index index;
     private final Path filePath;
 
@@ -67,11 +59,8 @@ public class ImportCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
+        Person personToEdit = model.getUser();
+        requireNonNull(personToEdit);
 
         Optional<TimeTable> optionalTimeTable;
         TimeTable timeTable;
@@ -79,20 +68,20 @@ public class ImportCommand extends Command {
         try {
             optionalTimeTable = IcsUtil.getInstance().readTimeTableFromFile(filePath);
         } catch (IOException e) {
-            throw new CommandException(MESSAGE_IO_ERROR);
+            throw new CommandException(MESSAGE_IO_ERROR + filePath.toString());
         }
         if (!optionalTimeTable.isPresent()) {
             return new CommandResult(String.format(MESSAGE_EMPTY));
         }
         timeTable = optionalTimeTable.get();
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+
         Person modifiedPerson = createModifiedPerson(personToEdit, timeTable);
 
         model.updatePerson(personToEdit, modifiedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         model.updateTimeTable(modifiedPerson.getTimeTable());
-        return new CommandResult(String.format(MESSAGE_SUCCESS, modifiedPerson));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, filePath.toString()));
     }
 
     /**
@@ -128,7 +117,9 @@ public class ImportCommand extends Command {
             return false;
         }
 
-        return true;
+        //TODO: Not sure if this is good enough?
+        return filePath.equals(((ImportCommand) other).filePath)
+                && index.equals(((ImportCommand) other).index);
     }
 
 
