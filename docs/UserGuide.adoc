@@ -20,7 +20,11 @@ By: `CS2113T-W12-4`      Since: `Jun 2016`      Licence: `MIT`
 
 == Introduction
 
-Drink I/O  is a desktop application that helps you to manage your drinks distribution company. You can use <product name> to keep track of your inventory, analyse your company’s sales performance and set reminders to help you import more goods should their stocks fall low. <product name> is optimised for Command Line Interface (CLI), allowing you to manage your store faster than traditional Graphical User Interface (GUI) apps, while retaining the benefits of a GUI.
+Drink I/O is a desktop application that helps you to manage your drinks distribution company. 
+You can use Drink I/O to keep track of your inventory, analyse your company’s sales performance and 
+set reminders to help you import more goods should their stocks fall low. 
+Drink I/O is optimised for Command Line Interface (CLI), allowing you to manage your store 
+faster than traditional Graphical User Interface (GUI) apps, while retaining the benefits of a GUI.
 
 This user guide provides comprehensive documentation on the Drink I/O setup process, the features you can acces and the commands you can use. Choose a topic from the Table of Contents (link) to find answers, get instructions and learn to improve your workflow with Drink I/O.
 
@@ -87,7 +91,7 @@ When you buy and receive new goods, and want to update your stocks, you can ente
 ====
 
 To record an import transaction, +
-1. Enter "import" +
+1. Enter `import` +
 2. Key in `n/`, followed by name of drink (`NAME`) +
 3. Key in `q/`, followed by quantity imported (`QUANTITY`) + 
 4. Press kbd:[enter] +
@@ -126,7 +130,7 @@ When you make a sale to your customers, recording the sale in Drink I/O allows y
 ====
 
 To record a sale transaction, +
-1. Use the sell command +
+1. Enter`sell` +
 2. Key in `n/`, followed by name of drink (`NAME`) +
 3. Key in `q/`, followed by quantity transacted in sale (`QUANTITY`) +
 4. Press kbd:[enter] +
@@ -144,6 +148,22 @@ To record a sale transaction, +
 
 == Analysing Sales Performance
 === Viewing overall cost, revenue and profit
+==== Viewing overall cost
+Drink I/O can calculate the total costs your store has incurred since the beginning of recording for you.
+
+[NOTE]
+====
+#*Command format*#: 
+`analyseCosts`
+====
+
+To view the total costs incurred, +
+1. Enter `analyseCosts` +
+2. Press kbd:[enter] +
+
+You should see a value displayed in the results panel.
+
+
 === Filtering popular items
 === Viewing an item’s transactions
 === Viewing an item’s cost, revenue and profit
