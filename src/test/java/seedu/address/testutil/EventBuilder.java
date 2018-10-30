@@ -85,7 +85,7 @@ public class EventBuilder {
     }
 
     /**
-     * Parses the {@code attendees} into a {@code Set<attendee>} and set it to the {@code Event} that we are building.
+     * Parses the {@code attendees} into a {@code Set<Attendee>} and set it to the {@code Event} that we are building.
      */
     public EventBuilder withAttendees(String ... attendees) {
         this.attendees = SampleDataUtil.getAttendeeSet(attendees);
@@ -93,13 +93,26 @@ public class EventBuilder {
     }
 
     /**
-     * Parses the {@code attendees} into a {@code Set<attendee>} and adds it to the {@code Event} that we are building.
+     * Parses the {@code attendees} and adds it to the {@code Set<Attendee>} for the {@code Event} that we are building.
      */
     public EventBuilder withAddAttendees(String ... attendees) {
         Set<Attendee> newAttendees = this.attendees;
         Arrays.stream(attendees)
                 .map(Attendee::new)
                 .forEach(newAttendees::add);
+        this.attendees = newAttendees;
+        return this;
+    }
+
+    /**
+     * Parses the {@code attendees} and removes it from the {@code Set<Attendee>}
+     * for the {@code Event} that we are building.
+     */
+    public EventBuilder withRemoveAttendees(String ... attendees) {
+        Set<Attendee> newAttendees = this.attendees;
+        Arrays.stream(attendees)
+                .map(Attendee::new)
+                .forEach(newAttendees::remove);
         this.attendees = newAttendees;
         return this;
     }

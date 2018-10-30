@@ -82,4 +82,3 @@ public class RegisterCommandTest {
         assertFalse(registerFirstCommand.equals(registerSecondCommand));
     }
 }
-
