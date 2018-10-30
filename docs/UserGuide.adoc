@@ -49,7 +49,7 @@ Graphical User Interface (GUI).
 .  Copy the file to the folder you want to use as the home folder for your Recruit Book.
 .  Double-click the file to start the app. The GUI (as shown in Figure 1) should appear in a few seconds.
 [NOTE]
-RecruitBook opens Company Book by default.
+RecruitBook opens Candidate Book by default.
 
 .Ui of RecruitBook
 image::Ui.png[width="790"]
@@ -459,7 +459,7 @@ Exits the program. +
 
 * Format in CLI : `exit`
 
-* GUI (refer to Figure 4) : At the top of the application, locate the menu bar and click `File` > `exit`.
+* GUI (refer to Figure 9) : At the top of the application, locate the menu bar and click `File` > `exit`.
 
 .GUI of Exit on Menu Bar
 image::exit.png[width="390"]

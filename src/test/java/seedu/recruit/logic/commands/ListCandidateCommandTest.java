@@ -6,7 +6,6 @@ import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.recruit.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.recruit.logic.CommandHistory;
@@ -31,14 +30,12 @@ public class ListCandidateCommandTest {
     }
 
     @Test
-    @Ignore
     public void execute_listIsNotFiltered_showsSameList() {
         assertCommandSuccess(new ListCandidateCommand(), model, commandHistory,
                 ListCandidateCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
-    @Ignore
     public void execute_listIsFiltered_showsEverything() {
         showPersonAtIndex(model, INDEX_FIRST);
         assertCommandSuccess(new ListCandidateCommand(), model, commandHistory,

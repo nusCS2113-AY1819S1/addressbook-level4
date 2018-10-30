@@ -224,7 +224,7 @@ public interface Model {
      * @param jobOffer job offer to shortlist to
      * @param candidate candidate to be shortlisted
      */
-    void shortListCandidateToJobOffer(Candidate candidate, JobOffer jobOffer );
+    void shortListCandidateToJobOffer(Candidate candidate, JobOffer jobOffer);
 
     // ================================== Email Command functions ===================================== //
 

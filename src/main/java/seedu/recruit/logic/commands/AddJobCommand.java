@@ -8,7 +8,6 @@ import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
-import seedu.recruit.ui.MainWindow;
 
 /**
  *  Starts the 2-step process of adding a job offer
@@ -26,9 +25,8 @@ public class AddJobCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        if (!MainWindow.getDisplayedBook().equals("companybook")) {
-            EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
-        }
+        EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
+
         LogicManager.setLogicState("AddJobDetails");
         return new CommandResult(AddJobDetailsCommand.MESSAGE_USAGE);
     }

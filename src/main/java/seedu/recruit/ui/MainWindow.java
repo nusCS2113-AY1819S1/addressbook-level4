@@ -39,7 +39,7 @@ public class MainWindow extends UiPart<Stage> {
     private static boolean exists = false;
 
     private static final String FXML = "MainWindow.fxml";
-    private static String currentBook = "companyBook";
+    private static String currentBook = "candidateBook";
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
@@ -141,15 +141,8 @@ public class MainWindow extends UiPart<Stage> {
      * fills up all the other placeholders of this window.
      */
     void fillInnerParts() {
-        candidateDetailsPanel = new CandidateDetailsPanel(logic.getFilteredPersonList());
 
-        shortlistPanel = new ShortlistPanel(logic.getFilteredPersonList(), logic.getFilteredCompanyList(),
-                logic.getFilteredCompanyJobList());
-
-        companyJobDetailsPanel = new CompanyJobDetailsPanel(logic.getFilteredCompanyList(),
-                logic.getFilteredCompanyJobList());
-
-        panelViewPlaceholder.getChildren().add(getCompanyJobDetailsPanel().getRoot());
+        panelViewPlaceholder.getChildren().add(getCandidateDetailsPanel().getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -261,14 +254,19 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private CandidateDetailsPanel getCandidateDetailsPanel() {
+        candidateDetailsPanel = new CandidateDetailsPanel(logic.getFilteredPersonList());
         return candidateDetailsPanel;
     }
 
     private CompanyJobDetailsPanel getCompanyJobDetailsPanel() {
+        companyJobDetailsPanel = new CompanyJobDetailsPanel(logic.getFilteredCompanyList(),
+                logic.getFilteredCompanyJobList());
         return companyJobDetailsPanel;
     }
 
     private ShortlistPanel getShortlistPanel() {
+        shortlistPanel = new ShortlistPanel(logic.getFilteredPersonList(), logic.getFilteredCompanyList(),
+                logic.getFilteredCompanyJobList());
         return shortlistPanel;
     }
 
@@ -372,13 +370,17 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleShowCandidateBookEvent(ShowCandidateBookRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        switchToCandidateBook();
+        if (currentBook.contentEquals("companyBook")) {
+            switchToCandidateBook();
+        }
     }
 
     @Subscribe
     private void handleShowCompanyBookEvent(ShowCompanyBookRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        switchToCompanyBook();
+        if (currentBook.contentEquals("candidateBook")) {
+            switchToCompanyBook();
+        }
     }
 
     @Subscribe

@@ -13,6 +13,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 
+import javafx.scene.layout.VBox;
 import seedu.recruit.commons.core.LogsCenter;
 import seedu.recruit.commons.events.ui.CompanyJobListDetailsPanelSelectionChangedEvent;
 import seedu.recruit.commons.events.ui.CompanyListDetailsPanelSelectionChangedEvent;
@@ -33,6 +34,9 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
 
     @FXML
     private Label numberOfJobOffers;
+
+    @FXML
+    private VBox cardPane;
 
     @FXML
     private ListView<Company> companyView;
