@@ -64,18 +64,6 @@ public class CommandBox extends UiPart<Region> {
             keyEvent.consume();
             navigateToNextInput();
             break;
-        case SHIFT:
-            keyEvent.consume();
-            commands = logic.getHistoryList();
-            if (commands.size() == 0) {
-                break;
-            }
-            if (commands.size() == commandHistoryPointer) {
-                commandHistoryPointer = 0;
-            }
-            commandTextField.setText(commands.get(commandHistoryPointer));
-            commandHistoryPointer++;
-            break;
         case TAB:
             keyEvent.consume();
             navigateToNextIsbn();

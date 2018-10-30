@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import seedu.address.commons.core.StatisticCenter;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -60,6 +61,8 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_BOOK);
         }
 
+        StatisticCenter.getInstance().getStatistic().getInventory().increase(
+                toAdd.getCost().toString(), toAdd.getQuantity().getValue());
 
         model.addBook(toAdd);
         model.commitBookInventory();
