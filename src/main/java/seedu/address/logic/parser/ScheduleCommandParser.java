@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
@@ -19,29 +20,38 @@ import seedu.address.model.person.Time;
 import seedu.address.model.person.Schedule;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new ScheduleCommand object
  */
 public class ScheduleCommandParser implements Parser<ScheduleCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the ScheduleCommand
+     * and returns an ScheduleCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public ScheduleCommand parse(String args) throws ParseException {
 
-        String indexNum = args.trim().split("\\s+")[0];
-        System.out.println(indexNum);
-        Index index = ParserUtil.parseIndex(indexNum);
+//        String indexNum = args.trim().split("\\s+")[0];
+//        System.out.println(indexNum);
+//        Index index = ParserUtil.parseIndex(indexNum);
+//
+//        System.out.println(userInput);
 
-        String userInput = args.replaceAll(indexNum, "");
-        System.out.println(userInput);
+        requireNonNull(args);
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(userInput,PREFIX_DATE, PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_EVENT_NAME);
+                ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_EVENT_NAME);
+
+        Index index;
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE), pe);
+        }
 
         if (!arePrefixesPresent(argMultimap,PREFIX_DATE, PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_EVENT_NAME)
-                || !argMultimap.getPreamble().isEmpty()) {
+                || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
         }
 
@@ -54,7 +64,7 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
 
         Schedule schedule = new Schedule(date,startTime, endTime, eventName);
 
-        return new ScheduleCommand(schedule, index, schedulePersonDescriptor);
+        return new ScheduleCommand(schedule, index);
     }
 
     /**

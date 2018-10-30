@@ -20,6 +20,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EventName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -53,13 +54,13 @@ public class ScheduleCommand extends Command {
 
     private Schedule toSchedule;
     private final Index index;
-    private final SchedulePersonDescriptor schedulePersonDescriptor;
+//    private final SchedulePersonDescriptor schedulePersonDescriptor;
 
-    public ScheduleCommand(Schedule schedule, Index index, SchedulePersonDescriptor schedulePersonDescriptor) {
+    public ScheduleCommand(Schedule schedule, Index index) {
         requireNonNull(schedule);
         this.index = index;
         this.toSchedule = schedule;
-        this.schedulePersonDescriptor = new SchedulePersonDescriptor(schedulePersonDescriptor);
+//        this.schedulePersonDescriptor = new SchedulePersonDescriptor(schedulePersonDescriptor);
     }
 
     public static final String MESSAGE_FAILURE = "Unable to add schedule";
@@ -74,11 +75,14 @@ public class ScheduleCommand extends Command {
         }
 
         Person personToAddSchedule = lastShownList.get(index.getZeroBased());
-        Person scheduledPerson = addScheduleToPerson(personToAddSchedule, schedulePersonDescriptor);
-
+        System.out.println(personToAddSchedule.getSchedules().toString());
+        Person scheduledPerson = addScheduleToPerson(personToAddSchedule, this.toSchedule);
+        System.out.println(scheduledPerson.getSchedules().toString());
 //        if (!personToAddSchedule.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
 //            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
 //        }
+
+
 
         model.updatePerson(personToAddSchedule, scheduledPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -91,7 +95,7 @@ public class ScheduleCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person addScheduleToPerson(Person personToAddSchedule, ScheduleCommand.SchedulePersonDescriptor schedulePersonDescriptor) {
+    private static Person addScheduleToPerson(Person personToAddSchedule, Schedule schedule) {
         assert personToAddSchedule != null;
 
         Name updatedName = personToAddSchedule.getName();
@@ -99,8 +103,10 @@ public class ScheduleCommand extends Command {
         Email updatedEmail = personToAddSchedule.getEmail();
         Address updatedAddress = personToAddSchedule.getAddress();
         Set<Tag> updatedTags = personToAddSchedule.getTags();
-        Set<Schedule> updatedSchedule = schedulePersonDescriptor.getSchedules().orElse(personToAddSchedule.getSchedules());; //does not allow edit of schedule
+        Set<Schedule> oldSchedule = personToAddSchedule.getSchedules();
 
+        Set<Schedule> updatedSchedule = new HashSet<>(oldSchedule);
+        updatedSchedule.add(schedule);
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedSchedule);
     }
 
@@ -117,7 +123,7 @@ public class ScheduleCommand extends Command {
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public SchedulePersonDescriptor(ScheduleCommand.SchedulePersonDescriptor toCopy) {
+        public SchedulePersonDescriptor(SchedulePersonDescriptor toCopy) {
             setSchedules(toCopy.schedules);
         }
 

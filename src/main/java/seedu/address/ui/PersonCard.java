@@ -8,7 +8,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Schedule;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -26,7 +25,6 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Person person;
-//    public final Schedule schedule;
 
     @FXML
     private HBox cardPane;
@@ -44,7 +42,6 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label scheduleHeader;
-
     @FXML
     private FlowPane schedules;
 
