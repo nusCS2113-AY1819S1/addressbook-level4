@@ -30,12 +30,12 @@ public class RegisterCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_UnregisteredEventUnfilteredList_success() {
+    public void execute_unregisteredEventUnfilteredList_success() {
         Event eventToRegister = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
         RegisterCommand registerCommand = new RegisterCommand(INDEX_FIRST_EVENT);
 
         String expectedMessage =
-                String.format(RegisterCommand.MESSAGE_REGISTER_EVENT_SUCCESS,INDEX_FIRST_EVENT.getOneBased());
+                String.format(RegisterCommand.MESSAGE_REGISTER_EVENT_SUCCESS, INDEX_FIRST_EVENT.getOneBased());
 
         // build new event with added attendee using current user username
         String currUsername = model.getUsername().toString();
@@ -49,7 +49,7 @@ public class RegisterCommandTest {
     }
 
     @Test
-    public void execute_RegisteredEventUnfilteredList_throwsCommandException() {
+    public void execute_registeredEventUnfilteredList_throwsCommandException() {
         Event eventToRegister = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
         RegisterCommand registerCommand = new RegisterCommand(INDEX_FIRST_EVENT);
 
@@ -70,7 +70,7 @@ public class RegisterCommandTest {
      * 4. Redo the registration. This ensures {@code RedoCommand} registers for the event object regardless of indexing.
      */
     @Test
-    public void executeUndoRedo_unRegisteredEventFilteredList_sameEventRegistered() throws Exception {
+    public void executeUndoRedo_unregisteredEventFilteredList_sameEventRegistered() throws Exception {
         RegisterCommand registerCommand = new RegisterCommand(INDEX_FIRST_EVENT);
         Model expectedModel = new ModelManager(model.getEventManager(), new UserPrefs());
 
