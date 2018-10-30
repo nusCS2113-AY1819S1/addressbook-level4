@@ -34,19 +34,19 @@ class UniqueBatchListTest {
 
     @Test
     void contains_batchInList_returnsTrue() {
-        uniqueBatchList.add(COKE2);
+        uniqueBatchList.addBatch(COKE2);
         assertTrue(uniqueBatchList.contains(COKE2));
     }
 
     @Test
     void add_nullBatch_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> uniqueBatchList.add(null));
+        Assert.assertThrows(NullPointerException.class, () -> uniqueBatchList.addBatch(null));
     }
 
     @Test
     void add_duplicateBatch_throwsDuplicateBatchException() {
-        uniqueBatchList.add(COKE2);
-        Assert.assertThrows(DuplicateBatchException.class, () -> uniqueBatchList.add(COKE2));
+        uniqueBatchList.addBatch(COKE2);
+        Assert.assertThrows(DuplicateBatchException.class, () -> uniqueBatchList.addBatch(COKE2));
     }
 
     @Test
@@ -66,10 +66,10 @@ class UniqueBatchListTest {
 
     @Test
     public void setBatch_editedBatchIsSameBatch_success() {
-        uniqueBatchList.add(COKE2);
+        uniqueBatchList.addBatch(COKE2);
         uniqueBatchList.setBatch(COKE2, COKE2);
         UniqueBatchList expectedUniqueBatchList = new UniqueBatchList();
-        expectedUniqueBatchList.add(COKE2);
+        expectedUniqueBatchList.addBatch(COKE2);
         assertEquals(expectedUniqueBatchList, uniqueBatchList);
     }
 

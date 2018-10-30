@@ -45,7 +45,7 @@ public class UniqueBatchList implements Iterable<Batch> {
      * Adds a batch to the list.
      * The batch must not already exist in the list.
      */
-    public void add(Batch toAdd) {
+    public void addBatch(Batch toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicateBatchException();
@@ -119,6 +119,8 @@ public class UniqueBatchList implements Iterable<Batch> {
 
     /**
      * Updates the quantities in the batches whenever a transaction is made
+     * Decreases quantities in the batches by the value specified
+     * Decreases quantity in the batches by the order of date imported, with the oldest batches first
      * @param value a valid quantity value expressed as an integer
      */
     public void updateBatchTransaction(int value) {
@@ -146,6 +148,15 @@ public class UniqueBatchList implements Iterable<Batch> {
     public Batch getBatch(int index) {
         sortBatches();
         return internalList.get(index);
+    }
+
+    public Batch getBatch(BatchId batchId) {
+        for (Batch b : internalList) {
+            if (b.getBatchId() == batchId) {
+                return b;
+            }
+        }
+        throw new BatchNotFoundException();
     }
 
     /**
