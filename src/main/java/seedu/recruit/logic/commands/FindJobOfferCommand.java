@@ -46,4 +46,5 @@ public class FindJobOfferCommand extends Command {
                 || (other instanceof FindJobOfferCommand // instanceof handles nulls
                 && predicate.equals(((FindJobOfferCommand) other).predicate)); // state check
     }
+    
 }
