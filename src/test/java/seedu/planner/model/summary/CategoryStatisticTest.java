@@ -3,9 +3,12 @@ package seedu.planner.model.summary;
 import static org.junit.Assert.assertEquals;
 import static seedu.planner.testutil.Assert.assertThrows;
 
+import java.util.HashSet;
+
 import org.junit.Test;
 
 import seedu.planner.model.record.Record;
+import seedu.planner.model.tag.Tag;
 import seedu.planner.testutil.RecordBuilder;
 
 public class CategoryStatisticTest {
@@ -20,12 +23,22 @@ public class CategoryStatisticTest {
     }
 
     @Test
+    public void constructor_recordWithTags_initTags() {
+        String sampleTag = "computer";
+        HashSet<Tag> expectedTags = new HashSet<>();
+        expectedTags.add(new Tag(sampleTag));
+        Record recordWithTag = new RecordBuilder().withTags(sampleTag).build();
+        CategoryStatistic toTest = new CategoryStatistic(recordWithTag);
+        assertEquals(expectedTags, toTest.getTags());
+    }
+
+    @Test
     public void constructor_recordWithPositiveMoney_initTotalIncome() {
         final Double expectedIncome = 100.0;
         final Double expectedExpense = 0.0;
         Record recordWithPositiveMoney = new RecordBuilder().withMoneyFlow(POSITIVE_MONEY_STRING).build();
         CategoryStatistic toTest = new CategoryStatistic(recordWithPositiveMoney);
-        assertCategoryStatisticCorrect(expectedIncome, expectedExpense, toTest);
+        assertCategoryStatisticCorrectMoney(expectedIncome, expectedExpense, toTest);
     }
 
     @Test
@@ -35,7 +48,7 @@ public class CategoryStatisticTest {
         final Double expectedExpense = 59.0;
         Record recordWithPositiveMoney = new RecordBuilder().withMoneyFlow(negativeMoneyString).build();
         CategoryStatistic toTest = new CategoryStatistic(recordWithPositiveMoney);
-        assertCategoryStatisticCorrect(expectedIncome, expectedExpense, toTest);
+        assertCategoryStatisticCorrectMoney(expectedIncome, expectedExpense, toTest);
     }
 
     @Test
@@ -47,7 +60,7 @@ public class CategoryStatisticTest {
         Record recordWithPositiveMoneyString = new RecordBuilder().withMoneyFlow((POSITIVE_MONEY_STRING)).build();
         CategoryStatistic toTest = new CategoryStatistic(recordWithStartingIncome);
         toTest.add(recordWithPositiveMoneyString);
-        assertCategoryStatisticCorrect(expectedIncome, expectedExpense, toTest);
+        assertCategoryStatisticCorrectMoney(expectedIncome, expectedExpense, toTest);
     }
 
     @Test
@@ -60,11 +73,11 @@ public class CategoryStatisticTest {
         Record recordWithPositiveMoneyString = new RecordBuilder().withMoneyFlow((negativeMoneyString)).build();
         CategoryStatistic toTest = new CategoryStatistic(recordWithStartingIncome);
         toTest.add(recordWithPositiveMoneyString);
-        assertCategoryStatisticCorrect(expectedIncome, expectedExpense, toTest);
+        assertCategoryStatisticCorrectMoney(expectedIncome, expectedExpense, toTest);
     }
 
-    private void assertCategoryStatisticCorrect(Double expectedIncome, Double expectedExpense,
-                                                CategoryStatistic toTest) {
+    private void assertCategoryStatisticCorrectMoney(Double expectedIncome, Double expectedExpense,
+                                                     CategoryStatistic toTest) {
         assertEquals(expectedExpense, toTest.getTotalExpense());
         assertEquals(expectedIncome, toTest.getTotalIncome());
     }
