@@ -19,7 +19,7 @@ public class TransactionTypeTest {
     public void constructor_importLowerCase_returnImport() {
         Assert.assertEquals(importType, TransactionType.valueOf("import".toUpperCase()));
     }
-g
+
     @Test
     public void toString_print_printCorrectFormat() {
         Assert.assertEquals("SALE", SALE_COKE_1.getTransactionType().toString());
