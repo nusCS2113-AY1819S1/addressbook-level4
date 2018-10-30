@@ -121,6 +121,9 @@ public class InventoryList implements ReadOnlyInventoryList {
         return drinks.hashCode();
     }
 
+    /**
+     * Returns reference to actual drink stored in inventory, using {@code drink}
+     */
     public Drink findDrinkByName(Drink drink) {
         if (hasDrink(drink)) {
             return drinks.find(drink);

@@ -21,7 +21,8 @@ public class ViewTransactionsCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        //model.getTransactionList();
+        //TransactionList transactionList = model.getTransactionList();
+        // String.format(MESSAGE_SUCCESS, model.getTransactions.size());
         String result = model.getTransactions();
         return new CommandResult(String.format(MESSAGE_SUCCESS, result));
     }

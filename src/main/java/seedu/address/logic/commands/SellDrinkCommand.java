@@ -43,7 +43,7 @@ public class SellDrinkCommand extends Command {
     private final Transaction transaction;
 
     /**
-     * Creates a SellDrinkCommand to sell the specified drink {@code Name}
+     * Creates a SellDrinkCommand to sell the specified {@code drink}
      */
     public SellDrinkCommand(Drink drink, Quantity quantity) {
         requireAllNonNull(drink, quantity);
