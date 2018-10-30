@@ -53,6 +53,83 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
+=== Security
+
+The timetable content is locked, and it requires a user to either login with a preexisting account, or register a new one.
+
+There are three commands that can be entered on this command line:
+
+1. `login`
+2. `register`
+3. `ui`
+4. `logout`
+5. `exit`
+
+.Login Page with Command Prompts
+image::Login Page.png[width="790"]
+
+You will have to enter your credentials to log in. Only then would you be able to edit and view your own timetable,
+and  view your friends' timetable. The timetable that belongs to people that are not your friends will not be available to you, till you
+add them as friends.
+
+==== Logging In: `login`
+Command: `login [username] [password]`
+
+Examples:
+
+* `login test test` +
+ Logins with Username: test and Password: test
+
+* `login tim tam` +
+Logins with Username: tim and Password: tam
+
+Constraints:
+
+* Username and Password must not contain any spaces
+
+==== Registering: `register`
+Command: `register [Username] [Password] [Email] [MobilePhone] [Address]`
+
+Examples:
+
+* register tim tam tim@tam.com 88888888 Tammy
+
+Constraints:
+
+* Currently all fields must not have spaces too
+
+* All fields must be entered
+
+==== Showing the UI Interface: `ui`
+Command: `ui`
+
+Entering the command `ui` will have the Login Window to appear as seen from th figure 2.
+
+.Login UI
+image::LoginUI.png[width="790"]
+
+
+Clicking on the Register button changes the pop up box to the Registration Window
+
+.Registration UI
+image::RegisterUI.png[width="790"]
+
+==== Logging Out : `logout`
+Command: `logout`
+
+To be able to use this command, you would have to be logged in in the first place. Referring to the figure 4, there is
+a logout button on the menu bar at the top of the application. Clicking on that would have the same effect as typing the
+command `logout`.
+
+.Logout Button Highlighted in Blue
+image::Logout.png[width="790"]
+
+==== Closing the Application : `exit`
+Command: `exit`
+
+This command closes the application without logging you out. It is recommended to logout before doing this, or the changes
+to your timetable might be lost.
+
 === Viewing help : `help` (`h`)
 
 Displays the userguide from within the app.
@@ -288,19 +365,10 @@ There is no need to save manually.
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
 
-== Security Feature
-
-The timetable content is 'locked', and you will be prompted with this login pop up box.
-
-image::Security.png[width="790"]
-
-You will have to enter your credentials to log in. Only then would you be able to edit and view your own timetable,
-and  view your friends' timetable. The timetable that belongs to people that are not your friends will not be available to you, till you
-add them as friends.
 
 
 
-Closing this popup box will close the entire program. +
+
 
 
 
