@@ -243,7 +243,6 @@ public abstract class EventManagerSystemTest {
                     + "&comments="
                     + selectedCardHandle.getComment().replaceAll("[{]", "%3C")
                     .replaceAll("[}]", "%3E").replaceAll(" ", "%20"));
-            
         } catch (MalformedURLException mue) {
             throw new AssertionError("URL expected to be valid.", mue);
         }
