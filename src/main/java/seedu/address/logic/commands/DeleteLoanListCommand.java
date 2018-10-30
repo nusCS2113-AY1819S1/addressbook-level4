@@ -69,7 +69,7 @@ public class DeleteLoanListCommand extends Command {
             throws CommandException {
         ChangeStatusCommand.ChangeStatusDescriptor changeStatusDescriptor =
                 new ChangeStatusCommand.ChangeStatusDescriptor(new Name(loanerDescription.getItemName()),
-                        loanerDescription.getQuantity(), "Ready", "On_Loan");
+                        loanerDescription.getQuantity(), "On_Loan", "Ready");
         ChangeStatusCommand changeStatusCommand = new ChangeStatusCommand(changeStatusDescriptor);
         changeStatusCommand.execute(model, history);
     }

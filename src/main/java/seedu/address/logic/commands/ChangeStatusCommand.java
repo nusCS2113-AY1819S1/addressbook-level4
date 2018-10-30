@@ -37,7 +37,6 @@ public class ChangeStatusCommand extends Command {
             + PREFIX_ORIGINAL_STATUS + "Ready "
             + PREFIX_NEW_STATUS + "Faulty";
     public static final String MESSAGE_CHANGE_STATUS_SUCCESS = "Changed Status: %1$s";
-    public static final String MESSAGE_INVALID_STATUS_QUANTITY = "The quantity input is invalid";
     public static final String MESSAGE_INVALID_STATUS_FIELD = "The status description is invalid";
     public static final String MESSAGE_INVALID_NAME_FIELD = "The item does not exist";
     public static final String MESSAGE_STATUS_CONSTRAINTS =

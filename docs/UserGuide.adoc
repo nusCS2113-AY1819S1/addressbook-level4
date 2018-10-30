@@ -142,7 +142,7 @@ Format: `status`
 
 === Changing status of item: `changeStatus`
 
-The status of the items can be changed (Ready, On_Loan, Faulty) +
+The status of the items can be changed from Ready to Faulty, and vice-versa +
 Format: `changeStatus n/NAME q/QUANTITY os/ORIGINALSTATUS ns/NEWSTATUS`
 
 Examples:
