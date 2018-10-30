@@ -411,6 +411,12 @@ Add a to-do task.
 
 The todo mechanism is facilitated by the `TodoComand` from the `Logic` component. A `Todo` object is instantiated to add a to-do task and each `Todo` object consists of  a `Title` and `Content` object.
 
+The following diagram illustrates the Todo class: 
+image::TodoClassDiagram.png[width="400"]
+
+The following diagram illustrates how the Todo operation works: 
+image::TodoSequenceDiagram.png[width="800"]
+
 ==== Design Considerations
 ===== Aspect: Checking for duplications of to-do tasks
 
