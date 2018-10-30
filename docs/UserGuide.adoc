@@ -134,7 +134,7 @@ Examples:
 
 === Deleting a limit: `deleteLimit` [Oscar]
 
-Adds a limit to the FinancialPlanner +
+Delete a limit from the FinancialPlanner +
 Format: `deleteLimit d/DATE_START DATE_END +
 
 The DATE_START and DATE_END are the two elements for limit searching. Since all the limits have
@@ -166,6 +166,16 @@ Examples:
 
 * `editLimit d/20-8-2018 30-8-2018 m/200`
 
+=== Printing all limits: `checkLimit` [Oscar]
+
+Print out all the limits information stored inside FinancialPlanner +
+Format: `checkLimit +
+
+The program will throw error when there is no limits stored inside the limit list.
+
+Examples:
+
+* `checkLimit`
 
 === Sorting displayed records : `sort`
 
