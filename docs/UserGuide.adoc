@@ -135,7 +135,7 @@ Edits the name of the 2nd event to be `Sports Day` and clears all existing tags.
 
 === Locating events by name: `find`
 
-Admin/User: Finds events whose names, date, tags contain any of the given keywords. +
+Admin/User: Finds events whose names, date, address, tags contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
@@ -151,6 +151,8 @@ Examples:
 Returns `Sports Day` and `Any day`
 * `find Sports Sci Day` +
 Returns any event having `Sports Day`, `Comp Sci Workshop`, or `Good Day` in chronological order
+* `find 12/01/2018 04:30`
+Return any event having `12/01/2018`, `04:30`
 
 === Deleting a event : `delete`
 
@@ -367,6 +369,21 @@ Deletes comment of event 1 at line 5
 * `deleteComment 2 L/2` +
 Deletes comment of event 2 at line 2
 
+=== Export Calendar Command: `export`
+
+Admin/User: export current user/admin registered/host events to an iCalendar file to use with other calendar application +
+Format: `export filename`
+
+Examples:
+
+* `export myCalendar` +
+export the iCalendar file with name myCalendar to src/data folder
+
+[NOTE]
+====
+File name should not be longer than 500 characters and can not be empty.
+====
+
 === Exiting the program : `exit`
 
 Admin/User: Exits the program. +
@@ -424,3 +441,6 @@ e.g. `add Comments 1 C/HELLO`
 e.g. `replyComment 1 L/2 C/Hello`
 * *deleteComment* : `deleteComment INDEX L/LINE` +
 e.g. `deleteComment 1 L/2`
+* *exportCalendarCommand* : export filename +
+e.g. `export BobCalendar`
+

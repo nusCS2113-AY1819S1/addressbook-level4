@@ -79,7 +79,9 @@ public class Event {
         return status;
     }
 
-    public Comment getComment () { return comment; }
+    public Comment getComment () {
+        return comment;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
