@@ -15,7 +15,9 @@ public class Date {
      * The first character of the date must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String DATE_VALIDATION_REGEX = "([0-9]{2})\\\\([0-9]{2})\\\\([0-9]{4})";
+    public static final String DATE_VALIDATION_REGEX = "(0[1-9]|[1-2][0-9]|3[0-1])(0[0-9]|1[0-2])(\\d{4})";
+//            "([01]?[0-9]|2[0-3])[0-5][0-9]";
+//            "^\\d{2}\\d{2}\\d{4}$";
 
     public final String value;
 
@@ -26,7 +28,7 @@ public class Date {
      */
     public Date(String theDate) {
         requireNonNull(theDate);
-//        checkArgument(isValidDate(theDate), MESSAGE_DATE_CONSTRAINTS);
+        checkArgument(isValidDate(theDate), MESSAGE_DATE_CONSTRAINTS);
         value = theDate;
     }
 
@@ -34,7 +36,7 @@ public class Date {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidDate(String test) {
-        return true/*test.matches(DATE_VALIDATION_REGEX)*/;
+        return test.matches(DATE_VALIDATION_REGEX);
     }
 
 

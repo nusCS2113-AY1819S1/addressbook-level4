@@ -11,7 +11,7 @@ public class Time {
 
     //TODO: CHANGE TIME TO ONLY ACCEPT 4 DIGITS
     public static final String MESSAGE_TIME_CONSTRAINTS = "Time should be 4 digits in 24HRS format";
-    public static final String TIME_VALIDATION_REGEX = "\\d{4,5}";
+    public static final String TIME_VALIDATION_REGEX = "([01]?[0-9]|2[0-3])[0-5][0-9]";
 
     public final String value;
 
@@ -22,7 +22,7 @@ public class Time {
      */
     public Time(String theTime) {
         requireNonNull(theTime);
-//        checkArgument(isValidTime(theTime), MESSAGE_TIME_CONSTRAINTS);
+        checkArgument(isValidTime(theTime), MESSAGE_TIME_CONSTRAINTS);
         value = theTime;
     }
 
@@ -30,7 +30,7 @@ public class Time {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTime(String test) {
-        return true/*test.matches(TIME_VALIDATION_REGEX*/;
+        return test.matches(TIME_VALIDATION_REGEX);
     }
 
     @Override

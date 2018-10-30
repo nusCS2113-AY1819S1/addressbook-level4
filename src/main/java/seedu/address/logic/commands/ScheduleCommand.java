@@ -78,11 +78,6 @@ public class ScheduleCommand extends Command {
         System.out.println(personToAddSchedule.getSchedules().toString());
         Person scheduledPerson = addScheduleToPerson(personToAddSchedule, this.toSchedule);
         System.out.println(scheduledPerson.getSchedules().toString());
-//        if (!personToAddSchedule.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-//            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-//        }
-
-
 
         model.updatePerson(personToAddSchedule, scheduledPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
