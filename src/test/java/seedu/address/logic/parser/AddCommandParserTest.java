@@ -74,7 +74,7 @@ public class AddCommandParserTest {
 
         //One gender - gender input string is non abbreviated
         assertParseSuccess(parser, NAME_DESC_BOB + GENDER_DESC_BOB + NATIONALITY_DESC_BOB
-                        + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB  + TAG_DESC_FRIEND,
+                        + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson));
 
         //One gender - gender input string is abbreviated
@@ -84,7 +84,7 @@ public class AddCommandParserTest {
 
         //multiple gender - last gender accepted (both are non abbreviation)
         assertParseSuccess(parser, NAME_DESC_BOB + GENDER_DESC_AMY + GENDER_DESC_BOB + NATIONALITY_DESC_BOB
-                        + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB  + TAG_DESC_FRIEND,
+                        + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson));
 
         //multiple gender - last gender accepted (both are abbreviation)
@@ -129,13 +129,13 @@ public class AddCommandParserTest {
 
         // multiple grades - last grade accepted
         assertParseSuccess(parser, NAME_DESC_BOB + GENDER_DESC_BOB + NATIONALITY_DESC_BOB
-                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB+
-                 TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple addresses - last address accepted
         assertParseSuccess(parser, NAME_DESC_BOB + GENDER_DESC_BOB + NATIONALITY_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + ADDRESS_DESC_AMY + ADDRESS_DESC_BOB+
-                 TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + EMAIL_DESC_BOB + ADDRESS_DESC_AMY + ADDRESS_DESC_BOB
+                + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple tags - all accepted
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
@@ -226,8 +226,8 @@ public class AddCommandParserTest {
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + GENDER_DESC_BOB + NATIONALITY_DESC_BOB
-                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB+
-                 INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS);
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + GENDER_DESC_BOB + NATIONALITY_DESC_BOB
