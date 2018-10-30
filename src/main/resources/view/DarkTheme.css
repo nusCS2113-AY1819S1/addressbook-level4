@@ -100,11 +100,11 @@
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
+    -fx-background-color: #6497ef;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #515658;
+    -fx-background-color: #5eafe5;
 }
 
 .list-cell:filled:selected {
@@ -130,6 +130,23 @@
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
     -fx-text-fill: #010504;
+}
+
+#id {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 15px;
+    -fx-text-fill: black;
+}
+
+#deadline {
+    -fx-text-fill: #28292b;
+    -fx-font-weight: bold;
+}
+
+#title {
+    -fx-font-family: "Gill Sans";
+    -fx-font-size: 15px;
+    -fx-text-fill: black;
 }
 
 .stack-pane {

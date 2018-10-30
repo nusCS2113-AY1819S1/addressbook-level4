@@ -13,7 +13,7 @@ import seedu.address.model.task.Task;
 public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         return new Task[] {
-            new Task(new Deadline("1/1/2018"), "Complete code refactoring",
+            new Task(new Deadline("1/11/2018"), "CS2113", "Complete code refactoring",
                     "refer to notes", new PriorityLevel("high"), 2),
         };
     }

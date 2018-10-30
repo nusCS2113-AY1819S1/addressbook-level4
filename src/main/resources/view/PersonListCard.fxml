@@ -10,41 +10,69 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-  <GridPane HBox.hgrow="ALWAYS">
-    <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
-    </columnConstraints>
-    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
-      <padding>
-        <Insets bottom="5" left="15" right="5" top="5" />
-      </padding>
-      <HBox alignment="CENTER_LEFT" spacing="5">
-        <Label fx:id="id" styleClass="cell_big_label">
-          <minWidth>
-            <!-- Ensures that the label text is never truncated -->
-            <Region fx:constant="USE_PREF_SIZE" />
-          </minWidth>
-        </Label>
-        <Label fx:id="title" styleClass="cell_big_label" text="\$title" />
+<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane prefHeight="140.0" prefWidth="351.0">
+         <columnConstraints>
+            <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="200.0" />
+            <ColumnConstraints halignment="LEFT" maxWidth="400.0" minWidth="30.0" prefWidth="157.33331298828125" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="35.333343505859375" minHeight="10.0" prefHeight="31.33331298828125" />
+            <RowConstraints maxHeight="27.66668701171875" minHeight="10.0" prefHeight="21.66668701171875" />
+            <RowConstraints maxHeight="29.666656494140625" minHeight="10.0" prefHeight="21.66668701171875" />
+            <RowConstraints maxHeight="37.333343505859375" minHeight="10.0" prefHeight="22.33331298828125" />
+            <RowConstraints maxHeight="45.333343505859375" minHeight="10.0" prefHeight="24.0" />
+            <RowConstraints maxHeight="48.666656494140625" minHeight="10.0" prefHeight="25.0" />
+            <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+            <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+         </rowConstraints>
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="5">
+               <children>
+                  <Label fx:id="id" styleClass="cell_big_label">
+                     <minWidth>
+                        <Region fx:constant="USE_PREF_SIZE" />
+                     </minWidth>
+                  </Label>
+                  <Label fx:id="title" styleClass="cell_big_label" text="\$title" />
+               </children>
+            </HBox>
+            <Label fx:id="moduleCodes" styleClass="cell_small_label" text="\$moduleCodes" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <padding>
+                  <Insets right="10.0" />
+               </padding></Label>
+            <Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+               <padding>
+                  <Insets right="10.0" />
+               </padding></Label>
+            <Label text="Module code:" GridPane.rowIndex="1" />
+            <Label text="Description:" GridPane.rowIndex="2" />
+            <Label fx:id="description" styleClass="cell_small_label" text="\$description" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <padding>
+                  <Insets right="10.0" />
+               </padding></Label>
+            <Label fx:id="priorityLevel" styleClass="cell_small_label" text="\$priorityLevel" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <padding>
+                  <Insets right="10.0" />
+               </padding></Label>
+            <Label text="Priority:" GridPane.rowIndex="3" />
+            <Label fx:id="expectedNumOfHours" text="\$expectedNumOfHours" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <padding>
+                  <Insets right="10.0" />
+               </padding></Label>
+            <Label text="To complete in: " GridPane.rowIndex="4" />
+            <Label fx:id="status" styleClass="cell_small_label" text="\$status" GridPane.rowIndex="5" />
+         </children>
+      </GridPane>
+      <HBox prefHeight="30.0" prefWidth="264.0" spacing="10">
+         <children>
+            <Label text="Milestones:" />
+            <FlowPane fx:id="milestones" hgap="10" prefHeight="0.0" prefWidth="200.0" />
+         </children>
       </HBox>
-      <!--<FlowPane fx:id="tags" />-->
-      <!--<FlowPane fx:id="milestones" hgap="10.0" />-->
-      <Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline" />
-      <Label fx:id="moduleCodes" styleClass="cell_small_label" text="\$moduleCodes" />
-      <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
-         <VBox spacing="10.0">
-            <children>
-            <FlowPane fx:id="milestones" hgap="10.0" rowValignment="TOP" VBox.vgrow="ALWAYS" />
-            </children>
-         </VBox>
-      <Label fx:id="priorityLevel" styleClass="cell_small_label" text="\$priorityLevel" />
-      <Label fx:id="status" styleClass="cell_small_label" text="\$status" />
-      <Label fx:id="expectedNumOfHours" text="\$expectedNumOfHours" />
-    </VBox>
-      <rowConstraints>
-         <RowConstraints />
-         <RowConstraints />
-      </rowConstraints>
-  </GridPane>
-</HBox>
+   </children>
+   <padding>
+      <Insets left="7.0" />
+   </padding>
+</VBox>
