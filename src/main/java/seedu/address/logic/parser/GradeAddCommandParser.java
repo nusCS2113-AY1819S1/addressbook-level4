@@ -13,6 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.gradebook.GradebookManager;
 import seedu.address.model.grades.Grades;
 import seedu.address.model.grades.GradesManager;
+import seedu.address.model.module.ModuleManager;
 
 /**
  * Parses input arguments and creates a new GradeAddCommand object
@@ -21,9 +22,11 @@ public class GradeAddCommandParser implements Parser<GradeAddCommand> {
     public static final String MESSAGE_MISSING_PARAMS = "All parameters must be filled";
     public static final String MESSAGE_MARKS_ERROR = "Invalid input. \nMaximum marks should only be an integer";
     public static final String MESSAGE_GRADEBOOK_INVALID = "Gradebook component does not exist";
+    public static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
     private static final String MESSAGE_MARKS_INVALID = "Marks should be within 0-100 range";
     private static final String MESSAGE_MARKS_EXCEED = "Marks assigned is above maximum marks.";
     private static final String MESSAGE_DUPLICATE_STUDENT = "Student has already been assigned a grade";
+    private static final String MESSAGE_INVALID_STUDENT_ENROL = "Student is not registered to module";
     /**
      * Parses the given {@code String args} of arguments in the context of the GradeAddCommand
      * and returns a GradeAddCommand object for execution.
@@ -32,6 +35,7 @@ public class GradeAddCommandParser implements Parser<GradeAddCommand> {
     public GradeAddCommand parse(String args) throws ParseException {
         GradesManager gradesManager = new GradesManager();
         GradebookManager gradebookManager = new GradebookManager();
+        ModuleManager moduleManager = ModuleManager.getInstance();
         float studentMarksArg = 0;
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULE_CODE, PREFIX_GRADEBOOK_ITEM,
@@ -62,6 +66,14 @@ public class GradeAddCommandParser implements Parser<GradeAddCommand> {
         boolean isEmpty = gradesManager.isEmpty(moduleCodeArg, gradeComponentNameArg, studentAdminNoArg);
         if (isEmpty) {
             throw new ParseException(MESSAGE_MISSING_PARAMS);
+        }
+        boolean doesModuleExist = moduleManager.doesModuleExist(moduleCodeArg);
+        if (!doesModuleExist) {
+            throw new ParseException(MESSAGE_MODULE_CODE_INVALID);
+        }
+        boolean isStudentEnrolledToModule = gradesManager.isStudentEnrolledToModule(moduleCodeArg, studentAdminNoArg);
+        if (!isStudentEnrolledToModule) {
+            throw new ParseException(MESSAGE_INVALID_STUDENT_ENROL);
         }
         boolean isGradeComponentValid = gradebookManager.isGradeComponentValid(moduleCodeArg, gradeComponentNameArg);
         if (!isGradeComponentValid) {

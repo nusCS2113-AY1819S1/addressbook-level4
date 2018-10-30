@@ -1,12 +1,17 @@
 package seedu.address.model.grades;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import seedu.address.model.StorageController;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleManager;
+import seedu.address.model.person.Person;
 import seedu.address.storage.adapter.XmlAdaptedGrades;
 
 /**
@@ -58,8 +63,10 @@ public class GradesManager {
      This method shows grades of students for one grade component in module.
      */
     public LineChart<Number, Number> createGraph (Grades grade) {
-        NumberAxis xAxis = new NumberAxis(); xAxis.setLabel("Marks");
-        NumberAxis yAxis = new NumberAxis(); yAxis.setLabel("No. Of Students");
+        NumberAxis xAxis = new NumberAxis();
+        xAxis.setLabel("Marks");
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("No. Of Students");
         LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
         XYChart.Series<Number, Number> series = new XYChart.Series<>();
         lineChart.setTitle("Results of Students");
@@ -131,6 +138,34 @@ public class GradesManager {
         return isMarksValid;
     }
 
+    /**
+     This method checks if student is enrolled to module.
+     */
+    public boolean isStudentEnrolledToModule (String moduleCode, String adminNo) {
+        boolean isStudentEnrolledToModule = false;
+        ModuleManager moduleManager = ModuleManager.getInstance();
+        Module module = moduleManager.getModuleByModuleCode(moduleCode);
+        for (Person personList : module.getEnrolledStudents()) {
+            if (personList.getMatricNo().matricNo.equals(adminNo)) {
+                isStudentEnrolledToModule = true;
+            }
+        }
+        return isStudentEnrolledToModule;
+    }
 
-
+    /**
+     This method checks if grades of all students enrolled to module are assigned to grade component.
+     */
+    public boolean isGradesComplete (String moduleCode, String componentName) {
+        boolean isGradesComplete = true;
+        ModuleManager moduleManager = ModuleManager.getInstance();
+        Module module = moduleManager.getModuleByModuleCode(moduleCode);
+        for (Person personList : module.getEnrolledStudents()) {
+            Grades grade = findAdminNo(moduleCode, componentName, personList.getMatricNo().matricNo);
+            if (grade == null) {
+                isGradesComplete = false;
+            }
+        }
+        return isGradesComplete;
+    }
 }

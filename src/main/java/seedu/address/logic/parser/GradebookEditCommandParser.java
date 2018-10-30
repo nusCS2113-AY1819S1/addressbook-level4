@@ -78,7 +78,11 @@ public class GradebookEditCommandParser {
         if (!isWeightageValid) {
             throw new ParseException(MESSAGE_WEIGHTAGE_INVALID);
         }
-        boolean hasWeightageExceed = gradebookManager.hasEditWeightageExceed(moduleCodeArg, gradeComponentNameArg, gradeComponentWeightageArg);
+
+        boolean hasWeightageExceed = gradebookManager.hasEditWeightageExceed(
+                moduleCodeArg,
+                gradeComponentNameArg,
+                gradeComponentWeightageArg);
         if (hasWeightageExceed) {
             throw new ParseException(MESSAGE_WEIGHTAGE_EXCEED);
         }

@@ -66,16 +66,6 @@ public class GradebookEditCommand extends Command {
         if (toEditGradebookItem.getGradeComponentWeightage() != 0) {
             gradebook.setgradebookWeightage(toEditGradebookItem.getGradeComponentWeightage());
         }
-
-//        if (!toEditGradebookItem.getgradebookNewComponentName().equals("")) {
-//            gradebook.setGradeComponentName(toEditGradebookItem.getgradebookNewComponentName());
-//        }
-//        if (toEditGradebookItem.getGradeComponentMaxMarks() != 0) {
-//            gradebook.setgradebookMaxMarks(toEditGradebookItem.getGradeComponentMaxMarks());
-//        }
-//        if (toEditGradebookItem.getGradeComponentWeightage() != 0) {
-//            gradebook.setgradebookWeightage(toEditGradebookItem.getGradeComponentWeightage());
-//        }
         gradebookManager.saveGradebookList();
 
         return new CommandResult(status);
