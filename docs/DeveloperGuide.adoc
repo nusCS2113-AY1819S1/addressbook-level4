@@ -391,24 +391,6 @@ image::Status.png[width="800"]
 
 // end::loanList[]
 
-// tag::status[]
-=== Status command
-For this command, 2 classes were created, SimpleItem and StatusCommand.
-
-* The SimpleItem class is a simplified version of the item class, consisting of only the itemName and quantity. These aer the only two fields relevant for the loan list.
-* For the StatusCommand class, it sorts the items into the 3 categories, Ready, OnLoan and Faulty. The items are then shown to the user, sorted by their status.
-
-image::Status.png[width="800"]
-
-// tag::status[]
-=== Status command
-For this command, 2 classes were created, SimpleItem and StatusCommand.
-
-* The SimpleItem class is a simplified version of the item class, consisting of only the itemName and quantity. These aer the only two fields relevant for the loan list.
-* For the StatusCommand class, it sorts the items into the 3 categories, Ready, OnLoan and Faulty. The items are then shown to the user, sorted by their status.
-
-image::Status.png[width="800"]
-
 // tag::login[]
 === Login feature
 ==== Current Implementation
