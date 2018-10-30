@@ -1,16 +1,6 @@
 {
   "loginInfoList" : [ {
     "userName" : {
-      "userName" : "tianhang"
-    },
-    "password" : {
-      "password" : "Gcf70h4aWQ1T9NMxE03XM3nq3nCmFGihnO4xMzHMgP0="
-    },
-    "authenticationLevel" : {
-      "authenticationLevel" : "ADMIN"
-    }
-  }, {
-    "userName" : {
       "userName" : "tester"
     },
     "password" : {
@@ -21,4 +11,3 @@
     }
   } ]
 }
-

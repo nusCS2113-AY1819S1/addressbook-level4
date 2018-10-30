@@ -12,8 +12,12 @@ import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.Config;
+import seedu.address.commons.core.CurrentUser;
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
+import seedu.address.commons.events.ui.NewResultAvailableEvent;
+import seedu.address.commons.events.ui.StartUiEvent;
 import seedu.address.commons.events.ui.StopUiEvent;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
@@ -29,7 +33,7 @@ public class UiManager extends ComponentManager implements Ui {
     public static final String FILE_OPS_ERROR_DIALOG_STAGE_TITLE = "File Op Error";
     public static final String FILE_OPS_ERROR_DIALOG_HEADER_MESSAGE = "Could not save data";
     public static final String FILE_OPS_ERROR_DIALOG_CONTENT_MESSAGE = "Could not save data to file";
-
+    public static final String WELCOME_MESSAGE = "Welcome %1$s";
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
     private static final String ICON_APPLICATION = "/images/address_book_32.png";
 
@@ -61,11 +65,12 @@ public class UiManager extends ComponentManager implements Ui {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
         }
+        EventsCenter.getInstance().post(new NewResultAvailableEvent (
+                                            String.format (WELCOME_MESSAGE, CurrentUser.getAuthenticationLevel ())));
     }
 
     @Override
     public void stop() {
-        System.out.println ("here");
         prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
         mainWindow.hide();
         mainWindow.releaseResources();
@@ -118,6 +123,12 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         showFileOperationAlertAndWait(FILE_OPS_ERROR_DIALOG_HEADER_MESSAGE, FILE_OPS_ERROR_DIALOG_CONTENT_MESSAGE,
                 event.exception);
+    }
+    @Subscribe
+
+    public void handleStartUiEvent(StartUiEvent event) {
+        System.out.println ("Uievent in UI MANAGER");
+        start(event.mainStage);
     }
     @Subscribe
     private void handleStopUiEvent(StopUiEvent event) {

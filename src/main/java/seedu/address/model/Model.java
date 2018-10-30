@@ -3,76 +3,74 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
+import seedu.address.commons.core.LoginInfo;
+import seedu.address.model.drink.Drink;
+import seedu.address.model.user.Password;
+import seedu.address.model.user.UserName;
 
 /**
- * The API of the DrinkModel component.
+ * The API of the Model component.
  */
 public interface Model {
+
+
+    //==============Drink Model===========================//
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    Predicate<Drink> PREDICATE_SHOW_ALL_DRINKS = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyAddressBook newData);
+    void resetData(ReadOnlyInventoryList newData);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the InventoryList */
+    ReadOnlyInventoryList getInventoryList();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a drink with the same identity as {@code drink} exists in the address book.
      */
-    boolean hasPerson(Person person);
+    boolean hasDrink(Drink drink);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given drink.
+     * The drink must exist in the inventory list.
      */
-    void deletePerson(Person target);
+    void deleteDrink(Drink target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given drink.
+     * {@code drink} must not already exist in the address book.
      */
-    void addPerson(Person person);
+    void addDrink(Drink drink);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given drink {@code target} with {@code editedDrink}.
+     * {@code target} must exist in the inventory list.
+     * The drink identity of {@code editedDrink} must not be the same as another existing drink in the inventory list.
      */
-    void updatePerson(Person target, Person editedPerson);
+    // void updateDrink(Drink target, Drink editedDrink);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered inventory list */
+    ObservableList<Drink> getFilteredDrinkList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered drink list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredDrinkList(Predicate<Drink> predicate);
+
+    //================= login function command========================//
 
     /**
-     * Returns true if the model has previous address book states to restore.
+     * change user password based on {@code userName} and {@code newHashedPassword}
      */
-    boolean canUndoAddressBook();
+    void changePassword (UserName userName, Password newHashedPassword);
 
     /**
-     * Returns true if the model has undone address book states to restore.
+     * Get user loginInfo base on userName
      */
-    boolean canRedoAddressBook();
-
+    LoginInfo getLoginInfo (UserName userName);
     /**
-     * Restores the model's address book to its previous state.
+     * Check a userName exist in list
      */
-    void undoAddressBook();
-
-    /**
-     * Restores the model's address book to its previously undone state.
-     */
-    void redoAddressBook();
-
-    /**
-     * Saves the current address book state for undo/redo.
-     */
-    void commitAddressBook();
+    boolean isUserNameExist(UserName userName);
 }
