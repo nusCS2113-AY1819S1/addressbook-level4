@@ -1,12 +1,14 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.ViewExpenditureCommand;
-import seedu.address.logic.commands.ViewTaskCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import seedu.address.logic.commands.ViewExpenditureCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+
+/**
+ * Parses input arguments and creates a new ViewExpenditureCommand object
+ */
 public class ViewExpenditureCommandParser implements Parser<ViewExpenditureCommand> {
 
     public static final String DATE_VALIDATION_REGEX = "[\\d]{2}" + "-" + "[\\d]{2}" + "-" + "[\\d]{4}";
