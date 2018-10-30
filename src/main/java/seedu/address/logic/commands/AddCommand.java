@@ -23,7 +23,7 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_QUANTITY + "QUANTITY "
             + PREFIX_MIN_QUANTITY + "MINIMUM QUANTITY "
-            + "[optional: " + PREFIX_TAG + "TAG]...\n"
+            + "[Optional: " + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Arduino "
             + PREFIX_QUANTITY + "20 "
