@@ -240,7 +240,7 @@ public abstract class EventManagerSystemTest {
                     + selectedCardHandle.getTagsString().replaceAll(" ", "%20")
                     + "&attendance="
                     + selectedCardHandle.getAttendanceString().replaceAll(" ", "%20")
-                    + "&comments=%3Cspan%3EComment%20Section%3C/span%3E%3Col%3E%3C/ol%3E"
+                    + "&comment="
                     + selectedCardHandle.getComment().replaceAll("[{]", "%3C")
                     .replaceAll("[}]", "%3E").replaceAll(" ", "%20"));
         } catch (MalformedURLException mue) {
