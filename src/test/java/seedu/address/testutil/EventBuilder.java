@@ -1,7 +1,9 @@
 package seedu.address.testutil;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.model.attendee.Attendee;
 import seedu.address.model.event.Comment;
@@ -87,6 +89,18 @@ public class EventBuilder {
      */
     public EventBuilder withAttendees(String ... attendees) {
         this.attendees = SampleDataUtil.getAttendeeSet(attendees);
+        return this;
+    }
+
+    /**
+     * Parses the {@code attendees} into a {@code Set<attendee>} and adds it to the {@code Event} that we are building.
+     */
+    public EventBuilder withAddAttendees(String ... attendees) {
+        Set<Attendee> newAttendees = this.attendees;
+        Arrays.stream(attendees)
+                .map(Attendee::new)
+                .forEach(newAttendees::add);
+        this.attendees = newAttendees;
         return this;
     }
 
