@@ -8,8 +8,8 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BOOKS;
 import java.util.List;
 import java.util.Set;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.StatisticCenter;
+import seedu.address.commons.util.ArgsUtil;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -65,13 +65,7 @@ public class SellCommand extends Command {
         List<Book> lastShownList = model.getFilteredBookList();
         Book bookToSell;
 
-        if (argsType.equals("Isbn")) {
-            bookToSell = model.getBook(findBookBy);
-        } else if (argsType.equals("Index") && Integer.parseInt(findBookBy) < lastShownList.size()) {
-            bookToSell = lastShownList.get(Integer.parseInt(findBookBy));
-        } else {
-            throw new CommandException(Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
-        }
+        bookToSell = ArgsUtil.getBookToEdit(model, lastShownList, argsType, findBookBy);
 
         Book sellBook = createSoldBook(bookToSell, decreaseQuantity);
 
