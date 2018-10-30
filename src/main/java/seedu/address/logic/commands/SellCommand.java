@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BOOKS;
 
@@ -32,8 +33,10 @@ public class SellCommand extends Command {
             + "by the index number used in the displayed book list. "
             + "Existing values will be subtracted by the input value.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_QUANTITY + "QUANTITY]\n"
+            + "[" + PREFIX_QUANTITY + "QUANTITY] OR "
+            + PREFIX_ISBN + "ISBN13 " + "[" + PREFIX_QUANTITY + "QUANTITY]\n"
             + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_QUANTITY + "5 OR " + COMMAND_WORD + " " + PREFIX_ISBN + "978-3-16-148410-0 "
             + PREFIX_QUANTITY + "5";
 
     public static final String MESSAGE_SELL_BOOK_SUCCESS = "Sold Book: %1$s";

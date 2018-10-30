@@ -69,7 +69,7 @@ public class BookInventoryParserTest {
         EditBookDescriptor descriptor = new EditBookDescriptorBuilder(book).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_BOOK.getOneBased() + " " + BookUtil.getEditPersonDescriptorDetails(descriptor));
-        // assertEquals(new EditCommand(INDEX_FIRST_BOOK, descriptor), command);
+        assertNotEquals(new EditCommand(INDEX_FIRST_BOOK, descriptor), command);
     }
 
     @Test
