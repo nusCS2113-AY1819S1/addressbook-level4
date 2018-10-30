@@ -240,7 +240,7 @@ Examples:
 
 === Listing Lost&Found List: `lost&found`
 
-Shows the number of every item that has been lost +
+Shows the number of every lost item that has been lost +
 Format: `lost&found`
 
 
