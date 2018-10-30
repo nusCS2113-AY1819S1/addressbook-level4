@@ -208,6 +208,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean getAdminStatus() {
+            return true;
+        }
+
+        @Override
         public boolean hasEvent(Event event) {
             requireNonNull(event);
             return this.event.isSameEvent(event);
@@ -222,6 +227,11 @@ public class AddCommandTest {
 
         @Override
         public boolean getLoginStatus() {
+            return true;
+        }
+
+        @Override
+        public boolean getAdminStatus() {
             return true;
         }
 
