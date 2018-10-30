@@ -12,8 +12,10 @@ import static seedu.recruit.model.Model.PREDICATE_SHOW_ALL_JOBOFFERS;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
+import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.commons.util.CollectionUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
@@ -27,6 +29,7 @@ import seedu.recruit.model.joboffer.AgeRange;
 import seedu.recruit.model.joboffer.Job;
 import seedu.recruit.model.joboffer.JobOffer;
 import seedu.recruit.model.joboffer.Salary;
+import seedu.recruit.ui.MainWindow;
 
 /**
  * Edits the job details of a selected company
@@ -80,6 +83,9 @@ public class EditJobDetailsCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        if (!MainWindow.getDisplayedBook().equals("companyBook")) {
+            EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
+        }
 
         int companyIndex = model.getCompanyIndexFromName(this.companyName);
 
