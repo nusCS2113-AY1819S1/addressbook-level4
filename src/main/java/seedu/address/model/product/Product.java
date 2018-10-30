@@ -72,8 +72,7 @@ public class Product {
 
         return otherProduct != null
                 && otherProduct.getName().equals(getName())
-                && (otherProduct.getSerialNumber().equals(getSerialNumber())
-                || otherProduct.getDistributor().equals(getDistributor()));
+                && otherProduct.getSerialNumber().equals(getSerialNumber());
     }
 
     /**
