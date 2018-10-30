@@ -110,7 +110,7 @@ public class Transaction {
                 .append(getDrinkTransacted())
                 .append(", Quantity: ")
                 .append(getQuantityTransacted())
-                .append(", Amount: ")
+                .append(", Amount transacted: ")
                 .append(getAmountMoney())
                 .append(", ID: ")
                 .append(getId());

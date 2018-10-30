@@ -33,7 +33,7 @@ public class SellDrinkCommand extends Command {
             + PREFIX_QUANTITY + "12 ";
     //+ PREFIX_PRICE + "345.68 ";
 
-    public static final String MESSAGE_SUCCESS = "%1$s sold on %2$s with quantity: %3$s and total revenue is : %4$s";
+    public static final String MESSAGE_SUCCESS = "%1$s sold on %2$s with quantity: %3$s";
     public static final String MESSAGE_DRINK_NOT_FOUND = "The drink entered does not exist in the inventory list";
     public static final String MESSAGE_FAILURE = "The quantity entered exceed the stock";
 
@@ -57,7 +57,7 @@ public class SellDrinkCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireAllNonNull(model);
 
-        if (model.hasDrink(drink)) {
+        if (!model.hasDrink(drink)) {
             throw new CommandException(MESSAGE_DRINK_NOT_FOUND);
         }
 

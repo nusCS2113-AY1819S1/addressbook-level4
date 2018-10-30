@@ -64,6 +64,12 @@ public interface Model {
      */
     void sellDrink(Transaction transaction);
 
+    // =============== transactions commands =====================
+    /**
+     * Returns an unmodifiable view of the transaction list
+     */
+    ObservableList<Transaction> getTransactionList();
+    String getTransactions(); //TODO: will be removed when UI is up
 
 
 

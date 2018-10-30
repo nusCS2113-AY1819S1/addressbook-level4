@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -48,7 +49,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     public ModelManager() {
-        this(new InventoryList(), new UserPrefs() , new LoginInfoManager (), new TransactionList());
+        this(new InventoryList(), new UserPrefs(), new LoginInfoManager(), new TransactionList());
     }
 
     @Override
@@ -62,9 +63,11 @@ public class ModelManager extends ComponentManager implements Model {
         return inventoryList;
     }
 
-    /** Raises an event to indicate the model has changed */
+    /**
+     * Raises an event to indicate the model has changed
+     */
     private void indicateInventoryListChanged() {
-        raise(new InventoryListChangedEvent (inventoryList));
+        raise(new InventoryListChangedEvent(inventoryList));
     }
 
     @Override
@@ -146,7 +149,6 @@ public class ModelManager extends ComponentManager implements Model {
         actualDrink.decreaseQuantity(transaction.getQuantityTransacted());
 
 
-
     }
 
 
@@ -154,24 +156,37 @@ public class ModelManager extends ComponentManager implements Model {
         transactionList.addTransaction(transaction);
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Transaction} backed by the internal list of
+     * {@code transactionList}
+     */
+    @Override
+    public ObservableList<Transaction> getTransactionList() {
+        List<Transaction> transactions = transactionList.getTransactions();
+        return FXCollections.unmodifiableObservableList(FXCollections.observableList(transactions));
+    }
 
+    @Override
+    public String getTransactions() {
+        return transactionList.toString();
+    }
 
 
     //=========== Login feature command ==============================================
 
     @Override
-    public void changePassword (UserName userName, Password newHashedPassword) {
-        loginInfoManager.changePassword (userName, newHashedPassword);
+    public void changePassword(UserName userName, Password newHashedPassword) {
+        loginInfoManager.changePassword(userName, newHashedPassword);
     }
 
     @Override
-    public LoginInfo getLoginInfo (UserName userName) {
-        return loginInfoManager.getLoginInfo (userName);
+    public LoginInfo getLoginInfo(UserName userName) {
+        return loginInfoManager.getLoginInfo(userName);
     }
 
     @Override
-    public boolean isUserNameExist (UserName userName) {
-        return loginInfoManager.isUserNameExist (userName);
+    public boolean isUserNameExist(UserName userName) {
+        return loginInfoManager.isUserNameExist(userName);
     }
 
 }

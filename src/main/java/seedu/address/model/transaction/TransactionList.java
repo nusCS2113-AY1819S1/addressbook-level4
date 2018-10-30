@@ -67,4 +67,11 @@ public class TransactionList {
         lastUpdateDate = new Date();
         // TODO: STUB
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        transactions.forEach(builder::append);
+        return builder.toString();
+    }
 }

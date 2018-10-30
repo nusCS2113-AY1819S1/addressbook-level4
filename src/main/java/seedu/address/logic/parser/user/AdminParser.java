@@ -17,6 +17,7 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SellDrinkCommand;
+import seedu.address.logic.commands.ViewTransactionsCommand;
 import seedu.address.logic.commands.user.ChangePasswordCommand;
 import seedu.address.logic.commands.user.CreateAccountCommand;
 import seedu.address.logic.commands.user.DeleteAccountCommand;
@@ -61,6 +62,9 @@ public class AdminParser {
 
         case SellDrinkCommand.COMMAND_WORD:
             return new SellDrinkCommandParser ().parse (arguments);
+
+        case ViewTransactionsCommand.COMMAND_WORD:
+            return new ViewTransactionsCommand();
             //==========login related command===============//
 
         case ChangePasswordCommand.COMMAND_WORD:
