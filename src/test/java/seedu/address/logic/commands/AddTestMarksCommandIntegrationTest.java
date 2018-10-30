@@ -62,23 +62,17 @@ public class AddTestMarksCommandIntegrationTest {
         assertCommandSuccess(addTestMarksCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 //TODO
-//    @Test
-//    public void execute_duplicatePersonFilteredList_failure() {
-//        Person editedPerson = new PersonBuilder().withName("Alex Crowe").build();
-//        EditTestMarksCommand.EditPersonDescriptor descriptor = new EditTestMarksCommand.EditPersonDescriptor();
-//        Set<seedu.address.model.grade.Test> testList = new HashSet<>();
-//        testList.add(VALID_TEST_AMY);
-//        descriptor.setTests(testList);
-//        String[] nameKeywords = editedPerson.getName().fullName.split("\\s+");
-//        List<String> nameKeywordsList =
-//                new ArrayList<>(Arrays.asList(nameKeywords));
-//
-//        nameKeywordsList.add("Alex");
-//        NameContainsKeywordsPredicate nameContainsKeywordsPredicate = new NameContainsKeywordsPredicate(nameKeywordsList);
-//
-//        AddTestMarksCommand addTestMarksCommand = new AddTestMarksCommand(nameContainsKeywordsPredicate,VALID_TEST_NAME_AMY,VALID_TEST_MARK_AMY,nameKeywordsList);
-//        assertCommandFailure(addTestMarksCommand, model, commandHistory, AddTestMarksCommand.MESSAGE_PERSON_DUPLICATE_FOUND);
-//    }
+    @Test
+    public void execute_duplicatePersonFilteredList_failure() {
+        List<String> nameKeywordsList = new ArrayList<>();
+        nameKeywordsList.add("Alice");
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicate = new NameContainsKeywordsPredicate(nameKeywordsList);
+
+        AddTestMarksCommand addTestMarksCommand = new AddTestMarksCommand(nameContainsKeywordsPredicate,VALID_TEST_NAME_AMY,VALID_TEST_MARK_AMY,nameKeywordsList);
+        Person newPerson = new PersonBuilder().withName("Alice Yang").build();
+        model.addPerson(newPerson);
+        assertCommandFailure(addTestMarksCommand, model, commandHistory, AddTestMarksCommand.MESSAGE_PERSON_DUPLICATE_FOUND);
+    }
 
     @Test
     public void execute_duplicateTest_failure() {
