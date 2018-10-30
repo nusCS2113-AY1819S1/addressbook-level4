@@ -20,7 +20,6 @@ import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.commons.events.ui.StartUiEvent;
 import seedu.address.commons.events.ui.StopUiEvent;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.DrinkLogic;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 
@@ -38,12 +37,12 @@ public class UiManager extends ComponentManager implements Ui {
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
     private static final String ICON_APPLICATION = "/images/address_book_32.png";
 
-    private DrinkLogic logic;
+    private Logic logic;
     private Config config;
     private UserPrefs prefs;
     private MainWindow mainWindow;
 
-    public UiManager(DrinkLogic logic, Config config, UserPrefs prefs) {
+    public UiManager(Logic logic, Config config, UserPrefs prefs) {
         super();
         this.logic = logic;
         this.config = config;
@@ -66,8 +65,8 @@ public class UiManager extends ComponentManager implements Ui {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
         }
-        EventsCenter.getInstance().post(new NewResultAvailableEvent (
-                                            String.format (WELCOME_MESSAGE, CurrentUser.getAuthenticationLevel ())));
+        EventsCenter.getInstance().post(new NewResultAvailableEvent(
+                String.format(WELCOME_MESSAGE, CurrentUser.getAuthenticationLevel())));
     }
 
     @Override
@@ -125,14 +124,16 @@ public class UiManager extends ComponentManager implements Ui {
         showFileOperationAlertAndWait(FILE_OPS_ERROR_DIALOG_HEADER_MESSAGE, FILE_OPS_ERROR_DIALOG_CONTENT_MESSAGE,
                 event.exception);
     }
+
     @Subscribe
 
     public void handleStartUiEvent(StartUiEvent event) {
-        System.out.println ("Uievent in UI MANAGER");
+        System.out.println("Uievent in UI MANAGER");
         start(event.mainStage);
     }
+
     @Subscribe
     private void handleStopUiEvent(StopUiEvent event) {
-        stop ();
+        stop();
     }
 }
