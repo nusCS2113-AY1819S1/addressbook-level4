@@ -72,6 +72,10 @@ public class ModuleManager {
         module.removeStudent(student);
     }
 
+    public boolean isStudentEnrolledInModule(Module module, Person student) {
+        return module.getEnrolledStudents().stream().anyMatch(s -> s.equals(student));
+    }
+
     /**
      * Gets the module list from storage and converts it to a Module array list.
      * Also reads the association data between Student and Module and stores it in-memory in the module.
