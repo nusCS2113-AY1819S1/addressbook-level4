@@ -29,6 +29,10 @@ public class UniqueBatchList implements Iterable<Batch> {
     private final ObservableList<Batch> internalList = FXCollections.observableArrayList();
     private Quantity totalQuantity;
 
+    public Quantity getTotalQuantity() {
+        return totalQuantity;
+    }
+
     /**
      * Returns true if the list contains an equivalent batch as the given argument.
      */
@@ -47,7 +51,7 @@ public class UniqueBatchList implements Iterable<Batch> {
             throw new DuplicateBatchException();
         }
         internalList.add(toAdd);
-        increaseTotalQuantity(toAdd.getBatchQuantity().getValue());
+        updateTotalQuantity();
     }
 
     /**
@@ -89,10 +93,6 @@ public class UniqueBatchList implements Iterable<Batch> {
         this.totalQuantity.setValue(value);
     }
 
-    public void increaseTotalQuantity(int value) {
-        this.totalQuantity.increaseValue(value);
-    }
-
     /**
      * Decreases total quantity by value specified
      * @param value a valid quantity value expressed as an integer
@@ -107,7 +107,7 @@ public class UniqueBatchList implements Iterable<Batch> {
     /**
      * Updates the total quantity of stock from all the batches in the list
      */
-    public void updateQuantity() {
+    public void updateTotalQuantity() {
         if (internalList.isEmpty()) {
             throw new EmptyBatchListException();
         }
@@ -131,9 +131,9 @@ public class UniqueBatchList implements Iterable<Batch> {
                 break;
             }
             if (toDecrease >= batchQuantity) {
-                setBatchQuantity( b, 0);
+                setBatchQuantity(b, 0);
             } else {
-                decreaseBatchQuantity( b, toDecrease);
+                decreaseBatchQuantity(b, toDecrease);
             }
             toDecrease -= batchQuantity;
         }
@@ -174,6 +174,7 @@ public class UniqueBatchList implements Iterable<Batch> {
     public void setBatches(UniqueBatchList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        sortBatches();
     }
 
     /**
