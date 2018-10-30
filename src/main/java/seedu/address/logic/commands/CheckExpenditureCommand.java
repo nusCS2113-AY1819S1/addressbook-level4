@@ -1,3 +1,4 @@
+//@@author SHININGGGG
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
@@ -9,9 +10,6 @@ import java.util.List;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.expenditureinfo.Expenditure;
-
-
-
 
 /**
  * Lists all persons in the address book to the user.
@@ -69,13 +67,11 @@ public class CheckExpenditureCommand extends Command {
 
             if ((year1 < year) && (year2 > year)) {
                 total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
-            }
-            else if (((year1 == year) && (year2 == year)) || ((year1 == year) && (year2 > year))
+            } else if (((year1 == year) && (year2 == year)) || ((year1 == year) && (year2 > year))
                         || ((year1 < year) && (year2 == year))) {
                 if ((month1 < month) && (month2 > month)) {
                     total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
-                }
-                else if (((month1 == month) || (month2 == month)) && ((day1 <= day) && (day2 >= day))) {
+                } else if (((month1 == month) || (month2 == month)) && ((day1 <= day) && (day2 >= day))) {
                     total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
                 }
             }

@@ -9,15 +9,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class TaskDate {
 
+    public static final String MESSAGE_DATE_CONSTRAINTS =
+            "Dates should be of the format DD-MM, where DD and MM are numbers.\n"
+                    + "DD must be in the range of 01 to 31, and MM must be in the range of 01 to 12.";
+    public static final String DATE_VALIDATION_REGEX = "[\\d]{2}" + "-" + "[\\d]{2}";
+
     private static final int DAY_MAX_LIMIT = 31;
     private static final int DAY_MIN_LIMIT = 1;
     private static final int MONTH_MAX_LIMIT = 12;
     private static final int MONTH_MIN_LIMIT = 1;
-
-    public static final String MESSAGE_DATE_CONSTRAINTS =
-            "Dates should be of the format DD-MM, where DD and MM are numbers.\n" +
-            "DD must be in the range of 01 to 31, and MM must be in the range of 01 to 12.";
-    public static final String DATE_VALIDATION_REGEX = "[\\d]{2}" + "-" + "[\\d]{2}";
 
     public final String value;
 

@@ -104,7 +104,7 @@ public class AddressBookParser {
             return new SortTaskCommandParser().parse(arguments);
 
         case HistoryCommand.COMMAND_WORD:
-        //case HistoryCommand.COMMAND_ALIAS:
+            //case HistoryCommand.COMMAND_ALIAS:
             return new HistoryCommand();
 
         case ExitCommand.COMMAND_WORD:
