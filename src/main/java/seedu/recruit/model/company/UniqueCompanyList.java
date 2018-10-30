@@ -162,8 +162,10 @@ public class UniqueCompanyList implements Iterable<Company> {
         if (!companiesAreUnique(companyList)) {
             throw new DuplicateCompanyException();
         }
-
-        internalList.setAll(companyList);
+        internalList.clear();
+        for (Company company: companyList) {
+            internalList.add(new Company(company));
+        }
     }
 
     /**
