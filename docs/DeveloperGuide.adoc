@@ -401,8 +401,23 @@ Step 6. Close the OpenCSV writer.
 ** Cons: Hard to write tests and requires more methods to process the data.
 
 * **Solution**: The data is passed into the `CsvWriter` object through its constructor as an `ObservableList<Person>`.
+// end::exportall[]
 
-// tag::exportall[]
+// tag::todo[]
+=== Todo Feature
+Add a to-do task.
+
+==== Current Implementation
+
+The todo mechanism is facilitated by the `TodoComand` from the `Logic` component. A `Todo` object is instantiated to add a to-do task and each `Todo` object consists of  a `Title` and `Content` object.
+
+==== Design Considerations
+===== Aspect: Checking for duplications of to-do tasks
+
+* **Alternative 1 (current choice):** `isSameTodo`
+** Pros: Easy to implement and write the test as it checks for both the title and the content of a to-do task
+** Cons: This implementation may store too many similiar to-do tasks.
+// end::todo[]
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
