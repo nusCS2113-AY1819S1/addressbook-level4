@@ -10,6 +10,7 @@ import seedu.address.model.person.EventName;
 import seedu.address.model.person.Schedule;
 import seedu.address.model.person.Time;
 
+//@@author: driedmelon
 /**
  * JAXB-friendly version of the Schedule.
  */
