@@ -254,8 +254,6 @@ The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
 * can save the Address Book data in xml format and read it back.
-* can save the `TimeTable` Objects in ics format and read it back.
-* can read `TimeTable` data from a user-specified file in ics format.
 
 [[Design-Commons]]
 === Common classes
