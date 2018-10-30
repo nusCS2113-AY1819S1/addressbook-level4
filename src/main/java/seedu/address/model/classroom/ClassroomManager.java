@@ -84,11 +84,31 @@ public class ClassroomManager {
      */
     private void readClassroomList() {
         ArrayList<XmlAdaptedClassroom> xmlClassroomList = StorageController.getClassesStorage();
+        ArrayList<XmlAdaptedClassroomAttendance> xmlClassroomAttendanceList =
+                StorageController.getClassAttendanceStorage();
+
         for (XmlAdaptedClassroom xmlClassroom : xmlClassroomList) {
             try {
-                classroomList.add(xmlClassroom.toModelType());
+                Classroom classroom = xmlClassroom.toModelType();
+                classroomList.add(classroom);
+                readAttendanceList(xmlClassroomAttendanceList, classroom);
             } catch (IllegalValueException e) {
                 logger.info("Illegal values found when reading classroom list: " + e.getMessage());
+            }
+        }
+    }
+
+    /**
+     * Reads back the classroom attendance and store into the classroom attendance list in-memory
+     */
+    private void readAttendanceList(ArrayList<XmlAdaptedClassroomAttendance> xmlClassroomAttendanceList,
+                                    Classroom classroom) throws IllegalValueException {
+        for (XmlAdaptedClassroomAttendance xmlClassroomAttendance : xmlClassroomAttendanceList) {
+            if (xmlClassroomAttendance.getClassName().equalsIgnoreCase(classroom.getClassName().getValue())
+                    && xmlClassroomAttendance.getModuleCode().equalsIgnoreCase(
+                    classroom.getModuleCode().moduleCode)) {
+                Attendance attendance = xmlClassroomAttendance.toModelType();
+                classroom.getAttendanceList().add(attendance);
             }
         }
     }

@@ -1,13 +1,13 @@
 package seedu.address.model.classroom;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
  * Represents an attendance for a classroom in the app.
  */
 public class Attendance {
-    public static final String DATE_FORMAT = "dd-MM-yyyy";
-
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private String date;
     private ArrayList<String> studentsPresent;
 
