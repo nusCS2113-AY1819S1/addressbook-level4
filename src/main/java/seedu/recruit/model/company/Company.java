@@ -4,14 +4,17 @@ import static java.util.Objects.requireNonNull;
 import static seedu.recruit.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import seedu.recruit.model.commons.Address;
 import seedu.recruit.model.commons.Email;
 import seedu.recruit.model.commons.Phone;
 import seedu.recruit.model.joboffer.JobOffer;
 import seedu.recruit.model.joboffer.UniqueJobList;
+import seedu.recruit.model.tag.Tag;
 
 
 /**
@@ -27,6 +30,7 @@ public class Company {
     private final Address address;
     private final Email email;
     private final Phone phone;
+    private final Set<Tag> tags = new HashSet<>();
 
     // List of unique job offers
     private UniqueJobList jobOffers;
@@ -58,9 +62,7 @@ public class Company {
         return companyName;
     }
 
-    public Address getAddress() {
-        return address;
-    }
+    public Address getAddress() { return address; }
 
     public Email getEmail() {
         return email;
@@ -68,6 +70,10 @@ public class Company {
 
     public Phone getPhone() {
         return phone;
+    }
+
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
     }
 
     public List<JobOffer> getJobOffers() {

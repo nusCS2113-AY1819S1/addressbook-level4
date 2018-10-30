@@ -6,6 +6,7 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.recruit.logic.parser.CliSyntax.PREFIX_REVERSE;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_SALARY;
 
 import seedu.recruit.logic.commands.SortCandidateCommand;
@@ -37,6 +38,8 @@ public class SortCandidateCommandParser implements Parser<SortCandidateCommand> 
             return new SortCandidateCommand(PREFIX_EDUCATION);
         case " s/":
             return new SortCandidateCommand(PREFIX_SALARY);
+        case " r/":
+            return new SortCandidateCommand(PREFIX_REVERSE);
         default:
             throw new ParseException(SortCandidateCommand.MESSAGE_TAG_USAGE);
         }

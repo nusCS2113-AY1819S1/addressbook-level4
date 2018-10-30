@@ -278,6 +278,12 @@ and returning false if the current book is Company Book.
 cases of the view of `panelViewPlaceholder`, which is not the case as we introduced another view `shortlistPanel`.
 // end::add/delete[]
 
+=== Find feature
+
+The `find` command is used to find candidates or companies stored in the address book through either the `findc` (find Candidate) or `findC` (find company).
+It extends `Command` and overrides two of its methods namely `CommandResult` and `equals`.
+
+=======
 // tag::shortlist[]
 === Shortlist Feature
 ==== Current Implementation
