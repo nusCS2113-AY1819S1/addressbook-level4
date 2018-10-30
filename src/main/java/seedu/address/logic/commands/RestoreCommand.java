@@ -10,6 +10,7 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.storage.LocalRestoreEvent;
 import seedu.address.commons.events.storage.OnlineRestoreEvent;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.UserPrefs;
 import seedu.address.storage.OnlineStorage;
@@ -24,15 +25,19 @@ public class RestoreCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Restore student planner data from location specified "
             + "(restores from default backup data path if no parameters provided)\n"
-            + "Parameters: [github authToken]\n"
+            + "Parameters: [service optionalAuthToken]\n"
             + "Example: " + COMMAND_WORD + "\n"
-            + "Example: " + COMMAND_WORD + " github my_personal_access_token";
+            + "Example: " + COMMAND_WORD + " github\n"
+            + "Note: Github restore does not require authentication token";
 
     public static final String MESSAGE_SUCCESS = "Restoring Backup from %s";
     public static final String MESSAGE_FAILURE = "Please perform an online backup using %s first or set relevant"
              + " settings in user prefs";
-    public static final String MESSAGE_FAILURE_SAMPLE = ": backup github [personal_access_token]";
+    public static final String MESSAGE_FAILURE_SAMPLE = ": backup github";
     public static final String MESSAGE_INVALID = "Invalid online service provided";
+    public static final String MESSAGE_SHOW_SUPPORTED = "Supported online services: Github."
+            + " for local restore no arguments are needed";
+
     private Optional<Path> backupPath;
     private boolean isLocal;
     private OnlineStorage.Type target;
@@ -46,18 +51,18 @@ public class RestoreCommand extends Command {
         if (isLocal && authToken.isPresent()) {
             throw new AssertionError("This should never happen. authToken should not exist if isLocal is true.");
         }
-        if (!isLocal && !authToken.isPresent()) {
-            throw new AssertionError("This should never happen. authToken should always exist if isLocal is false.");
+        if (!isLocal && authToken.isPresent() && (target.get() == OnlineStorage.Type.GITHUB)) {
+            throw new AssertionError("This should never happen. authToken should be empty if isLocal is "
+                    + "false and service is GITHUB.");
         }
         this.backupPath = backupPath;
         this.isLocal = isLocal;
         this.target = target.orElse(OnlineStorage.Type.GITHUB);
         this.authToken = authToken;
-
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         if (isLocal) {
             return localRestoreCommand(model);
@@ -83,7 +88,7 @@ public class RestoreCommand extends Command {
      * @param model
      * @return
      */
-    private CommandResult onlineRestoreCommand(Model model) {
+    private CommandResult onlineRestoreCommand(Model model) throws CommandException {
         if (target == OnlineStorage.Type.GITHUB) {
             String gistId = model.getUserPrefs().getAddressBookGistId();
             if (gistId == null) {
@@ -95,7 +100,7 @@ public class RestoreCommand extends Command {
                     model.getUserPrefs().getExpenseBookGistId(), authToken));
             return new CommandResult(String.format(MESSAGE_SUCCESS, "GitHub Gists"));
         } else {
-            return new CommandResult(MESSAGE_INVALID);
+            throw new CommandException(MESSAGE_INVALID);
         }
     }
 

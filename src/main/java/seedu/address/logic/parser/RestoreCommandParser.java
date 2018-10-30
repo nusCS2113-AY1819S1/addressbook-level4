@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_BACKUP_SERVICE_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
@@ -22,16 +23,11 @@ public class RestoreCommandParser implements Parser<RestoreCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public RestoreCommand parse(String args) throws ParseException {
-        try {
-            String trimmedArgs = args.trim();
-            if (trimmedArgs.isEmpty()) {
-                return new RestoreCommand(Optional.empty(), true, Optional.empty(), Optional.empty());
-            } else {
-                return parseArguments(trimmedArgs);
-            }
-        } catch (Exception pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, RestoreCommand.MESSAGE_USAGE), pe);
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty()) {
+            return new RestoreCommand(Optional.empty(), true, Optional.empty(), Optional.empty());
+        } else {
+            return parseArguments(trimmedArgs);
         }
     }
 
@@ -48,10 +44,14 @@ public class RestoreCommandParser implements Parser<RestoreCommand> {
             return new RestoreCommand(ParserUtil.parsePath(argumentList.get(0)), true,
                     Optional.empty(), Optional.empty());
         }*/
-        if (argumentList.size() == 2 && argumentList.get(0).toLowerCase().equals("github")) {
-            return new RestoreCommand(Optional.empty(), false,
-                    Optional.ofNullable(OnlineStorage.Type.GITHUB),
-                    Optional.ofNullable(argumentList.get(1)));
+        if (argumentList.size() == 1) {
+            if (argumentList.get(0).toUpperCase().equals(OnlineStorage.Type.GITHUB.name())) {
+                return new RestoreCommand(Optional.empty(), false,
+                        Optional.ofNullable(OnlineStorage.Type.GITHUB),
+                        Optional.empty());
+            }
+            throw new ParseException(String.format(MESSAGE_INVALID_BACKUP_SERVICE_FORMAT,
+                    RestoreCommand.MESSAGE_SHOW_SUPPORTED));
         }
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RestoreCommand.MESSAGE_USAGE));
     }

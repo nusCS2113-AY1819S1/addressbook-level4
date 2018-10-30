@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<expensebook>
+    <expenses>
+        <category>FOOD</category>
+        <date>11/11/1111</date>
+        <value>11.11</value>
+        <tagged>friends</tagged>
+    </expenses>
+    <expenses>
+        <category>FOOD</category>
+        <date>11/11/1111</date>
+        <value>11.11</value>
+        <tagged>friends</tagged>
+    </expenses>
+    <expenses>
+        <category>FOOD</category>
+        <date>11/11/1111</date>
+        <value>11.11</value>
+        <tagged>friends</tagged>
+    </expenses>
+    <expenses>
+        <category>FOOD</category>
+        <date>11/11/1111</date>
+        <value>11.11</value>
+        <tagged>friends</tagged>
+    </expenses>
+    <expenses>
+        <category>FOOD</category>
+        <date>11/11/1111</date>
+        <value>11.11</value>
+        <tagged>friends</tagged>
+    </expenses>
+    <expenses>
+        <category>FOOD</category>
+        <date>11/11/1111</date>
+        <value>11.11</value>
+        <tagged>friends</tagged>
+    </expenses>
+</expensebook>

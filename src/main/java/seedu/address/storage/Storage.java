@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.ExpenseBookChangedEvent;
+import seedu.address.commons.events.model.UserPrefsChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.events.storage.LocalBackupEvent;
 import seedu.address.commons.events.storage.LocalRestoreEvent;
@@ -42,6 +43,8 @@ public interface Storage extends AddressBookStorage, ExpenseBookStorage, UserPre
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleAddressBookChangedEvent(AddressBookChangedEvent abce);
+
+    void handleUserPrefsChangedEvent(UserPrefsChangedEvent upce);
 
     void handleOnlineBackupEvent(OnlineBackupEvent obe);
 

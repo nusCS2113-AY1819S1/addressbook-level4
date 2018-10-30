@@ -105,7 +105,7 @@ public class AddCommandTest {
 
         @Override
         public void resetData(ReadOnlyExpenseBook newData) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError("This mgethod should not be called.");
         }
 
         @Override

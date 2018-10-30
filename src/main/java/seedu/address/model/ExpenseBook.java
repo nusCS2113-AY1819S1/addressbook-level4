@@ -94,4 +94,11 @@ public class ExpenseBook implements ReadOnlyExpenseBook {
     public int hashCode() {
         return expenses.hashCode();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ExpenseBook // instanceof handles nulls
+                && expenses.equals(((ExpenseBook) other).expenses));
+    }
 }

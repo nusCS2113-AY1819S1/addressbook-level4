@@ -3,6 +3,7 @@ package seedu.address.storage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.testutil.TypicalExpenses.getTypicalExpenseBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.io.IOException;
@@ -15,8 +16,11 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.ExpenseBookChangedEvent;
+import seedu.address.commons.events.model.UserPrefsChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.model.AddressBook;
+import seedu.address.model.ExpenseBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyExpenseBook;
 import seedu.address.model.UserPrefs;
@@ -72,6 +76,47 @@ public class StorageManagerTest {
         assertEquals(original, new AddressBook(retrieved));
     }
 
+    //@@author QzSG
+    @Test
+    public void addressBookReadBackup() throws Exception {
+        /*
+         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * {@link XmlAddressBookStorage} class.
+         * More extensive testing of AddressBook saving/reading is done in {@link XmlAddressBookStorageTest} class.
+         */
+        AddressBook original = getTypicalAddressBook();
+        storageManager.backupAddressBook(original, getTempFilePath("AddressBook.bak"));
+        ReadOnlyAddressBook retrieved = storageManager.readAddressBook(getTempFilePath("AddressBook.bak")).get();
+        assertEquals(original, new AddressBook(retrieved));
+    }
+
+    @Test
+    public void expenseBookReadSave() throws Exception {
+        /*
+         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * {@link XmlExpenseBookStorage} class.
+         * More extensive testing of ExpenseBook saving/reading is done in {@link XmlExpenseBookStorageTest} class.
+         */
+        ExpenseBook original = getTypicalExpenseBook();
+        storageManager.saveExpenseBook(original);
+        ReadOnlyExpenseBook retrieved = storageManager.readExpenseBook().get();
+        assertEquals(original.hashCode(), new ExpenseBook(retrieved).hashCode());
+    }
+
+    @Test
+    public void expenseBookReadBackup() throws Exception {
+        /*
+         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * {@link XmlExpenseBookStorage} class.
+         * More extensive testing of ExpenseBook saving/reading is done in {@link XmlExpenseBookStorageTest} class.
+         */
+        ExpenseBook original = getTypicalExpenseBook();
+        storageManager.backupExpenseBook(original, getTempFilePath("ExpenseBook.bak"));
+        ReadOnlyExpenseBook retrieved = storageManager.readExpenseBook(getTempFilePath("ExpenseBook.bak")).get();
+        assertEquals(original.hashCode(), new ExpenseBook(retrieved).hashCode());
+    }
+
+    //@@author
     @Test
     public void getAddressBookFilePath() {
         assertNotNull(storageManager.getAddressBookFilePath());
@@ -82,11 +127,48 @@ public class StorageManagerTest {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub(Paths.get("dummy")),
                 new XmlExpenseBookStorageExceptionThrowingStub(Paths.get("dummy")),
-                new JsonUserPrefsStorage(Paths.get("dummy")));
+                new JsonUserPrefsStorageExceptionThrowingStub(Paths.get("dummy")));
         storage.handleAddressBookChangedEvent(new AddressBookChangedEvent(new AddressBook()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
 
+    //@@author QzSG
+    @Test
+    public void handleExpenseBookChangedEvent_exceptionThrown_eventRaised() {
+        // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
+        Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub(Paths.get("dummy")),
+                new XmlExpenseBookStorageExceptionThrowingStub(Paths.get("dummy")),
+                new JsonUserPrefsStorageExceptionThrowingStub(Paths.get("dummy")));
+        storage.handleExpenseBookChangedEvent(new ExpenseBookChangedEvent(new ExpenseBook()));
+        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
+    }
+
+    @Test
+    public void handleUserPrefsChangedEvent_exceptionThrown_eventRaised() {
+        // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
+        Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub(Paths.get("dummy")),
+                new XmlExpenseBookStorageExceptionThrowingStub(Paths.get("dummy")),
+                new JsonUserPrefsStorageExceptionThrowingStub(Paths.get("dummy")));
+        storage.handleUserPrefsChangedEvent(new UserPrefsChangedEvent(new UserPrefs()));
+        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
+    }
+
+    /**
+     * A Stub class to throw an exception when the save method is called
+     */
+    class JsonUserPrefsStorageExceptionThrowingStub extends JsonUserPrefsStorage {
+
+        public JsonUserPrefsStorageExceptionThrowingStub(Path filePath) {
+            super(filePath);
+        }
+
+        @Override
+        public void saveUserPrefs(UserPrefs userPrefs) throws IOException {
+            throw new IOException("dummy exception");
+        }
+    }
+
+    //@@author
 
     /**
      * A Stub class to throw an exception when the save method is called
