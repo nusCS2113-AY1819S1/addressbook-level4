@@ -22,10 +22,11 @@ public class GradebookAddCommandParser implements Parser<GradebookAddCommand> {
     public static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
     public static final String MESSAGE_MAX_MARKS_ERROR = "Invalid input. \nMaximum marks should only be an integer";
     public static final String MESSAGE_WEIGHTAGE_ERROR = "Invalid input. \nWeightage should only be an integer";
-    public static final String MESSAGE_MAX_MARKS_INVALID = "Marks should be within 0-100 range";
+    public static final String MESSAGE_MAX_MARKS_INVALID = "Maximum marks should be within 0-100 range";
     private static final String MESSAGE_WEIGHTAGE_INVALID = "Weightage should be within 0-100 range";
     private static final String MESSAGE_DUPLICATE = "Gradebook component already exist in Trajectory";
     private static final String MESSAGE_WEIGHTAGE_EXCEED = "The accumulated weightage for module stated has exceeded!";
+    private static final String MESSAGE_INT_INPUTS_INVALID = "Both marks and weightage must be within 0-100 range";
 
     /**
      * Parses the given {@code String args} of arguments in the context of the GradebookAddCommand
@@ -65,9 +66,11 @@ public class GradebookAddCommandParser implements Parser<GradebookAddCommand> {
         if (isEmpty) {
             throw new ParseException(MESSAGE_EMPTY_INPUTS);
         }
-        boolean isDuplicate = gradebookManager.isDuplicate(moduleCodeArg, gradeComponentNameArg);
-        if (isDuplicate) {
-            throw new ParseException(MESSAGE_DUPLICATE);
+        boolean isMaxMarksAndWeightageValid = gradebookManager.isIntParamsValid(
+                gradeComponentMaxMarksArg,
+                gradeComponentWeightageArg);
+        if (!isMaxMarksAndWeightageValid) {
+            throw new ParseException(MESSAGE_INT_INPUTS_INVALID);
         }
         boolean isMaxMarksValid = gradebookManager.isMaxMarksValid(gradeComponentMaxMarksArg);
         if (!isMaxMarksValid) {
@@ -76,6 +79,10 @@ public class GradebookAddCommandParser implements Parser<GradebookAddCommand> {
         boolean isWeightageValid = gradebookManager.isWeightageValid(gradeComponentWeightageArg);
         if (!isWeightageValid) {
             throw new ParseException(MESSAGE_WEIGHTAGE_INVALID);
+        }
+        boolean isDuplicate = gradebookManager.isDuplicate(moduleCodeArg, gradeComponentNameArg);
+        if (isDuplicate) {
+            throw new ParseException(MESSAGE_DUPLICATE);
         }
         boolean hasWeightageExceed = gradebookManager.hasAddWeightageExceed(moduleCodeArg, gradeComponentWeightageArg);
         if (hasWeightageExceed) {

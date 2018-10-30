@@ -94,6 +94,17 @@ public class GradebookManager {
     }
 
     /**
+     This method checks if maximum marks and weightage are within acceptable range.
+     */
+    public boolean isIntParamsValid (int gradebookMaxMarks, int gradebookWeightage) {
+        boolean isIntParamsValid = true;
+        if (!isMaxMarksValid(gradebookMaxMarks) && !isWeightageValid(gradebookWeightage)) {
+            isIntParamsValid = false;
+        }
+        return isIntParamsValid;
+    }
+
+    /**
      This method checks if maximum marks are within acceptable range.
      */
     public boolean isMaxMarksValid (int gradebookMaxMarks) {
