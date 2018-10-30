@@ -1,17 +1,18 @@
 package seedu.address.model.util;
 
-import static java.lang.Math.max;
-
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.grade.PersonTest;
 import seedu.address.model.person.Person;
-
+/**
+ * this is the method to find highest scores in certain test in GradeSummaryCommand
+ */
 public class Highest {
 
-
+    /**
+     * this is the method to find highest scores in certain test in GradeSummaryCommand
+     */
     public double findHighest(ObservableList<Person> personList, String testName) {
         ArrayList<PersonTest> list = SortMarks.sortingFromLowestToHighest(personList, testName);
 

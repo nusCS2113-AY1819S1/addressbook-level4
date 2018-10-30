@@ -18,8 +18,6 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
-
-    // Identity fields
     private final Name name;
     private final Phone phone;
     private final Email email;
@@ -32,22 +30,6 @@ public class Person {
     private final Set<Test> testList = new HashSet<>();
     private Grade grade = new Grade("Undefined");
     private Marks marks = new Marks("0");
-
-    public Grade getGrade() {
-        return grade;
-    }
-
-    public Marks getMarks() {
-        return marks;
-    }
-
-    public void setGrade(Grade grade) {
-        this.grade = grade;
-    }
-
-    public void setMarks(Marks marks){
-        this.marks = marks;
-    }
 
     /**
      * Every field must be present and not null.
@@ -66,6 +48,21 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.testList.addAll(testList);
+    }
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public Marks getMarks() {
+        return marks;
+    }
+
+    public void setGrade(Grade grade) {
+        this.grade = grade;
+    }
+
+    public void setMarks(Marks marks) {
+        this.marks = marks;
     }
 
     public Name getName() {

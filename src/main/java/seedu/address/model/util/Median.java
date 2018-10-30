@@ -4,17 +4,20 @@ import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.grade.PersonTest;
-import seedu.address.model.grade.Test;
 import seedu.address.model.person.Person;
-
+/**
+ * this is the method to find median scores in certain test in GradeSummaryCommand
+ */
 public class Median {
-    public double calculateMedian(ObservableList<Person> personList, String testName) { //calculate the mean score of a test
+    /**
+     * this is the method to find median scores in certain test in GradeSummaryCommand
+     */
+    public double calculateMedian(ObservableList<Person> personList, String testName) {
+        //calculate the mean score of a test
         double median = 0;
         ArrayList<PersonTest> sortedList =
                 new ArrayList<PersonTest>(SortMarks.sortingFromLowestToHighest(personList, testName));
-        for (int i = 0; i < sortedList.size(); i++) {
-        System.out.println(sortedList.get(i).getMarks());
-        }
+
         int size = sortedList.size();
         int index = (size / 2) - 1;
         if (size % 2 == 0) {

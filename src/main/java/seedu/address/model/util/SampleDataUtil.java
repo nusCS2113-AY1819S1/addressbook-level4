@@ -32,7 +32,7 @@ public class SampleDataUtil {
 
     public static Person[] getSamplePersons() {
         Set<Test> test = new HashSet<>();
-        test.add(new Test(new TestName("a"), new Marks("1"),new Grade("A")));
+        test.add(new Test(new TestName("a"), new Marks("1"), new Grade("A")));
 
         return new Person[] {
 

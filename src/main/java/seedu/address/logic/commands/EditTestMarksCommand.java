@@ -54,7 +54,8 @@ public class EditTestMarksCommand extends Command {
     private final String testGrade;
     private final List<String> nameList;
 
-    public EditTestMarksCommand(NameContainsKeywordsPredicate predicate, String testName, String testMarks, String testGrade, List<String> nameList) {
+    public EditTestMarksCommand(NameContainsKeywordsPredicate predicate, String testName,
+                                String testMarks, String testGrade, List<String> nameList) {
         this.predicate = predicate;
         this.testName = testName;
         this.testMarks = testMarks;
@@ -90,7 +91,8 @@ public class EditTestMarksCommand extends Command {
                 for (Person person: personListName) {
                     if (fullName.equals(person.getName().fullName.toUpperCase())) {
                         return editPersonMarks(person, model);
-                    } else if (!fullName.equals(person.getName().fullName.toUpperCase()) && person.getName().fullName.toUpperCase().contains(fullName)) {
+                    } else if (!fullName.equals(person.getName().fullName.toUpperCase())
+                            && person.getName().fullName.toUpperCase().contains(fullName)) {
                         duplicate = true;
                     }
                     else {

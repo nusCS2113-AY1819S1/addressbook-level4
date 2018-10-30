@@ -10,7 +10,6 @@ import seedu.address.commons.core.LogsCenter;
 
 import seedu.address.logic.commands.Command;
 
-
 import seedu.address.logic.commands.EditTestMarksCommand;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -26,21 +25,21 @@ public class AssignGrades {
     public String assignGradeByMarks(String testName, String marks, Person person, ObservableList<Person> personList) {
 
         double meanVal = Mean.calculateMean(personList, testName);
-        double SD = StandardDeviation.calculateStandardDeviation(personList, testName);
+        double sd = StandardDeviation.calculateStandardDeviation(personList, testName);
         double marksVal = Double.valueOf(marks);
         if (marksVal == 0) {
-          return "F";
-        } else if (((meanVal - 2 * SD) > marksVal) && (marksVal >= (meanVal - 3 * SD))) {
             return "F";
-        } else if (((meanVal - SD) > marksVal) && (marksVal >= (meanVal - 2 * SD))) {
+        } else if (((meanVal - 2 * sd) > marksVal) && (marksVal >= (meanVal - 3 * sd))) {
+            return "F";
+        } else if (((meanVal - sd) > marksVal) && (marksVal >= (meanVal - 2 * sd))) {
             return "D";
-        } else if ((meanVal > marksVal) && (marksVal >= (meanVal - SD))) {
+        } else if ((meanVal > marksVal) && (marksVal >= (meanVal - sd))) {
             return "C";
-        } else if (((meanVal + SD) > marksVal) && (marksVal >= meanVal)) {
+        } else if (((meanVal + sd) > marksVal) && (marksVal >= meanVal)) {
             return "C";
-        } else if (((meanVal + 2 * SD) > marksVal) && (marksVal >= (meanVal + SD))) {
+        } else if (((meanVal + 2 * sd) > marksVal) && (marksVal >= (meanVal + sd))) {
             return "B";
-        } else if (((meanVal + 3 * SD) > marksVal) && (marksVal >= (meanVal + 2 * SD))) {
+        } else if (((meanVal + 3 * sd) > marksVal) && (marksVal >= (meanVal + 2 * sd))) {
             return "A";
         }
         return "C";

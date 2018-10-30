@@ -10,7 +10,8 @@ import seedu.address.model.grade.Test;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.AssignGrades;
 /**
- * AssignGrade Command for Students, to assign grades to each student who has token certain test(use bell_curve calculate method)
+ * AssignGrade Command for Students, to assign grades to each student who has token certain
+ * test(use bell_curve calculate method)
  */
 public class AssignGradeCommand extends Command {
     public static final String COMMAND_WORD = "AssignGradePerTest";
@@ -22,11 +23,11 @@ public class AssignGradeCommand extends Command {
 
     public static final String MESSAGE_TEST_NOT_EXISTS = "Test does not exists in all students";
     public static final String MESSAGE_GENERATE_GRADE_LIST = "grade of the test has been assign to student";
-   // public static final String MESSAGE_EMPTY_LIST = "The ";
+    // public static final String MESSAGE_EMPTY_LIST = "The ";
 
 
     private final String testName;
-    public AssignGradeCommand( String test) {
+    public AssignGradeCommand(String test) {
         this.testName = test;
     }
 
@@ -40,8 +41,10 @@ public class AssignGradeCommand extends Command {
             for (Test test : person.getTests()) {
                 if (testName.equals(test.getTestName().testName)) {
                     checkExist = true;
-                    String testGrade = ag.assignGradeByMarks(test.getTestName().testName, test.getMarks().value, person, model.getFilteredPersonList());
-                    Command run = ag.updateGradeOfPersonList(person, test.getTestName().testName, test.getMarks().value, testGrade);
+                    String testGrade = ag.assignGradeByMarks(test.getTestName().testName, test.getMarks().value,
+                            person, model.getFilteredPersonList());
+                    Command run = ag.updateGradeOfPersonList(person, test.getTestName().testName,
+                            test.getMarks().value, testGrade);
                     run.execute(model, history);
                 }
             }

@@ -58,9 +58,11 @@ public class BrowserPanel extends UiPart<Region> {
         String json = "[";
         for (Test test: testList) {
             if (i++ == testList.size() - 1) {
-                json = json + "{\"name\":\"" + test.getTestName() + "\",\"marks\":\"" + test.getMarks() + "\",\"grade\":\"" + test.getGrade() + "\"}]";
+                json = json + "{\"name\":\"" + test.getTestName() + "\",\"marks\":\"" + test.getMarks()
+                        + "\",\"grade\":\"" + test.getGrade() + "\"}]";
             } else {
-                json = json + "{\"name\":\"" + test.getTestName() + "\",\"marks\":\"" + test.getMarks() + "\",\"grade\":\"" + test.getGrade() + "\"},";
+                json = json + "{\"name\":\"" + test.getTestName() + "\",\"marks\":\"" + test.getMarks()
+                        + "\",\"grade\":\"" + test.getGrade() + "\"},";
             }
         }
 

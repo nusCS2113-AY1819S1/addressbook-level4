@@ -35,7 +35,8 @@ public class GradeSummaryCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Success Showing List";
     public static final String MESSAGE_ERROR = "ERROR showing List";
-    public static final String MESSAGE_ERROR_COMMAND = "Invalid Command or invalid test name, please check again and re input";
+    public static final String MESSAGE_ERROR_COMMAND = "Invalid Command "
+            + "or invalid test name, please check again and re input";
     private final String commandType;
     private final String testName;
 
@@ -59,7 +60,8 @@ public class GradeSummaryCommand extends Command {
         DisplayGrade gradeDisplay;
 
         if ("TTF".equals(commandType)) {
-            ArrayList<PersonTest> studentList = topTwentyFivePercen.findTopTwentyFive(model.getFilteredPersonList(), testName);
+            ArrayList<PersonTest> studentList = topTwentyFivePercen.findTopTwentyFive(model
+                    .getFilteredPersonList(), testName);
 
 
             if (studentList.isEmpty()) {
@@ -71,7 +73,8 @@ public class GradeSummaryCommand extends Command {
 
         }
         if ("LTF".equals(commandType)) {
-            ArrayList<PersonTest> studentList = lastTwentyFivePercen.findLastTwentyFive(model.getFilteredPersonList(), testName );
+            ArrayList<PersonTest> studentList = lastTwentyFivePercen.findLastTwentyFive(model
+                    .getFilteredPersonList(), testName);
 
 
             if (studentList.isEmpty()) {

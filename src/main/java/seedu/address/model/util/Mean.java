@@ -1,7 +1,6 @@
 package seedu.address.model.util;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.grade.PersonTest;

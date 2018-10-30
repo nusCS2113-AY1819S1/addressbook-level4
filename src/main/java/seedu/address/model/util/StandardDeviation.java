@@ -24,7 +24,8 @@ public class StandardDeviation {
         String marks1;
         double sum = 0.0;
         double standardDeviation = 0.0;
-        ArrayList<PersonTest> list = new ArrayList<>(); // this is the list contains persons that take certain test(user defined)
+        ArrayList<PersonTest> list = new ArrayList<>();
+        // this is the list contains persons that take certain test(user defined)
         for (int i = 0; i < personList.size(); i++) {
             for (Test test: personList.get(i).getTests()) {
                 if (test.getTestName().testName.equals(testName)) {
@@ -42,7 +43,7 @@ public class StandardDeviation {
         for (int k = 0; k < size; k++) {
             standardDeviation += Math.pow(Double.parseDouble(list.get(k).getMarks().value) - mean, 2);
         }
-        double SD = Math.sqrt(standardDeviation / size);
-        return SD;
+        double sd = Math.sqrt(standardDeviation / size);
+        return sd;
     }
 }

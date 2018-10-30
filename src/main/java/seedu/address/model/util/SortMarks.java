@@ -1,7 +1,6 @@
 package seedu.address.model.util;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 import javafx.collections.ObservableList;
 

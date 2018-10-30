@@ -42,7 +42,8 @@ public class AddTestMarksCommand extends Command {
 
     public static final String MESSAGE_DUPLICATE_TEST = "This test already exists in the system";
     public static final String MESSAGE_PERSONNAME_NOT_FOUND = "This person cannot be found";
-    public static final String MESSAGE_PERSON_DUPLICATE_FOUND = "There are more then one person's name contain the keyword found please indicate the full name";
+    public static final String MESSAGE_PERSON_DUPLICATE_FOUND = "There are more then one "
+            + "person's name contain the keyword found please indicate the full name";
     public static final String MESSAGE_SUCCESS = "New test marks added";
     private final NameContainsKeywordsPredicate predicate;
     private final String testName;
@@ -50,7 +51,8 @@ public class AddTestMarksCommand extends Command {
     private final List<String> nameList;
     private final EditTestMarksCommand.EditPersonDescriptor editPersonDescriptor = null;
 
-    public AddTestMarksCommand(NameContainsKeywordsPredicate predicate, String testName, String testMarks, List<String> nameList) {
+    public AddTestMarksCommand(NameContainsKeywordsPredicate predicate,
+                               String testName, String testMarks, List<String> nameList) {
         requireNonNull(testMarks, testName);
         this.predicate = predicate;
         this.testName = testName;
@@ -81,13 +83,14 @@ public class AddTestMarksCommand extends Command {
 
                     if (fullName.equals(person.getName().fullName.toUpperCase())) {
                         return insertIntoPerson(person, model);
-                    } else if (!fullName.equals(person.getName().fullName.toUpperCase()) && person.getName().fullName.toUpperCase().contains(fullName)) {
+                    } else if (!fullName.equals(person.getName().fullName.toUpperCase()) && person.getName()
+                            .fullName.toUpperCase().contains(fullName)) {
                         duplicate = true;
-                } else {
+                    } else {
                         checked = true;
                     }
                 }
-                if (!checked && duplicate ) {
+                if (!checked && duplicate) {
                     model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
                     throw new CommandException(MESSAGE_PERSON_DUPLICATE_FOUND);
                 } else if (checked && !duplicate) {

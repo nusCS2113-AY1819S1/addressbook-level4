@@ -49,6 +49,7 @@ public class AddTestMarksCommandParser implements Parser<AddTestMarksCommand> {
         nameKeywordsList.remove(PREFIX_TEST_MARK + argMultimap.getValue(PREFIX_TEST_MARK).get());
 
         return new AddTestMarksCommand(new NameContainsKeywordsPredicate(nameKeywordsList),
-                argMultimap.getValue(PREFIX_TEST_NAME).get(), argMultimap.getValue(PREFIX_TEST_MARK).get(), nameKeywordsList);
+                argMultimap.getValue(PREFIX_TEST_NAME).get(),
+                argMultimap.getValue(PREFIX_TEST_MARK).get(), nameKeywordsList);
     }
 }

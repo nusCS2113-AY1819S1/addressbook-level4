@@ -242,21 +242,7 @@ public class ParserUtil {
         }
         return new Tag(trimmedTag);
     }
-//
-//    /**
-//     * Parses a {@code String Grade} into a {@code Grade}.
-//     * Leading and trailing whitespaces will be trimmed.
-//     *
-//     * @throws ParseException if the given {@code grade} is invalid.
-//     */
-//    public static Grade parseGrade(String grade) throws ParseException {
-//        requireNonNull(grade);
-//        String trimmedGrade = grade.trim();
-//        if (!Grade.isValidGrade(trimmedGrade)) {
-//            throw new ParseException(Grade.MESSAGE_GRADE_CONSTRAINTS);
-//        }
-//        return new Grade(trimmedGrade);
-//    }
+
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
