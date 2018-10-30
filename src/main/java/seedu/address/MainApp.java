@@ -243,6 +243,10 @@ public class MainApp extends Application {
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty statistic");
         }
+
+        if (StatisticCenter.getInstance().getStatistic().getInventory().toString().equals(Statistic.STARTING_FIGURE)) {
+            StatisticCenter.getInstance().calibrateInventory(model.getBookInventory());
+        }
     }
 
     @Override
