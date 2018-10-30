@@ -11,7 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.planner.commons.core.LogsCenter;
-
+//@@author tenvinc
 /**
  * Represents a month of {@code MonthSummary} in the financial planner.
  */

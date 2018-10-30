@@ -10,8 +10,7 @@ import javafx.scene.control.Control;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.planner.commons.core.LogsCenter;
-
-
+//@@author tenvinc
 /**
  * This UI component is responsible for displaying the breakdown of total income and expenses into categories
  * as a pie chart.

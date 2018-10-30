@@ -18,7 +18,7 @@ import seedu.planner.commons.events.ui.UpdateWelcomePanelEvent;
 import seedu.planner.model.Model;
 import seedu.planner.model.summary.CategoryStatistic;
 import seedu.planner.model.summary.CategoryStatisticsList;
-
+//@@author tenvinc
 /**
  * UI component that displays the default welcome page with statistic of the current month and a welcome message
  */

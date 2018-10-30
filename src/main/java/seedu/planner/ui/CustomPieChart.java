@@ -12,7 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
-
+//@@author tenvinc
 /**
  * This class is a custom PieChart class that can be used to display statistics in FinancialPlanner
  */

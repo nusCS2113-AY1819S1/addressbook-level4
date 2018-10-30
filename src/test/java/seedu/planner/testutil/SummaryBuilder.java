@@ -6,7 +6,7 @@ import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.summary.DaySummary;
 import seedu.planner.model.summary.MonthSummary;
 import seedu.planner.model.summary.Summary;
-
+//@@author tenvinc
 /**
  * A utility class to help buildDaySummary Summary objects for testing
  */

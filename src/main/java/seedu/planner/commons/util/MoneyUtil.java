@@ -3,7 +3,7 @@ package seedu.planner.commons.util;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.planner.model.record.MoneyFlow;
-
+//@@author tenvinc
 /**
  * Contains helper methods to process data of {@code MoneyFlow}
  */
@@ -30,11 +30,10 @@ public class MoneyUtil {
     /**
      * Formats a string into a string that is readable by {@code MoneyFlow}
      */
-    //TODO: implement an alternative representation for 0 in MoneyFlow parser
     private static final String formatIntoMoneyFlowFormat(double money) {
         String formattedMoney;
         if (money == 0) {
-            formattedMoney = String.format("-0");
+            formattedMoney = "-0";
         } else if (money > 0) {
             formattedMoney = String.format("+%.2f", money);
         } else {

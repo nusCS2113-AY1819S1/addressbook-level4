@@ -7,7 +7,7 @@ import seedu.planner.commons.util.MoneyUtil;
 import seedu.planner.model.Month;
 import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Record;
-
+//@@author tenvinc
 /**
  * This class represents all financial activity in a month
  */
