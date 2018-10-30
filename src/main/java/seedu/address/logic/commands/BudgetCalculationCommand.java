@@ -10,7 +10,6 @@ import seedu.address.logic.BudgetCalculationManager;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.arithmetic.CalculateTotalAttendees;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.budgetelements.ClubBudgetElements;
 import seedu.address.model.clubbudget.FinalClubBudget;

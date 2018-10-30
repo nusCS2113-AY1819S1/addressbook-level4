@@ -9,7 +9,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_VIEW_BUDGET_COMMAND_IN
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.BudgetCalculationManager;
 import seedu.address.logic.LoginManager;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddSkillCommand;
@@ -33,7 +32,6 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UndoSearchCommand;
 import seedu.address.logic.commands.ViewClubBudgetsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.FinalBudgetsBook;
 
 /**
  * Parses user input.
@@ -128,7 +126,7 @@ public class AddressBookParser {
             }
 
         case ViewClubBudgetsCommand.COMMAND_WORD:
-            if (LoginManager.getIsMember() || LoginManager.getIsTreasurer() ) {
+            if (LoginManager.getIsMember() || LoginManager.getIsTreasurer()) {
                 return new ViewClubBudgetsCommandParser().parse(arguments);
             } else {
                 throw new ParseException(MESSAGE_VIEW_BUDGET_COMMAND_INVALID_USER);
