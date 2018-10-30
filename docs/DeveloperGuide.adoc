@@ -432,10 +432,9 @@ image::ImportSequenceDiagram.png[width="800"]
 
 {nbsp}
 
-The `IcsUtil` class implements three key utility methods for handling .ics files: +
-1. `IcsUtil#getTimeTableFromFile()` - to obtain a `TimeTable`; accepts the `filePath` of the .ics file as parameter +
-2. +
-3. +
+The `IcsUtil` class implements two key utility methods for handling .ics files: +
+1. `IcsUtil#readTimeTableFromFile()` - to read an `Optional<TimeTable>` from an .ics file; accepts the `filePath` of the .ics file as parameter +
+2. `IcsUtil#saveTimeTableToFile()` - to write a `TimeTable` to disk; accepts the `TimeTable` and `filePath` of the .ics file as parameter +
 
 
 ===== Frontend implementation
@@ -447,8 +446,8 @@ Same as the other commands, see <<Events-Driven-Nature,*`Events-Driven nature of
 ** Pros: All functions that have to do with .ics parsing is in 1 class.
 ** Cons: Single responsibility principle is broken.
 * **Alternative 2:** Follow the existing implementation of 'Storage'; create an IcsTimeTableStorage class to access the ics file in hard disk, just like what is being done with 'preferences.json' and 'AddressBook.xml' files.
-** Pros: Better follows Single Responsibility Principle: classes that concerns storage are in the storage subsystem.
-** Cons: Current implementation favors 'permanent' files on the hard disk: Compared to the 'preferences.json' and 'AddressBook.xml' files, the .ics timetable file is single-use, and can have varying filePaths specified by user.
+** Pros: Classes that have to do with IO are in the storage subsystem.
+** Cons: Current implementation favors 'permanent' file storage, not on-demand IO (as in the import and export command).
 // end::timetable[]
 
 {nbsp}
