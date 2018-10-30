@@ -8,7 +8,7 @@ import static seedu.address.ui.BrowserPanel.DEFAULT_PAGE;
 import static seedu.address.ui.BrowserPanel.STUDENT_GRADE_PAGE_URL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
-import static seedu.address.ui.StatusBarFooter.TOTAL_PERSONS_STATUS;
+import static seedu.address.ui.StatusBarFooter.TOTAL_PERSONS_GROUPS_STATUS;
 import static seedu.address.ui.UiPart.FXML_FILE_FOLDER;
 import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
 
@@ -193,7 +193,7 @@ public abstract class AddressBookSystemTest {
         StatusBarFooterHandle statusBarFooterHandle = getStatusBarFooter();
         getBrowserPanel().rememberUrl();
         statusBarFooterHandle.rememberSaveLocation();
-        statusBarFooterHandle.rememberTotalPersonsStatus();
+        statusBarFooterHandle.rememberTotalPersonsGroupsStatus();
         statusBarFooterHandle.rememberSyncStatus();
         getPersonListPanel().rememberSelectedPersonCard();
     }
@@ -263,13 +263,14 @@ public abstract class AddressBookSystemTest {
     protected void assertStatusBarUnchanged() {
         StatusBarFooterHandle handle = getStatusBarFooter();
         assertFalse(handle.isSaveLocationChanged());
-        assertFalse(handle.isTotalPersonsStatusChanged());
+        assertFalse(handle.isTotalPersonsGroupsStatusChanged());
         assertFalse(handle.isSyncStatusChanged());
     }
 
     /**
      * Asserts that only the sync status in the status bar was changed to the timing of
      * {@code ClockRule#getInjectedClock()}, while the save location and the total person
+     * and total group
      * list remains the same.
      */
     protected void assertStatusBarUnchangedExceptSyncStatus() {
@@ -277,13 +278,13 @@ public abstract class AddressBookSystemTest {
         String timestamp = new Date(clockRule.getInjectedClock().millis()).toString();
         String expectedSyncStatus = String.format(SYNC_STATUS_UPDATED, timestamp);
         assertEquals(expectedSyncStatus, handle.getSyncStatus());
-        assertFalse(handle.isTotalPersonsStatusChanged());
+        assertFalse(handle.isTotalPersonsGroupsStatusChanged());
     }
 
     /**
      * Asserts that the sync status in the status bar was changed to the timing of
-     * {@code ClockRule#getInjectedClock()}, and total persons was changed to match the total
-     * number of persons in the address book, while the save location remains the same.
+     * {@code ClockRule#getInjectedClock()}, and total persons/groups was changed to match the total
+     * number of persons and groups in the address book, while the save location remains the same.
      */
     protected void assertStatusBarChangedExceptSaveLocation() {
         StatusBarFooterHandle handle = getStatusBarFooter();
@@ -291,7 +292,9 @@ public abstract class AddressBookSystemTest {
         String expectedSyncStatus = String.format(SYNC_STATUS_UPDATED, timestamp);
         assertEquals(expectedSyncStatus, handle.getSyncStatus());
         final int totalPersons = testApp.getModel().getAddressBook().getPersonList().size();
-        assertEquals(String.format(TOTAL_PERSONS_STATUS, totalPersons), handle.getTotalPersonsStatus());
+        final int totalGroups = testApp.getModel().getAddressBook().getGroupList().size();
+        assertEquals(String.format(TOTAL_PERSONS_GROUPS_STATUS,
+                totalPersons, totalGroups), handle.getTotalPersonsGroupsStatus());
         assertFalse(handle.isSaveLocationChanged());
     }
 
@@ -306,8 +309,9 @@ public abstract class AddressBookSystemTest {
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());
         assertEquals(SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
-        assertEquals(String.format(TOTAL_PERSONS_STATUS, getModel().getAddressBook().getPersonList().size()),
-                getStatusBarFooter().getTotalPersonsStatus());
+        assertEquals(String.format(TOTAL_PERSONS_GROUPS_STATUS, getModel().getAddressBook().getPersonList().size(),
+                getModel().getAddressBook().getGroupList().size()),
+                getStatusBarFooter().getTotalPersonsGroupsStatus());
     }
 
     /**

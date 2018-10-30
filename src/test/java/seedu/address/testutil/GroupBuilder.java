@@ -64,14 +64,6 @@ public class GroupBuilder {
         return this;
     }
 
-    /**
-     * Parses the {@code persons} into a {@code Set<Person>} and set it to the {@code Group} that we are building.
-     */
-    public GroupBuilder withPersons(Person ... persons) {
-        this.persons = SampleDataUtil.getPersonSet(persons);
-        return this;
-    }
-
     public Group build() {
         return new Group(groupName, groupLocation, tags);
     }

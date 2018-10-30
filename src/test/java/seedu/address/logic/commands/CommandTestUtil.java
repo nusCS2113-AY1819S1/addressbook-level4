@@ -178,6 +178,7 @@ public class CommandTestUtil {
     public static final String INVALID_GROUP_TAG_DESC = " " + PREFIX_TAG + "morning*"; // '*' not allowed in tags
 
     public static final String INVALID_GROUP_NUMBER_DESC = " " + "0";
+    public static final String INVALID_GROUP_NUMBER_STRING_DESC = " a";
     public static final String INVALID_MAX_GROUP_NUMBER_DESC = " " + "9223372036854775808";
 
     public static final String PREAMBLE_WHITESPACE = "\t \r \n";

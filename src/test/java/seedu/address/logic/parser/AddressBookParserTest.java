@@ -42,7 +42,9 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListGroupCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.ScriptCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.SelectGroupCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.distribute.Distribute;
@@ -114,6 +116,14 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListGroupCommand.COMMAND_WORD) instanceof ListGroupCommand);
         assertTrue(parser.parseCommand(ListGroupCommand.COMMAND_WORD + " 3") instanceof ListGroupCommand);
     }
+
+    @Test
+    public void parseCommand_selectGroup() throws Exception {
+        SelectGroupCommand command = (SelectGroupCommand) parser.parseCommand(
+                SelectGroupCommand.COMMAND_WORD + " " + INDEX_FIRST_GROUP.getOneBased());
+        assertEquals(new SelectGroupCommand(INDEX_FIRST_GROUP), command);
+    }
+
 
     @Test
     public void parseCommand_distribute() throws Exception {
@@ -190,6 +200,19 @@ public class AddressBookParserTest {
         SelectCommand command = (SelectCommand) parser.parseCommand(
                 SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new SelectCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_script() throws Exception {
+        String validAddTextFile = "ValidAddScriptCommand";
+        String missingTextFile = "MissingTextFile";
+        assertTrue(parser.parseCommand(ScriptCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_TEXT_FILE
+                        + validAddTextFile + " " + CliSyntax.PREFIX_COMMAND
+                        + AddCommand.COMMAND_WORD) instanceof ScriptCommand);
+        assertTrue(parser.parseCommand(
+                ScriptCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_TEXT_FILE
+                        + missingTextFile + " " + CliSyntax.PREFIX_COMMAND
+                        + AddCommand.COMMAND_WORD) instanceof ScriptCommand);
     }
 
     @Test

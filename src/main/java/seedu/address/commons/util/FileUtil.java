@@ -1,5 +1,6 @@
 package seedu.address.commons.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -9,6 +10,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
+
+import org.apache.commons.io.FileUtils;
 
 /**
  * Writes and reads files
@@ -60,10 +63,21 @@ public class FileUtil {
         if (Files.exists(file)) {
             return;
         }
-
         createParentDirsOfFile(file);
-
         Files.createFile(file);
+    }
+
+    /**
+     * Returns false if the new folder has been created and return true if the folder is present
+     * Creates all the folder directory if it is missing
+     * @throws IOException if the file or directory cannot be created.
+     */
+    public static boolean createFolder(Path folder) throws IOException {
+        if (folder != null && Files.notExists(folder)) {
+            Files.createDirectories(folder);
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -117,5 +131,12 @@ public class FileUtil {
         return currentRelativePath.toAbsolutePath().toString();
     }
 
-
+    /**
+     * Write String to Text File
+     * @file is the location of the file
+     * @text is the string to be written to the text file
+     */
+    public static void writeToTextFile(File file, String text) throws IOException {
+        FileUtils.writeStringToFile(file, text, CHARSET);
+    }
 }

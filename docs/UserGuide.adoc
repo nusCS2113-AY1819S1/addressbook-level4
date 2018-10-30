@@ -27,7 +27,7 @@ AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for mana
 .  Copy the file to the folder you want to use as the home folder for your Address Book.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
-image::Ui.png[width="790"]
+image::Ui.png.jpg[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -57,6 +57,11 @@ Format: `creategroup n/NAME l/LOCATION [t/TAG] ...`  +
 Shortcut Format: `cg n/NAME l/LOCATION [t/TAG] ...` +
 ****
 * Creates a group with the specified NAME, LOCATION and TAG(s)
+* NAME *should only contain alphanumeric characters, '-', '[' and ']', and should not be blank*
+* LOCATION *should only contain alphanumeric characters and '-', and should not be blank*
+* TAG(s) are optional and *should only contain alphanumeric characters* if used
+* TAG(s) *should not be blank* if used
+* This command is undoable
 ****
 
 Examples:
@@ -64,13 +69,36 @@ Examples:
 * `creategroup n/CS2113 l/LT15 t/java`
 * `cg n/CS2113 l/LT01 t/c t/cpp`
 
-=== Add students a group: `addgroup` `ag`
+=== Selecting a group : `selectgroup` `sg`
+
+Selects the group identified by the index number used in the displayed group list. +
+Format: `selectgroup INDEX` +
+Shortcut Format: `sg INDEX`
+
+****
+* Selects group and loads the *students in selected group panel* with students of the group at specified `INDEX`.
+* Selects the group and loads the Google search page of the group at the specified `INDEX`.
+* The index refers to the index number shown in the displayed group list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+* This command is *NOT* undoable
+****
+
+Examples:
+
+* `selectgroup 2` +
+Selects the 2nd group in the student management system.
+* `sg 1` +
+Selects the 1st group in the student management system.
+
+=== Add students to a group: `addgroup` `ag`
 Adds student(s) to a group in the student management system +
 Format: `addgroup g/INDEX p/INDEX ...` +
 Shortcut Format: `ag g/INDEX p/INDEX ...` +
 ****
-* Adds person(s) at specified INDEX(s) to group at specified at INDEX.
-* The index refers to the index number shown in the displayed group/person list.
+* Adds student(s) at specified INDEX(s) to group at specified at INDEX.
+* The index refers to the index number shown in the displayed group/student list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* This command is undoable
 ****
 
 Examples:
@@ -84,12 +112,30 @@ Format: `deletegroup INDEX`  +
 Shortcut Format: `dg INDEX` +
 ****
 * Removes the group with the specified INDEX from the student management systsm
+* The index *must be a positive integer* 1, 2, 3, ...
+* This command is undoable
 ****
 
 Examples:
 
 * `deletegroup 1`
 * `dg 1`
+
+=== Deleting student(s) from a group: `deletegroupstudents` `dgs` [_Coming in v1.4_]
+Deletes students from a group in the student management system +
+Format: `deletegroupstudents g/INDEX p/NDEX ...`  +
+Shortcut Format: `dgs g/INDEX p/INDEX ...` +
+****
+* Removes studnets at specifed INDEX(s) from the group at specified INDEX in the student management systsm
+* The index refers to the index number shown in the displayed group/student in group list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* This command is undoable
+****
+
+Examples:
+
+* `deletegroupstudents g/1 p/1`
+* `dgs g/1 p/1 p/2`
 
 === List a group of students: 'scorefilter a/56 or b/56'
 List out  students who score above/below certain grade.
@@ -99,44 +145,82 @@ Example: scorefilter a/66
 This will list all the students who score above 56 in a new grade list
 
 
-=== Create N number of group, distributed equally based on nationality or gender or both: `distinto` `di`
-Creates _n_ number of groups determined by the user, with a group name and user is able to select the condition to distribute equally via Gender or Nationally +
-Format: `distinto NUM_OF_GROUPS n/GROUP_NAME g/true nat/true` +
+=== Distributed all students into _n_ groups with balanced number of Nationality or Gender: `distinto` `di`
+This functionality creates _n_ number of groups determined by the user, with a general group name specified and randomly distribute all students in the system into _n_ groups. +
+User must choose to either distribute all students equally via Gender or Nationally or Neither. +
 ****
-* NUM_OF_GROUPS is an positive integer value and must not be 0.
+* *Distribution Modes*
+** `g/0 nat/0` -> Distribution all students randomly into _n_ groups.
+** `g/1 nat/0` -> Distribution all students randomly into _n_ groups with balanced Gender.
+** `g/0 nat/1` -> Distribution all students randomly into _n_ groups with balanced Nationality.
+** `g/1 nat/1` -> Distribution all students randomly into _n_ groups with balanced Gender and Nationality. (Coming in v1.4)
+****
+Format: `distinto NUM_OF_GROUPS n/GROUP_NAME g/true nat/true` +
+Shortcut Format: `di NUM_OF_GROUPS n/GROUP_NAME g/1 nat/1` +
+
+==== Command Input Guide ====
+****
+* *NUM_OF_GROUPS*
+** NUM_OF_GROUPS must be a *positive integer* value and must not be *0*.
 ** NUM_OF_GROUPS must not be more than the total number of persons in the address book.
-* Groups will be created with the GROUP_NAME + an index value starting from 1.
-** Eg: Group name Input: CS2113-T13-
-** Output: CS2113-T13-1
-* `g/` is the Gender Prefix which only takes in '1' or '0' or "true" or "false". It is a boolean type.
-** '1' or "true" will trigger the software to distribute into group with balanced genders
-** '0' or "false" will ignore gender field and distribute randomly
-* `nat/` is the nationality Prefix which only takes in '1' or '0'. It is a boolean type.
-** '1' or "true" will trigger the software to distribute into group with balanced nationality.
-** '0' or "false" will ignore nationality field and distribute randomly
-* When both flags are "false" or '0', the distinto command will distribute all person randomly into _n_ number of groups.
+* *GROUP_NAME*
+** All _n_ number of groups will have the same GROUP_NAME but every GROUP_NAME will be *concatenated with an index behind it*.
+** Index concatenated behind the GROUP_NAME starts from 1.
+** GROUP_NAME should only contain alphanumeric characters, '-', '[' and ']', and should not be blank
+** Eg: Group name Input: g/CS2113-T13-
+*** 1st Group Name: CS2113-T13-1
+*** 2nd Group Name: CS2113-T13-2
+* *Gender Flag `g/`*
+** `g/` is the Gender Prefix which only takes in '1' or '0' or "true" or "false". It should not be blank.
+** `g/1` or `g/true` will trigger the software to distribute all students into groups with balanced genders.
+** `g/0` or `g/false` will ignore gender field.
+* *Nationality Flag `nat/`*
+** `nat/` is the nationality Prefix which only takes in '1' or '0' or "true" or "false". It should not be blank.
+** `nat/1` or `nat/true` will trigger the software to distribute all students into groups with balanced nationality.
+** `nat/0` or `nat/false` will ignore nationality field.
 ****
 
 Examples:
 
-* distinto 5 n/T13- g/true nat/false
-* di 3 n/T11- g/1 nat/0
-* di 2 n/T11- g/true nat/0
+* `distinto 5 n/CS2113-T13-0 g/true nat/false`
+* `di 3 n/CS2113-T09- g/1 nat/0`
+* `di 2 n/CS2113-T14- g/true nat/0`
 
-=== Sending Email to Single, Multiple or Group of Person(s): `sendmail`
-Sends an email to a single person in list+
+=== Entering email credential into the Student Management System: `login`
+Enters account credential for sending email +
+Format: `login e/EmailAddress pw/Password`
+
+Example:
+
+* login e/tsurajovin@hotmail.com pw/password!@#
+
+For the purpose of user testing, please use the provided email account +
+if you do not wish to use your personal account.
+
+Email Address: tsurajovin@hotmail.com +
+Password: password!@#
+
+=== Sending Email to Single, Multiple or Group of Person(s): `sendmail` `sm`
+Sends an email to a single person in list +
 Format: `sendmail [Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
+Shortcut Format: `sm [Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
 
-Sends an email to multiple persons in list+
+Sends an email to multiple persons in list +
 Format: `sendmail [Index],..,[Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
+Shortcut Format: `sm [Index],..,[Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
 
 Sends an email to all persons belonging to a group +
-Format: `sendmail gn/GROUP_NAME s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
+Format: `sendmail g/[Group_Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
+Shortcut Format: `sm g/[Group_Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
 
 Examples: +
+
 * sendmail 1 s/Solution for Assignment m/Hi Bob, solution has been attached. +
+* sm 1 s/Solution for Assignment m/Hi Bob, solution has been attached. +
 * sendmail 1,4,6 s/Tutorial Cancelled m/Tutorial class for Friday has been cancelled. +
-* sendmail gn/CS2113T s/Announcement m/Please bring your calculator tomorrow.
+* sm 1,4,6 s/Tutorial Cancelled m/Tutorial Class for Friday has been cancelled. +
+* sendmail g/2 s/Announcement m/Please bring your calculator tomorrow. +
+* sm g/2 s/Announcement m/Please bring your calculator tomorrow.
 
 === List a group of students: `scorefilter`
 List out the standard deviation of the score data set from all students +
@@ -186,21 +270,27 @@ Examples:
 * `add n/John Doe g/M nat/SG p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `a n/Betsy Crowe g/female nat/MY t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-=== Adding multiple persons into the Addressbook : `addscript` `as`
+=== Execute multiples of the same Command using text file : `script` `scr`
 
-Get all the add commands from a text file and execute them +
-Format: `addscript TextFileName` +
-Shortcut Format: `as TextFileName` +
+Get all the commands parameters from a text file and execute them +
+Format: `script txt/TextFile c/CommandType` +
+Shortcut Format: `scr txt/TextFile c/CommandType` +
 
 ****
-* TextFileName is the text file name that is located at base of the project.
-* The TextFileName *must contain .txt* extension at the end of the String.
+* Default scripts folder is located at the /scripts/ where the main program is located at.
+* If the scripts folder is missing, the program will automatically generate the folder when the program starts
+* txt/ is the TextFile Prefix which is used to indicate the following parameter is a TextFile parameter
+** TextFile is the text file which contains all the command arguments that you want to execute.
+** TextFile should consist of the name of the file without the extension E.g "StudentList" is a valid TextFile but
+"StudentList.txt" is also valid TextFile but it will search for "StudentList.txt.txt" in the folder.
+* c/ is the CommandType Prefix which is used to indicate the following parameter is a CommandType parameter
+** CommandType is the command that you want to execute E.g add, delete, creategroup, etc
 ****
 
 Examples:
 
-* `addscript abc.txt`
-* `as abc.txt`
+* `script txt/addgroups c/creategroup`
+* `scr txt/addpersons c/add`
 
 === Listing all persons : `list` `l`
 
@@ -208,18 +298,19 @@ Shows a list of all persons in the address book. +
 Format: `list` +
 Shortcut Format: `l`
 
-=== Editing a person : `edit` `e`
+=== Editing a student : `edit` `e`
 
-Edits an existing person in the address book. +
+Edits an existing student in the student management system. +
 Format: `edit INDEX [n/NAME] [g/GENDER] [nat/NATIONALITY] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [g/GRADE]...`
 
 
 ****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
+* When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
+* You can remove all the student's tags by typing `t/` without specifying any tags after it.
+* Edits the student at specified `INDEX` in all groups which the student is in [_Coming in v1.4_]
 ****
 
 Examples:
@@ -252,13 +343,14 @@ Returns any person having names `Betsy`, `Tim`, or `John`
 
 === Deleting a person : `delete` `d`
 
-Deletes the specified person from the address book. +
+Deletes the specified student from the student management system. +
 Format: `delete INDEX` +
 Shortcut Format: `d INDEX`
 
 ****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student list.
+* Deletes student in all groups [_Coming in v1.4_]
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
 
@@ -266,10 +358,10 @@ Examples:
 
 * `list` +
 `delete 2` +
-Deletes the 2nd person in the address book.
+Deletes the 2nd student in the address book.
 * `find Betsy` +
 `d 1` +
-Deletes the 1st person in the results of the `find` command.
+Deletes the 1st student in the results of the `find` command.
 
 === Selecting a person : `select` `s`
 
@@ -392,20 +484,26 @@ e.g. `add n/James Ho g/M nat/CN p/22224444 e/jamesho@example.com a/123, Clementi
 e.g. `delete 3`
 * *Create Group* : `creategroup n/NAME l/LOCATION [t/TAG] ...` +
 e.g. `creategroup n/CS2040C l/LT15 t/cpp`
+* *Select Group* : `selectgroup INDEX` +
+e.g. `selectgroup 1`
 * *Add to Group* : `addgroup g/INDEX p/INDEX ...` +
 e.g. `addgroup g/1 p/1 p/2`
 * *Delete Group* : `deletegroup INDEX` +
 e.g. `deletegroup 1`
+* *Delete Students in Group* : `deletegroupstudents g/INDEX p/INDEX ...` +
+e.g. `deletegroupstudents g/1 p/1 p/2`
 * *Edit* : `edit INDEX [n/NAME] [g/GENDER] [nat/NATIONALITY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
+* *Login* : `login e/EmailAddress pw/Password` +
+e.g. `login e/tsurajovin@hotmail.com pw/password!@#`
 * *Send Email (Person)*: `sendmail [Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
 e.g. `sendmail 1 s/Solution for Assignment m/Hi Bob, solution has been attached.`
 * *Send Email (Persons)*: `sendmail [Index],..,[Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
 e.g. `sendmail 1,4,6 s/Tutorial Cancelled m/Tutorial class for Friday has been cancelled.`
-* *Send Email (Group)*: `sendmail gn/GROUP_NAME s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
-e.g. `sendmail gn/CS2113T s/Announcement m/Please bring your calculator tomorrow.`
+* *Send Email (Group)*: `sendmail g/[Group_Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
+e.g. `sendmail g/2 s/Announcement m/Please bring your calculator tomorrow.`
 * *List* : `list`
 * *Help* : `help`
 * *Select* : `select INDEX` +
