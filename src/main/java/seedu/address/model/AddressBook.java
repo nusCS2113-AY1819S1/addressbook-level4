@@ -146,6 +146,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         return groups.contains(aG);
     }
 
+    /**
+     * Removes person from group
+     * @param g group to remove person from
+     * @param p person to be removed
+     */
+    public void removeGroupPerson(Group g,Person p) {
+        groups.removeGroupPerson(g, p);
+    }
+
     //// util methods
 
     @Override

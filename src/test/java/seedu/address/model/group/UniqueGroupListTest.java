@@ -133,7 +133,7 @@ public class UniqueGroupListTest {
     @Test
     public void createEditedGroup_nullParameter_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        uniqueGroupList.createEditedGroup(null, null);
+        uniqueGroupList.createEditedGroup(null, null, null);
     }
 
     @Test

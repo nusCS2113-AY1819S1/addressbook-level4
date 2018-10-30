@@ -12,10 +12,12 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.SelectGroupCommand;
 import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
 
 
@@ -97,6 +99,32 @@ public class UniqueGroupList implements Iterable<Group> {
     }
 
     /**
+     * Removes the equivalent person from the group in the list.
+     * The group must exist in the list.
+     * The person must exist in the group.
+     */
+    public void removeGroupPerson(Group group, Person toRemove) {
+        requireAllNonNull(group, toRemove);
+        int index = internalList.indexOf(group);
+
+        if (index == -1) {
+            throw new GroupNotFoundException();
+        } else if (!group.getPersons().contains(toRemove)) {
+            throw new PersonNotFoundException();
+        }
+
+        Set<Person> personSet = new HashSet<>();
+        for (Person p : group.getPersons()) {
+            if (!p.equals(toRemove)) {
+                personSet.add(p);
+            }
+        }
+
+        Group editedGroup = createEditedGroup(group, personSet, false);
+        internalList.set(index, editedGroup);
+    }
+
+    /**
      * Adds persons to a group in the list.
      * The person must not already exist in the list.
      */
@@ -114,7 +142,7 @@ public class UniqueGroupList implements Iterable<Group> {
     public void addPersons(AddGroup toAdd) {
         requireNonNull(toAdd);
         Group target = toAdd.getGroup();
-        Group editedGroup = createEditedGroup(target, toAdd.getPersonSet());
+        Group editedGroup = createEditedGroup(target, toAdd.getPersonSet(), true);
         int index = internalList.indexOf(target);
 
         if (index == -1) {
@@ -129,13 +157,15 @@ public class UniqueGroupList implements Iterable<Group> {
      * @param personSet
      * @return
      */
-    public Group createEditedGroup(Group target, Set<Person> personSet) {
-        requireAllNonNull(target, personSet);
+    public Group createEditedGroup(Group target, Set<Person> personSet, Boolean addPerson) {
+        requireAllNonNull(target, personSet, addPerson);
         Set<Tag> editedGroupTagSet = new HashSet<>();
         editedGroupTagSet.addAll(target.getTags());
         Group editedGroup = new Group (new GroupName(target.getGroupName().groupName),
                 new GroupLocation(target.getGroupLocation().groupLocation), editedGroupTagSet);
-        editedGroup.addPersons(target.getPersons());
+        if (addPerson) {
+            editedGroup.addPersons(target.getPersons());
+        }
         editedGroup.addPersons(personSet);
 
         return editedGroup;
