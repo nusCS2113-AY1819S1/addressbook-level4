@@ -24,7 +24,6 @@ import seedu.recruit.logic.commands.EditCandidateCommand;
 import seedu.recruit.logic.commands.EditCompanyCommand;
 import seedu.recruit.logic.commands.EditJobDetailsCommand;
 import seedu.recruit.logic.commands.ExitCommand;
-import seedu.recruit.logic.commands.FilterCommand;
 import seedu.recruit.logic.commands.FindCandidateCommand;
 import seedu.recruit.logic.commands.FindCompanyCommand;
 import seedu.recruit.logic.commands.HelpCommand;
@@ -156,7 +155,7 @@ public class RecruitBookParser {
 
             case FindCompanyCommand.COMMAND_WORD:
                 return new FindCompanyCommandParser().parse(arguments);
-
+                
             case HistoryCommand.COMMAND_WORD:
                 return new HistoryCommand();
 
