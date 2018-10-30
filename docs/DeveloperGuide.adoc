@@ -387,7 +387,7 @@ For this command, 5 classes were created, LoanerDescription, LoanListParser, Loa
 * The LoanListParser class takes in the input string from the user, parses it into the LoanerDescription, and returns a new LoanListCommand.
 * For the LoanListCommand, the execute method creates a XmlAdaptedLoanerDescription object from the LoanerDescription and adds it into the XmlAdaptedLoanList. This is then saved inside the storage. The ChangeStatusCommand is then called to change the status from Ready to On_Loan.
 
-image::Status.png[width="800"]
+image::LoanListDiagram.png[width="800"]
 
 // end::loanList[]
 
