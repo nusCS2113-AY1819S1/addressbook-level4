@@ -60,10 +60,8 @@ public class LostandFoundCommand extends Command {
                     ": "
                     + simpleItem.getQuantity().toString()
                     + "\n"
-                    + "      ";
-            if (counter != lostItems.size()) {
-                messageOutput += ", ";
-            }
+                    + "        ";
+
         }
 
         return messageOutput;

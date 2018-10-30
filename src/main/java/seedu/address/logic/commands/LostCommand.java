@@ -17,7 +17,7 @@ import seedu.address.model.item.Loststatus;
 import seedu.address.model.item.Quantity;
 
 
-//@@author He Haowei
+//@@author HeHaowei
 
 /**
  * Lost an existing item in the stock list.
