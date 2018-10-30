@@ -27,7 +27,7 @@ import seedu.address.model.drink.exceptions.InsufficientQuantityException;
  */
 public class UniqueBatchList implements Iterable<Batch> {
     private final ObservableList<Batch> internalList = FXCollections.observableArrayList();
-    private Quantity totalQuantity;
+    private Quantity totalQuantity = new Quantity("0");
 
     public Quantity getTotalQuantity() {
         return totalQuantity;
