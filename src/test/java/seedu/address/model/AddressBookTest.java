@@ -19,8 +19,6 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.budgetelements.ClubBudgetElements;
-import seedu.address.model.clubbudget.FinalClubBudget;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
@@ -98,10 +96,6 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
-
-        private final ObservableList<ClubBudgetElements> clubs = FXCollections.observableArrayList();
-
-        private final ObservableList<FinalClubBudget> clubBudgets = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
