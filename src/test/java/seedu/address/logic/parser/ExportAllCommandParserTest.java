@@ -15,14 +15,14 @@ public class ExportAllCommandParserTest {
     private ExportAllCommandParser parser = new ExportAllCommandParser();
 
     @Test
-    public void parseFiletypeSuccess() {
+    public void parse_filetype_success() {
         final String userInput = "csv";
         final Filetype filetype = new Filetype(userInput);
         assertParseSuccess(parser, userInput, new ExportAllCommand(filetype));
     }
 
     @Test
-    public void parseMissingNotNullFieldFailure() {
+    public void parse_missingNotNullField_failure() {
         // no parameters
         final String userInput = ExportAllCommand.COMMAND_WORD + " ";
         final String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportAllCommand.MESSAGE_USAGE);

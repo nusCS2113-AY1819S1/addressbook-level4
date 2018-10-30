@@ -325,11 +325,11 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ==== Current Implementation
 
 The exportall mechanism is facilitated by `CsvWriter`. Internally, a CSVWriter object from the http://opencsv.sourceforge.net/[OpenCSV]
-library is instantiated to write all persons to the default file path `/data/pineapple.csv`. Currently, it implements
+library is instantiated to write all persons to the default file path `/data/addressbook.csv`. Currently, it implements
  the following operation(s):
 
 * `CsvWriter#write()` -- Writes the name, phone, address, and email of all persons in the current address book to
-`/data/pineapple.csv`, and overwrites the file if an older version is available.
+`/data/addressbook.csv`, and overwrites the file if an older version is available.
 
 This operation is exposed in the `Model` interface as `Model#exportAddressBook()`.
 
@@ -351,10 +351,10 @@ Step 6. The Model interface creates a new CsvWriter object and invokes the metho
 Step 7. The CsvWriter writes the data to the defined file path.
 
 [NOTE]
-The file path is defined in `outputFilepath`, and is hardcoded as `/data/pineapple.csv` for now.
+The file path is defined in `outputFilepath`, and is hardcoded as `/data/addressbook.csv` for now.
 
 [NOTE]
-Any existing file named as `pineapple.csv` at the defined path will be overwritten.
+Any existing file named as `addressbook.csv` at the defined path will be overwritten.
 
 The following sequence diagram shows how the ExportAll operation works:
 

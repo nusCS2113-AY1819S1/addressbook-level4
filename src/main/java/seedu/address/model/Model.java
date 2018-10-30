@@ -91,6 +91,11 @@ public interface Model {
      */
     void exportAddressBook() throws IOException;
 
+    /**
+     * Exports the given person to a .csv file.
+     */
+    void exportPerson(Person person) throws IOException;
+
     /** Returns an unmodifiable view of the filtered todo task list */
     ObservableList<Todo> getFilteredTodoList();
 

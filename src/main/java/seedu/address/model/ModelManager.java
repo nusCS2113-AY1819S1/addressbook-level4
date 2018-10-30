@@ -28,6 +28,8 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Todo> filteredTodos;
 
+    private final UserPrefs userPrefs;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -40,6 +42,8 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         filteredTodos = new FilteredList<>(versionedAddressBook.getTodoList());
+
+        this.userPrefs = userPrefs;
     }
 
     public ModelManager() {
@@ -179,7 +183,14 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Import/ Export ==============================================================================
     @Override
     public void exportAddressBook() throws IOException {
-        CsvWriter csvWriter = new CsvWriter(getFilteredPersonList());
+        CsvWriter csvWriter = new CsvWriter(versionedAddressBook.getPersonList(), userPrefs.getExportCsvFilePath());
+        csvWriter.write();
+    }
+
+    @Override
+    public void exportPerson(Person person) throws IOException {
+        requireNonNull(person);
+        CsvWriter csvWriter = new CsvWriter(person, userPrefs.getExportCsvFilePath());
         csvWriter.write();
     }
 
