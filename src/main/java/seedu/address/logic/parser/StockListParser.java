@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddTagCommand;
 import seedu.address.logic.commands.ChangeStatusCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -15,11 +16,15 @@ import seedu.address.logic.commands.DeleteLoanListCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FoundCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.LoanListCommand;
 import seedu.address.logic.commands.LoginCommand;
+import seedu.address.logic.commands.LostCommand;
+import seedu.address.logic.commands.LostandFoundCommand;
+import seedu.address.logic.commands.OpenCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SaveCommand;
 import seedu.address.logic.commands.SelectCommand;
@@ -58,12 +63,20 @@ public class StockListParser {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
+        case AddTagCommand.COMMAND_WORD:
+            return new AddTagCommandParser().parse(arguments);
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+        case LostCommand.COMMAND_WORD:
+            return new LostCommandParser().parse(arguments);
+        case FoundCommand.COMMAND_WORD:
+            return new FoundCommandParser().parse(arguments);
+        case LostandFoundCommand.COMMAND_WORD:
+            return new LostandFoundCommand();
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
         case FindCommand.COMMAND_WORD:
@@ -94,6 +107,8 @@ public class StockListParser {
             return new ChangeStatusCommandParser().parse(arguments);
         case SaveCommand.COMMAND_WORD:
             return new SaveCommandParser().parse(arguments);
+        case OpenCommand.COMMAND_WORD:
+            return new OpenCommandParser().parse(arguments);
         case TagCommand.COMMAND_WORD:
             return new TagCommandParser().parse(arguments);
         default:

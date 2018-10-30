@@ -10,7 +10,7 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Item in the address book.
+ * Represents a Item in the Stock List.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Item {
@@ -23,6 +23,7 @@ public class Item {
 
     // Data fields
     private final Status status = new Status();
+    private final Loststatus loststatus = new Loststatus();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -34,6 +35,7 @@ public class Item {
         this.quantity = quantity;
         this.minQuantity = minQuantity;
         this.status.setDefaultValues(quantity.toInteger());
+        this.loststatus.setDefaultValues(quantity.toInteger());
         this.tags.addAll(tags);
     }
 
@@ -45,6 +47,16 @@ public class Item {
         this.status.setStatusReady(status.getStatusReady());
         this.status.setStatusOnLoan(status.getStatusOnLoan());
         this.status.setStatusFaulty(status.getStatusFaulty());
+        this.tags.addAll(tags);
+    }
+
+    public Item(Name name, Quantity quantity, Quantity minQuantity, Loststatus loststatus, Set<Tag> tags) {
+        requireAllNonNull(name, quantity, minQuantity, tags);
+        this.name = name;
+        this.quantity = quantity;
+        this.minQuantity = minQuantity;
+        this.loststatus.setLoststatusFound(loststatus.getLoststatusFound());
+        this.loststatus.setLoststatusLost(loststatus.getLoststatusLost());
         this.tags.addAll(tags);
     }
 
@@ -63,6 +75,9 @@ public class Item {
     public Status getStatus() {
         return status;
     }
+
+    public Loststatus getLoststatus() {
+        return loststatus; }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -106,7 +121,7 @@ public class Item {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, quantity, minQuantity, status, tags);
+        return Objects.hash(name, quantity, minQuantity, status, loststatus, tags);
     }
 
     @Override
@@ -125,6 +140,8 @@ public class Item {
                 .append(getStatus().getStatusOnLoan())
                 .append(", Faulty | ")
                 .append(getStatus().getStatusFaulty())
+                .append(", Lost | ")
+                .append(getLoststatus().getLoststatusLost())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

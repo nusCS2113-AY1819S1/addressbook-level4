@@ -83,10 +83,10 @@ Examples:
 * `add n/Arduino q/20 m/5 t/Lab1 t/Lab2`
 
 
-=== Updating an item : `update`
+=== Editing an item : `edit`
 
-Updates an existing item in the stock list +
-Format: `update INDEX n/NAME [q/QUANTITY] [m/MINIMUM_QUANTITY] [t/TAG]`
+Edits an existing item in the stock list +
+Format: `edit INDEX n/NAME [q/QUANTITY] [m/MINIMUM_QUANTITY] [t/TAG]`
 
 ****
 * Edits the person at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​
@@ -97,7 +97,7 @@ Format: `update INDEX n/NAME [q/QUANTITY] [m/MINIMUM_QUANTITY] [t/TAG]`
 ****
 Examples:
 
-* `update 1 n/Arduino q/25 t/Lab7 t/Lab8` +
+* `edit 1 n/Arduino q/25 t/Lab7 t/Lab8` +
 Edits the name, quantity and tags of the 1st item to be `Arduino`, `25` and `Lab7`, `Lab8` respectively.
 
 === Deleting an item : `delete`
@@ -110,9 +110,9 @@ Examples:
 * `delete 1 q/20` +
 Decreases the quantity of the 1st item by 20
 
-=== Listing all items : `all`
+=== Listing all items : `list`
 Shows all items in the stock list +
-Format: `all`
+Format: `list`
 
 
 === Locating items by name: `find`
@@ -172,15 +172,25 @@ Examples:
 * `deleteLoanList 1` +
 The first entry as shown on the viewLoanList command will be deleted. The status of the item will be automatically changed back to ready
 
-=== Listing items under a specific tag: `tag`
+=== Listing items under specific tags: `tag`
 
 Finds and lists items whose tags contain any of the given keywords. This command is case insensitive +
 Format: `tag KEYWORD [MORE_KEYWORDS]
 
 Examples:
 
-* `tag Lab1` +
-Returns the items whose tags includes "Lab1"
+* `tag Lab1 Lab2` +
+Returns the items whose tags includes "Lab1" or "Lab2"
+
+=== Add tags to one item: `addTag`
+
+Add one or multiple tags to one item in the stock list by its index. +
+Format: `addTag INDEX t/ TAG [MORE_TAGS]`
+
+Examples:
+
+* `addTag 1 t/ Lab3 t/ Lab4` +
+Add tags "Lab3" and "Lab4" to the item with index 1
 
 === Listing entered commands : `history`
 
@@ -222,28 +232,28 @@ The `undo` command fails as there are no undoable commands executed previously.
 === Lost an item: `lost`
 
 Lost an item From the stock list +
-Format: `lost n/NAME [q/QUANTITY]`
+Format: `lost INDEX [q/QUANTITY]`
 
 
 
 Examples:
 
-* `lost n/Arduino q/25`
+* `lost 1 q/25`
 
 === Found an item: `found`
 
 Found an item From the Lost&Found List +
-Format: `found n/NAME [q/QUANTITY]`
+Format: `found INDEX [q/QUANTITY]`
 
 
 
 Examples:
 
-* `found n/Arduino q/25`
+* `found index q/25`
 
 === Listing Lost&Found List: `lost&found`
 
-Shows the number of every item that has been lost +
+Shows the number of every lost item that has been lost +
 Format: `lost&found`
 
 
@@ -330,10 +340,10 @@ e.g. `login u/jalil p/dontworrybrother`
 * *Undo* : `undo`
 * *Update* : `update INDEX n/NAME [q/QUANTITY] [m/MINIMUM_QUANTITY] [t/TAG]` +
 e.g. `update 1 n/Arduino q/25 t/Lab7 t/Lab8`
-* *Lost* : `lost n/NAME [q/QUANTITY]` +
-e.g. `lost n/Arduino q/25`
-* *Found* : `found n/NAME [q/QUANTITY]` +
-e.g. `found n/Arduino q/25`
+* *Lost* : `lost INDEX [q/QUANTITY]` +
+e.g. `lost 1 q/25`
+* *Found* : `found INDEX [q/QUANTITY]` +
+e.g. `found 1 q/25`
 * *Lost&Found List* : `lost&found`
 * *Tag* : `tag KEYWORD [MORE_KEYWORDS]` +
 e.g. `tag Lab1`
