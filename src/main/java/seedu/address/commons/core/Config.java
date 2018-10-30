@@ -16,7 +16,8 @@ public class Config {
     private String appTitle = "Address App";
     private Level logLevel = Level.INFO;
     private Path userPrefsFilePath = Paths.get("preferences.json");
-    private Path userLoginInfoFilePath = Paths.get("loginInfoManager.json");
+    private Path userLoginInfoFilePath = Paths.get("loginInfoList.json");
+
     private Path loginPagePath = Paths.get ("LoginPage.fxml");
 
 
