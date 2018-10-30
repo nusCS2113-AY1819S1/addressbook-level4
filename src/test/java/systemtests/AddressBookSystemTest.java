@@ -76,7 +76,7 @@ public abstract class AddressBookSystemTest {
         assertApplicationStartingStateIsCorrect();
 
         //To login in with test account
-        getCommandBox().run("login test test");
+        // getCommandBox().run("login test test");
     }
 
     @After
