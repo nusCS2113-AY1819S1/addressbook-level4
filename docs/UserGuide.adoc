@@ -173,7 +173,7 @@ Deletes the book with the corresponding iSBN13 from the inventory list.
 === Deleting a request : `deleterequest`
 
 Deletes the specified request from the request list. Strictly for bookstore owners. +
-Format: `delete INDEX` OR `delete i/ISBN13`
+Format: `delete INDEX`
 
 Examples:
 
