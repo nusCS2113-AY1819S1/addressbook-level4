@@ -24,7 +24,6 @@ import seedu.address.model.request.RequestCommand;
 import seedu.address.model.request.RequestListParser;
 import seedu.address.model.request.RequestModel;
 import seedu.address.model.request.UndoRequestCommand;
-import seedu.address.model.request.ViewRequestCommand;
 
 /**
  * The main LogicManager of the app.
