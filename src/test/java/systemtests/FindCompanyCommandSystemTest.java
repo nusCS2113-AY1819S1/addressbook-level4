@@ -16,10 +16,10 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.recruit.commons.core.index.Index;
-import seedu.recruit.logic.commands.DeleteCommand;
+import seedu.recruit.logic.commands.DeleteCompanyCommand;
 import seedu.recruit.logic.commands.FindCompanyCommand;
-import seedu.recruit.logic.commands.RedoCommand;
-import seedu.recruit.logic.commands.UndoCommand;
+import seedu.recruit.logic.commands.RedoCompanyBookCommand;
+import seedu.recruit.logic.commands.UndoCompanyBookCommand;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.tag.Tag;
 
@@ -33,7 +33,8 @@ public class FindCompanyCommandSystemTest extends CompanyBookSystemTest {
          */
         String command = "   " + FindCompanyCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_WHEELER + "   ";
         Model expectedModel = getModel();
-        ModelHelper.setCompanyFilteredList(expectedModel, AUDI, BENTLEY); // first names of Audi and Bentley are "Wheeler"
+        ModelHelper.setCompanyFilteredList(
+                expectedModel, AUDI, BENTLEY); // first names of Audi and Bentley are "Wheeler"
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -44,8 +45,9 @@ public class FindCompanyCommandSystemTest extends CompanyBookSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /** Case: find company where company list is not
-         *  displaying the company we are finding -> 1 company found */
+        /* Case: find company where company list is not
+         * displaying the company we are finding -> 1 company found
+         */
         command = FindCompanyCommand.COMMAND_WORD + " Chevrolet";
         ModelHelper.setCompanyFilteredList(expectedModel, CHEVROLET);
         assertCommandSuccess(command, expectedModel);
@@ -75,17 +77,17 @@ public class FindCompanyCommandSystemTest extends CompanyBookSystemTest {
         assertSelectedCardUnchanged();
 
         /* Case: undo previous find command -> rejected */
-        command = UndoCommand.COMMAND_WORD;
-        String expectedResultMessage = UndoCommand.MESSAGE_FAILURE;
+        command = UndoCompanyBookCommand.COMMAND_WORD;
+        String expectedResultMessage = UndoCompanyBookCommand.MESSAGE_FAILURE;
         assertCommandFailure(command, expectedResultMessage);
 
         /* Case: redo previous find command -> rejected */
-        command = RedoCommand.COMMAND_WORD;
-        expectedResultMessage = RedoCommand.MESSAGE_FAILURE;
+        command = RedoCompanyBookCommand.COMMAND_WORD;
+        expectedResultMessage = RedoCompanyBookCommand.MESSAGE_FAILURE;
         assertCommandFailure(command, expectedResultMessage);
 
         /* Case: find same companies in recruit book after deleting 1 of them -> 1 company found */
-        executeCommand(DeleteCommand.COMMAND_WORD + " 1");
+        executeCommand(DeleteCompanyCommand.COMMAND_WORD + " 1");
         assertFalse(getModel().getCandidateBook().getCandidateList().contains(BENTLEY));
         command = FindCompanyCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_WHEELER;
         expectedModel = getModel();
@@ -137,17 +139,17 @@ public class FindCompanyCommandSystemTest extends CompanyBookSystemTest {
         assertSelectedCardUnchanged();
 
         /* Case: find while a company is selected -> selected card deselected */
-        showAllPersons();
-        selectPerson(Index.fromOneBased(1));
-        assertFalse(getCompanyListPanel().
-                getHandleToSelectedCard().getName().equals(DODGE.getCompanyName().value));
+        showAllCompanies();
+        selectCompany(Index.fromOneBased(1));
+        assertFalse(getCompanyJobDetailsPanel().getHandleToSelectedCard().getName()
+                .equals(DODGE.getCompanyName().value));
         command = FindCompanyCommand.COMMAND_WORD + " Dodge";
         ModelHelper.setCompanyFilteredList(expectedModel, DODGE);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardDeselected();
 
         /* Case: find company in empty recruit book -> 0 companies found */
-        deleteAllPersons();
+        deleteAllCompanies();
         command = FindCompanyCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_WHEELER;
         expectedModel = getModel();
         ModelHelper.setCompanyFilteredList(expectedModel, DODGE);
@@ -161,8 +163,8 @@ public class FindCompanyCommandSystemTest extends CompanyBookSystemTest {
 
     /**
      * Executes {@code command} and verifies that the command box displays an empty string, the result display
-     * box displays {@code Messages#MESSAGE_COMPANIES_LISTED_OVERVIEW} with the number of companies in the filtered list,
-     * and the model related components equal to {@code expectedModel}.
+     * box displays {@code Messages#MESSAGE_COMPANIES_LISTED_OVERVIEW} with the number of companies in the filtered
+     * list, and the model related components equal to {@code expectedModel}.
      * These verifications are done by
      * {@code CompanyBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * Also verifies that the status bar remains unchanged, and the command box has the default style class, and the
@@ -190,7 +192,6 @@ public class FindCompanyCommandSystemTest extends CompanyBookSystemTest {
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();
-
         executeCommand(command);
         assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
         assertSelectedCardUnchanged();
