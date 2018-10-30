@@ -1,4 +1,4 @@
-:product_name : DRINK I/O
+:product_name : Drink I/O
 = AddressBook Level 4 - User Guide
 :site-section: UserGuide
 :toc:
@@ -20,10 +20,9 @@ By: `CS2113T-W12-4`      Since: `Jun 2016`      Licence: `MIT`
 
 == Introduction
 
-{product_name} is a desktop application that helps you to manage your drinks distribution company. You can use <product name> to keep track of your inventory, analyse your company’s sales performance and set reminders to help you import more goods should their stocks fall low. <product name> is optimised for Command Line Interface (CLI), allowing you to _____do your work____ faster than traditional Graphical User Interface (GUI) apps, while retaining the benefits of a GUI.
+*[blue]#_Drink I/O_#* is a desktop application that helps you to manage your drinks distribution company. You can use it to keep track of your inventory, analyse your company’s sales performance and set reminders to help you import more goods should their stocks fall low. *[blue]#_Drink I/O_#* is optimised for the Command Line Interface (CLI), allowing you to do your work faster than when using traditional Graphical User Interface (GUI) apps, while retaining the benefits of a GUI.
 
-This user guide provides comprehensive documentation on the {product_name} setup process, the commands you can use and ____. Choose a topic from the Table of Contents (link) to find answers, get instructions and learn to improve your workflow with {product_name}.
-
+This user guide provides comprehensive documentation on the *[blue]#_Drink I/O_#* setup process, the commands you can use and the features available to you. Choose a topic from the Table of Contents (link) to find answers, get instructions and learn how to improve your workflow with *[blue]#_Drink I/O_#*.
 
 == Quick Start
 
@@ -49,9 +48,58 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 == Getting Started
 
 === Logging in
+
+Upon entering starting up the application, you will be met by the login page below:
+
+image::loginPic/login_page_main.PNG[width="800"]
+
+To login, you can use either the CLI or GUI to input your `USERNAME` and `PASSWORD`.
+
+*GUI Login*
+
+. Enter your `USERNAME` and `PASSWORD` into the respective username and password fields
+
+. Click on the kbd:[LOGIN] button
+
+*CLI Login*
+
+. Enter your `USERNAME` and `PASSWORD` into the terminal in this format
+
+.. Format: `USERNAME` `PASSWORD`
+
+. Press the kbd:[ENTER] key
+
+
+[NOTE]
+Both username and password are single words. No spaces are allowed in username or password.
+
+[.example]
+====
+[example-title]#Examples for CLI input:#
+
+* [example]#`tester 123`# +
+* [example]#`stocktaker 123`# +
+====
+[NOTE]
+====
+The example provided is a default login account for admins. This account is created only for testing purposes.
+====
+
+After successfully logging in, a confirmation message would be shown indicating your authentication level:
+
+image::loginPic/login_confirmation.PNG[width="300"]
 === Logging out
+Logging out of the application will bring you back to the login screen.
+
+. To log out, enter the following command into the command bar
+
+.. Command format: `logout`
+
+. Press the kbd:[ENTER] key
 
 == Types of Users
+In small drink distribution companies, the workload can generally be split into 3 roles,
+
 === Stocktaker
 === Accountant
 === Administrator
@@ -64,6 +112,11 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 == Managing Your Inventory
 
 === Adding new items
+
+To add new drinks into your company's offer listing, you can carry out the steps below:
+
+
+
 === Searching for an item
 === Viewing all items in inventory
 === Viewing item details
@@ -96,43 +149,6 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters in square bracket are optional
 ====
 === Global Command
-==== Login:
-image::loginPic/login_page_main.PNG[width="800"]
-====
-[noteblock-title]#*User Parameters*#
-. At the login page, enter username and password using either the CLI or GUI
-. Clicked Login Button
-====
-
-[.format]
-====
-Format: `USERNAME PASSWORD`
-====
-
-[NOTE]
-====
-Both username and password are single words. No spaces are allowed in username or password.
-====
-
-[.example]
-====
-[example-title]#Examples:#
-
-* [example]#`tester 123`# +
-* [example]#`stocktaker 123`# +
-[NOTE]
-====
-The example provided is a default login account for admins. This account is only created for testing purposes.
-====
-
-After login in, a confirmation message would be shown indicating your authentication level.
-
-image::loginPic/login_confirmation.PNG[width="300"]
-
-====
-Exiting Program: `logout`
-Return user to the login page.
-Format: `logout`
 
 ==== Exiting Program: `exit`
 Exits program.
