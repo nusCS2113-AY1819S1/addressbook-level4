@@ -83,8 +83,9 @@ public class LostCommand extends Command {
 
         Integer updatedValue = lostDescriptor.getLostQuantity();
         Integer initialValue = itemToLost.getQuantity().toInteger();
-        if (initialValue - updatedValue <0) throw new CommandException(MESSAGE_INVALID_QUANTITY);
-
+        if (initialValue - updatedValue < 0) {
+            throw new CommandException(MESSAGE_INVALID_QUANTITY);
+        }
         updatedLost += updatedValue;
         updatedFound -= updatedValue;
         updatedLoststatus = new Loststatus(updatedLost, updatedFound);

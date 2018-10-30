@@ -86,7 +86,9 @@ public class FoundCommand extends Command {
 
         updatedLost -= updatedValue;
         updatedFound += updatedValue;
-        if (updatedLost < 0) throw new CommandException(MESSAGE_INVALID_QUANTITY);
+        if (updatedLost < 0) {
+            throw new CommandException(MESSAGE_INVALID_QUANTITY);
+        }
         updatedLoststatus = new Loststatus(updatedLost, updatedFound);
 
         Quantity updatedQuantity = new Quantity(Integer.toString(initialValue + updatedValue));
