@@ -65,7 +65,6 @@ public class UnregisterCommand extends Command {
         Event registeredEvent = createEditedEvent(eventToUnregister, registerEventDescriptor);
 
         model.updateEvent(eventToUnregister, registeredEvent);
-        model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         model.commitEventManager();
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));

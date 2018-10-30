@@ -66,7 +66,6 @@ public class RegisterCommand extends Command {
         Event registeredEvent = createEditedEvent(eventToRegister, registerEventDescriptor);
 
         model.updateEvent(eventToRegister, registeredEvent);
-        model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         model.commitEventManager();
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
