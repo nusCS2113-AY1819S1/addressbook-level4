@@ -188,7 +188,7 @@ image::LogicClassDiagram.png[width="800"]
 link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
 .  `Logic` uses the `AddressBookParser` class to parse the user command.
-.  The userInput is processed by a Natural Language Processor and the relevant data is parsed into its corresponding classes
+.  The userInput is processed by a Natural Language Processor and Suggestion component and the relevant data is parsed into its corresponding classes
 .  This results in a `Command` object which is executed by the `LogicManager`.
 .  The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
@@ -418,6 +418,18 @@ The todo mechanism is facilitated by the `TodoComand` from the `Logic` component
 ** Pros: Easy to implement and write the test as it checks for both the title and the content of a to-do task
 ** Cons: This implementation may store too many similiar to-do tasks.
 // end::todo[]
+
+//tag::suggestion[]
+=== Suggestions Feature
+Gives helpful suggestions to users on commands to type.
+
+==== Current Implementation
+There are two instances when suggestions are given.
+
+Firstly, when a user completes entering a command (after pressing ENTER key), if the command typed is invalid, the system will suggest a similar command based on the edit distance.
+
+The second instance would be when the user presses tab while typing the command halfway. The system will suggest commands based on the current prefix string.
+//end::suggestion[]
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
