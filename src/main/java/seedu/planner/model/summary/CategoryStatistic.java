@@ -52,5 +52,14 @@ public class CategoryStatistic {
     private boolean isExpense(Record record) {
         return record.getMoneyFlow().toDouble() < 0;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof CategoryStatistic // instanceof handles nulls
+                && tags.equals(((CategoryStatistic) other).tags)
+                && totalIncome.equals(((CategoryStatistic) other).totalIncome)
+                && totalExpense.equals(((CategoryStatistic) other).totalExpense));
+    }
 }
 
