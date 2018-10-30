@@ -11,7 +11,7 @@ import org.junit.Test;
 import seedu.recruit.logic.commands.FindCandidateCommand;
 import seedu.recruit.model.candidate.NameContainsKeywordsPredicate;
 
-public class FindCommandParserTest {
+public class FindCandidateCommandParserTest {
 
     private FindCandidateCommandParser parser = new FindCandidateCommandParser();
 

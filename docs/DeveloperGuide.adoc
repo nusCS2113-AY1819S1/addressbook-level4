@@ -229,6 +229,13 @@ Classes used by multiple components are in the `seedu.recruit.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+<<<<<<< HEAD
+=== Find feature
+
+The `find` command is used to find candidates or companies stored in the address book through either the `findc` (find Candidate) or `findC` (find company).
+It extends `Command` and overrides two of its methods namely `CommandResult` and `equals`.
+
+=======
 // tag::shortlist[]
 === Shortlist Feature
 ==== Current Implementation
@@ -358,6 +365,7 @@ and returning false if the current book is Company Book.
 ** Cons: Can be confusing for multiple contributors. There is also an assumption that there are only 2 distinct
 cases of the view of `panelViewPlaceholder`, which is not the case as we introduced another view `shortlistPanel`.
 // end::switchbook[]
+>>>>>>> 8624448b95e9dc0ab978d23587b1e0c56593aeef
 
 // tag::undoredo[]
 === Undo/Redo feature
