@@ -65,8 +65,8 @@ public class UiManager extends ComponentManager implements Ui {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
         }
-        EventsCenter.getInstance().post(new NewResultAvailableEvent (
-                                            String.format (WELCOME_MESSAGE, CurrentUser.getAuthenticationLevel ())));
+        EventsCenter.getInstance().post(new NewResultAvailableEvent(
+                String.format(WELCOME_MESSAGE, CurrentUser.getAuthenticationLevel())));
     }
 
     @Override
@@ -124,14 +124,16 @@ public class UiManager extends ComponentManager implements Ui {
         showFileOperationAlertAndWait(FILE_OPS_ERROR_DIALOG_HEADER_MESSAGE, FILE_OPS_ERROR_DIALOG_CONTENT_MESSAGE,
                 event.exception);
     }
+
     @Subscribe
 
     public void handleStartUiEvent(StartUiEvent event) {
-        System.out.println ("Uievent in UI MANAGER");
+        System.out.println("Uievent in UI MANAGER");
         start(event.mainStage);
     }
+
     @Subscribe
     private void handleStopUiEvent(StopUiEvent event) {
-        stop ();
+        stop();
     }
 }
