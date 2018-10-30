@@ -3,7 +3,7 @@ package seedu.planner.commons.events.ui;
 import javafx.collections.ObservableList;
 import seedu.planner.commons.events.BaseEvent;
 import seedu.planner.model.summary.CategoryStatistic;
-
+//@@author tenvinc
 /**
  * An event that requests the pie chart panel to be displayed and created
  */

@@ -21,7 +21,7 @@ import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
 import seedu.planner.testutil.FinancialPlannerBuilder;
-
+//@@author tenvinc
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
  */

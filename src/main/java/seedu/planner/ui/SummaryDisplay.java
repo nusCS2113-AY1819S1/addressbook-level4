@@ -11,7 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.planner.commons.core.LogsCenter;
-
+//@@author tenvinc
 /**
  * This UI component is responsible for displaying the summary requested by the user
  */

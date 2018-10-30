@@ -3,7 +3,7 @@ package seedu.planner.commons.events.ui;
 import javafx.collections.ObservableList;
 import seedu.planner.commons.events.BaseEvent;
 import seedu.planner.ui.SummaryEntry;
-
+//@@author tenvinc
 /**
  * An event that requests to show the summary display
  */

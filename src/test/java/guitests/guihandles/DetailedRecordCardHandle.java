@@ -1,5 +1,6 @@
 package guitests.guihandles;
 
+import static java.lang.Double.valueOf;
 import static seedu.planner.model.record.MoneyFlow.CURRENCY;
 import static seedu.planner.model.record.MoneyFlow.MONEYFLOW_NO_SIGN_REGEX;
 import static seedu.planner.model.record.MoneyFlow.SIGN_REGEX;
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-
+//@@ author tenvinc
 /**
  * A handle to the {@code DetailedRecordCard} in the GUI
  */
@@ -55,14 +56,14 @@ public class DetailedRecordCardHandle extends NodeHandle<Node> {
     }
 
     /**
-     * Gets numerical part from a money string. Assumes the money string has S in it.
+     * Gets numerical part from a money string. Assumes the money string has $ in it.
      */
-    public String getNumericalMoneyFlow(String moneyFlow) {
+    public Double getNumericalMoneyFlow(String moneyFlow) {
         Matcher matcher = MONEY_PATTERN.matcher(moneyFlow);
         if (!matcher.matches()) {
             throw new IllegalStateException();
         }
-        return matcher.group("sign") + matcher.group("money");
+        return valueOf(matcher.group("sign") + matcher.group("money"));
     }
 
     public String getDate() {
@@ -111,7 +112,7 @@ public class DetailedRecordCardHandle extends NodeHandle<Node> {
      */
     public boolean equals(RecordCardHandle recordCardHandle) {
         return getName().equals(recordCardHandle.getName())
-                && getNumericalMoneyFlow(getMoneyFlow()).equals(recordCardHandle.getMoneyFlow())
+                && getNumericalMoneyFlow(getMoneyFlow()).equals(valueOf(recordCardHandle.getMoneyFlow()))
                 && getDate().equals(recordCardHandle.getDate())
                 && getTags().equals(recordCardHandle.getTags());
     }

@@ -9,7 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.tag.Tag;
-
+//@@author tenvinc
 /**
  * This class represents a list to store the statistics of each category within a certain time period.
  */

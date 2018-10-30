@@ -18,7 +18,7 @@ import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.ui.ShowPieChartStatsEvent;
 import seedu.planner.commons.events.ui.ShowSummaryTableEvent;
 import seedu.planner.model.summary.CategoryStatistic;
-
+//@@author tenvinc
 /**
  * This UI component is responsible for managing the tabs where the statistics will be displayed
  */
