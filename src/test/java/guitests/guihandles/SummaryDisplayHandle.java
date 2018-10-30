@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
-import seedu.planner.ui.SummaryEntry;
 //@@author tenvinc
 /**
  * Provides a handle for {@code SummaryDisplay}
@@ -29,8 +28,8 @@ public class SummaryDisplayHandle extends NodeHandle<Node> {
         return summaryTable.isVisible();
     }
 
-    public ObservableList<SummaryEntry> getSummaryTableList() {
-        ObservableList<SummaryEntry> summaryEntries = summaryTable.getItems();
+    public ObservableList getSummaryTableList() {
+        ObservableList summaryEntries = summaryTable.getItems();
         int indexOfLastEntry = summaryEntries.size() - 1;
         return FXCollections.observableList(summaryEntries.subList(0, indexOfLastEntry));
     }
