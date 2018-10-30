@@ -242,8 +242,11 @@ Examples:
 2.  This command overwrites the previous `/data/addressbook.csv`.
 ====
 
+=== Exporting all contacts displayed: `export [coming in v1.4]`
+// TODO: find first, then export csv
+
 // TODO: Add preface
-=== Exporting contact details of a selected person: `export` [coming in v1.4]
+=== Exporting contact details of a selected person: `export`
 
 Export the name, phone, address and email of the specified person from the addressbook under the specified filetype. +
 Format: `export INDEX FILETYPE`
