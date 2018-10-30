@@ -35,9 +35,9 @@ public class ImportDrinkCommandParser implements Parser<ImportDrinkCommand> {
 
         Name drinkName = ParserUtil.parseDrinkName(argMultimap.getValue(PREFIX_DRINK_NAME).get());
         Drink drink = new Drink(drinkName);
-        Quantity quantitySold = ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
+        Quantity quantityImported = ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
 
-        return new ImportDrinkCommand(drink, quantitySold);
+        return new ImportDrinkCommand(drink, quantityImported);
     }
 
     /**
