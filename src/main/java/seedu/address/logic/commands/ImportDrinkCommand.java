@@ -8,7 +8,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.drink.Drink;
-import seedu.address.model.drink.Price;
 import seedu.address.model.drink.Quantity;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.TransactionType;
@@ -46,8 +45,8 @@ public class ImportDrinkCommand extends Command {
         requireAllNonNull(drink, quantity);
         this.drink = drink;
         this.quantity = quantity;
-        transaction = new Transaction(TransactionType.IMPORT, drink, quantity, new Price("3.00"));
-        // TODO: pull the actual price from the list of drinks
+        transaction = new Transaction(TransactionType.IMPORT, drink, quantity);
+        // actual amount transacted computed at inventoryList level
     }
 
     @Override
@@ -58,7 +57,7 @@ public class ImportDrinkCommand extends Command {
             throw new CommandException(MESSAGE_DRINK_NOT_FOUND);
         }
 
-        model.sellDrink(transaction);
+        model.importDrink(transaction);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, drink.getName(), transaction.getTransactionDate(),
                 quantity));

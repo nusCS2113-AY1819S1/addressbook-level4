@@ -46,7 +46,7 @@ public class Price {
 
     @Override
     public String toString() {
-        return (Float.toString(value));
+        return String.format("%.2f", value);
     }
 
     @Override

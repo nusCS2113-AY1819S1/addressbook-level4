@@ -15,6 +15,7 @@ import seedu.address.commons.core.LoginInfo;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.InventoryListChangedEvent;
 import seedu.address.model.drink.Drink;
+import seedu.address.model.drink.Price;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.TransactionList;
 import seedu.address.model.user.Password;
@@ -142,15 +143,23 @@ public class ModelManager extends ComponentManager implements Model {
     // ========== transaction commands ====================================
     @Override
     public void sellDrink(Transaction transaction) {
+        Price defaultSalePrice = inventoryList.getDefaultSellingPrice(transaction.getDrinkTransacted());
+
+        Price defaultAmountTransacted = new Price(Float.toString(defaultSalePrice.getValue()
+                * transaction.getQuantityTransacted().getValue()));
+        transaction.setAmountMoney(defaultAmountTransacted);
         recordTransaction(transaction);
 
-        Drink drink = transaction.getDrinkTransacted();
-        Drink actualDrink = findDrinkByName(drink);
-        actualDrink.decreaseQuantity(transaction.getQuantityTransacted());
+        inventoryList.decreaseQuantity(transaction.getDrinkTransacted(), transaction.getQuantityTransacted());
     }
 
     @Override
     public void importDrink(Transaction transaction) {
+        Price defaultCostPrice = inventoryList.getDefaultCostPrice(transaction.getDrinkTransacted());
+
+        Price defaultAmountTransacted = new Price(Float.toString(defaultCostPrice.getValue()
+                * transaction.getQuantityTransacted().getValue()));
+        transaction.setAmountMoney(defaultAmountTransacted);
         recordTransaction(transaction);
 
         inventoryList.increaseQuantity(transaction.getDrinkTransacted(), transaction.getQuantityTransacted());
@@ -159,6 +168,7 @@ public class ModelManager extends ComponentManager implements Model {
     private void recordTransaction(Transaction transaction) {
         transactionList.addTransaction(transaction);
     }
+
 
     /**
      * Returns an unmodifiable view of the list of {@code Transaction} backed by the internal list of

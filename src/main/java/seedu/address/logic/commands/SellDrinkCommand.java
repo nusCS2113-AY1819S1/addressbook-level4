@@ -49,8 +49,8 @@ public class SellDrinkCommand extends Command {
         requireAllNonNull(drink, quantity);
         this.drink = drink;
         this.quantity = quantity;
-        transaction = new Transaction(TransactionType.SALE, drink, quantity, new Price("3.00"));
-        // TODO: pull the actual price from the list of drinks
+        transaction = new Transaction(TransactionType.SALE, drink, quantity);
+        // actual amount transacted is computed at inventoryList level
     }
 
     @Override

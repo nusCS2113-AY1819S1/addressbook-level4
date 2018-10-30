@@ -45,6 +45,17 @@ public class Transaction {
         id = new java.util.Date().getTime();
     }
 
+    public Transaction(TransactionType transactionType, Drink drinkTransacted,
+                       Quantity quantityTransacted) {
+        requireAllNonNull(transactionType, drinkTransacted, quantityTransacted);
+        this.transactionType = transactionType;
+        this.drinkTransacted = drinkTransacted;
+        this.quantityTransacted = quantityTransacted;
+        amountMoney = new Price("0");
+        transactionDate = new Date();
+        id = new java.util.Date().getTime();
+    }
+
     /*
     methods to implement: (other than getters cos transactions (finance) are immutable so no setters)
     1. VIEW the transaction details
@@ -72,6 +83,10 @@ public class Transaction {
 
     private long getId() {
         return id;
+    }
+
+    public void setAmountMoney(Price amountMoney) {
+        this.amountMoney = amountMoney;
     }
 
 
@@ -110,7 +125,7 @@ public class Transaction {
                 .append(getDrinkTransacted())
                 .append(", Quantity: ")
                 .append(getQuantityTransacted())
-                .append(", Amount transacted: ")
+                .append(", Amount transacted: $")
                 .append(getAmountMoney())
                 .append(", ID: ")
                 .append(getId());
