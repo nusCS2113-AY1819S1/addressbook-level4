@@ -39,7 +39,6 @@ public class ListCommandParser implements Parser<ListCommand> {
 
     /**
      * Checks if first word of the userInput is equals to "all"
-     * @param userInput
      * @return boolean true if it is equal, if not, false
      */
     private boolean parseAll(String userInput) {
@@ -48,7 +47,6 @@ public class ListCommandParser implements Parser<ListCommand> {
 
     /**
      * Checks if first word of the userInput is equals to "dep"
-     * @param userInput
      * @return boolean true if it is equal, if not, false
      */
     private boolean parseDep(String userInput) {
@@ -57,7 +55,6 @@ public class ListCommandParser implements Parser<ListCommand> {
 
     /**
      * Splits the userInput by whitespace and places it into a DepartmentContainsKeywordPredicate
-     * @param userInput
      * @return a new predicate
      */
     private DepartmentContainsKeywordsPredicate preparePredicate(String userInput) {
