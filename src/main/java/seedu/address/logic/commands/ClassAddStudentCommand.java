@@ -21,7 +21,7 @@ public class ClassAddStudentCommand extends Command {
             + " for the system. "
             + "Parameters: "
             + PREFIX_CLASS_NAME + "CLASS_NAME "
-            + PREFIX_MODULE_CODE + "MODULE_NAME "
+            + PREFIX_MODULE_CODE + "MODULE_CODE "
             + PREFIX_MATRIC + "MATRIC_NO\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CLASS_NAME + "T16 "

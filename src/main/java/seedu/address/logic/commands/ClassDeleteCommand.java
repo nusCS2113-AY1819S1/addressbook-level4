@@ -19,7 +19,7 @@ public class ClassDeleteCommand extends Command {
             + " for a module for the system. "
             + "Parameters: "
             + PREFIX_CLASS_NAME + "CLASS_NAME "
-            + PREFIX_MODULE_CODE + "MODULE_NAME "
+            + PREFIX_MODULE_CODE + "MODULE_CODE "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CLASS_NAME + "T16 "
             + PREFIX_MODULE_CODE + "CG1111 ";
