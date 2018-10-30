@@ -5,6 +5,8 @@ https://travis-ci.org/CS2113-AY1819S1-T12-3/main[image:https://travis-ci.org/CS2
 https://ci.appveyor.com/project/gaoqikai/main[image:https://ci.appveyor.com/api/projects/status/436ch41il0wo8259/branch/master?svg=true[Build status]]
 https://app.codacy.com/project/CS2113-AY1819S1-T12-3/main/dashboard[image:https://api.codacy.com/project/badge/Grade/d58395f1d4e14eab986c887e16859476[Codacy Badge]]
 https://coveralls.io/github/se-edu/addressbook-level4?branch=master[image:https://coveralls.io/repos/github/se-edu/addressbook-level4/badge.svg?branch=master[Coverage Status]]
+//https://coveralls.io/github/CS2113-AY1819S1-T12-3/main[image:https://coveralls.io/repos/github/CS2113-AY1819S1-T12-3/main/badge.svg?branch=master[Coverage Status]]
+//Above is the real one
 https://gitter.im/se-edu/Lobby[image:https://badges.gitter.im/se-edu/Lobby.svg[Gitter chat]]
 
 ifndef::env-github[]
