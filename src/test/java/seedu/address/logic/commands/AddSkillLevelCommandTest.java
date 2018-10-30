@@ -102,22 +102,18 @@ public class AddSkillLevelCommandTest {
                 new Skill(VALID_SKILL_BOB), new SkillLevel(VALID_SKILL_LEVEL_BOB));
         assertCommandFailure(addSkillCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
-    //TODO: fix this test
-    /*
+
     @Test
     public void execute_invalidSkillLevel_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
-                .withSkill(SKILL_STUB).build();
         AddSkillLevelCommand addSkillLevelCommand = new AddSkillLevelCommand(
                 INDEX_FIRST_PERSON,
-                new Skill(editedPerson.getSkill().value),
+                new Skill(firstPerson.getSkill().value),
                 new SkillLevel(INVALID_SKILL_LEVEL_AMY)
         );
         assertCommandFailure(addSkillLevelCommand, model, commandHistory, MESSAGE_SKILLLEVEL_CONSTRAINTS);
     }
-    */
     /**
      * Edit filtered list where index is larger than size of filtered list,
      * but smaller than size of address book
