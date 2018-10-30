@@ -12,6 +12,7 @@ import seedu.address.logic.commands.ChangeStatusCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteLoanListCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -19,6 +20,7 @@ import seedu.address.logic.commands.FoundCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LoanListCommand;
 import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.LostCommand;
 import seedu.address.logic.commands.LostandFoundCommand;
@@ -29,7 +31,7 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.StatusCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UndoCommand;
-
+import seedu.address.logic.commands.ViewLoanListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -83,6 +85,12 @@ public class StockListParser {
             return new ListCommand();
         case StatusCommand.COMMAND_WORD:
             return new StatusCommand();
+        case ViewLoanListCommand.COMMAND_WORD:
+            return new ViewLoanListCommand();
+        case LoanListCommand.COMMAND_WORD:
+            return new LoanListCommandParser().parse(arguments);
+        case DeleteLoanListCommand.COMMAND_WORD:
+            return new DeleteLoanListCommandParser().parse(arguments);
         case LoginCommand.COMMAND_WORD:
             return new LoginCommandParser().parse(arguments);
         case HistoryCommand.COMMAND_WORD:
