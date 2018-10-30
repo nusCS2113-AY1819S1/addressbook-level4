@@ -26,6 +26,7 @@ import seedu.address.model.expenditureinfo.Expenditure;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
+import seedu.address.testutil.Assert;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -227,6 +228,11 @@ public class AddCommandTest {
         @Override
         public void reverseTodoList() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void rankTaskDefault() {
+            throw new AssertionError("This method should not be called");
         }
 
         @Override

@@ -257,6 +257,11 @@ public class ModelManager extends ComponentManager implements Model {
         versionedTodoList.reverseTasks();
     }
 
+    @Override
+    public void rankTaskDefault() {
+        versionedTodoList.sortTaskDefault();
+    }
+
 
     //=========== Undo/Redo =================================================================================
 

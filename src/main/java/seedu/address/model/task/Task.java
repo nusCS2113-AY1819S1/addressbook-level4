@@ -68,6 +68,10 @@ public class Task {
         return date.toString().substring(0, 2);
     }
 
+    public String getNameString() {
+        return name.toString();
+    }
+
     /**
      * Returns true if both tasks are totally the same.
      * This defines a weaker notion of equality between two tasks.

@@ -98,6 +98,10 @@ public class TodoList implements ReadOnlyTodoList {
         tasks.reverseTask();
     }
 
+    public void sortTaskDefault () {
+        tasks.sortDefault();
+    }
+
     //// util methods
 
     @Override

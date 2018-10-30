@@ -121,6 +121,10 @@ public class UniqueTaskList implements Iterable<Task> {
         Collections.reverse(internalList);
     }
 
+    public void sortDefault() {
+        Collections.sort(internalList, Comparator.comparing(Task::getNameString));
+    }
+
     @Override
     public Iterator<Task> iterator() {
         return internalList.iterator();
