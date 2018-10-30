@@ -228,7 +228,88 @@ Format: `exit`
 All to-do list data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-=== Commands for expenditure tracker and calendar to be added in the near future. `[coming in v2.0]`
+=== Adding an expenditure
+
+Adds an expenditure to Expenditure Tracker +
+Format: `ET_add e/DESCRIPTION d/DATE m/MONEY c/CATEGORY`
+
+****
+* The format for `e/DESCRIPTION` must be of String format, it cannot be null or spaces.
+* The format for `d/DATE` must be DD-MM-YYYY, where DD refers to the date, MM refers to the month and YYYY refers to the year in numbers.
+* The m/MONEY field accepts both integer and floating point numbers.
+* The format for `c/CATEGORY` must be one of Food, Drink, Clothing, Electronics, DailyNecessities, Sports, Communications, Travels, Study, Office, Pets, Gifts, Entertainment, Traffic, Shopping, Beauty, Furniture.
+****
+
+Examples:
+
+* `ET_add e/Chicken rice d/12-09-2018 m/4.2 c/Food`
+
+=== Editing and expenditure : `ET_edit`
+
+Edits an existing expenditure in the Expenditure Tracker. +
+Format: `ET_edit INDEX [e/DESCRIPTION] [d/DATE] [m/MONEY] [c/CATEGORY]`
+
+****
+* Edits the expenditure at the specified `INDEX`. The index refers to the index number shown in the displayed expenditures list. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields should be provided. There will not be any changes made if no optional fields are provided.
+* Existing values will be updated to the input values.
+****
+
+Examples:
+
+* `ET_edit 1 e/Beef rice m/12.5` +
+Edits the expenditure description and money detail of thhe first expenditure in the Expenditure Tracker list to be `Beef rice` and `12.5` respectively.
+* `ET_edit 2 d/09-12-2018 c/Electronics` +
+Edits the expenditure date and category of the 2nd expenditure to be `09-12-2018` and `Electronics` respectively.
+
+=== Deleting an expenditure : `ET_delete`
+
+Deletes the specified expenditure from the Expenditure Tracker. +
+Format: `ET_delete INDEX`
+
+****
+* Deletes the expenditure at the specified `INDEX`.
+* The index refers to the index number shown in the displayed expenditures list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `ET_delete 2` +
+Deletes the 2nd expenditure in the Expenditure Tracker.
+* `ET_delete 1` +
+Deletes the 1st expenditure in the Expenditure Tracker.
+
+=== Getting advice for spending money : `ET_advice`
+
+Gives a short summary of the expenditures made so far and provides advice on how to spend a particular amount of money in the following period. +
+Format: `ET_advice m/MONEY numofdays/NUMBEROFDAYS`
+
+****
+* m/MONEY accepts both integer and floating point numbers.
+* numofdays/NUMBEROFDAYS only accepts interger which represents the number of days
+****
+
+Examples:
+
+* `ET_advice m/1000 numofdays/25` +
+Gives a short summary of the expenditures made so far and provides advice on how to spend 1000 SGD in the following 25 days.
+* `ET_advice m/240 numofdays/14` +
+Gives a short summary of the expenditures made so far and provides advice on how to spend 240 SGD in the following 14 days.
+
+=== Checking expenditures : `ET_check`
+
+Checks the status of the expenditures in a particular period and generates a graph to demonstrate how much money was spent on each unit period. +
+Format: `ET_check d/DATE d/DATE`
+
+****
+* d/DATE must be in the format of DD-MM-YYYY, where DD refers the date, MM refers the month and YYYY refers the year in numbers.
+****
+
+Examples:
+
+* `ET_check d/01-01-2017 d/01-01-2018` +
+Checks the status of the expenditures from 01-01-2017 to 01-01-2018 and generates a graph to demonstrate how much money was spent on each month.
 
 == FAQ
 

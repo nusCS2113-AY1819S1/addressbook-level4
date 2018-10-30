@@ -58,6 +58,16 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public Predicate<Expenditure> getPredicateShowExpendituresOnDate(String date) {
+        return expenditure -> (expenditure.getDate().toString().equals(date));
+    }
+
+    @Override
+    public Predicate<Expenditure> getPredicateShowExpendituresOfCategory(String category) {
+        return expenditure -> (expenditure.getCategory().toString().equals(category));
+    }
+
+    @Override
     public void resetData(ReadOnlyAddressBook newData) {
         versionedAddressBook.resetData(newData);
         indicateAddressBookChanged();

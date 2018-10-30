@@ -94,6 +94,17 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+
+        @Override
+        public Predicate<Expenditure> getPredicateShowExpendituresOnDate(String date) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Predicate<Expenditure> getPredicateShowExpendituresOfCategory(String category) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
