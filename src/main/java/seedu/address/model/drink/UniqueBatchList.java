@@ -121,23 +121,23 @@ public class UniqueBatchList implements Iterable<Batch> {
      * Updates the quantities in the batches whenever a transaction is made
      * Decreases quantities in the batches by the value specified
      * Decreases quantity in the batches by the order of date imported, with the oldest batches first
-     * @param value a valid quantity value expressed as an integer
+     * @param quantity a valid quantity value expressed as an integer
      */
-    public void updateBatchTransaction(int value) {
-        int toDecrease = value;
-        decreaseTotalQuantity(toDecrease);
+    public void updateBatchTransaction(Quantity quantity) {
+        Quantity toDecrease = quantity;
+        decreaseTotalQuantity(toDecrease.getValue());
         sortBatches();
         for (Batch b : internalList) {
             int batchQuantity = b.getBatchQuantity().getValue();
-            if (toDecrease == 0) {
+            if (toDecrease.getValue() == 0) {
                 break;
             }
-            if (toDecrease >= batchQuantity) {
+            if (toDecrease.getValue() >= batchQuantity) {
                 setBatchQuantity(b, 0);
             } else {
-                decreaseBatchQuantity(b, toDecrease);
+                decreaseBatchQuantity(b, toDecrease.getValue());
             }
-            toDecrease -= batchQuantity;
+            toDecrease.decreaseValue(batchQuantity);
         }
     }
 
