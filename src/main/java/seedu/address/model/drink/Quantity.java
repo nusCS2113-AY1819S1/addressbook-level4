@@ -41,6 +41,14 @@ public class Quantity {
         this.value = value;
     }
 
+    public void increaseValue(int value) {
+        this.value += value;
+    }
+
+    public void decreaseValue(int value) {
+        this.value -= value;
+    }
+
     @Override
     public String toString() {
         return Integer.toString(value);

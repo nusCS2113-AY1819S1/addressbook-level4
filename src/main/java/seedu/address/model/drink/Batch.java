@@ -47,6 +47,10 @@ public class Batch {
         return batchDate;
     }
 
+    public void decreaseBatchQuantity(int value) {
+        batchQuantity.decreaseValue(value);
+    }
+
     /**
      * Returns true if both batches have the same BatchId
      * This defines a weaker notion of equality between two batches.
