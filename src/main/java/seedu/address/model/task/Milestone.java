@@ -2,12 +2,11 @@ package seedu.address.model.task;
 
 //@@author JeremyInElysium
 
-import seedu.address.logic.commands.AddMilestoneCommand;
 
 /**
  * Represents a Milestone for any Task in the TaskBook
  */
-public class Milestone {
+public class Milestone implements Comparable<Milestone> {
     private final MilestoneDescription milestoneDescription;
     private final Rank rank;
 
@@ -55,6 +54,14 @@ public class Milestone {
         return other == this // short circuit if same object
                 || (other instanceof Milestone // instanceof handles nulls
                 && rank.equals(((Milestone) other).rank));
+    }
+
+    /**
+     * To ensure that the milestoneList is sorted by the rank of each milestone
+     */
+    @Override
+    public int compareTo(Milestone other) {
+        return Integer.compare(this.rank.getRankInteger(), other.rank.getRankInteger());
     }
 
     @Override

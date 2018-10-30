@@ -43,6 +43,10 @@ public class Rank {
         return this.rank;
     }
 
+    public Integer getRankInteger() {
+        return Integer.valueOf(this.rank);
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

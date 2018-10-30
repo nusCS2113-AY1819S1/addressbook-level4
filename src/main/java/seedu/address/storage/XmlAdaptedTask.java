@@ -156,7 +156,7 @@ public class XmlAdaptedTask {
         //Boolean cannot be checked for null --> if (isCompleted == null)
         final boolean modelIsCompleted = isCompleted;
 
-        final Set<Milestone> milestoneEntries = new HashSet<>();
+        final List<Milestone> milestoneEntries = new ArrayList<Milestone>();
         if (milestonelist != null && !milestonelist.isEmpty()) {
             for (XmlAdaptedMilestone entry : milestonelist) {
                 milestoneEntries.add(entry.toModelType());

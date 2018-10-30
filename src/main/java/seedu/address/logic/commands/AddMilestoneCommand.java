@@ -67,7 +67,7 @@ public class AddMilestoneCommand extends Command implements CommandParser {
         }
 
         Task taskToEdit = lastShownList.get(index.getZeroBased());
-        
+
         for (Milestone temp: taskToEdit.getMilestoneList()) {
             if (temp.getRank().equals(toAdd.getRank())) {
                 throw new CommandException(MESSAGE_DUPLICATE_RANK);

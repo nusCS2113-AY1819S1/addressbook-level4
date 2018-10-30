@@ -1,9 +1,6 @@
 package seedu.address.model.task;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Represents a Task in the address book.
@@ -20,7 +17,7 @@ public class Task {
     private boolean isCompleted = false;
     private final int expectedNumOfHours;
     private int completedNumOfHours;
-    private final Set<Milestone> milestoneList = new HashSet<>();
+    private final List<Milestone> milestoneList = new ArrayList<Milestone>();
     public Task(Deadline deadline, String moduleCode, String title, String description, PriorityLevel priorityLevel,
                 int expectedNumOfHours) {
         this.deadline = deadline;
@@ -32,7 +29,8 @@ public class Task {
     }
 
     public Task(Deadline deadline, String moduleCode, String title, String description, PriorityLevel priorityLevel,
-                int expectedNumOfHours, int completedNumOfHours, boolean isCompleted, Set<Milestone> milestoneList) {
+                int expectedNumOfHours, int completedNumOfHours, boolean isCompleted,
+                List<Milestone> milestoneList) {
         this.deadline = deadline;
         this.moduleCode = moduleCode;
         this.title = title;
@@ -147,15 +145,17 @@ public class Task {
     public Task addMilestone(Milestone milestone) {
         Task taskWithMilestones = new Task(this);
         taskWithMilestones.milestoneList.add(milestone);
+        Collections.sort(taskWithMilestones.milestoneList);
         return taskWithMilestones;
     }
 
     /**
      * @return list of milestones for the task.
      */
-    public Set<Milestone> getMilestoneList() {
-        return Collections.unmodifiableSet(milestoneList);
+    public List<Milestone> getMilestoneList() {
+        return Collections.unmodifiableList(milestoneList);
     }
+
     /**
      * Returns true if both tasks have the same data fields.
      * This defines a stronger notion of equality between two tasks.
