@@ -60,7 +60,7 @@ public class AddTestMarksCommandTest {
                 new NameContainsKeywordsPredicate(nameKeywordsList);
 
         CommandResult commandResult = new AddTestMarksCommand(nameContainsKeywordsPredicate,
-                VALID_TEST_NAME_AMY,VALID_TEST_AMY_MARKS,nameKeywordsList).execute(modelStub, commandHistory);
+                VALID_TEST_NAME_AMY, VALID_TEST_AMY_MARKS, nameKeywordsList).execute(modelStub, commandHistory);
 
         assertEquals(Messages.MESSAGE_ADDED_TEST_LIST, commandResult.feedbackToUser);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
@@ -104,23 +104,25 @@ public class AddTestMarksCommandTest {
         addTestMarksCommand.execute(modelStub, commandHistory);
 
     }
-//TODO
-//    @Test
-//    public void execute_duplicatePerson_throwsCommandException() throws Exception {
-//
-//        ModelStubAcceptingTestAdded modelStub = new ModelStubAcceptingTestAdded();
-//
-//        Person validPerson = new PersonBuilder().withName("Jeff Alice").build();
-//        String[] nameKeywords = validPerson.getName().fullName.split("\\s+");
-//        List<String> nameKeywordsList =
-//                new ArrayList<>(Arrays.asList(nameKeywords));
-//        NameContainsKeywordsPredicate nameContainsKeywordsPredicate = new NameContainsKeywordsPredicate(nameKeywordsList);
-//        AddTestMarksCommand addTestMarksCommand = new AddTestMarksCommand(nameContainsKeywordsPredicate,VALID_TEST_NAME_AMY,VALID_TEST_AMY_MARKS,nameKeywordsList);
-//        thrown.expect(CommandException.class);
-//        thrown.expectMessage(AddTestMarksCommand.MESSAGE_PERSON_DUPLICATE_FOUND);
-//        addTestMarksCommand.execute(modelStub, commandHistory);
-//
-//    }
+
+    //    @Test
+    //    public void execute_duplicatePerson_throwsCommandException() throws Exception {
+    //
+    //        ModelStubAcceptingTestAdded modelStub = new ModelStubAcceptingTestAdded();
+    //
+    //        List<String> nameKeywordsList = new ArrayList<>();
+    //        nameKeywordsList.add("Alice");
+    //        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
+    // new NameContainsKeywordsPredicate(nameKeywordsList);
+    //
+    //        AddTestMarksCommand addTestMarksCommand =
+    // new AddTestMarksCommand(nameContainsKeywordsPredicate,VALID_TEST_NAME_AMY,VALID_TEST_MARK_AMY,nameKeywordsList);
+    //        Person newPerson = new PersonBuilder().withName("Alice Yang").build();
+    //        thrown.expect(CommandException.class);
+    //        thrown.expectMessage(AddTestMarksCommand.MESSAGE_PERSON_DUPLICATE_FOUND);
+    //        addTestMarksCommand.execute(modelStub, commandHistory);
+    //
+    //    }
 
     @Test
     public void equals() {
@@ -171,8 +173,8 @@ public class AddTestMarksCommandTest {
      */
     private class ModelStubAcceptingTestAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
-        Person validPerson = new PersonBuilder().build();
-        Person validPerson2 = new PersonBuilder().withName("Jeff").build();
+        private Person validPerson = new PersonBuilder().build();
+        private Person validPerson2 = new PersonBuilder().withName("Jeff").build();
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
 

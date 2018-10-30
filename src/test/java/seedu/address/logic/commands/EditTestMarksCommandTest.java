@@ -42,11 +42,11 @@ public class EditTestMarksCommandTest {
 
     private CommandHistory commandHistory = new CommandHistory();
     //TODO
-//    @Test
-//    public void constructor_nullTest_throwsNullPointerException() {
-//        thrown.expect(NullPointerException.class);
-//        new EditTestMarksCommand(null,null,null,null,null);
-//    }
+    //    @Test
+    //    public void constructor_nullTest_throwsNullPointerException() {
+    //        thrown.expect(NullPointerException.class);
+    //        new EditTestMarksCommand(null,null,null,null,null);
+    //    }
 
     @Test
     public void execute_testAcceptedByModel_addSuccessful() throws Exception {
@@ -56,9 +56,12 @@ public class EditTestMarksCommandTest {
         String[] nameKeywords = validPerson.getName().fullName.split("\\s+");
         List<String> nameKeywordsList =
                 new ArrayList<>(Arrays.asList(nameKeywords));
-        NameContainsKeywordsPredicate nameContainsKeywordsPredicate = new NameContainsKeywordsPredicate(nameKeywordsList);
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
+                new NameContainsKeywordsPredicate(nameKeywordsList);
 
-        CommandResult commandResult = new EditTestMarksCommand(nameContainsKeywordsPredicate,VALID_TEST_NAME_AMY,VALID_TEST_AMY_MARKS,VALID_TEST_GRADE_UNDEFINED,nameKeywordsList).execute(modelStub, commandHistory);
+        CommandResult commandResult = new EditTestMarksCommand(nameContainsKeywordsPredicate,
+                VALID_TEST_NAME_AMY, VALID_TEST_AMY_MARKS, VALID_TEST_GRADE_UNDEFINED, nameKeywordsList)
+                .execute(modelStub, commandHistory);
 
         assertEquals(Messages.MESSAGE_UPDATED_TEST_LIST, commandResult.feedbackToUser);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
@@ -72,8 +75,10 @@ public class EditTestMarksCommandTest {
         String[] nameKeywords = validPerson.getName().fullName.split("\\s+");
         List<String> nameKeywordsList =
                 new ArrayList<>(Arrays.asList(nameKeywords));
-        NameContainsKeywordsPredicate nameContainsKeywordsPredicate = new NameContainsKeywordsPredicate(nameKeywordsList);
-        EditTestMarksCommand editTestMarksCommand = new EditTestMarksCommand(nameContainsKeywordsPredicate,VALID_TEST_NAME_AMY,VALID_TEST_AMY_MARKS,VALID_TEST_GRADE_UNDEFINED,nameKeywordsList);
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
+                new NameContainsKeywordsPredicate(nameKeywordsList);
+        EditTestMarksCommand editTestMarksCommand = new EditTestMarksCommand(nameContainsKeywordsPredicate,
+                VALID_TEST_NAME_AMY, VALID_TEST_AMY_MARKS, VALID_TEST_GRADE_UNDEFINED, nameKeywordsList);
         thrown.expect(CommandException.class);
         thrown.expectMessage(EditTestMarksCommand.MESSAGE_NOT_FOUND_TEST);
         editTestMarksCommand.execute(modelStub, commandHistory);
@@ -88,30 +93,35 @@ public class EditTestMarksCommandTest {
         String[] nameKeywords = validPerson.getName().fullName.split("\\s+");
         List<String> nameKeywordsList =
                 new ArrayList<>(Arrays.asList(nameKeywords));
-        NameContainsKeywordsPredicate nameContainsKeywordsPredicate = new NameContainsKeywordsPredicate(nameKeywordsList);
-        EditTestMarksCommand editTestMarksCommand = new EditTestMarksCommand(nameContainsKeywordsPredicate,VALID_TEST_NAME_AMY,VALID_TEST_AMY_MARKS,VALID_TEST_GRADE_UNDEFINED,nameKeywordsList);
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
+                new NameContainsKeywordsPredicate(nameKeywordsList);
+        EditTestMarksCommand editTestMarksCommand = new EditTestMarksCommand(nameContainsKeywordsPredicate,
+                VALID_TEST_NAME_AMY, VALID_TEST_AMY_MARKS, VALID_TEST_GRADE_UNDEFINED, nameKeywordsList);
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddTestMarksCommand.MESSAGE_PERSONNAME_NOT_FOUND);
         editTestMarksCommand.execute(modelStub, commandHistory);
 
     }
 
-//    @Test
-//    public void execute_duplicatePerson_throwsCommandException() throws Exception {
-//
-//        ModelStubAcceptingTestAdded modelStub = new ModelStubAcceptingTestAdded();
-//
-//        Person validPerson = new PersonBuilder().withName("Jeff Alice").build();
-//        String[] nameKeywords = validPerson.getName().fullName.split("\\s+");
-//        List<String> nameKeywordsList =
-//                new ArrayList<>(Arrays.asList(nameKeywords));
-//        NameContainsKeywordsPredicate nameContainsKeywordsPredicate = new NameContainsKeywordsPredicate(nameKeywordsList);
-//        EditTestMarksCommand editTestMarksCommand = new EditTestMarksCommand(nameContainsKeywordsPredicate,VALID_TEST_NAME_AMY,VALID_TEST_AMY_MARKS,VALID_TEST_GRADE_UNDEFINED,nameKeywordsList);
-//        thrown.expect(CommandException.class);
-//        thrown.expectMessage(AddTestMarksCommand.MESSAGE_PERSON_DUPLICATE_FOUND);
-//        editTestMarksCommand.execute(modelStub, commandHistory);
-//
-//    }
+    //    @Test
+    //    public void execute_duplicatePerson_throwsCommandException() throws Exception {
+    //
+    //        ModelStubAcceptingTestAdded modelStub = new ModelStubAcceptingTestAdded();
+    //
+    //        Person validPerson = new PersonBuilder().withName("Jeff Alice").build();
+    //        String[] nameKeywords = validPerson.getName().fullName.split("\\s+");
+    //        List<String> nameKeywordsList =
+    //                new ArrayList<>(Arrays.asList(nameKeywords));
+    //        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
+    // new NameContainsKeywordsPredicate(nameKeywordsList);
+    //        EditTestMarksCommand editTestMarksCommand =
+    // new EditTestMarksCommand(nameContainsKeywordsPredicate,VALID_TEST_NAME_AMY,
+    // VALID_TEST_AMY_MARKS,VALID_TEST_GRADE_UNDEFINED,nameKeywordsList);
+    //        thrown.expect(CommandException.class);
+    //        thrown.expectMessage(AddTestMarksCommand.MESSAGE_PERSON_DUPLICATE_FOUND);
+    //        editTestMarksCommand.execute(modelStub, commandHistory);
+    //
+    //    }
 
     @Test
     public void equals() {
@@ -121,21 +131,27 @@ public class EditTestMarksCommandTest {
         String[] nameKeywordsAlice = alice.getName().fullName.split("\\s+");
         List<String> nameKeywordsListAlice =
                 new ArrayList<>(Arrays.asList(nameKeywordsAlice));
-        NameContainsKeywordsPredicate nameContainsKeywordsPredicateAlice = new NameContainsKeywordsPredicate(nameKeywordsListAlice);
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicateAlice =
+                new NameContainsKeywordsPredicate(nameKeywordsListAlice);
 
         String[] nameKeywordsBob = bob.getName().fullName.split("\\s+");
         List<String> nameKeywordsListBob =
                 new ArrayList<>(Arrays.asList(nameKeywordsBob));
-        NameContainsKeywordsPredicate nameContainsKeywordsPredicateBob = new NameContainsKeywordsPredicate(nameKeywordsListBob);
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicateBob =
+                new NameContainsKeywordsPredicate(nameKeywordsListBob);
 
-        EditTestMarksCommand editTestMarksCommandAlice = new EditTestMarksCommand(nameContainsKeywordsPredicateAlice,VALID_TEST_NAME_AMY,VALID_TEST_MARK_AMY,VALID_TEST_GRADE_UNDEFINED,nameKeywordsListAlice);
-        EditTestMarksCommand editTestMarksCommandBob = new EditTestMarksCommand(nameContainsKeywordsPredicateBob,VALID_TEST_NAME_BOB,VALID_TEST_MARK_BOB,VALID_TEST_GRADE_UNDEFINED,nameKeywordsListBob);
+        EditTestMarksCommand editTestMarksCommandAlice = new EditTestMarksCommand(nameContainsKeywordsPredicateAlice,
+                        VALID_TEST_NAME_AMY, VALID_TEST_MARK_AMY, VALID_TEST_GRADE_UNDEFINED, nameKeywordsListAlice);
+        EditTestMarksCommand editTestMarksCommandBob = new EditTestMarksCommand(nameContainsKeywordsPredicateBob,
+                VALID_TEST_NAME_BOB, VALID_TEST_MARK_BOB, VALID_TEST_GRADE_UNDEFINED, nameKeywordsListBob);
 
         // same object -> returns true
         assertTrue(editTestMarksCommandAlice.equals(editTestMarksCommandAlice));
 
         // same values -> returns true
-        EditTestMarksCommand editTestMarksCommandAliceCopy = new EditTestMarksCommand(nameContainsKeywordsPredicateAlice,VALID_TEST_NAME_AMY,VALID_TEST_MARK_AMY,VALID_TEST_GRADE_UNDEFINED,nameKeywordsListAlice);
+        EditTestMarksCommand editTestMarksCommandAliceCopy = new
+                EditTestMarksCommand(nameContainsKeywordsPredicateAlice,
+                VALID_TEST_NAME_AMY, VALID_TEST_MARK_AMY, VALID_TEST_GRADE_UNDEFINED, nameKeywordsListAlice);
         assertTrue(editTestMarksCommandAlice.equals(editTestMarksCommandAliceCopy));
 
         // different types -> returns false
@@ -154,8 +170,8 @@ public class EditTestMarksCommandTest {
      */
     private class ModelStubAcceptingTestAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
-        Person validPerson = new PersonBuilder().build();
-        Person validPerson2 = new PersonBuilder().withName("Jeff").build();
+        private Person validPerson = new PersonBuilder().build();
+        private Person validPerson2 = new PersonBuilder().withName("Jeff").build();
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
 

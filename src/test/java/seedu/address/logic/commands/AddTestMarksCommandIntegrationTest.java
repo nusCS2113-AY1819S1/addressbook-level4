@@ -61,17 +61,20 @@ public class AddTestMarksCommandIntegrationTest {
 
         assertCommandSuccess(addTestMarksCommand, model, commandHistory, expectedMessage, expectedModel);
     }
-//TODO
+
     @Test
     public void execute_duplicatePersonFilteredList_failure() {
         List<String> nameKeywordsList = new ArrayList<>();
         nameKeywordsList.add("Alice");
-        NameContainsKeywordsPredicate nameContainsKeywordsPredicate = new NameContainsKeywordsPredicate(nameKeywordsList);
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
+                new NameContainsKeywordsPredicate(nameKeywordsList);
 
-        AddTestMarksCommand addTestMarksCommand = new AddTestMarksCommand(nameContainsKeywordsPredicate,VALID_TEST_NAME_AMY,VALID_TEST_MARK_AMY,nameKeywordsList);
+        AddTestMarksCommand addTestMarksCommand = new AddTestMarksCommand(nameContainsKeywordsPredicate,
+                VALID_TEST_NAME_AMY, VALID_TEST_MARK_AMY, nameKeywordsList);
         Person newPerson = new PersonBuilder().withName("Alice Yang").build();
         model.addPerson(newPerson);
-        assertCommandFailure(addTestMarksCommand, model, commandHistory, AddTestMarksCommand.MESSAGE_PERSON_DUPLICATE_FOUND);
+        assertCommandFailure(addTestMarksCommand, model, commandHistory,
+                AddTestMarksCommand.MESSAGE_PERSON_DUPLICATE_FOUND);
     }
 
     @Test
@@ -90,7 +93,7 @@ public class AddTestMarksCommandIntegrationTest {
                 new NameContainsKeywordsPredicate(nameKeywordsList);
 
         AddTestMarksCommand addTestMarksCommand = new AddTestMarksCommand(nameContainsKeywordsPredicate,
-                VALID_TEST_NAME_AMY,VALID_TEST_MARK_AMY,nameKeywordsList);
+                VALID_TEST_NAME_AMY, VALID_TEST_MARK_AMY, nameKeywordsList);
 
         String expectedMessage = String.format(Messages.MESSAGE_ADDED_TEST_LIST, editedPerson);
         editedPerson = createEditedPerson(editedPerson, descriptor);
@@ -116,7 +119,7 @@ public class AddTestMarksCommandIntegrationTest {
                 new NameContainsKeywordsPredicate(nameKeywordsList);
         AddTestMarksCommand addTestMarksCommand =
                 new AddTestMarksCommand(nameContainsKeywordsPredicate,
-                        VALID_TEST_NAME_AMY,VALID_TEST_MARK_AMY,nameKeywordsList);
+                        VALID_TEST_NAME_AMY, VALID_TEST_MARK_AMY, nameKeywordsList);
         assertCommandFailure(addTestMarksCommand, model, commandHistory,
                 AddTestMarksCommand.MESSAGE_PERSONNAME_NOT_FOUND);
     }

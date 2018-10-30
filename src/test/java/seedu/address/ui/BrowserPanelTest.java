@@ -47,7 +47,7 @@ public class BrowserPanelTest extends GuiUnitTest {
         postNow(selectionChangedEventStub);
 
 
-        URL expectedPersonUrl = new URL(MainApp.class.getResource(STUDENT_GRADE_PAGE_URL).toString()+"?data=[");
+        URL expectedPersonUrl = new URL(MainApp.class.getResource(STUDENT_GRADE_PAGE_URL).toString() + "?data=[");
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedPersonUrl, browserPanelHandle.getLoadedUrl());

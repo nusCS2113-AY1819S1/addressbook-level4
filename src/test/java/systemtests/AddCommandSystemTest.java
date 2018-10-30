@@ -162,17 +162,17 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: missing phone -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + GENDER_DESC_AMY + NATIONALITY_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY ;
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: missing email -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + GENDER_DESC_AMY + NATIONALITY_DESC_AMY
-                + PHONE_DESC_AMY + ADDRESS_DESC_AMY ;
+                + PHONE_DESC_AMY + ADDRESS_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: missing address -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + GENDER_DESC_AMY + NATIONALITY_DESC_AMY
-                + PHONE_DESC_AMY + EMAIL_DESC_AMY ;
+                + PHONE_DESC_AMY + EMAIL_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: invalid keyword -> rejected */
@@ -181,7 +181,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: invalid name -> rejected */
         command = AddCommand.COMMAND_WORD + INVALID_NAME_DESC + GENDER_DESC_AMY + NATIONALITY_DESC_AMY
-                + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY ;
+                + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
         assertCommandFailure(command, Name.MESSAGE_NAME_CONSTRAINTS);
 
         // Case: invalid gender -> rejected
@@ -201,12 +201,12 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: invalid email -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + GENDER_DESC_AMY + NATIONALITY_DESC_AMY
-                + PHONE_DESC_AMY + INVALID_EMAIL_DESC + ADDRESS_DESC_AMY ;
+                + PHONE_DESC_AMY + INVALID_EMAIL_DESC + ADDRESS_DESC_AMY;
         assertCommandFailure(command, Email.MESSAGE_EMAIL_CONSTRAINTS);
 
         /* Case: invalid address -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + GENDER_DESC_AMY + NATIONALITY_DESC_AMY
-                + PHONE_DESC_AMY + EMAIL_DESC_AMY + INVALID_ADDRESS_DESC ;
+                + PHONE_DESC_AMY + EMAIL_DESC_AMY + INVALID_ADDRESS_DESC;
         assertCommandFailure(command, Address.MESSAGE_ADDRESS_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */

@@ -43,7 +43,6 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.testutil.TypicalPersons;
-import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
 
 /**
@@ -223,7 +222,7 @@ public abstract class AddressBookSystemTest {
 
 
         try {
-            expectedUrl = new URL(MainApp.class.getResource(STUDENT_GRADE_PAGE_URL).toString()+"?data=[");
+            expectedUrl = new URL(MainApp.class.getResource(STUDENT_GRADE_PAGE_URL).toString() + "?data=[");
         } catch (MalformedURLException mue) {
             throw new AssertionError("URL expected to be valid.", mue);
         }

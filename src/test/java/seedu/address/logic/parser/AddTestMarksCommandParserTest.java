@@ -20,26 +20,29 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 public class AddTestMarksCommandParserTest {
 
-    private AddTestMarksCommandParser parser = new AddTestMarksCommandParser();
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTestMarksCommand.MESSAGE_USAGE);
+    private AddTestMarksCommandParser parser = new AddTestMarksCommandParser();
 
 
     @Test
     public void parse_missingParts_failure() {
         assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
-//        assertParseFailure(parser, );
+        //        assertParseFailure(parser, );
     }
 
     @Test
     public void parse_success() {
         String userInput = VALID_NAME_BOB + TEST_MARK_DESC_BOB + TEST_NAME_DESC_BOB;
-        EditCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTest(VALID_TEST_BOB).build();
+        EditCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withTest(VALID_TEST_BOB).build();
         List<String> nameList = new ArrayList<>();
         nameList.add("Bob");
         nameList.add("Choo");
-        NameContainsKeywordsPredicate nameContainsKeywordsPredicate = new NameContainsKeywordsPredicate(nameList);
-        AddTestMarksCommand expectedCommand = new AddTestMarksCommand(nameContainsKeywordsPredicate, TEST_NAME_DESC_BOB, TEST_MARK_DESC_BOB, nameList);
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
+                new NameContainsKeywordsPredicate(nameList);
+        AddTestMarksCommand expectedCommand = new AddTestMarksCommand(nameContainsKeywordsPredicate,
+                TEST_NAME_DESC_BOB, TEST_MARK_DESC_BOB, nameList);
 
     }
 

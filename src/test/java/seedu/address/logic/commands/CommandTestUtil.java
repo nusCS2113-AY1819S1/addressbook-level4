@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -23,7 +22,6 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.Prefix;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.grade.Grade;
@@ -41,7 +39,7 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  */
 public class CommandTestUtil {
     //    public static final Prefix PREFIX_TEST_NAME = new Prefix("tn/");
-//    public static final Prefix PREFIX_TEST_MARK = new Prefix("tm/");
+    //    public static final Prefix PREFIX_TEST_MARK = new Prefix("tm/");
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -64,9 +62,12 @@ public class CommandTestUtil {
     public static final String VALID_TEST_AMY_MARKS = "99";
     public static final String VALID_TEST_AMY_SUBJECT = "Math";
     public static final String VALID_TEST_GRADE_UNDEFINED = "Undefined";
-    public static final Test VALID_TEST_AMY = new Test(new TestName(VALID_TEST_NAME_AMY),new Marks(VALID_TEST_MARK_AMY),new Grade(VALID_TEST_GRADE_UNDEFINED));
-    public static final Test VALID_TEST_AMY2 = new Test(new TestName(VALID_TEST_NAME_AMY),new Marks(VALID_TEST_MARK_BOB),new Grade(VALID_TEST_GRADE_UNDEFINED));
-    public static final Test VALID_TEST_BOB = new Test(new TestName(VALID_TEST_NAME_BOB),new Marks(VALID_TEST_MARK_BOB),new Grade(VALID_TEST_GRADE_UNDEFINED));
+    public static final Test VALID_TEST_AMY = new Test(new TestName(VALID_TEST_NAME_AMY),
+            new Marks(VALID_TEST_MARK_AMY), new Grade(VALID_TEST_GRADE_UNDEFINED));
+    public static final Test VALID_TEST_AMY2 = new Test(new TestName(VALID_TEST_NAME_AMY),
+            new Marks(VALID_TEST_MARK_BOB), new Grade(VALID_TEST_GRADE_UNDEFINED));
+    public static final Test VALID_TEST_BOB = new Test(new TestName(VALID_TEST_NAME_BOB),
+            new Marks(VALID_TEST_MARK_BOB), new Grade(VALID_TEST_GRADE_UNDEFINED));
 
 
     public static final String VALID_GROUP_NAME_TUT_1 = "TUT[1]";
@@ -166,7 +167,8 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_TEST_DESC = " " + PREFIX_TEST_NAME + "CS2113*" + " " + PREFIX_TEST_MARK + "1A"; // '*' not allowed in tags
+    public static final String INVALID_TEST_DESC = " "
+            + PREFIX_TEST_NAME + "CS2113*" + " " + PREFIX_TEST_MARK + "1A"; // '*' not allowed in tags
     public static final String INVALID_PERSON_INDEX_DESC = " "
             + PREFIX_PERSON_INDEX + "10*"; // '*' not allowed in person index
     public static final String INVALID_GROUP_INDEX_DESC = " "
@@ -191,11 +193,13 @@ public class CommandTestUtil {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withGender(VALID_GENDER_FEMALE).withNationality(VALID_NATIONALITY_SG)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).withTest(new Test(new TestName(VALID_TEST_NAME_AMY),new Marks(VALID_TEST_MARK_AMY), new Grade("Undefined"))).build();
+                .withTags(VALID_TAG_FRIEND).withTest(new Test(new TestName(VALID_TEST_NAME_AMY),
+                        new Marks(VALID_TEST_MARK_AMY), new Grade("Undefined"))).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withGender(VALID_GENDER_MALE).withNationality(VALID_NATIONALITY_CN)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withTest(new Test(new TestName(VALID_TEST_NAME_BOB),new Marks(VALID_TEST_MARK_BOB), new Grade("Undefined"))).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withTest(new Test(new TestName(VALID_TEST_NAME_BOB),
+                        new Marks(VALID_TEST_MARK_BOB), new Grade("Undefined"))).build();
     }
 
     /**
