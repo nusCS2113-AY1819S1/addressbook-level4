@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 public class MainWindowHandle extends StageHandle {
 
     private final CandidateDetailsPanelHandle candidateDetailsPanel;
+    private final CompanyDetailsPanelHandle companyDetailsPanel;
     private final ResultDisplayHandle resultDisplay;
     private final CommandBoxHandle commandBox;
     private final StatusBarFooterHandle statusBarFooter;
@@ -19,6 +20,8 @@ public class MainWindowHandle extends StageHandle {
 
         candidateDetailsPanel = new
                 CandidateDetailsPanelHandle(getChildNode(CandidateDetailsPanelHandle.CANDIDATE_DETAILS_VIEW_ID));
+        companyDetailsPanel = new
+                CompanyDetailsPanelHandle(getChildNode(CompanyDetailsPanelHandle.COMPANY_DETAILS_VIEW_ID));
         resultDisplay = new ResultDisplayHandle(getChildNode(ResultDisplayHandle.RESULT_DISPLAY_ID));
         commandBox = new CommandBoxHandle(getChildNode(CommandBoxHandle.COMMAND_INPUT_FIELD_ID));
         statusBarFooter = new StatusBarFooterHandle(getChildNode(StatusBarFooterHandle.STATUS_BAR_PLACEHOLDER));
@@ -28,6 +31,10 @@ public class MainWindowHandle extends StageHandle {
 
     public CandidateDetailsPanelHandle getPersonListPanel() {
         return candidateDetailsPanel;
+    }
+
+    public CompanyDetailsPanelHandle getCompanyListPanel() {
+        return companyDetailsPanel;
     }
 
     public ResultDisplayHandle getResultDisplay() {
