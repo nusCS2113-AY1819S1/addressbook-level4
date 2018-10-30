@@ -60,12 +60,12 @@ public class SellCommand extends Command {
         List<Book> lastShownList = model.getFilteredBookList();
         Book bookToSell;
 
-        if (findBookBy.length() == 1 && Integer.parseInt(findBookBy) >= lastShownList.size()) {
+        if (findBookBy.length() != 13 && Integer.parseInt(findBookBy) >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
-        } else if (findBookBy.length() == 1) {
-            bookToSell = lastShownList.get(Integer.parseInt(findBookBy));
-        } else {
+        } else if (findBookBy.length() == 13) {
             bookToSell = model.getBook(findBookBy);
+        } else {
+            bookToSell = lastShownList.get(Integer.parseInt(findBookBy));
         }
 
         Book sellBook = createSoldBook(bookToSell, decreaseQuantity);
