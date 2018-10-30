@@ -25,7 +25,6 @@ public class StorageManager extends ComponentManager implements Storage {
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
     private AppUsersStorage appUsersStorage;
-    private TimeTableStorage timeTableStorageStorage;
 
     public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
                           AppUsersStorage appUsersStorage) {

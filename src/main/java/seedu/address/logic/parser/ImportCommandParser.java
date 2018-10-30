@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FILELOCATION;
 
 import java.nio.file.Path;
 import java.util.NoSuchElementException;
@@ -21,25 +20,15 @@ public class ImportCommandParser implements Parser<ImportCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ImportCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_FILELOCATION);
 
-        Index index;
+        Index index = Index.fromZeroBased(1); //have to change this to the user after user is implemented.
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE), pe);
-        }
-
-        try {
-            //FileLocation fileLocation = ParserUtil.parseFileLocation(argMultimap.getValue(PREFIX_FILELOCATION).get());
-            Path path = ParserUtil.parseFileLocation(argMultimap.getValue(PREFIX_FILELOCATION).get());
+            Path path;
+            path = ParserUtil.parseImportFileLocation(args);
             return new ImportCommand(index, path);
-        } catch (NoSuchElementException ee) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE), ee);
+        } catch (NoSuchElementException | ParseException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE), e);
         }
-
-
     }
 }
