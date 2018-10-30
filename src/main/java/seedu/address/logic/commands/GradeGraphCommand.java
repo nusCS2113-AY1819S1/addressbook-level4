@@ -5,12 +5,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
-import javafx.stage.Stage;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.grades.Grades;
 import seedu.address.model.grades.GradesManager;
+import seedu.address.ui.GradeGraphDisplay;
 
 /**
  * Shows grades of student in a graph form in Trajectory.
@@ -36,11 +36,11 @@ public class GradeGraphCommand extends Command {
     @Override
     public CommandResult execute (Model model, CommandHistory history) throws CommandException {
         GradesManager gradesManager = new GradesManager();
-        Stage stage = new Stage();
-        LineChart lineChart = gradesManager.createGraph(toGraphGrade);
-        Scene scene = new Scene(lineChart, 600, 600);
-        stage.setScene(scene);
-        stage.show();
+        GradeGraphDisplay gradeGraphDisplay = new GradeGraphDisplay();
+        gradeGraphDisplay.configureLineChart();
+        gradesManager.createGraph(gradeGraphDisplay.getLineChart(), toGraphGrade);
+        gradeGraphDisplay.initGraph();
+        gradeGraphDisplay.showStage();
 
         return new CommandResult(MESSAGE_GRAPH_SUCCESS);
     }

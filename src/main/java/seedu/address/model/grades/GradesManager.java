@@ -14,6 +14,8 @@ import seedu.address.model.module.ModuleManager;
 import seedu.address.model.person.Person;
 import seedu.address.storage.adapter.XmlAdaptedGrades;
 
+import javax.sound.sampled.Line;
+
 /**
  * The API of the GradesManager component.
  */
@@ -59,17 +61,33 @@ public class GradesManager {
         grades.add(grade);
     }
 
+//    /**
+//     This method shows grades of students for one grade component in module.
+//     */
+//    public void createGraph (LineChart<Number, Number> lineChart, Grades grade) {
+//        XYChart.Series<Number, Number> series = new XYChart.Series<>();
+//
+//        // hashmap to store the frequency of element
+//        Map<Float, Integer> hashMapOfGrades = new HashMap<>();
+//        for (Grades gradesList : grades) {
+//            if (gradesList.getModuleCode().equals(grade.getModuleCode())
+//                    && gradesList.getGradeComponentName().equals(grade.getGradeComponentName())) {
+//                Integer count = hashMapOfGrades.get(gradesList.getMarks());
+//                hashMapOfGrades.put(gradesList.getMarks(), (count == null) ? 1 : count + 1);
+//            }
+//        }
+//        // displaying the occurrence of elements in the arraylist
+//        for (Map.Entry<Float, Integer> val : hashMapOfGrades.entrySet()) {
+//            series.getData().add(new XYChart.Data<>(val.getKey(), val.getValue()));
+//        }
+//        lineChart.getData().add(series);
+//    }
+
     /**
      This method shows grades of students for one grade component in module.
      */
-    public LineChart<Number, Number> createGraph (Grades grade) {
-        NumberAxis xAxis = new NumberAxis();
-        xAxis.setLabel("Marks");
-        NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("No. Of Students");
-        LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
+    public void createGraph (LineChart<Number, Number> lineChart, Grades grade) {
         XYChart.Series<Number, Number> series = new XYChart.Series<>();
-        lineChart.setTitle("Results of Students");
 
         // hashmap to store the frequency of element
         Map<Float, Integer> hashMapOfGrades = new HashMap<>();
@@ -85,8 +103,6 @@ public class GradesManager {
             series.getData().add(new XYChart.Data<>(val.getKey(), val.getValue()));
         }
         lineChart.getData().add(series);
-
-        return lineChart;
     }
 
 
