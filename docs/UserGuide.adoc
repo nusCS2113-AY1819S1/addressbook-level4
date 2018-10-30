@@ -348,14 +348,17 @@ Format: `clear`
 
 === Import Timetable from a file : `import` (`i`)
 
-Imports a timetable from file. Currently only support (.ics) files exported from NUSMODS. +
+Imports a timetable from file for the current user. If the location is not specified, the default location will be used (`.\import_export\import.ics`) +
+Currently only supports (.ics) files exported from NUSMODS. +
 
-Format: `import INDEX file/FILE_LOCATION`
+Format: `import [FILE_LOCATION]` +
 
 Examples:
 
-* To import the timetable `nusmods_calendar.ics` for the person at index `1`: +
-`import 1 file/C:\Users\happycat96\Downloads\nusmods_calendar.ics` +
+* To import the timetable at `C:\import_export\import.ics`: +
+`import C:\import_export\import.ics` +
+* To import the timetable at the default location `.\import_export\import.ics`: +
+`import` +
 
 [TIP]
 You can import your NUSMODS timetable as a .ics file, as shown in the picture below.
@@ -364,14 +367,16 @@ image::importics.png[]
 
 === Export Timetable to a file : `export` (`e`)
 
-Imports a timetable to .ics file. +
+Exports the currently-displayed timetable to the specified .ics file. If the location is not specified, the default location will be used (`.\import_export\export.ics`) +
 
-Format: `export INDEX file/FILE_LOCATION`
+Format: `export [FILE_LOCATION]`
 
 Examples:
 
-* To export the timetable for the person at index `1` to the file `export.ics`: +
- `export 1 file/C:\Users\happycat96\Downloads\export.ics` +
+* To export the currently displayed timetable to the location `C:\import_export\export.ics`: +
+ `export C:\import_export\export.ics` +
+* To export the currently displayed timetable to the default location `.\import_export\export.ics`: +
+ `export C:\import_export\export.ics` +
 
 
 === Exiting the program : `exit` (`x`)
@@ -417,4 +422,5 @@ e.g. `addtime mon 10-12`
 e.g. `deletetime tue 12-14`
 * *Free time* : `free` +
 e.g. `free 1 2 3`
-* *Import Timetable from a file* : `import INDEX file/FILE_LOCATION`
+* *Import Timetable from a file* : `import [FILE_LOCATION]`
+* *Export Timetable to a file* : `export [FILE_LOCATION]`
