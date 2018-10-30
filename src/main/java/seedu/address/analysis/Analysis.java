@@ -1,40 +1,17 @@
 package seedu.address.analysis;
 
 import seedu.address.model.drink.Price;
-import seedu.address.model.transaction.TransactionList;
 
 /**
- * Represents functions to analyse profit, revenue, cost, quantity sold.
+ * APIs for AnalysisManager (analyses of profit, revenue, cost, quantity sold)
  */
-public class Analysis implements AnalysisApi {
-    private TransactionList transactionList;
+public interface AnalysisApi {
+    public Price analyseProfit();
 
-    public Analysis() {}
+    public Price analyseCost();
 
-    @Override
-    public Price analyseProfit() {
-        // TODO: stub
-        return null;
+    public Price analyseRevenue();
 
-    }
-
-    @Override
-    public Price analyseCost() {
-
-        // TODO: stub
-        return null;
-
-    }
-
-    @Override
-    public Price analyseRevenue() {
-
-        // TODO: stub
-        return null;
-    }
-
-
-
-
+    // public Stock analyseQuantitiesSold();
 
 }
