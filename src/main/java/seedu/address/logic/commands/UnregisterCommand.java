@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.address.logic.commands.EditCommand.EditEventDescriptor;
 import static seedu.address.logic.commands.EditCommand.createEditedEvent;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
@@ -21,23 +20,23 @@ import seedu.address.model.attendee.Attendee;
 import seedu.address.model.event.Event;
 
 /**
- * Registers for an event identified using it's displayed index from the event manager.
+ * Unregisters for an event identified using it's displayed index from the event manager.
  */
-public class RegisterCommand extends Command {
+public class UnregisterCommand extends Command {
 
-    public static final String COMMAND_WORD = "register";
+    public static final String COMMAND_WORD = "unregister";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Registers for an event identified by the index number used in the displayed event list.\n"
+            + ": Unregisters for an event identified by the index number used in the displayed event list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_REGISTER_EVENT_SUCCESS = "Registered for event: %1$s";
-    public static final String MESSAGE_ALREADY_REGISTERED = "Already registered for event.";
+    public static final String MESSAGE_UNREGISTER_EVENT_SUCCESS = "Unregistered for event: %1$s";
+    public static final String MESSAGE_NOT_REGISTERED = "Not registered for event.";
 
     private final Index targetIndex;
 
-    public RegisterCommand(Index targetIndex) {
+    public UnregisterCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -51,32 +50,32 @@ public class RegisterCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
-        Event eventToRegister = filteredEventList.get(targetIndex.getZeroBased());
+        Event eventToUnregister = filteredEventList.get(targetIndex.getZeroBased());
 
         String attendeeName = model.getUsername().toString();
 
-        Set<Attendee> attendeeSet = new HashSet<>(eventToRegister.getAttendance());
+        Set<Attendee> attendeeSet = new HashSet<>(eventToUnregister.getAttendance());
 
-        if (!attendeeSet.add(new Attendee(attendeeName))) {
-            throw new CommandException(MESSAGE_ALREADY_REGISTERED);
+        if (!attendeeSet.remove(new Attendee(attendeeName))) {
+            throw new CommandException(MESSAGE_NOT_REGISTERED);
         }
 
         EditEventDescriptor registerEventDescriptor = new EditEventDescriptor();
         registerEventDescriptor.setAttendees(attendeeSet);
-        Event registeredEvent = createEditedEvent(eventToRegister, registerEventDescriptor);
+        Event registeredEvent = createEditedEvent(eventToUnregister, registerEventDescriptor);
 
-        model.updateEvent(eventToRegister, registeredEvent);
+        model.updateEvent(eventToUnregister, registeredEvent);
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         model.commitEventManager();
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
-        return new CommandResult(String.format(MESSAGE_REGISTER_EVENT_SUCCESS, targetIndex.getOneBased()));
+        return new CommandResult(String.format(MESSAGE_UNREGISTER_EVENT_SUCCESS, targetIndex.getOneBased()));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof RegisterCommand // instanceof handles nulls
-                && targetIndex.equals(((RegisterCommand) other).targetIndex)); // state check
+                || (other instanceof UnregisterCommand // instanceof handles nulls
+                && targetIndex.equals(((UnregisterCommand) other).targetIndex)); // state check
     }
 }

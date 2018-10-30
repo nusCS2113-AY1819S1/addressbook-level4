@@ -113,7 +113,7 @@ public class Event {
      * Returns attendee list formatted as a string to be passed into Event Page HTML as query string parameter
      */
     public String getAttendanceString() {
-        TreeSet<String> attendeesSet = new TreeSet<>();
+        TreeSet<String> attendeesSet = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
         for (Attendee a: attendees) {
             attendeesSet.add(a.attendeeName);
         }
