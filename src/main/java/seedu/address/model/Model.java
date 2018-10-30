@@ -59,12 +59,19 @@ public interface Model {
      */
     void updateFilteredDrinkList(Predicate<Drink> predicate);
 
+
+
+    // =============== transactions commands =====================
     /**
-     * Updates the quantity of the drink in the {@code transaction}.
+     * Decreases the quantity of the drink in the {@code transaction}.
      */
     void sellDrink(Transaction transaction);
 
-    // =============== transactions commands =====================
+    /**
+     * Increases the quantity of the dirnk in the {@code transaction}
+     */
+    void importDrink(Transaction transaction);
+
     /**
      * Returns an unmodifiable view of the transaction list
      */

@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.drink.Drink;
+import seedu.address.model.drink.Quantity;
 import seedu.address.model.drink.UniqueDrinkList;
 import seedu.address.model.drink.exceptions.DrinkNotFoundException;
 
@@ -130,5 +131,13 @@ public class InventoryList implements ReadOnlyInventoryList {
         }
 
         throw new DrinkNotFoundException();
+    }
+
+    /**
+     * Increases the quantity of the {@code drink} specified.
+     */
+    public void increaseQuantity(Drink drink, Quantity quantity) {
+        Drink actualDrink = findDrinkByName(drink);
+        actualDrink.increaseQuantity(quantity);
     }
 }

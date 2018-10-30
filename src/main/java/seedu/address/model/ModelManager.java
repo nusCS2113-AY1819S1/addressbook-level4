@@ -142,17 +142,21 @@ public class ModelManager extends ComponentManager implements Model {
     // ========== transaction commands ====================================
     @Override
     public void sellDrink(Transaction transaction) {
-        recordSaleDrink(transaction);
+        recordTransaction(transaction);
 
         Drink drink = transaction.getDrinkTransacted();
         Drink actualDrink = findDrinkByName(drink);
         actualDrink.decreaseQuantity(transaction.getQuantityTransacted());
-
-
     }
 
+    @Override
+    public void importDrink(Transaction transaction) {
+        recordTransaction(transaction);
 
-    private void recordSaleDrink(Transaction transaction) {
+        inventoryList.increaseQuantity(transaction.getDrinkTransacted(), transaction.getQuantityTransacted());
+    }
+
+    private void recordTransaction(Transaction transaction) {
         transactionList.addTransaction(transaction);
     }
 
