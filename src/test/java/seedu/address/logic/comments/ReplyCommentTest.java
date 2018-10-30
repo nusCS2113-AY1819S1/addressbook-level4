@@ -40,7 +40,8 @@ class ReplyCommentTest {
         try {
             assertNotEquals(testcase, test.replyComment("Chua", 15, "Yo"));
         } catch (Exception e) {
-            assertEquals("Line is invalid, try again", ReplyCommentCommand.MESSAGE_LINE_INVALID);
+            assertEquals("Line is invalid, try again. Example: replyComment 1 L/1 C/Hello",
+                    ReplyCommentCommand.MESSAGE_LINE_INVALID);
         }
     }
 
