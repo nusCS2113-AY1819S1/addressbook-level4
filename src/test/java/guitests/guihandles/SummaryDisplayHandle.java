@@ -1,5 +1,6 @@
 package guitests.guihandles;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.TableView;
@@ -29,6 +30,8 @@ public class SummaryDisplayHandle extends NodeHandle<Node> {
     }
 
     public ObservableList<SummaryEntry> getSummaryTableList() {
-        return summaryTable.getItems();
+        ObservableList<SummaryEntry> summaryEntries = summaryTable.getItems();
+        int indexOfLastEntry = summaryEntries.size() - 1;
+        return FXCollections.observableList(summaryEntries.subList(0, indexOfLastEntry));
     }
 }
