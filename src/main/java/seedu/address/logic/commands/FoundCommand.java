@@ -73,7 +73,8 @@ public class FoundCommand extends Command {
      * Creates and returns a {@code Item} with the details of {@code itemToFound}
      * edited with {@code FoundDescriptor}.
      */
-    private static Item createFoundItem(Item itemToFound, FoundDescriptor foundDescriptor) {
+    private static Item createFoundItem(Item itemToFound, FoundDescriptor foundDescriptor)
+            throws CommandException {
         assert itemToFound != null;
         Loststatus currentLoststatus = itemToFound.getLoststatus();
         Loststatus updatedLoststatus;
@@ -85,6 +86,9 @@ public class FoundCommand extends Command {
 
         updatedLost -= updatedValue;
         updatedFound += updatedValue;
+        if (updatedLost < 0) {
+            throw new CommandException(MESSAGE_INVALID_QUANTITY);
+        }
         updatedLoststatus = new Loststatus(updatedLost, updatedFound);
 
         Quantity updatedQuantity = new Quantity(Integer.toString(initialValue + updatedValue));
