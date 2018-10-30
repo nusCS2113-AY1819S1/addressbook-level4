@@ -170,6 +170,17 @@ Deletes the 2nd book in the displayed list.
 * `delete i/978-2-12-345680-3` +
 Deletes the book with the corresponding iSBN13 from the inventory list.
 
+=== Deleting a request : `deleterequest`
+
+Deletes the specified request from the request list. Strictly for bookstore owners. +
+Format: `delete INDEX` OR `delete i/ISBN13`
+
+Examples:
+
+* `delete 2` +
+Deletes the 2nd request in the displayed request list.
+
+
 === Requesting for a book : `request`
 
 Requests to purchase a book. +
@@ -297,8 +308,10 @@ e.g. `check 4`
 e.g. `request i/978-2-12-345680-3 e/johnd@gmail.com q/5`
 * *Display Statistics* : `stats`
 * *Clear* : `clear`
-* *Delete* : `delete INDEX` OR `delete i/ISBN13`+
+* *Delete* : `delete INDEX` OR `delete i/ISBN13` +
 e.g. `delete 1` OR `delete i/978-2-12-345680-3`
+* *DeleteRequest* : `deleterequest INDEX` +
+e.g. `delete 1`
 * *List* : `list`
 * *Help* : `help`
 * *History* : `history`
