@@ -22,7 +22,7 @@ public class VersionedSalesHistory extends SalesHistory {
     }
 
     /**
-     * Saves a copy of the current {@code SalesHistory} state at the end of the state list
+     * Saves a copy of the current {@code giSalesHistory} state at the end of the state list
      * Undone states are removed from the state list.
      */
     public void commit() {

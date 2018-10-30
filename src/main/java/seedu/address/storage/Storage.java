@@ -62,7 +62,7 @@ public interface Storage extends ProductDatabaseStorage, UserPrefsStorage, UserD
      * Creates the data file if missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleSalesHistoryChangedEvent(SalesHistoryChangedEvent event) throws IOException;
+    void handleSalesHistoryChangedEvent(SalesHistoryChangedEvent event);
 
     @Override
     Path getUserDatabaseFilePath();

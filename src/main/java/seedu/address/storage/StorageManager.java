@@ -141,6 +141,25 @@ public class StorageManager extends ComponentManager implements Storage {
         productDatabaseStorage.deleteAddressBook(user);
     }
 
+    @Override
+    @Subscribe
+    public void handleUserDatabaseChangedEvent(UserDatabaseChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local users data changed, saving to file"));
+        try {
+            saveUserDatabase(event.data);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    }
+
+    @Override
+    @Subscribe
+    public void handleUserDeletedEvent(UserDeletedEvent event) throws IOException {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "User has been deleted, deleting files"));
+        deleteAddressBook(event.data);
+        deleteSalesHistory();
+    }
+
     //================ Sales History methods =======================
     @Override
     public Path getSalesHistoryFilePath() {
@@ -165,7 +184,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public void deleteSalesHistory() throws IOException {
-
+        salesHistoryStorage.deleteSalesHistory();
     }
 
     @Override
@@ -175,26 +194,13 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    @Subscribe
-    public void handleUserDatabaseChangedEvent(UserDatabaseChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local users data changed, saving to file"));
+    public void handleSalesHistoryChangedEvent(SalesHistoryChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Sales history data changed, saving to file"));
         try {
-            saveUserDatabase(event.data);
+            saveSalesHistory(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
-    }
-
-    @Override
-    @Subscribe
-    public void handleUserDeletedEvent(UserDeletedEvent event) throws IOException {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event, "User has been deleted, deleting files"));
-        deleteAddressBook(event.data);
-    }
-
-    @Override
-    public void handleSalesHistoryChangedEvent(SalesHistoryChangedEvent event) throws IOException {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Sales history has been modified"));
     }
 
     // ============== Storage updater =====================
