@@ -35,7 +35,7 @@ public class LostandFoundCommand extends Command {
     /**
      * Sorts the lost item from the Stock List.
      */
-    void sortSimpleItems (List<Item> lastShownList, ArrayList<SimpleItem> lostItems
+    void sortSimpleItems (List<Item> lastShownList, List<SimpleItem> lostItems
                           ) {
         for (Item item : lastShownList) {
             if (item.getLoststatus().getLoststatusLost() > 0) {
@@ -45,7 +45,7 @@ public class LostandFoundCommand extends Command {
 
         }
     }
-    String getMessageOutput (ArrayList<SimpleItem> lostItems) {
+    String getMessageOutput (List<SimpleItem> lostItems) {
         String messageOutput = "";
         messageOutput += MESSAGE_SUCCESS + "\n";
 
