@@ -77,7 +77,8 @@ public class ReplyCommentCommand extends Command {
 
         Event eventToEdit = filteredEventList.get(index.getZeroBased());
         ReplyComment comments = new ReplyComment(eventToEdit.getComment().toString());
-        Comment newComments = new Comment(comments.replyComment(getComment(), getLine()));
+        Comment newComments = new Comment(comments.replyComment(getComment(), getLine(),
+                model.getUsername().toString()));
         editCommentDescriptor.setComment(newComments);
         Event editedEvent = EditCommand.createEditedEvent(eventToEdit, editCommentDescriptor);
         model.updateEvent(eventToEdit, editedEvent);

@@ -65,7 +65,7 @@ public class AddCommentCommand extends Command {
 
         Event eventToEdit = filteredEventList.get(index.getZeroBased());
         AddComment comments = new AddComment(eventToEdit.getComment().toString());
-        Comment newComments = new Comment(comments.addComment(getComment()));
+        Comment newComments = new Comment(comments.addComment(getComment(), model.getUsername().toString()));
         editCommentDescriptor.setComment(newComments);
         Event editedEvent = EditCommand.createEditedEvent(eventToEdit, editCommentDescriptor);
 

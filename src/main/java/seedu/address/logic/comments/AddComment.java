@@ -2,8 +2,6 @@ package seedu.address.logic.comments;
 
 import java.util.Vector;
 
-import seedu.address.model.UserSession;
-
 /**
  *  Adds Comment to the end of the comments section
  */
@@ -21,10 +19,10 @@ public class AddComment extends Comments {
     /**
      *  Appends comment to the end of the current vector and stores
      */
-    public String addComment(String comment) {
+    public String addComment(String comment, String username) {
         Vector comments = new Vector();
         comments = getComments();
-        comments.add(new UserSession().getUsername().toString() + " : " + comment);
+        comments.add(username + " : " + comment);
         return rewrite(comments);
     }
 
