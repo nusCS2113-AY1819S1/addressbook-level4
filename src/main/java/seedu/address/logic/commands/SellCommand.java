@@ -70,8 +70,11 @@ public class SellCommand extends Command {
 
         Book sellBook = createSoldBook(bookToSell, decreaseQuantity);
 
-        StatisticCenter.getInstance().getStatistic().increaseRevenue(
-                bookToSell.getPrice().toString(), decreaseQuantity.getQuantity().getValue());
+        StatisticCenter.getInstance().getStatistic().sell(
+                bookToSell.getPrice().toString(),
+                bookToSell.getCost().toString(),
+                decreaseQuantity.getQuantity().getValue());
+
 
         model.updateBook(bookToSell, sellBook);
         model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);

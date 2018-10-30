@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.StatisticCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
@@ -73,6 +74,9 @@ public class StockCommand extends Command {
         if (!bookToStock.isSameBook(stockedBook) && model.hasBook(stockedBook)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
+
+        StatisticCenter.getInstance().getStatistic().getInventory().increase(
+                bookToStock.getCost().toString(), stockBookDescriptor.getQuantity().getValue());
 
         model.updateBook(bookToStock, stockedBook);
         model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);

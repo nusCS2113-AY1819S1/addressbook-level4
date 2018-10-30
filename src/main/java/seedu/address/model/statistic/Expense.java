@@ -2,45 +2,21 @@ package seedu.address.model.statistic;
 
 
 /**
- * Represents Revenue in the month's Statistic
+ * Represents Inventory in the month's Statistic
  */
-public class Revenue {
+public class Expense {
     private static final String QUANTITY_VALIDATION_REGEX = "[-+]?[0-9]*\\.?[0-9]+";
     private volatile String value;
 
     /**
      * Constructor for Json Jackson
      */
-    public Revenue () {
+    public Expense() {
         super();
     }
 
-    public Revenue(String revenue) {
+    public Expense(String revenue) {
         value = revenue;
-    }
-
-    public static boolean isValid(String test) {
-        return test.matches(QUANTITY_VALIDATION_REGEX);
-    }
-
-    /**
-     * Increase revenue
-     * @param price
-     * @param quantity
-     */
-    public void increase(String price, String quantity) {
-        this.value = Float.toString(
-                Float.parseFloat(value) + (Float.parseFloat(price) * Float.parseFloat(quantity)));
-    }
-
-    /**
-     * decrease revenue
-     * @param price
-     * @param quantity
-     */
-    public void decrease(String price, String quantity) {
-        this.value = Float.toString(
-                Float.parseFloat(value) - (Float.parseFloat(price) * Float.parseFloat(quantity)));
     }
 
     public String getValue() {
@@ -51,6 +27,30 @@ public class Revenue {
         this.value = value;
     }
 
+    public static boolean isValid(String test) {
+        return test.matches(QUANTITY_VALIDATION_REGEX);
+    }
+
+    /**
+     * Increase expense
+     * @param price
+     * @param quantity
+     */
+    public void increase(String price, String quantity) {
+        this.value = Float.toString(
+                Float.parseFloat(value) + (Float.parseFloat(price) * Float.parseFloat(quantity)));
+    }
+
+    /**
+     * Decrease expense
+     * @param price
+     * @param quantity
+     */
+    public void decrease(String price, String quantity) {
+        this.value = Float.toString(
+                Float.parseFloat(value) - (Float.parseFloat(price) * Float.parseFloat(quantity)));
+    }
+
     @Override
     public String toString() {
         return value;
@@ -59,8 +59,8 @@ public class Revenue {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Revenue // instanceof handles nulls
-                && value.equals(((Revenue) other).value)); // state check
+                || (other instanceof Expense // instanceof handles nulls
+                && value.equals(((Expense) other).value)); // state check
     }
 
     @Override
