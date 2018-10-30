@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.saleshistory.ReadOnlySalesHistory;
 import seedu.address.model.saleshistory.SalesHistory;
 import seedu.address.model.timeidentifiedclass.Reminder;
 import seedu.address.model.timeidentifiedclass.Transaction;
@@ -46,6 +47,16 @@ public class XmlSerializableSalesHistory {
         }
         if (reminderList != null) {
             this.reminderList = new ArrayList<>(reminderList);
+        }
+    }
+
+    public XmlSerializableSalesHistory(ReadOnlySalesHistory src) {
+        this();
+        for (Transaction transaction : src.getTransactionsAsObservableList()) {
+            transactionList.add(new XmlAdaptedTransaction(transaction));
+        }
+        for (Reminder reminder : src.getRemindersAsObservableList()) {
+            reminderList.add(new XmlAdaptedReminder(reminder));
         }
     }
 

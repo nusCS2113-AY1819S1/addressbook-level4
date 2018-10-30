@@ -162,6 +162,12 @@ public class ProductDatabase implements ReadOnlyAddressBook {
         distributors.setDistributor(target, editedDistributor);
     }
 
+    /**
+     * Getter for {@code salesHistory}
+     */
+    public SalesHistory getSalesHistory() {
+        return salesHistory;
+    }
 
     /**
      * Adds a transaction to the active {@code salesHistory}.

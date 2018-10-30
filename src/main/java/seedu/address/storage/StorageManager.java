@@ -10,6 +10,7 @@ import com.google.common.eventbus.Subscribe;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.SalesHistoryChangedEvent;
 import seedu.address.commons.events.model.UserDatabaseChangedEvent;
 import seedu.address.commons.events.model.UserDeletedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
@@ -18,6 +19,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserDatabase;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.login.User;
+import seedu.address.model.saleshistory.ReadOnlySalesHistory;
 
 /**
  * Manages storage of ProductDatabase data in local storage.
@@ -28,14 +30,16 @@ public class StorageManager extends ComponentManager implements Storage {
     private ProductDatabaseStorage productDatabaseStorage;
     private UserPrefsStorage userPrefsStorage;
     private UserDatabaseStorage userDatabaseStorage;
+    private SalesHistoryStorage salesHistoryStorage;
 
 
     public StorageManager(ProductDatabaseStorage productDatabaseStorage, UserPrefsStorage userPrefsStorage,
-                          UserDatabaseStorage userDatabaseStorage) {
+                          UserDatabaseStorage userDatabaseStorage, SalesHistoryStorage salesHistoryStorage) {
         super();
         this.productDatabaseStorage = productDatabaseStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.userDatabaseStorage = userDatabaseStorage;
+        this.salesHistoryStorage = salesHistoryStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -137,6 +141,39 @@ public class StorageManager extends ComponentManager implements Storage {
         productDatabaseStorage.deleteAddressBook(user);
     }
 
+    //================ Sales History methods =======================
+    @Override
+    public Path getSalesHistoryFilePath() {
+        return salesHistoryStorage.getSalesHistoryFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlySalesHistory> readSalesHistory() throws DataConversionException, IOException {
+        return salesHistoryStorage.readSalesHistory();
+    }
+
+    @Override
+    public Optional<ReadOnlySalesHistory> readSalesHistory(Path filePath) throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return salesHistoryStorage.readSalesHistory(filePath);
+    }
+
+    @Override
+    public void saveSalesHistory(ReadOnlySalesHistory salesHistory) throws IOException {
+        salesHistoryStorage.saveSalesHistory(salesHistory, salesHistoryStorage.getSalesHistoryFilePath());
+    }
+
+    @Override
+    public void deleteSalesHistory() throws IOException {
+
+    }
+
+    @Override
+    public void saveSalesHistory(ReadOnlySalesHistory salesHistory, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        salesHistoryStorage.saveSalesHistory(salesHistory, filePath);
+    }
+
     @Override
     @Subscribe
     public void handleUserDatabaseChangedEvent(UserDatabaseChangedEvent event) {
@@ -153,6 +190,11 @@ public class StorageManager extends ComponentManager implements Storage {
     public void handleUserDeletedEvent(UserDeletedEvent event) throws IOException {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "User has been deleted, deleting files"));
         deleteAddressBook(event.data);
+    }
+
+    @Override
+    public void handleSalesHistoryChangedEvent(SalesHistoryChangedEvent event) throws IOException {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Sales history has been modified"));
     }
 
     // ============== Storage updater =====================

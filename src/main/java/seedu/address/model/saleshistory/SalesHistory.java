@@ -10,6 +10,9 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.TreeMap;
 
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.timeidentifiedclass.Reminder;
 import seedu.address.model.timeidentifiedclass.TimeIdentifiedClass;
 import seedu.address.model.timeidentifiedclass.Transaction;
@@ -20,26 +23,71 @@ import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatExcep
 /**
  * This class stores all the transactions and reminders. Each day and reminder must have a unique date.
  */
-public class SalesHistory {
+public class SalesHistory implements ReadOnlySalesHistory {
     private TreeMap<String, Transaction> transactionRecord;
     private TreeMap<String, Reminder> reminderRecord;
-
+    private ObservableList<Transaction> transactionObservableList;
+    private ObservableList<Reminder> reminderObservableList;
     /**
      * The following constructor creates a blank sales history.
      */
     public SalesHistory() {
         this.transactionRecord = new TreeMap<>();
         this.reminderRecord = new TreeMap<>();
+        this.transactionObservableList = FXCollections.observableArrayList();
+        this.reminderObservableList = FXCollections.observableArrayList();
     }
 
     /**
-     * The following constructor is to facilitate reading sales history from files.
-     * @param transactionRecord
+     * Creates {@code SalesHistory} given {@code transactionRecord} and {@code salesHistory}
      */
     public SalesHistory(TreeMap<String, Transaction> transactionRecord, TreeMap<String, Reminder> reminderRecord) {
         requireAllNonNull(transactionRecord, reminderRecord);
         this.transactionRecord = transactionRecord;
         this.reminderRecord = reminderRecord;
+        this.transactionObservableList = FXCollections.observableArrayList();
+        this.reminderObservableList = FXCollections.observableArrayList();
+
+        Iterator it = reminderRecord.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry entry = (Map.Entry) it.next();
+            reminderObservableList.add((Reminder) entry.getValue());
+        }
+
+        it = transactionRecord.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry entry = (Map.Entry) it.next();
+            transactionObservableList.add((Transaction) entry.getValue());
+        }
+
+    }
+
+    /**
+     * Constructor using {@code ReadOnlySalesHistory} object.
+     */
+    public SalesHistory(ReadOnlySalesHistory toBeCopied) {
+        this();
+        requireNonNull(toBeCopied);
+
+        for (Transaction transaction : toBeCopied.getTransactionsAsObservableList()) {
+            try {
+                addTransaction(transaction);
+            } catch (InvalidTimeFormatException e) {
+                e.printStackTrace();
+            } catch (DuplicateTransactionException e) {
+                e.printStackTrace();
+            }
+        }
+
+        for (Reminder reminder : toBeCopied.getRemindersAsObservableList()) {
+            try {
+                addReminder(reminder);
+            } catch (InvalidTimeFormatException e) {
+                e.printStackTrace();
+            } catch (DuplicateReminderException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public TreeMap<String, Transaction> getTransactionRecord() {
@@ -89,6 +137,7 @@ public class SalesHistory {
             throw new DuplicateTransactionException();
         }
         transactionRecord.put(transaction.getTransactionTime(), transaction);
+        transactionObservableList.add(transaction);
     }
 
     /**
@@ -106,6 +155,7 @@ public class SalesHistory {
             throw new DuplicateReminderException();
         }
         reminderRecord.put(reminder.getReminderTime(), reminder);
+        reminderObservableList.add(reminder);
     }
 
     /**
@@ -118,12 +168,26 @@ public class SalesHistory {
         requireNonNull(reminderTime);
         reminderTime = reminderTime.trim();
 
-        if (!reminderRecord.containsKey(reminderTime)) {
-            throw new NoSuchElementException();
-        }
         if (!Reminder.isValidReminderTime(reminderTime)) {
             throw new InvalidTimeFormatException();
         }
+
+        if (!reminderRecord.containsKey(reminderTime)) {
+            throw new NoSuchElementException();
+        }
+
+        Reminder toRemove = reminderRecord.get(reminderTime);
         reminderRecord.remove(reminderTime);
+        reminderObservableList.remove(toRemove);
+    }
+
+    @Override
+    public ObservableList<Transaction> getTransactionsAsObservableList() {
+        return FXCollections.unmodifiableObservableList(transactionObservableList);
+    }
+
+    @Override
+    public ObservableList<Reminder> getRemindersAsObservableList() {
+        return FXCollections.unmodifiableObservableList(reminderObservableList);
     }
 }
