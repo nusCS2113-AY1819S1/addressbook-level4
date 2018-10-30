@@ -50,55 +50,55 @@ public class ViewExpenditureCommand extends Command {
         if (filter.matches(DATE_VALIDATION_REGEX)) {
             model.updateFilteredExpenditureList(predicateShowExpendituresOnDate);
             return new CommandResult(String.format(MESSAGE_SUCCESS_DATE, filter));
-        } else if (filter.equals("Food")) {
+        } else if ("Food".equals(filter)) {
             model.updateFilteredExpenditureList(predicateShowExpendituresOfCategory);
             return new CommandResult(String.format(MESSAGE_SUCCESS_CATEGORY, filter));
-        } else if (filter.equals("Drink")) {
+        } else if ("Drink".equals(filter)) {
             model.updateFilteredExpenditureList(predicateShowExpendituresOfCategory);
             return new CommandResult(String.format(MESSAGE_SUCCESS_CATEGORY, filter));
-        } else if (filter.equals("Clothing")) {
+        } else if ("Clothing".equals(filter)) {
             model.updateFilteredExpenditureList(predicateShowExpendituresOfCategory);
             return new CommandResult(String.format(MESSAGE_SUCCESS_CATEGORY, filter));
-        } else if (filter.equals("Electronics")) {
+        } else if ("Electronics".equals(filter)) {
             model.updateFilteredExpenditureList(predicateShowExpendituresOfCategory);
             return new CommandResult(String.format(MESSAGE_SUCCESS_CATEGORY, filter));
-        } else if (filter.equals("DailyNecessities")) {
+        } else if ("DailyNecessities".equals(filter)) {
             model.updateFilteredExpenditureList(predicateShowExpendituresOfCategory);
             return new CommandResult(String.format(MESSAGE_SUCCESS_CATEGORY, filter));
-        } else if (filter.equals("Sports")) {
+        } else if ("Sports".equals(filter)) {
             model.updateFilteredExpenditureList(predicateShowExpendituresOfCategory);
             return new CommandResult(String.format(MESSAGE_SUCCESS_CATEGORY, filter));
-        } else if (filter.equals("Communications")) {
+        } else if ("Communications".equals(filter)) {
             model.updateFilteredExpenditureList(predicateShowExpendituresOfCategory);
             return new CommandResult(String.format(MESSAGE_SUCCESS_CATEGORY, filter));
-        } else if (filter.equals("Travels")) {
+        } else if ("Travels".equals(filter)) {
             model.updateFilteredExpenditureList(predicateShowExpendituresOfCategory);
             return new CommandResult(String.format(MESSAGE_SUCCESS_CATEGORY, filter));
-        } else if (filter.equals("Study")) {
+        } else if ("Study".equals(filter)) {
             model.updateFilteredExpenditureList(predicateShowExpendituresOfCategory);
             return new CommandResult(String.format(MESSAGE_SUCCESS_CATEGORY, filter));
-        } else if (filter.equals("Office")) {
+        } else if ("Office".equals(filter)) {
             model.updateFilteredExpenditureList(predicateShowExpendituresOfCategory);
             return new CommandResult(String.format(MESSAGE_SUCCESS_CATEGORY, filter));
-        } else if (filter.equals("Pets")) {
+        } else if ("Pets".equals(filter)) {
             model.updateFilteredExpenditureList(predicateShowExpendituresOfCategory);
             return new CommandResult(String.format(MESSAGE_SUCCESS_CATEGORY, filter));
-        } else if (filter.equals("Gifts")) {
+        } else if ("Gifts".equals(filter)) {
             model.updateFilteredExpenditureList(predicateShowExpendituresOfCategory);
             return new CommandResult(String.format(MESSAGE_SUCCESS_CATEGORY, filter));
-        } else if (filter.equals("Entertainment")) {
+        } else if ("Entertainment".equals(filter)) {
             model.updateFilteredExpenditureList(predicateShowExpendituresOfCategory);
             return new CommandResult(String.format(MESSAGE_SUCCESS_CATEGORY, filter));
-        } else if (filter.equals("Traffic")) {
+        } else if ("Traffic".equals(filter)) {
             model.updateFilteredExpenditureList(predicateShowExpendituresOfCategory);
             return new CommandResult(String.format(MESSAGE_SUCCESS_CATEGORY, filter));
-        } else if (filter.equals("Shopping")) {
+        } else if ("Shopping".equals(filter)) {
             model.updateFilteredExpenditureList(predicateShowExpendituresOfCategory);
             return new CommandResult(String.format(MESSAGE_SUCCESS_CATEGORY, filter));
-        } else if (filter.equals("Beauty")) {
+        } else if ("Beauty".equals(filter)) {
             model.updateFilteredExpenditureList(predicateShowExpendituresOfCategory);
             return new CommandResult(String.format(MESSAGE_SUCCESS_CATEGORY, filter));
-        } else if (filter.equals("Furniture")) {
+        } else if ("Furniture".equals(filter)) {
             model.updateFilteredExpenditureList(predicateShowExpendituresOfCategory);
             return new CommandResult(String.format(MESSAGE_SUCCESS_CATEGORY, filter));
         } else {

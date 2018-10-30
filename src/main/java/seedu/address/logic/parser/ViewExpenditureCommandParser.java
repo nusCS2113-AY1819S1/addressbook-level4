@@ -39,7 +39,7 @@ public class ViewExpenditureCommandParser implements Parser<ViewExpenditureComma
                 || "Traffic".equals(test)
                 || "Shopping".equals(test)
                 || "Beauty".equals(test)
-                || "Furniture".equals(test) || test.equals("all")) {
+                || "Furniture".equals(test) || "all".equals(test)) {
             return new ViewExpenditureCommand(test);
         }
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewExpenditureCommand.MESSAGE_USAGE));
