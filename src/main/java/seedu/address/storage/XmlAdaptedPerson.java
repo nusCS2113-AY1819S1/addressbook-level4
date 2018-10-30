@@ -129,7 +129,7 @@ public class XmlAdaptedPerson {
         }
 
         final Skill modelSkill = new Skill(skill);
-        final SkillLevel modelSkillLevel = new SkillLevel(5); // TODO: Change this to a real value.
+        final SkillLevel modelSkillLevel = new SkillLevel(Integer.parseInt(skillLevel));
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSkill, modelSkillLevel, modelTags);
