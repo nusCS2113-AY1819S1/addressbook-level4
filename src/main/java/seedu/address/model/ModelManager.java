@@ -10,6 +10,8 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import seedu.address.analysis.Analysis;
+import seedu.address.analysis.AnalysisManager;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LoginInfo;
 import seedu.address.commons.core.LogsCenter;
@@ -31,6 +33,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Drink> filteredDrinks;
     private final InventoryList inventoryList;
     private final TransactionList transactionList;
+    private final Analysis analysis;
 
     /**
      * Initializes a ModelManager with the given inventoryList, userPrefs and transactionList
@@ -46,6 +49,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredDrinks = new FilteredList<>(inventoryList.getDrinkList());
         this.loginInfoManager = loginInfoManager;
         this.transactionList = transactionList;
+        analysis = new AnalysisManager(transactionList);
         // TODO: transaction manager, facade for transactions
     }
 
@@ -184,6 +188,13 @@ public class ModelManager extends ComponentManager implements Model {
     public String getTransactions() {
         return transactionList.toString();
     }
+
+    // ========== Analysis commands =================================================
+    @Override
+    public Price analyseCosts() {
+        return analysis.analyseCost();
+    }
+
 
 
     //=========== Login feature command ==============================================

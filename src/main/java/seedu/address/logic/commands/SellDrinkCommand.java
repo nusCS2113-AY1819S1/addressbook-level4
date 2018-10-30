@@ -8,7 +8,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.drink.Drink;
-import seedu.address.model.drink.Price;
 import seedu.address.model.drink.Quantity;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.TransactionType;

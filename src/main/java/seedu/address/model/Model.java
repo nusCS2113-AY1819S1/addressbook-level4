@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.LoginInfo;
 import seedu.address.model.drink.Drink;
+import seedu.address.model.drink.Price;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.UserName;
@@ -77,6 +78,13 @@ public interface Model {
      */
     ObservableList<Transaction> getTransactionList();
     String getTransactions(); //TODO: will be removed when UI is up
+
+    // ================ analysis commands ==========================
+
+    /**
+     * Returns the total cost incurred.
+     */
+    Price analyseCosts();
 
 
 

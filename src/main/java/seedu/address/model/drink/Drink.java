@@ -25,17 +25,22 @@ public class Drink {
     private final Set<Tag> tags = new HashSet<>();
 
     /**
-     * Every field must be present and not null.
+     * Constructs a Drink for the use of adding new drink into inventory.
+     * Hence, quantity is 0 and uniqueBatchList is empty
      */
     public Drink(Name name, Price costPrice, Price retailPrice, Set<Tag> tags) {
         requireAllNonNull(name, costPrice, retailPrice, tags);
         this.name = name;
         this.costPrice = costPrice;
         this.retailPrice = retailPrice;
+        uniqueBatchList = new UniqueBatchList();
         quantity = new Quantity("0");
         this.tags.addAll(tags);
     }
 
+    /**
+     * Every field must be present and not null.
+     */
     public Drink(Name name, Price costPrice, Price retailPrice, Quantity quantity, Set<Tag> tags) {
         requireAllNonNull(name, costPrice, retailPrice, quantity, tags);
         this.name = name;
@@ -152,7 +157,7 @@ public class Drink {
      * Decreases the quantity of the drink, using {@code quantity} as the value to decrease
      */
     public void decreaseQuantity(Quantity quantity) {
-
+        //uniqueBatchList.updateBatchTransaction();
     }
 
     /**

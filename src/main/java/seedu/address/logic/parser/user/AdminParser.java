@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddDrinkCommand;
+import seedu.address.logic.commands.AnalyseCostsCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -70,7 +71,14 @@ public class AdminParser {
 
         case ViewTransactionsCommand.COMMAND_WORD:
             return new ViewTransactionsCommand();
-        //==========login related command===============//
+
+        // ========= analysis commnads ==================
+        case AnalyseCostsCommand.COMMAND_WORD:
+            return new AnalyseCostsCommand();
+
+
+
+        // ==========login related command===============//
 
         case ChangePasswordCommand.COMMAND_WORD:
             return new ChangePasswordCommandParser().parse(arguments);
