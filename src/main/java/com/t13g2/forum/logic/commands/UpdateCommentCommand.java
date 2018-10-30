@@ -49,11 +49,14 @@ public class UpdateCommentCommand extends Command {
         String messageSuccess = "Updated comment " + commentId + " to a new title: %1$s";
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             Comment comment = unitOfWork.getCommentRepository().getComment(commentId);
-            if (Context.getInstance().getCurrentUser().getId() != comment.getCreatedByUserId()) {
+            if (Context.getInstance().getCurrentUser().getId() == comment.getCreatedByUserId()
+                    || Context.getInstance().isCurrentUserAdmin()) {
+                comment.setContent(contentToUpdate);
+                unitOfWork.commit();
+            } else {
                 throw new CommandException(MESSAGE_NOT_COMMENT_OWNER);
             }
-            comment.setContent(contentToUpdate);
-            unitOfWork.commit();
+
         } catch (EntityDoesNotExistException e) {
             throw new CommandException(MESSAGE_INVALID_COMMENT_ID);
         } catch (CommandException e) {

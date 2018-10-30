@@ -17,7 +17,7 @@ import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 
 //@@author HansKoh
 /**
- * Update a existing thread title in the forum book
+ * Update an existing thread title in the forum book
  * User could only update thread title created by his/her own.
  */
 public class UpdateThreadCommand extends Command {
@@ -49,12 +49,14 @@ public class UpdateThreadCommand extends Command {
         String messageSuccess = "Updated thread " + threadId + " to a new title: %1$s";
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             ForumThread forumThread = unitOfWork.getForumThreadRepository().getThread(threadId);
-            if (Context.getInstance().getCurrentUser().getId() != forumThread.getCreatedByUserId()) {
+            if (Context.getInstance().getCurrentUser().getId() == forumThread.getCreatedByUserId()
+                    || Context.getInstance().isCurrentUserAdmin()) {
+                forumThread.setTitle(threadTitleToUpdate);
+                unitOfWork.getForumThreadRepository().updateThread(forumThread);
+                unitOfWork.commit();
+            } else {
                 throw new CommandException(MESSAGE_NOT_THREAD_OWNER);
             }
-            forumThread.setTitle(threadTitleToUpdate);
-            unitOfWork.getForumThreadRepository().updateThread(forumThread);
-            unitOfWork.commit();
         } catch (EntityDoesNotExistException e) {
             throw new CommandException(MESSAGE_INVALID_THREAD_ID);
         } catch (CommandException e) {
