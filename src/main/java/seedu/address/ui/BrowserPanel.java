@@ -55,6 +55,9 @@ public class BrowserPanel extends UiPart<Region> {
      */
     private String formatEventPageUrl(Event event) {
         URL searchPage = getSearchPageUrlWithoutName();
+        String test = event.getComment().toString();
+        test = test.replace("{", "<");
+        test = test.replace("}", ">");
         String searchPageString = searchPage.toString()
                 + "?name=" + event.getName()
                 + "&contact=" + event.getContact()
@@ -63,7 +66,8 @@ public class BrowserPanel extends UiPart<Region> {
                 + "&venue=" + event.getVenue().value.replaceAll("#", "%23")
                 + "&dateTime=" + PAGE_DATE_FORMAT.format(event.getDateTime().dateTime).replaceAll(" ", "%20")
                 + "&tags=" + event.getTagsString()
-                + "&attendance=" + event.getAttendanceString();
+                + "&attendance=" + event.getAttendanceString()
+                + "&comments=" + test;
 
         return searchPageString;
     }
