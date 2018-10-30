@@ -77,22 +77,18 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 === Creating an import transaction
 When you buy and receive new goods, and want to update your stocks, you can enter an import transaction to do so. 
 
-[.noteblock]
-====
-[noteblock-title]#*Command format*#
-`import n/NAME q/QUANTITY`
-====
-
 [NOTE]
 ====
-Desired drink must be recorded in Drink I/O
+#*Command format*#
+`import n/NAME q/QUANTITY`
+- Desired drink must be recorded in Drink I/O
 ====
 
 To record an import transaction,
 . Enter "import"
 . Key in n/, followed by name of drink
 . Key in q/, followed by quantity imported 
-. Press **enter**
+. Press kbd:[enter]
 . Check whether the transaction has been recorded successfully
 .. If you see the message "import transaction recorded!", the transaction had been successfully entered into DrinkIo
 .. If not, follow the instructions displayed in the message display pane, and re-enter the command
@@ -104,7 +100,7 @@ The drink you want to transact must be recorded in DrinkIo
 
 [NOTE]
 ====
-#*More about batches*#
+#*More about batches\n*#
 <to be added>
 
 ====
@@ -115,14 +111,11 @@ The drink you want to transact must be recorded in DrinkIo
 === Creating a sales transaction
 When you make a sale to your customers, recording the sale in Drink I/O allows you to update your transactions as well as the current stock. 
 
-[.noteblock]
-====
-[noteblock-title]#*Command format*#
-`sell n/NAME q/QUANTITY`
-====
 
 [NOTE]
 ====
+#*Command format*#
+`sell n/NAME q/QUANTITY`
 * Desired drink must be recorded in Drink I/O
 * Quantity must not exceed current stock
 ====
@@ -131,7 +124,7 @@ To record a sale transaction,
 . Use the sell command
 . Key in n/, followed by name of drink
 . Key in q/, followed by quantity transacted in sale
-. Press **enter**
+. Press kbd:[enter]
 . Check whether the transaction has been recorded successfully,
 .. If you see the message "sale transaction recorded!", the transaction had been successfully entered into Drink I/O
 .. If not, follow the instructions displayed in the message display pane, and re-enter the command
