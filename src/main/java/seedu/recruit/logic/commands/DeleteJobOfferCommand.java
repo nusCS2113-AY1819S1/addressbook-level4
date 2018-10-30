@@ -13,7 +13,6 @@ import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.joboffer.JobOffer;
-import seedu.recruit.ui.MainWindow;
 
 /**
  * Deletes a jobOffer identified using it's displayed index from the recruit book.
@@ -39,9 +38,8 @@ public class DeleteJobOfferCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        if (!MainWindow.getDisplayedBook().equals("companybook")) {
-            EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
-        }
+        EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
+
         List<JobOffer> lastShownList = model.getFilteredCompanyJobList();
         StringBuilder deletedJobOffers = new StringBuilder();
 

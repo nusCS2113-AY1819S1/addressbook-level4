@@ -19,7 +19,6 @@ import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.candidate.Candidate;
-import seedu.recruit.ui.MainWindow;
 
 /**
  * Adds a candidate to the CandidateBook.
@@ -70,9 +69,7 @@ public class AddCandidateCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        if (!MainWindow.getDisplayedBook().equals("candidatebook")) {
-            EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
-        }
+        EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
 
         if (model.hasCandidate(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);

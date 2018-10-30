@@ -13,7 +13,6 @@ import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.company.Company;
-import seedu.recruit.ui.MainWindow;
 
 /**
  * Adds a company to the CompanyBook.
@@ -52,9 +51,7 @@ public class AddCompanyCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        if (!MainWindow.getDisplayedBook().equals("companybook")) {
-            EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
-        }
+        EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
 
         if (model.hasCompany(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_COMPANY);

@@ -46,7 +46,6 @@ public class SelectCandidateCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
 
         List<Candidate> filteredCandidateList = model.getFilteredCandidateList();
 
@@ -55,7 +54,6 @@ public class SelectCandidateCommand extends Command {
         }
 
         selectedCandidate = filteredCandidateList.get(targetIndex.getZeroBased());
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
 
         if (ShortlistCandidateInitializationCommand.isShortlisting()) {
             LogicManager.setLogicState(ShortlistCandidateCommand.COMMAND_LOGIC_STATE);
@@ -63,6 +61,8 @@ public class SelectCandidateCommand extends Command {
                     targetIndex.getOneBased()) + ShortlistCandidateCommand.MESSAGE_USAGE);
         }
 
+        EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
         return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex.getOneBased()));
     }
 

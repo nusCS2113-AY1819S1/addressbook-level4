@@ -1,18 +1,13 @@
 package systemtests;
 
-import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.recruit.ui.BrowserPanel.DEFAULT_PAGE;
 import static seedu.recruit.ui.StatusBarFooter.SYNC_COMPANY_STATUS_INITIAL;
 import static seedu.recruit.ui.StatusBarFooter.SYNC_COMPANY_STATUS_UPDATED;
 import static seedu.recruit.ui.StatusBarFooter.TOTAL_COMPANIES_STATUS;
-import static seedu.recruit.ui.UiPart.FXML_FILE_FOLDER;
-import static seedu.recruit.ui.testutil.GuiTestAssert.assertListMatching;
+import static seedu.recruit.ui.testutil.GuiTestAssert.assertCompanyListMatching;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -23,35 +18,33 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 
 import guitests.guihandles.BrowserPanelHandle;
-import guitests.guihandles.CompanyDetailsPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
+import guitests.guihandles.CompanyJobDetailsPanelHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
-import seedu.recruit.MainApp;
 import seedu.recruit.TestApp;
 import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.logic.commands.ClearCompanyBookCommand;
 import seedu.recruit.logic.commands.FindCompanyCommand;
-import seedu.recruit.logic.commands.ListCommand;
-import seedu.recruit.logic.commands.SelectCommand;
+import seedu.recruit.logic.commands.ListCompanyCommand;
+import seedu.recruit.logic.commands.SelectCompanyCommand;
+import seedu.recruit.logic.commands.SwitchBookCommand;
+import seedu.recruit.model.CandidateBook;
 import seedu.recruit.model.CompanyBook;
 import seedu.recruit.model.Model;
 import seedu.recruit.testutil.TypicalCompanies;
-import seedu.recruit.ui.BrowserPanel;
+import seedu.recruit.testutil.TypicalPersons;
 import seedu.recruit.ui.CommandBox;
 
-
 /**
- * A system test class for CompanyBook, which provides access to handles of GUI components and helper methods
+ * A system test class for Company Book, which provides access to handles of GUI components and helper methods
  * for test verification.
  */
-@Ignore
 public abstract class CompanyBookSystemTest {
     @ClassRule
     public static ClockRule clockRule = new ClockRule();
@@ -72,10 +65,11 @@ public abstract class CompanyBookSystemTest {
     @Before
     public void setUp() {
         setupHelper = new SystemTestSetupHelper();
-        testApp = setupHelper.setupApplication(this::getInitialData, getDataFileLocation());
+        testApp = setupHelper.setupApplication(this::getInitialCandidateData, this::getInitialCompanyData,
+                getCandidateDataFileLocation(), getCompanyDataFileLocation());
         mainWindowHandle = setupHelper.setupMainWindowHandle();
-
-        waitUntilBrowserLoaded(getBrowserPanel());
+        executeCommand(SwitchBookCommand.COMMAND_WORD);
+        //waitUntilBrowserLoaded(getBrowserPanel());
         assertApplicationStartingStateIsCorrect();
     }
 
@@ -86,17 +80,31 @@ public abstract class CompanyBookSystemTest {
     }
 
     /**
-     * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
+     * Returns the data to be loaded into the file in {@link #getCandidateDataFileLocation()}.
      */
-    protected CompanyBook getInitialData() {
+    protected CandidateBook getInitialCandidateData() {
+        return TypicalPersons.getTypicalAddressBook();
+    }
+
+    /**
+     * Returns the data to be loaded into the file in {@link #getCompanyDataFileLocation()}.
+     */
+    protected CompanyBook getInitialCompanyData() {
         return TypicalCompanies.getTypicalCompanyBook();
     }
 
     /**
-     * Returns the directory of the data file.
+     * Returns the directory of the data file for candidate book.
      */
-    protected Path getDataFileLocation() {
-        return TestApp.SAVE_LOCATION_FOR_TESTING;
+    protected Path getCandidateDataFileLocation() {
+        return TestApp.SAVE_LOCATION_FOR_CANDIDATE_BOOK_TESTING;
+    }
+
+    /**
+     * Returns the directory of the data file for company book.
+     */
+    protected Path getCompanyDataFileLocation() {
+        return TestApp.SAVE_LOCATION_FOR_COMPANY_BOOK_TESTING;
     }
 
     public MainWindowHandle getMainWindowHandle() {
@@ -107,15 +115,22 @@ public abstract class CompanyBookSystemTest {
         return mainWindowHandle.getCommandBox();
     }
 
-    public CompanyDetailsPanelHandle getCompanyListPanel() { return mainWindowHandle.getCompanyListPanel(); }
+    public CompanyJobDetailsPanelHandle getCompanyJobDetailsPanel() {
+        return mainWindowHandle.getCompanyJobDetailsPanel();
+    }
+
+    public CompanyJobDetailsPanelHandle initializeCompanyJobDetailsPanel() {
+        return mainWindowHandle.initializeCompanyJobDetailsPanel();
+    }
 
     public MainMenuHandle getMainMenu() {
         return mainWindowHandle.getMainMenu();
     }
 
+    /**
     public BrowserPanelHandle getBrowserPanel() {
         return mainWindowHandle.getBrowserPanel();
-    }
+    }*/
 
     public StatusBarFooterHandle getStatusBarFooter() {
         return mainWindowHandle.getStatusBarFooter();
@@ -136,15 +151,18 @@ public abstract class CompanyBookSystemTest {
         clockRule.setInjectedClockToCurrentTime();
 
         mainWindowHandle.getCommandBox().run(command);
+        if (!mainWindowHandle.isCompanyBookInitialized()) {
+            initializeCompanyJobDetailsPanel();
+        }
 
-        waitUntilBrowserLoaded(getBrowserPanel());
+        //waitUntilBrowserLoaded(getBrowserPanel());
     }
 
     /**
      * Displays all companies in the recruit book.
      */
-    protected void showAllPersons() {
-        executeCommand(ListCommand.COMMAND_WORD);
+    protected void showAllCompanies() {
+        executeCommand(ListCompanyCommand.COMMAND_WORD);
         assertEquals(getModel().getCompanyBook().getCompanyList().size(),
                 getModel().getFilteredCompanyList().size());
     }
@@ -152,7 +170,7 @@ public abstract class CompanyBookSystemTest {
     /**
      * Displays all companies with any parts of their names matching {@code keyword} (case-insensitive).
      */
-    protected void showPersonsWithName(String keyword) {
+    protected void showCompaniesWithName(String keyword) {
         executeCommand(FindCompanyCommand.COMMAND_WORD + " " + keyword);
         assertTrue(getModel().getFilteredCompanyList().size()
                 < getModel().getCompanyBook().getCompanyList().size());
@@ -161,15 +179,15 @@ public abstract class CompanyBookSystemTest {
     /**
      * Selects the company at {@code index} of the displayed list.
      */
-    protected void selectPerson(Index index) {
-        executeCommand(SelectCommand.COMMAND_WORD + " " + index.getOneBased());
-        assertEquals(index.getZeroBased(), getCompanyListPanel().getSelectedCardIndex());
+    protected void selectCompany(Index index) {
+        executeCommand(SelectCompanyCommand.COMMAND_WORD + " " + index.getOneBased());
+        assertEquals(index.getZeroBased(), getCompanyJobDetailsPanel().getSelectedCardIndex());
     }
 
     /**
      * Deletes all companies in the recruit book.
      */
-    protected void deleteAllPersons() {
+    protected void deleteAllCompanies() {
         executeCommand(ClearCompanyBookCommand.COMMAND_WORD);
         assertEquals(0, getModel().getCompanyBook().getCompanyList().size());
     }
@@ -177,27 +195,29 @@ public abstract class CompanyBookSystemTest {
     /**
      * Asserts that the {@code CommandBox} displays {@code expectedCommandInput}, the {@code ResultDisplay} displays
      * {@code expectedResultMessage}, the storage contains the same company objects as {@code expectedModel}
-     * and the company list panel displays the companies in the model correctly.
+     * and the company job details panel displays the companies in the model correctly.
      */
     protected void assertApplicationDisplaysExpected(String expectedCommandInput, String expectedResultMessage,
-                                                     Model expectedModel) {
+            Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(new CompanyBook(expectedModel.getCompanyBook()), testApp.readStorageCompanyBook());
-        assertListMatching(getCompanyListPanel(), expectedModel.getFilteredCompanyList());
+        assertCompanyListMatching(getCompanyJobDetailsPanel(), expectedModel.getFilteredCompanyList());
     }
 
     /**
-     * Calls {@code BrowserPanelHandle}, {@code CompanyDetailsPanelHandle}
+     * Calls {@code BrowserPanelHandle}, {@code CompanyJobDetailsPanelHandle}
      * and {@code StatusBarFooterHandle} to remember their current state.
      */
     private void rememberStates() {
         StatusBarFooterHandle statusBarFooterHandle = getStatusBarFooter();
-        getBrowserPanel().rememberUrl();
-        statusBarFooterHandle.rememberSaveLocation();
-        statusBarFooterHandle.rememberTotalPersonsStatus();
-        statusBarFooterHandle.rememberSyncStatus();
-        getCompanyListPanel().rememberSelectedCompanyCard();
+        //getBrowserPanel().rememberUrl();
+        statusBarFooterHandle.rememberSaveCompanyBookLocation();
+        statusBarFooterHandle.rememberTotalCompaniesStatus();
+        statusBarFooterHandle.rememberCompaniesSyncStatus();
+        if (mainWindowHandle.isCompanyBookInitialized()) {
+            getCompanyJobDetailsPanel().rememberSelectedCompanyCard();
+        }
     }
 
     /**
@@ -206,38 +226,39 @@ public abstract class CompanyBookSystemTest {
      * @see BrowserPanelHandle#isUrlChanged()
      */
     protected void assertSelectedCardDeselected() {
-        assertFalse(getBrowserPanel().isUrlChanged());
-        assertFalse(getCompanyListPanel().isAnyCardSelected());
+        //assertFalse(getBrowserPanel().isUrlChanged());
+        assertFalse(getCompanyJobDetailsPanel().isAnyCardSelected());
     }
 
     /**
-     * Asserts that the browser's url is changed to display the details of the company in the company list panel at
-     * {@code expectedSelectedCardIndex}, and only the card at {@code expectedSelectedCardIndex} is selected.
+     * Asserts that the browser's url is changed to display the details of the company in the company job details panel
+     * at {@code expectedSelectedCardIndex}, and only the card at {@code expectedSelectedCardIndex} is selected.
      * @see BrowserPanelHandle#isUrlChanged()
-     * @see CompanyDetailsPanelHandle#isSelectedPersonCardChanged()
+     * @see CompanyJobDetailsPanelHandle#isSelectedCompanyCardChanged() ()
      */
     protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
-        getCompanyListPanel().navigateToCard(getCompanyListPanel().getSelectedCardIndex());
-        String selectedCardName = getCompanyListPanel().getHandleToSelectedCard().getName();
-        URL expectedUrl;
+        getCompanyJobDetailsPanel().navigateToCard(getCompanyJobDetailsPanel().getSelectedCardIndex());
+        String selectedCardName = getCompanyJobDetailsPanel().getHandleToSelectedCard().getName();
+        //URL expectedUrl;
+        /**
         try {
             expectedUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + selectedCardName.replaceAll(" ", "%20"));
         } catch (MalformedURLException mue) {
             throw new AssertionError("URL expected to be valid.", mue);
-        }
-        assertEquals(expectedUrl, getBrowserPanel().getLoadedUrl());
+        }*/
+        //assertEquals(expectedUrl, getBrowserPanel().getLoadedUrl());
 
-        assertEquals(expectedSelectedCardIndex.getZeroBased(), getCompanyListPanel().getSelectedCardIndex());
+        assertEquals(expectedSelectedCardIndex.getZeroBased(), getCompanyJobDetailsPanel().getSelectedCardIndex());
     }
 
     /**
-     * Asserts that the browser's url and the selected card in the company list panel remain unchanged.
+     * Asserts that the browser's url and the selected card in the company job details panel remain unchanged.
      * @see BrowserPanelHandle#isUrlChanged()
-     * @see CompanyDetailsPanelHandle#isSelectedCompanyCardChanged()
+     * @see CompanyJobDetailsPanelHandle#isSelectedCompanyCardChanged() ()
      */
     protected void assertSelectedCardUnchanged() {
-        assertFalse(getBrowserPanel().isUrlChanged());
-        assertFalse(getCompanyListPanel().isSelectedCompanyCardChanged());
+        //assertFalse(getBrowserPanel().isUrlChanged());
+        assertFalse(getCompanyJobDetailsPanel().isSelectedCompanyCardChanged());
     }
 
     /**
@@ -259,9 +280,9 @@ public abstract class CompanyBookSystemTest {
      */
     protected void assertStatusBarUnchanged() {
         StatusBarFooterHandle handle = getStatusBarFooter();
-        assertFalse(handle.isSaveLocationChanged());
-        assertFalse(handle.isTotalPersonsStatusChanged());
-        assertFalse(handle.isSyncStatusChanged());
+        assertFalse(handle.isSaveCompanyBookLocationChanged());
+        assertFalse(handle.isTotalCompaniesStatusChanged());
+        assertFalse(handle.isCompaniesSyncStatusChanged());
     }
 
     /**
@@ -272,25 +293,25 @@ public abstract class CompanyBookSystemTest {
     protected void assertStatusBarUnchangedExceptSyncStatus() {
         StatusBarFooterHandle handle = getStatusBarFooter();
         String timestamp = new Date(clockRule.getInjectedClock().millis()).toString();
-        String expectedSyncStatus = String.format(SYNC_COMPANY_STATUS_INITIAL, timestamp);
-        assertEquals(expectedSyncStatus, handle.getSyncStatus());
-        assertFalse(handle.isSaveLocationChanged());
-        assertFalse(handle.isTotalPersonsStatusChanged());
+        String expectedSyncStatus = String.format(SYNC_COMPANY_STATUS_UPDATED, timestamp);
+        assertEquals(expectedSyncStatus, handle.getCompaniesSyncStatus());
+        assertFalse(handle.isSaveCompanyBookLocationChanged());
+        assertFalse(handle.isTotalCompaniesStatusChanged());
     }
 
     /**
-     * Asserts that the sync status in the status bar was changed to the timing of
-     * {@code ClockRule#getInjectedClock()}, and total persons was changed to match the total
-     * number of persons in the recruit book, while the save location remains the same.
+     * Asserts that the companies sync status in the status bar was changed to the timing of
+     * {@code ClockRule#getInjectedClock()}, and total companies was changed to match the total
+     * number of companies in the recruit book, while the save location remains the same.
      */
     protected void assertStatusBarChangedExceptSaveLocation() {
         StatusBarFooterHandle handle = getStatusBarFooter();
         String timestamp = new Date(clockRule.getInjectedClock().millis()).toString();
-        String expectedSyncStatus = String.format(SYNC_COMPANY_STATUS_INITIAL, timestamp);
-        assertEquals(expectedSyncStatus, handle.getSyncStatus());
-        final int totalPersons = testApp.getModel().getCandidateBook().getCandidateList().size();
-        assertEquals(String.format(TOTAL_COMPANIES_STATUS, totalPersons), handle.getTotalPersonsStatus());
-        assertFalse(handle.isSaveLocationChanged());
+        String expectedSyncStatus = String.format(SYNC_COMPANY_STATUS_UPDATED, timestamp);
+        assertEquals(expectedSyncStatus, handle.getCompaniesSyncStatus());
+        final int totalCompanies = testApp.getModel().getCompanyBook().getCompanyList().size();
+        assertEquals(String.format(TOTAL_COMPANIES_STATUS, totalCompanies), handle.getTotalCompaniesStatus());
+        assertFalse(handle.isSaveCompanyBookLocationChanged());
     }
 
     /**
@@ -298,14 +319,13 @@ public abstract class CompanyBookSystemTest {
      */
     private void assertApplicationStartingStateIsCorrect() {
         assertEquals("", getCommandBox().getInput());
-        assertEquals("", getResultDisplay().getText());
-        assertListMatching(getCompanyListPanel(), getModel().getFilteredCompanyList());
-        assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE), getBrowserPanel().getLoadedUrl());
+        assertEquals(SwitchBookCommand.MESSAGE_SUCCESSFULLY_SWITCHED_TO_COMPANY_BOOK, getResultDisplay().getText());
+        assertCompanyListMatching(getCompanyJobDetailsPanel(), getModel().getFilteredCompanyList());
         assertEquals(Paths.get(".").resolve(testApp.getCompanyStorageSaveLocation()).toString(),
-                getStatusBarFooter().getSaveLocation());
-        assertEquals(SYNC_COMPANY_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
+                getStatusBarFooter().getSaveCompanyBookLocation());
+        assertEquals(SYNC_COMPANY_STATUS_INITIAL, getStatusBarFooter().getCompaniesSyncStatus());
         assertEquals(String.format(TOTAL_COMPANIES_STATUS, getModel().getCompanyBook().getCompanyList().size()),
-                getStatusBarFooter().getTotalPersonsStatus());
+                getStatusBarFooter().getTotalCompaniesStatus());
     }
 
     /**

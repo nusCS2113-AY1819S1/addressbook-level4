@@ -11,7 +11,6 @@ import static seedu.recruit.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_THIRD;
 import static seedu.recruit.testutil.TypicalPersons.getTypicalAddressBook;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -28,7 +27,6 @@ import seedu.recruit.ui.testutil.EventsCollectorRule;
 /**
  * Contains integration tests (interaction with the Model) for {@code SelectCandidateCommand}.
  */
-@Ignore
 public class SelectCandidateCommandTest {
     @Rule
     public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();

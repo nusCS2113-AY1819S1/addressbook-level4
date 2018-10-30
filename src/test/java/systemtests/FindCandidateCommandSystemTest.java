@@ -11,7 +11,6 @@ import static seedu.recruit.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.recruit.commons.core.index.Index;
@@ -22,7 +21,6 @@ import seedu.recruit.logic.commands.UndoCandidateBookCommand;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.tag.Tag;
 
-@Ignore("not updated with new UI changes")
 public class FindCandidateCommandSystemTest extends CandidateBookSystemTest {
 
     @Test
@@ -32,7 +30,8 @@ public class FindCandidateCommandSystemTest extends CandidateBookSystemTest {
          */
         String command = "   " + FindCandidateCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER + "   ";
         Model expectedModel = getModel();
-        ModelHelper.setCandidateFilteredList(expectedModel, BENSON, DANIEL); // first names of Benson and Daniel are "Meier"
+        ModelHelper.setCandidateFilteredList(expectedModel,
+                BENSON, DANIEL); // first names of Benson and Daniel are "Meier"
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -138,7 +137,7 @@ public class FindCandidateCommandSystemTest extends CandidateBookSystemTest {
         /* Case: find while a candidate is selected -> selected card deselected */
         showAllPersons();
         selectPerson(Index.fromOneBased(1));
-        assertFalse(getPersonListPanel().getHandleToSelectedCard().getName().equals(DANIEL.getName().fullName));
+        assertFalse(getCandidateDetailsPanel().getHandleToSelectedCard().getName().equals(DANIEL.getName().fullName));
         command = FindCandidateCommand.COMMAND_WORD + " Daniel";
         ModelHelper.setCandidateFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);
