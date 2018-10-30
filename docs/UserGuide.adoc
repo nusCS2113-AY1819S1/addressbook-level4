@@ -336,4 +336,5 @@ e.g.`select 2`
 e.g. `addtime mon 10-12`
 * *Delete timeslot* : `deletetime` +
 e.g. `deletetime tue 12-14`
-* *Import Timetable from a file* : `import INDEX file/FILE_LOCATION`
+* *Import Timetable from a file* : `import [FILE_LOCATION]`
+* *Export Timetable to a file* : `export [FILE_LOCATION]`
