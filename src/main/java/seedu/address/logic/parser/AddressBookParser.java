@@ -126,11 +126,12 @@ public class AddressBookParser {
         case ExportCommand.COMMAND_WORD_ALIAS:
             return new ExportCommandParser().parse(arguments);
 
-        // TODO: Implement aliases
         case AddTimeCommand.COMMAND_WORD:
+        case AddTimeCommand.COMMAND_WORD_ALIAS:
             return new AddTimeCommandParser().parse(arguments);
 
         case DeleteTimeCommand.COMMAND_WORD:
+        case DeleteTimeCommand.COMMAND_WORD_ALIAS:
             return new DeleteTimeCommandParser().parse(arguments);
 
         case FreeCommand.COMMAND_WORD:
