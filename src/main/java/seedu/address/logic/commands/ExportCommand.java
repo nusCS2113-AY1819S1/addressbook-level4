@@ -14,7 +14,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 //@@author jitwei98
-
 /**
  * Exports the selected person in the address book to a csv/vcf file.
  */
