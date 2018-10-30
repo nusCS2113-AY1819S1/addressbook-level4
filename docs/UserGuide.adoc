@@ -516,7 +516,7 @@ _{explain how the user can enable/disable data encryption}_
 |	*Filter* | `filter <tag> [h/highest education level] [j/job] [s/expected salary] [x/age]` +
 
             e.g. `filter h/O LEVEL`
-|   *Sort* | `sort`
+|   *Sort* | `sortc` or `sortC`
 |   *Shortlist Candidate* | `shortlist`
 |   *Email* | `email`
 |   *Cancel* | `cancel`

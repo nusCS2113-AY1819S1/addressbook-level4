@@ -58,7 +58,7 @@ public class CandidateCard extends UiPart<Region> {
         name.setText(candidate.getName().fullName);
         job.setText(candidate.getJob().value);
         education.setText(candidate.getEducation().value);
-        salary.setText(candidate.getSalary().value);SHORTL
+        salary.setText(candidate.getSalary().value);
         candidate.getTags().forEach(tag -> tags.getChildren().add(labelStyle(tag.tagName)));
     }
 
