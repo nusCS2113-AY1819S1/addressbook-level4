@@ -57,7 +57,7 @@ public class DrinkCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof DrinkCard)) {
             return false;
         }
 
