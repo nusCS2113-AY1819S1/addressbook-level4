@@ -12,7 +12,7 @@ import java.util.List;
 
 import seedu.recruit.logic.commands.FindCompanyCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
-import seedu.recruit.model.company.CompanyNameContainsKeywordsPredicate;
+import seedu.recruit.model.company.CompanyContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCompanyCommand object
@@ -49,7 +49,7 @@ public class FindCompanyCommandParser implements Parser<FindCompanyCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCompanyCommand.MESSAGE_USAGE));
         }
 
-        return new FindCompanyCommand(new CompanyNameContainsKeywordsPredicate(keywordsList));
+        return new FindCompanyCommand(new CompanyContainsKeywordsPredicate(keywordsList));
     }
 
 }

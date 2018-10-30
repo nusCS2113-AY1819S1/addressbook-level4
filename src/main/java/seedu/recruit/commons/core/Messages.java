@@ -13,4 +13,5 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX = "The company index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_COMPANIES_LISTED_OVERVIEW = "%1$d companies listed";
+    public static final String MESSAGE_JOBS_LISTED_OVERVIEW = "%1$d jobs listed";
 }

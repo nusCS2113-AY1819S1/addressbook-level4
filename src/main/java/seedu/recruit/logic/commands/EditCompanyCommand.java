@@ -16,6 +16,7 @@ import seedu.recruit.commons.util.CollectionUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.candidate.UniqueCandidateList;
 import seedu.recruit.model.commons.Address;
 import seedu.recruit.model.commons.Email;
 import seedu.recruit.model.commons.Phone;
@@ -113,7 +114,7 @@ public class EditCompanyCommand extends Command {
             UniqueJobList updatedJobList = new UniqueJobList();
             for(JobOffer offer : companyToEdit.getUniqueJobList()) {
                 JobOffer updatedOffer = new JobOffer(updatedName, offer.getJob(), offer.getGender(), offer.getAgeRange()
-                        , offer.getEducation(), offer.getSalary());
+                        , offer.getEducation(), offer.getSalary(), offer.getUniqueCandidateList());
                 updatedJobList.add(updatedOffer);
             }
             return updatedJobList;
