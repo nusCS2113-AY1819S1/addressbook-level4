@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.function.Supplier;
 
+import javax.xml.crypto.Data;
+
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import seedu.recruit.commons.core.Config;
@@ -114,14 +116,14 @@ public class TestApp extends MainApp {
     }
 
     /**
-     * Returns the file path of the candidate book storage file.
+     * Returns the file path of the candidate book in the storage file.
      */
     public Path getCandidateStorageSaveLocation() {
         return storage.getCandidateBookFilePath();
     }
 
     /**
-     * Returns the file path of the company book storage file.
+     * Returns the file path of the company book in the storage file
      */
     public Path getCompanyStorageSaveLocation() {
         return storage.getCompanyBookFilePath();

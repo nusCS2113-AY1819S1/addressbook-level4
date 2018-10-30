@@ -53,13 +53,9 @@ public class Candidate {
         this.tags.addAll(tags);
     }
 
-    public Name getName() {
-        return name;
-    }
+    public Name getName() { return name; }
 
-    public Gender getGender() {
-        return gender;
-    }
+    public Gender getGender() { return gender; }
 
     public Age getAge() {
         return age;

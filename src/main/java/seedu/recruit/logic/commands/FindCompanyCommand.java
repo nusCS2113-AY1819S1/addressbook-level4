@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.model.Model;
-import seedu.recruit.model.company.CompanyNameContainsKeywordsPredicate;
+import seedu.recruit.model.company.CompanyContainsKeywordsPredicate;
 
 /**
  * Finds and lists all companies in company book whose company name contains any of the argument keywords.
@@ -18,12 +18,15 @@ public class FindCompanyCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all companies whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: "
-            + "NAME \n"
-            + "Example: " + COMMAND_WORD + " Hanbaobao Pte Ltd";
+            + "COMPANY NAME "
+            + "PHONE "
+            + "EMAIL "
+            + "ADDRESS \n"
+            + "Example: " + COMMAND_WORD + "c/" + "Hanbaobao Pte Ltd";
 
-    private final CompanyNameContainsKeywordsPredicate predicate;
+    private final CompanyContainsKeywordsPredicate predicate;
 
-    public FindCompanyCommand(CompanyNameContainsKeywordsPredicate predicate) {
+    public FindCompanyCommand(CompanyContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -32,7 +35,7 @@ public class FindCompanyCommand extends Command {
         requireNonNull(model);
         model.updateFilteredCompanyList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredCompanyList().size()));
+                String.format(Messages.MESSAGE_COMPANIES_LISTED_OVERVIEW, model.getFilteredCompanyList().size()));
     }
 
     @Override
