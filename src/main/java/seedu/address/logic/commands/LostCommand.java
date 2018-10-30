@@ -73,7 +73,7 @@ public class LostCommand extends Command {
      * Creates and returns a {@code Item} with the details of {@code itemToLost}
      * edited with {@code LostDescriptor}.
      */
-    private static Item createLostItem(Item itemToLost, LostDescriptor lostDescriptor) {
+    private static Item createLostItem(Item itemToLost, LostDescriptor lostDescriptor) throws CommandException {
         assert itemToLost != null;
         Loststatus currentLoststatus = itemToLost.getLoststatus();
         Loststatus updatedLoststatus;
@@ -86,6 +86,7 @@ public class LostCommand extends Command {
         updatedLost += updatedValue;
         updatedFound -= updatedValue;
         updatedLoststatus = new Loststatus(updatedLost, updatedFound);
+        if (updatedFound<0) throw new CommandException(MESSAGE_INVALID_QUANTITY);
 
         Quantity updatedQuantity = new Quantity(Integer.toString(initialValue - updatedValue));
 
