@@ -1,6 +1,9 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
+
+import org.apache.commons.lang3.StringUtils;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,6 +17,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.suggestions.InputCommandSuggestion;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -23,9 +27,12 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
 
+    private static InputCommandSuggestion ics = new InputCommandSuggestion();
+
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
     private ListElementPointer historySnapshot;
+
 
     @FXML
     private TextField commandTextField;
@@ -43,17 +50,38 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     private void handleKeyPress(KeyEvent keyEvent) {
+        // TODO: figure out how to fix on demand type checking
+        /*
+        String keyInput = keyEvent.getText();
+
+        System.out.println(keyEvent.getCode());
+        if (keyEvent.getCode() == KeyCode.BACK_SPACE) {
+            boolean isCurSubstringValid = ics.removeSearchCharacter();
+            if (isCurSubstringValid) {
+                //setStyleToDefault();
+            }
+        } else if (!keyInput.isEmpty()) {
+            if (!ics.checkValidCharacter(keyInput.charAt(0)))  {
+                //setStyleToIndicateCommandFailure();
+            } else {
+                //setStyleToDefault();
+            }
+        }*/
+
         switch (keyEvent.getCode()) {
         case UP:
             // As up and down buttons will alter the position of the caret,
             // consuming it causes the caret's position to remain unchanged
             keyEvent.consume();
-
             navigateToPreviousInput();
             break;
         case DOWN:
             keyEvent.consume();
             navigateToNextInput();
+            break;
+        case TAB:
+            keyEvent.consume();
+            handleTabPressed();
             break;
         default:
             // let JavaFx handle the keypress
@@ -108,6 +136,8 @@ public class CommandBox extends UiPart<Region> {
             commandTextField.setText("");
             logger.info("Result: " + commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
+            // setStyleToDefault();
+            // ics.resetSearchCrawler();
 
         } catch (CommandException | ParseException e) {
             initHistory();
@@ -115,6 +145,23 @@ public class CommandBox extends UiPart<Region> {
             setStyleToIndicateCommandFailure();
             logger.info("Invalid command: " + commandTextField.getText());
             raise(new NewResultAvailableEvent(e.getMessage()));
+        }
+    }
+
+    //@@author elstonayx
+    /**
+     * Handles when the tab button is pressed
+     */
+    private void handleTabPressed() {
+        commandTextField.requestFocus();
+        // String prefix = commandTextField.getText();
+        ArrayList<String> listOfCommands = ics.getSuggestedCommands(commandTextField.getText());
+        if (listOfCommands.size() == 1) {
+            commandTextField.setText(listOfCommands.get(0));
+        } else {
+            String suggestions = StringUtils.join(listOfCommands, ", ");
+            logger.info("Tab Pressed. Suggestions: " + suggestions);
+            raise(new NewResultAvailableEvent(suggestions));
         }
     }
 

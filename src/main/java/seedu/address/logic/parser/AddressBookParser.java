@@ -6,7 +6,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.CommandSuggestion;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -24,6 +23,7 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.TodoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.suggestions.WrongCommandSuggestion;
 
 
 /**
@@ -112,7 +112,7 @@ public class AddressBookParser {
             return new TodoCommandParser().parse(arguments);
 
         default:
-            String suggestion = new CommandSuggestion().getSuggestion(commandWord);
+            String suggestion = new WrongCommandSuggestion().getSuggestion(commandWord);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND + System.lineSeparator() + suggestion);
         }
     }

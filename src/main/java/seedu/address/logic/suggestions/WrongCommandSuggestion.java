@@ -1,4 +1,4 @@
-package seedu.address.logic;
+package seedu.address.logic.suggestions;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -16,11 +16,11 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.TodoCommand;
 import seedu.address.logic.commands.UndoCommand;
 
+//@@author elstonayx
 /**
  * Suggests a command with the closest match to the inputted string.
- * @author elstonayx
  */
-public class CommandSuggestion {
+public class WrongCommandSuggestion {
     public static final String SUGGESTION_HEADER = "Did you mean: %1$s?";
     public static final String NO_SUGGESTION = "No suggestions available.";
     private static final int WORD_DISTANCE_LIMIT = 2;
