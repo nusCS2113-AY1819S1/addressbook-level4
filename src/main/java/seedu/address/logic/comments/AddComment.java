@@ -1,5 +1,7 @@
 package seedu.address.logic.comments;
 
+import seedu.address.model.UserSession;
+
 import java.util.Vector;
 
 /**
@@ -22,7 +24,7 @@ public class AddComment extends Comments {
     public String addComment(String comment) {
         Vector comments = new Vector();
         comments = getComments();
-        comments.add(comment);
+        comments.add(new UserSession().getUsername().toString()+ " : " + comment);
         return rewrite(comments);
     }
 

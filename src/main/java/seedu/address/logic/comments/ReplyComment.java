@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import seedu.address.logic.commands.ReplyCommentCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.UserSession;
 
 
 /**
@@ -28,7 +29,7 @@ public class ReplyComment extends Comments {
         Vector comments = new Vector();
         try {
             comments = getComments();
-            comments.add(line, "(REPLY)" + comment);
+            comments.add(line,  new UserSession().getUsername().toString() + " (REPLY)"+ ":" + comment);
         } catch (Exception e) {
             throw new CommandException(ReplyCommentCommand.MESSAGE_LINE_INVALID);
         }
