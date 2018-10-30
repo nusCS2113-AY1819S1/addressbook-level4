@@ -168,10 +168,9 @@ Format: `TDL_sort by PARAMETER`
 
 ****
 * PARAMETER is either `module` for module, `date` for deadline or `priority` for importance/priority.
-* PARAMETER can be set as `default` and tasks will be sorted by alphabetically by their name.
+* PARAMETER can be set as `default` and tasks will be sorted by alphabetically by their names.
 * PARAMETER can also be set as `reverse` and the former order of tasks will be reversed.
-* Users can use `TDL_sort` after `TDL_view` for sorting certain tasks (completed/uncomplted).
-* Tasks without the `d/DATE`, `m/MODULE` or `p/PRIORITY` tags will be at the bottom of the list when doing sorting by these tags.
+* Users can use `TDL_sort` after `TDL_view` for sorting certain tasks (completed/uncompleted).
 ****
 
 Examples:
