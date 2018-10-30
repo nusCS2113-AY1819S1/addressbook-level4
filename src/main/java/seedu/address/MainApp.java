@@ -16,6 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.events.security.LogoutEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.commons.events.ui.SuccessfulRegisterEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
@@ -240,6 +241,15 @@ public class MainApp extends Application {
         }
         Platform.exit();
         System.exit(0);
+    }
+
+    @Subscribe
+    private void handleSuccessfulRegisterEvent(SuccessfulRegisterEvent event) {
+        try {
+            storage.saveAppUsers(appUsers);
+        } catch (IOException e) {
+            logger.severe("Failed to save users " + StringUtil.getDetails(e));
+        }
     }
 
     @Subscribe

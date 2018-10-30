@@ -32,6 +32,9 @@ public class SampleDataUtil {
             new Person(new Name("Benson Meier"), new Phone("91031282"), new Email("meierbenson@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
                 getTagSet("family"), SampleTimeTableUtil.getTimeTableBensonMeier(), new HashSet<>()),
+            new Person(new Name("test"), new Phone("88888888"), new Email("test@test.com"),
+                new Address("Testy Road"),
+                getTagSet("family"), SampleTimeTableUtil.getTimeTableBensonMeier(), new HashSet<>()),
         };
     }
 
