@@ -10,8 +10,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import seedu.recruit.commons.core.LogsCenter;
 import seedu.recruit.commons.events.ui.CandidateDetailsPanelSelectionChangedEvent;
 import seedu.recruit.commons.events.ui.JumpToListRequestEvent;
@@ -28,7 +28,7 @@ public class CandidateDetailsPanel extends UiPart<Region> {
     @FXML
     private ListView<Candidate> candidateDetailsView;
     @FXML
-    private VBox cardPane;
+    private HBox cardPane;
     @FXML
     private Label name;
     @FXML

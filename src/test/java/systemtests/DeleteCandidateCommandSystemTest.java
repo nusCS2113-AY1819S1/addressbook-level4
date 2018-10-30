@@ -21,7 +21,7 @@ import seedu.recruit.logic.commands.UndoCandidateBookCommand;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.candidate.Candidate;
 
-@Ignore("not updated with new UI changes")
+@Ignore
 public class DeleteCandidateCommandSystemTest extends CandidateBookSystemTest {
 
     private static final String MESSAGE_INVALID_DELETE_COMMAND_FORMAT =

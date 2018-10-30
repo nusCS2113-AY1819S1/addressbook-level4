@@ -260,6 +260,9 @@ x refers to the index from user input.
 Assume that there are candidates and companies present in the data of RecruitBook, but no job offer.
 
 . User adds a new job offer `Cashier` under the existing company `KFC`.
+[NOTE]
+Since RecruitBook opens up Candidate Book by default, adding a job offer will automatically switch the view to Company Book.
+
 . RecruitBook creates a new object `Cashier` with `JobOffer` class. Hence, `Cashier` has `shortlistedCandidateList` as one of its attributes.
 [NOTE]
 `shortlistedCandidateList` is empty upon creation of the `Cashier` object.
@@ -322,11 +325,11 @@ As mentioned <<UI component, above>>, inside MainWindow, there are 4 placeholder
 
 The methods `switchToCandidateBook` and `switchToCompanyBook` work by placing the desired panel in panelViewPlaceholder, to be shown on the MainWindow.
 
-Given below is an example usage scenario for switching from `Company Book` to `Candidate Book` and how the switching mechanism behaves at each step.
+Given below is an example usage scenario for switching from `Candidate Book` to `Company Book` and how the switching mechanism behaves at each step.
 
-. User launches the application. `MainWindow` initialises the panelViewPlaceholder with `CompanyJobDetailsPanel`.
+. User launches the application. `MainWindow` initialises the panelViewPlaceholder with `CandidateDetailsPanel`.
 [NOTE]
-This means the default view of RecruitBook is the `Company Book`.
+This means the default view of RecruitBook is the `Candidate Book`.
 
 . User executes `switch` command, which posts a `SwitchBookRequestEvent`.
 
@@ -334,11 +337,11 @@ This means the default view of RecruitBook is the `Company Book`.
 
 . Inside this method, it checks which book is currently displayed by calling the method `getDisplayedBook`.
 
-. `getDisplayedBook` returns `companyBook` as a string.
+. `getDisplayedBook` returns `candidateBook` as a string.
 
-. Using a switch statement, case `companyBook` will execute and call for `switchToCandidateBook` method.
+. Using a switch statement, case `candidateBook` will execute and call for `switchToCompanyBook` method.
 
-. `switchToCandidateBook` method places the `CandidateDetailsPanel` into panelViewPlaceholder to switch the view
+. `switchToCompanyBook` method places the `CompanyJobDetailsPanel` into panelViewPlaceholder to switch the view
 [TIP]
 In order to add a panel into `panelViewPlaceholder`, the existing panel needs to be removed so that there will not be duplicated panels
 inside `panelViewPlaceholder`. There will be a compilation error if there are duplicated panels.

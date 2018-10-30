@@ -40,6 +40,7 @@ public class TypicalCompanies {
     public static final Company BMW = new CompanyBuilder().withCompanyName(VALID_NAME_BMW)
             .withAddress(VALID_ADDRESS_BMW).withEmail(VALID_EMAIL_BMW).withPhone(VALID_PHONE_BMW).build();
 
+    public static final String KEYWORD_MATCHING_AUDI = "AUDI"; // A keyword that matches AUDI
     public static final String KEYWORD_MATCHING_WHEELER = "Wheeler"; // A keyword that matches WHEELER
 
     private TypicalCompanies() {}

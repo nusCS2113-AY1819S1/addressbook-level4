@@ -46,7 +46,6 @@ public class SelectCompanyCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
 
         List<Company> filteredCompanyList = model.getFilteredCompanyList();
 
@@ -55,7 +54,6 @@ public class SelectCompanyCommand extends Command {
         }
 
         selectedCompany = filteredCompanyList.get(targetIndex.getZeroBased());
-        EventsCenter.getInstance().post(new JumpToCompanyListRequestEvent(targetIndex));
 
         if (ShortlistCandidateInitializationCommand.isShortlisting()) {
             LogicManager.setLogicState(SelectJobCommand.COMMAND_LOGIC_STATE);
@@ -63,6 +61,8 @@ public class SelectCompanyCommand extends Command {
                     targetIndex.getOneBased()) + SelectJobCommand.MESSAGE_USAGE);
         }
 
+        EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
+        EventsCenter.getInstance().post(new JumpToCompanyListRequestEvent(targetIndex));
         return new CommandResult(String.format(MESSAGE_SELECT_COMPANY_SUCCESS, targetIndex.getOneBased()));
     }
 
