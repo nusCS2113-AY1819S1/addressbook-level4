@@ -5,11 +5,11 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
+
 import java.time.LocalTime;
 import java.util.Collection;
 import java.util.Optional;
@@ -224,7 +224,8 @@ public class IcsUtil {
 
         File file = filePath.toFile();
         try {
-            Files.createFile(filePath); //biweekly will throw IOException if the file does not exist already
+            file.getParentFile().mkdirs();
+            file.createNewFile(); //biweekly will throw IOException if the file does not exist already
             Biweekly.write(iCalendar).go(file);
         } catch (IOException e) {
             throw new IOException();
