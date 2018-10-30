@@ -109,6 +109,7 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withTest(Test tests) {
         Set<Test> testSet = new HashSet<>();
+        testSet.add(tests);
         descriptor.setTests(testSet);
         return this;
     }

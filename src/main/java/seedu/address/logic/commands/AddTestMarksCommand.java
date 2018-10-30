@@ -21,7 +21,6 @@ import seedu.address.model.grade.Grade;
 import seedu.address.model.grade.Marks;
 import seedu.address.model.grade.Test;
 import seedu.address.model.grade.TestName;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
@@ -42,8 +41,8 @@ public class AddTestMarksCommand extends Command {
 
 
     public static final String MESSAGE_DUPLICATE_TEST = "This test already exists in the system";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "This person cannot be found";
-    public static final String MESSAGE_PERSON_DUPLICATE_FOUND = "There are more then one person found please indicate full name";
+    public static final String MESSAGE_PERSONNAME_NOT_FOUND = "This person cannot be found";
+    public static final String MESSAGE_PERSON_DUPLICATE_FOUND = "There are more then one person's name contain the keyword found please indicate the full name";
     public static final String MESSAGE_SUCCESS = "New test marks added";
     private final NameContainsKeywordsPredicate predicate;
     private final String testName;
@@ -68,33 +67,40 @@ public class AddTestMarksCommand extends Command {
 
         if (personListName.isEmpty()) {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+            throw new CommandException(MESSAGE_PERSONNAME_NOT_FOUND);
         } else {
             if (personListName.size() > 1) {
                 String fullName = "";
                 for (String name :nameList) {
                     fullName += name + " ";
                 }
-                fullName = fullName.substring(0, fullName.length() - 1);
+                fullName = fullName.substring(0, fullName.length() - 1).toUpperCase();
                 boolean checked = false;
+                boolean duplicate = false;
                 for (Person person: personListName) {
 
-                    if (fullName.equals(person.getName().fullName)) {
+                    if (fullName.equals(person.getName().fullName.toUpperCase())) {
                         return insertIntoPerson(person, model);
-                    } else {
+                    } else if (!fullName.equals(person.getName().fullName.toUpperCase()) && person.getName().fullName.toUpperCase().contains(fullName)) {
+                        duplicate = true;
+                } else {
                         checked = true;
                     }
                 }
-                if (checked) {
+                if (!checked && duplicate ) {
                     model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
                     throw new CommandException(MESSAGE_PERSON_DUPLICATE_FOUND);
+                } else if (checked && !duplicate) {
+                    model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+                    throw new CommandException(MESSAGE_PERSONNAME_NOT_FOUND);
                 }
             } else {
                 return insertIntoPerson(personListName.get(0), model);
             }
         }
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_NOT_FOUND, model.getFilteredPersonList().size()));
+                String.format(MESSAGE_PERSONNAME_NOT_FOUND, model.getFilteredPersonList().size()));
     }
 
     @Override
@@ -105,7 +111,7 @@ public class AddTestMarksCommand extends Command {
     }
 
     /**
-     * A command to add person test name and marks
+     * This is to add test name and marks to the student whose name is indicate in the input
      */
     private CommandResult insertIntoPerson(Person person, Model model) throws CommandException {
         Person personToEdit = person;

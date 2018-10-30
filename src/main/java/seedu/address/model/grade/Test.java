@@ -2,7 +2,12 @@ package seedu.address.model.grade;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Set;
+
+import seedu.address.commons.core.index.Index;
+
 /**
  * Represents a Test in the address book.
  *
@@ -11,9 +16,10 @@ import java.util.Objects;
  */
 
 public class Test {
-    private final TestName testName;
-    private final Marks marks;
-    private final Grade grade;
+    public final TestName testName;
+    public final Marks marks;
+    public final Grade grade;
+    final ArrayList<Test> testAdded = new ArrayList<>();
 
     public Test(TestName testName, Marks marks, Grade grade) {
         requireAllNonNull(testName, marks, grade);
@@ -21,6 +27,7 @@ public class Test {
         this.marks = marks;
         this.grade = grade;
     }
+
 
     public TestName getTestName() {
         return testName;
@@ -31,6 +38,7 @@ public class Test {
     public Grade getGrade() {
         return grade;
     }
+
     /**
      * Every field must be present and not null.
      */

@@ -9,7 +9,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.grade.PersonTest;
-import seedu.address.model.person.Person;
 import seedu.address.model.util.Highest;
 import seedu.address.model.util.LastTwentyFivePercen;
 import seedu.address.model.util.Lowest;
@@ -17,7 +16,7 @@ import seedu.address.model.util.Mean;
 import seedu.address.model.util.Median;
 import seedu.address.model.util.TopTwentyFivePercen;
 import seedu.address.ui.DisplayGrade;
-//import seedu.address.ui.DisplayGrade;
+
 
 /**
  * GradeSummary Command for Students, to display the highest, lowest, mean, median of certain test
@@ -36,7 +35,7 @@ public class GradeSummaryCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Success Showing List";
     public static final String MESSAGE_ERROR = "ERROR showing List";
-    public static final String MESSAGE_ERROR_COMMAND = "Invalid Command";
+    public static final String MESSAGE_ERROR_COMMAND = "Invalid Command or invalid test name, please check again and re input";
     private final String commandType;
     private final String testName;
 
@@ -85,19 +84,19 @@ public class GradeSummaryCommand extends Command {
         }
         if ("H".equals(commandType)) {
             double highestScore = highest.findHighest(model.getFilteredPersonList(), testName);
-            return new CommandResult(String.format("Highest Score in class is " + highestScore));
+            return new CommandResult(String.format("Highest Score of this test is " + highestScore));
         }
         if ("L".equals(commandType)) {
             double highestScore = lowest.findLowest(model.getFilteredPersonList(), testName);
-            return new CommandResult(String.format("Lowest Score in class is " + highestScore));
+            return new CommandResult(String.format("Lowest Score of this test is " + highestScore));
         }
         if ("MEAN".equals(commandType)) {
             double meanVal = mean.calculateMean(model.getFilteredPersonList(), testName);
-            return new CommandResult(String.format("The mean is " + meanVal));
+            return new CommandResult(String.format("The mean of this test is " + meanVal));
         }
         if ("MEDIAN".equals(commandType)) {
             double medianVal = median.calculateMedian(model.getFilteredPersonList(), testName);
-            return new CommandResult(String.format("Median in class is " + medianVal));
+            return new CommandResult(String.format("Median of this test is " + medianVal));
         }
 
         return new CommandResult(String.format(MESSAGE_ERROR_COMMAND));

@@ -5,6 +5,7 @@ import java.util.List;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
 
 import seedu.address.logic.commands.Command;
@@ -22,13 +23,14 @@ public class AssignGrades {
     /**
      * A method to calculate student grade base on their marks
      */
-    public String assignGradeByMarks(String testName, String marks, Person person, List<Person> personList) {
+    public String assignGradeByMarks(String testName, String marks, Person person, ObservableList<Person> personList) {
 
         double meanVal = Mean.calculateMean(personList, testName);
         double SD = StandardDeviation.calculateStandardDeviation(personList, testName);
-        int marksVal = Integer.valueOf(marks);
-
-        if (((meanVal - 2 * SD) > marksVal) && (marksVal >= (meanVal - 3 * SD))) {
+        double marksVal = Double.valueOf(marks);
+        if (marksVal == 0) {
+          return "F";
+        } else if (((meanVal - 2 * SD) > marksVal) && (marksVal >= (meanVal - 3 * SD))) {
             return "F";
         } else if (((meanVal - SD) > marksVal) && (marksVal >= (meanVal - 2 * SD))) {
             return "D";
@@ -41,11 +43,11 @@ public class AssignGrades {
         } else if (((meanVal + 3 * SD) > marksVal) && (marksVal >= (meanVal + 2 * SD))) {
             return "A";
         }
-        return "A";
+        return "C";
     }
 
     /**
-     * A method to assign grade to students
+     * This method is to update the grade we calculated above in
      */
     public Command updateGradeOfPersonList(Person person, String testName, String marks, String grade) {
         List<String> name = new ArrayList<>();
@@ -54,7 +56,7 @@ public class AssignGrades {
         for (String s: splited) {
             name.add(s);
         }
-        return new EditTestMarksCommand(new NameContainsKeywordsPredicate(name), testName, marks, grade);
+        return new EditTestMarksCommand(new NameContainsKeywordsPredicate(name), testName, marks, grade, name);
 
     }
 }

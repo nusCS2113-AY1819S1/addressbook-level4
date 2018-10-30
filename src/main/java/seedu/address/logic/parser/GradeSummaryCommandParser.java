@@ -12,7 +12,7 @@ import seedu.address.logic.commands.GradeSummaryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments (test name)
  */
 public class GradeSummaryCommandParser implements Parser<GradeSummaryCommand> {
 

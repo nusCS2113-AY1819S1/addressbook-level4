@@ -6,11 +6,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TEST_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TEST_AMY_MARKS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TEST_GRADE_UNDEFINED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TEST_MARK_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TEST_MARK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TEST_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TEST_NAME_BOB;
-
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,57 +28,55 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-
 import seedu.address.model.group.AddGroup;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
-
-public class AddTestMarksCommandTest {
+public class EditTestMarksCommandTest {
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     private CommandHistory commandHistory = new CommandHistory();
-
-    @Test
-    public void constructor_nullTest_throwsNullPointerException() {
-        thrown.expect(NullPointerException.class);
-        new AddTestMarksCommand(null,null,null,null);
-    }
+    //TODO
+//    @Test
+//    public void constructor_nullTest_throwsNullPointerException() {
+//        thrown.expect(NullPointerException.class);
+//        new EditTestMarksCommand(null,null,null,null,null);
+//    }
 
     @Test
     public void execute_testAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingTestAdded modelStub = new ModelStubAcceptingTestAdded();
+        modelStub.validPerson = new PersonBuilder().withTests(VALID_TEST_AMY).build();
         Person validPerson = new PersonBuilder().build();
         String[] nameKeywords = validPerson.getName().fullName.split("\\s+");
         List<String> nameKeywordsList =
                 new ArrayList<>(Arrays.asList(nameKeywords));
         NameContainsKeywordsPredicate nameContainsKeywordsPredicate = new NameContainsKeywordsPredicate(nameKeywordsList);
 
-        CommandResult commandResult = new AddTestMarksCommand(nameContainsKeywordsPredicate,VALID_TEST_NAME_AMY,VALID_TEST_AMY_MARKS,nameKeywordsList).execute(modelStub, commandHistory);
+        CommandResult commandResult = new EditTestMarksCommand(nameContainsKeywordsPredicate,VALID_TEST_NAME_AMY,VALID_TEST_AMY_MARKS,VALID_TEST_GRADE_UNDEFINED,nameKeywordsList).execute(modelStub, commandHistory);
 
-        assertEquals(Messages.MESSAGE_ADDED_TEST_LIST, commandResult.feedbackToUser);
+        assertEquals(Messages.MESSAGE_UPDATED_TEST_LIST, commandResult.feedbackToUser);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
-    public void execute_duplicateTest_throwsCommandException() throws Exception {
+    public void execute_notFoundTest_throwsCommandException() throws Exception {
 
         ModelStubAcceptingTestAdded modelStub = new ModelStubAcceptingTestAdded();
-        modelStub.validPerson = new PersonBuilder().withTests(VALID_TEST_AMY).build();
-        Person validPerson = new PersonBuilder().withTests(VALID_TEST_AMY).build();
+        Person validPerson = new PersonBuilder().build();
         String[] nameKeywords = validPerson.getName().fullName.split("\\s+");
         List<String> nameKeywordsList =
                 new ArrayList<>(Arrays.asList(nameKeywords));
         NameContainsKeywordsPredicate nameContainsKeywordsPredicate = new NameContainsKeywordsPredicate(nameKeywordsList);
-        AddTestMarksCommand addTestMarksCommand = new AddTestMarksCommand(nameContainsKeywordsPredicate,VALID_TEST_NAME_AMY,VALID_TEST_AMY_MARKS,nameKeywordsList);
+        EditTestMarksCommand editTestMarksCommand = new EditTestMarksCommand(nameContainsKeywordsPredicate,VALID_TEST_NAME_AMY,VALID_TEST_AMY_MARKS,VALID_TEST_GRADE_UNDEFINED,nameKeywordsList);
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddTestMarksCommand.MESSAGE_DUPLICATE_TEST);
-        addTestMarksCommand.execute(modelStub, commandHistory);
+        thrown.expectMessage(EditTestMarksCommand.MESSAGE_NOT_FOUND_TEST);
+        editTestMarksCommand.execute(modelStub, commandHistory);
 
     }
 
@@ -86,19 +84,18 @@ public class AddTestMarksCommandTest {
     public void execute_noPerson_throwsCommandException() throws Exception {
 
         ModelStubAcceptingTestAdded modelStub = new ModelStubAcceptingTestAdded();
-
         Person validPerson = new PersonBuilder().withName("Jenny").build();
         String[] nameKeywords = validPerson.getName().fullName.split("\\s+");
         List<String> nameKeywordsList =
                 new ArrayList<>(Arrays.asList(nameKeywords));
         NameContainsKeywordsPredicate nameContainsKeywordsPredicate = new NameContainsKeywordsPredicate(nameKeywordsList);
-        AddTestMarksCommand addTestMarksCommand = new AddTestMarksCommand(nameContainsKeywordsPredicate,VALID_TEST_NAME_AMY,VALID_TEST_AMY_MARKS,nameKeywordsList);
+        EditTestMarksCommand editTestMarksCommand = new EditTestMarksCommand(nameContainsKeywordsPredicate,VALID_TEST_NAME_AMY,VALID_TEST_AMY_MARKS,VALID_TEST_GRADE_UNDEFINED,nameKeywordsList);
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddTestMarksCommand.MESSAGE_PERSONNAME_NOT_FOUND);
-        addTestMarksCommand.execute(modelStub, commandHistory);
+        editTestMarksCommand.execute(modelStub, commandHistory);
 
     }
-//TODO
+
 //    @Test
 //    public void execute_duplicatePerson_throwsCommandException() throws Exception {
 //
@@ -109,10 +106,10 @@ public class AddTestMarksCommandTest {
 //        List<String> nameKeywordsList =
 //                new ArrayList<>(Arrays.asList(nameKeywords));
 //        NameContainsKeywordsPredicate nameContainsKeywordsPredicate = new NameContainsKeywordsPredicate(nameKeywordsList);
-//        AddTestMarksCommand addTestMarksCommand = new AddTestMarksCommand(nameContainsKeywordsPredicate,VALID_TEST_NAME_AMY,VALID_TEST_AMY_MARKS,nameKeywordsList);
+//        EditTestMarksCommand editTestMarksCommand = new EditTestMarksCommand(nameContainsKeywordsPredicate,VALID_TEST_NAME_AMY,VALID_TEST_AMY_MARKS,VALID_TEST_GRADE_UNDEFINED,nameKeywordsList);
 //        thrown.expect(CommandException.class);
 //        thrown.expectMessage(AddTestMarksCommand.MESSAGE_PERSON_DUPLICATE_FOUND);
-//        addTestMarksCommand.execute(modelStub, commandHistory);
+//        editTestMarksCommand.execute(modelStub, commandHistory);
 //
 //    }
 
@@ -131,24 +128,24 @@ public class AddTestMarksCommandTest {
                 new ArrayList<>(Arrays.asList(nameKeywordsBob));
         NameContainsKeywordsPredicate nameContainsKeywordsPredicateBob = new NameContainsKeywordsPredicate(nameKeywordsListBob);
 
-        AddTestMarksCommand addTestMarksCommandAlice = new AddTestMarksCommand(nameContainsKeywordsPredicateAlice,VALID_TEST_NAME_AMY,VALID_TEST_MARK_AMY,nameKeywordsListAlice);
-        AddTestMarksCommand addTestMarksCommandBob = new AddTestMarksCommand(nameContainsKeywordsPredicateBob,VALID_TEST_NAME_BOB,VALID_TEST_MARK_BOB,nameKeywordsListBob);
+        EditTestMarksCommand editTestMarksCommandAlice = new EditTestMarksCommand(nameContainsKeywordsPredicateAlice,VALID_TEST_NAME_AMY,VALID_TEST_MARK_AMY,VALID_TEST_GRADE_UNDEFINED,nameKeywordsListAlice);
+        EditTestMarksCommand editTestMarksCommandBob = new EditTestMarksCommand(nameContainsKeywordsPredicateBob,VALID_TEST_NAME_BOB,VALID_TEST_MARK_BOB,VALID_TEST_GRADE_UNDEFINED,nameKeywordsListBob);
 
         // same object -> returns true
-        assertTrue(addTestMarksCommandAlice.equals(addTestMarksCommandAlice));
+        assertTrue(editTestMarksCommandAlice.equals(editTestMarksCommandAlice));
 
         // same values -> returns true
-        AddTestMarksCommand addTestMarksCommandAliceCopy = new AddTestMarksCommand(nameContainsKeywordsPredicateAlice,VALID_TEST_NAME_AMY,VALID_TEST_MARK_AMY,nameKeywordsListAlice);
-        assertTrue(addTestMarksCommandAlice.equals(addTestMarksCommandAliceCopy));
+        EditTestMarksCommand editTestMarksCommandAliceCopy = new EditTestMarksCommand(nameContainsKeywordsPredicateAlice,VALID_TEST_NAME_AMY,VALID_TEST_MARK_AMY,VALID_TEST_GRADE_UNDEFINED,nameKeywordsListAlice);
+        assertTrue(editTestMarksCommandAlice.equals(editTestMarksCommandAliceCopy));
 
         // different types -> returns false
-        assertFalse(addTestMarksCommandAlice.equals(1));
+        assertFalse(editTestMarksCommandAlice.equals(1));
 
         // null -> returns false
-        assertFalse(addTestMarksCommandAlice.equals(null));
+        assertFalse(editTestMarksCommandAlice.equals(null));
 
         // different person -> returns false
-        assertFalse(addTestMarksCommandAlice.equals(addTestMarksCommandBob));
+        assertFalse(editTestMarksCommandAlice.equals(editTestMarksCommandBob));
     }
 
 
@@ -288,9 +285,5 @@ public class AddTestMarksCommandTest {
             throw new AssertionError("This method should not be called.");
         }
     }
-
-
-
-
 
 }

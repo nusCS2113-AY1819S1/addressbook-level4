@@ -40,7 +40,7 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
-//    public static final Prefix PREFIX_TEST_NAME = new Prefix("tn/");
+    //    public static final Prefix PREFIX_TEST_NAME = new Prefix("tn/");
 //    public static final Prefix PREFIX_TEST_MARK = new Prefix("tm/");
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
@@ -52,12 +52,22 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_FRIENDS = "friends";
     public static final String VALID_TEST_NAME_BOB = "Test1";
     public static final String VALID_TEST_MARK_BOB = "22";
+    public static final String VALID_TEST_MARK_AMY = "55";
+    public static final String INVALID_TEST_MARK = "1000";
+    public static final String INVALID_TEST_MARKCHAR = "AA";
+    public static final String INVALID_TEST_NAME = "@@@@!#@$";
+    public static final String NOTFOUND_TEST_NAME = "NOTFOUNDTESTNAME";
     public static final String VALID_TEST_NAME_AMY = "MA1511";
-    public static final String VALID_TEST_MARK_AMY = "77";
     public static final String VALID_TEST_AMY_MARKS = "99";
     public static final String VALID_TEST_AMY_SUBJECT = "Math";
+    public static final String VALID_TEST_GRADE_UNDEFINED = "Undefined";
+    public static final Test VALID_TEST_AMY = new Test(new TestName(VALID_TEST_NAME_AMY),new Marks(VALID_TEST_MARK_AMY),new Grade(VALID_TEST_GRADE_UNDEFINED));
+    public static final Test VALID_TEST_AMY2 = new Test(new TestName(VALID_TEST_NAME_AMY),new Marks(VALID_TEST_MARK_BOB),new Grade(VALID_TEST_GRADE_UNDEFINED));
+    public static final Test VALID_TEST_BOB = new Test(new TestName(VALID_TEST_NAME_BOB),new Marks(VALID_TEST_MARK_BOB),new Grade(VALID_TEST_GRADE_UNDEFINED));
+
 
     public static final String VALID_GROUP_NAME_TUT_1 = "TUT[1]";
     public static final String VALID_GROUP_NAME_CS1010 = "CS1010";
@@ -110,8 +120,12 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String TEST_NAME_DESC_BOB = " " + PREFIX_TEST_NAME + VALID_TEST_NAME_BOB;
     public static final String TEST_MARK_DESC_BOB = " " + PREFIX_TEST_MARK + VALID_TEST_MARK_BOB;
-    public static final String TEST_NAME_DESC_AMY = " " + PREFIX_TEST_NAME + VALID_TEST_NAME_AMY;
     public static final String TEST_MARK_DESC_AMY = " " + PREFIX_TEST_MARK + VALID_TEST_MARK_AMY;
+    public static final String TEST_NAME_DESC_INVALID = " " + PREFIX_TEST_NAME + INVALID_TEST_NAME;
+    public static final String TEST_NAME_DESC_NOTFOUND = " " + PREFIX_TEST_NAME + NOTFOUND_TEST_NAME;
+    public static final String TEST_MARK_DESC_INVALID = " " + PREFIX_TEST_MARK + INVALID_TEST_MARK;
+    public static final String TEST_MARK_DESC_INVALIDCHAR = " " + PREFIX_TEST_MARK + INVALID_TEST_MARKCHAR;
+    public static final String TEST_NAME_DESC_AMY = " " + PREFIX_TEST_NAME + VALID_TEST_NAME_AMY;
     public static final String PERSON_INDEX_DESC_1 = " " + PREFIX_PERSON_INDEX + VALID_PERSON_INDEX_1;
     public static final String PERSON_INDEX_DESC_2 = " " + PREFIX_PERSON_INDEX + VALID_PERSON_INDEX_2;
     public static final String PERSON_INDEX_DESC_3 = " " + PREFIX_PERSON_INDEX + VALID_PERSON_INDEX_3;
@@ -140,6 +154,8 @@ public class CommandTestUtil {
     public static final String NATIONALITY_FLAG_INVALID_NUMBER = " " + PREFIX_NATIONALITY
             + INVALID_NATIONALITY_FLAG_NUMBER;
     public static final String NATIONALITY_FLAG_INVALID_WORD = " " + PREFIX_NATIONALITY + INVALID_NATIONALITY_FLAG_WORD;
+
+
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "Male1"; // '1' not allowed in Gender
@@ -174,7 +190,7 @@ public class CommandTestUtil {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withGender(VALID_GENDER_FEMALE).withNationality(VALID_NATIONALITY_SG)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_FRIEND).withTest(new Test(new TestName(VALID_TEST_NAME_AMY),new Marks(VALID_TEST_MARK_AMY), new Grade("Undefined"))).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withGender(VALID_GENDER_MALE).withNationality(VALID_NATIONALITY_CN)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
@@ -188,7 +204,7 @@ public class CommandTestUtil {
      * - the {@code actualCommandHistory} remains unchanged.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandHistory actualCommandHistory,
-            String expectedMessage, Model expectedModel) {
+                                            String expectedMessage, Model expectedModel) {
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
         try {
             CommandResult result = command.execute(actualModel, actualCommandHistory);
@@ -208,7 +224,7 @@ public class CommandTestUtil {
      * - {@code actualCommandHistory} remains unchanged.
      */
     public static void assertCommandFailure(Command command, Model actualModel, CommandHistory actualCommandHistory,
-            String expectedMessage) {
+                                            String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
