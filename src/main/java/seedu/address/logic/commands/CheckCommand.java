@@ -18,6 +18,7 @@ public class CheckCommand extends Command {
             + "equal to the quantity specified and displays them as a list with index numbers.\n"
             + "Parameters: NUMBER\n"
             + "Example: " + COMMAND_WORD + " 4";
+    public static final String MESSAGE_EXCEEDED_QUANTITY = "Maximum input value cannot exceed 999";
 
     private final QuantityContainsNumberPredicate predicate;
 

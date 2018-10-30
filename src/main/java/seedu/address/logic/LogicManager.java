@@ -54,7 +54,6 @@ public class LogicManager extends ComponentManager implements Logic {
         diceCoefficient = new DiceCoefficient();
         String[] string = commandText.trim().split("\\s+", 8);
         if (diceCoefficient(string[0], RequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_THRESHOLD
-            || diceCoefficient(string[0], ViewRequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_THRESHOLD
             || diceCoefficient(string[0], DeleteRequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_THRESHOLD + 0.2
             || ((diceCoefficient(string[0], UndoRequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_THRESHOLD)
             && (history.getHistory().get(getHistoryList().size() - 1).contains("request")))) {
