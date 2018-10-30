@@ -14,7 +14,7 @@ import seedu.address.model.gradebook.Gradebook;
 import seedu.address.model.gradebook.GradebookManager;
 
 /**
- * Edits a gradebook component for module in Trajectory to the user.
+ * Edits a gradebook component in Trajectory.
  */
 public class GradebookEditCommand extends Command {
     public static final String COMMAND_WORD = "gradebook edit";

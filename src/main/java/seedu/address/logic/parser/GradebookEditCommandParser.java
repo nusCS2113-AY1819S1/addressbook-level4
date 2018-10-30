@@ -28,8 +28,8 @@ public class GradebookEditCommandParser {
     private static final String MESSAGE_DUPLICATE = "Gradebook component already exist in Trajectory";
 
     /**
-     * Parses the given {@code String args} of arguments in the context of the GradebookFindCommand
-     * and returns a GradebookFindCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the GradebookEditCommand
+     * and returns a GradebookEditCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public GradebookEditCommand parse(String args) throws ParseException {
