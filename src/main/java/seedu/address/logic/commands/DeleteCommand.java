@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
 
 import java.util.List;
 
@@ -19,8 +20,9 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the book identified by the index number used in the displayed book list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters: INDEX (must be a positive integer) OR i/ISBN13\n"
+            + "Example: " + COMMAND_WORD + " 1 OR " + COMMAND_WORD + " "
+            + PREFIX_ISBN + "978-3-16-148410-0";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Book: %1$s";
 
