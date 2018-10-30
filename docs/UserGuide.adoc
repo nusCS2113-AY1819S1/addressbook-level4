@@ -20,11 +20,11 @@ By: `CS2113T-W12-4`      Since: `Jun 2016`      Licence: `MIT`
 
 == Introduction
 
-Drink I/O is a desktop application that helps you to manage your drinks distribution company. 
-You can use Drink I/O to keep track of your inventory, analyse your company’s sales performance and 
-set reminders to help you import more goods should their stocks fall low. 
-Drink I/O is optimised for Command Line Interface (CLI), allowing you to manage your store 
-faster than traditional Graphical User Interface (GUI) apps, while retaining the benefits of a GUI.
+Drink I/O is a desktop application that helps you to manage your drinks distribution company.
+You can use Drink I/O to keep track of your inventory, analyse your company’s sales performance and
+set reminders to help you import more goods should their stocks fall low.
+Drink I/O is optimised for Command Line Interface (CLI), allowing you to manage your store
+faster than traditional Graphical User Interface (GUI) apps, while retaining the benefits of a GUI
 
 This user guide provides comprehensive documentation on the Drink I/O setup process, the features you can acces and the commands you can use. Choose a topic from the Table of Contents (link) to find answers, get instructions and learn to improve your workflow with Drink I/O.
 
@@ -79,11 +79,11 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 == Managing Transactions
 
 === Creating an import transaction
-When you buy and receive new goods, and want to update your stocks, you can enter an import transaction to do so. 
+When you buy and receive new goods, and want to update your stocks, you can enter an import transaction to do so.
 
 [NOTE]
 ====
-#*Command format*#: 
+#*Command format*#:
 `import n/NAME q/QUANTITY` +
 
 * Desired drink must be recorded in Drink I/O
@@ -93,7 +93,7 @@ When you buy and receive new goods, and want to update your stocks, you can ente
 To record an import transaction, +
 1. Enter `import` +
 2. Key in `n/`, followed by name of drink (`NAME`) +
-3. Key in `q/`, followed by quantity imported (`QUANTITY`) + 
+3. Key in `q/`, followed by quantity imported (`QUANTITY`) +
 4. Press kbd:[enter] +
 5. Check whether the transaction has been recorded successfully +
 
@@ -116,14 +116,14 @@ The drink you want to transact must be recorded in Drink I/O
 
 
 === Creating a sales transaction
-When you make a sale to your customers, recording the sale in Drink I/O allows you to update your transactions as well as the current stock. 
+When you make a sale to your customers, recording the sale in Drink I/O allows you to update your transactions as well as the current stock.
 
 
 [NOTE]
 ====
-#*Command format*#: 
+#*Command format*#:
 `sell n/NAME q/QUANTITY` +
- 
+
 * Desired drink must be recorded in Drink I/O +
 * Quantity must not exceed current stock
 
@@ -153,7 +153,7 @@ Drink I/O can calculate the total costs your store has incurred since the beginn
 
 [NOTE]
 ====
-#*Command format*#: 
+#*Command format*#:
 `analyseCosts`
 ====
 
