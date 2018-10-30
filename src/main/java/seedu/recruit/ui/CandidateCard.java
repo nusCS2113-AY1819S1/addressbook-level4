@@ -58,8 +58,17 @@ public class CandidateCard extends UiPart<Region> {
         name.setText(candidate.getName().fullName);
         job.setText(candidate.getJob().value);
         education.setText(candidate.getEducation().value);
-        salary.setText(candidate.getSalary().value);
-        candidate.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        salary.setText(candidate.getSalary().value);SHORTL
+        candidate.getTags().forEach(tag -> tags.getChildren().add(labelStyle(tag.tagName)));
+    }
+
+    private Label labelStyle(String tagName) {
+            Label label = new Label(tagName);
+
+            if (tagName.equals("BLACKLISTED")) {
+                label.setStyle("-fx-background-color: #111122;");
+            }
+            return label;
     }
 
     @Override

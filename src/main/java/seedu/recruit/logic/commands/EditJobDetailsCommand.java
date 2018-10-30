@@ -29,7 +29,6 @@ import seedu.recruit.model.joboffer.AgeRange;
 import seedu.recruit.model.joboffer.Job;
 import seedu.recruit.model.joboffer.JobOffer;
 import seedu.recruit.model.joboffer.Salary;
-import seedu.recruit.ui.MainWindow;
 
 /**
  * Edits the job details of a selected company

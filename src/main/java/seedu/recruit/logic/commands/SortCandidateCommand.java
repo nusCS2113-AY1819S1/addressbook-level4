@@ -13,7 +13,6 @@ import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.parser.Prefix;
 import seedu.recruit.model.Model;
-import seedu.recruit.ui.MainWindow;
 
 /**
  * Sorts all the candidates in the CandidateBook

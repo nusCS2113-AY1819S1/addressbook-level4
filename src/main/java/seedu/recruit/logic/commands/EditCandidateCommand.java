@@ -38,7 +38,6 @@ import seedu.recruit.model.commons.Phone;
 import seedu.recruit.model.joboffer.Job;
 import seedu.recruit.model.joboffer.Salary;
 import seedu.recruit.model.tag.Tag;
-import seedu.recruit.ui.MainWindow;
 
 /**
  * Edits the details of an existing candidate in the recruit book.

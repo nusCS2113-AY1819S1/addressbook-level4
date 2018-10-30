@@ -18,7 +18,6 @@ import seedu.recruit.commons.util.CollectionUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
-import seedu.recruit.model.candidate.UniqueCandidateList;
 import seedu.recruit.model.commons.Address;
 import seedu.recruit.model.commons.Email;
 import seedu.recruit.model.commons.Phone;
@@ -26,7 +25,6 @@ import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
 import seedu.recruit.model.joboffer.JobOffer;
 import seedu.recruit.model.joboffer.UniqueJobList;
-import seedu.recruit.ui.MainWindow;
 
 /**
  * Edits the details of an existing company in the company book.

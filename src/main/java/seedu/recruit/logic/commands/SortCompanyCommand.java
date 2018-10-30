@@ -9,7 +9,6 @@ import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.parser.Prefix;
 import seedu.recruit.model.Model;
-import seedu.recruit.ui.MainWindow;
 
 /**
  * Sorts all the companies in the CompanyBook
