@@ -13,7 +13,7 @@ import seedu.recruit.model.company.Company;
  * Contains helper methods to set up {@code Model} for testing.
  */
 public class ModelHelper {
-    private static final Predicate<Candidate> PREDICATE_MATCHING_NO_PERSONS = unused -> false;
+    private static final Predicate<Candidate> PREDICATE_MATCHING_NO_CANDIDATES = unused -> false;
     private static final Predicate<Company> PREDICATE_MATCHING_NO_COMPANIES = unused -> false;
 
     // ============================= CANDIDATE BOOK ======================================= //
@@ -24,7 +24,7 @@ public class ModelHelper {
     public static void setCandidateFilteredList(Model model, List<Candidate> toDisplay) {
         Optional<Predicate<Candidate>> predicate =
                 toDisplay.stream().map(ModelHelper::getCandidatePredicateMatching).reduce(Predicate::or);
-        model.updateFilteredCandidateList(predicate.orElse(PREDICATE_MATCHING_NO_PERSONS));
+        model.updateFilteredCandidateList(predicate.orElse(PREDICATE_MATCHING_NO_CANDIDATES));
     }
 
     /**

@@ -50,7 +50,6 @@ public class CompanyCardHandle extends NodeHandle<Node> {
         return addressLabel.getText();
     }
 
-
     /**
      * Returns true if this handle contains {@code company}.
      */

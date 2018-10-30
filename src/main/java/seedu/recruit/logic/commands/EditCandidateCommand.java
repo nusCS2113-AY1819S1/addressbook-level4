@@ -19,8 +19,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
+import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.commons.util.CollectionUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
@@ -36,6 +38,7 @@ import seedu.recruit.model.commons.Phone;
 import seedu.recruit.model.joboffer.Job;
 import seedu.recruit.model.joboffer.Salary;
 import seedu.recruit.model.tag.Tag;
+import seedu.recruit.ui.MainWindow;
 
 /**
  * Edits the details of an existing candidate in the recruit book.
@@ -85,6 +88,10 @@ public class EditCandidateCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        if (!MainWindow.getDisplayedBook().equals("candidateBook")) {
+            EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
+        }
+
         List<Candidate> lastShownList = model.getFilteredCandidateList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
