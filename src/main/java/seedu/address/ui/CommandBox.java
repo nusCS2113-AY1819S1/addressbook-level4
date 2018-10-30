@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import org.apache.commons.lang3.StringUtils;
@@ -147,14 +148,21 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    //@@author elstonayx
     /**
      * Handles when the tab button is pressed
      */
     private void handleTabPressed() {
         commandTextField.requestFocus();
-        String suggestions = StringUtils.join(ics.getSuggestedCommands(commandTextField.getText()), ',');
-        logger.info("Tab Pressed. Suggestions: " + suggestions);
-        raise(new NewResultAvailableEvent(suggestions));
+        // String prefix = commandTextField.getText();
+        ArrayList<String> listOfCommands = ics.getSuggestedCommands(commandTextField.getText());
+        if (listOfCommands.size() == 1) {
+            commandTextField.setText(listOfCommands.get(0));
+        } else {
+            String suggestions = StringUtils.join(listOfCommands, ", ");
+            logger.info("Tab Pressed. Suggestions: " + suggestions);
+            raise(new NewResultAvailableEvent(suggestions));
+        }
     }
 
     /**

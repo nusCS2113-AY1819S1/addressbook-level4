@@ -105,10 +105,11 @@ public class InputCommandSuggestion {
     /**
      * Gets a list of suggested commands
      * TODO: chop off input after whitespace
-     * @param prefix the current string to check for suggested commands
+     * @param userInput the current string to check for suggested commands
      * @return ArrayList of possible commands
      */
-    public ArrayList<String> getSuggestedCommands(String prefix) {
-        return commandList.getListOfWords(prefix);
+    public ArrayList<String> getSuggestedCommands(String userInput) {
+        String command = userInput.split(" ")[0];
+        return commandList.getListOfWords(command);
     }
 }
