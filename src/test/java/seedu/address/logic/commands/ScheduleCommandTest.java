@@ -31,7 +31,8 @@
 ////    @Test
 ////    public void executeFailureAddSchedule() {
 ////        // unable to add schedule in model
-////        assertCommandFailure(new ScheduleCommandParser().parse(arguments), model, commandHistory, ScheduleCommand.MESSAGE_FAILURE);
+////        assertCommandFailure(new ScheduleCommandParser().parse(arguments), model,
+//                  commandHistory, ScheduleCommand.MESSAGE_FAILURE);
 ////    }
 ////
 ////    @Test
