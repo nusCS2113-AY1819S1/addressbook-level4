@@ -88,9 +88,7 @@ public class EditCandidateCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        if (!MainWindow.getDisplayedBook().equals("candidateBook")) {
-            EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
-        }
+        EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
 
         List<Candidate> lastShownList = model.getFilteredCandidateList();
 

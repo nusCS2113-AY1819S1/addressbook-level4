@@ -43,9 +43,7 @@ public class SortCandidateCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        if (!MainWindow.getDisplayedBook().equals("candidatebook")) {
-            EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
-        }
+        EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
         model.sortCandidates(prefixToSort);
         model.commitCandidateBook();
         return new CommandResult(MESSAGE_SUCCESS);

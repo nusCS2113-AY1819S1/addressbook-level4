@@ -35,9 +35,7 @@ public class SortCompanyCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        if (!MainWindow.getDisplayedBook().equals("companyBook")) {
-            EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
-        }
+        EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
         model.sortCompanies(prefixToSort);
         model.commitCompanyBook();
         return new CommandResult(MESSAGE_SUCCESS);
