@@ -10,13 +10,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Comment {
 
     public static final String MESSAGE_COMMENT_CONSTRAINTS =
-            "Comment should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Comment can take any values, and it should not be blank";
 
     /*
      * The first character of the comment must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String COMMENT_VALIDATION_REGEX = "\\{span\\}[\\p{Alnum}][\\p{Alnum} ]*\\{/span\\}";
+    public static final String COMMENT_VALIDATION_REGEX = "[^\\s].*";
 
     public final String value;
 

@@ -7,7 +7,7 @@
         <email isPrivate="false">hans@example.com</email>
         <venue isPrivate="false">4th street</venue>
         <dateTime isPrivate="false">22/10/2018 9:30</dateTime>
-        <comment isPrivate="false">{span}This is a comment{/span}</comment>
+        <comment isPrivate="false">{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
     <events>
         <name>Ruth Mueller</name>
@@ -16,7 +16,7 @@
         <email isPrivate="false">ruth@example.com</email>
         <venue isPrivate="false">81th street</venue>
         <dateTime isPrivate="false">2/10/2018 19:30</dateTime>
-        <comment isPrivate="false">{span}This is a comment{/span}</comment>
+        <comment isPrivate="false">{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
     <events>
         <name>Heinz Kurz</name>
@@ -25,7 +25,7 @@
         <email isPrivate="false">heinz@example.com</email>
         <venue isPrivate="false">wall street</venue>
         <dateTime isPrivate="false">22/1/2018 9:30</dateTime>
-        <comment isPrivate="false">{span}This is a comment{/span}</comment>
+        <comment isPrivate="false">{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
     <events>
         <name>Cornelia Meier</name>
@@ -34,7 +34,7 @@
         <email isPrivate="false">cornelia@example.com</email>
         <venue isPrivate="false">10th street</venue>
         <dateTime isPrivate="false">22/10/2017 9:30</dateTime>
-        <comment isPrivate="false">{span}This is a comment{/span}</comment>
+        <comment isPrivate="false">{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
     <events>
         <name>Werner Meyer</name>
@@ -43,7 +43,7 @@
         <email isPrivate="false">werner@example.com</email>
         <venue isPrivate="false">michegan ave</venue>
         <dateTime isPrivate="false">22/10/2017 9:30</dateTime>
-        <comment isPrivate="false">{span}This is a comment{/span}</comment>
+        <comment isPrivate="false">{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
     <events>
         <name>Lydia Kunz</name>
@@ -52,7 +52,7 @@
         <email isPrivate="false">lydia@example.com</email>
         <venue isPrivate="false">little tokyo</venue>
         <dateTime isPrivate="false">22/10/2017 9:30</dateTime>
-        <comment isPrivate="false">{span}This is a comment{/span}</comment>
+        <comment isPrivate="false">{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
     <events>
         <name>Anna Best</name>
@@ -61,7 +61,7 @@
         <email isPrivate="false">anna@example.com</email>
         <venue isPrivate="false">4th street</venue>
         <dateTime isPrivate="false">22/10/2017 9:30</dateTime>
-        <comment isPrivate="false">{span}This is a comment{/span}</comment>
+        <comment isPrivate="false">{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
     <events>
         <name>Stefan Meier</name>
@@ -70,7 +70,7 @@
         <email isPrivate="false">stefan@example.com</email>
         <venue isPrivate="false">little india</venue>
         <dateTime isPrivate="false">22/10/2017 9:30</dateTime>
-        <comment isPrivate="false">{span}This is a comment{/span}</comment>
+        <comment isPrivate="false">{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
     <events>
         <name>Martin Mueller</name>
@@ -79,6 +79,6 @@
         <email isPrivate="false">hans@example.com</email>
         <venue isPrivate="false">chicago ave</venue>
         <dateTime isPrivate="false">22/10/2017 9:30</dateTime>
-        <comment isPrivate="false">{span}This is a comment{/span}</comment>
+        <comment isPrivate="false">{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
 </eventmanager>

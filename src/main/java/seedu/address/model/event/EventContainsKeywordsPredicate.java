@@ -20,8 +20,10 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
     @Override
     public boolean test(Event event) {
         return keywords.stream()
-                .anyMatch(keyword ->
-                        StringUtil.containsWordIgnoreCase(event.getName().fullName, keyword)
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(event.getName().fullName, keyword)
+                        || StringUtil.containsWordIgnoreCase(event.getContact().fullContactName, keyword)
+                        || StringUtil.containsWordIgnoreCase(event.getEmail().value, keyword)
+                        || StringUtil.containsWordIgnoreCase(event.getPhone().value, keyword)
                         || StringUtil.containsWordIgnoreCase(event.getVenue().value, keyword)
                         || StringUtil.containsWordIgnoreCase(event.getDateTime().toString(), keyword)
                         || event.getTags().stream()
@@ -34,5 +36,4 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                 || (other instanceof EventContainsKeywordsPredicate // instanceof handles nulls
                 && keywords.equals(((EventContainsKeywordsPredicate) other).keywords)); // state check
     }
-
 }

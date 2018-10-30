@@ -22,6 +22,8 @@ public class EventCardHandle extends NodeHandle<Node> {
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String DATETIME_FIELD_ID = "#dateTime";
     private static final String TAGS_FIELD_ID = "#tags";
+    private static final String ATTENDANCE_FIELD_ID = "#attendance";
+    private static final String COMMENT_FIELD_ID = "#comment";
 
     private final Label idLabel;
     private final Label nameLabel;
@@ -30,7 +32,9 @@ public class EventCardHandle extends NodeHandle<Node> {
     private final Label phoneLabel;
     private final Label emailLabel;
     private final Label datetimeLabel;
+    private final Label commentLabel;
     private final List<Label> tagLabels;
+    private final List<Label> attendanceLabels;
 
     public EventCardHandle(Node cardNode) {
         super(cardNode);
@@ -41,10 +45,18 @@ public class EventCardHandle extends NodeHandle<Node> {
         venueLabel = getChildNode(VENUE_FIELD_ID);
         phoneLabel = getChildNode(PHONE_FIELD_ID);
         emailLabel = getChildNode(EMAIL_FIELD_ID);
+        commentLabel = getChildNode(COMMENT_FIELD_ID);
         datetimeLabel = getChildNode(DATETIME_FIELD_ID);
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
         tagLabels = tagsContainer
+                .getChildrenUnmodifiable()
+                .stream()
+                .map(Label.class::cast)
+                .collect(Collectors.toList());
+
+        Region attendanceContainer = getChildNode(ATTENDANCE_FIELD_ID);
+        attendanceLabels = attendanceContainer
                 .getChildrenUnmodifiable()
                 .stream()
                 .map(Label.class::cast)
@@ -79,6 +91,10 @@ public class EventCardHandle extends NodeHandle<Node> {
         return datetimeLabel.getText();
     }
 
+    public String getComment() {
+        return commentLabel.getText();
+    }
+
     public List<String> getTags() {
         return tagLabels
                 .stream()
@@ -92,6 +108,19 @@ public class EventCardHandle extends NodeHandle<Node> {
         return tagsString;
     }
 
+    public List<String> getAttendance() {
+        return attendanceLabels
+                .stream()
+                .map(Label::getText)
+                .collect(Collectors.toList());
+    }
+
+    public String getAttendanceString() {
+        List<String> attendanceList = getAttendance();
+        String attendanceString = String.join("<br>", attendanceList);
+        return attendanceString;
+    }
+
     /**
      * Returns true if this handle contains {@code event}.
      */
@@ -101,6 +130,8 @@ public class EventCardHandle extends NodeHandle<Node> {
                 && getVenue().equals(event.getVenue().value)
                 && getPhone().equals(event.getPhone().value)
                 && getEmail().equals(event.getEmail().value)
+
+
                 && getDatetime().equals(event.getDateTime().toString())
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(event.getTags().stream()
                         .map(tag -> tag.tagName)

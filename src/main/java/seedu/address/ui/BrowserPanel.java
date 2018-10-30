@@ -1,6 +1,6 @@
 package seedu.address.ui;
 
-import static seedu.address.model.DateTimeManager.PAGE_DATE_FORMAT;
+import static seedu.address.model.DateTimeUtil.PAGE_DATE_FORMAT;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -62,7 +62,8 @@ public class BrowserPanel extends UiPart<Region> {
                 + "&email=" + event.getEmail()
                 + "&venue=" + event.getVenue().value.replaceAll("#", "%23")
                 + "&dateTime=" + PAGE_DATE_FORMAT.format(event.getDateTime().dateTime).replaceAll(" ", "%20")
-                + "&tags=" + event.getTagsString();
+                + "&tags=" + event.getTagsString()
+                + "&attendance=" + event.getAttendanceString();
 
         return searchPageString;
     }

@@ -59,6 +59,11 @@ public class EventContainsKeywordsPredicateTest {
         // Mixed-case keywords
         predicate = new EventContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
         assertTrue(predicate.test(new EventBuilder().withName("Alice Bob").build()));
+
+        // Keywords match phone and email, but does not match name, venue and dateTime
+        predicate = new EventContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com"));
+        assertTrue(predicate.test(new EventBuilder().withName("Alice").withPhone("12345")
+                .withEmail("alice@email.com").withVenue("Main Street").withDateTime("10/10/2010 10:10").build()));
     }
 
     @Test
@@ -70,10 +75,5 @@ public class EventContainsKeywordsPredicateTest {
         // Non-matching keyword
         predicate = new EventContainsKeywordsPredicate(Arrays.asList("Carol"));
         assertFalse(predicate.test(new EventBuilder().withName("Alice Bob").build()));
-
-        // Keywords match phone and email, but does not match name, venue and dateTime
-        predicate = new EventContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com"));
-        assertFalse(predicate.test(new EventBuilder().withName("Alice").withPhone("12345")
-                .withEmail("alice@email.com").withVenue("Main Street").withDateTime("10/10/2010 10:10").build()));
     }
 }

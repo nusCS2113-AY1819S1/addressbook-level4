@@ -127,20 +127,21 @@ public class FindCommandSystemTest extends EventManagerSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find phone number of event in event manager -> 0 persons found */
+        /* Case: find phone number of event in event manager -> 1 persons found */
         command = FindCommand.COMMAND_WORD + " " + DANIEL.getPhone().value;
+        ModelHelper.setFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find venue of event in event manager -> 0 persons found */
+        /* Case: find venue of event in event manager -> 3 persons found */
         command = FindCommand.COMMAND_WORD + " " + DANIEL.getVenue().value;
         ModelHelper.setFilteredList(expectedModel, GEORGE, DANIEL, CARL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find email of event in event manager -> 0 persons found */
+        /* Case: find email of event in event manager -> 1 persons found */
         command = FindCommand.COMMAND_WORD + " " + DANIEL.getEmail().value;
-        ModelHelper.setFilteredList(expectedModel);
+        ModelHelper.setFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
