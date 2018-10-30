@@ -18,7 +18,7 @@ import seedu.address.model.drink.exceptions.DrinkNotFoundException;
 public class InventoryList implements ReadOnlyInventoryList {
     private final UniqueDrinkList drinks;
 
-    /*
+     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
      *
