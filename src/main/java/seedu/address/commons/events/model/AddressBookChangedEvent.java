@@ -14,6 +14,6 @@ public class AddressBookChangedEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "number of products " + data.getPersonList().size();
+        return "number of products " + data.getProductList().size();
     }
 }

@@ -74,7 +74,7 @@ public class ModelManager extends ComponentManager implements Model {
 
 
         filteredDistributors = new FilteredList<>(versionedDistributorBook.getDistributorList());
-        filteredProducts = new FilteredList<>(versionedAddressBook.getPersonList());
+        filteredProducts = new FilteredList<>(versionedAddressBook.getProductList());
     }
 
     public ModelManager(Storage storage) {

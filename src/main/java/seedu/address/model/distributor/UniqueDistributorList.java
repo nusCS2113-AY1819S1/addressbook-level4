@@ -79,7 +79,7 @@ public class UniqueDistributorList implements Iterable<Distributor> {
         }
     }
 
-    public void setDistributors(seedu.address.model.distributor.UniqueDistributorList replacement) {
+    public void setDistributors(UniqueDistributorList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -112,8 +112,8 @@ public class UniqueDistributorList implements Iterable<Distributor> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof seedu.address.model.distributor.UniqueDistributorList // instanceof handles nulls
-                && internalList.equals(((seedu.address.model.distributor.UniqueDistributorList) other).internalList));
+                || (other instanceof UniqueDistributorList // instanceof handles nulls
+                && internalList.equals(((UniqueDistributorList) other).internalList));
     }
 
     @Override

@@ -9,6 +9,6 @@ import seedu.address.model.product.Product;
  */
 public interface ReadOnlyAddressBook {
 
-    ObservableList<Product> getPersonList();
+    ObservableList<Product> getProductList();
 
 }

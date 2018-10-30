@@ -36,7 +36,7 @@ public class XmlSerializableProductDatabase {
      */
     public XmlSerializableProductDatabase(ReadOnlyAddressBook src) {
         this();
-        products.addAll(src.getPersonList().stream().map(XmlAdaptedProduct::new).collect(Collectors.toList()));
+        products.addAll(src.getProductList().stream().map(XmlAdaptedProduct::new).collect(Collectors.toList()));
     }
 
     /**

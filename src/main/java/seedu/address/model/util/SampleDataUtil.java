@@ -21,22 +21,22 @@ public class SampleDataUtil {
 
     public static Product[] getSamplePersons() {
         return new Product[] {
-            new Product(new Name("Apple"), new SerialNumber("87807"),
+            new Product(new Name("Apple"), new SerialNumber("001"),
                     new DistributorName("Farm"), new Address("fruit"),
-                getTagSet("friends")),
-            new Product(new Name("Beef"), new SerialNumber("92758"),
+                getTagSet("healthy")),
+            new Product(new Name("Beef"), new SerialNumber("002"),
                     new DistributorName("Butcher"), new Address("meat"),
                 getTagSet("red meat")),
-            new Product(new Name("Cheezles"), new SerialNumber("90283"),
+            new Product(new Name("Cheezles"), new SerialNumber("003"),
                     new DistributorName("Snack Shack"), new Address("snack"),
                 getTagSet("unhealthy")),
-            new Product(new Name("Dog Biscuits"), new SerialNumber("91282"),
+            new Product(new Name("Dog Biscuits"), new SerialNumber("004"),
                     new DistributorName("Pet Store"), new Address("pets"),
                 getTagSet("food")),
-            new Product(new Name("Toilet Paper"), new SerialNumber("92021"),
+            new Product(new Name("Toilet Paper"), new SerialNumber("005"),
                     new DistributorName("Toiletries"), new Address("toilet"),
                 getTagSet("toilet")),
-            new Product(new Name("Ice Cream"), new SerialNumber("92617"),
+            new Product(new Name("Ice Cream"), new SerialNumber("006"),
                     new DistributorName("Ben & Harry's"), new Address("snack"),
                 getTagSet("cold"))
         };

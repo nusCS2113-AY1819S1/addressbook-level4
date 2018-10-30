@@ -31,7 +31,7 @@ import seedu.address.model.timeidentifiedclass.transaction.Transaction;
  */
 public class ProductDatabase implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
+    private final UniquePersonList products;
     private final SalesHistory salesHistory;
     private Transaction lastTransaction;
     /*
@@ -43,7 +43,7 @@ public class ProductDatabase implements ReadOnlyAddressBook {
      */
 
     {
-        persons = new UniquePersonList();
+        products = new UniquePersonList();
         salesHistory = new SalesHistory();
         lastTransaction = null;
     }
@@ -65,8 +65,8 @@ public class ProductDatabase implements ReadOnlyAddressBook {
      * Replaces the contents of the product list with {@code products}.
      * {@code products} must not contain duplicate products.
      */
-    public void setPersons(List<Product> products) {
-        this.persons.setPersons(products);
+    public void setProducts(List<Product> products) {
+        this.products.setPersons(products);
     }
 
     //// product-level operations
@@ -76,7 +76,7 @@ public class ProductDatabase implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-        setPersons(newData.getPersonList());
+        setProducts(newData.getProductList());
     }
 
     /**
@@ -84,7 +84,7 @@ public class ProductDatabase implements ReadOnlyAddressBook {
      */
     public boolean hasPerson(Product product) {
         requireNonNull(product);
-        return persons.contains(product);
+        return products.contains(product);
     }
 
     /**
@@ -92,7 +92,7 @@ public class ProductDatabase implements ReadOnlyAddressBook {
      * The product must not already exist in the address book.
      */
     public void addPerson(Product p) {
-        persons.add(p);
+        products.add(p);
     }
 
     /**
@@ -102,7 +102,7 @@ public class ProductDatabase implements ReadOnlyAddressBook {
      */
     public void updatePerson(Product target, Product editedProduct) {
         requireNonNull(editedProduct);
-        persons.setPerson(target, editedProduct);
+        products.setPerson(target, editedProduct);
     }
 
     /**
@@ -247,31 +247,31 @@ public class ProductDatabase implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removePerson(Product key) {
-        persons.remove(key);
+        products.remove(key);
     }
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " distributors";
+        return products.asUnmodifiableObservableList().size() + " products";
         // TODO: refine later
     }
 
     @Override
-    public ObservableList<Product> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Product> getProductList() {
+        return products.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ProductDatabase // instanceof handles nulls
-                && persons.equals(((ProductDatabase) other).persons));
+                && products.equals(((ProductDatabase) other).products));
 
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return products.hashCode();
     }
 }

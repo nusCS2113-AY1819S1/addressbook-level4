@@ -82,7 +82,6 @@ public class DistributorBook implements ReadOnlyDistributorBook {
      */
     public void updateDistributor(Distributor target, Distributor editedDistributor) {
         requireNonNull(editedDistributor);
-
         distributors.setDistributor(target, editedDistributor);
     }
 
