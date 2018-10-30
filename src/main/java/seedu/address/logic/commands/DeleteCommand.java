@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -25,22 +24,28 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Book: %1$s";
 
-    private final Index targetIndex;
+    private final String findBookBy;
+    private final String argsType;
 
-    public DeleteCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    public DeleteCommand(String findBookBy, String argsType) {
+        this.findBookBy = findBookBy;
+        this.argsType = argsType;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Book> lastShownList = model.getFilteredBookList();
+        Book bookToDelete;
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (argsType.equals("Isbn")) {
+            bookToDelete = model.getBook(findBookBy);
+        } else if (Integer.parseInt(findBookBy) < lastShownList.size() && argsType.equals("Index")) {
+            bookToDelete = lastShownList.get(Integer.parseInt(findBookBy));
+        } else {
             throw new CommandException(Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
         }
 
-        Book bookToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteBook(bookToDelete);
         model.commitBookInventory();
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, bookToDelete));
@@ -50,6 +55,6 @@ public class DeleteCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
+                && findBookBy.equals(((DeleteCommand) other).findBookBy)); // state check
     }
 }
