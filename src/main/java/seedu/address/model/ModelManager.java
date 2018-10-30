@@ -245,6 +245,34 @@ public class ModelManager extends ComponentManager implements Model {
         filteredExpenditures.setPredicate(predicate);
     }
 
+    //=========== Rank Filtered Task List ===================================================================
+
+    @Override
+    public void rankFilteredTaskDeadline() {
+        versionedTodoList.sortTaskDate();
+    }
+
+    @Override
+    public void rankFilteredTaskModule() {
+        versionedTodoList.sortTaskModule();
+    }
+
+    @Override
+    public void rankFilteredTaskPriority() {
+        versionedTodoList.sortTaskPriority();
+    }
+
+    @Override
+    public void reverseTodoList() {
+        versionedTodoList.reverseTasks();
+    }
+
+    @Override
+    public void rankTaskDefault() {
+        versionedTodoList.sortTaskDefault();
+    }
+
+
     //=========== Undo/Redo =================================================================================
 
     @Override

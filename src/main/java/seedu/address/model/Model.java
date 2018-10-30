@@ -133,6 +133,7 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+
     /**
      * Updates the filter of the filtered task list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
@@ -144,6 +145,16 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredExpenditureList(Predicate<Expenditure> predicate);
+
+    void rankFilteredTaskDeadline();
+
+    void rankFilteredTaskModule();
+
+    void rankFilteredTaskPriority();
+
+    void reverseTodoList();
+
+    void rankTaskDefault();
 
 
     /**
