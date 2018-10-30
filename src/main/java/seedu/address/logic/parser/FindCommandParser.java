@@ -1,8 +1,19 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_KEYWORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
@@ -13,6 +24,8 @@ import seedu.address.model.event.EventContainsKeywordsPredicate;
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
+    private final List<Prefix> PREFIXES = Arrays.asList(PREFIX_KEYWORD, PREFIX_NAME, PREFIX_CONTACT,
+            PREFIX_EMAIL, PREFIX_PHONE, PREFIX_VENUE, PREFIX_DATETIME, PREFIX_TAG);
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -20,20 +33,36 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_KEYWORD, PREFIX_NAME,
+                PREFIX_CONTACT, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_VENUE, PREFIX_DATETIME, PREFIX_TAG);
 
-        if (trimmedArgs.isEmpty()) {
+        if (!anyPrefixesPresent(argMultimap, PREFIX_KEYWORD, PREFIX_NAME, PREFIX_CONTACT,
+                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_VENUE, PREFIX_DATETIME, PREFIX_TAG)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-
-        String[] keywords = trimmedArgs.split("\\s+");
-
-
-        //TODO: Deal with optional value
+        Map<Prefix, List<String> > keywordsMap = new HashMap<>();
+        for (Prefix prefix : PREFIXES) {
+            MapPrefixAndKeywords(keywordsMap, prefix, argMultimap);
+        }
         return new FindCommand(
-                new EventContainsKeywordsPredicate(Arrays.asList(keywords)));
+                new EventContainsKeywordsPredicate(keywordsMap));
+    }
+
+    /**
+     * Map presented prefix with its' list of keywords
+     * @param keywordMap hash map for prefix and list of keyword
+     * @param prefix prefix to map
+     * @param argMultimap to check for prefix present
+     */
+    public void MapPrefixAndKeywords (Map<Prefix, List<String> > keywordMap, Prefix prefix,
+                                      ArgumentMultimap argMultimap) {
+        if (argMultimap.getValue(prefix).isPresent())  {
+            keywordMap.put(prefix, Arrays.asList(argMultimap.getValue(prefix).get().trim().split("\\s+")));
+        }
+        else
+            keywordMap.put(prefix, null);
     }
 
     /**
