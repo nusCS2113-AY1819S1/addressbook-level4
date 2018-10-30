@@ -384,6 +384,10 @@ image::HighLevelRequestSequenceDiagram.png[width="800"]
 ** The storage then receives the request and returns message to model, which is then transferred to the UI.
 ** This notifies the user that the request is successfully submitted.
 
+* **Similar to Delete Command**
+** The bookstore owner may decide whether to accept or reject a request offer.
+** After deciding, he or she can type deleterequest to remove Request from the RequestList.
+
 // end::Request[]
 
 
