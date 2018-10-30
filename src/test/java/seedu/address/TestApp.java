@@ -94,6 +94,8 @@ public class TestApp extends MainApp {
 
         logic = new LogicManager(model);
 
+        model.matchUserToPerson("test");
+
         user = new SecurityManager(true, logic, appUsers);
 
         ui = new UiManager(logic, config, userPrefs, user);
