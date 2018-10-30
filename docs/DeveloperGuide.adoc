@@ -413,11 +413,11 @@ The todo mechanism is facilitated by the `TodoComand` from the `Logic` component
 
 The following diagram illustrates the Todo class:
 
-image::TodoClassDiagram.png[width="400"]
+image::TodoClassDiagram.png[width="200"]
 
 The following diagram illustrates how the Todo operation works:
 
-image::TodoSequenceDiagram.png[width="800"]
+image::TodoSequenceDiagram.png[width="1000"]
 
 ==== Design Considerations
 ===== Aspect: Checking for duplications of to-do tasks
