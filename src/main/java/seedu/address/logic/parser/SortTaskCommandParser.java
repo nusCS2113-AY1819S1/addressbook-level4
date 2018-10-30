@@ -21,7 +21,10 @@ public class SortTaskCommandParser implements Parser<SortTaskCommand> {
 
         String filter = args.trim();
 
-        if ("module".equals(filter) || "date".equals(filter) || "priority".equals(filter) || "default".equals(filter) || "reverse".equals(filter)) {
+        if ("module".equals(filter) || "date".equals(filter) || "priority".equals(filter) || "default".equals(filter)) {
+            return new SortTaskCommand(filter);
+        }
+        else if ("reverse".equals(filter)) {
             return new SortTaskCommand(filter);
         }
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortTaskCommand.MESSAGE_USAGE));
