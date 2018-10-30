@@ -4,6 +4,7 @@ import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL;
 import static seedu.address.ui.BrowserPanel.DEFAULT_PAGE;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
@@ -142,7 +143,7 @@ public abstract class AddressBookSystemTest {
      * Displays all persons in the address book.
      */
     protected void showAllPersons() {
-        executeCommand(ListCommand.COMMAND_WORD);
+        executeCommand(ListCommand.COMMAND_WORD + " " + PREFIX_ALL);
         assertEquals(getModel().getAddressBook().getPersonList().size(), getModel().getFilteredPersonList().size());
     }
 
