@@ -1,2 +1,5 @@
-login_page_pic_1.jpg source: http://www.freakingnews.com/Ice-Cream-Iceberg-Pictures-72805.asp
+login_page_pic_1.jpg source: http://collection.mam.org/details.php?id=1231
 login_page_pic_2.jgp source: http://www.1zoom.me/en/wallpaper/547877/z4093.9/
+login_page_pic_3.jpg source: https://www.bbcgoodfood.com/howto/guide/should-i-still-drink-fruit-juice
+login_page_pic_4,jpg source: https://www.google.com.sg/search?hl=en&biw=1396&bih=613&tbm=isch&sa=1&ei=KtjXW9fAEYfjvATJuZ-ABg&q=drinks&oq=drinks&gs_l=img.3..35i39k1l2j0i67k1l2j0l3j0i67k1j0l2.10565.10565.0.10807.1.1.0.0.0.0.63.63.1.1.0....0...1c.1.64.img..0.1.62....0.37PweCngDV4#imgrc=EhyquYWr-2LHbM
+

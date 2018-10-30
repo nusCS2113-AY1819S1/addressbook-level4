@@ -27,13 +27,13 @@ public class PasswordTest {
         // invalid userName
         assertFalse(Password.isValidPassword("")); // empty string
         assertFalse(Password.isValidPassword(" ")); // spaces only
-        //assert False(Password.isValidPassword("^")); // only non-alphanumeric characters // TODO: this test failed
-        //assertFalse(Password.isValidPassword("peter*")); // contains non-alphanumeric characters
         assertFalse(Password.isValidPassword("password password")); //contain space
 
         // valid userName
         assertTrue(Password.isValidPassword("myPassword")); // alphabets only
         assertTrue(Password.isValidPassword("myPassword123")); // numbers and alphabets
+        assertTrue (Password.isValidPassword ("myPassword123^*(")); //with non-alphanumeric characters
+        assertTrue (Password.isValidPassword ("Gcf70h4aWQ1T9NMxE03XM3nq3nCmFGihnO4xMzHMgP0"));
     }
 
     @Test
@@ -45,7 +45,10 @@ public class PasswordTest {
         // longer than 30 words
 
         //valid userName
-        assertFalse (Password.isPasswordTooLong("tester123tester123tester123")); //long name that is less than 30 char
+        assertFalse (Password.isPasswordTooLong("Gcf70h4aWQ1T9NMxE03XM3nq3nCmFGihnO4xMzHMgP0"));
+        //long hashed that is less than 50 char
+        assertFalse (Password.isPasswordTooLong("tester123tester123tester123"));
+        //long password that is less than 50 char
 
     }
 }

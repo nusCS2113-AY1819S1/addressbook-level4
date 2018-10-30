@@ -96,9 +96,39 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters in square bracket are optional
 ====
 === Global Command
-==== Login in Program:(more details about command box login will be release soon)
-. At the login page, enter user and password,
+==== Login:
+image::loginPic/login_page_main.PNG[width="800"]
+[.noteblock]
+====
+[noteblock-title]#*User Parameters*#
+. At the login page, enter user and password using either the CLI or GUI
 . Clicked Login Button
+====
+
+[.format]
+====
+Format: `USERNAME PASSWORD`
+====
+
+[NOTE]
+====
+Both userName and password are single word. No spaces are allow in userName or password.
+====
+
+[.example]
+====
+[example-title]#Examples:#
+
+* [example]#`tester 123`# +
+* [example]#`stocktaker 123`# +
+[NOTE]
+====
+The example provided is a default login account for admin. This account only create for tester.
+====
+
+After login in, a confirmation message would showed and indicate your authentication level.
+
+image::loginPic/login_confirmation.PNG[width="300"]
 
 ==== Exiting Program: `logout`
 Return user to the login page.

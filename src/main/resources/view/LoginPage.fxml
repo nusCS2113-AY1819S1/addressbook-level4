@@ -13,51 +13,51 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.address.controller.LoginController">
     <children>
-        <ImageView fitHeight="416.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../images/login_page_pic_1.jpg" />
-            </image>
-        </ImageView>
-        <TextField fx:id="usernameField" layoutX="382.0" layoutY="200.0" onKeyPressed="#handleEnterPressed" />
-        <Label layoutX="398.0" layoutY="85.0" text="Welcome to" textFill="#ed0505">
+        <TextField fx:id="usernameField" layoutX="357.0" layoutY="197.0" onKeyPressed="#handleEnterPressed" />
+        <Label layoutX="373.0" layoutY="82.0" text="Welcome to" textFill="#ed0505">
             <font>
                 <Font name="Lucida Console" size="20.0" />
             </font>
         </Label>
-        <Label layoutX="388.0" layoutY="114.0" text="Drink I/O" textFill="#3b33e2">
+        <Label layoutX="365.0" layoutY="115.0" text="Drink I/O" textFill="#3b33e2">
             <font>
                 <Font name="Marlett" size="33.0" />
             </font>
         </Label>
-        <Label layoutX="381.0" layoutY="169.0" text="Username">
+        <Label layoutX="357.0" layoutY="167.0" text="Username">
             <font>
                 <Font name="Arial Black" size="12.0" />
             </font>
         </Label>
-        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
-        <Label layoutX="383.0" layoutY="234.0" text="Password">
+        <ImageView fitHeight="394.0" fitWidth="200.0" layoutX="6.0" pickOnBounds="true" preserveRatio="true" />
+        <Label layoutX="359.0" layoutY="234.0" text="Password">
             <font>
                 <Font name="Arial Black" size="12.0" />
             </font>
         </Label>
-        <Button layoutX="420.0" layoutY="289.0" mnemonicParsing="false" onAction="#handleLoginButtonClick" prefHeight="26.0" prefWidth="54.0" style="-fx-background-color: #6fa1f2;" text="Login" />
-        <ImageView fitHeight="79.0" fitWidth="149.0" layoutX="383.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../images/login_page_pic_3.jpg" />
-            </image>
-        </ImageView>
-        <ImageView fitHeight="109.0" fitWidth="54.0" layoutX="516.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: -20;">
+        <Button layoutX="396.0" layoutY="308.0" mnemonicParsing="false" onAction="#handleLoginButtonClick" prefHeight="26.0" prefWidth="54.0" style="-fx-background-color: #6fa1f2;" text="Login" />
+        <ImageView fitHeight="109.0" fitWidth="54.0" layoutX="509.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: -20;">
             <image>
                 <Image url="@../images/login_page_pic_2.jpg" />
             </image>
         </ImageView>
         <Label fx:id="loginError" layoutX="460.0" layoutY="234.0" textFill="#fa0c0c" />
-        <PasswordField fx:id="passwordField" layoutX="381.0" layoutY="263.0" onKeyPressed="#handleEnterPressed" />
+        <PasswordField fx:id="passwordField" layoutX="357.0" layoutY="263.0" onKeyPressed="#handleEnterPressed" />
         <Label layoutX="576.0" layoutY="28.0" onMouseClicked="#handleClose" prefHeight="18.0" prefWidth="19.0" text="x" textFill="#e20505">
             <font>
                 <Font size="17.0" />
             </font>
         </Label>
       <TextField fx:id="commandBox" layoutY="2.0" onKeyReleased="#handleInputFromCommandBox" prefHeight="26.0" prefWidth="600.0" />
+      <ImageView fitHeight="119.0" fitWidth="64.0" layoutX="518.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/login_page_pic_1.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="370.0" fitWidth="314.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/login_page_pic_4.jpg" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>

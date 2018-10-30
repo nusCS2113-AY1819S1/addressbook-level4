@@ -208,6 +208,7 @@ public class LoginController {
         Stage stage = new Stage ();
         EventsCenter.getInstance().post(new InitInventoryListEvent ());
         EventsCenter.getInstance().post(new StartUiEvent (stage));
+
     }
     /**
      * pass in LoginInfo list

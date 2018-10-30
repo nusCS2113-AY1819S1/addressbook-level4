@@ -50,7 +50,7 @@ public class TypicalBatches {
     public static UniqueBatchList getTypicalUniqueBatchList() {
         UniqueBatchList ubl = new UniqueBatchList();
         for (Batch batch :getTypicalBatches()) {
-            ubl.add(batch);
+            ubl.addBatch(batch);
         }
         return ubl;
     }
