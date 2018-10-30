@@ -6,6 +6,7 @@ import static seedu.address.testutil.TypicalAccounts.LOGINDETAIL1;
 import static seedu.address.testutil.TypicalAccounts.LOGINDETAIL2;
 import static seedu.address.testutil.TypicalClubBudgetElements.CLUB_1;
 import static seedu.address.testutil.TypicalClubBudgetElements.CLUB_2;
+import static seedu.address.testutil.TypicalClubBudgetElements.COMPUTING_CLUB;
 import static seedu.address.testutil.TypicalFinalClubBudget.CLUB_BUDGET_1;
 import static seedu.address.testutil.TypicalFinalClubBudget.CLUB_BUDGET_2;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -58,6 +59,18 @@ public class ModelManagerTest {
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasClubBudgetElements_clubInClubBudgetElementsBook_returnsTrue() {
+        modelManager.addClub(COMPUTING_CLUB);
+        assertTrue(modelManager.hasClub(COMPUTING_CLUB));
+    }
+
+    @Test
+    public void hasFinalClubBudget_budgetInFinalBudgetsBook_returnsTrue() {
+        modelManager.addClubBudget(CLUB_BUDGET_1);
+        assertTrue(modelManager.hasClubBudget(CLUB_BUDGET_1));
     }
 
     @Test
