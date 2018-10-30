@@ -40,17 +40,19 @@ public class SellCommand extends Command {
     public static final String MESSAGE_NOT_SOLD = "Decrease to stock quantity must be provided.";
     public static final String MESSAGE_INVALID_QUANTITY = "Quantity of books left cannot be less than 0.";
     private final String findBookBy;
+    private final String argsType;
     private final DecreaseQuantity decreaseQuantity;
 
     /**
      * @param findBookBy the index or isbn in the filtered book list to edit
      * @param decreaseQuantity number to sell the book with
      */
-    public SellCommand(String findBookBy, DecreaseQuantity decreaseQuantity) {
+    public SellCommand(String findBookBy, String argsType, DecreaseQuantity decreaseQuantity) {
         requireNonNull(findBookBy);
         requireNonNull(decreaseQuantity);
 
         this.findBookBy = findBookBy;
+        this.argsType = argsType;
         this.decreaseQuantity = new DecreaseQuantity(decreaseQuantity);
     }
 
@@ -60,12 +62,12 @@ public class SellCommand extends Command {
         List<Book> lastShownList = model.getFilteredBookList();
         Book bookToSell;
 
-        if (findBookBy.length() != 13 && Integer.parseInt(findBookBy) >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
-        } else if (findBookBy.length() == 13) {
+        if (argsType.equals("Isbn")) {
             bookToSell = model.getBook(findBookBy);
-        } else {
+        } else if (argsType.equals("Index") && Integer.parseInt(findBookBy) < lastShownList.size()) {
             bookToSell = lastShownList.get(Integer.parseInt(findBookBy));
+        } else {
+            throw new CommandException(Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
         }
 
         Book sellBook = createSoldBook(bookToSell, decreaseQuantity);

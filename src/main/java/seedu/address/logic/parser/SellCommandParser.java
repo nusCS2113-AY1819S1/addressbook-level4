@@ -70,6 +70,6 @@ public class SellCommandParser implements Parser<SellCommand> {
         }
 
 
-        return new SellCommand(findBookBy, decreaseQuantity);
+        return new SellCommand(findBookBy, argsType, decreaseQuantity);
     }
 }
