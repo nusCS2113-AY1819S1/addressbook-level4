@@ -26,7 +26,6 @@ import seedu.address.model.expenditureinfo.Expenditure;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
-import seedu.address.testutil.Assert;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
