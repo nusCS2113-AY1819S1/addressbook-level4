@@ -47,9 +47,6 @@ public interface Model {
     /** Selects the input date as deadline.*/
     void selectDeadline(Deadline deadline);
 
-    //@@author ChanChunCheong
-    void sortTask(String method);
-
     /** Gets deadline previously selected from the TaskBook.*/
     Deadline getDeadline();
 
@@ -62,6 +59,9 @@ public interface Model {
      * The task identity of {@code editedTask} must not be the same as another existing task in the task book.
      */
     void updateTask(Task target, Task editedTask);
+
+    //@@author ChanChunCheong
+    void sortTask(String method);
 
     /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();

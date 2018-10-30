@@ -13,6 +13,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CompleteTaskCommand;
 import seedu.address.logic.commands.DeferDeadlineCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditTaskCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
@@ -56,7 +57,8 @@ public class LogicManager extends ComponentManager implements Logic {
                 new HistoryCommand(),
                 new UndoCommand(),
                 new RedoCommand(),
-                new AddMilestoneCommand()
+                new AddMilestoneCommand(),
+                new EditTaskCommand()
         );
     }
 
