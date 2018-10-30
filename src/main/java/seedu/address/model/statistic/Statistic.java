@@ -13,6 +13,8 @@ public class Statistic {
     private static final String STARTING_FIGURE = "0";
     // Data fields
     private volatile Revenue revenue;
+    private volatile Inventory inventory;
+    private volatile Expense expense;
     private int month;
     private int year;
 
@@ -27,6 +29,8 @@ public class Statistic {
      */
     public Statistic(int month, int year) {
         this.revenue = new Revenue(STARTING_FIGURE);
+        this.inventory = new Inventory(STARTING_FIGURE);
+        this.expense = new Expense((STARTING_FIGURE));
         this.month = month;
         this.year = year;
     }
@@ -43,16 +47,26 @@ public class Statistic {
         return revenue;
     }
 
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public Expense getExpense() {
+        return expense;
+    }
+
     /**
      * Increases the Revenue
      * @param price selling price of book
      * @param amount number of books sold
      */
-    public void increaseRevenue(String price, String amount) {
-        Float earnedRevenue = Float.parseFloat(price) * Integer.parseInt(amount);
-        revenue.increase(earnedRevenue);
-    }
 
+    public void sell(String price, String cost, String
+            amount) {
+        revenue.increase(price, amount);
+        inventory.decrease(cost, amount);
+        expense.increase(cost, amount);
+    }
 
     /**
      * compares statistic made with existing statistic
@@ -104,7 +118,11 @@ public class Statistic {
                 .append(" Year: ")
                 .append(getYear())
                 .append(" Revenue: ")
-                .append(getRevenue().toString());
+                .append(revenue.toString())
+                .append(" Expense: ")
+                .append(expense.toString())
+                .append(" Inventory: ")
+                .append(inventory.toString());
         return builder.toString();
     }
 
