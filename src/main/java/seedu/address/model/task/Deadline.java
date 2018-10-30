@@ -1,5 +1,7 @@
 package seedu.address.model.task;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 //@@author emobeany
 
@@ -61,17 +63,26 @@ public class Deadline {
         String month = entries[1];
         String year = entries[2];
 
-        // Check that all the characters are numeric first.
+        ArrayList<Integer> monthsWith30Days = new ArrayList<>(Arrays.asList(4, 6, 9, 11));
+        ArrayList<Integer> monthsWith31Days = new ArrayList<>(Arrays.asList(1, 3, 5, 7, 8, 10, 12));
+
         if (!isNumeric(day) || !isNumeric(month) || !isNumeric(year)) {
-            return false;
-        } else if (Integer.parseInt(day) < 1 || Integer.parseInt(day) > 31) {
             return false;
         } else if (Integer.parseInt(month) < 1 || Integer.parseInt(month) > 12) {
             return false;
         } else if (Integer.parseInt(year) < 2018 || Integer.parseInt(year) > 9999) {
             return false;
+        } else if (monthsWith30Days.contains(Integer.parseInt(month))) {
+            return (Integer.parseInt(day) > 0 && Integer.parseInt(day) < 31);
+        } else if (monthsWith31Days.contains(Integer.parseInt(month))) {
+            return (Integer.parseInt(day) > 0 && Integer.parseInt(day) < 32);
+        } else {
+            if (isLeapYear(Integer.parseInt(year))) {
+                return (Integer.parseInt(day) > 0 && Integer.parseInt(day) < 30);
+            } else {
+                return (Integer.parseInt(day) > 0 && Integer.parseInt(day) < 29);
+            }
         }
-        return true;
     }
 
     @Override
@@ -99,6 +110,15 @@ public class Deadline {
     public static boolean isNumeric(String s) {
         //s.matches("[-+]?\\d*\\.?\\d+");
         return s != null && s.matches("-?\\d+(\\.\\d+)?");
+    }
+
+    /**
+     * Referenced online: Checking if year is a leap year
+     * @param year selected
+     * @return true if year is a leap year
+     */
+    public static boolean isLeapYear(Integer year) {
+        return ((year % 400 == 0 || year % 100 != 0) && year % 4 == 0);
     }
 
     @Override

@@ -7,16 +7,16 @@ import static seedu.address.testutil.TypicalDeadlines.INVALID_1ST_0_2018;
 import static seedu.address.testutil.TypicalDeadlines.INVALID_1ST_13_2018;
 import static seedu.address.testutil.TypicalDeadlines.INVALID_1ST_JAN_10000;
 import static seedu.address.testutil.TypicalDeadlines.INVALID_1ST_JAN_2017;
-//import static seedu.address.testutil.TypicalDeadlines.INVALID_29TH_FEB_2018;
-//import static seedu.address.testutil.TypicalDeadlines.INVALID_30TH_FEB_2020;
-//import static seedu.address.testutil.TypicalDeadlines.INVALID_31ST_APR_2018;
+import static seedu.address.testutil.TypicalDeadlines.INVALID_29TH_FEB_2018;
+import static seedu.address.testutil.TypicalDeadlines.INVALID_30TH_FEB_2020;
+import static seedu.address.testutil.TypicalDeadlines.INVALID_31ST_APR_2018;
 import static seedu.address.testutil.TypicalDeadlines.INVALID_32ND_JAN_2018;
 import static seedu.address.testutil.TypicalDeadlines.VALID_1ST_APR_2018;
 import static seedu.address.testutil.TypicalDeadlines.VALID_1ST_JAN_2018;
 import static seedu.address.testutil.TypicalDeadlines.VALID_1ST_JAN_9999;
-//import static seedu.address.testutil.TypicalDeadlines.VALID_28TH_FEB_2018;
-//import static seedu.address.testutil.TypicalDeadlines.VALID_29TH_FEB_2020;
-//import static seedu.address.testutil.TypicalDeadlines.VALID_30TH_APR_2018;
+import static seedu.address.testutil.TypicalDeadlines.VALID_28TH_FEB_2018;
+import static seedu.address.testutil.TypicalDeadlines.VALID_29TH_FEB_2020;
+import static seedu.address.testutil.TypicalDeadlines.VALID_30TH_APR_2018;
 import static seedu.address.testutil.TypicalDeadlines.VALID_31ST_JAN_2018;
 
 import java.util.logging.Logger;
@@ -44,7 +44,7 @@ public class DeadlineTest {
         // Valid deadline -> returns true
         assertTrue(Deadline.isValidDeadline(VALID_1ST_JAN_2018.toString()));
 
-        /*// Valid deadline for february -> returns true
+        // Valid deadline for february -> returns true
         assertTrue(Deadline.isValidDeadline(VALID_28TH_FEB_2018.toString()));
 
         // Invalid deadline for february in common year -> returns false
@@ -61,7 +61,7 @@ public class DeadlineTest {
 
         // Invalid deadline for months with 30 days -> returns false
         assertFalse(Deadline.isValidDeadline(INVALID_31ST_APR_2018.toString()));
-*/
+
         // Valid deadline for months with 31 days -> returns true
         assertTrue(Deadline.isValidDeadline(VALID_31ST_JAN_2018.toString()));
 
