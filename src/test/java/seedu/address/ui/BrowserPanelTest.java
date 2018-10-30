@@ -58,7 +58,7 @@ public class BrowserPanelTest extends GuiUnitTest {
                 + ALICE.getTagsString().replaceAll(" ", "%20")
                 + "&attendance="
                 + ALICE.getAttendanceString().replaceAll(" ", "%20")
-                + "&comments="
+                + "&comment="
                 + ALICE.getComment().value.replaceAll("[{]", "%3C")
                 .replaceAll("[}]", "%3E").replaceAll(" ", "%20"));
 
