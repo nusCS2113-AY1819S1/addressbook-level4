@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import com.sun.xml.bind.XmlAccessorFactory;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;

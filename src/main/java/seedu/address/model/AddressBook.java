@@ -20,7 +20,6 @@ import seedu.address.model.todo.UniqueTodoList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-//    private final UniqueScheduleList schedules;
     private final UniqueTodoList todos;
 
     /*
@@ -32,7 +31,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-//        schedules = new SchedulePersonList();
         todos = new UniqueTodoList();
     }
 

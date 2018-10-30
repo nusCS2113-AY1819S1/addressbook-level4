@@ -7,10 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
@@ -20,7 +18,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.EventName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -51,19 +48,18 @@ public class ScheduleCommand extends Command {
             + PREFIX_EVENT_NAME + "GER1000 Class ";
 
     public static final String MESSAGE_SUCCESS = "Schedule Added!";
+    public static final String MESSAGE_FAILURE = "Unable to add schedule";
 
     private Schedule toSchedule;
     private final Index index;
-//    private final SchedulePersonDescriptor schedulePersonDescriptor;
+    //private final SchedulePersonDescriptor schedulePersonDescriptor;
 
     public ScheduleCommand(Schedule schedule, Index index) {
         requireNonNull(schedule);
         this.index = index;
         this.toSchedule = schedule;
-//        this.schedulePersonDescriptor = new SchedulePersonDescriptor(schedulePersonDescriptor);
+        //this.schedulePersonDescriptor = new SchedulePersonDescriptor(schedulePersonDescriptor);
     }
-
-    public static final String MESSAGE_FAILURE = "Unable to add schedule";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
@@ -105,52 +101,53 @@ public class ScheduleCommand extends Command {
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedSchedule);
     }
 
-    /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
-     */
-    public static class  SchedulePersonDescriptor {
-        private Set<Schedule> schedules;
-
-        public SchedulePersonDescriptor() {}
-
-        /**
-         * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public SchedulePersonDescriptor(SchedulePersonDescriptor toCopy) {
-            setSchedules(toCopy.schedules);
-        }
-
-        /**
-         * Sets {@code schedules} to this object's {@code schedules}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setSchedules(Set<Schedule> schedules) {
-            this.schedules = (schedules != null) ? new HashSet<>(schedules) : null;
-        }
-
-        //TODO TODO HOW TO MAKE NOT OPTIONAL
-        public Optional<Set<Schedule>> getSchedules() {
-            return (schedules != null) ? Optional.of(Collections.unmodifiableSet(schedules)) : Optional.empty();
-        }
-
-        @Override
-        public boolean equals(Object other) {
-            // short circuit if same object
-            if (other == this) {
-                return true;
-            }
-
-            // instanceof handles nulls
-            if (!(other instanceof ScheduleCommand.SchedulePersonDescriptor)) {
-                return false;
-            }
-
-            // state check
-            ScheduleCommand.SchedulePersonDescriptor e = (ScheduleCommand.SchedulePersonDescriptor) other;
-
-            return getSchedules().equals(e.getSchedules());
-        }
-    }
+    //THIS IS CURRENTLY UNUSED
+//    /**
+//     * Stores the details to edit the person with. Each non-empty field value will replace the
+//     * corresponding field value of the person.
+//     */
+//    public static class SchedulePersonDescriptor {
+//        private Set<Schedule> schedules;
+//
+//        public SchedulePersonDescriptor() {}
+//
+//        /**
+//         * Copy constructor.
+//         * A defensive copy of {@code tags} is used internally.
+//         */
+//        public SchedulePersonDescriptor (SchedulePersonDescriptor toCopy) {
+//            setSchedules(toCopy.schedules);
+//        }
+//
+//        /**
+//         * Sets {@code schedules} to this object's {@code schedules}.
+//         * A defensive copy of {@code tags} is used internally.
+//         */
+//        public void setSchedules(Set<Schedule> schedules) {
+//            this.schedules = (schedules != null) ? new HashSet<>(schedules) : null;
+//        }
+//
+//        //TODO TODO HOW TO MAKE NOT OPTIONAL
+//        public Optional<Set<Schedule>> getSchedules() {
+//            return (schedules != null) ? Optional.of(Collections.unmodifiableSet(schedules)) : Optional.empty();
+//        }
+//
+//        @Override
+//        public boolean equals(Object other) {
+//            // short circuit if same object
+//            if (other == this) {
+//                return true;
+//            }
+//
+//            // instanceof handles nulls
+//            if (!(other instanceof ScheduleCommand.SchedulePersonDescriptor)) {
+//                return false;
+//            }
+//
+//            // state check
+//            ScheduleCommand.SchedulePersonDescriptor e = (ScheduleCommand.SchedulePersonDescriptor) other;
+//
+//            return getSchedules().equals(e.getSchedules());
+//        }
+//    }
 }

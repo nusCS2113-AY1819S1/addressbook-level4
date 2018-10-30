@@ -7,17 +7,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ScheduleCommand;
-import seedu.address.logic.commands.ScheduleCommand.SchedulePersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Date;
 import seedu.address.model.person.EventName;
-import seedu.address.model.person.Time;
 import seedu.address.model.person.Schedule;
+import seedu.address.model.person.Time;
 
 /**
  * Parses input arguments and creates a new ScheduleCommand object
@@ -30,12 +28,6 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ScheduleCommand parse(String args) throws ParseException {
-
-//        String indexNum = args.trim().split("\\s+")[0];
-//        System.out.println(indexNum);
-//        Index index = ParserUtil.parseIndex(indexNum);
-//
-//        System.out.println(userInput);
 
         requireNonNull(args);
 
@@ -50,7 +42,7 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE), pe);
         }
 
-        if (!arePrefixesPresent(argMultimap,PREFIX_DATE, PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_EVENT_NAME)
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATE, PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_EVENT_NAME)
                 || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
         }
@@ -60,9 +52,7 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
         Time endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END_TIME).get());
         EventName eventName = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_EVENT_NAME).get());
 
-        SchedulePersonDescriptor schedulePersonDescriptor = new SchedulePersonDescriptor();
-
-        Schedule schedule = new Schedule(date,startTime, endTime, eventName);
+        Schedule schedule = new Schedule(date, startTime, endTime, eventName);
 
         return new ScheduleCommand(schedule, index);
     }

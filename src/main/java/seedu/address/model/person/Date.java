@@ -16,8 +16,6 @@ public class Date {
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String DATE_VALIDATION_REGEX = "(0[1-9]|[1-2][0-9]|3[0-1])(0[0-9]|1[0-2])(\\d{4})";
-//            "([01]?[0-9]|2[0-3])[0-5][0-9]";
-//            "^\\d{2}\\d{2}\\d{4}$";
 
     public final String value;
 

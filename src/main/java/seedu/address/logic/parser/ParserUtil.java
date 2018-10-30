@@ -177,6 +177,12 @@ public class ParserUtil {
         return new Content(trimmedContent);
     }
 
+    /**
+     * Parses a {@code String date} into a {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
@@ -186,6 +192,12 @@ public class ParserUtil {
         return new Date(trimmedDate);
     }
 
+    /**
+     * Parses a {@code String time} into a {@code Time}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code time} is invalid.
+     */
     public static Time parseTime(String time) throws ParseException {
         requireNonNull(time);
         String trimmedTime = time.trim();
@@ -195,6 +207,12 @@ public class ParserUtil {
         return new Time(trimmedTime);
     }
 
+    /**
+     * Parses a {@code String eventName} into a {@code EventName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code eventName} is invalid.
+     */
     public static EventName parseEventName(String eventName) throws ParseException {
         requireNonNull(eventName);
         String trimmedEventName = eventName.trim();

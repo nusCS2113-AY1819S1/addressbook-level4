@@ -47,18 +47,19 @@ public class Schedule {
         return endTime;
     }
 
-    public EventName getEventName() { return eventName; }
-
+    public EventName getEventName() {
+        return eventName;
+    }
 
     /**
      * Returns true if another event has the same start time.
      * This prevents one person from adding the same event at the same start time.
      */
     // TODO TODO TODO TODO TODO
-//    public boolean isSameStartTime(Object otherStartTime) {
-//        return otherStartTime == this ||
-//                (otherStartTime instanceof Schedule && schedulePrint.equals(((Schedule) schedulePrint).value ));
-//    }
+    //    public boolean isSameStartTime(Object otherStartTime) {
+    //        return otherStartTime == this ||
+    //                (otherStartTime instanceof Schedule && schedulePrint.equals(((Schedule) schedulePrint).value ));
+    //    }
 
     @Override
     public int hashCode() {
