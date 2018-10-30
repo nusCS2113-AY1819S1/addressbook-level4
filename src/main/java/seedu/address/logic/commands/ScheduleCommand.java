@@ -15,7 +15,6 @@ import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -54,12 +53,13 @@ public class ScheduleCommand extends Command {
 
     private Schedule toSchedule;
     private final Index index;
-//    private final SchedulePersonDescriptor schedulePersonDescriptor;
+    private final SchedulePersonDescriptor schedulePersonDescriptor;
 
-    public ScheduleCommand(Schedule schedule, Index index) {
+    public ScheduleCommand(Schedule schedule, Index index, SchedulePersonDescriptor schedulePersonDescriptor) {
         requireNonNull(schedule);
         this.index = index;
         this.toSchedule = schedule;
+        this.schedulePersonDescriptor = new SchedulePersonDescriptor(schedulePersonDescriptor);
     }
 
     public static final String MESSAGE_FAILURE = "Unable to add schedule";
@@ -69,22 +69,21 @@ public class ScheduleCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-//        if (index.getZeroBased() >= lastShownList.size()) {
-//            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        Person personToAddSchedule = lastShownList.get(index.getZeroBased());
+        Person scheduledPerson = addScheduleToPerson(personToAddSchedule, schedulePersonDescriptor);
+
+//        if (!personToAddSchedule.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+//            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
 //        }
-//
-//        Person personToAddSchedule = lastShownList.get(index.getZeroBased());
-//        Person scheduledPerson = addScheduleToPerson(personToAddSchedule, schedulePersonDescriptor);
-//
-////        if (!personToAddSchedule.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-////            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-////        }
-//
-//        model.updatePerson(personToAddSchedule, scheduledPerson);
-//        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-//        model.commitAddressBook();
-//        return new CommandResult(String.format(MESSAGE_SUCCESS, scheduledPerson));
-        return new CommandResult(MESSAGE_SUCCESS);
+
+        model.updatePerson(personToAddSchedule, scheduledPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.commitAddressBook();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, scheduledPerson));
 
     }
 
@@ -92,64 +91,65 @@ public class ScheduleCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-//    private static Person addScheduleToPerson(Person personToAddSchedule, ScheduleCommand.SchedulePersonDescriptor schedulePersonDescriptor) {
-//        assert personToAddSchedule != null;
-//
-//        Name updatedName = personToAddSchedule.getName();
-//        Phone updatedPhone = personToAddSchedule.getPhone();
-//        Email updatedEmail = personToAddSchedule.getEmail();
-//        Address updatedAddress = personToAddSchedule.getAddress();
-//        Set<Tag> updatedTags = personToAddSchedule.getTags();
-//        Set<Schedule> updatedSchedule = schedulePersonDescriptor.getSchedules().orElse(personToAddSchedule.getSchedules());; //does not allow edit of schedule
-//
-//        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedSchedule);
-//    }
-//
-//    /**
-//     * Stores the details to edit the person with. Each non-empty field value will replace the
-//     * corresponding field value of the person.
-//     */
-//    public static class  SchedulePersonDescriptor {
-//        private Set<Schedule> schedules;
-//
-//        public SchedulePersonDescriptor() {}
-//
-//        /**
-//         * Copy constructor.
-//         * A defensive copy of {@code tags} is used internally.
-//         */
-//        public SchedulePersonDescriptor(ScheduleCommand.SchedulePersonDescriptor toCopy) {
-//            setSchedules(toCopy.schedules);
-//        }
-//
-//        /**
-//         * Sets {@code schedules} to this object's {@code schedules}.
-//         * A defensive copy of {@code tags} is used internally.
-//         */
-//        public void setSchedules(Set<Schedule> schedules) {
-//            this.schedules = (schedules != null) ? new HashSet<>(schedules) : null;
-//        }
-//
-//        @Override
-//        public boolean equals(Object other) {
-//            // short circuit if same object
-//            if (other == this) {
-//                return true;
-//            }
-//
-//            // instanceof handles nulls
-//            if (!(other instanceof EditCommand.EditPersonDescriptor)) {
-//                return false;
-//            }
-//
-//            // state check
-//            EditCommand.EditPersonDescriptor e = (EditCommand.EditPersonDescriptor) other;
-//
-//            return getName().equals(e.getName())
-//                    && getPhone().equals(e.getPhone())
-//                    && getEmail().equals(e.getEmail())
-//                    && getAddress().equals(e.getAddress())
-//                    && getTags().equals(e.getTags());
-//        }
-//    }
+    private static Person addScheduleToPerson(Person personToAddSchedule, ScheduleCommand.SchedulePersonDescriptor schedulePersonDescriptor) {
+        assert personToAddSchedule != null;
+
+        Name updatedName = personToAddSchedule.getName();
+        Phone updatedPhone = personToAddSchedule.getPhone();
+        Email updatedEmail = personToAddSchedule.getEmail();
+        Address updatedAddress = personToAddSchedule.getAddress();
+        Set<Tag> updatedTags = personToAddSchedule.getTags();
+        Set<Schedule> updatedSchedule = schedulePersonDescriptor.getSchedules().orElse(personToAddSchedule.getSchedules());; //does not allow edit of schedule
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedSchedule);
+    }
+
+    /**
+     * Stores the details to edit the person with. Each non-empty field value will replace the
+     * corresponding field value of the person.
+     */
+    public static class  SchedulePersonDescriptor {
+        private Set<Schedule> schedules;
+
+        public SchedulePersonDescriptor() {}
+
+        /**
+         * Copy constructor.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public SchedulePersonDescriptor(ScheduleCommand.SchedulePersonDescriptor toCopy) {
+            setSchedules(toCopy.schedules);
+        }
+
+        /**
+         * Sets {@code schedules} to this object's {@code schedules}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setSchedules(Set<Schedule> schedules) {
+            this.schedules = (schedules != null) ? new HashSet<>(schedules) : null;
+        }
+
+        //TODO TODO HOW TO MAKE NOT OPTIONAL
+        public Optional<Set<Schedule>> getSchedules() {
+            return (schedules != null) ? Optional.of(Collections.unmodifiableSet(schedules)) : Optional.empty();
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            // short circuit if same object
+            if (other == this) {
+                return true;
+            }
+
+            // instanceof handles nulls
+            if (!(other instanceof ScheduleCommand.SchedulePersonDescriptor)) {
+                return false;
+            }
+
+            // state check
+            ScheduleCommand.SchedulePersonDescriptor e = (ScheduleCommand.SchedulePersonDescriptor) other;
+
+            return getSchedules().equals(e.getSchedules());
+        }
+    }
 }

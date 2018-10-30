@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ScheduleCommand;
+import seedu.address.logic.commands.ScheduleCommand.SchedulePersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Date;
 import seedu.address.model.person.EventName;
@@ -49,9 +50,11 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
         Time endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END_TIME).get());
         EventName eventName = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_EVENT_NAME).get());
 
+        SchedulePersonDescriptor schedulePersonDescriptor = new SchedulePersonDescriptor();
+
         Schedule schedule = new Schedule(date,startTime, endTime, eventName);
 
-        return new ScheduleCommand(schedule, index);
+        return new ScheduleCommand(schedule, index, schedulePersonDescriptor);
     }
 
     /**
