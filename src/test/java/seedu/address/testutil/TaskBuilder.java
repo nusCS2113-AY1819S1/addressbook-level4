@@ -129,7 +129,7 @@ public class TaskBuilder {
      * @return Task
      */
     public Task build() {
-        return new Task(deadline, moduleCode, title, description, priority, expectedNumOfHours,
-                completedNumOfHours, isCompleted, milestones);
+        return new Task(deadline, moduleCode, title, description, priority,
+                expectedNumOfHours, completedNumOfHours, isCompleted, milestones);
     }
 }
