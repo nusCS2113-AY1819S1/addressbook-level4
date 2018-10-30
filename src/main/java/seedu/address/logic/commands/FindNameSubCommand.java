@@ -12,15 +12,15 @@ import seedu.address.model.searchhistory.KeywordType;
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindPersonSubCommand extends FindCommand {
+public class FindNameSubCommand extends FindCommand {
 
     private final NameContainsKeywordsPredicate predicate;
 
-    public FindPersonSubCommand(NameContainsKeywordsPredicate predicate) {
+    public FindNameSubCommand(NameContainsKeywordsPredicate predicate) {
         this(predicate, false);
     }
 
-    public FindPersonSubCommand(NameContainsKeywordsPredicate predicate, boolean isExcludeMode) {
+    public FindNameSubCommand(NameContainsKeywordsPredicate predicate, boolean isExcludeMode) {
         this.predicate = predicate;
         this.isExcludeMode = isExcludeMode;
     }
@@ -43,7 +43,7 @@ public class FindPersonSubCommand extends FindCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FindPersonSubCommand // instanceof handles nulls
-                && predicate.equals(((FindPersonSubCommand) other).predicate)); // state check
+                || (other instanceof FindNameSubCommand // instanceof handles nulls
+                && predicate.equals(((FindNameSubCommand) other).predicate)); // state check
     }
 }

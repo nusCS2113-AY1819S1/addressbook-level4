@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindPersonSubCommand;
+import seedu.address.logic.commands.FindNameSubCommand;
 import seedu.address.logic.commands.FindTagSubCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -50,9 +50,9 @@ public class FindCommandParser implements Parser<FindCommand> {
             return new FindTagSubCommand(new TagContainsKeywordsPredicate(keywordsList));
         } else if (isExcludePersonSearch(keywordsList)) {
             keywordsList.remove(0);
-            return new FindPersonSubCommand(new NameContainsKeywordsPredicate(keywordsList), true);
+            return new FindNameSubCommand(new NameContainsKeywordsPredicate(keywordsList), true);
         } else {
-            return new FindPersonSubCommand(new NameContainsKeywordsPredicate(keywordsList));
+            return new FindNameSubCommand(new NameContainsKeywordsPredicate(keywordsList));
         }
     }
 

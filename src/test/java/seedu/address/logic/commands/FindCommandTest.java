@@ -54,8 +54,8 @@ public class FindCommandTest {
         TagContainsKeywordsPredicate fourthPredicate =
                 new TagContainsKeywordsPredicate(Collections.singletonList("fourth"));
 
-        FindCommand findFirstCommand = new FindPersonSubCommand(firstPredicate, false);
-        FindCommand findSecondCommand = new FindPersonSubCommand(secondPredicate, false);
+        FindCommand findFirstCommand = new FindNameSubCommand(firstPredicate, false);
+        FindCommand findSecondCommand = new FindNameSubCommand(secondPredicate, false);
         FindCommand findThirdCommand = new FindTagSubCommand(thirdPredicate);
         FindCommand findFourthCommand = new FindTagSubCommand(fourthPredicate);
 
@@ -63,7 +63,7 @@ public class FindCommandTest {
         assertTrue(findFirstCommand.equals(findFirstCommand));
         assertTrue(findThirdCommand.equals(findThirdCommand));
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindPersonSubCommand(firstPredicate, false);
+        FindCommand findFirstCommandCopy = new FindNameSubCommand(firstPredicate, false);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         FindCommand findThirdCommandCopy = new FindTagSubCommand(thirdPredicate);
@@ -92,7 +92,7 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW
                 + KeywordsOutputUtil.getOutputString(null, null, null, null), 0);
         NameContainsKeywordsPredicate predicate = prepareNameContainsKeywordsPredicate(" ");
-        FindCommand command = new FindPersonSubCommand(predicate);
+        FindCommand command = new FindNameSubCommand(predicate);
         expectedModel.executeSearch(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
@@ -103,7 +103,7 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW
                 + KeywordsOutputUtil.getOutputString(null, null, null, Arrays.asList("kurz", "elle", "kunz")), 7);
         NameContainsKeywordsPredicate predicate = prepareNameContainsKeywordsPredicate("Kurz Elle Kunz");
-        FindCommand command = new FindPersonSubCommand(predicate, true);
+        FindCommand command = new FindNameSubCommand(predicate, true);
         expectedModel.executeSearch(predicate.negate());
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, DANIEL, GEORGE, JOHN, SEGWIT, KHOR), model.getFilteredPersonList());
@@ -114,7 +114,7 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW
                 + KeywordsOutputUtil.getOutputString(null, Arrays.asList("kurz", "elle", "kunz"), null, null), 3);
         NameContainsKeywordsPredicate predicate = prepareNameContainsKeywordsPredicate("Kurz Elle Kunz");
-        FindCommand command = new FindPersonSubCommand(predicate);
+        FindCommand command = new FindNameSubCommand(predicate);
         expectedModel.executeSearch(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
@@ -172,7 +172,7 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(SEGWIT, KHOR), model.getFilteredPersonList());
 
         NameContainsKeywordsPredicate secondPredicate = prepareNameContainsKeywordsPredicate("Choo");
-        FindCommand secondCommand = new FindPersonSubCommand(secondPredicate);
+        FindCommand secondCommand = new FindNameSubCommand(secondPredicate);
         expectedModel.executeSearch(secondPredicate);
         assertCommandSuccess(secondCommand, model, commandHistory, secondExpectedMessage, expectedModel);
         assertEquals(Arrays.asList(SEGWIT), model.getFilteredPersonList());
