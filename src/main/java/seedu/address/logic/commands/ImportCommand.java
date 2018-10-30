@@ -62,6 +62,7 @@ public class ImportCommand extends Command {
         requireNonNull(model);
 
         Person personToEdit = model.getUser();
+        requireNonNull(personToEdit);
 
         Optional<TimeTable> optionalTimeTable;
         TimeTable timeTable;
