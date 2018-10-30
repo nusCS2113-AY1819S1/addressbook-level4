@@ -31,6 +31,9 @@ public class SelectCompanyCommand extends Command {
 
     public static final String MESSAGE_SELECT_COMPANY_SUCCESS = "Selected Company: %1$s\n";
 
+    public static final String MESSAGE_SELECT_COMPANY_SUCCESS_NEXT_STEP =
+            "Please select a job offer.\n";
+
     private static Company selectedCompany;
 
     private final Index targetIndex;
@@ -58,7 +61,8 @@ public class SelectCompanyCommand extends Command {
         if (ShortlistCandidateInitializationCommand.isShortlisting()) {
             LogicManager.setLogicState(SelectJobCommand.COMMAND_LOGIC_STATE);
             return new CommandResult(String.format(MESSAGE_SELECT_COMPANY_SUCCESS,
-                    targetIndex.getOneBased()) + SelectJobCommand.MESSAGE_USAGE);
+                    targetIndex.getOneBased()) + MESSAGE_SELECT_COMPANY_SUCCESS_NEXT_STEP +
+                    SelectJobCommand.MESSAGE_USAGE);
         }
 
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());

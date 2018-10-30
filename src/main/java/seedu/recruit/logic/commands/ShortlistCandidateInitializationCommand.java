@@ -10,17 +10,22 @@ import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 
 /**
- * First stage of the 4-stage Shortlist command.
+ * First stage of the 5-stage Shortlist command.
  * Shortlists selected candidates for a job offer
  */
 public class ShortlistCandidateInitializationCommand extends Command {
     public static final String COMMAND_WORD = "shortlist";
 
+    public static final String COMMAND_LOGIC_STATE = "primary";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Shortlists selected candidate(s) for a job offer.\n";
 
     public static final String MESSAGE_ENTERING_SHORTLIST_PROCESS =
-            "Entering shortlisting process. \n" + "Please select a company.\n";
+            "Entering shortlisting process.\n";
+
+    public static final String MESSAGE_NEXT_STEP =
+            "Please select a company.\n";
 
     /** Keeps track of the status of the shortlist process.
      * Returns true if process is ongoing.
@@ -44,7 +49,7 @@ public class ShortlistCandidateInitializationCommand extends Command {
         EventsCenter.getInstance().post(new ShowShortlistPanelRequestEvent());
         shortlistStatus = true;
         LogicManager.setLogicState(SelectCompanyCommand.COMMAND_LOGIC_STATE);
-        return new CommandResult(MESSAGE_USAGE + MESSAGE_ENTERING_SHORTLIST_PROCESS
+        return new CommandResult(MESSAGE_ENTERING_SHORTLIST_PROCESS + MESSAGE_NEXT_STEP
                 + SelectCompanyCommand.MESSAGE_USAGE);
     }
 }

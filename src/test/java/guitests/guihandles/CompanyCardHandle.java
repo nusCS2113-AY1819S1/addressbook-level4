@@ -10,9 +10,9 @@ import seedu.recruit.model.company.Company;
 public class CompanyCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
     private static final String NAME_FIELD_ID = "#name";
-    private static final String PHONE_ID = "#phone";
-    private static final String EMAIL_ID = "#email";
-    private static final String ADDRESS_ID = "#address";
+    private static final String PHONE_FIELD_ID = "#phone";
+    private static final String EMAIL_FIELD_ID = "#email";
+    private static final String ADDRESS_FIELD_ID = "#address";
 
     private final Label idLabel;
     private final Label nameLabel;
@@ -25,9 +25,9 @@ public class CompanyCardHandle extends NodeHandle<Node> {
 
         idLabel = getChildNode(ID_FIELD_ID);
         nameLabel = getChildNode(NAME_FIELD_ID);
-        phoneLabel = getChildNode(PHONE_ID);
-        emailLabel = getChildNode(EMAIL_ID);
-        addressLabel = getChildNode(ADDRESS_ID);
+        phoneLabel = getChildNode(PHONE_FIELD_ID);
+        emailLabel = getChildNode(EMAIL_FIELD_ID);
+        addressLabel = getChildNode(ADDRESS_FIELD_ID);
     }
 
     public String getId() {
