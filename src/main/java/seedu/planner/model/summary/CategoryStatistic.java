@@ -12,9 +12,8 @@ import seedu.planner.model.tag.Tag;
 public class CategoryStatistic {
 
     private Set<Tag> tags;
-    private double totalIncome = 0;
-
-    private double totalExpense = 0;
+    private Double totalIncome = 0.0;
+    private Double totalExpense = 0.0;
 
     public CategoryStatistic(Record record) {
         tags = record.getTags();
@@ -32,11 +31,11 @@ public class CategoryStatistic {
         return tags;
     }
 
-    public double getTotalIncome() {
+    public Double getTotalIncome() {
         return totalIncome;
     }
 
-    public double getTotalExpense() {
+    public Double getTotalExpense() {
         return totalExpense;
     }
 
