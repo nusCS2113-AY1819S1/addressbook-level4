@@ -16,16 +16,16 @@ endif::[]
 
 * This is a desktop Financial Planner application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface). +
 
-This app is mainly for users who want to:
+*This app is mainly for users who want to:*
 
 * Use typing as their main method of entering information into the app
 * Organise their financial information using mostly CLI
 * Have a visual representation of their financial data
 * Store and retrieve their financial data efficiently
 
-This app is mainly written in an OOP fashion. +
+*This app is mainly written in an OOP fashion.* +
 
-What’s good about this project:
+*What’s good about this project:*
 
 * The app has a sophisticated GUI that includes a list panel, a table panel and also chart panels
 
