@@ -207,4 +207,5 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTodoList(PREDICATE_SHOW_ALL_TODOS);
         indicateAddressBookChanged();
     }
+
 }

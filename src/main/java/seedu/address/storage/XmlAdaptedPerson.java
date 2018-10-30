@@ -15,6 +15,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Schedule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,6 +36,8 @@ public class XmlAdaptedPerson {
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
+    @XmlElement
+    private List<XmlAdaptedSchedule> schedules = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedPerson.
@@ -68,6 +71,9 @@ public class XmlAdaptedPerson {
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
+        schedules = source.getSchedules().stream()
+                .map(XmlAdaptedSchedule::new)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -77,6 +83,7 @@ public class XmlAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
+        final List<Schedule> personSchedules = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
         }
@@ -114,7 +121,10 @@ public class XmlAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        final Set<Schedule> modelSchedules = new HashSet<>(personSchedules);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelSchedules);
     }
 
     @Override
@@ -132,6 +142,7 @@ public class XmlAdaptedPerson {
                 && Objects.equals(phone, otherPerson.phone)
                 && Objects.equals(email, otherPerson.email)
                 && Objects.equals(address, otherPerson.address)
-                && tagged.equals(otherPerson.tagged);
+                && tagged.equals(otherPerson.tagged)
+                && schedules.equals(otherPerson.schedules);
     }
 }
