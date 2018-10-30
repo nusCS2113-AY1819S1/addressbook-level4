@@ -81,14 +81,14 @@ Examples:
 
 === Sort the taskbook: `sort`
 
-Sort the tasks in the task book by certain method +
+Sort the tasks in the task book via `priority`, `deadlines`, `modules`, or `title` +
 Format: `sort s/METHOD`
 
 Examples:
 
 * `sort s/priority`
 
-=== Deferring a deadline: `deadline`
+=== Deferring a deadline: `defer`
 
 Defers a deadline for a task +
 Format: `defer [INDEX] de/deadline`
@@ -109,7 +109,8 @@ Examples:
 === Selecting a date: `select`
 
 Chooses a particular date. +
-Format: `select dd/DAY [mm/MONTH] [yyyy/YEAR]`
+Format: `select dd/DAY mm/MONTH yyyy/YEAR` or
+`select DAY/MONTH/YEAR`
 
 Examples:
 
@@ -139,7 +140,7 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `complete`, `sort`, `add_milestone`, `defer_deadline`, `delete`, and `clear`).
+Undoable commands: those commands that modify the address book's content (`add`, `complete`, `sort`, `add_milestone`, `defer_deadline`, `delete`, `select` and `clear`).
 ====
 
 Examples:
@@ -148,7 +149,7 @@ Examples:
 `list` +
 `undo` (reverses the `delete 1` command) +
 
-* `select 1` +
+* `track` +
 `list` +
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
@@ -203,8 +204,8 @@ There is no need to save manually.
 
 == Command Summary
 
-* *Add task* : `add t/ACTION d/DESCRIPTION p/PRIORITY_LEVEL h/HOURS_TO_COMPLETE` +
-e.g. `add t/Complete 2113 Tutorial d/with code done p/high h/2`
+* *Add task* : `add c/MODULE_CODE t/ACTION d/DESCRIPTION p/PRIORITY_LEVEL h/HOURS_TO_COMPLETE` +
+e.g. `add c/CS2113 t/Complete 2113 Tutorial d/with code done p/high h/2`
 * *Add milestone* : `add_milestone t/TASK_TITLE m/MILESTONE r/RANK...` +
 e.g. `add_milestone t/Complete CS2113 W8 LO m/Complete Sections 8.1 to 8.5 r/1`
 * *Clear* : `clear`
@@ -217,7 +218,10 @@ e.g. `delete 1`
 * *List* : `list`
 * *Help* : `help`
 * *History* : `history`
-* *Select* : `select dd/DAY mm/MONTH yyyy/YEAR` +
+* *Select* : `select dd/DAY mm/MONTH yyyy/YEAR` or `select DAY/MONTH/YEAR` +
 e.g. `select dd/1 mm/1 yyyy/2018`
+* *Sort* : `sort s/METHOD`
+e.g. `sort s/priority` +
+* *Track* : `track`
 * *Undo* : `undo`
 * *Redo* : `redo`
