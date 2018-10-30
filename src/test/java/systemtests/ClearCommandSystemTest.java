@@ -79,7 +79,7 @@ public class ClearCommandSystemTest extends AddressBookSystemTest {
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();
-        assertStatusBarUnchangedExceptSyncStatus();
+        assertStatusBarChangedExceptSaveLocation();
     }
 
     /**
