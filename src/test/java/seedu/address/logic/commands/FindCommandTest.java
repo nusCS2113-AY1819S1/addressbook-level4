@@ -20,6 +20,7 @@ import static seedu.address.testutil.TypicalPersons.KHOR;
 import static seedu.address.testutil.TypicalPersons.SEGWIT;
 import static seedu.address.testutil.TypicalPersons.getTypicalTaggedAddressBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -31,6 +32,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.model.searchhistory.KeywordType;
 import seedu.address.testutil.KeywordsOutputUtil;
 
 /**
@@ -94,6 +96,7 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate predicate = prepareNameContainsKeywordsPredicate(" ");
         FindCommand command = new FindNameSubCommand(predicate);
         expectedModel.executeSearch(predicate);
+        expectedModel.recordKeywords(KeywordType.IncludeNames, new ArrayList<>());
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
@@ -105,6 +108,7 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate predicate = prepareNameContainsKeywordsPredicate("Kurz Elle Kunz");
         FindCommand command = new FindNameSubCommand(predicate, true);
         expectedModel.executeSearch(predicate.negate());
+        expectedModel.recordKeywords(KeywordType.ExcludeNames, Arrays.asList("kurz", "elle", "kunz"));
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, DANIEL, GEORGE, JOHN, SEGWIT, KHOR), model.getFilteredPersonList());
     }
@@ -116,6 +120,7 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate predicate = prepareNameContainsKeywordsPredicate("Kurz Elle Kunz");
         FindCommand command = new FindNameSubCommand(predicate);
         expectedModel.executeSearch(predicate);
+        expectedModel.recordKeywords(KeywordType.IncludeNames, Arrays.asList("kurz", "elle", "kunz"));
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
     }
@@ -127,6 +132,7 @@ public class FindCommandTest {
         TagContainsKeywordsPredicate predicate = prepareTagContainsKeywordsPredicate(VALID_TAG_FRIEND);
         FindCommand command = new FindTagSubCommand(predicate);
         expectedModel.executeSearch(predicate);
+        expectedModel.recordKeywords(KeywordType.IncludeTags, Arrays.asList(VALID_TAG_FRIEND));
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(SEGWIT, KHOR), model.getFilteredPersonList());
     }
@@ -139,6 +145,7 @@ public class FindCommandTest {
         TagContainsKeywordsPredicate predicate = prepareTagContainsKeywordsPredicate(VALID_TAG_HUSBAND);
         FindCommand command = new FindTagSubCommand(predicate, true);
         expectedModel.executeSearch(predicate.negate());
+        expectedModel.recordKeywords(KeywordType.ExcludeTags, Arrays.asList(VALID_TAG_HUSBAND));
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, JOHN, KHOR),
                 model.getFilteredPersonList());
@@ -152,6 +159,7 @@ public class FindCommandTest {
         TagContainsKeywordsPredicate predicate = prepareTagContainsKeywordsPredicate(VALID_TAG_HUSBAND);
         FindCommand command = new FindTagSubCommand(predicate);
         expectedModel.executeSearch(predicate);
+        expectedModel.recordKeywords(KeywordType.IncludeTags, Arrays.asList(VALID_TAG_HUSBAND));
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(SEGWIT), model.getFilteredPersonList());
     }
@@ -168,12 +176,14 @@ public class FindCommandTest {
         TagContainsKeywordsPredicate firstPredicate = prepareTagContainsKeywordsPredicate(VALID_TAG_FRIEND);
         FindCommand firstCommand = new FindTagSubCommand(firstPredicate);
         expectedModel.executeSearch(firstPredicate);
+        expectedModel.recordKeywords(KeywordType.IncludeTags, Collections.singletonList(VALID_TAG_FRIEND));
         assertCommandSuccess(firstCommand, model, commandHistory, firstExpectedMessage, expectedModel);
         assertEquals(Arrays.asList(SEGWIT, KHOR), model.getFilteredPersonList());
 
         NameContainsKeywordsPredicate secondPredicate = prepareNameContainsKeywordsPredicate("Choo");
         FindCommand secondCommand = new FindNameSubCommand(secondPredicate);
         expectedModel.executeSearch(secondPredicate);
+        expectedModel.recordKeywords(KeywordType.IncludeNames, Collections.singletonList("choo"));
         assertCommandSuccess(secondCommand, model, commandHistory, secondExpectedMessage, expectedModel);
         assertEquals(Arrays.asList(SEGWIT), model.getFilteredPersonList());
     }
