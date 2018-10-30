@@ -17,6 +17,8 @@ import seedu.address.ui.HtmlCardProcessor;
  */
 public class NoteManager {
 
+    public static final String NOTE_PAGE_IDENTIFIER = "<!-- NOTE -->";
+
     private static final ArrayList<String> NOTE_CSV_HEADERS =
             new ArrayList<>(Arrays.asList(
                     "subject", "startDate", "startTime", "endDate", "endTime", "description", "location"
@@ -67,6 +69,8 @@ public class NoteManager {
 
         int listId = 1;
 
+        sb.append(NOTE_PAGE_IDENTIFIER);
+        sb.append("\n");
         for (Note note: filteredNotes) {
             sb.append(HtmlCardProcessor.getCardStart());
 
