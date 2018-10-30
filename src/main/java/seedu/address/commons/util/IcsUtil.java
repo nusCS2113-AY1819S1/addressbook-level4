@@ -150,7 +150,7 @@ public class IcsUtil {
         }
 
         //if any of out essential TimeSlot variables are missing, ignore the VEvent and do not add it.
-        if ((dateStartStr == null) || (timeStartStr == null) || (timeEndStr == null) || (summaryStr == null)) {
+        if ((dateStartStr == null) || (timeStartStr == null) || (timeEndStr == null)) {
             return Optional.empty();
         }
 
