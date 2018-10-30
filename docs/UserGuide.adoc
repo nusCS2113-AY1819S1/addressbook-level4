@@ -81,17 +81,18 @@ When you buy and receive new goods, and want to update your stocks, you can ente
 ====
 #*Command format*#: 
 `import n/NAME q/QUANTITY` +
-* Desired drink must be recorded in Drink I/O
+.
+- Desired drink must be recorded in Drink I/O
 ====
 
-To record an import transaction,
-1. Enter "import"
-2. Key in n/, followed by name of drink
-3. Key in q/, followed by quantity imported 
-4. Press kbd:[enter]
-5. Check whether the transaction has been recorded successfully
-.. If you see the message "import transaction recorded!", the transaction had been successfully entered into DrinkIo
-.. If not, follow the instructions displayed in the message display pane, and re-enter the command
+To record an import transaction, +
+1. Enter "import" +
+2. Key in n/, followed by name of drink (`NAME`) +
+3. Key in q/, followed by quantity imported (`QUANTITY`) + 
+4. Press kbd:[enter] +
+5. Check whether the transaction has been recorded successfully +
+-  If you see the message "import transaction recorded!", the transaction had been successfully entered into Drink I/O +
+-  If not, follow the instructions displayed in the message display pane, and re-enter the command +
 
 [WARNING]
 ====
@@ -120,18 +121,18 @@ When you make a sale to your customers, recording the sale in Drink I/O allows y
 * Quantity must not exceed current stock
 ====
 
-To record a sale transaction,
-1. Use the sell command
-2. Key in n/, followed by name of drink
-3. Key in q/, followed by quantity transacted in sale
-4. Press kbd:[enter]
-5. Check whether the transaction has been recorded successfully,
-.. If you see the message "sale transaction recorded!", the transaction had been successfully entered into Drink I/O
-.. If not, follow the instructions displayed in the message display pane, and re-enter the command
+To record a sale transaction, +
+1. Use the sell command +
+2. Key in n/, followed by name of drink (`NAME`) +
+3. Key in q/, followed by quantity transacted in sale (`QUANTITY`) +
+4. Press kbd:[enter] +
+5. Check whether the transaction has been recorded successfully, +
+.. If you see the message "sale transaction recorded!", the transaction had been successfully entered into Drink I/O +
+.. If not, follow the instructions displayed in the message display pane, and re-enter the command +
 
 [WARNING]
 ====
-- The drink you want to transact must be recorded in DrinkIo
+- The drink you want to transact must be recorded in Drink I/O.
 - The recording will fail if QUANTITY is more than the available stock in Drink I/O. Do check if your stock counts in Drink I/O are updated.
 ====
 
