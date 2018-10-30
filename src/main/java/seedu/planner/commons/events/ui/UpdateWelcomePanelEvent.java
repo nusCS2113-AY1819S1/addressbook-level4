@@ -3,7 +3,7 @@ package seedu.planner.commons.events.ui;
 import javafx.collections.ObservableList;
 import seedu.planner.commons.events.BaseEvent;
 import seedu.planner.model.summary.CategoryStatistic;
-
+//@@author tenvinc
 /**
  * Indicates a request to update the welcome panel with new information
  */

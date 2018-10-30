@@ -6,12 +6,15 @@ import java.util.HashMap;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+
+import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.record.UniqueRecordList;
 import seedu.planner.model.tag.TagMap;
 import seedu.planner.ui.CustomSuggestionProvider;
+
 
 /**
  * Wraps all data at the planner-book level
@@ -72,8 +75,8 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         requireNonNull(newData);
 
         setRecords(newData.getRecordList());
-        //setLimits(newData.getLimitList());
         setTagMap(newData.getTagMap());
+        setLimits(newData.getLimitList());
     }
 
     /**
@@ -83,6 +86,15 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     public void resetData(UniqueRecordList recordList) {
         requireNonNull(recordList);
         setRecords(recordList.asUnmodifiableObservableList());
+    }
+
+    /**
+     * Resets LimitList
+     * @param dateBasedLimitList
+     */
+    public void resetLimit(DateBasedLimitList dateBasedLimitList) {
+        requireNonNull(dateBasedLimitList);
+        setLimitList(dateBasedLimitList);
     }
 
     //// record-level operations
@@ -121,7 +133,6 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
      */
     public void updateRecord(Record target, Record editedRecord) {
         requireNonNull(editedRecord);
-
         records.setRecord(target, editedRecord);
     }
     /**
@@ -152,6 +163,16 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         limits.add(limit); }
 
     /**
+     * edit an existing limit.
+     * Replace the limit the new limit given.
+     * @param target
+     * @param editedLimit
+     */
+    public void updateLimit(Limit target, Limit editedLimit) {
+        requireNonNull(editedLimit);
+        limits.setLimit(target, editedLimit);
+    }
+    /**
      * check whether the records' money has already exceeded the limit.
      * return true if limit exceeded.
      * @param limit
@@ -159,22 +180,43 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
      */
     public boolean isExceededLimit (Limit limit) {
         Double recordsMoney = 0.0;
-
         for (Record i: records) {
             if (limit.isInsideDatePeriod(i)) {
                 recordsMoney += i.getMoneyFlow().toDouble();
             }
         }
-
         return (limit.isExceeded(recordsMoney));
     }
 
+    public Double getTotalSpend (Limit limit) {
+        Double recordsMoney = 0.0;
+        for (Record i: records) {
+            if (limit.isInsideDatePeriod(i)) {
+                recordsMoney += i.getMoneyFlow().toDouble();
+            }
+        }
+        return recordsMoney;
+    }
+
+    /**
+     * return the dates
+     */
+    public Limit getSameDatesLimit (Date dateStart, Date dateEnd) {
+        for (Limit i: limits.asUnmodifiableObservableList()) {
+            if (dateStart.equals(i.getDateStart()) && dateEnd.equals(i.getDateEnd())) {
+                return i;
+            }
+        }
+        return null;
+    }
+
+
     /**
      * Removes a limit from the list,
-     * @param limitin must already existed.
+     * @param limitLn must already existed.
      */
-    public void removeLimit(Limit limitin) {
-        limits.remove(limitin); }
+    public void removeLimit(Limit limitLn) {
+        limits.remove(limitLn); }
 
     public void addRecordToTagMap(Record record) {
         tagMap.addRecordToTagMap(record);
@@ -192,8 +234,6 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     public HashMap<String, Integer> getTagMap () {
         return tagMap.makeTagMapFromRecordList(records);
     }
-
-    //// util methods
 
     @Override
     public String toString() {

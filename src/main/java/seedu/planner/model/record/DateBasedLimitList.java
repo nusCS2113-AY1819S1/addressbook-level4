@@ -55,6 +55,18 @@ public class DateBasedLimitList { //implements Iterable<Limit> {
         }
     }
 
+    public void setLimit(Limit target, Limit editedLimit) {
+        requireAllNonNull(target, editedLimit);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new LimitNotFoundException();
+        }
+
+
+        internalList.set(index, editedLimit);
+    }
+
     public void setLimits(DateBasedLimitList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);

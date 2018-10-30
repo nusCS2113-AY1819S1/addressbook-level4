@@ -18,7 +18,7 @@ import seedu.planner.commons.events.ui.UpdateWelcomePanelEvent;
 import seedu.planner.model.Model;
 import seedu.planner.model.summary.CategoryStatistic;
 import seedu.planner.model.summary.CategoryStatisticsList;
-
+//@@author tenvinc
 /**
  * UI component that displays the default welcome page with statistic of the current month and a welcome message
  */
@@ -119,16 +119,18 @@ public class WelcomePanel extends UiPart<Region> implements Switchable {
     private void populateUi(ObservableList<CategoryStatistic> toDisplay) {
         Pair<ObservableList<ChartData>, Double> expenseChartData = extractExpenseChartData(toDisplay);
         if (expenseChartData.getKey().size() == 0) {
-            return;
+            expenseStats.getChildren().clear();
+        } else {
+            Node expenseNode = createTotalExpenseBreakdown(expenseChartData);
+            expenseStats.getChildren().add(expenseNode);
         }
-        Node expenseNode = createTotalExpenseBreakdown(expenseChartData);
-        expenseStats.getChildren().add(expenseNode);
         Pair<ObservableList<ChartData>, Double> incomeChartData = extractIncomeChartData(toDisplay);
         if (incomeChartData.getKey().size() == 0) {
-            return;
+            incomeStats.getChildren().clear();
+        } else {
+            Node incomeNode = createTotalIncomeBreakdown(incomeChartData);
+            incomeStats.getChildren().add(incomeNode);
         }
-        Node incomeNode = createTotalIncomeBreakdown(incomeChartData);
-        incomeStats.getChildren().add(incomeNode);
     }
 
     /**

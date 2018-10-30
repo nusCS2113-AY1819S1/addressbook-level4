@@ -18,6 +18,7 @@ public interface FinancialPlannerStorage {
     /**
      * Returns the file path of the data file of the record list storage.
      */
+
     Path getRecordListFilePath();
 
     /**

@@ -5,7 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import seedu.planner.ui.SummaryEntry;
-
+//@@author tenvinc
 /**
  * Provides a handle for {@code SummaryDisplay}
  */

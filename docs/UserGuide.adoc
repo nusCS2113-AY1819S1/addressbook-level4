@@ -107,6 +107,66 @@ Examples:
 * `list d/10-11-2018`
 * `list d/10-11-2018 11-11-2018`
 
+=== Adding a limit: `limit` [Oscar]
+
+Adds a limit to the FinancialPlanner +
+Format: `limit d/DATE_START DATE_END m/MONEYFLOW` +
+
+DATE_START and DATE_END indicates the starting date and ending date for the limit.
+MONEYFLOW denotes the money limit for that period of time. It only contains number(without "-" or "+"),
+which indicates that during this period of time,
+the program will warn the user once the total money spend exceeds the limit money.
+For each period of time, there is only one limit. If there is a limit which has the same
+dates with the input, the program will throw error.
+Once the limit has been set, the program will keep updating the latest information about
+each limit.
+****
+* Typical format for a Limit MONEYFLOW parameter :"100"
+** Typical example of *expense*: limit d/24-9-2018 25-9-2018 m/*100*
+****
+
+[TIP]
+The Limit MONEYFLOW can not be negative number.
+
+Examples:
+
+* `limit d/20-8-2018 30-8-2018 m/100`
+
+=== Deleting a limit: `deleteLimit` [Oscar]
+
+Adds a limit to the FinancialPlanner +
+Format: `deleteLimit d/DATE_START DATE_END +
+
+The DATE_START and DATE_END are the two elements for limit searching. Since all the limits have
+unique dates, once user input the two dates, the limit with same dates inside the
+limit list will be deleted. If there is no limit sharing the same dates, it will throw error.
+
+
+Examples:
+
+* `deleteLimit d/20-8-2018 30-8-2018`
+
+=== Editing a limit: `editLimit` [Oscar]
+
+Edit a limit to the FinancialPlanner +
+Format: `editLimit d/DATE_START DATE_END m/MONEYFLOW` +
+
+This command will edit an existing limit inside the limit list according to the
+two dates. The newly input Money will replace the original money limit. If there is no limit
+for that period of time, the program will return error.
+****
+* Typical format for a Limit MONEYFLOW parameter :"200"
+** Typical example of *expense*: editLimit d/24-9-2018 25-9-2018 m/*200*
+****
+
+[TIP]
+The editLimit MONEYFLOW can not be negative number.
+
+Examples:
+
+* `editLimit d/20-8-2018 30-8-2018 m/200`
+
+
 === Sorting displayed records : `sort`
 
 Sorts the list of records in the record book by a category.
@@ -277,7 +337,6 @@ Format: +
 * For *summary by month*, START_MONTH/END_MONTH must in the format of `mmm-yyyy`, `mmm` represents the month with its three letter representations, and
 `yyyy` represents the year in its numerical form.
 * Note that for mmm, it is case-insensitive, meaning both *"APR"* and *"apr"* are accepted
-*
 ****
 
 Examples:
@@ -293,6 +352,33 @@ Screenshot of app when `summary date d/1-1-2018 12-12-2018` is run
 
 image::UiSummaryByMonthTable.png[width="790"]
 Screenshot of app when `summary month d/apr-2018 sep-2018` is run
+
+=== Showing a breakdown of total expenses and income into categories: `stats`
+
+Shows a breakdown of total expenses and income into categories and displays these information in a pie chart. +
+Format:`stats d/START_DATE END_DATE`
+
+****
+* START_DATE/END_DATE follow the same configurations as date parameters required when adding records. It is in the form of
+*dd-mm-yyyy* where *dd* represents day, *mm* represents month and *yyyy* represents the year. *dd* and *mm* both require 1 to 2 digits while
+*yyyy* requires exactly 4 digits.
+****
+
+Once the command has been executed, 2 tabs will appear showing a pie chart containing data that is relevant in the range. +
+Note that due to label constraints, some labels may not be displaying correctly if they are overlapping with other labels. This happens when the pie slice
+is too small. To improve readability, we have decided to hide some labels in such scenarios.
+
+Examples:
+
+* `stats d/1-1-2018 12-12-2018`
+
+Below are some screenshots of what you can see when the command has been accepted.
+
+image::UiPieChartExpense.png[width="790"]
+Screenshot of app displaying expense breakdown when `stats d/1-1-2018 12-12-2018` is run
+
+image::UiPieChartIncome.png[width="790"]
+Screenshot of app displaying income breakdown when `stats d/1-1-2018 12-12-2018` is run
 
 === Selecting a record : `select`
 

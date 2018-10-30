@@ -15,7 +15,7 @@ import seedu.planner.model.record.Record;
 import seedu.planner.testutil.Assert;
 import seedu.planner.testutil.RecordBuilder;
 import seedu.planner.testutil.SummaryBuilder;
-
+//@@author tenvinc
 /**
  * This tests both the DaySummary and MonthSummary classes
  */

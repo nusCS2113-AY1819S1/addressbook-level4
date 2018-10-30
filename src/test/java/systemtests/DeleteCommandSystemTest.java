@@ -33,7 +33,7 @@ public class DeleteCommandSystemTest extends FinancialPlannerSystemTest {
         Model expectedModel = getModel();
         String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_RECORD.getOneBased() + "       ";
         Record deletedRecord = removeRecord(expectedModel, INDEX_FIRST_RECORD);
-        String expectedResultMessage = String.format(MESSAGE_DELETE_RECORD_SUCCESS, deletedRecord);
+        String expectedResultMessage = String.format(MESSAGE_DELETE_RECORD_SUCCESS , deletedRecord);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
         /* Case: delete the last record in the list -> deleted */

@@ -11,6 +11,7 @@ import seedu.planner.model.Month;
 import seedu.planner.model.record.Record;
 import seedu.planner.ui.SummaryEntry;
 
+//@@author tenvinc
 /**
  * This class represents a list containing all MonthSummary objects computed from a given list of records
  * and a predicate criteria. The internal implementation is a HashMap but it returns a list

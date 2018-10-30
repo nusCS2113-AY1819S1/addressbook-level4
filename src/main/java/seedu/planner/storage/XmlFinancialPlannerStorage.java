@@ -29,6 +29,7 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
     private Path recordListFilePath;
     private Path limitListFilePath;
 
+
     public XmlFinancialPlannerStorage(Path recordListFilePath, Path limitListFilePath) {
         this.recordListFilePath = recordListFilePath;
         this.limitListFilePath = limitListFilePath;
@@ -43,6 +44,7 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
     }
 
     // ===================== Financial Planner Storage methods ================================
+
 
     @Override
     public Optional<ReadOnlyFinancialPlanner> readFinancialPlanner() throws DataConversionException, IOException {
@@ -108,7 +110,9 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
 
     @Override
     public void saveRecordList(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
+
         saveRecordList(financialPlanner, recordListFilePath);
+
     }
 
     /**
@@ -129,6 +133,7 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
     public Optional<DateBasedLimitList> readLimitList() throws DataConversionException, IOException {
         return readLimitList(limitListFilePath);
     }
+
 
     @Override
     public Optional<DateBasedLimitList> readLimitList(Path filePath) throws DataConversionException,
@@ -159,6 +164,7 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
      * Similar to {@link FinancialPlannerStorage#saveRecordList(ReadOnlyFinancialPlanner)}
      * @param filePath location of the data. Cannot be null
      */
+
     public void saveLimitList(ReadOnlyFinancialPlanner limitList, Path filePath) throws IOException {
         requireNonNull(limitList);
         requireNonNull(filePath);

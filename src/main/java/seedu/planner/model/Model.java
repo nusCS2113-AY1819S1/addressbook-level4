@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 
@@ -60,6 +61,13 @@ public interface Model {
     void updateRecord(Record target, Record editedRecord);
 
     /**
+     * Replace the limit inside the limit list according to the given limit dates
+     * @param target
+     * @param editedLimit
+     */
+    void updateLimit(Limit target, Limit editedLimit);
+
+    /**
      * To delete a existing limit.
      * @param target
      */
@@ -71,6 +79,44 @@ public interface Model {
      * @return
      */
     boolean isExceededLimit (Limit limitIn);
+    /**
+     *This function will execute all the limits stored inside storage right now.
+     * However, only exceeded limits will be displayed.
+     * The final output will be in one string
+     * and it will return this string to limit command and display.
+     * @return
+     */
+    String autoLimitCheck ();
+
+    /**
+     *This function will execute all the limits stored inside
+     * storage right now. The final output will be in one string
+     * and it will return this string to limit command and display.
+     * @return
+     */
+    String manualLimitCheck ();
+    /**
+     * This will generate the output string according to the
+     * exceeding condition and limit information.
+     * @param isExceeded
+     * @param limit
+     * @return
+     */
+    String generateLimitOutput (boolean isExceeded, Double totalMoney, Limit limit);
+
+    /**
+     * This function will return the total money spent during that period of limit time.
+     * @param limitIn
+     * @return
+     */
+    Double getTotalSpend (Limit limitIn);
+    /**
+     * Return the limit which has the same dates as input.
+     * @param dateStart
+     * @param dateEnd
+     * @return
+     */
+    Limit getSameDatesLimit (Date dateStart, Date dateEnd);
 
     ObservableList<Record> getRecordsThisMonth();
 

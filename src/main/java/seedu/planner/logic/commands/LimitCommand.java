@@ -12,54 +12,55 @@ import seedu.planner.model.record.Limit;
 /**
 * This Command is used as a limit function, Currently the user can input two Dates and one MoneyFlow,
 * and the command will check whether the the total expense during this period has exceeded the limit.
+ * and the limit will be stored inside the limit storage.
 * */
 public class LimitCommand extends Command {
     public static final String COMMAND_WORD = "limit";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Check the limit for a period of time. "
             + "Parameters: "
             + PREFIX_DATE + "DATE_START " + "DATE_END "
-            + PREFIX_MONEYFLOW + "LIMIT_MONEY "
+            + PREFIX_MONEYFLOW + "LIMIT_MONEY " + "\n"
 
             + "Example: " + COMMAND_WORD + " "
-
             + PREFIX_DATE + "18-9-2018 " + "20-9-2018 "
             + PREFIX_MONEYFLOW + "100 ";
 
-    public static final String MESSAGE_BASIC = "Date Period: %s -- %s.\n The limit you have set: %.2f \n";
+    public static final String MESSAGE_BASIC_SPEND = "Date Period: %s -- %s.\n The limit you have set: %.2f \n"
+            + "Your spend during the limit period: %.2f\n";
 
-    public static final String MESSAGE_EXCEED = "Your spend exceeded the limit !!! "; //%l$s";
-    public static final String MESSAGE_NOT_EXCEED = "Your spend did not exceed the limit ^o^";
-    public static final String MESSAGE_LIMITS_SAME_DATE = "There are already limits for that period of date";
+    public static final String MESSAGE_BASIC_EARNED = "Date Period: %s -- %s.\n The limit you have set: %.2f \n"
+            + "Your income during the limit period: %.2f\n";
+    public static final String MESSAGE_EXCEED = "Your spend exceeded the limit !!! \n";
+    public static final String MESSAGE_NOT_EXCEED = "Your spend did not exceed the limit ^o^\n";
+    public static final String MESSAGE_LIMITS_SAME_DATE = "There already a limit for that period of date\n";
+
+
 
     private Limit limit;
+
     private String output;
+
     public LimitCommand (Limit limitIn) {
         requireNonNull(limitIn);
         limit = limitIn;
+
     }
+
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        requireNonNull(model);
+
         if (model.hasSameDateLimit(limit)) {
             throw new CommandException(MESSAGE_LIMITS_SAME_DATE);
         }
 
         model.addLimit(limit);
-
-        if (model.isExceededLimit(limit)) {
-            output = String.format(MESSAGE_BASIC,
-                    limit.getDateStart(), limit.getDateEnd(), limit.getLimitMoneyFlow().toDouble())
-                    + MESSAGE_EXCEED;
-        } else {
-            output = String.format(MESSAGE_BASIC,
-                    limit.getDateStart(), limit.getDateEnd(), limit.getLimitMoneyFlow().toDouble())
-                    + MESSAGE_NOT_EXCEED;
-        }
-
+        output = model.generateLimitOutput(model.isExceededLimit(limit),
+                model.getTotalSpend(limit), limit);
+        model.commitFinancialPlanner();
         return new CommandResult(output);
-
     }
+
     @Override
     public boolean equals (Object other) {
         return other == this // short circuit if same object

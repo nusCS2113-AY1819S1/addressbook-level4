@@ -22,4 +22,6 @@ public class Messages {
             "Please enter the Start_Date smaller than or equal to the End_Date.\n";
     public static final String MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY =
             "The Excel file named %1$s has been written successfully.\n";
+    public static final String MESSAGE_LIMITS_DO_NOT_EXIST =
+            "There is no limit for that period of date";
 }
