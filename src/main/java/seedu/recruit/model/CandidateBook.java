@@ -109,10 +109,10 @@ public class CandidateBook implements ReadOnlyCandidateBook {
             candidates.sortByEducation();
             break;
         case "s/":
-            persons.sortBySalary();
+            candidates.sortBySalary();
             break;
         default:
-            persons.sortInReverse();
+            candidates.sortInReverse();
 
         }
 
