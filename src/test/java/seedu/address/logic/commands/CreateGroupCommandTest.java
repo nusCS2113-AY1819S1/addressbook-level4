@@ -189,6 +189,11 @@ public class CreateGroupCommandTest {
         public void deleteGroup(Group target) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void deleteGroupPerson(Group group, Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

@@ -99,7 +99,7 @@ public class UniqueGroupList implements Iterable<Group> {
     }
 
     /**
-     * Removes the equivalent person from the group in the list.
+     * Removes a person from a group in the list.
      * The group must exist in the list.
      * The person must exist in the group.
      */
