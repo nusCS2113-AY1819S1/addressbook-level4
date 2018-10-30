@@ -229,6 +229,55 @@ Classes used by multiple components are in the `seedu.recruit.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::add/delete[]
+=== Add/Delete Feature
+==== Current Implementation
+===== Adding/Deletion of candidates
+The add/delete mechanism of candidates is facilitated in `UniqueCandidateList` which stores the added candidates internally as an `internalList` which is a list of candidate objects.
+
+It implements `Iterable<Candidate>`, where it overrides the `Iterator`, `equals` and `hashCode` of the `Iterable` interface.
+Additionally, it implements the following operations to support adding/deletion:
+
+* `UniqueCandidateList#contains(Candidate candidate)` — Checks whether a candidate exists inside `internalList` using `Candidate#isSameCandidate` to define equality.
+* `UniqueCandidateList#add(Candidate candidate)` — Adds a unique candidate to `internalList`. Checks for uniqueness using `UniqueCandidateList#contains(Candidate candidate)`.
+* `UniqueCandidateList#remove(Candidate candidate)` — Removes the equivalent candidate from `internalList`.
+
+These operations are exposed in the Model interface as Model#addCandidate(Candidate) and Model#deleteCandidate(Candidate candidate) respectively.
+Given below is an example usage scenario for adding a candidate and how the adding mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time.
+        `UniqueCompanyList` will be initialised with the list of saved candidates in RecruitBook
+
+Step 2. The user executes `addc n/John Doe ...` to add a new candidate.
+        `AddCandidateCommand` calls
+
+Step 3. The user launches the application for the first time.
+        `UniqueCompanyList` will be initialised with the list of saved candidates in RecruitBook
+
+
+==== Design Considerations
+
+===== Aspect: How switch feature executes
+
+* **Alternative 1 (current choice):** Use `EventsCenter` to post events and `MainWindow` to handle these events.
+** Pros: Easy to implement. Neat and clean code with less coupling. `MainWindow` has private methods and variables to prevent unauthorised access
+for better integrity purposes.
+** Cons: -
+* **Alternative 2:** Allow all methods in MainWindow to be static and public.
+** Pros: Other classes can have easy access to the switching methods and their variables.
+** Cons: May face integrity issues due to public access of MainWindow. Increases unnecessary coupling.
+
+===== Aspect: Data structure to support the switch feature
+* **Alternative 1 (current choice):** The only variable that `MainWindow` has to keep track of is `currentBook`.
+** Pros: Easy to keep track as `currentBook` is set to `candidateBook` or `companyBook` accordingly.
+** Cons: `currentBook` is a string variable. Misspelling of `candidateBook` or `companyBook` in code may result in a bug.
+* **Alternative 2:** Store `currentBook` as boolean `isCandidateBook`, with the boolean returning true if the current book is Candidate Book,
+and returning false if the current book is Company Book.
+** Pros: Eliminates the possibility of misspelling the books.
+** Cons: Can be confusing for multiple contributors. There is also an assumption that there are only 2 distinct
+cases of the view of `panelViewPlaceholder`, which is not the case as we introduced another view `shortlistPanel`.
+// end::add/delete[]
+
 // tag::shortlist[]
 === Shortlist Feature
 ==== Current Implementation
