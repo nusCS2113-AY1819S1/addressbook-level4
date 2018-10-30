@@ -5,23 +5,18 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
-import static seedu.recruit.ui.testutil.GuiTestAssert.assertListMatching;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import guitests.GuiRobot;
 import guitests.guihandles.HelpWindowHandle;
 import seedu.recruit.logic.commands.DeleteCandidateCommand;
 import seedu.recruit.logic.commands.HelpCommand;
-import seedu.recruit.logic.commands.SelectCandidateCommand;
-import seedu.recruit.ui.BrowserPanel;
 import seedu.recruit.ui.StatusBarFooter;
 
 /**
  * A system test class for the help window, which contains interaction with other UI components.
  */
-@Ignore("not updated with new UI changes")
 public class HelpCommandSystemTest extends CandidateBookSystemTest {
     private static final String ERROR_MESSAGE = "ATTENTION!!!! : On some computers, this test may fail when run on "
             + "non-headless mode as FxRobot#clickOn(Node, MouseButton...) clicks on the wrong location. We suspect "
@@ -41,12 +36,10 @@ public class HelpCommandSystemTest extends CandidateBookSystemTest {
         getMainMenu().openHelpWindowUsingAccelerator();
         assertHelpWindowOpen();
 
-        getPersonListPanel().click();
+        getCandidateDetailsPanel().click();
         getMainMenu().openHelpWindowUsingAccelerator();
         assertHelpWindowOpen();
 
-        getBrowserPanel().click();
-        getMainMenu().openHelpWindowUsingAccelerator();
         assertHelpWindowNotOpen();
 
         //use menu button
@@ -61,13 +54,15 @@ public class HelpCommandSystemTest extends CandidateBookSystemTest {
         executeCommand(HelpCommand.COMMAND_WORD);
         getMainWindowHandle().focus();
 
+        /**
         // assert that while the help window is open the UI updates correctly for a command execution
         executeCommand(SelectCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
         assertNotEquals(HelpCommand.SHOWING_HELP_MESSAGE, getResultDisplay().getText());
-        assertNotEquals(BrowserPanel.DEFAULT_PAGE, getBrowserPanel().getLoadedUrl());
-        assertListMatching(getPersonListPanel(), getModel().getFilteredCandidateList());
+        //assertNotEquals(BrowserPanel.DEFAULT_PAGE, getBrowserPanel().getLoadedUrl());
+        assertListMatching(getCandidateDetailsPanel(), getModel().getFilteredCandidateList());
+        */
 
         // assert that the status bar too is updated correctly while the help window is open
         // note: the select command tested above does not update the status bar

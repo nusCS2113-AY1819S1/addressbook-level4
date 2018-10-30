@@ -48,7 +48,6 @@ public class SelectJobCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
 
         List<JobOffer> filteredCompanyJobList = model.getFilteredCompanyJobList();
 
@@ -57,7 +56,6 @@ public class SelectJobCommand extends Command {
         }
 
         selectedJobOffer = filteredCompanyJobList.get(targetIndex.getZeroBased());
-        EventsCenter.getInstance().post(new JumpToCompanyJobListRequestEvent(targetIndex));
 
         /**
          * If user is inside Shortlist command,
@@ -76,6 +74,8 @@ public class SelectJobCommand extends Command {
                     targetIndex.getOneBased()) + SelectCandidateCommand.MESSAGE_USAGE);
         }
 
+        EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
+        EventsCenter.getInstance().post(new JumpToCompanyJobListRequestEvent(targetIndex));
         return new CommandResult(String.format(MESSAGE_SELECT_JOB_SUCCESS, targetIndex.getOneBased()));
     }
 

@@ -47,7 +47,8 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        CandidateBook candidateBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        CandidateBook candidateBook = new
+                AddressBookBuilder().withCandidate(ALICE).withCandidate(BENSON).buildCandidateBook();
         CandidateBook differentCandidateBook = new CandidateBook();
         UserPrefs userPrefs = new UserPrefs();
 

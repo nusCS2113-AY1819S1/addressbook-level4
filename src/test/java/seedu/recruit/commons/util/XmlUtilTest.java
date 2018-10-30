@@ -16,6 +16,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.recruit.model.CandidateBook;
+import seedu.recruit.model.CompanyBook;
 import seedu.recruit.storage.XmlAdaptedCandidate;
 import seedu.recruit.storage.XmlAdaptedTag;
 import seedu.recruit.storage.XmlSerializableCandidateBook;
@@ -141,9 +142,9 @@ public class XmlUtilTest {
                 XmlSerializableCandidateBook.class);
         assertEquals(dataToWrite, dataFromFile);
 
-        AddressBookBuilder builder = new AddressBookBuilder(new CandidateBook());
+        AddressBookBuilder builder = new AddressBookBuilder(new CandidateBook(), new CompanyBook());
         dataToWrite = new XmlSerializableCandidateBook(
-                builder.withPerson(new CandidateBuilder().build()).build());
+                builder.withCandidate(new CandidateBuilder().build()).buildCandidateBook());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableCandidateBook.class);

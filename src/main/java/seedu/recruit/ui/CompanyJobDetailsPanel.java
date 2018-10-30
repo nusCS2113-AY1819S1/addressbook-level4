@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
 import seedu.recruit.commons.core.LogsCenter;
@@ -33,6 +34,9 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
 
     @FXML
     private Label numberOfJobOffers;
+
+    @FXML
+    private HBox cardPane;
 
     @FXML
     private ListView<Company> companyView;
