@@ -11,7 +11,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TEST_MARK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TEST_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TEST_NAME_BOB;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -47,7 +46,7 @@ public class AddTestMarksCommandTest {
     @Test
     public void constructor_nullTest_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new AddTestMarksCommand(null,null,null,null);
+        new AddTestMarksCommand(null, null, null, null);
     }
 
     @Test
@@ -57,9 +56,11 @@ public class AddTestMarksCommandTest {
         String[] nameKeywords = validPerson.getName().fullName.split("\\s+");
         List<String> nameKeywordsList =
                 new ArrayList<>(Arrays.asList(nameKeywords));
-        NameContainsKeywordsPredicate nameContainsKeywordsPredicate = new NameContainsKeywordsPredicate(nameKeywordsList);
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
+                new NameContainsKeywordsPredicate(nameKeywordsList);
 
-        CommandResult commandResult = new AddTestMarksCommand(nameContainsKeywordsPredicate,VALID_TEST_NAME_AMY,VALID_TEST_AMY_MARKS,nameKeywordsList).execute(modelStub, commandHistory);
+        CommandResult commandResult = new AddTestMarksCommand(nameContainsKeywordsPredicate,
+                VALID_TEST_NAME_AMY,VALID_TEST_AMY_MARKS,nameKeywordsList).execute(modelStub, commandHistory);
 
         assertEquals(Messages.MESSAGE_ADDED_TEST_LIST, commandResult.feedbackToUser);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
@@ -74,8 +75,11 @@ public class AddTestMarksCommandTest {
         String[] nameKeywords = validPerson.getName().fullName.split("\\s+");
         List<String> nameKeywordsList =
                 new ArrayList<>(Arrays.asList(nameKeywords));
-        NameContainsKeywordsPredicate nameContainsKeywordsPredicate = new NameContainsKeywordsPredicate(nameKeywordsList);
-        AddTestMarksCommand addTestMarksCommand = new AddTestMarksCommand(nameContainsKeywordsPredicate,VALID_TEST_NAME_AMY,VALID_TEST_AMY_MARKS,nameKeywordsList);
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
+                new NameContainsKeywordsPredicate(nameKeywordsList);
+        AddTestMarksCommand addTestMarksCommand =
+                new AddTestMarksCommand(nameContainsKeywordsPredicate,
+                        VALID_TEST_NAME_AMY, VALID_TEST_AMY_MARKS, nameKeywordsList);
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddTestMarksCommand.MESSAGE_DUPLICATE_TEST);
         addTestMarksCommand.execute(modelStub, commandHistory);
@@ -91,8 +95,10 @@ public class AddTestMarksCommandTest {
         String[] nameKeywords = validPerson.getName().fullName.split("\\s+");
         List<String> nameKeywordsList =
                 new ArrayList<>(Arrays.asList(nameKeywords));
-        NameContainsKeywordsPredicate nameContainsKeywordsPredicate = new NameContainsKeywordsPredicate(nameKeywordsList);
-        AddTestMarksCommand addTestMarksCommand = new AddTestMarksCommand(nameContainsKeywordsPredicate,VALID_TEST_NAME_AMY,VALID_TEST_AMY_MARKS,nameKeywordsList);
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
+                new NameContainsKeywordsPredicate(nameKeywordsList);
+        AddTestMarksCommand addTestMarksCommand = new AddTestMarksCommand(nameContainsKeywordsPredicate,
+                VALID_TEST_NAME_AMY, VALID_TEST_AMY_MARKS, nameKeywordsList);
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddTestMarksCommand.MESSAGE_PERSONNAME_NOT_FOUND);
         addTestMarksCommand.execute(modelStub, commandHistory);
@@ -124,21 +130,29 @@ public class AddTestMarksCommandTest {
         String[] nameKeywordsAlice = alice.getName().fullName.split("\\s+");
         List<String> nameKeywordsListAlice =
                 new ArrayList<>(Arrays.asList(nameKeywordsAlice));
-        NameContainsKeywordsPredicate nameContainsKeywordsPredicateAlice = new NameContainsKeywordsPredicate(nameKeywordsListAlice);
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicateAlice =
+                new NameContainsKeywordsPredicate(nameKeywordsListAlice);
 
         String[] nameKeywordsBob = bob.getName().fullName.split("\\s+");
         List<String> nameKeywordsListBob =
                 new ArrayList<>(Arrays.asList(nameKeywordsBob));
-        NameContainsKeywordsPredicate nameContainsKeywordsPredicateBob = new NameContainsKeywordsPredicate(nameKeywordsListBob);
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicateBob =
+                new NameContainsKeywordsPredicate(nameKeywordsListBob);
 
-        AddTestMarksCommand addTestMarksCommandAlice = new AddTestMarksCommand(nameContainsKeywordsPredicateAlice,VALID_TEST_NAME_AMY,VALID_TEST_MARK_AMY,nameKeywordsListAlice);
-        AddTestMarksCommand addTestMarksCommandBob = new AddTestMarksCommand(nameContainsKeywordsPredicateBob,VALID_TEST_NAME_BOB,VALID_TEST_MARK_BOB,nameKeywordsListBob);
+        AddTestMarksCommand addTestMarksCommandAlice =
+                new AddTestMarksCommand(nameContainsKeywordsPredicateAlice, VALID_TEST_NAME_AMY,
+                        VALID_TEST_MARK_AMY, nameKeywordsListAlice);
+        AddTestMarksCommand addTestMarksCommandBob =
+                new AddTestMarksCommand(nameContainsKeywordsPredicateBob, VALID_TEST_NAME_BOB,
+                        VALID_TEST_MARK_BOB, nameKeywordsListBob);
 
         // same object -> returns true
         assertTrue(addTestMarksCommandAlice.equals(addTestMarksCommandAlice));
 
         // same values -> returns true
-        AddTestMarksCommand addTestMarksCommandAliceCopy = new AddTestMarksCommand(nameContainsKeywordsPredicateAlice,VALID_TEST_NAME_AMY,VALID_TEST_MARK_AMY,nameKeywordsListAlice);
+        AddTestMarksCommand addTestMarksCommandAliceCopy = new AddTestMarksCommand(nameContainsKeywordsPredicateAlice,
+                VALID_TEST_NAME_AMY,
+                VALID_TEST_MARK_AMY, nameKeywordsListAlice);
         assertTrue(addTestMarksCommandAlice.equals(addTestMarksCommandAliceCopy));
 
         // different types -> returns false
