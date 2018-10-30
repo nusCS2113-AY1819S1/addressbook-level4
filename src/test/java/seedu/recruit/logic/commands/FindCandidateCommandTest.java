@@ -34,9 +34,9 @@ public class FindCandidateCommandTest {
     @Test
     public void equals() {
         CandidateContainsKeywordsPredicate firstPredicate =
-                new CandidateContainsKeywordsPredicateBuilder("first").getCandidatePredicate();
+                new CandidateContainsKeywordsPredicateBuilder("n/first").getCandidatePredicate();
         CandidateContainsKeywordsPredicate secondPredicate =
-                new CandidateContainsKeywordsPredicateBuilder("second").getCandidatePredicate();
+                new CandidateContainsKeywordsPredicateBuilder("n/second").getCandidatePredicate();
 
         FindCandidateCommand findFirstCommand = new FindCandidateCommand(firstPredicate);
         FindCandidateCommand findSecondCommand = new FindCandidateCommand(secondPredicate);
@@ -73,7 +73,7 @@ public class FindCandidateCommandTest {
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         CandidateContainsKeywordsPredicate predicate =
-                new CandidateContainsKeywordsPredicateBuilder("Kurz Elle Kunz").getCandidatePredicate();
+                new CandidateContainsKeywordsPredicateBuilder("n/Kurz n/Elle n/Kunz").getCandidatePredicate();
         FindCandidateCommand command = new FindCandidateCommand(predicate);
         expectedModel.updateFilteredCandidateList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);

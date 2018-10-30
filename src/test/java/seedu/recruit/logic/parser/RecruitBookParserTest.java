@@ -92,12 +92,12 @@ public class RecruitBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywordsList = Arrays.asList("foo", "bar", "baz");
+        List<String> keywordsList = Arrays.asList("n/foo", "p/bar", "e/baz");
         String keywords = keywordsList.stream().collect(Collectors.joining(" "));
         FindCandidateCommand command = (FindCandidateCommand) parser.parseCommand(
                 FindCandidateCommand.COMMAND_WORD + " " + keywords, state, emailUtil);
-        assertEquals(new FindCandidateCommand(new
-                CandidateContainsKeywordsPredicateBuilder(keywords).getCandidatePredicate()), command);
+        assertEquals(new FindCandidateCommand(
+                new CandidateContainsKeywordsPredicateBuilder(keywords).getCandidatePredicate()), command);
     }
 
     @Test

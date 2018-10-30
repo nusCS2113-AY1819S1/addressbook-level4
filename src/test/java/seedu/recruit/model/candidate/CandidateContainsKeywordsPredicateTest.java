@@ -3,6 +3,7 @@ package seedu.recruit.model.candidate;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class CandidateContainsKeywordsPredicateTest {
         // One keyword
         CandidateContainsKeywordsPredicate predicate =
                 new CandidateContainsKeywordsPredicateBuilder("n/Alice").getCandidatePredicate();
-        assertTrue(predicate.test(new CandidateBuilder().withName("Alice Bob").build()));
+        assertTrue(predicate.test(new CandidateBuilder().withName("n/Alice n/Bob").build()));
 
         // Multiple keywords
         predicate = new CandidateContainsKeywordsPredicateBuilder("n/Alice n/Bob").getCandidatePredicate();
@@ -60,14 +61,14 @@ public class CandidateContainsKeywordsPredicateTest {
 
         // Mixed-case keywords
         predicate = new CandidateContainsKeywordsPredicateBuilder("n/aLIce n/bOB").getCandidatePredicate();
-        assertTrue(predicate.test(new CandidateBuilder().withName("Alice Bob").build()));
+        assertTrue(predicate.test(new CandidateBuilder().withName("n/Alice n/Bob").build()));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         CandidateContainsKeywordsPredicate predicate =
-                new CandidateContainsKeywordsPredicate(new HashMap<>());
+                new CandidateContainsKeywordsPredicate((HashMap<String, List<String>> ) Collections.EMPTY_MAP);
         assertFalse(predicate.test(new CandidateBuilder().withName("n/Alice").build()));
 
         // Non-matching keyword
