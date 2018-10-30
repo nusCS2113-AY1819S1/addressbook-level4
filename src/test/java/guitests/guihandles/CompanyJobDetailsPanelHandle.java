@@ -17,7 +17,7 @@ public class CompanyJobDetailsPanelHandle extends NodeHandle<ListView<Company>> 
 
     private static final String CARD_PANE_ID = "#cardPane";
 
-    private Optional<Company> lastRememberedSelectedPersonCard;
+    private Optional<Company> lastRememberedSelectedCompanyCard;
 
     public CompanyJobDetailsPanelHandle(ListView<Company> companyDetailsNode) {
         super(companyDetailsNode);
@@ -64,11 +64,11 @@ public class CompanyJobDetailsPanelHandle extends NodeHandle<ListView<Company>> 
     }
 
     /**
-     * Navigates the listview to display {@code candidate}.
+     * Navigates the listview to display {@code company}.
      */
     public void navigateToCard(Company company) {
         if (!getRootNode().getItems().contains(company)) {
-            throw new IllegalArgumentException("Candidate does not exist.");
+            throw new IllegalArgumentException("Company does not exist.");
         }
 
         guiRobot.interact(() -> {
@@ -92,14 +92,14 @@ public class CompanyJobDetailsPanelHandle extends NodeHandle<ListView<Company>> 
     }
 
     /**
-     * Selects the {@code CandidateCard} at {@code index} in the list.
+     * Selects the {@code CompanyCard} at {@code index} in the list.
      */
     public void select(int index) {
         getRootNode().getSelectionModel().select(index);
     }
 
     /**
-     * Returns the candidate card handle of a candidate associated with the {@code index} in the list.
+     * Returns the company card handle of a candidate associated with the {@code index} in the list.
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
     public CompanyCardHandle getCompanyCardHandle(int index) {
@@ -130,9 +130,9 @@ public class CompanyJobDetailsPanelHandle extends NodeHandle<ListView<Company>> 
         List<Company> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
-            lastRememberedSelectedPersonCard = Optional.empty();
+            lastRememberedSelectedCompanyCard = Optional.empty();
         } else {
-            lastRememberedSelectedPersonCard = Optional.of(selectedItems.get(0));
+            lastRememberedSelectedCompanyCard = Optional.of(selectedItems.get(0));
         }
     }
 
@@ -144,10 +144,10 @@ public class CompanyJobDetailsPanelHandle extends NodeHandle<ListView<Company>> 
         List<Company> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
-            return lastRememberedSelectedPersonCard.isPresent();
+            return lastRememberedSelectedCompanyCard.isPresent();
         } else {
-            return !lastRememberedSelectedPersonCard.isPresent()
-                    || !lastRememberedSelectedPersonCard.get().equals(selectedItems.get(0));
+            return !lastRememberedSelectedCompanyCard.isPresent()
+                    || !lastRememberedSelectedCompanyCard.get().equals(selectedItems.get(0));
         }
     }
 

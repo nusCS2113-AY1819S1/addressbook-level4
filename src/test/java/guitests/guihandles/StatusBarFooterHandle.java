@@ -136,7 +136,7 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
      * Remembers the content of the sync status portion of the status bar.
      */
     public void rememberCompaniesSyncStatus() {
-        lastRememberedCompaniesSyncStatus = getSyncStatus();
+        lastRememberedCompaniesSyncStatus = getCompaniesSyncStatus();
     }
 
     /**
@@ -144,14 +144,14 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
      * {@code rememberCompaniesSyncStatus()} call.
      */
     public boolean isCompaniesSyncStatusChanged() {
-        return !lastRememberedCompaniesSyncStatus.equals(getSyncStatus());
+        return !lastRememberedCompaniesSyncStatus.equals(getCompaniesSyncStatus());
     }
 
     /**
      * Remembers the content of the 'total companies' portion of the status bar.
      */
     public void rememberTotalCompaniesStatus() {
-        lastRememberedTotalCompaniesStatus = getTotalPersonsStatus();
+        lastRememberedTotalCompaniesStatus = getTotalCompaniesStatus();
     }
 
     /**
@@ -159,14 +159,14 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
      * recent {@code rememberTotalCompaniesStatus()} call.
      */
     public boolean isTotalCompaniesStatusChanged() {
-        return !lastRememberedTotalCompaniesStatus.equals(getTotalPersonsStatus());
+        return !lastRememberedTotalCompaniesStatus.equals(getTotalCompaniesStatus());
     }
 
     /**
      * Remembers the content of the 'save location' portion of the status bar.
      */
     public void rememberSaveCompanyBookLocation() {
-        lastRememberedSaveCompanyBookLocation = getSaveLocation();
+        lastRememberedSaveCompanyBookLocation = getSaveCompanyBookLocation();
     }
 
     /**
@@ -174,7 +174,7 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
      * recent {@code rememberSaveCompanyBookLocation()} call.
      */
     public boolean isSaveCompanyBookLocationChanged() {
-        return !lastRememberedSaveCompanyBookLocation.equals(getSaveLocation());
+        return !lastRememberedSaveCompanyBookLocation.equals(getSaveCompanyBookLocation());
     }
 
 }

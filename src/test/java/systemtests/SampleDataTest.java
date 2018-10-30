@@ -18,7 +18,7 @@ public class SampleDataTest extends CandidateBookSystemTest {
      * Returns null to force test app to load data of the file in {@code getDataFileLocation()}.
      */
     @Override
-    protected CandidateBook getInitialData() {
+    protected CandidateBook getInitialCandidateData() {
         return null;
     }
 
@@ -26,7 +26,7 @@ public class SampleDataTest extends CandidateBookSystemTest {
      * Returns a non-existent file location to force test app to load sample data.
      */
     @Override
-    protected Path getDataFileLocation() {
+    protected Path getCandidateDataFileLocation() {
         Path filePath = TestUtil.getFilePathInSandboxFolder("SomeFileThatDoesNotExist1234567890.xml");
         deleteFileIfExists(filePath);
         return filePath;

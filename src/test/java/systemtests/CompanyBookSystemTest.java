@@ -3,10 +3,10 @@ package systemtests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.recruit.ui.StatusBarFooter.SYNC_CANDIDATE_STATUS_INITIAL;
-import static seedu.recruit.ui.StatusBarFooter.SYNC_CANDIDATE_STATUS_UPDATED;
-import static seedu.recruit.ui.StatusBarFooter.TOTAL_CANDIDATES_STATUS;
-import static seedu.recruit.ui.testutil.GuiTestAssert.assertListMatching;
+import static seedu.recruit.ui.StatusBarFooter.SYNC_COMPANY_STATUS_INITIAL;
+import static seedu.recruit.ui.StatusBarFooter.SYNC_COMPANY_STATUS_UPDATED;
+import static seedu.recruit.ui.StatusBarFooter.TOTAL_COMPANIES_STATUS;
+import static seedu.recruit.ui.testutil.GuiTestAssert.assertCompanyListMatching;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,8 +20,8 @@ import org.junit.BeforeClass;
 import org.junit.ClassRule;
 
 import guitests.guihandles.BrowserPanelHandle;
-import guitests.guihandles.CandidateDetailsPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
+import guitests.guihandles.CompanyJobDetailsPanelHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
 import guitests.guihandles.ResultDisplayHandle;
@@ -29,10 +29,11 @@ import guitests.guihandles.StatusBarFooterHandle;
 import seedu.recruit.TestApp;
 import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.index.Index;
-import seedu.recruit.logic.commands.ClearCandidateBookCommand;
-import seedu.recruit.logic.commands.FindCandidateCommand;
-import seedu.recruit.logic.commands.ListCandidateCommand;
-import seedu.recruit.logic.commands.SelectCandidateCommand;
+import seedu.recruit.logic.commands.ClearCompanyBookCommand;
+import seedu.recruit.logic.commands.FindCompanyCommand;
+import seedu.recruit.logic.commands.ListCompanyCommand;
+import seedu.recruit.logic.commands.SelectCompanyCommand;
+import seedu.recruit.logic.commands.SwitchBookCommand;
 import seedu.recruit.model.CandidateBook;
 import seedu.recruit.model.CompanyBook;
 import seedu.recruit.model.Model;
@@ -41,10 +42,10 @@ import seedu.recruit.testutil.TypicalPersons;
 import seedu.recruit.ui.CommandBox;
 
 /**
- * A system test class for CandidateBook, which provides access to handles of GUI components and helper methods
+ * A system test class for Company Book, which provides access to handles of GUI components and helper methods
  * for test verification.
  */
-public abstract class CandidateBookSystemTest {
+public abstract class CompanyBookSystemTest {
     @ClassRule
     public static ClockRule clockRule = new ClockRule();
 
@@ -67,7 +68,7 @@ public abstract class CandidateBookSystemTest {
         testApp = setupHelper.setupApplication(this::getInitialCandidateData, this::getInitialCompanyData,
                 getCandidateDataFileLocation(), getCompanyDataFileLocation());
         mainWindowHandle = setupHelper.setupMainWindowHandle();
-
+        executeCommand(SwitchBookCommand.COMMAND_WORD);
         //waitUntilBrowserLoaded(getBrowserPanel());
         assertApplicationStartingStateIsCorrect();
     }
@@ -114,8 +115,12 @@ public abstract class CandidateBookSystemTest {
         return mainWindowHandle.getCommandBox();
     }
 
-    public CandidateDetailsPanelHandle getCandidateDetailsPanel() {
-        return mainWindowHandle.getCandidateDetailsPanel();
+    public CompanyJobDetailsPanelHandle getCompanyJobDetailsPanel() {
+        return mainWindowHandle.getCompanyJobDetailsPanel();
+    }
+
+    public CompanyJobDetailsPanelHandle initializeCompanyJobDetailsPanel() {
+        return mainWindowHandle.initializeCompanyJobDetailsPanel();
     }
 
     public MainMenuHandle getMainMenu() {
@@ -146,89 +151,94 @@ public abstract class CandidateBookSystemTest {
         clockRule.setInjectedClockToCurrentTime();
 
         mainWindowHandle.getCommandBox().run(command);
+        if (!mainWindowHandle.isCompanyBookInitialized()) {
+            initializeCompanyJobDetailsPanel();
+        }
 
         //waitUntilBrowserLoaded(getBrowserPanel());
     }
 
     /**
-     * Displays all candidates in the recruit book.
+     * Displays all companies in the recruit book.
      */
-    protected void showAllPersons() {
-        executeCommand(ListCandidateCommand.COMMAND_WORD);
-        assertEquals(getModel().getCandidateBook().getCandidateList().size(),
-                getModel().getFilteredCandidateList().size());
+    protected void showAllCompanies() {
+        executeCommand(ListCompanyCommand.COMMAND_WORD);
+        assertEquals(getModel().getCompanyBook().getCompanyList().size(),
+                getModel().getFilteredCompanyList().size());
     }
 
     /**
-     * Displays all candidates with any parts of their names matching {@code keyword} (case-insensitive).
+     * Displays all companies with any parts of their names matching {@code keyword} (case-insensitive).
      */
-    protected void showPersonsWithName(String keyword) {
-        executeCommand(FindCandidateCommand.COMMAND_WORD + " " + keyword);
-        assertTrue(getModel().getFilteredCandidateList().size()
-                < getModel().getCandidateBook().getCandidateList().size());
+    protected void showCompaniesWithName(String keyword) {
+        executeCommand(FindCompanyCommand.COMMAND_WORD + " " + keyword);
+        assertTrue(getModel().getFilteredCompanyList().size()
+                < getModel().getCompanyBook().getCompanyList().size());
     }
 
     /**
-     * Selects the candidate at {@code index} of the displayed list.
+     * Selects the company at {@code index} of the displayed list.
      */
-    protected void selectPerson(Index index) {
-        executeCommand(SelectCandidateCommand.COMMAND_WORD + " " + index.getOneBased());
-        assertEquals(index.getZeroBased(), getCandidateDetailsPanel().getSelectedCardIndex());
+    protected void selectCompany(Index index) {
+        executeCommand(SelectCompanyCommand.COMMAND_WORD + " " + index.getOneBased());
+        assertEquals(index.getZeroBased(), getCompanyJobDetailsPanel().getSelectedCardIndex());
     }
 
     /**
-     * Deletes all candidates in the recruit book.
+     * Deletes all companies in the recruit book.
      */
-    protected void deleteAllPersons() {
-        executeCommand(ClearCandidateBookCommand.COMMAND_WORD);
-        assertEquals(0, getModel().getCandidateBook().getCandidateList().size());
+    protected void deleteAllCompanies() {
+        executeCommand(ClearCompanyBookCommand.COMMAND_WORD);
+        assertEquals(0, getModel().getCompanyBook().getCompanyList().size());
     }
 
     /**
      * Asserts that the {@code CommandBox} displays {@code expectedCommandInput}, the {@code ResultDisplay} displays
-     * {@code expectedResultMessage}, the storage contains the same candidate objects as {@code expectedModel}
-     * and the candidate list panel displays the persons in the model correctly.
+     * {@code expectedResultMessage}, the storage contains the same company objects as {@code expectedModel}
+     * and the company job details panel displays the companies in the model correctly.
      */
     protected void assertApplicationDisplaysExpected(String expectedCommandInput, String expectedResultMessage,
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
-        assertEquals(new CandidateBook(expectedModel.getCandidateBook()), testApp.readStorageCandidateBook());
-        assertListMatching(getCandidateDetailsPanel(), expectedModel.getFilteredCandidateList());
+        assertEquals(new CompanyBook(expectedModel.getCompanyBook()), testApp.readStorageCompanyBook());
+        assertCompanyListMatching(getCompanyJobDetailsPanel(), expectedModel.getFilteredCompanyList());
     }
 
     /**
-     * Calls {@code BrowserPanelHandle}, {@code CandidateDetailsPanelHandle}
+     * Calls {@code BrowserPanelHandle}, {@code CompanyJobDetailsPanelHandle}
      * and {@code StatusBarFooterHandle} to remember their current state.
      */
     private void rememberStates() {
         StatusBarFooterHandle statusBarFooterHandle = getStatusBarFooter();
         //getBrowserPanel().rememberUrl();
-        statusBarFooterHandle.rememberSaveLocation();
-        statusBarFooterHandle.rememberTotalPersonsStatus();
-        statusBarFooterHandle.rememberSyncStatus();
-        getCandidateDetailsPanel().rememberSelectedPersonCard();
+        statusBarFooterHandle.rememberSaveCompanyBookLocation();
+        statusBarFooterHandle.rememberTotalCompaniesStatus();
+        statusBarFooterHandle.rememberCompaniesSyncStatus();
+        if (mainWindowHandle.isCompanyBookInitialized()) {
+            getCompanyJobDetailsPanel().rememberSelectedCompanyCard();
+        }
     }
 
     /**
      * Asserts that the previously selected card is now deselected and the browser's url remains displaying the details
-     * of the previously selected candidate.
+     * of the previously selected company.
      * @see BrowserPanelHandle#isUrlChanged()
      */
     protected void assertSelectedCardDeselected() {
         //assertFalse(getBrowserPanel().isUrlChanged());
-        assertFalse(getCandidateDetailsPanel().isAnyCardSelected());
+        assertFalse(getCompanyJobDetailsPanel().isAnyCardSelected());
     }
 
     /**
-     * Asserts that the browser's url is changed to display the details of the candidate in the candidate details panel
+     * Asserts that the browser's url is changed to display the details of the company in the company job details panel
      * at {@code expectedSelectedCardIndex}, and only the card at {@code expectedSelectedCardIndex} is selected.
      * @see BrowserPanelHandle#isUrlChanged()
-     * @see CandidateDetailsPanelHandle#isSelectedPersonCardChanged()
+     * @see CompanyJobDetailsPanelHandle#isSelectedCompanyCardChanged() ()
      */
     protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
-        getCandidateDetailsPanel().navigateToCard(getCandidateDetailsPanel().getSelectedCardIndex());
-        String selectedCardName = getCandidateDetailsPanel().getHandleToSelectedCard().getName();
+        getCompanyJobDetailsPanel().navigateToCard(getCompanyJobDetailsPanel().getSelectedCardIndex());
+        String selectedCardName = getCompanyJobDetailsPanel().getHandleToSelectedCard().getName();
         //URL expectedUrl;
         /**
         try {
@@ -238,17 +248,17 @@ public abstract class CandidateBookSystemTest {
         }*/
         //assertEquals(expectedUrl, getBrowserPanel().getLoadedUrl());
 
-        assertEquals(expectedSelectedCardIndex.getZeroBased(), getCandidateDetailsPanel().getSelectedCardIndex());
+        assertEquals(expectedSelectedCardIndex.getZeroBased(), getCompanyJobDetailsPanel().getSelectedCardIndex());
     }
 
     /**
-     * Asserts that the browser's url and the selected card in the candidate details panel remain unchanged.
+     * Asserts that the browser's url and the selected card in the company job details panel remain unchanged.
      * @see BrowserPanelHandle#isUrlChanged()
-     * @see CandidateDetailsPanelHandle#isSelectedPersonCardChanged()
+     * @see CompanyJobDetailsPanelHandle#isSelectedCompanyCardChanged() ()
      */
     protected void assertSelectedCardUnchanged() {
         //assertFalse(getBrowserPanel().isUrlChanged());
-        assertFalse(getCandidateDetailsPanel().isSelectedPersonCardChanged());
+        assertFalse(getCompanyJobDetailsPanel().isSelectedCompanyCardChanged());
     }
 
     /**
@@ -270,38 +280,38 @@ public abstract class CandidateBookSystemTest {
      */
     protected void assertStatusBarUnchanged() {
         StatusBarFooterHandle handle = getStatusBarFooter();
-        assertFalse(handle.isSaveLocationChanged());
-        assertFalse(handle.isTotalPersonsStatusChanged());
-        assertFalse(handle.isSyncStatusChanged());
+        assertFalse(handle.isSaveCompanyBookLocationChanged());
+        assertFalse(handle.isTotalCompaniesStatusChanged());
+        assertFalse(handle.isCompaniesSyncStatusChanged());
     }
 
     /**
      * Asserts that only the sync status in the status bar was changed to the timing of
-     * {@code ClockRule#getInjectedClock()}, while the save location and the total person
+     * {@code ClockRule#getInjectedClock()}, while the save location and the total company
      * list remains the same.
      */
     protected void assertStatusBarUnchangedExceptSyncStatus() {
         StatusBarFooterHandle handle = getStatusBarFooter();
         String timestamp = new Date(clockRule.getInjectedClock().millis()).toString();
-        String expectedSyncStatus = String.format(SYNC_CANDIDATE_STATUS_UPDATED, timestamp);
-        assertEquals(expectedSyncStatus, handle.getSyncStatus());
-        assertFalse(handle.isSaveLocationChanged());
-        assertFalse(handle.isTotalPersonsStatusChanged());
+        String expectedSyncStatus = String.format(SYNC_COMPANY_STATUS_UPDATED, timestamp);
+        assertEquals(expectedSyncStatus, handle.getCompaniesSyncStatus());
+        assertFalse(handle.isSaveCompanyBookLocationChanged());
+        assertFalse(handle.isTotalCompaniesStatusChanged());
     }
 
     /**
-     * Asserts that the sync status in the status bar was changed to the timing of
-     * {@code ClockRule#getInjectedClock()}, and total persons was changed to match the total
-     * number of persons in the recruit book, while the save location remains the same.
+     * Asserts that the companies sync status in the status bar was changed to the timing of
+     * {@code ClockRule#getInjectedClock()}, and total companies was changed to match the total
+     * number of companies in the recruit book, while the save location remains the same.
      */
     protected void assertStatusBarChangedExceptSaveLocation() {
         StatusBarFooterHandle handle = getStatusBarFooter();
         String timestamp = new Date(clockRule.getInjectedClock().millis()).toString();
-        String expectedSyncStatus = String.format(SYNC_CANDIDATE_STATUS_UPDATED, timestamp);
-        assertEquals(expectedSyncStatus, handle.getSyncStatus());
-        final int totalPersons = testApp.getModel().getCandidateBook().getCandidateList().size();
-        assertEquals(String.format(TOTAL_CANDIDATES_STATUS, totalPersons), handle.getTotalPersonsStatus());
-        assertFalse(handle.isSaveLocationChanged());
+        String expectedSyncStatus = String.format(SYNC_COMPANY_STATUS_UPDATED, timestamp);
+        assertEquals(expectedSyncStatus, handle.getCompaniesSyncStatus());
+        final int totalCompanies = testApp.getModel().getCompanyBook().getCompanyList().size();
+        assertEquals(String.format(TOTAL_COMPANIES_STATUS, totalCompanies), handle.getTotalCompaniesStatus());
+        assertFalse(handle.isSaveCompanyBookLocationChanged());
     }
 
     /**
@@ -309,13 +319,13 @@ public abstract class CandidateBookSystemTest {
      */
     private void assertApplicationStartingStateIsCorrect() {
         assertEquals("", getCommandBox().getInput());
-        assertEquals("", getResultDisplay().getText());
-        assertListMatching(getCandidateDetailsPanel(), getModel().getFilteredCandidateList());
-        assertEquals(Paths.get(".").resolve(testApp.getCandidateStorageSaveLocation()).toString(),
-                getStatusBarFooter().getSaveLocation());
-        assertEquals(SYNC_CANDIDATE_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
-        assertEquals(String.format(TOTAL_CANDIDATES_STATUS, getModel().getCandidateBook().getCandidateList().size()),
-                getStatusBarFooter().getTotalPersonsStatus());
+        assertEquals(SwitchBookCommand.MESSAGE_SUCCESSFULLY_SWITCHED_TO_COMPANY_BOOK, getResultDisplay().getText());
+        assertCompanyListMatching(getCompanyJobDetailsPanel(), getModel().getFilteredCompanyList());
+        assertEquals(Paths.get(".").resolve(testApp.getCompanyStorageSaveLocation()).toString(),
+                getStatusBarFooter().getSaveCompanyBookLocation());
+        assertEquals(SYNC_COMPANY_STATUS_INITIAL, getStatusBarFooter().getCompaniesSyncStatus());
+        assertEquals(String.format(TOTAL_COMPANIES_STATUS, getModel().getCompanyBook().getCompanyList().size()),
+                getStatusBarFooter().getTotalCompaniesStatus());
     }
 
     /**
