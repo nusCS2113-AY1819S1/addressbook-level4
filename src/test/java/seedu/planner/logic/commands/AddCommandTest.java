@@ -23,7 +23,6 @@ import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
-import seedu.planner.model.summary.Summary;
 import seedu.planner.testutil.RecordBuilder;
 
 public class AddCommandTest {
@@ -107,6 +106,12 @@ public class AddCommandTest {
         }
 
         @Override
+        public int deleteListRecordSameDate(List<Record> targetList, Date targetDate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
+        @Override
         public void updateRecord(Record target, Record editedRecord) {
             throw new AssertionError("This method should not be called.");
         }
@@ -116,13 +121,13 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
 
         }
-        @Override
-        public void resetData(ReadOnlyFinancialPlanner newData) {
+
+        public void updateLimit(Limit target, Limit editedLimit) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Summary> getSummaryList(Date date1, Date date2) {
+        public void resetData(ReadOnlyFinancialPlanner newData) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -130,6 +135,7 @@ public class AddCommandTest {
         public ObservableList<Limit> getLimitList() {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public ReadOnlyFinancialPlanner getFinancialPlanner() {
             throw new AssertionError("This method should not be called.");
@@ -146,9 +152,15 @@ public class AddCommandTest {
         }
 
         @Override
+        public Double getTotalSpend(Limit limit) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteLimit(Limit limit) {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public boolean hasRecord(Record record) {
             throw new AssertionError("This method should not be called.");
@@ -159,13 +171,27 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-
         @Override
         public boolean isExceededLimit (Limit limit) {
             throw new AssertionError("This method should not be called.");
         }
 
-        public int deleteListRecordSameDate(List<Record> targetList, Date targetDate) {
+        @Override
+        public String autoLimitCheck() {
+            return "";
+        }
+
+        @Override
+        public String manualLimitCheck() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public String generateLimitOutput(boolean isExceeded, Double totalSpend, Limit limit) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Limit getSameDatesLimit(Date dateStart, Date dateEnd) {
             throw new AssertionError("This method should not be called.");
         }
 

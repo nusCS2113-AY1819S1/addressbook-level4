@@ -7,11 +7,9 @@ import static seedu.planner.logic.parser.CliSyntax.PREFIX_MONEYFLOW;
 import java.util.stream.Stream;
 
 import seedu.planner.logic.commands.LimitCommand;
-
 import seedu.planner.logic.parser.exceptions.ParseException;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
-
 import seedu.planner.model.record.MoneyFlow;
 
 
@@ -27,8 +25,7 @@ public class LimitCommandParser implements Parser<LimitCommand> {
      */
 
     private String [] datesIn; //the string is used to divide two the whole strings into two substrings.
-    private String dateStartString;
-    private String getDateEndString;
+    private String moneyString;
 
     @Override
     public LimitCommand parse(String args) throws ParseException {
@@ -39,12 +36,21 @@ public class LimitCommandParser implements Parser<LimitCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LimitCommand.MESSAGE_USAGE));
         }
-        //TODO: change the scan function to read only the integer, add a "-" manually before the integer.
-        MoneyFlow money = ParserUtil.parseMoneyFlow("-" + argMultimap.getValue(PREFIX_MONEYFLOW).get());
+        moneyString = "-" + argMultimap.getValue(PREFIX_MONEYFLOW).get();
+
+        if (!(MoneyFlow.isValidMoneyFlow(moneyString))) {
+            throw new ParseException("The limit money can only be normal real number. \n"
+                    + "Example: m/100.");
+        }
+        MoneyFlow money = ParserUtil.parseMoneyFlow(moneyString);
         datesIn = argMultimap.getValue(PREFIX_DATE).get().split("\\s+");
 
         Date dateStart = ParserUtil.parseDate(datesIn[0]);
         Date dateEnd = ParserUtil.parseDate(datesIn[1]);
+
+        if (dateStart.isLaterThan(dateEnd)) {
+            throw new ParseException("The dateStart must be earlier than or equals to dateEnd.");
+        }
         Limit limit = new Limit(dateStart, dateEnd, money);
 
 

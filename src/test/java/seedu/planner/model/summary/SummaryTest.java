@@ -72,16 +72,16 @@ public class SummaryTest {
 
     @Test
     public void add_nullRecord_throwsNullPointerException() {
-        final SummaryAbs daySummary = summaryBuilder.buildDaySummary();
+        final Summary daySummary = summaryBuilder.buildDaySummary();
         Assert.assertThrows(NullPointerException.class, () -> daySummary.add(null));
 
-        final SummaryAbs monthSummary = summaryBuilder.buildMonthSummary();
+        final Summary monthSummary = summaryBuilder.buildMonthSummary();
         Assert.assertThrows(NullPointerException.class, () -> monthSummary.add(null));
     }
 
     @Test
     public void add_recordWithExpenseMoneyFlowToDaySummary_success() {
-        SummaryAbs summary = summaryBuilder.buildDaySummary();
+        Summary summary = summaryBuilder.buildDaySummary();
         RecordBuilder recordBuilder = new RecordBuilder();
         Record toAdd = recordBuilder.withDate(DEFAULT_DATE).withMoneyFlow(DEFAULT_MONEYFLOW_EXPENSE).build();
         summary.add(toAdd);
@@ -96,7 +96,7 @@ public class SummaryTest {
 
     @Test
     public void add_recordWithExpenseMoneyFlowToMonthSummary_success() {
-        SummaryAbs summary = summaryBuilder.buildMonthSummary();
+        Summary summary = summaryBuilder.buildMonthSummary();
         RecordBuilder recordBuilder = new RecordBuilder();
         Record toAdd = recordBuilder.withDate(DEFAULT_DATE).withMoneyFlow(DEFAULT_MONEYFLOW_EXPENSE).build();
         summary.add(toAdd);
@@ -112,7 +112,7 @@ public class SummaryTest {
 
     @Test
     public void add_recordWithIncomeMoneyFlowToDaySummary_success() {
-        SummaryAbs summary = summaryBuilder.buildDaySummary();
+        Summary summary = summaryBuilder.buildDaySummary();
         RecordBuilder recordBuilder = new RecordBuilder();
         Record toAdd = recordBuilder.withDate(DEFAULT_DATE).withMoneyFlow(DEFAULT_MONEYFLOW_INCOME).build();
         summary.add(toAdd);
@@ -127,7 +127,7 @@ public class SummaryTest {
 
     @Test
     public void add_recordWithIncomeMoneyFlowToMonthSummary_success() {
-        SummaryAbs summary = summaryBuilder.buildMonthSummary();
+        Summary summary = summaryBuilder.buildMonthSummary();
         RecordBuilder recordBuilder = new RecordBuilder();
         Record toAdd = recordBuilder.withDate(DEFAULT_DATE).withMoneyFlow(DEFAULT_MONEYFLOW_INCOME).build();
         summary.add(toAdd);

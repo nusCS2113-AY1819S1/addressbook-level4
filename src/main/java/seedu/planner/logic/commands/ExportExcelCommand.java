@@ -88,7 +88,7 @@ public class ExportExcelCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory) {
         requireNonNull(this);
         model.updateFilteredRecordList(predicate);
         ReadOnlyFinancialPlanner financialPlanner = model.getFinancialPlanner();

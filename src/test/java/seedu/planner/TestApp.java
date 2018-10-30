@@ -19,7 +19,6 @@ import seedu.planner.model.UserPrefs;
 import seedu.planner.storage.UserPrefsStorage;
 import seedu.planner.storage.XmlSerializableLimitList;
 import seedu.planner.storage.xmljaxb.XmlSerializableFinancialPlanner;
-import seedu.planner.storage.xmljaxb.XmlSerializableSummaryMap;
 import seedu.planner.testutil.TestUtil;
 import systemtests.ModelHelper;
 
@@ -31,8 +30,6 @@ public class TestApp extends MainApp {
 
     public static final Path RECORD_LIST_LOCATION_FOR_TESTING = TestUtil
             .getFilePathInSandboxFolder("sampleRecordListData.xml");
-    public static final Path SUMMARY_MAP_LOCATION_FOR_TESTING = TestUtil
-            .getFilePathInSandboxFolder("sampleSummaryMapData.xml");
     public static final Path LIMIT_LIST_LOCATION_FOR_TESTING = TestUtil
             .getFilePathInSandboxFolder("sampleLimitListData.xml");
 
@@ -43,18 +40,16 @@ public class TestApp extends MainApp {
     protected Supplier<ReadOnlyFinancialPlanner> initialDataSupplier = () -> null;
 
     protected Path recordListSaveLocation = RECORD_LIST_LOCATION_FOR_TESTING;
-    protected Path summaryMapSaveLocation = SUMMARY_MAP_LOCATION_FOR_TESTING;
     protected Path limitListSaveLocation = LIMIT_LIST_LOCATION_FOR_TESTING;
 
     public TestApp() {
     }
 
     public TestApp(Supplier<ReadOnlyFinancialPlanner> initialDataSupplier, Path recordListSaveFileLocation,
-                   Path limitListSaveFileLocation, Path summaryListSaveFileLocation) {
+                   Path limitListSaveFileLocation) {
         super();
         this.initialDataSupplier = initialDataSupplier;
         this.recordListSaveLocation = recordListSaveFileLocation;
-        this.summaryMapSaveLocation = summaryListSaveFileLocation;
         this.limitListSaveLocation = limitListSaveFileLocation;
 
         // If some initial local data has been provided, write those to the file
@@ -63,8 +58,6 @@ public class TestApp extends MainApp {
                     this.recordListSaveLocation);
             createDataFileWithData(new XmlSerializableLimitList(this.initialDataSupplier.get()),
                     this.limitListSaveLocation);
-            createDataFileWithData(new XmlSerializableSummaryMap(this.initialDataSupplier.get()),
-                    this.summaryMapSaveLocation);
         }
     }
 
@@ -83,7 +76,6 @@ public class TestApp extends MainApp {
         double y = Screen.getPrimary().getVisualBounds().getMinY();
         userPrefs.updateLastUsedGuiSetting(new GuiSettings(600.0, 600.0, (int) x, (int) y));
         userPrefs.setFinancialPlannerFilePath(recordListSaveLocation);
-        userPrefs.setSummaryMapFilePath(summaryMapSaveLocation);
         return userPrefs;
     }
 
@@ -105,13 +97,6 @@ public class TestApp extends MainApp {
      */
     public Path getRecordStorageSaveLocation() {
         return storage.getRecordListFilePath();
-    }
-
-    /**
-     * Returns the file path of the storage file.
-     */
-    public Path getSummaryStorageSaveLocation() {
-        return storage.getSummaryMapFilePath();
     }
 
     /**
