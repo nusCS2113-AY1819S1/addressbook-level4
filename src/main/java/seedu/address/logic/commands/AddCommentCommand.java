@@ -23,9 +23,9 @@ import seedu.address.model.event.Event;
 public class AddCommentCommand extends Command {
     public static final String COMMAND_WORD = "addComment";
 
-    public static final String MESSAGE = COMMAND_WORD + ": Edits the details of the event identified "
-            + "by the index number used in the displayed event list. "
-            + "Existing values will be overwritten by the input values.\n"
+    public static final String MESSAGE = COMMAND_WORD
+            + ": Adds a comment to the end of the comment section of the event identified "
+            + "by the index number used in the displayed event list.\n "
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_COMMENT + "COMMENT] "
             + "Example: " + COMMAND_WORD + " 1 "
