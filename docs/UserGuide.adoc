@@ -246,7 +246,8 @@ Format: `clear`
 
 === Import Timetable from a file : `import` (`i`)
 
-Imports a timetable from file for the current user. Currently only supports (.ics) files exported from NUSMODS. +
+Imports a timetable from file for the current user. If the location is not specified, the default location will be used (`.\import_export\import.ics`) +
+Currently only supports (.ics) files exported from NUSMODS. +
 
 Format: `import [FILE_LOCATION]` +
 
@@ -264,7 +265,7 @@ image::importics.png[]
 
 === Export Timetable to a file : `export` (`e`)
 
-Exports the currently-displayed timetable to the specified .ics file. +
+Exports the currently-displayed timetable to the specified .ics file. If the location is not specified, the default location will be used (`.\import_export\export.ics`) +
 
 Format: `export [FILE_LOCATION]`
 
