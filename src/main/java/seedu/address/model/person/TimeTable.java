@@ -1,8 +1,10 @@
 package seedu.address.model.person;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
+import javafx.scene.paint.Color;
 import seedu.address.model.person.exceptions.TimeSlotDoesNotExistException;
 import seedu.address.model.person.exceptions.TimeSlotOverlapException;
 
@@ -10,6 +12,17 @@ import seedu.address.model.person.exceptions.TimeSlotOverlapException;
  * Represents a timetable that is associated with a person
  */
 public class TimeTable {
+    private static final ArrayList<Color> COLOR_LIST = new ArrayList<>();
+
+    static {
+        COLOR_LIST.add(Color.BLUE);
+        COLOR_LIST.add(Color.GREEN);
+        COLOR_LIST.add(Color.YELLOW);
+        COLOR_LIST.add(Color.ORANGE);
+        COLOR_LIST.add(Color.PINK);
+        COLOR_LIST.add(Color.PURPLE);
+    }
+
     protected Collection <TimeSlot> timeSlots;
 
     public TimeTable() {
@@ -40,18 +53,6 @@ public class TimeTable {
     }
 
     /**
-     * Adds a {@code TimeSlot} to the {@code TimeTable}
-     * Returns if the TimeTable is empty.
-     */
-    public boolean isEmpty() {
-        if (timeSlots.isEmpty()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Adds a TimeSlot to the TimeTable
      *
      * @param toAdd {@code TimeSlot} to be added
@@ -61,6 +62,7 @@ public class TimeTable {
         if (hasOverlap(toAdd)) {
             throw new TimeSlotOverlapException();
         } else {
+            toAdd.setColor(getRandomColor());
             timeSlots.add(toAdd);
         }
     }
@@ -90,6 +92,15 @@ public class TimeTable {
         }
 
         return false;
+    }
+
+    // TODO: Make it such that it doesn't repeat colors too often
+    public Color getRandomColor() {
+        return COLOR_LIST.get((int) (Math.random() * COLOR_LIST.size()));
+    }
+
+    public boolean isEmpty() {
+        return timeSlots.isEmpty();
     }
 
     @Override

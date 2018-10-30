@@ -13,7 +13,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -23,7 +22,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.TimeSlot;
 import seedu.address.model.person.TimeTable;
 import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.TypicalIndexes;
 import seedu.address.testutil.TypicalTimeSlots;
 
 public class AddTimeCommandTest {
@@ -35,15 +33,9 @@ public class AddTimeCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void constructor_nullIndex_throwsNullPointerException() {
-        thrown.expect(NullPointerException.class);
-        new AddTimeCommand(null, TypicalTimeSlots.MON_8_TO_10);
-    }
-
-    @Test
     public void constructor_nullTimeSlot_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new AddTimeCommand(TypicalIndexes.INDEX_FIRST_PERSON, null);
+        new AddTimeCommand(null);
     }
 
     @Test
@@ -70,7 +62,9 @@ public class AddTimeCommandTest {
                 .withTags("friends")
                 .withTimeTable(expectedTimeTable).build();
 
-        AddTimeCommand command = new AddTimeCommand(Index.fromOneBased(1), toAdd);
+        model.matchUserToPerson("Alice Pauline");
+
+        AddTimeCommand command = new AddTimeCommand(toAdd);
         expectedModel.updatePerson(lastPerson, editedPerson);
         expectedModel.commitAddressBook();
         expectedModel.updateTimeTable(expectedTimeTable);
@@ -81,7 +75,9 @@ public class AddTimeCommandTest {
     @Test
     public void execute_timeSlotOverlaps_throwsCommandException() throws Exception {
         TimeSlot toAdd = TypicalTimeSlots.MON_8_TO_10;
-        AddTimeCommand command = new AddTimeCommand(Index.fromOneBased(1), toAdd);
+        AddTimeCommand command = new AddTimeCommand(toAdd);
+
+        model.matchUserToPerson("Alice Pauline");
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddTimeCommand.MESSAGE_OVERLAP_TIMESLOT);
@@ -90,31 +86,26 @@ public class AddTimeCommandTest {
 
     @Test
     public void equals() {
-        AddTimeCommand addMon8To10ToFirstCommand =
-                new AddTimeCommand(TypicalIndexes.INDEX_FIRST_PERSON, TypicalTimeSlots.MON_8_TO_10);
-        AddTimeCommand addTue8To10ToFirstCommand =
-                new AddTimeCommand(TypicalIndexes.INDEX_FIRST_PERSON, TypicalTimeSlots.TUE_10_TO_12);
-        AddTimeCommand addTue8To10ToSecondCommand =
-                new AddTimeCommand(TypicalIndexes.INDEX_SECOND_PERSON, TypicalTimeSlots.TUE_10_TO_12);
+        AddTimeCommand addMon8To10Command =
+                new AddTimeCommand(TypicalTimeSlots.MON_8_TO_10);
+        AddTimeCommand addTue8To10Command =
+                new AddTimeCommand(TypicalTimeSlots.TUE_10_TO_12);
 
         // same object -> returns true
-        assertTrue(addMon8To10ToFirstCommand.equals(addMon8To10ToFirstCommand));
+        assertTrue(addMon8To10Command.equals(addMon8To10Command));
 
         // same values -> returns true
         AddTimeCommand addMon8To10CommandCopy =
-                new AddTimeCommand(TypicalIndexes.INDEX_FIRST_PERSON, TypicalTimeSlots.MON_8_TO_10);
-        assertTrue(addMon8To10ToFirstCommand.equals(addMon8To10CommandCopy));
+                new AddTimeCommand(TypicalTimeSlots.MON_8_TO_10);
+        assertTrue(addMon8To10Command.equals(addMon8To10CommandCopy));
 
         // different types -> returns false
-        assertFalse(addMon8To10ToFirstCommand.equals(1));
+        assertFalse(addMon8To10Command.equals(1));
 
         // null -> returns false
-        assertFalse(addMon8To10ToFirstCommand.equals(null));
+        assertFalse(addMon8To10Command.equals(null));
 
         // different timeslot -> returns false
-        assertFalse(addMon8To10ToFirstCommand.equals(addTue8To10ToFirstCommand));
-
-        // different index -> returns false
-        assertFalse(addTue8To10ToFirstCommand.equals(addTue8To10ToSecondCommand));
+        assertFalse(addMon8To10Command.equals(addTue8To10Command));
     }
 }
