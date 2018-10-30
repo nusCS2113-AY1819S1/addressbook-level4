@@ -926,9 +926,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |Manager |see drink batches that have been imported before a certain date|take action to clear old inventory stocks
 
-|`* * ` |Manager |see which drinks are selling well and the converse |take action to manage stocks better
+|`* *` |Manager |see which drinks are selling well and the converse |take action to manage stocks better
 
-|`* * ` |Manager |view actions done by employees |track work done and monitor for fraud
+|`* *` |Manager |view actions done by employees |track work done and monitor for fraud
 
 |`* * *` |Stock Taker |add new batches of drinks |keep inventory updated
 
@@ -952,7 +952,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |user |confirmation for actions |reduce mistakes due to carelessness
 
-|`* * ` |user |see the pictures of drinks |easily identify the drink that i am looking at
+|`* *` |user |see the pictures of drinks |easily identify the drink that i am looking at
 
 |`*` |experienced user |have shortcuts for commands |perform actions efficiently
 

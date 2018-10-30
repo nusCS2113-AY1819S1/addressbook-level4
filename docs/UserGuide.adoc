@@ -98,10 +98,9 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 === Global Command
 ==== Login:
 image::loginPic/login_page_main.PNG[width="800"]
-[.noteblock]
 ====
 [noteblock-title]#*User Parameters*#
-. At the login page, enter user and password using either the CLI or GUI
+. At the login page, enter username and password using either the CLI or GUI
 . Clicked Login Button
 ====
 
@@ -112,7 +111,7 @@ Format: `USERNAME PASSWORD`
 
 [NOTE]
 ====
-Both userName and password are single word. No spaces are allow in userName or password.
+Both username and password are single words. No spaces are allowed in username or password.
 ====
 
 [.example]
@@ -123,14 +122,15 @@ Both userName and password are single word. No spaces are allow in userName or p
 * [example]#`stocktaker 123`# +
 [NOTE]
 ====
-The example provided is a default login account for admin. This account only create for tester.
+The example provided is a default login account for admins. This account is only created for testing purposes.
 ====
 
-After login in, a confirmation message would showed and indicate your authentication level.
+After login in, a confirmation message would be shown indicating your authentication level.
 
 image::loginPic/login_confirmation.PNG[width="300"]
 
-==== Exiting Program: `logout`
+====
+Exiting Program: `logout`
 Return user to the login page.
 Format: `logout`
 
