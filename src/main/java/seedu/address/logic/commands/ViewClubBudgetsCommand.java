@@ -66,6 +66,6 @@ public class ViewClubBudgetsCommand extends Command {
             }
 
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, budgetToShow));
+        return new CommandResult(String.format(MESSAGE_INVALID_CLUB));
     }
 }

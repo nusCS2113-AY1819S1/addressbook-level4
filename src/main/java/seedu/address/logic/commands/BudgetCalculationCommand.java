@@ -1,13 +1,16 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_BUDGETS_ALREADY_CALCULATED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TOTAL_BUDGET;
 
 import java.util.List;
 
+import seedu.address.logic.BudgetCalculationManager;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.arithmetic.CalculateTotalAttendees;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.budgetelements.ClubBudgetElements;
 import seedu.address.model.clubbudget.FinalClubBudget;
@@ -49,36 +52,39 @@ public class BudgetCalculationCommand extends Command {
 
         if (Integer.parseInt(totalBudget.toString()) <= 0) {
             throw new CommandException(MESSAGE_INVALID_TOTAL_BUDGET);
-        }
-        int i;
+        } else if (BudgetCalculationManager.getHaveBudgetsBeenCalculated(model)) {
+            return new CommandResult(String.format(MESSAGE_BUDGETS_ALREADY_CALCULATED));
+        } else {
+            int i;
 
-        int budgetPerPerson;
+            int budgetPerPerson;
 
-        CalculateTotalAttendees totalAttendees = new CalculateTotalAttendees(listOfClubs);
+            CalculateTotalAttendees totalAttendees = new CalculateTotalAttendees(listOfClubs);
 
-        budgetPerPerson = Integer.parseInt(totalBudget.toString()) / totalAttendees.arithmeticTotalAttendees();
+            budgetPerPerson = Integer.parseInt(totalBudget.toString()) / totalAttendees.arithmeticTotalAttendees();
 
-        for (i = 0; i < listOfClubs.size(); i++) {
+            for (i = 0; i < listOfClubs.size(); i++) {
 
-            ClubBudgetElements currentClubForBudget = listOfClubs.get(i);
+                ClubBudgetElements currentClubForBudget = listOfClubs.get(i);
 
-            int currenteo = Integer.parseInt(currentClubForBudget.getExpectedTurnout().toString());
+                int currenteo = Integer.parseInt(currentClubForBudget.getExpectedTurnout().toString());
 
-            int currentnoe = Integer.parseInt(currentClubForBudget.getNumberOfEvents().toString());
+                int currentnoe = Integer.parseInt(currentClubForBudget.getNumberOfEvents().toString());
 
-            int totalClubMembers = currenteo * currentnoe;
+                int totalClubMembers = currenteo * currentnoe;
 
-            int currentClubsBudget = budgetPerPerson * totalClubMembers;
+                int currentClubsBudget = budgetPerPerson * totalClubMembers;
 
-            FinalClubBudget toAdd = new FinalClubBudget(currentClubForBudget.getClubName(), currentClubsBudget);
+                FinalClubBudget toAdd = new FinalClubBudget(currentClubForBudget.getClubName(), currentClubsBudget);
 
-            if (model.hasClubBudget(toAdd)) {
-                throw new CommandException(MESSAGE_DUPLICATE_CLUB);
+                if (model.hasClubBudget(toAdd)) {
+                    throw new CommandException(MESSAGE_DUPLICATE_CLUB);
+                }
+                model.addClubBudget(toAdd);
+
             }
-            model.addClubBudget(toAdd);
-
+            model.commitFinalBudgetsBook();
+            return new CommandResult(String.format(MESSAGE_CALCULATE_BUDGET_SUCCESS));
         }
-        model.commitFinalBudgetsBook();
-        return new CommandResult(String.format(MESSAGE_CALCULATE_BUDGET_SUCCESS));
     }
 }
