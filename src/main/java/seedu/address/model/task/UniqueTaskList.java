@@ -3,11 +3,14 @@ package seedu.address.model.task;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.util.SortComparator;
 import seedu.address.model.task.exceptions.DuplicateTaskException;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
 
@@ -100,6 +103,26 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public ObservableList<Task> asUnmodifiableObservableList() {
         return FXCollections.unmodifiableObservableList(internalList);
+    }
+
+    public void sortDate() {
+        Collections.sort(internalList, Comparator.comparing(Task::getMonth).thenComparing(Task::getDay));
+    }
+
+    public void sortModule() {
+        internalList.sort(SortComparator.compareModule());
+    }
+
+    public void sortPriority() {
+        internalList.sort(SortComparator.comparePriority());
+    }
+
+    public void reverseTask() {
+        Collections.reverse(internalList);
+    }
+
+    public void sortDefault() {
+        Collections.sort(internalList, Comparator.comparing(Task::getNameString));
     }
 
     @Override

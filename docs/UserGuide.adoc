@@ -167,14 +167,19 @@ Sorts and displays the to-do list by a certain tag. +
 Format: `TDL_sort by PARAMETER`
 
 ****
-* PARAMETER is either `mod` for module, `ddl` for deadline or `impt` for importance/priority.
-* Tasks without the `d/DATE` or `p/PRIORITY` tags will be at the bottom of the list when doing sorting by these tags.
+* PARAMETER is either `module` for module, `date` for deadline or `priority` for importance/priority.
+* PARAMETER can be set as `default` and tasks will be sorted by alphabetically by their name.
+* PARAMETER can also be set as `reverse` and the former order of tasks will be reversed.
+* Users can use `TDL_sort` after `TDL_view` for sorting certain tasks (completed/uncomplted).
+* Tasks without the `d/DATE`, `m/MODULE` or `p/PRIORITY` tags will be at the bottom of the list when doing sorting by these tags.
 ****
 
 Examples:
 
-* `TDL_sort by deadline` +
+* `TDL_sort date` +
 The tasks are now sorted by deadlines, where tasks without deadlines are at the bottom of the list.
+* `TDL_view uncompleted` + `TDL_sort priority` +
+All uncompleted tasks will be sorted by their priority.
 
 === Listing entered commands : `history`
 

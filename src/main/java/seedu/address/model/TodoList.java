@@ -82,6 +82,25 @@ public class TodoList implements ReadOnlyTodoList {
         tasks.remove(key);
     }
 
+    public void sortTaskDate() {
+        tasks.sortDate();
+    }
+
+    public void sortTaskPriority() {
+        tasks.sortPriority();
+    }
+
+    public void sortTaskModule() {
+        tasks.sortModule();
+    }
+
+    public void reverseTasks () {
+        tasks.reverseTask();
+    }
+
+    public void sortTaskDefault () {
+        tasks.sortDefault();
+    }
 
     //// util methods
 
