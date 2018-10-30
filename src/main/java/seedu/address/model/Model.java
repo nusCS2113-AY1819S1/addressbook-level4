@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.LoginInfo;
 import seedu.address.model.drink.Drink;
+import seedu.address.model.transaction.Transaction;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.UserName;
 
@@ -57,6 +58,14 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredDrinkList(Predicate<Drink> predicate);
+
+    /**
+     * Updates the quantity of the drink in the {@code transaction}.
+     */
+    void sellDrink(Transaction transaction);
+
+
+
 
     //================= login function command========================//
 

@@ -14,6 +14,8 @@ import seedu.address.commons.core.LoginInfo;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.InventoryListChangedEvent;
 import seedu.address.model.drink.Drink;
+import seedu.address.model.transaction.Transaction;
+import seedu.address.model.transaction.TransactionList;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.UserName;
 
@@ -26,11 +28,13 @@ public class ModelManager extends ComponentManager implements Model {
     protected LoginInfoManager loginInfoManager;
     private final FilteredList<Drink> filteredDrinks;
     private final InventoryList inventoryList;
+    private final TransactionList transactionList;
 
     /**
-     * Initializes a ModelManager with the given inventoryList and userPrefs.
+     * Initializes a ModelManager with the given inventoryList, userPrefs and transactionList
      */
-    public ModelManager(ReadOnlyInventoryList inventoryList, UserPrefs userPrefs, LoginInfoManager loginInfoManager) {
+    public ModelManager(ReadOnlyInventoryList inventoryList, UserPrefs userPrefs, LoginInfoManager loginInfoManager,
+                        TransactionList transactionList) {
         super();
         requireAllNonNull(inventoryList, userPrefs);
 
@@ -39,10 +43,12 @@ public class ModelManager extends ComponentManager implements Model {
         this.inventoryList = new InventoryList(inventoryList);
         filteredDrinks = new FilteredList<>(inventoryList.getDrinkList());
         this.loginInfoManager = loginInfoManager;
+        this.transactionList = transactionList;
+        // TODO: transaction manager, facade for transactions
     }
 
     public ModelManager() {
-        this(new InventoryList(), new UserPrefs() , new LoginInfoManager ());
+        this(new InventoryList(), new UserPrefs() , new LoginInfoManager (), new TransactionList());
     }
 
     @Override
@@ -90,6 +96,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
     */
 
+    private Drink findDrinkByName(Drink drink) {
+        Drink actualDrinkRef = inventoryList.findDrinkByName(drink);
+        return actualDrinkRef;
+    }
+
     //=========== Filtered Drink List Accessors =============================================================
 
     /**
@@ -125,7 +136,28 @@ public class ModelManager extends ComponentManager implements Model {
                 && inventoryList.equals(other.inventoryList);
     }
 
-    //=========== Login feature command ==============================================//
+    // ========== transaction commands ====================================
+    @Override
+    public void sellDrink(Transaction transaction) {
+        recordSaleDrink(transaction);
+
+        Drink drink = transaction.getDrinkTransacted();
+        Drink actualDrink = findDrinkByName(drink);
+        actualDrink.decreaseQuantity(transaction.getQuantityTransacted());
+
+
+
+    }
+
+
+    private void recordSaleDrink(Transaction transaction) {
+        transactionList.addTransaction(transaction);
+    }
+
+
+
+
+    //=========== Login feature command ==============================================
 
     @Override
     public void changePassword (UserName userName, Password newHashedPassword) {

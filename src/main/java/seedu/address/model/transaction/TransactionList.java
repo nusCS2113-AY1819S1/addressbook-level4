@@ -6,13 +6,15 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.address.model.drink.Date;
+
 /**
  * Represents a list of transactions for (currently) eternity, until cleared.
  */
 public class TransactionList {
 
     private List<Transaction> transactions;
-    // private Date lastUpdateDate;
+    private Date lastUpdateDate;
 
     public TransactionList() {
         transactions = new ArrayList<>();
@@ -55,5 +57,14 @@ public class TransactionList {
      */
     public void addTransaction(Transaction transaction) {
         transactions.add(transaction);
+        updateLastUpdateDate();
+    }
+
+    /**
+     * Updates the {@code lastUpdateDate} depending on last sale or import.
+     */
+    private void updateLastUpdateDate() {
+        lastUpdateDate = new Date();
+        // TODO: STUB
     }
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.drink.Drink;
 import seedu.address.model.drink.UniqueDrinkList;
+import seedu.address.model.drink.exceptions.DrinkNotFoundException;
 
 /**
  * Wraps all data at the inventory-list level
@@ -118,5 +119,13 @@ public class InventoryList implements ReadOnlyInventoryList {
     @Override
     public int hashCode() {
         return drinks.hashCode();
+    }
+
+    public Drink findDrinkByName(Drink drink) {
+        if (hasDrink(drink)) {
+            return drinks.find(drink);
+        }
+
+        throw new DrinkNotFoundException();
     }
 }

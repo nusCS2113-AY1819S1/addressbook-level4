@@ -149,5 +149,13 @@ public class Drink {
         return builder.toString();
     }
 
+
+    public void decreaseQuantity(Quantity quantity) {
+
+    }
+
+    public void increaseQuantity(Quantity quantity) {
+
+    }
 }
 

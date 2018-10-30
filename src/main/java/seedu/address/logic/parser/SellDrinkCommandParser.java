@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.SellDrinkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.drink.Drink;
 import seedu.address.model.drink.Name;
 import seedu.address.model.drink.Quantity;
 
@@ -33,9 +34,10 @@ public class SellDrinkCommandParser implements Parser<SellDrinkCommand> {
         }
 
         Name drinkName = ParserUtil.parseDrinkName(argMultimap.getValue(PREFIX_DRINK_NAME).get());
+        Drink drink = new Drink(drinkName);
         Quantity quantitySold = ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
 
-        return new SellDrinkCommand(drinkName, quantitySold);
+        return new SellDrinkCommand(drink, quantitySold);
     }
 
     /**

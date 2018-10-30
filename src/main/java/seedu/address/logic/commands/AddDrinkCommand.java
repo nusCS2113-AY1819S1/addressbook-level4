@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DRINK_COST_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DRINK_DEFAULT_SELLING_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DRINK_NAME;
 
-
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -54,13 +53,13 @@ public class AddDrinkCommand extends Command {
         model.addDrink(toAdd);
 
         if (model instanceof AdminModel) {
-            System.out.println ("add drinkCommand");
+            System.out.println("add drinkCommand");
             System.out.println(((AdminModelManager) model).isValid());
         } else {
             System.out.println("not rights");
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS,
-                toAdd.getName ().toString (), toAdd.getRetailPrice ().toString ()));
+                toAdd.getName().toString(), toAdd.getRetailPrice().toString()));
     }
 
     @Override
