@@ -115,7 +115,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         Person updatedPerson = new Person(person.getName(), person.getPhone(),
-                                          person.getEmail(), person.getAddress(), newTags);
+                                          person.getEmail(), person.getAddress(), newTags, person.getSchedules());
 
         updatePerson(person, updatedPerson);
     }

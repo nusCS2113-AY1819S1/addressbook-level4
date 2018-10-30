@@ -15,44 +15,44 @@ public class Date {
      * The first character of the date must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String DATE_VALIDATION_REGEX = "[\\d{Digit}][\\d{Digit} ]*";
+    public static final String DATE_VALIDATION_REGEX = "([0-9]{2})\\\\([0-9]{2})\\\\([0-9]{4})";
 
-    public final String date;
+    public final String value;
 
     /**
      * Constructs a {@code Name}.
      *
-     * @param date A valid date.
+     * @param theDate A valid date.
      */
     public Date(String theDate) {
         requireNonNull(theDate);
-        checkArgument(isValidDate(theDate), MESSAGE_DATE_CONSTRAINTS);
-        date = theDate;
+//        checkArgument(isValidDate(theDate), MESSAGE_DATE_CONSTRAINTS);
+        value = theDate;
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidDate(String test) {
-        return test.matches(DATE_VALIDATION_REGEX);
+        return true/*test.matches(DATE_VALIDATION_REGEX)*/;
     }
 
 
     @Override
     public String toString() {
-        return date;
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Date // instanceof handles nulls
-                && date.equals(((Date) other).date)); // state check
+                && value.equals(((Date) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return date.hashCode();
+        return value.hashCode();
     }
 
 }

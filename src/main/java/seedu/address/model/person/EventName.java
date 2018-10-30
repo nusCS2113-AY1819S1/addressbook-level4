@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's name in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidEventName(String)}
  */
 public class EventName {
     public static final String MESSAGE_EVENT_NAME_CONSTRAINTS =
@@ -17,7 +17,7 @@ public class EventName {
      */
     public static final String EVENT_NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String eventName;
+    public final String value;
 
     /**
      * Constructs a {@code Name}.
@@ -27,7 +27,7 @@ public class EventName {
     public EventName(String name) {
         requireNonNull(name);
         checkArgument(isValidEventName(name), MESSAGE_EVENT_NAME_CONSTRAINTS);
-        eventName = name;
+        value = name;
     }
 
     /**
@@ -40,12 +40,12 @@ public class EventName {
 
     @Override
     public String toString() {
-        return eventName;
+        return value;
     }
 
     @Override
     public int hashCode() {
-        return eventName.hashCode();
+        return value.hashCode();
     }
 
 }

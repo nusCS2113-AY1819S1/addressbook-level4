@@ -44,7 +44,7 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label scheduleHeader;
-    //TODO: ADD TAG STUFF
+
     @FXML
     private FlowPane schedules;
 
@@ -57,7 +57,8 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        scheduleHeader.setText("\nSchedule of " + person.getName().fullName + ": ");
+        scheduleHeader.setText("\nSchedule of " + person.getName().fullName + ": \n");
+        person.getSchedules().forEach(schedule -> schedules.getChildren().add(new Label(schedule.schedulePrint)));
     }
 
     @Override

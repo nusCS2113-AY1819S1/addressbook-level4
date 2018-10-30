@@ -4,13 +4,28 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.Schedule;
+import seedu.address.model.tag.Tag;
 
 //@@Author: driedmelon
 /**
@@ -23,14 +38,13 @@ public class ScheduleCommand extends Command {
     public static final String COMMAND_ALIAS = "sc";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a schedule to a person. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
+            + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_DATE + "DATE(DDMMYYYY) "
             + PREFIX_START_TIME + "TIME(24HRS) "
             + PREFIX_END_TIME + "TIME(24HRS) "
             + PREFIX_EVENT_NAME + "EVENT NAME \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Sylvester Chun "
+            + "1 "
             + PREFIX_DATE + "08112018 "
             + PREFIX_START_TIME + "1000 "
             + PREFIX_END_TIME + "1200 "
@@ -39,10 +53,13 @@ public class ScheduleCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Schedule Added!";
 
     private Schedule toSchedule;
+    private final Index index;
+//    private final SchedulePersonDescriptor schedulePersonDescriptor;
 
-    public ScheduleCommand(Schedule schedule) {
+    public ScheduleCommand(Schedule schedule, Index index) {
         requireNonNull(schedule);
-        toSchedule = schedule;
+        this.index = index;
+        this.toSchedule = schedule;
     }
 
     public static final String MESSAGE_FAILURE = "Unable to add schedule";
@@ -50,12 +67,89 @@ public class ScheduleCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
 
-//        model.addSchedule(toSchedule);
-
-//        throw new CommandException(MESSAGE_FAILURE);
-
+//        if (index.getZeroBased() >= lastShownList.size()) {
+//            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+//        }
+//
+//        Person personToAddSchedule = lastShownList.get(index.getZeroBased());
+//        Person scheduledPerson = addScheduleToPerson(personToAddSchedule, schedulePersonDescriptor);
+//
+////        if (!personToAddSchedule.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+////            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+////        }
+//
+//        model.updatePerson(personToAddSchedule, scheduledPerson);
+//        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+//        model.commitAddressBook();
+//        return new CommandResult(String.format(MESSAGE_SUCCESS, scheduledPerson));
         return new CommandResult(MESSAGE_SUCCESS);
 
     }
+
+    /**
+     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * edited with {@code editPersonDescriptor}.
+     */
+//    private static Person addScheduleToPerson(Person personToAddSchedule, ScheduleCommand.SchedulePersonDescriptor schedulePersonDescriptor) {
+//        assert personToAddSchedule != null;
+//
+//        Name updatedName = personToAddSchedule.getName();
+//        Phone updatedPhone = personToAddSchedule.getPhone();
+//        Email updatedEmail = personToAddSchedule.getEmail();
+//        Address updatedAddress = personToAddSchedule.getAddress();
+//        Set<Tag> updatedTags = personToAddSchedule.getTags();
+//        Set<Schedule> updatedSchedule = schedulePersonDescriptor.getSchedules().orElse(personToAddSchedule.getSchedules());; //does not allow edit of schedule
+//
+//        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedSchedule);
+//    }
+//
+//    /**
+//     * Stores the details to edit the person with. Each non-empty field value will replace the
+//     * corresponding field value of the person.
+//     */
+//    public static class  SchedulePersonDescriptor {
+//        private Set<Schedule> schedules;
+//
+//        public SchedulePersonDescriptor() {}
+//
+//        /**
+//         * Copy constructor.
+//         * A defensive copy of {@code tags} is used internally.
+//         */
+//        public SchedulePersonDescriptor(ScheduleCommand.SchedulePersonDescriptor toCopy) {
+//            setSchedules(toCopy.schedules);
+//        }
+//
+//        /**
+//         * Sets {@code schedules} to this object's {@code schedules}.
+//         * A defensive copy of {@code tags} is used internally.
+//         */
+//        public void setSchedules(Set<Schedule> schedules) {
+//            this.schedules = (schedules != null) ? new HashSet<>(schedules) : null;
+//        }
+//
+//        @Override
+//        public boolean equals(Object other) {
+//            // short circuit if same object
+//            if (other == this) {
+//                return true;
+//            }
+//
+//            // instanceof handles nulls
+//            if (!(other instanceof EditCommand.EditPersonDescriptor)) {
+//                return false;
+//            }
+//
+//            // state check
+//            EditCommand.EditPersonDescriptor e = (EditCommand.EditPersonDescriptor) other;
+//
+//            return getName().equals(e.getName())
+//                    && getPhone().equals(e.getPhone())
+//                    && getEmail().equals(e.getEmail())
+//                    && getAddress().equals(e.getAddress())
+//                    && getTags().equals(e.getTags());
+//        }
+//    }
 }

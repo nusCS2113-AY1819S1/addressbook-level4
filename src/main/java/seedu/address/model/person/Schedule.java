@@ -10,8 +10,7 @@ import java.util.Objects;
  */
 public class Schedule {
 
-    //Name fields
-    private final Name name;
+    public final String schedulePrint;
 
     // Date fields
     private final Date date;
@@ -26,18 +25,15 @@ public class Schedule {
     /**
      * Every field must be present and not null.
      */
-    public Schedule(Name name, Date date, Time startTime, Time endTime, EventName eventName) {
-        requireAllNonNull(name, date, startTime, endTime, eventName);
-        this.name = name;
+    public Schedule(Date date, Time startTime, Time endTime, EventName eventName) {
+        requireAllNonNull(date, startTime, endTime, eventName);
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
         this.eventName = eventName;
+        this.schedulePrint = this.toString();
     }
 
-    public Name getName() {
-        return name;
-    }
 
     public Date getDate() {
         return date;
@@ -52,33 +48,28 @@ public class Schedule {
     }
 
     public EventName getEventName() { return eventName; }
-//
-//
-//    /**
-//     * Returns true if another event has the same start time.
-//     * This prevents one person from adding the same event at the same start time.
-//     */
-//    public boolean isSameStartTime(Time otherStartTime) {
-//        if (otherStartTime == this) {
-//            return true;
-//        }
-//
-//        return otherStartTime != null
-//                && otherStartTime.getStartTime().equals(getStartTime())
-//                && (otherEndTime.getEndTime().equals(getEndTime()));
+
+
+    /**
+     * Returns true if another event has the same start time.
+     * This prevents one person from adding the same event at the same start time.
+     */
+    // TODO TODO TODO TODO TODO
+//    public boolean isSameStartTime(Object otherStartTime) {
+//        return otherStartTime == this ||
+//                (otherStartTime instanceof Schedule && schedulePrint.equals(((Schedule) schedulePrint).value ));
 //    }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, date, startTime, endTime, eventName);
+        return Objects.hash(date, startTime, endTime, eventName);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(" Date: ")
+        builder.append("Date: ")
                 .append(getDate())
                 .append(" StartTime: ")
                 .append(getStartTime())

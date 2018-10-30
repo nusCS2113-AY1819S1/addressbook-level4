@@ -14,18 +14,18 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 public class ScheduleCommandTest {
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private final CommandHistory commandHistory = new CommandHistory();
-    final String arguments = matcher.group("arguments");
+//    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+//    private final CommandHistory commandHistory = new CommandHistory();
+//    final String arguments = matcher.group("arguments");
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
-    @Test
-    public void constructor_nullSchedule_throwsNullPointerException() {
-        thrown.expect(NullPointerException.class);
-        new ScheduleCommand(null);
-    }
+//    @Rule
+//    public ExpectedException thrown = ExpectedException.none();
+//
+//    @Test
+//    public void constructor_nullSchedule_throwsNullPointerException() {
+//        thrown.expect(NullPointerException.class);
+//        new ScheduleCommand(null);
+//    }
 
 
 //    @Test
