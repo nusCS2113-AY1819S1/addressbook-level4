@@ -1,7 +1,5 @@
 package seedu.address.model.task;
 
-import seedu.address.commons.util.StringUtil;
-
 import static java.util.Objects.requireNonNull;
 
 //@@author JeremyInElysium

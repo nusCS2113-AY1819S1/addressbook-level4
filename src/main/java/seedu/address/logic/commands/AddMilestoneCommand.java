@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MILESTONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RANK;
 
-import java.util.Iterator;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
