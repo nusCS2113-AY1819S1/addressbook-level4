@@ -17,6 +17,7 @@ import seedu.address.model.person.exceptions.TimeSlotOverlapException;
  */
 public class AddTimeCommand extends Command {
     public static final String COMMAND_WORD = "addtime";
+    public static final String COMMAND_WORD_ALIAS = "at";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a timeslot to your timetable.\n"

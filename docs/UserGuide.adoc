@@ -1,4 +1,4 @@
-= Timetable Deconflicter (TBC) - User Guide
+= FreeTime - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -18,7 +18,7 @@ By: `W13-1`      Since: `Sept 2018`      Licence: `MIT`
 
 == Introduction
 
-Timetable Deconflicter (TBC) is a desktop app that allows you to *find free timeslots to meet team members for projects*. More specifically, it helps you identify the times during which everyone you want to meet is free. Timetable Deconflicter is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+FreeTime is a desktop app that allows you to *find free timeslots to meet team members for projects*. More specifically, it helps you identify the times during which everyone you want to meet is free. Timetable Deconflicter is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
@@ -182,15 +182,19 @@ Returns any person having names `Betsy`, `Tim`, or `John`
 
 === Add a timeslot to your timetable: `addtime` (`at`)
 
-Adds a filled timeslot to your timetable.
+Adds a timeslot to your timetable.
 
 Format: `addtime Monday 10:00-12:00`
 
 ****
-* Shortforms for the day of the week are fine too. e.g. You can type `Mon` instead of Monday.
-* If you type `10` for either the start or end time, FreeTime will assume that you mean `10:00`
+* Shortforms for the day of the week are fine too. e.g. You can type `Mon` instead of `Monday`.
+* If you type a single number, like `10` for either the start or end time, FreeTime will assume that you mean `10:00`
 * You cannot add a timeslot that clashes with your timetable.
 ****
+
+[NOTE]
+Currently, FreeTime only accepts timeslots that start and end exactly on the hour, which means that you cannot add timeslots that begin, say, at 10:30. +
+Stay tuned for this extension in v1.4!
 
 Examples:
 
@@ -206,7 +210,12 @@ Adds the timeslot from 17:00 to 18:00 on Wednesday to your timetable.
 
 After adding a timeslot, you should see the following:
 
-image:AddTimeSuccess.png[width="600"]
+.Timeslot added to your timetable
+image::AddTimeSuccess.png[width="600"]
+
+[NOTE]
+Currently, FreeTime only displays timeslots between 10:00 and 19:00. +
+Stay tuned for timetables that resize automatically in v1.4!
 
 === Delete a timeslot from your timetable: `deletetime` (`dt`)
 
@@ -215,9 +224,9 @@ Delete a timeslot from your timetable.
 Format: `deletetime Monday 10:00-12:00`
 
 ****
-* Shortforms for the day of the week are fine too. e.g. You can type `Mon` instead of Monday.
-* If you type `10` for either the start or end time, FreeTime will assume that you mean `10:00`
-* You cannot delete a timeslot that is not already filled in your timetable.
+* Shortforms for the day of the week are fine too. e.g. You can type `Mon` instead of `Monday`.
+* If you type a single number, like `10` for either the start or end time, FreeTime will assume that you mean `10:00`
+* You cannot delete a timeslot that is not already in your timetable.
 ****
 
 Examples:
@@ -231,30 +240,46 @@ Deletes the timeslot from 13:00 to 14:00 on Friday from your timetable.
 * `deletetime Wed 17-18` +
 Deletes the timeslot from 17:00 to 18:00 on Wednesday from your timetable.
 
-=== Show free slots among selected people `free` (`f`) (coming to you in v1.3!)
-
-{nbsp}
-
-
 === Selecting a person : `select` (`s`)
 
-Selects the person identified by the index number used in the displayed person list. +
+Selects your friend with the specified index, showing you their timetable. +
 Format: `select INDEX`
 
 ****
-* Selects the person and displays the person's timetable at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in your friend list.
 * The index *must be a positive integer* `1, 2, 3, ...`
+* You cannot select someone who is not your friend yet. Try using the `friend` command first!
 ****
 
 Examples:
 
-* `list` +
-`select 2` +
-Selects the 2nd person in the address book.
+* `select 2` +
+Selects the 2nd person listed in your friend list.
 * `find Betsy` +
 `select 1` +
 Selects the 1st person in the results of the `find` command.
+
+=== Show free slots among selected people `free`
+
+Highlights timeslots where everyone specified is free.
+
+Format: `free INDEX...`
+
+****
+* You can specify more than one friend.
+* The indices refer to the index number shown in your friend list.
+* The indices *must be positive integers* `1, 2, 3, ...`
+****
+
+Examples:
+
+* `free 1 2` +
+Highlights timeslots where you, friend 1, and friend 2, are all free to meet up.
+
+After executing the command, you should see the following:
+
+.Timeslots highlighted in red are unavailable.
+image::FreeTimeSuccess.png[width="600"]
 
 === Listing entered commands : `history` (`g`)
 
@@ -364,12 +389,6 @@ Format: `exit`
 Address book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
-
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
-
 
 
 
@@ -385,13 +404,9 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 * *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
+* *Edit* : `edit [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
+e.g. `edit n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
 * *List* : `list`
@@ -405,5 +420,7 @@ e.g.`select 2`
 e.g. `addtime mon 10-12`
 * *Delete timeslot* : `deletetime` +
 e.g. `deletetime tue 12-14`
+* *Free time* : `free` +
+e.g. `free 1 2 3`
 * *Import Timetable from a file* : `import [FILE_LOCATION]`
 * *Export Timetable to a file* : `export [FILE_LOCATION]`
