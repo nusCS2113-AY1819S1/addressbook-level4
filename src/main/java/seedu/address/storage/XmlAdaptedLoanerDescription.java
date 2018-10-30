@@ -2,13 +2,13 @@ package seedu.address.storage;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.model.item.LoanerDescription;
-import seedu.address.model.item.Name;
-import seedu.address.model.item.Quantity;
 
+/**
+ * JAXB-friendly version of the LoanerDescription.
+ */
 @XmlRootElement(name = "Loaner")
 @XmlAccessorType(XmlAccessType.FIELD)
 

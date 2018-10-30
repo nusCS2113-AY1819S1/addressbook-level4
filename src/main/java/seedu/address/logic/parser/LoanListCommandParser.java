@@ -8,14 +8,21 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.LoanListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.LoanerDescription;
 import seedu.address.model.item.Name;
 import seedu.address.model.item.Quantity;
-
+/**
+ * Parses input arguments and creates a new LoanListCommand object
+ */
 public class LoanListCommandParser implements Parser<LoanListCommand> {
+    /**
+     * Parses the given {@code String} of arguments in the context of the LoanListCommand
+     * and returns an LoanListCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+
     public LoanListCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
@@ -25,8 +32,8 @@ public class LoanListCommandParser implements Parser<LoanListCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoanListCommand.MESSAGE_USAGE));
         }
-        Name itemName =ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Name loanerName =ParserUtil.parseName(argMultimap.getValue(PREFIX_LOANER).get());
+        Name itemName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Name loanerName = ParserUtil.parseName(argMultimap.getValue(PREFIX_LOANER).get());
         Quantity quantity = ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
         return new LoanListCommand(new LoanerDescription(itemName, loanerName, quantity));
     }

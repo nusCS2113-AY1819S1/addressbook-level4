@@ -2,13 +2,11 @@ package seedu.address.logic.commands;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -16,6 +14,10 @@ import seedu.address.model.Model;
 import seedu.address.model.item.Name;
 import seedu.address.storage.XmlAdaptedLoanList;
 import seedu.address.storage.XmlAdaptedLoanerDescription;
+
+/**
+ * Deletes an entry in the loan list base on the Index
+ */
 
 public class DeleteLoanListCommand extends Command {
     public static final String COMMAND_WORD = "deleteLoanList";
@@ -36,7 +38,7 @@ public class DeleteLoanListCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         File loanListFile = new File("C:/Users/ckinw/OneDrive/Documents/JalilEnterprisesCKW/data/LoanList.xml");
-        if(!loanListFile.exists()) {
+        if (!loanListFile.exists()) {
             throw new CommandException(MESSAGE_EMPTY);
         }
         try {
@@ -44,26 +46,30 @@ public class DeleteLoanListCommand extends Command {
             Unmarshaller unmarshaller = context.createUnmarshaller();
             XmlAdaptedLoanList xmlAdaptedLoanList = (XmlAdaptedLoanList) unmarshaller
                     .unmarshal(loanListFile);
-            ArrayList<XmlAdaptedLoanerDescription> loanList= xmlAdaptedLoanList.getLoanList();
-            if(index.getOneBased() > loanList.size()) {
+            ArrayList<XmlAdaptedLoanerDescription> loanList = xmlAdaptedLoanList.getLoanList();
+
+            if (index.getOneBased() > loanList.size()) {
                 throw new CommandException(MESSAGE_INVALID_INDEX);
             }
-            XmlAdaptedLoanerDescription loanerDescription = loanList.get(index.getZeroBased());
-            updateStatus(model, history, loanerDescription);
+
+            updateStatus(model, history, loanList.get(index.getZeroBased()));
+
             loanList.remove(index.getZeroBased());
-            LoanListCommand.addToFile(new XmlAdaptedLoanList(loanList));
-        }
-        catch (JAXBException e) {
+
+            LoanListCommand.updateXmlLoanListFile(new XmlAdaptedLoanList(loanList));
+        } catch (JAXBException e) {
             System.out.println(e.toString());
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
-    private void updateStatus(Model model, CommandHistory history,XmlAdaptedLoanerDescription loanerDescription) throws CommandException {
-        ChangeStatusCommand.ChangeStatusDescriptor changeStatusDescriptor = new ChangeStatusCommand.ChangeStatusDescriptor();
-        changeStatusDescriptor.setName(new Name(loanerDescription.getItemName()));
-        changeStatusDescriptor.setQuantity(loanerDescription.getQuantity());
-        changeStatusDescriptor.setInitialStatus("On_Loan");
-        changeStatusDescriptor.setUpdatedStatus("Ready");
+    /**
+     * Changes the status from Ready to On_Loan
+     */
+    private void updateStatus(Model model, CommandHistory history, XmlAdaptedLoanerDescription loanerDescription)
+            throws CommandException {
+        ChangeStatusCommand.ChangeStatusDescriptor changeStatusDescriptor =
+                new ChangeStatusCommand.ChangeStatusDescriptor(new Name(loanerDescription.getItemName()),
+                        loanerDescription.getQuantity(), "Ready", "On_Loan");
         ChangeStatusCommand changeStatusCommand = new ChangeStatusCommand(changeStatusDescriptor);
         changeStatusCommand.execute(model, history);
     }

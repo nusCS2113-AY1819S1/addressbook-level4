@@ -2,6 +2,10 @@ package seedu.address.model.item;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+/**
+ * Represents a loaner in the loan list.
+ */
+
 public class LoanerDescription {
     private final Name itemName;
     private final Name loanerName;

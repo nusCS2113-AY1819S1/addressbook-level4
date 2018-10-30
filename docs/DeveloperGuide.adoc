@@ -360,7 +360,7 @@ For this command, 3 classes were created, ChangeStatusDescriptor, ChangeStatusCo
 
 * The ChangeStatusDescriptor class consists of the itemName, quantity, originalStatus, and updatedStatus.
 * The ChangeStatusCommandParser class takes in the input string from the user, parses it into the ChangeStatusDescriptor, and returns a new ChangeStatusCommand.
-* The ChangeStatusCommand class has the execute method. Using the itemName, the item to update is obtained from the model class. A copy is created and changes are made to the copy. The copy then replaces the original item.
+* For the ChangeStatusCommand class, the execute method uses the itemName to obtain the item to update from the model class. A copy is created and changes are made to the copy. The copy then replaces the original item.
 
 The updated item list and success message is shown to the user. Updates are committed to the storage.
 
@@ -373,6 +373,37 @@ image::ChangeStatus.png[width="800"]
 // tag::status[]
 === Status command
 For this command, 2 classes were created, SimpleItem and StatusCommand.
+
+* The SimpleItem class is a simplified version of the item class, consisting of only the itemName and quantity. These aer the only two fields relevant for the loan list.
+* For the StatusCommand class, the execute method sorts the items into the 3 categories, Ready, OnLoan and Faulty. The items are then shown to the user, sorted by their status.
+
+image::Status.png[width="800"]
+
+// tag::loanList[]
+=== LoanList command
+For this command, 5 classes were created, LoanerDescription, LoanListParser, LoanListCommand, XmlAdaptedLoanerDescription, and XmlAdaptedLoanList.
+
+* The LoanerDescription class consists of the itemName, loanerName, and quantity.
+* The LoanListParser class takes in the input string from the user, parses it into the LoanerDescription, and returns a new LoanListCommand.
+* For the LoanListCommand, the execute method creates a XmlAdaptedLoanerDescription object from the LoanerDescription and adds it into the XmlAdaptedLoanList. This is then saved inside the storage. The ChangeStatusCommand is then called to change the status from Ready to On_Loan.
+
+image::Status.png[width="800"]
+
+// end::loanList[]
+
+// tag::status[]
+=== Status command
+For this command, 2 classes were created, SimpleItem and StatusCommand.
+
+* The SimpleItem class is a simplified version of the item class, consisting of only the itemName and quantity. These aer the only two fields relevant for the loan list.
+* For the StatusCommand class, it sorts the items into the 3 categories, Ready, OnLoan and Faulty. The items are then shown to the user, sorted by their status.
+
+image::Status.png[width="800"]
+
+// tag::status[]
+=== Status command
+For this command, 2 classes were created, SimpleItem and StatusCommand.
+
 * The SimpleItem class is a simplified version of the item class, consisting of only the itemName and quantity. These aer the only two fields relevant for the loan list.
 * For the StatusCommand class, it sorts the items into the 3 categories, Ready, OnLoan and Faulty. The items are then shown to the user, sorted by their status.
 
