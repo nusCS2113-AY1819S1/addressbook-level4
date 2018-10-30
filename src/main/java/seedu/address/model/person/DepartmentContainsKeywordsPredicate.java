@@ -11,7 +11,8 @@ import seedu.address.commons.util.StringUtil;
 public class DepartmentContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
-    public DepartmentContainsKeywordsPredicate(List<String> keywords) { this.keywords = keywords; }
+    public DepartmentContainsKeywordsPredicate(List<String> keywords) {
+        this.keywords = keywords; }
 
     @Override
     public boolean test(Person person) {
