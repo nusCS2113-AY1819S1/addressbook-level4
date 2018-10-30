@@ -155,7 +155,8 @@ public class Drink {
     }
 
     public void increaseQuantity(Quantity quantity) {
-        Batch batch = new Batch
+        // Batch batch = new Batch
+
     }
 }
 

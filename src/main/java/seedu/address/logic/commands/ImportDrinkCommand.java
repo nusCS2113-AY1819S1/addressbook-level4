@@ -18,9 +18,9 @@ import seedu.address.model.transaction.TransactionType;
  * Drink must exist in inventory.
  */
 public class ImportDrinkCommand extends Command {
-    public static final String COMMAND_WORD = "sell";
+    public static final String COMMAND_WORD = "import";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sell an drink that is recorded in Drink I/O. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Import a drink that is recorded in Drink I/O. "
             + "Parameters: "
             + PREFIX_DRINK_NAME + "DRINK NAME "
             //+ PREFIX_DATE + "DATE SOLD "

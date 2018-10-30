@@ -14,6 +14,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
+import seedu.address.logic.commands.ImportDrinkCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SellDrinkCommand;
@@ -25,6 +26,7 @@ import seedu.address.logic.commands.user.LogoutCommand;
 import seedu.address.logic.parser.AddDrinkCommandParser;
 import seedu.address.logic.parser.DeleteCommandParser;
 import seedu.address.logic.parser.FindCommandParser;
+import seedu.address.logic.parser.ImportDrinkCommandParser;
 import seedu.address.logic.parser.SelectCommandParser;
 import seedu.address.logic.parser.SellDrinkCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -58,28 +60,31 @@ public class AdminParser {
         switch (commandWord) {
 
         case AddDrinkCommand.COMMAND_WORD:
-            return new AddDrinkCommandParser ().parse (arguments);
+            return new AddDrinkCommandParser().parse(arguments);
 
         case SellDrinkCommand.COMMAND_WORD:
-            return new SellDrinkCommandParser ().parse (arguments);
+            return new SellDrinkCommandParser().parse(arguments);
+
+        case ImportDrinkCommand.COMMAND_WORD:
+            return new ImportDrinkCommandParser().parse(arguments);
 
         case ViewTransactionsCommand.COMMAND_WORD:
             return new ViewTransactionsCommand();
-            //==========login related command===============//
+        //==========login related command===============//
 
         case ChangePasswordCommand.COMMAND_WORD:
-            return new ChangePasswordCommandParser ().parse(arguments);
+            return new ChangePasswordCommandParser().parse(arguments);
 
 
         case CreateAccountCommand.COMMAND_WORD:
-            return new CreateAccountCommandParser ().parse (arguments);
+            return new CreateAccountCommandParser().parse(arguments);
 
 
         case DeleteAccountCommand.COMMAND_WORD:
-            return new DeleteAccountCommandParser ().parse (arguments);
+            return new DeleteAccountCommandParser().parse(arguments);
 
         case LogoutCommand.COMMAND_WORD:
-            return new LogoutCommand ();
+            return new LogoutCommand();
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
