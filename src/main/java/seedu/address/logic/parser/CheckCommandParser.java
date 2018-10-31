@@ -29,10 +29,6 @@ public class CheckCommandParser implements Parser<CheckCommand> {
 
         List<String> quantities = new ArrayList<>();
         Integer number = Integer.parseInt(trimmedArgs);
-        if (Integer.parseInt(trimmedArgs) > 999) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_EXCEEDED_QUANTITY));
-        }
         for (Integer i = number; i > 0; i--) {
             quantities.add(Integer.toString(i));
         }

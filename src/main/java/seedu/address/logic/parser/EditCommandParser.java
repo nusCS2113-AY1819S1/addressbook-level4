@@ -34,8 +34,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ISBN, PREFIX_PRICE,
-                        PREFIX_COST, PREFIX_QUANTITY, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ISBN, PREFIX_PRICE, PREFIX_QUANTITY, PREFIX_TAG);
 
         Index index;
 
@@ -59,7 +58,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editBookDescriptor.setCost(ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get()));
         }
         if (argMultimap.getValue(PREFIX_QUANTITY).isPresent()) {
-            throw new ParseException(EditCommand.MESSAGE_QUANTITY_PRESENT);
+            editBookDescriptor.setQuantity(ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editBookDescriptor::setTags);
 

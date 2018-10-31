@@ -9,7 +9,7 @@ import seedu.address.model.Model;
  */
 public class ViewStatisticCommand extends Command {
 
-    public static final String COMMAND_WORD = "stats";
+    public static final String COMMAND_WORD = "viewstatistic";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {

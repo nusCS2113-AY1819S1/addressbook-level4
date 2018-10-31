@@ -6,7 +6,6 @@ import java.util.TimeZone;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
-import seedu.address.model.ReadOnlyBookInventory;
 import seedu.address.model.statistic.Statistic;
 
 
@@ -50,9 +49,5 @@ public class StatisticCenter implements Serializable {
 
     public void loadStatistic(Statistic copy) {
         this.statistic = copy;
-    }
-
-    public void calibrateInventory(ReadOnlyBookInventory readOnlyBookInventory) {
-        statistic.getInventory().calibrate(readOnlyBookInventory);
     }
 }

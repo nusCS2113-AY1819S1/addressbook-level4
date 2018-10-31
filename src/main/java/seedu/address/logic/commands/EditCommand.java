@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BOOKS;
 
@@ -43,14 +44,14 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ISBN + "ISBN] "
             + "[" + PREFIX_PRICE + "PRICE] "
             + "[" + PREFIX_COST + "COST] "
+            + "[" + PREFIX_QUANTITY + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_ISBN + "978-3-16-148410-0 "
+            + PREFIX_ISBN + "91234567 "
             + PREFIX_PRICE + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_BOOK_SUCCESS = "Edited Book: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_QUANTITY_PRESENT = "Quantity Field Present.\n" + "Unable to edit Book";
     public static final String MESSAGE_DUPLICATE_BOOK = "This book already exists in the BookInventory.";
 
     private final Index index;
@@ -156,7 +157,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, isbn, price, cost, quantity, tags);
+            return CollectionUtil.isAnyNonNull(name, isbn, price, quantity, tags);
         }
 
         public void setName(Name name) {

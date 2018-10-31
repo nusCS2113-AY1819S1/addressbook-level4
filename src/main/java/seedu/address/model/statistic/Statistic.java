@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
  */
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Statistic {
-    public static final String STARTING_FIGURE = "0.0";
+    private static final String STARTING_FIGURE = "0";
     // Data fields
     private volatile Revenue revenue;
     private volatile Inventory inventory;

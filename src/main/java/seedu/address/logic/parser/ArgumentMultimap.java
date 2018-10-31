@@ -1,7 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,17 +56,5 @@ public class ArgumentMultimap {
      */
     public String getPreamble() {
         return getValue(new Prefix("")).orElse("");
-    }
-
-    public String getArgsType() {
-        if (getValue(PREFIX_ISBN).isPresent() && !getPreamble().isEmpty()) {
-            return "Both";
-        } else if (getValue(PREFIX_ISBN).isPresent()) {
-            return "Isbn";
-        } else if (!getPreamble().isEmpty()) {
-            return "Index";
-        } else {
-            return "None";
-        }
     }
 }

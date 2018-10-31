@@ -11,7 +11,7 @@ public class Isbn {
 
 
     public static final String MESSAGE_ISBN_CONSTRAINTS =
-            "ISBN should be a valid 10-digit or 13-digit number.";
+            "ISBN should be a valid 10-digit or 13-digit number (with hyphens).";
     // A 13-digit ISBN should start with either 978 or 979. A 10-digit ISBN would omit the first 3 char.
     public static final String ISBN10_VALIDATION_REGEX = "\\d{10}";
     public static final String ISBN13_VALIDATION_REGEX = "(978|979)\\d{10}";

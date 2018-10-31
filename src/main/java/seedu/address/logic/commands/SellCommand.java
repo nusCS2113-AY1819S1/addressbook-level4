@@ -1,15 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BOOKS;
 
 import java.util.List;
 import java.util.Set;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.StatisticCenter;
-import seedu.address.commons.util.ArgsUtil;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -33,29 +32,25 @@ public class SellCommand extends Command {
             + "by the index number used in the displayed book list. "
             + "Existing values will be subtracted by the input value.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_QUANTITY + "QUANTITY] OR "
-            + PREFIX_ISBN + "ISBN13 " + "[" + PREFIX_QUANTITY + "QUANTITY]\n"
+            + "[" + PREFIX_QUANTITY + "QUANTITY]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_QUANTITY + "5 OR " + COMMAND_WORD + " " + PREFIX_ISBN + "978-3-16-148410-0 "
             + PREFIX_QUANTITY + "5";
 
     public static final String MESSAGE_SELL_BOOK_SUCCESS = "Sold Book: %1$s";
     public static final String MESSAGE_NOT_SOLD = "Decrease to stock quantity must be provided.";
     public static final String MESSAGE_INVALID_QUANTITY = "Quantity of books left cannot be less than 0.";
     private final String findBookBy;
-    private final String argsType;
     private final DecreaseQuantity decreaseQuantity;
 
     /**
      * @param findBookBy the index or isbn in the filtered book list to edit
      * @param decreaseQuantity number to sell the book with
      */
-    public SellCommand(String findBookBy, String argsType, DecreaseQuantity decreaseQuantity) {
+    public SellCommand(String findBookBy, DecreaseQuantity decreaseQuantity) {
         requireNonNull(findBookBy);
         requireNonNull(decreaseQuantity);
 
         this.findBookBy = findBookBy;
-        this.argsType = argsType;
         this.decreaseQuantity = new DecreaseQuantity(decreaseQuantity);
     }
 
@@ -65,7 +60,13 @@ public class SellCommand extends Command {
         List<Book> lastShownList = model.getFilteredBookList();
         Book bookToSell;
 
-        bookToSell = ArgsUtil.getBookToEdit(model, lastShownList, argsType, findBookBy);
+        if (findBookBy.length() == 1 && Integer.parseInt(findBookBy) >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
+        } else if (findBookBy.length() == 1) {
+            bookToSell = lastShownList.get(Integer.parseInt(findBookBy));
+        } else {
+            bookToSell = model.getBook(findBookBy);
+        }
 
         Book sellBook = createSoldBook(bookToSell, decreaseQuantity);
 

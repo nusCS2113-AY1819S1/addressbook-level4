@@ -1,8 +1,5 @@
 package seedu.address.model.statistic;
 
-import javafx.collections.ObservableList;
-import seedu.address.model.ReadOnlyBookInventory;
-import seedu.address.model.book.Book;
 
 /**
  * Represents Revenue in the month's Statistic
@@ -69,18 +66,6 @@ public class Inventory {
     @Override
     public int hashCode() {
         return value.hashCode();
-    }
-
-    /**
-     * Calibrates Inventory according to current inventory.
-     * @param readOnlyBookInventory
-     */
-    public void calibrate(ReadOnlyBookInventory readOnlyBookInventory) {
-        this.value = "0";
-        ObservableList<Book> bookList = readOnlyBookInventory.getBookList();
-        bookList.forEach((book) -> {
-            this.increase(book.getCost().toString(), book.getQuantity().getValue());
-        });
     }
 }
 
