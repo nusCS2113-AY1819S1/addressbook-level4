@@ -12,7 +12,6 @@ import seedu.address.model.gradebook.GradebookManager;
 import seedu.address.testutil.GradebookBuilder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.commands.GradebookEditCommand.MESSAGE_EDIT_GRADEBOOK_SUCCESS;
 import static seedu.address.logic.commands.GradebookEditCommand.MESSAGE_FIND_FAIL;
 
 public class GradebookEditCommandTest {
@@ -26,29 +25,6 @@ public class GradebookEditCommandTest {
     public void setUp() {
         gradebookManager.clearGradebook();
         gradebookManager.saveGradebookList();
-    }
-
-    @Test
-    public void execute_gradebookEditValid_success() throws CommandException {
-        String moduleCode = "CS2113";
-        String gradebookComponentName = "Finals";
-        String newGradebookComponentName = "Test";
-        String expectedMessage = MESSAGE_EDIT_GRADEBOOK_SUCCESS;
-        int gradebookMaxMarks = 10;
-        int gradebookWeightage = 20;
-
-        gradebookManager.addGradebookComponent(dummyGradebookComponent.build());
-        gradebookManager.saveGradebookList();
-
-        Gradebook gradebook = new Gradebook(
-                moduleCode,
-                gradebookComponentName,
-                newGradebookComponentName,
-                gradebookMaxMarks,
-                gradebookWeightage);
-        GradebookEditCommand gradebookEditCommand = new GradebookEditCommand(gradebook);
-        CommandResult result = gradebookEditCommand.execute(new ModelManager(), new CommandHistory());
-        assertEquals(expectedMessage, result.feedbackToUser);
     }
 
     @Test

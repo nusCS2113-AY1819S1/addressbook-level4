@@ -8,21 +8,18 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.gradebook.Gradebook;
 import seedu.address.model.gradebook.GradebookManager;
+import seedu.address.model.grades.Grades;
+import seedu.address.model.grades.GradesManager;
 
 /**
  * Deletes gradebook component for module in Trajectory to the user.
  */
 public class GradebookDeleteCommand extends Command {
     public static final String COMMAND_WORD = "gradebook delete";
-    public static final String MESSAGE_DELETE_SUCCESS = ""
-            + "\nSuccessfully deleted!"
-            + "\nModule Code: %1$s"
-            + "\nGradebook Component: %2$s"
-            + "\nMaximum Marks: %3$s"
-            + "\nWeightage: %4$s";
+    public static final String MESSAGE_DELETE_SUCCESS = "Successfully deleted! \n Number of grade components: ";
     public static final String MESSAGE_DELETE_FAIL = "\nGradebook component not found!";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a gradebook component to Trajectory. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a gradebook component to Trajectory.\n"
             + "Parameters: "
             + PREFIX_MODULE_CODE + "MODULE_CODE  "
             + PREFIX_GRADEBOOK_ITEM + "ITEM "
@@ -32,27 +29,31 @@ public class GradebookDeleteCommand extends Command {
 
     private final Gradebook toDeleteGradebookComponent;
     private final GradebookManager gradebookManager;
+    private final Grades toDeleteGrades;
+    private final GradesManager gradesManager;
 
     /**
      * Command deletes a gradebook component.
      */
     public GradebookDeleteCommand(String moduleCode, String gradebookComponentName) {
         gradebookManager = new GradebookManager();
+        gradesManager = new GradesManager();
         this.toDeleteGradebookComponent = gradebookManager.findGradebookComponent(moduleCode, gradebookComponentName);
+        this.toDeleteGrades = gradesManager.findGrade(moduleCode, gradebookComponentName);
     }
 
     @Override
     public CommandResult execute (Model model, CommandHistory history) throws CommandException {
+        GradesManager gradesManager = new GradesManager();
         if (toDeleteGradebookComponent == null) {
             return new CommandResult(MESSAGE_DELETE_FAIL);
         }
         gradebookManager.deleteGradebookComponent(toDeleteGradebookComponent);
         gradebookManager.saveGradebookList();
-        return new CommandResult(String.format(
-                MESSAGE_DELETE_SUCCESS,
-                toDeleteGradebookComponent.getModuleCode(),
-                toDeleteGradebookComponent.getGradeComponentName(),
-                toDeleteGradebookComponent.getGradeComponentMaxMarks(),
-                toDeleteGradebookComponent.getGradeComponentWeightage()));
+        gradesManager.deleteGrades(toDeleteGrades);
+        gradesManager.saveGradeList();
+        String gradebookList = gradebookManager.listGradebookComponent();
+        int size = gradebookManager.getGradebookSize();
+        return new CommandResult(MESSAGE_DELETE_SUCCESS + size + "\n" + "", gradebookList);
     }
 }

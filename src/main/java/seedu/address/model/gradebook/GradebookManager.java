@@ -1,10 +1,12 @@
 package seedu.address.model.gradebook;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import seedu.address.model.StorageController;
 import seedu.address.storage.adapter.XmlAdaptedGradebook;
+import seedu.address.ui.HtmlTableProcessor;
 
 /**
  * The API of the GradebookManager component.
@@ -51,6 +53,39 @@ public class GradebookManager {
     }
 
     /**
+     This method adds gradebook component to a module in Trajectory.
+     */
+    public String listGradebookComponent () {
+        StringBuilder sb = new StringBuilder();
+        int index = 1;
+
+        sb.append(HtmlTableProcessor.getH3Representation("Gradebook List"));
+        sb.append(HtmlTableProcessor.renderTableStart(new ArrayList<String>(
+                Arrays.asList("Index", "Module Code", "Component Name", "Maximum Marks", "Weightage"))));
+
+        sb.append(HtmlTableProcessor.getTableItemStart());
+        for (Gradebook gradebook: getGradebooks()) {
+            sb.append(HtmlTableProcessor
+                    .renderTableItem(new ArrayList<String>(Arrays
+                            .asList(Integer.toString(index++),
+                                    gradebook.getModuleCode(),
+                                    gradebook.getGradeComponentName(),
+                                    Integer.toString(gradebook.getGradeComponentMaxMarks()),
+                                    Integer.toString(gradebook.getGradeComponentWeightage())))));
+        }
+        sb.append(HtmlTableProcessor.getTableItemEnd());
+        return sb.toString();
+    }
+
+    /**
+     This method gets size of gradebook.
+     */
+    public int getGradebookSize () {
+        int count = getGradebooks().size();
+        return count;
+    }
+
+    /**
      This method deletes gradebook component to a module in Trajectory.
      */
     public void deleteGradebookComponent (Gradebook gradebook) {
@@ -71,14 +106,47 @@ public class GradebookManager {
     }
 
     /**
+     This method checks if module code have empty inputs.
+     */
+    public boolean isModuleCodeEmpty (String moduleCode) {
+        boolean isModuleCodeEmpty = false;
+        if (moduleCode.equals("")) {
+            isModuleCodeEmpty = true;
+        }
+        return isModuleCodeEmpty;
+    }
+
+    /**
+     This method checks if component name have empty inputs.
+     */
+    public boolean isComponentNameEmpty (String componentName) {
+        boolean isComponentNameEmpty = false;
+        if (componentName.equals("")) {
+            isComponentNameEmpty = true;
+        }
+        return isComponentNameEmpty;
+    }
+
+    /**
      This method checks if module code and component name have empty inputs.
      */
-    public boolean isEmpty (String moduleCode, String gradebookComponentName) {
-        boolean isEmpty = false;
-        if (moduleCode.equals("") || gradebookComponentName.equals("")) {
-            isEmpty = true;
+    public boolean isModuleCodeAndComponentNameEmpty (String moduleCode, String gradebookComponentName) {
+        boolean isModuleCodeAndComponentNameEmpty = false;
+        if (moduleCode.equals("") && gradebookComponentName.equals("")) {
+            isModuleCodeAndComponentNameEmpty = true;
         }
-        return isEmpty;
+        return isModuleCodeAndComponentNameEmpty;
+    }
+
+    /**
+     This method checks if edited params are valid.
+     */
+    public boolean isParamsValid (String newGradebookComponentName, int maxMarks, int weightage) {
+        boolean isParamsValid = true;
+        if (newGradebookComponentName.equals("") && maxMarks == 0 && weightage == 0) {
+            isParamsValid = false;
+        }
+        return isParamsValid;
     }
 
     /**
@@ -176,12 +244,22 @@ public class GradebookManager {
     }
 
     /**
+     This method gets max marks of grade component.
+     */
+    public int getMaxMarks (String moduleCode, String gradebookComponentName) {
+        GradebookManager gradebookManager = new GradebookManager();
+        Gradebook gradebook = gradebookManager.findGradebookComponent(moduleCode, gradebookComponentName);
+        return gradebook.getGradeComponentMaxMarks();
+    }
+
+    /**
      This method checks if gradebook component exist.
      */
     public boolean isGradeComponentValid (String moduleCode, String gradebookComponentName) {
         boolean isGradeComponentValid = true;
         GradebookManager gradebookManager = new GradebookManager();
-        Gradebook gradebook = gradebookManager.findGradebookComponent(moduleCode, gradebookComponentName);
+        Gradebook gradebook = gradebookManager.findGradebookComponent(moduleCode,
+                gradebookComponentName);
         if (gradebook == null) {
             isGradeComponentValid = false;
         }
