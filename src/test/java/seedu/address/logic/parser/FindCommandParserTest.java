@@ -1,42 +1,49 @@
 package seedu.address.logic.parser;
-/*
+
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.junit.Test;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.model.event.EventContainsKeywordsPredicate;
+import seedu.address.logic.commands.FindCommandTest;
 
 public class FindCommandParserTest {
 
     private FindCommandParser parser = new FindCommandParser();
-    private Map<Prefix, List<String> > keywordMap = new HashMap<>();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_allUnknownPrefixes_throwsParseException() {
+        assertParseFailure(parser, " KF/Keywords DD/ T/ ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
-        keywordMap.put(PREFIX_NAME, Arrays.asList("Alice", "Bob"));
-
         FindCommand expectedFindCommand =
-                new FindCommand(new EventContainsKeywordsPredicate(keywordMap));
-        assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
+                new FindCommand(FindCommandTest.preparePredicate("k/Alice Bob"));
+        assertParseSuccess(parser, " k/Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
+        assertParseSuccess(parser, " \n k/Alice \n \t Bob  \t", expectedFindCommand);
+
+        //multiple known prefixes only
+        expectedFindCommand = new FindCommand(FindCommandTest.preparePredicate("k/Alice n/Bob"));
+        assertParseSuccess(parser, " k/Alice n/Bob", expectedFindCommand);
+
+        //multiple known prefixes + multiple unknown prefixes
+        expectedFindCommand = new FindCommand(FindCommandTest
+                .preparePredicate("k/Alice n/Bob EE/love TT/tag"));
+        assertParseSuccess(parser, " k/Alice n/Bob EE/love TT/tag", expectedFindCommand);
+
     }
 
 }
-*/

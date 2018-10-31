@@ -47,7 +47,7 @@ public class FindCommandTest {
     private Model expectedModel = new ModelManager(getTypicalEventManager(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
-    private final List<Prefix> PREFIXES = Arrays.asList(PREFIX_KEYWORD, PREFIX_NAME, PREFIX_CONTACT,
+    private static final List<Prefix> PREFIXES = Arrays.asList(PREFIX_KEYWORD, PREFIX_NAME, PREFIX_CONTACT,
             PREFIX_EMAIL, PREFIX_PHONE, PREFIX_VENUE, PREFIX_DATETIME, PREFIX_TAG);
 
     @Test
@@ -188,7 +188,7 @@ public class FindCommandTest {
     /**
      * Parses {@code userInput} into a {@code EventContainsKeywordsPredicate}.
      */
-    private EventContainsKeywordsPredicate preparePredicate(String userInput) {
+    public static EventContainsKeywordsPredicate preparePredicate(String userInput) {
         //Add space in case of missing
         userInput = " " + userInput;
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_KEYWORD, PREFIX_NAME,
@@ -207,7 +207,7 @@ public class FindCommandTest {
      * @param prefix prefix to map
      * @param argMultimap to check for prefix present
      */
-    public void MapPrefixAndKeywords (Map<Prefix, List<String> > prefixKeywordMap, Prefix prefix,
+    public static void MapPrefixAndKeywords (Map<Prefix, List<String> > prefixKeywordMap, Prefix prefix,
                                       ArgumentMultimap argMultimap) {
         if (argMultimap.getValue(prefix).isPresent())  {
             List<String> combineAllSamePrefixKeywordsList = new ArrayList<>();
