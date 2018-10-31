@@ -220,21 +220,6 @@ Returns `CS2113` and `CS2040C`.
 Shows a list of all modules in the system. +
 Format: `module list`
 
-==== Archive module : `module archive [coming in v1.4]`
-Archives a module that is no longer being taught to keep it as a historical record. +
-Format: `module archive mc/MODULE_CODE`
-
-****
-* The archived module will no longer show up using the base module list command.
-* The module must already exist in the system.
-* The user will be prompted to confirm archiving the module to prevent accidents.
-****
-
-Example:
-
-* `module archive mc/CS2113` +
-Archives the module with module code `CS2113`.
-
 ==== Enrol Student : `module enrol`
 Enrols students into the specified module using their matriculation numbers or email addresses. +
 Format: `module enrol mc/MODULE_CODE i/MATRIC_NUMBER...`
@@ -251,6 +236,21 @@ Examples:
 Enrols a student with matric no. `A0161234B` in `CS2113`.
 * `module enrol mc/CS2040C i/A0167263X i/A0179821B` +
 Enrols two students with matric no. `A0167263X` and `A0179821B` in `CS2040C`.
+
+==== Archive module : `module archive [coming in v1.4]`
+Archives a module that is no longer being taught to keep it as a historical record. +
+Format: `module archive mc/MODULE_CODE`
+
+****
+* The archived module will no longer show up using the base module list command.
+* The module must already exist in the system.
+* The user will be prompted to confirm archiving the module to prevent accidents.
+****
+
+Example:
+
+* `module archive mc/CS2113` +
+Archives the module with module code `CS2113`.
 
 ==== Assign TA : `module assign [coming in v2.0]`
 Assigns a student as a TA of the module. +
@@ -697,10 +697,10 @@ e.g. `module view mc/CS2113`
 * *Find module by module code* : `module find KEYWORD [MORE_KEYWORDS]​` +
 e.g. `module find cs2113 structures`
 * *List modules* : `module list​` +
-* *Archive module* : `module archive mc/MODULE_CODE​` `[coming in v1.4]` +
-e.g. `module archive mc/CS2113`
 * *Enrol student in module* : `module enrol mc/MODULE_CODE i/MATRIC_NUMBER…​` +
 e.g. `module enrol mc/CS2113 i/A0167263X i/A0179821B`
+* *Archive module* : `module archive mc/MODULE_CODE​` `[coming in v1.4]` +
+e.g. `module archive mc/CS2113`
 * *Assign TA* : `module assign mc/MODULE_CODE [i/MATRIC_NUMBER] [e/EMAIL]` `[coming in v2.0]` +
 e.g. `module assign mc/CS2113 i/A0171234B`
 
