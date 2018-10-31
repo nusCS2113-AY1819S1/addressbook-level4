@@ -3,15 +3,14 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
 
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -20,6 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.EditTaskCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.PriorityLevel;
 import seedu.address.model.task.Task;
 
@@ -28,20 +28,19 @@ import seedu.address.model.task.Task;
  * Edits the details of an existing task that has been added to task book.
  */
 public class EditTaskCommand extends Command implements CommandParser {
-    //private static final Logger logger = LogsCenter.getLogger(EditTaskCommand.class);
 
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the displayed task list. "
             + "Existing values will be overwritten by user's input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: " + PREFIX_INDEX + "INDEX "
             + "[" + PREFIX_TITLE + "TITLE] "
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
             + "[" + PREFIX_MODULE_CODE + "MODULE CODE] "
             + "[" + PREFIX_PRIORITY + "PRIORITY] "
             + "[" + PREFIX_HOURS + "HOURS] \n"
-            + "Example: " + COMMAND_WORD + "1"
+            + "Example: " + COMMAND_WORD + PREFIX_INDEX + "1"
             + PREFIX_DESCRIPTION + "write your own notes"
             + PREFIX_PRIORITY + "high";
 
@@ -68,7 +67,7 @@ public class EditTaskCommand extends Command implements CommandParser {
         requireNonNull(editTaskDescriptor);
 
         this.index = index;
-        this.editTaskDescriptor = new EditTaskDescriptor();
+        this.editTaskDescriptor = editTaskDescriptor;
     }
 
     @Override
@@ -82,9 +81,6 @@ public class EditTaskCommand extends Command implements CommandParser {
         Task taskToEdit = lastShownList.get(index.getZeroBased());
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
-        System.out.println(taskToEdit);
-        System.out.println(editedTask);
-
         if (!taskToEdit.isSameTask(editedTask) && model.hasTask(editedTask)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
@@ -92,6 +88,7 @@ public class EditTaskCommand extends Command implements CommandParser {
         model.updateTask(taskToEdit, editedTask);
         model.updateFilteredTaskList(model.PREDICATE_SHOW_ALL_TASKS);
         model.commitTaskBook();
+
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 
@@ -102,13 +99,14 @@ public class EditTaskCommand extends Command implements CommandParser {
     private static Task createEditedTask(Task taskToEdit, EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
 
+        Deadline deadline = taskToEdit.getDeadline();
         String updatedTitle = editTaskDescriptor.getTitle().orElse(taskToEdit.getTitle());
         String updatedDescription = editTaskDescriptor.getDescription().orElse(taskToEdit.getDescription());
         String updatedModuleCode = editTaskDescriptor.getModuleCode().orElse(taskToEdit.getModuleCode());
         PriorityLevel updatedPriority = editTaskDescriptor.getPriorityLevel().orElse(taskToEdit.getPriorityLevel());
         Integer updatedHours = editTaskDescriptor.getExpectedNumOfHours().orElse(taskToEdit.getExpectedNumOfHours());
 
-        return new Task(updatedTitle, updatedDescription, updatedModuleCode, updatedPriority, updatedHours);
+        return new Task(deadline, updatedTitle, updatedDescription, updatedModuleCode, updatedPriority, updatedHours);
     }
 
     @Override

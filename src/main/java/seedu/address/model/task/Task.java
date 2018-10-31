@@ -52,6 +52,16 @@ public class Task {
         this.expectedNumOfHours = expectedNumOfHours;
     }
 
+    public Task(Deadline deadline, String moduleCode, String title, String description,
+                PriorityLevel priorityLevel, int expectedNumOfHours) {
+        this.deadline = deadline;
+        this.moduleCode = moduleCode;
+        this.title = title;
+        this.description = description;
+        this.priorityLevel = priorityLevel;
+        this.expectedNumOfHours = expectedNumOfHours;
+    }
+
     public Task(Task other) {
         this.deadline = other.deadline;
         this.moduleCode = other.moduleCode;
