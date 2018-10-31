@@ -7,6 +7,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModuleManager;
 
 /**
@@ -24,10 +25,11 @@ public class ModuleDeleteCommand extends Command {
             + PREFIX_MODULE_CODE + "CS2113";
 
     public static final String MESSAGE_DELETE_MODULE_SUCCESS = "Deleted module: %1$s";
+    public static final String MESSAGE_MODULE_NOT_FOUND = "Module with code %s doesn't exist in Trajectory!";
 
-    private final String targetModuleCode;
+    private final ModuleCode targetModuleCode;
 
-    public ModuleDeleteCommand(String moduleCode) {
+    public ModuleDeleteCommand(ModuleCode moduleCode) {
         this.targetModuleCode = moduleCode;
     }
 
@@ -36,7 +38,11 @@ public class ModuleDeleteCommand extends Command {
         requireNonNull(model);
         ModuleManager moduleManager = ModuleManager.getInstance();
 
-        Module moduleToDelete = moduleManager.getModuleByModuleCode(targetModuleCode);
+        if (!moduleManager.doesModuleExist(targetModuleCode.moduleCode)) {
+            throw new CommandException(String.format(MESSAGE_MODULE_NOT_FOUND, targetModuleCode.moduleCode));
+        }
+
+        Module moduleToDelete = moduleManager.getModuleByModuleCode(targetModuleCode.moduleCode);
         moduleManager.deleteModule(moduleToDelete);
         moduleManager.saveModuleList();
 
