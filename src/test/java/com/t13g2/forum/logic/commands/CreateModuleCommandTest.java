@@ -38,6 +38,12 @@ public class CreateModuleCommandTest {
     }
 
     @Test
+    public void constructor_nullModule_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        new CreateModuleCommand(null);
+    }
+
+    @Test
     public void execute_adminLoggedInCreateModule_createModuleSuccess() {
         //set the current logged in user as an admin.
         User validAdmin = new UserBuilder().build();

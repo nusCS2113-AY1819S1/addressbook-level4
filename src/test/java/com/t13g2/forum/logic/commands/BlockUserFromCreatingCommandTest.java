@@ -76,6 +76,30 @@ public class BlockUserFromCreatingCommandTest {
     }
 
     @Test
+    public void execute_adminBlockAdmin_blockUserFailed () throws Exception {
+        //set the current logged in user as an admin.
+        User validAdmin = new UserBuilder().build();
+        Context.getInstance().setCurrentUser(validAdmin);
+
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            unitOfWork.getUserRepository().addUser(validAdmin);
+            unitOfWork.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        BlockUserFromCreatingCommand blockCommand = new BlockUserFromCreatingCommand(validAdmin.getUsername(), true);
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(String.format(BlockUserFromCreatingCommand.MESSAGE_USER_IS_ADMIN,
+            validAdmin.getUsername()));
+
+        CommandResult commandResult = blockCommand.execute(model, commandHistory);
+        assertEquals(String.format(BlockUserFromCreatingCommand.MESSAGE_USER_IS_ADMIN,
+            validAdmin.getUsername()), commandResult.feedbackToUser);
+    }
+
+    @Test
     public void execute_adminDuplicateBlock_blockUserFailed () throws Exception {
         //set the current logged in user as an admin.
         User validAdmin = new UserBuilder().build();

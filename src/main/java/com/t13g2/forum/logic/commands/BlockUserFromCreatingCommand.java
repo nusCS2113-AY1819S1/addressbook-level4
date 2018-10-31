@@ -42,6 +42,7 @@ public class BlockUserFromCreatingCommand extends Command {
      */
     public BlockUserFromCreatingCommand(String userName, boolean block) {
         requireNonNull(userName);
+        requireNonNull(block);
         userNameToBlock = userName;
         this.block = block;
     }
