@@ -15,7 +15,6 @@ preferences.json
 classes/
 /data/
 /bin/
-src/main/resources/docs/
 out/
 /config.json
 reposense-report/
