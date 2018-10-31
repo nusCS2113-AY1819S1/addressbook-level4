@@ -266,6 +266,7 @@ Additionally, it implements the following operations to support adding/deletion 
 
 These operations are exposed in the Model interface as Model#addJobOffer(JobOffer) and Model#deleteJobOffer(JobOffer jobOffer) respectively.
 
+[NOTE]
 All addition/deletion of the 3 entities (Candidates, Companies, Job Offers) follow the same mechanism.
 
 Given below is an example usage scenario for adding/deleting of these entities and how the adding/deleting mechanism behaves at each step.
@@ -300,6 +301,7 @@ Step 3. The user executes ...
 // tag::edit[]
 === Edit feature
 ==== Current Implementation
+===== Candidates
 The edit mechanism for candidates is facilitated by `EditPersonDescriptor` in `EditCandidateCommand` which creates a new Candidate object with edited attributes
 and `UniqueCandidateList` which stores the added candidates internally as an `internalList` which is a list of Candidate objects.
 Additionally, it implements the following operations to support the editing of candidates.
@@ -309,6 +311,7 @@ Additionally, it implements the following operations to support the editing of c
 
 These operations are exposed in the `Model` interface as `Model#hasCandidate(Candidate candidate)` and `Model#updateCandidate(Candidate target, Candidate editedCandidate)` respectively.
 
+===== Companies
 The edit mechanism for companies is facilitated by `EditCompanyDescriptor` in `EditCompanyCommand` which creates a new Company object with edited attributes
 and `UniqueCompanyList` which stores the added companies internally as an `internalList` which is a list of Company objects.
 Additionally, it implements the following operations to support the editing of companies.
@@ -318,6 +321,7 @@ Additionally, it implements the following operations to support the editing of c
 
 These operations are exposed in the `Model` interface as `Model#hasCompany(Company company)` and `Model#updateCompany(Company target, Company editedCompany)` respectively.
 
+===== Job Offers
 The edit mechanism for job offers is facilitated by `EditJobOfferDescriptor` in `EditJobDetailsCommand` which creates a new Job Offer object with edited attributes
 and `UniqueJobList` which stores the added job offer internally as an `internalList` which is a list of Job Offer objects.
 Additionally, it implements the following operations to support the editing of job offers.
@@ -327,6 +331,7 @@ Additionally, it implements the following operations to support the editing of j
 
 These operations are exposed in the `Model` interface as `Model#hasJobOffer(JobOffer jobOffer)` and `Model#updateJobOffer(JobOffer target, JobOffer editedJobOffer)` respectively.
 
+[NOTE]
 The editing of all three entities(Candidate, Company, JobOffer) follow the same mechanism.
 
 Given below is an example usage scenario and how the edit mechanism behaves at each step.
