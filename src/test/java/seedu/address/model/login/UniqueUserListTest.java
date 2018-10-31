@@ -30,18 +30,18 @@ public class UniqueUserListTest {
     }
 
     @Test
-    public void contains_personNotInList_returnsFalse() {
+    public void contains_userNotInList_returnsFalse() {
         assertFalse(uniqueUserList.contains(AMY));
     }
 
     @Test
-    public void contains_personInList_returnsTrue() {
+    public void contains_userInList_returnsTrue() {
         uniqueUserList.add(AMY);
         assertTrue(uniqueUserList.contains(AMY));
     }
 
     @Test
-    public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_userWithSameIdentityFieldsInList_returnsTrue() {
         uniqueUserList.add(AMY);
         User editedAmy = new User(new Username("amy"), new Password("pass"));
         assertTrue(uniqueUserList.contains(editedAmy));
@@ -121,7 +121,7 @@ public class UniqueUserListTest {
     }
 
     @Test
-    public void remove_personDoesNotExist_throwsUserNotFoundException() {
+    public void remove_userDoesNotExist_throwsUserNotFoundException() {
         thrown.expect(UserNotFoundException.class);
         uniqueUserList.remove(AMY);
     }
@@ -158,8 +158,8 @@ public class UniqueUserListTest {
     @Test
     public void setUsers_list_replacesOwnListWithProvidedList() {
         uniqueUserList.add(AMY);
-        List<User> personList = Collections.singletonList(BOB);
-        uniqueUserList.setUsers(personList);
+        List<User> userList = Collections.singletonList(BOB);
+        uniqueUserList.setUsers(userList);
         UniqueUserList expectedUniqueUserList = new UniqueUserList();
         expectedUniqueUserList.add(BOB);
         assertEquals(expectedUniqueUserList, uniqueUserList);
