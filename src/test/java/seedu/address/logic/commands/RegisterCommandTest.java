@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
@@ -17,7 +18,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
+import seedu.address.model.user.User;
 import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.UserBuilder;
 
 
 /**
@@ -28,6 +31,13 @@ import seedu.address.testutil.EventBuilder;
 public class RegisterCommandTest {
     private Model model = new ModelManager(getTypicalEventManager(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
+
+    @Before
+    public void setUp() {
+        User user = new UserBuilder().build();
+        model = new ModelManager(getTypicalEventManager(), new UserPrefs());
+        model.logUser(user);
+    }
 
     @Test
     public void execute_unregisteredEventUnfilteredList_success() {
@@ -42,6 +52,7 @@ public class RegisterCommandTest {
         Event registeredEvent = new EventBuilder(eventToRegister).withAddAttendees(currUsername).build();
 
         ModelManager expectedModel = new ModelManager(model.getEventManager(), new UserPrefs());
+        expectedModel.logUser(new UserBuilder().build());
         expectedModel.updateEvent(eventToRegister, registeredEvent);
         expectedModel.commitEventManager();
 
@@ -78,6 +89,7 @@ public class RegisterCommandTest {
         Event eventToRegister = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
         String currUsername = model.getUsername().toString();
         Event registeredEvent = new EventBuilder(eventToRegister).withAddAttendees(currUsername).build();
+        expectedModel.logUser(new UserBuilder().build());
         expectedModel.updateEvent(eventToRegister, registeredEvent);
         expectedModel.commitEventManager();
 
