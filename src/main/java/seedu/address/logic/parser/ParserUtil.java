@@ -240,9 +240,6 @@ public class ParserUtil {
         return year;
     }
 
-
-
-
     /**
      * Parses a {@code String startTime} into a {@code StartTime}.
      * Leading and trailing whitespaces will be trimmed.
