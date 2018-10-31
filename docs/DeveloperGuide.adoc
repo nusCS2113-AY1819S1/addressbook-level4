@@ -436,6 +436,79 @@ and returning false if the current book is Company Book.
 cases of the view of `panelViewPlaceholder`, which is not the case as we introduced another view `shortlistPanel`.
 // end::switchbook[]
 
+// tag::email[]
+=== Email command
+==== Current Implementation
+The email command is facilitated by `EmailInitialiseCommand`, `EmailRecipientsCommand`, `EmailContentsCommand` and `EmailSendCommand`
+classes which extends the `Command` class, and `EmailUtil` attribute in `Model` which stores variables and methods pertaining to the email command
+and the `EmailSettings` class which stores email subject and email body text settings.
+
+._Some of these classes also contain children classes which act as sub-commands:_
+. `EmailRecipientsAddCommand`, `EmailRecipientsNextCommand` extends `EmailRecipientsSelectCommand`.
+. `EmailContentsAddCommand`, `EmailContentsBackCommand` and `EmailContentsNextCommand` extends `EmailContentsSelectCommand`.
+. `EmailSendBackCommand`, `EmailSendPreviewCommand` and `EmailSendSendCommand` extends `EmailSendCommand`.
+
+The email command is a 4-stage process supported by `LogicManager` by keeping track of the `LogicState`.
+
+. `EmailInitialiseCommand`
+. `EmailRecipientsCommand`
+. `EmailContentsCommand`
+. `EmailSendCommand`
+
+Given below is an example usage scenario of how the email command behaves at each step.
+
+. The user launches the application. The application loads email settings from `preferences.json` which is stored in `Model#EmailUtil`.
+
+. The user executes the `email` command. A new `EmailUtil` object is constructed and replaces the `EmailUtil` object in `Model`.
+  `LogicState` is changed to reflect initialisation of the email command and to move it into recipients selection stage
+. The user executes the `add` command for the first time. This calls `EmailRecipientsAddCommand`.
+.. In `EmailRecipientsAddCommand`, `EmailUtil#hasRecipientsAdded` boolean value will be changed to true.
+.. `MainWindow#getCurrentBook()` is called to determine the current book that the user is on and
+   `EmailUtil#areRecipientsCandidates` boolean value will be changed accordingly
+... If recipients are candidates, `EmailUtil#areRecipientsCandidates` will be true.
+... If recipients are companies, `EmailUtil#areRecipientsCandidates` will be false.
+.. Depending on `EmailUtil#areRecipientsCandidates`, the recipient objects are called with `Model#getFilteredCandidateList`
+   or `Model#getFilteredJobList` and are stored in a linked hash set within `EmailUtil`. +
+   Using `LinkedHashSet#add()` boolean return value, it is possible to determine if object added is a duplicate.
+   Duplicates are not added and are noted down inside an `ArrayList` within `EmailRecipientsAddCommand` which will be
+   reflected back to the user.
+. The user executes another `add` command to add more recipients. This calls `EmailRecipientsAddCommand`
+.. If `MainWindow#getCurrentBook()` and `EmailUtil#areRecipientsCandidates` do not match, user will be notified and nothing will be done.
+   This is to prevent adding different objects into the recipients linked hash set.
+.. If `MainWindow#getCurrentBook()` and `EmailUtil#areRecipientsCandidates` match, then adds recipients as seen above.
+. The user executes `next` command. This calls `EmailRecipientsNextCommand` which based on
+  `EmailUtil#areRecipientsCandidates`, switches the current book and changes `LogicState` to select contents phase.
+[NOTE]
+In `EmailContentSelectionCommand` phase, depending on `EmailUtil#areRecipientsCandidates`, the current book will be locked and only
+  commands pertaining to the current book can be used. This is to enforce that recipients and contents must be contrasting.
+. The user executes `add` command. This calls `EmailContentsAddCommand` which adds contents similarly to `EmailRecipientsAddCommand` as seen above.
+. The user executes `back` command. This calls `EmailContentsBackCommand` which switches the current book and changes `LogicState` back to select recipients phase.
+. The user executes `next` command. This calls `EmailRecipientsNextCommand` which switches the current book and changes `LogicState` to select contents phase.
+. The user executes `next` command. This calls `EmailContentsNextCommand` which changes `LogicState` to the send phase.
+. The user executes `preview` command. This calls `EmailSendPreviewCommand`.
+.. This generates a string of the email based on recipients and contents in `EmailUtil` which calls `EventCenter` to post `ShowEmailPreviewEvent`
+   with the email String and shows the string in a new window, `EmailPreview`.
+. The user is satisfied with the preview and executes the `send` command. This generates the email as a `MimeMessage`
+  which is the Java format used for emails and is sent via `EmailUtil#sendMessage`. `LogicState` is reset back to orignal and this marks the end of the email command.
+
+==== Design Considerations
+===== Aspect: Data structure to store recipients and candidates
+
+* **Alternative 1:** Array List
+** Pros: General purpose data structure that will work for this use case
+** Cons: Checking for duplicates is not efficient. Each insertion requires a comparison across all elements in the array.
+
+* **Alternative 2:** Hash Set
+** Pros: Does not allow duplicates and indicates if an object being added is successful or not.
+** Cons: Does not maintain the order in which objects were added in.
+
+* **Alternative 3 (current choice):** Linked Hash Set
+** Pros: Does not allow duplicates, indicates if an object being added is successful or not,
+   and maintains order in which objects were added in.
+** Cons: -
+
+// end::email[]
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
