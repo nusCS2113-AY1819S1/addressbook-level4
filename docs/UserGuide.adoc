@@ -514,7 +514,7 @@ Examples:
 
 * `restore` +
 Restores Student Planner data using local backups in backup paths inside `preferences.json`.
-* `restore github ACCESS_TOKEN_HERE` +
+* `restore github` +
 Restores Student Planner data on GitHub Gists.
 
 ****

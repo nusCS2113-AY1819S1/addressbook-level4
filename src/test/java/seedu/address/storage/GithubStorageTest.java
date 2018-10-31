@@ -23,6 +23,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyExpenseBook;
 import seedu.address.model.UserPrefs;
 
+@DisabledIfEnvironmentVariable(named = "TRAVIS", matches = "true")
 public class GithubStorageTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "GithubStorageTest");
@@ -73,7 +74,6 @@ public class GithubStorageTest {
     }
 
     @Test
-    @DisabledIfEnvironmentVariable(named = "TRAVIS", matches = "true")
     public void readAddressBookContent_validGistIdInvalidContent_throws() throws Exception {
         thrown.expect(NullPointerException.class); //Gist does not contain file named AddressBook.bak
         githubStorage.readContentFromStorage(UserPrefs.TargetBook.AddressBook, TEST_VALID_EXPENSE_BOOK_GIST_ID);
