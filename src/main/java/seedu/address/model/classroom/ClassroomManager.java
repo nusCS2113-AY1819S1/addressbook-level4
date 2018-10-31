@@ -2,7 +2,6 @@ package seedu.address.model.classroom;
 
 import static java.util.Objects.requireNonNull;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -10,6 +9,7 @@ import java.util.stream.Collectors;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.StorageController;
+import seedu.address.model.module.ModuleManager;
 import seedu.address.model.student.StudentManager;
 import seedu.address.storage.adapter.XmlAdaptedClassroom;
 import seedu.address.storage.adapter.XmlAdaptedClassroomAttendance;
@@ -71,7 +71,7 @@ public class ClassroomManager {
         return classroom.getAttendanceList()
                 .stream()
                 .anyMatch(attendance -> attendance.getDate().equalsIgnoreCase(date)
-                            && attendance.getStudentsPresent().contains(matricNo));
+                        && attendance.getStudentsPresent().contains(matricNo));
     }
 
     /**
@@ -85,6 +85,8 @@ public class ClassroomManager {
      * Gets the classroom list from storage and converts it to a Classroom array list
      */
     private void readClassroomList() {
+        ModuleManager moduleManager = ModuleManager.getInstance();
+        StudentManager studentManager = StudentManager.getInstance();
         ArrayList<XmlAdaptedClassroom> xmlClassroomList = StorageController.getClassesStorage();
         ArrayList<XmlAdaptedClassroomAttendance> xmlClassroomAttendanceList =
                 StorageController.getClassAttendanceStorage();
@@ -92,11 +94,19 @@ public class ClassroomManager {
         for (XmlAdaptedClassroom xmlClassroom : xmlClassroomList) {
             try {
                 Classroom classroom = xmlClassroom.toModelType();
-                ArrayList<String> studentsAssigned = new ArrayList<>();
-                for (String matricNo : classroom.getStudents()){
-                    if()
+                if (!moduleManager.doesModuleExist(classroom.getModuleCode().moduleCode)) {
+                    continue;
                 }
-
+                ArrayList<String> studentsAssigned = classroom.getStudents();
+                ArrayList<String> modelStudentsAssigned = new ArrayList<>();
+                classroom.setStudents(modelStudentsAssigned);
+                for (String matricNo : studentsAssigned) {
+                    if (studentManager.doesStudentExistForGivenMatricNo(matricNo)) {
+                        if (!isClassroomFull(classroom)) {
+                            classroom.getStudents().add(matricNo);
+                        }
+                    }
+                }
                 classroomList.add(classroom);
                 readAttendanceList(xmlClassroomAttendanceList, classroom);
             } catch (IllegalValueException ive) {

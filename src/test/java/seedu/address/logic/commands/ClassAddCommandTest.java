@@ -11,6 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -19,11 +20,16 @@ import seedu.address.logic.CommandHistory;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.StorageController;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.classroom.ClassName;
 import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.Enrollment;
+import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleManager;
+import seedu.address.model.module.ModuleName;
+import seedu.address.model.module.exceptions.DuplicateModuleException;
 
 /**
  * Provides a test for the class add command
@@ -33,6 +39,22 @@ public class ClassAddCommandTest {
     public ExpectedException thrown = ExpectedException.none();
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @Before
+    public void setup() {
+        ModuleManager moduleManager = ModuleManager.getInstance();
+        final String moduleCodeStr = "CG1111";
+        final String moduleNameStr = "Computer Engineering Physics";
+        ModuleCode moduleCode = new ModuleCode(moduleCodeStr);
+        ModuleName moduleName = new ModuleName(moduleNameStr);
+        Module module = new Module(moduleCode, moduleName);
+        try {
+            moduleManager.addModule(module);
+        } catch (DuplicateModuleException e) {
+            e.printStackTrace();
+        }
+        moduleManager.saveModuleList();
+    }
 
     @Test
     public void execute() {

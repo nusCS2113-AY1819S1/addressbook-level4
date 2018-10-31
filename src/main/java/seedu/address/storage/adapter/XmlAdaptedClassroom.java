@@ -1,6 +1,5 @@
 package seedu.address.storage.adapter;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -13,7 +12,6 @@ import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.Enrollment;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.person.MatricNo;
-import seedu.address.model.person.Person;
 
 /**
  * JAXB-friendly adapted version of the Classroom.
@@ -97,9 +95,7 @@ public class XmlAdaptedClassroom {
 
         for (String matricNo : studentList) {
             if (MatricNo.isValidMatricNo(matricNo)) {
-                if (modelStudentList.size() < Integer.parseInt(maxEnrollment)) {
-                    modelStudentList.add(matricNo);
-                }
+                modelStudentList.add(matricNo);
             }
         }
 
