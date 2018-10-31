@@ -1,7 +1,16 @@
 package seedu.address.ui;
 
+import java.io.File;
+import java.io.StringWriter;
 import java.net.URL;
 import java.util.logging.Logger;
+
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 import com.google.common.eventbus.Subscribe;
 
@@ -20,7 +29,6 @@ import seedu.address.commons.events.model.OpenStockListVersionEvent;
 public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
-    public static final String FILE_PAGE = "fileaspage.html";
     public static final String SEARCH_PAGE_URL =
             "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
     private static final String FXML = "BrowserPanel.fxml";
@@ -56,9 +64,16 @@ public class BrowserPanel extends UiPart<Region> {
      * Loads the specified .xml file as a .html page.
      */
     private void loadFileAsPage(String fileName) {
-        URL fileAsPage = MainApp.class.getResource("/docs/" + FILE_PAGE);
-        loadPage(fileAsPage.toExternalForm() + "?name=" + fileName);
+        File jarPath = new File(MainApp.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+        String filePath = jarPath.getParent();
+        String pathXsl = getClass().getResource("/docs/template.xsl").toString();
+        try {
+            transformXml((filePath + "\\versions\\" + fileName), pathXsl);
+        } catch (Exception e) {
+            //handle exception
+        }
     }
+
 
     /**
      * Frees resources allocated to the browser.
@@ -70,7 +85,28 @@ public class BrowserPanel extends UiPart<Region> {
     @Subscribe
     private void handleOpenStockListVersionEvent (OpenStockListVersionEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadDefaultPage();
         loadFileAsPage(event.fileName);
+    }
+
+    /**
+     * Transforms the given .xml file with the given .xsl template and outputs onto the browser
+     * @param pathXml
+     * @param pathXsl
+     * @throws Exception
+     */
+    private void transformXml (String pathXml, String pathXsl) throws Exception {
+        Source source = new StreamSource(pathXml);
+        Source xsl = new StreamSource(pathXsl);
+        final StreamResult output = new StreamResult(new StringWriter());
+        TransformerFactory factory = TransformerFactory.newInstance();
+        Transformer transformer = factory.newTransformer(xsl);
+        transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+        transformer.setOutputProperty(OutputKeys.METHOD, "html");
+        transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount",
+                "4");
+        transformer.transform(source, output);
+        browser.getEngine().loadContent(output.getWriter().toString());
     }
 }
