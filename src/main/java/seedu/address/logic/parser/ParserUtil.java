@@ -27,7 +27,12 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
+    public static final String MONTH_VALIDATION_REGEX = "0[1-9]|1[012]";
+    public static final String YEAR_VALIDATION_REGEX = "\\d{4}";
+
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_MONTH = "Input for month is not valid or according to MM format.";
+    public static final String MESSAGE_INVALID_YEAR = "Input for year is not valid or according to YYYY format.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -204,6 +209,38 @@ public class ParserUtil {
         }
         return new EventDate(trimmedDate);
     }
+
+    /**
+     * Parses a {@code String month} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code month} is invalid.
+     */
+    public static String parseMonth(String month) throws ParseException {
+        requireNonNull(month);
+        String trimmedDate = month.trim();
+        if (!trimmedDate.matches(MONTH_VALIDATION_REGEX)) {
+            throw new ParseException(MESSAGE_INVALID_MONTH);
+        }
+        return month;
+    }
+
+    /**
+     * Parses a {@code String year} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code year} is invalid.
+     */
+    public static String parseYear(String year) throws ParseException {
+        requireNonNull(year);
+        String trimmedDate = year.trim();
+        if (!trimmedDate.matches(YEAR_VALIDATION_REGEX)) {
+            throw new ParseException(MESSAGE_INVALID_YEAR);
+        }
+        return year;
+    }
+
+
 
 
     /**
