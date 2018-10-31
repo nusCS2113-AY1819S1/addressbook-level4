@@ -13,14 +13,14 @@ ifndef::env-github[]
 image::images/Ui.png[width="600"]
 endif::[]
 
-* This is a desktop Project Management application designed for project-based companies. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
+* This is a desktop Event Management application designed for project-based companies. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
 * We provide an all-in-one platform that saves our consumers’ time and money. Our customers will feel at ease communicating with one another in their project team setting.
 * Managers of project team are now able to oversee their employees and overall project easily and conveniently.
 
 * Features:
-** Project teams management.
 ** Employees management.
 ** Department management.
+** Event management.
 
 == Site Map
 
