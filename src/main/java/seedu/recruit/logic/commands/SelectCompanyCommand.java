@@ -22,7 +22,9 @@ public class SelectCompanyCommand extends Command {
 
     public static final String COMMAND_WORD = "selectCompany";
 
-    public static final String COMMAND_LOGIC_STATE = "SelectCompany";
+    public static final String COMMAND_LOGIC_STATE_FOR_SHORTLIST = "SelectCompanyForShortlist";
+
+    public static final String COMMAND_LOGIC_STATE_FOR_SHORTLIST_DELETE = "SelectCompanyForShortlistDelete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Selects the company identified by the index number used in the displayed company list.\n"
@@ -30,6 +32,9 @@ public class SelectCompanyCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SELECT_COMPANY_SUCCESS = "Selected Company: %1$s\n";
+
+    public static final String MESSAGE_SELECT_COMPANY_SUCCESS_NEXT_STEP =
+            "Please select a job offer.\n";
 
     private static Company selectedCompany;
 
@@ -56,9 +61,19 @@ public class SelectCompanyCommand extends Command {
         selectedCompany = filteredCompanyList.get(targetIndex.getZeroBased());
 
         if (ShortlistCandidateInitializationCommand.isShortlisting()) {
-            LogicManager.setLogicState(SelectJobCommand.COMMAND_LOGIC_STATE);
+            EventsCenter.getInstance().post(new JumpToCompanyListRequestEvent(targetIndex));
+            LogicManager.setLogicState(SelectJobCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST);
             return new CommandResult(String.format(MESSAGE_SELECT_COMPANY_SUCCESS,
-                    targetIndex.getOneBased()) + SelectJobCommand.MESSAGE_USAGE);
+                    targetIndex.getOneBased()) + MESSAGE_SELECT_COMPANY_SUCCESS_NEXT_STEP
+                    + SelectJobCommand.MESSAGE_USAGE);
+        }
+
+        if (DeleteShortlistedCandidateInitializationCommand.isDeleting()) {
+            EventsCenter.getInstance().post(new JumpToCompanyListRequestEvent(targetIndex));
+            LogicManager.setLogicState(SelectJobCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST_DELETE);
+            return new CommandResult(String.format(MESSAGE_SELECT_COMPANY_SUCCESS,
+                    targetIndex.getOneBased()) + MESSAGE_SELECT_COMPANY_SUCCESS_NEXT_STEP
+                    + SelectJobCommand.MESSAGE_USAGE);
         }
 
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());

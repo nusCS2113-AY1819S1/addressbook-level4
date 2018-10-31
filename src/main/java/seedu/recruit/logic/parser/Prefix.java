@@ -7,11 +7,12 @@ package seedu.recruit.logic.parser;
 public class Prefix {
     private final String prefix;
 
-    public Prefix(String prefix) { this.prefix = prefix; }
+    public Prefix(String prefix) {
+        this.prefix = prefix;
+    }
 
     public String getPrefix() {
-        return prefix;
-    }
+        return prefix; }
 
     public String toString() {
         return getPrefix();
@@ -32,6 +33,7 @@ public class Prefix {
         }
 
         Prefix otherPrefix = (Prefix) obj;
+
         return otherPrefix.getPrefix().equals(getPrefix());
     }
 }

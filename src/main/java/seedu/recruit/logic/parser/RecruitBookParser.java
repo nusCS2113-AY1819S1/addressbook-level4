@@ -20,6 +20,8 @@ import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.DeleteCandidateCommand;
 import seedu.recruit.logic.commands.DeleteCompanyCommand;
 import seedu.recruit.logic.commands.DeleteJobOfferCommand;
+import seedu.recruit.logic.commands.DeleteShortlistedCandidateCommand;
+import seedu.recruit.logic.commands.DeleteShortlistedCandidateInitializationCommand;
 import seedu.recruit.logic.commands.EditCandidateCommand;
 import seedu.recruit.logic.commands.EditCompanyCommand;
 import seedu.recruit.logic.commands.EditJobDetailsCommand;
@@ -98,10 +100,15 @@ public class RecruitBookParser {
                 return new EmailParser().parseCommand(commandWord, arguments, state, emailUtil);
 
             case ShortlistCandidateCommand.COMMAND_LOGIC_STATE:
-            case SelectCompanyCommand.COMMAND_LOGIC_STATE:
-            case SelectJobCommand.COMMAND_LOGIC_STATE:
+            case SelectCompanyCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST:
+            case SelectJobCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST:
             case SelectCandidateCommand.COMMAND_LOGIC_STATE:
                 return new ShortlistParser().parseCommand(commandWord, arguments, state);
+
+            case DeleteShortlistedCandidateCommand.COMMAND_LOGIC_STATE:
+            case SelectCompanyCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST_DELETE:
+            case SelectJobCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST_DELETE:
+                return new DeleteShortlistedCandidateParser().parseCommand(commandWord, arguments, state);
 
             default:
                 LogicManager.setLogicState("primary");
@@ -144,6 +151,9 @@ public class RecruitBookParser {
 
             case DeleteJobOfferCommand.COMMAND_WORD:
                 return new DeleteJobOfferCommandParser().parse(arguments);
+
+            case DeleteShortlistedCandidateInitializationCommand.COMMAND_WORD:
+                return new DeleteShortlistedCandidateInitializationCommand();
 
             case ClearCandidateBookCommand.COMMAND_WORD:
                 return new ClearCandidateBookCommand();

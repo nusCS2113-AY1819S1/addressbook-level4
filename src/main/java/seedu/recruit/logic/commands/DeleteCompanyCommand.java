@@ -15,7 +15,7 @@ import seedu.recruit.model.Model;
 import seedu.recruit.model.company.Company;
 
 /**
- * Deletes a company identified using it's displayed index from the recruit book.
+ * Deletes a company identified using its displayed index from the recruit book.
  */
 
 public class DeleteCompanyCommand extends Command {

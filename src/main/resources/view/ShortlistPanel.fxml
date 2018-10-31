@@ -1,21 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox id="cardPane" fx:id="cardPane" prefHeight="400.0" prefWidth="672.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
-    <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.5" VBox.vgrow="ALWAYS">
-        <StackPane fx:id="leftPlaceholder" prefWidth="340" >
-            <padding>
-                <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
-        </StackPane>
-        <StackPane fx:id="rightPlaceholder" prefWidth="340" >
-            <padding>
-                <Insets top="10" bottom="10" />
-            </padding>
-        </StackPane>
-    </SplitPane>
+   <HBox prefHeight="100.0" prefWidth="200.0">
+      <children>
+         <AnchorPane prefHeight="398.0" prefWidth="243.0">
+            <children>
+               <Label layoutX="14.0" layoutY="23.0" text="Candidate Book:" />
+                 <ListView fx:id="leftPlaceholder" layoutY="50.0" prefHeight="348.0" prefWidth="240.0" />
+            </children>
+         </AnchorPane>
+         <AnchorPane prefHeight="398.0" prefWidth="435.0">
+            <children>
+                 <StackPane fx:id="rightPlaceholder" layoutX="34.0" prefHeight="398.0" prefWidth="459.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <padding>
+                         <Insets bottom="10" top="10" />
+                     </padding>
+                 </StackPane>
+            </children>
+         </AnchorPane>
+      </children>
+   </HBox>
 </VBox>

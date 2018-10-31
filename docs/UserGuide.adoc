@@ -110,7 +110,8 @@ and does the switch to the other book for you when you enter the `switch` comman
 .GUI of Switch Book on Menu Bar
 image::switchBook.png[width="390"]
 
-=== Adding a candidate / company / job  : `addc` `addC`
+// tag::add[]
+=== Adding a candidate / company / job  : `addc` `addC` `addj`
 
 ==== Adds a candidate to the RecruitBook
 Format: `addc` +
@@ -123,16 +124,8 @@ Entering this command will prompt you the following: +
 Examples:
 
 * `n/John Doe g/M x/18 p/91238123 e/johndoe@gmail.com a/123, Central Boulevard, #01-111, 600123 j/WAITER h/A LEVEL s/1200`
-* `n/Mary Loe g/M x/18 p/82238123 e/maryloe@gmail.com a/113, South Boulevard, #01-111, 600123 j/WAITER h/O LEVEL s/NA`
+* `n/Mary Loe g/M x/18 p/82238123 e/maryloe@gmail.com a/113, South Boulevard, #01-111, 600123 j/WAITER h/O LEVEL s/1000`
 
-After keying in the details, you will be further prompted for details of job experience: +
-*`Enter job experience (if any) of the candidate in the following format:`* +
-`j/JOB y/YEARS_OF_EXPERIENCE c/COMPANY`
-
-Examples:
-
-* `j/Store Manager y/1 c/Mcdonalds`
-* `j/Cashier y/2 c/KFC`
 
 ==== Adds a company to the RecruitBook
 Format: `addC c/UNIQUE_COMPANY_NAME a/ADDRESS e/EMAIL p/PHONE` +
@@ -151,12 +144,15 @@ Entering this command will prompt you the following: +
 `(Enter 'cancel' to stop adding jobs)` +
 `Example: c/McDonalds j/cashier g/M xr/20-30 h/O levels s/1200`
 
-Note: COMPANY specified has to be added to RecruitBook first!
+[NOTE]
+COMPANY specified has to be added to RecruitBook first!
 
 Examples:
 
 *	`c/Subway j/Cashier g/M xr/20-30 h/O levels s/1200`
 *	`c/KFC j/Cook g/F xr/20-30 h/O levels s/1400`
+
+// end::add[]
 
 === Editing a candidate / company / job : `edit`
 
@@ -196,6 +192,7 @@ Examples:
 *	`editj 1 x/20-30` +
 (Edits the `MIN_AGE-MAX_AGE` attribute of the 1st job offer to be of 20 to 30 years of age)
 
+// tag::delete[]
 === Deleting candidates / companies / job offers : `delete`
 
 ==== Deleting candidate(s)
@@ -242,6 +239,8 @@ Step 1. `listj` +
 
 Step 2. `deletej 5-4,6` +
 (Deletes the 4th, 5th and 6th job in the job list)
+
+// end::delete[]
 
 === Listing details of candidates / companies / jobs: `listc` `listC`
 
@@ -385,66 +384,83 @@ Format: `shortlist`
 . *Confirm the details*
 .. Type `confirm` and press kbd:[Enter] to confirm.
 
+// tag::email[]
 === Sending emails : `email`
 
 Sends an email to specified candidates about specified job offers OR
 to specified companies about specified candidates that are suitable for specified job offers. +
 
-NOTE: Only Gmail is supported at this point in time.
-
-NOTE: If it is your first time running RecruitBook, a Gmail log in page will open on your browser.
-The Gmail account that you log in with will be the email account used to send emails.
+[NOTE]
+Only Gmail is supported at this point in time. +
+If it is your first time running RecruitBook, a Gmail log in page will open on your browser.
+The Gmail account that you log in with will be the email account used to send emails. +
+To use another Gmail account, delete `tokens` folder which is in the same directory of the
+program.
 
 Format: `email`
 
-._Email command is a 4-step command_
-.   *Initialisation.* Type `email` to initialise the email command.
-.   *Choose your recipients.* On the RecruitBook application, what's shown on the main window
-    will be taken in as the recipients. +
-        ..    You can use commands such as `listc`, `filterc`, `findc` to change the candidate shown.
-        ..    You can also use commands such as `listj`, `filterj`, `findj` to change the job offer shown.
-        ..    Type `next` to move on to the next step.
+[NOTE]
+Email process is a 4-stage process. To exit from this process, enter `cancel` command as explained in <<Exits from any intermediate command: `cancel`>>.
+
+. *Initialisation.* Type `email` and press kbd:[Enter] to initialise the email command.
+. *Choose your recipients.* On the RecruitBook application, what's shown on the main window
+   will be taken in as the recipients. +
+.. You can use commands such as `listc`, `filterc`, `findc` to change the candidate shown.
+.. You can also use commands such as `listj`, `filterj`, `findj` to change the job offer shown.
+.. Type `next` and press kbd:[Enter] to move on to the next step.
 
 [start=3]
-.   *Choose your contents.* On the RecruitBook application, what's shown on the main window
-    will be taken in as contents. +
-        ..  Depending on what what were the recipients, contents can only be the contrasting +
-            eg. If recipients were candidates, only job offers can be the contents and vice versa. +
-        ..  This is enforced by the program by limiting commands available in contents selection.
-        ..  Type `next` to move on to the next step.
+. *Choose your contents.* On the RecruitBook application, what's shown on the main window
+   will be taken in as contents.
+.. Depending on what what were the recipients, contents can only be the contrasting +
+   eg. If recipients were candidates, only job offers can be the contents and vice versa.
+.. This is enforced by the program by limiting commands available in contents selection.
+.. Type `next` and press kbd:[Enter] to move on to the next step.
 
 [start=4]
-.   *Sending your email.*  This step is a confirmation step before you actually send the email. +
-    ..  Type `preview` to preview your email. +
-    ..  Type `send` to send the email. +
+. *Sending your email.*  This step is a confirmation step before you actually send the email.
+.. Type `preview` and press kbd:[Enter] to preview your email.
+.. Type `send` and press kbd:[Enter] to send the email.
 
-._Other notes_
-.   `back` can be used to go back to the previous step.
-.   `cancel` can be used to cancel the email command entirely.
-.   Adding duplicate candidate/job offers will be caught and will not be double counted.
+Other notes
+
+. `back` can be used to go back to the previous step.
+. `cancel` can be used to cancel the email command entirely.
+. Adding duplicate candidate/job offers will be caught and will not be double counted.
+
+You can also change the email subject and email body text in `preference.json`. +
+Restart RecruitBook for changes to take effect.
+
+. `subjectCandidateAsRecipient` -> Email subject if recipients of the email are candidates and contents of the email are job offers
+. `subjectCompanyAsRecipient` -> Email subject if recipients of the email are companies and contents of the email are candidates.
+. `bodyTextCandidateAsRecipient` -> Body text of email if recipients of the email are candidates and contents of the email are job offers
+. `bodyTextCompanyAsRecipient` -> Body text of email if recipients of the email are companies and contents of the email are candidates.
 
 Examples:
 
 ._You wish to send an email to candidates whose asking salary is $1,000 about being a cashier_
-.   `email` +
-    (Initialise email command)
-.   `filterc /s$1000` +
-    (On CandidateBook)
-.   `next` +
-    (To select recipients)
-.   `findj /jCashier` +
-    (On CompanyBook)
-.   `next` +
-    (To select contents)
-.   `preview` +
-    (To preview email)
-.   `send` +
-    (To send the email)
+. `email` +
+  (Initialise email command)
+. `filterc /s$1000` +
+  (On CandidateBook)
+. `next` +
+  (To select recipients)
+. `findj /jCashier` +
+  (On CompanyBook)
+. `next` +
+  (To select contents)
+. `preview` +
+  (To preview email)
+. `send` +
+  (To send the email)
+
+// end::email[]
 
 === Exiting from any intermediate command: `cancel`
 
 Format : `cancel`
 
+// tag::clear[]
 === Clearing all entries : `clear`
 
 Clears all entries from the Candidate Book. +
@@ -452,6 +468,8 @@ Format: `clearc`
 
 Clears all entries from the Company Book. +
 Format: `clearC`
+
+// end::clear[]
 
 === Exiting the program : `exit`
 
