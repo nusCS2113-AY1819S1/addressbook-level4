@@ -105,11 +105,6 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
-        public int deleteListRecordSameDate(List<Record> targetList, Date targetDate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
 
         @Override
         public void updateRecord(Record target, Record editedRecord) {

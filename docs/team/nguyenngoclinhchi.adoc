@@ -43,7 +43,7 @@ FinancialPlanner - Level 4 is a desktop expense book application used for teachi
 ** What it does: helps the user to read the Excel sheet and add all the data, store them in Financial Planner.
 ** Justification: This implementation will help the user transfer all the data from Excel sheet to Financial Planner automatically without typing data again.
 
-=== `ongoing` *Major enhancement #5*: added the ability to draw the line chart about income(money received) and outcome(money spent) of specific period:
+=== `completed` *Major enhancement #5*: added the ability to draw the line chart about income(money received) and outcome(money spent) of specific period:
 
 ** What it does: helps the user to have a visual line chart in the Excel sheet after they export/achieve the records into Excel sheet.
 ** Justification: This implementation will help the user to have a good visual plan for the money they spent or receive. This line chart will be automatically drawn after they export or achieve the data into Excel sheet. Hence, this will help to save time for the user.
@@ -69,7 +69,6 @@ FinancialPlanner - Level 4 is a desktop expense book application used for teachi
 _{you can add/remove categories in the list above}_
 
 == Contributions to the User Guide
-
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._

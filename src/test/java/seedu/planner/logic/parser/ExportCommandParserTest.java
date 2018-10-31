@@ -22,13 +22,13 @@ public class ExportCommandParserTest {
         Date endDate = TypicalRecords.TYPICAL_END_DATE;
         DirectoryPath directoryPath = DirectoryPath.HOME_DIRECTORY;
 
-        CommandParserTestUtil.assertParseFailure(parser, "3A-3B-19C9    ",
+        CommandParserTestUtil.assertParseFailure(parser, "d/ 3A-3B-19C9    ",
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ExportExcelCommand.MESSAGE_USAGE));
 
-        CommandParserTestUtil.assertParseFailure(parser, "3A-3B-1999 13-4-2020",
+        CommandParserTestUtil.assertParseFailure(parser, "d/ 3A-3B-1999 13-4-2020",
                 String.format(Date.MESSAGE_DATE_CONSTRAINTS));
 
-        CommandParserTestUtil.assertParseFailure(parser, "31-03-1999 31-04-2019 31-12-2020",
+        CommandParserTestUtil.assertParseFailure(parser, "d/ 31-03-1999 31-04-2019 31-12-2020",
                 String.format(
                         Messages.MESSAGE_INVALID_COMMAND_FORMAT + Messages.MESSAGE_INVALID_DATE_REQUIRED,
                         ExportExcelCommand.MESSAGE_USAGE));
@@ -54,35 +54,26 @@ public class ExportCommandParserTest {
         assertParseSuccess(parser,
                 "",
                 expectedExportExcelCommand_1);
-        //existing PREFIX_DATE
-        assertParseSuccess(parser,
-                WHITE_SPACE + PREFIX_DATE.getPrefix() + WHITE_SPACE + WHITE_SPACE,
-                expectedExportExcelCommand_1);
-        //existing PREFIX_DIRECTORY
-        assertParseSuccess(parser,
-                WHITE_SPACE + WHITE_SPACE + PREFIX_DIR.getPrefix() + WHITE_SPACE,
-                expectedExportExcelCommand_1);
-        //existing PREFIX_DATE and PREFIX_DIRECTORY
-        assertParseSuccess(parser,
-                WHITE_SPACE + PREFIX_DATE.getPrefix() + WHITE_SPACE + WHITE_SPACE
-                        + PREFIX_DIR.getPrefix() + WHITE_SPACE,
-                expectedExportExcelCommand_1);
 
-        ExportExcelCommand expectedExportExcelCommand_2_1 = new ExportExcelCommand(new Date(startDate), new Date(endDate));
+        ExportExcelCommand expectedExportExcelCommand_2_1 =
+                new ExportExcelCommand(new Date(startDate), new Date(endDate));
+
         // no leading and trailing whitespaces
         assertParseSuccess(parser,
-                WHITE_SPACE + PREFIX_DATE + startDate + " " + endDate + " ",
-                expectedExportExcelCommand_2_1);
+                WHITE_SPACE + PREFIX_DATE + WHITE_SPACE + startDate + WHITE_SPACE + endDate + WHITE_SPACE,
+                expectedExportExcelCommand_1);
 
         assertParseSuccess(parser,
                 WHITE_SPACE + PREFIX_DATE + WHITE_SPACE + startDate + WHITE_SPACE + endDate,
-                expectedExportExcelCommand_2_1);
+                expectedExportExcelCommand_1);
 
-        ExportExcelCommand expectedExportExcelCommand_2_2 = new ExportExcelCommand(new Date(startDate), new Date(startDate));
+        ExportExcelCommand expectedExportExcelCommand_2_2 =
+                new ExportExcelCommand(new Date(startDate), new Date(startDate));
         // no leading and trailing whitespaces only 1 date
         assertParseSuccess(parser,
                 WHITE_SPACE + PREFIX_DATE + startDate,
                 expectedExportExcelCommand_2_2);
+
         // multiple whitespaces between keywords only 1 date
         assertParseSuccess(parser,
                 WHITE_SPACE + PREFIX_DATE + WHITE_SPACE + startDate,

@@ -1,6 +1,7 @@
 package seedu.planner.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.planner.commons.util.ExcelUtil.setPathFile;
 import static seedu.planner.logic.commands.ExportExcelCommand.exportDataIntoExcelSheetWithGivenRecords;
 import static seedu.planner.model.Model.PREDICATE_SHOW_ALL_RECORDS;
 
@@ -15,9 +16,12 @@ import seedu.planner.logic.CommandHistory;
 import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.DirectoryPath;
 import seedu.planner.model.Model;
+import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
+import seedu.planner.model.summary.SummaryByDateList;
+import seedu.planner.ui.SummaryEntry;
 
 /**
  * Achieve the records into Excel file and then deletes all the records exported.
@@ -82,14 +86,22 @@ public class AchieveCommand extends Command {
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(this);
         model.updateFilteredRecordList(predicate);
+        ReadOnlyFinancialPlanner financialPlanner = model.getFinancialPlanner();
+        SummaryByDateList summaryList = new SummaryByDateList(financialPlanner.getRecordList(), predicate);
         List<Record> recordList = model.getFilteredRecordList();
+        List<SummaryEntry> daySummaryEntryList = summaryList.getSummaryList();
         String nameFile = ExcelUtil.setNameExcelFile(startDate, endDate);
         String message;
-        if (exportDataIntoExcelSheetWithGivenRecords(recordList, null, startDate, endDate, nameFile, directoryPath)) {
-            message = String.format(Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY,
-                    nameFile, directoryPath);
+        String filePath = setPathFile(nameFile, directoryPath);
+        if (!ExcelUtil.checkIfFileOpen(filePath)) {
+            if (exportDataIntoExcelSheetWithGivenRecords(recordList, daySummaryEntryList, filePath)) {
+                message = String.format(Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY
+                        + Messages.MESSAGE_ACHIEVE_SUCCESSFULLY, nameFile, directoryPath);
+            } else {
+                message = Messages.MESSAGE_ACHIEVE_COMMAND_ERRORS;
+            }
         } else {
-            message = Messages.MESSAGE_NO_RECORDS_TO_ACHIEVE;
+            message = Messages.MESSAGE_ACHIEVE_COMMAND_ERRORS;
         }
         model.deleteListRecord(recordList);
         model.commitFinancialPlanner();
@@ -101,8 +113,6 @@ public class AchieveCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof AchieveCommand // instanceof handles nulls
                 && predicate.equals(((AchieveCommand) other).predicate)
-                && startDate.equals(((AchieveCommand) other).startDate)
-                && endDate.equals(((AchieveCommand) other).startDate)
                 && directoryPath.equals(((AchieveCommand) other).directoryPath)); // state check
     }
 }

@@ -126,6 +126,7 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         requireNonNull(editedRecord);
         records.setRecord(target, editedRecord);
     }
+
     /**
      * Removes {@code key} from this {@code FinancialPlanner}.
      * {@code key} must exist in the financial planner.
@@ -135,21 +136,12 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     }
 
     /**
-     * Removes {@code records} from this {@code Financial Planner}
-     * {@code records} must exist in the Financial Planner.
-     * That means that all the Records in the list must exist in the Finacial Planner.
+     * Removes {@code records} from this {@code FinancialPlanner}.
+     * {@code records} must exist in the financial planner.
      */
-    public int removeRecordsSameDate(List<Record> records, Date targetDate) {
-        int count = 0;
-        for (Record record : records) {
-            if (record.getDate().equals(targetDate)) {
-                removeRecord(record);
-                count++;
-            }
-        }
-        return count;
+    public void removeListRecord(List<Record> recordList) {
+        records.removeListRecord(recordList);
     }
-
     /**
      * Sorts the records in this {@code FinancialPlanner}.
      */

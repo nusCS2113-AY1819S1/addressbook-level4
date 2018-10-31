@@ -2,6 +2,7 @@ package seedu.planner.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.planner.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.planner.model.DirectoryPath.HOME_DIRECTORY_STRING;
 import static seedu.planner.testutil.TypicalRecords.getTypicalFinancialPlanner;
 
 import java.util.Arrays;
@@ -34,7 +35,7 @@ public class ExportExcelCommandTest {
         Date startDate_2 = TypicalRecords.TYPICAL_START_DATE1;
         Date endDate_1 = TypicalRecords.TYPICAL_END_DATE;
         Date endDate_2 = TypicalRecords.TYPICAL_END_DATE1;
-        String directoryPath = DirectoryPath.HOME_DIRECTORY_STRING;
+        String directoryPath = HOME_DIRECTORY_STRING;
         String directoryPath1 = DirectoryPath.WORKING_DIRECTORY_STRING;
 
         ExportExcelCommand exportExcelCommand_1_1 = new ExportExcelCommand();
@@ -78,9 +79,8 @@ public class ExportExcelCommandTest {
     public void execute_zeroRecordFound_noRecordFound() {
         String nameFile = ExcelUtil.setNameExcelFile(
                 TypicalRecords.TYPICAL_START_DATE1, TypicalRecords.TYPICAL_END_DATE1);
-        String directoryPath = DirectoryPath.HOME_DIRECTORY_STRING;
         ExportExcelCommand command = new ExportExcelCommand(
-                TypicalRecords.TYPICAL_START_DATE1, TypicalRecords.TYPICAL_END_DATE1, directoryPath);
+                TypicalRecords.TYPICAL_START_DATE1, TypicalRecords.TYPICAL_END_DATE1, HOME_DIRECTORY_STRING);
         String expectedMessage;
         expectedModel.updateFilteredRecordList(new DateIsWithinIntervalPredicate(
                 TypicalRecords.TYPICAL_START_DATE1, TypicalRecords.TYPICAL_END_DATE1));
@@ -90,7 +90,7 @@ public class ExportExcelCommandTest {
                     Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY,
                     nameFile, DirectoryPath.HOME_DIRECTORY.getDirectoryPathValue());
         } else {
-            expectedMessage = Messages.MESSAGE_NO_RECORDS_TO_EXPORT;
+            expectedMessage = Messages.MESSAGE_EXPORT_COMMAND_ERRORS;
         }
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredRecordList());
@@ -100,12 +100,10 @@ public class ExportExcelCommandTest {
     public void execute_multipleRecordsFound() {
         String nameFile = ExcelUtil.setNameExcelFile(
                 TypicalRecords.TYPICAL_START_FAR_DATE, TypicalRecords.TYPICAL_END_FAR_DATE);
-        String directoryPath = DirectoryPath.HOME_DIRECTORY_STRING;
         String expectedMessage = String.format(
-                Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY,
-                nameFile, DirectoryPath.HOME_DIRECTORY.getDirectoryPath().getDirectoryPathValue());
+                Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY, nameFile, HOME_DIRECTORY_STRING);
         ExportExcelCommand command = new ExportExcelCommand(
-                TypicalRecords.TYPICAL_START_FAR_DATE, TypicalRecords.TYPICAL_END_FAR_DATE, directoryPath);
+                TypicalRecords.TYPICAL_START_FAR_DATE, TypicalRecords.TYPICAL_END_FAR_DATE, HOME_DIRECTORY_STRING);
         expectedModel.updateFilteredRecordList(new DateIsWithinIntervalPredicate(
                 TypicalRecords.TYPICAL_START_FAR_DATE, TypicalRecords.TYPICAL_END_FAR_DATE));
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);

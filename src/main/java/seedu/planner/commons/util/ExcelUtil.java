@@ -1,7 +1,6 @@
 package seedu.planner.commons.util;
 
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_TAG;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,12 +12,10 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Chart;
 import org.apache.poi.ss.usermodel.ClientAnchor;
 import org.apache.poi.ss.usermodel.Drawing;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.charts.AxisCrosses;
 import org.apache.poi.ss.usermodel.charts.AxisPosition;
@@ -67,17 +64,19 @@ public class ExcelUtil {
     private static final int STARTING_CURRENCY = 2;
     private static final char MINUS_SIGN_CHAR = '-';
     private static final char PLUS_SIGN_CHAR = '+';
+    private static final char CURRENCY_CHAR = '$';
     private static final Double CHANGE_TO_DOUBLE = 1.0;
     private static final String PLUS_SIGN_STRING = "+";
     private static final String MINUS_SIGN_STRING = "-";
+    private static final String CURRENCY_STRING = "$";
     private static final String WHITE_SPACE = " ";
     private static final String NAME_TITLE = "NAME";
     private static final String DATE_TITLE = "DATE";
-    private static final String MONEY_TITLE = "MONEY SPENT/RECEIVED";
+    private static final String MONEY_TITLE = "MONEY";
     private static final String TAG_TITLE = "TAGS";
-    private static final String INCOME_TITLE = "TOTAL INCOME";
-    private static final String OUTCOME_TITLE = "TOTAL EXPENSE";
-    private static final String TOTAL_MONEY = "NET MONEYFLOW";
+    private static final String INCOME_TITLE = "INCOME";
+    private static final String OUTCOME_TITLE = "EXPENSE";
+    private static final String TOTAL_MONEY = "TOTAL";
     private static final String TAG_SEPARATOR = " ... ";
 
     private static Logger logger = LogsCenter.getLogger(ExcelUtil.class);
@@ -92,16 +91,21 @@ public class ExcelUtil {
             if (!DirectoryPath.isValidFilePath(filePath)) {
                 throw new ParseException(Messages.MESSAGE_UNREALISTIC_DIRECTORY);
             }
-
-            FileInputStream file = new FileInputStream(new File(filePath));
-            XSSFWorkbook workbook = new XSSFWorkbook(file);
-
-            CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setWrapText(true);
-            cellStyle.setAlignment(HorizontalAlignment.CENTER);
+            FileInputStream targetFile = new FileInputStream(new File(filePath));
+            XSSFWorkbook workbook = new XSSFWorkbook(targetFile);
+            File filexssf = new File(filePath);
+            File filexssfCopy = new File(filePath);
+            if (filexssf.renameTo(filexssfCopy)) {
+                logger.info("READ EXCEL: FILE CLOSED");
+            } else {
+                logger.info("READ EXCEL: FILE OPENED");
+                throw new ParseException(Messages.MESSAGE_FILE_OPENED);
+            }
 
             boolean isRightSheet = true;
+
             List<Record> records = new ArrayList<>();
+
             workbook.setMissingCellPolicy(Row.MissingCellPolicy.RETURN_BLANK_AS_NULL);
 
             for (int sn = STARTING_SHEET; sn < workbook.getNumberOfSheets(); sn++) {
@@ -122,7 +126,6 @@ public class ExcelUtil {
 
                     for (int cn = row.getFirstCellNum(); cn < row.getLastCellNum(); cn++) {
                         Cell cell = row.getCell(cn);
-                        cell.setCellStyle(cellStyle);
                         if (cn == row.getFirstCellNum() + FIRST_COLUMN) {
                             nameString = retrieveDataFromOneRow(row, cell, FIRST_COLUMN);
                         } else if (cn == row.getFirstCellNum() + SECOND_COLUMN) {
@@ -133,8 +136,6 @@ public class ExcelUtil {
                             tagsString = retrieveDataFromOneRow(row, cell, FOURTH_COLUMN);
                         }
                     }
-                    logger.info(String.format("RECORD: %1$s %2$s %3$s %4$s",
-                            nameString, dateString, moneyString, tagsString));
                     if (nameString == null || dateString == null || moneyString == null) {
                         throw new ParseException(Messages.MESSAGE_INVALID_ENTRY_EXCEL_FILE);
                     }
@@ -161,16 +162,14 @@ public class ExcelUtil {
     public static void writeExcelSheetIntoDirectory (List<Record> recordList,
                                                      List<SummaryEntry> daySummaryEntryList,
                                                      XSSFSheet recordDataSheet, XSSFSheet summaryDataSheet,
-                                                     XSSFWorkbook workbook, String directoryPath, String nameFile) {
-        writeDataIntoExcelSheetRecord(recordList, recordDataSheet);
-        writeDataIntoExcelSheetSummary(daySummaryEntryList, summaryDataSheet);
+                                                     XSSFWorkbook workbook, String filePath) {
         try {
+            writeDataIntoExcelSheetRecord(recordList, recordDataSheet);
+            writeDataIntoExcelSheetSummary(daySummaryEntryList, summaryDataSheet);
             //Write the workbook in file system
-            String filePath = setPathFile(nameFile, directoryPath);
-            FileOutputStream out = new FileOutputStream(filePath);
+            FileOutputStream out = new FileOutputStream(filePath, false);
             workbook.write(out);
             out.close();
-            readExcelSheet(filePath);
             drawChart(summaryDataSheet, filePath, workbook);
         } catch (Exception e) {
             e.printStackTrace();
@@ -193,13 +192,17 @@ public class ExcelUtil {
             final int lastColumnOutcome = firstColumnOutcome;
             final int firstColumnNet = firstColumnSheet + THIRD_COLUMN;
             final int lastColumnNet = firstColumnNet;
+            final int widthChart = 12;
+            final int heightChart = 18;
 
             if (!DirectoryPath.isValidFilePath(filePath)) {
                 throw new ParseException(Messages.MESSAGE_UNREALISTIC_DIRECTORY);
             }
 
             Drawing drawing = sheet.createDrawingPatriarch();
-            ClientAnchor anchor = drawing.createAnchor(0, 0, 0, 0, 0, 6, 12, 18);
+            ClientAnchor anchor = drawing.createAnchor(0, 0, 0, 0,
+                    firstColumnSheet + FOURTH_COLUMN + THIRD_COLUMN, firstRowSheet,
+                    lastColumnSheet + widthChart, firstRowSheet + heightChart);
 
             Chart chart = drawing.createChart(anchor);
             ChartLegend legend = chart.getOrCreateLegend();
@@ -236,6 +239,26 @@ public class ExcelUtil {
     }
     //==========================================SUB METHOD FOR READ EXCEL===============================================
     //TODO: coloring the over-limit records.
+
+    /**
+     * Check is the file is being used, if yes, then we cannot read/write the Excel file.
+     */
+    public static Boolean checkIfFileOpen (String filePath) {
+        try {
+            File filexssf = new File(filePath);
+            File filexssfCopy = new File(filePath);
+            if (filexssf.renameTo(filexssfCopy)) {
+                logger.info("READ EXCEL: FILE CLOSED");
+                return false;
+            } else {
+                logger.info("READ EXCEL: FILE OPENED");
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
     /**
      * Check if the first row has the appropriate title.
      */
@@ -353,14 +376,6 @@ public class ExcelUtil {
                     Double.parseDouble(removeCurrencySign((summaryEntry.getTotalExpense()))));
             writeDataIntoCell(row, FOURTH_COLUMN,
                     Double.parseDouble(removeCurrencySign(summaryEntry.getTotal())));
-            logger.info("SUMMARY WITHOUT REMOVE ANYTHING: " + summaryEntry.getTimeStamp() + " "
-                        + summaryEntry.getTotalIncome() + " "
-                        + summaryEntry.getTotalExpense() + " "
-                        + summaryEntry.getTotal());
-            logger.info("SUMMARY: " + summaryEntry.getTimeStamp() + " "
-                    + Double.parseDouble(removeCurrencySign(summaryEntry.getTotalIncome())) + " "
-                    + Double.parseDouble(removeCurrencySign((summaryEntry.getTotalExpense()))) + " "
-                    + Double.parseDouble(removeCurrencySign(summaryEntry.getTotal())));
         }
     }
 
@@ -368,12 +383,21 @@ public class ExcelUtil {
      * Remove the character of $ in the String money retrieved.
      */
     private static String removeCurrencySign (String money) {
-        String moneyString = (money.contains(MINUS_SIGN_STRING) || money.contains(PLUS_SIGN_STRING))
-                ? (money.charAt(STARTING_INDEX) == MINUS_SIGN_CHAR
-                ? MINUS_SIGN_STRING + money.substring(STARTING_CURRENCY)
-                : PLUS_SIGN_STRING + money.substring(STARTING_CURRENCY))
-                : money;
-        return (moneyString.length() == 1) ? moneyString + "0.0" : moneyString;
+        String moneyString = null;
+        if (money.contains(CURRENCY_STRING)) {
+            for (int i = STARTING_INDEX; i < money.length(); i++) {
+                if (money.charAt(i) == CURRENCY_CHAR) {
+                    moneyString = (money.charAt(STARTING_INDEX) == MINUS_SIGN_CHAR)
+                                ? (MINUS_SIGN_STRING + money.substring(++i))
+                                : (PLUS_SIGN_STRING + money.substring(++i));
+                }
+            }
+        } else {
+            moneyString = (money.charAt(STARTING_INDEX) == MINUS_SIGN_CHAR)
+                        ? (PLUS_SIGN_STRING + money)
+                        : money;
+        }
+        return moneyString;
     }
 
     /**

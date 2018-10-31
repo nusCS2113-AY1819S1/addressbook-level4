@@ -1,7 +1,6 @@
 package seedu.planner.ui;
 
 import javafx.beans.property.SimpleStringProperty;
-import seedu.planner.model.record.Date;
 
 //@@author tenvinc
 /**
