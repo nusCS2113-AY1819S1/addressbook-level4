@@ -5,10 +5,16 @@ import java.util.ArrayList;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.classroom.Attendance;
+import seedu.address.model.person.MatricNo;
+
 /**
  * JAXB-friendly adapted version of the ClassroomAttendance.
  */
 public class XmlAdaptedClassroomAttendance {
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Classroom attendance's %s field is missing!";
+
     //class-attendance fields
     @XmlElement(name = "date", required = true, nillable = true)
     private String date;
@@ -36,5 +42,42 @@ public class XmlAdaptedClassroomAttendance {
         this.moduleCode = moduleCode;
         this.date = date;
         this.studentsPresent = studentsPresent;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public String getModuleCode() {
+        return moduleCode;
+    }
+
+    public ArrayList<String> getStudentsPresent() {
+        return studentsPresent;
+    }
+
+    /**
+     * Converts this XmlAdaptedClassroomAttendance into the model's Attendance object
+     */
+    public Attendance toModelType() throws IllegalValueException {
+        if (date == null ) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Attendance.class.getSimpleName()));
+        }
+
+        for (String matricNo : studentsPresent) {
+            if (matricNo == null) {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                        MatricNo.class.getSimpleName()));
+            }
+            if (MatricNo.isValidMatricNo(matricNo)) {
+                throw new IllegalValueException(MatricNo.MESSAGE_MATRIC_NO_CONSTRAINTS);
+            }
+        }
+        return new Attendance(date, studentsPresent);
     }
 }

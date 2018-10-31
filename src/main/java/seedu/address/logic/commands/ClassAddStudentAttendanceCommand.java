@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -25,7 +24,7 @@ public class ClassAddStudentAttendanceCommand extends Command {
             + " for the system. "
             + "Parameters: "
             + PREFIX_CLASS_NAME + "CLASS_NAME "
-            + PREFIX_MODULE_CODE + "MODULE_NAME "
+            + PREFIX_MODULE_CODE + "MODULE_CODE "
             + PREFIX_MATRIC + "MATRIC_NO\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CLASS_NAME + "T16 "
@@ -50,9 +49,8 @@ public class ClassAddStudentAttendanceCommand extends Command {
         this.className = className;
         this.moduleCode = moduleCode;
         this.matricNo = matricNo;
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(Attendance.DATE_FORMAT);
         LocalDate localDate = LocalDate.now();
-        date = dtf.format(localDate);
+        date = Attendance.DATE_FORMATTER.format(localDate);
     }
 
     /**
