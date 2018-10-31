@@ -44,6 +44,16 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void undoResetData() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void redoResetData() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public ReadOnlyAddressBook getAddressBook() {
         throw new AssertionError("This method should not be called.");
     }

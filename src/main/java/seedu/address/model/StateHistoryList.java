@@ -10,6 +10,7 @@ public class StateHistoryList extends LinkedList<Integer> {
 
     static final int STATE_ADDRESSBOOK = 0;
     static final int STATE_EVENTLIST = 1;
+    static final int STATE_RESET = 2;
     static final int STATE_NONE = -1;
 
     private int pointer;
@@ -24,7 +25,7 @@ public class StateHistoryList extends LinkedList<Integer> {
     }
 
     /**
-     * Adds a new state to the history list. Undone states in front of the current pointer will be removed.
+     * Adds a new AddressBook state
      */
     public void addAddressBookState() {
         addState(STATE_ADDRESSBOOK);
@@ -35,6 +36,13 @@ public class StateHistoryList extends LinkedList<Integer> {
      */
     public void addEventListState() {
         addState(STATE_EVENTLIST);
+    }
+
+    /**
+     * Adds a new ResetData state to the history list.
+     */
+    public void addResetState() {
+        addState(STATE_RESET);
     }
 
     /**

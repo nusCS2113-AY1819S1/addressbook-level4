@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.StateHistoryList.STATE_ADDRESSBOOK;
 import static seedu.address.model.StateHistoryList.STATE_EVENTLIST;
+import static seedu.address.model.StateHistoryList.STATE_RESET;
 import static seedu.address.model.StateHistoryList.STATE_NONE;
 
 import java.util.function.Predicate;
@@ -57,7 +58,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyAddressBook newData, ReadOnlyEventList newEventList) {
+        stateHistoryList.addResetState();
+
         versionedAddressBook.resetData(newData);
+        versionedEventList.resetData(newEventList);
         indicateAddressBookChanged();
         indicateEventListChanged();
     }
@@ -70,6 +74,8 @@ public class ModelManager extends ComponentManager implements Model {
             return canUndoAddressBook();
         case STATE_EVENTLIST:
             return canUndoEventList();
+        case STATE_RESET:
+            return canUndoEventList() && canUndoAddressBook();
         case STATE_NONE:
             // pass-through
         default:
@@ -87,6 +93,9 @@ public class ModelManager extends ComponentManager implements Model {
         case STATE_EVENTLIST:
             undoEventList();
             break;
+        case STATE_RESET:
+            undoResetData();
+            break;
         case STATE_NONE:
             // pass-through
         default:
@@ -102,6 +111,8 @@ public class ModelManager extends ComponentManager implements Model {
             return canRedoAddressBook();
         case STATE_EVENTLIST:
             return canRedoEventList();
+        case STATE_RESET:
+            return canRedoEventList() && canRedoAddressBook();
         case STATE_NONE:
             // pass-through
         default:
@@ -119,11 +130,36 @@ public class ModelManager extends ComponentManager implements Model {
         case STATE_EVENTLIST:
             redoEventList();
             break;
+        case STATE_RESET:
+            redoResetData();
+            break;
         case STATE_NONE:
             // pass-through
         default:
             throw new NoRedoableStateException();
         }
+    }
+
+    @Override
+    public void undoResetData() {
+        stateHistoryList.decrementPointer();
+
+        versionedAddressBook.undo();
+        indicateAddressBookChanged();
+
+        versionedEventList.undo();
+        indicateEventListChanged();
+    }
+
+    @Override
+    public void redoResetData() {
+        stateHistoryList.incrementPointer();
+
+        versionedAddressBook.redo();
+        indicateAddressBookChanged();
+
+        versionedEventList.redo();
+        indicateEventListChanged();
     }
 
     //=========== Address Book Methods =======================================================================

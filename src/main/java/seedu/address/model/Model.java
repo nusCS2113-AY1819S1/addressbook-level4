@@ -19,4 +19,11 @@ public interface Model extends PersonModel, EventModel {
 
     /** Redoes next state. */
     void redo();
+
+    /** Undoes a resetData command */
+    void undoResetData();
+
+    /** Redoes a resetData command */
+    void redoResetData();
+
 }
