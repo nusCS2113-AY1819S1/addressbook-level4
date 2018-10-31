@@ -359,6 +359,52 @@ Implementation of this additional feature would require changes to both `InviteC
 
 
 // tag::dataencryption[]
+
+=== List Feature
+
+==== Current Implementation
+
+The `list` feature allows users to filter through all the individual people in ProManage and understand which department
+they are from. The command currently has 2 sub-features; `list all` and `list dep DEPARTMENT`. The user can list all the
+people in ProManage by simply typing `list all`. Alternatively, the user can filter through ProManage and get the
+relevant Person's information by listing those of the relevant department. The user can list multiple departments such
+as `list dep Admin Finance`. As of now, each person can only be inside one department.
+
+The listing of people from the respective departments is facilitated by the class: `Departments`,
+a list of departments of type `String`.
+
+The following is a more detailed description of the classes involved:
+
+*  `Department`
+** Each `Person` object has a `Department`, which is the department in which the person is in.
+** This class is essentially another piece of information about the person.
+** Each `Person` can only be in one `Department`.
+
+==== Execution of Command
+
+Given below is an example usage scenario and how the list mechanism works.
+
+Step 1. The user executes `list dep Admin` to list only the people in the Admin department. The command text is passed
+to an instance of the `LogicManager` class.
+
+Step 2. The `LogicManager` instance calls `AddressBookParser#parsecommand`, which parses the `list` command prefix
+"list".
+
+Step 3. `ListCommandParser#parse` parses the type of command that is called upon and if applicable, the departments
+listed. The list command can take in either `all` or `dep`. `all` means that are no predicates and 'dep' means specific
+departments are about to be listed. An instance of the `ListCommand` encapsulating the type of `ListCommand` and if
+applicable, the predicates involved, is then returned to `Logic Manager`.
+
+Step 4. `Logic Manager` then executes this `ListCommand` by calling `ListCommand#execute`.
+
+Step 5. The filtered person list is first obtained by calling `PersonModel#updateFilteredPersonList`. Based on the departments, the list of `Person` are selected.
+
+Step 9. The `ListCommand#execute` finally returns a `CommandResult` with a success message.
+
+The sequence diagram below illustrates the execution of the `invite` command.
+
+image::ListSequenceDiagram.png[width="800"]
+
 === [Proposed] Data Encryption
 
 _{Explain here how the data encryption feature will be implemented}_

@@ -103,7 +103,23 @@ An employee can have any number of tags (including 0)
 Example: +
 `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dep/ADMIN`
 
-=== Editing an employee : `edit`
+=== Listing all personnel of the company : 'list'
+
+Shows a list of all the personnel, all the events, or those people in the specific department in the project team +
+Format/Prompts: +
+
+Enter command to list all people: `list all people` +
+Enter a command to list all the events: `list all events` +
+Enter a command to list all people and events: `list all` +
+Enter a command to list people in the specific `DEPARTMENT`: `list dep DEPARTMENT`
+
+Example: +
+`list dep Admin` +
+`list dep Admin Finance`
+
+
+=== Editing an employee : 'edit'
+
 Priority level: `default`,`manager`
 
 Edits the details of the employee: +
@@ -132,13 +148,6 @@ Enter a command: `delete PERSON_INDEX`
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
-
-=== Listing all employee of the company : `list`
-Priority level: all
-
-Shows a list of employee in the company +
-Format/Prompts: +
-Enter a command: `list`
 
 === Adding an event: `addEvent`
 Priority level: `default`,`manager`
@@ -222,8 +231,8 @@ Format: sort `key word` +
 Example: sort name
 
 === Invite employees: `invite`
-Priority level: all
 
+Priority level: all
 Invites an employee to an event. +
 Format: `invite PERSON_INDEX to/EVENT_INDEX` +
 Example: invite 1 to/2
@@ -375,6 +384,7 @@ Enter a command: `exit`
 ProManage data saves data in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
+
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
@@ -388,7 +398,7 @@ There is no need to save manually.
 
 * *Delete* : `delete PERSON_INDEX`
 
-* *List* : `list`
+* *List* : `list all` OR `list all people` OR `list all events` or `list dep Admin`
 
 * *addEvent* : `addEvent n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START_TIME e/END_TIME`
 
