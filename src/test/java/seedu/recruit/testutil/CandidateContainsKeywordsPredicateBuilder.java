@@ -32,7 +32,7 @@ public class CandidateContainsKeywordsPredicateBuilder {
     public static final String KEY_PHONE = "Phone";
     public static final String KEY_EMAIL = "Email";
     public static final String KEY_ADDRESS = "Address";
-    public static final String KEY_JOB = "JOB";
+    public static final String KEY_JOB = "Job";
     public static final String KEY_EDUCATION = "Education";
     public static final String KEY_SALARY = "Salary";
 
@@ -62,7 +62,8 @@ public class CandidateContainsKeywordsPredicateBuilder {
                 ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_GENDER, PREFIX_AGE, PREFIX_PHONE,
                         PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_JOB, PREFIX_EDUCATION, PREFIX_SALARY, PREFIX_TAG);
 
-        //HashMap<String, List<String>> keywordsList = new HashMap<>();
+        //HashMap<String,List<String>> keywordsList = new HashMap<>();
+
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             this.keywordsList.put(KEY_NAME, (argMultimap.getAllValues(PREFIX_NAME)));
         }
@@ -90,6 +91,8 @@ public class CandidateContainsKeywordsPredicateBuilder {
         if (argMultimap.getValue(PREFIX_SALARY).isPresent()) {
             this.keywordsList.put(KEY_SALARY, (argMultimap.getAllValues(PREFIX_SALARY)));
         }
+
+        System.out.println(keywordsList);
 
         return new CandidateContainsKeywordsPredicate(keywordsList);
     }

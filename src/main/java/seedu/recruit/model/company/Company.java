@@ -58,17 +58,12 @@ public class Company {
         this.jobOffers.setJobOffers(company.getUniqueJobList());
     }
     public CompanyName getCompanyName() {
-        return companyName; }
-
-    public CompanyName getCompanyName() {
         return companyName;
     }
 
     public Address getAddress() {
         return address;
     }
-    public Address getAddress() {
-        return address; }
 
     public Email getEmail() {
         return email;
