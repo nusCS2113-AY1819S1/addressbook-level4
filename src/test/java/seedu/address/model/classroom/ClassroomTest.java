@@ -11,6 +11,9 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.testutil.ClassroomBuilder;
 
+/**
+ * Provides a test for classroom
+ */
 public class ClassroomTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();

@@ -5,11 +5,13 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ModuleEnrolCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.person.MatricNo;
 
 /**
  * Parses input arguments and creates a new ModuleEnrolCommand object.
@@ -34,7 +36,7 @@ public class ModuleEnrolCommandParser implements Parser<ModuleEnrolCommand> {
         }
 
         ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
-        String studentMatricNo = argMultimap.getValue(PREFIX_MATRIC).get();
+        Set<MatricNo> studentMatricNo = ParserUtil.parseMatricNums(argMultimap.getAllValues(PREFIX_MATRIC));
 
         return new ModuleEnrolCommand(moduleCode, studentMatricNo);
     }

@@ -125,6 +125,19 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code Collection<String> matricNums} into a {@code Set<MatricNo>}
+     */
+    public static Set<MatricNo> parseMatricNums(Collection<String> matricNums) throws ParseException {
+        requireNonNull(matricNums);
+        final Set<MatricNo> matricNoSet = new HashSet<>();
+        for (String matricNumber : matricNums) {
+            MatricNo matricNo = parseMatric(matricNumber);
+            matricNoSet.add(matricNo);
+        }
+        return matricNoSet;
+    }
+
+    /**
      * Parses a {@code String courseName} into an {@code CourseName}.
      * Leading and trailing whitespaces will be trimmed.
      *

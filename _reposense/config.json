@@ -1,28 +1,30 @@
 {
-  "ignoreGlobList": ["about-us/**", "**index.html"],
-  "formats": ["html", "css"],
-  "ignoreCommitList": ["90018e49f129ce7e0abdc8b18e91c9813588c601", "67890def"],
   "authors":
   [
     {
-      "githubId": "m-aslam-mj2",
-      "displayName": "Mohd Aslam"
-    },
-    {
-      "githubId": "harriuscai",
-      "displayName": "Tan Yuan Cai"
+      "githubId": "jomcruz93",
+      "displayName": "CRU...STA",
+      "authorNames": ["jomcruz93"]
     },
     {
       "githubId": "zhicaizack",
-      "displayName": "Gian Zhi Cai"
+      "displayName": "GIA...CAI",
+      "authorNames": ["zhicaizack"]
+    },
+    {
+      "githubId": "m-aslam-mj2",
+      "displayName": "MOH...HAN",
+      "authorNames": ["m-aslam-mj2"]
     },
     {
       "githubId": "tristyxxnana",
-      "displayName": "Nur Tristy Erna"
+      "displayName": "NUR...LAN",
+      "authorNames": ["tristyxxnana"]
     },
     {
-      "githubId": "jomcruz93",
-      "displayName": "Jomari Cruz"
+      "githubId": "harriuscai",
+      "displayName": "TAN...CAI",
+      "authorNames": ["harriuscai"]
     }
   ]
 }

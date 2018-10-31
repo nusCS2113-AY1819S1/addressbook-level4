@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
 import seedu.address.testutil.Assert;
 
 public class ModuleNameTest {
@@ -26,21 +27,21 @@ public class ModuleNameTest {
         Assert.assertThrows(NullPointerException.class, () -> ModuleName.isValidModuleName(null));
 
         // invalid module names
-        assertFalse(ModuleName.isValidModuleName(""));  // empty string
-        assertFalse(ModuleName.isValidModuleName(" "));  // spaces only
-        assertFalse(ModuleName.isValidModuleName(" Software"));  // starting with a space
-        assertFalse(ModuleName.isValidModuleName("^"));  // invalid symbols only
+        assertFalse(ModuleName.isValidModuleName("")); // empty string
+        assertFalse(ModuleName.isValidModuleName(" ")); // spaces only
+        assertFalse(ModuleName.isValidModuleName(" Software")); // starting with a space
+        assertFalse(ModuleName.isValidModuleName("^")); // invalid symbols only
         assertFalse(ModuleName.isValidModuleName(" Software+")); // contains invalid symbols
-        assertFalse(ModuleName.isValidModuleName("&Software"));  // accepted symbol as the first char
+        assertFalse(ModuleName.isValidModuleName("&Software")); // accepted symbol as the first char
 
         // valid module names
-        assertTrue(ModuleName.isValidModuleName("Asking Questions"));  // letters only
-        assertTrue(ModuleName.isValidModuleName("Physics 2"));  // alphanumeric characters
-        assertTrue(ModuleName.isValidModuleName("12345"));  // numbers only
-        assertTrue(ModuleName.isValidModuleName("Software & OOP"));  // contains ampersand (&)
-        assertTrue(ModuleName.isValidModuleName("Object-oriented"));  // contains hyphen (-)
-        assertTrue(ModuleName.isValidModuleName("linear algebra"));  // all lowercase
-        assertTrue(ModuleName.isValidModuleName("Software Engineering & Object-Oriented Programming"));  // long
+        assertTrue(ModuleName.isValidModuleName("Asking Questions")); // letters only
+        assertTrue(ModuleName.isValidModuleName("Physics 2")); // alphanumeric characters
+        assertTrue(ModuleName.isValidModuleName("12345")); // numbers only
+        assertTrue(ModuleName.isValidModuleName("Software & OOP")); // contains ampersand (&)
+        assertTrue(ModuleName.isValidModuleName("Object-oriented")); // contains hyphen (-)
+        assertTrue(ModuleName.isValidModuleName("linear algebra")); // all lowercase
+        assertTrue(ModuleName.isValidModuleName("Software Engineering & Object-Oriented Programming")); // long
     }
 
     @Test
