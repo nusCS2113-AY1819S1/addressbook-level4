@@ -67,7 +67,6 @@ public class Date {
         standardYear = String.valueOf(year);
         String standardValue =
                 String.format(standardDay + "-" + standardMonth + "-" + standardYear);
-        logger.info("Standard value is " + standardDay + "\n");
         return standardValue;
     }
 
