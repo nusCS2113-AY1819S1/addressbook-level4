@@ -46,13 +46,13 @@ public class SelectCommandParser implements Parser<SelectCommand> {
         } else if (hasDate && !hasMonth && !hasYear) {
             EventDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
             return new SelectCommand(index, date.eventDate, TimeType.DAY);
-        } else if (hasMonth && !hasYear) {
+        } else if (hasMonth && !hasYear && !hasDate) {
             String month = ParserUtil.parseMonth(argMultimap.getValue(PREFIX_MONTH).get());
             return new SelectCommand(index, month, TimeType.MONTH);
-        } else if (!hasMonth && hasYear) {
+        } else if (!hasMonth && hasYear && !hasDate) {
             String year = ParserUtil.parseYear(argMultimap.getValue(PREFIX_YEAR).get());
             return new SelectCommand(index, year, TimeType.YEAR);
-        } else if (hasMonth && hasYear) {
+        } else if (hasMonth && hasYear && !hasDate) {
             String month = ParserUtil.parseMonth(argMultimap.getValue(PREFIX_MONTH).get());
             String year = ParserUtil.parseYear(argMultimap.getValue(PREFIX_YEAR).get());
             String combined = year + "-" + month;

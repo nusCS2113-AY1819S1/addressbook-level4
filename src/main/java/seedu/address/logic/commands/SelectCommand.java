@@ -91,6 +91,10 @@ public class SelectCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof SelectCommand // instanceof handles nulls
-                && targetIndex.equals(((SelectCommand) other).targetIndex)); // state check
+                && targetIndex.equals(((SelectCommand) other).targetIndex) // state check
+                && (((date == null && (((SelectCommand) other).date) == null)) // short circuit if both are null
+                    || ((date != null && (((SelectCommand) other).date) != null)
+                && date.equals(((SelectCommand) other).date)))
+                && type.equals(((SelectCommand) other).type));
     }
 }

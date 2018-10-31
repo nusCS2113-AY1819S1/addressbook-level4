@@ -3,6 +3,9 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MONTH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_YEAR;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -23,6 +26,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.AttendeeContainsNamePredicate;
+import seedu.address.model.event.TimeType;
 import seedu.address.model.person.Person;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
@@ -74,7 +78,7 @@ public class SelectCommandTest {
     }
 
     @Test
-    public void equals() {
+    public void equals_noDateFilter() {
         SelectCommand selectFirstCommand = new SelectCommand(INDEX_FIRST_PERSON);
         SelectCommand selectSecondCommand = new SelectCommand(INDEX_SECOND_PERSON);
 
@@ -93,6 +97,32 @@ public class SelectCommandTest {
 
         // different person -> returns false
         assertFalse(selectFirstCommand.equals(selectSecondCommand));
+    }
+
+    @Test
+    public void equals_hasDateFilter() {
+        SelectCommand selectFirstWithDateCommand = new SelectCommand(INDEX_FIRST_PERSON, VALID_DATE, TimeType.DAY);
+        SelectCommand selectFirstWithMonthCommand = new SelectCommand(INDEX_FIRST_PERSON, VALID_MONTH, TimeType.MONTH);
+        SelectCommand selectFirstWithYearCommand = new SelectCommand(INDEX_FIRST_PERSON, VALID_YEAR, TimeType.YEAR);
+        SelectCommand selectSecondCommand = new SelectCommand(INDEX_SECOND_PERSON, VALID_YEAR, TimeType.YEAR);
+
+
+        // same object -> returns true
+        assertTrue(selectFirstWithDateCommand.equals(selectFirstWithDateCommand));
+
+        // same values -> returns true
+        SelectCommand selectFirstCommandWithDateCopy = new SelectCommand(INDEX_FIRST_PERSON, VALID_DATE, TimeType.DAY);
+        assertTrue(selectFirstWithDateCommand.equals(selectFirstCommandWithDateCopy));
+
+        // different types -> returns false
+        assertFalse(selectFirstWithDateCommand.equals(selectFirstWithYearCommand));
+        assertFalse(selectFirstWithDateCommand.equals(selectFirstWithMonthCommand));
+
+        // null -> returns false
+        assertFalse(selectFirstWithDateCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(selectFirstWithDateCommand.equals(selectSecondCommand));
     }
 
     /**

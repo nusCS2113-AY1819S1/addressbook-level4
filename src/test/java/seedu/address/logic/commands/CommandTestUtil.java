@@ -3,11 +3,14 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,9 +50,10 @@ public class CommandTestUtil {
     public static final String VALID_DATE = "2018-10-28";
     public static final String VALID_DESCRIPTION_PUNCTUAL = "Please be punctual.";
     public static final String VALID_LOCATION_LT = "LT15";
-    public static final String VALID_LOCATION_UT = "University Town";
+    public static final String VALID_MONTH = "01";
     public static final String VALID_TIME_MORNING = "08:00";
     public static final String VALID_TIME_NOON = "12:00";
+    public static final String VALID_YEAR = "2018";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -64,6 +68,11 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
+    public static final String DATE_DESC = " " + PREFIX_DATE + VALID_DATE;
+    public static final String MONTH_DESC = " " + PREFIX_MONTH + VALID_MONTH;
+    public static final String YEAR_DESC = " " + PREFIX_YEAR + VALID_YEAR;
+    public static final String MONTHANDYEAR_DESC = " " + PREFIX_YEAR + VALID_YEAR + " " + PREFIX_MONTH + VALID_MONTH;
+
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -71,6 +80,10 @@ public class CommandTestUtil {
     public static final String INVALID_DEPARTMENT_DESC = " " + PREFIX_DEPARTMENT + "M@rketing";
     // '@' not allowed in department
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
+    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "2018/12/25";
+    public static final String INVALID_MONTH_DESC = " " + PREFIX_MONTH + "13";
+    public static final String INVALID_YEAR_DESC = " " + PREFIX_YEAR + "18";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
