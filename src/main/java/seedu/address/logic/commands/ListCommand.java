@@ -22,7 +22,8 @@ public class ListCommand extends Command {
             + "Parameters: "
             + PREFIX_LIST_DEPARTMENT + " DEPARTMENT "
             + "or " + PREFIX_ALL_PEOPLE + "\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_LIST_DEPARTMENT + " Admin";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_LIST_DEPARTMENT + " Admin Finance, "
+            + COMMAND_WORD + " all people";
 
     public static final String MESSAGE_SUCCESS_PEOPLE = "All people listed!";
     public static final String MESSAGE_SUCCESS_EVENT = "All events listed!";
