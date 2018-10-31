@@ -10,6 +10,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.ClassroomManager;
+import seedu.address.model.module.ModuleManager;
+import seedu.address.model.student.StudentManager;
 
 /**
  * Unassigns an existing student from an existing class.
@@ -33,7 +35,9 @@ public class ClassDeleteStudentCommand extends Command {
             + ", Module code: %3$s";
     private static final String MESSAGE_FAIL = "Class belonging to module not found!";
 
-    private static final String MESSAGE_CLASSROOM_STUDENT_NOT_FOUND = "This student doesn't exists in class: %1$s";
+    private static final String MESSAGE_CLASSROOM_STUDENT_NOT_FOUND = "This student doesn't belong to class: %1$s";
+    private static final String MESSAGE_INVALID_STUDENT = "Student does not exist";
+    private static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
 
     private Classroom classToUnassignStudent;
     private final String className;
@@ -41,7 +45,7 @@ public class ClassDeleteStudentCommand extends Command {
     private final String matricNo;
 
     public ClassDeleteStudentCommand(String className, String moduleCode, String matricNo) {
-        requireAllNonNull(className, moduleCode);
+        requireAllNonNull(className, moduleCode, matricNo);
         this.className = className;
         this.moduleCode = moduleCode;
         this.matricNo = matricNo;
@@ -58,6 +62,16 @@ public class ClassDeleteStudentCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         ClassroomManager classroomManager = ClassroomManager.getInstance();
+        ModuleManager moduleManager = ModuleManager.getInstance();
+        StudentManager studentManager = StudentManager.getInstance();
+
+        if (!moduleManager.doesModuleExist(moduleCode)) {
+            throw new CommandException(MESSAGE_MODULE_CODE_INVALID);
+        }
+
+        if (!studentManager.doesStudentExistForGivenMatricNo(matricNo)) {
+            throw new CommandException(MESSAGE_INVALID_STUDENT);
+        }
 
         classToUnassignStudent = classroomManager.findClassroom(className, moduleCode);
         if (classToUnassignStudent == null) {
