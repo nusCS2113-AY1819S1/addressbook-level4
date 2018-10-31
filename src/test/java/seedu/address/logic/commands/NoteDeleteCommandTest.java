@@ -67,16 +67,18 @@ public class NoteDeleteCommandTest {
 
     @Test
     public void execute_validIndex_success() throws CommandException {
+        String expectedMessage = NoteDeleteCommand.MESSAGE_SUCCESS;
+
         noteManager.addNote(dummyNote.build());
         noteManager.addNote(dummyNote.build());
         noteManager.addNote(dummyNote.build());
+        noteManager.setFilteredNotesNoFilter();
         noteManager.saveNoteList();
 
         int index = 3; // arraylist size: 3, accessed index = 2 (zero-based) -> OK
         NoteDeleteCommand noteDeleteCommand = new NoteDeleteCommand(index);
         CommandResult result = noteDeleteCommand.execute(new ModelManager(), new CommandHistory());
 
-        String expectedMessage = NoteDeleteCommand.MESSAGE_SUCCESS;
         assertEquals(expectedMessage, result.feedbackToUser);
 
         int expectedSize = 2;
