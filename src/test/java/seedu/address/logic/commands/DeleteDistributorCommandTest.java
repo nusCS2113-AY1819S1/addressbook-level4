@@ -39,7 +39,8 @@ public class DeleteDistributorCommandTest {
         Distributor distributorToDelete = model.getFilteredDistributorList().get(INDEX_FIRST.getZeroBased());
         DeleteDistributorCommand deleteDistributorCommand = new DeleteDistributorCommand(INDEX_FIRST);
 
-        String expectedMessage = String.format(DeleteDistributorCommand.MESSAGE_DELETE_DISTRIBUTOR_SUCCESS, distributorToDelete);
+        String expectedMessage = String.format(DeleteDistributorCommand
+                .MESSAGE_DELETE_DISTRIBUTOR_SUCCESS, distributorToDelete);
 
         ModelManager expectedModel = new ModelManager(new ProductDatabase(model.getProductInfoBook()),
                 new DistributorBook(model.getDistributorInfoBook()), new UserPrefs(),
@@ -55,7 +56,8 @@ public class DeleteDistributorCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredDistributorList().size() + 1);
         DeleteDistributorCommand deleteDistributorCommand = new DeleteDistributorCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteDistributorCommand, model, commandHistory, Messages.MESSAGE_INVALID_DIST_DISPLAYED_INDEX);
+        assertCommandFailure(deleteDistributorCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_DIST_DISPLAYED_INDEX);
     }
 
     @Test
@@ -73,11 +75,13 @@ public class DeleteDistributorCommandTest {
 
         // undo -> reverts addressbook back to previous state and filtered person list to show all persons
         expectedModel.undoDistributorBook();
-        assertCommandSuccess(new UndoDistributorCommand(), model, commandHistory, UndoDistributorCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new UndoDistributorCommand(), model, commandHistory,
+                UndoDistributorCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first person deleted again
         expectedModel.redoDistributorBook();
-        assertCommandSuccess(new RedoDistributorCommand(), model, commandHistory, RedoDistributorCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new RedoDistributorCommand(), model, commandHistory,
+                RedoDistributorCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
@@ -86,11 +90,14 @@ public class DeleteDistributorCommandTest {
         DeleteDistributorCommand deleteDistributorCommand = new DeleteDistributorCommand(outOfBoundIndex);
 
         // execution failed -> address book state not added into model
-        assertCommandFailure(deleteDistributorCommand, model, commandHistory, Messages.MESSAGE_INVALID_DIST_DISPLAYED_INDEX);
+        assertCommandFailure(deleteDistributorCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_DIST_DISPLAYED_INDEX);
 
         // single address book state in model -> undoCommand and redoCommand fail
-        assertCommandFailure(new UndoDistributorCommand(), model, commandHistory, UndoDistributorCommand.MESSAGE_FAILURE);
-        assertCommandFailure(new RedoDistributorCommand(), model, commandHistory, RedoDistributorCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new UndoDistributorCommand(), model, commandHistory,
+                UndoDistributorCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new RedoDistributorCommand(), model, commandHistory,
+                RedoDistributorCommand.MESSAGE_FAILURE);
     }
 
     /**
@@ -117,11 +124,13 @@ public class DeleteDistributorCommandTest {
 
         // undo -> reverts addressbook back to previous state and filtered person list to show all persons
         expectedModel.undoDistributorBook();
-        assertCommandSuccess(new UndoDistributorCommand(), model, commandHistory, UndoDistributorCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new UndoDistributorCommand(), model, commandHistory,
+                UndoDistributorCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> deletes same second person in unfiltered person list
         expectedModel.redoDistributorBook();
-        assertCommandSuccess(new RedoDistributorCommand(), model, commandHistory, RedoDistributorCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new RedoDistributorCommand(), model, commandHistory,
+                RedoDistributorCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
