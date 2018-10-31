@@ -59,7 +59,8 @@ public class NewAutoCompletionBinding<T> {
      **************************************************************************/
 
     public NewAutoCompletionBinding(TextField textField,
-                                    Callback<AutoCompletionBinding.ISuggestionRequest, Collection<T>> suggestionProvider) {
+                                    Callback<AutoCompletionBinding.ISuggestionRequest,
+                                            Collection<T>> suggestionProvider) {
         this(textField, suggestionProvider, defaultStringConverter());
     }
 
@@ -283,6 +284,7 @@ public class NewAutoCompletionBinding<T> {
     private final ChangeListener<Number> caretChangeListener = (obs, oldNumber, newNumber) -> {
         String text = getCompletionTarget().getText().substring(0, newNumber.intValue());
         int index;
+        CustomSuggestionProvider.updateSuggestions(text);
         for (index = text.length() - 1; index >= 0 && !Character.isWhitespace(text.charAt(index)); index--);
         if (index > 0) {
             oldText = text.substring(0, index) + " ";

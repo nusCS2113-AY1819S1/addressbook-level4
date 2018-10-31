@@ -84,11 +84,7 @@ public class CustomSuggestionProvider {
             } else {
                 updateSuggestions(sortKeywordsSet);
             }
-        } /*else if (possibleTagKeywordsSet.contains(inputs[0])) { // either add or edit TODO: MAKE IT WORK BY t/
-            if (pattern.matcher(inputs[inputs.length-1]).matches()){
-                updateSuggestions(tagKeywordsMap.keySet());
-            }
-        }*/ else if (inputs[0].equals(FindTagCommand.COMMAND_WORD) && inputs.length > 1) {
+        } else if (inputs[0].equals(FindTagCommand.COMMAND_WORD) && inputs.length > 1) {
             updateSuggestions(tagKeywordsMap.keySet());
         } else if (commandKeywordsSet.contains(inputs[0]) || inputs.length > 1) {
             updateSuggestions(emptySet);
