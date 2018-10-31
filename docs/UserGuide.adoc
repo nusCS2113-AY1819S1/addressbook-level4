@@ -180,54 +180,6 @@ The tasks are now sorted by deadlines, where tasks without deadlines are at the 
 * `TDL_view uncompleted` + `TDL_sort priority` +
 All uncompleted tasks will be sorted by their priority.
 
-=== Adding an expenditure : `ET_add`
-
-Adds a task to the expenditure tracker. +
-Format: `ET_add e/DESCRIPTION d/DATE m/MONEY c/CATEGORY`
-
-****
-* The format for `d/DATE` tag must be DD-MM-YY, where DD refers to the date, MM refers to the month and YY refers to the month in numbers.
-* The m/MONEY only accepts integers which refers to the money spent on this.
-* The c/CATEGORY only accepts strings: Food, Drink, Clothing, Electronics, DailyNecessities, Sports, Communications, Travels, Study, Office, Pets, Gifts, Entertainment, Traffic, Shopping, Beauty and Furniture.
-
-****
-
-Examples:
-
-* `ET_add e/iPhoneX d/09-08-2018 m/1500 c/Electronics`
-
-=== Deleting an expenditure : `ET_delete`
-
-Deletes the specified expenditure from the expenditure tracker. +
-Format: `ET_delete INDEX`
-
-****
-* Deletes the expenditrue at the specified `INDEX`.
-* The index refers to the index number shown in the displayed expenditrue list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
-
-Examples:
-
-* `ET_delete 2` +
-Deletes the 2nd expenditure in the expenditure tracker.
-
-=== Editing an expenditure : `ET_edit`
-
-Edits an existing expenditure in the expenditure tracker. +
-Format: `ET_edit INDEX [e/DESCRIPTION] [d/DATE] [m/MONEY] [c/CATEGORY]`
-
-****
-* Edits the expenditrue at the specified `INDEX`. The index refers to the index number shown in the displayed expenditure tracker. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields should be provided. There will not be any changes made if no optional fields are provided.
-* Existing values will be updated to the input values.
-****
-
-Examples:
-
-* `ET_edit 2 e/ChickenRice ` +
-Edits the expenditure name of the second expenditure be `ChickenRice`.
-
 === Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
@@ -347,15 +299,15 @@ Gives a short summary of the expenditures made so far and provides advice on how
 === Checking expenditures : `ET_check`
 
 Checks the status of the expenditures in a particular period and generates a graph to demonstrate how much money was spent on each unit period. +
-Format: `ET_check d/DATE d/DATE`
+Format: `ET_check start/DATE end/DATE`
 
 ****
-* d/DATE must be in the format of DD-MM-YYYY, where DD refers the date, MM refers the month and YYYY refers the year in numbers.
+* start/DATE and end/DATE must be in the format of DD-MM-YYYY, where DD refers the date, MM refers the month and YYYY refers the year in numbers.
 ****
 
 Examples:
 
-* `ET_check d/01-01-2017 d/01-01-2018` +
+* `ET_check start/01-01-2017 start/01-01-2018` +
 Checks the status of the expenditures from 01-01-2017 to 01-01-2018 and generates a graph to demonstrate how much money was spent on each month.
 
 == FAQ
@@ -373,6 +325,7 @@ Checks the status of the expenditures from 01-01-2017 to 01-01-2018 and generate
 * *Uncomplete* : `TDL_uncomplete INDEX`
 * *Sort* : `TDL_sort by PARAMETER`
 * *Check* : `ET_check start/STARTDATE end/ENDDATE`
+* *Advice* : `ET_advice m/MONEY numofdays/NUMBEROFDAYS`
 * *Help* : `help`
 * *History* : `history`
 * *Undo* : `undo`
