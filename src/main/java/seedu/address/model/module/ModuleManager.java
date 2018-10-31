@@ -77,6 +77,21 @@ public class ModuleManager {
     }
 
     /**
+     * Overload of {@link #isStudentEnrolledInModule(Module, Person)} to provide greater convenience.
+     * Additionally, this overload will verify the existence of the given module and student.
+     */
+    public boolean isStudentEnrolledInModule(String moduleCode, String matricNo) {
+        if (doesModuleExist(moduleCode)
+                && StudentManager.getInstance().doesStudentExistForGivenMatricNo(matricNo)) {
+            Module module = getModuleByModuleCode(moduleCode);
+            Person student = StudentManager.getInstance().retrieveStudentByMatricNo(matricNo);
+
+            return isStudentEnrolledInModule(module, student);
+        }
+        return false;
+    }
+
+    /**
      * Gets the module list from storage and converts it to a Module array list.
      * Also reads the association data between Student and Module and stores it in-memory in the module.
      */
