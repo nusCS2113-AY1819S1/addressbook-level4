@@ -67,6 +67,8 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 Three types priorities: `default`,`manager`,`employee` +
 If login command is not executed, the priority will be `default`.
+
+All clicking features are disabled. Clicking on persons and events will not trigger anything.
 ====
 
 
@@ -250,7 +252,7 @@ Priority level: all
 
 Selects an employee and view the specified employee's events by date, year, month, month and year, or all his/her events. +
 Format/Prompts: +
-Enter a command: `select PERSON_INDEX` [date/DATE] [m/MONTH] [y/YEAR]
+Enter a command: `select PERSON_INDEX [date/DATE] [m/MONTH] [y/YEAR]`
 
 ****
 * Select the employee at the specified `PERSON_INDEX` and view all his/her events or events at certain time as indicated.

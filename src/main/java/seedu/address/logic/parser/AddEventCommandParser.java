@@ -46,10 +46,14 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Location location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get());
         EventDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        StartTime startDate = ParserUtil.parseStartTime(argMultimap.getValue(PREFIX_START_DATE).get());
-        EndTime endDate = ParserUtil.parseEndTime(argMultimap.getValue(PREFIX_END_DATE).get());
+        StartTime startTime = ParserUtil.parseStartTime(argMultimap.getValue(PREFIX_START_DATE).get());
+        EndTime endTime = ParserUtil.parseEndTime(argMultimap.getValue(PREFIX_END_DATE).get());
 
-        Event event = new Event(name, description, date, startDate, endDate, location);
+        if (startTime.startTime.compareTo(endTime.endTime) > 0) {
+            throw new ParseException(String.format(EndTime.MESSAGE_INVALID_END_TIME));
+        }
+
+        Event event = new Event(name, description, date, startTime, endTime, location);
 
         return new AddEventCommand(event);
     }
