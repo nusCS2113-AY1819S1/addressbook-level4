@@ -112,7 +112,7 @@ public class EditDistributorCommandTest {
 
     @Test
     public void execute_duplicatePersonFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST);
+        showDistributorAtIndex(model, INDEX_FIRST);
 
         // edit product in filtered list into a duplicate in address book
         Distributor distributorInList = model.getDistributorInfoBook().getDistributorList()
