@@ -1476,6 +1476,45 @@ Use case resumes at step 1.
 
 
 [discrete]
+
+=== Use case: List courses ordered by students
+*Precondition(s)* :
+
+* NIL
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
+
+1.  Teacher lists courses ordered by students.
+2.  System displays lists of courses ordered by students.
++
+Use case ends.
+
+*Extensions* :
+
+* 2a. Teacher enters an invalid command.
++
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+
+* 2b. Teacher enters improperly formatted command.
++
+** 2b1. System displays the proper format for usage of the command.
++
+Use case resumes at step 1.
+
+* 2c. There are no courses in the system.
++
+** 2c1. System shows 'no courses in system' message.
++
+Use case resumes at step 1.
+
+
+[discrete]
 === Use case: Add module
 
 *Precondition(s)* :

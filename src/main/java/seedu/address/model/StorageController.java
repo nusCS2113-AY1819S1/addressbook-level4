@@ -33,16 +33,16 @@ public class StorageController {
     private static final String TEST_DIRECTORY = "testStorage/";
     private static String workingDirectory = BASE_DIRECTORY;
 
-    private static final String STORAGE_COURSES = workingDirectory + "courseList.xml";
-    private static final String STORAGE_MODULES = workingDirectory + "modules.xml";
-    private static final String STORAGE_CLASSES = workingDirectory + "classes.xml";
-    private static final String STORAGE_GRADEBOOK = workingDirectory + "gradebook.xml";
-    private static final String STORAGE_NOTES = workingDirectory + "notes.xml";
-    private static final String STORAGE_USERS = workingDirectory + "users.xml";
+    private static String storageCourses = workingDirectory + "courseList.xml";
+    private static String storageModules = workingDirectory + "modules.xml";
+    private static String storageClasses = workingDirectory + "classes.xml";
+    private static String storageGradebook = workingDirectory + "gradebook.xml";
+    private static String storageNotes = workingDirectory + "notes.xml";
+    private static String storageUsers = workingDirectory + "users.xml";
 
-    private static final String STORAGE_STUDENT_MODULE = workingDirectory + "studentModule.xml";
-    private static final String STORAGE_CLASS_ATTENDANCE = workingDirectory + "classAttendance.xml";
-    private static final String STORAGE_GRADES = workingDirectory + "grades.xml";
+    private static String storageStudentModule = workingDirectory + "studentModule.xml";
+    private static String storageClassAttendance = workingDirectory + "classAttendance.xml";
+    private static String storageGrades = workingDirectory + "grades.xml";
 
     private static ArrayList<XmlAdaptedCourse> courseStorage = new ArrayList<>();
     private static ArrayList<XmlAdaptedModule> moduleStorage = new ArrayList<>();
@@ -60,6 +60,20 @@ public class StorageController {
      */
     public static void enterTestMode() {
         workingDirectory = TEST_DIRECTORY;
+
+        storageCourses = workingDirectory + "courseList.xml";
+        storageModules = workingDirectory + "modules.xml";
+        storageClasses = workingDirectory + "classes.xml";
+        storageGradebook = workingDirectory + "gradebook.xml";
+        storageNotes = workingDirectory + "notes.xml";
+        storageUsers = workingDirectory + "users.xml";
+
+        storageStudentModule = workingDirectory + "studentModule.xml";
+        storageClassAttendance = workingDirectory + "classAttendance.xml";
+        storageGrades = workingDirectory + "grades.xml";
+
+        System.out.println(workingDirectory);
+        System.out.println(storageCourses);
         createTestFolder();
         wipeAllTestData();
         createFiles();
@@ -86,39 +100,39 @@ public class StorageController {
         createFiles();
         try {
             XmlSerializableCourseList cl = XmlUtil
-                    .getDataFromFile(Paths.get(STORAGE_COURSES), XmlSerializableCourseList.class);
+                    .getDataFromFile(Paths.get(storageCourses), XmlSerializableCourseList.class);
             courseStorage = cl.getList();
 
             XmlSerializableModuleList moduleList =
-                    XmlUtil.getDataFromFile(Paths.get(STORAGE_MODULES), XmlSerializableModuleList.class);
+                    XmlUtil.getDataFromFile(Paths.get(storageModules), XmlSerializableModuleList.class);
             moduleStorage = moduleList.getModules();
 
             XmlSerializableClassroomList classroomList =
-                    XmlUtil.getDataFromFile(Paths.get(STORAGE_CLASSES), XmlSerializableClassroomList.class);
+                    XmlUtil.getDataFromFile(Paths.get(storageClasses), XmlSerializableClassroomList.class);
             classesStorage = classroomList.getClassroomList();
 
             XmlSerializableNoteList noteList =
-                    XmlUtil.getDataFromFile(Paths.get(STORAGE_NOTES), XmlSerializableNoteList.class);
+                    XmlUtil.getDataFromFile(Paths.get(storageNotes), XmlSerializableNoteList.class);
             noteStorage = noteList.getNotes();
 
-            XmlSerializableGradebookList gradebookSerializable = XmlUtil.getDataFromFile(Paths.get(STORAGE_GRADEBOOK),
+            XmlSerializableGradebookList gradebookSerializable = XmlUtil.getDataFromFile(Paths.get(storageGradebook),
                     XmlSerializableGradebookList.class);
             gradebookStorage = gradebookSerializable.getGradebookList();
 
             XmlSerializableUserList ul = XmlUtil
-                    .getDataFromFile(Paths.get(STORAGE_USERS), XmlSerializableUserList.class);
+                    .getDataFromFile(Paths.get(storageUsers), XmlSerializableUserList.class);
             userStorage = ul.getList();
 
             XmlSerializableStudentModuleList studentModuleList =
-                    XmlUtil.getDataFromFile(Paths.get(STORAGE_STUDENT_MODULE), XmlSerializableStudentModuleList.class);
+                    XmlUtil.getDataFromFile(Paths.get(storageStudentModule), XmlSerializableStudentModuleList.class);
             studentModuleStorage = studentModuleList.getStudentModuleList();
 
             XmlSerializableClassroomAttendanceList classroomAttendanceList =
-                    XmlUtil.getDataFromFile(Paths.get(STORAGE_CLASS_ATTENDANCE),
+                    XmlUtil.getDataFromFile(Paths.get(storageClassAttendance),
                             XmlSerializableClassroomAttendanceList.class);
             classAttendanceStorage = classroomAttendanceList.getClassroomAttendanceList();
 
-            XmlSerializableGradeList gradeSerializable = XmlUtil.getDataFromFile(Paths.get(STORAGE_GRADES),
+            XmlSerializableGradeList gradeSerializable = XmlUtil.getDataFromFile(Paths.get(storageGrades),
                     XmlSerializableGradeList.class);
             gradesStorage = gradeSerializable.getGradeList();
         } catch (Exception e) {
@@ -130,15 +144,15 @@ public class StorageController {
      * This method creates files for all datasets if they do not exist on the local filesystem.
      */
     private static void createFiles() {
-        File classes = new File(STORAGE_CLASSES);
-        File courses = new File(STORAGE_COURSES);
-        File modules = new File(STORAGE_MODULES);
-        File notes = new File(STORAGE_NOTES);
-        File gradebook = new File(STORAGE_GRADEBOOK);
-        File users = new File(STORAGE_USERS);
-        File studentModule = new File(STORAGE_STUDENT_MODULE);
-        File classAttendance = new File(STORAGE_CLASS_ATTENDANCE);
-        File grades = new File(STORAGE_GRADES);
+        File classes = new File(storageClasses);
+        File courses = new File(storageCourses);
+        File modules = new File(storageModules);
+        File notes = new File(storageNotes);
+        File gradebook = new File(storageGradebook);
+        File users = new File(storageUsers);
+        File studentModule = new File(storageStudentModule);
+        File classAttendance = new File(storageClassAttendance);
+        File grades = new File(storageGrades);
 
         try {
             classes.createNewFile();
@@ -162,40 +176,40 @@ public class StorageController {
         try {
             XmlSerializableCourseList cl = new XmlSerializableCourseList();
             cl.setCourseList(courseStorage);
-            XmlUtil.saveDataToFile(Paths.get(STORAGE_COURSES), cl);
+            XmlUtil.saveDataToFile(Paths.get(storageCourses), cl);
 
             XmlSerializableModuleList moduleList = new XmlSerializableModuleList();
             moduleList.setModules(moduleStorage);
-            XmlUtil.saveDataToFile(Paths.get(STORAGE_MODULES), moduleList);
+            XmlUtil.saveDataToFile(Paths.get(storageModules), moduleList);
 
             XmlSerializableClassroomList classroomList = new XmlSerializableClassroomList();
             classroomList.setClassroomList(classesStorage);
-            XmlUtil.saveDataToFile(Paths.get(STORAGE_CLASSES), classroomList);
+            XmlUtil.saveDataToFile(Paths.get(storageClasses), classroomList);
 
             XmlSerializableNoteList noteList = new XmlSerializableNoteList();
             noteList.setNotes(noteStorage);
-            XmlUtil.saveDataToFile(Paths.get(STORAGE_NOTES), noteList);
+            XmlUtil.saveDataToFile(Paths.get(storageNotes), noteList);
 
             XmlSerializableGradebookList gradebookList = new XmlSerializableGradebookList();
             gradebookList.setGradebookList(gradebookStorage);
-            XmlUtil.saveDataToFile(Paths.get(STORAGE_GRADEBOOK), gradebookList);
+            XmlUtil.saveDataToFile(Paths.get(storageGradebook), gradebookList);
 
             XmlSerializableUserList ul = new XmlSerializableUserList();
             ul.setUserList(userStorage);
-            XmlUtil.saveDataToFile(Paths.get(STORAGE_USERS), ul);
+            XmlUtil.saveDataToFile(Paths.get(storageUsers), ul);
 
             XmlSerializableStudentModuleList studentModuleList = new XmlSerializableStudentModuleList();
             studentModuleList.setStudentModuleList(studentModuleStorage);
-            XmlUtil.saveDataToFile(Paths.get(STORAGE_STUDENT_MODULE), studentModuleList);
+            XmlUtil.saveDataToFile(Paths.get(storageStudentModule), studentModuleList);
 
             XmlSerializableClassroomAttendanceList classroomAttendanceList =
                     new XmlSerializableClassroomAttendanceList();
             classroomAttendanceList.setClassroomAttendanceList(classAttendanceStorage);
-            XmlUtil.saveDataToFile(Paths.get(STORAGE_CLASS_ATTENDANCE), classroomAttendanceList);
+            XmlUtil.saveDataToFile(Paths.get(storageClassAttendance), classroomAttendanceList);
 
             XmlSerializableGradeList gradeList = new XmlSerializableGradeList();
             gradeList.setGradeList(gradesStorage);
-            XmlUtil.saveDataToFile(Paths.get(STORAGE_GRADES), gradeList);
+            XmlUtil.saveDataToFile(Paths.get(storageGrades), gradeList);
 
         } catch (Exception e) {
             e.printStackTrace();
