@@ -18,9 +18,7 @@ import seedu.address.logic.commands.EditTaskCommand.EditTaskDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
-import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UncompleteTaskCommand;
-import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.task.Task;
@@ -166,6 +164,7 @@ public class AddressBookParserTest {
         assertEquals(new UncompleteTaskCommand(INDEX_FIRST_TASK), command);
     }
 
+    /*
     @Test
     public void parseCommand_redoCommandWord_returnsRedoCommand() throws Exception {
         assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD) instanceof RedoCommand);
@@ -176,7 +175,7 @@ public class AddressBookParserTest {
     public void parseCommand_undoCommandWord_returnsUndoCommand() throws Exception {
         assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD) instanceof UndoCommand);
         assertTrue(parser.parseCommand("undo 3") instanceof UndoCommand);
-    }
+    }*/
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() throws Exception {
