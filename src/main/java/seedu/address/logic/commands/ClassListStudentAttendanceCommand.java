@@ -61,7 +61,7 @@ public class ClassListStudentAttendanceCommand extends Command {
 
         Classroom classToListAttendance = classroomManager.findClassroom(className, moduleCode);
         if (classToListAttendance == null) {
-            return new CommandResult(MESSAGE_FAIL);
+            throw new CommandException(MESSAGE_FAIL);
         }
 
         builder.append(HtmlTableProcessor.getH3Representation(String.format(HTML_TABLE_TITLE_ATTENDANCE,

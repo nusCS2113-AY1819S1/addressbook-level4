@@ -51,7 +51,7 @@ public class ClassDeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         if (classToDelete == null) {
-            return new CommandResult(MESSAGE_FAIL);
+            throw new CommandException(MESSAGE_FAIL);
         }
         classroomManager.deleteClassroom(classToDelete);
         classroomManager.saveClassroomList();
