@@ -1,0 +1,74 @@
+= Bao Lin Ruo - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== Role: Developer
+
+Code contribution and add extra features on existing addressbook level 4
+
+== Responsibility: Integration and Testing
+
+Overlook version control of the project and ensure that individual software modules are combined and tested as a group.
+
+== PROJECT: JitHub
+
+---
+
+== Overview
+
+JitHub is a desktop personal assistant application that allows students to manage their contacts, schedule and to-do tasks. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 15 kLoC.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to create a to-do task*
+** What it does: allows the user to create to-do tasks.
+** Justification: This feature improves the usability of the product significantly because a user can create a to-do task to remind them the to-dos of the day.
+** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+** Credits: JavaMail, CalendarFx
+
+* *Minor enhancement*: added a calendar view where users can view their schedules, enhancing the overall user interface.
+
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.3` (1 release) on GitHub
+** Enhancements to existing features:
+*** Updated the GUI theme (Pull requests https://github.com[#50], https://github.com[#115])
+*** Wrote additional tests for existing features to increase coverage from 82.51% to 90.16% (Pull request https://github.com[#119])
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#118]
+*** Did cosmetic tweaks to existing contents of the Developer Guide: https://github.com[#130]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com[#121], https://github.com[#120], https://github.com[#95]
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[77], https://github.com[92])
+** Tools:
+*** Integrated a third party library (CalendarFx) to the project (https://github.com[#77])
+
+_{you can add/remove categories in the list above}_
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=todo]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=todo]
+
+
+== PROJECT: PowerPointLabs
+
+---
+
+_{Optionally, you may include other projects in your portfolio.}_
