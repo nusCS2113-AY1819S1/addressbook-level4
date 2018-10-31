@@ -44,7 +44,7 @@ public class StudentListCommand extends Command {
                                     CourseManager.getInstance()
                                             .getCourse(p.getCourseCode().courseCode).getCourseName().courseName))));
         }
-        sb.append(HtmlTableProcessor.getTableItemEnd());
+        sb.append(HtmlTableProcessor.getTableEnd());
 
         return new CommandResult(MESSAGE_SUCCESS, sb.toString());
     }
