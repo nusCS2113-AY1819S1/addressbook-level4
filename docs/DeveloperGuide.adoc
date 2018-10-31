@@ -300,10 +300,88 @@ Step 3. The user executes ...
 
 // end::add/delete[]
 
+// tag::edit[]
+=== Edit Feature
+==== Current Implementation
+The edit mechanism for candidates is facilitated by `EditPersonDescriptor` in `EditCandidateCommand` which creates a new Candidate object with edited attributes
+and `UniqueCandidateList` which stores the added candidates internally as an `internalList` which is a list of Candidate objects.
+Additionally, it implements the following operations to support the editing of candidates.
+
+* `UniqueCandidateList#contains(Candidate candidate)` — Checks whether a candidate exists inside `internalList` using `Candidate#isSameCandidate` to define equality.
+* `UniqueCandidateList#setCandidate(Candidate target, Candidate editedCandidate)` — Sets the Candidate object(target) in the `internalList` to the newly edited Candidate object(editedCandidate) through `List#set(int index, E element)`.
+
+These operations are exposed in the `Model` interface as `Model#hasCandidate(Candidate candidate)` and `Model#updateCandidate(Candidate target, Candidate editedCandidate)` respectively.
+
+The edit mechanism for companies is facilitated by `EditCompanyDescriptor` in `EditCompanyCommand` which creates a new Company object with edited attributes
+and `UniqueCompanyList` which stores the added companies internally as an `internalList` which is a list of Company objects.
+Additionally, it implements the following operations to support the editing of companies.
+
+* `UniqueCompanyList#contains(Company company)` — Checks whether a company exists inside `internalList` using `Company#isSameCompany` to define equality.
+* `UniqueCompanyList#setCompany(Company target, Company editedCompany)` — Sets the Company object(target) in the `internalList` to the newly edited Company object(editedCompany) through `List#set(int index, E element)`.
+
+These operations are exposed in the `Model` interface as `Model#hasCompany(Company company)` and `Model#updateCompany(Company target, Company editedCompany)` respectively.
+
+The edit mechanism for job offers is facilitated by `EditJobOfferDescriptor` in `EditJobDetailsCommand` which creates a new Job Offer object with edited attributes
+and `UniqueJobList` which stores the added job offer internally as an `internalList` which is a list of Job Offer objects.
+Additionally, it implements the following operations to support the editing of job offers.
+
+* `UniqueJobList#contains(JobOffer jobOffer)` — Checks whether a job offer exists inside `internalList` using `JobOffer#isSameJobOffer` to define equality.
+* `UniqueJobList#setJobOffer(JobOffer target, JobOffer editedJobOffer)` — Sets the Job Offer object(target) in the `internalList` to the newly edited Job Offer object(editedJobOffer) through `List#set(int index, E element)`.
+
+These operations are exposed in the `Model` interface as `Model#hasJobOffer(JobOffer jobOffer)` and `Model#updateJobOffer(JobOffer target, JobOffer editedJobOffer)` respectively.
+
+The editing of all three entities(Candidate, Company, JobOffer) follow the same mechanism.
+
+Given below is an example usage scenario and how the edit mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time.
+
+.. `UniqueCandidateList` will be initialised with the list of saved candidates in RecruitBook
+.. `UniqueCompanyList` will be initialised with the list of saved companies in RecruitBook
+.. `UniqueJobList` will be initialised with the list of saved job offers.
+[NOTE]
+Assume that upon initialisation, there are candidate, company and job offer entries in RecruitBook.
+
+Step 2. The user executes ...
+
+.. `editc 1 n/John Doe` to edit the name of the 1st person in the RecruitBook.
+... The name attribute in `EditPersonDescriptor` in `EditCandidateCommand` has been set to "John Doe" and the descriptor is used to compare with the original Candidate object and a new Candidate object is created with the name being "John Doe".
+... `EditCandidateCommand` then calls `Model#hasCandidate(Candidate candidate)` to check if the edited candidate has a duplicate in the RecruitBook. If not, `Model#updateCandidate(Candidate target, Candidate editedCandidate)` is then called that replaces the original Candidate object with the newly edited one.
+.. `editC 1 c/KFC` to edit the name of the 1st company in the RecruitBook.
+... The name attribute in `EditCompanyDescriptor` in `EditCompanyCommand` has been set to "KFC" and the descriptor is used to compare with the original Company object and a new Company object is created with the name being "KFC".
+... `EditCompanyCommand` then calls `Model#hasCompany(Company company)` to check if the edited company has a duplicate in the RecruitBook. If not, `Model#updateCompany(Company target, Company editedCompany)` is then called that replaces the original Company object with the newly edited one.
+.. `editj 1 j/Cashier` to edit the job title of the 1st job offer in the RecruitBook.
+... The job title attribute in `EditJobOfferDescriptor` in `EditJobDetailsCommand` has been set to "Cashier" and the descriptor is used to compare with the original JobOffer object and a new JobOffer object is created with the job title being "Cashier".
+... `EditJobDetailsCommand` then calls `Model#hasJobOffer(JobOffer jobOffer)` to check if the edited job offer has a duplicate in the RecruitBook. If not, `Model#updateJobOffer(JobOffer target, JobOffer editedJobOffer)` is then called that replaces the original JobOffer object with the newly edited one.
+[NOTE]
+Any duplicates formed after editing will not replace the original object. It will prompt an error message
+
+==== Design Considerations
+
+===== How edit executes
+* **Alternative 1 (current choice):** Replaces the original object with an edited one.
+** Pros: If the edited object were to result in errors, it can be prevented from replacing the original object.
+** Cons: It is less efficient as compared to editing the original object straightaway.
+* **Alternative 2:** Editing the original object instead of replacing it with an edited one.
+** Pros: It is more intuitive and efficient.
+** Cons: The edited object cannot be checked for duplicates without permanently changing the object first.
+
+===== Data structure to support the edit command
+* **Alternative 1 (current choice):** Separating the editing feature into 3 commands for different entities.
+** Pros: Greater distinction between the entities.
+** Cons: More commands to deal with (similar commands across all three entities).
+* **Alternative 2:** Have a central `EditManager` that handles all edits.
+** Pros: Reduction of command objects (less confusing).
+** Cons: There is coupling between the manager and the individual commands. Changes to an entity has to be cascaded to the manager.
+// end::edit[]
+
+// tag::find[]
 === Find Feature
 
 The `find` command is used to find candidates or companies stored in the address book through either the `findc` (find Candidate) or `findC` (find company).
 It extends `Command` and overrides two of its methods namely `CommandResult` and `equals`.
+
+// end::find[]
 
 // tag::shortlist[]
 === Shortlist Feature

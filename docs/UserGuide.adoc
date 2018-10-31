@@ -156,6 +156,8 @@ Examples:
 
 
 // end::add[]
+
+// tag::edit[]
 === Editing a candidate / company / job : `editc` `editC` `editj`
 
 ==== Edits attributes of the candidate at the specified index `INDEX`
@@ -193,6 +195,8 @@ Examples:
 
 *	`editj 1 xr/20-30` +
 (Edits the `MIN_AGE-MAX_AGE` attribute of the 1st job offer to be of 20 to 30 years of age)
+
+// end::edit[]
 
 // tag::delete[]
 === Deleting candidates / companies / job offers : `delete`
@@ -388,6 +392,7 @@ Examples:
 ==== Exits from the filter interface and system proceeds to ask for next command
 Format: `cancel`
 
+// tag::sort[]
 === Sorting candidates / company / job : `sortc` `sortC`
 
 ==== Sorting candidates based on different fields
@@ -418,6 +423,9 @@ Examples:
 *   `sortC r/` +
 (Sort all companies in reverse)
 
+// end::sort[]
+
+// tag::blacklist[]
 === Blacklisting candidates : `blacklist` `blacklist rm`
 Format: `blacklist` `<INDEX>`
 
@@ -434,6 +442,7 @@ Examples:
 (Blacklists first candidate in the list)
 *   `blacklist rm 1` +
 (Unblacklists first candidate in the list)
+// end::blacklist[]
 
 // tag::shortlist[]
 === Shortlisting candidates for a job offer : `shortlist`
