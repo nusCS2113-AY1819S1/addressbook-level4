@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class CourseCode {
 
     public static final String MESSAGE_COURSE_CODE_CONSTRAINTS =
-            "Course codes may only contain alphanumeric characters and spaces,"
+            "Course codes may only contain characters and spaces,"
                     + " can have between 1 to 10 characters, and it should not be blank";
 
     public static final String COURSE_CODE_VALIDATION_REGEX = "^[a-zA-Z\\s]{1,10}$";

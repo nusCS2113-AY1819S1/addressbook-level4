@@ -53,6 +53,11 @@ public class HtmlTableProcessor {
     public static String getH1Representation(String text) {
         return "<h1>" + text + "</h1>\n";
     }
+
+    public static String getH2Representation(String text) {
+        return "<h2>" + text + "</h2>\n";
+    }
+
     /**
      * This method returns HTML in a card form.
      */
@@ -68,6 +73,9 @@ public class HtmlTableProcessor {
 
     public static String getH3Representation(String text) {
         return "<h3>" + text + "</h3>\n";
+    }
+    public static String getH4Representation(String text) {
+        return "<h4>" + text + "</h4>\n";
     }
 
     public static String getTableHeadEnd() {
@@ -89,7 +97,7 @@ public class HtmlTableProcessor {
     }
 
     public static String getTableEnd() {
-        return "\"  </tbody>\\n\" +\n"
-                + "\"</table> \"";
+        return " </tbody>"
+                + "</table>";
     }
 }

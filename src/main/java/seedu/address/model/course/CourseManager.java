@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import seedu.address.model.StorageController;
+import seedu.address.model.student.StudentManager;
 import seedu.address.storage.adapter.XmlAdaptedCourse;
 import seedu.address.ui.HtmlTableProcessor;
 
@@ -57,6 +58,7 @@ public class CourseManager {
         return false;
     }
 
+
     public String getTableRepresentation() {
         StringBuilder sb = new StringBuilder();
 
@@ -102,5 +104,16 @@ public class CourseManager {
 
     public void setCourses(ArrayList<Course> courses) {
         this.courseList = courses;
+    }
+
+    public String getOrderedByCourseRepresentation() {
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(HtmlTableProcessor.getH2Representation("List of Students ordered by Courses"));
+        for (Course c : courseList) {
+            sb.append(StudentManager.getInstance().getStudentsInCourseRepresentation(c.getCourseCode().toString()));
+        }
+        return sb.toString();
+
     }
 }

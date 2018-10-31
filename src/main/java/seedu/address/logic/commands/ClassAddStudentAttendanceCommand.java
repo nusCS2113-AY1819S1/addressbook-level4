@@ -13,6 +13,8 @@ import seedu.address.model.Model;
 import seedu.address.model.classroom.Attendance;
 import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.ClassroomManager;
+import seedu.address.model.module.ModuleManager;
+import seedu.address.model.student.StudentManager;
 
 /**
  * Mark the class attendance list for a specified student for the system.
@@ -38,6 +40,8 @@ public class ClassAddStudentAttendanceCommand extends Command {
 
     private static final String MESSAGE_DUPLICATE_CLASSROOM_STUDENT_ATTENDANCE = "This student already"
             + " present in class: %1$s";
+    private static final String MESSAGE_INVALID_STUDENT = "Student does not exist";
+    private static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
 
     private final String className;
     private final String moduleCode;
@@ -64,6 +68,16 @@ public class ClassAddStudentAttendanceCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         ClassroomManager classroomManager = ClassroomManager.getInstance();
+        ModuleManager moduleManager = ModuleManager.getInstance();
+        StudentManager studentManager = StudentManager.getInstance();
+
+        if (!moduleManager.doesModuleExist(moduleCode)) {
+            throw new CommandException(MESSAGE_MODULE_CODE_INVALID);
+        }
+
+        if (!studentManager.doesStudentExistForGivenMatricNo(matricNo)) {
+            throw new CommandException(MESSAGE_INVALID_STUDENT);
+        }
 
         Classroom classToMarkAttendance = classroomManager.findClassroom(className, moduleCode);
         if (classToMarkAttendance == null) {

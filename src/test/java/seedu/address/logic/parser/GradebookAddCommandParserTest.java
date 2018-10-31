@@ -6,10 +6,15 @@ import org.junit.rules.ExpectedException;
 import seedu.address.logic.commands.GradebookAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import static org.junit.Assert.assertNotNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.GradebookAddCommandParser.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADEBOOK_ITEM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADEBOOK_MAXMARKS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADEBOOK_WEIGHTAGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.address.logic.parser.GradebookAddCommandParser.MESSAGE_EMPTY_INPUTS;
+import static seedu.address.logic.parser.GradebookAddCommandParser.MESSAGE_MAX_MARKS_ERROR;
+import static seedu.address.logic.parser.GradebookAddCommandParser.MESSAGE_MAX_MARKS_INVALID;
+import static seedu.address.logic.parser.GradebookAddCommandParser.MESSAGE_WEIGHTAGE_ERROR;
 
 public class GradebookAddCommandParserTest {
     private GradebookAddCommandParser parser = new GradebookAddCommandParser();

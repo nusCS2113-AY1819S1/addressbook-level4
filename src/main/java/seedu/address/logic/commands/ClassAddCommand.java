@@ -10,6 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.ClassroomManager;
+import seedu.address.model.module.ModuleManager;
 
 /**
  * Creates a class for a module.
@@ -33,6 +34,7 @@ public class ClassAddCommand extends Command {
             + " Enrollment size: %3$s";
 
     private static final String MESSAGE_DUPLICATE_CLASSROOM = "This classroom already exists in Trajectory";
+    private static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
 
     private final Classroom classToCreate;
 
@@ -55,6 +57,11 @@ public class ClassAddCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         ClassroomManager classroomManager = ClassroomManager.getInstance();
+        ModuleManager moduleManager = ModuleManager.getInstance();
+
+        if (!moduleManager.doesModuleExist(classToCreate.getModuleCode().moduleCode)) {
+            throw new CommandException(MESSAGE_MODULE_CODE_INVALID);
+        }
 
         if (classroomManager.hasClassroom(classToCreate)) {
             throw new CommandException(MESSAGE_DUPLICATE_CLASSROOM);

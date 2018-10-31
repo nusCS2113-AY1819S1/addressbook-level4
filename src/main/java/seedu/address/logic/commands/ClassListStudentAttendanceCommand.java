@@ -14,6 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.classroom.Attendance;
 import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.ClassroomManager;
+import seedu.address.model.module.ModuleManager;
 import seedu.address.ui.HtmlTableProcessor;
 
 /**
@@ -35,7 +36,9 @@ public class ClassListStudentAttendanceCommand extends Command {
             + " Class: %1$s"
             + ", Module code: %2$s";
     private static final String MESSAGE_FAIL = "Class belonging to module not found!";
+    private static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
     private static final String HTML_TABLE_TITLE_ATTENDANCE = "Attendance list for %1$s, %2$s";
+
 
     private final String className;
     private final String moduleCode;
@@ -57,13 +60,18 @@ public class ClassListStudentAttendanceCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         ClassroomManager classroomManager = ClassroomManager.getInstance();
-        final StringBuilder builder = new StringBuilder();
+        ModuleManager moduleManager = ModuleManager.getInstance();
+
+        if (!moduleManager.doesModuleExist(moduleCode)) {
+            throw new CommandException(MESSAGE_MODULE_CODE_INVALID);
+        }
 
         Classroom classToListAttendance = classroomManager.findClassroom(className, moduleCode);
         if (classToListAttendance == null) {
             throw new CommandException(MESSAGE_FAIL);
         }
 
+        final StringBuilder builder = new StringBuilder();
         builder.append(HtmlTableProcessor.getH3Representation(String.format(HTML_TABLE_TITLE_ATTENDANCE,
                 classToListAttendance.getClassName(), classToListAttendance.getModuleCode())));
         String studentStatus = "";

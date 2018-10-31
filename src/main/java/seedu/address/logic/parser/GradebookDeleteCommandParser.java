@@ -15,6 +15,8 @@ import seedu.address.model.gradebook.GradebookManager;
  */
 public class GradebookDeleteCommandParser {
     public static final String MESSAGE_EMPTY_INPUTS = "Module code and gradebook component name cannot be empty";
+    public static final String MESSAGE_EMPTY_MODULE_CODE = "Module code cannot be empty";
+    public static final String MESSAGE_EMPTY_COMPONENT_NAME = "Component name cannot be empty";
     /**
      * Parses the given {@code String args} of arguments in the context of the GradebookDeleteCommand
      * and returns a GradebookDeleteCommand object for execution.
@@ -32,9 +34,19 @@ public class GradebookDeleteCommandParser {
 
         String moduleCodeArg = argMultimap.getValue(PREFIX_MODULE_CODE).get();
         String gradeComponentNameArg = argMultimap.getValue(PREFIX_GRADEBOOK_ITEM).get();
-        boolean isEmpty = gradebookManager.isEmpty(moduleCodeArg, gradeComponentNameArg);
-        if (isEmpty) {
+        boolean isModuleCodeEmpty = gradebookManager.isModuleCodeEmpty(moduleCodeArg);
+        boolean isModuleCodeAndComponentNameEmpty = gradebookManager.isModuleCodeAndComponentNameEmpty(
+                moduleCodeArg,
+                gradeComponentNameArg);
+        boolean isComponentNameEmpty = gradebookManager.isComponentNameEmpty(gradeComponentNameArg);
+        if (isModuleCodeAndComponentNameEmpty) {
             throw new ParseException(MESSAGE_EMPTY_INPUTS);
+        }
+        if (isModuleCodeEmpty) {
+            throw new ParseException(MESSAGE_EMPTY_MODULE_CODE);
+        }
+        if (isComponentNameEmpty) {
+            throw new ParseException(MESSAGE_EMPTY_COMPONENT_NAME);
         }
         return new GradebookDeleteCommand(moduleCodeArg, gradeComponentNameArg);
     }

@@ -20,7 +20,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label fx:id="feedbackLabel" alignment="BOTTOM_RIGHT" prefHeight="28.0" prefWidth="250.0" textFill="RED">
+            <Label fx:id="feedbackLabel" alignment="BOTTOM_RIGHT" prefHeight="28.0" prefWidth="250.0" styleClass="label-bright" stylesheets="@DarkTheme.css" textFill="RED">
                <padding>
                   <Insets right="10.0" />
                </padding>
