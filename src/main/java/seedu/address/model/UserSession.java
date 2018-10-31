@@ -29,10 +29,13 @@ public class UserSession {
     private boolean loginStatus;
     private boolean adminStatus;
 
+    /**
+     * The constructor initializes the user with a stub username and password.
+     */
     public UserSession() {
         final Path userFilePath = Paths.get("users.json");
-        final Username username = new Username("admin");
-        final Password password = new Password("root");
+        final Username username = new Username("stub");
+        final Password password = new Password("stub");
         user = new User(username, password);
         loginStatus = false;
         adminStatus = false;
