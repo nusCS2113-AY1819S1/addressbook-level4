@@ -30,7 +30,7 @@ public class GradeSummaryCommand extends Command {
             + "Parameters: "
             + PREFIX_MEAN
             + "\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + COMMAND_WORD_2 + " "
             + PREFIX_MEAN;
 
     public static final String MESSAGE_SUCCESS = "Success Showing List";

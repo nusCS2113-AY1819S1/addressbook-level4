@@ -19,11 +19,11 @@ public class AssignGradeCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": edit test to persons whose names"
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + PREFIX_TEST_NAME + "cs2113quiz1 ";
+            + "Example: " + COMMAND_WORD_2 + " " + PREFIX_TEST_NAME + "cs2113quiz1 ";
 
     public static final String MESSAGE_TEST_NOT_EXISTS = "Test does not exists in all students";
     public static final String MESSAGE_GENERATE_GRADE_LIST = "grade of the test has been assign to student";
-    // public static final String MESSAGE_EMPTY_LIST = "The ";
+
 
 
     private final String testName;
