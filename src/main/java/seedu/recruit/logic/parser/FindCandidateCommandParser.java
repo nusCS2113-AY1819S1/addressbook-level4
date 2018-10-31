@@ -20,7 +20,6 @@ import seedu.recruit.logic.commands.FindCandidateCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.candidate.CandidateContainsKeywordsPredicate;
 
-
 /**
  * Parses input arguments and creates a new FindCandidateCommand object
  */
@@ -71,6 +70,9 @@ public class FindCandidateCommandParser implements Parser<FindCandidateCommand> 
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCandidateCommand.MESSAGE_USAGE));
         }
+
+        System.out.println("Parser: " + keywordsList);
+
 
         return new FindCandidateCommand(new CandidateContainsKeywordsPredicate(keywordsList));
     }

@@ -32,6 +32,7 @@ public class Prefix {
         }
 
         Prefix otherPrefix = (Prefix) obj;
+
         return otherPrefix.getPrefix().equals(getPrefix());
     }
 }

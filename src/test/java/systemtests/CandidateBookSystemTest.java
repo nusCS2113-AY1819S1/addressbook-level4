@@ -163,7 +163,7 @@ public abstract class CandidateBookSystemTest {
      * Displays all candidates with any parts of their names matching {@code keyword} (case-insensitive).
      */
     protected void showPersonsWithName(String keyword) {
-        executeCommand(FindCandidateCommand.COMMAND_WORD + " " + keyword);
+        executeCommand(FindCandidateCommand.COMMAND_WORD + " n/" + keyword);
         assertTrue(getModel().getFilteredCandidateList().size()
                 < getModel().getCandidateBook().getCandidateList().size());
     }
