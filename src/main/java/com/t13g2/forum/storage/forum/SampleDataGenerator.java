@@ -7,6 +7,9 @@ import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.model.forum.Module;
 import com.t13g2.forum.model.forum.User;
 
+/**
+ *
+ */
 public class SampleDataGenerator {
     private UnitOfWork uow;
     private int userId;
@@ -17,6 +20,9 @@ public class SampleDataGenerator {
         this.uow = uow;
     }
 
+    /**
+     *
+     */
     public void generate() {
         this.generateUser();
         this.generateModule();
@@ -25,6 +31,9 @@ public class SampleDataGenerator {
         this.generateAnnouncement();
     }
 
+    /**
+     *
+     */
     private void generateUser() {
         User admin = new User();
         admin.setUsername("admin");
@@ -50,6 +59,9 @@ public class SampleDataGenerator {
         this.moduleId = module.getId();
     }
 
+    /**
+     *
+     */
     private void generateThread() {
         ForumThread forumThread = new ForumThread();
         forumThread.setModuleId(this.moduleId);
@@ -59,6 +71,9 @@ public class SampleDataGenerator {
         this.forumThreadId = forumThread.getId();
     }
 
+    /**
+     *
+     */
     private void generateComment() {
         Comment comment = new Comment();
         comment.setThreadId(this.forumThreadId);

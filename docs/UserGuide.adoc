@@ -146,7 +146,7 @@ Examples:
 
 * `deleteComment cId/1`
 
-=== Listing all the modules : 'listModule'
+=== Listing all the modules : `listModule`
 
 List all the existing modules in the forum book. +
 Format: `listModule`
@@ -155,7 +155,7 @@ Examples:
 
 * `listModule`
 
-=== Listing all the forumThreads : 'selectModule'
+=== Listing all the forumThreads : `selectModule`
 
 List all the existing forumThreads under a specific module that exists as well. +
 Format: `selectModule mCode/MODULE CODE`
@@ -164,7 +164,7 @@ Examples:
 
 * `selectModule mCode/CS2113`
 
-=== Listing all the comments : 'selectThread'
+=== Listing all the comments : `selectThread`
 
 List all the existing comments under a specific forumThread that exists as well. +
 Format: `selectThread tId/THREAD ID`
