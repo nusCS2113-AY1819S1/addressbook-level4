@@ -69,7 +69,7 @@ public class Comments {
     }
 
     /**
-     * Test code, to do create a function to view comments by displaying Html file. Optional, add and delete comment. Addsome code
+     * Test code, to do create a function to view comments by displaying Html file.
      */
     public static void main(String[] args) {
         Comments comment = new Comments();
