@@ -94,6 +94,7 @@ public class ClassAddStudentAttendanceCommand extends Command {
         classroomManager.saveClassroomAttendanceList();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, matricNo,
-                classToMarkAttendance.getClassName(), classToMarkAttendance.getModuleCode()));
+                classToMarkAttendance.getClassName(), classToMarkAttendance.getModuleCode()),
+                classroomManager.getClassroomAttendanceHtmlRepresentation(classToMarkAttendance));
     }
 }
