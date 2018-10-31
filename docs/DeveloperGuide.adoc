@@ -441,22 +441,96 @@ image::FindTagSequenceDiagram.png[width:800]
 
 === Limit feature
 ==== Current Implementation
-The limit command is based on the data type "Date", which includes two dates and moneyFlow.
-Once the user execute the limit command, the program will read all the records from the memory.
+The limit command is based on the data type "Date", which includes two dates and "moneyFlow".
+Once the user execute the limit command, the Limit will be stored inside the LimitList.xml file by
+calling the function model.add(limit). The input limit will be serialized and stored.
+Whenever the user change the recordList information, including adding a record, deleting a record
+and editing a record, all the limits will be checked automatically by calling the function model.autoLimitCheck,
+this function will generate a string which contains all the exceeded limits' information will be printed
+out to warn the user that they have overspent their money.
 
-The user need to input two dates, the first one is start date while the second one is end date.
-And the user also need to input the limit money they want to set. The user enter two dates after the
-one "d/" index followed by money with m/ index.
+The user enter two dates after the one "d/" index followed by money with m/ index.
+The user need to input two dates, the first one is dateStart while the second one is dateEnd.
+The dateStart must be earlier or equals to dateEnd, otherwise, the program will throw error.
+The user also need to input the limit money they want to set. Unlike the moneyFlow used
+by addCommand, the limit moneyFlow can only be normal real number, which does not have "-" or
+"+" in front of the number. After user input the normal real number, the parser will add a "-"
+at the beginning of the real number, which makes it a normal moneyFlow.
+If user input wrong form of limit moneyFlow, the program will throw error.
+
 
 The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
 . This returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
 . The string associated with `d/` is then passed into `LimitCommandParser#splitByWhitespace` for further processing and returns an array.
-This string will be split into two strings and each of them will be construct as a date type variable
+This string will be split into two strings and each of them will be construct as a date type variable.
+. After parsing the two dates, the parser will check whether the dateStart is small
 . The argument mode is determined by the size of this array and the elements are further processed into `Date` objects, before creating and returning a `ListCommand` object.
 
 The following sequence diagram shows how the limit operation works:
 
 image::LimitSequenceDiagram.png[width:800]
+
+=== deleteLimit feature
+==== Current Implementation
+deleteLimit will delete the limit inside the limitList according to the dates input. The user inputs
+two dates, dateStart and dateEnd, and the parser will make it a limit which has a dummy money.
+Then call the getSameDatesLimit() to get the limit with the same dates. Afterwards, the command will
+call deleteLimit(sameDatesLimit) to delete the limit.
+
+The user enter two dates after the one "d/" index.
+The user need to input two dates, the first one is dateStart while the second one is dateEnd.
+The dateStart must be earlier or equals to dateEnd, otherwise, the program will throw error.
+If there is no limits inside the limitList has the same dates, the program will throw an error.
+
+
+The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
+. This returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
+. The string associated with `d/` is then passed into `deleteLimitCommandParser#splitByWhitespace` for further processing and returns an array.
+This string will be split into two strings and each of them will be construct as a date type variable.
+. After parsing the two dates, the parser will check whether the dateStart is small
+. The argument mode is determined by the size of this array and the elements are further processed into `Date` objects, before creating and returning a `ListCommand` object.
+
+The following sequence diagram shows how the deleteLimit operation works:
+
+image::deleteLimitSequenceDiagram.png[width:800]
+
+
+=== editLimit feature
+==== Current Implementation
+The editLimit command is similar to limit command, has dateStart, dateEnd and moneyFlow.
+The command will do the replacement by deleting the limit with same dates and add the new limit.
+
+
+
+The user enter two dates after the one "d/" index followed by money with m/ index.
+The user need to input two dates, the first one is dateStart while the second one is dateEnd.
+The dateStart must be earlier or equals to dateEnd, otherwise, the program will throw error.
+If there is no limits inside the limitList has the same dates, the program will throw an error.
+The user also need to input the limit money they want to reset.
+
+
+The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
+. This returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
+. The string associated with `d/` is then passed into `editLimitCommandParser#splitByWhitespace` for further processing and returns an array.
+This string will be split into two strings and each of them will be construct as a date type variable.
+. After parsing the two dates, the parser will check whether the dateStart is small
+. The argument mode is determined by the size of this array and the elements are further processed into `Date` objects, before creating and returning a `ListCommand` object.
+
+The following sequence diagram shows how the limit operation works:
+
+image::editLimitSequenceDiagram.png[width:800]
+
+
+=== checkLimit feature
+==== Current Implementation
+This feature is to help the user to check all the limits stored inside the limitList. The function will call
+manualLimitCheck(), which will generate a string that contains all limits' information.
+
+When there is no limits inside the limitList, the program will throw an error.
+
+The following sequence diagram shows how the limit operation works:
+
+image::checkLimitSequenceDiagram.png[width:800]
 
 === Delete By Date Entry
 ==== Current implementation
