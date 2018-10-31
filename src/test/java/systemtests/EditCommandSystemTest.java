@@ -58,7 +58,8 @@
 //    public void edit() {
 //        Model model = getModel();
 //
-//        /* ----------------- Performing edit operation while an unfiltered list is being shown ---------------------- */
+//        /* ----------------- Performing edit operation while an unfiltered list is being shown
+// ---------------------- */
 //
 //        /* Case: edit all fields, command with leading spaces, trailing spaces and multiple spaces between each field
 //         * -> edited
@@ -115,7 +116,8 @@
 //        editedPerson = new PersonBuilder(personToEdit).withTags().build();
 //        assertCommandSuccess(command, index, editedPerson);
 //
-//        /* ------------------ Performing edit operation while a filtered list is being shown ------------------------ */
+//        /* ------------------ Performing edit operation while a filtered list is being shown
+// ------------------------ */
 //
 //        /* Case: filtered person list, edit index within bounds of address book and person list -> edited */
 //        showPersonsWithName(KEYWORD_MATCHING_MEIER);
