@@ -24,31 +24,34 @@ import seedu.address.model.tag.Tag;
 
 
 /**
- * Add the given tags to selected item by index.
+ * Delete the given tags to selected item by index.
  */
 
-public class AddTagCommand extends Command {
-    public static final String COMMAND_WORD = "addTag";
+public class DeleteTagCommand extends Command {
+    public static final String COMMAND_WORD = "deleteTag";
 
-    public static final String MESSAGE_SUCCESS = "Added tags to the selected item.";
+    public static final String MESSAGE_SUCCESS = "Deleted tags from the selected item.";
 
-    public static final String MESSAGE_NO_TAG = "Please include the tags you want to add.";
+    public static final String MESSAGE_NO_TAG = "Please include the tags you want to delete.";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add the inputted tags to the selected item "
+    public static final String MESSAGE_DOES_NOT_EXIST = "The selected item does not contain the inputted tags.";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete the inputted tags from the selected item "
             + "by the index number used in the displayed item list.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_TAG + "TAG [MORE_TAGS]"
             + " Example: " + COMMAND_WORD + " 1 " + PREFIX_TAG + " Lab1";
 
-    private final AddTagDescriptor addTagDescriptor;
+    private static boolean flag = false; //to indicate whether a deletion is executed.
+    private final DeleteTagDescriptor deleteTagDescriptor;
     private final Index index;
 
-    public AddTagCommand(Index index, AddTagDescriptor addTagDescriptor) {
+    public DeleteTagCommand(Index index, DeleteTagDescriptor deleteTagDescriptor) {
         requireNonNull(index);
-        requireNonNull(addTagDescriptor);
+        requireNonNull(deleteTagDescriptor);
 
         this.index = index;
-        this.addTagDescriptor = new AddTagDescriptor(addTagDescriptor);
+        this.deleteTagDescriptor = new DeleteTagDescriptor(deleteTagDescriptor);
     }
 
     @Override
@@ -62,48 +65,49 @@ public class AddTagCommand extends Command {
         }
 
         Item itemToEdit = lastShownList.get(index.getZeroBased());
-        Item editedItem = createEditedItem(itemToEdit, addTagDescriptor);
+        Item editedItem = createEditedItem(itemToEdit, deleteTagDescriptor);
 
         model.updateItem(itemToEdit, editedItem);
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitStockList();
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(flag ? (MESSAGE_SUCCESS) : (MESSAGE_DOES_NOT_EXIST));
 
     }
 
     /**
      * Creates and returns a {@code Item} with the details of {@code itemToEdit}
-     * edited with {@code addTagDescriptor}.
+     * edited with {@code deleteTagDescriptor}.
      */
-    private static Item createEditedItem(Item itemToEdit, AddTagCommand.AddTagDescriptor addTagDescriptor) {
+    private static Item createEditedItem(Item itemToEdit, DeleteTagCommand.DeleteTagDescriptor deleteTagDescriptor) {
         assert itemToEdit != null;
 
         Name updatedName = itemToEdit.getName();
         Quantity updatedQuantity = itemToEdit.getQuantity();
         Quantity updatedMinQuantity = itemToEdit.getMinQuantity();
-        Set<Tag> updatedTags = addTagDescriptor.getTags();
-        updatedTags.addAll(itemToEdit.getTags()); //A set will automatically sort its elements
+        Set<Tag> updatedTags = new HashSet<>(itemToEdit.getTags());
+        flag = updatedTags.removeIf((Tag current) -> deleteTagDescriptor.getTags().toString().toLowerCase()
+                .contains(current.toString().toLowerCase()));
         return new Item(updatedName, updatedQuantity, updatedMinQuantity, updatedTags);
     }
 
     /**
      * Temporarily stores the tags to be added.
      */
-    public static class AddTagDescriptor {
+    public static class DeleteTagDescriptor {
         private Set<Tag> tags;
 
-        public AddTagDescriptor() {}
+        public DeleteTagDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public AddTagDescriptor(AddTagDescriptor toCopy) {
+        public DeleteTagDescriptor(DeleteTagDescriptor toCopy) {
             setTags(toCopy.tags);
         }
 
         /**
-         * Returns true if there is tag to add.
+         * Returns true if there is tag to delete.
          */
         public boolean haveTag() {
             return CollectionUtil.isAnyNonNull(tags);
@@ -129,12 +133,12 @@ public class AddTagCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof AddTagDescriptor)) {
+            if (!(other instanceof DeleteTagDescriptor)) {
                 return false;
             }
 
             // state check
-            AddTagDescriptor e = (AddTagDescriptor) other;
+            DeleteTagDescriptor e = (DeleteTagDescriptor) other;
 
             return getTags().equals(e.getTags());
         }
