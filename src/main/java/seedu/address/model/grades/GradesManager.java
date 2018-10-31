@@ -74,10 +74,12 @@ public class GradesManager {
      This method deletes all grades of student if gradebook component is deleted.
      */
     public void deleteGrades (Grades grade) {
-        grades.remove(grade);
-        Grades gradeCheck = findGrade(grade.getModuleCode(), grade.getGradeComponentName());
-        if (gradeCheck != null) {
-            deleteGrades(gradeCheck);
+        if (!grades.isEmpty()) {
+            grades.remove(grade);
+            Grades gradeCheck = findGrade(grade.getModuleCode(), grade.getGradeComponentName());
+            if (gradeCheck != null) {
+                deleteGrades(gradeCheck);
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADEBOOK_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
@@ -44,6 +45,7 @@ public class GradebookDeleteCommand extends Command {
 
     @Override
     public CommandResult execute (Model model, CommandHistory history) throws CommandException {
+        requireNonNull(model);
         GradesManager gradesManager = new GradesManager();
         if (toDeleteGradebookComponent == null) {
             return new CommandResult(MESSAGE_DELETE_FAIL);

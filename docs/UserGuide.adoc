@@ -431,6 +431,7 @@ Creates a grade item to a module code. +
 Format: `gradebook add mc/MODULE_CODE cn/COMPONENT_NAME [mm/MAX_MARKS] [w/WEIGHTAGE]`
 
 ****
+* Inputs are case sensitive.
 * Module code must exist
 * Component name must not already exist in Trajectory.
 * Accumulated weightage for grade components in module cannot exceed 100%.
@@ -447,6 +448,7 @@ Edits a grade item. +
 Format: `gradebook edit mc/MODULE_CODE cn/COMPONENT_NAME [ei/EDITED_COMPONENT_NAME] [mm/EDITED_MAX_MARKS] [w/EDITED_WEIGHTAGE]`
 
 ****
+* Inputs are case sensitive.
 * Grade component name must exist in existing module.
 * Accumulated weightage including the updated weightage must not exceed 100%.
 * At least one optional parameter must be included in command.
@@ -461,9 +463,10 @@ Updated maximum marks and weightage of Assignment 1 in CS2113 to 60 and 50% resp
 
 ==== Remove Grade Component : `gradebook delete`
 Removes a grade item to a module code. +
-Format: `gradebook delete mc/MODULE_CODE cn/COMPONENT_NAME'
+Format: `gradebook delete mc/MODULE_CODE cn/COMPONENT_NAME`
 
 ****
+* Inputs are case sensitive.
 * Grade component name must exist in existing module.
 ****
 
@@ -474,9 +477,10 @@ Deletes Assignment 1 from module CS2113.
 
 ==== Find Grade Component : `gradebook find`
 Finds gradebook component. +
-Format: `gradebook find mc/MODULE_CODE cn/COMPONENT_NAME'
+Format: `gradebook find mc/MODULE_CODE cn/COMPONENT_NAME`
 
 ****
+* Inputs are case sensitive.
 * Grade component name must exist in existing module.
 ****
 
@@ -487,7 +491,7 @@ Finds Assignment 1 to module CS2113.
 
 ==== List Grade Components : `gradebook list`
 Lists all the grade items in a certain module. +
-Format: `gradebook list'
+Format: `gradebook list`
 
 Examples:
 
@@ -496,7 +500,7 @@ Lists all the grade items found in Trajectory.
 
 ==== List Students Grades : `grade list`
 Lists grades of all students enrolled in all modules. +
-Format: `grade list'
+Format: `grade list`
 
 Examples:
 
@@ -505,9 +509,10 @@ Lists all students grades recorded in Trajectory.
 
 ==== Add Student Grade : `grade add`
 Assigns marks to a student. +
-Format: `grade add mc/MODULE_CODE cn/COMPONENT_NAME i/MATRIC_NO m/MARKS '
+Format: `grade add mc/MODULE_CODE cn/COMPONENT_NAME i/MATRIC_NO m/MARKS`
 
 ****
+* Inputs are case sensitive.
 * Students must be enrolled to the module.
 * Grade component name must exist in existing module.
 * Marks assigned to student for the particular gradebook component must not exceed its maximum marks.
@@ -520,9 +525,10 @@ Assigns 50 marks to CS2113 student with matric number A0167789S for Assignment 1
 
 ==== Display Graph of Student Grades : `grade graph`
 Displays graph of all students of one grade component of an existing module. +
-Format: `grade graph mc/MODULE_CODE cn/ITEM'
+Format: `grade graph mc/MODULE_CODE cn/COMPONENT_NAME`
 
 ****
+* Inputs are case sensitive.
 * Grade component name must exist in existing module.
 * Marks of all students taking the module should be added in.
 ****
