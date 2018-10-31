@@ -528,7 +528,7 @@ Format: `editLimit d/START_DATE END_DATE m/MONEYFLOW` +
 
 ****
 * `MONEYFLOW` can only be a positive integer, and does not require a "+" or "-".
-* `START_DATE/END_DATE` must be exactly the same as when the limit was created. 
+* `START_DATE/END_DATE` must be exactly the same as when the limit was created.
 ****
 
 Examples:
