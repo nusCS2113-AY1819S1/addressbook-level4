@@ -235,7 +235,7 @@ This section describes some noteworthy details on how certain features are imple
 // tag::add/delete[]
 === Add/Delete Feature
 ==== Current Implementation
-
+===== Candidates
 The add/delete mechanism of candidates is facilitated in `UniqueCandidateList` which stores the added candidates internally as an `internalList` which is a list of Candidate objects.
 
 It implements `Iterable<Candidate>`, where it overrides the `Iterator`, `equals` and `hashCode` of the `Iterable` interface.
@@ -247,6 +247,7 @@ Additionally, it implements the following operations to support adding/deletion 
 
 These operations are exposed in the Model interface as Model#addCandidate(Candidate) and Model#deleteCandidate(Candidate candidate) respectively.
 
+===== Companies
 The add/delete mechanism of companies is facilitated in `UniqueCompanyList` which stores the added companies internally as an `internalList` which is a list of Company objects.
 
 It implements `Iterable<Company>`, where it overrides the `Iterator`, `equals` and `hashCode` of the `Iterable` interface.
@@ -258,6 +259,7 @@ Additionally, it implements the following operations to support adding/deletion 
 
 These operations are exposed in the Model interface as Model#addCompany(Company) and Model#deleteCompany(Company company) respectively.
 
+===== Job Offers
 The add/delete mechanism of job offer is facilitated in `UniqueJobList` which stores the added job offer internally as an `internalList` which is a list of JobOffer objects.
 
 It implements `Iterable<JobOffer>`, where it overrides the `Iterator`, `equals` and `hashCode` of the `Iterable` interface.
