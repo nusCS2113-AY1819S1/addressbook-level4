@@ -7,6 +7,9 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.ClassAddCommand;
 
+/**
+ * Provides a test for the class add command parser
+ */
 public class ClassAddCommandParserTest {
     private ClassAddCommandParser parser = new ClassAddCommandParser();
 
