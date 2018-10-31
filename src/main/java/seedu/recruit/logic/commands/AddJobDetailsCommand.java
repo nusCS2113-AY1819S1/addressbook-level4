@@ -15,7 +15,6 @@ import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.joboffer.JobOffer;
-import seedu.recruit.ui.MainWindow;
 
 /**
  * Intermediate Command of AddJobCommand
@@ -60,9 +59,8 @@ public class AddJobDetailsCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        if (!MainWindow.getDisplayedBook().equals("companybook")) {
-            EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
-        }
+        EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
+
         int companyIndex = model.getCompanyIndexFromName(toAdd.getCompanyName());
         if (companyIndex == -1) {
             throw new CommandException(MESSAGE_COMPANY_NOT_FOUND);

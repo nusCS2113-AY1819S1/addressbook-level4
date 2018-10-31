@@ -10,7 +10,6 @@ import static seedu.recruit.testutil.TestUtil.getMidIndex;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.recruit.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.recruit.commons.core.index.Index;
@@ -19,7 +18,6 @@ import seedu.recruit.logic.commands.SelectCandidateCommand;
 import seedu.recruit.logic.commands.UndoCandidateBookCommand;
 import seedu.recruit.model.Model;
 
-@Ignore("not updated with new UI changes")
 public class SelectCandidateCommandSystemTest extends CandidateBookSystemTest {
     @Test
     public void select() {
@@ -120,7 +118,7 @@ public class SelectCandidateCommandSystemTest extends CandidateBookSystemTest {
         Model expectedModel = getModel();
         String expectedResultMessage = String.format(
                 MESSAGE_SELECT_PERSON_SUCCESS, expectedSelectedCardIndex.getOneBased());
-        int preExecutionSelectedCardIndex = getPersonListPanel().getSelectedCardIndex();
+        int preExecutionSelectedCardIndex = getCandidateDetailsPanel().getSelectedCardIndex();
 
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);

@@ -16,6 +16,8 @@ public class ModelHelper {
     private static final Predicate<Candidate> PREDICATE_MATCHING_NO_CANDIDATES = unused -> false;
     private static final Predicate<Company> PREDICATE_MATCHING_NO_COMPANIES = unused -> false;
 
+    // ============================= CANDIDATE BOOK ======================================= //
+
     /**
      * Updates {@code model}'s filtered list to display only {@code toDisplay}.
      */
@@ -31,6 +33,15 @@ public class ModelHelper {
     public static void setCandidateFilteredList(Model model, Candidate... toDisplay) {
         setCandidateFilteredList(model, Arrays.asList(toDisplay));
     }
+
+    /**
+     * Returns a predicate that evaluates to true if this {@code Candidate} equals to {@code other}.
+     */
+    private static Predicate<Candidate> getCandidatePredicateMatching(Candidate other) {
+        return person -> person.equals(other);
+    }
+
+    // ============================= COMPANY BOOK ======================================= //
 
     /**
      * Updates {@code model}'s filtered list to display only {@code toDisplay}.
@@ -49,12 +60,8 @@ public class ModelHelper {
     }
 
     /**
-     * Returns a predicate that evaluates to true if this {@code Candidate} equals to {@code other}.
+     * Returns a predicate that evaluates to true if this {@code Company} equals to {@code other}.
      */
-    private static Predicate<Candidate> getCandidatePredicateMatching(Candidate other) {
-        return person -> person.equals(other);
-    }
-
     private static Predicate<Company> getCompanyPredicateMatching(Company other) {
         return person -> person.equals(other);
     }

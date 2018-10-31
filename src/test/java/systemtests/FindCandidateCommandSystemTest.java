@@ -32,7 +32,8 @@ public class FindCandidateCommandSystemTest extends CandidateBookSystemTest {
          */
         String command = "   " + FindCandidateCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER + "   ";
         Model expectedModel = getModel();
-        ModelHelper.setCandidateFilteredList(expectedModel, BENSON, DANIEL); // first names of Benson and Daniel are "Meier"
+        ModelHelper.setCandidateFilteredList(expectedModel,
+                BENSON, DANIEL); // first names of Benson and Daniel are "Meier"
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -138,7 +139,7 @@ public class FindCandidateCommandSystemTest extends CandidateBookSystemTest {
         /* Case: find while a candidate is selected -> selected card deselected */
         showAllPersons();
         selectPerson(Index.fromOneBased(1));
-        assertFalse(getPersonListPanel().getHandleToSelectedCard().getName().equals(DANIEL.getName().fullName));
+        assertFalse(getCandidateDetailsPanel().getHandleToSelectedCard().getName().equals(DANIEL.getName().fullName));
         command = FindCandidateCommand.COMMAND_WORD + " Daniel";
         ModelHelper.setCandidateFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);

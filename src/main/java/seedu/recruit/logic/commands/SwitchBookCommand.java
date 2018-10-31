@@ -20,7 +20,7 @@ public class SwitchBookCommand extends Command {
     public static final String MESSAGE_SUCCESSFULLY_SWITCHED_TO_COMPANY_BOOK =
             "Switched to Company Book successfully.";
 
-    private static String MESSAGE_SUCCESS = "";
+    private static String MESSAGE_SUCCESS = " ";
 
     public static void setMessage(String message) {
         MESSAGE_SUCCESS = message;

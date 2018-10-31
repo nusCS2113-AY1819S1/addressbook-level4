@@ -49,7 +49,7 @@ Graphical User Interface (GUI).
 .  Copy the file to the folder you want to use as the home folder for your Recruit Book.
 .  Double-click the file to start the app. The GUI (as shown in Figure 1) should appear in a few seconds.
 [NOTE]
-RecruitBook opens Company Book by default.
+RecruitBook opens Candidate Book by default.
 
 .Ui of RecruitBook
 image::Ui.png[width="790"]
@@ -440,7 +440,7 @@ Examples:
 .   `send` +
     (To send the email)
 
-=== Exits from any intermediate command: `cancel`
+=== Exiting from any intermediate command: `cancel`
 
 Format : `cancel`
 
@@ -461,7 +461,7 @@ Exits the program. +
 
 * Format in CLI : `exit`
 
-* GUI (refer to Figure 4) : At the top of the application, locate the menu bar and click `File` > `exit`.
+* GUI (refer to Figure 9) : At the top of the application, locate the menu bar and click `File` > `exit`.
 
 .GUI of Exit on Menu Bar
 image::exit.png[width="390"]
@@ -484,17 +484,29 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
-*	*Help* : `help`
-*	*Add* : `addc n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS …` +
+|=====
+|*Help* | `help`
+|   *Switch* | `switch`
+|	*Add* | `addc n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS …`
+
             e.g. `addc n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 …`
-*	*List* : `list [jobs /candidates]`
-*	*Edit* : `editc <INDEX> [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` or `editC <INDEX>` +
+|	*Edit* | `editc <INDEX> [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` or `editC <INDEX>` +
+
             e.g. `editc 2 e/jameslee@example.com`, `editC 5`
-*	*Find* : `find <tag>/KEYWORD [MORE_KEYWORDS]` +
-*	*Filter* : `filter <tag> [h/highest education level] [j/job] [s/expected salary] [x/age]` +
-            e.g. `filter h/O LEVEL`
-*	*Delete* : `deletec <INDEX>` or `deletej <INDEX>` +
+|	*Delete* | `deletec <INDEX>` or `deletej <INDEX>` +
+
             e.g. `deletec 1 `, `deletej 5`
-*	*Clear* : `clear`
-*	*Exit* : `exit`
-*   *Email* : `email`
+|	*List* | `list [jobs /candidates]`
+|   *Select Candidate* | `select` `<INDEX>`
+|   *Select Company* | `selectCompany` `<INDEX>`
+|   *Select Job Offer* | `selectJob` `<INDEX>`
+|	*Find* | `find <tag>/KEYWORD [MORE_KEYWORDS]` +
+|	*Filter* | `filter <tag> [h/highest education level] [j/job] [s/expected salary] [x/age]` +
+
+            e.g. `filter h/O LEVEL`
+|   *Sort* | `sort`
+|   *Shortlist Candidate* | `shortlist`
+|   *Email* | `email`
+|   *Cancel* | `cancel`
+|	*Clear* | `clear`
+|	*Exit* | `exit`
