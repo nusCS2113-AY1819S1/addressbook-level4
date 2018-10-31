@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DIST_NAME_AHHUA
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showDistributorAtIndex;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalDistributors.getTypicalDistributorBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
@@ -112,7 +111,7 @@ public class EditDistributorCommandTest {
 
     @Test
     public void execute_duplicatePersonFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST);
+        showDistributorAtIndex(model, INDEX_FIRST);
 
         // edit product in filtered list into a duplicate in address book
         Distributor distributorInList = model.getDistributorInfoBook().getDistributorList()
