@@ -14,14 +14,14 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2113-AY1819S1-T16-2/main
 
-By: `Team 16-2`      Since: `Sept 2018`      Licence: `MIT`
+By: `T16-2`      Since: `Sept 2018`      Licence: `MIT`
 
 == Introduction
 
 ProManage is a *professional desktop application* for companies that specialises in executing projects that undergoes a
 long and tedious planning phase, prior to their event. This is particularly useful for companies that have a distinct structure
 and chain of command. For each project, there is a project team, which is usually led by a *Manager*. The planning
-committee consists of various branches: *Admin, Logistics, Programmes, Finance, Publicity, Marketing and Safety*.
+committee consists of various branches such as *Admin, Logistics, Programmes, Finance, Publicity, Marketing and Safety*.
 
 Our application aims to ease the mode of task, event allocation and management by providing an all-in-one platform for
 the project team. It saves companies' time and money. Our customers will feel at ease communicating with one another in
@@ -67,6 +67,8 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 Three types priorities: `default`,`manager`,`employee` +
 If login command is not executed, the priority will be `default`.
+
+All clicking features are disabled. Clicking on persons and events will not trigger anything.
 ====
 
 
@@ -74,7 +76,8 @@ If login command is not executed, the priority will be `default`.
 
 Format: `help`
 
-=== Login the app: 'login'
+
+=== Login the app: `login`
 Priority level: `default`
 
 Login to the app as one of the following identity: `manager` or `employee` +
@@ -83,62 +86,125 @@ Once login cannot logout till the app is closed.
 Format: login `identity`
 
 Example: +
-login manager
+`login manager`
 
-=== Adding an employee : 'add'
+=== Adding an employee : `add`
 Priority level: `default`,`manager`
+
 
 Adds an employee to ProManage +
 Format/Prompts: +
 Enter a command: `add` +
 Enter employee details: `n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT [t/TAG]...`
 
+[TIP]
+An employee can have any number of tags (including 0)
+
 Example: +
 `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dep/ADMIN`
 
-=== Listing all personnel of the company : 'list'
-Priority level: all
-
-Shows a list of personnel in the company +
-Format/Prompts: +
-Enter a command: `list`
-
-=== Editing an employee : 'edit'
+=== Editing an employee : `edit`
 Priority level: `default`,`manager`
 
 Edits the details of the employee: +
 Format/Prompts: +
-Enter a command: `edit LIST_INDEX p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT t/TAG…​`
+Enter a command: `edit PERSON_INDEX [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dep/DEPARTMENT] [t/TAG]…​`
 
 ****
-* Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The
+* Edits the employee at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The
 index *must be a positive integer* 1, 2, 3, ... +
 * At least one of the optional fields must be provided.
 * Name is not editable
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing t/ without specifying any tags after it.
+* When editing tags, the existing tags of the employee will be removed i.e adding of tags is not cumulative.
+* You can remove all the employee’s tags by typing t/ without specifying any tags after it.
 ****
 
-=== Deleting an employee : 'delete'
+=== Deleting an employee : `delete`
 Priority level: `default`,`manager`
 
 Delete an employee from ProManage: +
 Format/Prompts: +
-Enter a command: `delete LIST_INDEX`
+Enter a command: `delete PERSON_INDEX`
+
+****
+* Deletes the employee at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+=== Listing all employee of the company : `list`
+Priority level: all
+
+Shows a list of employee in the company +
+Format/Prompts: +
+Enter a command: `list`
 
 === Adding an event: `addEvent`
 Priority level: `default`,`manager`
 
-Adds an event to ProManage, via a series of prompts +
+Adds an event to ProManage +
 Format/Prompts: +
 Enter a command: `addEvent` +
-Enter event details: `n/NAME d/DESCRIPTION l/LOCATION date/DATE(DDMMYY) s/START TIME e/END TIME`  +
+Enter event details: `n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START_TIME e/END_TIME`  +
+
+****
+* DATE needs to be in YYYY-MM-DD format
+* TIME needs to be in 00:00 format
+* START_TIME must not be later than END_TIME
+****
+
+[NOTE]
+====
+* Current checking of date format is loose. Certain invalid date may still be accepted, such as 2018-02-30.
+====
 
 Example: +
 `addEvent` +
 `n/Board Meeting d/Weekly Meeting l/Conference Room 1 date/2018-09-28 s/12:00 e/23:59 ` +
 Creates an event named Board Meeting.
+
+
+=== Modifying an event: `editEvent`
+Priority level: `default`,`manager`
+
+Edits the details of the events:
+Format/Prompts: +
+Enter a command: `editEvent EVENT_INDEX` +
+Enter event details: `[n/NAME] [d/DESCRIPTION] [l/LOCATION] [date/DATE] [s/START_TIME [e/END_TIME]`  +
+
+****
+* Edits the event at the specified `EVENT_INDEX`. The index refers to the index number shown in the displayed event list. The
+index *must be a positive integer* 1, 2, 3, ... +
+* At least one of the optional fields must be provided.
+* DATE needs to be in YYYY-MM-DD format
+* TIME needs to be in 00:00 format
+* START_TIME must not be later than END_TIME
+* Existing values will be updated to the input values.
+****
+
+Examples:
+* Enter a command: `editEvent 10`  +
+Enter event details: `n/Weekly Meeting d/Check on progress l/Conference Room 2 date/2018-09-10 s/12:00 e/14:00`
+
+=== Deleting an event : `deleteEvent`
+Priority level: `default`,`manager`
+
+Delete the specified event from ProManage. +
+Format/Prompts: +
+Enter a command: `deleteEvent EVENT_INDEX`
+
+****
+* Deletes the event at the specified `EVENT_INDEX`.
+* The index refers to the index number shown in the displayed event list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `deleteEvent 2` +
+Deletes the 2nd event in the address book.
+
 
 === Sorting all events: `sort`
 Priority level: all
@@ -156,107 +222,73 @@ Format: sort `key word` +
 Example: sort name
 
 === Invite employees: `invite`
-Priority level: `default`,`manager`
+Priority level: all
 
-Add employees to the project event at the respective specified INDEX. The index refers to the index number shown in the
-displayed person and event list. The index must be a positive integer 1, 2, 3... +
+Invites an employee to an event. +
 Format: `invite PERSON_INDEX to/EVENT_INDEX` +
 Example: invite 1 to/2
+
+****
+* Invites the employee at the specified `PERSON_INDEX` *TO* the event at the specified `EVENT_INDEX`.
+* The index refers to the index number shown in the displayed person list and event list respectively.
+* The index *must be a positive integer* 1, 2, 3, ...
+* Employee should not have already been invited to the selected event.
+****
 
 === Remove employee: `remove`
 Priority level: `default`,`manager`
 
-Removes an employee from the project event. +
+Removes an employee from the an event. +
 Format/Prompts: `remove PERSON_INDEX  from/EVENT_INDEX` +
 Example: remove 1 from/2
 
+****
+* Remove the employee at the specified `PERSON_INDEX` *FROM* the event at the specified `EVENT_INDEX`.
+* The index refers to the index number shown in the displayed person list and event list respectively.
+* The index *must be a positive integer* 1, 2, 3, ...
+* The employee to be remove must be previously invited to an event in order to be removed.
+****
 
-=== Modifying an event: `editEvent`
-Priority level: `default`,`manager`
+=== Selecting a person: `select`
+Priority level: all
 
-Modifying the event at the specified INDEX. The index refers to the index number shown in the displayed event list. The
-index must be a positive integer 1, 2, 3... +
-Input nil if it is not the field to be changed. +
+Selects an employee and view the specified employee's events by date, year, month, month and year, or all his/her events. +
 Format/Prompts: +
-Enter a command: `editEvent SCHEDULE_INDEX` +
-Enter event details: `n/NAME d/DESCRIPTION l/LOCATION date/DATE(DDMMYY) s/START TIME e/END TIME`  +
+Enter a command: `select PERSON_INDEX [date/DATE] [m/MONTH] [y/YEAR]`
 
 ****
-* Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The
-index *must be a positive integer* 1, 2, 3, ... +
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
+* Select the employee at the specified `PERSON_INDEX` and view all his/her events or events at certain time as indicated.
+* The index refers to the index number shown in the displayed person list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+* DATE needs to be in YYYY-MM-DD format
+* MONTH needs to be in 00 format (e.g. 01, 02, ... , 12)
+* YEAR needs to be in 0000 format. (e.g. 2018)
+* If DATE is indicated, MONTH and YEAR must NOT be indicated. Then, all events of the selected employee at the specific DATE will be displayed.
+* MONTH and YEAR can be both used at the same time, resulting in events on the selected MONTH and YEAR to be displayed.
 ****
 
 Examples:
-* Enter a command: `editEvent 10`  +
-Enter event details: n/Weekly Meeting d/Check on progress l/Conference Room 2 date/2018-09-10 s/12:00 e/14:00`
 
-=== Locating events by name: `find`
+* `select 1`
+* `select 1 date/2018-10-31`
+* `select 1 m/08`
+* `select 1 y/2018`
+* `select 1 y/2018 m/08`
+
+=== Locating persons by name: `find`
 Priority level: all
 
-Finds the event whose names contain any of the given keywords. +
+Finds employees whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The search is case insensitive. e.g `Budget Review` will match `budget review`
-* The order of the keywords does not matter. e.g. `Budget Review` will match `Review Budget`
+* The search is case insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Budget` will not match `Budg`
-* Events matching at least one keyword will be returned (i.e. `OR` search). e.g. `Budget Review` will return `Budget`, `Review`
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
-Examples:
-
-* `find Budget` +
-Returns `Budget Review` and `Budget Press Release`
-* `find Budget Review` +
-Returns any event having names `Budget` or `Review`
-
-=== Deleting an event : `deleteEvent`
-Priority level: `default`,`manager`
-
-Delete the event at the specified INDEX. +
-Format/Prompts: +
-Enter a command: `deleteEvent SCHEDULE_INDEX`
-
-****
-* Deletes the event at the specified `INDEX`.
-* The index refers to the index number shown in the displayed event/task list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
-
-Examples:
-
-* `schedule` +
-`deleteEvent 2` +
-Deletes the 2nd event in the address book.
-* `find Meeting` +
-`deleteEvent 1` +
-Deletes the 1st event in the results of the `find` command.
-
-
-=== Selecting an event: `select`
-Priority level: `default`,`manager`
-
-Selects the event identified by the index number used in the displayed event list. +
-Format/Prompts: +
-Enter a command: `select SCHEDULE_INDEX`
-
-****
-* Selects the event and loads the full description of the event at the specified `INDEX`.
-* The index refers to the index number shown in the displayed event list.
-* The index *must be a positive integer* `1, 2, 3, ...`
-****
-
-Examples:
-
-* `schedule` +
-`select 2` +
-Selects the 2nd event in the event schedule.
-* `find Meeting` +
-`select 1` +
-Selects the 1st event in the results of the `find` command.
 
 === Listing entered commands : `history`
 Priority level: all
@@ -271,7 +303,7 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 ====
 
 // tag::undoredo[]
-=== Undoing previous command : `undo`
+=== Undoing previous command : `undo` [to be done in v1.4]
 Priority level: all
 
 Restores the event schedule to the state before the previous _undoable_ command was executed. +
@@ -299,7 +331,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
 
-=== Redoing the previously undone command : `redo`
+=== Redoing the previously undone command : `redo` [to be done in v1.4]
 Priority level: all
 
 Reverses the most recent `undo` command. +
@@ -343,7 +375,6 @@ Enter a command: `exit`
 ProManage data saves data in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
@@ -353,28 +384,25 @@ There is no need to save manually.
 
 * *Add*: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT [t/TAG]...`
 
+* *Edit* : `edit PERSON_INDEX [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dep/DEPARTMENT] [t/TAG]…​`
+
+* *Delete* : `delete PERSON_INDEX`
+
 * *List* : `list`
 
-* *Edit* : `edit LIST_INDEX p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT t/TAG…​`
+* *addEvent* : `addEvent n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START_TIME e/END_TIME`
 
-* *Delete* : `delete LIST_INDEX`
-
-* *addEvent* : `addEvent n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START TIME e/END TIME ` +
-// TODO figure this out! Enter description or instructions: `INSTRUCTIONS`
-
-* *Schedule* : `schedule`
-
-* *Invite* : `invite PERSON_INDEX to/EVENT_INDEX`
-
-* *Remove* : `remove PERSON_INDEX  n/EVENT_INDEX`
-
-* *editEvent* : `n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START TIME e/END TIME `
-
-* *Find* : `find KEYWORD [MORE_KEYWORDS]`
+* *editEvent* : `editEvent `[n/NAME] [d/DESCRIPTION] [l/LOCATION] [date/DATE] [s/START_TIME [e/END_TIME]`
 
 * *deleteEvent* : `deleteEvent SCHEDULE_INDEX`
 
+* *Invite* : `invite PERSON_INDEX to/EVENT_INDEX`
+
+* *Remove* : `remove PERSON_INDEX  from/EVENT_INDEX`
+
 * *Select* : `select SCHEDULE_INDEX`
+
+* *Find* : `find KEYWORD [MORE_KEYWORDS]`
 
 * *History* : `history`
 

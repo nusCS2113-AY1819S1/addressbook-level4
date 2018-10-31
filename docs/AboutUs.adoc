@@ -15,17 +15,17 @@ image::icedcoffeeboy.png[width="150", align="left"]
 {empty}[https://github.com/IcedCoffeeBoy[github]] [<<#, portfolio>>]
 
 **Role:** Developer +
-**Responsibilities:** In charge of Storage
+**Responsibilities:** In charge of Storage, Code Quality
 
 '''
 
 
-=== Jie Liang Ang
+=== Ang Jie Liang
 image::jieliangang.png[width="150", align="left"]
 {empty}[https://github.com/jieliangang[github]] [<<#, portfolio>>]
 
 **Role:** Team Lead +
-**Responsibilities:** Integration, Scheduling and Tracking
+**Responsibilities:** Integration, Scheduling and Tracking, Deliverable and Deadlines
 
 '''
 
@@ -35,7 +35,7 @@ image::jeevz10.png[width="150", align="left"]
 {empty}[https://github.com/Jeevz10[github]] [<<#, portfolio>>]
 
 **Role:** Developer +
-**Responsibilities:** Documentation
+**Responsibilities:** Documentation, Testing
 
 
 '''
@@ -45,7 +45,7 @@ image::perrythewang.png[width="150", align="left"]
 {empty}[https://github.com/perrythewang[github]] [<<#, portfolio>>]
 
 **Role:** Developer +
-**Responsibilities:** Testing
+**Responsibilities:** In Charge of Model
 
 '''
 
@@ -54,6 +54,6 @@ image::fr3ddy4.png[width="150", align="left"]
 {empty}[https://github.com/fr3ddy4[github]] [<<#, portfolio>>]
 
 **Role:** Developer +
-**Responsibilities:** Code Quality Assurance
+**Responsibilities:** In charge of UI
 
 '''

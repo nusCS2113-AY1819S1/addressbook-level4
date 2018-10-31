@@ -55,7 +55,7 @@ public class SelectCommandParser implements Parser<SelectCommand> {
         } else if (hasMonth && hasYear && !hasDate) {
             String month = ParserUtil.parseMonth(argMultimap.getValue(PREFIX_MONTH).get());
             String year = ParserUtil.parseYear(argMultimap.getValue(PREFIX_YEAR).get());
-            String combined = year + "-" + month;
+            String combined = year + "-" + month; //format year and month into one string
             return new SelectCommand(index, combined, TimeType.MONTH_AND_YEAR);
         } else {
             throw new ParseException(

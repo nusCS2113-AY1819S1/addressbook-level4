@@ -240,9 +240,6 @@ public class ParserUtil {
         return year;
     }
 
-
-
-
     /**
      * Parses a {@code String startTime} into a {@code StartTime}.
      * Leading and trailing whitespaces will be trimmed.
@@ -252,10 +249,9 @@ public class ParserUtil {
     public static StartTime parseStartTime(String startTime) throws ParseException {
         requireNonNull(startTime);
         String trimmedStartTime = startTime.trim();
-        // TODO: WORK ON VALIDATING DATE
-        //if (!Location.isValidLocation(trimmedLocation)) {
-        //  throw new ParseException(Location.MESSAGE_LOCATION_CONSTRAINTS);
-        //}
+        if (!StartTime.isValidTime(trimmedStartTime)) {
+            throw new ParseException(StartTime.MESSAGE_TIME_CONSTRAINTS);
+        }
         return new StartTime(trimmedStartTime);
     }
 
@@ -268,10 +264,9 @@ public class ParserUtil {
     public static EndTime parseEndTime(String endTime) throws ParseException {
         requireNonNull(endTime);
         String trimmedEndTime = endTime.trim();
-        // TODO: WORK ON VALIDATING DATE
-        //if (!Location.isValidLocation(trimmedLocation)) {
-        //  throw new ParseException(Location.MESSAGE_LOCATION_CONSTRAINTS);
-        //}
+        if (!EndTime.isValidTime(trimmedEndTime)) {
+            throw new ParseException(EndTime.MESSAGE_TIME_CONSTRAINTS);
+        }
         return new EndTime(trimmedEndTime);
     }
 
