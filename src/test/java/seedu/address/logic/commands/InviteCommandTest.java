@@ -67,7 +67,7 @@ public class InviteCommandTest {
         Event eventUpdated = new EventBuilder(eventChosen).withAttendee(setUpdated).build();
 
         expectedModel.updateEvent(eventChosen, eventUpdated);
-        expectedModel.commitAddressBook();
+        expectedModel.commitEventList();
 
         assertCommandSuccess(inviteCommand, model, commandHistory, expectedMessage, expectedModel);
     }
