@@ -297,7 +297,7 @@ Step 3. The user executes ...
 
 // end::add/delete[]
 
-=== Find feature
+=== Find Feature
 
 The `find` command is used to find candidates or companies stored in the address book through either the `findc` (find Candidate) or `findC` (find company).
 It extends `Command` and overrides two of its methods namely `CommandResult` and `equals`.
@@ -305,14 +305,18 @@ It extends `Command` and overrides two of its methods namely `CommandResult` and
 // tag::shortlist[]
 === Shortlist Feature
 ==== Current Implementation
+===== Shortlisting a Candidate
+
 The shortlist mechanism is facilitated by `select`, `selectCompany` and `selectJob` command.
-It extends `CompanyBook` with a list of shortlisted candidate(s) for each job offer, stored internally as a `shortlistedCandidateList`.
+It extends `CompanyBook` with a list of shortlisted candidate(s) for each job offer, stored internally as a
+Unique Candidate List called `candidateList`. The reason for storing as a unique list is to prevent duplicated
+candidates from being added into the same `candidateList`.
 
 It is a 5-stage process supported by `LogicManager` by keeping track of the `LogicState`.
 
 . `primary`
-. `SelectCompany`
-. `SelectJob`
+. `SelectCompanyForShortlist`
+. `SelectJobForShortlist`
 . `SelectCandidate`
 . `ShortlistCandidate`
 
@@ -329,9 +333,9 @@ Assume that there are candidates and companies present in the data of RecruitBoo
 [NOTE]
 Since RecruitBook opens up Candidate Book by default, adding a job offer will automatically switch the view to Company Book.
 
-. RecruitBook creates a new object `Cashier` with `JobOffer` class. Hence, `Cashier` has `shortlistedCandidateList` as one of its attributes.
+. RecruitBook creates a new object `Cashier` with `JobOffer` class. Hence, `Cashier` has `candidateList` as one of its attributes.
 [NOTE]
-`shortlistedCandidateList` is empty upon creation of the `Cashier` object.
+`candidateList` is empty upon creation of the `Cashier` object.
 
 . User executes `shortlist` command. RecruitBook enters Stage 2 of the shortlisting process to shortlist a candidate for a job offer.
 This is implemented by `LogicManager` where `setLogicState` is called in each stage to connect one after another. User will need to execute
@@ -342,11 +346,64 @@ This is implemented by `LogicManager` where `setLogicState` is called in each st
 .. `select x` -> User selects the candidate to shortlist.
 .. `confirm` -> User confirms the above inputs.
 
-. RecruitBook proceeds to add shortlisted candidate into `shortlistedCandidateList` of the job offer through `addToShortlistedCandidateList` method in `JobOffer` class.
-. `shortlistedCandidateList` is linked to the job offer.
-[NOTE]
-You can access this list by calling `selectedJob.getShortlistedCandidateList()`.
+. RecruitBook proceeds to add shortlisted candidate through `Model`.
+`ModelManager` connects the `candidateList` of the job offer in `JobOffer` class to `Model`, which then connects
+to `Command`.
+.  `Model.shortlistCandidateToJobOffer()` method adds the shortlisted candidate into the `candidateList`.
+. `candidateList` is linked to the job offer.
+[TIP]
+You can access this list by calling `selectedJob.getUniqueCandidateList()`.
 
+. `model.commitCompanyBook()` is then called to indicate that Company Book has been changed.
+. RecruitBook exits the shortlisting process and returns your view to your last viewed book.
+
+===== Deleting a Shortlisted Candidate
+
+Deletion of a shortlisted candidate uses similar implementation as <<Shortlisting a Candidate>>.
+
+The shortlist mechanism is facilitated by `selectCompany` and `selectJob` command.
+It deletes a shortlisted candidate from the `candidateList` through `Model`.
+
+It is a 4-stage process supported by `LogicManager` by keeping track of the `LogicState`.
+
+. `primary`
+. `SelectCompanyForShortlistDelete`
+. `SelectJobForShortlistDelete`
+. `DeleteShortlistedCandidate`
+
+Given below is an example usage scenario and how the delete mechanism behaves at each step.
+
+[NOTE]
+x refers to the index from user input.
+
+. User launches the application. RecruitBook sets up the Candidate Book and Company Book respectively.
+[NOTE]
+Assume that there is at least one shortlisted candidate for the job offer selected by user.
+
+. User executes `deleteShortlist` command.
+[NOTE]
+Since RecruitBook opens up Candidate Book by default, entering the delete process for shortlisted candidates
+will automatically switch the view to Company Book.
+
+. RecruitBook enters Stage 2 of the deleting process.
+This is implemented by `LogicManager` where `setLogicState` is called in each stage to connect one after another. User will need to execute
+`cancel` command to exit from the shortlist process. The 4-stage process is described in order below.
+.. `deleteShortlist` -> User initializes the deleting process.
+.. `selectCompany x` -> User selects the company of the job offer.
+.. `selectJob x` -> User selects the job offer.
+.. `delete x` -> User selects the candidate to delete.
+
+. RecruitBook proceeds to delete the shortlisted candidate through `Model`.
+`ModelManager` connects the `candidateList` of the job offer in `JobOffer` class to `Model`, which then connects
+to `Command`.
+.  `Model.deleteShortlistedCandidateFromJobOffer()` method deletes the shortlisted candidate from the `candidateList`.
+[NOTE]
+This command checks if the selected candidate exists inside `candidateList` by evaluating a boolean statement
+`selectedJob.getUniqueCandidateList().contains(selectedCandidate)`. If the candidate does not exists inside the list,
+this command returns a message to be displayed to inform the user.
+
+. `model.commitCompanyBook()` is then called to indicate that Company Book has been changed.
+. RecruitBook exits the deleting process.
 
 ==== Design Considerations
 
