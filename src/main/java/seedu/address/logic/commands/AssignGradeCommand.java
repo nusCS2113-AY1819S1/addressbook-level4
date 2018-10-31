@@ -16,10 +16,10 @@ import seedu.address.model.util.AssignGrades;
 public class AssignGradeCommand extends Command {
     public static final String COMMAND_WORD = "AssignGradePerTest";
     public static final String COMMAND_WORD_2 = "agpt";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": assign grade to students.\n  "
-            + "the test name show be valid test that has been input before.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": edit test to persons whose names"
+            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD_2 + " " + PREFIX_TEST_NAME + "cs2113PE ";
+            + "Example: " + COMMAND_WORD + PREFIX_TEST_NAME + "cs2113quiz1 ";
 
     public static final String MESSAGE_TEST_NOT_EXISTS = "Test does not exists in all students";
     public static final String MESSAGE_GENERATE_GRADE_LIST = "grade of the test has been assign to student";

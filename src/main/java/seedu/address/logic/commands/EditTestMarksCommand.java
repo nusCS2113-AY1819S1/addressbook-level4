@@ -44,7 +44,7 @@ public class EditTestMarksCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": edit test to persons whose names"
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD_2 + " alice " + PREFIX_TEST_NAME + "cs2113quiz1 " + PREFIX_TEST_MARK + "67";
+            + "Example: " + COMMAND_WORD + " alice " + PREFIX_TEST_NAME + "cs2113quiz1 " + PREFIX_TEST_MARK + "67";
 
 
     public static final String MESSAGE_NOT_FOUND_TEST = "Test Name is not Found please add first.";

@@ -65,6 +65,7 @@ public class AddTestMarksCommandTest {
         assertEquals(Messages.MESSAGE_ADDED_TEST_LIST, commandResult.feedbackToUser);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
+
     @Test
     public void execute_duplicateTest_throwsCommandException() throws Exception {
 
