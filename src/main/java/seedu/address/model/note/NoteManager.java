@@ -179,9 +179,7 @@ public class NoteManager {
                 currentFilterState = FILTERED_BY_MODULE_CODE;
             }
         } else {
-            currentFilter = "";
-            currentFilterState = NO_FILTER;
-            filteredNotes = notes;
+            setFilteredNotesNoFilter();
         }
     }
 

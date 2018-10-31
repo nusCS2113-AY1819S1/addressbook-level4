@@ -51,6 +51,7 @@ public class NoteEditCommandTest {
 
         noteManager.addNote(note1.build());
         noteManager.saveNoteList(); // contains one note in list
+        noteManager.setFilteredNotesNoFilter();
 
         int index = 1; // arraylist size: 1, accessed index = 0 (zero-based) -> within bounds
         NoteBuilder editedNote1Builder = new NoteBuilder(note1.build());
@@ -88,6 +89,7 @@ public class NoteEditCommandTest {
         noteManager.addNote(note2.build()); // index 1
         noteManager.addNote(note3.build()); // index 2
         noteManager.saveNoteList();
+        noteManager.setFilteredNotesNoFilter();
 
         int index = 2; // arraylist size: 3, accessed index = 1 (zero-based) -> within bounds
 
@@ -124,6 +126,7 @@ public class NoteEditCommandTest {
         noteManager.addNote(note2.build());
         noteManager.addNote(note3.build());
         noteManager.saveNoteList();
+        noteManager.setFilteredNotesNoFilter();
 
         int index = 5; // arraylist size: 3, accessed index = 4 (zero-based) -> out of bounds
         ModuleCode newModuleCode = new ModuleCode("CS5000");

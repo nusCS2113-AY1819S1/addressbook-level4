@@ -56,6 +56,7 @@ public class NoteDeleteCommandTest {
         noteManager.addNote(dummyNote.build());
         noteManager.addNote(dummyNote.build());
         noteManager.saveNoteList();
+        noteManager.setFilteredNotesNoFilter();
 
         int index = 5; // arraylist size: 2, accessed index = 4 (zero-based) -> out of bounds
         NoteDeleteCommand noteDeleteCommand = new NoteDeleteCommand(index);
@@ -72,8 +73,8 @@ public class NoteDeleteCommandTest {
         noteManager.addNote(dummyNote.build());
         noteManager.addNote(dummyNote.build());
         noteManager.addNote(dummyNote.build());
-        noteManager.setFilteredNotesNoFilter();
         noteManager.saveNoteList();
+        noteManager.setFilteredNotesNoFilter();
 
         int index = 3; // arraylist size: 3, accessed index = 2 (zero-based) -> OK
         NoteDeleteCommand noteDeleteCommand = new NoteDeleteCommand(index);
