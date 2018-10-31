@@ -16,11 +16,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.EventManager;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
@@ -160,8 +163,12 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredEventList().size());
 
         Event event = model.getFilteredEventList().get(targetIndex.getZeroBased());
+
         final String[] splitName = event.getName().fullName.split("\\s+");
-        model.updateFilteredEventList(new EventContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        List<String> nameList = Arrays.asList(splitName[0]);
+        Map<Prefix, List<String> >keywordMap = new HashMap<>();
+        keywordMap.put(PREFIX_NAME, nameList);
+        model.updateFilteredEventList(new EventContainsKeywordsPredicate(keywordMap));
         assertEquals(1, model.getFilteredEventList().size());
     }
 

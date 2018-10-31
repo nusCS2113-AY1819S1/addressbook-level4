@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.EditCommand.EditEventDescriptor;
 import static seedu.address.logic.commands.EditCommand.createEditedEvent;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
 import java.util.HashSet;
 import java.util.List;
@@ -65,7 +64,6 @@ public class UnregisterCommand extends Command {
         Event registeredEvent = createEditedEvent(eventToUnregister, registerEventDescriptor);
 
         model.updateEvent(eventToUnregister, registeredEvent);
-        model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         model.commitEventManager();
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
