@@ -302,7 +302,6 @@ Step 3. The user executes ...
 The `find` command is used to find candidates or companies stored in the address book through either the `findc` (find Candidate) or `findC` (find company).
 It extends `Command` and overrides two of its methods namely `CommandResult` and `equals`.
 
-=======
 // tag::shortlist[]
 === Shortlist Feature
 ==== Current Implementation

@@ -7,7 +7,7 @@ import javafx.stage.Stage;
  */
 public class MainWindowHandle extends StageHandle {
 
-    private boolean isCompanyBookInitialized = false;
+    private boolean isCompanyBookInitialized;
     private CandidateDetailsPanelHandle candidateDetailsPanel;
     private CompanyJobDetailsPanelHandle companyJobDetailsPanel;
     private final ResultDisplayHandle resultDisplay;
@@ -20,7 +20,7 @@ public class MainWindowHandle extends StageHandle {
         super(stage);
         candidateDetailsPanel = new
                 CandidateDetailsPanelHandle(getChildNode(CandidateDetailsPanelHandle.CANDIDATE_DETAILS_VIEW_ID));
-
+        isCompanyBookInitialized = false;
         resultDisplay = new ResultDisplayHandle(getChildNode(ResultDisplayHandle.RESULT_DISPLAY_ID));
         commandBox = new CommandBoxHandle(getChildNode(CommandBoxHandle.COMMAND_INPUT_FIELD_ID));
         statusBarFooter = new StatusBarFooterHandle(getChildNode(StatusBarFooterHandle.STATUS_BAR_PLACEHOLDER));

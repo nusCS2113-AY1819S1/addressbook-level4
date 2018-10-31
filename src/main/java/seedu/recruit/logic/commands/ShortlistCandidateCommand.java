@@ -45,7 +45,7 @@ public class ShortlistCandidateCommand extends Command {
                     + MESSAGE_USAGE);
         }
 
-        model.shortListCandidateToJobOffer(selectedCandidate, selectedJobOffer);
+        model.shortlistCandidateToJobOffer(selectedCandidate, selectedJobOffer);
         model.commitCompanyBook();
 
         LogicManager.setLogicState("primary");

@@ -60,7 +60,7 @@ public class DeleteShortlistedCandidateCommand extends Command {
         }
 
         Candidate selectedCandidate = selectedJob.getObservableCandidateList().get(targetIndex.getZeroBased());
-        model.deleteShortListedCandidateFromJobOffer(selectedCandidate, selectedJob);
+        model.deleteShortlistedCandidateFromJobOffer(selectedCandidate, selectedJob);
         model.commitCompanyBook();
         if (DeleteShortlistedCandidateInitializationCommand.isDeleting()) {
             DeleteShortlistedCandidateInitializationCommand.isDoneDeleting();
