@@ -144,6 +144,7 @@ public class StorageController {
      * This method creates files for all datasets if they do not exist on the local filesystem.
      */
     private static void createFiles() {
+        new File(BASE_DIRECTORY).mkdirs();
         File classes = new File(storageClasses);
         File courses = new File(storageCourses);
         File modules = new File(storageModules);
