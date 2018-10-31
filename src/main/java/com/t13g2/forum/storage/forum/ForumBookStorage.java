@@ -13,6 +13,8 @@ public class ForumBookStorage implements IForumBookStorage {
     private ModuleStorage modules;
     private UserStorage users;
 
+    private boolean isFresh;
+
 
     public ForumBookStorage(IStorage underlyingStorage) {
         this.underlyingStorage = underlyingStorage;
@@ -62,6 +64,7 @@ public class ForumBookStorage implements IForumBookStorage {
         announcements = underlyingStorage.read(AnnouncementStorage.class);
         if (announcements == null) {
             announcements = new AnnouncementStorage();
+            announcements.setDirty();
             saveAnnouncement();
         }
     }
@@ -78,6 +81,7 @@ public class ForumBookStorage implements IForumBookStorage {
         comments = underlyingStorage.read(CommentStorage.class);
         if (comments == null) {
             comments = new CommentStorage();
+            comments.setDirty();
             saveComment();
         }
     }
@@ -95,6 +99,7 @@ public class ForumBookStorage implements IForumBookStorage {
         forumThreads = underlyingStorage.read(ForumThreadStorage.class);
         if (forumThreads == null) {
             forumThreads = new ForumThreadStorage();
+            forumThreads.setDirty();
             saveForumThread();
         }
     }
@@ -113,7 +118,9 @@ public class ForumBookStorage implements IForumBookStorage {
         users = underlyingStorage.read(UserStorage.class);
         if (users == null) {
             users = new UserStorage();
+            users.setDirty();
             saveUser();
+            this.isFresh = true;
         }
     }
 
@@ -129,6 +136,7 @@ public class ForumBookStorage implements IForumBookStorage {
         modules = underlyingStorage.read(ModuleStorage.class);
         if (modules == null) {
             modules = new ModuleStorage();
+            modules.setDirty();
             saveModule();
         }
     }
@@ -156,6 +164,10 @@ public class ForumBookStorage implements IForumBookStorage {
     @Override
     public CommentStorage getComments() {
         return comments;
+    }
+
+    public boolean isFresh() {
+        return this.isFresh;
     }
 
 

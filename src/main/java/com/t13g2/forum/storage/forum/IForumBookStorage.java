@@ -33,6 +33,8 @@ public interface IForumBookStorage {
 
     void loadModule();
 
+    boolean isFresh();
+
     AnnouncementStorage getAnnouncements();
 
     ForumThreadStorage getForumThreads();

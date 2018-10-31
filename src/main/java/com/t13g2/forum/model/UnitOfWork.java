@@ -5,6 +5,7 @@ import com.t13g2.forum.storage.forum.ForumBookStorage;
 import com.t13g2.forum.storage.forum.IForumBookStorage;
 import com.t13g2.forum.storage.forum.IStorage;
 import com.t13g2.forum.storage.forum.JsonFileStorage;
+import com.t13g2.forum.storage.forum.SampleDataGenerator;
 
 /**
  *
@@ -72,6 +73,13 @@ public class UnitOfWork implements IUnitOfWork, AutoCloseable {
     @Override
     public void close() throws Exception {
 
+    }
+
+    public void init() {
+        if (this.forumBookStorage.isFresh()) {
+            new SampleDataGenerator(this).generate();
+            this.commit();
+        }
     }
 }
 
