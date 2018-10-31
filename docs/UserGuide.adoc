@@ -23,7 +23,7 @@ Inventarie Pro is for self employed business owners who *prefer to use a desktop
 == Quick Start
 
 .  Ensure you have Java version 9  installed in your Computer.
-.  Download the latest inventarie.jar here (link will be added later).
+.  Download the latest Inventarie.jar here (link will be added later).
 .  Copy the file to the folder you want to use as the home folder for your Inventarie Pro.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 .  Once prompted, enter your username and password. This will be your permanent username and password for subsequent uses.
@@ -52,26 +52,35 @@ All commands and information about it is displayed
 
 ==== Register new user : `register`
 
-Creates a new user account in the application. +
 Format: `register u/USERNAME p/PASSWORD` +
-e.g. `register u/John p/pass`
+Creates a new user account in the application. +
+
+Examples:
+
+* `register u/John p/pass`
 
 ==== Login : `login`
 
-Logs the user into the application. +
 Format: `login u/USERNAME p/PASSWORD` +
-e.g. `login u/John p/pass`
+Logs the user into the application. +
+
+Examples:
+
+* `login u/John p/pass`
 
 ==== Logout: `logout`
 
+Format: `logout` +
 Logs the user out of the application. +
-Format: `logout`
 
 ==== Deregister: `deregister`
 
 Deregister the user account in the application. +
 Format: `deregister u/USERNAME p/PASSWORD` +
-e.g. `deregister u/John p/pass`
+
+Examples:
+
+ * `deregister u/John p/pass`
 
 // end::authentication[]
 
@@ -80,9 +89,14 @@ e.g. `deregister u/John p/pass`
 
 ==== Add a product: `add`
 
-Format: `add n/<product name> s/<serial no.> d/<distributor> i/<info.> t/<tags>`
+Format: `add n/PRODUCT_NAME s/SERIAL_NUMBER d/DISTRIBUTOR i/INFO t/TAGS`
 
 Adds a product to the list of products offered by the store, and adds the distributor to the list of distributors too if the distributor is not yet added. Distributors:s name is the Primary key.
+
+Examples:
+
+* `add n/G2 s/08382 d/Pilot Pens i/0.7 t/Stationary`
+* `add n/Black Tea s/10041 d/Lim Siang i/175mg t/Beverages`
 
 ==== List all products: `inventory`
 
@@ -92,11 +106,16 @@ Lists all products offered by the store in alphabetical order
 
 ==== Search for a product: `find`
 
-Format: `find <product name>`or <Serial number of product>
+Format: `find PRODUCT_NAME` or `find SERIAL_NUMBER`
 
 Displays the product and basic information related to it
 The search is case insensitive e.g ‘potato’ will match ‘POTATO’
-All products containing the name or having the same serial number that is serached for will appear.
+All products containing the name or serial number that is searched for will appear.
+
+Examples:
+
+* `find Cap`
+* `find 1021`
 
 ==== Show best selling product: `top selling`
 
@@ -111,9 +130,14 @@ Lists the best selling products in order of the sales revenues from those produc
 
 ==== Add a distributor: `addDistributor`
 
-Format: `addDistributor dn/<distributor name> dp/<distributor phone>`
+Format: `addDistributor dn/DISTRIBUTOR_NAME dp/PHONE_NUMBER`
 
 Adds a distributor to the list of distributors engaged with the store. Distributors should have different names. There should not exist 2 distributors with the same name but different phone numbers.
+
+Examples:
+
+* `addDistributor dn/Ming Kee dp/98761234`
+* `addDistributor dn/Hak Kim dp/65900011`
 
 ==== List all distributors: `listDistributors`
 
@@ -123,22 +147,41 @@ Provides the list of distributors engaged with the store.
 
 ==== Edit a distributor: `editDistributor index`
 
-Format: `editDistributor index dn/<distributor name> dp/<distributor serialNumber>`
+Format: `editDistributor index dn/DISTRIBUTOR_NAME dp/PHONE_NUMBER`
 
 Edits details of the indexed distributor from the list of distributors engaged with the store.
 Index should be a positive number.
 
+Examples:
+
+* `editDistributor 1 dn/Ben Lok dp/93120000`
+
 ==== Find a distributor: `findDistributor`
 
-Format: `findDistributor <some relevant field>`
+Format: `findDistributor DISTRIBUTOR_NAME`
 
-Finds distributors that are related to the <some relevant field> entered.
+Locates distributors that are related to the DISTRIBUTOR_NAME entered.
+
+Examples:
+
+* `findDistributor Taylor`
 
 ==== Delete a distributor: `deleteDistributor`
 
 Format: `deleteDistributor index`
 
 Deletes the indexed distributor from the list of distributors engaged with the store.
+
+Examples:
+
+* `delete 2` +
+Deletes the 2nd distributor in the contacts panel.
+
+* `find Betsy` +
+  `delete 1` +
+   Deletes the 1st distributor in the results of the find command.
+
+
 
 // end::distributormanagement[]
 
@@ -148,11 +191,15 @@ Deletes the indexed distributor from the list of distributors engaged with the s
 
 ==== Add a transaction: `transaction`
 
-Format: `Transaction pr/<product name> pr/<product name> ... pr/<product name`
+Format: `transaction pr/PRODUCT_NAME pr/PRODUCT_NAME ... pr/PRODUCT_NAME`
 
 Adds a transaction to the record for the given day.
 The time of the transaction, names of the products, and
 individual product quantities will be stored.
+
+Examples:
+
+* `transaction pr/Apple pr/Banana pr/Cherries`
 
 ==== View the latest transaction: `latest`
 
@@ -167,6 +214,11 @@ Format: `addreminder time/yyyy/MM/dd HH:mm:ss message/<The reminder message>`
 Sets and stores a reminder. In v1.2, this is only allowed for the current day.
 In future releases, reminders will be set in the current and future days.
 
+Examples:
+
+* `addreminder time/2018/07/30 18:20:31 message/Throw rubbish`
+* `addreminder time/2019/11/22 21:31:11 message/Milk delivery`
+
 ==== View due reminder notifcations: `duereminders`
 
 Format: `duereminders`
@@ -176,14 +228,14 @@ Shows all reminders that are still due in the current day.
 // end::journal[]
 
 === Clearing all entries : `clear`
-
+Format: `clear` +
 Clears all entries from the address book. +
-Format: `clear`
 
 === Exiting the program : `exit`
 
+Format: `exit` +
 Exits the program. +
-Format: `exit`
+
 
 === Saving the data
 
@@ -213,33 +265,3 @@ A: Yes, because Java is platform independent. However, please ensure that the la
 Q: Why can I not just use pen and paper to log my transactions, if I am a small provision store owner?
 
 A: There are numerous advantages to digitization of records. Do google ‘advantages of digitization’ for more information!
-
-
-== Command Summary
-
-* *Add Product* : `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-*  *Add Distributor* : `addD dn/DIST_NAME dp/DIST_PHONE` +
-e.g. `addD dn/Ah Huat Distributors dp/61234567`
-* *Add a Transaction* : `Transaction pr/<product name> pr/<product name> ... pr/<product name` +
-e.g. `transaction pr/Apple pr/Banana pr/Cherry pr/Banana`
-* *View the latest transaction: `latest`
-* *Set a Reminder* : `addreminder time/yyyy/MM/dd HH:mm:ss message/<The reminder message>` +
-e.g `addreminder time/2018/08/16 08:30:00 message/Remove expired milk from aisle 6.`
-* *View due Reminders* : `duereminders`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Edit Distributor* : `editD INDEX [dn/DIST_NAME] [dp/DIST_PHONE]` +
-e.g. `editD 2 dn/Distributors Huat Ah dp/67654321`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *List* : `list`
-* *Help* : `help`
-* *Select* : `select INDEX` +
-e.g.`select 2`
-* *History* : `history`
-* *Undo* : `undo`
-* *Redo* : `redo`
