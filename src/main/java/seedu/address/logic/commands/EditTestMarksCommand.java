@@ -1,6 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.AddTestMarksCommand.MESSAGE_PERSONNAME_NOT_FOUND;
+import static seedu.address.logic.commands.AddTestMarksCommand.MESSAGE_PERSON_DUPLICATE_FOUND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TEST_MARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TEST_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -14,13 +18,13 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.grade.Grade;
 import seedu.address.model.grade.Marks;
 import seedu.address.model.grade.Test;
 import seedu.address.model.grade.TestName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
-import seedu.address.model.person.Grade;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Nationality;
@@ -35,24 +39,28 @@ public class EditTestMarksCommand extends Command {
      * A command to edit person test marks
      */
     public static final String COMMAND_WORD = "edit_test";
-    public static final String COMMAND_WORD_2 = "et";
+    public static final String COMMAND_WORD_2 = "edt";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add test to persons whose names"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": edit test to persons whose names"
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice cs2113quiz1 66";
+            + "Example: " + COMMAND_WORD + " alice " + PREFIX_TEST_NAME + "cs2113quiz1 " + PREFIX_TEST_MARK + "67";
 
 
     public static final String MESSAGE_NOT_FOUND_TEST = "Test Name is not Found please add first.";
     private final NameContainsKeywordsPredicate predicate;
     private final String testName;
     private final String testMarks;
-    private final EditPersonDescriptor editPersonDescriptor = null;
+    private final String testGrade;
+    private final List<String> nameList;
 
-    public EditTestMarksCommand(NameContainsKeywordsPredicate predicate, String testName, String testMarks) {
+    public EditTestMarksCommand(NameContainsKeywordsPredicate predicate, String testName,
+                                String testMarks, String testGrade, List<String> nameList) {
         this.predicate = predicate;
         this.testName = testName;
         this.testMarks = testMarks;
+        this.testGrade = testGrade;
+        this.nameList = nameList;
     }
 
     @Override
@@ -63,10 +71,64 @@ public class EditTestMarksCommand extends Command {
 
         List<Person> personListName = model.getFilteredPersonList();
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        Person personToEdit = personListName.get(0);
+        String grade = "Undefined";
+        if (testGrade != null) {
+            grade = testGrade;
+        }
+        if (personListName.isEmpty()) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            throw new CommandException(MESSAGE_PERSONNAME_NOT_FOUND);
+        } else {
+            if (personListName.size() > 1) {
+                String fullName = "";
+                for (String name :nameList) {
+                    fullName += name + " ";
+                }
+                fullName = fullName.substring(0, fullName.length() - 1).toUpperCase();
+                boolean checked = false;
+                boolean duplicate = false;
+                for (Person person: personListName) {
+                    if (fullName.equals(person.getName().fullName.toUpperCase())) {
+                        return editPersonMarks(person, model);
+                    } else if (!fullName.equals(person.getName().fullName.toUpperCase())
+                            && person.getName().fullName.toUpperCase().contains(fullName)) {
+                        duplicate = true;
+                    } else {
+                        checked = true;
+                    }
+                }
+                if (!checked && duplicate) {
+                    model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+                    throw new CommandException(MESSAGE_PERSON_DUPLICATE_FOUND);
+                } else if (checked && !duplicate) {
+                    model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+                    throw new CommandException(MESSAGE_PERSONNAME_NOT_FOUND);
+                }
+            } else {
+                return editPersonMarks(personListName.get(0), model);
+            }
+        }
 
-        Test test = new Test(new TestName(testName), new Marks(testMarks));
-
+        return new CommandResult(
+                String.format(Messages.MESSAGE_PERSONS_NOT_FOUND, model.getFilteredPersonList().size()));
+    }
+    /**
+     * createEditedPerson
+     */
+    private CommandResult editPersonMarks(Person person, Model model) throws CommandException {
+        Person personToEdit = person;
+        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        Test test = null;
+        Grade assignGrade = new Grade("Undefined");
+        if (this.testGrade != null) {
+            assignGrade = new Grade(this.testGrade);
+        }
+        try {
+            test = new Test(new TestName(testName), new Marks(testMarks), assignGrade);
+        } catch (IllegalArgumentException e) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            throw new CommandException(e.getMessage());
+        }
         Set<Test> testList = new HashSet<>();
         testList.addAll(personToEdit.getTests());
 
@@ -80,6 +142,7 @@ public class EditTestMarksCommand extends Command {
         }
 
         if (!checkExists) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             throw new CommandException(MESSAGE_NOT_FOUND_TEST);
         }
 
@@ -107,14 +170,11 @@ public class EditTestMarksCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Grade updatedGrade = editPersonDescriptor.getGrade().orElse(personToEdit.getGrade());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Test> updatedTests = editPersonDescriptor.getTests().orElse(personToEdit.getTests());
         return new Person(updatedName, updateGender, updateNationality, updatedPhone,
-                updatedEmail, updatedAddress, updatedGrade, updatedTags, updatedTests);
+                updatedEmail, updatedAddress, updatedTags, updatedTests);
     }
-
-
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -133,7 +193,6 @@ public class EditTestMarksCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Grade grade;
         private Set<Tag> tags;
         private Set<Test> tests;
 
@@ -151,7 +210,6 @@ public class EditTestMarksCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setGrade(toCopy.grade);
             setTags(toCopy.tags);
             setTests(toCopy.tests);
         }
@@ -162,7 +220,7 @@ public class EditTestMarksCommand extends Command {
         public boolean isAnyFieldEdited() {
 
             return CollectionUtil.isAnyNonNull(name, phone, email,
-                    address, tags, grade, tests);
+                    address, tags, tests);
 
         }
 
@@ -212,14 +270,6 @@ public class EditTestMarksCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
-        }
-
-        public void setGrade(Grade grade) {
-            this.grade = grade;
-        }
-
-        public Optional<Grade> getGrade() {
-            return Optional.ofNullable(grade);
         }
 
 
@@ -278,7 +328,6 @@ public class EditTestMarksCommand extends Command {
                     && getNationality().equals(e.getNationality())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getGrade().equals(e.getGrade())
                     && getTags().equals(e.getTags())
                     && getTests().equals(e.getTests());
         }

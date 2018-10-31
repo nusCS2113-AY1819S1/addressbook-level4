@@ -7,7 +7,6 @@ import seedu.address.model.grade.Test;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
-import seedu.address.model.person.Grade;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Person;
@@ -26,7 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_GRADE = "100";
+    public static final String DEFAULT_TEST = "CS2113, 66, B";
 
     private Name name;
     private Gender gender;
@@ -34,7 +33,6 @@ public class PersonBuilder {
     private Email email;
     private Phone phone;
     private Address address;
-    private Grade grade;
     private Set<Tag> tags;
     private Set<Test> tests;
 
@@ -45,7 +43,6 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        grade = new Grade(DEFAULT_GRADE);
         tags = new HashSet<>();
         tests = new HashSet<>();
     }
@@ -60,7 +57,6 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        grade = personToCopy.getGrade();
         tags = new HashSet<>(personToCopy.getTags());
         tests = new HashSet<>(personToCopy.getTests());
     }
@@ -124,14 +120,15 @@ public class PersonBuilder {
     /**
      * Sets the {@code Grade} of the {@code Person} that we are building.
      */
-    public PersonBuilder withGrade(String grade) {
-        this.grade = new Grade(grade);
+    public PersonBuilder withTests(Test test) {
+        this.tests = new HashSet<>();
+        this.tests.add(test);
         return this;
     }
 
 
     public Person build() {
-        return new Person(name, gender, nationality, phone, email, address, grade, tags, tests);
+        return new Person(name, gender, nationality, phone, email, address, tags, tests);
     }
 
 }

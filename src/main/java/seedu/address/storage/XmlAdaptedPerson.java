@@ -15,7 +15,7 @@ import seedu.address.model.grade.Test;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
-import seedu.address.model.person.Grade;
+
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Person;
@@ -41,8 +41,6 @@ public class XmlAdaptedPerson {
     private String email;
     @XmlElement(required = true)
     private String address;
-    @XmlElement(required = true)
-    private String grade;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -62,7 +60,7 @@ public class XmlAdaptedPerson {
      */
 
     public XmlAdaptedPerson(String name, String gender, String nationality, String phone, String email, String address,
-                            String grade, List<XmlAdaptedTag> tagged, List<XmlAdaptedTest> tests) {
+                             List<XmlAdaptedTag> tagged, List<XmlAdaptedTest> tests) {
 
         this.name = name;
         this.gender = gender;
@@ -70,7 +68,6 @@ public class XmlAdaptedPerson {
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.grade = grade;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -91,7 +88,6 @@ public class XmlAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        grade = source.getGrade().value;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -160,14 +156,6 @@ public class XmlAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        if (grade == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Grade.class.getSimpleName()));
-        }
-        if (!Grade.isValidGrade(grade)) {
-            throw new IllegalValueException(Grade.MESSAGE_GRADE_CONSTRAINTS);
-        }
-        final Grade modelGrade = new Grade(grade);
-
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         final List<Test> personTests = new ArrayList<>();
@@ -178,7 +166,7 @@ public class XmlAdaptedPerson {
         final Set<Test> modelTests = new HashSet<>(personTests);
 
         return new Person(modelName, modelGender, modelNationality, modelPhone,
-                modelEmail, modelAddress, modelGrade, modelTags, modelTests);
+                modelEmail, modelAddress, modelTags, modelTests);
 
     }
 
@@ -199,7 +187,6 @@ public class XmlAdaptedPerson {
                 && Objects.equals(phone, otherPerson.phone)
                 && Objects.equals(email, otherPerson.email)
                 && Objects.equals(address, otherPerson.address)
-                && Objects.equals(grade, otherPerson.grade)
                 && tagged.equals(otherPerson.tagged)
                 && tests.equals(otherPerson.tests);
     }

@@ -2,6 +2,7 @@ package seedu.address.model.grade;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+//@@author clara1234566
 /**
  * Represents a Marks in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidMarks(String)}
@@ -11,7 +12,7 @@ public class Marks {
 
     public static final String MESSAGE_MARKS_CONSTRAINTS =
             "marks should be >=0 && <= 100";
-    public static final String MARKS_VALIDATION_REGEX = "^([0-9]|[1-9][0-9]|100)$";
+    public static final String MARKS_VALIDATION_REGEX = "^(?:100(?:\\.00?)?|\\d?\\d(?:\\.\\d\\d?)?)$";
     public final String value;
 
     /**

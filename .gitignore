@@ -14,9 +14,12 @@ preferences.json
 ./screenshot*.png
 classes/
 /data/
-/bin/
 src/main/resources/docs/
+!src/main/resources/docs/StudentGradeSummary.html
+/bin/
 out/
 /config.json
 reposense-report/
+!build.gradle
+
 

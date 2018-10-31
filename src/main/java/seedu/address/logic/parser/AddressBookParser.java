@@ -10,6 +10,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.AddScriptCommand;
 import seedu.address.logic.commands.AddTestMarksCommand;
+import seedu.address.logic.commands.AssignGradeCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CreateGroupCommand;
@@ -25,6 +26,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GenListCommand;
 import seedu.address.logic.commands.GradeSummaryCommand;
+
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -174,6 +176,10 @@ public class AddressBookParser {
         case ScriptCommand.COMMAND_WORD:
         case ScriptCommand.COMMAND_WORD_2:
             return new ScriptCommandParser().parse(arguments);
+
+        case AssignGradeCommand.COMMAND_WORD:
+        case AssignGradeCommand.COMMAND_WORD_2:
+            return new AssignGradeCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

@@ -9,7 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import seedu.address.model.person.Person;
+import seedu.address.model.grade.PersonTest;
 
 /**
  * The UI Component to the Attendance List.
@@ -17,27 +17,29 @@ import seedu.address.model.person.Person;
 public class DisplayGrade extends UiPart<Stage> {
 
     private static final String FXML = "DisplayGrade.fxml";
-    private ObservableList<Person> persons;
+    private ObservableList<PersonTest> persons;
 
     @FXML
-    private TableView<Person> personTable;
+    private TableView<PersonTest> personTable;
 
 
     @FXML
-    private TableColumn<Person, String> nameColumn;
+    private TableColumn<PersonTest, String> nameColumn;
 
     @FXML
-    private TableColumn<Person, String> gradeColumn;
+    private TableColumn<PersonTest, String> marksColumn;
+
+    @FXML
+    private TableColumn<PersonTest, String> testNameColumn;
 
 
     /**
      * Create list to display person and grades.
      */
-    public DisplayGrade(ArrayList<Person> persons) {
+    public DisplayGrade(ArrayList<PersonTest> persons) {
         this(new Stage());
-        this.persons = FXCollections.observableArrayList(persons); //convert arraylist to observableArraylist
+        this.persons = FXCollections.observableArrayList(persons); //convert arraylist to observable Arraylist
     }
-
 
     /**
      * Setup the Stage for grade List.
@@ -49,6 +51,7 @@ public class DisplayGrade extends UiPart<Stage> {
         registerAsAnEventHandler(this);
     }
 
+
     /**
      * Using ObservableList to generate the grade List.
      */
@@ -58,7 +61,8 @@ public class DisplayGrade extends UiPart<Stage> {
 
         // Initialize the person table with all the data
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        gradeColumn.setCellValueFactory(new PropertyValueFactory<>("grade"));
+        marksColumn.setCellValueFactory(new PropertyValueFactory<>("marks"));
+        testNameColumn.setCellValueFactory(new PropertyValueFactory<>("testName"));
         personTable.setItems(persons);
 
     }
