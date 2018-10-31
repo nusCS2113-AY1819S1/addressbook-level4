@@ -107,7 +107,8 @@ public class DeleteGroupPersonCommandTest {
                 new DeleteGroupPersonCommand(INDEX_FIRST_GROUP, outOfBoundIndex);
 
         // execution failed -> address book state not added into model
-        assertCommandFailure(deleteGroupPersonCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteGroupPersonCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         // single address book state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
@@ -116,14 +117,17 @@ public class DeleteGroupPersonCommandTest {
 
     @Test
     public void equals() {
-        DeleteGroupPersonCommand deleteFirstCommand = new DeleteGroupPersonCommand(INDEX_FIRST_GROUP, INDEX_FIRST_PERSON);
-        DeleteGroupPersonCommand deleteSecondCommand = new DeleteGroupPersonCommand(INDEX_FIRST_GROUP, INDEX_SECOND_PERSON);
+        DeleteGroupPersonCommand deleteFirstCommand =
+                new DeleteGroupPersonCommand(INDEX_FIRST_GROUP, INDEX_FIRST_PERSON);
+        DeleteGroupPersonCommand deleteSecondCommand =
+                new DeleteGroupPersonCommand(INDEX_FIRST_GROUP, INDEX_SECOND_PERSON);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteGroupPersonCommand deleteFirstCommandCopy = new DeleteGroupPersonCommand(INDEX_FIRST_GROUP, INDEX_FIRST_PERSON);
+        DeleteGroupPersonCommand deleteFirstCommandCopy =
+                new DeleteGroupPersonCommand(INDEX_FIRST_GROUP, INDEX_FIRST_PERSON);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
