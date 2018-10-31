@@ -50,7 +50,7 @@ public class CommandParserTestUtil {
                                                                  Command expectedCommand) {
         try {
             Command command = parser.parseCommand(SelectCompanyCommand.COMMAND_WORD, userInput,
-                    new LogicState(SelectCompanyCommand.COMMAND_LOGIC_STATE));
+                    new LogicState(SelectCompanyCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST));
             assertEquals(expectedCommand, command);
         } catch (ParseException pe) {
             throw new IllegalArgumentException("Invalid userInput.", pe);
@@ -65,7 +65,7 @@ public class CommandParserTestUtil {
                                                                  String expectedMessage) {
         try {
             parser.parseCommand(SelectCompanyCommand.COMMAND_WORD, userInput,
-                    new LogicState(SelectCompanyCommand.COMMAND_LOGIC_STATE));
+                    new LogicState(SelectCompanyCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST));
             throw new AssertionError("The expected ParseException was not thrown.");
         } catch (ParseException pe) {
             assertEquals(expectedMessage, pe.getMessage());
@@ -80,7 +80,7 @@ public class CommandParserTestUtil {
                                                               Command expectedCommand) {
         try {
             Command command = parser.parseCommand(SelectJobCommand.COMMAND_WORD, userInput,
-                    new LogicState(SelectJobCommand.COMMAND_LOGIC_STATE));
+                    new LogicState(SelectJobCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST));
             assertEquals(expectedCommand, command);
         } catch (ParseException pe) {
             throw new IllegalArgumentException("Invalid userInput.", pe);
@@ -95,7 +95,7 @@ public class CommandParserTestUtil {
                                                               String expectedMessage) {
         try {
             parser.parseCommand(SelectJobCommand.COMMAND_WORD, userInput,
-                    new LogicState(SelectJobCommand.COMMAND_LOGIC_STATE));
+                    new LogicState(SelectJobCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST));
             throw new AssertionError("The expected ParseException was not thrown.");
         } catch (ParseException pe) {
             assertEquals(expectedMessage, pe.getMessage());

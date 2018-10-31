@@ -58,8 +58,9 @@ public class DeleteShortlistedCandidateParser {
                 return new SelectJobCommand(index);
 
             default:
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND +
-                        SelectCompanyCommand.MESSAGE_SELECT_COMPANY_SUCCESS_NEXT_STEP + SelectJobCommand.MESSAGE_USAGE);
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND
+                        + SelectCompanyCommand.MESSAGE_SELECT_COMPANY_SUCCESS_NEXT_STEP
+                        + SelectJobCommand.MESSAGE_USAGE);
             }
 
         } else {

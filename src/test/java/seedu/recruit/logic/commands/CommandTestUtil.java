@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -34,7 +35,7 @@ import seedu.recruit.model.Model;
 import seedu.recruit.model.ReadOnlyCandidateBook;
 import seedu.recruit.model.ReadOnlyCompanyBook;
 import seedu.recruit.model.candidate.Candidate;
-import seedu.recruit.model.candidate.NameContainsKeywordsPredicate;
+import seedu.recruit.model.candidate.CandidateContainsKeywordsPredicate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
 import seedu.recruit.model.joboffer.JobOffer;
@@ -196,7 +197,7 @@ public class CommandTestUtil {
 
         Candidate candidate = model.getFilteredCandidateList().get(targetIndex.getZeroBased());
         final String[] splitName = candidate.getName().fullName.split("\\s+");
-        model.updateFilteredCandidateList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredCandidateList(new CandidateContainsKeywordsPredicate(new HashMap<Arrays.asList(splitName[0])>));
 
         assertEquals(1, model.getFilteredCandidateList().size());
     }

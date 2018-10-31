@@ -40,8 +40,9 @@ public class ShortlistCandidateCommand extends Command {
         Candidate selectedCandidate = SelectCandidateCommand.getSelectedCandidate();
 
         if (selectedJobOffer.getUniqueCandidateList().contains(selectedCandidate)) {
-            throw new CommandException(String.format(MESSAGE_DUPLICATE_CANDIDATE_SHORTLISTED, selectedJobOffer.getJob().value,
-                    selectedCompany.getCompanyName().value) + MESSAGE_USAGE);
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_CANDIDATE_SHORTLISTED,
+                    selectedJobOffer.getJob().value, selectedCompany.getCompanyName().value)
+                    + MESSAGE_USAGE);
         }
 
         model.shortListCandidateToJobOffer(selectedCandidate, selectedJobOffer);

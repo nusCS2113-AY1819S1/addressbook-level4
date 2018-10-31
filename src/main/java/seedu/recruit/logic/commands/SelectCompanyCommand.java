@@ -64,16 +64,16 @@ public class SelectCompanyCommand extends Command {
             EventsCenter.getInstance().post(new JumpToCompanyListRequestEvent(targetIndex));
             LogicManager.setLogicState(SelectJobCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST);
             return new CommandResult(String.format(MESSAGE_SELECT_COMPANY_SUCCESS,
-                    targetIndex.getOneBased()) + MESSAGE_SELECT_COMPANY_SUCCESS_NEXT_STEP +
-                    SelectJobCommand.MESSAGE_USAGE);
+                    targetIndex.getOneBased()) + MESSAGE_SELECT_COMPANY_SUCCESS_NEXT_STEP
+                    + SelectJobCommand.MESSAGE_USAGE);
         }
 
         if (DeleteShortlistedCandidateInitializationCommand.isDeleting()) {
             EventsCenter.getInstance().post(new JumpToCompanyListRequestEvent(targetIndex));
             LogicManager.setLogicState(SelectJobCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST_DELETE);
             return new CommandResult(String.format(MESSAGE_SELECT_COMPANY_SUCCESS,
-                    targetIndex.getOneBased()) + MESSAGE_SELECT_COMPANY_SUCCESS_NEXT_STEP +
-                    SelectJobCommand.MESSAGE_USAGE);
+                    targetIndex.getOneBased()) + MESSAGE_SELECT_COMPANY_SUCCESS_NEXT_STEP
+                    + SelectJobCommand.MESSAGE_USAGE);
         }
 
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());

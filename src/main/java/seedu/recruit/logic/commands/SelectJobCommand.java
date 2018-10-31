@@ -73,8 +73,8 @@ public class SelectJobCommand extends Command {
             EventsCenter.getInstance().post(new JumpToCompanyJobListRequestEvent(targetIndex));
             LogicManager.setLogicState(SelectCandidateCommand.COMMAND_LOGIC_STATE);
             return new CommandResult(String.format(MESSAGE_SELECT_JOB_SUCCESS,
-                    targetIndex.getOneBased()) + MESSAGE_SELECT_JOB_SUCCESS_NEXT_STEP_IN_SHORTLIST +
-                    SelectCandidateCommand.MESSAGE_USAGE);
+                    targetIndex.getOneBased()) + MESSAGE_SELECT_JOB_SUCCESS_NEXT_STEP_IN_SHORTLIST
+                    + SelectCandidateCommand.MESSAGE_USAGE);
         }
 
         /**
@@ -85,8 +85,8 @@ public class SelectJobCommand extends Command {
             EventsCenter.getInstance().post(new JumpToCompanyJobListRequestEvent(targetIndex));
             LogicManager.setLogicState(DeleteShortlistedCandidateCommand.COMMAND_LOGIC_STATE);
             return new CommandResult(String.format(MESSAGE_SELECT_JOB_SUCCESS,
-                    targetIndex.getOneBased()) + MESSAGE_SELECT_JOB_SUCCESS_NEXT_STEP_IN_SHORTLIST_DELETE +
-                    DeleteShortlistedCandidateCommand.MESSAGE_USAGE);
+                    targetIndex.getOneBased()) + MESSAGE_SELECT_JOB_SUCCESS_NEXT_STEP_IN_SHORTLIST_DELETE
+                    + DeleteShortlistedCandidateCommand.MESSAGE_USAGE);
         }
 
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
@@ -95,7 +95,8 @@ public class SelectJobCommand extends Command {
     }
 
     public JobOffer getSelectedJobFromSelectedCompany() throws CommandException {
-        List<JobOffer> filteredCompanyJobList = SelectCompanyCommand.getSelectedCompany().getUniqueJobList().getInternalList();
+        List<JobOffer> filteredCompanyJobList =
+                SelectCompanyCommand.getSelectedCompany().getUniqueJobList().getInternalList();
 
         if (targetIndex.getZeroBased() >= filteredCompanyJobList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_JOB_OFFER_DISPLAYED_INDEX);

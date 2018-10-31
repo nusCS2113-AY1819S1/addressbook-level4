@@ -62,8 +62,9 @@ public class ShortlistParser {
                 return new SelectJobCommand(index);
 
             default:
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND +
-                        SelectCompanyCommand.MESSAGE_SELECT_COMPANY_SUCCESS_NEXT_STEP + SelectJobCommand.MESSAGE_USAGE);
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND
+                        + SelectCompanyCommand.MESSAGE_SELECT_COMPANY_SUCCESS_NEXT_STEP
+                        + SelectJobCommand.MESSAGE_USAGE);
             }
 
         } else if (state.nextCommand.equals(SelectCandidateCommand.COMMAND_LOGIC_STATE)) {
@@ -74,8 +75,9 @@ public class ShortlistParser {
                 return new SelectCandidateCommand(index);
 
             default:
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND +
-                        SelectJobCommand.MESSAGE_SELECT_JOB_SUCCESS_NEXT_STEP_IN_SHORTLIST + SelectCandidateCommand.MESSAGE_USAGE);
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND
+                        + SelectJobCommand.MESSAGE_SELECT_JOB_SUCCESS_NEXT_STEP_IN_SHORTLIST
+                        + SelectCandidateCommand.MESSAGE_USAGE);
             }
         } else {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
