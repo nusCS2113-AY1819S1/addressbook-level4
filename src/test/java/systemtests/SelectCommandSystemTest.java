@@ -24,7 +24,7 @@ public class SelectCommandSystemTest extends EventManagerSystemTest {
         /* ------------------------ Perform select operations on the shown unfiltered list -------------------------- */
 
         /* Case: select the first card in the event list, command with leading spaces and trailing spaces
-         * -> selected
+         * -> select
          */
         String command = "   " + SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_EVENT.getOneBased() + "   ";
         assertCommandSuccess(command, INDEX_FIRST_EVENT);

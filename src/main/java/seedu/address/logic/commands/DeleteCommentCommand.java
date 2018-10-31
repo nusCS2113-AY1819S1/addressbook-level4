@@ -1,3 +1,4 @@
+//@@author Geraldcdx
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
@@ -23,16 +24,18 @@ public class DeleteCommentCommand extends Command {
 
     public static final String COMMAND_WORD = "deleteComment";
 
-    public static final String MESSAGE = COMMAND_WORD + ": Edits the details of the event identified "
-            + "by the index number used in the displayed event list. "
-            + "Existing values will be overwritten by the input values.\n"
+    public static final String MESSAGE = COMMAND_WORD
+            + ": Deletes a comment in the comment section of the event identified "
+            + "by the index number used in the displayed event list "
+            + "when the line parameter is given.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_LINE + "LINE] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_LINE + "91 ";
 
     public static final String MESSAGE_DELETE_COMMENT = "Comment deleted for Event %1$s at Line %2$s";
-    public static final String MESSAGE_LINE_INVALID = "Line is invalid, try again";
+    public static final String MESSAGE_LINE_INVALID = "Line is invalid, try again. Example: deleteComment 1 L/2";
+    public static final String MESSAGE_LINE_STRING_INVALID = "Line cannot be a string! Example: deleteComment 1 L/2";
 
     private final Index index;
     private final EditCommand.EditEventDescriptor editCommentDescriptor;
@@ -59,7 +62,6 @@ public class DeleteCommentCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Event> filteredEventList = model.getFilteredEventList();
-
 
         if (index.getZeroBased() >= filteredEventList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);

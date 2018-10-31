@@ -25,9 +25,9 @@ public class ReplyCommentCommand extends Command {
 
     public static final String COMMAND_WORD = "replyComment";
 
-    public static final String MESSAGE = COMMAND_WORD + ": Edits the details of the event identified "
-            + "by the index number used in the displayed event list. "
-            + "Existing values will be overwritten by the input values.\n"
+    public static final String MESSAGE = COMMAND_WORD + ": Replies the comment section of the event identified "
+            + "by the index number used in the displayed event list "
+            + "with comment and line parameters given.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_LINE + "LINE] "
             + "[" + PREFIX_COMMENT + "COMMENT] "
@@ -36,7 +36,9 @@ public class ReplyCommentCommand extends Command {
             + PREFIX_COMMENT + "johndoe@example.com is here";
 
     public static final String MESSAGE_REPLY_COMMENT = "Comment [%1$s] replied for Event %2$s at Line %3$s";
-    public static final String MESSAGE_LINE_INVALID = "Line is invalid, try again";
+    public static final String MESSAGE_LINE_INVALID = "Line is invalid, try again. Example: replyComment 1 L/1 C/Hello";
+    public static final String MESSAGE_LINE_STRING_INVALID = "Line cannot be a string!"
+            + " Example: replyComment 1 L/1 C/Hello";
 
     private final Index index;
     private final EditCommand.EditEventDescriptor editCommentDescriptor;
@@ -77,7 +79,8 @@ public class ReplyCommentCommand extends Command {
 
         Event eventToEdit = filteredEventList.get(index.getZeroBased());
         ReplyComment comments = new ReplyComment(eventToEdit.getComment().toString());
-        Comment newComments = new Comment(comments.replyComment(getComment(), getLine()));
+        Comment newComments = new Comment(comments.replyComment(getComment(), getLine(),
+                model.getUsername().toString()));
         editCommentDescriptor.setComment(newComments);
         Event editedEvent = EditCommand.createEditedEvent(eventToEdit, editCommentDescriptor);
         model.updateEvent(eventToEdit, editedEvent);
