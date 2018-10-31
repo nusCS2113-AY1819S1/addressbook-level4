@@ -164,6 +164,7 @@ Edits the phone number and email address of the 1st person to be `91234567` and 
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+// tag::find[]
 === Locating persons: `find`
 
 Finds persons in the displayed list whose names/tags contain any of the given keywords. +
@@ -227,6 +228,7 @@ Format: `undosearch`
 ****
 * To be used together with Search Pruning feature
 ****
+// end::find[]
 
 === Deleting : `delete`
 
