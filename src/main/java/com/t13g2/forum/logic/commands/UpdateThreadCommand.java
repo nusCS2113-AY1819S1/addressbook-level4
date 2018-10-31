@@ -1,5 +1,13 @@
 package com.t13g2.forum.logic.commands;
 
+import static com.t13g2.forum.commons.core.Messages.MESSAGE_INVALID_THREAD;
+import static com.t13g2.forum.commons.core.Messages.MESSAGE_INVALID_THREAD_ID;
+import static com.t13g2.forum.commons.core.Messages.MESSAGE_NOT_LOGIN;
+import static com.t13g2.forum.commons.core.Messages.MESSAGE_NOT_THREAD_OWNER;
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_ID;
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_TITLE;
+import static java.util.Objects.requireNonNull;
+
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.Context;
@@ -8,13 +16,6 @@ import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 
-import static com.t13g2.forum.commons.core.Messages.MESSAGE_INVALID_THREAD;
-import static com.t13g2.forum.commons.core.Messages.MESSAGE_INVALID_THREAD_ID;
-import static com.t13g2.forum.commons.core.Messages.MESSAGE_NOT_LOGIN;
-import static com.t13g2.forum.commons.core.Messages.MESSAGE_NOT_THREAD_OWNER;
-import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_ID;
-import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_TITLE;
-import static java.util.Objects.requireNonNull;
 
 
 //@@author HansKoh

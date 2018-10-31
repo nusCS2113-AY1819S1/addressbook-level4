@@ -75,6 +75,9 @@ public class UnitOfWork implements IUnitOfWork, AutoCloseable {
 
     }
 
+    /**
+     *
+     */
     public void init() {
         if (this.forumBookStorage.isFresh()) {
             new SampleDataGenerator(this).generate();
