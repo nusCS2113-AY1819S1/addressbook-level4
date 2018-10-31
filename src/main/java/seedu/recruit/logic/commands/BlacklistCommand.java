@@ -87,7 +87,7 @@ public class BlacklistCommand extends Command {
         } else {
             return new CommandResult(String.format(MESSAGE_UNBLACKLIST_SUCCESS, updatedCandidate));
         }
-}
+    }
 
     /**
      * Returns the original candidate but the tags have been changed to "BLACKLISTED"
