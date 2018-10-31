@@ -18,8 +18,11 @@ public class CliSyntax {
     public static final Prefix PREFIX_END_DATE = new Prefix("e/");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("d/");
     public static final Prefix PREFIX_DEPARTMENT = new Prefix("dep/");
+    public static final Prefix PREFIX_LIST_DEPARTMENT = new Prefix("dep");
     public static final Prefix PREFIX_LOCATION = new Prefix("l/");
     public static final Prefix PREFIX_TO = new Prefix("to/");
+    public static final Prefix PREFIX_ALL_PEOPLE = new Prefix("all people");
+    public static final Prefix PREFIX_ALL_EVENTS = new Prefix("all events");
     public static final Prefix PREFIX_FROM = new Prefix("from/");
 
 
