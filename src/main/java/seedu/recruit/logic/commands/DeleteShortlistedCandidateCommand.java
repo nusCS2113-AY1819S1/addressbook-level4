@@ -23,8 +23,8 @@ public class DeleteShortlistedCandidateCommand extends Command {
     public static final String COMMAND_LOGIC_STATE = "DeleteShortlistedCandidate";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the candidate(s) identified by the index number(s) used in the shortlisted candidate list.\n"
-            + "Parameters: INDEX,INDEX-INDEX ... (INDEX must be a positive integer)\n"
+            + ": Deletes the candidate identified by the index number used in the shortlisted candidate list.\n"
+            + "Parameters: INDEX (INDEX must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_CANDIDATE_SUCCESS =
