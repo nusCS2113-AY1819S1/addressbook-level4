@@ -64,7 +64,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/Harry Potter t/cs2113t` or as `n/Harry Potter`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Items in brackets are *required* and always *private* e.g. `q/QUANTITY (c/COST)`
-* Items in arrow brackets are commands that are commands available depending on the user e.g. <Accountant> means command only usable by accountant.
+* Items in arrow brackets are commands that are commands available depending on the user e.g. <Owner> means command only usable by Owner.
 ====
 
 === Viewing help : `help`
@@ -84,74 +84,9 @@ Examples:
 * `add n/Harry Potter i/978-2-12-345680-3 p/60.70 q/100 c/30.90 t/difficult`
 * `add n/Lord of the Rings i/978-2-12-345123-3 p/59.90 q/271 c/20.99`
 
-=== Listing all books : `list`
-
-Shows a list of all books in the inventory list. +
-Format: `list`
-
-=== Locating book by iSBN13: `find`
-
-Finds book with the iSBN13 from the inventory. +
-Format: `find i/iSBN13`
-
-Example:
-
-* `find i/978-2-12-345680-3`
-
-=== Locating book by tags: `search`
-
-Search for books by tags from the inventory
-Format: `search TAG`
-
-Example:
-
-* `search cs2113t`
-
-****
-* The search is case insensitive. e.g `cs2113t` will match `CS2113T`
-* Only the tag is searched.
-* Only full words will be matched e.g. `cs2113` will not match `cs2113t`
-****
-
-=== Decrease Book Quantity (Items Sold) : `sell`
-
-Decrease an existing book quantity in the inventory list. +
-Format: `sell INDEX QUANTITY` OR `sell ISBN13 QUANTITY`
-
-****
-* Decrease the quantity at the specified `INDEX`. The index refers to the index number shown in the displayed inventory list. The index *must be a positive integer* 1, 2, 3, ...
-* Existing quantity will be decrease by the input value.
-****
-
-Examples:
-
-* `list` +
-`sell 1 5` +
-Decrease the quantity available of the 1st book by 5.
-* `sell 978-2-12-345680-3 4` +
-Decrease the quantity available for the book with the corresponding ISBN13 by 4.
-
-=== Increase Book Quantity (Ordered more books): `stock`
-
-Increase an existing book quantity in the inventory list. +
-Format: `stock INDEX QUANTITY` OR `stock ISBN13 QUANTITY`
-
-****
-* Increase the stock at the specified `INDEX`. The index refers to the index number shown in the displayed inventory list. The index *must be a positive integer* 1, 2, 3, ...
-* Existing quantity will be increase by the input value.
-****
-
-Examples:
-
-* `list` +
-`stock 2 6` +
-Increase the quantity available of the 2nd book by 6.
-* `stock 978-2-12-345680-3 5` +
-Increase the quantity available for the book with the corresponding ISBN13 by 5.
-
 === Check Inventory: `check`
 
-Finds books with quantity less than or equal to the given input value.
+Finds books with quantity less than or equal to the given input value. List of books displayed in ascending order based on quantity left +
 Format: `check QUANTITY`
 
 Example:
@@ -159,34 +94,126 @@ Example:
 * `check 4` +
 Displays list of all books with quantity less than or equal to 4.
 
-=== Deleting a book : `delete`
+=== Listing all books : `list`
 
-Deletes the specified book from the inventory list. +
-Format: `delete i/ISBN13`
+Shows a list of all books in the inventory list. +
+Format: `list`
+
+=== Locating book by Name: `find`
+
+Finds books which names contain any of the given keywords from the inventory. +
+Format: `find KEYWORD [MORE KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* bOOKS matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+****
+
+Example:
+
+* `find Biology` +
+Returns `biology`
+* `find Biology Chemistry` +
+Returns any books having names `Biology` or `Chemistry`
+
+=== Increase Book Quantity (Ordered more books): `stock`
+
+Increase an existing book quantity in the inventory list. +
+Format: `stock INDEX q/QUANTITY` OR `stock i/ISBN13 q/QUANTITY`
+
+****
+* Increase the stock at the specified `INDEX`. The index refers to the index number shown in the displayed inventory list. The index *must be a positive integer* 1, 2, 3, ...
+* Increase the quantity of the book with the respective ISBN. ISBN is *unique* to each book
+* Existing quantity will be increase by the input value.
+****
 
 Examples:
 
+* `list` +
+`stock 2 q/6` +
+Increase the quantity available of the 2nd book by 6.
+* `stock i/978-2-12-345680-3 q/5` +
+Increase the quantity available for the book with the corresponding ISBN13 by 5.
+
+=== Decrease Book Quantity (Items Sold) : `sell`
+
+Decrease an existing book quantity in the inventory list. +
+Format: `sell INDEX q/QUANTITY` OR `sell i/ISBN13 q/QUANTITY`
+
+****
+* Decrease the quantity at the specified `INDEX`. The index refers to the index number shown in the displayed inventory list. The index *must be a positive integer* 1, 2, 3, ...
+* Decrease the quantity of the book with the respective ISBN. ISBN is *unique* to each book
+* Existing quantity will decrease by the input value.
+****
+
+Examples:
+
+* `list` +
+`sell 1 q/5` +
+Decrease the quantity available of the 1st book by 5.
+* `sell i/978-2-12-345680-3 q/4` +
+Decrease the quantity available for the book with the corresponding ISBN13 by 4.
+
+=== Deleting a book : `delete`
+
+Deletes the specified book from the inventory list. +
+Format: `delete INDEX` OR `delete i/ISBN13`
+
+Examples:
+
+* `list` +
+`delete 2` +
+Deletes the 2nd book in the displayed list.
 * `delete i/978-2-12-345680-3` +
 Deletes the book with the corresponding iSBN13 from the inventory list.
 
+=== Editing a person : `edit`
+
+Edits an existing book in the inventory book. +
+Format: `edit INDEX [n/NAME] [i/ISBN] [p/PRICE] [c/COST] [t/TAG]...`
+
+****
+* Edits the book at the specified `INDEX`. The index refers to the index number shown in the displayed book list. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* Quantity Field cannot be an input values. Use `stock` and `sell` to change Quantity Field
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person's tags by typing `t/` without specifying any tags after it.
+****
+
+Examples:
+
+* `edit 1 p/20 n/Chemistry` +
+Edits the price and name of the 1st book to be `20` and `Chemistry` respectively.
+* `edit 2 c/30 t/` +
+Edits the cost of the 2nd book to be `30` and clears all existing tags.
+
+=== Deleting a request : `deleterequest`
+
+Deletes the specified request from the request list. Strictly for bookstore owners. +
+Format: `deleterequest INDEX`
+
+Examples:
+
+* `deleterequest 2` +
+Deletes the 2nd request in the displayed request list.
+
 === Requesting for a book : `request`
 
-Requests to buy a book in the inventory. +
+Requests to purchase a book. +
 Format: `request i/ISBN13 e/EMAIL q/QUANTITY`
 
 ****
-* The price is for inventory keeper to confirm order with requester.
+* The email is for owner to confirm the order with requester.
 ****
 
 Examples:
 
 * `request i/978-2-12-345680-3 e/johnd@gmail.com q/5` +
 Requests for 5 same books with the corresponding iSBN13 with requester's email johnd@gmail.com
-
-=== Viewing of Requests : `viewrequests`
-
-Views all the requests for books. +
-Format: `viewrequests`
 
 === Listing entered commands : `history`
 
@@ -248,18 +275,10 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-=== Display account data : `showdata`
+=== Display account data : `stats`
 
-Displays accounting data. +
-Format: `showdata`
-
-=== Next Page : `next`
-Displays next set of accounting data. +
-Format: `next`
-
-=== Previous Page : `previous`
-Displays the previous set of accounting data. +
-Format: `previous`
+Displays the total revenue made. +
+Format: `stats`
 
 === Clearing all entries : `clear`
 
@@ -296,25 +315,25 @@ _{explain how the user can enable/disable data encryption}_
 == Command Summary
 
 * *Add* : `add n/NAME i/ISBN13 p/PRICE q/QUANTITY (c/COST) [t/TAG]...` +
-e.g. `add n/Harry Potter i/978-2-12-345680-3 p/60.70 q/100 c/30/90 t/difficult`
-* *Find* : `find i/ISBN13` +
-e.g. `find i/978-2-12-345680-3`
-* *Search* : `search TAG` +
-e.g. `search cs2113t`
-* *Sell* : `sell INDEX QUANTITY` OR `sell i/ISBN13 QUANTITY` +
-e.g. `sell 1 8` OR `sell i/978-2-12-345680-3 8`
-* *Stock* : `stock INDEX QUANTITY` OR `stock i/ISBN13 QUANTITY` +
-e.g. `stock 1 8` OR `stock i/978-2-12-345680-3 8`
+e.g. `add n/Harry Potter i/978-2-12-345680-3 p/60.70 q/100 c/90 t/difficult`
+* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
+e.g. `find biology chemistry`
+* *Edit* : `edit INDEX n/NAME i/ISBN13 p/PRICE c/COST [t/TAG]...` +
+e.g. `edit INDEX n/Chemistry p/30.00`
+* *Stock* : `stock INDEX q/QUANTITY` OR `stock i/ISBN13 q/QUANTITY` +
+e.g. `stock 1 q/8` OR `stock i/978-2-12-345680-3 q/8`
+* *Sell* : `sell INDEX q/QUANTITY` OR `sell i/ISBN13 q/QUANTITY` +
+e.g. `sell 1 q/8` OR `sell i/978-2-12-345680-3 q/8`
 * *Check* : `check QUANTITY` +
 e.g. `check 4`
 * *Request* : `request i/ISBN13 e/EMAIL q/QUANTITY` +
 e.g. `request i/978-2-12-345680-3 e/johnd@gmail.com q/5`
-* *View Request* : `viewrequests`
-* *Display data* : `showdata`
-* *Next* : `next`
+* *Display Statistics* : `stats`
 * *Clear* : `clear`
-* *Delete* : `delete i/ISBN13` +
-e.g. `delete i/978-2-12-345680-3`
+* *Delete* : `delete INDEX` OR `delete i/ISBN13` +
+e.g. `delete 1` OR `delete i/978-2-12-345680-3`
+* *DeleteRequest* : `deleterequest INDEX` +
+e.g. `deleterequest 1`
 * *List* : `list`
 * *Help* : `help`
 * *History* : `history`

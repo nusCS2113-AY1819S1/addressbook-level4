@@ -5,7 +5,9 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.testutil.TypicalArgTypes.ARGS_INDEX;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
+import static seedu.address.testutil.TypicalIndexes.INDEX_ONE_BASED_FIRST_BOOK;
 
 import java.util.Arrays;
 import java.util.List;
@@ -58,7 +60,7 @@ public class BookInventoryParserTest {
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_BOOK.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_BOOK), command);
+        assertEquals(new DeleteCommand(INDEX_ONE_BASED_FIRST_BOOK, ARGS_INDEX), command);
     }
 
     @Test
@@ -67,7 +69,7 @@ public class BookInventoryParserTest {
         EditBookDescriptor descriptor = new EditBookDescriptorBuilder(book).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_BOOK.getOneBased() + " " + BookUtil.getEditPersonDescriptorDetails(descriptor));
-        // assertEquals(new EditCommand(INDEX_FIRST_BOOK, descriptor), command);
+        assertNotEquals(new EditCommand(INDEX_FIRST_BOOK, descriptor), command);
     }
 
     @Test
