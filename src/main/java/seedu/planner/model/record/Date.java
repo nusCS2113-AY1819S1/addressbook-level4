@@ -41,8 +41,8 @@ public class Date {
     public Date(String date) {
         requireNonNull(date);
         checkArgument(isValidDateFormat(date), MESSAGE_DATE_CONSTRAINTS);
-        value = date;
         splitDate(date);
+        value = getStandardValue();
         checkArgument(DateUtil.isValidDate(day, month), MESSAGE_DATE_LOGICAL_CONSTRAINTS);
     }
 
