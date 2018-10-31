@@ -17,15 +17,15 @@ This project portfolio would be introducing you to my team that has developed th
 feature, I would be going indepth into the details on how my own features are implemtented. This is to give you a deeper understanding of what contributions that I have done within this project,
 and hopefully you would perhaps also learn something along the way.
 
-So sit tight, and let me tell you more about FreeTime. 
+So sit tight, and let me tell you more about FreeTime.
 
 == FreeTime Features
-In addition to essential security features such as login and registering, we have a clean, minimalistic landing page that is user-friendly. 
+In addition to essential security features such as login and registering, we have a clean, minimalistic landing page that is user-friendly.
 
 Users can import preexisting timetables that are taken from Google Calander or any other calander application that saves their data into the commonly used .ics format. This handy feature allows
-quick integraton for users coming from other timetable applications that do not have our main feature. 
+quick integraton for users coming from other timetable applications that do not have our main feature.
 
-On top of having friends to look at their timetable, Users are also grouped with groups according to what they specify. This is to easily select friends that are in the same group as you, which then sets the stage to find the mutually free slot among 
+On top of having friends to look at their timetable, Users are also grouped with groups according to what they specify. This is to easily select friends that are in the same group as you, which then sets the stage to find the mutually free slot among
 this particular group of friends.
 
 Using the command `freetime`, you would be presented with a timetable that shows you what are your common free slots are. Thus you are freed from the painful moments of finding a common free slot in huge groups.
@@ -37,8 +37,8 @@ In this section, I would be briefly telling you about my contributions to this p
 
 * *Major enhancement*: added *the ability to authenticate users*
 ** What it does: Allows the users to have unique access and control to his own timetable
-** Justification: To prevent malicious users to edit other users' timetable, and to introduce different privacy levels. Other users that you are friends with allows you to view their 
-timetables and find common slots with them. 
+** Justification: To prevent malicious users to edit other users' timetable, and to introduce different privacy levels. Other users that you are friends with allows you to view their
+timetables and find common slots with them.
 ** Highlights: Other than having the ability to add friends, you are now able to add groups since each users are differentiated from each other
 
 
