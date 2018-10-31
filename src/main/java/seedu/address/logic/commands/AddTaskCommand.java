@@ -15,7 +15,7 @@ import seedu.address.model.task.Task;
 
 //@@author luhan02
 /**
- * Adds a task to the student planner.
+ * Adds a task to the task book.
  */
 public class AddTaskCommand extends Command {
     public static final String COMMAND_WORD = "task";
@@ -23,15 +23,15 @@ public class AddTaskCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list. \n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + "[" + PREFIX_BODY + "BODY] "
-            + "[" + PREFIX_START + "START_DATETIME] "
+            + PREFIX_BODY + "BODY "
+            + PREFIX_START + "START_DATETIME "
             + PREFIX_END + "END_DATETIME "
             + PREFIX_PRIORITY + "PRIORITY "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Submission "
-            + PREFIX_BODY + "CG2027_assign2 "
-            + PREFIX_START + "09/10_1700 "
+            + PREFIX_BODY + "CG2027 assign2 "
+            + PREFIX_START + "09/10 "
             + PREFIX_END + "16/10_1400 "
             + PREFIX_PRIORITY + "HIGH "
             + PREFIX_TAG + "IVLE";
@@ -58,7 +58,7 @@ public class AddTaskCommand extends Command {
         }
 
         model.addTask(toAdd);
-        model.commitAddressBook();
+        model.commitTaskBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

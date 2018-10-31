@@ -10,6 +10,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ExpenseBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TaskBook;
 import seedu.address.model.UserPrefs;
 
 public class ClearExpenseCommandTest {
@@ -28,8 +29,9 @@ public class ClearExpenseCommandTest {
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(new AddressBook(), getTypicalExpenseBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(new AddressBook(), getTypicalExpenseBook(), new UserPrefs());
+        Model model = new ModelManager(new AddressBook(), getTypicalExpenseBook(), new TaskBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(), getTypicalExpenseBook(),
+                new TaskBook(), new UserPrefs());
         expectedModel.resetData(new ExpenseBook());
         expectedModel.commitExpenseBook();
 

@@ -16,6 +16,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TaskBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.expense.Expense;
 
@@ -25,7 +26,7 @@ import seedu.address.model.expense.Expense;
  */
 public class DeleteExpenseCommandTest {
 
-    private Model model = new ModelManager(new AddressBook(), getTypicalExpenseBook(), new UserPrefs());
+    private Model model = new ModelManager(new AddressBook(), getTypicalExpenseBook(), new TaskBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -35,7 +36,8 @@ public class DeleteExpenseCommandTest {
 
         String expectedMessage = String.format(DeleteExpenseCommand.MESSAGE_DELETE_EXPENSE_SUCCESS, expenseToDelete);
 
-        ModelManager expectedModel = new ModelManager(new AddressBook(), model.getExpenseBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(new AddressBook(), model.getExpenseBook(),
+                new TaskBook(), new UserPrefs());
         expectedModel.deleteExpense(expenseToDelete);
         expectedModel.commitExpenseBook();
 
@@ -55,7 +57,8 @@ public class DeleteExpenseCommandTest {
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Expense expenseToDelete = model.getFilteredExpenseList().get(INDEX_FIRST_EXPENSE.getZeroBased());
         DeleteExpenseCommand deleteExpenseCommand = new DeleteExpenseCommand(INDEX_FIRST_EXPENSE);
-        Model expectedModel = new ModelManager(new AddressBook(), model.getExpenseBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(), model.getExpenseBook(),
+                new TaskBook(), new UserPrefs());
         expectedModel.deleteExpense(expenseToDelete);
         expectedModel.commitExpenseBook();
 

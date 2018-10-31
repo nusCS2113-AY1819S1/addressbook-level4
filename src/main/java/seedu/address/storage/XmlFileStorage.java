@@ -37,6 +37,18 @@ public class XmlFileStorage {
     }
 
     /**
+     * Saves the given taskBook data to the specified file.
+     */
+    public static void saveDataToFile(Path file, XmlSerializableTaskBook taskBook)
+            throws FileNotFoundException {
+        try {
+            XmlUtil.saveDataToFile(file, taskBook);
+        } catch (JAXBException e) {
+            throw new AssertionError("Unexpected exception " + e.getMessage(), e);
+        }
+    }
+
+    /**
      * Returns address book in the file or an empty address book
      */
     public static XmlSerializableAddressBook loadDataFromSaveFile(Path file) throws DataConversionException,
@@ -62,5 +74,18 @@ public class XmlFileStorage {
         }
     }
 
+    //============= Task =======================================================================
+
+    /**
+     * Returns task book in the file or an empty task book
+     */
+    public static XmlSerializableTaskBook loadTaskFromSaveFile(Path file) throws DataConversionException,
+            FileNotFoundException {
+        try {
+            return XmlUtil.getDataFromFile(file, XmlSerializableTaskBook.class);
+        } catch (JAXBException e) {
+            throw new DataConversionException(e);
+        }
+    }
 
 }

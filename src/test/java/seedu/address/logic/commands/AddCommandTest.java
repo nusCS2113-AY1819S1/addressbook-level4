@@ -20,6 +20,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyExpenseBook;
+import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
 import seedu.address.model.expense.Expense;
@@ -109,8 +110,18 @@ public class AddCommandTest {
         }
 
         @Override
+        public void resetData(ReadOnlyTaskBook newData) {
+
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyTaskBook getTaskBook() {
+            return null;
         }
 
         @Override
@@ -176,6 +187,11 @@ public class AddCommandTest {
         @Override
         public void restoreExpenseBook(ReadOnlyExpenseBook restoredExpenseBook) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitTaskBook() {
+
         }
 
         @Override
@@ -334,4 +350,3 @@ public class AddCommandTest {
     }
 
 }
-

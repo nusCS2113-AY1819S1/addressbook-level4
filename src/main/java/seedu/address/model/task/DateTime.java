@@ -1,5 +1,6 @@
 package seedu.address.model.task;
 
+//@@author luhan02
 /**
  * Represents a Task's start & end date time in the task list.
  * Guarantees: immutable; is valid as declared in {@link #isValidDateTime(String)}
@@ -11,7 +12,7 @@ public class DateTime {
                     "and it should in DD/MM_HHmm format\";should be at least 4 digits long";
     public static final String DATETIME_VALIDATION_REGEX = "\\d+\\/\\d+(\\w\\d+)?";
 
-    private String dateTimeString;
+    public final String dateTimeString;
 
     public DateTime(String dateTimeString) {
         this.dateTimeString = dateTimeString;

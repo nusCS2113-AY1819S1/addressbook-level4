@@ -12,12 +12,15 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TaskBook;
 import seedu.address.model.UserPrefs;
 
 public class UndoExpenseCommandTest {
 
-    private final Model model = new ModelManager(new AddressBook(), getTypicalExpenseBook(), new UserPrefs());
-    private final Model expectedModel = new ModelManager(new AddressBook(), getTypicalExpenseBook(), new UserPrefs());
+    private final Model model = new ModelManager(new AddressBook(), getTypicalExpenseBook(),
+            new TaskBook(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(new AddressBook(), getTypicalExpenseBook(),
+            new TaskBook(), new UserPrefs());
     private final CommandHistory commandHistory = new CommandHistory();
 
     @Before

@@ -148,6 +148,7 @@ public class ParserUtil {
         return Optional.ofNullable(Paths.get(stringPath));
     }
 
+    //@@author luhan02
     /**
      * Parses a {@code String name} into a {@code TaskName}.
      * Leading and trailing whitespaces will be trimmed.
@@ -189,6 +190,15 @@ public class ParserUtil {
     }
 
     /**
+     *
+     */
+    public static DateTime parseDateTimeAllowNull(String startDateTime) throws ParseException {
+        if (startDateTime == null) {
+            return null;
+        }
+        return ParserUtil.parseDateTime(startDateTime);
+    }
+    /**
      * Parses a {@code String endDateTime} into an {@code DateTime}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -216,6 +226,7 @@ public class ParserUtil {
         }
         return new Priority(trimmedPriority);
     }
+    //@@author
 
     /**
      * Parses a {@code String name} into a {@code EventName}.

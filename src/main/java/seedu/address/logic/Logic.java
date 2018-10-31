@@ -10,6 +10,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * API of the Logic component
@@ -32,6 +33,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of expenses */
     ObservableList<Expense> getFilteredExpenseList();
+
+    /** Returns an unmodifiable view of the filtered list of tasks */
+    ObservableList<Task> getFilteredTaskList();
 
     /** Returns the list of input entered by the user, encapsulated in a {@code ListElementPointer} object */
     ListElementPointer getHistorySnapshot();

@@ -57,23 +57,27 @@ priority to the Address Book.
 
 Format: `help`
 
-=== Adding a task: `add`
+=== Adding a task: `task`
 
 Adds a task to the schedule planner +
-Format: `add n/NAME [b/BODY] [s/START_DATETIME] [e/END_DATETIME] [t/TAG]... [p/PRIORITY]`
+Format: `task n/NAME b/BODY s/START_DATETIME e/END_DATETIME [t/TAG]... p/PRIORITY`
 
 [TIP]
-A task can have any number of tags (including 0)
+A task can have any number of tags (including 0). A task can only have its start and end DATE (without specific TIME).
+
+
+
+
 
 Examples:
 
-* `add n/Buy stationary tomorrow p/MED`
-* `add n/Attend PostModern JukeBox concert e/180918_2000 p/HIGH`
+* `task n/Buy stationary e/25/10 p/LOW`
+* `tsak n/Attend PostModern JukeBox concert e/180918_2000 p/HIGH`
 
-=== Listing all tasks : `list`
+=== Listing all tasks : `listTask`
 
 Shows a list of all tasks in the schedule planner. +
-Format: `list`
+Format: `listTask`
 
 === Editing a task : `edit`
 
@@ -173,7 +177,7 @@ Returns `pen` and `Pen pineapple pen`
 * `find concert meeting cute` +
 Returns any task having names or body `concert`, `meeting`, or `cute`
 
-=== Deleting a task : `delete`
+=== Deleting a task : `deleteTask`
 
 Deletes the specified task from the schedule planner. +
 Format: `delete INDEX`
@@ -186,11 +190,11 @@ Format: `delete INDEX`
 
 Examples:
 
-* `list` +
-`delete 2` +
+* `listTask` +
+`deleteTask 2` +
 Deletes the 2nd task in the schedule planner.
 * `find Pen` +
-`delete 1` +
+`deleteTask 1` +
 Deletes the 1st task in the results of the `find` command.
 
 === Listing entered commands : `history`

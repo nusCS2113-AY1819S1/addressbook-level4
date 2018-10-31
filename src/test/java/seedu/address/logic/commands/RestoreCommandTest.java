@@ -17,6 +17,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ExpenseBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TaskBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.storage.OnlineStorage;
 import seedu.address.storage.XmlAddressBookStorage;
@@ -47,6 +48,7 @@ public class RestoreCommandTest {
         Path tempExpenseBookFilePath = testFolder.getRoot().toPath().resolve("ExpenseBook.xml");
 
         ExpenseBook expenseBook = new ExpenseBook();
+        TaskBook taskBook = new TaskBook();
         UserPrefs userPrefs = new UserPrefs();
 
         userPrefs.setAddressBookBackupFilePath(tempAddressBookBackupFilePath);
@@ -60,12 +62,12 @@ public class RestoreCommandTest {
         userPrefs.setExpenseBookGistId("6e6d4388b672da5a29c951630f4610db");
 
         System.out.println(userPrefs.getAddressBookBackupFilePath());
-        model = new ModelManager(getTypicalAddressBook(), expenseBook, userPrefs);
+        model = new ModelManager(getTypicalAddressBook(), expenseBook, taskBook, userPrefs);
         XmlAddressBookStorage xmlAddressBookStorage = new XmlAddressBookStorage(tempAddressBookBackupFilePath);
         xmlAddressBookStorage.saveAddressBook(model.getAddressBook());
         XmlExpenseBookStorage xmlExpenseBookStorage = new XmlExpenseBookStorage(tempExpenseBookBackupFilePath);
         xmlExpenseBookStorage.saveExpenseBook(model.getExpenseBook());
-        noBackupModel = new ModelManager(getTypicalAddressBook(), expenseBook, noBackupUserPrefs);
+        noBackupModel = new ModelManager(getTypicalAddressBook(), expenseBook, taskBook, noBackupUserPrefs);
     }
 
     @Test

@@ -19,6 +19,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.ExpenseBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TaskBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
@@ -26,8 +27,9 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindNameCommand}.
  */
 public class FindNameCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new ExpenseBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new ExpenseBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new ExpenseBook(), new TaskBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new ExpenseBook(),
+            new TaskBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test

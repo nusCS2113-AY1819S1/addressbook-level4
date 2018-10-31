@@ -27,7 +27,7 @@ public class Task {
      */
     public Task(TaskName taskName, Body body, DateTime startDateTime, DateTime endDateTime,
                 Priority priority, Set<Tag> tags) {
-        requireAllNonNull(taskName, body, startDateTime, endDateTime, priority, tags);
+        requireAllNonNull(taskName, body, endDateTime, priority, tags);
         this.taskName = taskName;
         this.body = body;
         this.startDateTime = startDateTime;
@@ -62,6 +62,43 @@ public class Task {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns true if both tasks of the same name and same body.
+     * This defines a weaker notion of equality between two tasks.
+     */
+    public boolean isSameTask(Task otherTask) {
+        if (otherTask == this) {
+            return true;
+        }
+
+        return otherTask != null
+                && otherTask.getTaskName().equals(getTaskName())
+                && otherTask.getBody().equals(getBody());
+    }
+
+    /**
+     * Returns true if both tasks have the same identity and data fields.
+     * This defines a stronger notion of equality between two tasks.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Task)) {
+            return false;
+        }
+
+        Task otherTask = (Task) other;
+        return otherTask.getTaskName().equals(getTaskName())
+                && otherTask.getBody().equals(getBody())
+                && otherTask.getStartDateTime().equals(getStartDateTime())
+                && otherTask.getEndDateTime().equals(getEndDateTime())
+                && otherTask.getPriority().equals(getPriority())
+                && otherTask.getTags().equals(getTags());
     }
 
     @Override

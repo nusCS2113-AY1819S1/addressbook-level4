@@ -40,6 +40,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ExpenseBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyExpenseBook;
+import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.UserPrefs;
 
 /**
@@ -50,16 +51,19 @@ public class StorageManager extends ComponentManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private ExpenseBookStorage expenseBookStorage;
+    private TaskBookStorage taskBookStorage;
     private UserPrefsStorage userPrefsStorage;
 
     private GithubStorage githubStorage;
 
     public StorageManager(AddressBookStorage addressBookStorage,
                           ExpenseBookStorage expenseBookStorage,
+                          TaskBookStorage taskBookStorage,
                           UserPrefsStorage userPrefsStorage) {
         super();
         this.addressBookStorage = addressBookStorage;
         this.expenseBookStorage = expenseBookStorage;
+        this.taskBookStorage = taskBookStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -425,5 +429,51 @@ public class StorageManager extends ComponentManager implements Storage {
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
+    }
+
+    /*
+    @Override
+    @Subscribe
+    public void handleExpenseBookLocalBackupEvent(ExpenseBookLocalBackupEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Saving student planner data as backup"));
+        try {
+            backupExpenseBook(event.data, event.filePath);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    }
+    */
+
+    //============== Task ================================================================================
+    @Override
+    public Path getTaskBookFilePath() {
+        return taskBookStorage.getTaskBookFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyTaskBook> readTaskBook() throws DataConversionException, IOException {
+        return readTaskBook(taskBookStorage.getTaskBookFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyTaskBook> readTaskBook(Path filePath) throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return taskBookStorage.readTaskBook(filePath);
+    }
+
+    @Override
+    public void saveTaskBook(ReadOnlyTaskBook taskBook) throws IOException {
+        saveTaskBook(taskBook, taskBookStorage.getTaskBookFilePath());
+    }
+
+    @Override
+    public void saveTaskBook(ReadOnlyTaskBook taskBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        taskBookStorage.saveTaskBook(taskBook, filePath);
+    }
+
+    @Override
+    public void backupTaskBook(ReadOnlyTaskBook taskBook, Path backupFilePath) throws IOException {
+        taskBookStorage.backupTaskBook(taskBook, backupFilePath);
     }
 }
