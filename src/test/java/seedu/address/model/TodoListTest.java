@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DATE_ASSIGNMENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_PRIORITY_ASSIGNMENT;
 import static seedu.address.testutil.TypicalTasks.ESSAY;
-import static seedu.address.testutil.TypicalTasks.REFLECTION;
 import static seedu.address.testutil.TypicalTasks.getTypicalTodoList;
 
 import java.util.Arrays;
@@ -23,7 +22,6 @@ import javafx.collections.ObservableList;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.exceptions.DuplicateTaskException;
 import seedu.address.testutil.TaskBuilder;
-import seedu.address.testutil.TodoListBuilder;
 
 public class TodoListTest {
 
