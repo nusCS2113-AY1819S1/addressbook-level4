@@ -14,6 +14,7 @@ import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.Context;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.ModelManager;
+import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.model.UserPrefs;
 import com.t13g2.forum.model.forum.Module;
 import com.t13g2.forum.model.forum.User;
@@ -44,6 +45,11 @@ public class DeleteModuleCommandTest {
         Context.getInstance().setCurrentUser(validAdmin);
 
         Module validModule = TypicalModules.GET1020;
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            unitOfWork.getModuleRepository().addModule(validModule);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         DeleteModuleCommand deleteModuleCommand = new DeleteModuleCommand(validModule.getModuleCode());
 
         CommandTestUtil.assertCommandSuccess(deleteModuleCommand, model, commandHistory,
