@@ -25,6 +25,9 @@ public interface Model {
     //@@author kelvintankaiboon
     /** Saves the current version of the StockList */
     void saveStockList(String fileName);
+
+    /** Opens the .xml file indicated by user in the browser pane*/
+    void openStockList(String fileName);
     //@@author
 
     /**
@@ -66,16 +69,17 @@ public interface Model {
     void updateFilteredItemList(Predicate<Item> predicate);
     void updateFilteredAccountList(Predicate<Account> predicate);
 
+    //@@author gaoqikai
     /**
-     * Updates the filter of the filtered item list to filter by the given {@code predicate}.
+     * Updates the tag filter of the filtered item list to filter by the given tag: {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredItemListByTag(Predicate<Item> predicate);
+    //@@author
 
     /**
      * Returns true if the model has previous stock list states to restore.
      */
-
     boolean canUndoStockList();
 
     /**

@@ -12,8 +12,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.ItemPanelSelectionChangedEvent;
-import seedu.address.model.item.Item;
+import seedu.address.commons.events.model.OpenStockListVersionEvent;
 
 /**
  * The Browser Panel of the App.
@@ -21,9 +20,9 @@ import seedu.address.model.item.Item;
 public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
+    public static final String FILE_PAGE = "fileaspage.html";
     public static final String SEARCH_PAGE_URL =
             "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
-
     private static final String FXML = "BrowserPanel.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -41,10 +40,6 @@ public class BrowserPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
-    private void loadItemPage(Item item) {
-        loadPage(SEARCH_PAGE_URL + item.getName().fullName);
-    }
-
     public void loadPage(String url) {
         Platform.runLater(() -> browser.getEngine().load(url));
     }
@@ -58,6 +53,14 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     /**
+     * Loads the specified .xml file as a .html page.
+     */
+    private void loadFileAsPage(String fileName) {
+        URL fileAsPage = MainApp.class.getResource("/docs/" + FILE_PAGE);
+        loadPage(fileAsPage.toExternalForm() + "?name=" + fileName);
+    }
+
+    /**
      * Frees resources allocated to the browser.
      */
     public void freeResources() {
@@ -65,8 +68,9 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handleItemPanelSelectionChangedEvent(ItemPanelSelectionChangedEvent event) {
+    private void handleOpenStockListVersionEvent (OpenStockListVersionEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadItemPage(event.getNewSelection());
+        loadDefaultPage();
+        loadFileAsPage(event.fileName);
     }
 }

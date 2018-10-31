@@ -97,7 +97,7 @@ public class StorageManager extends ComponentManager implements Storage {
     public void handleSaveStockListVersionEvent(SaveStockListVersionEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Saving current version to file"));
         try {
-            saveStockListVersion(event.data, Paths.get("versions", event.fileName));
+            saveStockListVersion(event.data, Paths.get("src\\main\\resources\\docs\\versions", event.fileName));
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }

@@ -4,7 +4,7 @@ import seedu.address.logic.commands.SaveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new SelectCommand object
+ * Parses input arguments and creates a new SaveCommand object
  */
 public class SaveCommandParser implements Parser<SaveCommand> {
 
@@ -17,6 +17,11 @@ public class SaveCommandParser implements Parser<SaveCommand> {
         try {
             String fileName = ParserUtil.parseFileName(args);
             fileName = fileName + ".xml";
+            if (fileName.equalsIgnoreCase(".xml")) {
+                throw new ParseException(
+                        String.format(SaveCommand.MESSAGE_EMPTY_FILE_NAME, SaveCommand.MESSAGE_USAGE)
+                );
+            }
             return new SaveCommand(fileName);
         } catch (ParseException pe) {
             throw new ParseException(

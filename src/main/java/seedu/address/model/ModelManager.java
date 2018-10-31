@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AccountListChangedEvent;
+import seedu.address.commons.events.model.OpenStockListVersionEvent;
 import seedu.address.commons.events.model.SaveStockListVersionEvent;
 import seedu.address.commons.events.model.StockListChangedEvent;
 import seedu.address.model.account.Account;
@@ -77,6 +78,17 @@ public class ModelManager extends ComponentManager implements Model {
         indicateSaveStockListVersion(fileName);
     }
 
+    /** Raises an event to indicate that OpenCommand has been called */
+    private void indicateOpenStockListVersion(String fileName) {
+        raise(new OpenStockListVersionEvent(versionedStockList, fileName));
+    }
+
+    @Override
+    public void openStockList(String fileName) {
+        indicateOpenStockListVersion(fileName);
+    }
+    //@@author
+
     @Override
     public boolean hasItem(Item item) {
         requireNonNull(item);
@@ -120,12 +132,15 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(predicate);
         filteredItems.setPredicate(predicate);
     }
+
+    //@@author gaoqikai
     @Override
+    //update the stock list that is filtered by tag
     public void updateFilteredItemListByTag(Predicate<Item> predicate) {
         requireNonNull(predicate);
         filteredItems.setPredicate(predicate);
-
     }
+    //@@author
 
     //=========== Undo/Redo =================================================================================
 

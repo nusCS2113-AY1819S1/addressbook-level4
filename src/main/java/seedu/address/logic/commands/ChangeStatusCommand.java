@@ -27,18 +27,20 @@ public class ChangeStatusCommand extends Command {
     public static final String COMMAND_WORD = "changeStatus";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the status of the item identified "
             + "by the name of the item. "
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_QUANTITY + "QUANTITY] "
-            + "[" + PREFIX_ORIGINAL_STATUS + "ORIGINAL STATUS] "
-            + "[" + PREFIX_NEW_STATUS + "NEW STATUS] "
-            + "Example: " + COMMAND_WORD + "1"
+            + "Parameters: "
+            + PREFIX_NAME + "NAME  "
+            + PREFIX_QUANTITY + "QUANTITY "
+            + PREFIX_ORIGINAL_STATUS + "ORIGINAL STATUS "
+            + PREFIX_NEW_STATUS + "NEW STATUS "
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_QUANTITY + "5 "
-            + PREFIX_ORIGINAL_STATUS + "Ready"
+            + PREFIX_ORIGINAL_STATUS + "Ready "
             + PREFIX_NEW_STATUS + "Faulty";
-    public static final String MESSAGE_CHANG_STATUS_SUCCESS = "Changed Status: %1$s";
-    public static final String MESSAGE_INVALID_STATUS_QUANTITY = "The change status quantity input is invalid";
+    public static final String MESSAGE_CHANGE_STATUS_SUCCESS = "Changed Status: %1$s";
     public static final String MESSAGE_INVALID_STATUS_FIELD = "The status description is invalid";
+    public static final String MESSAGE_INVALID_NAME_FIELD = "The item does not exist";
+    public static final String MESSAGE_STATUS_CONSTRAINTS =
+            "The updated value of each status field has to be positive";
 
     private Index index;
     private final ChangeStatusDescriptor changeStatusDescriptor;
@@ -51,27 +53,33 @@ public class ChangeStatusCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Item> lastShownList = model.getFilteredItemList();
-        int counter = 0;
-        for (Item item:lastShownList) {
-            if (item.getName().equals(changeStatusDescriptor.getName())) {
-                index = Index.fromZeroBased(counter);
-            }
-            counter++;
-        }
+
+        index = getIndex(lastShownList, changeStatusDescriptor);
 
         Item itemToUpdate = lastShownList.get(index.getZeroBased());
 
         Item updatedItem = createUpdatedItem(itemToUpdate, changeStatusDescriptor);
 
-        if (!itemToUpdate.isSameItem(updatedItem) && model.hasItem(updatedItem)) {
-            throw new CommandException(MESSAGE_INVALID_STATUS_QUANTITY);
-        }
         model.updateItem(itemToUpdate, updatedItem);
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitStockList();
-        return new CommandResult(String.format(MESSAGE_CHANG_STATUS_SUCCESS, updatedItem));
+        return new CommandResult(String.format(MESSAGE_CHANGE_STATUS_SUCCESS, updatedItem));
 
 
+    }
+
+    private static Index getIndex(List<Item> lastShownList, ChangeStatusDescriptor changeStatusDescriptor)
+            throws CommandException {
+        Index index;
+        int counter = 0;
+        for (Item item:lastShownList) {
+            if (item.getName().equals(changeStatusDescriptor.getName())) {
+                index = Index.fromZeroBased(counter);
+                return index;
+            }
+            counter++;
+        }
+        throw new CommandException(MESSAGE_INVALID_NAME_FIELD);
     }
     /**
      * Creates and returns a {@code Item} with the details of {@code itemToUpdate}
@@ -114,6 +122,9 @@ public class ChangeStatusCommand extends Command {
         default:
             throw new CommandException(MESSAGE_INVALID_STATUS_FIELD);
         }
+        if (updatedReady < 0 || updatedOnLoan < 0 || updatedFaulty < 0) {
+            throw new CommandException(MESSAGE_STATUS_CONSTRAINTS);
+        }
         updatedStatus = new Status(updatedReady, updatedOnLoan, updatedFaulty);
 
         return new Item(itemToUpdate.getName(), itemToUpdate.getQuantity(), itemToUpdate.getMinQuantity(),
@@ -128,7 +139,16 @@ public class ChangeStatusCommand extends Command {
         private String initialStatus;
         private String updatedStatus;
 
-        public ChangeStatusDescriptor() {}
+        public ChangeStatusDescriptor() {
+        }
+
+        public ChangeStatusDescriptor(Name name, Integer changeStatusQuantity,
+                                      String initialStatus, String updatedStatus) {
+            this.name = name;
+            this.changeStatusQuantity = changeStatusQuantity;
+            this.initialStatus = initialStatus;
+            this.updatedStatus = updatedStatus;
+        }
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
