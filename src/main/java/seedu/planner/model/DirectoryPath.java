@@ -2,6 +2,7 @@ package seedu.planner.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.AppUtil.checkArgument;
+
 import java.io.File;
 import java.util.logging.Logger;
 

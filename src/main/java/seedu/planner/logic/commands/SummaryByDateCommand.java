@@ -42,8 +42,7 @@ public class SummaryByDateCommand extends SummaryCommand {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         ReadOnlyFinancialPlanner financialPlanner = model.getFinancialPlanner();
-        SummaryByDateList summaryList = new SummaryByDateList(financialPlanner.getRecordList(),
-                predicate);
+        SummaryByDateList summaryList = new SummaryByDateList(financialPlanner.getRecordList(), predicate);
         EventsCenter.getInstance().post(new ShowSummaryTableEvent(summaryList.getSummaryList()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, summaryList.size()));
     }

@@ -43,9 +43,6 @@ public class DeleteCommandByDateEntry extends Command {
         List<Record> lastShownList = model.getFilteredRecordList();
         for (int i = lastShownList.size() - 1; i >= 0; i--) {
             Record targetRecord = lastShownList.get(i);
-            logger.info(String.format(
-                    "---------------------------------------------The date required is: %1$s, the date shown is %2$s\n",
-                    targetDate.getValue(), targetRecord.getDate().getValue()));
             if (targetRecord.isSameDateRecord(targetDate)) {
                 model.deleteRecord(targetRecord);
                 targetRecordExist = Boolean.TRUE;

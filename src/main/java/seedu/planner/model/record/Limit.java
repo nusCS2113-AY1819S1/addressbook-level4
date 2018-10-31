@@ -2,7 +2,6 @@ package seedu.planner.model.record;
 
 import static java.lang.Math.abs;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
-import java.io.File;
 
 /**
 * Limit used to offer a function as a reminder to user about their money usage.

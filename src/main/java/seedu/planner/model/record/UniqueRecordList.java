@@ -79,6 +79,24 @@ public class UniqueRecordList implements Iterable<Record> {
         }
     }
 
+    /**
+     * Removes the equivalent records from the list.
+     * The record must exist in the list.
+     */
+    public void removeListRecord(List<Record> recordList) {
+        requireNonNull(recordList);
+        for (int i = internalList.size() - 1; i >= 0; i--) {
+            Record record = internalList.get(i);
+            if (recordList.contains(record)) {
+                remove(record);
+                recordList.remove(record);
+            }
+        }
+    }
+
+    /**
+     * Set the new UniqueRecordList.
+     */
     public void setRecords(UniqueRecordList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);

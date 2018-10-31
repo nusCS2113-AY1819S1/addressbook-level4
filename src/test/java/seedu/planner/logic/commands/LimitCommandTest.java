@@ -23,6 +23,7 @@ import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
+import seedu.planner.testutil.Assert;
 import seedu.planner.testutil.LimitBuilder;
 
 
@@ -109,11 +110,6 @@ public class LimitCommandTest {
         }
 
         @Override
-        public int deleteListRecordSameDate(List<Record> targetList, Date targetDate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void updateRecord(Record target, Record editedRecord) {
             throw new AssertionError("This method should not be called.");
         }
@@ -138,6 +134,7 @@ public class LimitCommandTest {
         public ObservableList<Limit> getLimitList() {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public ReadOnlyFinancialPlanner getFinancialPlanner() {
             throw new AssertionError("This method should not be called.");
@@ -152,10 +149,12 @@ public class LimitCommandTest {
         public Double getTotalSpend(Limit limit) {
             return 0.0;
         }
+
         @Override
         public void deleteLimit(Limit limit) {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public boolean hasRecord(Record record) {
             throw new AssertionError("This method should not be called.");
@@ -176,8 +175,7 @@ public class LimitCommandTest {
             return false;
         }
 
-
-
+        @Override
         public void deleteListRecord(List<Record> targetList) {
             throw new AssertionError("This method should not be called.");
         }

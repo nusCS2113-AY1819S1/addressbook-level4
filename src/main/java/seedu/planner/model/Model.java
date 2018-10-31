@@ -39,12 +39,6 @@ public interface Model {
     void deleteRecord(Record target);
 
     /**
-     * Deletes the record whose date is required.
-     * The record must exist in the financial planner.
-     */
-    int deleteListRecordSameDate(List<Record> targetList, Date targetDate);
-
-    /**
      * Deletes the given list of records.
      * The record must exist in the financial planner.
      */

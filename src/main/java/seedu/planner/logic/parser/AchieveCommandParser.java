@@ -31,7 +31,7 @@ public class AchieveCommandParser implements Parser<AchieveCommand> {
         String stringPath = " ";
         String trimmedArgs = args.trim();
         logger.info(trimmedArgs);
-        if (args.isEmpty()) {
+        if (trimmedArgs.isEmpty()) {
             return new AchieveCommand();
         }
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_DIR);
@@ -40,6 +40,7 @@ public class AchieveCommandParser implements Parser<AchieveCommand> {
         logger.info("stringDate: " + stringDate + " stringPath: " + stringPath);
         return parseArgumentsModeIntoCommand(args, stringDate, stringPath);
     }
+
     /**
      * Parse the arguments into different argument mode, hence, we will have different command mode.
      */

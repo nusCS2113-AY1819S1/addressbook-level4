@@ -126,6 +126,7 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         requireNonNull(editedRecord);
         records.setRecord(target, editedRecord);
     }
+
     /**
      * Removes {@code key} from this {@code FinancialPlanner}.
      * {@code key} must exist in the financial planner.
@@ -135,21 +136,12 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     }
 
     /**
-     * Removes {@code records} from this {@code Financial Planner}
-     * {@code records} must exist in the Financial Planner.
-     * That means that all the Records in the list must exist in the Finacial Planner.
+     * Removes {@code records} from this {@code FinancialPlanner}.
+     * {@code records} must exist in the financial planner.
      */
-    public int removeRecordsSameDate(List<Record> records, Date targetDate) {
-        int count = 0;
-        for (Record record : records) {
-            if (record.getDate().equals(targetDate)) {
-                removeRecord(record);
-                count++;
-            }
-        }
-        return count;
+    public void removeListRecord(List<Record> recordList) {
+        records.removeListRecord(recordList);
     }
-
     /**
      * Sorts the records in this {@code FinancialPlanner}.
      */
@@ -165,7 +157,6 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     /**
      * Add a limit to the financial planner.
      * The newly added limit can not share same dates with the rest.
-     * @param limit
      */
     public void addLimit(Limit limit) {
         limits.add(limit); }
@@ -173,18 +164,15 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     /**
      * edit an existing limit.
      * Replace the limit the new limit given.
-     * @param target
-     * @param editedLimit
      */
     public void updateLimit(Limit target, Limit editedLimit) {
         requireNonNull(editedLimit);
         limits.setLimit(target, editedLimit);
     }
+
     /**
      * check whether the records' money has already exceeded the limit.
      * return true if limit exceeded.
-     * @param limit
-     * @return
      */
     public boolean isExceededLimit (Limit limit) {
         Double recordsMoney = 0.0;

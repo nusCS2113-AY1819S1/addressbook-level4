@@ -387,7 +387,6 @@ Screenshot of app displaying expense breakdown when `stats d/1-1-2018 12-12-2018
 
 image::UiPieChartIncome.png[width="790"]
 Screenshot of app displaying income breakdown when `stats d/1-1-2018 12-12-2018` is run
->>>>>>> 4f3224d463794208f6ba64057d3d132e86b74383
 
 === Selecting a record : `select`
 

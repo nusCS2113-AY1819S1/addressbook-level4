@@ -22,10 +22,10 @@ Responsibilities: UI
 
 === Nguyen Ngoc Linh Chi
 image::nguyenngoclinhchi.png[width="150", align="left"]
-{empty}[http://github.com/nguyenngoclinhchi[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/nguyenngoclinhchi[github]] [<<nguyenngoclinhchi#, portfolio>>]
 
 Role: Team Lead +
-Responsibilities: UI
+Responsibilities: Logic + UI
 
 '''
 

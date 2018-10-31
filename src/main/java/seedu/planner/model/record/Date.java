@@ -145,6 +145,14 @@ public class Date {
         return year;
     }
 
+    /**
+     * Create Date string code, used in Comparator for the Sort util.
+     */
+    public int hashDateStringCode(String dateString) {
+        Date date = new Date(dateString);
+        return date.getDay() + date.getMonth() * 100 + date.getYear() * 10000;
+    }
+
     @Override
     public String toString() {
         return value;

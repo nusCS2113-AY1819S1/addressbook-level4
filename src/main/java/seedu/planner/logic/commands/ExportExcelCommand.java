@@ -1,7 +1,10 @@
 package seedu.planner.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.planner.commons.util.ExcelUtil.setPathFile;
 import static seedu.planner.model.Model.PREDICATE_SHOW_ALL_RECORDS;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -15,9 +18,12 @@ import seedu.planner.commons.util.ExcelUtil;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.model.DirectoryPath;
 import seedu.planner.model.Model;
+import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
+import seedu.planner.model.summary.SummaryByDateList;
+import seedu.planner.ui.SummaryEntry;
 
 /**
  * Export the data of the records within specific period.
@@ -80,36 +86,36 @@ public class ExportExcelCommand extends Command {
     public CommandResult execute(Model model, CommandHistory commandHistory) {
         requireNonNull(this);
         model.updateFilteredRecordList(predicate);
+        ReadOnlyFinancialPlanner financialPlanner = model.getFinancialPlanner();
+        SummaryByDateList summaryList = new SummaryByDateList(financialPlanner.getRecordList(), predicate);
         List<Record> recordList = model.getFilteredRecordList();
+        List<SummaryEntry> daySummaryEntryList = summaryList.getSummaryList();
         String nameFile = ExcelUtil.setNameExcelFile(startDate, endDate);
         String message;
-        if (exportDataIntoExcelSheetWithGivenRecords(recordList, startDate, endDate, nameFile, directoryPath)) {
-            message = String.format(Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY,
-                    nameFile, directoryPath) + Messages.MESSAGE_ACHIEVE_SUCCESSFULLY;
+        String filePath = setPathFile(nameFile, directoryPath);
+
+        logger.info("The file Path: " + filePath);
+
+        if (exportDataIntoExcelSheetWithGivenRecords(recordList, daySummaryEntryList, filePath)) {
+            message = String.format(Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY, nameFile, directoryPath);
         } else {
-            message = Messages.MESSAGE_NO_RECORDS_TO_EXPORT;
+            message = Messages.MESSAGE_EXPORT_COMMAND_ERRORS;
         }
-        for (Record record : recordList) {
-            model.deleteRecord(record);
-        }
-        model.commitFinancialPlanner();
+
         return new CommandResult(message);
     }
 
     /**
      * Export the records into Excel File.
      */
-    public static Boolean exportDataIntoExcelSheetWithGivenRecords (
-            List<Record> recordList, Date startDate, Date endDate, String nameFile, String directoryPath) {
-        logger.info(nameFile);
-
+    public static Boolean exportDataIntoExcelSheetWithGivenRecords(
+            List<Record> recordList, List<SummaryEntry> daySummaryEntryList, String filePath) {
         XSSFWorkbook workbook = new XSSFWorkbook();
-        XSSFSheet sheet = workbook.createSheet(nameFile);
-
-        logger.info("START DATE : " + startDate + " END DATE: " + endDate);
+        XSSFSheet recordData = workbook.createSheet("RECORD DATA");
+        XSSFSheet summaryData = workbook.createSheet("SUMMARY DATA");
         if (recordList.size() > 0) {
             ExcelUtil.writeExcelSheetIntoDirectory(
-                    recordList, sheet, workbook, directoryPath, nameFile);
+                    recordList, daySummaryEntryList, recordData, summaryData, workbook, filePath);
             return true;
         }
         return false;
@@ -119,6 +125,7 @@ public class ExportExcelCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ExportExcelCommand // instanceof handles nulls
-                && predicate.equals(((ExportExcelCommand) other).predicate)); // state check
+                && predicate.equals(((ExportExcelCommand) other).predicate)
+                && directoryPath.equals(((ExportExcelCommand) other).directoryPath)); // state check
     }
 }
