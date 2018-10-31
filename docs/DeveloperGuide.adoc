@@ -144,7 +144,7 @@ image::LogicClassDiagram.png[width="800"]
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the command `delete 1`.
 
 .Component interactions for `delete 1` command (part 1)
-image::SDforDeletePerson.png[width="800"]
+image::SDforDeleteRecord.png[width="800"]
 
 [NOTE]
 Note how the `Model` simply raises a `FinancialPlannerChangedEvent` when the Financial Planner data are changed, instead of asking the `Storage` to save the updates to the hard disk.
@@ -152,7 +152,7 @@ Note how the `Model` simply raises a `FinancialPlannerChangedEvent` when the Fin
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
 .Component interactions for `delete 1` command (part 2)
-image::SDforDeletePersonEventHandling.png[width="800"]
+image::SDforDeleteRecordEventHandling.png[width="800"]
 
 [NOTE]
 Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between components.
@@ -167,9 +167,10 @@ image::UiClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/expense/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `WelcomePanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/expense/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
+For example, the layout of the link:{repoURL}/src/main/java/seedu/expense/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
 The `UI` component,
 
@@ -1107,33 +1108,39 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |user |be able to input my expenses and income along with a timestamp with options (daily, monthly or yearly) | record how much I am spending
+|`* * *` |user |be able to input my expenses and income along with a timestamp | record how much I am spending
 
-|`* * *` |user |be able to delete existing entries |edit my mistakes in the future
+|`* * *` |user |be able to delete existing entries |remove records which I do not need
 
-|`* * *` |user |be able to see the history of my expenses |Can keep track of my expense
+|`* * *` |user |be able to edit existing entries |update records with the correct information
 
-|`* * *` |user |be able to create a limit for my daily expenses | stop myself from overspending
+|`* * *` |user |be able to undo and redo |Revert any unwanted changes
 
-|`* * *` |user |be able to undo |Revert any unwanted changes
+|`* * *` |user |be able to retain my financial information when app shuts down |Not have the app open all the time
 
-|`*` |user with many persons in the expense book |sort persons by name |locate a person easily
+|`* * *` |user |be able to see the history of my financial activities |Can keep track of my financial activities
+
+|`* * *` |user with many records in the FinancialPlanner |have an ordered list of records |locate records easily
+
+|`* * *` |user with many records in the FinancialPlanner |find a record easily by name |access any record I want easily
 
 |`* * *` |user |be able to clear history |to reduce the clutter in the app
 
+|`* * *` |user |be able to create a limit for my daily final activities | stop myself from overspending
+
 |`* * *` |user |be able to see a summary expenditure of each category | see the areas where I am spending the most
+
+|`* * *` |user |be able to see a summary of each day or month | see how much I am spending per day or month
 
 |`* * *` |new user |see usage instructions | refer to instructions when i forget how to use the app
 
 |`* * *` |user |access the history within a few seconds | do not have the time to wait for the app to update
 
-|`* * *` |advanced user |add notes to each expense | know where my money went
+|`* *` |advanced user |be able to freely edit the tags | define my own categories
 
-|`* * ` |advanced user |be able to freely edit the tags | define my own categories
+|`* *` |user |be able to tag my financial activities with a category|To figure out in which part money spent on.
 
-|`* *` |user |be able to tag my expenses with a category|To figure out in which part money spent on.
-
-|`* *` |advanced user |export my expenses into other forms |log it and store it in a place different from the app
+|`* *` |advanced user |export my financial activities into other forms |log it and store it in a place different from the app
 
 |`* *` |user |search based on the categories |monitor the expenditure in a specific category
 
@@ -1141,24 +1148,32 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |advanced user |plan out my future expenses | allocate money properly, to ensure I can make my payments
 
-|`* *` |user |have a visual representation of my spending habits |have a better idea of my expenditures
+|`* *` |user |have a visual representation of daily and monthly financial activity |visualise the amount spend each day or month
+
+|`* *` |user |have a visual representation of financial activity broken down into categories |easily identify the areas where I am spending the most
 
 |`* *` |user |record parties to make payment to |allocate money and ensure I do not owe anyone
 
-|`* *` |user |be able to edit my expenses |correct any mistakes when checking my accounts
+|`* *` |user |know my current monthly financial activity |have a sense of how much I am spending currently
 
 |`* *` |user |view balances in bank accounts |keep track of my bank savings or current without having to login to accounts
 
-|`* *` |user |a nice representation of the categories |have a better idea of the expenses in each category
+|`* *` |user |have an intuitive user interface |so that I don't have to think too much when using the app
+
+|`* *` |user |have a visually appealing user interface |so that I feel happy when using the app
+
+|`*` |user |be able to access basic app configurations |so that I can adjust the app to my liking
 
 |`*` |user |hide private details by default | minimize chance of someone else seeing them by accident
 
-|`*` |user |a secure place to store my expense records |keep my financial data safe
+|`*` |user |a secure place to store my finance records |keep my financial data safe
 
-|`*` |user |archive my old expenses history |look back at my expenses history whenever I need it
+|`*` |user |archive my old finance history |look back at my finance history whenever I need it
+
+|`*` |inexperienced user |have command suggestions |use the commands without having to remember them
+
+|`*` |advanced user |add notes to each finance record | know where my money went
 |=======================================================================
-
-_{More to be added}_
 
 [appendix]
 == Use Cases
@@ -1166,42 +1181,31 @@ _{More to be added}_
 (For all use cases below, the *System* is the `FinancialPlanner` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== 1.  Use case: Input expense for a certain activity. [Vincent]
+=== 1.  Use case: Input expense for a certain activity.
 
 *MSS*
 
-1.  User requests to insert a spending amount
-2.  FinancialPlanner requests the amount of money
-3.  User enters the amount of money spent
-4.  FinancialPlanner requests for confirmation from user.
-5.  User confirms the amount.
-6.  FinancialPlanner requests the description of the item/activity that money was spent on
-7.  User enters the description of the item he spent on
-8.  FinancialPlanner requests for confirmation from user.
-9.  User confirms the description.
-10. FinancialPlanner processes the input and stores the information.
-11. FinancialPlanner shows the status update of the operation.
+1.  User requests to add record into FinancialPlanner.
+2.  System adds the record into the system.
+3.  System displays the record added to the user.
 +
 Use case ends.
 
 *Extensions*
 
-* 3a. User’s input is of invalid form.
-    FinancialPlanner throws invalid format error and shows the format needed.
-    Use case resumes at step 2.
+* 1a. User’s input command is invalid. +
+** FinancialPlanner throws invalid command error and shows an example command input needed.
+** Use case ends.
 
-* 5a. User declines the confirmation.
-** Use case resumes at step 2.
+* 1a. User's input parameters are missing or invalid. +
+** FinancialPlanner throws invalid command error and notifies user of the correct format.
+** Use case ends.
 
-* 7a. User’s input is of invalid form.
-** FinancialPlanner throws invalid format error.
-** Use case resumes at step 6.
-
-* 9a. User declines the confirmation.
-** Use case resumes at step 6.
+* 1a. The record to be added is a duplicate of existing record in the system.
+** FinancialPlanner throws duplicated record error.
+** Use case ends.
 
 [discrete]
-
 === 2.  Use case: Delete expense entry whose date is required. [Linh Chi]
 
 *MSS*
@@ -1246,12 +1250,15 @@ Use case ends.
 * 1a. User’s command is of invalid form.
 ** FinancialPlanner throws invalid command error.
 ** Use case resumes at step 1.
+
 * 1a. User does not specify any arguments.
 ** FinancialPlanner returns all records in the FinancialPlanner.
 ** Use case ends.
+
 * 1a. The arguments are of incorrect format
-** FinancialPlanner throws invalid command error and shows an example of a correct command
+** FinancialPlanner throws invalid command error and notifies user of the correct format.
 ** Use case resumes at step 1.
+
 * 2a. There is no history.
 ** FinancialPlanner shows a blank list.
 ** Use case ends.
@@ -1275,28 +1282,29 @@ Use case ends.
 ** Use case continues from step 2
 
 [discrete]
-=== 5.  Use case: Plan the total expenses for a period of time
+=== 5.  Use case: View breakdown of financial activity into category [Vincent]
 
 *MSS*
 
-1.  User requests to plan expenses
-2.  FinancialPlanner requests for amount of money to be allocated
-3.  User inputs amount of money
-4.  FinancialPlanner requests for period of time for amount of money to be allocated
-5.  User inputs period of time
-6.  FinancialPlanner records amount of money for time period specified.
+1.  User requests for category breakdown within a period of time.
+2.  System retrieves the category breakdown report.
+3.  System shows the report to the user in format of pie charts.
 +
 Use case ends.
 
 *Extensions*
 
-* 3a User’s input is not a valid amount of money
-** FinancialPlanner throws invalid input command
-** Use case continues from step 2
-* 5a User’s input is not a valid period of time
-** FinancialPlanner throws invalid input command
-** Use case continues from step 4
+* 1a. User’s input command is invalid. +
+** System throws invalid command error and shows an example command input needed.
+** Use case ends.
 
+* 1a. User's input parameters are missing or invalid. +
+** System throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+* 2a. There are no records within the time range specified. +
+** System shows an empty page with warning that nothing has been found.
+** Use case ends.
 
 [discrete]
 === 6.  Use case: Search expenses based on category [Zhi Thon]
@@ -1316,24 +1324,29 @@ Use case ends.
 ** FinancialPlanner shows no expenditure for selected category
 
 [discrete]
-=== 7.  Use case: Summary of expenditure by category [Vincent]
+=== 7.  Use case: View daily/monthly summary within a period of time [Vincent]
 
 *MSS*
 
-1.  User requests for Expenditure summary
-2.  FinancialPlanner requests for date of entry the user want to see
-3.  User enters the date they want to see
-4.  FinancialPlanner requests for confimation from the user
-5.  User confirms the date
-6.  FinancialDisplay displays the list of catrgories expenditure.
+1.  User requests for summary report within a period of time.
+2.  System retrieves the summary report.
+3.  System shows the report to the user in format of a table.
 +
 Use case ends.
 
 *Extensions*
 
-* 3a. User’s input is of invalid form.
-** FinancialPlanner throws invalid format error and shows the format needed.
-** Use case resumes at step 2.
+* 1a. User’s input command is invalid. +
+** System throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 1a. User's input parameters are missing or invalid. +
+** System throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+* 2a. There are no records within the time range specified. +
+** System shows an empty table.
+** Use case ends.
 
 [discrete]
 === 8.  Use case: Usage Instructions guide
@@ -1343,7 +1356,7 @@ Use case ends.
 1.  User requests for usage instructions
 2.  FinancialPlanner displays different commands
 3.  User inputs which command he wants to find out about
-4.  Financial displays infomration on selected command
+4.  Financial displays information on selected command
 +
 Use case ends.
 
@@ -1462,8 +1475,7 @@ Use case ends.
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
 .  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-_{More to be added}_
+.  Should be able to retain data in the event of app exiting or crashing.
 
 [appendix]
 == Glossary
@@ -1473,6 +1485,9 @@ Windows, Linux, Unix, OS-X
 
 [[private-contact-detail]] Private contact detail::
 A contact detail that is not meant to be shared with others
+
+[[Finance-activity]] Finance Activity::
+Activity where an individual engage in exchange of money, can comprise of income or spending
 
 [appendix]
 == Product Survey

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- @@author tenvinc -->
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -7,25 +8,22 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" stylesheets="DarkTheme.css" xmlns="http://javafx.com/javafx/10.0.1">
-   <children>
-      <VBox alignment="TOP_CENTER" styleClass="box-welcome-panel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <GridPane gridLinesVisible="true">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" prefWidth="50.0" />
-                <ColumnConstraints hgrow="SOMETIMES" prefWidth="50.0" />
-              </columnConstraints>
-               <children>
-                  <AnchorPane fx:id="expenseStats" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <AnchorPane fx:id="incomeStats" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" GridPane.columnIndex="1" />
-               </children>
-               <rowConstraints>
-                  <RowConstraints />
-               </rowConstraints>
-            </GridPane>
-            <Label fx:id="welcomeMessage" styleClass="label-welcome"
-                   text="Label" textAlignment="CENTER" wrapText="true" />
-         </children>
-      </VBox>
-   </children>
+   <VBox alignment="TOP_CENTER" styleClass="box-welcome-panel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+         AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <GridPane gridLinesVisible="true">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" prefWidth="50.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" prefWidth="50.0"/>
+         </columnConstraints>
+         <AnchorPane fx:id="expenseStats" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                     AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+         <AnchorPane fx:id="incomeStats" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                     AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" GridPane.columnIndex="1"/>
+         <rowConstraints>
+            <RowConstraints/>
+         </rowConstraints>
+      </GridPane>
+      <Label fx:id="welcomeMessage" styleClass="label-welcome"
+             text="Label" textAlignment="CENTER" wrapText="true"/>
+   </VBox>
 </AnchorPane>

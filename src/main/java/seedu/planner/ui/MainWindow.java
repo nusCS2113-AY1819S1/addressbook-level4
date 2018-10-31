@@ -223,6 +223,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /* ------------------ Delegates for event management system for switching of panels ----------------------------- */
+    //@@author tenvinc
     @Subscribe
     private void handleShowSummaryTableEvent(ShowSummaryTableEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));

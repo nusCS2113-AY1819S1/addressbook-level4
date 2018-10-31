@@ -11,7 +11,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.planner.commons.core.LogsCenter;
-
+import seedu.planner.model.record.MoneyFlow;
+//@@author tenvinc
 /**
  * This UI component is responsible for displaying the summary requested by the user
  */
@@ -43,9 +44,12 @@ public class SummaryDisplay extends UiPart<Region> {
     @FXML
     private TableColumn totalColumn;
 
-    public SummaryDisplay(ObservableList<SummaryEntry> toDisplay) {
+    public SummaryDisplay(ObservableList<SummaryEntry> toDisplay, MoneyFlow totalExpense, MoneyFlow totalIncome,
+                          MoneyFlow total, String totalLabel) {
         super(FXML);
         init(toDisplay);
+        summaryTable.getItems().add(new SummaryEntry(totalLabel, totalIncome.toString(), totalExpense.toString(),
+                total.toString()));
     }
 
     /**

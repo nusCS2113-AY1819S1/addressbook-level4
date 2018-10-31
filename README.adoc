@@ -14,7 +14,30 @@ ifndef::env-github[]
 image::images/Ui.png[width="600"]
 endif::[]
 
-* This is a desktop Financial Planner application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
+* This is a desktop Financial Planner application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface). +
+
+*This app is mainly for users who want to:*
+
+* Use typing as their main method of entering information into the app
+* Organise their financial information using mostly CLI
+* Have a visual representation of their financial data
+* Store and retrieve their financial data efficiently
+
+*This app is mainly written in an OOP fashion.* +
+
+*What’s good about this project:*
+
+* The app has a sophisticated GUI that includes a list panel, a table panel and also chart panels
+
+* The app has the ability to show detailed visual representations of the financial expenditure and income data stored in the Financial Planner.
+
+* The app has the ability to export financial information in the app to other formats like Excel.
+
+* The app has auto-completion algorithm built in to aid in the typing.
+
+* Contains many test cases, including automated GUI testing.
+
+* Supports for Build Automation using Gradle and for Continuous Integration using Travis CI.
 
 == Site Map
 

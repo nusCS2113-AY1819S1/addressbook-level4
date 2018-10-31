@@ -5,16 +5,15 @@ import java.util.Set;
 import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.tag.Tag;
-
+//@@author tenvinc
 /**
  * This class represents a in memory model of the statistic of a category. It contains totalIncome and totalExpenses.
  */
 public class CategoryStatistic {
 
     private Set<Tag> tags;
-    private double totalIncome = 0;
-
-    private double totalExpense = 0;
+    private Double totalIncome = 0.0;
+    private Double totalExpense = 0.0;
 
     public CategoryStatistic(Record record) {
         tags = record.getTags();
@@ -32,11 +31,11 @@ public class CategoryStatistic {
         return tags;
     }
 
-    public double getTotalIncome() {
+    public Double getTotalIncome() {
         return totalIncome;
     }
 
-    public double getTotalExpense() {
+    public Double getTotalExpense() {
         return totalExpense;
     }
 
@@ -52,6 +51,15 @@ public class CategoryStatistic {
 
     private boolean isExpense(Record record) {
         return record.getMoneyFlow().toDouble() < 0;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof CategoryStatistic // instanceof handles nulls
+                && tags.equals(((CategoryStatistic) other).tags)
+                && totalIncome.equals(((CategoryStatistic) other).totalIncome)
+                && totalExpense.equals(((CategoryStatistic) other).totalExpense));
     }
 }
 

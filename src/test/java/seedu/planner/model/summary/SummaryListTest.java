@@ -25,7 +25,7 @@ import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
 import seedu.planner.testutil.RecordBuilder;
 import seedu.planner.testutil.SummaryBuilder;
-
+//@@author tenvinc
 /**
  * This test tests both SummaryByDateList and SummaryByMonthList because this 2 classes
  * share a great number of similarities
@@ -140,7 +140,7 @@ public class SummaryListTest {
         Date startTestDate = new Date("1-1-2018");
         Date endTestDate = new Date("5-6-2018");
         DateIsWithinIntervalPredicate predicate = new DateIsWithinIntervalPredicate(startTestDate, endTestDate);
-        FilteredList<Record> filteredList = new FilteredList(FXCollections.observableList(recordListAllUniqueDates));
+        FilteredList<Record> filteredList = new FilteredList<>(FXCollections.observableList(recordListAllUniqueDates));
         filteredList.setPredicate(predicate);
         HashMap<Date, Summary> expectedMap = new HashMap<>();
         for (Record r : filteredList) {
@@ -158,7 +158,7 @@ public class SummaryListTest {
         Date startTestDate = new Date("1-1-2018");
         Date endTestDate = new Date("30-6-2018");
         DateIsWithinIntervalPredicate predicate = new DateIsWithinIntervalPredicate(startTestDate, endTestDate);
-        FilteredList<Record> filteredList = new FilteredList(FXCollections.observableList(recordListAllUniqueDates));
+        FilteredList<Record> filteredList = new FilteredList<>(FXCollections.observableList(recordListAllUniqueDates));
         filteredList.setPredicate(predicate);
         HashMap<Month, Summary> expectedMap = new HashMap<>();
         for (Record r : filteredList) {

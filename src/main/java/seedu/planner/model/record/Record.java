@@ -69,7 +69,7 @@ public class Record {
     }
 
     /**
-     * Return whether the record has the same date requried.
+     * Return whether the record has the same date required.
      */
     public boolean isSameDateRecord (Date date) {
         return date.getDay() == this.date.getDay()

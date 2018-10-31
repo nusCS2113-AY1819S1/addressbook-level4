@@ -1,6 +1,6 @@
 package seedu.planner.ui;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -18,7 +18,7 @@ import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.ui.ShowPieChartStatsEvent;
 import seedu.planner.commons.events.ui.ShowSummaryTableEvent;
 import seedu.planner.model.summary.CategoryStatistic;
-
+//@@author tenvinc
 /**
  * This UI component is responsible for managing the tabs where the statistics will be displayed
  */
@@ -83,7 +83,7 @@ public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
 
     /** Extracts the label and expense information and places it in a list of ChartData */
     private Pair< ObservableList<ChartData>, Double> extractExpenseChartData(ObservableList<CategoryStatistic> data) {
-        List<ChartData> chartDataList = new ArrayList();
+        List<ChartData> chartDataList = Collections.emptyList();
         Double totalExpense = 0.0;
         for (CategoryStatistic d : data) {
             if (d.getTotalExpense() > 0.0) {
@@ -114,7 +114,7 @@ public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
 
     /** Extracts the label and income information and places it in a list of ChartData */
     private Pair< ObservableList<ChartData>, Double> extractIncomeChartData(ObservableList<CategoryStatistic> data) {
-        List<ChartData> chartDataList = new ArrayList();
+        List<ChartData> chartDataList = Collections.emptyList();
         Double totalIncome = 0.0;
         for (CategoryStatistic d : data) {
             if (d.getTotalIncome() > 0.0) {
@@ -137,7 +137,8 @@ public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
      */
     public void handleShowSummaryTableEvent(ShowSummaryTableEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        Tab summaryTab = new Tab(SummaryDisplay.LABEL , new SummaryDisplay(event.data).getRoot());
+        Tab summaryTab = new Tab(SummaryDisplay.LABEL , new SummaryDisplay(event.data, event.totalExpense,
+                event.totalIncome, event.total, event.totalLabel).getRoot());
         clearTabs();
         createTabs(summaryTab);
         show();

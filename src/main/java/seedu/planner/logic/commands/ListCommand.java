@@ -12,6 +12,7 @@ import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
 
+//@@author tenvinc
 /**
  * Lists all records in the financial planner to the user.
  */

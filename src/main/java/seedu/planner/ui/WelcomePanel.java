@@ -1,6 +1,6 @@
 package seedu.planner.ui;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -18,7 +18,7 @@ import seedu.planner.commons.events.ui.UpdateWelcomePanelEvent;
 import seedu.planner.model.Model;
 import seedu.planner.model.summary.CategoryStatistic;
 import seedu.planner.model.summary.CategoryStatisticsList;
-
+//@@author tenvinc
 /**
  * UI component that displays the default welcome page with statistic of the current month and a welcome message
  */
@@ -77,7 +77,7 @@ public class WelcomePanel extends UiPart<Region> implements Switchable {
 
     /** Extracts the label and expense information and places it in a list of ChartData */
     private Pair< ObservableList<ChartData>, Double> extractExpenseChartData(ObservableList<CategoryStatistic> data) {
-        List<ChartData> chartDataList = new ArrayList();
+        List<ChartData> chartDataList = Collections.emptyList();
         Double totalExpense = 0.0;
         for (CategoryStatistic d : data) {
             if (d.getTotalExpense() > 0.0) {
@@ -104,7 +104,7 @@ public class WelcomePanel extends UiPart<Region> implements Switchable {
 
     /** Extracts the label and income information and places it in a list of ChartData */
     private Pair< ObservableList<ChartData>, Double> extractIncomeChartData(ObservableList<CategoryStatistic> data) {
-        List<ChartData> chartDataList = new ArrayList();
+        List<ChartData> chartDataList = Collections.emptyList();
         Double totalIncome = 0.0;
         for (CategoryStatistic d : data) {
             if (d.getTotalIncome() > 0.0) {
@@ -119,16 +119,18 @@ public class WelcomePanel extends UiPart<Region> implements Switchable {
     private void populateUi(ObservableList<CategoryStatistic> toDisplay) {
         Pair<ObservableList<ChartData>, Double> expenseChartData = extractExpenseChartData(toDisplay);
         if (expenseChartData.getKey().size() == 0) {
-            return;
+            expenseStats.getChildren().clear();
+        } else {
+            Node expenseNode = createTotalExpenseBreakdown(expenseChartData);
+            expenseStats.getChildren().add(expenseNode);
         }
-        Node expenseNode = createTotalExpenseBreakdown(expenseChartData);
-        expenseStats.getChildren().add(expenseNode);
         Pair<ObservableList<ChartData>, Double> incomeChartData = extractIncomeChartData(toDisplay);
         if (incomeChartData.getKey().size() == 0) {
-            return;
+            incomeStats.getChildren().clear();
+        } else {
+            Node incomeNode = createTotalIncomeBreakdown(incomeChartData);
+            incomeStats.getChildren().add(incomeNode);
         }
-        Node incomeNode = createTotalIncomeBreakdown(incomeChartData);
-        incomeStats.getChildren().add(incomeNode);
     }
 
     /**
