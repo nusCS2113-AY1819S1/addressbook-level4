@@ -250,4 +250,12 @@ public class NoteManager {
 
         return exportableNotes;
     }
+
+    /**
+     * Deletes all notes that contains the {@code moduleCode}.
+     */
+    public static void deleteNotesByModuleCode(String moduleCode) {
+        noteManager.getNotes().removeIf(n -> n.getModuleCode().toString().equalsIgnoreCase(moduleCode));
+        noteManager.refreshFilteredNotes();
+    }
 }

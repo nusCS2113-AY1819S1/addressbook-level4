@@ -215,6 +215,7 @@ Format: `module find KEYWORD [MORE_KEYWORDS]`
 ****
 * At least one keyword must be provided.
 * The search is case-insensitive.
+* The search will only match whole words i.e. `engin` will not return `Engineering`.
 ****
 
 Examples:
@@ -740,21 +741,23 @@ e.g. `student delete 2`
 * *Export students* : `student export` +
 e.g. `student export C:\export`
 
-* *Add module* : `module add n/MODULE_NAME c/MODULE_CODE [p/PREREQUISITES]…​` +
-e.g. `module add n/Software Engineering c/CS2113 p/CS2040C`
-* *Update module* : `module edit n/MODULE_NAME c/MODULE_CODE [p/PREREQUISITES]…​` +
-e.g. `module edit c/CS2113 p/`
-* *Remove module* : `module delete c/MODULE_CODE​` +
-e.g. `module delete c/CS2113`
+* *Add module* : `module add mc/MODULE_CODE mn/MODULE_NAME` +
+e.g. `module add mc/CS2113 p/CS2040C mn/Software Engineering`
+* *Update module* : `module edit mc/MODULE_CODE​ mn/MODULE_NAME` +
+e.g. `module edit mc/CS2113 mn/Software`
+* *Remove module* : `module delete mc/MODULE_CODE​` +
+e.g. `module delete mc/CS2113`
+* *View module details* : `module view mc/MODULE_CODE` +
+e.g. `module view mc/CS2113`
 * *Find module by module code* : `module find KEYWORD [MORE_KEYWORDS]​` +
-e.g. `module find cs2113`
+e.g. `module find cs2113 structures`
 * *List modules* : `module list​` +
-* *Archive module* : `module archive c/MODULE_CODE​` +
-e.g. `module archive c/CS2113`
-* *Enrol student in module* : `module enrol [i/MATRIC_NUMBER]…​ [e/EMAIL]…​​` +
-e.g. `module enrol i/A0167263X i/A0179821B`
-* *Assign TA* : `module assign [i/MATRIC_NUMBER] [e/EMAIL]` +
-e.g. `module assign i/A0171234B`
+* *Archive module* : `module archive mc/MODULE_CODE​` `[coming in v1.4]` +
+e.g. `module archive mc/CS2113`
+* *Enrol student in module* : `module enrol mc/MODULE_CODE i/MATRIC_NUMBER…​` +
+e.g. `module enrol mc/CS2113 i/A0167263X i/A0179821B`
+* *Assign TA* : `module assign mc/MODULE_CODE [i/MATRIC_NUMBER] [e/EMAIL]` `[coming in v2.0]` +
+e.g. `module assign mc/CS2113 i/A0171234B`
 
 * *Add Grade Component* : `gradebook add mc/MODULE_CODE cn/COMPONENT_NAME [mm/MAX_MARKS] [w/WEIGHTAGE]` +
 e.g. `gradebook add mc/CS2113 cn/Assignment 1 mm/60`
@@ -790,16 +793,18 @@ e.g. `class listattendance cn/T16 mc/CG1111`
 e.g. `class markattendance cn/T16 mc/CG1111 i/A6942069M`
 * *Modifying class attendance list* `class modattendance cn/CLASS_NAME mc/MODULE_CODE i/MATRIC_NO` +
 e.g. `class modattendance cn/T16 mc/CG1111 i/A6942069M`
-* *Add a note* `note add m/MODULE_CODE [d/DATE]` +
-e.g. `note add m/CS2040C`
-* *List notes* `note list [m/MODULE_CODE]` +
-e.g. `note list m/CS2040C`
+* *Add a note* `note add mc/MODULE_CODE [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME] [lc/LOCATION]` +
+e.g. `note add mc/CS2040C`
+* *List notes* `note list [mc/MODULE_CODE]` +
+e.g. `note list mc/CS2040C`
 * *Delete a note* `note delete INDEX` +
 e.g. `note delete 8`
-* *Edit a note* `note edit INDEX [m/MODULE_CODE] [d/DATE]` `[Coming in v1.3]` +
-e.g. `note edit 5 m/CS2040C`
-* *Find a note* `note find k/KEYWORD [k/KEYWORD]..` `[Coming in v1.3]` +
+* *Edit a note* `note edit INDEX [mc/NEW_MODULE_CODE] [sd/NEW_START_DATE] [st/NEW_START_TIME] [ed/NEW_END_DATE] [et/NEW_END_TIME] [lc/NEW_LOCATION]` +
+e.g. `note edit 5 mc/CS2040C`
+* *Find a note* `note find k/KEYWORD [k/MORE_KEYWORDS]..` +
 e.g. `note find k/bubble k/queue`
+* *Export notes* `note export fn/FILE_NAME` +
+e.g. `note export fn/notes`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
