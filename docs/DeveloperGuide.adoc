@@ -414,6 +414,22 @@ In `EmailContentSelectionCommand` phase, depending on `EmailUtil#areRecipientsCa
 . The user is satisfied with the preview and executes the `send` command. This generates the email as a `MimeMessage`
   which is the Java format used for emails and is sent via `EmailUtil#sendMessage`. `LogicState` is reset back to orignal and this marks the end of the email command.
 
+==== Design Considerations
+===== Aspect: Data structure to store recipients and candidates
+
+* **Alternative 1:** Array List
+** Pros: General purpose data structure that will work for this use case
+** Cons: Checking for duplicates is not efficient. Each insertion requires a comparison across all elements in the array.
+
+* **Alternative 2:** Hash Set
+** Pros: Does not allow duplicates and indicates if an object being added is successful or not.
+** Cons: Does not maintain the order in which objects were added in.
+
+* **Alternative 3 (current choice):** Linked Hash Set
+** Pros: Does not allow duplicates, indicates if an object being added is successful or not,
+   and maintains order in which objects were added in.
+** Cons: -
+
 // end::email[]
 
 // tag::undoredo[]
