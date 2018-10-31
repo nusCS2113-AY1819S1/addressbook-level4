@@ -96,7 +96,7 @@ public class ExpenditureList implements Iterable<Expenditure> {
         //System.out.println("Now we are in expenditureList executing getExpenditureRecords.");
         while (index < internalList.size()) {
             category = internalList.get(index).getCategory().categoryName;
-            money = Integer.parseInt(internalList.get(index).getMoney().addingMoney);
+            money = Double.parseDouble(internalList.get(index).getMoney().addingMoney);
             if (!map.containsKey(category)) {
                 map.put(category, 0.0);
             }
