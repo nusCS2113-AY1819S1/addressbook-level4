@@ -18,6 +18,7 @@ import seedu.address.model.person.exceptions.TimeSlotOverlapException;
  */
 public class DeleteTimeCommand extends Command {
     public static final String COMMAND_WORD = "deletetime";
+    public static final String COMMAND_WORD_ALIAS = "dt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes a timeslot from your timetable.\n"
