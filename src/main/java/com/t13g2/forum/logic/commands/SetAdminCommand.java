@@ -28,7 +28,7 @@ public class SetAdminCommand extends Command {
         + PREFIX_ADMIN_SET + "true  ";
 
     public static final String MESSAGE_SUCCESS = "%1$s now is %2$s.";
-    public static final String MESSAGE_INVALID_USER = "This user does not exist.";
+    public static final String MESSAGE_INVALID_USER = "The user:  does not exist.";
     public static final String MESSAGE_DUPLICATE_SET = "This user is already an admin.";
     public static final String MESSAGE_DUPLICATE_REVERT = "%1$s is not an admin, unable to revert.";
 
@@ -51,12 +51,11 @@ public class SetAdminCommand extends Command {
         User userToSet = null;
 
         // if user has not login or is not admin, then throw exception
-        try {
-            if (!Context.getInstance().isCurrentUserAdmin()) {
-                throw new CommandException(User.MESSAGE_NOT_ADMIN);
-            }
-        } catch (CommandException e) {
-            throw e;
+        // if user has not login or is not admin, then throw exception
+        if (!Context.getInstance().isLoggedIn()) {
+            throw new CommandException(User.MESSAGE_NOT_LOGIN);
+        } else if (!Context.getInstance().isCurrentUserAdmin()) {
+            throw new CommandException(User.MESSAGE_NOT_ADMIN);
         }
 
         try (UnitOfWork unitOfWork = new UnitOfWork()) {

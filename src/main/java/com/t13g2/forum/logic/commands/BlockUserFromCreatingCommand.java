@@ -50,12 +50,10 @@ public class BlockUserFromCreatingCommand extends Command {
         requireNonNull(model);
         User user = null;
         // if user has not login or is not admin, then throw exception
-        try {
-            if (!Context.getInstance().isCurrentUserAdmin()) {
-                throw new CommandException(User.MESSAGE_NOT_ADMIN);
-            }
-        } catch (CommandException e) {
-            throw e;
+        if (!Context.getInstance().isLoggedIn()) {
+            throw new CommandException(User.MESSAGE_NOT_LOGIN);
+        } else if (!Context.getInstance().isCurrentUserAdmin()) {
+            throw new CommandException(User.MESSAGE_NOT_ADMIN);
         }
 
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
@@ -76,7 +74,7 @@ public class BlockUserFromCreatingCommand extends Command {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, (block ? "blocked" : "unblocked"), user));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, (block ? "blocked" : "unblocked"), userNameToBlock));
     }
 
 }

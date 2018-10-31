@@ -81,8 +81,7 @@ public class AnnounceCommandTest {
 
         CommandResult commandResult = new AnnounceCommand(validAnnouncement).execute(model, commandHistory);
 
-        assertEquals(String.format(AnnounceCommand.MESSAGE_SUCCESS, validAnnouncement),
-            commandResult.feedbackToUser);
+        assertEquals(String.format(AnnounceCommand.MESSAGE_SUCCESS, validAnnouncement), commandResult.feedbackToUser);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 }
