@@ -1,4 +1,6 @@
 language: java
+before_install:
+  - chmod +x gradlew
 matrix:
   include:
   - jdk: oraclejdk9
@@ -28,8 +30,6 @@ cache:
   - $HOME/.gradle/caches/
   - $HOME/.gradle/wrapper/
 
-
-  
 
 
 
