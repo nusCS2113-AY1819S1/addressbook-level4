@@ -1,21 +1,21 @@
 package seedu.address.model.login;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static seedu.address.testutil.TypicalUsers.AMY;
+import static seedu.address.testutil.TypicalUsers.BOB;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalUsers.AMY;
-import static seedu.address.testutil.TypicalUsers.BOB;
 
 public class UniqueUserListTest {
 
