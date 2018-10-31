@@ -50,7 +50,7 @@ public class GradebookFindCommandParser {
             throw new ParseException(MESSAGE_EMPTY_COMPONENT_NAME);
         }
 
-        Gradebook gradebook = new Gradebook(moduleCodeArg.toLowerCase(), gradeComponentNameArg.toLowerCase());
+        Gradebook gradebook = new Gradebook(moduleCodeArg, gradeComponentNameArg);
         return new GradebookFindCommand(gradebook);
     }
 
