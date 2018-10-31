@@ -3,11 +3,13 @@ package seedu.address.model.module;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.model.StorageController;
 import seedu.address.model.module.exceptions.DuplicateModuleException;
 import seedu.address.model.person.Person;
@@ -127,6 +129,19 @@ public class ModuleManager {
         StorageController.setStudentModuleStorage(xmlAdaptedStudentModuleList);
 
         StorageController.storeData();
+    }
+
+    /**
+     * Searches the list of modules for module codes and/or names that match any of the keywords.
+     * @return List of modules that match at least one keyword.
+     */
+    public List<Module> searchModulesWithKeywords(List<String> keywords) {
+        return modules.stream()
+                .filter(module ->
+                        keywords.stream().anyMatch(keyword ->
+                                StringUtil.containsWordIgnoreCase(module.getModuleCode().moduleCode, keyword)
+                                || StringUtil.containsWordIgnoreCase(module.getModuleName().moduleName, keyword)))
+                .collect(Collectors.toList());
     }
 
     /**
