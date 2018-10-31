@@ -29,7 +29,6 @@ public class NoteAddCommandParserTest {
 
     private NoteAddCommandParser parser = new NoteAddCommandParser();
 
-
     @Test
     public void parse_invalidArgs_throwsParseException() throws ParseException {
         String expectedMessage = String.format(
