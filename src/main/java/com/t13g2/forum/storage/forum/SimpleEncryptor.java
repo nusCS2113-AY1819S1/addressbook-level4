@@ -1,5 +1,8 @@
 package com.t13g2.forum.storage.forum;
 
+/**
+ *
+ */
 public class SimpleEncryptor implements IEncryptor {
     private static final String DEFAULT_KEY = "Iamastupidencryptor";
     private String key;
@@ -34,6 +37,9 @@ public class SimpleEncryptor implements IEncryptor {
         return this.orAlgorithm(text);
     }
 
+    /**
+     *
+     */
     private byte[] orAlgorithm(String text) {
         byte[] bytes = text.getBytes();
         for (int i = 0; i < bytes.length; i++) {

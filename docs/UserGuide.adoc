@@ -55,6 +55,27 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Format: `help`
 
+=== Register a new User : `addUser`
+
+Register a New User to the Forum. User Name is unique and case sensitive. +
+Format: `addUser uName/USER NAME uPass/USER PASSWORD`
+
+Examples:
+
+* `addUser uName/MyName uPass/password`
+****
+*  User Name and password is unique and case sensitive.
+****
+
+=== logIn to the forum : `login`
+
+Login to the forum with a registered user name and password. +
+Format: `login uName/USER NAME uPass/USER PASSWORD`
+
+Examples:
+
+* `login uName/MyName uPass/password`
+
 === Creating a new forumThread : `createThread`
 
 Create a new forumThread under a specific module that exists +
@@ -222,6 +243,11 @@ Example:
 
 * `deleteUser uName/john`
 
+=== Logout from the forum : `logout`
+
+Logout from the Forum. +
+Format: `logout`
+
 === Exiting the program : `exit`
 
 Exits the program. +
@@ -277,3 +303,8 @@ e.g `deleteComment cId/1`
 e.g `selectModule mCode/CS2113`
 * *selectThread* : `selectThread tId/THREAD ID` +
 e.g `selectThread tId/123`
+* *RegisterUser* : `addUser uName/USER NAME uPass/USER PASSWORD` +
+e.g `addUser uName/MyName uPass/password`
+* *Login* : `login uName/USER NAME uPass/USER PASSWORD` +
+e.g `login uName/MyName uPass/password`
+* *Logout* : `logout`

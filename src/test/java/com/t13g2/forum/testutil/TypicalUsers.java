@@ -10,6 +10,8 @@ public class TypicalUsers {
         .withIsBlock(false).withEmail("janeDoe@test.com").withPhone("87654321").build();
     public static final User JIM = new UserBuilder().withName("jim").withPassword("123").withIsAdmin(false)
         .withIsBlock(false).withEmail("jim@test.com").withPhone("87654321").build();
+    public static final User JIMBLOCKED = new UserBuilder().withName("jim").withPassword("123").withIsAdmin(false)
+        .withIsBlock(true).withEmail("jim@test.com").withPhone("87654321").build();
     public static final User JONE = new UserBuilder().withName("jone").withPassword("123").withIsAdmin(false)
         .withIsBlock(false).withEmail("jone@test.com").withPhone("87654321").build();
 

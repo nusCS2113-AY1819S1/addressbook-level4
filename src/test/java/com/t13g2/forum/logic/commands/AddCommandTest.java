@@ -201,5 +201,4 @@ public class AddCommandTest {
             return new ForumBook();
         }
     }
-
 }

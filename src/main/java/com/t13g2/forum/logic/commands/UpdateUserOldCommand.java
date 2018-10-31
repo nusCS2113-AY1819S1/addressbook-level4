@@ -15,7 +15,7 @@ import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 /**
  * Deletes a specific user by admin
  */
-public class UpdateUserCommand extends Command {
+public class UpdateUserOldCommand extends Command {
     public static final String COMMAND_WORD = "updateUser";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Update a certain user's password, email and/or phone. "
@@ -33,7 +33,7 @@ public class UpdateUserCommand extends Command {
     /**
      * Creates an DeleteUserCommand to delete the specified {@code userName}.
      */
-    public UpdateUserCommand(Person personToUpdate) {
+    public UpdateUserOldCommand(Person personToUpdate) {
         requireNonNull(personToUpdate);
         this.userToUpdate = personToUpdate;
     }

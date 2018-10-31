@@ -39,6 +39,12 @@ public class DeleteModuleCommandTest {
     }
 
     @Test
+    public void constructor_nullModuleCode_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        new DeleteModuleCommand(null);
+    }
+
+    @Test
     public void execute_adminLoggedInAndValidModule_deleteModuleSuccess() {
         //set the current logged in user as an admin.
         User validAdmin = new UserBuilder().build();

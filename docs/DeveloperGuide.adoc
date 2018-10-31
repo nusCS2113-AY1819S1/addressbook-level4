@@ -339,46 +339,22 @@ The user management is facilitated by various commands. It extends `ForumBook` w
 
 * `UpdateCommand`: Update a certain user's password, email and/or phone.
 
-Given below is an example usage scenario and how the admin management behaves at each step.
+Given below is an example usage scenario and how the user management behaves at each step.
 
-This Section below until Admin Management need to be edited :(
+----------------------------------------------------------------------------------------------------------------------------------------------------- +
+Given below is an example usage scenario and how the user management can be operated by user at each step.
 
-Step 1. The admin launches the application, executes `announce aTitle/Urgent! aContent/System maintenance from 3PM to 6PM.` to add the announcement to storage file. The `announce` command calls `UnitOfWork.getAnnouncementRepository.addAnnouncement(announcement)` and then `UnitOfWork.commit()`, causing a modified forum book state to be saved into `ForumBookStorage`
+Step 1. The user executes `addUser uName/UserName uPass/password` to add a new user into forum userStorage file. The addUser command calls 'unitOfWork.getUserRepository().getUserByUsername(userToAdd.getUsername())' to check if the name entered by the user is available. If there is not duplicate, User can be registered. If the registration is successful, addUser command calls `UnitOfWork.commit()` to save the modified forum book state into UserStorage.
 
-image::SDAnnounce.png[width="800"]
+Step 2. The user executes `login uName/UserName uPass/password` to login to the forum. The login command calls 'unitOfWork.getUserRepository().authenticate(userName, userPassword)' to check if the login can be authorise. If success, login command calls `Context.getInstance().setCurrentUser(exist)` to create an instance for the authorised user.
 
-Step 2. The admin/user executes `checkAnnounce` to check for the latest announcement in storage file. The `checkAnnounce` calls the `UnitOfWork.getAnnouncementRepository().getLatestAnnouncement()` which returns an announcement to be shown in the message dialog.
+Step 3. The user executes `logout` to exit the forum or to switch user, logout command calls 'EventsCenter.getInstance().post(new UserLoginEvent("", false, false))' to close the instance created by the user. Next/ another user is able to login after a successful logout.
 
-image::SDCheckAnnounce.png[width="200"]
-
-Step 3. The admin executes `block uName/john` to block john from creating new threads or comments. The `block` calls `User.setIsBlock(true)` and then `UnitOfWork.commit()`, causing another modified forum book state to be saved into `ForumBookStorage`.
-
-image::SDBlockUserFromCreating.png[width="200"]
-
-Step 4. The admin executes `setAdmin uName/john set/true` to set a certain user as admin or to revert an admin to user. The `setAdmin` calls the `User.setAdmin(true)` and then `UnitOfWork.commit()`, causing another modified forum book state to be saved into `ForumBookStorage`.
-
-image::SDSetAdmin.png[width="200"]
-
-Step 5. The admin executes `createModule mCode/CS2113 mTitle/Software Engineering and OOP` to create the specific module. The `createModule` calls the `UnitOfWork.getModuleRepository().addModule(module)` and then `UnitOfWork.commit()`, causing another modified forum book state to be save into `ForumBookStorage`.
-
-image::SDCreateModule.png[width="200"]
-
-Step 6. The admin executes `deleteModule mCode/CS2113` to delete specific module. The `deleteModule` calls the `UnitOfWork.getModuleRepository().removeModule(module);` and then `UnitOfWork.commit()`, causing another modified forum book state to be save into `ForumBookStorage`.
-
-image::SDDeleteModule.png[width="200"]
-
-Step 7. The admin executes `updatePass uName/john uPass/098` to update the user john's password. The `updatePass` calls the `UnitOfWork.getUserRepository().updateUser(user)` and then `UnitOfWork.commit()`, causing another modified forum book state to be save into `ForumBookStorage`.
-
-image::SDUpdatePass.png[width="200"]
-
-Step 8. The admin executes `deleteUser uName/john` to delete the user john. The `deleteUser` calls the ` UnitOfWork.getUserRepository().deleteUser(userToDelete)` and then `UnitOfWork.commit()`, causing another modified forum book state to be save into `ForumBookStorage`.
-
-image::SDDeleteUser.png[width="200"]
-
-[NOTE]
-If the syntax of a command is wrong, the program will prompt the user to try again and show a suggested command format.
-
+ToDo:
+Step 4. The user executes `updateUserComment ` to update the uPass.
 // tag::dataencryption[]
+
+----------------------------------------------------------------------------------------------------------------------------------------------------- +
 
 === Admin management
 
@@ -1053,21 +1029,82 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
+=== Announcing new announcement
 
-=== Deleting a person
+. Announcing a new announcement by admin.
 
-. Deleting a person while all persons are listed
+.. Prerequisites: Current user must login as an admin.
+.. Test case: `announce aTitle/Urgent! aContent/System Maintenance from 4pm to 5pm.` +
+   Expected: Announcement will show up in a pop up window as well as the result display panel.
+.. Test case: `announce aTitle/ aContent/` +
+   Expected: No announcement will be posted. Error details shown in the result display panel.
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-.. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
-   Expected: Similar to previous.
+=== Checking new announcement
 
-_{ more test cases ... }_
+. Checking for latest announcement.
+
+.. Prerequisites: Users have to login in order to do `checkAnnounce`
+.. Test case: `checkAnnounce` +
+   Expected: The latest announcement will show up in a pop up window and in the result display panel. However, if the latest announcement is null, an error message "There is no announcement at the moment" will be shown in the result display panel.
+
+=== Blocking user from posting
+
+. Blocking a given user by admin.
+
+.. Prerequisites: Current user must login as an admin. The given user should be in the UserStorage.
+.. Test case: `blockUser uName/john block/true` +
+   Expected: The given user will be blocked and a success message will be shown in the result display panel.
+.. Test case: `blockUser uName/abcd block/true` +
+   Expected: Since the given user has not been added to the UserStorage, an error message will be shown in the result display panel.
+
+=== Setting a user as admin or setting an admin as user
+
+. Setting a user as admin or revert an admin to a user.
+
+.. Prerequisites: Current user must login as an admin. Admin is unable to set/revert himself/herself to admin/user. The given user must be in UserStorage.
+.. Test case: `setAdmin uName/john set/true` +
+   Expected: The given user will be set to an admin and the success message will be shown in the result display panel.
+.. Test case: `setAdmin uName/abcd set/true` +
+   Expected: Since the given user has not been added to the UserStorage, an error message will be shown in the result display panel.
+
+=== Creating a module
+
+. Creating a module by admin.
+
+.. Prerequisites: Current user must login as an admin. The module must not be in the ModuleStorage.
+.. Test case: `createModule mCode/CS2113 mContent/Software Engineering and OOP` +
+   Expected: A new module will be added to the ModuleStorage, and a success message will be shown in the result display panel.
+.. Test case: `createModule mCode/ mTitle/` +
+   Expected: No module will be added. Error details shown in the result display panel.
+
+=== Deleting a module
+
+. Deleting a module by admin.
+
+.. Prerequisites: Current user must login as an admin. The module must be in ModuleStorage.
+.. Test case: `deleteModule mCode/CS2113` +
+   Expected: The module `CS2113` will be deleted from the ModuleStorage, and an success message will be shown in the result display panel.
+.. Test case: `deleteModule mCode/CS2113` +
+   Expected: Since the module `CS2113` has been deleted. This command should raise an error and show in the result display panel.
+
+=== Updating password
+
+. Updating a given user's password by admin.
+
+.. Prerequisites: Current user must login as an admin. The given user must be in UserStorage.
+.. Test case: `updatePass uName/john uPass/456` +
+   Expected: The user `john`'s password will be updated to `456`
+.. Test case: `updatePass uName/abcd uPass/123` +
+   Expected: Since the given user `abcd` has not been added to the UserStorage, an error message will be shown in the result display panel.
+
+=== Deleting a user
+
+. Deleting a given user by admin.
+.. Prerequisites: Current user must login as an admin. The given user must be in the UserStorage.
+.. Test case: `deleteUser uName/john`
+   Expected: The user `john` will be deleted from the UserStorage and a success message will be shown in the result display panel.
+.. Test case: `deleteUser uName/abcd`
+   Expected: Since the given user `abcd` does not exist in the UserStorage, an error message will be shown in the result display panel.
 
 === Saving data
 

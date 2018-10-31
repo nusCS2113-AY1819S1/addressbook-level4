@@ -41,12 +41,11 @@ public class DeleteUserCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         // if user has not login or is not admin, then throw exception
-        try {
-            if (!Context.getInstance().isCurrentUserAdmin()) {
-                throw new CommandException(User.MESSAGE_NOT_ADMIN);
-            }
-        } catch (CommandException e) {
-            throw e;
+        // if user has not login or is not admin, then throw exception
+        if (!Context.getInstance().isLoggedIn()) {
+            throw new CommandException(User.MESSAGE_NOT_LOGIN);
+        } else if (!Context.getInstance().isCurrentUserAdmin()) {
+            throw new CommandException(User.MESSAGE_NOT_ADMIN);
         }
 
         try (UnitOfWork unitOfWork = new UnitOfWork()) {

@@ -7,8 +7,8 @@ import com.t13g2.forum.model.forum.Module;
  */
 public class ModuleBuilder {
 
-    public static final String DEFAULT_MODULE_CODE = "GET1020";
-    public static final String DEFAULT_MODULE_TITLE = "Darwin and Revolution";
+    public static final String DEFAULT_MODULE_CODE = "CS2113";
+    public static final String DEFAULT_MODULE_TITLE = "Software Engineering and OOP";
 
     private String moduleCode;
     private String moduleTitle;
