@@ -248,8 +248,10 @@ Invites an employee to an event. +
 Format: `invite PERSON_INDEX to/EVENT_INDEX` +
 Example:
 
-* `invite 1 to/2` +
-Invite 1st employee at employee list to 2nd event at event list
+* `invite 1 to/3` +
+Invite 1st employee at employee list to 3rd event at event list
+
+image::InviteCommandGuide.png[width="600"]
 
 ****
 * Invites the employee at the specified `PERSON_INDEX` *TO* the event at the specified `EVENT_INDEX`.
