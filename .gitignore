@@ -14,8 +14,8 @@ preferences.json
 ./screenshot*.png
 classes/
 /data/
-src/main/resources/docs/
 /bin/
+src/main/resources/docs/
 out/
 /config.json
 reposense-report/
