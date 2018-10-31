@@ -24,7 +24,6 @@ public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
     public static final String SEARCH_PAGE = "EventSearchPage.html";
-    public static final String SEARCH_PAGE_URL = "https://cs2113-ay1819s1-t12-1.github.io/main/EventSearchPage.html";
 
 
     private static final String FXML = "BrowserPanel.fxml";
@@ -47,17 +46,15 @@ public class BrowserPanel extends UiPart<Region> {
     /**
      * Gets the URL without parameters
      */
-    public static String getSearchPageUrlWithoutName() {
-        //return MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE);
-        return SEARCH_PAGE_URL;
+    public static URL getSearchPageUrlWithoutName() {
+        return MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE);
     }
 
     /**
      * Formats HTML file path into string
      */
     private String formatEventPageUrl(Event event) {
-        //URL searchPage = getSearchPageUrlWithoutName();
-        String searchPage = SEARCH_PAGE_URL;
+        URL searchPage = getSearchPageUrlWithoutName();
         String comment = event.getComment().toString();
         comment = comment.replace("{", "<");
         comment = comment.replace("}", ">");
