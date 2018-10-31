@@ -266,7 +266,6 @@ public class ModelManager extends ComponentManager implements Model {
     public void removePersonFromAllEvents(Person person) {
         requireNonNull(person);
 
-        stateHistoryList.addEventListState();
         versionedEventList.removePersonFromAllEvents(person);
         indicateEventListChanged();
     }
