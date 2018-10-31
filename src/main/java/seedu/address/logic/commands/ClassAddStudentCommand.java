@@ -91,7 +91,8 @@ public class ClassAddStudentCommand extends Command {
         classroomManager.saveClassroomList();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, matricNo,
-                classToAssignStudent.getClassName(), classToAssignStudent.getModuleCode()));
+                classToAssignStudent.getClassName(), classToAssignStudent.getModuleCode()),
+                classroomManager.getClassroomHtmlRepresentation());
     }
 
     @Override
