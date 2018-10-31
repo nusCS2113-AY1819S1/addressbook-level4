@@ -30,66 +30,6 @@ public class GradebookAddCommandParserTest {
     }
 
     @Test
-    public void parse_validArgsWithOptionalParams_success() throws ParseException {
-        //valid arguments without optional arguments
-        String moduleCode = "CS2113";
-        String gradebookComponentName = "Finals";
-        int maxMarks = 20;
-        int weightage = 10;
-
-        String argsWithoutOptionalParam = " "
-                + PREFIX_MODULE_CODE
-                + moduleCode
-                + " "
-                + PREFIX_GRADEBOOK_ITEM
-                + gradebookComponentName;
-        GradebookAddCommand gradebookAddCommand = parser.parse(argsWithoutOptionalParam);
-        assertNotNull(gradebookAddCommand);
-
-        //valid arguments including optional argument, Max Marks
-        String argsWithMaxMarks = " "
-                + PREFIX_MODULE_CODE
-                + moduleCode
-                + " "
-                + PREFIX_GRADEBOOK_ITEM
-                + gradebookComponentName
-                + " "
-                + PREFIX_GRADEBOOK_MAXMARKS
-                + maxMarks;
-        gradebookAddCommand = parser.parse(argsWithMaxMarks);
-        assertNotNull(gradebookAddCommand);
-
-        //valid arguments including optional argument, Weightage
-        String argsWithWeightage = " "
-                + PREFIX_MODULE_CODE
-                + moduleCode
-                + " "
-                + PREFIX_GRADEBOOK_ITEM
-                + gradebookComponentName
-                + " "
-                + PREFIX_GRADEBOOK_WEIGHTAGE
-                + weightage;
-        gradebookAddCommand = parser.parse(argsWithWeightage);
-        assertNotNull(gradebookAddCommand);
-
-        //valid arguments including optional arguments, Max Marks and Weightage
-        String argsWithAllOptionalParams = " "
-                + PREFIX_MODULE_CODE
-                + moduleCode
-                + " "
-                + PREFIX_GRADEBOOK_ITEM
-                + gradebookComponentName
-                + " "
-                + PREFIX_GRADEBOOK_MAXMARKS
-                + maxMarks
-                + " "
-                + PREFIX_GRADEBOOK_WEIGHTAGE
-                + weightage;
-        gradebookAddCommand = parser.parse(argsWithAllOptionalParams);
-        assertNotNull(gradebookAddCommand);
-    }
-
-    @Test
     public void parse_invalidMaxMarksType_throwsParseException() throws ParseException {
         String expectedMessage = String.format(MESSAGE_MAX_MARKS_ERROR);
         String moduleCode = "CS2113";

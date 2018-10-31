@@ -70,16 +70,4 @@ public class GradeAddCommandParserTest {
         thrown.expectMessage(expectedMessage);
         parser.parse(argWithInvalidMarksType);
     }
-
-    @Test
-    public void parse_invalidGradeComponent_throwsParseException() throws ParseException {
-        String expectedMessage = MESSAGE_GRADEBOOK_INVALID;
-
-        String argWithinvalidGradeComponent = " mc/PC102 i/Finals a/A9188789S m/60";
-
-        thrown.expect(ParseException.class);
-        thrown.expectMessage(expectedMessage);
-        parser.parse(argWithinvalidGradeComponent);
-    }
-
 }
