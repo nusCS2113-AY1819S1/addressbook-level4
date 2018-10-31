@@ -358,8 +358,6 @@ Implementation of this additional feature would require changes to both `InviteC
 // end::Invite[]
 
 
-// tag::dataencryption[]
-
 === List Feature
 
 ==== Current Implementation
@@ -405,9 +403,10 @@ The sequence diagram below illustrates the execution of the `invite` command.
 
 image::ListSequenceDiagram.png[width="800"]
 
+// tag::dataencryption[]
 === [Proposed] Data Encryption
 
-_{Explain here how the data encryption feature will be implemented}_
+
 
 // end::dataencryption[]
 
