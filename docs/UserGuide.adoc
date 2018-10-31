@@ -510,7 +510,7 @@ Example:
 === Viewing all limits: `checkLimit` [Oscar]
 
 Displays all limits information stored in FinancialPlanner +
-Format: `checkLimit 
+Format: `checkLimit`
 
 === Deleting a limit: `deleteLimit`
 
