@@ -63,7 +63,7 @@ public class CreateModuleCommandTest {
         thrown.expectMessage(String.format(CreateModuleCommand.MESSAGE_DUPLICATE_MODULE, validModule.getModuleCode()));
 
         CommandResult commandResult = createModuleCommand.execute(model, commandHistory);
-        assertEquals(String.format(createModuleCommand.MESSAGE_DUPLICATE_MODULE,
+        assertEquals(String.format(CreateModuleCommand.MESSAGE_DUPLICATE_MODULE,
             validModule.getModuleCode()), commandResult.feedbackToUser);
     }
 
