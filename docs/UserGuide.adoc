@@ -142,13 +142,8 @@ Returns `dinner with family` and `family party`
 * `find family food shopping` +
 Returns all records having `family`, `food`, or `shopping` in their name
 
-<<<<<<< HEAD
-Delete a limit from the FinancialPlanner +
-Format: `deleteLimit d/DATE_START DATE_END +
-=======
 [[findtag]]
 === Locating records by tag: `findtag`
->>>>>>> 28335aaa0554cfe3b6679858835169ef21730935
 
 Finds records with tags that match any of the given keywords. +
 Format: `findtag KEYWORD [MORE_KEYWORDS]`
@@ -181,27 +176,12 @@ Format: `select INDEX`
 
 Examples:
 
-<<<<<<< HEAD
-* `editLimit d/20-8-2018 30-8-2018 m/200`
-
-=== Printing all limits: `checkLimit` [Oscar]
-
-Print out all the limits information stored inside FinancialPlanner +
-Format: `checkLimit +
-
-The program will throw error when there is no limits stored inside the limit list.
-
-Examples:
-
-* `checkLimit`
-=======
 * `list` +
 `select 2` +
 Selects the 2nd record in the expense book.
 * `find Dinner` +
 `select 1` +
 Selects the 1st record in the results of the `find` command.
->>>>>>> 28335aaa0554cfe3b6679858835169ef21730935
 
 [[sort]]
 === Sorting displayed records : `sort`
@@ -526,6 +506,11 @@ FinancialPlanner will warn the user once the total amount of money spent during 
 Example:
 
 * `limit d/20-8-2018 30-8-2018 m/100`
+
+=== Viewing all limits: `checkLimit` [Oscar]
+
+Displays all limits information stored in FinancialPlanner +
+Format: `checkLimit 
 
 === Deleting a limit: `deleteLimit`
 
