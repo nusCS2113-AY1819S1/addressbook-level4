@@ -8,7 +8,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
-import com.t13g2.forum.storage.forum.IEvent;
 import com.t13g2.forum.storage.forum.IStorage;
 
 /**
@@ -30,25 +29,31 @@ public class IStorageStub implements IStorage {
         return _instance;
     }
 
+
+    @Override
+    public <T> T read(Class clazz) {
+        return (T) this.copyObject(storage.get(clazz));
+    }
+
     @Override
     public void write(Object object) {
         storage.put(object.getClass(), this.copyObject(object));
     }
 
-    @Override
-    public Object read(Class clazz) {
-        return this.copyObject(storage.get(clazz));
-    }
-
-    @Override
-    public void remove(Class clazz) {
-        storage.remove(clazz);
-    }
-
-    @Override
-    public void handleSourceChange(IEvent changeEvent) {
-
-    }
+//    @Override
+//    public Object read(Class clazz) {
+//        return this.copyObject(storage.get(clazz));
+//    }
+//
+//    @Override
+//    public void remove(Class clazz) {
+//        storage.remove(clazz);
+//    }
+//
+//    @Override
+//    public void handleSourceChange(IEvent changeEvent) {
+//
+//    }
 
     public void refreshInstantce() {
         _instance = new IStorageStub();

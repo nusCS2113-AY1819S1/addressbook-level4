@@ -6,22 +6,40 @@ import java.io.Serializable;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.t13g2.forum.storage.forum.FileStorage;
+import com.t13g2.forum.model.forum.Announcement;
+import com.t13g2.forum.storage.forum.AnnouncementStorage;
+import com.t13g2.forum.storage.forum.IStorage;
+import com.t13g2.forum.storage.forum.JsonFileStorage;
 import com.t13g2.forum.storage.forum.StorageMapping;
 
 public class FileStorageTest {
     @Test
     public void readAndWrite() {
-        FileStorage fileStorage = new FileStorage();
+        JsonFileStorage fileStorage = new JsonFileStorage();
         StorageMapping.getInstance().addMapping(DummyClass.class, "dummyClass");
         DummyClass dummy = new DummyClass();
         dummy.setName("hehe");
         fileStorage.write(dummy);
 
-        DummyClass dummyFromDisk = (DummyClass) fileStorage.read(DummyClass.class);
+        DummyClass dummyFromDisk = fileStorage.read(DummyClass.class);
         Assert.assertEquals(dummy.getName(), dummyFromDisk.getName());
 
-        fileStorage.remove(DummyClass.class);
+    }
+
+    @Test
+    public void readWriteWithActualStorage() {
+        IStorage fileStorage = new JsonFileStorage();
+        Announcement announcement = new Announcement("hey", "ha");
+        AnnouncementStorage announcementStorage = new AnnouncementStorage();
+        announcementStorage.getList().add(announcement);
+        fileStorage.write(announcementStorage);
+
+        AnnouncementStorage readBack = fileStorage.read(AnnouncementStorage.class);
+        Announcement readBackAnnouncement = readBack.getList().get(0);
+        Assert.assertEquals(announcement.getId(), readBackAnnouncement.getId());
+        Assert.assertEquals(announcement.getTitle(), readBackAnnouncement.getTitle());
+        Assert.assertEquals(announcement.getContent(), readBackAnnouncement.getContent());
+
 
     }
 

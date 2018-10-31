@@ -17,11 +17,11 @@ public class StorageMapping {
     private StorageMapping() {
         initDataFolder();
         classMapFileName = new HashMap<>();
-        classMapFileName.put(AnnouncementStorage.class, Paths.get(dataFolder, "ann").toString());
-        classMapFileName.put(CommentStorage.class, Paths.get(dataFolder, "comment").toString());
-        classMapFileName.put(ForumThreadStorage.class, Paths.get(dataFolder, "threads").toString());
-        classMapFileName.put(ModuleStorage.class, Paths.get(dataFolder, "modules").toString());
-        classMapFileName.put(UserStorage.class, Paths.get(dataFolder, "user").toString());
+        classMapFileName.put(AnnouncementStorage.class, Paths.get(dataFolder, "ann.json").toString());
+        classMapFileName.put(CommentStorage.class, Paths.get(dataFolder, "comment.json").toString());
+        classMapFileName.put(ForumThreadStorage.class, Paths.get(dataFolder, "threads.json").toString());
+        classMapFileName.put(ModuleStorage.class, Paths.get(dataFolder, "modules.json").toString());
+        classMapFileName.put(UserStorage.class, Paths.get(dataFolder, "user.json").toString());
         classMapFileName.put(RunningId.class, Paths.get(dataFolder, "i").toString());
     }
 
