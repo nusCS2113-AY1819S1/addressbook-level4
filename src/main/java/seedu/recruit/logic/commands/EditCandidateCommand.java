@@ -98,6 +98,11 @@ public class EditCandidateCommand extends Command {
         Candidate candidateToEdit = lastShownList.get(index.getZeroBased());
         Candidate editedCandidate = createEditedPerson(candidateToEdit, editPersonDescriptor);
 
+        Tag blacklistedTag = new Tag("BLACKLISTED");
+        if(candidateToEdit.getTags().contains(blacklistedTag)) {
+            throw new CommandException(BlacklistCommand.MESSAGE_WARNING_BLACKLISTED_PERSON);
+        }
+
         if (!candidateToEdit.isSameCandidate(editedCandidate) && model.hasCandidate(editedCandidate)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }

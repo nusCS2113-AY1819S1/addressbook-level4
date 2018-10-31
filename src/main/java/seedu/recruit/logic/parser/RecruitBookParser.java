@@ -13,6 +13,7 @@ import seedu.recruit.logic.commands.AddCandidateCommand;
 import seedu.recruit.logic.commands.AddCompanyCommand;
 import seedu.recruit.logic.commands.AddJobCommand;
 import seedu.recruit.logic.commands.AddJobDetailsCommand;
+import seedu.recruit.logic.commands.BlacklistCommand;
 import seedu.recruit.logic.commands.CancelCommand;
 import seedu.recruit.logic.commands.ClearCandidateBookCommand;
 import seedu.recruit.logic.commands.ClearCompanyBookCommand;
@@ -117,6 +118,9 @@ public class RecruitBookParser {
 
             case AddCompanyCommand.COMMAND_WORD:
                 return new AddCompanyCommandParser().parse(arguments);
+
+            case BlacklistCommand.COMMAND_WORD:
+                return new BlacklistCommandParser().parse(arguments);
 
             case EditCandidateCommand.COMMAND_WORD:
                 return new EditCandidateCommandParser().parse(arguments);
