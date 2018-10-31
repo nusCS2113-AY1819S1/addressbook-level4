@@ -47,9 +47,9 @@ import seedu.address.logic.commands.MonthlyExpenseCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RedoExpenseCommand;
 import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.SelectTaskCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UndoExpenseCommand;
+import seedu.address.logic.commands.UpdateTaskCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -174,10 +174,16 @@ public class LogicManager extends ComponentManager implements Logic {
         commandList.add(RedoExpenseCommand.COMMAND_WORD);
         commandList.add(SelectCommand.COMMAND_WORD);
         commandList.add(SelectCommand.COMMAND_WORD + " INDEX");
-        commandList.add(SelectTaskCommand.COMMAND_WORD);
-        commandList.add(SelectTaskCommand.COMMAND_WORD + " INDEX");
         commandList.add(UndoCommand.COMMAND_WORD);
         commandList.add(UndoExpenseCommand.COMMAND_WORD);
+        commandList.add(UpdateTaskCommand.COMMAND_WORD);
+        commandList.add(UpdateTaskCommand.COMMAND_WORD + " INDEX "
+                + PREFIX_NAME + " "
+                + PREFIX_BODY + " "
+                + PREFIX_START + " "
+                + PREFIX_END + " "
+                + PREFIX_PRIORITY + " "
+                + PREFIX_TAG);
 
         return commandList;
     }

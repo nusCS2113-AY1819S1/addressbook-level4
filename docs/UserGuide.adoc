@@ -415,7 +415,7 @@ Examples:
 Shows a list of all tasks from task book in the schedule planner. +
 Format: `listTask`
 
-=== Editing a task : `updateTask` `[Coming in v1.4]`
+=== Editing a task : `updateTask`
 
 Update an existing task in the schedule planner. +
 Format: `updateTask INDEX [n/NAME] [b/BODY] [s/START_DATETIME] [e/END_DATETIME] [t/TAG]... [p/PRIORITY]`

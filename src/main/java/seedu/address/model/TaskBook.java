@@ -75,10 +75,10 @@ public class TaskBook implements ReadOnlyTaskBook {
      * {@code target} must exist in the task book.
      * The task identity of {@code editedTask} must not be the same as another existing task in the task book.
      */
-    public void updateTask(Task target, Task editedTask) {
-        requireNonNull(editedTask);
+    public void updateTask(Task target, Task updatedTask) {
+        requireNonNull(updatedTask);
 
-        tasks.setTask(target, editedTask);
+        tasks.setTask(target, updatedTask);
     }
 
     /**
