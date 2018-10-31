@@ -82,7 +82,7 @@ public class LogicManagerTest {
      * @see #assertCommandBehavior(Class, String, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<?> expectedException, String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getStockList(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getStockList(), new UserPrefs(), model.getAccountList());
         assertCommandBehavior(expectedException, inputCommand, expectedMessage, expectedModel);
     }
 
