@@ -4,13 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DATE_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TIME_FORMAT;
 
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -36,20 +31,6 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
-    private static final DateTimeFormatter TIME_FORMATTER =
-            new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("h:m a").toFormatter();
-
-    private static final List<DateTimeFormatter> DATE_FORMATTER_LIST =
-            new ArrayList<>(Arrays.asList(
-                    DateTimeFormatter.ofPattern("d-M-yyyy"),
-                    DateTimeFormatter.ofPattern("d/M/yyyy"),
-                    DateTimeFormatter.ofPattern("d.M.yyyy"),
-                    new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("d-MMM-yyyy").toFormatter(),
-                    new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("d MMM yyyy").toFormatter(),
-                    new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("d-MMM-yy").toFormatter(),
-                    new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("d MMM yy").toFormatter()
-            ));
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be

@@ -35,8 +35,6 @@ public class NoteEntryPrompt {
     private boolean feedbackLabelIsDisplayed = false;
     private boolean isCancelled = false;
 
-    public NoteEntryPrompt() { }
-
     private void initialize() {
 
     }

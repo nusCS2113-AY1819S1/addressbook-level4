@@ -39,8 +39,7 @@ public class NoteDeleteCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() throws ParseException {
-        String expectedMessage = String.format(
-                Messages.MESSAGE_INVALID_COMMAND_FORMAT, NoteDeleteCommand.MESSAGE_USAGE);
+        String expectedMessage = NoteDeleteCommand.MESSAGE_PARSE_INDEX_ERROR;
 
         // invalid args
         String args = " 15 this is an 2invalid input";
