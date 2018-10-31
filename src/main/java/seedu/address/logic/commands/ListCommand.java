@@ -32,9 +32,8 @@ public class ListCommand extends Command {
     private final DepartmentContainsKeywordsPredicate predicate;
 
     public ListCommand(String sortByParam, DepartmentContainsKeywordsPredicate predicate) {
-        requireNonNull(sortByParam);
-        //requireNonNull(predicate);
         this.predicate = predicate;
+        requireNonNull(sortByParam);
         listKey = sortByParam;
     }
 
@@ -43,12 +42,12 @@ public class ListCommand extends Command {
         requireNonNull(model);
 
         switch (listKey) {
-        case (LIST_KEY_DEPARTMENT): model.updateFilteredPersonList(predicate);
-           return new CommandResult(
+            case (LIST_KEY_DEPARTMENT): model.updateFilteredPersonList(predicate);
+               return new CommandResult(
                         String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
-        case (LIST_KEY_ALL): model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            break;
-        default:
+            case (LIST_KEY_ALL): model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+                break;
+            default:
         }
 
         return new CommandResult(MESSAGE_SUCCESS);
