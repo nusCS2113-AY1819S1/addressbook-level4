@@ -40,16 +40,16 @@ JitHub is a desktop personal assistant application that allows students to manag
 ** Project management:
 *** Managed release `v1.3` (1 release) on GitHub
 ** Enhancements to existing features:
-*** Updated the GUI theme (Pull requests https://github.com[#50], https://github.com[#115])
-*** Wrote additional tests for existing features to increase coverage from 82.51% to 90.16% (Pull request https://github.com[#119])
+*** Updated the GUI theme (Pull requests https://github.com/CS2113-AY1819S1-W12-1/main/pull/50[#50], https://github.com/CS2113-AY1819S1-W12-1/main/pull/115[#115])
+*** Wrote additional tests for existing features to increase coverage from 82.51% to 90.16% (Pull request https://github.com/CS2113-AY1819S1-W12-1/main/pull/119[#119])
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#118]
-*** Did cosmetic tweaks to existing contents of the Developer Guide: https://github.com[#130]
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2113-AY1819S1-W12-1/main/pull/118[#118]
+*** Did cosmetic tweaks to existing contents of the Developer Guide: https://github.com/CS2113-AY1819S1-W12-1/main/pull/130[#130]
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#121], https://github.com[#120], https://github.com[#95]
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[77], https://github.com[92])
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-W12-1/main/pull/121[#121], https://github.com/CS2113-AY1819S1-W12-1/main/pull/120[#120], https://github.com/CS2113-AY1819S1-W12-1/main/pull/95[#95]
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-W12-1/main/issues/77[77], https://github.com/CS2113-AY1819S1-W12-1/main/pull/95[92])
 ** Tools:
-*** Integrated a third party library (CalendarFx) to the project (https://github.com[#77])
+*** Integrated a third party library (CalendarFx) to the project (https://github.com/CS2113-AY1819S1-W12-1/main/issues/77[#77])
 
 == Contributions to the User Guide
 
