@@ -58,7 +58,8 @@
 //        Index middlePersonIndex = getMidIndex(getModel());
 //        assertCommandSuccess(middlePersonIndex);
 //
-//        /* ------------------ Performing delete operation while a filtered list is being shown ---------------------- */
+//        /* ------------------ Performing delete operation while a filtered list is being shown
+// ---------------------- */
 //
 //        /* Case: filtered person list, delete index within bounds of address book and person list -> deleted */
 //        showPersonsWithName(KEYWORD_MATCHING_MEIER);
@@ -74,7 +75,8 @@
 //        command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
 //        assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 //
-//        /* --------------------- Performing delete operation while a person card is selected ------------------------ */
+//        /* --------------------- Performing delete operation while a person card is selected
+// ------------------------ */
 //
 //        /* Case: delete the selected person -> person list panel selects the person before the deleted person */
 //        showAllPersons();
