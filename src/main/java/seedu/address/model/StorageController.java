@@ -85,7 +85,7 @@ public class StorageController {
             XmlSerializableStudentModuleList studentModuleList =
                     XmlUtil.getDataFromFile(Paths.get(STORAGE_STUDENT_MODULE), XmlSerializableStudentModuleList.class);
             studentModuleStorage = studentModuleList.getStudentModuleList();
-            
+
             XmlSerializableClassroomAttendanceList classroomAttendanceList =
                     XmlUtil.getDataFromFile(Paths.get(STORAGE_CLASS_ATTENDANCE),
                             XmlSerializableClassroomAttendanceList.class);
