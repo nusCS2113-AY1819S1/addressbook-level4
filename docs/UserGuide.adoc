@@ -359,7 +359,7 @@ There is no need to save manually.
 * *Complete* : `TDL_complete INDEX`
 * *Uncomplete* : `TDL_uncomplete INDEX`
 * *View* : `TDL_view PARAMETER`
-* *Sort* : `TDL_sort by PARAMETER`
+* *Sort* : `TDL_sort PARAMETER`
 
 *Expenditure Tracker:*
 
