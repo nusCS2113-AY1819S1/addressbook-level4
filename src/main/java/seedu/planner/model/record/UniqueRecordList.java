@@ -3,6 +3,7 @@ package seedu.planner.model.record;
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import seedu.planner.commons.util.SortUtil;
 import seedu.planner.logic.commands.SortCommand;
 import seedu.planner.model.record.exceptions.DuplicateRecordException;
 import seedu.planner.model.record.exceptions.RecordNotFoundException;
+import seedu.planner.model.tag.TagMap;
 
 /**
  * A list of records that enforces uniqueness between its elements and does not allow nulls.
@@ -133,6 +135,17 @@ public class UniqueRecordList implements Iterable<Record> {
         default: break;
         }
 
+    }
+
+    /**
+     * Creates a hashmap of the lists' contents' tags that keep tracks of the usage of each different tag
+     */
+    public HashMap<String, Integer> makeTagMap() {
+        TagMap tagMap = new TagMap();
+        for (Record record : internalList) {
+            tagMap.addRecordToTagMap(record);
+        }
+        return tagMap.getAsReadOnlyTagMap();
     }
 
     /**
