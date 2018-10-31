@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.EndTime;
+import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Location;
 import seedu.address.model.event.StartTime;
@@ -27,7 +27,12 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
+    public static final String MONTH_VALIDATION_REGEX = "0[1-9]|1[012]";
+    public static final String YEAR_VALIDATION_REGEX = "\\d{4}";
+
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_MONTH = "Input for month is not valid or according to MM format.";
+    public static final String MESSAGE_INVALID_YEAR = "Input for year is not valid or according to YYYY format.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -196,15 +201,46 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static LocalDate parseDate(String date) throws ParseException {
+    public static EventDate parseDate(String date) throws ParseException {
         requireNonNull(date);
-        String trimmedStartTime = date.trim();
-        // TODO: WORK ON VALIDATING DATE
-        //if (!Location.isValidLocation(trimmedLocation)) {
-        //  throw new ParseException(Location.MESSAGE_LOCATION_CONSTRAINTS);
-        //}
-        return LocalDate.parse(date);
+        String trimmedDate = date.trim();
+        if (!EventDate.isValidDate(trimmedDate)) {
+            throw new ParseException(EventDate.MESSAGE_DATE_CONSTRAINTS);
+        }
+        return new EventDate(trimmedDate);
     }
+
+    /**
+     * Parses a {@code String month} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code month} is invalid.
+     */
+    public static String parseMonth(String month) throws ParseException {
+        requireNonNull(month);
+        String trimmedDate = month.trim();
+        if (!trimmedDate.matches(MONTH_VALIDATION_REGEX)) {
+            throw new ParseException(MESSAGE_INVALID_MONTH);
+        }
+        return month;
+    }
+
+    /**
+     * Parses a {@code String year} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code year} is invalid.
+     */
+    public static String parseYear(String year) throws ParseException {
+        requireNonNull(year);
+        String trimmedDate = year.trim();
+        if (!trimmedDate.matches(YEAR_VALIDATION_REGEX)) {
+            throw new ParseException(MESSAGE_INVALID_YEAR);
+        }
+        return year;
+    }
+
+
 
 
     /**

@@ -15,7 +15,7 @@ import org.junit.Test;
 import seedu.address.testutil.EventBuilder;
 
 //@@author jieliangang
-public class EventContainsAttendeePredicateTest {
+public class AttendeeContainsNamePredicateTest {
 
     private Set<String> attendeesSetOne;
     private Set<String> attendeesSetTwo;
@@ -37,13 +37,13 @@ public class EventContainsAttendeePredicateTest {
         String personNameAlice = "ALICE";
         String personNameBob = "BOB";
 
-        EventContainsAttendeePredicate firstPredicate = new EventContainsAttendeePredicate(personNameAlice);
-        EventContainsAttendeePredicate secondPredicate = new EventContainsAttendeePredicate(personNameBob);
+        AttendeeContainsNamePredicate firstPredicate = new AttendeeContainsNamePredicate(personNameAlice);
+        AttendeeContainsNamePredicate secondPredicate = new AttendeeContainsNamePredicate(personNameBob);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
-        EventContainsAttendeePredicate firstPredicateCopy = new EventContainsAttendeePredicate(personNameAlice);
+        AttendeeContainsNamePredicate firstPredicateCopy = new AttendeeContainsNamePredicate(personNameAlice);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -60,11 +60,11 @@ public class EventContainsAttendeePredicateTest {
     @Test
     public void test_attendeesContainName_returnsTrue() {
         //event with attendee size one
-        EventContainsAttendeePredicate predicate = new EventContainsAttendeePredicate(VALID_NAME_AMY);
+        AttendeeContainsNamePredicate predicate = new AttendeeContainsNamePredicate(VALID_NAME_AMY);
         assertTrue(predicate.test(new EventBuilder().withAttendee(attendeesSetOne).build()));
 
         //event with attendee size more than one
-        predicate = new EventContainsAttendeePredicate(VALID_NAME_BOB);
+        predicate = new AttendeeContainsNamePredicate(VALID_NAME_BOB);
         assertTrue(predicate.test(new EventBuilder().withAttendee(attendeesSetTwo).build()));
 
     }
@@ -72,18 +72,18 @@ public class EventContainsAttendeePredicateTest {
     @Test
     public void test_attendeesContainName_returnsFalse() {
         //empty name
-        EventContainsAttendeePredicate predicate = new EventContainsAttendeePredicate("");
+        AttendeeContainsNamePredicate predicate = new AttendeeContainsNamePredicate("");
         assertFalse(predicate.test(new EventBuilder().withAttendee(attendeesSetOne).build()));
 
         //person not in attendee
-        predicate = new EventContainsAttendeePredicate(VALID_NAME_AMY);
+        predicate = new AttendeeContainsNamePredicate(VALID_NAME_AMY);
         assertFalse(predicate.test(new EventBuilder().withAttendee(attendeesSetTwo).build()));
 
-        predicate = new EventContainsAttendeePredicate(VALID_NAME_CALVIN);
+        predicate = new AttendeeContainsNamePredicate(VALID_NAME_CALVIN);
         assertFalse(predicate.test(new EventBuilder().withAttendee(attendeesSetOne).build()));
 
         //no attendee in event
-        predicate = new EventContainsAttendeePredicate(VALID_NAME_CALVIN);
+        predicate = new AttendeeContainsNamePredicate(VALID_NAME_CALVIN);
         assertFalse(predicate.test(new EventBuilder().build()));
 
     }

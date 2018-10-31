@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -132,11 +131,6 @@ public class InviteCommandTest {
         assertFalse(command1.equals(command2));
     }
 
-    @Test
-    public void updateList_personAddedToEvent_success() {
-        event3 = InviteCommand.updateList(event1, "Alice");
-        assertEquals(event2, event3);
-    }
 
 
 }

@@ -2,7 +2,6 @@ package seedu.address.model.event;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 
@@ -23,7 +22,7 @@ public class Event implements Comparable<Event> {
 
     // Data fields
     private final Description description;
-    private final LocalDate date;
+    private final EventDate date;
     private final StartTime startTime;
     private final EndTime endTime;
     private final Location location;
@@ -34,7 +33,7 @@ public class Event implements Comparable<Event> {
      */
 
     public Event(EventName eventName, Description description,
-                 LocalDate date, StartTime startTime, EndTime endTime, Location location) {
+                 EventDate date, StartTime startTime, EndTime endTime, Location location) {
         requireAllNonNull(eventName, description, startTime, endTime, location);
 
         this.eventName = eventName;
@@ -52,7 +51,7 @@ public class Event implements Comparable<Event> {
      */
 
     public Event(EventName eventName, Description description,
-                 LocalDate date, StartTime startTime, EndTime endTime, Location location, Attendees attendees) {
+                 EventDate date, StartTime startTime, EndTime endTime, Location location, Attendees attendees) {
         requireAllNonNull(eventName, description, startTime, endTime, location);
 
         this.eventName = eventName;
@@ -74,7 +73,7 @@ public class Event implements Comparable<Event> {
         return description;
     }
 
-    public LocalDate getDate() {
+    public EventDate getDate() {
         return date;
     }
 
@@ -130,7 +129,8 @@ public class Event implements Comparable<Event> {
                 && otherEvent.getDescription().equals(getDescription())
                 && otherEvent.getLocation().equals(getLocation())
                 && otherEvent.getStartTime().equals(getStartTime())
-                && otherEvent.getEndTime().equals(getEndTime());
+                && otherEvent.getEndTime().equals(getEndTime())
+                && otherEvent.getDate().equals(getDate());
     }
 
     @Override
@@ -163,15 +163,58 @@ public class Event implements Comparable<Event> {
         return builder.toString();
     }
 
+    /**
+     * Add new name to an event attendees list.
+     *
+     * @param personName The person's name to be removed from the attendees list.
+     * @return An updated event with the person's name in the attendees list.
+     */
+    public Event addPersonToAttendee(String personName) {
+        assert personName != null;
+        assert !attendees.hasName(personName);
+        Attendees updatedAttendee = attendees.addName(personName);
+        return new Event(eventName, description, date, startTime, endTime, location, updatedAttendee);
+    }
+
+
+    /**
+     * Remove existing name from an event attendees list.
+     *
+     * @param personName The person's name to be removed from the attendees list.
+     * @return An updated event with the person's name removed in the attendees list.
+     */
+    public Event removePersonFromAttendee(String personName) {
+        assert personName != null;
+        assert attendees.hasName(personName);
+        Attendees updatedAttendee = attendees.removeName(personName);
+        return new Event(eventName, description, date, startTime, endTime, location, updatedAttendee);
+    }
+
+    /**
+     * Check if personName is in attendees of Event.
+     *
+     * @param personName The person's name to be checked from the attendees list.
+     */
+    public boolean hasAttendee(String personName) {
+        assert personName != null;
+        return attendees.hasName(personName);
+    }
+
+    /**
+     * Check if Attendees of Event is empty.
+     */
+    public boolean isAttendeeEmpty() {
+        return attendees.isSetEmpty();
+    }
+
 
     @Override
     public int compareTo(Event other) {
         return this.getEventName().fullName.compareTo(other.getEventName().fullName);
     }
 
-
     public int compareDateTo(Event other) {
-        return this.getDate().compareTo(other.getDate());
+        return this.getDate().eventDate.compareTo(other.getDate().eventDate);
     }
 
     public int compareStartTimeTo(Event other) {

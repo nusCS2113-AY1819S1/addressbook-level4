@@ -1,12 +1,12 @@
 package seedu.address.testutil;
 
-import java.time.LocalDate;
 import java.util.Set;
 
 import seedu.address.model.event.Attendees;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.EndTime;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Location;
 import seedu.address.model.event.StartTime;
@@ -26,7 +26,7 @@ public class EventBuilder {
 
     private EventName eventName;
     private Description description;
-    private LocalDate date;
+    private EventDate date;
     private StartTime startTime;
     private EndTime endTime;
     private Location location;
@@ -35,7 +35,7 @@ public class EventBuilder {
     public EventBuilder() {
         eventName = new EventName(DEFAULT_NAME);
         description = new Description(DEFAULT_DESCRIPTION);
-        date = LocalDate.parse(DEFAULT_DATE);
+        date = new EventDate(DEFAULT_DATE);
         startTime = new StartTime(DEFAULT_START_TIME);
         endTime = new EndTime(DEFAULT_END_TIME);
         location = new Location(DEFAULT_LOCATION);
@@ -48,6 +48,7 @@ public class EventBuilder {
     public EventBuilder(Event eventToCopy) {
         eventName = eventToCopy.getEventName();
         description = eventToCopy.getDescription();
+        date = eventToCopy.getDate();
         startTime = eventToCopy.getStartTime();
         endTime = eventToCopy.getEndTime();
         location = eventToCopy.getLocation();
@@ -75,12 +76,12 @@ public class EventBuilder {
      * Sets the {@code Address} of the {@code Event} that we are building.
      */
     public EventBuilder withDate(String date) {
-        this.date = LocalDate.parse(date);
+        this.date = new EventDate(date);
         return this;
     }
 
     /**
-     * Sets the {@code LocalDate} of the {@code Event} that we are building.
+     * Sets the {@code StartTime} of the {@code Event} that we are building.
      */
     public EventBuilder withStartTime(String startTime) {
         this.startTime = new StartTime(startTime);
@@ -88,7 +89,7 @@ public class EventBuilder {
     }
 
     /**
-     * Sets the {@code LocalDate} of the {@code Event} that we are building.
+     * Sets the {@code EndTime} of the {@code Event} that we are building.
      */
     public EventBuilder withEndTime(String endTime) {
         this.endTime = new EndTime(endTime);

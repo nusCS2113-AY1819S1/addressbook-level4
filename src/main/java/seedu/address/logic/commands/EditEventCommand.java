@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.EndTime;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Location;
 import seedu.address.model.event.StartTime;
@@ -73,7 +73,7 @@ public class EditEventCommand extends Command {
 
         EventName updatedName = editEventDescriptor.getEventName().orElse(eventToEdit.getEventName());
         Description updatedDescription = editEventDescriptor.getDescription().orElse(eventToEdit.getDescription());
-        LocalDate updatedDate = editEventDescriptor.getDate().orElse(eventToEdit.getDate());
+        EventDate updatedDate = editEventDescriptor.getDate().orElse(eventToEdit.getDate());
         StartTime updatedStartTime = editEventDescriptor.getStartTime().orElse(eventToEdit.getStartTime());
         EndTime updatedEndTime = editEventDescriptor.getEndTime().orElse(eventToEdit.getEndTime());
         Location updatedLocation = editEventDescriptor.getLocation().orElse(eventToEdit.getLocation());
@@ -129,7 +129,7 @@ public class EditEventCommand extends Command {
     public static class EditEventDescriptor {
         private EventName eventName;
         private Description description;
-        private LocalDate date;
+        private EventDate date;
         private StartTime startTime;
         private EndTime endTime;
         private Location location;
@@ -147,6 +147,7 @@ public class EditEventCommand extends Command {
             setStartTime(toCopy.startTime);
             setEndTime(toCopy.endTime);
             setLocation(toCopy.location);
+            setDate(toCopy.date);
         }
 
         /**
@@ -172,11 +173,11 @@ public class EditEventCommand extends Command {
             this.description = description;
         }
 
-        public Optional<LocalDate> getDate() {
+        public Optional<EventDate> getDate() {
             return Optional.ofNullable(date);
         }
 
-        public void setDate(LocalDate date) {
+        public void setDate(EventDate date) {
             this.date = date;
         }
 
@@ -223,7 +224,8 @@ public class EditEventCommand extends Command {
                     && getDescription().equals(e.getDescription())
                     && getStartTime().equals(e.getStartTime())
                     && getEndTime().equals(e.getEndTime())
-                    && getLocation().equals(e.getLocation());
+                    && getLocation().equals(e.getLocation())
+                    && getDate().equals(e.getDate());
         }
     }
 }
