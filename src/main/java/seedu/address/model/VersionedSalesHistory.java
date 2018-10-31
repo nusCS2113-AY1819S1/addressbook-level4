@@ -16,7 +16,6 @@ public class VersionedSalesHistory extends SalesHistoryManager {
 
     public VersionedSalesHistory(ReadOnlySalesHistory initialState) {
         super(initialState);
-
         salesHistoriesStateList = new ArrayList<>();
         salesHistoriesStateList.add(initialState);
         currentStatePointer = 0;

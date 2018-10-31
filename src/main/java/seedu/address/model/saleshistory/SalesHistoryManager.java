@@ -26,6 +26,9 @@ public class SalesHistoryManager extends SalesHistory {
      */
     public SalesHistoryManager(ReadOnlySalesHistory initialState) {
         super(initialState);
+        if (getTransactionRecord().size() > 0) {
+            lastTransaction = getTransactionRecord().lastEntry().getValue();
+        }
     }
 
     /**
@@ -111,7 +114,7 @@ public class SalesHistoryManager extends SalesHistory {
     }
 
     /**
-     * Returns the reminders which are due in the active day.
+     * Returns the reminders which are due.
      * @return reminder list.
      */
     public ArrayList<Reminder> getOverdueReminders() {

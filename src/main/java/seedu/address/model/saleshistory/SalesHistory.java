@@ -73,8 +73,8 @@ public class SalesHistory implements ReadOnlySalesHistory {
     }
 
     private void copyReadOnlySalesHistory(ReadOnlySalesHistory toBeCopied) {
-        requireNonNull(toBeCopied);
         for (Transaction transaction : toBeCopied.getTransactionsAsObservableList()) {
+            // These exceptions should never be raised. Printing the stack trace will help debugging.
             try {
                 addTransaction(transaction);
             } catch (InvalidTimeFormatException e) {
@@ -84,6 +84,7 @@ public class SalesHistory implements ReadOnlySalesHistory {
             }
         }
         for (Reminder reminder : toBeCopied.getRemindersAsObservableList()) {
+            // These exceptions should never be raised. Printing the stack trace will help debugging.
             try {
                 addReminder(reminder);
             } catch (InvalidTimeFormatException e) {

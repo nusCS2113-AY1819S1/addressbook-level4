@@ -75,24 +75,7 @@ public class SampleDataUtil {
     }
 
     public static ReadOnlySalesHistory getSampleSalesHistory() {
-        SalesHistory sampleSh = new SalesHistory();
-        Transaction toAdd = new Transaction();
-        try {
-            toAdd.addProduct("Apples");
-        } catch (ClosedTransactionException e) {
-            // should not happen AT ALL. Stack trace will help debug if this occurs.
-            e.printStackTrace();
-        }
-        try {
-            sampleSh.addTransaction(toAdd);
-        } catch (InvalidTimeFormatException e) {
-            // should not happen AT ALL. Stack trace will help debug if this occurs.
-            e.printStackTrace();
-        } catch (DuplicateTransactionException e) {
-            // should not happen AT ALL. Stack trace will help debug if this occurs.
-            e.printStackTrace();
-        }
-        return sampleSh;
+        return new SalesHistory();
     }
 
     /**

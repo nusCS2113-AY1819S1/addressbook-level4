@@ -176,7 +176,7 @@ public class ModelManager extends ComponentManager implements Model {
         try {
             salesHistoryOptional = storage.readSalesHistory();
             if(!salesHistoryOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample SalesHistory");
+                logger.info("Data file not found. Will be starting with an empty SalesHistory");
             }
             newSalesHistory = salesHistoryOptional.orElseGet(SampleDataUtil::getSampleSalesHistory);
         } catch (DataConversionException e) {

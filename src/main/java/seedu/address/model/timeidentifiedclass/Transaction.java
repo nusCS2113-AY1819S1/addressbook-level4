@@ -109,10 +109,12 @@ public class Transaction extends TimeIdentifiedClass {
         Iterator it = set.iterator();
 
         ret.append("================== Transaction Record " + this.getTransactionTime() + "==================\n");
-        ret.append("ITEM\tQTY\n");
+        ret.append("PRODUCT NAME: QUANTITY\n");
         while (it.hasNext()) {
             Map.Entry entry = (Map.Entry) it.next();
-            ret.append(entry.getKey() + "\t\t" + entry.getValue() + "\n");
+            if (entry.getKey() != null && !entry.equals("")) {
+                ret.append(entry.getKey() + ": " + entry.getValue() + "\n");
+            }
         }
         ret.trimToSize();
         return ret.toString();
