@@ -26,7 +26,7 @@ endif::[]
 * View Students Data
 * Create/Delete Groups
 ** Add Students to Groups
-** Delete Students from Groups [_Coming in v1.4_]
+** Delete Students from Groups
 * View Groups
 * View Students in Groups
 * Student Distribution
