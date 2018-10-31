@@ -78,15 +78,10 @@ public class StockListParser {
             return new AddAccountCommandParser().parse(arguments);
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
-<<<<<<< HEAD
         case EditAccountCommand.COMMAND_WORD:
             return new EditAccountCommandParser().parse(arguments);
-        case SelectCommand.COMMAND_WORD:
-            return new SelectCommandParser().parse(arguments);
         case DeleteAccountCommand.COMMAND_WORD:
             return new DeleteAccountCommandParser().parse(arguments);
-=======
->>>>>>> 4fc0ba719f53a27dde6207be50206f9fa32f6d47
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
         case ListCommand.COMMAND_WORD:
@@ -97,22 +92,14 @@ public class StockListParser {
             return new ClearCommand();
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
-<<<<<<< HEAD
         case FindAccountCommand.COMMAND_WORD:
             return new FindAccountCommandParser().parse(arguments);
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
         case ListAccountsCommand.COMMAND_WORD:
             return new ListAccountsCommand();
-        case LoginCommand.COMMAND_WORD:
-            return new LoginCommandParser().parse(arguments);
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
-=======
         case StatusCommand.COMMAND_WORD:
             return new StatusCommand();
         case ChangeStatusCommand.COMMAND_WORD:
@@ -135,27 +122,16 @@ public class StockListParser {
             return new FoundCommandParser().parse(arguments);
         case LostandFoundCommand.COMMAND_WORD:
             return new LostandFoundCommand();
->>>>>>> 4fc0ba719f53a27dde6207be50206f9fa32f6d47
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
-<<<<<<< HEAD
         case ResetAccountsCommand.COMMAND_WORD:
             return new ResetAccountsCommand();
-        case ChangeStatusCommand.COMMAND_WORD:
-            return new ChangeStatusCommandParser().parse(arguments);
-=======
-        case HistoryCommand.COMMAND_WORD:
-            return new HistoryCommand();
->>>>>>> 4fc0ba719f53a27dde6207be50206f9fa32f6d47
         case SaveCommand.COMMAND_WORD:
             return new SaveCommandParser().parse(arguments);
         case OpenCommand.COMMAND_WORD:
             return new OpenCommandParser().parse(arguments);
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
