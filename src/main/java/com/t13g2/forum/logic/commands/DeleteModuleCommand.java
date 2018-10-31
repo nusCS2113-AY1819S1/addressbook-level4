@@ -3,7 +3,6 @@ package com.t13g2.forum.logic.commands;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static java.util.Objects.requireNonNull;
 
-import com.t13g2.forum.commons.exceptions.NotLoggedInException;
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.Context;
@@ -44,14 +43,10 @@ public class DeleteModuleCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         // if user has not login or is not admin, then throw exception
-        try {
-            if (!Context.getInstance().isCurrentUserAdmin()) {
-                throw new CommandException(User.MESSAGE_NOT_ADMIN);
-            }
-        } catch (CommandException e) {
-            throw e;
-        } catch (NotLoggedInException e) {
+        if (!Context.getInstance().isLoggedIn()) {
             throw new CommandException(User.MESSAGE_NOT_LOGIN);
+        } else if (!Context.getInstance().isCurrentUserAdmin()) {
+            throw new CommandException(User.MESSAGE_NOT_ADMIN);
         }
 
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
