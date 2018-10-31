@@ -13,7 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 public class Quantity {
 
     public static final String MESSAGE_QUANTITY_CONSTRAINTS =
-            "Quantity can only take positive values, and it should not be blank";
+            "Quantity can only take positive values up to 999, and it should not be blank";
 
     /**
      * Quantity only accepts from 0 to 999

@@ -51,8 +51,7 @@ public class BookUtil {
         descriptor.getIsbn().ifPresent(isbn -> sb.append(PREFIX_ISBN).append(isbn.value).append(" "));
         descriptor.getPrice().ifPresent(price -> sb.append(PREFIX_PRICE).append(price.value).append(" "));
         descriptor.getCost().ifPresent(cost -> sb.append(PREFIX_PRICE).append(cost.value).append(" "));
-        descriptor.getQuantity().ifPresent(
-            quantity -> sb.append(PREFIX_QUANTITY).append(quantity.getValue()).append(" "));
+
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
