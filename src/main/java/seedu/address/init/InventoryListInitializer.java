@@ -30,6 +30,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.transaction.TransactionList;
 import seedu.address.model.user.accountant.AccountantModelManager;
 import seedu.address.model.user.admin.AdminModelManager;
 import seedu.address.model.user.manager.ManagerModelManager;
@@ -56,6 +57,7 @@ public class InventoryListInitializer {
     protected UserPrefs userPrefs;
     private FXMLLoader fxmlLoader;
     private LoginInfoManager loginInfoList;
+    private TransactionList transactionList;
 
 
     public InventoryListInitializer (Config config, Storage storage,
@@ -106,21 +108,23 @@ public class InventoryListInitializer {
             initialData = new AddressBook();
         }
         if (CurrentUser.getAuthenticationLevel ().equals (AUTH_ADMIN)) {
-            return new AdminModelManager (new InventoryList (), userPrefs, loginInfoManager);
+            return new AdminModelManager (new InventoryList (), userPrefs, loginInfoManager, new TransactionList());
         }
         if (CurrentUser.getAuthenticationLevel ().equals (AUTH_MANAGER)) {
-            return new ManagerModelManager (new InventoryList (), userPrefs, loginInfoManager);
+            return new ManagerModelManager (new InventoryList (), userPrefs, loginInfoManager, new TransactionList());
         }
         if (CurrentUser.getAuthenticationLevel ().equals (AUTH_STOCK_TAKER)) {
-            return new StockTakerModelManager (new InventoryList () , userPrefs, loginInfoManager);
+            return new StockTakerModelManager (new InventoryList () , userPrefs, loginInfoManager,
+                    new TransactionList());
         }
 
         if (CurrentUser.getAuthenticationLevel ().equals (AUTH_ACCOUNTANT)) {
-            return new AccountantModelManager (new InventoryList (), userPrefs, loginInfoManager);
+            return new AccountantModelManager (new InventoryList (), userPrefs, loginInfoManager,
+                    new TransactionList());
         }
 
         //TODO: need change InventoryList () to storage when storage is done
-        return new ModelManager (new InventoryList () , userPrefs, loginInfoManager);
+        return new ModelManager (new InventoryList () , userPrefs, loginInfoManager, new TransactionList());
     }
 
 

@@ -3,17 +3,23 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import seedu.address.analysis.Analysis;
+import seedu.address.analysis.AnalysisManager;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LoginInfo;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.InventoryListChangedEvent;
 import seedu.address.model.drink.Drink;
+import seedu.address.model.drink.Price;
+import seedu.address.model.transaction.Transaction;
+import seedu.address.model.transaction.TransactionList;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.UserName;
 
@@ -26,11 +32,14 @@ public class ModelManager extends ComponentManager implements Model {
     protected LoginInfoManager loginInfoManager;
     private final FilteredList<Drink> filteredDrinks;
     private final InventoryList inventoryList;
+    private final TransactionList transactionList;
+    private final Analysis analysis;
 
     /**
-     * Initializes a ModelManager with the given inventoryList and userPrefs.
+     * Initializes a ModelManager with the given inventoryList, userPrefs and transactionList
      */
-    public ModelManager(ReadOnlyInventoryList inventoryList, UserPrefs userPrefs, LoginInfoManager loginInfoManager) {
+    public ModelManager(ReadOnlyInventoryList inventoryList, UserPrefs userPrefs, LoginInfoManager loginInfoManager,
+                        TransactionList transactionList) {
         super();
         requireAllNonNull(inventoryList, userPrefs);
 
@@ -39,10 +48,13 @@ public class ModelManager extends ComponentManager implements Model {
         this.inventoryList = new InventoryList(inventoryList);
         filteredDrinks = new FilteredList<>(inventoryList.getDrinkList());
         this.loginInfoManager = loginInfoManager;
+        this.transactionList = transactionList;
+        analysis = new AnalysisManager(transactionList);
+        // TODO: transaction manager, facade for transactions
     }
 
     public ModelManager() {
-        this(new InventoryList(), new UserPrefs() , new LoginInfoManager ());
+        this(new InventoryList(), new UserPrefs(), new LoginInfoManager(), new TransactionList());
     }
 
     @Override
@@ -56,9 +68,11 @@ public class ModelManager extends ComponentManager implements Model {
         return inventoryList;
     }
 
-    /** Raises an event to indicate the model has changed */
+    /**
+     * Raises an event to indicate the model has changed
+     */
     private void indicateInventoryListChanged() {
-        raise(new InventoryListChangedEvent (inventoryList));
+        raise(new InventoryListChangedEvent(inventoryList));
     }
 
     @Override
@@ -89,6 +103,11 @@ public class ModelManager extends ComponentManager implements Model {
         indicateInventoryListChanged();
     }
     */
+
+    private Drink findDrinkByName(Drink drink) {
+        Drink actualDrinkRef = inventoryList.findDrinkByName(drink);
+        return actualDrinkRef;
+    }
 
     //=========== Filtered Drink List Accessors =============================================================
 
@@ -125,21 +144,74 @@ public class ModelManager extends ComponentManager implements Model {
                 && inventoryList.equals(other.inventoryList);
     }
 
-    //=========== Login feature command ==============================================//
-
+    // ========== transaction commands ====================================
     @Override
-    public void changePassword (UserName userName, Password newHashedPassword) {
-        loginInfoManager.changePassword (userName, newHashedPassword);
+    public void sellDrink(Transaction transaction) {
+        Price defaultSalePrice = inventoryList.getDefaultSellingPrice(transaction.getDrinkTransacted());
+
+        Price defaultAmountTransacted = new Price(Float.toString(defaultSalePrice.getValue()
+                * transaction.getQuantityTransacted().getValue()));
+        transaction.setAmountMoney(defaultAmountTransacted);
+        recordTransaction(transaction);
+
+        inventoryList.decreaseQuantity(transaction.getDrinkTransacted(), transaction.getQuantityTransacted());
     }
 
     @Override
-    public LoginInfo getLoginInfo (UserName userName) {
-        return loginInfoManager.getLoginInfo (userName);
+    public void importDrink(Transaction transaction) {
+        Price defaultCostPrice = inventoryList.getDefaultCostPrice(transaction.getDrinkTransacted());
+
+        Price defaultAmountTransacted = new Price(Float.toString(defaultCostPrice.getValue()
+                * transaction.getQuantityTransacted().getValue()));
+        transaction.setAmountMoney(defaultAmountTransacted);
+        recordTransaction(transaction);
+
+        inventoryList.increaseQuantity(transaction.getDrinkTransacted(), transaction.getQuantityTransacted());
+    }
+
+    private void recordTransaction(Transaction transaction) {
+        transactionList.addTransaction(transaction);
+    }
+
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Transaction} backed by the internal list of
+     * {@code transactionList}
+     */
+    @Override
+    public ObservableList<Transaction> getTransactionList() {
+        List<Transaction> transactions = transactionList.getTransactions();
+        return FXCollections.unmodifiableObservableList(FXCollections.observableList(transactions));
     }
 
     @Override
-    public boolean isUserNameExist (UserName userName) {
-        return loginInfoManager.isUserNameExist (userName);
+    public String getTransactions() {
+        return transactionList.toString();
+    }
+
+    // ========== Analysis commands =================================================
+    @Override
+    public Price analyseCosts() {
+        return analysis.analyseCost();
+    }
+
+
+
+    //=========== Login feature command ==============================================
+
+    @Override
+    public void changePassword(UserName userName, Password newHashedPassword) {
+        loginInfoManager.changePassword(userName, newHashedPassword);
+    }
+
+    @Override
+    public LoginInfo getLoginInfo(UserName userName) {
+        return loginInfoManager.getLoginInfo(userName);
+    }
+
+    @Override
+    public boolean isUserNameExist(UserName userName) {
+        return loginInfoManager.isUserNameExist(userName);
     }
 
 }

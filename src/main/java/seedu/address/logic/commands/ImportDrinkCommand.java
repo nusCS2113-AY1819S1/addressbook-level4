@@ -13,18 +13,17 @@ import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.TransactionType;
 
 /**
- * Sell a drink from inventory.
- * // TODO: STUB
+ * Import a drink into inventory. This increases the quantity of the drink.
+ * Drink must exist in inventory.
  */
-public class SellDrinkCommand extends Command {
+public class ImportDrinkCommand extends Command {
+    public static final String COMMAND_WORD = "import";
 
-    public static final String COMMAND_WORD = "sell";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sell an drink that is recorded in Drink I/O. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Import a drink that is recorded in Drink I/O. "
             + "Parameters: "
             + PREFIX_DRINK_NAME + "DRINK NAME "
             //+ PREFIX_DATE + "DATE SOLD "
-            + PREFIX_QUANTITY + "QUANTITY SOLD "
+            + PREFIX_QUANTITY + "QUANTITY IMPORTED "
             //+ PREFIX_PRICE + "TOTAL REVENUE "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DRINK_NAME + "coca cola "
@@ -32,24 +31,22 @@ public class SellDrinkCommand extends Command {
             + PREFIX_QUANTITY + "12 ";
     //+ PREFIX_PRICE + "345.68 ";
 
-    public static final String MESSAGE_SUCCESS = "%1$s sold on %2$s with quantity: %3$s";
+    public static final String MESSAGE_SUCCESS = "%1$s imported on %2$s with quantity: %3$s";
     public static final String MESSAGE_DRINK_NOT_FOUND = "The drink entered does not exist in the inventory list";
-    public static final String MESSAGE_FAILURE = "The quantity entered exceed the stock";
 
     private final Drink drink;
-    // private final Date date; // TODO: add date support
     private final Quantity quantity;
     private final Transaction transaction;
 
     /**
-     * Creates a SellDrinkCommand to sell the specified {@code drink}
+     * Creates an ImportDrinkCommand to import the specified drink {@code Name}
      */
-    public SellDrinkCommand(Drink drink, Quantity quantity) {
+    public ImportDrinkCommand(Drink drink, Quantity quantity) {
         requireAllNonNull(drink, quantity);
         this.drink = drink;
         this.quantity = quantity;
-        transaction = new Transaction(TransactionType.SALE, drink, quantity);
-        // actual amount transacted is computed at inventoryList level
+        transaction = new Transaction(TransactionType.IMPORT, drink, quantity);
+        // actual amount transacted computed at inventoryList level
     }
 
     @Override
@@ -60,7 +57,7 @@ public class SellDrinkCommand extends Command {
             throw new CommandException(MESSAGE_DRINK_NOT_FOUND);
         }
 
-        model.sellDrink(transaction);
+        model.importDrink(transaction);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, drink.getName(), transaction.getTransactionDate(),
                 quantity));

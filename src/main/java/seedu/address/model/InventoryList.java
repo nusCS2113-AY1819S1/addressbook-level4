@@ -6,7 +6,10 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.drink.Drink;
+import seedu.address.model.drink.Price;
+import seedu.address.model.drink.Quantity;
 import seedu.address.model.drink.UniqueDrinkList;
+import seedu.address.model.drink.exceptions.DrinkNotFoundException;
 
 /**
  * Wraps all data at the inventory-list level
@@ -15,18 +18,18 @@ import seedu.address.model.drink.UniqueDrinkList;
 public class InventoryList implements ReadOnlyInventoryList {
     private final UniqueDrinkList drinks;
 
-    /*
+     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */
-    {
+     */ {
         drinks = new UniqueDrinkList();
     }
 
-    public InventoryList() {}
+    public InventoryList() {
+    }
 
     /**
      * Creates an InventoryList using the Drinkss in the {@code toBeCopied}
@@ -118,5 +121,42 @@ public class InventoryList implements ReadOnlyInventoryList {
     @Override
     public int hashCode() {
         return drinks.hashCode();
+    }
+
+    /**
+     * Returns reference to actual drink stored in inventory, using {@code drink}
+     */
+    public Drink findDrinkByName(Drink drink) {
+        if (hasDrink(drink)) {
+            return drinks.find(drink);
+        }
+
+        throw new DrinkNotFoundException();
+    }
+
+    /**
+     * Increases the quantity of the {@code drink} specified.
+     */
+    public void increaseQuantity(Drink drink, Quantity quantity) {
+        Drink actualDrink = findDrinkByName(drink);
+        actualDrink.increaseQuantity(quantity);
+    }
+
+    /**
+     * Decreases the quantity of the {@code drink} specified.
+     */
+    public void decreaseQuantity(Drink drink, Quantity quantity) {
+        Drink actualDrink = findDrinkByName(drink);
+        actualDrink.decreaseQuantity(quantity);
+    }
+
+    public Price getDefaultSellingPrice(Drink drink) {
+        Drink actualDrink = findDrinkByName(drink);
+        return actualDrink.getRetailPrice();
+    }
+
+    public Price getDefaultCostPrice(Drink drink) {
+        Drink actualDrink = findDrinkByName(drink);
+        return actualDrink.getCostPrice();
     }
 }

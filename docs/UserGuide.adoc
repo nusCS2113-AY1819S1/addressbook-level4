@@ -20,7 +20,15 @@ By: `CS2113T-W12-4`      Since: `Jun 2016`      Licence: `MIT`
 
 == Introduction
 
-*[blue]#_Drink I/O_#* is a desktop application that helps you to manage your drinks distribution company. You can use it to keep track of your inventory, analyse your company’s sales performance and set reminders to help you import more goods should their stocks fall low. *[blue]#_Drink I/O_#* is optimised for the Command Line Interface (CLI), allowing you to do your work faster than when using traditional Graphical User Interface (GUI) apps, while retaining the benefits of a GUI.
+*[blue]#_Drink I/O_#* is a desktop application that helps you to manage your drink distribution company.
+You can use *[blue]#_Drink I/O_#* to keep track of your inventory, analyse your company’s sales performance and
+set reminders to help you import more goods should their stocks fall low.
+*[blue]#_Drink I/O_#* is optimised for Command Line Interface (CLI), allowing you to manage your store
+faster than traditional Graphical User Interface (GUI) apps, while retaining the benefits of a GUI
+
+This user guide provides comprehensive documentation on the *[blue]#_Drink I/O_#* setup process, the features you can
+access and the commands you can use. Choose a topic from the Table of Contents (link) to find answers,
+get instructions and learn to improve your workflow with Drink I/O.
 
 This user guide provides comprehensive documentation on the *[blue]#_Drink I/O_#* setup process, the commands you can use and the features available to you. Choose a topic from the Table of Contents (link) to find answers, get instructions and learn how to improve your workflow with *[blue]#_Drink I/O_#*.
 
@@ -127,11 +135,92 @@ To add new drinks into your company's offer listing, you can carry out the steps
 
 == Managing Transactions
 
-=== Creating an import transaction [batches]
+=== Creating an import transaction
+When you buy and receive new goods, and want to update your stocks, you can enter an import transaction to do so.
+
+[NOTE]
+====
+#*Command format*#:
+`import n/NAME q/QUANTITY` +
+
+* Desired drink must be recorded in Drink I/O
+
+====
+
+To record an import transaction, +
+1. Enter `import` +
+2. Key in `n/`, followed by name of drink (`NAME`) +
+3. Key in `q/`, followed by quantity imported (`QUANTITY`) +
+4. Press kbd:[enter] +
+5. Check whether the transaction has been recorded successfully +
+
+-  If you see the message "import transaction recorded!", the transaction had been successfully entered into Drink I/O +
+-  If not, follow the instructions displayed in the message display pane, and re-enter the command +
+
+[WARNING]
+====
+The drink you want to transact must be recorded in Drink I/O
+====
+
+[NOTE]
+====
+#*More about batches*# +
+<to be added>
+
+====
+
+
+
+
 === Creating a sales transaction
+When you make a sale to your customers, recording the sale in Drink I/O allows you to update your transactions as well as the current stock.
+
+
+[NOTE]
+====
+#*Command format*#:
+`sell n/NAME q/QUANTITY` +
+
+* Desired drink must be recorded in Drink I/O +
+* Quantity must not exceed current stock
+
+====
+
+To record a sale transaction, +
+1. Enter`sell` +
+2. Key in `n/`, followed by name of drink (`NAME`) +
+3. Key in `q/`, followed by quantity transacted in sale (`QUANTITY`) +
+4. Press kbd:[enter] +
+5. Check whether the transaction has been recorded successfully, +
+
+* If you see the message "sale transaction recorded!", the transaction had been successfully entered into Drink I/O +
+* If not, follow the instructions displayed in the message display pane, and re-enter the command +
+
+[WARNING]
+====
+- The drink you want to transact must be recorded in Drink I/O.
+- The recording will fail if QUANTITY is more than the available stock in Drink I/O. Do check if your stock counts in Drink I/O are updated.
+====
+
 
 == Analysing Sales Performance
 === Viewing overall cost, revenue and profit
+==== Viewing overall cost
+Drink I/O can calculate the total costs your store has incurred since the beginning of recording for you.
+
+[NOTE]
+====
+#*Command format*#:
+`analyseCosts`
+====
+
+To view the total costs incurred, +
+1. Enter `analyseCosts` +
+2. Press kbd:[enter] +
+
+You should see a value displayed in the results panel.
+
+
 === Filtering popular items
 === Viewing an item’s transactions
 === Viewing an item’s cost, revenue and profit
