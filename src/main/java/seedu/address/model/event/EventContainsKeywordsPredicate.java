@@ -61,6 +61,12 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                 .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword))));
     }
 
+    /**
+     * To check if any of name prefix keywords match with any of event name
+     * @param keywords list of keywords
+     * @param event event to compare
+     * @return a boolean indicate matching
+     */
     public boolean checkNameKeywordsMatchEventName (List<String> keywords, Event event) {
         if (keywords == null) {
             return true;
@@ -70,6 +76,12 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                         && StringUtil.containsWordIgnoreCase(event.getName().fullName, keyword));
     }
 
+    /**
+     * To check if any of contact prefix keywords match with any of event contact
+     * @param keywords list of keywords
+     * @param event event to compare
+     * @return a boolean indicate matching
+     */
     public boolean checkContactKeywordsMatchEventContact (List<String> keywords, Event event) {
         if (keywords == null) {
             return true;
@@ -79,6 +91,12 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                         && StringUtil.containsWordIgnoreCase(event.getContact().fullContactName, keyword));
     }
 
+    /**
+     * To check if any of email prefix keywords match with any of event email
+     * @param keywords list of keywords
+     * @param event event to compare
+     * @return a boolean indicate matching
+     */
     public boolean checkEmailKeywordsMatchEventEmail (List<String> keywords, Event event) {
         if (keywords == null) {
             return true;
@@ -88,6 +106,12 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                         && StringUtil.containsWordIgnoreCase(event.getEmail().value, keyword));
     }
 
+    /**
+     * To check if any of phone prefix keywords match with any of event phone
+     * @param keywords list of keywords
+     * @param event event to compare
+     * @return a boolean indicate matching
+     */
     public boolean checkPhoneKeywordsMatchEventPhone (List<String> keywords, Event event) {
         if (keywords == null) {
             return true;
@@ -97,6 +121,12 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                         && StringUtil.containsWordIgnoreCase(event.getPhone().value, keyword));
     }
 
+    /**
+     * To check if any of venue prefix keywords match with any of event venue
+     * @param keywords list of keywords
+     * @param event event to compare
+     * @return a boolean indicate matching
+     */
     public boolean checkVenueKeywordsMatchEventVenue (List<String> keywords, Event event) {
         if (keywords == null) {
             return true;
@@ -106,6 +136,12 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                         && StringUtil.containsWordIgnoreCase(event.getVenue().value, keyword));
     }
 
+    /**
+     * To check if any of datetime prefix keywords match with any of event datetime
+     * @param keywords list of keywords
+     * @param event event to compare
+     * @return a boolean indicate matching
+     */
     public boolean checkDateTimeKeywordsMatchEventDateTime (List<String> keywords, Event event) {
         if (keywords == null) {
             return true;
@@ -115,6 +151,12 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                         && StringUtil.containsWordIgnoreCase(event.getDateTime().toString(), keyword));
     }
 
+    /**
+     * To check if any of tag prefix keywords match with any of event tags
+     * @param keywords list of keywords
+     * @param event event to compare
+     * @return a boolean indicate matching
+     */
     public boolean checkTagKeywordsMatchEventTag (List<String> keywords, Event event) {
         if(keywords == null) {
             return true;
