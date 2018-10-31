@@ -32,6 +32,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CreateGroupCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteGroupCommand;
+import seedu.address.logic.commands.DeleteGroupPersonCommand;
 import seedu.address.logic.commands.DistributeCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -105,6 +106,21 @@ public class AddressBookParserTest {
         DeleteGroupCommand command = (DeleteGroupCommand) parser.parseCommand(
                 DeleteGroupCommand.COMMAND_WORD + " " + INDEX_FIRST_GROUP.getOneBased());
         assertEquals(new DeleteGroupCommand(INDEX_FIRST_GROUP), command);
+    }
+
+    /**
+     * Command to delete a person from a group
+     * @throws Exception
+     */
+    @Test
+    public void parseCommand_deleteGroupPerson() throws Exception {
+        DeleteGroupPersonCommand command = (DeleteGroupPersonCommand) parser.parseCommand(
+                DeleteGroupPersonCommand.COMMAND_WORD
+                        + " " + PREFIX_GROUP_INDEX
+                        + INDEX_FIRST_GROUP.getOneBased()
+                        + " " + PREFIX_PERSON_INDEX
+                        + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteGroupPersonCommand(INDEX_FIRST_GROUP, INDEX_FIRST_PERSON), command);
     }
 
     /**
