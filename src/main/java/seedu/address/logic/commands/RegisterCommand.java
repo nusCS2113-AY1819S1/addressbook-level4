@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import static seedu.address.logic.commands.EditCommand.EditEventDescriptor;
 import static seedu.address.logic.commands.EditCommand.createEditedEvent;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
 import java.util.HashSet;
 import java.util.List;
@@ -66,7 +65,6 @@ public class RegisterCommand extends Command {
         Event registeredEvent = createEditedEvent(eventToRegister, registerEventDescriptor);
 
         model.updateEvent(eventToRegister, registeredEvent);
-        model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         model.commitEventManager();
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
