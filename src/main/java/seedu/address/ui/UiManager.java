@@ -15,8 +15,10 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.CurrentUser;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.logic.LogicChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
+import seedu.address.commons.events.ui.RestartUiEvent;
 import seedu.address.commons.events.ui.StartUiEvent;
 import seedu.address.commons.events.ui.StopUiEvent;
 import seedu.address.commons.util.StringUtil;
@@ -36,18 +38,18 @@ public class UiManager extends ComponentManager implements Ui {
     public static final String WELCOME_MESSAGE = "Welcome %1$s";
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
     private static final String ICON_APPLICATION = "/images/address_book_32.png";
-
     private Logic logic;
     private Config config;
     private UserPrefs prefs;
     private MainWindow mainWindow;
 
-    public UiManager(Logic logic, Config config, UserPrefs prefs) {
+    public UiManager(Logic newLogic, Config config, UserPrefs prefs) {
         super();
-        this.logic = logic;
+        this.logic = newLogic;
         this.config = config;
         this.prefs = prefs;
     }
+
 
     @Override
     public void start(Stage primaryStage) {
@@ -59,7 +61,8 @@ public class UiManager extends ComponentManager implements Ui {
         try {
             mainWindow = new MainWindow(primaryStage, config, prefs, logic);
             mainWindow.show(); //This should be called before creating other UI parts
-            mainWindow.fillInnerParts();
+            mainWindow.fillInnerParts ();
+
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
@@ -124,16 +127,24 @@ public class UiManager extends ComponentManager implements Ui {
         showFileOperationAlertAndWait(FILE_OPS_ERROR_DIALOG_HEADER_MESSAGE, FILE_OPS_ERROR_DIALOG_CONTENT_MESSAGE,
                 event.exception);
     }
-
     @Subscribe
-
     public void handleStartUiEvent(StartUiEvent event) {
-        System.out.println("Uievent in UI MANAGER");
         start(event.mainStage);
     }
-
     @Subscribe
     private void handleStopUiEvent(StopUiEvent event) {
-        stop();
+        prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
+        mainWindow.hide();
+    }
+    @Subscribe
+    private void handleLogicChangedEvent(LogicChangedEvent event) {
+        this.logic = event.logic;
+    }
+    @Subscribe
+    private void handleRestartUiEvent(RestartUiEvent event) {
+        logger.info("Starting UI...");
+        mainWindow.show(); //This should be called before creating other UI parts
+        EventsCenter.getInstance().post(new NewResultAvailableEvent (
+                String.format (WELCOME_MESSAGE, CurrentUser.getAuthenticationLevel ())));
     }
 }
