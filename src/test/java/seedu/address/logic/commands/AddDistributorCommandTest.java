@@ -28,9 +28,9 @@ import seedu.address.model.login.UniqueUserList;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
 import seedu.address.model.product.Product;
+import seedu.address.model.timeidentifiedclass.Reminder;
+import seedu.address.model.timeidentifiedclass.Transaction;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
-import seedu.address.model.timeidentifiedclass.shopday.Reminder;
-import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 import seedu.address.testutil.DistributorBuilder;
 
 public class AddDistributorCommandTest {
@@ -234,16 +234,6 @@ public class AddDistributorCommandTest {
         }
 
         @Override
-        public String getDaysHistory(String day) {
-            return null;
-        }
-
-        @Override
-        public String getActiveDayHistory() {
-            return null;
-        }
-
-        @Override
         public Transaction getLastTransaction() {
             fail("This method should not be called.");
             return null;
@@ -255,17 +245,27 @@ public class AddDistributorCommandTest {
         }
 
         @Override
-        public void removeReminder(Reminder reminder) throws InvalidTimeFormatException, NoSuchElementException {
-            throw new InvalidTimeFormatException();
+        public void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException {
+
         }
 
         @Override
-        public ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread() {
+        public ArrayList<Reminder> getAllReminders() {
             return null;
         }
 
-        public ArrayList<Reminder> getDueRemindersInActiveBusinessDay() {
-            fail("This method should not be called.");
+        @Override
+        public ArrayList<Reminder> getOverdueReminders() {
+            return null;
+        }
+
+        @Override
+        public ArrayList<Reminder> getOverdueRemindersForThread() {
+            return null;
+        }
+
+        @Override
+        public String getDaysTransactions(String day) throws InvalidTimeFormatException {
             return null;
         }
 
