@@ -16,8 +16,8 @@ public class ViewTaskCommand extends Command {
     public static final String COMMAND_WORD = "TDL_view";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Shows a list of uncompleted/completed tasks in the displayed to-do list.\n"
-            + "Parameters: completed or uncompleted\n"
+            + ": Shows a list of uncompleted/completed/all tasks in the displayed to-do list.\n"
+            + "Parameters: uncompleted, completed or all\n"
             + "Example: " + COMMAND_WORD + " completed";
 
     public static final String MESSAGE_SUCCESS_ALL = "Listed all tasks";

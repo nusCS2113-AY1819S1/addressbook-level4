@@ -1,3 +1,4 @@
+//@@author XiaoYunhan
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
@@ -13,7 +14,7 @@ public class SortTaskCommand extends Command {
     public static final String COMMAND_WORD = "TDL_sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Reverse or Sort tasks in the sequence of deadline date, module or default.\n"
+            + ": Reverse or Sort tasks in the order of module, date, priority or default.\n"
             + "Parameters: default, date, module or priority\n"
             + "Example: " + COMMAND_WORD + " date";
 
@@ -41,20 +42,16 @@ public class SortTaskCommand extends Command {
         if ("date".equals(filter)) {
             model.rankFilteredTaskDeadline();
             return new CommandResult(MESSAGE_SUCCESS_DATE);
-        }
-        else if ("module".equals(filter)) {
+        } else if ("module".equals(filter)) {
             model.rankFilteredTaskModule();
             return new CommandResult(MESSAGE_SUCCESS_MODULE);
-        }
-        else if ("default".equals(filter)) {
+        } else if ("default".equals(filter)) {
             model.rankTaskDefault();
             return new CommandResult(MESSAGE_SUCCESS_DEFAULT);
-        }
-        else if ("reverse".equals(filter)) {
+        } else if ("reverse".equals(filter)) {
             model.reverseTodoList();
             return new CommandResult(MESSAGE_SUCCESS_REVERSE);
-        }
-        else {
+        } else {
             model.rankFilteredTaskPriority();
             return new CommandResult(MESSAGE_SUCCESS_PRIORITY);
         }

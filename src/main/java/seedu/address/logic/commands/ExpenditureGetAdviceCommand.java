@@ -17,10 +17,10 @@ import seedu.address.model.Model;
  */
 public class ExpenditureGetAdviceCommand extends Command {
     public static final String COMMAND_WORD = "ET_advice";
-    public static final String COMMAND_ALIAS = "a";
+    //public static final String COMMAND_ALIAS = "a";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gives user advice on "
-            + "how to save money based on last week record.\n"
+            + "how to save money based on last week's record.\n"
             + "Parameters: "
             + PREFIX_MONEY + "MONEY "
             + PREFIX_PERIOD + "PERIOD "

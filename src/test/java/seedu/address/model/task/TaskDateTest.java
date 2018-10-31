@@ -36,9 +36,15 @@ public class TaskDateTest {
         assertFalse(TaskDate.isValidDate("9-12")); // less than 2 numbers for day
         assertFalse(TaskDate.isValidDate("322-12")); // more than 2 numbers for day
         assertFalse(TaskDate.isValidDate("1407")); // missing '-' symbol
+        assertFalse(TaskDate.isValidDate("32-09")); // day out of maximum logical limit
+        assertFalse(TaskDate.isValidDate("00-09")); // day out of minimum logical limit
+        assertFalse(TaskDate.isValidDate("15-13")); // month out of maximum logical limit
+        assertFalse(TaskDate.isValidDate("15-00")); // month out of minimum logical limit
 
         // valid date
-        assertTrue(TaskDate.isValidDate("10-10"));
-        assertTrue(TaskDate.isValidDate("14-08"));
+        assertTrue(TaskDate.isValidDate("01-07"));
+        assertTrue(TaskDate.isValidDate("31-07"));
+        assertTrue(TaskDate.isValidDate("23-01"));
+        assertTrue(TaskDate.isValidDate("23-12"));
     }
 }

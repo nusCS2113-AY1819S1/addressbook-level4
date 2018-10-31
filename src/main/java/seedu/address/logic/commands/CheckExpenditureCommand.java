@@ -1,3 +1,4 @@
+//@@author feijunzi
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
@@ -10,25 +11,23 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.expenditureinfo.Expenditure;
 
-
-
-
 /**
  * Lists all persons in the address book to the user.
  */
 public class CheckExpenditureCommand extends Command {
 
     public static final String COMMAND_WORD = "ET_check";
-    public static final String COMMAND_ALIAS = "c";
+    //public static final String COMMAND_ALIAS = "c";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Check expenditures in a specific period\n"
-            + "Parameters: Date1 ( must be a positive number)"
-            + " Date2 (must larger than previous number)\n"
+            + "Parameters: "
+            + PREFIX_START + "DATE1 "
+            + PREFIX_END + "DATE2 (must be larger than DATE1)\n"
             + "Examples: " + COMMAND_WORD + " "
             + PREFIX_START + "27-09-2018 "
             + PREFIX_END + "09-10-2018 ";
 
-    public static final String MESSAGE_SUCCESS = "Total money in this period %f";
+    public static final String MESSAGE_SUCCESS = "Total amount spent in this period: %f";
 
     private final String date1;
     private final String date2;
@@ -69,13 +68,11 @@ public class CheckExpenditureCommand extends Command {
 
             if ((year1 < year) && (year2 > year)) {
                 total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
-            }
-            else if (((year1 == year) && (year2 == year)) || ((year1 == year) && (year2 > year))
+            } else if (((year1 == year) && (year2 == year)) || ((year1 == year) && (year2 > year))
                         || ((year1 < year) && (year2 == year))) {
                 if ((month1 < month) && (month2 > month)) {
                     total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
-                }
-                else if (((month1 == month) || (month2 == month)) && ((day1 <= day) && (day2 >= day))) {
+                } else if (((month1 == month) || (month2 == month)) && ((day1 <= day) && (day2 >= day))) {
                     total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
                 }
             }
