@@ -17,7 +17,7 @@ public class DeleteCandidateCommandParser implements Parser<DeleteCandidateComma
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCandidateCommand
-     * and returns an DeleteCandidateCommand object for execution.
+     * and returns a DeleteCandidateCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCandidateCommand parse(String args) throws ParseException {

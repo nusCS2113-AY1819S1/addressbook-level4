@@ -25,7 +25,6 @@ import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
 import seedu.recruit.model.joboffer.JobOffer;
 import seedu.recruit.model.joboffer.UniqueJobList;
-import seedu.recruit.ui.MainWindow;
 
 /**
  * Edits the details of an existing company in the company book.
@@ -70,9 +69,7 @@ public class EditCompanyCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        if (!MainWindow.getDisplayedBook().equals("companyBook")) {
-            EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
-        }
+        EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
 
         List<Company> lastShownList = model.getFilteredCompanyList();
 

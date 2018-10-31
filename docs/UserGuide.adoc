@@ -152,9 +152,9 @@ Examples:
 *	`c/Subway j/Cashier g/M xr/20-30 h/O levels s/1200`
 *	`c/KFC j/Cook g/F xr/20-30 h/O levels s/1400`
 
-// end::add[]
 
-=== Editing a candidate / company / job : `edit`
+// end::add[]
+=== Editing a candidate / company / job : `editc` `editC` `editj`
 
 ==== Edits attributes of the candidate at the specified index `INDEX`
 Format: `editc <INDEX>`
@@ -178,7 +178,7 @@ The index must be an index number shown in the displayed company list.
 
 Example:
 
-*   `editC 1 n/KFC p/62226111` +
+*   `editC 1 c/KFC p/62226111` +
 (Edits the name and phone number of the company with index 1 to be KFC and 62226111
 
 ==== Edits details of a job offer
@@ -189,7 +189,7 @@ This index must be an index number shown in the displayed job list.
 
 Examples:
 
-*	`editj 1 x/20-30` +
+*	`editj 1 xr/20-30` +
 (Edits the `MIN_AGE-MAX_AGE` attribute of the 1st job offer to be of 20 to 30 years of age)
 
 // tag::delete[]
@@ -350,11 +350,11 @@ Examples:
 ==== Exits from the filter interface and system proceeds to ask for next command
 Format: `cancel`
 
-=== Sorting candidates / company / job : `sort`
+=== Sorting candidates / company / job : `sortc` `sortC`
 
 ==== Sorting candidates based on different fields
 Format: `sortc <tag>` +
-Supported tags: `n/`, `x/`, `e/`, `j/`, `h/`, `s/`
+Supported tags: `n/`, `x/`, `e/`, `j/`, `h/`, `s/`, `r/`
 
 *   Only one tag/field is included when using the sort command
 *   There must be one tag/field included
@@ -363,8 +363,39 @@ Examples:
 
 *   `sortc n/` +
 (Sorts all candidates lexicographically by their name)
-*   `sortc s/` +
-(Sorts all candidates by their salary)
+*   `sortc r/` +
+(Sorts all candidates in reverse)
+
+==== Sorting companies based on different fields
+Format: `sortC <tag>` +
+Supported tags: `c/`, `e/`, `r/`
+
+*   Only one tag/field is included when using the sort command
+*   There must be one tag/field included
+
+Examples:
+
+*   `sortC c/` +
+(Sorts all companies lexicographically by their company's name)
+*   `sortC r/` +
+(Sort all companies in reverse)
+
+=== Blacklisting candidates : `blacklist` `blacklist rm`
+Format: `blacklist` `<INDEX>`
+
+Blacklists the candidate with the specified `INDEX`.
+The index must be an index number shown in the displayed candidates list
+
+[NOTE]
+Blacklisting candidates will prevent them from being edited.
+Candidates can be unblacklisted by using `blacklist rm`.
+
+Examples:
+
+*   `blacklist 1` +
+(Blacklists first candidate in the list)
+*   `blacklist rm 1` +
+(Unblacklists first candidate in the list)
 
 === Shortlisting candidates for a job offer : `shortlist`
 
@@ -520,7 +551,8 @@ _{explain how the user can enable/disable data encryption}_
 |	*Filter* | `filter <tag> [h/highest education level] [j/job] [s/expected salary] [x/age]` +
 
             e.g. `filter h/O LEVEL`
-|   *Sort* | `sort`
+|   *Sort* | `sortc` or `sortC`
+|   *Blacklist* | `blacklist`
 |   *Shortlist Candidate* | `shortlist`
 |   *Email* | `email`
 |   *Cancel* | `cancel`
