@@ -64,7 +64,7 @@ public class DeleteUserCommand extends Command {
 
         String currentUserName = Context.getInstance().getCurrentUser().getUsername();
         if (userNameToDelete.equals(currentUserName)) {
-            EventsCenter.getInstance().post(new UserLoginEvent("", false));
+            EventsCenter.getInstance().post(new UserLoginEvent("", false, false));
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, userNameToDelete));
     }

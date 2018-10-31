@@ -54,10 +54,10 @@ public class LoginCommand extends Command {
         }
         Context.getInstance().setCurrentUser(exist);
         if (exist != null) {
-            EventsCenter.getInstance().post(new UserLoginEvent(userName, exist.isAdmin()));
+            EventsCenter.getInstance().post(new UserLoginEvent(userName, exist.isAdmin(), exist.isBlock()));
             return new CommandResult(String.format(MESSAGE_SUCCESS, userName));
         } else {
-            EventsCenter.getInstance().post(new UserLoginEvent("", false));
+            EventsCenter.getInstance().post(new UserLoginEvent("", false, false));
             throw new CommandException(String.format(MESSAGE_FAIL, userName));
         }
     }

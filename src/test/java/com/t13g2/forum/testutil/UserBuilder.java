@@ -74,7 +74,7 @@ public class UserBuilder {
     /**
      * Sets the {@code email} of the {@code User} that we are building.
      */
-    public UserBuilder withContent(String email) {
+    public UserBuilder withEmail(String email) {
         this.email = email;
         return this;
     }
@@ -90,9 +90,4 @@ public class UserBuilder {
     public User build() {
         return new User(username, password, isAdmin, isBlock, email, phone);
     }
-
-    public User buildUser(boolean isAdmin, boolean isBlock) {
-        return new User("john", "123", isAdmin, isBlock, "john@test.com", "87654321");
-    }
-
 }

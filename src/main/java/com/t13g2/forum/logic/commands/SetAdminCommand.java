@@ -29,8 +29,9 @@ public class SetAdminCommand extends Command {
         + PREFIX_ADMIN_SET + "true  ";
 
     public static final String MESSAGE_SUCCESS = "%1$s now is %2$s.";
-    public static final String MESSAGE_INVALID_USER = "This user does not exist.";
-    public static final String MESSAGE_DUPLICATE_SET = "This user is already an admin.";
+    public static final String MESSAGE_FAILED = "You cannot set/revert yourself.";
+    public static final String MESSAGE_INVALID_USER = "The user \"%1$s\" does not exist.";
+    public static final String MESSAGE_DUPLICATE_SET = "The user \"%1$s\" is already an admin.";
     public static final String MESSAGE_DUPLICATE_REVERT = "%1$s is not an admin, unable to revert.";
 
     private final String userNametoSetAdmin;
@@ -62,24 +63,28 @@ public class SetAdminCommand extends Command {
             throw new CommandException(User.MESSAGE_NOT_LOGIN);
         }
 
+        if (Context.getInstance().getCurrentUser().getUsername().equals(userNametoSetAdmin)) {
+            return new CommandResult(MESSAGE_FAILED);
+        }
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             userToSet = unitOfWork.getUserRepository().getUserByUsername(userNametoSetAdmin);
             if (setAdmin && userToSet.isAdmin()) {
-                throw new CommandException(MESSAGE_DUPLICATE_SET);
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_SET, userNametoSetAdmin));
             } else if (!setAdmin && !userToSet.isAdmin()) {
-                throw new CommandException(String.format(MESSAGE_DUPLICATE_REVERT, userToSet.getUsername()));
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_REVERT, userNametoSetAdmin));
             } else {
                 userToSet.setAdmin(!userToSet.isAdmin());
                 unitOfWork.getUserRepository().updateUser(userToSet);
                 unitOfWork.commit();
             }
+
             if (!setAdmin) {
                 isAdmin = "a user";
             }
         } catch (CommandException e) {
             throw e;
         } catch (EntityDoesNotExistException e) {
-            throw new CommandException(MESSAGE_INVALID_USER);
+            throw new CommandException(String.format(MESSAGE_INVALID_USER, userNametoSetAdmin));
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import com.t13g2.forum.logic.CommandHistory;
+import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.Context;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.ModelManager;
@@ -15,8 +16,10 @@ import com.t13g2.forum.model.forum.Announcement;
 import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.testutil.AnnouncementBuilder;
 import com.t13g2.forum.testutil.TypicalPersons;
+import com.t13g2.forum.testutil.TypicalUsers;
 import com.t13g2.forum.testutil.UserBuilder;
 
+//@@author xllx1
 /**
  * integration test for AnnounceCommand.
  */
@@ -37,6 +40,38 @@ public class AnnounceCommandTest {
     }
 
     @Test
+    public void execute_userNotLogin_announceFailed() throws Exception {
+        //set the current logged in user as null.
+        Context.getInstance().setCurrentUser(null);
+
+        Announcement validAnnouncement = new AnnouncementBuilder().build();
+        AnnounceCommand announceCommand = new AnnounceCommand(validAnnouncement);
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(User.MESSAGE_NOT_LOGIN);
+
+        CommandResult commandResult = announceCommand.execute(model, commandHistory);
+        assertEquals(User.MESSAGE_NOT_LOGIN, commandResult.feedbackToUser);
+    }
+
+    @Test
+    public void execute_userLoggedIn_announceFailed() throws Exception {
+        //set the current logged in user as a user.
+        User loginUser = TypicalUsers.JANEDOE;
+        Context.getInstance().setCurrentUser(loginUser);
+
+        Announcement validAnnouncement = new AnnouncementBuilder().build();
+        AnnounceCommand announceCommand = new AnnounceCommand(validAnnouncement);
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(User.MESSAGE_NOT_ADMIN);
+
+        CommandResult commandResult = announceCommand.execute(model, commandHistory);
+        assertEquals(User.MESSAGE_NOT_ADMIN, commandResult.feedbackToUser);
+    }
+
+
+    @Test
     public void execute_announcementAccepted_announceSuccessful() throws Exception {
         //set the current logged in user as an admin.
         User loginUser = new UserBuilder().build();
@@ -49,28 +84,5 @@ public class AnnounceCommandTest {
         assertEquals(String.format(AnnounceCommand.MESSAGE_SUCCESS, validAnnouncement),
             commandResult.feedbackToUser);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
-    }
-
-    @Test
-    public void userLoggedIn() {
-        //set the current logged in user as a user.
-        User loginUser = new UserBuilder().buildUser(false, false);
-        Context.getInstance().setCurrentUser(loginUser);
-
-        Announcement validAnnouncement = new AnnouncementBuilder().build();
-
-        CommandTestUtil.assertCommandFailure(new AnnounceCommand(validAnnouncement), model, commandHistory,
-            User.MESSAGE_NOT_ADMIN);
-    }
-
-    @Test
-    public void notLoggedIn() {
-        //set the current logged in user as null.
-        Context.getInstance().setCurrentUser(null);
-
-        Announcement validAnnouncement = new AnnouncementBuilder().build();
-
-        CommandTestUtil.assertCommandFailure(new AnnounceCommand(validAnnouncement), model, commandHistory,
-            User.MESSAGE_NOT_LOGIN);
     }
 }
