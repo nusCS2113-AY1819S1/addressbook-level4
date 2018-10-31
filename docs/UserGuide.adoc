@@ -212,6 +212,7 @@ Displays the details of the latest transaction.
 Format: `addreminder time/ <yyyy/MM/dd HH:mm:ss> message/<The reminder message>`
 
 Sets and stores a reminder. All reminders must have unique times.
+There must only be a single space between "dd" and "HH" in the command format.
 
 Examples:
 
@@ -235,7 +236,8 @@ Shows all reminders that are in the system.
 
 Format: `removereminder time/<yyyy/MM/dd HH:mm:ss>`
 
-Removes a reminder in the system.
+Removes a reminder in the system. There must only be a single
+space between "dd" and "HH" in the command format.
 
 Examples:
 * `removereminder time/ 2018/10/26 12:30:00`
