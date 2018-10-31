@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.StateHistoryList.STATE_ADDRESSBOOK;
 import static seedu.address.model.StateHistoryList.STATE_EVENTLIST;
-import static seedu.address.model.StateHistoryList.STATE_RESET;
 import static seedu.address.model.StateHistoryList.STATE_NONE;
+import static seedu.address.model.StateHistoryList.STATE_RESET;
 
 import java.util.function.Predicate;
 import java.util.logging.Logger;
