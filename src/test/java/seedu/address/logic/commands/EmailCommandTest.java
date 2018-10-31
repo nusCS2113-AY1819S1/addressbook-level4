@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.testutil.TypicalAddressBook.getGroupTypicalAddressBook;
 import static seedu.address.testutil.TypicalAddressBook.getMultipleTypicalAddressBook;
 import static seedu.address.testutil.TypicalAddressBook.getSingleTypicalAddressBook;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 
 import java.util.List;
 
@@ -48,6 +49,7 @@ public class EmailCommandTest {
     private Model modelSingle = new ModelManager(getSingleTypicalAddressBook(), new UserPrefs());
     private Model modelMultiple = new ModelManager(getMultipleTypicalAddressBook(), new UserPrefs());
     private Model modelGroup = new ModelManager(getGroupTypicalAddressBook(), new UserPrefs());
+    private Model modelEmptyGroup = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     private Index index;
     private List<Index> indexList;
@@ -179,6 +181,21 @@ public class EmailCommandTest {
         CommandResult commandResult = new EmailCommand(index, VALID_SUBJECT, VALID_MESSAGE, true)
                 .execute(modelGroup, commandHistory);
         assertEquals(String.format(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX), commandResult.feedbackToUser);
+    }
+
+    @Test
+    public void execute_sendEmailWithSmtpSendFailedException() throws Exception {
+        setValidLogin();
+        try {
+            index = ParserUtil.parseGroupIndex("g/1");
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EmailCommand.MESSAGE_USAGE), pe);
+        }
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(EmailCommand.setErrorMessageForSendFailedException(TEST_MESSAGE_CONTAINS_NO_RECIPIENT));
+        CommandResult commandResult = new EmailCommand(index, VALID_SUBJECT, VALID_MESSAGE, true)
+                .execute(modelEmptyGroup, commandHistory);
+        assertEquals(String.format(TEST_MESSAGE_CONTAINS_NO_RECIPIENT), commandResult.feedbackToUser);
     }
 
     @Test
