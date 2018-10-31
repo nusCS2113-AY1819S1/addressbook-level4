@@ -62,15 +62,21 @@ public class CustomSuggestionProvider {
         suggestionProvider.clearSuggestions();
     }
 
-    private static void updateSuggestions(Set<String> newSuggestions) {
-        suggestionProvider.addPossibleSuggestions(newSuggestions);
-    }
-
     public static SuggestionProvider<String> getSuggestions() {
         return suggestionProvider;
     }
 
-    public static void updateSuggestions(String userInput){
+    private static void updateSuggestions(Set<String> newSuggestions) {
+        suggestionProvider.addPossibleSuggestions(newSuggestions);
+    }
+
+    /**
+     * This method is responsible for deciding which collection of Strings is to be used as the reference collection
+     * for comparison to the input String by the user. It can autocomplete the command word or when a tag is expected
+     * of the user input.
+     * @param userInput is the current word/substring to be automatically completed
+     */
+    public static void updateSuggestions(String userInput) {
         String[] inputs = userInput.split(" ");
         clearSuggestions();
 
@@ -79,7 +85,7 @@ public class CustomSuggestionProvider {
                 updateSuggestions(SortCommand.CATEGORY_SET);
             } else if (SortCommand.CATEGORY_SET.contains(inputs[1])) {
                 updateSuggestions(SortCommand.ORDER_SET);
-            } else if (inputs.length > 2 && !inputs[2].isEmpty()){
+            } else if (inputs.length > 2 && !inputs[2].isEmpty()) {
                 updateSuggestions(emptySet);
             } else {
                 updateSuggestions(sortKeywordsSet);

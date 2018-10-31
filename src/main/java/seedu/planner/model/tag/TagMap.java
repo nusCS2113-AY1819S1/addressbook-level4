@@ -6,8 +6,8 @@ import seedu.planner.model.record.Record;
 import seedu.planner.model.record.UniqueRecordList;
 
 /**
- *  This object represents the in memory model of a Hashmap containing integers as values which can be retrieved with
- *  Strings as the key. It keeps track of the usage of each unique tag in the model.
+ *  This object represents the in memory model of a HashMap containing integers as values which can be retrieved with
+ *  Strings as the key. It keeps track of the number of usage of each unique tag in the model.
  *  It supports creation from scratch, addition, deletion, updating and finding the size of the Hashmap.
  */
 public class TagMap {
@@ -17,7 +17,7 @@ public class TagMap {
     public TagMap(){
     }
 
-    public int size(){
+    public int size() {
         return tagMap.size();
     }
 
@@ -27,7 +27,7 @@ public class TagMap {
 
     /**
      * Adds the tags of a record to the tag map
-     * @param record
+     * @param record to be added to the tag map
      */
     public void addRecordToTagMap(Record record) {
         for (Tag tag : record.getTags()) {
@@ -41,7 +41,7 @@ public class TagMap {
 
     /**
      * Removes the tags of a record from the tag map
-     * @param record
+     * @param record to be removed from the tag map
      */
     public void removeRecordFromTagMap(Record record) {
         for (Tag tag : record.getTags()) {
@@ -57,19 +57,19 @@ public class TagMap {
     /**
      * Updates the tags of a target record by removing the previous record's tags
      * and adding the tags of the new record
-     * @param initialRecord
-     * @param editedRecord
+     * @param initialRecord holds the record to be deleted
+     * @param editedRecord holds the record to replace the deleted record
      */
     public void updateRecordInTagMap(Record initialRecord, Record editedRecord) {
         removeRecordFromTagMap(initialRecord);
         addRecordToTagMap(editedRecord);
     }
 
-    public void setTagMap(HashMap<String, Integer> tagMap){
+    public void setTagMap(HashMap<String, Integer> tagMap) {
         this.tagMap = tagMap;
     }
 
-    public HashMap<String, Integer> getAsReadOnlyTagMap(){
+    public HashMap<String, Integer> getAsReadOnlyTagMap() {
         return this.tagMap;
     }
 

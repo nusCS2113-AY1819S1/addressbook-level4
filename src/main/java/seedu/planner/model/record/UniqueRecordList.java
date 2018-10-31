@@ -14,7 +14,6 @@ import seedu.planner.logic.commands.SortCommand;
 import seedu.planner.model.record.exceptions.DuplicateRecordException;
 import seedu.planner.model.record.exceptions.RecordNotFoundException;
 import seedu.planner.model.tag.TagMap;
-import seedu.planner.ui.CustomSuggestionProvider;
 
 /**
  * A list of records that enforces uniqueness between its elements and does not allow nulls.

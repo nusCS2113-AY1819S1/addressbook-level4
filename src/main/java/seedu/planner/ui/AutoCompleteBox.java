@@ -16,8 +16,8 @@ public class AutoCompleteBox extends UiPart<Region> {
     public AutoCompleteBox(TextField commandTextField) {
         super(FXML);
         CustomSuggestionProvider suggestionProvider = new CustomSuggestionProvider();
-        new NewAutoCompletionBinding<>(commandTextField, suggestionProvider.getSuggestions()).
-                setVisibleRowCount(MAX_ROWS);
+        new NewAutoCompletionBinding<>(commandTextField, suggestionProvider.getSuggestions())
+                .setVisibleRowCount(MAX_ROWS);
     }
 
 }

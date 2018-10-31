@@ -35,29 +35,37 @@ public class NewAutoCompletionBinding<T> {
     private final StringConverter<T> converter;
 
     /**
-     * String converter to be used to convert suggestions to strings.
+     * This listener is responsible for checking the position of the caret in the TextField
+     * and obtaining the most recently typed String of characters to allow updating of the
+     * list of suggestions according to the most recently typed word adds the new suggested
+     * text to the TextField.
      */
-    private static <T> StringConverter<T> defaultStringConverter() {
-        return new StringConverter<T>() {
-            @Override
-            public String toString(T t) {
-                return t == null ? null : t.toString();
-            }
+    private final ChangeListener<Number> caretChangeListener = (obs, oldNumber, newNumber) -> {
+        String text = getCompletionTarget().getText().substring(0, newNumber.intValue());
+        int index;
+        CustomSuggestionProvider.updateSuggestions(text);
+        for (index = text.length() - 1; index >= 0 && !Character.isWhitespace(text.charAt(index)); index--);
+        if (index > 0) {
+            oldText = text.substring(0, index) + " ";
+        } else {
+            oldText = "";
+        }
 
-            @SuppressWarnings("unchecked")
-            @Override
-            public T fromString(String string) {
-                return (T) string;
-            }
-        };
-    }
+        String newText = text.substring(index + 1);
+        if (getCompletionTarget().isFocused()) {
+            setUserInput(newText); // updates the input text to new user input
+        }
+    };
 
-    public NewAutoCompletionBinding(TextField textField,
-                                    Callback<AutoCompletionBinding.ISuggestionRequest,
-                                            Collection<T>> suggestionProvider) {
-
-        this(textField, suggestionProvider, defaultStringConverter());
-    }
+    /**
+     * This listener checks if the commandBox is currently in focus and hides the autocomplete
+     * popup if not.
+     */
+    private final ChangeListener<Boolean> focusChangedListener = (obs, oldFocused, newFocused) -> {
+        if (newFocused == false) {
+            hidePopup();
+        }
+    };
 
     /**
      * Creates a new NewAutoCompletionBinding
@@ -66,10 +74,11 @@ public class NewAutoCompletionBinding<T> {
      * @param suggestionProvider The strategy to retrieve suggestions
      * @param converter The converter to be used to convert suggestions to strings
      */
+
     protected NewAutoCompletionBinding(Node completionTarget,
                                        Callback<AutoCompletionBinding.ISuggestionRequest,
                                                Collection<T>> suggestionProvider,
-                                       StringConverter<T> converter){
+                                       StringConverter<T> converter) {
 
         this.completionTarget = completionTarget;
         this.suggestionProvider = suggestionProvider;
@@ -91,11 +100,36 @@ public class NewAutoCompletionBinding<T> {
         getCompletionTarget().focusedProperty().addListener(focusChangedListener);
     }
 
+    public NewAutoCompletionBinding(TextField textField,
+                                    Callback<AutoCompletionBinding.ISuggestionRequest,
+                                            Collection<T>> suggestionProvider) {
+
+        this(textField, suggestionProvider, defaultStringConverter());
+    }
+
+    /**
+     * String converter to be used to convert suggestions to strings.
+     */
+    private static <T> StringConverter<T> defaultStringConverter() {
+        return new StringConverter<T>() {
+            @Override
+            public String toString(T t) {
+                return t == null ? null : t.toString();
+            }
+
+            @SuppressWarnings("unchecked")
+            @Override
+            public T fromString(String string) {
+                return (T) string;
+            }
+        };
+    }
+
     /**
      * Specifies the number of suggested strings that should appear under the Textfield
      * @param value
      */
-    public final void setVisibleRowCount(int value) {
+    public void setVisibleRowCount(int value) {
         autoCompletionPopup.setVisibleRowCount(value);
     }
 
@@ -112,8 +146,8 @@ public class NewAutoCompletionBinding<T> {
      * Set the current text the user has entered
      * @param userText
      */
-    public final void setUserInput(String userText){
-        if(!isIgnoreInputChanges()){
+    public final void setUserInput(String userText) {
+        if (!isIgnoreInputChanges()) {
             onUserInputChanged(userText);
         }
     }
@@ -147,7 +181,7 @@ public class NewAutoCompletionBinding<T> {
     /**
      * Show the auto completion popup
      */
-    private void showPopup(){
+    private void showPopup() {
         autoCompletionPopup.show(completionTarget);
         selectFirstSuggestion(autoCompletionPopup);
     }
@@ -155,7 +189,9 @@ public class NewAutoCompletionBinding<T> {
     /**
      * Hide the auto completion targets
      */
-    private void hidePopup(){ autoCompletionPopup.hide(); }
+    private void hidePopup() {
+        autoCompletionPopup.hide();
+    }
 
     /**
      * Selects the first suggestion (if any), so the user can choose it
@@ -164,9 +200,9 @@ public class NewAutoCompletionBinding<T> {
     private void selectFirstSuggestion(AutoCompletePopup<?> autoCompletionPopup) {
         Skin<?> skin = autoCompletionPopup.getSkin();
         if (skin instanceof AutoCompletePopupSkin) {
-            AutoCompletePopupSkin<?> AutoCompleteSkin = (AutoCompletePopupSkin<?>) skin;
-            ListView<?> list = (ListView<?>) AutoCompleteSkin.getNode();
-            if (list.getItems() != null && !list.getItems().isEmpty()){
+            AutoCompletePopupSkin<?> autoCompleteSkin = (AutoCompletePopupSkin<?>) skin;
+            ListView<?> list = (ListView<?>) autoCompleteSkin.getNode();
+            if (list.getItems() != null && !list.getItems().isEmpty()) {
                 list.getSelectionModel().select(0);
             }
         }
@@ -176,9 +212,9 @@ public class NewAutoCompletionBinding<T> {
      * Occurs when the user text has changed and the suggestions require an update
      * @param userText
      */
-    private final void onUserInputChanged(final String userText) {
+    private void onUserInputChanged(final String userText) {
         synchronized (suggestionsTaskLock) {
-            if(suggestionsTask != null && suggestionsTask.isRunning()) {
+            if (suggestionsTask != null && suggestionsTask.isRunning()) {
                 // cancel the current running task
                 suggestionsTask.cancel();
             }
@@ -192,14 +228,20 @@ public class NewAutoCompletionBinding<T> {
      * Boolean that specifies if the user's changes to the input can be ignored.
      * @return
      */
-    private boolean isIgnoreInputChanges(){ return ignoreInputChanges; }
+    private boolean isIgnoreInputChanges() {
+        return ignoreInputChanges;
+    }
 
     /**
      * If IgnoreInputChanges is set to true, all changes to the user input are
      * ignored. This is used to avoid self triggering while auto completing.
      * @param state
      */
-    private void setIgnoreInputChanges(boolean state){ ignoreInputChanges = state; }
+    private void setIgnoreInputChanges(boolean state) {
+        ignoreInputChanges = state;
+    }
+
+
 
     /**
      * This task is responsible to fetch suggestions asynchronous
@@ -208,18 +250,18 @@ public class NewAutoCompletionBinding<T> {
     private class FetchSuggestionsTask extends Task<Void> implements AutoCompletionBinding.ISuggestionRequest {
         private final String userText;
 
-        public FetchSuggestionsTask(String userText){
+        public FetchSuggestionsTask(String userText) {
             this.userText = userText;
         }
 
         @Override
         protected Void call() {
             Callback<AutoCompletionBinding.ISuggestionRequest, Collection<T>> provider = suggestionProvider;
-            if(provider != null) {
+            if (provider != null) {
                 final Collection<T> fetchedSuggestions = provider.call(this);
-                if(!isCancelled()) {
+                if (!isCancelled()) {
                     Platform.runLater(() -> {
-                        if(fetchedSuggestions != null && !fetchedSuggestions.isEmpty()) {
+                        if (fetchedSuggestions != null && !fetchedSuggestions.isEmpty()) {
                             autoCompletionPopup.getSuggestions().setAll(fetchedSuggestions);
                             showPopup();
                         } else {
@@ -239,38 +281,5 @@ public class NewAutoCompletionBinding<T> {
             return userText;
         }
     }
-
-    /**
-     * This listener is responsible for checking the position of the caret in the TextField
-     * and obtaining the most recently typed String of characters to allow updating of the
-     * list of suggestions according to the most recently typed word adds the new suggested
-     * text to the TextField.
-     */
-    private final ChangeListener<Number> caretChangeListener = (obs, oldNumber, newNumber) -> {
-        String text = getCompletionTarget().getText().substring(0, newNumber.intValue());
-        int index;
-        CustomSuggestionProvider.updateSuggestions(text);
-        for (index = text.length() - 1; index >= 0 && !Character.isWhitespace(text.charAt(index)); index--);
-        if (index > 0) {
-            oldText = text.substring(0, index) + " ";
-        } else {
-            oldText = "";
-        }
-
-        String newText = text.substring(index + 1);
-        if (getCompletionTarget().isFocused()) {
-            setUserInput(newText); // updates the input text to new user input
-        }
-    };
-
-    /**
-     * This listener checks if the commandBox is currently in focus and hides the autocomplete
-     * popup if not.
-     */
-    private final ChangeListener<Boolean> focusChangedListener = (obs, oldFocused, newFocused) -> {
-        if (newFocused == false) {
-            hidePopup();
-        }
-    };
 
 }
