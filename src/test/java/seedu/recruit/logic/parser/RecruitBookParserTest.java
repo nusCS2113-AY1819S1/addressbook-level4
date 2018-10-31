@@ -97,7 +97,7 @@ public class RecruitBookParserTest {
         FindCandidateCommand command = (FindCandidateCommand) parser.parseCommand(
                 FindCandidateCommand.COMMAND_WORD + " " + keywords, state, emailUtil);
         assertEquals(new FindCandidateCommand(
-                new CandidateContainsKeywordsPredicateBuilder(keywords).getCandidatePredicate()), command);
+                new CandidateContainsKeywordsPredicateBuilder(" " + keywords).getCandidatePredicate()), command);
     }
 
     @Test

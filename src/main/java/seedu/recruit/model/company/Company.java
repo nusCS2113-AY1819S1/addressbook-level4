@@ -1,5 +1,6 @@
 package seedu.recruit.model.company;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.recruit.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -47,11 +48,22 @@ public class Company {
         this.jobOffers = jobOffers;
     }
 
+    public Company (Company company) {
+        requireNonNull(company);
+        this.companyName = new CompanyName(company.getCompanyName().value);
+        this.address = new Address(company.getAddress().value);
+        this.email = new Email(company.getEmail().value);
+        this.phone = new Phone(company.getPhone().value);
+        this.jobOffers = new UniqueJobList();
+        this.jobOffers.setJobOffers(company.getUniqueJobList());
+    }
     public CompanyName getCompanyName() {
-        return companyName; }
+        return companyName;
+    }
 
     public Address getAddress() {
-        return address; }
+        return address;
+    }
 
     public Email getEmail() {
         return email;

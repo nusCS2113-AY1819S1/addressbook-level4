@@ -54,10 +54,12 @@ public class Candidate {
     }
 
     public Name getName() {
-        return name; }
+        return name;
+    }
 
     public Gender getGender() {
-        return gender; }
+        return gender;
+    }
 
     public Age getAge() {
         return age;

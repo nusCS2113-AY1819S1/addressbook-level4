@@ -169,6 +169,7 @@ public class DeleteCandidateCommandTest {
         DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(getIndexSet(INDEX_FIRST));
         Model expectedModel = new ModelManager(model.getCandidateBook(), new CompanyBook(), new UserPrefs());
 
+
         showPersonAtIndex(model, INDEX_SECOND);
         Candidate candidateToDelete = model.getFilteredCandidateList().get(INDEX_FIRST.getZeroBased());
         expectedModel.deleteCandidate(candidateToDelete);
