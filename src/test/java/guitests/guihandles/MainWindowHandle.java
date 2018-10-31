@@ -39,7 +39,7 @@ public class MainWindowHandle extends StageHandle {
     /**
      * Initializes the companyJobDetailsPanel when switching from Candidate Book to Company Book for
      * Company Book tests.
-     * @return companyJobDetailsPanel
+     * @return companyJobDetailsPanel after initialization
      */
     public CompanyJobDetailsPanelHandle initializeCompanyJobDetailsPanel() {
         companyJobDetailsPanel = new

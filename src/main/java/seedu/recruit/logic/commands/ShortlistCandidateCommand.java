@@ -25,24 +25,34 @@ public class ShortlistCandidateCommand extends Command {
             + "Enter cancel to cancel shortlist.\n";
 
     public static final String MESSAGE_SUCCESS = "Successfully shortlisted candidate: %1$s\n"
-            + "for job offer: %2$s, by company: %3$s.\n"
+            + "for job offer: %2$s, for company: %3$s.\n"
             + "Shortlisting Process Done. You may carry out other commands.\n";
+
+    public static final String MESSAGE_DUPLICATE_CANDIDATE_SHORTLISTED =
+            "This candidate is already shortlisted for job offer: %1$s, for company: %2$s.\n"
+            + "Please cancel the current shortlisting process.\n";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        if (ShortlistCandidateInitializationCommand.isShortlisting()) {
-            ShortlistCandidateInitializationCommand.isDoneShortlisting();
-        }
         Company selectedCompany = SelectCompanyCommand.getSelectedCompany();
         JobOffer selectedJobOffer = SelectJobCommand.getSelectedJobOffer();
         Candidate selectedCandidate = SelectCandidateCommand.getSelectedCandidate();
+
+        if (selectedJobOffer.getUniqueCandidateList().contains(selectedCandidate)) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_CANDIDATE_SHORTLISTED,
+                    selectedJobOffer.getJob().value, selectedCompany.getCompanyName().value)
+                    + MESSAGE_USAGE);
+        }
 
         model.shortListCandidateToJobOffer(selectedCandidate, selectedJobOffer);
         model.commitCompanyBook();
 
         LogicManager.setLogicState("primary");
         EventsCenter.getInstance().post(new ShowLastViewedBookRequestEvent());
+        if (ShortlistCandidateInitializationCommand.isShortlisting()) {
+            ShortlistCandidateInitializationCommand.isDoneShortlisting();
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, selectedCandidate.getName().fullName,
                 selectedJobOffer.getJob().value, selectedCompany.getCompanyName().value));
     }

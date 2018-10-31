@@ -13,7 +13,8 @@
                 <items>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="307.0">
                         <children>
-                            <ListView fx:id="companyView" prefHeight="398.0" prefWidth="223.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                            <ListView fx:id="companyView" layoutY="42.0" prefHeight="356.0" prefWidth="252.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0" />
+                     <Label layoutX="14.0" layoutY="14.0" text="Company Book:" />
                         </children>
                     </AnchorPane>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="442.0">

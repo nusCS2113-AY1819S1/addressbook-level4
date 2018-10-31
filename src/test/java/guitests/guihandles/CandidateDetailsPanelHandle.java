@@ -18,9 +18,39 @@ public class CandidateDetailsPanelHandle extends NodeHandle<ListView<Candidate>>
 
     private Optional<Candidate> lastRememberedSelectedPersonCard;
 
+    /**
+    private static final String NAME_FIELD_ID = "#name";
+    private static final String GENDER_FIELD_ID = "#gender";
+    private static final String AGE_FIELD_ID = "#age";
+    private static final String PHONE_FIELD_ID = "#phone";
+    private static final String EMAIL_FIELD_ID = "#email";
+    private static final String ADDRESS_FIELD_ID = "#address";
+    private static final String JOB_FIELD_ID = "#job";
+    private static final String EDUCATION_FIELD_ID = "#education";
+    private static final String SALARY_FIELD_ID = "#salary";
+
+    private Optional<Label> lastRememberedNameLabel;
+    private Optional<Label> lastRememberedGenderLabel;
+    private Optional<Label> lastRememberedAgeLabel;
+    private Optional<Label> lastRememberedPhoneLabel;
+    private Optional<Label> lastRememberedEmailLabel;
+    private Optional<Label> lastRememberedAddressLabel;
+
+     Label name = candidateDetailsPanel.getRoot().getChildNode(NAME_FIELD_ID);
+     Label gender = getChildNode(GENDER_FIELD_ID);
+     Label age = getChildNode(AGE_FIELD_ID);
+     Label phone = getChildNode(PHONE_FIELD_ID);
+     Label email = getChildNode(EMAIL_FIELD_ID);
+     Label address = getChildNode(ADDRESS_FIELD_ID);
+     Label job = getChildNode(JOB_FIELD_ID);
+     Label education = getChildNode(EDUCATION_FIELD_ID);
+     Label salary = getChildNode(SALARY_FIELD_ID);
+    */
+
     public CandidateDetailsPanelHandle(ListView<Candidate> candidateDetailsPanelNode) {
         super(candidateDetailsPanelNode);
     }
+
 
     /**
      * Returns a handle to the selected {@code CandidateCardHandle}.

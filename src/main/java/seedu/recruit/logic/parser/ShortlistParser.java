@@ -9,6 +9,7 @@ import seedu.recruit.logic.commands.SelectCandidateCommand;
 import seedu.recruit.logic.commands.SelectCompanyCommand;
 import seedu.recruit.logic.commands.SelectJobCommand;
 import seedu.recruit.logic.commands.ShortlistCandidateCommand;
+import seedu.recruit.logic.commands.ShortlistCandidateInitializationCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 
 /**
@@ -30,13 +31,17 @@ public class ShortlistParser {
             switch (commandWord) {
 
             case ShortlistCandidateCommand.COMMAND_WORD:
+                // prevents invalid arguments as confirm should not be accompanied with further arguments
+                if (!arguments.contentEquals("")) {
+                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND + ShortlistCandidateCommand.MESSAGE_USAGE);
+                }
                 return new ShortlistCandidateCommand();
 
             default:
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND + ShortlistCandidateCommand.MESSAGE_USAGE);
             }
 
-        } else if (state.nextCommand.equals(SelectCompanyCommand.COMMAND_LOGIC_STATE)) {
+        } else if (state.nextCommand.equals(SelectCompanyCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST)) {
             switch (commandWord) {
 
             case SelectCompanyCommand.COMMAND_WORD:
@@ -44,9 +49,12 @@ public class ShortlistParser {
                 return new SelectCompanyCommand(index);
 
             default:
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND
+                        + ShortlistCandidateInitializationCommand.MESSAGE_NEXT_STEP
+                        + SelectCompanyCommand.MESSAGE_USAGE);
             }
-        } else if (state.nextCommand.equals(SelectJobCommand.COMMAND_LOGIC_STATE)) {
+
+        } else if (state.nextCommand.equals(SelectJobCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST)) {
             switch (commandWord) {
 
             case SelectJobCommand.COMMAND_WORD:
@@ -54,7 +62,9 @@ public class ShortlistParser {
                 return new SelectJobCommand(index);
 
             default:
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND
+                        + SelectCompanyCommand.MESSAGE_SELECT_COMPANY_SUCCESS_NEXT_STEP
+                        + SelectJobCommand.MESSAGE_USAGE);
             }
 
         } else if (state.nextCommand.equals(SelectCandidateCommand.COMMAND_LOGIC_STATE)) {
@@ -65,7 +75,9 @@ public class ShortlistParser {
                 return new SelectCandidateCommand(index);
 
             default:
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND
+                        + SelectJobCommand.MESSAGE_SELECT_JOB_SUCCESS_NEXT_STEP_IN_SHORTLIST
+                        + SelectCandidateCommand.MESSAGE_USAGE);
             }
         } else {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

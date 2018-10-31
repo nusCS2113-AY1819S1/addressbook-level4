@@ -29,6 +29,10 @@ public class CancelCommand extends Command {
             this.cancelledCommand = ShortlistCandidateInitializationCommand.COMMAND_WORD;
             EventsCenter.getInstance().post(new ShowLastViewedBookRequestEvent());
         }
+        if (!DeleteShortlistedCandidateInitializationCommand.isDeleting()) {
+            DeleteShortlistedCandidateInitializationCommand.isDoneDeleting();
+            this.cancelledCommand = DeleteShortlistedCandidateInitializationCommand.COMMAND_WORD;
+        }
         LogicManager.setLogicState("primary");
         return new CommandResult(String.format(MESSAGE_SUCCESS, cancelledCommand));
     }

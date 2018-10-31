@@ -226,6 +226,13 @@ public interface Model {
      */
     void shortListCandidateToJobOffer(Candidate candidate, JobOffer jobOffer);
 
+    /**
+     * Deletes a candidate from the candidateList of the jobOffer
+     * @param jobOffer job offer to delete from
+     * @param candidate candidate to be deleted
+     */
+    void deleteShortListedCandidateFromJobOffer(Candidate candidate, JobOffer jobOffer);
+
     // ================================== Email Command functions ===================================== //
 
     /**

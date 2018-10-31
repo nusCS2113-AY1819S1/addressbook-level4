@@ -342,6 +342,12 @@ public class ModelManager extends ComponentManager implements Model {
         indicateCompanyBookChanged();
     };
 
+    @Override
+    public void deleteShortListedCandidateFromJobOffer(Candidate candidate, JobOffer jobOffer) {
+        jobOffer.deleteShortlistedCandidate(candidate);
+        indicateCompanyBookChanged();
+    }
+
     // ================================== Email Command functions ====================================== //
 
     public EmailUtil getEmailUtil() {
