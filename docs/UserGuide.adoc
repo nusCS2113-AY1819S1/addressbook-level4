@@ -95,6 +95,7 @@ Views help information of the various commands in RecruitBook.
 .GUI of Help on Menu Bar
 image::help.png[width="390"]
 
+// tag::switch[]
 === Switching Books : `switch`
 
 Toggles between Candidate Book and Company Book according to your viewing needs.
@@ -109,6 +110,7 @@ and does the switch to the other book for you when you enter the `switch` comman
 
 .GUI of Switch Book on Menu Bar
 image::switchBook.png[width="390"]
+// tag::switch[]
 
 // tag::add[]
 === Adding a candidate / company / job  : `addc` `addC` `addj`
@@ -242,9 +244,28 @@ Step 2. `deletej 5-4,6` +
 
 // end::delete[]
 
+// tag::deleteShortlist[]
 === Deleting a shortlisted candidate: `deleteShortlist`
 
+[IMPORTANT]
+Deleting a shortlisted candidate is a 4-stage process. To exit from this process, enter `cancel` command as explained in <<Exits from any intermediate command: `cancel`>>.
 
+Format: `deleteShortlist`
+
+. *Initialization*
+.. Type `deleteShortlist` and press kbd:[Enter] to initialize the delete process.
+. *Choose the company*
+.. Type `selectCompany` `<INDEX>` and press kbd:[Enter] to select the company.
+. *Choose the job offer*
+.. Type `selectJob` `<INDEX>` and press kbd:[Enter] to select the job offer.
+. *Choose the candidate to delete*
+.. Type `delete` `<INDEX>` and press kbd:[Enter] to select the shortlisted candidate to delete.
+
+[NOTE]
+Index must be an index number shown in the displayed list.
+// end::deleteShortlist[]
+
+// tag::list[]
 === Listing details of candidates / companies / jobs: `listc` `listC`
 
 ==== Shows a list of all candidates
@@ -279,23 +300,29 @@ image::companyPanel1.png[width="790", align="left"]
 image::companyPanel2.png[width="790", align="left"]
 .Selecting MOE to show the available job offers
 image::companyPanel3.png[width="790", align="left"]
+// end::list[]
 
+// tag::select[]
 === Selecting a candidate / company / job offer: `select` `selectCompany` `selectJob`
 
 ==== Selecting a candidate :
 Format: `select` `<INDEX>`
 
-. Selects the candidate(s) with the specified INDEX(s)
-This index must be an index number shown in the displayed candidate list.
+. Selects the candidate with the specified INDEX
+. This index must be an index number shown in the displayed candidate list.
 
 ==== Selecting a company :
 Format: `selectCompany` `<INDEX>`
 
+. Selects the company with the specified INDEX
+. This index must be an index number shown in the displayed company list.
 
 ==== Selecting a job offer :
 Format: `selectJob` `<INDEX>`
 
-
+. Selects the job offer with the specified INDEX
+. This index must be an index number shown in the displayed job offer list.
+// end::select[]
 
 === Locating candidates by search parameter : `find`
 ==== Finds names of candidates from RecruitBook based on the search parameter.
@@ -408,6 +435,7 @@ Examples:
 *   `blacklist rm 1` +
 (Unblacklists first candidate in the list)
 
+// tag::shortlist[]
 === Shortlisting candidates for a job offer : `shortlist`
 
 [IMPORTANT]
@@ -425,6 +453,10 @@ Format: `shortlist`
 .. Type `select` `<INDEX>` and press kbd:[Enter] to select the candidate to shortlist.
 . *Confirm the details*
 .. Type `confirm` and press kbd:[Enter] to confirm.
+
+[NOTE]
+Index must be an index number shown in the displayed list.
+// end::shortlist[]
 
 // tag::email[]
 === Sending emails : `email`
@@ -554,7 +586,9 @@ _{explain how the user can enable/disable data encryption}_
 |	*Delete* | `deletec <INDEX>` or `deletej <INDEX>` +
 
             e.g. `deletec 1 `, `deletej 5`
-|	*List* | `list [jobs /candidates]`
+|   *Delete Shortlisted Candidate* | `deleteShortlist`
+|	*List all Candidates* | `listc`
+|   *List all Companies and all Job Offers* | `listC`
 |   *Select Candidate* | `select` `<INDEX>`
 |   *Select Company* | `selectCompany` `<INDEX>`
 |   *Select Job Offer* | `selectJob` `<INDEX>`
