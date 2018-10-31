@@ -1,4 +1,6 @@
 language: java
+env:
+  - IS_TRAVIS="true"
 matrix:
   include:
     - jdk: oraclejdk9
