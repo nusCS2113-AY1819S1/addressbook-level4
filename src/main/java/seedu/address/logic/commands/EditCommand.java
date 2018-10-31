@@ -169,7 +169,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
 
-            return CollectionUtil.isAnyNonNull(name, phone, email,
+            return CollectionUtil.isAnyNonNull(name, phone, email, gender, nationality,
                     address, tags);
 
         }
