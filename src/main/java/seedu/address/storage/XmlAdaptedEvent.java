@@ -1,6 +1,5 @@
 package seedu.address.storage;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -15,6 +14,7 @@ import seedu.address.model.event.Attendees;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.EndTime;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Location;
 import seedu.address.model.event.StartTime;
@@ -132,11 +132,13 @@ public class XmlAdaptedEvent {
         final Description modelDescription = new Description(description);
 
         if (date == null) {
-            throw new IllegalValueException("Wrong date format");
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Description.class.getSimpleName()));
         }
-
-        final LocalDate modelDate = LocalDate.parse(date);
-
+        if (!EventDate.isValidDate(date)) {
+            throw new IllegalValueException(EventDate.MESSAGE_DATE_CONSTRAINTS);
+        }
+        final EventDate modelDate = new EventDate(date);
 
         if (startTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

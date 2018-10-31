@@ -10,7 +10,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.event.Attendees;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
@@ -58,11 +57,10 @@ public class RemoveCommand extends Command {
         Event event = lastShownEventList.get(indexEvent.getZeroBased());
 
         String personName = person.getName().toString();
-        Attendees attendeesList = event.getAttendees();
 
-        if (attendeesList.isSetEmpty()) {
+        if (event.isAttendeeEmpty()) {
             throw new CommandException(MESSAGE_ATTENDEE_EMPTY);
-        } else if (!attendeesList.hasName(personName)) {
+        } else if (!event.hasAttendee(personName)) {
             throw new CommandException(MESSAGE_ABSENT_PERSON);
         }
 

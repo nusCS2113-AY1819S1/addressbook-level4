@@ -102,7 +102,7 @@ public class EventTest {
     }
 
     @Test
-    public void addPersonToAttendee() {
+    public void addPersonToAttendee_validNameAdded_success() {
         Event eventToUpdate = new EventBuilder(EVENT_1).build();
         Event eventUpdated = new EventBuilder(EVENT_1).withAttendee(setOne).build();
 
@@ -113,7 +113,7 @@ public class EventTest {
     }
 
     @Test
-    public void removePersonFromAttendee() {
+    public void removePersonFromAttendee_validNameRemoved_success() {
         Event eventToUpdate = new EventBuilder(EVENT_1).withAttendee(setOne).build();
         Event eventUpdated = new EventBuilder(EVENT_1).build();
 
@@ -121,5 +121,30 @@ public class EventTest {
         Event event = eventToUpdate.removePersonFromAttendee(VALID_NAME_ALICE);
 
         assertEquals(event, eventUpdated);
+    }
+
+    @Test
+    public void hasAttendee_validName_success() {
+        Event event = new EventBuilder(EVENT_1).withAttendee(setOne).build();
+        assertTrue(event.hasAttendee("Alice Pauline"));
+
+    }
+
+    @Test
+    public void hasAttendee_invalidName_fail() {
+        Event event = new EventBuilder(EVENT_1).withAttendee(setOne).build();
+        assertFalse(event.hasAttendee("Bob Choo"));
+    }
+
+    @Test
+    public void isAttendeeEmpty_attendeeContainsNoName_success() {
+        Event event = new EventBuilder(EVENT_1).build();
+        assertTrue(event.isAttendeeEmpty());
+    }
+
+    @Test
+    public void isAttendeeEmpty_attendeeContainsNames_success() {
+        Event event = new EventBuilder(EVENT_1).withAttendee(setOne).build();
+        assertFalse(event.isAttendeeEmpty());
     }
 }
