@@ -65,8 +65,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 combineAllSamePrefixKeywordsList.addAll(Arrays.asList(singlePrefix.trim().split("\\s+")));
             }
             keywordMap.put(prefix, combineAllSamePrefixKeywordsList);
-        }
-        else {
+        } else {
             keywordMap.put(prefix, null);
         }
     }

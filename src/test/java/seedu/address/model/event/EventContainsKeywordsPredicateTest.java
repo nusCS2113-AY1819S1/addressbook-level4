@@ -76,7 +76,7 @@ public class EventContainsKeywordsPredicateTest {
         assertTrue(predicate.test(new EventBuilder().withName("Alice Bob").build()));
 
         // Mixed-case keywords one prefix
-        predicate = FindCommandTest.preparePredicate( "n/aLIce bOB");
+        predicate = FindCommandTest.preparePredicate("n/aLIce bOB");
         assertTrue(predicate.test(new EventBuilder().withName("Alice Bob").build()));
 
         // Keywords match phone and email, but does not match name, venue and dateTime with multiple prefixes

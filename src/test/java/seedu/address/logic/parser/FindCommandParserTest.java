@@ -45,5 +45,4 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, " k/Alice n/Bob EE/love TT/tag", expectedFindCommand);
 
     }
-
 }

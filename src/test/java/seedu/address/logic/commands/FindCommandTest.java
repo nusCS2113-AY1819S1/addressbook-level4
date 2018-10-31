@@ -42,13 +42,13 @@ import seedu.address.model.event.EventContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
+    private static final List<Prefix> PREFIXES = Arrays.asList(PREFIX_KEYWORD, PREFIX_NAME, PREFIX_CONTACT,
+            PREFIX_EMAIL, PREFIX_PHONE, PREFIX_VENUE, PREFIX_DATETIME, PREFIX_TAG);
+
     //Setup model and history
     private Model model = new ModelManager(getTypicalEventManager(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalEventManager(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
-
-    private static final List<Prefix> PREFIXES = Arrays.asList(PREFIX_KEYWORD, PREFIX_NAME, PREFIX_CONTACT,
-            PREFIX_EMAIL, PREFIX_PHONE, PREFIX_VENUE, PREFIX_DATETIME, PREFIX_TAG);
 
     @Test
     public void equals() {
@@ -106,7 +106,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywordPrefixes_multipleKeywordPrefixes_noEventFound() {
+    public void execute_zeroKeywordPrefix_multipleKeywordPrefixes_noEventFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 0);
         EventContainsKeywordsPredicate predicate = preparePredicate(" k/ t/Friends n/Art c/ d/");
 
@@ -117,7 +117,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywordPrefix_keywordsSamePrefix_oneEventFound() {
+    public void execute_zeroKeywordPrefix_keywordsSamePrefixes_oneEventFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1);
         EventContainsKeywordsPredicate predicate = preparePredicate(" c/ c/Daniel c/");
 
@@ -196,7 +196,7 @@ public class FindCommandTest {
 
         Map<Prefix, List<String> > keywordsMap = new HashMap<>();
         for (Prefix prefix : PREFIXES) {
-            MapPrefixAndKeywords(keywordsMap, prefix, argMultimap);
+            mapPrefixAndKeywords(keywordsMap, prefix, argMultimap);
         }
         return new EventContainsKeywordsPredicate(keywordsMap);
     }
@@ -207,16 +207,16 @@ public class FindCommandTest {
      * @param prefix prefix to map
      * @param argMultimap to check for prefix present
      */
-    public static void MapPrefixAndKeywords (Map<Prefix, List<String> > prefixKeywordMap, Prefix prefix,
-                                      ArgumentMultimap argMultimap) {
+    public static void mapPrefixAndKeywords(Map<Prefix, List<String> > prefixKeywordMap, Prefix prefix,
+                                            ArgumentMultimap argMultimap) {
         if (argMultimap.getValue(prefix).isPresent())  {
             List<String> combineAllSamePrefixKeywordsList = new ArrayList<>();
-            for(String singlePrefix : argMultimap.getAllValues(prefix)) {
+            for (String singlePrefix : argMultimap.getAllValues(prefix)) {
                 combineAllSamePrefixKeywordsList.addAll(Arrays.asList(singlePrefix.trim().split("\\s+")));
             }
             prefixKeywordMap.put(prefix, combineAllSamePrefixKeywordsList);
-        }
-        else
+        } else {
             prefixKeywordMap.put(prefix, null);
+        }
     }
 }
