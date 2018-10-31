@@ -28,9 +28,8 @@ public class SetAdminCommand extends Command {
         + PREFIX_ADMIN_SET + "true  ";
 
     public static final String MESSAGE_SUCCESS = "%1$s now is %2$s.";
-    public static final String MESSAGE_FAILED = "You cannot set/revert yourself.";
-    public static final String MESSAGE_INVALID_USER = "The user \"%1$s\" does not exist.";
-    public static final String MESSAGE_DUPLICATE_SET = "The user \"%1$s\" is already an admin.";
+    public static final String MESSAGE_INVALID_USER = "This user does not exist.";
+    public static final String MESSAGE_DUPLICATE_SET = "This user is already an admin.";
     public static final String MESSAGE_DUPLICATE_REVERT = "%1$s is not an admin, unable to revert.";
 
     private final String userNametoSetAdmin;
@@ -52,34 +51,32 @@ public class SetAdminCommand extends Command {
         User userToSet = null;
 
         // if user has not login or is not admin, then throw exception
-        if (!Context.getInstance().isLoggedIn()) {
-            throw new CommandException(User.MESSAGE_NOT_LOGIN);
-        } else if (!Context.getInstance().isCurrentUserAdmin()) {
-            throw new CommandException(User.MESSAGE_NOT_ADMIN);
+        try {
+            if (!Context.getInstance().isCurrentUserAdmin()) {
+                throw new CommandException(User.MESSAGE_NOT_ADMIN);
+            }
+        } catch (CommandException e) {
+            throw e;
         }
 
-        if (Context.getInstance().getCurrentUser().getUsername().equals(userNametoSetAdmin)) {
-            return new CommandResult(MESSAGE_FAILED);
-        }
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             userToSet = unitOfWork.getUserRepository().getUserByUsername(userNametoSetAdmin);
             if (setAdmin && userToSet.isAdmin()) {
-                throw new CommandException(String.format(MESSAGE_DUPLICATE_SET, userNametoSetAdmin));
+                throw new CommandException(MESSAGE_DUPLICATE_SET);
             } else if (!setAdmin && !userToSet.isAdmin()) {
-                throw new CommandException(String.format(MESSAGE_DUPLICATE_REVERT, userNametoSetAdmin));
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_REVERT, userToSet.getUsername()));
             } else {
                 userToSet.setAdmin(!userToSet.isAdmin());
                 unitOfWork.getUserRepository().updateUser(userToSet);
                 unitOfWork.commit();
             }
-
             if (!setAdmin) {
                 isAdmin = "a user";
             }
         } catch (CommandException e) {
             throw e;
         } catch (EntityDoesNotExistException e) {
-            throw new CommandException(String.format(MESSAGE_INVALID_USER, userNametoSetAdmin));
+            throw new CommandException(MESSAGE_INVALID_USER);
         } catch (Exception e) {
             e.printStackTrace();
         }

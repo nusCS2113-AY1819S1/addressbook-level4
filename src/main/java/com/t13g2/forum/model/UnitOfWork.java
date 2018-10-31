@@ -1,10 +1,10 @@
 //@@Meowzz95
 package com.t13g2.forum.model;
 
-import com.t13g2.forum.storage.forum.FileStorage;
 import com.t13g2.forum.storage.forum.ForumBookStorage;
 import com.t13g2.forum.storage.forum.IForumBookStorage;
 import com.t13g2.forum.storage.forum.IStorage;
+import com.t13g2.forum.storage.forum.JsonFileStorage;
 
 /**
  *
@@ -29,7 +29,7 @@ public class UnitOfWork implements IUnitOfWork, AutoCloseable {
     }
 
     public UnitOfWork() {
-        this(new FileStorage());
+        this(new JsonFileStorage());
     }
 
     public IAnnouncementRepository getAnnouncementRepository() {
