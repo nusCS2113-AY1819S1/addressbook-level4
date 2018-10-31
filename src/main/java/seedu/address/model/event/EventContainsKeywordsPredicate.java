@@ -158,7 +158,7 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
      * @return a boolean indicate matching
      */
     public boolean checkTagKeywordsMatchEventTag (List<String> keywords, Event event) {
-        if(keywords == null) {
+        if (keywords == null) {
             return true;
         }
 

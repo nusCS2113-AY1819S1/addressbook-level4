@@ -25,7 +25,7 @@ import seedu.address.model.event.EventContainsKeywordsPredicate;
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
-    private final List<Prefix> PREFIXES = Arrays.asList(PREFIX_KEYWORD, PREFIX_NAME, PREFIX_CONTACT,
+    private static final List<Prefix> PREFIXES = Arrays.asList(PREFIX_KEYWORD, PREFIX_NAME, PREFIX_CONTACT,
             PREFIX_EMAIL, PREFIX_PHONE, PREFIX_VENUE, PREFIX_DATETIME, PREFIX_TAG);
 
     /**
@@ -45,7 +45,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         Map<Prefix, List<String> > keywordsMap = new HashMap<>();
         for (Prefix prefix : PREFIXES) {
-            MapPrefixAndKeywords(keywordsMap, prefix, argMultimap);
+            mapPrefixAndKeywords(keywordsMap, prefix, argMultimap);
         }
         return new FindCommand(
                 new EventContainsKeywordsPredicate(keywordsMap));
@@ -57,17 +57,18 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @param prefix prefix to map
      * @param argMultimap to check for prefix present
      */
-    public void MapPrefixAndKeywords (Map<Prefix, List<String> > keywordMap, Prefix prefix,
-                                      ArgumentMultimap argMultimap) {
+    public void mapPrefixAndKeywords(Map<Prefix, List<String> > keywordMap, Prefix prefix,
+                                     ArgumentMultimap argMultimap) {
         if (argMultimap.getValue(prefix).isPresent())  {
             List<String> combineAllSamePrefixKeywordsList = new ArrayList<>();
-            for(String singlePrefix : argMultimap.getAllValues(prefix)) {
+            for (String singlePrefix : argMultimap.getAllValues(prefix)) {
                 combineAllSamePrefixKeywordsList.addAll(Arrays.asList(singlePrefix.trim().split("\\s+")));
             }
             keywordMap.put(prefix, combineAllSamePrefixKeywordsList);
         }
-        else
+        else {
             keywordMap.put(prefix, null);
+        }
     }
 
     /**

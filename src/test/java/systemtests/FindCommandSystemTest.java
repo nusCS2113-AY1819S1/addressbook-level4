@@ -25,7 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 
 public class FindCommandSystemTest extends EventManagerSystemTest {
-
+    //TODO: add case when find with multiple prefixes and unknown prefixes
     @Test
     public void find() {
         /* Case: find multiple events in event manager, command with leading spaces and trailing spaces
