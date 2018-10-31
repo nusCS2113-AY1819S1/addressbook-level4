@@ -14,9 +14,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.function.Predicate;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.LoginManager;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -29,6 +32,9 @@ import seedu.address.model.searchhistory.SearchHistoryManager;
  * Contains integration tests (interaction with the Model) for {@code LoginUserIdPasswordRoleCommand}.
  */
 public class LoginUserIdPasswordRoleCommandTest {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     private Model model = new ModelManager(getTypicalLoginBook(), getTypicalTaggedAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalLoginBook(),
             getTypicalTaggedAddressBook(), new UserPrefs());
@@ -84,10 +90,39 @@ public class LoginUserIdPasswordRoleCommandTest {
     }
 
     @Test
-    public void updateFilteredAccountList_nullLoginInputs_loginFailed() {
+    public void updateFilteredAccountList_emptyStringLoginInputs_loginFailed() {
         LoginUserIdPasswordRoleCommand command = updateLoginListBasedOnPredicates(" ", " ", " ");
         assertCommandSuccess(command, model, commandHistory, MESSAGE_LOGIN_LISTED_OVERVIEW, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredLoginDetailsList());
+        assertFalse(LoginManager.getIsLoginSuccessful());
+    }
+
+    @Test
+    public void updateFilteredAccountList_nullLoginInputs_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        LoginUserIdPasswordRoleCommand command = updateLoginListBasedOnPredicates(null,
+                null, null);
+    }
+
+    @Test
+    public void updateFilteredAccountList_nullLoginId_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        LoginUserIdPasswordRoleCommand command = updateLoginListBasedOnPredicates(null,
+                "zaq1xsw2cde3", "member");
+    }
+
+    @Test
+    public void updateFilteredAccountList_nullLoginPassword_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        LoginUserIdPasswordRoleCommand command = updateLoginListBasedOnPredicates("A1234561M",
+                null, "member");
+    }
+
+    @Test
+    public void updateFilteredAccountList_nullLoginRole_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        LoginUserIdPasswordRoleCommand command = updateLoginListBasedOnPredicates("A1234561M",
+                "zaq1xsw2cde3", null);
     }
 
     @Test
@@ -96,6 +131,7 @@ public class LoginUserIdPasswordRoleCommandTest {
                 "zaq1xsw2cde3", "member");
         assertCommandSuccess(command, model, commandHistory, MESSAGE_LOGIN_LISTED_OVERVIEW, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredLoginDetailsList());
+        assertFalse(LoginManager.getIsLoginSuccessful());
     }
 
     @Test
@@ -104,6 +140,7 @@ public class LoginUserIdPasswordRoleCommandTest {
                 " ", "member");
         assertCommandSuccess(command, model, commandHistory, MESSAGE_LOGIN_LISTED_OVERVIEW, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredLoginDetailsList());
+        assertFalse(LoginManager.getIsLoginSuccessful());
     }
 
     @Test
@@ -112,6 +149,7 @@ public class LoginUserIdPasswordRoleCommandTest {
                 "zaq1xsw2cde3", " ");
         assertCommandSuccess(command, model, commandHistory, MESSAGE_LOGIN_LISTED_OVERVIEW, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredLoginDetailsList());
+        assertFalse(LoginManager.getIsLoginSuccessful());
     }
 
     @Test
@@ -120,6 +158,16 @@ public class LoginUserIdPasswordRoleCommandTest {
                 "zaq1xsw2cde3", "member");
         assertCommandSuccess(command, model, commandHistory, MESSAGE_LOGIN_LISTED_OVERVIEW, expectedModel);
         assertEquals(Collections.singletonList(LOGINDETAIL_1), model.getFilteredLoginDetailsList());
+        assertTrue(LoginManager.getIsLoginSuccessful());
+    }
+
+    @Test
+    public void updateFilteredAccountList_correctLoginDetailsWhitespaces_loginSuccessful() {
+        LoginUserIdPasswordRoleCommand command = updateLoginListBasedOnPredicates("A1234561M   ",
+                "zaq1xsw2cde3   ", "member   ");
+        assertCommandSuccess(command, model, commandHistory, MESSAGE_LOGIN_LISTED_OVERVIEW, expectedModel);
+        assertEquals(Collections.singletonList(LOGINDETAIL_1), model.getFilteredLoginDetailsList());
+        assertTrue(LoginManager.getIsLoginSuccessful());
     }
 
     @Test
@@ -128,6 +176,7 @@ public class LoginUserIdPasswordRoleCommandTest {
                 "zaq1xsw2cde3", "member");
         assertCommandSuccess(command, model, commandHistory, MESSAGE_LOGIN_LISTED_OVERVIEW, expectedModel);
         assertNotEquals(Collections.singletonList(LOGINDETAIL_1), model.getFilteredLoginDetailsList());
+        assertFalse(LoginManager.getIsLoginSuccessful());
     }
 
     @Test
@@ -136,6 +185,7 @@ public class LoginUserIdPasswordRoleCommandTest {
                 "1qaz2wsx3edc", "member");
         assertCommandSuccess(command, model, commandHistory, MESSAGE_LOGIN_LISTED_OVERVIEW, expectedModel);
         assertNotEquals(Collections.singletonList(LOGINDETAIL_1), model.getFilteredLoginDetailsList());
+        assertFalse(LoginManager.getIsLoginSuccessful());
     }
 
     @Test
@@ -144,6 +194,7 @@ public class LoginUserIdPasswordRoleCommandTest {
                 "zaq1xsw2cde3", "janitor");
         assertCommandSuccess(command, model, commandHistory, MESSAGE_LOGIN_LISTED_OVERVIEW, expectedModel);
         assertNotEquals(Collections.singletonList(LOGINDETAIL_1), model.getFilteredLoginDetailsList());
+        assertFalse(LoginManager.getIsLoginSuccessful());
     }
 
     @Test
@@ -152,11 +203,13 @@ public class LoginUserIdPasswordRoleCommandTest {
                 "zaq1xsw2cde3", "member");
         assertCommandSuccess(firstCommand, model, commandHistory, MESSAGE_LOGIN_LISTED_OVERVIEW, expectedModel);
         assertNotEquals(Collections.singletonList(LOGINDETAIL_1), model.getFilteredLoginDetailsList());
+        assertFalse(LoginManager.getIsLoginSuccessful());
 
         LoginUserIdPasswordRoleCommand secondCommand = updateLoginListBasedOnPredicates("A1234560M",
                 "zaq1xsw2cde3", "member");
         assertCommandSuccess(secondCommand, model, commandHistory, MESSAGE_LOGIN_LISTED_OVERVIEW, expectedModel);
         assertNotEquals(Collections.singletonList(LOGINDETAIL_1), model.getFilteredLoginDetailsList());
+        assertFalse(LoginManager.getIsLoginSuccessful());
     }
 
     private Predicate getMostUpdatedIdPredicate(Predicate idPredicate) {

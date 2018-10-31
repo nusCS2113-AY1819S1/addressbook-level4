@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.model.login.UserRole.MESSAGE_USERROLE_CONSTRAINTS;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -69,19 +70,25 @@ public class LoginUserIdPasswordRoleCommandParser implements Parser<LoginCommand
      * @return a LoginUserIdPasswordRoleCommand object
      */
     public LoginUserIdPasswordRoleCommand setRoleReturnLoginCommandObject(
-            String[] keywords, List<String> keywordsList) {
+            String[] keywords, List<String> keywordsList) throws ParseException {
         switch(keywords[2]) {
         case "member":
             LoginManager.setIsMember(true);
+            LoginManager.setIsPresident(false);
+            LoginManager.setIsTreasurer(false);
             break;
         case "president":
             LoginManager.setIsPresident(true);
+            LoginManager.setIsMember(false);
+            LoginManager.setIsTreasurer(false);
             break;
         case "treasurer":
             LoginManager.setIsTreasurer(true);
+            LoginManager.setIsMember(false);
+            LoginManager.setIsPresident(false);
             break;
         default:
-            break;
+            throw new ParseException(MESSAGE_USERROLE_CONSTRAINTS);
         }
         return new LoginUserIdPasswordRoleCommand(new UserIdContainsKeywordsPredicate(keywordsList),
                 new UserPasswordContainsKeywordsPredicate(keywordsList),
