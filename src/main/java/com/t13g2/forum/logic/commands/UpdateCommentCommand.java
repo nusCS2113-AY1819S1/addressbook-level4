@@ -1,5 +1,6 @@
 package com.t13g2.forum.logic.commands;
 
+import static com.t13g2.forum.commons.core.Messages.MESSAGE_INVALID_COMMENT;
 import static com.t13g2.forum.commons.core.Messages.MESSAGE_INVALID_COMMENT_ID;
 import static com.t13g2.forum.commons.core.Messages.MESSAGE_NOT_COMMENT_OWNER;
 import static com.t13g2.forum.commons.core.Messages.MESSAGE_NOT_LOGIN;
@@ -30,13 +31,17 @@ public class UpdateCommentCommand extends Command {
             + PREFIX_COMMENT_ID + "123 "
             + PREFIX_COMMENT_CONTENT + "This is a new title";
 
-    private static int commentId;
+    public static final String MESSAGE_SUCCESS = "Comment content updated successfully! %1$s";
+    private static int commentIdToUpdate;
     private static String contentToUpdate;
+    private int currentModuleId;
+    private int currentThreadId;
+    private String currentModuleCode;
 
-    public UpdateCommentCommand(int commentId, String contentToUpdate) {
-        requireNonNull(commentId);
+    public UpdateCommentCommand(int commentIdToUpdate, String contentToUpdate) {
+        requireNonNull(commentIdToUpdate);
         requireNonNull(contentToUpdate);
-        this.commentId = commentId;
+        this.commentIdToUpdate = commentIdToUpdate;
         this.contentToUpdate = contentToUpdate;
     }
 
@@ -46,9 +51,14 @@ public class UpdateCommentCommand extends Command {
         if (!Context.getInstance().isLoggedIn()) {
             throw new CommandException(MESSAGE_NOT_LOGIN);
         }
-        String messageSuccess = "Updated comment " + commentId + " to a new title: %1$s";
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
-            Comment comment = unitOfWork.getCommentRepository().getComment(commentId);
+            currentThreadId = Context.getInstance().getCurrentThreadId();
+            currentModuleId = Context.getInstance().getCurrentModuleId();
+            currentModuleCode = unitOfWork.getModuleRepository().getModule(currentModuleId).getModuleCode();
+            Comment comment = unitOfWork.getCommentRepository().getComment(commentIdToUpdate);
+            if (currentThreadId != comment.getThreadId()) {
+                throw new CommandException(MESSAGE_INVALID_COMMENT);
+            }
             if (Context.getInstance().getCurrentUser().getId() == comment.getCreatedByUserId()
                     || Context.getInstance().isCurrentUserAdmin()) {
                 comment.setContent(contentToUpdate);
@@ -64,6 +74,11 @@ public class UpdateCommentCommand extends Command {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new CommandResult(String.format(messageSuccess, contentToUpdate));
+        String updateMessage = "\n\n"
+                + "Under Module Code: " + currentModuleCode + "\n"
+                + "Under Thread ID: " + currentThreadId + "\n"
+                + "Updated Comment ID: " + commentIdToUpdate + "\n"
+                + "Updated Comment Content: " + contentToUpdate + "\n";
+        return new CommandResult(String.format(MESSAGE_SUCCESS, updateMessage));
     }
 }
