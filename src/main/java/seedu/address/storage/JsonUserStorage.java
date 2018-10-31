@@ -15,7 +15,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
-//@@author jamesyaputra
 /**
  * A class to access UserSession stored in the hard disk as a JSON file
  */

@@ -5,7 +5,6 @@ import java.util.Map;
 
 import seedu.address.model.UserSession;
 
-//@@author jamesyaputra
 /**
  * Represents a storage for {@link UserSession}.
  */
