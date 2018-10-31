@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
@@ -17,6 +18,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.event.Attendees;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.EndTime;
 import seedu.address.model.event.Event;
@@ -38,8 +40,9 @@ public class EditEventCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
-            + "[" + PREFIX_START_DATE + "START_DATE] "
-            + "[" + PREFIX_END_DATE + "END_DATE] "
+            + "[" + PREFIX_DATE + "DATE] "
+            + "[" + PREFIX_START_DATE + "START_TIME] "
+            + "[" + PREFIX_END_DATE + "END_TIME] "
             + "[" + PREFIX_LOCATION + "LOCATION]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "Strategy Meeting "
@@ -77,9 +80,10 @@ public class EditEventCommand extends Command {
         StartTime updatedStartTime = editEventDescriptor.getStartTime().orElse(eventToEdit.getStartTime());
         EndTime updatedEndTime = editEventDescriptor.getEndTime().orElse(eventToEdit.getEndTime());
         Location updatedLocation = editEventDescriptor.getLocation().orElse(eventToEdit.getLocation());
+        Attendees attendees = eventToEdit.getAttendees();
 
         return new Event(updatedName, updatedDescription, updatedDate,
-                updatedStartTime, updatedEndTime, updatedLocation);
+                updatedStartTime, updatedEndTime, updatedLocation, attendees);
     }
 
     @Override
@@ -98,10 +102,14 @@ public class EditEventCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
 
+        if (editedEvent.getStartTime().startTime.compareTo(editedEvent.getEndTime().endTime) > 0) {
+            throw new CommandException(EndTime.MESSAGE_INVALID_END_TIME);
+        }
+
         model.updateEvent(eventToEdit, editedEvent);
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         model.commitEventList();
-        return new CommandResult(String.format(MESSAGE_EDIT_EVENT_SUCCESS, editedEvent));
+        return new CommandResult(String.format(MESSAGE_EDIT_EVENT_SUCCESS, editedEvent.getEventName()));
     }
 
     @Override

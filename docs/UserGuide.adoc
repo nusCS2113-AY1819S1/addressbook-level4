@@ -151,6 +151,7 @@ Enter event details: `n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START_TIME e/E
 ****
 * DATE needs to be in YYYY-MM-DD format
 * TIME needs to be in 00:00 format
+* START_TIME must not be later than END_TIME
 ****
 
 [NOTE]
@@ -178,12 +179,13 @@ index *must be a positive integer* 1, 2, 3, ... +
 * At least one of the optional fields must be provided.
 * DATE needs to be in YYYY-MM-DD format
 * TIME needs to be in 00:00 format
+* START_TIME must not be later than END_TIME
 * Existing values will be updated to the input values.
 ****
 
 Examples:
 * Enter a command: `editEvent 10`  +
-Enter event details: n/Weekly Meeting d/Check on progress l/Conference Room 2 date/2018-09-10 s/12:00 e/14:00`
+Enter event details: `n/Weekly Meeting d/Check on progress l/Conference Room 2 date/2018-09-10 s/12:00 e/14:00`
 
 === Deleting an event : `deleteEvent`
 Priority level: `default`,`manager`
