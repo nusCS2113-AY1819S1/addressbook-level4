@@ -26,7 +26,7 @@ import seedu.address.logic.commands.LoginUserIdPasswordRoleCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.commands.UndoSearchCommand;
+import seedu.address.logic.commands.UndoFindCommand;
 import seedu.address.logic.commands.ViewClubBudgetsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -107,8 +107,8 @@ public class AddressBookParser {
         case AddSkillLevelCommand.COMMAND_WORD:
             return new AddSkillLevelCommandParser().parse(arguments);
 
-        case UndoSearchCommand.COMMAND_WORD:
-            return new UndoSearchCommand();
+        case UndoFindCommand.COMMAND_WORD:
+            return new UndoFindCommand();
 
         case BudgetCommand.COMMAND_WORD:
             return new BudgetCommandParser().parse(arguments);

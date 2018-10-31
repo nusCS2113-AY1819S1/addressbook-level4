@@ -10,8 +10,8 @@ import seedu.address.model.searchhistory.exceptions.EmptyHistoryException;
 /**
  * Reverts the {@code model}'s search history to its previous state.
  */
-public class UndoSearchCommand extends Command {
-    public static final String COMMAND_WORD = "undosearch";
+public class UndoFindCommand extends Command {
+    public static final String COMMAND_WORD = "undofind";
     public static final String MESSAGE_SUCCESS = "Undo success!";
     public static final String MESSAGE_FAILURE = "Search History is empty";
     private KeywordsOutputFormatter formatter = new KeywordsOutputFormatter();
