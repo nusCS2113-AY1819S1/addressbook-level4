@@ -25,7 +25,6 @@ import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.Model;
 import seedu.planner.model.ModelManager;
 import seedu.planner.model.record.UniqueRecordList;
-import seedu.planner.model.summary.SummaryMap;
 import seedu.planner.storage.xmljaxb.XmlAdaptedRecord;
 import seedu.planner.storage.xmljaxb.XmlAdaptedTag;
 import seedu.planner.storage.xmljaxb.XmlSerializableFinancialPlanner;
@@ -100,7 +99,7 @@ public class ExitCommandTest {
             UniqueRecordList dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableFinancialPlanner.class)
                     .toModelType();
             FinancialPlanner data = new FinancialPlanner();
-            data.resetData(dataFromFile, new SummaryMap());
+            data.resetData(dataFromFile);
             assertEquals(9, data.getRecordList().size());
         }
 

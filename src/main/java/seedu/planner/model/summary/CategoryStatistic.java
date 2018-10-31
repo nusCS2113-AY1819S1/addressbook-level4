@@ -5,7 +5,7 @@ import java.util.Set;
 import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.tag.Tag;
-
+//@@author tenvinc
 /**
  * This class represents a in memory model of the statistic of a category. It contains totalIncome and totalExpenses.
  */

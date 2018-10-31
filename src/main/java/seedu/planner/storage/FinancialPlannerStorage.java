@@ -9,7 +9,6 @@ import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.record.UniqueRecordList;
-import seedu.planner.model.summary.SummaryMap;
 
 /**
  * Represents a storage for {@link FinancialPlanner}.
@@ -19,17 +18,13 @@ public interface FinancialPlannerStorage {
     /**
      * Returns the file path of the data file of the record list storage.
      */
+
     Path getRecordListFilePath();
 
     /**
      * Returns the file path for the data file of the limit list storage.
      */
     Path getLimitListFilePath();
-
-    /**
-     * Returns the file path of the data file for SummaryMap storage
-     */
-    Path getSummaryMapFilePath();
 
     // ================ Financial Planner storage methods ===========================
     /**
@@ -41,10 +36,9 @@ public interface FinancialPlannerStorage {
     Optional<ReadOnlyFinancialPlanner> readFinancialPlanner() throws DataConversionException, IOException;
 
     /**
-     * @see #getRecordListFilePath() and #getSummaryMapFilePath
+     * @see #getRecordListFilePath()
      */
-    Optional<ReadOnlyFinancialPlanner> readFinancialPlanner(Path recordListFilePath,
-                                                            Path summaryListFilePath)
+    Optional<ReadOnlyFinancialPlanner> readFinancialPlanner(Path recordListFilePath)
             throws DataConversionException, IOException;
 
     /**
@@ -57,8 +51,7 @@ public interface FinancialPlannerStorage {
     /**
      * @see #saveFinancialPlanner(ReadOnlyFinancialPlanner)
      */
-    void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner, Path recordListFilePath,
-                              Path summaryMapFilePath) throws IOException;
+    void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner, Path recordListFilePath) throws IOException;
 
     // ================ Record List storage methods ===========================
     /**
@@ -85,33 +78,6 @@ public interface FinancialPlannerStorage {
      * @see #saveRecordList(ReadOnlyFinancialPlanner)
      */
     void saveRecordList(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException;
-
-    // ================ Summary Map storage methods ===========================
-
-    /**
-     * Returns SummaryMap data as a {@link SummaryMap}.
-     *   Returns {@code Optional.empty()} if storage file is not found.
-     * @throws DataConversionException if the data in storage is not in the expected format.
-     * @throws IOException if there was any problem reading from the storage.
-     */
-    Optional<SummaryMap> readSummaryMap() throws DataConversionException, IOException;
-
-    /**
-     * @see #getSummaryMapFilePath()
-     */
-    Optional<SummaryMap> readSummaryMap(Path filePath) throws DataConversionException, IOException;
-
-    /**
-     * Saves the given SummaryMap of {@link ReadOnlyFinancialPlanner} to the storage.
-     * @param financialPlanner cannot be null
-     * @throws IOException if there was any problem writing to the file.
-     */
-    void saveSummaryMap(ReadOnlyFinancialPlanner financialPlanner) throws IOException;
-
-    /**
-     * @see #saveSummaryMap(ReadOnlyFinancialPlanner)
-     */
-    void saveSummaryMap(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException;
 
     // ================ Limit List storage methods ===========================
     /**

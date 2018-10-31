@@ -7,11 +7,11 @@ import seedu.planner.commons.util.MoneyUtil;
 import seedu.planner.model.Month;
 import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Record;
-
+//@@author tenvinc
 /**
  * This class represents all financial activity in a month
  */
-public class MonthSummary extends SummaryAbs {
+public class MonthSummary extends Summary {
     private Month month;
     private MoneyFlow totalExpense;
     private MoneyFlow totalIncome;

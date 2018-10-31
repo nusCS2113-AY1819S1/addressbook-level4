@@ -4,9 +4,10 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<!-- @@author tenvinc -->
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="summaryDisplay" xmlns="http://javafx.com/javafx/10.0.1">
    <ScrollPane fitToHeight="true" fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <TableView fx:id="table">
+      <TableView fx:id="summaryTable">
          <columns>
             <TableColumn fx:id="dateColumn" editable="false" minWidth="100.0" sortable="false" text="DATE" />
             <TableColumn fx:id="totalIncomeColumn" editable="false" minWidth="200.0" sortable="false" text="TOTAL INCOME" />

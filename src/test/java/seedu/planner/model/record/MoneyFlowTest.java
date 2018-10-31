@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.planner.testutil.Assert;
-
+//@@author tenvinc
 public class MoneyFlowTest {
 
     @Test

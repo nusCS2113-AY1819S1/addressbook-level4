@@ -7,11 +7,11 @@ import seedu.planner.commons.util.MoneyUtil;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Record;
-
+//@@author tenvinc
 /**
  * This class represents the summary of all financial activity within a day.
  */
-public class DaySummary extends SummaryAbs {
+public class DaySummary extends Summary {
     private Date date;
     private MoneyFlow totalExpense;
     private MoneyFlow totalIncome;

@@ -2,6 +2,7 @@ package seedu.planner.ui;
 
 import javafx.beans.property.SimpleStringProperty;
 
+//@@author tenvinc
 /**
  * This represents a UI friendly summary entry.
  */
@@ -49,5 +50,15 @@ public class SummaryEntry {
 
     public void setTotal(String total) {
         this.total.set(total);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof SummaryEntry // instanceof handles nulls
+                && timeStamp.toString().equals(((SummaryEntry) other).timeStamp.toString())
+                && totalIncome.toString().equals(((SummaryEntry) other).totalIncome.toString())
+                && totalExpense.toString().equals(((SummaryEntry) other).totalExpense.toString())
+                && total.toString().equals(((SummaryEntry) other).total.toString()));
     }
 }

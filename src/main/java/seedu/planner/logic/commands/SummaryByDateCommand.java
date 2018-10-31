@@ -15,6 +15,7 @@ import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.summary.SummaryByDateList;
 
+//@@author tenvinc
 /** List all the summary of records within a period of time specified */
 public class SummaryByDateCommand extends SummaryCommand {
 
@@ -25,7 +26,7 @@ public class SummaryByDateCommand extends SummaryCommand {
             + "Example: " + COMMAND_WORD + " " + COMMAND_MODE_WORD + " "
             + PREFIX_DATE + "18-9-2018 " + "20-9-2018 ";
 
-    public static final String MESSAGE_SUCCESS = "Listed summary for %d days/months:";
+    public static final String MESSAGE_SUCCESS = "Listed summary for %d days ";
 
     private final Date startDate;
     private final Date endDate;

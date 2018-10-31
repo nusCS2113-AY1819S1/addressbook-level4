@@ -2,6 +2,10 @@ package seedu.planner.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.planner.logic.commands.LimitCommand.MESSAGE_BASIC_EARNED;
+import static seedu.planner.logic.commands.LimitCommand.MESSAGE_BASIC_SPEND;
+import static seedu.planner.logic.commands.LimitCommand.MESSAGE_EXCEED;
+import static seedu.planner.logic.commands.LimitCommand.MESSAGE_NOT_EXCEED;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -16,7 +20,6 @@ import seedu.planner.commons.core.EventsCenter;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
 import seedu.planner.commons.events.model.LimitListChangedEvent;
-import seedu.planner.commons.events.model.SummaryMapChangedEvent;
 import seedu.planner.commons.events.ui.UpdateWelcomePanelEvent;
 import seedu.planner.commons.util.DateUtil;
 import seedu.planner.model.record.Date;
@@ -24,7 +27,6 @@ import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.summary.CategoryStatisticsList;
-import seedu.planner.model.summary.Summary;
 
 /**
  * Represents the in-memory model of the financial planner data.
@@ -77,7 +79,6 @@ public class ModelManager extends ComponentManager implements Model {
     public void resetData(ReadOnlyFinancialPlanner newData) {
         versionedFinancialPlanner.resetData(newData);
         indicateFinancialPlannerChanged();
-        indicateSummaryMapChanged();
     }
 
     @Override
@@ -94,11 +95,7 @@ public class ModelManager extends ComponentManager implements Model {
     /** Raises an event to indicate the model has changed */
     private void indicateFinancialPlannerChanged() {
         raise(new FinancialPlannerChangedEvent(versionedFinancialPlanner));
-    }
-
-    /** Raises an event to indicate the summary map has changed */
-    private void indicateSummaryMapChanged() {
-        raise(new SummaryMapChangedEvent(versionedFinancialPlanner));
+        autoLimitCheck();
     }
 
     /** Raises an event to indicate the limit list has changed */
@@ -118,9 +115,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void deleteRecord(Record target) {
         requireNonNull(target);
         versionedFinancialPlanner.removeRecord(target);
-        versionedFinancialPlanner.removeRecordFromSummary(target);
         indicateFinancialPlannerChanged();
-        indicateSummaryMapChanged();
     }
 
     @Override
@@ -149,10 +144,8 @@ public class ModelManager extends ComponentManager implements Model {
     public void addRecord(Record record) {
         requireNonNull(record);
         versionedFinancialPlanner.addRecord(record);
-        versionedFinancialPlanner.addRecordToSummary(record);
         updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
         indicateFinancialPlannerChanged();
-        indicateSummaryMapChanged();
     }
 
     @Override
@@ -175,9 +168,7 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(target, editedRecord);
 
         versionedFinancialPlanner.updateRecord(target, editedRecord);
-        versionedFinancialPlanner.updateSummary(target, editedRecord);
         indicateFinancialPlannerChanged();
-        indicateSummaryMapChanged();
     }
 
     //=========== Limit related methods =====================================================
@@ -203,6 +194,74 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(limitIn);
         return (versionedFinancialPlanner.isExceededLimit(limitIn));
     }
+    @Override
+    public void updateLimit(Limit target, Limit editedLimit) {
+        requireAllNonNull(target, editedLimit);
+        versionedFinancialPlanner.updateLimit(target, editedLimit);
+        indicateLimitListChanged();
+    }
+
+    @Override
+    public Limit getSameDatesLimit (Date dateStart, Date dateEnd) {
+        requireAllNonNull(dateStart, dateEnd);
+        return versionedFinancialPlanner.getSameDatesLimit(dateStart, dateEnd);
+    }
+    @Override
+    public Double getTotalSpend (Limit limitIn) {
+        requireNonNull(limitIn);
+        return versionedFinancialPlanner.getTotalSpend(limitIn);
+    }
+    @Override
+    public String autoLimitCheck () {
+        String output = "";
+        int count = 1;
+        for (Limit i: limits) {
+            if (isExceededLimit(i)) {
+                output += "\n" + String.format("%d.", count++) + generateLimitOutput(true, getTotalSpend(i), i);
+            }
+        }
+        return output;
+    }
+
+    @Override
+    public String manualLimitCheck () {
+        String output = "";
+        int count = 1;
+        for (Limit i: limits) {
+            output += "\n" + String.format("%d.", count++)
+                    + generateLimitOutput(isExceededLimit(i), getTotalSpend(i), i);
+
+        }
+        return output;
+    }
+
+    /**
+     * This function is to do the auto check whenever the record changed.
+     * @param isExceeded
+     * @param limit
+     * @return
+     */
+    public String generateLimitOutput (boolean isExceeded, Double totalMoney, Limit limit) {
+        String output;
+        if (totalMoney > 0) {
+            output = String.format(MESSAGE_BASIC_EARNED,
+                    limit.getDateStart(), limit.getDateEnd(),
+                    -1 * limit.getLimitMoneyFlow().toDouble(), totalMoney)
+                    + MESSAGE_NOT_EXCEED;
+        } else if (isExceeded) {
+            output = String.format(MESSAGE_BASIC_SPEND,
+                    limit.getDateStart(), limit.getDateEnd(),
+                    -1 * limit.getLimitMoneyFlow().toDouble(), -1 * totalMoney)
+                    + MESSAGE_EXCEED;
+        } else {
+            output = String.format(MESSAGE_BASIC_SPEND,
+                    limit.getDateStart(), limit.getDateEnd(),
+                    -1 * limit.getLimitMoneyFlow().toDouble(), -1 * totalMoney)
+                    + MESSAGE_NOT_EXCEED;
+        }
+        return output;
+    }
+
 
     //=========== Filtered Record List Accessors =============================================================
 
@@ -251,7 +310,6 @@ public class ModelManager extends ComponentManager implements Model {
     public void undoFinancialPlanner() {
         versionedFinancialPlanner.undo();
         indicateFinancialPlannerChanged();
-        indicateSummaryMapChanged();
         indicateLimitListChanged();
     }
 
@@ -259,19 +317,12 @@ public class ModelManager extends ComponentManager implements Model {
     public void redoFinancialPlanner() {
         versionedFinancialPlanner.redo();
         indicateFinancialPlannerChanged();
-        indicateSummaryMapChanged();
         indicateLimitListChanged();
     }
 
     @Override
     public void commitFinancialPlanner() {
         versionedFinancialPlanner.commit();
-    }
-
-    //=========== Summary Display =================================================================================
-
-    public ObservableList<Summary> getSummaryList(Date startDate, Date endDate) {
-        return versionedFinancialPlanner.getSummaryList(startDate, endDate);
     }
 
     @Override

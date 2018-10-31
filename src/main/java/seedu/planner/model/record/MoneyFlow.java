@@ -3,9 +3,6 @@ package seedu.planner.model.record;
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.AppUtil.checkArgument;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * Represents any form of money flow in a record in the financialplanner
  * Guarantees: immutable; is valid as declared in {@link #isValidMoneyFlow(String)}
@@ -24,25 +21,27 @@ public class MoneyFlow {
     public static final String SIGN_REGEX = ("(?<sign>[-+])");
     public static final String MONEYFLOW_NO_SIGN_REGEX = ("(?<money>.*)");
     public static final String CURRENCY = "$";
+    public static final String POSITIVE_SIGN = "+";
+    public static final String NEGATIVE_SIGN = "-";
 
     // Any form of money flow entered must follow the format defined above
     private static final String MONEYFLOW_WHOLE_NUMBER_ZERO_REGEX = "0";
     private static final String MONEYFLOW_WHOLE_NUMBER_NONZERO_REGEX = "[1-9]{1}\\d*";
     private static final String MONEYFLOW_DECIMAL_PART_REGEX = ".\\d+";
     private static final String MONEYFLOW_SIGN_PART_REGEX = "[\\+-]";
+
     /**
      * This only represents the numerical part of the string pattern.
      */
     // UNSIGNED_MONEYFLOW_VALIDATION_REGEX = "(0|[1-9]{1}\d*)($|.\d+)"
     private static final String UNSIGNED_MONEYFLOW_VALIDATION_REGEX = "(" + MONEYFLOW_WHOLE_NUMBER_ZERO_REGEX + "|"
             + MONEYFLOW_WHOLE_NUMBER_NONZERO_REGEX + ")" + "(" + "$" + "|" + MONEYFLOW_DECIMAL_PART_REGEX + ")";
+
     /**
      * This represents the whole pattern.
      */
     private static final String MONEYFLOW_VALIDATION_REGEX = "^" + MONEYFLOW_SIGN_PART_REGEX
             + UNSIGNED_MONEYFLOW_VALIDATION_REGEX;
-
-    private static final Pattern MONEY_PATTERN = Pattern.compile(SIGN_REGEX + MONEYFLOW_NO_SIGN_REGEX);
 
     public final String value;
     public final double valueDouble;
@@ -69,11 +68,13 @@ public class MoneyFlow {
 
     @Override
     public String toString() {
-        Matcher matcher = MONEY_PATTERN.matcher(value);
-        if (!matcher.matches()) {
-            throw new IllegalStateException();
+        if (String.format("%.2f", Math.abs(valueDouble)).equals("0.00")) {
+            return CURRENCY + String.format("%.2f", Math.abs(valueDouble));
+        } else if (valueDouble > 0) {
+            return POSITIVE_SIGN + CURRENCY + String.format("%.2f", Math.abs(valueDouble));
+        } else {
+            return NEGATIVE_SIGN + CURRENCY + String.format("%.2f", Math.abs(valueDouble));
         }
-        return matcher.group("sign") + CURRENCY + matcher.group("money");
     }
 
     public double toDouble () {

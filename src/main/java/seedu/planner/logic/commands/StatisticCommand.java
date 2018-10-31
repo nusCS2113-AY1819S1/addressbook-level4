@@ -13,7 +13,7 @@ import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.summary.CategoryStatisticsList;
-
+//@@author tenvinc
 /**
  * Shows the statistics of the current summary
  */

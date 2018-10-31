@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import seedu.planner.logic.commands.ListCommand;
 import seedu.planner.model.record.Date;
-
+//@@author tenvinc
 public class ListCommandParserTest {
 
     private static final String WHITESPACE = "\t \n \r";

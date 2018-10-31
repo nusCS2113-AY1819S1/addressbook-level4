@@ -26,7 +26,7 @@ import seedu.planner.logic.commands.SummaryByMonthCommand;
 import seedu.planner.logic.commands.SummaryCommand;
 import seedu.planner.model.Month;
 import seedu.planner.model.record.Date;
-
+//@@author tenvinc
 public class SummaryCommandParserTest {
 
     private final SummaryCommandParser parser = new SummaryCommandParser();

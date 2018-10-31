@@ -4,27 +4,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import javafx.util.Pair;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.ui.ShowPieChartStatsEvent;
 import seedu.planner.commons.events.ui.ShowSummaryTableEvent;
 import seedu.planner.model.summary.CategoryStatistic;
-
+//@@author tenvinc
 /**
  * This UI component is responsible for managing the tabs where the statistics will be displayed
  */
-public class StatsDisplayPanel extends UiPart<Region> {
+public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
 
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
 
     private static final String FXML = "StatsDisplayPanel.fxml";
+
+    private static final String untaggedLabel = "<<untagged>>";
 
     @FXML
     private TabPane tabManager;
@@ -35,12 +39,14 @@ public class StatsDisplayPanel extends UiPart<Region> {
         hide();
     }
 
-    private void show() {
+    @Override
+    public void show() {
         getRoot().toFront();
         getRoot().setVisible(true);
     }
 
-    private void hide() {
+    @Override
+    public void hide() {
         getRoot().toBack();
         getRoot().setVisible(false);
     }
@@ -63,49 +69,90 @@ public class StatsDisplayPanel extends UiPart<Region> {
     }
 
     /** Creates the CategoryBreakdown object with the total expense and tag of each CategoryStatistic */
-    private CategoryBreakdown createTotalExpenseBreakdown(ObservableList<CategoryStatistic> data) {
+    private Node createTotalExpenseBreakdown(ObservableList<CategoryStatistic> data) {
+        Pair< ObservableList<ChartData>, Double> chartData = extractExpenseChartData(data);
+        if (chartData.getKey().size() == 0) {
+            Label label = new Label("Nothing has been found! Please input a more appropriate range:)");
+            label.getStyleClass().add("label-bright");
+            return new AnchorPane(label);
+        }
+        return new CategoryBreakdown(chartData.getKey(), "Total Expense for the period",
+                chartData.getValue()).getRoot();
+    }
+
+
+    /** Extracts the label and expense information and places it in a list of ChartData */
+    private Pair< ObservableList<ChartData>, Double> extractExpenseChartData(ObservableList<CategoryStatistic> data) {
         List<ChartData> chartDataList = new ArrayList();
         Double totalExpense = 0.0;
         for (CategoryStatistic d : data) {
             if (d.getTotalExpense() > 0.0) {
-                chartDataList.add(new ChartData(d.getTags().toString(), d.getTotalExpense()));
+                String label;
+                if (d.getTags().isEmpty()) {
+                    label = untaggedLabel;
+                } else {
+                    label = d.getTags().toString();
+                }
+                chartDataList.add(new ChartData(label, d.getTotalExpense()));
                 totalExpense += d.getTotalExpense();
             }
         }
-        return new CategoryBreakdown(FXCollections.observableList(chartDataList), "Total Expense for the period",
-                totalExpense);
+        return new Pair<>(FXCollections.observableList(chartDataList), totalExpense);
     }
 
     /** Creates the CategoryBreakdown object with the total income and tag of each CategoryStatistic */
-    private CategoryBreakdown createTotalIncomeBreakdown(ObservableList<CategoryStatistic> data) {
+    private Node createTotalIncomeBreakdown(ObservableList<CategoryStatistic> data) {
+        Pair< ObservableList<ChartData>, Double> chartData = extractIncomeChartData(data);
+        if (chartData.getKey().size() == 0) {
+            Label label = new Label("Nothing has been found! Please input a more appropriate range:)");
+            label.getStyleClass().add("label-bright");
+            return new AnchorPane(label);
+        }
+        return new CategoryBreakdown(chartData.getKey(), "Total Income for the period",
+                chartData.getValue()).getRoot();
+    }
+
+    /** Extracts the label and income information and places it in a list of ChartData */
+    private Pair< ObservableList<ChartData>, Double> extractIncomeChartData(ObservableList<CategoryStatistic> data) {
         List<ChartData> chartDataList = new ArrayList();
         Double totalIncome = 0.0;
         for (CategoryStatistic d : data) {
             if (d.getTotalIncome() > 0.0) {
-                chartDataList.add(new ChartData(d.getTags().toString(), d.getTotalIncome()));
+                String label;
+                if (d.getTags().isEmpty()) {
+                    label = untaggedLabel;
+                } else {
+                    label = d.getTags().toString();
+                }
+                chartDataList.add(new ChartData(label, d.getTotalIncome()));
                 totalIncome += d.getTotalIncome();
             }
         }
-        return new CategoryBreakdown(FXCollections.observableList(chartDataList), "Total Income for the period",
-                totalIncome);
+        return new Pair<>(FXCollections.observableList(chartDataList), totalIncome);
     }
 
-    @Subscribe
+    /**
+     * Handles the ShowSummaryTableEvent that is passed from MainWindow's delegate function.
+     * @param event event to be handled
+     */
     public void handleShowSummaryTableEvent(ShowSummaryTableEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        CustomTab summaryTab = new CustomTab(SummaryDisplay.LABEL , new SummaryDisplay(event.data).getRoot());
+        Tab summaryTab = new Tab(SummaryDisplay.LABEL , new SummaryDisplay(event.data).getRoot());
         clearTabs();
         createTabs(summaryTab);
         show();
     }
 
-    @Subscribe
+    /**
+     * Handles the ShowPieChartStatsEvent that is passed from MainWindow's delegate function.
+     * @param event event to be handled
+     */
     public void handleShowPieChartStatsEvent(ShowPieChartStatsEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        CustomTab categoryExpenseTab = new CustomTab("Category Breakdown For Expenses", createTotalExpenseBreakdown(
-                event.data).getRoot());
-        CustomTab categoryIncomeTab = new CustomTab("Category Breakdown For Income", createTotalIncomeBreakdown(
-                event.data).getRoot());
+        Tab categoryExpenseTab = new Tab("Category Breakdown For Expenses", createTotalExpenseBreakdown(
+                event.data));
+        Tab categoryIncomeTab = new Tab("Category Breakdown For Income", createTotalIncomeBreakdown(
+                event.data));
         clearTabs();
         createTabs(categoryExpenseTab, categoryIncomeTab);
         show();
