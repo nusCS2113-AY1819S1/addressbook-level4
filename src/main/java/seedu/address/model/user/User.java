@@ -2,6 +2,7 @@ package seedu.address.model.user;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+//@@author jamesyaputra
 /**
  * Represents a user account.
  */

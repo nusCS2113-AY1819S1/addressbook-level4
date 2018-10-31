@@ -12,6 +12,7 @@ import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
+//@@author jamesyaputra
 /**
  * Parses input arguments and creates a new SignupCommand object.
  */
