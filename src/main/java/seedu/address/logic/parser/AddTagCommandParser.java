@@ -45,7 +45,7 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
 
         if (!addTagDescriptor.haveTag()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_NO_TAG ));
         }
 
         return new AddTagCommand(index, addTagDescriptor);

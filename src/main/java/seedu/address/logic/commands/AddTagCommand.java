@@ -32,6 +32,8 @@ public class AddTagCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Added tags to the selected item.";
 
+    public static final String MESSAGE_NO_TAG = "Please include the tags you want to add.";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add the inputted tags to the selected item "
             + "by the index number used in the displayed item list.\n"
             + "Parameters: INDEX (must be a positive integer) "
