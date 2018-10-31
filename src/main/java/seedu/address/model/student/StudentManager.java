@@ -33,7 +33,7 @@ public class StudentManager {
      * @return
      */
     public boolean doesStudentExistForGivenMatricNo(String matricNo) {
-        for (Person p:studentModel.getAddressBook().getPersonList()) {
+        for (Person p: studentModel.getAddressBook().getPersonList()) {
             if (p.getMatricNo().matricNo.equals(matricNo)) {
                 return true;
             }

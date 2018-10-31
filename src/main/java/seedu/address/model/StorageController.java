@@ -30,16 +30,19 @@ import seedu.address.storage.serializable.XmlSerializableUserList;
  */
 public class StorageController {
     private static final String BASE_DIRECTORY = "data/";
-    private static final String STORAGE_COURSES = BASE_DIRECTORY + "courseList.xml";
-    private static final String STORAGE_MODULES = BASE_DIRECTORY + "modules.xml";
-    private static final String STORAGE_CLASSES = BASE_DIRECTORY + "classes.xml";
-    private static final String STORAGE_GRADEBOOK = BASE_DIRECTORY + "gradebook.xml";
-    private static final String STORAGE_NOTES = BASE_DIRECTORY + "notes.xml";
-    private static final String STORAGE_USERS = BASE_DIRECTORY + "users.xml";
-    private static final String STORAGE_GRADES = BASE_DIRECTORY + "grades.xml";
+    private static final String TEST_DIRECTORY = "testStorage/";
+    private static String workingDirectory = BASE_DIRECTORY;
 
-    private static final String STORAGE_STUDENT_MODULE = BASE_DIRECTORY + "studentModule.xml";
-    private static final String STORAGE_CLASS_ATTENDANCE = BASE_DIRECTORY + "classAttendance.xml";
+    private static final String STORAGE_COURSES = workingDirectory + "courseList.xml";
+    private static final String STORAGE_MODULES = workingDirectory + "modules.xml";
+    private static final String STORAGE_CLASSES = workingDirectory + "classes.xml";
+    private static final String STORAGE_GRADEBOOK = workingDirectory + "gradebook.xml";
+    private static final String STORAGE_NOTES = workingDirectory + "notes.xml";
+    private static final String STORAGE_USERS = workingDirectory + "users.xml";
+
+    private static final String STORAGE_STUDENT_MODULE = workingDirectory + "studentModule.xml";
+    private static final String STORAGE_CLASS_ATTENDANCE = workingDirectory + "classAttendance.xml";
+    private static final String STORAGE_GRADES = workingDirectory + "grades.xml";
 
     private static ArrayList<XmlAdaptedCourse> courseStorage = new ArrayList<>();
     private static ArrayList<XmlAdaptedModule> moduleStorage = new ArrayList<>();
@@ -52,6 +55,30 @@ public class StorageController {
     private static ArrayList<XmlAdaptedStudentModule> studentModuleStorage = new ArrayList<>();
     private static ArrayList<XmlAdaptedClassroomAttendance> classAttendanceStorage = new ArrayList<>();
 
+    /**
+     * This method switches the class to use a test directory with fresh empty files.
+     */
+    public static void enterTestMode() {
+        workingDirectory = TEST_DIRECTORY;
+        createTestFolder();
+        wipeAllTestData();
+        createFiles();
+    }
+
+    public static void createTestFolder() {
+        new File(TEST_DIRECTORY).mkdirs();
+    }
+    /**
+     * This method wipes all local test data files.
+     */
+    public static void wipeAllTestData() {
+        for (File file: new File(TEST_DIRECTORY).listFiles()) {
+            if (!file.isDirectory()) {
+                file.delete();
+            }
+        }
+
+    }
     /**
      * This method retrieves all datasets saved locally.
      */
