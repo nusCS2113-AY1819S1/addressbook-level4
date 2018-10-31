@@ -37,7 +37,7 @@ public class XmlAdaptedPerson {
     @XmlElement(required = true)
     private String skill;
     @XmlElement(required = true)
-    private String skillLevel; // TODO: Determine if this needs to be a string.
+    private String skillLevel;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -120,15 +120,6 @@ public class XmlAdaptedPerson {
             throw new IllegalValueException(Address.MESSAGE_ADDRESS_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
-
-        if (skill == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Skill.class.getSimpleName()));
-        }
-
-        if (skillLevel == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    SkillLevel.class.getSimpleName()));
-        }
 
         final Skill modelSkill = new Skill(skill);
         final SkillLevel modelSkillLevel = new SkillLevel(Integer.parseInt(skillLevel));
