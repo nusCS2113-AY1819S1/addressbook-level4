@@ -107,6 +107,7 @@ public class ClassDeleteStudentAttendanceCommand extends Command {
         classroomManager.saveClassroomAttendanceList();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, matricNo,
-                classToModifyAttendance.getClassName(), classToModifyAttendance.getModuleCode()));
+                classToModifyAttendance.getClassName(), classToModifyAttendance.getModuleCode()),
+                classroomManager.getClassroomAttendanceHtmlRepresentation(classToModifyAttendance));
     }
 }

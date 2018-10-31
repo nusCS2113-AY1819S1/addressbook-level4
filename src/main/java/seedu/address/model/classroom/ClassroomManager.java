@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.ClassListCommand;
+import seedu.address.logic.commands.ClassListStudentAttendanceCommand;
 import seedu.address.model.StorageController;
 import seedu.address.model.module.ModuleManager;
 import seedu.address.model.student.StudentManager;
@@ -296,6 +297,43 @@ public class ClassroomManager {
         }
         builder.append(HtmlTableProcessor.getTableItemEnd());
 
+        return builder.toString();
+    }
+
+    /**
+     * Returns a string of the classroom attendance list in html representation
+     */
+    public String getClassroomAttendanceHtmlRepresentation(Classroom classToListAttendance) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(HtmlTableProcessor.getH3Representation(String.format(
+                ClassListStudentAttendanceCommand.HTML_TABLE_TITLE_ATTENDANCE,
+                classToListAttendance.getClassName(), classToListAttendance.getModuleCode())));
+        String studentStatus = "";
+        for (Attendance attendance : classToListAttendance.getAttendanceList()) {
+            builder.append(HtmlTableProcessor.renderTableStart(new ArrayList<>(
+                    Collections.singletonList("Date of attendance"))));
+            builder.append(HtmlTableProcessor.getTableItemStart());
+            builder.append(HtmlTableProcessor
+                    .renderTableItem(new ArrayList<>(Collections.singletonList(attendance.getDate()))));
+            builder.append(HtmlTableProcessor.getTableItemEnd());
+
+            builder.append(HtmlTableProcessor.renderTableStart(new ArrayList<>(Arrays
+                    .asList("Matric No", "Status"))));
+
+            builder.append(HtmlTableProcessor.getTableItemStart());
+            for (String student : classToListAttendance.getStudents()) {
+                studentStatus = "Absent";
+                if (attendance.getStudentsPresent().contains(student)) {
+                    studentStatus = "Present";
+                }
+                builder.append(HtmlTableProcessor
+                        .renderTableItem(new ArrayList<>(Arrays
+                                .asList(student,
+                                        studentStatus))));
+
+            }
+            builder.append(HtmlTableProcessor.getTableItemEnd());
+        }
         return builder.toString();
     }
 
