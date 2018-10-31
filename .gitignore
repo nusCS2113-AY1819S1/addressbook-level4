@@ -14,8 +14,9 @@ preferences.json
 ./screenshot*.png
 classes/
 /data/
-src/main/resources/docs/
+
 !src/main/resources/docs/StudentGradeSummary.html
+src/main/resources/docs/
 /bin/
 out/
 /config.json
