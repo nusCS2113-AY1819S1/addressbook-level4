@@ -1,0 +1,83 @@
+= Khoo Yuan Hui - Project Portfolio
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: FreeTime
+
+---
+
+== Overview
+
+|===
+*This project was done in my second year at university, as part of a module on Software Engineering.*
+|===
+
+FreeTime is the end-product of my CS2113T project. Our team was given a existing project (AddressBook 4) to morph to something different that targets a group of users. We chose to target students.
+
+FreeTime is a Time-Planner application. It is primarily aimed at Students who need to collaborate with their peers, but find manually comparing timetables a hassle. +
+
+The user interacts with it using a command-line interface (CLI), but it also has a graphical user interface (GUI) created with JavaFX. It is written in Java, and has about 10 kLoC. +
+
+The changes that we have done can be seen in the picture below:
+
+image::alexiscatnip_PPP_overview.png[align="center"]
+
+AddressBook 4: https://github.com/nusCS2113-AY1819S1/addressbook-level4 +
+FreeTime: https://github.com/CS2113-AY1819S1-W13-1/main
+
+
+== Summary of contributions
+|===
+*Here are the items that I have contributed to the project.*
+|===
+
+* *Major enhancement*: *Added Command to import and export timetable*
+** What it does: allows the user to import and export timetables that are in the .ics format.
+** Justification: Users need to add their pre-existing timetables from other software easily.
+** Highlights: This enhancement makes use of a third party library to correctly format the .ics file format (given in RFC 5545; https://tools.ietf.org/html/rfc5545). Thus, the project now has an extra dependency. The alternative to a third-party library is writing the code for the formatting by myself; which would be too time consuming.
+** Credits: *biweekly third-party library* (https://github.com/mangstadt/biweekly)
+
+* *Minor enhancement*: *Save user's timetable across application instances*.
+** What it does: Allows the application to save the timetable into the disk automatically. This means that it can remmeber our users' timetables across restarts.
+
+* *Code contributed*: [https://github.com<TODO>[Functional code]] [https://github.com<TODO>[Test code]] _{give links to collated code files}_
+
+* *Other contributions*:
+
+** Enhancements to existing features:
+*** Added 'label' to timeslot, so that users can label the timeslot with the module name. (Pull requests https://github.com[#33])
+** Documentation:
+*** Created documentation for import, export command and save timetable feature: https://github.com[#14]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+** Tools:
+*** Integrated a third party library (biweekly) to the project (https://github.com/CS2113-AY1819S1-W13-1/main/pull/55[#55])
+
+_{you can add/remove categories in the list above}_
+
+== Contributions to the User Guide
+
+|===
+*Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.*
+|===
+
+include::../UserGuide.adoc[tag=import]
+
+include::../UserGuide.adoc[tag=export]
+
+== Contributions to the Developer Guide
+
+|===
+*Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.*
+|===
+
+include::../DeveloperGuide.adoc[tag=import]
+
+
+== PROJECT: <some other project>
+
+---
+
+_{Optionally, you may include other projects in your portfolio.}_
