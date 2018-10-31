@@ -61,7 +61,7 @@ public class ClassDeleteStudentCommand extends Command {
 
         classToUnassignStudent = classroomManager.findClassroom(className, moduleCode);
         if (classToUnassignStudent == null) {
-            return new CommandResult(MESSAGE_FAIL);
+            throw new CommandException(MESSAGE_FAIL);
         }
 
         if (!classroomManager.hasClassroomStudent(classToUnassignStudent, matricNo)) {

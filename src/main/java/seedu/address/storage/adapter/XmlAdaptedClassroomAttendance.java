@@ -13,7 +13,7 @@ import seedu.address.model.person.MatricNo;
  * JAXB-friendly adapted version of the ClassroomAttendance.
  */
 public class XmlAdaptedClassroomAttendance {
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Classroom attendance's %s field is missing!";
+    private static final String MISSING_FIELD_MESSAGE_FORMAT = "Classroom attendance's %s field is missing!";
 
     //class-attendance fields
     @XmlElement(name = "date", required = true, nillable = true)
@@ -64,9 +64,13 @@ public class XmlAdaptedClassroomAttendance {
      * Converts this XmlAdaptedClassroomAttendance into the model's Attendance object
      */
     public Attendance toModelType() throws IllegalValueException {
-        if (date == null ) {
+        if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Attendance.class.getSimpleName()));
+        }
+
+        if (!Attendance.isValidDate(date)) {
+            throw new IllegalValueException(Attendance.MESSAGE_DATE_CONSTRAINTS);
         }
 
         for (String matricNo : studentsPresent) {
@@ -74,7 +78,7 @@ public class XmlAdaptedClassroomAttendance {
                 throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                         MatricNo.class.getSimpleName()));
             }
-            if (MatricNo.isValidMatricNo(matricNo)) {
+            if (!MatricNo.isValidMatricNo(matricNo)) {
                 throw new IllegalValueException(MatricNo.MESSAGE_MATRIC_NO_CONSTRAINTS);
             }
         }

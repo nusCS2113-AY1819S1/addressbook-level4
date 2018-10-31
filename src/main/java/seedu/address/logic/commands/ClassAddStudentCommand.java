@@ -61,7 +61,7 @@ public class ClassAddStudentCommand extends Command {
 
         classToAssignStudent = classroomManager.findClassroom(className, moduleCode);
         if (classToAssignStudent == null) {
-            return new CommandResult(MESSAGE_FAIL);
+            throw new CommandException(MESSAGE_FAIL);
         }
 
         if (classroomManager.isDuplicateClassroomStudent(classToAssignStudent, matricNo)) {
