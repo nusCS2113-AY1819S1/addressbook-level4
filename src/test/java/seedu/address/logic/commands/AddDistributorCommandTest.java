@@ -230,7 +230,7 @@ public class AddDistributorCommandTest {
 
         @Override
         public void addTransaction(Transaction transaction) {
-
+            fail("This method should not be called.");
         }
 
         @Override
@@ -245,6 +245,7 @@ public class AddDistributorCommandTest {
 
         @Override
         public Transaction getLastTransaction() {
+            fail("This method should not be called.");
             return null;
         }
 
