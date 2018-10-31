@@ -34,7 +34,7 @@ JitHub is a desktop personal assistant application that allows students to manag
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` (1 release) on GitHub
+*** Managed release `v1.3` (1 release) on GitHub
 ** Enhancements to existing features:
 *** Updated the GUI theme (Pull requests https://github.com[#50], https://github.com[#115])
 *** Wrote additional tests for existing features to increase coverage from 82.51% to 90.16% (Pull request https://github.com[#119])
