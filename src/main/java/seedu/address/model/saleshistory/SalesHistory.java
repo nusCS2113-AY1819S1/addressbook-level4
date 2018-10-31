@@ -10,9 +10,9 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.TreeMap;
 
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import seedu.address.model.timeidentifiedclass.Reminder;
 import seedu.address.model.timeidentifiedclass.TimeIdentifiedClass;
 import seedu.address.model.timeidentifiedclass.Transaction;
@@ -72,9 +72,13 @@ public class SalesHistory implements ReadOnlySalesHistory {
         copyReadOnlySalesHistory(toBeCopied);
     }
 
+    /**
+     * Copies the {@code toBeCopied} to the {@code SalesHistory}
+     * @param toBeCopied
+     */
     private void copyReadOnlySalesHistory(ReadOnlySalesHistory toBeCopied) {
         for (Transaction transaction : toBeCopied.getTransactionsAsObservableList()) {
-            // These exceptions should never be raised. Printing the stack trace will help debugging.
+            // These exceptions should never be thrown. Printing the stack trace will help debugging.
             try {
                 addTransaction(transaction);
             } catch (InvalidTimeFormatException e) {
@@ -84,7 +88,7 @@ public class SalesHistory implements ReadOnlySalesHistory {
             }
         }
         for (Reminder reminder : toBeCopied.getRemindersAsObservableList()) {
-            // These exceptions should never be raised. Printing the stack trace will help debugging.
+            // These exceptions should never be thrown. Printing the stack trace will help debugging.
             try {
                 addReminder(reminder);
             } catch (InvalidTimeFormatException e) {
@@ -186,6 +190,10 @@ public class SalesHistory implements ReadOnlySalesHistory {
         reminderObservableList.remove(toRemove);
     }
 
+    /**
+     * Resets the {@code SalesHistory} according to a {@code ReadOnlySalesHistory} object
+     * @param src
+     */
     public void resetData(ReadOnlySalesHistory src) {
         transactionRecord.clear();
         reminderRecord.clear();

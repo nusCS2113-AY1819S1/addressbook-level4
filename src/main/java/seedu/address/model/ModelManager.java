@@ -153,16 +153,15 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /**
-     * Updates the sales history and its storage path using the {@code username} provided.
-     * @param username
+     * Reloads the sales history
      */
-    private void reloadSalesHistory(Username username) {
+    private void reloadSalesHistory() {
         Optional<ReadOnlySalesHistory> salesHistoryOptional;
         ReadOnlySalesHistory newSalesHistory;
 
         try {
             salesHistoryOptional = storage.readSalesHistory();
-            if(!salesHistoryOptional.isPresent()) {
+            if (!salesHistoryOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with an empty SalesHistory");
             }
             newSalesHistory = salesHistoryOptional.orElseGet(SampleDataUtil::getSampleSalesHistory);
@@ -272,8 +271,9 @@ public class ModelManager extends ComponentManager implements Model {
     public boolean checkAuthentication(Username username, Password password) throws AuthenticatedException {
         boolean result = versionedUserDatabase.checkAuthentication(username, password);
         if (hasLoggedIn() && result) {
+            storage.update(versionedUserDatabase.getUser(username));
             reloadAddressBook(username);
-            reloadSalesHistory(username);
+            reloadSalesHistory();
             reloadDistributorBook(username);
         }
         return result;

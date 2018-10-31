@@ -37,6 +37,7 @@ public class LoginCommand extends Command {
         this.username = username;
         this.password = password;
     }
+
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(username);

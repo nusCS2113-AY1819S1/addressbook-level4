@@ -2,17 +2,12 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 
 import seedu.address.model.product.Product;
 import seedu.address.model.product.UniquePersonList;
-import seedu.address.model.saleshistory.SalesHistory;
-import seedu.address.model.timeidentifiedclass.TimeIdentifiedClass;
-import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
 
 /**
  * Wraps all data at the address-book level

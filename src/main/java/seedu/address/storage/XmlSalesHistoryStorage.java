@@ -14,7 +14,11 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.saleshistory.ReadOnlySalesHistory;
+import seedu.address.model.saleshistory.SalesHistory;
 
+/**
+ * A class to access and modify {@link SalesHistory} stored on the hard disk in xml form.
+ */
 public class XmlSalesHistoryStorage implements SalesHistoryStorage {
     private static Logger logger = LogsCenter.getLogger(XmlSalesHistoryStorage.class);
 

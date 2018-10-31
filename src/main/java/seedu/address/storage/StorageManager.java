@@ -231,14 +231,14 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public void deleteSalesHistory() throws IOException {
-        salesHistoryStorage.deleteSalesHistory();
-    }
-
-    @Override
     public void saveSalesHistory(ReadOnlySalesHistory salesHistory, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         salesHistoryStorage.saveSalesHistory(salesHistory, filePath);
+    }
+
+    @Override
+    public void deleteSalesHistory() throws IOException {
+        salesHistoryStorage.deleteSalesHistory();
     }
 
     @Override

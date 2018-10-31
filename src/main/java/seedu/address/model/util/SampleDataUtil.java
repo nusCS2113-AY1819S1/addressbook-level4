@@ -14,10 +14,6 @@ import seedu.address.model.product.SerialNumber;
 import seedu.address.model.saleshistory.ReadOnlySalesHistory;
 import seedu.address.model.saleshistory.SalesHistory;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.timeidentifiedclass.Transaction;
-import seedu.address.model.timeidentifiedclass.exceptions.ClosedTransactionException;
-import seedu.address.model.timeidentifiedclass.exceptions.DuplicateTransactionException;
-import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
 
 /**
  * Contains utility methods for populating {@code ProductDatabase} with sample data.

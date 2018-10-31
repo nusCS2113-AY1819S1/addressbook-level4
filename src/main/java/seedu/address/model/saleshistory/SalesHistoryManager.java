@@ -26,9 +26,6 @@ public class SalesHistoryManager extends SalesHistory {
      */
     public SalesHistoryManager(ReadOnlySalesHistory initialState) {
         super(initialState);
-        if (getTransactionRecord().size() > 0) {
-            lastTransaction = getTransactionRecord().lastEntry().getValue();
-        }
     }
 
     /**
@@ -77,7 +74,7 @@ public class SalesHistoryManager extends SalesHistory {
     }
 
     public Transaction getLastTransaction() {
-        return lastTransaction;
+        return getTransactionRecord().lastEntry().getValue();
     }
 
     /**
