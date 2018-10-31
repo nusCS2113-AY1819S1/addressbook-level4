@@ -18,6 +18,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyDistributorBook;
 import seedu.address.model.distributor.Distributor;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.UniqueUserList;
@@ -93,11 +94,21 @@ public class LoginCommandTest {
         }
 
         @Override
+        public void resetData(ReadOnlyDistributorBook newData) {
+            fail("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             fail("This method should not be called.");
             return null;
         }
 
+        @Override
+        public ReadOnlyDistributorBook getDistributorBook() {
+            fail("This method should not be called.");
+            return null;
+        }
 
         @Override
         public boolean hasLoggedIn() {
@@ -161,7 +172,7 @@ public class LoginCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getDistributorInfoBook() {
+        public ReadOnlyDistributorBook getDistributorInfoBook() {
             fail("This method should not be called.");
             return null;
         }
@@ -209,7 +220,7 @@ public class LoginCommandTest {
         }
 
         @Override
-        public ObservableList<Product> getFilteredPersonList() {
+        public ObservableList<Product> getFilteredProductList() {
             fail("This method should not be called.");
             return null;
         }
@@ -226,11 +237,16 @@ public class LoginCommandTest {
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Product> predicate) {
+        public void updateFilteredProductList(Predicate<Product> predicate) {
             fail("This method should not be called.");
         }
 
         public boolean canUndoAddressBook() {
+            fail("This method should not be called.");
+            return false;
+        }
+
+        public boolean canUndoDistributorBook() {
             fail("This method should not be called.");
             return false;
         }
@@ -240,7 +256,16 @@ public class LoginCommandTest {
             return false;
         }
 
+        public boolean canRedoDistributorBook() {
+            fail("This method should not be called.");
+            return false;
+        }
+
         public void undoAddressBook() {
+            fail("This method should not be called.");
+        }
+
+        public void undoDistributorBook() {
             fail("This method should not be called.");
         }
 
@@ -248,7 +273,15 @@ public class LoginCommandTest {
             fail("This method should not be called.");
         }
 
+        public void redoDistributorBook() {
+            fail("This method should not be called.");
+        }
+
         public void commitAddressBook() {
+            fail("This method should not be called.");
+        }
+
+        public void commitDistributorBook() {
             fail("This method should not be called.");
         }
 

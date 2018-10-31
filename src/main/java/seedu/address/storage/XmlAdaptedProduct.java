@@ -27,11 +27,11 @@ public class XmlAdaptedProduct {
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
-    private String phone;
+    private String serialNumber;
     @XmlElement(required = true)
-    private String distname;
+    private String distributor;
     @XmlElement(required = true)
-    private String address;
+    private String info;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -45,11 +45,12 @@ public class XmlAdaptedProduct {
     /**
      * Constructs an {@code XmlAdaptedProduct} with the given product details.
      */
-    public XmlAdaptedProduct(String name, String phone, String distname, String address, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedProduct(String name, String serialNumber, String distributor,
+                             String info, List<XmlAdaptedTag> tagged) {
         this.name = name;
-        this.phone = phone;
-        this.distname = distname;
-        this.address = address;
+        this.serialNumber = serialNumber;
+        this.distributor = distributor;
+        this.info = info;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -62,9 +63,9 @@ public class XmlAdaptedProduct {
      */
     public XmlAdaptedProduct(Product source) {
         name = source.getName().fullName;
-        phone = source.getSerialNumber().value;
-        distname = source.getDistributor().fullDistName;
-        address = source.getProductInfo().value;
+        serialNumber = source.getSerialNumber().value;
+        distributor = source.getDistributor().fullDistName;
+        info = source.getProductInfo().value;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -89,30 +90,30 @@ public class XmlAdaptedProduct {
         }
         final Name modelName = new Name(name);
 
-        if (phone == null) {
+        if (serialNumber == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, SerialNumber.class.getSimpleName()));
         }
-        if (!SerialNumber.isValidPhone(phone)) {
+        if (!SerialNumber.isValidPhone(serialNumber)) {
             throw new IllegalValueException(SerialNumber.MESSAGE_PHONE_CONSTRAINTS);
         }
-        final SerialNumber modelSerialNumber = new SerialNumber(phone);
+        final SerialNumber modelSerialNumber = new SerialNumber(serialNumber);
 
-        if (distname == null) {
+        if (distributor == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
-        if (!DistributorName.isValidName(distname)) {
+        if (!DistributorName.isValidName(distributor)) {
             throw new IllegalValueException(DistributorName.MESSAGE_NAME_CONSTRAINTS);
         }
-        final DistributorName modelDistName = new DistributorName(distname);
+        final DistributorName modelDistName = new DistributorName(distributor);
 
-        if (address == null) {
+        if (info == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
+        if (!Address.isValidAddress(info)) {
             throw new IllegalValueException(Address.MESSAGE_ADDRESS_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
+        final Address modelAddress = new Address(info);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Product(modelName, modelSerialNumber, modelDistName, modelAddress, modelTags);
@@ -130,9 +131,9 @@ public class XmlAdaptedProduct {
 
         XmlAdaptedProduct otherPerson = (XmlAdaptedProduct) other;
         return Objects.equals(name, otherPerson.name)
-                && Objects.equals(phone, otherPerson.phone)
-                && Objects.equals(distname, otherPerson.distname)
-                && Objects.equals(address, otherPerson.address)
+                && Objects.equals(serialNumber, otherPerson.serialNumber)
+                && Objects.equals(distributor, otherPerson.distributor)
+                && Objects.equals(info, otherPerson.info)
                 && tagged.equals(otherPerson.tagged);
     }
 }

@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.DistributorBookChangedEvent;
 import seedu.address.commons.events.model.SalesHistoryChangedEvent;
 import seedu.address.commons.events.model.UserDatabaseChangedEvent;
 import seedu.address.commons.events.model.UserDeletedEvent;
@@ -39,16 +40,12 @@ public class TestStorage extends ComponentManager implements Storage {
     }
 
     @Override
-    public Path getDistributorInfoFilePath() {
+    public Path getDistributorBookFilePath() {
         return null;
     }
 
     @Override
     public Path getProductInfoBookFilePath() {
-        return null;
-    }
-
-    public Path getAddressBookFilePath() {
         return null;
     }
 
@@ -63,11 +60,29 @@ public class TestStorage extends ComponentManager implements Storage {
     }
 
     @Override
+    public Optional<ReadOnlyDistributorBook> readDistributorBook() throws DataConversionException, IOException {
+        return null;
+    }
+
+    @Override
+    public Optional<ReadOnlyDistributorBook> readDistributorBook(Path filePath) {
+        return null;
+    }
+
+    @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
     }
 
     @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    }
+
+    @Override
+    public void saveDistributorBook(ReadOnlyDistributorBook distributorBook) throws IOException {
+    }
+
+    @Override
+    public void saveDistributorBook(ReadOnlyDistributorBook distributorBook, Path filePath) throws IOException {
     }
 
     /**
@@ -79,6 +94,9 @@ public class TestStorage extends ComponentManager implements Storage {
     public void handleAddressBookChangedEvent(AddressBookChangedEvent abce) {
     }
 
+    @Override
+    public void handleDistributorBookChangedEvent(DistributorBookChangedEvent abce) {
+    }
 
     @Override
     public Path getUserDatabaseFilePath() {
@@ -140,6 +158,11 @@ public class TestStorage extends ComponentManager implements Storage {
     public void deleteSalesHistory() throws IOException {
 
     }
+
+    public void deleteDistributorBook(User user) {
+
+    }
+
 
     @Override
     public void handleUserDeletedEvent(UserDeletedEvent event) {

@@ -891,9 +891,21 @@ _{More to be added}_
 *MSS*
 
 1.  User requests to list products
-2.  AddressBook shows a list of products
+2.  Inventarie PRO shows a list of products
 3.  User requests to delete a specific product in the list
-4.  AddressBook deletes the product
+4.  Inventarie PRO deletes the product
++
+Use case ends.
+
+[discrete]
+=== Use case: Delete distributor
+
+*MSS*
+
+1.  User requests to list distributors
+2.  Inventarie PRO shows a list of distributors
+3.  User requests to delete a specific distributor in the list
+4.  Inventarie PRO deletes the product
 +
 Use case ends.
 
@@ -981,6 +993,20 @@ _{ more test cases ... }_
    Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
    Expected: No product is deleted. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
+   Expected: Similar to previous.
+
+_{ more test cases ... }_
+
+=== Deleting a distributor
+
+. Deleting a distributor while all distributors are listed
+
+.. Prerequisites: List all distributors using the `listDistributor` command. Multiple products in the list.
+.. Test case: `deleteDistributor 1` +
+   Expected: First contact is deleted from the list. Details of the deleted distributor shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `deleteDistributor 0` +
+   Expected: No distributor is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 

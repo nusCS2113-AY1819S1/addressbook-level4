@@ -19,6 +19,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+
 import seedu.address.model.ProductDatabase;
 import seedu.address.model.product.NameContainsKeywordsPredicate;
 import seedu.address.model.product.Product;
@@ -50,6 +51,17 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+
+    public static final String VALID_DIST_NAME_AHBENG = "Ah Beng";
+    public static final String VALID_DIST_NAME_AHHUAT = "Ah Huat";
+    public static final String VALID_DIST_NAME_AHLEE = "Ah Lee";
+    public static final String VALID_DIST_NAME_AHSENG = "Ah Seng";
+    public static final String VALID_DIST_PHONE_AHBENG = "11111111";
+    public static final String VALID_DIST_PHONE_AHHUAT = "22222222";
+    public static final String VALID_DIST_PHONE_AHLEE = "33333333";
+    public static final String VALID_DIST_PHONE_AHSENG = "44444444";
+
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -121,7 +133,7 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         ProductDatabase expectedProductDatabase = new ProductDatabase(actualModel.getProductInfoBook());
-        List<Product> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        List<Product> expectedFilteredList = new ArrayList<>(actualModel.getFilteredProductList());
 
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
 
@@ -131,7 +143,7 @@ public class CommandTestUtil {
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
             assertEquals(expectedProductDatabase, actualModel.getProductInfoBook());
-            assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+            assertEquals(expectedFilteredList, actualModel.getFilteredProductList());
             assertEquals(expectedCommandHistory, actualCommandHistory);
         }
     }
@@ -141,20 +153,20 @@ public class CommandTestUtil {
      * {@code model}'s address book.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredProductList().size());
 
-        Product product = model.getFilteredPersonList().get(targetIndex.getZeroBased());
+        Product product = model.getFilteredProductList().get(targetIndex.getZeroBased());
         final String[] splitName = product.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredProductList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredPersonList().size());
+        assertEquals(1, model.getFilteredProductList().size());
     }
 
     /**
      * Deletes the first product in {@code model}'s filtered list from {@code model}'s address book.
      */
     public static void deleteFirstPerson(Model model) {
-        Product firstProduct = model.getFilteredPersonList().get(0);
+        Product firstProduct = model.getFilteredProductList().get(0);
         model.deletePerson(firstProduct);
         model.commitAddressBook();
     }

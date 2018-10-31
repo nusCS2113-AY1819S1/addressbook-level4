@@ -7,11 +7,11 @@ import javafx.scene.layout.Region;
 import seedu.address.model.distributor.Distributor;
 
 /**
- * An UI component that displays information of a {@code Product}.
+ * An UI component that displays information of a {@code Distributor}.
  */
 public class DistributorCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "DistributorListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -37,7 +37,7 @@ public class DistributorCard extends UiPart<Region> {
         this.distributor = distributor;
         id.setText(displayedIndex + "." + "\n");
         name.setText("Name: " + distributor.getDistName().fullDistName);
-        phone.setText("Serial Number: " + distributor.getDistPhone().value);
+        phone.setText("Phone: " + distributor.getDistPhone().value);
     }
 
     @Override

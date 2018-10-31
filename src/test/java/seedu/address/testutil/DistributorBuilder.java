@@ -5,12 +5,12 @@ import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.distributor.DistributorPhone;
 
 /**
- * A utility class to help with building Product objects.
+ * A utility class to help with building Distributor objects.
  */
 public class DistributorBuilder {
 
-    public static final String DEFAULT_NAME = "Ah Bee Distributors";
-    public static final String DEFAULT_SERIAL_NUMBER = "85355255";
+    public static final String DEFAULT_NAME = "Ah Bee";
+    public static final String DEFAULT_PHONE = "00000000";
 
 
     private DistributorName name;
@@ -19,7 +19,7 @@ public class DistributorBuilder {
 
     public DistributorBuilder() {
         name = new DistributorName(DEFAULT_NAME);
-        phone = new DistributorPhone(DEFAULT_SERIAL_NUMBER);
+        phone = new DistributorPhone(DEFAULT_PHONE);
 
     }
 

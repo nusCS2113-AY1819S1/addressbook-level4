@@ -21,11 +21,11 @@ public class UndoDistributorCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (!model.canUndoAddressBook()) {
+        if (!model.canUndoDistributorBook()) {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        model.undoAddressBook();
+        model.undoDistributorBook();
         model.updateFilteredDistributorList(PREDICATE_SHOW_ALL_DISTRIBUTORS);
         return new CommandResult(MESSAGE_SUCCESS);
     }

@@ -18,10 +18,15 @@ public class User {
     private static final String AB_FILEPATH_PREFIX = "addressbook-";
     private static final String AB_SALESHISTORY_FILEPATH_PREFIX = "saleshistory-";
     private static final String AB_FILEPATH_POSTFIX = ".xml";
+    private static final String DB_FILEPATH_FOLDER = "data/";
+    private static final String DB_FILEPATH_PREFIX = "distributorbook-";
+    private static final String DB_FILEPATH_POSTFIX = ".xml";
 
     private Username username;
     private Password password;
     private Path addressBookFilePath;
+    private Path distributorBookFilePath;
+
     private Path salesHistoryFilePath;
 
 
@@ -29,6 +34,7 @@ public class User {
         this.username = new Username("default");
         this.password = new Password("password");
         this.addressBookFilePath = Paths.get(AB_FILEPATH_FOLDER, "addressbook-default.xml");
+        this.distributorBookFilePath = Paths.get(DB_FILEPATH_FOLDER, "distributorbook-default.xml");
         this.salesHistoryFilePath = Paths.get(AB_FILEPATH_FOLDER, "saleshistory-default.xml");
     }
 
@@ -36,21 +42,23 @@ public class User {
      * Creates a user instance
      */
     public User(Username username, Password password) {
-        this(username,
-                password,
+        this(username, password,
                 Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX),
+                Paths.get(DB_FILEPATH_FOLDER, DB_FILEPATH_PREFIX + username + DB_FILEPATH_POSTFIX),
                 Paths.get(AB_FILEPATH_FOLDER, AB_SALESHISTORY_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX));
     }
 
     /**
      * Every field must be present and not null.
      */
-    public User(Username username, Password password, Path addressBookFilePath, Path salesHistoryFilePath) {
-        requireAllNonNull(username, password, addressBookFilePath, salesHistoryFilePath);
+    public User(Username username, Password password, Path addressBookFilePath, Path distributorBookFilePath,
+                Path salesHistoryFilePath) {
+        requireAllNonNull(username, password, addressBookFilePath, distributorBookFilePath, salesHistoryFilePath);
         this.username = username;
         this.password = password;
         this.addressBookFilePath = addressBookFilePath;
         this.salesHistoryFilePath = salesHistoryFilePath;
+        this.distributorBookFilePath = distributorBookFilePath;
     }
 
     /**
@@ -59,6 +67,14 @@ public class User {
     public static boolean isValidAddressBookFilePath(Path test, String username) {
         return test.equals(Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX))
                 && !test.equals(Paths.get(""));
+    }
+
+    /**
+     * Returns true if user of the same name has the correct distributor book extension field.
+     */
+    public static boolean isValidDistributorBookFilePath(Path test, String username) {
+        return test.equals(Paths.get(DB_FILEPATH_FOLDER + DB_FILEPATH_PREFIX + username + DB_FILEPATH_POSTFIX))
+                && !test.equals("");
     }
 
     /**
@@ -82,6 +98,10 @@ public class User {
         return addressBookFilePath;
     }
 
+    public Path getDistributorBookFilePath() {
+        return distributorBookFilePath;
+    }
+
     public Path getSalesHistoryFilePath() {
         return salesHistoryFilePath;
     }
@@ -97,7 +117,8 @@ public class User {
         return otherUser != null
                 && otherUser.getUsername().equals(getUsername())
                 && (otherUser.getPassword().equals(getPassword())
-                || otherUser.getAddressBookFilePath().equals(getAddressBookFilePath()));
+                || otherUser.getAddressBookFilePath().equals(getAddressBookFilePath())
+                || otherUser.getDistributorBookFilePath().equals(getDistributorBookFilePath()));
     }
 
     /**
@@ -117,13 +138,14 @@ public class User {
         User otherPerson = (User) other;
         return otherPerson.getUsername().equals(this.getUsername())
                 && otherPerson.getPassword().equals(this.getPassword())
-                && otherPerson.getAddressBookFilePath().equals(this.getAddressBookFilePath());
+                && otherPerson.getAddressBookFilePath().equals(this.getAddressBookFilePath())
+                && otherPerson.getDistributorBookFilePath().equals(this.getDistributorBookFilePath());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(username, password, addressBookFilePath, salesHistoryFilePath);
+        return Objects.hash(username, password, addressBookFilePath, distributorBookFilePath, salesHistoryFilePath);
     }
 
     @Override
@@ -133,10 +155,13 @@ public class User {
                 .append(getUsername())
                 .append(" Password: ")
                 .append(getPassword())
-                .append(" Product File Path: ")
                 .append(getAddressBookFilePath())
+                .append(" Product File Path: ")
+                .append(getDistributorBookFilePath())
+                .append(" Distributor Book File Path: ")
                 .append(" Sales History File Path: ")
                 .append(getSalesHistoryFilePath());
+
         return builder.toString();
     }
 }

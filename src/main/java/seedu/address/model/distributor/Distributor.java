@@ -75,7 +75,7 @@ public class Distributor {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDistName())
-                .append(" SerialNumber: ")
+                .append(" Phone: ")
                 .append(getDistPhone());
         return builder.toString();
     }

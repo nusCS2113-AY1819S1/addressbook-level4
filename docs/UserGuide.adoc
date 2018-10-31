@@ -22,7 +22,7 @@ Inventarie Pro is for self employed business owners who *prefer to use a desktop
 
 == Quick Start
 
-.  Ensure you have Java version 10 or later installed in your Computer.
+.  Ensure you have Java version 9  installed in your Computer.
 .  Download the latest inventarie.jar here (link will be added later).
 .  Copy the file to the folder you want to use as the home folder for your Inventarie Pro.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
@@ -82,7 +82,7 @@ e.g. `deregister u/John p/pass`
 
 Format: `add n/<product name> s/<serial no.> d/<distributor> i/<info.> t/<tags>`
 
-Adds a product to the list of products offered by the store
+Adds a product to the list of products offered by the store, and adds the distributor to the list of distributors too if the distributor is not yet added. Distributors:s name is the Primary key.
 
 ==== List all products: `inventory`
 
@@ -111,15 +111,22 @@ Lists the best selling products in order of the sales revenues from those produc
 
 ==== Add a distributor: `addDistributor`
 
-Format: `addDistributor dn/<distributor name> dp/<distributor serialNumber>`
+Format: `addDistributor dn/<distributor name> dp/<distributor phone>`
 
-Adds a distributor to the list of distributors engaged with the store.
+Adds a distributor to the list of distributors engaged with the store. Distributors should have different names. There should not exist 2 distributors with the same name but different phone numbers.
+
+==== List all distributors: `listDistributors`
+
+Format: `listDistributors`
+
+Provides the list of distributors engaged with the store.
 
 ==== Edit a distributor: `editDistributor index`
 
 Format: `editDistributor index dn/<distributor name> dp/<distributor serialNumber>`
 
 Edits details of the indexed distributor from the list of distributors engaged with the store.
+Index should be a positive number.
 
 ==== Find a distributor: `findDistributor`
 
@@ -133,11 +140,6 @@ Format: `deleteDistributor index`
 
 Deletes the indexed distributor from the list of distributors engaged with the store.
 
-==== Find all stored contact information (distributors and customers): `contacts`
-
-Format: `contacts`
-
-This command lists all the contacts in alphabetical order of the first name, and whether they are distributors or customers.
 // end::distributormanagement[]
 
 // tag::journal[]

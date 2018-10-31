@@ -21,7 +21,9 @@ public class XmlAdaptedUser {
     @XmlElement(required = true)
     private String password;
     @XmlElement(required = true)
-    private String addressBookFilePath;
+    private String addressbookfilepath;
+    @XmlElement(required = true)
+    private String distributorbookfilepath;
     @XmlElement(required = true)
     private String salesHistoryFilePath;
 
@@ -34,10 +36,13 @@ public class XmlAdaptedUser {
     /**
      * Constructs an {@code XmlAdaptedUser} with the given product details.
      */
-    public XmlAdaptedUser(String username, String password, String addressBookFilePath, String salesHistoryFilePath) {
+    public XmlAdaptedUser(String username, String password,
+                          String addressbookfilepath, String distributorbookfilepath,
+                          String salesHistoryFilePath) {
         this.username = username;
         this.password = password;
-        this.addressBookFilePath = addressBookFilePath;
+        this.addressbookfilepath = addressbookfilepath;
+        this.distributorbookfilepath = distributorbookfilepath;
         this.salesHistoryFilePath = salesHistoryFilePath;
     }
 
@@ -49,7 +54,8 @@ public class XmlAdaptedUser {
     public XmlAdaptedUser(User source) {
         username = source.getUsername().fullUsername;
         password = source.getPassword().fullPassword;
-        addressBookFilePath = source.getAddressBookFilePath().toString();
+        addressbookfilepath = source.getAddressBookFilePath().toString();
+        distributorbookfilepath = source.getDistributorBookFilePath().toString();
         salesHistoryFilePath = source.getSalesHistoryFilePath().toString();
     }
 
@@ -77,25 +83,32 @@ public class XmlAdaptedUser {
         }
         final Password modelPassword = new Password(password);
 
-        if (addressBookFilePath == null) {
+        if (addressbookfilepath == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "ProductDatabase file path"));
         }
 
-        if (!User.isValidAddressBookFilePath(Paths.get(addressBookFilePath), this.username)) {
-            throw new IllegalValueException(String.format(User.MESSAGE_AB_FILEPATH_CONSTRAINTS, "AddressBook"));
+        if (distributorbookfilepath == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "DistributorBook file path"));
         }
-        final Path modelAddressBookFilePath = Paths.get(addressBookFilePath);
 
         if (salesHistoryFilePath == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "SalesHistory file path"));
         }
 
+        if (!User.isValidAddressBookFilePath(Paths.get(addressbookfilepath), this.username)) {
+            throw new IllegalValueException(User.MESSAGE_AB_FILEPATH_CONSTRAINTS);
+        }
+
         if (!User.isValidSalesHistoryFilePath(Paths.get(salesHistoryFilePath), this.username)) {
             throw new IllegalValueException(String.format(User.MESSAGE_AB_FILEPATH_CONSTRAINTS, "SalesHistory"));
         }
+
+        final Path modelAddressBookFilePath = Paths.get(addressbookfilepath);
+        final Path modelDistributorBookFilePath = Paths.get(distributorbookfilepath);
         final Path modelSalesHistoryFilePath = Paths.get(salesHistoryFilePath);
 
-        return new User(modelUsername, modelPassword, modelAddressBookFilePath, modelSalesHistoryFilePath);
+        return new User(modelUsername, modelPassword, modelAddressBookFilePath,
+                modelDistributorBookFilePath, modelSalesHistoryFilePath);
     }
 
     @Override
@@ -111,7 +124,8 @@ public class XmlAdaptedUser {
         XmlAdaptedUser otherUser = (XmlAdaptedUser) other;
         return Objects.equals(username, otherUser.username)
                 && Objects.equals(password, otherUser.password)
-                && Objects.equals(addressBookFilePath, otherUser.addressBookFilePath);
-
+                && Objects.equals(addressbookfilepath, otherUser.addressbookfilepath)
+                && Objects.equals(distributorbookfilepath, otherUser.distributorbookfilepath)
+                && Objects.equals(salesHistoryFilePath, otherUser.salesHistoryFilePath);
     }
 }

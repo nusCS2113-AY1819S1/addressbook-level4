@@ -22,24 +22,20 @@ public class DistributorTest {
 
     @Test
     public void isValidDistributor() {
-        // null email
-        Assert.assertThrows(NullPointerException.class, () -> Email.isValidEmail(null));
-
-        // blank email
-        assertFalse(Email.isValidEmail("")); // empty string
-        assertFalse(Email.isValidEmail(" ")); // spaces only
+        // null name
+        Assert.assertThrows(NullPointerException.class, () -> Name.isValidName(null));
 
         // invalid name
-        assertFalse(Email.isValidEmail("")); // empty string
-        assertFalse(Email.isValidEmail(" ")); // spaces only
-        assertFalse(Email.isValidEmail("^")); // only non-alphanumeric characters
-        assertFalse(Email.isValidEmail("peter*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidName("")); // empty string
+        assertFalse(Name.isValidName(" ")); // spaces only
+        assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
+        assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
 
         // valid name
-        assertTrue(Email.isValidEmail("peter jack")); // alphabets only
-        assertTrue(Email.isValidEmail("12345")); // numbers only
-        assertTrue(Email.isValidEmail("peter the 2nd")); // alphanumeric characters
-        assertTrue(Email.isValidEmail("Capital Tan")); // with capital letters
-        assertTrue(Email.isValidEmail("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Name.isValidName("peter jack")); // alphabets only
+        assertTrue(Name.isValidName("12345")); // numbers only
+        assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
+        assertTrue(Name.isValidName("Capital Tan")); // with capital letters
+        assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
     }
 }

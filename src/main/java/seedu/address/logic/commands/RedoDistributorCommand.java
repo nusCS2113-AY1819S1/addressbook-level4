@@ -20,11 +20,11 @@ public class RedoDistributorCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (!model.canRedoAddressBook()) {
+        if (!model.canRedoDistributorBook()) {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        model.redoAddressBook();
+        model.redoDistributorBook();
         model.updateFilteredDistributorList(PREDICATE_SHOW_ALL_DISTRIBUTORS);
         return new CommandResult(MESSAGE_SUCCESS);
     }

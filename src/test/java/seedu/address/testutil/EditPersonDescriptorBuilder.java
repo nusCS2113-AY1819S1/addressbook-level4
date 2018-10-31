@@ -58,8 +58,8 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withEmail(String distname) {
-        descriptor.setEmail(new DistributorName(distname));
+    public EditPersonDescriptorBuilder withEmail(String email) {
+        descriptor.setEmail(new DistributorName(email));
         return this;
     }
 

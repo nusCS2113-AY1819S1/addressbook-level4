@@ -23,7 +23,7 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Product> getFilteredPersonList();
+    ObservableList<Product> getFilteredProductList();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Distributor> getFilteredDistributorList();

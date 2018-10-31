@@ -9,7 +9,7 @@ import javafx.scene.control.ListView;
 import seedu.address.model.product.Product;
 
 /**
- * Provides a handle for {@code ProductListPanel} containing the list of {@code PersonCard}.
+ * Provides a handle for {@code ProductListPanel} containing the list of {@code ProductCard}.
  */
 public class PersonListPanelHandle extends NodeHandle<ListView<Product>> {
     public static final String PERSON_LIST_VIEW_ID = "#personListView";
@@ -91,7 +91,7 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Product>> {
     }
 
     /**
-     * Selects the {@code PersonCard} at {@code index} in the list.
+     * Selects the {@code ProductCard} at {@code index} in the list.
      */
     public void select(int index) {
         getRootNode().getSelectionModel().select(index);
@@ -123,7 +123,7 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Product>> {
     }
 
     /**
-     * Remembers the selected {@code PersonCard} in the list.
+     * Remembers the selected {@code ProductCard} in the list.
      */
     public void rememberSelectedPersonCard() {
         List<Product> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
@@ -136,7 +136,7 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Product>> {
     }
 
     /**
-     * Returns true if the selected {@code PersonCard} is different from the value remembered by the most recent
+     * Returns true if the selected {@code ProductCard} is different from the value remembered by the most recent
      * {@code rememberSelectedPersonCard()} call.
      */
     public boolean isSelectedPersonCardChanged() {
