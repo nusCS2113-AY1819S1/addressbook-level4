@@ -19,15 +19,13 @@ public class ChangeStatusCommand extends Command {
             + PREFIX_QUANTITY + "5 "
             + PREFIX_ORIGINAL_STATUS + "Ready "
             + PREFIX_NEW_STATUS + "Faulty";
-    public static final String MESSAGE_CHANG_STATUS_SUCCESS = "Changed Status: %1$s";
-    public static final String MESSAGE_INVALID_STATUS_QUANTITY = "The change status quantity input is invalid";
+    public static final String MESSAGE_CHANGE_STATUS_SUCCESS = "Changed Status: %1$s";
     public static final String MESSAGE_INVALID_STATUS_FIELD = "The status description is invalid";
     public static final String MESSAGE_INVALID_NAME_FIELD = "The item does not exist";
     public static final String MESSAGE_STATUS_CONSTRAINTS =
             "The updated value of each status field has to be positive";
 
     private Index index;
-    private boolean hasItem = false;
     private final ChangeStatusDescriptor changeStatusDescriptor;
     public ChangeStatusCommand(ChangeStatusDescriptor changeStatusDescriptor) {
         requireNonNull(changeStatusDescriptor);
@@ -38,31 +36,33 @@ public class ChangeStatusCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Item> lastShownList = model.getFilteredItemList();
-        int counter = 0;
-        for (Item item:lastShownList) {
-            if (item.getName().equals(changeStatusDescriptor.getName())) {
-                index = Index.fromZeroBased(counter);
-                hasItem = true;
-            }
-            counter++;
-        }
-        if (!hasItem) {
-            throw new CommandException(MESSAGE_INVALID_NAME_FIELD);
-        }
+
+        index = getIndex(lastShownList, changeStatusDescriptor);
 
         Item itemToUpdate = lastShownList.get(index.getZeroBased());
 
         Item updatedItem = createUpdatedItem(itemToUpdate, changeStatusDescriptor);
 
-        if (!itemToUpdate.isSameItem(updatedItem) && model.hasItem(updatedItem)) {
-            throw new CommandException(MESSAGE_INVALID_STATUS_QUANTITY);
-        }
         model.updateItem(itemToUpdate, updatedItem);
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitStockList();
-        return new CommandResult(String.format(MESSAGE_CHANG_STATUS_SUCCESS, updatedItem));
+        return new CommandResult(String.format(MESSAGE_CHANGE_STATUS_SUCCESS, updatedItem));
 
 
+    }
+
+    private static Index getIndex(List<Item> lastShownList, ChangeStatusDescriptor changeStatusDescriptor)
+            throws CommandException {
+        Index index;
+        int counter = 0;
+        for (Item item:lastShownList) {
+            if (item.getName().equals(changeStatusDescriptor.getName())) {
+                index = Index.fromZeroBased(counter);
+                return index;
+            }
+            counter++;
+        }
+        throw new CommandException(MESSAGE_INVALID_NAME_FIELD);
     }
     /**
      * Creates and returns a {@code Item} with the details of {@code itemToUpdate}
@@ -122,7 +122,16 @@ public class ChangeStatusCommand extends Command {
         private String initialStatus;
         private String updatedStatus;
 
-        public ChangeStatusDescriptor() {}
+        public ChangeStatusDescriptor() {
+        }
+
+        public ChangeStatusDescriptor(Name name, Integer changeStatusQuantity,
+                                      String initialStatus, String updatedStatus) {
+            this.name = name;
+            this.changeStatusQuantity = changeStatusQuantity;
+            this.initialStatus = initialStatus;
+            this.updatedStatus = updatedStatus;
+        }
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
@@ -178,10 +187,15 @@ public class StatusCommand extends Command {
         ArrayList<SimpleItem> readyItems = new ArrayList<>();
         ArrayList<SimpleItem> onLoanItems = new ArrayList<>();
         ArrayList<SimpleItem> faultyItems = new ArrayList<>();
+
         List<Item> lastShownList = model.getFilteredItemList();
+
         sortSimpleItems(lastShownList, readyItems, onLoanItems, faultyItems);
+
         String messageOutput = getMessageOutput(readyItems, onLoanItems, faultyItems);
+
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+
         return new CommandResult(messageOutput);
     }
 
@@ -205,6 +219,7 @@ public class StatusCommand extends Command {
             }
         }
     }
+
     String getMessageOutput (ArrayList<SimpleItem> readyItems,
                            ArrayList<SimpleItem> onLoanItems, ArrayList<SimpleItem> faultyItems) {
         String messageOutput = "";
@@ -257,6 +272,7 @@ public class ChangeStatusCommandParser implements Parser<ChangeStatusCommand> {
      * and returns an ChangeStatusCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
+
     public ChangeStatusCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
@@ -267,18 +283,24 @@ public class ChangeStatusCommandParser implements Parser<ChangeStatusCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ChangeStatusCommand.MESSAGE_USAGE));
         }
+        String initialStatus = ParserUtil
+                .parseStatus(argMultimap.getValue(PREFIX_ORIGINAL_STATUS).get());
+        String updatedStatus = ParserUtil
+                .parseStatus(argMultimap.getValue(PREFIX_NEW_STATUS).get());
+        if (initialStatus.equals("On_Loan") || updatedStatus.equals("On_Loan")) {
+            throw new ParseException(String.format(ChangeStatusCommand.MESSAGE_INVALID_STATUS_FIELD));
+        }
         ChangeStatusDescriptor changeStatusDescriptor = new ChangeStatusDescriptor();
         changeStatusDescriptor.setName(ParserUtil
                 .parseName(argMultimap.getValue(PREFIX_NAME).get()));
         changeStatusDescriptor.setQuantity(ParserUtil
                 .parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get()).toInteger());
-        changeStatusDescriptor.setInitialStatus(ParserUtil
-                .parseStatus(argMultimap.getValue(PREFIX_ORIGINAL_STATUS).get()));
-        changeStatusDescriptor.setUpdatedStatus(ParserUtil
-                .parseStatus(argMultimap.getValue(PREFIX_NEW_STATUS).get()));
+        changeStatusDescriptor.setInitialStatus(initialStatus);
+        changeStatusDescriptor.setUpdatedStatus(updatedStatus);
 
         return new ChangeStatusCommand(changeStatusDescriptor);
     }
+
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }

@@ -11,46 +11,45 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddTagCommand;
-import seedu.address.logic.commands.AddTagCommand.AddTagDescriptor;
+import seedu.address.logic.commands.DeleteTagCommand;
+import seedu.address.logic.commands.DeleteTagCommand.DeleteTagDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new AddTagCommand object
+ * Parses input arguments and creates a new DeleteTagCommand object
  */
-public class AddTagCommandParser implements Parser<AddTagCommand> {
+public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
 
     /**
-     * Parsers the given (@code String) of arguments in the context of the AddTagCommand and
-     * returns an AddTagCommand object for execution.
+     * Parsers the given (@code String) of arguments in the context of the DeleteTagCommand and
+     * returns an DeleteTagCommand object for execution.
      * @Throws ParseException if the user input does not conform the expected format
      */
-    public AddTagCommand parse(String args) throws ParseException {
+    public DeleteTagCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
 
         Index index;
 
-        AddTagDescriptor addTagDescriptor = new AddTagCommand.AddTagDescriptor();
+        DeleteTagDescriptor deleteTagDescriptor = new DeleteTagCommand.DeleteTagDescriptor();
 
-        parseTagsToAdd(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(addTagDescriptor::setTags);
+        parseTagsToAdd(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(deleteTagDescriptor::setTags);
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagCommand.MESSAGE_USAGE), pe);
         }
 
-        if (!addTagDescriptor.haveTag()) {
+        if (!deleteTagDescriptor.haveTag()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_NO_TAG));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagCommand.MESSAGE_NO_TAG));
         }
 
-        return new AddTagCommand(index, addTagDescriptor);
+        return new DeleteTagCommand(index, deleteTagDescriptor);
     }
-
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a

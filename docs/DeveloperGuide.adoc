@@ -465,7 +465,7 @@ Given below is an example usage scenario and how the addTag mechanism behaves at
 
 Step 1. The user executes `addTag 1 t/ Lab2` command to add a tag `Lab2` to the item with index 2 in the Stock List.
 
-Step 2. The 'addTag' command calls `updateFilteredItemList();` in `model` show the stock list after the tag is added.
+Step 2. The `addTag` command calls `updateFilteredItemList();` in `model` show the stock list after the tag is added.
 
 
 ==== Design Considerations

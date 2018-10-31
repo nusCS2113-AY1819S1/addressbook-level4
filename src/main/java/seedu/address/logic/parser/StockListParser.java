@@ -13,6 +13,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteLoanListCommand;
+import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -71,6 +72,8 @@ public class StockListParser {
             return new SelectCommandParser().parse(arguments);
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+        case DeleteTagCommand.COMMAND_WORD:
+            return new DeleteTagCommandParser().parse(arguments);
         case LostCommand.COMMAND_WORD:
             return new LostCommandParser().parse(arguments);
         case FoundCommand.COMMAND_WORD:
@@ -81,6 +84,8 @@ public class StockListParser {
             return new ClearCommand();
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
+        case TagCommand.COMMAND_WORD:
+            return new TagCommandParser().parse(arguments);
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
         case StatusCommand.COMMAND_WORD:
@@ -109,8 +114,6 @@ public class StockListParser {
             return new SaveCommandParser().parse(arguments);
         case OpenCommand.COMMAND_WORD:
             return new OpenCommandParser().parse(arguments);
-        case TagCommand.COMMAND_WORD:
-            return new TagCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
