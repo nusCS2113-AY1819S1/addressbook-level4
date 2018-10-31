@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.Assert.assertNotNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_KEY_WORD;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -10,21 +10,21 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.NoteListCommand;
+import seedu.address.logic.commands.NoteFindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.note.NoteManager;
 
 /**
- * Contains tests for NoteListCommandParser.
+ * Contains tests for NoteFindCommandParser.
  */
-public class NoteListCommandParserTest {
+public class NoteFindCommandParserTest {
 
     private static NoteManager noteManager = NoteManager.getInstance();
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private NoteListCommandParser parser = new NoteListCommandParser();
+    private NoteFindCommandParser parser = new NoteFindCommandParser();
 
     @Before
     public void setUp() {
@@ -35,38 +35,37 @@ public class NoteListCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() throws ParseException {
         String expectedMessageInvalidCommand = String.format(
-                Messages.MESSAGE_INVALID_COMMAND_FORMAT, NoteListCommand.MESSAGE_USAGE);
-        String expectedMessageEmptyModuleCodeArg = NoteListCommand.MESSAGE_EMPTY_MODULE_CODE_ARG;
+                Messages.MESSAGE_INVALID_COMMAND_FORMAT, NoteFindCommand.MESSAGE_USAGE);
 
-        // invalid args, missing prefix
-        String args = " CS2113";
+        String expectedMessageInvalidKeyword = NoteFindCommand.MESSAGE_INVALID_KEYWORD;
+
+        // invalid args, empty
+        String args = "";
 
         thrown.expect(ParseException.class);
         thrown.expectMessage(expectedMessageInvalidCommand);
         parser.parse(args);
 
-        // invalid args, with prefix but has empty param
-        args = " " + PREFIX_MODULE_CODE;
+        // invalid args with prefix but blank param
+        args = " " + PREFIX_NOTE_KEY_WORD;
 
         thrown.expect(ParseException.class);
-        thrown.expectMessage(expectedMessageEmptyModuleCodeArg);
+        thrown.expectMessage(expectedMessageInvalidKeyword);
         parser.parse(args);
+
+        // invalid args with prefix but contains a space in between
+        args = " " + PREFIX_NOTE_KEY_WORD + "hello world";
     }
 
     @Test
     public void parse_validArgs_success() throws ParseException {
-        // valid args with empty arguments
-        String args = "";
-        NoteListCommand noteListCommand = parser.parse(args);
+        NoteFindCommand noteFindCommand = null;
 
-        assertNotNull(noteListCommand);
+        // valid args with two non-empty keywords and no spaces in between
+        String args = " " + PREFIX_NOTE_KEY_WORD + "hello " + PREFIX_NOTE_KEY_WORD + "world";
 
-        // valid args with module code
-        args = " " + PREFIX_MODULE_CODE + "CS2113";
-        noteListCommand = null;
-        noteListCommand = parser.parse(args);
-
-        assertNotNull(noteListCommand);
+        noteFindCommand = parser.parse(args);
+        assertNotNull(noteFindCommand);
     }
 
     @AfterClass

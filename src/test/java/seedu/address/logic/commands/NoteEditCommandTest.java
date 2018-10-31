@@ -9,72 +9,135 @@ import org.junit.rules.ExpectedException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ModelManager;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.note.Note;
+import seedu.address.model.note.NoteDate;
+import seedu.address.model.note.NoteLocation;
 import seedu.address.model.note.NoteManager;
+import seedu.address.model.note.NoteTime;
+import seedu.address.model.note.NoteTitle;
 import seedu.address.testutil.NoteBuilder;
+import seedu.address.ui.BrowserPanel;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Contains tests for NoteEditCommand.
  */
 public class NoteEditCommandTest {
 
+    private static NoteManager noteManager = NoteManager.getInstance();
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private static NoteManager noteManager = NoteManager.getInstance();
-
-    private NoteBuilder note1 = new NoteBuilder(
-            "CS1010",
-            "First note",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "C");
-
-    private NoteBuilder note2 = new NoteBuilder(
-            "CS2040C",
-            "Second note",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "C++");
-
-    private NoteBuilder note3 = new NoteBuilder(
-            "CS2113",
-            "Third note",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "Java");
-
+    private NoteBuilder note1 = new NoteBuilder();
+    private NoteBuilder note2 = new NoteBuilder();
+    private NoteBuilder note3 = new NoteBuilder();
 
     @Before
     public void setUp() {
         noteManager.clearNotes();
         noteManager.saveNoteList();
+        BrowserPanel.setNotePageIsLoaded(true);
+    }
+
+    @Test
+    public void execute_notePageNotLoadedInWebView_displaysMessageNotePageNotLoaded() throws CommandException {
+        String expectedMessage = NoteEditCommand.MESSAGE_NOTE_PAGE_NOT_LOADED;
+
+        // assert that note page is currently not loaded
+        BrowserPanel.setNotePageIsLoaded(false);
+
+        noteManager.addNote(note1.build());
+        noteManager.saveNoteList(); // contains one note in list
+        noteManager.setFilteredNotesNoFilter();
+
+        int index = 1; // arraylist size: 1, accessed index = 0 (zero-based) -> within bounds
+        NoteBuilder editedNote1Builder = new NoteBuilder(note1.build());
+        editedNote1Builder.withNoteText("Changed the note text");
+
+        Note editedNote1 = editedNote1Builder.build();
+        NoteEditCommand noteEditCommand =
+                new NoteEditCommand(
+                        index,
+                        editedNote1.getModuleCode(),
+                        editedNote1.getTitle(),
+                        editedNote1.getStartDate(),
+                        editedNote1.getStartTime(),
+                        editedNote1.getEndDate(),
+                        editedNote1.getEndTime(),
+                        editedNote1.getLocation()
+                );
+
+        CommandResult result = noteEditCommand.execute(new ModelManager(), new CommandHistory());
+        assertEquals(expectedMessage, result.feedbackToUser);
+    }
+
+    @Test
+    public void execute_invalidDateTimeDifference_throwsCommandException() throws CommandException {
+        String expectedMessage = NoteEditCommand.MESSAGE_INVALID_DATE_TIME_DIFFERENCE;
+
+        // setup Note to edit
+        note2 = note2.withStartDate("12-12-2012");
+        note2 = note2.withStartTime("10:00 AM");
+        note2 = note2.withEndDate("13-12-2012");
+        note2 = note2.withEndTime("9:00 AM");
+
+        // Populate the notes list
+        noteManager.addNote(note1.build()); // index 0
+        noteManager.addNote(note2.build()); // index 1
+        noteManager.addNote(note3.build()); // index 2
+        noteManager.saveNoteList();
+        noteManager.setFilteredNotesNoFilter();
+
+        int index = 2; // arraylist size: 3, accessed index = 1 (zero-based) -> within bounds
+
+        // setup note2 with edited end date
+        NoteBuilder editedNote2Builder = new NoteBuilder(note2.build());
+        // set new note to be earlier date than current note2's start date
+        editedNote2Builder = editedNote2Builder.withEndDate("11-12-2012");
+
+        Note editedNote2 = editedNote2Builder.build();
+        NoteEditCommand noteEditCommand =
+                new NoteEditCommand(
+                        index,
+                        editedNote2.getModuleCode(),
+                        editedNote2.getTitle(),
+                        editedNote2.getStartDate(),
+                        editedNote2.getStartTime(),
+                        editedNote2.getEndDate(),
+                        editedNote2.getEndTime(),
+                        editedNote2.getLocation()
+                );
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(expectedMessage);
+        noteEditCommand.execute(new ModelManager(), new CommandHistory());
     }
 
     @Test
     public void execute_indexOutOfBounds_throwsCommandException() throws CommandException {
+        // Change some fields
+        note2 = note2.withStartDate("22-12-2018");
+        note3 = note3.withNoteText("note 3");
+
         noteManager.addNote(note1.build());
         noteManager.addNote(note2.build());
         noteManager.addNote(note3.build());
         noteManager.saveNoteList();
+        noteManager.setFilteredNotesNoFilter();
 
         int index = 5; // arraylist size: 3, accessed index = 4 (zero-based) -> out of bounds
-        String newModuleCode = "CS5000";
-        String newTitle = "My new title";
-        String newStartDate = "1/1/2019";
-        String newStartTime = "11:00 AM";
-        String newEndDate = "1/1/2019";
-        String newEndTime = "1:00 PM";
-        String newLocation = "National University of Singapore";
+        ModuleCode newModuleCode = new ModuleCode("CS5000");
+        NoteTitle newTitle = new NoteTitle("My new title");
+        NoteDate newStartDate = new NoteDate("1-1-2019");
+        NoteTime newStartTime = new NoteTime("11:00 AM");
+        NoteDate newEndDate = new NoteDate("1/1/2019");
+        NoteTime newEndTime = new NoteTime("1:00 PM");
+        NoteLocation newLocation = new NoteLocation("National University of Singapore");
 
+        // Try to modify the Note at index 4 of arraylist
         NoteEditCommand noteEditCommand =
                 new NoteEditCommand(
                         index,

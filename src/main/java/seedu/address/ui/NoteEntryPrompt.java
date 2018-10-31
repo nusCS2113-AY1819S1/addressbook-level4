@@ -10,6 +10,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import seedu.address.model.note.Note;
+import seedu.address.model.note.NoteText;
 
 /**
  * This is the controller for the NoteEntryPromptWindow FXML.
@@ -34,10 +35,6 @@ public class NoteEntryPrompt {
     private boolean feedbackLabelIsDisplayed = false;
     private boolean isCancelled = false;
 
-    public NoteEntryPrompt() {
-
-    }
-
     private void initialize() {
 
     }
@@ -54,7 +51,7 @@ public class NoteEntryPrompt {
     public void setNote(Note note) {
         this.note = note;
 
-        noteContent.setText(note.getNoteText());
+        noteContent.setText(note.getNoteText().toString());
         noteContent.setPromptText("Enter note here.");
     }
 
@@ -100,7 +97,7 @@ public class NoteEntryPrompt {
         String tempNote = noteContent.getText();
 
         if (!tempNote.trim().isEmpty()) {
-            note.setNoteText(tempNote);
+            note.setNoteText(new NoteText(tempNote));
             dialogStage.close();
         } else {
             displayFeedbackLabel();
