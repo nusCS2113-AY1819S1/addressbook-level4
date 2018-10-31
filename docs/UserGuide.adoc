@@ -683,7 +683,7 @@ e.g. `student find Megan Nicole`
 * *List all students* : `student list` +
 * *Delete student by INDEX* : `student delete` +
 e.g. `student delete 2`
-* *Export students [COMING IN V1.4]* : `student export`+
+* *Export students [COMING IN V1.4]* : `student export` +
 e.g. `student export C:\export`
 
 * *Add module* : `module add mc/MODULE_CODE mn/MODULE_NAME` +
