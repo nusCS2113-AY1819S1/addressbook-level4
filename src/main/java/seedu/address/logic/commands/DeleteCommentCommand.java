@@ -64,6 +64,7 @@ public class DeleteCommentCommand extends Command {
 
         List<Event> filteredEventList = model.getFilteredEventList();
 
+
         if (index.getZeroBased() >= filteredEventList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
