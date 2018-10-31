@@ -16,7 +16,8 @@ import seedu.address.model.util.AssignGrades;
 public class AssignGradeCommand extends Command {
     public static final String COMMAND_WORD = "AssignGradePerTest";
     public static final String COMMAND_WORD_2 = "agpt";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": assign grade to all students who has taken certain test\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": assign grade"
+            + " to all students who has taken certain test\n"
             + "the correct format should be.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD_2 + " " + PREFIX_TEST_NAME + "cs2113quiz1 ";
