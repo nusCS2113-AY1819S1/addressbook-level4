@@ -41,7 +41,7 @@ public class FindCandidateCommand extends Command {
             + PREFIX_JOB + "JOB "
             + PREFIX_SALARY + "SALARY "
             + PREFIX_TAG + "TAG " + "\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + " alice bob charlie";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + " alice" + PREFIX_SALARY + " 2500";
 
     private final CandidateContainsKeywordsPredicate candidatePredicate;
 
