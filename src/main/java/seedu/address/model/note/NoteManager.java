@@ -24,12 +24,17 @@ public class NoteManager {
                     "subject", "startDate", "startTime", "endDate", "endTime", "description", "location"
             ));
 
+    private static final int FILTERED_BY_MODULE_CODE = 1;
+    private static final int FILTERED_BY_KEYWORDS = 2;
+    private static final int NO_FILTER = 0;
+
     private static NoteManager noteManager = null;
 
     private ArrayList<Note> notes = new ArrayList<>();
     private List<Note> filteredNotes;
 
     private String currentFilter = "";
+    private int currentFilterState = 0; // 0 = all, 1 = by moduleCode, 2 = by keywords
 
     private NoteManager() {
         readNoteList();
@@ -49,7 +54,8 @@ public class NoteManager {
     public void addNote(Note note) {
         requireNonNull(note);
         notes.add(note);
-        setFilteredNotes(currentFilter);
+
+        refreshFilteredNotes();
     }
 
     /**
@@ -61,7 +67,8 @@ public class NoteManager {
             throw new IndexOutOfBoundsException(NoteDeleteCommand.MESSAGE_INVALID_INDEX);
         }
         notes.remove(getNoteAt(index));
-        setFilteredNotes(currentFilter);
+
+        refreshFilteredNotes();
     }
 
     public String getHtmlNoteList() {
@@ -147,27 +154,81 @@ public class NoteManager {
         return this.notes;
     }
 
-    public void setFilteredNotes(String moduleCode) {
-        if (!moduleCode.trim().isEmpty()) {
+    public void setFilteredNotesNoFilter() {
+        filteredNotes = notes;
+        currentFilter = "";
+        currentFilterState = NO_FILTER;
+    }
+
+    /**
+     * Filter all notes that do not match the given {@code moduleCode} parameter.
+     *
+     * @param moduleCode contains the Module Code to be compared with the note's moduleCode attribute
+     */
+    public void setFilteredNotesByModuleCode(String moduleCode) {
+        requireNonNull(moduleCode);
+        String trimmedModuleCode = moduleCode.trim();
+
+        if (!trimmedModuleCode.isEmpty()) {
             filteredNotes = notes.stream()
-                    .filter(p -> p.getModuleCode().toString().equalsIgnoreCase(moduleCode))
+                    .filter(n -> n.getModuleCode().toString().equalsIgnoreCase(trimmedModuleCode))
                     .collect(Collectors.toList());
 
             if (filteredNotes.size() > 0) {
                 currentFilter = moduleCode;
+                currentFilterState = FILTERED_BY_MODULE_CODE;
             }
         } else {
             currentFilter = "";
+            currentFilterState = NO_FILTER;
             filteredNotes = notes;
+        }
+    }
+
+    /**
+     * Filter all notes that do not match the given {@code matcher} parameter.
+     *
+     * @param matcher contains the RegEx string for finding keyword(s)
+     *                from a Note object's {@code title} or {@code noteText}
+     */
+    public void setFilteredNotesByKeyword(String matcher) {
+        requireNonNull(matcher);
+
+        filteredNotes = notes.stream()
+                .filter(n -> n.getNoteText().toString().replaceAll("(\r\n|\n)", " ")
+                        .matches(matcher)
+                        || n.getTitle().toString()
+                        .matches(matcher))
+                .collect(Collectors.toList());
+
+        if (filteredNotes.size() > 0) {
+            currentFilter = matcher;
+            currentFilterState = FILTERED_BY_KEYWORDS;
+        }
+    }
+
+    /**
+     * Rebuilds the viewable notes list depending on the latest
+     * non-empty resulting filter.
+     */
+    public void refreshFilteredNotes() {
+        switch (currentFilterState) {
+        case NO_FILTER:
+            setFilteredNotesByModuleCode("");
+            break;
+        case FILTERED_BY_MODULE_CODE:
+            setFilteredNotesByModuleCode(currentFilter);
+            break;
+        case FILTERED_BY_KEYWORDS:
+            setFilteredNotesByKeyword(currentFilter);
+            break;
+        default:
+            setFilteredNotesByModuleCode("");
         }
     }
 
     public List<Note> getFilteredNotes() {
         return filteredNotes;
-    }
-
-    public String getCurrentFilter() {
-        return this.currentFilter;
     }
 
     /**
