@@ -111,9 +111,24 @@ Examples:
 Decreases the quantity of the 1st item by 20
 
 === Listing all items : `list`
+
 Shows all items in the stock list +
 Format: `list`
 
+=== Selecting and highlighting an item : `select`
+
+Selects and highlights one item using its index number +
+Format: `select INDEX`
+
+Examples:
+
+* `select 1` +
+Selects and highlights the item with the index number 1
+
+=== Clearing all items : `clear`
+
+Clears all items in the stock list +
+Format: `clear`
 
 === Locating items by name: `find`
 
@@ -160,10 +175,12 @@ Examples:
 This would update the status of the 20 arduinos to On_Loan, and add the entry into the loan list
 
 === Viewing the loan list: `viewLoanList`
+
 Shows every loan list entry +
 Format: `viewLoanList`
 
 === Deleting a loan list entry: `deleteLoanList`
+
 An entry in the loan list can be deleted when the loaner returns the items +
 Format: `deleteLoanList INDEX`
 
@@ -202,43 +219,6 @@ Examples:
 * `deleteTag 1 t/ Lab1 t/ Lab2` +
 Deletes tags "Lab1" and "Lab2" from the item with index 1
 
-=== Listing entered commands : `history`
-
-Lists all the commands that you have entered in reverse chronological order. +
-Format: `history`
-
-[NOTE]
-====
-Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
-====
-
-// tag::undoredo[]
-=== Undoing previous command : `undo`
-
-Restores the address book to the state before the previous _undoable_ command was executed. +
-Format: `undo`
-
-[NOTE]
-====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
-====
-
-Examples:
-
-* `delete 1` +
-`list` +
-`undo` (reverses the `delete 1` command) +
-
-* `select 1` +
-`list` +
-`undo` +
-The `undo` command fails as there are no undoable commands executed previously.
-
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-
 === Lost an item: `lost`
 
 Lost an item From the stock list +
@@ -266,7 +246,31 @@ Examples:
 Shows the number of every lost item that has been lost +
 Format: `lost&found`
 
+=== Undoing previous command : `undo`
 
+Restores the address book to the state before the previous _undoable_ command was executed. +
+Format: `undo`
+
+[NOTE]
+====
+Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+====
+
+Examples:
+
+* `delete 1` +
+`list` +
+`undo` (reverses the `delete 1` command) +
+
+* `select 1` +
+`list` +
+`undo` +
+The `undo` command fails as there are no undoable commands executed previously.
+
+* `delete 1` +
+`clear` +
+`undo` (reverses the `clear` command) +
+`undo` (reverses the `delete 1` command)
 
 === Redoing the previously undone command : `redo`
 
@@ -289,10 +293,21 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `undo` (reverses the `delete 1` command) +
 `redo` (reapplies the `delete 1` command) +
 `redo` (reapplies the `clear` command) +
-// end::undoredo[]
 
 // tag::savecommand[]
+
+=== Listing entered commands : `history`
+
+Lists all the commands that you have entered in reverse chronological order. +
+Format: `history`
+
+[NOTE]
+====
+Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
+====
+
 === Save current version of stock list : `save`
+
 An xml file recording current stocks will be created and named. +
 Format: `save NAME`
 
@@ -302,6 +317,17 @@ Examples:
 This would save the stock list at the time when the command is inputted, and the name for this xml file is
 `ForAugust.xml`, under a /versions/ folder in main.
 // end::savecommand[]
+
+=== Open a saved stock list : `open`
+
+An xml file recording current stocks will be opened. +
+Format: `open NAME`
+
+Examples:
+
+* `open ForAugust` +
+This would open the saved stock list under /versions/ folder in main at the time when the command is inputted
+
 
 === Exiting the program : `exit`
 
@@ -326,37 +352,45 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
+* *Help* `help`
+* *Login* `login u/USERNAME p/PASSWORD`
+e.g. `login u/jalil p/dontworrybrother`
 * *Add* `add n/NAME q/QUANTITY m/MINIMUM_QUANTITY [t/TAG]...` +
 e.g. `add n/Arduino q/20 m/5 t/Lab1 t/Lab2`
-* *Save* `save NAME` +
-e.g. save ForAugust
-* *Check* `check`
-* *Changing status* `changeStatus n/NAME q/QUANTITY os/ORIGINALSTATUS ns/NEWSTATUS` +
-e.g. `changeStatus n/Arduino q/20 os/Ready ns/Faulty`
-* *Delete* : `delete INDEX q/QUANTITY` +
+* *Edit* `edit INDEX n/NAME [q/QUANTITY] [m/MINIMUM_QUANTITY] [t/TAG]`
+e.g. `edit 1 n/Arduino q/25 t/Lab7 t/Lab8`
+* *Delete* `delete INDEX q/QUANTITY`
 e.g. `delete 1 q/20`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find n/Arduino`
-* *List* : `all`
-* *List by tag* : `list t/TAG` +
-e.g. `list t/Lab5`
-* *List item status* : `status`
-* *Loan list* : `loanList n/NAME q/QUANTITY l/LOANER` +
+* *List* `list`
+* *Select* `select INDEX`
+e.g. `select 1`
+* *Clear* `clear`
+* *Find* `find KEYWORD [MORE_KEYWORDS]`
+e.g. `find Arduino`
+* *Status* `status`
+* *Change Status*  `changeStatus n/NAME q/QUANTITY os/ORIGINALSTATUS ns/NEWSTATUS`
+e.g. `changeStatus n/Arduino q/20 os/Ready ns/Faulty`
+* *Loan List* `loanList n/NAME q/QUANTITY l/LOANER`
 e.g. `loanList n/Arduino q/20 l/KinWhye`
-* *Login* : `login u/USERNAME p/PASSWORD` +
-e.g. `login u/jalil p/dontworrybrother`
-* *Help* : `help`
-* *History* : `history`
-* *Undo* : `undo`
-* *Update* : `update INDEX n/NAME [q/QUANTITY] [m/MINIMUM_QUANTITY] [t/TAG]` +
-e.g. `update 1 n/Arduino q/25 t/Lab7 t/Lab8`
+* *View Loan List* `viewLoanList`
+* *Delete Loan List* `deleteLoanList INDEX`
+e.g. `deleteLoanList 1`
+* *Tag* `tag KEYWORD [MORE_KEYWORDS]`
+e.g. `tag Lab1`
+* *Add Tag* `addTag INDEX t/TAG [MORE_TAGS]`
+e.g. `addTag 1 t/Lab2`
+* *Delete Tag* `deleteTag INDEX t/TAG [MORE_TAGS]`
+e.g. `deleteTag 1 t/Lab2`
 * *Lost* : `lost INDEX [q/QUANTITY]` +
 e.g. `lost 1 q/25`
 * *Found* : `found INDEX [q/QUANTITY]` +
 e.g. `found 1 q/25`
 * *Lost&Found List* : `lost&found`
-* *Tag* : `tag KEYWORD [MORE_KEYWORDS]` +
-e.g. `tag Lab1`
+* *Undo* : `undo`
 * *Redo* : `redo`
-
-
+* *History* : `history`
+* *Save* `save NAME` +
+e.g. `save ForAugust`
+* *Open* `open NAME`
+e.g. `open forAugust`
+* *Exit* `exit`

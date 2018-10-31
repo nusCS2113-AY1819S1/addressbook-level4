@@ -62,16 +62,38 @@ public class StockListParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
+        case LoginCommand.COMMAND_WORD:
+            return new LoginCommandParser().parse(arguments);
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
-        case AddTagCommand.COMMAND_WORD:
-            return new AddTagCommandParser().parse(arguments);
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
-        case SelectCommand.COMMAND_WORD:
-            return new SelectCommandParser().parse(arguments);
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
+        case SelectCommand.COMMAND_WORD:
+            return new SelectCommandParser().parse(arguments);
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
+        case FindCommand.COMMAND_WORD:
+            return new FindCommandParser().parse(arguments);
+        case StatusCommand.COMMAND_WORD:
+            return new StatusCommand();
+        case ChangeStatusCommand.COMMAND_WORD:
+            return new ChangeStatusCommandParser().parse(arguments);
+        case LoanListCommand.COMMAND_WORD:
+            return new LoanListCommandParser().parse(arguments);
+        case ViewLoanListCommand.COMMAND_WORD:
+            return new ViewLoanListCommand();
+        case DeleteLoanListCommand.COMMAND_WORD:
+            return new DeleteLoanListCommandParser().parse(arguments);
+        case TagCommand.COMMAND_WORD:
+            return new TagCommandParser().parse(arguments);
+        case AddTagCommand.COMMAND_WORD:
+            return new AddTagCommandParser().parse(arguments);
         case DeleteTagCommand.COMMAND_WORD:
             return new DeleteTagCommandParser().parse(arguments);
         case LostCommand.COMMAND_WORD:
@@ -80,40 +102,19 @@ public class StockListParser {
             return new FoundCommandParser().parse(arguments);
         case LostandFoundCommand.COMMAND_WORD:
             return new LostandFoundCommand();
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
-        case TagCommand.COMMAND_WORD:
-            return new TagCommandParser().parse(arguments);
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
-        case StatusCommand.COMMAND_WORD:
-            return new StatusCommand();
-        case ViewLoanListCommand.COMMAND_WORD:
-            return new ViewLoanListCommand();
-        case LoanListCommand.COMMAND_WORD:
-            return new LoanListCommandParser().parse(arguments);
-        case DeleteLoanListCommand.COMMAND_WORD:
-            return new DeleteLoanListCommandParser().parse(arguments);
-        case LoginCommand.COMMAND_WORD:
-            return new LoginCommandParser().parse(arguments);
-        case HistoryCommand.COMMAND_WORD:
-            return new HistoryCommand();
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
-        case ChangeStatusCommand.COMMAND_WORD:
-            return new ChangeStatusCommandParser().parse(arguments);
+        case HistoryCommand.COMMAND_WORD:
+            return new HistoryCommand();
         case SaveCommand.COMMAND_WORD:
             return new SaveCommandParser().parse(arguments);
         case OpenCommand.COMMAND_WORD:
             return new OpenCommandParser().parse(arguments);
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
