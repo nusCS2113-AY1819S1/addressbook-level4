@@ -7,6 +7,9 @@ import java.util.List;
 
 import com.google.gson.Gson;
 
+/**
+ * json storage file.
+ */
 public class JsonFileStorage implements IStorage {
     @Override
     public <T> T read(Class clazz) {
