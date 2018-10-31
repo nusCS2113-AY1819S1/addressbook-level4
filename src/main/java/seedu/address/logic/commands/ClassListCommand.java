@@ -1,14 +1,8 @@
 package seedu.address.logic.commands;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
-import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.ClassroomManager;
-import seedu.address.ui.HtmlTableProcessor;
 
 /**
  * Lists all the class from the classroom list.
