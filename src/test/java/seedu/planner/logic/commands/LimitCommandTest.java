@@ -99,10 +99,19 @@ public class LimitCommandTest {
         }
 
         @Override
+        public void addListUniqueRecord(List<Record> records) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteRecord(Record target) {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public int deleteListRecordSameDate(List<Record> targetList, Date targetDate) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public void updateRecord(Record target, Record editedRecord) {

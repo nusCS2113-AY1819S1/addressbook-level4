@@ -123,9 +123,7 @@ public class ModelManager extends ComponentManager implements Model {
         int count;
         requireNonNull(targetList);
         count = versionedFinancialPlanner.removeRecordsSameDate(targetList, targetDate);
-        versionedFinancialPlanner.removeRecordsFromSummarySameDate(targetList, targetDate);
         indicateFinancialPlannerChanged();
-        indicateSummaryMapChanged();
         return count;
     }
 
@@ -134,10 +132,8 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(records);
         for (Record record : records) {
             versionedFinancialPlanner.removeRecord(record);
-            versionedFinancialPlanner.removeRecordFromSummary(record);
         }
         indicateFinancialPlannerChanged();
-        indicateSummaryMapChanged();
     }
 
     @Override
@@ -156,11 +152,9 @@ public class ModelManager extends ComponentManager implements Model {
                 continue;
             }
             versionedFinancialPlanner.addRecord(record);
-            versionedFinancialPlanner.addRecordToSummary(record);
         }
         updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
         indicateFinancialPlannerChanged();
-        indicateSummaryMapChanged();
     }
 
     @Override
