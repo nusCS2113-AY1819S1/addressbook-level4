@@ -121,12 +121,12 @@ Examples:
 * `deletegroup 1`
 * `dg 1`
 
-=== Deleting student(s) from a group: `deletegroupstudents` `dgs` [_Coming in v1.4_]
-Deletes students from a group in the student management system +
-Format: `deletegroupstudents g/INDEX p/NDEX ...`  +
-Shortcut Format: `dgs g/INDEX p/INDEX ...` +
+=== Deleting student(s) from a group: `deletegroupstudent` `dgs`
+Deletes a student from a group in the student management system +
+Format: `deletegroupstudent g/INDEX p/NDEX`  +
+Shortcut Format: `dgs g/INDEX p/INDEX` +
 ****
-* Removes studnets at specifed INDEX(s) from the group at specified INDEX in the student management systsm
+* Removes studnet at specifed INDEX from the group at specified INDEX in the student management systsm
 * The index refers to the index number shown in the displayed group/student in group list.
 * The index *must be a positive integer* 1, 2, 3, ...
 * This command is undoable
@@ -134,8 +134,8 @@ Shortcut Format: `dgs g/INDEX p/INDEX ...` +
 
 Examples:
 
-* `deletegroupstudents g/1 p/1`
-* `dgs g/1 p/1 p/2`
+* `deletegroupstudent g/1 p/1`
+* `dgs g/1 p/1`
 
 === add test and test marks to student: 'adt student name tn/ tm/'
 The system is allowed user to input different testname and test marks for each student by indicate
@@ -311,7 +311,7 @@ Format: `edit INDEX [n/NAME] [g/GENDER] [nat/NATIONALITY] [p/PHONE] [e/EMAIL] [a
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
 * You can remove all the student's tags by typing `t/` without specifying any tags after it.
-* Edits the student at specified `INDEX` in all groups which the student is in [_Coming in v1.4_]
+* Edits the student at specified `INDEX` in all groups which the student is in [_Coming in v2.0_]
 ****
 
 Examples:
@@ -351,8 +351,8 @@ Shortcut Format: `d INDEX`
 ****
 * Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
-* Deletes student in all groups [_Coming in v1.4_]
 * The index *must be a positive integer* 1, 2, 3, ...
+* Deletes student in all groups [_Coming in v2.0_]
 ****
 
 Examples:
@@ -491,8 +491,8 @@ e.g. `selectgroup 1`
 e.g. `addgroup g/1 p/1 p/2`
 * *Delete Group* : `deletegroup INDEX` +
 e.g. `deletegroup 1`
-* *Delete Students in Group* : `deletegroupstudents g/INDEX p/INDEX ...` +
-e.g. `deletegroupstudents g/1 p/1 p/2`
+* *Delete Student from Group* : `deletegroupstudent g/INDEX p/INDEX` +
+e.g. `deletegroupstudent g/1 p/1`
 * *Edit* : `edit INDEX [n/NAME] [g/GENDER] [nat/NATIONALITY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
