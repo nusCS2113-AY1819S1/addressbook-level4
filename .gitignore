@@ -20,6 +20,8 @@ src/main/resources/docs/
 out/
 /config.json
 reposense-report/
+！build.gradlew
+！.travis.yml
 
 
 
