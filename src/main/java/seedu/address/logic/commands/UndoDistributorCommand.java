@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 */
 public class UndoDistributorCommand extends Command {
 
-    public static final String COMMAND_WORD = "undoDistributor";
+    public static final String COMMAND_WORD = "undodistributor";
     public static final String MESSAGE_SUCCESS = "Undo success!";
     public static final String MESSAGE_FAILURE = "No more commands to undo!";
 

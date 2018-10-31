@@ -70,6 +70,6 @@ public class DNameContainsKeywordsPredicateTest {
         // Keywords match serial number, distributor and info, but does not match name
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("12345", "aliceemailcom", "Main", "Street"));
         assertTrue(predicate.test(new ProductBuilder().withName("Alice").withSerialNumber("12345")
-                .withEmail("aliceemailcom").withAddress("Main Street").build()));
+                .withDistributor("aliceemailcom").withInfo("Main Street").build()));
     }
 }

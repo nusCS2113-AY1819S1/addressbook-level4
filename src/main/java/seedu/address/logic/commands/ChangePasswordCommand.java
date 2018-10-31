@@ -16,7 +16,7 @@ import seedu.address.model.login.exceptions.UserNotFoundException;
  */
 public class ChangePasswordCommand extends Command {
 
-    public static final String COMMAND_WORD = "change-pw";
+    public static final String COMMAND_WORD = "changepw";
 
     public static final String MESSAGE_USAGE = "Changes the user password."
             + "with the parameters: u/USERNAME p/PASSWORD newp/NEWPASSWORD"

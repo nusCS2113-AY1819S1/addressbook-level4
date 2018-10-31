@@ -30,6 +30,9 @@ import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatExcep
 import seedu.address.model.timeidentifiedclass.shopday.Reminder;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
+/**
+ * @author Amirul
+ */
 public class LogoutCommandTest {
 
     @Rule
