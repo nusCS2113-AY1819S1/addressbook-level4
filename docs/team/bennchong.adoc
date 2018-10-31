@@ -13,7 +13,7 @@
 FreeTime is a security-enabled desktop application that is used for finding mutually availble slots between its users. This
 available slot will be displayed for the user to choose from, which will be reflected in his timetable using our FreeTime GUI.
 
-This project portfolio would be introducing you to my team that has developed this product in the span of a semester. In addition to giving you a brief general overview of this application 
+This project portfolio would be introducing you to my team that has developed this product in the span of a semester. In addition to giving you a brief general overview of this application
 feature, I would be going indepth into the details on how my own features are implemtented. This is to give you a deeper understanding of what contributions that I have done within this project,
 and hopefully you would perhaps also learn something along the way.
 
