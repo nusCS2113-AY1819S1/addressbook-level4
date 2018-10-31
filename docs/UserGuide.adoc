@@ -280,7 +280,7 @@ Assigns the student with email `e0191234@u.nus.edu` as a TA.
 === Class Management
 ==== Add Class : `class add`
 Creates a class and assigns it to a module for the system. +
-Format: `class add c/CLASS_NAME m/MODULE_CODE e/MAX_ENROLLMENT`
+Format: `class add cn/CLASS_NAME mc/MODULE_CODE e/MAX_ENROLLMENT`
 
 ****
 * Module code must exist before creating a class for the module.
@@ -288,38 +288,42 @@ Format: `class add c/CLASS_NAME m/MODULE_CODE e/MAX_ENROLLMENT`
 
 Examples:
 
-* `class add c/T16 m/CG1111 e/20` +
+* `class add cn/T16 mc/CG1111 e/20` +
 Creates a class T16, assigns it to the module CG1111 with the max enrollment size of 20
 
-==== Update Class Enrollment Limits : `class maxenroll [coming in v1.3]`
+==== Update Class Enrollment Limits : `class edit`
 Modifies the max enrollment size for a class for the system. +
-Format: `class maxenroll  c/CLASS_NAME e/NEW_MAX_ENROLLMENT_SIZE`
+Format: `class edit cn/CLASS_NAME mc/MODULE_CODE e/ENROLLMENT_SIZE`
 
 ****
-* Class must exist before being able to modify the class enrollment limits
+* Module code must exist
+* Class must exist and belong to module code before being able to modify the class enrollment limits
 ****
 
 Examples:
 
-* `class maxenroll c/T16 e/20` +
-Modifies the new max class enrollment size for the class T16 to be 20
+* `class edit cn/T16 mc/CG1111 e/69` +
+Modifies the new max class enrollment size for the class T16 of module CG1111 to be 69
 
-==== Update Class Attendance List : `class modattend [coming in v1.3]`
+==== Update Class Attendance List : `class modattendance`
 Modifies the class attendance list for the system. +
-Format: `class modattend c/CLASS_NAME i/ADMISSION_NO`
+Format: `class modattendance cn/CLASS_NAME mc/MODULE_CODE i/MATRIC_NO`
 
 ****
-* Class must exist before modifying a student’s attendance
-* If current student is present, modifying will mark student as absent, vice versa
+* Module code must exist
+* Student must exist
+* Class must exist and belong to module code before modifying a student’s attendance
+* Student belong to class and be marked present first
+* If current student is present, modifying will mark student as absent
 ****
 
 Examples:
 
-* `class modattend c/T16 i/A6942069M` +
-Modifies the attendance of the student of the admission number A6942069M for the class T16
+* `class modattendance cn/T16 mc/CG1111 i/A6942069M` +
+Modifies the attendance of the student of the admission number A6942069M for the class T16 of module CG1111 to be absent
 
 ==== List class : `class list`
-Lists class(es) with information of the class for the system. +
+Lists class(es) with information of the class as well as students assigned to class (if any) for the system. +
 Format: `class list`
 
 ****
@@ -329,101 +333,81 @@ Format: `class list`
 Examples:
 
 * `class list` +
-Lists all the class(es) created.
+Lists all the class(es) created as well as students assigned to class (if any).
 
 ==== Remove class : `class delete`
-Deletes a class with students assigned to it for a module for the system. +
-Format: `class delete c/CLASS_NAME m/MODULE_CODE`
+Deletes a class for a module in the system. +
+Format: `class delete cn/CLASS_NAME mc/MODULE_CODE`
 
 ****
-* Class must exist in order to be deleted
-* Module code must exist and have a specified class assigned to it before deleting a class for the module
+* Class must exist and belong to module code before being able to delete the class
 ****
 
 Examples:
 
-* `class delete c/T16 m/CG1111` +
+* `class delete cn/CLASS_NAME mc/MODULE_CODE` +
 Deletes the class T16 from the module CG1111
 
-==== Assign Student To Class : `class addstudent [coming in v1.3]`
-Assigns a student to a class for the system. +
-Format: `class addstudent c/CLASS_NAME m/MODULE_CODE`
+==== Assign Student To Class : `class addstudent`
+Assigns a student to a class in the system. +
+Format: `class addstudent cn/CLASS_NAME mc/MODULE_CODE i/MATRIC_NO`
 
 ****
-* Class must exist before assigning a student to the class
+* Student must exist in the system
+* Module code must exist
+* Classroom shouldn't be full
+* Class must exist and belong to the module code before assigning a student to the class
 ****
 
 Examples:
 
-* `class addstudent c/T16 i/A6942069M` +
-Adds a student of the admission number A6942069M to the class T16
+* `class addstudent cn/T16 mc/CG1111 i/A6942069M` +
+Adds a student of the admission number A6942069M to the class T16 of module CG1111
 
-==== Unassigning Student From Class : `class delstudent [coming in v1.3]`
-Unassigns a student from the class for the system. +
+==== Unassigning Student From Class : `class delstudent`
+Unassigns a student from the class in the system. +
 Format: `class delstudent c/CLASS_NAME i/ADMISSION_NO`
 
 ****
-* Class must exist before unassigning a student from the class
+* Student must exist in the system
+* Class must exist and belong to the module code before unassigning a student from the class
 * Student must be assigned to class in order to unassign them from the class
 ****
 
 Examples:
 
-* `class delstudent c/T16 i/A6942069M` +
-Removes a student of the admission number A6942069M from the class T16
+* `class delstudent cn/T16 mc/CG1111 i/A6942069M` +
+Removes a student of the admission number A6942069M from the class T16 of module CG1111
 
-==== Modifying class enrollment limits : `class maxenroll [coming in v1.3]`
-Modifies the max enrollment size for a class for the system. +
-Format: `class maxenroll  c/CLASS_NAME e/NEW_MAX_ENROLLMENT_SIZE`
-
-****
-* Class must exist before being able to modify the class enrollment limits
-****
-
-Examples:
-
-* `class maxenroll c/T16 e/20` +
-Modifies the new max class enrollment size for the class T16 to be 20
-
-==== Accessing class attendance list : `class listattend [coming in v1.3]`
+==== Accessing class attendance list : `class listattendance`
 Access the class attendance list for the system. +
-Format: `class listattend c/CLASS_NAME`
+Format: `class listattendance cn/T16 mc/CG1111`
 
 ****
-* Class must exist before being able to access the class attendance list
+* Module must exist
+* Class must exist and belong to module before being able to access the class attendance list
 ****
 
 Examples:
 
-* `class listattend c/T16` +
-Displays the class attendance list for the class T16
+* `class listattendance cn/T16 mc/CG1111` +
+Displays the class attendance list for the class T16 for the module CG1111
 
-==== Marking class attendance list : `class markattend [coming in v1.3]`
+==== Marking class attendance list : `class markattend`
 Mark the class attendance list for a specified student for the system. +
-Format: `class markattend c/CLASS_NAME i/ADMISSION_NO`
+Format: `class markattendance cn/CLASS_NAME mc/MODULE_CODE i/MATRIC_NO`
 
 ****
-* Class must exist before being able to mark student available for class attendance
+* Student must exist
+* Module code must exist
+* Class must exist and belong to class before being able to mark student available for class attendance
 * Student must be in the specified class in order to mark student present
 ****
 
 Examples:
 
-* `class markattend c/T16 i/A6942069M` +
-Marks the attendance of the student of the admission number A6942069M for the class T16
-
-==== Modifying class attendance list : `class modattend [coming in v1.3]`
-Modifies the class attendance list for the system. +
-Format: `class modattend c/CLASS_NAME i/ADMISSION_NO`
-
-****
-* Class must exist before being able to access the class attendance list
-****
-
-Examples:
-
-* `class listattend c/T16` +
-Displays the class attendance list for the class T16
+* `class markattendance cn/T16 mc/CG1111 i/A6942069M` +
+Marks the attendance of the student of the admission number A6942069M for the class T16 for the module CG1111
 
 === Grade Management
 ==== Add Grade Component : `gradebook add`
@@ -734,24 +718,24 @@ e.g. `gradebook list`
 e.g. `gradebook find m/CS2040C i/finals`
 * *Assign Grades* : `gradebook assign c/MODULE_CODE i/MATRIC_NUMBER g/GRADE_ITEM_NAME m/MARKS` +
 e.g. `gradebook assign c/CS2040C i/A0168111 g/Assignment 1 m/10`
-* *Creating a class* `class add c/CLASS_NAME m/MODULE_CODE e/MAX_ENROLLMENT` +
-e.g. `class add c/T16 m/CG1111 e/20`
+* *Creating a class* `class add cn/CLASS_NAME mc/MODULE_CODE e/ENROLLMENT_SIZE` +
+e.g. `class add cn/T16 mc/CG1111 e/20`
 * *List class* `class list` +
 e.g. `class list`
-* *Deleting a class* `class delete c/CLASS_NAME m/MODULE_CODE` +
-e.g. `class delete c/T16 m/CG1111`
-* *Assigning a student to class* `class addstudent c/CLASS_NAME m/MODULE_CODE` +
-e.g. `class addstudent c/T16 i/A6942069M`
-* *Unassigning a student from class* `class delstudent c/CLASS_NAME i/ADMISSION_NO` +
-e.g. `class delstudent c/T16 i/A6942069M`
-* *Modifying class enrollment limits* `class maxenroll c/CLASS_NAME e/NEW_MAX_ENROLLMENT_SIZE` +
-e.g. `class maxenroll c/T16 e/20`
-* *Accessing class attendance list* `class listattend c/CLASS_NAME` +
-e.g. `class listattend c/T16`
-* *Marking class attendance list* `class markattend c/CLASS_NAME i/ADMISSION_NO` +
-e.g. `class markattend c/T16 i/A6942069M`
-* *Modifying class attendance list* `class modattend c/CLASS_NAME i/ADMISSION_NO` +
-e.g. `class modattend c/T16 i/A6942069M`
+* *Deleting a class* `class delete cn/CLASS_NAME mc/MODULE_CODE` +
+e.g. `class delete cn/T16 mc/CG1111`
+* *Assigning a student to class* `class addstudent cn/CLASS_NAME mc/MODULE_CODE i/MATRIC_NO` +
+e.g. `class addstudent cn/T16 mc/CG1111 i/A6942069M`
+* *Unassigning a student from class* `class delstudent cn/CLASS_NAME mc/MODULE_CODE i/MATRIC_NO` +
+e.g. `class delstudent cn/T16 mc/CG1111 i/A6942069M`
+* *Modifying class enrollment limits* `class edit cn/CLASS_NAME mc/MODULE_CODE e/ENROLLMENT_SIZE` +
+e.g. `class edit cn/T16 mc/CG1111 e/69`
+* *Accessing class attendance list* `class listattendance cn/CLASS_NAME mc/MODULE_CODE` +
+e.g. `class listattendance cn/T16 mc/CG1111`
+* *Marking class attendance list* `class markattendance cn/CLASS_NAME mc/MODULE_CODE i/MATRIC_NO` +
+e.g. `class markattendance cn/T16 mc/CG1111 i/A6942069M`
+* *Modifying class attendance list* `class modattendance cn/CLASS_NAME mc/MODULE_CODE i/MATRIC_NO` +
+e.g. `class modattendance cn/T16 mc/CG1111 i/A6942069M`
 * *Add a note* `note add m/MODULE_CODE [d/DATE]` +
 e.g. `note add m/CS2040C`
 * *List notes* `note list [m/MODULE_CODE]` +
