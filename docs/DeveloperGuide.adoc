@@ -1053,21 +1053,63 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
+=== Announcing new announcement
 
-=== Deleting a person
+. Announcing a new announcement by admin.
 
-. Deleting a person while all persons are listed
+.. Prerequisites: Current user must login as an admin.
+.. Test case: `announce aTitle/Urgent! aContent/System Maintenance from 4pm to 5pm.` +
+   Expected: Announcement will show up in a pop up window as well as the result display panel.
+.. Test case: `announce aTitle/ aContent/` +
+   Expected: No announcement will be posted. Error details shown in the result display panel.
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-.. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
-   Expected: Similar to previous.
+=== Checking new announcement
 
-_{ more test cases ... }_
+. Checking for latest announcement.
+
+.. Prerequisites: Users have to login in order to do `checkAnnounce`
+.. Test case: `checkAnnounce` +
+   Expected: The latest announcement will show up in a pop up window and in the result display panel. However, if the latest announcement is null, an error message "There is no announcement at the moment" will be shown in the result display panel.
+
+=== Blocking user from posting
+
+. Blocking a given user by admin.
+
+.. Prerequisites: Current user must login as an admin. The given user should be in the UserStorage.
+.. Test case: `blockUser uName/john block/true` +
+   Expected: The given user will be blocked and a success message will be shown in the result display panel.
+.. Test case: `blockUser uName/abcd block/true` +
+   Expected: Since the given user has not been added to the UserStorage, an error message will be shown in the result display panel.
+
+=== Setting a user as admin or setting an admin as user
+
+. Setting a user as admin or revert an admin to a user.
+
+.. Prerequisites: Current user must login as an admin. Admin is unable to set/revert himself/herself to admin/user.
+.. Test case: `setAdmin uName/john set/true` +
+   Expected: The given user will be set to an admin and the success message will be shown in the result display panel.
+.. Test case: `setAdmin uName/abcd set/true` +
+   Expected: Since the given user has not been added to the UserStorage, an error message will be shown in the result display panel.
+
+=== Creating a module
+
+. Creating a module by admin.
+
+.. Prerequisites: Current user must login as an admin.
+.. Test case: `createModule mCode/CS2113 mContent/Software Engineering and OOP` +
+   Expected: A new module will be added to the ModuleStorage, and a success message will be shown in the result display panel.
+.. Test case: `createModule mCode/ mTitle/` +
+   Expected: No module will be added. Error details shown in the result display panel.
+
+=== Deleting a module
+
+. Deleting a module by admin.
+
+.. Prerequisites: Current user must be login as an admin.
+.. Test case: `deleteModule mCode/CS2113`
+   Expected: The module `CS2113` will be deleted from the ModuleStorage, and an success message will be shown in the result display panel.
+.. Test case: `deleteModule mCode/CS2113`
+   Expected: Since the module `CS2113` has been deleted. This command should raise an error and show in the result display panel.
 
 === Saving data
 
