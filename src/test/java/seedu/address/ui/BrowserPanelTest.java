@@ -6,7 +6,6 @@ import static seedu.address.testutil.EventsUtil.postNow;
 import static seedu.address.testutil.TypicalGroups.TUT_1;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.ui.BrowserPanel.DEFAULT_PAGE;
-import static seedu.address.ui.BrowserPanel.STUDENT_GRADE_PAGE_URL;
 import static seedu.address.ui.UiPart.FXML_FILE_FOLDER;
 
 import java.net.URL;
@@ -46,11 +45,6 @@ public class BrowserPanelTest extends GuiUnitTest {
         // associated web page of a person
         postNow(selectionChangedEventStub);
 
-
-        URL expectedPersonUrl = new URL(MainApp.class.getResource(STUDENT_GRADE_PAGE_URL).toString() + "?data=[");
-
-        waitUntilBrowserLoaded(browserPanelHandle);
-        assertEquals(expectedPersonUrl, browserPanelHandle.getLoadedUrl());
 
         // associated web page of a group
         postNow(selectionChangedEventGroupStub);
