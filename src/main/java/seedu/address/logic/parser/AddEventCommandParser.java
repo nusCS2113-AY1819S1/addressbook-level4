@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 
-import java.time.LocalDate;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddEventCommand;
@@ -16,6 +15,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.EndTime;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Location;
 import seedu.address.model.event.StartTime;
@@ -45,11 +45,15 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         EventName name = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_NAME).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Location location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get());
-        LocalDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        StartTime startDate = ParserUtil.parseStartTime(argMultimap.getValue(PREFIX_START_DATE).get());
-        EndTime endDate = ParserUtil.parseEndTime(argMultimap.getValue(PREFIX_END_DATE).get());
+        EventDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        StartTime startTime = ParserUtil.parseStartTime(argMultimap.getValue(PREFIX_START_DATE).get());
+        EndTime endTime = ParserUtil.parseEndTime(argMultimap.getValue(PREFIX_END_DATE).get());
 
-        Event event = new Event(name, description, date, startDate, endDate, location);
+        if (startTime.startTime.compareTo(endTime.endTime) > 0) {
+            throw new ParseException(String.format(EndTime.MESSAGE_INVALID_END_TIME));
+        }
+
+        Event event = new Event(name, description, date, startTime, endTime, location);
 
         return new AddEventCommand(event);
     }

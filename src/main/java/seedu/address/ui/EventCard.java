@@ -1,8 +1,5 @@
 package seedu.address.ui;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -52,7 +49,7 @@ public class EventCard extends UiPart<Region> {
         eventName.setText(event.getEventName().fullName);
         description.setText(event.getDescription().value);
         eventLocation.setText(String.format("Location: %s", event.getLocation().value));
-        eventDate.setText(String.format("Date: %s", formatDate(event.getDate())));
+        eventDate.setText(String.format("Date: %s", event.getDate().eventDate));
         startTime.setText(String.format("Start time: %s", event.getStartTime().startTime));
         endTime.setText(String.format("End time: %s", event.getEndTime().endTime));
     }
@@ -75,13 +72,4 @@ public class EventCard extends UiPart<Region> {
                 && event.equals(card.event);
     }
 
-    /**
-     * Returns formatted string based on LocalDate.
-     */
-    public static String formatDate(LocalDate date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String formattedString = date.format(formatter);
-        String trimmedFormattedString = formattedString.trim();
-        return trimmedFormattedString;
-    }
 }

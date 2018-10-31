@@ -26,9 +26,11 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS_PEOPLE = "All people listed!";
     public static final String MESSAGE_SUCCESS_EVENT = "All events listed!";
+    public static final String MESSAGE_SUCCESS_ALL = "All people and events listed";
 
     public static final String LIST_KEY_DEPARTMENT = "dep";
-    public static final String LIST_KEY_ALL = "all people";
+    public static final String LIST_KEY_ALL = "all";
+    public static final String LIST_KEY_PEOPLE = "all people";
     public static final String LIST_KEY_EVENT = "all events";
 
     private final String listKey;
@@ -55,9 +57,13 @@ public class ListCommand extends Command {
         case (LIST_KEY_EVENT): model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
             message = MESSAGE_SUCCESS_EVENT;
             break;
-        case (LIST_KEY_ALL): model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        case (LIST_KEY_PEOPLE): model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             message = MESSAGE_SUCCESS_PEOPLE;
             break;
+        case (LIST_KEY_ALL): model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+                message = MESSAGE_SUCCESS_ALL;
+                break;
         default:
         }
         return new CommandResult(message);

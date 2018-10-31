@@ -26,6 +26,8 @@ public class ListCommandParser implements Parser<ListCommand> {
         List<String> showAll = new ArrayList<>();
         if (parseAll(userInput)) {
             return new ListCommand(ListCommand.LIST_KEY_ALL, new DepartmentContainsKeywordsPredicate(showAll));
+        } else if (parsePeople(userInput)) {
+            return new ListCommand(ListCommand.LIST_KEY_PEOPLE, new DepartmentContainsKeywordsPredicate(showAll));
         } else if (parseEvent(userInput)) {
             return new ListCommand(ListCommand.LIST_KEY_EVENT, new DepartmentContainsKeywordsPredicate(showAll));
         } else if (parseDep(userInput)) {
@@ -46,6 +48,14 @@ public class ListCommandParser implements Parser<ListCommand> {
      * @return boolean true if it is equal, if not, false
      */
     private boolean parseAll(String userInput) {
+        return userInput.trim().equalsIgnoreCase("all");
+    }
+
+    /**
+     * Checks if first word of the userInput is equals to "all people"
+     * @return boolean true if it is equal, if not, false
+     */
+    private boolean parsePeople(String userInput) {
         return userInput.trim().equalsIgnoreCase("all people");
     }
 
@@ -59,7 +69,7 @@ public class ListCommandParser implements Parser<ListCommand> {
     }
 
     /**
-     * Checks if first word of the userInput is equals to "dep"
+     * Checks if first word of the userInput is equals to "all events"
      * @return boolean true if it is equal, if not, false
      */
     private boolean parseEvent(String userInput) {
