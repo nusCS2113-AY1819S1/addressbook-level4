@@ -31,23 +31,32 @@ public class SellCommandParser implements Parser<SellCommand> {
         String findBookBy;
         Index index;
         Isbn isbn;
+        String argsType;
+        argsType = argMultimap.getArgsType();
 
-        if (argMultimap.getValue(PREFIX_ISBN).isPresent() && !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SellCommand.MESSAGE_USAGE));
-        } else if (!argMultimap.getValue(PREFIX_ISBN).isPresent()) {
-            try {
-                index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            } catch (ParseException pe) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SellCommand.MESSAGE_USAGE), pe);
-            }
-            findBookBy = Integer.toString(index.getZeroBased());
-        } else {
+        switch(argsType) {
+        case("Isbn"):
             try {
                 isbn = ParserUtil.parseIsbn(argMultimap.getValue(PREFIX_ISBN).get());
             } catch (ParseException pe) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SellCommand.MESSAGE_USAGE), pe);
             }
             findBookBy = isbn.value;
+            break;
+
+        case("Index"):
+            try {
+                index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            } catch (ParseException pe) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SellCommand.MESSAGE_USAGE), pe);
+            }
+            findBookBy = Integer.toString(index.getZeroBased());
+            break;
+
+        case ("Both"):
+        case ("None"):
+        default:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SellCommand.MESSAGE_USAGE));
         }
 
         DecreaseQuantity decreaseQuantity = new DecreaseQuantity();
@@ -61,6 +70,6 @@ public class SellCommandParser implements Parser<SellCommand> {
         }
 
 
-        return new SellCommand(findBookBy, decreaseQuantity);
+        return new SellCommand(findBookBy, argsType, decreaseQuantity);
     }
 }

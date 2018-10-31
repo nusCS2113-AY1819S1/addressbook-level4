@@ -1,66 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addressbook>
+<bookinventory>
     <books>
         <name>Hans Muster</name>
         <isbn isPrivate="false">978-1-56619-909-4</isbn>
         <price isPrivate="false">7.90</price>
         <cost isPrivate="false">7.90</cost>
-        <quantity isPrivate="false">4th street</quantity>
+        <quantity isPrivate="false">4</quantity>
     </books>
     <books>
         <name>Ruth Mueller</name>
-        <isbn isPrivate="false">978-1-56619-909-4</isbn>
+        <isbn isPrivate="false">978-3-16-148410-0</isbn>
         <price isPrivate="false">7.90</price>
         <cost isPrivate="false">7.90</cost>
-        <quantity isPrivate="false">81th street</quantity>
+        <quantity isPrivate="false">81</quantity>
     </books>
     <books>
         <name>Heinz Kurz</name>
-        <isbn isPrivate="false">978-1-56619-909-4</isbn>
+        <isbn isPrivate="false">9781782808084</isbn>
         <price isPrivate="false">7.90</price>
         <cost isPrivate="false">7.90</cost>
-        <quantity isPrivate="false">wall street</quantity>
+        <quantity isPrivate="false">5</quantity>
     </books>
     <books>
         <name>Cornelia Meier</name>
-        <isbn isPrivate="false">978-1-56619-909-4</isbn>
+        <isbn isPrivate="false">9791234567896</isbn>
         <price isPrivate="false">7.90</price>
         <cost isPrivate="false">7.90</cost>
-        <quantity isPrivate="false">10th street</quantity>
+        <quantity isPrivate="false">10</quantity>
     </books>
     <books>
         <name>Werner Meyer</name>
-        <isbn isPrivate="false">978-1-56619-909-4</isbn>
+        <isbn isPrivate="false">978-1-234567-89-7</isbn>
         <price isPrivate="false">7.90</price>
         <cost isPrivate="false">7.90</cost>
-        <quantity isPrivate="false">michegan ave</quantity>
+        <quantity isPrivate="false">12</quantity>
     </books>
     <books>
         <name>Lydia Kunz</name>
-        <isbn isPrivate="false">978-1-56619-909-4</isbn>
+        <isbn isPrivate="false">978-0-9965611-2-9</isbn>
         <price isPrivate="false">7.90</price>
         <cost isPrivate="false">7.90</cost>
-        <quantity isPrivate="false">little tokyo</quantity>
+        <quantity isPrivate="false">52</quantity>
     </books>
     <books>
         <name>Anna Best</name>
-        <isbn isPrivate="false">978-1-56619-909-4</isbn>
+        <isbn isPrivate="false">978-1-943048-13-7</isbn>
         <price isPrivate="false">7.90</price>
         <cost isPrivate="false">7.90</cost>
-        <quantity isPrivate="false">4th street</quantity>
+        <quantity isPrivate="false">4</quantity>
     </books>
     <books>
         <name>Stefan Meier</name>
-        <isbn isPrivate="false">978-1-56619-909-4</isbn>
+        <isbn isPrivate="false">9787519224585</isbn>
         <price isPrivate="false">7.90</price>
         <cost isPrivate="false">7.90</cost>
-        <quantity isPrivate="false">little india</quantity>
+        <quantity isPrivate="false">9</quantity>
     </books>
     <books>
         <name>Martin Mueller</name>
-        <isbn isPrivate="false">978-1-56619-909-4</isbn>
+        <isbn isPrivate="false">9780979305030</isbn>
         <price isPrivate="false">7.90</price>
         <cost isPrivate="false">7.90</cost>
-        <quantity isPrivate="false">chicago ave</quantity>
+        <quantity isPrivate="false">5</quantity>
     </books>
-</addressbook>
+</bookinventory>
