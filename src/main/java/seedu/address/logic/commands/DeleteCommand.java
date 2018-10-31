@@ -2,7 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.File;
 import java.util.List;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -10,6 +15,8 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
+import seedu.address.storage.XmlAdaptedLoanList;
+import seedu.address.storage.XmlAdaptedLoanerDescription;
 
 /**
  * Deletes a item identified using it's displayed index from the stock list.
@@ -40,8 +47,27 @@ public class DeleteCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
         }
-
+        File loanListFile = new File("C:/Users/ckinw/OneDrive/Documents/JalilEnterprisesCKW/data/LoanList.xml");
         Item itemToDelete = lastShownList.get(targetIndex.getZeroBased());
+        if (loanListFile.exists()) {
+            try {
+                int counter = 0;
+                JAXBContext context = JAXBContext.newInstance(XmlAdaptedLoanList.class);
+                Unmarshaller unmarshaller = context.createUnmarshaller();
+                XmlAdaptedLoanList xmlAdaptedLoanList = (XmlAdaptedLoanList) unmarshaller
+                        .unmarshal(loanListFile);
+                for (XmlAdaptedLoanerDescription loanerDescription : xmlAdaptedLoanList.getLoanList()) {
+                    if (loanerDescription.getItemName().equals(itemToDelete.getName().toString())) {
+                        DeleteLoanListCommand toDelete = new DeleteLoanListCommand(Index.fromZeroBased(counter));
+                        toDelete.execute(model, history);
+                    }
+                    counter++;
+                }
+            } catch (JAXBException e) {
+                System.out.println(e.toString());
+            }
+        }
+
         model.deleteItem(itemToDelete);
         model.commitStockList();
         return new CommandResult(String.format(MESSAGE_DELETE_ITEM_SUCCESS, itemToDelete));

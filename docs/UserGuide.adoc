@@ -135,20 +135,42 @@ Returns `Arduino` and `Arduino Uno`
 * `find Arduino Pi` +
 Returns any items having names `Arduino` or `Pi`
 
-=== Listing item status: `status`
+=== Listing item according to status: `status`
 
-Shows the number of every item in each status category (Ready, On_Loan, Faulty) +
+Shows the quantity of every item in each status category (Ready, On_Loan, Faulty) +
 Format: `status`
 
 === Changing status of item: `changeStatus`
 
-The status of the items can be changed +
-Format: `changeStatus INDEX q/QUANTITY os/ORIGINALSTATUS ns/NEWSTATUS`
+The status of the items can be changed from Ready to Faulty, and vice-versa +
+Format: `changeStatus n/NAME q/QUANTITY os/ORIGINALSTATUS ns/NEWSTATUS`
 
 Examples:
 
-* `changeStatus 1 q/20 os/Ready ns/Faulty` +
-The status of 20 arduinos would be changed from Ready to Faulty
+* `changeStatus n/Arduino q/20 os/Ready ns/Faulty` +
+The status of 20 Arduinos would be changed from Ready to Faulty
+
+=== Creating a loan list: `loanList`
+A loan list can be created whenever a list of items loaned out needs to be kept tracked on +
+Format: `loanList n/NAME q/QUANTITY l/LOANER`
+
+Examples:
+
+* `loanList n/Arduino q/20 l/KinWhye` +
+This would update the status of the 20 arduinos to On_Loan, and add the entry into the loan list
+
+=== Viewing the loan list: `viewLoanList`
+Shows every loan list entry +
+Format: `viewLoanList`
+
+=== Deleting a loan list entry: `deleteLoanList`
+An entry in the loan list can be deleted when the loaner returns the items +
+Format: `deleteLoanList INDEX`
+
+Examples:
+
+* `deleteLoanList 1` +
+The first entry as shown on the viewLoanList command will be deleted. The status of the item will be automatically changed back to ready
 
 === Listing items under specific tags: `tag`
 
@@ -169,15 +191,6 @@ Examples:
 
 * `addTag 1 t/ Lab3 t/ Lab4` +
 Add tags "Lab3" and "Lab4" to the item with index 1
-
-=== Creating a loan list: `loanList`
-A loan list can be created whenever a list of items loaned out needs to be kept tracked on +
-Format: `loanList n/NAME q/QUANTITY l/LOANER`
-
-Examples:
-
-* `loanList n/Arduino q/20 l/KinWhye` +
-This would update the status of the 20 arduinos to On_Loan
 
 === Listing entered commands : `history`
 
