@@ -72,8 +72,7 @@ public class EditTestMarksCommand extends Command {
         List<Person> personListName = model.getFilteredPersonList();
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         String grade = "Undefined";
-        if (testGrade != null)
-        {
+        if (testGrade != null) {
             grade = testGrade;
         }
         if (personListName.isEmpty()) {
@@ -94,12 +93,11 @@ public class EditTestMarksCommand extends Command {
                     } else if (!fullName.equals(person.getName().fullName.toUpperCase())
                             && person.getName().fullName.toUpperCase().contains(fullName)) {
                         duplicate = true;
-                    }
-                    else {
+                    } else {
                         checked = true;
                     }
                 }
-                if (!checked && duplicate ) {
+                if (!checked && duplicate) {
                     model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
                     throw new CommandException(MESSAGE_PERSON_DUPLICATE_FOUND);
                 } else if (checked && !duplicate) {
