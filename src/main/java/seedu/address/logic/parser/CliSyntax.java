@@ -28,6 +28,10 @@ public class CliSyntax {
     public static final Prefix PREFIX_GRADEBOOK_WEIGHTAGE = new Prefix("w/");
     public static final Prefix PREFIX_GRADEBOOK_ITEM_EDIT = new Prefix("ei/");
 
+    /* Grade info prefixes */
+    public static final Prefix PREFIX_STUDENT_MARKS = new Prefix("m/");
+    public static final Prefix PREFIX_STUDENT_ADMIN_NO = new Prefix("a/");
+
     /* Module prefixes */
     public static final Prefix PREFIX_MODULE_CODE = new Prefix("mc/");
     public static final Prefix PREFIX_MODULE_NAME = new Prefix("mn/");

@@ -7,11 +7,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.ClassAddCommand;
+import seedu.address.logic.commands.ClassAddStudentAttendanceCommand;
 import seedu.address.logic.commands.ClassAddStudentCommand;
 import seedu.address.logic.commands.ClassDeleteCommand;
+import seedu.address.logic.commands.ClassDeleteStudentAttendanceCommand;
 import seedu.address.logic.commands.ClassDeleteStudentCommand;
 import seedu.address.logic.commands.ClassEditCommand;
 import seedu.address.logic.commands.ClassListCommand;
+import seedu.address.logic.commands.ClassListStudentAttendanceCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CourseAddCommand;
@@ -20,6 +23,9 @@ import seedu.address.logic.commands.CourseListCommand;
 import seedu.address.logic.commands.DebugCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.GradeAddCommand;
+import seedu.address.logic.commands.GradeGraphCommand;
+import seedu.address.logic.commands.GradeListCommand;
 import seedu.address.logic.commands.GradebookAddCommand;
 import seedu.address.logic.commands.GradebookDeleteCommand;
 import seedu.address.logic.commands.GradebookEditCommand;
@@ -190,17 +196,35 @@ public class AddressBookParser {
         case ClassListCommand.COMMAND_WORD:
             return new ClassListCommand();
 
+        case ClassListStudentAttendanceCommand.COMMAND_WORD:
+            return new ClassListStudentAttendanceCommandParser().parse(arguments);
+
         case ClassEditCommand.COMMAND_WORD:
             return new ClassEditCommandParser().parse(arguments);
 
         case ClassDeleteCommand.COMMAND_WORD:
             return new ClassDeleteCommandParser().parse(arguments);
 
+        case ClassDeleteStudentAttendanceCommand.COMMAND_WORD:
+            return new ClassDeleteStudentAttendanceCommandParser().parse(arguments);
+
         case ClassAddStudentCommand.COMMAND_WORD:
             return new ClassAddStudentCommandParser().parse(arguments);
 
+        case ClassAddStudentAttendanceCommand.COMMAND_WORD:
+            return new ClassAddStudentAttendanceCommandParser().parse(arguments);
+
         case ClassDeleteStudentCommand.COMMAND_WORD:
             return new ClassDeleteStudentCommandParser().parse(arguments);
+
+        case GradeAddCommand.COMMAND_WORD:
+            return new GradeAddCommandParser().parse(arguments);
+
+        case GradeListCommand.COMMAND_WORD:
+            return new GradeListCommand();
+
+        case GradeGraphCommand.COMMAND_WORD:
+            return new GradeGraphCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

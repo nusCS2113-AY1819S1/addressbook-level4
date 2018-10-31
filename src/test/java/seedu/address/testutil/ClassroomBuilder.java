@@ -27,10 +27,10 @@ public class ClassroomBuilder {
     /**
      * Initializes the ClassroomBuilder with the data of {@code ClassroomToCopy}.
      */
-    public ClassroomBuilder(Classroom ClassroomToCopy) {
-        className = ClassroomToCopy.getClassName();
-        moduleCode = ClassroomToCopy.getModuleCode();
-        maxEnrollment = ClassroomToCopy.getMaxEnrollment();
+    public ClassroomBuilder(Classroom classroomToCopy) {
+        className = classroomToCopy.getClassName();
+        moduleCode = classroomToCopy.getModuleCode();
+        maxEnrollment = classroomToCopy.getMaxEnrollment();
     }
 
     /**

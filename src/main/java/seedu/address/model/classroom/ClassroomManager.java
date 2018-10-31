@@ -10,6 +10,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.StorageController;
 import seedu.address.storage.adapter.XmlAdaptedClassroom;
+import seedu.address.storage.adapter.XmlAdaptedClassroomAttendance;
 
 /**
  * This classroom manager stores classrooms for Trajectory.
@@ -62,6 +63,16 @@ public class ClassroomManager {
     }
 
     /**
+     * Search for duplication of student attendance marked for classroom
+     */
+    public boolean isDuplicateClassroomStudentAttendance(Classroom classroom, String matricNo, String date) {
+        return classroom.getAttendanceList()
+                .stream()
+                .anyMatch(attendance -> attendance.getDate().equalsIgnoreCase(date)
+                            && attendance.getStudentsPresent().contains(matricNo));
+    }
+
+    /**
      * Removes a classroom from classroomList
      */
     public void deleteClassroom(Classroom classroom) {
@@ -73,11 +84,36 @@ public class ClassroomManager {
      */
     private void readClassroomList() {
         ArrayList<XmlAdaptedClassroom> xmlClassroomList = StorageController.getClassesStorage();
+        ArrayList<XmlAdaptedClassroomAttendance> xmlClassroomAttendanceList =
+                StorageController.getClassAttendanceStorage();
+
         for (XmlAdaptedClassroom xmlClassroom : xmlClassroomList) {
             try {
-                classroomList.add(xmlClassroom.toModelType());
+                Classroom classroom = xmlClassroom.toModelType();
+                classroomList.add(classroom);
+                readAttendanceList(xmlClassroomAttendanceList, classroom);
             } catch (IllegalValueException e) {
                 logger.info("Illegal values found when reading classroom list: " + e.getMessage());
+            }
+        }
+    }
+
+    /**
+     * Reads back the classroom attendance and store into the classroom attendance list in-memory
+     */
+    private void readAttendanceList(ArrayList<XmlAdaptedClassroomAttendance> xmlClassroomAttendanceList,
+                                    Classroom classroom) throws IllegalValueException {
+        if (xmlClassroomAttendanceList.size() == 0) {
+            for (Classroom c : classroomList) {
+                c.getAttendanceList().add(new Attendance());
+            }
+        }
+        for (XmlAdaptedClassroomAttendance xmlClassroomAttendance : xmlClassroomAttendanceList) {
+            if (xmlClassroomAttendance.getClassName().equalsIgnoreCase(classroom.getClassName().getValue())
+                    && xmlClassroomAttendance.getModuleCode().equalsIgnoreCase(
+                    classroom.getModuleCode().moduleCode)) {
+                Attendance attendance = xmlClassroomAttendance.toModelType();
+                classroom.getAttendanceList().add(attendance);
             }
         }
     }
@@ -139,5 +175,81 @@ public class ClassroomManager {
      */
     public boolean hasClassroomStudent(Classroom classToUnassignStudent, String matricNo) {
         return (classToUnassignStudent.getStudents().contains(matricNo));
+    }
+
+    /**
+     * Marks the attendance for a student for the class in the given day.
+     * If an attendance is available for the class, append the student to the attendance, otherwise
+     * add the attendance to the class attendance list.
+     */
+    public void markStudentAttendance(Classroom classToMarkAttendance, Attendance attendance, String matricNo) {
+        attendance.getStudentsPresent().add(matricNo);
+        for (Attendance attend : classToMarkAttendance.getAttendanceList()) {
+            if (attend.getDate().equalsIgnoreCase(attendance.getDate())) {
+                int index = classToMarkAttendance.getAttendanceList().indexOf(attend);
+                classToMarkAttendance.getAttendanceList().set(index, attendance);
+                return;
+            }
+        }
+        classToMarkAttendance.getAttendanceList().add(attendance);
+    }
+
+    /**
+     * Returns the attendance for a classroom for the given date
+     */
+    public Attendance findAttendanceForClass(Classroom classroom, String date) {
+        for (Attendance attendance : classroom.getAttendanceList()) {
+            if (attendance.getDate().equalsIgnoreCase(date)) {
+                return attendance;
+            }
+        }
+        return new Attendance();
+    }
+
+    /**
+     * Saves the classroom attendance list
+     */
+    public void saveClassroomAttendanceList() {
+        ArrayList<XmlAdaptedClassroomAttendance> xmlClassroomAttendanceList = new ArrayList<>();
+        for (Classroom classroom : classroomList) {
+            xmlClassroomAttendanceList.addAll(
+                    classroom.getAttendanceList()
+                            .stream()
+                            .map(attendance -> new XmlAdaptedClassroomAttendance(
+                                    classroom.getClassName().getValue(),
+                                    classroom.getModuleCode().moduleCode,
+                                    attendance.getDate(), attendance.getStudentsPresent()))
+                            .collect(Collectors.toCollection(ArrayList::new))
+            );
+        }
+        StorageController.setClassAttendanceStorage(xmlClassroomAttendanceList);
+        StorageController.storeData();
+    }
+
+    /**
+     * Returns whether a specified student is from the specified class
+     */
+    public boolean isStudentFromClass(Classroom classToMarkAttendance, String matricNo) {
+        return classToMarkAttendance.getStudents().contains(matricNo);
+    }
+
+    /**
+     * Modifies the classroom attendance for the specified student
+     * if student is marked present, mark them absent
+     */
+    public void modifyStudentAttendance(Classroom classToMarkAttendance, Attendance attendance, String matricNo) {
+        ArrayList<Attendance> attendanceList = classToMarkAttendance.getAttendanceList();
+        int index = attendanceList.indexOf(attendance);
+
+        ArrayList<String> studentPresents = attendanceList.get(index).getStudentsPresent();
+        studentPresents.remove(matricNo);
+        classToMarkAttendance.setAttendanceList(attendanceList);
+    }
+
+    /**
+     * Returns whether a student's attendance is marked
+     */
+    public boolean isStudentAttendanceMarked(Attendance attendance, String matricNo) {
+        return attendance.getStudentsPresent().contains(matricNo);
     }
 }

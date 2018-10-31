@@ -5,19 +5,22 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
+import java.time.LocalDate;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.classroom.Attendance;
 import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.ClassroomManager;
 
 /**
- * Assigns a student to an existing class.
+ * Mark the class attendance list for a specified student for the system.
  */
-public class ClassAddStudentCommand extends Command {
-    public static final String COMMAND_WORD = "class addstudent";
+public class ClassAddStudentAttendanceCommand extends Command {
+    public static final String COMMAND_WORD = "class markattendance";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a student to a class"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Mark the class attendance list for a specified student"
             + " for the system. "
             + "Parameters: "
             + PREFIX_CLASS_NAME + "CLASS_NAME "
@@ -28,23 +31,26 @@ public class ClassAddStudentCommand extends Command {
             + PREFIX_MODULE_CODE + "CG1111 "
             + PREFIX_MATRIC + "A6942069M";
 
-    public static final String MESSAGE_SUCCESS = "New student assigned to class: %1$s"
+    public static final String MESSAGE_SUCCESS = "Student is marked present: %1$s"
             + ", Class: %2$s"
             + ", Module code: %3$s";
     private static final String MESSAGE_FAIL = "Class belonging to module not found!";
 
-    private static final String MESSAGE_DUPLICATE_CLASSROOM_STUDENT = "This student already exists in class: %1$s";
+    private static final String MESSAGE_DUPLICATE_CLASSROOM_STUDENT_ATTENDANCE = "This student already"
+            + " present in class: %1$s";
 
-    private Classroom classToAssignStudent;
     private final String className;
     private final String moduleCode;
     private final String matricNo;
+    private final String date;
 
-    public ClassAddStudentCommand(String className, String moduleCode, String matricNo) {
-        requireAllNonNull(className, moduleCode);
+    public ClassAddStudentAttendanceCommand(String className, String moduleCode, String matricNo) {
+        requireAllNonNull(className, moduleCode, matricNo);
         this.className = className;
         this.moduleCode = moduleCode;
         this.matricNo = matricNo;
+        LocalDate localDate = LocalDate.now();
+        date = Attendance.DATE_FORMATTER.format(localDate);
     }
 
     /**
@@ -59,27 +65,21 @@ public class ClassAddStudentCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         ClassroomManager classroomManager = ClassroomManager.getInstance();
 
-        classToAssignStudent = classroomManager.findClassroom(className, moduleCode);
-        if (classToAssignStudent == null) {
+        Classroom classToMarkAttendance = classroomManager.findClassroom(className, moduleCode);
+        if (classToMarkAttendance == null) {
             throw new CommandException(MESSAGE_FAIL);
         }
 
-        if (classroomManager.isDuplicateClassroomStudent(classToAssignStudent, matricNo)) {
-            throw new CommandException(String.format(MESSAGE_DUPLICATE_CLASSROOM_STUDENT, matricNo));
+        Attendance attendance = classroomManager.findAttendanceForClass(classToMarkAttendance, date);
+
+        if (classroomManager.isDuplicateClassroomStudentAttendance(classToMarkAttendance, matricNo, date)) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_CLASSROOM_STUDENT_ATTENDANCE, matricNo));
         }
 
-        classroomManager.assignStudent(classToAssignStudent, matricNo);
-        classroomManager.saveClassroomList();
+        classroomManager.markStudentAttendance(classToMarkAttendance, attendance, matricNo);
+        classroomManager.saveClassroomAttendanceList();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, matricNo,
-                classToAssignStudent.getClassName(), classToAssignStudent.getModuleCode()));
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof ClassAddStudentCommand // instanceof handles nulls
-                && classToAssignStudent.equals(((ClassAddStudentCommand) other).classToAssignStudent));
-
+                classToMarkAttendance.getClassName(), classToMarkAttendance.getModuleCode()));
     }
 }

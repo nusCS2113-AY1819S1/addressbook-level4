@@ -8,13 +8,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.ClassAddStudentCommand;
+import seedu.address.logic.commands.ClassDeleteStudentAttendanceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new ClassAddStudentCommand object
+ * Parses input arguments and creates a new ClassDeleteStudentAttendanceCommand object
  */
-public class ClassAddStudentCommandParser implements Parser<ClassAddStudentCommand> {
+public class ClassDeleteStudentAttendanceCommandParser implements Parser<ClassDeleteStudentAttendanceCommand> {
     /**
      * Parses {@code args} into a command and returns it.
      *
@@ -22,7 +22,7 @@ public class ClassAddStudentCommandParser implements Parser<ClassAddStudentComma
      * @throws ParseException if {@code args} does not conform the expected format
      */
     @Override
-    public ClassAddStudentCommand parse(String args) throws ParseException {
+    public ClassDeleteStudentAttendanceCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_CLASS_NAME, PREFIX_MODULE_CODE, PREFIX_MATRIC);
@@ -30,7 +30,7 @@ public class ClassAddStudentCommandParser implements Parser<ClassAddStudentComma
         if (!arePrefixesPresent(argMultimap, PREFIX_CLASS_NAME, PREFIX_MODULE_CODE, PREFIX_MATRIC)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ClassAddStudentCommand.MESSAGE_USAGE));
+                    ClassDeleteStudentAttendanceCommand.MESSAGE_USAGE));
         }
 
         String className = argMultimap.getValue(PREFIX_CLASS_NAME).get().toUpperCase();
@@ -40,7 +40,7 @@ public class ClassAddStudentCommandParser implements Parser<ClassAddStudentComma
         String matricNo = argMultimap.getValue(PREFIX_MATRIC).get().toUpperCase();
         ParserUtil.parseMatric(matricNo);
 
-        return new ClassAddStudentCommand(className, moduleCode, matricNo);
+        return new ClassDeleteStudentAttendanceCommand(className, moduleCode, matricNo);
     }
 
     /**
