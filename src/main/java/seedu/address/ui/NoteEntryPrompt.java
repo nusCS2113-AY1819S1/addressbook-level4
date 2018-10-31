@@ -21,12 +21,10 @@ import seedu.address.model.note.NoteText;
  */
 public class NoteEntryPrompt {
 
-    private static final int NOTE_MAX_CHARACTER_LIMIT = 10;
+    private static final int NOTE_MAX_CHARACTER_LIMIT = 150;
 
     private static final String NOTE_TAB_OVERWRITE = "    ";
     private static final String NOTE_TEXT_EMPTY_MESSAGE = "Saving failed! The field is empty.";
-    private static final String MESSAGE_NOTE_REACH_CHARACTER_LIMIT =
-            "You have reached the maximum character limit of " + Integer.toString(NOTE_MAX_CHARACTER_LIMIT);
 
     private final KeyCombination keyCombinationSave = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN);
     private final KeyCombination keyCombinationCancel = new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN);
@@ -40,7 +38,6 @@ public class NoteEntryPrompt {
     private Stage dialogStage;
     private Note note;
 
-    private boolean feedbackLabelIsDisplayed = false;
     private boolean isCancelled = false;
 
     private void initialize() {
