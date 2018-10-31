@@ -14,6 +14,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.AccountListChangedEvent;
 import seedu.address.commons.events.model.StockListChangedEvent;
 
 /**
@@ -77,7 +78,17 @@ public class StatusBarFooter extends UiPart<Region> {
     public void handleStockListChangedEvent(StockListChangedEvent stockList) {
         long now = clock.millis();
         String lastUpdated = new Date(now).toString();
-        logger.info(LogsCenter.getEventHandlingLogMessage(stockList, "Setting last updated status to " + lastUpdated));
+        logger.info(LogsCenter.getEventHandlingLogMessage(stockList, "Setting last updated status to "
+                + lastUpdated));
+        setSyncStatus(String.format(SYNC_STATUS_UPDATED, lastUpdated));
+    }
+
+    @Subscribe
+    public void handleAccountListChangedEvent(AccountListChangedEvent accountList) {
+        long now = clock.millis();
+        String lastUpdated = new Date(now).toString();
+        logger.info(LogsCenter.getEventHandlingLogMessage(accountList, "Setting last updated status to "
+                + lastUpdated));
         setSyncStatus(String.format(SYNC_STATUS_UPDATED, lastUpdated));
     }
 }

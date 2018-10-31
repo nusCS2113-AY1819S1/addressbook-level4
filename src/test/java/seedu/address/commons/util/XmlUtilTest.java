@@ -132,7 +132,7 @@ public class XmlUtilTest {
     public void saveDataToFile_validFile_dataSaved() throws Exception {
         FileUtil.createFile(TEMP_FILE);
         XmlSerializableStockList dataToWrite = new XmlSerializableStockList(new StockList());
-        XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
+        XmlUtil.saveStockListDataToFile(TEMP_FILE, dataToWrite);
         XmlSerializableStockList dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableStockList.class);
         assertEquals(dataToWrite, dataFromFile);
 
@@ -140,7 +140,7 @@ public class XmlUtilTest {
         dataToWrite = new XmlSerializableStockList(
                 builder.withItem(new ItemBuilder().build()).build());
 
-        XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
+        XmlUtil.saveStockListDataToFile(TEMP_FILE, dataToWrite);
         dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableStockList.class);
         assertEquals(dataToWrite, dataFromFile);
     }

@@ -42,7 +42,28 @@ public class TypicalItems {
         return ab;
     }
 
+
     public static List<Item> getTypicalItems() {
         return new ArrayList<>(Arrays.asList(ARDUINO, RPLIDAR, MOTOR));
     }
+
+
+    /**
+     * Returns an {@code StockList} with all the typical items.
+     * NEEDS WORK
+     */
+    /*
+    public static AccountList getTypicalAccountList() {
+        AccountList ab = new AccountList();
+        for (Account account : getTypicalAccounts()) {
+            ab.addAccount(account);
+        }
+        return ab;
+    }
+
+    public static List<Account> getTypicalAccounts() {
+        return new ArrayList<>(Arrays.asList(ARDUINO, RPLIDAR, MOTOR));
+    }
+    */
+
 }
