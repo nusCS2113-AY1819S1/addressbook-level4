@@ -1,33 +1,36 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADEBOOK_ITEM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ADMIN_NO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_MARKS;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.gradebook.GradebookManager;
 import seedu.address.model.grades.Grades;
 import seedu.address.model.grades.GradesManager;
+
 
 /**
  * Adds student grade to Trajectory.
  */
 public class GradeAddCommand extends Command {
     public static final String COMMAND_WORD = "grade add";
+    public static final String MESSAGE_MARKS_EXCEED = "Marks assigned is above maximum marks %1$s.";
     public static final String MESSAGE_ADD_GRADE_SUCCESS = "\nSuccessfully assign! \nModule Code: %1$s"
-            + "\nGradebook Component Name: %2$s" + "\nAdmin No.: %3$s" + "\nMarks: %4$s";
+            + "\nGradebook Component Name: %2$s" + "\nMatric No.: %3$s" + "\nMarks: %4$s";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds grade to Trajectory. "
             + "\nParameters: "
-            + PREFIX_MODULE_CODE + "MODULE CODE  "
-            + PREFIX_GRADEBOOK_ITEM + "ITEM "
-            + PREFIX_STUDENT_ADMIN_NO + "ADMIN. NO "
+            + PREFIX_MODULE_CODE + "MODULE_CODE  "
+            + PREFIX_GRADEBOOK_ITEM + "COMPONENT_NAME "
+            + PREFIX_MATRIC + "MATRIC_NO "
             + PREFIX_STUDENT_MARKS + "MARKS "
             + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_MODULE_CODE + "CS2113 "
             + PREFIX_GRADEBOOK_ITEM + "Assignment 1 "
-            + PREFIX_STUDENT_ADMIN_NO + "A0167789S "
+            + PREFIX_MATRIC + "A0167789S "
             + PREFIX_STUDENT_MARKS + "50";
     private final Grades toAddGrade;
     public GradeAddCommand(Grades grade) {
@@ -37,6 +40,15 @@ public class GradeAddCommand extends Command {
     @Override
     public CommandResult execute (Model model, CommandHistory history) throws CommandException {
         GradesManager gradesManager = new GradesManager();
+        GradebookManager gradebookManager = new GradebookManager();
+        boolean hasMarksExceed = gradebookManager.hasMarksExceed(
+                toAddGrade.getModuleCode(),
+                toAddGrade.getGradeComponentName(),
+                toAddGrade.getMarks());
+        if (!hasMarksExceed) {
+            int maxMarks = gradebookManager.getMaxMarks(toAddGrade.getModuleCode(), toAddGrade.getGradeComponentName());
+            return new CommandResult(String.format(MESSAGE_MARKS_EXCEED, maxMarks));
+        }
         gradesManager.addGrade(toAddGrade);
         gradesManager.saveGradeList();
         return new CommandResult(String.format(
