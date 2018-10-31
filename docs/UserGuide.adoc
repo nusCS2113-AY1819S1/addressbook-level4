@@ -215,6 +215,7 @@ Format: `module find KEYWORD [MORE_KEYWORDS]`
 ****
 * At least one keyword must be provided.
 * The search is case-insensitive.
+* The search will only match whole words i.e. `engin` will not return `Engineering`.
 ****
 
 Examples:

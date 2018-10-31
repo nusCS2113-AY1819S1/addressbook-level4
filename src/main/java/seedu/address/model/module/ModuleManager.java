@@ -11,6 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.StorageController;
+import seedu.address.model.classroom.ClassroomManager;
 import seedu.address.model.module.exceptions.DuplicateModuleException;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.StudentManager;
@@ -62,8 +63,13 @@ public class ModuleManager {
         modules.set(targetIndex, editedModule);
     }
 
+    /**
+     * Deletes a module from Trajectory. This method will also handle the deletion of the other components that
+     * rely on {@code Module}.
+     */
     public void deleteModule(Module toDelete) {
         modules.remove(toDelete);
+        ClassroomManager.getInstance().handleModuleDeletedByModuleCode(toDelete.getModuleCode().moduleCode);
     }
 
     public void enrolStudentInModule(Module module, Person student) {
