@@ -2,8 +2,6 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
-
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,8 +9,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.EventPanelSelectionChangedEvent;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.model.event.Event;
 
 
@@ -36,7 +32,7 @@ public class EventListPanel extends UiPart<Region> {
     private void setConnections(ObservableList<Event> eventList) {
         eventListView.setItems(eventList);
         eventListView.setCellFactory(listView -> new EventListViewCell());
-        setEventHandlerForSelectionChangeEvent();
+        //setEventHandlerForSelectionChangeEvent();
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
@@ -44,8 +40,7 @@ public class EventListPanel extends UiPart<Region> {
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in event list panel changed to : '" + newValue + "'");
-                        raise(new EventPanelSelectionChangedEvent(newValue));
-                        //raise(new NewResultAvailableEvent(newValue.toString()));
+                        //raise(new EventPanelSelectionChangedEvent(newValue));
                     }
                 });
     }
@@ -58,12 +53,6 @@ public class EventListPanel extends UiPart<Region> {
             eventListView.scrollTo(index);
             eventListView.getSelectionModel().clearAndSelect(index);
         });
-    }
-
-    @Subscribe
-    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        scrollTo(event.targetIndex);
     }
 
     /**

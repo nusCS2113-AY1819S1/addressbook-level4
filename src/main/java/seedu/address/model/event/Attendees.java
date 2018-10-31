@@ -28,18 +28,6 @@ public class Attendees {
         }
     }
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        int i = 1;
-        for (String name : attendeesSet) {
-            builder.append(String.format("%i: ", i++));
-            builder.append(name);
-            builder.append("\n");
-        }
-        return builder.toString();
-    }
-
     /**
      * Add names to attendees list
      * @param name The new name to be added.
@@ -48,6 +36,17 @@ public class Attendees {
     public Attendees addName(String name) {
         Set<String> updatedAttendees = new HashSet<>(this.attendeesSet);
         updatedAttendees.add(name);
+        return new Attendees(updatedAttendees);
+    }
+
+    /**
+     * Remove names to attendees list
+     * @param name The name to be removed.
+     * @return A new copy of updated Attendees.
+     */
+    public Attendees removeName(String name) {
+        Set<String> updatedAttendees = new HashSet<>(this.attendeesSet);
+        updatedAttendees.remove(name);
         return new Attendees(updatedAttendees);
     }
 

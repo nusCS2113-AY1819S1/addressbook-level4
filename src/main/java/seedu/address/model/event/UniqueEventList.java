@@ -50,7 +50,7 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Replaces the event {@code target} in the list with {@code editedPerson}.
+     * Replaces the event {@code target} in the list with {@code editedEvent}.
      * {@code target} must exist in the list.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
      */
@@ -69,8 +69,8 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent event from the list.
+     * The event must exist in the list.
      */
     public void remove(Event toRemove) {
         requireNonNull(toRemove);
@@ -96,6 +96,21 @@ public class UniqueEventList implements Iterable<Event> {
 
         internalList.setAll(events);
     }
+
+    /**
+     * Update events which Attendee contains personName
+     */
+    public void removeAttendee(String personName) {
+        requireNonNull(personName);
+        for (Event event: internalList) {
+            if (event.getAttendees().hasName(personName)) {
+                int index = internalList.indexOf(event);
+                Event updatedEvent = event.removePersonFromAttendee(personName);
+                internalList.set(index, updatedEvent);
+            }
+        }
+    }
+
 
     public List<Event> getSortedEventList() {
         List<Event> result = this.internalList;
