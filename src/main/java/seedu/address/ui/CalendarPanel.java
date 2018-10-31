@@ -49,7 +49,7 @@ public class CalendarPanel extends UiPart<Region> {
             || calendar.get(Calendar.MONTH) == Calendar.OCTOBER
             || calendar.get(Calendar.MONTH) == Calendar.DECEMBER) {
             numOfDays = 31;
-        } else if (calendar.get(Calendar.MONTH) == Calendar.FEBRUARY){
+        } else if (calendar.get(Calendar.MONTH) == Calendar.FEBRUARY) {
             numOfDays = 29;
         } else {
             numOfDays = 30;
