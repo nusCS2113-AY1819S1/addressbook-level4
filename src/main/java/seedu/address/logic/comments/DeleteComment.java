@@ -1,4 +1,4 @@
-//@@author  Geraldcdx
+//@@author Geraldcdx
 package seedu.address.logic.comments;
 
 import java.util.Vector;
