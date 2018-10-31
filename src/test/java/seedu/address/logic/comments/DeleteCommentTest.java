@@ -39,7 +39,8 @@ class DeleteCommentTest {
         try {
             assertNotEquals(testcase, test.deleteComment(15));
         } catch (Exception e) {
-            assertEquals("Line is invalid, try again", DeleteCommentCommand.MESSAGE_LINE_INVALID);
+            assertEquals("Line is invalid, try again. Example: deleteComment 1 L/2",
+                    DeleteCommentCommand.MESSAGE_LINE_INVALID);
         }
     }
 }
