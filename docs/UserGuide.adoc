@@ -137,7 +137,7 @@ Examples:
 * `deletegroupstudents g/1 p/1`
 * `dgs g/1 p/1 p/2`
 
-=== List a group of students: 'scorefilter a/56 or b/56'
+=== add test and test marks to student: 'adt'
 List out  students who score above/below certain grade.
 
 Format: scoreFilter [filter_standard]
