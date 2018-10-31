@@ -400,28 +400,28 @@ program.
 
 Format: `email`
 
-[IMPORTANT]
+[NOTE]
 Email process is a 4-stage process. To exit from this process, enter `cancel` command as explained in <<Exits from any intermediate command: `cancel`>>.
 
 . *Initialisation.* Type `email` and press kbd:[Enter] to initialise the email command.
 . *Choose your recipients.* On the RecruitBook application, what's shown on the main window
    will be taken in as the recipients. +
-    .. You can use commands such as `listc`, `filterc`, `findc` to change the candidate shown.
-    .. You can also use commands such as `listj`, `filterj`, `findj` to change the job offer shown.
-    .. Type `next` and press kbd:[Enter] to move on to the next step.
+.. You can use commands such as `listc`, `filterc`, `findc` to change the candidate shown.
+.. You can also use commands such as `listj`, `filterj`, `findj` to change the job offer shown.
+.. Type `next` and press kbd:[Enter] to move on to the next step.
 
 [start=3]
 . *Choose your contents.* On the RecruitBook application, what's shown on the main window
    will be taken in as contents.
-    .. Depending on what what were the recipients, contents can only be the contrasting +
-       eg. If recipients were candidates, only job offers can be the contents and vice versa.
-    .. This is enforced by the program by limiting commands available in contents selection.
-    .. Type `next` and press kbd:[Enter] to move on to the next step.
+.. Depending on what what were the recipients, contents can only be the contrasting +
+   eg. If recipients were candidates, only job offers can be the contents and vice versa.
+.. This is enforced by the program by limiting commands available in contents selection.
+.. Type `next` and press kbd:[Enter] to move on to the next step.
 
 [start=4]
 . *Sending your email.*  This step is a confirmation step before you actually send the email.
-    .. Type `preview` and press kbd:[Enter] to preview your email.
-    .. Type `send` and press kbd:[Enter] to send the email.
+.. Type `preview` and press kbd:[Enter] to preview your email.
+.. Type `send` and press kbd:[Enter] to send the email.
 
 Other notes
 

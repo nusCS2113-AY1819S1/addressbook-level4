@@ -406,7 +406,7 @@ In `EmailContentSelectionCommand` phase, depending on `EmailUtil#areRecipientsCa
   commands pertaining to the current book can be used. This is to enforce that recipients and contents must be contrasting.
 . The user executes `add` command. This calls `EmailContentsAddCommand` which adds contents similarly to `EmailRecipientsAddCommand` as seen above.
 . The user executes `back` command. This calls `EmailContentsBackCommand` which switches the current book and changes `LogicState` back to select recipients phase.
-. The user executes `next` command. This calls `EmailRecipientsNextCommand which switches the current book and changes `LogicState` to select contents phase.
+. The user executes `next` command. This calls `EmailRecipientsNextCommand` which switches the current book and changes `LogicState` to select contents phase.
 . The user executes `next` command. This calls `EmailContentsNextCommand` which changes `LogicState` to the send phase.
 . The user executes `preview` command. This calls `EmailSendPreviewCommand`.
 .. This generates a string of the email based on recipients and contents in `EmailUtil` which calls `EventCenter` to post `ShowEmailPreviewEvent`
