@@ -253,7 +253,7 @@ public class ParserUtil {
         requireNonNull(startTime);
         String trimmedStartTime = startTime.trim();
         if (!StartTime.isValidTime(trimmedStartTime)) {
-          throw new ParseException(StartTime.MESSAGE_TIME_CONSTRAINTS);
+            throw new ParseException(StartTime.MESSAGE_TIME_CONSTRAINTS);
         }
         return new StartTime(trimmedStartTime);
     }
@@ -268,7 +268,7 @@ public class ParserUtil {
         requireNonNull(endTime);
         String trimmedEndTime = endTime.trim();
         if (!EndTime.isValidTime(trimmedEndTime)) {
-          throw new ParseException(EndTime.MESSAGE_TIME_CONSTRAINTS);
+            throw new ParseException(EndTime.MESSAGE_TIME_CONSTRAINTS);
         }
         return new EndTime(trimmedEndTime);
     }

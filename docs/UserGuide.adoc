@@ -303,7 +303,7 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 ====
 
 // tag::undoredo[]
-=== Undoing previous command : `undo`
+=== Undoing previous command : `undo` [to be done in v1.4]
 Priority level: all
 
 Restores the event schedule to the state before the previous _undoable_ command was executed. +
@@ -331,7 +331,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
 
-=== Redoing the previously undone command : `redo`
+=== Redoing the previously undone command : `redo` [to be done in v1.4]
 Priority level: all
 
 Reverses the most recent `undo` command. +
