@@ -2,11 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,8 +32,9 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-    public static final String VALID_TAG_CC = "CEG";
-    public static final String VALID_TAG_MATRIC_NO = "A0168412C";
+    public static final String VALID_COURSE_CODE_CEG = "CEG";
+    public static final String VALID_MATRIC_NO_MEGAN = "A0168412C";
+    public static final String VALID_MATRIC_NO_TAYLOR = "A0168412D";
     public static final String VALID_CLASS_T16 = "T16";
     public static final String VALID_MODULE_CODE = "CG1111";
     public static final String VALID_MAX_ENROLLMENT = "20";
@@ -52,12 +49,17 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String MATRIC_DESC_MEGAN = " "  + PREFIX_MATRIC + VALID_MATRIC_NO_MEGAN;
+    public static final String MATRIC_DESC_BOB = " "  + PREFIX_MATRIC + VALID_MATRIC_NO_TAYLOR;
+    public static final String COURSE_CODE_DESC_CEG = " " + PREFIX_COURSE_CODE + VALID_COURSE_CODE_CEG;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_MATRIC_NO = " " + PREFIX_MATRIC + "00000000V"; // missing prefix letter
+    public static final String INVALID_COURSE_CODE = " " + PREFIX_COURSE_CODE + "ACE"; // course doesn't exist
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
