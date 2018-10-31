@@ -1106,7 +1106,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |teacher |assign student to class |add students to a class in the event that some students still have not signed up for a slot when classes begin
 
-|`* * *` |teacher |unassign student from class |remove a student from a class to prevent clashes in his/her timetable, or the student has dropped out of school, or if he/she has not paid his/her school fees
+|`* * *` |teacher |unassign student from class |remove a student from a class if the student has dropped out of school, or if he/she has not paid his/her school fees
 
 |`* * *` |teacher |modify class enrollment limit |set class enrollment limits so that the classes that I’m teaching or my TAs are teaching are not over-subscribed.
 
@@ -2124,8 +2124,8 @@ Use case resumes at step 1.
 === Use case: Update Class Enrollment Limits
 
 *Precondition(s)* :
-
-* Class must exist in data file.
+* Module code exists in data file.
+* Class belonging to the module code exists in data file.
 
 *Guarantees* :
 
@@ -2149,11 +2149,13 @@ Use case resumes at step 1.
 
 
 [discrete]
-=== Use case: Update Class Attendance List
+=== Use case: Modify Class Attendance List
 
 *Precondition(s)* :
 
-* Class must exist in data file.
+* Module code exists in data file.
+* Class belonging to the module code exists in data file.
+* Student exists in data file and must be marked present.
 
 *Guarantees* :
 
@@ -2180,7 +2182,7 @@ Use case resumes at step 1.
 
 *Precondition(s)* :
 
-* Class(es) must exists in data file.
+* Class(es) exists in data file.
 
 *Guarantees* :
 
@@ -2207,7 +2209,8 @@ Use case resumes at step 1.
 
 *Precondition(s)* :
 
-* Module code exists in data file.
+* Module code exists in the data file.
+* Class belonging to the module code exists in data file.
 
 *Guarantees* :
 
@@ -2242,6 +2245,9 @@ Use case resumes at step 1.
 *Precondition(s)* :
 
 * Student exists in data file.
+* Module code exists in data file.
+* Class must not be full.
+* Class belonging to the module code exists in data file.
 
 *Guarantees* :
 
@@ -2276,6 +2282,9 @@ Use case resumes at step 1.
 *Precondition(s)* :
 
 * Student exists in data file.
+* Module code exists in data file.
+* Class belonging to the module code exists in data file.
+* Student must be assigned to class before unassigning them.
 
 *Guarantees* :
 
@@ -2315,7 +2324,10 @@ Use case resumes at step 1.
 
 *Precondition(s)* :
 
-* Class must exist in data file.
+* Student exists in data file.
+* Module code exists in data file.
+* Class belonging to module code exists in data file.
+* Student must be assigned to class.
 
 *Guarantees* :
 
@@ -2349,7 +2361,8 @@ Use case resumes at step 1.
 
 *Precondition(s)* :
 
-* Class must exist in data file.
+* Module code exists in data file.
+* Class belonging to module code exists in data file.
 
 *Guarantees* :
 
