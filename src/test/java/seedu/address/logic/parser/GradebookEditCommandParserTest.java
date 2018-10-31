@@ -3,10 +3,8 @@ package seedu.address.logic.parser;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import seedu.address.logic.commands.GradebookEditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import static org.junit.Assert.assertNotNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.GradebookEditCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CliSyntax.*;
@@ -28,118 +26,6 @@ public class GradebookEditCommandParserTest {
         thrown.expect(ParseException.class);
         thrown.expectMessage(expectedMessage);
         parser.parse(arg);
-    }
-
-    @Test
-    public void parse_validArgsWithNewComponentName_success() throws ParseException {
-        //valid arguments with optional new gradebook component name
-        String moduleCode = "CS2113";
-        String gradebookComponentName = "Finals";
-        String newGradebookComponentName = "Test";
-        String args = " "
-                + PREFIX_MODULE_CODE
-                + moduleCode
-                + " "
-                + PREFIX_GRADEBOOK_ITEM
-                + gradebookComponentName
-                + " "
-                + PREFIX_GRADEBOOK_ITEM_EDIT
-                + newGradebookComponentName;
-        GradebookEditCommand gradebookEditCommand = parser.parse(args);
-        assertNotNull(gradebookEditCommand);
-    }
-
-    @Test
-    public void parse_validArgsWithNewMaxMarks_success() throws ParseException {
-        //valid arguments with optional new max marks
-        String moduleCode = "CS2113";
-        String gradebookComponentName = "Finals";
-        int newMaxMarks = 50;
-        String args = " "
-                + PREFIX_MODULE_CODE
-                + moduleCode
-                + " "
-                + PREFIX_GRADEBOOK_ITEM
-                + gradebookComponentName
-                + " "
-                + PREFIX_GRADEBOOK_MAXMARKS
-                + newMaxMarks;
-        GradebookEditCommand gradebookEditCommand = parser.parse(args);
-        assertNotNull(gradebookEditCommand);
-    }
-
-    @Test
-    public void parse_validArgsWithNewWeightage_success() throws ParseException {
-        //valid arguments with optional new weightage
-        String moduleCode = "CS2113";
-        String gradebookComponentName = "Finals";
-        int newWeightage = 20;
-        String args = " "
-                + PREFIX_MODULE_CODE
-                + moduleCode
-                + " "
-                + PREFIX_GRADEBOOK_ITEM
-                + gradebookComponentName
-                + " "
-                + PREFIX_GRADEBOOK_WEIGHTAGE
-                + newWeightage;
-        GradebookEditCommand gradebookEditCommand = parser.parse(args);
-        assertNotNull(gradebookEditCommand);
-    }
-
-    @Test
-    public void parse_validArgsDifferentPositions_success() throws ParseException {
-        //valid arguments
-        String moduleCode = "CS2113";
-        String gradebookComponentName = "Finals";
-        int newMaxMarks = 90;
-        String args = " "
-                + PREFIX_MODULE_CODE
-                + moduleCode
-                + " "
-                + PREFIX_GRADEBOOK_MAXMARKS
-                + newMaxMarks
-                + " "
-                + PREFIX_GRADEBOOK_ITEM
-                + gradebookComponentName;
-
-        GradebookEditCommand gradebookEditCommand = parser.parse(args);
-        assertNotNull(gradebookEditCommand);
-    }
-
-    @Test
-    public void parse_emptyModuleArgs_throwsParseException() throws ParseException {
-        String expectedMessage = String.format(MESSAGE_ERROR_EMPTY);
-        //component name empty
-        String moduleCode = "CS2113";
-        String gradebookComponentName = "";
-        String argWithoutModule = " "
-                + PREFIX_MODULE_CODE
-                + moduleCode
-                + " "
-                + PREFIX_GRADEBOOK_ITEM
-                + gradebookComponentName;
-        thrown.expect(ParseException.class);
-        thrown.expectMessage(expectedMessage);
-        parser.parse(argWithoutModule);
-    }
-
-
-    @Test
-    public void parse_emptyComponentNameArgs_throwsParseException() throws ParseException {
-        String expectedMessage = String.format(MESSAGE_ERROR_EMPTY);
-        //component name empty
-        String moduleCode = "";
-        String gradebookComponentName = "Finals";
-        String argWithoutComponentName = " "
-                + PREFIX_MODULE_CODE
-                + moduleCode
-                + " "
-                + PREFIX_GRADEBOOK_ITEM
-                + gradebookComponentName;
-        thrown.expect(ParseException.class);
-        thrown.expectMessage(expectedMessage);
-        parser.parse(argWithoutComponentName);
     }
 
     @Test

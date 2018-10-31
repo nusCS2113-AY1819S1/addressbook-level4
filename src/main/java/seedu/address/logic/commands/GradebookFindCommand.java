@@ -17,15 +17,15 @@ import seedu.address.ui.HtmlTableProcessor;
  */
 public class GradebookFindCommand extends Command {
     public static final String COMMAND_WORD = "gradebook find";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds a gradebook component to module in Trajectory. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds a gradebook component to module in Trajectory.\n"
             + "Parameters: "
             + PREFIX_MODULE_CODE + "MODULE_CODE  "
-            + PREFIX_GRADEBOOK_ITEM + "ITEM "
+            + PREFIX_GRADEBOOK_ITEM + "COMPONENT_NAME\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_MODULE_CODE + "CS2113 "
             + PREFIX_GRADEBOOK_ITEM + "Assignment 1";
     public static final String MESSAGE_FIND_SUCCESS = "\nSuccessfully found!";
-    public static final String MESSAGE_FIND_FAIL = "\nUnsuccessful find";
+    public static final String MESSAGE_FIND_FAIL = "\nGrade component does not exist!";
 
 
     private final Gradebook toFindGradebookComponent;

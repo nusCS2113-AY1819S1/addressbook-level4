@@ -18,7 +18,9 @@ import seedu.address.model.module.ModuleManager;
  * Parses input arguments and creates a new GradeGraphCommand object
  */
 public class GradeGraphCommandParser implements Parser<GradeGraphCommand> {
-    public static final String MESSAGE_MISSING_PARAMS = "All parameters must be filled";
+    public static final String MESSAGE_EMPTY_INPUTS = "Module code and gradebook component name cannot be empty";
+    public static final String MESSAGE_EMPTY_MODULE_CODE = "Module code cannot be empty";
+    public static final String MESSAGE_EMPTY_COMPONENT_NAME = "Component name cannot be empty";
     public static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
     public static final String MESSAGE_GRADEBOOK_INVALID = "Gradebook component does not exist";
     public static final String MESSAGE_GRADE_COMPONENT_INCOMPLETE = "Not all marks of students enrolled in module are "
@@ -41,9 +43,19 @@ public class GradeGraphCommandParser implements Parser<GradeGraphCommand> {
         }
         String moduleCodeArg = argMultimap.getValue(PREFIX_MODULE_CODE).get();
         String gradeComponentNameArg = argMultimap.getValue(PREFIX_GRADEBOOK_ITEM).get();
-        boolean isEmpty = gradebookManager.isEmpty(moduleCodeArg, gradeComponentNameArg);
-        if (isEmpty) {
-            throw new ParseException(MESSAGE_MISSING_PARAMS);
+        boolean isModuleCodeAndComponentNameEmpty = gradebookManager.isModuleCodeAndComponentNameEmpty(
+                moduleCodeArg,
+                gradeComponentNameArg);
+        if (isModuleCodeAndComponentNameEmpty) {
+            throw new ParseException(MESSAGE_EMPTY_INPUTS);
+        }
+        boolean isModuleCodeEmpty = gradebookManager.isModuleCodeEmpty(moduleCodeArg);
+        if (isModuleCodeEmpty) {
+            throw new ParseException(MESSAGE_EMPTY_MODULE_CODE);
+        }
+        boolean isComponentNameEmpty = gradebookManager.isComponentNameEmpty(gradeComponentNameArg);
+        if (isComponentNameEmpty) {
+            throw new ParseException(MESSAGE_EMPTY_COMPONENT_NAME);
         }
         boolean doesModuleExist = moduleManager.doesModuleExist(moduleCodeArg);
         if (!doesModuleExist) {
@@ -59,8 +71,8 @@ public class GradeGraphCommandParser implements Parser<GradeGraphCommand> {
         }
 
         Grades grade = new Grades(
-                moduleCodeArg.replaceAll("\\s+", " "),
-                gradeComponentNameArg.replaceAll("\\s+", " "));
+                moduleCodeArg,
+                gradeComponentNameArg);
         return new GradeGraphCommand(grade);
 
     }

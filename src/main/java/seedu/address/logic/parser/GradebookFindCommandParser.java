@@ -16,6 +16,8 @@ import seedu.address.model.gradebook.GradebookManager;
  */
 public class GradebookFindCommandParser {
     public static final String MESSAGE_EMPTY_INPUTS = "Module code and gradebook component name cannot be empty";
+    public static final String MESSAGE_EMPTY_MODULE_CODE = "Module code cannot be empty";
+    public static final String MESSAGE_EMPTY_COMPONENT_NAME = "Component name cannot be empty";
     /**
      * Parses the given {@code String args} of arguments in the context of the GradebookFindCommand
      * and returns a GradebookFindCommand object for execution.
@@ -33,12 +35,22 @@ public class GradebookFindCommandParser {
 
         String moduleCodeArg = argMultimap.getValue(PREFIX_MODULE_CODE).get();
         String gradeComponentNameArg = argMultimap.getValue(PREFIX_GRADEBOOK_ITEM).get();
-        boolean isEmpty = gradebookManager.isEmpty(moduleCodeArg, gradeComponentNameArg);
-        if (isEmpty) {
+        boolean isModuleCodeAndComponentNameEmpty = gradebookManager.isModuleCodeAndComponentNameEmpty(
+                moduleCodeArg,
+                gradeComponentNameArg);
+        if (isModuleCodeAndComponentNameEmpty) {
             throw new ParseException(MESSAGE_EMPTY_INPUTS);
         }
+        boolean isModuleCodeEmpty = gradebookManager.isModuleCodeEmpty(moduleCodeArg);
+        if (isModuleCodeEmpty) {
+            throw new ParseException(MESSAGE_EMPTY_MODULE_CODE);
+        }
+        boolean isComponentNameEmpty = gradebookManager.isComponentNameEmpty(gradeComponentNameArg);
+        if (isComponentNameEmpty) {
+            throw new ParseException(MESSAGE_EMPTY_COMPONENT_NAME);
+        }
 
-        Gradebook gradebook = new Gradebook(moduleCodeArg, gradeComponentNameArg);
+        Gradebook gradebook = new Gradebook(moduleCodeArg.toLowerCase(), gradeComponentNameArg.toLowerCase());
         return new GradebookFindCommand(gradebook);
     }
 
