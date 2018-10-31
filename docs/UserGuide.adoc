@@ -507,40 +507,62 @@ Displays graph which shows result of 'Finals' grade component of all CS2113 stud
 === Notes Management
 ==== Add Note : `note add`
 Adds a note to a module. +
-Format: `note add m/MODULE_CODE [p/PRIORITY_LEVEL] [d/DATE]`
+Format: `note add m/MODULE_CODE [tt/TITLE] [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME] [lc/LOCATION]`
 
-NOTE: `*The optional parameter PRIORITY_LEVEL will be available from v1.4*` +
-- PRIORITY_LEVEL = { 1 = LOW, 2 = MEDIUM, 3 = HIGH } +
-- If the PRIORITY_LEVEL is omitted, a default value of 1 (LOW) will be assigned to the created note. +
-- The DATE parameter follows the `DD.MM.YYYY` formatting only. *(Validation coming in v1.3)*
+- The START_DATE and END_DATE parameters allows the following date formats only. +
+* d-M-yyyy (e.g. 2-11-2018) +
+* d/M-yyyy (e.g. 2/11/2018) +
+* d.M.yyyy (e.g. 2.11.2018) +
+* d-MMM-yyyy (e.g. 2-Nov-2018) +
+* d MMM yyyy (e.g. 2 Nov 2018) +
+* d-MMM-yy (e.g. 2-Nov-18) +
+* d MMM yy (e.g. 2 Nov 18) +
+- The START_TIME and END_TIME parameters follows the following time format only. +
+* h:m AM/PM (e.g. 4:00 PM) +
+
+NOTE: - MODULE_CODE strictly follows the following: +
+`Module code should begin with 2 or 3 uppercase letters, followed by a 4-digit number and an optional uppercase letter at the end.` +
+- The date and time fields are *case-insensitive* which means the user can enter `2-nOv-2018` as date. +
+- If dates are specified but not the time, the system defines a default time of `12:00 AM` for `START_DATE` and `11:59 PM` for `END_DATE`. +
+- Specifying an `END_DATE` or any time parameters requires the `START_DATE` to be defined. Otherwise, the system will inform the user. +
+- The TITLE and LOCATION parameters allows characters up to 30 and 80 maximum respectively. Otherwise, an error message will be displayed. +
+- Omitting the TITLE will show a "(No title)" when the note is displayed. +
+- Defining the `START_DATE` but not the `END_DATE` automatically assigns the same date to it. +
+- Entering a `START_DATE` and `START_TIME` later than `END_DATE` and `END_TIME` is not allowed. +
+- Specifying the prefix but with an empty field is not allowed. (e.g. tt/ )
+
 
 ****
-* Upon entering the `note add` command, the system will prompt the user to type his/her note.
-* The user can choose to cancel anytime during the note editing stage.
+* Upon entering the `note add` command, the system will prompt the user to type his/her note in a new window. +
+* To save the note, the user can press `CTRL+S`. Note that saving blank text field is not allowed. +
+* The user can choose to cancel anytime during the process by pressing `CTRL+Q`.
 ****
 
 Examples:
 
-* `note add m/CS2113` +
+* `note add mc/CS2113` +
 This tells the system that the note is to be saved in the CS2113 module with no date.
-* `note add m/CS2113 d/31.12.2113` +
-This tells the system that the note is to be saved in the CS2113 module with a date (31 Dec 2113).
+* `note add mc/CS2113 tt/Lecture sd/2.11.2018 st/4:00 PM et/6:00 pm lc/LT15` +
+This tells the system that the note is to be saved in the CS2113 module with a title named "Lecture", a start date (2 Nov 2018) and end date (2 Nov 2018) from 4PM to 6PM at LT15.
 
-==== Edit note : `note edit [coming in v1.3]`
+==== Edit note : `note edit`
 Edits an existing note. +
-Format: `note edit INDEX m/MODULE_CODE [d/DATE]`
+Format: `note edit INDEX [mc/NEW_MODULE_CODE] [sd/NEW_START_DATE] [st/NEW_START_TIME] [ed/NEW_END_DATE] [et/NEW_END_TIME] [lc/NEW_LOCATION]`
 
 * Edits the note with the specified INDEX.
 * The INDEX refers to the corresponding number of each note when `note list` command is invoked.
 * Upon entering the `note edit` command, the system will prompt the user to type his/her modifications to the note.
-* The user can choose to cancel anytime during the note editing stage.
+* The user can complete his/her edits by pressing `CTRL+S`.
+* The user can choose to cancel anytime during the editing stage with `CTRL+Q`.
+
+NOTE: The system does not allow calling this command when the notes list is not displayed. This is to prevent accidentally editing another note.
 
 Examples:
 
-* `note list m/CS1010` +
+* `note list mc/CS1010` +
 A list of all notes saved in CS1010 module is displayed. +
-`note edit 3 m/CS1010 d/10.10.2019` +
-The user will now be able to edit the note that corresponds to INDEX=3 in the list. The modified note will be saved with its assigned DATE changed to 10/10/2019.
+`note edit 3 tt/Changed the title lc/NUS` +
+The user will now be able to edit the note that corresponds to INDEX=3 in the list. The modified note will be saved with its attributes changed accordingly.
 
 ==== Delete note : `note delete`
 Deletes a specific note. +
@@ -556,14 +578,16 @@ A list of all notes saved in CS2040C module is displayed. +
 `note delete 1` +
 Deletes the note that corresponds to INDEX=1 in the list.
 
-==== Find note : `note find [coming in v1.3]`
+==== Find note : `note find`
 Search and display existing notes using keywords. +
-Format: `note find k/KEYWORD [k/KEYWORD]..`
+Format: `note find k/KEYWORD [k/MORE_KEYWORDS]..`
 
+* The command searches for notes that contains *ALL* keywords. +
+* It only matches with `TITLE` and the note's `text content`. +
 * Multiple keywords can be accepted.
 * A minimum of one keyword is required for the command to work.
-* Keywords are not case-sensitive.
-* Each keyword must consist only of a single word.
+* Keywords are *case-insensitive*.
+* Each keyword must consist only of a single word (e.g. "Sort", "Git-Hub") and is not separated by spaces.
 
 Examples:
 
@@ -572,19 +596,25 @@ Lists all notes which contain both keywords "git" and "OOP".
 
 ==== List notes : `note list`
 Shows a list of all saved notes. +
-Format: `note list [m/MODULE_CODE] [P]`
+Format: `note list [mc/MODULE_CODE]`
 
-NOTE: `*The optional parameter P will be available from v1.4*` +
-- Adding the `P` parameter allows the user to view notes based on their assigned PRIORITY_LEVEL from highest to lowest. +
-- It is not case-sensitive, hence the user can use either lowercase or uppercase. +
-- If `P` is omitted, the list displayed is sorted by the order of creation.
+- `MODULE_CODE` field is case-insensitive, hence the user can use either lowercase or uppercase.
 
 Examples:
 
 * `note list` +
 This will list all existing notes from Trajectory.
-* `note list m/CS1231` +
+* `note list mc/CS1231` +
 This will list all notes saved in CS1231 module.
+
+==== Export notes: `note export`
+Converts all exportable notes to CSV. +
+Format: `note export fn/FILE_NAME`
+
+- This command creates a <FILE_NAME>.csv file in the user directory. +
+- Directory: C:\Users\<UserName>\<FILE_NAME>.csv +
+- The format follows the Google Calendar's CSV import formatting. Hence, the user can import their notes to Google Calendar with this command.
+- Only notes with dates are exportable.
 
 === Viewing help : `help`
 

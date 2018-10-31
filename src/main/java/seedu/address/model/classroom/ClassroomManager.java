@@ -279,4 +279,28 @@ public class ClassroomManager {
         int maxEnrollment = Integer.parseInt(classToAssignStudent.getMaxEnrollment().getValue());
         return classToAssignStudent.getStudents().size() >= maxEnrollment;
     }
+
+    /**
+     * Handles the removal of module by module code
+     */
+    public void handleModuleDeletedByModuleCode(String moduleCode) {
+        for (Classroom c : classroomList) {
+            if (c.getModuleCode().moduleCode.equalsIgnoreCase(moduleCode)) {
+                classroomList.remove(c);
+            }
+        }
+    }
+
+    /**
+     * Handles the removal of student by matric no
+     */
+    public void handleStudentDeletedByMatricNo(String matricNo) {
+        for (Classroom c : classroomList) {
+            for (String student : c.getStudents()) {
+                if (student.equalsIgnoreCase(matricNo)) {
+                    c.getStudents().remove(student);
+                }
+            }
+        }
+    }
 }

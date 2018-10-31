@@ -15,6 +15,7 @@ import java.util.List;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ModelManager;
+import seedu.address.model.StorageController;
 import seedu.address.model.note.NoteManager;
 import seedu.address.testutil.NoteBuilder;
 
@@ -32,6 +33,7 @@ public class NoteFindCommandTest {
 
     @Before
     public void setUp() {
+        StorageController.enterTestMode();
         noteManager.clearNotes();
         noteManager.saveNoteList();
     }
