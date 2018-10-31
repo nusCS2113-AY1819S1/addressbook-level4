@@ -507,7 +507,7 @@ Example:
 
 * `limit d/20-8-2018 30-8-2018 m/100`
 
-=== Viewing all limits: `checkLimit` [Oscar]
+=== Viewing all limits: `checkLimit`
 
 Displays all limits information stored in FinancialPlanner +
 Format: `checkLimit`
