@@ -420,6 +420,7 @@ export the iCalendar file with name myCalendar to src/data folder
 [NOTE]
 ====
 File name should not be longer than 500 characters and can not be empty.
+For the current version of this product, all event inside the event manager will be exported, as authentication and RSVP are in final period of testing 
 ====
 
 === Exiting the program : `exit`
