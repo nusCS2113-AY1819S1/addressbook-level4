@@ -18,7 +18,7 @@ public class OpenCommandParser implements Parser<OpenCommand> {
     public OpenCommand parse(String args) throws ParseException {
         String fileName = ParserUtil.parseFileName(args);
         fileName = fileName + ".xml";
-        if (fileName.equals(".xml")) {
+        if ((".xml").equals(fileName)) {
             throw new ParseException(
                     String.format(OpenCommand.MESSAGE_EMPTY_FILE_NAME, OpenCommand.MESSAGE_USAGE)
             );
