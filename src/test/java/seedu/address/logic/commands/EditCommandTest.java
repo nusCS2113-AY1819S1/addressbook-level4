@@ -26,6 +26,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.student.StudentManager;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -42,6 +43,7 @@ public class EditCommandTest {
         Person editedPerson = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         StudentEditCommand editCommand = new StudentEditCommand(INDEX_FIRST_PERSON, descriptor);
+        StudentManager.getInstance().initializeModel(model);
 
         String expectedMessage = String.format(StudentEditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 

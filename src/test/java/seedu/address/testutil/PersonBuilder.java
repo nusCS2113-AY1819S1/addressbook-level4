@@ -22,8 +22,8 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_MATRIC_NO = "A0168347B";
-    public static final String DEFAULT_COURSE_CODE = "CS";
+    public static final String DEFAULT_MATRIC_NO = "A0168347A";
+    public static final String DEFAULT_COURSE_CODE = "CEG";
 
     private Name name;
     private Phone phone;

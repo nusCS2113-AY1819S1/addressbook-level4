@@ -29,7 +29,7 @@ import seedu.address.storage.serializable.XmlSerializableUserList;
 public class StorageController {
     private static final String BASE_DIRECTORY = "data/";
     private static final String TEST_DIRECTORY = "testStorage/";
-    private static String workingDirectory = TEST_DIRECTORY;
+    private static String workingDirectory = BASE_DIRECTORY;
 
     private static final String STORAGE_COURSES = workingDirectory + "courseList.xml";
     private static final String STORAGE_MODULES = workingDirectory + "modules.xml";
@@ -56,8 +56,13 @@ public class StorageController {
      */
     public static void enterTestMode() {
         workingDirectory = TEST_DIRECTORY;
+        createTestFolder();
         wipeAllTestData();
         createFiles();
+    }
+
+    public static void createTestFolder() {
+        new File(TEST_DIRECTORY).mkdirs();
     }
     /**
      * This method wipes all local test data files.
