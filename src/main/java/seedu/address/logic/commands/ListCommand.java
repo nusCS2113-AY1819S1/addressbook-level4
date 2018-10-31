@@ -1,8 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_PEOPLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LIST_DEPARTMENT;
+import static seedu.address.model.EventModel.PREDICATE_SHOW_ALL_EVENTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.commons.core.Messages;
@@ -19,14 +20,16 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all persons by the given parameter\n"
             + "Parameters: "
-            + PREFIX_DEPARTMENT + " DEPARTMENT "
-            + "or " + PREFIX_ALL + "\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_DEPARTMENT + " Admin";
+            + PREFIX_LIST_DEPARTMENT + " DEPARTMENT "
+            + "or " + PREFIX_ALL_PEOPLE + "\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_LIST_DEPARTMENT + " Admin";
 
-    public static final String MESSAGE_SUCCESS = "All persons listed!";
+    public static final String MESSAGE_SUCCESS_PEOPLE = "All people listed!";
+    public static final String MESSAGE_SUCCESS_EVENT = "All events listed!";
 
     public static final String LIST_KEY_DEPARTMENT = "dep";
-    public static final String LIST_KEY_ALL = "all";
+    public static final String LIST_KEY_ALL = "all people";
+    public static final String LIST_KEY_EVENT = "all events";
 
     private final String listKey;
     private final DepartmentContainsKeywordsPredicate predicate;
@@ -42,16 +45,24 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
 
+        String message = null;
+
         switch (listKey) {
         case (LIST_KEY_DEPARTMENT): model.updateFilteredPersonList(predicate);
            return new CommandResult(
                         String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+
+        case (LIST_KEY_EVENT): model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+            message = MESSAGE_SUCCESS_EVENT;
+            break;
         case (LIST_KEY_ALL): model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            message = MESSAGE_SUCCESS_PEOPLE;
             break;
         default:
         }
+        return new CommandResult(message);
 
-        return new CommandResult(MESSAGE_SUCCESS);
+
     }
 
     @Override

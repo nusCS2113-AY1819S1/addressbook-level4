@@ -87,20 +87,29 @@ Example: +
 
 ==== Listing all personnel of the company : 'list'
 
-Shows a list of personnel in the company +
+Shows a list of all the personnel, , all the events, or those people in the specific department in the project team +
 Format/Prompts: +
-Enter a command: `list`
+
+Enter command to list all people: `list all people` +
+Enter a command to list all the events: `list all events` +
+Enter a command to list people in the specific `DEPARTMENT`: `list dep DEPARTMENT`
+
+Example: +
+`list dep Admin` +
+`list dep Admin Finance`
+
 
 ==== Editing an employee : 'edit'
 
 Edits the details of the employee: +
 Format/Prompts: +
-Enter a command: `edit LIST_INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT t/TAG…​`
+Enter a command: `edit LIST_INDEX p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT t/TAG…​`
 
 ****
 * Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The
 index *must be a positive integer* 1, 2, 3, ... +
 * At least one of the optional fields must be provided.
+* Name is not editable
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing t/ without specifying any tags after it.
@@ -133,14 +142,14 @@ Format: `schedule`
 
 Add employees to the project event at the respective specified INDEX. The index refers to the index number shown in the
 displayed person and event list. The index must be a positive integer 1, 2, 3... +
-Format: `invite LIST_INDEX to/SCHEDULE_INDEX` +
+Format: `invite PERSON_INDEX to/EVENT_INDEX` +
 Example: invite 1 to/2
 
 ==== Remove employee: `remove`
 
 Removes an employee from the project event. +
-Format/Prompts: `remove SCHEDULE_INDEX  n/NAME` +
-Example: remove 10 n/John Doe
+Format/Prompts: `remove PERSON_INDEX  from/EVENT_INDEX` +
+Example: remove 1 from/2
 
 
 ==== Modifying an event: `editEvent`
@@ -330,6 +339,19 @@ Example: +
 `n/Board Meeting d/Weekly Meeting l/Conference Room 1 date/2018-09-28 s/12:00 e/23:59 ` +
 Creates an event named Board Meeting.
 
+==== Listing all personnel of the company : 'list'
+
+Shows a list of all the personnel, , all the events, or those people in the specific department in the project team +
+Format/Prompts: +
+
+Enter command to list all people: `list all people` +
+Enter a command to list all the events: `list all events` +
+Enter a command to list people in the specific `DEPARTMENT`: `list dep DEPARTMENT`
+
+Example: +
+`list dep Admin` +
+`list dep Admin Finance`
+
 ==== Listing all events: `schedule`
 
 Display the full list of events in the project. +
@@ -345,8 +367,8 @@ Example: invite 1 to/2
 ==== Remove employee: `remove`
 
 Removes an employee from the project event. +
-Format/Prompts: `remove SCHEDULE_INDEX  n/NAME` +
-Example: remove 10 n/John Doe
+Format/Prompts: `remove EVENT_INDEX  from/PERSON_INDEX` +
+Example: remove 1 from/2
 
 
 ==== Modifying an event: `editEvent`
@@ -356,7 +378,7 @@ index must be a positive integer 1, 2, 3... +
 Input nil if it is not the field to be changed. +
 Format/Prompts: +
 Enter a command: `editEvent SCHEDULE_INDEX` +
-Enter event details: `n/NAME d/DESCRIPTION l/LOCATION date/DATE(DDMMYY) s/START TIME e/END TIME`  +
+Enter event details: `d/DESCRIPTION l/LOCATION date/DATE(DDMMYY) s/START TIME e/END TIME`  +
 
 ****
 * Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The
@@ -520,6 +542,19 @@ This section is meant for Employees.
 Employees can only access his/her own departments' events.
 ====
 
+==== Listing all personnel of the company : 'list'
+
+Shows a list of all the personnel, , all the events, or those people in the specific department in the project team +
+Format/Prompts: +
+
+Enter command to list all people: `list all people` +
+Enter a command to list all the events: `list all events` +
+Enter a command to list people in the specific `DEPARTMENT`: `list dep DEPARTMENT`
+
+Example: +
+`list dep Admin` +
+`list dep Admin Finance`
+
 ==== Listing all events: `schedule`
 
 Display the full list of events in the project. +
@@ -558,7 +593,7 @@ Task with id 1 is submitted as complete.
 
 * *List* : `list`
 
-* *Edit* : `edit LIST_INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT t/TAG…​`
+* *Edit* : `edit LIST_INDEX p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT t/TAG…​`
 
 * *Delete* : `delete LIST_INDEX`
 
@@ -567,9 +602,9 @@ Task with id 1 is submitted as complete.
 
 * *Schedule* : `schedule`
 
-* *Invite* : `invite LIST_INDEX to/SCHEDULE_INDEX`
+* *Invite* : `invite PERSON_INDEX to/EVENT_INDEX`
 
-* *Remove* : `remove SCHEDULE_INDEX  n/NAME`
+* *Remove* : `remove PERSON_INDEX  n/EVENT_INDEX`
 
 * *editEvent* : `n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START TIME e/END TIME `
 

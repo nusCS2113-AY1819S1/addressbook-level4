@@ -3,8 +3,8 @@ package seedu.address.logic;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_PEOPLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LIST_DEPARTMENT;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -43,14 +43,14 @@ public class LogicManagerTest {
 
     @Test
     public void execute_validCommand_success() {
-        String firstListCommand = ListCommand.COMMAND_WORD + " " + PREFIX_ALL;
-        assertCommandSuccess(firstListCommand, ListCommand.MESSAGE_SUCCESS, model);
+        String firstListCommand = ListCommand.COMMAND_WORD + " " + PREFIX_ALL_PEOPLE;
+        assertCommandSuccess(firstListCommand, ListCommand.MESSAGE_SUCCESS_PEOPLE, model);
         assertHistoryCorrect(firstListCommand);
     }
 
     @Test
     public void execute_validSecondCommand_success() {
-        String secondListCommand = ListCommand.COMMAND_WORD + " " + PREFIX_DEPARTMENT + " " + "Admin";
+        String secondListCommand = ListCommand.COMMAND_WORD + " " + PREFIX_LIST_DEPARTMENT + " " + "Admin";
         String expectedMessage = "0 persons listed!";
         assertCommandSuccess(secondListCommand, expectedMessage, model);
         assertHistoryCorrect(secondListCommand);
