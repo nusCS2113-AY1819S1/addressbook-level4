@@ -22,7 +22,6 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.model.event.EventDate;
 import seedu.address.model.event.TimeType;
 
-
 public class SelectCommandParserTest {
 
     private SelectCommandParser parser = new SelectCommandParser();
