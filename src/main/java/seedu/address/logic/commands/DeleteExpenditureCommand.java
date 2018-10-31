@@ -1,3 +1,4 @@
+//@@author feijunzi
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
@@ -17,12 +18,12 @@ import seedu.address.model.expenditureinfo.Expenditure;
 
 public class DeleteExpenditureCommand extends Command {
     public static final String COMMAND_WORD = "ET_delete";
-    public static final String COMMAND_ALIAS = "d";
+    //public static final String COMMAND_ALIAS = "d";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the expenditure identified by the index number used in the list.\n"
+            + ": Deletes the expenditure identified by the index number used in the displayed expenditure list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + "1";
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_SUCCESS = "Deleted expenditure: %1$s";
 

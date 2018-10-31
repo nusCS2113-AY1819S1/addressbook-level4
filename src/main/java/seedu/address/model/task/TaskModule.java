@@ -23,7 +23,7 @@ public class TaskModule {
     public TaskModule(String module) {
         requireNonNull(module);
         checkArgument(isValidModule(module), MESSAGE_MODULE_CONSTRAINTS);
-        value = module;
+        value = module.toUpperCase();
     }
 
     /**
