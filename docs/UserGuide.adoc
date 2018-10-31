@@ -187,7 +187,7 @@ Deletes the 2nd distributor in the contacts panel.
 
 // tag::journal[]
 
-=== Journal
+=== Sales History
 
 ==== Add a transaction: `transaction`
 
@@ -209,22 +209,36 @@ Displays the details of the latest transaction.
 
 ==== Add a reminder: `setreminder`
 
-Format: `addreminder time/yyyy/MM/dd HH:mm:ss message/<The reminder message>`
+Format: `addreminder time/ <yyyy/MM/dd HH:mm:ss> message/<The reminder message>`
 
-Sets and stores a reminder. In v1.2, this is only allowed for the current day.
-In future releases, reminders will be set in the current and future days.
+Sets and stores a reminder. All reminders must have unique times.
 
 Examples:
 
-* `addreminder time/2018/07/30 18:20:31 message/Throw rubbish`
-* `addreminder time/2019/11/22 21:31:11 message/Milk delivery`
+* `addreminder time/ 2018/07/30 18:20:31 message/Throw rubbish`
+* `addreminder time/ 2019/11/22 21:31:11 message/Milk delivery`
 
 ==== View due reminder notifcations: `duereminders`
 
 Format: `duereminders`
 
-Shows all reminders that are still due in the current day.
+Shows all reminders that are still due.
 
+==== View all reminders: `allreminders`
+
+Format: `allreminders`
+
+Shows all reminders that are in the system.
+
+
+==== Remove a Reminder
+
+Format: `removereminder time/<yyyy/MM/dd HH:mm:ss>`
+
+Removes a reminder in the system.
+
+Examples:
+* `removereminder time/ 2018/10/26 12:30:00`
 // end::journal[]
 
 === Clearing all entries : `clear`
