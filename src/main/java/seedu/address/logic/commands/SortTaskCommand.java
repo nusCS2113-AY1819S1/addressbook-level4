@@ -14,7 +14,7 @@ public class SortTaskCommand extends Command {
     public static final String COMMAND_WORD = "TDL_sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Reverse or Sort tasks in the sequence of deadline date, module or default.\n"
+            + ": Reverse or Sort tasks in the order of module, date, priority or default.\n"
             + "Parameters: default, date, module or priority\n"
             + "Example: " + COMMAND_WORD + " date";
 

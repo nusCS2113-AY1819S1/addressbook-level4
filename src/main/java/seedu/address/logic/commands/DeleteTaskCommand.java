@@ -18,7 +18,7 @@ import seedu.address.model.task.Task;
 public class DeleteTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "TDL_delete";
-    public static final String COMMAND_ALIAS = "d";
+    //public static final String COMMAND_ALIAS = "d";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the task identified by the index number used in the displayed to-do list.\n"
