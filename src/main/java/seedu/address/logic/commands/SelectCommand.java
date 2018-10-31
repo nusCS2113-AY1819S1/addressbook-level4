@@ -11,7 +11,7 @@ import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.event.EventContainsAttendeePredicate;
+import seedu.address.model.event.AttendeeContainsNamePredicate;
 import seedu.address.model.event.EventDate;
 import seedu.address.model.person.Person;
 
@@ -56,7 +56,7 @@ public class SelectCommand extends Command {
 
         Person person = filteredPersonList.get(targetIndex.getZeroBased());
         String personName = person.getName().toString();
-        EventContainsAttendeePredicate predicate = new EventContainsAttendeePredicate(personName);
+        AttendeeContainsNamePredicate predicate = new AttendeeContainsNamePredicate(personName);
         model.updateFilteredEventList(predicate);
         model.sortByDate();
 

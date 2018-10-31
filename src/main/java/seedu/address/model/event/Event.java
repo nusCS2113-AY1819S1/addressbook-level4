@@ -190,6 +190,16 @@ public class Event implements Comparable<Event> {
         return new Event(eventName, description, date, startTime, endTime, location, updatedAttendee);
     }
 
+    /**
+     * Check if personName is in attendees of Event.
+     *
+     * @param personName The person's name to be checked from the attendees list.
+     */
+    public boolean hasAttendee(String personName) {
+        assert personName != null;
+        return attendees.hasName(personName);
+    }
+
 
     @Override
     public int compareTo(Event other) {
