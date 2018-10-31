@@ -70,7 +70,8 @@ public class StudentAddCommand extends Command {
 
         model.addPerson(toAdd);
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd),
+                StudentManager.getInstance().getTableRepresentation());
     }
 
     @Override

@@ -17,6 +17,51 @@ public class StudentManager {
     private static StudentManager initSM = new StudentManager();
     private Model studentModel;
 
+    public String getTableRepresentationForModel(Model model) {
+        StringBuilder sb = new StringBuilder();
+
+        int index = 1;
+        sb.append(HtmlTableProcessor.getH3Representation("Student List"));
+        sb.append(HtmlTableProcessor.renderTableStart(new ArrayList<String>(
+                Arrays.asList("Index", "Matric No", "Full Name", "Email Address", "Course Code", "Course Name"))));
+
+        sb.append(HtmlTableProcessor.getTableItemStart());
+        for (Person p: model.getFilteredPersonList()) {
+            sb.append(HtmlTableProcessor
+                    .renderTableItem(new ArrayList<String>(Arrays
+                            .asList(index + "", p.getMatricNo().toString(), p.getName().toString(),
+                                    p.getEmail().toString(), p.getCourseCode().toString(),
+                                    CourseManager.getInstance()
+                                            .getCourse(p.getCourseCode().courseCode).getCourseName().courseName))));
+            index++;
+        }
+        sb.append(HtmlTableProcessor.getTableEnd());
+
+        return sb.toString();
+    }
+    public String getTableRepresentation() {
+        StringBuilder sb = new StringBuilder();
+
+        int index = 1;
+        sb.append(HtmlTableProcessor.getH3Representation("Student List"));
+        sb.append(HtmlTableProcessor.renderTableStart(new ArrayList<String>(
+                Arrays.asList("Index", "Matric No", "Full Name", "Email Address", "Course Code", "Course Name"))));
+
+        sb.append(HtmlTableProcessor.getTableItemStart());
+        for (Person p: studentModel.getAddressBook().getPersonList()) {
+            sb.append(HtmlTableProcessor
+                    .renderTableItem(new ArrayList<String>(Arrays
+                            .asList(index + "", p.getMatricNo().toString(), p.getName().toString(),
+                                    p.getEmail().toString(), p.getCourseCode().toString(),
+                                    CourseManager.getInstance()
+                                            .getCourse(p.getCourseCode().courseCode).getCourseName().courseName))));
+            index++;
+        }
+        sb.append(HtmlTableProcessor.getTableEnd());
+
+        return sb.toString();
+    }
+
     /**
      * Link StudentManager to initialized Model in MainApp.
      * @param model
