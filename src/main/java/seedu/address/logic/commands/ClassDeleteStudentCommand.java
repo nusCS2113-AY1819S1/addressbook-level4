@@ -21,7 +21,7 @@ public class ClassDeleteStudentCommand extends Command {
             + " for the system. "
             + "Parameters: "
             + PREFIX_CLASS_NAME + "CLASS_NAME "
-            + PREFIX_MODULE_CODE + "MODULE_NAME "
+            + PREFIX_MODULE_CODE + "MODULE_CODE "
             + PREFIX_MATRIC + "MATRIC_NO\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CLASS_NAME + "T16 "
@@ -61,7 +61,7 @@ public class ClassDeleteStudentCommand extends Command {
 
         classToUnassignStudent = classroomManager.findClassroom(className, moduleCode);
         if (classToUnassignStudent == null) {
-            return new CommandResult(MESSAGE_FAIL);
+            throw new CommandException(MESSAGE_FAIL);
         }
 
         if (!classroomManager.hasClassroomStudent(classToUnassignStudent, matricNo)) {

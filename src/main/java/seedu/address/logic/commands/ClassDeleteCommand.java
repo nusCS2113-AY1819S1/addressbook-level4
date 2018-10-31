@@ -19,7 +19,7 @@ public class ClassDeleteCommand extends Command {
             + " for a module for the system. "
             + "Parameters: "
             + PREFIX_CLASS_NAME + "CLASS_NAME "
-            + PREFIX_MODULE_CODE + "MODULE_NAME "
+            + PREFIX_MODULE_CODE + "MODULE_CODE "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CLASS_NAME + "T16 "
             + PREFIX_MODULE_CODE + "CG1111 ";
@@ -51,7 +51,7 @@ public class ClassDeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         if (classToDelete == null) {
-            return new CommandResult(MESSAGE_FAIL);
+            throw new CommandException(MESSAGE_FAIL);
         }
         classroomManager.deleteClassroom(classToDelete);
         classroomManager.saveClassroomList();

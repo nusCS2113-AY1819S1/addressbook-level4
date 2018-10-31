@@ -15,12 +15,13 @@ import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.ClassroomManager;
 
 /**
- * Mark the class attendance list for a specified student for the system.
+ * Modify the class attendance list for a specified student for the system.
  */
-public class ClassAddStudentAttendanceCommand extends Command {
-    public static final String COMMAND_WORD = "class markattendance";
+public class ClassDeleteStudentAttendanceCommand extends Command {
+    public static final String COMMAND_WORD = "class modattendance";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Mark the class attendance list for a specified student"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Modify the class attendance list for"
+            + " a specified student"
             + " for the system. "
             + "Parameters: "
             + PREFIX_CLASS_NAME + "CLASS_NAME "
@@ -31,20 +32,25 @@ public class ClassAddStudentAttendanceCommand extends Command {
             + PREFIX_MODULE_CODE + "CG1111 "
             + PREFIX_MATRIC + "A6942069M";
 
-    public static final String MESSAGE_SUCCESS = "Student is marked present: %1$s"
+    public static final String MESSAGE_SUCCESS = "Student is marked absent: %1$s"
             + ", Class: %2$s"
             + ", Module code: %3$s";
     private static final String MESSAGE_FAIL = "Class belonging to module not found!";
 
-    private static final String MESSAGE_DUPLICATE_CLASSROOM_STUDENT_ATTENDANCE = "This student already"
-            + " present in class: %1$s";
+    private static final String MESSAGE_NOT_CLASSROOM_STUDENT_ATTENDANCE = "This student does not belong"
+            + " to class: %1$s";
+
+    private static final String MESSAGE_UNMARKED_CLASSROOM_STUDENT_ATTENDANCE = "This student's attendance"
+            + " is already absent: %1$s";
+    private static final String MESSAGE_NO_CLASSROOM_STUDENT_ATTENDANCE = "There is no classroom attendance marked"
+            + " for this class";
 
     private final String className;
     private final String moduleCode;
     private final String matricNo;
     private final String date;
 
-    public ClassAddStudentAttendanceCommand(String className, String moduleCode, String matricNo) {
+    public ClassDeleteStudentAttendanceCommand(String className, String moduleCode, String matricNo) {
         requireAllNonNull(className, moduleCode, matricNo);
         this.className = className;
         this.moduleCode = moduleCode;
@@ -65,21 +71,28 @@ public class ClassAddStudentAttendanceCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         ClassroomManager classroomManager = ClassroomManager.getInstance();
 
-        Classroom classToMarkAttendance = classroomManager.findClassroom(className, moduleCode);
-        if (classToMarkAttendance == null) {
+        Classroom classToModifyAttendance = classroomManager.findClassroom(className, moduleCode);
+        if (classToModifyAttendance == null) {
             throw new CommandException(MESSAGE_FAIL);
         }
 
-        Attendance attendance = classroomManager.findAttendanceForClass(classToMarkAttendance, date);
-
-        if (classroomManager.isDuplicateClassroomStudentAttendance(classToMarkAttendance, matricNo, date)) {
-            throw new CommandException(String.format(MESSAGE_DUPLICATE_CLASSROOM_STUDENT_ATTENDANCE, matricNo));
+        if (!classroomManager.isStudentFromClass(classToModifyAttendance, matricNo)) {
+            throw new CommandException(String.format(MESSAGE_NOT_CLASSROOM_STUDENT_ATTENDANCE, matricNo));
         }
 
-        classroomManager.markStudentAttendance(classToMarkAttendance, attendance, matricNo);
+        Attendance attendance = classroomManager.findAttendanceForClass(classToModifyAttendance, date);
+        if (attendance == null) {
+            throw new CommandException(MESSAGE_NO_CLASSROOM_STUDENT_ATTENDANCE);
+        }
+
+        if (!classroomManager.isStudentAttendanceMarked(attendance, matricNo)) {
+            throw new CommandException(String.format(MESSAGE_UNMARKED_CLASSROOM_STUDENT_ATTENDANCE, matricNo));
+        }
+
+        classroomManager.modifyStudentAttendance(classToModifyAttendance, attendance, matricNo);
         classroomManager.saveClassroomAttendanceList();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, matricNo,
-                classToMarkAttendance.getClassName(), classToMarkAttendance.getModuleCode()));
+                classToModifyAttendance.getClassName(), classToModifyAttendance.getModuleCode()));
     }
 }
