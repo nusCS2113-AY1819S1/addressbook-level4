@@ -299,15 +299,15 @@ Gives a short summary of the expenditures made so far and provides advice on how
 === Checking expenditures : `ET_check`
 
 Checks the status of the expenditures in a particular period and generates a graph to demonstrate how much money was spent on each unit period. +
-Format: `ET_check d/DATE d/DATE`
+Format: `ET_check start/DATE end/DATE`
 
 ****
-* d/DATE must be in the format of DD-MM-YYYY, where DD refers the date, MM refers the month and YYYY refers the year in numbers.
+* start/DATE and end/DATE must be in the format of DD-MM-YYYY, where DD refers the date, MM refers the month and YYYY refers the year in numbers.
 ****
 
 Examples:
 
-* `ET_check d/01-01-2017 d/01-01-2018` +
+* `ET_check start/01-01-2017 start/01-01-2018` +
 Checks the status of the expenditures from 01-01-2017 to 01-01-2018 and generates a graph to demonstrate how much money was spent on each month.
 
 == FAQ
@@ -324,6 +324,8 @@ Checks the status of the expenditures from 01-01-2017 to 01-01-2018 and generate
 * *Complete* : `TDL_complete INDEX`
 * *Uncomplete* : `TDL_uncomplete INDEX`
 * *Sort* : `TDL_sort by PARAMETER`
+* *Check* : `ET_check start/STARTDATE end/ENDDATE`
+* *Advice* : `ET_advice m/MONEY numofdays/NUMBEROFDAYS`
 * *Help* : `help`
 * *History* : `history`
 * *Undo* : `undo`
