@@ -12,7 +12,7 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2113-AY1819S1-T13-3/main
 
 By: `CS2113-AY1819S1-T13-3`      Since: `Sep 2018`      Licence: `MIT`
 
@@ -22,11 +22,11 @@ Inventarie Pro is for self employed business owners who *prefer to use a desktop
 
 == Quick Start
 
-.  Ensure you have Java version 9  installed in your Computer.
+.  Ensure you have Java version 9 installed in your Computer.
 .  Download the latest Inventarie.jar here (link will be added later).
 .  Copy the file to the folder you want to use as the home folder for your Inventarie Pro.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
-.  Once prompted, enter your username and password. This will be your permanent username and password for subsequent uses.
+.  Enter your username and password.
 
 +
 image::Ui.png[width="790"]
