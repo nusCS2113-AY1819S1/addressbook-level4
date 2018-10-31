@@ -71,16 +71,16 @@ public class ClassDeleteStudentAttendanceCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         ClassroomManager classroomManager = ClassroomManager.getInstance();
 
-        Classroom classToMarkAttendance = classroomManager.findClassroom(className, moduleCode);
-        if (classToMarkAttendance == null) {
+        Classroom classToModifyAttendance = classroomManager.findClassroom(className, moduleCode);
+        if (classToModifyAttendance == null) {
             throw new CommandException(MESSAGE_FAIL);
         }
 
-        if (!classroomManager.isStudentFromClass(classToMarkAttendance, matricNo)) {
+        if (!classroomManager.isStudentFromClass(classToModifyAttendance, matricNo)) {
             throw new CommandException(String.format(MESSAGE_NOT_CLASSROOM_STUDENT_ATTENDANCE, matricNo));
         }
 
-        Attendance attendance = classroomManager.findAttendanceForClass(classToMarkAttendance, date);
+        Attendance attendance = classroomManager.findAttendanceForClass(classToModifyAttendance, date);
         if (attendance == null) {
             throw new CommandException(MESSAGE_NO_CLASSROOM_STUDENT_ATTENDANCE);
         }
@@ -89,10 +89,10 @@ public class ClassDeleteStudentAttendanceCommand extends Command {
             throw new CommandException(String.format(MESSAGE_UNMARKED_CLASSROOM_STUDENT_ATTENDANCE, matricNo));
         }
 
-        classroomManager.modifyStudentAttendance(classToMarkAttendance, attendance, matricNo);
+        classroomManager.modifyStudentAttendance(classToModifyAttendance, attendance, matricNo);
         classroomManager.saveClassroomAttendanceList();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, matricNo,
-                classToMarkAttendance.getClassName(), classToMarkAttendance.getModuleCode()));
+                classToModifyAttendance.getClassName(), classToModifyAttendance.getModuleCode()));
     }
 }
