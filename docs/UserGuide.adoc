@@ -87,8 +87,8 @@ Both username and password are single words. No spaces are allowed in username o
 ====
 [example-title]#Examples for CLI input:#
 
-* [example]#`tester 123`# +
-* [example]#`stocktaker 123`# +
+* [example]#`tester 123`#
+* [example]#`stocktaker 123`#
 ====
 [NOTE]
 ====
@@ -143,18 +143,23 @@ When you buy and receive new goods, and want to update your stocks, you can ente
 [NOTE]
 ====
 #*Command format*#:
-`import n/NAME q/QUANTITY` +
+`import n/NAME q/QUANTITY`
 
 * Desired drink must be recorded in Drink I/O
 
 ====
 
-To record an import transaction, +
-1. Enter `import` +
-2. Key in `n/`, followed by name of drink (`NAME`) +
-3. Key in `q/`, followed by quantity imported (`QUANTITY`) +
-4. Press kbd:[enter] +
-5. Check whether the transaction has been recorded successfully +
+To record an import transaction,
+
+. Enter `import`
+
+. Key in `n/`, followed by name of drink (`NAME`)
+
+. Key in `q/`, followed by quantity imported (`QUANTITY`)
+
+. Press kbd:[enter]
+
+. Check whether the transaction has been recorded successfully
 
 -  If you see the message "import transaction recorded!", the transaction had been successfully entered into Drink I/O +
 -  If not, follow the instructions displayed in the message display pane, and re-enter the command +
@@ -188,12 +193,17 @@ When you make a sale to your customers, recording the sale in Drink I/O allows y
 
 ====
 
-To record a sale transaction, +
-1. Enter`sell` +
-2. Key in `n/`, followed by name of drink (`NAME`) +
-3. Key in `q/`, followed by quantity transacted in sale (`QUANTITY`) +
-4. Press kbd:[enter] +
-5. Check whether the transaction has been recorded successfully, +
+To record a sale transaction,
+
+. Enter `sell`
+
+. Key in `n/`, followed by name of drink (`NAME`)
+
+. Key in `q/`, followed by quantity transacted in sale (`QUANTITY`)
+
+. Press kbd:[enter]
+
+. Check whether the transaction has been recorded successfully,
 
 * If you see the message "sale transaction recorded!", the transaction had been successfully entered into Drink I/O +
 * If not, follow the instructions displayed in the message display pane, and re-enter the command +
@@ -216,9 +226,11 @@ Drink I/O can calculate the total costs your store has incurred since the beginn
 `analyseCosts`
 ====
 
-To view the total costs incurred, +
-1. Enter `analyseCosts` +
-2. Press kbd:[enter] +
+To view the total costs incurred,
+
+. Enter `analyseCosts`
+
+. Press kbd:[enter]
 
 You should see a value displayed in the results panel.
 
