@@ -42,26 +42,34 @@ public class AddUserCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
-        try (UnitOfWork unitOfWork = new UnitOfWork()) {
-            boolean exist = false;
-            try {
-                if (userToAdd == unitOfWork.getUserRepository().getUserByUsername(userToAdd.getUsername())) {
-                    exist = true;
-                    throw new CommandException(String.format(MESSAGE_DUPLICATE_PERSON));
-                }
-
-            } catch (EntityDoesNotExistException ex) {
-                if (!exist) {
-                    unitOfWork.getUserRepository().addUser(userToAdd);
-                    unitOfWork.commit();
-                }
-                ex.printStackTrace();
+        boolean exist = false;
+        /* Check if user Name is available.
+        * */
+        UnitOfWork unitOfWork = new UnitOfWork();
+        //try () {
+        try {
+            if (unitOfWork.getUserRepository().getUserByUsername(userToAdd.getUsername()) != null) {
+                exist = true;
             }
 
-        } catch (Exception e) {
+           } catch (EntityDoesNotExistException ex) {
+            exist = false;
+        }
+
+        catch (Exception e) {
+            exist = true;
             e.printStackTrace();
         }
+
+        if (!exist) {
+            unitOfWork.getUserRepository().addUser(userToAdd);
+            unitOfWork.commit();
+        }
+        else {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_PERSON));
+            //return new CommandResult(String.format(MESSAGE_DUPLICATE_PERSON, userToAdd.getUsername()));
+        }
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, userToAdd.getUsername()));
     }
 }
