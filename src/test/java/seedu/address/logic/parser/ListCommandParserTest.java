@@ -25,7 +25,8 @@ public class ListCommandParserTest {
         String[] secondUserInput = secondExample.trim().split("\\s+");
         List<String> showAll = new ArrayList<>();
 
-        ListCommand expectedCommand = new ListCommand(ListCommand.LIST_KEY_ALL, new DepartmentContainsKeywordsPredicate(showAll));
+        ListCommand expectedCommand = new ListCommand(ListCommand.LIST_KEY_ALL,
+                new DepartmentContainsKeywordsPredicate(showAll));
 
 
         assertParseSuccess(parser, "all people", expectedCommand);
@@ -61,11 +62,14 @@ public class ListCommandParserTest {
     public void parse_invalidArgs_throwsParseException() {
 
         // missing department prefix
-        assertParseFailure(parser, "de Admin", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "de Admin", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ListCommand.MESSAGE_USAGE));
 
-        assertParseFailure(parser, "dep ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "dep ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ListCommand.MESSAGE_USAGE));
         // missing all prefix
-        assertParseFailure(parser,"al", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "al", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ListCommand.MESSAGE_USAGE));
     }
 
 }
