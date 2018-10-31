@@ -73,7 +73,7 @@ include::../UserGuide.adoc[tag=export]
 *Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.*
 |===
 
-include::../DeveloperGuide.adoc[tag=import]
+include::../DeveloperGuide.adoc[tag=import_export_timetable]
 
 
 == PROJECT: <some other project>
