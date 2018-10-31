@@ -63,7 +63,7 @@ public class InviteCommand extends Command {
         Event updatedEvent = event.addPersonToAttendee(personName);
 
         model.updateEvent(event, updatedEvent);
-        model.commitAddressBook();
+        model.commitEventList();
 
         return new CommandResult(String.format(MESSAGE_INVITE_PERSON_SUCCESS, personName, event.getEventName()));
     }

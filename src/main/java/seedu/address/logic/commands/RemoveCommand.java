@@ -67,7 +67,7 @@ public class RemoveCommand extends Command {
         Event updatedEvent = event.removePersonFromAttendee(personName);
 
         model.updateEvent(event, updatedEvent);
-        model.commitAddressBook();
+        model.commitEventList();
 
         return new CommandResult(String.format(MESSAGE_REMOVE_PERSON_SUCCESS, personName, event.getEventName()));
     }

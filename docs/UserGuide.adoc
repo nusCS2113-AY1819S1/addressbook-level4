@@ -335,17 +335,16 @@ Enter a command: `history`
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
 
-// tag::undoredo[]_v1.4
-=== Undoing previous command : `undo` [to be done in v1.4]
+=== Undoing previous command : `undo`
 Priority level: all
 
-Restores the event schedule to the state before the previous _undoable_ command was executed. +
+Restores the event schedule or address book to the state before the previous _undoable_ command was executed. +
 Format/Prompts: +
 Enter a command: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the event schedule's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the event schedule's or address book's content (`add`, `delete`, `edit` and `clear`).
 ====
 
 Examples:
@@ -364,7 +363,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
 
-=== Redoing the previously undone command : `redo` [to be done in v1.4]
+=== Redoing the previously undone command : `redo`
 Priority level: all
 
 Reverses the most recent `undo` command. +
