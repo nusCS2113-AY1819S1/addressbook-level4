@@ -184,6 +184,11 @@ public interface Model {
     void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException;
 
     /**
+     * Returns ALL the reminders
+     */
+    ArrayList<Reminder> getAllReminders();
+
+    /**
      * Returns the reminders due on the current active day.
      */
     ArrayList<Reminder> getOverdueReminders();

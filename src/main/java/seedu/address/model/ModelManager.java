@@ -461,8 +461,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
 
-    //=========== Transactions =================================================================================
-
     //=========================== SalesHistory accessories ===================================
 
     private void indicateSalesHistoryChanged() {
@@ -471,6 +469,17 @@ public class ModelManager extends ComponentManager implements Model {
 
     public SalesHistory getSalesHistory() {
         return versionedSalesHistory;
+    }
+
+    @Override
+    public ArrayList<Reminder> getAllReminders() {
+        ArrayList<Reminder> reminders = new ArrayList<>();
+        for (Reminder toAdd: versionedSalesHistory.getRemindersAsObservableList()) {
+            if (toAdd.getReminderTime() != null && !toAdd.getReminderTime().equals("")) {
+                reminders.add(toAdd);
+            }
+        }
+        return reminders;
     }
 
     @Override

@@ -328,6 +328,11 @@ public class DeregisterCommandTest {
         public void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException {}
 
         @Override
+        public ArrayList<Reminder> getAllReminders() {
+            return null;
+        }
+
+        @Override
         public ArrayList<Reminder> getOverdueRemindersForThread() {
             return null;
         }
@@ -350,6 +355,11 @@ public class DeregisterCommandTest {
         public void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException {}
 
         @Override
+        public ArrayList<Reminder> getAllReminders() {
+            return null;
+        }
+
+        @Override
         public ArrayList<Reminder> getOverdueRemindersForThread() {
             return null;
         }
@@ -368,6 +378,11 @@ public class DeregisterCommandTest {
 
         @Override
         public void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException {}
+
+        @Override
+        public ArrayList<Reminder> getAllReminders() {
+            return null;
+        }
 
         @Override
         public ArrayList<Reminder> getOverdueRemindersForThread() {

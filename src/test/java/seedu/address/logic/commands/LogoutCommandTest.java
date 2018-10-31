@@ -295,6 +295,11 @@ public class LogoutCommandTest {
         private boolean loginStatus = false;
 
         @Override
+        public ArrayList<Reminder> getAllReminders() {
+            return null;
+        }
+
+        @Override
         public ArrayList<Reminder> getOverdueRemindersForThread() {
             return null;
         }
