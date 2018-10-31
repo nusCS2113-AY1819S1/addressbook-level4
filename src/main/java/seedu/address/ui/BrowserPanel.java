@@ -47,8 +47,9 @@ public class BrowserPanel extends UiPart<Region> {
     /**
      * Gets the URL without parameters
      */
-    public static URL getSearchPageUrlWithoutName() {
-        return MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE);
+    public static String getSearchPageUrlWithoutName() {
+        //return MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE);
+        return SEARCH_PAGE_URL;
     }
 
     /**
