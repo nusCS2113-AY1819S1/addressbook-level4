@@ -24,6 +24,7 @@ import seedu.address.model.group.GroupNameContainsKeywordsPredicate;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -84,6 +85,34 @@ public class ModelManagerTest {
     public void deleteGroup_groupNotInAddressBook_throwsGroupNotFoundException() {
         thrown.expect(GroupNotFoundException.class);
         modelManager.deleteGroup(getTut1());
+    }
+
+    @Test
+    public void removeGroupPerson_nullParameters_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        modelManager.deleteGroupPerson(null, null);
+    }
+
+    @Test
+    public void removeGroupPerson_personInGroup_removesGroupPerson() {
+        ModelManager expected = new ModelManager();
+        expected.createGroup(getTut1());
+        modelManager.createGroup(getTypicalGroupsWithPersons());
+        modelManager.deleteGroupPerson(getTypicalGroupsWithPersons(), ALICE);
+        assertEquals(expected, modelManager);
+    }
+
+    @Test
+    public void removeGroupPerson_personNotInGroup_throwsPersonNotFoundException() {
+        modelManager.createGroup(getTut1());
+        thrown.expect(PersonNotFoundException.class);
+        modelManager.deleteGroupPerson(getTut1(), ALICE);
+    }
+
+    @Test
+    public void removeGroupPerson_groupNotInAddressBook_throwsGroupNotFoundException() {
+        thrown.expect(GroupNotFoundException.class);
+        modelManager.deleteGroupPerson(getTut1(), ALICE);
     }
 
     @Test

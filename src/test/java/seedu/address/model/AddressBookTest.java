@@ -30,6 +30,7 @@ import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -156,6 +157,34 @@ public class AddressBookTest {
     public void removeGroup_groupNotInAddressBook_throwsGroupNotFoundException() {
         thrown.expect(GroupNotFoundException.class);
         addressBook.removeGroup(getTut1());
+    }
+
+    @Test
+    public void removeGroupPerson_personInGroup_removesGroupPerson() {
+        AddressBook expected = new AddressBook();
+        expected.createGroup(getTut1());
+        addressBook.createGroup(getTypicalGroupsWithPersons());
+        addressBook.removeGroupPerson(getTypicalGroupsWithPersons(), ALICE);
+        assertEquals(expected, addressBook);
+    }
+
+    @Test
+    public void removeGroupPerson_personNotInGroup_throwsPersonNotFoundException() {
+        addressBook.createGroup(getTut1());
+        thrown.expect(PersonNotFoundException.class);
+        addressBook.removeGroupPerson(getTut1(), ALICE);
+    }
+
+    @Test
+    public void removeGroupPerson_groupNotInAddressBook_throwsGroupNotFoundException() {
+        thrown.expect(GroupNotFoundException.class);
+        addressBook.removeGroupPerson(getTut1(), ALICE);
+    }
+
+    @Test
+    public void removeGroupPerson_nullParameter_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        addressBook.removeGroupPerson(null, null);
     }
 
     @Test
