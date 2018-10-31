@@ -1061,7 +1061,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 . Setting a user as admin or revert an admin to a user.
 
-.. Prerequisites: Current user must login as an admin. Admin is unable to set/revert himself/herself to admin/user.
+.. Prerequisites: Current user must login as an admin. Admin is unable to set/revert himself/herself to admin/user. The given user must be in UserStorage.
 .. Test case: `setAdmin uName/john set/true` +
    Expected: The given user will be set to an admin and the success message will be shown in the result display panel.
 .. Test case: `setAdmin uName/abcd set/true` +
@@ -1071,7 +1071,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 . Creating a module by admin.
 
-.. Prerequisites: Current user must login as an admin.
+.. Prerequisites: Current user must login as an admin. The module must not be in the ModuleStorage.
 .. Test case: `createModule mCode/CS2113 mContent/Software Engineering and OOP` +
    Expected: A new module will be added to the ModuleStorage, and a success message will be shown in the result display panel.
 .. Test case: `createModule mCode/ mTitle/` +
@@ -1081,11 +1081,30 @@ These instructions only provide a starting point for testers to work on; testers
 
 . Deleting a module by admin.
 
-.. Prerequisites: Current user must be login as an admin.
-.. Test case: `deleteModule mCode/CS2113`
+.. Prerequisites: Current user must login as an admin. The module must be in ModuleStorage.
+.. Test case: `deleteModule mCode/CS2113` +
    Expected: The module `CS2113` will be deleted from the ModuleStorage, and an success message will be shown in the result display panel.
-.. Test case: `deleteModule mCode/CS2113`
+.. Test case: `deleteModule mCode/CS2113` +
    Expected: Since the module `CS2113` has been deleted. This command should raise an error and show in the result display panel.
+
+=== Updating password
+
+. Updating a given user's password by admin.
+
+.. Prerequisites: Current user must login as an admin. The given user must be in UserStorage.
+.. Test case: `updatePass uName/john uPass/456` +
+   Expected: The user `john`'s password will be updated to `456`
+.. Test case: `updatePass uName/abcd uPass/123` +
+   Expected: Since the given user `abcd` has not been added to the UserStorage, an error message will be shown in the result display panel.
+
+=== Deleting a user
+
+. Deleting a given user by admin.
+.. Prerequisites: Current user must login as an admin. The given user must be in the UserStorage.
+.. Test case: `deleteUser uName/john`
+   Expected: The user `john` will be deleted from the UserStorage and a success message will be shown in the result display panel.
+.. Test case: `deleteUser uName/abcd`
+   Expected: Since the given user `abcd` does not exist in the UserStorage, an error message will be shown in the result display panel.
 
 === Saving data
 
