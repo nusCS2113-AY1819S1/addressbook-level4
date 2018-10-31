@@ -21,9 +21,10 @@ public class CliSyntax {
     public static final Prefix PREFIX_PERSON_INDEX = new Prefix("p/");
     public static final Prefix PREFIX_GROUP_INDEX = new Prefix("g/");
     public static final Prefix PREFIX_MEAN = new Prefix("mean/");
+    public static final Prefix PREFIX_LOWEST = new Prefix("lowest/");
     public static final Prefix PREFIX_HIGHEST = new Prefix("highest/");
-    public static final Prefix PREFIX_TWENTY_FIVE = new Prefix("25/");
-    public static final Prefix PREFIX_SEVENTY_FIVE = new Prefix("75/");
+    public static final Prefix PREFIX_TWENTY_FIVE = new Prefix("TTF/");
+    public static final Prefix PREFIX_SEVENTY_FIVE = new Prefix("LTF/");
     public static final Prefix PREFIX_MEDIAN = new Prefix("median/");
     public static final Prefix PREFIX_TEST_NAME = new Prefix("tn/");
     public static final Prefix PREFIX_TEST_MARK = new Prefix("tm/");

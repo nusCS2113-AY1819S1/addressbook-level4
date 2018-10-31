@@ -5,6 +5,7 @@ import java.util.Objects;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.grade.Grade;
 import seedu.address.model.grade.Marks;
 import seedu.address.model.grade.Test;
 import seedu.address.model.grade.TestName;
@@ -22,6 +23,8 @@ public class XmlAdaptedTest {
     private String testName;
     @XmlElement(required = true)
     private String marks;
+    @XmlElement(required = true)
+    private String grade;
 
 
     /**
@@ -34,9 +37,10 @@ public class XmlAdaptedTest {
     /**
      * Constructs an {@code XmlAdaptedGroup} with the given group details.
      */
-    public XmlAdaptedTest(String testname, String scores) {
+    public XmlAdaptedTest(String testname, String scores, String grade) {
         this.testName = testname;
         this.marks = scores;
+        this.grade = grade;
 
     }
 
@@ -48,6 +52,7 @@ public class XmlAdaptedTest {
     public XmlAdaptedTest(Test source) {
         testName = source.getTestName().testName;
         marks = source.getMarks().value;
+        grade = source.getGrade().value;
     }
 
     /**
@@ -74,8 +79,15 @@ public class XmlAdaptedTest {
             throw new IllegalValueException(Marks.MESSAGE_MARKS_CONSTRAINTS);
         }
         Marks modelMarks = new Marks(marks);
+        if (grade == null) {
+            grade = " ";
+        }
+        if (!Grade.isValidGrade(grade)) {
+            throw new IllegalValueException(Grade.MESSAGE_GRADE_CONSTRAINTS);
+        }
+        final Grade modelGrades = new Grade(grade);
 
-        return new Test(modelTestName, modelMarks);
+        return new Test(modelTestName, modelMarks, modelGrades);
     }
 
 
