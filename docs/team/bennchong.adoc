@@ -10,22 +10,40 @@
 == Overview
 
 
-FreeTime is a security-enabled desktop application that is used for finding available meeting slots between its users. This
+FreeTime is a security-enabled desktop application that is used for finding mutually availble slots between its users. This
 available slot will be displayed for the user to choose from, which will be reflected in his timetable using our FreeTime GUI.
 
+This project portfolio would be introducing you to my team that has developed this product in the span of a semester. In addition to giving you a brief general overview of this application 
+feature, I would be going indepth into the details on how my own features are implemtented. This is to give you a deeper understanding of what contributions that I have done within this project,
+and hopefully ultimately you would perhaps also learn something along the way. 
+
+So sit tight, and let me tell you more about FreeTime. 
+
+== FreeTime Features
+In addition to essential security features such as login and registering, we have a clean, minimalistic landing page that is user-friendly. 
+
+Users can import preexisting timetables that are taken from Google Calander or any other calander application that saves their data into the commonly used .ics format. This handy feature allows
+quick integraton for users coming from other timetable applications that do not have our main feature. 
+
+On top of having friends to look at their timetable, Users are also grouped with groups according to what they specify. This is to easily select friends that are in the same group as you, which then sets the stage to find the mutually free slot among 
+this particular group of friends.
+
+Using the command `freetime`, you would be presented with a timetable that shows you what are your common free slots are. Thus you are freed from the painful moments of finding a common free slot in huge groups.
+
+
+
 == Summary of contributions
+In this section, I would be briefly telling you about my contributions to this project, and any interesting points that you could find useful.
 
 * *Major enhancement*: added *the ability to authenticate users*
 ** What it does: Allows the users to have unique access and control to his own timetable
-** Justification: To prevent malicious users to edit other users' timetable, and even to view non-friend users. Friended users
-** Highlights:
+** Justification: To prevent malicious users to edit other users' timetable, and to introduce different privacy levels. Other users that you are friends with allows you to view their 
+timetables and find common slots with them. 
+** Highlights: Other than having the ability to add friends, you are now able to add groups since each users are differentiated from each other
 
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
-
+* *Minor enhancement*: Used a hashing feature together with a salt to store user's password
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
-
-* *Other contributions*:
 
 ** Project management:
 *** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
@@ -45,8 +63,10 @@ available slot will be displayed for the user to choose from, which will be refl
 
 _{you can add/remove categories in the list above}_
 
-== Contributions to the User Guide
+== My User Guide Contributions
 
+A User guide is given to the targeted audience of the application, and usually is written in a step-by-step way to guide
+new users to use the application.
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
@@ -56,7 +76,10 @@ include::../UserGuide.adoc[tag=undoredo]
 
 include::../UserGuide.adoc[tag=dataencryption]
 
-== Contributions to the Developer Guide
+== My Developer Guide Contribution
+
+On the other hand, a developer guide is written for technical stakeholders that are interested in the implementation
+of the methods, and might be working on extending the project.
 
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
@@ -66,9 +89,3 @@ include::../DeveloperGuide.adoc[tag=undoredo]
 
 include::../DeveloperGuide.adoc[tag=dataencryption]
 
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
