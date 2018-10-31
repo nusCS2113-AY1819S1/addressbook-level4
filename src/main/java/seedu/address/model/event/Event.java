@@ -200,6 +200,13 @@ public class Event implements Comparable<Event> {
         return attendees.hasName(personName);
     }
 
+    /**
+     * Check if Attendees of Event is empty.
+     */
+    public boolean isAttendeeEmpty() {
+        return attendees.isSetEmpty();
+    }
+
 
     @Override
     public int compareTo(Event other) {

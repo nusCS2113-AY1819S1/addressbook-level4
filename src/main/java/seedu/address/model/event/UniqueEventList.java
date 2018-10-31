@@ -103,7 +103,7 @@ public class UniqueEventList implements Iterable<Event> {
     public void removeAttendee(String personName) {
         requireNonNull(personName);
         for (Event event: internalList) {
-            if (event.getAttendees().hasName(personName)) {
+            if (event.hasAttendee(personName)) {
                 int index = internalList.indexOf(event);
                 Event updatedEvent = event.removePersonFromAttendee(personName);
                 internalList.set(index, updatedEvent);
