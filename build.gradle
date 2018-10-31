@@ -240,8 +240,8 @@ task deployOfflineDocs(type: Copy) {
     }
 }
 
-task copyDummySearchPage(type: Copy) {
-    from 'docs/DummySearchPage.html'
+task copyEventSearchPage(type: Copy) {
+    from 'docs/EventSearchPage.html'
     into "${buildDir}/docs/html5"
 }
 
