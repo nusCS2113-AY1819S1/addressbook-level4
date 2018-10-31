@@ -23,4 +23,19 @@ public class User {
     public Password getPassword() {
         return password;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof User)) {
+            return false;
+        }
+
+        User user = (User) other;
+        return this.username.equals(user.getUsername())
+                && this.password.equals(user.getPassword());
+    }
 }

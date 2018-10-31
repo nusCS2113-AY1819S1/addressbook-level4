@@ -2,10 +2,10 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.HOON;
-import static seedu.address.testutil.TypicalPersons.IDA;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalEvents.ALICE;
+import static seedu.address.testutil.TypicalEvents.HOON;
+import static seedu.address.testutil.TypicalEvents.IDA;
+import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -30,12 +30,12 @@ public class XmlEventManagerStorageTest {
     public TemporaryFolder testFolder = new TemporaryFolder();
 
     @Test
-    public void readAddressBook_nullFilePath_throwsNullPointerException() throws Exception {
+    public void readEventManager_nullFilePath_throwsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);
-        readAddressBook(null);
+        readEventManager(null);
     }
 
-    private java.util.Optional<ReadOnlyEventManager> readAddressBook(String filePath) throws Exception {
+    private java.util.Optional<ReadOnlyEventManager> readEventManager(String filePath) throws Exception {
         return new XmlEManagerStorage(Paths.get(filePath)).readEventManager(addToTestDataPathIfNotNull(filePath));
     }
 
@@ -47,14 +47,14 @@ public class XmlEventManagerStorageTest {
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
-        assertFalse(readAddressBook("NonExistentFile.xml").isPresent());
+        assertFalse(readEventManager("NonExistentFile.xml").isPresent());
     }
 
     @Test
     public void read_notXmlFormat_exceptionThrown() throws Exception {
 
         thrown.expect(DataConversionException.class);
-        readAddressBook("NotXmlFormatAddressBook.xml");
+        readEventManager("NotXmlFormatEventManager.xml");
 
         /* IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored.
          * That means you should not have more than one exception test in one method
@@ -62,21 +62,21 @@ public class XmlEventManagerStorageTest {
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() throws Exception {
+    public void readEventManager_invalidEventEventManager_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
-        readAddressBook("invalidPersonAddressBook.xml");
+        readEventManager("invalidEventEventManager.xml");
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() throws Exception {
+    public void readEventManager_invalidAndValidEventEventManager_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
-        readAddressBook("invalidAndValidPersonAddressBook.xml");
+        readEventManager("invalidAndValidEventEventManager.xml");
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
-        Path filePath = testFolder.getRoot().toPath().resolve("TempAddressBook.xml");
-        EventManager original = getTypicalAddressBook();
+    public void readAndSaveEventManager_allInOrder_success() throws Exception {
+        Path filePath = testFolder.getRoot().toPath().resolve("TempEventManger.xml");
+        EventManager original = getTypicalEventManager();
         XmlEManagerStorage xmlEManagerStorage = new XmlEManagerStorage(filePath);
 
         //Save in new file and read back
@@ -100,27 +100,27 @@ public class XmlEventManagerStorageTest {
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
+    public void saveEventManager_nullEventManager_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        saveAddressBook(null, "SomeFile.xml");
+        saveEventManager(null, "SomeFile.xml");
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code eventManager} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyEventManager addressBook, String filePath) {
+    private void saveEventManager(ReadOnlyEventManager eventManager, String filePath) {
         try {
             new XmlEManagerStorage(Paths.get(filePath))
-                    .saveEventManager(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveEventManager(eventManager, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
+    public void saveEventManager_nullFilePath_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        saveAddressBook(new EventManager(), null);
+        saveEventManager(new EventManager(), null);
     }
 
 

@@ -52,16 +52,17 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/EVENT p/PHONE_NUMBER`, `p/PHONE_NUMBER n/EVENT` is also acceptable.
 ====
 
+// tag::authentication[]
 === Signing up for an account : `signup`
 
 User: Creates a *user* account +
-Format: `signup n/USERdetails p/PASSWORD c/CONFIRM-PASSWORD` +
+Format: `signup u/USERNAME p/PASSWORD +
 Examples:
 
-* `signup u/Gerald Chua p/password12345 c/password12345` +
-Creates account for Gerald Chua
-* `signup u/James Yaputra p/drowssap12345 c/drowssap12345` +
-Creates account for James Yaputra
+* `signup u/Gerald Chua p/password12345` +
+Creates account with the username Gerald Chua
+* `signup u/James Yaputra p/drowssap12345` +
+Creates account with the username James Yaputra
 
 === Logging into an account : `login`
 
@@ -80,21 +81,11 @@ User: Logs out of an account +
 Format: `logout` +
 Examples:
 
-* `login n/Gerald Chua p/password12345` +
+* `login u/Gerald Chua p/password12345` +
 Logs in Gerald Chua +
 * `logout` +
 Logs out from Gerald Chua
-
-=== Signing up for an account : `signup`
-
-User: Creates a new account +
-Format: `signup u/USERNAME p/PASSWORD` +
-Examples:
-
-* `signup n/Gerald Chua p/password12345` +
-Creates Gerald Chua +
-* `signup u/James Yaputra p/drowssap12345` +
-Creates James Yaputra
+// end::authentication[]
 
 === Viewing help : `help`
 
@@ -119,7 +110,7 @@ Examples:
 
 === Listing all events : `list`
 
-User/Admin: Shows a list of all events in the Event Manager. +
+User/Admin: Shows a list of all events in chronological order in the Event Manager. +
 Format: `list`
 
 === Editing a event : `edit`
@@ -144,15 +135,14 @@ Edits the name of the 2nd event to be `Sports Day` and clears all existing tags.
 
 === Locating events by name: `find`
 
-Admin/User: Finds events whose names contain any of the given keywords. +
+Admin/User: Finds events whose names, date, address, tags contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
 * The search is case insensitive. e.g `sports` will match `Sports`
 * The order of the keywords does not matter. e.g. `Sports Day` will match `Day Sports`
-* Only the event name is searched.
 * Only full words will be matched e.g. `Sport` will not match `Sports`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Sports Day` will return `Sports games`, `Good Day`
+* Events matching at least one keyword will be returned (i.e. `OR` search). e.g. `Sports Day` will return `Sports games`, `Good Day`
 ****
 
 Examples:
@@ -160,7 +150,9 @@ Examples:
 * `find Day` +
 Returns `Sports Day` and `Any day`
 * `find Sports Sci Day` +
-Returns any event having names `Sports Day`, `Comp Sci Workshop`, or `Good Day`
+Returns any event having `Sports Day`, `Comp Sci Workshop`, or `Good Day` in chronological order
+* `find 12/01/2018 04:30`
+Return any event having `12/01/2018`, `04:30`
 
 === Deleting a event : `delete`
 
@@ -267,41 +259,35 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Admin: Clears all entries from the Event Manager. +
 Format: `clear`
 
+// tag::rsvp[]
 === Register for event : `register`
 
-User: RSVPs for an event. +
+User: Registers for an event, adding current user's username to attendance list. +
 Format: `register INDEX`
 
 Examples:
 
-* `register 1` +
-Registers User to event 1
-* `register 5` +
-Registers User to event 5
+* `list` +
+`register 3` +
+Registers user to the 3rd event of the Event Manager.
+* `find Sports` +
+`register 1` +
+Registers User to the 1st event in the results of the `find` command.
 
 === Remove registration from event : `unregister`
 
-User: Removes RSVPs for an event. +
+User: Unregisters for an event, removing current user's username to attendance list. +
 Format: `unregister INDEX`
 
 Examples:
 
-* `unregister 1` +
-Unregisters User from event 1
-* `unregister 5` +
-Unregisters User from event 5
-
-=== View participant list : `viewParticipants`
-
-Admin/User: View names and total number of event attendees  +
-Format: `viewParticipants INDEX`
-
-Examples:
-
-* `viewParticipants 1` +
-Shows total and names of all participants going to event 1
-* `viewParticipants 5` +
-Shows total and names of all participants going to event 5
+* `list` +
+`register 1` +
+Unregisters user from the 1st event of the Event Manager.
+* `find Sports` +
+`register 2` +
+Unregisters User from the 2nd event in the results of the `find` command.
+// end::rsvp[]
 
 === Set reminders : `setReminder`
 
@@ -332,10 +318,21 @@ Removes a reminder for user for event 5
 Admin/User: Show all events with reminders set +
 Format: `showReminders`
 
+[NOTE]
+====
+For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
+so you need to refresh it yourself.
+====
+
 === Adds Comment : `addComment`
 
 Admin/User: Add comment into event comment section +
 Format: `addComment INDEX C/STRING`
+
+****
+* Adds comment at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index *must be a positive integer* 1, 2, 3, ...
+* Comment cannot be blank,. For C/String, String cannot be empty
+****
 
 Examples:
 
@@ -344,11 +341,22 @@ Adds "What is the attire to wear for the event?" into event 1 comment section
 * `addComment 5 C/What is the attire to wear for this event?` +
 Adds "What is the attire to wear for this event?" into event 5 comment section
 
+[NOTE]
+====
+For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
+so you need to refresh it yourself.
+====
+
 === Reply Comment : `replyComment`
 
 Admin/User: Replies a comment +
-Format: `replyComment INDEX LINE STRING`
+Format: `replyComment INDEX L/LINE C/STRING`
 
+****
+* Replies a comment to the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index *must be a positive integer* 1, 2, 3, ...
+* Comment cannot be blank. For C/String, String cannot be empty
+* Line has to be a non-zero integer and exist within the comment section
+****
 Examples:
 
 * `replyComment 1 L/5 C/What is the attire to wear for the event?` +
@@ -356,10 +364,21 @@ Adds the comment "What is the attire to wear for the event?" into event 1 commen
 * `replyComment 2 L/2 C/What is the attire to wear for the event?` +
 Adds the comment "What is the attire to wear for the event?" into event 2 comment section at line 2
 
+[NOTE]
+====
+For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
+so you need to refresh it yourself.
+====
+
 === Delete Comment : `deleteComment`
 
-Admin: Deletes a comment +
-Format: `deleteComment INDEX LINE`
+Admin/User: Deletes a comment +
+Format: `deleteComment INDEX L/LINE`
+
+****
+* Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index *must be a positive integer* 1, 2, 3, ...
+* Line has to be a non-zero integer and exist within the comment section
+****
 
 Examples:
 
@@ -367,6 +386,21 @@ Examples:
 Deletes comment of event 1 at line 5
 * `deleteComment 2 L/2` +
 Deletes comment of event 2 at line 2
+
+=== Export Calendar Command: `export`
+
+Admin/User: export current user/admin registered/host events to an iCalendar file to use with other calendar application +
+Format: `export filename`
+
+Examples:
+
+* `export myCalendar` +
+export the iCalendar file with name myCalendar to src/data folder
+
+[NOTE]
+====
+File name should not be longer than 500 characters and can not be empty.
+====
 
 === Exiting the program : `exit`
 
@@ -419,11 +453,12 @@ e.g. `unregister 1`
 e.g. `setReminder 1`
 * *View Reminders* : `reminders` +
 e.g. `reminder`
-* *showComments* : `showComments INDEX` +
-e.g. `showComments 1`
-* *addComment* : `addCeomment INDEX STRING` +
-e.g. `add Comments 1 "HELLO"`
-* *replyComment* : `replyComment EVENTINDEX LINEINDEX STRING` +
-e.g. `replyComments 1 2 "Hello"`
-* *deleteComment* : `deleteComment EVENT INDEX LINEINDEX STRING` +
-e.g. `deleteComment 1 2`
+* *addComment* : `addComment INDEX C/STRING` +
+e.g. `addComment 1 C/HELLO`
+* *replyComment* : `replyComment INDEX L/LINE C/STRING` +
+e.g. `replyComment 1 L/2 C/Hello`
+* *deleteComment* : `deleteComment INDEX L/LINE` +
+e.g. `deleteComment 1 L/2`
+* *exportCalendarCommand* : export filename +
+e.g. `export BobCalendar`
+

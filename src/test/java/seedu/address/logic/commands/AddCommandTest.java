@@ -20,6 +20,8 @@ import seedu.address.model.EventManager;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyEventManager;
 import seedu.address.model.event.Event;
+import seedu.address.model.user.User;
+import seedu.address.model.user.Username;
 import seedu.address.testutil.EventBuilder;
 
 public class AddCommandTest {
@@ -88,6 +90,41 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+        @Override
+        public void createUser(User user) {
+            throw new AssertionError("This method should not be called!");
+        }
+
+        @Override
+        public boolean getLoginStatus() {
+            throw new AssertionError("This method should not be called!");
+        }
+
+        @Override
+        public boolean getAdminStatus() {
+            throw new AssertionError("This method should not be called!");
+        }
+
+        @Override
+        public boolean userExists(User user) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void logUser(User user) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public Username getUsername() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void clearUser() {
+            throw new AssertionError("This method should not be called");
+        }
+
         @Override
         public void addEvent(Event event) {
             throw new AssertionError("This method should not be called.");

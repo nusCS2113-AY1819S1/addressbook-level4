@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.deleteFirstPerson;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.logic.commands.CommandTestUtil.deleteFirstEvent;
+import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,20 +15,20 @@ import seedu.address.model.UserPrefs;
 
 public class RedoCommandTest {
 
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalEventManager(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalEventManager(), new UserPrefs());
     private final CommandHistory commandHistory = new CommandHistory();
 
     @Before
     public void setUp() {
         // set up of both models' undo/redo history
-        deleteFirstPerson(model);
-        deleteFirstPerson(model);
+        deleteFirstEvent(model);
+        deleteFirstEvent(model);
         model.undoEventManager();
         model.undoEventManager();
 
-        deleteFirstPerson(expectedModel);
-        deleteFirstPerson(expectedModel);
+        deleteFirstEvent(expectedModel);
+        deleteFirstEvent(expectedModel);
         expectedModel.undoEventManager();
         expectedModel.undoEventManager();
     }

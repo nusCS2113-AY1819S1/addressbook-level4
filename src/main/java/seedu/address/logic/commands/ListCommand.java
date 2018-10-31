@@ -7,14 +7,13 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 
 /**
- * Lists all persons in the event manager to the user.
+ * Lists all events in the event manager to the user.
  */
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all persons";
-
+    public static final String MESSAGE_SUCCESS = "Listed all events\n";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {

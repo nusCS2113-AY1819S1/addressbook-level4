@@ -1,1 +1,53 @@
+= James Arista Yaputra - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Event Manager
+
+---
+
+== Overview
+
+Event Manager is a desktop address book application used for managing events in the Halls and Residential Colleges of NUS. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+
+== Summary of contributions
+* *Major enhancement*: added *the ability to login/logout and signup for user accounts*
+** What it does: allows the user log in and log out of their accounts and sign up for new ones.
+** Justification: This feature allows the Event Manager to keep track of individual attendees of events.
+** Highlights: This enhancement affects existing commands and commands to be added in the future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+** Credits: GSON library by Google.
+
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.3` - `v1.4` (2 releases) on GitHub
+*** Wrote additional tests for authentication features to increase coverage by 2.3% (Pull request https://github.com/CS2113-AY1819S1-T12-1/main/pull/79[#79])
+** Documentation:
+*** Updated User and Developer Guides to describe new features: https://github.com/CS2113-AY1819S1-T12-1/main/pull/81[#81]
+** Community:
+*** PRs reviewed: https://github.com/CS2113-AY1819S1-T12-1/main/pull/22[#22], https://github.com/CS2113-AY1819S1-T12-1/main/pull/58[#58], https://github.com/CS2113-AY1819S1-T12-1/main/pull/59[#59]
+** Tools:
+*** Integrated a third party library (Gson) to the project (https://github.com/CS2113-AY1819S1-T12-1/main/pull/39[#39])
+*** Integrated a new Github plugin (Coveralls) to the team repo
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=authentication]
+
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=authentication]
 

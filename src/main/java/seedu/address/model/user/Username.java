@@ -8,15 +8,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Username {
 
-    // TODO: SET PROPER USERNAME CONSTRAINTS
     public static final String MESSAGE_USERNAME_CONSTRAINTS =
-            "Usernames can take any values, and it should not be blank";
+            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
-     * The first character of the username must not be a whitespace,
+     * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String USERNAME_VALIDATION_REGEX = "[^\\s].*";
+    public static final String USERNAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String value;
 

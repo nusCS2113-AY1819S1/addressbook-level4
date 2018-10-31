@@ -8,8 +8,10 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.event.exceptions.DuplicatePersonException;
-import seedu.address.model.event.exceptions.PersonNotFoundException;
+import seedu.address.commons.comparators.DateTimeComparator;
+import seedu.address.commons.comparators.NameComparator;
+import seedu.address.model.event.exceptions.DuplicateEventException;
+import seedu.address.model.event.exceptions.EventNotFoundException;
 
 /**
  * A list of events that enforces uniqueness between its elements and does not allow nulls.
@@ -41,9 +43,10 @@ public class UniqueEventList implements Iterable<Event> {
     public void add(Event toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateEventException();
         }
         internalList.add(toAdd);
+        sortEventList();
     }
 
     /**
@@ -56,14 +59,15 @@ public class UniqueEventList implements Iterable<Event> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new EventNotFoundException();
         }
 
         if (!target.isSameEvent(editedEvent) && contains(editedEvent)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateEventException();
         }
 
         internalList.set(index, editedEvent);
+        sortEventList();
     }
 
     /**
@@ -73,13 +77,15 @@ public class UniqueEventList implements Iterable<Event> {
     public void remove(Event toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new EventNotFoundException();
         }
+        sortEventList();
     }
 
     public void setEvents(UniqueEventList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        sortEventList();
     }
 
     /**
@@ -89,10 +95,11 @@ public class UniqueEventList implements Iterable<Event> {
     public void setEvents(List<Event> events) {
         requireAllNonNull(events);
         if (!eventsAreUnique(events)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateEventException();
         }
 
         internalList.setAll(events);
+        sortEventList();
     }
 
     /**
@@ -100,6 +107,15 @@ public class UniqueEventList implements Iterable<Event> {
      */
     public ObservableList<Event> asUnmodifiableObservableList() {
         return FXCollections.unmodifiableObservableList(internalList);
+    }
+
+    /**
+     * Sort the internal events list by DateTime then by Name
+     * implement here to keep the the binding list as internal list
+     */
+    //Todo: check if list is sorted by DateTime then Name by default
+    public void sortEventList() {
+        internalList.sort(new DateTimeComparator().thenComparing(new NameComparator()));
     }
 
     @Override

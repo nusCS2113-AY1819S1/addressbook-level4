@@ -1,29 +1,23 @@
 package seedu.address.storage;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import java.util.Optional;
+import java.util.Map;
 
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.user.User;
+import seedu.address.model.UserSession;
 
 /**
- * Represents a storage for {@link seedu.address.model.user.User}.
+ * Represents a storage for {@link UserSession}.
  */
 public interface UserStorage {
 
     /**
-     * Returns the file path of the User data file.
+     * Creates a new User account.
      */
-    Path getUserFilePath();
+    void createUser(String username, String password) throws IOException;
 
     /**
-     * Returns User data from storage.
-     *   Returns {@code Optional.empty()} if storage file is not found.
-     * @throws DataConversionException if the data in storage is not in the expected format.
-     * @throws IOException if there was any problem when reading from the storage.
+     * Returns a JsonObject containing user accounts.
      */
-    Optional<User> readUser() throws DataConversionException, IOException;
+    Map<String, String> getUserAccounts() throws IOException;
 
-    //TODO = SAVE USER METHOD
 }
