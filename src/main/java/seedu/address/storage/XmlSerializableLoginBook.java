@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,7 +48,12 @@ public class XmlSerializableLoginBook {
     public LoginBook toModelType() throws IllegalValueException {
         LoginBook loginBook = new LoginBook();
         for (XmlAccount l : accounts) {
-            LoginDetails loginDetails = l.toModelType();
+            LoginDetails loginDetails = null;
+            try {
+                loginDetails = l.toModelType();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
             if (loginBook.hasAccount(loginDetails)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_ACCOUNT);
             }

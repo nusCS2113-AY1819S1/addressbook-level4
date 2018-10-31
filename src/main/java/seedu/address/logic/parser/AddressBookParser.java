@@ -6,6 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.LoginManager;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddSkillCommand;
 import seedu.address.logic.commands.AddSkillLevelCommand;
@@ -21,7 +22,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.LoginCommand;
+import seedu.address.logic.commands.LoginUserIdPasswordRoleCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
@@ -55,10 +56,13 @@ public class AddressBookParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
-        case LoginCommand.COMMAND_WORD:
+        case LoginUserIdPasswordRoleCommand.COMMAND_WORD:
             return new LoginUserIdPasswordRoleCommandParser().parse(arguments);
 
         case CreateAccountCommand.COMMAND_WORD:
+            if (!LoginManager.getIsCurrentlyTesting()) {
+                LoginManager.setIsCurrentlyCreatingAccount(true);
+            }
             return new CreateAccountCommandParser().parse(arguments);
 
         case AddCommand.COMMAND_WORD:

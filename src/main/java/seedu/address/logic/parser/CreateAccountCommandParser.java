@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.ParserUtil.parseUserId;
 import static seedu.address.logic.parser.ParserUtil.parseUserPassword;
 import static seedu.address.logic.parser.ParserUtil.parseUserRole;
 
+import java.io.UnsupportedEncodingException;
 import java.util.StringTokenizer;
 
 import seedu.address.logic.commands.CreateAccountCommand;
@@ -55,11 +56,23 @@ public class CreateAccountCommandParser implements Parser<CreateAccountCommand> 
             UserRole userRole = null;
             for (int i = 1; st.hasMoreTokens(); i++) {
                 if (i == 2) {
-                    userId = parseUserId(st.nextToken());
+                    try {
+                        userId = parseUserId(st.nextToken());
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
                 } else if (i == 3) {
-                    userPassword = parseUserPassword(st.nextToken());
+                    try {
+                        userPassword = parseUserPassword(st.nextToken());
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
                 } else if (i == 4) {
-                    userRole = parseUserRole(st.nextToken());
+                    try {
+                        userRole = parseUserRole(st.nextToken());
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
             return new LoginDetails(userId, userPassword, userRole);

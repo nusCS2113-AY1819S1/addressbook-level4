@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Objects;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -56,29 +57,26 @@ public class XmlAccount {
      *
      * @throws IllegalValueException if there were any data constraints violated in the account
      */
-    public LoginDetails toModelType() throws IllegalValueException {
+    public LoginDetails toModelType() throws IllegalValueException, UnsupportedEncodingException {
+        UserId modelUserId;
+        UserPassword modelUserPassword;
+        UserRole modelUserRole;
         if (userId == null) {
             throw new IllegalValueException(String.format(MISSING_ACCOUNT_FIELD_MESSAGE_FORMAT,
                     UserId.class.getSimpleName()));
         }
-        if (!UserId.isValidUserId(userId)) {
-            throw new IllegalValueException(UserId.MESSAGE_USERID_CONSTRAINTS);
-        }
-        final UserId modelUserId = new UserId(userId);
+        modelUserId = new UserId(userId);
 
         if (userPassword == null) {
             throw new IllegalValueException(String.format(MISSING_ACCOUNT_FIELD_MESSAGE_FORMAT,
                                                           UserPassword.class.getSimpleName()));
         }
-        if (!UserPassword.isValidUserPassword(userPassword)) {
-            throw new IllegalValueException(UserPassword.MESSAGE_USERPASSWORD_CONSTRAINTS);
+        modelUserPassword = new UserPassword(userPassword);
+        if (userRole == null) {
+            throw new IllegalValueException(String.format(MISSING_ACCOUNT_FIELD_MESSAGE_FORMAT,
+                    UserRole.class.getSimpleName()));
         }
-        final UserPassword modelUserPassword = new UserPassword(userPassword);
-
-        if (!UserRole.isValidUserRole(userRole)) {
-            throw new IllegalValueException(UserRole.MESSAGE_USERROLE_CONSTRAINTS);
-        }
-        final UserRole modelUserRole = new UserRole(userRole);
+        modelUserRole = new UserRole(userRole);
 
         return new LoginDetails(modelUserId, modelUserPassword, modelUserRole);
     }

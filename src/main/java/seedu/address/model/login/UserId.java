@@ -3,6 +3,11 @@ package seedu.address.model.login;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Base64;
+
+import seedu.address.logic.LoginManager;
+
 /**
  * Represents an account's user ID in the login book.
  * Guarantees: immutable; is valid as declared in {@link #isValidUserId(String)}
@@ -26,10 +31,17 @@ public class UserId {
      *
      * @param id A valid userid.
      */
-    public UserId(String id) {
+    public UserId(String id) throws UnsupportedEncodingException {
         requireNonNull(id);
-        checkArgument(isValidUserId(id), MESSAGE_USERID_CONSTRAINTS);
-        fullUserId = id;
+        if (LoginManager.getIsCurrentlyCreatingAccount() && !LoginManager.getIsCurrentlyTesting()) {
+            checkArgument(isValidUserId(id), MESSAGE_USERID_CONSTRAINTS);
+        }
+        if (LoginManager.getIsCurrentlyCreatingAccount()) {
+            fullUserId = Base64.getEncoder().encodeToString(id.getBytes("utf-8"));
+        } else {
+            fullUserId = id;
+        }
+
     }
 
     /**

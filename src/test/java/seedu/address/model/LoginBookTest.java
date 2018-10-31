@@ -3,7 +3,7 @@ package seedu.address.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalAccounts.LOGINDETAIL5;
+import static seedu.address.testutil.TypicalAccounts.LOGINDETAIL_5;
 import static seedu.address.testutil.TypicalAccounts.getTypicalLoginBook;
 
 import java.util.Arrays;
@@ -47,8 +47,8 @@ public class LoginBookTest {
     @Test
     public void resetData_withDuplicateAccounts_throwsDuplicateAccountException() {
         // Two persons with the same identity fields
-        LoginDetails editedLoginDetails = new AccountBuilder(LOGINDETAIL5).withUserPassword("1qaz2wsx3edc").build();
-        List<LoginDetails> newAccounts = Arrays.asList(LOGINDETAIL5, editedLoginDetails);
+        LoginDetails editedLoginDetails = new AccountBuilder(LOGINDETAIL_5).withUserPassword("1qaz2wsx3edc").build();
+        List<LoginDetails> newAccounts = Arrays.asList(LOGINDETAIL_5, editedLoginDetails);
         LoginBookStub newData = new LoginBookStub(newAccounts);
 
         thrown.expect(DuplicateAccountException.class);
@@ -63,19 +63,19 @@ public class LoginBookTest {
 
     @Test
     public void hasAccount_accountNotInLoginBook_returnsFalse() {
-        assertFalse(loginBook.hasAccount(LOGINDETAIL5));
+        assertFalse(loginBook.hasAccount(LOGINDETAIL_5));
     }
 
     @Test
     public void hasAccount_accountInLoginBook_returnsTrue() {
-        loginBook.createAccount(LOGINDETAIL5);
-        assertTrue(loginBook.hasAccount(LOGINDETAIL5));
+        loginBook.createAccount(LOGINDETAIL_5);
+        assertTrue(loginBook.hasAccount(LOGINDETAIL_5));
     }
 
     @Test
     public void hasAccount_accountWithSameUserIdFieldInLoginBook_returnsTrue() {
-        loginBook.createAccount(LOGINDETAIL5);
-        LoginDetails editedLoginDetails = new AccountBuilder(LOGINDETAIL5).withUserPassword("1qaz2wsx3edc").build();
+        loginBook.createAccount(LOGINDETAIL_5);
+        LoginDetails editedLoginDetails = new AccountBuilder(LOGINDETAIL_5).withUserPassword("1qaz2wsx3edc").build();
         assertTrue(loginBook.hasAccount(editedLoginDetails));
     }
 

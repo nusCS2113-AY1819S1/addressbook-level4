@@ -15,6 +15,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.logic.LoginManager;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.login.UserId;
 import seedu.address.model.person.Address;
@@ -75,6 +76,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseUserId_invalidValue_throwsParseException() {
+        LoginManager.setIsCurrentlyTesting(false);
         Assert.assertThrows(ParseException.class, () -> ParserUtil.parseUserId(INVALID_USERID));
     }
 
