@@ -1033,33 +1033,39 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |user |be able to input my expenses and income along with a timestamp with options (daily, monthly or yearly) | record how much I am spending
+|`* * *` |user |be able to input my expenses and income along with a timestamp | record how much I am spending
 
-|`* * *` |user |be able to delete existing entries |edit my mistakes in the future
+|`* * *` |user |be able to delete existing entries |remove records which I do not need
 
-|`* * *` |user |be able to see the history of my expenses |Can keep track of my expense
+|`* * *` |user |be able to edit existing entries |update records with the correct information
 
-|`* * *` |user |be able to create a limit for my daily expenses | stop myself from overspending
+|`* * *` |user |be able to undo and redo |Revert any unwanted changes
 
-|`* * *` |user |be able to undo |Revert any unwanted changes
+|`* * *` |user |be able to retain my financial information when app shuts down |Not have the app open all the time
 
-|`*` |user with many persons in the expense book |sort persons by name |locate a person easily
+|`* * *` |user |be able to see the history of my financial activities |Can keep track of my financial activities
+
+|`* * *` |user with many records in the FinancialPlanner |have an ordered list of records |locate records easily
+
+|`* * *` |user with many records in the FinancialPlanner |find a record easily by name |access any record I want easily
 
 |`* * *` |user |be able to clear history |to reduce the clutter in the app
 
+|`* * *` |user |be able to create a limit for my daily final activities | stop myself from overspending
+
 |`* * *` |user |be able to see a summary expenditure of each category | see the areas where I am spending the most
+
+|`* * *` |user |be able to see a summary of each day or month | see how much I am spending per day or month
 
 |`* * *` |new user |see usage instructions | refer to instructions when i forget how to use the app
 
 |`* * *` |user |access the history within a few seconds | do not have the time to wait for the app to update
 
-|`* * *` |advanced user |add notes to each expense | know where my money went
-
 |`* * ` |advanced user |be able to freely edit the tags | define my own categories
 
-|`* *` |user |be able to tag my expenses with a category|To figure out in which part money spent on.
+|`* *` |user |be able to tag my financial activities with a category|To figure out in which part money spent on.
 
-|`* *` |advanced user |export my expenses into other forms |log it and store it in a place different from the app
+|`* *` |advanced user |export my financial activities into other forms |log it and store it in a place different from the app
 
 |`* *` |user |search based on the categories |monitor the expenditure in a specific category
 
@@ -1067,24 +1073,32 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |advanced user |plan out my future expenses | allocate money properly, to ensure I can make my payments
 
-|`* *` |user |have a visual representation of my spending habits |have a better idea of my expenditures
+|`* *` |user |have a visual representation of daily and monthly financial activity |visualise the amount spend each day or month
+
+|`* *` |user |have a visual representation of financial activity broken down into categories |easily identify the areas where I am spending the most
 
 |`* *` |user |record parties to make payment to |allocate money and ensure I do not owe anyone
 
-|`* *` |user |be able to edit my expenses |correct any mistakes when checking my accounts
+|`* *` |user |know my current monthly financial activity |have a sense of how much I am spending currently
 
 |`* *` |user |view balances in bank accounts |keep track of my bank savings or current without having to login to accounts
 
-|`* *` |user |a nice representation of the categories |have a better idea of the expenses in each category
+|`* *` |user |have an intuitive user interface |so that I don't have to think too much when using the app
+
+|`* *` |user |have a visually appealing user interface |so that I feel happy when using the app
+
+|`*` |user |be able to access basic app configurations |so that I can adjust the app to my liking
 
 |`*` |user |hide private details by default | minimize chance of someone else seeing them by accident
 
-|`*` |user |a secure place to store my expense records |keep my financial data safe
+|`*` |user |a secure place to store my finance records |keep my financial data safe
 
-|`*` |user |archive my old expenses history |look back at my expenses history whenever I need it
+|`*` |user |archive my old finance history |look back at my finance history whenever I need it
+
+|`*` |inexperienced user |have command suggestions |use the commands without having to remember them
+
+|`*` |advanced user |add notes to each finance record | know where my money went
 |=======================================================================
-
-_{More to be added}_
 
 [appendix]
 == Use Cases
@@ -1388,8 +1402,7 @@ Use case ends.
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
 .  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-_{More to be added}_
+.  Should be able to retain data in the event of app exiting or crashing.
 
 [appendix]
 == Glossary
@@ -1399,6 +1412,9 @@ Windows, Linux, Unix, OS-X
 
 [[private-contact-detail]] Private contact detail::
 A contact detail that is not meant to be shared with others
+
+[[Finance-activity]] Finance Activity::
+Activity where an individual engage in exchange of money, can comprise of income or spending
 
 [appendix]
 == Product Survey
