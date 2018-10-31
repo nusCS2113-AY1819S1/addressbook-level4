@@ -21,7 +21,7 @@ import seedu.address.logic.commands.EditDistributorCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindDistributorCommand;
-import seedu.address.logic.commands.FinishedReminderCommand;
+import seedu.address.logic.commands.RemoveReminderCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -148,7 +148,7 @@ public class AddressBookParser {
         case AddReminderCommand.COMMAND_WORD:
             return new AddReminderCommandParser().parse(arguments);
 
-        case FinishedReminderCommand.COMMAND_WORD:
+        case RemoveReminderCommand.COMMAND_WORD:
             return new FinishedReminderCommandParser().parse(arguments);
 
         case ViewDueRemindersCommand.COMMAND_WORD:
