@@ -47,7 +47,6 @@ public class TypicalGroups {
     public static final Group EMAIL_TEST_GROUP = new GroupBuilder()
             .withGroupName("TestGroupForEmail")
             .withGroupLocation("NUS").build();
-    public static final String KEYWORD_MATCHING_CS1010 = "Cs1010"; // A keyword that matches CS1010
 
     private TypicalGroups() {} // prevents instantiation
 
@@ -68,7 +67,7 @@ public class TypicalGroups {
      */
     public static AddressBook getTypicalAddressBookWithGroupPersons() {
         AddressBook ab = new AddressBook();
-        for (Group group : getTypicalGroups()) {
+        for (Group group : getTypicalGroupsCopy()) {
             group.addPersons(ALICE);
             ab.createGroup(group);
         }
@@ -82,12 +81,23 @@ public class TypicalGroups {
                 .withTags(VALID_GROUP_TAG_TUT_1).build();
     }
 
+    public static Group getCS1010() {
+        return new GroupBuilder()
+                .withGroupName(VALID_GROUP_NAME_CS1010)
+                .withGroupLocation(VALID_GROUP_LOCATION_CS1010)
+                .withTags(VALID_GROUP_TAG_CS1010).build();
+    }
+
     public static List<Group> getTypicalGroups() {
         return new ArrayList<>(Arrays.asList(TUT_1, CS1010, TUT_2, TUT_3, TUT_4));
     }
 
+    public static List<Group> getTypicalGroupsCopy() {
+        return new ArrayList<>(Arrays.asList(getTut1(), getCS1010()));
+    }
+
     public static final Group getTypicalGroupsWithPersons() {
-        Group group = new GroupBuilder(TUT_1).build();
+        Group group = new GroupBuilder(getTut1()).build();
         group.addPersons(ALICE);
         return group;
     }
