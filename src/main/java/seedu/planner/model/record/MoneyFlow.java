@@ -16,7 +16,7 @@ public class MoneyFlow {
                     + "1. <number> cannot start from '0' unless it has only 1 digit. "
                     + "There must be at least 1 digit in this field.\n"
                     + "2. At most 1 decimal point can be present. Decimal point is optional."
-                    + "If decimal point is present, it must have at least 1 digit after it";
+                    + "If decimal point is present, it must have at least 1 digit and at most 2 digits after it ";
 
     public static final String SIGN_REGEX = ("(?<sign>[-+])");
     public static final String MONEYFLOW_NO_SIGN_REGEX = ("(?<money>.*)");
@@ -27,7 +27,7 @@ public class MoneyFlow {
     // Any form of money flow entered must follow the format defined above
     private static final String MONEYFLOW_WHOLE_NUMBER_ZERO_REGEX = "0";
     private static final String MONEYFLOW_WHOLE_NUMBER_NONZERO_REGEX = "[1-9]{1}\\d*";
-    private static final String MONEYFLOW_DECIMAL_PART_REGEX = ".\\d+";
+    private static final String MONEYFLOW_DECIMAL_PART_REGEX = ".\\d{1,2}";
     private static final String MONEYFLOW_SIGN_PART_REGEX = "[+-]";
 
     /**
