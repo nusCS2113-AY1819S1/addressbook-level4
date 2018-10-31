@@ -108,7 +108,15 @@ Logging out of the application will bring you back to the login screen.
 . Press the kbd:[ENTER] key
 
 == Types of Users
-In small drink distribution companies, the workload can generally be split into 3 roles,
+In small-scale drink distribution companies, there are generally 3 critical roles and responsibilities to
+keep the company running:
+
+. Stock taker
+. Accountant
+. Manager
+
+This is taken into account in *[blue]#_Drink I/O_#*. Each role has a different type of *[blue]#_Drink I/O_#*
+account, and in a specific role, you can work with functions that are tailored to your role.
 
 === Stocktaker
 === Accountant
