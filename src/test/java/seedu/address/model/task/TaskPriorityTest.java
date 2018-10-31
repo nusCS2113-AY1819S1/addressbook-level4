@@ -30,10 +30,11 @@ public class TaskPriorityTest {
         assertFalse(TaskPriority.isValidPriority(" ")); // spaces only
         assertFalse(TaskPriority.isValidPriority("^")); // only non-alphanumeric characters
         assertFalse(TaskPriority.isValidPriority("4")); // contains numbers not in range
-        assertFalse(TaskPriority.isValidPriority("12")); // contains numbers not in range
+        assertFalse(TaskPriority.isValidPriority("0")); // contains numbers not in range
 
         // valid name
         assertTrue(TaskPriority.isValidPriority("1"));
         assertTrue(TaskPriority.isValidPriority("2"));
+        assertTrue(TaskPriority.isValidPriority("3"));
     }
 }

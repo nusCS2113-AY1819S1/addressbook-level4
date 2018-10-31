@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- TodoList save file which contains the same Task values as in TypicalTasks#getTypicalTodoList() -->
+<todolist>
+    <tasks>
+        <name>Assignment 2</name>
+        <module>CG2027</module>
+        <date>16-10</date>
+        <priority>2</priority>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>Lab 1</name>
+        <module>CG2028</module>
+        <date>30-08</date>
+        <priority>3</priority>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>Crowdfunding Website</name>
+        <module>CS2102</module>
+        <date>11-11</date>
+        <priority>1</priority>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>Quiz 9</name>
+        <module>CS1231</module>
+        <date>14-10</date>
+        <priority>1</priority>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>Tutorial 5</name>
+        <module>CS2040</module>
+        <date>26-09</date>
+        <priority>3</priority>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>Lecture 3</name>
+        <module>CS2113</module>
+        <date>12-10</date>
+        <priority>2</priority>
+        <status>false</status>
+    </tasks>
+</todolist>
