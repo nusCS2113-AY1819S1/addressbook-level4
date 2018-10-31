@@ -13,8 +13,6 @@ import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.OpenStockListVersionEvent;
-import seedu.address.commons.events.ui.ItemPanelSelectionChangedEvent;
-import seedu.address.model.item.Item;
 
 /**
  * The Browser Panel of the App.
@@ -25,7 +23,6 @@ public class BrowserPanel extends UiPart<Region> {
     public static final String FILE_PAGE = "fileaspage.html";
     public static final String SEARCH_PAGE_URL =
             "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
-
     private static final String FXML = "BrowserPanel.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -43,10 +40,6 @@ public class BrowserPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
-    private void loadItemPage(Item item) {
-        loadPage(SEARCH_PAGE_URL + item.getName().fullName);
-    }
-
     public void loadPage(String url) {
         Platform.runLater(() -> browser.getEngine().load(url));
     }
@@ -62,9 +55,9 @@ public class BrowserPanel extends UiPart<Region> {
     /**
      * Loads the specified .xml file as a .html page.
      */
-    private void loadFileAsPage() {
-        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + FILE_PAGE);
-        loadPage(defaultPage.toExternalForm());
+    private void loadFileAsPage(String fileName) {
+        URL fileAsPage = MainApp.class.getResource("/docs/" + FILE_PAGE);
+        loadPage(fileAsPage.toExternalForm() + "?name=" + fileName);
     }
 
     /**
@@ -75,14 +68,9 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handleItemPanelSelectionChangedEvent(ItemPanelSelectionChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadItemPage(event.getNewSelection());
-    }
-
-    @Subscribe
     private void handleOpenStockListVersionEvent (OpenStockListVersionEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadFileAsPage();
+        loadDefaultPage();
+        loadFileAsPage(event.fileName);
     }
 }
