@@ -349,7 +349,7 @@
 }
 
 #tags .red {
-    -fx-text-fill: black;
+    -fx-text-fill: white;
     -fx-background-color: red;
 }
 

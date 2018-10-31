@@ -107,7 +107,7 @@ Example:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dep/ADMIN`
 
 
-=== Editing an employee : 'edit'
+=== Editing an employee : `edit`
 
 Priority level: `default`,`manager`
 
@@ -148,7 +148,7 @@ Examples:
 `delete 2` +
 Deletes the 2nd person in the employee list.
 
-=== Listing all personnel of the company : 'list'
+=== Listing all personnel of the company : `list`
 
 Shows a list of all the personnel, all the events, or those people in the specific department in the project team +
 Format/Prompts: +
