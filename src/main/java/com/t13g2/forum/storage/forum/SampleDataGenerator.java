@@ -1,6 +1,7 @@
 package com.t13g2.forum.storage.forum;
 
 import com.t13g2.forum.model.UnitOfWork;
+import com.t13g2.forum.model.forum.Announcement;
 import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.model.forum.Module;
@@ -21,6 +22,7 @@ public class SampleDataGenerator {
         this.generateModule();
         this.generateThread();
         this.generateComment();
+        this.generateAnnouncement();
     }
 
     private void generateUser() {
@@ -64,5 +66,10 @@ public class SampleDataGenerator {
         comment.setCreatedByUserId(this.userId);
 
         uow.getCommentRepository().addComment(comment);
+    }
+
+    private void generateAnnouncement() {
+        Announcement announcement = new Announcement("Welcome!", "Welcome to ForumBook");
+        uow.getAnnouncementRepository().addAnnouncement(announcement);
     }
 }
