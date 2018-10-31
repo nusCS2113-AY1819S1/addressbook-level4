@@ -42,6 +42,8 @@ public class StockCommand extends Command {
             + PREFIX_QUANTITY + "5 OR " + COMMAND_WORD + " " + PREFIX_ISBN + "978-3-16-148410-0 "
             + PREFIX_QUANTITY + "5";
 
+
+    public static final String MESSAGE_QUANTITY_STOCK = "Number of Book Sold: ";
     public static final String MESSAGE_STOCK_PERSON_SUCCESS = "Stocked Book: %1$s";
     public static final String MESSAGE_NOT_STOCKED = "Increase to stock quantity must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This book already exists in the book inventory.";
@@ -86,7 +88,8 @@ public class StockCommand extends Command {
         model.updateBook(bookToStock, stockedBook);
         model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
         model.commitBookInventory();
-        return new CommandResult(String.format(MESSAGE_STOCK_PERSON_SUCCESS, stockedBook));
+        return new CommandResult(MESSAGE_QUANTITY_STOCK + stockBookDescriptor.getQuantity().getValue()
+                + "\n" + String.format(MESSAGE_STOCK_PERSON_SUCCESS, stockedBook));
     }
 
     /**

@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.SellCommand;
-import seedu.address.logic.commands.SellCommand.DecreaseQuantity;
+import seedu.address.logic.commands.SellCommand.SellBookDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.book.Isbn;
 import seedu.address.model.book.Quantity;
@@ -59,17 +59,17 @@ public class SellCommandParser implements Parser<SellCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SellCommand.MESSAGE_USAGE));
         }
 
-        DecreaseQuantity decreaseQuantity = new DecreaseQuantity();
+        SellBookDescriptor sellBookDescriptor = new SellCommand.SellBookDescriptor();
         if (argMultimap.getValue(PREFIX_QUANTITY).isPresent()) {
             Quantity quantity = ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
-            decreaseQuantity.setQuantity(quantity);
+            sellBookDescriptor.setQuantity(quantity);
         }
 
-        if (!decreaseQuantity.isQuantityFieldSpecified()) {
+        if (!sellBookDescriptor.isQuantityFieldSpecified()) {
             throw new ParseException(SellCommand.MESSAGE_NOT_SOLD);
         }
 
 
-        return new SellCommand(findBookBy, argsType, decreaseQuantity);
+        return new SellCommand(findBookBy, argsType, sellBookDescriptor);
     }
 }
