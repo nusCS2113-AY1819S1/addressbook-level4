@@ -57,8 +57,13 @@ Format: student add n/NAME i/ADMIN_NUMBER c/COURSE_CODE p/MOBILE_NUMBER e/EMAIL 
 
 Examples:
 
-* `student add n/Tristy i/A0169999Z c/CS1 p/90002334 e/E0111342@u.nus.edu a/522 Tampines North 1`
-* `student add n/Megan Nicole c/CEG1 e/E0169113@u.nus.edu a/14 Changi South i/A0177897E p/92667921`
+* `student add n/Tristy i/A0169999Z c/CS p/90002334 e/E0111342@u.nus.edu a/522 Tampines North 1`
+* `student add n/Megan Nicole c/CEG e/E0169113@u.nus.edu a/14 Changi South i/A0177897E p/92667921`
+
+****
+* Matriculation number must be unique, and must consist of a letter prefix, followed by 7 numbers, and a letter suffix.
+* Course code must already exist in the system.
+****
 
 ==== Update Student : `student edit`
 Edits an existing student in the system. +
@@ -75,31 +80,6 @@ Edits the phone number and home address of the 1st student to be 99887890 and 14
 * `student edit 2 a/14 Jurong East Street 91`
 Edits only the address of the 2nd student to be 14 Jurong East Street 91.
 
-==== Select Student : `select`
-Selects the student identified by the index number used in the displayed person list. +
-Format: `student select INDEX`
-
-==== Find Student by name/matric no : `student find` (find by matric no coming in v1.3)
-Find student(s) whose names contain any of the given keywords. +
-Format:  student find [n/STUDENT_NAME] [i/MATRIC_NO]
-****
-* Display a list of students whose name or matric number matches the given keywords.
-****
-Examples:
-
-* `student find n/Rachel`
-Returns students whose first name or last name contains 'Rachel'.
-* `student find i/A0168000L`
-Return the student whose matriculation no matches 'A0168000L'.
-
-Examples:
-
-* `student list` +
-`select 2` +
-Selects the 2nd student in the address book.
-* `student find Betsy` +
-`select 1` +
-Selects the 1st student in the results of the `find` command.
 
 ==== Remove Student : `student delete`
 Deletes the specified student from the system. +
@@ -120,7 +100,7 @@ Deletes the 2nd person in the system
 Shows a list of all students in the system. +
 Format: list students
 
-==== Export Student : `student export [coming in v1.3]`
+==== Export Student : `student export [coming in v1.4]`
 Exports students to a .csv file +
 Format: student export LOCATION
 ****
