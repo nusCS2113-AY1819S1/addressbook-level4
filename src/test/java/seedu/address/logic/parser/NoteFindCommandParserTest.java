@@ -12,6 +12,7 @@ import org.junit.rules.ExpectedException;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.NoteFindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.StorageController;
 import seedu.address.model.note.NoteManager;
 
 /**
@@ -28,6 +29,7 @@ public class NoteFindCommandParserTest {
 
     @Before
     public void setUp() {
+        StorageController.enterTestMode();
         noteManager.clearNotes();
         noteManager.saveNoteList();
     }
