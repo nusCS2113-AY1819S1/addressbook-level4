@@ -318,6 +318,12 @@ Removes a reminder for user for event 5
 Admin/User: Show all events with reminders set +
 Format: `showReminders`
 
+[NOTE]
+====
+For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
+so you need to refresh it yourself.
+====
+
 === Adds Comment : `addComment`
 
 Admin/User: Add comment into event comment section +
@@ -334,6 +340,12 @@ Examples:
 Adds "What is the attire to wear for the event?" into event 1 comment section
 * `addComment 5 C/What is the attire to wear for this event?` +
 Adds "What is the attire to wear for this event?" into event 5 comment section
+
+[NOTE]
+====
+For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
+so you need to refresh it yourself.
+====
 
 === Reply Comment : `replyComment`
 
@@ -352,9 +364,15 @@ Adds the comment "What is the attire to wear for the event?" into event 1 commen
 * `replyComment 2 L/2 C/What is the attire to wear for the event?` +
 Adds the comment "What is the attire to wear for the event?" into event 2 comment section at line 2
 
+[NOTE]
+====
+For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
+so you need to refresh it yourself.
+====
+
 === Delete Comment : `deleteComment`
 
-Admin: Deletes a comment +
+Admin/User: Deletes a comment +
 Format: `deleteComment INDEX L/LINE`
 
 ****
@@ -436,7 +454,7 @@ e.g. `setReminder 1`
 * *View Reminders* : `reminders` +
 e.g. `reminder`
 * *addComment* : `addComment INDEX C/STRING` +
-e.g. `add Comments 1 C/HELLO`
+e.g. `addComment 1 C/HELLO`
 * *replyComment* : `replyComment INDEX L/LINE C/STRING` +
 e.g. `replyComment 1 L/2 C/Hello`
 * *deleteComment* : `deleteComment INDEX L/LINE` +

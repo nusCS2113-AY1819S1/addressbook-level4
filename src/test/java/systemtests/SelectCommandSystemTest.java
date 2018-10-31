@@ -36,7 +36,7 @@ public class SelectCommandSystemTest extends EventManagerSystemTest {
         assertCommandSuccess(command, toLogin);
 
         /* Case: select the first card in the event list, command with leading spaces and trailing spaces
-         * -> selected
+         * -> select
          */
         command = "   " + SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_EVENT.getOneBased() + "   ";
         assertCommandSuccess(command, INDEX_FIRST_EVENT);
