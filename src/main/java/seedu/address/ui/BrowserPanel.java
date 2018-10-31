@@ -24,6 +24,7 @@ public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
     public static final String SEARCH_PAGE = "EventSearchPage.html";
+    public static final String SEARCH_PAGE_URL = "https://cs2113-ay1819s1-t12-1.github.io/main/EventSearchPage.html";
 
 
     private static final String FXML = "BrowserPanel.fxml";
@@ -46,15 +47,20 @@ public class BrowserPanel extends UiPart<Region> {
     /**
      * Gets the URL without parameters
      */
-    public static URL getSearchPageUrlWithoutName() {
-        return MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE);
+    public static String getSearchPageUrlWithoutName() {
+        //return MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE);
+        return SEARCH_PAGE_URL;
     }
 
     /**
      * Formats HTML file path into string
      */
     private String formatEventPageUrl(Event event) {
-        URL searchPage = getSearchPageUrlWithoutName();
+        //URL searchPage = getSearchPageUrlWithoutName();
+        String searchPage = SEARCH_PAGE_URL;
+        String comment = event.getComment().toString();
+        comment = comment.replace("{", "<");
+        comment = comment.replace("}", ">");
         String searchPageString = searchPage.toString()
                 + "?name=" + event.getName()
                 + "&contact=" + event.getContact()
@@ -63,7 +69,8 @@ public class BrowserPanel extends UiPart<Region> {
                 + "&venue=" + event.getVenue().value.replaceAll("#", "%23")
                 + "&dateTime=" + PAGE_DATE_FORMAT.format(event.getDateTime().dateTime).replaceAll(" ", "%20")
                 + "&tags=" + event.getTagsString()
-                + "&attendance=" + event.getAttendanceString();
+                + "&attendance=" + event.getAttendanceString()
+                + "&comment=" + comment;
 
         return searchPageString;
     }
