@@ -9,6 +9,9 @@ import com.t13g2.forum.model.forum.User;
 public class Context {
     private static Context instance;
     private User currentUser;
+    private int currentModuleId = -1;
+    private int currentThreadId = -1;
+    private int currentCommentId = -1;
 
 
     private Context() {
@@ -63,4 +66,27 @@ public class Context {
         return currentUser == null || currentUser.isBlock();
     }
 
+    public int getCurrentModuleId() {
+        return currentModuleId;
+    }
+
+    public void setCurrentModuleId(int currentModuleId) {
+        this.currentModuleId = currentModuleId;
+    }
+
+    public int getCurrentThreadId() {
+        return currentThreadId;
+    }
+
+    public void setCurrentThreadId(int currentThreadId) {
+        this.currentThreadId = currentThreadId;
+    }
+
+    public int getCurrentCommentId() {
+        return currentCommentId;
+    }
+
+    public void setCurrentCommentId(int currentCommentId) {
+        this.currentCommentId = currentCommentId;
+    }
 }

@@ -59,7 +59,7 @@ public class ForumBookStorage implements IForumBookStorage {
 
     @Override
     public void loadAnnouncement() {
-        announcements = (AnnouncementStorage) underlyingStorage.read(AnnouncementStorage.class);
+        announcements = underlyingStorage.read(AnnouncementStorage.class);
         if (announcements == null) {
             announcements = new AnnouncementStorage();
             saveAnnouncement();
@@ -75,7 +75,7 @@ public class ForumBookStorage implements IForumBookStorage {
 
     @Override
     public void loadComment() {
-        comments = (CommentStorage) underlyingStorage.read(CommentStorage.class);
+        comments = underlyingStorage.read(CommentStorage.class);
         if (comments == null) {
             comments = new CommentStorage();
             saveComment();
@@ -92,7 +92,7 @@ public class ForumBookStorage implements IForumBookStorage {
 
     @Override
     public void loadForumThread() {
-        forumThreads = (ForumThreadStorage) underlyingStorage.read(ForumThreadStorage.class);
+        forumThreads = underlyingStorage.read(ForumThreadStorage.class);
         if (forumThreads == null) {
             forumThreads = new ForumThreadStorage();
             saveForumThread();
@@ -110,7 +110,7 @@ public class ForumBookStorage implements IForumBookStorage {
 
     @Override
     public void loadUser() {
-        users = (UserStorage) underlyingStorage.read(UserStorage.class);
+        users = underlyingStorage.read(UserStorage.class);
         if (users == null) {
             users = new UserStorage();
             saveUser();
@@ -126,7 +126,7 @@ public class ForumBookStorage implements IForumBookStorage {
 
     @Override
     public void loadModule() {
-        modules = (ModuleStorage) underlyingStorage.read(ModuleStorage.class);
+        modules = underlyingStorage.read(ModuleStorage.class);
         if (modules == null) {
             modules = new ModuleStorage();
             saveModule();

@@ -8,4 +8,14 @@ public interface IUnitOfWork {
     void commit();
 
     void rollBack();
+
+    IAnnouncementRepository getAnnouncementRepository();
+
+    ICommentRepository getCommentRepository();
+
+    IForumThreadRepository getForumThreadRepository();
+
+    IModuleRepository getModuleRepository();
+
+    IUserRepository getUserRepository();
 }
