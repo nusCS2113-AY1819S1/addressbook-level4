@@ -14,7 +14,7 @@ import seedu.address.model.gradebook.Gradebook;
 import seedu.address.model.gradebook.GradebookManager;
 
 /**
- * Edits a gradebook component for module in Trajectory to the user.
+ * Edits a gradebook component in Trajectory.
  */
 public class GradebookEditCommand extends Command {
     public static final String COMMAND_WORD = "gradebook edit";
@@ -33,7 +33,7 @@ public class GradebookEditCommand extends Command {
             + PREFIX_GRADEBOOK_ITEM_EDIT + "Finals "
             + PREFIX_GRADEBOOK_MAXMARKS + "60 "
             + PREFIX_GRADEBOOK_WEIGHTAGE + "50";
-
+    private static final String MESSAGE_INVALID_ENTRY = "You need to fill in at least one optional parameter!";
     private final Gradebook toEditGradebookItem;
     public GradebookEditCommand (Gradebook gradebookComponent) {
         toEditGradebookItem = gradebookComponent;
@@ -43,6 +43,9 @@ public class GradebookEditCommand extends Command {
     public CommandResult execute (Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         String status = MESSAGE_EDIT_GRADEBOOK_SUCCESS;
+        String newGradeComponentName = toEditGradebookItem.getgradebookNewComponentName();
+        int newMaxMarks = toEditGradebookItem.getGradeComponentMaxMarks();
+        int newWeightage = toEditGradebookItem.getGradeComponentWeightage();
 
         GradebookManager gradebookManager = new GradebookManager();
         Gradebook gradebook = gradebookManager.findGradebookComponent(
@@ -51,7 +54,9 @@ public class GradebookEditCommand extends Command {
         if (gradebook == null) {
             return new CommandResult(MESSAGE_FIND_FAIL);
         }
-
+        if (newGradeComponentName.equals("") && newMaxMarks == 0 && newWeightage == 0) {
+            return new CommandResult(MESSAGE_INVALID_ENTRY);
+        }
         if (!toEditGradebookItem.getgradebookNewComponentName().equals("")) {
             gradebook.setGradeComponentName(toEditGradebookItem.getgradebookNewComponentName());
         }
