@@ -335,9 +335,10 @@ and implements the following operations:
 * `AddressBook#hasPersonInGroup()` -- Checks to see if a particular person is in a group.
 * `AddressBook#addGroup()` -- Add's persons to a group.
 * `AddressBook#removeGroup()` -- Removes a group form the student management system.
+* `AddressBook#removeGroupPerson()` -- Removes a student from group form the student management system.
 
 These operations are exposed in the `Model` interface as `Model#createGroup()`, `Model#hasGroup()`,
-`Model#hasPersonInGroup()`, `Model#addGroup()` and `Model#deleteGroup()` respectively.
+`Model#hasPersonInGroup()`, `Model#addGroup()`, `Model#deleteGroup()` and `Model#deleteGroupPerson()` respectively.
 
 Given below is an example usage scenario and how the group mechanism behaves at each step.
 
@@ -372,7 +373,19 @@ The following sequence diagram shows how the add persons to group operation work
 image::AddGroupSequenceDiagram.png[width="800"]
 
 
-Step 3. The user inputs `deletegroup 1` to delete the first group in the student management system. The `AddressBookParser` detects `deletegroup` as a command word and will use `DeleteGroupCommandParser`
+Step 3. The user inputs `deletegroupstudent g/1 p/1` to remove the person at the first index (`GroupPersonListPanel`) from the group at the first index (`GroupListPanel`)
+in the student management system. The `AddressBookParser` detects `deletegroupstudent` as a command word will use `DeleteGroupPersonCommandParser`
+to parse the input given. `DeleteGroupPersonCommandParser` will then create two `Index` objects after parsing and pass it to `DeleteGroupPersonCommand`
+which will then execute deleting the person from the specified group from the student management system.
+ +
+
+The following sequence diagram shows how the delete group person operation works within both `Model` and `Logic` components:
+
+.Interactions Inside the Logic and Model Component for the `deletegroupstudent g/1 p/1` Command +
+image::DeleteGroupPersonSequenceDiagram.png[width="800"]
+
+
+Step 4. The user inputs `deletegroup 1` to delete the first group in the student management system. The `AddressBookParser` detects `deletegroup` as a command word and will use `DeleteGroupCommandParser`
 to parse the input given. `DeleteGroupCommandParser` will then create an `Index` object after parsing and pass it to `DeleteGroupCommand`
 which will then execute deleting the specified group from the student management system.
  +
