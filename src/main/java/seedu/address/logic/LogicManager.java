@@ -40,6 +40,7 @@ public class LogicManager extends ComponentManager implements Logic {
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
+        commandText.toLowerCase();
         try {
             Command command = addressBookParser.parseCommand(commandText);
             CommandResult result = null;

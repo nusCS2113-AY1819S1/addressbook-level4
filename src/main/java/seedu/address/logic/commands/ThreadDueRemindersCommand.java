@@ -33,6 +33,11 @@ public class ThreadDueRemindersCommand extends Command {
             allReminders.append(reminder.getReminderTime() + "\t\t" + reminder.getReminderMessage() + "\n");
         }
 
+        /**Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Reminders due");
+        alert.getDialogPane().setExpandableContent(new ScrollPane(new TextArea(allReminders.toString())));
+        alert.show();*/
+
         return new CommandResult(allReminders.toString());
     }
 }

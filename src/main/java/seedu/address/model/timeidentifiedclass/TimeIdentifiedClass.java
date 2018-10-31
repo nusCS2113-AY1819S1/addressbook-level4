@@ -128,6 +128,10 @@ public abstract class TimeIdentifiedClass {
     public static boolean isValidDateAndTime (String dateAndTime) {
         String[] times = dateAndTime.split("[/ \\s+ :]");
 
+        if (times.length != 6) {
+            return false;
+        }
+
         for (int i = 0; i < times.length; i++) {
             times[i].trim();
         }
@@ -151,6 +155,10 @@ public abstract class TimeIdentifiedClass {
      */
     public static boolean isValidDate(String date) {
         String[] splitDate = date.split("/");
+
+        if (splitDate.length != 3) {
+            return false;
+        }
 
         // checking the individual components of the date
         if (isValidYear(splitDate[0])

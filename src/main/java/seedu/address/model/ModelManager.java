@@ -485,6 +485,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addTransaction(Transaction transaction) throws InvalidTimeFormatException,
             DuplicateTransactionException {
+        transaction.closeTransaction();
         try {
             versionedSalesHistory.addTransaction(transaction);
         } catch (DuplicateTransactionException e) {
