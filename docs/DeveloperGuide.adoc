@@ -1061,7 +1061,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |access the history within a few seconds | do not have the time to wait for the app to update
 
-|`* * ` |advanced user |be able to freely edit the tags | define my own categories
+|`* *` |advanced user |be able to freely edit the tags | define my own categories
 
 |`* *` |user |be able to tag my financial activities with a category|To figure out in which part money spent on.
 
