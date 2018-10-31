@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeFalse;
@@ -30,6 +31,7 @@ public class HelpWindowTest extends GuiUnitTest {
     public void display() throws Exception {
         FxToolkit.showStage();
         URL expectedHelpPage = HelpWindow.class.getResource(USERGUIDE_FILE_PATH);
+        assertEquals(expectedHelpPage, helpWindowHandle.getLoadedUrl());
     }
 
     @Test

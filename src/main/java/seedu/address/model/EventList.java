@@ -7,7 +7,6 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
-import seedu.address.model.person.Person;
 
 /**
  * Wraps all data at the event-list level
@@ -82,14 +81,6 @@ public class EventList implements ReadOnlyEventList {
      */
     public void removeEvent(Event key) {
         events.remove(key);
-    }
-
-    /**
-     * Removes {@code Person} from the Attendee of {@code EventList}.
-     */
-    public void removePersonFromAllEvents(Person person) {
-        String personName = person.getName().toString();
-        events.removeAttendee(personName);
     }
 
     public List<Event> getSortedEventList() {

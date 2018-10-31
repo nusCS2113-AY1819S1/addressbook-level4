@@ -82,7 +82,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'proManage.jar'
+    archiveName = 'addressbook.jar'
 
     destinationDir = file("${buildDir}/jar/")
 }

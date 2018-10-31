@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_PEOPLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LIST_DEPARTMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -31,7 +31,6 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.InviteCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -132,17 +131,15 @@ public class AddressBookParserTest {
         //assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         //assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
 
-        List<String> firstDepartmentKeywords = Arrays.asList("Admin", "Finance", "Programmes");
-        List<String> secondDepartmentKeywords = Arrays.asList();
+        List<String> departmentKeywords = Arrays.asList("Admin", "Finance", "Programmes");
         ListCommand firstCommand = (ListCommand) parser.parseCommand(
-                ListCommand.COMMAND_WORD + " " + PREFIX_LIST_DEPARTMENT + " "
-                        + firstDepartmentKeywords.stream().collect(Collectors.joining(" ")));
+                ListCommand.COMMAND_WORD + " " + PREFIX_DEPARTMENT + " "
+                        + departmentKeywords.stream().collect(Collectors.joining(" ")));
         ListCommand secondCommand = (ListCommand) parser.parseCommand(ListCommand.COMMAND_WORD + " "
-                + PREFIX_ALL_PEOPLE);
-        assertEquals(new ListCommand("dep", new DepartmentContainsKeywordsPredicate(firstDepartmentKeywords)),
+                + PREFIX_ALL);
+        assertEquals(new ListCommand("dep", new DepartmentContainsKeywordsPredicate(departmentKeywords)),
                 firstCommand);
-        assertEquals(new ListCommand("all people",
-                new DepartmentContainsKeywordsPredicate(secondDepartmentKeywords)), secondCommand);
+        assertEquals(new ListCommand("all", null), secondCommand);
 
     }
 
@@ -157,16 +154,8 @@ public class AddressBookParserTest {
     public void parseCommand_invite() throws Exception {
         InviteCommand command = (InviteCommand) parser.parseCommand(
                 InviteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
-                + EventsUtil.getEventIndexForInvite(INDEX_FIRST_EVENT));
+                + EventsUtil.getEventIndex(INDEX_FIRST_EVENT));
         assertEquals(new InviteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_EVENT), command);
-    }
-
-    @Test
-    public void parseCommand_remove() throws Exception {
-        RemoveCommand command = (RemoveCommand) parser.parseCommand(
-                RemoveCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
-                        + EventsUtil.getEventIndexForRemove(INDEX_FIRST_EVENT));
-        assertEquals(new RemoveCommand(INDEX_FIRST_PERSON, INDEX_FIRST_EVENT), command);
     }
 
     @Test

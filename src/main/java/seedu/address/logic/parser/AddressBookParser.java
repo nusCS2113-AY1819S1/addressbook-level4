@@ -21,7 +21,6 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.InviteCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.UndoCommand;
@@ -89,9 +88,6 @@ public class AddressBookParser {
 
         case InviteCommand.COMMAND_WORD:
             return new InviteCommandParser().parse(arguments);
-
-        case RemoveCommand.COMMAND_WORD:
-            return new RemoveCommandParser().parse(arguments);
 
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();

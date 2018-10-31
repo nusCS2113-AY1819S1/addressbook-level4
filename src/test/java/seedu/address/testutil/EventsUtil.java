@@ -3,7 +3,6 @@ package seedu.address.testutil;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
@@ -63,17 +62,10 @@ public class EventsUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code event}'s index for InviteCommand.
+     * Returns the part of command string for the given {@code event}'s index.
      */
-    public static String getEventIndexForInvite(Index index) {
+    public static String getEventIndex(Index index) {
         return PREFIX_TO + String.valueOf(index.getOneBased());
-    }
-
-    /**
-     * Returns the part of command string for the given {@code event}'s index for RemoveCommand.
-     */
-    public static String getEventIndexForRemove(Index index) {
-        return PREFIX_FROM + String.valueOf(index.getOneBased());
     }
 
     /**

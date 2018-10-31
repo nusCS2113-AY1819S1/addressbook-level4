@@ -4,9 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import org.junit.Test;
 
@@ -23,17 +21,15 @@ public class ListCommandParserTest {
         String secondExample = "Admin Finance";
         String[] firstUserInput = firstExample.trim().split("\\s+");
         String[] secondUserInput = secondExample.trim().split("\\s+");
-        List<String> showAll = new ArrayList<>();
-
-        ListCommand expectedCommand = new ListCommand(ListCommand.LIST_KEY_ALL, new DepartmentContainsKeywordsPredicate(showAll));
+        ListCommand expectedCommand = new ListCommand(ListCommand.LIST_KEY_ALL, null);
 
 
-        assertParseSuccess(parser, "all people", expectedCommand);
+        assertParseSuccess(parser, "all", expectedCommand);
 
         // whitespace -> accepted
-        assertParseSuccess(parser, " all people", expectedCommand);
+        assertParseSuccess(parser, " all", expectedCommand);
 
-        assertParseSuccess(parser, " all people ", expectedCommand);
+        assertParseSuccess(parser, " all ", expectedCommand);
         assertParseSuccess(parser, "dep Admin", new ListCommand("dep",
                 new DepartmentContainsKeywordsPredicate(Arrays.asList(firstUserInput))));
         assertParseSuccess(parser, " dep Admin", new ListCommand("dep",

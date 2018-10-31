@@ -2,9 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -23,11 +21,9 @@ public class ListCommandParser implements Parser<ListCommand> {
      */
     @Override
     public ListCommand parse(String userInput) throws ParseException {
-        List<String> showAll = new ArrayList<>();
+
         if (parseAll(userInput)) {
-            return new ListCommand(ListCommand.LIST_KEY_ALL, new DepartmentContainsKeywordsPredicate(showAll));
-        } else if (parseEvent(userInput)) {
-            return new ListCommand(ListCommand.LIST_KEY_EVENT, new DepartmentContainsKeywordsPredicate(showAll));
+            return new ListCommand(ListCommand.LIST_KEY_ALL, null);
         } else if (parseDep(userInput)) {
             String relevantInfo = userInput.replaceAll("(?i)dep", "");
 
@@ -46,7 +42,7 @@ public class ListCommandParser implements Parser<ListCommand> {
      * @return boolean true if it is equal, if not, false
      */
     private boolean parseAll(String userInput) {
-        return userInput.trim().equalsIgnoreCase("all people");
+        return userInput.trim().equalsIgnoreCase("all");
     }
 
     /**
@@ -54,17 +50,9 @@ public class ListCommandParser implements Parser<ListCommand> {
      * @return boolean true if it is equal, if not, false
      */
     private boolean parseDep(String userInput) {
-        return userInput.trim().split("\\s+")[0]
-                .equalsIgnoreCase("dep");
+        return userInput.trim().split("\\s+")[0].equalsIgnoreCase("dep");
     }
 
-    /**
-     * Checks if first word of the userInput is equals to "dep"
-     * @return boolean true if it is equal, if not, false
-     */
-    private boolean parseEvent(String userInput) {
-        return userInput.trim().equalsIgnoreCase("all events");
-    }
     /**
      * Splits the userInput by whitespace and places it into a DepartmentContainsKeywordPredicate
      * @return a new predicate

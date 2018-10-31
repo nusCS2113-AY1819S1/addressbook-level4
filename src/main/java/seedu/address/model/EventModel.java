@@ -4,7 +4,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.Person;
 
 
 /**
@@ -56,12 +55,6 @@ public interface EventModel {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
-
-    /**
-     * Remove person's name from all event's attendee if present
-     * This is called when a person is deleted from addressbook
-     */
-    void removePersonFromAllEvents(Person person);
 
     /**
      * Returns true if the model has previous event list states to restore.

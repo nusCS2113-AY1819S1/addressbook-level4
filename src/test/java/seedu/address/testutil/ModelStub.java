@@ -86,12 +86,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public boolean hasEvent(Event event) {
+    public boolean hasEvent(Event person) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public void deleteEvent(Event event) {
+    public void deleteEvent(Event target) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -102,11 +102,6 @@ public class ModelStub implements Model {
 
     @Override
     public void updateEvent(Event target, Event editedEvent) {
-        throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
-    public void removePersonFromAllEvents(Person person) {
         throw new AssertionError("This method should not be called.");
     }
 

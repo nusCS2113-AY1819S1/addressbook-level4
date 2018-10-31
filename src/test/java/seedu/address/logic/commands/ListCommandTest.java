@@ -16,10 +16,8 @@ import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,18 +46,16 @@ public class ListCommandTest {
     @Test
     public void equals() {
         String firstSortByParams = "dep";
-        String secondSortByParams = "all people";
-        String thirdSortByParams = "all event";
+        String secondSortByParams = "all";
         DepartmentContainsKeywordsPredicate firstPredicate =
                 new DepartmentContainsKeywordsPredicate(Collections.singletonList("Admin"));
         DepartmentContainsKeywordsPredicate secondPredicate =
                 new DepartmentContainsKeywordsPredicate(Collections.singletonList("Finance"));
-        List<String> showAll = new ArrayList<>();
-        DepartmentContainsKeywordsPredicate thirdPredicate = new DepartmentContainsKeywordsPredicate(showAll);
+        DepartmentContainsKeywordsPredicate thirdPredicate = null;
+
         ListCommand findFirstCommand = new ListCommand(firstSortByParams, firstPredicate);
         ListCommand findSecondCommand = new ListCommand(firstSortByParams, secondPredicate);
         ListCommand findThirdCommand = new ListCommand(secondSortByParams, thirdPredicate);
-        ListCommand findFourthCommand = new ListCommand(thirdSortByParams, thirdPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
@@ -76,9 +72,6 @@ public class ListCommandTest {
         // same object -> returns true
         assertTrue(findThirdCommand.equals(findThirdCommand));
 
-        // same object -> returns true
-        assertTrue(findFourthCommand.equals(findFourthCommand));
-
         // different types -> returns false
         assertFalse(findThirdCommand.equals(1));
 
@@ -90,17 +83,11 @@ public class ListCommandTest {
         assertEquals(findFirstCommand, findFirstCommandCopy);
 
         // same values -> returns true
-        ListCommand findSecondCommandCopy = new ListCommand(secondSortByParams, thirdPredicate);
-        assertEquals(findThirdCommand, findSecondCommandCopy);
-
-        // same values -> returns true
-        ListCommand findSThirdCommandCopy = new ListCommand(thirdSortByParams, thirdPredicate);
-        assertEquals(findFourthCommand, findSThirdCommandCopy);
-
-
+        ListCommand findThirdCommandCopy = new ListCommand(secondSortByParams, thirdPredicate);
+        assertEquals(findThirdCommand, findThirdCommandCopy);
     }
 
-    /*@Test
+    @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         DepartmentContainsKeywordsPredicate predicate = preparePredicate(" ");
@@ -111,7 +98,7 @@ public class ListCommandTest {
         assertCommandSuccess(firstCommand, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
 
-    }*/
+    }
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
@@ -126,22 +113,16 @@ public class ListCommandTest {
     }
 
     @Test
-    public void execute_personListIsNotFiltered_showsSameList() {
-        String sortByParams = "all people";
-        List<String> showAll = new ArrayList<>();
-        DepartmentContainsKeywordsPredicate predicate = new DepartmentContainsKeywordsPredicate(showAll);
-        assertCommandSuccess(new ListCommand(sortByParams, predicate), model, commandHistory,
-                ListCommand.MESSAGE_SUCCESS_PEOPLE, expectedModel);
+    public void execute_listIsNotFiltered_showsSameList() {
+        String sortByParams = "all";
+        assertCommandSuccess(new ListCommand(sortByParams, null), model, commandHistory, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
-    public void execute_personListIsFiltered_showsEverything() {
-        String sortByParams = "all people";
+    public void execute_listIsFiltered_showsEverything() {
+        String sortByParams = "all";
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        List<String> showAll = new ArrayList<>();
-        DepartmentContainsKeywordsPredicate predicate = new DepartmentContainsKeywordsPredicate(showAll);
-        assertCommandSuccess(new ListCommand(sortByParams, predicate), model, commandHistory,
-                ListCommand.MESSAGE_SUCCESS_PEOPLE, expectedModel);
+        assertCommandSuccess(new ListCommand(sortByParams, null), model, commandHistory, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     /**
