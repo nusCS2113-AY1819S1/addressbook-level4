@@ -218,9 +218,9 @@ Format: sort `key word` +
 Example: sort name
 
 === Invite employees: `invite`
-Priority level: `default`,`manager`
+Priority level: all
 
-Invites an employee to an event if the employee was not previously invited. +
+Invites an employee to an event. +
 Format: `invite PERSON_INDEX to/EVENT_INDEX` +
 Example: invite 1 to/2
 
@@ -228,12 +228,13 @@ Example: invite 1 to/2
 * Invites the employee at the specified `PERSON_INDEX` *TO* the event at the specified `EVENT_INDEX`.
 * The index refers to the index number shown in the displayed person list and event list respectively.
 * The index *must be a positive integer* 1, 2, 3, ...
+* Employee should not have already been invited to the selected event.
 ****
 
 === Remove employee: `remove`
 Priority level: `default`,`manager`
 
-Removes an employee from the an event if the employee was previously invited to the event. +
+Removes an employee from the an event. +
 Format/Prompts: `remove PERSON_INDEX  from/EVENT_INDEX` +
 Example: remove 1 from/2
 
@@ -245,7 +246,7 @@ Example: remove 1 from/2
 ****
 
 === Selecting a person: `select`
-Priority level: `default`,`manager`
+Priority level: all
 
 Selects an employee and view the specified employee's events by date, year, month, month and year, or all his/her events. +
 Format/Prompts: +
