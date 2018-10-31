@@ -22,10 +22,7 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.model.event.EventDate;
 import seedu.address.model.event.TimeType;
 
-/**
- * Test scope: similar to {@code DeleteCommandParserTest}.
- * @see DeleteCommandParserTest
- */
+
 public class SelectCommandParserTest {
 
     private SelectCommandParser parser = new SelectCommandParser();
