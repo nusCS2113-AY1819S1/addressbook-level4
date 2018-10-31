@@ -104,9 +104,6 @@ public class AddTestMarksCommandTest {
         addTestMarksCommand.execute(modelStub, commandHistory);
 
     }
-    
-
-
     @Test
     public void equals() {
         Person alice = new PersonBuilder().withName("Alice").build();
