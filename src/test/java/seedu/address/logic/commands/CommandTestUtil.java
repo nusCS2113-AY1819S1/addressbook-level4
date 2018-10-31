@@ -21,6 +21,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -170,6 +171,15 @@ public class CommandTestUtil {
         Person firstPerson = model.getFilteredPersonList().get(0);
         model.deletePerson(firstPerson);
         model.commitAddressBook();
+    }
+
+    /**
+     * Deletes the first event in {@code model}'s filtered list from {@code model}'s event list.
+     */
+    public static void deleteFirstEvent(Model model) {
+        Event firstEvent = model.getFilteredEventList().get(0);
+        model.deleteEvent(firstEvent);
+        model.commitEventList();
     }
 
 }
