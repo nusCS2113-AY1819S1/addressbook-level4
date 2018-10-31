@@ -1,5 +1,5 @@
 package seedu.address.logic.parser;
-
+/*
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
@@ -12,11 +12,11 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_ONE_BASED_FIRST_BOOK;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
+*/
 import org.junit.Rule;
-import org.junit.Test;
+//import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
+/*
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -36,13 +36,13 @@ import seedu.address.model.book.NameContainsKeywordsPredicate;
 import seedu.address.testutil.BookBuilder;
 import seedu.address.testutil.BookUtil;
 import seedu.address.testutil.EditBookDescriptorBuilder;
-
+*/
 public class BookInventoryParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     private final BookInventoryParser parser = new BookInventoryParser();
-/*
+    /*
     @Test
     public void parseCommand_add() throws Exception {
         Book book = new BookBuilder().build();
@@ -143,6 +143,6 @@ public class BookInventoryParserTest {
         thrown.expectMessage(MESSAGE_UNKNOWN_COMMAND);
         parser.parseCommand("unknownCommand");
     }
-*/
+    */
 }
 
