@@ -29,7 +29,7 @@ JitHub is a desktop personal assistant application that allows students to manag
 
 * *Minor enhancement*: added a calendar view where users can view their schedules, enhancing the overall user interface.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]]
 
 * *Other contributions*:
 
@@ -47,8 +47,6 @@ JitHub is a desktop personal assistant application that allows students to manag
 ** Tools:
 *** Integrated a third party library (CalendarFx) to the project (https://github.com[#77])
 
-_{you can add/remove categories in the list above}_
-
 == Contributions to the User Guide
 
 
@@ -56,7 +54,7 @@ _{you can add/remove categories in the list above}_
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=todo]
+include::../UserGuide.adoc[tag=#add-to-do-task-code-todo-code]
 
 == Contributions to the Developer Guide
 
@@ -64,11 +62,9 @@ include::../UserGuide.adoc[tag=todo]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=todo]
+include::../DeveloperGuide.adoc[tag=#todo-feature]
 
 
 == PROJECT: PowerPointLabs
 
 ---
-
-_{Optionally, you may include other projects in your portfolio.}_
