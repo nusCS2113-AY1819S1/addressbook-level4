@@ -37,20 +37,6 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
-    private static final DateTimeFormatter TIME_FORMATTER =
-            new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("h:m a").toFormatter();
-
-    private static final List<DateTimeFormatter> DATE_FORMATTER_LIST =
-            new ArrayList<>(Arrays.asList(
-                    DateTimeFormatter.ofPattern("d-M-yyyy"),
-                    DateTimeFormatter.ofPattern("d/M/yyyy"),
-                    DateTimeFormatter.ofPattern("d.M.yyyy"),
-                    new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("d-MMM-yyyy").toFormatter(),
-                    new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("d MMM yyyy").toFormatter(),
-                    new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("d-MMM-yy").toFormatter(),
-                    new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("d MMM yy").toFormatter()
-            ));
-
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
