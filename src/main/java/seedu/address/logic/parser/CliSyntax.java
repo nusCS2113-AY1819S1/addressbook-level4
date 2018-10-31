@@ -23,14 +23,13 @@ public class CliSyntax {
     public static final Prefix PREFIX_COURSE_FACULTY = new Prefix("f/");
 
     /* Gradebook prefixes */
-    public static final Prefix PREFIX_GRADEBOOK_ITEM = new Prefix("i/");
+    public static final Prefix PREFIX_GRADEBOOK_ITEM = new Prefix("cn/");
     public static final Prefix PREFIX_GRADEBOOK_MAXMARKS = new Prefix("mm/");
     public static final Prefix PREFIX_GRADEBOOK_WEIGHTAGE = new Prefix("w/");
-    public static final Prefix PREFIX_GRADEBOOK_ITEM_EDIT = new Prefix("ei/");
+    public static final Prefix PREFIX_GRADEBOOK_ITEM_EDIT = new Prefix("en/");
 
     /* Grade info prefixes */
     public static final Prefix PREFIX_STUDENT_MARKS = new Prefix("m/");
-    public static final Prefix PREFIX_STUDENT_ADMIN_NO = new Prefix("a/");
 
     /* Module prefixes */
     public static final Prefix PREFIX_MODULE_CODE = new Prefix("mc/");

@@ -2,8 +2,8 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADEBOOK_ITEM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ADMIN_NO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_MARKS;
 
 import java.util.stream.Stream;
@@ -14,6 +14,7 @@ import seedu.address.model.gradebook.GradebookManager;
 import seedu.address.model.grades.Grades;
 import seedu.address.model.grades.GradesManager;
 import seedu.address.model.module.ModuleManager;
+import seedu.address.model.person.MatricNo;
 
 /**
  * Parses input arguments and creates a new GradeAddCommand object
@@ -24,9 +25,11 @@ public class GradeAddCommandParser implements Parser<GradeAddCommand> {
     public static final String MESSAGE_GRADEBOOK_INVALID = "Gradebook component does not exist";
     public static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
     private static final String MESSAGE_MARKS_INVALID = "Marks should be within 0-100 range";
-    private static final String MESSAGE_MARKS_EXCEED = "Marks assigned is above maximum marks.";
     private static final String MESSAGE_DUPLICATE_STUDENT = "Student has already been assigned a grade";
     private static final String MESSAGE_INVALID_STUDENT_ENROL = "Student is not registered to module";
+    private static final String MESSAGE_MATRIC_INVALID = "Matriculation numbers are required to start with A, followed"
+            + " by a combination of 7 numbers and end with a checksum letter, and it should not be blank";
+
     /**
      * Parses the given {@code String args} of arguments in the context of the GradeAddCommand
      * and returns a GradeAddCommand object for execution.
@@ -39,12 +42,12 @@ public class GradeAddCommandParser implements Parser<GradeAddCommand> {
         float studentMarksArg = 0;
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULE_CODE, PREFIX_GRADEBOOK_ITEM,
-                PREFIX_STUDENT_ADMIN_NO, PREFIX_STUDENT_MARKS);
+                PREFIX_MATRIC, PREFIX_STUDENT_MARKS);
 
         if (!arePrefixesPresent(argMultimap,
                 PREFIX_MODULE_CODE,
                 PREFIX_GRADEBOOK_ITEM,
-                PREFIX_STUDENT_ADMIN_NO,
+                PREFIX_MATRIC,
                 PREFIX_STUDENT_MARKS)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(
@@ -52,6 +55,14 @@ public class GradeAddCommandParser implements Parser<GradeAddCommand> {
                     GradeAddCommand.MESSAGE_USAGE));
         }
 
+        String moduleCodeArg = argMultimap.getValue(PREFIX_MODULE_CODE).get();
+        String studentAdminNoArg = argMultimap.getValue(PREFIX_MATRIC).get();
+
+        String gradeComponentNameArg = argMultimap.getValue(PREFIX_GRADEBOOK_ITEM).get();
+        boolean isEmpty = gradesManager.isEmpty(moduleCodeArg, gradeComponentNameArg, studentAdminNoArg);
+        if (isEmpty) {
+            throw new ParseException(MESSAGE_MISSING_PARAMS);
+        }
         if (arePrefixesPresent(argMultimap, PREFIX_STUDENT_MARKS) || !argMultimap.getPreamble().isEmpty()) {
             try {
                 studentMarksArg = Float.parseFloat(argMultimap.getValue(PREFIX_STUDENT_MARKS).get());
@@ -59,25 +70,25 @@ public class GradeAddCommandParser implements Parser<GradeAddCommand> {
                 throw new ParseException(MESSAGE_MARKS_ERROR);
             }
         }
-
-        String moduleCodeArg = argMultimap.getValue(PREFIX_MODULE_CODE).get();
-        String studentAdminNoArg = argMultimap.getValue(PREFIX_STUDENT_ADMIN_NO).get();
-        String gradeComponentNameArg = argMultimap.getValue(PREFIX_GRADEBOOK_ITEM).get();
-        boolean isEmpty = gradesManager.isEmpty(moduleCodeArg, gradeComponentNameArg, studentAdminNoArg);
-        if (isEmpty) {
-            throw new ParseException(MESSAGE_MISSING_PARAMS);
+        boolean isMatricValid = MatricNo.isValidMatricNo(studentAdminNoArg);
+        if (!isMatricValid) {
+            throw new ParseException(MESSAGE_MATRIC_INVALID);
         }
         boolean doesModuleExist = moduleManager.doesModuleExist(moduleCodeArg);
         if (!doesModuleExist) {
             throw new ParseException(MESSAGE_MODULE_CODE_INVALID);
         }
-        boolean isStudentEnrolledToModule = gradesManager.isStudentEnrolledToModule(moduleCodeArg, studentAdminNoArg);
-        if (!isStudentEnrolledToModule) {
-            throw new ParseException(MESSAGE_INVALID_STUDENT_ENROL);
-        }
-        boolean isGradeComponentValid = gradebookManager.isGradeComponentValid(moduleCodeArg, gradeComponentNameArg);
+        boolean isGradeComponentValid = gradebookManager.isGradeComponentValid(
+                moduleCodeArg,
+                gradeComponentNameArg);
         if (!isGradeComponentValid) {
             throw new ParseException(MESSAGE_GRADEBOOK_INVALID);
+        }
+        boolean isStudentEnrolledToModule = gradesManager.isStudentEnrolledToModule(
+                moduleCodeArg,
+                studentAdminNoArg);
+        if (!isStudentEnrolledToModule) {
+            throw new ParseException(MESSAGE_INVALID_STUDENT_ENROL);
         }
         boolean isDuplicate = gradesManager.isDuplicate(moduleCodeArg, gradeComponentNameArg, studentAdminNoArg);
         if (isDuplicate) {
@@ -86,10 +97,6 @@ public class GradeAddCommandParser implements Parser<GradeAddCommand> {
         boolean isMarksValid = gradesManager.isMarksValid(studentMarksArg);
         if (!isMarksValid) {
             throw new ParseException(MESSAGE_MARKS_INVALID);
-        }
-        boolean hasMarksExceed = gradebookManager.hasMarksExceed(moduleCodeArg, gradeComponentNameArg, studentMarksArg);
-        if (!hasMarksExceed) {
-            throw new ParseException(MESSAGE_MARKS_EXCEED);
         }
         Grades grade = new Grades(
                 moduleCodeArg,

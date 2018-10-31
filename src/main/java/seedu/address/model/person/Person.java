@@ -130,10 +130,8 @@ public class Person {
                 .append(" Email: ")
                 .append(getEmail())
                 .append(" Address: ")
-                .append(getAddress())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
-        builder.append("Course Code: ").append(getCourseCode()).append("Matric No: ").append(getMatricNo());
+                .append(getAddress());
+        builder.append(" Course Code: ").append(getCourseCode()).append(" Matric No: ").append(getMatricNo());
         return builder.toString();
     }
 

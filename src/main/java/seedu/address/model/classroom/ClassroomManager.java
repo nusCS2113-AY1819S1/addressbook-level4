@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.StorageController;
+import seedu.address.model.module.ModuleManager;
+import seedu.address.model.student.StudentManager;
 import seedu.address.storage.adapter.XmlAdaptedClassroom;
 import seedu.address.storage.adapter.XmlAdaptedClassroomAttendance;
 
@@ -69,7 +71,7 @@ public class ClassroomManager {
         return classroom.getAttendanceList()
                 .stream()
                 .anyMatch(attendance -> attendance.getDate().equalsIgnoreCase(date)
-                            && attendance.getStudentsPresent().contains(matricNo));
+                        && attendance.getStudentsPresent().contains(matricNo));
     }
 
     /**
@@ -83,6 +85,8 @@ public class ClassroomManager {
      * Gets the classroom list from storage and converts it to a Classroom array list
      */
     private void readClassroomList() {
+        ModuleManager moduleManager = ModuleManager.getInstance();
+        StudentManager studentManager = StudentManager.getInstance();
         ArrayList<XmlAdaptedClassroom> xmlClassroomList = StorageController.getClassesStorage();
         ArrayList<XmlAdaptedClassroomAttendance> xmlClassroomAttendanceList =
                 StorageController.getClassAttendanceStorage();
@@ -90,10 +94,23 @@ public class ClassroomManager {
         for (XmlAdaptedClassroom xmlClassroom : xmlClassroomList) {
             try {
                 Classroom classroom = xmlClassroom.toModelType();
+                if (!moduleManager.doesModuleExist(classroom.getModuleCode().moduleCode)) {
+                    continue;
+                }
+                ArrayList<String> studentsAssigned = classroom.getStudents();
+                ArrayList<String> modelStudentsAssigned = new ArrayList<>();
+                classroom.setStudents(modelStudentsAssigned);
+                for (String matricNo : studentsAssigned) {
+                    if (studentManager.doesStudentExistForGivenMatricNo(matricNo)) {
+                        if (!isClassroomFull(classroom)) {
+                            classroom.getStudents().add(matricNo);
+                        }
+                    }
+                }
                 classroomList.add(classroom);
                 readAttendanceList(xmlClassroomAttendanceList, classroom);
-            } catch (IllegalValueException e) {
-                logger.info("Illegal values found when reading classroom list: " + e.getMessage());
+            } catch (IllegalValueException ive) {
+                logger.info("Illegal values found when reading classroom list: " + ive.getMessage());
             }
         }
     }
@@ -103,11 +120,13 @@ public class ClassroomManager {
      */
     private void readAttendanceList(ArrayList<XmlAdaptedClassroomAttendance> xmlClassroomAttendanceList,
                                     Classroom classroom) throws IllegalValueException {
-        if (xmlClassroomAttendanceList.size() == 0) {
+        if (xmlClassroomAttendanceList == null || xmlClassroomAttendanceList.size() == 0) {
             for (Classroom c : classroomList) {
                 c.getAttendanceList().add(new Attendance());
             }
         }
+
+        assert xmlClassroomAttendanceList != null;
         for (XmlAdaptedClassroomAttendance xmlClassroomAttendance : xmlClassroomAttendanceList) {
             if (xmlClassroomAttendance.getClassName().equalsIgnoreCase(classroom.getClassName().getValue())
                     && xmlClassroomAttendance.getModuleCode().equalsIgnoreCase(
@@ -251,5 +270,13 @@ public class ClassroomManager {
      */
     public boolean isStudentAttendanceMarked(Attendance attendance, String matricNo) {
         return attendance.getStudentsPresent().contains(matricNo);
+    }
+
+    /**
+     * Returns whether a classroom is full
+     */
+    public boolean isClassroomFull(Classroom classToAssignStudent) {
+        int maxEnrollment = Integer.parseInt(classToAssignStudent.getMaxEnrollment().getValue());
+        return classToAssignStudent.getStudents().size() >= maxEnrollment;
     }
 }

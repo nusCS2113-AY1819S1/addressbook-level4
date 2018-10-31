@@ -18,21 +18,22 @@ import seedu.address.model.gradebook.GradebookManager;
  */
 public class GradebookEditCommand extends Command {
     public static final String COMMAND_WORD = "gradebook edit";
-    public static final String MESSAGE_EDIT_GRADEBOOK_SUCCESS = "Successfully edited!";
-    public static final String MESSAGE_FIND_FAIL = "Unsuccessful find";
+    public static final String MESSAGE_EDIT_GRADEBOOK_SUCCESS = "Edit success! \nNo of grade component: ";
+    public static final String MESSAGE_FIND_FAIL = "Gradebook component does not exist!";
+    public static final String MESSAGE_DUPLICATE_COMPONENT_NAME = "Edited component name already exist";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a gradebook component to Trajectory. "
             + "\nParameters: "
             + PREFIX_MODULE_CODE + "MODULE CODE  "
-            + PREFIX_GRADEBOOK_ITEM + "COMPONENT NAME "
-            + PREFIX_GRADEBOOK_ITEM_EDIT + "[EDITED COMPONENT NAME] "
-            + PREFIX_GRADEBOOK_MAXMARKS + "[EDITED MAX MARKS] "
-            + PREFIX_GRADEBOOK_WEIGHTAGE + "[EDITED WEIGHTAGE]"
+            + PREFIX_GRADEBOOK_ITEM + "COMPONENT NAME ["
+            + PREFIX_GRADEBOOK_ITEM_EDIT + "EDITED COMPONENT NAME] ["
+            + PREFIX_GRADEBOOK_MAXMARKS + "EDITED MAX MARKS] ["
+            + PREFIX_GRADEBOOK_WEIGHTAGE + "EDITED WEIGHTAGE]"
             + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_MODULE_CODE + "CS2113 "
-            + PREFIX_GRADEBOOK_ITEM + "Assignment 1 "
-            + PREFIX_GRADEBOOK_ITEM_EDIT + "Finals "
-            + PREFIX_GRADEBOOK_MAXMARKS + "60 "
-            + PREFIX_GRADEBOOK_WEIGHTAGE + "50";
+            + PREFIX_GRADEBOOK_ITEM + "Assignment 1 ["
+            + PREFIX_GRADEBOOK_ITEM_EDIT + "Finals] ["
+            + PREFIX_GRADEBOOK_MAXMARKS + "60] ["
+            + PREFIX_GRADEBOOK_WEIGHTAGE + "50]";
     private static final String MESSAGE_INVALID_ENTRY = "You need to fill in at least one optional parameter!";
     private final Gradebook toEditGradebookItem;
     public GradebookEditCommand (Gradebook gradebookComponent) {
@@ -42,7 +43,6 @@ public class GradebookEditCommand extends Command {
     @Override
     public CommandResult execute (Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        String status = MESSAGE_EDIT_GRADEBOOK_SUCCESS;
         String newGradeComponentName = toEditGradebookItem.getgradebookNewComponentName();
         int newMaxMarks = toEditGradebookItem.getGradeComponentMaxMarks();
         int newWeightage = toEditGradebookItem.getGradeComponentWeightage();
@@ -51,6 +51,9 @@ public class GradebookEditCommand extends Command {
         Gradebook gradebook = gradebookManager.findGradebookComponent(
                 toEditGradebookItem.getModuleCode(),
                 toEditGradebookItem.getGradeComponentName());
+        Gradebook checkIfComponentNameExist = gradebookManager.findGradebookComponent(
+                toEditGradebookItem.getModuleCode(),
+                toEditGradebookItem.getgradebookNewComponentName());
         if (gradebook == null) {
             return new CommandResult(MESSAGE_FIND_FAIL);
         }
@@ -58,7 +61,11 @@ public class GradebookEditCommand extends Command {
             return new CommandResult(MESSAGE_INVALID_ENTRY);
         }
         if (!toEditGradebookItem.getgradebookNewComponentName().equals("")) {
-            gradebook.setGradeComponentName(toEditGradebookItem.getgradebookNewComponentName());
+            if (checkIfComponentNameExist == null) {
+                gradebook.setGradeComponentName(toEditGradebookItem.getgradebookNewComponentName());
+            } else {
+                return new CommandResult(MESSAGE_DUPLICATE_COMPONENT_NAME);
+            }
         }
         if (toEditGradebookItem.getGradeComponentMaxMarks() != 0) {
             gradebook.setgradebookMaxMarks(toEditGradebookItem.getGradeComponentMaxMarks());
@@ -67,7 +74,8 @@ public class GradebookEditCommand extends Command {
             gradebook.setgradebookWeightage(toEditGradebookItem.getGradeComponentWeightage());
         }
         gradebookManager.saveGradebookList();
-
-        return new CommandResult(status);
+        String gradebookList = gradebookManager.listGradebookComponent();
+        int size = gradebookManager.getGradebookSize();
+        return new CommandResult(MESSAGE_EDIT_GRADEBOOK_SUCCESS + size + "\n" + "", gradebookList);
     }
 }

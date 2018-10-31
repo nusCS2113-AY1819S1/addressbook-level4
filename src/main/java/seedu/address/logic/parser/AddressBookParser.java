@@ -20,6 +20,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CourseAddCommand;
 import seedu.address.logic.commands.CourseDeleteCommand;
 import seedu.address.logic.commands.CourseListCommand;
+import seedu.address.logic.commands.CourseListStudentsCommand;
 import seedu.address.logic.commands.DebugCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -39,6 +40,7 @@ import seedu.address.logic.commands.ModuleDeleteCommand;
 import seedu.address.logic.commands.ModuleEditCommand;
 import seedu.address.logic.commands.ModuleEnrolCommand;
 import seedu.address.logic.commands.ModuleListCommand;
+import seedu.address.logic.commands.ModuleViewCommand;
 import seedu.address.logic.commands.NoteAddCommand;
 import seedu.address.logic.commands.NoteDeleteCommand;
 import seedu.address.logic.commands.NoteEditCommand;
@@ -122,6 +124,9 @@ public class AddressBookParser {
         case CourseListCommand.COMMAND_WORD:
             return new CourseListCommand();
 
+        case CourseListStudentsCommand.COMMAND_WORD:
+            return new CourseListStudentsCommand();
+
         case CourseDeleteCommand.COMMAND_WORD:
             return new CourseDeleteCommandParser().parse(arguments);
 
@@ -172,6 +177,9 @@ public class AddressBookParser {
 
         case ModuleDeleteCommand.COMMAND_WORD:
             return new ModuleDeleteCommandParser().parse(arguments);
+
+        case ModuleViewCommand.COMMAND_WORD:
+            return new ModuleViewCommandParser().parse(arguments);
 
         case ModuleListCommand.COMMAND_WORD:
             return new ModuleListCommand();

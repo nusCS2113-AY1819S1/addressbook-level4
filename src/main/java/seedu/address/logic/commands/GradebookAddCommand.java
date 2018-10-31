@@ -17,20 +17,19 @@ import seedu.address.model.gradebook.GradebookManager;
 public class GradebookAddCommand extends Command {
 
     public static final String COMMAND_WORD = "gradebook add";
-    public static final String MESSAGE_ADD_SUCCESS = "\nSuccessfully Added! \nModule Code: %1$s"
-            + "\nGradebook Component Name: %2$s" + "\nMaximum Marks: %3$s" + "\nWeightage: %4$s";
+    public static final String MESSAGE_ADD_SUCCESS = "\nSuccessfully Added! \n Number of grade components: ";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a gradebook component to Trajectory. "
             + "\nParameters: "
             + PREFIX_MODULE_CODE + "MODULE CODE  "
-            + PREFIX_GRADEBOOK_ITEM + "ITEM "
-            + PREFIX_GRADEBOOK_MAXMARKS + "[MAX MARKS] "
-            + PREFIX_GRADEBOOK_WEIGHTAGE + "[WEIGHTAGE] "
+            + PREFIX_GRADEBOOK_ITEM + "COMPONENT_NAME ["
+            + PREFIX_GRADEBOOK_MAXMARKS + "MAX MARKS] ["
+            + PREFIX_GRADEBOOK_WEIGHTAGE + "WEIGHTAGE] "
             + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_MODULE_CODE + "CS2113 "
-            + PREFIX_GRADEBOOK_ITEM + "Assignment 1 "
-            + PREFIX_GRADEBOOK_MAXMARKS + "60 "
-            + PREFIX_GRADEBOOK_WEIGHTAGE + "50";
+            + PREFIX_GRADEBOOK_ITEM + "Assignment 1 ["
+            + PREFIX_GRADEBOOK_MAXMARKS + "60] ["
+            + PREFIX_GRADEBOOK_WEIGHTAGE + "50]";
 
     private final Gradebook toAddGradebookItem;
 
@@ -43,13 +42,10 @@ public class GradebookAddCommand extends Command {
         GradebookManager gradebookManager = new GradebookManager();
         gradebookManager.addGradebookComponent(toAddGradebookItem);
         gradebookManager.saveGradebookList();
+        String gradebookList = gradebookManager.listGradebookComponent();
+        int size = gradebookManager.getGradebookSize();
 
-        return new CommandResult(String.format(
-                MESSAGE_ADD_SUCCESS,
-                toAddGradebookItem.getModuleCode(),
-                toAddGradebookItem.getGradeComponentName(),
-                toAddGradebookItem.getGradeComponentMaxMarks(),
-                toAddGradebookItem.getGradeComponentWeightage()));
+        return new CommandResult(MESSAGE_ADD_SUCCESS + size + "\n" + "", gradebookList);
     }
 
     @Override

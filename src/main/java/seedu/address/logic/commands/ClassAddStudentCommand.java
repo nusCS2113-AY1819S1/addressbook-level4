@@ -10,6 +10,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.ClassroomManager;
+import seedu.address.model.module.ModuleManager;
+import seedu.address.model.student.StudentManager;
 
 /**
  * Assigns a student to an existing class.
@@ -34,6 +36,9 @@ public class ClassAddStudentCommand extends Command {
     private static final String MESSAGE_FAIL = "Class belonging to module not found!";
 
     private static final String MESSAGE_DUPLICATE_CLASSROOM_STUDENT = "This student already exists in class: %1$s";
+    private static final String MESSAGE_INVALID_STUDENT = "Student does not exist";
+    private static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
+    private static final String MESSAGE_CLASSROOM_FULL = "The classroom is full!";
 
     private Classroom classToAssignStudent;
     private final String className;
@@ -41,7 +46,7 @@ public class ClassAddStudentCommand extends Command {
     private final String matricNo;
 
     public ClassAddStudentCommand(String className, String moduleCode, String matricNo) {
-        requireAllNonNull(className, moduleCode);
+        requireAllNonNull(className, moduleCode, matricNo);
         this.className = className;
         this.moduleCode = moduleCode;
         this.matricNo = matricNo;
@@ -58,6 +63,16 @@ public class ClassAddStudentCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         ClassroomManager classroomManager = ClassroomManager.getInstance();
+        ModuleManager moduleManager = ModuleManager.getInstance();
+        StudentManager studentManager = StudentManager.getInstance();
+
+        if (!moduleManager.doesModuleExist(moduleCode)) {
+            throw new CommandException(MESSAGE_MODULE_CODE_INVALID);
+        }
+
+        if (!studentManager.doesStudentExistForGivenMatricNo(matricNo)) {
+            throw new CommandException(MESSAGE_INVALID_STUDENT);
+        }
 
         classToAssignStudent = classroomManager.findClassroom(className, moduleCode);
         if (classToAssignStudent == null) {
@@ -66,6 +81,10 @@ public class ClassAddStudentCommand extends Command {
 
         if (classroomManager.isDuplicateClassroomStudent(classToAssignStudent, matricNo)) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_CLASSROOM_STUDENT, matricNo));
+        }
+
+        if (classroomManager.isClassroomFull(classToAssignStudent)) {
+            throw new CommandException(MESSAGE_CLASSROOM_FULL);
         }
 
         classroomManager.assignStudent(classToAssignStudent, matricNo);

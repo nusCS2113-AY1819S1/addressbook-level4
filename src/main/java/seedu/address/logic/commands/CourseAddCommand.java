@@ -21,9 +21,9 @@ public class CourseAddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a course into Trajectory. "
             + "Parameters: "
-            + PREFIX_COURSE_CODE + "COURSE_CODE"
-            + PREFIX_COURSE_NAME + "COURSE_NAME"
-            + PREFIX_COURSE_FACULTY + "COURSE_ORIGIN_FACULTY"
+            + PREFIX_COURSE_CODE + "COURSE_CODE "
+            + PREFIX_COURSE_NAME + "COURSE_NAME "
+            + PREFIX_COURSE_FACULTY + "COURSE_ORIGIN_FACULTY "
             + "\n"
             + "Example: "
             + COMMAND_WORD + " "

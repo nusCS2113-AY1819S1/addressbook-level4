@@ -73,15 +73,14 @@ public class XmlAdaptedClassroomAttendance {
             throw new IllegalValueException(Attendance.MESSAGE_DATE_CONSTRAINTS);
         }
 
+        ArrayList<String> modelStudentsPresent = new ArrayList<>();
+
         for (String matricNo : studentsPresent) {
-            if (matricNo == null) {
-                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                        MatricNo.class.getSimpleName()));
-            }
-            if (!MatricNo.isValidMatricNo(matricNo)) {
-                throw new IllegalValueException(MatricNo.MESSAGE_MATRIC_NO_CONSTRAINTS);
+            if (MatricNo.isValidMatricNo(matricNo)) {
+                modelStudentsPresent.add(matricNo);
             }
         }
-        return new Attendance(date, studentsPresent);
+
+        return new Attendance(date, modelStudentsPresent);
     }
 }
