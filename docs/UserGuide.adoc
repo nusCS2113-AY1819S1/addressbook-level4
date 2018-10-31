@@ -735,15 +735,17 @@ e.g. `class listattendance cn/T16 mc/CG1111`
 e.g. `class markattendance cn/T16 mc/CG1111 i/A6942069M`
 * *Modifying class attendance list* `class modattendance cn/CLASS_NAME mc/MODULE_CODE i/MATRIC_NO` +
 e.g. `class modattendance cn/T16 mc/CG1111 i/A6942069M`
-* *Add a note* `note add m/MODULE_CODE [d/DATE]` +
-e.g. `note add m/CS2040C`
-* *List notes* `note list [m/MODULE_CODE]` +
-e.g. `note list m/CS2040C`
+* *Add a note* `note add mc/MODULE_CODE [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME] [lc/LOCATION]` +
+e.g. `note add mc/CS2040C`
+* *List notes* `note list [mc/MODULE_CODE]` +
+e.g. `note list mc/CS2040C`
 * *Delete a note* `note delete INDEX` +
 e.g. `note delete 8`
-* *Edit a note* `note edit INDEX [m/MODULE_CODE] [d/DATE]` `[Coming in v1.3]` +
-e.g. `note edit 5 m/CS2040C`
-* *Find a note* `note find k/KEYWORD [k/KEYWORD]..` `[Coming in v1.3]` +
+* *Edit a note* `note edit INDEX [mc/NEW_MODULE_CODE] [sd/NEW_START_DATE] [st/NEW_START_TIME] [ed/NEW_END_DATE] [et/NEW_END_TIME] [lc/NEW_LOCATION]` +
+e.g. `note edit 5 mc/CS2040C`
+* *Find a note* `note find k/KEYWORD [k/MORE_KEYWORDS]..` +
 e.g. `note find k/bubble k/queue`
+* *Export notes* `note export fn/FILE_NAME` +
+e.g. `note export fn/notes`
 * *History* : `history`
 
