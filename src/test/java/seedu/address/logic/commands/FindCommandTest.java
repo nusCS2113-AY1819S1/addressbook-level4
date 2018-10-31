@@ -84,7 +84,7 @@ public class FindCommandTest {
 
     //***************************Testing no keyword input for prefixes*************************************************
     @Test
-    public void execute_zeroKeywordsOnePrefix_noEventFound() {
+    public void execute_zeroKeywordOnePrefix_noEventFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 0);
         EventContainsKeywordsPredicate predicate = preparePredicate(" k/");
 
@@ -95,7 +95,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywordsMultiplePrefixes_noEventFound() {
+    public void execute_zeroKeywordMultiplePrefixes_noEventFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 0);
         EventContainsKeywordsPredicate predicate = preparePredicate(" k/ n/ c/ d/");
 
@@ -106,9 +106,9 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywordPrefix_multipleKeywordPrefixes_noEventFound() {
+    public void execute_zeroKeywordMultiplePrefixes_multipleKeywordsMultiplePrefixes_noEventFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 0);
-        EventContainsKeywordsPredicate predicate = preparePredicate(" k/ t/Friends n/Art c/ d/");
+        EventContainsKeywordsPredicate predicate = preparePredicate(" k/ t/Friends love n/Art c/ d/");
 
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredEventList(predicate);
@@ -117,7 +117,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywordPrefix_keywordsSamePrefixes_oneEventFound() {
+    public void execute_zeroKeywordOnePrefix_multipleKeywordsMultipleSamePrefixes_oneEventFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1);
         EventContainsKeywordsPredicate predicate = preparePredicate(" c/ c/Daniel c/");
 
