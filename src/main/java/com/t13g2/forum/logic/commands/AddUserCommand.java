@@ -51,12 +51,9 @@ public class AddUserCommand extends Command {
             if (unitOfWork.getUserRepository().getUserByUsername(userToAdd.getUsername()) != null) {
                 exist = true;
             }
-
-           } catch (EntityDoesNotExistException ex) {
+        } catch (EntityDoesNotExistException ex) {
             exist = false;
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
             exist = true;
             e.printStackTrace();
         }
@@ -64,8 +61,7 @@ public class AddUserCommand extends Command {
         if (!exist) {
             unitOfWork.getUserRepository().addUser(userToAdd);
             unitOfWork.commit();
-        }
-        else {
+        } else {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_PERSON));
             //return new CommandResult(String.format(MESSAGE_DUPLICATE_PERSON, userToAdd.getUsername()));
         }
