@@ -40,7 +40,7 @@ Responsibilities: Data
 
 === Lu Han
 image::luhan02.png[width="150", align="left"]
-{empty}[https://github.com/luhan02[github]]
+{empty}[https://github.com/luhan02[github]][<<luhan#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Testing

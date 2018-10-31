@@ -57,47 +57,63 @@ priority to the Address Book.
 
 Format: `help`
 
-=== Adding a task: `task`
+=== Adding a person: `add`
 
-Adds a task to the schedule planner +
-Format: `task n/NAME b/BODY s/START_DATETIME e/END_DATETIME [t/TAG]... p/PRIORITY`
+Adds a person to the address book +
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 
 [TIP]
-A task can have any number of tags (including 0). A task can only have its start and end DATE (without specific TIME).
-
-
-
-
+A person can have any number of tags (including 0)
 
 Examples:
 
-* `task n/Buy stationary e/25/10 p/LOW`
-* `tsak n/Attend PostModern JukeBox concert e/180918_2000 p/HIGH`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-=== Listing all tasks : `listTask`
+=== Listing all persons : `list`
 
-Shows a list of all tasks in the schedule planner. +
-Format: `listTask`
+Shows a list of all persons in the address book. +
+Format: `list`
 
-=== Editing a task : `edit`
+=== Editing a person : `edit`
 
-Edits an existing task in the schedule planner. +
-Format: `edit INDEX [n/NAME] [b/BODY] [s/START_DATETIME] [e/END_DATETIME] [t/TAG]... [p/PRIORITY]`
+Edits an existing person in the address book. +
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 ****
-* Edits the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
-* You can remove all the task's tags by typing `t/` without specifying any tags after it.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person's tags by typing `t/` without specifying any tags after it.
 ****
 
 Examples:
 
-* `edit 1 b/Need two pens` +
-Edits the body of the 1st task to be `Need two pens`.
-* `edit 2 t/` +
-Edits the 2nd task by clearing all existing tags.
+* `edit 1 p/91234567 e/johndoe@example.com` +
+Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower t/` +
+Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+=== Locating persons by name: `find`
+
+Finds persons whose names contain any of the given keywords. +
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+****
+
+Examples:
+
+* `find John` +
+Returns `john` and `John Doe`
+* `find Betsy Tim John` +
+Returns any person having names `Betsy`, `Tim`, or `John`
 
 === Locating contacts by address: `findaddress`
 
@@ -157,45 +173,45 @@ Returns `98835761` and the contact with that phone number
 * `findaddress 98835761 87438807` +
 Returns any contacts having phone number or body that contains `98835761`, or `87438807`
 
-=== Locating tasks by name: `find`
+=== Deleting a person : `delete`
 
-Finds tasks whose names or body contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name and body is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* tasks matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-****
-
-Examples:
-
-* `find Pen` +
-Returns `pen` and `Pen pineapple pen`
-* `find concert meeting cute` +
-Returns any task having names or body `concert`, `meeting`, or `cute`
-
-=== Deleting a task : `deleteTask`
-
-Deletes the specified task from the schedule planner. +
+Deletes the specified person from the address book. +
 Format: `delete INDEX`
 
 ****
-* Deletes the task at the specified `INDEX`.
-* The index refers to the index number shown in the displayed task list.
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
 
 Examples:
 
-* `listTask` +
-`deleteTask 2` +
-Deletes the 2nd task in the schedule planner.
-* `find Pen` +
-`deleteTask 1` +
-Deletes the 1st task in the results of the `find` command.
+* `list` +
+`delete 2` +
+Deletes the 2nd person in the address book.
+* `find Betsy` +
+`delete 1` +
+Deletes the 1st person in the results of the `find` command.
+
+=== Selecting a person : `select`
+
+Selects the person identified by the index number used in the displayed person list. +
+Format: `select INDEX`
+
+****
+* Selects the person and loads the Google search page the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+****
+
+Examples:
+
+* `list` +
+`select 2` +
+Selects the 2nd person in the address book.
+* `find Betsy` +
+`select 1` +
+Selects the 1st person in the results of the `find` command.
 
 === Listing entered commands : `history`
 
@@ -210,12 +226,12 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 // tag::undoredo[]
 === Undoing previous command : `undo`
 
-Restores the schedule planner to the state before the previous _undoable_ command was executed. +
+Restores the address book to the state before the previous _undoable_ command was executed. +
 Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the schedule planner's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
 ====
 
 Examples:
@@ -256,16 +272,6 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `delete 1` command) +
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
-
-=== Clearing all entries : `clear`
-
-Clears all entries from the schedule planner. +
-Format: `clear`
-
-=== Exiting the program : `exit`
-
-Exits the program. +
-Format: `exit`
 
 //@@author ChenSongJian
 // tag::expense[]
@@ -389,14 +395,89 @@ Displays the monthly expense data for November 2018 in a new window
 // end::expense[]
 //@@author
 
+//@@author luhan02
+// tag::tasks[]
+=== Adding a task: `task`
+
+Adds a task to the schedule planner +
+Format: `task n/NAME b/BODY s/START_DATETIME e/END_DATETIME [t/TAG]... p/PRIORITY`
+
+[TIP]
+A task can only have its start and end DATE (without specific TIME). A task can have any number of tags (including 0).
+
+Examples:
+
+* `task n/Submit Assignment b/CG2027 Assign2 s/18/10 e/25/10_1400 p/HIGH t/Hardcopy`
+* `task n/Submit Quiz b/MA1508E Quzi11 s/29/10_0000 e/4/11_2200 p/MED t/IVLE`
+
+=== Listing all tasks : `listTask`
+
+Shows a list of all tasks from task book in the schedule planner. +
+Format: `listTask`
+
+=== Editing a task : `updateTask` `[Coming in v1.4]`
+
+Update an existing task in the schedule planner. +
+Format: `updateTask INDEX [n/NAME] [b/BODY] [s/START_DATETIME] [e/END_DATETIME] [t/TAG]... [p/PRIORITY]`
+
+****
+* Edits the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
+* You can remove all the task's tags by typing `t/` without specifying any tags after it.
+****
+
+Examples:
+
+* `updateTask 1 b/Need two pens` +
+Edits the body of the 1st task to be `Need two pens`.
+* `updateTask 2 t/` +
+Edits the 2nd task by clearing all existing tags.
+
+=== Locating tasks by name: `findTask` `[Coming in v1.4]`
+
+Finds tasks whose names or body contain any of the given keywords. +
+Format: `findTask KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name and body is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* tasks matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+****
+
+Examples:
+
+* `find Pen` +
+Returns `pen` and `Pen pineapple pen`
+* `find concert meeting cute` +
+Returns any task having names or body `concert`, `meeting`, or `cute`
+
+=== Deleting a task : `deleteTask`
+
+Deletes the specified task from the task book in the schedule planner. +
+Format: `deleteTask INDEX`
+
+****
+* Deletes the task at the specified `INDEX`.
+* The index refers to the index number shown in the displayed task list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `listTask` +
+`deleteTask 2` +
+Deletes the 2nd task from the task book.
+// end::tasks[]
+//@@author
+
 === Saving the data
 
 Schedule planner data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
-
-=== Sending notification
-
-Alert user when a deadline is due
 
 //@@author QzSG
 // tag::databackup[]
@@ -441,6 +522,16 @@ Restores Student Planner data on GitHub Gists.
 * If that happens, do proceed to first create a backup using `backup` command.
 ****
 //@@author
+
+=== Clearing all entries : `clear`
+
+Clears all entries from the schedule planner. +
+Format: `clear`
+
+=== Exiting the program : `exit`
+
+Exits the program. +
+Format: `exit`
 
 === Configure backup and restore settings `[coming in v2.0]`
 Allow user to configure backup settings (configure and save cloud services authentication tokens like GitHub gists or Google Drive, backup location) by calling `backup doctor`
@@ -496,5 +587,16 @@ e.g. `editExpense 2 c/Travel v/998.00`
 * *ExpenseTrend* : `expenseTrend`
 * *MonthlyExpense* : `monthlyExpense MM/YYYY` +
 e.g. `monthlyExpense 11/2018`
+//@@author
+
+//@@author luhan02
+* *AddTask* : `task n/NAME b/BODY s/START_DATETIME e/END_DATETIME [t/TAG]... p/PRIORITY` +
+e.g. `task n/Submit Assignment b/CG2027 Assign2 s/18/10 e/25/10_1400 p/HIGH t/Hardcopy`
+* *ListTask* : `listTask`
+* *FindTask* : `findTask KEYWORD [MORE_KEYWORDS]`
+* *EditTask* : `updateTask INDEX [n/NAME] [b/BODY] [s/START_DATETIME] [e/END_DATETIME] [t/TAG]... [p/PRIORITY]` +
+e.g. `updateTask 2`
+* *DeleteTask* : `deleteTask INDEX` +
+e.g. `deleteTask 2 `
 //@@author
 

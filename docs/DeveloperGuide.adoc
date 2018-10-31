@@ -357,7 +357,11 @@ Given below is an example usage scenario and how the CRUD mechanism behaves at e
 
 Step 1. The user launches the application for the first time. The Student Planner will be initialized with the initial task planner state.
 
+image::taskStartingStateListDiagram.png[width="800"]
+
 Step 2. The user executes `add t/submission ...` command to add a new submission task to the student planner. The `add` command calls `Model#addTask()` which returns a task to be shown in the task list.
+
+image::taskCommand1StateListDiagram.png[width="700"]
 
 Step 3. The user executes  `find ...` command to search any existing task. The `find` command calls `Model#findTask()` and it does not modify the student planner, the studentPlannerStateList remains unchanged.
 
