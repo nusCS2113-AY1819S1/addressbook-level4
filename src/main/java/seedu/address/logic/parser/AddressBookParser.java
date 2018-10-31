@@ -100,7 +100,6 @@ public class AddressBookParser {
         case AddSkillCommand.COMMAND_WORD:
             return new AddSkillCommandParser().parse(arguments);
 
-
         case AddSkillLevelCommand.COMMAND_WORD:
             return new AddSkillLevelCommandParser().parse(arguments);
 
