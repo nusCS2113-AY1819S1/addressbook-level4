@@ -124,7 +124,7 @@ keep the company running:
 This is taken into account in *[blue]#_Drink I/O_#*. Each role has a different type of *[blue]#_Drink I/O_#*
 account, and in a specific role, you can work with functions that are tailored to your role.
 
-=== Stocktaker
+=== Stock Taker
 === Accountant
 === Administrator
 
@@ -151,42 +151,47 @@ To add new drinks into your company's offer listing, you can carry out the steps
 ==== Updating sales price
 
 == Managing Transactions
+Buying and selling likely occurs frequently in your company. To manage the ins and outs of your drinks,
+you can record your sales and imports of drinks into *[blue]#_Drink I/O_#*, and let *[blue]#_Drink I/O_#*
+handle the updating of the inventory for you in real-time.
+
 
 === Creating an import transaction
 When you buy and receive new goods, and want to update your stocks, you can enter an import transaction to do so.
 
-[NOTE]
+[TIP]
 ====
-#*Command format*#:
+*_Summary_* +
+
+*Command format*:
 `import n/NAME q/QUANTITY`
 
-* Desired drink must be recorded in Drink I/O
+* `NAME` is the name of the drink you are entering a transaction for
+** The desired drink must be recorded in *[blue]#_Drink I/O_#*
+* `QUANTITY` is the number of cartons of drink that you are transacting
 
 ====
-
+*Step-by-Step Instructions* +
 To record an import transaction,
 
 . Enter `import`
-
 . Key in `n/`, followed by name of drink (`NAME`)
-
 . Key in `q/`, followed by quantity imported (`QUANTITY`)
-
 . Press kbd:[enter]
-
 . Check whether the transaction has been recorded successfully
-
--  If you see the message "import transaction recorded!", the transaction had been successfully entered into Drink I/O +
+-  If you see the message "import transaction recorded!", the transaction had been successfully
+entered into *[blue]#_Drink I/O_#* +
 -  If not, follow the instructions displayed in the message display pane, and re-enter the command +
 
 [WARNING]
 ====
-The drink you want to transact must be recorded in Drink I/O
+The drink you want to transact must be recorded in *[blue]#_Drink I/O_#*.
+Otherwise, the transaction will not be entered into the system.
 ====
 
 [NOTE]
 ====
-#*More about batches*# +
+*More about batches* +
 <to be added>
 
 ====
@@ -195,19 +200,21 @@ The drink you want to transact must be recorded in Drink I/O
 
 
 === Creating a sales transaction
-When you make a sale to your customers, recording the sale in Drink I/O allows you to update your transactions as well as the current stock.
+When you make a sale to your customers, recording the sale in *[blue]#_Drink I/O_#* allows you
+to update your transactions as well as the current stock.
 
-
-[NOTE]
+[TIP]
 ====
-#*Command format*#:
+*_Summary_* +
+
+*Command format*:
 `sell n/NAME q/QUANTITY` +
 
-* Desired drink must be recorded in Drink I/O +
+* Desired drink must be recorded in *[blue]#_Drink I/O_#* +
 * Quantity must not exceed current stock
 
 ====
-
+*Step-by-Step Instructions* +
 To record a sale transaction,
 
 . Enter `sell`
@@ -220,27 +227,52 @@ To record a sale transaction,
 
 . Check whether the transaction has been recorded successfully,
 
-* If you see the message "sale transaction recorded!", the transaction had been successfully entered into Drink I/O +
+* If you see the message "sale transaction recorded!", the transaction had been
+successfully entered into *[blue]#_Drink I/O_#*
 * If not, follow the instructions displayed in the message display pane, and re-enter the command +
 
 [WARNING]
 ====
-- The drink you want to transact must be recorded in Drink I/O.
-- The recording will fail if QUANTITY is more than the available stock in Drink I/O. Do check if your stock counts in Drink I/O are updated.
+- The drink you want to transact must be recorded in *[blue]#_Drink I/O_#*.
+- The recording will fail if `QUANTITY` is more than the available stock in *[blue]#_Drink I/O_#*.
+  Do check if your stock counts in *[blue]#_Drink I/O_#* are updated.
 ====
+
+=== Viewing transactions
+You can view the transactions entered into *[blue]#_Drink I/O_#* to verify their accuracy.
+
+[TIP]
+====
+*_Summary_* +
+
+*Command format*:
+`viewTrans`
+====
+
+*Step by Step Instructions* +
+To view all transactions entered,
+
+. Enter `viewTrans`
+. Press kbd:[enter]
+
+You will see a list of transactions displayed in the results panel.
 
 
 == Analysing Sales Performance
 === Viewing overall cost, revenue and profit
 ==== Viewing overall cost
-Drink I/O can calculate the total costs your store has incurred since the beginning of recording for you.
+*[blue]#_Drink I/O_#* can calculate the total costs your company has incurred
+since the beginning of using *[blue]#_Drink I/O_#* for you.
 
-[NOTE]
+[TIP]
 ====
-#*Command format*#:
+*_Summary_* +
+
+*Command format*:
 `analyseCosts`
 ====
 
+*Step by Step Instructions* +
 To view the total costs incurred,
 
 . Enter `analyseCosts`
@@ -249,6 +281,30 @@ To view the total costs incurred,
 
 You should see a value displayed in the results panel.
 
+// insert picture
+
+==== Viewing overall cost
+*[blue]#_Drink I/O_#* can calculate the total costs your company has incurred
+since the beginning of using *[blue]#_Drink I/O_#* for you.
+
+[TIP]
+====
+*_Summary_* +
+
+*Command format*:
+`analyseCosts`
+====
+
+*Step by Step Instructions* +
+To view the total costs incurred,
+
+. Enter `analyseCosts`
+
+. Press kbd:[enter]
+
+You should see a value displayed in the results panel.
+
+// insert picture
 
 === Filtering popular items
 === Viewing an item’s transactions
