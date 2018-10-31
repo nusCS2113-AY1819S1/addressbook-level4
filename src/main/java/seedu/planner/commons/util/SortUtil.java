@@ -2,6 +2,8 @@ package seedu.planner.commons.util;
 
 import java.util.Comparator;
 
+import seedu.planner.model.Month;
+import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Record;
 
 /**
@@ -21,5 +23,12 @@ public class SortUtil {
         return Comparator.comparing(a -> a.getMoneyFlow().valueDouble);
     }
 
+    public static Comparator<Date> compareDate() {
+        return (a, b) -> a.dateComparator(b);
+    }
+
+    public static Comparator<Month> compareMonth() {
+        return (a, b) -> DateUtil.compareMonth(a, b);
+    }
 }
 

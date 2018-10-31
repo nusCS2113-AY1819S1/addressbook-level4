@@ -12,7 +12,7 @@ public class MoneyUtil {
     /**
      * Takes in 2 {@code MoneyFlow} parameters and returns the sum
      */
-    public static final MoneyFlow add(MoneyFlow money1, MoneyFlow money2) {
+    public static MoneyFlow add(MoneyFlow money1, MoneyFlow money2) {
         requireAllNonNull(money1, money2);
         double newMoney = money1.toDouble() + money2.toDouble();
         return new MoneyFlow(formatIntoMoneyFlowFormat(newMoney));
@@ -30,7 +30,7 @@ public class MoneyUtil {
     /**
      * Formats a string into a string that is readable by {@code MoneyFlow}
      */
-    private static final String formatIntoMoneyFlowFormat(double money) {
+    private static String formatIntoMoneyFlowFormat(double money) {
         String formattedMoney;
         if (money == 0) {
             formattedMoney = "-0";

@@ -46,7 +46,8 @@ public class SummaryByMonthCommand extends SummaryCommand {
         ReadOnlyFinancialPlanner financialPlanner = model.getFinancialPlanner();
         SummaryByMonthList summaryList = new SummaryByMonthList(financialPlanner.getRecordList(),
                 predicate);
-        EventsCenter.getInstance().post(new ShowSummaryTableEvent(summaryList.getSummaryList()));
+        EventsCenter.getInstance().post(new ShowSummaryTableEvent(summaryList.getSummaryList(),
+                summaryList.getTotalExpense(), summaryList.getTotalIncome(), summaryList.getTotal(), TOTAL_LABEL));
         return new CommandResult(String.format(MESSAGE_SUCCESS, summaryList.size()));
     }
 
