@@ -43,7 +43,7 @@ public class StockCommand extends Command {
             + PREFIX_QUANTITY + "5";
 
 
-    public static final String MESSAGE_QUANTITY_STOCK = "Number of Book Sold: ";
+    public static final String MESSAGE_QUANTITY_STOCK = "Number of Book Stocked: ";
     public static final String MESSAGE_STOCK_PERSON_SUCCESS = "Stocked Book: %1$s";
     public static final String MESSAGE_NOT_STOCKED = "Increase to stock quantity must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This book already exists in the book inventory.";
