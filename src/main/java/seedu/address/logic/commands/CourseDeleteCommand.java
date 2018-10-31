@@ -18,7 +18,7 @@ public class CourseDeleteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the course based on the course code that was provided.\n"
             + "Parameters: " + PREFIX_COURSE_CODE + "COURSE_CODE\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_COURSE_CODE + "CS1";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_COURSE_CODE + "CS";
 
 
     public static final String MESSAGE_DELETE_COURSE_SUCCESS = "Deleted course: %1$s";
@@ -39,7 +39,7 @@ public class CourseDeleteCommand extends Command {
         cm.deleteCourse(foundCourse);
         cm.saveCourseList();
         return new CommandResult(String.format(MESSAGE_DELETE_COURSE_SUCCESS,
-                foundCourse.getCourseName(), cm.getTableRepresentation()));
+                foundCourse.getCourseName()), cm.getTableRepresentation());
     }
 
 
