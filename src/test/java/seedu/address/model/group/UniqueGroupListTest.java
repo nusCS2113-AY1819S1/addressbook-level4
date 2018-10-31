@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalAddGroups.getAddGroupWithGroupAndPer
 import static seedu.address.testutil.TypicalGroups.CS1010;
 import static seedu.address.testutil.TypicalGroups.getTut1;
 import static seedu.address.testutil.TypicalGroups.getTypicalGroupsWithPersons;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,6 +25,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.GroupBuilder;
 
 public class UniqueGroupListTest {
@@ -154,6 +156,34 @@ public class UniqueGroupListTest {
         uniqueGroupList.remove(getTut1());
         UniqueGroupList expectedUniqueGroupList = new UniqueGroupList();
         assertEquals(expectedUniqueGroupList, uniqueGroupList);
+    }
+
+    @Test
+    public void removeGroupPerson_nullParameters_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        uniqueGroupList.removeGroupPerson(null, null);
+    }
+
+    @Test
+    public void removeGroupPerson_personInGroup_removesGroupPerson() {
+        UniqueGroupList expected = new UniqueGroupList();
+        expected.createGroup(getTut1());
+        uniqueGroupList.createGroup(getTypicalGroupsWithPersons());
+        uniqueGroupList.removeGroupPerson(getTypicalGroupsWithPersons(), ALICE);
+        assertEquals(expected, uniqueGroupList);
+    }
+
+    @Test
+    public void removeGroupPerson_personNotInGroup_throwsPersonNotFoundException() {
+        uniqueGroupList.createGroup(getTut1());
+        thrown.expect(PersonNotFoundException.class);
+        uniqueGroupList.removeGroupPerson(getTut1(), ALICE);
+    }
+
+    @Test
+    public void removeGroupPerson_groupNotInAddressBook_throwsGroupNotFoundException() {
+        thrown.expect(GroupNotFoundException.class);
+        uniqueGroupList.removeGroupPerson(getTut1(), ALICE);
     }
 
     @Test
