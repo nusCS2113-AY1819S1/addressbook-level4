@@ -1,9 +1,12 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.note.NoteManager;
+import seedu.address.ui.BrowserPanel;
 
 /**
  * Deletes a note from Trajectory.
@@ -20,6 +23,11 @@ public class NoteDeleteCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Note has been deleted.";
     public static final String MESSAGE_INVALID_INDEX = "Invalid input!\nINDEX %1$s is out of bounds.";
+    public static final String MESSAGE_NOTE_PAGE_NOT_LOADED = "The command has been blocked by the system.\n"
+            + "Please call the command to list notes before calling this command again "
+            + "to avoid accidentally deleting another note.\n"
+            + "Command: " + NoteListCommand.COMMAND_WORD
+            + " [" + PREFIX_MODULE_CODE + "MODULE_CODE]";
 
     private final int index;
 
@@ -29,6 +37,10 @@ public class NoteDeleteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+
+        if (!BrowserPanel.isNotePageLoaded()) {
+            return new CommandResult(MESSAGE_NOTE_PAGE_NOT_LOADED);
+        }
 
         NoteManager noteManager = NoteManager.getInstance();
 

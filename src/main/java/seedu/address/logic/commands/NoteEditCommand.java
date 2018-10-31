@@ -20,6 +20,7 @@ import seedu.address.model.note.NoteLocation;
 import seedu.address.model.note.NoteManager;
 import seedu.address.model.note.NoteTime;
 import seedu.address.model.note.NoteTitle;
+import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.NoteTextEditWindow;
 
 /**
@@ -28,6 +29,21 @@ import seedu.address.ui.NoteTextEditWindow;
 public class NoteEditCommand extends Command {
 
     public static final String COMMAND_WORD = "note edit";
+
+    public static final String MESSAGE_CANCEL = "Edit note operation has been cancelled.";
+
+    public static final String MESSAGE_INVALID_DATE_TIME_DIFFERENCE =
+            "Invalid input! Please make sure the start date/time is earlier than the end date/time.";
+
+    public static final String MESSAGE_INVALID_INDEX = "Invalid input!\nINDEX %1$s is out of bounds.";
+
+    public static final String MESSAGE_NOTE_PAGE_NOT_LOADED = "The command has been blocked by the system.\n"
+            + "Please call the command to list notes before calling this command again "
+            + "to avoid accidentally editing another note.\n"
+            + "Command: " + NoteListCommand.COMMAND_WORD
+            + " [" + PREFIX_MODULE_CODE + "MODULE_CODE]";
+
+    public static final String MESSAGE_SUCCESS = "Note has been edited.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a note. "
             + "Parameters: "
@@ -50,12 +66,6 @@ public class NoteEditCommand extends Command {
             + "4 "
             + PREFIX_NOTE_TITLE + "My second note "
             + PREFIX_NOTE_START_TIME + "10:45 AM";
-
-    public static final String MESSAGE_SUCCESS = "Note has been edited.";
-    public static final String MESSAGE_CANCEL = "Edit note operation has been cancelled.";
-    public static final String MESSAGE_INVALID_INDEX = "Invalid input!\nINDEX %1$s is out of bounds.";
-    public static final String MESSAGE_INVALID_DATE_TIME_DIFFERENCE =
-            "Invalid input! Please make sure the start date/time is earlier than the end date/time.";
 
     private final int index;
     private final ModuleCode moduleCode;
@@ -87,6 +97,10 @@ public class NoteEditCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+
+        if (!BrowserPanel.isNotePageLoaded()) {
+            return new CommandResult(MESSAGE_NOTE_PAGE_NOT_LOADED);
+        }
 
         NoteManager noteManager = NoteManager.getInstance();
 

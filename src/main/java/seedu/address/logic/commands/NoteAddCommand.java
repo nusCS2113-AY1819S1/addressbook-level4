@@ -23,7 +23,7 @@ public class NoteAddCommand extends Command {
 
     public static final String COMMAND_WORD = "note add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a note to Trajectory. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a note to Trajectory.\n"
             + "Parameters: "
             + PREFIX_MODULE_CODE + "MODULE_CODE "
             + "[" + PREFIX_NOTE_TITLE + "TITLE] "
@@ -33,6 +33,7 @@ public class NoteAddCommand extends Command {
             + "[" + PREFIX_NOTE_END_TIME + "END_TIME] "
             + "[" + PREFIX_NOTE_LOCATION + "LOCATION]\n"
             + "Example: " + COMMAND_WORD + " "
+            + PREFIX_MODULE_CODE + "CS2113 "
             + PREFIX_NOTE_TITLE + "My First Note "
             + PREFIX_NOTE_START_DATE + "30-10-2020 "
             + PREFIX_NOTE_LOCATION + "Columbia, Schermerhorn 614";

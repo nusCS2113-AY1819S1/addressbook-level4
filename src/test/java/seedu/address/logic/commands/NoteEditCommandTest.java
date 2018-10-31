@@ -17,6 +17,9 @@ import seedu.address.model.note.NoteManager;
 import seedu.address.model.note.NoteTime;
 import seedu.address.model.note.NoteTitle;
 import seedu.address.testutil.NoteBuilder;
+import seedu.address.ui.BrowserPanel;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Contains tests for NoteEditCommand.
@@ -36,6 +39,39 @@ public class NoteEditCommandTest {
     public void setUp() {
         noteManager.clearNotes();
         noteManager.saveNoteList();
+        BrowserPanel.setNotePageIsLoaded(true);
+    }
+
+    @Test
+    public void execute_notePageNotLoadedInWebView_displaysMessageNotePageNotLoaded() throws CommandException {
+        String expectedMessage = NoteEditCommand.MESSAGE_NOTE_PAGE_NOT_LOADED;
+
+        // assert that note page is currently not loaded
+        BrowserPanel.setNotePageIsLoaded(false);
+
+        noteManager.addNote(note1.build());
+        noteManager.saveNoteList(); // contains one note in list
+        noteManager.setFilteredNotesNoFilter();
+
+        int index = 1; // arraylist size: 1, accessed index = 0 (zero-based) -> within bounds
+        NoteBuilder editedNote1Builder = new NoteBuilder(note1.build());
+        editedNote1Builder.withNoteText("Changed the note text");
+
+        Note editedNote1 = editedNote1Builder.build();
+        NoteEditCommand noteEditCommand =
+                new NoteEditCommand(
+                        index,
+                        editedNote1.getModuleCode(),
+                        editedNote1.getTitle(),
+                        editedNote1.getStartDate(),
+                        editedNote1.getStartTime(),
+                        editedNote1.getEndDate(),
+                        editedNote1.getEndTime(),
+                        editedNote1.getLocation()
+                );
+
+        CommandResult result = noteEditCommand.execute(new ModelManager(), new CommandHistory());
+        assertEquals(expectedMessage, result.feedbackToUser);
     }
 
     @Test
@@ -53,12 +89,14 @@ public class NoteEditCommandTest {
         noteManager.addNote(note2.build()); // index 1
         noteManager.addNote(note3.build()); // index 2
         noteManager.saveNoteList();
+        noteManager.setFilteredNotesNoFilter();
 
         int index = 2; // arraylist size: 3, accessed index = 1 (zero-based) -> within bounds
 
         // setup note2 with edited end date
         NoteBuilder editedNote2Builder = new NoteBuilder(note2.build());
-        editedNote2Builder = editedNote2Builder.withEndDate("11-12-2012"); // earlier date than current note2's start date
+        // set new note to be earlier date than current note2's start date
+        editedNote2Builder = editedNote2Builder.withEndDate("11-12-2012");
 
         Note editedNote2 = editedNote2Builder.build();
         NoteEditCommand noteEditCommand =
@@ -88,6 +126,7 @@ public class NoteEditCommandTest {
         noteManager.addNote(note2.build());
         noteManager.addNote(note3.build());
         noteManager.saveNoteList();
+        noteManager.setFilteredNotesNoFilter();
 
         int index = 5; // arraylist size: 3, accessed index = 4 (zero-based) -> out of bounds
         ModuleCode newModuleCode = new ModuleCode("CS5000");

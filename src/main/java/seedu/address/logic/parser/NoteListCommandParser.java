@@ -22,7 +22,10 @@ public class NoteListCommandParser implements Parser<NoteListCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_MODULE_CODE);
 
         if (arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE)) {
-            String moduleCode = argMultimap.getValue(PREFIX_MODULE_CODE).get();
+            String moduleCode = argMultimap.getValue(PREFIX_MODULE_CODE).get().trim();
+            if (moduleCode.isEmpty()) {
+                throw new ParseException(NoteListCommand.MESSAGE_EMPTY_MODULE_CODE_ARG);
+            }
             return new NoteListCommand(moduleCode);
         } else if (args.trim().isEmpty()) {
             return new NoteListCommand("");

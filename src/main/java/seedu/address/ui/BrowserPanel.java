@@ -30,7 +30,7 @@ public class BrowserPanel extends UiPart<Region> {
 
     private static final String FXML = "BrowserPanel.fxml";
 
-    private static boolean noteListIsLoaded = false;
+    private static boolean notePageIsLoaded = false;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -89,15 +89,19 @@ public class BrowserPanel extends UiPart<Region> {
                 .addListener((ObservableValue<? extends Worker.State> observable,
                               Worker.State oldValue, Worker.State newValue) -> {
                     if (newValue == Worker.State.SUCCEEDED) {
-                        if (noteListIsLoaded) {
+                        if (notePageIsLoaded) {
                             browser.getEngine().executeScript("window.scrollTo(0, document.body.scrollHeight);");
                         }
                     }
                 });
     }
 
-    public boolean isNoteListLoaded() {
-        return noteListIsLoaded;
+    public static boolean isNotePageLoaded() {
+        return notePageIsLoaded;
+    }
+
+    public static void setNotePageIsLoaded(boolean condition) {
+        notePageIsLoaded = condition;
     }
 
     @Subscribe
@@ -111,7 +115,7 @@ public class BrowserPanel extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         browser.getEngine().loadContent(event.message);
         if (event.message != null) {
-            noteListIsLoaded = event.message.contains(NoteManager.NOTE_PAGE_IDENTIFIER);
+            notePageIsLoaded = event.message.contains(NoteManager.NOTE_PAGE_IDENTIFIER);
         }
     }
 }
