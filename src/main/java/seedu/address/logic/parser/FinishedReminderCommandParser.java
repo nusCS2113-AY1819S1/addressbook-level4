@@ -5,27 +5,27 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.FinishedReminderCommand;
+import seedu.address.logic.commands.RemoveReminderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses the arguments for finishing a reminder task.
  */
-public class FinishedReminderCommandParser implements Parser<FinishedReminderCommand> {
+public class FinishedReminderCommandParser implements Parser<RemoveReminderCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of AddReminderCommand
      * and returns an AddReminderCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public FinishedReminderCommand parse(String args) throws ParseException {
+    public RemoveReminderCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TIME);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TIME)
                 || !argMultimap.getPreamble().isEmpty()) {
 
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    FinishedReminderCommand.MESSAGE_USAGE));
+                    RemoveReminderCommand.MESSAGE_USAGE));
         }
 
         String toRemoveReminderTime;
@@ -34,7 +34,7 @@ public class FinishedReminderCommandParser implements Parser<FinishedReminderCom
         } catch (ParseException e) {
             throw e;
         }
-        return new FinishedReminderCommand(toRemoveReminderTime);
+        return new RemoveReminderCommand(toRemoveReminderTime);
     }
 
     /**
