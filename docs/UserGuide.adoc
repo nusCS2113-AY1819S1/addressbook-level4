@@ -17,6 +17,8 @@ endif::[]
 
 By: `CS2113T-W12-4`      Since: `Jun 2016`      Licence: `MIT`
 
+// Use sentence case for long titles e.g. "Updating item details". capitalise first letter if it is a short title ////
+
 
 == Introduction
 
@@ -27,12 +29,13 @@ set reminders to help you import more goods should their stocks fall low.
 faster than traditional Graphical User Interface (GUI) apps, while retaining the benefits of a GUI
 
 This user guide provides comprehensive documentation on the *[blue]#_Drink I/O_#* setup process, the features you can
-access and the commands you can use. Choose a topic from the Table of Contents (link) to find answers,
+access and the commands you can use. Choose a topic from the Table of Contents above to find answers,
 get instructions and learn to improve your workflow with Drink I/O.
 
-This user guide provides comprehensive documentation on the *[blue]#_Drink I/O_#* setup process, the commands you can use
-and the features available to you. Choose a topic from the Table of Contents (link) to find answers,
-get instructions and learn how to improve your workflow with *[blue]#_Drink I/O_#*.
+=== How to use this guide
+
+=== How to navigate Drink I/O's interface
+
 
 == Quick Start
 
@@ -45,12 +48,15 @@ image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
+.  Some example commands you can try: +
+<to be added>
 
+////
 * *`viewall`* : Shows a list of all the drinks stocked in the inventory, together with their prices.
 * **`add` **`Coca Cola, Green Tea [2]` : Adds a transaction of 1 Coca Cola and 2 Green Tea.
 * **`stock` **`Coca Cola 10` : Increases the stock quantity Coca Cola by 10 cans
 * *`exit`* : Exits the app
+////
 
 .  Refer to <<Features>> for details of each command.
 
@@ -128,6 +134,7 @@ account, and in a specific role, you can work with functions that are tailored t
 === Create additional account
 
 == Managing Your Inventory
+The core feature of *[blue]#_Drink I/O_#* is to manage your inventory
 
 === Adding new items
 
@@ -256,8 +263,9 @@ You should see a value displayed in the results panel.
 
 * Words in UPPER_CASE are the parameters supplied by users
 * Use underscore for spaces
-* There is a default order for command parameters, but parameters can be supplied in any order if tags are specified (e.g. t/ for item, c/ for characteristic)
-* Parameters in square bracket are optional
+* Parameters can be supplied in any order as tags are specified
+** *e.g.* t/ for item, c/ for characteristic
+* Parameters in square brackets are optional
 ====
 === Global Command
 
@@ -489,8 +497,9 @@ _{explain how the user can enable/disable data encryption}_
 
 == FAQ
 
-*Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*Q*: How do I transfer my data to another computer? +
+*A*: Install *[blue]#_Drink I/O_#* in the other computer. Overwrite the empty data file *[blue]#_Drink I/O_#* creates
+with the file that contains the data of your previous *[blue]#_Drink I/O_#* folder.
 
 == Command Summary
 === Common Command
