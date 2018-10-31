@@ -8,6 +8,7 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 //import seedu.address.commons.events.model.BooksLocalBackupEvent;
 import seedu.address.commons.events.model.EventBookChangedEvent;
 import seedu.address.commons.events.model.ExpenseBookChangedEvent;
+import seedu.address.commons.events.model.TaskBookChangedEvent;
 import seedu.address.commons.events.model.UserPrefsChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.events.storage.LocalBackupEvent;
@@ -110,4 +111,13 @@ public interface Storage extends AddressBookStorage, EventBookStorage, ExpenseBo
 
     @Override
     void saveTaskBook(ReadOnlyTaskBook taskBook) throws IOException;
+
+    //@@author QzSG
+    /**
+     * Saves the current version of the Task Book to the hard disk.
+     *   Creates the data file if it is missing.
+     * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
+     */
+    void handleTaskBookChangedEvent(TaskBookChangedEvent tbce);
+
 }

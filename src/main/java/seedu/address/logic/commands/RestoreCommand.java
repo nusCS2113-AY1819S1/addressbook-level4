@@ -79,7 +79,8 @@ public class RestoreCommand extends Command {
      */
     private CommandResult localRestoreCommand(Model model) {
         EventsCenter.getInstance().post(new LocalRestoreEvent(
-                retrieveAddressBookPath(model), retrieveExpenseBookPath(model)));
+                retrieveAddressBookPath(model), retrieveEventBookPath(model),
+                retrieveExpenseBookPath(model), retrieveTaskBookPath(model)));
         return new CommandResult(String.format(MESSAGE_SUCCESS, retrievePath(model).getParent().toString()));
     }
 
@@ -90,14 +91,17 @@ public class RestoreCommand extends Command {
      */
     private CommandResult onlineRestoreCommand(Model model) throws CommandException {
         if (target == OnlineStorage.Type.GITHUB) {
-            String gistId = model.getUserPrefs().getAddressBookGistId();
-            if (gistId == null) {
+            if (model.getUserPrefs().hasNullGistId()) {
                 return new CommandResult(String.format(MESSAGE_FAILURE, MESSAGE_FAILURE_SAMPLE));
             }
             EventsCenter.getInstance().post(new OnlineRestoreEvent(target, UserPrefs.TargetBook.AddressBook,
                     model.getUserPrefs().getAddressBookGistId(), authToken));
+            EventsCenter.getInstance().post(new OnlineRestoreEvent(target, UserPrefs.TargetBook.EventBook,
+                    model.getUserPrefs().getEventBookGistId(), authToken));
             EventsCenter.getInstance().post(new OnlineRestoreEvent(target, UserPrefs.TargetBook.ExpenseBook,
                     model.getUserPrefs().getExpenseBookGistId(), authToken));
+            EventsCenter.getInstance().post(new OnlineRestoreEvent(target, UserPrefs.TargetBook.TaskBook,
+                    model.getUserPrefs().getTaskBookGistId(), authToken));
             return new CommandResult(String.format(MESSAGE_SUCCESS, "GitHub Gists"));
         } else {
             throw new CommandException(MESSAGE_INVALID);
@@ -112,10 +116,17 @@ public class RestoreCommand extends Command {
         return model.getUserPrefs().getAddressBookBackupFilePath();
     }
 
+    private Path retrieveEventBookPath(Model model) {
+        return model.getUserPrefs().getEventBookBackupFilePath();
+    }
+
     private Path retrieveExpenseBookPath(Model model) {
         return model.getUserPrefs().getExpenseBookBackupFilePath();
     }
 
+    private Path retrieveTaskBookPath(Model model) {
+        return model.getUserPrefs().getTaskBookBackupFilePath();
+    }
 
     @Override
     public boolean equals(Object other) {

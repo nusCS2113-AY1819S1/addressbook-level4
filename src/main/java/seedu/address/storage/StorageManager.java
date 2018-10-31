@@ -21,9 +21,14 @@ import seedu.address.commons.events.model.AddressBookLocalRestoreEvent;
 import seedu.address.commons.events.model.AddressBookOnlineRestoreEvent;
 //import seedu.address.commons.events.model.BooksLocalBackupEvent;
 import seedu.address.commons.events.model.EventBookChangedEvent;
+import seedu.address.commons.events.model.EventBookLocalRestoreEvent;
+import seedu.address.commons.events.model.EventBookOnlineRestoreEvent;
 import seedu.address.commons.events.model.ExpenseBookChangedEvent;
 import seedu.address.commons.events.model.ExpenseBookLocalRestoreEvent;
 import seedu.address.commons.events.model.ExpenseBookOnlineRestoreEvent;
+import seedu.address.commons.events.model.TaskBookChangedEvent;
+import seedu.address.commons.events.model.TaskBookLocalRestoreEvent;
+import seedu.address.commons.events.model.TaskBookOnlineRestoreEvent;
 import seedu.address.commons.events.model.UserPrefsChangedEvent;
 import seedu.address.commons.events.storage.DataRestoreExceptionEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
@@ -39,11 +44,13 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.exceptions.OnlineBackupFailureException;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.AddressBook;
+import seedu.address.model.EventBook;
 import seedu.address.model.ExpenseBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyEventBook;
 import seedu.address.model.ReadOnlyExpenseBook;
 import seedu.address.model.ReadOnlyTaskBook;
+import seedu.address.model.TaskBook;
 import seedu.address.model.UserPrefs;
 
 /**
@@ -153,22 +160,28 @@ public class StorageManager extends ComponentManager implements Storage {
     @Subscribe
     public void handleLocalBackupEvent(LocalBackupEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Saving student planner data as backup"));
-        backupLocal(event.readOnlyAddressBook, event.readOnlyExpenseBook,
-                    event.addressBookPath, event.expenseBookPath);
+        backupLocal(event.readOnlyAddressBook, event.readOnlyEventBook, event.readOnlyExpenseBook,
+                event.readOnlyTaskBook, event.addressBookPath, event.eventBookPath,
+                event.expenseBookPath, event.taskBookPath);
     }
 
     /**
      * Performs local backup to local storage
      * @param addressData  {@code ReadOnlyAddressBook} addressData
      * @param expenseData  {@code ReadOnlyExpenseBook} expenseData
+     * @param taskData  {@code ReadOnlyExpenseBook} expenseData
      * @param addressBookPath Location to save address data to
      * @param expenseBookPath Location to save expense data to
+     * @param taskBookPath Location to save task data to
      */
-    private void backupLocal(ReadOnlyAddressBook addressData, ReadOnlyExpenseBook expenseData,
-                              Path addressBookPath, Path expenseBookPath) {
+    private void backupLocal(ReadOnlyAddressBook addressData, ReadOnlyEventBook eventData,
+                             ReadOnlyExpenseBook expenseData, ReadOnlyTaskBook taskData,
+                             Path addressBookPath, Path eventBookPath,
+                             Path expenseBookPath, Path taskBookPath) {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-        executorService.submit(getLocalBackupTask(addressData, expenseData, addressBookPath, expenseBookPath));
+        executorService.submit(getLocalBackupTask(addressData, eventData, expenseData, taskData,
+                addressBookPath, eventBookPath, expenseBookPath, taskBookPath));
     }
 
     /**
@@ -179,12 +192,16 @@ public class StorageManager extends ComponentManager implements Storage {
      * @param expenseBookPath Location to save expense data to
      * @return Local Backup Task
      */
-    private Task getLocalBackupTask(ReadOnlyAddressBook addressData, ReadOnlyExpenseBook expenseData,
-                                    Path addressBookPath, Path expenseBookPath) {
+    private Task getLocalBackupTask(ReadOnlyAddressBook addressData, ReadOnlyEventBook eventData,
+                                    ReadOnlyExpenseBook expenseData, ReadOnlyTaskBook taskData,
+                                    Path addressBookPath, Path eventBookPath,
+                                    Path expenseBookPath, Path taskBookPath) {
         Task backupTask = new Task<Void>() {
             @Override public Void call() throws Exception {
                 backupAddressBook(addressData, addressBookPath);
+                backupEventBook(eventData, eventBookPath);
                 backupExpenseBook(expenseData, expenseBookPath);
+                backupTaskBook(taskData, taskBookPath);
                 return null;
             }
         };
@@ -207,9 +224,13 @@ public class StorageManager extends ComponentManager implements Storage {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Retrieving student planner data from storage"));
         try {
             ReadOnlyAddressBook restoredReadOnlyAddressBook = readAddressBook(event.addressBookPath).get();
+            ReadOnlyEventBook restoredReadOnlyEventBook = readEventBook(event.eventBookPath).get();
             ReadOnlyExpenseBook restoredReadOnlyExpenseBook = readExpenseBook(event.expenseBookPath).get();
+            ReadOnlyTaskBook restoredReadOnlyTaskBook = readTaskBook(event.taskBookPath).get();
             raise(new AddressBookLocalRestoreEvent(restoredReadOnlyAddressBook));
+            raise(new EventBookLocalRestoreEvent(restoredReadOnlyEventBook));
             raise(new ExpenseBookLocalRestoreEvent(restoredReadOnlyExpenseBook));
+            raise(new TaskBookLocalRestoreEvent(restoredReadOnlyTaskBook));
         } catch (IOException | DataConversionException | NoSuchElementException e) {
             raise(new DataRestoreExceptionEvent(e));
         }
@@ -223,7 +244,8 @@ public class StorageManager extends ComponentManager implements Storage {
     @Subscribe
     public void handleOnlineBackupEvent(OnlineBackupEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Saving data to online storage"));
-        backupOnline(event.target, event.addressData, event.expenseData, event.authToken);
+        backupOnline(event.target, event.addressData, event.eventData, event.expenseData,
+                event.taskData, event.authToken);
     }
 
     /*
@@ -243,12 +265,15 @@ public class StorageManager extends ComponentManager implements Storage {
      * @param expenseData  {@code ReadOnlyExpenseBook} expenseData
      * @param authToken Personal Access Token for GitHub Authentication
      */
-    private void backupOnline(OnlineStorage.Type target, ReadOnlyAddressBook addressData,
-                              ReadOnlyExpenseBook expenseData, Optional<String> authToken) {
+    private void backupOnline(OnlineStorage.Type target, ReadOnlyAddressBook addressData, ReadOnlyEventBook eventData,
+                              ReadOnlyExpenseBook expenseData, ReadOnlyTaskBook taskData,
+                              Optional<String> authToken) {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
 
         executorService.submit(getOnlineBackupTask(target, addressData, "AddressBook.bak", authToken));
+        executorService.submit(getOnlineBackupTask(target, eventData, "EventBook.bak", authToken));
         executorService.submit(getOnlineBackupTask(target, expenseData, "ExpenseBook.bak", authToken));
+        executorService.submit(getOnlineBackupTask(target, taskData, "TaskBook.bak", authToken));
     }
 
     /**
@@ -288,11 +313,23 @@ public class StorageManager extends ComponentManager implements Storage {
                                     XmlSerializableAddressBook.class).toModelType();
                             return restoredAddressBook;
                         }
+                        if (targetBook == UserPrefs.TargetBook.EventBook) {
+                            EventBook restoredEventBook = XmlUtil.getDataFromString(
+                                    githubStorage.readContentFromStorage(targetBook, ref),
+                                    XmlSerializableEventBook.class).toModelType();
+                            return restoredEventBook;
+                        }
                         if (targetBook == UserPrefs.TargetBook.ExpenseBook) {
                             ExpenseBook restoredExpenseBook = XmlUtil.getDataFromString(
                                     githubStorage.readContentFromStorage(targetBook, ref),
                                     XmlSerializableExpenseBook.class).toModelType();
                             return restoredExpenseBook;
+                        }
+                        if (targetBook == UserPrefs.TargetBook.TaskBook) {
+                            TaskBook restoredTaskBook = XmlUtil.getDataFromString(
+                                    githubStorage.readContentFromStorage(targetBook, ref),
+                                    XmlSerializableTaskBook.class).toModelType();
+                            return restoredTaskBook;
                         } else {
                             throw (new IllegalValueException("Invalid book data"));
                         }
@@ -302,9 +339,17 @@ public class StorageManager extends ComponentManager implements Storage {
         restoreTask.setOnSucceeded(event -> {
             if (targetBook == UserPrefs.TargetBook.AddressBook) {
                 raise(new AddressBookOnlineRestoreEvent(((Task<AddressBook>) restoreTask).getValue()));
-            } else if (targetBook == UserPrefs.TargetBook.ExpenseBook) {
+            }
+            if (targetBook == UserPrefs.TargetBook.EventBook) {
+                raise(new EventBookOnlineRestoreEvent(((Task<EventBook>) restoreTask).getValue()));
+            }
+            if (targetBook == UserPrefs.TargetBook.ExpenseBook) {
                 raise(new ExpenseBookOnlineRestoreEvent(((Task<ExpenseBook>) restoreTask).getValue()));
             }
+            if (targetBook == UserPrefs.TargetBook.TaskBook) {
+                raise(new TaskBookOnlineRestoreEvent(((Task<TaskBook>) restoreTask).getValue()));
+            }
+
 
         });
         restoreTask.setOnFailed(event -> {
@@ -365,12 +410,19 @@ public class StorageManager extends ComponentManager implements Storage {
             return XmlUtil.convertDataToString(
                     new XmlSerializableAddressBook((ReadOnlyAddressBook) data));
         }
+        if (data instanceof ReadOnlyEventBook) {
+            return XmlUtil.convertDataToString(
+                    new XmlSerializableEventBook((ReadOnlyEventBook) data));
+        }
         if (data instanceof ReadOnlyExpenseBook) {
             return XmlUtil.convertDataToString(
                     new XmlSerializableExpenseBook((ReadOnlyExpenseBook) data));
-        } else {
-            throw (new IllegalValueException("Invalid data provided"));
         }
+        if (data instanceof ReadOnlyTaskBook) {
+            return XmlUtil.convertDataToString(
+                    new XmlSerializableTaskBook((ReadOnlyTaskBook) data));
+        }
+        throw (new IllegalValueException("Invalid data provided"));
     }
 
     /**
@@ -384,13 +436,18 @@ public class StorageManager extends ComponentManager implements Storage {
         if (data instanceof ReadOnlyAddressBook) {
             return UserPrefs.TargetBook.AddressBook;
         }
+        if (data instanceof ReadOnlyEventBook) {
+            return UserPrefs.TargetBook.EventBook;
+        }
         if (data instanceof ReadOnlyExpenseBook) {
             return UserPrefs.TargetBook.ExpenseBook;
-        } else {
-            throw (new IllegalValueException("Invalid data provided"));
         }
+        if (data instanceof ReadOnlyTaskBook) {
+            return UserPrefs.TargetBook.TaskBook;
+        }
+        throw (new IllegalValueException("Invalid data provided"));
     }
-
+    //@@author
     //============ Expense ===============================================================================
 
     @Override
@@ -526,4 +583,17 @@ public class StorageManager extends ComponentManager implements Storage {
     public void backupTaskBook(ReadOnlyTaskBook taskBook, Path backupFilePath) throws IOException {
         taskBookStorage.backupTaskBook(taskBook, backupFilePath);
     }
+
+    //@@author QzSG
+    @Override
+    @Subscribe
+    public void handleTaskBookChangedEvent(TaskBookChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
+        try {
+            saveTaskBook(event.data);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    }
+    //@@author QzSG
 }

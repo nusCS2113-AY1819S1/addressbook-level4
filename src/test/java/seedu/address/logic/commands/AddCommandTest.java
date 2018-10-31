@@ -205,6 +205,10 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        public void restoreTaskBook(ReadOnlyTaskBook restoredTaskBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void commitTaskBook() {
         }

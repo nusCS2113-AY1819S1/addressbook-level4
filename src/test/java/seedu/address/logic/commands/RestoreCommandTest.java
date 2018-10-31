@@ -61,7 +61,9 @@ public class RestoreCommandTest {
         UserPrefs noBackupUserPrefs = new UserPrefs();
 
         userPrefs.setAddressBookGistId("c877006f34937fa5133b9619e2d7be1b");
+        userPrefs.setEventBookGistId("abc599102cd4da237258183615fd8661");
         userPrefs.setExpenseBookGistId("6e6d4388b672da5a29c951630f4610db");
+        userPrefs.setTaskBookGistId("f2fdeb364cf38fbb4d32f246d3da0222");
 
         System.out.println(userPrefs.getAddressBookBackupFilePath());
         model = new ModelManager(getTypicalAddressBook(), expenseBook, eventBook, taskBook, userPrefs);

@@ -10,11 +10,15 @@ import seedu.address.commons.events.BaseEvent;
 public class LocalRestoreEvent extends BaseEvent {
 
     public final Path addressBookPath;
+    public final Path eventBookPath;
     public final Path expenseBookPath;
+    public final Path taskBookPath;
 
-    public LocalRestoreEvent(Path addressBookPath, Path expenseBookPath) {
+    public LocalRestoreEvent(Path addressBookPath, Path eventBookPath, Path expenseBookPath, Path taskBookPath) {
         this.addressBookPath = addressBookPath;
+        this.eventBookPath = eventBookPath;
         this.expenseBookPath = expenseBookPath;
+        this.taskBookPath = taskBookPath;
     }
 
     @Override

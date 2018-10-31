@@ -67,7 +67,6 @@ public class StorageManagerTest {
         assertEquals(original, retrieved);
     }
 
-
     @Test
     public void addressBookReadSave() throws Exception {
         /*
@@ -229,7 +228,9 @@ public class StorageManagerTest {
 
     class XmlTaskBookStorageExceptionThrowingStub extends XmlTaskBookStorage {
 
-        public XmlTaskBookStorageExceptionThrowingStub(Path filePath) { super(filePath); }
+        public XmlTaskBookStorageExceptionThrowingStub(Path filePath) {
+            super(filePath);
+        }
 
         @Override
         public void saveTaskBook(ReadOnlyTaskBook taskBook, Path filePath) throws IOException {

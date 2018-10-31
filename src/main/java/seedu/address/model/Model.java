@@ -109,7 +109,7 @@ public interface Model {
     void restoreAddressBook(ReadOnlyAddressBook restoredAddressBook);
 
     /**
-     * Restore address book from storage.
+     * Restore expense book from storage.
      * @param restoredExpenseBook
      */
     void restoreExpenseBook(ReadOnlyExpenseBook restoredExpenseBook);
@@ -120,6 +120,11 @@ public interface Model {
      */
     void restoreEventBook(ReadOnlyEventBook restoredEventBook);
 
+    /**
+     * Restore task book from storage.
+     * @param restoredTaskBook
+     */
+    void restoreTaskBook(ReadOnlyTaskBook restoredTaskBook);
 
     //@@author luhan02
     /**

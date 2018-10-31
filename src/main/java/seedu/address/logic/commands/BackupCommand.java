@@ -97,7 +97,8 @@ public class BackupCommand extends Command {
      */
     private void onlineBackupCommand(Model model) {
         EventsCenter.getInstance().post(
-                new OnlineBackupEvent(target, model.getAddressBook(), model.getExpenseBook(), authToken));
+                new OnlineBackupEvent(target, model.getAddressBook(), model.getEventBook(),
+                        model.getExpenseBook(), model.getTaskBook(), authToken));
     }
 
     /**
@@ -105,8 +106,10 @@ public class BackupCommand extends Command {
      * @param model Memory model
      */
     private void localBackupCommand(Model model) {
-        EventsCenter.getInstance().post(new LocalBackupEvent(model.getAddressBook(),
-                model.getUserPrefs().getAddressBookBackupFilePath(),
-                model.getExpenseBook(), model.getUserPrefs().getExpenseBookBackupFilePath()));
+        EventsCenter.getInstance().post(new LocalBackupEvent(
+                model.getAddressBook(), model.getUserPrefs().getAddressBookBackupFilePath(),
+                model.getEventBook(), model.getUserPrefs().getEventBookBackupFilePath(),
+                model.getExpenseBook(), model.getUserPrefs().getExpenseBookBackupFilePath(),
+                model.getTaskBook(), model.getUserPrefs().getTaskBookBackupFilePath()));
     }
 }

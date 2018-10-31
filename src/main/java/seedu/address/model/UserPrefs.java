@@ -49,6 +49,7 @@ public class UserPrefs {
      */
     public enum TargetBook {
         AddressBook,
+        EventBook,
         ExpenseBook,
         TaskBook
     }
@@ -103,6 +104,25 @@ public class UserPrefs {
 
     public void setEventBookGistId(String eventBookGistId) {
         this.eventBookGistId = eventBookGistId;
+    }
+
+    public String getTaskBookGistId() {
+        return taskBookGistId;
+    }
+
+    public void setTaskBookGistId(String taskBookGistId) {
+        this.taskBookGistId = taskBookGistId;
+    }
+
+    /**
+     * Helper method to check if any of the Gist Ids for the books data is null
+     * @return True if any of the Gist Ids for the books data is null
+     */
+    public boolean hasNullGistId() {
+        return (getAddressBookGistId() == null || getAddressBookGistId().isEmpty())
+                || (getEventBookGistId() == null || getEventBookGistId().isEmpty())
+                || (getExpenseBookGistId() == null || getExpenseBookGistId().isEmpty())
+                || (getTaskBookGistId() == null || getTaskBookGistId().isEmpty());
     }
 
     @Override
