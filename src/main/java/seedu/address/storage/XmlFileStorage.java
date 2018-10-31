@@ -37,6 +37,18 @@ public class XmlFileStorage {
     }
 
     /**
+     * Saves the given eventBook data to the specified file.
+     */
+    public static void saveDataToFile(Path file, XmlSerializableEventBook eventBook)
+            throws FileNotFoundException {
+        try {
+            XmlUtil.saveDataToFile(file, eventBook);
+        } catch (JAXBException e) {
+            throw new AssertionError("Unexpected exception " + e.getMessage(), e);
+        }
+    }
+
+    /**
      * Saves the given taskBook data to the specified file.
      */
     public static void saveDataToFile(Path file, XmlSerializableTaskBook taskBook)
@@ -55,6 +67,18 @@ public class XmlFileStorage {
                                                                             FileNotFoundException {
         try {
             return XmlUtil.getDataFromFile(file, XmlSerializableAddressBook.class);
+        } catch (JAXBException e) {
+            throw new DataConversionException(e);
+        }
+    }
+
+    /**
+     * Returns expense book in the file or an empty expense book
+     */
+    public static XmlSerializableEventBook loadEventFromSaveFile(Path file) throws DataConversionException,
+            FileNotFoundException {
+        try {
+            return XmlUtil.getDataFromFile(file, XmlSerializableEventBook.class);
         } catch (JAXBException e) {
             throw new DataConversionException(e);
         }

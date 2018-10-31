@@ -5,11 +5,18 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.EventBook;
 import seedu.address.model.ExpenseBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyEventBook;
 import seedu.address.model.ReadOnlyExpenseBook;
 import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.TaskBook;
+import seedu.address.model.event.Date;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
+import seedu.address.model.event.Time;
+import seedu.address.model.eventContacts.EventContacts;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.expense.ExpenseCategory;
 import seedu.address.model.expense.ExpenseDate;
@@ -86,7 +93,42 @@ public class SampleDataUtil {
         }
         return sampleEb;
     }
-    //@@author
+
+    //@@author ian-tjahjono
+    //================Events===============================
+    public static Event[] getSampleEvent() {
+        return new Event[] {
+            new Event(new EventName("Watch Movie"), new Date("10022008"), new Time("1111"),
+                    getEventContactSet("John")),
+            new Event(new EventName("Watch Movie"), new Date("10022008"), new Time("1111"),
+                    getEventContactSet("John")),
+            new Event(new EventName("Watch Movie"), new Date("10022008"), new Time("1111"),
+                    getEventContactSet("John")),
+            new Event(new EventName("Watch Movie"), new Date("10022008"), new Time("1111"),
+                    getEventContactSet("John")),
+            new Event(new EventName("Watch Movie"), new Date("10022008"), new Time("1111"),
+                    getEventContactSet("John")),
+            new Event(new EventName("Watch Movie"), new Date("10022008"), new Time("1111"),
+                    getEventContactSet("John"))
+        };
+    }
+
+    public static ReadOnlyEventBook getSampleEventBook() {
+        EventBook sampleEventBook = new EventBook();
+        for (Event sampleEvent : getSampleEvent()) {
+            sampleEventBook.addEvent(sampleEvent);
+        }
+        return sampleEventBook;
+    }
+
+    /**
+     * Returns a tag set containing the list of strings given.
+     */
+    public static Set<EventContacts> getEventContactSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(EventContacts::new)
+                .collect(Collectors.toSet());
+    }
 
     //@@author luhan02
     public static Task[] getSampleTasks() {

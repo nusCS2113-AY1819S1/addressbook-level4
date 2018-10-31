@@ -11,7 +11,7 @@ public class EventContacts {
 
     public static final String MESSAGE_EVENT_CONTACTS_CONSTRAINTS = "Event Contacts should contain only "
             + "letters and spaces";
-    public static final String CONTACT_VALIDATION_REGEX = "[a-z|A-Z|\\s]+";
+    public static final String CONTACT_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String eventContactName;
 

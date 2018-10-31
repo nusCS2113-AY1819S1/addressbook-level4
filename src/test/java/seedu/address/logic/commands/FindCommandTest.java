@@ -16,6 +16,7 @@ import java.util.Collections;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.model.EventBook;
 import seedu.address.model.ExpenseBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -28,9 +29,9 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
  */
 public class FindCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new ExpenseBook(),
-            new TaskBook(), new UserPrefs());
+            new EventBook(), new TaskBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new ExpenseBook(),
-            new TaskBook(), new UserPrefs());
+            new EventBook(), new TaskBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test

@@ -5,6 +5,8 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+//import seedu.address.commons.events.model.BooksLocalBackupEvent;
+import seedu.address.commons.events.model.EventBookChangedEvent;
 import seedu.address.commons.events.model.ExpenseBookChangedEvent;
 import seedu.address.commons.events.model.UserPrefsChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
@@ -14,6 +16,7 @@ import seedu.address.commons.events.storage.OnlineBackupEvent;
 import seedu.address.commons.events.storage.OnlineRestoreEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyEventBook;
 import seedu.address.model.ReadOnlyExpenseBook;
 import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.UserPrefs;
@@ -21,8 +24,8 @@ import seedu.address.model.UserPrefs;
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, ExpenseBookStorage, TaskBookStorage, UserPrefsStorage {
-
+public interface Storage extends AddressBookStorage, EventBookStorage, ExpenseBookStorage,
+        TaskBookStorage, UserPrefsStorage {
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
 
@@ -81,6 +84,23 @@ public interface Storage extends AddressBookStorage, ExpenseBookStorage, TaskBoo
      */
     //void handleExpenseBookLocalBackupEvent(ExpenseBookLocalBackupEvent abce);
 
+    //=====================Events===========================
+    @Override
+    Path getEventBookFilePath();
+
+    @Override
+    Optional<ReadOnlyEventBook> readEventBook() throws DataConversionException, IOException;
+
+    @Override
+    void saveEventBook(ReadOnlyEventBook eventBook) throws IOException;
+
+    /**
+     * Saves the current version of the Event Book to the hard disk.
+     *   Creates the data file if it is missing.
+     * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
+     */
+    void handleEventBookChangedEvent(EventBookChangedEvent abce);
+
     //=========== Task ===================================================================================
     @Override
     Path getTaskBookFilePath();
@@ -90,6 +110,4 @@ public interface Storage extends AddressBookStorage, ExpenseBookStorage, TaskBoo
 
     @Override
     void saveTaskBook(ReadOnlyTaskBook taskBook) throws IOException;
-
-
 }

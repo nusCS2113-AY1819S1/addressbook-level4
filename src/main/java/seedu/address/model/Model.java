@@ -29,6 +29,9 @@ public interface Model {
     /** Clears existing expense model and replaces with the provided new data. */
     void resetData(ReadOnlyExpenseBook newData);
 
+    /** Clears existing event model and replaces with the provided new data. */
+    void resetData(ReadOnlyEventBook newData);
+
     /** Clears existing expense model and replaces with the provided new data. */
     void resetData(ReadOnlyTaskBook newData);
 
@@ -111,6 +114,12 @@ public interface Model {
      */
     void restoreExpenseBook(ReadOnlyExpenseBook restoredExpenseBook);
 
+    /**
+     * Restore event book from storage.
+     * @param restoredEventBook
+     */
+    void restoreEventBook(ReadOnlyEventBook restoredEventBook);
+
 
     //@@author luhan02
     /**
@@ -174,6 +183,14 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered event list */
     ObservableList<Event> getFilteredEventList();
+
+    /**
+     * Saves the current expense book state for undo/redo.
+     */
+    void commitEventBook();
+
+    /** Returns the EventBook */
+    ReadOnlyEventBook getEventBook();
 
     //@@author ChenSongJian
 

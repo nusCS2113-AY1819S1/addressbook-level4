@@ -32,7 +32,7 @@ public class Event {
     }
 
     public EventName getEventName() {
-        return eventName;
+        return this.eventName;
     }
 
     public Date getEventDate() {

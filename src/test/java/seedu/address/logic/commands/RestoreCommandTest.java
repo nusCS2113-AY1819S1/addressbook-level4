@@ -14,6 +14,7 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.EventBook;
 import seedu.address.model.ExpenseBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -48,6 +49,7 @@ public class RestoreCommandTest {
         Path tempExpenseBookFilePath = testFolder.getRoot().toPath().resolve("ExpenseBook.xml");
 
         ExpenseBook expenseBook = new ExpenseBook();
+        EventBook eventBook = new EventBook();
         TaskBook taskBook = new TaskBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -62,12 +64,12 @@ public class RestoreCommandTest {
         userPrefs.setExpenseBookGistId("6e6d4388b672da5a29c951630f4610db");
 
         System.out.println(userPrefs.getAddressBookBackupFilePath());
-        model = new ModelManager(getTypicalAddressBook(), expenseBook, taskBook, userPrefs);
+        model = new ModelManager(getTypicalAddressBook(), expenseBook, eventBook, taskBook, userPrefs);
         XmlAddressBookStorage xmlAddressBookStorage = new XmlAddressBookStorage(tempAddressBookBackupFilePath);
         xmlAddressBookStorage.saveAddressBook(model.getAddressBook());
         XmlExpenseBookStorage xmlExpenseBookStorage = new XmlExpenseBookStorage(tempExpenseBookBackupFilePath);
         xmlExpenseBookStorage.saveExpenseBook(model.getExpenseBook());
-        noBackupModel = new ModelManager(getTypicalAddressBook(), expenseBook, taskBook, noBackupUserPrefs);
+        noBackupModel = new ModelManager(getTypicalAddressBook(), expenseBook, eventBook, taskBook, noBackupUserPrefs);
     }
 
     @Test

@@ -15,9 +15,11 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
+import seedu.address.model.EventBook;
 import seedu.address.model.ExpenseBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyEventBook;
 import seedu.address.model.ReadOnlyExpenseBook;
 import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.UserPrefs;
@@ -94,6 +96,11 @@ public class AddExpenseCommandTest {
 
         @Override
         public void resetData(ReadOnlyExpenseBook newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetData(ReadOnlyEventBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -178,6 +185,11 @@ public class AddExpenseCommandTest {
         }
 
         @Override
+        public void restoreEventBook(ReadOnlyEventBook restoredEventBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void commitTaskBook() {
 
         }
@@ -232,6 +244,15 @@ public class AddExpenseCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void commitEventBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyEventBook getEventBook() {
+            return new EventBook();
+        }
         //======== Expense ============================================================================================
 
         @Override

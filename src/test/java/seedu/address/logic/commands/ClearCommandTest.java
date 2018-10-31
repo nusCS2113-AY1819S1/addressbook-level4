@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.AddressBook;
+import seedu.address.model.EventBook;
 import seedu.address.model.ExpenseBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -28,9 +29,10 @@ public class ClearCommandTest {
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new ExpenseBook(), new TaskBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new ExpenseBook(),
+        Model model = new ModelManager(getTypicalAddressBook(), new ExpenseBook(), new EventBook(),
                 new TaskBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new ExpenseBook(),
+                new EventBook(), new TaskBook(), new UserPrefs());
         expectedModel.resetData(new AddressBook());
         expectedModel.commitAddressBook();
 

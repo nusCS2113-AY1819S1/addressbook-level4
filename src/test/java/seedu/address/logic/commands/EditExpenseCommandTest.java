@@ -20,6 +20,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.EditExpenseCommand.EditExpenseDescriptor;
 import seedu.address.model.AddressBook;
+import seedu.address.model.EventBook;
 import seedu.address.model.ExpenseBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -34,7 +35,8 @@ import seedu.address.testutil.ExpenseBuilder;
  */
 public class EditExpenseCommandTest {
 
-    private Model model = new ModelManager(new AddressBook(), getTypicalExpenseBook(), new TaskBook(), new UserPrefs());
+    private Model model = new ModelManager(new AddressBook(), getTypicalExpenseBook(), new EventBook(),
+            new TaskBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -46,7 +48,7 @@ public class EditExpenseCommandTest {
         String expectedMessage = String.format(EditExpenseCommand.MESSAGE_EDIT_EXPENSE_SUCCESS, editedExpense);
 
         Model expectedModel =
-                new ModelManager(new AddressBook(), new ExpenseBook(model.getExpenseBook()),
+                new ModelManager(new AddressBook(), new ExpenseBook(model.getExpenseBook()), new EventBook(),
                         new TaskBook(), new UserPrefs());
         expectedModel.updateExpense(model.getFilteredExpenseList().get(0), editedExpense);
         expectedModel.commitExpenseBook();
@@ -75,7 +77,7 @@ public class EditExpenseCommandTest {
         String expectedMessage = String.format(EditExpenseCommand.MESSAGE_EDIT_EXPENSE_SUCCESS, editedExpense);
 
         Model expectedModel =
-                new ModelManager(new AddressBook(), new ExpenseBook(model.getExpenseBook()),
+                new ModelManager(new AddressBook(), new ExpenseBook(model.getExpenseBook()), new EventBook(),
                         new TaskBook(), new UserPrefs());
         expectedModel.updateExpense(lastExpense, editedExpense);
         expectedModel.commitExpenseBook();
@@ -92,7 +94,7 @@ public class EditExpenseCommandTest {
         String expectedMessage = String.format(EditExpenseCommand.MESSAGE_EDIT_EXPENSE_SUCCESS, editedExpense);
 
         Model expectedModel =
-                new ModelManager(new AddressBook(), new ExpenseBook(model.getExpenseBook()),
+                new ModelManager(new AddressBook(), new ExpenseBook(model.getExpenseBook()), new EventBook(),
                         new TaskBook(), new UserPrefs());
         expectedModel.commitExpenseBook();
 
@@ -118,7 +120,7 @@ public class EditExpenseCommandTest {
         EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder(editedExpense).build();
         EditExpenseCommand editExpenseCommand = new EditExpenseCommand(INDEX_FIRST_EXPENSE, descriptor);
         Model expectedModel =
-                new ModelManager(new AddressBook(), new ExpenseBook(model.getExpenseBook()),
+                new ModelManager(new AddressBook(), new ExpenseBook(model.getExpenseBook()), new EventBook(),
                         new TaskBook(), new UserPrefs());
         expectedModel.updateExpense(expenseToEdit, editedExpense);
         expectedModel.commitExpenseBook();

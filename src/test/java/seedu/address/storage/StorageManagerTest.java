@@ -22,6 +22,7 @@ import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ExpenseBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyEventBook;
 import seedu.address.model.ReadOnlyExpenseBook;
 import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.UserPrefs;
@@ -39,10 +40,12 @@ public class StorageManagerTest {
     @Before
     public void setUp() {
         XmlAddressBookStorage addressBookStorage = new XmlAddressBookStorage(getTempFilePath("ab"));
+        XmlEventBookStorage eventBookStorage = new XmlEventBookStorage(getTempFilePath("ev"));
         XmlExpenseBookStorage expenseBookStorage = new XmlExpenseBookStorage(getTempFilePath("eb"));
         XmlTaskBookStorage taskBookStorage = new XmlTaskBookStorage(getTempFilePath("tb"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, expenseBookStorage, taskBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(addressBookStorage, expenseBookStorage, eventBookStorage,
+                taskBookStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -129,8 +132,10 @@ public class StorageManagerTest {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub(Paths.get("dummy")),
                 new XmlExpenseBookStorageExceptionThrowingStub(Paths.get("dummy")),
+                new XmlEventBookStorageExceptionThrowingStub(Paths.get("dummy")),
                 new XmlTaskBookStorageExceptionThrowingStub(Paths.get("dummy")),
-                new JsonUserPrefsStorageExceptionThrowingStub(Paths.get("dummy")));
+                new JsonUserPrefsStorage(Paths.get("dummy")));
+
         storage.handleAddressBookChangedEvent(new AddressBookChangedEvent(new AddressBook()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
@@ -141,6 +146,7 @@ public class StorageManagerTest {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub(Paths.get("dummy")),
                 new XmlExpenseBookStorageExceptionThrowingStub(Paths.get("dummy")),
+                new XmlEventBookStorageExceptionThrowingStub(Paths.get("dummy")),
                 new XmlTaskBookStorageExceptionThrowingStub(Paths.get("dummy")),
                 new JsonUserPrefsStorageExceptionThrowingStub(Paths.get("dummy")));
         storage.handleExpenseBookChangedEvent(new ExpenseBookChangedEvent(new ExpenseBook()));
@@ -152,6 +158,7 @@ public class StorageManagerTest {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub(Paths.get("dummy")),
                 new XmlExpenseBookStorageExceptionThrowingStub(Paths.get("dummy")),
+                new XmlEventBookStorageExceptionThrowingStub(Paths.get("dummy")),
                 new XmlTaskBookStorageExceptionThrowingStub(Paths.get("dummy")),
                 new JsonUserPrefsStorageExceptionThrowingStub(Paths.get("dummy")));
         storage.handleUserPrefsChangedEvent(new UserPrefsChangedEvent(new UserPrefs()));
@@ -208,11 +215,21 @@ public class StorageManagerTest {
     /**
      * A Stub class to throw an exception when the save method is called
      */
-    class XmlTaskBookStorageExceptionThrowingStub extends XmlTaskBookStorage {
+    class XmlEventBookStorageExceptionThrowingStub extends XmlEventBookStorage {
 
-        public XmlTaskBookStorageExceptionThrowingStub(Path filePath) {
+        public XmlEventBookStorageExceptionThrowingStub(Path filePath) {
             super(filePath);
         }
+
+        @Override
+        public void saveEventBook(ReadOnlyEventBook eventBook, Path filePath) throws IOException {
+            throw new IOException("dummy exception");
+        }
+    }
+
+    class XmlTaskBookStorageExceptionThrowingStub extends XmlTaskBookStorage {
+
+        public XmlTaskBookStorageExceptionThrowingStub(Path filePath) { super(filePath); }
 
         @Override
         public void saveTaskBook(ReadOnlyTaskBook taskBook, Path filePath) throws IOException {

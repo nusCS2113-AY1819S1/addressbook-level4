@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.AddressBook;
+import seedu.address.model.EventBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.TaskBook;
@@ -25,7 +26,7 @@ public class AddExpenseCommandIntegrationTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(new AddressBook(), getTypicalExpenseBook(),
+        model = new ModelManager(new AddressBook(), getTypicalExpenseBook(), new EventBook(),
                 new TaskBook(), new UserPrefs());
     }
 
@@ -33,7 +34,7 @@ public class AddExpenseCommandIntegrationTest {
     public void execute_newExpense_success() {
         Expense validExpense = new ExpenseBuilder().build();
 
-        Model expectedModel = new ModelManager(new AddressBook(), getTypicalExpenseBook(),
+        Model expectedModel = new ModelManager(new AddressBook(), getTypicalExpenseBook(), new EventBook(),
                 new TaskBook(), new UserPrefs());
         expectedModel.addExpense(validExpense);
         expectedModel.commitExpenseBook();

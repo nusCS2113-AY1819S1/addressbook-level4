@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.model.EventBook;
 import seedu.address.model.ExpenseBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -26,8 +27,10 @@ public class ListCommandTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new ExpenseBook(), new TaskBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new ExpenseBook(), new TaskBook(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), new ExpenseBook(), new EventBook(),
+                new TaskBook(), new UserPrefs());
+        expectedModel = new ModelManager(model.getAddressBook(), new ExpenseBook(), new EventBook(),
+                new TaskBook(), new UserPrefs());
     }
 
     @Test
