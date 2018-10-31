@@ -58,7 +58,7 @@ JitHub is a desktop personal assistant application that allows students to manag
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=#add-to-do-task-code-todo-code]
+https://github.com/linnnruoo/main_AB4/blob/master/docs/UserGuide.adoc#add-to-do-task-code-todo-code[To-do task]
 
 == Contributions to the Developer Guide
 
@@ -66,7 +66,7 @@ include::../UserGuide.adoc[tag=#add-to-do-task-code-todo-code]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=#todo-feature]
+https://github.com/linnnruoo/main_AB4/blob/master/docs/DeveloperGuide.adoc#todo-feature[To-do feature]
 
 
 == PROJECT: PowerPointLabs
