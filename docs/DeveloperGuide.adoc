@@ -1422,8 +1422,8 @@ Use case ends
 
 *MSS*
 
-1.  Lecturer deletes student(s) from a group
-2.  AddressBook confirms student(s) are deleted
+1.  Lecturer deletes student from a group
+2.  AddressBook confirms student is deleted
 +
 Use case ends
 
@@ -1436,7 +1436,7 @@ Use case ends
 [none]
 ** 1a1. Student management system rejects command entered with relevant error message.
 [none]
-* 1b. Student management system detects student(s) not in the group.
+* 1b. Student management system detects student not in the group.
 +
 
 [none]
