@@ -687,7 +687,7 @@ e.g. `student delete 2`
 e.g. `student export C:\export`
 
 * *Add module* : `module add mc/MODULE_CODE mn/MODULE_NAME` +
-e.g. `module add mc/CS2113 p/CS2040C mn/Software Engineering`
+e.g. `module add mc/CS2113 mn/Software Engineering`
 * *Update module* : `module edit mc/MODULE_CODE​ mn/MODULE_NAME` +
 e.g. `module edit mc/CS2113 mn/Software`
 * *Remove module* : `module delete mc/MODULE_CODE​` +
