@@ -23,9 +23,9 @@ import seedu.address.model.event.Event;
 public class AddCommentCommand extends Command {
     public static final String COMMAND_WORD = "addComment";
 
-    public static final String MESSAGE = COMMAND_WORD + ": Edits the details of the event identified "
-            + "by the index number used in the displayed event list. "
-            + "Existing values will be overwritten by the input values.\n"
+    public static final String MESSAGE = COMMAND_WORD
+            + ": Adds a comment to the end of the comment section of the event identified "
+            + "by the index number used in the displayed event list.\n "
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_COMMENT + "COMMENT] "
             + "Example: " + COMMAND_WORD + " 1 "
@@ -38,7 +38,8 @@ public class AddCommentCommand extends Command {
     private String comment = null;
 
     /**
-     * @param index of the event in the filtered event list to edit.
+     * @param index of the event in the filtered event list to edit
+     * @param editEventDescriptor details to edit the event with
      */
     public AddCommentCommand(Index index, String comment) {
         requireNonNull(index);
@@ -69,7 +70,7 @@ public class AddCommentCommand extends Command {
 
         Event eventToEdit = filteredEventList.get(index.getZeroBased());
         AddComment comments = new AddComment(eventToEdit.getComment().toString());
-        Comment newComments = new Comment(comments.addComment(getComment()));
+        Comment newComments = new Comment(comments.addComment(getComment(), model.getUsername().toString()));
         editCommentDescriptor.setComment(newComments);
         Event editedEvent = EditCommand.createEditedEvent(eventToEdit, editCommentDescriptor);
 
