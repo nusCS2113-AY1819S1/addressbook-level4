@@ -40,6 +40,8 @@ image::download.png[width="450", align="left"]
 . Key-in password
 * A password will be required by the application to use it.
 * If you do not know the password, please contact us using github directly.
+* For the sake of this early development of the program, the password for the admin: "admin"; student: "password"; accountant: "accountant".
+* Different roles have different sets of permission ie commands.
 . Input Commands
 * Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
