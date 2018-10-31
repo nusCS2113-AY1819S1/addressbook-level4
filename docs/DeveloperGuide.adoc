@@ -24,6 +24,9 @@ to add, edit, find, filter, shortlist, email and delete candidates, as well as j
 potential candidates to the job offer that is best suited for them. Hence, you can organise and sift out your desired
 information with just a few clicks due to the meticulous data handling in RecruitBook.
 
+RecruitBook is written in Java, and you can interact with it using Command-Line Interface(CLI), as well as Graphical User Interface(GUI).
+Its GUI is created with JavaFX.
+
 This guide provides information that will not only help you get started as a RecruitBook contributor, but also get
 a better understanding of data handling and code implementation if you are interested in coding.
 
@@ -431,7 +434,7 @@ be able to shortlist a candidate for multiple job offers. Hence, we need to furt
 to store multiple job offers under the same candidate `key`.
 // end::shortlist[]
 
-// tag::switchbook[]
+// tag::switch[]
 === Switch Book Feature
 ==== Current Implementation
 The switching mechanism is facilitated by `MainWindow`, with the latter's `switchToCandidateBook` and `switchToCompanyBook` methods.
@@ -490,7 +493,7 @@ and returning false if the current book is Company Book.
 ** Pros: Eliminates the possibility of misspelling the books.
 ** Cons: Can be confusing for multiple contributors. There is also an assumption that there are only 2 distinct
 cases of the view of `panelViewPlaceholder`, which is not the case as we introduced another view `shortlistPanel`.
-// end::switchbook[]
+// end::switch[]
 
 // tag::email[]
 === Email command
