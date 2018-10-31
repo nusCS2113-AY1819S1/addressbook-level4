@@ -104,6 +104,7 @@ public class AddTestMarksCommandTest {
         addTestMarksCommand.execute(modelStub, commandHistory);
 
     }
+
     @Test
     public void equals() {
         Person alice = new PersonBuilder().withName("Alice").build();
@@ -155,6 +156,7 @@ public class AddTestMarksCommandTest {
         final ArrayList<Person> personsAdded = new ArrayList<>();
         private Person validPerson = new PersonBuilder().build();
         private Person validPerson2 = new PersonBuilder().withName("Jeff").build();
+
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
 
@@ -284,9 +286,4 @@ public class AddTestMarksCommandTest {
             throw new AssertionError("This method should not be called.");
         }
     }
-
-
-
-
-
 }
