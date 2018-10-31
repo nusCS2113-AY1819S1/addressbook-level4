@@ -58,6 +58,7 @@ public class StudentAddCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        StudentManager.getInstance().initializeModel(model);
 
         if (model.hasPerson(toAdd) || StudentManager.getInstance()
                 .doesStudentExistForGivenMatricNo(toAdd.getMatricNo().matricNo)) {

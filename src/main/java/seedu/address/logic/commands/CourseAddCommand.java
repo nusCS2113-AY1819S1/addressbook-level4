@@ -27,7 +27,7 @@ public class CourseAddCommand extends Command {
             + "\n"
             + "Example: "
             + COMMAND_WORD + " "
-            + PREFIX_COURSE_CODE + "CEG1 "
+            + PREFIX_COURSE_CODE + "CEG "
             + PREFIX_COURSE_NAME + "Computer Engineering "
             + PREFIX_COURSE_FACULTY + "School of Computing ";
 
