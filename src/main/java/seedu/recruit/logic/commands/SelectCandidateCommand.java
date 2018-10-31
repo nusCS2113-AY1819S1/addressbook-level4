@@ -16,6 +16,7 @@ import seedu.recruit.model.Model;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.joboffer.JobOffer;
+import seedu.recruit.model.tag.Tag;
 
 /**
  * Selects a candidate identified using it's displayed index from the recruit book.
@@ -59,6 +60,11 @@ public class SelectCandidateCommand extends Command {
         }
 
         selectedCandidate = filteredCandidateList.get(targetIndex.getZeroBased());
+
+        Tag blacklistTag = new Tag("BLACKLISTED");
+        if (selectedCandidate.getTags().contains(blacklistTag)) {
+            throw new CommandException(BlacklistCommand.MESSAGE_WARNING_BLACKLISTED_PERSON);
+        }
 
         if (ShortlistCandidateInitializationCommand.isShortlisting()) {
             EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
