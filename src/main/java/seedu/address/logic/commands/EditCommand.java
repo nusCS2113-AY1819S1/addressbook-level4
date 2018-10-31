@@ -50,7 +50,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Product: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PRODUCT = "This product already exists in the product list.";
+    public static final String MESSAGE_DUPLICATE_PRODUCT = "A product with the same serialnumber already exists.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -80,7 +80,7 @@ public class EditCommand extends Command {
         Product productToEdit = lastShownList.get(index.getZeroBased());
         Product editedProduct = createEditedPerson(productToEdit, editPersonDescriptor);
 
-        if (!productToEdit.isSamePerson(editedProduct) && model.hasPerson(editedProduct)) {
+        if (!productToEdit.isSameProduct(editedProduct) && model.hasPerson(editedProduct)) {
             throw new CommandException(MESSAGE_DUPLICATE_PRODUCT);
         }
 
