@@ -39,7 +39,7 @@ public class AddCommentCommand extends Command {
 
     /**
      * @param index of the event in the filtered event list to edit
-     * @param editEventDescriptor details to edit the event with
+     * @param comment details to edit the event with
      */
     public AddCommentCommand(Index index, String comment) {
         requireNonNull(index);
