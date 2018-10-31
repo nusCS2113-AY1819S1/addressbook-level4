@@ -1106,42 +1106,31 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 (For all use cases below, the *System* is the `FinancialPlanner` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== 1.  Use case: Input expense for a certain activity. [Vincent]
+=== 1.  Use case: Input expense for a certain activity.
 
 *MSS*
 
-1.  User requests to insert a spending amount
-2.  FinancialPlanner requests the amount of money
-3.  User enters the amount of money spent
-4.  FinancialPlanner requests for confirmation from user.
-5.  User confirms the amount.
-6.  FinancialPlanner requests the description of the item/activity that money was spent on
-7.  User enters the description of the item he spent on
-8.  FinancialPlanner requests for confirmation from user.
-9.  User confirms the description.
-10. FinancialPlanner processes the input and stores the information.
-11. FinancialPlanner shows the status update of the operation.
+1.  User requests to add record into FinancialPlanner.
+2.  System adds the record into the system.
+3.  System displays the record added to the user.
 +
 Use case ends.
 
 *Extensions*
 
-* 3a. User’s input is of invalid form.
-    FinancialPlanner throws invalid format error and shows the format needed.
-    Use case resumes at step 2.
+* 1a. User’s input command is invalid. +
+** FinancialPlanner throws invalid command error and shows an example command input needed.
+** Use case ends.
 
-* 5a. User declines the confirmation.
-** Use case resumes at step 2.
+* 1a. User's input parameters are missing or invalid. +
+** FinancialPlanner throws invalid command error and notifies user of the correct format.
+** Use case ends.
 
-* 7a. User’s input is of invalid form.
-** FinancialPlanner throws invalid format error.
-** Use case resumes at step 6.
-
-* 9a. User declines the confirmation.
-** Use case resumes at step 6.
+* 1a. The record to be added is a duplicate of existing record in the system.
+** FinancialPlanner throws duplicated record error.
+** Use case ends.
 
 [discrete]
-
 === 2.  Use case: Delete expense entry whose date is required. [Linh Chi]
 
 *MSS*
@@ -1186,12 +1175,15 @@ Use case ends.
 * 1a. User’s command is of invalid form.
 ** FinancialPlanner throws invalid command error.
 ** Use case resumes at step 1.
+
 * 1a. User does not specify any arguments.
 ** FinancialPlanner returns all records in the FinancialPlanner.
 ** Use case ends.
+
 * 1a. The arguments are of incorrect format
-** FinancialPlanner throws invalid command error and shows an example of a correct command
+** FinancialPlanner throws invalid command error and notifies user of the correct format.
 ** Use case resumes at step 1.
+
 * 2a. There is no history.
 ** FinancialPlanner shows a blank list.
 ** Use case ends.
@@ -1215,28 +1207,29 @@ Use case ends.
 ** Use case continues from step 2
 
 [discrete]
-=== 5.  Use case: Plan the total expenses for a period of time
+=== 5.  Use case: View breakdown of financial activity into category [Vincent]
 
 *MSS*
 
-1.  User requests to plan expenses
-2.  FinancialPlanner requests for amount of money to be allocated
-3.  User inputs amount of money
-4.  FinancialPlanner requests for period of time for amount of money to be allocated
-5.  User inputs period of time
-6.  FinancialPlanner records amount of money for time period specified.
+1.  User requests for category breakdown within a period of time.
+2.  System retrieves the category breakdown report.
+3.  System shows the report to the user in format of pie charts.
 +
 Use case ends.
 
 *Extensions*
 
-* 3a User’s input is not a valid amount of money
-** FinancialPlanner throws invalid input command
-** Use case continues from step 2
-* 5a User’s input is not a valid period of time
-** FinancialPlanner throws invalid input command
-** Use case continues from step 4
+* 1a. User’s input command is invalid. +
+** System throws invalid command error and shows an example command input needed.
+** Use case ends.
 
+* 1a. User's input parameters are missing or invalid. +
+** System throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+* 2a. There are no records within the time range specified. +
+** System shows an empty page with warning that nothing has been found.
+** Use case ends.
 
 [discrete]
 === 6.  Use case: Search expenses based on category [Zhi Thon]
@@ -1256,24 +1249,29 @@ Use case ends.
 ** FinancialPlanner shows no expenditure for selected category
 
 [discrete]
-=== 7.  Use case: Summary of expenditure by category [Vincent]
+=== 7.  Use case: View daily/monthly summary within a period of time [Vincent]
 
 *MSS*
 
-1.  User requests for Expenditure summary
-2.  FinancialPlanner requests for date of entry the user want to see
-3.  User enters the date they want to see
-4.  FinancialPlanner requests for confimation from the user
-5.  User confirms the date
-6.  FinancialDisplay displays the list of catrgories expenditure.
+1.  User requests for summary report within a period of time.
+2.  System retrieves the summary report.
+3.  System shows the report to the user in format of a table.
 +
 Use case ends.
 
 *Extensions*
 
-* 3a. User’s input is of invalid form.
-** FinancialPlanner throws invalid format error and shows the format needed.
-** Use case resumes at step 2.
+* 1a. User’s input command is invalid. +
+** System throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 1a. User's input parameters are missing or invalid. +
+** System throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+* 2a. There are no records within the time range specified. +
+** System shows an empty table.
+** Use case ends.
 
 [discrete]
 === 8.  Use case: Usage Instructions guide
@@ -1283,7 +1281,7 @@ Use case ends.
 1.  User requests for usage instructions
 2.  FinancialPlanner displays different commands
 3.  User inputs which command he wants to find out about
-4.  Financial displays infomration on selected command
+4.  Financial displays information on selected command
 +
 Use case ends.
 
