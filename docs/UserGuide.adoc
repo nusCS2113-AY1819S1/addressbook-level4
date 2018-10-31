@@ -139,16 +139,16 @@ Examples:
 
 === Add test and test marks to student: `adt student name tn/ tm/`
 The system is allowed user to input different test name and test marks for each student by indicate
-the name of student. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate keyword then need to indicate the full name, otherwise if no duplicate it will just add to the student )
-
+the name of student. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate keyword then need to indicate the full name, otherwise if no duplicate it will just add to the student ),
+the marks should be 1 digit double numbers or integers within 0-100
 Format: `adt student name tn/ tm/` or  `adt student name tm/ tn/`
 Example: `adt Alex tn/CS2113Midterm tm/77`
 This will add a test to the student
 
 === Edit test marks of student: `edt student name tn/ tm/`
 The system is allowed user to input different test name and test marks for each student by indicate
-the student name. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate then need to indicate the full name, otherwise if no duplicate it will just edit the student's mark)
-
+the student name. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate then need to indicate the full name, otherwise if no duplicate it will just edit the student's mark),
+the marks should be 1 digit double numbers or integers within 0-100
 Format: `edt student name tn/ tm/` or `edt student name tm/ tn/`
 Example: `edt Alex tn/CS2113Midterm tm/66`
 This will edit the student marks for test CS2113Midterm

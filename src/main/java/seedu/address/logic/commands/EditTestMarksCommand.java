@@ -43,7 +43,6 @@ public class EditTestMarksCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": edit test marks of students \n"
             + "the test should be an available test which was added before\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD_2 + " alice " + PREFIX_TEST_NAME + "cs2113PE " + PREFIX_TEST_MARK + "67";
 
 
