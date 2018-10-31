@@ -19,4 +19,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_THREAD_ID = "Invalid Thread ID!";
     public static final String MESSAGE_INVALID_COMMENT_ID = "Invalid Comment ID!";
 
+    public static final String MESSAGE_INVALID_THREAD =
+            "Sorry! The entity you requested is not under the current scope";
+    public static final String MESSAGE_INVALID_COMMENT =
+            "Sorry! The entity you requested is not under the current scope";
 }
