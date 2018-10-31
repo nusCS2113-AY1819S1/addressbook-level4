@@ -23,9 +23,9 @@ public class NoteAddCommand extends Command {
 
     public static final String COMMAND_WORD = "note add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a note to Trajectory. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a note to Trajectory.\n"
             + "Parameters: "
-            + "[" + PREFIX_MODULE_CODE + "MODULE_CODE] "
+            + PREFIX_MODULE_CODE + "MODULE_CODE "
             + "[" + PREFIX_NOTE_TITLE + "TITLE] "
             + "[" + PREFIX_NOTE_START_DATE + "START_DATE] "
             + "[" + PREFIX_NOTE_START_TIME + "START_TIME] "
@@ -33,11 +33,12 @@ public class NoteAddCommand extends Command {
             + "[" + PREFIX_NOTE_END_TIME + "END_TIME] "
             + "[" + PREFIX_NOTE_LOCATION + "LOCATION]\n"
             + "Example: " + COMMAND_WORD + " "
+            + PREFIX_MODULE_CODE + "CS2113 "
             + PREFIX_NOTE_TITLE + "My First Note "
             + PREFIX_NOTE_START_DATE + "30-10-2020 "
             + PREFIX_NOTE_LOCATION + "Columbia, Schermerhorn 614";
 
-    public static final String MESSAGE_SUCCESS = "Note has been added.";
+    public static final String MESSAGE_SUCCESS = "Note has been added to %1$s.";
     public static final String MESSAGE_CANCEL = "Note creation has been cancelled.";
 
     private Note noteToAdd;
@@ -60,7 +61,7 @@ public class NoteAddCommand extends Command {
 
             String noteList = noteManager.getHtmlNoteList();
 
-            return new CommandResult(MESSAGE_SUCCESS, noteList);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, noteToAdd.getModuleCode().toString()), noteList);
         } else {
             return new CommandResult(MESSAGE_CANCEL);
         }

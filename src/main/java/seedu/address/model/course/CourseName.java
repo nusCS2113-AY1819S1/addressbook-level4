@@ -10,9 +10,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class CourseName {
 
     public static final String MESSAGE_COURSE_NAME_CONSTRAINTS =
-            "Course names may only contain alphanumeric characters and spaces, and it should not be blank";
+            "Course names may only contain alphanumeric characters and spaces"
+                    + ", may have between 1 to 64 characters and it should not be blank";
 
-    public static final String COURSE_NAME_VALIDATION_REGEX = "^[a-zA-Z\\s]*$";
+    public static final String COURSE_NAME_VALIDATION_REGEX = "^[a-zA-Z\\s]{1,64}$";
 
     public final String courseName;
 

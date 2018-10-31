@@ -19,14 +19,16 @@ import seedu.address.model.module.ModuleManager;
  */
 public class GradebookAddCommandParser implements Parser<GradebookAddCommand> {
     public static final String MESSAGE_EMPTY_INPUTS = "Module code and gradebook component name cannot be empty";
+    public static final String MESSAGE_EMPTY_MODULE_CODE = "Module code cannot be empty";
+    public static final String MESSAGE_EMPTY_COMPONENT_NAME = "Component name cannot be empty";
     public static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
-    public static final String MESSAGE_MAX_MARKS_ERROR = "Invalid input. \nMaximum marks should only be an integer";
-    public static final String MESSAGE_WEIGHTAGE_ERROR = "Invalid input. \nWeightage should only be an integer";
+    public static final String MESSAGE_MAX_MARKS_ERROR = "Maximum marks indicated must be an integer.";
+    public static final String MESSAGE_WEIGHTAGE_ERROR = "Weightage indicated must be an integer.";
     public static final String MESSAGE_MAX_MARKS_INVALID = "Maximum marks should be within 0-100 range";
+    private static final String MESSAGE_INT_INPUTS_INVALID = "Both marks and weightage must be within 0-100 range";
     private static final String MESSAGE_WEIGHTAGE_INVALID = "Weightage should be within 0-100 range";
     private static final String MESSAGE_DUPLICATE = "Gradebook component already exist in Trajectory";
     private static final String MESSAGE_WEIGHTAGE_EXCEED = "The accumulated weightage for module stated has exceeded!";
-    private static final String MESSAGE_INT_INPUTS_INVALID = "Both marks and weightage must be within 0-100 range";
 
     /**
      * Parses the given {@code String args} of arguments in the context of the GradebookAddCommand
@@ -62,9 +64,19 @@ public class GradebookAddCommandParser implements Parser<GradebookAddCommand> {
         }
         String moduleCodeArg = argMultimap.getValue(PREFIX_MODULE_CODE).get();
         String gradeComponentNameArg = argMultimap.getValue(PREFIX_GRADEBOOK_ITEM).get();
-        boolean isEmpty = gradebookManager.isEmpty(moduleCodeArg, gradeComponentNameArg);
-        if (isEmpty) {
+        boolean isModuleCodeAndComponentNameEmpty = gradebookManager.isModuleCodeAndComponentNameEmpty(
+                moduleCodeArg,
+                gradeComponentNameArg);
+        if (isModuleCodeAndComponentNameEmpty) {
             throw new ParseException(MESSAGE_EMPTY_INPUTS);
+        }
+        boolean isModuleCodeEmpty = gradebookManager.isModuleCodeEmpty(moduleCodeArg);
+        if (isModuleCodeEmpty) {
+            throw new ParseException(MESSAGE_EMPTY_MODULE_CODE);
+        }
+        boolean isComponentNameEmpty = gradebookManager.isComponentNameEmpty(gradeComponentNameArg);
+        if (isComponentNameEmpty) {
+            throw new ParseException(MESSAGE_EMPTY_COMPONENT_NAME);
         }
         boolean isMaxMarksAndWeightageValid = gradebookManager.isIntParamsValid(
                 gradeComponentMaxMarksArg,
@@ -88,7 +100,7 @@ public class GradebookAddCommandParser implements Parser<GradebookAddCommand> {
         if (hasWeightageExceed) {
             throw new ParseException(MESSAGE_WEIGHTAGE_EXCEED);
         }
-        boolean doesModuleExist = moduleManager.doesModuleExist(moduleCodeArg);
+        boolean doesModuleExist = moduleManager.doesModuleExist(moduleCodeArg.toUpperCase());
         if (!doesModuleExist) {
             throw new ParseException(MESSAGE_MODULE_CODE_INVALID);
         }

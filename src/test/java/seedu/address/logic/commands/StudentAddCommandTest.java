@@ -19,6 +19,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.StorageController;
+import seedu.address.model.course.*;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -41,6 +43,10 @@ public class StudentAddCommandTest {
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Person validPerson = new PersonBuilder().build();
+
+        StorageController.enterTestMode();
+        CourseManager.getInstance().addCourse(new Course(new CourseCode("CEG")
+                , new CourseName("Computer Engineering"), new FacultyName("Faculty of Engineering")));
 
         CommandResult commandResult = new StudentAddCommand(validPerson).execute(modelStub, commandHistory);
 

@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
+import seedu.address.model.course.CourseManager;
 import seedu.address.model.person.Person;
 import seedu.address.ui.HtmlTableProcessor;
 
@@ -32,16 +33,19 @@ public class StudentListCommand extends Command {
 
         sb.append(HtmlTableProcessor.getH3Representation("Student List"));
         sb.append(HtmlTableProcessor.renderTableStart(new ArrayList<String>(
-                Arrays.asList("Matric No", "Full Name", "Email Address"))));
+                Arrays.asList("Matric No", "Full Name", "Email Address", "Course Code", "Course Name"))));
 
         sb.append(HtmlTableProcessor.getTableItemStart());
         for (Person p: model.getAddressBook().getPersonList()) {
             sb.append(HtmlTableProcessor
                     .renderTableItem(new ArrayList<String>(Arrays
-                            .asList(p.getMatricNo().toString(), p.getName().toString(), p.getEmail().toString()))));
+                            .asList(p.getMatricNo().toString(), p.getName().toString(),
+                                    p.getEmail().toString(), p.getCourseCode().toString(),
+                                    CourseManager.getInstance()
+                                            .getCourse(p.getCourseCode().courseCode).getCourseName().courseName))));
         }
-        sb.append(HtmlTableProcessor.getTableItemEnd());
+        sb.append(HtmlTableProcessor.getTableEnd());
 
-        return new CommandResult(MESSAGE_SUCCESS + "\n" + "", sb.toString());
+        return new CommandResult(MESSAGE_SUCCESS, sb.toString());
     }
 }

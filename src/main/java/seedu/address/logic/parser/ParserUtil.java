@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DATE_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TIME_FORMAT;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -14,6 +16,8 @@ import seedu.address.model.course.CourseName;
 import seedu.address.model.course.FacultyName;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModuleName;
+import seedu.address.model.note.NoteDate;
+import seedu.address.model.note.NoteTime;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.MatricNo;
@@ -229,5 +233,35 @@ public class ParserUtil {
             throw new ParseException(ModuleName.MESSAGE_MODULE_NAME_CONSTRAINTS);
         }
         return new ModuleName(trimmedModuleName);
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code LocalDate}.
+     * Leading and trailing whitespaces will be trimmed and
+     * spaces in between non-space characters will be reduced to
+     * a single space.
+     */
+    public static NoteDate parseNoteDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim().replaceAll(" +", " ");
+        if (!NoteDate.isValidDate(trimmedDate)) {
+            throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
+        }
+        return new NoteDate(trimmedDate);
+    }
+
+    /**
+     * Parses a {@code String time} into a {@code LocalTime}.
+     * Leading and trailing whitespaces will be trimmed and
+     * spaces in between non-space characters will be reduced to
+     * a single space.
+     */
+    public static NoteTime parseNoteTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedTime = time.trim().replaceAll(" +", " ");
+        if (!NoteTime.isValidTime(trimmedTime)) {
+            throw new ParseException(MESSAGE_INVALID_TIME_FORMAT);
+        }
+        return new NoteTime(trimmedTime);
     }
 }

@@ -50,12 +50,37 @@ public class GradesManager {
         grades.clear();
     }
 
-
     /**
      This method adds grade component to a module in Trajectory.
      */
     public void addGrade (Grades grade) {
         grades.add(grade);
+    }
+
+    /**
+     This method finds grade item.
+     */
+    public Grades findGrade (String moduleCode, String gradebookComponentName) {
+        for (Grades gradeList : grades) {
+            if (gradeList.getModuleCode().equals(moduleCode)
+                    && gradeList.getGradeComponentName().equals(gradebookComponentName)) {
+                return gradeList;
+            }
+        }
+        return null;
+    }
+
+    /**
+     This method deletes all grades of student if gradebook component is deleted.
+     */
+    public void deleteGrades (Grades grade) {
+        if (!grades.isEmpty()) {
+            grades.remove(grade);
+            Grades gradeCheck = findGrade(grade.getModuleCode(), grade.getGradeComponentName());
+            if (gradeCheck != null) {
+                deleteGrades(gradeCheck);
+            }
+        }
     }
 
     /**

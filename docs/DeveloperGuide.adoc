@@ -1118,15 +1118,19 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |teacher |add grade components |differentiate the grade components in a module (E.g. mid term test, finals examination)
 
-|`* * *` |teacher |edit grades of students |change students marks after reviewing
+|`* * *` |teacher | edit grade components |modifications is possible to reflect the grade component properly.
 
-|`* * *` |teacher |delete grade item |remove after an incorrect input of grade item
+|`* * *` |teacher | delete grade components |incorrect grade components in the module can be removed.
 
-|`* * *` |teacher |list grades of students |monitor my students progress
+|`* * *` |teacher |list grade components |view the grade components available in the module.
 
-|`* *` |teacher |list all grade components |view all the grade components that I have added to my module
+|`* * *` |teacher | find grade components |view the information for a specific grade component.
 
-|`* * *` |teacher |assign grades of students |keep track of the grades that I have given out to students
+|`* * *` |teacher | add students grades |store the marks for students enrolled in module
+
+|`* * *` |teacher | list students grades |view all grades keyed in to the students
+
+|`* * *` |teacher | display students grades in a graph |keep track of the progress of students for a particular grade component
 
 |`* * *` |teacher |add notes |keep track of important things and also my own teaching progress
 
@@ -1834,12 +1838,14 @@ Use case resumes at step 1.
 === Use case: Add Grade Component
 *Precondition(s)* :
 
-* Module code must exist.
+* Module code must exist
 * Component name must not already exist in Trajectory.
+* Accumulated weightage for grade components in module cannot exceed 100%.
+* Weightage can be 0 for grade components like Mock Practical Exam.
 
 *Guarantees* :
 
-* Gradebook component will not be added if it does not meet validation requirements (Duplicate results, empty inputs etc)
+* Gradebook component will not be added if it does not meet validation requirements.
 
 *MSS* :
 
@@ -1885,9 +1891,9 @@ Use case resumes at step 1.
 === Use case: Update Grade Component
 *Precondition(s)* :
 
-* Grade component and corresponding module code must exist.
-* Percentage of grade must not exceed 100%.
-* Total sum of weightage for all grade components must not exceed 100%.
+* Grade component name must exist in existing module.
+* Accumulated weightage including the updated weightage must not exceed 100%.
+* At least one optional parameter must be included in command.
 
 *Guarantees* :
 
@@ -1896,9 +1902,7 @@ Use case resumes at step 1.
 *MSS* :
 
 1. Teacher updates grade component.
-2. System requests for confirmation by displaying input.
-3. Teacher confirms request.
-4. System indicates success message.
+2. System indicates success message.
 +
 Use case ends.
 
@@ -1911,26 +1915,18 @@ Use case ends.
 +
 Steps 1a1-1a2 are repeated until the data entered is correct.
 +
-Use case resumes from step 2.
-
-* *a. At any time, teacher chooses to cancel updating a grade component.
-+
-** *a1. System requests to confirm the cancellation.
-** *a2. Teacher confirms request.
-+
-Use case ends.
+Use case resumes from step 1.
 
 
 [discrete]
 === Use case: Remove Grade Component
 *Precondition(s)* :
 
-* Grade component must exist.
-* Corresponding module must exist.
+* Grade component name must exist in existing module.
 
 *Guarantees* :
 
-* Deleting grade component will also delete any grade items associated to it.
+* Deleting grade component will also delete any student marks associated to it.
 
 *MSS* :
 
@@ -1952,7 +1948,7 @@ Use case resumes at step 1.
 === Use case: Find Grade Component
 *Precondition(s)* :
 
-* Grade component must exist.
+* Grade component name must exist in existing module.
 
 *Guarantees* :
 
@@ -1984,7 +1980,7 @@ Use case resumes at step 1.
 === Use case: List Grade Components
 *Precondition(s)* :
 
-* Module must exist.
+* Grade component name must exist in existing module.
 
 *Guarantees* :
 
@@ -2032,14 +2028,7 @@ Use case ends.
 +
 Steps 1a1-1a2 are repeated until the data entered is correct.
 +
-Use case resumes from step 2.
-
-* *a. At any time, teacher chooses to cancel listing students grades.
-+
-** *a1. System requests to confirm the cancellation.
-** *a2. Teacher confirms request.
-+
-Use case ends.
+Use case resumes from step 1.
 
 
 [discrete]
@@ -2047,7 +2036,8 @@ Use case ends.
 *Precondition(s)* :
 
 * Students must be enrolled to the module.
-* Grade item details(MAX_MARKS, PERCENTAGE OF GRADE) must exist.
+* Grade component name must exist in existing module.
+* Marks assigned to student for the particular gradebook component must not exceed its maximum marks.
 
 *Guarantees* :
 
@@ -2056,9 +2046,7 @@ Use case ends.
 *MSS* :
 
 1. Teacher assigns student a mark.
-2. System requests for confirmation.
-3. Teacher confirms request.
-4. System indicates success message.
+2. System indicates success message.
 +
 Use case ends.
 
@@ -2071,14 +2059,37 @@ Use case ends.
 +
 Steps 1a1-1a2 are repeated until the data entered is correct.
 +
-Use case resumes from step 2.
+Use case resumes from step 1.
 
-* *a. At any time, teacher chooses to cancel assigning students grades.
-+
-** *a1. System requests to confirm the cancellation.
-** *a2. Teacher confirms request.
+
+[discrete]
+=== Use case: Display Graph of Student Grades
+*Precondition(s)* :
+
+* Grade component name must exist in existing module.
+* Marks of all students taking the module should be added in.
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
+
+1. Teacher displays grade graph.
+2. System indicates success message.
 +
 Use case ends.
+
+*Extensions* :
+
+* 1a. System detects an error in the entered data.
++
+** 1a1. System displays message and format corresponding to error.
+** 1a2. Teacher enters new data.
++
+Steps 1a1-1a2 are repeated until the data entered is correct.
++
+Use case resumes from step 1.
 
 
 [discrete]

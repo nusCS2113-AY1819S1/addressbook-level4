@@ -20,6 +20,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CourseAddCommand;
 import seedu.address.logic.commands.CourseDeleteCommand;
 import seedu.address.logic.commands.CourseListCommand;
+import seedu.address.logic.commands.CourseListStudentsCommand;
 import seedu.address.logic.commands.DebugCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -39,10 +40,12 @@ import seedu.address.logic.commands.ModuleDeleteCommand;
 import seedu.address.logic.commands.ModuleEditCommand;
 import seedu.address.logic.commands.ModuleEnrolCommand;
 import seedu.address.logic.commands.ModuleListCommand;
+import seedu.address.logic.commands.ModuleViewCommand;
 import seedu.address.logic.commands.NoteAddCommand;
 import seedu.address.logic.commands.NoteDeleteCommand;
 import seedu.address.logic.commands.NoteEditCommand;
 import seedu.address.logic.commands.NoteExportCommand;
+import seedu.address.logic.commands.NoteFindCommand;
 import seedu.address.logic.commands.NoteListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
@@ -68,7 +71,7 @@ public class AddressBookParser {
      * Used to separate multiple command words and args
      */
     private static final Pattern ADVANCED_COMMAND_FORMAT =
-            Pattern.compile("(?<commandWords>.*?\\S+((?<=find)|(?=(?:\\s+[0-9]|\\s+[a-z]+\\/))|$))(?<arguments>.*)");
+            Pattern.compile("(?<commandWords>.*?\\S+((?<=find)|(?=(?:\\s+-?[0-9]|\\s+[a-z]+\\/))|$))(?<arguments>.*)");
 
     /**
      * Parses user input into command for execution.
@@ -121,6 +124,9 @@ public class AddressBookParser {
         case CourseListCommand.COMMAND_WORD:
             return new CourseListCommand();
 
+        case CourseListStudentsCommand.COMMAND_WORD:
+            return new CourseListStudentsCommand();
+
         case CourseDeleteCommand.COMMAND_WORD:
             return new CourseDeleteCommandParser().parse(arguments);
 
@@ -141,6 +147,9 @@ public class AddressBookParser {
 
         case NoteExportCommand.COMMAND_WORD:
             return new NoteExportCommandParser().parse(arguments);
+
+        case NoteFindCommand.COMMAND_WORD:
+            return new NoteFindCommandParser().parse(arguments);
 
         case StudentEditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
@@ -168,6 +177,9 @@ public class AddressBookParser {
 
         case ModuleDeleteCommand.COMMAND_WORD:
             return new ModuleDeleteCommandParser().parse(arguments);
+
+        case ModuleViewCommand.COMMAND_WORD:
+            return new ModuleViewCommandParser().parse(arguments);
 
         case ModuleListCommand.COMMAND_WORD:
             return new ModuleListCommand();

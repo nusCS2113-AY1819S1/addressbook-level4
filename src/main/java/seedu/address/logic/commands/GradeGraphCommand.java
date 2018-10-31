@@ -18,8 +18,8 @@ public class GradeGraphCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a graph to show scores of all students"
             + " for one grade component.\n"
             + "Parameters: "
-            + PREFIX_MODULE_CODE + "MODULE_CODE  "
-            + PREFIX_GRADEBOOK_ITEM + "ITEM \n"
+            + PREFIX_MODULE_CODE + "MODULE_CODE "
+            + PREFIX_GRADEBOOK_ITEM + "COMPONENT_NAME \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_MODULE_CODE + "CS2113 "
             + PREFIX_GRADEBOOK_ITEM + "Assignment 1";
