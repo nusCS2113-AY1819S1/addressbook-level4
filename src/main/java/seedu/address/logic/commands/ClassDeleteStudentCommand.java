@@ -86,7 +86,8 @@ public class ClassDeleteStudentCommand extends Command {
         classroomManager.saveClassroomList();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, matricNo,
-                classToUnassignStudent.getClassName(), classToUnassignStudent.getModuleCode()));
+                classToUnassignStudent.getClassName(), classToUnassignStudent.getModuleCode()),
+                classroomManager.getClassroomHtmlRepresentation());
     }
 
     @Override

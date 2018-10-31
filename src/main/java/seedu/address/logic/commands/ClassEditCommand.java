@@ -73,7 +73,8 @@ public class ClassEditCommand extends Command {
         classroomManager.updateClassroom(classtoEdit, editedClass);
         classroomManager.saveClassroomList();
         return new CommandResult(String.format(MESSAGE_EDIT_CLASSROOM_SUCCESS,
-                classtoEdit.getClassName(), classtoEdit.getModuleCode()));
+                classtoEdit.getClassName(), classtoEdit.getModuleCode()),
+                classroomManager.getClassroomHtmlRepresentation());
     }
 
     /**

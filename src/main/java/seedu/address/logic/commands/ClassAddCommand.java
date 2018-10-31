@@ -71,7 +71,8 @@ public class ClassAddCommand extends Command {
         classroomManager.saveClassroomList();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, classToCreate.getClassName(),
-                classToCreate.getModuleCode(), classToCreate.getMaxEnrollment()));
+                classToCreate.getModuleCode(), classToCreate.getMaxEnrollment()),
+                classroomManager.getClassroomHtmlRepresentation());
     }
 
     @Override

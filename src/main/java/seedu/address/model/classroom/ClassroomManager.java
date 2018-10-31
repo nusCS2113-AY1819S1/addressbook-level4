@@ -3,16 +3,20 @@ package seedu.address.model.classroom;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.ClassListCommand;
 import seedu.address.model.StorageController;
 import seedu.address.model.module.ModuleManager;
 import seedu.address.model.student.StudentManager;
 import seedu.address.storage.adapter.XmlAdaptedClassroom;
 import seedu.address.storage.adapter.XmlAdaptedClassroomAttendance;
+import seedu.address.ui.HtmlTableProcessor;
 
 /**
  * This classroom manager stores classrooms for Trajectory.
@@ -263,6 +267,36 @@ public class ClassroomManager {
         ArrayList<String> studentPresents = attendanceList.get(index).getStudentsPresent();
         studentPresents.remove(matricNo);
         classToMarkAttendance.setAttendanceList(attendanceList);
+    }
+
+    /**
+     * Returns a string of the classroom representation in html
+     */
+    public String getClassroomHtmlRepresentation() {
+        final StringBuilder builder = new StringBuilder();
+
+        builder.append(HtmlTableProcessor.getH3Representation("Class List"));
+
+        for (Classroom c : classroomList) {
+            builder.append(HtmlTableProcessor.renderTableStart(new ArrayList<>(
+                    Arrays.asList("Class Name", "Module Code", "Max Enrollment Size"))));
+            builder.append(HtmlTableProcessor.getTableItemStart());
+            builder.append(c.toClassHtmlString());
+            if (!c.getStudents().isEmpty()) {
+                builder.append(HtmlTableProcessor.renderTableStart(new ArrayList<>(
+                        Collections.singletonList(String.format(ClassListCommand.HTML_TABLE_TITLE_STUDENT,
+                                c.getClassName())))));
+                builder.append(HtmlTableProcessor.getTableItemStart());
+                for (String matricNo : c.getStudents()) {
+                    builder.append(HtmlTableProcessor
+                            .renderTableItem(new ArrayList<>(Collections.singletonList(matricNo))));
+                }
+                builder.append(HtmlTableProcessor.getTableItemEnd());
+            }
+        }
+        builder.append(HtmlTableProcessor.getTableItemEnd());
+
+        return builder.toString();
     }
 
     /**
