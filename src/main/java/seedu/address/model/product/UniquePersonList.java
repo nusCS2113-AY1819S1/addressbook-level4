@@ -13,15 +13,15 @@ import seedu.address.model.product.exceptions.PersonNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A product is considered unique by comparing using {@code Product#isSamePerson(Product)}.
- * As such, adding and updating of persons uses Product#isSamePerson(Product) for equality so
+ * A product is considered unique by comparing using {@code Product#isSameProduct(Product)}.
+ * As such, adding and updating of persons uses Product#isSameProduct(Product) for equality so
  * as to ensure that the product being added or updated is unique in terms of identity in the UniquePersonList.
  * However, the removal of a product uses Product#equals(Object) so as to
  * ensure that the product with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Product#isSamePerson(Product)
+ * @see Product#isSameProduct(Product)
  */
 public class UniquePersonList implements Iterable<Product> {
 
@@ -32,7 +32,7 @@ public class UniquePersonList implements Iterable<Product> {
      */
     public boolean contains(Product toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().anyMatch(toCheck::isSameProduct);
     }
 
     /**
@@ -60,7 +60,7 @@ public class UniquePersonList implements Iterable<Product> {
             throw new PersonNotFoundException();
         }
 
-        if (!target.isSamePerson(editedProduct) && contains(editedProduct)) {
+        if (!target.isSameProduct(editedProduct) && contains(editedProduct)) {
             throw new DuplicatePersonException();
         }
 
@@ -126,7 +126,7 @@ public class UniquePersonList implements Iterable<Product> {
     private boolean personsAreUnique(List<Product> products) {
         for (int i = 0; i < products.size() - 1; i++) {
             for (int j = i + 1; j < products.size(); j++) {
-                if (products.get(i).isSamePerson(products.get(j))) {
+                if (products.get(i).isSameProduct(products.get(j))) {
                     return false;
                 }
             }

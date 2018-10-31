@@ -27,7 +27,7 @@ import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameProduct comparison)
  */
 public class ProductDatabase implements ReadOnlyAddressBook {
 

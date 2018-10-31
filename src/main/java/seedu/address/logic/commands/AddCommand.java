@@ -36,7 +36,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "fruit ";
 
     public static final String MESSAGE_SUCCESS = "New product added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PRODUCT = "This product already exists in the Product list";
+    public static final String MESSAGE_DUPLICATE_PRODUCT = "A product with the same serialnumber already exists";
 
 
     private final Product toAdd;

@@ -11,7 +11,7 @@ import seedu.address.model.distributor.UniqueDistributorList;
 
 /**
  * Wraps all data at the distributor-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameProduct comparison)
  */
 public class DistributorBook implements ReadOnlyDistributorBook {
 

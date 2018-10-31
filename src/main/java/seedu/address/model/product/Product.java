@@ -65,13 +65,12 @@ public class Product {
      * Returns true if both persons of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Product otherProduct) {
-        if (otherProduct == this) {
+    public boolean isSameProduct(Product otherProduct) {
+        if (otherProduct.getSerialNumber() == this.getSerialNumber() ) {
             return true;
         }
 
         return otherProduct != null
-                && otherProduct.getName().equals(getName())
                 && otherProduct.getSerialNumber().equals(getSerialNumber());
     }
 
