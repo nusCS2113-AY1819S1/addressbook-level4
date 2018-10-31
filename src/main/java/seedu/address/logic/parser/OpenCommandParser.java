@@ -36,7 +36,7 @@ public class OpenCommandParser implements Parser<OpenCommand> {
      * @return
      */
     public boolean isValidFile(String fileName) {
-        File tempFile = new File("src/main/resources/docs/versions/" + fileName);
+        File tempFile = new File("versions/" + fileName);
         return tempFile.isFile();
     }
 }
