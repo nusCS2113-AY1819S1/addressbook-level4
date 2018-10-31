@@ -23,7 +23,7 @@ import com.t13g2.forum.testutil.UserBuilder;
 
 //@@author xllx1
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class BlockUserFromPostingCommandTest {
+public class BlockUserFromCreatingCommandTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
     private Model model;
@@ -86,11 +86,11 @@ public class BlockUserFromPostingCommandTest {
             new BlockUserFromCreatingCommand(toBlock.getUsername(), true);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(String.format(BlockUserFromCreatingCommand.MESSAGE_DUPLICATE_BLOCK,
+        thrown.expectMessage(String.format(BlockUserFromCreatingCommand.MESSAGE_DUPLICATE_UNBLOCK,
             toBlock.getUsername()));
 
         CommandResult commandResult = blockCommand.execute(model, commandHistory);
-        assertEquals(String.format(BlockUserFromCreatingCommand.MESSAGE_DUPLICATE_BLOCK,
+        assertEquals(String.format(BlockUserFromCreatingCommand.MESSAGE_DUPLICATE_UNBLOCK,
             toBlock.getUsername()), commandResult.feedbackToUser);
     }
 

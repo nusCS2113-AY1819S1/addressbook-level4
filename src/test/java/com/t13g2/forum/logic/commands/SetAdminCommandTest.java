@@ -98,7 +98,7 @@ public class SetAdminCommandTest {
         SetAdminCommand setAdminCommand = new SetAdminCommand("abcd", true);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(String.format(SetAdminCommand.MESSAGE_INVALID_USER, "abcd"));
+        thrown.expectMessage(String.format(BlockUserFromCreatingCommand.MESSAGE_INVALID_USER, "abcd"));
 
         CommandResult commandResult = setAdminCommand.execute(model, commandHistory);
         assertEquals(String.format(SetAdminCommand.MESSAGE_INVALID_USER, "abcd"),
