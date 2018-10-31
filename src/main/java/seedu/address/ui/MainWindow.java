@@ -78,8 +78,8 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
         registerAsAnEventHandler(this);
+        //helpWindow = new HelpWindow();
 
-//        helpWindow = new HelpWindow();
     }
 
     public Stage getPrimaryStage() {

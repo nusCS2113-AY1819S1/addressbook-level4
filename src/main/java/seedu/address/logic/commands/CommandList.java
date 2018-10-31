@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
 import java.util.ArrayList;
-
+/**
+ * Gives out the command list for different users
+ */
 public class CommandList {
     private ArrayList<String> commandList = new ArrayList<>();
 

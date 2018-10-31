@@ -50,9 +50,9 @@ import seedu.address.logic.commands.Role;
  * Checks if password is correct
  */
 public class CheckPassword {
+    private static Role role = null;
     private static int count = 0;
     private static Label message = new Label("");
-    public static Role role = null;
 
     /**
      * displays enter password box
