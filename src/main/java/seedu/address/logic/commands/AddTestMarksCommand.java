@@ -37,7 +37,7 @@ public class AddTestMarksCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": invalid command Add to add test and marks "
             + "the command format should be .\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice " + PREFIX_TEST_NAME + "cs2113quiz1 " + PREFIX_TEST_MARK + "67";
+            + "Example: " + COMMAND_WORD_2 + " alice " + PREFIX_TEST_NAME + "cs2113quiz1 " + PREFIX_TEST_MARK + "67";
 
 
     public static final String MESSAGE_DUPLICATE_TEST = "This test already exists in the system";
