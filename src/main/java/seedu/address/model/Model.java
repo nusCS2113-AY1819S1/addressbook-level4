@@ -124,6 +124,12 @@ public interface Model {
     void deleteGroup(Group target);
 
     /**
+     * Deletes person from the given group.
+     * The person/group must exist in the address book.
+     */
+    void deleteGroupPerson(Group group, Person targetPerson);
+
+    /**
      * Returns an unmodifiable view of the filtered group list
      */
     ObservableList<Group> getFilteredGroupList();

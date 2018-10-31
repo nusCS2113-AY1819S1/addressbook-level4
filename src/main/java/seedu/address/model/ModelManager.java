@@ -123,6 +123,11 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    @Override
+    public void deleteGroupPerson(Group group, Person target) {
+        versionedAddressBook.removeGroupPerson(group, target);
+        indicateAddressBookChanged();
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**
