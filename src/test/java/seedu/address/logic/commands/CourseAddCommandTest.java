@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.StorageController;
 import seedu.address.model.course.Course;
 import seedu.address.model.course.CourseCode;
 import seedu.address.model.course.CourseManager;
@@ -39,17 +40,20 @@ public class CourseAddCommandTest {
 
     @Test
     public void execute_addSuccessful() {
-       final CourseCode courseCode = new CourseCode("CEG");
+        StorageController.enterTestMode();
+       final CourseCode courseCode = new CourseCode("CES");
        final CourseName courseName = new CourseName("Computer Engineering");
        final FacultyName faculty = new FacultyName("School of Computing");
 
        assertCommandSuccess(new CourseAddCommand(new Course(courseCode,courseName,faculty)), new CommandHistory(),
                 String.format(MESSAGE_SUCCESS, courseName));
        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+
     }
 
     @Test
     public void execute_duplicateCourse_throwsCommandException() throws Exception {
+        StorageController.enterTestMode();
         Course validCourse = new CourseBuilder().build();
         CourseAddCommand addCommand = new CourseAddCommand(validCourse);
         CourseManagerStub cmStub = new CourseManagerStubWithCourse(validCourse);
