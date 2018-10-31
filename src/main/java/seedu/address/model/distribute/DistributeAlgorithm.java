@@ -28,6 +28,7 @@ import seedu.address.model.person.Person;
 public class DistributeAlgorithm {
 
     public static final String MESSAGE_INVALID_SIZE = "Number of Groups should not be more than Number of Persons";
+    public static final String MESSAGE_TO_BE_IMPLEMENTED = "Currently under development. Stay tuned in v.20";
     public static final String MESSAGE_FLAG_ERROR = "Gender and Nationality flags only accept "
             + "'1' or '0' or \"true\" or \"false\"";
 
@@ -163,7 +164,7 @@ public class DistributeAlgorithm {
     private void strictDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList,
                                     LinkedList<Person> personLinkedList, String groupName)
             throws CommandException {
-        System.out.println("Gender & Nationality Distribution");
+        throw new CommandException(MESSAGE_TO_BE_IMPLEMENTED);
     }
 
 }
