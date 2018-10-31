@@ -1,4 +1,4 @@
-:product_name : DRINK I/O
+:product_name : Drink I/O
 = AddressBook Level 4 - User Guide
 :site-section: UserGuide
 :toc:
@@ -20,14 +20,19 @@ By: `CS2113T-W12-4`      Since: `Jun 2016`      Licence: `MIT`
 
 == Introduction
 
-Drink I/O is a desktop application that helps you to manage your drinks distribution company.
-You can use Drink I/O to keep track of your inventory, analyse your company’s sales performance and
+*[blue]#_Drink I/O_#* is a desktop application that helps you to manage your drink distribution company.
+You can use *[blue]#_Drink I/O_#* to keep track of your inventory, analyse your company’s sales performance and
 set reminders to help you import more goods should their stocks fall low.
-Drink I/O is optimised for Command Line Interface (CLI), allowing you to manage your store
+*[blue]#_Drink I/O_#* is optimised for Command Line Interface (CLI), allowing you to manage your store
 faster than traditional Graphical User Interface (GUI) apps, while retaining the benefits of a GUI
 
-This user guide provides comprehensive documentation on the Drink I/O setup process, the features you can acces and the commands you can use. Choose a topic from the Table of Contents (link) to find answers, get instructions and learn to improve your workflow with Drink I/O.
+This user guide provides comprehensive documentation on the *[blue]#_Drink I/O_#* setup process, the features you can
+access and the commands you can use. Choose a topic from the Table of Contents (link) to find answers,
+get instructions and learn to improve your workflow with Drink I/O.
 
+This user guide provides comprehensive documentation on the *[blue]#_Drink I/O_#* setup process, the commands you can use
+and the features available to you. Choose a topic from the Table of Contents (link) to find answers,
+get instructions and learn how to improve your workflow with *[blue]#_Drink I/O_#*.
 
 == Quick Start
 
@@ -53,9 +58,58 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 == Getting Started
 
 === Logging in
+
+Upon entering starting up the application, you will be met by the login page below:
+
+image::loginPic/login_page_main.PNG[width="800"]
+
+To login, you can use either the CLI or GUI to input your `USERNAME` and `PASSWORD`.
+
+*GUI Login*
+
+. Enter your `USERNAME` and `PASSWORD` into the respective username and password fields
+
+. Click on the kbd:[LOGIN] button
+
+*CLI Login*
+
+. Enter your `USERNAME` and `PASSWORD` into the terminal in this format
+
+.. Format: `USERNAME` `PASSWORD`
+
+. Press the kbd:[ENTER] key
+
+
+[NOTE]
+Both username and password are single words. No spaces are allowed in username or password.
+
+[.example]
+====
+[example-title]#Examples for CLI input:#
+
+* [example]#`tester 123`#
+* [example]#`stocktaker 123`#
+====
+[NOTE]
+====
+The example provided is a default login account for admins. This account is created only for testing purposes.
+====
+
+After successfully logging in, a confirmation message would be shown indicating your authentication level:
+
+image::loginPic/login_confirmation.PNG[width="300"]
 === Logging out
+Logging out of the application will bring you back to the login screen.
+
+. To log out, enter the following command into the command bar
+
+.. Command format: `logout`
+
+. Press the kbd:[ENTER] key
 
 == Types of Users
+In small drink distribution companies, the workload can generally be split into 3 roles,
+
 === Stocktaker
 === Accountant
 === Administrator
@@ -68,6 +122,11 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 == Managing Your Inventory
 
 === Adding new items
+
+To add new drinks into your company's offer listing, you can carry out the steps below:
+
+
+
 === Searching for an item
 === Viewing all items in inventory
 === Viewing item details
@@ -84,18 +143,23 @@ When you buy and receive new goods, and want to update your stocks, you can ente
 [NOTE]
 ====
 #*Command format*#:
-`import n/NAME q/QUANTITY` +
+`import n/NAME q/QUANTITY`
 
 * Desired drink must be recorded in Drink I/O
 
 ====
 
-To record an import transaction, +
-1. Enter `import` +
-2. Key in `n/`, followed by name of drink (`NAME`) +
-3. Key in `q/`, followed by quantity imported (`QUANTITY`) +
-4. Press kbd:[enter] +
-5. Check whether the transaction has been recorded successfully +
+To record an import transaction,
+
+. Enter `import`
+
+. Key in `n/`, followed by name of drink (`NAME`)
+
+. Key in `q/`, followed by quantity imported (`QUANTITY`)
+
+. Press kbd:[enter]
+
+. Check whether the transaction has been recorded successfully
 
 -  If you see the message "import transaction recorded!", the transaction had been successfully entered into Drink I/O +
 -  If not, follow the instructions displayed in the message display pane, and re-enter the command +
@@ -129,12 +193,17 @@ When you make a sale to your customers, recording the sale in Drink I/O allows y
 
 ====
 
-To record a sale transaction, +
-1. Enter`sell` +
-2. Key in `n/`, followed by name of drink (`NAME`) +
-3. Key in `q/`, followed by quantity transacted in sale (`QUANTITY`) +
-4. Press kbd:[enter] +
-5. Check whether the transaction has been recorded successfully, +
+To record a sale transaction,
+
+. Enter `sell`
+
+. Key in `n/`, followed by name of drink (`NAME`)
+
+. Key in `q/`, followed by quantity transacted in sale (`QUANTITY`)
+
+. Press kbd:[enter]
+
+. Check whether the transaction has been recorded successfully,
 
 * If you see the message "sale transaction recorded!", the transaction had been successfully entered into Drink I/O +
 * If not, follow the instructions displayed in the message display pane, and re-enter the command +
@@ -157,9 +226,11 @@ Drink I/O can calculate the total costs your store has incurred since the beginn
 `analyseCosts`
 ====
 
-To view the total costs incurred, +
-1. Enter `analyseCosts` +
-2. Press kbd:[enter] +
+To view the total costs incurred,
+
+. Enter `analyseCosts`
+
+. Press kbd:[enter]
 
 You should see a value displayed in the results panel.
 
@@ -181,43 +252,6 @@ You should see a value displayed in the results panel.
 * Parameters in square bracket are optional
 ====
 === Global Command
-==== Login:
-image::loginPic/login_page_main.PNG[width="800"]
-[.noteblock]
-====
-[noteblock-title]#*User Parameters*#
-. At the login page, enter user and password using either the CLI or GUI
-. Clicked Login Button
-====
-
-[.format]
-====
-Format: `USERNAME PASSWORD`
-====
-
-[NOTE]
-====
-Both userName and password are single word. No spaces are allow in userName or password.
-====
-
-[.example]
-====
-[example-title]#Examples:#
-
-* [example]#`tester 123`# +
-* [example]#`stocktaker 123`# +
-[NOTE]
-====
-The example provided is a default login account for admin. This account only create for tester.
-====
-
-After login in, a confirmation message would showed and indicate your authentication level.
-
-image::loginPic/login_confirmation.PNG[width="300"]
-
-==== Exiting Program: `logout`
-Return user to the login page.
-Format: `logout`
 
 ==== Exiting Program: `exit`
 Exits program.
