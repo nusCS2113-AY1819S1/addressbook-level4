@@ -35,7 +35,7 @@ image::e0191729.png[width="150", align="left"]
 
 Role: Developer +
 Responsibilities:
-
+ Key focus on user management
 '''
 
 === Cai Xiaolin

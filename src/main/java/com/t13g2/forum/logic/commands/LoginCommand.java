@@ -30,7 +30,7 @@ public class LoginCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "WELCOME : %1$s";
     public static final String MESSAGE_FAIL = "No user named %s found or password is wrong";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_USER_ACTIVE = "Hi %s, Please logout before trying to login. Thank you";
     private final String userName;
     private final String userPassword;
 
@@ -45,20 +45,24 @@ public class LoginCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         User exist = null;
-        try (UnitOfWork unitOfWork = new UnitOfWork()) {
-            exist = unitOfWork.getUserRepository().authenticate(userName, userPassword);
-        } catch (EntityDoesNotExistException e) {
-            exist = null;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Context.getInstance().setCurrentUser(exist);
-        if (exist != null) {
-            EventsCenter.getInstance().post(new UserLoginEvent(userName, exist.isAdmin(), exist.isBlock()));
-            return new CommandResult(String.format(MESSAGE_SUCCESS, userName));
+        if (Context.getInstance().getCurrentUser() == null) {
+            try (UnitOfWork unitOfWork = new UnitOfWork()) {
+                exist = unitOfWork.getUserRepository().authenticate(userName, userPassword);
+            } catch (EntityDoesNotExistException e) {
+                exist = null;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (exist != null) {
+                Context.getInstance().setCurrentUser(exist);
+                EventsCenter.getInstance().post(new UserLoginEvent(userName, exist.isAdmin(), exist.isBlock()));
+                return new CommandResult(String.format(MESSAGE_SUCCESS, userName));
+            } else {
+                EventsCenter.getInstance().post(new UserLoginEvent("", false, false));
+                throw new CommandException(String.format(MESSAGE_FAIL, userName));
+            }
         } else {
-            EventsCenter.getInstance().post(new UserLoginEvent("", false, false));
-            throw new CommandException(String.format(MESSAGE_FAIL, userName));
+            return new CommandResult(String.format(MESSAGE_USER_ACTIVE, userName));
         }
     }
 }
