@@ -346,7 +346,7 @@ so you need to refresh it yourself.
 
 === Adds Comment : `addComment`
 
-Admin/User: Add comment into event comment section +
+Admin/User: Add comment into event comment section with the username (default non-login username is stub) +
 Format: `addComment INDEX C/STRING`
 
 ****
@@ -357,9 +357,9 @@ Format: `addComment INDEX C/STRING`
 Examples:
 
 * `addComment 1 C/What is the attire to wear for the event?` +
-Adds "What is the attire to wear for the event?" into event 1 comment section
+Adds "What is the attire to wear for the event?" into event 1 comment section with username
 * `addComment 5 C/What is the attire to wear for this event?` +
-Adds "What is the attire to wear for this event?" into event 5 comment section
+Adds "What is the attire to wear for this event?" into event 5 comment section with username
 
 [NOTE]
 ====
@@ -369,7 +369,7 @@ so you need to refresh it yourself.
 
 === Reply Comment : `replyComment`
 
-Admin/User: Replies a comment +
+Admin/User: Replies a comment with the username (default non-login username is stub)  +
 Format: `replyComment INDEX L/LINE C/STRING`
 
 ****
@@ -380,9 +380,9 @@ Format: `replyComment INDEX L/LINE C/STRING`
 Examples:
 
 * `replyComment 1 L/5 C/What is the attire to wear for the event?` +
-Adds the comment "What is the attire to wear for the event?" into event 1 comment section at line 5
+Adds the comment "What is the attire to wear for the event?" into event 1 comment section at line 5 with username
 * `replyComment 2 L/2 C/What is the attire to wear for the event?` +
-Adds the comment "What is the attire to wear for the event?" into event 2 comment section at line 2
+Adds the comment "What is the attire to wear for the event?" into event 2 comment section at line 2 with username
 
 [NOTE]
 ====
