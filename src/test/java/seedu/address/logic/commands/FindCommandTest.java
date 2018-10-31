@@ -13,7 +13,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
+import static seedu.address.testutil.TypicalEvents.ALICE;
 import static seedu.address.testutil.TypicalEvents.CARL;
+import static seedu.address.testutil.TypicalEvents.DANIEL;
 import static seedu.address.testutil.TypicalEvents.ELLE;
 import static seedu.address.testutil.TypicalEvents.FIONA;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
@@ -80,10 +82,12 @@ public class FindCommandTest {
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
+    //***************************Testing no keyword input for prefixes*************************************************
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
+    public void execute_zeroKeywordsOnePrefix_noEventFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 0);
-        EventContainsKeywordsPredicate predicate = preparePredicate("k/");
+        EventContainsKeywordsPredicate predicate = preparePredicate(" k/");
+
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredEventList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
@@ -91,9 +95,43 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
+    public void execute_zeroKeywordsMultiplePrefixes_noEventFound() {
+        String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 0);
+        EventContainsKeywordsPredicate predicate = preparePredicate(" k/ n/ c/ d/");
+
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredEventList(predicate);
+        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredEventList());
+    }
+
+    @Test
+    public void execute_zeroKeywordPrefixes_multipleKeywordPrefixes_noEventFound() {
+        String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 0);
+        EventContainsKeywordsPredicate predicate = preparePredicate(" k/ t/Friends n/Art c/ d/");
+
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredEventList(predicate);
+        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredEventList());
+    }
+
+    @Test
+    public void execute_zeroKeywordPrefix_keywordsSamePrefix_oneEventFound() {
+        String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1);
+        EventContainsKeywordsPredicate predicate = preparePredicate(" c/ c/Daniel c/");
+
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredEventList(predicate);
+        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(DANIEL), model.getFilteredEventList());
+    }
+
+    //**************** Testing not include prefixes, assume no command format error ************************************
+    @Test
+    public void execute_unknownPrefixesWithAvailablePrefixes_multipleEventsFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 3);
-        EventContainsKeywordsPredicate predicate = preparePredicate("k/Frisbee Music Dark");
+        EventContainsKeywordsPredicate predicate = preparePredicate(" n/Frisbee Music Dark l/love T/tag");
 
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredEventList(predicate);
@@ -101,10 +139,58 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredEventList());
     }
 
+    @Test
+    public void execute_zeroKeywordKnownPrefixesWithUnknownPrefixes_noEventFound() {
+        String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 0);
+        EventContainsKeywordsPredicate predicate = preparePredicate(" k/ n/ e/ L/ DTT/");
+
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredEventList(predicate);
+        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredEventList());
+    }
+
+    //*******************************Testing multiple prefixes and keywords*********************************************
+    @Test
+    public void execute_multipleKeywordsOnePrefix_multipleEventsFound() {
+        String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 3);
+        EventContainsKeywordsPredicate predicate = preparePredicate(" n/Frisbee Music Dark");
+
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredEventList(predicate);
+        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredEventList());
+    }
+
+    //NOTE: Events found are in chronological order, so matching array list should be sorted
+    @Test
+    public void execute_multipleKeywordsMultiplePrefixes_multipleEventsFound() {
+        String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 2);
+        EventContainsKeywordsPredicate predicate = preparePredicate(" t/Friends n/Art n/Cooking d/09:30");
+
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredEventList(predicate);
+        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(DANIEL, ALICE), model.getFilteredEventList());
+    }
+
+    @Test
+    public void execute_multipleKeywordsMultiplePrefixes_noEventFound() {
+        String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 0);
+        EventContainsKeywordsPredicate predicate = preparePredicate(" t/Friends n/Art c/daniel d/19:30");
+
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredEventList(predicate);
+        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredEventList());
+    }
+
     /**
      * Parses {@code userInput} into a {@code EventContainsKeywordsPredicate}.
      */
     private EventContainsKeywordsPredicate preparePredicate(String userInput) {
+        //Add space in case of missing
+        userInput = " " + userInput;
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_KEYWORD, PREFIX_NAME,
                 PREFIX_CONTACT, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_VENUE, PREFIX_DATETIME, PREFIX_TAG);
 
@@ -117,20 +203,20 @@ public class FindCommandTest {
 
     /**
      * Map presented prefix with its' list of keywords
-     * @param keywordMap hash map for prefix and list of keyword
+     * @param prefixKeywordMap hash map for prefix and list of keyword
      * @param prefix prefix to map
      * @param argMultimap to check for prefix present
      */
-    public void MapPrefixAndKeywords (Map<Prefix, List<String> > keywordMap, Prefix prefix,
+    public void MapPrefixAndKeywords (Map<Prefix, List<String> > prefixKeywordMap, Prefix prefix,
                                       ArgumentMultimap argMultimap) {
         if (argMultimap.getValue(prefix).isPresent())  {
             List<String> combineAllSamePrefixKeywordsList = new ArrayList<>();
             for(String singlePrefix : argMultimap.getAllValues(prefix)) {
                 combineAllSamePrefixKeywordsList.addAll(Arrays.asList(singlePrefix.trim().split("\\s+")));
             }
-            keywordMap.put(prefix, combineAllSamePrefixKeywordsList);
+            prefixKeywordMap.put(prefix, combineAllSamePrefixKeywordsList);
         }
         else
-            keywordMap.put(prefix, null);
+            prefixKeywordMap.put(prefix, null);
     }
 }

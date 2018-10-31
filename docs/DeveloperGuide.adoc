@@ -514,12 +514,15 @@ Step 4: The event page is reloaded and display the newly added event in the corr
 ==== Current Implementation
 `find` command is used for better navigation. Therefore, it is enhanced to search for more properties in an Event. +
 
-`find` can search for Name, Address, Date and Tags. If prefix is added, find can search for event that must contain that keyword in that specific field
+`find` can search for any data with the default keywords and . If specific prefix is added, find can search for event that must contain that keyword in that specific field
+
+[NOTE]
+If there are more than 1 prefix of the same type, for example, `find n/new n/dark n/meeting`, this will be automatically combined together, which means this command will be assumed to be the same as `find n/new dark meeting`
 
 ==== Aspect: How to improve search
-* **Alternative 1 (current choice):** Modify the predicate to display the event that Name, Date, Address, Tags contains one of the keywords
+* **Alternative 1 (current choice):** Modify the predicate to display the event that date contains one of the keywords
 ** Pros: Follow the current structure of `find` command, which mean can reuse current resources
-** Cons: Predicate have limited ability to handle complexity needed in further enhancement
+** Cons: With the current implementation of the predicate, scaling will severely affect product performance
 
 ==== Future enhancement:
 * Search for contained or exact keywords option
@@ -555,6 +558,8 @@ For the current version of this product, export calendar now will export every e
 
 ==== [Proposed]: [V1.4] enhancement
 The method related to `ExportCalendarCommand` class should be re-designed to follow OOP requirement.
+
+Export should be able to export the attendance list of an event according to user preference
 // end::export calendar[]
 
 // tag::dataencryption[]

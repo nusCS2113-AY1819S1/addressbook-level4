@@ -157,7 +157,7 @@ public class FindCommandSystemTest extends EventManagerSystemTest {
         assertSelectedCardUnchanged();
 
         /* Case: mixed case command word -> rejected */
-        command = "FiNd Tryouts";
+        command = "FiNd k/Tryouts";
         assertCommandFailure(command, MESSAGE_UNKNOWN_COMMAND);
     }
 
