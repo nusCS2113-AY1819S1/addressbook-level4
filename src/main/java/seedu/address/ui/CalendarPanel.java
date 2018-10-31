@@ -1,22 +1,14 @@
 package seedu.address.ui;
 
-import java.util.logging.Logger;
 import java.util.Calendar;
+import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
-
-import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.layout.GridPane;
+
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
-import seedu.address.model.person.Person;
 import seedu.address.model.CalendarInfo;
 
 /**
@@ -26,10 +18,10 @@ public class CalendarPanel extends UiPart<Region> {
     private static final String FXML = "CalendarPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(CalendarPanel.class);
 
+    private CalendarInfo calendarInfo = new CalendarInfo();
+
     private Calendar calendar;
     private int firstDay;
-
-    CalendarInfo calendarInfo = new CalendarInfo();
 
     @FXML
     private GridPane calendarView = new GridPane();
@@ -50,12 +42,12 @@ public class CalendarPanel extends UiPart<Region> {
         int week;
         int day = firstDay;
         if (calendar.get(Calendar.MONTH) == Calendar.JANUARY
-                || calendar.get(Calendar.MONTH) == Calendar.MARCH
-                || calendar.get(Calendar.MONTH) == Calendar.MAY
-                || calendar.get(Calendar.MONTH) == Calendar.JULY
-                || calendar.get(Calendar.MONTH) == Calendar.AUGUST
-                || calendar.get(Calendar.MONTH) == Calendar.OCTOBER
-                || calendar.get(Calendar.MONTH) == Calendar.DECEMBER) {
+            || calendar.get(Calendar.MONTH) == Calendar.MARCH
+            || calendar.get(Calendar.MONTH) == Calendar.MAY
+            || calendar.get(Calendar.MONTH) == Calendar.JULY
+            || calendar.get(Calendar.MONTH) == Calendar.AUGUST
+            || calendar.get(Calendar.MONTH) == Calendar.OCTOBER
+            || calendar.get(Calendar.MONTH) == Calendar.DECEMBER) {
             numOfDays = 31;
         } else if (calendar.get(Calendar.MONTH) == Calendar.FEBRUARY){
             numOfDays = 29;
@@ -63,11 +55,11 @@ public class CalendarPanel extends UiPart<Region> {
             numOfDays = 30;
         }
         //for (int i = 0; i < numOfDays; i++) {
-            week = calendar.get(Calendar.WEEK_OF_MONTH);
-            calendar.set(Calendar.DAY_OF_MONTH, 1);
-            date1.setText(Integer.toString(1));
-            calendarView.add(date1, (day%7), week);
-            day++;
+        week = calendar.get(Calendar.WEEK_OF_MONTH);
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        date1.setText(Integer.toString(1));
+        calendarView.add(date1, (day % 7), week);
+        day++;
         //}
     }
     /*
