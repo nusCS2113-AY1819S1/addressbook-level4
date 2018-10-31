@@ -6,6 +6,9 @@ import java.nio.file.Paths;
 
 import com.google.gson.Gson;
 
+/**
+ * json storage file.
+ */
 public class JsonFileStorage implements IStorage {
     private IEncryptor encryptor;
 
