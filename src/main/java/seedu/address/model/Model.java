@@ -211,5 +211,20 @@ public interface Model {
     /**
      * Saves the current expenditure tracker state for undo/redo.
      */
-    //void commitExpenditureTracker();
+
+    boolean canUndoExpenditureList();
+
+    boolean canRedoExpenditureList();
+
+    void undoExpenditureList();
+
+    void redoExpenditureList();
+
+    void commitExpenditureList();
+
+    String getUndoableCommand();
+
+    void commitUndoableTodoList();
+
+    void commitUndoableExpenditure();
 }

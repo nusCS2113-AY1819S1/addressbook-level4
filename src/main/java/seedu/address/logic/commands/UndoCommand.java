@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EXPENDITURES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import seedu.address.logic.CommandHistory;
@@ -20,12 +21,26 @@ public class UndoCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (!model.canUndoTodoList()) {
+        if ("EMPTY".equals(model.getUndoableCommand())) {
             throw new CommandException(MESSAGE_FAILURE);
         }
+        else if ("TDL".equals(model.getUndoableCommand())) {
+            if (!model.canUndoTodoList()) {
+                throw new CommandException(MESSAGE_FAILURE);
+            }
 
-        model.undoTodoList();
-        model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+            model.undoTodoList();
+            model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        }
+        else if ("ET".equals(model.getUndoableCommand())) {
+            if (!model.canUndoExpenditureList()) {
+                throw new CommandException(MESSAGE_FAILURE);
+            }
+
+            model.undoExpenditureList();
+            model.updateFilteredExpenditureList(PREDICATE_SHOW_ALL_EXPENDITURES);
+        }
+
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

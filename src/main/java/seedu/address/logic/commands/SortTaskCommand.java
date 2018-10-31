@@ -38,8 +38,6 @@ public class SortTaskCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
 
-        model.commitTodoList();
-
         if ("date".equals(filter)) {
             model.rankFilteredTaskDeadline();
             return new CommandResult(MESSAGE_SUCCESS_DATE);

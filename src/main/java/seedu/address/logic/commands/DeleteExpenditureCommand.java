@@ -40,7 +40,8 @@ public class DeleteExpenditureCommand extends Command {
 
         Expenditure expenditureToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteExpenditure(expenditureToDelete);
-        model.commitAddressBook();
+        model.commitExpenditureList();
+        model.commitUndoableExpenditure();
         return new CommandResult(String.format(MESSAGE_DELETE_SUCCESS, expenditureToDelete));
     }
 }

@@ -58,6 +58,7 @@ public class CompleteTaskCommand extends Command {
         model.updateTask(taskToEdit, editedTask);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         model.commitTodoList();
+        model.commitUndoableTodoList();
         return new CommandResult(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, editedTask));
     }
 

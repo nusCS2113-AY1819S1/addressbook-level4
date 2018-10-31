@@ -39,8 +39,6 @@ public class ViewTaskCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
 
-        model.commitTodoList();
-
         if (filter.equals("uncompleted")) {
             model.updateFilteredTaskList(PREDICATE_SHOW_ALL_UNCOMPLETED_TASKS);
             return new CommandResult(MESSAGE_SUCCESS_UNCOMPLETED);

@@ -78,7 +78,8 @@ public class EditExpenditureCommand extends Command {
 
         model.updateExpenditure(expenditureToEdit, editedexpenditure);
         model.updateFilteredExpenditureList(Model.PREDICATE_SHOW_ALL_EXPENDITURES);
-        model.commitAddressBook();
+        model.commitExpenditureList();
+        model.commitUndoableExpenditure();
         return new CommandResult(String.format(MESSAGE_EDIT_EXPENDITURE_SUCCESS, editedexpenditure));
     }
 
