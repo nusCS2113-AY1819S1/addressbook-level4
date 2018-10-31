@@ -62,13 +62,16 @@ public class CandidateCard extends UiPart<Region> {
         candidate.getTags().forEach(tag -> tags.getChildren().add(labelStyle(tag.tagName)));
     }
 
+    /**
+     * Method to add a different background color for specific labels
+     */
     private Label labelStyle(String tagName) {
-            Label label = new Label(tagName);
+        Label label = new Label(tagName);
 
-            if (tagName.equals("BLACKLISTED")) {
-                label.setStyle("-fx-background-color: #111122;");
-            }
-            return label;
+        if (tagName.equals("BLACKLISTED")) {
+            label.setStyle("-fx-background-color: #111122;");
+        }
+        return label;
     }
 
     @Override

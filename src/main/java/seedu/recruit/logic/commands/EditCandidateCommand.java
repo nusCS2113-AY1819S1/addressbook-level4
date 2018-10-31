@@ -99,7 +99,7 @@ public class EditCandidateCommand extends Command {
         Candidate editedCandidate = createEditedPerson(candidateToEdit, editPersonDescriptor);
 
         Tag blacklistedTag = new Tag("BLACKLISTED");
-        if(candidateToEdit.getTags().contains(blacklistedTag)) {
+        if (candidateToEdit.getTags().contains(blacklistedTag)) {
             throw new CommandException(BlacklistCommand.MESSAGE_WARNING_BLACKLISTED_PERSON);
         }
 

@@ -2,17 +2,6 @@ package seedu.recruit.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import static seedu.recruit.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.recruit.logic.parser.CliSyntax.PREFIX_AGE;
-import static seedu.recruit.logic.parser.CliSyntax.PREFIX_EDUCATION;
-import static seedu.recruit.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.recruit.logic.parser.CliSyntax.PREFIX_GENDER;
-import static seedu.recruit.logic.parser.CliSyntax.PREFIX_JOB;
-import static seedu.recruit.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.recruit.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.recruit.logic.parser.CliSyntax.PREFIX_SALARY;
-import static seedu.recruit.logic.parser.CliSyntax.PREFIX_TAG;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,21 +26,28 @@ public class BlacklistCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Blacklists a candidate in the RecruitBook. "
             + "Parameters: "
             + "INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1 ";
+            + "Example: " + COMMAND_WORD + " 1\n"
+            + "To remove a blacklist tag, add \"rm\" before INDEX.\n"
+            + "Example: " + COMMAND_WORD + " rm " + "1";
 
-    public static final String MESSAGE_SUCCESS = "Blacklisted candidate: %1$s";
+    public static final String MESSAGE_BLACKLIST_SUCCESS = "Blacklisted candidate: %1$s";
+    public static final String MESSAGE_UNBLACKLIST_SUCCESS = "Unblacklisted candidate: %1$s";
     public static final String MESSAGE_ALREADY_BLACKLISTED = "This candidate has already been blacklisted!";
+    public static final String MESSAGE_IS_NOT_BLACKLISTED = "This candidate is not blacklisted.";
     public static final String MESSAGE_WARNING_BLACKLISTED_PERSON = "The selected candidate has been blacklisted!\n"
             + "You can remove the blacklist with [ blacklist rm <INDEX>]";
+
     private final Index index;
+    private final boolean rmCheck;
 
     /**
      * @param index of the candidate in the filtered candidate list to blacklist
      */
 
-    public BlacklistCommand(Index index) {
+    public BlacklistCommand(boolean rmCheck, Index index) {
         requireNonNull(index);
         this.index = index;
+        this.rmCheck = rmCheck;
     }
 
     @Override
@@ -65,17 +61,33 @@ public class BlacklistCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Candidate candidateToBlacklist = lastShownList.get(index.getZeroBased());
-        Tag blacklistedTag = new Tag("BLACKLISTED");
-        if (candidateToBlacklist.getTags().contains(blacklistedTag)) {
-            throw new CommandException(MESSAGE_ALREADY_BLACKLISTED);
+        Candidate selectedCandidateBlacklist = lastShownList.get(index.getZeroBased());
+        Candidate updatedCandidate;
+
+        if (rmCheck) {
+            Tag blacklistedTag = new Tag("BLACKLISTED");
+            if (selectedCandidateBlacklist.getTags().contains(blacklistedTag)) {
+                throw new CommandException(MESSAGE_ALREADY_BLACKLISTED);
+            }
+
+            updatedCandidate = insertBlacklistTag(selectedCandidateBlacklist);
+        } else {
+            Tag blacklistedTag = new Tag("BLACKLISTED");
+            if (!selectedCandidateBlacklist.getTags().contains(blacklistedTag)) {
+                throw new CommandException(MESSAGE_IS_NOT_BLACKLISTED);
+            }
+
+            updatedCandidate = removeBlacklistTag(selectedCandidateBlacklist);
         }
 
-        Candidate blacklistedCandidate = insertBlacklistTag(candidateToBlacklist);
-        model.updateCandidate(candidateToBlacklist, blacklistedCandidate);
+        model.updateCandidate(selectedCandidateBlacklist, updatedCandidate);
         model.commitCandidateBook();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, blacklistedCandidate));
-    }
+        if  (rmCheck) {
+            return new CommandResult(String.format(MESSAGE_BLACKLIST_SUCCESS, updatedCandidate));
+        } else {
+            return new CommandResult(String.format(MESSAGE_UNBLACKLIST_SUCCESS, updatedCandidate));
+        }
+}
 
     /**
      * Returns the original candidate but the tags have been changed to "BLACKLISTED"
@@ -83,12 +95,24 @@ public class BlacklistCommand extends Command {
     Candidate insertBlacklistTag(Candidate blacklistee) {
         assert blacklistee != null;
 
-        Set<Tag> Tags = new HashSet<Tag>();
+        Set<Tag> tags = new HashSet<Tag>();
         Tag blacklistedTag = new Tag("BLACKLISTED");
-        Tags.add(blacklistedTag);
-        return new Candidate(blacklistee.getName(), blacklistee.getGender(), blacklistee.getAge(), blacklistee.getPhone(),
-                blacklistee.getEmail(), blacklistee.getAddress(), blacklistee.getJob(), blacklistee.getEducation(),
-                blacklistee.getSalary(), Tags);
+        tags.add(blacklistedTag);
+        return new Candidate(blacklistee.getName(), blacklistee.getGender(), blacklistee.getAge(),
+                blacklistee.getPhone(), blacklistee.getEmail(), blacklistee.getAddress(), blacklistee.getJob(),
+                blacklistee.getEducation(), blacklistee.getSalary(), tags);
+    }
+
+    /**
+     * Returns the candidate but the "BLACKLISTED" tag has been removed
+     */
+    Candidate removeBlacklistTag(Candidate blacklistee) {
+        assert blacklistee != null;
+
+        Set<Tag> tags = new HashSet<Tag>();
+        return new Candidate(blacklistee.getName(), blacklistee.getGender(), blacklistee.getAge(),
+                blacklistee.getPhone(), blacklistee.getEmail(), blacklistee.getAddress(), blacklistee.getJob(),
+                blacklistee.getEducation(), blacklistee.getSalary(), tags);
     }
 
     @Override
