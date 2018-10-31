@@ -13,6 +13,7 @@ import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.Ignore;
 import org.junit.Test;
+
 import seedu.recruit.logic.commands.SelectCandidateCommand;
 import seedu.recruit.logic.commands.SelectCompanyCommand;
 import seedu.recruit.logic.commands.SelectJobCommand;
@@ -88,7 +89,7 @@ public class ShortlistCommandParserTest {
     @Test
     public void parse_invalidLetterArgsForShortlistCandidateCommand_throwsParseException() {
         assertShortlistCandidateCommandParseFailure(parser, "a", MESSAGE_UNKNOWN_COMMAND
-        + ShortlistCandidateCommand.MESSAGE_USAGE);
+                + ShortlistCandidateCommand.MESSAGE_USAGE);
     }
 
     @Test

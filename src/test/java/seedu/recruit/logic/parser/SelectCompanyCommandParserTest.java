@@ -6,6 +6,7 @@ import static seedu.recruit.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.Test;
+
 import seedu.recruit.logic.commands.SelectCompanyCommand;
 
 /**
