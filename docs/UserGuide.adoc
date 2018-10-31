@@ -137,11 +137,12 @@ Examples:
 * `deletegroupstudents g/1 p/1`
 * `dgs g/1 p/1 p/2`
 
-=== add test and test marks to student: 'adt'
-List out  students who score above/below certain grade.
+=== add test and test marks to student: 'adt student name tn/ tm/'
+The system is allowed user to input different testname and test marks for each student by indicate
+the student name. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate then need to indicate the full name, otherwise it will be just add )
 
-Format: scoreFilter [filter_standard]
-Example: scorefilter a/66
+Format: adt tn/ tm/ or adt tm/ tn/
+Example: adt
 This will list all the students who score above 56 in a new grade list
 
 
