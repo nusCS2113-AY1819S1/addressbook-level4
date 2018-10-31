@@ -58,6 +58,16 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public Predicate<Expenditure> getPredicateShowExpendituresOnDate(String date) {
+        return expenditure -> (expenditure.getDate().toString().equals(date));
+    }
+
+    @Override
+    public Predicate<Expenditure> getPredicateShowExpendituresOfCategory(String category) {
+        return expenditure -> (expenditure.getCategory().toString().equals(category));
+    }
+
+    @Override
     public void resetData(ReadOnlyAddressBook newData) {
         versionedAddressBook.resetData(newData);
         indicateAddressBookChanged();
@@ -234,6 +244,34 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(predicate);
         filteredExpenditures.setPredicate(predicate);
     }
+
+    //=========== Rank Filtered Task List ===================================================================
+
+    @Override
+    public void rankFilteredTaskDeadline() {
+        versionedTodoList.sortTaskDate();
+    }
+
+    @Override
+    public void rankFilteredTaskModule() {
+        versionedTodoList.sortTaskModule();
+    }
+
+    @Override
+    public void rankFilteredTaskPriority() {
+        versionedTodoList.sortTaskPriority();
+    }
+
+    @Override
+    public void reverseTodoList() {
+        versionedTodoList.reverseTasks();
+    }
+
+    @Override
+    public void rankTaskDefault() {
+        versionedTodoList.sortTaskDefault();
+    }
+
 
     //=========== Undo/Redo =================================================================================
 

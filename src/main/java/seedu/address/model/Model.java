@@ -22,6 +22,10 @@ public interface Model {
     Predicate<Task> PREDICATE_SHOW_ALL_COMPLETED_TASKS = task -> (task.getComplete());
     Predicate<Task> PREDICATE_SHOW_ALL_UNCOMPLETED_TASKS = task -> (!task.getComplete());
 
+    /** {@code Predicate} that evaluates based on the date of the task */
+    Predicate<Expenditure> getPredicateShowExpendituresOnDate(String date);
+    Predicate<Expenditure> getPredicateShowExpendituresOfCategory(String category);
+
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
 
@@ -129,6 +133,7 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+
     /**
      * Updates the filter of the filtered task list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
@@ -140,6 +145,16 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredExpenditureList(Predicate<Expenditure> predicate);
+
+    void rankFilteredTaskDeadline();
+
+    void rankFilteredTaskModule();
+
+    void rankFilteredTaskPriority();
+
+    void reverseTodoList();
+
+    void rankTaskDefault();
 
 
     /**
