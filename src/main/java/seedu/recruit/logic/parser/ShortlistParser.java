@@ -41,7 +41,7 @@ public class ShortlistParser {
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND + ShortlistCandidateCommand.MESSAGE_USAGE);
             }
 
-        } else if (state.nextCommand.equals(SelectCompanyCommand.COMMAND_LOGIC_STATE)) {
+        } else if (state.nextCommand.equals(SelectCompanyCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST)) {
             switch (commandWord) {
 
             case SelectCompanyCommand.COMMAND_WORD:
@@ -54,7 +54,7 @@ public class ShortlistParser {
                         + SelectCompanyCommand.MESSAGE_USAGE);
             }
 
-        } else if (state.nextCommand.equals(SelectJobCommand.COMMAND_LOGIC_STATE)) {
+        } else if (state.nextCommand.equals(SelectJobCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST)) {
             switch (commandWord) {
 
             case SelectJobCommand.COMMAND_WORD:
@@ -75,7 +75,7 @@ public class ShortlistParser {
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND +
-                        SelectJobCommand.MESSAGE_SELECT_JOB_SUCCESS_NEXT_STEP + SelectCandidateCommand.MESSAGE_USAGE);
+                        SelectJobCommand.MESSAGE_SELECT_JOB_SUCCESS_NEXT_STEP_IN_SHORTLIST + SelectCandidateCommand.MESSAGE_USAGE);
             }
         } else {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

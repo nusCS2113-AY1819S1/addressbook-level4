@@ -3,7 +3,6 @@ package seedu.recruit.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.recruit.commons.core.EventsCenter;
-import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.commons.events.ui.ShowLastViewedBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;

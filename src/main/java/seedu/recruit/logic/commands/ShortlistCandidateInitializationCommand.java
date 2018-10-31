@@ -22,7 +22,8 @@ public class ShortlistCandidateInitializationCommand extends Command {
             + ": Shortlists selected candidate(s) for a job offer.\n";
 
     public static final String MESSAGE_ENTERING_SHORTLIST_PROCESS =
-            "Entering shortlisting process.\n";
+            "Entering shortlisting process...\n"
+            + "Enter cancel to exit anytime.\n";
 
     public static final String MESSAGE_NEXT_STEP =
             "Please select a company.\n";
@@ -48,7 +49,7 @@ public class ShortlistCandidateInitializationCommand extends Command {
         requireNonNull(model);
         EventsCenter.getInstance().post(new ShowShortlistPanelRequestEvent());
         shortlistStatus = true;
-        LogicManager.setLogicState(SelectCompanyCommand.COMMAND_LOGIC_STATE);
+        LogicManager.setLogicState(SelectCompanyCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST);
         return new CommandResult(MESSAGE_ENTERING_SHORTLIST_PROCESS + MESSAGE_NEXT_STEP
                 + SelectCompanyCommand.MESSAGE_USAGE);
     }
