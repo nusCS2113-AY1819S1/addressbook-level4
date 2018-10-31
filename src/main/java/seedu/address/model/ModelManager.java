@@ -129,10 +129,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /**
-     * Updates the addressBook and its storage path using the {@code username} provided.
-     * @param username
+     * Updates the addressBook and its storage path.
      */
-    private void reloadAddressBook(Username username) {
+    private void reloadAddressBook() {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook newAddressBook;
 
@@ -212,14 +211,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /**
-     * Updates the distributorBook and its storage path using the {@code username} provided.
-     * @param username
+     * Updates the distributorBook and its storage path.
      */
-    private void reloadDistributorBook(Username username) {
+    private void reloadDistributorBook() {
         Optional<ReadOnlyDistributorBook> distributorBookOptional;
         ReadOnlyDistributorBook newData;
 
-        storage.update(versionedUserDatabase.getUser(username));
         try {
             distributorBookOptional = storage.readDistributorBook();
             if (!distributorBookOptional.isPresent()) {
@@ -272,9 +269,9 @@ public class ModelManager extends ComponentManager implements Model {
         boolean result = versionedUserDatabase.checkAuthentication(username, password);
         if (hasLoggedIn() && result) {
             storage.update(versionedUserDatabase.getUser(username));
-            reloadAddressBook(username);
+            reloadAddressBook();
             reloadSalesHistory();
-            reloadDistributorBook(username);
+            reloadDistributorBook();
         }
         return result;
     }
