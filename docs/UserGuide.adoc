@@ -30,7 +30,9 @@ This user guide provides comprehensive documentation on the *[blue]#_Drink I/O_#
 access and the commands you can use. Choose a topic from the Table of Contents (link) to find answers,
 get instructions and learn to improve your workflow with Drink I/O.
 
-This user guide provides comprehensive documentation on the *[blue]#_Drink I/O_#* setup process, the commands you can use and the features available to you. Choose a topic from the Table of Contents (link) to find answers, get instructions and learn how to improve your workflow with *[blue]#_Drink I/O_#*.
+This user guide provides comprehensive documentation on the *[blue]#_Drink I/O_#* setup process, the commands you can use
+and the features available to you. Choose a topic from the Table of Contents (link) to find answers,
+get instructions and learn how to improve your workflow with *[blue]#_Drink I/O_#*.
 
 == Quick Start
 
