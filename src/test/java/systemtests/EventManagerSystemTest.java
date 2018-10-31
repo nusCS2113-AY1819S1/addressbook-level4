@@ -154,7 +154,7 @@ public abstract class EventManagerSystemTest {
      * Displays all Events with any parts of their names matching {@code keyword} (case-insensitive).
      */
     protected void showEventsWithName(String keyword) {
-        executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
+        executeCommand(FindCommand.COMMAND_WORD + " n/" + keyword);
         assertTrue(getModel().getFilteredEventList().size() < getModel().getEventManager().getEventList().size());
     }
 

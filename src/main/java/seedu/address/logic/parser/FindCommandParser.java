@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -59,7 +60,11 @@ public class FindCommandParser implements Parser<FindCommand> {
     public void MapPrefixAndKeywords (Map<Prefix, List<String> > keywordMap, Prefix prefix,
                                       ArgumentMultimap argMultimap) {
         if (argMultimap.getValue(prefix).isPresent())  {
-            keywordMap.put(prefix, Arrays.asList(argMultimap.getValue(prefix).get().trim().split("\\s+")));
+            List<String> combineAllSamePrefixKeywordsList = new ArrayList<>();
+            for(String singlePrefix : argMultimap.getAllValues(prefix)) {
+                combineAllSamePrefixKeywordsList.addAll(Arrays.asList(singlePrefix.trim().split("\\s+")));
+            }
+            keywordMap.put(prefix, combineAllSamePrefixKeywordsList);
         }
         else
             keywordMap.put(prefix, null);

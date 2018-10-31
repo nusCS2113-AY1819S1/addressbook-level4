@@ -50,8 +50,8 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
             return true;
         }
 
-        return keywords.stream().anyMatch(keyword -> keyword.isEmpty()
-                        || (StringUtil.containsWordIgnoreCase(event.getName().fullName, keyword)
+        return keywords.stream().anyMatch(keyword -> !keyword.isEmpty()
+                        && (StringUtil.containsWordIgnoreCase(event.getName().fullName, keyword)
                             || StringUtil.containsWordIgnoreCase(event.getContact().fullContactName, keyword)
                             || StringUtil.containsWordIgnoreCase(event.getEmail().value, keyword)
                             || StringUtil.containsWordIgnoreCase(event.getPhone().value, keyword)
@@ -66,16 +66,17 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
             return true;
         }
 
-        return keywords.stream().anyMatch(keyword -> keyword.isEmpty()
-                        || StringUtil.containsWordIgnoreCase(event.getName().fullName, keyword));
+        return keywords.stream().anyMatch(keyword -> !keyword.isEmpty()
+                        && StringUtil.containsWordIgnoreCase(event.getName().fullName, keyword));
     }
 
     public boolean checkContactKeywordsMatchEventContact (List<String> keywords, Event event) {
         if (keywords == null) {
             return true;
         }
-        return keywords.stream().anyMatch(keyword -> keyword.isEmpty()
-                        || StringUtil.containsWordIgnoreCase(event.getContact().fullContactName, keyword));
+
+        return keywords.stream().anyMatch(keyword -> !keyword.isEmpty()
+                        && StringUtil.containsWordIgnoreCase(event.getContact().fullContactName, keyword));
     }
 
     public boolean checkEmailKeywordsMatchEventEmail (List<String> keywords, Event event) {
@@ -83,8 +84,8 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
             return true;
         }
 
-        return keywords.stream().anyMatch(keyword -> keyword.isEmpty()
-                        || StringUtil.containsWordIgnoreCase(event.getEmail().value, keyword));
+        return keywords.stream().anyMatch(keyword -> !keyword.isEmpty()
+                        && StringUtil.containsWordIgnoreCase(event.getEmail().value, keyword));
     }
 
     public boolean checkPhoneKeywordsMatchEventPhone (List<String> keywords, Event event) {
@@ -92,8 +93,8 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
             return true;
         }
 
-        return keywords.stream().anyMatch(keyword -> keyword.isEmpty()
-                        || StringUtil.containsWordIgnoreCase(event.getPhone().value, keyword));
+        return keywords.stream().anyMatch(keyword -> !keyword.isEmpty()
+                        && StringUtil.containsWordIgnoreCase(event.getPhone().value, keyword));
     }
 
     public boolean checkVenueKeywordsMatchEventVenue (List<String> keywords, Event event) {
@@ -101,8 +102,8 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
             return true;
         }
 
-        return keywords.stream().anyMatch(keyword -> keyword.isEmpty()
-                        || StringUtil.containsWordIgnoreCase(event.getVenue().value, keyword));
+        return keywords.stream().anyMatch(keyword -> !keyword.isEmpty()
+                        && StringUtil.containsWordIgnoreCase(event.getVenue().value, keyword));
     }
 
     public boolean checkDateTimeKeywordsMatchEventDateTime (List<String> keywords, Event event) {
@@ -110,8 +111,8 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
             return true;
         }
 
-        return keywords.stream().anyMatch(keyword -> keyword.isEmpty()
-                        || StringUtil.containsWordIgnoreCase(event.getDateTime().toString(), keyword));
+        return keywords.stream().anyMatch(keyword -> !keyword.isEmpty()
+                        && StringUtil.containsWordIgnoreCase(event.getDateTime().toString(), keyword));
     }
 
     public boolean checkTagKeywordsMatchEventTag (List<String> keywords, Event event) {
@@ -119,8 +120,8 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
             return true;
         }
 
-        return keywords.stream().anyMatch(keyword -> keyword.isEmpty()
-                    || event.getTags().stream()
+        return keywords.stream().anyMatch(keyword -> !keyword.isEmpty()
+                    && event.getTags().stream()
                 .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword)));
     }
 

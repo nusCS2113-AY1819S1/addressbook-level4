@@ -1,34 +1,48 @@
 package seedu.address.model.event;
-
+/*
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_KEYWORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 
+import seedu.address.logic.parser.Prefix;
 import seedu.address.testutil.EventBuilder;
 
 public class EventContainsKeywordsPredicateTest {
 
     @Test
     public void equals() {
-        List<String> firstPredicateKeywordList = Collections.singletonList("first");
-        List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
+        Map<Prefix, List<String> > firstPredicateKeywordMap = new HashMap<>();
+        Map<Prefix, List<String> > secondPredicateKeywordMap = new HashMap<>();
+
+        List<String> firstPredicateKeywordPrefixList = Collections.singletonList("first");
+        List<String> secondPredicateKeywordPrefixList = Collections.singletonList("first");
+        List<String> secondPredicateNamePrefixList = Collections.singletonList("second");
+
+
+        firstPredicateKeywordMap.put(PREFIX_KEYWORD, firstPredicateKeywordPrefixList);
+        secondPredicateKeywordMap.put(PREFIX_KEYWORD, secondPredicateKeywordPrefixList);
+        secondPredicateKeywordMap.put(PREFIX_NAME, secondPredicateNamePrefixList);
 
         EventContainsKeywordsPredicate firstPredicate =
-                new EventContainsKeywordsPredicate(firstPredicateKeywordList);
+                new EventContainsKeywordsPredicate(firstPredicateKeywordMap);
         EventContainsKeywordsPredicate secondPredicate =
-                new EventContainsKeywordsPredicate(secondPredicateKeywordList);
+                new EventContainsKeywordsPredicate(secondPredicateKeywordMap);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
         EventContainsKeywordsPredicate firstPredicateCopy =
-                new EventContainsKeywordsPredicate(firstPredicateKeywordList);
+                new EventContainsKeywordsPredicate(firstPredicateKeywordMap);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -76,4 +90,9 @@ public class EventContainsKeywordsPredicateTest {
         predicate = new EventContainsKeywordsPredicate(Arrays.asList("Carol"));
         assertFalse(predicate.test(new EventBuilder().withName("Alice Bob").build()));
     }
+
+    public void setup_predicate(List<String> keywords) {
+
+    }
 }
+*/
