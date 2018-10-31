@@ -26,7 +26,7 @@ public class SampleDataUtil {
                 getTagSet("healthy")),
             new Product(new Name("Beef"), new SerialNumber("002"),
                     new DistributorName("Butcher"), new Address("meat"),
-                getTagSet("red meat")),
+                getTagSet("redmeat")),
             new Product(new Name("Cheezles"), new SerialNumber("003"),
                     new DistributorName("Snack Shack"), new Address("snack"),
                 getTagSet("unhealthy")),
@@ -35,9 +35,9 @@ public class SampleDataUtil {
                 getTagSet("food")),
             new Product(new Name("Toilet Paper"), new SerialNumber("005"),
                     new DistributorName("Toiletries"), new Address("toilet"),
-                getTagSet("toilet")),
+                getTagSet("tolet")),
             new Product(new Name("Ice Cream"), new SerialNumber("006"),
-                    new DistributorName("Ben & Harry's"), new Address("snack"),
+                    new DistributorName("Ben Harrys"), new Address("snack"),
                 getTagSet("cold"))
         };
     }
