@@ -340,6 +340,7 @@ Deletes a class for a module in the system. +
 Format: `class delete cn/CLASS_NAME mc/MODULE_CODE`
 
 ****
+* Module code must exist
 * Class must exist and belong to module code before being able to delete the class
 ****
 
@@ -370,6 +371,7 @@ Format: `class delstudent c/CLASS_NAME i/ADMISSION_NO`
 
 ****
 * Student must exist in the system
+* Module code must exist
 * Class must exist and belong to the module code before unassigning a student from the class
 * Student must be assigned to class in order to unassign them from the class
 ****
