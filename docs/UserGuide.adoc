@@ -134,13 +134,51 @@ account, and in a specific role, you can work with functions that are tailored t
 === Create additional account
 
 == Managing Your Inventory
-The core feature of *[blue]#_Drink I/O_#* is to manage your inventory
+The core feature of *[blue]#_Drink I/O_#* is to manage your company's inventory.
+This includes the adding of drinks into the inventory, deleting, viewing their details
+and updating these details.
+
+In *[blue]#_Drink I/O_#*, each drink has a _unique_ name, a selling price, a cost price,
+stock count and tags that allow you to classify the drink (e.g. soft drink, tea) and enter
+any other information.
 
 === Adding new items
+When you decide to bring in new drinks into your company, you can add these drinks into
+your inventory to let *[blue]#_Drink I/O_#* track them.
 
-To add new drinks into your company's offer listing, you can carry out the steps below:
+[TIP]
+====
+*_Summary_* +
+
+*Command format*:
+`addDrink n/NAME p/SELLING_PRICE cp/COST_PRICE`
+
+* `NAME` is the name of the drink you wish to record
+** This name must be unique among the drinks recorded in *[blue]#_Drink I/O_#*
+* `SELLING_PRICE` is the default selling price of 1 carton of the drink
+* `COST_PRICE` is the default cost price of 1 carton of the drink
+** Prices must not be negative values `[Coming in v1.4]`
+====
 
 
+*Step-by-Step Instructions* +
+To enter a new drink into *[blue]#_Drink I/O_#*,
+
+. Enter `addDrink` into the command box
+. Key in `n/`, followed by name of drink (`NAME`)
+. Key in `p/`, followed by default selling price of 1 carton of the drink (`SELLING_PRICE`)
+. Key in `cp/`, followed by default cost price of 1 carton of the drink (`COST_PRICE`)
+. Press kbd:[enter]
+. Check whether the drink has been recorded successfully in the system
+-  If you see the message "new drink added!", the drink has been successfully
+entered into *[blue]#_Drink I/O_#* +
+-  If not, follow the instructions displayed in the message display pane, and re-enter the command +
+
+[WARNING]
+====
+- The new drink you want to add must be have a unique name among the drinks in *[blue]#_Drink I/O_#*.
+- The adding of the drink will fail if `SELLING_PRICE` or `COST_PRICE` are negative values. `[To be added in v1.4]`
+====
 
 === Searching for an item
 === Viewing all items in inventory
@@ -517,6 +555,7 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 ====
 
 // tag::undoredo[]
+////
 ==== Undoing previous command : `undo`
 
 <TO BE EDITED FURTHER> +
@@ -567,7 +606,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `delete 1` command) +
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
-
+////
 ==== Clearing all entries : `clear`
 
 Clears all data from the FrozenBook. +
