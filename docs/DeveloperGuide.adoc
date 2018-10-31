@@ -427,7 +427,7 @@ Step 4. If the username and password strings match, a success message is printed
 ==== Current Implementation
 
 The Tag feature is facilitated by `TagCommand`.
-It extends `Command` and implements the following operations:
+It extends `Command` and implements the following operation:
 
 * `TagCommand()` -- Finds and shows all items under specific tags.
 
@@ -453,28 +453,37 @@ Step 2. The `tag` command calls `updateFilteredItemListByTag()`, which shows the
 // end::tag[]
 
 // tag::addTtag[]
-=== AddTag feature
+=== AddTag/DeleteTag feature
 ==== Current Implementation
 
-The Tag feature is facilitated by `AddTagCommand`.
-It extends `Command` and implements the following operations:
+The AddTag and DeleteTag features are facilitated by `AddTagCommand` and `DeleteTagCommand`.
+They extend `Command` and implement the following operations:
 
-* `AddTagCommand()` --  Add new tags to a select item in the Stock List.
+* `AddTagCommand()` --  Adds new tags to a selected item in the Stock List.
+* `DeleteTagCommand()` -- Deletes some tags while keeping the rest of a selected item in the Stock List.
 
-Given below is an example usage scenario and how the addTag mechanism behaves at each step.
+Given below are example usage scenarios and how the addTag/deleteTag mechanism behave at each step.
 
-Step 1. The user executes `addTag 1 t/ Lab2` command to add a tag `Lab2` to the item with index 2 in the Stock List.
+Scenario 1: `AddTag`
 
-Step 2. The `addTag` command calls `updateFilteredItemList();` in `model` show the stock list after the tag is added.
+Step 1. The user executes `addTag 1 t/ Lab2` command to add a tag `Lab2` to the item with index 1 in the Stock List.
+
+Step 2. The `addTag` command calls `updateFilteredItemList();` in `model` to show the stock list after the tag is added.
+
+Scenario 2: `DeleteTag`
+
+Step 1. The user executes `deleteTag 1 t/ Lab1` command to delete a tag `Lab1` from the item with index 1 in the Stock List.
+
+Step 2. The `deleteTag` command calls `updateFilteredItemList();` in `model` to show the stock list after the tag is deleted.
 
 
 ==== Design Considerations
 
-* **Alternative 1 (current choice):** Add tags to one item in the stock list.
+* **Alternative 1 (current choice):** Adds tags to or deletes tags from one item in the stock list.
 ** Pros: Easy to implement.
-** Cons: May be complicated when the user want to add same tags to multiple items.
-* **Alternative 2:** Add tag to multiple items in the stock list.
-** Pros: Will be more user friendly when same tags need to be added to multiple items.
+** Cons: May be complicated when the same tags need to be added to or deleted from multiple items.
+* **Alternative 2:** Adds tags to or deletes tag from multiple items in the stock list.
+** Pros: Will be more user friendly when same tags need to be added to or deleted from multiple items.
 ** Cons: It is harder to implement.
 
 

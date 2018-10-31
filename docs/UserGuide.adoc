@@ -184,13 +184,23 @@ Returns the items whose tags includes "Lab1" or "Lab2"
 
 === Add tags to one item: `addTag`
 
-Add one or multiple tags to one item in the stock list by its index. +
+Adds one or multiple tags to one item in the stock list by its index. +
 Format: `addTag INDEX t/ TAG [MORE_TAGS]`
 
 Examples:
 
 * `addTag 1 t/ Lab3 t/ Lab4` +
 Add tags "Lab3" and "Lab4" to the item with index 1
+
+=== Delete tags from one item: `deleteTag`
+
+Deletes some tags and keeps the rest of one item in the stock list by its index. +
+Format: `deleteTag INDEX t/ TAG [MORE_TAGS]`
+
+Examples:
+
+* `deleteTag 1 t/ Lab1 t/ Lab2` +
+Deletes tags "Lab1" and "Lab2" from the item with index 1
 
 === Listing entered commands : `history`
 
