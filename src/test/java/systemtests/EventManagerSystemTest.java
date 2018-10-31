@@ -181,7 +181,7 @@ public abstract class EventManagerSystemTest {
      * and the event list panel displays the Events in the model correctly.
      */
     protected void assertApplicationDisplaysExpected(String expectedCommandInput, String expectedResultMessage,
-            Model expectedModel) {
+                                                     Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(new EventManager(expectedModel.getEventManager()), testApp.readStorageAddressBook());
@@ -223,7 +223,7 @@ public abstract class EventManagerSystemTest {
         URL expectedUrl;
         try {
 
-            expectedUrl = new URL(BrowserPanel.getSearchPageUrlWithoutName().toString()
+            expectedUrl = new URL(BrowserPanel.getSearchPageUrlWithoutName()
                     + "?name="
                     + selectedCardHandle.getName().replaceAll(" ", "%20")
                     + "&contact="
@@ -239,7 +239,10 @@ public abstract class EventManagerSystemTest {
                     + "&tags="
                     + selectedCardHandle.getTagsString().replaceAll(" ", "%20")
                     + "&attendance="
-                    + selectedCardHandle.getAttendanceString().replaceAll(" ", "%20"));
+                    + selectedCardHandle.getAttendanceString().replaceAll(" ", "%20")
+                    + "&comment="
+                    + selectedCardHandle.getComment().replaceAll("[{]", "%3C")
+                    .replaceAll("[}]", "%3E").replaceAll(" ", "%20"));
         } catch (MalformedURLException mue) {
             throw new AssertionError("URL expected to be valid.", mue);
         }
