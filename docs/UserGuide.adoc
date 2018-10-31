@@ -242,6 +242,9 @@ Step 2. `deletej 5-4,6` +
 
 // end::delete[]
 
+=== Deleting a shortlisted candidate: `deleteShortlist`
+
+
 === Listing details of candidates / companies / jobs: `listc` `listC`
 
 ==== Shows a list of all candidates
@@ -277,14 +280,22 @@ image::companyPanel2.png[width="790", align="left"]
 .Selecting MOE to show the available job offers
 image::companyPanel3.png[width="790", align="left"]
 
-=== Selecting a candidate : `select`
+=== Selecting a candidate / company / job offer: `select` `selectCompany` `selectJob`
+
+==== Selecting a candidate :
 Format: `select` `<INDEX>`
 
-=== Selecting a company : `selectCompany`
+. Selects the candidate(s) with the specified INDEX(s)
+This index must be an index number shown in the displayed candidate list.
+
+==== Selecting a company :
 Format: `selectCompany` `<INDEX>`
 
-=== Selecting a job offer : `selectJob`
+
+==== Selecting a job offer :
 Format: `selectJob` `<INDEX>`
+
+
 
 === Locating candidates by search parameter : `find`
 ==== Finds names of candidates from RecruitBook based on the search parameter.
