@@ -174,7 +174,7 @@ When you buy and receive new goods, and want to update your stocks, you can ente
 *Step-by-Step Instructions* +
 To record an import transaction,
 
-. Enter `import`
+. Enter `import` into the command box
 . Key in `n/`, followed by name of drink (`NAME`)
 . Key in `q/`, followed by quantity imported (`QUANTITY`)
 . Press kbd:[enter]
@@ -217,16 +217,11 @@ to update your transactions as well as the current stock.
 *Step-by-Step Instructions* +
 To record a sale transaction,
 
-. Enter `sell`
-
+. Enter `sell` into the command box
 . Key in `n/`, followed by name of drink (`NAME`)
-
 . Key in `q/`, followed by quantity transacted in sale (`QUANTITY`)
-
 . Press kbd:[enter]
-
 . Check whether the transaction has been recorded successfully,
-
 * If you see the message "sale transaction recorded!", the transaction had been
 successfully entered into *[blue]#_Drink I/O_#*
 * If not, follow the instructions displayed in the message display pane, and re-enter the command +
@@ -252,17 +247,25 @@ You can view the transactions entered into *[blue]#_Drink I/O_#* to verify their
 *Step by Step Instructions* +
 To view all transactions entered,
 
-. Enter `viewTrans`
+. Enter `viewTrans` into the command box
 . Press kbd:[enter]
 
 You will see a list of transactions displayed in the results panel.
 
 
 == Analysing Sales Performance
+Having up-to-date figures on how much you are making is definitely an important statistic to
+gauge the health of your company. *[blue]#_Drink I/O_#* can crunch the numbers from your
+transactions for you, and present overall cost, revenue and profit, and
+individual drink's sales figures.
+// Add about bestselling drink
+
 === Viewing overall cost, revenue and profit
+You can view the overall sales figures aggregated across all drinks.
+
 ==== Viewing overall cost
-*[blue]#_Drink I/O_#* can calculate the total costs your company has incurred
-since the beginning of using *[blue]#_Drink I/O_#* for you.
+You can check the total costs incurred by your company. Let *[blue]#_Drink I/O_#*
+calculate the costs since the beginning of using *[blue]#_Drink I/O_#* for you.
 
 [TIP]
 ====
@@ -275,7 +278,7 @@ since the beginning of using *[blue]#_Drink I/O_#* for you.
 *Step by Step Instructions* +
 To view the total costs incurred,
 
-. Enter `analyseCosts`
+. Enter `analyseCosts` into the command box
 
 . Press kbd:[enter]
 
@@ -283,8 +286,8 @@ You should see a value displayed in the results panel.
 
 // insert picture
 
-==== Viewing overall cost
-*[blue]#_Drink I/O_#* can calculate the total costs your company has incurred
+==== Viewing overall revenue `[Coming in v1.4]`
+*[blue]#_Drink I/O_#* can calculate the total revenue your company has earned
 since the beginning of using *[blue]#_Drink I/O_#* for you.
 
 [TIP]
@@ -292,13 +295,13 @@ since the beginning of using *[blue]#_Drink I/O_#* for you.
 *_Summary_* +
 
 *Command format*:
-`analyseCosts`
+`analyseRevenue`
 ====
 
 *Step by Step Instructions* +
-To view the total costs incurred,
+To view the total revenue earned,
 
-. Enter `analyseCosts`
+. Enter `analyseRevenue` into the command box
 
 . Press kbd:[enter]
 
@@ -306,13 +309,48 @@ You should see a value displayed in the results panel.
 
 // insert picture
 
-=== Filtering popular items
-=== Viewing an item’s transactions
-=== Viewing an item’s cost, revenue and profit
+==== Viewing overall profit `[Coming in v1.4]`
+*[blue]#_Drink I/O_#* can calculate the total profit your company has earned
+since the beginning of using *[blue]#_Drink I/O_#* for you.
+
+[TIP]
+====
+*_Summary_* +
+
+*Command format*:
+`analyseProfits`
+====
+
+*Step by Step Instructions* +
+To view the total profit earned,
+
+. Enter `analyseProfits` into the command box
+
+. Press kbd:[enter]
+
+You should see a value displayed in the results panel.
+
+// insert picture
+
+
+=== Filtering popular items `[Coming in v1.4]`
+=== Viewing an item’s transactions `[Coming in v1.4]`
+=== Viewing an item’s cost, revenue and profit `[Coming in v1.4]`
 
 == Setting Reminders
 
-== Features
+
+
+
+
+
+
+
+
+
+
+
+== Overview of Role-Specific Commands
 
 ====
 *Command Format*
@@ -550,6 +588,9 @@ There is no need to save manually.
 
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
+
+== Upcoming Features in Future Releases
+
 
 == FAQ
 
