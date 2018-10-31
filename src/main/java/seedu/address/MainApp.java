@@ -14,7 +14,9 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
+import seedu.address.commons.events.security.LogoutEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.commons.events.ui.SuccessfulRegisterEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
@@ -26,9 +28,12 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
+import seedu.address.security.AppUsers;
 import seedu.address.security.Security;
 import seedu.address.security.SecurityManager;
 import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.AppUsersStorage;
+import seedu.address.storage.JsonAppUsersStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
@@ -42,7 +47,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 6, 0, true);
+    public static final Version VERSION = new Version(1, 3, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -52,6 +57,7 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
+    protected AppUsers appUsers;
     protected Security security;
 
 
@@ -64,9 +70,12 @@ public class MainApp extends Application {
         config = initConfig(appParameters.getConfigPath());
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
+        AppUsersStorage appUsersStorage = new JsonAppUsersStorage(config.getAppUsersFilePath());
+
+        appUsers = initUsers(appUsersStorage);
         userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, appUsersStorage);
 
         initLogging(config);
 
@@ -74,7 +83,7 @@ public class MainApp extends Application {
 
         logic = new LogicManager(model);
 
-        security = new SecurityManager(false);
+        security = new SecurityManager(false, logic, appUsers);
 
         ui = new UiManager(logic, config, userPrefs, security);
 
@@ -147,6 +156,38 @@ public class MainApp extends Application {
     }
 
     /**
+     * Returns a {@code AppUsers} using the file at {@code storage}'s app users file path,
+     * or a new {@code AppUsers} with default configuration if errors occur when
+     * reading from the file.
+     */
+    protected AppUsers initUsers(AppUsersStorage storage) {
+        Path usersFilePath = storage.getAppUsersFilePath();
+        logger.info("Using users file : " + usersFilePath);
+
+        AppUsers initializedUsers;
+        try {
+            Optional<AppUsers> usersOptional = storage.readAppUsers();
+            initializedUsers = usersOptional.orElse(new AppUsers());
+        } catch (DataConversionException e) {
+            logger.warning("AppUsers file at " + usersFilePath + " is not in the correct format. "
+                    + "Using default user prefs");
+            initializedUsers = new AppUsers();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            initializedUsers = new AppUsers();
+        }
+
+        //Update users file in case it was missing to begin with or there are new/unused fields
+        try {
+            storage.saveAppUsers(initializedUsers);
+        } catch (IOException e) {
+            logger.warning("Failed to save user file : " + StringUtil.getDetails(e));
+        }
+
+        return initializedUsers;
+    }
+
+    /**
      * Returns a {@code UserPrefs} using the file at {@code storage}'s user prefs file path,
      * or a new {@code UserPrefs} with default configuration if errors occur when
      * reading from the file.
@@ -194,6 +235,7 @@ public class MainApp extends Application {
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);
+            //TODO Save Users Here
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
@@ -202,9 +244,30 @@ public class MainApp extends Application {
     }
 
     @Subscribe
+    private void handleSuccessfulRegisterEvent(SuccessfulRegisterEvent event) {
+        try {
+            storage.saveAppUsers(appUsers);
+        } catch (IOException e) {
+            logger.severe("Failed to save users " + StringUtil.getDetails(e));
+        }
+    }
+
+    @Subscribe
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         stop();
+    }
+
+    /**
+     * Saves new users whenever someone logs out (Superset of the new users and prexisting ones)
+     */
+    @Subscribe
+    public void handleLogoutEvent(LogoutEvent logout) {
+        try {
+            storage.saveAppUsers(appUsers);
+        } catch (IOException e) {
+            logger.severe("Failed to save users " + StringUtil.getDetails(e));
+        }
     }
 
     public static void main(String[] args) {

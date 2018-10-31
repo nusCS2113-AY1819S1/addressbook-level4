@@ -13,6 +13,9 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.TimeTableChangedEvent;
+import seedu.address.commons.events.security.LogoutEvent;
+import seedu.address.model.person.CombinedFriendPredicate;
+import seedu.address.model.person.CombinedOtherPredicate;
 import seedu.address.model.person.FriendListPredicate;
 import seedu.address.model.person.OtherListPredicate;
 import seedu.address.model.person.Person;
@@ -29,6 +32,8 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Person> friendList;
     private final FilteredList<Person> otherList;
     private final TimeTable timeTable;
+    private ObservableList<Person> list;
+    private User user;
 
     /**
      * Initializes a ModelManager with the given addressBook, userPrefs, timeTable.
@@ -42,8 +47,8 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook = new VersionedAddressBook(addressBook);
         friendList = new FilteredList<>(versionedAddressBook.getPersonList());
         otherList = new FilteredList<>(versionedAddressBook.getPersonList());
-        this.filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
-        this.timeTable = new TimeTable();
+        filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        timeTable = new TimeTable();
     }
 
     public ModelManager() {
@@ -68,6 +73,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
+        //TODO Check whether this actually works when modifying your own data.
+        if (user != null) {
+            matchUserToPerson(user.getName().toString());
+        }
         raise(new AddressBookChangedEvent(versionedAddressBook));
     }
 
@@ -98,7 +107,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updatePerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         versionedAddressBook.updatePerson(target, editedPerson);
         indicateAddressBookChanged();
     }
@@ -126,6 +134,18 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFriendList(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        friendList.setPredicate(combinedFriendPredicate(predicate, friendsPredicateFromPerson(user)));
+    }
+
+    @Override
+    public void updateOtherList(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        otherList.setPredicate(combinedOtherPredicate(predicate, othersPredicateFromPerson(user)));
     }
 
     @Override
@@ -157,12 +177,18 @@ public class ModelManager extends ComponentManager implements Model {
     public void undoAddressBook() {
         versionedAddressBook.undo();
         indicateAddressBookChanged();
+
+        // TODO: Implement after user comes online
+        // indicateTimeTableChanged(user.getTimeTable());
     }
 
     @Override
     public void redoAddressBook() {
         versionedAddressBook.redo();
         indicateAddressBookChanged();
+
+        // TODO: Implement after user comes online
+        // indicateTimeTableChanged(user.getTimeTable());
     }
 
     @Override
@@ -190,10 +216,53 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     public FriendListPredicate friendsPredicateFromPerson(Person person) {
-        return new FriendListPredicate(person.getFriends());
+        return new FriendListPredicate(person);
     }
 
     public OtherListPredicate othersPredicateFromPerson(Person person) {
-        return new OtherListPredicate(person.getFriends());
+        return new OtherListPredicate(person);
+    }
+
+    /**
+     * Combines the predicates to allow SetPredicate to be called
+     * @param predicate
+     * @param friendListPredicate
+     * @return
+     */
+    public CombinedFriendPredicate combinedFriendPredicate(Predicate<Person> predicate,
+                                                           FriendListPredicate friendListPredicate) {
+        return new CombinedFriendPredicate(predicate, friendListPredicate);
+    }
+
+    public CombinedOtherPredicate combinedOtherPredicate(Predicate<Person> predicate,
+                                                         OtherListPredicate otherListPredicate) {
+        return new CombinedOtherPredicate(predicate, otherListPredicate);
+    }
+
+    @Override
+    public void matchUserToPerson(String name) {
+        list = versionedAddressBook.getPersonList();
+        //Loops through personlist to get matched name Person Class
+        for (Person person : list) {
+            if (name.equals(person.getName().toString())) {
+                this.user = new User(person.getData());
+            }
+        }
+    }
+
+    @Override
+    public void clearUser() {
+        this.user = null;
+    }
+
+    @Override
+    public User getUser() {
+        //TODO Can you do this? Must you create a new object to be returned instead?
+        return this.user;
+    }
+
+    @Override
+    public void commandLogout() {
+        raise(new LogoutEvent());
     }
 }

@@ -62,6 +62,16 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
+     * Update the friend list to show the current
+     */
+    void updateFriendList(Predicate<Person> predicate);
+
+    /**
+     * Updates the others list to show current
+     */
+    void updateOtherList(Predicate<Person> predicate);
+
+    /**
      * Return the friends list of the current user
      * @param person
      */
@@ -72,6 +82,28 @@ public interface Model {
      * @param person
      */
     ObservableList<Person> getOtherList(Person person);
+
+    /**
+     * Instantiates the user with a Person in database
+     * @param name
+     */
+    void matchUserToPerson(String name);
+
+    /**
+     * Clears the user instance when logging out
+     */
+    void clearUser();
+
+    /**
+     *
+     * @return the current authenticated User
+     */
+    User getUser();
+
+    /**
+     * For CLI Logout to call to raise event
+     */
+    void commandLogout();
 
     /**
      * Returns true if the model has previous address book states to restore.

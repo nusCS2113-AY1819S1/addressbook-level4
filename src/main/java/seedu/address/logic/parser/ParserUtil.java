@@ -2,22 +2,24 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.FileLocation;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TimeSlot;
@@ -29,6 +31,17 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final HashMap<String, DayOfWeek> DAY_OF_WEEK_MAP = new HashMap<>();
+
+    static {
+        DAY_OF_WEEK_MAP.put("MON", DayOfWeek.MONDAY);
+        DAY_OF_WEEK_MAP.put("TUE", DayOfWeek.TUESDAY);
+        DAY_OF_WEEK_MAP.put("WED", DayOfWeek.WEDNESDAY);
+        DAY_OF_WEEK_MAP.put("THU", DayOfWeek.THURSDAY);
+        DAY_OF_WEEK_MAP.put("FRI", DayOfWeek.FRIDAY);
+        DAY_OF_WEEK_MAP.put("SAT", DayOfWeek.SATURDAY);
+        DAY_OF_WEEK_MAP.put("SUN", DayOfWeek.SUNDAY);
+    }
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -160,8 +173,8 @@ public class ParserUtil {
         LocalTime endTime;
 
         try {
-            startTime = LocalTime.parse(startString);
-            endTime = LocalTime.parse(endString);
+            startTime = parseTime(startString);
+            endTime = parseTime(endString);
         } catch (DateTimeParseException e) {
             throw new ParseException((TimeSlot.MESSAGE_CANNOT_PARSE_TIME));
         }
@@ -174,36 +187,103 @@ public class ParserUtil {
         }
     }
 
-    // TODO: Make this accept non-full day name strings too (e.g. MON, Tue)
+    /**
+     * Parses a string and returns a DayOfWeek
+     * @param dayString String to be parsed
+     * @return DayOfWeek of String
+     * @throws IllegalArgumentException if string cannot be parsed
+     */
     public static DayOfWeek parseDay(String dayString) throws IllegalArgumentException {
-        return DayOfWeek.valueOf(dayString.toUpperCase());
+        if (DAY_OF_WEEK_MAP.containsKey(dayString.toUpperCase())) {
+            return DAY_OF_WEEK_MAP.get(dayString.toUpperCase());
+        } else {
+            try {
+                return DayOfWeek.valueOf(dayString.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                throw e;
+            }
+        }
     }
 
     /**
-     *
-     * Parses a {@code String fileLocation} into a {@code fileLocation}
-     *
+     * Parses {@code timeString} according to various defined formats into a {@code LocalTime} object
+     * @param timeString {@code String} to be parsed
+     * @return {@code LocalTime} object representing {@code timeString}
+     * @throws DateTimeParseException if {@code timeString} cannot be parsed
      */
-    public static Path parseFileLocation (String fileLocation) throws ParseException {
+    public static LocalTime parseTime(String timeString) throws DateTimeParseException {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm");
+
+        if (timeString.contains(":") && timeString.length() == 4) {
+            format = DateTimeFormatter.ofPattern("H:mm");
+        } else if (timeString.length() == 4) {
+            format = DateTimeFormatter.ofPattern("HHmm");
+        } else if (timeString.length() == 3) {
+            format = DateTimeFormatter.ofPattern("Hmm");
+        } else if (timeString.length() == 2) {
+            format = DateTimeFormatter.ofPattern("HH");
+        } else if (timeString.length() == 1) {
+            format = DateTimeFormatter.ofPattern("H");
+        }
+
+        try {
+            return LocalTime.parse(timeString, format);
+        } catch (DateTimeParseException e) {
+            throw e;
+        }
+    }
+
+    /**
+     * Parses a {@code String filePath} into a {@code Path}
+     */
+    public static Path parseImportFileLocation (String fileLocation) throws ParseException {
         requireNonNull(fileLocation);
         String trimmedFileLocation = fileLocation.trim();
 
-        //FileLocation newFileLocation = new FileLocation(fileLocation);
-        Path newFilePath = Paths.get(trimmedFileLocation);
-
-        //check file exists in the disk //does not check the validity of file!
-        if (!FileUtil.isFileExists(newFilePath)) {
-            throw new ParseException(FileLocation.MESSAGE_CONSTRAINTS);
+        //default import path.
+        if (trimmedFileLocation.length() == 0) {
+            Path path;
+            path = Paths.get("import_export" , "import.ics");
+            return path;
         }
 
-        //check file ends in .ics //does not check the validity of file!
-        /*
-        String pattern = "^.*\\.(ics|ICS)$";
-        if (Pattern.matches(pattern, fileLocation)) {
-            throw new ParseException(FileLocation.MESSAGE_CONSTRAINTS);
-        }
-        */
+        //ensure the filePath ends in .ics
+        return parseImportExportFileLocation(trimmedFileLocation);
+    }
 
-        return newFilePath;
+    /**
+     * Parses a {@code String filePath} into a {@code Path}
+     */
+    public static Path parseExportFileLocation (String fileLocation) throws ParseException {
+        requireNonNull(fileLocation);
+        String trimmedFileLocation = fileLocation.trim();
+
+        //default export path.
+        if (trimmedFileLocation.length() == 0) {
+            Path path;
+            path = Paths.get("import_export" , "export.ics");
+            return path;
+        }
+        return parseImportExportFileLocation(trimmedFileLocation);
+    }
+
+    /**
+     * Parses a (non-empty) {@code String fileLocation} into a {@code Path}
+     */
+    private static Path parseImportExportFileLocation(String trimmedFileLocation) throws ParseException {
+        //ensure the filePath ends in .ics
+        String pattern = "^.+\\.(?:(?:[iI][cC][sS]))$"; //ending in .ics
+        if (!Pattern.matches(pattern, trimmedFileLocation)) {
+            throw new ParseException("The path must end in .ics");
+        }
+
+        //create the Path
+        Path path;
+        try {
+            path = Paths.get(trimmedFileLocation);
+        } catch (InvalidPathException e) {
+            throw new ParseException("The path you entered is invalid.");
+        }
+        return path;
     }
 }

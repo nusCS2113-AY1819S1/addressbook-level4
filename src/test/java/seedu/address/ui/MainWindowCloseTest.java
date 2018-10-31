@@ -15,6 +15,7 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.security.AppUsers;
 import seedu.address.security.SecurityManager;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
@@ -34,7 +35,7 @@ public class MainWindowCloseTest extends GuiUnitTest {
         FxToolkit.setupStage(stage -> {
             this.stage = stage;
             mainWindow = new MainWindow(stage, new Config(), new UserPrefs(), new LogicManager(new ModelManager()),
-                    new SecurityManager(true));
+                    new SecurityManager(true, new LogicManager(new ModelManager()), new AppUsers()));
             mainWindowHandle = new EmptyMainWindowHandle(stage);
 
             stage.setScene(mainWindow.getRoot().getScene());

@@ -74,6 +74,9 @@ public abstract class AddressBookSystemTest {
 
         //waitUntilBrowserLoaded(getBrowserPanel());
         assertApplicationStartingStateIsCorrect();
+
+        //To login in with test account
+        // getCommandBox().run("login test test");
     }
 
     @After

@@ -13,9 +13,10 @@ public class Config {
     public static final Path DEFAULT_CONFIG_FILE = Paths.get("config.json");
 
     // Config values customizable through config file
-    private String appTitle = "Timetable Deconflicter (TBC) V0.1";
+    private String appTitle = "FreeTime v1.3";
     private Level logLevel = Level.INFO;
     private Path userPrefsFilePath = Paths.get("preferences.json");
+    private Path appUsersFilePath = Paths.get("users.json");
 
     public String getAppTitle() {
         return appTitle;
@@ -35,6 +36,10 @@ public class Config {
 
     public Path getUserPrefsFilePath() {
         return userPrefsFilePath;
+    }
+
+    public Path getAppUsersFilePath() {
+        return appUsersFilePath;
     }
 
     public void setUserPrefsFilePath(Path userPrefsFilePath) {

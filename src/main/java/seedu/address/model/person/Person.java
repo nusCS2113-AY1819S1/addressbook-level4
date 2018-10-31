@@ -66,8 +66,7 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Returns an immutable Friend set
      */
     public Set<Friend> getFriends() {
         return friendList;
@@ -115,6 +114,7 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
+                && otherPerson.getFriends().equals(getFriends())
                 && otherPerson.getTimeTable().equals(getTimeTable());
     }
 
@@ -137,5 +137,10 @@ public class Person {
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
+    }
+
+    public UserParameterHelper getData() {
+        return new UserParameterHelper(this.name, this.phone, this.email, this.address, this.tags,
+                this.timeTable, this.friendList);
     }
 }

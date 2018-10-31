@@ -42,6 +42,9 @@ public class XmlAdaptedPerson {
     @XmlElement
     private List<XmlAdaptedFriend> friendList = new ArrayList<>();
 
+    @XmlElement
+    private List<XmlAdaptedTimeSlot> timeSlotList = new ArrayList<>();
+
     /**
      * Constructs an XmlAdaptedPerson.
      * This is the no-arg constructor that is required by JAXB.
@@ -77,6 +80,9 @@ public class XmlAdaptedPerson {
                 .collect(Collectors.toList());
         friendList = source.getFriends().stream()
                 .map(XmlAdaptedFriend::new)
+                .collect(Collectors.toList());
+        timeSlotList = source.getTimeTable().getTimeSlots().stream()
+                .map(XmlAdaptedTimeSlot::new)
                 .collect(Collectors.toList());
     }
 
@@ -133,6 +139,9 @@ public class XmlAdaptedPerson {
         final Set<Friend> friendList = new HashSet<>(friendSet);
 
         TimeTable timeTable = new TimeTable();
+        for (XmlAdaptedTimeSlot ts : timeSlotList) {
+            timeTable.addTimeSlot(ts.toModelType());
+        }
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, timeTable, friendList);
     }
 

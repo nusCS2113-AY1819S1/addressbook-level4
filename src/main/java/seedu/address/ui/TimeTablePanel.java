@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.time.LocalTime;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -49,8 +50,8 @@ public class TimeTablePanel extends UiPart<Region> {
     private TimeTable timeTableLastLoaded;
 
     // TODO: remove hardcoding here
-    private int currStartHour = 10;
-    private int currEndHour = 19;
+    private LocalTime currStartHour = LocalTime.parse("10:00");
+    private LocalTime currEndHour = LocalTime.parse("19:00");
     private int currNumRow = 5;
     private int currNumCol = 9;
 

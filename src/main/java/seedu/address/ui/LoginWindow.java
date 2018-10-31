@@ -9,7 +9,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.address.commons.events.security.SuccessfulLoginEvent;
 import seedu.address.commons.events.security.UnsuccessfulLoginEvent;
-import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowRegisterEvent;
 import seedu.address.security.Security;
 
@@ -121,13 +120,5 @@ public class LoginWindow extends UiPart<Stage> {
     @Subscribe
     public void handleUnsuccessfulLoginEvent(UnsuccessfulLoginEvent loginFailure) {
         label.setText("Incorrect Username/Password");
-    }
-
-    /**
-     * Closes the application.
-     */
-    @FXML
-    private void handleExit() {
-        raise(new ExitAppRequestEvent());
     }
 }

@@ -12,7 +12,7 @@
 
 <!-- TODO: set a more appropriate initial size -->
 <?import javafx.scene.layout.GridPane?>
-<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" onCloseRequest="#handleExit">
+<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/login.png" />
     </icons>

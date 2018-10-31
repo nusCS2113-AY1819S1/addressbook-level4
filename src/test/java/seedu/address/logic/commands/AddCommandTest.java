@@ -19,6 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.User;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.TimeTable;
 import seedu.address.testutil.PersonBuilder;
@@ -140,6 +141,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateFriendList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateOtherList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFriendList(Person person) {
             throw new AssertionError("This method should not be called.");
         }
@@ -171,6 +182,26 @@ public class AddCommandTest {
 
         @Override
         public void commitAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void matchUserToPerson(String name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public User getUser() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearUser() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commandLogout() {
             throw new AssertionError("This method should not be called.");
         }
     }

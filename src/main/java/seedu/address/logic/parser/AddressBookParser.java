@@ -14,12 +14,15 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteTimeCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FreeCommand;
 import seedu.address.logic.commands.FriendCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LogoutCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.TagCommand;
@@ -81,6 +84,10 @@ public class AddressBookParser {
         case ListCommand.COMMAND_WORD_ALIAS:
             return new ListCommand();
 
+        case LogoutCommand.COMMAND_WORD:
+        case LogoutCommand.COMMAND_WORD_ALIAS:
+            return new LogoutCommand();
+
         case HistoryCommand.COMMAND_WORD:
         case HistoryCommand.COMMAND_WORD_ALIAS:
             return new HistoryCommand();
@@ -115,12 +122,20 @@ public class AddressBookParser {
         case ImportCommand.COMMAND_WORD_ALIAS:
             return new ImportCommandParser().parse(arguments);
 
-        // TODO: Implement aliases
+        case ExportCommand.COMMAND_WORD:
+        case ExportCommand.COMMAND_WORD_ALIAS:
+            return new ExportCommandParser().parse(arguments);
+
         case AddTimeCommand.COMMAND_WORD:
+        case AddTimeCommand.COMMAND_WORD_ALIAS:
             return new AddTimeCommandParser().parse(arguments);
 
         case DeleteTimeCommand.COMMAND_WORD:
+        case DeleteTimeCommand.COMMAND_WORD_ALIAS:
             return new DeleteTimeCommandParser().parse(arguments);
+
+        case FreeCommand.COMMAND_WORD:
+            return new FreeCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

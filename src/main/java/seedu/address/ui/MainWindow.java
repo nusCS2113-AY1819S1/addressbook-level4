@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -17,15 +18,17 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.security.LogoutEvent;
+import seedu.address.commons.events.security.SuccessfulLoginEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ExitRegisterEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
+import seedu.address.commons.events.ui.ShowLoginEvent;
 import seedu.address.commons.events.ui.ShowRegisterEvent;
+import seedu.address.commons.events.ui.SuccessfulRegisterEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
 import seedu.address.security.Security;
-import seedu.address.security.UserStub;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -39,17 +42,21 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    private Security security;
 
     // Independent Ui parts residing in this Ui container
     private TimeTablePanel timetablePanel;
-    private PersonListPanel personListPanel;
+    private MePanel mePanel;
+    private OtherListPanel otherListPanel;
     private FriendListPanel friendListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
     private LoginWindow loginWindow;
     private RegistrationWindow registrationWindow;
-    private Person person = UserStub.getUser();
+
+    @FXML
+    private Text meText;
 
     @FXML
     private Text friendText;
@@ -65,6 +72,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private StackPane mePanelPlaceholder;
 
     @FXML
     private StackPane friendListPanelPlaceholder;
@@ -84,6 +94,7 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.security = security;
         this.config = config;
         this.prefs = prefs;
 
@@ -138,10 +149,42 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Enables Security CLI
+     */
+    public void fillSecurityCommandBox() {
+        SecurityBox commandBox = new SecurityBox(security);
+        commandBoxPlaceholder.getChildren().clear();
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        SecurityResultDisplay securityResultDisplay = new SecurityResultDisplay();
+        resultDisplayPlaceholder.getChildren().clear();
+        resultDisplayPlaceholder.getChildren().add(securityResultDisplay.getRoot());
+    }
+
+    /**
+     * Clear displays when user is logging out
+     */
+    private void removeInnerParts() {
+        commandBoxPlaceholder.getChildren().clear();
+        resultDisplayPlaceholder.getChildren().clear();
+        mePanelPlaceholder.getChildren().clear();
+        timetablePlaceholder.getChildren().clear();
+        personListPanelPlaceholder.getChildren().clear();
+        friendListPanelPlaceholder.getChildren().clear();
+        statusbarPlaceholder.getChildren().clear();
+        friendText.setText("");
+        personText.setText("");
+        meText.setText("");
+    }
+
+    /**
      * Fills up all the placeholders of this window.
      */
-    void fillInnerParts() {
+    public void fillInnerParts() {
 
+        meText.setText("Me");
+        meText.setFill(Color.LIGHTGOLDENRODYELLOW);
+        meText.setStyle("-fx-font-size: 20px;");
         friendText.setText("Friends");
         friendText.setFill(Color.LIGHTGOLDENRODYELLOW);
         friendText.setStyle("-fx-font-size: 20px;");
@@ -152,23 +195,24 @@ public class MainWindow extends UiPart<Stage> {
         timetablePanel = new TimeTablePanel();
         timetablePlaceholder.getChildren().add(timetablePanel.getRoot());
 
-        // Implemented with UserStub, commented out to preserve tests
-        personListPanel = new PersonListPanel(logic.getOtherList(person));
-        // personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        mePanel = new MePanel(FXCollections.observableArrayList(security.getUser()));
+        mePanelPlaceholder.getChildren().add(mePanel.getRoot());
 
-        // Implemented with UserStub, commented out to preserve tests
-         friendListPanel = new FriendListPanel(logic.getFriendList(person));
-        // friendListPanel = new FriendListPanel(logic.getFilteredPersonList());
+        friendListPanel = new FriendListPanel(logic.getFriendList(security.getUser()));
         friendListPanelPlaceholder.getChildren().add(friendListPanel.getRoot());
 
+        otherListPanel = new OtherListPanel(logic.getOtherList(security.getUser()));
+        personListPanelPlaceholder.getChildren().add(otherListPanel.getRoot());
+
         ResultDisplay resultDisplay = new ResultDisplay();
+        resultDisplayPlaceholder.getChildren().clear();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(logic);
+        commandBoxPlaceholder.getChildren().clear();
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -224,17 +268,24 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    void show() {
+        primaryStage.show();
+    }
+
     /**
      * Opens the Registration Window.
      */
-    @FXML
     public void handleRegister() {
         loginWindow.hide();
         registrationWindow.show();
     }
 
-    void show() {
-        primaryStage.show();
+    /***
+     * Handles successful registration
+     */
+    public void handleSuccessRegister() {
+        registrationWindow.hide();
+        raise(new SuccessfulLoginEvent()); //Calls method fill in data
     }
 
     /**
@@ -245,8 +296,18 @@ public class MainWindow extends UiPart<Stage> {
         raise(new ExitAppRequestEvent());
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    /***
+     * Logs out of the application
+     */
+    @FXML
+    public void handleLogout() {
+        security.logout();
+        removeInnerParts();
+        fillSecurityCommandBox();
+    }
+
+    public OtherListPanel getOtherListPanel() {
+        return otherListPanel;
     }
 
     void releaseResources() {
@@ -269,5 +330,24 @@ public class MainWindow extends UiPart<Stage> {
     private void handleExitRegisterEvent(ExitRegisterEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleLogin();
+    }
+
+    @Subscribe
+    private void handleShowLoginEvent(ShowLoginEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleLogin();
+    }
+
+    @Subscribe
+    private void handleSuccessfulRegisterEvent(SuccessfulRegisterEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleSuccessRegister();
+    }
+
+    @Subscribe
+    public void handleLogoutEvent(LogoutEvent logout) {
+        security.logout();
+        removeInnerParts();
+        fillSecurityCommandBox();
     }
 }

@@ -39,6 +39,7 @@ public class UiManager extends ComponentManager implements Ui {
     private UserPrefs prefs;
     private Security security;
     private MainWindow mainWindow;
+    private Stage primaryStage;
 
     public UiManager(Logic logic, Config config, UserPrefs prefs, Security security) {
         super();
@@ -50,6 +51,7 @@ public class UiManager extends ComponentManager implements Ui {
 
     @Override
     public void start(Stage primaryStage) {
+        this.primaryStage = primaryStage;
         logger.info("Starting UI...");
 
         //Set the application icon
@@ -58,11 +60,12 @@ public class UiManager extends ComponentManager implements Ui {
         try {
             mainWindow = new MainWindow(primaryStage, config, prefs, logic, security);
             mainWindow.show(); //This should be called before creating other UI parts
-            //Gets rid of the login window when testing
+            //Gets rid of the login window when testing, can remove this once released
             if (security.getAuthentication()) {
                 mainWindow.fillInnerParts();
             } else {
-                mainWindow.handleLogin();
+                //CLI for Authentication
+                mainWindow.fillSecurityCommandBox();
             }
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
