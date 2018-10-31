@@ -20,7 +20,6 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
@@ -119,7 +118,9 @@ public class FinancialPlannerTest {
         }
 
         @Override
-        public HashMap<String, Integer> getTagMap() { return tags; }
+        public HashMap<String, Integer> getTagMap() {
+            return tags;
+        }
 
         @Override
         public void setLimitList(DateBasedLimitList limitList) {} //see as above
