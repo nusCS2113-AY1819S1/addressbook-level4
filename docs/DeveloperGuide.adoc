@@ -352,6 +352,24 @@ Step 2. The user executes ...
 ... `EditJobDetailsCommand` then calls `Model#hasJobOffer(JobOffer jobOffer)` to check if the edited job offer has a duplicate in the RecruitBook. If not, `Model#updateJobOffer(JobOffer target, JobOffer editedJobOffer)` is then called that replaces the original JobOffer object with the newly edited one.
 [NOTE]
 Any duplicates formed after editing will not replace the original object. It will prompt an error message
+
+==== Design Considerations
+
+===== How edit executes
+* **Alternative 1 (current choice):** Replaces the original object with an edited one.
+** Pros: If the edited object were to result in errors, it can be prevented from replacing the original object.
+** Cons: It is less efficient as compared to editing the original object straightaway.
+* **Alternative 2:** Editing the original object instead of replacing it with an edited one.
+** Pros: It is more intuitive and efficient.
+** Cons: The edited object cannot be checked for duplicates without permanently changing the object first.
+
+===== Data structure to support the edit command
+* **Alternative 1 (current choice):** Separating the editing feature into 3 commands for different entities.
+** Pros: Greater distinction between the entities.
+** Cons: More commands to deal with (similar commands across all three entities).
+* **Alternative 2:** Have a central `EditManager` that handles all edits.
+** Pros: Reduction of command objects (less confusing).
+** Cons: There is coupling between the manager and the individual commands. Changes to an entity has to be cascaded to the manager.
 // end::edit[]
 
 // tag::find[]
