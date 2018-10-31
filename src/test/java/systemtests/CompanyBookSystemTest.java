@@ -171,7 +171,7 @@ public abstract class CompanyBookSystemTest {
      * Displays all companies with any parts of their names matching {@code keyword} (case-insensitive).
      */
     protected void showCompaniesWithName(String keyword) {
-        executeCommand(FindCompanyCommand.COMMAND_WORD + " " + keyword);
+        executeCommand(FindCompanyCommand.COMMAND_WORD + " c/" + keyword);
         assertTrue(getModel().getFilteredCompanyList().size()
                 < getModel().getCompanyBook().getCompanyList().size());
     }

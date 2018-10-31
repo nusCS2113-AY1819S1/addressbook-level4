@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.function.Supplier;
 
-import javax.xml.crypto.Data;
-
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import seedu.recruit.commons.core.Config;

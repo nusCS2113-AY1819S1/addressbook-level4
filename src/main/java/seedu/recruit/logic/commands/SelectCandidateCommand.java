@@ -14,6 +14,8 @@ import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.candidate.Candidate;
+import seedu.recruit.model.company.Company;
+import seedu.recruit.model.joboffer.JobOffer;
 
 /**
  * Selects a candidate identified using it's displayed index from the recruit book.
@@ -30,6 +32,9 @@ public class SelectCandidateCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Selected Candidate: %1$s\n";
+
+    public static final String MESSAGE_CONFIRMATION_FOR_SHORTLIST =
+            "for job offer: %1$s, for company: %2$s.\n";
 
     private static Candidate selectedCandidate;
 
@@ -56,9 +61,15 @@ public class SelectCandidateCommand extends Command {
         selectedCandidate = filteredCandidateList.get(targetIndex.getZeroBased());
 
         if (ShortlistCandidateInitializationCommand.isShortlisting()) {
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
+            Company selectedCompany = SelectCompanyCommand.getSelectedCompany();
+            JobOffer selectedJobOffer = SelectJobCommand.getSelectedJobOffer();
             LogicManager.setLogicState(ShortlistCandidateCommand.COMMAND_LOGIC_STATE);
             return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS,
-                    targetIndex.getOneBased()) + ShortlistCandidateCommand.MESSAGE_USAGE);
+                    targetIndex.getOneBased())
+                    + String.format(MESSAGE_CONFIRMATION_FOR_SHORTLIST,
+                    selectedJobOffer.getJob().value, selectedCompany.getCompanyName().value)
+                    + ShortlistCandidateCommand.MESSAGE_USAGE);
         }
 
         EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());

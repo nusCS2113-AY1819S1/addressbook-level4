@@ -12,8 +12,7 @@ public class Prefix {
     }
 
     public String getPrefix() {
-        return prefix;
-    }
+        return prefix; }
 
     public String toString() {
         return getPrefix();
@@ -34,6 +33,7 @@ public class Prefix {
         }
 
         Prefix otherPrefix = (Prefix) obj;
+
         return otherPrefix.getPrefix().equals(getPrefix());
     }
 }

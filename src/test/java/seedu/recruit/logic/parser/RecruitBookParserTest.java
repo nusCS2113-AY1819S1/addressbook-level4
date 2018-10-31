@@ -32,8 +32,8 @@ import seedu.recruit.logic.commands.SelectCandidateCommand;
 import seedu.recruit.logic.commands.UndoCandidateBookCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.candidate.Candidate;
-import seedu.recruit.model.candidate.NameContainsKeywordsPredicate;
 import seedu.recruit.testutil.CandidateBuilder;
+import seedu.recruit.testutil.CandidateContainsKeywordsPredicateBuilder;
 import seedu.recruit.testutil.EditPersonDescriptorBuilder;
 import seedu.recruit.testutil.PersonUtil;
 
@@ -92,13 +92,12 @@ public class RecruitBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-
+        List<String> keywordsList = Arrays.asList("n/foo", "p/bar", "e/baz");
+        String keywords = keywordsList.stream().collect(Collectors.joining(" "));
         FindCandidateCommand command = (FindCandidateCommand) parser.parseCommand(
-                FindCandidateCommand.COMMAND_WORD + " " + keywords.stream()
-                        .collect(Collectors.joining(" ")),
-                state, emailUtil);
-        assertEquals(new FindCandidateCommand(new NameContainsKeywordsPredicate(keywords)), command);
+                FindCandidateCommand.COMMAND_WORD + " " + keywords, state, emailUtil);
+        assertEquals(new FindCandidateCommand(
+                new CandidateContainsKeywordsPredicateBuilder(" " + keywords).getCandidatePredicate()), command);
     }
 
     @Test

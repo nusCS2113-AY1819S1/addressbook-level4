@@ -1,0 +1,83 @@
+= Andrew Ong - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: RecruitBook
+
+---
+
+== Overview
+
+RecruitBook is a desktop application created for job agent. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+
+== Summary of contributions
+
+* *Major enhancement*: added an email feature
+** What it does: Allows the user to send mass emails about one or more job offers to specified candidates or one or more candidates to specified companies.
+** Justification: It is imperative for a job agent to be able to inform candidates about job offers or inform companies about candidates. This feature allows emails to be done automatically without any hassle.
+** Highlights: The email will be automatically generated, all the user needs to do is select the recipients and contents of the email. There is a preview feature built into the command to allow the user to double check the recipients and contents of the email. Subject text and body text of the email is also customisable.
+
+* *Code contributed*: [https://github.com/CS2113-AY1819S1-F09-4/main/pulls?utf8=%E2%9C%93&q=is%3Apr+author%3Aandrewome+is%3Amerged[Functional code]]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.1` - `v1.3` (3 releases) on GitHub
+** Enhancements to existing features:
+*** https://github.com/CS2113-AY1819S1-F09-4/main/pull/76[Updated project website]
+** Community:
+*** PRs reviewed(non trivial) https://github.com/CS2113-AY1819S1-F09-4/main/pull/79[#79]
+
+== Contributions to the User Guide
+
+|===
+|_Below is my contribution to the User Guide. This demonstrates my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=email]
+
+== Contributions to the Developer Guide
+
+|===
+|_Below is my contribution to the Developer Guide. This demonstrates my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=email]
+
+== PROJECT: PartyCards
+
+---
+
+== Overview
+
+PartyCards is a web-application that allows up to 4 users play card games. Card games include: Cheat, Taiti, Bridge and Hearts. PartyCards was written with ReactJS frontend and Node.js backend.
+
+== Summary of contributions
+
+* *Major enhancement*: Added game: Cheat
+** What it does: Allows up to 4 users to connect and play the game: Cheat.
+** Highlights: I wrote the logic of the game, from how the front end checks if a card being played is valid to how the back end handles if somebody is being accused as cheating.
+
+* *Major enhancement*: Added game: Taiti
+** What it does: Allows up to 4 users to connect and play the game: Taiti.
+** Highlights: I wrote the logic of the game, from how the front end checks if a card combination being played is valid to how back end handles each turn and updates the current deck.
+
+* *Major enhancement*: Reconnection feature
+** What it does: Allows users to disconnect from the game instance and rejoin the game instance,
+** Justification: Users should be allowed to reconnect to a game should they disconnect due to bad internet connection.
+** Highlight: When the user reconnects, all cards the user had will be reinstated, allowing the user to pick up where he/she left off.
+
+* *Major enhancement*: Added mobile support to PartyCards
+** What it does: Allows users to play PartyCards comfortably on a mobile screen.
+** Justification: Websites should always support mobile(portrait) and desktop(landscape) orientations. This will make the web-application playable on all platforms.
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `Milestone 1` - `Milestone 3` (3 releases) on GitHub
+** Documentation:
+*** Updated README.md with documentation on PartyCards
+** Tools:
+*** Integrated Socket.io into the project to handle game instances.
+
