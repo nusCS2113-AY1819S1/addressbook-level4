@@ -35,7 +35,7 @@ public class LogoutCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         if (canLogout) {
-            EventsCenter.getInstance().post(new UserLoginEvent("", false));
+            EventsCenter.getInstance().post(new UserLoginEvent("", false, false));
             return new CommandResult(String.format(MESSAGE_SUCCESS, userName));
         } else {
             return new CommandResult(String.format(MESSAGE_FAIL, userName));

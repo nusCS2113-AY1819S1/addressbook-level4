@@ -189,8 +189,8 @@ public class MainWindow extends UiPart<Stage> {
      * show user name and user type in the label
      */
     @FXML
-    public void handleUserLogin(String userName, boolean isAdmin) {
-        String userType = "(" + (isAdmin ? "Admin" : "User") + ")";
+    public void handleUserLogin(String userName, boolean isAdmin, boolean isBlocked) {
+        String userType = "(" + (isAdmin ? "Admin" : "User") + "), " + (isBlocked ? "Blocked"  : ":)");
         lblUserName.setText("");
         if (userName.equals("")) {
             lblUserName.setText("Welcome to Forum Book. Please login to proceed! ");
@@ -243,7 +243,7 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleUserLoginEvent(UserLoginEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        handleUserLogin(event.userName, event.userType);
+        handleUserLogin(event.userName, event.userType, event.isBlocked);
     }
 
     @Subscribe

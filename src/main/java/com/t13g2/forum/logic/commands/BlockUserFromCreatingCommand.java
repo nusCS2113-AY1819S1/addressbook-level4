@@ -4,7 +4,6 @@ import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_BLOCK;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_USER_NAME;
 import static java.util.Objects.requireNonNull;
 
-import com.t13g2.forum.commons.exceptions.NotLoggedInException;
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.Context;
@@ -30,9 +29,10 @@ public class BlockUserFromCreatingCommand extends Command {
         + PREFIX_BLOCK + "true";
 
     public static final String MESSAGE_SUCCESS = "User %1$s successfully: %2$s";
-    public static final String MESSAGE_INVALID_USER = "This user: %s does not exist.";
-    public static final String MESSAGE_DUPLICATE_BLOCK = "This user has already been blocked.";
-    public static final String MESSAGE_DUPLICATE_UNBLOCK = "This user has not been block.";
+    public static final String MESSAGE_USER_IS_ADMIN = "The user \"%s\" is an admin, no point blocking.";
+    public static final String MESSAGE_INVALID_USER = "The user \"%s\" does not exist.";
+    public static final String MESSAGE_DUPLICATE_BLOCK = "The user \"%s\" has already been blocked.";
+    public static final String MESSAGE_DUPLICATE_UNBLOCK = "The user \"%s\" has not been block.";
 
     private final String userNameToBlock;
     private final boolean block;
@@ -51,20 +51,18 @@ public class BlockUserFromCreatingCommand extends Command {
         requireNonNull(model);
         User user = null;
         // if user has not login or is not admin, then throw exception
-        try {
-            if (!Context.getInstance().isCurrentUserAdmin()) {
-                throw new CommandException(User.MESSAGE_NOT_ADMIN);
-            }
-        } catch (CommandException e) {
-            throw e;
-        } catch (NotLoggedInException e) {
+        if (!Context.getInstance().isLoggedIn()) {
             throw new CommandException(User.MESSAGE_NOT_LOGIN);
+        } else if (!Context.getInstance().isCurrentUserAdmin()) {
+            throw new CommandException(User.MESSAGE_NOT_ADMIN);
         }
 
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             user = unitOfWork.getUserRepository().getUserByUsername(userNameToBlock);
-            if (block && user.isBlock()) {
-                throw new CommandException(MESSAGE_DUPLICATE_BLOCK);
+            if (user.isAdmin()) {
+                throw new CommandException(String.format(MESSAGE_USER_IS_ADMIN, userNameToBlock));
+            } else if (block && user.isBlock()) {
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_UNBLOCK, userNameToBlock));
             } else if (!block && !user.isBlock()) {
                 throw new CommandException(String.format(MESSAGE_DUPLICATE_UNBLOCK, userNameToBlock));
             } else {
@@ -79,7 +77,7 @@ public class BlockUserFromCreatingCommand extends Command {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, (block ? "blocked" : "unblocked"), user));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, (block ? "blocked" : "unblocked"), userNameToBlock));
     }
 
 }
