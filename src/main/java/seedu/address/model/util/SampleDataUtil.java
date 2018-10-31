@@ -11,6 +11,8 @@ import seedu.address.model.product.Address;
 import seedu.address.model.product.Name;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.SerialNumber;
+import seedu.address.model.saleshistory.ReadOnlySalesHistory;
+import seedu.address.model.saleshistory.SalesHistory;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -49,6 +51,10 @@ public class SampleDataUtil {
             sampleAb.addPerson(sampleProduct);
         }
         return sampleAb;
+    }
+
+    public static ReadOnlySalesHistory getSampleSalesHistory() {
+        return new SalesHistory();
     }
 
     /**

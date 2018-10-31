@@ -28,9 +28,9 @@ import seedu.address.model.login.exceptions.AuthenticatedException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 import seedu.address.model.product.Product;
+import seedu.address.model.timeidentifiedclass.Reminder;
+import seedu.address.model.timeidentifiedclass.Transaction;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
-import seedu.address.model.timeidentifiedclass.shopday.Reminder;
-import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
 public class LoginCommandTest {
 
@@ -293,17 +293,17 @@ public class LoginCommandTest {
             fail("This method should not be called.");
         }
 
-        public ArrayList<Reminder> getDueRemindersInActiveBusinessDay() {
+        public ArrayList<Reminder> getOverdueReminders() {
             fail("This method should not be called.");
             return null;
         }
 
-        public String getDaysHistory(String day) {
+        public String getDaysTransactions(String day) {
             fail("This method should not be called.");
             return null;
         }
 
-        public String getActiveDayHistory() {
+        public String getDaysTransactions() {
             fail("This method should not be called.");
             return null;
         }
@@ -323,12 +323,12 @@ public class LoginCommandTest {
         private boolean loginStatus = false;
 
         @Override
-        public void removeReminder(Reminder reminder) throws InvalidTimeFormatException, NoSuchElementException {
+        public void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException {
             throw new InvalidTimeFormatException();
         }
 
         @Override
-        public ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread() {
+        public ArrayList<Reminder> getOverdueRemindersForThread() {
             return null;
         }
 
@@ -357,12 +357,10 @@ public class LoginCommandTest {
     private class ModelStubThrowingAuthenticatedException extends ModelStub {
 
         @Override
-        public void removeReminder(Reminder reminder) throws InvalidTimeFormatException, NoSuchElementException {
-            throw new InvalidTimeFormatException();
-        }
+        public void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException {}
 
         @Override
-        public ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread() {
+        public ArrayList<Reminder> getOverdueRemindersForThread() {
             return null;
         }
 

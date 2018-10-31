@@ -8,7 +8,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
-import seedu.address.model.timeidentifiedclass.shopday.Reminder;
 
 /**
  * This class removes a reminder whose task has been finished
@@ -25,22 +24,22 @@ public class FinishedReminderCommand extends Command {
 
     private static final String MESSAGE_SUCCESS = "Reminder at time %s successfully removed";
     private static final String FAILURE_NO_SUCH_REMINDER = "No such reminder has been set";
-    private final Reminder toRemove;
+    private final String toRemoveReminderTime;
 
-    public FinishedReminderCommand(Reminder toRemove) {
-        this.toRemove = toRemove;
+    public FinishedReminderCommand(String toRemoveReminderTime) {
+        this.toRemoveReminderTime = toRemoveReminderTime;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         try {
-            model.removeReminder(toRemove);
+            model.removeReminder(toRemoveReminderTime);
         } catch (InvalidTimeFormatException e) {
             return new CommandResult(e.getExceptionMessage() + "Upon trying to remove this reminder.");
         } catch (NoSuchElementException e) {
             return new CommandResult(FAILURE_NO_SUCH_REMINDER);
         }
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toRemove.getTime()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toRemoveReminderTime));
     }
 }

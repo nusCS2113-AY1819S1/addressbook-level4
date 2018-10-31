@@ -85,4 +85,28 @@ public class XmlFileStorage {
         }
     }
 
+    /**
+     * Saves the {@code SalesHistory} data to the specified file
+     */
+    public static void saveSalesHistoryToFile(Path file, XmlSerializableSalesHistory salesHistory)
+            throws FileNotFoundException {
+        try {
+            XmlUtil.saveDataToFile(file, salesHistory);
+        } catch (JAXBException e) {
+            throw new AssertionError("Unexpected exception " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Returns {@code XmlSerializableSalesHistory} from the file.
+     */
+    public static XmlSerializableSalesHistory loadSalesHistoryFromFile(Path file) throws DataConversionException,
+            FileNotFoundException {
+        try {
+            return XmlUtil.getDataFromFile(file, XmlSerializableSalesHistory.class);
+        } catch (JAXBException e) {
+            throw new DataConversionException(e);
+        }
+    }
+
 }

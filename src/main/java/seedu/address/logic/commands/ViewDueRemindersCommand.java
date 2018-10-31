@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.timeidentifiedclass.shopday.Reminder;
+import seedu.address.model.timeidentifiedclass.Reminder;
 
 /**
  * This command allows us to view all reminders in the active shop day that are due.
@@ -19,7 +19,7 @@ public class ViewDueRemindersCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        ArrayList<Reminder> reminders = model.getDueRemindersInActiveBusinessDay();
+        ArrayList<Reminder> reminders = model.getOverdueReminders();
 
         if (reminders.size() == 0) {
             return new CommandResult(NO_REMINDERS_SET);
@@ -30,7 +30,7 @@ public class ViewDueRemindersCommand extends Command {
         allReminders.append("Reminders due as of now today:\n");
 
         for (Reminder reminder : reminders) {
-            allReminders.append(reminder.getTime() + "\t\t" + reminder.getMessage() + "\n");
+            allReminders.append(reminder.getReminderTime() + "\t\t" + reminder.getReminderMessage() + "\n");
         }
 
         return new CommandResult(allReminders.toString());

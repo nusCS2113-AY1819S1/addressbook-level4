@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -26,9 +25,8 @@ import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 import seedu.address.model.product.Product;
-import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
-import seedu.address.model.timeidentifiedclass.shopday.Reminder;
-import seedu.address.model.timeidentifiedclass.transaction.Transaction;
+import seedu.address.model.timeidentifiedclass.Reminder;
+import seedu.address.model.timeidentifiedclass.Transaction;
 
 public class LogoutCommandTest {
 
@@ -263,17 +261,21 @@ public class LogoutCommandTest {
             fail("This method should not be called.");
         }
 
-        public ArrayList<Reminder> getDueRemindersInActiveBusinessDay() {
+        public void removeReminder(String reminderTime) {
+            fail("This method should not be called.");
+        }
+
+        public ArrayList<Reminder> getOverdueReminders() {
             fail("This method should not be called.");
             return null;
         }
 
-        public String getDaysHistory(String day) {
+        public String getDaysTransactions(String day) {
             fail("This method should not be called.");
             return null;
         }
 
-        public String getActiveDayHistory() {
+        public String getDaysTransactions() {
             fail("This method should not be called.");
             return null;
         }
@@ -293,12 +295,7 @@ public class LogoutCommandTest {
         private boolean loginStatus = false;
 
         @Override
-        public void removeReminder(Reminder reminder) throws InvalidTimeFormatException, NoSuchElementException {
-            throw new InvalidTimeFormatException();
-        }
-
-        @Override
-        public ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread() {
+        public ArrayList<Reminder> getOverdueRemindersForThread() {
             return null;
         }
 

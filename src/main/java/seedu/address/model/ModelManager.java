@@ -13,10 +13,12 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.DistributorBookChangedEvent;
+import seedu.address.commons.events.model.SalesHistoryChangedEvent;
 import seedu.address.commons.events.model.UserDatabaseChangedEvent;
 import seedu.address.commons.events.model.UserDeletedEvent;
 import seedu.address.commons.exceptions.DataConversionException;
@@ -29,13 +31,14 @@ import seedu.address.model.login.exceptions.AuthenticatedException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 import seedu.address.model.product.Product;
+import seedu.address.model.saleshistory.ReadOnlySalesHistory;
+import seedu.address.model.saleshistory.SalesHistory;
+import seedu.address.model.timeidentifiedclass.Reminder;
 import seedu.address.model.timeidentifiedclass.TimeIdentifiedClass;
+import seedu.address.model.timeidentifiedclass.Transaction;
+import seedu.address.model.timeidentifiedclass.exceptions.DuplicateReminderException;
+import seedu.address.model.timeidentifiedclass.exceptions.DuplicateTransactionException;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
-import seedu.address.model.timeidentifiedclass.shopday.Reminder;
-import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
-import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateReminderException;
-import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
-import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.model.util.SampleDistributorsUtil;
 import seedu.address.storage.Storage;
@@ -51,6 +54,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedDistributorBook versionedDistributorBook;
     private final VersionedProductDatabase versionedAddressBook;
     private final VersionedUserDatabase versionedUserDatabase;
+    private final VersionedSalesHistory versionedSalesHistory;
 
     private final FilteredList<Distributor> filteredDistributors;
     private final FilteredList<Product> filteredProducts;
@@ -60,25 +64,44 @@ public class ModelManager extends ComponentManager implements Model {
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyDistributorBook distributorBook, UserPrefs userPrefs,
-                        ReadOnlyUserDatabase userDatabase, Storage storage) {
+                        ReadOnlyUserDatabase userDatabase, ReadOnlySalesHistory salesHistory, Storage storage) {
         super();
         requireAllNonNull(addressBook, userPrefs, userDatabase);
         logger.fine("Initializing with address book: " + addressBook
                 + "and distributor book: " + distributorBook
-                + " and user prefs " + userPrefs
-                + " and user database " + userDatabase);
+                + ", user prefs " + userPrefs
+                + ", user database " + userDatabase
+                + ", and sales history " + salesHistory);
+
         this.storage = storage;
         versionedUserDatabase = new VersionedUserDatabase(userDatabase);
         versionedDistributorBook = new VersionedDistributorBook(distributorBook);
         versionedAddressBook = new VersionedProductDatabase(addressBook);
-
-
+        versionedSalesHistory = new VersionedSalesHistory(salesHistory);
         filteredDistributors = new FilteredList<>(versionedDistributorBook.getDistributorList());
         filteredProducts = new FilteredList<>(versionedAddressBook.getProductList());
     }
 
+    /**
+     * Initializes a {@code ModelManager} without sales history.
+     * Needed as {@code SalesHistory} file is read after login.
+     */
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyDistributorBook distributorBook, UserPrefs userPrefs,
+                        ReadOnlyUserDatabase userDatabase, Storage storage) {
+        this(addressBook, distributorBook, userPrefs, userDatabase, new SalesHistory(), storage);
+    }
+
     public ModelManager(Storage storage) {
-        this(new ProductDatabase(), new DistributorBook(), new UserPrefs(), new UserDatabase(), storage);
+        this(new ProductDatabase(), new DistributorBook(),
+                new UserPrefs(), new UserDatabase(),
+                new SalesHistory(), storage);
+    }
+
+    /**
+     * Allows us to set sales history to what is required.
+     */
+    public void setSalesHistory(ReadOnlySalesHistory salesHistory) {
+        versionedSalesHistory.resetData(salesHistory);
     }
 
     // ============== ProductDatabase Modifiers =============================================================
@@ -111,23 +134,46 @@ public class ModelManager extends ComponentManager implements Model {
      */
     private void reloadAddressBook(Username username) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook newData;
+        ReadOnlyAddressBook newAddressBook;
 
-        storage.update(versionedUserDatabase.getUser(username));
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample ProductDatabase");
             }
-            newData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            newAddressBook = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
-            newData = new ProductDatabase();
+            newAddressBook = new ProductDatabase();
             logger.warning("Data file not in the correct format. Will be starting with an empty ProductDatabase");
         } catch (IOException e) {
-            newData = new ProductDatabase();
+            newAddressBook = new ProductDatabase();
             logger.warning("Problem while reading from the file. Will be starting with an empty ProductDatabase");
         }
-        versionedAddressBook.resetData(newData);
+        versionedAddressBook.resetData(newAddressBook);
+    }
+
+    /**
+     * Reloads the sales history
+     */
+    private void reloadSalesHistory() {
+        Optional<ReadOnlySalesHistory> salesHistoryOptional;
+        ReadOnlySalesHistory newSalesHistory;
+
+        try {
+            salesHistoryOptional = storage.readSalesHistory();
+            if (!salesHistoryOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with an empty SalesHistory");
+            }
+            newSalesHistory = salesHistoryOptional.orElseGet(SampleDataUtil::getSampleSalesHistory);
+        } catch (DataConversionException e) {
+            newSalesHistory = new SalesHistory();
+            logger.warning("Data file not in the correct format. Will be starting with an empty SalesHistory");
+        } catch (IOException e) {
+            newSalesHistory = new SalesHistory();
+            logger.warning("Problem while reading from the file. Will be starting with an empty SalesHistory");
+        }
+
+        versionedSalesHistory.resetData(newSalesHistory);
     }
 
     // ============== DistributorBook Modifiers =============================================================
@@ -225,7 +271,9 @@ public class ModelManager extends ComponentManager implements Model {
     public boolean checkAuthentication(Username username, Password password) throws AuthenticatedException {
         boolean result = versionedUserDatabase.checkAuthentication(username, password);
         if (hasLoggedIn() && result) {
+            storage.update(versionedUserDatabase.getUser(username));
             reloadAddressBook(username);
+            reloadSalesHistory();
             reloadDistributorBook(username);
         }
         return result;
@@ -420,66 +468,75 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========================== SalesHistory accessories ===================================
 
-    @Override
-    public String getActiveDayHistory() {
-        return versionedAddressBook.getActiveDayHistory();
+    private void indicateSalesHistoryChanged() {
+        raise(new SalesHistoryChangedEvent(versionedSalesHistory));
+    }
+
+    public SalesHistory getSalesHistory() {
+        return versionedSalesHistory;
     }
 
     @Override
-    public String getDaysHistory(String day) {
-        return versionedAddressBook.getDaysHistory(day);
+    public String getDaysTransactions(String day) throws InvalidTimeFormatException {
+        try {
+            return versionedSalesHistory.getDaysTransactionsAsString(day);
+        } catch (InvalidTimeFormatException e) {
+            throw e;
+        }
     }
 
     @Override
     public void addTransaction(Transaction transaction) throws InvalidTimeFormatException,
-            ClosedShopDayException, DuplicateTransactionException {
+            DuplicateTransactionException {
         try {
-            versionedAddressBook.addTransaction(transaction);
+            versionedSalesHistory.addTransaction(transaction);
         } catch (DuplicateTransactionException e) {
             throw e;
         } catch (InvalidTimeFormatException e) {
             throw e;
-        } catch (ClosedShopDayException e) {
-            throw e;
         }
+        indicateSalesHistoryChanged();
     }
 
     @Override
     public void addReminder(Reminder reminder) throws InvalidTimeFormatException, DuplicateReminderException {
-        if (!TimeIdentifiedClass.isValidDateAndTime(reminder.getTime())) {
+        if (!TimeIdentifiedClass.isValidDateAndTime(reminder.getReminderTime())) {
             throw new InvalidTimeFormatException();
         }
         try {
-            versionedAddressBook.addReminderToActiveBusinessDay(reminder);
+            versionedSalesHistory.addReminder(reminder);
         } catch (InvalidTimeFormatException e) {
             throw e;
         } catch (DuplicateReminderException e) {
             throw e;
         }
+        indicateSalesHistoryChanged();
     }
 
     @Override
-    public void removeReminder(Reminder reminder) throws InvalidTimeFormatException, NoSuchElementException {
+    public void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException {
         try {
-            versionedAddressBook.removeReminderFromActiveBusinessDay(reminder);
+            versionedSalesHistory.removeReminder(reminderTime);
         } catch (InvalidTimeFormatException e) {
             throw e;
         } catch (NoSuchElementException e) {
             throw e;
         }
+        indicateSalesHistoryChanged();
     }
 
     @Override
-    public ArrayList<Reminder> getDueRemindersInActiveBusinessDay() {
-        return versionedAddressBook.getDueRemindersInActiveDay();
+    public ArrayList<Reminder> getOverdueReminders() {
+        return versionedSalesHistory.getOverdueReminders();
     }
 
-    public ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread() {
-        return versionedAddressBook.getDueRemindersInActiveDayForThread();
+    @Override
+    public ArrayList<Reminder> getOverdueRemindersForThread() {
+        return versionedSalesHistory.getOverDueRemindersForThread();
     }
 
     @Override
     public Transaction getLastTransaction() {
-        return versionedAddressBook.getLastTransaction();
+        return versionedSalesHistory.getLastTransaction();
     }
 }

@@ -66,7 +66,7 @@ public class Product {
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSameProduct(Product otherProduct) {
-        if (otherProduct.getSerialNumber() == this.getSerialNumber() ) {
+        if (otherProduct.getSerialNumber() == this.getSerialNumber()) {
             return true;
         }
 

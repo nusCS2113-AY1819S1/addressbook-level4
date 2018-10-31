@@ -4,8 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Some of the classes, such as BusinessDay and Transaction, are identified using their time of creation/
- * record.
+ * Some of the classes, such as Reminder and Transaction, are identified using time.
  */
 public abstract class TimeIdentifiedClass {
     private static final int NUMBER_OF_MONTHS_IN_YEAR = 12;
@@ -14,8 +13,8 @@ public abstract class TimeIdentifiedClass {
     private static final int NUMBER_OF_MINUTES_IN_HOUR = 60;
     private static final int NUMBER_OF_SECONDS_IN_HOUR = 60;
 
-    private static DateTimeFormatter dateAndTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-    private static DateTimeFormatter dayFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static DateTimeFormatter dateAndTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+    private static DateTimeFormatter dayFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
     private static LocalDateTime time;
 
     /**
@@ -129,14 +128,14 @@ public abstract class TimeIdentifiedClass {
     public static boolean isValidDateAndTime (String dateAndTime) {
         String[] times = dateAndTime.split("[/ \\s+ :]");
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < times.length; i++) {
             times[i].trim();
         }
 
         // checks on the different components of the transaction time.
-        if (isValidDay(times[0])
+        if (isValidYear(times[0])
                 && isValidMonth(times[1])
-                && isValidYear(times[2])
+                && isValidDay(times[2])
                 && isValidHour(times[3])
                 && isValidMinute(times[4])
                 && isValidSecond(times[5])) {
@@ -154,9 +153,9 @@ public abstract class TimeIdentifiedClass {
         String[] splitDate = date.split("/");
 
         // checking the individual components of the date
-        if (isValidDay(splitDate[0])
+        if (isValidYear(splitDate[0])
                 && isValidMonth(splitDate[1])
-                && isValidYear(splitDate[2])) {
+                && isValidDay(splitDate[2])) {
             return true;
         }
         return false;

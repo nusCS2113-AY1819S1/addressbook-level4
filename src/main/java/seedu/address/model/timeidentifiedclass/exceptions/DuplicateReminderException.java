@@ -1,4 +1,4 @@
-package seedu.address.model.timeidentifiedclass.shopday.exceptions;
+package seedu.address.model.timeidentifiedclass.exceptions;
 
 /**
  * Exception for duplicate reminders within the same day

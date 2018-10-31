@@ -27,9 +27,9 @@ import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 import seedu.address.model.product.Product;
+import seedu.address.model.timeidentifiedclass.Reminder;
+import seedu.address.model.timeidentifiedclass.Transaction;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
-import seedu.address.model.timeidentifiedclass.shopday.Reminder;
-import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
 public class RegisterCommandTest {
 
@@ -288,17 +288,17 @@ public class RegisterCommandTest {
             fail("This method should not be called.");
         }
 
-        public ArrayList<Reminder> getDueRemindersInActiveBusinessDay() {
+        public ArrayList<Reminder> getOverdueReminders() {
             fail("This method should not be called.");
             return null;
         }
 
-        public String getDaysHistory(String day) {
+        public String getDaysTransactions(String day) {
             fail("This method should not be called.");
             return null;
         }
 
-        public String getActiveDayHistory() {
+        public String getDaysTransactions() {
             fail("This method should not be called.");
             return null;
         }
@@ -317,12 +317,10 @@ public class RegisterCommandTest {
         final ArrayList<User> usersAdded = new ArrayList<>();
 
         @Override
-        public void removeReminder(Reminder reminder) throws InvalidTimeFormatException, NoSuchElementException {
-            throw new InvalidTimeFormatException();
-        }
+        public void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException {}
 
         @Override
-        public ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread() {
+        public ArrayList<Reminder> getOverdueRemindersForThread() {
             return null;
         }
 
@@ -340,12 +338,10 @@ public class RegisterCommandTest {
     private class ModelStubThrowingDuplicateUserException extends RegisterCommandTest.ModelStub {
 
         @Override
-        public void removeReminder(Reminder reminder) throws InvalidTimeFormatException, NoSuchElementException {
-            throw new InvalidTimeFormatException();
-        }
+        public void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException {}
 
         @Override
-        public ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread() {
+        public ArrayList<Reminder> getOverdueRemindersForThread() {
             return null;
         }
 
