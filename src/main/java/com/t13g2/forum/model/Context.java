@@ -1,11 +1,10 @@
 //@@Meowzz95
 package com.t13g2.forum.model;
 
-import com.t13g2.forum.commons.exceptions.NotLoggedInException;
 import com.t13g2.forum.model.forum.User;
 
 /**
- *
+ *  A singleton class to manage login status
  */
 public class Context {
     private static Context instance;
@@ -31,38 +30,37 @@ public class Context {
         this.currentUser = currentUser;
     }
 
-    public int getCurrentUserId() throws NotLoggedInException {
-        ensureLoggedIn();
-        return currentUser.getId();
+    /**
+     * returns current logged in user id
+     *
+     * @return user id, if not logged in -1
+     */
+    public int getCurrentUserId() {
+        return currentUser == null ? -1 : currentUser.getId();
     }
 
+    /**
+     * checks login status
+     * @return true if logged in otherwise false
+     */
     public boolean isLoggedIn() {
         return currentUser != null;
     }
 
     /**
-     * check if current user a admin.
+     * checks if current user a admin.
+     * @return true if current user is admin otherwise false(including not logged in)
      */
-    public boolean isCurrentUserAdmin() throws NotLoggedInException {
-        ensureLoggedIn();
-        return currentUser.isAdmin();
+    public boolean isCurrentUserAdmin() {
+        return currentUser != null && currentUser.isAdmin();
     }
 
     /**
-     * check if current user is blocked.
+     * checks if current user is blocked.
+     * @return true if current user is blocked or not logged in otherwise false
      */
-    public boolean isCurrentUserBlocked() throws NotLoggedInException {
-        ensureLoggedIn();
-        return currentUser.isBlock();
+    public boolean isCurrentUserBlocked() {
+        return currentUser == null || currentUser.isBlock();
     }
 
-    /**
-     * ensure that a user is logged in.
-     */
-    private void ensureLoggedIn() throws NotLoggedInException {
-        if (!isLoggedIn()) {
-            throw new NotLoggedInException();
-
-        }
-    }
 }
