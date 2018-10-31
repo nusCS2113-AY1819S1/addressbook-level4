@@ -32,7 +32,7 @@ public class ParserUtilTest {
     private static final String INVALID_MONTH = "13";
     private static final String INVALID_YEAR = "18";
     private static final String INVALID_START_TIME = "25:00";
-    private static final String INVALID_END_TIME= "25:00";
+    private static final String INVALID_END_TIME = "25:00";
     private static final String INVALID_DATE = "2018-13-32";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -44,7 +44,7 @@ public class ParserUtilTest {
     private static final String VALID_MONTH = "12";
     private static final String VALID_YEAR = "2018";
     private static final String VALID_START_TIME = "12:00";
-    private static final String VALID_END_TIME= "1:00";
+    private static final String VALID_END_TIME = "1:00";
     private static final String VALID_DATE = "2018-10-31";
 
     private static final String WHITESPACE = " \t\r\n";
