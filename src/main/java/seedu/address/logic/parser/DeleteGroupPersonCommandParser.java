@@ -27,7 +27,8 @@ public class DeleteGroupPersonCommandParser implements Parser<DeleteGroupPersonC
 
         if (!arePrefixesPresent(argMultimap, PREFIX_GROUP_INDEX, PREFIX_PERSON_INDEX)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteGroupPersonCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteGroupPersonCommand.MESSAGE_USAGE));
         }
 
         Index groupIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_GROUP_INDEX).get());

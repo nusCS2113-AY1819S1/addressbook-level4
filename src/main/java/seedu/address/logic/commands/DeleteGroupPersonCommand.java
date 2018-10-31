@@ -29,10 +29,11 @@ public class DeleteGroupPersonCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes a student from the group identified by the index numbers used in the "
             + "displayed group panel and students in group panel.\n"
-            + "Parameters: " + PREFIX_GROUP_INDEX +  "GROUP_INDEX " + PREFIX_PERSON_INDEX + "PERSON_INDEX\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_GROUP_INDEX +  "1 " + PREFIX_PERSON_INDEX + "1";
+            + "Parameters: " + PREFIX_GROUP_INDEX + "GROUP_INDEX " + PREFIX_PERSON_INDEX + "PERSON_INDEX\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_GROUP_INDEX + "1 " + PREFIX_PERSON_INDEX + "1";
 
-    public static final String MESSAGE_DELETE_GROUP_PERSON_SUCCESS = "Person index deleted from group at index [%1$s] : [%2$s]";
+    public static final String MESSAGE_DELETE_GROUP_PERSON_SUCCESS =
+            "Person index deleted from group at index [%1$s] : [%2$s]";
 
     private final Index groupTargetIndex;
     private final Index personTargetIndex;

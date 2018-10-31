@@ -151,7 +151,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param g group to remove person from
      * @param p person to be removed
      */
-    public void removeGroupPerson(Group g,Person p) {
+    public void removeGroupPerson(Group g, Person p) {
         groups.removeGroupPerson(g, p);
     }
 
