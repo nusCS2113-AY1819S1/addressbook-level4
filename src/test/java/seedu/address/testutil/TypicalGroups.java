@@ -62,6 +62,19 @@ public class TypicalGroups {
         return ab;
     }
 
+    /**
+     * Returns an {@code AddressBook} with all the typical groups
+     * and persons in them.
+     */
+    public static AddressBook getTypicalAddressBookWithGroupPersons() {
+        AddressBook ab = new AddressBook();
+        for (Group group : getTypicalGroups()) {
+            group.addPersons(ALICE);
+            ab.createGroup(group);
+        }
+        return ab;
+    }
+
     public static Group getTut1() {
         return new GroupBuilder()
                 .withGroupName(VALID_GROUP_NAME_TUT_1)
