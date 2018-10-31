@@ -20,7 +20,6 @@ import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 import seedu.address.testutil.UserBuilder;
 
-//@@author jamesyaputra
 public class SignupCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();

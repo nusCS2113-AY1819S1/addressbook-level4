@@ -24,24 +24,22 @@ class ReplyCommentTest {
     @Test
     void replyComment_correctInput_success() throws Exception {
         ReplyComment test = new ReplyComment(comments);
-        //Change back to equals
-        assertNotEquals(testcase, test.replyComment("My name is Gerald", 1, "Yo"));
+        assertEquals(testcase, test.replyComment("My name is Gerald", 1));
     }
 
     @Test
     void replyComment_incorrectInput_failure() throws Exception {
         ReplyComment test = new ReplyComment(comments);
-        assertNotEquals(testcase, test.replyComment("Chu", 1, "yo"));
+        assertNotEquals(testcase, test.replyComment("Chu", 1));
     }
 
     @Test
     void replyComment_lineNotPresent_exceptionThrown() throws Exception {
         ReplyComment test = new ReplyComment(comments);
         try {
-            assertNotEquals(testcase, test.replyComment("Chua", 15, "Yo"));
+            assertNotEquals(testcase, test.replyComment("Chua", 15));
         } catch (Exception e) {
-            assertEquals("Line is invalid, try again. Example: replyComment 1 L/1 C/Hello",
-                    ReplyCommentCommand.MESSAGE_LINE_INVALID);
+            assertEquals("Line is invalid, try again", ReplyCommentCommand.MESSAGE_LINE_INVALID);
         }
     }
 

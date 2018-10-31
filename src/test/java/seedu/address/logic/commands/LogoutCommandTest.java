@@ -10,7 +10,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.user.User;
 import seedu.address.testutil.UserBuilder;
 
-//@@author jamesyaputra
 public class LogoutCommandTest {
 
     private CommandHistory commandHistory = new CommandHistory();

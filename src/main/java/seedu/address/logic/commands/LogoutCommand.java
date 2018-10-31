@@ -5,8 +5,6 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 
-
-//@@author jamesyaputra
 /**
  * Logs user out of the Event Manager.
  */

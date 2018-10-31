@@ -1,4 +1,3 @@
-//@@author Geraldcdx
 package seedu.address.logic.comments;
 
 import java.util.Vector;
@@ -20,10 +19,10 @@ public class AddComment extends Comments {
     /**
      *  Appends comment to the end of the current vector and stores
      */
-    public String addComment(String comment, String username) {
+    public String addComment(String comment) {
         Vector comments = new Vector();
         comments = getComments();
-        comments.add(username + " : " + comment);
+        comments.add(comment);
         return rewrite(comments);
     }
 

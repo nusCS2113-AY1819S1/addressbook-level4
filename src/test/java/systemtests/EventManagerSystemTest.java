@@ -239,10 +239,7 @@ public abstract class EventManagerSystemTest {
                     + "&tags="
                     + selectedCardHandle.getTagsString().replaceAll(" ", "%20")
                     + "&attendance="
-                    + selectedCardHandle.getAttendanceString().replaceAll(" ", "%20")
-                    + "&comment="
-                    + selectedCardHandle.getComment().replaceAll("[{]", "%3C")
-                    .replaceAll("[}]", "%3E").replaceAll(" ", "%20"));
+                    + selectedCardHandle.getAttendanceString().replaceAll(" ", "%20"));
         } catch (MalformedURLException mue) {
             throw new AssertionError("URL expected to be valid.", mue);
         }

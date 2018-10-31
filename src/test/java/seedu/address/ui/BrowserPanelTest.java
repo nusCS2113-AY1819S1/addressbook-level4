@@ -57,10 +57,7 @@ public class BrowserPanelTest extends GuiUnitTest {
                 + "&tags="
                 + ALICE.getTagsString().replaceAll(" ", "%20")
                 + "&attendance="
-                + ALICE.getAttendanceString().replaceAll(" ", "%20")
-                + "&comment="
-                + ALICE.getComment().value.replaceAll("[{]", "%3C")
-                .replaceAll("[}]", "%3E").replaceAll(" ", "%20"));
+                + ALICE.getAttendanceString().replaceAll(" ", "%20"));
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedPersonUrl, browserPanelHandle.getLoadedUrl());

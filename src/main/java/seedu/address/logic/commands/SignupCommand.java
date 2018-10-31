@@ -9,7 +9,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.user.User;
 
-//@@author jamesyaputra
 /**
  * Creates a user in the Event Manager.
  */
