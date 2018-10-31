@@ -1,0 +1,1124 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>AddressBook Level 4 - User Guide</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="header"><h1>AddressBook Level 4 - User Guide</h1></div><div id="content"><div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>By: <code>Team SE-EDU</code>      Since: <code>Jun 2016</code>      Licence: <code>MIT</code></p>
+</div>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle"></div>
+<ul class="sectlevel1">
+<li><a href="#introduction">1. Introduction</a></li>
+<li><a href="#quick-start">2. Quick Start</a></li>
+<li><a href="#Features">3. Features</a>
+<ul class="sectlevel2">
+<li><a href="#creating-a-group-code-creategroup-code-code-cg-code">3.1. Creating a group: <code>creategroup</code> <code>cg</code></a></li>
+<li><a href="#selecting-a-group-code-selectgroup-code-code-sg-code">3.2. Selecting a group : <code>selectgroup</code> <code>sg</code></a></li>
+<li><a href="#add-students-to-a-group-code-addgroup-code-code-ag-code">3.3. Add students to a group: <code>addgroup</code> <code>ag</code></a></li>
+<li><a href="#deleting-a-group-code-deletegroup-code-code-dg-code">3.4. Deleting a group: <code>deletegroup</code> <code>dg</code></a></li>
+<li><a href="#deleting-student-s-from-a-group-code-deletegroupstudents-code-code-dgs-code-em-coming-in-v1-4-em">3.5. Deleting student(s) from a group: <code>deletegroupstudents</code> <code>dgs</code> [<em>Coming in v1.4</em>]</a></li>
+<li><a href="#list-a-group-of-students-scorefilter-a-56-or-b-56">3.6. List a group of students: 'scorefilter a/56 or b/56'</a></li>
+<li><a href="#distributed-all-students-into-em-n-em-groups-with-balanced-number-of-nationality-or-gender-code-distinto-code-code-di-code">3.7. Distributed all students into <em>n</em> groups with balanced number of Nationality or Gender: <code>distinto</code> <code>di</code></a></li>
+<li><a href="#entering-email-credential-into-the-student-management-system-code-login-code">3.8. Entering email credential into the Student Management System: <code>login</code></a></li>
+<li><a href="#sending-email-to-single-multiple-or-group-of-person-s-code-sendmail-code-code-sm-code">3.9. Sending Email to Single, Multiple or Group of Person(s): <code>sendmail</code> <code>sm</code></a></li>
+<li><a href="#list-a-group-of-students-code-scorefilter-code">3.10. List a group of students: <code>scorefilter</code></a></li>
+<li><a href="#summary-of-students-grade-summarygrade">3.11. Summary of students' grade: 'summaryGrade'</a></li>
+<li><a href="#adding-deleting-tags-automatically-addtag-deletetag">3.12. Adding/deleting tags automatically: 'addtag/deletetag'</a></li>
+<li><a href="#viewing-help-code-help-code-code-h-code">3.13. Viewing help : <code>help</code> <code>h</code></a></li>
+<li><a href="#adding-a-person-code-add-code-code-a-code">3.14. Adding a person: <code>add</code> <code>a</code></a></li>
+<li><a href="#execute-multiples-of-the-same-command-using-text-file-code-script-code-code-scr-code">3.15. Execute multiples of the same Command using text file : <code>script</code> <code>scr</code></a></li>
+<li><a href="#listing-all-persons-code-list-code-code-l-code">3.16. Listing all persons : <code>list</code> <code>l</code></a></li>
+<li><a href="#editing-a-student-code-edit-code-code-e-code">3.17. Editing a student : <code>edit</code> <code>e</code></a></li>
+<li><a href="#locating-persons-by-name-code-find-code-code-f-code">3.18. Locating persons by name: <code>find</code> <code>f</code></a></li>
+<li><a href="#deleting-a-person-code-delete-code-code-d-code">3.19. Deleting a person : <code>delete</code> <code>d</code></a></li>
+<li><a href="#selecting-a-person-code-select-code-code-s-code">3.20. Selecting a person : <code>select</code> <code>s</code></a></li>
+<li><a href="#listing-entered-commands-code-history-code-code-his-code">3.21. Listing entered commands : <code>history</code> <code>his</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code-code-u-code">3.22. Undoing previous command : <code>undo</code> <code>u</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code-code-r-code">3.23. Redoing the previously undone command : <code>redo</code> <code>r</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code-code-c-code">3.24. Clearing all entries : <code>clear</code> <code>c</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code-code-ex-code">3.25. Exiting the program : <code>exit</code> <code>ex</code></a></li>
+<li><a href="#saving-the-data">3.26. Saving the data</a></li>
+<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.27. Encrypting data files <code>[coming in v2.0]</code></a></li>
+</ul>
+</li>
+<li><a href="#faq">4. FAQ</a></li>
+<li><a href="#command-summary">5. Command Summary</a></li>
+</ul>
+</div>
+</div>
+<div class="sect1">
+<h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>AddressBook Level 4 (AB4) is for those who <strong>prefer to use a desktop app for managing contacts</strong>. More importantly, AB4 is <strong>optimized for those who prefer to work with a Command Line Interface</strong> (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <a href="#quick-start">Section 2, &#8220;Quick Start&#8221;</a> to get started. Enjoy!</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="quick-start"><a class="link" href="#quick-start">2. Quick Start</a></h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Ensure you have Java version <code>9</code> or later installed in your Computer.</p>
+</li>
+<li>
+<p>Download the latest <code>addressbook.jar</code> <a href="https://github.com/se-edu/addressbook-level4/releases">here</a>.</p>
+</li>
+<li>
+<p>Copy the file to the folder you want to use as the home folder for your Address Book.</p>
+</li>
+<li>
+<p>Double-click the file to start the app. The GUI should appear in a few seconds.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/Ui.png.jpg" alt="Ui.png" width="790">
+</div>
+</div>
+</li>
+<li>
+<p>Type the command in the command box and press <kbd>Enter</kbd> to execute it.<br>
+e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> will open the help window.</p>
+</li>
+<li>
+<p>Some example commands you can try:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><code>list</code></strong> : lists all contacts</p>
+</li>
+<li>
+<p><strong><code>add</code></strong><code>n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01</code> : adds a contact named <code>John Doe</code> to the Address Book.</p>
+</li>
+<li>
+<p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd contact shown in the current list</p>
+</li>
+<li>
+<p><strong><code>exit</code></strong> : exits the app</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Refer to <a href="#Features">Section 3, &#8220;Features&#8221;</a> for details of each command.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Features"><a class="link" href="#Features">3. Features</a></h2>
+<div class="sectionbody">
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Command Format</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user e.g. in <code>add n/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>add n/John Doe</code>.</p>
+</li>
+<li>
+<p>Items in square brackets are optional e.g <code>n/NAME [t/TAG]</code> can be used as <code>n/John Doe t/friend</code> or as <code>n/John Doe</code>.</p>
+</li>
+<li>
+<p>Items with <code>…</code>​ after them can be used multiple times including zero times e.g. <code>[t/TAG]&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>t/friend</code>, <code>t/friend t/family</code> etc.</p>
+</li>
+<li>
+<p>Parameters can be in any order e.g. if the command specifies <code>n/NAME p/PHONE_NUMBER</code>, <code>p/PHONE_NUMBER n/NAME</code> is also acceptable.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="creating-a-group-code-creategroup-code-code-cg-code"><a class="link" href="#creating-a-group-code-creategroup-code-code-cg-code">3.1. Creating a group: <code>creategroup</code> <code>cg</code></a></h3>
+<div class="paragraph">
+<p>Creates a group in the student management system<br>
+Format: <code>creategroup n/NAME l/LOCATION [t/TAG] &#8230;&#8203;</code> <br>
+Shortcut Format: <code>cg n/NAME l/LOCATION [t/TAG] &#8230;&#8203;</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Creates a group with the specified NAME, LOCATION and TAG(s)</p>
+</li>
+<li>
+<p>NAME <strong>should only contain alphanumeric characters, '-', '[' and ']', and should not be blank</strong></p>
+</li>
+<li>
+<p>LOCATION <strong>should only contain alphanumeric characters and '-', and should not be blank</strong></p>
+</li>
+<li>
+<p>TAG(s) are optional and <strong>should only contain alphanumeric characters</strong> if used</p>
+</li>
+<li>
+<p>TAG(s) <strong>should not be blank</strong> if used</p>
+</li>
+<li>
+<p>This command is undoable</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>creategroup n/CS2113 l/LT15 t/java</code></p>
+</li>
+<li>
+<p><code>cg n/CS2113 l/LT01 t/c t/cpp</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="selecting-a-group-code-selectgroup-code-code-sg-code"><a class="link" href="#selecting-a-group-code-selectgroup-code-code-sg-code">3.2. Selecting a group : <code>selectgroup</code> <code>sg</code></a></h3>
+<div class="paragraph">
+<p>Selects the group identified by the index number used in the displayed group list.<br>
+Format: <code>selectgroup INDEX</code><br>
+Shortcut Format: <code>sg INDEX</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Selects group and loads the <strong>students in selected group panel</strong> with students of the group at specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>Selects the group and loads the Google search page of the group at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed group list.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code></p>
+</li>
+<li>
+<p>This command is <strong>NOT</strong> undoable</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>selectgroup 2</code><br>
+Selects the 2nd group in the student management system.</p>
+</li>
+<li>
+<p><code>sg 1</code><br>
+Selects the 1st group in the student management system.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-students-to-a-group-code-addgroup-code-code-ag-code"><a class="link" href="#add-students-to-a-group-code-addgroup-code-code-ag-code">3.3. Add students to a group: <code>addgroup</code> <code>ag</code></a></h3>
+<div class="paragraph">
+<p>Adds student(s) to a group in the student management system<br>
+Format: <code>addgroup g/INDEX p/INDEX &#8230;&#8203;</code><br>
+Shortcut Format: <code>ag g/INDEX p/INDEX &#8230;&#8203;</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Adds student(s) at specified INDEX(s) to group at specified at INDEX.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed group/student list.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>This command is undoable</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addgroup g/1 p/1</code></p>
+</li>
+<li>
+<p><code>ag g/1 p/1 p/2</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-group-code-deletegroup-code-code-dg-code"><a class="link" href="#deleting-a-group-code-deletegroup-code-code-dg-code">3.4. Deleting a group: <code>deletegroup</code> <code>dg</code></a></h3>
+<div class="paragraph">
+<p>Deletes a group in the student management system<br>
+Format: <code>deletegroup INDEX</code> <br>
+Shortcut Format: <code>dg INDEX</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Removes the group with the specified INDEX from the student management systsm</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>This command is undoable</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deletegroup 1</code></p>
+</li>
+<li>
+<p><code>dg 1</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-student-s-from-a-group-code-deletegroupstudents-code-code-dgs-code-em-coming-in-v1-4-em"><a class="link" href="#deleting-student-s-from-a-group-code-deletegroupstudents-code-code-dgs-code-em-coming-in-v1-4-em">3.5. Deleting student(s) from a group: <code>deletegroupstudents</code> <code>dgs</code> [<em>Coming in v1.4</em>]</a></h3>
+<div class="paragraph">
+<p>Deletes students from a group in the student management system<br>
+Format: <code>deletegroupstudents g/INDEX p/NDEX &#8230;&#8203;</code> <br>
+Shortcut Format: <code>dgs g/INDEX p/INDEX &#8230;&#8203;</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Removes studnets at specifed INDEX(s) from the group at specified INDEX in the student management systsm</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed group/student in group list.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>This command is undoable</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deletegroupstudents g/1 p/1</code></p>
+</li>
+<li>
+<p><code>dgs g/1 p/1 p/2</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="list-a-group-of-students-scorefilter-a-56-or-b-56"><a class="link" href="#list-a-group-of-students-scorefilter-a-56-or-b-56">3.6. List a group of students: 'scorefilter a/56 or b/56'</a></h3>
+<div class="paragraph">
+<p>List out  students who score above/below certain grade.</p>
+</div>
+<div class="paragraph">
+<p>Format: scoreFilter [filter_standard]
+Example: scorefilter a/66
+This will list all the students who score above 56 in a new grade list</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="distributed-all-students-into-em-n-em-groups-with-balanced-number-of-nationality-or-gender-code-distinto-code-code-di-code"><a class="link" href="#distributed-all-students-into-em-n-em-groups-with-balanced-number-of-nationality-or-gender-code-distinto-code-code-di-code">3.7. Distributed all students into <em>n</em> groups with balanced number of Nationality or Gender: <code>distinto</code> <code>di</code></a></h3>
+<div class="paragraph">
+<p>This functionality creates <em>n</em> number of groups determined by the user, with a general group name specified and randomly distribute all students in the system into <em>n</em> groups.<br>
+User must choose to either distribute all students equally via Gender or Nationally or Neither.<br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Distribution Modes</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>g/0 nat/0</code> &#8594; Distribution all students randomly into <em>n</em> groups.</p>
+</li>
+<li>
+<p><code>g/1 nat/0</code> &#8594; Distribution all students randomly into <em>n</em> groups with balanced Gender.</p>
+</li>
+<li>
+<p><code>g/0 nat/1</code> &#8594; Distribution all students randomly into <em>n</em> groups with balanced Nationality.</p>
+</li>
+<li>
+<p><code>g/1 nat/1</code> &#8594; Distribution all students randomly into <em>n</em> groups with balanced Gender and Nationality. (Coming in v1.4)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Format: <code>distinto NUM_OF_GROUPS n/GROUP_NAME g/true nat/true</code><br>
+Shortcut Format: <code>di NUM_OF_GROUPS n/GROUP_NAME g/1 nat/1</code><br></p>
+</div>
+<div class="sect3">
+<h4 id="command-input-guide"><a class="link" href="#command-input-guide">3.7.1. Command Input Guide</a></h4>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>NUM_OF_GROUPS</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>NUM_OF_GROUPS must be a <strong>positive integer</strong> value and must not be <strong>0</strong>.</p>
+</li>
+<li>
+<p>NUM_OF_GROUPS must not be more than the total number of persons in the address book.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>GROUP_NAME</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>All <em>n</em> number of groups will have the same GROUP_NAME but every GROUP_NAME will be <strong>concatenated with an index behind it</strong>.</p>
+</li>
+<li>
+<p>Index concatenated behind the GROUP_NAME starts from 1.</p>
+</li>
+<li>
+<p>GROUP_NAME should only contain alphanumeric characters, '-', '[' and ']', and should not be blank</p>
+</li>
+<li>
+<p>Eg: Group name Input: g/CS2113-T13-</p>
+<div class="ulist">
+<ul>
+<li>
+<p>1st Group Name: CS2113-T13-1</p>
+</li>
+<li>
+<p>2nd Group Name: CS2113-T13-2</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Gender Flag <code>g/</code></strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>g/</code> is the Gender Prefix which only takes in '1' or '0' or "true" or "false". It should not be blank.</p>
+</li>
+<li>
+<p><code>g/1</code> or <code>g/true</code> will trigger the software to distribute all students into groups with balanced genders.</p>
+</li>
+<li>
+<p><code>g/0</code> or <code>g/false</code> will ignore gender field.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Nationality Flag <code>nat/</code></strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>nat/</code> is the nationality Prefix which only takes in '1' or '0' or "true" or "false". It should not be blank.</p>
+</li>
+<li>
+<p><code>nat/1</code> or <code>nat/true</code> will trigger the software to distribute all students into groups with balanced nationality.</p>
+</li>
+<li>
+<p><code>nat/0</code> or <code>nat/false</code> will ignore nationality field.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>distinto 5 n/CS2113-T13-0 g/true nat/false</code></p>
+</li>
+<li>
+<p><code>di 3 n/CS2113-T09- g/1 nat/0</code></p>
+</li>
+<li>
+<p><code>di 2 n/CS2113-T14- g/true nat/0</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="entering-email-credential-into-the-student-management-system-code-login-code"><a class="link" href="#entering-email-credential-into-the-student-management-system-code-login-code">3.8. Entering email credential into the Student Management System: <code>login</code></a></h3>
+<div class="paragraph">
+<p>Enters account credential for sending email<br>
+Format: <code>login e/EmailAddress pw/Password</code></p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>login e/tsurajovin@hotmail.com pw/password!@#</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For the purpose of user testing, please use the provided email account<br>
+if you do not wish to use your personal account.</p>
+</div>
+<div class="paragraph">
+<p>Email Address: <a href="mailto:tsurajovin@hotmail.com">tsurajovin@hotmail.com</a><br>
+Password: password!@#</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sending-email-to-single-multiple-or-group-of-person-s-code-sendmail-code-code-sm-code"><a class="link" href="#sending-email-to-single-multiple-or-group-of-person-s-code-sendmail-code-code-sm-code">3.9. Sending Email to Single, Multiple or Group of Person(s): <code>sendmail</code> <code>sm</code></a></h3>
+<div class="paragraph">
+<p>Sends an email to a single person in list<br>
+Format: <code>sendmail [Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE</code><br>
+Shortcut Format: <code>sm [Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE</code><br></p>
+</div>
+<div class="paragraph">
+<p>Sends an email to multiple persons in list<br>
+Format: <code>sendmail [Index],..,[Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE</code><br>
+Shortcut Format: <code>sm [Index],..,[Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE</code><br></p>
+</div>
+<div class="paragraph">
+<p>Sends an email to all persons belonging to a group<br>
+Format: <code>sendmail g/[Group_Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE</code><br>
+Shortcut Format: <code>sm g/[Group_Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE</code><br></p>
+</div>
+<div class="paragraph">
+<p>Examples:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>sendmail 1 s/Solution for Assignment m/Hi Bob, solution has been attached.<br></p>
+</li>
+<li>
+<p>sm 1 s/Solution for Assignment m/Hi Bob, solution has been attached.<br></p>
+</li>
+<li>
+<p>sendmail 1,4,6 s/Tutorial Cancelled m/Tutorial class for Friday has been cancelled.<br></p>
+</li>
+<li>
+<p>sm 1,4,6 s/Tutorial Cancelled m/Tutorial Class for Friday has been cancelled.<br></p>
+</li>
+<li>
+<p>sendmail g/2 s/Announcement m/Please bring your calculator tomorrow.<br></p>
+</li>
+<li>
+<p>sm g/2 s/Announcement m/Please bring your calculator tomorrow.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="list-a-group-of-students-code-scorefilter-code"><a class="link" href="#list-a-group-of-students-code-scorefilter-code">3.10. List a group of students: <code>scorefilter</code></a></h3>
+<div class="paragraph">
+<p>List out the standard deviation of the score data set from all students<br>
+Format: <code>scoreFilter [filter_standard]</code><br></p>
+</div>
+<div class="paragraph">
+<p>Examples:
+* scorefilter 56</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="summary-of-students-grade-summarygrade"><a class="link" href="#summary-of-students-grade-summarygrade">3.11. Summary of students' grade: 'summaryGrade'</a></h3>
+<div class="paragraph">
+<p>show highest, lowest, mean, median, 25th 75th percentiles, %passes* of certain test.
+Example: summaryGrade</p>
+</div>
+<div class="paragraph">
+<p>Format: summaryGrade
+Example: summaryGrade
+show highest, lowest, mean, median, 25th 75th percentiles, %passes* of certain test</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-deleting-tags-automatically-addtag-deletetag"><a class="link" href="#adding-deleting-tags-automatically-addtag-deletetag">3.12. Adding/deleting tags automatically: 'addtag/deletetag'</a></h3>
+<div class="paragraph">
+<p>Add/delete certain tags for certain group of people<br>
+Format: <code>addtag GROUP_NAME  tag/</code><br>
+Format: <code>deletetag  GROUP_NAME  tag/</code><br></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>addtag TAG_STRING tag/need more attention</p>
+</li>
+<li>
+<p>deletetag TAG_STRING  tag/need more attention</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="viewing-help-code-help-code-code-h-code"><a class="link" href="#viewing-help-code-help-code-code-h-code">3.13. Viewing help : <code>help</code> <code>h</code></a></h3>
+<div class="paragraph">
+<p>Format: <code>help</code><br>
+Shortcut Format: <code>h</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-a-person-code-add-code-code-a-code"><a class="link" href="#adding-a-person-code-add-code-code-a-code">3.14. Adding a person: <code>add</code> <code>a</code></a></h3>
+<div class="paragraph">
+<p>Adds a person to the address book<br>
+Format: <code>add n/NAME g/GENDER nat/NATIONALITY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code><br>
+Shortcut Format: <code>a n/NAME g/GENDER nat/NATIONALITY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code><br></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+A person can have any number of tags (including 0)<br>
+A person gender can only be Male or Female<br>
+You can use <code>g/M</code> or <code>g/m</code> or <code>g/male</code> to specify a male gender. (Not Case-sensitive)
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>add n/John Doe g/M nat/SG p/98765432 e/johnd@example.com a/John street, block 123, #01-01</code></p>
+</li>
+<li>
+<p><code>a n/Betsy Crowe g/female nat/MY t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="execute-multiples-of-the-same-command-using-text-file-code-script-code-code-scr-code"><a class="link" href="#execute-multiples-of-the-same-command-using-text-file-code-script-code-code-scr-code">3.15. Execute multiples of the same Command using text file : <code>script</code> <code>scr</code></a></h3>
+<div class="paragraph">
+<p>Get all the commands parameters from a text file and execute them<br>
+Format: <code>script txt/TextFile c/CommandType</code><br>
+Shortcut Format: <code>scr txt/TextFile c/CommandType</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Default scripts folder is located at the /scripts/ where the main program is located at.</p>
+</li>
+<li>
+<p>If the scripts folder is missing, the program will automatically generate the folder when the program starts</p>
+</li>
+<li>
+<p>txt/ is the TextFile Prefix which is used to indicate the following parameter is a TextFile parameter</p>
+<div class="ulist">
+<ul>
+<li>
+<p>TextFile is the text file which contains all the command arguments that you want to execute.</p>
+</li>
+<li>
+<p>TextFile should consist of the name of the file without the extension E.g "StudentList" is a valid TextFile but
+"StudentList.txt" is also valid TextFile but it will search for "StudentList.txt.txt" in the folder.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>c/ is the CommandType Prefix which is used to indicate the following parameter is a CommandType parameter</p>
+<div class="ulist">
+<ul>
+<li>
+<p>CommandType is the command that you want to execute E.g add, delete, creategroup, etc</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>script txt/addgroups c/creategroup</code></p>
+</li>
+<li>
+<p><code>scr txt/addpersons c/add</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-all-persons-code-list-code-code-l-code"><a class="link" href="#listing-all-persons-code-list-code-code-l-code">3.16. Listing all persons : <code>list</code> <code>l</code></a></h3>
+<div class="paragraph">
+<p>Shows a list of all persons in the address book.<br>
+Format: <code>list</code><br>
+Shortcut Format: <code>l</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editing-a-student-code-edit-code-code-e-code"><a class="link" href="#editing-a-student-code-edit-code-code-e-code">3.17. Editing a student : <code>edit</code> <code>e</code></a></h3>
+<div class="paragraph">
+<p>Edits an existing student in the student management system.<br>
+Format: <code>edit INDEX [n/NAME] [g/GENDER] [nat/NATIONALITY] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [g/GRADE]&#8230;&#8203;</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Edits the student at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed student list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+<li>
+<p>Existing values will be updated to the input values.</p>
+</li>
+<li>
+<p>When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.</p>
+</li>
+<li>
+<p>You can remove all the student&#8217;s tags by typing <code>t/</code> without specifying any tags after it.</p>
+</li>
+<li>
+<p>Edits the student at specified <code>INDEX</code> in all groups which the student is in [<em>Coming in v1.4</em>]</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>edit 1 p/91234567 e/johndoe@example.com</code><br>
+Edits the phone number and email address of the 1st person to be <code>91234567</code> and <code>johndoe@example.com</code> respectively.</p>
+</li>
+<li>
+<p><code>e 2 n/Betsy Crower t/</code><br>
+Edits the name of the 2nd person to be <code>Betsy Crower</code> and clears all existing tags.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="locating-persons-by-name-code-find-code-code-f-code"><a class="link" href="#locating-persons-by-name-code-find-code-code-f-code">3.18. Locating persons by name: <code>find</code> <code>f</code></a></h3>
+<div class="paragraph">
+<p>Finds persons whose names contain any of the given keywords.<br>
+Format: <code>find KEYWORD [MORE_KEYWORDS]</code><br>
+Shortcut Format: <code>f KEYWORD [MORE_KEYWORDS]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case insensitive. e.g <code>hans</code> will match <code>Hans</code></p>
+</li>
+<li>
+<p>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></p>
+</li>
+<li>
+<p>Only the name is searched.</p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
+</li>
+<li>
+<p>Persons matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>find John</code><br>
+Returns <code>john</code> and <code>John Doe</code></p>
+</li>
+<li>
+<p><code>f Betsy Tim John</code><br>
+Returns any person having names <code>Betsy</code>, <code>Tim</code>, or <code>John</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-person-code-delete-code-code-d-code"><a class="link" href="#deleting-a-person-code-delete-code-code-d-code">3.19. Deleting a person : <code>delete</code> <code>d</code></a></h3>
+<div class="paragraph">
+<p>Deletes the specified student from the student management system.<br>
+Format: <code>delete INDEX</code><br>
+Shortcut Format: <code>d INDEX</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the student at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed student list.</p>
+</li>
+<li>
+<p>Deletes student in all groups [<em>Coming in v1.4</em>]</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>delete 2</code><br>
+Deletes the 2nd student in the address book.</p>
+</li>
+<li>
+<p><code>find Betsy</code><br>
+<code>d 1</code><br>
+Deletes the 1st student in the results of the <code>find</code> command.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="selecting-a-person-code-select-code-code-s-code"><a class="link" href="#selecting-a-person-code-select-code-code-s-code">3.20. Selecting a person : <code>select</code> <code>s</code></a></h3>
+<div class="paragraph">
+<p>Selects the person identified by the index number used in the displayed person list.<br>
+Format: <code>select INDEX</code><br>
+Shortcut Format: <code>s INDEX</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Selects the person and loads the Google search page the person at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed person list.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>select 2</code><br>
+Selects the 2nd person in the address book.</p>
+</li>
+<li>
+<p><code>find Betsy</code><br>
+<code>s 1</code><br>
+Selects the 1st person in the results of the <code>find</code> command.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-entered-commands-code-history-code-code-his-code"><a class="link" href="#listing-entered-commands-code-history-code-code-his-code">3.21. Listing entered commands : <code>history</code> <code>his</code></a></h3>
+<div class="paragraph">
+<p>Lists all the commands that you have entered in reverse chronological order.<br>
+Format: <code>history</code><br>
+Shortcut Format: <code>his</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Pressing the <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> arrows will display the previous and next input respectively in the command box.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="undoing-previous-command-code-undo-code-code-u-code"><a class="link" href="#undoing-previous-command-code-undo-code-code-u-code">3.22. Undoing previous command : <code>undo</code> <code>u</code></a></h3>
+<div class="paragraph">
+<p>Restores the address book to the state before the previous <em>undoable</em> command was executed.<br>
+Format: <code>undo</code><br>
+Shortcut Format: <code>u</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Undoable commands: those commands that modify the address book&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>delete 1</code><br>
+<code>list</code><br>
+<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+</li>
+<li>
+<p><code>select 1</code><br>
+<code>list</code><br>
+<code>undo</code><br>
+The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
+</li>
+<li>
+<p><code>delete 1</code><br>
+<code>clear</code><br>
+<code>undo</code> (reverses the <code>clear</code> command)<br>
+<code>u</code> (reverses the <code>delete 1</code> command)<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="redoing-the-previously-undone-command-code-redo-code-code-r-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code-code-r-code">3.23. Redoing the previously undone command : <code>redo</code> <code>r</code></a></h3>
+<div class="paragraph">
+<p>Reverses the most recent <code>undo</code> command.<br>
+Format: <code>redo</code><br>
+Shortcut Format: <code>r</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>delete 1</code><br>
+<code>undo</code> (reverses the <code>delete 1</code> command)<br>
+<code>redo</code> (reapplies the <code>delete 1</code> command)<br></p>
+</li>
+<li>
+<p><code>delete 1</code><br>
+<code>redo</code><br>
+The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
+</li>
+<li>
+<p><code>delete 1</code><br>
+<code>clear</code><br>
+<code>undo</code> (reverses the <code>clear</code> command)<br>
+<code>undo</code> (reverses the <code>delete 1</code> command)<br>
+<code>redo</code> (reapplies the <code>delete 1</code> command)<br>
+<code>r</code> (reapplies the <code>clear</code> command)<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="clearing-all-entries-code-clear-code-code-c-code"><a class="link" href="#clearing-all-entries-code-clear-code-code-c-code">3.24. Clearing all entries : <code>clear</code> <code>c</code></a></h3>
+<div class="paragraph">
+<p>Clears all entries from the address book.<br>
+Format: <code>clear</code><br>
+Shortcut Format: <code>c</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exiting-the-program-code-exit-code-code-ex-code"><a class="link" href="#exiting-the-program-code-exit-code-code-ex-code">3.25. Exiting the program : <code>exit</code> <code>ex</code></a></h3>
+<div class="paragraph">
+<p>Exits the program.<br>
+Format: <code>exit</code><br>
+Shortcut Format: <code>ex</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.26. Saving the data</a></h3>
+<div class="paragraph">
+<p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
+There is no need to save manually.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.27. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<div class="paragraph">
+<p><em>{explain how the user can enable/disable data encryption}</em></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="faq"><a class="link" href="#faq">4. FAQ</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
+<strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="command-summary"><a class="link" href="#command-summary">5. Command Summary</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Add</strong> <code>add n/NAME g/GENDER nat/NATIONALITY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>add n/James Ho g/M nat/CN p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague</code></p>
+</li>
+<li>
+<p><strong>Clear</strong> : <code>clear</code></p>
+</li>
+<li>
+<p><strong>Delete</strong> : <code>delete INDEX</code><br>
+e.g. <code>delete 3</code></p>
+</li>
+<li>
+<p><strong>Create Group</strong> : <code>creategroup n/NAME l/LOCATION [t/TAG] &#8230;&#8203;</code><br>
+e.g. <code>creategroup n/CS2040C l/LT15 t/cpp</code></p>
+</li>
+<li>
+<p><strong>Select Group</strong> : <code>selectgroup INDEX</code><br>
+e.g. <code>selectgroup 1</code></p>
+</li>
+<li>
+<p><strong>Add to Group</strong> : <code>addgroup g/INDEX p/INDEX &#8230;&#8203;</code><br>
+e.g. <code>addgroup g/1 p/1 p/2</code></p>
+</li>
+<li>
+<p><strong>Delete Group</strong> : <code>deletegroup INDEX</code><br>
+e.g. <code>deletegroup 1</code></p>
+</li>
+<li>
+<p><strong>Delete Students in Group</strong> : <code>deletegroupstudents g/INDEX p/INDEX &#8230;&#8203;</code><br>
+e.g. <code>deletegroupstudents g/1 p/1 p/2</code></p>
+</li>
+<li>
+<p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [g/GENDER] [nat/NATIONALITY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>edit 2 n/James Lee e/jameslee@example.com</code></p>
+</li>
+<li>
+<p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code><br>
+e.g. <code>find James Jake</code></p>
+</li>
+<li>
+<p><strong>Login</strong> : <code>login e/EmailAddress pw/Password</code><br>
+e.g. <code>login e/tsurajovin@hotmail.com pw/password!@#</code></p>
+</li>
+<li>
+<p><strong>Send Email (Person)</strong>: <code>sendmail [Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE</code><br>
+e.g. <code>sendmail 1 s/Solution for Assignment m/Hi Bob, solution has been attached.</code></p>
+</li>
+<li>
+<p><strong>Send Email (Persons)</strong>: <code>sendmail [Index],..,[Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE</code><br>
+e.g. <code>sendmail 1,4,6 s/Tutorial Cancelled m/Tutorial class for Friday has been cancelled.</code></p>
+</li>
+<li>
+<p><strong>Send Email (Group)</strong>: <code>sendmail g/[Group_Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE</code><br>
+e.g. <code>sendmail g/2 s/Announcement m/Please bring your calculator tomorrow.</code></p>
+</li>
+<li>
+<p><strong>List</strong> : <code>list</code></p>
+</li>
+<li>
+<p><strong>Help</strong> : <code>help</code></p>
+</li>
+<li>
+<p><strong>Select</strong> : <code>select INDEX</code><br>
+e.g.<code>select 2</code></p>
+</li>
+<li>
+<p><strong>History</strong> : <code>history</code></p>
+</li>
+<li>
+<p><strong>Undo</strong> : <code>undo</code></p>
+</li>
+<li>
+<p><strong>Redo</strong> : <code>redo</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-25 11:50:24 SRET</div></div></div></body></html>
