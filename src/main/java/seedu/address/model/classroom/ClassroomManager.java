@@ -2,6 +2,7 @@ package seedu.address.model.classroom;
 
 import static java.util.Objects.requireNonNull;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -9,6 +10,7 @@ import java.util.stream.Collectors;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.StorageController;
+import seedu.address.model.student.StudentManager;
 import seedu.address.storage.adapter.XmlAdaptedClassroom;
 import seedu.address.storage.adapter.XmlAdaptedClassroomAttendance;
 
@@ -90,10 +92,15 @@ public class ClassroomManager {
         for (XmlAdaptedClassroom xmlClassroom : xmlClassroomList) {
             try {
                 Classroom classroom = xmlClassroom.toModelType();
+                ArrayList<String> studentsAssigned = new ArrayList<>();
+                for (String matricNo : classroom.getStudents()){
+                    if()
+                }
+
                 classroomList.add(classroom);
                 readAttendanceList(xmlClassroomAttendanceList, classroom);
-            } catch (IllegalValueException e) {
-                logger.info("Illegal values found when reading classroom list: " + e.getMessage());
+            } catch (IllegalValueException ive) {
+                logger.info("Illegal values found when reading classroom list: " + ive.getMessage());
             }
         }
     }
@@ -103,11 +110,13 @@ public class ClassroomManager {
      */
     private void readAttendanceList(ArrayList<XmlAdaptedClassroomAttendance> xmlClassroomAttendanceList,
                                     Classroom classroom) throws IllegalValueException {
-        if (xmlClassroomAttendanceList.size() == 0) {
+        if (xmlClassroomAttendanceList == null || xmlClassroomAttendanceList.size() == 0) {
             for (Classroom c : classroomList) {
                 c.getAttendanceList().add(new Attendance());
             }
         }
+
+        assert xmlClassroomAttendanceList != null;
         for (XmlAdaptedClassroomAttendance xmlClassroomAttendance : xmlClassroomAttendanceList) {
             if (xmlClassroomAttendance.getClassName().equalsIgnoreCase(classroom.getClassName().getValue())
                     && xmlClassroomAttendance.getModuleCode().equalsIgnoreCase(
@@ -251,5 +260,13 @@ public class ClassroomManager {
      */
     public boolean isStudentAttendanceMarked(Attendance attendance, String matricNo) {
         return attendance.getStudentsPresent().contains(matricNo);
+    }
+
+    /**
+     * Returns whether a classroom is full
+     */
+    public boolean isClassroomFull(Classroom classToAssignStudent) {
+        int maxEnrollment = Integer.parseInt(classToAssignStudent.getMaxEnrollment().getValue());
+        return classToAssignStudent.getStudents().size() >= maxEnrollment;
     }
 }
