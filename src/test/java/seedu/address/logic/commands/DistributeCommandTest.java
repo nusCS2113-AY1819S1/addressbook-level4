@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -26,11 +27,19 @@ import seedu.address.testutil.GroupBuilder;
 public class DistributeCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+    private Model model;
+    private AddressBook addressBook;
 
     private CommandHistory commandHistory = new CommandHistory();
+
+    @Before
+    public void setUp() {
+        addressBook = getTypicalAddressBook();
+        UserPrefs stubUserPrefs = new UserPrefs();
+        model = new ModelManager(addressBook, stubUserPrefs);
+    }
 
     @Test
     public void constructor_nullDistribute_throwsNullPointerException() {
@@ -41,11 +50,8 @@ public class DistributeCommandTest {
     @Test
     public void execute_distributeBalancedAcceptedByModel_distributeSuccessful()
             throws ParseException, CommandException {
-        AddressBook stubAddressBook = getTypicalAddressBook();
-        UserPrefs stubUserPrefs = new UserPrefs();
-        Model modelStub = new ModelManager(stubAddressBook, stubUserPrefs);
         Distribute validDistributeCommand = new DistributeBuilder().build();
-        CommandResult commandResult = new DistributeCommand(validDistributeCommand).execute(modelStub, commandHistory);
+        CommandResult commandResult = new DistributeCommand(validDistributeCommand).execute(model, commandHistory);
         assertEquals(String.format(DistributeCommand.MESSAGE_SUCCESS, validDistributeCommand),
                 commandResult.feedbackToUser);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
@@ -54,11 +60,8 @@ public class DistributeCommandTest {
     @Test
     public void execute_distributeByGenderAcceptedByModel_distributeSuccessful()
             throws ParseException, CommandException {
-        AddressBook stubAddressBook = getTypicalAddressBook();
-        UserPrefs stubUserPrefs = new UserPrefs();
-        Model modelStub = new ModelManager(stubAddressBook, stubUserPrefs);
         Distribute validDistributeCommand = new DistributeBuilder().setGenderFlag("true").build();
-        CommandResult commandResult = new DistributeCommand(validDistributeCommand).execute(modelStub, commandHistory);
+        CommandResult commandResult = new DistributeCommand(validDistributeCommand).execute(model, commandHistory);
         assertEquals(String.format(DistributeCommand.MESSAGE_SUCCESS, validDistributeCommand),
                 commandResult.feedbackToUser);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
@@ -67,11 +70,8 @@ public class DistributeCommandTest {
     @Test
     public void execute_distributeByNationalityAcceptedByModel_distributeSuccessful()
             throws ParseException, CommandException {
-        AddressBook stubAddressBook = getTypicalAddressBook();
-        UserPrefs stubUserPrefs = new UserPrefs();
-        Model modelStub = new ModelManager(stubAddressBook, stubUserPrefs);
         Distribute validDistributeCommand = new DistributeBuilder().setNationalityFlag("true").build();
-        CommandResult commandResult = new DistributeCommand(validDistributeCommand).execute(modelStub, commandHistory);
+        CommandResult commandResult = new DistributeCommand(validDistributeCommand).execute(model, commandHistory);
         assertEquals(String.format(DistributeCommand.MESSAGE_SUCCESS, validDistributeCommand),
                 commandResult.feedbackToUser);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
@@ -80,12 +80,9 @@ public class DistributeCommandTest {
     @Test
     public void execute_distributeByGenderAndNationalityAcceptedByModel_distributeSuccessful()
             throws ParseException, CommandException {
-        AddressBook stubAddressBook = getTypicalAddressBook();
-        UserPrefs stubUserPrefs = new UserPrefs();
-        Model modelStub = new ModelManager(stubAddressBook, stubUserPrefs);
         Distribute validDistributeCommand = new DistributeBuilder().setNationalityFlag("true").setGenderFlag("true")
                 .build();
-        CommandResult commandResult = new DistributeCommand(validDistributeCommand).execute(modelStub, commandHistory);
+        CommandResult commandResult = new DistributeCommand(validDistributeCommand).execute(model, commandHistory);
         assertEquals(String.format(DistributeCommand.MESSAGE_SUCCESS, validDistributeCommand),
                 commandResult.feedbackToUser);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
@@ -95,11 +92,10 @@ public class DistributeCommandTest {
 
     @Test
     public void execute_duplicateGroupFound_throwsCommandException() throws CommandException, ParseException {
-        AddressBook stubAddressBook = getTypicalAddressBook();
         Group stubGroup = new GroupBuilder().withGroupName("CS2113-T13-1").build();
-        stubAddressBook.createGroup(stubGroup);
+        addressBook.createGroup(stubGroup);
         UserPrefs stubUserPrefs = new UserPrefs();
-        Model modelStub = new ModelManager(stubAddressBook, stubUserPrefs);
+        Model modelStub = new ModelManager(addressBook, stubUserPrefs);
         Distribute validDistributeCommand = new DistributeBuilder().build();
         thrown.expect(CommandException.class);
         thrown.expectMessage(DistributeUtil.MESSAGE_DUPLICATE_GROUP);
