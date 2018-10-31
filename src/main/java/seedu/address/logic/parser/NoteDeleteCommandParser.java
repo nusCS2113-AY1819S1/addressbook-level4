@@ -2,15 +2,14 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.address.logic.commands.NoteDeleteCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import seedu.address.logic.commands.NoteDeleteCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new NoteDeleteCommand object
@@ -56,13 +55,5 @@ public class NoteDeleteCommandParser implements Parser<NoteDeleteCommand> {
         }
 
         return new NoteDeleteCommand(indexList);
-
-//        String index = args.trim().replaceAll(" +", "");
-//
-//        if (index.matches("\\d+")) {
-//            return new NoteDeleteCommand(Integer.parseInt(index));
-//        } else {
-//            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteDeleteCommand.MESSAGE_USAGE));
-//        }
     }
 }

@@ -3,13 +3,13 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
+import java.util.List;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.note.NoteManager;
 import seedu.address.ui.BrowserPanel;
-
-import java.util.List;
 
 /**
  * Deletes a note from Trajectory.
@@ -27,9 +27,7 @@ public class NoteDeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + "2";
 
-//    public static final String MESSAGE_SUCCESS = "Note has been deleted.";
     public static final String MESSAGE_SUCCESS = "(%s) note(s) successfully deleted.";
-//    public static final String MESSAGE_INVALID_INDEX = "Invalid input!\nINDEX %1$s is out of bounds.";
     public static final String MESSAGE_INVALID_INDEX = "Invalid input! INDEX is out of bounds.";
     public static final String MESSAGE_PARSE_INDEX_ERROR = "You entered an invalid index. "
             + "Please enter positive integers only.";
@@ -40,13 +38,8 @@ public class NoteDeleteCommand extends Command {
             + "Command: " + NoteListCommand.COMMAND_WORD
             + " [" + PREFIX_MODULE_CODE + "MODULE_CODE]";
 
-//    private final int index;
-
     private final List<Integer> indexList;
 
-//    public NoteDeleteCommand(int index) {
-//        this.index = index;
-//    }
 
     public NoteDeleteCommand(List<Integer> indexList) {
         requireNonNull(indexList);
@@ -75,16 +68,5 @@ public class NoteDeleteCommand extends Command {
         int size = indexList.size();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Integer.toString(size)), noteList);
-
-//        if (index > noteManager.getFilteredNotes().size() || index < 1) {
-//            throw new CommandException(String.format(MESSAGE_INVALID_INDEX, index));
-//        } else {
-//            noteManager.deleteNote(index - 1);
-//            noteManager.saveNoteList();
-//
-//            String noteList = noteManager.getHtmlNoteList();
-//
-//            return new CommandResult(MESSAGE_SUCCESS, noteList);
-//        }
     }
 }
