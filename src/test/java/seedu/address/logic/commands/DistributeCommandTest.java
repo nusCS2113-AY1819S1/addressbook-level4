@@ -87,8 +87,8 @@ public class DistributeCommandTest {
         thrown.expectMessage(MESSAGE_TO_BE_IMPLEMENTED);
         CommandResult commandResult = new DistributeCommand(validDistributeCommand).execute(model, commandHistory);
         //        assertEquals(String.format(DistributeCommand.MESSAGE_SUCCESS, validDistributeCommand),
-    //                commandResult.feedbackToUser);
-    //        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+        //                commandResult.feedbackToUser);
+        //        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
 

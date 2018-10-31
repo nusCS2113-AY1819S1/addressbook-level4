@@ -24,14 +24,14 @@ public class DistributeCommandIntegrationTest {
         model = new ModelManager(addressBook, userPrefs);
     }
 
-//    @Test
-//    public void execute_distributionCommand_success() throws ParseException {
-//        Distribute validDistribute = new DistributeBuilder().build();
-//        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-//
-//        assertCommandSuccess(new DistributeCommand(validDistribute), model, commandHistory,
-//                String.format(DistributeCommand.MESSAGE_SUCCESS, validDistribute), expectedModel);
-//    }
+    //    @Test
+    //    public void execute_distributionCommand_success() throws ParseException {
+    //        Distribute validDistribute = new DistributeBuilder().build();
+    //        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    //
+    //        assertCommandSuccess(new DistributeCommand(validDistribute), model, commandHistory,
+    //                String.format(DistributeCommand.MESSAGE_SUCCESS, validDistribute), expectedModel);
+    //    }
 
     @Test
     public void execute_duplicateGroup_throwsCommandException() {
