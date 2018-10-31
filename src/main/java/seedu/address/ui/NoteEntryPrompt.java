@@ -1,8 +1,11 @@
 package seedu.address.ui;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
@@ -18,8 +21,13 @@ import seedu.address.model.note.NoteText;
  */
 public class NoteEntryPrompt {
 
+    private static final int NOTE_MAX_CHARACTER_LIMIT = 10;
+
     private static final String NOTE_TAB_OVERWRITE = "    ";
     private static final String NOTE_TEXT_EMPTY_MESSAGE = "Saving failed! The field is empty.";
+    private static final String MESSAGE_NOTE_REACH_CHARACTER_LIMIT =
+            "You have reached the maximum character limit of " + Integer.toString(NOTE_MAX_CHARACTER_LIMIT);
+
     private final KeyCombination keyCombinationSave = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN);
     private final KeyCombination keyCombinationCancel = new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN);
 
@@ -76,11 +84,6 @@ public class NoteEntryPrompt {
             noteContent.appendText(NOTE_TAB_OVERWRITE);
         }
 
-        if (feedbackLabelIsDisplayed && !keyEvent.getCode().isModifierKey()) {
-            feedbackLabel.setText("");
-            feedbackLabelIsDisplayed = false;
-        }
-
         if (keyCombinationSave.match(keyEvent)) {
             saveAndCloseWindow();
         }
@@ -93,21 +96,43 @@ public class NoteEntryPrompt {
     /**
      * Saves the note and closes the window.
      */
-    public void saveAndCloseWindow() {
+    private void saveAndCloseWindow() {
         String tempNote = noteContent.getText();
 
         if (!tempNote.trim().isEmpty()) {
             note.setNoteText(new NoteText(tempNote));
             dialogStage.close();
         } else {
-            displayFeedbackLabel();
-            feedbackLabelIsDisplayed = true;
+            displayFeedbackLabelEmptyMessage();
         }
     }
 
-    private void displayFeedbackLabel() {
+    private void displayFeedbackLabelEmptyMessage() {
         feedbackLabel.setStyle("-fx-font-size: 12; -fx-text-fill: red;");
         feedbackLabel.setText(NOTE_TEXT_EMPTY_MESSAGE);
+    }
+
+    /**
+     * Sets a character limit for the TextArea.
+     */
+    public void setUpTextArea() {
+        noteContent.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                int remaining = NOTE_MAX_CHARACTER_LIMIT - newValue.length();
+                feedbackLabel.setStyle("-fx-font-size: 12; -fx-text-fill: white;");
+                feedbackLabel.setText("Characters remaining: " + remaining);
+            }
+        });
+
+        noteContent.setTextFormatter(new TextFormatter<String>(text ->
+                text.getControlNewText().length() <= NOTE_MAX_CHARACTER_LIMIT
+                        ? text : null));
+    }
+
+    public void setUpFeedbackLabel() {
+        feedbackLabel.setStyle("-fx-font-size: 12; -fx-text-fill: white;");
+        feedbackLabel.setText("Characters remaining: " + NOTE_MAX_CHARACTER_LIMIT);
     }
 
     /**
@@ -128,4 +153,3 @@ public class NoteEntryPrompt {
         return isCancelled;
     }
 }
-

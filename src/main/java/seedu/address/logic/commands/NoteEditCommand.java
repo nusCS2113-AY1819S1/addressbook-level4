@@ -139,11 +139,15 @@ public class NoteEditCommand extends Command {
             newEndTime = noteToEdit.getEndTime();
         }
 
+        if (newStartDate == null && (newStartTime != null || newEndDate != null || newEndTime != null)) {
+            throw new CommandException(NoteDate.MESSAGE_START_DATE_MISSING_FIELD);
+        }
+
         if (newStartDate != null && newEndDate == null) {
             newEndDate = new NoteDate(newStartDate.getDate().format(NoteDate.DATE_FORMAT));
         }
 
-        if (startDate != null) {
+        if (newStartDate != null) {
             LocalDateTime newStartDateTime = LocalDateTime.of(newStartDate.getDate(), newStartTime.getTime());
             LocalDateTime newEndDateTime = LocalDateTime.of(newEndDate.getDate(), newEndTime.getTime());
 

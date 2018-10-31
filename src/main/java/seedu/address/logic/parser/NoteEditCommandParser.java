@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_BLANK_FIELD;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DATE_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TIME_FORMAT;
@@ -71,78 +72,121 @@ public class NoteEditCommandParser implements Parser<NoteEditCommand> {
         NoteTime endTime = null;
         NoteLocation location = null;
 
-        StringBuilder messageExceptions = new StringBuilder();
-        boolean dateFormatErrorFound = false;
-        boolean timeFormatErrorFound = false;
+        StringBuilder messageErrors = new StringBuilder();
+        boolean dateErrorFound = false;
+        boolean timeErrorFound = false;
+        boolean startDateMissingErrorFound = false;
+
+        // ModuleManager moduleManager = ModuleManager.getInstance();
 
         if (argMultimap.getValue(PREFIX_MODULE_CODE).isPresent()) {
-            // TODO: Check validity of input moduleCode value
+            if (argMultimap.getValue(PREFIX_MODULE_CODE).get().trim().isEmpty()) {
+                throw new ParseException(MESSAGE_BLANK_FIELD);
+            }
+
             try {
                 moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
+
+                /* Disabled for standalone testing
+                if (!moduleManager.doesModuleExist(moduleCode.toString())) {
+                    messageErrors.append(
+                            String.format(NoteAddCommand.MESSAGE_MODULE_CODE_DOES_NOT_EXIST, moduleCode.toString()));
+                    messageErrors.append("\n");
+                } */
             } catch (ParseException e) {
-                e.printStackTrace();
-                messageExceptions.append(ModuleCode.MESSAGE_MODULE_CODE_CONSTRAINT);
-                messageExceptions.append("\n\n");
+                messageErrors.append(ModuleCode.MESSAGE_MODULE_CODE_CONSTRAINT);
+                messageErrors.append("\n");
             }
         }
 
         if (argMultimap.getValue(PREFIX_NOTE_TITLE).isPresent()) {
-            title = new NoteTitle(argMultimap.getValue(PREFIX_NOTE_TITLE).get());
+            String trimmedTitle = argMultimap.getValue(PREFIX_NOTE_TITLE).get().trim();
+            if (trimmedTitle.isEmpty()) {
+                throw new ParseException(MESSAGE_BLANK_FIELD);
+            }
+
+            if (!NoteTitle.isValidTitle(trimmedTitle)) {
+                messageErrors.append(NoteTitle.MESSAGE_TITLE_EXCEED_MAX_CHAR_COUNT);
+                messageErrors.append("\n");
+            } else {
+                title = new NoteTitle(trimmedTitle);
+            }
         }
 
         if (argMultimap.getValue(PREFIX_NOTE_START_DATE).isPresent()) {
+            if (argMultimap.getValue(PREFIX_NOTE_START_DATE).get().trim().isEmpty()) {
+                throw new ParseException(MESSAGE_BLANK_FIELD);
+            }
+
             try {
                 startDate = ParserUtil.parseNoteDate(argMultimap.getValue(PREFIX_NOTE_START_DATE).get());
             } catch (ParseException e) {
-                e.printStackTrace();
-                messageExceptions.append(MESSAGE_INVALID_DATE_FORMAT);
-                messageExceptions.append("\n\n");
-                dateFormatErrorFound = true;
+                messageErrors.append(MESSAGE_INVALID_DATE_FORMAT);
+                messageErrors.append("\n");
+                dateErrorFound = true;
             }
         }
 
         if (argMultimap.getValue(PREFIX_NOTE_START_TIME).isPresent()) {
+            if (argMultimap.getValue(PREFIX_NOTE_START_TIME).get().trim().isEmpty()) {
+                throw new ParseException(MESSAGE_BLANK_FIELD);
+            }
+
             try {
                 startTime = ParserUtil.parseNoteTime(argMultimap.getValue(PREFIX_NOTE_START_TIME).get());
             } catch (ParseException e) {
-                e.printStackTrace();
-                messageExceptions.append(MESSAGE_INVALID_TIME_FORMAT);
-                messageExceptions.append("\n\n");
-                timeFormatErrorFound = true;
+                messageErrors.append(MESSAGE_INVALID_TIME_FORMAT);
+                messageErrors.append("\n");
+                timeErrorFound = true;
             }
         }
 
         if (argMultimap.getValue(PREFIX_NOTE_END_DATE).isPresent()) {
+            if (argMultimap.getValue(PREFIX_NOTE_END_DATE).get().trim().isEmpty()) {
+                throw new ParseException(MESSAGE_BLANK_FIELD);
+            }
+
             try {
                 endDate = ParserUtil.parseNoteDate(argMultimap.getValue(PREFIX_NOTE_END_DATE).get());
             } catch (ParseException e) {
-                e.printStackTrace();
-                if (!dateFormatErrorFound) {
-                    messageExceptions.append(MESSAGE_INVALID_DATE_FORMAT);
-                    messageExceptions.append("\n\n");
+                if (!dateErrorFound) {
+                    messageErrors.append(MESSAGE_INVALID_DATE_FORMAT);
+                    messageErrors.append("\n");
                 }
             }
-
         }
 
         if (argMultimap.getValue(PREFIX_NOTE_END_TIME).isPresent()) {
+            if (argMultimap.getValue(PREFIX_NOTE_END_TIME).get().trim().isEmpty()) {
+                throw new ParseException(MESSAGE_BLANK_FIELD);
+            }
+
             try {
                 endTime = ParserUtil.parseNoteTime(argMultimap.getValue(PREFIX_NOTE_END_TIME).get());
             } catch (ParseException e) {
-                e.printStackTrace();
-                if (!timeFormatErrorFound) {
-                    messageExceptions.append(MESSAGE_INVALID_TIME_FORMAT);
-                    messageExceptions.append("\n\n");
+                if (!timeErrorFound) {
+                    messageErrors.append(MESSAGE_INVALID_TIME_FORMAT);
+                    messageErrors.append("\n");
                 }
             }
         }
 
         if (argMultimap.getValue(PREFIX_NOTE_LOCATION).isPresent()) {
-            location = new NoteLocation(argMultimap.getValue(PREFIX_NOTE_LOCATION).get());
+            String trimmedLocation = argMultimap.getValue(PREFIX_NOTE_LOCATION).get().trim();
+            if (trimmedLocation.isEmpty()) {
+                throw new ParseException(MESSAGE_BLANK_FIELD);
+            }
+
+            if (!NoteLocation.isValidLocation(trimmedLocation)) {
+                messageErrors.append(NoteLocation.MESSAGE_LOCATION_EXCEED_MAX_CHAR_COUNT);
+                messageErrors.append("\n");
+            } else {
+                location = new NoteLocation(trimmedLocation);
+            }
         }
 
-        if (messageExceptions.length() > 0) {
-            throw new ParseException(messageExceptions.substring(0, messageExceptions.length() - 2));
+        if (messageErrors.length() > 0) {
+            throw new ParseException(messageErrors.toString());
         }
 
         return new NoteEditCommand(

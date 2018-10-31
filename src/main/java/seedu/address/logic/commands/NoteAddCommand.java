@@ -23,6 +23,8 @@ public class NoteAddCommand extends Command {
 
     public static final String COMMAND_WORD = "note add";
 
+    public static final String MESSAGE_MODULE_CODE_DOES_NOT_EXIST = "Module Code %s does not exist in Trajectory.";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a note to Trajectory.\n"
             + "Parameters: "
             + PREFIX_MODULE_CODE + "MODULE_CODE "

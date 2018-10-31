@@ -57,6 +57,8 @@ public class NoteTextEditWindow {
 
             controller.setDialogStage(notePromptStage);
             controller.setNote(note);
+            controller.setUpTextArea();
+            controller.setUpFeedbackLabel();
         } catch (IOException e) {
             e.printStackTrace();
         }
