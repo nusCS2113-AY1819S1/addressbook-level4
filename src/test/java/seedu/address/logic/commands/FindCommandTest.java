@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
@@ -37,6 +38,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.EventContainsKeywordsPredicate;
+import seedu.address.model.user.User;
+import seedu.address.testutil.UserBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -46,9 +49,17 @@ public class FindCommandTest {
             PREFIX_EMAIL, PREFIX_PHONE, PREFIX_VENUE, PREFIX_DATETIME, PREFIX_TAG);
 
     //Setup model and history
-    private Model model = new ModelManager(getTypicalEventManager(), new UserPrefs());
+    private Model model;
     private Model expectedModel = new ModelManager(getTypicalEventManager(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
+
+    @Before
+    public void setUp() {
+        User user = new UserBuilder().build();
+        model = new ModelManager(getTypicalEventManager(), new UserPrefs());
+        model.logUser(user);
+        expectedModel.logUser(new UserBuilder().build());
+    }
 
     @Test
     public void equals() {

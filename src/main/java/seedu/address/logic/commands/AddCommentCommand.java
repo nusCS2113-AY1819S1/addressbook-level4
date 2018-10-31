@@ -39,7 +39,7 @@ public class AddCommentCommand extends Command {
 
     /**
      * @param index of the event in the filtered event list to edit
-     * @param editEventDescriptor details to edit the event with
+     * @param comment details to edit the event with
      */
     public AddCommentCommand(Index index, String comment) {
         requireNonNull(index);
@@ -57,6 +57,11 @@ public class AddCommentCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGIN);
+        }
+
         List<Event> filteredEventList = model.getFilteredEventList();
 
         if (index.getZeroBased() >= filteredEventList.size()) {

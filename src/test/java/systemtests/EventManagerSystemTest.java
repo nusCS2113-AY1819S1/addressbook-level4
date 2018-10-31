@@ -181,7 +181,7 @@ public abstract class EventManagerSystemTest {
      * and the event list panel displays the Events in the model correctly.
      */
     protected void assertApplicationDisplaysExpected(String expectedCommandInput, String expectedResultMessage,
-            Model expectedModel) {
+                                                     Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(new EventManager(expectedModel.getEventManager()), testApp.readStorageAddressBook());
