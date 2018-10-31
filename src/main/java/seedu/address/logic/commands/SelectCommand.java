@@ -38,7 +38,7 @@ public class SelectCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_DATE + "2018-05-24" + "   or  "
             + COMMAND_WORD + " 1 " + PREFIX_MONTH + "05";
 
-    public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Selected Person: %1$s %2$s";
+    public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Selected Person: %1$s";
 
     private final Index targetIndex;
     private final String date;
@@ -83,7 +83,7 @@ public class SelectCommand extends Command {
         model.sortByDate();
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
-        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex.getOneBased(), personName));
+        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex.getOneBased()));
 
     }
 
