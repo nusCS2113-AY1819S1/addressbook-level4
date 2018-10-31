@@ -63,6 +63,18 @@ which can be used as `add n/Grocery shopping`.
 * Parameters can be in any order e.g. if the command specifies `n/NAME m/MONEYFLOW`, `m/MONEYFLOW n/NAME` is also acceptable.
 ====
 
+====
+*Parameter Constraints* [[constraints]]
+
+* `NAME` can be any word, phrase or sentence.
+* `MONEYFLOW` must be made up of only digits, a single "+" or "-" and at most one decimal point.
+* `DATE` is in the form of *dd-mm-yyyy* where *dd* represents day, *mm* represents month and *yyyy* represents the year.
+*dd* and *mm* both require 1 to 2 digits while *yyyy* requires exactly 4 digits.
+* `DATE` entered must also be a valid date, no fake dates e.g. 60-11-2018, 30-02-2018
+* `TAG` is completely optional and can be any alphanumerical word, but limited to only 1 whole word, no whitespaces are allowed.
+* `INDEX` *must be a positive integer* `1, 2, 3, ...`
+====
+
 === Viewing help : `help`
 
 Displays a help page with information on all commands in FinancialPlanner.
@@ -71,30 +83,27 @@ Format: `help`
 
 === Adding a record: `add`
 
-Adds a record to the FinancialPlanner +
+Adds a record of a financial activity to the FinancialPlanner with the given name, date, money earned or spent and tags. +
 Format: `add n/NAME d/DATE m/MONEYFLOW [t/TAG]...` +
 
-MONEYFLOW denotes the money parameter of the financial activity. It can be either a debit (expense) or a credit (income).
-To distinguish between an expense and an income, the user will need to enter a plus "+" or minus "-" sign before the
-money amount. +
+Name denotes the name of the financial activity, moneyflow denotes the money spent or gained in the financial activity
+and date denotes the date the financial activity was completed. Each financial activity can be labelled with any number
+of tags.
 
 ****
-* Typical format for a MONEYFLOW parameter :
-** Typical example of *expense*: add n/PhoneBill d/24-9-2018 m/*-4.50*
-** Typical example of *income*: add n/Allowance d/24-9-2018 m/*+50.00*
+* Moneyflow can be either a debit (expense) or a credit (income).
+* To distinguish between an expense and an income, the user will need to enter a plus "+" or minus "-" sign before the
+money amount.
 ****
-
-[TIP]
-A record can have any number of tags (including 0)
 
 Examples:
 
-* `add n/PaymentToJohn d/20-8-2018 m/-10`
+* `add n/Payment To John d/20-8-2018 m/-10`
 * `add n/PaymentFromBetty t/friend m/+10 d/10-11-2018 t/classmate`
 
 === Listing all records satisfying a criteria : `list`
 
-Shows a list of all records in the record book which fulfills a certain criteria. +
+Shows a list of all records in the financial planner which fulfill a given criteria. +
 There are 3 modes, default mode, single argument mode and dual argument mode. +
 Format: +
 Default mode: `list` +
@@ -102,10 +111,9 @@ Single argument mode: `list d/DATE` +
 Dual argument mode: `list d/START_DATE END_DATE`
 
 ****
-* The default mode will list down all records in the Financial Planner. +
-* The single argument mode will list down all records with the date equal to DATE specified in the format. +
-* The dual argument mode will list down all records with date equal to or later than START_DATE
-and earlier than or equal to END_DATE +
+* Default mode will list down all records in the Financial Planner. +
+* Single argument mode will list down all records with the date specified. +
+* Dual argument mode will list down all records with the date that fall on either dates or between both dates.
 ****
 
 Examples:
@@ -145,7 +153,8 @@ Format: `findtag KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the tags are searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Records with tags matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Records with tags matching at least one keyword will be returned (i.e. `OR` search). e.g. `friends food` will return
+all records tagged with either `friends` or `food`.
 ****
 
 Examples:
@@ -157,13 +166,12 @@ Returns all records having any of the tags `friend`, `food`, or `shopping`
 
 === Selecting a record : `select`
 
-Selects the record identified by the index number used in the displayed record list. +
+Selects the record identified by the specified index number in the displayed record list. +
 Format: `select INDEX`
 
 ****
-* Selects the record and loads the Google search page the record at the specified `INDEX`.
+* Selects the record at `INDEX` and display the record information in a more detailed format.
 * The index refers to the index number shown in the displayed record list.
-* The index *must be a positive integer* `1, 2, 3, ...`
 ****
 
 Examples:
@@ -179,18 +187,18 @@ Selects the 1st record in the results of the `find` command.
 === Sorting displayed records : `sort`
 
 Sorts the list of records in the record book by a category.
-There are 3 categories to sort by `name`, `date`, `moneyflow`/`money` either in ascending order `asc` or
-descending order `desc`. +
+There are 3 categories to sort by `name`, `date`, `moneyflow`/`money` and
+records can be sorted in either ascending order `asc` or descending order `desc`. +
 Format: `sort [CATEGORY] [ORDER]`
 
 ****
 * Only the abovementioned keywords for category and order are supported.
 * Keyword matching is case insensitive, e.g `sort Name Desc` will work the same as `sort name desc`.
-* Sorts the list of records and updates the displayed list of records.
-* At least one of the optional fields must be provided.
-* At most one of each optional field is to be provided.
-* If only a category is specified, the records are sorted in ascending order of that category.
-* If only a sort order is specified, the records are sorted by name in that order.
+* Either one or both of the optionals fields are to be provided.
+* Order of the input fields is not significant, e.g. `sort name asc` will work the same as `sort
+asc name`.
+* If order is not specified, default sort order is ascending.
+* If category is not specified, default sort category is by name.
 ****
 
 Examples:
@@ -209,11 +217,11 @@ Sorts the list of records by moneyflow in descending order.
 
 === Editing a record : `edit`
 
-Edits an existing record in the expense book. +
+Edits an existing record in the financial planner. +
 Format: `edit INDEX [n/NAME] [m/MONEYFLOW] [d/DATE] [t/TAG]...`
 
 ****
-* Edits the record at the specified `INDEX`. The index refers to the index number shown in the displayed record list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the record at the specified `INDEX`. The index refers to the index number shown in the displayed record list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the record will be removed i.e adding of tags is not cumulative.
@@ -223,19 +231,18 @@ Format: `edit INDEX [n/NAME] [m/MONEYFLOW] [d/DATE] [t/TAG]...`
 Examples:
 
 * `edit 1 m/+33 d/28-2-2018` +
-Edits the money flow and date of the 1st record to be `+33` and `28-2-2018` respectively.
+Edits the moneyflow and date of the 1st record to be `+33` and `28-2-2018` respectively.
 * `edit 2 n/Shopping for clothes t/` +
 Edits the name of the 2nd record to be `Shopping for clothes` and clears all existing tags.
 
 === Deleting a record : `delete`
 
-Deletes the specified record from the expense book. +
+Deletes an existing record from the expense book. +
 Format: `delete INDEX`
 
 ****
 * Deletes the record at the specified `INDEX`.
 * The index refers to the index number shown in the displayed record list.
-* The index *must be a positive integer* 1, 2, 3, ...
 ****
 
 Examples:
@@ -247,21 +254,20 @@ Deletes the 2nd record in the expense book.
 `delete 1` +
 Deletes the 1st record in the results of the `find` command.
 
-=== Delete records by same date. `delete_date`
+=== Deleting records by date. `delete_date`
 
-Deletes the records whose date is required from the expense book. +
+Deletes the records with a specified date from the expense book. +
 Format: `delete_date DATE`
 
 ****
 * Deletes records with the specified `DATE`.
-* The date refers to the date of the record.
-* The date must follow the format: dd-mm-yyyy or dd-m-yyyy, and should be a valid date.
+* Date refers to the date of the expected records to be deleted.
 ****
 
 Examples:
 
-* `delete_date 31-03-1999` +
-Deletes the records whose date is 31-03-1999.
+* `delete_date 31-7-2018` +
+Deletes the records with date 31-7-2018.
 
 === Listing entered commands : `history`
 
@@ -323,9 +329,9 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-=== Clearing all entries : `clear`
+=== Clearing all records : `clear`
 
-Clears all entries from the expense book. +
+Clears all records from the expense book. +
 Format: `clear`
 
 === Exiting the program : `exit`
@@ -335,7 +341,7 @@ Format: `exit`
 
 === Saving the data
 
-Financial Planner data are saved in the hard disk automatically after any command that changes the data. +
+All Financial Planner data is saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 == Auto Complete Feature
@@ -347,13 +353,14 @@ A list of possible words will be displayed in a popup-box under the command box 
 * Word suggestions are not case sensitive. e.g. `HEL` will have a possible suggestion `HELP`
 * Possible words that contain the user input can also be suggested. e.g. `tag` will have a possbile suggestion `findtag`
 * Whitespaces are ignored in the input regardless of where they appear.
+* Auto completion is performed word by word.
 ====
 
 image::AutoComplete.png[width="790"]
 
 === Auto Complete for Commands
 
-Commands words that contain the word input by the user will appear as possible suggestions.
+Command words that contain the word input by the user will appear as possible suggestions.
 Refer to <<Features>> and <<morefeatures>> for all possible commands.
 
 ====
@@ -362,9 +369,11 @@ Refer to <<Features>> and <<morefeatures>> for all possible commands.
 
 === Auto Complete for Tags
 
-When the command word `findtag` is entered, additional words typed will display suggestions based on
-tags that currently exist in the FinancialPlanner data as tags of other existing records. Refer to <<findtag>> for
-more information on how the command works.
+When the command word `findtag` has been entered, suggestions will display based on
+tags that currently exist in the FinancialPlanner data as tags of other existing records.
+
+Refer to <<findtag>> for
+more information on how the `findtag` works.
 
 
 ====
@@ -373,12 +382,14 @@ more information on how the command works.
 
 === Auto Complete for Sort
 
-When the command word `sort` is entered, the required inputs are either a `CATEGORY` or a `SORT_ORDER` or both.
-Refer to <<sort>>  for keywords.
+When the command word `sort` is entered, suggestion will display based on the possible keyword inputs for the sort function.
+
+Refer to <<sort>> for the sort function keywords.
 ====
 * When a `CATEGORY` has already been entered, the only possible suggestions are `asc` and `desc` as they are the only
 `SORT_ORDER possible.
 * Likewise, when a `SORT_ORDER` has already been entered, only `CATEGORY` such as `name`, `date` or `money` will be suggested.
+* After two words have been keyed in, no other suggestions will be made as `sort` only takes 2 parameters.
 ====
 
 [[morefeatures]]
@@ -450,7 +461,8 @@ Screenshot of app displaying income breakdown when `stats d/1-1-2018 12-12-2018`
 
 === Export the records into the Excel file. `export_excel`
 
-Exports the records into the Excel file. +
+Exports the records into an Excel file. +
+
 
 There are 3 modes, default mode, single argument mode and dual argument mode. +
 Format: +
@@ -460,40 +472,34 @@ Format: +
 * Dual argument mode: `export_excel d/START_DATE END_DATE`
 
 ****
-* The default mode will list down all records in the Financial Planner and exports all the records in the Excel file. +
-* The single argument mode will list down all records with the date equal to DATE specified in the format and exports all shown records in the Excel file. +
-* The dual argument mode will list down all records with date equal to or later than START_DATE
-and earlier than or equal to END_DATE and exports all shown records in the Excel file. +
+* Default mode will list down all records in the Financial Planner and exports all of them to an Excel file.
+* Single argument mode will list down all records with the specified date and exports all shown records to an
+Excel file.
+* Dual argument mode will list down all records with the date that fall on either dates or between both dates and
+exports all shown records to an Excel file. +
 ****
 
 Examples:
 
 * `export_excel`
-* `export_excel 31-3-1999`
-* `export_excel 31-3-1999 31-03-2019`
+* `export_excel d/31-3-1999`
+* `export_excel d/31-3-1999 31-03-2019`
 
 == Spending Limit Feature
 
-This section describes the limit feature that allows the user to set values to control their future spending.
+This section describes the limit feature that allows users to set values to control their future spending.
+Constraints that apply to records also apply to each limit. Refer to <<constraints>> for more information.
 
-=== Adding a limit: `limit` [Oscar]
+=== Adding a limit: `limit`
 
 Adds a spending limit for a time period to the FinancialPlanner. +
 Format: `limit d/START_DATE END_DATE m/MONEYFLOW` +
 
 START_DATE and END_DATE indicates the starting date and ending date for the limit.
 MONEYFLOW denotes the money limit for that period of time.
-The program will warn the user once the total amount of money spent during this time period exceeds the spending limit.
-For each period of time, there is only one limit. If there is an overlapping time period which already has a limit set
-, the program will throw error.
-Once the limit has been set, the program will keep updating the latest information about
-each limit.
+FinancialPlanner will warn the user once the total amount of money spent during this time period exceeds the spending limit.
 ****
-* START_DATE/END_DATE follow the same configurations as date parameters required when adding records. It is in the form of
-*dd-mm-yyyy* where *dd* represents day, *mm* represents month and *yyyy* represents the year. *dd* and *mm* both require 1 to 2 digits while
-*yyyy* requires exactly 4 digits.
-* MONEYFLOW refers to the limit on total money spent during a time period from START_DATE to END_DATE.
-* MONEYFLOW should only conists of digits.
+* Moneyflow can only be a positive integer, and does not require a "+" or "-".
 * Any date or period of time can only have at most 1 assigned limit.
 ****
 
@@ -501,36 +507,28 @@ Example:
 
 * `limit d/20-8-2018 30-8-2018 m/100`
 
-=== Deleting a limit: `deleteLimit` [Oscar]
+=== Deleting a limit: `deleteLimit`
 
-Deletes a limit from the FinancialPlanner +
+Deletes a spending limit from the FinancialPlanner +
 Format: `deleteLimit d/START_DATE END_DATE` +
 
-The DATE_START and DATE_END are the two elements for limit searching. Since all the limits have
-unique dates, once user input the two dates, the limit with same dates inside the
-limit list will be deleted. If there is no limit sharing the same dates, it will throw error.
-
 ****
-* START_DATE/END_DATE follow the same configurations as date parameters required when adding records. It is in the form of
-*dd-mm-yyyy* where *dd* represents day, *mm* represents month and *yyyy* represents the year. *dd* and *mm* both require 1 to 2 digits while
-*yyyy* requires exactly 4 digits.
+* `START_DATE/END_DATE` must match exactly the same as when the limit was created.
+* Limits cannot be partially deleted with incorrect dates.
 ****
 
 Examples:
 
 * `deleteLimit d/20-8-2018 30-8-2018`
 
-=== Editing a limit: `editLimit` [Oscar]
+=== Editing a limit: `editLimit`
 
 Edit a limit to the FinancialPlanner +
-Format: `editLimit d/DATE_START DATE_END m/MONEYFLOW` +
+Format: `editLimit d/START_DATE END_DATE m/MONEYFLOW` +
 
-This command will edit an existing limit inside the limit list according to the
-two dates. The newly input Money will replace the original money limit. If there is no limit
-for that period of time, the program will return error.
 ****
-* Typical format for a Limit MONEYFLOW parameter :"200"
-** Typical example of *expense*: editLimit d/24-9-2018 25-9-2018 m/*200*
+* `MONEYFLOW` can only be a positive integer, and does not require a "+" or "-".
+* `START_DATE/END_DATE` must be exactly the same as when the limit was created. 
 ****
 
 Examples:
