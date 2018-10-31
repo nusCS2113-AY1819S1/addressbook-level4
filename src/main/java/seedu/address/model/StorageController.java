@@ -10,6 +10,7 @@ import seedu.address.storage.adapter.XmlAdaptedClassroom;
 import seedu.address.storage.adapter.XmlAdaptedClassroomAttendance;
 import seedu.address.storage.adapter.XmlAdaptedCourse;
 import seedu.address.storage.adapter.XmlAdaptedGradebook;
+import seedu.address.storage.adapter.XmlAdaptedGrades;
 import seedu.address.storage.adapter.XmlAdaptedModule;
 import seedu.address.storage.adapter.XmlAdaptedNote;
 import seedu.address.storage.adapter.XmlAdaptedStudentModule;
@@ -17,6 +18,7 @@ import seedu.address.storage.adapter.XmlAdaptedUser;
 import seedu.address.storage.serializable.XmlSerializableClassroomAttendanceList;
 import seedu.address.storage.serializable.XmlSerializableClassroomList;
 import seedu.address.storage.serializable.XmlSerializableCourseList;
+import seedu.address.storage.serializable.XmlSerializableGradeList;
 import seedu.address.storage.serializable.XmlSerializableGradebookList;
 import seedu.address.storage.serializable.XmlSerializableModuleList;
 import seedu.address.storage.serializable.XmlSerializableNoteList;
@@ -34,6 +36,7 @@ public class StorageController {
     private static final String STORAGE_GRADEBOOK = BASE_DIRECTORY + "gradebook.xml";
     private static final String STORAGE_NOTES = BASE_DIRECTORY + "notes.xml";
     private static final String STORAGE_USERS = BASE_DIRECTORY + "users.xml";
+    private static final String STORAGE_GRADES = BASE_DIRECTORY + "grades.xml";
 
     private static final String STORAGE_STUDENT_MODULE = BASE_DIRECTORY + "studentModule.xml";
     private static final String STORAGE_CLASS_ATTENDANCE = BASE_DIRECTORY + "classAttendance.xml";
@@ -44,6 +47,7 @@ public class StorageController {
     private static ArrayList<XmlAdaptedGradebook> gradebookStorage = new ArrayList<>();
     private static ArrayList<XmlAdaptedNote> noteStorage = new ArrayList<>();
     private static ArrayList<XmlAdaptedUser> userStorage = new ArrayList<>();
+    private static ArrayList<XmlAdaptedGrades> gradesStorage = new ArrayList<>();
 
     private static ArrayList<XmlAdaptedStudentModule> studentModuleStorage = new ArrayList<>();
     private static ArrayList<XmlAdaptedClassroomAttendance> classAttendanceStorage = new ArrayList<>();
@@ -87,6 +91,9 @@ public class StorageController {
                             XmlSerializableClassroomAttendanceList.class);
             classAttendanceStorage = classroomAttendanceList.getClassroomAttendanceList();
 
+            XmlSerializableGradeList gradeSerializable = XmlUtil.getDataFromFile(Paths.get(STORAGE_GRADES),
+                    XmlSerializableGradeList.class);
+            gradesStorage = gradeSerializable.getGradeList();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -104,6 +111,8 @@ public class StorageController {
         File users = new File(STORAGE_USERS);
         File studentModule = new File(STORAGE_STUDENT_MODULE);
         File classAttendance = new File(STORAGE_CLASS_ATTENDANCE);
+        File grades = new File(STORAGE_GRADES);
+
         try {
             classes.createNewFile();
             courses.createNewFile();
@@ -113,6 +122,7 @@ public class StorageController {
             users.createNewFile();
             studentModule.createNewFile();
             classAttendance.createNewFile();
+            grades.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -155,6 +165,11 @@ public class StorageController {
                     new XmlSerializableClassroomAttendanceList();
             classroomAttendanceList.setClassroomAttendanceList(classAttendanceStorage);
             XmlUtil.saveDataToFile(Paths.get(STORAGE_CLASS_ATTENDANCE), classroomAttendanceList);
+
+            XmlSerializableGradeList gradeList = new XmlSerializableGradeList();
+            gradeList.setGradeList(gradesStorage);
+            XmlUtil.saveDataToFile(Paths.get(STORAGE_GRADES), gradeList);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -222,5 +237,14 @@ public class StorageController {
 
     public static void setClassAttendanceStorage(ArrayList<XmlAdaptedClassroomAttendance> classAttendanceStorage) {
         StorageController.classAttendanceStorage = classAttendanceStorage;
+    }
+
+    public static ArrayList<XmlAdaptedGrades> getGradeStorage() {
+        return gradesStorage;
+    }
+
+    public static void setGradeStorage(ArrayList<XmlAdaptedGrades> gradesStorage) {
+        StorageController.gradesStorage = gradesStorage;
+
     }
 }
