@@ -4,8 +4,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT;
 
 import seedu.address.logic.commands.AddTransactionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.timeidentifiedclass.transaction.Transaction;
-import seedu.address.model.timeidentifiedclass.transaction.exceptions.ClosedTransactionException;
+import seedu.address.model.timeidentifiedclass.Transaction;
+import seedu.address.model.timeidentifiedclass.exceptions.ClosedTransactionException;
 
 /**
  * Parses input arguments and creates a new AddTransactionCommand object

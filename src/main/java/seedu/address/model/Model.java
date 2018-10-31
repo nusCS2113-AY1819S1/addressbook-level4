@@ -14,12 +14,11 @@ import seedu.address.model.login.exceptions.AuthenticatedException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 import seedu.address.model.product.Product;
+import seedu.address.model.timeidentifiedclass.Reminder;
+import seedu.address.model.timeidentifiedclass.Transaction;
+import seedu.address.model.timeidentifiedclass.exceptions.DuplicateReminderException;
+import seedu.address.model.timeidentifiedclass.exceptions.DuplicateTransactionException;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
-import seedu.address.model.timeidentifiedclass.shopday.Reminder;
-import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
-import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateReminderException;
-import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
-import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
 /**
  * The API of the Model component.
@@ -164,10 +163,9 @@ public interface Model {
      * @param transaction
      * @throws InvalidTimeFormatException
      * @throws DuplicateTransactionException
-     * @throws ClosedShopDayException
      */
     void addTransaction(Transaction transaction) throws InvalidTimeFormatException,
-            DuplicateTransactionException, ClosedShopDayException;
+            DuplicateTransactionException;
 
     /**
      * Adds a reminder to the active business day.
@@ -179,31 +177,31 @@ public interface Model {
 
     /**
      * Removes a reminder from the active business day.
-     * @param reminder
+     * @param reminderTime
      * @throws InvalidTimeFormatException
      * @throws NoSuchElementException
      */
-    void removeReminder(Reminder reminder) throws InvalidTimeFormatException, NoSuchElementException;
+    void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException;
+
+    /**
+     * Returns ALL the reminders
+     */
+    ArrayList<Reminder> getAllReminders();
 
     /**
      * Returns the reminders due on the current active day.
      */
-    ArrayList<Reminder> getDueRemindersInActiveBusinessDay();
+    ArrayList<Reminder> getOverdueReminders();
 
     /**
      * Returns the reminders that have not been shown by the thread.
      */
-    ArrayList<Reminder> getDueRemindersInActiveBusinessDayForThread();
+    ArrayList<Reminder> getOverdueRemindersForThread();
 
     /**
      * Returns a given day's transaction history
      */
-    String getDaysHistory(String day);
-
-    /**
-     * Returns the active day's transaction history
-     */
-    String getActiveDayHistory();
+    String getDaysTransactions(String day) throws InvalidTimeFormatException;
 
     /**
      * Returns the latest transaction.

@@ -1,4 +1,4 @@
-package seedu.address.model.timeidentifiedclass.transaction;
+package seedu.address.model.timeidentifiedclass;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -8,10 +8,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import seedu.address.model.timeidentifiedclass.TimeIdentifiedClass;
+import seedu.address.model.timeidentifiedclass.exceptions.ClosedTransactionException;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
-import seedu.address.model.timeidentifiedclass.transaction.exceptions.ClosedTransactionException;
-
 
 /**
  * A basic Transaction class, where the Product is taken to be a string. This will be updated with actual Product
@@ -30,7 +28,7 @@ public class Transaction extends TimeIdentifiedClass {
     }
 
     /**
-     * Constructor to create transaction with given parameters. Used for reading from file.
+     * Constructor to create transaction with given parameters.
      * @param transactionTime
      * @param transactionRecord
      * @throws InvalidTimeFormatException
@@ -45,6 +43,21 @@ public class Transaction extends TimeIdentifiedClass {
         }
         this.transactionTime = transactionTime;
         this.transactionRecord = transactionRecord;
+    }
+
+    /**
+     * Constructor to create a transaction object for a given time with an empty transaction record.
+     * @param transactionTime
+     * @throws InvalidTimeFormatException
+     */
+    public Transaction(String transactionTime) throws InvalidTimeFormatException {
+        requireNonNull(transactionTime);
+
+        if (!isValidTransactionTime(transactionTime)) {
+            throw new InvalidTimeFormatException();
+        }
+        this.transactionTime = transactionTime;
+        this.transactionRecord = new TreeMap<>();
     }
 
     public String getTransactionTime() {
@@ -96,10 +109,12 @@ public class Transaction extends TimeIdentifiedClass {
         Iterator it = set.iterator();
 
         ret.append("================== Transaction Record " + this.getTransactionTime() + "==================\n");
-        ret.append("ITEM\tQTY\n");
+        ret.append("PRODUCT NAME: QUANTITY\n");
         while (it.hasNext()) {
             Map.Entry entry = (Map.Entry) it.next();
-            ret.append(entry.getKey() + "\t\t" + entry.getValue() + "\n");
+            if (entry.getKey() != null && !entry.equals("")) {
+                ret.append(entry.getKey() + ": " + entry.getValue() + "\n");
+            }
         }
         ret.trimToSize();
         return ret.toString();

@@ -1,9 +1,8 @@
-package seedu.address.model.timeidentifiedclass.shopday;
+package seedu.address.model.timeidentifiedclass;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import seedu.address.model.timeidentifiedclass.TimeIdentifiedClass;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
 
 /**
@@ -15,7 +14,7 @@ public class Reminder extends TimeIdentifiedClass {
 
     private String time;
     private String reminderMessage;
-    private boolean hasShownByThread;
+    private boolean hasBeenShownByThread;
 
     /**
      * Constructor to set a reminder with time and reminder message.
@@ -26,25 +25,31 @@ public class Reminder extends TimeIdentifiedClass {
     public Reminder(String time, String reminderMessage) throws InvalidTimeFormatException {
         requireAllNonNull(time, reminderMessage);
         time = time.trim();
-        // Reminders are set with in date and time format.
-        if (!super.isValidDateAndTime(time)) {
+
+        if (!isValidReminderTime(time)) {
             throw new InvalidTimeFormatException();
         }
         this.time = time;
         this.reminderMessage = reminderMessage.trim();
-        this.hasShownByThread = false;
+        this.hasBeenShownByThread = false;
     }
 
-    public String getMessage() {
+    /**
+     * No parameter constructor for tests
+     */
+    protected Reminder() {}
+
+    public String getReminderMessage() {
         return reminderMessage;
     }
 
-    public String getTime() {
+    public String getReminderTime() {
         return time;
     }
 
     /**
-     * The following method allows us to change the time for a reminder.
+     * The following method allows us to change the time for a reminder. It also resets the
+     * {@code hasBeenShownByThread} after changing the time.
      * @param time
      * @throws InvalidTimeFormatException
      */
@@ -55,6 +60,7 @@ public class Reminder extends TimeIdentifiedClass {
             throw new InvalidTimeFormatException();
         }
         this.time = time;
+        this.hasBeenShownByThread = false;
     }
 
     public void changeMessage(String newMessage) {
@@ -62,10 +68,18 @@ public class Reminder extends TimeIdentifiedClass {
     }
 
     public boolean hasBeenShownByThread() {
-        return hasShownByThread;
+        return hasBeenShownByThread;
     }
 
     public void declareAsShownByThread() {
-        hasShownByThread = true;
+        hasBeenShownByThread = true;
+    }
+
+    /**
+     * The given method checks if the {@code reminderTim} is in the required day and time format.
+     * @param reminderTime
+     */
+    public static boolean isValidReminderTime(String reminderTime) {
+        return isValidDateAndTime(reminderTime);
     }
 }

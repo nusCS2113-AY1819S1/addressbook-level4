@@ -1,136 +1,212 @@
 package seedu.address.model.saleshistory;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Set;
 import java.util.TreeMap;
 
-import seedu.address.model.saleshistory.exceptions.DuplicateDayException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import seedu.address.model.timeidentifiedclass.Reminder;
+import seedu.address.model.timeidentifiedclass.TimeIdentifiedClass;
+import seedu.address.model.timeidentifiedclass.Transaction;
+import seedu.address.model.timeidentifiedclass.exceptions.DuplicateReminderException;
+import seedu.address.model.timeidentifiedclass.exceptions.DuplicateTransactionException;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
-import seedu.address.model.timeidentifiedclass.shopday.BusinessDay;
-import seedu.address.model.timeidentifiedclass.shopday.Reminder;
-import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
-import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
-import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
 /**
- * This class stores all the shopDay objects, with their contained transactions. Each day must have a unique date.
+ * This class stores all the transactions and reminders. Each day and reminder must have a unique date.
  */
-public class SalesHistory {
-    private TreeMap<String, BusinessDay> salesHistory;
-    private BusinessDay activeDay;
+public class SalesHistory implements ReadOnlySalesHistory {
+    private TreeMap<String, Transaction> transactionRecord;
+    private TreeMap<String, Reminder> reminderRecord;
+    private ObservableList<Transaction> transactionObservableList;
+    private ObservableList<Reminder> reminderObservableList;
 
     /**
-     * The following constructor creates a blank sales history, with today automatically inserted.
+     * The following constructor creates a blank sales history.
      */
-
     public SalesHistory() {
-        this.salesHistory = new TreeMap<>();
-        activeDay = new BusinessDay();
-        salesHistory.put(activeDay.getDay(), activeDay);
+        this.transactionRecord = new TreeMap<>();
+        this.reminderRecord = new TreeMap<>();
+        this.transactionObservableList = FXCollections.observableArrayList();
+        this.reminderObservableList = FXCollections.observableArrayList();
     }
 
     /**
-     * The following constructor is to facilitate reading sales history from files.
-     * @param salesHistory
+     * Creates {@code SalesHistory} given {@code transactionRecord} and {@code salesHistory}
      */
+    public SalesHistory(TreeMap<String, Transaction> transactionRecord, TreeMap<String, Reminder> reminderRecord) {
+        requireAllNonNull(transactionRecord, reminderRecord);
+        this.transactionRecord = transactionRecord;
+        this.reminderRecord = reminderRecord;
+        this.transactionObservableList = FXCollections.observableArrayList();
+        this.reminderObservableList = FXCollections.observableArrayList();
 
-    public SalesHistory(TreeMap<String, BusinessDay> salesHistory) {
-        this.salesHistory = salesHistory;
-        BusinessDay today = new BusinessDay();
-        if (!salesHistory.containsKey(today.getDay())) {
-            salesHistory.put(today.getDay(), today);
+        Iterator it = reminderRecord.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry entry = (Map.Entry) it.next();
+            reminderObservableList.add((Reminder) entry.getValue());
         }
+
+        it = transactionRecord.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry entry = (Map.Entry) it.next();
+            transactionObservableList.add((Transaction) entry.getValue());
+        }
+
     }
 
     /**
-     * This method adds a day to the sales history.
-     * @param day
-     * @throws DuplicateDayException
+     * Constructor using {@code ReadOnlySalesHistory} object.
      */
-    public void addDay(BusinessDay day) throws DuplicateDayException {
-        if (salesHistory.containsKey(day.getDay())) {
-            throw new DuplicateDayException();
-        }
-        salesHistory.put(day.getDay(), day);
+    public SalesHistory(ReadOnlySalesHistory toBeCopied) {
+        this();
+        requireNonNull(toBeCopied);
+        copyReadOnlySalesHistory(toBeCopied);
     }
 
     /**
-     * The following method adds a day to the sales history.
-     * @param day
-     * @throws DuplicateDayException
-     * @throws InvalidTimeFormatException
+     * Copies the {@code toBeCopied} to the {@code SalesHistory}
+     * @param toBeCopied
      */
-    public void addDay(String day) throws DuplicateDayException,
-            InvalidTimeFormatException {
-        if (salesHistory.containsKey(day)) {
-            throw new DuplicateDayException();
+    private void copyReadOnlySalesHistory(ReadOnlySalesHistory toBeCopied) {
+        for (Transaction transaction : toBeCopied.getTransactionsAsObservableList()) {
+            // These exceptions should never be thrown. Printing the stack trace will help debugging.
+            try {
+                addTransaction(transaction);
+            } catch (InvalidTimeFormatException e) {
+                e.printStackTrace();
+            } catch (DuplicateTransactionException e) {
+                e.printStackTrace();
+            }
         }
-        BusinessDay toBeAdded = null;
-        try {
-            toBeAdded = new BusinessDay(day);
-        } catch (InvalidTimeFormatException e) {
-            throw e;
-        }
-    }
-
-    public BusinessDay getDaysHistory(String day) throws NoSuchElementException {
-        try {
-            return salesHistory.get(day);
-        } catch (NullPointerException e) {
-            throw new NoSuchElementException();
-        }
-    }
-
-    public BusinessDay getActiveDay() throws NoSuchElementException {
-        try {
-            return getDaysHistory(activeDay.getDay());
-        } catch (NoSuchElementException e) {
-            throw e;
+        for (Reminder reminder : toBeCopied.getRemindersAsObservableList()) {
+            // These exceptions should never be thrown. Printing the stack trace will help debugging.
+            try {
+                addReminder(reminder);
+            } catch (InvalidTimeFormatException e) {
+                e.printStackTrace();
+            } catch (DuplicateReminderException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    public void setActiveDay(BusinessDay day) {
-        try {
-            addDay(day);
-            activeDay = salesHistory.get(day.getDay());
-        } catch (DuplicateDayException e) {
-            activeDay = salesHistory.get(day.getDay());
-        }
+    public TreeMap<String, Transaction> getTransactionRecord() {
+        return transactionRecord;
     }
 
+    public TreeMap<String, Reminder> getReminderRecord() {
+        return reminderRecord;
+    }
+
+    public ArrayList<Transaction> getDaysTransactions(String day) throws InvalidTimeFormatException {
+        requireNonNull(day);
+        day = day.trim();
+
+        if (!TimeIdentifiedClass.isValidDay(day)) {
+            throw new InvalidTimeFormatException();
+        }
+
+        final String initialTime = day + " 00:00:00";
+        final String finalTime = day + " 24:00:00";
+
+        // To get the day's transactions...
+        ArrayList<Transaction> daysTransactions = new ArrayList<>();
+        Set transactionSet = transactionRecord.subMap(initialTime, finalTime).entrySet();
+        Iterator it = transactionSet.iterator();
+
+        while (it.hasNext()) {
+            Map.Entry entry = (Map.Entry) it.next();
+            daysTransactions.add((Transaction) entry.getValue());
+        }
+        return daysTransactions;
+    }
 
     /**
-     * The following method adds a transaction to the active day.
+     * The following method adds a transaction with a valid and unique time to the {@code transactionRecord}.
      * @param transaction
+     * @throws InvalidTimeFormatException
+     * @throws DuplicateTransactionException
      */
-    public void addTransaction(Transaction transaction) throws
-            InvalidTimeFormatException,
-            ClosedShopDayException,
+    public void addTransaction(Transaction transaction) throws InvalidTimeFormatException,
             DuplicateTransactionException {
-        try {
-            activeDay.addTransaction(transaction);
-        } catch (InvalidTimeFormatException e) {
-            throw e;
-        } catch (ClosedShopDayException e) {
-            throw e;
-        } catch (DuplicateTransactionException e) {
-            throw e;
+        requireNonNull(transaction);
+        if (!Transaction.isValidTransactionTime(transaction.getTransactionTime())) {
+            throw new InvalidTimeFormatException();
         }
+        if (transactionRecord.containsKey(transaction.getTransactionTime())) {
+            throw new DuplicateTransactionException();
+        }
+        transactionRecord.put(transaction.getTransactionTime(), transaction);
+        transactionObservableList.add(transaction);
+    }
+
+    /**
+     * The following method adds a {@code reminder} with a valid and unique time to the {@code reminderRecord}.
+     * @param reminder
+     * @throws InvalidTimeFormatException
+     * @throws DuplicateReminderException
+     */
+    public void addReminder(Reminder reminder) throws InvalidTimeFormatException, DuplicateReminderException {
+        requireNonNull(reminder);
+        if (!Reminder.isValidReminderTime(reminder.getReminderTime())) {
+            throw new InvalidTimeFormatException();
+        }
+        if (reminderRecord.containsKey(reminder.getReminderTime())) {
+            throw new DuplicateReminderException();
+        }
+        reminderRecord.put(reminder.getReminderTime(), reminder);
+        reminderObservableList.add(reminder);
     }
 
     /**
      * Removes given {@code reminder} from the sales history.
-     * TODO Make this work for more than just the {@code activeDay}
-     * @param reminder
+     * @param reminderTime
      * @throws InvalidTimeFormatException
      * @throws NoSuchElementException
      */
-    public void removeReminder(Reminder reminder) throws InvalidTimeFormatException, NoSuchElementException {
-        try {
-            activeDay.removeReminder(reminder);
-        } catch (InvalidTimeFormatException e) {
-            throw e;
-        } catch (NoSuchElementException e) {
-            throw e;
+    public void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException {
+        requireNonNull(reminderTime);
+        reminderTime = reminderTime.trim();
+
+        if (!Reminder.isValidReminderTime(reminderTime)) {
+            throw new InvalidTimeFormatException();
         }
+
+        if (!reminderRecord.containsKey(reminderTime)) {
+            throw new NoSuchElementException();
+        }
+
+        Reminder toRemove = reminderRecord.get(reminderTime);
+        reminderRecord.remove(reminderTime);
+        reminderObservableList.remove(toRemove);
+    }
+
+    /**
+     * Resets the {@code SalesHistory} according to a {@code ReadOnlySalesHistory} object
+     * @param src
+     */
+    public void resetData(ReadOnlySalesHistory src) {
+        transactionRecord.clear();
+        reminderRecord.clear();
+        copyReadOnlySalesHistory(src);
+    }
+
+    @Override
+    public ObservableList<Transaction> getTransactionsAsObservableList() {
+        return FXCollections.unmodifiableObservableList(transactionObservableList);
+    }
+
+    @Override
+    public ObservableList<Reminder> getRemindersAsObservableList() {
+        return FXCollections.unmodifiableObservableList(reminderObservableList);
     }
 }

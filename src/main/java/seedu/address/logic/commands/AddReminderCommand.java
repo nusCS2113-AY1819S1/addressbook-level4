@@ -7,9 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.timeidentifiedclass.Reminder;
+import seedu.address.model.timeidentifiedclass.exceptions.DuplicateReminderException;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
-import seedu.address.model.timeidentifiedclass.shopday.Reminder;
-import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateReminderException;
 
 /**
  * Adds a reminder to the Address Book.
@@ -43,7 +43,7 @@ public class AddReminderCommand extends Command {
             return new CommandResult(e.getExceptionMessage());
         }
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getMessage(), toAdd.getTime()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getReminderMessage(), toAdd.getReminderTime()));
     }
 
     @Override

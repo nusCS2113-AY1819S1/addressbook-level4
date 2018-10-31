@@ -35,12 +35,14 @@ import seedu.address.model.util.SampleUsersUtil;
 import seedu.address.storage.DistributorBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.ProductDatabaseStorage;
+import seedu.address.storage.SalesHistoryStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserDatabaseStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlDistributorBookStorage;
 import seedu.address.storage.XmlProductDatabaseStorage;
+import seedu.address.storage.XmlSalesHistoryStorage;
 import seedu.address.storage.XmlUserDatabaseStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
@@ -64,7 +66,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing Inventori PRO ]===========================");
+        logger.info("=============================[ Initializing Inventarie PRO ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -77,10 +79,12 @@ public class MainApp extends Application {
                 new XmlUserDatabaseStorage(userPrefs.getUsersFilePath());
         ProductDatabaseStorage productDatabaseStorage =
                 new XmlProductDatabaseStorage(userPrefs.getAddressBookFilePath());
+        SalesHistoryStorage salesHistoryStorage =
+                new XmlSalesHistoryStorage(userPrefs.getSalesHistoryFilePath());
         DistributorBookStorage distributorBookStorage =
                 new XmlDistributorBookStorage(userPrefs.getDistributorBookFilePath());
-        storage = new StorageManager(productDatabaseStorage, distributorBookStorage, userPrefsStorage, usersStorage);
-
+        storage = new StorageManager(productDatabaseStorage, distributorBookStorage,
+                userPrefsStorage, usersStorage, salesHistoryStorage);
 
         initLogging(config);
 

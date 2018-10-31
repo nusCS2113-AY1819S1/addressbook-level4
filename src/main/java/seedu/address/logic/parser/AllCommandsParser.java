@@ -21,7 +21,6 @@ import seedu.address.logic.commands.EditDistributorCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindDistributorCommand;
-import seedu.address.logic.commands.FinishedReminderCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -31,10 +30,12 @@ import seedu.address.logic.commands.LogoutCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RedoDistributorCommand;
 import seedu.address.logic.commands.RegisterCommand;
+import seedu.address.logic.commands.RemoveReminderCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.ThreadDueRemindersCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UndoDistributorCommand;
+import seedu.address.logic.commands.ViewAllRemindersCommand;
 import seedu.address.logic.commands.ViewDueRemindersCommand;
 import seedu.address.logic.commands.ViewLastTransactionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -42,7 +43,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class AllCommandsParser {
 
     /**
      * Used for initial separation of command word and args.
@@ -147,7 +148,7 @@ public class AddressBookParser {
         case AddReminderCommand.COMMAND_WORD:
             return new AddReminderCommandParser().parse(arguments);
 
-        case FinishedReminderCommand.COMMAND_WORD:
+        case RemoveReminderCommand.COMMAND_WORD:
             return new FinishedReminderCommandParser().parse(arguments);
 
         case ViewDueRemindersCommand.COMMAND_WORD:
@@ -155,6 +156,9 @@ public class AddressBookParser {
 
         case ThreadDueRemindersCommand.COMMAND_WORD:
             return new ThreadDueRemindersCommand();
+
+        case ViewAllRemindersCommand.COMMAND_WORD:
+            return new ViewAllRemindersCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
