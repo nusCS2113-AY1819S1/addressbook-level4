@@ -3,6 +3,12 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
+== PROJECT: JitHub
+
+== Overview
+
+This portfolio is written to document the software engineering process of CS2113T.
+
 == Role: Developer
 
 Code contribution and add extra features on existing addressbook level 4
@@ -10,8 +16,6 @@ Code contribution and add extra features on existing addressbook level 4
 == Responsibility: Integration and Testing
 
 Overlook version control of the project and ensure that individual software modules are combined and tested as a group.
-
-== PROJECT: JitHub
 
 ---
 
@@ -29,7 +33,7 @@ JitHub is a desktop personal assistant application that allows students to manag
 
 * *Minor enhancement*: added a calendar view where users can view their schedules, enhancing the overall user interface.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]]
+* *Sample Code contributed*: [https://github.com/CS2113-AY1819S1-W12-1/main/blob/master/src/main/java/seedu/address/logic/commands/TodoCommand.java[Functional code]] [https://github.com/CS2113-AY1819S1-W12-1/main/blob/master/src/test/java/seedu/address/logic/commands/TodoCommandTest.java[Test code]]
 
 * *Other contributions*:
 
@@ -54,7 +58,7 @@ JitHub is a desktop personal assistant application that allows students to manag
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc#add-to-do-task-code-todo-code
+include::../UserGuide.adoc[tag=#add-to-do-task-code-todo-code]
 
 == Contributions to the Developer Guide
 
@@ -62,7 +66,7 @@ include::../UserGuide.adoc#add-to-do-task-code-todo-code
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc#todo-feature
+include::../DeveloperGuide.adoc[tag=#todo-feature]
 
 
 == PROJECT: PowerPointLabs
