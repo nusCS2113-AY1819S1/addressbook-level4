@@ -16,13 +16,13 @@ import javafx.scene.control.TextField;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 
+/**
+ * This object creates the binding for the auto complete popup to the commandBox
+ * and handles whenever there is a change in the user input by updating the suggestions
+ * and inserts the new suggested text when selected by the user.
+ */
 public class NewAutoCompletionBinding<T> {
 
-    /***************************************************************************
-     *                                                                         *
-     * Private fields                                                          *
-     *                                                                         *
-     **************************************************************************/
     private final Node completionTarget;
     private final AutoCompletePopup<T> autoCompletionPopup;
     private final Object suggestionsTaskLock = new Object();
@@ -52,15 +52,10 @@ public class NewAutoCompletionBinding<T> {
         };
     }
 
-    /***************************************************************************
-     *                                                                         *
-     * Constructors                                                            *
-     *                                                                         *
-     **************************************************************************/
-
     public NewAutoCompletionBinding(TextField textField,
                                     Callback<AutoCompletionBinding.ISuggestionRequest,
                                             Collection<T>> suggestionProvider) {
+
         this(textField, suggestionProvider, defaultStringConverter());
     }
 
@@ -72,7 +67,8 @@ public class NewAutoCompletionBinding<T> {
      * @param converter The converter to be used to convert suggestions to strings
      */
     protected NewAutoCompletionBinding(Node completionTarget,
-                                       Callback<AutoCompletionBinding.ISuggestionRequest, Collection<T>> suggestionProvider,
+                                       Callback<AutoCompletionBinding.ISuggestionRequest,
+                                               Collection<T>> suggestionProvider,
                                        StringConverter<T> converter){
 
         this.completionTarget = completionTarget;
@@ -95,12 +91,10 @@ public class NewAutoCompletionBinding<T> {
         getCompletionTarget().focusedProperty().addListener(focusChangedListener);
     }
 
-    /***************************************************************************
-     *                                                                         *
-     * Public API                                                              *
-     *                                                                         *
-     **************************************************************************/
-
+    /**
+     * Specifies the number of suggested strings that should appear under the Textfield
+     * @param value
+     */
     public final void setVisibleRowCount(int value) {
         autoCompletionPopup.setVisibleRowCount(value);
     }
@@ -108,7 +102,6 @@ public class NewAutoCompletionBinding<T> {
     /**
      * Specifies whether the PopupWindow should be hidden when an unhandled
      * escape key is pressed while the popup has focus.
-     *
      * @param value
      */
     public void setHideOnEscape(boolean value) {
@@ -141,18 +134,11 @@ public class NewAutoCompletionBinding<T> {
         getCompletionTarget().focusedProperty().removeListener(focusChangedListener);
     }
 
-    /***************************************************************************
-     *                                                                         *
-     * Protected methods                                                       *
-     *                                                                         *
-     **************************************************************************/
-
     /**
      * Complete the current user-input with the provided completion.
-     * Sub-classes have to provide a concrete implementation.
      * @param completion
      */
-    protected void completeUserInput(T completion) {
+    private void completeUserInput(T completion) {
         String newText = oldText + converter.toString(completion);
         getCompletionTarget().setText(newText);
         getCompletionTarget().positionCaret(newText.length());
@@ -161,7 +147,7 @@ public class NewAutoCompletionBinding<T> {
     /**
      * Show the auto completion popup
      */
-    protected void showPopup(){
+    private void showPopup(){
         autoCompletionPopup.show(completionTarget);
         selectFirstSuggestion(autoCompletionPopup);
     }
@@ -169,28 +155,19 @@ public class NewAutoCompletionBinding<T> {
     /**
      * Hide the auto completion targets
      */
-    protected void hidePopup(){
-        autoCompletionPopup.hide();
-    }
-
-
-    /***************************************************************************
-     *                                                                         *
-     * Private methods                                                         *
-     *                                                                         *
-     **************************************************************************/
+    private void hidePopup(){ autoCompletionPopup.hide(); }
 
     /**
      * Selects the first suggestion (if any), so the user can choose it
      * by pressing enter immediately.
      */
-    private void selectFirstSuggestion(AutoCompletePopup<?> autoCompletionPopup){
+    private void selectFirstSuggestion(AutoCompletePopup<?> autoCompletionPopup) {
         Skin<?> skin = autoCompletionPopup.getSkin();
-        if(skin instanceof AutoCompletePopupSkin){
-            AutoCompletePopupSkin<?> au = (AutoCompletePopupSkin<?>)skin;
-            ListView<?> li = (ListView<?>)au.getNode();
-            if(li.getItems() != null && !li.getItems().isEmpty()){
-                li.getSelectionModel().select(0);
+        if (skin instanceof AutoCompletePopupSkin) {
+            AutoCompletePopupSkin<?> AutoCompleteSkin = (AutoCompletePopupSkin<?>) skin;
+            ListView<?> list = (ListView<?>) AutoCompleteSkin.getNode();
+            if (list.getItems() != null && !list.getItems().isEmpty()){
+                list.getSelectionModel().select(0);
             }
         }
     }
@@ -199,9 +176,9 @@ public class NewAutoCompletionBinding<T> {
      * Occurs when the user text has changed and the suggestions require an update
      * @param userText
      */
-    private final void onUserInputChanged(final String userText){
+    private final void onUserInputChanged(final String userText) {
         synchronized (suggestionsTaskLock) {
-            if(suggestionsTask != null && suggestionsTask.isRunning()){
+            if(suggestionsTask != null && suggestionsTask.isRunning()) {
                 // cancel the current running task
                 suggestionsTask.cancel();
             }
@@ -212,33 +189,21 @@ public class NewAutoCompletionBinding<T> {
     }
 
     /**
-     * Shall changes to the user input be ignored?
+     * Boolean that specifies if the user's changes to the input can be ignored.
      * @return
      */
-    private boolean isIgnoreInputChanges(){
-        return ignoreInputChanges;
-    }
+    private boolean isIgnoreInputChanges(){ return ignoreInputChanges; }
 
     /**
      * If IgnoreInputChanges is set to true, all changes to the user input are
-     * ignored. This is primary used to avoid self triggering while
-     * auto completing.
+     * ignored. This is used to avoid self triggering while auto completing.
      * @param state
      */
-    private void setIgnoreInputChanges(boolean state){
-        ignoreInputChanges = state;
-    }
-
-    /***************************************************************************
-     *                                                                         *
-     * Inner classes and interfaces                                            *
-     *                                                                         *
-     **************************************************************************/
+    private void setIgnoreInputChanges(boolean state){ ignoreInputChanges = state; }
 
     /**
      * This task is responsible to fetch suggestions asynchronous
      * by using the current defined suggestionProvider
-     *
      */
     private class FetchSuggestionsTask extends Task<Void> implements AutoCompletionBinding.ISuggestionRequest {
         private final String userText;
@@ -250,7 +215,7 @@ public class NewAutoCompletionBinding<T> {
         @Override
         protected Void call() {
             Callback<AutoCompletionBinding.ISuggestionRequest, Collection<T>> provider = suggestionProvider;
-            if(provider != null){
+            if(provider != null) {
                 final Collection<T> fetchedSuggestions = provider.call(this);
                 if(!isCancelled()) {
                     Platform.runLater(() -> {
@@ -275,12 +240,12 @@ public class NewAutoCompletionBinding<T> {
         }
     }
 
-    /***************************************************************************
-     *                                                                         *
-     * Listeners                                                               *
-     *                                                                         *
-     **************************************************************************/
-
+    /**
+     * This listener is responsible for checking the position of the caret in the TextField
+     * and obtaining the most recently typed String of characters to allow updating of the
+     * list of suggestions according to the most recently typed word adds the new suggested
+     * text to the TextField.
+     */
     private final ChangeListener<Number> caretChangeListener = (obs, oldNumber, newNumber) -> {
         String text = getCompletionTarget().getText().substring(0, newNumber.intValue());
         int index;
@@ -298,6 +263,10 @@ public class NewAutoCompletionBinding<T> {
         }
     };
 
+    /**
+     * This listener checks if the commandBox is currently in focus and hides the autocomplete
+     * popup if not.
+     */
     private final ChangeListener<Boolean> focusChangedListener = (obs, oldFocused, newFocused) -> {
         if (newFocused == false) {
             hidePopup();
