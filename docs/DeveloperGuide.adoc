@@ -338,6 +338,24 @@ image::CompleteUncompleteTaskSequenceDiagram.png[width="800"]
 ** Cons: We must ensure that the implementation of each individual methods are correct.
 // end::completeuncomplete[]
 
+// tag::sorttask[]
+=== Sort To-do list
+
+==== Current Implementation
+
+Sorting tasks in the to-do list uses both Logic and Model components.
+Generally, the implementation of `TDL_sort date`, `TDL_sort priority` and `TDL_sort module` are quite similar,
+and they use different comparators. These features sort ObservableList<Task> and use the method sort()
+from List<>.
+
+`TDL_sort reverse` use the method `Collection.reverse()` to reverse the sequence of tasks in to-do list.
+
+==== Design Considerations
+
+===== Aspect: Methods to support the sort commands
+
+// end::sorttask[]
+
 // tag::expenditure[]
 === Expenditure feature
 
