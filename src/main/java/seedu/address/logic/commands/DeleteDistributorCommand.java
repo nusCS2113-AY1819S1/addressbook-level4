@@ -16,7 +16,7 @@ import seedu.address.model.distributor.Distributor;
  */
 public class DeleteDistributorCommand extends Command {
 
-    public static final String COMMAND_WORD = "deleteDistributor";
+    public static final String COMMAND_WORD = "deletedistributor";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the distributor identified by the index number used in the displayed distributor list.\n"

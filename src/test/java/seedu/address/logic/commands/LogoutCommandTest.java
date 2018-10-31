@@ -28,6 +28,9 @@ import seedu.address.model.product.Product;
 import seedu.address.model.timeidentifiedclass.Reminder;
 import seedu.address.model.timeidentifiedclass.Transaction;
 
+/**
+ * @author Amirul
+ */
 public class LogoutCommandTest {
 
     @Rule
