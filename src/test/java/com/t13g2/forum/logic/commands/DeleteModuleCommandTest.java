@@ -47,6 +47,7 @@ public class DeleteModuleCommandTest {
         Module validModule = TypicalModules.GET1020;
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             unitOfWork.getModuleRepository().addModule(validModule);
+            unitOfWork.commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
