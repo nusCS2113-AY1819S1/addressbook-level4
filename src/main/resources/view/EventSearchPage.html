@@ -23,6 +23,7 @@
           document.getElementById("venue").innerHTML=getJsonFromUrl().venue;
           document.getElementById("dateTime").innerHTML=getJsonFromUrl().dateTime;
           document.getElementById("attendance").innerHTML=getJsonFromUrl().attendance;
+          document.getElementById("comment").innerHTML=getJsonFromUrl().comment;
       });
   </script>
 </head>
@@ -37,6 +38,9 @@
 
   <strong>Event Attendance:</strong><br>
   <span id="attendance"></span>
+  <br>
+  <br>
+  <span id = "comment"></span></span>
 
 </body>
 </html>
