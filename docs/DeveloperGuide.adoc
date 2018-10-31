@@ -225,6 +225,7 @@ As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person`
  +
 image:ModelClassBetterOopDiagram.png[width="800"]
 
+// tag::designSecurity[]
 [[Design-Security]]
 === Security component
 
@@ -241,6 +242,7 @@ The Sequence Diagram when a user logs in is given below:
 
 .Interactions between the UI Component and Security Component for the `login` Command
 image::SecurityLoginSequenceDiagram.png[width="800"]
+// end::designSecurity[]
 
 [[Design-Storage]]
 === Storage component
@@ -451,7 +453,7 @@ Same as the other commands, see <<Events-Driven-Nature,*`Events-Driven nature of
 // end::timetable[]
 
 {nbsp}
-
+// tag::securityImplementation[]
 === Security Implementation
 To begin this section, we would need to introduce the idea of a Authenticated User instance.
 Everytime a user successfully logs in, or creates a new account, the application will create an Authenticated User in
@@ -487,6 +489,7 @@ Whenever a user logs in, the username is searched inside AppUsers. Once it match
 then salted and hashed (SHA-512), and finally compared to the stored hashed password.
 
 ==== Design Considerations
+// end::securityImplementation[]
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
