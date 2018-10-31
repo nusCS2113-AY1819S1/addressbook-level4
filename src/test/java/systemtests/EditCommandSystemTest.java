@@ -134,7 +134,8 @@
 //        assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
 //                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 //
-//        /* --------------------- Performing edit operation while a person card is selected -------------------------- */
+//        /* --------------------- Performing edit operation while a person card is selected
+// -------------------------- */
 //
 //        /* Case: selects first card in the person list, edit a person -> edited, card selection remains unchanged but
 //         * browser url changes
@@ -149,7 +150,8 @@
 //        // browser's url is updated to reflect the new person's name
 //        assertCommandSuccess(command, index, AMY, index);
 //
-//        /* --------------------------------- Performing invalid edit operation -------------------------------------- */
+//        /* --------------------------------- Performing invalid edit operation
+// -------------------------------------- */
 //
 //        /* Case: invalid index (0) -> rejected */
 //        assertCommandFailure(EditCommand.COMMAND_WORD + " 0" + NAME_DESC_BOB,
@@ -211,7 +213,8 @@
 //                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND;
 //        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
 //
-//        /* Case: edit a person with new values same as another person's values but with different address -> rejected */
+//        /* Case: edit a person with new values same as another person's values
+// but with different address -> rejected */
 //        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + GENDER_DESC_BOB
 //                + NATIONALITY_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
 //                + ADDRESS_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
@@ -241,7 +244,8 @@
 //    }
 //
 //    /**
-//     * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} and in addition,<br>
+//     * Performs the same verification as {@code assertCommandSuccess(String, Model,
+// String, Index)} and in addition,<br>
 //     * 1. Asserts that result display box displays the success message of executing {@code EditCommand}.<br>
 //     * 2. Asserts that the model related components are updated to reflect the person at index {@code toEdit} being
 //     * updated to values specified {@code editedPerson}.<br>
@@ -251,15 +255,18 @@
 //    private void assertCommandSuccess(String command, Index toEdit, Person editedPerson,
 //            Index expectedSelectedCardIndex) {
 //        Model expectedModel = getModel();
-//        expectedModel.updatePerson(expectedModel.getFilteredPersonList().get(toEdit.getZeroBased()), editedPerson);
+//        expectedModel.updatePerson(expectedModel.getFilteredPersonList().get(toEdit.getZeroBased()),
+// editedPerson);
 //        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 //
 //        assertCommandSuccess(command, expectedModel,
-//                String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson), expectedSelectedCardIndex);
+//                String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson),
+// expectedSelectedCardIndex);
 //    }
 //
 //    /**
-//     * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} except that the
+//     * Performs the same verification as {@code assertCommandSuccess(String, Model,
+// String, Index)} except that the
 //     * browser url and selected card remain unchanged.
 //     * @see EditCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
 //     */
