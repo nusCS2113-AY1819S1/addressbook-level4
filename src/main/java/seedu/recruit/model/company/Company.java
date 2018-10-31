@@ -62,7 +62,9 @@ public class Company {
         return companyName;
     }
 
-    public Address getAddress() { return address; }
+    public Address getAddress() {
+        return address;
+    }
 
     public Email getEmail() {
         return email;

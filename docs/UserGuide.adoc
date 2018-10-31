@@ -111,7 +111,7 @@ and does the switch to the other book for you when you enter the `switch` comman
 image::switchBook.png[width="390"]
 
 // tag::add[]
-=== Adding a candidate / company / job  : `addc` `addC`
+=== Adding a candidate / company / job  : `addc` `addC` `addj`
 
 ==== Adds a candidate to the RecruitBook
 Format: `addc` +
@@ -124,16 +124,8 @@ Entering this command will prompt you the following: +
 Examples:
 
 * `n/John Doe g/M x/18 p/91238123 e/johndoe@gmail.com a/123, Central Boulevard, #01-111, 600123 j/WAITER h/A LEVEL s/1200`
-* `n/Mary Loe g/M x/18 p/82238123 e/maryloe@gmail.com a/113, South Boulevard, #01-111, 600123 j/WAITER h/O LEVEL s/NA`
+* `n/Mary Loe g/M x/18 p/82238123 e/maryloe@gmail.com a/113, South Boulevard, #01-111, 600123 j/WAITER h/O LEVEL s/1000`
 
-After keying in the details, you will be further prompted for details of job experience: +
-*`Enter job experience (if any) of the candidate in the following format:`* +
-`j/JOB y/YEARS_OF_EXPERIENCE c/COMPANY`
-
-Examples:
-
-* `j/Store Manager y/1 c/Mcdonalds`
-* `j/Cashier y/2 c/KFC`
 
 ==== Adds a company to the RecruitBook
 Format: `addC c/UNIQUE_COMPANY_NAME a/ADDRESS e/EMAIL p/PHONE` +
@@ -152,7 +144,8 @@ Entering this command will prompt you the following: +
 `(Enter 'cancel' to stop adding jobs)` +
 `Example: c/McDonalds j/cashier g/M xr/20-30 h/O levels s/1200`
 
-Note: COMPANY specified has to be added to RecruitBook first!
+[NOTE]
+COMPANY specified has to be added to RecruitBook first!
 
 Examples:
 
