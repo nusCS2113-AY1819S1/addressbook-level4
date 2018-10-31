@@ -63,19 +63,30 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/NAME t/TIME`, `t/TIME n/NAME` is also acceptable.
 ====
 
-=== *Project Manager*
-
 [NOTE]
 ====
-This section is meant for Project Managers'. Some of the following commands are exclusive to the Project Manager.
-Project Managers have full jurisdriction to view all information and events.
+Three types priorities: `default`,`manager`,`employee` +
+If login command is not executed, the priority will be `default`.
 ====
 
-==== Viewing help : `help`
+
+=== Viewing help : `help`
 
 Format: `help`
 
-==== Adding an employee : 'add'
+=== Login the app: 'login'
+Priority level: `default`
+
+Login to the app as one of the following identity: `manager` or `employee` +
+Once login cannot logout till the app is closed.
+
+Format: login `identity`
+
+Example: +
+login manager
+
+=== Adding an employee : 'add'
+Priority level: `default`,`manager`
 
 Adds an employee to ProManage +
 Format/Prompts: +
@@ -85,13 +96,15 @@ Enter employee details: `n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT 
 Example: +
 `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dep/ADMIN`
 
-==== Listing all personnel of the company : 'list'
+=== Listing all personnel of the company : 'list'
+Priority level: all
 
 Shows a list of personnel in the company +
 Format/Prompts: +
 Enter a command: `list`
 
-==== Editing an employee : 'edit'
+=== Editing an employee : 'edit'
+Priority level: `default`,`manager`
 
 Edits the details of the employee: +
 Format/Prompts: +
@@ -107,13 +120,15 @@ index *must be a positive integer* 1, 2, 3, ... +
 * You can remove all the person’s tags by typing t/ without specifying any tags after it.
 ****
 
-==== Deleting an employee : 'delete'
+=== Deleting an employee : 'delete'
+Priority level: `default`,`manager`
 
 Delete an employee from ProManage: +
 Format/Prompts: +
 Enter a command: `delete LIST_INDEX`
 
-==== Adding an event: `addEvent`
+=== Adding an event: `addEvent`
+Priority level: `default`,`manager`
 
 Adds an event to ProManage, via a series of prompts +
 Format/Prompts: +
@@ -125,26 +140,39 @@ Example: +
 `n/Board Meeting d/Weekly Meeting l/Conference Room 1 date/2018-09-28 s/12:00 e/23:59 ` +
 Creates an event named Board Meeting.
 
-==== Listing all events: `schedule`
+=== Sorting all events: `sort`
+Priority level: all
 
-Display the full list of events in the project. +
-Format: `schedule`
+Sort the event listing based on the key words provided. +
+Able to sort with event's name, event's date, event's starttime, event's endtime.  +
+*Key word:* +
+1) event's name: `name` +
+2) event's data: `date` +
+3) event's starttime: `starttime` +
+4) event's endtime: `endtime`
 
-==== Invite employees: `invite`
+
+Format: sort `key word` +
+Example: sort name
+
+=== Invite employees: `invite`
+Priority level: `default`,`manager`
 
 Add employees to the project event at the respective specified INDEX. The index refers to the index number shown in the
 displayed person and event list. The index must be a positive integer 1, 2, 3... +
 Format: `invite PERSON_INDEX to/EVENT_INDEX` +
 Example: invite 1 to/2
 
-==== Remove employee: `remove`
+=== Remove employee: `remove`
+Priority level: `default`,`manager`
 
 Removes an employee from the project event. +
 Format/Prompts: `remove PERSON_INDEX  from/EVENT_INDEX` +
 Example: remove 1 from/2
 
 
-==== Modifying an event: `editEvent`
+=== Modifying an event: `editEvent`
+Priority level: `default`,`manager`
 
 Modifying the event at the specified INDEX. The index refers to the index number shown in the displayed event list. The
 index must be a positive integer 1, 2, 3... +
@@ -164,7 +192,8 @@ Examples:
 * Enter a command: `editEvent 10`  +
 Enter event details: n/Weekly Meeting d/Check on progress l/Conference Room 2 date/2018-09-10 s/12:00 e/14:00`
 
-==== Locating events by name: `find`
+=== Locating events by name: `find`
+Priority level: all
 
 Finds the event whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -184,7 +213,8 @@ Returns `Budget Review` and `Budget Press Release`
 * `find Budget Review` +
 Returns any event having names `Budget` or `Review`
 
-==== Deleting an event : `deleteEvent`
+=== Deleting an event : `deleteEvent`
+Priority level: `default`,`manager`
 
 Delete the event at the specified INDEX. +
 Format/Prompts: +
@@ -206,7 +236,8 @@ Deletes the 2nd event in the address book.
 Deletes the 1st event in the results of the `find` command.
 
 
-==== Selecting an event: `select`
+=== Selecting an event: `select`
+Priority level: `default`,`manager`
 
 Selects the event identified by the index number used in the displayed event list. +
 Format/Prompts: +
@@ -227,7 +258,8 @@ Selects the 2nd event in the event schedule.
 `select 1` +
 Selects the 1st event in the results of the `find` command.
 
-==== Listing entered commands : `history`
+=== Listing entered commands : `history`
+Priority level: all
 
 Lists all the commands that you have entered in reverse chronological order. +
 Format/Prompts: +
@@ -239,7 +271,8 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 ====
 
 // tag::undoredo[]
-==== Undoing previous command : `undo`
+=== Undoing previous command : `undo`
+Priority level: all
 
 Restores the event schedule to the state before the previous _undoable_ command was executed. +
 Format/Prompts: +
@@ -266,7 +299,8 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
 
-==== Redoing the previously undone command : `redo`
+=== Redoing the previously undone command : `redo`
+Priority level: all
 
 Reverses the most recent `undo` command. +
 Format/Prompts: +
@@ -290,263 +324,25 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-==== Clearing all entries : `clear`
+=== Clearing all entries : `clear`
+Priority level: all
 
 Clears all entries from the event schedule. +
 Format/Prompts: +
 Enter a command: `clear`
 
-==== Exiting the program : `exit`
+=== Exiting the program : `exit`
+Priority level: all
 
 Exits the program. +
 Format/Prompts: +
 Enter a command: `exit`
 
-==== Saving the data
+=== Saving the data
 
 ProManage data saves data in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-=== *Department Head*
-
-[NOTE]
-====
-This section is meant for Department Heads'.
-Department Heads can only access his/her own department’s events.
-====
-//TODO confirm that department heads cannot add people?
-==== Viewing help : `help`
-
-Format: `help`
-
-==== Adding an event: `addEvent`
-
-Adds an event to ProManage, via a series of prompts +
-Format/Prompts: +
-Enter a command: `addEvent` +
-Enter event details: `n/NAME d/DESCRIPTION l/LOCATION date/DATE(DDMMYY) s/START TIME e/END TIME`  +
-
-Example: +
-`addEvent` +
-`n/Board Meeting d/Weekly Meeting l/Conference Room 1 date/2018-09-28 s/12:00 e/23:59 ` +
-Creates an event named Board Meeting.
-
-==== Listing all events: `schedule`
-
-Display the full list of events in the project. +
-Format: `schedule`
-
-==== Invite employees: `invite`
-
-Add employees to the project event at the respective specified INDEX. The index refers to the index number shown in the
-displayed person and event list. The index must be a positive integer 1, 2, 3... +
-Format: `invite LIST_INDEX to/SCHEDULE_INDEX` +
-Example: invite 1 to/2
-
-==== Remove employee: `remove`
-
-Removes an employee from the project event. +
-Format/Prompts: `remove EVENT_INDEX  from/PERSON_INDEX` +
-Example: remove 1 from/2
-
-
-==== Modifying an event: `editEvent`
-
-Modifying the event at the specified INDEX. The index refers to the index number shown in the displayed event list. The
-index must be a positive integer 1, 2, 3... +
-Input nil if it is not the field to be changed. +
-Format/Prompts: +
-Enter a command: `editEvent SCHEDULE_INDEX` +
-Enter event details: `d/DESCRIPTION l/LOCATION date/DATE(DDMMYY) s/START TIME e/END TIME`  +
-
-****
-* Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The
-index *must be a positive integer* 1, 2, 3, ... +
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-****
-
-Examples:
-* Enter a command: `editEvent 10`  +
-Enter event details: n/Weekly Meeting d/Check on progress l/Conference Room 2 date/2018-09-10 s/12:00 e/14:00`
-
-==== Locating events by name: `find`
-
-Finds the event whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-****
-* The search is case insensitive. e.g `Budget Review` will match `budget review`
-* The order of the keywords does not matter. e.g. `Budget Review` will match `Review Budget`
-* Only the name is searched.
-* Only full words will be matched e.g. `Budget` will not match `Budg`
-* Events matching at least one keyword will be returned (i.e. `OR` search). e.g. `Budget Review` will return `Budget`, `Review`
-****
-
-Examples:
-
-* `find Budget` +
-Returns `Budget Review` and `Budget Press Release`
-* `find Budget Review` +
-Returns any event having names `Budget` or `Review`
-
-==== Deleting an event : `deleteEvent`
-
-Delete the event at the specified INDEX. +
-Format/Prompts: +
-Enter a command: `deleteEvent SCHEDULE_INDEX`
-
-****
-* Deletes the event at the specified `INDEX`.
-* The index refers to the index number shown in the displayed event/task list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
-
-Examples:
-
-* `schedule` +
-`deleteEvent 2` +
-Deletes the 2nd event in the address book.
-* `find Meeting` +
-`deleteEvent 1` +
-Deletes the 1st event in the results of the `find` command.
-
-
-==== Selecting an event: `select`
-
-Selects the event identified by the index number used in the displayed event list. +
-Format/Prompts: +
-Enter a command: `select SCHEDULE_INDEX`
-
-****
-* Selects the event and loads the full description of the event at the specified `INDEX`.
-* The index refers to the index number shown in the displayed event list.
-* The index *must be a positive integer* `1, 2, 3, ...`
-****
-
-Examples:
-
-* `schedule` +
-`select 2` +
-Selects the 2nd event in the event schedule.
-* `find Meeting` +
-`select 1` +
-Selects the 1st event in the results of the `find` command.
-
-==== Listing entered commands : `history`
-
-Lists all the commands that you have entered in reverse chronological order. +
-Format/Prompts: +
-Enter a command: `history`
-
-[NOTE]
-====
-Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
-====
-
-// tag::undoredo[]
-==== Undoing previous command : `undo`
-
-Restores the event schedule to the state before the previous _undoable_ command was executed. +
-Format/Prompts: +
-Enter a command: `undo`
-
-[NOTE]
-====
-Undoable commands: those commands that modify the event schedule's content (`add`, `delete`, `edit` and `clear`).
-====
-
-Examples:
-
-* `cancel 1` +
-`list` +
-`undo` (reverses the `delete 1` command) +
-
-* `select 1` +
-`list` +
-`undo` +
-The `undo` command fails as there are no undoable commands executed previously.
-
-* `cancel 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-
-==== Redoing the previously undone command : `redo`
-
-Reverses the most recent `undo` command. +
-Format/Prompts: +
-Enter a command: `redo`
-
-Examples:
-
-* `cancel 1` +
-`undo` (reverses the `cancel 1` command) +
-`redo` (reapplies the `cancel 1` command) +
-
-* `cancel 1` +
-`redo` +
-The `redo` command fails as there are no `undo` commands executed previously.
-
-* `cancel 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `cancel 1` command) +
-`redo` (reapplies the `cancel 1` command) +
-`redo` (reapplies the `clear` command) +
-// end::undoredo[]
-
-==== Clearing all entries : `clear`
-
-Clears all entries from the event schedule. +
-Format/Prompts: +
-Enter a command: `clear`
-
-==== Exiting the program : `exit`
-
-Exits the program. +
-Format/Prompts: +
-Enter a command: `exit`
-
-==== Saving the data
-
-ProManage data saves data in the hard disk automatically after any command that changes the data. +
-There is no need to save manually.
-
-=== *Employee*
-
-[NOTE]
-====
-This section is meant for Employees.
-Employees can only access his/her own departments' events.
-====
-
-==== Listing all events: `schedule`
-
-Display the full list of events in the project. +
-Format/Prompts: `schedule`
-
-
-==== Requests for a statistics of a week or get a suggested common meeting time by analysing multiple users’ calendars: `query`
-Format/Prompts: +
-Enter a command: `query'
-//TODO Finalise what this section does
-Examples:
-
-* `query stats` +
-Displays the statistics of a week
-
-* `query meetings` +
-Displays a suggested common meeting time
-
-
-==== Submit a completed task: `submit`
-
-Example:
-* `submit 1` +
-
-
-Task with id 1 is submitted as complete.
 
 == FAQ
 
