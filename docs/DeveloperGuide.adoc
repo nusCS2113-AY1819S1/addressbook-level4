@@ -550,6 +550,9 @@ All method are written in the `ExportCalendarCommand` class.
 ** Pros: Have better control of the output file, since the ical4j support API has not been updated for a long time and currently show some lacking
 ** Cons: Very complicated and time wasting
 
+[NOTE]
+For the current version of this product, export calendar now will export every events available in the event manager as authentication and RSVP are under test.
+
 ==== [Proposed]: [V1.4] enhancement
 The method related to `ExportCalendarCommand` class should be re-designed to follow OOP requirement.
 // end::export calendar[]
