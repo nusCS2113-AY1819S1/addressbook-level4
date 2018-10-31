@@ -81,7 +81,9 @@ public class CustomSuggestionProvider {
         clearSuggestions();
 
         if (inputs[0].equals(SortCommand.COMMAND_WORD) && inputs.length > 1) {
-            if (SortCommand.ORDER_SET.contains(inputs[1])) {
+            if (inputs.length > 3){
+                updateSuggestions(emptySet);
+            } else if (SortCommand.ORDER_SET.contains(inputs[1])) {
                 updateSuggestions(SortCommand.CATEGORY_SET);
             } else if (SortCommand.CATEGORY_SET.contains(inputs[1])) {
                 updateSuggestions(SortCommand.ORDER_SET);
