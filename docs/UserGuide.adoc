@@ -385,6 +385,7 @@ Format: `shortlist`
 . *Confirm the details*
 .. Type `confirm` and press kbd:[Enter] to confirm.
 
+// tag::email[]
 === Sending emails : `email`
 
 Sends an email to specified candidates about specified job offers OR
@@ -453,6 +454,8 @@ Examples:
   (To preview email)
 . `send` +
   (To send the email)
+
+// end::email[]
 
 === Exits from any intermediate command: `cancel`
 
