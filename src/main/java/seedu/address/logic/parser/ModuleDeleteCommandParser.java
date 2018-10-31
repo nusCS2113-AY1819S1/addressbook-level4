@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ModuleDeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.ModuleCode;
 
 /**
  * Parses input arguments and creates a new ModuleDeleteCommand object
@@ -29,7 +30,7 @@ public class ModuleDeleteCommandParser implements Parser<ModuleDeleteCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleDeleteCommand.MESSAGE_USAGE));
         }
 
-        String moduleCode = argMultimap.getValue(PREFIX_MODULE_CODE).get();
+        ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
 
         return new ModuleDeleteCommand(moduleCode);
     }
