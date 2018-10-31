@@ -6,15 +6,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import seedu.address.model.StorageController;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleManager;
 import seedu.address.model.person.Person;
 import seedu.address.storage.adapter.XmlAdaptedGrades;
-
-import javax.sound.sampled.Line;
 
 /**
  * The API of the GradesManager component.
@@ -60,28 +57,6 @@ public class GradesManager {
     public void addGrade (Grades grade) {
         grades.add(grade);
     }
-
-//    /**
-//     This method shows grades of students for one grade component in module.
-//     */
-//    public void createGraph (LineChart<Number, Number> lineChart, Grades grade) {
-//        XYChart.Series<Number, Number> series = new XYChart.Series<>();
-//
-//        // hashmap to store the frequency of element
-//        Map<Float, Integer> hashMapOfGrades = new HashMap<>();
-//        for (Grades gradesList : grades) {
-//            if (gradesList.getModuleCode().equals(grade.getModuleCode())
-//                    && gradesList.getGradeComponentName().equals(grade.getGradeComponentName())) {
-//                Integer count = hashMapOfGrades.get(gradesList.getMarks());
-//                hashMapOfGrades.put(gradesList.getMarks(), (count == null) ? 1 : count + 1);
-//            }
-//        }
-//        // displaying the occurrence of elements in the arraylist
-//        for (Map.Entry<Float, Integer> val : hashMapOfGrades.entrySet()) {
-//            series.getData().add(new XYChart.Data<>(val.getKey(), val.getValue()));
-//        }
-//        lineChart.getData().add(series);
-//    }
 
     /**
      This method shows grades of students for one grade component in module.

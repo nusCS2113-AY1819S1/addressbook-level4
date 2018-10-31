@@ -38,7 +38,6 @@ public class GradeGraphDisplay {
 
         lineChart = new LineChart<>(xAxis, yAxis);
         lineChart.setTitle(CHART_TITLE);
-//        return lineChart;
     }
 
     public LineChart<Number, Number> getLineChart() {
