@@ -1,5 +1,7 @@
 package seedu.planner.model;
 
+import java.util.HashMap;
+
 import javafx.collections.ObservableList;
 import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.record.Limit;
@@ -15,6 +17,8 @@ public interface ReadOnlyFinancialPlanner {
      * This list will not contain any duplicate records.
      */
     ObservableList<Record> getRecordList();
+
+    HashMap<String, Integer> getTagMap();
 
     ObservableList<Limit> getLimitList();
 

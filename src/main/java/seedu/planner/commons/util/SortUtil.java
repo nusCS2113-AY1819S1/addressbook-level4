@@ -2,6 +2,7 @@ package seedu.planner.commons.util;
 
 import java.util.Comparator;
 
+import seedu.planner.model.Month;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Record;
 import seedu.planner.ui.SummaryEntry;
@@ -25,6 +26,14 @@ public class SortUtil {
 
     public static Comparator<SummaryEntry> compareTimeStampAttribute() {
         return (a, b) -> new Date(a.getTimeStamp()).dateComparator(new Date(b.getTimeStamp()));
+    }
+
+    public static Comparator<Date> compareDate() {
+        return (a, b) -> a.dateComparator(b);
+    }
+
+    public static Comparator<Month> compareMonth() {
+        return (a, b) -> DateUtil.compareMonth(a, b);
     }
 }
 

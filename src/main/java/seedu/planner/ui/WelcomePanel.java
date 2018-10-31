@@ -1,6 +1,6 @@
 package seedu.planner.ui;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -77,7 +77,7 @@ public class WelcomePanel extends UiPart<Region> implements Switchable {
 
     /** Extracts the label and expense information and places it in a list of ChartData */
     private Pair< ObservableList<ChartData>, Double> extractExpenseChartData(ObservableList<CategoryStatistic> data) {
-        List<ChartData> chartDataList = new ArrayList();
+        List<ChartData> chartDataList = Collections.emptyList();
         Double totalExpense = 0.0;
         for (CategoryStatistic d : data) {
             if (d.getTotalExpense() > 0.0) {
@@ -104,7 +104,7 @@ public class WelcomePanel extends UiPart<Region> implements Switchable {
 
     /** Extracts the label and income information and places it in a list of ChartData */
     private Pair< ObservableList<ChartData>, Double> extractIncomeChartData(ObservableList<CategoryStatistic> data) {
-        List<ChartData> chartDataList = new ArrayList();
+        List<ChartData> chartDataList = Collections.emptyList();
         Double totalIncome = 0.0;
         for (CategoryStatistic d : data) {
             if (d.getTotalIncome() > 0.0) {

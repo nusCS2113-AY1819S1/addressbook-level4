@@ -1,5 +1,7 @@
 package seedu.planner.model.record;
 
+import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -16,6 +18,7 @@ public class DateIsWithinIntervalPredicate implements Predicate<Record> {
     private final Date endDate;
 
     public DateIsWithinIntervalPredicate(Date startDate, Date endDate) {
+        requireAllNonNull(startDate, endDate);
         this.startDate = startDate;
         this.endDate = endDate;
     }

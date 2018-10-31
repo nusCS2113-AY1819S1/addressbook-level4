@@ -7,7 +7,10 @@ import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.planner.commons.util.MoneyUtil;
+import seedu.planner.commons.util.SortUtil;
 import seedu.planner.model.Month;
+import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Record;
 import seedu.planner.ui.SummaryEntry;
 
@@ -20,17 +23,22 @@ import seedu.planner.ui.SummaryEntry;
 public class SummaryByMonthList {
 
     protected HashMap<Month, MonthSummary> summaryMap = new HashMap<>();
+    private MoneyFlow total = new MoneyFlow("-0");
+    private MoneyFlow totalIncome = new MoneyFlow("-0");
+    private MoneyFlow totalExpense = new MoneyFlow("-0");
 
     public SummaryByMonthList(List<Record> recordList , Predicate<Record> predicate) {
         for (Record r : recordList) {
             if (predicate.test(r)) {
                 addRecordToMap(r);
+                updateTotals(r);
             }
         }
     }
 
     public ObservableList<SummaryEntry> getSummaryList() {
-        List<SummaryEntry> list = summaryMap.keySet().stream().map(k -> convertToUiFriendly(summaryMap.get(k)))
+        List<SummaryEntry> list = summaryMap.keySet().stream().sorted(SortUtil.compareMonth())
+                .map(k -> convertToUiFriendly(summaryMap.get(k)))
                 .collect(Collectors.toList());
         return FXCollections.observableList(list);
     }
@@ -60,6 +68,33 @@ public class SummaryByMonthList {
         } else {
             summaryMap.put(month, new MonthSummary(record));
         }
+    }
+
+    /** Update the total moneyflow, total income and total expense */
+    private void updateTotals(Record record) {
+        MoneyFlow money = record.getMoneyFlow();
+        if (isExpense(money)) {
+            totalExpense = MoneyUtil.add(totalExpense, money);
+        } else {
+            totalIncome = MoneyUtil.add(totalIncome, money);
+        }
+        total = MoneyUtil.add(total, money);
+    }
+
+    private boolean isExpense(MoneyFlow money) {
+        return money.toDouble() < 0;
+    }
+
+    public MoneyFlow getTotal() {
+        return total;
+    }
+
+    public MoneyFlow getTotalIncome() {
+        return totalIncome;
+    }
+
+    public MoneyFlow getTotalExpense() {
+        return totalExpense;
     }
 
     public int size() {

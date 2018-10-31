@@ -20,6 +20,7 @@ import seedu.planner.commons.core.EventsCenter;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
 import seedu.planner.commons.events.model.LimitListChangedEvent;
+import seedu.planner.commons.events.model.TagMapChangedEvent;
 import seedu.planner.commons.events.ui.UpdateWelcomePanelEvent;
 import seedu.planner.commons.util.DateUtil;
 import seedu.planner.model.record.Date;
@@ -79,6 +80,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void resetData(ReadOnlyFinancialPlanner newData) {
         versionedFinancialPlanner.resetData(newData);
         indicateFinancialPlannerChanged();
+        indicateTagMapChanged();
     }
 
     @Override
@@ -103,6 +105,11 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new LimitListChangedEvent(versionedFinancialPlanner));
     }
 
+    /** Raises an event to indicate the limit list has changed */
+    private void indicateTagMapChanged() {
+        raise(new TagMapChangedEvent(versionedFinancialPlanner));
+    }
+
     //=========== Financial planner standard operations ============================================
 
     @Override
@@ -115,7 +122,9 @@ public class ModelManager extends ComponentManager implements Model {
     public void deleteRecord(Record target) {
         requireNonNull(target);
         versionedFinancialPlanner.removeRecord(target);
+        versionedFinancialPlanner.removeRecordFromTagMap(target);
         indicateFinancialPlannerChanged();
+        indicateTagMapChanged();
     }
 
     @Override
@@ -129,8 +138,10 @@ public class ModelManager extends ComponentManager implements Model {
     public void addRecord(Record record) {
         requireNonNull(record);
         versionedFinancialPlanner.addRecord(record);
+        versionedFinancialPlanner.addRecordToTagMap(record);
         updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
         indicateFinancialPlannerChanged();
+        indicateTagMapChanged();
     }
 
     @Override
@@ -149,9 +160,10 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateRecord(Record target, Record editedRecord) {
         requireAllNonNull(target, editedRecord);
-
         versionedFinancialPlanner.updateRecord(target, editedRecord);
+        versionedFinancialPlanner.updateRecordInTagMap(target, editedRecord);
         indicateFinancialPlannerChanged();
+        indicateTagMapChanged();
     }
 
     //=========== Limit related methods =====================================================
@@ -169,7 +181,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addLimit(Limit limitIn) {
         versionedFinancialPlanner.addLimit(limitIn);
-
         indicateLimitListChanged();
     }
     @Override
@@ -294,6 +305,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedFinancialPlanner.undo();
         indicateFinancialPlannerChanged();
         indicateLimitListChanged();
+        indicateTagMapChanged();
     }
 
     @Override
@@ -301,6 +313,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedFinancialPlanner.redo();
         indicateFinancialPlannerChanged();
         indicateLimitListChanged();
+        indicateTagMapChanged();
     }
 
     @Override

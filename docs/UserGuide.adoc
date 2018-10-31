@@ -483,11 +483,21 @@ Format: `exit`
 Financial Planner data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
+=== Showing a visual representation of daily/monthly summary `[Coming in v1.4]`
+
 // tag::dataencryption[]
 === Encrypting data files `[coming in v2.0]`
-
-_{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
+
+=== Adding description to records `[Coming in v2.0]`
+
+=== Changing app configurations `[Coming in v2.0]`
+
+=== View bank balances `[Coming in v2.0]`
+
+=== Record parties to make payment to `[Coming in v2.0]`
+
+=== Adding regular payments/income to be automatically recorded `[Coming in v2.0]`
 
 == FAQ
 

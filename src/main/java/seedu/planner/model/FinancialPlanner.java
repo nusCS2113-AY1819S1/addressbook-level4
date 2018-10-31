@@ -2,6 +2,7 @@ package seedu.planner.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -11,6 +12,8 @@ import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.record.UniqueRecordList;
+import seedu.planner.model.tag.TagMap;
+import seedu.planner.ui.CustomSuggestionProvider;
 
 
 /**
@@ -21,6 +24,7 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
 
     private final UniqueRecordList records;
     private DateBasedLimitList limits;
+    private TagMap tagMap;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -32,6 +36,7 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     {
         records = new UniqueRecordList();
         limits = new DateBasedLimitList();
+        tagMap = new TagMap();
     }
 
     public FinancialPlanner() {}
@@ -58,6 +63,11 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         this.limits.setLimits(limits);
     }
 
+    public void setTagMap(HashMap<String, Integer> tagMap) {
+        this.tagMap.setTagMap(tagMap);
+        CustomSuggestionProvider.updateTagSet(tagMap);
+    }
+
     /**
      * Resets the existing data of this {@code FinancialPlanner} with {@code newData}.
      */
@@ -65,9 +75,8 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         requireNonNull(newData);
 
         setRecords(newData.getRecordList());
-
+        setTagMap(newData.getTagMap());
         setLimits(newData.getLimitList());
-
     }
 
     /**
@@ -153,7 +162,6 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         this.limits = limitList;
     }
 
-
     /**
      * Add a limit to the financial planner.
      * The newly added limit can not share same dates with the rest.
@@ -214,6 +222,22 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     public void removeLimit(Limit limitLn) {
         limits.remove(limitLn); }
 
+    public void addRecordToTagMap(Record record) {
+        tagMap.addRecordToTagMap(record);
+    }
+
+    public void removeRecordFromTagMap(Record target) {
+        tagMap.removeRecordFromTagMap(target);
+    }
+
+    public void updateRecordInTagMap(Record target, Record editedRecord) {
+        tagMap.updateRecordInTagMap(target, editedRecord);
+    }
+
+    @Override
+    public HashMap<String, Integer> getTagMap () {
+        return tagMap.makeTagMapFromRecordList(records);
+    }
 
     @Override
     public String toString() {
@@ -227,7 +251,8 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
 
     @Override
     public ObservableList<Limit> getLimitList () {
-        return limits.asUnmodifiableObservableList(); }
+        return limits.asUnmodifiableObservableList();
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -240,4 +265,5 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     public int hashCode() {
         return records.hashCode();
     }
+
 }

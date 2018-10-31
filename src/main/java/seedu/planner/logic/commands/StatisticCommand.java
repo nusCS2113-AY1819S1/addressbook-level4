@@ -1,5 +1,7 @@
 package seedu.planner.logic.commands;
 
+import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -28,6 +30,7 @@ public class StatisticCommand extends Command {
     private final Predicate<Record> predicate;
 
     public StatisticCommand(Date startDate, Date endDate) {
+        requireAllNonNull(startDate, endDate);
         predicate = new DateIsWithinIntervalPredicate(startDate, endDate);
     }
 

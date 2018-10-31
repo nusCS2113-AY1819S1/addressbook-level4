@@ -11,6 +11,7 @@ import static seedu.planner.testutil.TypicalRecords.getTypicalFinancialPlanner;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Rule;
@@ -100,6 +101,7 @@ public class FinancialPlannerTest {
     private static class FinancialPlannerStub implements ReadOnlyFinancialPlanner {
         private final ObservableList<Record> records = FXCollections.observableArrayList();
         private final ObservableList<Limit> limits = FXCollections.observableArrayList();
+        private final HashMap<String, Integer> tags = new HashMap();
 
         FinancialPlannerStub(Collection<Record> records) {
             this.records.setAll(records);
@@ -113,6 +115,11 @@ public class FinancialPlannerTest {
         @Override
         public ObservableList<Limit> getLimitList() {
             return limits;
+        }
+
+        @Override
+        public HashMap<String, Integer> getTagMap() {
+            return tags;
         }
 
         @Override
