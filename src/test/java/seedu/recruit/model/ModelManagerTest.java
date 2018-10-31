@@ -7,14 +7,13 @@ import static seedu.recruit.testutil.TypicalPersons.ALICE;
 import static seedu.recruit.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.recruit.model.candidate.NameContainsKeywordsPredicate;
 import seedu.recruit.testutil.AddressBookBuilder;
+import seedu.recruit.testutil.CandidateContainsKeywordsPredicateBuilder;
 
 public class ModelManagerTest {
     @Rule
@@ -70,8 +69,9 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentCandidateBook, new CompanyBook(), userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredCandidateList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        String keywords = ALICE.getName().fullName;
+        modelManager.updateFilteredCandidateList(
+                new CandidateContainsKeywordsPredicateBuilder(keywords).getCandidatePredicate());
         assertFalse(modelManager.equals(new ModelManager(candidateBook, new CompanyBook(), userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

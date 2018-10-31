@@ -1,0 +1,69 @@
+= Seah Xi Qi, Nicholas - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== Introduction
+
+=== What is RecruitBook?
+
+RecruitBook is a useful Java desktop application for job agents to better organise the list of available job offers and prospective job candidates.
+RecruitBook mainly uses a Command Line Interface(CLI) that allows you to interact with specific commands.
+It also has a Graphical User Interface created with JavaFX and has a codebase of about 10000 lines of code.
+
+=== RecruitBook features:
+* Add Feature
+* Edit Feature
+* Find Feature
+* List Feature
+* Email Feature
+
+
+== Summary of contributions
+
+* *Major enhancement #1*: added *the ability to add/delete job candidates*
+** What it does: +
+   It allows job agents to save relevant information of job candidates such as their desired job, expected salary etc.
+** Justification: +
+   Enables job agents to record and access required information of job candidates in RecruitBook efficiently.
+
+* *Major enhancement #2*: added *the ability to add/delete companies*
+** What it does: +
+   It allows job agents to save relevant information of companies hiring such as the company contact, email address etc.
+** Justification: +
+   Enables job agents to record and access required information of companies in RecruitBook efficiently.
+
+* *Major enhancement #3*: added *the ability to add/delete job offers*
+** What it does:
+   + It allows job agents to save relevant information of job offers such as the hiring company, type of job etc.
+** Justification:
+   + Enables job agents to record and access required information of job offers in RecruitBook efficiently.
+
+* *Minor enhancement #1*: +
+   Added a functionality that allows job agents to delete multiple entries in a single delete command
+
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=add]
+
+include::../UserGuide.adoc[tag=delete]
+
+include::../UserGuide.adoc[tag=clear]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=add/delete]
+
+
+

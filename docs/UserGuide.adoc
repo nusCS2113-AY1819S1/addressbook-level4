@@ -110,7 +110,8 @@ and does the switch to the other book for you when you enter the `switch` comman
 .GUI of Switch Book on Menu Bar
 image::switchBook.png[width="390"]
 
-=== Adding a candidate / company / job  : `addc` `addC`
+// tag::add[]
+=== Adding a candidate / company / job  : `addc` `addC` `addj`
 
 ==== Adds a candidate to the RecruitBook
 Format: `addc` +
@@ -123,16 +124,8 @@ Entering this command will prompt you the following: +
 Examples:
 
 * `n/John Doe g/M x/18 p/91238123 e/johndoe@gmail.com a/123, Central Boulevard, #01-111, 600123 j/WAITER h/A LEVEL s/1200`
-* `n/Mary Loe g/M x/18 p/82238123 e/maryloe@gmail.com a/113, South Boulevard, #01-111, 600123 j/WAITER h/O LEVEL s/NA`
+* `n/Mary Loe g/M x/18 p/82238123 e/maryloe@gmail.com a/113, South Boulevard, #01-111, 600123 j/WAITER h/O LEVEL s/1000`
 
-After keying in the details, you will be further prompted for details of job experience: +
-*`Enter job experience (if any) of the candidate in the following format:`* +
-`j/JOB y/YEARS_OF_EXPERIENCE c/COMPANY`
-
-Examples:
-
-* `j/Store Manager y/1 c/Mcdonalds`
-* `j/Cashier y/2 c/KFC`
 
 ==== Adds a company to the RecruitBook
 Format: `addC c/UNIQUE_COMPANY_NAME a/ADDRESS e/EMAIL p/PHONE` +
@@ -151,12 +144,15 @@ Entering this command will prompt you the following: +
 `(Enter 'cancel' to stop adding jobs)` +
 `Example: c/McDonalds j/cashier g/M xr/20-30 h/O levels s/1200`
 
-Note: COMPANY specified has to be added to RecruitBook first!
+[NOTE]
+COMPANY specified has to be added to RecruitBook first!
 
 Examples:
 
 *	`c/Subway j/Cashier g/M xr/20-30 h/O levels s/1200`
 *	`c/KFC j/Cook g/F xr/20-30 h/O levels s/1400`
+
+// end::add[]
 
 === Editing a candidate / company / job : `edit`
 
@@ -196,6 +192,7 @@ Examples:
 *	`editj 1 x/20-30` +
 (Edits the `MIN_AGE-MAX_AGE` attribute of the 1st job offer to be of 20 to 30 years of age)
 
+// tag::delete[]
 === Deleting candidates / companies / job offers : `delete`
 
 ==== Deleting candidate(s)
@@ -242,6 +239,8 @@ Step 1. `listj` +
 
 Step 2. `deletej 5-4,6` +
 (Deletes the 4th, 5th and 6th job in the job list)
+
+// end::delete[]
 
 === Listing details of candidates / companies / jobs: `listc` `listC`
 
@@ -445,6 +444,7 @@ Examples:
 
 Format : `cancel`
 
+// tag::clear[]
 === Clearing all entries : `clear`
 
 Clears all entries from the Candidate Book. +
@@ -452,6 +452,8 @@ Format: `clearc`
 
 Clears all entries from the Company Book. +
 Format: `clearC`
+
+// end::clear[]
 
 === Exiting the program : `exit`
 
