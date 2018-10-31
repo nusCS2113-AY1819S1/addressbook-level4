@@ -104,25 +104,8 @@ public class AddTestMarksCommandTest {
         addTestMarksCommand.execute(modelStub, commandHistory);
 
     }
+    
 
-//    @Test
-//    public void execute_duplicatePerson_throwsCommandException() throws Exception {
-//
-//        ModelStubAcceptingTestAdded modelStub = new ModelStubAcceptingTestAdded();
-//
-//        List<String> nameKeywordsList = new ArrayList<>();
-//        nameKeywordsList.add("Alice");
-//        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
-//                new NameContainsKeywordsPredicate(nameKeywordsList);
-//
-//        AddTestMarksCommand addTestMarksCommand =
-//                new AddTestMarksCommand(nameContainsKeywordsPredicate, VALID_TEST_NAME_AMY, VALID_TEST_MARK_AMY, nameKeywordsList);
-//        Person newPerson = new PersonBuilder().withName("Alice Yang").build();
-//        thrown.expect(CommandException.class);
-//        thrown.expectMessage(AddTestMarksCommand.MESSAGE_PERSON_DUPLICATE_FOUND);
-//        addTestMarksCommand.execute(modelStub, commandHistory);
-//
-//    }
 
     @Test
     public void equals() {
