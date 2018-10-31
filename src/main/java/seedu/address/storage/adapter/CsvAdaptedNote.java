@@ -9,7 +9,6 @@ public class CsvAdaptedNote {
 
     private static final String COMMA_DELIM = ",";
     private static final String DOUBLE_QUOTE = "\"";
-    private static final String EMPTY_TITLE = "(No Title)";
 
     private String moduleCode;
     private String title;

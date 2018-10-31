@@ -13,6 +13,8 @@ import seedu.address.model.Model;
 import seedu.address.model.classroom.Attendance;
 import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.ClassroomManager;
+import seedu.address.model.module.ModuleManager;
+import seedu.address.model.student.StudentManager;
 
 /**
  * Modify the class attendance list for a specified student for the system.
@@ -44,6 +46,8 @@ public class ClassDeleteStudentAttendanceCommand extends Command {
             + " is already absent: %1$s";
     private static final String MESSAGE_NO_CLASSROOM_STUDENT_ATTENDANCE = "There is no classroom attendance marked"
             + " for this class";
+    private static final String MESSAGE_INVALID_STUDENT = "Student does not exist";
+    private static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
 
     private final String className;
     private final String moduleCode;
@@ -70,6 +74,16 @@ public class ClassDeleteStudentAttendanceCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         ClassroomManager classroomManager = ClassroomManager.getInstance();
+        ModuleManager moduleManager = ModuleManager.getInstance();
+        StudentManager studentManager = StudentManager.getInstance();
+
+        if (!moduleManager.doesModuleExist(moduleCode)) {
+            throw new CommandException(MESSAGE_MODULE_CODE_INVALID);
+        }
+
+        if (!studentManager.doesStudentExistForGivenMatricNo(matricNo)) {
+            throw new CommandException(MESSAGE_INVALID_STUDENT);
+        }
 
         Classroom classToModifyAttendance = classroomManager.findClassroom(className, moduleCode);
         if (classToModifyAttendance == null) {

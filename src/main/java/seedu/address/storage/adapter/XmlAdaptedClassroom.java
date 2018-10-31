@@ -11,6 +11,7 @@ import seedu.address.model.classroom.ClassName;
 import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.Enrollment;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.person.MatricNo;
 
 /**
  * JAXB-friendly adapted version of the Classroom.
@@ -89,7 +90,16 @@ public class XmlAdaptedClassroom {
         }
         final Enrollment modelEnrollment = new Enrollment(maxEnrollment);
         Classroom classroom = new Classroom(modelClassName, modelModuleCode, modelEnrollment);
-        classroom.setStudents(studentList);
+
+        ArrayList<String> modelStudentList = new ArrayList<>();
+
+        for (String matricNo : studentList) {
+            if (MatricNo.isValidMatricNo(matricNo)) {
+                modelStudentList.add(matricNo);
+            }
+        }
+
+        classroom.setStudents(modelStudentList);
         return classroom;
     }
 

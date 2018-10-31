@@ -15,6 +15,10 @@ import seedu.address.model.note.NoteManager;
 import seedu.address.testutil.NoteBuilder;
 import seedu.address.ui.BrowserPanel;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Contains tests for NoteDeleteCommand.
  */
@@ -42,10 +46,14 @@ public class NoteDeleteCommandTest {
         BrowserPanel.setNotePageIsLoaded(false);
 
         noteManager.addNote(dummyNote.build());
-        noteManager.saveNoteList(); // contains one note in list
+        noteManager.addNote(dummyNote.build());
+        noteManager.saveNoteList(); // contains two notes in list
+        noteManager.setFilteredNotesNoFilter();
 
-        int index = 1; // arraylist size: 1, accessed index = 0 (zero-based) -> within bounds
-        NoteDeleteCommand noteDeleteCommand = new NoteDeleteCommand(index);
+        // delete index 0 and 1 (zero-based) in list
+        List<Integer> indexList = new ArrayList<>(Arrays.asList(1));
+
+        NoteDeleteCommand noteDeleteCommand = new NoteDeleteCommand(indexList);
 
         CommandResult result = noteDeleteCommand.execute(new ModelManager(), new CommandHistory());
         assertEquals(expectedMessage, result.feedbackToUser);
@@ -58,11 +66,13 @@ public class NoteDeleteCommandTest {
         noteManager.saveNoteList();
         noteManager.setFilteredNotesNoFilter();
 
-        int index = 5; // arraylist size: 2, accessed index = 4 (zero-based) -> out of bounds
-        NoteDeleteCommand noteDeleteCommand = new NoteDeleteCommand(index);
+        // arraylist size: 2, delete at index = 2 (zero-based) -> out of bounds
+        List<Integer> indexList = new ArrayList<>(Arrays.asList(3));
+
+        NoteDeleteCommand noteDeleteCommand = new NoteDeleteCommand(indexList);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(String.format(NoteDeleteCommand.MESSAGE_INVALID_INDEX, index));
+        thrown.expectMessage(NoteDeleteCommand.MESSAGE_INVALID_INDEX);
         noteDeleteCommand.execute(new ModelManager(), new CommandHistory());
     }
 
@@ -76,13 +86,31 @@ public class NoteDeleteCommandTest {
         noteManager.saveNoteList();
         noteManager.setFilteredNotesNoFilter();
 
-        int index = 3; // arraylist size: 3, accessed index = 2 (zero-based) -> OK
-        NoteDeleteCommand noteDeleteCommand = new NoteDeleteCommand(index);
+        // arraylist size: 3, delete at index = 2 (zero-based) -> OK
+        List<Integer> indexList = new ArrayList<>(Arrays.asList(3));
+
+        NoteDeleteCommand noteDeleteCommand = new NoteDeleteCommand(indexList);
         CommandResult result = noteDeleteCommand.execute(new ModelManager(), new CommandHistory());
 
-        assertEquals(expectedMessage, result.feedbackToUser);
+        int size = indexList.size();
+        assertEquals(String.format(expectedMessage, size), result.feedbackToUser);
 
         int expectedSize = 2;
+        assertEquals(expectedSize, noteManager.getNotes().size());
+
+        noteManager.setFilteredNotesNoFilter();
+
+        // multiple deletion by index, must be sorted by descending order
+        indexList = new ArrayList<>(Arrays.asList(2, 1));
+
+
+        noteDeleteCommand = new NoteDeleteCommand(indexList);
+        result = noteDeleteCommand.execute(new ModelManager(), new CommandHistory());
+
+        size = indexList.size();
+        assertEquals(String.format(expectedMessage, size), result.feedbackToUser);
+
+        expectedSize = 0;
         assertEquals(expectedSize, noteManager.getNotes().size());
     }
 

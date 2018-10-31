@@ -40,6 +40,7 @@ import seedu.address.logic.commands.ModuleDeleteCommand;
 import seedu.address.logic.commands.ModuleEditCommand;
 import seedu.address.logic.commands.ModuleEnrolCommand;
 import seedu.address.logic.commands.ModuleListCommand;
+import seedu.address.logic.commands.ModuleViewCommand;
 import seedu.address.logic.commands.NoteAddCommand;
 import seedu.address.logic.commands.NoteDeleteCommand;
 import seedu.address.logic.commands.NoteEditCommand;
@@ -70,7 +71,7 @@ public class AddressBookParser {
      * Used to separate multiple command words and args
      */
     private static final Pattern ADVANCED_COMMAND_FORMAT =
-            Pattern.compile("(?<commandWords>.*?\\S+((?<=find)|(?=(?:\\s+[0-9]|\\s+[a-z]+\\/))|$))(?<arguments>.*)");
+            Pattern.compile("(?<commandWords>.*?\\S+((?<=find)|(?=(?:\\s+-?[0-9]|\\s+[a-z]+\\/))|$))(?<arguments>.*)");
 
     /**
      * Parses user input into command for execution.
@@ -176,6 +177,9 @@ public class AddressBookParser {
 
         case ModuleDeleteCommand.COMMAND_WORD:
             return new ModuleDeleteCommandParser().parse(arguments);
+
+        case ModuleViewCommand.COMMAND_WORD:
+            return new ModuleViewCommandParser().parse(arguments);
 
         case ModuleListCommand.COMMAND_WORD:
             return new ModuleListCommand();

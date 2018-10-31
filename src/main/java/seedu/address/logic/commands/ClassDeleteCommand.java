@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
@@ -8,6 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.ClassroomManager;
+import seedu.address.model.module.ModuleManager;
 
 /**
  * Deletes a class from the classroom list.
@@ -28,6 +30,7 @@ public class ClassDeleteCommand extends Command {
             + " Module code: %2$s,"
             + " Enrollment size: %3$s";
     private static final String MESSAGE_FAIL = "Class belonging to module not found!";
+    private static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
 
     private final Classroom classToDelete;
     private final ClassroomManager classroomManager;
@@ -36,6 +39,7 @@ public class ClassDeleteCommand extends Command {
      * Command deletes a classroom.
      */
     public ClassDeleteCommand(String className, String moduleCode) {
+        requireAllNonNull(className, moduleCode);
         classroomManager = ClassroomManager.getInstance();
         this.classToDelete = classroomManager.findClassroom(className, moduleCode);
     }
@@ -50,9 +54,16 @@ public class ClassDeleteCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        ModuleManager moduleManager = ModuleManager.getInstance();
+
         if (classToDelete == null) {
             throw new CommandException(MESSAGE_FAIL);
         }
+
+        if (!moduleManager.doesModuleExist(classToDelete.getModuleCode().moduleCode)) {
+            throw new CommandException(MESSAGE_MODULE_CODE_INVALID);
+        }
+
         classroomManager.deleteClassroom(classToDelete);
         classroomManager.saveClassroomList();
 

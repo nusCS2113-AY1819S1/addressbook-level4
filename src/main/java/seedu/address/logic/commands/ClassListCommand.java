@@ -29,7 +29,7 @@ public class ClassListCommand extends Command {
         builder.append(HtmlTableProcessor.getH3Representation("Class List"));
 
         for (Classroom c : classroomManager.getClassroomList()) {
-            builder.append(HtmlTableProcessor.renderTableStart(new ArrayList<String>(
+            builder.append(HtmlTableProcessor.renderTableStart(new ArrayList<>(
                     Arrays.asList("Class Name", "Module Code", "Max Enrollment Size"))));
             builder.append(HtmlTableProcessor.getTableItemStart());
             builder.append(c.toClassHtmlString());
