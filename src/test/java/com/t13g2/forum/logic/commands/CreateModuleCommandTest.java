@@ -38,6 +38,12 @@ public class CreateModuleCommandTest {
     }
 
     @Test
+    public void constructor_nullModule_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        new CreateModuleCommand(null);
+    }
+
+    @Test
     public void execute_adminLoggedInCreateModule_createModuleSuccess() {
         //set the current logged in user as an admin.
         User validAdmin = new UserBuilder().build();
@@ -63,7 +69,7 @@ public class CreateModuleCommandTest {
         thrown.expectMessage(String.format(CreateModuleCommand.MESSAGE_DUPLICATE_MODULE, validModule.getModuleCode()));
 
         CommandResult commandResult = createModuleCommand.execute(model, commandHistory);
-        assertEquals(String.format(CreateModuleCommand.MESSAGE_DUPLICATE_MODULE,
+        assertEquals(String.format(createModuleCommand.MESSAGE_DUPLICATE_MODULE,
             validModule.getModuleCode()), commandResult.feedbackToUser);
     }
 

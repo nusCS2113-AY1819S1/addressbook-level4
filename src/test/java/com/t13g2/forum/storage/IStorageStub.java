@@ -40,20 +40,20 @@ public class IStorageStub implements IStorage {
         storage.put(object.getClass(), this.copyObject(object));
     }
 
-//    @Override
-//    public Object read(Class clazz) {
-//        return this.copyObject(storage.get(clazz));
-//    }
-//
-//    @Override
-//    public void remove(Class clazz) {
-//        storage.remove(clazz);
-//    }
-//
-//    @Override
-//    public void handleSourceChange(IEvent changeEvent) {
-//
-//    }
+    // @Override
+    // public Object read(Class clazz) {
+    //    return this.copyObject(storage.get(clazz));
+    // }
+    //
+    // @Override
+    // public void remove(Class clazz) {
+    //    storage.remove(clazz);
+    // }
+    //
+    // @Override
+    // public void handleSourceChange(IEvent changeEvent) {
+    //
+    // }
 
     public void refreshInstantce() {
         _instance = new IStorageStub();
