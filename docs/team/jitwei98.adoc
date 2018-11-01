@@ -7,21 +7,34 @@
 
 // image::../jitwei98.png[width="150", align="left"]
 
+// TODO: one line description of the product
 == PROJECT: https://github.com/CS2113-AY1819S1-W12-1/main[JitHub]
 
 // TODO: include UI screenshot here
 image::../Ui.png[width="600"]
 ---
 
-== Overview
+== Introduction
 
-https://github.com/CS2113-AY1819S1-W12-1/main[JitHub] is a CLI (Command Line Interface) application written in Java that saves your contacts
-and helps
- you
-schedule
-meetings
-through cross-checking the
-timetable of your group mates.
+This portfolio documents my contribution to this group project for the module https://nusmods.com/modules/CS2113T/software-engineering-object-oriented-programming[*CS2113T Software Engineering & Object-Oriented Programming*]
+ taught in the National University of Singapore.
+
+Other members of my team are: +
+Bao Lin Ruo, Chun Hong Wei, Elston Aw, and Low Jun Wei.
+
+We are required to enhance https://github.com/se-edu/addressbook-level4[a Java sample AddressBook application] with
+6kLoc(lines of code) while following software engineering principles taught in the module.
+
+=== Product Overview
+Our end product, *JitHub*, is a https://en.wikipedia.org/wiki/Command-line_interface[CLI (Command Line Interface)] desktop application that *saves your contacts* and *helps you schedule group project meetings* through cross-checking the timetable of your group mates.
+
+*JitHub* can:
+
+** Suggest available timeslot for your group project meetings
+** Import/Export data between your group members
+** Keep track of your meeting minutes
+** Keep track of tasks assigned to your group members
+** Auto complete your commands
 
 // TODO: add more stuff here
 
@@ -29,16 +42,21 @@ timetable of your group mates.
 == Summary of contributions
 
 // TODO: add file format supported in appendix?
+// TODO: add preface?
 // TODO: how many LOC?
-* *Major enhancement*: enables you to *import/export contacts and timetables in various file format*
+* *Major enhancement*: added the ability to *import/export data of different project groups*
 
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
+** What it does: allows the user to share data specific to different projects among his/her group members.
+
+** Justification: This feature improves the product significantly because only one member from the group is required to key in all the details, in contrast to requiring everyone in the team typing in the exactly same details, which is tedious and inefficient.
+// TODO: edit this part
 ** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
 ** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+// TODO: end
+// TODO: add screenshot here
+* *Minor enhancement*: added an UI enhancement that *displays the total number of persons* in the application and the ability for the application to *backup the storage file* locally.
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
-
+// TODO: edit this part
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
 * *Other contributions*:
@@ -86,7 +104,7 @@ project.**_
 //include::../DeveloperGuide.adoc[tag=undoredo]
 //
 //include::../DeveloperGuide.adoc[tag=dataencryption]
-
+//TODO: end edit
 
 // TODO: include links
 == PROJECT: AnimatedEpp
