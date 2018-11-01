@@ -17,6 +17,7 @@ import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
@@ -28,16 +29,25 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
+import seedu.address.model.user.User;
 import seedu.address.testutil.EditEventDescriptorBuilder;
 import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.UserBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalEventManager(), new UserPrefs());
+    private Model model;
     private CommandHistory commandHistory = new CommandHistory();
+
+    @Before
+    public void setUp() {
+        User user = new UserBuilder().build();
+        model = new ModelManager(getTypicalEventManager(), new UserPrefs());
+        model.logUser(user);
+    }
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -48,6 +58,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_EVENT_SUCCESS, editedEvent);
 
         Model expectedModel = new ModelManager(new EventManager(model.getEventManager()), new UserPrefs());
+        expectedModel.logUser(new UserBuilder().build());
         expectedModel.updateEvent(model.getFilteredEventList().get(0), editedEvent);
         expectedModel.commitEventManager();
 
@@ -70,6 +81,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_EVENT_SUCCESS, editedEvent);
 
         Model expectedModel = new ModelManager(new EventManager(model.getEventManager()), new UserPrefs());
+        expectedModel.logUser(new UserBuilder().build());
         expectedModel.updateEvent(lastEvent, editedEvent);
         expectedModel.commitEventManager();
 
@@ -83,6 +95,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_EVENT_SUCCESS, editedEvent);
         Model expectedModel = new ModelManager(new EventManager(model.getEventManager()), new UserPrefs());
+        expectedModel.logUser(new UserBuilder().build());
         expectedModel.commitEventManager();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -100,6 +113,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_EVENT_SUCCESS, editedEvent);
 
         Model expectedModel = new ModelManager(new EventManager(model.getEventManager()), new UserPrefs());
+        expectedModel.logUser(new UserBuilder().build());
         expectedModel.updateEvent(model.getFilteredEventList().get(0), editedEvent);
         expectedModel.commitEventManager();
 
@@ -160,6 +174,7 @@ public class EditCommandTest {
         EditEventDescriptor descriptor = new EditEventDescriptorBuilder(editedEvent).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_EVENT, descriptor);
         Model expectedModel = new ModelManager(new EventManager(model.getEventManager()), new UserPrefs());
+        expectedModel.logUser(new UserBuilder().build());
         expectedModel.updateEvent(eventToEdit, editedEvent);
         expectedModel.commitEventManager();
 
@@ -205,6 +220,7 @@ public class EditCommandTest {
 
         showEventAtIndex(model, INDEX_SECOND_EVENT);
         Event eventToEdit = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
+        expectedModel.logUser(new UserBuilder().build());
         expectedModel.updateEvent(eventToEdit, editedEvent);
         expectedModel.commitEventManager();
 
