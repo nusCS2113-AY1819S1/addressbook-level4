@@ -29,7 +29,7 @@ public class InventoryList implements ReadOnlyInventoryList {
     public InventoryList() {}
 
     /**
-     * Creates an InventoryList using the Drinkss in the {@code toBeCopied}
+     * Creates an InventoryList using the Drinks in the {@code toBeCopied}
      */
     public InventoryList(ReadOnlyInventoryList toBeCopied) {
         this();
