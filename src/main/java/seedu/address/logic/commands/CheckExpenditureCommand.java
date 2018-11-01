@@ -73,33 +73,49 @@ public class CheckExpenditureCommand extends Command {
 
             if ((year1 < year) && (year2 > year)) {
                 total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
-                dpd.setValue(editedExpenditure.getDescription().toString(), Integer.parseInt(editedExpenditure.getMoney().toString()));
+                dpd.setValue(editedExpenditure.getDescription().toString()+ ":"+
+                        Integer.parseInt(editedExpenditure.getMoney().toString()),
+                        Integer.parseInt(editedExpenditure.getMoney().toString()));
             } else if ((year1 == year) && (year2 == year)) {
                 if ((month1 < month) && (month2 > month)) {
                     total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
-                    dpd.setValue(editedExpenditure.getDescription().toString(), Integer.parseInt(editedExpenditure.getMoney().toString()));
+                    dpd.setValue(editedExpenditure.getDescription().toString()+ ":"+
+                            Integer.parseInt(editedExpenditure.getMoney().toString()),
+                            Integer.parseInt(editedExpenditure.getMoney().toString()));
                 } else if ((month1 == month) && (day1 <= day)) {
                     total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
-                    dpd.setValue(editedExpenditure.getDescription().toString(), Integer.parseInt(editedExpenditure.getMoney().toString()));
+                    dpd.setValue(editedExpenditure.getDescription().toString()+ ":"+
+                            Integer.parseInt(editedExpenditure.getMoney().toString()),
+                            Integer.parseInt(editedExpenditure.getMoney().toString()));
                 } else if ((month2 == month) && (day2 >= day)) {
                     total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
-                    dpd.setValue(editedExpenditure.getDescription().toString(), Integer.parseInt(editedExpenditure.getMoney().toString()));
+                    dpd.setValue(editedExpenditure.getDescription().toString()+ ":"+
+                            Integer.parseInt(editedExpenditure.getMoney().toString()),
+                            Integer.parseInt(editedExpenditure.getMoney().toString()));
                 }
             } else if ((year1 == year) && (year2 > year)) {
                 if (month1 < month) {
                     total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
-                    dpd.setValue(editedExpenditure.getDescription().toString(), Integer.parseInt(editedExpenditure.getMoney().toString()));
+                    dpd.setValue(editedExpenditure.getDescription().toString()+ ":"+
+                            Integer.parseInt(editedExpenditure.getMoney().toString()),
+                            Integer.parseInt(editedExpenditure.getMoney().toString()));
                 } else if ((month1 == month) && (day1 <= day)) {
                     total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
-                    dpd.setValue(editedExpenditure.getDescription().toString(), Integer.parseInt(editedExpenditure.getMoney().toString()));
+                    dpd.setValue(editedExpenditure.getDescription().toString()+ ":"+
+                            Integer.parseInt(editedExpenditure.getMoney().toString()),
+                            Integer.parseInt(editedExpenditure.getMoney().toString()));
                 }
             } else if ((year1 < year) && (year2 == year)) {
                 if (month2 > month) {
                     total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
-                    dpd.setValue(editedExpenditure.getDescription().toString(), Integer.parseInt(editedExpenditure.getMoney().toString()));
+                    dpd.setValue(editedExpenditure.getDescription().toString()+ ":"+
+                            Integer.parseInt(editedExpenditure.getMoney().toString()),
+                            Integer.parseInt(editedExpenditure.getMoney().toString()));
                 } else if ((month2 == month) && (day2 >= day)) {
                     total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
-                    dpd.setValue(editedExpenditure.getDescription().toString(), Integer.parseInt(editedExpenditure.getMoney().toString()));
+                    dpd.setValue(editedExpenditure.getDescription().toString()+ ":"+
+                            Integer.parseInt(editedExpenditure.getMoney().toString()),
+                            Integer.parseInt(editedExpenditure.getMoney().toString()));
 
                 }
             }
