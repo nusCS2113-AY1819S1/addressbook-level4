@@ -870,6 +870,7 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Value proposition*: To assist students in managing all of their academic work and spendings which will improve their student life
 
+// tag::userStories[]
 [appendix]
 == User Stories
 
@@ -926,7 +927,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`*` |student who does not record their money spending regularly |notified by the Expenditure Tracker to note down the amount of money spent on food, snacks or other categories respectively everyday |
 |=======================================================================
-
+// end::userStories[]
 
 [appendix]
 == Use Cases
