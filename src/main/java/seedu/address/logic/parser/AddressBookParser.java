@@ -6,7 +6,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.CommandSuggestion;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -14,6 +13,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportAllCommand;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
@@ -24,6 +24,7 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.TodoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.suggestions.WrongCommandSuggestion;
 
 
 /**
@@ -44,7 +45,10 @@ public class AddressBookParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput) throws ParseException {
-        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+
+        userInput = new Processor().commandParser(userInput.trim());
+
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput);
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
@@ -103,7 +107,10 @@ public class AddressBookParser {
 
         case ScheduleCommand.COMMAND_WORD:
         case ScheduleCommand.COMMAND_ALIAS:
-            return new ScheduleCommand();
+            return new ScheduleCommandParser().parse(arguments);
+
+        case ExportCommand.COMMAND_WORD:
+            return new ExportCommandParser().parse(arguments);
 
         case ExportAllCommand.COMMAND_WORD:
             return new ExportAllCommandParser().parse(arguments);
@@ -112,7 +119,7 @@ public class AddressBookParser {
             return new TodoCommandParser().parse(arguments);
 
         default:
-            String suggestion = new CommandSuggestion().getSuggestion(commandWord);
+            String suggestion = new WrongCommandSuggestion().getSuggestion(commandWord);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND + System.lineSeparator() + suggestion);
         }
     }
