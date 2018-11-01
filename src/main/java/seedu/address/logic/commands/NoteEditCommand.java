@@ -39,7 +39,7 @@ public class NoteEditCommand extends Command {
 
     public static final String MESSAGE_NOTE_PAGE_NOT_LOADED = "The command has been blocked by the system.\n"
             + "Please call the command to list notes before calling this command again "
-            + "to avoid accidentally editing another note.\n"
+            + "to avoid accidentally editing a different note.\n"
             + "Command: " + NoteListCommand.COMMAND_WORD
             + " [" + PREFIX_MODULE_CODE + "MODULE_CODE]";
 

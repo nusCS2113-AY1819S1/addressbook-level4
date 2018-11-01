@@ -254,8 +254,8 @@ public class NoteManager {
     /**
      * Deletes all notes that contains the {@code moduleCode}.
      */
-    public static void deleteNotesByModuleCode(String moduleCode) {
-        noteManager.getNotes().removeIf(n -> n.getModuleCode().toString().equalsIgnoreCase(moduleCode));
-        noteManager.refreshFilteredNotes();
+    public void deleteNotesByModuleCode(String moduleCode) {
+        notes.removeIf(n -> n.getModuleCode().toString().equalsIgnoreCase(moduleCode));
+        refreshFilteredNotes();
     }
 }

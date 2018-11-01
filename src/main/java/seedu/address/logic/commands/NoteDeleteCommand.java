@@ -21,11 +21,11 @@ public class NoteDeleteCommand extends Command {
     public static final String MESSAGE_DUPLICATE_INDEX_FOUND = "Invalid input!\n"
             + "Duplicate indexes are found.";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a note. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete notes. "
             + "Parameters: "
-            + "INDEX\n"
+            + "INDEX [MORE_INDEXES]..\n"
             + "Example: " + COMMAND_WORD + " "
-            + "2";
+            + "2 4 3";
 
     public static final String MESSAGE_SUCCESS = "(%s) note(s) successfully deleted.";
     public static final String MESSAGE_INVALID_INDEX = "Invalid input! INDEX is out of bounds.";
@@ -34,7 +34,7 @@ public class NoteDeleteCommand extends Command {
 
     public static final String MESSAGE_NOTE_PAGE_NOT_LOADED = "The command has been blocked by the system.\n"
             + "Please call the command to list notes before calling this command again "
-            + "to avoid accidentally deleting another note.\n"
+            + "to avoid accidentally deleting a different note.\n"
             + "Command: " + NoteListCommand.COMMAND_WORD
             + " [" + PREFIX_MODULE_CODE + "MODULE_CODE]";
 

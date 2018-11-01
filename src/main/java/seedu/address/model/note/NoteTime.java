@@ -17,7 +17,7 @@ public class NoteTime {
 
     public static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("hh:mm a");
     public static final DateTimeFormatter TIME_FORMATTER =
-            new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("h:m a").toFormatter();
+            new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("h:mm a").toFormatter();
 
     /**
      * Default time to be used if start time is not specified (12:00 AM).
