@@ -176,7 +176,8 @@ Format: `addEvent n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START_TIME e/END_T
 
 [NOTE]
 ====
-* Current checking of date format is loose. Certain invalid date may still be accepted, such as 2018-02-30.
+* Leap years are not considered during date validation.
+* Events created cannot span multiple days.
 ====
 
 Example:
