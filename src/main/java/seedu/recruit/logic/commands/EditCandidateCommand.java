@@ -38,7 +38,6 @@ import seedu.recruit.model.commons.Phone;
 import seedu.recruit.model.joboffer.Job;
 import seedu.recruit.model.joboffer.Salary;
 import seedu.recruit.model.tag.Tag;
-import seedu.recruit.ui.MainWindow;
 
 /**
  * Edits the details of an existing candidate in the recruit book.
@@ -88,9 +87,7 @@ public class EditCandidateCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        if (!MainWindow.getDisplayedBook().equals("candidateBook")) {
-            EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
-        }
+        EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
 
         List<Candidate> lastShownList = model.getFilteredCandidateList();
 
@@ -100,6 +97,11 @@ public class EditCandidateCommand extends Command {
 
         Candidate candidateToEdit = lastShownList.get(index.getZeroBased());
         Candidate editedCandidate = createEditedPerson(candidateToEdit, editPersonDescriptor);
+
+        Tag blacklistedTag = new Tag("BLACKLISTED");
+        if (candidateToEdit.getTags().contains(blacklistedTag)) {
+            throw new CommandException(BlacklistCommand.MESSAGE_WARNING_BLACKLISTED_PERSON);
+        }
 
         if (!candidateToEdit.isSameCandidate(editedCandidate) && model.hasCandidate(editedCandidate)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);

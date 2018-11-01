@@ -1,0 +1,108 @@
+= Rachel Lee - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: RecruitBook
+
+---
+
+== Overview
+
+This Project Portfolio documents my role and contributions to this project.
+
+RecruitBook is a project created for my core module [CS2113T Software Engineering] in my second year in
+National University of Singapore(NUS). My team consists of 5 members, with a mixture of undergraduates majoring in Computer Engineering
+and undergraduates majoring in Information Security. Throughout this 13-week long project, we were required to constantly
+work on building the application while documenting on our progress and milestones.
+
+The project requirement was to morph an AddressBook application into something that responds to social needs and
+offers sustainable solutions. My team morphed it into a RecruitBook application to address the limited tools of
+the HumanResource(HR) departments and various free-lance job agents. Our application provides a sustainable solution
+as it eliminates the need for paperwork and application forms.
+
+RecruitBook is an offline desktop application that allows you to manage candidates and job offers
+throughout the process of recruiting. The user interacts with it using a CLI, and it has a GUI created with JavaFX.
+It is written in Java, and has about 10 kLoC.
+
+== Summary of contributions
+
+* *Major enhancement: added a Shortlist feature*
+** What it does: It allows the user to shortlist a candidate for a selected job offer of a selected company.
+It also allows the user to delete a shortlisted candidate from a selected job offer of a selected company.
+** Justification: This feature improves the product significantly as a user can link up the potential candidates to
+suitable job offers. It makes the recruitment process easier because a user can be easily confused by the high volume of jobs
+and candidates. Furthermore, this feature allows a shortlisted candidate to be deleted in case the user changes his/her mind.
+Overall, it emphasises on the selling point of RecruitBook as it is built to improve the way shortlisting process is carried out in the recruitment process.
+** Highlights: This feature is unlike other 1-step commands as it carries out a series of commands linked together like a shortlisting
+process. It required user to select a company, then select a job offered by that company, then select a candidate to be
+shortlisted for that job. The shortlisting process takes up 5 stages, while the deleting process takes up 4 stages.
+Moreover, this enhancement required an in-depth analysis of design alternatives as to how the shortlisted candidates are stored and displayed.
+** Credits: Used Nicholas's idea of LogicState to carry out the multi-staged process of this feature.
+
+* *Major enhancement: redesigned the User Interface(UI) to suit RecruitBook*
+** What it does: It allows the user to switch view between Candidate Book and Company Book, as well as interact with the items
+displayed on the screen.
+** Justification: This feature is essential in the product as it manages the data of both candidates and companies.
+In order to benefit the user, the app should organise the way data is displayed to the user. Overall, it emphasises on the selling point
+of RecruitBook as it is built to improve the way data is handled in the recruitment process.
+** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required a lot of research on JavaFX
+as I was new to Java and JavaFX.
+** Credits: Existing examples from how the GUI was implemented in https://github.com/nusCS2113-AY1819S1/addressbook-level4[AddressBook]
+
+* *Minor enhancement*:
+** Select feature is extended to 3 different commands: select company, select job and select candidate.
+** List feature is extended to list candidates, and list companies and job offers.
+** StatusFooterBar at the bottom of the application keeps track of the total number of candidates and companies,
+as well as their last updated time and locations of the files saved.
+** Credits: https://github.com/se-edu/addressbook-level4/pull/803[StatusFooterBar]
+
+* *Code contributed*:
+Navigate under Commits, and click _leerachel_ filter to see commits by me.
+. https://github.com/CS2113-AY1819S1-F09-4/main/tree/master/src/main[Functional Code]
+. https://github.com/CS2113-AY1819S1-F09-4/main/tree/master/src/test[Test Code]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.1` - `v2` (5 releases) on GitHub
+** Enhancements to existing features:
+*** Listing feature is enhanced to list candidates, companies and job offers:
+https://github.com/CS2113-AY1819S1-F09-4/main/pull/5[here]
+https://github.com/CS2113-AY1819S1-F09-4/main/pull/59[here]
+*** Morphed test files to suit RecruitBook: https://github.com/CS2113-AY1819S1-F09-4/main/pull/114[here]
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide and reorganised Developer Guide: https://github.com/CS2113-AY1819S1-F09-4/main/pull/109[here]
+** Community:
+*** PRs reviewed (with non-trivial review comments):
+https://github.com/CS2113-AY1819S1-F09-4/main/pull/105[here]
+https://github.com/CS2113-AY1819S1-F09-4/main/pull/97[here]
+https://github.com/CS2113-AY1819S1-F09-4/main/pull/61[here]
+** Tools:
+*** Integrated a Travis to the team repo
+*** Integrated a Auto-publishing of documents for team repo
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+* include::../UserGuide.adoc[tag=switch]
+* include::../UserGuide.adoc[tag=select]
+* include::../UserGuide.adoc[tag=deleteShortlist]
+* include::../UserGuide.adoc[tag=shortlist]
+* include::../UserGuide.adoc[tag=list]
+
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+* include::../DeveloperGuide.adoc[tag=switch]
+* include::../DeveloperGuide.adoc[tag=shortlist]
+
+

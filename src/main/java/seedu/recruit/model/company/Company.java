@@ -57,6 +57,7 @@ public class Company {
         this.jobOffers = new UniqueJobList();
         this.jobOffers.setJobOffers(company.getUniqueJobList());
     }
+
     public CompanyName getCompanyName() {
         return companyName;
     }

@@ -19,6 +19,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_COMPANY_NAME = new Prefix("c/");
     public static final Prefix PREFIX_REVERSE = new Prefix("r/");
     public static final Prefix PREFIX_INDEX = new Prefix(",");
+    public static final Prefix PREFIX_REMOVE = new Prefix("rm");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 
 }

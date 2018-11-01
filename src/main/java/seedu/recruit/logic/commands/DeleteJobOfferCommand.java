@@ -15,7 +15,7 @@ import seedu.recruit.model.Model;
 import seedu.recruit.model.joboffer.JobOffer;
 
 /**
- * Deletes a jobOffer identified using it's displayed index from the recruit book.
+ * Deletes a jobOffer identified using its displayed index from the recruit book.
  */
 
 public class DeleteJobOfferCommand extends Command {
