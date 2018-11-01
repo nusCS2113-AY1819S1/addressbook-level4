@@ -24,7 +24,6 @@ Something Daily is a desktop address book application used for teaching Software
 
 * *Other contributions*:
 
-
 ** Project management:
 *** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
 ** Enhancements to existing features:
