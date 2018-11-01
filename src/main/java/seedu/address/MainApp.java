@@ -23,7 +23,6 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.LogoutEvent;
-import seedu.address.commons.events.ui.StopUiEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
@@ -51,7 +50,7 @@ import seedu.address.ui.UiPart;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 6, 0, true);
+    public static final Version VERSION = new Version(0, 7, 0, true);
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
 
@@ -266,7 +265,7 @@ public class MainApp extends Application {
      */
     private void closeUiWindow() {
         logger.info("============================ [ Stopping DRINK I/O ] =============================");
-        EventsCenter.getInstance().post(new StopUiEvent ());
+        //EventsCenter.getInstance().post(new StopUiEvent ());
         try {
             storage.saveLoginInfo (loginInfoList);
             storage.saveUserPrefs(userPrefs);
@@ -274,7 +273,6 @@ public class MainApp extends Application {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
         //EventsCenter.clearSubscribers ();
-        //initEventsCenter();
     }
     @Subscribe
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
