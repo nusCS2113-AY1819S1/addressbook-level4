@@ -78,12 +78,18 @@ public class ClubBudgetElementsBookTest {
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasClubBudgetElements_clubBudgetElementsWithSameIdentityFieldsInClubBudgetElementsBook_returnsTrue() {
         clubBudgetElementsBook.addClub(COMPUTING_CLUB);
         ClubBudgetElements editedClub1 = new ClubBudgetElementsBuilder(COMPUTING_CLUB)
                 .withExpectedTurnout(VALID_EXPECTED_TURNOUT_ECE).withNumberOfEvents(VALID_NUMBER_OF_EVENTS_ECE)
                 .build();
         assertTrue(clubBudgetElementsBook.hasClub(editedClub1));
+    }
+
+    @Test
+    public void getClubsList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        clubBudgetElementsBook.getClubsList().remove(0);
     }
 
     /**

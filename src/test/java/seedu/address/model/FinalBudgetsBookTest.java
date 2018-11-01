@@ -84,6 +84,12 @@ public class FinalBudgetsBookTest {
         assertTrue(finalBudgetsBook.hasClubBudget(editedClubBudget1));
     }
 
+    @Test
+    public void getClubBudgetsList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        finalBudgetsBook.getClubBudgetsList().remove(0);
+    }
+
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
