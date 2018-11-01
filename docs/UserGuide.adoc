@@ -32,7 +32,7 @@ The aim of this application is to digitise any company’s or organisation’s s
 .  window appears as shown in the image below. You will need to head over to the "Logging into system" section and follow the steps detailed 
 .  carefully in order to log into the application successfully.
 +
-image::BlankLoginInput.png[width="400"]
+image::BlankLoginInput.PNG[width="400"]
 +
 . Upon a successful attempt, you should see the main window of the application load up, as shown in the image below.
 +
@@ -102,14 +102,14 @@ image::DefaultAccountDetails.PNG[width="300"]
 ====
 After the user logs in successfully, they should expect to see the main window of the application as shown below.
 ====
-image::LoginSuccess.png[width="300"]
+image::LoginSuccess.PNG[width="300"]
 
 [NOTE]
 ====
 If the user is unable to log in successfully, they should expect to see the login input field in a pop-up box again, asking the user
 to input their login credentials again.
 ====
-image::BlankLoginInput.png[width="300"]
+image::BlankLoginInput.PNG[width="300"]
 
 [NOTE]
 ====
