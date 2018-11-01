@@ -22,10 +22,10 @@ as though we were releasing an official product for public usage to simulate an 
 We choose to create our application FinancialPlanner to allow users keep track of their financial status using a
 desktop application and is targeted at users who enjoy typing and are keen on managing their finances responsibly.
 
-The application revolves around users managing their finances by storing the
-`name`, `moneyflow`, `date` and `tags` of any form of financial activity in the application
-as a `Record`. `Moneyflow` would be the expenditure or income of the financial activity, `date` would be
-the actual date the activity was performed on and `tags` is a system for users to label their data for easy access.
+The application revolves around usage of the CLI to manage one's finances. Users can store `name`, `moneyflow`, `date`
+and `tags` of any form of financial activity in the application as a `Record`. `Moneyflow` would be the expenditure
+or income of the financial activity, `date` would be the actual date the activity was performed on and `tags` is a
+system for users to label their data for easy access. The applicat
 
 == Summary of Contributions
 
