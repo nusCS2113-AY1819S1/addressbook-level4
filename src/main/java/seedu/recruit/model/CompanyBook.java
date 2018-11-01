@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.recruit.logic.parser.Prefix;
+import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
 import seedu.recruit.model.company.UniqueCompanyList;
@@ -185,6 +186,19 @@ public class CompanyBook implements ReadOnlyCompanyBook {
     public void updateJobOffer(JobOffer target, JobOffer editedJobOffer) {
         requireAllNonNull(target, editedJobOffer);
         companyJobList.setJobOffer(target, editedJobOffer);
+    }
+
+    /** Cascading changes of candidates in to the candidate lists stored in job offers from shortlistcommand
+     */
+    public void cascadeJobListWithEditedCandidate(Candidate target, Candidate editedCandidate) {
+        requireAllNonNull(target, editedCandidate);
+
+        for (JobOffer jobOffer: companyJobList) {
+            if (jobOffer.getUniqueCandidateList().contains(target)) {
+                jobOffer.getUniqueCandidateList().setCandidate(target, editedCandidate);
+                break;
+            }
+        }
     }
 
     /**
