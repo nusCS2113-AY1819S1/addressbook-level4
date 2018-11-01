@@ -88,7 +88,6 @@ public class ExportCalendarCommand extends Command {
     }
 
     //*****************************Method related to the new export calendar command********************************
-    //TODO: Write test case for new command in test/logic/command
     /**
      * Get the current list of event that the current user
      * @param  model current Event Manager model
@@ -133,7 +132,7 @@ public class ExportCalendarCommand extends Command {
      */
     public VEvent convertEventToVEvent(Event event) {
         VEvent vEvent = new VEvent(new net.fortuna.ical4j.model.DateTime(event.getDateTime().dateTime),
-                new net.fortuna.ical4j.model.DateTime(event.getDateTime().dateTime.getTime() + 1000*60*60),
+                new net.fortuna.ical4j.model.DateTime(event.getDateTime().dateTime.getTime() + 1000 * 60 * 60),
                 event.getName().toString());
 
         //Event properties
