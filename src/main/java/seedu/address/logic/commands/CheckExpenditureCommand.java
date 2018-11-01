@@ -51,7 +51,7 @@ public class CheckExpenditureCommand extends Command {
         requireNonNull(model);
         List<Expenditure> lastShownList = model.getFilteredExpenditureList();
         Expenditure editedExpenditure;
-        DefaultPieDataset dpd = new DefaultPieDataset(); //建立一个默认的饼图
+        DefaultPieDataset dpd = new DefaultPieDataset(); 
 
         int index = 0;
         float total = 0;

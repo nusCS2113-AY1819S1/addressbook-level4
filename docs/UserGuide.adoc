@@ -268,7 +268,7 @@ Format: `ET_check start/STARTDATE end/ENDDATE`
 Examples:
 
 * `ET_check start/01-01-2017 start/01-01-2018` +
-Checks the status of the expenditures from 01-01-2017 to 01-01-2018 and generates a graph [coming in v1.4] to demonstrate how much money was spent on each month.
+Checks the status of the expenditures from 01-01-2017 to 01-01-2018 and generates a graph [coming in v1.4] to demonstrate how much money was spent on each expenditure.
 
 === Getting advice for spending money : `ET_advice`
 
