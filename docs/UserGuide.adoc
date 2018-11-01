@@ -161,6 +161,9 @@ Edits a person's skill in the address book.
 
 Format: `asl INDEX s/SKILL l/SKILL_LEVEL`
 
+[TIP]
+A skill level must be an integer from 0 to 100 (inclusive).
+
 Examples:
 
 * `asl 2 s/Photography l/30`
