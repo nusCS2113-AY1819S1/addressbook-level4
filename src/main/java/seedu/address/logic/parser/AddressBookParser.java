@@ -46,7 +46,7 @@ public class AddressBookParser {
      */
     public Command parseCommand(String userInput) throws ParseException {
 
-    //    userInput = new Processor().commandParser(userInput.trim());
+        //userInput = new Processor().commandParser(userInput.trim());
 
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
