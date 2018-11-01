@@ -13,35 +13,45 @@ Something Daily is a desktop address book application used for teaching Software
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+* *Major enhancement*: designed *models for Expenditure Tracker*
+** What it does: the most basic components of this product, execute the commands typed by user in the lowest level.
+** Justification: This enhancement improves the product significantly because the models are the foundation of Expenditure Tracker.
+
+* *Major enhancement*: designed *storage for Expenditure Tracker*
+** What it does: stores the expenditures that user has recorded and direct it to a particular path.
+** Justification: This enhancement improves the product significantly because the storage keeps the record of expenditures recorded by the user so that he/she will never lose the history records.
+
+* *Major enhancement*: designed *user interface for Expenditure Tracker*
+** What it does: displays the expenditures recorded in Expenditure Tracker properly.
+** Justification: This enhancement improves the product significantly because the UI is the only place for users to see the expenditures and do commands.
+
+* *Major enhancement*: added *tests for Expenditure Tracker*
+** What it does: tests that whether everything related to Expenditure Tracker works properly.
+** Justification: This enhancement improves the product significantly because the tests help developers find out the bug to fix.
+
+* *Major enhancement*: added *the ability to add an expenditure*
+** What it does: allows the user to add an expenditure to Expenditure Tracker.
+** Justification: This feature improves the product significantly because a user needs to add an expenditure to record.
+
+* *Major enhancement*: added *the ability to get advice from Expenditure Tracker on how to save money*
+** What it does: If the user has no idea on where he/she spent there money and want to get some advice on how to save money in the following period, this command will give the user a summary on those.
+** Justification: This feature improves the product significantly because a user who is not capable of managing money can get advice on how to spend their money properly.
+
+* *Major enhancement*: added *the ability to view expenditure on a particular day or of a particular category*
+** What it does: allows the user to see only the expenditures on a specific day or of a specific category.
+** Justification: This feature improves the product significantly because user might not want to see all the expenditures have been made from beginning till now, this enhancement provides user with features that user can view the expenditures only on a particular day or of a particular category, which depends on the user's preference.
 
 * *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=&sort=displayName&since=2018-09-12&until=2018-10-30&timeframe=day&reverse=false&repoSort=true[Dashboard]]
 
 * *Other contributions*:
 
-** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Added expenditure tracker information to User Guide and Developer Guide.
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
-
-_{you can add/remove categories in the list above}_
+*** PRs reviewed (with review comments): https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed[#80], https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed[#68], https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed[#23], https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed[#20]
+*** Contributed to forum discussions (examples:  https://github.com/nusCS2113-AY1819S1/forum/issues[#60])
 
 == Contributions to the User Guide
 
@@ -50,23 +60,16 @@ _{you can add/remove categories in the list above}_
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
+include::../UserGuide.adoc[tag=ETadd]
 
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=ETview]
+
+include::../UserGuide.adoc[tag=ETadvice]
 
 == Contributions to the Developer Guide
 
 |===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|_The user stories of Expenditure Tracker given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
-
-include::../DeveloperGuide.adoc[tag=dataencryption]
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
+include::../DeveloperGuide.adoc[tag=userStories]

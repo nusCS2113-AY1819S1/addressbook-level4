@@ -180,6 +180,7 @@ The tasks are now sorted by its due date.
 * `TDL_view uncompleted` + `TDL_sort priority` +
 All uncompleted tasks will be sorted by their priority level.
 
+// tag::ETadd[]
 === Adding an expenditure : `ET_add`
 
 Adds an expenditure to Expenditure Tracker +
@@ -195,6 +196,7 @@ Format: `ET_add e/DESCRIPTION d/DATE m/MONEY c/CATEGORY`
 Examples:
 
 * `ET_add e/Chicken rice d/12-09-2018 m/4.2 c/Food`
+// end::ETadd[]
 
 === Editing an expenditure : `ET_edit`
 
@@ -232,6 +234,7 @@ Deletes the 2nd expenditure in the Expenditure Tracker.
 * `ET_delete 1` +
 Deletes the 1st expenditure in the Expenditure Tracker.
 
+// tag::ETview[]
 === Viewing expenditures : `ET_view`
 
 Shows a filtered list of expenditures in the expenditure tracker. +
@@ -254,6 +257,7 @@ The list is now populated with expenditures of `Electronics` category.
 
 * `ET_view all` +
 The list is now populated with all expenditures regardless of their date or category.
+// end::ETview[]
 
 === Checking expenditures : `ET_check`
 
@@ -270,6 +274,7 @@ Examples:
 * `ET_check start/01-01-2017 start/01-01-2018` +
 Checks the status of the expenditures from 01-01-2017 to 01-01-2018 and generates a graph [coming in v1.4] to demonstrate how much money was spent on each month.
 
+// tag::ETadvice[]
 === Getting advice for spending money : `ET_advice`
 
 Gives a short summary of the expenditures made so far and provides advice on how to spend a particular amount of money in a given period of time. +
@@ -286,6 +291,7 @@ Examples:
 Gives a short summary of the expenditures made so far and provides advice on how to spend 1000 SGD in the following 25 days.
 * `ET_advice m/240 numofdays/14` +
 Gives a short summary of the expenditures made so far and provides advice on how to spend 240 SGD in the following 14 days.
+// end::ETadvice[]
 
 === Listing entered commands : `history`
 
