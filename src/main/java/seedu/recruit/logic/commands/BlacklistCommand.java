@@ -82,6 +82,7 @@ public class BlacklistCommand extends Command {
 
         model.updateCandidate(selectedCandidateBlacklist, updatedCandidate);
         model.commitCandidateBook();
+        model.commitCompanyBook();
         if  (rmCheck) {
             return new CommandResult(String.format(MESSAGE_BLACKLIST_SUCCESS, updatedCandidate));
         } else {
