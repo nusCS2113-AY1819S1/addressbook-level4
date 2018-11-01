@@ -7,14 +7,12 @@ import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_STOC
 
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
-
 import javafx.fxml.FXML;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import seedu.address.commons.core.CurrentUser;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.logic.LogicChangedEvent;
+
 
 /**
  * Controller for a help page
@@ -28,6 +26,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_FILE_PATH_STOCK_TAKER = "/docs/StockTakerHelpWindow.html";
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
+
     @FXML
     private WebView browser;
 
@@ -41,7 +40,6 @@ public class HelpWindow extends UiPart<Stage> {
         String fileOpening = setFilePathAccordingToRole();
         String userGuideUrl = getClass().getResource(fileOpening).toString();
         browser.getEngine().load(userGuideUrl);
-        registerAsAnEventHandler(this);
     }
 
     /**
@@ -105,11 +103,5 @@ public class HelpWindow extends UiPart<Stage> {
             return USERGUIDE_FILE_PATH_STOCK_TAKER;
         }
         return USERGUIDE_FILE_PATH;
-    }
-    @Subscribe
-    private void handleLogicChangedEvent(LogicChangedEvent event) {
-        String fileOpening = setFilePathAccordingToRole();
-        String userGuideUrl = getClass().getResource(fileOpening).toString();
-        browser.getEngine().load(userGuideUrl);
     }
 }

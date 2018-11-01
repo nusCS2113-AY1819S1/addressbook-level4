@@ -53,13 +53,13 @@ public class AddDrinkCommand extends Command {
         model.addDrink(toAdd);
 
         if (model instanceof AdminModel) {
-            System.out.println("add drinkCommand");
+            System.out.println ("add drinkCommand");
             System.out.println(((AdminModelManager) model).isValid());
         } else {
             System.out.println("not rights");
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS,
-                toAdd.getName().toString(), toAdd.getRetailPrice().toString()));
+                toAdd.getName ().toString (), toAdd.getRetailPrice ().toString ()));
     }
 
     @Override

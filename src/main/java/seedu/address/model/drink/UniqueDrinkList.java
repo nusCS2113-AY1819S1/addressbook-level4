@@ -147,19 +147,4 @@ public class UniqueDrinkList implements Iterable<Drink> {
         }
         return true;
     }
-
-    /**
-     * Returns the reference to drink in inventory as specified by {@code drink}
-     * Pre-condition: drink must exit in inventory list.
-     */
-    public Drink find(Drink drink) {
-        requireNonNull(drink);
-        for (Drink d : internalList) {
-            if (d.isSameDrink(drink)) {
-                return d;
-            }
-        }
-
-        throw new DrinkNotFoundException();
-    }
 }

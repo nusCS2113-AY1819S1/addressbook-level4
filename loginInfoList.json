@@ -9,35 +9,5 @@
     "authenticationLevel" : {
       "authenticationLevel" : "ADMIN"
     }
-  }, {
-    "userName" : {
-      "userName" : "stockTaker"
-    },
-    "password" : {
-      "password" : "Gcf70h4aWQ1T9NMxE03XM3nq3nCmFGihnO4xMzHMgP0="
-    },
-    "authenticationLevel" : {
-      "authenticationLevel" : "STOCKTAKER"
-    }
-  }, {
-    "userName" : {
-      "userName" : "manager"
-    },
-    "password" : {
-      "password" : "Gcf70h4aWQ1T9NMxE03XM3nq3nCmFGihnO4xMzHMgP0="
-    },
-    "authenticationLevel" : {
-      "authenticationLevel" : "MANAGER"
-    }
-  }, {
-    "userName" : {
-      "userName" : "accountant"
-    },
-    "password" : {
-      "password" : "Gcf70h4aWQ1T9NMxE03XM3nq3nCmFGihnO4xMzHMgP0="
-    },
-    "authenticationLevel" : {
-      "authenticationLevel" : "ACCOUNTANT"
-    }
   } ]
 }

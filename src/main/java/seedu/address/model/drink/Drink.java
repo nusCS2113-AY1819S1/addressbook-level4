@@ -25,22 +25,17 @@ public class Drink {
     private final Set<Tag> tags = new HashSet<>();
 
     /**
-     * Constructs a Drink for the use of adding new drink into inventory.
-     * Hence, quantity is 0 and uniqueBatchList is empty
+     * Every field must be present and not null.
      */
     public Drink(Name name, Price costPrice, Price retailPrice, Set<Tag> tags) {
         requireAllNonNull(name, costPrice, retailPrice, tags);
         this.name = name;
         this.costPrice = costPrice;
         this.retailPrice = retailPrice;
-        uniqueBatchList = new UniqueBatchList();
         quantity = new Quantity("0");
         this.tags.addAll(tags);
     }
 
-    /**
-     * Every field must be present and not null.
-     */
     public Drink(Name name, Price costPrice, Price retailPrice, Quantity quantity, Set<Tag> tags) {
         requireAllNonNull(name, costPrice, retailPrice, quantity, tags);
         this.name = name;
@@ -48,13 +43,6 @@ public class Drink {
         this.retailPrice = retailPrice;
         this.quantity = quantity;
         this.tags.addAll(tags);
-    }
-
-    public Drink(Name name) {
-        this.name = name;
-        this.costPrice = new Price("0");
-        this.retailPrice = new Price("0");
-        this.quantity = new Quantity("0");
     }
 
     public Name getName() {
@@ -147,25 +135,12 @@ public class Drink {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(", Tags: ");
+                .append(" Selling price: ")
+                .append(getRetailPrice())
+                .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
 
-
-    /**
-     * Decreases the quantity of the drink, using {@code quantity} as the value to decrease
-     */
-    public void decreaseQuantity(Quantity quantity) {
-        //uniqueBatchList.updateBatchTransaction();
-    }
-
-    /**
-     * Increases the quantity of the drink, using {@code quantity} as the value to increase
-     */
-    public void increaseQuantity(Quantity quantity) {
-        // Batch batch = new Batch
-
-    }
 }
 

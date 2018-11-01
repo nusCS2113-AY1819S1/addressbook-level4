@@ -58,15 +58,6 @@ public interface Model {
      */
     void updateFilteredDrinkList(Predicate<Drink> predicate);
 
-
-
-    // =============== transactions commands =====================
-
-    // ================ analysis commands ==========================
-
-
-
-
     //================= login function command========================//
 
     /**

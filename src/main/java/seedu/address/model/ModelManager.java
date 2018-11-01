@@ -9,14 +9,11 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import seedu.address.analysis.Analysis;
-import seedu.address.analysis.AnalysisManager;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LoginInfo;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.InventoryListChangedEvent;
 import seedu.address.model.drink.Drink;
-import seedu.address.model.transaction.TransactionList;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.UserName;
 
@@ -27,17 +24,14 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     protected LoginInfoManager loginInfoManager;
-    protected final FilteredList<Drink> filteredDrinks;
-    protected final InventoryList inventoryList;
-    protected final TransactionList transactionList;
-    protected final Analysis analysis;
+    private final FilteredList<Drink> filteredDrinks;
+    private final InventoryList inventoryList;
 
     /**
-     * Initializes a ModelManager with the given inventoryList, userPrefs and transactionList
+     * Initializes a ModelManager with the given inventoryList and userPrefs.
      */
     public ModelManager(ReadOnlyInventoryList readOnlyInventoryList, UserPrefs userPrefs,
-                        LoginInfoManager loginInfoManager, TransactionList transactionList) {
-
+                        LoginInfoManager loginInfoManager) {
         super();
         requireAllNonNull(readOnlyInventoryList, userPrefs);
 
@@ -46,13 +40,10 @@ public class ModelManager extends ComponentManager implements Model {
         inventoryList = new InventoryList(readOnlyInventoryList);
         filteredDrinks = new FilteredList<>(inventoryList.getDrinkList());
         this.loginInfoManager = loginInfoManager;
-        this.transactionList = transactionList;
-        analysis = new AnalysisManager(transactionList);
-        // TODO: transaction manager, facade for transactions
     }
 
     public ModelManager() {
-        this(new InventoryList(), new UserPrefs(), new LoginInfoManager(), new TransactionList());
+        this(new InventoryList(), new UserPrefs() , new LoginInfoManager ());
     }
 
     @Override
@@ -66,11 +57,9 @@ public class ModelManager extends ComponentManager implements Model {
         return inventoryList;
     }
 
-    /**
-     * Raises an event to indicate the model has changed
-     */
+    /** Raises an event to indicate the model has changed */
     private void indicateInventoryListChanged() {
-        raise(new InventoryListChangedEvent(inventoryList));
+        raise(new InventoryListChangedEvent (inventoryList));
     }
 
     @Override
@@ -101,11 +90,6 @@ public class ModelManager extends ComponentManager implements Model {
         indicateInventoryListChanged();
     }
     */
-
-    private Drink findDrinkByName(Drink drink) {
-        Drink actualDrinkRef = inventoryList.findDrinkByName(drink);
-        return actualDrinkRef;
-    }
 
     //=========== Filtered Drink List Accessors =============================================================
 
@@ -142,26 +126,21 @@ public class ModelManager extends ComponentManager implements Model {
                 && inventoryList.equals(other.inventoryList);
     }
 
-    // ========== stockTaker commands ====================================
-
-
-    // ========== Accountant commands =================================================
-
-
-    //=========== Login feature command ==============================================
+    //=========== Login feature command ==============================================//
 
     @Override
-    public void changePassword(UserName userName, Password newHashedPassword) {
-        loginInfoManager.changePassword(userName, newHashedPassword);
+    public void changePassword (UserName userName, Password newHashedPassword) {
+        loginInfoManager.changePassword (userName, newHashedPassword);
     }
 
     @Override
-    public LoginInfo getLoginInfo(UserName userName) {
-        return loginInfoManager.getLoginInfo(userName);
+    public LoginInfo getLoginInfo (UserName userName) {
+        return loginInfoManager.getLoginInfo (userName);
     }
 
     @Override
-    public boolean isUserNameExist(UserName userName) {
-        return loginInfoManager.isUserNameExist(userName);
+    public boolean isUserNameExist (UserName userName) {
+        return loginInfoManager.isUserNameExist (userName);
     }
+
 }

@@ -18,9 +18,7 @@ import javafx.stage.Stage;
 import seedu.address.authentication.LoginUtils;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.ChangeModelEvent;
 import seedu.address.commons.events.model.InitInventoryListEvent;
-import seedu.address.commons.events.ui.RestartUiEvent;
 import seedu.address.commons.events.ui.StartUiEvent;
 import seedu.address.model.LoginInfoManager;
 
@@ -32,7 +30,6 @@ import seedu.address.model.LoginInfoManager;
 public class LoginController {
 
     protected static LoginInfoManager loginInfoManager;
-    private static boolean firstTimeLogin = true;
     private String username;
     private String password;
     @FXML
@@ -209,14 +206,8 @@ public class LoginController {
         Stage primaryStage = (Stage) passwordField.getScene().getWindow();
         primaryStage.hide();
         Stage stage = new Stage ();
-        if (firstTimeLogin) {
-            EventsCenter.getInstance ().post (new InitInventoryListEvent ());
-            EventsCenter.getInstance ().post (new StartUiEvent (stage));
-            firstTimeLogin = false;
-        } else {
-            EventsCenter.getInstance ().post (new ChangeModelEvent ());
-            EventsCenter.getInstance ().post (new RestartUiEvent (stage));
-        }
+        EventsCenter.getInstance().post(new InitInventoryListEvent ());
+        EventsCenter.getInstance().post(new StartUiEvent (stage));
 
     }
     /**
