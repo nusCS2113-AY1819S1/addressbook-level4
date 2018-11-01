@@ -3,7 +3,6 @@ package systemtests;
 import static org.junit.Assert.assertTrue;
 import static seedu.planner.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.planner.commons.core.Messages.MESSAGE_INVALID_RECORD_DISPLAYED_INDEX;
-import static seedu.planner.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.planner.logic.commands.SelectCommand.MESSAGE_SELECT_RECORD_SUCCESS;
 import static seedu.planner.testutil.TestUtil.getLastIndex;
 import static seedu.planner.testutil.TestUtil.getMidIndex;

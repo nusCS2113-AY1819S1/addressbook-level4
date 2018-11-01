@@ -1,6 +1,5 @@
 package systemtests;
 
-import static seedu.planner.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.planner.testutil.TypicalRecords.KEYWORD_MATCHING_BURSARY;
 
 import org.junit.Test;

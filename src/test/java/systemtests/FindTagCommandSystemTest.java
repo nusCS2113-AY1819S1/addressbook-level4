@@ -2,7 +2,6 @@ package systemtests;
 
 import static org.junit.Assert.assertFalse;
 import static seedu.planner.commons.core.Messages.MESSAGE_RECORDS_LISTED_OVERVIEW;
-import static seedu.planner.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.planner.testutil.TypicalRecords.CAIFAN;
 import static seedu.planner.testutil.TypicalRecords.IDA;
 import static seedu.planner.testutil.TypicalRecords.INDO;
