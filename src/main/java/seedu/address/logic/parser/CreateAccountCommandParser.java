@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.ParserUtil.parseUserRole;
 import java.io.UnsupportedEncodingException;
 import java.util.StringTokenizer;
 
+import seedu.address.logic.LoginManager;
 import seedu.address.logic.commands.CreateAccountCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.login.LoginDetails;
