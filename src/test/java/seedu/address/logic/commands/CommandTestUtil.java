@@ -62,6 +62,7 @@ public class CommandTestUtil {
     public static final String VALID_SKILL_BOB = "Stage Manager";
     public static final int VALID_SKILL_LEVEL_AMY = 5;
     public static final int VALID_SKILL_LEVEL_BOB = 37;
+    public static final int INVALID_SKILL_LEVEL_AMY = 137;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -102,6 +103,8 @@ public class CommandTestUtil {
             + "10a"; // 'a' not allowed in expected turnout
     public static final String INVALID_NUMBER_OF_EVENTS_DESC = " " + PREFIX_NUMBER_OF_EVENTS
             + "5!"; // '!' not allowed in number of events
+    public static final String VALID_ALLOCATED_BUDGET_COMPUTING = "1000";
+    public static final String VALID_ALLOCATED_BUDGET_ECE = "2100";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
