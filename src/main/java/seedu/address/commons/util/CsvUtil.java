@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class CsvUtil {
 
     // private static final String BASE_DIRECTORY = "data/CSVexport/";
-    private static final String BASE_DIRECTORY = System.getProperty("user.home") + "\\";
+    private static final String BASE_DIRECTORY = System.getProperty("user.home") + "/";
     private static final String COMMA_DELIM = ",";
     private static final String NEW_LINE_SEPARATOR = "\n";
     private static final String MESSAGE_ERROR = "Error! could not write to %s.";
