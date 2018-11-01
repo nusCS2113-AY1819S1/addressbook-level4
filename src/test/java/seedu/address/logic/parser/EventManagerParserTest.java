@@ -70,6 +70,15 @@ public class EventManagerParserTest {
         assertEquals(new EditCommand(INDEX_FIRST_EVENT, descriptor), command);
     }
 
+    @Test(expected = ParseException.class)
+    public void parseCommand_edit_fail() throws Exception {
+        Event event = new EventBuilder().withComment("wrong").build();
+        EditEventDescriptor descriptor = new EditEventDescriptorBuilder(event).build();
+        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_EVENT.getOneBased() + " " + EventUtil.getEditEventDescriptorDetails(descriptor));
+        new EditCommand(INDEX_FIRST_EVENT, descriptor).toString();
+    }
+
     @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
