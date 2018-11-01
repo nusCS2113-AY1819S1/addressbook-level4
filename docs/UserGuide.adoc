@@ -275,6 +275,11 @@ Adds a person from the others list to your friend list.
 
 Format: `friend INDEX`
 
+[NOTE]
+====
+Most commands in this application (like `free` and `select`) can only be executed only after adding someone to your friend list.
+====
+
 ****
 * You can only befriend someone who is in the others list.
 * The indices *must be positive integers* `1, 2, 3, ...` and have to match someone on the others list
@@ -299,8 +304,18 @@ image::AfterAddingFriendsPS.png[width="600"]
 === Removing a person from your friend list : `unfriend` (`uf`)
 
 Removes a person from your friend list.
+
 Format: `unfriend INDEX`
 
+****
+* You can only unfriend someone who is in your friends list.
+* The indices *must be positive integers* `1, 2, 3, ...` and have to match someone on the friends list
+****
+
+Example:
+
+* `unfriend 1` +
+Removes the first user from the friends list.
 
 // tag::freecommand[]
 === Show free slots among selected people: `free`
