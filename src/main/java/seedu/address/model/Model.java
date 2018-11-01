@@ -44,6 +44,11 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
+    /** Returns the ClubBudgetElementsBook */
+    ReadOnlyClubBudgetElementsBook getClubBudgetElementsBook();
+
+    /** Returns the FinalBudgetsBook */
+    ReadOnlyFinalBudgetBook getFinalBudgetsBook();
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
@@ -89,6 +94,12 @@ public interface Model {
     void updateFilteredLoginDetailsList(Predicate<LoginDetails> predicate);
 
     /**
+     * Updates the filter of the filtered persons list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
      * Updates the filter of the filtered club budgets list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
@@ -119,6 +130,54 @@ public interface Model {
      */
     void commitAddressBook();
 
+    /**
+     * Returns true if the model has previous club budget elements book states to restore.
+     */
+    boolean canUndoClubBudgetElementsBook();
+
+    /**
+     * Returns true if the model has undone club budget elements book states to restore.
+     */
+    boolean canRedoClubBudgetElementsBook();
+
+    /**
+     * Restores the model's club budget elements book to its previous state.
+     */
+    void undoClubBudgetElementsBook();
+
+    /**
+     * Restores the model's club budget elements book to its previously undone state.
+     */
+    void redoClubBudgetElementsBook();
+
+    /**
+     * Saves the current club budget elements book state for undo/redo.
+     */
+    void commitClubBudgetElementsBook();
+
+    /** Returns true if the model has previous final budgets book states to restore.*/
+
+    boolean canUndoFinalBudgetsBook();
+
+    /**
+     * Returns true if the model has undone final budgets book states to restore.
+     */
+    boolean canRedoFinalBudgetsBook();
+
+    /**
+     * Restores the model's final budgets book to its previous state.
+     */
+    void undoFinalBudgetsBook();
+
+    /**
+     * Restores the model's final budgets book to its previously undone state.
+     */
+    void redoFinalBudgetsBook();
+
+    /**
+     * Saves the current final budgets book state for undo/redo.
+     */
+    void commitFinalBudgetsBook();
     /**
      * Returns true if a club with the same identity as {@code club} exists in the address book.
      */

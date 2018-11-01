@@ -10,10 +10,14 @@ import com.google.common.eventbus.Subscribe;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.ClubBudgetElementsBookChangedEvent;
+import seedu.address.commons.events.model.FinalBudgetsBookChangedEvent;
 import seedu.address.commons.events.model.LoginBookChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyClubBudgetElementsBook;
+import seedu.address.model.ReadOnlyFinalBudgetBook;
 import seedu.address.model.ReadOnlyLoginBook;
 import seedu.address.model.UserPrefs;
 
@@ -25,14 +29,20 @@ public class StorageManager extends ComponentManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private LoginBookStorage loginBookStorage;
     private AddressBookStorage addressBookStorage;
+    private ClubBudgetElementsBookStorage clubBudgetElementsBookStorage;
+    private FinalBudgetsBookStorage finalBudgetsBookStorage;
     private UserPrefsStorage userPrefsStorage;
 
 
     public StorageManager(LoginBookStorage loginBookStorage, AddressBookStorage addressBookStorage,
+                          ClubBudgetElementsBookStorage clubBudgetElementsBookStorage,
+                          FinalBudgetsBookStorage finalBudgetsBookStorage,
                           UserPrefsStorage userPrefsStorage) {
         super();
         this.loginBookStorage = loginBookStorage;
         this.addressBookStorage = addressBookStorage;
+        this.clubBudgetElementsBookStorage = clubBudgetElementsBookStorage;
+        this.finalBudgetsBookStorage = finalBudgetsBookStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -134,4 +144,89 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
+    // ================ ClubBudgetElementsBook methods ==============================
+
+    @Override
+    public Path getClubBudgetElementsBookFilePath() {
+        return clubBudgetElementsBookStorage.getClubBudgetElementsBookFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyClubBudgetElementsBook> readClubBudgetElementsBook() throws DataConversionException,
+            IOException {
+        return readClubBudgetElementsBook(clubBudgetElementsBookStorage.getClubBudgetElementsBookFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyClubBudgetElementsBook> readClubBudgetElementsBook(Path filePath)
+            throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return clubBudgetElementsBookStorage.readClubBudgetElementsBook(filePath);
+    }
+
+    @Override
+    public void saveClubBudgetElementsBook(ReadOnlyClubBudgetElementsBook clubBudgetElementsBook) throws IOException {
+        saveClubBudgetElementsBook(clubBudgetElementsBook, clubBudgetElementsBookStorage
+                .getClubBudgetElementsBookFilePath());
+    }
+
+    @Override
+    public void saveClubBudgetElementsBook(ReadOnlyClubBudgetElementsBook clubBudgetElementsBook, Path filePath)
+            throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        clubBudgetElementsBookStorage.saveClubBudgetElementsBook(clubBudgetElementsBook, filePath);
+    }
+
+
+    @Override
+    @Subscribe
+    public void handleClubBudgetElementsBookChangedEvent(ClubBudgetElementsBookChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
+        try {
+            saveClubBudgetElementsBook(event.data);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    }
+    // ================ FinalBudgetsBook methods ==============================
+
+    @Override
+    public Path getFinalBudgetsBookFilePath() {
+        return finalBudgetsBookStorage.getFinalBudgetsBookFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyFinalBudgetBook> readFinalBudgetsBook() throws DataConversionException, IOException {
+        return readFinalBudgetsBook(finalBudgetsBookStorage.getFinalBudgetsBookFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyFinalBudgetBook> readFinalBudgetsBook(Path filePath) throws DataConversionException,
+            IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return finalBudgetsBookStorage.readFinalBudgetsBook(filePath);
+    }
+
+    @Override
+    public void saveFinalBudgetsBook(ReadOnlyFinalBudgetBook finalBudgetBook) throws IOException {
+        saveFinalBudgetsBook(finalBudgetBook, finalBudgetsBookStorage.getFinalBudgetsBookFilePath());
+    }
+
+    @Override
+    public void saveFinalBudgetsBook(ReadOnlyFinalBudgetBook finalBudgetBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        finalBudgetsBookStorage.saveFinalBudgetsBook(finalBudgetBook, filePath);
+    }
+
+
+    @Override
+    @Subscribe
+    public void handleFinalBudgetsBookChangedEvent(FinalBudgetsBookChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
+        try {
+            saveFinalBudgetsBook(event.data);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    }
 }

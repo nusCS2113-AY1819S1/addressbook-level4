@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.ClubBudgetElementsBook;
 import seedu.address.model.budgetelements.ClubBudgetElements;
 
 
@@ -47,14 +47,14 @@ public class TypicalClubBudgetElements {
     private TypicalClubBudgetElements() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical clubs.
+     * Returns a {@code ClubBudgetElementsBook} with all the typical clubs.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static ClubBudgetElementsBook getTypicalClubBudgetElementsBook() {
+        ClubBudgetElementsBook cbeb = new ClubBudgetElementsBook();
         for (ClubBudgetElements club : getTypicalClubBudgetElements()) {
-            ab.addClub(club);
+            cbeb.addClub(club);
         }
-        return ab;
+        return cbeb;
     }
 
     /**

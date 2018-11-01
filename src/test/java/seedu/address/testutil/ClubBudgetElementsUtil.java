@@ -9,7 +9,7 @@ import seedu.address.model.budgetelements.ClubBudgetElements;
 
 
 /**
- * A utility class for Person.
+ * A utility class for ClubBudgetElements.
  */
 public class ClubBudgetElementsUtil {
 
