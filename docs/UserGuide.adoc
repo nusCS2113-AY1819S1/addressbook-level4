@@ -28,9 +28,7 @@ The aim of this application is to digitise any company’s or organisation’s s
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Download the latest `NUSSU-Connect.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your NUSSU-Connect.
-.  Double-click on the jar file to start the app and wait for a few seconds for the loading to complete. You will then see a login pop up
-.  window appears as shown in the image below. You will need to head over to the "Logging into system" section and follow the steps detailed 
-.  carefully in order to log into the application successfully.
+.  Double-click on the jar file to start the app and wait for a few seconds for the loading to complete. You will then see a login pop up window appears as shown in the image below. You will need to head over to the "Logging into system" section and follow the steps detailed carefully in order to log into the application successfully.
 +
 image::BlankLoginInput.PNG[width="400"]
 +
