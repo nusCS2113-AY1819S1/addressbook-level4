@@ -9,50 +9,69 @@
 
 == Overview
 
-Something Daily is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Something Daily is a desktop task and expenditure tracker application created for NUS SoC students to aid them in their busy student life. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+* *Major enhancement*: Designed *model component for To-do List*
+** What it does: It is the component that holds all to-do list related data of the app in-memory.
+** Justification: This component is a core building block of the to-do list in the app.
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+* *Major enhancement*: Designed *storage component for To-do List*
+** What it does: It is the component that reads and writes to-do list data to the hard disk.
+** Justification: This component allows user's to-do list data to be stored, hence allowing the user to keep track of his/her task's progress.
+
+* *Major enhancement*: Added *the ability to mark a task as completed/uncompleted*
+** What it does: The command allows the user to mark a specific task in the to-do list as completed or uncompleted. The status is then updated accordingly in the UI of the to-do list.
+** Justification: This feature is key to a functioning to-do list, where users can keep track of the status of his/her tasks.
+** Highlights: This enhancement enables commands like viewing a filtered list based on task's status.
+
+* *Major enhancement*: Added *the ability to view a filtered list of tasks*
+** What it does: The command allows the user to view a list of tasks based on task's status.
+** Justification: This feature improves the user experience and efficiency as it helps the user in navigating through all of the tasks in the to-do list. Users can now easily separate out uncompleted tasks from completed task.
+
+* *Minor enhancement*: updated application icon and application name to reflect on our product
+* *Minor enhancement*: modified console messages in the application to enhance user experience
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
-** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
-** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
+*** Set up team organisation on GitHub
+*** Set up and managed GitHub issue tracker and labels
+*** Set up and managed milestones on GitHub
+*** Managed releases `v1.2` - `v1.3.1` (3 releases) on GitHub
 
-_{you can add/remove categories in the list above}_
+** Documentation:
+*** Updated README document to reflect our application
+*** Updated the About Us page to reflect our team members
+*** Restructured commands listing in section 3 & 5 of the User Guide
+*** Updated class diagrams for model and storage components in Developer Guide
+
+** Tools:
+*** Set up Travis CI for the team repo
+*** Set up Coveralls for the team repo
+*** Set up Codacy for the team repo
+*** Set up auto-publishing of documentations for the team repo
 
 == Contributions to the User Guide
-
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
+include::../UserGuide.adoc[tag=TDLadd]
 
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=TDLedit]
+
+include::../UserGuide.adoc[tag=TDLdelete]
+
+include::../UserGuide.adoc[tag=TDLcomplete]
+
+include::../UserGuide.adoc[tag=TDLuncomplete]
+
+include::../UserGuide.adoc[tag=TDLview]
 
 == Contributions to the Developer Guide
 
@@ -60,13 +79,6 @@ include::../UserGuide.adoc[tag=dataencryption]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=completeuncomplete]
 
-include::../DeveloperGuide.adoc[tag=dataencryption]
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
+include::../DeveloperGuide.adoc[tag=viewtask]

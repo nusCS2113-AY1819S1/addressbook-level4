@@ -15,7 +15,7 @@ image::SHININGGGG.png[width="150", align="left"]
 {empty}[http://github.com/SHININGGGG[github]] [<<SHININGGGG#, portfolio>>]
 
 Role: Team Lead +
-Responsibilities: Expenditure tracker & Calender coding, UGDG update
+Responsibilities: Expenditure tracker & Calender components
 
 '''
 
@@ -24,7 +24,7 @@ image::arty9.png[width="150", align="left"]
 {empty}[http://github.com/arty9[github]] [<<arty9#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Documentations
+Responsibilities: To-do list component
 
 '''
 
@@ -33,7 +33,7 @@ image::feijunzi.png[width="150", align="left"]
 {empty}[http://github.com/feijunzi[github]] [<<feijunzi#, portfolio>>]
 
 Role: Developer +
-Responsibilities:
+Responsibilities: Expenditure tracker component
 
 '''
 
@@ -42,7 +42,7 @@ image::XiaoYunhan.png[width="150", align="left"]
 {empty}[http://github.com/XiaoYunhan[github]] [<<XiaoYunhan#, portfolio>>]
 
 Role: Developer +
-Responsibilities:
+Responsibilities: To-do list component
 
 '''
 
