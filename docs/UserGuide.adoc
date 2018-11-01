@@ -125,8 +125,8 @@ Entering this command will prompt you the following: +
 
 Examples:
 
-* `n/John Doe g/M x/18 p/91238123 e/johndoe@gmail.com a/123, Central Boulevard, #01-111, 600123 j/WAITER h/A LEVEL s/1200`
-* `n/Mary Loe g/M x/18 p/82238123 e/maryloe@gmail.com a/113, South Boulevard, #01-111, 600123 j/WAITER h/O LEVEL s/1000`
+* `n/John Doe g/M x/18 p/91238123 e/johndoe@gmail.com a/123, Central Boulevard, #01-111, 600123 j/WAITER h/ALEVELS s/1200`
+* `n/Mary Loe g/M x/18 p/82238123 e/maryloe@gmail.com a/113, South Boulevard, #01-111, 600123 j/WAITER h/OLEVELS s/1000`
 
 
 ==== Adds a company to the RecruitBook
@@ -144,15 +144,15 @@ Entering this command will prompt you the following: +
 *`Enter the following details of the job in the format:`* +
 `c/COMPANY j/JOB_TITLE g/GENDER xr/AGE_RANGE h/EDUCATION s/SALARY` +
 `(Enter 'cancel' to stop adding jobs)` +
-`Example: c/McDonalds j/cashier g/M xr/20-30 h/O levels s/1200`
+`Example: c/McDonalds j/cashier g/M xr/20-30 h/OLEVELS s/1200`
 
 [NOTE]
 COMPANY specified has to be added to RecruitBook first!
 
 Examples:
 
-*	`c/Subway j/Cashier g/M xr/20-30 h/O levels s/1200`
-*	`c/KFC j/Cook g/F xr/20-30 h/O levels s/1400`
+*	`c/Subway j/Cashier g/M xr/20-30 h/OLEVELS s/1200`
+*	`c/KFC j/Cook g/F xr/20-30 h/OLEVELS s/1400`
 
 
 // end::add[]
@@ -168,8 +168,8 @@ The index must be an index number shown in the displayed candidates list.
 
 Example:
 
-* `editc 1 n/John Doe p/91234567 e/johndoe@example.com` +
-(Edits the name, phone number and email address of the candidate with index 1 to be John Doe, 91234567 and johndoe@example.com respectively)
+* `editc 1 n/John Doe p/91234567` +
+(Edits the name, phone number and email address of the candidate with index 1 to be John Doe and 91234567 respectively)
 
 * `editc 3 t/` +
 (Edits and clears all existing tags belonging to the candidate at index 3)
@@ -433,7 +433,7 @@ Blacklists the candidate with the specified `INDEX`.
 The index must be an index number shown in the displayed candidates list
 
 [NOTE]
-Blacklisting candidates will prevent them from being edited.
+Blacklisting candidates will prevent them from being edited or shortlisted.
 Candidates can be unblacklisted by using `blacklist rm`.
 
 Examples:
