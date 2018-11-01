@@ -365,13 +365,18 @@ from List<>.
 
 // end::sorttask[]
 
-// tag::expenditure[]
-=== Expenditure feature
-
+// tag::checkexpenditure[]
+=== Check Expenditure
 ==== Current Implementation
 
-==== Design Considerations
-// end::expenditure[]
+Check the total money spent in a specific period uses both Logic and Model components.
+It also generate a chart to show each expenditure in this period on each date.
+
+image::CheckSequenceDiagram.png[width="800"]
+==== Design Consideration
+===== Aspect: Methods to support the check commands
+
+// end::checkexpenditure[]
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
