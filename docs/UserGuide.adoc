@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2113-AY1819S1-F09-1/main
 
-
+image::NUSSU-ConnectPNGBanner.png[width="680", align=center"]
 By: `Team F09-1`      Since: `Sept 2018`
 
 == Introduction
@@ -420,6 +420,8 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the address book. +
 Format: `clear`
 
+// tag::budget[]
+
 === Submitting data for budget allocation: `budget`
 
 Submits the data about number of events, expected turnout etc. +
@@ -436,42 +438,15 @@ Format: `calculatebudget b/TOTAL AVAILABLE BUDGET IN SGD`
 Example: +
 `calculatebudget b/50000`
 
-=== Viewing the allocated budget : `viewbudget`
+=== Viewing the allocated budget for a club : `viewbudget`
 
-Shows all the allocated budgets to the user +
-Format: `viewbudget`
-
-=== Submitting grant request : `request`
-
-Submits data about amount of grant needed, the reason and tags the importance level
-Format: `request m/AMOUNT r/REASON t/IMPORTANCE LEVEL`
+Shows the budget allocated to that particular club to the user.
+Format: `viewbudget c/CLUB NAME`
 
 Example: +
-`request m/1000 r/for booking auditorium t/medium` +
+`viewbudget c/Computing Club`
 
-=== Viewing grant request : `viewrequest`
-Shows a list of all the grant request sorted by order of importance, and if there is a tie, by descending order of amount requested. +
-Format: `viewrequest`
-
-=== Accepting grant request: `accept`
-
-Approves a specific grant request from the list of grants.
-Format: `accept [-a all] [INDEX]`
-
-****
-* Approves the request at the specified `INDEX`.
-* The index refers to the index number shown in the displayed requests list.
-* The index *must be a positive integer* 1, 2, 3, ...
-* If -a option is selected, all requests on the list will be approved and INDEX will be ignored.
-****
-Example:
-
-* `viewrequest` +
-`accept 2` +
-Approves the 2nd request in the list of grant requests.
-* `viewrequest` +
-`accept -a` +
-Approves all the requests in the list.
+// end::budget[]
 
 === Exiting the program : `exit`
 
@@ -521,13 +496,7 @@ e.g.`select 2`
 e.g. `budget c/Computing Club t/200 e/5`
 * *Calculating budgets* : `calculatebudget b/TOTAL AVAILABLE BUDGET IN SGD` +
 e.g. `calculatebudget b/50000`
-* *Viewing all the budgets* : `viewbudget`
-* *Submitting grant request* : request m/AMOUNT r/REASON t/IMPORTANCE LEVEL` +
-e.g. `request m/1000 r/for booking auditorium t/medium`
-* *Viewing grant request* : `viewrequest`
-* *Accepting a grant request* : `accept [-a all] [INDEX]` +
-e.g. `viewrequest` +
-       `accept 2` +
-e.g. `viewrequest` +
-     `accept -a`
+* *Viewing the budget for a club* : `viewbudget c/CLUB NAME` +
+e.g. `viewbudget c/Computing Club`
+
 
