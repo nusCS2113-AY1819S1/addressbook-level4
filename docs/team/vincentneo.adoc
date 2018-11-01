@@ -1,0 +1,154 @@
+= Vincent Neo Guo Zhong - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+---
+
+== PROJECT: FinancialPlanner
+
+== What FinancialPlanner is about:
+
+FinancialPlanner is an application my team has created for the NUS module CS2113T. In this module, we were taught basic software
+engineering principles and object oriented programming. This project lasted for 10 weeks and we were tasked to develop a desktop application
+for a particular group of users.
+
+FinancialPlanner's main target audience are students who need help managing their finances.
+They like typing and are often much more proficient in organising their data with command line interface (CLI). In FinancialPlanner,
+there is a text box located at the topmost part of the application which users can use to type commands into the system. Graphic user interface(GUI)
+created using JavaFX was also used to display the output of the system to create a more intuitive and engaging user experience.
+
+Below shows a snapshot of the FinancialApplication:
+
+image::WelcomePanel.png["width="790"]
+
+For a detailed tutorial on how to use FinancialPlanner, please visit our github page at
+https://cs2113-ay1819s1-t09-4.github.io/main/UserGuide.html[Financial Planner User Guide].
+For developers who wishes to work on this project, please visit https://cs2113-ay1819s1-t09-4.github.io/main/DeveloperGuide.html[Financial Planner Developer Guide].
+
+== Summary of contributions
+FinancialPlanner was adapted from https://nuscs2113-ay1819s1.github.io/addressbook-level4/[AddressBook Level 4], a sample codebase given by the module.
+The workflow of FinancialPlanner's development cycle follows a hybrid framework between Agile and Scrum closely. There were fortnightly milestones to meet
+and each milestone required a working product. Throughout this development cycle, I have made much contributions to the team and below shows a summary of my
+contributions.
+
+=== Application Code related contributions
+
+* *Major Enhancements*: Facilitated the morph from AddressBook Level 4 to FinancialPlanner
+** `Reason for the enhancement` FinancialPlanner is mainly targeted at users who wants to store and keep track of their daily financial activity. Thus, naturally the type of data
+stored in the app would differ greatly from what the AddressBook required. Considerable effort was needed to morph the AddressBook Level 4 source code to fit
+the context of FinancialPlanner and we would not have managed it without every member of the team doing their part in the morph process.
+** `My contributions` I adapted all functions that involved addition, removal and editing of the app data into functions able to process data required. I also fixed
+all the tests that broke as a result of the morph.
+
+* *Major Enhancements*: Added a feature that allows users to display a summary of their daily/monthly expenses
+** `Reason for the enhancement` Users want to have a way to track daily or monthly financial activities without having to go through the list.
+** `Brief Description` To see the summary within any date range, the user simply needs to enter 2 dates or 2 months and the system would generate a report.
+** `My contributions` This feature was rather challenging to implement due to the variety of implementations available. Originally, the summary would
+be updated regularly as records are edited. However without changing the core structure of the model component in FinancialPlanner, this implementation proved
+to be hard to maintain. Thus, a simple implementation of generating the summary only when called is used. This summary feature was shown to be very helpful to
+users as they could have a sense of their financial activity without requiring too much effort. Below are some of the code snippets that make up the core of this
+feature.
+
+* *Major Enhancements*: Added a feature that shows the summary result in a easy to read table.
+** `Reason for the enhancement` When the date range specified gets too large, the display can become hard to read as data is not segregated into different columns.
+This makes the app much less user friendly which reduces the desirability and usability of the application. Usability is important as it determines if a user
+is willing to use the product. Thus, this feature was implemented to provide a more user friendly format for users.
+** `Brief Description` This feature presents summary results in a table. The table has 4 columns which represents each input of a summary, the date timestamp, total income,
+total expense and net flow of money. The entries in the table are automatically sorted according to the timestamp which provides a readable list of summaries for users to
+understand easily.
+** `My contributions` This feature is an enhancement of the previous feature and utilises JavaFX library to create the necessary UI.
+A Java FXML file had to be created to specify the layout of the UI and a corresponding Java code had to be attached to it to provide logic.
+This logic is responsible for processing data generated into a form that is readable by the library. Due to my inexperience with UI, much effort had to be put in to
+ensure that the UI works as stated in the user requirements. There were many challenges during the implementation. A separate class needed to be created to process data
+objects into strings as the UI TableView can only accept strings as its parameters. Also due to my inexperience with UI, there were constantly resizing issues which led to
+instability in the GUI. Despite all these challenges, I was able to create the feature exactly how I envisioned it and it also made me significantly more
+knowledgeable about JavaFX GUI framework in the process.
+
+Below is a snapshot of the FinancialPlanner after the summary command has been executed.
+
+image::UiSummaryByDateTable.png[width="790"]
+
+* *Major Enhancements*: Added a feature that shows the breakdown of financial activity into categories
+** `Reason for the enhancement` FinancialPlanner also allows users to tag each financial activity with a category that they can define. Sometimes, users
+would like to know where they are spending their money on in order to make informed decisions on their future finance activities. Since each record is tagged with
+an optional set of tags, these tags can be used as categories for users to classify each financial activity.
+** `Overview` To further empower users to make informed choices, the statistics feature was designed to provide a detailed breakdown of all financial
+activity within a given period.
+** `My contributions` To implement this feature, a specialised statistic component responsible for calculating and splitting records into categories had to be
+created. The output from this component must then be connected with a UI component which then displays the output. A pie chart was chosen as the UI component as
+it presented a neat visual representation of the breakdown for the users. This helped to make our app even more user friendly which increased its desirability.
+However, the pie charts provided by JavaFX were rather limited and were not able to meet the design requirements for our application. Thus, some parts of the pie chart had
+to be overridden to allow for new implementations and more customizations. This required much effort in reading through the library source code and researching online for possible solutions to
+meet our product requirements. Although it was hard for me to understand the library code fully due to my lack of experience with extensive code bases, this self-exploration helped
+me understand more about the pie chart library and I was able to display the pie charts that we were satisfied with.
+
+Below is a snapshot of the FinancialPlanner after the statistic command has been executed.
+
+image::UiPieChartExpense.png[width="790"]
+
+* *Major Enhancements*: Added a feature that allows swapping of UI panels.
+** `Reason for the enhancement` For increased user friendliness, FinancialPlanner supports commands which draws charts using the in built UI. This meant that sufficient space
+needed to be given to these UI panels for the chart to look right and the data points to be seen clearly. Thus, the usual approach of splitting the application in the panel is not effective.
+To overcome this challenge, swapping UI algorithms were designed.
+** `Overview` The swapping UI algorithm manages UI panels and decides which panels will be shown while keeping the rest hidden.
+** `My contributions` To implement this feature, the usual event management methods had to be tweaked. In java, UI panels are allowed to be stacked on top of each other
+and the topmost panel is shown at the front followed by the rest of the panels behind it. This feature makes use of this property and creates a manager class that determines which panel
+is at the front and disables the rest. To reduce application overhead, unfocused panels are simply rendered invisible instead of destroying them. Much thought was put into this system to ensure that
+it is modular and easily extendable.
+
+* *Major Enhancements*: Added a welcome panel that displays breakdown for current month
+** `Reason for the enhancement`  Users may want to get a sense of their current financial status without having
+to type a single command. By having the panel updated, users can instantly get feedback on their current financial status whenever they add a new
+record to the system. This improved the user friendliness of our app significantly.
+** `Overview` This feature serves as the front page of the application. It displays the category breakdown of current month and is automatically
+updated whenever the data in the application is changed.
+** `My contributions` The implementation of this was similar to that of category breakdown feature. Thus, only java fxml files had to be created
+and its corresponding logic component can use the same implementation as the category breakdown feature.
+
+* *Minor Enhancements*: Added an extension to list command
+** `Reason for the enhancement` Originally, the list command would list all records in the application. This may not be very convenient when the
+number of records become very large. Thus, a more specific and user friendly command is introduced.
+** `Overview` This list command allows users to specify the date range and will only show records in that range.
+** `My contributions` ListCommandParser of the original implementation was tweaked slightly to allow additional functionality.
+
+* *Minor Enhancements*: Added a class that made storage more modular
+** `Reason for enhancement` The storage system had to be redesigned to allow for more storage components.
+** `My contributions` An abstract class with basic storage functionality was created as an additional layer of abstraction which
+allowed more modularity in the storage components.
+
+=== Non-enhancement related contributions
+
+* Project management
+** Managed releases for 4 milestones(v1.0 - v1.3)
+** Set up Continuous Integration, coverage tools and github website deployment
+** Set up a workflow where pull requests are automatically blocked unless there is one other person who approved the request
+** Ensured that milestone objectives are met and submit relevant PRs to module repo
+** PRs reviewed(with non trivial comments)
+
+* Debugging team members code
+** Helped debug other team member's code and offer suggestions when they are stuck
+** Helped provide ideas for possible implementation for other team member's features
+
+* Team Management
+** Coordinated some team meetings
+** Ensured that team members meet feature deadlines set within the team
+
+* Testing
+** Wrote extensive tests to increase coverage of the project
+** Wrote system tests to test integration of the system
+
+* Documentation
+** Did a few cosmetic tweaks to the User Guide
+** Organised and ensured that documentation is coherent
+
+== Contributions to the User Guide
+|===
+|_Below are some of my contributions to the User Guide. These show that I am able to write comprehensive User Guides._
+|===
+
+== Contributions to the Developer Guide
+|===
+|_Below are some of my contributions to the Developer Guide. These show that I am able to utilise modelling tools such as
+UML diagrams, sequence diagrams, activity flow which are crucial to Software Engineering Principles to illustrate to potential
+developers the architecture of my product._
+|===
