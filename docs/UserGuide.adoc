@@ -62,34 +62,43 @@ Only `select` and `list` commands can be performed without logging in. Also, `ad
 
 User: Creates a *user* account +
 Format: `signup u/USERNAME p/PASSWORD` +
+
+|===
 Examples:
 
 * `signup u/Gerald Chua p/password12345` +
-Creates account with the username Gerald Chua
+Creates account with the username Gerald Chua +
 * `signup u/James Yaputra p/drowssap12345` +
 Creates account with the username James Yaputra
+|===
 
 === Logging into an account : `login`
 
 User: Logs in to account +
 Format: `login u/USERNAME p/PASSWORD` +
+
+|===
 Examples:
 
 * `login n/Gerald Chua p/password12345` +
 Logs in Gerald Chua +
 * `login u/James Yaputra p/drowssap12345` +
 Logs in James Yaputra
+|===
 
 === Logging out of an account : `logout`
 
 User: Logs out of an account +
 Format: `logout` +
+
+|===
 Examples:
 
 * `login u/Gerald Chua p/password12345` +
 Logs in Gerald Chua +
 * `logout` +
 Logs out from Gerald Chua
+|===
 // end::authentication[]
 
 === Viewing help : `help`
