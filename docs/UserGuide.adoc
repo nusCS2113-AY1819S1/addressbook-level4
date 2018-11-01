@@ -187,6 +187,22 @@ Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 
+// tag::tagcommand[]
+=== Locating persons by group : `group` (`t`)
+
+Find persons whose group tags match the specified group tags.
+
+Format: `group GROUPNAME [MORE_GROUPNAMES]`
+
+Example:
+
+* `group CS2101` +
+Filters both the others list and the friends list to show only users with the group tag "CS2101".
+
+`group CS2101 CS2113T` +
+Filters both the others list and the friends list to show only users with both group tags "CS2101" and "CS2113T".
+// end::tagcommand[]
+
 // tag::timeslot[]
 === Add a timeslot to your timetable: `addtime` (`at`)
 
@@ -301,6 +317,7 @@ After executing `friend 1`, there will be a sucess message and the first person 
 image::AfterAddingFriendsPS.png[width="600"]
 // end::friendcommand[]
 
+// tag::unfriendcommand[]
 === Removing a person from your friend list : `unfriend` (`uf`)
 
 Removes a person from your friend list.
@@ -316,6 +333,7 @@ Example:
 
 * `unfriend 1` +
 Removes the first user from the friends list.
+// end::unfriendcommand[]
 
 // tag::freecommand[]
 === Show free slots among selected people: `free`
@@ -400,11 +418,6 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `delete 1` command) +
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
-
-=== Locating persons by group : `group` (`t`)
-
-Find persons whose group tags match the specified group tags.
-Format: `group GROUPNAME [MORE_GROUPNAMES]`
 
 === Clearing all entries : `clear` (`c`)
 
