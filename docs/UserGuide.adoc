@@ -91,11 +91,20 @@ Examples:
 === Deferring a deadline: `defer`
 
 Defers a deadline for a task +
-Format: `defer [INDEX] de/deadline`
+Format: `defer i/INDEX dd/DAY mm/MONTH yyyy/YEAR`
+
+[NOTE]
+====
+Valid Command: +
+*Index: `must be a positive integer` +
+*DAY: `months [4, 6, 9, 11] have 30 days and [1, 3, 5, 7, 8, 10, 12] have 31 days)` +
+*MONTH: `between 1 and 12, inclusive` +
+*YEAR: `between 2018 and 9999, inclusive`
+====
 
 Examples:
 
-* `defer 1 de/04012018`
+* `defer i/1 dd/04 mm/01/ yyyy/2018`
 
 === Delete a task : `delete`
 
@@ -112,6 +121,14 @@ Chooses a particular date. +
 //Format: `select dd/DAY [mm/MONTH] [yyyy/YEAR]`
 Format: `select dd/DAY mm/MONTH yyyy/YEAR` or
 `select DAY/MONTH/YEAR`
+
+[NOTE]
+====
+Valid Date: +
+*DAY: `months [4, 6, 9, 11] have 30 days and [1, 3, 5, 7, 8, 10, 12] have 31 days)` +
+*MONTH: `between 1 and 12, inclusive` +
+*YEAR: `between 2018 and 9999, inclusive`
+====
 
 Examples:
 

@@ -1,7 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTH;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
 import java.util.List;
 
@@ -24,11 +27,18 @@ public class DeferDeadlineCommand extends Command implements CommandParser {
     public static final String COMMAND_WORD = "defer";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Defers the deadline of the selected task in the taskbook. "
-            + "Existing deadline will be overwritten by the input. "
+            + "Existing deadline will be overwritten by the input. \n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_DEADLINE + "deadline \n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DEADLINE + "04011996";
+            + PREFIX_INDEX + "INDEX (must be a positive integer) "
+            + PREFIX_DAY + "DAY (months [4, 6, 9, 11] have 30 days and [1, 3, 5, 7, 8, 10, 12] have 31 days) "
+            + PREFIX_MONTH + "MONTH (between 1 and 12, inclusive) "
+            + PREFIX_YEAR + "YEAR (between 2018 and 9999, inclusive)\n"
+
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_INDEX + "1 "
+            + PREFIX_DAY + "04 "
+            + PREFIX_MONTH + "01 "
+            + PREFIX_YEAR + "2018 ";
     /*
     + PREFIX_DAY + "DAY"
     + PREFIX_MONTH + "MONTH"
