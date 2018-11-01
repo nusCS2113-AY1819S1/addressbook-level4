@@ -438,7 +438,7 @@ Format: `budget c/CLUB NAME t/TURNOUT e/NUMBER OF EVENTS`
 Example: +
 `budget c/Computing Club t/200 e/5`
 
-[NOTE:]
+[NOTE]
 ====
 CLUB NAME is case sensitive. Hence `c/Computing Club` and `c/computing club` will be treated as unique entries.
 ====
@@ -452,7 +452,7 @@ Format: `calculatebudget b/TOTAL AVAILABLE BUDGET IN SGD`
 Example: +
 `calculatebudget b/50000`
 
-[NOTE:]
+[NOTE]
 ====
 Remember to only use the `calculatebudget` command once ALL the clubs' data has been collected since NUSSU-Connect only supports a one-time calculation of budgets in v1.3
 ====
