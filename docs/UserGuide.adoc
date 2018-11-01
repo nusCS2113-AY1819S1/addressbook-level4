@@ -36,19 +36,19 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 1. Register using `addUser uName/john uPass/123`
 2. Login using `login uName/john uPass/123`
 * As a user, you could: +
-0. Show help using `help`
-1. List all the modules using `listModule`
-2. Select a module to check the threads under that module using `selectModule mCode/CS2113`
-3. Select a thread among the threads listed using `selectThread tId/1`
-4. Create a comment under a thread using `createComment tId/1 cContent/This is a new comment`
-5. Update a comment created by you using `updateComment cId/1 cContent/This is a new comment`
-6. Delete a comment created by you using `deleteComment cId/1`
-7. Create a thread under a module using `createThread tTitle/About exams? cContent/Is there any exam?`
-8. Update a thread created by you using `updateThread tId/1 tTitle/Is there any midterm?`
-9. Delete a thread created by you using `deleteThread tId/1`
-10. Check for latest announcement using `checkAnnounce`
-11. Logout from ForumBook using `logout`
-12. Exits the app using `exit`
+1. Show help using `help`
+2. List all the modules using `listModule`
+3. Select a module to check the threads under that module using `selectModule mCode/CS2113`
+4. Select a thread among the threads listed using `selectThread tId/1`
+5. Create a comment under a thread using `createComment tId/1 cContent/This is a new comment`
+6. Update a comment created by you using `updateComment cId/1 cContent/This is a new comment`
+7. Delete a comment created by you using `deleteComment cId/1`
+8. Create a thread under a module using `createThread tTitle/About exams? cContent/Is there any exam?`
+9. Update a thread created by you using `updateThread tId/1 tTitle/Is there any midterm?`
+10. Delete a thread created by you using `deleteThread tId/1`
+11. Check for latest announcement using `checkAnnounce`
+12. Logout from ForumBook using `logout`
+13. Exits the app using `exit`
 
 * As an admin, you could do anything that an ordinary user could do and the following: +
 1. Post new announcement using `announce aTitle/Urgent! aContent/System maintenance from 3pm to 5pm`
