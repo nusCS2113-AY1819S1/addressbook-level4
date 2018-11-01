@@ -199,7 +199,7 @@ Example:
 * `group CS2101` +
 Filters both the others list and the friends list to show only users with the group tag "CS2101".
 
-`group CS2101 CS2113T` +
+* `group CS2101 CS2113T` +
 Filters both the others list and the friends list to show only users with both group tags "CS2101" and "CS2113T".
 // end::tagcommand[]
 
