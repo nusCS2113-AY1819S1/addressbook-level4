@@ -33,9 +33,9 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* **`find m/CS2113 java`** : finding threads associated with content, `java`, under module `CS2113`
-* **`create m/CS2113 t/Is there mid-terms?`** : create a forumThread tittled as `Is there mid-terms?` under module `CS2113`.
-* **`like m/CS2113 i/1`** : like the forumThread with `index 1` in module `CS2113`
+* **`login uName/user1 uPass/user1`**: login as `user1`, the user's information will be shown in the top right corner, `user1(User), blocked`. The content in the bracket denote the user type, be it admin or user. The `blocked` denotes that the user is blocked, he/she is unable to create threads or comments.
+* **`selectModule m/CS2113`** : finding threads under module `CS2113`
+* **`createThread mCode/CS2113 tTitle/Is there mid-terms? cContent/I am taking this sem.`** : create a forumThread tittled as `Is there mid-terms?` under module `CS2113`.
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -46,9 +46,9 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `create m/MODULE_NAME t/THREAD_NAME [c/REPLY_MESSAGE]` can be used as `create m/CS2113 t/what is this module like? c/I heard that the workload is very heavy` or as `create m/CS2113 t/what is this module like?`.
-* Parameters can be in any order e.g. if the command specifies `m/CS2113 t/Is there mid-terms?`, `t/Is there mid-terms? m/CS2113` is also acceptable.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `addUser uName/USER_NAME uPass/USER_PASSWORD`, `NAME` is a parameter which can be used as `addUser uName/john uPass/123`.
+* Parameters can be in any order e.g. if the command specifies `mCode/CS2113 tTitle/Is there mid-terms?`, `tTitle/Is there mid-terms? mCode/CS2113` is also acceptable.
+* Command keywords are case sensitive. e.g. `adduser`, `DELETECOMMENT` is not recognised.
 ====
 
 === Viewing help : `help`
@@ -285,7 +285,7 @@ e.g `deleteModule mCode/CS2113`
 e.g `updatePass uName/john uPass/098`
 * *DeleteUser* : `deleteUser uName/USER_NAME` +
 e.g `deleteUser uName/john`
-* *Help*
+* *Help*: `help`
 * *createThread* : `createThread mCode/MODULE CODE tTitle/THREAD TITLE cContent/COMMENT CONTENT` +
 e.g `createThread mCode/CS2113 tTitle/Exam Information cContent/All the best for the final guys`
 * *createComment* : `createComment tId/THREAD ID cContent/COMMENT CONTENT` +
@@ -298,7 +298,7 @@ e.g `updateComment tId/123 tTitle/This is a new title`
 e.g `deleteThread tId/1`
 * *deleteComment* : `deleteComment cId/COMMENT ID` +
 e.g `deleteComment cId/1`
-* *listModule*
+* *listModule*: `listModule`
 * *selectModule* : `selectModule mCode/MODULE CODE` +
 e.g `selectModule mCode/CS2113`
 * *selectThread* : `selectThread tId/THREAD ID` +
