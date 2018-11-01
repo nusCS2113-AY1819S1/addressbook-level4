@@ -245,7 +245,7 @@ Additionally, it implements the following operations to support adding/deletion 
 * `UniqueCandidateList#add(Candidate candidate)` — Adds a unique candidate to `internalList`. Checks for uniqueness using `UniqueCandidateList#contains(Candidate candidate)`.
 * `UniqueCandidateList#remove(Candidate candidate)` — Removes the equivalent candidate from `internalList`.
 
-These operations are exposed in the Model interface as Model#addCandidate(Candidate) and Model#deleteCandidate(Candidate candidate) respectively.
+These operations are exposed in the `Model` interface as `Model#addCandidate(Candidate)` and `Model#deleteCandidate(Candidate candidate)` respectively.
 
 ===== Companies
 The add/delete mechanism of companies is facilitated in `UniqueCompanyList` which stores the added companies internally as an `internalList` which is a list of Company objects.
@@ -257,7 +257,7 @@ Additionally, it implements the following operations to support adding/deletion 
 * `UniqueCompanyList#add(Company company)` — Adds a unique company to `internalList`. Checks for uniqueness using `UniqueCompanyList#contains(Company company)`.
 * `UniqueCompanyList#remove(Company company)` — Removes the equivalent company from `internalList`.
 
-These operations are exposed in the Model interface as Model#addCompany(Company) and Model#deleteCompany(Company company) respectively.
+These operations are exposed in the `Model` interface as `Model#addCompany(Company)` and `Model#deleteCompany(Company company)` respectively.
 
 ===== Job Offers
 The add/delete mechanism of job offer is facilitated in `UniqueJobList` which stores the added job offer internally as an `internalList` which is a list of JobOffer objects.
@@ -269,7 +269,7 @@ Additionally, it implements the following operations to support adding/deletion 
 * `UniqueJobList#add(JobOffer jobOffer)` — Adds a unique job offer to `internalList`. Checks for uniqueness using `UniqueJobOfferList#contains(JobOffer jobOffer)`.
 * `UniqueJobList#remove(JobOffer jobOffer)` — Removes the equivalent job offer from `internalList`.
 
-These operations are exposed in the Model interface as Model#addJobOffer(JobOffer) and Model#deleteJobOffer(JobOffer jobOffer) respectively.
+These operations are exposed in the `Model` interface as `Model#addJobOffer(JobOffer)` and `Model#deleteJobOffer(JobOffer jobOffer)` respectively.
 
 [NOTE]
 All addition/deletion of the 3 entities (Candidates, Companies, Job Offers) follow the same mechanism.
