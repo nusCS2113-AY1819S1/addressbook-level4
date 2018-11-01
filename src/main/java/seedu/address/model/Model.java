@@ -38,12 +38,6 @@ public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
 
-    /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyClubBudgetElementsBook newData);
-
-    /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyFinalBudgetBook newData);
-
     /** Returns the LoginBook */
     ReadOnlyLoginBook getLoginBook();
 

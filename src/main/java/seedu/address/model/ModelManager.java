@@ -79,20 +79,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void resetData(ReadOnlyClubBudgetElementsBook newData) {
-        searchHistoryManager.clearSearchHistory();
-        versionedClubBudgetElementsBook.resetData(newData);
-        indicateClubBudgetElementsBookChanged();
-    }
-
-    @Override
-    public void resetData(ReadOnlyFinalBudgetBook newData) {
-        searchHistoryManager.clearSearchHistory();
-        versionedFinalBudgetsBook.resetData(newData);
-        indicateFinalBudgetsBookChanged();
-    }
-
-    @Override
     public ReadOnlyLoginBook getLoginBook() {
         return versionedLoginBook;
     }
