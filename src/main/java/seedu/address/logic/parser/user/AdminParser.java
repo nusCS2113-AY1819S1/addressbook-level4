@@ -18,16 +18,16 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.ViewTransactionsCommand;
 import seedu.address.logic.commands.accountant.AnalyseCostsCommand;
-import seedu.address.logic.commands.stocktaker.ImportDrinkCommand;
+import seedu.address.logic.commands.stocktaker.BuyDrinkCommand;
 import seedu.address.logic.commands.stocktaker.SellDrinkCommand;
 import seedu.address.logic.commands.user.ChangePasswordCommand;
 import seedu.address.logic.commands.user.CreateAccountCommand;
 import seedu.address.logic.commands.user.DeleteAccountCommand;
 import seedu.address.logic.commands.user.LogoutCommand;
 import seedu.address.logic.parser.AddDrinkCommandParser;
+import seedu.address.logic.parser.BuyDrinkCommandParser;
 import seedu.address.logic.parser.DeleteCommandParser;
 import seedu.address.logic.parser.FindCommandParser;
-import seedu.address.logic.parser.ImportDrinkCommandParser;
 import seedu.address.logic.parser.SelectCommandParser;
 import seedu.address.logic.parser.SellDrinkCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -67,8 +67,8 @@ public class AdminParser {
         case SellDrinkCommand.COMMAND_WORD:
             return new SellDrinkCommandParser().parse(arguments);
 
-        case ImportDrinkCommand.COMMAND_WORD:
-            return new ImportDrinkCommandParser().parse(arguments);
+        case BuyDrinkCommand.COMMAND_WORD:
+            return new BuyDrinkCommandParser ().parse(arguments);
 
         case ViewTransactionsCommand.COMMAND_WORD:
             return new ViewTransactionsCommand();

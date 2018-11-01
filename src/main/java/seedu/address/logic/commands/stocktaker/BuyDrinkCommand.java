@@ -19,14 +19,14 @@ import seedu.address.model.user.stocktaker.StockTakerModel;
  * Import a drink into inventory. This increases the quantity of the drink.
  * Drink must exist in inventory.
  */
-public class ImportDrinkCommand extends Command {
-    public static final String COMMAND_WORD = "import";
+public class BuyDrinkCommand extends Command {
+    public static final String COMMAND_WORD = "buy";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Import a drink that is recorded in Drink I/O. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Import a drink that is recorded in Drink I/O. \n"
             + "Parameters: "
             + PREFIX_DRINK_NAME + "DRINK NAME "
             //+ PREFIX_DATE + "DATE SOLD "
-            + PREFIX_QUANTITY + "QUANTITY IMPORTED "
+            + PREFIX_QUANTITY + "QUANTITY IMPORTED \n"
             //+ PREFIX_PRICE + "TOTAL REVENUE "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DRINK_NAME + "coca cola "
@@ -42,9 +42,9 @@ public class ImportDrinkCommand extends Command {
     private final Transaction transaction;
 
     /**
-     * Creates an ImportDrinkCommand to import the specified drink {@code Name}
+     * Creates an BuyDrinkCommand to import the specified drink {@code Name}
      */
-    public ImportDrinkCommand(Drink drink, Quantity quantity) {
+    public BuyDrinkCommand (Drink drink, Quantity quantity) {
         requireAllNonNull(drink, quantity);
         this.drink = drink;
         this.quantity = quantity;

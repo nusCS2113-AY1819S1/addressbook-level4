@@ -35,14 +35,15 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Initializes a ModelManager with the given inventoryList, userPrefs and transactionList
      */
-    public ModelManager(ReadOnlyInventoryList inventoryList, UserPrefs userPrefs, LoginInfoManager loginInfoManager,
-                        TransactionList transactionList) {
+    public ModelManager(ReadOnlyInventoryList readOnlyInventoryList, UserPrefs userPrefs,
+                        LoginInfoManager loginInfoManager, TransactionList transactionList) {
+
         super();
-        requireAllNonNull(inventoryList, userPrefs);
+        requireAllNonNull(readOnlyInventoryList, userPrefs);
 
-        logger.fine("Initializing with inventory list: " + inventoryList + " and user prefs " + userPrefs);
+        logger.fine("Initializing with inventory list: " + readOnlyInventoryList + " and user prefs " + userPrefs);
 
-        this.inventoryList = new InventoryList(inventoryList);
+        inventoryList = new InventoryList(readOnlyInventoryList);
         filteredDrinks = new FilteredList<>(inventoryList.getDrinkList());
         this.loginInfoManager = loginInfoManager;
         this.transactionList = transactionList;
@@ -163,5 +164,4 @@ public class ModelManager extends ComponentManager implements Model {
     public boolean isUserNameExist(UserName userName) {
         return loginInfoManager.isUserNameExist(userName);
     }
-
 }

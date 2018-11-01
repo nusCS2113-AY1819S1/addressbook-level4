@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.logic.ListElementPointer;
@@ -22,10 +23,14 @@ public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
-
+    private static final String CONFIRMATION_OF_COMMAND_MESSAGE =
+            "Please confirm the command: \n %1$s \n Press y or Y to confirm";
+    private static final String FAILURE_TO_CONFIRM_COMMAND_MESSAGE =
+            "You did not confirm your command. Please key in command again";
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private Logic logic;
     private ListElementPointer historySnapshot;
+    private String commandEntered;
 
     @FXML
     private TextField commandTextField;
@@ -37,6 +42,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         historySnapshot = logic.getHistorySnapshot();
         registerAsAnEventHandler(this);
+        commandEntered = "";
     }
 
     /**
@@ -97,12 +103,12 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Handles the Enter button pressed event.
+     * process when command is confirmed
      */
-    @FXML
-    private void handleCommandEntered() {
+    private void handleConfirmCommand() {
         try {
-            CommandResult commandResult = logic.execute(commandTextField.getText());
+
+            CommandResult commandResult = logic.execute(commandEntered);
             initHistory();
             historySnapshot.next();
             // process result of the command
@@ -118,7 +124,59 @@ public class CommandBox extends UiPart<Region> {
             raise(new NewResultAvailableEvent(e.getMessage()));
         }
     }
+    /**
+     * Handles the Enter button pressed event.
+     */
+    @FXML
+    private void handleCommandEntered() {
+        if (commandEntered.isEmpty ()) {
+            commandEntered = commandTextField.getText ();
+            EventsCenter.getInstance ().post (new NewResultAvailableEvent(
+                                                String.format (CONFIRMATION_OF_COMMAND_MESSAGE , commandEntered)));
+            commandTextField.setText ("");
+        } else {
+            if (checkCommandConfirmation (commandTextField.getText ())) {
+                handleConfirmCommand();
+                commandEntered = "";
+            } else {
+                EventsCenter.getInstance ().post (new NewResultAvailableEvent(FAILURE_TO_CONFIRM_COMMAND_MESSAGE));
+                commandEntered = "";
+                commandTextField.setText ("");
+            }
+        }
+    }
+    //=============uncomment this if u find comfirmation is annoying and c
+    // comment out the above two method handleCommandEntered and handleConfirmCommand============
+    //    @FXML
+    //    private void handleCommandEntered() {
+    //        try {
+    //
+    //            CommandResult commandResult = logic.execute(commandTextField.getText());
+    //            initHistory();
+    //            historySnapshot.next();
+    //            // process result of the command
+    //            commandTextField.setText("");
+    //            logger.info("Result: " + commandResult.feedbackToUser);
+    //            raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
+    //
+    //        } catch (CommandException | ParseException e) {
+    //            initHistory();
+    //            // handle command failure
+    //            setStyleToIndicateCommandFailure();
+    //            logger.info("Invalid command: " + commandTextField.getText());
+    //            raise(new NewResultAvailableEvent(e.getMessage()));
+    //        }
+    //    }
 
+    /**
+     *Returns true if test is equal to y or Y
+     */
+    private boolean checkCommandConfirmation(String test) {
+        if (test.equals ("y") || test.equals ("Y")) {
+            return true;
+        }
+        return false;
+    }
     /**
      * Initializes the history snapshot.
      */
