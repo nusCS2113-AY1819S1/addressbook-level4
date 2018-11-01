@@ -578,6 +578,7 @@ All method are written in the `ExportCalendarCommand` class.
 ** Cons: Very complicated and time wasting
 
 [NOTE]
+Calendar will be exported to your data folder.
 For the current version of this product, export calendar now will export every events available in the event manager as authentication and RSVP are under test.
 
 ==== [Proposed]: [V1.4] enhancement
