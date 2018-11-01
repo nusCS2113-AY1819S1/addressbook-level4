@@ -267,18 +267,31 @@ Exports the 2nd person in the address book as a csv file.
 `export 1 csv` +
 Exports the 1st person starting from the 1st person in the results of the `find` command as a csv file.
 
-=== Enter or delete personal weekly schedule : `schedule` [coming in v1.4]
-
+// tag::schedule[]
+=== Add personal schedule : `schedule`
 Format:
 
-`addschedule d/DDMMYYYY st/START-TIME et/END-TIME en/EVENT-NAME`
-`delschedule d/DDMMYYYY st/START-TIME et/END-TIME en/EVENT-NAME`
+`schedule INDEX d/DDMMYYYY st/START-TIME et/END_TIME en/EVENT-NAME`
 
 Examples:
 
-* `addschedule d/08112018 st/1000 et/1200 en/GER1000`
-* `addschedule d/01012019 st/1000 et/1800 en/FireworkParty`
-* `delschedule d/01012019 st/1000 et/1800 en/FireworkParty`
+* `schedule 1 d/09092018 st/1200 et/1400 en/CS1231 Exam`
+* `schedule 2 d/08072018 st/1000 et/1900 en/CS2040C Practical Exam`
+
+
+
+=== Add and Delete personal weekly schedule : `schedule` [coming in v1.4]
+
+Format:
+
+`addschedule INDEX d/DDMMYYYY st/START-TIME et/END-TIME en/EVENT-NAME`
+`delschedule INDEX d/DDMMYYYY st/START-TIME et/END-TIME en/EVENT-NAME`
+
+Examples:
+
+* `addschedule 1 d/08112018 st/1000 et/1200 en/GER1000`
+* `addschedule 2 d/01012019 st/1000 et/1800 en/FireworkParty`
+* `delschedule 2 d/01012019 st/1000 et/1800 en/FireworkParty`
 
 === List Common Schedule : `commonschedule` [coming in v1.4]
 
@@ -288,6 +301,7 @@ Format: `commonschedule p/PERSON...[PERSON] sd/START-DATE-DDMMYYYY ed/END-DATE-D
 Examples:
 
 * `commonschedule p/John Smith p/Jane Doe sd/08092018 ed/01102018 t/1.5`
+// end::schedule[]
 
 === Add To-do task: `todo`
 
@@ -316,7 +330,10 @@ The storage file 'addressbook.xml' is located in the project root folder.
 // tag::dataencryption[]
 === Encrypting data files `[coming in v2.0]`
 
-_{explain how the user can enable/disable data encryption}_
+When exporting contacts for the purpose of information transfer to another computer, encryption can be enabled before
+the export command to prevent data misuse.
+
+Command type: `encrypt for export`
 // end::dataencryption[]
 
 == FAQ
