@@ -124,7 +124,8 @@ public class CheckExpenditureCommand extends Command {
         }
 
 
-        /*JFreeChart chart = ChartFactory.createPieChart("My Expense During" + date1 + "to" + date2, dpd, true, true, false);
+        /*JFreeChart chart = ChartFactory.createPieChart("My Expense During" + date1 + "to" + date2, dpd, true, true,
+        false);
         ChartFrame chartFrame = new ChartFrame("My Expense During" + date1 + "to" + date2, chart);
         chartFrame.pack();
         chartFrame.setVisible(true);*/
