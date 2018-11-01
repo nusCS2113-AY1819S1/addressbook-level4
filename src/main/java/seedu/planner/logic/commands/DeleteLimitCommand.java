@@ -14,7 +14,8 @@ import seedu.planner.model.record.Limit;
  * report an error.
  */
 public class DeleteLimitCommand extends Command {
-    public static final String COMMAND_WORD = "deleteLimit";
+    public static final String COMMAND_WORD = "deletelimit";
+    public static final String COMMAND_WORD_UNDERSCORE = "delete_limit";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": delete certain limit according to the dates. "
             + "Parameters: "
             + PREFIX_DATE + "DATE_START " + "DATE_END " + "\n"

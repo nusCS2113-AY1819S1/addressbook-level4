@@ -14,8 +14,9 @@ import seedu.planner.model.record.Limit;
 * and the command will check whether the the total expense during this period has exceeded the limit.
  * and the limit will be stored inside the limit storage.
 * */
-public class LimitCommand extends Command {
-    public static final String COMMAND_WORD = "limit";
+public class AddLimitCommand extends Command {
+    public static final String COMMAND_WORD = "addlimit";
+    public static final String COMMAND_WORD_UNDERSCORE = "add_limit";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Check the limit for a period of time. "
             + "Parameters: "
             + PREFIX_DATE + "DATE_START " + "DATE_END "
@@ -40,7 +41,7 @@ public class LimitCommand extends Command {
 
     private String output;
 
-    public LimitCommand (Limit limitIn) {
+    public AddLimitCommand (Limit limitIn) {
         requireNonNull(limitIn);
         limit = limitIn;
 
@@ -64,7 +65,7 @@ public class LimitCommand extends Command {
     @Override
     public boolean equals (Object other) {
         return other == this // short circuit if same object
-                || (other instanceof LimitCommand // instanceof handles nulls
-                && limit.equals(((LimitCommand) other).limit));
+                || (other instanceof AddLimitCommand // instanceof handles nulls
+                && limit.equals(((AddLimitCommand) other).limit));
     }
 }

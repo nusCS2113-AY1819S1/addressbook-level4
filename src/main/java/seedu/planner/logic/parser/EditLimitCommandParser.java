@@ -13,7 +13,7 @@ import seedu.planner.model.record.MoneyFlow;
 
 
 /**
- * This command Parser is very similar to the @LimitCommandParser.
+ * This command Parser is very similar to the @AddLimitCommandParser.
  * Will return the editLimitCommand with the given limit.
  */
 public class EditLimitCommandParser implements Parser <EditLimitCommand> {

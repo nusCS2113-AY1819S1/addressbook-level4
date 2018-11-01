@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.planner.logic.commands.AddCommand;
+import seedu.planner.logic.commands.AddLimitCommand;
 import seedu.planner.logic.commands.CheckLimitCommand;
 import seedu.planner.logic.commands.ClearCommand;
 import seedu.planner.logic.commands.Command;
@@ -21,7 +22,6 @@ import seedu.planner.logic.commands.FindCommand;
 import seedu.planner.logic.commands.FindTagCommand;
 import seedu.planner.logic.commands.HelpCommand;
 import seedu.planner.logic.commands.HistoryCommand;
-import seedu.planner.logic.commands.LimitCommand;
 import seedu.planner.logic.commands.ListCommand;
 import seedu.planner.logic.commands.RedoCommand;
 import seedu.planner.logic.commands.SelectCommand;
@@ -56,8 +56,8 @@ public class FinancialPlannerParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
+        final String commandWord = matcher.group("commandWord").toLowerCase();
+        final String arguments = matcher.group("arguments").toLowerCase();
 
         switch (commandWord) {
 
@@ -73,7 +73,7 @@ public class FinancialPlannerParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case DeleteCommandByDateEntry.COMMAND_WORD:
+        case DeleteCommandByDateEntry.COMMAND_WORD: case DeleteCommandByDateEntry.COMMAND_WORD_UNDERSCORE:
             return new DeleteCommandByDateEntryParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
@@ -82,7 +82,7 @@ public class FinancialPlannerParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case FindTagCommand.COMMAND_WORD:
+        case FindTagCommand.COMMAND_WORD: case FindTagCommand.COMMAND_WORD_UNDERSCORE:
             return new FindTagCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
@@ -106,23 +106,25 @@ public class FinancialPlannerParser {
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
-        case LimitCommand.COMMAND_WORD:
-            return new LimitCommandParser().parse(arguments);
+        case AddLimitCommand.COMMAND_WORD: case AddLimitCommand.COMMAND_WORD_UNDERSCORE:
+            return new AddLimitCommandParser().parse(arguments);
 
-        case DeleteLimitCommand.COMMAND_WORD:
+        case DeleteLimitCommand.COMMAND_WORD: case DeleteLimitCommand.COMMAND_WORD_UNDERSCORE:
             return new DeleteLimitCommandParser().parse(arguments);
 
-        case EditLimitCommand.COMMAND_WORD:
+        case EditLimitCommand.COMMAND_WORD: case EditLimitCommand.COMMAND_WORD_UNDERSCORE:
             return new EditLimitCommandParser().parse(arguments);
-        case CheckLimitCommand.COMMAND_WORD:
+
+        case CheckLimitCommand.COMMAND_WORD: case CheckLimitCommand.COMMAND_WORD_UNDERSCORE:
             return new CheckLimitCommand();
+
         case SummaryCommand.COMMAND_WORD:
             return new SummaryCommandParser().parse(arguments);
 
         case StatisticCommand.COMMAND_WORD:
             return new StatisticCommandParser().parse(arguments);
 
-        case ExportExcelCommand.COMMAND_WORD:
+        case ExportExcelCommand.COMMAND_WORD: case ExportExcelCommand.COMMAND_WORD_UNDERSCORE:
             return new ExportExcelCommandParser().parse(arguments);
 
 
