@@ -373,21 +373,7 @@ Examples:
 * `class delstudent cn/T16 mc/CG1111 i/A6942069M` +
 Removes a student of the admission number A6942069M from the class T16 of module CG1111
 
-==== Accessing class attendance list : `class listattendance`
-Access the class attendance list for the system. +
-Format: `class listattendance cn/T16 mc/CG1111`
-
-****
-* Module must exist
-* Class must exist and belong to module before being able to access the class attendance list
-****
-
-Examples:
-
-* `class listattendance cn/T16 mc/CG1111` +
-Displays the class attendance list for the class T16 for the module CG1111
-
-==== Marking class attendance list : `class markattend`
+==== Marking class attendance list : `class markattendance`
 Mark the class attendance list for a specified student for the system. +
 Format: `class markattendance cn/CLASS_NAME mc/MODULE_CODE i/MATRIC_NO`
 
@@ -402,6 +388,20 @@ Examples:
 
 * `class markattendance cn/T16 mc/CG1111 i/A6942069M` +
 Marks the attendance of the student of the admission number A6942069M for the class T16 for the module CG1111
+
+==== Accessing class attendance list : `class listattendance`
+Access the class attendance list for the system. +
+Format: `class listattendance cn/T16 mc/CG1111`
+
+****
+* Module must exist
+* Class must exist and belong to module before being able to access the class attendance list
+****
+
+Examples:
+
+* `class listattendance cn/T16 mc/CG1111` +
+Displays the class attendance list for the class T16 for the module CG1111
 
 === Grade Management
 ==== Add Grade Component : `gradebook add`
@@ -733,10 +733,10 @@ e.g. `class addstudent cn/T16 mc/CG1111 i/A6942069M`
 e.g. `class delstudent cn/T16 mc/CG1111 i/A6942069M`
 * *Modifying class enrollment limits* `class edit cn/CLASS_NAME mc/MODULE_CODE e/ENROLLMENT_SIZE` +
 e.g. `class edit cn/T16 mc/CG1111 e/69`
-* *Accessing class attendance list* `class listattendance cn/CLASS_NAME mc/MODULE_CODE` +
-e.g. `class listattendance cn/T16 mc/CG1111`
 * *Marking class attendance list* `class markattendance cn/CLASS_NAME mc/MODULE_CODE i/MATRIC_NO` +
 e.g. `class markattendance cn/T16 mc/CG1111 i/A6942069M`
+* *Accessing class attendance list* `class listattendance cn/CLASS_NAME mc/MODULE_CODE` +
+e.g. `class listattendance cn/T16 mc/CG1111`
 * *Modifying class attendance list* `class modattendance cn/CLASS_NAME mc/MODULE_CODE i/MATRIC_NO` +
 e.g. `class modattendance cn/T16 mc/CG1111 i/A6942069M`
 * *Add a note* `note add mc/MODULE_CODE [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME] [lc/LOCATION]` +
