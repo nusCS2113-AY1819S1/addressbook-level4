@@ -25,7 +25,7 @@ desktop application and is targeted at users who enjoy typing and are keen on ma
 The application revolves around usage of the CLI to manage one's finances. Users can store `name`, `moneyflow`, `date`
 and `tags` of any form of financial activity in the application as a `Record`. `Moneyflow` would be the expenditure
 or income of the financial activity, `date` would be the actual date the activity was performed on and `tags` is a
-system for users to label their data for easy access. The applicat
+system for users to label their data for easy access. 
 
 == Summary of Contributions
 
