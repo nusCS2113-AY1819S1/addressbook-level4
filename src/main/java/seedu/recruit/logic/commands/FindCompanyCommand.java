@@ -26,7 +26,7 @@ public class FindCompanyCommand extends Command {
             + "Parameters: "
             + PREFIX_COMPANY_NAME + "COMPANY NAME "
             + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL+ "EMAIL "
+            + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS \n"
             + "Example: " + COMMAND_WORD + PREFIX_COMPANY_NAME + "Hanbaobao Pte Ltd";
 

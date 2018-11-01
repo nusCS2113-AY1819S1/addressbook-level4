@@ -26,7 +26,7 @@ public class FindJobOfferCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all job offers whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: "
-            + PREFIX_COMPANY_NAME+ "COMPANY NAME "
+            + PREFIX_COMPANY_NAME + "COMPANY NAME "
             + PREFIX_JOB + "JOB "
             + PREFIX_GENDER + "GENDER "
             + PREFIX_SALARY + "SALARY "
