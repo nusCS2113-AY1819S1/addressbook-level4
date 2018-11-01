@@ -313,11 +313,32 @@ Address book data are saved in the hard disk automatically after any command tha
 There is no need to save manually. +
 The storage file 'addressbook.xml' is located in the project root folder.
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
+// tag::suggestions[]
+=== Getting Smart Suggestions
 
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
+Receive smart suggestions while typing in your commands. Press the `TAB` key while typing a command halfway to get
+suggestions on possible commands without having to navigate to the help window. If only one command is available,
+pressing `TAB` will auto-complete the command for you without the need to type it in manually.
+
+Examples:
+
+* While typing `his` to get `history` command, press `TAB`. The `history` command will automatically be filled in for
+you as it is the only suggestion available.
+* While typing `e`, press `TAB`. The system will suggest to you all possible commands that start with `e`, which would
+be `exportall`, `exit`, and `edit`.
+
+=== Getting Wrong Command Suggestions
+
+Should you type in a wrong command, fear not, as our system will automatically suggest to you what you have typed wrongly,
+by giving you a closest approximation of word through the message box after you press enter.
+
+Examples:
+
+* If you wanted to type `select` but you typed `salect` instead, the system will tell you that it is an invalid command,
+and would suggest to you the command `select` instead.
+
+
+// end::suggestions[]
 
 == FAQ
 

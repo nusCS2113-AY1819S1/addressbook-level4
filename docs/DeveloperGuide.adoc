@@ -434,9 +434,11 @@ Gives helpful suggestions to users on commands to type.
 ==== Current Implementation
 There are two instances when suggestions are given.
 
-Firstly, when a user completes entering a command (after pressing ENTER key), if the command typed is invalid, the system will suggest a similar command based on the edit distance.
+Firstly, when a user completes entering a command (after pressing ENTER key), if the command typed is invalid, the system
+will suggest a similar command based on the edit distance.
 
-The second instance would be when the user presses tab while typing the command halfway. The system will suggest commands based on the current prefix string.
+The second instance would be when the user presses tab while typing the command halfway. The system will suggest commands
+based on the current prefix string.
 //end::suggestion[]
 
 // tag::dataencryption[]
@@ -1139,7 +1141,7 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
+//TODO: _{ more test cases ... }_
 
 === Deleting a person
 
