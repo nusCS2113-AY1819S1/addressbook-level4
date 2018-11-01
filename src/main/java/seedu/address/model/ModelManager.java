@@ -319,21 +319,25 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void sortByName() {
+        stateHistoryList.addEventListState();
         versionedEventList.sortByName();
     }
 
     @Override
     public void sortByStartTime() {
+        stateHistoryList.addEventListState();
         versionedEventList.sortByStartTime();
     }
 
     @Override
     public void sortByEndTime() {
+        stateHistoryList.addEventListState();
         versionedEventList.sortByEndTime();
     }
 
     @Override
     public void sortByDate() {
+        stateHistoryList.addEventListState();
         versionedEventList.sortByDate();
     }
 
