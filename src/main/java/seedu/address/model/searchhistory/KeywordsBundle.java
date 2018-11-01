@@ -6,10 +6,12 @@ import java.util.List;
  * A utility class to store the list of keywords and its type.
  */
 public class KeywordsBundle {
-    private KeywordType type;
-    private List<String> keywords;
+    protected KeywordType type;
+    protected List<String> keywords;
 
-    KeywordsBundle (KeywordType type, List<String> keywords) {
+    public KeywordsBundle (KeywordType type, List<String> keywords) {
+        assert type != null;
+        assert keywords != null;
         this.type = type;
         this.keywords = keywords;
     }
@@ -20,5 +22,19 @@ public class KeywordsBundle {
 
     public List<String> getKeywords() {
         return keywords;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof KeywordsBundle)) {
+            return false;
+        }
+
+        KeywordsBundle other = (KeywordsBundle) obj;
+        return type == other.type && keywords.equals(other.keywords);
     }
 }

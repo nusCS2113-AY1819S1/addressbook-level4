@@ -6,7 +6,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_LOGIN_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalAccounts.LOGINDETAIL1;
+import static seedu.address.testutil.TypicalAccounts.LOGINDETAIL_1;
 import static seedu.address.testutil.TypicalAccounts.getTypicalLoginBook;
 import static seedu.address.testutil.TypicalClubBudgetElements.getTypicalClubBudgetElementsBook;
 import static seedu.address.testutil.TypicalFinalClubBudget.getTypicalFinalBudgetsBook;
@@ -16,9 +16,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.function.Predicate;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.LoginManager;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -31,8 +34,13 @@ import seedu.address.model.searchhistory.SearchHistoryManager;
  * Contains integration tests (interaction with the Model) for {@code LoginUserIdPasswordRoleCommand}.
  */
 public class LoginUserIdPasswordRoleCommandTest {
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     private Model model = new ModelManager(getTypicalLoginBook(), getTypicalTaggedAddressBook(),
             getTypicalClubBudgetElementsBook(), getTypicalFinalBudgetsBook(), new UserPrefs());
+
     private Model expectedModel = new ModelManager(getTypicalLoginBook(),
             getTypicalTaggedAddressBook(), getTypicalClubBudgetElementsBook(), getTypicalFinalBudgetsBook(),
             new UserPrefs());
@@ -88,165 +96,126 @@ public class LoginUserIdPasswordRoleCommandTest {
     }
 
     @Test
-    public void updateFilteredAccountList_zeroParameters_loginFailed() {
-        String expectedMessage = String.format(MESSAGE_LOGIN_LISTED_OVERVIEW);
-        UserIdContainsKeywordsPredicate idPredicate = prepareUserIdContainsKeywordsPredicate(" ");
-        UserPasswordContainsKeywordsPredicate passwordPredicate = prepareUserPasswordContainsKeywordsPredicate(" ");
-        UserRoleContainsKeywordsPredicate rolePredicate = prepareUserRoleContainsKeywordsPredicate(" ");
-        LoginUserIdPasswordRoleCommand command = new LoginUserIdPasswordRoleCommand(idPredicate,
-                passwordPredicate, rolePredicate);
-        Predicate updatedIdPredicate = getMostUpdatedIdPredicate(idPredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedIdPredicate);
-        Predicate updatedPasswordPredicate = getMostUpdatedPasswordPredicate(passwordPredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedPasswordPredicate);
-        Predicate updatedRolePredicate = getMostUpdatedRolePredicate(rolePredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedRolePredicate);
-        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+    public void updateFilteredAccountList_emptyStringLoginInputs_loginFailed() {
+        LoginUserIdPasswordRoleCommand command = updateLoginListBasedOnPredicates(" ", " ", " ");
+        assertCommandSuccess(command, model, commandHistory, MESSAGE_LOGIN_LISTED_OVERVIEW, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredLoginDetailsList());
+        assertFalse(LoginManager.getIsLoginSuccessful());
+    }
+
+    @Test
+    public void updateFilteredAccountList_nullLoginInputs_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        LoginUserIdPasswordRoleCommand command = updateLoginListBasedOnPredicates(null,
+                null, null);
+    }
+
+    @Test
+    public void updateFilteredAccountList_nullLoginId_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        LoginUserIdPasswordRoleCommand command = updateLoginListBasedOnPredicates(null,
+                "zaq1xsw2cde3", "member");
+    }
+
+    @Test
+    public void updateFilteredAccountList_nullLoginPassword_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        LoginUserIdPasswordRoleCommand command = updateLoginListBasedOnPredicates("A1234561M",
+                null, "member");
+    }
+
+    @Test
+    public void updateFilteredAccountList_nullLoginRole_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        LoginUserIdPasswordRoleCommand command = updateLoginListBasedOnPredicates("A1234561M",
+                "zaq1xsw2cde3", null);
+    }
+
+    @Test
+    public void updateFilteredAccountList_emptyStringLoginId_loginFailed() {
+        LoginUserIdPasswordRoleCommand command = updateLoginListBasedOnPredicates(" ",
+                "zaq1xsw2cde3", "member");
+        assertCommandSuccess(command, model, commandHistory, MESSAGE_LOGIN_LISTED_OVERVIEW, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredLoginDetailsList());
+        assertFalse(LoginManager.getIsLoginSuccessful());
+    }
+
+    @Test
+    public void updateFilteredAccountList_emptyStringLoginPassword_loginFailed() {
+        LoginUserIdPasswordRoleCommand command = updateLoginListBasedOnPredicates("A1234561M",
+                " ", "member");
+        assertCommandSuccess(command, model, commandHistory, MESSAGE_LOGIN_LISTED_OVERVIEW, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredLoginDetailsList());
+        assertFalse(LoginManager.getIsLoginSuccessful());
+    }
+
+    @Test
+    public void updateFilteredAccountList_emptyStringLoginRole_loginFailed() {
+        LoginUserIdPasswordRoleCommand command = updateLoginListBasedOnPredicates("A1234561M",
+                "zaq1xsw2cde3", " ");
+        assertCommandSuccess(command, model, commandHistory, MESSAGE_LOGIN_LISTED_OVERVIEW, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredLoginDetailsList());
+        assertFalse(LoginManager.getIsLoginSuccessful());
     }
 
     @Test
     public void updateFilteredAccountList_correctLoginDetails_loginSuccessful() {
-        String expectedMessage = String.format(MESSAGE_LOGIN_LISTED_OVERVIEW);
-        UserIdContainsKeywordsPredicate idPredicate = prepareUserIdContainsKeywordsPredicate("A1234561M");
-        UserPasswordContainsKeywordsPredicate passwordPredicate = prepareUserPasswordContainsKeywordsPredicate(
-                "zaq1xsw2cde3");
-        UserRoleContainsKeywordsPredicate rolePredicate = prepareUserRoleContainsKeywordsPredicate("member");
-        LoginUserIdPasswordRoleCommand command = new LoginUserIdPasswordRoleCommand(idPredicate,
-                passwordPredicate, rolePredicate);
-        Predicate updatedIdPredicate = getMostUpdatedIdPredicate(idPredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedIdPredicate);
-        Predicate updatedPasswordPredicate = getMostUpdatedPasswordPredicate(passwordPredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedPasswordPredicate);
-        Predicate updatedRolePredicate = getMostUpdatedRolePredicate(rolePredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedRolePredicate);
-        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(LOGINDETAIL1), model.getFilteredLoginDetailsList());
+        LoginUserIdPasswordRoleCommand command = updateLoginListBasedOnPredicates("A1234561M",
+                "zaq1xsw2cde3", "member");
+        assertCommandSuccess(command, model, commandHistory, MESSAGE_LOGIN_LISTED_OVERVIEW, expectedModel);
+        assertEquals(Collections.singletonList(LOGINDETAIL_1), model.getFilteredLoginDetailsList());
+        assertTrue(LoginManager.getIsLoginSuccessful());
+    }
+
+    @Test
+    public void updateFilteredAccountList_correctLoginDetailsWhitespaces_loginSuccessful() {
+        LoginUserIdPasswordRoleCommand command = updateLoginListBasedOnPredicates("A1234561M   ",
+                "zaq1xsw2cde3   ", "member   ");
+        assertCommandSuccess(command, model, commandHistory, MESSAGE_LOGIN_LISTED_OVERVIEW, expectedModel);
+        assertEquals(Collections.singletonList(LOGINDETAIL_1), model.getFilteredLoginDetailsList());
+        assertTrue(LoginManager.getIsLoginSuccessful());
     }
 
     @Test
     public void updateFilteredAccountList_wrongUserId_loginFailed() {
-        String expectedMessage = String.format(MESSAGE_LOGIN_LISTED_OVERVIEW);
-        UserIdContainsKeywordsPredicate idPredicate = prepareUserIdContainsKeywordsPredicate("A1234560M");
-        UserPasswordContainsKeywordsPredicate passwordPredicate = prepareUserPasswordContainsKeywordsPredicate(
-                "zaq1xsw2cde3");
-        UserRoleContainsKeywordsPredicate rolePredicate = prepareUserRoleContainsKeywordsPredicate("member");
-        LoginUserIdPasswordRoleCommand command = new LoginUserIdPasswordRoleCommand(idPredicate,
-                passwordPredicate, rolePredicate);
-        Predicate updatedIdPredicate = getMostUpdatedIdPredicate(idPredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedIdPredicate);
-        Predicate updatedPasswordPredicate = getMostUpdatedPasswordPredicate(passwordPredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedPasswordPredicate);
-        Predicate updatedRolePredicate = getMostUpdatedRolePredicate(rolePredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedRolePredicate);
-        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertNotEquals(Arrays.asList(LOGINDETAIL1), model.getFilteredLoginDetailsList());
+        LoginUserIdPasswordRoleCommand command = updateLoginListBasedOnPredicates("A1234560M",
+                "zaq1xsw2cde3", "member");
+        assertCommandSuccess(command, model, commandHistory, MESSAGE_LOGIN_LISTED_OVERVIEW, expectedModel);
+        assertNotEquals(Collections.singletonList(LOGINDETAIL_1), model.getFilteredLoginDetailsList());
+        assertFalse(LoginManager.getIsLoginSuccessful());
     }
 
     @Test
     public void updateFilteredAccountList_wrongUserPassword_loginFailed() {
-        String expectedMessage = String.format(MESSAGE_LOGIN_LISTED_OVERVIEW);
-        UserIdContainsKeywordsPredicate idPredicate = prepareUserIdContainsKeywordsPredicate("A1234561M");
-        UserPasswordContainsKeywordsPredicate passwordPredicate = prepareUserPasswordContainsKeywordsPredicate(
-                "zwevwrvrrbre");
-        UserRoleContainsKeywordsPredicate rolePredicate = prepareUserRoleContainsKeywordsPredicate("member");
-        LoginUserIdPasswordRoleCommand command = new LoginUserIdPasswordRoleCommand(idPredicate,
-                passwordPredicate, rolePredicate);
-        Predicate updatedIdPredicate = getMostUpdatedIdPredicate(idPredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedIdPredicate);
-        Predicate updatedPasswordPredicate = getMostUpdatedPasswordPredicate(passwordPredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedPasswordPredicate);
-        Predicate updatedRolePredicate = getMostUpdatedRolePredicate(rolePredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedRolePredicate);
-        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertNotEquals(Arrays.asList(LOGINDETAIL1), model.getFilteredLoginDetailsList());
+        LoginUserIdPasswordRoleCommand command = updateLoginListBasedOnPredicates("A1234561M",
+                "1qaz2wsx3edc", "member");
+        assertCommandSuccess(command, model, commandHistory, MESSAGE_LOGIN_LISTED_OVERVIEW, expectedModel);
+        assertNotEquals(Collections.singletonList(LOGINDETAIL_1), model.getFilteredLoginDetailsList());
+        assertFalse(LoginManager.getIsLoginSuccessful());
     }
 
     @Test
     public void updateFilteredAccountList_wrongUserRole_loginFailed() {
-        String expectedMessage = String.format(MESSAGE_LOGIN_LISTED_OVERVIEW);
-        UserIdContainsKeywordsPredicate idPredicate = prepareUserIdContainsKeywordsPredicate("A1234561M");
-        UserPasswordContainsKeywordsPredicate passwordPredicate = prepareUserPasswordContainsKeywordsPredicate(
-                "zaq1xsw2cde3");
-        UserRoleContainsKeywordsPredicate rolePredicate = prepareUserRoleContainsKeywordsPredicate("treasurer");
-        LoginUserIdPasswordRoleCommand command = new LoginUserIdPasswordRoleCommand(idPredicate,
-                passwordPredicate, rolePredicate);
-        Predicate updatedIdPredicate = getMostUpdatedIdPredicate(idPredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedIdPredicate);
-        Predicate updatedPasswordPredicate = getMostUpdatedPasswordPredicate(passwordPredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedPasswordPredicate);
-        Predicate updatedRolePredicate = getMostUpdatedRolePredicate(rolePredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedRolePredicate);
-        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertNotEquals(Arrays.asList(LOGINDETAIL1), model.getFilteredLoginDetailsList());
+        LoginUserIdPasswordRoleCommand command = updateLoginListBasedOnPredicates("A1234561M",
+                "zaq1xsw2cde3", "janitor");
+        assertCommandSuccess(command, model, commandHistory, MESSAGE_LOGIN_LISTED_OVERVIEW, expectedModel);
+        assertNotEquals(Collections.singletonList(LOGINDETAIL_1), model.getFilteredLoginDetailsList());
+        assertFalse(LoginManager.getIsLoginSuccessful());
     }
 
     @Test
     public void updateFilteredAccountList_multipleLoginTriesWrongLoginDetails_loginFailed() {
-        String expectedMessage = String.format(MESSAGE_LOGIN_LISTED_OVERVIEW);
-        UserIdContainsKeywordsPredicate firstIdPredicate = prepareUserIdContainsKeywordsPredicate("A1234561M");
-        UserPasswordContainsKeywordsPredicate firstPasswordPredicate = prepareUserPasswordContainsKeywordsPredicate(
-                "zaq1xsw2cde3");
-        UserRoleContainsKeywordsPredicate firstRolePredicate = prepareUserRoleContainsKeywordsPredicate("treasurer");
-        LoginUserIdPasswordRoleCommand firstCommand = new LoginUserIdPasswordRoleCommand(firstIdPredicate,
-                firstPasswordPredicate, firstRolePredicate);
-        Predicate updatedFirstIdPredicate = getMostUpdatedIdPredicate(firstIdPredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedFirstIdPredicate);
-        Predicate updatedFirstPasswordPredicate = getMostUpdatedPasswordPredicate(firstPasswordPredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedFirstPasswordPredicate);
-        Predicate updatedFirstRolePredicate = getMostUpdatedRolePredicate(firstRolePredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedFirstRolePredicate);
-        assertCommandSuccess(firstCommand, model, commandHistory, expectedMessage, expectedModel);
-        assertNotEquals(Arrays.asList(LOGINDETAIL1), model.getFilteredLoginDetailsList());
+        LoginUserIdPasswordRoleCommand firstCommand = updateLoginListBasedOnPredicates("A1234560M",
+                "zaq1xsw2cde3", "member");
+        assertCommandSuccess(firstCommand, model, commandHistory, MESSAGE_LOGIN_LISTED_OVERVIEW, expectedModel);
+        assertNotEquals(Collections.singletonList(LOGINDETAIL_1), model.getFilteredLoginDetailsList());
+        assertFalse(LoginManager.getIsLoginSuccessful());
 
-        UserIdContainsKeywordsPredicate secondIdPredicate = prepareUserIdContainsKeywordsPredicate("A1234561M");
-        UserPasswordContainsKeywordsPredicate secondPasswordPredicate = prepareUserPasswordContainsKeywordsPredicate(
-                "zaq1xsw2cde3");
-        UserRoleContainsKeywordsPredicate secondRolePredicate = prepareUserRoleContainsKeywordsPredicate("treasurer");
-        LoginUserIdPasswordRoleCommand secondCommand = new LoginUserIdPasswordRoleCommand(secondIdPredicate,
-                secondPasswordPredicate, secondRolePredicate);
-        Predicate updatedSecondIdPredicate = getMostUpdatedIdPredicate(secondIdPredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedSecondIdPredicate);
-        Predicate updatedSecondPasswordPredicate = getMostUpdatedPasswordPredicate(secondPasswordPredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedSecondPasswordPredicate);
-        Predicate updatedSecondRolePredicate = getMostUpdatedRolePredicate(secondRolePredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedSecondRolePredicate);
-        assertCommandSuccess(secondCommand, model, commandHistory, expectedMessage, expectedModel);
-        assertNotEquals(Arrays.asList(LOGINDETAIL1), model.getFilteredLoginDetailsList());
-    }
-
-    @Test
-    public void updateFilteredAccountList_multipleLoginTriesFirstWrongSecondCorrect_loginSuccessful() {
-        String expectedMessage = String.format(MESSAGE_LOGIN_LISTED_OVERVIEW);
-        UserIdContainsKeywordsPredicate firstIdPredicate = prepareUserIdContainsKeywordsPredicate("A1234561M");
-        UserPasswordContainsKeywordsPredicate firstPasswordPredicate = prepareUserPasswordContainsKeywordsPredicate(
-                "zaq1xsw2cde3");
-        UserRoleContainsKeywordsPredicate firstRolePredicate = prepareUserRoleContainsKeywordsPredicate("treasurer");
-        LoginUserIdPasswordRoleCommand firstCommand = new LoginUserIdPasswordRoleCommand(firstIdPredicate,
-                firstPasswordPredicate, firstRolePredicate);
-        Predicate updatedFirstIdPredicate = getMostUpdatedIdPredicate(firstIdPredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedFirstIdPredicate);
-        Predicate updatedFirstPasswordPredicate = getMostUpdatedPasswordPredicate(firstPasswordPredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedFirstPasswordPredicate);
-        Predicate updatedFirstRolePredicate = getMostUpdatedRolePredicate(firstRolePredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedFirstRolePredicate);
-        assertCommandSuccess(firstCommand, model, commandHistory, expectedMessage, expectedModel);
-        assertNotEquals(Arrays.asList(LOGINDETAIL1), model.getFilteredLoginDetailsList());
-
-        UserIdContainsKeywordsPredicate secondIdPredicate = prepareUserIdContainsKeywordsPredicate("A1234561M");
-        UserPasswordContainsKeywordsPredicate secondPasswordPredicate = prepareUserPasswordContainsKeywordsPredicate(
-                "zaq1xsw2cde3");
-        UserRoleContainsKeywordsPredicate secondRolePredicate = prepareUserRoleContainsKeywordsPredicate("member");
-        LoginUserIdPasswordRoleCommand secondCommand = new LoginUserIdPasswordRoleCommand(secondIdPredicate,
-                secondPasswordPredicate, secondRolePredicate);
-        Predicate updatedSecondIdPredicate = getMostUpdatedIdPredicate(secondIdPredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedSecondIdPredicate);
-        Predicate updatedSecondPasswordPredicate = getMostUpdatedPasswordPredicate(secondPasswordPredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedSecondPasswordPredicate);
-        Predicate updatedSecondRolePredicate = getMostUpdatedRolePredicate(secondRolePredicate);
-        expectedModel.updateFilteredLoginDetailsList(updatedSecondRolePredicate);
-        assertCommandSuccess(secondCommand, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(LOGINDETAIL1), model.getFilteredLoginDetailsList());
+        LoginUserIdPasswordRoleCommand secondCommand = updateLoginListBasedOnPredicates("A1234560M",
+                "zaq1xsw2cde3", "member");
+        assertCommandSuccess(secondCommand, model, commandHistory, MESSAGE_LOGIN_LISTED_OVERVIEW, expectedModel);
+        assertNotEquals(Collections.singletonList(LOGINDETAIL_1), model.getFilteredLoginDetailsList());
+        assertFalse(LoginManager.getIsLoginSuccessful());
     }
 
     private Predicate getMostUpdatedIdPredicate(Predicate idPredicate) {
@@ -260,6 +229,29 @@ public class LoginUserIdPasswordRoleCommandTest {
 
     private Predicate getMostUpdatedRolePredicate(Predicate rolePredicate) {
         return searchHistoryManager.executeNewSearch(rolePredicate);
+    }
+
+    /**
+     * Updates the accounts list in {@code expectedModel} based on id, password and role predicates
+     * @param userId the input user id
+     * @param userPassword password predicate based on user password
+     * @param userRole role predicate based on user role
+     * @return a new {@code LoginUserIdPasswordRoleCommand} object that contains {@code idPredicate},
+     * {@code passwordPredicate} and {@code rolePredicate}
+     */
+    private LoginUserIdPasswordRoleCommand updateLoginListBasedOnPredicates(String userId,
+                                                                            String userPassword, String userRole) {
+        UserIdContainsKeywordsPredicate idPredicate = prepareUserIdContainsKeywordsPredicate(userId);
+        UserPasswordContainsKeywordsPredicate passwordPredicate = prepareUserPasswordContainsKeywordsPredicate(
+                userPassword);
+        UserRoleContainsKeywordsPredicate rolePredicate = prepareUserRoleContainsKeywordsPredicate(userRole);
+        Predicate updatedIdPredicate = getMostUpdatedIdPredicate(idPredicate);
+        expectedModel.updateFilteredLoginDetailsList(updatedIdPredicate);
+        Predicate updatedPasswordPredicate = getMostUpdatedPasswordPredicate(passwordPredicate);
+        expectedModel.updateFilteredLoginDetailsList(updatedPasswordPredicate);
+        Predicate updatedRolePredicate = getMostUpdatedRolePredicate(rolePredicate);
+        expectedModel.updateFilteredLoginDetailsList(updatedRolePredicate);
+        return new LoginUserIdPasswordRoleCommand(idPredicate, passwordPredicate, rolePredicate);
     }
 
     /**

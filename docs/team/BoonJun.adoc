@@ -1,0 +1,86 @@
+= Boon Jun - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: NUSSU Connect
+
+
+== Introduction
+
+This Portfolio is a documentation of the contributions that I have made for this project, titled NUSSU Connect.
+
+NUSSU Connect is a CLI application mainly targeted towards executive committee (exco) members of the NUS Student Union (NUSSU).
+Being representatives of the NUS student body, the exco members has a part in many projects and initiatives.
+This application therefore aims to help them perform some of these miscellaneous tasks that often comes from these projects much more easily.
+
+To do so, the application comes with several features. This includes budgets/expenses management, human resource allocation and managing of important contacts.
+The original source code of this project is the https://github.com/se-edu/[AddressBook-Level4] project created by SE-EDU initiative, and hence,
+it also comes with some features from the AB4 project.
+
+== Summary of contributions
+
+In this project, my main contribution is the Search Pruning feature. The main purpose of this feature is to
+ease the process of managing a large list of contacts.
+Further details about my contributions will be explained in this section.
+
+* *Major enhancement*: added *the ability to prune the list of contacts with find and undosearch commands*
+
+** What it does: allows users to search and reduce the size of the list of contacts in discrete steps.
+
+** Justification: When managing several large scale projects/events, users will find themselves in a situation
+where they have to manage numerous of contacts. This includes student volunteers, sponsors, key organizers etc. Hence, a search pruning feature
+allows the users to filter the list of contacts intuitively and help them retrieve the relevant results more easily. In the event that users
+made a mistake in their search, users can utilize the `undosearch` command to rectify their mistake.
+
+** Highlights: This enhancement is mainly created from scratch with some help from documentations on how the `Predicate` class works.
+This enhancement was also created with re-usability in mind and any form of filtering done with `Predicate` will be able to
+utilize this feature.
+
+* *Minor enhancement*: added the feature that allows users to see a history of keywords they used in their search when utilizing the Search Pruning feature.
+
+** What it does: Every time when the user performs a search, the command result box will display the list of keywords describing how the current displayed list is being filtered.
+
+** Justification: When utilizing the search pruning feature, the users might forget the keywords that they have specified in the past. Therefore, this feature simply shows
+the keywords that were previously executed by the user.
+
+* *Minor enhancement*: Improved find command by introducing searching by tags and exclude functionality
+
+** What it does: Searching by tags allows users to filter the contacts according to the tags (extra description). Exclude functionality allows users to remove
+unwanted results from their search.
+
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.1`, `v1.2` and `v1.2.1` (3 releases) on GitHub
+*** Managed Milestones and Deadlines of the project.
+
+** Documentation:
+*** Changing site-wide documentation settings in several files.
+*** Minor tweaks to ReadMe, UserGuide and DeveloperGuide to meet the module requirements. (Pull Requests https://github.com[#12], https://github.com[#14], https://github.com[#23])
+*** Provided teammates with non-trivial PR reviews (Pull Requests https://github.com[#25], https://github.com[#76])
+
+** Tools:
+*** Integrated Coveralls to the team repository
+
+**  Others:
+*** Search Pruning Feature reused in Login/Logout feature of the application.
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=find]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=searchpruning]

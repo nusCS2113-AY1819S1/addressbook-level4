@@ -401,6 +401,7 @@ public class ModelManager extends ComponentManager implements Model {
                 && filteredPersons.equals(other.filteredPersons)
                 && filteredClubs.equals(other.filteredClubs)
                 && filteredClubBudgets.equals(other.filteredClubBudgets)
-                && searchHistoryManager.equals(other.searchHistoryManager);
+                && searchHistoryManager.equals(other.searchHistoryManager)
+                && keywordsRecord.equals(other.keywordsRecord);
     }
 }

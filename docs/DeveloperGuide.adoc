@@ -268,7 +268,7 @@ a list of all the accounts in `LoginBook`.
 
 image::InitialLoginBookList.PNG[width="300"]
 
-Step 2. The user executes `login A1234567M zaq1xsw2cde3 member` command in the input box that matches an account in
+Step 2. The user executes `login A1234568M zaq1xsw2cde3 member` command in the input box that matches an account in
 `LoginBook`. `LogicManager` then calls `ParseCommand(login A1234568M zaq1xsw2cde3 member)` in `AddressBookParser`.
 
 image::CorrectIdPasswordRole.PNG[width="300"]
@@ -301,6 +301,11 @@ whose role is a mismatch with updatedRolePredicate. `filteredLoginDetails` is fu
 image::ParseCorrectLoginDetailList.PNG[width="300"]
 
 [NOTE]
+After step 9 is done, there should only be one account left in the list, assuming that the user input the correct login
+details. As the loginbook does not allow duplicate accounts with the same user ID field as another account, there should
+not be two or more accounts left in the list.
+
+[NOTE]
 In step 2, if the user executes `login A1234566M zaq1xsw2cde janitor` command instead, the application will continue with steps
 2 to 7, but instead of one account remaining at the end of the filtering process, there will be no account in the updated
 list as shown in the image below.
@@ -309,21 +314,41 @@ image::WrongIdPasswordRole.PNG[width="300"]
 image::WrongIdOrPasswordOrRoleList.PNG[width="300"]
 
 [NOTE]
+In step 2, if the user does not type in anything and gives a blank input for the login command instead, the application will throw a new ParseException
+and consider the login attempt as unsuccessful and initiate a new pop-up window asking the user for input of login
+credentials again, as shown in the image below.
+
+image::BlankLoginInput.PNG[width="300"]
+
+[NOTE]
+In step 2, if the user types in a string of login input that has either the id, password or role parameters missing instead, the application will
+throw a new ParseException and consider the login attempt as unsuccessful and initiate a new pop-up window asking the user
+for input of login credentials again, as shown in the image below.
+
+image::MissingLoginInput.PNG[width="300"]
+
+[NOTE]
 In all cases where the user inputs either the wrong ID, password, role, any combination of two or all three, there will
 be no account left in the account list when `getFilteredLoginDetailsList` method in `Model` is called. The
 `isLoginSuccessful` boolean in `LoginManager` will be set to false via the setter method, `setIsLoginSuccessful`
 in `LoginManager`. This is done by the `checkUpdatedAccountListSetLoginCondition` method in `LoginUserIdPasswordRoleCommand`.
 The `initializeLoginProcess` method in `MainWindow` will be called repeatedly until `isLoginSuccessful` is set to true.
-The sequence diagram below shows the high level workflow of the login mechanism.
+The sequence diagram below shows the high level workflow of the login mechanism in the event of log-in failure.
 
 image::RepeatLoginSequenceDiagram.png[width="300"]
 
 The activity diagram below shows the overall picture of how the login mechanism works.
 
 image::LoginActivityDiagram.png[width="300"]
+The activity diagram below is an extension of the activity diagram above.
+
 image::LoginExtendedActivityDiagram.png[width="300"]
 
 ==== Design Considerations
+
+===== Preface
+This section touches on the different aspects of design considerations encountered during the project in the implementation of the login feature.
+It will also talk about the different alternatives in different design aspects, and its advantages and disadvantages.
 
 ===== Aspect: How login data is stored
 
@@ -333,6 +358,15 @@ image::LoginExtendedActivityDiagram.png[width="300"]
 * **Alternative 2:** Saves login credentials using JSON.
 ** Pros: Does not take up a lot of space.
 ** Cons: Harder to read.
+
+===== Aspect: Choice of hashing algorithms to hash login details securely
+
+* **Alternative 1 (current choice):** Using Base64 as the encoding and decoding scheme for login details
+** Pros: Easier to implement, in the context of project time constraints
+** Cons: Not as secure compared to other regular hashing algorithms like MD5 with added salt
+* **Alternative 2:** Using MD5 with added salt as a hashing algorithm
+** Pros: More secure than using Base64 as a hashing algorithm
+** Cons: Harder and takes a longer time to implement
 // end::login[]
 
 //tag::budget[]
@@ -387,7 +421,7 @@ image::BudgetCommandSequenceDiagram.png[width="800"]
 
 //end::budget[]
 
-// tag::undoredo[]
+// tag::searchpruning[]
 === Search Pruning Feature
 
 The Search Pruning mechanism is facilitated by the `SearchHistoryManager`.
@@ -489,7 +523,7 @@ Aspect: What data is stored in search history stack +
 ** Cons:
     . More memory is required as Person objects has to be duplicated multiple times into a new List.
     . Class is inextensible to store other objects other than those from a Person classes.
-
+// end::searchpruning[]
 
 === Add Skill Level Command
 
@@ -542,6 +576,7 @@ information during addition of personal information.
 * Another is to enhance the edit command, possibly depreciating the use of the add skill level command.
 * Another is to enhance the storage such that multiple skills can be added per person.
 
+// tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
 
