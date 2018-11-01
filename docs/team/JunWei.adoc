@@ -41,7 +41,7 @@ Our developer team consists of:
 * *Major enhancement*: Reminder and Meeting Minutes
 ** What it does: The *Reminder* feature automatically showcases the next upcoming meeting's details on the GUI. The Meeting Minutes feature allows users to open up a text box on the GUI to write their meeting minutes and store them in the JitHub.
 ** Justification: These features compliment the user experience significantly as we are a Meeting Scheduling app and having a reminder for upcoming meetings is essential. Similarly, being able to take down meeting minutes within JitHub makes keeping track of meetings and discussions a lot easier for users.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+** Highlights: (Main challenges faced and what have u learnt when doing the project) This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
 
 * *Minor enhancement*: I added *natural language processing to the Command Line Interface* as well as added a *Remark command* that allows the user to allows users to leave Remarks for each contact.
 
@@ -63,7 +63,7 @@ Our developer team consists of:
 
 
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|_(The following are extracts of the User Guide with reference to the " " feature) Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
 include::../UserGuide.adoc[tag=undoredo]
