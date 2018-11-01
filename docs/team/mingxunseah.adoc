@@ -23,7 +23,7 @@ This feature gives users the freedom to update the saved data in RecruitBook, ma
 
 * *Major enhancement*: added *the ability to sort entries*
 ** What it does: +
-It allows users to sort the various lists (candidate or company) by different attributes such as their names.
+It allows users to sort the various lists (candidate, company or job offers) by different attributes such as their names.
 ** Justification: +
 This feature enables users to control how they want their lists listed. It makes it easier to determine how different entries compare to one another by sorting them based on selected attributes.
 ** Highlights: +

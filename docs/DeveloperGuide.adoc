@@ -399,7 +399,7 @@ The sort mechanism of candidates is facilitated in `UniqueCandidateList` which s
 
 These operations are accessed through the `Model` interface as `Model#sortCandidates(Prefix prefix)` which then calls the respective sorting method by determining the prefix type in `CandidateBook`.
 [NOTE]
-These prefixes `/n`, `/x`,`/e`, `/j`, `/h`, `/s`, `/r` are used respectively to the methods shown above.
+These prefixes `n/`, `x/`, `e/`, `j/`, `h/`, `s/`, `r/` are used respectively to the methods shown above.
 
 ===== Companies
 
@@ -411,7 +411,22 @@ The sort mechanism of companies is facilitated in `UniqueCompanyList` which stor
 
 These operations are accessed through the `Model` interface as `Model#sortCompanies(Prefix prefix)` which then calls the respective sorting method by determining the prefix type in `CompanyBook`.
 [NOTE]
-These prefixes `/c`, `/e`, `/r` are used respectively to the methods shown above.
+These prefixes `c/`, `e/`, `r/` are used respectively to the methods shown above.
+
+===== Job Offers
+
+The sort mechanism of job offers is facilitated in `UniqueCompanyJobList` which stores job offers in an `internalList`. It implements the sorting of job offers using the following operations:
+
+* `UniqueCompanyJobList#sortByCompanyName()` — Sorts the `internalList` of Job Offers by the company names they are attached to.
+* `UniqueCompanyJobList#sortByJob()` — Sorts the `internalList` of Job Offers by their job titles.
+* `UniqueCompanyJobList#sortByAgeRange()` — Sorts the `internalList` of Job Offers by the minimum age of their required age ranges.
+* `UniqueCompanyJobList#sortByEducation()` — Sorts the `internalList` of Job Offers by their required education levels.
+* `UniqueCompanyJobList#sortBySalary()` — Sorts the `internalList` of Job Offers by their salaries.
+* `UniqueCompanyJobList#sortInReverse()` — Sorts the `internalList` of Job Offers in reverse order of their current order.
+
+These operations are accessed through the `Model` interface as `Model#sortJobOffers(Prefix prefix)` which then calls the respective sorting method by determining the prefix type in `CompanyBook`.
+[NOTE]
+These prefixes `c/`, `j/`, `xr/`, `h/`, `s/`, `r/` are used respectively to the methods shown above.
 
 Given below is an example usage scenario and how the sort command behaves at each step.
 
@@ -419,9 +434,10 @@ Step 1. The user launches RecruitBook for the first time.
 
 .. `UniqueCandidateList` will be initialised with the list of saved candidates in `CandidateBook`.
 .. `UniqueCompanyList` will be initialised with the list of saved companies in `CompanyBook`.
+.. `UniqueCompanyJobList` will be initialised with the list of saved job offers in `CompanyBook`.
 
 [NOTE]
-Assume that upon initialisation, there are candidate and company entries in RecruitBook.
+Assume that upon initialisation, there are candidate, company and job entries in RecruitBook.
 
 Step 2. The user executes...
 
@@ -431,10 +447,13 @@ Step 2. The user executes...
 .. `sortC c/` to sort the list of companies based on their names.
 ... `c/` prefix is used which calls the `UniqueCompanyList`#sortByCompanyName()` from `CompanyBook`.
 ... The `internalList` within `CompanyBook` is then sorted lexicographically based on their names and the newly sorted list will be reflected in the `MainWindow` of RecruitBook.
+.. `sortj j/` to sort the list of job offers based on their title.
+... `j/` prefix is used which calls the `UniqueCompanyJobList`#sortByJob()` from `CompanyBook`.
+... The `internalList` within `UniqueCompanyJobList` is then sorted lexicographically based on their titles and the newly sorted list will be reflected in the `MainWindow` of RecruitBook.
 
-Step 3. The user does not want the candidates to be sorted in increasing order but decreasing order. So, the user executes
+Step 3. The user does not want the candidates to be sorted in increasing order of their salaries but decreasing order. So, the user executes
 
-.. `sortc /r` to sort the list of candidates in the reverse order of the current order.
+.. `sortc r/` to sort the list of candidates in the reverse order of the current order.
 
 ==== Design Considerations
 ===== Aspect: How sort executes

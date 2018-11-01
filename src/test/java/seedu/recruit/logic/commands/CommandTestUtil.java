@@ -385,6 +385,11 @@ public class CommandTestUtil {
         }
 
         @Override
+        public void sortJobOffers(Prefix prefix) {
+            throw new AssertionError("This message should not be called.");
+        }
+
+        @Override
         public void deleteJobOffer(JobOffer jobOffer) {
             throw new AssertionError("This method should not be called.");
         }

@@ -129,7 +129,6 @@ public class ModelManager extends ComponentManager implements Model {
         indicateCandidateBookChanged();
     }
 
-
     // =========== Filtered Candidate List Accessors =================================================== //
 
     /**
@@ -234,13 +233,13 @@ public class ModelManager extends ComponentManager implements Model {
         indicateCompanyBookChanged();
     }
 
-    // =========== Filtered Company List Accessors ===================================================== //
-
     @Override
     public void sortCompanies(Prefix prefix) {
         versionedCompanyBook.sortCompanies(prefix);
         indicateCompanyBookChanged();
     }
+
+    // =========== Filtered Company List Accessors ===================================================== //
 
     /**
      * Returns an unmodifiable view of the list of {@code Company} backed by the internal list of
@@ -320,6 +319,14 @@ public class ModelManager extends ComponentManager implements Model {
         versionedCompanyBook.removeJobOffer(jobOffer);
         indicateCompanyBookChanged();
     }
+
+    @Override
+    public void sortJobOffers(Prefix prefix) {
+        versionedCompanyBook.sortJobOffers(prefix);
+        indicateCompanyBookChanged();
+    }
+
+    // =========== Filtered Company Job List Accessors ===================================================== //
 
     /**
      * Returns an unmodifiable view of the job lists of all companies {@code Company} backed by the internal list of
