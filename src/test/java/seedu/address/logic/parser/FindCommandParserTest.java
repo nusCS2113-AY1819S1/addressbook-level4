@@ -9,7 +9,7 @@ import java.util.Arrays;
 import org.junit.Test;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindPersonSubCommand;
+import seedu.address.logic.commands.FindNameSubCommand;
 import seedu.address.logic.commands.FindTagSubCommand;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
@@ -27,7 +27,7 @@ public class FindCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindPersonSubCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")), false);
+                new FindNameSubCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")), false);
         assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
@@ -35,7 +35,7 @@ public class FindCommandParserTest {
 
         // parsing with exclude option enabled
         FindCommand expectedFindCommand2 =
-                new FindPersonSubCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")), true);
+                new FindNameSubCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")), true);
         assertParseSuccess(parser, "\\exclude Alice Bob", expectedFindCommand2);
 
         // parsing with tag option enabled

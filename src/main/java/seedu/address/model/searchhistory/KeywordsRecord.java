@@ -1,53 +1,40 @@
 package seedu.address.model.searchhistory;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.SortedSet;
 
-import com.google.common.collect.TreeMultiset;
+import seedu.address.model.searchhistory.exceptions.EmptyHistoryException;
 
 /**
  * Represents the in-app memory of all keywords relevant to the current Persons search.
  */
 public class KeywordsRecord implements ReadOnlyKeywordsRecord {
 
-    private TreeMultiset<String> includedNamesSet = TreeMultiset.create();
-    private TreeMultiset<String> includedTagsSet = TreeMultiset.create();
-    private TreeMultiset<String> excludedNamesSet = TreeMultiset.create();
-    private TreeMultiset<String> excludedTagsSet = TreeMultiset.create();
-    private KeywordsHistoryStack historyStack = new KeywordsHistoryStack();
+    protected HashMap<KeywordType, KeywordsSet> map = new HashMap<>();
+
+    protected KeywordsHistoryStack historyStack = new KeywordsHistoryStack();
+
+    public KeywordsRecord() {
+        prepareKeywordSets();
+    }
 
     /**
      * Clears all keywords in memory.
      */
     public void clearKeywordsHistory() {
-        includedNamesSet.clear();
-        includedTagsSet.clear();
-        excludedNamesSet.clear();
-        excludedTagsSet.clear();
+        map.clear();
         historyStack.clear();
+        prepareKeywordSets();
     }
 
     /**
      * Resets in-app memory of keywords back to its previous state.
      */
-    public void undoKeywordsHistory() {
+    public void undoKeywordsHistory() throws EmptyHistoryException {
         KeywordsBundle bundle = historyStack.pop();
-        switch (bundle.getType()) {
-        case IncludeNames:
-            removeKeywordsFromSet(includedNamesSet, bundle.getKeywords());
-            break;
-        case ExcludeNames:
-            removeKeywordsFromSet(excludedNamesSet, bundle.getKeywords());
-            break;
-        case IncludeTags:
-            removeKeywordsFromSet(includedTagsSet, bundle.getKeywords());
-            break;
-        case ExcludeTags:
-            removeKeywordsFromSet(excludedTagsSet, bundle.getKeywords());
-            break;
-        default:
-            break;
-        }
+        KeywordsSet set = map.get(bundle.getType());
+        set.removeKeywordsFromSet(bundle.getKeywords());
     }
 
     /**
@@ -57,52 +44,56 @@ public class KeywordsRecord implements ReadOnlyKeywordsRecord {
      * @param keywords list of words to be stored in memory.
      */
     public void recordKeywords (KeywordType type, List<String> keywords) {
-        switch (type) {
-        case IncludeNames:
-            addKeywordsToSet(includedNamesSet, keywords);
-            break;
-        case ExcludeNames:
-            addKeywordsToSet(excludedNamesSet, keywords);
-            break;
-        case IncludeTags:
-            addKeywordsToSet(includedTagsSet, keywords);
-            break;
-        case ExcludeTags:
-            addKeywordsToSet(excludedTagsSet, keywords);
-            break;
-        default:
-            break;
+        if (type == null || keywords == null) {
+            return;
         }
+        KeywordsSet set = map.get(type);
+        set.addKeywordsToSet(keywords);
         updateHistoryStack(type, keywords);
     }
 
-    private void removeKeywordsFromSet(TreeMultiset<String> set, List<String> keywords) {
-        for (String keyword : keywords) {
-            set.remove(keyword);
-        }
-    }
-
-    private void addKeywordsToSet(TreeMultiset<String> set, List<String> keywords) {
-        set.addAll(keywords);
-    }
-
     private void updateHistoryStack(KeywordType type, List<String> keywords) {
+        assert type != null;
+        assert keywords != null;
         historyStack.push(type, keywords);
     }
 
-    public SortedSet<String> getIncludedTags() {
-        return includedTagsSet.elementSet();
+    @Override
+    public SortedSet<String> getKeywordSet(KeywordType type) {
+        KeywordsSet set = map.get(type);
+        return set.getUniqueKeywordsSet();
     }
 
-    public SortedSet<String> getExcludedTags() {
-        return excludedTagsSet.elementSet();
+    private void prepareKeywordSets() {
+        for (KeywordType type: KeywordType.values()) {
+            map.put(type, new KeywordsSet());
+        }
     }
 
-    public SortedSet<String> getIncludedNames() {
-        return includedNamesSet.elementSet();
+    /**
+     * Returns true if no keywords are stored.
+     */
+    public boolean isEmpty() {
+        for (KeywordsSet set: map.values()) {
+            if (!set.isEmpty()) {
+                return false;
+            }
+        }
+        return historyStack.isEmpty();
     }
 
-    public SortedSet<String> getExcludedNames() {
-        return excludedNamesSet.elementSet();
+    @Override
+    public boolean equals(Object obj) {
+
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof KeywordsRecord)) {
+            return false;
+        }
+
+        KeywordsRecord other = (KeywordsRecord) obj;
+        return map.equals(other.map) && historyStack.equals(other.historyStack);
     }
 }

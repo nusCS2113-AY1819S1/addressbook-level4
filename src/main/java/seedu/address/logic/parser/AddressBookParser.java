@@ -6,6 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.LoginManager;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddSkillCommand;
 import seedu.address.logic.commands.AddSkillLevelCommand;
@@ -21,11 +22,11 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.LoginCommand;
+import seedu.address.logic.commands.LoginUserIdPasswordRoleCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.commands.UndoSearchCommand;
+import seedu.address.logic.commands.UndoFindCommand;
 import seedu.address.logic.commands.ViewClubBudgetsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -55,10 +56,13 @@ public class AddressBookParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
-        case LoginCommand.COMMAND_WORD:
+        case LoginUserIdPasswordRoleCommand.COMMAND_WORD:
             return new LoginUserIdPasswordRoleCommandParser().parse(arguments);
 
         case CreateAccountCommand.COMMAND_WORD:
+            if (!LoginManager.getIsCurrentlyTesting()) {
+                LoginManager.setIsCurrentlyCreatingAccount(true);
+            }
             return new CreateAccountCommandParser().parse(arguments);
 
         case AddCommand.COMMAND_WORD:
@@ -97,14 +101,14 @@ public class AddressBookParser {
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
-        case UndoSearchCommand.COMMAND_WORD:
-            return new UndoSearchCommand();
-
         case AddSkillCommand.COMMAND_WORD:
             return new AddSkillCommandParser().parse(arguments);
 
         case AddSkillLevelCommand.COMMAND_WORD:
             return new AddSkillLevelCommandParser().parse(arguments);
+
+        case UndoFindCommand.COMMAND_WORD:
+            return new UndoFindCommand();
 
         case BudgetCommand.COMMAND_WORD:
             return new BudgetCommandParser().parse(arguments);

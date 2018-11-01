@@ -1,9 +1,9 @@
-= John Doe - Project Portfolio
+= Melvin Tan Jit Chong - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: AddressBook - Level 4
+== PROJECT: NUSSU-Connect
 
 ---
 
@@ -52,12 +52,24 @@ Other team members working on this project are Jonathan Ng Hian Leong, Sanjukta,
 This section shows the various contributions made to the project, covering aspects such as enhancement features, codes contributed and other forms of contributions.
 
 * *Major enhancement*: added *the ability to securely log into the application with the relevant login credentials with a specific level of access to the application features associated with the login credentials*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+** What it does: allows you to login into the application with a specific role so you are only able to access role-specific features within the application.
+** Justification: This feature improves the product in terms of security significantly because it prevents any random user who does not possess the correct login credentials to be able to access the application.
+Due to the fact that you can only log into the application with your relevant role, it prevents any unauthorized access to other features that are only accessible for other roles.
+** Highlights: This enhancement is first designed, taking into consideration the security and practicality aspects that are highly specific to NUSSU committee members, which is our target user group.
+There were a few challenges, namely the addition of new commands within the enhancement itself such as deletion of accounts and changing of account passwords, and
+the way account credentials are encrypted. Owing to the project time constraints, a simpler encryption algorithm, compared to traditional encryption algorithms which are stronger, is used.
+The current choice of the encryption methodology of login credentials ensures the security enhancement is still feasibly robust, yet does not demand an excess of time spent working on it.
+** Credits:
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+* *Minor enhancement*: added a create account command within the application.
+** What it does: allows you to create a new account with your desired login credentials so that you can log into the application securely.
+** Justification: This feature allows you to be able to create their own accounts so that you do not need to rely on the accounts of other users in order
+to log into the application.
+** Highlights: Similar to the major enhancement, this minor enhancement is designed in light of practical considerations of the committee members of NUSSU.
+It is impractical for NUSSU, which consists of a numerous number of members, to all use the same account to log into the application. Without the account creation
+enhancement, the multi-user access level feature within the login system would not be utilized at all. There should be multiple accounts with different roles that fit
+different committee members with varying levels of authority within NUSSU, so that a member can create an account with an application access level relevant to his role
+in NUSSU only.
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
@@ -65,6 +77,9 @@ This section shows the various contributions made to the project, covering aspec
 
 ** Project management:
 *** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+*** Set up issue tracker for the team repository
+*** Set up organization directory and team repository on GitHub
+*** Set up continuous integration (CI) tools (Travis) and (Appveyor) on the team repository
 ** Enhancements to existing features:
 *** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
 *** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
@@ -72,36 +87,37 @@ This section shows the various contributions made to the project, covering aspec
 *** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
+*** Some parts of the login's multi-user access level feature I added was adopted by several project group mates (https://github.com[1], https://github.com[2])
+*** Renamed the product to "NUSSU-Connect"
+*** Gave suggestions to reduce the time needed to create UML diagrams (ObjectAidUM as an Eclipse framework)
 ** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
-
-_{you can add/remove categories in the list above}_
 
 == Contributions to the User Guide
 
+== Preface
+This section will touch on two commands that you can use, namely the `login` and `createaccount` command. The `login` command allows you to log into the application securely
+using your own login credentials. The `createaccount` command allows you to create a new account with your own desired login credentials.
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
+include::../UserGuide.adoc[tag=logincreateaccount]
 
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=login]
 
 == Contributions to the Developer Guide
+
+== Preface
+This section will touch on two commands that you can use, namely the `login` and `createaccount` command. The `login` command allow you to log into the application securely
+using your own login credentials. The `createaccount` command allows you to create a new account with your own desired login credentials.
 
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
-
-include::../DeveloperGuide.adoc[tag=dataencryption]
-
+include::../DeveloperGuide.adoc[tag=login]
 
 == PROJECT: PowerPointLabs
 

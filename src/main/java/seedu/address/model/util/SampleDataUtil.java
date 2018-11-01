@@ -1,6 +1,8 @@
 package seedu.address.model.util;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -52,11 +54,21 @@ public class SampleDataUtil {
         };
     }
 
-    public static LoginDetails[] getSampleLoginDetails() {
-        return new LoginDetails[] {
-            new LoginDetails(new UserId("A1234567M"), new UserPassword("zaq1xsw2cde3"), new UserRole("treasurer")),
-            new LoginDetails(new UserId("A1234568M"), new UserPassword("1qaz2wsx3edc"), new UserRole("president"))
-        };
+    public static LoginDetails getSampleLoginDetails() {
+        LoginDetails loginDetails = null;
+        String encryptedLoginId = null;
+        String encryptedLoginPassword = null;
+        String encryptedLoginRole = null;
+        try {
+            encryptedLoginId = Base64.getEncoder().encodeToString("A1234567M".getBytes("utf-8"));
+            encryptedLoginPassword = Base64.getEncoder().encodeToString("zaq1xsw2cde3".getBytes("utf-8"));
+            encryptedLoginRole = Base64.getEncoder().encodeToString("president".getBytes("utf-8"));
+            loginDetails = new LoginDetails(new UserId(encryptedLoginId),
+                    new UserPassword(encryptedLoginPassword), new UserRole(encryptedLoginRole));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return loginDetails;
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
@@ -69,9 +81,7 @@ public class SampleDataUtil {
 
     public static ReadOnlyLoginBook getSampleLoginBook() {
         LoginBook sampleLb = new LoginBook();
-        for (LoginDetails sampleAccount : getSampleLoginDetails()) {
-            sampleLb.createAccount(sampleAccount);
-        }
+        sampleLb.createAccount(getSampleLoginDetails());
         return sampleLb;
     }
 
