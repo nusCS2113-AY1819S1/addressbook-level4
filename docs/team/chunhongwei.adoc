@@ -1,0 +1,95 @@
+= Chun Hong Wei - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+image::driedmelon.png[width="150", align="left"]
+{empty}
+
+== PROJECT:
+image::logo.png[width="150", align="center"]
+
+---
+
+=== Roles: Team Lead
+=== Responsibilities: Deliverables and deadlines
+
+---
+
+== Overview
+
+`JitHub` is a desktop meeting organising application targeted at tertiary students. Besides enabling you to view common
+meeting time slots in teams, it includes various meeting tools such as the taking of minutes and a list of todo tasks.
+This is done with a Command Line Interface(CLI), and it has a GUI created with JavaFX.
+ `JitHub` is written in Java, and has about 10 kLoC.
+
+JitHub is developed in a team of five throughout the course of a semester as part of module requirements in the School
+of Computing, National University of Singapore.
+
+Modules with JitHub as requirements:
+
+* CS2101 - Effective Communication for Computing Professionals
+* CS2113T - Software Engineering & Object Oriented Programming
+
+== Summary of contributions
+
+* *Major enhancement*: Added *the ability to view available meeting time slots in teams.*
+** What it does: It allows you to view the available meeting time slots based on the calendar of all team members
+** Justification: This feature improves the product significantly as it enables you to arrange for group meetings without
+manually checking each team member's calendar.
+** Highlights: This enhancement affects GUI to be added in future, should the calendar be displayed with a non-text format.
+ It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes
+ to existing commands.
+** Credits: Mr Akshay Narayan, Team Members, Seniors
+//_{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in
+//the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+
+* *Minor enhancement*: added a browser panel which allows people to search for photographs of an added person.
+
+* *Code contributed*: [https://github.com/driedmelon/main/commits?author=driedmelon[Functional code]]
+//TODO TO CHANGE TEST CODE LINK AND CLARIFY WHAT LINK TO BE PUT UP
+[https://github.com/driedmelo/main/commits?author=driedmelon[Test code]]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+** Enhancements to existing features:
+** Documentation:
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com[#45], https://github.com[#50], https://github.com[#62]
+*** Reported bugs and suggestions for other teams in the class (TO BE DONE ON 2/11/2018 FRIDAY)
+** Tools:
+
+//_{you can add/remove categories in the list above}_
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=schedule]
+
+include::../UserGuide.adoc[tag=dataencryption]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+Developer guide not updated online. [Coming soon in v1.4]
+//include::../DeveloperGuide.adoc[tag=undoredo]
+//
+//include::../DeveloperGuide.adoc[tag=dataencryption]
+
+
+== PROJECT: UTC2101-Time-and-Life-Chatbot
+
+---
+A chatbot is created for the purposes of demonstrating the different concepts of time in our daily lives as part of the
+module project of UTC2101.
+https://github.com/driedmelon/UTC2101-Time-and-Life-Chatbot[Time and Life Chatbot]
+
