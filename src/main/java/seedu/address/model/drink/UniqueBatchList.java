@@ -29,6 +29,7 @@ public class UniqueBatchList implements Iterable<Batch> {
     private final ObservableList<Batch> internalList = FXCollections.observableArrayList();
     private Quantity totalQuantity = new Quantity("0");
 
+
     public Quantity getTotalQuantity() {
         return totalQuantity;
     }
@@ -47,10 +48,20 @@ public class UniqueBatchList implements Iterable<Batch> {
      */
     public void addBatch(Batch toAdd) {
         requireNonNull(toAdd);
+        /*
         if (contains(toAdd)) {
             throw new DuplicateBatchException();
         }
-        internalList.add(toAdd);
+        */
+        if (contains(toAdd)) {
+            for (Batch b : internalList) {
+                if (b.isSameDate(toAdd)) {
+                    increaseBatchQuantity(b, toAdd.getBatchQuantity().getValue());
+                }
+            }
+        } else {
+            internalList.add(toAdd);
+        }
         updateTotalQuantity();
     }
 
@@ -97,11 +108,19 @@ public class UniqueBatchList implements Iterable<Batch> {
      * Decreases total quantity by value specified
      * @param value a valid quantity value expressed as an integer
      */
-    public void decreaseTotalQuantity(int value) {
+    public void decreaseTotalQuantity(int value) throws InsufficientQuantityException {
         if (value > this.totalQuantity.getValue()) {
             throw new InsufficientQuantityException();
         }
         this.totalQuantity.decreaseValue(value);
+    }
+
+    /**
+     * Increases total quantity by value specified
+     * @param value a valid quantity value expressed as an integer
+     */
+    public void increaseTotalQuantity(int value) {
+        this.totalQuantity.increaseValue(value);
     }
 
     /**
@@ -123,7 +142,7 @@ public class UniqueBatchList implements Iterable<Batch> {
      * Decreases quantity in the batches by the order of date imported, with the oldest batches first
      * @param quantity a valid quantity value expressed as an integer
      */
-    public void updateBatchTransaction(Quantity quantity) {
+    public void updateBatchTransaction(Quantity quantity) throws InsufficientQuantityException {
         Quantity toDecrease = quantity;
         decreaseTotalQuantity(toDecrease.getValue());
         sortBatches();
@@ -159,6 +178,15 @@ public class UniqueBatchList implements Iterable<Batch> {
         throw new BatchNotFoundException();
     }
 
+    public Batch getBatch(BatchDate date) {
+        for (Batch b : internalList) {
+            if (b.getBatchDate() == date) {
+                return b;
+            }
+        }
+        throw new BatchNotFoundException();
+    }
+
     /**
      * Sets the quantity for the indicated batch
      * @param batchToEdit a valid batch object
@@ -171,6 +199,11 @@ public class UniqueBatchList implements Iterable<Batch> {
     public void decreaseBatchQuantity(Batch batchToEdit, int value) {
         batchToEdit.decreaseBatchQuantity(value);
     }
+
+    public void increaseBatchQuantity(Batch batchToEdit, int value) {
+        batchToEdit.increaseBatchQuantity(value);
+    }
+
     /**
      * Sorts the Batch list by date
      * The batch list must not be empty
@@ -223,6 +256,18 @@ public class UniqueBatchList implements Iterable<Batch> {
     @Override
     public int hashCode() {
         return internalList.hashCode();
+    }
+
+    /**
+     * Returns true if another batch with the same date exists else returns false
+     */
+    public boolean batchSameDate(Batch batchToCheck) {
+        for (Batch b : internalList) {
+            if (b.isSameDate(batchToCheck)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

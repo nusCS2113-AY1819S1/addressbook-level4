@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.drink.exceptions.InsufficientQuantityException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -89,6 +90,11 @@ public class Drink {
         this.quantity = quantity;
     }
 
+    public void updateQuantity() {
+        this.quantity = uniqueBatchList.getTotalQuantity();
+        System.out.println("Batch quantity" + uniqueBatchList.getTotalQuantity());
+    }
+
     public UniqueBatchList getUniqueBatchList() {
         return uniqueBatchList;
     }
@@ -156,16 +162,21 @@ public class Drink {
     /**
      * Decreases the quantity of the drink, using {@code quantity} as the value to decrease
      */
-    public void decreaseQuantity(Quantity quantity) {
-        //uniqueBatchList.updateBatchTransaction();
+    public void decreaseQuantity(Quantity quantity) throws InsufficientQuantityException {
+        this.uniqueBatchList.updateBatchTransaction(quantity);
+        updateQuantity();
     }
 
     /**
      * Increases the quantity of the drink, using {@code quantity} as the value to increase
      */
     public void increaseQuantity(Quantity quantity) {
-        // Batch batch = new Batch
-
+        BatchId tempId = new BatchId("01");
+        BatchPrice tempPrice = new BatchPrice(this.getCostPrice().toString());
+        BatchQuantity tempQuantity = new BatchQuantity(quantity.toString());
+        Batch toAdd = new Batch(tempId, tempQuantity, tempPrice);
+        this.uniqueBatchList.addBatch(toAdd);
+        updateQuantity();
     }
 }
 

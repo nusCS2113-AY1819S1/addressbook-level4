@@ -51,6 +51,11 @@ public class Batch {
         batchQuantity.decreaseValue(value);
     }
 
+    public void increaseBatchQuantity(int value) {
+        batchQuantity.increaseValue(value);
+        System.out.println("Current Batch Quantity:" + getBatchQuantity().toString());
+    }
+
     /**
      * Returns true if both batches have the same BatchId
      * This defines a weaker notion of equality between two batches.
@@ -72,6 +77,9 @@ public class Batch {
         return this.batchDate.compareTo(otherBatch.getBatchDate());
     }
 
+    public boolean isSameDate(Batch otherBatch) {
+        return this.batchDate.equals(otherBatch.batchDate);
+    }
 
     /**
      * Returns true if both batches have the same identity and data fields.
