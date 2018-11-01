@@ -341,10 +341,10 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-=== Locating persons by tag/module : `tag` (`t`)
+=== Locating persons by group : `group` (`t`)
 
 Find persons whose tags match the specified tags.
-Format: `tag TAGNAME [MORE_TAGNAMES]`
+Format: `group GROUPNAME [MORE_GROUPNAMES]`
 
 
 === Adding a person to your friend list : `friend` (`af`)

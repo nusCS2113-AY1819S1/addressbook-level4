@@ -18,7 +18,7 @@ This project is part of the deliverables for the following modules offered by th
 
 The user interacts with it using a Command Line Interface (CLI), and it has a Graphical User Interface (GUI) created with JavaFX. It is written in Java, and has about 10 kLoC.
 
-This project portfolio shows my contributions to the project.
+This project portfolio shows my contributions to the project, which includes the learning the Java Programing Language.
 
 == Summary of contributions
 
@@ -29,6 +29,7 @@ This project portfolio shows my contributions to the project.
 Before adding a particular user as a friend, the timetables and other personal information about the user will be obscured.
 This is to address privacy concerns of users revealing too much information to unknown people.
 ** Highlights: Implementing this concept and commands required that the main UI to be modified and changes how the logic works fundamentally.
+I had to learn how to use JavaFX to manage the different panels to show the friends and users individually.
 The implementation too was challenging as it required changes to the main logic of the code and many tests were changed as a result.
 
 * *Minor enhancement*: added a tag command that allows the user to search for persons by module code.
@@ -50,9 +51,11 @@ This is to enhance the search feature in the case where there are too many users
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
+include::../UserGuide.adoc[tag=tagcommand]
 
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=friendcommand]
+
+include::../UserGuide.adoc[tag=unfriendcommand]
 
 == Contributions to the Developer Guide
 
