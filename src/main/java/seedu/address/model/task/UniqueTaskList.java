@@ -2,6 +2,7 @@ package seedu.address.model.task;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.task.expections.DuplicateTaskException;
 import seedu.address.model.task.expections.TaskNotFoundException;
 
+//@@author luhan02
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
  * A task is considered unique by comparing using {@code Task#isSameTask(Task)}. As such, adding and updating of
@@ -21,6 +23,7 @@ import seedu.address.model.task.expections.TaskNotFoundException;
  * @see Task#isSameTask(Task)
  */
 public class UniqueTaskList implements Iterable<Task> {
+
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
     /**
@@ -41,26 +44,27 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new DuplicateTaskException();
         }
         internalList.add(toAdd);
+        sortPriority(internalList);
     }
 
     /**
-     * Replaces the task {@code target} in the list with {@code editedTask}.
+     * Replaces the task {@code target} in the list with {@code updatedTask}.
      * {@code target} must exist in the list.
-     * The task identity of {@code editedTask} must not be the same as another existing task in the list.
+     * The task identity of {@code updatedTask} must not be the same as another existing task in the list.
      */
-    public void setTask(Task target, Task editedTask) {
-        requireAllNonNull(target, editedTask);
+    public void setTask(Task target, Task updatedTask) {
+        requireAllNonNull(target, updatedTask);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new TaskNotFoundException();
         }
 
-        if (!target.isSameTask(editedTask) && contains(editedTask)) {
+        if (!target.isSameTask(updatedTask) && contains(updatedTask)) {
             throw new DuplicateTaskException();
         }
 
-        internalList.set(index, editedTask);
+        internalList.set(index, updatedTask);
     }
 
     /**
@@ -99,20 +103,47 @@ public class UniqueTaskList implements Iterable<Task> {
         return FXCollections.unmodifiableObservableList(internalList);
     }
 
-    /*
-    private void Sorting(){
-        Collections.sort(internalList, new Comparator<Task>() {
-            @Override
-            public int compare(Task o1, Task o2) {
-                return o1.getEndDateTime().dateTimeString.compareTo(o2.getEndDateTime().dateTimeString);
+    /**
+     * List of tasks to be sorted according to its deadline(end DateTime)
+     */
+    public void sort() {
+        internalList.sort(((o1, o2) -> {
+            String o1DateStr = this.trimTime(o1.getEndDateTime().dateTimeString);
+            int o1Month = this.getMonth(o1DateStr);
+            int o1Day = this.getDay(o1DateStr);
+
+            String o2DateStr = this.trimTime(o2.getEndDateTime().dateTimeString);
+            int o2Month = this.getMonth(o2DateStr);
+            int o2Day = this.getDay(o2DateStr);
+
+            if (o1Month > o2Month) {
+                return 1;
             }
-        });
+            if (o1Month == o2Month) {
+                if (o1Day == o2Day) {
+                    return 0;
+                } else if (o1Day > o2Day) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+            return -1;
+        }));
     }
 
-    public ObservableList<Task> sortedTaskList() {
-        Sorting();
-        return FXCollections.unmodifiableObservableList(internalList);
-    }*/
+    private String trimTime(String datetimeStr) {
+        int underScoreIndex = datetimeStr.indexOf("_");
+        return datetimeStr.substring(0, underScoreIndex);
+    }
+
+    private int getMonth(String dateStr) {
+        return Integer.parseInt(dateStr.split("\\/")[1]);
+    }
+
+    private int getDay(String dateStr) {
+        return Integer.parseInt(dateStr.split("\\/")[0]);
+    }
 
     @Override
     public Iterator<Task> iterator() {
@@ -144,4 +175,29 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         return true;
     }
+
+    /**
+     * @param internalList list of tasks to be sorted according to its priority
+     */
+    private void sortPriority(ObservableList<Task> internalList) {
+        FXCollections.sort(internalList, new Comparator<Task>() {
+            @Override
+            public int compare(Task t1, Task t2) {
+                String p1 = t1.getPriority().priorityString;
+                String p2 = t2.getPriority().priorityString;
+
+                if (p1.equals(p2)) {
+                    return 0;
+                }
+                if (p1.equals("HIGH") && (p2.equals("MED") || p2.equals("LOW"))) {
+                    return -1;
+                }
+                if (p1.equals("MED") && p2.equals("LOW")) {
+                    return -1;
+                }
+                return 2;
+            }
+        });
+    }
+
 }

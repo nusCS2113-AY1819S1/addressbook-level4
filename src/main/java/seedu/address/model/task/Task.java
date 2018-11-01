@@ -27,7 +27,7 @@ public class Task {
      */
     public Task(TaskName taskName, Body body, DateTime startDateTime, DateTime endDateTime,
                 Priority priority, Set<Tag> tags) {
-        requireAllNonNull(taskName, body, endDateTime, priority, tags);
+        requireAllNonNull(taskName, body, startDateTime, endDateTime, priority, tags);
         this.taskName = taskName;
         this.body = body;
         this.startDateTime = startDateTime;

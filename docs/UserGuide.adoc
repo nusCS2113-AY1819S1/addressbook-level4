@@ -405,6 +405,9 @@ Format: `task n/NAME b/BODY s/START_DATETIME e/END_DATETIME [t/TAG]... p/PRIORIT
 [TIP]
 A task can only have its start and end DATE (without specific TIME). A task can have any number of tags (including 0).
 
+[NOTE]
+By default, the tasks are listed by descending order of priority i.e. HIGH, MED, LOW.
+
 Examples:
 
 * `task n/Submit Assignment b/CG2027 Assign2 s/18/10 e/25/10_1400 p/HIGH t/Hardcopy`
@@ -412,12 +415,12 @@ Examples:
 
 === Listing all tasks : `listTask`
 
-Shows a list of all tasks from task book in the schedule planner. +
+Shows a list of all tasks from task book in the student planner according to the deadline (end DateTime). +
 Format: `listTask`
 
 === Editing a task : `updateTask`
 
-Update an existing task in the schedule planner. +
+Update an existing task in the student planner. +
 Format: `updateTask INDEX [n/NAME] [b/BODY] [s/START_DATETIME] [e/END_DATETIME] [t/TAG]... [p/PRIORITY]`
 
 ****
@@ -440,13 +443,10 @@ Edits the 2nd task by clearing all existing tags.
 Finds tasks whose names or body contain any of the given keywords. +
 Format: `findTask KEYWORD [MORE_KEYWORDS]`
 
-****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name and body is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* tasks matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-****
+//
+//****
+//* (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+//****
 
 Examples:
 
@@ -457,7 +457,7 @@ Returns any task having names or body `concert`, `meeting`, or `cute`
 
 === Deleting a task : `deleteTask`
 
-Deletes the specified task from the task book in the schedule planner. +
+Deletes the specified task from the task book in the student planner. +
 Format: `deleteTask INDEX`
 
 ****

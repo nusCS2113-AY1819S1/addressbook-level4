@@ -143,7 +143,6 @@ public class LogicManager extends ComponentManager implements Logic {
         commandList.add(DeleteExpenseCommand.COMMAND_WORD);
         commandList.add(DeleteExpenseCommand.COMMAND_WORD + "INDEX");
         commandList.add(DeleteTaskCommand.COMMAND_WORD);
-        commandList.add(DeleteTaskCommand.COMMAND_WORD + " INDEX");
         commandList.add(EditCommand.COMMAND_WORD);
         commandList.add(EditCommand.COMMAND_WORD + " INDEX "
                 + PREFIX_NAME + " "

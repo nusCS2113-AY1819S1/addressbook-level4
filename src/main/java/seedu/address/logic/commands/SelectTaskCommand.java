@@ -15,7 +15,7 @@ import seedu.address.model.task.Task;
 
 //@@author luhan02
 /**
- * Selects a task using it's displayed index from the student planner.
+ * Selects a task using it's displayed index from the task book.
  */
 public class SelectTaskCommand extends Command {
     public static final String COMMAND_WORD = "selectTask";

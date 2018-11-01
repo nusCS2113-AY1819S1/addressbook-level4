@@ -406,7 +406,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addTask(Task task) {
         versionedTaskBook.addTask(task);
-        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        //updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         indicateTaskBookChanged();
     }
 
@@ -430,28 +430,20 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskList(Predicate<Task> predicate) {
         requireNonNull(predicate);
         filteredTasks.setPredicate(predicate);
+        sortedTaskList(filteredTasks);
     }
 
-    /*
-    private void Sorting(){
-        FXCollections.sort(filteredTasks, new Comparator<Task>() {
-            public int compare(Task t1, Task t2) {
-                return t1.getTaskName().fullName.compareTo(t2.getTaskName().fullName);
-            }
-        });
+    private void sortedTaskList(FilteredList<Task> filteredTasks) {
+        versionedTaskBook.sort();
+        indicateTaskBookChanged();
     }
-
-    @Override
-    public ObservableList<Task> sortedTaskList(){
-        Sorting();
-        return  FXCollections.unmodifiableObservableList(filteredTasks);
-    }*/
-    //@@author luhan02
 
     @Override
     public void commitTaskBook() {
         versionedTaskBook.commit();
     }
+    //@@author
+
     //@@author ian-tjahjono
 
     @Override

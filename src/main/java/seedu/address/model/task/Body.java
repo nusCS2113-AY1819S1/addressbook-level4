@@ -1,6 +1,5 @@
 package seedu.address.model.task;
 
-//@@author luhan02
 /**
  * Represents a Task's datails in the task list .
  * Guarantees: immutable.
@@ -32,5 +31,17 @@ public class Body {
      */
     public static boolean isValidBody(String test) {
         return test.matches(BODY_VALIDATION_REGEX);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Body // instanceof handles nulls
+                && bodyString.equals(((Body) other).bodyString)); // state check
+    }
+
+    @Override
+    public int hashCode() {
+        return bodyString.hashCode();
     }
 }

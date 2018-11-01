@@ -9,8 +9,8 @@ public class DateTime {
     public static final String MESSAGE_DATETIME_CONSTRAINTS =
             "Date & Time should only contain numbers, "
                     +
-                    "and it should in DD/MM_HHmm format\";should be at least 4 digits long";
-    public static final String DATETIME_VALIDATION_REGEX = "\\d+\\/\\d+(\\w\\d+)?";
+                    "and it should in DD/MM(_HHmm) format";
+    public static final String DATETIME_VALIDATION_REGEX = "\\d{1,2}\\/\\d{1,2}(\\_\\d{3,4})?";
 
     public final String dateTimeString;
 
