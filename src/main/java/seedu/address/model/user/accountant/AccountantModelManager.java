@@ -4,14 +4,22 @@ import seedu.address.model.LoginInfoManager;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyInventoryList;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.drink.Price;
+import seedu.address.model.transaction.TransactionList;
 
 /**
  * Represents the in-memory model of the accountant command
  */
 public class AccountantModelManager extends ModelManager implements AccountantModel {
     public AccountantModelManager(ReadOnlyInventoryList inventoryList ,
-                                  UserPrefs userPrefs, LoginInfoManager loginInfoManager) {
-        super(inventoryList, userPrefs, loginInfoManager);
+                                  UserPrefs userPrefs, LoginInfoManager loginInfoManager,
+                                  TransactionList transactionList) {
+        super(inventoryList, userPrefs, loginInfoManager, transactionList);
+    }
+
+    @Override
+    public Price analyseCosts() {
+        return analysis.analyseCost();
     }
 
 }

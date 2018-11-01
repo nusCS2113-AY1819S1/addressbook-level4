@@ -7,7 +7,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.drink.Drink;
 
 /**
- * API of the Logic component
+ * API of the logic component
  */
 public interface Logic {
     /**

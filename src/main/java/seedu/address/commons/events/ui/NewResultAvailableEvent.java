@@ -11,6 +11,7 @@ public class NewResultAvailableEvent extends BaseEvent {
 
     public NewResultAvailableEvent(String message) {
         this.message = message;
+
     }
 
     @Override
