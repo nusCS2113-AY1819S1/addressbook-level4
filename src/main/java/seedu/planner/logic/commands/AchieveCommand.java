@@ -93,13 +93,9 @@ public class AchieveCommand extends Command {
         String nameFile = ExcelUtil.setNameExcelFile(startDate, endDate);
         String message;
         String filePath = setPathFile(nameFile, directoryPath);
-        if (!ExcelUtil.checkIfFileOpen(filePath)) {
-            if (exportDataIntoExcelSheetWithGivenRecords(recordList, daySummaryEntryList, filePath)) {
-                message = String.format(Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY
-                        + Messages.MESSAGE_ACHIEVE_SUCCESSFULLY, nameFile, directoryPath);
-            } else {
-                message = Messages.MESSAGE_ACHIEVE_COMMAND_ERRORS;
-            }
+        if (exportDataIntoExcelSheetWithGivenRecords(recordList, daySummaryEntryList, filePath)) {
+            message = String.format(Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY
+                    + Messages.MESSAGE_ACHIEVE_SUCCESSFULLY, nameFile, directoryPath);
         } else {
             message = Messages.MESSAGE_ACHIEVE_COMMAND_ERRORS;
         }

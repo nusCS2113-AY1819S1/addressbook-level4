@@ -2,8 +2,10 @@ package seedu.planner.logic.parser;
 
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DIR;
+
 import java.util.Arrays;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.core.Messages;
@@ -16,7 +18,7 @@ import seedu.planner.model.record.Date;
  */
 public class ExportExcelCommandParser implements Parser<ExportExcelCommand> {
     private static Logger logger = LogsCenter.getLogger(ExportExcelCommandParser.class);
-    private static String WHITE_SPACE = " ";
+    private static String whiteSpace = " ";
 
     /**
      * Parses the given code {@code String} of arguments in the context of the ExportExcelCommand
@@ -24,41 +26,66 @@ public class ExportExcelCommandParser implements Parser<ExportExcelCommand> {
      * @throws ParseException if the user input does not conform the expected format.
      */
     public ExportExcelCommand parse(String args) throws ParseException {
-        String stringDate = " ";
-        String stringPath = " ";
         String trimmedArgs = args.trim();
         logger.info("TRIMMED ARGS: " + trimmedArgs);
         if (trimmedArgs.isEmpty()) {
+            logger.info("ExportExcelCommand(): 1");
             return new ExportExcelCommand();
         }
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(trimmedArgs, PREFIX_DATE, PREFIX_DIR);
-        String stringDateRetrievedFromPrefix = retrieveDataFromPrefix(argMultimap, PREFIX_DATE);
-        String stringPathRetrievedFromPrefix = retrieveDataFromPrefix(argMultimap, PREFIX_DIR);
-        String stringDateRetrievedFromPrefixCopy = argMultimap.getValue(PREFIX_DATE).get();
-        String stringPathRetrievedFromPrefixCopy = argMultimap.getValue(PREFIX_DIR).get();
-        logger.info("retrieveDataFromPrefix(argMultimap, PREFIX_DATE)" + stringDateRetrievedFromPrefix);
-        logger.info("retrieveDataFromPrefix(argMultimap, PREFIX_DIR)" + stringPathRetrievedFromPrefix);
-        logger.info("retrieveDataFromPrefixCopy(argMultimap, PREFIX_DATE)" + stringDateRetrievedFromPrefixCopy);
-        logger.info("retrieveDataFromPrefixCopy(argMultimap, PREFIX_DATE)" + stringPathRetrievedFromPrefixCopy);
-        if (stringDateRetrievedFromPrefix.trim().isEmpty() && stringPathRetrievedFromPrefix.trim().isEmpty()) {
+        String stringDate = whiteSpace;
+        String stringPath = whiteSpace;
+        boolean isDateExist = true;
+        boolean isPathExist = true;
+        logger.info("Args: " + args);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_DIR);
+        logger.info("stringDate 1: " + stringDate + " stringPath: " + stringPath);
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATE) || !argMultimap.getPreamble().isEmpty()) {
+            isDateExist = false;
+        }
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATE)) {
+            logger.info("isDateExist 1: False");
+        }
+        if (!argMultimap.getPreamble().isEmpty()) {
+            logger.info("isDateExist 2: False");
+        }
+        if (!arePrefixesPresent(argMultimap, PREFIX_DIR) || !argMultimap.getPreamble().isEmpty()) {
+            isPathExist = false;
+        }
+        if (!arePrefixesPresent(argMultimap, PREFIX_DIR)) {
+            logger.info("isPathExist 1: False");
+        }
+        if (!argMultimap.getPreamble().isEmpty()) {
+            logger.info("isPathExist 2: False");
+        }
+        logger.info("stringDate 2: " + stringDate + " stringPath: " + stringPath);
+        logger.info("isDateExist: " + isDateExist + " isPathExist: " + isPathExist);
+        if (!isDateExist && !isPathExist) {
             throw new ParseException(
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ExportExcelCommand.MESSAGE_USAGE));
         }
-        stringDate += retrieveDataFromPrefix(argMultimap, PREFIX_DATE);
-        stringPath += retrieveDataFromPrefix(argMultimap, PREFIX_DIR);
-        logger.info("stringDate: " + stringDate + " stringPath: " + stringPath);
+        if (isDateExist) {
+            stringDate = argMultimap.getValue(PREFIX_DATE).get();
+        }
+        if (isPathExist) {
+            stringPath = argMultimap.getValue(PREFIX_DIR).get();
+        }
+        logger.info("stringDate 3: " + stringDate + " stringPath: " + stringPath);
+        if (stringDate.trim().isEmpty() && stringPath.trim().isEmpty()) {
+            logger.info("ExportExcelCommand(): 2");
+            return new ExportExcelCommand();
+        }
         return parseArgumentsModeIntoCommand(stringDate.trim(), stringPath.trim());
     }
 
     /**
      * Parse the arguments into different argument mode, hence, we will have different command mode.
      */
-    public static ExportExcelCommand parseArgumentsModeIntoCommand (String stringDate, String stringPath)
+    private static ExportExcelCommand parseArgumentsModeIntoCommand (String stringDate, String stringPath)
             throws ParseException {
         String directoryPath;
-        if (stringDate.isEmpty() && stringPath.isEmpty()) {
-            return new ExportExcelCommand();
-        } else if (stringDate.isEmpty()) {
+        if (stringDate.isEmpty()) {
+            logger.info("ExportExcelCommand(directoryPath)");
+            logger.info("Directory path 1.");
             directoryPath = ParserUtil.parseDirectoryString(stringPath);
             return new ExportExcelCommand(directoryPath);
         } else {
@@ -89,8 +116,10 @@ public class ExportExcelCommandParser implements Parser<ExportExcelCommand> {
         }
         if (isDateOrderValid(startDate, endDate)) {
             if (stringPath == null || stringPath.isEmpty()) {
+                logger.info("ExportExcelCommand(startDate, endDate)");
                 return new ExportExcelCommand(startDate, endDate);
             } else {
+                logger.info("ExportExcelCommand(startDate, endDate, directoryPath)");
                 directoryPath = ParserUtil.parseDirectoryString(stringPath);
                 return new ExportExcelCommand(startDate, endDate, directoryPath);
             }
@@ -100,13 +129,11 @@ public class ExportExcelCommandParser implements Parser<ExportExcelCommand> {
     }
 
     /**
-     * Return the String value after retrieve data from prefix.
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
      */
-    public static String retrieveDataFromPrefix (ArgumentMultimap argumentMultimap, Prefix prefix) {
-        if (argumentMultimap.getValue(prefix).isPresent()) {
-            return argumentMultimap.getValue(prefix).get();
-        }
-        return WHITE_SPACE;
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
     /**
@@ -114,7 +141,7 @@ public class ExportExcelCommandParser implements Parser<ExportExcelCommand> {
      * @param args String arguments that have 2 dates.
      * @return array of split strings
      */
-    public static String[] splitByWhitespace(String args) {
+    private static String[] splitByWhitespace(String args) {
         if (args.isEmpty()) {
             return null;
         }
@@ -123,7 +150,7 @@ public class ExportExcelCommandParser implements Parser<ExportExcelCommand> {
     /**
      * Check whether the Dates are valid period or not.
      */
-    public static boolean isDateOrderValid(Date startDate, Date endDate) {
+    private static boolean isDateOrderValid(Date startDate, Date endDate) {
         return startDate.isEarlierThan(endDate) || startDate.equals(endDate);
     }
 }

@@ -26,7 +26,7 @@ public class Messages {
             "Please enter the Start_Date smaller than or equal to the End_Date.\n";
 
     public static final String MESSAGE_UNREALISTIC_DIRECTORY =
-            "Please choose existing directory.\n";
+            "Please choose existing directory/file path.\n";
 
     public static final String MESSAGE_INVALID_ENTRY_EXCEL_FILE =
             "The cells for Name, Date, Money Received/Spent, Tags should be in correct order."

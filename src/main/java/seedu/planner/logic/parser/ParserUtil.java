@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.planner.commons.core.Messages;
 import seedu.planner.commons.core.index.Index;
 import seedu.planner.commons.util.StringUtil;
 import seedu.planner.logic.parser.exceptions.ParseException;
@@ -141,10 +142,10 @@ public class ParserUtil {
      */
     public static String parseDirectoryString(String dirPath) throws ParseException {
         requireNonNull(dirPath);
-        if (DirectoryPath.isValidDirectory(dirPath)) {
-            return dirPath;
+        if (!DirectoryPath.isValidDirectory(dirPath)) {
+            throw new ParseException(Messages.MESSAGE_UNREALISTIC_DIRECTORY);
         }
-        return DirectoryPath.HOME_DIRECTORY_STRING;
+        return dirPath;
     }
 
     /**
@@ -153,9 +154,9 @@ public class ParserUtil {
     public static String parseFilePathString(String dirPath) throws ParseException {
         requireNonNull(dirPath);
         System.out.println(dirPath);
-        if (DirectoryPath.isValidFilePath(dirPath)) {
-            return dirPath;
+        if (!DirectoryPath.isValidFilePath(dirPath)) {
+            throw new ParseException(Messages.MESSAGE_UNREALISTIC_DIRECTORY);
         }
-        return DirectoryPath.HOME_DIRECTORY_STRING;
+        return dirPath;
     }
 }

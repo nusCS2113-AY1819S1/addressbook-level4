@@ -3,8 +3,7 @@ package seedu.planner.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.ExcelUtil.setPathFile;
 import static seedu.planner.model.Model.PREDICATE_SHOW_ALL_RECORDS;
-import java.io.File;
-import java.io.FileNotFoundException;
+
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -49,12 +48,13 @@ public class ExportExcelCommand extends Command {
     public static final int SECOND_ELEMENT = 1;
 
     private static Logger logger = LogsCenter.getLogger(ExportExcelCommand.class);
-    private final Date startDate;
-    private final Date endDate;
-    private final String directoryPath;
-    private final Predicate<Record> predicate;
+    private Date startDate = null;
+    private Date endDate = null;
+    private String directoryPath = null;
+    private Predicate<Record> predicate;
 
     public ExportExcelCommand() {
+        logger.info("1. Start date " + startDate + " end date: " + endDate + " directory path: " + directoryPath);
         this.startDate = null;
         this.endDate = null;
         this.directoryPath = DirectoryPath.HOME_DIRECTORY_STRING;
@@ -62,6 +62,7 @@ public class ExportExcelCommand extends Command {
     }
 
     public ExportExcelCommand(String directoryPath) {
+        logger.info("2. Start date " + startDate + " end date: " + endDate + " directory path: " + directoryPath);
         this.startDate = null;
         this.endDate = null;
         this.directoryPath = directoryPath;
@@ -69,6 +70,7 @@ public class ExportExcelCommand extends Command {
     }
 
     public ExportExcelCommand(Date startDate, Date endDate) {
+        logger.info("3. Start date " + startDate + " end date: " + endDate + " directory path: " + directoryPath);
         this.startDate = startDate;
         this.endDate = endDate;
         this.directoryPath = DirectoryPath.HOME_DIRECTORY_STRING;
@@ -76,6 +78,7 @@ public class ExportExcelCommand extends Command {
     }
 
     public ExportExcelCommand(Date startDate, Date endDate, String directoryPath) {
+        logger.info("4. Start date " + startDate + " end date: " + endDate + " directory path: " + directoryPath);
         this.startDate = startDate;
         this.endDate = endDate;
         this.directoryPath = directoryPath;
@@ -85,6 +88,7 @@ public class ExportExcelCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) {
         requireNonNull(this);
+        logger.info("Start date " + startDate + " end date: " + endDate + " directory path: " + directoryPath);
         model.updateFilteredRecordList(predicate);
         ReadOnlyFinancialPlanner financialPlanner = model.getFinancialPlanner();
         SummaryByDateList summaryList = new SummaryByDateList(financialPlanner.getRecordList(), predicate);

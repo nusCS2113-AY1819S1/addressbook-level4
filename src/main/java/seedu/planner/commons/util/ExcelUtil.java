@@ -1,6 +1,7 @@
 package seedu.planner.commons.util;
 
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_TAG;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

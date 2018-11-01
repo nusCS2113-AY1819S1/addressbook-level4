@@ -2,18 +2,14 @@ package seedu.planner.logic.parser;
 
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DIR;
-import static seedu.planner.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.planner.logic.parser.ExportExcelCommandParser.isDateOrderValid;
-import static seedu.planner.logic.parser.ExportExcelCommandParser.retrieveDataFromPrefix;
-import static seedu.planner.logic.parser.ExportExcelCommandParser.splitByWhitespace;
 
 import java.util.Arrays;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.core.Messages;
 import seedu.planner.logic.commands.AchieveCommand;
-import seedu.planner.logic.commands.ExportExcelCommand;
 import seedu.planner.logic.parser.exceptions.ParseException;
 import seedu.planner.model.record.Date;
 
@@ -21,35 +17,75 @@ import seedu.planner.model.record.Date;
  * Achieve the records, export into  Excel file then delete all records exported.
  */
 public class AchieveCommandParser implements Parser<AchieveCommand> {
-    private Logger logger = LogsCenter.getLogger(AchieveCommand.class);
+    private static Logger logger = LogsCenter.getLogger(ExportExcelCommandParser.class);
+    private static String whiteSpace = " ";
 
     /**
-     * Parses input arguments and create AchieveCommand object.
+     * Parses the given code {@code String} of arguments in the context of the ExportExcelCommand
+     * @return an ExportExcelCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public AchieveCommand parse(String args) throws ParseException {
-        String stringDate = " ";
-        String stringPath = " ";
         String trimmedArgs = args.trim();
-        logger.info(trimmedArgs);
+        logger.info("TRIMMED ARGS: " + trimmedArgs);
         if (trimmedArgs.isEmpty()) {
+            logger.info("ExportExcelCommand(): 1");
             return new AchieveCommand();
         }
+        String stringDate = whiteSpace;
+        String stringPath = whiteSpace;
+        boolean isDateExist = true;
+        boolean isPathExist = true;
+        logger.info("Args: " + args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_DIR);
-        stringDate += retrieveDataFromPrefix(argMultimap, PREFIX_NAME);
-        stringPath += retrieveDataFromPrefix(argMultimap, PREFIX_DIR);
-        logger.info("stringDate: " + stringDate + " stringPath: " + stringPath);
-        return parseArgumentsModeIntoCommand(args, stringDate, stringPath);
+        logger.info("stringDate 1: " + stringDate + " stringPath: " + stringPath);
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATE) || !argMultimap.getPreamble().isEmpty()) {
+            isDateExist = false;
+        }
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATE)) {
+            logger.info("isDateExist 1: False");
+        }
+        if (!argMultimap.getPreamble().isEmpty()) {
+            logger.info("isDateExist 2: False");
+        }
+        if (!arePrefixesPresent(argMultimap, PREFIX_DIR) || !argMultimap.getPreamble().isEmpty()) {
+            isPathExist = false;
+        }
+        if (!arePrefixesPresent(argMultimap, PREFIX_DIR)) {
+            logger.info("isPathExist 1: False");
+        }
+        if (!argMultimap.getPreamble().isEmpty()) {
+            logger.info("isPathExist 2: False");
+        }
+        logger.info("stringDate 2: " + stringDate + " stringPath: " + stringPath);
+        logger.info("isDateExist: " + isDateExist + " isPathExist: " + isPathExist);
+        if (!isDateExist && !isPathExist) {
+            throw new ParseException(
+                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AchieveCommand.MESSAGE_USAGE));
+        }
+        if (isDateExist) {
+            stringDate = argMultimap.getValue(PREFIX_DATE).get();
+        }
+        if (isPathExist) {
+            stringPath = argMultimap.getValue(PREFIX_DIR).get();
+        }
+        logger.info("stringDate 3: " + stringDate + " stringPath: " + stringPath);
+        if (stringDate.trim().isEmpty() && stringPath.trim().isEmpty()) {
+            logger.info("AchieveExcelCommand(): 2");
+            return new AchieveCommand();
+        }
+        return parseArgumentsModeIntoCommand(stringDate.trim(), stringPath.trim());
     }
 
     /**
      * Parse the arguments into different argument mode, hence, we will have different command mode.
      */
-    public static AchieveCommand parseArgumentsModeIntoCommand (String args, String stringDate, String stringPath)
+    private static AchieveCommand parseArgumentsModeIntoCommand (String stringDate, String stringPath)
             throws ParseException {
         String directoryPath;
-        if (stringDate.isEmpty() && stringPath.isEmpty()) {
-            return new AchieveCommand();
-        } else if (stringDate.isEmpty()) {
+        if (stringDate.isEmpty()) {
+            logger.info("AchieveExcelCommand(directoryPath)");
+            logger.info("Directory path 1.");
             directoryPath = ParserUtil.parseDirectoryString(stringPath);
             return new AchieveCommand(directoryPath);
         } else {
@@ -59,7 +95,7 @@ public class AchieveCommandParser implements Parser<AchieveCommand> {
     }
 
     /**
-     * Parse the string Date into different mode and return different mode of command.
+     * Parse the string Date into different mode, hence return different commands.
      */
     private static AchieveCommand parseDateIntoDifferentMode (String[] dates, String stringPath)
             throws ParseException {
@@ -70,7 +106,7 @@ public class AchieveCommandParser implements Parser<AchieveCommand> {
         if (dateNum > AchieveCommand.DUO_MODE) {
             throw new ParseException(
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT
-                            + Messages.MESSAGE_INVALID_DATE_REQUIRED, ExportExcelCommand.MESSAGE_USAGE));
+                            + Messages.MESSAGE_INVALID_DATE_REQUIRED, AchieveCommand.MESSAGE_USAGE));
         } else if (dateNum == AchieveCommand.SINGLE_MODE) {
             startDate = ParserUtil.parseDate(Arrays.asList(dates).get(AchieveCommand.FIRST_ELEMENT).trim());
             endDate = ParserUtil.parseDate(Arrays.asList(dates).get(AchieveCommand.FIRST_ELEMENT).trim());
@@ -79,14 +115,43 @@ public class AchieveCommandParser implements Parser<AchieveCommand> {
             endDate = ParserUtil.parseDate(Arrays.asList(dates).get(AchieveCommand.SECOND_ELEMENT).trim());
         }
         if (isDateOrderValid(startDate, endDate)) {
-            if (stringPath.isEmpty()) {
+            if (stringPath == null || stringPath.isEmpty()) {
+                logger.info("AchieveExcelCommand(startDate, endDate)");
                 return new AchieveCommand(startDate, endDate);
             } else {
+                logger.info("AchieveExcelCommand(startDate, endDate, directoryPath)");
                 directoryPath = ParserUtil.parseDirectoryString(stringPath);
                 return new AchieveCommand(startDate, endDate, directoryPath);
             }
         } else {
             throw new ParseException(Messages.MESSAGE_INVALID_STARTDATE_ENDDATE);
         }
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Splits a string using whitespace as delimiters
+     * @param args String arguments that have 2 dates.
+     * @return array of split strings
+     */
+    private static String[] splitByWhitespace(String args) {
+        if (args.isEmpty()) {
+            return null;
+        }
+        return args.split("\\s+");
+    }
+
+    /**
+     * Check whether the Dates are valid period or not.
+     */
+    private static boolean isDateOrderValid(Date startDate, Date endDate) {
+        return startDate.isEarlierThan(endDate) || startDate.equals(endDate);
     }
 }

@@ -60,7 +60,7 @@ public class TypicalRecords {
     public static final Date TYPICAL_END_DATE = new Date("26-9-2018");
 
     public static final Date TYPICAL_START_DATE1 = new Date ("31-03-1999");
-    public static final Date TYPICAL_END_DATE1 = new Date ("31-3-2000");
+    public static final Date TYPICAL_END_DATE1 = new Date ("1-4-1999");
     public static final Date TYPICAL_START_FAR_DATE = new Date("1-1-0000");
     public static final Date TYPICAL_END_FAR_DATE = new Date ("31-12-9999");
 
