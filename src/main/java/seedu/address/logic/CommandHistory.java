@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Stores the history of commands executed.
@@ -32,6 +33,14 @@ public class CommandHistory {
      */
     public List<String> getHistory() {
         return new LinkedList<>(userInputHistory);
+    }
+
+    public String getLastExecutedCommand() {
+        try {
+            return userInputHistory.getLast();
+        } catch (NoSuchElementException e) {
+            return null;
+        }
     }
 
     @Override

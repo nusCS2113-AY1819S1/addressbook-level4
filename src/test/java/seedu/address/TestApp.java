@@ -11,7 +11,9 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
+import seedu.address.logic.CommandHistory;
 import seedu.address.model.AddressBook;
+import seedu.address.model.LoginBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -71,6 +73,19 @@ public class TestApp extends MainApp {
     /**
      * Returns a defensive copy of the address book data stored inside the storage file.
      */
+    public LoginBook readStorageLoginBook() {
+        try {
+            return new LoginBook(storage.readLoginBook().get());
+        } catch (DataConversionException dce) {
+            throw new AssertionError("Data is not in the LoginBook format.", dce);
+        } catch (IOException ioe) {
+            throw new AssertionError("Storage file cannot be found.", ioe);
+        }
+    }
+
+    /**
+     * Returns a defensive copy of the address book data stored inside the storage file.
+     */
     public AddressBook readStorageAddressBook() {
         try {
             return new AddressBook(storage.readAddressBook().get());
@@ -92,14 +107,16 @@ public class TestApp extends MainApp {
      * Returns a defensive copy of the model.
      */
     public Model getModel() {
-        Model copy = new ModelManager((model.getAddressBook()), new UserPrefs());
+        Model copy = new ModelManager((model.getLoginBook()), (model.getAddressBook()), new UserPrefs());
+        ModelHelper.setFilteredLoginList(copy, model.getFilteredLoginDetailsList());
         ModelHelper.setFilteredList(copy, model.getFilteredPersonList());
         return copy;
     }
 
     @Override
     public void start(Stage primaryStage) {
-        ui.start(primaryStage);
+        CommandHistory history = new CommandHistory();
+        ui.start(primaryStage, model, history);
     }
 
     public static void main(String[] args) {

@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILLLEVEL;
+import static seedu.address.testutil.AccountUtil.buildLogin;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -14,22 +17,38 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.logic.LoginManager;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddSkillLevelCommand;
+import seedu.address.logic.commands.BudgetCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.CreateAccountCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindNameSubCommand;
+import seedu.address.logic.commands.FindTagSubCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LoginUserIdPasswordRoleCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.budgetelements.ClubBudgetElements;
+import seedu.address.model.login.LoginDetails;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Skill;
+import seedu.address.model.person.SkillLevel;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.testutil.AccountBuilder;
+import seedu.address.testutil.AccountUtil;
+import seedu.address.testutil.ClubBudgetElementsBuilder;
+import seedu.address.testutil.ClubBudgetElementsUtil;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -45,6 +64,24 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
+    }
+
+    @Test
+    public void parseCommand_login() throws Exception {
+        LoginDetails loginDetails = new AccountBuilder().build();
+        LoginUserIdPasswordRoleCommand command = (LoginUserIdPasswordRoleCommand) parser.parseCommand(AccountUtil
+                .getLoginCommand(loginDetails));
+        assertEquals(buildLogin(), command);
+    }
+
+    @Test
+    public void parseCommand_createaccount() throws Exception {
+        LoginManager.setIsCurrentlyTesting(true);
+        LoginDetails loginDetails = new AccountBuilder().build();
+        CreateAccountCommand command = (CreateAccountCommand) parser.parseCommand(AccountUtil
+                                                                        .getCreateAccountCommand(loginDetails));
+        assertEquals(new CreateAccountCommand(loginDetails), command);
+        LoginManager.setIsCurrentlyTesting(false);
     }
 
     @Test
@@ -76,11 +113,19 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
+    public void parseCommand_find_person() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindNameSubCommand(new NameContainsKeywordsPredicate(keywords), false), command);
+    }
+
+    @Test
+    public void parseCommand_find_tag() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindCommand command = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " " + "\\tag " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindTagSubCommand(new TagContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
@@ -139,5 +184,25 @@ public class AddressBookParserTest {
         thrown.expect(ParseException.class);
         thrown.expectMessage(MESSAGE_UNKNOWN_COMMAND);
         parser.parseCommand("unknownCommand");
+    }
+
+    @Test
+    public void parseCommand_budget() throws Exception {
+        ClubBudgetElements club = new ClubBudgetElementsBuilder().build();
+        BudgetCommand command = (BudgetCommand) parser.parseCommand(ClubBudgetElementsUtil.getBudgetCommand(club));
+        assertEquals(new BudgetCommand(club), command);
+    }
+
+    @Test
+    public void parseCommand_addSkillLevelCommand() throws Exception {
+        final Skill skill = new Skill("Photography");
+        final SkillLevel skillLevel = new SkillLevel(5);
+        AddSkillLevelCommand command = (AddSkillLevelCommand) parser.parseCommand(
+                AddSkillLevelCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " "
+                + PREFIX_SKILL + skill + " "
+                + PREFIX_SKILLLEVEL + skillLevel);
+        assertEquals(new AddSkillLevelCommand(INDEX_FIRST_PERSON, skill, skillLevel), command);
+
     }
 }

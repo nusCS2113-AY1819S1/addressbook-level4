@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+﻿= NUSSU Connect - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -12,13 +12,14 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2113-AY1819S1-F09-1/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+
+By: `Team F09-1`      Since: `Sept 2018`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+NUSSU-Connect is an application for executive committee (exco) members of the NUS Student Union (NUSSU) to help them perform their daily tasks including managing recruitment, contacts, budgets and projects efficiently.
 
 == Quick Start
 
@@ -52,6 +53,91 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
+// tag::logincreateaccount[]
+=== Logging into system: `login`
+
+Logs into application using relevant credentials. +
+Format: `login USERID PASSWORD ROLE`
+
+****
+* USERID refers to student matriculation number
+* PASSWORD refers to the password associated with the existing account
+* ROLE refers to the role in NUSSU associated with the existing account
+* The USERID must be in the `X1234567X` format, where X can only be upper case letter alphabets, and there must be exactly 7 digits between the two `X`
+* USERID must belong to an existing account
+* ROLE can only contain lower-case letter alphabets, and be only either `member`, `president` or `treasurer`
+* There must be at least 1 space between USERID and PASSWORD, and between PASSWORD and ROLE
+* There must be at least 1 space between `login` keyword and USERID
+* The 3 parameters, USERID, PASSWORD and ROLE must be present in user input during the login process
+* There must not be any additional unnecessary parameters in user input during the login process
+* There must not be any spaces in USERID, PASSWORD and ROLE
+****
+
+Examples:
+
+* `login A1234567M zaq1xsw2cde3 president` +
+Logs into Address book with user ID as A1234567M, password as zaq1xsw2cde3 and role as president.
+
+image::DefaultAccountDetails.PNG[width="300"]
+
+[NOTE]
+====
+The default account login details for logging in when the application is launched for the very first time, can be illustrated in the picture
+below. Enter the login details shown in the picture exactly, as all the login parameters are case-sensitive. Thus, any difference
+in casing between the actual and expected input characters will lead to failure in logging into the application.
+====
+image::DefaultAccountDetails.PNG[width="300"]
+
+[NOTE]
+====
+After the user logs in successfully, they should expect to see the main window of the application as shown below.
+====
+image::LoginSuccess.png[width="300"]
+
+[NOTE]
+====
+If the user is unable to log in successfully, they should expect to see the login input field in a pop-up box again, asking the user
+to input their login credentials again.
+====
+image::BlankLoginInput.png[width="300"]
+
+[NOTE]
+====
+User Id, Password and Role inputs are all case-sensitive!
+====
+
+=== Creating a new user account: `createaccount`
+
+Creates a new user account in the address book. +
+Format: `createaccount USERID PASSWORD ROLE`
+
+****
+* USERID refers to student matriculation number
+* PASSWORD refers to any desired passphrases the new user wishes to have
+* ROLE refers to the role in NUSSU associated with the existing account
+* The USERID must be in the `X1234567X` format, where X can only be upper-case letter alphabets, and there must be exactly 7 digits between the two `X`
+* USERID must not belong to an existing account
+* ROLE can only contain lower-case letter alphabets, and be only either `member`, `president` or `treasurer`
+* There must be at least 1 space between USERID and PASSWORD, and between PASSWORD and ROLE
+* There must be at least 1 space between `createaccount` keyword and USERID
+* The 3 parameters, USERID, PASSWORD and ROLE must be present in user input during the account creation process
+* There must not be any additional unnecessary parameters in user input during the account creation process
+* There must not be any spaces in USERID, PASSWORD and ROLE
+****
+
+Examples:
+
+* `createaccount A1234569M zaq1xsw2cde3 member` +
+Creates a new account with user ID as A1234569M, password as zaq1xsw2cde3 and role as member in the address book.
+The image below shows the outcome of a successful creation of a new account.
+
+image::CreateAccountSuccess.PNG[width="300"]
+
+The image below shows the outcome of an unsuccessful creation of a new account due to an account already existing.
+
+image::CreateAccountFailure.PNG[width="300"]
+// end::logincreateaccount[]
+
 === Viewing help : `help`
 
 Format: `help`
@@ -69,10 +155,19 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-=== Listing all persons : `list`
+=== Adding person's skill: `asl`
 
-Shows a list of all persons in the address book. +
-Format: `list`
+Edits a person's skill in the address book.
+
+Format: `asl INDEX s/SKILL l/SKILL_LEVEL`
+
+[TIP]
+A skill level must be an integer from 0 to 100 (inclusive).
+
+Examples:
+
+* `asl 2 s/Photography l/30`
+* `asl 4 s/Java l/40`
 
 === Editing a person : `edit`
 
@@ -94,35 +189,137 @@ Edits the phone number and email address of the 1st person to be `91234567` and 
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-=== Locating persons by name: `find`
+=== Listing all persons : `list`
 
-Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Shows a list of all persons in the address book. +
+Format: `list`
+
+// tag::find[]
+=== Locating persons: `find`
+
+Finds persons in the displayed list whose names/tags contain any of the given keywords. +
+If the `\exclude` option is enabled, the matched person will be excluded from the list instead. +
+
+Format: `find [\tag] [\exclude] KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The search is case insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* If `\tag` option is not specified, find command will search according to names.
+* The `\exclude` option will exclude any names/tags with the specified keywords
+* The order of `\tag` and `\exclude` options cannot be swapped if you want to exclude tags from the displayed list.
+* Back-to-back find commands utilizes the Search Pruning feature and you can get more details about this under the
+Search Pruning Feature section.
 ****
 
 Examples:
 
 * `find John` +
+* `find John` +
 Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
+* `find \exclude Tom` +
+Returns any person without the name `Tom`.
 
-=== Deleting a person : `delete`
+* `find \tag President` +
+Returns any person with the tag `President`
+* `find \tag President VicePresident` +
+Returns any person with the tag `President` OR `VicePresident`.
+* `find \tag \exclude President` +
+Returns any person without the tag `President`.
 
-Deletes the specified person from the address book. +
-Format: `delete INDEX`
+=== Undoing Find Commands: `undofind`
+
+Reverts the displayed list to the state before you perform your most recent find command +
+Format: `undofind`
+****
+* To be used in Search Pruning feature
+****
+
+=== Search Pruning Feature with list, find and undofind commands
+
+Since v1.1, the Search Pruning feature was introduced to NUSSU Connect that helps you
+trim the list of contacts with every successive find command. This lets you search through the list
+of contacts in a much more intuitive manner without the hassle of typing a long single line command that is
+usually error-prone.
+
+The concept of the Search Pruning feature will be illustrated below. +
+
+**1. Search Pruning with Find Commands**
+
+****
+Assume that the original list of contacts contains the following six persons and you wanted to search for all persons
+with the science tag. You could do this by executing the command `find \tag science`. +
+
+image::SearchPruning1st.png[align="left"]
+
+After executing the command the displayed list will now contain 2 persons,
+both with the science tag.
+
+image::SearchPruning2nd.png[align="left"]
+
+The following message will be displayed in the Command Result Box to tell you the keywords that you have previously executed.
+The "+" prefix before a keyword is used to denote that you chose to include all persons with the relevant keyword in
+the displayed list. +
+
+image::SearchPruning3rd.png[align="left"]
+
+Next, you wanted to exclude everyone that has the tag `VPresident` and you could do that by executing the command +
+`find \tag \exclude VPresident`. +
+
+image::SearchPruning4th.png[align="left"]
+
+The command will filter according to the previous displayed list instead of the original contacts list and the
+displayed list now contains only 1 person with the President Tag as everyone with the VPresident tag have been excluded. +
+
+image::SearchPruning5th.png[align="left"]
+
+The Command Result Box will now display an extra vpresident keyword with the "-" prefix, denoting that all persons
+with the vpresident tag has been excluded from the list +
+
+image::SearchPruning6th.png[align="left"]
+****
+
+**2 . Making a mistake and undoing it with undofind command**
+
+****
+Now assume that you have made a mistake and you want to revert to the list before you execute your most
+recent find command. You can do so with the undofind command +
+
+image::SearchPruning7th.png[align="left"]
+
+After executing the undofind command, the displayed list is reverted to the state before the +
+`find \tag \exclude VPresident` command was executed +
+
+image::SearchPruning8th.png[align="left"]
+****
+
+**3 . Reverting to initial state with list command**
+
+****
+You can revert to the initial state before any find commands are executed with the list command
+
+image::SearchPruning9th.png[align="left"]
+
+After executing the list command, all search history is cleared and the displayed list now contains all six persons.
+
+image::SearchPruning10th.png[align="left"]
+****
+
+// end::find[]
+
+=== Deleting : `delete`
+
+Deletes a specific person from the address book. +
+Format: `delete [-a all] [INDEX]`
 
 ****
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* If -a option is selected, all contacts on the list will be deleted and INDEX will be ignored.
 ****
 
 Examples:
@@ -133,6 +330,10 @@ Deletes the 2nd person in the address book.
 * `find Betsy` +
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
+* `list` +
+`delete -a` +
+Deletes everyone in the results of the `find` command.
+
 
 === Selecting a person : `select`
 
@@ -219,6 +420,59 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the address book. +
 Format: `clear`
 
+=== Submitting data for budget allocation: `budget`
+
+Submits the data about number of events, expected turnout etc. +
+Format: `budget c/CLUB NAME t/TURNOUT e/NUMBER OF EVENTS`
+
+Example: +
+`budget c/Computing Club t/200 e/5`
+
+=== Calculating the budgets : `calculatebudget`
+
+Calculates the budgets for all the clubs in the address book using the total available budget
+Format: `calculatebudget b/TOTAL AVAILABLE BUDGET IN SGD`
+
+Example: +
+`calculatebudget b/50000`
+
+=== Viewing the allocated budget : `viewbudget`
+
+Shows all the allocated budgets to the user +
+Format: `viewbudget`
+
+=== Submitting grant request : `request`
+
+Submits data about amount of grant needed, the reason and tags the importance level
+Format: `request m/AMOUNT r/REASON t/IMPORTANCE LEVEL`
+
+Example: +
+`request m/1000 r/for booking auditorium t/medium` +
+
+=== Viewing grant request : `viewrequest`
+Shows a list of all the grant request sorted by order of importance, and if there is a tie, by descending order of amount requested. +
+Format: `viewrequest`
+
+=== Accepting grant request: `accept`
+
+Approves a specific grant request from the list of grants.
+Format: `accept [-a all] [INDEX]`
+
+****
+* Approves the request at the specified `INDEX`.
+* The index refers to the index number shown in the displayed requests list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* If -a option is selected, all requests on the list will be approved and INDEX will be ignored.
+****
+Example:
+
+* `viewrequest` +
+`accept 2` +
+Approves the 2nd request in the list of grant requests.
+* `viewrequest` +
+`accept -a` +
+Approves all the requests in the list.
+
 === Exiting the program : `exit`
 
 Exits the program. +
@@ -242,15 +496,20 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
+* *Login* : `login USERID PASSWORD ROLE`
+e.g. `login A1234567M zaq1xsw2cde3 member`
+* *Create Account* : `createaccount USERID PASSWORD ROLE` +
+e.g. `createaccount A1234567M zaq1xsw2cde3 member`
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 * *Clear* : `clear`
-* *Delete* : `delete INDEX` +
+* *Delete* : `delete [-a all][INDEX]` +
 e.g. `delete 3`
 * *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
+* *Find* : `find [\tag] [\exclude] KEYWORD [MORE_KEYWORDS]` +
+e.g. `find James Jake` +
+e.g `find \tag President`
+* *Undo Find* : `undofind`
 * *List* : `list`
 * *Help* : `help`
 * *Select* : `select INDEX` +
@@ -258,3 +517,17 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
+* *Submitting data for budget* : `budget c/CLUB NAME t/TURNOUT e/NUMBER OF EVENTS` +
+e.g. `budget c/Computing Club t/200 e/5`
+* *Calculating budgets* : `calculatebudget b/TOTAL AVAILABLE BUDGET IN SGD` +
+e.g. `calculatebudget b/50000`
+* *Viewing all the budgets* : `viewbudget`
+* *Submitting grant request* : request m/AMOUNT r/REASON t/IMPORTANCE LEVEL` +
+e.g. `request m/1000 r/for booking auditorium t/medium`
+* *Viewing grant request* : `viewrequest`
+* *Accepting a grant request* : `accept [-a all] [INDEX]` +
+e.g. `viewrequest` +
+       `accept 2` +
+e.g. `viewrequest` +
+     `accept -a`
+

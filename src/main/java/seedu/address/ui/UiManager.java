@@ -15,7 +15,9 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Logic;
+import seedu.address.model.Model;
 import seedu.address.model.UserPrefs;
 
 /**
@@ -45,7 +47,7 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage, Model model, CommandHistory history) {
         logger.info("Starting UI...");
 
         //Set the application icon.

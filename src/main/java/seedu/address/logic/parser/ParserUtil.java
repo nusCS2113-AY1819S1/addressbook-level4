@@ -2,13 +2,22 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.LoginManager;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.budgetelements.ClubName;
+import seedu.address.model.budgetelements.ExpectedTurnout;
+import seedu.address.model.budgetelements.NumberOfEvents;
+import seedu.address.model.clubbudget.TotalBudget;
+import seedu.address.model.login.UserId;
+import seedu.address.model.login.UserPassword;
+import seedu.address.model.login.UserRole;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -21,6 +30,51 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+
+    /**
+     * Parses a {@code String userId} into a {@code UserId}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code userId} is invalid.
+     */
+    public static UserId parseUserId(String userId) throws ParseException, UnsupportedEncodingException {
+        requireNonNull(userId);
+        String trimmeduserId = userId.trim();
+        if (!UserId.isValidUserId(trimmeduserId) && !LoginManager.getIsCurrentlyTesting()) {
+            throw new ParseException(UserId.MESSAGE_USERID_CONSTRAINTS);
+        }
+        return new UserId(trimmeduserId);
+    }
+
+    /**
+     * Parses a {@code String userPassword} into a {@code UserPassword}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code userPassword} is invalid.
+     */
+    public static UserPassword parseUserPassword(String userPassword) throws ParseException,
+            UnsupportedEncodingException {
+        requireNonNull(userPassword);
+        String trimmeduserPassword = userPassword.trim();
+        if (!UserPassword.isValidUserPassword(trimmeduserPassword) && !LoginManager.getIsCurrentlyTesting()) {
+            throw new ParseException(UserPassword.MESSAGE_USERPASSWORD_CONSTRAINTS);
+        }
+        return new UserPassword(trimmeduserPassword);
+    }
+
+    /**
+     * Parses a {@code String userRole} into a {@code UserRole}.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the given {@code userRole} is invalid.
+     */
+    public static UserRole parseUserRole(String userRole) throws ParseException, UnsupportedEncodingException {
+        requireNonNull(userRole);
+        String trimmeduserRole = userRole.trim();
+        if (!UserRole.isValidUserRole(trimmeduserRole) && !LoginManager.getIsCurrentlyTesting()) {
+            throw new ParseException(UserRole.MESSAGE_USERROLE_CONSTRAINTS);
+        }
+        return new UserRole(trimmeduserRole);
+    }
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -120,5 +174,65 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String clubname} into a {@code ClubName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code clubname} is invalid.
+     */
+    public static ClubName parseClubName(String clubname) throws ParseException {
+        requireNonNull(clubname);
+        String trimmedClubName = clubname.trim();
+        if (!ClubName.isValidClubName(trimmedClubName)) {
+            throw new ParseException(ClubName.MESSAGE_CLUB_NAME_CONSTRAINTS);
+        }
+        return new ClubName(trimmedClubName);
+    }
+
+    /**
+     * Parses a {@code String expectedturnout} into a {@code ExpectedTurnout}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code expectedturnout} is invalid.
+     */
+    public static ExpectedTurnout parseExpectedTurnout(String expectedturnout) throws ParseException {
+        requireNonNull(expectedturnout);
+        String trimmedExpectedTurnout = expectedturnout.trim();
+        if (!ExpectedTurnout.isValidExpectedTurnout(trimmedExpectedTurnout)) {
+            throw new ParseException(ExpectedTurnout.MESSAGE_EXPECTED_TURNOUT_CONSTRAINTS);
+        }
+        return new ExpectedTurnout(trimmedExpectedTurnout);
+    }
+
+    /**
+     * Parses a {@code String numberofevents} into a {@code NumberOfEvents}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code numberofevents} is invalid.
+     */
+    public static NumberOfEvents parseNumberOfEvents(String numberofevents) throws ParseException {
+        requireNonNull(numberofevents);
+        String trimmedNumberOfEvents = numberofevents.trim();
+        if (!NumberOfEvents.isValidNumberOfEvents(trimmedNumberOfEvents)) {
+            throw new ParseException(NumberOfEvents.MESSAGE_NUMBER_OF_EVENTS_CONSTRAINTS);
+        }
+        return new NumberOfEvents(trimmedNumberOfEvents);
+    }
+
+    /**
+     * Parses a {@code int totalBudget} into a {@code int}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code totalBudget} is invalid.
+     */
+    public static TotalBudget parseTotalBudget(String totalBudget) throws ParseException {
+        requireNonNull(totalBudget);
+        String trimmedTotalBudget = totalBudget.trim();
+        if (!TotalBudget.isValidTotalBudget(trimmedTotalBudget)) {
+            throw new ParseException(TotalBudget.MESSAGE_TOTAL_BUDGET_CONSTRAINTS);
+        }
+        return new TotalBudget(trimmedTotalBudget);
     }
 }

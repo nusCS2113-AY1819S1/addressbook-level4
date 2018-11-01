@@ -99,15 +99,16 @@ public class CommandBox extends UiPart<Region> {
      * Handles the Enter button pressed event.
      */
     @FXML
-    private void handleCommandEntered() {
+    void handleCommandEntered() {
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText());
+            logger.info("Result: " + commandResult.feedbackToUser);
+            raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
+
             initHistory();
             historySnapshot.next();
             // process result of the command
             commandTextField.setText("");
-            logger.info("Result: " + commandResult.feedbackToUser);
-            raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
 
         } catch (CommandException | ParseException e) {
             initHistory();
