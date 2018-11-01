@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
+import seedu.address.model.user.stocktaker.StockTakerModel;
 
 /**
  * Sell a drink from inventory.
@@ -21,9 +22,11 @@ public class ViewTransactionsCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
+        assert model instanceof StockTakerModel;
+        StockTakerModel stockTakerModel = (StockTakerModel) model;
         //TransactionList transactionList = model.getTransactionList();
         // String.format(MESSAGE_SUCCESS, model.getTransactions.size());
-        String result = model.getTransactions();
+        String result = stockTakerModel.getTransactions();
         return new CommandResult(String.format(MESSAGE_SUCCESS, result));
     }
 

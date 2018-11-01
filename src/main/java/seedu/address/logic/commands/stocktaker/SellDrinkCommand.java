@@ -1,16 +1,19 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.stocktaker;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DRINK_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.drink.Drink;
 import seedu.address.model.drink.Quantity;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.TransactionType;
+import seedu.address.model.user.stocktaker.StockTakerModel;
 
 /**
  * Sell a drink from inventory.
@@ -55,12 +58,14 @@ public class SellDrinkCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireAllNonNull(model);
+        assert model instanceof StockTakerModel;
+        StockTakerModel stockTakerModel = (StockTakerModel) model;
 
-        if (!model.hasDrink(drink)) {
+        if (!stockTakerModel.hasDrink(drink)) {
             throw new CommandException(MESSAGE_DRINK_NOT_FOUND);
         }
 
-        model.sellDrink(transaction);
+        stockTakerModel.sellDrink(transaction);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, drink.getName(), transaction.getTransactionDate(),
                 quantity));

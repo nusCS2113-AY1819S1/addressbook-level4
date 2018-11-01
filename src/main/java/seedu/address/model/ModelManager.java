@@ -3,7 +3,6 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -17,8 +16,6 @@ import seedu.address.commons.core.LoginInfo;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.InventoryListChangedEvent;
 import seedu.address.model.drink.Drink;
-import seedu.address.model.drink.Price;
-import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.TransactionList;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.UserName;
@@ -30,10 +27,10 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     protected LoginInfoManager loginInfoManager;
-    private final FilteredList<Drink> filteredDrinks;
-    private final InventoryList inventoryList;
-    private final TransactionList transactionList;
-    private final Analysis analysis;
+    protected final FilteredList<Drink> filteredDrinks;
+    protected final InventoryList inventoryList;
+    protected final TransactionList transactionList;
+    protected final Analysis analysis;
 
     /**
      * Initializes a ModelManager with the given inventoryList, userPrefs and transactionList
@@ -144,57 +141,10 @@ public class ModelManager extends ComponentManager implements Model {
                 && inventoryList.equals(other.inventoryList);
     }
 
-    // ========== transaction commands ====================================
-    @Override
-    public void sellDrink(Transaction transaction) {
-        Price defaultSalePrice = inventoryList.getDefaultSellingPrice(transaction.getDrinkTransacted());
-
-        Price defaultAmountTransacted = new Price(Float.toString(defaultSalePrice.getValue()
-                * transaction.getQuantityTransacted().getValue()));
-        transaction.setAmountMoney(defaultAmountTransacted);
-        recordTransaction(transaction);
-
-        inventoryList.decreaseQuantity(transaction.getDrinkTransacted(), transaction.getQuantityTransacted());
-    }
-
-    @Override
-    public void importDrink(Transaction transaction) {
-        Price defaultCostPrice = inventoryList.getDefaultCostPrice(transaction.getDrinkTransacted());
-
-        Price defaultAmountTransacted = new Price(Float.toString(defaultCostPrice.getValue()
-                * transaction.getQuantityTransacted().getValue()));
-        transaction.setAmountMoney(defaultAmountTransacted);
-        recordTransaction(transaction);
-
-        inventoryList.increaseQuantity(transaction.getDrinkTransacted(), transaction.getQuantityTransacted());
-    }
-
-    private void recordTransaction(Transaction transaction) {
-        transactionList.addTransaction(transaction);
-    }
+    // ========== stockTaker commands ====================================
 
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Transaction} backed by the internal list of
-     * {@code transactionList}
-     */
-    @Override
-    public ObservableList<Transaction> getTransactionList() {
-        List<Transaction> transactions = transactionList.getTransactions();
-        return FXCollections.unmodifiableObservableList(FXCollections.observableList(transactions));
-    }
-
-    @Override
-    public String getTransactions() {
-        return transactionList.toString();
-    }
-
-    // ========== Analysis commands =================================================
-    @Override
-    public Price analyseCosts() {
-        return analysis.analyseCost();
-    }
-
+    // ========== Accountant commands =================================================
 
 
     //=========== Login feature command ==============================================

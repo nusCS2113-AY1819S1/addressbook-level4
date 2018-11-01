@@ -1,11 +1,14 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.accountant;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.drink.Price;
+import seedu.address.model.user.accountant.AccountantModel;
 
 /**
  * Analyses total costs of transactions.
@@ -27,8 +30,9 @@ public class AnalyseCostsCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireAllNonNull(model);
-
-        Price totalCosts = model.analyseCosts();
+        assert model instanceof AccountantModel;
+        AccountantModel accountantModel = (AccountantModel) model;
+        Price totalCosts = accountantModel.analyseCosts();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, totalCosts));
     }

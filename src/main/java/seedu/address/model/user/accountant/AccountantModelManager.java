@@ -4,6 +4,7 @@ import seedu.address.model.LoginInfoManager;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyInventoryList;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.drink.Price;
 import seedu.address.model.transaction.TransactionList;
 
 /**
@@ -14,6 +15,11 @@ public class AccountantModelManager extends ModelManager implements AccountantMo
                                   UserPrefs userPrefs, LoginInfoManager loginInfoManager,
                                   TransactionList transactionList) {
         super(inventoryList, userPrefs, loginInfoManager, transactionList);
+    }
+
+    @Override
+    public Price analyseCosts() {
+        return analysis.analyseCost();
     }
 
 }

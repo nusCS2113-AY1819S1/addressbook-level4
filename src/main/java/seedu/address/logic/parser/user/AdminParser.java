@@ -7,7 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddDrinkCommand;
-import seedu.address.logic.commands.AnalyseCostsCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -15,11 +14,12 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
-import seedu.address.logic.commands.ImportDrinkCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.SellDrinkCommand;
 import seedu.address.logic.commands.ViewTransactionsCommand;
+import seedu.address.logic.commands.accountant.AnalyseCostsCommand;
+import seedu.address.logic.commands.stocktaker.ImportDrinkCommand;
+import seedu.address.logic.commands.stocktaker.SellDrinkCommand;
 import seedu.address.logic.commands.user.ChangePasswordCommand;
 import seedu.address.logic.commands.user.CreateAccountCommand;
 import seedu.address.logic.commands.user.DeleteAccountCommand;
@@ -59,10 +59,11 @@ public class AdminParser {
         final String arguments = matcher.group("arguments");
 
         switch (commandWord) {
-
+        // ========= manager commands ==================
         case AddDrinkCommand.COMMAND_WORD:
             return new AddDrinkCommandParser().parse(arguments);
 
+        // ========= stock taker commands ==================
         case SellDrinkCommand.COMMAND_WORD:
             return new SellDrinkCommandParser().parse(arguments);
 
@@ -72,7 +73,7 @@ public class AdminParser {
         case ViewTransactionsCommand.COMMAND_WORD:
             return new ViewTransactionsCommand();
 
-        // ========= analysis commnads ==================
+        // ========= analysis commands ==================
         case AnalyseCostsCommand.COMMAND_WORD:
             return new AnalyseCostsCommand();
 
