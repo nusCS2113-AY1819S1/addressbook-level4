@@ -10,16 +10,17 @@
 == Overview
 
 
-FreeTime is a security-enabled desktop application that is used for finding mutually availble slots between its users. This
-available slot will be displayed for the user to choose from, which will be reflected in his timetable using our FreeTime GUI.
+FreeTime(TM) is a security-enabled desktop application that is used for finding mutually availble slots between its users. This
+available slot will be displayed for the user to choose from, which will be reflected in his timetable using our FreeTime
+Graphical User Interface (GUI).
 
 This project portfolio would be introducing you to my team that has developed this product in the span of a semester. In addition to giving you a brief general overview of this application
 feature, I would be going indepth into the details on how my own features are implemtented. This is to give you a deeper understanding of what contributions that I have done within this project,
 and hopefully you would perhaps also learn something along the way.
 
-So sit tight, and let me tell you more about FreeTime.
+So sit tight, and let me tell you more about _FreeTime_.
 
-== FreeTime Features
+== FreeTime(TM) Features
 In addition to essential security features such as login and registering, we have a clean, minimalistic landing page that is user-friendly.
 
 Users can import preexisting timetables that are taken from Google Calander or any other calander application that saves their data into the commonly used .ics format. This handy feature allows
@@ -30,6 +31,7 @@ this particular group of friends.
 
 Using the command `freetime`, you would be presented with a timetable that shows you what are your common free slots are. Thus you are freed from the painful moments of finding a common free slot in huge groups.
 
+NOTE: More information below in User Guide
 
 
 == Summary of contributions

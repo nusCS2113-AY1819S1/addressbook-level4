@@ -59,6 +59,8 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 The timetable content is locked, and it requires a user to either login with a pre-existing account, or register a new one.
 
+NOTE: The application have a default user with username: *test* and password: *test*
+
 There are five security related commands that can be entered on this command line:
 
 1. `login`
@@ -73,7 +75,7 @@ image::Login Page.png[width="790"]
 At this page you will have to enter your credentials to log in. Only then would you be able to edit and view your own timetable,
 and view your friends' timetable. +
 
-Friends are other users that you have "friended", and all users start off without
+TIP: Friends are other users that you have "friended", and all users start off without
 having any friends. +
 
 The timetable that belongs to users that are not your friends will not be available to you, till you
@@ -90,9 +92,8 @@ Examples:
 * `login tim tam` +
 Logins with Username: tim and Password: tam
 
-Constraints:
-
-* Username and Password must not contain any spaces
+WARNING: Constraints: +
+ Username and Password must not contain any spaces
 
 ==== Registering: `register`
 Command: `register [Username] [Password] [Email] [MobilePhone] [Address]`
@@ -137,6 +138,7 @@ Command: `exit`
 This command closes the application without logging you out. It is recommended to logout before doing this, or the changes
 to your timetable might be lost.
 // end::security[]
+
 === Viewing help : `help` (`h`)
 
 Displays the userguide from within the app.
