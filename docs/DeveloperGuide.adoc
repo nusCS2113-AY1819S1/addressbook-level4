@@ -225,6 +225,7 @@ As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person`
  +
 image:ModelClassBetterOopDiagram.png[width="800"]
 
+// tag::designSecurity[]
 [[Design-Security]]
 === Security component
 
@@ -241,6 +242,7 @@ The Sequence Diagram when a user logs in is given below:
 
 .Interactions between the UI Component and Security Component for the `login` Command
 image::SecurityLoginSequenceDiagram.png[width="800"]
+// end::designSecurity[]
 
 [[Design-Storage]]
 === Storage component
@@ -351,31 +353,38 @@ image::UndoRedoActivityDiagram.png[width="650"]
 === Timetable feature
 ==== Current implementation
 
-The timetable feature allows users to store and view their own timetables. Additionally, it allows users to view a deconflicted timetable, a timetable which highlights mutual free timeslots among all selected users.
+FreeTime's timetable feature allows users to store and view their own timetables. +
+
+FreeTime can also display a deconflicted timetable, highlighting mutually free timeslots among the current user and all other selected people.
 
 The timetable feature can be broadly split into two parts: +
 1. The backend, which handles the storage and logic of `TimeTable` objects; +
 2. The frontend, which handles the display of `TimeTable` objects.
 
-
 ===== Backend implementation
 
-The `TimeTable` object is composed under the `Person` class in `Model`. Each `TimeTable` in turn is composed of any number of `TimeSlot` objects. Each `TimeSlot` consists of: +
-1. One `DayOfWeek` object to indicate the day of week of the timeslot; +
-2. Two `LocalTime` objects to indicate the start time and end time of the timeslot respectively.
+The `TimeTable` object is composed under the `Person` class in `Model`. Each `TimeTable` is composed of any number of `TimeSlot` objects. Each `TimeSlot` consists of: +
+1. One `DayOfWeek` object to indicate the day of week of the `TimeSlot`; +
+2. Two `LocalTime` objects to indicate the start time and end time of the `TimeSlot` respectively. +
+3. One `Color` object to indicate the color of the `TimeSlot` when displayed on FreeTime's UI.
 
 The following class diagram summarises the relationship between the components of the TimeTable class:
 
 .Structure of the TimeTable Class
 image::TimeTableClassDiagram.png[width="400"]
 
-
-{nbsp}
-
-The `TimeTable` class implements three key methods: +
+The `TimeTable` class implements two key methods: +
 1. `TimeTable#addTimeSlot()` - to add a new `TimeSlot` to the `TimeTable` +
 2. `TimeTable#deleteTimeSlot()` - to remove an existing `TimeSlot` from the `TimeTable` +
-3. `TimeTable#deconflict()` - to create a deconflicted timetable from two or more `TimeTable` objects +
+
+The class `DeconflictTimeTable`, which inherits from `TimeTable`, is used to display mutually free timeslots among users. +
+
+The key difference between `TimeTable` and `DeconflictTimeTable` lies in the implementation of the `addTimeSlot()` method. `TimeTable#addTimeSlot()` throws an exception when the `TimeSlot` to be added overlaps with an existing `TimeSlot` in the `TimeTable`. However, `DeconflictTimeTable#addTimeSlot()` merges the `TimeSlot` to be added with all overlapping `TimeSlot` objects in the `TimeTable`.
+
+The following sequence diagram shows the significant method calls for generating a `DeconflictTimeTable` object from two `TimeTable` objects:
+
+.Sequence Diagram Showing the Generation of a `DeconflictTimeTable`
+image::DeconflictSequenceDiagram.png[width="800"]
 
 ===== Frontend implementation
 
@@ -389,22 +398,24 @@ The following screenshot shows the relative position of all the components in `T
 .Layout of the TimeTablePanel
 image::TimeTableScreenshotLabelled.png[width="800"]
 
-{nbsp}
 
 ===== Interaction between backend and frontend
 
-The following sequence diagrams show the sequence of significant method calls for the execution of the `TimeTable#addTimeSlot()` method. The execution of the `TimeTable#removeTimeSlot()` method is implemented in a similar manner.
+The following sequence diagram show the significant method calls for the execution of the `addtime` command. The execution of the `deletetime` is implemented in a similar manner.
 
-
+.Sequence Diagram Showing the Execution of an `addtime` Command
 image::TimeTableSequenceDiagram.png[width="800"]
+
+{nbsp}
+
 
 ==== Design Considerations
 ===== Aspect: How the frontend updates the `TimeTable` to be displayed
 * **Alternative 1 (current choice):** Clears the entire `TimeTableMainGrid` before loading the new `TimeTable`
-** Pros: Easy to implement, only one method (`loadTimeTable`) required
+** Pros: Easy to implement, only one method (`loadTimeTable()`) is required
 ** Cons: May suffer from performance degradation, especially when the `TimeTable` to be loaded contains many `TimeSlot` objects
-* **Alternative 2:** Detects the difference between the currently displayed `TimeTable` before adding or deleting `TimeTablePanelTimeSlot` objects accordingly.
-** Pros: Will reduce execution time of methods which update the displayed `TimeTable`
+* **Alternative 2:** Detect the difference between the currently displayed `TimeTable` before adding or deleting `TimeTablePanelTimeSlot` objects accordingly.
+** Pros: Reduces execution time of methods which update the displayed `TimeTable`
 ** Cons: A method to detect the difference between `TimeTable` objects must be implemented. May not result in significant performance improvements when switching between `TimeTable` objects with few or no `TimeSlot` objects in common.
 // end::timetable[]
 
@@ -448,10 +459,10 @@ Same as the other commands, see <<Events-Driven-Nature,*`Events-Driven nature of
 * **Alternative 2:** Follow the existing implementation of 'Storage'; create an IcsTimeTableStorage class to access the ics file in hard disk, just like what is being done with 'preferences.json' and 'AddressBook.xml' files.
 ** Pros: Classes that have to do with IO are in the storage subsystem.
 ** Cons: Current implementation favors 'permanent' file storage, not on-demand IO (as in the import and export command).
-// end::timetable[]
+// end::import_export_timetable[]
 
 {nbsp}
-
+// tag::securityImplementation[]
 === Security Implementation
 To begin this section, we would need to introduce the idea of a Authenticated User instance.
 Everytime a user successfully logs in, or creates a new account, the application will create an Authenticated User in
@@ -487,6 +498,8 @@ Whenever a user logs in, the username is searched inside AppUsers. Once it match
 then salted and hashed (SHA-512), and finally compared to the stored hashed password.
 
 ==== Design Considerations
+// end::securityImplementation[]
+
 // tag::friend[]
 === Friend feature
 ==== Feature description
