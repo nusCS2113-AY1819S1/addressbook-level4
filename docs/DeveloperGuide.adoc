@@ -303,6 +303,46 @@ Step 3. The user executes ...
 
 // end::add/delete[]
 
+// tag::find[]
+=== Find Feature
+==== Current Implementation
+
+The find mechanism is facilitated by `keywordsMap` which stores the searched keywords in a `Map`.
+It implements the following operations to support the checking of keywords with the data stored in the RecruitBook:
+
+* `keywordsMap#add(String arg)` - Adds a keyword into the `keywordMap` based on the preceding prefix
+
+===== Candidates
+The `findCandidateCommand` is facilitated by the `CandidateContainsKeywordsPredicate` which implements `Predicate<Candidate>`
+and overrides the `test` and `equal` methods so that more fields can be searched at the same time.
+
+===== Companies
+The `findCompanyCommand` is facilitated by the `CompanyContainsKeywordsPredicate` which implements `Predicate<Company>`
+and overrides the `test` and `equal` methods so that more fields can be searched at the same time.
+
+===== Job Offers
+The `findJobOfferCommand` is facilitated by the `JobOfferContainsKeywordsPredicate` which implements `Predicate<JobOffer>`
+and overrides the `test` and `equal` methods so that more fields can be searched at the same time.
+
+[NOTE]
+The finding of all three entities (Candidate, Company, JobOffer) follow the same mechanism.
+
+An example usage scenario and how the find mechanism behaves at each step is shown below.
+
+Step 1. The user launched the application for the first time.
+
+.. `UniqueCandidateList` will be initialised with the list of candidates in RecruitBook
+.. `UniqueCompanyList` will be initialised with the list of saved companies in `CompanyBook`.
+.. `UniqueCompanyJobList` will be initialised with the list of saved job offers in `CompanyBook`.
+
+Step 2. The user executes `findc n/Alex p/91234567 e/michelleyeoh@gmail.com` command to find the candidates who either have the name `Alex`,
+with phone number `91234567`,  or with email address `michelleyeoh@gmail.com`.
+
+The following sequence diagram shows how the find operation works:
+
+image::FindSequenceDiagram.png[width="800"]
+// end::find[]
+
 // tag::edit[]
 === Edit Feature
 ==== Current Implementation
@@ -337,7 +377,7 @@ Additionally, it implements the following operations to support the editing of j
 These operations are exposed in the `Model` interface as `Model#hasJobOffer(JobOffer jobOffer)` and `Model#updateJobOffer(JobOffer target, JobOffer editedJobOffer)` respectively.
 
 [NOTE]
-The editing of all three entities(Candidate, Company, JobOffer) follow the same mechanism.
+The editing of all three entities (Candidate, Company, JobOffer) follow the same mechanism.
 
 Given below is an example usage scenario and how the edit mechanism behaves at each step.
 
@@ -522,14 +562,6 @@ Unblacklisting a candidate who is not blacklisted will do likewise.
 ** Cons: To check if a candidate if blacklisted, a loop has to be used to check the list. (slows the execution of edit and shortlist).
 
 // end::blacklist[]
-
-// tag::find[]
-=== Find Feature
-
-The `find` command is used to find candidates or companies stored in the address book through either the `findc` (find Candidate) or `findC` (find company).
-It extends `Command` and overrides two of its methods namely `CommandResult` and `equals`.
-
-// end::find[]
 
 // tag::shortlist[]
 === Shortlist Feature
