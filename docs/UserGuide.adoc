@@ -342,6 +342,7 @@ Format: `showReminders`
 ====
 For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
 so you need to refresh it yourself.
+Also, you have to log in first to use the functions.
 ====
 
 === Adds Comment : `addComment`
@@ -365,6 +366,7 @@ Adds "What is the attire to wear for this event?" into event 5 comment section w
 ====
 For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
 so you need to refresh it yourself.
+Also, you have to log in first to use the functions.
 ====
 
 === Reply Comment : `replyComment`
@@ -388,6 +390,7 @@ Adds the comment "What is the attire to wear for the event?" into event 2 commen
 ====
 For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
 so you need to refresh it yourself.
+Also, you have to log in first to use the functions.
 ====
 
 === Delete Comment : `deleteComment`
