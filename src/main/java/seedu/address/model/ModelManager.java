@@ -366,12 +366,12 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void commitUndoableTodoList() {
-        undoableCommandHistory.addTDL();
+        undoableCommandHistory.addTodoList();
     }
 
     @Override
     public void commitUndoableExpenditure() {
-        undoableCommandHistory.addET();
+        undoableCommandHistory.addExpenditureTracker();
     }
 
     @Override
