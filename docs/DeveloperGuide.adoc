@@ -1124,7 +1124,7 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: No comment content will be updated. Error details of entity is not under scope will be shown in the result display panel.
 .. Test case: `updateThread cId/ cContent/` +
    Expected: No comment content will be updated. Error details shown in the result display panel.
-   
+
 === Deleting a thread
 
 . Deleting a forum thread by thread creator or admin.
