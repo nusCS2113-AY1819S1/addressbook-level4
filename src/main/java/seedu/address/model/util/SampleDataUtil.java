@@ -113,17 +113,17 @@ public class SampleDataUtil {
 
     public static ReadOnlyClubBudgetElementsBook getSampleClubBudgetElementsBook() {
         ClubBudgetElementsBook sampleCBb = new ClubBudgetElementsBook();
-        for (ClubBudgetElements sampleClubBudgetElements : getSampleClubBudgetElements()) {
+        /*for (ClubBudgetElements sampleClubBudgetElements : getSampleClubBudgetElements()) {
             sampleCBb.addClub(sampleClubBudgetElements);
-        }
+        }*/
         return sampleCBb;
     }
 
     public static ReadOnlyFinalBudgetBook getSampleFinalBudgetsBook() {
         FinalBudgetsBook sampleFBb = new FinalBudgetsBook();
-        for (FinalClubBudget sampleFinalClubBudget : getSampleFinalClubBudget()) {
+        /*for (FinalClubBudget sampleFinalClubBudget : getSampleFinalClubBudget()) {
             sampleFBb.addClubBudget(sampleFinalClubBudget);
-        }
+        }*/
         return sampleFBb;
     }
 
