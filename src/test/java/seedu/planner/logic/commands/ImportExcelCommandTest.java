@@ -1,16 +1,12 @@
 package seedu.planner.logic.commands;
 
-import static seedu.planner.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.planner.model.DirectoryPath.HOME_DIRECTORY_STRING;
 import static seedu.planner.testutil.TypicalRecords.getTypicalFinancialPlanner;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import seedu.planner.commons.core.Messages;
 import seedu.planner.commons.util.ExcelUtil;
 import seedu.planner.logic.CommandHistory;
-import seedu.planner.logic.parser.CommandParserTestUtil;
 import seedu.planner.model.DirectoryPath;
 import seedu.planner.model.Model;
 import seedu.planner.model.ModelManager;

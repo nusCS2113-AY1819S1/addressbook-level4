@@ -23,7 +23,6 @@ import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
-import seedu.planner.testutil.Assert;
 import seedu.planner.testutil.LimitBuilder;
 
 
