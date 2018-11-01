@@ -225,9 +225,10 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the address book. +
 Format: `clear`
 
+// TODO: Add preface
 === Exporting all contacts : `exportall`
 
-Export all name, phone, address and email of all persons in the address book. +
+Export the name, phone, address and email of all persons in the addressbook under the specified filetype. +
 Format: `exportall FILETYPE`
 
 Examples:
@@ -237,29 +238,34 @@ Examples:
 
 [NOTE]
 ====
-1.  The csv/vcf file will be located in `/data/pineapple.csv`.
-2.  This command overwrites the previous `/data/pineapple.csv`.
+1.  The file will be located in `/data/addressbook.csv`.
+2.  This command overwrites the previous `/data/addressbook.csv`.
 ====
 
-=== Exporting contacts : `export` [coming in v1.4]
+=== Exporting all contacts displayed: `export [coming in v1.4]`
+// TODO: find first, then export csv
 
-Export the specified persons from the address book. +
-Format: `export INDEX N FILETYPE`
+// TODO: Add preface
+=== Exporting contact details of a selected person: `export`
+
+Export the name, phone, address and email of the specified person from the addressbook under the specified filetype. +
+Format: `export INDEX FILETYPE`
 
 ****
-Export `N` persons starting from the specified `INDEX`.
-The index refers to the index number shown in the most recent listing.
+* Export the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index *must be a positive integer* 1, 2, 3, ...
 ****
 
 Examples:
 
 * `list` +
-`export 2 1 csv` +
+`export 2 csv` +
 Exports the 2nd person in the address book as a csv file.
 
 * `find Betsy` +
-`export 1 5 vcf` +
-Exports the five persons starting from the 1st person in the results of the `find` command as a vcf file.
+`export 1 csv` +
+Exports the 1st person starting from the 1st person in the results of the `find` command as a csv file.
 
 === Enter or delete personal weekly schedule : `schedule` [coming in v1.4]
 
@@ -283,22 +289,18 @@ Examples:
 
 * `commonschedule p/John Smith p/Jane Doe sd/08092018 ed/01102018 t/1.5`
 
-=== List Unread / New Email / Auto-reply of email: `mail` [coming in v1.4]
+=== Add To-do task: `todo`
 
-Shows a list of unread or new emails of the user. Upen entering the index of the unread emails, the terminal will display the email’s title, body.
-The user can choose whether he wants to send an auto-reply to indicate that he has read it. +
-Format: `mail [i/INDEX]`
+Adds a to-do task, the to-do list panel will display the task's title and its content. +
+Format: `todo tt/TITLE c/CONTENT`
 
 [TIP]
-Keying the index is optional, without keying it, it will list all the mail items in the user’s current mailbox.
+The user is unable to edit the content of the to-do task
 
 Examples:
 
-* `mail`
-* `Expected output: 0/Latest Pomelo Fashion 1/Quora - will PHP die in 2018 2/How to communicate effectively`
-* `mail i/INDEX`
-* `mail i/1`
-* `Expected output: t/Quora - will PHP die in 2018 ct/PHP is terrible blablablablabla s/quora@quora.com E/would you like to send an auto-reply to the sender? (Y/n)`
+* `todo tt/Write tests c/Need to write test for this command`
+* `todo tt/Buy grocery c/Buy tomato and potato on the way back home`
 
 === Exiting the program : `exit` / `x`
 
@@ -346,7 +348,9 @@ e.g.`select 2`
 * *Undo* : `undo`
 * *Redo* : `redo`
 * *ExportAll* : `exportall FILETYPE`
+* *Export* : `export INDEX FILETYPE`
 * *Mail* : `mail [i/INDEX]` (to be added)
+* *Todo* : `todo tt/TITLE c/CONTENT`
 * *List Schedule* : `commonschedule p/PERSON…[PERSON] sd/START-DATE-DDMMYYYY` * *Mail* : `mail [i/INDEX]` +
 (to be added)
 * *Add Schedule* : `addschedule d/DDMMYYYY st/START-TIME et/END-TIME en/EVENT-NAME` * *Mail* : `mail [i/INDEX]` +

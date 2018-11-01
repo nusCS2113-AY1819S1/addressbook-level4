@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.Test;
 
 import seedu.address.logic.commands.ExportAllCommand;
+import seedu.address.model.Filetype;
 
 //@@author jitwei98
 public class ExportAllCommandParserTest {
@@ -14,14 +15,14 @@ public class ExportAllCommandParserTest {
     private ExportAllCommandParser parser = new ExportAllCommandParser();
 
     @Test
-    public void parseFiletypeSuccess() {
+    public void parse_filetype_success() {
         final String userInput = "csv";
-        ExportAllCommand expectedCommand = new ExportAllCommand(userInput);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        final Filetype filetype = new Filetype(userInput);
+        assertParseSuccess(parser, userInput, new ExportAllCommand(filetype));
     }
 
     @Test
-    public void parseMissingNotNullFieldFailure() {
+    public void parse_missingNotNullField_failure() {
         // no parameters
         final String userInput = ExportAllCommand.COMMAND_WORD + " ";
         final String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportAllCommand.MESSAGE_USAGE);

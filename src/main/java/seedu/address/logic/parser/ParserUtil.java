@@ -12,10 +12,15 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Filetype;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EventName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Time;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.todo.Content;
+import seedu.address.model.todo.Title;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -124,19 +129,96 @@ public class ParserUtil {
         return tagSet;
     }
 
+    //@@author jitwei98
     /**
      * Parses a {@code String filetype} into a {@code Filetype}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code String filetype} is invalid.
      */
-    public static String parseFiletype(String filetype) throws ParseException {
+    public static Filetype parseFiletype(String filetype) throws ParseException {
         requireNonNull(filetype);
 
         String trimmedFiletype = filetype.trim();
         if (!isValidFiletype(trimmedFiletype)) {
             throw new ParseException(Filetype.MESSAGE_FILETYPE_CONSTRAINTS);
         }
-        return trimmedFiletype;
+        return new Filetype(trimmedFiletype);
+    }
+
+    //@@author linnnruo
+    /**
+     * Parses a {@code String title} into a {@code Title}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code title} is invalid.
+     */
+    public static Title parseTitle(String title) throws ParseException {
+        requireNonNull(title);
+        String trimmedTitle = title.trim();
+        if (!Title.isValidTitle(trimmedTitle)) {
+            throw new ParseException(Title.MESSAGE_TITLE_CONSTRAINTS);
+        }
+        return new Title(trimmedTitle);
+    }
+
+    /**
+     * Parses a {@code String content} into a {@code Content}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code content} is invalid.
+     */
+    public static Content parseContent(String content) throws ParseException {
+        requireNonNull(content);
+        String trimmedContent = content.trim();
+        if (!Content.isValidContent(trimmedContent)) {
+            throw new ParseException(Content.MESSAGE_CONTENT_CONSTRAINTS);
+        }
+        return new Content(trimmedContent);
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!Date.isValidDate(trimmedDate)) {
+            throw new ParseException(Date.MESSAGE_DATE_CONSTRAINTS);
+        }
+        return new Date(trimmedDate);
+    }
+
+    /**
+     * Parses a {@code String time} into a {@code Time}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code time} is invalid.
+     */
+    public static Time parseTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+        if (!Time.isValidTime(trimmedTime)) {
+            throw new ParseException(Time.MESSAGE_TIME_CONSTRAINTS);
+        }
+        return new Time(trimmedTime);
+    }
+
+    /**
+     * Parses a {@code String eventName} into a {@code EventName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code eventName} is invalid.
+     */
+    public static EventName parseEventName(String eventName) throws ParseException {
+        requireNonNull(eventName);
+        String trimmedEventName = eventName.trim();
+        if (!EventName.isValidEventName(trimmedEventName)) {
+            throw new ParseException(EventName.MESSAGE_EVENT_NAME_CONSTRAINTS);
+        }
+        return new EventName(trimmedEventName);
     }
 }

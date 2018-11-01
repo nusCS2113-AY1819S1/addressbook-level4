@@ -33,10 +33,10 @@ import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.CommandSuggestion;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.suggestions.WrongCommandSuggestion;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -156,7 +156,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         /* Case: invalid keyword -> rejected */
         command = "adds " + PersonUtil.getPersonDetails(toAdd);
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND
-                + "\n" + String.format(CommandSuggestion.SUGGESTION_HEADER, AddCommand.COMMAND_WORD));
+                + "\n" + String.format(WrongCommandSuggestion.SUGGESTION_HEADER, AddCommand.COMMAND_WORD));
 
         /* Case: invalid name -> rejected */
         command = AddCommand.COMMAND_WORD + INVALID_NAME_DESC + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
@@ -224,7 +224,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertSelectedCardUnchanged();
         assertCommandBoxShowsDefaultStyle();
-        assertStatusBarUnchangedExceptSyncStatus();
+        assertStatusBarChangedExceptSaveLocation();
     }
 
     /**

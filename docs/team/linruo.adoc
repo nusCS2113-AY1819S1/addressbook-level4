@@ -1,0 +1,74 @@
+= Bao Lin Ruo - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== Overview
+
+This portfolio is written to document the software engineering process of CS2113T.
+
+== Role: Developer
+
+Code contribution and add extra features on existing addressbook level 4
+
+== Responsibility: Integration and Testing
+
+Overlook version control of the project and ensure that individual software modules are combined and tested as a group.
+
+---
+
+== PROJECT: JitHub
+
+== Overview
+
+JitHub is a desktop personal assistant application that allows students to manage their contacts, schedule and to-do tasks. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 15 kLoC.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to create a to-do task*
+** What it does: allows the user to create to-do tasks.
+** Justification: This feature improves the usability of the product significantly because a user can create a to-do task to remind them the to-dos of the day.
+** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+** Credits: JavaMail, CalendarFx
+
+* *Minor enhancement*: added a calendar view where users can view their schedules, enhancing the overall user interface.
+
+* *Sample Code contributed*: [https://github.com/CS2113-AY1819S1-W12-1/main/blob/master/src/main/java/seedu/address/logic/commands/TodoCommand.java[Functional code]] [https://github.com/CS2113-AY1819S1-W12-1/main/blob/master/src/test/java/seedu/address/logic/commands/TodoCommandTest.java[Test code]]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed release `v1.3` (1 release) on GitHub
+** Enhancements to existing features:
+*** Updated the GUI theme (Pull requests https://github.com/CS2113-AY1819S1-W12-1/main/pull/50[#50], https://github.com/CS2113-AY1819S1-W12-1/main/pull/115[#115])
+*** Wrote additional tests for existing features to increase coverage from 82.51% to 90.16% (Pull request https://github.com/CS2113-AY1819S1-W12-1/main/pull/119[#119])
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2113-AY1819S1-W12-1/main/pull/118[#118]
+*** Did cosmetic tweaks to existing contents of the Developer Guide: https://github.com/CS2113-AY1819S1-W12-1/main/pull/130[#130]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-W12-1/main/pull/121[#121], https://github.com/CS2113-AY1819S1-W12-1/main/pull/120[#120], https://github.com/CS2113-AY1819S1-W12-1/main/pull/95[#95]
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-W12-1/main/issues/77[77], https://github.com/CS2113-AY1819S1-W12-1/main/pull/95[92])
+** Tools:
+*** Integrated a third party library (CalendarFx) to the project (https://github.com/CS2113-AY1819S1-W12-1/main/issues/77[#77])
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+https://github.com/linnnruoo/main_AB4/blob/master/docs/UserGuide.adoc#add-to-do-task-code-todo-code[To-do task]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+https://github.com/linnnruoo/main_AB4/blob/master/docs/DeveloperGuide.adoc#todo-feature[To-do feature]
+
+
+== PROJECT: PowerPointLabs
+
+---

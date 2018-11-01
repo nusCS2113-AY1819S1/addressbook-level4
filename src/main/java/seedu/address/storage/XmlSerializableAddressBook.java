@@ -11,6 +11,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.todo.Todo;
 
 /**
  * An Immutable AddressBook that is serializable to XML format
@@ -19,9 +20,13 @@ import seedu.address.model.person.Person;
 public class XmlSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_TODO = "Todo tasks list contains duplicate todo task(s).";
 
     @XmlElement
     private List<XmlAdaptedPerson> persons;
+
+    @XmlElement
+    private List<XmlAdaptedTodo> todoTasks;
 
     /**
      * Creates an empty XmlSerializableAddressBook.
@@ -29,6 +34,7 @@ public class XmlSerializableAddressBook {
      */
     public XmlSerializableAddressBook() {
         persons = new ArrayList<>();
+        todoTasks = new ArrayList<>();
     }
 
     /**
@@ -37,6 +43,7 @@ public class XmlSerializableAddressBook {
     public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
         this();
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        todoTasks.addAll(src.getTodoList().stream().map(XmlAdaptedTodo::new).collect(Collectors.toList()));
     }
 
     /**
@@ -54,6 +61,15 @@ public class XmlSerializableAddressBook {
             }
             addressBook.addPerson(person);
         }
+
+        for (XmlAdaptedTodo td : todoTasks) {
+            Todo todoTask = td.toModelType();
+            if (addressBook.hasTodo(todoTask)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_TODO);
+            }
+            addressBook.addTodo(todoTask);
+        }
+
         return addressBook;
     }
 
@@ -66,6 +82,7 @@ public class XmlSerializableAddressBook {
         if (!(other instanceof XmlSerializableAddressBook)) {
             return false;
         }
-        return persons.equals(((XmlSerializableAddressBook) other).persons);
+        return persons.equals(((XmlSerializableAddressBook) other).persons)
+                && todoTasks.equals(((XmlSerializableAddressBook) other).todoTasks);
     }
 }

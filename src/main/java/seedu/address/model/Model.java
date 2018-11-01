@@ -1,10 +1,12 @@
 package seedu.address.model;
 
+import java.io.IOException;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.todo.Todo;
 
 /**
  * The API of the Model component.
@@ -12,6 +14,7 @@ import seedu.address.model.tag.Tag;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Todo> PREDICATE_SHOW_ALL_TODOS = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
@@ -86,5 +89,31 @@ public interface Model {
     /**
      * Exports the current address book state to a .csv file.
      */
-    void exportAddressBook();
+    void exportAddressBook() throws IOException;
+
+    /**
+     * Exports the given person to a .csv file.
+     */
+    void exportPerson(Person person) throws IOException;
+
+    /** Returns an unmodifiable view of the filtered todo task list */
+    ObservableList<Todo> getFilteredTodoList();
+
+    /**
+     * Returns true if a todo task with the same fields as {@code todo} exists in the address book.
+     */
+    boolean hasTodo(Todo todo);
+
+    /**
+     * Adds the given todo task.
+     * {@code todo} must not already exist in the address book.
+     */
+    void addTodo(Todo todo);
+
+    /**
+     * Updates the filter of the filtered todo task list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTodoList(Predicate<Todo> predicate);
+
 }

@@ -14,10 +14,10 @@ import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.CommandSuggestion;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.suggestions.WrongCommandSuggestion;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -110,7 +110,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: mixed case command word -> rejected */
         assertCommandFailure("DelETE 1", MESSAGE_UNKNOWN_COMMAND
-                + "\n" + CommandSuggestion.NO_SUGGESTION);
+                + "\n" + WrongCommandSuggestion.NO_SUGGESTION);
     }
 
     /**
@@ -170,7 +170,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         }
 
         assertCommandBoxShowsDefaultStyle();
-        assertStatusBarUnchangedExceptSyncStatus();
+        assertStatusBarChangedExceptSaveLocation();
     }
 
     /**

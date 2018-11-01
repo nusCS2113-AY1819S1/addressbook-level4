@@ -3,10 +3,12 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,6 +39,13 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
+    //@@author linnnruoo
+    public static final String VALID_CONTENT_TASK1 = "Eat my own dog food.";
+    public static final String VALID_CONTENT_TASK2 = "Do my own unit tests.";
+    public static final String VALID_TITLE_TASK1 = "To eat or not to eat";
+    public static final String VALID_TITLE_TASK2 = "To do or not to do";
+
+    //@@author
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -48,12 +57,24 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
+    //@@author linnnruoo
+    public static final String CONTENT_DESC_TASK1 = " " + PREFIX_CONTENT + VALID_CONTENT_TASK1;
+    public static final String CONTENT_DESC_TASK2 = " " + PREFIX_CONTENT + VALID_CONTENT_TASK2;
+    public static final String TITLE_DESC_TASK1 = " " + PREFIX_TITLE + VALID_TITLE_TASK1;
+    public static final String TITLE_DESC_TASK2 = " " + PREFIX_TITLE + VALID_TITLE_TASK2;
+
+    //@@author
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
+    //@@author linnnruoo
+    public static final String INVALID_CONTENT_DESC = " " + PREFIX_CONTENT; // empty string not allowed for content
+    public static final String INVALID_TITLE_DESC = " " + PREFIX_TITLE; // empty string not allowed for titles
+
+    //@@author
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
@@ -137,5 +158,4 @@ public class CommandTestUtil {
         model.deletePerson(firstPerson);
         model.commitAddressBook();
     }
-
 }

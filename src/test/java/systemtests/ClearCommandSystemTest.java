@@ -6,10 +6,10 @@ import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.CommandSuggestion;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.suggestions.WrongCommandSuggestion;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
@@ -55,7 +55,7 @@ public class ClearCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: mixed case command word -> rejected */
         assertCommandFailure("ClEaR", MESSAGE_UNKNOWN_COMMAND
-                + "\n" + CommandSuggestion.NO_SUGGESTION);
+                + "\n" + WrongCommandSuggestion.NO_SUGGESTION);
     }
 
     /**
@@ -79,7 +79,7 @@ public class ClearCommandSystemTest extends AddressBookSystemTest {
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();
-        assertStatusBarUnchangedExceptSyncStatus();
+        assertStatusBarChangedExceptSaveLocation();
     }
 
     /**

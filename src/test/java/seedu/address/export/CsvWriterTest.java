@@ -13,30 +13,32 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
+//@@author jitwei98
 public class CsvWriterTest {
     //  private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     //  model.getFilteredPersonList();
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private CsvWriter csvWriter = new CsvWriter(model.getFilteredPersonList());
+    private Path outputFilepath = Paths.get("data", "addressbook.csv");
+    private CsvWriter csvWriter = new CsvWriter(model.getFilteredPersonList(), outputFilepath);
 
-    private Path expectedPath = Paths.get("data" , "pineapple.csv");
+    private Path expectedPath = Paths.get("data" , "addressbook.csv");
     // AddressBookStub addressBookStub = new AddressBookStub();
-    //  CsvWriter csvWriter = new CsvWriter(new AddressBookStub.getPersonList());
+    // CsvWriter csvWriter = new CsvWriter(new AddressBookStub.getPersonList());
 
     @Test
-    public void getOutputFilepathNotNull() {
+    public void getOutputFilepath_notNull() {
         assertNotNull(csvWriter.getOutputFilepath());
     }
 
     @Test
-    public void getOutputFilepathEqualsDefault() {
+    public void getOutputFilepath_equalsDefault() {
         assertEquals(csvWriter.getOutputFilepath(), expectedPath);
     }
 
     @Test
     public void testWriteToCsv() {
-        // TODO: Implement this!
+        // TODO: Implement this after being able to read from csv
     }
 
 }
