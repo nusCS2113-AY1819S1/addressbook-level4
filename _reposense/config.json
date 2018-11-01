@@ -5,28 +5,24 @@
   "authors":
   [
     {
-      "githubId": "tenvinc",
-      "displayName": "Vincent Neo",
-      "authorNames": ["tenvinc", "Vincent"],
-      "ignoreGlobList": ["**.css"]
+      "githubId": "nguyenngoclinhchi",
+      "displayName": "NGU...CHI",
+      "authorNames": ["nguyenngoclinhchi"]
     },
     {
       "githubId": "tztzt",
-      "displayName": "Teh Zhi Thon",
-      "authorNames": ["tztzt"],
-      "ignoreGlobList": ["**.css"]
+      "displayName": "TEH...HON",
+      "authorNames": ["tztzt"]
     },
     {
-      "githubId": "OscarZeng",
-      "displayName": "Oscar Zeng",
-      "authorNames": ["OscarZeng"],
-      "ignoreGlobList": ["**.css"]
+      "githubId": "Tenvinc",
+      "displayName": "VIN...ONG",
+      "authorNames": ["tenvinc", "Vincent"]
     },
     {
-      "githubId": "nguyenngoclinhchi",
-      "displayName": "Nguyen Ngoc Linh Chi",
-      "authorNames": ["nguyenngoclinhchi"],
-      "ignoreGlobList": ["**.css"]
+      "githubId": "oscarzeng",
+      "displayName": "ZEN...HAO",
+      "authorNames": ["oscarzeng"]
     }
   ]
 }

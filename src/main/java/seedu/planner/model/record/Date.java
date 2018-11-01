@@ -41,9 +41,40 @@ public class Date {
     public Date(String date) {
         requireNonNull(date);
         checkArgument(isValidDateFormat(date), MESSAGE_DATE_CONSTRAINTS);
-        value = date;
         splitDate(date);
-        checkArgument(DateUtil.isValidDate(day, month, year), MESSAGE_DATE_LOGICAL_CONSTRAINTS);
+        value = getStandardValue();
+        checkArgument(DateUtil.isValidDate(day, month), MESSAGE_DATE_LOGICAL_CONSTRAINTS);
+    }
+    /**
+     * Change the (String)value to some Standard Value (follow the format dd-mm-yyyy)
+     * @return standard value Date
+     */
+    public String getStandardValue () {
+        String standardDay;
+        String standardMonth;
+        String standardYear;
+        if (day > 0 && day < 10 && String.valueOf(day).length() == 1) {
+            standardDay = "0" + String.valueOf(day);
+        } else {
+            standardDay = String.valueOf(day);
+        }
+        if (month > 0 && month < 10 && String.valueOf(month).length() == 1) {
+            standardMonth = "0" + String.valueOf(month);
+        } else {
+            standardMonth = String.valueOf(month);
+        }
+        standardYear = String.valueOf(year);
+        String standardValue =
+                String.format(standardDay + "-" + standardMonth + "-" + standardYear);
+        return standardValue;
+    }
+
+    /**
+     * Transform the Date into standard Date following the format dd-mm-yyyy
+     * @return standard Date
+     */
+    public Date getStandardDate() {
+        return new Date (getStandardValue());
     }
 
     /**

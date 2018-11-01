@@ -25,10 +25,10 @@ public class LimitCommand extends Command {
             + PREFIX_DATE + "18-9-2018 " + "20-9-2018 "
             + PREFIX_MONEYFLOW + "100 ";
 
-    public static final String MESSAGE_BASIC_SPEND = "Date Period: %s -- %s.\n The limit you have set: %.2f \n"
+    public static final String MESSAGE_BASIC_SPEND = "Date Period: %s -- %s.\nThe limit you have set: %.2f \n"
             + "Your spend during the limit period: %.2f\n";
 
-    public static final String MESSAGE_BASIC_EARNED = "Date Period: %s -- %s.\n The limit you have set: %.2f \n"
+    public static final String MESSAGE_BASIC_EARNED = "Date Period: %s -- %s.\nThe limit you have set: %.2f \n"
             + "Your income during the limit period: %.2f\n";
     public static final String MESSAGE_EXCEED = "Your spend exceeded the limit !!! \n";
     public static final String MESSAGE_NOT_EXCEED = "Your spend did not exceed the limit ^o^\n";
