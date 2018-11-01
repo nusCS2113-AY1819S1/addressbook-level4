@@ -158,7 +158,7 @@ Examples:
 // end::add[]
 
 //tag::find[]
-=== Locating candidates/companies/job offers : `findc` `findC` `findj` +
+=== Finding candidates/companies/job offers : `findc` `findC` `findj` +
 Each `find` command is differentiated by the letter that comes right after the `find` word. 
 
 Our app’s GUI provides two different views where the Candidate Book view and the Company Book view shows the details of all the candidates and companies respectively. +
