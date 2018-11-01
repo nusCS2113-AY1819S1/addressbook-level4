@@ -22,6 +22,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditEventDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.attendee.Attendee;
+import seedu.address.model.event.Comment;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -69,7 +70,10 @@ public class EditCommandParser implements Parser
         if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
             editEventDescriptor.setDate(ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get()));
         }
-        //editEventDescriptor.setComment(new Comment("{span}Comment Section{/span}{ol}{/ol}"));
+        if (argMultimap.getValue(PREFIX_COMMENT).isPresent()) {
+            editEventDescriptor.setComment(new Comment(ParserUtil.parseComment(argMultimap.getValue(PREFIX_COMMENT)
+                    .get())));
+        }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editEventDescriptor::setTags);
         parseAttendeesForEdit(argMultimap.getAllValues(PREFIX_ATTENDEE)).ifPresent(editEventDescriptor::setAttendees);
 

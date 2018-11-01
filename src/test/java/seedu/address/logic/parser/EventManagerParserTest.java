@@ -68,7 +68,7 @@ public class EventManagerParserTest {
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_EVENT.getOneBased() + " " + EventUtil.getEditEventDescriptorDetails(descriptor));
 
-        assertNotEquals(new EditCommand(INDEX_FIRST_EVENT, descriptor), command);
+        assertEquals(new EditCommand(INDEX_FIRST_EVENT, descriptor), command);
     }
 
     @Test
