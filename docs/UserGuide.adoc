@@ -577,18 +577,19 @@ A list of all notes saved in CS1010 module is displayed. +
 The user will now be able to edit the note that corresponds to INDEX=3 in the list. The modified note will be saved with its attributes changed accordingly.
 
 ==== Delete note : `note delete`
-Deletes a specific note. +
-Format: `note delete INDEX`
+Delete notes. +
+Format: `note delete INDEX [MORE_INDEXES]..`
 
-* Deletes the note with the specified INDEX.
+* Delete notes with the specified INDEX.
+* The command allows for multiple deletion by entering multiple INDEXES separated by space.
 * The INDEX refers to the corresponding number of each note when `note list` command is invoked.
 
 Examples:
 
 * `note list m/CS2040C` +
 A list of all notes saved in CS2040C module is displayed. +
-`note delete 1` +
-Deletes the note that corresponds to INDEX=1 in the list.
+`note delete 2 1` +
+Delete notes that corresponds to INDEX=1 and INDEX=2 from the list.
 
 ==== Find note : `note find`
 Search and display existing notes using keywords. +
@@ -734,7 +735,7 @@ e.g. `class delstudent cn/T16 mc/CG1111 i/A6942069M`
 e.g. `class edit cn/T16 mc/CG1111 e/69`
 * *Accessing class attendance list* `class listattendance cn/CLASS_NAME mc/MODULE_CODE` +
 e.g. `class listattendance cn/T16 mc/CG1111`
-* *Marking class attendance list* `class markattendance cn/CLASS_NAME mc/MODULE_CODE i/MATRIC_NO` +
+* *Marking class attendance list* `class markattendance cn/CLASS_NAME mc/MODULE_CODE i/MATRIC_NO` +no
 e.g. `class markattendance cn/T16 mc/CG1111 i/A6942069M`
 * *Modifying class attendance list* `class modattendance cn/CLASS_NAME mc/MODULE_CODE i/MATRIC_NO` +
 e.g. `class modattendance cn/T16 mc/CG1111 i/A6942069M`
