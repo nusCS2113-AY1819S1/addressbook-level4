@@ -15,14 +15,14 @@ import seedu.planner.commons.util.DateUtil;
 public class Date {
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Date parameter should be in the format of dd-mm-yyyy "
-            + "with dd and mm being 2 digits, and yyyy being 4 digits."
-            + " Please take note that inappropriate date will result in errors, for example: 30/02/2018\n";
+                    + "with dd and mm being 2 digits, and yyyy being 4 digits."
+                    + " Please take note that inappropriate date will result in errors, for example: 30/02/2018";
     public static final String MESSAGE_DATE_LOGICAL_CONSTRAINTS =
             "Date should follow the modern calendar. "
-            + "Day parameter must fit within the constraints of each month. \n"
-            + "For e.g, February has only 28 days for the non-Leap year "
-            + "so the day parameter must be less than or equal to 28 if the month "
-            + "parameter is 2.";
+                    + "Day parameter must fit within the constraints of each month. \n"
+                    + "For e.g, February has only 28 days for the non-Leap year "
+                    + "so the day parameter must be less than or equal to 28 if the month "
+                    + "parameter is 2.";
     public static final String DATE_VALIDATION_REGEX = "\\d{1,2}-\\d{1,2}-\\d{4}";
 
     public final String value;
@@ -45,6 +45,7 @@ public class Date {
         value = getStandardValue();
         checkArgument(DateUtil.isValidDate(day, month), MESSAGE_DATE_LOGICAL_CONSTRAINTS);
     }
+
     /**
      * Change the (String)value to some Standard Value (follow the format dd-mm-yyyy)
      * @return standard value Date
@@ -76,7 +77,6 @@ public class Date {
     public Date getStandardDate() {
         return new Date (getStandardValue());
     }
-
     /**
      * Splits a date into the different parameters and assigns them to day,month,year
      * Format specified: dd-mm-yyyy
@@ -87,6 +87,44 @@ public class Date {
         day = Integer.parseInt(dateParams[0]);
         month = Integer.parseInt(dateParams[1]);
         year = Integer.parseInt(dateParams[2]);
+    }
+
+
+    /**
+     * Returns true if a given string is in a valid date format.
+     */
+    public static boolean isValidDate (String test) {
+        if (test.matches(DATE_VALIDATION_REGEX)) {
+            String[] dateParams = test.split("-");
+            int day = Integer.parseInt(dateParams[0]);
+            int month = Integer.parseInt(dateParams[1]);
+            int year = Integer.parseInt(dateParams[2]);
+            if (day <= 0 || day > 31 || month <= 0 || month > 12 || year <= 0) {
+                return false;
+            } else if (month == 2 || month == 4 || month == 6 || month == 9 || month == 11) {
+                if (day <= 30) {
+                    return month != 2 || day <= 28 || !isLeapYear(year);
+                }
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks if the year is Leap Year or not.
+     * @param year
+     * @return the result whether the year is Leap year.
+     */
+    public static boolean isLeapYear (int year) {
+        if (year % 400 == 0) {
+            return true;
+        } else if (year % 100 == 0) {
+            return false;
+        } else {
+            return year % 4 == 0;
+        }
     }
 
     public static boolean isValidDateFormat(String test) {
@@ -174,14 +212,6 @@ public class Date {
 
     public int getYear() {
         return year;
-    }
-
-    /**
-     * Create Date string code, used in Comparator for the Sort util.
-     */
-    public int hashDateStringCode(String dateString) {
-        Date date = new Date(dateString);
-        return date.getDay() + date.getMonth() * 100 + date.getYear() * 10000;
     }
 
     @Override

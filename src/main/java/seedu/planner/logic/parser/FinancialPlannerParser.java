@@ -6,8 +6,8 @@ import static seedu.planner.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.planner.logic.commands.AchieveCommand;
 import seedu.planner.logic.commands.AddCommand;
+import seedu.planner.logic.commands.ArchiveCommand;
 import seedu.planner.logic.commands.CheckLimitCommand;
 import seedu.planner.logic.commands.ClearCommand;
 import seedu.planner.logic.commands.Command;
@@ -31,7 +31,6 @@ import seedu.planner.logic.commands.SortCommand;
 import seedu.planner.logic.commands.StatisticCommand;
 import seedu.planner.logic.commands.SummaryCommand;
 import seedu.planner.logic.commands.UndoCommand;
-
 import seedu.planner.logic.parser.exceptions.ParseException;
 
 
@@ -130,8 +129,8 @@ public class FinancialPlannerParser {
         case ImportExcelCommand.COMMAND_WORD:
             return new ImportExcelCommandParser().parse(arguments);
 
-        case AchieveCommand.COMMAND_WORD:
-            return new AchieveCommandParser().parse(arguments);
+        case ArchiveCommand.COMMAND_WORD:
+            return new ArchiveCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

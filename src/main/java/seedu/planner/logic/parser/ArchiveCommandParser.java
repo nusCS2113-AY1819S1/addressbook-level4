@@ -7,14 +7,14 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 
 import seedu.planner.commons.core.Messages;
-import seedu.planner.logic.commands.AchieveCommand;
+import seedu.planner.logic.commands.ArchiveCommand;
 import seedu.planner.logic.parser.exceptions.ParseException;
 import seedu.planner.model.record.Date;
 
 /**
  * Achieve the records, export into  Excel file then delete all records exported.
  */
-public class AchieveCommandParser implements Parser<AchieveCommand> {
+public class ArchiveCommandParser implements Parser<ArchiveCommand> {
     private static String whiteSpace = " ";
 
     /**
@@ -22,10 +22,10 @@ public class AchieveCommandParser implements Parser<AchieveCommand> {
      * @return an ExportExcelCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format.
      */
-    public AchieveCommand parse(String args) throws ParseException {
+    public ArchiveCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
-            return new AchieveCommand();
+            return new ArchiveCommand();
         }
         String stringDate = whiteSpace;
         String stringPath = whiteSpace;
@@ -40,7 +40,7 @@ public class AchieveCommandParser implements Parser<AchieveCommand> {
         }
         if (!isDateExist && !isPathExist) {
             throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AchieveCommand.MESSAGE_USAGE));
+                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ArchiveCommand.MESSAGE_USAGE));
         }
         if (isDateExist) {
             stringDate = argMultimap.getValue(PREFIX_DATE).get();
@@ -49,7 +49,7 @@ public class AchieveCommandParser implements Parser<AchieveCommand> {
             stringPath = argMultimap.getValue(PREFIX_DIR).get();
         }
         if (stringDate.trim().isEmpty() && stringPath.trim().isEmpty()) {
-            return new AchieveCommand();
+            return new ArchiveCommand();
         }
         return parseArgumentsModeIntoCommand(stringDate.trim(), stringPath.trim());
     }
@@ -57,12 +57,12 @@ public class AchieveCommandParser implements Parser<AchieveCommand> {
     /**
      * Parse the arguments into different argument mode, hence, we will have different command mode.
      */
-    private static AchieveCommand parseArgumentsModeIntoCommand (String stringDate, String stringPath)
+    private static ArchiveCommand parseArgumentsModeIntoCommand (String stringDate, String stringPath)
             throws ParseException {
         String directoryPath;
         if (stringDate.isEmpty()) {
             directoryPath = ParserUtil.parseDirectoryString(stringPath);
-            return new AchieveCommand(directoryPath);
+            return new ArchiveCommand(directoryPath);
         } else {
             String[] dates = splitByWhitespace(stringDate);
             return parseDateIntoDifferentMode(dates, stringPath);
@@ -72,29 +72,29 @@ public class AchieveCommandParser implements Parser<AchieveCommand> {
     /**
      * Parse the string Date into different mode, hence return different commands.
      */
-    private static AchieveCommand parseDateIntoDifferentMode (String[] dates, String stringPath)
+    private static ArchiveCommand parseDateIntoDifferentMode (String[] dates, String stringPath)
             throws ParseException {
         Date startDate;
         Date endDate;
         String directoryPath;
         int dateNum = Arrays.asList(dates).size();
-        if (dateNum > AchieveCommand.DUO_MODE) {
+        if (dateNum > ArchiveCommand.DUO_MODE) {
             throw new ParseException(
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT
-                            + Messages.MESSAGE_INVALID_DATE_REQUIRED, AchieveCommand.MESSAGE_USAGE));
-        } else if (dateNum == AchieveCommand.SINGLE_MODE) {
-            startDate = ParserUtil.parseDate(Arrays.asList(dates).get(AchieveCommand.FIRST_ELEMENT).trim());
-            endDate = ParserUtil.parseDate(Arrays.asList(dates).get(AchieveCommand.FIRST_ELEMENT).trim());
+                            + Messages.MESSAGE_INVALID_DATE_REQUIRED, ArchiveCommand.MESSAGE_USAGE));
+        } else if (dateNum == ArchiveCommand.SINGLE_MODE) {
+            startDate = ParserUtil.parseDate(Arrays.asList(dates).get(ArchiveCommand.FIRST_ELEMENT).trim());
+            endDate = ParserUtil.parseDate(Arrays.asList(dates).get(ArchiveCommand.FIRST_ELEMENT).trim());
         } else {
-            startDate = ParserUtil.parseDate(Arrays.asList(dates).get(AchieveCommand.FIRST_ELEMENT).trim());
-            endDate = ParserUtil.parseDate(Arrays.asList(dates).get(AchieveCommand.SECOND_ELEMENT).trim());
+            startDate = ParserUtil.parseDate(Arrays.asList(dates).get(ArchiveCommand.FIRST_ELEMENT).trim());
+            endDate = ParserUtil.parseDate(Arrays.asList(dates).get(ArchiveCommand.SECOND_ELEMENT).trim());
         }
         if (isDateOrderValid(startDate, endDate)) {
             if (stringPath == null || stringPath.isEmpty()) {
-                return new AchieveCommand(startDate, endDate);
+                return new ArchiveCommand(startDate, endDate);
             } else {
                 directoryPath = ParserUtil.parseDirectoryString(stringPath);
-                return new AchieveCommand(startDate, endDate, directoryPath);
+                return new ArchiveCommand(startDate, endDate, directoryPath);
             }
         } else {
             throw new ParseException(Messages.MESSAGE_INVALID_STARTDATE_ENDDATE);

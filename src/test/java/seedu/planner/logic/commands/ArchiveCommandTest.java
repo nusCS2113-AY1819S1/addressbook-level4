@@ -24,7 +24,7 @@ import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
 import seedu.planner.testutil.TypicalRecords;
 
-public class AchieveCommandTest {
+public class ArchiveCommandTest {
     private Model model = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
@@ -37,14 +37,14 @@ public class AchieveCommandTest {
         String directoryPath = HOME_DIRECTORY_STRING;
         String directoryPath1 = DirectoryPath.WORKING_DIRECTORY_STRING;
 
-        AchieveCommand achieveCommand11 = new AchieveCommand();
-        AchieveCommand achieveCommand21 = new AchieveCommand(directoryPath);
-        AchieveCommand achieveCommand31 = new AchieveCommand(startDate1, endDate1);
-        AchieveCommand achieveCommand41 = new AchieveCommand(startDate1, endDate1, directoryPath);
+        ArchiveCommand achieveCommand11 = new ArchiveCommand();
+        ArchiveCommand achieveCommand21 = new ArchiveCommand(directoryPath);
+        ArchiveCommand achieveCommand31 = new ArchiveCommand(startDate1, endDate1);
+        ArchiveCommand achieveCommand41 = new ArchiveCommand(startDate1, endDate1, directoryPath);
 
-        AchieveCommand achieveCommand22 = new AchieveCommand(directoryPath1);
-        AchieveCommand achieveCommand32 = new AchieveCommand(startDate2, endDate2);
-        AchieveCommand achieveCommand42 = new AchieveCommand(startDate2, endDate2, directoryPath1);
+        ArchiveCommand achieveCommand22 = new ArchiveCommand(directoryPath1);
+        ArchiveCommand achieveCommand32 = new ArchiveCommand(startDate2, endDate2);
+        ArchiveCommand achieveCommand42 = new ArchiveCommand(startDate2, endDate2, directoryPath1);
 
         // same object -> returns true
         Assert.assertTrue(achieveCommand11.equals(achieveCommand11));
@@ -53,10 +53,10 @@ public class AchieveCommandTest {
         Assert.assertTrue(achieveCommand41.equals(achieveCommand41));
 
         // same value -> returns true
-        AchieveCommand achieveCommand11Copy = new AchieveCommand();
-        AchieveCommand achieveExcelCommand21Copy = new AchieveCommand(directoryPath);
-        AchieveCommand achieveExcelCommand31Copy = new AchieveCommand(startDate1, endDate1);
-        AchieveCommand achieveExcelCommand41Copy = new AchieveCommand(startDate1, endDate1, directoryPath);
+        ArchiveCommand achieveCommand11Copy = new ArchiveCommand();
+        ArchiveCommand achieveExcelCommand21Copy = new ArchiveCommand(directoryPath);
+        ArchiveCommand achieveExcelCommand31Copy = new ArchiveCommand(startDate1, endDate1);
+        ArchiveCommand achieveExcelCommand41Copy = new ArchiveCommand(startDate1, endDate1, directoryPath);
 
         Assert.assertTrue(achieveCommand11.equals(achieveCommand11Copy));
         Assert.assertTrue(achieveCommand21.equals(achieveExcelCommand21Copy));
@@ -79,7 +79,7 @@ public class AchieveCommandTest {
         Model expectedModel = model;
         String nameFile = ExcelUtil.setNameExcelFile(
                 TypicalRecords.TYPICAL_START_DATE1, TypicalRecords.TYPICAL_END_DATE1);
-        AchieveCommand command = new AchieveCommand(
+        ArchiveCommand command = new ArchiveCommand(
                 TypicalRecords.TYPICAL_START_DATE1, TypicalRecords.TYPICAL_END_DATE1);
         String expectedMessage;
         expectedModel.updateFilteredRecordList(new DateIsWithinIntervalPredicate(
@@ -107,7 +107,7 @@ public class AchieveCommandTest {
         String expectedMessage = String.format(
                 Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY + Messages.MESSAGE_ACHIEVE_SUCCESSFULLY,
                 nameFile, HOME_DIRECTORY_STRING);
-        AchieveCommand command = new AchieveCommand(
+        ArchiveCommand command = new ArchiveCommand(
                 TypicalRecords.TYPICAL_START_FAR_DATE, TypicalRecords.TYPICAL_END_FAR_DATE, HOME_DIRECTORY_STRING);
         expectedModel.updateFilteredRecordList(new DateIsWithinIntervalPredicate(
                 TypicalRecords.TYPICAL_START_FAR_DATE, TypicalRecords.TYPICAL_END_FAR_DATE));

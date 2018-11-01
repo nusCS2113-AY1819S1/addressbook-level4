@@ -25,8 +25,8 @@ import seedu.planner.ui.SummaryEntry;
 /**
  * Achieve the records into Excel file and then deletes all the records exported.
  */
-public class AchieveCommand extends Command {
-    public static final String COMMAND_WORD = "achieve";
+public class ArchiveCommand extends Command {
+    public static final String COMMAND_WORD = "archive";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Achieve the records within specific period or all records in the Financial Planner into Excel file.\n"
             + "All the records exported into Excel file will be deleted in the current Financial Planner.\n"
@@ -54,28 +54,28 @@ public class AchieveCommand extends Command {
     private final String directoryPath;
     private final Predicate<Record> predicate;
 
-    public AchieveCommand() {
+    public ArchiveCommand() {
         this.startDate = null;
         this.endDate = null;
         this.directoryPath = DirectoryPath.HOME_DIRECTORY_STRING;
         this.predicate = PREDICATE_SHOW_ALL_RECORDS;
     }
 
-    public AchieveCommand(String directoryPath) {
+    public ArchiveCommand(String directoryPath) {
         this.startDate = null;
         this.endDate = null;
         this.directoryPath = directoryPath;
         this.predicate = PREDICATE_SHOW_ALL_RECORDS;
     }
 
-    public AchieveCommand(Date startDate, Date endDate) {
+    public ArchiveCommand(Date startDate, Date endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.directoryPath = DirectoryPath.HOME_DIRECTORY_STRING;
         this.predicate = new DateIsWithinIntervalPredicate(startDate, endDate);
     }
 
-    public AchieveCommand(Date startDate, Date endDate, String directoryPath) {
+    public ArchiveCommand(Date startDate, Date endDate, String directoryPath) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.directoryPath = directoryPath;
@@ -123,8 +123,8 @@ public class AchieveCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AchieveCommand // instanceof handles nulls
-                && predicate.equals(((AchieveCommand) other).predicate)
-                && directoryPath.equals(((AchieveCommand) other).directoryPath)); // state check
+                || (other instanceof ArchiveCommand // instanceof handles nulls
+                && predicate.equals(((ArchiveCommand) other).predicate)
+                && directoryPath.equals(((ArchiveCommand) other).directoryPath)); // state check
     }
 }

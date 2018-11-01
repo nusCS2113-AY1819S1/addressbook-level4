@@ -254,6 +254,8 @@ Deletes the 2nd record in the expense book.
 `delete 1` +
 Deletes the 1st record in the results of the `find` command.
 
+// tag::delete_by_date_entry[]
+
 === Deleting records by date. `delete_date`
 
 Deletes the records with a specified date from the expense book. +
@@ -268,6 +270,8 @@ Examples:
 
 * `delete_date 31-7-2018` +
 Deletes the records with date 31-7-2018.
+
+// end::delete_by_date_entry[]
 
 === Listing entered commands : `history`
 
@@ -301,17 +305,6 @@ Examples:
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
 
-<<<<<<< HEAD
-// tag::delete_by_date_entry[]
-
-=== Delete records in same date. `delete_date`
-=======
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
->>>>>>> 3ebf123636cf3ff2a70d4a3f0fd64681d645c9dd
-
 === Redoing the previously undone command : `redo`
 
 Reverses the most recent `undo` command. +
@@ -323,17 +316,9 @@ Examples:
 `undo` (reverses the `delete 1` command) +
 `redo` (reapplies the `delete 1` command) +
 
-<<<<<<< HEAD
-// end::delete_by_date_entry[]
-
-// tag::export_excel[]
-
-=== Export the records into the Excel file. `export_excel`
-=======
 * `delete 1` +
 `redo` +
 The `redo` command fails as there are no `undo` commands executed previously.
->>>>>>> 3ebf123636cf3ff2a70d4a3f0fd64681d645c9dd
 
 * `delete 1` +
 `clear` +
@@ -475,6 +460,8 @@ Screenshot of app displaying expense breakdown when `stats d/1-1-2018 12-12-2018
 image::UiPieChartIncome.png[width="790"]
 Screenshot of app displaying income breakdown when `stats d/1-1-2018 12-12-2018` is run
 
+// tag::export_excel[]
+
 === Export the records into the Excel file. `export_excel`
 
 Exports the records into an Excel file. +
@@ -505,6 +492,19 @@ Format: +
 +
 ****
 
+The Excel file name will be named based on the command, relating to Date: +
+
+* *Default mode*: The Excel file will be named `Financial_Planner_ALL.xlsx`
+* *Single argument Date mode*: The Excel file will be named `Financial_Planner_dd-mm-yyyy.xlsx`
+* *Dual argument Date*: The Excel file will be named `Financial_Planner_dd-mm-yyyy_dd-mm-yyyy.xlsx`
++
+
+
+In The Excel file, there will be 2 sheets: +
+
+* The first one named `RECORD DATA` (stores all the data of record the user want to export, there are 4 columns: Name, date, money and tags, the tags names will be separated by ..., for visual benefit).
+* The second one named `SUMMARY DATA` (stored the summary statistics for the period you exported, and there is a *Line Chart* next to the table for visual statistic [refer to `Draw line chart` part for more information].
+
 Examples:
 
 * `export_excel`
@@ -512,6 +512,64 @@ Examples:
 * `export_excel d/31-3-1999 31-03-2019`
 * `export_excel d/31-3-1999 dir/C:\`
 * `export_excel d/31-3-1999 31-3-2019 dir/C:\`
+
+// end::export_excel[]
+
+// tag::export_excel[]
+
+=== Archive the records into the Excel file. `archive`
+
+Exports the records into an Excel file. +
+
+
+There are 3 modes, default mode, single argument mode and dual argument mode (for Date) and single argument mode (Directory Path). +
+Format: +
+
+* Default mode: `export_excel` +
+* Single argument Date mode: `export_excel d/DATE` +
+* Dual argument Date mode: `export_excel d/START_DATE END_DATE`
+* Single argument Directory Path mode: `export_excel dir/DIRECTORY_PATH`
+* Single argument Directory Path + Single argument Date mode: `export_excel d/DATE dir/DIRECTORY_PATH`
+* Single argument Directory Path + Dual argument Date mode: `export_excel d/START_DATE END_DATE dir/DIRECTORY_PATH`
+
+****
+* *Default mode* will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically user's Home Directory*.
+
+* *Single argument Date mode* will list down all records with the specified date and exports all shown records to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically user's Home Directory*.
+
+* *Dual argument Date mode* will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically user's Home Directory*.
+
+* *Single argument Directory Path mode* will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the chosen Directory Path.
+
+* *Single argument Date mode + Single argument Directory path mode* will list down all records with the specified date and exports all shown records to an Excel file and store the file in the chosen Directory Path.
+
+* *Dual argument Date mode + Single argument Directory path mode* will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the chosen Directory Path.
++
+****
+
+The Excel file name will be named based on the command, relating to Date: +
+
+* *Default mode*: The Excel file will be named `Financial_Planner_ALL.xlsx`
+* *Single argument Date mode*: The Excel file will be named `Financial_Planner_dd-mm-yyyy.xlsx`
+* *Dual argument Date*: The Excel file will be named `Financial_Planner_dd-mm-yyyy_dd-mm-yyyy.xlsx`
++
+
+
+In The Excel file, there will be 2 sheets: +
+
+* The first one named `RECORD DATA` (stores all the data of record the user want to export, there are 4 columns: Name, date, money and tags, the tags names will be separated by ..., for visual benefit).
+* The second one named `SUMMARY DATA` (stored the summary statistics for the period you exported, and there is a *Line Chart* next to the table for visual statistic [refer to `Draw line chart` part for more information].
+
+Examples:
+
+* `export_excel`
+* `export_excel d/31-3-1999`
+* `export_excel d/31-3-1999 31-03-2019`
+* `export_excel d/31-3-1999 dir/C:\`
+* `export_excel d/31-3-1999 31-3-2019 dir/C:\`
+
+// end::export_excel[]
+
 
 == Spending Limit Feature
 
