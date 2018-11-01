@@ -338,6 +338,15 @@ image::CompleteUncompleteTaskSequenceDiagram.png[width="800"]
 ** Cons: We must ensure that the implementation of each individual methods are correct.
 // end::completeuncomplete[]
 
+// tag::viewtask[]
+=== Viewing Tasks feature
+==== Current Implementation
+
+==== Design Considerations
+
+===== Aspect:
+// end::viewtask[]
+
 // tag::sorttask[]
 === Sort To-do list
 

@@ -56,6 +56,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 Shows a list of commands +
 Format: `help`
 
+// tag::TDLadd[]
 === Adding a task: `TDL_add`
 
 Adds a task to the to-do list +
@@ -71,7 +72,9 @@ Format: `TDL_add t/TASK m/MODULE d/DATE p/PRIORITY`
 Examples:
 
 * `TDL_add t/Tutorial 5 m/CS2101 d/12-09 p/1`
+// end::TDLadd[]
 
+// tag::TDLedit[]
 === Editing a task : `TDL_edit`
 
 Edits an existing task in the to-do list. +
@@ -90,7 +93,9 @@ Examples:
 Edits the task name and module code of the 1st task to be `Tutorial 2` and `CS2113` respectively.
 * `TDL_edit 2 t/Tutorial 2 d/ p/` +
 [Coming in v2.0] Edits the task name of the 2nd task to be `Tutorial 2` and clears all existing deadlines and priority tags associated with this task.
+// end::TDLedit[]
 
+// tag::TDLdelete[]
 === Deleting a task : `TDL_delete`
 
 Deletes the specified task from the to-do list. +
@@ -108,7 +113,9 @@ Examples:
 Deletes the 2nd task in the to-do list.
 * `TDL_delete 1` +
 Deletes the 1st task in the to-do list.
+// end::TDLdelete[]
 
+// tag::TDLcomplete[]
 === Marking a task as completed: `TDL_complete`
 
 Marks the specified task in the to-do list as completed. +
@@ -124,7 +131,9 @@ Examples:
 
 * `TDL_complete 3` +
 The 3rd task in the to-do list is now marked as completed.
+// end::TDLcomplete[]
 
+// tag::TDLuncomplete[]
 === Marking a task as uncompleted: `TDL_uncomplete`
 
 Marks the specific task in the to-do list as uncompleted. +
@@ -140,7 +149,9 @@ Examples:
 
 * `TDL_uncomplete 3` +
 The 3rd task in the to-do list is now marked as uncompleted.
+// end::TDLuncomplete[]
 
+// tag::TDLview[]
 === Viewing tasks : `TDL_view`
 
 Shows a filtered list of tasks in the to-do list. +
@@ -150,7 +161,7 @@ Format: `TDL_view PARAMETER`
 * PARAMETER is either `completed`, `uncompleted` or `all`.
 * The default view for the to-do list upon starting up is _all tasks_.
 * Performing `TDL_view uncompleted` with the to-do list displaying _uncompleted tasks_ will not result in any changes. The same is applied to _completed tasks_ list with `TDL_view completed` command.
-* The GUI should allow the user to understand which list they are currently looking at. [Coming in v1.4]
+* The GUI should allow the user to understand which list they are currently looking at. [Coming in v2.0]
 ****
 
 Examples:
@@ -160,7 +171,9 @@ The list is now populated with tasks marked as completed.
 
 * `TDL_view all` +
 The list is now populated with all tasks regardless of their completion status.
+// end::TDLview[]
 
+// tag::TDLsort[]
 === Sorting tasks : `TDL_sort`
 
 Sorts and displays the to-do list by a certain tag. +
@@ -179,6 +192,7 @@ Examples:
 The tasks are now sorted by its due date.
 * `TDL_view uncompleted` + `TDL_sort priority` +
 All uncompleted tasks will be sorted by their priority level.
+// end::TDLsort[]
 
 // tag::ETadd[]
 === Adding an expenditure : `ET_add`
