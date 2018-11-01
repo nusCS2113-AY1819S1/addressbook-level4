@@ -51,19 +51,19 @@ public class CandidateContainsKeywordsPredicateTest {
         // One keyword
         CandidateContainsKeywordsPredicate predicate =
                 new CandidateContainsKeywordsPredicateBuilder("n/Alice").getCandidatePredicate();
-        assertTrue(predicate.test(new CandidateBuilder().withName("n/Alice n/Bob").build()));
+        assertTrue(predicate.test(new CandidateBuilder().withName("Alice Bob").build()));
 
         // Multiple keywords
         predicate = new CandidateContainsKeywordsPredicateBuilder("n/Alice n/Bob").getCandidatePredicate();
-        assertTrue(predicate.test(new CandidateBuilder().withName("n/Alice n/Bob").build()));
+        assertTrue(predicate.test(new CandidateBuilder().withName("Alice Bob").build()));
 
         // Only one matching keyword
         predicate = new CandidateContainsKeywordsPredicateBuilder("n/Bob n/Carol").getCandidatePredicate();
-        assertTrue(predicate.test(new CandidateBuilder().withName("n/Alice n/Carol").build()));
+        assertTrue(predicate.test(new CandidateBuilder().withName("Alice Carol").build()));
 
         // Mixed-case keywords
         predicate = new CandidateContainsKeywordsPredicateBuilder("n/aLIce n/bOB").getCandidatePredicate();
-        assertTrue(predicate.test(new CandidateBuilder().withName("n/Alice n/Bob").build()));
+        assertTrue(predicate.test(new CandidateBuilder().withName("Alice Bob").build()));
     }
 
     @Test
@@ -72,11 +72,11 @@ public class CandidateContainsKeywordsPredicateTest {
         // Zero keywords
         CandidateContainsKeywordsPredicate predicate =
                 new CandidateContainsKeywordsPredicate((HashMap<String, List<String>> ) Collections.EMPTY_MAP);
-        assertFalse(predicate.test(new CandidateBuilder().withName("n/Alice").build()));
+        assertFalse(predicate.test(new CandidateBuilder().withName("Alice").build()));
 
         // Non-matching keyword
         predicate = new CandidateContainsKeywordsPredicateBuilder("n/Carol").getCandidatePredicate();
-        assertFalse(predicate.test(new CandidateBuilder().withName("n/Alice n/Bob").build()));
+        assertFalse(predicate.test(new CandidateBuilder().withName("Alice Bob").build()));
 
         // Keywords match phone, email and recruit, but does not match name
         predicate = new CandidateContainsKeywordsPredicateBuilder(
