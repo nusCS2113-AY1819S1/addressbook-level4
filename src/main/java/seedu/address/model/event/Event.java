@@ -213,12 +213,29 @@ public class Event implements Comparable<Event> {
         return this.getEventName().fullName.compareTo(other.getEventName().fullName);
     }
 
+
+    /**
+     * Compare the date between the events
+     * If both events have the same date then compare their start time
+     **/
     public int compareDateTo(Event other) {
-        return this.getDate().eventDate.compareTo(other.getDate().eventDate);
+        int compareValue = this.getDate().eventDate.compareTo(other.getDate().eventDate);
+        if (compareValue == 0) {
+            return this.getStartTime().compareTo(other.getStartTime());
+        }
+        return compareValue;
     }
 
+    /**
+     * Compare the start time between the events
+     * If both events have the same start time then compare their date
+     **/
     public int compareStartTimeTo(Event other) {
-        return this.getStartTime().compareTo(other.getStartTime());
+        int compareValue = this.getStartTime().compareTo(other.getStartTime());
+        if (compareValue == 0) {
+            return this.getDate().eventDate.compareTo(other.getDate().eventDate);
+        }
+        return compareValue;
     }
 
     public int compareEndTimeTo(Event other) {
