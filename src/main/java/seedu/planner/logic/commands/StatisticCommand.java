@@ -46,4 +46,11 @@ public class StatisticCommand extends Command {
     public List<Record> filterRecordListByPredicate(List<Record> recordList, Predicate<Record> predicate) {
         return recordList.stream().filter(predicate).collect(Collectors.toList());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof StatisticCommand // instanceof handles nulls
+                && predicate.equals(((StatisticCommand) other).predicate));
+    }
 }
