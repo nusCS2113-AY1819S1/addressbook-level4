@@ -52,7 +52,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/EVENT p/PHONE_NUMBER`, `p/PHONE_NUMBER n/EVENT` is also acceptable.
 ====
 
-[NOTE]
+[IMPORTANT]
 ====
 Only `select` and `list` commands can be performed without logging in. Also, `add`, `edit`, `delete` and `deleteComment` can only performed by the admin account.
 ====
@@ -61,7 +61,7 @@ Only `select` and `list` commands can be performed without logging in. Also, `ad
 === Signing up for an account : `signup`
 
 User: Creates a *user* account +
-Format: `signup u/USERNAME p/PASSWORD +
+Format: `signup u/USERNAME p/PASSWORD` +
 Examples:
 
 * `signup u/Gerald Chua p/password12345` +
