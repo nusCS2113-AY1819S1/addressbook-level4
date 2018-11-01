@@ -72,6 +72,7 @@ Examples:
 
 * `login n/Gerald Chua p/password12345` +
 Logs in Gerald Chua +
+
 * `login u/James Yaputra p/drowssap12345` +
 Logs in James Yaputra
 
@@ -83,6 +84,7 @@ Examples:
 
 * `login u/Gerald Chua p/password12345` +
 Logs in Gerald Chua +
+
 * `logout` +
 Logs out from Gerald Chua
 // end::authentication[]

@@ -1,5 +1,15 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
+
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
@@ -8,7 +18,6 @@ import seedu.address.model.attendee.Attendee;
 import seedu.address.model.event.Event;
 import seedu.address.model.tag.Tag;
 
-import static seedu.address.logic.parser.CliSyntax.*;
 
 /**
  * A utility class for Event.
