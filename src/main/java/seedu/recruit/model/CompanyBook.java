@@ -2,7 +2,6 @@ package seedu.recruit.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.recruit.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.recruit.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,10 +118,16 @@ public class CompanyBook implements ReadOnlyCompanyBook {
      * Sorts the company list
      */
     public void sortCompanies(Prefix prefix) {
-        if (prefix == PREFIX_COMPANY_NAME) {
+        String prefixString = prefix.toString();
+        switch (prefixString) {
+        case "c/":
             companyList.sortByCompanyName();
-        } else {
+            break;
+        case "e/":
             companyList.sortByEmail();
+            break;
+        default:
+            companyList.sortInReverse();
         }
     }
 

@@ -75,6 +75,10 @@ public class JobOffer {
         candidateList.add(shortlistedCandidate);
     }
 
+    public void deleteShortlistedCandidate(Candidate shortlistedCandidate) {
+        candidateList.remove(shortlistedCandidate);
+    }
+
     /**
      * Returns true if both job offers have the same job identity fields
      */

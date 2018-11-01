@@ -13,6 +13,7 @@ import seedu.recruit.logic.commands.AddCandidateCommand;
 import seedu.recruit.logic.commands.AddCompanyCommand;
 import seedu.recruit.logic.commands.AddJobCommand;
 import seedu.recruit.logic.commands.AddJobDetailsCommand;
+import seedu.recruit.logic.commands.BlacklistCommand;
 import seedu.recruit.logic.commands.CancelCommand;
 import seedu.recruit.logic.commands.ClearCandidateBookCommand;
 import seedu.recruit.logic.commands.ClearCompanyBookCommand;
@@ -20,6 +21,8 @@ import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.DeleteCandidateCommand;
 import seedu.recruit.logic.commands.DeleteCompanyCommand;
 import seedu.recruit.logic.commands.DeleteJobOfferCommand;
+import seedu.recruit.logic.commands.DeleteShortlistedCandidateCommand;
+import seedu.recruit.logic.commands.DeleteShortlistedCandidateInitializationCommand;
 import seedu.recruit.logic.commands.EditCandidateCommand;
 import seedu.recruit.logic.commands.EditCompanyCommand;
 import seedu.recruit.logic.commands.EditJobDetailsCommand;
@@ -98,10 +101,15 @@ public class RecruitBookParser {
                 return new EmailParser().parseCommand(commandWord, arguments, state, emailUtil);
 
             case ShortlistCandidateCommand.COMMAND_LOGIC_STATE:
-            case SelectCompanyCommand.COMMAND_LOGIC_STATE:
-            case SelectJobCommand.COMMAND_LOGIC_STATE:
+            case SelectCompanyCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST:
+            case SelectJobCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST:
             case SelectCandidateCommand.COMMAND_LOGIC_STATE:
                 return new ShortlistParser().parseCommand(commandWord, arguments, state);
+
+            case DeleteShortlistedCandidateCommand.COMMAND_LOGIC_STATE:
+            case SelectCompanyCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST_DELETE:
+            case SelectJobCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST_DELETE:
+                return new DeleteShortlistedCandidateParser().parseCommand(commandWord, arguments, state);
 
             default:
                 LogicManager.setLogicState("primary");
@@ -117,6 +125,9 @@ public class RecruitBookParser {
 
             case AddCompanyCommand.COMMAND_WORD:
                 return new AddCompanyCommandParser().parse(arguments);
+
+            case BlacklistCommand.COMMAND_WORD:
+                return new BlacklistCommandParser().parse(arguments);
 
             case EditCandidateCommand.COMMAND_WORD:
                 return new EditCandidateCommandParser().parse(arguments);
@@ -144,6 +155,9 @@ public class RecruitBookParser {
 
             case DeleteJobOfferCommand.COMMAND_WORD:
                 return new DeleteJobOfferCommandParser().parse(arguments);
+
+            case DeleteShortlistedCandidateInitializationCommand.COMMAND_WORD:
+                return new DeleteShortlistedCandidateInitializationCommand();
 
             case ClearCandidateBookCommand.COMMAND_WORD:
                 return new ClearCandidateBookCommand();

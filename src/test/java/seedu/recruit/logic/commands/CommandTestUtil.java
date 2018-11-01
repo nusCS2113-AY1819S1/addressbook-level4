@@ -196,7 +196,6 @@ public class CommandTestUtil {
         final String[] splitName = candidate.getName().fullName.split("\\s+");
         model.updateFilteredCandidateList(
                 new CandidateContainsKeywordsPredicateBuilder(" n/" + splitName[0]).getCandidatePredicate());
-
         assertEquals(1, model.getFilteredCandidateList().size());
     }
 
@@ -401,7 +400,12 @@ public class CommandTestUtil {
         }
 
         @Override
-        public void shortListCandidateToJobOffer(Candidate candidate, JobOffer jobOffer) {
+        public void shortlistCandidateToJobOffer(Candidate candidate, JobOffer jobOffer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteShortlistedCandidateFromJobOffer(Candidate candidate, JobOffer jobOffer) {
             throw new AssertionError("This method should not be called.");
         }
 
