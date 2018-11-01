@@ -180,6 +180,7 @@ Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 
+// tag::timeslot[]
 === Add a timeslot to your timetable: `addtime` (`at`)
 
 Adds a timeslot to your timetable.
@@ -239,6 +240,7 @@ Deletes the timeslot from 13:00 to 14:00 on Friday from your timetable.
 
 * `deletetime Wed 17-18` +
 Deletes the timeslot from 17:00 to 18:00 on Wednesday from your timetable.
+// end::timeslot[]
 
 === Selecting a person : `select` (`s`)
 
@@ -259,7 +261,8 @@ Selects the 2nd person listed in your friend list.
 `select 1` +
 Selects the 1st person in the results of the `find` command.
 
-=== Show free slots among selected people `free`
+// tag::freecommand[]
+=== Show free slots among selected people: `free`
 
 Highlights timeslots where everyone specified is free.
 
@@ -280,6 +283,7 @@ After executing the command, you should see the following:
 
 .Timeslots highlighted in red are unavailable.
 image::FreeTimeSuccess.png[width="600"]
+// end::freecommand[]
 
 === Listing entered commands : `history` (`g`)
 

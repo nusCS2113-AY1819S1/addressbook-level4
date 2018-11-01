@@ -2,28 +2,45 @@
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
+:sectnums:
 
-== PROJECT: FreeTime
-
----
+= PROJECT: FreeTime
 
 == Overview
 
-FreeTime is a desktop application that helps users coordinate their schedules with their friends or groupmates. It displays timeslots where everyone the user wants to meet is free. It receives input through a command line interface while displaying output through a graphical user interface.
+FreeTime is a desktop application that helps users coordinate their schedules with their friends or groupmates. It displays timeslots where everyone the user wants to meet is free. +
 
-FreeTime was developed in a team of four throughout the course of a semester as part of the module requirements for the following modules offered by the School of Computing, National University of Singapore: +
+FreeTime receives input through a command line interface (CLI) while displaying output through a graphical user interface (GUI). It is written in Java, and has approximately 10 kLoC.
+
+FreeTime was developed in a team of four throughout the course of a semester. It is modified from the Address Book (Level 4) project by SE-EDU.
+
+FreeTime was developed as part of the module requirements for the following modules offered by the School of Computing, National University of Singapore: +
 
 * CS2113 - Software Engineering & Object-Oriented Programming +
 * CS2101 - Effective Communication for Computing Professionals +
 
-
+This project portfolio documents my contributions to the FreeTime project.
 
 == Summary of contributions
+
+* *Major enhancement: Added timetables to FreeTime*
+** What it does: Allows the user to manage their timetables. Additionally, allows users to determine when they can organise meetings such that every person can be present.
+** Highlights: This enhancement requires changes in almost every component of FreeTime, It required a through understanding of the existing codebase.
+* *Code contributed*: [Functional code] [Test code]
+* *Other contributions*:
+** Project management: Managed releases `v1.1` - `v1.4` on GitHub (4 releases)
+** Enhancements to existing features: Added aliases for all commands (Pull request https://github.com[#3])
 
 == Contributions to the User Guide
 
 The following section details my contributions to FreeTime's User Guide.
 
+include::../UserGuide.adoc[tag=timeslot]
+
+include::../UserGuide.adoc[tag=freecommand]
+
 == Contributions to the Developer Guide
 
 The following section details my contributions to FreeTime's Developer Guide.
+
+include::../DeveloperGuide.adoc[tag=timetable]
