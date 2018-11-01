@@ -341,6 +341,22 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
+=== Locating persons by tag/module : `tag` (`t`)
+
+Find persons whose tags match the specified tags.
+Format: `tag TAGNAME [MORE_TAGNAMES]`
+
+
+=== Adding a person to your friend list : `friend` (`af`)
+
+Adds a person from the others list to your friend list.
+Format: `friend INDEX`
+
+=== Removing a person from your friend list : `unfriend` (`uf`)
+
+Removes a person from your friend list.
+Format: `unfriend INDEX`
+
 === Clearing all entries : `clear` (`c`)
 
 Clears all entries from the address book. +
@@ -416,6 +432,12 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
+* *Tag* : `tag TAGNAME [MORE_TAGNAMES]` +
+e.g `tag CS2101`
+* *Friend* : `friend INDEX` +
+e.g.`friend 2`
+* *Unfriend* : `unfriend INDEX` +
+e.g.`unfriend 2`
 * *Add timeslot* : `addtime` +
 e.g. `addtime mon 10-12`
 * *Delete timeslot* : `deletetime` +
