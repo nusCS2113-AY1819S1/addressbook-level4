@@ -26,7 +26,9 @@ Inventarie Pro is for self employed business owners who *prefer to use a desktop
 .  Download the latest Inventarie.jar here (link will be added later).
 .  Copy the file to the folder you want to use as the home folder for your Inventarie Pro.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
-.  Enter your username and password.
+.  Register a new user account (Jump to `register` in <<Authentication>>.
+.  Login with your username and password.
+.  Refer to <<Features>> for a detailed list of commands.
 
 +
 image::Ui.png[width="790"]
@@ -64,6 +66,8 @@ Examples:
 Format: `login u/USERNAME p/PASSWORD` +
 Logs the user into the application. +
 
+*   The password is case-sensitive.
+
 Examples:
 
 * `login u/John p/pass`
@@ -87,29 +91,34 @@ Examples:
 // tag::inventorymanagement[]
 === Inventory Management
 
-==== Add a product: `add`
+==== Add a product: `addproduct`
 
 Format: `addproduct n/PRODUCT_NAME s/SERIAL_NUMBER d/DISTRIBUTOR i/INFO t/TAGS`
 
-Adds a product to the list of products offered by the store, and adds the distributor to the list of distributors too if the distributor is not yet added. Distributors:s name is the Primary key.
+Adds a product to the list of products offered by the store
+and adds the distributor to the list of distributors too if the distributor
+is not yet added. +
+
+*  Distributor's name is the key.
 
 Examples:
 
 * `addproduct n/G2 s/08382 d/Pilot Pens i/0.7 t/Stationary`
 * `addproduct n/Black Tea s/10041 d/Lim Siang i/175mg t/Beverages`
 
-==== Search for a product: `find`
+==== Search for a product: `findproduct`
 
-Format: `find PRODUCT_NAME` or `find SERIAL_NUMBER`
+Format: `findproduct PRODUCT_NAME` or `findproduct SERIAL_NUMBER`
 
-Displays the product and basic information related to it
-The search is case insensitive e.g ‘potato’ will match ‘POTATO’
-All products containing the name or serial number that is searched for will appear.
+Displays the product and basic information related to it. +
+
+*  The search is case in-sensitive. (e.g `potato` will match `POTATO`)
+*  All products containing the name or serial number that is searched for will appear.
 
 Examples:
 
-* `find Cap`
-* `find 1021`
+* `findproduct Cap`
+* `findproduct 1021`
 
 // end::inventorymanagement[]
 
@@ -120,7 +129,7 @@ Examples:
 
 Format: `adddistributor dn/DISTRIBUTOR_NAME dp/PHONE_NUMBER`
 
-Adds a distributor to the list of distributors engaged with the store. Distributors should have different names. There should not exist 2 distributors with the same name but different phone numbers.
+Adds a distributor to the list of distributors engaged with the store.
 
 Examples:
 
@@ -199,8 +208,7 @@ Displays the details of the latest transaction.
 
 Format: `addreminder time/yyyy/MM/dd HH:mm:ss message/<The reminder message>`
 
-Sets and stores a reminder. In v1.2, this is only allowed for the current day.
-In future releases, reminders will be set in the current and future days.
+Sets and stores a reminder.
 
 Examples:
 
@@ -210,14 +218,13 @@ Examples:
 ==== View due reminder notifcations: `duereminders`
 
 Format: `duereminders`
-
-Shows all reminders that are still due in the current day.
+Displays all reminders that are still due in the current day.
 
 // end::journal[]
 
 === Clearing all entries : `clear`
 Format: `clear` +
-Clears all entries from the address book. +
+Clears all product from Inventarie Pro. +
 
 === Exiting the program : `exit`
 
@@ -232,24 +239,22 @@ There is no need to save manually.
 
 // tag::dataencryption[]
 === Encrypting data files `[coming in v2.0]`
-
-_{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
 
 == FAQ
+=== Inventarie Pro System Requirements
+Recommended requirements:
 
-Q: Why is the product called Inventarie Pro?
+*   Operating system: Windows 10 64-bit/ Mac OS X
+Please ensure the latest version of Java is installed on your system.
 
-A: We have Swedish developer on our team. `Inventarie` is the Swedish word for inventory.
+
+Q: Why is the software called `Inventarie Pro`?
+
+A: We have the pleasure of working with Swedish developer on our team. +
+`Inventarie` is the Swedish word for inventory.
 
 Q: How do I transfer my data to another computer?
 
 A: Install the application on another computer and copy the folder “data”  from the old computer to the new computer and place it in the folder that belong to the program.
 
-Q: I see your screenshots are from a Windows computer. Will this software work on my Macbook?
-
-A: Yes, because Java is platform independent. However, please ensure that the latest version of Java is installed on your system.
-
-Q: Why can I not just use pen and paper to log my transactions, if I am a small provision store owner?
-
-A: There are numerous advantages to digitization of records. Do google ‘advantages of digitization’ for more information!
