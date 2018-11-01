@@ -31,6 +31,8 @@ public class CreateAccountCommandParser implements Parser<CreateAccountCommand> 
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateAccountCommand.MESSAGE_USAGE));
+        } else if (!LoginManager.getIsPresident()) {
+            throw new ParseException("You must log in as president in order to create a new account!");
         }
 
         String[] keywords = trimmedArgs.split("\\s+");
