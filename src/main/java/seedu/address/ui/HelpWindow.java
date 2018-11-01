@@ -14,7 +14,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import seedu.address.commons.core.CurrentUser;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.logic.LogicChangedEvent;
+import seedu.address.commons.events.logic.ChangeHelpWindowEvent;
 
 /**
  * Controller for a help page
@@ -107,7 +107,7 @@ public class HelpWindow extends UiPart<Stage> {
         return USERGUIDE_FILE_PATH;
     }
     @Subscribe
-    private void handleLogicChangedEvent(LogicChangedEvent event) {
+    private void handleChangeHelpWindowEvent(ChangeHelpWindowEvent event) {
         String fileOpening = setFilePathAccordingToRole();
         String userGuideUrl = getClass().getResource(fileOpening).toString();
         browser.getEngine().load(userGuideUrl);

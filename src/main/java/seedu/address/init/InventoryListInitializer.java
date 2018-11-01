@@ -17,7 +17,6 @@ import seedu.address.commons.core.CurrentUser;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
-import seedu.address.commons.events.logic.LogicChangedEvent;
 import seedu.address.commons.events.model.ChangeModelEvent;
 import seedu.address.commons.events.model.InitInventoryListEvent;
 import seedu.address.commons.exceptions.DataConversionException;
@@ -84,8 +83,7 @@ public class InventoryListInitializer {
     @Subscribe
     public void handleChangeModelEvent(ChangeModelEvent event) {
         model = initModelManager(storage, userPrefs, loginInfoList);
-        logic = new LogicManager (model);
-        EventsCenter.getInstance ().post (new LogicChangedEvent (logic));
+        logic.changeModelAfterReLogin (model);
     }
 
     /**
