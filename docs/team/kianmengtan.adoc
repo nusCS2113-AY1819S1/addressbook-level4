@@ -1,4 +1,4 @@
-= Seah Xi Qi, Nicholas - Project Portfolio
+= Tan Kian Meng - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
@@ -21,7 +21,7 @@ It also has a Graphical User Interface created with JavaFX and has a codebase of
 
 == Summary of contributions
 * *Major enhancement*: enhanced *the find command such that it becomes more extensive*
-** What it does: allows user to find candidates s
+** What it does: allows user to find candidates 
 
 == Contributions to the User Guide
 |===
