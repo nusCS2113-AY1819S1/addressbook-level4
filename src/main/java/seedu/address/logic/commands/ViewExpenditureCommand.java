@@ -1,3 +1,4 @@
+//@@author SHININGGGG
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
@@ -19,7 +20,7 @@ public class ViewExpenditureCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Shows a list of expenditures made on a particular day or of a specific category "
             + "in the displayed Expenditure Tracker.\n"
-            + "Parameters: DATE\n"
+            + "Parameters: DATE, CATEGORY or all\n"
             + "Example: " + COMMAND_WORD + " 01-01-2018";
 
     public static final String MESSAGE_SUCCESS_ALL = "Listed all expenditures";

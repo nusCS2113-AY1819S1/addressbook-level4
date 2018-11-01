@@ -1,3 +1,4 @@
+//@@author feijunzi
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
@@ -29,7 +30,7 @@ import seedu.address.model.expenditureinfo.Money;
 public class EditExpenditureCommand extends Command {
 
     public static final String COMMAND_WORD = "ET_edit";
-    public static final String COMMAND_ALIAS = "e";
+    //public static final String COMMAND_ALIAS = "e";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the expenditure identified "
             + "by the index number used in the displayed expenditure list. "
@@ -40,14 +41,15 @@ public class EditExpenditureCommand extends Command {
             + "[" + PREFIX_MONEY + "MONEY] "
             + "[" + PREFIX_CATEGORY + "CATEGORY]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DESCRIPTION + "Chicken rice"
+            + PREFIX_DESCRIPTION + "Chicken rice "
             + PREFIX_DATE + "25/12/2017 "
-            + PREFIX_MONEY + "500"
-            + PREFIX_CATEGORY + "Food";
+            + PREFIX_MONEY + "500 "
+            + PREFIX_CATEGORY + "Food ";
 
     public static final String MESSAGE_EDIT_EXPENDITURE_SUCCESS = "Edited Expenditure: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_EXPENDITURE = "This expenditure already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_EXPENDITURE =
+            "This expenditure already exists in the expenditure tracker.";
 
     private final Index index;
     private final EditExpenditureDescriptor editExpenditureDescriptor;

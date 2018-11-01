@@ -17,10 +17,10 @@ import seedu.address.model.Model;
  */
 public class ExpenditureGetAdviceCommand extends Command {
     public static final String COMMAND_WORD = "ET_advice";
-    public static final String COMMAND_ALIAS = "a";
+    //public static final String COMMAND_ALIAS = "a";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gives user advice on "
-            + "how to save money based on last week record.\n"
+            + "how to save money based on past records.\n"
             + "Parameters: "
             + PREFIX_MONEY + "MONEY "
             + PREFIX_PERIOD + "PERIOD "
@@ -56,7 +56,7 @@ public class ExpenditureGetAdviceCommand extends Command {
         map = model.getExpenditureRecords();
         StringBuilder x = new StringBuilder();
 
-        x.append("This is a summary of the expenditures you made in the past.\n"
+        x.append("This is a summary of the expenditures you have made in the past.\n"
                 + "From the first day you used this app till now, you have spent:\n");
 
         for (Map.Entry s : map.entrySet()) {
@@ -70,22 +70,22 @@ public class ExpenditureGetAdviceCommand extends Command {
                 .append(m.getKey())
                 .append(", which takes approximately ")
                 .append((int) Math.round(100 * map.get(m.getKey()) / totalExpenditure))
-                .append("% percentage of the total expenditure you made")
+                .append("% of the total expenditure you have made.")
                 .append("\n");
         }
 
-        x.append("\nBased on the information given, hope you can know better about where did you spend your money.\n");
+        x.append("\nBased on the information given, I hope you can better understand how you spent your money.\n");
         x.append("If you plan to spend a total of ")
             .append(money)
             .append(" SGD in a period of ")
             .append(numOfDays)
             .append(" days, on average, the maximum amount of money that you can spend per day is ")
             .append(dailyExpense)
-            .append(".\n")
-            .append("According to your expenditure history record, here' a more detailed advice "
-                    + "on how much money you can spend on each category in the following \nperiod and ")
-            .append("please note that the sum of adviced individual expenditure will not necessarily "
-                    + "be the same as the target money, there might be a slight \ndifference.\n");
+            .append(".\n\n")
+            .append("According to your expenditure history, here's a more detailed advice "
+                    + "on how much money you can spend on each category in the following period.\n")
+            .append("Do note that the sum of advised individual expenditure will not necessarily "
+                    + "be the same as the target money, and there might be a slight difference.\n");
 
         for (Map.Entry t : map.entrySet()) {
             x.append(t.getKey())

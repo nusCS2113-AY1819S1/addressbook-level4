@@ -18,16 +18,16 @@ import seedu.address.model.expenditureinfo.Expenditure;
 public class AddExpenditureCommand extends Command {
 
     public static final String COMMAND_WORD = "ET_add";
-    public static final String COMMAND_ALIAS = "a";
+    //public static final String COMMAND_ALIAS = "a";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an expenditure to the expenditure tracker. "
             + "Parameters: "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_DATE + "DATE "
             + PREFIX_MONEY + "MONEY "
-            + PREFIX_CATEGORY + "CATEGORY "
+            + PREFIX_CATEGORY + "CATEGORY\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_DESCRIPTION + "iPhone7 Plus"
+            + PREFIX_DESCRIPTION + "iPhone7 Plus "
             + PREFIX_DATE + "25-12-2017 "
             + PREFIX_MONEY + "1000 "
             + PREFIX_CATEGORY + "Electronics ";
