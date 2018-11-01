@@ -22,10 +22,10 @@ import seedu.address.commons.events.logic.ChangeHelpWindowEvent;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_FILE_PATH = "/docs/HelpWindow.html";
-    public static final String USERGUIDE_FILE_PATH_ADMIN = "/docs/AdminHelpWindow.html";
-    public static final String USERGUIDE_FILE_PATH_ACCOUNTANT = "/docs/AccountantHelpWindow.html";
-    public static final String USERGUIDE_FILE_PATH_MANAGER = "/docs/ManagerHelpWindow.html";
-    public static final String USERGUIDE_FILE_PATH_STOCK_TAKER = "/docs/StockTakerHelpWindow.html";
+    public static final String USERGUIDE_FILE_PATH_ADMIN = "/help/AdminHelpWindow.html";
+    public static final String USERGUIDE_FILE_PATH_ACCOUNTANT = "/help/AccountantHelpWindow.html";
+    public static final String USERGUIDE_FILE_PATH_MANAGER = "/help/ManagerHelpWindow.html";
+    public static final String USERGUIDE_FILE_PATH_STOCK_TAKER = "/help/StockTakerHelpWindow.html";
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
     @FXML
