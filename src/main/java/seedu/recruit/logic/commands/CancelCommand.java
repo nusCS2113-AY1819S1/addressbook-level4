@@ -29,7 +29,7 @@ public class CancelCommand extends Command {
             this.cancelledCommand = ShortlistCandidateInitializationCommand.COMMAND_WORD;
             EventsCenter.getInstance().post(new ShowLastViewedBookRequestEvent());
         }
-        if (!DeleteShortlistedCandidateInitializationCommand.isDeleting()) {
+        if (DeleteShortlistedCandidateInitializationCommand.isDeleting()) {
             DeleteShortlistedCandidateInitializationCommand.isDoneDeleting();
             this.cancelledCommand = DeleteShortlistedCandidateInitializationCommand.COMMAND_WORD;
         }
