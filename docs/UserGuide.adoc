@@ -735,7 +735,7 @@ e.g. `class delstudent cn/T16 mc/CG1111 i/A6942069M`
 e.g. `class edit cn/T16 mc/CG1111 e/69`
 * *Accessing class attendance list* `class listattendance cn/CLASS_NAME mc/MODULE_CODE` +
 e.g. `class listattendance cn/T16 mc/CG1111`
-* *Marking class attendance list* `class markattendance cn/CLASS_NAME mc/MODULE_CODE i/MATRIC_NO` +no
+* *Marking class attendance list* `class markattendance cn/CLASS_NAME mc/MODULE_CODE i/MATRIC_NO` +
 e.g. `class markattendance cn/T16 mc/CG1111 i/A6942069M`
 * *Modifying class attendance list* `class modattendance cn/CLASS_NAME mc/MODULE_CODE i/MATRIC_NO` +
 e.g. `class modattendance cn/T16 mc/CG1111 i/A6942069M`
