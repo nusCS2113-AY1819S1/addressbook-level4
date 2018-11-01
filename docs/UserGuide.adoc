@@ -89,20 +89,14 @@ Examples:
 
 ==== Add a product: `add`
 
-Format: `add n/PRODUCT_NAME s/SERIAL_NUMBER d/DISTRIBUTOR i/INFO t/TAGS`
+Format: `addproduct n/PRODUCT_NAME s/SERIAL_NUMBER d/DISTRIBUTOR i/INFO t/TAGS`
 
 Adds a product to the list of products offered by the store, and adds the distributor to the list of distributors too if the distributor is not yet added. Distributors:s name is the Primary key.
 
 Examples:
 
-* `add n/G2 s/08382 d/Pilot Pens i/0.7 t/Stationary`
-* `add n/Black Tea s/10041 d/Lim Siang i/175mg t/Beverages`
-
-==== List all products: `inventory`
-
-Format: `inventory`
-
-Lists all products offered by the store in alphabetical order
+* `addproduct n/G2 s/08382 d/Pilot Pens i/0.7 t/Stationary`
+* `addproduct n/Black Tea s/10041 d/Lim Siang i/175mg t/Beverages`
 
 ==== Search for a product: `find`
 
@@ -117,58 +111,52 @@ Examples:
 * `find Cap`
 * `find 1021`
 
-==== Show best selling product: `top selling`
-
-Format: `top selling`
-
-Lists the best selling products in order of the sales revenues from those products.
-
 // end::inventorymanagement[]
 
 // tag::distributormanagement[]
 === Contacts
 
-==== Add a distributor: `addDistributor`
+==== Add a distributor: `adddistributor`
 
-Format: `addDistributor dn/DISTRIBUTOR_NAME dp/PHONE_NUMBER`
+Format: `adddistributor dn/DISTRIBUTOR_NAME dp/PHONE_NUMBER`
 
 Adds a distributor to the list of distributors engaged with the store. Distributors should have different names. There should not exist 2 distributors with the same name but different phone numbers.
 
 Examples:
 
-* `addDistributor dn/Ming Kee dp/98761234`
-* `addDistributor dn/Hak Kim dp/65900011`
+* `adddistributor dn/Ming Kee dp/98761234`
+* `adddistributor dn/Hak Kim dp/65900011`
 
-==== List all distributors: `listDistributors`
+==== List all distributors: `listdistributors`
 
-Format: `listDistributors`
+Format: `listdistributors`
 
 Provides the list of distributors engaged with the store.
 
-==== Edit a distributor: `editDistributor index`
+==== Edit a distributor: `editdistributor index`
 
-Format: `editDistributor index dn/DISTRIBUTOR_NAME dp/PHONE_NUMBER`
+Format: `editdistributor index dn/DISTRIBUTOR_NAME dp/PHONE_NUMBER`
 
 Edits details of the indexed distributor from the list of distributors engaged with the store.
 Index should be a positive number.
 
 Examples:
 
-* `editDistributor 1 dn/Ben Lok dp/93120000`
+* `editdistributor 1 dn/Ben Lok dp/93120000`
 
-==== Find a distributor: `findDistributor`
+==== Find a distributor: `finddistributor`
 
-Format: `findDistributor DISTRIBUTOR_NAME`
+Format: `finddistributor DISTRIBUTOR_NAME`
 
 Locates distributors that are related to the DISTRIBUTOR_NAME entered.
 
 Examples:
 
-* `findDistributor Taylor`
+* `finddistributor Taylor`
 
-==== Delete a distributor: `deleteDistributor`
+==== Delete a distributor: `deletedistributor`
 
-Format: `deleteDistributor index`
+Format: `deletedistributor index`
 
 Deletes the indexed distributor from the list of distributors engaged with the store.
 
