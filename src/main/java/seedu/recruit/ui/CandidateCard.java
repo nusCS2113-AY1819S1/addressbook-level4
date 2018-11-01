@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 import seedu.recruit.model.candidate.Candidate;
 
 /**
@@ -70,6 +71,11 @@ public class CandidateCard extends UiPart<Region> {
 
         if (tagName.equals("BLACKLISTED")) {
             label.setStyle("-fx-background-color: #111122;");
+        }
+        else if (tagName.equals("SHORTLISTED")) {
+            label.setStyle("-fx-background-color: rgba(52,255,65,0.99);");
+            label.setTextFill(Color.rgb(0,0,0));
+
         }
         return label;
     }
