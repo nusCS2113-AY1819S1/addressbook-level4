@@ -53,7 +53,6 @@ public class Batch {
 
     public void increaseBatchQuantity(int value) {
         batchQuantity.increaseValue(value);
-        System.out.println("Current Batch Quantity:" + getBatchQuantity().toString());
     }
 
     /**

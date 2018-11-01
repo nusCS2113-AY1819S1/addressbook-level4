@@ -92,7 +92,6 @@ public class Drink {
 
     public void updateQuantity() {
         this.quantity = uniqueBatchList.getTotalQuantity();
-        System.out.println("Batch quantity" + uniqueBatchList.getTotalQuantity());
     }
 
     public UniqueBatchList getUniqueBatchList() {

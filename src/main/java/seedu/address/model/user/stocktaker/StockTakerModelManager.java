@@ -22,7 +22,7 @@ public class StockTakerModelManager extends ModelManager implements StockTakerMo
         super(inventoryList, userPrefs, loginInfoManager, transactionList);
     }
     @Override
-    public void sellDrink(Transaction transaction) throws InsufficientQuantityException{
+    public void sellDrink(Transaction transaction) throws InsufficientQuantityException {
         Price defaultSalePrice = inventoryList.getDefaultSellingPrice(transaction.getDrinkTransacted());
 
         Price defaultAmountTransacted = new Price(Float.toString(defaultSalePrice.getValue()

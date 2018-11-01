@@ -131,7 +131,6 @@ public class InventoryList implements ReadOnlyInventoryList {
         if (hasDrink(drink)) {
             return drinks.find(drink);
         }
-
         throw new DrinkNotFoundException();
     }
 
@@ -139,10 +138,7 @@ public class InventoryList implements ReadOnlyInventoryList {
      * Increases the quantity of the {@code drink} specified.
      */
     public void increaseQuantity(Drink drink, Quantity quantity) {
-        // Drink actualDrink = findDrinkByName(drink);
-        // actualDrink.increaseQuantity(quantity);
         findDrinkByName(drink).increaseQuantity(quantity);
-        System.out.println(findDrinkByName(drink).getQuantity());
     }
 
     /**
