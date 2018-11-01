@@ -340,9 +340,10 @@ Format: `showReminders`
 
 [NOTE]
 ====
-For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
+* For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
 so you need to refresh it yourself.
-Also, you have to log in first to use the functions.
+* Also, you have to log in first to use the functions.
+* Do not use a hash (#) in the Comments, e.g. addComment 1 C/#hello - this is a bug we will fix
 ====
 
 === Adds Comment : `addComment`
@@ -364,9 +365,10 @@ Adds "What is the attire to wear for this event?" into event 5 comment section w
 
 [NOTE]
 ====
-For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
+* For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
 so you need to refresh it yourself.
-Also, you have to log in first to use the functions.
+* Also, you have to log in first to use the functions.
+* Do not use a hash (#) in the Comments, e.g. replyComment 1 L/2 C/#hello - this is a bug we will fix
 ====
 
 === Reply Comment : `replyComment`
@@ -388,9 +390,9 @@ Adds the comment "What is the attire to wear for the event?" into event 2 commen
 
 [NOTE]
 ====
-For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
+* For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
 so you need to refresh it yourself.
-Also, you have to log in first to use the functions.
+* Also, you have to log in first to use the functions.
 ====
 
 === Delete Comment : `deleteComment`
