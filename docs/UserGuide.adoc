@@ -161,6 +161,7 @@ The list is now populated with tasks marked as completed.
 * `TDL_view all` +
 The list is now populated with all tasks regardless of their completion status.
 
+// tag::TDLsort[]
 === Sorting tasks : `TDL_sort`
 
 Sorts and displays the to-do list by a certain tag. +
@@ -179,6 +180,7 @@ Examples:
 The tasks are now sorted by its due date.
 * `TDL_view uncompleted` + `TDL_sort priority` +
 All uncompleted tasks will be sorted by their priority level.
+// end::TDLsort[]
 
 // tag::ETadd[]
 === Adding an expenditure : `ET_add`
