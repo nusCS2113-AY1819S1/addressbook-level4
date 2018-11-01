@@ -70,7 +70,7 @@ There are five security related commands that can be entered on this command lin
 5. `exit`
 
 .Login Page with Command Prompts
-image::Login Page.png[width="790"]
+image::LoginPage.png[width="790"]
 
 At this page you will have to enter your credentials to log in. Only then would you be able to edit and view your own timetable,
 and view your friends' timetable. +
