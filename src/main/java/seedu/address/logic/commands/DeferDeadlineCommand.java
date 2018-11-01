@@ -26,13 +26,12 @@ public class DeferDeadlineCommand extends Command implements CommandParser {
 
     public static final String COMMAND_WORD = "defer";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Defers the deadline of the selected task in the taskbook. "
-            + "Existing deadline will be overwritten by the input. \n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + ": Defers the deadline of the selected task in the taskbook. \n"
+            + "Parameters: "
             + PREFIX_INDEX + "INDEX (must be a positive integer) "
-            + PREFIX_DAY + "DAY (months [4, 6, 9, 11] have 30 days and [1, 3, 5, 7, 8, 10, 12] have 31 days) "
-            + PREFIX_MONTH + "MONTH (between 1 and 12, inclusive) "
-            + PREFIX_YEAR + "YEAR (between 2018 and 9999, inclusive)\n"
+            + PREFIX_DAY + "DAY "
+            + PREFIX_MONTH + "MONTH "
+            + PREFIX_YEAR + "YEAR (between 2018 and 9999)\n"
 
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_INDEX + "1 "
