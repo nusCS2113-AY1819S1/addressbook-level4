@@ -8,7 +8,7 @@ import java.util.List;
 
 import seedu.address.logic.BudgetCalculationManager;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.arithmetic.CalculateTotalAttendees;
+import seedu.address.logic.arithmetic.TotalAttendees;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.budgetelements.ClubBudgetElements;
@@ -58,19 +58,19 @@ public class BudgetCalculationCommand extends Command {
 
             int budgetPerPerson;
 
-            CalculateTotalAttendees totalAttendees = new CalculateTotalAttendees(listOfClubs);
+            TotalAttendees totalAttendees = new TotalAttendees(listOfClubs);
 
-            budgetPerPerson = Integer.parseInt(totalBudget.toString()) / totalAttendees.arithmeticTotalAttendees();
+            budgetPerPerson = Integer.parseInt(totalBudget.toString()) / totalAttendees.calculateTotalAttendees();
 
             for (i = 0; i < listOfClubs.size(); i++) {
 
                 ClubBudgetElements currentClubForBudget = listOfClubs.get(i);
 
-                int currenteo = Integer.parseInt(currentClubForBudget.getExpectedTurnout().toString());
+                int currentEo = Integer.parseInt(currentClubForBudget.getExpectedTurnout().toString());
 
-                int currentnoe = Integer.parseInt(currentClubForBudget.getNumberOfEvents().toString());
+                int currentNoe = Integer.parseInt(currentClubForBudget.getNumberOfEvents().toString());
 
-                int totalClubMembers = currenteo * currentnoe;
+                int totalClubMembers = currentEo * currentNoe;
 
                 int currentClubsBudget = budgetPerPerson * totalClubMembers;
 
