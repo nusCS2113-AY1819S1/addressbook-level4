@@ -47,11 +47,11 @@ Apart from the attributes, users can also do a reverse sort to list out the curr
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-[https://github.com/CS2113-AY1819S1-F09-4/main/blob/master/docs/UserGuide.adoc#editing-a-candidate-company-job-code-editc-code-code-editc-code-code-editj-code[Edit]]
+include::../UserGuide.adoc[tag=edit]
 
-[https://github.com/CS2113-AY1819S1-F09-4/main/blob/master/docs/UserGuide.adoc#sorting-candidates-company-job-code-sortc-code-code-sortc-code[Sort]]
+include::../UserGuide.adoc[tag=sort]
 
-[https://github.com/CS2113-AY1819S1-F09-4/main/blob/master/docs/UserGuide.adoc#blacklisting-candidates-code-blacklist-code-code-blacklist-rm-code[Blacklist]]
+include::../UserGuide.adoc[tag=blacklist]
 
 == Contributions to the Developer Guide
 
@@ -59,8 +59,9 @@ Apart from the attributes, users can also do a reverse sort to list out the curr
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-[https://github.com/CS2113-AY1819S1-F09-4/main/blob/master/docs/DeveloperGuide.adoc#edit-feature[Edit]]
+include::../DeveloperGuide.adoc[tag=edit]
 
-[https://github.com/CS2113-AY1819S1-F09-4/main/blob/master/docs/DeveloperGuide.adoc#sort-feature[Sort]]
+include::../DeveloperGuide.adoc[tag=sort]
 
-[https://github.com/CS2113-AY1819S1-F09-4/main/blob/master/docs/DeveloperGuide.adoc#blacklist-feature[Blacklist]]
+include::../DeveloperGuide.adoc[tag=blacklist]
+
