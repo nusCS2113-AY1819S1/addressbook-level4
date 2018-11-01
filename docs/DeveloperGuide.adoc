@@ -420,6 +420,12 @@ If the syntax of a command is wrong, the program will prompt the user to try aga
 
 Data encryption is done in a transparent layer between `ForumBookStorage` and `FileStorage`.
 
+All data using in this app is encrypted.
+
+A very simple, naive, and insecure encryption is implemented, this is only for demoing the ability of
+encrypting data in this app. However, a more secure algorithm can be easily added in to the app by
+implementing the `IEncryptor` interface and provide it into `IStorage`.
+
 // end::dataencryption[]
 
 === Logging
