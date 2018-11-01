@@ -157,6 +157,68 @@ Examples:
 
 // end::add[]
 
+//tag::find[]
+=== Finding candidates/companies/job offers : `findc` `findC` `findj` +
+Each `find` command is differentiated by the letter that comes right after the `find` word. 
+
+Our app’s GUI provides two different views where the Candidate Book view and the Company Book view shows the details of all the candidates and companies respectively. +
+
+Entering commands in the other book will automatically switch your view to the correct book and still display the details of the results that you are searching for. +
+
+****
+* Each search field has to come with a preceding prefix e.g. `n/NAME`, `p/PHONE`
+* The search is case insensitive e.g `n/hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `n/Hans n/Bo` will match `Bo Hans`
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Candidates matching at least one keyword will be returned (i.e. `OR` search). e.g. `n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`
+****
+
+==== Finds names of candidates from RecruitBook based on search fields that you have entered.
+Format: `findc <tag>/KEYWORD` +
+Supported tags: `n/NAME`, `p/PHONE`, `e/EMAIL`, `a/ADDRESS`, `x/AGE`, `h/HIGHEST EDUCATION`, `g/GENDER`, `j/JOB INTERESTED`, `s/EXPECTED SALARY)`, `t/TAGS`
+
+Examples:
+
+* `findc n/john` +
+(Returns any candidate having the name John)
+
+* `findc n/alice p/91234567` +
+(Returns any candidate with the name alice or any candidate that has phone number 91234567)
+
+* `findc e/helloworld@example.com` +
+(Returns any candidates having email helloworld@example.com)
+
+==== Finds names of companies from RecruitBook based on searched fields that you have entered.
+Format: `findC <tag>/KEYWORD` +
+Supported tags: `c/COMPANY NAME`, `p/PHONE`, `e/EMAIL`, `a/ADDRESS`
+
+Examples:
+
+* `findC c/KFC c/McDonalds` +
+(Returns any company having either the name `KFC` or `McDonalds`)
+
+* `findC n/HanBaoBao Pte Ltd a/Yishun MRT` +
+(Returns any company having the name `HanBaoBao Pte Ltd` or with address saved as `Yishun MRT`)
+
+==== Finds job offers from a selected company based on searched fields that you have entered.
+Format: `findj <tag>/KEYWORD` +
+Supported tags: `c/COMPANY NAME`, `j/JOB OFFER`, `g/GENDER`, `s/SALARY`, `xr/AGE RANGE`, `h/HIGHEST EDUCATION`
+
+****
+* If you wish to search for job offers from only one company, you should include the name of that particular company in the searched field together with the other search fields.
+****
+
+Examples:
+
+To look for job offers listed by KFC only, include the name of company in the searched field.
+
+* `findj c/KFC j/cashier` +
+(Returns any cashier job offer listed by KFC)
+* `findj c/KFC s/1500 h/SECONDARY` +
+(Returns any job offer listed by KFC that has a pay of $1500 and requires highest education level attained to be `SECONDARY` level)
+
+//end::find[]
+
 // tag::edit[]
 === Editing a candidate / company / job : `editc` `editC` `editj`
 
@@ -328,72 +390,8 @@ Format: `selectJob` `<INDEX>`
 . This index must be an index number shown in the displayed job offer list.
 // end::select[]
 
-=== Locating candidates by search parameter : `find`
-==== Finds names of candidates from RecruitBook based on the search parameter.
-Format: `findc <tag>/KEYWORD` +
-Supported tags: `n/NAME`, `p/PHONE`, `e/EMAIL`, `a/ADDRESS`
-
-****
-* The search is case insensitive e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Candidates matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-****
-
-Examples:
-
-* `findc n/john` +
-(Returns any candidate having the name John)
-
-* `findc p/98` +
-(Returns any candidate having phone number with 98 inside)
-
-* `findc e/helloworld@example.com` +
-(Returns any candidates having email helloworld@example.com)
-
-==== Finds names of companies from RecruitBook based on the searched name.
-Format: `findC NAME` +
-
-****
-* The search is case insensitive. e.g. `kfc` will match `KFC`
-* The order of the keywords does not matter. e.g. `Pte Ltd Hanbaobao` will match `Hanbaobao Pte Ltd`
-* Only full words will be matched e.g. `Mc` will not match `McDonalds`
-* Companies matching at least one keyword will be returned (i.e. `OR` search)
-****
-
-Examples:
-
-* `findC McDonalds` +
-(Returns any company having the name McDonalds)
-
-=== Filtering by a specific tag : `filter`
-
-==== Filters out the names of the people that falls under the searched category
-
-Format: `filter <tag>/KEYWORD` +
-Supported tags: `h/`, `j/`, `s/`, `x/`
-
-Searched field *must be of the full length* that is recorded in the RecruitBook
-
-Examples:
-
-* `filter h/O LEVEL` +
-(Returns any candidate with `O LEVEL` as the highest education level)
-
-* `filter j/Librarian` +
-(Returns any candidate searching for the job `Librarian`)
-
-* `filter s/$4000` +
-(Returns any candidate that expects a salary of $4000)
-
-* `filter x/18` +
-(Returns any candidate that is aged 18)
-
-==== Exits from the filter interface and system proceeds to ask for next command
-Format: `cancel`
-
 // tag::sort[]
-=== Sorting candidates / company / job : `sortc` `sortC`
+=== Sorting candidates / company / job : `sortc` `sortC` `sortj`
 
 ==== Sorting candidates based on different fields
 Format: `sortc <tag>` +
@@ -423,6 +421,19 @@ Examples:
 *   `sortC r/` +
 (Sort all companies in reverse)
 
+==== Sorting job offers based on different fields
+Format: `sortj <tag>` +
+Supported tags: `c/`, `j/`, `xr/`, `h/`, `s/`, `r/`
+
+*   Only one tag/field is included when using the sort command
+*   There must be one tag/field included
+
+Examples:
+
+*   `sortj j/` +
+(Sorts all job offers lexicographically by their titles)
+*   `sortj r/` +
+(Sorts all job offers in reverse)
 // end::sort[]
 
 // tag::blacklist[]

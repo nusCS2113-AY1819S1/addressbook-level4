@@ -3,6 +3,8 @@ package seedu.recruit.model.joboffer;
 import static java.util.Objects.requireNonNull;
 import static seedu.recruit.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -86,6 +88,80 @@ public class UniqueJobList implements Iterable<JobOffer> {
         internalList.clear();
     }
 
+    /**
+     * Sorts job offers by the company names they are affiliated with
+     */
+    public void sortByCompanyName() {
+
+        Collections.sort(internalList, new Comparator<JobOffer>() {
+            @Override
+            public int compare(JobOffer o1, JobOffer o2) {
+                return (o1.getCompanyName().toString()).compareTo(o2.getCompanyName().toString());
+            }
+        });
+    }
+
+    /**
+     * Sorts job offers by their job titles
+     */
+    public void sortByJob() {
+
+        Collections.sort(internalList, new Comparator<JobOffer>() {
+            @Override
+            public int compare(JobOffer o1, JobOffer o2) {
+                return (o1.getJob().toString()).compareTo(o2.getJob().toString());
+            }
+        });
+    }
+
+    /**
+     * Sorts job offers by their minimum age limit
+     */
+    public void sortByAgeRange() {
+
+        Collections.sort(internalList, new Comparator<JobOffer>() {
+            @Override
+            public int compare(JobOffer o1, JobOffer o2) {
+                String[] o1AgeRange = o1.getAgeRange().toString().split("-");
+                String[] o2AgeRange = o2.getAgeRange().toString().split("-");
+                return (Integer.parseInt(o1AgeRange[0]) - Integer.parseInt(o2AgeRange[0]));
+            }
+        });
+    }
+
+    /**
+     * Sorts job offers by their desired education levels
+     */
+    public void sortByEducation() {
+
+        Collections.sort(internalList, new Comparator<JobOffer>() {
+            @Override
+            public int compare(JobOffer o1, JobOffer o2) {
+                return (o1.getEducation().order - o2.getEducation().order);
+            }
+        });
+    }
+
+    /**
+     * Sorts job offers by their provided salaries
+     */
+    public void sortBySalary() {
+
+        Collections.sort(internalList, new Comparator<JobOffer>() {
+            @Override
+            public int compare(JobOffer o1, JobOffer o2) {
+                return (Integer.parseInt(o1.getSalary().toString()) - Integer.parseInt(o2.getSalary().toString()));
+            }
+        });
+    }
+
+    /**
+     * Sorts job offers in reverse to the current order
+     */
+    public void sortInReverse() {
+
+        Collections.reverse(internalList);
+    }
 
     /**
      * Replaces the job offer {@code target} in the list with {@code editedJobOffer}.
