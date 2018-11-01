@@ -1077,6 +1077,110 @@ These instructions only provide a starting point for testers to work on; testers
 .. Test case: `createModule mCode/ mTitle/` +
    Expected: No module will be added. Error details shown in the result display panel.
 
+=== Creating a thread
+
+. Creating a thread under certain module by user or admin.
+
+.. Prerequisites: User must login to proceed. User should not be blocked by admin.
+.. Test case: `createThread mCode/CS2113 tTitle/Exam Information cContent/All the best for the final guys` +
+   Expected: A new thread will be added to the ForumThreadStorage, and a success message will be shown in the result display panel.
+.. Test case: `createThread mCode/ tTitle/ cContent/` +
+   Expected: No module will be added. Error details shown in the result display panel.
+
+=== Creating a comment
+
+. Creating a comment under certain forum thread by user or admin.
+
+.. Prerequisites: User must login to proceed. User should not be blocked by admin.
+.. Test case: `createComment tId/1 cContent/This is a new comment` +
+   Expected: A new thread will be added to the CommentStorage, and a success message will be shown in the result display panel.
+.. Test case: `createComment tId/ cContent/` +
+   Expected: No comment will be added. Error details shown in the result display panel.
+
+=== Updating a thread title
+
+. Updating the title of a forum thread by thread creator or admin.
+
+.. Prerequisites: User must login to proceed. User is the owner/creator of the forum thread.
+.. Test case: (If thread ID 123 is under current module) + `updateThread tId/123 tTitle/This is a new title` +
+   Expected: The new thread title will be updated in the ForumThreadStorage, and a success message will be shown in the result display panel.
+.. Test case: (If thread ID 123 does not exist in the forum book) + `updateThread tId/123 tTitle/This is a new title` +
+   Expected: No thread title will be updated. Error details of invalid thread id will be shown in the result display panel.
+.. Test case: (If thread ID 123 is not under current module) + `updateThread tId/123 tTitle/This is a new title` +
+   Expected: No thread title will be updated. Error details of entity is not under scope will be shown in the result display panel.
+.. Test case: `updateThread tId/ tTitle/` +
+   Expected: No thread title will be updated. Error details shown in the result display panel.
+
+=== Updating a comment content
+
+. Updating the content of a comment by comment creator or admin.
+
+.. Prerequisites: User must login to proceed. User is the owner/creator of the comment.
+.. Test case: (If comment ID 123 is under current forum thread) + `updateThread cId/123 cContent/This is a new content` +
+   Expected: The new comment content will be updated in the CommentStorage, and a success message will be shown in the result display panel.
+.. Test case: (If comment ID 123 does not exist in the forum book) + `updateThread cId/123 cContent/This is a new content` +
+   Expected: No comment content will be updated. Error details of invalid comment id will be shown in the result display panel.
+.. Test case: (If comment ID 123 is not under current forum thread) + `updateThread cId/123 cContent/This is a new content` +
+   Expected: No comment content will be updated. Error details of entity is not under scope will be shown in the result display panel.
+.. Test case: `updateThread cId/ cContent/` +
+   Expected: No comment content will be updated. Error details shown in the result display panel.
+
+=== Deleting a thread
+
+. Deleting a forum thread by thread creator or admin.
+
+.. Prerequisites: User must login to proceed. User is the owner/creator of the forum thread.
+.. Test case: (If thread ID 123 is under current module) + `deleteThread tId/123` +
+   Expected: The new thread title will be deleted in the ForumThreadStorage, and a success message will be shown in the result display panel.
+.. Test case: (If thread ID 123 does not exist in the forum book) + `deleteThread tId/123` +
+   Expected: No thread title will be deleted. Error details of invalid thread id will be shown in the result display panel.
+.. Test case: (If thread ID 123 is not under current module) + `deleteThread tId/123` +
+   Expected: No thread title will be deleted. Error details of entity is not under scope will be shown in the result display panel.
+.. Test case: `deleteThread tId/` +
+   Expected: No thread title will be deleted. Error details shown in the result display panel.
+
+=== Deleting a comment
+
+. Deleting a comment by comment creator or admin.
+
+.. Prerequisites: User must login to proceed. User is the owner/creator of the comment.
+.. Test case: (If comment ID 123 is under current forum thread) + `deleteComment cId/123` +
+   Expected: The new comment content will be deleted in the CommentStorage, and a success message will be shown in the result display panel.
+.. Test case: (If comment ID 123 does not exist in the forum book) + `deleteComment cId/123` +
+   Expected: No comment content will be deleted. Error details of invalid comment id will be shown in the result display panel.
+.. Test case: (If comment ID 123 is not under current forum thread) + `deleteComment cId/123` +
+   Expected: No comment content will be deleted. Error details of entity is not under scope will be shown in the result display panel.
+.. Test case: `deleteComment cId/` +
+   Expected: No comment content will be deleted. Error details shown in the result display panel.
+
+=== Listing all modules
+
+. Listing all the modules in the forun book by user or admin.
+
+.. Prerequisites: User must login to proceed.
+.. Test case: `listModule` +
+   Expected: A list of modules in the ModuleStorage will be shown in the result display panel.
+
+=== Selecting a module to list all threads
+
+. Listing all the forum threads under certain module in the forun book by user or admin.
+
+.. Prerequisites: User must login to proceed. The module code entered by user should exist in the ModuleStorage.
+.. Test case: `selectModule mCode/CS2113` +
+   Expected: A list of forum threads under module CS2113 in the ForumThreadStorage will be shown in the result display panel.
+.. Test case: `selectModule mCode/` +
+   Expected: No forum thread will be listed out. Error details shown in the result display panel.
+
+=== Selecting a thread to list all comments
+
+. Listing all the comments under certain forum thread in the forun book by user or admin.
+
+.. Prerequisites: User must login to proceed. The thread Id entered by user should exist in the ForumThreadStorage.
+.. Test case: `selectThread tId/123` +
+   Expected: A list of comments under thread ID 123 in the ForumThreadStorage will be shown in the result display panel.
+.. Test case: `selectModule tId/` +
+   Expected: No comment will be listed out. Error details shown in the result display panel.
+
 === Deleting a module
 
 . Deleting a module by admin.
