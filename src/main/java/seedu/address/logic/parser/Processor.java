@@ -125,7 +125,7 @@ public class Processor {
             default:
             }
         }
-            // if this statement is reached, there is no COMMAND_WORD within the userInput string
-            return userInput;
+        // if this statement is reached, there is no COMMAND_WORD within the userInput string
+        return userInput;
     }
 }
