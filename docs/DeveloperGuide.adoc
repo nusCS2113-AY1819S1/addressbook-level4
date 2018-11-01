@@ -546,10 +546,12 @@ Step 4. After parsing, the command is sent to the `Model` which alters the `Pers
 `Skill` and `SkillLevel` properties.
 
 Step 5. The result is encapsulated as a `CommandResult` object which is passed back to the `UI`.
-z
+
 The following is a sequence diagram illustrating the above.
 
-image::asls.png[width="1000"]
+image::asl_sequence.png[width="1000"]
+
+**Usage:**
 
 Before executing the command:
 

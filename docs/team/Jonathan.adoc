@@ -40,14 +40,13 @@ was implemented.
 
 
 == Contributions to the User Guide
-
-
+include::../UserGuide.adoc[tag=aslUser]
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
 == Contributions to the Developer Guide
-
+include::../DeveloperGuide.adoc[tag=asl]
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
