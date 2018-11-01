@@ -245,7 +245,7 @@ Additionally, it implements the following operations to support adding/deletion 
 * `UniqueCandidateList#add(Candidate candidate)` — Adds a unique candidate to `internalList`. Checks for uniqueness using `UniqueCandidateList#contains(Candidate candidate)`.
 * `UniqueCandidateList#remove(Candidate candidate)` — Removes the equivalent candidate from `internalList`.
 
-These operations are exposed in the Model interface as Model#addCandidate(Candidate) and Model#deleteCandidate(Candidate candidate) respectively.
+These operations are exposed in the `Model` interface as `Model#addCandidate(Candidate)` and `Model#deleteCandidate(Candidate candidate)` respectively.
 
 ===== Companies
 The add/delete mechanism of companies is facilitated in `UniqueCompanyList` which stores the added companies internally as an `internalList` which is a list of Company objects.
@@ -257,7 +257,7 @@ Additionally, it implements the following operations to support adding/deletion 
 * `UniqueCompanyList#add(Company company)` — Adds a unique company to `internalList`. Checks for uniqueness using `UniqueCompanyList#contains(Company company)`.
 * `UniqueCompanyList#remove(Company company)` — Removes the equivalent company from `internalList`.
 
-These operations are exposed in the Model interface as Model#addCompany(Company) and Model#deleteCompany(Company company) respectively.
+These operations are exposed in the `Model` interface as `Model#addCompany(Company)` and `Model#deleteCompany(Company company)` respectively.
 
 ===== Job Offers
 The add/delete mechanism of job offer is facilitated in `UniqueJobList` which stores the added job offer internally as an `internalList` which is a list of JobOffer objects.
@@ -269,7 +269,7 @@ Additionally, it implements the following operations to support adding/deletion 
 * `UniqueJobList#add(JobOffer jobOffer)` — Adds a unique job offer to `internalList`. Checks for uniqueness using `UniqueJobOfferList#contains(JobOffer jobOffer)`.
 * `UniqueJobList#remove(JobOffer jobOffer)` — Removes the equivalent job offer from `internalList`.
 
-These operations are exposed in the Model interface as Model#addJobOffer(JobOffer) and Model#deleteJobOffer(JobOffer jobOffer) respectively.
+These operations are exposed in the `Model` interface as `Model#addJobOffer(JobOffer)` and `Model#deleteJobOffer(JobOffer jobOffer)` respectively.
 
 [NOTE]
 All addition/deletion of the 3 entities (Candidates, Companies, Job Offers) follow the same mechanism.
@@ -401,7 +401,7 @@ These operations are accessed through the `Model` interface as `Model#sortCandid
 [NOTE]
 These prefixes `/n`, `/x`,`/e`, `/j`, `/h`, `/s`, `/r` are used respectively to the methods shown above.
 
-====== Companies
+===== Companies
 
 The sort mechanism of companies is facilitated in `UniqueCompanyList` which stores companies in an `internalList`. It implements the sorting of companies using the following operations:
 
@@ -438,7 +438,7 @@ Step 3. The user does not want the candidates to be sorted in increasing order b
 
 ==== Design Considerations
 ===== Aspect: How sort executes
-* **Alternative 1{current choice):** Store the input prefix as a parameter to be passed in to the respective books which calls the respective method.
+* **Alternative 1(current choice):** Store the input prefix as a parameter to be passed in to the respective books which calls the respective method.
 ** Pros: The variations of sort methods are stored under `UniqueCandidateList` instead of having more command objects.
 ** Cons: Implementation of switch case statements in both books which could lead to poorer performance.
 * **Alternative 2:** Create multiple sort commands for the various attributes.
