@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
     private LedgerListPanel ledgerListPanel;
+    private EventListPanel eventListPanel;
     private ItemListPanel itemListPanel;
     private Config config;
     private UserPrefs prefs;
@@ -55,6 +56,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane ledgerListPanelPlaceholder;
+
+    @FXML
+    private StackPane eventListPanelPlaceholder;
 
     @FXML
     private StackPane itemListPanelPlaceholder;
@@ -135,6 +139,9 @@ public class MainWindow extends UiPart<Stage> {
         ledgerListPanel = new LedgerListPanel(logic.getFilteredLedgerList());
         ledgerListPanelPlaceholder.getChildren().add(ledgerListPanel.getRoot());
 
+        eventListPanel = new EventListPanel(logic.getFilteredEventList());
+        eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+
         itemListPanel = new ItemListPanel(logic.getFilteredItemList());
         itemListPanelPlaceholder.getChildren().add(itemListPanel.getRoot());
 
@@ -207,6 +214,8 @@ public class MainWindow extends UiPart<Stage> {
     public LedgerListPanel getLedgerListPanel() {
         return ledgerListPanel;
     }
+
+    public  EventListPanel getEventListPanel() {return eventListPanel;}
 
     public ItemListPanel getItemListPanel() {
         return itemListPanel;

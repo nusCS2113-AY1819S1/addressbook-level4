@@ -14,6 +14,8 @@ import seedu.address.model.ledger.Ledger;
 import seedu.address.model.ledger.UniqueLedgerList;
 import seedu.address.model.member.Person;
 import seedu.address.model.member.UniquePersonList;
+import seedu.address.model.Events.Event;
+import seedu.address.model.Events.UniqueEventList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,6 +37,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         ledgers = new UniqueLedgerList();
+    }
+
+    private final UniqueEventList events;
+
+    {
+        events = new UniqueEventList();
     }
 
     private final UniqueItemList items;
@@ -63,6 +71,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+    /**
+     * Replaces the contents of the event list with {@code events}.
+     * {@code events} must not contain duplicate events.
+     */
+
+    public void setEvents(List<Event> events) {
+        this.events.setEvents(events);
+    }
     /**
      * Replaces the contents of the ledger list with {@code ledgers}.
      * {@code ledgers} must not contain duplicate ledgers.
@@ -109,6 +125,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a ledger with the same name as {@code event} exists in the club book
+     */
+    public boolean hasEvent(Event event){
+        requireNonNull(event);
+        return events.contains(event);
+    }
+
+    /**
      * Returns true if an item with the same ItemName as {@code item} exists in the club book
      */
     public boolean hasItem(Item item) {
@@ -122,6 +146,19 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addPerson(Person p) {
         persons.add(p);
+    }
+
+    /**
+     * add or remove an event.
+     * @param event
+     */
+    public void addEvent(Event event) {
+        events.add(event);
+    }
+
+    public void removeEvent(Event event) {
+        requireNonNull(event);
+        events.remove(event);
     }
 
     /**
@@ -167,6 +204,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         ledgers.setLedger(target, editedLedger);
     }
 
+    public void updateEvent(Event target, Event editedTarget) {
+        requireNonNull(editedTarget);
+        events.setEvent(target, editedTarget);
+    }
     /**
      * Replaces the given item {@code target} in the list with {@code editedItem}.
      * {@code target} must exist in the address book.
@@ -223,6 +264,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Ledger> getLedgerList() {
         return ledgers.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Event> getEventList() {
+        return events.asUnmodifiableObservableList();
     }
 
     @Override

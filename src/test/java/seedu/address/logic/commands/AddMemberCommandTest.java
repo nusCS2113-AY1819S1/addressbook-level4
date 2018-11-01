@@ -19,6 +19,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.MemberCommand.AddMemberCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.Events.Event;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.item.Item;
@@ -100,6 +101,16 @@ public class AddMemberCommandTest {
         }
 
         @Override
+        public void addEvent(Event event) {
+
+        }
+
+        @Override
+        public void updateEvent(Event target, Event editedEvent) {
+
+        }
+
+        @Override
         public void addLedger(Ledger ledger) {
             throw new AssertionError("This method should not be called.");
         }
@@ -132,6 +143,11 @@ public class AddMemberCommandTest {
         @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasEvent(Event event) {
+            return false;
         }
 
         @Override
@@ -185,6 +201,11 @@ public class AddMemberCommandTest {
         }
 
         @Override
+        public ObservableList<Event> getFilteredEventList() {
+            return null;
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -196,6 +217,11 @@ public class AddMemberCommandTest {
 
         @Override
         public void updateFilteredItemList(Predicate<Item> predicate) {
+
+        }
+
+        @Override
+        public void updateFilteredEventList(Predicate<Event> predicate) {
 
         }
 

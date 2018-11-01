@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddItemCommand;
+import seedu.address.logic.commands.EventCommand.AddEventCommand;
 import seedu.address.logic.commands.ledger.AddLedgerCommand;
 import seedu.address.logic.commands.*;
 import seedu.address.logic.commands.MemberCommand.*;
@@ -11,6 +12,7 @@ import seedu.address.logic.commands.ledger.DebitCommand;
 import seedu.address.logic.commands.ledger.DeleteLedgerCommand;
 import seedu.address.logic.commands.ledger.OpenLedgerCommand;
 import seedu.address.logic.parser.Member.*;
+import seedu.address.logic.parser.event.AddEventCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.ledger.AddLedgerCommandParser;
 import seedu.address.logic.parser.ledger.CreditCommandParser;
@@ -53,6 +55,9 @@ public class AddressBookParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
+
+            case AddEventCommand.COMMAND_WORD: case AddEventCommand.COMMAND_ALIAS:
+                return new AddEventCommandParser().parse(arguments);
 
         case AddMemberCommand.COMMAND_WORD: case AddMemberCommand.COMMAND_ALIAS:
             return new AddCommandParser().parse(arguments);
