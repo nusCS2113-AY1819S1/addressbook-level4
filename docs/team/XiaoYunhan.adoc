@@ -19,28 +19,24 @@ Something Daily is a desktop address book application used for teaching Software
 ** Specific features: (include add/ delete/ edit) Users can add, delete and edit certain tasks in the To-do List.
 
 * *Major enhancement*: designed *user interface for To-do List*
-** What it does:
-** Justification:
+** What it does: display tasks recorded in To-do List
+** Justification: This enhancement make it possible for user checking tasks more visually and easier.
 
 * *Major enhancement*: designed *the ability to sort tasks in To-do List*
 ** What it does: Provide users a way to sort tasks in the To-do List by certain task attribution (name, module code, deadline) and users can also reverse the rank of sorting
-** Justification:
+** Justification: This enhancement make users easier to check their tasks recorded in the To-do list based on a certain standard.
 
 * *Minor enhancement*: add "undoable_command" class related methods to fix "undo" command on both To-do List side and Expenditure Tracker side.
+* *Minor enhancement*: add a few tests to increase coverage.
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
 * *Other contributions*:
 
-** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Add implementation of TDL_sort command in the Developer Guide and update To-do List-related logic part in both User guide and Developer guide.
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com[#20], https://github.com[#24], https://github.com[#47], https://github.com[#48], https://github.com[#74], https://github.com[#78], https://github.com[#82]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
 
 
 
