@@ -3,11 +3,8 @@ package seedu.planner.logic.parser;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DIR;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.util.logging.Logger;
-
 import org.junit.Test;
 
-import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.core.Messages;
 import seedu.planner.commons.util.ExcelUtil;
 import seedu.planner.logic.commands.ImportExcelCommand;
@@ -18,7 +15,6 @@ public class ImportExcelCommandParserTest {
     private static final String directoryPath = DirectoryPath.HOME_DIRECTORY_STRING;
     private static final String nameFile = "Financial_Planner_ALL";
     private static final String directoryPathName = ExcelUtil.setPathFile(nameFile, directoryPath);
-    private Logger logger = LogsCenter.getLogger(ImportExcelCommandParserTest.class);
 
     private ImportExcelCommandParser parser = new ImportExcelCommandParser();
 

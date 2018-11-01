@@ -4,10 +4,8 @@ import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DIR;
 
 import java.util.Arrays;
-import java.util.logging.Logger;
 import java.util.stream.Stream;
 
-import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.core.Messages;
 import seedu.planner.logic.commands.AchieveCommand;
 import seedu.planner.logic.parser.exceptions.ParseException;
@@ -17,7 +15,6 @@ import seedu.planner.model.record.Date;
  * Achieve the records, export into  Excel file then delete all records exported.
  */
 public class AchieveCommandParser implements Parser<AchieveCommand> {
-    private static Logger logger = LogsCenter.getLogger(ExportExcelCommandParser.class);
     private static String whiteSpace = " ";
 
     /**
@@ -27,38 +24,20 @@ public class AchieveCommandParser implements Parser<AchieveCommand> {
      */
     public AchieveCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        logger.info("TRIMMED ARGS: " + trimmedArgs);
         if (trimmedArgs.isEmpty()) {
-            logger.info("ExportExcelCommand(): 1");
             return new AchieveCommand();
         }
         String stringDate = whiteSpace;
         String stringPath = whiteSpace;
         boolean isDateExist = true;
         boolean isPathExist = true;
-        logger.info("Args: " + args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_DIR);
-        logger.info("stringDate 1: " + stringDate + " stringPath: " + stringPath);
         if (!arePrefixesPresent(argMultimap, PREFIX_DATE) || !argMultimap.getPreamble().isEmpty()) {
             isDateExist = false;
-        }
-        if (!arePrefixesPresent(argMultimap, PREFIX_DATE)) {
-            logger.info("isDateExist 1: False");
-        }
-        if (!argMultimap.getPreamble().isEmpty()) {
-            logger.info("isDateExist 2: False");
         }
         if (!arePrefixesPresent(argMultimap, PREFIX_DIR) || !argMultimap.getPreamble().isEmpty()) {
             isPathExist = false;
         }
-        if (!arePrefixesPresent(argMultimap, PREFIX_DIR)) {
-            logger.info("isPathExist 1: False");
-        }
-        if (!argMultimap.getPreamble().isEmpty()) {
-            logger.info("isPathExist 2: False");
-        }
-        logger.info("stringDate 2: " + stringDate + " stringPath: " + stringPath);
-        logger.info("isDateExist: " + isDateExist + " isPathExist: " + isPathExist);
         if (!isDateExist && !isPathExist) {
             throw new ParseException(
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AchieveCommand.MESSAGE_USAGE));
@@ -69,9 +48,7 @@ public class AchieveCommandParser implements Parser<AchieveCommand> {
         if (isPathExist) {
             stringPath = argMultimap.getValue(PREFIX_DIR).get();
         }
-        logger.info("stringDate 3: " + stringDate + " stringPath: " + stringPath);
         if (stringDate.trim().isEmpty() && stringPath.trim().isEmpty()) {
-            logger.info("AchieveExcelCommand(): 2");
             return new AchieveCommand();
         }
         return parseArgumentsModeIntoCommand(stringDate.trim(), stringPath.trim());
@@ -84,8 +61,6 @@ public class AchieveCommandParser implements Parser<AchieveCommand> {
             throws ParseException {
         String directoryPath;
         if (stringDate.isEmpty()) {
-            logger.info("AchieveExcelCommand(directoryPath)");
-            logger.info("Directory path 1.");
             directoryPath = ParserUtil.parseDirectoryString(stringPath);
             return new AchieveCommand(directoryPath);
         } else {
@@ -116,10 +91,8 @@ public class AchieveCommandParser implements Parser<AchieveCommand> {
         }
         if (isDateOrderValid(startDate, endDate)) {
             if (stringPath == null || stringPath.isEmpty()) {
-                logger.info("AchieveExcelCommand(startDate, endDate)");
                 return new AchieveCommand(startDate, endDate);
             } else {
-                logger.info("AchieveExcelCommand(startDate, endDate, directoryPath)");
                 directoryPath = ParserUtil.parseDirectoryString(stringPath);
                 return new AchieveCommand(startDate, endDate, directoryPath);
             }

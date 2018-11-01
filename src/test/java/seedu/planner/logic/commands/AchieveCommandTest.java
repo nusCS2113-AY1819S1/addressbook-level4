@@ -8,12 +8,10 @@ import static seedu.planner.testutil.TypicalRecords.getTypicalFinancialPlanner;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Logger;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
-import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.core.Messages;
 import seedu.planner.commons.util.ExcelUtil;
 import seedu.planner.logic.CommandHistory;
@@ -29,8 +27,6 @@ import seedu.planner.testutil.TypicalRecords;
 public class AchieveCommandTest {
     private Model model = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
-
-    private Logger logger = LogsCenter.getLogger(AchieveCommand.class);
 
     @Test
     public void equals() {
@@ -118,7 +114,6 @@ public class AchieveCommandTest {
         List<Record> records = expectedModel.getFilteredRecordList();
         expectedModel.deleteListRecord(records);
         expectedModel.commitFinancialPlanner();
-        logger.info("3. The size of the record list: " + records.size());
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
     }
 }

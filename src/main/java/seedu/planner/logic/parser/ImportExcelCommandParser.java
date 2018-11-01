@@ -3,10 +3,8 @@ package seedu.planner.logic.parser;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DIR;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.util.logging.Logger;
 import java.util.stream.Stream;
 
-import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.core.Messages;
 import seedu.planner.commons.util.ExcelUtil;
 import seedu.planner.logic.commands.ImportExcelCommand;
@@ -16,7 +14,6 @@ import seedu.planner.logic.parser.exceptions.ParseException;
  * Parses input arguments and create ImportExcelCommand object.
  */
 public class ImportExcelCommandParser implements Parser<ImportExcelCommand> {
-    private Logger logger = LogsCenter.getLogger(ImportExcelCommandParser.class);
     /**
      * Parses the given code {@code String} of arguments in the context of the ImportExcelCommand
      * @param args the given input
@@ -41,14 +38,12 @@ public class ImportExcelCommandParser implements Parser<ImportExcelCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME) || !argMultimap.getPreamble().isEmpty()) {
             isNameExist = false;
         }
-        logger.info("Hello 1!");
-        if (isNameExist && !(argMultimap.getValue(PREFIX_NAME).get() + " ").trim().isEmpty()) {
-            logger.info("Hello 2!");
+        if (isNameExist && argMultimap.getValue(PREFIX_NAME).isPresent()
+                && !(argMultimap.getValue(PREFIX_NAME).get() + " ").trim().isEmpty()) {
             nameFile = argMultimap.getValue(PREFIX_NAME).get().trim();
             directoryPath = ParserUtil.parseDirectoryString(argMultimap.getValue(PREFIX_DIR).get().trim());
             checkedDirectoryPath = ParserUtil.parseFilePathString(ExcelUtil.setPathFile(nameFile, directoryPath));
         } else {
-            logger.info("Hello 3!");
             checkedDirectoryPath = ParserUtil.parseFilePathString(directoryPath);
         }
         return new ImportExcelCommand(checkedDirectoryPath);

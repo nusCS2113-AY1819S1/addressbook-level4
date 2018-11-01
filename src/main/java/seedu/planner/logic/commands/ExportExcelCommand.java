@@ -6,12 +6,10 @@ import static seedu.planner.model.Model.PREDICATE_SHOW_ALL_RECORDS;
 
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.logging.Logger;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.core.Messages;
 import seedu.planner.commons.util.ExcelUtil;
 import seedu.planner.logic.CommandHistory;
@@ -47,14 +45,14 @@ public class ExportExcelCommand extends Command {
     public static final int FIRST_ELEMENT = 0;
     public static final int SECOND_ELEMENT = 1;
 
-    private static Logger logger = LogsCenter.getLogger(ExportExcelCommand.class);
-    private Date startDate = null;
-    private Date endDate = null;
-    private String directoryPath = null;
+    private static final int EMPTY_RECORD_LIST_SIZE_EXPORT = 0;
+
+    private Date startDate;
+    private Date endDate;
+    private String directoryPath;
     private Predicate<Record> predicate;
 
     public ExportExcelCommand() {
-        logger.info("1. Start date " + startDate + " end date: " + endDate + " directory path: " + directoryPath);
         this.startDate = null;
         this.endDate = null;
         this.directoryPath = DirectoryPath.HOME_DIRECTORY_STRING;
@@ -62,7 +60,6 @@ public class ExportExcelCommand extends Command {
     }
 
     public ExportExcelCommand(String directoryPath) {
-        logger.info("2. Start date " + startDate + " end date: " + endDate + " directory path: " + directoryPath);
         this.startDate = null;
         this.endDate = null;
         this.directoryPath = directoryPath;
@@ -70,7 +67,6 @@ public class ExportExcelCommand extends Command {
     }
 
     public ExportExcelCommand(Date startDate, Date endDate) {
-        logger.info("3. Start date " + startDate + " end date: " + endDate + " directory path: " + directoryPath);
         this.startDate = startDate;
         this.endDate = endDate;
         this.directoryPath = DirectoryPath.HOME_DIRECTORY_STRING;
@@ -78,7 +74,6 @@ public class ExportExcelCommand extends Command {
     }
 
     public ExportExcelCommand(Date startDate, Date endDate, String directoryPath) {
-        logger.info("4. Start date " + startDate + " end date: " + endDate + " directory path: " + directoryPath);
         this.startDate = startDate;
         this.endDate = endDate;
         this.directoryPath = directoryPath;
@@ -88,7 +83,6 @@ public class ExportExcelCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) {
         requireNonNull(this);
-        logger.info("Start date " + startDate + " end date: " + endDate + " directory path: " + directoryPath);
         model.updateFilteredRecordList(predicate);
         ReadOnlyFinancialPlanner financialPlanner = model.getFinancialPlanner();
         SummaryByDateList summaryList = new SummaryByDateList(financialPlanner.getRecordList(), predicate);
@@ -97,8 +91,6 @@ public class ExportExcelCommand extends Command {
         String nameFile = ExcelUtil.setNameExcelFile(startDate, endDate);
         String message;
         String filePath = setPathFile(nameFile, directoryPath);
-
-        logger.info("The file Path: " + filePath);
 
         if (exportDataIntoExcelSheetWithGivenRecords(recordList, daySummaryEntryList, filePath)) {
             message = String.format(Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY, nameFile, directoryPath);
@@ -112,7 +104,7 @@ public class ExportExcelCommand extends Command {
     /**
      * Export the records into Excel File.
      */
-    public static Boolean exportDataIntoExcelSheetWithGivenRecords(
+    private static Boolean exportDataIntoExcelSheetWithGivenRecords(
             List<Record> recordList, List<SummaryEntry> daySummaryEntryList, String filePath) {
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet recordData = workbook.createSheet("RECORD DATA");

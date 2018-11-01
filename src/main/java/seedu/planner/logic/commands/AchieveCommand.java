@@ -2,18 +2,17 @@ package seedu.planner.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.ExcelUtil.setPathFile;
-import static seedu.planner.logic.commands.ExportExcelCommand.exportDataIntoExcelSheetWithGivenRecords;
 import static seedu.planner.model.Model.PREDICATE_SHOW_ALL_RECORDS;
 
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.logging.Logger;
 
-import seedu.planner.commons.core.LogsCenter;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import seedu.planner.commons.core.Messages;
 import seedu.planner.commons.util.ExcelUtil;
 import seedu.planner.logic.CommandHistory;
-import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.DirectoryPath;
 import seedu.planner.model.Model;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
@@ -48,7 +47,8 @@ public class AchieveCommand extends Command {
     public static final int FIRST_ELEMENT = 0;
     public static final int SECOND_ELEMENT = 1;
 
-    private static Logger logger = LogsCenter.getLogger(AchieveCommand.class);
+    private static final int EMPTY_LIST_RECORD_SIZE = 0;
+
     private final Date startDate;
     private final Date endDate;
     private final String directoryPath;
@@ -82,8 +82,24 @@ public class AchieveCommand extends Command {
         this.predicate = new DateIsWithinIntervalPredicate(startDate, endDate);
     }
 
+    /**
+     * Achieve the records into Excel File.
+     */
+    private static Boolean achieveDataIntoExcelSheetWithGivenRecords(
+            List<Record> recordList, List<SummaryEntry> daySummaryEntryList, String filePath) {
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet recordData = workbook.createSheet("RECORD DATA");
+        XSSFSheet summaryData = workbook.createSheet("SUMMARY DATA");
+        if (recordList.size() > EMPTY_LIST_RECORD_SIZE) {
+            ExcelUtil.writeExcelSheetIntoDirectory(
+                    recordList, daySummaryEntryList, recordData, summaryData, workbook, filePath);
+            return true;
+        }
+        return false;
+    }
+
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory) {
         requireNonNull(this);
         model.updateFilteredRecordList(predicate);
         ReadOnlyFinancialPlanner financialPlanner = model.getFinancialPlanner();
@@ -93,7 +109,7 @@ public class AchieveCommand extends Command {
         String nameFile = ExcelUtil.setNameExcelFile(startDate, endDate);
         String message;
         String filePath = setPathFile(nameFile, directoryPath);
-        if (exportDataIntoExcelSheetWithGivenRecords(recordList, daySummaryEntryList, filePath)) {
+        if (achieveDataIntoExcelSheetWithGivenRecords(recordList, daySummaryEntryList, filePath)) {
             message = String.format(Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY
                     + Messages.MESSAGE_ACHIEVE_SUCCESSFULLY, nameFile, directoryPath);
         } else {
