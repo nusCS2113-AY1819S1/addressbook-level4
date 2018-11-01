@@ -184,6 +184,11 @@ public interface Model {
     void addJobOffer(CompanyName companyName, JobOffer jobOffer);
 
     /**
+     * Sorts the list of job offers in CompanyBook
+     */
+    void sortJobOffers(Prefix prefix);
+
+    /**
      * Returns true if a company has a job offer with the same identity as {@code jobOffer} exists in the CompanyBook.
      */
     boolean hasJobOffer(CompanyName companyName, JobOffer jobOffer);

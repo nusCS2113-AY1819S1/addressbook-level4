@@ -25,20 +25,20 @@ public class SortCandidateCommandParser implements Parser<SortCandidateCommand> 
     public SortCandidateCommand parse(String arg) throws ParseException {
         requireNonNull(arg);
 
-        switch(arg) {
-        case " n/":
+        switch(arg.trim()) {
+        case "n/":
             return new SortCandidateCommand(PREFIX_NAME);
-        case " x/":
+        case "x/":
             return new SortCandidateCommand(PREFIX_AGE);
-        case " e/":
+        case "e/":
             return new SortCandidateCommand(PREFIX_EMAIL);
-        case " j/":
+        case "j/":
             return new SortCandidateCommand(PREFIX_JOB);
-        case " h/":
+        case "h/":
             return new SortCandidateCommand(PREFIX_EDUCATION);
-        case " s/":
+        case "s/":
             return new SortCandidateCommand(PREFIX_SALARY);
-        case " r/":
+        case "r/":
             return new SortCandidateCommand(PREFIX_REVERSE);
         default:
             throw new ParseException(SortCandidateCommand.MESSAGE_TAG_USAGE);

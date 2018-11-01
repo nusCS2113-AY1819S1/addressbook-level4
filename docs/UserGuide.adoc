@@ -393,7 +393,7 @@ Examples:
 Format: `cancel`
 
 // tag::sort[]
-=== Sorting candidates / company / job : `sortc` `sortC`
+=== Sorting candidates / company / job : `sortc` `sortC` `sortj`
 
 ==== Sorting candidates based on different fields
 Format: `sortc <tag>` +
@@ -423,6 +423,19 @@ Examples:
 *   `sortC r/` +
 (Sort all companies in reverse)
 
+==== Sorting job offers based on different fields
+Format: `sortj <tag>` +
+Supported tags: `c/`, `j/`, `xr/`, `h/`, `s/`, `r/`
+
+*   Only one tag/field is included when using the sort command
+*   There must be one tag/field included
+
+Examples:
+
+*   `sortj j/` +
+(Sorts all job offers lexicographically by their titles)
+*   `sortj r/` +
+(Sorts all job offers in reverse)
 // end::sort[]
 
 // tag::blacklist[]

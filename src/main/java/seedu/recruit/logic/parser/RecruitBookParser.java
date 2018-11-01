@@ -43,6 +43,7 @@ import seedu.recruit.logic.commands.ShortlistCandidateCommand;
 import seedu.recruit.logic.commands.ShortlistCandidateInitializationCommand;
 import seedu.recruit.logic.commands.SortCandidateCommand;
 import seedu.recruit.logic.commands.SortCompanyCommand;
+import seedu.recruit.logic.commands.SortJobOfferCommand;
 import seedu.recruit.logic.commands.SwitchBookCommand;
 import seedu.recruit.logic.commands.UndoCandidateBookCommand;
 import seedu.recruit.logic.commands.UndoCompanyBookCommand;
@@ -182,6 +183,9 @@ public class RecruitBookParser {
 
             case SortCompanyCommand.COMMAND_WORD:
                 return new SortCompanyCommandParser().parse(arguments);
+
+            case SortJobOfferCommand.COMMAND_WORD:
+                return new SortJobOfferCommandParser().parse(arguments);
 
             case ListCandidateCommand.COMMAND_WORD:
                 return new ListCandidateCommand();
