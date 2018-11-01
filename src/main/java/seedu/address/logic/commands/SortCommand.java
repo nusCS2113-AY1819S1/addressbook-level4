@@ -58,7 +58,7 @@ public class SortCommand extends Command {
         default:
             break;
         }
-        model.commitAddressBook();
+        model.commitEventList();
         return new CommandResult(String.format(MESSAGE_SUCCESS, key));
     }
 }

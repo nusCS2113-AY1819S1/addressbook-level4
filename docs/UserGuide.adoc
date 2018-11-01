@@ -339,7 +339,7 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 === Undoing previous command : `undo`
 Priority level: all
 
-Restores the event schedule or address book to the state before the previous _undoable_ command was executed. +
+Restores the event schedule or address book to the state before the previous _undoable_ command was executed. Only commands that modify the entries in the event schedule or address book are able to be undone. The unfiltered event schedule and address book will be displayed after undoing the previous command. +
 Format/Prompts: +
 Enter a command: `undo`
 
@@ -367,7 +367,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 === Redoing the previously undone command : `redo`
 Priority level: all
 
-Reverses the most recent `undo` command. +
+Reverses the most recent `undo` command. Only commands that modify the entries in the event schedule or address book will be reversed. The unfiltered event schedule and address book will be displayed after redoing the command. +
 Format/Prompts: +
 Enter a command: `redo`
 
