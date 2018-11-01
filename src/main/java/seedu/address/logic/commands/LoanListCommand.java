@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.MainApp.loanListFile;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOANER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
@@ -50,8 +51,7 @@ public class LoanListCommand extends Command {
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
         jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         jaxbMarshaller.marshal(xmlAdaptedLoanList, System.out);
-        jaxbMarshaller.marshal(xmlAdaptedLoanList,
-                new File("C:/Users/ckinw/OneDrive/Documents/JalilEnterprisesCKW/data/LoanList.xml"));
+        jaxbMarshaller.marshal(xmlAdaptedLoanList, loanListFile);
     }
 
     @Override
@@ -70,7 +70,6 @@ public class LoanListCommand extends Command {
      * Updates the XmlAdaptedLoanList, then updates the XmlLoanListFile
      */
     private void updateLoanList() throws JAXBException {
-        File loanListFile = new File("C:/Users/ckinw/OneDrive/Documents/JalilEnterprisesCKW/data/LoanList.xml");
         XmlAdaptedLoanerDescription toAdd = new XmlAdaptedLoanerDescription(loaner);
         JAXBContext context = JAXBContext.newInstance(XmlAdaptedLoanList.class);
         XmlAdaptedLoanList xmlAdaptedLoanList = new XmlAdaptedLoanList();

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.MainApp.loanListFile;
 
 import java.io.File;
 import java.util.List;
@@ -47,7 +48,6 @@ public class DeleteCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
         }
-        File loanListFile = new File("C:/Users/ckinw/OneDrive/Documents/JalilEnterprisesCKW/data/LoanList.xml");
         Item itemToDelete = lastShownList.get(targetIndex.getZeroBased());
         if (loanListFile.exists()) {
             try {

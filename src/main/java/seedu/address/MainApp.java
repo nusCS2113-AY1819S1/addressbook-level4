@@ -1,5 +1,6 @@
 package seedu.address;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -50,12 +51,19 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
-
+    public static File loanListFile;
 
     @Override
     public void init() throws Exception {
         logger.info("=============================[ Initializing StockList ]===========================");
         super.init();
+
+        File userDirectory = new File(System.getProperty("user.dir"));
+        String loanListDirectory = userDirectory.getAbsolutePath().replace("\\", "/");
+        loanListDirectory += "/data/LoanList.xml";
+        System.out.println(loanListDirectory);
+        loanListFile = new File(loanListDirectory);
+
 
         AppParameters appParameters = AppParameters.parse(getParameters());
         config = initConfig(appParameters.getConfigPath());

@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.MainApp.loanListFile;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -37,7 +39,6 @@ public class DeleteLoanListCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        File loanListFile = new File("C:/Users/ckinw/OneDrive/Documents/JalilEnterprisesCKW/data/LoanList.xml");
         if (!loanListFile.exists()) {
             throw new CommandException(MESSAGE_EMPTY);
         }
