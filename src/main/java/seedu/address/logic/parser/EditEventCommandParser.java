@@ -65,6 +65,10 @@ public class EditEventCommandParser implements Parser<EditEventCommand> {
             editEventDescriptor.setLocation(
                     ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get()));
         }
+        if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
+            editEventDescriptor.setDescription(
+                    ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()));
+        }
 
         if (!editEventDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditEventCommand.MESSAGE_NOT_EDITED);

@@ -177,6 +177,7 @@ Format: `addEvent n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START_TIME e/END_T
 [NOTE]
 ====
 * Leap years are not considered during date validation.
+* Events created cannot span multiple days.
 ====
 
 Example:
