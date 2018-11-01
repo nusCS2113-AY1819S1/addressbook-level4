@@ -20,10 +20,10 @@ public class SortCompanyCommandParser implements Parser<SortCompanyCommand> {
     public SortCompanyCommand parse(String arg) throws ParseException {
         requireNonNull(arg);
 
-        switch(arg) {
-        case " c/":
+        switch(arg.trim()) {
+        case "c/":
             return new SortCompanyCommand(PREFIX_COMPANY_NAME);
-        case " e/":
+        case "e/":
             return new SortCompanyCommand(PREFIX_EMAIL);
         default:
             throw new ParseException(SortCompanyCommand.MESSAGE_TAG_USAGE);
