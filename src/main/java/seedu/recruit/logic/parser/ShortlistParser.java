@@ -1,5 +1,6 @@
 package seedu.recruit.logic.parser;
 
+import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT;
 import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import seedu.recruit.commons.core.index.Index;
@@ -32,8 +33,9 @@ public class ShortlistParser {
 
             case ShortlistCandidateCommand.COMMAND_WORD:
                 // prevents invalid arguments as confirm should not be accompanied with further arguments
-                if (!arguments.contentEquals("")) {
-                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND + ShortlistCandidateCommand.MESSAGE_USAGE);
+                if (!arguments.isEmpty()) {
+                    throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
+                            + ShortlistCandidateCommand.MESSAGE_USAGE);
                 }
                 return new ShortlistCandidateCommand();
 

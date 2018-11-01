@@ -16,7 +16,9 @@ public class ListCandidateCommand extends Command {
 
     public static final String COMMAND_WORD = "listc";
 
-    public static final String MESSAGE_SUCCESS = "Listed all candidates";
+    public static final String MESSAGE_SUCCESS = "Listed all candidates.\n";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all candidates.\n";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {

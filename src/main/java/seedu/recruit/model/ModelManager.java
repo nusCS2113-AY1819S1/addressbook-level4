@@ -347,7 +347,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void shortlistCandidateToJobOffer(Candidate candidate, JobOffer jobOffer) {
         jobOffer.shortlistCandidate(candidate);
         indicateCompanyBookChanged();
-    };
+    }
 
     @Override
     public void deleteShortlistedCandidateFromJobOffer(Candidate candidate, JobOffer jobOffer) {

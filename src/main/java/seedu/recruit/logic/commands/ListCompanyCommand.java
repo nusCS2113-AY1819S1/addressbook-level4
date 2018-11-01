@@ -17,7 +17,9 @@ public class ListCompanyCommand extends Command {
 
     public static final String COMMAND_WORD = "listC";
 
-    public static final String MESSAGE_SUCCESS = "Listed all companies and all job offers";
+    public static final String MESSAGE_SUCCESS = "Listed all companies and all job offers.\n";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all companies and all job offers.\n";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
