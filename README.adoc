@@ -5,13 +5,7 @@ image:https://travis-ci.org/CS2113-AY1819S1-F09-4/main.svg?branch=master["Build 
 
 Simplifying your job recruiting experience!
 
-ifdef::env-github[]
-image::docs/images/Ui.png[width="600"]
-endif::[]
-
-ifndef::env-github[]
-image::images/Ui.png[width="600"]
-endif::[]
+image::docs/images/Ui.png[width="1000"]
 
 Are you a job agent looking to keep track of interviewed candidates and available job offers?
 
