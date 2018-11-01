@@ -1,15 +1,22 @@
 package seedu.address.model.person;
 
+// import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents a Skill's Level in the address book.
  * Guarantees: immutable; is always valid
  */
 
 public class SkillLevel {
+
     public final int skillLevel;
 
     public SkillLevel(int skillLevel) {
         this.skillLevel = skillLevel;
+    }
+
+    public boolean isValidSkillLevel() {
+        return skillLevel >= 0 && skillLevel <= 100;
     }
 
     @Override

@@ -421,7 +421,7 @@ image::BudgetCommandSequenceDiagram.png[width="800"]
 
 //end::budget[]
 
-// tag::undoredo[]
+// tag::searchpruning[]
 === Search Pruning Feature
 
 The Search Pruning mechanism is facilitated by the `SearchHistoryManager`.
@@ -523,7 +523,7 @@ Aspect: What data is stored in search history stack +
 ** Cons:
     . More memory is required as Person objects has to be duplicated multiple times into a new List.
     . Class is inextensible to store other objects other than those from a Person classes.
-
+// end::searchpruning[]
 
 === Add Skill Level Command
 
@@ -576,6 +576,7 @@ information during addition of personal information.
 * Another is to enhance the edit command, possibly depreciating the use of the add skill level command.
 * Another is to enhance the storage such that multiple skills can be added per person.
 
+// tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
 

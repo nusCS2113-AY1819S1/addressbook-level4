@@ -28,7 +28,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindPersonSubCommand;
+import seedu.address.logic.commands.FindNameSubCommand;
 import seedu.address.logic.commands.FindTagSubCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
@@ -117,7 +117,7 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindPersonSubCommand(new NameContainsKeywordsPredicate(keywords), false), command);
+        assertEquals(new FindNameSubCommand(new NameContainsKeywordsPredicate(keywords), false), command);
     }
 
     @Test

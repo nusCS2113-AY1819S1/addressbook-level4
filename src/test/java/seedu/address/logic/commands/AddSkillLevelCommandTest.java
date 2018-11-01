@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.AddSkillLevelCommand.MESSAGE_SKILLLEVEL_CONSTRAINTS;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_SKILL_LEVEL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SKILL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SKILL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SKILL_LEVEL_AMY;
@@ -99,6 +101,18 @@ public class AddSkillLevelCommandTest {
         AddSkillLevelCommand addSkillCommand = new AddSkillLevelCommand(outOfBoundIndex,
                 new Skill(VALID_SKILL_BOB), new SkillLevel(VALID_SKILL_LEVEL_BOB));
         assertCommandFailure(addSkillCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidSkillLevel_failure() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        AddSkillLevelCommand addSkillLevelCommand = new AddSkillLevelCommand(
+                INDEX_FIRST_PERSON,
+                new Skill(firstPerson.getSkill().value),
+                new SkillLevel(INVALID_SKILL_LEVEL_AMY)
+        );
+        assertCommandFailure(addSkillLevelCommand, model, commandHistory, MESSAGE_SKILLLEVEL_CONSTRAINTS);
     }
     /**
      * Edit filtered list where index is larger than size of filtered list,
