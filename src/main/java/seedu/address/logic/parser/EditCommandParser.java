@@ -71,7 +71,13 @@ public class EditCommandParser implements Parser
             editEventDescriptor.setDate(ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get()));
         }
         if (argMultimap.getValue(PREFIX_COMMENT).isPresent()) {
-            editEventDescriptor.setComment(new Comment("{span}Comment Section{/span}{ol}{/ol}"));
+            String defaultComments = "{span}Comment Section{/span}{ol}{/ol}";
+            if (ParserUtil.parseComment(argMultimap.getValue(PREFIX_COMMENT).get()).equals(defaultComments)) {
+                editEventDescriptor.setComment(new Comment("{span}Comment Section{/span}{ol}{/ol}"));
+            }
+            else {
+                throw new ParseException("C/ needs to be C/" +defaultComments + "to reset the comment section.");
+            }
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editEventDescriptor::setTags);
         parseAttendeesForEdit(argMultimap.getAllValues(PREFIX_ATTENDEE)).ifPresent(editEventDescriptor::setAttendees);
