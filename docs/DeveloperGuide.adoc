@@ -1069,6 +1069,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |teacher |remove modules |delete modules that I accidentally created
 
+|`* *` |teacher |view module details |see extra information such as the students enrolled in the module
+
 |`* * *` |teacher |archive modules |remove modules that I am no longer actively teaching, and keep it as a historical record instead
 
 |`* * *` |teacher |find modules |check if I have already created the module, and view its details if it exists in the system
@@ -1457,6 +1459,45 @@ Use case resumes at step 1.
 
 
 [discrete]
+
+=== Use case: List courses ordered by students
+*Precondition(s)* :
+
+* NIL
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
+
+1.  Teacher lists courses ordered by students.
+2.  System displays lists of courses ordered by students.
++
+Use case ends.
+
+*Extensions* :
+
+* 2a. Teacher enters an invalid command.
++
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+
+* 2b. Teacher enters improperly formatted command.
++
+** 2b1. System displays the proper format for usage of the command.
++
+Use case resumes at step 1.
+
+* 2c. There are no courses in the system.
++
+** 2c1. System shows 'no courses in system' message.
++
+Use case resumes at step 1.
+
+
+[discrete]
 === Use case: Add module
 
 *Precondition(s)* :
@@ -1585,6 +1626,32 @@ Use case resumes at step 1.
 Use case resumes at step 1.
 
 * 3a. Teacher rejects the confirmation to delete the module.
++
+Use case resumes at step 1.
+
+
+[discrete]
+=== Use case: View module details
+*Precondition(s)* :
+
+* The module must exist in the system.
+
+*Guarantees* :
+
+* None.
+
+*MSS* :
+
+1.  Teacher wants to see the details of a particular module in the system.
+2.  System displays all the information about that module.
++
+Use case ends.
+
+*Extensions* :
+
+* 2a. Teacher enters an invalid command.
++
+** 2a1. System displays the command's correct usage.
 +
 Use case resumes at step 1.
 

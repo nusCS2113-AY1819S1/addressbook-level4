@@ -6,6 +6,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.student.StudentManager;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -31,7 +32,8 @@ public class StudentFindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
+                StudentManager.getInstance().getTableRepresentationForModel(model));
     }
 
     @Override

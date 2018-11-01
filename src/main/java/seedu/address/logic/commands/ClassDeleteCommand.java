@@ -68,7 +68,8 @@ public class ClassDeleteCommand extends Command {
         classroomManager.saveClassroomList();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, classToDelete.getClassName(),
-                classToDelete.getModuleCode(), classToDelete.getMaxEnrollment()));
+                classToDelete.getModuleCode(), classToDelete.getMaxEnrollment()),
+                classroomManager.getClassroomHtmlRepresentation());
     }
 
     @Override

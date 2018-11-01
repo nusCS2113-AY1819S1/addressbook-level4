@@ -27,6 +27,7 @@ import seedu.address.model.person.MatricNo;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.student.StudentManager;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -87,7 +88,8 @@ public class StudentEditCommand extends Command {
         model.updatePerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson),
+                StudentManager.getInstance().getTableRepresentationForModel(model));
     }
 
     /**

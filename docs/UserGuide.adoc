@@ -57,8 +57,13 @@ Format: student add n/NAME i/ADMIN_NUMBER c/COURSE_CODE p/MOBILE_NUMBER e/EMAIL 
 
 Examples:
 
-* `student add n/Tristy i/A0169999Z c/CS1 p/90002334 e/E0111342@u.nus.edu a/522 Tampines North 1`
-* `student add n/Megan Nicole c/CEG1 e/E0169113@u.nus.edu a/14 Changi South i/A0177897E p/92667921`
+* `student add n/Tristy i/A0169999Z c/CS p/90002334 e/E0111342@u.nus.edu a/522 Tampines North 1`
+* `student add n/Megan Nicole c/CEG e/E0169113@u.nus.edu a/14 Changi South i/A0177897E p/92667921`
+
+****
+* Matriculation number must be unique, and must consist of a letter prefix, followed by 7 numbers, and a letter suffix.
+* Course code must already exist in the system.
+****
 
 ==== Update Student : `student edit`
 Edits an existing student in the system. +
@@ -75,31 +80,6 @@ Edits the phone number and home address of the 1st student to be 99887890 and 14
 * `student edit 2 a/14 Jurong East Street 91`
 Edits only the address of the 2nd student to be 14 Jurong East Street 91.
 
-==== Select Student : `select`
-Selects the student identified by the index number used in the displayed person list. +
-Format: `student select INDEX`
-
-==== Find Student by name/matric no : `student find` (find by matric no coming in v1.3)
-Find student(s) whose names contain any of the given keywords. +
-Format:  student find [n/STUDENT_NAME] [i/MATRIC_NO]
-****
-* Display a list of students whose name or matric number matches the given keywords.
-****
-Examples:
-
-* `student find n/Rachel`
-Returns students whose first name or last name contains 'Rachel'.
-* `student find i/A0168000L`
-Return the student whose matriculation no matches 'A0168000L'.
-
-Examples:
-
-* `student list` +
-`select 2` +
-Selects the 2nd student in the address book.
-* `student find Betsy` +
-`select 1` +
-Selects the 1st student in the results of the `find` command.
 
 ==== Remove Student : `student delete`
 Deletes the specified student from the system. +
@@ -118,9 +98,9 @@ Deletes the 2nd person in the system
 
 ==== List Students : `student list`
 Shows a list of all students in the system. +
-Format: list students
+Format: student list
 
-==== Export Student : `student export [coming in v1.3]`
+==== Export Student : `student export [coming in v1.4]`
 Exports students to a .csv file +
 Format: student export LOCATION
 ****
@@ -135,24 +115,35 @@ Exports all students in .csv format to the 'export' folder in C drive.
 ==== Add a course : `course add`
 Adds a student to the system. +
 Format: course_add n/COURSE_NAME c/COURSE_CODE f/FACULTY_NAME
-
+****
+* Course code must be unique.
+* Course code may contain letters only.
+****
 Examples:
 
-* `course add n/Computer Engineering c/CEG1 f/School of Computing`
-* `course add n/Computer Science c/CS1 f/School of Computing`
+* `course add n/Computer Engineering c/CEG f/School of Computing`
+* `course add n/Computer Science c/CS f/School of Computing`
 
 ==== List all courses : `course list`
 Shows a list of all courses in the system. +
 Format: course list
 
+==== List all courses : `course liststudents`
+Shows a list of all students ordered by course. +
+Format: course liststudent
+
 ==== Remove course : `course delete`
 Deletes the specified course from the system +
 Format: course delete c/COURSE_CODE
 
+****
+* Course must exist/
+****
+
 Examples:
 
-* `course delete CEG1`
-Deletes CEG1 from the course directory, if it exists.
+* `course delete CEG`
+Deletes CEG from the course directory, if it exists.
 
 
 === Module Management
@@ -215,6 +206,7 @@ Format: `module find KEYWORD [MORE_KEYWORDS]`
 ****
 * At least one keyword must be provided.
 * The search is case-insensitive.
+* The search will only match whole words i.e. `engin` will not return `Engineering`.
 ****
 
 Examples:
@@ -227,21 +219,6 @@ Returns `CS2113` and `CS2040C`.
 ==== List modules : `module list`
 Shows a list of all modules in the system. +
 Format: `module list`
-
-==== Archive module : `module archive [coming in v1.4]`
-Archives a module that is no longer being taught to keep it as a historical record. +
-Format: `module archive mc/MODULE_CODE`
-
-****
-* The archived module will no longer show up using the base module list command.
-* The module must already exist in the system.
-* The user will be prompted to confirm archiving the module to prevent accidents.
-****
-
-Example:
-
-* `module archive mc/CS2113` +
-Archives the module with module code `CS2113`.
 
 ==== Enrol Student : `module enrol`
 Enrols students into the specified module using their matriculation numbers or email addresses. +
@@ -259,6 +236,21 @@ Examples:
 Enrols a student with matric no. `A0161234B` in `CS2113`.
 * `module enrol mc/CS2040C i/A0167263X i/A0179821B` +
 Enrols two students with matric no. `A0167263X` and `A0179821B` in `CS2040C`.
+
+==== Archive module : `module archive [coming in v1.4]`
+Archives a module that is no longer being taught to keep it as a historical record. +
+Format: `module archive mc/MODULE_CODE`
+
+****
+* The archived module will no longer show up using the base module list command.
+* The module must already exist in the system.
+* The user will be prompted to confirm archiving the module to prevent accidents.
+****
+
+Example:
+
+* `module archive mc/CS2113` +
+Archives the module with module code `CS2113`.
 
 ==== Assign TA : `module assign [coming in v2.0]`
 Assigns a student as a TA of the module. +
@@ -652,59 +644,7 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 ====
 
 // tag::undoredo[]
-=== Undoing previous command : `undo`
 
-Restores the address book to the state before the previous _undoable_ command was executed. +
-Format: `undo`
-
-[NOTE]
-====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
-====
-
-Examples:
-
-* `delete 1` +
-`list` +
-`undo` (reverses the `delete 1` command) +
-
-* `select 1` +
-`list` +
-`undo` +
-The `undo` command fails as there are no undoable commands executed previously.
-
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-
-=== Redoing the previously undone command : `redo`
-
-Reverses the most recent `undo` command. +
-Format: `redo`
-
-Examples:
-
-* `delete 1` +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
-
-* `delete 1` +
-`redo` +
-The `redo` command fails as there are no `undo` commands executed previously.
-
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
-`redo` (reapplies the `clear` command) +
-// end::undoredo[]
-
-=== Clearing all entries : `clear`
-
-Clears all entries from the address book. +
-Format: `clear`
 
 === Exiting the program : `exit`
 
@@ -728,33 +668,41 @@ _{explain how the user can enable/disable data encryption}_
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
 
 == Command Summary
+* *Add course* : `course add c/COURSE_CODE n/COURSE_NAME f/FACULTY_NAME` +
+e.g. `course add c/CEG n/Computer Engineering f/FoE`
+* *Delete course* : `course delete c/COURSE_CODE` +
+e.g. `course delete c/CEG`
+* *List all courses* : `course list` +
+* *List all students ordered by courses* : `course liststudents` +
 * *Add student* : `student add n/NAME i/ADMIN_NUMBER c/COURSE_CODE p/MOBILE_NUMBER e/EMAIL a/ADDRESS` +
 e.g. `student add n/Megan Nicole c/CEG e/E0169113@u.nus.edu a/14 Changi South i/A0177897E p/92667921`
 * *Update student* : `student edit INDEX [n/NAME] [i/ADMIN_NUMBER] [c/CLASS] [p/MOBILE_NUMBER] [e/EMAIL a/ADDRESS] ` +
 e.g. `student edit 1 p/99887890 a/14 Simei Avenue 1`
 * *Finding a student by name/matric no* : `student find [n/STUDENT_NAME] [i/MATRIC_NO` +
-e.g. `find student Megan Nicole`
+e.g. `student find Megan Nicole`
 * *List all students* : `student list` +
 * *Delete student by INDEX* : `student delete` +
 e.g. `student delete 2`
-* *Export students* : `student export` +
+* *Export students [COMING IN V1.4]* : `student export` +
 e.g. `student export C:\export`
 
-* *Add module* : `module add n/MODULE_NAME c/MODULE_CODE [p/PREREQUISITES]…​` +
-e.g. `module add n/Software Engineering c/CS2113 p/CS2040C`
-* *Update module* : `module edit n/MODULE_NAME c/MODULE_CODE [p/PREREQUISITES]…​` +
-e.g. `module edit c/CS2113 p/`
-* *Remove module* : `module delete c/MODULE_CODE​` +
-e.g. `module delete c/CS2113`
+* *Add module* : `module add mc/MODULE_CODE mn/MODULE_NAME` +
+e.g. `module add mc/CS2113 mn/Software Engineering`
+* *Update module* : `module edit mc/MODULE_CODE​ mn/MODULE_NAME` +
+e.g. `module edit mc/CS2113 mn/Software`
+* *Remove module* : `module delete mc/MODULE_CODE​` +
+e.g. `module delete mc/CS2113`
+* *View module details* : `module view mc/MODULE_CODE` +
+e.g. `module view mc/CS2113`
 * *Find module by module code* : `module find KEYWORD [MORE_KEYWORDS]​` +
-e.g. `module find cs2113`
+e.g. `module find cs2113 structures`
 * *List modules* : `module list​` +
-* *Archive module* : `module archive c/MODULE_CODE​` +
-e.g. `module archive c/CS2113`
-* *Enrol student in module* : `module enrol [i/MATRIC_NUMBER]…​ [e/EMAIL]…​​` +
-e.g. `module enrol i/A0167263X i/A0179821B`
-* *Assign TA* : `module assign [i/MATRIC_NUMBER] [e/EMAIL]` +
-e.g. `module assign i/A0171234B`
+* *Enrol student in module* : `module enrol mc/MODULE_CODE i/MATRIC_NUMBER…​` +
+e.g. `module enrol mc/CS2113 i/A0167263X i/A0179821B`
+* *Archive module* : `module archive mc/MODULE_CODE​` `[coming in v1.4]` +
+e.g. `module archive mc/CS2113`
+* *Assign TA* : `module assign mc/MODULE_CODE [i/MATRIC_NUMBER] [e/EMAIL]` `[coming in v2.0]` +
+e.g. `module assign mc/CS2113 i/A0171234B`
 
 * *Add Grade Component* : `gradebook add mc/MODULE_CODE cn/COMPONENT_NAME [mm/MAX_MARKS] [w/WEIGHTAGE]` +
 e.g. `gradebook add mc/CS2113 cn/Assignment 1 mm/60`
@@ -803,5 +751,4 @@ e.g. `note find k/bubble k/queue`
 * *Export notes* `note export fn/FILE_NAME` +
 e.g. `note export fn/notes`
 * *History* : `history`
-* *Undo* : `undo`
-* *Redo* : `redo`
+

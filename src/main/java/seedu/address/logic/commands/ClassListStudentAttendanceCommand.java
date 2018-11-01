@@ -4,25 +4,19 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.classroom.Attendance;
 import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.ClassroomManager;
 import seedu.address.model.module.ModuleManager;
-import seedu.address.ui.HtmlTableProcessor;
 
 /**
  * Lists the attendance for a class in the system.
  */
 public class ClassListStudentAttendanceCommand extends Command {
     public static final String COMMAND_WORD = "class listattendance";
-
+    public static final String HTML_TABLE_TITLE_ATTENDANCE = "Attendance list for %1$s, %2$s";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": list class attendance list for a specified class"
             + " for the system. "
             + "Parameters: "
@@ -37,8 +31,6 @@ public class ClassListStudentAttendanceCommand extends Command {
             + ", Module code: %2$s";
     private static final String MESSAGE_FAIL = "Class belonging to module not found!";
     private static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
-    private static final String HTML_TABLE_TITLE_ATTENDANCE = "Attendance list for %1$s, %2$s";
-
 
     private final String className;
     private final String moduleCode;
@@ -71,38 +63,7 @@ public class ClassListStudentAttendanceCommand extends Command {
             throw new CommandException(MESSAGE_FAIL);
         }
 
-        final StringBuilder builder = new StringBuilder();
-        builder.append(HtmlTableProcessor.getH3Representation(String.format(HTML_TABLE_TITLE_ATTENDANCE,
-                classToListAttendance.getClassName(), classToListAttendance.getModuleCode())));
-        String studentStatus = "";
-        for (Attendance attendance : classToListAttendance.getAttendanceList()) {
-            builder.append(HtmlTableProcessor.renderTableStart(new ArrayList<>(
-                    Collections.singletonList("Date of attendance"))));
-            builder.append(HtmlTableProcessor.getTableItemStart());
-            builder.append(HtmlTableProcessor
-                    .renderTableItem(new ArrayList<>(Collections.singletonList(attendance.getDate()))));
-            builder.append(HtmlTableProcessor.getTableItemEnd());
-
-            builder.append(HtmlTableProcessor.renderTableStart(new ArrayList<>(Arrays
-                    .asList("Matric No", "Status"))));
-
-            builder.append(HtmlTableProcessor.getTableItemStart());
-            for (String student : classToListAttendance.getStudents()) {
-                studentStatus = "Absent";
-                if (attendance.getStudentsPresent().contains(student)) {
-                    studentStatus = "Present";
-                }
-                builder.append(HtmlTableProcessor
-                        .renderTableItem(new ArrayList<>(Arrays
-                                .asList(student,
-                                        studentStatus))));
-
-            }
-            builder.append(HtmlTableProcessor.getTableItemEnd());
-        }
-
-
         return new CommandResult(String.format(MESSAGE_SUCCESS + "\n", className, moduleCode),
-                builder.toString());
+                classroomManager.getClassroomAttendanceHtmlRepresentation(classToListAttendance));
     }
 }
