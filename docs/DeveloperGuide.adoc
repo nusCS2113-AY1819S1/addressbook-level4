@@ -356,7 +356,7 @@ from List<>.
 
 // end::sorttask[]
 
-// tag::expenditure[]
+// tag::checkexpenditure[]
 === Check Expenditure
 ==== Current Implementation
 
@@ -367,7 +367,7 @@ image::CheckSequenceDiagram.png[width="800"]
 ==== Design Consideration
 ===== Aspect: Methods to support the check commands
 
-// end::expenditure[]
+// end::checkexpenditure[]
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption

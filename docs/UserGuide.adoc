@@ -259,6 +259,7 @@ The list is now populated with expenditures of `Electronics` category.
 The list is now populated with all expenditures regardless of their date or category.
 // end::ETview[]
 
+// tag::ETcheck[]
 === Checking expenditures : `ET_check`
 
 Checks the status of the expenditures in a particular period and generates a graph [coming in v1.4] to demonstrate how much money was spent on each unit period. +
@@ -273,6 +274,7 @@ Examples:
 
 * `ET_check start/01-01-2017 start/01-01-2018` +
 Checks the status of the expenditures from 01-01-2017 to 01-01-2018 and generates a graph [coming in v1.4] to demonstrate how much money was spent on each expenditure.
+// end::ETcheck[]
 
 // tag::ETadvice[]
 === Getting advice for spending money : `ET_advice`
