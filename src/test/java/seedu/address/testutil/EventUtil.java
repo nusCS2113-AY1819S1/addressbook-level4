@@ -41,7 +41,6 @@ public class EventUtil {
         sb.append(PREFIX_PHONE + event.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + event.getEmail().value + " ");
         sb.append(PREFIX_VENUE + event.getVenue().value + " ");
-        sb.append(PREFIX_COMMENT + event.getComment().value + " ");
         sb.append(PREFIX_DATETIME + event.getDateTime().toString() + " ");
         event.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
