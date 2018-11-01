@@ -162,7 +162,7 @@ Format: `edit  [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 Examples:
 
 
-=== Locating persons by name : `find` (`f`)
+=== Locating persons by name : `find` (`f`) (DOES NOT WORK IN V1.3)
 
 Finds persons whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
