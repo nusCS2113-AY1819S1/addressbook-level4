@@ -31,13 +31,45 @@ image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
+.  There are two types of users in ForumBook: **user** and **admin**
+* Without logging in, you could: +
+1. Register using `addUser uName/john uPass/123`
+2. Login using `login uName/john uPass/123`
+* As a user, you could: +
+0. Show help using `help`
+1. List all the modules using `listModule`
+2. Select a module to check the threads under that module using `selectModule mCode/CS2113`
+3. Select a thread among the threads listed using `selectThread tId/1`
+4. Create a comment under a thread using `createComment tId/1 cContent/This is a new comment`
+5. Update a comment created by you using `updateComment cId/1 cContent/This is a new comment`
+6. Delete a comment created by you using `deleteComment cId/1`
+7. Create a thread under a module using `createThread tTitle/About exams? cContent/Is there any exam?`
+8. Update a thread created by you using `updateThread tId/1 tTitle/Is there any midterm?`
+9. Delete a thread created by you using `deleteThread tId/1`
+10. Check for latest announcement using `checkAnnounce`
+11. Logout from ForumBook using `logout`
+12. Exits the app using `exit`
 
-* **`login uName/user1 uPass/user1`**: login as `user1`, the user's information will be shown in the top right corner, `user1(User), blocked`. The content in the bracket denote the user type, be it admin or user. The `blocked` denotes that the user is blocked, he/she is unable to create threads or comments.
-* **`selectModule m/CS2113`** : finding threads under module `CS2113`
-* **`createThread mCode/CS2113 tTitle/Is there mid-terms? cContent/I am taking this sem.`** : create a forumThread tittled as `Is there mid-terms?` under module `CS2113`.
-* *`exit`* : exits the app
+* As an admin, you could do anything that an ordinary user could do and the following: +
+1. Post new announcement using `announce aTitle/Urgent! aContent/System maintenance from 3pm to 5pm`
+2. Update a given user's password using `updatePass uName/john uPass/456`
+3. Block a given user using `blockUser uName/john block/true`
+4. Create a new module using `createModule mCode/MA1508E mTitle/Linear Algebra`
+5. Delete a module using `deleteModule mCode/MA1508E`
+6. Update a comment created by other user using `updateComment cId/1 cContent/This is a new comment by admin`
+7. Delete a comment created by other user using `deleteComment cId/1`
+8. Update a thread created by other user using `updateThread tId/1 tTitle/This is updated by admin`
+9. Delete a thread created by other user using `deleteThread tId/1`
+10. Set a user as an admin using `setAdmin uName/john set/true`
+11. Delete a given user using `deleteUser uName/john`
 
+. Note that we populate ForumBook with default data:
+1. Default admin: uName/admin uPass/admin
+2. Default user: uName/user1 uPass/user1
+3. Default module: mCode/CS2113 mTitle/Software Eng
+4. Default thread under CS2113: tTitle/Hey How is CS2113
+5. Default content under that thread: cContent/I am taking this module next sem, how is it?
+6. Default announcement: aTitle/Welcome! aContent/Welcome to ForumBook
 .  Refer to <<Features>> for details of each command.
 
 [[Features]]
@@ -62,7 +94,7 @@ Format: `addUser uName/USER NAME uPass/USER PASSWORD`
 
 Examples:
 
-* `addUser uName/MyName uPass/password`
+* `addUser uName/user1 uPass/user1`
 ****
 *  User Name and password is unique and case sensitive.
 ****
@@ -74,7 +106,7 @@ Format: `login uName/USER NAME uPass/USER PASSWORD`
 
 Examples:
 
-* `login uName/MyName uPass/password`
+* `login uName/user1 uPass/user1`
 
 === Creating a new forumThread : `createThread`
 

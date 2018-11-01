@@ -29,7 +29,7 @@ public class UpdateCommentCommand extends Command {
             + "Example: "
             + COMMAND_WORD + " "
             + PREFIX_COMMENT_ID + "123 "
-            + PREFIX_COMMENT_CONTENT + "This is a new title";
+            + PREFIX_COMMENT_CONTENT + "This is a new comment";
 
     public static final String MESSAGE_SUCCESS = "Comment content updated successfully! %1$s";
     private static int commentIdToUpdate;
