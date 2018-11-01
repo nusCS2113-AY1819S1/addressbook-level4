@@ -294,7 +294,7 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 ====
 
 // tag::undoredo[]
-=== Undoing previous command : `undo` (`u`)
+=== Undoing previous command : `undo` (`u`) (DOES NOT WORK IN V1.3)
 
 Restores the address book to the state before the previous _undoable_ command was executed. +
 Format: `undo`
@@ -320,7 +320,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
 
-=== Redoing the previously undone command : `redo` (`r`)
+=== Redoing the previously undone command : `redo` (`r`) (DOES NOT WORK IN V1.3)
 
 Reverses the most recent `undo` command. +
 Format: `redo`
@@ -343,7 +343,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-=== Clearing all entries : `clear` (`c`)
+=== Clearing all entries : `clear` (`c`) (DOES NOT WORK IN V1.3)
 
 Clears all entries from the address book. +
 Format: `clear`
