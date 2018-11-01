@@ -18,7 +18,13 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.course.Course;
+import seedu.address.model.course.CourseCode;
+import seedu.address.model.course.CourseManager;
+import seedu.address.model.course.CourseName;
+import seedu.address.model.course.FacultyName;
 import seedu.address.model.person.Person;
+import seedu.address.model.student.StudentManager;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -31,6 +37,8 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
+        StudentManager.getInstance().initializeModel(model);
+        CourseManager.getInstance().addCourse(new Course(new CourseCode("CEG"), new CourseName("Computer Engineering"), new FacultyName("Faculty of Engineering")));
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
@@ -130,6 +138,11 @@ public class DeleteCommandTest {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         expectedModel.deletePerson(personToDelete);
         expectedModel.commitAddressBook();
+        CourseManager.getInstance();
+        StudentManager.getInstance().initializeModel(model);
+
+        StudentManager.getInstance().initializeModel(model);
+        CourseManager.getInstance().addCourse(new Course(new CourseCode("CEG"), new CourseName("Computer Engineering"), new FacultyName("Faculty of Engineering")));
 
         // delete -> deletes second person in unfiltered person list / first person in filtered person list
         deleteCommand.execute(model, commandHistory);

@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
+import seedu.address.model.course.CourseManager;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.student.StudentManager;
 
@@ -31,6 +32,8 @@ public class StudentFindCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
+        CourseManager.getInstance();
+        StudentManager.getInstance().initializeModel(model);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
                 StudentManager.getInstance().getTableRepresentationForModel(model));
