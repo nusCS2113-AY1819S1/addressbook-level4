@@ -208,9 +208,9 @@ Format: `find [\tag] [\exclude] KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * If `\tag` option is not specified, find command will search according to names.
 * The `\exclude` option will exclude any names/tags with the specified keywords
-* The order of `\tag` and `\exclude` options cannot be swapped if you want to exclude tags from the displayed list.
-* Back-to-back find commands utilizes the Search Pruning feature and you can get more details about this under the
-Search Pruning Feature section.
+* The order of `\tag` and `\exclude` options can be swapped
+* Back-to-back find commands utilizes the Search Pruning feature which will be further explained under the Search Pruning
+Feature section.
 ****
 
 Examples:

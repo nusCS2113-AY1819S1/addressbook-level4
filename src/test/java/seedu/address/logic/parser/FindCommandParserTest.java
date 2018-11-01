@@ -46,7 +46,8 @@ public class FindCommandParserTest {
         // parsing with tag and exclude options enabled
         FindCommand expectedFindCommand4 =
                 new FindTagSubCommand(new TagContainsKeywordsPredicate(Arrays.asList("friends", "colleagues")), true);
-        assertParseSuccess(parser, "\\tag friends colleagues", expectedFindCommand4);
+        assertParseSuccess(parser, "\\tag \\exclude friends colleagues", expectedFindCommand4);
+        assertParseSuccess(parser, "\\exclude \\tag friends colleagues", expectedFindCommand4);
     }
 
     @Test
@@ -59,6 +60,8 @@ public class FindCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         //parse tags with exclude option enabled without keywords
         assertParseFailure(parser, "\\tag \\exclude",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "\\exclude \\tag",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
