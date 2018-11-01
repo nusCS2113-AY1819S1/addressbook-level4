@@ -435,24 +435,37 @@ Format: `clear`
 // tag::budget[]
 
 === Submitting data for budget allocation: `budget`
+This is the first step in the budget allocation process!
 
-Submits the data about number of events, expected turnout etc. +
+This command allows club members to submit budget calculation data - the name of their club, number of events the club is planning to hold and the expected turnout of the events  +
 Format: `budget c/CLUB NAME t/TURNOUT e/NUMBER OF EVENTS`
 
 Example: +
 `budget c/Computing Club t/200 e/5`
 
-=== Calculating the budgets : `calculatebudget`
+[NOTE]
+====
+CLUB NAME is case sensitive. Hence `c/Computing Club` and `c/computing club` will be treated as unique entries.
+====
 
-Calculates the budgets for all the clubs in NUSSU-Connect using the total available budget
+=== Calculating the budgets : `calculatebudget`
+This is the second step in the budget allocation process!
+
+After all the clubs budget calculation data has been submitted by the club members, NUSSU treasurers must use this command to calculate and allocate budgets to all the clubs based on the total available budget +
 Format: `calculatebudget b/TOTAL AVAILABLE BUDGET IN SGD`
 
 Example: +
 `calculatebudget b/50000`
 
-=== Viewing the allocated budget for a club : `viewbudget`
+[NOTE]
+====
+Remember to only use the `calculatebudget` command once ALL the clubs' data has been collected since NUSSU-Connect only supports a one-time calculation of budgets in v1.3
+====
 
-Shows the budget allocated to that particular club to the user.
+=== Viewing the allocated budget for a club : `viewbudget`
+This is the third and final step in the budget calculation process!
+
+This command shows the budget allocated to that particular club to the user. Both club members and NUSSU treasurers have access to this command.
 Format: `viewbudget c/CLUB NAME`
 
 Example: +
