@@ -128,8 +128,9 @@ public class NoteEntryPrompt {
     }
 
     public void setUpFeedbackLabel() {
+        int remaining = NOTE_MAX_CHARACTER_LIMIT - noteContent.getText().length();
         feedbackLabel.setStyle("-fx-font-size: 12; -fx-text-fill: white;");
-        feedbackLabel.setText("Characters remaining: " + NOTE_MAX_CHARACTER_LIMIT);
+        feedbackLabel.setText("Characters remaining: " + remaining);
     }
 
     /**

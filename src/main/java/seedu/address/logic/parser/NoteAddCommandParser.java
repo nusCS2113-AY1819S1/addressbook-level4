@@ -31,10 +31,11 @@ import seedu.address.model.note.NoteTitle;
  */
 public class NoteAddCommandParser implements Parser<NoteAddCommand> {
 
-    public static final String MESSAGE_ERROR_IN_PARSING_FOUND =
-            "Invalid input! Trajectory found the following error(s).";
     public static final String MESSAGE_INVALID_DATE_TIME_DIFFERENCE =
             "Invalid input! Please make sure the start date/time is earlier than the end date/time.";
+
+    private static final String MESSAGE_ERROR_IN_PARSING_FOUND =
+            "Invalid input! Trajectory found the following error(s).";
 
     /**
      * Parses the given {@code String} of arguments in the context of the NoteAddCommand
@@ -87,7 +88,7 @@ public class NoteAddCommandParser implements Parser<NoteAddCommand> {
             */
         } catch (ParseException e) {
             messageErrors.append(ModuleCode.MESSAGE_MODULE_CODE_CONSTRAINT);
-            messageErrors.append("\n");
+            messageErrors.append("\n\n");
         }
 
         if (argMultimap.getValue(PREFIX_NOTE_TITLE).isPresent()) {
@@ -98,7 +99,7 @@ public class NoteAddCommandParser implements Parser<NoteAddCommand> {
 
             if (!NoteTitle.isValidTitle(trimmedTitle)) {
                 messageErrors.append(NoteTitle.MESSAGE_TITLE_EXCEED_MAX_CHAR_COUNT);
-                messageErrors.append("\n");
+                messageErrors.append("\n\n");
             } else {
                 title = new NoteTitle(trimmedTitle);
             }
@@ -113,7 +114,7 @@ public class NoteAddCommandParser implements Parser<NoteAddCommand> {
                 startDate = ParserUtil.parseNoteDate(argMultimap.getValue(PREFIX_NOTE_START_DATE).get());
             } catch (ParseException e) {
                 messageErrors.append(MESSAGE_INVALID_DATE_FORMAT);
-                messageErrors.append("\n");
+                messageErrors.append("\n\n");
                 dateErrorFound = true;
             }
         }
@@ -127,13 +128,13 @@ public class NoteAddCommandParser implements Parser<NoteAddCommand> {
                 startTime = ParserUtil.parseNoteTime(argMultimap.getValue(PREFIX_NOTE_START_TIME).get());
             } catch (ParseException e) {
                 messageErrors.append(MESSAGE_INVALID_TIME_FORMAT);
-                messageErrors.append("\n");
+                messageErrors.append("\n\n");
                 timeErrorFound = true;
             }
 
             if (startDate == null) {
                 messageErrors.append(NoteDate.MESSAGE_START_DATE_MISSING_FIELD);
-                messageErrors.append("\n");
+                messageErrors.append("\n\n");
                 startDateMissingErrorFound = true;
             }
         }
@@ -148,14 +149,14 @@ public class NoteAddCommandParser implements Parser<NoteAddCommand> {
             } catch (ParseException e) {
                 if (!dateErrorFound) {
                     messageErrors.append(MESSAGE_INVALID_DATE_FORMAT);
-                    messageErrors.append("\n");
+                    messageErrors.append("\n\n");
                 }
             }
 
             if (startDate == null) {
                 if (!startDateMissingErrorFound) {
                     messageErrors.append(NoteDate.MESSAGE_START_DATE_MISSING_FIELD);
-                    messageErrors.append("\n");
+                    messageErrors.append("\n\n");
                     startDateMissingErrorFound = true;
                 }
             }
@@ -171,14 +172,14 @@ public class NoteAddCommandParser implements Parser<NoteAddCommand> {
             } catch (ParseException e) {
                 if (!timeErrorFound) {
                     messageErrors.append(MESSAGE_INVALID_TIME_FORMAT);
-                    messageErrors.append("\n");
+                    messageErrors.append("\n\n");
                 }
             }
 
             if (startDate == null) {
                 if (!startDateMissingErrorFound) {
                     messageErrors.append(NoteDate.MESSAGE_START_DATE_MISSING_FIELD);
-                    messageErrors.append("\n");
+                    messageErrors.append("\n\n");
                 }
             }
         }
@@ -191,14 +192,15 @@ public class NoteAddCommandParser implements Parser<NoteAddCommand> {
 
             if (!NoteLocation.isValidLocation(trimmedLocation)) {
                 messageErrors.append(NoteLocation.MESSAGE_LOCATION_EXCEED_MAX_CHAR_COUNT);
-                messageErrors.append("\n");
+                messageErrors.append("\n\n");
             } else {
                 location = new NoteLocation(trimmedLocation);
             }
         }
 
         if (messageErrors.length() > 0) {
-            throw new ParseException(messageErrors.toString());
+            throw new ParseException(MESSAGE_ERROR_IN_PARSING_FOUND + "\n\n"
+                    + messageErrors.toString().substring(0, messageErrors.length() - 1));
         }
 
         if (startDate != null && endDate == null) {

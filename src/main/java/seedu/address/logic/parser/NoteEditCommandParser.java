@@ -27,11 +27,13 @@ import seedu.address.model.note.NoteTitle;
  * Parses input arguments and creates a new NoteEditCommand object
  */
 public class NoteEditCommandParser implements Parser<NoteEditCommand> {
-
     /**
      * Used to separate the index and optional parameters in the arguments.
      */
     private static final Pattern ARGS_FORMAT = Pattern.compile("^\\s*(?<index>\\S+)(?<optionalParams>.*)");
+
+    private static final String MESSAGE_ERROR_IN_PARSING_FOUND =
+            "Invalid input! Trajectory found the following error(s).";
 
     /**
      * Parses the given {@code String} of arguments in the context of the NoteEditCommand
@@ -75,7 +77,6 @@ public class NoteEditCommandParser implements Parser<NoteEditCommand> {
         StringBuilder messageErrors = new StringBuilder();
         boolean dateErrorFound = false;
         boolean timeErrorFound = false;
-        boolean startDateMissingErrorFound = false;
 
         // ModuleManager moduleManager = ModuleManager.getInstance();
 
@@ -95,7 +96,7 @@ public class NoteEditCommandParser implements Parser<NoteEditCommand> {
                 } */
             } catch (ParseException e) {
                 messageErrors.append(ModuleCode.MESSAGE_MODULE_CODE_CONSTRAINT);
-                messageErrors.append("\n");
+                messageErrors.append("\n\n");
             }
         }
 
@@ -107,7 +108,7 @@ public class NoteEditCommandParser implements Parser<NoteEditCommand> {
 
             if (!NoteTitle.isValidTitle(trimmedTitle)) {
                 messageErrors.append(NoteTitle.MESSAGE_TITLE_EXCEED_MAX_CHAR_COUNT);
-                messageErrors.append("\n");
+                messageErrors.append("\n\n");
             } else {
                 title = new NoteTitle(trimmedTitle);
             }
@@ -122,7 +123,7 @@ public class NoteEditCommandParser implements Parser<NoteEditCommand> {
                 startDate = ParserUtil.parseNoteDate(argMultimap.getValue(PREFIX_NOTE_START_DATE).get());
             } catch (ParseException e) {
                 messageErrors.append(MESSAGE_INVALID_DATE_FORMAT);
-                messageErrors.append("\n");
+                messageErrors.append("\n\n");
                 dateErrorFound = true;
             }
         }
@@ -136,7 +137,7 @@ public class NoteEditCommandParser implements Parser<NoteEditCommand> {
                 startTime = ParserUtil.parseNoteTime(argMultimap.getValue(PREFIX_NOTE_START_TIME).get());
             } catch (ParseException e) {
                 messageErrors.append(MESSAGE_INVALID_TIME_FORMAT);
-                messageErrors.append("\n");
+                messageErrors.append("\n\n");
                 timeErrorFound = true;
             }
         }
@@ -151,7 +152,7 @@ public class NoteEditCommandParser implements Parser<NoteEditCommand> {
             } catch (ParseException e) {
                 if (!dateErrorFound) {
                     messageErrors.append(MESSAGE_INVALID_DATE_FORMAT);
-                    messageErrors.append("\n");
+                    messageErrors.append("\n\n");
                 }
             }
         }
@@ -166,7 +167,7 @@ public class NoteEditCommandParser implements Parser<NoteEditCommand> {
             } catch (ParseException e) {
                 if (!timeErrorFound) {
                     messageErrors.append(MESSAGE_INVALID_TIME_FORMAT);
-                    messageErrors.append("\n");
+                    messageErrors.append("\n\n");
                 }
             }
         }
@@ -179,14 +180,15 @@ public class NoteEditCommandParser implements Parser<NoteEditCommand> {
 
             if (!NoteLocation.isValidLocation(trimmedLocation)) {
                 messageErrors.append(NoteLocation.MESSAGE_LOCATION_EXCEED_MAX_CHAR_COUNT);
-                messageErrors.append("\n");
+                messageErrors.append("\n\n");
             } else {
                 location = new NoteLocation(trimmedLocation);
             }
         }
 
         if (messageErrors.length() > 0) {
-            throw new ParseException(messageErrors.toString());
+            throw new ParseException(MESSAGE_ERROR_IN_PARSING_FOUND + "\n\n"
+                    + messageErrors.toString().substring(0, messageErrors.length() - 1));
         }
 
         return new NoteEditCommand(
