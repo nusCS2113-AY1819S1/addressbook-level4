@@ -48,10 +48,11 @@ public class BudgetCalculationCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<ClubBudgetElements> listOfClubs = model.getFilteredClubsList();
+        BudgetCalculationManager budgetCalculationManager = new BudgetCalculationManager();
 
         if (Integer.parseInt(totalBudget.toString()) <= 0) {
             throw new CommandException(MESSAGE_INVALID_TOTAL_BUDGET);
-        } else if (BudgetCalculationManager.getHaveBudgetsBeenCalculated(model)) {
+        } else if (budgetCalculationManager.getHaveBudgetsBeenCalculated(model)) {
             return new CommandResult(String.format(MESSAGE_BUDGETS_ALREADY_CALCULATED));
         } else {
             int i;

@@ -12,9 +12,10 @@ import seedu.address.model.clubbudget.FinalClubBudget;
 
 public class BudgetCalculationManager {
     private static boolean haveBudgetsBeenCalculated = false;
-    BudgetCalculationManager() {}
 
-    public static boolean getHaveBudgetsBeenCalculated(Model model) {
+    public BudgetCalculationManager() {}
+
+    public boolean getHaveBudgetsBeenCalculated(Model model) {
         List<FinalClubBudget> listOfBudgets = model.getFilteredClubBudgetsList();
         haveBudgetsBeenCalculated = (listOfBudgets.size() != 0);
         return haveBudgetsBeenCalculated;
