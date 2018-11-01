@@ -68,5 +68,4 @@ public class AddEventCommand extends Command {
                 || (other instanceof AddEventCommand // instanceof handles nulls
                 && NewEvent.equals(((AddEventCommand) other).NewEvent));
     }
-
 }

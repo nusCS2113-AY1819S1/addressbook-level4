@@ -17,7 +17,7 @@ endif::[]
 By: `Team T09-3`      Since: `Sep 2018`      Licence: `NUS`
 
 == Introduction
- 
+
 ClubHub (CH) is for those who *prefer to use a desktop app for managing members, inventory, finances and events in their club*. More importantly, CH is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CH can get your club management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
