@@ -52,6 +52,11 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/EVENT p/PHONE_NUMBER`, `p/PHONE_NUMBER n/EVENT` is also acceptable.
 ====
 
+[NOTE]
+====
+Only `select` and `list` commands can be performed without logging in. Also, `add`, `edit` and `delete` can only performed by the admin account.
+====
+
 // tag::authentication[]
 === Signing up for an account : `signup`
 
