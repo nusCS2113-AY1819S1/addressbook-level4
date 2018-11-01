@@ -524,7 +524,7 @@ Aspect: What data is stored in search history stack +
     . More memory is required as Person objects has to be duplicated multiple times into a new List.
     . Class is inextensible to store other objects other than those from a Person classes.
 // end::searchpruning[]
-
+// tag::asl[]
 === Add Skill Level Command
 
 ==== Current Implementation
@@ -533,7 +533,7 @@ The add skill mechanism builds on the `addressBookParser`. This as well
 as it's subclass `addSkillCommandParser` ensures that the correct number of arguments
 is given to the command.
 
-The following shows how the application handles the request to change a skill in one particular scenario.
+The following shows how the application Logic handles the request to change a skill in one particular scenario.
 
 Step 1. The user launches the application. The application boots up and lists all members.
 
@@ -547,13 +547,18 @@ Step 4. After parsing, the command is sent to the `Model` which alters the `Pers
 
 Step 5. The result is encapsulated as a `CommandResult` object which is passed back to the `UI`.
 
+The following is a sequence diagram illustrating the above.
+
+image::asl_sequence.png[width="1000"]
+
+**Usage:**
 
 Before executing the command:
 
-image::aslbefore.png[width="800"]
+image::aslbefore.png[width="300"]
 After executing the command:
 
-image::aslafter.png[width="800"]
+image::aslafter.png[width="300"]
 
 ==== Alternate implementations
 
@@ -575,7 +580,7 @@ We considered two different ways to implement the Skill Class.
 information during addition of personal information.
 * Another is to enhance the edit command, possibly depreciating the use of the add skill level command.
 * Another is to enhance the storage such that multiple skills can be added per person.
-
+// end::asl[]
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation

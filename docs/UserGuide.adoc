@@ -161,7 +161,7 @@ Examples:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
+// tag:aslUser[]
 === Adding person's skill: `asl`
 
 Edits a person's skill in NUSSU-Connect.
@@ -175,7 +175,7 @@ Examples:
 
 * `asl 2 s/Photography l/30`
 * `asl 4 s/Java l/40`
-
+// end:aslUser[]
 === Editing a person : `edit`
 
 Edits an existing person in NUSSU-Connect. +
