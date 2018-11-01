@@ -28,6 +28,9 @@ public class Date {
         addingDate = date;
     }
 
+    /**
+     * Returns if a given string is a valid date.
+     */
     public static boolean isValidDate(String test) {
         if (test.matches(DATE_VALIDATION_REGEX)) {
             String[] numbers = test.split("-");
