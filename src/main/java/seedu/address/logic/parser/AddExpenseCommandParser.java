@@ -38,8 +38,8 @@ public class AddExpenseCommandParser implements Parser<AddExpenseCommand> {
 
         ExpenseCategory expenseCategory =
                 ParserUtil.parseExpenseCategory(argMultimap.getValue(PREFIX_EXPENSE_CATEGORY).get());
-        ExpenseDate expenseDate = ParserUtil.parseExpenseDate(argMultimap.getValue(PREFIX_EXPENSE_DATE).get());
         ExpenseValue expenseValue = ParserUtil.parseExpenseValue(argMultimap.getValue(PREFIX_EXPENSE_VALUE).get());
+        ExpenseDate expenseDate = ParserUtil.parseExpenseDate(argMultimap.getValue(PREFIX_EXPENSE_DATE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Expense expense = new Expense(expenseCategory, expenseDate, expenseValue, tagList);

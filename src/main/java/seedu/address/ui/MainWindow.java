@@ -266,15 +266,15 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleDisplayMonthlyExpenseEvent(DisplayMonthlyExpenseEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        handleDisplayMonthlyExpense(event.getMonthlyData());
+        handleDisplayMonthlyExpense(event.getMonthlyData(), event.getSelectedMonth());
     }
 
     /**
      * Display the monthly expense window or focuses on it if it's already opened.
      */
     @FXML
-    public void handleDisplayMonthlyExpense(HashMap<String, String> monthlyData) {
-        monthlyExpenseWindow.setMonthlyData(monthlyData);
+    public void handleDisplayMonthlyExpense(HashMap<String, String> monthlyData, String selectedMonth) {
+        monthlyExpenseWindow.setMonthlyData(monthlyData, selectedMonth);
         if (!monthlyExpenseWindow.isShowing()) {
             monthlyExpenseWindow.show();
         } else {

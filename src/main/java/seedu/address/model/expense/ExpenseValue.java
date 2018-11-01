@@ -23,7 +23,7 @@ public class ExpenseValue {
     public ExpenseValue(String expenseValue) {
         requireNonNull(expenseValue);
         checkArgument(isValidExpenseValue(expenseValue), MESSAGE_EXPENSE_VALUE_CONSTRAINTS);
-        this.expenseValue = expenseValue;
+        this.expenseValue = eliminateLeadingZero(expenseValue);
     }
 
     /**
@@ -51,6 +51,22 @@ public class ExpenseValue {
     @Override
     public int hashCode() {
         return expenseValue.hashCode();
+    }
+
+    /**
+     * Returns a String of expenseValue without unnecessary leading zeros
+     */
+    private static String eliminateLeadingZero(String expenseValue) {
+        for (int i = 0; i < expenseValue.length(); i++) {
+            if (expenseValue.charAt(i) != '0') {
+                if (expenseValue.charAt(i) == '.') {
+                    return expenseValue.substring(i - 1);
+                } else {
+                    return expenseValue.substring(i);
+                }
+            }
+        }
+        return expenseValue;
     }
 }
 

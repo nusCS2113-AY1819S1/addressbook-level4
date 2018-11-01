@@ -40,7 +40,7 @@ public class MonthlyExpenseCommand extends Command {
         requireNonNull(this.selectedMonth);
         ObservableList<Expense> expenseList = model.getFilteredExpenseList();
         HashMap<String, String> monthlyData = getMonthlyData(expenseList);
-        EventsCenter.getInstance().post(new DisplayMonthlyExpenseEvent(monthlyData));
+        EventsCenter.getInstance().post(new DisplayMonthlyExpenseEvent(monthlyData, this.selectedMonth));
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

@@ -36,7 +36,7 @@ public class ExpenseValueTest {
         assertFalse(ExpenseValue.isValidExpenseValue("931 2.34")); // spaces within digits
 
         // valid expense values
-        assertTrue(ExpenseValue.isValidExpenseValue("0.01")); // small numbers
+        assertTrue(ExpenseValue.isValidExpenseValue("00000.01")); // can be entered and will be formatted to 0.01
         assertTrue(ExpenseValue.isValidExpenseValue("1242938420331.23")); // long numbers
     }
 }

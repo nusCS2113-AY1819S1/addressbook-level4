@@ -42,8 +42,9 @@ public class MonthlyExpenseWindow extends UiPart<Stage> {
         this(new Stage());
     }
 
-    public void setMonthlyData(HashMap<String, String> monthlyData) {
-        displayMonthlyData(updatePieChart(monthlyData));
+    public void setMonthlyData(HashMap<String, String> monthlyData, String selectedMonth) {
+        PieChart monthlyDataPie = updatePieChart(monthlyData, selectedMonth);
+        displayMonthlyData(monthlyDataPie);
     }
 
     /**
@@ -51,7 +52,7 @@ public class MonthlyExpenseWindow extends UiPart<Stage> {
      * @param monthlyData the values of each category for the selected month
      * @return
      */
-    public PieChart updatePieChart(HashMap<String, String> monthlyData) {
+    public PieChart updatePieChart(HashMap<String, String> monthlyData, String selectedMonth) {
         ArrayList<PieChart.Data> pieChartDataList = new ArrayList<>();
         for (HashMap.Entry<String, String> entry : monthlyData.entrySet()) {
             pieChartDataList.add(new PieChart.Data(entry.getKey() + ": $"
@@ -59,7 +60,11 @@ public class MonthlyExpenseWindow extends UiPart<Stage> {
         }
         ObservableList<PieChart.Data> observablePieChartDataList = FXCollections.observableList(pieChartDataList);
         PieChart pieChart = new PieChart(observablePieChartDataList);
-        pieChart.setTitle("Monthly Expense");
+        if (monthlyData.isEmpty()) {
+            pieChart.setTitle("Expense not found in " + selectedMonth);
+        } else {
+            pieChart.setTitle("Monthly Expense for " + selectedMonth);
+        }
         return pieChart;
     }
 

@@ -12,14 +12,20 @@ import seedu.address.commons.events.BaseEvent;
 public class DisplayMonthlyExpenseEvent extends BaseEvent {
 
     private final HashMap<String, String> monthlyData;
+    private final String selectedMonth;
 
-    public DisplayMonthlyExpenseEvent(HashMap<String, String> monthlyData) {
+    public DisplayMonthlyExpenseEvent(HashMap<String, String> monthlyData, String selectedMonth) {
         this.monthlyData = monthlyData;
+        this.selectedMonth = selectedMonth;
     }
 
     public HashMap<String, String> getMonthlyData() {
         requireNonNull(this.monthlyData);
         return this.monthlyData;
+    }
+
+    public String getSelectedMonth() {
+        return this.selectedMonth;
     }
 
     @Override
