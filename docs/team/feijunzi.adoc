@@ -16,13 +16,14 @@ Something Daily is a desktop address book application used for teaching Software
 * *Major enhancement*: added *the check command for Expenditure Tracker*
 ** What it does: allows the user to check how much money they have spent in a specific period and appear a chart to show each expense
 ** Justification: This feature improves the product significantly because if a user want to know how much money they have spent in a period, they can easily get the value and see where they have spent directly from the chart.
-** Highlights: This enhancement will appear a new window to show the chart. 
+** Highlights: This enhancement will appear a new window to show the chart.
 ** Credits: This feature needs another library which is jfreechart to draw the chart.
 
 * *Minor enhancement*: add the delete and edit command for expenditure tracker.
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
 * *Other contributions*:
+
 
 ** Project management:
 *** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
@@ -69,4 +70,3 @@ include::../DeveloperGuide.adoc[tag=dataencryption]
 ---
 
 _{Optionally, you may include other projects in your portfolio.}_
-
