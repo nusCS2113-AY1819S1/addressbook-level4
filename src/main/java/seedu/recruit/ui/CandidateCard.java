@@ -74,7 +74,7 @@ public class CandidateCard extends UiPart<Region> {
         }
         else if (tagName.equals("SHORTLISTED")) {
             label.setStyle("-fx-background-color: rgba(52,255,65,0.99);");
-            label.setTextFill(Color.rgb(0,0,0));
+            label.setTextFill(Color.rgb(0, 0, 0));
 
         }
         return label;
