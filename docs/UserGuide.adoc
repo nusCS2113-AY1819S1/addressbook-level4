@@ -143,6 +143,11 @@ image::CreateAccountSuccess.PNG[width="300"]
 The image below shows the outcome of an unsuccessful creation of a new account due to an account already existing.
 
 image::CreateAccountFailure.PNG[width="300"]
+
+[NOTE]
+====
+Only the president is able to create new accounts. As such, you must log in with president login credentials to be able to create new accounts.
+====
 // end::logincreateaccount[]
 
 === Viewing help : `help`
