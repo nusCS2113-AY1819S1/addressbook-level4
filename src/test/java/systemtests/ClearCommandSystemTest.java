@@ -52,8 +52,6 @@ public class ClearCommandSystemTest extends FinancialPlannerSystemTest {
         assertCommandSuccess(ClearCommand.COMMAND_WORD);
         assertSelectedCardUnchanged();
 
-        /* Case: mixed case command word -> rejected */
-        assertCommandFailure("ClEaR", MESSAGE_UNKNOWN_COMMAND);
     }
 
     /**

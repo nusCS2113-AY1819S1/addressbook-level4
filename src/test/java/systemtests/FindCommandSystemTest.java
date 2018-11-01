@@ -146,9 +146,6 @@ public class FindCommandSystemTest extends FinancialPlannerSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: mixed case command word -> rejected */
-        command = "FiNd Income";
-        assertCommandFailure(command, MESSAGE_UNKNOWN_COMMAND);
     }
 
     /**

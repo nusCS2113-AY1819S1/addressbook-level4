@@ -140,9 +140,6 @@ public class FindTagCommandSystemTest extends FinancialPlannerSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: mixed case command word -> rejected */
-        command = "fINDtAG friends";
-        assertCommandFailure(command, MESSAGE_UNKNOWN_COMMAND);
     }
 
     /**

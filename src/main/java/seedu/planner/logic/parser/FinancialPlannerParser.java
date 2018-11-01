@@ -57,7 +57,7 @@ public class FinancialPlannerParser {
         }
 
         final String commandWord = matcher.group("commandWord").toLowerCase();
-        final String arguments = matcher.group("arguments").toLowerCase();
+        final String arguments = matcher.group("arguments");
 
         switch (commandWord) {
 
@@ -83,13 +83,13 @@ public class FinancialPlannerParser {
             return new FindCommandParser().parse(arguments);
 
         case FindTagCommand.COMMAND_WORD: case FindTagCommand.COMMAND_WORD_UNDERSCORE:
-            return new FindTagCommandParser().parse(arguments);
+            return new FindTagCommandParser().parse(arguments.toLowerCase());
 
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments);
 
         case SortCommand.COMMAND_WORD:
-            return new SortCommandParser().parse(arguments);
+            return new SortCommandParser().parse(arguments.toLowerCase());
 
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();
