@@ -12,8 +12,8 @@ import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatExcep
 /**
  * This class removes a reminder whose task has been finished
  */
-public class FinishedReminderCommand extends Command {
-    public static final String COMMAND_WORD = "finished";
+public class RemoveReminderCommand extends Command {
+    public static final String COMMAND_WORD = "removereminder";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + "Marks a reminder as completed and removes it from storage"
@@ -26,7 +26,7 @@ public class FinishedReminderCommand extends Command {
     private static final String FAILURE_NO_SUCH_REMINDER = "No such reminder has been set";
     private final String toRemoveReminderTime;
 
-    public FinishedReminderCommand(String toRemoveReminderTime) {
+    public RemoveReminderCommand(String toRemoveReminderTime) {
         this.toRemoveReminderTime = toRemoveReminderTime;
     }
 
