@@ -14,12 +14,13 @@ user interface created using JavaFX.
 We worked in groups of 4 - 5 members for the project and were each expected to make contributions to the project by a
 dding both minor enhancements and major features to the software. We were initially provided with the base code which
 is written in Java, and has about 10 kLoC. Our task was to morph the existing code into any other software we opted to.
-We would be evaluated based on our ability to work with existing base code and the quality of our new enhancements to
-the existing code.Besides code, we were expected to write a User Guide and Developer Guide for the product as though we
-were releasing an official product for public usage to simulate an actual work schedule.
 
-Our application was designed to allows users keep track of their financial status using a desktop application
-and is targeted at users who enjoy typing and are keen on managing their finances responsibly.
+We would be evaluated based on our ability to work with existing base code and the quality of our new enhancements to
+the existing code.Besides code, we were expected to write a User Guide and Developer Guide as well for the product
+as though we were releasing an official product for public usage to simulate an actual work schedule.
+
+We choose to create our application FinancialPlanner to allow users keep track of their financial status using a
+desktop application and is targeted at users who enjoy typing and are keen on managing their finances responsibly.
 
 The application revolves around users managing their finances by storing the
 `name`, `moneyflow`, `date` and `tags` of any form of financial activity in the application
