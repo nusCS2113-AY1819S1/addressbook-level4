@@ -13,7 +13,24 @@ ifndef::env-github[]
 image::images/Ui.png[width="600"]
 endif::[]
 
-NUSSU-Connect is an application for executive committee (exco) members of the NUS Student Union (NUSSU) to help them perform their daily tasks including managing recruitment, contacts, budgets and projects efficiently.
+
+NUSSU-Connect is an application designed and created specifically for executive committee (exco) members of the NUS Student Union (NUSSU).
+It enables the committee members to reduce their daily workload and the organisation to potentially minimize manpower and logistics issues
+during peak periods of activity by providing them a convenient platform to manage recruitment, contacts, budgets and projects efficiently.
+The application can also be used by every organisation with a clearly defined hierarchy of roles and responsibilities of each and every member
+belonging to the organisation.
+
+== Value Proposition
+To digitise any company's or organisation's standard operating procedures, through the process of streamlining workflow to essentially
+solve, or at least minimize, any manpower and logistics issues that can happen during any peak periods of business activities.
+
+=== Notable features
+The list shown below details the key features that our application provides, which any organisation or company can make full use of.
+
+* Security:
+** Log into the application with a set of login credentials
+*** Gives a specific level of access to the application according to role of user account defined during account creation
+** Creation of a new account with desired login credentials for logging into the application
 
 
 == Site Map
@@ -24,8 +41,7 @@ NUSSU-Connect is an application for executive committee (exco) members of the NU
 
 == Acknowledgements
 
-* Some parts of this sample application were inspired by the excellent http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by
-_Marco Jakob_.
+* Some parts of this application were inspired and adapted from the sample application: Address Book Level 4 by SE-EDU.
 * Libraries used: https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5]
 * The original source of the code is https://github.com/se-edu/[AddressBook-Level4] project created by SE-EDU initiative.
 
