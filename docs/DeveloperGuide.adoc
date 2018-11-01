@@ -307,6 +307,10 @@ Given below is an example of access login information for `loginInfoList.json` d
 
 image::LoginUMLDiagram/LoginList_Read_Sequence_Diagram.png[width="800"]
 
+Given below is an example of relogin under different account. `InventoryListInitializer` will call three event list below.
+
+image::LoginUMLDiagram/ReLoginEvent_sequence_diagram.png[width="800"]
+
 ==== Design Considerations
 ===== Aspect: How to store the data
 * **Alternative 1 (current choice):** Saves the login detail in a json file called `loginInfoList.json`.
