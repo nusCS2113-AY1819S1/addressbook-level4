@@ -1,8 +1,8 @@
-package seedu.address.logic;
+package seedu.address.logic.suggestions;
 
+//@@author elstonayx
 /**
  * Finds how similar two given strings are.
- * @author elstonayx
  */
 public class StringSimilarity {
     private static final int ARRAY_PADDING = 1;

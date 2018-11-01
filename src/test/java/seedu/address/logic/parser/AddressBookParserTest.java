@@ -14,7 +14,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.logic.CommandSuggestion;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -22,15 +21,16 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportAllCommand;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.suggestions.WrongCommandSuggestion;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -85,7 +85,12 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_exportall() throws Exception {
-        assertTrue(parser.parseCommand(ExportAllCommand.COMMAND_WORD + " " + "csv") instanceof ExportAllCommand);
+        assertTrue(parser.parseCommand(ExportAllCommand.COMMAND_WORD + " csv") instanceof ExportAllCommand);
+    }
+
+    @Test
+    public void parseCommand_export() throws Exception {
+        assertTrue(parser.parseCommand(ExportCommand.COMMAND_WORD + " 3 vcf") instanceof ExportCommand);
     }
 
     @Test
@@ -127,7 +132,7 @@ public class AddressBookParserTest {
             throw new AssertionError("The expected ParseException was not thrown.");
         } catch (ParseException pe) {
             assertEquals(MESSAGE_UNKNOWN_COMMAND + System.lineSeparator()
-                    + CommandSuggestion.NO_SUGGESTION, pe.getMessage());
+                    + WrongCommandSuggestion.NO_SUGGESTION, pe.getMessage());
         }
     }
 
@@ -149,11 +154,11 @@ public class AddressBookParserTest {
         assertEquals(new SelectCommand(INDEX_FIRST_PERSON), command);
     }
 
-    @Test
-    public void parseCommand_schedule() throws Exception {
-        assertTrue(parser.parseCommand(ScheduleCommand.COMMAND_WORD) instanceof ScheduleCommand);
-        assertTrue(parser.parseCommand(ScheduleCommand.COMMAND_ALIAS) instanceof ScheduleCommand);
-    }
+    //    @Test
+    //    public void parseCommand_schedule() throws Exception {
+    //        assertTrue(parser.parseCommand(ScheduleCommand.COMMAND_WORD) instanceof ScheduleCommand);
+    //        assertTrue(parser.parseCommand(ScheduleCommand.COMMAND_ALIAS) instanceof ScheduleCommand);
+    //    }
 
     @Test
     public void parseCommand_redoCommandWord_returnsRedoCommand() throws Exception {
@@ -182,7 +187,7 @@ public class AddressBookParserTest {
     public void parseCommand_unknownCommand_throwsParseException() throws Exception {
         thrown.expect(ParseException.class);
         thrown.expectMessage(MESSAGE_UNKNOWN_COMMAND + System.lineSeparator()
-                + CommandSuggestion.NO_SUGGESTION);
+                + WrongCommandSuggestion.NO_SUGGESTION);
         parser.parseCommand("unknownCommand");
     }
 }
