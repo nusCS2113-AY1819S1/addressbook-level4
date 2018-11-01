@@ -48,6 +48,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `addUser uName/USER_NAME uPass/USER_PASSWORD`, `NAME` is a parameter which can be used as `addUser uName/john uPass/123`.
 * Parameters can be in any order e.g. if the command specifies `mCode/CS2113 tTitle/Is there mid-terms?`, `tTitle/Is there mid-terms? mCode/CS2113` is also acceptable.
+* Command keywords are case sensitive. e.g. `adduser`, `DELETECOMMENT` is not recognised.
 ====
 
 === Viewing help : `help`
