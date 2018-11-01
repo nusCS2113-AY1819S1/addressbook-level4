@@ -122,16 +122,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public void resetData(ReadOnlyClubBudgetElementsBook newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void resetData(ReadOnlyFinalBudgetBook newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ReadOnlyLoginBook getLoginBook() {
             throw new AssertionError("This method should not be called.");
         }
