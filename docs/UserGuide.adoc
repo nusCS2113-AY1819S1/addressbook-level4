@@ -92,8 +92,8 @@ Examples:
 * `login tim tam` +
 Logins with Username: tim and Password: tam
 
-WARNING: Constraints: +
- Username and Password must not contain any spaces
+CAUTION: Constraints: +
+* Username and Password must not contain any spaces
 
 ==== Registering: `register`
 Command: `register [Username] [Password] [Email] [MobilePhone] [Address]`
@@ -102,10 +102,8 @@ Examples:
 
 * register tim tam tim@tam.com 88888888 Tammy
 
-Constraints:
-
-* Currently all fields must not have spaces too
-
+CAUTION: Constraints: +
+* Currently all fields must not have spaces too +
 * All fields must be entered
 
 ==== Showing the UI Interface: `ui`
