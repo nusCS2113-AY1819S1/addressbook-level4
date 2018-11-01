@@ -213,8 +213,8 @@ Format: `find [\tag] [\exclude] KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* If `\tag` option is not specified, find command will search according to names.
-* The `\exclude` option will exclude any names/tags with the specified keywords
+* If `\tag` option is specified, find command will search according to names.
+* If `\exclude` option is specified, find command will exclude any names/tags with the specified keywords
 * The order of `\tag` and `\exclude` options can be swapped
 * Back-to-back find commands utilizes the Search Pruning feature which will be further explained under the Search Pruning
 Feature section.
