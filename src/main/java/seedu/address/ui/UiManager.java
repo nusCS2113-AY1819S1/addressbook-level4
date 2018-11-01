@@ -15,7 +15,6 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.CurrentUser;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.logic.LogicChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.commons.events.ui.RestartUiEvent;
@@ -135,10 +134,6 @@ public class UiManager extends ComponentManager implements Ui {
     private void handleStopUiEvent(StopUiEvent event) {
         prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
         mainWindow.hide();
-    }
-    @Subscribe
-    private void handleLogicChangedEvent(LogicChangedEvent event) {
-        this.logic = event.logic;
     }
     @Subscribe
     private void handleRestartUiEvent(RestartUiEvent event) {

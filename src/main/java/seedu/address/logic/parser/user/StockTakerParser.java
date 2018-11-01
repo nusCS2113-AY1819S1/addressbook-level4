@@ -15,11 +15,16 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.ViewTransactionsCommand;
+import seedu.address.logic.commands.stocktaker.ImportDrinkCommand;
+import seedu.address.logic.commands.stocktaker.SellDrinkCommand;
 import seedu.address.logic.commands.user.ChangePasswordCommand;
 import seedu.address.logic.commands.user.LogoutCommand;
 import seedu.address.logic.parser.DeleteCommandParser;
 import seedu.address.logic.parser.FindCommandParser;
+import seedu.address.logic.parser.ImportDrinkCommandParser;
 import seedu.address.logic.parser.SelectCommandParser;
+import seedu.address.logic.parser.SellDrinkCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 
@@ -51,8 +56,6 @@ public class StockTakerParser {
 
         switch (commandWord) {
 
-        //case SellDrinkCommand.COMMAND_WORD:
-        //    return new SellCommandParser().parse(arguments);
 
         case ChangePasswordCommand.COMMAND_WORD:
             return new ChangePasswordCommandParser().parse(arguments);
@@ -60,9 +63,18 @@ public class StockTakerParser {
 
         case LogoutCommand.COMMAND_WORD:
             return new LogoutCommand ();
-        //existing command
-        //        case EditCommand.COMMAND_WORD:
-        //            return new EditCommandParser().parse(arguments);
+
+        // ========= stock taker commands ==================
+        case SellDrinkCommand.COMMAND_WORD:
+            return new SellDrinkCommandParser ().parse(arguments);
+
+        case ImportDrinkCommand.COMMAND_WORD:
+            return new ImportDrinkCommandParser ().parse(arguments);
+
+        case ViewTransactionsCommand.COMMAND_WORD:
+            return new ViewTransactionsCommand();
+
+        //============general commands==========================
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);

@@ -73,7 +73,8 @@ public class AdminParser {
         case ViewTransactionsCommand.COMMAND_WORD:
             return new ViewTransactionsCommand();
 
-        // ========= analysis commands ==================
+        // ========= accountant commands ==================
+
         case AnalyseCostsCommand.COMMAND_WORD:
             return new AnalyseCostsCommand();
 
@@ -94,7 +95,7 @@ public class AdminParser {
 
         case LogoutCommand.COMMAND_WORD:
             return new LogoutCommand();
-
+        //=============general command==================//
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
 

@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import seedu.address.authentication.LoginUtils;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.logic.ChangeHelpWindowEvent;
 import seedu.address.commons.events.model.ChangeModelEvent;
 import seedu.address.commons.events.model.InitInventoryListEvent;
 import seedu.address.commons.events.ui.RestartUiEvent;
@@ -215,6 +216,7 @@ public class LoginController {
             firstTimeLogin = false;
         } else {
             EventsCenter.getInstance ().post (new ChangeModelEvent ());
+            EventsCenter.getInstance ().post (new ChangeHelpWindowEvent ());
             EventsCenter.getInstance ().post (new RestartUiEvent (stage));
         }
 

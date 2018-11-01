@@ -9,6 +9,8 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.accountant.AnalyseCostsCommand;
+import seedu.address.logic.commands.user.ChangePasswordCommand;
 import seedu.address.logic.commands.user.LogoutCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -36,12 +38,18 @@ public class AccountantParser {
         }
 
         String commandWord = matcher.group("commandWord");
+        final String arguments = matcher.group("arguments");
 
         switch (commandWord) {
+        //===========login command========================//
+        case ChangePasswordCommand.COMMAND_WORD:
+            return new ChangePasswordCommandParser().parse(arguments);
+        //===========accountant only command=============//
 
-        //case ChangePasswordCommand.COMMAND_WORD:
-        //    return new ChangePasswordCommandParser().parse(arguments);
+        case AnalyseCostsCommand.COMMAND_WORD:
+            return new AnalyseCostsCommand();
 
+        //=======general command=================//
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 

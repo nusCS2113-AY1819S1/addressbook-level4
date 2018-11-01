@@ -63,6 +63,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 [[Features]]
 == Getting Started
 
+// tag::login[]
 === Logging in
 
 Upon entering starting up the application, you will be met by the login page below:
@@ -87,8 +88,10 @@ To login, you can use either the CLI or GUI to input your `USERNAME` and `PASSWO
 
 
 [NOTE]
-Both username and password are single words. No spaces are allowed in username or password.
-
+====
+* User name and password are seperated with a single space when using CLI input
+* Both username and password are single words. No spaces are allowed in username or password.
+====
 [.example]
 ====
 [example-title]#Examples for CLI input:#
@@ -113,6 +116,7 @@ Logging out of the application will bring you back to the login screen.
 
 . Press the kbd:[ENTER] key
 
+//end::login[]
 == Types of Users
 In small-scale drink distribution companies, there are generally 3 critical roles and responsibilities to
 keep the company running:
@@ -127,12 +131,50 @@ account, and in a specific role, you can work with functions that are tailored t
 === Stock Taker
 === Accountant
 === Administrator
-
+//tag::account[]
 == Managing Your {product_name} Account
 
 === Changing your password
-=== Create additional account
+When you receive an account from manager, you want to change the password to increase security.
+Format: `changePassword o/[OLD_PASSWORD] n/[NEW_PASSWORD]`
+[.example]
+====
+[example-title]#Examples for changePassword:#
 
+* [example]#`changePassword o/123 n/1234`#
+
+If password changes is successful, a message will be shown:
+
+image::loginPic/password_change_successful.PNG[width="300"]
+====
+=== Create additional account
+As a [red]#manager#, you want to create new account for new employee.
+
+Format:`createAccount u/USER_NAME p/PASSWORD a/AUTHENTICATION_LEVEL`
+[.example]
+====
+[example-title]#Examples for create new account:#
+
+* [example]#`createAccount u/tester p/myPassword a/admin`#
+
+If create account is successful, a message will be shown:
+
+image::loginPic/create_new_account_successful.PNG[width="300"]
+====
+=== Delete account
+As a [red]#manager#, you want to delete a account when it is no longer used.
+Format: `deleteAccount u/USER_NAME`
+[.example]
+====
+[example-title]#Examples for delete old account:#
+
+* [example]#`deleteAccount u/tester`#
+
+If delete account is successful, a message will be shown:
+
+image::loginPic/deleteAccount_successful.PNG[width="300"]
+====
+//end::account[]
 == Managing Your Inventory
 The core feature of *[blue]#_Drink I/O_#* is to manage your company's inventory.
 This includes the adding of drinks into the inventory, deleting, viewing their details
@@ -474,13 +516,6 @@ Displays list of actions done by user over a specified time frame.
 Start date must be earlier than end date
 ====
 
-==== Create account for other user : `createAccount`
-Create a account with different authentication right.
-Format:`createAccount u/USER_NAME p/PASSWORD a/AUTHENTICATION_LEVEL`
-
-==== Delete account of other user : `deleteAccount`
-Delete a account.
-Format: `deleteAccount u/USER_NAME`
 
 === Stock Taker
 

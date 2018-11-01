@@ -289,21 +289,24 @@ For the analyses over 7 days, a similar concept as that for analyses over 1 day 
 The login feature is a standalone feature that enable security check on user. It has a fxml page that name `LoginPage.fxml` at `main\resources\view`
 The controller of the fxml page named `LoginController` at `seedu.address\controller`
 
-Given below is a class diagram for logout function
+Given below is a class diagram for login function
 
 image::LoginUMLDiagram/Login_Class_Diagram.png[width="800"]
 
 
-Given below is an example usage scenario and how logout mechanism behave at each step.
+Given below is an example usage scenario and how login mechanism behave at each step.
 
 image::LoginUMLDiagram/Login_sequence_diagram.png[width="800"]
 The `LoginController` will check for username and password will the LoginUtils
-Once the username and password is correct, it will continue to `initAddressBook`.
+Once the username and password is correct, it will continue to `InventoryListInitializer`.
 It will also start the ui.
 
 
 image::LoginUMLDiagram/LoginUtils_Sequence_Diagram.png[width="800"]
+Given below is an example of access login information for `loginInfoList.json` during initiation of the application.
+
 image::LoginUMLDiagram/LoginList_Read_Sequence_Diagram.png[width="800"]
+
 ==== Design Considerations
 ===== Aspect: How to store the data
 * **Alternative 1 (current choice):** Saves the login detail in a json file called `loginInfoList.json`.
@@ -323,7 +326,7 @@ image::LoginUMLDiagram/LoginList_Read_Sequence_Diagram.png[width="800"]
 ** Pros: Classic and matured product
 ** Pros: Have serialized code in original ab4.
 ** Cons: It has many rule to set before implementation.
-
+//end::login[]
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
