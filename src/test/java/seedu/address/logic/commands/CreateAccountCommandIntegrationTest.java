@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalAccounts.getTypicalLoginBook;
+import static seedu.address.testutil.TypicalClubBudgetElements.getTypicalClubBudgetElementsBook;
+import static seedu.address.testutil.TypicalFinalClubBudget.getTypicalFinalBudgetsBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Before;
@@ -25,14 +27,16 @@ public class CreateAccountCommandIntegrationTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalLoginBook(), getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalLoginBook(), getTypicalAddressBook(), getTypicalClubBudgetElementsBook(),
+                getTypicalFinalBudgetsBook(), new UserPrefs());
     }
 
     @Test
     public void execute_newAccount_success() {
         LoginDetails validAccount = new AccountBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getLoginBook(), model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getLoginBook(), model.getAddressBook(),
+                model.getClubBudgetElementsBook(), model.getFinalBudgetsBook(), new UserPrefs());
         expectedModel.createAccount(validAccount);
 
         assertCommandSuccess(new CreateAccountCommand(validAccount), model, commandHistory,

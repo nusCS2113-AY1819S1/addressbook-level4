@@ -1,6 +1,7 @@
 package seedu.address.model.budgetelements;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
@@ -43,6 +44,19 @@ public class UniqueClubsList implements Iterable<ClubBudgetElements> {
         }
 
         internalList.add(toAdd);
+    }
+
+    /**
+     * Replaces the contents of this list with {@code club budget elements}.
+     * {@code club budget elements} must not contain duplicate club budget elements.
+     */
+    public void setClubs(List<ClubBudgetElements> clubs) {
+        requireAllNonNull(clubs);
+        if (!clubsAreUnique(clubs)) {
+            throw new DuplicateClubException();
+        }
+
+        internalList.setAll(clubs);
     }
 
     /**

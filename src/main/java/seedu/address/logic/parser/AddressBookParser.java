@@ -1,7 +1,10 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_BUDGET_COMMAND_INVALID_USER;
+import static seedu.address.commons.core.Messages.MESSAGE_CALCULATE_BUDGET_COMMAND_INVALID_USER;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.commons.core.Messages.MESSAGE_VIEW_BUDGET_COMMAND_INVALID_USER;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -111,13 +114,25 @@ public class AddressBookParser {
             return new UndoFindCommand();
 
         case BudgetCommand.COMMAND_WORD:
-            return new BudgetCommandParser().parse(arguments);
+            if (LoginManager.getIsMember()) {
+                return new BudgetCommandParser().parse(arguments);
+            } else {
+                throw new ParseException(MESSAGE_BUDGET_COMMAND_INVALID_USER);
+            }
 
         case BudgetCalculationCommand.COMMAND_WORD:
-            return new BudgetCalculationCommandParser().parse(arguments);
+            if (LoginManager.getIsTreasurer()) {
+                return new BudgetCalculationCommandParser().parse(arguments);
+            } else {
+                throw new ParseException(MESSAGE_CALCULATE_BUDGET_COMMAND_INVALID_USER);
+            }
 
         case ViewClubBudgetsCommand.COMMAND_WORD:
-            return new ViewClubBudgetsCommandParser().parse(arguments);
+            if (LoginManager.getIsMember() || LoginManager.getIsTreasurer()) {
+                return new ViewClubBudgetsCommandParser().parse(arguments);
+            } else {
+                throw new ParseException(MESSAGE_VIEW_BUDGET_COMMAND_INVALID_USER);
+            }
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
