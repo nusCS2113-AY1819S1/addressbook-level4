@@ -1,5 +1,10 @@
 package seedu.address.logic.commands.ledger;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LEDGERS;
+
+import java.util.List;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
@@ -10,11 +15,6 @@ import seedu.address.model.ledger.Account;
 import seedu.address.model.ledger.DateLedger;
 import seedu.address.model.ledger.Ledger;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.ledger.CreditCommand.MESSAGE_CREDIT_ACCOUNT_SUCCESS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LEDGERS;
 
 /**
  * Decreases the value of balance in the ledger
@@ -53,8 +53,7 @@ public class DebitCommand extends Command {
 
             k = false;
 
-            if (i.getDateLedger().getDate().equals(dateLedger.getDate())){
-
+            if (i.getDateLedger().getDate().equals(dateLedger.getDate())) {
                 ledgerToEdit = i;
                 k = true;
                 break;
@@ -78,6 +77,7 @@ public class DebitCommand extends Command {
         model.updateFilteredLedgerList(PREDICATE_SHOW_ALL_LEDGERS);
         model.commitAddressBook();
 
-        return new CommandResult(String.format(MESSAGE_DEBIT_ACCOUNT_SUCCESS, editedLedger.getAccount(), editedLedger.getDateLedger().getDate()));
+        return new CommandResult(String.format(MESSAGE_DEBIT_ACCOUNT_SUCCESS, editedLedger.getAccount(),
+                editedLedger.getDateLedger().getDate()));
     }
 }

@@ -7,8 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import javax.swing.*;
-import seedu.address.logic.commands.EventCommand.AddEventCommand;
+import seedu.address.logic.commands.eventCommand.AddEventCommand;
 import seedu.address.logic.parser.*;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Events.Description;

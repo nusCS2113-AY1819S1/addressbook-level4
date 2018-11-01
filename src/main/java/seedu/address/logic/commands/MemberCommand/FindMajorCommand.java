@@ -9,7 +9,9 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.member.MajorContainsKeywordsPredicate;
 
-
+/**
+ * .
+ */
 public class FindMajorCommand extends Command {
 
     public static final String COMMAND_WORD = "findmajor";
