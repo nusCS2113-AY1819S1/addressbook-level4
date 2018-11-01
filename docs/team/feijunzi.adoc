@@ -9,32 +9,44 @@
 
 == Overview
 
-Something Daily is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Something Daily is a desktop address book application used for teaching Software
+Engineering principles. The user interacts with it using a CLI, and it has a GUI
+created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 == Summary of contributions
 
 * *Major enhancement*: added *the check command for Expenditure Tracker*
-** What it does: allows the user to check how much money they have spent in a specific period and appear a chart to show each expense
-** Justification: This feature improves the product significantly because if a user want to know how much money they have spent in a period, they can easily get the value and see where they have spent directly from the chart.
+** What it does: allows the user to check how much money they have spent in a
+specific period and appear a chart to show each expense
+** Justification: This feature improves the product significantly because if a user
+want to know how much money they have spent in a period, they can easily get the
+value and see where they have spent directly from the chart.
 ** Highlights: This enhancement will appear a new window to show the chart.
 ** Credits: This feature needs another library which is jfreechart to draw the chart.
 
 * *Minor enhancement*: add the delete and edit command for expenditure tracker.
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test
+code]] _{give links to collated code files}_
 
 * *Other contributions*:
 
 ** Project management:
 *** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
 ** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Updated the GUI color scheme (Pull requests https://github.com[#33], https:/
+github.com[#34])
+*** Wrote additional tests for existing features to increase coverage from 88% to 92%
+(Pull requests https://github.com[#36], https://github.com[#38])** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide: https:/
+github.com[#14]
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
+*** PRs reviewed (with non-trivial review comments): https://github.com[#12],
+https://github.com[#32], https://github.com[#19], https://github.com[#42]
+*** Contributed to forum discussions (examples:  https://github.com[1], https:/
+github.com[2], https://github.com[3], https://github.com[4])
+*** Reported bugs and suggestions for other teams in the class (examples:  https:/github.com[1], https://github.com[2], https://github.com[3])
+*** Some parts of the history feature I added was adopted by several other class
+mates (https://github.com[1], https://github.com[2])
 ** Tools:
 *** Integrated a third party library (Natty) to the project (https://github.com[#42])
 *** Integrated a new Github plugin (CircleCI) to the team repo
@@ -45,7 +57,8 @@ _{you can add/remove categories in the list above}_
 
 
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|_Given below are sections I contributed to the User Guide. They showcase my ability
+to write documentation targeting end-users._
 |===
 
 include::../UserGuide.adoc[tag=checkexpenditure]
@@ -54,7 +67,9 @@ include::../UserGuide.adoc[tag=checkexpenditure]
 == Contributions to the Developer Guide
 
 |===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|_Given below are sections I contributed to the Developer Guide. They showcase my
+ability to write technical documentation and the technical depth of my contributions
+to the project._
 |===
 
 include::../DeveloperGuide.adoc[tag=checkexpenditure]
