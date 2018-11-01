@@ -188,6 +188,32 @@ public class CompanyBook implements ReadOnlyCompanyBook {
     }
 
     /**
+     * Sorts the company job list
+     */
+    public void sortJobOffers(Prefix prefix) {
+        String prefixString = prefix.toString();
+        switch (prefixString) {
+        case "c/":
+            companyJobList.sortByCompanyName();
+            break;
+        case "j/":
+            companyJobList.sortByJob();
+            break;
+        case "xr/":
+            companyJobList.sortByAgeRange();
+            break;
+        case "h/":
+            companyJobList.sortByEducation();
+            break;
+        case "s/":
+            companyJobList.sortBySalary();
+            break;
+        default:
+            companyJobList.sortInReverse();
+        }
+    }
+
+    /**
      * Deletes a job offer from an existing company in the CompanyBook.
      * @param jobOffer must exist inside the CompanyBook
      */
