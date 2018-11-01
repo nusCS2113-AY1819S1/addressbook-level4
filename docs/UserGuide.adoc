@@ -519,7 +519,7 @@ Displays graph which shows result of 'Finals' grade component of all CS2113 stud
 === Notes Management
 ==== Add Note : `note add`
 Adds a note to a module. +
-Format: `note add m/MODULE_CODE [tt/TITLE] [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME] [lc/LOCATION]`
+Format: `note add mc/MODULE_CODE [tt/TITLE] [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME] [lc/LOCATION]`
 
 - The START_DATE and END_DATE parameters allows the following date formats only. +
 * d-M-yyyy (e.g. 2-11-2018) +
@@ -586,7 +586,7 @@ Format: `note delete INDEX [MORE_INDEXES]..`
 
 Examples:
 
-* `note list m/CS2040C` +
+* `note list mc/CS2040C` +
 A list of all notes saved in CS2040C module is displayed. +
 `note delete 2 1` +
 Delete notes that corresponds to INDEX=1 and INDEX=2 from the list.
