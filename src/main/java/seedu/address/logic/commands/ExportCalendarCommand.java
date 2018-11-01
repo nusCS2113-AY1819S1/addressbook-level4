@@ -33,8 +33,6 @@ import seedu.address.model.Model;
 import seedu.address.model.event.AttendanceContainsUserPredicate;
 import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Event;
-import seedu.address.model.user.Password;
-import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
 /**
@@ -69,7 +67,8 @@ public class ExportCalendarCommand extends Command {
     //Todo: Update when have a method to get the current logging in user
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
-        User currentUser = new User(new Username("John"), new Password("12345678"));
+        Username currentUser = model.getUsername();
+
         try {
             exportICalenderFile(getAttendingEventList(model, currentUser), fileName);
         } catch (IOException e) {
@@ -87,10 +86,9 @@ public class ExportCalendarCommand extends Command {
      * @param  currentUser current User
      * @return an user registered event list
      */
-    public static ObservableList<Event> getAttendingEventList(Model model, User currentUser) {
+    public static ObservableList<Event> getAttendingEventList(Model model, Username currentUser) {
         requireAllNonNull(model, currentUser);
-        //currentUser.getUsername();
-        model.updateFilteredEventList(Model.PREDICATE_SHOW_ALL_EVENTS);
+        model.updateFilteredEventList(new AttendanceContainsUserPredicate(currentUser));
         return model.getFilteredEventList();
     }
 
