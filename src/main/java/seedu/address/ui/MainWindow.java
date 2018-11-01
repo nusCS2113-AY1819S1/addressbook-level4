@@ -10,6 +10,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
@@ -36,6 +37,8 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
 
+    private CalendarPanel calendarPanel;
+
     //private PersonListPanel personListPanel;
     private TaskListPanel taskListPanel;
     private ExpenditureListPanel expenditureListPanel;
@@ -47,6 +50,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane browserPlaceholder;
+
+    @FXML
+    private GridPane calendarPlaceholder;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -130,8 +136,11 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        browserPanel = new BrowserPanel();
-        browserPlaceholder.getChildren().add(browserPanel.getRoot());
+        //browserPanel = new BrowserPanel();
+        //browserPlaceholder.getChildren().add(browserPanel.getRoot());
+
+        calendarPanel = new CalendarPanel();
+        calendarPlaceholder.getChildren().add(calendarPanel.getRoot());
 
         expenditureListPanel = new ExpenditureListPanel(logic.getFilteredExpenditureList());
         expenditureListPanelPlaceholder.getChildren().add(expenditureListPanel.getRoot());

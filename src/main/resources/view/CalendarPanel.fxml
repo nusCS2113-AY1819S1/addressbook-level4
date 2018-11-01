@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.scene.layout.GridPane?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml"  hgap="30" vgap="30">
+<padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
+
+    <Label text="Sun"
+           GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+    <Label text="Mon"
+           GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+    <Label text="Tue"
+           GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+    <Label text="Wed"
+           GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+    <Label text="Thur"
+           GridPane.columnIndex="4" GridPane.rowIndex="0"/>
+    <Label text="Fri"
+           GridPane.columnIndex="5" GridPane.rowIndex="0"/>
+    <Label text="Sat"
+           GridPane.columnIndex="6" GridPane.rowIndex="0"/>
+
+
+    <Label text="1"
+           GridPane.columnIndex="0" GridPane.rowIndex="2"
+           GridPane.columnSpan="2"/>
+
+    <Label text="2"
+           GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    <Label text="3"
+           GridPane.columnIndex="2" GridPane.rowIndex="2"
+           GridPane.columnSpan="2"/>
+
+    <Label text="4"
+           GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+    <Label text="5"
+           GridPane.columnIndex="4" GridPane.rowIndex="2"
+           GridPane.columnSpan="2"/>
+
+    <Label text="6"
+           GridPane.columnIndex="5" GridPane.rowIndex="2"/>
+    <Label text="7"
+           GridPane.columnIndex="6" GridPane.rowIndex="2"
+           GridPane.columnSpan="2"/>
+
+    <Label text="8"
+           GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+    <Label text="9"
+           GridPane.columnIndex="1" GridPane.rowIndex="3"
+           GridPane.columnSpan="2"/>
+
+    <Label text="10"
+           GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+    <Label text="11"
+           GridPane.columnIndex="3" GridPane.rowIndex="3"
+           GridPane.columnSpan="2"/>
+
+    <Label text="12"
+           GridPane.columnIndex="4" GridPane.rowIndex="3"/>
+    <Label text="13"
+           GridPane.columnIndex="5" GridPane.rowIndex="3"
+           GridPane.columnSpan="2"/>
+
+    <Label text="14"
+           GridPane.columnIndex="6" GridPane.rowIndex="3"/>
+    <Label text="15"
+           GridPane.columnIndex="0" GridPane.rowIndex="4"
+           GridPane.columnSpan="2"/>
+
+    <Label text="16"
+           GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+    <Label text="17"
+           GridPane.columnIndex="2" GridPane.rowIndex="4"
+           GridPane.columnSpan="2"/>
+
+    <Label text="18"
+           GridPane.columnIndex="3" GridPane.rowIndex="4"/>
+    <Label text="19"
+           GridPane.columnIndex="4" GridPane.rowIndex="4"
+           GridPane.columnSpan="2"/>
+
+    <Label text="20"
+           GridPane.columnIndex="5" GridPane.rowIndex="4"/>
+    <Label text="21"
+           GridPane.columnIndex="6" GridPane.rowIndex="4"
+           GridPane.columnSpan="2"/>
+
+    <Label text="22"
+           GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+    <Label text="23"
+           GridPane.columnIndex="1" GridPane.rowIndex="5"
+           GridPane.columnSpan="2"/>
+
+    <Label text="24"
+           GridPane.columnIndex="2" GridPane.rowIndex="5"/>
+    <Label text="25"
+           GridPane.columnIndex="3" GridPane.rowIndex="5"
+           GridPane.columnSpan="2"/>
+
+    <Label text="26"
+           GridPane.columnIndex="4" GridPane.rowIndex="5"/>
+    <Label text="27"
+           GridPane.columnIndex="5" GridPane.rowIndex="5"
+           GridPane.columnSpan="2"/>
+
+    <Label text="28"
+           GridPane.columnIndex="6" GridPane.rowIndex="5"/>
+    <Label text="29"
+           GridPane.columnIndex="0" GridPane.rowIndex="6"
+           GridPane.columnSpan="2"/>
+
+    <Label text="30"
+           GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+    <Label fx:id="date1" styleClass="cell_small_label" text="\$phone" />
+
+
+
+</GridPane>

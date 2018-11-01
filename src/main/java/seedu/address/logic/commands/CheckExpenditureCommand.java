@@ -51,7 +51,7 @@ public class CheckExpenditureCommand extends Command {
         requireNonNull(model);
         List<Expenditure> lastShownList = model.getFilteredExpenditureList();
         Expenditure editedExpenditure;
-        DefaultPieDataset dpd=new DefaultPieDataset(); //建立一个默认的饼图
+        DefaultPieDataset dpd = new DefaultPieDataset(); //建立一个默认的饼图
 
         int index = 0;
         float total = 0;
@@ -73,29 +73,46 @@ public class CheckExpenditureCommand extends Command {
 
             if ((year1 < year) && (year2 > year)) {
                 total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
-                dpd.setValue(editedExpenditure.getDescription().toString(),Integer.parseInt(editedExpenditure.getMoney().toString()));
-            } else if (((year1 == year) && (year2 == year)) || ((year1 == year) && (year2 > year))
-                        || ((year1 < year) && (year2 == year))) {
+                dpd.setValue(editedExpenditure.getDescription().toString(), Integer.parseInt(editedExpenditure.getMoney().toString()));
+            } else if ((year1 == year) && (year2 == year)) {
                 if ((month1 < month) && (month2 > month)) {
                     total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
-                    dpd.setValue(editedExpenditure.getDescription().toString(),Integer.parseInt(editedExpenditure.getMoney().toString()));
-                } else if (((month1 == month) || (month2 == month)) && ((day1 <= day) && (day2 >= day))) {
+                    dpd.setValue(editedExpenditure.getDescription().toString(), Integer.parseInt(editedExpenditure.getMoney().toString()));
+                } else if ((month1 == month) && (day1 <= day)) {
                     total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
-                    dpd.setValue(editedExpenditure.getDescription().toString(),Integer.parseInt(editedExpenditure.getMoney().toString()));
+                    dpd.setValue(editedExpenditure.getDescription().toString(), Integer.parseInt(editedExpenditure.getMoney().toString()));
+                } else if ((month2 == month) && (day2 >= day)) {
+                    total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
+                    dpd.setValue(editedExpenditure.getDescription().toString(), Integer.parseInt(editedExpenditure.getMoney().toString()));
+                }
+            } else if ((year1 == year) && (year2 > year)) {
+                if (month1 < month) {
+                    total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
+                    dpd.setValue(editedExpenditure.getDescription().toString(), Integer.parseInt(editedExpenditure.getMoney().toString()));
+                } else if ((month1 == month) && (day1 <= day)) {
+                    total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
+                    dpd.setValue(editedExpenditure.getDescription().toString(), Integer.parseInt(editedExpenditure.getMoney().toString()));
+                }
+            } else if ((year1 < year) && (year2 == year)) {
+                if (month2 > month) {
+                    total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
+                    dpd.setValue(editedExpenditure.getDescription().toString(), Integer.parseInt(editedExpenditure.getMoney().toString()));
+                } else if ((month2 == month) && (day2 >= day)) {
+                    total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
+                    dpd.setValue(editedExpenditure.getDescription().toString(), Integer.parseInt(editedExpenditure.getMoney().toString()));
+
                 }
             }
             index++;
-
         }
 
 
-
-            JFreeChart chart=ChartFactory.createPieChart("My Expense During"+ date1+ "to"+date2,dpd,true,true,false);
-            ChartFrame chartFrame=new ChartFrame("My Expense During"+ date1+ "to"+date2,chart);
+            JFreeChart chart = ChartFactory.createPieChart("My Expense During" + date1 + "to" + date2, dpd, true, true, false);
+            ChartFrame chartFrame = new ChartFrame("My Expense During" + date1 + "to" + date2, chart);
             chartFrame.pack();
             chartFrame.setVisible(true);
 
-
         return new CommandResult(String.format(MESSAGE_SUCCESS, total));
+
     }
 }

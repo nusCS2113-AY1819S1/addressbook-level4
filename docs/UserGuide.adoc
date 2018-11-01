@@ -12,7 +12,7 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2113-AY1819S1-T09-2/main
 
 By: `Team T09-2`      Since: `Sep 2018`      Licence: `MIT`
 
@@ -23,7 +23,7 @@ Something Daily (SD) is for those who *prefer to use a desktop app to manage a s
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
+.  Download the latest `somethingdaily.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your application.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
@@ -141,7 +141,7 @@ Examples:
 * `TDL_uncomplete 3` +
 The 3rd task in the to-do list is now marked as uncompleted.
 
-=== View tasks : `TDL_view`
+=== Viewing tasks : `TDL_view`
 
 Shows a filtered list of tasks in the to-do list. +
 Format: `TDL_view PARAMETER`
@@ -150,7 +150,7 @@ Format: `TDL_view PARAMETER`
 * PARAMETER is either `completed`, `uncompleted` or `all`.
 * The default view for the to-do list upon starting up is _all tasks_.
 * Performing `TDL_view uncompleted` with the to-do list displaying _uncompleted tasks_ will not result in any changes. The same is applied to _completed tasks_ list with `TDL_view completed` command.
-* The GUI should allow the user to understand which list they are currently looking at.
+* The GUI should allow the user to understand which list they are currently looking at. [Coming in v1.4]
 ****
 
 Examples:
@@ -161,14 +161,14 @@ The list is now populated with tasks marked as completed.
 * `TDL_view all` +
 The list is now populated with all tasks regardless of their completion status.
 
-=== Sort all tasks listed : `TDL_sort`
+=== Sorting tasks : `TDL_sort`
 
 Sorts and displays the to-do list by a certain tag. +
-Format: `TDL_sort by PARAMETER`
+Format: `TDL_sort PARAMETER`
 
 ****
-* PARAMETER is either `module` for module, `date` for deadline or `priority` for importance/priority.
-* PARAMETER can be set as `default` and tasks will be sorted by alphabetically by their names.
+* PARAMETER is either `module`, `date` or `priority`.
+* PARAMETER can be set as `default` and tasks will be sorted alphabetically by their names.
 * PARAMETER can also be set as `reverse` and the former order of tasks will be reversed.
 * Users can use `TDL_sort` after `TDL_view` for sorting certain tasks (completed/uncompleted).
 ****
@@ -176,58 +176,11 @@ Format: `TDL_sort by PARAMETER`
 Examples:
 
 * `TDL_sort date` +
-The tasks are now sorted by deadlines, where tasks without deadlines are at the bottom of the list.
+The tasks are now sorted by its due date.
 * `TDL_view uncompleted` + `TDL_sort priority` +
-All uncompleted tasks will be sorted by their priority.
+All uncompleted tasks will be sorted by their priority level.
 
-=== Listing entered commands : `history`
-
-Lists all the commands that you have entered in reverse chronological order. +
-Format: `history`
-
-[NOTE]
-====
-Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
-====
-
-=== Undoing previous command : `undo`
-
-Restores the application to the state before the previous _undoable_ command was executed. +
-Format: `undo`
-
-[NOTE]
-====
-Undoable commands: those commands that modify the application's content (`add`, `delete`, `edit` and `complete`).
-====
-
-Examples:
-
-* `TDL_complete 3` +
-`TDL_view completed` +
-`undo` (reverses the `TDL_complete 3` command) +
-
-=== Redoing the previously undone command : `redo`
-
-Reverses the most recent `undo` command. +
-Format: `redo`
-
-Examples:
-
-* `TDL_complete 3` +
-`undo` (reverses the `TDL_complete 3` command) +
-`redo` (reapplies the `TDL_complete 3` command) +
-
-=== Exiting the program : `exit`
-
-Exits the program +
-Format: `exit`
-
-=== Saving the data
-
-All to-do list data are saved in the hard disk automatically after any command that changes the data. +
-There is no need to save manually.
-
-=== Adding an expenditure
+=== Adding an expenditure : `ET_add`
 
 Adds an expenditure to Expenditure Tracker +
 Format: `ET_add e/DESCRIPTION d/DATE m/MONEY c/CATEGORY`
@@ -236,14 +189,14 @@ Format: `ET_add e/DESCRIPTION d/DATE m/MONEY c/CATEGORY`
 * The format for `e/DESCRIPTION` must be of String format, it cannot be null or spaces.
 * The format for `d/DATE` must be DD-MM-YYYY, where DD refers to the date, MM refers to the month and YYYY refers to the year in numbers.
 * The m/MONEY field accepts both integer and floating point numbers.
-* The format for `c/CATEGORY` must be one of Food, Drink, Clothing, Electronics, DailyNecessities, Sports, Communications, Travels, Study, Office, Pets, Gifts, Entertainment, Traffic, Shopping, Beauty, Furniture.
+* The format for `c/CATEGORY` must be one of the following: Food, Drink, Clothing, Electronics, DailyNecessities, Sports, Communications, Travels, Study, Office, Pets, Gifts, Entertainment, Traffic, Shopping, Beauty, Furniture.
 ****
 
 Examples:
 
 * `ET_add e/Chicken rice d/12-09-2018 m/4.2 c/Food`
 
-=== Editing and expenditure : `ET_edit`
+=== Editing an expenditure : `ET_edit`
 
 Edits an existing expenditure in the Expenditure Tracker. +
 Format: `ET_edit INDEX [e/DESCRIPTION] [d/DATE] [m/MONEY] [c/CATEGORY]`
@@ -257,7 +210,7 @@ Format: `ET_edit INDEX [e/DESCRIPTION] [d/DATE] [m/MONEY] [c/CATEGORY]`
 Examples:
 
 * `ET_edit 1 e/Beef rice m/12.5` +
-Edits the expenditure description and money detail of thhe first expenditure in the Expenditure Tracker list to be `Beef rice` and `12.5` respectively.
+Edits the expenditure description and money detail of the 1st expenditure in the Expenditure Tracker list to be `Beef rice` and `12.5` respectively.
 * `ET_edit 2 d/09-12-2018 c/Electronics` +
 Edits the expenditure date and category of the 2nd expenditure to be `09-12-2018` and `Electronics` respectively.
 
@@ -279,14 +232,52 @@ Deletes the 2nd expenditure in the Expenditure Tracker.
 * `ET_delete 1` +
 Deletes the 1st expenditure in the Expenditure Tracker.
 
+=== Viewing expenditures : `ET_view`
+
+Shows a filtered list of expenditures in the expenditure tracker. +
+Format: `ET_view PARAMETER`
+
+****
+* PARAMETER is either `DATE`, `CATEGORY` or `all`.
+* The default view for the expenditure tracker upon starting up is _all expenditures_.
+* If `DATE` is used, the input must be in DD-MM-YYYY, where DD refers to the date, MM refers to the month and YYYY refers to the year in numbers.
+* If `CATEGORY` is used, the input must only be one of the following: Food, Drink, Clothing, Electronics, DailyNecessities, Sports, Communications, Travels, Study, Office, Pets, Gifts, Entertainment, Traffic, Shopping, Beauty, Furniture.
+****
+
+Examples:
+
+* `ET_view 01-01-2018` +
+The list is now populated with expenditures of date `01-01-2018`.
+
+* `ET_view Electronics` +
+The list is now populated with expenditures of `Electronics` category.
+
+* `ET_view all` +
+The list is now populated with all expenditures regardless of their date or category.
+
+=== Checking expenditures : `ET_check`
+
+Checks the status of the expenditures in a particular period and generates a graph [coming in v1.4] to demonstrate how much money was spent on each unit period. +
+Format: `ET_check start/STARTDATE end/ENDDATE`
+
+****
+* `start/STARTDATE` and `end/ENDDATE` must be in the format of DD-MM-YYYY, where DD refers the date, MM refers the month and YYYY refers the year in numbers.
+* `end/ENDDATE` must be of a later date than `start/STARTDATE`.
+****
+
+Examples:
+
+* `ET_check start/01-01-2017 start/01-01-2018` +
+Checks the status of the expenditures from 01-01-2017 to 01-01-2018 and generates a graph [coming in v1.4] to demonstrate how much money was spent on each month.
+
 === Getting advice for spending money : `ET_advice`
 
-Gives a short summary of the expenditures made so far and provides advice on how to spend a particular amount of money in the following period. +
+Gives a short summary of the expenditures made so far and provides advice on how to spend a particular amount of money in a given period of time. +
 Format: `ET_advice m/MONEY numofdays/NUMBEROFDAYS`
 
 ****
-* m/MONEY accepts both integer and floating point numbers.
-* numofdays/NUMBEROFDAYS only accepts interger which represents the number of days
+* `m/MONEY` accepts both integer and floating point numbers.
+* `numofdays/NUMBEROFDAYS` only accepts integer which represents the number of days
 ****
 
 Examples:
@@ -296,38 +287,85 @@ Gives a short summary of the expenditures made so far and provides advice on how
 * `ET_advice m/240 numofdays/14` +
 Gives a short summary of the expenditures made so far and provides advice on how to spend 240 SGD in the following 14 days.
 
-=== Checking expenditures : `ET_check`
+=== Listing entered commands : `history`
 
-Checks the status of the expenditures in a particular period and generates a graph to demonstrate how much money was spent on each unit period. +
-Format: `ET_check start/DATE end/DATE`
+Lists all the commands that you have entered in reverse chronological order. +
+Format: `history`
 
-****
-* start/DATE and end/DATE must be in the format of DD-MM-YYYY, where DD refers the date, MM refers the month and YYYY refers the year in numbers.
-****
+[NOTE]
+====
+Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
+====
+
+=== Undoing previous command : `undo` [Coming in v1.4]
+
+Restores the application to the state before the previous _undoable_ command was executed. +
+Format: `undo`
+
+[NOTE]
+====
+Undoable commands: those commands that modify the application's content (`add`, `delete`, `edit` and `complete`).
+====
 
 Examples:
 
-* `ET_check start/01-01-2017 start/01-01-2018` +
-Checks the status of the expenditures from 01-01-2017 to 01-01-2018 and generates a graph to demonstrate how much money was spent on each month.
+* `TDL_complete 3` +
+`TDL_view completed` +
+`undo` (reverses the `TDL_complete 3` command) +
+
+=== Redoing the previously undone command : `redo` [Coming in v1.4]
+
+Reverses the most recent `undo` command. +
+Format: `redo`
+
+Examples:
+
+* `TDL_complete 3` +
+`undo` (reverses the `TDL_complete 3` command) +
+`redo` (reapplies the `TDL_complete 3` command) +
+
+=== Exiting the program : `exit`
+
+Exits the program +
+Format: `exit`
+
+=== Saving the data
+
+All to-do list data are saved in the hard disk automatically after any command that changes the data. +
+There is no need to save manually.
+
 
 == FAQ
 
-*Q*:
-*A*:
+*Q*: How do I transfer my data to another computer? +
+*A*: Install the app in the other computer and overwrite the empty data files it creates with the files that contains the data in your previous data folder.
+
 
 == Command Summary
 
-* *View* : `TDL_view PARAMETER`
-* *Add* `TDL_add t/TASK m/MODULE d/DATE p/PRIORITY`
+*General:*
+
+* *Help* : `help`
+* *History* : `history`
+* *Undo* : `undo` [Coming in v1.4]
+* *Redo* : `redo` [Coming in v1.4]
+* *Exit* : `exit`
+
+*To-do List:*
+
+* *Add* : `TDL_add t/TASK m/MODULE d/DATE p/PRIORITY`
 * *Edit* : `TDL_edit INDEX [t/TASK] [m/MODULE] [d/DATE] [p/PRIORITY]`
 * *Delete* : `TDL_delete INDEX`
 * *Complete* : `TDL_complete INDEX`
 * *Uncomplete* : `TDL_uncomplete INDEX`
-* *Sort* : `TDL_sort by PARAMETER`
+* *View* : `TDL_view PARAMETER`
+* *Sort* : `TDL_sort PARAMETER`
+
+*Expenditure Tracker:*
+
+* *Add* : `ET_add e/DESCRIPTION d/DATE m/MONEY c/CATEGORY`
+* *Edit* : `ET_edit INDEX [e/DESCRIPTION] [d/DATE] [m/MONEY] [c/CATEGORY]`
+* *Delete* : `ET_delete INDEX`
+* *View* : `ET_view PARAMETER`
 * *Check* : `ET_check start/STARTDATE end/ENDDATE`
 * *Advice* : `ET_advice m/MONEY numofdays/NUMBEROFDAYS`
-* *Help* : `help`
-* *History* : `history`
-* *Undo* : `undo`
-* *Redo* : `redo`
-* *Exit* : `exit`
