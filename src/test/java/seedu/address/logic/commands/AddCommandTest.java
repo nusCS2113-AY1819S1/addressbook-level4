@@ -296,6 +296,46 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean canUndoExpenditureList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoExpenditureList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoExpenditureList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoExpenditureList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitExpenditureList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getUndoableCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitUndoableTodoList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitUndoableExpenditure() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteTag(Tag tag) {
             throw new AssertionError("This method should not be called.");
         }

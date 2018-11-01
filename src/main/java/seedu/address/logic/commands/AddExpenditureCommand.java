@@ -50,7 +50,8 @@ public class AddExpenditureCommand extends Command {
 
 
         model.addExpenditure(toAdd);
-        model.commitAddressBook();
+        model.commitExpenditureList();
+        model.commitUndoableExpenditure();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

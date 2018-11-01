@@ -15,6 +15,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.ExpenditureTrackerChangedEvent;
 import seedu.address.commons.events.model.TodoListChangedEvent;
+import seedu.address.logic.UndoableCommandHistory;
 import seedu.address.model.expenditureinfo.Expenditure;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
@@ -33,6 +34,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Expenditure> filteredExpenditures;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Task> filteredTasks;
+    private final UndoableCommandHistory undoableCommandHistory;
 
 
     /**
@@ -51,6 +53,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredExpenditures = new FilteredList<>(versionedExpenditureTracker.getExpenditureList());
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         filteredTasks = new FilteredList<>(versionedTodoList.getTaskList());
+        undoableCommandHistory = new UndoableCommandHistory();
     }
 
     public ModelManager() {
@@ -303,6 +306,33 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean canUndoExpenditureList() {
+        return versionedExpenditureTracker.canUndo();
+    }
+
+    @Override
+    public boolean canRedoExpenditureList() {
+        return versionedExpenditureTracker.canRedo();
+    }
+
+    @Override
+    public void undoExpenditureList() {
+        versionedExpenditureTracker.undo();
+        indicateExpenditureTrackerChanged();
+    }
+
+    @Override
+    public void redoExpenditureList() {
+        versionedExpenditureTracker.redo();
+        indicateExpenditureTrackerChanged();
+    }
+
+    @Override
+    public void commitExpenditureList() {
+        versionedExpenditureTracker.commit();
+    }
+
+    @Override
     public boolean canUndoTodoList() {
         return versionedTodoList.canUndo();
     }
@@ -327,6 +357,21 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void commitTodoList() {
         versionedTodoList.commit();
+    }
+
+    @Override
+    public String getUndoableCommand() {
+        return undoableCommandHistory.getCommand();
+    }
+
+    @Override
+    public void commitUndoableTodoList() {
+        undoableCommandHistory.addTodoList();
+    }
+
+    @Override
+    public void commitUndoableExpenditure() {
+        undoableCommandHistory.addExpenditureTracker();
     }
 
     @Override
