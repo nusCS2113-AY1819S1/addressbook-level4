@@ -16,7 +16,7 @@ dding both minor enhancements and major features to the software. We were initia
 is written in Java, and has about 10 kLoC. Our task was to morph the existing code into any other software we opted to.
 
 We would be evaluated based on our ability to work with existing base code and the quality of our new enhancements to
-the existing code.Besides code, we were expected to write a User Guide and Developer Guide as well for the product
+the existing code. Besides code, we were expected to write a User Guide and Developer Guide as well for the product
 as though we were releasing an official product for public usage to simulate an actual work schedule.
 
 We choose to create our application FinancialPlanner to allow users keep track of their financial status using a
