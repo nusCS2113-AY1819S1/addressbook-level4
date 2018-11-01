@@ -22,11 +22,11 @@ public class TypicalExpenditures {
     public static final Expenditure NIKE = new ExpenditureBuilder().withDescription("Nike shoes")
             .withCategory("Shopping").withDate("06-12-2018").withMoney("199").build();
     public static final Expenditure COKE = new ExpenditureBuilder().withDescription("Coke")
-            .withCategory("Drink").withDate("05-21-2018").withMoney("1").build();
+            .withCategory("Drink").withDate("05-12-2018").withMoney("1").build();
     public static final Expenditure AIRCON = new ExpenditureBuilder().withDescription("Air conditioner")
-            .withCategory("Furniture").withDate("04-30-2017").withMoney("700").build();
+            .withCategory("Furniture").withDate("04-03-2017").withMoney("700").build();
     public static final Expenditure SPEAKER = new ExpenditureBuilder().withDescription("Bose speaker")
-            .withCategory("Electronics").withDate("09-17-2018").withMoney("400").build();
+            .withCategory("Electronics").withDate("09-10-2018").withMoney("400").build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
