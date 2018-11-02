@@ -19,6 +19,7 @@ import seedu.recruit.commons.events.ui.CompanyJobListDetailsPanelSelectionChange
 import seedu.recruit.commons.events.ui.CompanyListDetailsPanelSelectionChangedEvent;
 import seedu.recruit.commons.events.ui.JumpToCompanyJobListRequestEvent;
 import seedu.recruit.commons.events.ui.JumpToCompanyListRequestEvent;
+import seedu.recruit.commons.events.ui.ShowUpdateJobListRequestEvent;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.joboffer.JobOffer;

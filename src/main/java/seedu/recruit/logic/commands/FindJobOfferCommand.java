@@ -2,7 +2,11 @@ package seedu.recruit.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.Messages;
+import seedu.recruit.commons.events.ui.CompanyJobListDetailsPanelSelectionChangedEvent;
+import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
+import seedu.recruit.commons.events.ui.ShowUpdateJobListRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.joboffer.JobOfferContainsKeywordsPredicate;
@@ -36,6 +40,9 @@ public class FindJobOfferCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredCompanyJobList(predicate);
+        EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
+
+        //EventsCenter.getInstance().post(new ShowUpdateJobListRequestEvent(model));
         return new CommandResult(
                 String.format(Messages.MESSAGE_JOBS_LISTED_OVERVIEW, model.getFilteredCompanyJobList().size()));
     }
