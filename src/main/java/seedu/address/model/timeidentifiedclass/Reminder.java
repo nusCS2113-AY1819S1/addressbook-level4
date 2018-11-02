@@ -10,7 +10,7 @@ import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatExcep
  */
 public class Reminder extends TimeIdentifiedClass {
 
-    public static final String REMINDER_TIME_CONSTRAINTS = "Reminder times must be in dd/MM/yyyy HH:mm:ss format.";
+    public static final String REMINDER_TIME_CONSTRAINTS = "Reminder times must be in yyyy/MM/dd HH:mm:ss format.";
 
     private String time;
     private String reminderMessage;
