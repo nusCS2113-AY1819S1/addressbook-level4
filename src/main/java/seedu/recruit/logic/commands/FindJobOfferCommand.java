@@ -1,6 +1,7 @@
 package seedu.recruit.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_AGE_RANGE;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_EDUCATION;

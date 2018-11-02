@@ -24,6 +24,7 @@ import seedu.recruit.commons.events.ui.ShowEmailPreviewEvent;
 import seedu.recruit.commons.events.ui.ShowHelpRequestEvent;
 import seedu.recruit.commons.events.ui.ShowLastViewedBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowShortlistPanelRequestEvent;
+import seedu.recruit.commons.events.ui.ShowUpdateJobListRequestEvent;
 import seedu.recruit.commons.events.ui.SwitchBookRequestEvent;
 import seedu.recruit.logic.Logic;
 import seedu.recruit.logic.commands.SwitchBookCommand;
@@ -403,5 +404,11 @@ public class MainWindow extends UiPart<Stage> {
     private void handleShowLastViewedBookEvent (ShowLastViewedBookRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         switchToLastViewedBook();
+    }
+
+    @Subscribe
+    private void handleUpdateJobListEvent(ShowUpdateJobListRequestEvent event) {
+        switchToCompanyBook();
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
     }
 }
