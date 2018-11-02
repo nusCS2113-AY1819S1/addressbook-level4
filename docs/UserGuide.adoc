@@ -269,23 +269,27 @@ Exports the 1st person starting from the 1st person in the results of the `find`
 
 // tag::schedule[]
 === Add personal schedule : `schedule`
+This function enables you to add the scheduled events of a person into the selected person's card.
+
+
 Format:
 
-`schedule INDEX d/DDMMYYYY st/START-TIME et/END_TIME en/EVENT-NAME`
+`schedule IndexOfPerson d/DDMMYYYY st/START-TIME et/END_TIME en/EVENT-NAME`
 
 Examples:
 
 * `schedule 1 d/09092018 st/1200 et/1400 en/CS1231 Exam`
 * `schedule 2 d/08072018 st/1000 et/1900 en/CS2040C Practical Exam`
 
-
+*To clear the schedules, please restart the program on your end.
+Delete and clear schedules will be coming in version 1.4.*
 
 === Add and Delete personal weekly schedule : `schedule` [coming in v1.4]
 
 Format:
 
-`addschedule INDEX d/DDMMYYYY st/START-TIME et/END-TIME en/EVENT-NAME`
-`delschedule INDEX d/DDMMYYYY st/START-TIME et/END-TIME en/EVENT-NAME`
+`addschedule IndexOfPerson d/DDMMYYYY st/START-TIME et/END-TIME en/EVENT-NAME`
+`delschedule IndexOfPerson d/DDMMYYYY st/START-TIME et/END-TIME en/EVENT-NAME`
 
 Examples:
 
@@ -296,11 +300,11 @@ Examples:
 === List Common Schedule : `commonschedule` [coming in v1.4]
 
 Shows a list of common meeting time for a group of contacts and the user in that given that given period of time. +
-Format: `commonschedule p/PERSON...[PERSON] sd/START-DATE-DDMMYYYY ed/END-DATE-DDMMYYYY t/HOURS`
+Format: `commonschedule i/IndexOfPerson...[INDEX] sd/START-DATE-DDMMYYYY ed/END-DATE-DDMMYYYY t/AVAIL-HOURS-REQUIRED`
 
 Examples:
 
-* `commonschedule p/John Smith p/Jane Doe sd/08092018 ed/01102018 t/1.5`
+* `commonschedule i/1 i/2 i/3 sd/08092018 ed/01102018 t/1.5`
 // end::schedule[]
 
 === Add To-do task: `todo`
