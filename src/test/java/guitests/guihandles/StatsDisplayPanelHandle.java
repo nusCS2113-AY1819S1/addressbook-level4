@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * Handle for the GUI component StatsDisplayPanel
@@ -12,8 +13,8 @@ import javafx.scene.control.TabPane;
 public class StatsDisplayPanelHandle extends NodeHandle<Node> {
 
     public static final String STATS_DISPLAY_HANDLE = "#tabManager";
-    public static final String EXPENSE_BREAKDOWN_LABEL = "Total Expense for the period";
-    public static final String INCOME_BREAKDOWN_LABEL = "Total Income for the period";
+    public static final String EXPENSE_BREAKDOWN_LABEL = "Category Breakdown For Expenses";
+    public static final String INCOME_BREAKDOWN_LABEL = "Category Breakdown For Income";
 
     private TabPane tabManager;
 
@@ -31,19 +32,17 @@ public class StatsDisplayPanelHandle extends NodeHandle<Node> {
      * reference
      * @return CategoryBreakdownHandle
      */
-    public CategoryBreakdownHandle getCategoryBreakdown(String label) throws NullPointerException {
+    public CategoryBreakdownHandle getCategoryBreakdown(Tab tab) throws NullPointerException {
         CategoryBreakdownHandle categoryBreakdownHandle;
-        Tab breakdownTab = getChildTab(label);
         try {
-            categoryBreakdownHandle = new CategoryBreakdownHandle(getChildNode(
-                    CategoryBreakdownHandle.CATEGORY_BREAKDOWN_HANDLE));
+            categoryBreakdownHandle = new CategoryBreakdownHandle((AnchorPane) tab.getContent());
         } catch (NodeNotFoundException nfe) {
             return null;
         }
         return categoryBreakdownHandle;
     }
 
-    private Tab getChildTab(String label) {
+    public Tab getChildTab(String label) {
         ObservableList<Tab> tabs = tabManager.getTabs();
         for (Tab t : tabs) {
             if (t.getText().equals(label)) {
@@ -51,5 +50,10 @@ public class StatsDisplayPanelHandle extends NodeHandle<Node> {
             }
         }
         return null;
+    }
+
+    public boolean isTabSelected(Tab tab) {
+        int indexOfTab = tabManager.getTabs().indexOf(tab);
+        return tabManager.getSelectionModel().isSelected(indexOfTab);
     }
 }

@@ -1,5 +1,6 @@
 package seedu.planner.ui;
 //@@author tenvinc
+
 /**
  * This class represents any type of chart data that can be split into 2 parameters, key and the value which is a double
  */

@@ -23,6 +23,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 
+import guitests.guihandles.CategoryBreakdownHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.DetailedRecordCardHandle;
 import guitests.guihandles.MainMenuHandle;
@@ -30,9 +31,11 @@ import guitests.guihandles.MainWindowHandle;
 import guitests.guihandles.RecordCardHandle;
 import guitests.guihandles.RecordListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
+import guitests.guihandles.StatsDisplayPanelHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import guitests.guihandles.SummaryDisplayHandle;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Tab;
 import seedu.planner.TestApp;
 import seedu.planner.commons.core.EventsCenter;
 import seedu.planner.commons.core.index.Index;
@@ -50,6 +53,7 @@ import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.Model;
 import seedu.planner.model.record.NameContainsKeywordsPredicate;
 import seedu.planner.model.record.Record;
+import seedu.planner.model.summary.CategoryStatistic;
 import seedu.planner.model.tag.Tag;
 import seedu.planner.testutil.EditRecordDescriptorBuilder;
 import seedu.planner.testutil.TypicalRecords;
@@ -144,6 +148,8 @@ public abstract class FinancialPlannerSystemTest {
     public SummaryDisplayHandle getSummaryDisplay() {
         return mainWindowHandle.getSummaryDisplay();
     }
+
+    public StatsDisplayPanelHandle getStatsDisplayPanel() { return mainWindowHandle.getStatsDisplayPanel(); }
     /**
      * Executes {@code command} in the application's {@code CommandBox}.
      * Method returns after UI components have been updated.
@@ -295,6 +301,25 @@ public abstract class FinancialPlannerSystemTest {
         assertEquals(expected, summaryDisplayHandle.getSummaryTableList());
     }
 
+    protected void assertCategoryBreakdownShownCorrectly(ObservableList<CategoryStatistic> expected) {
+        StatsDisplayPanelHandle statsDisplayPanel = getStatsDisplayPanel();
+        assertTrue(statsDisplayPanel.isVisible());
+
+        // Asserts that the 1st tab is visible but not selected
+        Tab expenseTab = statsDisplayPanel.getChildTab(StatsDisplayPanelHandle.EXPENSE_BREAKDOWN_LABEL);
+        assertFalse(statsDisplayPanel.isTabSelected(expenseTab));
+        CategoryBreakdownHandle expenseCategoryBreakdown = statsDisplayPanel.getCategoryBreakdown(
+                expenseTab);
+        assertTrue(expenseCategoryBreakdown.isVisible());
+
+        // Asserts that the 2nd tab is visible and selected
+        Tab incomeTab = statsDisplayPanel.getChildTab(StatsDisplayPanelHandle.INCOME_BREAKDOWN_LABEL);
+        assertTrue(statsDisplayPanel.isTabSelected(incomeTab));
+        CategoryBreakdownHandle incomeCategoryBreakdown = statsDisplayPanel.getCategoryBreakdown(
+                incomeTab);
+        assertTrue(incomeCategoryBreakdown.isVisible());
+    }
+
     /**
      * Asserts that the starting state of the application is correct.
      */
@@ -403,6 +428,16 @@ public abstract class FinancialPlannerSystemTest {
         deleteCommand.execute(model, null);
         String command = "   " + DeleteCommand.COMMAND_WORD + " " + indexToDelete;
         executeCommand(command);
+    }
+
+    /**
+     * Executes the ClearCommand on the ui and updates the expected model
+     * @param model expectedModel to update
+     */
+    protected void clearModel(Model model) {
+        executeCommand(ClearCommand.COMMAND_WORD);
+        model.resetData(new FinancialPlanner());
+        model.commitFinancialPlanner();
     }
 
 }

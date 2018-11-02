@@ -17,11 +17,9 @@ import org.junit.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.planner.logic.commands.ClearCommand;
 import seedu.planner.logic.commands.SummaryByDateCommand;
 import seedu.planner.logic.commands.SummaryByMonthCommand;
 import seedu.planner.logic.commands.SummaryCommand;
-import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.Model;
 import seedu.planner.model.Month;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
@@ -175,16 +173,6 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
     }
 
     /**
-     * Executes the ClearCommand on the ui and updates the expected model
-     * @param model expectedModel to update
-     */
-    protected void clearModel(Model model) {
-        executeCommand(ClearCommand.COMMAND_WORD);
-        model.resetData(new FinancialPlanner());
-        model.commitFinancialPlanner();
-    }
-
-    /**
      * Executes the {@code SummaryCommand} that queries the model and asserts that the,<br>
      * 1. Command box displays an empty string.<br>
      * 2. Command box has the default style class.<br>
@@ -198,7 +186,7 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
      */
     private void assertCommandSuccess(String command, Model expectedModel,
                                       ObservableList<SummaryEntry> expectedList, Mode mode) {
-        requireAllNonNull();
+        requireAllNonNull(command, expectedModel, expectedList, mode);
         String expectedResultMessage;
         if (mode.equals(BY_DATE)) {
             expectedResultMessage = String.format(SummaryByDateCommand.MESSAGE_SUCCESS, expectedList.size());
