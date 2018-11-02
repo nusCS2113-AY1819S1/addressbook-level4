@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
 import seedu.planner.model.summary.CategoryStatistic;
 
 /**
@@ -15,11 +16,11 @@ public class MixedPieChartDataList {
 
     private static final String untaggedLabel = "<<untagged>>";
 
-    private List<ChartData> expenseChartLabelData;
+    private List<PieChart.Data> expenseChartLabelData;
 
-    private List<ChartData> incomeChartLabelData;
-    private List<ChartData> expenseChartLegendData;
-    private List<ChartData> incomeChartLegendData;
+    private List<PieChart.Data> incomeChartLabelData;
+    private List<PieChart.Data> expenseChartLegendData;
+    private List<PieChart.Data> incomeChartLegendData;
 
     private Double totalIncome = 0.0;
     private Double totalExpense = 0.0;
@@ -38,7 +39,7 @@ public class MixedPieChartDataList {
     }
 
     /**
-     * Process given data and adds new ChartData to the incomeChartLabelData
+     * Process given data and adds new PieChart.Data to the incomeChartLabelData
      * @param data data to be added
      */
     private void addToIncomeLabelData(CategoryStatistic data) {
@@ -49,7 +50,7 @@ public class MixedPieChartDataList {
             } else {
                 label = data.getTags().toString();
             }
-            incomeChartLabelData.add(new ChartData(label, data.getTotalIncome()));
+            incomeChartLabelData.add(new PieChart.Data(label, data.getTotalIncome()));
             totalIncome += data.getTotalIncome();
         } else {
             return;
@@ -57,7 +58,7 @@ public class MixedPieChartDataList {
     }
 
     /**
-     * Process given data and adds new ChartData to the expenseChartLabelData
+     * Process given data and adds new PieChart.Data to the expenseChartLabelData
      * @param data data to be added
      */
     private void addToExpenseLabelData(CategoryStatistic data) {
@@ -68,7 +69,7 @@ public class MixedPieChartDataList {
             } else {
                 label = data.getTags().toString();
             }
-            expenseChartLabelData.add(new ChartData(label, data.getTotalExpense()));
+            expenseChartLabelData.add(new PieChart.Data(label, data.getTotalExpense()));
             totalExpense += data.getTotalExpense();
         } else {
             return;
@@ -76,15 +77,15 @@ public class MixedPieChartDataList {
     }
 
     /**
-     * Computes the proportion of a given {@code ChartData} data over the given total amount
+     * Computes the proportion of a given {@code PieChart.Data} data over the given total amount
      * @param data data to be converted
      * @param total reference total amount
      * @return
      */
-    private ChartData convertToPercentages(ChartData data, Double total) {
+    private PieChart.Data convertToPercentages(PieChart.Data data, Double total) {
         if (total > 0.0) {
-            Double newValue = Double.parseDouble(String.format("%.2f", data.value / total * 100.0));
-            return new ChartData(data.key, newValue);
+            Double newValue = Double.parseDouble(String.format("%.2f", data.getPieValue() / total * 100.0));
+            return new PieChart.Data(data.getName(), newValue);
         } else {
             return data;
         }
@@ -98,19 +99,19 @@ public class MixedPieChartDataList {
         return incomeChartLabelData.size() == 0 && incomeChartLegendData.size() == 0;
     }
 
-    public List<ChartData> getExpenseChartLabelData() {
+    public List<PieChart.Data> getExpenseChartLabelData() {
         return expenseChartLabelData;
     }
 
-    public List<ChartData> getIncomeChartLabelData() {
+    public List<PieChart.Data> getIncomeChartLabelData() {
         return incomeChartLabelData;
     }
 
-    public List<ChartData> getExpenseChartLegendData() {
+    public List<PieChart.Data> getExpenseChartLegendData() {
         return expenseChartLegendData;
     }
 
-    public List<ChartData> getIncomeChartLegendData() {
+    public List<PieChart.Data> getIncomeChartLegendData() {
         return incomeChartLegendData;
     }
 }

@@ -28,7 +28,7 @@ public class CategoryBreakdown extends UiPart<Region> {
     private ObservableList<PieChart.Data> pieChartData;
     private PieChart pieChart;
 
-    public CategoryBreakdown(List<ChartData> labelData, List<ChartData> legendData, String label) {
+    public CategoryBreakdown(List<PieChart.Data> labelData, List<PieChart.Data> legendData, String label) {
         super(FXML);
         pieChart = new CustomPieChart(labelData, legendData);
         initPieChart(label);
