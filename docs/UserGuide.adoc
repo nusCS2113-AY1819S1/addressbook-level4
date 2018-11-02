@@ -59,6 +59,8 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 The timetable content is locked, and it requires a user to either login with a pre-existing account, or register a new one.
 
+NOTE: The application has a default user with username: *test* and password: *test*
+
 There are five security related commands that can be entered on this command line:
 
 1. `login`
@@ -68,12 +70,12 @@ There are five security related commands that can be entered on this command lin
 5. `exit`
 
 .Login Page with Command Prompts
-image::Login Page.png[width="790"]
+image::LoginPage.png[width="790"]
 
 At this page you will have to enter your credentials to log in. Only then would you be able to edit and view your own timetable,
 and view your friends' timetable. +
 
-Friends are other users that you have "friended", and all users start off without
+TIP: Friends are other users that you have "friended", and all users start off without
 having any friends. +
 
 The timetable that belongs to users that are not your friends will not be available to you, till you
@@ -90,8 +92,7 @@ Examples:
 * `login tim tam` +
 Logins with Username: tim and Password: tam
 
-Constraints:
-
+CAUTION: Constraints: +
 * Username and Password must not contain any spaces
 
 ==== Registering: `register`
@@ -101,10 +102,8 @@ Examples:
 
 * register tim tam tim@tam.com 88888888 Tammy
 
-Constraints:
-
-* Currently all fields must not have spaces too
-
+CAUTION: Constraints: +
+* Currently all fields must not have spaces too +
 * All fields must be entered
 
 ==== Showing the UI Interface: `ui`
@@ -137,6 +136,7 @@ Command: `exit`
 This command closes the application without logging you out. It is recommended to logout before doing this, or the changes
 to your timetable might be lost.
 // end::security[]
+
 === Viewing help : `help` (`h`)
 
 Displays the userguide from within the app.
@@ -147,14 +147,13 @@ Format: `help`
 Shows a list of all persons in the address book. +
 Format: `list`
 
-=== Editing a person : `edit` (`e`)
+=== Editing a person : `edit` (`e`) (DOES NOT WORK IN V1.3)
 
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Edits your information in the address book. +
+Format: `edit  [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 ****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
+
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person's tags by typing `t/` without specifying any tags after it.
@@ -162,12 +161,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-=== Locating persons by name : `find` (`f`)
+=== Locating persons by name : `find` (`f`) (DOES NOT WORK IN V1.3)
 
 Finds persons whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -370,7 +365,7 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 ====
 
 // tag::undoredo[]
-=== Undoing previous command : `undo` (`u`)
+=== Undoing previous command : `undo` (`u`) (DOES NOT WORK IN V1.3)
 
 Restores the address book to the state before the previous _undoable_ command was executed. +
 Format: `undo`
@@ -396,7 +391,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
 
-=== Redoing the previously undone command : `redo` (`r`)
+=== Redoing the previously undone command : `redo` (`r`) (DOES NOT WORK IN V1.3)
 
 Reverses the most recent `undo` command. +
 Format: `redo`
@@ -419,7 +414,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-=== Clearing all entries : `clear` (`c`)
+=== Clearing all entries : `clear` (`c`) (DOES NOT WORK IN V1.3)
 
 Clears all entries from the address book. +
 Format: `clear`

@@ -10,16 +10,17 @@
 == Overview
 
 
-FreeTime is a security-enabled desktop application that is used for finding mutually availble slots between its users. This
-available slot will be displayed for the user to choose from, which will be reflected in his timetable using our FreeTime GUI.
+FreeTime(TM) is a security-enabled desktop application that is used for finding mutually availble slots between its users. This
+available slot will be displayed for the user to choose from, which will be reflected in his timetable using our FreeTime
+Graphical User Interface (GUI).
 
 This project portfolio would be introducing you to my team that has developed this product in the span of a semester. In addition to giving you a brief general overview of this application
 feature, I would be going indepth into the details on how my own features are implemtented. This is to give you a deeper understanding of what contributions that I have done within this project,
 and hopefully you would perhaps also learn something along the way.
 
-So sit tight, and let me tell you more about FreeTime.
+So sit tight, and let me tell you more about _FreeTime_.
 
-== FreeTime Features
+== FreeTime(TM) Features
 In addition to essential security features such as login and registering, we have a clean, minimalistic landing page that is user-friendly.
 
 Users can import preexisting timetables that are taken from Google Calander or any other calander application that saves their data into the commonly used .ics format. This handy feature allows
@@ -30,16 +31,24 @@ this particular group of friends.
 
 Using the command `freetime`, you would be presented with a timetable that shows you what are your common free slots are. Thus you are freed from the painful moments of finding a common free slot in huge groups.
 
+NOTE: More information below in User Guide
 
 
 == Summary of contributions
 In this section, I would be briefly telling you about my contributions to this project, and any interesting points that you could find useful.
 
+
+GIVE THE REASON WHY. USE LONGER SENTENCE BELOW
+
 * *Major enhancement*: added *the ability to authenticate users*
 ** What it does: Allows the users to have unique access and control to his own timetable
-** Justification: To prevent malicious users to edit other users' timetable, and to introduce different privacy levels. Other users that you are friends with allows you to view their
-timetables and find common slots with them.
-** Highlights: Other than having the ability to add friends, you are now able to add groups since each users are differentiated from each other
+** Justification: To be able to prevent others from editing your own timetable, and to facilitate different privacy levels.
+Privacy levels are given to users to have control over what they feel comfortable sharing between strangers and friends.
+** Highlights: Not only have I learnt how to implement features, I have to also consider the implications of having some
+of them implemented. For example, to have an extra level of security such as 2FA(Factor Authorization) step might seem beneficial,
+but does this application warrants the extra steps to log in? Not so in my opinion.
+
+Other than having the ability to add friends, you are now able to add groups since each users are differentiated from each other
 
 
 * *Minor enhancement*: Used a hashing feature together with a salt to store user's password
