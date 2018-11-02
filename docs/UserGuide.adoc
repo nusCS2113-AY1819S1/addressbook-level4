@@ -433,7 +433,7 @@ Format: `clear`
 This is the first step in the budget allocation process!
 
 This command allows club members to submit budget calculation data - the name of their club, number of events the club is planning to hold and the expected turnout of the events  +
-Format: `budget c/CLUB NAME t/TURNOUT e/NUMBER OF EVENTS`
+Format: `budget c/CLUB NAME t/EXPECTED TURNOUT e/NUMBER OF EVENTS`
 
 Example: +
 `budget c/Computing Club t/200 e/5`
@@ -443,14 +443,24 @@ Example: +
 CLUB NAME is case sensitive. Hence `c/Computing Club` and `c/computing club` will be treated as unique entries.
 ====
 
+[NOTE]
+====
+EXPECTED TURNOUT and NUMBER OF EVENTS must be postive whole numbers.
+====
+
 === Calculating the budgets : `calculatebudget`
 This is the second step in the budget allocation process!
 
-After all the clubs budget calculation data has been submitted by the club members, NUSSU treasurers must use this command to calculate and allocate budgets to all the clubs based on the total available budget +
+After all the clubs' budget calculation data has been submitted by the club members, NUSSU treasurers must use this command to calculate and allocate budgets to all the clubs based on the total available budget +
 Format: `calculatebudget b/TOTAL AVAILABLE BUDGET IN SGD`
 
 Example: +
 `calculatebudget b/50000`
+
+[NOTE]
+====
+Ensure that TOTAL AVAILABLE BUDGET is a positive whole number.
+====
 
 [NOTE]
 ====
@@ -465,6 +475,11 @@ Format: `viewbudget c/CLUB NAME`
 
 Example: +
 `viewbudget c/Computing Club`
+
+[NOTE]
+====
+If the TOTAL AVAILABLE BUDGET specified by the treasurer using the `calculatebudget` command is a very small number, the budget allocated to the clubs may even be 0.
+====
 
 // end::budget[]
 
