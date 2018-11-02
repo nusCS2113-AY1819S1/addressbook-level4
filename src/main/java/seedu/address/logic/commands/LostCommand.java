@@ -93,7 +93,8 @@ public class LostCommand extends Command {
         updatedLoststatus = new Loststatus(updatedLost, updatedFound);
 
         Quantity updatedQuantity = new Quantity(Integer.toString(initialValue - updatedValue));
-        Status updatedStatus = new Status(initialReadyValue - updatedValue, itemToLost.getStatus().getStatusOnLoan(), itemToLost.getStatus().getStatusFaulty());
+        Status updatedStatus = new Status(initialReadyValue - updatedValue,
+                itemToLost.getStatus().getStatusOnLoan(), itemToLost.getStatus().getStatusFaulty());
 
 
         return new Item(itemToLost.getName(), updatedQuantity,

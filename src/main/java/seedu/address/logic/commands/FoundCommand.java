@@ -95,13 +95,14 @@ public class FoundCommand extends Command {
         updatedLoststatus = new Loststatus(updatedLost, updatedFound);
 
         Quantity updatedQuantity = new Quantity(Integer.toString(initialValue + updatedValue));
-        Status updatedStatus = new Status(initialReadyValue + updatedValue, itemToFound.getStatus().getStatusOnLoan(), itemToFound.getStatus().getStatusFaulty());
+        Status updatedStatus = new Status(initialReadyValue + updatedValue,
+                itemToFound.getStatus().getStatusOnLoan(), itemToFound.getStatus().getStatusFaulty());
 
 
 
 
         return new Item(itemToFound.getName(), updatedQuantity,
-                itemToFound.getMinQuantity(), updatedLoststatus, updatedStatus,itemToFound.getTags());
+                itemToFound.getMinQuantity(), updatedLoststatus, updatedStatus, itemToFound.getTags());
     }
 
     /**
