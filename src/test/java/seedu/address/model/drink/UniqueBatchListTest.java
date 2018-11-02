@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.drink.exceptions.BatchNotFoundException;
-import seedu.address.model.drink.exceptions.DuplicateBatchException;
 import seedu.address.model.testutil.Assert;
 
 class UniqueBatchListTest {
