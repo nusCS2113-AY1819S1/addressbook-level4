@@ -43,6 +43,7 @@ public class MainWindow extends UiPart<Stage> {
     private UserPrefs prefs;
     private HelpWindow helpWindow;
     private AnnouncementPopUp announcementPopUp;
+    private LoginPopUp loginPopUp;
 
     @FXML
     private StackPane browserPlaceholder;
@@ -83,6 +84,7 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         announcementPopUp = new AnnouncementPopUp();
+        loginPopUp = new LoginPopUp();
     }
 
     public Stage getPrimaryStage() {
@@ -212,6 +214,19 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * allows login in a pop up window.
+     */
+    @FXML
+    public void handleLogin(String announcementTitle, String announcementContent) {
+        loginPopUp = new LoginPopUp();
+        if (!loginPopUp.isShowing()) {
+            loginPopUp.show(announcementTitle, announcementContent);
+        } else {
+            loginPopUp.focus();
+        }
+    }
+
     //@@author
     void show() {
         primaryStage.show();
@@ -250,5 +265,10 @@ public class MainWindow extends UiPart<Stage> {
     private void handleShowAnnouncementEvent(ShowAnnouncementEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleShowAnnouncement(event.announcementTitle, event.announcementContent);
+    }
+    @Subscribe
+    private void handleLoginEvent(ShowAnnouncementEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleLogin(event.announcementTitle, event.announcementContent);
     }
 }

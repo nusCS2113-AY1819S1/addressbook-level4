@@ -29,8 +29,8 @@ public class LoginCommandParser implements Parser<LoginCommand> {
                 LoginCommand.MESSAGE_USAGE));
         }
 
-        String userName = argMultimap.getValue(PREFIX_USER_NAME).get().trim();
-        String userPassword = argMultimap.getValue(PREFIX_USER_PASSWORD).get().trim();
+        String userName = ParserUtil.parseUserName(argMultimap.getValue(PREFIX_USER_NAME).get());
+        String userPassword = ParserUtil.parseUserPassword(argMultimap.getValue(PREFIX_USER_PASSWORD).get());
 
         return new LoginCommand(userName, userPassword);
     }

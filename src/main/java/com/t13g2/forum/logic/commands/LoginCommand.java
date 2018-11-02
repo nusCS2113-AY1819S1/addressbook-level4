@@ -33,6 +33,7 @@ public class LoginCommand extends Command {
     public static final String MESSAGE_USER_ACTIVE = "Hi %s, Please logout before trying to login. Thank you";
     private final String userName;
     private final String userPassword;
+    private boolean empty;
 
     public LoginCommand(String userName, String userPassword) {
         requireNonNull(userName);
@@ -46,6 +47,7 @@ public class LoginCommand extends Command {
         requireNonNull(model);
         User exist = null;
         if (Context.getInstance().getCurrentUser() == null) {
+
             try (UnitOfWork unitOfWork = new UnitOfWork()) {
                 exist = unitOfWork.getUserRepository().authenticate(userName, userPassword);
             } catch (EntityDoesNotExistException e) {
