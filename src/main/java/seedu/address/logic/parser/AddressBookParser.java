@@ -118,6 +118,9 @@ public class AddressBookParser {
         case IncreaseItemCommand.COMMAND_WORD: case IncreaseItemCommand.COMMAND_ALIAS:
             return new IncreaseItemCommandParser().parse(arguments);
 
+        case DecreaseItemCommand.COMMAND_WORD:
+            return new DecreaseItemCommandParser().parse(arguments);
+
         case UndoAllCommand.COMMAND_WORD:
             return new UndoAllCommand();
 
