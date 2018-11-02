@@ -52,7 +52,7 @@ public class EmailContentsAddCommand extends EmailContentsSelectCommand {
                 }
             } else {
                 for (JobOffer duplicateJobOffer : duplicateJobOffers) {
-                    duplicates += duplicateJobOffer.getJob().toString();
+                    duplicates += model.getContentJobOfferName(duplicateJobOffer);
                     duplicates += "\n";
                 }
             }
