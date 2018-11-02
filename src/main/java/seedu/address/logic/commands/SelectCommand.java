@@ -26,7 +26,7 @@ public class SelectCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Selected Person: %1$s";
+    public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Selected %1$s";
 
     private final Index targetIndex;
 
@@ -54,7 +54,9 @@ public class SelectCommand extends Command {
 
             model.updateTimeTable(friendList.get(targetIndex.getZeroBased()).getTimeTable());
             EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
-            return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex.getOneBased()));
+            String namePerson = model.getFilteredPersonList().get(targetIndex.getZeroBased()).getName().toString();
+
+            return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, namePerson));
         }
     }
 
