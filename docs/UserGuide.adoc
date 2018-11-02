@@ -165,7 +165,7 @@ Examples:
 
 * `updateThread tId/123 tTitle/This is a new title`
 
-=== Updating a comment title : `updateComment`
+=== Updating a comment content : `updateComment`
 
 Update an existing comment title in the forum book. +
 Format: `updateComment cId/COMMENT ID cContent/NEW COMMENT CONTENT`
@@ -206,7 +206,7 @@ Examples:
 
 === Announcing new command : `announce`
 
-Announce the new announcement created by admin. +
+Announce the new announcement created by admin. The first character of announcement title and content must not be a whitespace. +
 Format: `announce aTitle/ANNOUNCEMENT_TITLE aContent/ANNOUNCEMENT_CONTENT`
 
 Example:
@@ -218,18 +218,20 @@ Example:
 Check for the latest announcement. +
 Format: `checkAnnounce`
 
-=== Blocking a user from creating thread or comment : `block`
+=== Blocking a user from creating thread or comment : `blockUser`
 
-Block a specific user that match the given argument by admin. +
-Format: `block uName/USER_NAME`
+Block a specific user that match the given argument by admin. `block` only takes `true` or `false`  +
+Format: `blockUser uName/USER_NAME block/BLOCK_OR_UNBLOCK`
 
 Example:
 
-* `block uName/john`
+* `blockUser uName/john block/true`
+
+* `blockUser uName/john block/false`
 
 === Setting a user as admin or revert an admin to user : `setAdmin`
 
-Set a user as an admin or revert an admin to user. +
+Set a user as an admin or revert an admin to user. `set` only takes `true` or `false` +
 Format: `setAdmin uName/USER_NAME set/SET_OR_REVERT`
 
 Examples:
@@ -240,7 +242,7 @@ Examples:
 
 === Creating a new module : `createModule`
 
-Create a new module by admin. +
+Create a new module by admin. Module code should follow (2 or 3 capital letters) + (4 numbers) + (0 or 1 capital letter) and it should not be blank. E.g. MA1580E, CS2113 or USP1000A, USP1000. Module title should only contain letters and spaces.+
 Format: `createModule mCode/MODULE_CODE mTitle/MODULE_TITLE`
 
 Example:
