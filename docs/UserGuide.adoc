@@ -276,11 +276,6 @@ A: We have the pleasure of working with Swedish developer on our team. +
 
 Q: How do I transfer my data to another computer?
 
-<<<<<<< HEAD
 . Install the application on another computer.
 . Copy the folder “data”  from the old computer to the new computer.
 . Place it in the folder that belong to the program.
-
-=======
-A: Install the application on another computer and copy the folder “data”  from the old computer to the new computer and place it in the folder that belong to the program.
->>>>>>> 3cd35ee78dd20c8ee28a6f73b6992efe68870e4a
