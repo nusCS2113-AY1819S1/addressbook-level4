@@ -64,21 +64,42 @@ public class SampleDataUtil {
         };
     }
 
-    public static LoginDetails getSampleLoginDetails() {
-        LoginDetails loginDetails = null;
-        String encryptedLoginId = null;
-        String encryptedLoginPassword = null;
-        String encryptedLoginRole = null;
+    public static LoginDetails[] getSampleLoginDetails() {
+        String encryptedLoginIdOne = null;
+        String encryptedLoginPasswordOne = null;
+        String encryptedLoginRoleOne = null;
+        String encryptedLoginIdTwo = null;
+        String encryptedLoginPasswordTwo = null;
+        String encryptedLoginRoleTwo = null;
+        String encryptedLoginIdThree = null;
+        String encryptedLoginPasswordThree = null;
+        String encryptedLoginRoleThree = null;
         try {
-            encryptedLoginId = Base64.getEncoder().encodeToString("A1234567M".getBytes("utf-8"));
-            encryptedLoginPassword = Base64.getEncoder().encodeToString("zaq1xsw2cde3".getBytes("utf-8"));
-            encryptedLoginRole = Base64.getEncoder().encodeToString("president".getBytes("utf-8"));
-            loginDetails = new LoginDetails(new UserId(encryptedLoginId),
-                    new UserPassword(encryptedLoginPassword), new UserRole(encryptedLoginRole));
+            encryptedLoginIdOne = Base64.getEncoder().encodeToString("A1234567M".getBytes("utf-8"));
+            encryptedLoginPasswordOne = Base64.getEncoder().encodeToString("zaq1xsw2cde3".getBytes("utf-8"));
+            encryptedLoginRoleOne = Base64.getEncoder().encodeToString("president".getBytes("utf-8"));
+            encryptedLoginIdTwo = Base64.getEncoder().encodeToString("A1234568M".getBytes("utf-8"));
+            encryptedLoginPasswordTwo = Base64.getEncoder().encodeToString("zaq1xsw2cde3".getBytes("utf-8"));
+            encryptedLoginRoleTwo = Base64.getEncoder().encodeToString("treasurer".getBytes("utf-8"));
+            encryptedLoginIdThree = Base64.getEncoder().encodeToString("A1234569M".getBytes("utf-8"));
+            encryptedLoginPasswordThree = Base64.getEncoder().encodeToString("zaq1xsw2cde3".getBytes("utf-8"));
+            encryptedLoginRoleThree = Base64.getEncoder().encodeToString("member".getBytes("utf-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        return loginDetails;
+        try {
+            return new LoginDetails[]{
+                new LoginDetails(new UserId(encryptedLoginIdOne), new UserPassword(encryptedLoginPasswordOne),
+                        new UserRole(encryptedLoginRoleOne)),
+                new LoginDetails(new UserId(encryptedLoginIdTwo), new UserPassword(encryptedLoginPasswordTwo),
+                        new UserRole(encryptedLoginRoleTwo)),
+                new LoginDetails(new UserId(encryptedLoginIdThree), new UserPassword(encryptedLoginPasswordThree),
+                        new UserRole(encryptedLoginRoleThree))
+            };
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return new LoginDetails[0];
     }
 
     public static ClubBudgetElements[] getSampleClubBudgetElements() {
@@ -107,7 +128,9 @@ public class SampleDataUtil {
 
     public static ReadOnlyLoginBook getSampleLoginBook() {
         LoginBook sampleLb = new LoginBook();
-        sampleLb.createAccount(getSampleLoginDetails());
+        for (LoginDetails sampleAccount : getSampleLoginDetails()) {
+            sampleLb.createAccount(sampleAccount);
+        }
         return sampleLb;
     }
 
