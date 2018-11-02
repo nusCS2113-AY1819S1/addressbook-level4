@@ -42,7 +42,7 @@ Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds an employee named
+* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dep/ADMIN` : adds an employee named
  `John Doe` to the Employee List.
 * **`addEvent`**`n/Annual General Meeting d/Weekly Meeting l/Conference Room 1 date/2018-09-28 s/12:00 e/23:59 ` : creates
 a new event `Annual General Meeting`
@@ -182,8 +182,8 @@ Format: `addEvent n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START_TIME e/END_T
 
 Example:
 
-* `addEvent n/Board Meeting d/Weekly Meeting l/Conference Room 1 date/2018-09-28 s/12:00 e/23:59 ` +
-Creates an event named Board Meeting.`
+* `addEvent n/Board Meeting d/Weekly Meeting l/Conference Room 1 date/2018-09-28 s/12:00 e/23:59` +
+Creates an event named Board Meeting.
 
 
 === Modifying an event: `editEvent`
@@ -259,6 +259,7 @@ image::InviteCommandGuide.png[width="600"]
 * The index refers to the index number shown in the displayed person list and event list respectively.
 * The index *must be a positive integer* 1, 2, 3, ...
 * Employee should not have already been invited to the selected event.
+* Event invited to should not clash with the selected employee's schedule.
 ****
 
 === Removing employee from event: `remove`

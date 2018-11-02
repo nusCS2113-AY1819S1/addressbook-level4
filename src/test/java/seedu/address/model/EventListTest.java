@@ -99,7 +99,7 @@ public class EventListTest {
     @Test
     public void hasClash_eventClashWithList_returnsTrue() {
         eventList.addEvent(TypicalEvents.eventwithAttendee());
-        assertTrue(eventList.hasClash(EVENT_3, VALID_NAME_ALICE));
+        assertTrue(eventList.hasClash(EVENT_1, VALID_NAME_ALICE));
     }
 
     @Test

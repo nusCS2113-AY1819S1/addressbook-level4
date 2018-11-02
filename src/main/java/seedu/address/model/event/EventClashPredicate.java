@@ -16,7 +16,7 @@ public class EventClashPredicate implements Predicate<Event> {
 
     @Override
     public boolean test(Event event) {
-        return event.hasAttendee(personName) && event.hasClash(personEvent);
+        return !event.isSameEvent(personEvent) && event.hasAttendee(personName) && event.hasClash(personEvent);
     }
 
     @Override
