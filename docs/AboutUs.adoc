@@ -25,7 +25,7 @@ Responsibilities: Search Pruning + Advanced Search and filter feature.
 
 === Melvin Tan
 image::chocological.png[width="150", align="left"]
-{empty}[http://github.com/Chocological[github]]
+{empty}[http://github.com/Chocological[github]][<<MelvinTanJitChong#, portfolio>>]
 
 Role: Integration and Testing +
 Responsibilities: Login System
@@ -34,7 +34,7 @@ Responsibilities: Login System
 
 === Jonathan Ng
 image::derpyplops.png[width="150", align="left"]
-{empty}[http://github.com/derpyplops[github]]
+{empty}[http://github.com/derpyplops[github]][<<Jonathan#, portfolio>>]
 
 Role: Documentation and Team Lead +
 Responsibilities: HR & Roles
