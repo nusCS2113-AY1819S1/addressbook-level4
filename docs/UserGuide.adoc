@@ -188,18 +188,18 @@ Returns `john` and `John Doe`
 Returns any person having names `Betsy`, `Tim`, or `John`
 
 // tag::tagcommand[]
-=== Locating persons by group : `group` (`t`)
+=== Locating persons by group : `tag` (`t`)
 
 Find persons whose group tags match the specified group tags.
 
-Format: `group GROUPNAME [MORE_GROUPNAMES]`
+Format: `group TAGNAME [MORE_TAGNAMES]`
 
 Example:
 
-* `group CS2101` +
+* `tag CS2101` +
 Filters both the others list and the friends list to show only users with the group tag "CS2101".
 
-* `group CS2101 CS2113T` +
+* `tag CS2101 CS2113T` +
 Filters both the others list and the friends list to show only users with both group tags "CS2101" and "CS2113T".
 // end::tagcommand[]
 
