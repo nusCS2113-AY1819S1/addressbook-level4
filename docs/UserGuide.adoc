@@ -225,6 +225,15 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the address book. +
 Format: `clear`
 
+=== Searching for person's photograph
+Searches for the person's photograph on Google.
+
+* Person must have an online presence eg. Facebook/LinkedIn for the search to work.
+
+Format:
+
+* The selected person will be searched on google. Refer to `select` on how to select a person.
+
 // TODO: Add preface
 === Exporting all contacts : `exportall`
 
