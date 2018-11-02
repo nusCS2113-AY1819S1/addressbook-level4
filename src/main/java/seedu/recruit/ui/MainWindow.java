@@ -378,9 +378,7 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleShowCompanyBookEvent(ShowCompanyBookRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        if (currentBook.contentEquals("candidateBook")) {
-            switchToCompanyBook();
-        }
+        switchToCompanyBook();
     }
 
     @Subscribe
