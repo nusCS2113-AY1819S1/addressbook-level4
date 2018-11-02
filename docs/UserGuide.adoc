@@ -185,15 +185,15 @@ Format: `listEvents`
 
 ==== Adding an event: `addEvent`
 Adds an event to the calendar. +
-Format: `addEvent EVENT_NAME EVENT_DATE EVENT_LOCATION EVENT_DESCRIPTION`
+Format: `addEvent n/EVENT_NAME v/VENUE d/DESCRIPTION D/EVENT_DATE`
 
-==== Editing an event: `editEvent`(will be coming soon)
+==== Editing an event: `editEvent`(This will be implemented in v1.4)
 Edits an event on the calendar. +
 Format: `editEvent EVENT_NAME to EVENT_NAME EVENT_DATE EVENT_LOCATION EVENT_DESCRIPTION`
 
-==== Deleting event: `deleteEvent` 
+==== Deleting event: `deleteEvent`
 Deletes an event from the calendar. +
-Format: `deleteEvent EVENT_NAME`.
+Format: `deleteEvent n/EVENT_NAME`.
 
 
 === Accounts:
