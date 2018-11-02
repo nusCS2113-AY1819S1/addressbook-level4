@@ -17,8 +17,13 @@ public class CategoryBreakdownHandle extends NodeHandle<Node> {
 
     public CategoryBreakdownHandle(Node node) {
         super(node);
-        root = (AnchorPane) node;
-        pieChart = (CustomPieChart) root.getChildren().get(0);
+        if (node instanceof AnchorPane) {
+            root = (AnchorPane) node;
+        }
+        Node childNode = root.getChildren().get(0);
+        if (childNode instanceof CustomPieChart) {
+            pieChart = (CustomPieChart) childNode;
+        }
     }
 
     public boolean isVisible() {
