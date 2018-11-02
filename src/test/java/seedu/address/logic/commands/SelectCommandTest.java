@@ -138,6 +138,7 @@ public class SelectCommandTest {
         String personName = personChosen.getName().toString();
         AttendeeContainsNamePredicate predicate = new AttendeeContainsNamePredicate(personName);
         expectedModel.updateFilteredEventList(predicate);
+        expectedModel.sortByDate();
 
         assertCommandSuccess(selectCommand, model, commandHistory, expectedMessage, expectedModel);
 

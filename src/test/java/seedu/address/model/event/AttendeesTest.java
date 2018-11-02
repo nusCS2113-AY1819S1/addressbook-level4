@@ -68,6 +68,10 @@ public class AttendeesTest {
         assertFalse(attendeesOne.equals(attendeesTwo));
         assertFalse(attendeesOne.equals(attendeesThree));
         assertFalse(attendeesTwo.equals(attendeesThree));
+
+        // Attendees equal after adding new person
+        Attendees attendeesTest = attendeesTwo.createAttendeesWithAddedName(VALID_NAME_CALVIN);
+        assertTrue(attendeesTest.equals(attendeesThree));
     }
 
     @Test
@@ -85,14 +89,14 @@ public class AttendeesTest {
 
 
     @Test
-    public void addName() {
-        Attendees attendeesTwoNew = attendeesTwo.addName(VALID_NAME_CALVIN);
+    public void createAttendeesWithAddedName() {
+        Attendees attendeesTwoNew = attendeesTwo.createAttendeesWithAddedName(VALID_NAME_CALVIN);
         assertEquals(attendeesTwoNew, attendeesThree);
     }
 
     @Test
-    public void removeName() {
-        Attendees attendeesThreeNew = attendeesThree.removeName(VALID_NAME_CALVIN);
+    public void createAttendeesWithRemovedName() {
+        Attendees attendeesThreeNew = attendeesThree.createAttendeesWithRemovedName(VALID_NAME_CALVIN);
         assertEquals(attendeesTwo, attendeesThreeNew);
     }
 

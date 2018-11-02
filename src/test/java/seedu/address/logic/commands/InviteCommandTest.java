@@ -20,6 +20,8 @@ import org.junit.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
+import seedu.address.model.AddressBook;
+import seedu.address.model.EventList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -59,11 +61,12 @@ public class InviteCommandTest {
         String expectedMessage = String.format(InviteCommand.MESSAGE_INVITE_PERSON_SUCCESS,
                 personChosen.getName(), eventChosen.getEventName());
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getEventList(), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new EventList(model.getEventList()), new UserPrefs());
 
         Attendees attendeesChosen = eventChosen.getAttendees();
-        Attendees attendeesUpdated = attendeesChosen.addName(personName);
-        Set<String> setUpdated = attendeesUpdated.attendeesSet;
+        Attendees attendeesUpdated = attendeesChosen.createAttendeesWithAddedName(personName);
+        Set<String> setUpdated = attendeesUpdated.getAttendeesSet();
         Event eventUpdated = new EventBuilder(eventChosen).withAttendee(setUpdated).build();
 
         expectedModel.updateEvent(eventChosen, eventUpdated);

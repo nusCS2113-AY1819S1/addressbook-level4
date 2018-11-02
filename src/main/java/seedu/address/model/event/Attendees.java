@@ -9,7 +9,7 @@ import java.util.Set;
  * Represents a the attendees in a event.
  */
 public class Attendees {
-    public final Set<String> attendeesSet;
+    private final Set<String> attendeesSet;
 
     public Attendees() {
         this.attendeesSet = new HashSet<>();
@@ -28,12 +28,16 @@ public class Attendees {
         }
     }
 
+    public Set<String> getAttendeesSet() {
+        return attendeesSet;
+    }
+
     /**
      * Add names to attendees list
      * @param name The new name to be added.
      * @return A new copy of updated Attendees.
      */
-    public Attendees addName(String name) {
+    public Attendees createAttendeesWithAddedName(String name) {
         Set<String> updatedAttendees = new HashSet<>(this.attendeesSet);
         updatedAttendees.add(name);
         return new Attendees(updatedAttendees);
@@ -44,7 +48,7 @@ public class Attendees {
      * @param name The name to be removed.
      * @return A new copy of updated Attendees.
      */
-    public Attendees removeName(String name) {
+    public Attendees createAttendeesWithRemovedName(String name) {
         Set<String> updatedAttendees = new HashSet<>(this.attendeesSet);
         updatedAttendees.remove(name);
         return new Attendees(updatedAttendees);

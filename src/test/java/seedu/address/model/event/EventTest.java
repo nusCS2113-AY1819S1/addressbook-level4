@@ -107,7 +107,7 @@ public class EventTest {
         Event eventUpdated = new EventBuilder(EVENT_1).withAttendee(setOne).build();
 
         //add name
-        Event event = eventToUpdate.addPersonToAttendee(VALID_NAME_ALICE);
+        Event event = eventToUpdate.createEventWithUpdatedAttendee(VALID_NAME_ALICE);
 
         assertEquals(event, eventUpdated);
     }

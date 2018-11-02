@@ -44,8 +44,8 @@ public class RemoveCommandTest {
                 personChosen.getName(), eventChosen.getEventName());
 
         Attendees attendeesChosen = eventChosen.getAttendees();
-        Attendees attendeesUpdated = attendeesChosen.removeName(personName);
-        Set<String> setUpdated = attendeesUpdated.attendeesSet;
+        Attendees attendeesUpdated = attendeesChosen.createAttendeesWithRemovedName(personName);
+        Set<String> setUpdated = attendeesUpdated.getAttendeesSet();
         Event eventUpdated = new EventBuilder(eventChosen).withAttendee(setUpdated).build();
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getEventList(), new UserPrefs());

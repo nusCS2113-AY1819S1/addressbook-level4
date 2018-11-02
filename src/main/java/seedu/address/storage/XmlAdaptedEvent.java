@@ -94,7 +94,7 @@ public class XmlAdaptedEvent {
         startTime = source.getStartTime().startTime;
         endTime = source.getEndTime().endTime;
         location = source.getLocation().value;
-        attendees = source.getAttendees().attendeesSet.stream()
+        attendees = source.getAttendees().getAttendeesSet().stream()
                 .collect(Collectors.toList());
 
         /* attendees = source.getAttendees().stream()

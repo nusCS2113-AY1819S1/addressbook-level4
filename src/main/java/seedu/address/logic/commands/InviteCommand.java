@@ -60,7 +60,7 @@ public class InviteCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        Event updatedEvent = event.addPersonToAttendee(personName);
+        Event updatedEvent = event.createEventWithUpdatedAttendee(personName);
 
         model.updateEvent(event, updatedEvent);
         model.commitEventList();

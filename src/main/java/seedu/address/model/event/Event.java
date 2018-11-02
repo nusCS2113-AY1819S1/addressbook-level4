@@ -130,7 +130,8 @@ public class Event implements Comparable<Event> {
                 && otherEvent.getLocation().equals(getLocation())
                 && otherEvent.getStartTime().equals(getStartTime())
                 && otherEvent.getEndTime().equals(getEndTime())
-                && otherEvent.getDate().equals(getDate());
+                && otherEvent.getDate().equals(getDate())
+                && otherEvent.getAttendees().equals(getAttendees());
     }
 
     @Override
@@ -169,10 +170,10 @@ public class Event implements Comparable<Event> {
      * @param personName The person's name to be removed from the attendees list.
      * @return An updated event with the person's name in the attendees list.
      */
-    public Event addPersonToAttendee(String personName) {
+    public Event createEventWithUpdatedAttendee(String personName) {
         assert personName != null;
         assert !attendees.hasName(personName);
-        Attendees updatedAttendee = attendees.addName(personName);
+        Attendees updatedAttendee = attendees.createAttendeesWithAddedName(personName);
         return new Event(eventName, description, date, startTime, endTime, location, updatedAttendee);
     }
 
@@ -186,7 +187,7 @@ public class Event implements Comparable<Event> {
     public Event removePersonFromAttendee(String personName) {
         assert personName != null;
         assert attendees.hasName(personName);
-        Attendees updatedAttendee = attendees.removeName(personName);
+        Attendees updatedAttendee = attendees.createAttendeesWithRemovedName(personName);
         return new Event(eventName, description, date, startTime, endTime, location, updatedAttendee);
     }
 

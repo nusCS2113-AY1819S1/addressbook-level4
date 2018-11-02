@@ -64,6 +64,7 @@ public class DeleteCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getEventList(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
+        expectedModel.removePersonFromAllEvents(personToDelete);
         expectedModel.commitAddressBook();
         showNoPerson(expectedModel);
 
@@ -89,6 +90,7 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getEventList(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
+        expectedModel.removePersonFromAllEvents(personToDelete);
         expectedModel.commitAddressBook();
 
         // delete -> first person deleted
