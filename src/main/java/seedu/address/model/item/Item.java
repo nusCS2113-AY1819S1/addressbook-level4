@@ -50,7 +50,8 @@ public class Item {
         this.tags.addAll(tags);
     }
 
-    public Item(Name name, Quantity quantity, Quantity minQuantity, Loststatus loststatus, Status status, Set<Tag> tags) {
+    public Item(Name name, Quantity quantity, Quantity minQuantity,
+                Loststatus loststatus, Status status, Set<Tag> tags) {
         requireAllNonNull(name, quantity, minQuantity, tags);
         this.name = name;
         this.quantity = quantity;
