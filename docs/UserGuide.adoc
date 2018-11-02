@@ -55,7 +55,7 @@ e.g. typing *`help`* or *`h`* and pressing kbd:[Enter] will open the help window
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 * Commands argument can be in any order e.g. 'AddCommand' Format: 'add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]'
-          can also be 'n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL add'
+          can also be 'n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL add' [available in V1.4]
 ====
 
 === Viewing help : `help` / `h`
@@ -331,6 +331,21 @@ Examples:
 
 * `todo tt/Write tests c/Need to write test for this command`
 * `todo tt/Buy grocery c/Buy tomato and potato on the way back home`
+
+=== Add Reminder: `reminder` [coming in v1.4]
+
+Adds a Reminder for your next meeting, along with details to be displayed
+
+Format: `reminder d/DDMMYY tm/TIME lc/LOCATION tp/TOPIC
+
+Examples: 
+
+* `reminder d/031118 tm/1900 lc/COM2 tp/CS2113T Milestone 1.4`
+
+=== Meeting Minutes: `minutes` [coming in v1.4]
+
+Opens up a text box to take meeting minutes
+Format: `minutes`
 
 === Exiting the program : `exit` / `x`
 
