@@ -1,0 +1,85 @@
+= Low Jun Wei - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== About me
+
+I am a team member of the JitHub developer team, in-charge of managing the documentations and implementing Reminder and Meeting Minutes features (Major enhancement). I also worked on natural language processing and Remark command (Minor enhancement)
+
+== PROJECT: JitHub - Schedule Management Software
+
+---
+
+== Project Overview
+
+JitHub is an addressbook application with schedule management features, allowing tech-savvy students to quickly navigate the GUI with efficient CLI commands. JitHub allows users to input their timetables and compare them with their peers on the Calendar GUI, for easier scheduling of meetings.
+Our developer team consists of:
+
+* *Chun Hong Wei*
+** Role: Team Lead
+** Responsibilities: Deliverables and Deadlines
+
+* *Bao Linruo*
+** Role: Developer
+** Responsibilities: Code Integration and Testing
+
+* *Elston Aw Yu Xuan*
+** Role: Developer
+** Responsibilities: Code Quality
+
+* *Lim Jit Wei*
+** Role: Developer
+** Responsibilities: Scheduling and Tracking
+
+* *Low Jun Wei*
+** Role: Developer
+** Responsibilities: Documentation
+
+== Summary of contributions
+
+* *Major enhancement*: Reminder and Meeting Minutes
+** What it does: The *Reminder* feature automatically showcases the next upcoming meeting's details on the GUI. The Meeting Minutes feature allows users to open up a text box on the GUI to write their meeting minutes and store them in the JitHub.
+** Justification: These features compliment the user experience significantly as we are a Meeting Scheduling app and having a reminder for upcoming meetings is essential. Similarly, being able to take down meeting minutes within JitHub makes keeping track of meetings and discussions a lot easier for users.
+** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+* *Code contributed*: [https://github.com/CS2113-AY1819S1-W12-1/main[To be updated]]
+
+* *Minor enhancement*: I added *natural language processing to the Command Line Interface*
+** What it does: The *Natural Language Processing* allows users to input their commands in any order and it will still be recognised by the parser.
+** Justification: This removes the need to remember the exact pattern of inputting commands and makes it easier for users to navigate our app.
+**  Highlights: I've learnt about how to account for multiple edge cases and work my code around them so as to make it more universal.
+* *Code contributed*: [https://github.com/CS2113-AY1819S1-W12-1/main/pull/126/files[Functional code]]
+
+* *Other contributions*:
+Added a *Remark command* that allows the user to allows users to leave Remarks for each contact
+
+** Project management:
+*** Managed releases `v1.1` - `v1.3` (3 releases) on GitHub
+** Enhancements to existing features:
+*** Updated the GUI for Reminder and Meeting Minutes(Pull requests)
+*** Wrote additional tests for existing features to increase coverage from 88% to 92% [To be updated]
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide: [To be updated]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=undoredo]
+
+include::../UserGuide.adoc[tag=dataencryption]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=undoredo]
+
+include::../DeveloperGuide.adoc[tag=dataencryption]
