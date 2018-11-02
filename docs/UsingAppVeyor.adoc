@@ -2,6 +2,7 @@
 :site-section: DeveloperGuide
 :imagesDir: images
 :stylesDir: stylesheets
+:stylesheet: gh-pages.css
 
 https://www.appveyor.com/[AppVeyor] is a _Continuous Integration_ platform for GitHub projects. It runs its builds on Windows virtual machines.
 

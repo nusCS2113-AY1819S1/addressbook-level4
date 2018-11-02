@@ -3,6 +3,7 @@
 :relfileprefix: team/
 :imagesDir: images
 :stylesDir: stylesheets
+:stylesheet: gh-pages.css
 
 FinancialPlanner was developed by the https://github.com/CS2113-AY1819S1-T09-4[CS2113-AY1819S1-T09-4] team. +
 

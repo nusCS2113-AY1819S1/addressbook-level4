@@ -6,6 +6,7 @@
 :sectnums:
 :imagesDir: images
 :stylesDir: stylesheets
+:stylesheet: gh-pages.css
 :xrefstyle: full
 :experimental:
 ifdef::env-github[]
