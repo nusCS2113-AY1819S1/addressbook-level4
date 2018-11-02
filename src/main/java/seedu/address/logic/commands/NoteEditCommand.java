@@ -139,7 +139,7 @@ public class NoteEditCommand extends Command {
             newEndTime = noteToEdit.getEndTime();
         }
 
-        if (newStartDate == null && (newStartTime != null || newEndDate != null || newEndTime != null)) {
+        if (newStartDate == null && (startTime != null || newEndDate != null || endTime != null)) {
             throw new CommandException(NoteDate.MESSAGE_START_DATE_MISSING_FIELD);
         }
 
