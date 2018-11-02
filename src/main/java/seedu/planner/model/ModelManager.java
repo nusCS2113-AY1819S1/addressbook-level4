@@ -2,10 +2,10 @@ package seedu.planner.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.planner.logic.commands.LimitCommand.MESSAGE_BASIC_EARNED;
-import static seedu.planner.logic.commands.LimitCommand.MESSAGE_BASIC_SPEND;
-import static seedu.planner.logic.commands.LimitCommand.MESSAGE_EXCEED;
-import static seedu.planner.logic.commands.LimitCommand.MESSAGE_NOT_EXCEED;
+import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_BASIC_EARNED;
+import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_BASIC_SPEND;
+import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_EXCEED;
+import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_NOT_EXCEED;
 
 import java.util.List;
 import java.util.function.Predicate;

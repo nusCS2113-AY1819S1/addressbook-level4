@@ -26,7 +26,7 @@ import seedu.planner.model.record.Record;
 import seedu.planner.testutil.LimitBuilder;
 
 
-public class LimitCommandTest {
+public class AddLimitCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
@@ -38,7 +38,7 @@ public class LimitCommandTest {
     @Test
     public void constructor_nullLimit_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new LimitCommand(null);
+        new AddLimitCommand(null);
     }
 
     @Test
@@ -46,7 +46,7 @@ public class LimitCommandTest {
         ModelStubAcceptingLimitAdded modelStub = new ModelStubAcceptingLimitAdded();
         Limit validLimit = new LimitBuilder().build();
 
-        CommandResult commandResult = new LimitCommand(validLimit).execute(modelStub, commandHistory);
+        CommandResult commandResult = new AddLimitCommand(validLimit).execute(modelStub, commandHistory);
 
         assertEquals(modelStub.generateLimitOutput(false,
                 modelStub.getTotalSpend(validLimit), validLimit), commandResult.feedbackToUser);
@@ -57,11 +57,11 @@ public class LimitCommandTest {
     @Test
     public void execute_sameDatesLimit_throwsCommandException() throws Exception {
         Limit validLimit = new LimitBuilder().build();
-        LimitCommand limitCommand = new LimitCommand(validLimit);
+        AddLimitCommand limitCommand = new AddLimitCommand(validLimit);
         ModelStub modelStub = new ModelStubWithLimit(validLimit);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(LimitCommand.MESSAGE_LIMITS_SAME_DATE);
+        thrown.expectMessage(AddLimitCommand.MESSAGE_LIMITS_SAME_DATE);
         limitCommand.execute(modelStub, commandHistory);
     }
 
@@ -69,14 +69,14 @@ public class LimitCommandTest {
     public void equals() {
         Limit limit = new LimitBuilder().withMoneyFlow("-100").build();
         Limit limitD = new LimitBuilder().withDateStart("16-12-1998").build();
-        LimitCommand limitCommand = new LimitCommand(limit);
-        LimitCommand limitDCommand = new LimitCommand(limitD);
+        AddLimitCommand limitCommand = new AddLimitCommand(limit);
+        AddLimitCommand limitDCommand = new AddLimitCommand(limitD);
 
         // same object -> returns true
         assertTrue(limitCommand.equals(limitCommand));
 
         // same values -> returns true
-        LimitCommand limitCommandCopy = new LimitCommand(limit);
+        AddLimitCommand limitCommandCopy = new AddLimitCommand(limit);
         assertTrue(limitCommand.equals(limitCommandCopy));
 
         // different types -> returns false

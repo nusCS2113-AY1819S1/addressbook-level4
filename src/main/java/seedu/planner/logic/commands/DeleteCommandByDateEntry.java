@@ -17,7 +17,8 @@ import seedu.planner.model.record.Record;
  * Delete the records whose date is required.
  */
 public class DeleteCommandByDateEntry extends Command {
-    public static final String COMMAND_WORD = "delete_date";
+    public static final String COMMAND_WORD = "deletedate";
+    public static final String COMMAND_WORD_UNDERSCORE = "delete_date";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the all records identified by the date number used in the displayed record list.\n"
             + "PARAMERERS: DATE (Must follow the format dd-mm-yyyy).\n"

@@ -11,10 +11,12 @@ import java.util.stream.Stream;
 
 import impl.org.controlsfx.autocompletion.SuggestionProvider;
 import seedu.planner.logic.commands.AddCommand;
+import seedu.planner.logic.commands.AddLimitCommand;
 import seedu.planner.logic.commands.CheckLimitCommand;
 import seedu.planner.logic.commands.ClearCommand;
 import seedu.planner.logic.commands.DeleteCommand;
 import seedu.planner.logic.commands.DeleteCommandByDateEntry;
+import seedu.planner.logic.commands.DeleteLimitCommand;
 import seedu.planner.logic.commands.EditCommand;
 import seedu.planner.logic.commands.EditLimitCommand;
 import seedu.planner.logic.commands.ExitCommand;
@@ -23,7 +25,6 @@ import seedu.planner.logic.commands.FindCommand;
 import seedu.planner.logic.commands.FindTagCommand;
 import seedu.planner.logic.commands.HelpCommand;
 import seedu.planner.logic.commands.HistoryCommand;
-import seedu.planner.logic.commands.LimitCommand;
 import seedu.planner.logic.commands.ListCommand;
 import seedu.planner.logic.commands.RedoCommand;
 import seedu.planner.logic.commands.SelectCommand;
@@ -44,14 +45,24 @@ public class CustomSuggestionProvider {
     private static Pattern pattern = Pattern.compile(patternStr);
 
     private static Set<String> commandKeywordsSet =
-            new HashSet<>(Arrays.asList(AddCommand.COMMAND_WORD, CheckLimitCommand.COMMAND_WORD,
-                    ClearCommand.COMMAND_WORD, DeleteCommand.COMMAND_WORD, DeleteCommandByDateEntry.COMMAND_WORD,
-                    EditCommand.COMMAND_WORD, EditLimitCommand.COMMAND_WORD, ExitCommand.COMMAND_WORD,
-                    ExportExcelCommand.COMMAND_WORD, FindCommand.COMMAND_WORD, FindTagCommand.COMMAND_WORD,
-                    HelpCommand.COMMAND_WORD, HistoryCommand.COMMAND_WORD, LimitCommand.COMMAND_WORD,
+            new HashSet<>(Arrays.asList(AddCommand.COMMAND_WORD, AddLimitCommand.COMMAND_WORD,
+                    CheckLimitCommand.COMMAND_WORD, ClearCommand.COMMAND_WORD, DeleteCommand.COMMAND_WORD,
+                    DeleteCommandByDateEntry.COMMAND_WORD, DeleteLimitCommand.COMMAND_WORD,
+                    EditCommand.COMMAND_WORD, EditLimitCommand.COMMAND_WORD,
+                    ExitCommand.COMMAND_WORD, ExportExcelCommand.COMMAND_WORD, FindCommand.COMMAND_WORD,
+                    FindTagCommand.COMMAND_WORD, HelpCommand.COMMAND_WORD, HistoryCommand.COMMAND_WORD,
                     ListCommand.COMMAND_WORD, RedoCommand.COMMAND_WORD, SelectCommand.COMMAND_WORD,
                     SortCommand.COMMAND_WORD, StatisticCommand.COMMAND_WORD, SummaryCommand.COMMAND_WORD,
                     UndoCommand.COMMAND_WORD));
+
+    private static Set<String> commandKeywordsUnderscoreSet =
+            new HashSet<>(Arrays.asList(AddLimitCommand.COMMAND_WORD_UNDERSCORE,
+                    CheckLimitCommand.COMMAND_WORD_UNDERSCORE, DeleteCommandByDateEntry.COMMAND_WORD_UNDERSCORE,
+                    DeleteLimitCommand.COMMAND_WORD_UNDERSCORE, EditLimitCommand.COMMAND_WORD_UNDERSCORE,
+                    ExportExcelCommand.COMMAND_WORD_UNDERSCORE, FindTagCommand.COMMAND_WORD_UNDERSCORE));
+
+    private static Set<String> fullCommandKeywordsSet = Stream.concat(commandKeywordsSet.stream(),
+            commandKeywordsUnderscoreSet.stream()).collect(Collectors.toSet());
 
     private static Set<String> summaryKeywordsSet = new HashSet<>(Arrays.asList(SummaryByMonthCommand.COMMAND_MODE_WORD,
             SummaryByDateCommand.COMMAND_MODE_WORD));
@@ -114,7 +125,7 @@ public class CustomSuggestionProvider {
             }
         } else if (inputs[0].equals(FindTagCommand.COMMAND_WORD) && inputs.length > 1) {
             updateSuggestions(tagKeywordsMap.keySet());
-        } else if (commandKeywordsSet.contains(inputs[0]) || inputs.length > 1) {
+        } else if (fullCommandKeywordsSet.contains(inputs[0]) || inputs.length > 1) {
             updateSuggestions(emptySet);
         } else {
             updateSuggestions(commandKeywordsSet);
