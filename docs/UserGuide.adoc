@@ -14,19 +14,25 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2113-AY1819S1-F09-1/main
 
-
+image::NUSSU-ConnectPNGBanner.png[width="680", align=center"]
 By: `Team F09-1`      Since: `Sept 2018`
 
 == Introduction
 
-NUSSU-Connect is an application for executive committee (exco) members of the NUS Student Union (NUSSU) to help them perform their daily tasks including managing recruitment, contacts, budgets and projects efficiently.
+NUSSU-Connect is an application designed and created specifically for executive committee (exco) members of the NUS Student Union (NUSSU). It enables the committee members to reduce their daily workload and the organisation to potentially minimize manpower and logistics issues during peak periods of activity by providing them a convenient platform to manage recruitment, contacts, budgets and projects efficiently. The application can also be used by every organisation with a clearly defined hierarchy of roles and responsibilities of each and every member belonging to the organisation.
+
+The aim of this application is to digitise any company’s or organisation’s standard operating procedures, through the process of streamlining workflow to essentially solve, or at least minimize, any manpower and logistics issues that can happen during any peak periods of business activities.
 
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
+.  Download the latest `NUSSU-Connect.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your NUSSU-Connect.
+.  Double-click on the jar file to start the app and wait for a few seconds for the loading to complete. You will then see a login pop up window appears as shown in the image below. You will need to head over to section 3.1, "Logging into system" and follow the steps detailed carefully in order to log into the application successfully.
++
+image::BlankLoginInput.PNG[width="400"]
++
+. Upon a successful attempt, you should see the main window of the application load up, as shown in the image below.
 +
 image::Ui.png[width="790"]
 +
@@ -35,11 +41,12 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
+* **`createaccount`**`A1234568M zaq1xsw2cde3 member` : creates a new account with `A1234568M` as the user id, `zaq1xsw2cde3` as the user password, and `member` as the user role of the account to be created.
+* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to NUSSU-Connect.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
 * *`exit`* : exits the app
 
-.  Refer to <<Features>> for details of each command.
+.  You can refer to Section 3, <<Features>> subsection to see more detailed documentation of the features that are built in this application.
 
 [[Features]]
 == Features
@@ -76,7 +83,7 @@ Format: `login USERID PASSWORD ROLE`
 Examples:
 
 * `login A1234567M zaq1xsw2cde3 president` +
-Logs into Address book with user ID as A1234567M, password as zaq1xsw2cde3 and role as president.
+Logs into NUSSU-Connect with user ID as A1234567M, password as zaq1xsw2cde3 and role as president.
 
 image::DefaultAccountDetails.PNG[width="300"]
 
@@ -92,14 +99,14 @@ image::DefaultAccountDetails.PNG[width="300"]
 ====
 After the user logs in successfully, they should expect to see the main window of the application as shown below.
 ====
-image::LoginSuccess.png[width="300"]
+image::LoginSuccess.PNG[width="300"]
 
 [NOTE]
 ====
 If the user is unable to log in successfully, they should expect to see the login input field in a pop-up box again, asking the user
 to input their login credentials again.
 ====
-image::BlankLoginInput.png[width="300"]
+image::BlankLoginInput.PNG[width="300"]
 
 [NOTE]
 ====
@@ -108,7 +115,7 @@ User Id, Password and Role inputs are all case-sensitive!
 
 === Creating a new user account: `createaccount`
 
-Creates a new user account in the address book. +
+Creates a new user account in the NUSSU-Connect. +
 Format: `createaccount USERID PASSWORD ROLE`
 
 ****
@@ -128,7 +135,7 @@ Format: `createaccount USERID PASSWORD ROLE`
 Examples:
 
 * `createaccount A1234569M zaq1xsw2cde3 member` +
-Creates a new account with user ID as A1234569M, password as zaq1xsw2cde3 and role as member in the address book.
+Creates a new account with user ID as A1234569M, password as zaq1xsw2cde3 and role as member in the NUSSU-Connect.
 The image below shows the outcome of a successful creation of a new account.
 
 image::CreateAccountSuccess.PNG[width="300"]
@@ -144,7 +151,7 @@ Format: `help`
 
 === Adding a person: `add`
 
-Adds a person to the address book +
+Adds a person to NUSSU-Connect+
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 
 [TIP]
@@ -154,10 +161,10 @@ Examples:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
+// tag:aslUser[]
 === Adding person's skill: `asl`
 
-Edits a person's skill in the address book.
+Edits a person's skill in NUSSU-Connect.
 
 Format: `asl INDEX s/SKILL l/SKILL_LEVEL`
 
@@ -168,10 +175,10 @@ Examples:
 
 * `asl 2 s/Photography l/30`
 * `asl 4 s/Java l/40`
-
+// end:aslUser[]
 === Editing a person : `edit`
 
-Edits an existing person in the address book. +
+Edits an existing person in NUSSU-Connect. +
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 ****
@@ -191,7 +198,7 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears all existing ta
 
 === Listing all persons : `list`
 
-Shows a list of all persons in the address book. +
+Shows a list of all persons in the NUSSU-Connect. +
 Format: `list`
 
 // tag::find[]
@@ -206,8 +213,8 @@ Format: `find [\tag] [\exclude] KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* If `\tag` option is not specified, find command will search according to names.
-* The `\exclude` option will exclude any names/tags with the specified keywords
+* If `\tag` option is specified, find command will search according to names.
+* If `\exclude` option is specified, find command will exclude any names/tags with the specified keywords
 * The order of `\tag` and `\exclude` options can be swapped
 * Back-to-back find commands utilizes the Search Pruning feature which will be further explained under the Search Pruning
 Feature section.
@@ -312,7 +319,7 @@ image::SearchPruning10th.png[align="left"]
 
 === Deleting : `delete`
 
-Deletes a specific person from the address book. +
+Deletes a specific person from NUSSU-Connect. +
 Format: `delete [-a all] [INDEX]`
 
 ****
@@ -326,7 +333,7 @@ Examples:
 
 * `list` +
 `delete 2` +
-Deletes the 2nd person in the address book.
+Deletes the 2nd person in NUSSU-Connect.
 * `find Betsy` +
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
@@ -350,7 +357,7 @@ Examples:
 
 * `list` +
 `select 2` +
-Selects the 2nd person in the address book.
+Selects the 2nd person in NUSSU-Connect.
 * `find Betsy` +
 `select 1` +
 Selects the 1st person in the results of the `find` command.
@@ -368,12 +375,12 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 // tag::undoredo[]
 === Undoing previous command : `undo`
 
-Restores the address book to the state before the previous _undoable_ command was executed. +
+Restores NUSSU-Connect to the state before the previous _undoable_ command was executed. +
 Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify NUSSU-Connect's content (`add`, `delete`, `edit` and `clear`).
 ====
 
 Examples:
@@ -417,8 +424,10 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 === Clearing all entries : `clear`
 
-Clears all entries from the address book. +
+Clears all entries from NUSSU-Connect. +
 Format: `clear`
+
+// tag::budget[]
 
 === Submitting data for budget allocation: `budget`
 
@@ -430,48 +439,21 @@ Example: +
 
 === Calculating the budgets : `calculatebudget`
 
-Calculates the budgets for all the clubs in the address book using the total available budget
+Calculates the budgets for all the clubs in NUSSU-Connect using the total available budget
 Format: `calculatebudget b/TOTAL AVAILABLE BUDGET IN SGD`
 
 Example: +
 `calculatebudget b/50000`
 
-=== Viewing the allocated budget : `viewbudget`
+=== Viewing the allocated budget for a club : `viewbudget`
 
-Shows all the allocated budgets to the user +
-Format: `viewbudget`
-
-=== Submitting grant request : `request`
-
-Submits data about amount of grant needed, the reason and tags the importance level
-Format: `request m/AMOUNT r/REASON t/IMPORTANCE LEVEL`
+Shows the budget allocated to that particular club to the user.
+Format: `viewbudget c/CLUB NAME`
 
 Example: +
-`request m/1000 r/for booking auditorium t/medium` +
+`viewbudget c/Computing Club`
 
-=== Viewing grant request : `viewrequest`
-Shows a list of all the grant request sorted by order of importance, and if there is a tie, by descending order of amount requested. +
-Format: `viewrequest`
-
-=== Accepting grant request: `accept`
-
-Approves a specific grant request from the list of grants.
-Format: `accept [-a all] [INDEX]`
-
-****
-* Approves the request at the specified `INDEX`.
-* The index refers to the index number shown in the displayed requests list.
-* The index *must be a positive integer* 1, 2, 3, ...
-* If -a option is selected, all requests on the list will be approved and INDEX will be ignored.
-****
-Example:
-
-* `viewrequest` +
-`accept 2` +
-Approves the 2nd request in the list of grant requests.
-* `viewrequest` +
-`accept -a` +
-Approves all the requests in the list.
+// end::budget[]
 
 === Exiting the program : `exit`
 
@@ -480,7 +462,7 @@ Format: `exit`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+NUSSU-Connect data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 // tag::dataencryption[]
@@ -492,7 +474,7 @@ _{explain how the user can enable/disable data encryption}_
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous NUSSU-Connect folder.
 
 == Command Summary
 
@@ -521,13 +503,7 @@ e.g.`select 2`
 e.g. `budget c/Computing Club t/200 e/5`
 * *Calculating budgets* : `calculatebudget b/TOTAL AVAILABLE BUDGET IN SGD` +
 e.g. `calculatebudget b/50000`
-* *Viewing all the budgets* : `viewbudget`
-* *Submitting grant request* : request m/AMOUNT r/REASON t/IMPORTANCE LEVEL` +
-e.g. `request m/1000 r/for booking auditorium t/medium`
-* *Viewing grant request* : `viewrequest`
-* *Accepting a grant request* : `accept [-a all] [INDEX]` +
-e.g. `viewrequest` +
-       `accept 2` +
-e.g. `viewrequest` +
-     `accept -a`
+* *Viewing the budget for a club* : `viewbudget c/CLUB NAME` +
+e.g. `viewbudget c/Computing Club`
+
 
