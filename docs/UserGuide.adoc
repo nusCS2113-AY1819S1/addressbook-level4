@@ -486,7 +486,9 @@ to specified companies about specified candidates that are suitable for specifie
 
 [NOTE]
 Only Gmail is supported at this point in time. +
-If it is your first time running RecruitBook, a Gmail log in page will open on your browser.
+If it is your first time running RecruitBook, a Gmail log in authorisation page will open on your browser. +
+**While the authorisation page is open, RecruitBook will be unresponsive while waiting for an authentication response. +
+This is part of google's API and is intended.** +
 The Gmail account that you log in with will be the email account used to send emails. +
 To use another Gmail account, delete `tokens` folder which is in the same directory of the
 program.
@@ -499,8 +501,8 @@ Email process is a 4-stage process. To exit from this process, enter `cancel` co
 . *Initialisation.* Type `email` and press kbd:[Enter] to initialise the email command.
 . *Choose your recipients.* On the RecruitBook application, what's shown on the main window
    will be taken in as the recipients. +
-.. You can use commands such as `listc`, `filterc`, `findc` to change the candidate shown.
-.. You can also use commands such as `listj`, `filterj`, `findj` to change the job offer shown.
+.. You can use commands such as `listc` and `findc` to change the candidate shown.
+.. You can also use commands such as `listj` and `findj` to change the job offer shown.
 .. Type `next` and press kbd:[Enter] to move on to the next step.
 
 [start=3]
@@ -535,11 +537,11 @@ Examples:
 ._You wish to send an email to candidates whose asking salary is $1,000 about being a cashier_
 . `email` +
   (Initialise email command)
-. `filterc /s$1000` +
+. `findc s/$1000` +
   (On CandidateBook)
 . `next` +
   (To select recipients)
-. `findj /jCashier` +
+. `findj j/Cashier` +
   (On CompanyBook)
 . `next` +
   (To select contents)
