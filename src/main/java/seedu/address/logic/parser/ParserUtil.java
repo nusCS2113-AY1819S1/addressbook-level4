@@ -242,10 +242,10 @@ public class ParserUtil {
     public static Double parseBalance(String balance) throws ParseException {
         requireNonNull(balance);
         //DecimalFormat decimalFormat = new DecimalFormat("#.##");
-        Double trimmedBalance = Double.parseDouble(balance);
         if (!Account.isValidBalance(balance)) {
             throw new ParseException(Account.MESSAGE_BALANCE_CONSTRAINTS);
         }
+        Double trimmedBalance = Double.parseDouble(balance);
         return trimmedBalance;
     }
 
