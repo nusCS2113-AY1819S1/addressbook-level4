@@ -350,16 +350,16 @@ Undoable commands: those commands that modify the event schedule's or address bo
 
 Examples:
 
-* `cancel 1` +
-`list` +
+* `delete 1` +
+`list all` +
 `undo` (reverses the `delete 1` command) +
 
 * `select 1` +
-`list` +
+`list all` +
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
 
-* `cancel 1` +
+* `delete 1` +
 `clear` +
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
@@ -373,19 +373,19 @@ Enter a command: `redo`
 
 Examples:
 
-* `cancel 1` +
-`undo` (reverses the `cancel 1` command) +
-`redo` (reapplies the `cancel 1` command) +
+* `delete 1` +
+`undo` (reverses the `delete 1` command) +
+`redo` (reapplies the `delete 1` command) +
 
-* `cancel 1` +
+* `delete 1` +
 `redo` +
 The `redo` command fails as there are no `undo` commands executed previously.
 
 * `cancel 1` +
 `clear` +
 `undo` (reverses the `clear` command) +
-`undo` (reverses the `cancel 1` command) +
-`redo` (reapplies the `cancel 1` command) +
+`undo` (reverses the `delete 1` command) +
+`redo` (reapplies the `delete 1` command) +
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]_v1.4
 
