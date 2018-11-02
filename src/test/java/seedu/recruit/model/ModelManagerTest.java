@@ -14,7 +14,6 @@ import org.junit.rules.ExpectedException;
 
 import seedu.recruit.testutil.AddressBookBuilder;
 import seedu.recruit.testutil.CandidateContainsKeywordsPredicateBuilder;
-import seedu.recruit.testutil.TypicalCompanies;
 
 public class ModelManagerTest {
     @Rule

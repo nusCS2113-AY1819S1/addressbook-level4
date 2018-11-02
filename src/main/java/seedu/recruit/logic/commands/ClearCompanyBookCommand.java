@@ -13,7 +13,7 @@ import seedu.recruit.model.Model;
 public class ClearCompanyBookCommand extends Command {
     public static final String COMMAND_WORD = "clearC";
     public static final String MESSAGE_SUCCESS = "CompanyBook has been cleared!";
-
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears Company Book.";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
