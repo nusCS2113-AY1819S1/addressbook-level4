@@ -358,7 +358,7 @@ Removes a reminder for user for event 1
 * `removeReminder 5` +
 Removes a reminder for user for event 5
 
-=== show reminders : `showReminders`
+=== show reminders : `showReminders` [Proposed]
 
 Admin/User: Show all events with reminders set +
 Format: `showReminders`
