@@ -12,15 +12,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 public class DeleteComment extends Comments {
 
     /**
-     * Constructor to make sure that used Vector and path is initialised
-     *
-     * @param input
-     */
-    public DeleteComment(String input) {
-        super(input);
-    }
-
-    /**
      *  Admin only: Can delete comment given event Comment Section indexx and Line
      */
     public String deleteComment(int line) throws CommandException {

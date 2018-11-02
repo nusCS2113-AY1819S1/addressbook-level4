@@ -12,7 +12,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.comments.DeleteComment;
+import seedu.address.logic.comments.CommentFacade;
 import seedu.address.model.Model;
 import seedu.address.model.event.Comment;
 import seedu.address.model.event.Event;
@@ -78,9 +78,9 @@ public class DeleteCommentCommand extends Command {
         }
 
         Event eventToEdit = filteredEventList.get(index.getZeroBased());
-        DeleteComment comments = new DeleteComment(eventToEdit.getComment().toString());
-        Comment newComments = new Comment(comments.deleteComment(getLine()));
-        editCommentDescriptor.setComment(newComments);
+        CommentFacade comments = new CommentFacade();
+        String deletedComment = comments.deleteComment(eventToEdit.getComment().toString(), getLine());
+        editCommentDescriptor.setComment(new Comment(deletedComment));
         Event editedEvent = EditCommand.createEditedEvent(eventToEdit, editCommentDescriptor);
 
         model.updateEvent(eventToEdit, editedEvent);
