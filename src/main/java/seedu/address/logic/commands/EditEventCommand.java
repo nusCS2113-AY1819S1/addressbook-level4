@@ -102,7 +102,7 @@ public class EditEventCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
 
-        if (editedEvent.getStartTime().time.compareTo(editedEvent.getEndTime().time) > 0) {
+        if (editedEvent.getStartTime().compareTo(editedEvent.getEndTime()) > 0) {
             throw new CommandException(EndTime.MESSAGE_INVALID_END_TIME);
         }
 
