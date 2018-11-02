@@ -182,6 +182,23 @@ Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 
+// tag::tagcommand[]
+=== Locating persons by group : `tag` (`t`)
+
+Find persons whose group tags match the specified group tags.
+
+Format: `group TAGNAME [MORE_TAGNAMES]`
+
+Example:
+
+* `tag CS2101` +
+Filters both the others list and the friends list to show only users with the group tag "CS2101".
+
+* `tag CS2101 CS2113T` +
+Filters both the others list and the friends list to show only users with both group tags "CS2101" and "CS2113T".
+// end::tagcommand[]
+
+// tag::timeslot[]
 === Add a timeslot to your timetable: `addtime` (`at`)
 
 Adds a timeslot to your timetable.
@@ -241,7 +258,9 @@ Deletes the timeslot from 13:00 to 14:00 on Friday from your timetable.
 
 * `deletetime Wed 17-18` +
 Deletes the timeslot from 17:00 to 18:00 on Wednesday from your timetable.
+// end::timeslot[]
 
+// tag::friendcommand[]
 === Selecting a person : `select` (`s`)
 
 Selects your friend with the specified index, showing you their timetable. +
@@ -261,7 +280,58 @@ Selects the 2nd person listed in your friend list.
 `select 1` +
 Selects the 1st person in the results of the `find` command.
 
-=== Show free slots among selected people `free`
+=== Adding a person to your friend list : `friend` (`af`)
+
+Adds a person from the others list to your friend list.
+
+Format: `friend INDEX`
+
+[NOTE]
+====
+Most commands in this application (like `free` and `select`) can only be executed only after adding someone to your friend list.
+====
+
+****
+* You can only befriend someone who is in the others list.
+* The indices *must be positive integers* `1, 2, 3, ...` and have to match someone on the others list
+****
+
+Examples:
+
+* `friend 1` +
+Adds the first user in the others list to your list of friends.
+
+Before executing the command, your window might look like the following, without friends:
+
+.Before adding friend to your friend list.
+image::BeforeAddingFriendsPS.png[width="600"]
+
+After executing `friend 1`, there will be a sucess message and the first person should be added to the friend's list, as follows:
+
+.After adding friend to your friend list.
+image::AfterAddingFriendsPS.png[width="600"]
+// end::friendcommand[]
+
+// tag::unfriendcommand[]
+=== Removing a person from your friend list : `unfriend` (`uf`)
+
+Removes a person from your friend list.
+
+Format: `unfriend INDEX`
+
+****
+* You can only unfriend someone who is in your friends list.
+* The indices *must be positive integers* `1, 2, 3, ...` and have to match someone on the friends list
+****
+
+Example:
+
+* `unfriend 1` +
+Removes the first user from the friends list.
+// end::unfriendcommand[]
+
+// tag::freecommand[]
+=== Show free slots among selected people: `free`
 
 Highlights timeslots where everyone specified is free.
 
@@ -282,6 +352,7 @@ After executing the command, you should see the following:
 
 .Timeslots highlighted in red are unavailable.
 image::FreeTimeSuccess.png[width="600"]
+// end::freecommand[]
 
 === Listing entered commands : `history` (`g`)
 
@@ -418,6 +489,12 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
+* *Tag* : `tag TAGNAME [MORE_TAGNAMES]` +
+e.g `tag CS2101`
+* *Friend* : `friend INDEX` +
+e.g.`friend 2`
+* *Unfriend* : `unfriend INDEX` +
+e.g.`unfriend 2`
 * *Add timeslot* : `addtime` +
 e.g. `addtime mon 10-12`
 * *Delete timeslot* : `deletetime` +
