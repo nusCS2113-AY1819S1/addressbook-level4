@@ -12,7 +12,7 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL:https://github.com/CS2113-AY1819S1-T13-2
+:repoURL:https://github.com/CS2113-AY1819S1-T13-2/main/
 
 By: `Team CS2113-AY1819S1-T13-2`      Since: `Aug 2018`      Licence: `MIT`
 
@@ -298,22 +298,11 @@ There is no need to save manually.
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Forum Book folder.`
 
 == Command Summary
-* *Announce* : `announce aTitle/ANNOUNCEMENT_TITLE aContent/ANNOUNCEMENT_CONTENT` +
-e.g `announce aTitle/Urgent! aContent/System maintenance from 4pm to 5pm.`
-* *CheckAnnounce* : `checkAnnounce`
-* *Block* : `block uName/USER_NAME` +
-e.g `block uName/john`
-* *SetAdmin* : `setAdmin uName/USER_NAME set/SET_OR_REVERT` +
-e.g `setAdmin uName/john set/true`
-* *CreateModule* : `createModule mCode/MODULE_CODE mTitle/MODULE_TITLE` +
-e.g `createModule mCode/CS2113 mTitle/Software Engineering and OOP`
-* *DeleteModule* : `deleteModule mCode/MODULE_CODE` +
-e.g `deleteModule mCode/CS2113`
-* *UpdatePass* : `updatePass uName/USER_NAME uPass/USER_PASSWORD` +
-e.g `updatePass uName/john uPass/098`
-* *DeleteUser* : `deleteUser uName/USER_NAME` +
-e.g `deleteUser uName/john`
 * *Help*: `help`
+* *RegisterUser* : `addUser uName/USER NAME uPass/USER PASSWORD` +
+e.g `addUser uName/MyName uPass/password`
+* *Login* : `login uName/USER NAME uPass/USER PASSWORD` +
+e.g `login uName/MyName uPass/password`
 * *createThread* : `createThread mCode/MODULE CODE tTitle/THREAD TITLE cContent/COMMENT CONTENT` +
 e.g `createThread mCode/CS2113 tTitle/Exam Information cContent/All the best for the final guys`
 * *createComment* : `createComment tId/THREAD ID cContent/COMMENT CONTENT` +
@@ -331,8 +320,19 @@ e.g `deleteComment cId/1`
 e.g `selectModule mCode/CS2113`
 * *selectThread* : `selectThread tId/THREAD ID` +
 e.g `selectThread tId/123`
-* *RegisterUser* : `addUser uName/USER NAME uPass/USER PASSWORD` +
-e.g `addUser uName/MyName uPass/password`
-* *Login* : `login uName/USER NAME uPass/USER PASSWORD` +
-e.g `login uName/MyName uPass/password`
+* *Announce* : `announce aTitle/ANNOUNCEMENT_TITLE aContent/ANNOUNCEMENT_CONTENT` +
+e.g `announce aTitle/Urgent! aContent/System maintenance from 4pm to 5pm.`
+* *CheckAnnounce* : `checkAnnounce`
+* *Block* : `block uName/USER_NAME` +
+e.g `block uName/john`
+* *SetAdmin* : `setAdmin uName/USER_NAME set/SET_OR_REVERT` +
+e.g `setAdmin uName/john set/true`
+* *CreateModule* : `createModule mCode/MODULE_CODE mTitle/MODULE_TITLE` +
+e.g `createModule mCode/CS2113 mTitle/Software Engineering and OOP`
+* *DeleteModule* : `deleteModule mCode/MODULE_CODE` +
+e.g `deleteModule mCode/CS2113`
+* *UpdatePass* : `updatePass uName/USER_NAME uPass/USER_PASSWORD` +
+e.g `updatePass uName/john uPass/098`
+* *DeleteUser* : `deleteUser uName/USER_NAME` +
+e.g `deleteUser uName/john`
 * *Logout* : `logout`
