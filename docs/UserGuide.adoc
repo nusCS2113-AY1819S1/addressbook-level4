@@ -27,7 +27,7 @@ ClubHub (CH) is for those who *prefer to use a desktop app for managing members,
 .  Copy the file to the folder you want to use as the home folder for your ClubHub.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
-image::Ui.png[width="790"]
+image::Ui.png   [width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -177,63 +177,12 @@ _{explain how the user can enable/disable data encryption}_
 
 == Main Features
 
-=== Calendar:
-
-==== List events: `listEvents`
-Lists all the events sorted by date. +
-Format: `listEvents`
-
-==== Adding an event: `addEvent`
-Adds an event to the calendar. +
-Format: `addEvent n/EVENT_NAME v/VENUE d/DESCRIPTION D/EVENT_DATE`
-
-==== Editing an event: `editEvent`(This will be implemented in v1.4)
-Edits an event on the calendar. +
-Format: `editEvent EVENT_NAME to EVENT_NAME EVENT_DATE EVENT_LOCATION EVENT_DESCRIPTION`
-
-==== Deleting event: `deleteEvent`
-Deletes an event from the calendar. +
-Format: `deleteEvent n/EVENT_NAME`.
-
-
-=== Accounts:
-
-
-The accounts features a ledger column to record the spending of the club
-on any date in the form of DD/MM. There are 4 basic commands allowing the user to
-add or delete a ledger, and to credit or debit money from any date in the
-list of records.
-
-==== Adding a ledger: `addLedger`
-Adds a ledger to the ledger column. +
-Format: `addLedger d/[DD/MM]`
-
-Example: `addLedger d/ 10/10`
-
-==== Deleting a ledger: `deleteLedger`
-Deletes a ledger from the log. +
-Format: `deleteLedger d/[DD/MM]`
-
-Example: `deleteLedger d/ 10/10`
-
-==== Crediting a ledger: `credit`
-Increase the balance of a ledger on a date indicated. +
-Format: `credit d/[DD/MM] b/[NUM]`
-
-Example: `credit d/ 10/10 b/ 100`
-
-==== Debiting a ledger: `credit`
-Decrease the balance of a ledger on a date indicated. +
-Format: `debit d/[DD/MM] b/[NUM]`
-
-Example: `debit d/ 10/10 b/ 100`
-
 === Members:
 
 ==== Adding a member: `addmember`
 
 Adds a person to the ClubHub +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/POSTALCODE m/MAJOR [t/TAG]...`
+Format: `addmember n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/POSTALCODE m/MAJOR [t/TAG]...`
 
 [TIP]
 A person can have any number of tags (including 0)
@@ -246,7 +195,7 @@ Examples:
 ==== Editing a member : `editmember`
 
 Edits an existing person in the ClubHub. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/POSTALCODE] [m/MAJOR] [t/TAG]...`
+Format: `editmember INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/POSTALCODE] [m/MAJOR] [t/TAG]...`
 
 ****
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
@@ -362,6 +311,59 @@ Deletes the 2nd person in ClubHub.
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
 
+=== Accounts:
+
+
+The accounts features a ledger column to record the spending of the club
+on any date in the form of DD/MM. There are 4 basic commands allowing the user to
+add or delete a ledger, and to credit or debit money from any date in the
+list of records.
+
+==== Adding a ledger: `addLedger`
+Adds a ledger to the ledger column. +
+Format: `addLedger d/[DD/MM]`
+
+Example: `addLedger d/ 10/10`
+
+==== Deleting a ledger: `deleteLedger`
+Deletes a ledger from the log. +
+Format: `deleteLedger d/[DD/MM]`
+
+Example: `deleteLedger d/ 10/10`
+
+==== Crediting a ledger: `credit`
+Increase the balance of a ledger on a date indicated. +
+Format: `credit d/[DD/MM] b/[NUM]`
+
+Example: `credit d/ 10/10 b/ 100`
+
+==== Debiting a ledger: `debit`
+Decrease the balance of a ledger on a date indicated. +
+Format: `debit d/[DD/MM] b/[NUM]`
+
+Example: `debit d/ 10/10 b/ 100`
+
+
+
+=== Calendar:
+
+==== List events: `listEvents`
+Lists all the events sorted by date. +
+Format: `listEvents`
+
+==== Adding an event: `addEvent`
+Adds an event to the calendar. +
+Format: `addEvent n/EVENT_NAME v/VENUE d/DESCRIPTION D/EVENT_DATE`
+
+==== Editing an event: `editEvent`(This will be implemented in v1.4)
+Edits an event on the calendar. +
+Format: `editEvent EVENT_NAME to EVENT_NAME EVENT_DATE EVENT_LOCATION EVENT_DESCRIPTION`
+
+==== Deleting event: `deleteEvent`
+Deletes an event from the calendar. +
+Format: `deleteEvent n/EVENT_NAME`.
+
+
 === ItemList
 
 ==== Adding an item: `addItem`
@@ -418,16 +420,6 @@ Edits the name and quantity of the 1st item to be `Soccer Balls` and `6` respect
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *List* : `list`
 * *Help* : `help`
 * *Select* : `select INDEX` +
 e.g.`select 2`
@@ -436,3 +428,22 @@ e.g.`select 2`
 * *Redo* : `redo`
 * *UndoAll* : `undoAll`
 * *RedoAll* : `redoAll`
+* *List* : `list`
+* *Addmember* : `addmember n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/POSTALCODE m/MAJOR [t/TAG]…​`
+* *Editmember* : `editmember INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/POSTALCODE] [m/MAJOR] [t/TAG]…​`
+* *Findbyname* : `find KEYWORD [MORE_KEYWORDS]`
+* *Findbymajor* : `findmajor KEYWORD [MORE_KEYWORDS]`
+* *Findbyphonenumber* : `findphone KEYWORD [MORE_KEYWORDS]`
+* *Findbypostalcode* : `findpostalcode KEYWORD [MORE_KEYWORDS]`
+* *Deletemember* : `delete INDEX`
+* *AddLedger*: `addLedger d/[DD/MM]`
+* *DeleteLedger* : `deleteLedger d/[DD/MM]`
+* *Credit*: `credit d/[DD/MM] b/[NUM]`
+* *Debit*: `debit d/[DD/MM] b/[NUM]`
+* *AddEvent* : `addEvent n/EVENT_NAME v/VENUE d/DESCRIPTION D/EVENT_DATE`
+* *EditEvent* : `editEvent EVENT_NAME to EVENT_NAME EVENT_DATE EVENT_LOCATION EVENT_DESCRIPTION`
+* *DeleteEvent* : `deleteEvent n/EVENT_NAME`
+* *AddItem* : `addItem n/ITEM_NAME q/ITEM_QUANTITY`
+* *DeleteItem* : `deleteItem INDEX`
+* *EditItem* : `editItem INDEX [n/ITEM_NAME] [q/ITEM_QUANTITY]…​`
+
