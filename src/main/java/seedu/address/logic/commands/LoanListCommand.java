@@ -4,13 +4,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOANER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 
-import java.io.File;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import seedu.address.MainApp;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -25,15 +24,16 @@ import seedu.address.storage.XmlAdaptedLoanerDescription;
 public class LoanListCommand extends Command {
     public static final String COMMAND_WORD = "loanList";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a loan list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a loan list. \n"
             + "Parameters: "
-            + PREFIX_LOANER + "LOANER"
             + PREFIX_NAME + "NAME "
-            + PREFIX_QUANTITY + "QUANTITY"
+            + PREFIX_QUANTITY + "QUANTITY "
+            + PREFIX_LOANER + "LOANER\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_LOANER + "KinWhye"
             + PREFIX_NAME + "Arduino "
-            + PREFIX_QUANTITY + "20 ";
+            + PREFIX_QUANTITY + "20 "
+            + PREFIX_LOANER + "KinWhye";
+
     public static final String MESSAGE_SUCCESS = "Loan list created";
 
     private final LoanerDescription loaner;
@@ -50,8 +50,7 @@ public class LoanListCommand extends Command {
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
         jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         jaxbMarshaller.marshal(xmlAdaptedLoanList, System.out);
-        jaxbMarshaller.marshal(xmlAdaptedLoanList,
-                new File("C:/Users/ckinw/OneDrive/Documents/JalilEnterprisesCKW/data/LoanList.xml"));
+        jaxbMarshaller.marshal(xmlAdaptedLoanList, MainApp.getLoanListFile());
     }
 
     @Override
@@ -70,14 +69,13 @@ public class LoanListCommand extends Command {
      * Updates the XmlAdaptedLoanList, then updates the XmlLoanListFile
      */
     private void updateLoanList() throws JAXBException {
-        File loanListFile = new File("C:/Users/ckinw/OneDrive/Documents/JalilEnterprisesCKW/data/LoanList.xml");
         XmlAdaptedLoanerDescription toAdd = new XmlAdaptedLoanerDescription(loaner);
         JAXBContext context = JAXBContext.newInstance(XmlAdaptedLoanList.class);
         XmlAdaptedLoanList xmlAdaptedLoanList = new XmlAdaptedLoanList();
-        if (loanListFile.exists()) {
+        if (MainApp.getLoanListFile().exists()) {
             Unmarshaller unmarshaller = context.createUnmarshaller();
             xmlAdaptedLoanList = (XmlAdaptedLoanList) unmarshaller
-                    .unmarshal(loanListFile);
+                    .unmarshal(MainApp.getLoanListFile());
         }
         xmlAdaptedLoanList.addLoaner(toAdd);
         updateXmlLoanListFile(xmlAdaptedLoanList);

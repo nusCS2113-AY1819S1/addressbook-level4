@@ -2,13 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.io.File;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import seedu.address.MainApp;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
@@ -47,15 +47,14 @@ public class DeleteCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
         }
-        File loanListFile = new File("C:/Users/ckinw/OneDrive/Documents/JalilEnterprisesCKW/data/LoanList.xml");
         Item itemToDelete = lastShownList.get(targetIndex.getZeroBased());
-        if (loanListFile.exists()) {
+        if (MainApp.getLoanListFile().exists()) {
             try {
                 int counter = 0;
                 JAXBContext context = JAXBContext.newInstance(XmlAdaptedLoanList.class);
                 Unmarshaller unmarshaller = context.createUnmarshaller();
                 XmlAdaptedLoanList xmlAdaptedLoanList = (XmlAdaptedLoanList) unmarshaller
-                        .unmarshal(loanListFile);
+                        .unmarshal(MainApp.getLoanListFile());
                 for (XmlAdaptedLoanerDescription loanerDescription : xmlAdaptedLoanList.getLoanList()) {
                     if (loanerDescription.getItemName().equals(itemToDelete.getName().toString())) {
                         DeleteLoanListCommand toDelete = new DeleteLoanListCommand(Index.fromZeroBased(counter));
