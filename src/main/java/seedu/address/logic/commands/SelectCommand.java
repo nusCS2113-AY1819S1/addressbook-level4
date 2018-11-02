@@ -80,7 +80,7 @@ public class SelectCommand extends Command {
 
         }
 
-        model.sortByDate();
+        //model.sortByDate();
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
         return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex.getOneBased()));
