@@ -284,6 +284,9 @@ Examples:
 *To clear the schedules, please restart the program on your end.
 Delete and clear schedules will be coming in version 1.4.*
 
+*Currently, the date validation regex allows for 31 days every month. This issue will be fixed
+in v1.4*
+
 === Add and Delete personal weekly schedule : `schedule` [coming in v1.4]
 
 Format:
