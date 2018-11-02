@@ -15,9 +15,9 @@ import seedu.planner.testutil.RecordBuilder;
 
 public class CompareUtilTest {
 
-    Month MONTH_AUG_2018 = new Month("aug-2018");
-    Month MONTH_FEB_2018 = new Month("feb-2018");
-    Month MONTH_AUG_2017 = new Month("aug-2017");
+    private static Month monthAug2018 = new Month("aug-2018");
+    private static Month monthFeb2018 = new Month("feb-2018");
+    private static Month monthAug2017 = new Month("aug-2017");
 
     @Test
     public void compareNameAttribute_equalsTest() { // test exactly similar names
@@ -117,23 +117,23 @@ public class CompareUtilTest {
 
     @Test
     public void compareMonth_equalsTest() {
-        int compareResult = compareMonth().compare(MONTH_AUG_2018, new Month("AUG-2018"));
+        int compareResult = compareMonth().compare(monthAug2018, new Month("AUG-2018"));
         assertTrue(compareResult == 0);
     }
 
     @Test
     public void compareMonth_lessThanTest() {
-        int compareResult = compareMonth().compare(MONTH_AUG_2017, MONTH_AUG_2018);
+        int compareResult = compareMonth().compare(monthAug2017, monthAug2018);
         assertTrue(compareResult <= -1);
-        compareResult = compareMonth().compare(MONTH_FEB_2018, MONTH_AUG_2018);
+        compareResult = compareMonth().compare(monthFeb2018, monthAug2018);
         assertTrue(compareResult <= -1);
     }
 
     @Test
     public void compareMonth_moreThanTest() {
-        int compareResult = compareMonth().compare(MONTH_AUG_2018, MONTH_FEB_2018);
+        int compareResult = compareMonth().compare(monthAug2018, monthFeb2018);
         assertTrue(compareResult >= 1);
-        compareResult = compareMonth().compare(MONTH_AUG_2018, MONTH_AUG_2017);
+        compareResult = compareMonth().compare(monthAug2018, monthAug2017);
         assertTrue(compareResult >= 1);
     }
 
