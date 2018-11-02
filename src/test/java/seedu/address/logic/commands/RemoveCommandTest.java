@@ -50,7 +50,7 @@ public class RemoveCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getEventList(), new UserPrefs());
         expectedModel.updateEvent(eventChosen, eventUpdated);
-        expectedModel.commitAddressBook();
+        expectedModel.commitEventList();
 
         assertCommandSuccess(removeCommand, model, commandHistory, expectedMessage, expectedModel);
     }

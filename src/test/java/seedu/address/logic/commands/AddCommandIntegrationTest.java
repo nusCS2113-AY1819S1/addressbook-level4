@@ -48,7 +48,7 @@ public class AddCommandIntegrationTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getEventList(), new UserPrefs());
         expectedModel.addEvent(validEvent);
-        expectedModel.commitAddressBook();
+        expectedModel.commitEventList();
 
         assertCommandSuccess(new AddEventCommand(validEvent), model, commandHistory,
                 String.format(AddEventCommand.MESSAGE_SUCCESS, validEvent), expectedModel);
