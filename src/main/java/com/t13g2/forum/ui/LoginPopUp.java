@@ -1,5 +1,6 @@
 package com.t13g2.forum.ui;
 import java.util.logging.Logger;
+
 import com.t13g2.forum.commons.core.LogsCenter;
 
 import javafx.geometry.Insets;
