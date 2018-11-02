@@ -1,6 +1,6 @@
 package seedu.planner.commons.util;
 
-import static seedu.planner.commons.util.SortUtil.compareDate;
+import static seedu.planner.commons.util.CompareUtil.compareDate;
 
 import java.time.LocalDate;
 import java.util.Arrays;

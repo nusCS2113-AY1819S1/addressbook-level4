@@ -9,7 +9,7 @@ import seedu.planner.model.record.Record;
 /**
  * Comparator to sort {@code Record}s by name, date and moneyflow attributes.
  */
-public class SortUtil {
+public class CompareUtil {
 
     public static Comparator<Record> compareNameAttribute() {
         return Comparator.comparing(a -> a.getName().fullName.toLowerCase());
