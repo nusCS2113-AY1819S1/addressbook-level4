@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.recruit.model.CandidateBook;
@@ -14,13 +13,12 @@ import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.util.SampleDataUtil;
 import seedu.recruit.testutil.TestUtil;
 
-@Ignore("not updated with new UI changes")
 public class SampleDataTest extends CandidateBookSystemTest {
     /**
      * Returns null to force test app to load data of the file in {@code getDataFileLocation()}.
      */
     @Override
-    protected CandidateBook getInitialData() {
+    protected CandidateBook getInitialCandidateData() {
         return null;
     }
 
@@ -28,7 +26,7 @@ public class SampleDataTest extends CandidateBookSystemTest {
      * Returns a non-existent file location to force test app to load sample data.
      */
     @Override
-    protected Path getDataFileLocation() {
+    protected Path getCandidateDataFileLocation() {
         Path filePath = TestUtil.getFilePathInSandboxFolder("SomeFileThatDoesNotExist1234567890.xml");
         deleteFileIfExists(filePath);
         return filePath;
@@ -48,6 +46,6 @@ public class SampleDataTest extends CandidateBookSystemTest {
     @Test
     public void addressBook_dataFileDoesNotExist_loadSampleData() {
         Candidate[] expectedList = SampleDataUtil.getSampleCandidates();
-        assertListMatching(getPersonListPanel(), expectedList);
+        assertListMatching(getCandidateDetailsPanel(), expectedList);
     }
 }

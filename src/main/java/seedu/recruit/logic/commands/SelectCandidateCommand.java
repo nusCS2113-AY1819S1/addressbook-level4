@@ -14,6 +14,9 @@ import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.candidate.Candidate;
+import seedu.recruit.model.company.Company;
+import seedu.recruit.model.joboffer.JobOffer;
+import seedu.recruit.model.tag.Tag;
 
 /**
  * Selects a candidate identified using it's displayed index from the recruit book.
@@ -31,6 +34,9 @@ public class SelectCandidateCommand extends Command {
 
     public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Selected Candidate: %1$s\n";
 
+    public static final String MESSAGE_CONFIRMATION_FOR_SHORTLIST =
+            "for job offer: %1$s, for company: %2$s.\n";
+
     private static Candidate selectedCandidate;
 
     private final Index targetIndex;
@@ -46,7 +52,6 @@ public class SelectCandidateCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
 
         List<Candidate> filteredCandidateList = model.getFilteredCandidateList();
 
@@ -55,14 +60,26 @@ public class SelectCandidateCommand extends Command {
         }
 
         selectedCandidate = filteredCandidateList.get(targetIndex.getZeroBased());
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
 
-        if (ShortlistCandidateInitializationCommand.isShortlisting()) {
-            LogicManager.setLogicState(ShortlistCandidateCommand.COMMAND_LOGIC_STATE);
-            return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS,
-                    targetIndex.getOneBased()) + ShortlistCandidateCommand.MESSAGE_USAGE);
+        Tag blacklistTag = new Tag("BLACKLISTED");
+        if (selectedCandidate.getTags().contains(blacklistTag)) {
+            throw new CommandException(BlacklistCommand.MESSAGE_WARNING_BLACKLISTED_PERSON);
         }
 
+        if (ShortlistCandidateInitializationCommand.isShortlisting()) {
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
+            Company selectedCompany = SelectCompanyCommand.getSelectedCompany();
+            JobOffer selectedJobOffer = SelectJobCommand.getSelectedJobOffer();
+            LogicManager.setLogicState(ShortlistCandidateCommand.COMMAND_LOGIC_STATE);
+            return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS,
+                    targetIndex.getOneBased())
+                    + String.format(MESSAGE_CONFIRMATION_FOR_SHORTLIST,
+                    selectedJobOffer.getJob().value, selectedCompany.getCompanyName().value)
+                    + ShortlistCandidateCommand.MESSAGE_USAGE);
+        }
+
+        EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
         return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex.getOneBased()));
     }
 

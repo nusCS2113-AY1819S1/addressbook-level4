@@ -24,6 +24,9 @@ to add, edit, find, filter, shortlist, email and delete candidates, as well as j
 potential candidates to the job offer that is best suited for them. Hence, you can organise and sift out your desired
 information with just a few clicks due to the meticulous data handling in RecruitBook.
 
+RecruitBook is written in Java, and you can interact with it using Command-Line Interface(CLI), as well as Graphical User Interface(GUI).
+Its GUI is created with JavaFX.
+
 This guide provides information that will not only help you get started as a RecruitBook contributor, but also get
 a better understanding of data handling and code implementation if you are interested in coding.
 
@@ -229,17 +232,352 @@ Classes used by multiple components are in the `seedu.recruit.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::add/delete[]
+=== Add/Delete Feature
+==== Current Implementation
+===== Candidates
+The add/delete mechanism of candidates is facilitated in `UniqueCandidateList` which stores the added candidates internally as an `internalList` which is a list of Candidate objects.
+
+It implements `Iterable<Candidate>`, where it overrides the `Iterator`, `equals` and `hashCode` of the `Iterable` interface.
+Additionally, it implements the following operations to support adding/deletion of candidates:
+
+* `UniqueCandidateList#contains(Candidate candidate)` — Checks whether a candidate exists inside `internalList` using `Candidate#isSameCandidate` to define equality.
+* `UniqueCandidateList#add(Candidate candidate)` — Adds a unique candidate to `internalList`. Checks for uniqueness using `UniqueCandidateList#contains(Candidate candidate)`.
+* `UniqueCandidateList#remove(Candidate candidate)` — Removes the equivalent candidate from `internalList`.
+
+These operations are exposed in the `Model` interface as `Model#addCandidate(Candidate)` and `Model#deleteCandidate(Candidate candidate)` respectively.
+
+===== Companies
+The add/delete mechanism of companies is facilitated in `UniqueCompanyList` which stores the added companies internally as an `internalList` which is a list of Company objects.
+
+It implements `Iterable<Company>`, where it overrides the `Iterator`, `equals` and `hashCode` of the `Iterable` interface.
+Additionally, it implements the following operations to support adding/deletion of companies:
+
+* `UniqueCompanyList#contains(Company company)` — Checks whether a company exists inside `internalList` using `Company#isSameCompany` to define equality.
+* `UniqueCompanyList#add(Company company)` — Adds a unique company to `internalList`. Checks for uniqueness using `UniqueCompanyList#contains(Company company)`.
+* `UniqueCompanyList#remove(Company company)` — Removes the equivalent company from `internalList`.
+
+These operations are exposed in the `Model` interface as `Model#addCompany(Company)` and `Model#deleteCompany(Company company)` respectively.
+
+===== Job Offers
+The add/delete mechanism of job offer is facilitated in `UniqueJobList` which stores the added job offer internally as an `internalList` which is a list of JobOffer objects.
+
+It implements `Iterable<JobOffer>`, where it overrides the `Iterator`, `equals` and `hashCode` of the `Iterable` interface.
+Additionally, it implements the following operations to support adding/deletion of job offer:
+
+* `UniqueJobList#contains(JobOffer jobOffer)` — Checks whether a job offer exists inside `internalList` using `JobOffer#isSameJobOffer` to define equality.
+* `UniqueJobList#add(JobOffer jobOffer)` — Adds a unique job offer to `internalList`. Checks for uniqueness using `UniqueJobOfferList#contains(JobOffer jobOffer)`.
+* `UniqueJobList#remove(JobOffer jobOffer)` — Removes the equivalent job offer from `internalList`.
+
+These operations are exposed in the `Model` interface as `Model#addJobOffer(JobOffer)` and `Model#deleteJobOffer(JobOffer jobOffer)` respectively.
+
+[NOTE]
+All addition/deletion of the 3 entities (Candidates, Companies, Job Offers) follow the same mechanism.
+
+Given below is an example usage scenario for adding/deleting of these entities and how the adding/deleting mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time.
+
+.. `UniqueCandidateList` will be initialised with the list of saved candidates in RecruitBook
+.. `UniqueCompanyList` will be initialised with the list of saved companies in RecruitBook
+.. `UniqueJobList` will be initialised with the list of saved job offers.
+
+Step 2. The user executes ...
+
+        .. `addc n/John Doe ...` to add a new candidate. `AddCandidateCommand` calls `Model#hasCandidate(Candidate candidate)` to check if a duplicate entry exists. Then `Model#addCandidate(Candidate candidate)` and adds the candidate to the CandidateBook.
+        .. `addC c/McDonalds ...` to add a new company. `AddCompanyCommand` calls `Model#hasCompany(Company company)` to check if a duplicate entry exists. Then `Model#addCompany(Company company)` and adds the company to the CompanyBook.
+        .. `addj c/McDonalds ...` to add a new job offer. `AddJobDetailsCommand` calls `Model#hasJobOffer(JobOffer jobOffer)` to check if a duplicate entry exists. Then `Model#addJobOffer(JobOffer jobOffer)` and adds the job offer to the CompanyBook.
+
+Step 3. The user executes ...
+
+        .. `deletec 1,3-4` to delete multiple candidates. `DeleteCandidateCommand` calls `Model#removeCandidate(Candidate candidate)` for the candidates listed at index 1, and 4.
+        .. `deleteC 1,3-4` to delete multiple companies. `DeleteCompanyCommand` calls `Model#removeCompany(Company company)` for the companies listed at index 1, and 4.
+        .. `deletej 1,3-4` to delete multiple job offers. `DeleteJobOfferCommand` calls `Model#deleteJobOffer(JobOffer jobOffer)` for the job offers listed at index 1, and 4.
+
+
+==== Design Considerations
+
+===== Aspect: How add/delete feature executes
+
+===== Aspect: Data structure to support the add/delete feature
+
+// end::add/delete[]
+
+// tag::find[]
+=== Find Feature
+==== Current Implementation
+
+The find mechanism is facilitated by `keywordsMap` which stores the searched keywords in a `Map`.
+It implements the following operations to support the checking of keywords with the data stored in the RecruitBook:
+
+* `keywordsMap#add(String arg)` - Adds a keyword into the `keywordMap` based on the preceding prefix
+
+===== Candidates
+The `findCandidateCommand` is facilitated by the `CandidateContainsKeywordsPredicate` which implements `Predicate<Candidate>`
+and overrides the `test` and `equal` methods so that more fields can be searched at the same time.
+
+===== Companies
+The `findCompanyCommand` is facilitated by the `CompanyContainsKeywordsPredicate` which implements `Predicate<Company>`
+and overrides the `test` and `equal` methods so that more fields can be searched at the same time.
+
+===== Job Offers
+The `findJobOfferCommand` is facilitated by the `JobOfferContainsKeywordsPredicate` which implements `Predicate<JobOffer>`
+and overrides the `test` and `equal` methods so that more fields can be searched at the same time.
+
+[NOTE]
+The finding of all three entities (Candidate, Company, JobOffer) follow the same mechanism.
+
+An example usage scenario and how the find mechanism behaves at each step is shown below.
+
+Step 1. The user launched the application for the first time.
+
+.. `UniqueCandidateList` will be initialised with the list of candidates in RecruitBook
+.. `UniqueCompanyList` will be initialised with the list of saved companies in `CompanyBook`.
+.. `UniqueCompanyJobList` will be initialised with the list of saved job offers in `CompanyBook`.
+
+Step 2. The user executes `findc n/Alex p/91234567 e/michelleyeoh@gmail.com` command to find the candidates who either have the name `Alex`,
+with phone number `91234567`,  or with email address `michelleyeoh@gmail.com`.
+
+The following sequence diagram shows how the find operation works:
+
+image::FindSequenceDiagram.png[width="800"]
+// end::find[]
+
+// tag::edit[]
+=== Edit Feature
+==== Current Implementation
+===== Candidates
+The edit mechanism for candidates is facilitated by `EditPersonDescriptor` in `EditCandidateCommand` which creates a new Candidate object with edited attributes
+and `UniqueCandidateList` which stores candidates internally as an `internalList` which is a list of Candidate objects.
+Additionally, it implements the following operations to support the editing of candidates.
+
+* `UniqueCandidateList#contains(Candidate candidate)` — Checks whether a candidate exists inside `internalList` using `Candidate#isSameCandidate` to define equality.
+* `UniqueCandidateList#setCandidate(Candidate target, Candidate editedCandidate)` — Replaces the Candidate object(target) in the `internalList` to the newly edited Candidate object(editedCandidate) through `List#set(int index, E element)`.
+
+These operations are exposed in the `Model` interface as `Model#hasCandidate(Candidate candidate)` and `Model#updateCandidate(Candidate target, Candidate editedCandidate)` respectively.
+
+===== Companies
+The edit mechanism for companies is facilitated by `EditCompanyDescriptor` in `EditCompanyCommand` which creates a new Company object with edited attributes
+and `UniqueCompanyList` which stores companies internally as an `internalList` which is a list of Company objects.
+Additionally, it implements the following operations to support the editing of companies.
+
+* `UniqueCompanyList#contains(Company company)` — Checks whether a company exists inside `internalList` using `Company#isSameCompany` to define equality.
+* `UniqueCompanyList#setCompany(Company target, Company editedCompany)` — Replaces the Company object(target) in the `internalList` to the newly edited Company object(editedCompany) through `List#set(int index, E element)`.
+
+These operations are exposed in the `Model` interface as `Model#hasCompany(Company company)` and `Model#updateCompany(Company target, Company editedCompany)` respectively.
+
+===== Job Offers
+The edit mechanism for job offers is facilitated by `EditJobOfferDescriptor` in `EditJobDetailsCommand` which creates a new Job Offer object with edited attributes
+and `UniqueJobList` which stores job offers internally as an `internalList` which is a list of Job Offer objects.
+Additionally, it implements the following operations to support the editing of job offers.
+
+* `UniqueJobList#contains(JobOffer jobOffer)` — Checks whether a job offer exists inside `internalList` using `JobOffer#isSameJobOffer` to define equality.
+* `UniqueJobList#setJobOffer(JobOffer target, JobOffer editedJobOffer)` — Replaces the Job Offer object(target) in the `internalList` to the newly edited Job Offer object(editedJobOffer) through `List#set(int index, E element)`.
+
+These operations are exposed in the `Model` interface as `Model#hasJobOffer(JobOffer jobOffer)` and `Model#updateJobOffer(JobOffer target, JobOffer editedJobOffer)` respectively.
+
+[NOTE]
+The editing of all three entities (Candidate, Company, JobOffer) follow the same mechanism.
+
+Given below is an example usage scenario and how the edit mechanism behaves at each step.
+
+Step 1. The user launches RecruitBook for the first time.
+
+.. `UniqueCandidateList` will be initialised with the list of saved candidates in RecruitBook
+.. `UniqueCompanyList` will be initialised with the list of saved companies in RecruitBook
+.. `UniqueJobList` will be initialised with the list of saved job offers.
+[NOTE]
+Assume that upon initialisation, there are candidate, company and job offer entries in RecruitBook.
+
+Step 2. The user executes ...
+
+.. `editc 1 n/John Doe` to edit the name of the 1st person in the RecruitBook.
+... The name attribute in `EditPersonDescriptor` in `EditCandidateCommand` has been set to "John Doe" and the descriptor is used to compare with the original Candidate object and a new Candidate object is created with the name being "John Doe".
+... `EditCandidateCommand` then calls `Model#hasCandidate(Candidate candidate)` to check if the edited candidate has a duplicate in the RecruitBook. If not, `Model#updateCandidate(Candidate target, Candidate editedCandidate)` is then called that replaces the original Candidate object with the newly edited one.
+.. `editC 1 c/KFC` to edit the name of the 1st company in the RecruitBook.
+... The name attribute in `EditCompanyDescriptor` in `EditCompanyCommand` has been set to "KFC" and the descriptor is used to compare with the original Company object and a new Company object is created with the name being "KFC".
+... `EditCompanyCommand` then calls `Model#hasCompany(Company company)` to check if the edited company has a duplicate in the RecruitBook. If not, `Model#updateCompany(Company target, Company editedCompany)` is then called that replaces the original Company object with the newly edited one.
+.. `editj 1 j/Cashier` to edit the job title of the 1st job offer in the RecruitBook.
+... The job title attribute in `EditJobOfferDescriptor` in `EditJobDetailsCommand` has been set to "Cashier" and the descriptor is used to compare with the original JobOffer object and a new JobOffer object is created with the job title being "Cashier".
+... `EditJobDetailsCommand` then calls `Model#hasJobOffer(JobOffer jobOffer)` to check if the edited job offer has a duplicate in the RecruitBook. If not, `Model#updateJobOffer(JobOffer target, JobOffer editedJobOffer)` is then called that replaces the original JobOffer object with the newly edited one.
+[NOTE]
+Any duplicates formed after editing will not replace the original object. It will prompt an error message
+
+==== Design Considerations
+
+===== How edit executes
+* **Alternative 1 (current choice):** Replaces the original object with an edited one.
+** Pros: If the edited object were to result in errors, it can be prevented from replacing the original object.
+** Cons: It is less efficient as compared to editing the original object straightaway.
+* **Alternative 2:** Editing the original object instead of replacing it with an edited one.
+** Pros: It is more intuitive and efficient.
+** Cons: The edited object cannot be checked for duplicates without permanently changing the object first.
+
+===== Data structure to support the edit command
+* **Alternative 1 (current choice):** Separating the editing feature into 3 commands for different entities.
+** Pros: Greater distinction between the entities.
+** Cons: More commands to deal with (similar commands across all three entities).
+* **Alternative 2:** Have a central `EditManager` that handles all edits.
+** Pros: Reduction of command objects (less confusing).
+** Cons: There is coupling between the manager and the individual commands. Changes to an entity has to be cascaded to the manager.
+// end::edit[]
+
+// tag::sort[]
+=== Sort Feature
+==== Current Implementation
+===== Candidates
+
+The sort mechanism of candidates is facilitated in `UniqueCandidateList` which stores candidates in an `internalList`. It implements the sorting of candidates using the following operations:
+
+* `UniqueCandidateList#sortByName()` — Sorts the `internalList` of Candidates by their names.
+* `UniqueCandidateList#sortByAge()` — Sorts the `internalList` of Candidates by their age.
+* `UniqueCandidateList#sortByEmail()` — Sorts the `internalList` of Candidates by their emails.
+* `UniqueCandidateList#sortByJob()` — Sorts the `internalList` of Candidates by their job titles.
+* `UniqueCandidateList#sortByEducation()` — Sorts the `internalList` of Candidates by their education levels.
+* `UniqueCandidateList#sortBySalary()` — Sorts the `internalList` of Candidates by their salaries.
+* `UniqueCandidateList#sortInReverse()` — Sorts the `internalList` of Candidates in reverse order of their current order.
+
+These operations are accessed through the `Model` interface as `Model#sortCandidates(Prefix prefix)` which then calls the respective sorting method by determining the prefix type in `CandidateBook`.
+[NOTE]
+These prefixes `n/`, `x/`, `e/`, `j/`, `h/`, `s/`, `r/` are used respectively to the methods shown above.
+
+===== Companies
+
+The sort mechanism of companies is facilitated in `UniqueCompanyList` which stores companies in an `internalList`. It implements the sorting of companies using the following operations:
+
+* `UniqueCompanyList#sortByCompanyName()` — Sorts the `internalList` of Companies by their names.
+* `UniqueCompanyList#sortByEmail()` — Sorts the `internalList` of Companies by their emails.
+* `UniqueCompanyList#sortInReverse()` — Sorts the `internalList` of Companies in reverse order of their current order.
+
+These operations are accessed through the `Model` interface as `Model#sortCompanies(Prefix prefix)` which then calls the respective sorting method by determining the prefix type in `CompanyBook`.
+[NOTE]
+These prefixes `c/`, `e/`, `r/` are used respectively to the methods shown above.
+
+===== Job Offers
+
+The sort mechanism of job offers is facilitated in `UniqueCompanyJobList` which stores job offers in an `internalList`. It implements the sorting of job offers using the following operations:
+
+* `UniqueCompanyJobList#sortByCompanyName()` — Sorts the `internalList` of Job Offers by the company names they are attached to.
+* `UniqueCompanyJobList#sortByJob()` — Sorts the `internalList` of Job Offers by their job titles.
+* `UniqueCompanyJobList#sortByAgeRange()` — Sorts the `internalList` of Job Offers by the minimum age of their required age ranges.
+* `UniqueCompanyJobList#sortByEducation()` — Sorts the `internalList` of Job Offers by their required education levels.
+* `UniqueCompanyJobList#sortBySalary()` — Sorts the `internalList` of Job Offers by their salaries.
+* `UniqueCompanyJobList#sortInReverse()` — Sorts the `internalList` of Job Offers in reverse order of their current order.
+
+These operations are accessed through the `Model` interface as `Model#sortJobOffers(Prefix prefix)` which then calls the respective sorting method by determining the prefix type in `CompanyBook`.
+[NOTE]
+These prefixes `c/`, `j/`, `xr/`, `h/`, `s/`, `r/` are used respectively to the methods shown above.
+
+Given below is an example usage scenario and how the sort command behaves at each step.
+
+Step 1. The user launches RecruitBook for the first time.
+
+.. `UniqueCandidateList` will be initialised with the list of saved candidates in `CandidateBook`.
+.. `UniqueCompanyList` will be initialised with the list of saved companies in `CompanyBook`.
+.. `UniqueCompanyJobList` will be initialised with the list of saved job offers in `CompanyBook`.
+
+[NOTE]
+Assume that upon initialisation, there are candidate, company and job entries in RecruitBook.
+
+Step 2. The user executes...
+
+.. `sortc s/` to sort the list of candidates based on their salaries.
+... `s/` prefix is used which calls the `UniqueCandidateList#sortBySalary()` from `CandidateBook`.
+... The `internalList` within `CandidateBook` is then sorted numerically based on salary and the newly sorted list will be reflected in the `MainWindow` of RecruitBook.
+.. `sortC c/` to sort the list of companies based on their names.
+... `c/` prefix is used which calls the `UniqueCompanyList`#sortByCompanyName()` from `CompanyBook`.
+... The `internalList` within `CompanyBook` is then sorted lexicographically based on their names and the newly sorted list will be reflected in the `MainWindow` of RecruitBook.
+.. `sortj j/` to sort the list of job offers based on their title.
+... `j/` prefix is used which calls the `UniqueCompanyJobList`#sortByJob()` from `CompanyBook`.
+... The `internalList` within `UniqueCompanyJobList` is then sorted lexicographically based on their titles and the newly sorted list will be reflected in the `MainWindow` of RecruitBook.
+
+Step 3. The user does not want the candidates to be sorted in increasing order of their salaries but decreasing order. So, the user executes
+
+.. `sortc r/` to sort the list of candidates in the reverse order of the current order.
+
+==== Design Considerations
+===== Aspect: How sort executes
+* **Alternative 1(current choice):** Store the input prefix as a parameter to be passed in to the respective books which calls the respective method.
+** Pros: The variations of sort methods are stored under `UniqueCandidateList` instead of having more command objects.
+** Cons: Implementation of switch case statements in both books which could lead to poorer performance.
+* **Alternative 2:** Create multiple sort commands for the various attributes.
+** Pros: The implementation would give a better performance.
+** Cons: There will be about 10 more newly added command objects which makes it confusing when dealing with many similar commands.
+
+// end::sort[]
+
+// tag::blacklist[]
+=== Blacklist Feature
+==== Current Implementation
+The blacklist mechanism is facilitated by `UniqueCandidateList` that is stored in the CandidateBook (as `internalList`). This feature is also supported by `Model#getFilteredCandidateList` where the input index is used to obtain the Candidate object from the observable list.
+Additionally, it implements the following operations:
+
+* `UniqueCandidateList#setCandidate(Candidate target, Candidate editedCandidate)` — Replaces the original Candidate object in the `internalList` with the newly edited Candidate object.
+
+This operation is exposed in the `Model` interface as `Model#updateCandidate(Candidate target, Candidate editedCandidate)`.
+
+[NOTE]
+There is *no* duplicate check as no two candidate objects share the same name and changing the tags (blacklist) does not violate the uniqueness of their names.
+
+Given below is an example usage scenario and how the blacklist command behaves at each step.
+
+Step 1. The user launches RecruitBook for the first time.
+
+.. `UniqueCandidateList` is initialised with the saved data of Candidates in RecuitBook.
+
+[NOTE]
+Assume that upon initialisation, there are candidate entries in RecruitBook.
+
+Step 2. The user executes `blacklist 1` command to blacklist the 1st candidate in the candidate book. If there are no errors, the 1st candidate will be blacklisted and a "BLACKLISTED" tag will appear in its entry.
+
+.. It achieves this by generating a new Candidate object with a blacklist tag then replaces the original Candidate object in the `internalList`.
+
+Step 3. The user executes `editc 1 n/James`. This command will fail to execute as blacklisted candidates cannot be edited or shortlisted. An error message will appear.
+
+Step 4. The user decides that blacklisting the candidate was a mistake and proceeds to *remove* the blacklist.
+
+.. `blacklist rm 1` is executed. The 1st candidate will no longer be blacklisted and the "BLACKLISTED" tag will be removed from its entry.
+.. It achieves this by generating a new Candidate object without a blacklist tag which replaces the original blacklisted Candidate in the `internalList`.
+
+[NOTE]
+Trying to blacklist an already blacklisted candidate will prompt an error message. +
+Unblacklisting a candidate who is not blacklisted will do likewise.
+
+==== Design considerations
+===== Aspect: How blacklist executes
+
+* **Alternative 1(current choice):** Creates a new  Candidate object for adding or removal of blacklist.
+** Pros: Less error prone as compared to editing candidates straight.
+** Cons: It is less efficient to regenerate objects as compared to directing editing of candidates.
+* **Alternative 2:** Editing the tags of the Candidate directly.
+** Pros: More intuitive and efficient.
+** Cons: Code becomes less defensive as any changes will be permanent reflected in that candidate.
+
+===== Aspect: Data structure to support the blacklist command
+* **Alternative 1(current choice):** Add blacklist tags into the candidates.
+** Pros: Blacklisting can be immediately displayed on entries.
+** Cons: There is no organised data structure that accommodates all blacklisted candidates, so if there is a need for all blacklisted candidates, every candidate has to be checked.
+* **Alternative 2:** Store blacklisted candidates in a list.
+** Pros: There is a one-stop collection of blacklisted candidates.
+** Cons: To check if a candidate if blacklisted, a loop has to be used to check the list. (slows the execution of edit and shortlist).
+
+// end::blacklist[]
+
 // tag::shortlist[]
 === Shortlist Feature
 ==== Current Implementation
+===== Shortlisting a Candidate
+
 The shortlist mechanism is facilitated by `select`, `selectCompany` and `selectJob` command.
-It extends `CompanyBook` with a list of shortlisted candidate(s) for each job offer, stored internally as a `shortlistedCandidateList`.
+It extends `CompanyBook` with a list of shortlisted candidate(s) for each job offer, stored internally as a
+Unique Candidate List called `candidateList`. The reason for storing as a unique list is to prevent duplicated
+candidates from being added into the same `candidateList`.
 
 It is a 5-stage process supported by `LogicManager` by keeping track of the `LogicState`.
 
 . `primary`
-. `SelectCompany`
-. `SelectJob`
+. `SelectCompanyForShortlist`
+. `SelectJobForShortlist`
 . `SelectCandidate`
 . `ShortlistCandidate`
 
@@ -253,9 +591,12 @@ x refers to the index from user input.
 Assume that there are candidates and companies present in the data of RecruitBook, but no job offer.
 
 . User adds a new job offer `Cashier` under the existing company `KFC`.
-. RecruitBook creates a new object `Cashier` with `JobOffer` class. Hence, `Cashier` has `shortlistedCandidateList` as one of its attributes.
 [NOTE]
-`shortlistedCandidateList` is empty upon creation of the `Cashier` object.
+Since RecruitBook opens up Candidate Book by default, adding a job offer will automatically switch the view to Company Book.
+
+. RecruitBook creates a new object `Cashier` with `JobOffer` class. Hence, `Cashier` has `candidateList` as one of its attributes.
+[NOTE]
+`candidateList` is empty upon creation of the `Cashier` object.
 
 . User executes `shortlist` command. RecruitBook enters Stage 2 of the shortlisting process to shortlist a candidate for a job offer.
 This is implemented by `LogicManager` where `setLogicState` is called in each stage to connect one after another. User will need to execute
@@ -266,11 +607,64 @@ This is implemented by `LogicManager` where `setLogicState` is called in each st
 .. `select x` -> User selects the candidate to shortlist.
 .. `confirm` -> User confirms the above inputs.
 
-. RecruitBook proceeds to add shortlisted candidate into `shortlistedCandidateList` of the job offer through `addToShortlistedCandidateList` method in `JobOffer` class.
-. `shortlistedCandidateList` is linked to the job offer.
-[NOTE]
-You can access this list by calling `selectedJob.getShortlistedCandidateList()`.
+. RecruitBook proceeds to add shortlisted candidate through `Model`.
+`ModelManager` connects the `candidateList` of the job offer in `JobOffer` class to `Model`, which then connects
+to `Command`.
+.  `Model.shortlistCandidateToJobOffer()` method adds the shortlisted candidate into the `candidateList`.
+. `candidateList` is linked to the job offer.
+[TIP]
+You can access this list by calling `selectedJob.getUniqueCandidateList()`.
 
+. `model.commitCompanyBook()` is then called to indicate that Company Book has been changed.
+. RecruitBook exits the shortlisting process and returns your view to your last viewed book.
+
+===== Deleting a Shortlisted Candidate
+
+Deletion of a shortlisted candidate uses similar implementation as <<Shortlisting a Candidate>>.
+
+The shortlist mechanism is facilitated by `selectCompany` and `selectJob` command.
+It deletes a shortlisted candidate from the `candidateList` through `Model`.
+
+It is a 4-stage process supported by `LogicManager` by keeping track of the `LogicState`.
+
+. `primary`
+. `SelectCompanyForShortlistDelete`
+. `SelectJobForShortlistDelete`
+. `DeleteShortlistedCandidate`
+
+Given below is an example usage scenario and how the delete mechanism behaves at each step.
+
+[NOTE]
+x refers to the index from user input.
+
+. User launches the application. RecruitBook sets up the Candidate Book and Company Book respectively.
+[NOTE]
+Assume that there is at least one shortlisted candidate for the job offer selected by user.
+
+. User executes `deleteShortlist` command.
+[NOTE]
+Since RecruitBook opens up Candidate Book by default, entering the delete process for shortlisted candidates
+will automatically switch the view to Company Book.
+
+. RecruitBook enters Stage 2 of the deleting process.
+This is implemented by `LogicManager` where `setLogicState` is called in each stage to connect one after another. User will need to execute
+`cancel` command to exit from the shortlist process. The 4-stage process is described in order below.
+.. `deleteShortlist` -> User initializes the deleting process.
+.. `selectCompany x` -> User selects the company of the job offer.
+.. `selectJob x` -> User selects the job offer.
+.. `delete x` -> User selects the candidate to delete.
+
+. RecruitBook proceeds to delete the shortlisted candidate through `Model`.
+`ModelManager` connects the `candidateList` of the job offer in `JobOffer` class to `Model`, which then connects
+to `Command`.
+.  `Model.deleteShortlistedCandidateFromJobOffer()` method deletes the shortlisted candidate from the `candidateList`.
+[NOTE]
+This command checks if the selected candidate exists inside `candidateList` by evaluating a boolean statement
+`selectedJob.getUniqueCandidateList().contains(selectedCandidate)`. If the candidate does not exists inside the list,
+this command returns a message to be displayed to inform the user.
+
+. `model.commitCompanyBook()` is then called to indicate that Company Book has been changed.
+. RecruitBook exits the deleting process.
 
 ==== Design Considerations
 
@@ -298,7 +692,7 @@ be able to shortlist a candidate for multiple job offers. Hence, we need to furt
 to store multiple job offers under the same candidate `key`.
 // end::shortlist[]
 
-// tag::switchbook[]
+// tag::switch[]
 === Switch Book Feature
 ==== Current Implementation
 The switching mechanism is facilitated by `MainWindow`, with the latter's `switchToCandidateBook` and `switchToCompanyBook` methods.
@@ -315,11 +709,11 @@ As mentioned <<UI component, above>>, inside MainWindow, there are 4 placeholder
 
 The methods `switchToCandidateBook` and `switchToCompanyBook` work by placing the desired panel in panelViewPlaceholder, to be shown on the MainWindow.
 
-Given below is an example usage scenario for switching from `Company Book` to `Candidate Book` and how the switching mechanism behaves at each step.
+Given below is an example usage scenario for switching from `Candidate Book` to `Company Book` and how the switching mechanism behaves at each step.
 
-. User launches the application. `MainWindow` initialises the panelViewPlaceholder with `CompanyJobDetailsPanel`.
+. User launches the application. `MainWindow` initialises the panelViewPlaceholder with `CandidateDetailsPanel`.
 [NOTE]
-This means the default view of RecruitBook is the `Company Book`.
+This means the default view of RecruitBook is the `Candidate Book`.
 
 . User executes `switch` command, which posts a `SwitchBookRequestEvent`.
 
@@ -327,11 +721,11 @@ This means the default view of RecruitBook is the `Company Book`.
 
 . Inside this method, it checks which book is currently displayed by calling the method `getDisplayedBook`.
 
-. `getDisplayedBook` returns `companyBook` as a string.
+. `getDisplayedBook` returns `candidateBook` as a string.
 
-. Using a switch statement, case `companyBook` will execute and call for `switchToCandidateBook` method.
+. Using a switch statement, case `candidateBook` will execute and call for `switchToCompanyBook` method.
 
-. `switchToCandidateBook` method places the `CandidateDetailsPanel` into panelViewPlaceholder to switch the view
+. `switchToCompanyBook` method places the `CompanyJobDetailsPanel` into panelViewPlaceholder to switch the view
 [TIP]
 In order to add a panel into `panelViewPlaceholder`, the existing panel needs to be removed so that there will not be duplicated panels
 inside `panelViewPlaceholder`. There will be a compilation error if there are duplicated panels.
@@ -357,7 +751,7 @@ and returning false if the current book is Company Book.
 ** Pros: Eliminates the possibility of misspelling the books.
 ** Cons: Can be confusing for multiple contributors. There is also an assumption that there are only 2 distinct
 cases of the view of `panelViewPlaceholder`, which is not the case as we introduced another view `shortlistPanel`.
-// end::switchbook[]
+// end::switch[]
 
 // tag::email[]
 === Email command

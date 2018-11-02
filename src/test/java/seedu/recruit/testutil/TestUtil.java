@@ -11,6 +11,7 @@ import java.util.TreeSet;
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.candidate.Candidate;
+import seedu.recruit.model.company.Company;
 
 /**
  * A utility class for test cases.
@@ -35,6 +36,7 @@ public class TestUtil {
         return SANDBOX_FOLDER.resolve(fileName);
     }
 
+    // ================================= CANDIDATE BOOK =================================== //
     /**
      * Returns the middle index of the candidate in the {@code model}'s candidate list.
      */
@@ -55,6 +57,31 @@ public class TestUtil {
     public static Candidate getPerson(Model model, Index index) {
         return model.getFilteredCandidateList().get(index.getZeroBased());
     }
+
+    // ================================= COMPANY BOOK =================================== //
+
+    /**
+     * Returns the middle index of the company in the {@code model}'s company list.
+     */
+    public static Index getCompanyMidIndex(Model model) {
+        return Index.fromOneBased(model.getFilteredCompanyList().size() / 2);
+    }
+
+    /**
+     * Returns the last index of the company in the {@code model}'s company list.
+     */
+    public static Index getCompanyLastIndex(Model model) {
+        return Index.fromOneBased(model.getFilteredCompanyList().size());
+    }
+
+    /**
+     * Returns the company in the {@code model}'s company list at {@code index}.
+     */
+    public static Company getCompany(Model model, Index index) {
+        return model.getFilteredCompanyList().get(index.getZeroBased());
+    }
+
+    // ================================= INDEX ========================================== //
 
     /**
      * Parse an array {@code indexes} into a set sorted in descending order

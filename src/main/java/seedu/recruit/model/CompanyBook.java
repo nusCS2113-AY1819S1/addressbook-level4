@@ -2,13 +2,13 @@ package seedu.recruit.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.recruit.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.recruit.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.recruit.logic.parser.Prefix;
+import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
 import seedu.recruit.model.company.UniqueCompanyList;
@@ -119,10 +119,16 @@ public class CompanyBook implements ReadOnlyCompanyBook {
      * Sorts the company list
      */
     public void sortCompanies(Prefix prefix) {
-        if (prefix == PREFIX_COMPANY_NAME) {
+        String prefixString = prefix.toString();
+        switch (prefixString) {
+        case "c/":
             companyList.sortByCompanyName();
-        } else {
+            break;
+        case "e/":
             companyList.sortByEmail();
+            break;
+        default:
+            companyList.sortInReverse();
         }
     }
 
@@ -180,6 +186,45 @@ public class CompanyBook implements ReadOnlyCompanyBook {
     public void updateJobOffer(JobOffer target, JobOffer editedJobOffer) {
         requireAllNonNull(target, editedJobOffer);
         companyJobList.setJobOffer(target, editedJobOffer);
+    }
+
+    /** Cascading changes of candidates in to the candidate lists stored in job offers from shortlistcommand
+     */
+    public void cascadeJobListWithEditedCandidate(Candidate target, Candidate editedCandidate) {
+        requireAllNonNull(target, editedCandidate);
+
+        for (JobOffer jobOffer: companyJobList) {
+            if (jobOffer.getUniqueCandidateList().contains(target)) {
+                jobOffer.getUniqueCandidateList().setCandidate(target, editedCandidate);
+                break;
+            }
+        }
+    }
+
+    /**
+     * Sorts the company job list
+     */
+    public void sortJobOffers(Prefix prefix) {
+        String prefixString = prefix.toString();
+        switch (prefixString) {
+        case "c/":
+            companyJobList.sortByCompanyName();
+            break;
+        case "j/":
+            companyJobList.sortByJob();
+            break;
+        case "xr/":
+            companyJobList.sortByAgeRange();
+            break;
+        case "h/":
+            companyJobList.sortByEducation();
+            break;
+        case "s/":
+            companyJobList.sortBySalary();
+            break;
+        default:
+            companyJobList.sortInReverse();
+        }
     }
 
     /**

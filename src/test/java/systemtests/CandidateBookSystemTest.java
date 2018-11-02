@@ -1,18 +1,13 @@
 package systemtests;
 
-import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.recruit.ui.BrowserPanel.DEFAULT_PAGE;
 import static seedu.recruit.ui.StatusBarFooter.SYNC_CANDIDATE_STATUS_INITIAL;
 import static seedu.recruit.ui.StatusBarFooter.SYNC_CANDIDATE_STATUS_UPDATED;
 import static seedu.recruit.ui.StatusBarFooter.TOTAL_CANDIDATES_STATUS;
-import static seedu.recruit.ui.UiPart.FXML_FILE_FOLDER;
 import static seedu.recruit.ui.testutil.GuiTestAssert.assertListMatching;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -31,7 +26,6 @@ import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
-import seedu.recruit.MainApp;
 import seedu.recruit.TestApp;
 import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.index.Index;
@@ -40,9 +34,10 @@ import seedu.recruit.logic.commands.FindCandidateCommand;
 import seedu.recruit.logic.commands.ListCandidateCommand;
 import seedu.recruit.logic.commands.SelectCandidateCommand;
 import seedu.recruit.model.CandidateBook;
+import seedu.recruit.model.CompanyBook;
 import seedu.recruit.model.Model;
+import seedu.recruit.testutil.TypicalCompanies;
 import seedu.recruit.testutil.TypicalPersons;
-import seedu.recruit.ui.BrowserPanel;
 import seedu.recruit.ui.CommandBox;
 
 /**
@@ -69,10 +64,11 @@ public abstract class CandidateBookSystemTest {
     @Before
     public void setUp() {
         setupHelper = new SystemTestSetupHelper();
-        testApp = setupHelper.setupApplication(this::getInitialData, getDataFileLocation());
+        testApp = setupHelper.setupApplication(this::getInitialCandidateData, this::getInitialCompanyData,
+                getCandidateDataFileLocation(), getCompanyDataFileLocation());
         mainWindowHandle = setupHelper.setupMainWindowHandle();
 
-        waitUntilBrowserLoaded(getBrowserPanel());
+        //waitUntilBrowserLoaded(getBrowserPanel());
         assertApplicationStartingStateIsCorrect();
     }
 
@@ -83,17 +79,31 @@ public abstract class CandidateBookSystemTest {
     }
 
     /**
-     * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
+     * Returns the data to be loaded into the file in {@link #getCandidateDataFileLocation()}.
      */
-    protected CandidateBook getInitialData() {
+    protected CandidateBook getInitialCandidateData() {
         return TypicalPersons.getTypicalAddressBook();
     }
 
     /**
-     * Returns the directory of the data file.
+     * Returns the data to be loaded into the file in {@link #getCompanyDataFileLocation()}.
      */
-    protected Path getDataFileLocation() {
-        return TestApp.SAVE_LOCATION_FOR_TESTING;
+    protected CompanyBook getInitialCompanyData() {
+        return TypicalCompanies.getTypicalCompanyBook();
+    }
+
+    /**
+     * Returns the directory of the data file for candidate book.
+     */
+    protected Path getCandidateDataFileLocation() {
+        return TestApp.SAVE_LOCATION_FOR_CANDIDATE_BOOK_TESTING;
+    }
+
+    /**
+     * Returns the directory of the data file for company book.
+     */
+    protected Path getCompanyDataFileLocation() {
+        return TestApp.SAVE_LOCATION_FOR_COMPANY_BOOK_TESTING;
     }
 
     public MainWindowHandle getMainWindowHandle() {
@@ -104,17 +114,18 @@ public abstract class CandidateBookSystemTest {
         return mainWindowHandle.getCommandBox();
     }
 
-    public CandidateDetailsPanelHandle getPersonListPanel() {
-        return mainWindowHandle.getPersonListPanel();
+    public CandidateDetailsPanelHandle getCandidateDetailsPanel() {
+        return mainWindowHandle.getCandidateDetailsPanel();
     }
 
     public MainMenuHandle getMainMenu() {
         return mainWindowHandle.getMainMenu();
     }
 
+    /**
     public BrowserPanelHandle getBrowserPanel() {
         return mainWindowHandle.getBrowserPanel();
-    }
+    }*/
 
     public StatusBarFooterHandle getStatusBarFooter() {
         return mainWindowHandle.getStatusBarFooter();
@@ -136,11 +147,11 @@ public abstract class CandidateBookSystemTest {
 
         mainWindowHandle.getCommandBox().run(command);
 
-        waitUntilBrowserLoaded(getBrowserPanel());
+        //waitUntilBrowserLoaded(getBrowserPanel());
     }
 
     /**
-     * Displays all persons in the recruit book.
+     * Displays all candidates in the recruit book.
      */
     protected void showAllPersons() {
         executeCommand(ListCandidateCommand.COMMAND_WORD);
@@ -149,10 +160,10 @@ public abstract class CandidateBookSystemTest {
     }
 
     /**
-     * Displays all persons with any parts of their names matching {@code keyword} (case-insensitive).
+     * Displays all candidates with any parts of their names matching {@code keyword} (case-insensitive).
      */
     protected void showPersonsWithName(String keyword) {
-        executeCommand(FindCandidateCommand.COMMAND_WORD + " " + keyword);
+        executeCommand(FindCandidateCommand.COMMAND_WORD + " n/" + keyword);
         assertTrue(getModel().getFilteredCandidateList().size()
                 < getModel().getCandidateBook().getCandidateList().size());
     }
@@ -162,11 +173,11 @@ public abstract class CandidateBookSystemTest {
      */
     protected void selectPerson(Index index) {
         executeCommand(SelectCandidateCommand.COMMAND_WORD + " " + index.getOneBased());
-        assertEquals(index.getZeroBased(), getPersonListPanel().getSelectedCardIndex());
+        assertEquals(index.getZeroBased(), getCandidateDetailsPanel().getSelectedCardIndex());
     }
 
     /**
-     * Deletes all persons in the recruit book.
+     * Deletes all candidates in the recruit book.
      */
     protected void deleteAllPersons() {
         executeCommand(ClearCandidateBookCommand.COMMAND_WORD);
@@ -182,8 +193,8 @@ public abstract class CandidateBookSystemTest {
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
-        assertEquals(new CandidateBook(expectedModel.getCandidateBook()), testApp.readStorageAddressBook());
-        assertListMatching(getPersonListPanel(), expectedModel.getFilteredCandidateList());
+        assertEquals(new CandidateBook(expectedModel.getCandidateBook()), testApp.readStorageCandidateBook());
+        assertListMatching(getCandidateDetailsPanel(), expectedModel.getFilteredCandidateList());
     }
 
     /**
@@ -192,11 +203,11 @@ public abstract class CandidateBookSystemTest {
      */
     private void rememberStates() {
         StatusBarFooterHandle statusBarFooterHandle = getStatusBarFooter();
-        getBrowserPanel().rememberUrl();
+        //getBrowserPanel().rememberUrl();
         statusBarFooterHandle.rememberSaveLocation();
         statusBarFooterHandle.rememberTotalPersonsStatus();
         statusBarFooterHandle.rememberSyncStatus();
-        getPersonListPanel().rememberSelectedPersonCard();
+        getCandidateDetailsPanel().rememberSelectedPersonCard();
     }
 
     /**
@@ -205,38 +216,39 @@ public abstract class CandidateBookSystemTest {
      * @see BrowserPanelHandle#isUrlChanged()
      */
     protected void assertSelectedCardDeselected() {
-        assertFalse(getBrowserPanel().isUrlChanged());
-        assertFalse(getPersonListPanel().isAnyCardSelected());
+        //assertFalse(getBrowserPanel().isUrlChanged());
+        assertFalse(getCandidateDetailsPanel().isAnyCardSelected());
     }
 
     /**
-     * Asserts that the browser's url is changed to display the details of the candidate in the candidate list panel at
-     * {@code expectedSelectedCardIndex}, and only the card at {@code expectedSelectedCardIndex} is selected.
+     * Asserts that the browser's url is changed to display the details of the candidate in the candidate details panel
+     * at {@code expectedSelectedCardIndex}, and only the card at {@code expectedSelectedCardIndex} is selected.
      * @see BrowserPanelHandle#isUrlChanged()
      * @see CandidateDetailsPanelHandle#isSelectedPersonCardChanged()
      */
     protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
-        getPersonListPanel().navigateToCard(getPersonListPanel().getSelectedCardIndex());
-        String selectedCardName = getPersonListPanel().getHandleToSelectedCard().getName();
-        URL expectedUrl;
+        getCandidateDetailsPanel().navigateToCard(getCandidateDetailsPanel().getSelectedCardIndex());
+        String selectedCardName = getCandidateDetailsPanel().getHandleToSelectedCard().getName();
+        //URL expectedUrl;
+        /**
         try {
             expectedUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + selectedCardName.replaceAll(" ", "%20"));
         } catch (MalformedURLException mue) {
             throw new AssertionError("URL expected to be valid.", mue);
-        }
-        assertEquals(expectedUrl, getBrowserPanel().getLoadedUrl());
+        }*/
+        //assertEquals(expectedUrl, getBrowserPanel().getLoadedUrl());
 
-        assertEquals(expectedSelectedCardIndex.getZeroBased(), getPersonListPanel().getSelectedCardIndex());
+        assertEquals(expectedSelectedCardIndex.getZeroBased(), getCandidateDetailsPanel().getSelectedCardIndex());
     }
 
     /**
-     * Asserts that the browser's url and the selected card in the candidate list panel remain unchanged.
+     * Asserts that the browser's url and the selected card in the candidate details panel remain unchanged.
      * @see BrowserPanelHandle#isUrlChanged()
      * @see CandidateDetailsPanelHandle#isSelectedPersonCardChanged()
      */
     protected void assertSelectedCardUnchanged() {
-        assertFalse(getBrowserPanel().isUrlChanged());
-        assertFalse(getPersonListPanel().isSelectedPersonCardChanged());
+        //assertFalse(getBrowserPanel().isUrlChanged());
+        assertFalse(getCandidateDetailsPanel().isSelectedPersonCardChanged());
     }
 
     /**
@@ -298,9 +310,8 @@ public abstract class CandidateBookSystemTest {
     private void assertApplicationStartingStateIsCorrect() {
         assertEquals("", getCommandBox().getInput());
         assertEquals("", getResultDisplay().getText());
-        assertListMatching(getPersonListPanel(), getModel().getFilteredCandidateList());
-        assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE), getBrowserPanel().getLoadedUrl());
-        assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
+        assertListMatching(getCandidateDetailsPanel(), getModel().getFilteredCandidateList());
+        assertEquals(Paths.get(".").resolve(testApp.getCandidateStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());
         assertEquals(SYNC_CANDIDATE_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
         assertEquals(String.format(TOTAL_CANDIDATES_STATUS, getModel().getCandidateBook().getCandidateList().size()),

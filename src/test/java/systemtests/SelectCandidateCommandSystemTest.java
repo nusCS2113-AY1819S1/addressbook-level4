@@ -19,7 +19,7 @@ import seedu.recruit.logic.commands.SelectCandidateCommand;
 import seedu.recruit.logic.commands.UndoCandidateBookCommand;
 import seedu.recruit.model.Model;
 
-@Ignore("not updated with new UI changes")
+@Ignore("Works locally only?")
 public class SelectCandidateCommandSystemTest extends CandidateBookSystemTest {
     @Test
     public void select() {
@@ -120,7 +120,7 @@ public class SelectCandidateCommandSystemTest extends CandidateBookSystemTest {
         Model expectedModel = getModel();
         String expectedResultMessage = String.format(
                 MESSAGE_SELECT_PERSON_SUCCESS, expectedSelectedCardIndex.getOneBased());
-        int preExecutionSelectedCardIndex = getPersonListPanel().getSelectedCardIndex();
+        int preExecutionSelectedCardIndex = getCandidateDetailsPanel().getSelectedCardIndex();
 
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);

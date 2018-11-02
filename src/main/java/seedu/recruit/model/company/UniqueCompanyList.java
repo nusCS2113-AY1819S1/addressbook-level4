@@ -38,6 +38,7 @@ public class UniqueCompanyList implements Iterable<Company> {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameCompany);
     }
+
     /**
      * Adds a company to the list.
      * The company must not already exist in the list.
@@ -50,10 +51,11 @@ public class UniqueCompanyList implements Iterable<Company> {
         internalList.add(toAdd);
     }
 
-    /** Returns index of Company using @param companyName in UniqueCompanyList
-     *  Returns -1 if no such company with companyName in UniqueCompanyList
-     *  NOTE: CompanyName is enforced to be unique in CompanyBook
-     *  See {@code isSameCompany()}
+    /**
+     * Returns index of Company using @param companyName in UniqueCompanyList
+     * Returns -1 if no such company with companyName in UniqueCompanyList
+     * NOTE: CompanyName is enforced to be unique in CompanyBook
+     * See {@code isSameCompany()}
      */
     public int getCompanyIndexFromName(CompanyName companyName) {
         for (int index = 0; index < internalList.size(); index++) {
@@ -148,6 +150,13 @@ public class UniqueCompanyList implements Iterable<Company> {
         });
     }
 
+    /**
+     * Sorts the companies in reverse
+     */
+    public void sortInReverse() {
+        Collections.reverse(internalList);
+    }
+
     public void setCompanyList (UniqueCompanyList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -162,8 +171,10 @@ public class UniqueCompanyList implements Iterable<Company> {
         if (!companiesAreUnique(companyList)) {
             throw new DuplicateCompanyException();
         }
-
-        internalList.setAll(companyList);
+        internalList.clear();
+        for (Company company: companyList) {
+            internalList.add(new Company(company));
+        }
     }
 
     /**

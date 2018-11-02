@@ -32,7 +32,8 @@ public class FindCandidateCommandSystemTest extends CandidateBookSystemTest {
          */
         String command = "   " + FindCandidateCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER + "   ";
         Model expectedModel = getModel();
-        ModelHelper.setFilteredList(expectedModel, BENSON, DANIEL); // first names of Benson and Daniel are "Meier"
+        ModelHelper.setCandidateFilteredList(expectedModel,
+                BENSON, DANIEL); // first names of Benson and Daniel are "Meier"
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -46,13 +47,13 @@ public class FindCandidateCommandSystemTest extends CandidateBookSystemTest {
         /** Case: find candidate where candidate list is not
          *  displaying the candidate we are finding -> 1 candidate found */
         command = FindCandidateCommand.COMMAND_WORD + " Carl";
-        ModelHelper.setFilteredList(expectedModel, CARL);
+        ModelHelper.setCandidateFilteredList(expectedModel, CARL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find multiple persons in recruit book, 2 keywords -> 2 persons found */
         command = FindCandidateCommand.COMMAND_WORD + " Benson Daniel";
-        ModelHelper.setFilteredList(expectedModel, BENSON, DANIEL);
+        ModelHelper.setCandidateFilteredList(expectedModel, BENSON, DANIEL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -88,7 +89,7 @@ public class FindCandidateCommandSystemTest extends CandidateBookSystemTest {
         assertFalse(getModel().getCandidateBook().getCandidateList().contains(BENSON));
         command = FindCandidateCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
         expectedModel = getModel();
-        ModelHelper.setFilteredList(expectedModel, DANIEL);
+        ModelHelper.setCandidateFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -99,13 +100,13 @@ public class FindCandidateCommandSystemTest extends CandidateBookSystemTest {
 
         /* Case: find candidate in recruit book, keyword is substring of name -> 0 persons found */
         command = FindCandidateCommand.COMMAND_WORD + " Mei";
-        ModelHelper.setFilteredList(expectedModel);
+        ModelHelper.setCandidateFilteredList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find candidate in recruit book, name is substring of keyword -> 0 persons found */
         command = FindCandidateCommand.COMMAND_WORD + " Meiers";
-        ModelHelper.setFilteredList(expectedModel);
+        ModelHelper.setCandidateFilteredList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -138,9 +139,9 @@ public class FindCandidateCommandSystemTest extends CandidateBookSystemTest {
         /* Case: find while a candidate is selected -> selected card deselected */
         showAllPersons();
         selectPerson(Index.fromOneBased(1));
-        assertFalse(getPersonListPanel().getHandleToSelectedCard().getName().equals(DANIEL.getName().fullName));
+        assertFalse(getCandidateDetailsPanel().getHandleToSelectedCard().getName().equals(DANIEL.getName().fullName));
         command = FindCandidateCommand.COMMAND_WORD + " Daniel";
-        ModelHelper.setFilteredList(expectedModel, DANIEL);
+        ModelHelper.setCandidateFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardDeselected();
 
@@ -148,7 +149,7 @@ public class FindCandidateCommandSystemTest extends CandidateBookSystemTest {
         deleteAllPersons();
         command = FindCandidateCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
         expectedModel = getModel();
-        ModelHelper.setFilteredList(expectedModel, DANIEL);
+        ModelHelper.setCandidateFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 

@@ -19,7 +19,7 @@ public class DeleteCompanyCommandParser implements Parser<DeleteCompanyCommand> 
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCompanyCommand
-     * and returns an DeleteCompanyCommand object for execution.
+     * and returns a DeleteCompanyCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCompanyCommand parse(String args) throws ParseException {

@@ -57,7 +57,7 @@ import seedu.recruit.model.tag.Tag;
 import seedu.recruit.testutil.CandidateBuilder;
 import seedu.recruit.testutil.PersonUtil;
 
-@Ignore("not updated with new UI changes")
+@Ignore
 public class AddCandidateCommandSystemTest extends CandidateBookSystemTest {
 
     @Test

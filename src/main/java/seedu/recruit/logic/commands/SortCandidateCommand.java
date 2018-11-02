@@ -8,6 +8,8 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_SALARY;
 
+import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.parser.Prefix;
 import seedu.recruit.model.Model;
@@ -28,7 +30,7 @@ public class SortCandidateCommand extends Command {
             + ", Job " + PREFIX_JOB
             + ", Education " + PREFIX_EDUCATION
             + ", Salary " + PREFIX_SALARY
-            + " or sort the current order in reverse with /r \n"
+            + " or sort the current order in reverse with r/ \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME;
 
     private static Prefix prefixToSort;
@@ -40,6 +42,7 @@ public class SortCandidateCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
+        EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
         model.sortCandidates(prefixToSort);
         model.commitCandidateBook();
         return new CommandResult(MESSAGE_SUCCESS);

@@ -118,9 +118,10 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateCandidate(Candidate target, Candidate editedCandidate) {
         requireAllNonNull(target, editedCandidate);
-
+        versionedCompanyBook.cascadeJobListWithEditedCandidate(target, editedCandidate);
         versionedCandidateBook.updatePerson(target, editedCandidate);
         indicateCandidateBookChanged();
+        indicateCompanyBookChanged();
     }
 
     @Override
@@ -128,7 +129,6 @@ public class ModelManager extends ComponentManager implements Model {
         versionedCandidateBook.sortCandidates(prefix);
         indicateCandidateBookChanged();
     }
-
 
     // =========== Filtered Candidate List Accessors =================================================== //
 
@@ -234,13 +234,13 @@ public class ModelManager extends ComponentManager implements Model {
         indicateCompanyBookChanged();
     }
 
-    // =========== Filtered Company List Accessors ===================================================== //
-
     @Override
     public void sortCompanies(Prefix prefix) {
         versionedCompanyBook.sortCompanies(prefix);
         indicateCompanyBookChanged();
     }
+
+    // =========== Filtered Company List Accessors ===================================================== //
 
     /**
      * Returns an unmodifiable view of the list of {@code Company} backed by the internal list of
@@ -321,6 +321,14 @@ public class ModelManager extends ComponentManager implements Model {
         indicateCompanyBookChanged();
     }
 
+    @Override
+    public void sortJobOffers(Prefix prefix) {
+        versionedCompanyBook.sortJobOffers(prefix);
+        indicateCompanyBookChanged();
+    }
+
+    // =========== Filtered Company Job List Accessors ===================================================== //
+
     /**
      * Returns an unmodifiable view of the job lists of all companies {@code Company} backed by the internal list of
      * {@code versionedCompanyBook}
@@ -337,10 +345,16 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void shortListCandidateToJobOffer(Candidate candidate, JobOffer jobOffer) {
+    public void shortlistCandidateToJobOffer(Candidate candidate, JobOffer jobOffer) {
         jobOffer.shortlistCandidate(candidate);
         indicateCompanyBookChanged();
     };
+
+    @Override
+    public void deleteShortlistedCandidateFromJobOffer(Candidate candidate, JobOffer jobOffer) {
+        jobOffer.deleteShortlistedCandidate(candidate);
+        indicateCompanyBookChanged();
+    }
 
     // ================================== Email Command functions ====================================== //
 

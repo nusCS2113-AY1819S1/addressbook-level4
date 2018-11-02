@@ -27,7 +27,7 @@ import seedu.recruit.model.tag.Tag;
 /**
  * Parses input arguments and creates a new EditCandidateCommand object
  */
-public class EditCandidateCommandParser implements Parser<EditCandidateCommand> {
+public class  EditCandidateCommandParser implements Parser<EditCandidateCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCandidateCommand

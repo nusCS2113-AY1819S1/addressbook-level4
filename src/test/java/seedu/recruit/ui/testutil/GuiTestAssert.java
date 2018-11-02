@@ -7,13 +7,19 @@ import java.util.stream.Collectors;
 
 import guitests.guihandles.CandidateCardHandle;
 import guitests.guihandles.CandidateDetailsPanelHandle;
+import guitests.guihandles.CompanyCardHandle;
+import guitests.guihandles.CompanyJobDetailsPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import seedu.recruit.model.candidate.Candidate;
+import seedu.recruit.model.company.Company;
 
 /**
  * A set of assertion methods useful for writing GUI tests.
  */
 public class GuiTestAssert {
+
+    // ================================ COMPANY BOOK ================================================ //
+
     /**
      * Asserts that {@code actualCard} displays the same values as {@code expectedCard}.
      */
@@ -59,6 +65,7 @@ public class GuiTestAssert {
         assertListMatching(candidateDetailsPanelHandle, candidates.toArray(new Candidate[0]));
     }
 
+
     /**
      * Asserts the size of the list in {@code candidateDetailsPanelHandle} equals to {@code size}.
      */
@@ -67,6 +74,61 @@ public class GuiTestAssert {
         assertEquals(size, numberOfPeople);
     }
 
+    // ================================ COMPANY BOOK ================================================ //
+
+    /**
+     * Asserts that {@code actualCard} displays the same values as {@code expectedCard}.
+     */
+    public static void assertCompanyCardEquals(CompanyCardHandle expectedCard,
+                                               CompanyCardHandle actualCard) {
+        assertEquals(expectedCard.getId(), actualCard.getId());
+        assertEquals(expectedCard.getName(), actualCard.getName());
+        assertEquals(expectedCard.getAddressId(), actualCard.getAddressId());
+        assertEquals(expectedCard.getEmailId(), actualCard.getEmailId());
+        assertEquals(expectedCard.getPhoneId(), actualCard.getPhoneId());
+    }
+
+    /**
+     * Asserts that {@code actualCard} displays the details of {@code expectedCompany}.
+     */
+    public static void assertCompanyCardDisplaysPerson(Company expectedCompany,
+                                                       CompanyCardHandle actualCard) {
+        assertEquals(expectedCompany.getCompanyName().value, actualCard.getName());
+        assertEquals(expectedCompany.getAddress().value, actualCard.getAddressId());
+        assertEquals(expectedCompany.getEmail().value, actualCard.getEmailId());
+        assertEquals(expectedCompany.getPhone().value, actualCard.getPhoneId());
+    }
+
+    /**
+     * Asserts that the list in {@code companyJobDetailsPanelHandle} displays the details of {@code companies}
+     * correctly and in the correct order.
+     */
+    public static void assertCompanyListMatching(CompanyJobDetailsPanelHandle companyJobDetailsPanelHandle,
+                                          Company... companies) {
+        for (int i = 0; i < companies.length; i++) {
+            companyJobDetailsPanelHandle.navigateToCard(i);
+            assertCompanyCardDisplaysPerson(companies[i], companyJobDetailsPanelHandle.getCompanyCardHandle(i));
+        }
+    }
+
+    /**
+     * Asserts that the list in {@code companyJobDetailsPanelHandle} displays the details of
+     * {@code companies} correctly and in the correct order.
+     */
+    public static void assertCompanyListMatching(CompanyJobDetailsPanelHandle companyJobDetailsPanelHandle,
+                                          List<Company> companies) {
+        assertCompanyListMatching(companyJobDetailsPanelHandle, companies.toArray(new Company[0]));
+    }
+
+    /**
+     * Asserts the size of the list in {@code companyJobDetailsPanelHandle} equals to {@code size}.
+     */
+    public static void assertCompanyListSize(CompanyJobDetailsPanelHandle companyJobDetailsPanelHandle, int size) {
+        int numberOfCompanies = companyJobDetailsPanelHandle.getListSize();
+        assertEquals(size, numberOfCompanies);
+    }
+
+    // ================================ RESULT DISPLAY ============================================== //
     /**
      * Asserts the message shown in {@code resultDisplayHandle} equals to {@code expected}.
      */

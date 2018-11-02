@@ -19,8 +19,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
+import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.commons.util.CollectionUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
@@ -85,6 +87,8 @@ public class EditCandidateCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
+
         List<Candidate> lastShownList = model.getFilteredCandidateList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -94,6 +98,11 @@ public class EditCandidateCommand extends Command {
         Candidate candidateToEdit = lastShownList.get(index.getZeroBased());
         Candidate editedCandidate = createEditedPerson(candidateToEdit, editPersonDescriptor);
 
+        Tag blacklistedTag = new Tag("BLACKLISTED");
+        if (candidateToEdit.getTags().contains(blacklistedTag)) {
+            throw new CommandException(BlacklistCommand.MESSAGE_WARNING_BLACKLISTED_PERSON);
+        }
+
         if (!candidateToEdit.isSameCandidate(editedCandidate) && model.hasCandidate(editedCandidate)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
@@ -101,6 +110,7 @@ public class EditCandidateCommand extends Command {
         model.updateCandidate(candidateToEdit, editedCandidate);
         model.updateFilteredCandidateList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitCandidateBook();
+        model.commitCompanyBook();
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedCandidate));
     }
 

@@ -49,7 +49,7 @@ Graphical User Interface (GUI).
 .  Copy the file to the folder you want to use as the home folder for your Recruit Book.
 .  Double-click the file to start the app. The GUI (as shown in Figure 1) should appear in a few seconds.
 [NOTE]
-RecruitBook opens Company Book by default.
+RecruitBook opens Candidate Book by default.
 
 .Ui of RecruitBook
 image::Ui.png[width="790"]
@@ -95,6 +95,7 @@ Views help information of the various commands in RecruitBook.
 .GUI of Help on Menu Bar
 image::help.png[width="390"]
 
+// tag::switch[]
 === Switching Books : `switch`
 
 Toggles between Candidate Book and Company Book according to your viewing needs.
@@ -109,8 +110,10 @@ and does the switch to the other book for you when you enter the `switch` comman
 
 .GUI of Switch Book on Menu Bar
 image::switchBook.png[width="390"]
+// tag::switch[]
 
-=== Adding a candidate / company / job  : `addc` `addC`
+// tag::add[]
+=== Adding a candidate / company / job  : `addc` `addC` `addj`
 
 ==== Adds a candidate to the RecruitBook
 Format: `addc` +
@@ -122,17 +125,9 @@ Entering this command will prompt you the following: +
 
 Examples:
 
-* `n/John Doe g/M x/18 p/91238123 e/johndoe@gmail.com a/123, Central Boulevard, #01-111, 600123 j/WAITER h/A LEVEL s/1200`
-* `n/Mary Loe g/M x/18 p/82238123 e/maryloe@gmail.com a/113, South Boulevard, #01-111, 600123 j/WAITER h/O LEVEL s/NA`
+* `n/John Doe g/M x/18 p/91238123 e/johndoe@gmail.com a/123, Central Boulevard, #01-111, 600123 j/WAITER h/ALEVELS s/1200`
+* `n/Mary Loe g/M x/18 p/82238123 e/maryloe@gmail.com a/113, South Boulevard, #01-111, 600123 j/WAITER h/OLEVELS s/1000`
 
-After keying in the details, you will be further prompted for details of job experience: +
-*`Enter job experience (if any) of the candidate in the following format:`* +
-`j/JOB y/YEARS_OF_EXPERIENCE c/COMPANY`
-
-Examples:
-
-* `j/Store Manager y/1 c/Mcdonalds`
-* `j/Cashier y/2 c/KFC`
 
 ==== Adds a company to the RecruitBook
 Format: `addC c/UNIQUE_COMPANY_NAME a/ADDRESS e/EMAIL p/PHONE` +
@@ -149,16 +144,83 @@ Entering this command will prompt you the following: +
 *`Enter the following details of the job in the format:`* +
 `c/COMPANY j/JOB_TITLE g/GENDER xr/AGE_RANGE h/EDUCATION s/SALARY` +
 `(Enter 'cancel' to stop adding jobs)` +
-`Example: c/McDonalds j/cashier g/M xr/20-30 h/O levels s/1200`
+`Example: c/McDonalds j/cashier g/M xr/20-30 h/OLEVELS s/1200`
 
-Note: COMPANY specified has to be added to RecruitBook first!
+[NOTE]
+COMPANY specified has to be added to RecruitBook first!
 
 Examples:
 
-*	`c/Subway j/Cashier g/M xr/20-30 h/O levels s/1200`
-*	`c/KFC j/Cook g/F xr/20-30 h/O levels s/1400`
+*	`c/Subway j/Cashier g/M xr/20-30 h/OLEVELS s/1200`
+*	`c/KFC j/Cook g/F xr/20-30 h/OLEVELS s/1400`
 
-=== Editing a candidate / company / job : `edit`
+
+// end::add[]
+
+//tag::find[]
+=== Finding candidates/companies/job offers : `findc` `findC` `findj` +
+Each `find` command is differentiated by the letter that comes right after the `find` word.
+
+Our app’s GUI provides two different views where the Candidate Book view and the Company Book view shows the details of all the candidates and companies respectively. +
+
+Entering commands in the other book will automatically switch your view to the correct book and still display the details of the results that you are searching for. +
+
+****
+* Each search field has to come with a preceding prefix e.g. `n/NAME`, `p/PHONE`
+* The search is case insensitive e.g `n/hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `n/Hans n/Bo` will match `Bo Hans`
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Candidates matching at least one keyword will be returned (i.e. `OR` search). e.g. `n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`
+****
+
+==== Finds names of candidates from RecruitBook based on search fields that you have entered.
+Format: `findc <tag>/KEYWORD` +
+Supported tags: `n/NAME`, `p/PHONE`, `e/EMAIL`, `a/ADDRESS`, `x/AGE`, `h/HIGHEST EDUCATION`, `g/GENDER`, `j/JOB INTERESTED`, `s/EXPECTED SALARY)`, `t/TAGS`
+
+Examples:
+
+* `findc n/john` +
+(Returns any candidate having the name John)
+
+* `findc n/alice p/91234567` +
+(Returns any candidate with the name alice or any candidate that has phone number 91234567)
+
+* `findc e/helloworld@example.com` +
+(Returns any candidates having email helloworld@example.com)
+
+==== Finds names of companies from RecruitBook based on searched fields that you have entered.
+Format: `findC <tag>/KEYWORD` +
+Supported tags: `c/COMPANY NAME`, `p/PHONE`, `e/EMAIL`, `a/ADDRESS`
+
+Examples:
+
+* `findC c/KFC c/McDonalds` +
+(Returns any company having either the name `KFC` or `McDonalds`)
+
+* `findC n/HanBaoBao Pte Ltd a/Yishun MRT` +
+(Returns any company having the name `HanBaoBao Pte Ltd` or with address saved as `Yishun MRT`)
+
+==== Finds job offers from a selected company based on searched fields that you have entered.
+Format: `findj <tag>/KEYWORD` +
+Supported tags: `c/COMPANY NAME`, `j/JOB OFFER`, `g/GENDER`, `s/SALARY`, `xr/AGE RANGE`, `h/HIGHEST EDUCATION`
+
+****
+* If you wish to search for job offers from only one company, you should include the name of that particular company in the searched field together with the other search fields.
+****
+
+Examples:
+
+To look for job offers listed by KFC only, include the name of company in the searched field.
+
+* `findj c/KFC j/cashier` +
+(Returns any cashier job offer listed by KFC)
+* `findj c/KFC s/1500 h/SECONDARY` +
+(Returns any job offer listed by KFC that has a pay of $1500 and requires highest education level attained to be `SECONDARY` level)
+
+//end::find[]
+
+// tag::edit[]
+=== Editing a candidate / company / job : `editc` `editC` `editj`
 
 ==== Edits attributes of the candidate at the specified index `INDEX`
 Format: `editc <INDEX>`
@@ -168,8 +230,8 @@ The index must be an index number shown in the displayed candidates list.
 
 Example:
 
-* `editc 1 n/John Doe p/91234567 e/johndoe@example.com` +
-(Edits the name, phone number and email address of the candidate with index 1 to be John Doe, 91234567 and johndoe@example.com respectively)
+* `editc 1 n/John Doe p/91234567` +
+(Edits the name, phone number and email address of the candidate with index 1 to be John Doe and 91234567 respectively)
 
 * `editc 3 t/` +
 (Edits and clears all existing tags belonging to the candidate at index 3)
@@ -182,7 +244,7 @@ The index must be an index number shown in the displayed company list.
 
 Example:
 
-*   `editC 1 n/KFC p/62226111` +
+*   `editC 1 c/KFC p/62226111` +
 (Edits the name and phone number of the company with index 1 to be KFC and 62226111
 
 ==== Edits details of a job offer
@@ -193,9 +255,12 @@ This index must be an index number shown in the displayed job list.
 
 Examples:
 
-*	`editj 1 x/20-30` +
+*	`editj 1 xr/20-30` +
 (Edits the `MIN_AGE-MAX_AGE` attribute of the 1st job offer to be of 20 to 30 years of age)
 
+// end::edit[]
+
+// tag::delete[]
 === Deleting candidates / companies / job offers : `delete`
 
 ==== Deleting candidate(s)
@@ -243,6 +308,30 @@ Step 1. `listj` +
 Step 2. `deletej 5-4,6` +
 (Deletes the 4th, 5th and 6th job in the job list)
 
+// end::delete[]
+
+// tag::deleteShortlist[]
+=== Deleting a shortlisted candidate: `deleteShortlist`
+
+[IMPORTANT]
+Deleting a shortlisted candidate is a 4-stage process. To exit from this process, enter `cancel` command as explained in <<Exits from any intermediate command: `cancel`>>.
+
+Format: `deleteShortlist`
+
+. *Initialization*
+.. Type `deleteShortlist` and press kbd:[Enter] to initialize the delete process.
+. *Choose the company*
+.. Type `selectCompany` `<INDEX>` and press kbd:[Enter] to select the company.
+. *Choose the job offer*
+.. Type `selectJob` `<INDEX>` and press kbd:[Enter] to select the job offer.
+. *Choose the candidate to delete*
+.. Type `delete` `<INDEX>` and press kbd:[Enter] to select the shortlisted candidate to delete.
+
+[NOTE]
+Index must be an index number shown in the displayed list.
+// end::deleteShortlist[]
+
+// tag::list[]
 === Listing details of candidates / companies / jobs: `listc` `listC`
 
 ==== Shows a list of all candidates
@@ -277,85 +366,36 @@ image::companyPanel1.png[width="790", align="left"]
 image::companyPanel2.png[width="790", align="left"]
 .Selecting MOE to show the available job offers
 image::companyPanel3.png[width="790", align="left"]
+// end::list[]
 
-=== Selecting a candidate : `select`
+// tag::select[]
+=== Selecting a candidate / company / job offer: `select` `selectCompany` `selectJob`
+
+==== Selecting a candidate :
 Format: `select` `<INDEX>`
 
-=== Selecting a company : `selectCompany`
+. Selects the candidate with the specified INDEX
+. This index must be an index number shown in the displayed candidate list.
+
+==== Selecting a company :
 Format: `selectCompany` `<INDEX>`
 
-=== Selecting a job offer : `selectJob`
+. Selects the company with the specified INDEX
+. This index must be an index number shown in the displayed company list.
+
+==== Selecting a job offer :
 Format: `selectJob` `<INDEX>`
 
-=== Locating candidates by search parameter : `find`
-==== Finds names of candidates from RecruitBook based on the search parameter.
-Format: `findc <tag>/KEYWORD` +
-Supported tags: `n/NAME`, `p/PHONE`, `e/EMAIL`, `a/ADDRESS`
+. Selects the job offer with the specified INDEX
+. This index must be an index number shown in the displayed job offer list.
+// end::select[]
 
-****
-* The search is case insensitive e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Candidates matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-****
-
-Examples:
-
-* `findc n/john` +
-(Returns any candidate having the name John)
-
-* `findc p/98` +
-(Returns any candidate having phone number with 98 inside)
-
-* `findc e/helloworld@example.com` +
-(Returns any candidates having email helloworld@example.com)
-
-==== Finds names of companies from RecruitBook based on the searched name.
-Format: `findC NAME` +
-
-****
-* The search is case insensitive. e.g. `kfc` will match `KFC`
-* The order of the keywords does not matter. e.g. `Pte Ltd Hanbaobao` will match `Hanbaobao Pte Ltd`
-* Only full words will be matched e.g. `Mc` will not match `McDonalds`
-* Companies matching at least one keyword will be returned (i.e. `OR` search)
-****
-
-Examples:
-
-* `findC McDonalds` +
-(Returns any company having the name McDonalds)
-
-=== Filtering by a specific tag : `filter`
-
-==== Filters out the names of the people that falls under the searched category
-
-Format: `filter <tag>/KEYWORD` +
-Supported tags: `h/`, `j/`, `s/`, `x/`
-
-Searched field *must be of the full length* that is recorded in the RecruitBook
-
-Examples:
-
-* `filter h/O LEVEL` +
-(Returns any candidate with `O LEVEL` as the highest education level)
-
-* `filter j/Librarian` +
-(Returns any candidate searching for the job `Librarian`)
-
-* `filter s/$4000` +
-(Returns any candidate that expects a salary of $4000)
-
-* `filter x/18` +
-(Returns any candidate that is aged 18)
-
-==== Exits from the filter interface and system proceeds to ask for next command
-Format: `cancel`
-
-=== Sorting candidates / company / job : `sort`
+// tag::sort[]
+=== Sorting candidates / company / job : `sortc` `sortC` `sortj`
 
 ==== Sorting candidates based on different fields
 Format: `sortc <tag>` +
-Supported tags: `n/`, `x/`, `e/`, `j/`, `h/`, `s/`
+Supported tags: `n/`, `x/`, `e/`, `j/`, `h/`, `s/`, `r/`
 
 *   Only one tag/field is included when using the sort command
 *   There must be one tag/field included
@@ -364,9 +404,58 @@ Examples:
 
 *   `sortc n/` +
 (Sorts all candidates lexicographically by their name)
-*   `sortc s/` +
-(Sorts all candidates by their salary)
+*   `sortc r/` +
+(Sorts all candidates in reverse)
 
+==== Sorting companies based on different fields
+Format: `sortC <tag>` +
+Supported tags: `c/`, `e/`, `r/`
+
+*   Only one tag/field is included when using the sort command
+*   There must be one tag/field included
+
+Examples:
+
+*   `sortC c/` +
+(Sorts all companies lexicographically by their company's name)
+*   `sortC r/` +
+(Sort all companies in reverse)
+
+==== Sorting job offers based on different fields
+Format: `sortj <tag>` +
+Supported tags: `c/`, `j/`, `xr/`, `h/`, `s/`, `r/`
+
+*   Only one tag/field is included when using the sort command
+*   There must be one tag/field included
+
+Examples:
+
+*   `sortj j/` +
+(Sorts all job offers lexicographically by their titles)
+*   `sortj r/` +
+(Sorts all job offers in reverse)
+// end::sort[]
+
+// tag::blacklist[]
+=== Blacklisting candidates : `blacklist` `blacklist rm`
+Format: `blacklist` `<INDEX>`
+
+Blacklists the candidate with the specified `INDEX`.
+The index must be an index number shown in the displayed candidates list
+
+[NOTE]
+Blacklisting candidates will prevent them from being edited or shortlisted.
+Candidates can be unblacklisted by using `blacklist rm`.
+
+Examples:
+
+*   `blacklist 1` +
+(Blacklists first candidate in the list)
+*   `blacklist rm 1` +
+(Unblacklists first candidate in the list)
+// end::blacklist[]
+
+// tag::shortlist[]
 === Shortlisting candidates for a job offer : `shortlist`
 
 [IMPORTANT]
@@ -384,6 +473,10 @@ Format: `shortlist`
 .. Type `select` `<INDEX>` and press kbd:[Enter] to select the candidate to shortlist.
 . *Confirm the details*
 .. Type `confirm` and press kbd:[Enter] to confirm.
+
+[NOTE]
+Index must be an index number shown in the displayed list.
+// end::shortlist[]
 
 // tag::email[]
 === Sending emails : `email`
@@ -457,10 +550,11 @@ Examples:
 
 // end::email[]
 
-=== Exits from any intermediate command: `cancel`
+=== Exiting from any intermediate command: `cancel`
 
 Format : `cancel`
 
+// tag::clear[]
 === Clearing all entries : `clear`
 
 Clears all entries from the Candidate Book. +
@@ -469,13 +563,15 @@ Format: `clearc`
 Clears all entries from the Company Book. +
 Format: `clearC`
 
+// end::clear[]
+
 === Exiting the program : `exit`
 
 Exits the program. +
 
 * Format in CLI : `exit`
 
-* GUI (refer to Figure 4) : At the top of the application, locate the menu bar and click `File` > `exit`.
+* GUI (refer to Figure 9) : At the top of the application, locate the menu bar and click `File` > `exit`.
 
 .GUI of Exit on Menu Bar
 image::exit.png[width="390"]
@@ -498,17 +594,32 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
-*	*Help* : `help`
-*	*Add* : `addc n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS …` +
+|=====
+|*Help* | `help`
+|   *Switch* | `switch`
+|	*Add* | `addc n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS …`
+
             e.g. `addc n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 …`
-*	*List* : `list [jobs /candidates]`
-*	*Edit* : `editc <INDEX> [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` or `editC <INDEX>` +
+|	*Edit* | `editc <INDEX> [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` or `editC <INDEX>` +
+
             e.g. `editc 2 e/jameslee@example.com`, `editC 5`
-*	*Find* : `find <tag>/KEYWORD [MORE_KEYWORDS]` +
-*	*Filter* : `filter <tag> [h/highest education level] [j/job] [s/expected salary] [x/age]` +
-            e.g. `filter h/O LEVEL`
-*	*Delete* : `deletec <INDEX>` or `deletej <INDEX>` +
+|	*Delete* | `deletec <INDEX>` or `deletej <INDEX>` +
+
             e.g. `deletec 1 `, `deletej 5`
-*	*Clear* : `clear`
-*	*Exit* : `exit`
-*   *Email* : `email`
+|   *Delete Shortlisted Candidate* | `deleteShortlist`
+|	*List all Candidates* | `listc`
+|   *List all Companies and all Job Offers* | `listC`
+|   *Select Candidate* | `select` `<INDEX>`
+|   *Select Company* | `selectCompany` `<INDEX>`
+|   *Select Job Offer* | `selectJob` `<INDEX>`
+|	*Find* | `find <tag>/KEYWORD [MORE_KEYWORDS]` +
+|	*Filter* | `filter <tag> [h/highest education level] [j/job] [s/expected salary] [x/age]` +
+
+            e.g. `filter h/O LEVEL`
+|   *Sort* | `sortc` or `sortC`
+|   *Blacklist* | `blacklist`
+|   *Shortlist Candidate* | `shortlist`
+|   *Email* | `email`
+|   *Cancel* | `cancel`
+|	*Clear* | `clear`
+|	*Exit* | `exit`

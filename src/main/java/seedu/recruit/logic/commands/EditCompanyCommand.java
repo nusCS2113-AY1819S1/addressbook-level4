@@ -10,8 +10,10 @@ import static seedu.recruit.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
+import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.commons.util.CollectionUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
@@ -21,6 +23,7 @@ import seedu.recruit.model.commons.Email;
 import seedu.recruit.model.commons.Phone;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
+import seedu.recruit.model.joboffer.JobOffer;
 import seedu.recruit.model.joboffer.UniqueJobList;
 
 /**
@@ -66,6 +69,8 @@ public class EditCompanyCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
+
         List<Company> lastShownList = model.getFilteredCompanyList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -96,9 +101,28 @@ public class EditCompanyCommand extends Command {
         Phone updatedPhone = editCompanyDescriptor.getPhone().orElse(companyToEdit.getPhone());
         Email updatedEmail = editCompanyDescriptor.getEmail().orElse(companyToEdit.getEmail());
         Address updatedAddress = editCompanyDescriptor.getAddress().orElse(companyToEdit.getAddress());
-        UniqueJobList sameJobList = companyToEdit.getUniqueJobList();
+        UniqueJobList updatedJobList = cascadeToJobOfferList(updatedName, companyToEdit);
 
-        return new Company(updatedName, updatedAddress, updatedEmail, updatedPhone, sameJobList);
+        return new Company(updatedName, updatedAddress, updatedEmail, updatedPhone, updatedJobList);
+    }
+
+    /**
+     * Creates and returns a {@code UniqueJobList} with cascaded names if the company name of the job offers
+     * in the list has been updated.
+     */
+    private static UniqueJobList cascadeToJobOfferList (CompanyName updatedName, Company companyToEdit) {
+        if (updatedName == companyToEdit.getCompanyName()) {
+            return companyToEdit.getUniqueJobList();
+        } else {
+            UniqueJobList updatedJobList = new UniqueJobList();
+
+            for (JobOffer offer : companyToEdit.getUniqueJobList()) {
+                JobOffer updatedOffer = new JobOffer(updatedName, offer.getJob(), offer.getGender(),
+                        offer.getAgeRange(), offer.getEducation(), offer.getSalary(), offer.getUniqueCandidateList());
+                updatedJobList.add(updatedOffer);
+            }
+            return updatedJobList;
+        }
     }
 
     @Override

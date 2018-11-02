@@ -12,12 +12,15 @@ import seedu.recruit.commons.exceptions.DataConversionException;
 import seedu.recruit.commons.util.FileUtil;
 import seedu.recruit.commons.util.XmlUtil;
 import seedu.recruit.model.CandidateBook;
+import seedu.recruit.model.CompanyBook;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.ModelManager;
 import seedu.recruit.model.ReadOnlyCandidateBook;
+import seedu.recruit.model.ReadOnlyCompanyBook;
 import seedu.recruit.model.UserPrefs;
 import seedu.recruit.storage.UserPrefsStorage;
 import seedu.recruit.storage.XmlSerializableCandidateBook;
+import seedu.recruit.storage.XmlSerializableCompanyBook;
 import seedu.recruit.testutil.TestUtil;
 import systemtests.ModelHelper;
 
@@ -27,26 +30,41 @@ import systemtests.ModelHelper;
  */
 public class TestApp extends MainApp {
 
-    public static final Path SAVE_LOCATION_FOR_TESTING = TestUtil.getFilePathInSandboxFolder("sampleData.xml");
+    public static final Path SAVE_LOCATION_FOR_CANDIDATE_BOOK_TESTING =
+            TestUtil.getFilePathInSandboxFolder("sampleCandidateData.xml");
+    public static final Path SAVE_LOCATION_FOR_COMPANY_BOOK_TESTING =
+            TestUtil.getFilePathInSandboxFolder("sampleCompanyData.xml");
     public static final String APP_TITLE = "Test App";
 
     protected static final Path DEFAULT_PREF_FILE_LOCATION_FOR_TESTING =
             TestUtil.getFilePathInSandboxFolder("pref_testing.json");
-    protected Supplier<ReadOnlyCandidateBook> initialDataSupplier = () -> null;
-    protected Path saveFileLocation = SAVE_LOCATION_FOR_TESTING;
+    protected Supplier<ReadOnlyCandidateBook> initialCandidateDataSupplier = () -> null;
+    protected Supplier<ReadOnlyCompanyBook> initialCompanyDataSupplier = () -> null;
+    protected Path saveCandidateFileLocation = SAVE_LOCATION_FOR_CANDIDATE_BOOK_TESTING;
+    protected Path saveCompanyFileLocation = SAVE_LOCATION_FOR_COMPANY_BOOK_TESTING;
 
     public TestApp() {
     }
 
-    public TestApp(Supplier<ReadOnlyCandidateBook> initialDataSupplier, Path saveFileLocation) {
+    public TestApp(Supplier<ReadOnlyCandidateBook> initialCandidateDataSupplier,
+                   Supplier<ReadOnlyCompanyBook> initialCompanyDataSupplier,
+                   Path saveCandidateFileLocation, Path saveCompanyFileLocation) {
         super();
-        this.initialDataSupplier = initialDataSupplier;
-        this.saveFileLocation = saveFileLocation;
+        this.initialCandidateDataSupplier = initialCandidateDataSupplier;
+        this.initialCompanyDataSupplier = initialCompanyDataSupplier;
+        this.saveCandidateFileLocation = saveCandidateFileLocation;
+        this.saveCompanyFileLocation = saveCompanyFileLocation;
 
-        // If some initial local data has been provided, write those to the file
-        if (initialDataSupplier.get() != null) {
-            createDataFileWithData(new XmlSerializableCandidateBook(this.initialDataSupplier.get()),
-                    this.saveFileLocation);
+        // If some initial local candidate data has been provided, write those to the file
+        if (initialCandidateDataSupplier.get() != null) {
+            createDataFileWithData(new XmlSerializableCandidateBook(this.initialCandidateDataSupplier.get()),
+                    this.saveCandidateFileLocation);
+        }
+
+        // If some initial local company data has been provided, write those to the file
+        if (initialCompanyDataSupplier.get() != null) {
+            createDataFileWithData(new XmlSerializableCompanyBook(this.initialCompanyDataSupplier.get()),
+                    this.saveCompanyFileLocation);
         }
     }
 
@@ -64,14 +82,15 @@ public class TestApp extends MainApp {
         double x = Screen.getPrimary().getVisualBounds().getMinX();
         double y = Screen.getPrimary().getVisualBounds().getMinY();
         userPrefs.updateLastUsedGuiSetting(new GuiSettings(600.0, 600.0, (int) x, (int) y));
-        userPrefs.setCandidateBookFilePath(saveFileLocation);
+        userPrefs.setCandidateBookFilePath(saveCandidateFileLocation);
+        userPrefs.setCompanyBookFilePath(saveCompanyFileLocation);
         return userPrefs;
     }
 
     /**
-     * Returns a defensive copy of the recruit book data stored inside the storage file.
+     * Returns a defensive copy of the candidate book data stored inside the storage file.
      */
-    public CandidateBook readStorageAddressBook() {
+    public CandidateBook readStorageCandidateBook() {
         try {
             return new CandidateBook(storage.readCandidateBook().get());
         } catch (DataConversionException dce) {
@@ -82,10 +101,30 @@ public class TestApp extends MainApp {
     }
 
     /**
-     * Returns the file path of the storage file.
+     * Returns a defensive copy of the company book data stored inside the storage file.
      */
-    public Path getStorageSaveLocation() {
+    public CompanyBook readStorageCompanyBook() {
+        try {
+            return new CompanyBook(storage.readCompanyBook().get());
+        } catch (DataConversionException dce) {
+            throw new AssertionError("Data is not in the CompanyBook format.", dce);
+        } catch (IOException ioe) {
+            throw new AssertionError("Storage file cannot be found.", ioe);
+        }
+    }
+
+    /**
+     * Returns the file path of the candidate book in the storage file.
+     */
+    public Path getCandidateStorageSaveLocation() {
         return storage.getCandidateBookFilePath();
+    }
+
+    /**
+     * Returns the file path of the company book in the storage file
+     */
+    public Path getCompanyStorageSaveLocation() {
+        return storage.getCompanyBookFilePath();
     }
 
     /**
@@ -93,7 +132,8 @@ public class TestApp extends MainApp {
      */
     public Model getModel() {
         Model copy = new ModelManager((model.getCandidateBook()), model.getCompanyBook(), new UserPrefs());
-        ModelHelper.setFilteredList(copy, model.getFilteredCandidateList());
+        ModelHelper.setCandidateFilteredList(copy, model.getFilteredCandidateList());
+        ModelHelper.setCompanyFilteredList(copy, model.getFilteredCompanyList());
         return copy;
     }
 

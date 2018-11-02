@@ -184,6 +184,11 @@ public interface Model {
     void addJobOffer(CompanyName companyName, JobOffer jobOffer);
 
     /**
+     * Sorts the list of job offers in CompanyBook
+     */
+    void sortJobOffers(Prefix prefix);
+
+    /**
      * Returns true if a company has a job offer with the same identity as {@code jobOffer} exists in the CompanyBook.
      */
     boolean hasJobOffer(CompanyName companyName, JobOffer jobOffer);
@@ -224,7 +229,14 @@ public interface Model {
      * @param jobOffer job offer to shortlist to
      * @param candidate candidate to be shortlisted
      */
-    void shortListCandidateToJobOffer(Candidate candidate, JobOffer jobOffer );
+    void shortlistCandidateToJobOffer(Candidate candidate, JobOffer jobOffer);
+
+    /**
+     * Deletes a candidate from the candidateList of the jobOffer
+     * @param jobOffer job offer to delete from
+     * @param candidate candidate to be deleted
+     */
+    void deleteShortlistedCandidateFromJobOffer(Candidate candidate, JobOffer jobOffer);
 
     // ================================== Email Command functions ===================================== //
 

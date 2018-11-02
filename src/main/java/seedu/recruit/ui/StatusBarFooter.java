@@ -22,7 +22,7 @@ import seedu.recruit.commons.events.model.CompanyBookChangedEvent;
  */
 public class StatusBarFooter extends UiPart<Region> {
 
-    public static final String SYNC_CANDIDATE_STATUS_INITIAL = "Candidate Book - not updated yet in this session";
+    public static final String SYNC_CANDIDATE_STATUS_INITIAL = "Candidate Book - Not updated yet in this session";
     public static final String SYNC_CANDIDATE_STATUS_UPDATED = "Candidate Book - Last Updated: %s";
     public static final String SYNC_COMPANY_STATUS_INITIAL = "Company Book - Not updated yet in this session";
     public static final String SYNC_COMPANY_STATUS_UPDATED = "Company Book - Last Updated: %s";

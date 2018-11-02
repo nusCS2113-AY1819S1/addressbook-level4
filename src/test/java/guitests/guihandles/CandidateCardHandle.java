@@ -18,7 +18,7 @@ public class CandidateCardHandle extends NodeHandle<Node> {
     private static final String NAME_FIELD_ID = "#name";
     private static final String EDUCATION_FIELD_ID = "#education";
     private static final String SALARY_FIELD_ID = "#salary";
-    private static final String JOB_FIELD_ID = "#desired_job";
+    private static final String JOB_FIELD_ID = "#job";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private final Label idLabel;

@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_EMAIL;
 
+import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.parser.Prefix;
 import seedu.recruit.model.Model;
@@ -20,7 +22,7 @@ public class SortCompanyCommand extends Command {
     public static final String MESSAGE_TAG_USAGE = "Please sort by using one of the available tags: "
             + "Company Name " + PREFIX_COMPANY_NAME
             + ", Email " + PREFIX_EMAIL
-            + " or sort the current order in reverse with /r \n"
+            + " or sort the current order in reverse with r/ \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_COMPANY_NAME;
 
     private static Prefix prefixToSort;
@@ -32,6 +34,7 @@ public class SortCompanyCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
+        EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
         model.sortCompanies(prefixToSort);
         model.commitCompanyBook();
         return new CommandResult(MESSAGE_SUCCESS);

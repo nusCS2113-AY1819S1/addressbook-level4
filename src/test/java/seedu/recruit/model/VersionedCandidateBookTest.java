@@ -18,10 +18,13 @@ import seedu.recruit.testutil.AddressBookBuilder;
 
 public class VersionedCandidateBookTest {
 
-    private final ReadOnlyCandidateBook addressBookWithAmy = new AddressBookBuilder().withPerson(AMY).build();
-    private final ReadOnlyCandidateBook addressBookWithBob = new AddressBookBuilder().withPerson(BOB).build();
-    private final ReadOnlyCandidateBook addressBookWithCarl = new AddressBookBuilder().withPerson(CARL).build();
-    private final ReadOnlyCandidateBook emptyAddressBook = new AddressBookBuilder().build();
+    private final ReadOnlyCandidateBook addressBookWithAmy = new
+            AddressBookBuilder().withCandidate(AMY).buildCandidateBook();
+    private final ReadOnlyCandidateBook addressBookWithBob = new
+            AddressBookBuilder().withCandidate(BOB).buildCandidateBook();
+    private final ReadOnlyCandidateBook addressBookWithCarl = new
+            AddressBookBuilder().withCandidate(CARL).buildCandidateBook();
+    private final ReadOnlyCandidateBook emptyAddressBook = new AddressBookBuilder().buildCandidateBook();
 
     @Test
     public void commit_singleAddressBook_noStatesRemovedCurrentStateSaved() {

@@ -18,7 +18,7 @@ public class DeleteJobOfferCommandParser implements Parser<DeleteJobOfferCommand
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteJobOfferCommand
-     * and returns an DeleteJobOfferCommand object for execution.
+     * and returns a DeleteJobOfferCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteJobOfferCommand parse(String args) throws ParseException {
