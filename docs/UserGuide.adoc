@@ -242,7 +242,7 @@ Example:
 
 * `sort name`
 
-=== Invite employees: `invite`
+=== Inviting employee to event: `invite`
 
 Priority level: `all` +
 Invites an employee to an event. +
@@ -261,7 +261,7 @@ image::InviteCommandGuide.png[width="600"]
 * Employee should not have already been invited to the selected event.
 ****
 
-=== Remove employee: `remove`
+=== Removing employee from event: `remove`
 Priority level: `default`,`manager`
 
 Removes an employee from the an event. +
@@ -426,15 +426,15 @@ There is no need to save manually.
 
 * *addEvent* : `addEvent n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START_TIME e/END_TIME`
 
-* *editEvent* : `editEvent `[n/NAME] [d/DESCRIPTION] [l/LOCATION] [date/DATE] [s/START_TIME [e/END_TIME]`
+* *editEvent* : `editEvent EVENT_INDEX [n/NAME] [d/DESCRIPTION] [l/LOCATION] [date/DATE] [s/START_TIME [e/END_TIME]`
 
-* *deleteEvent* : `deleteEvent SCHEDULE_INDEX`
+* *deleteEvent* : `deleteEvent EVENT_INDEX`
 
 * *Invite* : `invite PERSON_INDEX to/EVENT_INDEX`
 
 * *Remove* : `remove PERSON_INDEX  from/EVENT_INDEX`
 
-* *Select* : `select SCHEDULE_INDEX`
+* *Select* : `select PERSON_INDEX [date/DATE] [m/MONTH] [y/YEAR]`
 
 * *Find* : `find KEYWORD [MORE_KEYWORDS]`
 
