@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<financialplanner>
+
+    <records>
+        <name>Payment for Indo</name>
+        <date>10-3-2000</date>
+        <moneyFlow>-5.80</moneyFlow>
+        <tagged>friends</tagged>
+    </records>
+
+    <!-- Record with same identity as Payment for Indo -->
+    <records>
+        <name>Payment for Indo</name>
+        <date>10-3-2000</date>
+        <moneyFlow>+40.60</moneyFlow>
+    </records>
+
+</financialplanner>

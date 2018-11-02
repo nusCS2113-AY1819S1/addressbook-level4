@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<financialplanner>
+    <records>
+        <name>Payment for earphone</name>
+        <date isPrivate="false">01-10-1400</date>
+        <moneyFlow isPrivate="false">-20.40</moneyFlow>
+    </records>
+    <records>
+        <name>Payment for western</name>
+        <date isPrivate="false">01-11-1400</date>
+        <moneyFlow isPrivate="false">-35.59</moneyFlow>
+    </records>
+    <records>
+        <name>Payment for concert</name>
+        <date isPrivate="false">9-3-3003</date>
+        <moneyFlow isPrivate="false">-20.30</moneyFlow>
+    </records>
+    <records>
+        <name>Phone bill</name>
+        <date isPrivate="false">10-4-2005</date>
+        <moneyFlow isPrivate="false">-30.40</moneyFlow>
+    </records>
+    <records>
+        <name>Payment for bag</name>
+        <date isPrivate="false">17-9-2018</date>
+        <moneyFlow isPrivate="false">-39.50</moneyFlow>
+    </records>
+    <records>
+        <name>Weekly allowance</name>
+        <date isPrivate="false">18-10-2018</date>
+        <moneyFlow isPrivate="false">+91.99</moneyFlow>
+    </records>
+    <records>
+        <name>TA Pay</name>
+        <date isPrivate="false">20-10-2018</date>
+        <moneyFlow isPrivate="false">+101</moneyFlow>
+    </records>
+    <records>
+        <name>Bursary from school</name>
+        <date isPrivate="false">23-5-2009</date>
+        <moneyFlow isPrivate="false">+1000</moneyFlow>
+    </records>
+    <records>
+        <name>I wish this was true</name>
+        <date isPrivate="false">27-10-2006</date>
+        <moneyFlow isPrivate="false">+1000001</moneyFlow>
+    </records>
+</financialplanner>
