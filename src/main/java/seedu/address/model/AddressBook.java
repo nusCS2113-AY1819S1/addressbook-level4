@@ -104,6 +104,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         setPersons(newData.getPersonList());
         setItems(newData.getItemList());
         setLedgers(newData.getLedgerList());
+        setEvents(newData.getEventList());
     }
 
     //// member-level operations

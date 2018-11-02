@@ -116,6 +116,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void deleteEvent(Event event) {
+        versionedAddressBook.removeEvent(event);
+    }
+
+    @Override
     public boolean hasLedger (Ledger ledger) {
         requireAllNonNull(ledger);
         return versionedAddressBook.hasLedger(ledger);

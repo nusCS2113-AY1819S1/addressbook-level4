@@ -187,11 +187,11 @@ Format: `listEvents`
 Adds an event to the calendar. +
 Format: `addEvent EVENT_NAME EVENT_DATE EVENT_LOCATION EVENT_DESCRIPTION`
 
-==== Editing an event: `changeEvent`
+==== Editing an event: `editEvent`(will be coming soon)
 Edits an event on the calendar. +
-Format: `changeEvent EVENT_NAME to EVENT_NAME EVENT_DATE EVENT_LOCATION EVENT_DESCRIPTION`
+Format: `editEvent EVENT_NAME to EVENT_NAME EVENT_DATE EVENT_LOCATION EVENT_DESCRIPTION`
 
-==== Deleting event: `deleteEvent`
+==== Deleting event: `deleteEvent` 
 Deletes an event from the calendar. +
 Format: `deleteEvent EVENT_NAME`.
 

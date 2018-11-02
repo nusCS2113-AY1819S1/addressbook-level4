@@ -98,6 +98,12 @@ public interface Model {
     void deleteLedger(Ledger ledger);
 
     /**
+     * Delete the given event
+     * @param event
+     */
+    void deleteEvent(Event event);
+
+    /**
      * Increases the amount in balance by a given amount
      * @param account
      */
