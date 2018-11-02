@@ -143,10 +143,6 @@ public class NoteEditCommand extends Command {
             throw new CommandException(NoteDate.MESSAGE_START_DATE_MISSING_FIELD);
         }
 
-//        if (newStartDate == null && (newStartTime != null || newEndDate != null || newEndTime != null)) {
-//            throw new CommandException(NoteDate.MESSAGE_START_DATE_MISSING_FIELD);
-//        }
-
         if (newStartDate != null && newEndDate == null) {
             newEndDate = new NoteDate(newStartDate.getDate().format(NoteDate.DATE_FORMAT));
         }
