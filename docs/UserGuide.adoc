@@ -336,7 +336,7 @@ Examples:
 
 Adds a Reminder for your next meeting, along with details to be displayed
 
-Format: `reminder d/DDMMYY tm/TIME lc/LOCATION tp/TOPIC
+Format: `reminder d/DDMMYY tm/TIME lc/LOCATION tp/TOPIC`
 
 Examples: 
 
@@ -345,6 +345,7 @@ Examples:
 === Meeting Minutes: `minutes` [coming in v1.4]
 
 Opens up a text box to take meeting minutes
+
 Format: `minutes`
 
 === Exiting the program : `exit` / `x`
