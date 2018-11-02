@@ -399,7 +399,10 @@ public class ModelManager extends ComponentManager implements Model {
                 }
             }
             if (!isDuplicate) {
-                output.append(getFilteredRecipientJobOfferNames());
+                output.append(jobOffer.getCompanyName().toString());
+                output.append(" regarding job offer: ");
+                output.append(jobOffer.getJob().toString());
+                output.append("\n");
             }
         }
         return output.toString();
@@ -439,7 +442,10 @@ public class ModelManager extends ComponentManager implements Model {
                 }
             }
             if (!isDuplicate) {
-                output.append(getFilteredContentJobOfferNames());
+                output.append(jobOffer.getJob().toString());
+                output.append(" at ");
+                output.append(jobOffer.getCompanyName().toString());
+                output.append("\n");
             }
         }
         return output.toString();
@@ -475,7 +481,7 @@ public class ModelManager extends ComponentManager implements Model {
                 }
             }
             if (!isDuplicate) {
-                output.append(getFilteredCandidateNames());
+                output.append(candidate.getName().toString() + "\n");
             }
         }
         return output.toString();
