@@ -25,7 +25,7 @@ Responsibilities: Search Pruning + Advanced Search and filter feature.
 
 === Melvin Tan
 image::chocological.png[width="150", align="left"]
-{empty}[http://github.com/Chocological[github]]
+{empty}[http://github.com/Chocological[github]][<<MelvinTanJitChong#, portfolio>>]
 
 Role: Integration and Testing +
 Responsibilities: Login System
@@ -34,7 +34,7 @@ Responsibilities: Login System
 
 === Jonathan Ng
 image::derpyplops.png[width="150", align="left"]
-{empty}[http://github.com/derpyplops[github]]
+{empty}[http://github.com/derpyplops[github]][<<Jonathan#, portfolio>>]
 
 Role: Documentation and Team Lead +
 Responsibilities: HR & Roles
@@ -43,7 +43,7 @@ Responsibilities: HR & Roles
 
 === Sanjukta Saha
 image::sanjukta99.png[width="150", align="left"]
-{empty}[http://github.com/sanjukta99[github]]
+{empty}[http://github.com/sanjukta99[github]][<<SanjuktaSaha#, portfolio>>]
 
 Role: Code Quality +
 Responsibilities: Budgeting functionality for NUSSU and club treasurers
