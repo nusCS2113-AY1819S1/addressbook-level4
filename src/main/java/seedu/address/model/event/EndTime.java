@@ -10,9 +10,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class EndTime implements Comparable<EndTime> {
 
     public static final String MESSAGE_TIME_CONSTRAINTS =
-            "End time should only be given in HH:MM in 24 hour format";
+            "End time should only be given in HH:MM in 24 hour format and valid";
     public static final String MESSAGE_INVALID_END_TIME =
-            "End time should be later than start time.";
+            "End time should not be earlier than start time.";
 
     /*
      * The first character of the start time must not be a whitespace,

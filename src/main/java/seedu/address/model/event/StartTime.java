@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class StartTime implements Comparable<StartTime> {
 
     public static final String MESSAGE_TIME_CONSTRAINTS =
-            "Start time should only be given in HH:MM in 24 hour format";
+            "Start time should only be given in HH:MM in 24 hour format and valid";
 
     /*
      * The first character of the start time must not be a whitespace,
