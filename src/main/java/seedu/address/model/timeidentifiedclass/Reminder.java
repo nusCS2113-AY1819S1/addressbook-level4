@@ -34,6 +34,11 @@ public class Reminder extends TimeIdentifiedClass {
         this.hasBeenShownByThread = false;
     }
 
+    /**
+     * No parameter constructor for tests
+     */
+    protected Reminder() {}
+
     public String getReminderMessage() {
         return reminderMessage;
     }
