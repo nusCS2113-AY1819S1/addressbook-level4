@@ -82,10 +82,20 @@ public class SelectCommandTest {
         assertExecutionSuccess(INDEX_FIRST_PERSON);
     }
 
+    @Test
+    public void execute_me_success() {
+        SelectCommand selectCommand = new SelectCommand();
+        String nameSelected = "me";
+
+        String expectedMessage = String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, nameSelected);
+
+        assertCommandSuccess(selectCommand, model, commandHistory, expectedMessage, expectedModel);
+    }
+
     /**
      * Broken test
      */
-    //@Test
+    // @Test
     public void execute_invalidIndexFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
@@ -125,7 +135,9 @@ public class SelectCommandTest {
      */
     private void assertExecutionSuccess(Index index) {
         SelectCommand selectCommand = new SelectCommand(index);
-        String expectedMessage = String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, index.getOneBased());
+        String nameSelected = model.getFilteredPersonList().get(index.getZeroBased()).getName().toString();
+
+        String expectedMessage = String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, nameSelected);
 
         assertCommandSuccess(selectCommand, model, commandHistory, expectedMessage, expectedModel);
 

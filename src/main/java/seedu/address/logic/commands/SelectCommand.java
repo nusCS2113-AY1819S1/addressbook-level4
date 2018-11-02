@@ -21,6 +21,8 @@ public class SelectCommand extends Command {
     public static final String COMMAND_WORD = "select";
     public static final String COMMAND_WORD_ALIAS = "s";
 
+    public static final String ARGS_ME = "me";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Selects the person identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
@@ -44,7 +46,7 @@ public class SelectCommand extends Command {
 
         if (targetIndex == null) {
             model.updateTimeTable(model.getUser().getTimeTable());
-            return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, "me"));
+            return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, ARGS_ME));
         } else {
             List<Person> friendList = model.getFriendList(model.getUser());
 
@@ -62,8 +64,24 @@ public class SelectCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof SelectCommand // instanceof handles nulls
-                && targetIndex.equals(((SelectCommand) other).targetIndex)); // state check
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof SelectCommand)) {
+            return false;
+        }
+
+        SelectCommand otherSelectCommand = (SelectCommand) other;
+
+        if (targetIndex == null && otherSelectCommand.targetIndex == null) {
+            return true;
+        }
+
+        if (targetIndex.equals(otherSelectCommand.targetIndex)) {
+            return true;
+        }
+
+        return false;
     }
 }

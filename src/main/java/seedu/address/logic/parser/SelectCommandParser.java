@@ -17,7 +17,7 @@ public class SelectCommandParser implements Parser<SelectCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public SelectCommand parse(String args) throws ParseException {
-        if (args.equals("")) {
+        if (args.trim().equals(SelectCommand.ARGS_ME)) {
             return new SelectCommand();
         } else {
             try {
