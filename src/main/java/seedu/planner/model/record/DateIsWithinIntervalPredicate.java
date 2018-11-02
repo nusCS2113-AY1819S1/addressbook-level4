@@ -50,7 +50,7 @@ public class DateIsWithinIntervalPredicate implements Predicate<Record> {
     public boolean test(Record record) {
         Date recordDate = record.getDate();
         return recordDate.equals(startDate) || recordDate.equals(endDate)
-            || isLaterThan(recordDate, startDate) && isEarlierThan(recordDate ,endDate);
+            || isLaterThan(recordDate, startDate) && isEarlierThan(recordDate, endDate);
     }
 
     @Override

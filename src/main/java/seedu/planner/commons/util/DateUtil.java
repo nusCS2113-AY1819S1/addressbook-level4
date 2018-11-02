@@ -24,13 +24,12 @@ public class DateUtil {
      * This function checks whether the given day and month falls within the constraints of modern calendars
      */
     public static boolean isValidDate(int day, int month, int year) {
-        if (isLeapYear(year)){
+        if (isLeapYear(year)) {
             if (month > maxDaysInEachMonthLeapYear.size()) {
                 return false;
             }
             return day <= maxDaysInEachMonthLeapYear.get(month - 1);
-        }
-        else {
+        } else {
             if (month > maxDaysInEachMonth.size()) {
                 return false;
             }

@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.planner.commons.util.MoneyUtil;
 import seedu.planner.commons.util.CompareUtil;
+import seedu.planner.commons.util.MoneyUtil;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Record;

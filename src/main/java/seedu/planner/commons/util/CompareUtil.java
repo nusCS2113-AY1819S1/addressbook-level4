@@ -16,7 +16,7 @@ public class CompareUtil {
     }
 
     public static Comparator<Record> compareDateAttribute() {
-        return (a, b) -> compareDate().compare(a.getDate(),b.getDate());
+        return (a, b) -> compareDate().compare(a.getDate(), b.getDate());
     }
 
     public static Comparator<Record> compareMoneyflowAttribute() {
