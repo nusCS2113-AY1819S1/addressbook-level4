@@ -9,9 +9,6 @@ import static seedu.recruit.testutil.TypicalCompanies.CHEVROLET;
 import static seedu.recruit.testutil.TypicalCompanies.DODGE;
 import static seedu.recruit.testutil.TypicalCompanies.KEYWORD_MATCHING_WHEELER;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -21,9 +18,11 @@ import seedu.recruit.logic.commands.FindCompanyCommand;
 import seedu.recruit.logic.commands.RedoCompanyBookCommand;
 import seedu.recruit.logic.commands.UndoCompanyBookCommand;
 import seedu.recruit.model.Model;
-import seedu.recruit.model.tag.Tag;
+
+
 
 @Ignore("not updated with new UI changes")
+
 public class FindCompanyCommandSystemTest extends CompanyBookSystemTest {
 
     @Test
@@ -132,11 +131,11 @@ public class FindCompanyCommandSystemTest extends CompanyBookSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find tags of companies in recruit book -> 0 companies found */
+        /* Case: find tags of companies in recruit book -> 0 companies found
         List<Tag> tags = new ArrayList<>(DODGE.getTags());
         command = FindCompanyCommand.COMMAND_WORD + " " + tags.get(0).tagName;
         assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
+        assertSelectedCardUnchanged();*/
 
         /* Case: find while a company is selected -> selected card deselected */
         showAllCompanies();

@@ -15,8 +15,6 @@ import seedu.recruit.model.commons.Email;
 import seedu.recruit.model.commons.Phone;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
-import seedu.recruit.model.joboffer.UniqueJobList;
-
 
 /**
  * Parses input arguments and creates a new AddCompanyCommand object
@@ -44,7 +42,7 @@ public class AddCompanyCommandParser implements Parser<AddCompanyCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
 
-        Company company = new Company(companyName, address, email, phone, new UniqueJobList());
+        Company company = new Company(companyName, address, email, phone);
         return new AddCompanyCommand(company);
     }
 

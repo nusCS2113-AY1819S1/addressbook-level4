@@ -69,7 +69,7 @@ public class SelectJobCommand extends Command {
          * If user is inside Shortlist command, user can only select jobs from a selected company.
          */
         if (ShortlistCandidateInitializationCommand.isShortlisting()) {
-            selectedJobOffer = getSelectedJobFromSelectedCompany();
+            //selectedJobOffer = getSelectedJobFromSelectedCompany();
             EventsCenter.getInstance().post(new JumpToCompanyJobListRequestEvent(targetIndex));
             LogicManager.setLogicState(SelectCandidateCommand.COMMAND_LOGIC_STATE);
             return new CommandResult(String.format(MESSAGE_SELECT_JOB_SUCCESS,
@@ -81,7 +81,7 @@ public class SelectJobCommand extends Command {
          * If user is inside DeleteShortlistedCandidate command, user can only select jobs from a selected company.
          */
         if (DeleteShortlistedCandidateInitializationCommand.isDeleting()) {
-            selectedJobOffer = getSelectedJobFromSelectedCompany();
+            //selectedJobOffer = getSelectedJobFromSelectedCompany();git
             EventsCenter.getInstance().post(new JumpToCompanyJobListRequestEvent(targetIndex));
             LogicManager.setLogicState(DeleteShortlistedCandidateCommand.COMMAND_LOGIC_STATE);
             return new CommandResult(String.format(MESSAGE_SELECT_JOB_SUCCESS,
@@ -94,7 +94,7 @@ public class SelectJobCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SELECT_JOB_SUCCESS, targetIndex.getOneBased()));
     }
 
-    public JobOffer getSelectedJobFromSelectedCompany() throws CommandException {
+    /*public JobOffer getSelectedJobFromSelectedCompany() throws CommandException {
         List<JobOffer> filteredCompanyJobList =
                 SelectCompanyCommand.getSelectedCompany().getUniqueJobList().getInternalList();
 
@@ -104,7 +104,7 @@ public class SelectJobCommand extends Command {
 
         selectedJobOffer = filteredCompanyJobList.get(targetIndex.getZeroBased());
         return selectedJobOffer;
-    }
+    }*/
 
     @Override
     public boolean equals(Object other) {

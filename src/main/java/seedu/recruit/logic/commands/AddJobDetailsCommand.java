@@ -65,10 +65,10 @@ public class AddJobDetailsCommand extends Command {
         if (companyIndex == -1) {
             throw new CommandException(MESSAGE_COMPANY_NOT_FOUND);
         }
-        if (model.getCompanyFromIndex(companyIndex).getUniqueJobList().contains(toAdd)) {
+        if (model.hasJobOffer(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_JOB_OFFER);
         }
-        model.addJobOffer(toAdd.getCompanyName(), toAdd);
+        model.addJobOffer(toAdd);
         model.commitCompanyBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

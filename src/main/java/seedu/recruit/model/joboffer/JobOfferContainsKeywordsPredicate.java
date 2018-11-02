@@ -18,34 +18,18 @@ public class JobOfferContainsKeywordsPredicate implements Predicate<JobOffer> {
 
     @Override
     public boolean test(JobOffer jobOffer) {
-        if (keywords.containsKey("CompanyName")) {
-            return ((keywords.containsKey("CompanyName")) && (keywords.get("CompanyName").stream().anyMatch(keyword ->
-                    StringUtil.containsWordIgnoreCase(jobOffer.getCompanyName().value, keyword))))
-                    && ((keywords.containsKey("Job")) && (keywords.get("Job").stream().anyMatch(keyword ->
-                    StringUtil.containsWordIgnoreCase(jobOffer.getJob().value, keyword))))
-                    || ((keywords.containsKey("Age Range")) && (keywords.get("Age Range").stream().anyMatch(keyword ->
-                    StringUtil.containsWordIgnoreCase(jobOffer.getAgeRange().value, keyword))))
-                    || ((keywords.containsKey("Education")) && (keywords.get("Education").stream().anyMatch(keyword ->
-                    StringUtil.containsWordIgnoreCase(jobOffer.getEducation().value, keyword))))
-                    || ((keywords.containsKey("Salary")) && (keywords.get("Salary").stream().anyMatch(keyword ->
-                    StringUtil.containsWordIgnoreCase(jobOffer.getSalary().value, keyword))))
-                    || ((keywords.containsKey("Gender")) && (keywords.get("Gender").stream().anyMatch(keyword ->
-                    StringUtil.containsWordIgnoreCase(jobOffer.getGender().value, keyword))));
-        }
-        else {
-            return ((keywords.containsKey("CompanyName")) && (keywords.get("CompanyName").stream().anyMatch(keyword ->
-                    StringUtil.containsWordIgnoreCase(jobOffer.getCompanyName().value, keyword))))
-                    || ((keywords.containsKey("Job")) && (keywords.get("Job").stream().anyMatch(keyword ->
-                    StringUtil.containsWordIgnoreCase(jobOffer.getJob().value, keyword))))
-                    || ((keywords.containsKey("Age Range")) && (keywords.get("Age Range").stream().anyMatch(keyword ->
-                    StringUtil.containsWordIgnoreCase(jobOffer.getAgeRange().value, keyword))))
-                    || ((keywords.containsKey("Education")) && (keywords.get("Education").stream().anyMatch(keyword ->
-                    StringUtil.containsWordIgnoreCase(jobOffer.getEducation().value, keyword))))
-                    || ((keywords.containsKey("Salary")) && (keywords.get("Salary").stream().anyMatch(keyword ->
-                    StringUtil.containsWordIgnoreCase(jobOffer.getSalary().value, keyword))))
-                    || ((keywords.containsKey("Gender")) && (keywords.get("Gender").stream().anyMatch(keyword ->
-                    StringUtil.containsWordIgnoreCase(jobOffer.getGender().value, keyword))));
-        }
+        return ((keywords.containsKey("CompanyName")) && (keywords.get("CompanyName").stream().anyMatch(keyword ->
+                StringUtil.containsWordIgnoreCase(jobOffer.getCompanyName().value, keyword))))
+                || ((keywords.containsKey("Job")) && (keywords.get("Job").stream().anyMatch(keyword ->
+                StringUtil.containsWordIgnoreCase(jobOffer.getJob().value, keyword))))
+                || ((keywords.containsKey("Age Range")) && (keywords.get("Age Range").stream().anyMatch(keyword ->
+                StringUtil.containsWordIgnoreCase(jobOffer.getAgeRange().value, keyword))))
+                || ((keywords.containsKey("Education")) && (keywords.get("Education").stream().anyMatch(keyword ->
+                StringUtil.containsWordIgnoreCase(jobOffer.getEducation().value, keyword))))
+                || ((keywords.containsKey("Salary")) && (keywords.get("Salary").stream().anyMatch(keyword ->
+                StringUtil.containsWordIgnoreCase(jobOffer.getSalary().value, keyword))))
+                || ((keywords.containsKey("Gender")) && (keywords.get("Gender").stream().anyMatch(keyword ->
+                StringUtil.containsWordIgnoreCase(jobOffer.getGender().value, keyword))));
     }
 
     @Override

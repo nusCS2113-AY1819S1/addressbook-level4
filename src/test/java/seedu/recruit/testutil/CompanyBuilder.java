@@ -23,14 +23,12 @@ public class CompanyBuilder {
     private Address address;
     private Email email;
     private Phone phone;
-    private UniqueJobList jobList;
 
     public CompanyBuilder() {
         companyName = new CompanyName(DEFAULT_COMPANY_NAME);
         address = new Address(DEFAULT_COMPANY_ADDRESS);
         email = new Email(DEFAULT_COMPANY_EMAIL);
         phone = new Phone(DEFAULT_COMPANY_PHONE);
-        jobList = new UniqueJobList();
     }
 
     /**
@@ -41,7 +39,6 @@ public class CompanyBuilder {
         phone = companyToCopy.getPhone();
         email = companyToCopy.getEmail();
         address = companyToCopy.getAddress();
-        jobList = companyToCopy.getUniqueJobList();
     }
 
     /**
@@ -85,11 +82,10 @@ public class CompanyBuilder {
      */
 
     public CompanyBuilder withJobList(UniqueJobList jobList) {
-        this.jobList = jobList;
         return this;
     }
 
     public Company build() {
-        return new Company(companyName, address, email, phone, jobList);
+        return new Company(companyName, address, email, phone);
     }
 }
