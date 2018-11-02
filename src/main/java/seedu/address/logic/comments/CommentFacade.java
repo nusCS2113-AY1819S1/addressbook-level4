@@ -7,18 +7,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
  */
 public class CommentFacade {
 
-    private AddComment add;
-    private DeleteComment delete;
-    private ReplyComment reply;
-
-    /**
-    *  Constructor to intialise all the comment commands
-    */
-    public CommentFacade() {
-        add = new AddComment();
-        delete = new DeleteComment();
-        reply = new ReplyComment();
-    }
+    private AddComment add = new AddComment();
+    private DeleteComment delete = new DeleteComment();
+    private ReplyComment reply = new ReplyComment();
 
     /**
     *  Add comment function
