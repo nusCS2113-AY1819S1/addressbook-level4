@@ -58,6 +58,7 @@ import seedu.planner.model.tag.Tag;
 import seedu.planner.testutil.EditRecordDescriptorBuilder;
 import seedu.planner.testutil.TypicalRecords;
 import seedu.planner.ui.CommandBox;
+import seedu.planner.ui.MixedPieChartDataList;
 import seedu.planner.ui.SummaryEntry;
 
 /**
@@ -149,7 +150,9 @@ public abstract class FinancialPlannerSystemTest {
         return mainWindowHandle.getSummaryDisplay();
     }
 
-    public StatsDisplayPanelHandle getStatsDisplayPanel() { return mainWindowHandle.getStatsDisplayPanel(); }
+    public StatsDisplayPanelHandle getStatsDisplayPanel() {
+        return mainWindowHandle.getStatsDisplayPanel();
+    }
     /**
      * Executes {@code command} in the application's {@code CommandBox}.
      * Method returns after UI components have been updated.
@@ -301,10 +304,30 @@ public abstract class FinancialPlannerSystemTest {
         assertEquals(expected, summaryDisplayHandle.getSummaryTableList());
     }
 
+    /**
+     * Asserts that the 2 CategoryBreakdown panels are showing as intended
+     * @param expected
+     */
     protected void assertCategoryBreakdownShownCorrectly(ObservableList<CategoryStatistic> expected) {
         StatsDisplayPanelHandle statsDisplayPanel = getStatsDisplayPanel();
         assertTrue(statsDisplayPanel.isVisible());
+        assertCategoryBreakdownsAreShown(statsDisplayPanel);
 
+        MixedPieChartDataList expectedData = new MixedPieChartDataList(expected);
+        CategoryBreakdownHandle expenseBreakdown = statsDisplayPanel.getCategoryBreakdown(
+                StatsDisplayPanelHandle.EXPENSE_BREAKDOWN_LABEL);
+        CategoryBreakdownHandle incomeBreakdown = statsDisplayPanel.getCategoryBreakdown(
+                StatsDisplayPanelHandle.INCOME_BREAKDOWN_LABEL);
+        assertTrue(expenseBreakdown.checkIfDataIsSame(expectedData.getExpenseChartLabelData(),
+                expectedData.getExpenseChartLegendData()));
+        assertTrue(incomeBreakdown.checkIfDataIsSame(expectedData.getIncomeChartLabelData(),
+                expectedData.getIncomeChartLegendData()));
+    }
+
+    /**
+     * Asserts that the 2 CategoryBreakdown panels are shown correctly
+     */
+    private void assertCategoryBreakdownsAreShown(StatsDisplayPanelHandle statsDisplayPanel) {
         // Asserts that the 1st tab is visible but not selected
         Tab expenseTab = statsDisplayPanel.getChildTab(StatsDisplayPanelHandle.EXPENSE_BREAKDOWN_LABEL);
         assertFalse(statsDisplayPanel.isTabSelected(expenseTab));

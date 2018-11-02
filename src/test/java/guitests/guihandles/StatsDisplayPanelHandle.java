@@ -1,11 +1,11 @@
 package guitests.guihandles;
 
-import guitests.guihandles.exceptions.NodeNotFoundException;
+import static java.util.Objects.requireNonNull;
+
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.AnchorPane;
 
 /**
  * Handle for the GUI component StatsDisplayPanel
@@ -32,14 +32,14 @@ public class StatsDisplayPanelHandle extends NodeHandle<Node> {
      * reference
      * @return CategoryBreakdownHandle
      */
+    public CategoryBreakdownHandle getCategoryBreakdown(String label) throws NullPointerException {
+        Tab tab = getChildTab(label);
+        return getCategoryBreakdown(tab);
+    }
+
     public CategoryBreakdownHandle getCategoryBreakdown(Tab tab) throws NullPointerException {
-        CategoryBreakdownHandle categoryBreakdownHandle;
-        try {
-            categoryBreakdownHandle = new CategoryBreakdownHandle((AnchorPane) tab.getContent());
-        } catch (NodeNotFoundException nfe) {
-            return null;
-        }
-        return categoryBreakdownHandle;
+        requireNonNull(tab);
+        return new CategoryBreakdownHandle(tab.getContent());
     }
 
     public Tab getChildTab(String label) {
@@ -52,6 +52,9 @@ public class StatsDisplayPanelHandle extends NodeHandle<Node> {
         return null;
     }
 
+    /**
+     * Returns true if the tab is selected and false if not
+     */
     public boolean isTabSelected(Tab tab) {
         int indexOfTab = tabManager.getTabs().indexOf(tab);
         return tabManager.getSelectionModel().isSelected(indexOfTab);

@@ -14,12 +14,12 @@ import java.util.List;
 
 import org.junit.Test;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.planner.logic.commands.StatisticCommand;
 import seedu.planner.model.Model;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.summary.CategoryStatistic;
+import seedu.planner.model.summary.CategoryStatisticsList;
 
 public class StatisticCommandSystemTest extends FinancialPlannerSystemTest {
 
@@ -31,7 +31,7 @@ public class StatisticCommandSystemTest extends FinancialPlannerSystemTest {
         Model model = getModel();
         String command = StatisticCommand.COMMAND_WORD + " " + PREFIX_DATE + " " + START_DATE + " " + END_DATE;
         List<Record> records = Arrays.asList(RANDOM, CAIFAN, WORK, KOREAN, JAP, ZT);
-        assertCommandSuccess(command, model, FXCollections.emptyObservableList());
+        assertCommandSuccess(command, model, new CategoryStatisticsList(records).getReadOnlyStatsList());
     }
 
     /**
