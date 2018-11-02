@@ -33,10 +33,10 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all tasks
-* **`add`**`n/Attend Post Modern Jukebox concert e/180918_2000 p/HIGH` : adds a task named `Attend Post Modern Jukebox concert` on `18 September 2018 at 8pm` with `HIGH`
+* *`list`* : lists all contacts
+* **`task`**`n/Attend Post Modern Jukebox concert b/hyped s/18/09_2000 e/18/09_2200 p/HIGH t/concert` on `18 September 2018 at 8pm` with `HIGH`
 priority to the Address Book.
-* **`delete`**`3` : deletes the 3rd task shown in the current list
+* **`delete`**`3` : deletes the 3rd contact shown in the current list
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -150,9 +150,9 @@ Format: `findname KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-* `findaddress Mario` +
+* `findname Mario` +
 Returns `mario` and `Mario Gonzalez`
-* `findaddress mario alex david` +
+* `findname mario alex david` +
 Returns any contacts having names or body that contains `mario`, `alex`, or `david`
 
 === Locating contacts by phone: `findphone`
@@ -168,9 +168,9 @@ Format: `findname KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-* `findaddress 98835761` +
+* `findphone 98835761` +
 Returns `98835761` and the contact with that phone number
-* `findaddress 98835761 87438807` +
+* `findphone 98835761 87438807` +
 Returns any contacts having phone number or body that contains `98835761`, or `87438807`
 
 === Deleting a person : `delete`
