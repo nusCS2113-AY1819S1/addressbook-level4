@@ -453,5 +453,15 @@ public class CommandTestUtil {
         public String getFilteredCandidateNames(ArrayList<Candidate> duplicateCandidates) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public String getRecipientJobOfferName(JobOffer jobOffer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getContentJobOfferName(JobOffer jobOffer) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 }
