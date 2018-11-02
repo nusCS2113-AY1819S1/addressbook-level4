@@ -1,6 +1,7 @@
 package seedu.recruit.logic.parser;
 
-import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static org.junit.Assert.assertTrue;
+import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT;
 import static seedu.recruit.logic.parser.CommandParserTestUtil.assertSelectCandidateCommandParseFailure;
 import static seedu.recruit.logic.parser.CommandParserTestUtil.assertSelectCandidateCommandParseSuccess;
 import static seedu.recruit.logic.parser.CommandParserTestUtil.assertSelectCompanyCommandParseFailure;
@@ -8,12 +9,11 @@ import static seedu.recruit.logic.parser.CommandParserTestUtil.assertSelectCompa
 import static seedu.recruit.logic.parser.CommandParserTestUtil.assertSelectJobCommandParseFailure;
 import static seedu.recruit.logic.parser.CommandParserTestUtil.assertSelectJobCommandParseSuccess;
 import static seedu.recruit.logic.parser.CommandParserTestUtil.assertShortlistCandidateCommandParseFailure;
-import static seedu.recruit.logic.parser.CommandParserTestUtil.assertShortlistCandidateCommandParseSuccess;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
+import seedu.recruit.logic.LogicState;
 import seedu.recruit.logic.commands.SelectCandidateCommand;
 import seedu.recruit.logic.commands.SelectCompanyCommand;
 import seedu.recruit.logic.commands.SelectJobCommand;
@@ -81,20 +81,22 @@ public class ShortlistCommandParserTest {
     // ================================ LAST STAGE: CONFIRMATION ===================================== //
 
     @Test
-    @Ignore
-    public void parse_validArgs_returnsShortlistCandidateCommand() {
-        assertShortlistCandidateCommandParseSuccess(parser, "", new ShortlistCandidateCommand());
+    public void parse_validArgs_returnsShortlistCandidateCommand() throws Exception {
+        assertTrue(parser.parseCommand(ShortlistCandidateCommand.COMMAND_WORD, "",
+                new LogicState(ShortlistCandidateCommand.COMMAND_LOGIC_STATE)) instanceof ShortlistCandidateCommand);
     }
 
     @Test
     public void parse_invalidLetterArgsForShortlistCandidateCommand_throwsParseException() {
-        assertShortlistCandidateCommandParseFailure(parser, "a", MESSAGE_UNKNOWN_COMMAND
+        assertShortlistCandidateCommandParseFailure(parser, "a",
+                MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
                 + ShortlistCandidateCommand.MESSAGE_USAGE);
     }
 
     @Test
     public void parse_invalidIndexArgsForShortlistCandidateCommand_throwsParseException() {
-        assertShortlistCandidateCommandParseFailure(parser, "1", MESSAGE_UNKNOWN_COMMAND
+        assertShortlistCandidateCommandParseFailure(parser, "1",
+                MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
                 + ShortlistCandidateCommand.MESSAGE_USAGE);
     }
 }

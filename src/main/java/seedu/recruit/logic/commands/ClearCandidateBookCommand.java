@@ -13,7 +13,7 @@ public class ClearCandidateBookCommand extends Command {
 
     public static final String COMMAND_WORD = "clearc";
     public static final String MESSAGE_SUCCESS = "CandidateBook has been cleared!";
-
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears Candidate Book.";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {

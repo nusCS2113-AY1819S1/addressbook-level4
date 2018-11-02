@@ -20,9 +20,6 @@
          <AnchorPane prefHeight="398.0" prefWidth="435.0">
             <children>
                  <StackPane fx:id="rightPlaceholder" layoutX="34.0" prefHeight="398.0" prefWidth="459.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <padding>
-                         <Insets bottom="10" top="10" />
-                     </padding>
                  </StackPane>
             </children>
          </AnchorPane>
