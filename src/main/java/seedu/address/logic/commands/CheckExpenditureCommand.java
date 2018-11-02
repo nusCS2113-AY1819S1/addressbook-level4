@@ -7,15 +7,17 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 
 import java.util.List;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.expenditureinfo.Expenditure;
 
-/*import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartFrame;
-import org.jfree.chart.JFreeChart;
-import org.jfree.data.general.DefaultPieDataset;
-*/
+
+
 
 /**
  * Lists all persons in the address book to the user.
@@ -52,7 +54,7 @@ public class CheckExpenditureCommand extends Command {
         requireNonNull(model);
         List<Expenditure> lastShownList = model.getFilteredExpenditureList();
         Expenditure editedExpenditure;
-        /*DefaultPieDataset dpd = new DefaultPieDataset();*/
+        DefaultPieDataset dpd = new DefaultPieDataset();
 
         int index = 0;
         float total = 0;
@@ -74,60 +76,60 @@ public class CheckExpenditureCommand extends Command {
 
             if ((year1 < year) && (year2 > year)) {
                 total = total + Float.parseFloat(editedExpenditure.getMoney().toString());
-                /*dpd.setValue(editedExpenditure.getDescription().toString()+ ":"+
-                                Integer.parseInt(editedExpenditure.getMoney().toString()),
-                        Integer.parseInt(editedExpenditure.getMoney().toString()));*/
+                dpd.setValue(editedExpenditure.getDescription().toString() + ":"
+                                + Integer.parseInt(editedExpenditure.getMoney().toString()),
+                        Integer.parseInt(editedExpenditure.getMoney().toString()));
             } else if ((year1 == year) && (year2 == year)) {
                 if ((month1 < month) && (month2 > month)) {
                     total = total + Float.parseFloat(editedExpenditure.getMoney().toString());
-                    /*dpd.setValue(editedExpenditure.getDescription().toString()+ ":"+
-                                    Integer.parseInt(editedExpenditure.getMoney().toString()),
-                            Integer.parseInt(editedExpenditure.getMoney().toString()));*/
+                    dpd.setValue(editedExpenditure.getDescription().toString() + ":"
+                                    + Integer.parseInt(editedExpenditure.getMoney().toString()),
+                            Integer.parseInt(editedExpenditure.getMoney().toString()));
                 } else if ((month1 == month) && (day1 <= day)) {
                     total = total + Float.parseFloat(editedExpenditure.getMoney().toString());
-                    /*dpd.setValue(editedExpenditure.getDescription().toString()+ ":"+
-                                    Integer.parseInt(editedExpenditure.getMoney().toString()),
-                            Integer.parseInt(editedExpenditure.getMoney().toString()));*/
+                    dpd.setValue(editedExpenditure.getDescription().toString() + ":"
+                                    + Integer.parseInt(editedExpenditure.getMoney().toString()),
+                            Integer.parseInt(editedExpenditure.getMoney().toString()));
                 } else if ((month2 == month) && (day2 >= day)) {
                     total = total + Float.parseFloat(editedExpenditure.getMoney().toString());
-                    /*dpd.setValue(editedExpenditure.getDescription().toString()+ ":"+
-                                    Integer.parseInt(editedExpenditure.getMoney().toString()),
-                            Integer.parseInt(editedExpenditure.getMoney().toString()));*/
+                    dpd.setValue(editedExpenditure.getDescription().toString() + ":"
+                                    + Integer.parseInt(editedExpenditure.getMoney().toString()),
+                            Integer.parseInt(editedExpenditure.getMoney().toString()));
                 }
             } else if ((year1 == year) && (year2 > year)) {
                 if (month1 < month) {
                     total = total + Float.parseFloat(editedExpenditure.getMoney().toString());
-                    /*dpd.setValue(editedExpenditure.getDescription().toString()+ ":"+
-                                    Integer.parseInt(editedExpenditure.getMoney().toString()),
-                            Integer.parseInt(editedExpenditure.getMoney().toString()));*/
+                    dpd.setValue(editedExpenditure.getDescription().toString() + ":"
+                                    + Integer.parseInt(editedExpenditure.getMoney().toString()),
+                            Integer.parseInt(editedExpenditure.getMoney().toString()));
                 } else if ((month1 == month) && (day1 <= day)) {
                     total = total + Float.parseFloat(editedExpenditure.getMoney().toString());
-                    /*dpd.setValue(editedExpenditure.getDescription().toString()+ ":"+
-                                    Integer.parseInt(editedExpenditure.getMoney().toString()),
-                            Integer.parseInt(editedExpenditure.getMoney().toString()));*/
+                    dpd.setValue(editedExpenditure.getDescription().toString() + ":"
+                                    + Integer.parseInt(editedExpenditure.getMoney().toString()),
+                            Integer.parseInt(editedExpenditure.getMoney().toString()));
                 }
             } else if ((year1 < year) && (year2 == year)) {
                 if (month2 > month) {
                     total = total + Float.parseFloat(editedExpenditure.getMoney().toString());
-                    /*dpd.setValue(editedExpenditure.getDescription().toString()+ ":"+
-                                    Integer.parseInt(editedExpenditure.getMoney().toString()),
-                            Integer.parseInt(editedExpenditure.getMoney().toString()));*/
+                    dpd.setValue(editedExpenditure.getDescription().toString() + ":"
+                                    + Integer.parseInt(editedExpenditure.getMoney().toString()),
+                            Integer.parseInt(editedExpenditure.getMoney().toString()));
                 } else if ((month2 == month) && (day2 >= day)) {
                     total = total + Float.parseFloat(editedExpenditure.getMoney().toString());
-                    /*dpd.setValue(editedExpenditure.getDescription().toString()+ ":"+
-                                    Integer.parseInt(editedExpenditure.getMoney().toString()),
-                            Integer.parseInt(editedExpenditure.getMoney().toString()));*/
+                    dpd.setValue(editedExpenditure.getDescription().toString() + ":"
+                                    + Integer.parseInt(editedExpenditure.getMoney().toString()),
+                            Integer.parseInt(editedExpenditure.getMoney().toString()));
                 }
             }
             index++;
         }
 
 
-        /*JFreeChart chart = ChartFactory.createPieChart("My Expense During" + date1 + "to" + date2, dpd, true, true,
-        false);
+        JFreeChart chart = ChartFactory.createPieChart("My Expense During" + date1 + "to" + date2, dpd, true, true,
+                false);
         ChartFrame chartFrame = new ChartFrame("My Expense During" + date1 + "to" + date2, chart);
         chartFrame.pack();
-        chartFrame.setVisible(true);*/
+        chartFrame.setVisible(true);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, total));
 
