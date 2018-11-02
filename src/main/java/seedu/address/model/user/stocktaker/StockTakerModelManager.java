@@ -9,6 +9,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyInventoryList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.drink.Price;
+import seedu.address.model.drink.exceptions.InsufficientQuantityException;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.TransactionList;
 
@@ -21,7 +22,7 @@ public class StockTakerModelManager extends ModelManager implements StockTakerMo
         super(inventoryList, userPrefs, loginInfoManager, transactionList);
     }
     @Override
-    public void sellDrink(Transaction transaction) {
+    public void sellDrink(Transaction transaction) throws InsufficientQuantityException {
         Price defaultSalePrice = inventoryList.getDefaultSellingPrice(transaction.getDrinkTransacted());
 
         Price defaultAmountTransacted = new Price(Float.toString(defaultSalePrice.getValue()
@@ -40,7 +41,6 @@ public class StockTakerModelManager extends ModelManager implements StockTakerMo
                 * transaction.getQuantityTransacted().getValue()));
         transaction.setAmountMoney(defaultAmountTransacted);
         recordTransaction(transaction);
-
         inventoryList.increaseQuantity(transaction.getDrinkTransacted(), transaction.getQuantityTransacted());
     }
 

@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.drink.exceptions.BatchNotFoundException;
-import seedu.address.model.drink.exceptions.DuplicateBatchException;
 import seedu.address.model.testutil.Assert;
 
 class UniqueBatchListTest {
@@ -43,11 +42,13 @@ class UniqueBatchListTest {
         Assert.assertThrows(NullPointerException.class, () -> uniqueBatchList.addBatch(null));
     }
 
+    /*
     @Test
     void add_duplicateBatch_throwsDuplicateBatchException() {
         uniqueBatchList.addBatch(COKE2);
         Assert.assertThrows(DuplicateBatchException.class, () -> uniqueBatchList.addBatch(COKE2));
     }
+    */
 
     @Test
     public void setBatch_nullTargetBatch_throwsNullPointerException() {

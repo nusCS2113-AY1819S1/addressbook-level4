@@ -11,6 +11,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.drink.Drink;
 import seedu.address.model.drink.Quantity;
+import seedu.address.model.drink.exceptions.InsufficientQuantityException;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.TransactionType;
 import seedu.address.model.user.stocktaker.StockTakerModel;
@@ -37,7 +38,7 @@ public class SellDrinkCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "%1$s sold on %2$s with quantity: %3$s";
     public static final String MESSAGE_DRINK_NOT_FOUND = "The drink entered does not exist in the inventory list";
-    public static final String MESSAGE_FAILURE = "The quantity entered exceed the stock";
+    public static final String MESSAGE_FAILURE = "Insufficient quantity in stock to perform operation";
 
     private final Drink drink;
     // private final Date date; // TODO: add date support
@@ -65,7 +66,11 @@ public class SellDrinkCommand extends Command {
             throw new CommandException(MESSAGE_DRINK_NOT_FOUND);
         }
 
-        stockTakerModel.sellDrink(transaction);
+        try {
+            stockTakerModel.sellDrink(transaction);
+        } catch (InsufficientQuantityException e) {
+            throw new CommandException(MESSAGE_FAILURE);
+        }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, drink.getName(), transaction.getTransactionDate(),
                 quantity));

@@ -10,6 +10,7 @@ import seedu.address.model.drink.Price;
 import seedu.address.model.drink.Quantity;
 import seedu.address.model.drink.UniqueDrinkList;
 import seedu.address.model.drink.exceptions.DrinkNotFoundException;
+import seedu.address.model.drink.exceptions.InsufficientQuantityException;
 
 /**
  * Wraps all data at the inventory-list level
@@ -130,7 +131,6 @@ public class InventoryList implements ReadOnlyInventoryList {
         if (hasDrink(drink)) {
             return drinks.find(drink);
         }
-
         throw new DrinkNotFoundException();
     }
 
@@ -138,14 +138,13 @@ public class InventoryList implements ReadOnlyInventoryList {
      * Increases the quantity of the {@code drink} specified.
      */
     public void increaseQuantity(Drink drink, Quantity quantity) {
-        Drink actualDrink = findDrinkByName(drink);
-        actualDrink.increaseQuantity(quantity);
+        findDrinkByName(drink).increaseQuantity(quantity);
     }
 
     /**
      * Decreases the quantity of the {@code drink} specified.
      */
-    public void decreaseQuantity(Drink drink, Quantity quantity) {
+    public void decreaseQuantity(Drink drink, Quantity quantity) throws InsufficientQuantityException {
         Drink actualDrink = findDrinkByName(drink);
         actualDrink.decreaseQuantity(quantity);
     }
