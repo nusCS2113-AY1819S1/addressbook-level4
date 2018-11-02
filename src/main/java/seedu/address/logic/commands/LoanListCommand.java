@@ -26,15 +26,16 @@ import seedu.address.storage.XmlAdaptedLoanerDescription;
 public class LoanListCommand extends Command {
     public static final String COMMAND_WORD = "loanList";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a loan list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a loan list. \n"
             + "Parameters: "
-            + PREFIX_LOANER + "LOANER"
             + PREFIX_NAME + "NAME "
-            + PREFIX_QUANTITY + "QUANTITY"
+            + PREFIX_QUANTITY + "QUANTITY "
+            + PREFIX_LOANER + "LOANER\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_LOANER + "KinWhye"
             + PREFIX_NAME + "Arduino "
-            + PREFIX_QUANTITY + "20 ";
+            + PREFIX_QUANTITY + "20 "
+            + PREFIX_LOANER + "KinWhye";
+
     public static final String MESSAGE_SUCCESS = "Loan list created";
 
     private final LoanerDescription loaner;
