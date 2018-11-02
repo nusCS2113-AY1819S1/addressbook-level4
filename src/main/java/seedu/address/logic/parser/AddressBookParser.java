@@ -12,11 +12,13 @@ import seedu.address.logic.commands.AddItemCommand;
 
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DecreaseItemCommand;
 import seedu.address.logic.commands.DeleteItemCommand;
 import seedu.address.logic.commands.EditItemCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
+import seedu.address.logic.commands.IncreaseItemCommand;
 import seedu.address.logic.commands.MemberCommand.AddMemberCommand;
 import seedu.address.logic.commands.MemberCommand.DeleteMemberCommand;
 import seedu.address.logic.commands.MemberCommand.EditMemberCommand;
