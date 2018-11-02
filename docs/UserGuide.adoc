@@ -414,9 +414,9 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-=== Clearing all entries : `clear` (`c`) (DOES NOT WORK IN V1.3)
+=== Clears your timetable : `clear` (`c`)
 
-Clears all entries from the address book. +
+Clears all timeslots from your timetable. +
 Format: `clear`
 
 === Import Timetable from a file : `import` (`i`)
