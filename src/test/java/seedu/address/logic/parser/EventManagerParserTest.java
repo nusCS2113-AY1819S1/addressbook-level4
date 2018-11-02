@@ -76,7 +76,6 @@ public class EventManagerParserTest {
         EditEventDescriptor descriptor = new EditEventDescriptorBuilder(event).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_EVENT.getOneBased() + " " + EventUtil.getEditEventDescriptorDetails(descriptor));
-        new EditCommand(INDEX_FIRST_EVENT, descriptor).toString();
     }
 
     @Test

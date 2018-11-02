@@ -20,7 +20,7 @@ public abstract class Comments {
     /**
      *  Constructor to make sure that used Vector and path is initialised
      */
-    public Comments (String input) {
+    public void initComments(String input) {
         this.input = replaceBrackets(input);
         this.comments = this.parseCommentSection(input);
     }

@@ -9,15 +9,6 @@ import java.util.Vector;
 public class AddComment extends Comments {
 
     /**
-     * Constructor to make sure that used Vector and path is initialised
-     *
-     * @param input
-     */
-    public AddComment(String input) {
-        super(input);
-    }
-
-    /**
      *  Appends comment to the end of the current vector and stores
      */
     public String addComment(String comment, String username) {

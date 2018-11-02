@@ -12,7 +12,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.comments.AddComment;
+import seedu.address.logic.comments.CommentFacade;
 import seedu.address.model.Model;
 import seedu.address.model.event.Comment;
 import seedu.address.model.event.Event;
@@ -64,9 +64,10 @@ public class AddCommentCommand extends Command {
         }
 
         Event eventToEdit = filteredEventList.get(index.getZeroBased());
-        AddComment comments = new AddComment(eventToEdit.getComment().toString());
-        Comment newComments = new Comment(comments.addComment(getComment(), model.getUsername().toString()));
-        editCommentDescriptor.setComment(newComments);
+        CommentFacade comments = new CommentFacade();
+        String addedComment = comments.addComment(eventToEdit.getComment().toString(),
+                getComment(), model.getUsername().toString());
+        editCommentDescriptor.setComment(new Comment(addedComment));
         Event editedEvent = EditCommand.createEditedEvent(eventToEdit, editCommentDescriptor);
 
         model.updateEvent(eventToEdit, editedEvent);
