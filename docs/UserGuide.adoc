@@ -27,7 +27,7 @@ ClubHub (CH) is for those who *prefer to use a desktop app for managing members,
 .  Copy the file to the folder you want to use as the home folder for your ClubHub.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
-image::Ui.png[width="790"]
+image::Ui.png   [width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -432,7 +432,7 @@ e.g.`select 2`
 * *Addmember* : `addmember n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/POSTALCODE m/MAJOR [t/TAG]…​`
 * *Editmember* : `editmember INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/POSTALCODE] [m/MAJOR] [t/TAG]…​`
 * *Findbyname* : `find KEYWORD [MORE_KEYWORDS]`
-* *Findbymajor* :`findmajor KEYWORD [MORE_KEYWORDS]`
+* *Findbymajor* : `findmajor KEYWORD [MORE_KEYWORDS]`
 * *Findbyphonenumber* : `findphone KEYWORD [MORE_KEYWORDS]`
 * *Findbypostalcode* : `findpostalcode KEYWORD [MORE_KEYWORDS]`
 * *Deletemember* : `delete INDEX`
