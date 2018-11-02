@@ -1,29 +1,57 @@
 package seedu.address.logic.parser;
 
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddItemCommand;
-import seedu.address.logic.commands.ledger.AddLedgerCommand;
-import seedu.address.logic.commands.*;
-import seedu.address.logic.commands.MemberCommand.*;
-import seedu.address.logic.commands.ledger.AddLedgerCommand;
-import seedu.address.logic.commands.ledger.CreditCommand;
-import seedu.address.logic.commands.ledger.DebitCommand;
-import seedu.address.logic.commands.ledger.DeleteLedgerCommand;
-import seedu.address.logic.commands.ledger.OpenLedgerCommand;
-import seedu.address.logic.parser.Member.*;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.ledger.AddLedgerCommandParser;
-import seedu.address.logic.parser.ledger.CreditCommandParser;
-import seedu.address.logic.parser.ledger.DebitCommandParser;
-import seedu.address.logic.parser.ledger.DeleteLedgerCommandParser;
-import seedu.address.model.Model;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddItemCommand;
+
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteItemCommand;
+import seedu.address.logic.commands.EditItemCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HistoryCommand;
+import seedu.address.logic.commands.MemberCommand.AddMemberCommand;
+import seedu.address.logic.commands.MemberCommand.DeleteMemberCommand;
+import seedu.address.logic.commands.MemberCommand.EditMemberCommand;
+import seedu.address.logic.commands.MemberCommand.FindMajorCommand;
+import seedu.address.logic.commands.MemberCommand.FindMemberCommand;
+import seedu.address.logic.commands.MemberCommand.FindPhoneCommand;
+import seedu.address.logic.commands.MemberCommand.FindPostalcodeCommand;
+import seedu.address.logic.commands.MemberCommand.ListMemberCommand;
+import seedu.address.logic.commands.RedoAllCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.UndoAllCommand;
+import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.eventCommand.AddEventCommand;
+import seedu.address.logic.commands.eventCommand.DeleteEventCommand;
+import seedu.address.logic.commands.eventCommand.ListEventCommand;
+import seedu.address.logic.commands.ledger.AddLedgerCommand;
+import seedu.address.logic.commands.ledger.CreditCommand;
+import seedu.address.logic.commands.ledger.DebitCommand;
+import seedu.address.logic.commands.ledger.DeleteLedgerCommand;
+import seedu.address.logic.commands.ledger.OpenLedgerCommand;
+import seedu.address.logic.parser.Member.AddCommandParser;
+import seedu.address.logic.parser.Member.DeleteCommandParser;
+import seedu.address.logic.parser.Member.EditCommandParser;
+import seedu.address.logic.parser.Member.FindCommandParser;
+import seedu.address.logic.parser.Member.FindMajorCommandParser;
+import seedu.address.logic.parser.Member.FindPhoneCommandParser;
+import seedu.address.logic.parser.Member.FindPostalcodeCommandParser;
+import seedu.address.logic.parser.event.AddEventCommandParser;
+import seedu.address.logic.parser.event.DeleteEventCommandParser;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.ledger.AddLedgerCommandParser;
+import seedu.address.logic.parser.ledger.CreditCommandParser;
+import seedu.address.logic.parser.ledger.DebitCommandParser;
+import seedu.address.logic.parser.ledger.DeleteLedgerCommandParser;
 
 /**
  * Parses user input.
@@ -52,7 +80,14 @@ public class AddressBookParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-        switch (commandWord) {
+
+        switch(commandWord) {
+        case AddEventCommand.COMMAND_WORD: case AddEventCommand.COMMAND_ALIAS:
+            return new AddEventCommandParser().parse(arguments);
+        case DeleteEventCommand.COMMAND_WORD: case DeleteEventCommand.COMMAND_ALIAS:
+            return new DeleteEventCommandParser().parse(arguments);
+        case ListEventCommand.COMMAND_WORD: case ListEventCommand.COMMAND_ALIAS:
+            return new ListEventCommand();
 
         case AddMemberCommand.COMMAND_WORD: case AddMemberCommand.COMMAND_ALIAS:
             return new AddCommandParser().parse(arguments);

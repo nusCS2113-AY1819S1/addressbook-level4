@@ -1,6 +1,9 @@
 package seedu.address.ui;
 
+import java.util.logging.Logger;
+
 import com.google.common.eventbus.Subscribe;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -17,7 +20,7 @@ import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 
-import java.util.logging.Logger;
+
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -36,6 +39,7 @@ public class MainWindow extends UiPart<Stage> {
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
     private LedgerListPanel ledgerListPanel;
+    private EventListPanel eventListPanel;
     private ItemListPanel itemListPanel;
     private Config config;
     private UserPrefs prefs;
@@ -55,6 +59,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane ledgerListPanelPlaceholder;
+
+    @FXML
+    private StackPane eventListPanelPlaceholder;
 
     @FXML
     private StackPane itemListPanelPlaceholder;
@@ -135,6 +142,9 @@ public class MainWindow extends UiPart<Stage> {
         ledgerListPanel = new LedgerListPanel(logic.getFilteredLedgerList());
         ledgerListPanelPlaceholder.getChildren().add(ledgerListPanel.getRoot());
 
+        eventListPanel = new EventListPanel(logic.getFilteredEventList());
+        eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+
         itemListPanel = new ItemListPanel(logic.getFilteredItemList());
         itemListPanelPlaceholder.getChildren().add(itemListPanel.getRoot());
 
@@ -206,6 +216,10 @@ public class MainWindow extends UiPart<Stage> {
 
     public LedgerListPanel getLedgerListPanel() {
         return ledgerListPanel;
+    }
+
+    public EventListPanel getEventListPanel() {
+        return eventListPanel;
     }
 
     public ItemListPanel getItemListPanel() {

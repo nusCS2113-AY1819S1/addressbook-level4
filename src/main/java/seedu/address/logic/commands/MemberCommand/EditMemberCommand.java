@@ -1,7 +1,14 @@
 package seedu.address.logic.commands.MemberCommand;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTALCODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -18,7 +25,13 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.member.*;
+import seedu.address.model.member.Address;
+import seedu.address.model.member.Email;
+import seedu.address.model.member.Major;
+import seedu.address.model.member.Name;
+import seedu.address.model.member.Person;
+import seedu.address.model.member.Phone;
+import seedu.address.model.member.Postalcode;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -101,7 +114,8 @@ public class EditMemberCommand extends Command {
 
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPostalcode, updatedMajor, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPostalcode, updatedMajor,
+                updatedTags);
     }
 
     @Override

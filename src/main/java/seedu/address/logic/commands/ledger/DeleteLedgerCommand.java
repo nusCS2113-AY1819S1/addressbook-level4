@@ -1,20 +1,18 @@
 package seedu.address.logic.commands.ledger;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.item.Item;
 import seedu.address.model.ledger.Account;
 import seedu.address.model.ledger.DateLedger;
 import seedu.address.model.ledger.Ledger;
-
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Deletes a ledger identified using it's displayed index from the address book.
@@ -49,8 +47,7 @@ public class DeleteLedgerCommand extends Command {
 
             k = false;
 
-            if (i.getDateLedger().getDate().equals(targetDate.getDate())){
-
+            if (i.getDateLedger().getDate().equals(targetDate.getDate())) {
                 ledgerToDelete = i;
                 model.deleteLedger(ledgerToDelete);
                 k = true;

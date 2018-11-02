@@ -1,5 +1,7 @@
 package seedu.address.logic.commands.MemberCommand;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
@@ -7,10 +9,10 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.member.PostalcodeContainsKeywordPredicate;
 
-import static java.util.Objects.requireNonNull;
-
-public class FindPostalcodeCommand extends Command{
-
+/**
+ * .
+ */
+public class FindPostalcodeCommand extends Command {
     public static final String COMMAND_WORD = "findpostalcode";
     public static final String COMMAND_ALIAS = "fc";
 
@@ -36,8 +38,9 @@ public class FindPostalcodeCommand extends Command{
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof seedu.address.logic.commands.MemberCommand.FindPostalcodeCommand // instanceof handles nulls
-                && predicate.equals(((seedu.address.logic.commands.MemberCommand.FindPostalcodeCommand) other).predicate)); // state check
+                || (other instanceof seedu.address.logic.commands.MemberCommand.FindPostalcodeCommand
+                // instanceof handles nulls
+                && predicate.equals(((seedu.address.logic.commands.MemberCommand.FindPostalcodeCommand)
+                other).predicate)); // state check
     }
 }
-

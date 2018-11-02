@@ -9,7 +9,11 @@ import seedu.address.model.ledger.Account;
 import seedu.address.model.ledger.Ledger;
 import seedu.address.model.member.Person;
 import seedu.address.model.tag.Tag;
-
+import seedu.address.model.Events.Event;
+import seedu.address.model.Events.EventDate;
+import seedu.address.model.Events.Description;
+import seedu.address.model.Events.EventName;
+import seedu.address.model.Events.Venue;
 /**
  * The API of the Model component.
  */
@@ -21,6 +25,8 @@ public interface Model {
 
     Predicate<Item> PREDICATE_SHOW_ALL_ITEMS = unused -> true;
 
+    Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
+
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
 
@@ -31,6 +37,12 @@ public interface Model {
      * Returns true if a member with the same identity as {@code member} exists in the address book.
      */
     boolean hasPerson(Person person);
+
+
+    /**
+     * Returns true if an event with the same name as (@code event) exists in the club book
+     */
+    boolean hasEvent(Event event);
 
     /**
      * Returns true if a ledger with the same date as (@code ledger) exists in the club book
@@ -58,6 +70,20 @@ public interface Model {
      */
     void addPerson(Person person);
 
+    /**
+     * Adds the given event
+     * @param event
+     */
+    void addEvent(Event event);
+
+
+
+    /**
+     * Replaces the given event (@code target) with (@code editedEvent).
+     * target must exist in the club book.
+     */
+    void updateEvent(Event target, Event editedEvent);
+
 
     /**
      * Adds the given ledger
@@ -70,6 +96,12 @@ public interface Model {
      * @param ledger
      */
     void deleteLedger(Ledger ledger);
+
+    /**
+     * Delete the given event
+     * @param event
+     */
+    void deleteEvent(Event event);
 
     /**
      * Increases the amount in balance by a given amount
@@ -113,6 +145,9 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered item list */
     ObservableList<Item> getFilteredItemList();
 
+    /**Return an unmodified view of the filtered event list*/
+    ObservableList<Event> getFilteredEventList();
+
     /**
      * Updates the filter of the filtered member list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
@@ -130,6 +165,12 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredItemList(Predicate<Item> predicate);
+
+    /**
+     * Updates the filter of the filtered item list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredEventList(Predicate<Event> predicate);
 
 
     /**
