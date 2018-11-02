@@ -26,7 +26,7 @@ import seedu.address.model.person.Person;
 public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
-    public static final String STUDENT_GRADE_PAGE_URL = "/docs/StudentGradeSummary.html";
+    public static final String STUDENT_GRADE_PAGE_URL = "https://clara1234566.github.io/StudentGradeSummary.html";
     public static final String SEARCH_PAGE_URL =
             "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
 
@@ -51,7 +51,7 @@ public class BrowserPanel extends UiPart<Region> {
      * The window to show student tests && grades.
      */
     private void loadPersonPage(Person person) {
-        String urlToLoad = getClass().getResource(STUDENT_GRADE_PAGE_URL).toString();
+        String urlToLoad = STUDENT_GRADE_PAGE_URL;
         int i = 0;
         Set<Test> testList = new HashSet<>();
         testList.addAll(person.getTests());
