@@ -1,6 +1,5 @@
 package seedu.address.logic.commands.ledger;
 
-
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.ShowLedgerRequestEvent;
 import seedu.address.logic.CommandHistory;

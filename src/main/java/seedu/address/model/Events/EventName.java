@@ -3,15 +3,15 @@ package seedu.address.model.Events;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-public class Name {
+public class EventName {
     public final String ThisName;
     public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-    public static final String MESSAGE_NAME =
+    public static final String MESSAGE_EVENTNAME_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
-    public Name(String name){
+    public EventName(String name){
         requireNonNull(name);
-        checkArgument(CheckValid(name),MESSAGE_NAME);
-        ThisName=name;
+        checkArgument(CheckValid(name), MESSAGE_EVENTNAME_CONSTRAINTS);
+        ThisName= name;
     }
     public static boolean CheckValid(String name){
         return name.matches(NAME_VALIDATION_REGEX);
@@ -20,7 +20,8 @@ public class Name {
     public String toString() {
         return ThisName;
     }
-    public static Boolean Checkqual(String name, String other){
-        return (name==other);
+    public boolean equals(EventName other) {
+        return other == this
+                || ThisName.equals(other.ThisName);
     }
 }

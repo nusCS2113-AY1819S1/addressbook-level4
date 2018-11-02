@@ -9,6 +9,10 @@ import seedu.address.model.ledger.Account;
 import seedu.address.model.ledger.DateLedger;
 import seedu.address.model.member.*;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.Events.Venue;
+import seedu.address.model.Events.Description;
+import seedu.address.model.Events.EventName;
+import seedu.address.model.Events.EventDate;
 
 import java.text.DecimalFormat;
 import java.util.Collection;
@@ -51,7 +55,64 @@ public class ParserUtil {
         }
         return new Name(trimmedName);
     }
+    /**
+     * Parses a {@code String name} into a {@code EventName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static EventName parseEventName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!EventName.CheckValid(trimmedName)) {
+            throw new ParseException(EventName.MESSAGE_EVENTNAME_CONSTRAINTS);
+        }
+        return new EventName(trimmedName);
+    }
 
+    /**
+     * Parses a {@code String description} into a {@code Description}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code description} is invalid.
+     */
+    public static  Description parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        if (!Venue.CheckValid(trimmedDescription)) {
+            throw new ParseException(Description.MESSAGE_DESCRIPTION_CCONSTRAINT);
+        }
+        return new Description(trimmedDescription);
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code EventDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code EventDate} is invalid.
+     */
+    public static EventDate parserEventDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if(!EventDate.CheckValid(trimmedDate)) {
+            throw new  ParseException(EventDate.MESSAGE_EVENTDATE_CONSTRAINTS);
+        }
+        return new EventDate(trimmedDate);
+    }
+    /**
+     * Parses a {@code String venue} into a {@code Venue}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code venue} is invalid.
+     */
+    public static  Venue parseVenue(String venue) throws ParseException {
+        requireNonNull(venue);
+        String trimmedVenue = venue.trim();
+        if (!Venue.CheckValid(trimmedVenue)) {
+            throw new ParseException(Venue.MESSAGE_VENUE_CONSTRAINT);
+        }
+        return new Venue(trimmedVenue);
+    }
     /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
@@ -181,10 +242,10 @@ public class ParserUtil {
     public static Double parseBalance(String balance) throws ParseException {
         requireNonNull(balance);
         //DecimalFormat decimalFormat = new DecimalFormat("#.##");
-        Double trimmedBalance = Double.parseDouble(balance);
         if (!Account.isValidBalance(balance)) {
             throw new ParseException(Account.MESSAGE_BALANCE_CONSTRAINTS);
         }
+        Double trimmedBalance = Double.parseDouble(balance);
         return trimmedBalance;
     }
 
