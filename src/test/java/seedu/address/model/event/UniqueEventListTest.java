@@ -5,8 +5,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_PUNCTUAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_LT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ALICE;
 import static seedu.address.testutil.TypicalEvents.EVENT_1;
 import static seedu.address.testutil.TypicalEvents.EVENT_2;
+import static seedu.address.testutil.TypicalEvents.EVENT_3;
+import static seedu.address.testutil.TypicalEvents.EVENT_4;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,6 +22,7 @@ import org.junit.rules.ExpectedException;
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.TypicalEvents;
 
 public class UniqueEventListTest {
     @Rule
@@ -181,5 +185,32 @@ public class UniqueEventListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         uniqueEventList.asUnmodifiableObservableList().remove(0);
+    }
+
+    @Test
+    public void removeAttendee_personNameExistInList_success () {
+        uniqueEventList.add(TypicalEvents.eventwithAttendee());
+        uniqueEventList.removeAttendee(VALID_NAME_ALICE);
+        UniqueEventList expectedUniqueEventList = new UniqueEventList();
+        expectedUniqueEventList.add(EVENT_3);
+        assertEquals(expectedUniqueEventList, uniqueEventList);
+    }
+
+    @Test
+    public void hasClash_noEventInList_returnsFalse() {
+        assertFalse(uniqueEventList.hasClash(EVENT_1, VALID_NAME_ALICE));
+    }
+
+    @Test
+    public void hasClash_clashWithEventInList_returnsTrue() {
+        uniqueEventList.add(TypicalEvents.eventwithAttendee());
+        assertTrue(uniqueEventList.hasClash(EVENT_1, VALID_NAME_ALICE));
+    }
+
+    @Test
+    public void hasClash_doesNotClashWithEventInList_returnsFalse() {
+        uniqueEventList.add(EVENT_1);
+        uniqueEventList.add(TypicalEvents.eventwithAttendee());
+        assertFalse(uniqueEventList.hasClash(EVENT_4, VALID_NAME_ALICE));
     }
 }

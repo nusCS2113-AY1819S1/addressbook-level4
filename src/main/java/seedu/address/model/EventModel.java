@@ -64,6 +64,11 @@ public interface EventModel {
     void removePersonFromAllEvents(Person person);
 
     /**
+     * Returns true if an {@code event} clashes with any event in the event list.
+     */
+    boolean hasClash(Event event, String personName);
+
+    /**
      * Returns true if the model has previous event list states to restore.
      */
     boolean canUndoEventList();

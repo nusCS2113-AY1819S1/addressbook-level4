@@ -5,7 +5,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_PUNCTUAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_LT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ALICE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.testutil.TypicalEvents.EVENT_1;
+import static seedu.address.testutil.TypicalEvents.EVENT_3;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventList;
 
 import java.util.Collections;
@@ -16,6 +19,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.event.Event;
 import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.TypicalEvents;
 
 public class EventListTest {
 
@@ -72,6 +76,36 @@ public class EventListTest {
     public void getEventList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         eventList.getEventList().remove(0);
+    }
+
+    @Test
+    public void removePersonFromAllEvents_nullPerson_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        eventList.removePersonFromAllEvents(null);
+    }
+
+    @Test
+    public void hasClash_nullEvent_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        eventList.hasClash(null, VALID_NAME_ALICE);
+    }
+
+    @Test
+    public void hasClash_nullPersonName_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        eventList.hasClash(EVENT_1, null);
+    }
+
+    @Test
+    public void hasClash_eventClashWithList_returnsTrue() {
+        eventList.addEvent(TypicalEvents.eventwithAttendee());
+        assertTrue(eventList.hasClash(EVENT_3, VALID_NAME_ALICE));
+    }
+
+    @Test
+    public void hasClash_eventDoesNotClashWithList_returnsFalse() {
+        eventList.addEvent(TypicalEvents.eventwithAttendee());
+        assertFalse(eventList.hasClash(EVENT_3, VALID_NAME_BOB));
     }
 
 

@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -109,6 +110,15 @@ public class UniqueEventList implements Iterable<Event> {
                 internalList.set(index, updatedEvent);
             }
         }
+    }
+
+    /**
+     * Returns true if the selected event clashes with the person's event list.
+     */
+    public boolean hasClash(Event toCheck, String personName) {
+        requireNonNull(toCheck);
+        Predicate < Event > eventClashPredicate = e -> e.hasAttendee(personName) && e.hasClash(toCheck);
+        return internalList.stream().anyMatch(eventClashPredicate);
     }
 
 

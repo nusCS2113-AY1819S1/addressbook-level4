@@ -88,8 +88,18 @@ public class EventList implements ReadOnlyEventList {
      * Removes {@code Person} from the Attendee of {@code EventList}.
      */
     public void removePersonFromAllEvents(Person person) {
+        requireNonNull(person);
         String personName = person.getName().toString();
         events.removeAttendee(personName);
+    }
+
+    /**
+     * Removes {@code Person} from the Attendee of {@code EventList}.
+     */
+    public boolean hasClash(Event event, String personName) {
+        requireNonNull(event);
+        requireNonNull(personName);
+        return events.hasClash(event, personName);
     }
 
     public List<Event> getSortedEventList() {

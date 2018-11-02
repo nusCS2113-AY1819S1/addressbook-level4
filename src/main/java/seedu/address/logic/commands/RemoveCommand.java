@@ -53,6 +53,7 @@ public class RemoveCommand extends Command {
         if (indexEvent.getZeroBased() >= lastShownEventList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
+
         Person person = lastShownPersonList.get(indexPerson.getZeroBased());
         Event event = lastShownEventList.get(indexEvent.getZeroBased());
 

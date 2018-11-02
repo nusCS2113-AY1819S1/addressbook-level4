@@ -141,6 +141,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public boolean hasClash(Event event, String personName) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public ObservableList<Event> getFilteredEventList() {
         throw new AssertionError("This method should not be called.");
     }
