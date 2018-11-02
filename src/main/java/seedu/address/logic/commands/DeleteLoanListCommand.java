@@ -1,14 +1,12 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.MainApp.loanListFile;
-
-import java.io.File;
 import java.util.ArrayList;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import seedu.address.MainApp;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -39,14 +37,14 @@ public class DeleteLoanListCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        if (!loanListFile.exists()) {
+        if (!MainApp.getLoanListFile().exists()) {
             throw new CommandException(MESSAGE_EMPTY);
         }
         try {
             JAXBContext context = JAXBContext.newInstance(XmlAdaptedLoanList.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
             XmlAdaptedLoanList xmlAdaptedLoanList = (XmlAdaptedLoanList) unmarshaller
-                    .unmarshal(loanListFile);
+                    .unmarshal(MainApp.getLoanListFile());
             ArrayList<XmlAdaptedLoanerDescription> loanList = xmlAdaptedLoanList.getLoanList();
 
             if (index.getOneBased() > loanList.size()) {

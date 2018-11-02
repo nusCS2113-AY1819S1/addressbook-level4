@@ -45,14 +45,18 @@ public class MainApp extends Application {
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
+    private static File LoanListFile;
+
     protected Ui ui;
     protected Logic logic;
     protected Storage storage;
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
-    public static File loanListFile;
 
+    public static File getLoanListFile() {
+        return LoanListFile;
+    }
     @Override
     public void init() throws Exception {
         logger.info("=============================[ Initializing StockList ]===========================");
@@ -62,7 +66,7 @@ public class MainApp extends Application {
         String loanListDirectory = userDirectory.getAbsolutePath().replace("\\", "/");
         loanListDirectory += "/data/LoanList.xml";
         System.out.println(loanListDirectory);
-        loanListFile = new File(loanListDirectory);
+        LoanListFile = new File(loanListDirectory);
 
 
         AppParameters appParameters = AppParameters.parse(getParameters());

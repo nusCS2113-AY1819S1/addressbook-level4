@@ -1,17 +1,15 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.MainApp.loanListFile;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOANER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
-
-import java.io.File;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import seedu.address.MainApp;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -52,7 +50,7 @@ public class LoanListCommand extends Command {
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
         jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         jaxbMarshaller.marshal(xmlAdaptedLoanList, System.out);
-        jaxbMarshaller.marshal(xmlAdaptedLoanList, loanListFile);
+        jaxbMarshaller.marshal(xmlAdaptedLoanList, MainApp.getLoanListFile());
     }
 
     @Override
@@ -74,10 +72,10 @@ public class LoanListCommand extends Command {
         XmlAdaptedLoanerDescription toAdd = new XmlAdaptedLoanerDescription(loaner);
         JAXBContext context = JAXBContext.newInstance(XmlAdaptedLoanList.class);
         XmlAdaptedLoanList xmlAdaptedLoanList = new XmlAdaptedLoanList();
-        if (loanListFile.exists()) {
+        if (MainApp.getLoanListFile().exists()) {
             Unmarshaller unmarshaller = context.createUnmarshaller();
             xmlAdaptedLoanList = (XmlAdaptedLoanList) unmarshaller
-                    .unmarshal(loanListFile);
+                    .unmarshal(MainApp.getLoanListFile());
         }
         xmlAdaptedLoanList.addLoaner(toAdd);
         updateXmlLoanListFile(xmlAdaptedLoanList);
