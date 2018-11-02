@@ -11,6 +11,7 @@ import seedu.recruit.logic.LogicState;
 import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.FindCandidateCommand;
 import seedu.recruit.logic.commands.FindCompanyCommand;
+import seedu.recruit.logic.commands.FindJobOfferCommand;
 import seedu.recruit.logic.commands.ListCandidateCommand;
 import seedu.recruit.logic.commands.ListCompanyCommand;
 import seedu.recruit.logic.commands.SwitchBookCommand;
@@ -59,6 +60,9 @@ public class EmailParser {
             case FindCompanyCommand.COMMAND_WORD:
                 return new FindCompanyCommandParser().parse(arguments);
 
+            case FindJobOfferCommand.COMMAND_WORD:
+                return new FindJobOfferCommandParser().parse(arguments);
+
             case SwitchBookCommand.COMMAND_WORD:
                 return new SwitchBookCommand();
 
@@ -83,6 +87,9 @@ public class EmailParser {
 
             case FindCompanyCommand.COMMAND_WORD:
                 return new FindCompanyCommandParser().parse(arguments);
+
+            case FindJobOfferCommand.COMMAND_WORD:
+                return new FindJobOfferCommandParser().parse(arguments);
 
             case EMAIL_NEXT_COMMAND:
                 return new EmailContentsNextCommand();
