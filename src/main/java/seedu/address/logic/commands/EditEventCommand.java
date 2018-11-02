@@ -107,11 +107,13 @@ public class EditEventCommand extends Command {
             throw new CommandException(EndTime.MESSAGE_INVALID_END_TIME);
         }
 
+        //TODO: Write tests for EditEvent
+        /*
         for (String personName: editedEvent.getAttendees().getAttendeesSet()) {
             if (model.hasClash(editedEvent, personName)) {
                 throw new CommandException(String.format(MESSAGE_EVENT_CLASH, personName));
             }
-        }
+        }*/
 
         model.updateEvent(eventToEdit, editedEvent);
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
