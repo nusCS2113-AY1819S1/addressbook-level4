@@ -73,11 +73,13 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_createaccount() throws Exception {
         LoginManager.setIsCurrentlyTesting(true);
+        LoginManager.setIsPresident(true);
         LoginDetails loginDetails = new AccountBuilder().build();
         CreateAccountCommand command = (CreateAccountCommand) parser.parseCommand(AccountUtil
                                                                         .getCreateAccountCommand(loginDetails));
         assertEquals(new CreateAccountCommand(loginDetails), command);
         LoginManager.setIsCurrentlyTesting(false);
+        LoginManager.setIsPresident(false);
     }
 
     @Test

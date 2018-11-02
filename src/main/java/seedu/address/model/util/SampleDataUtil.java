@@ -113,6 +113,7 @@ public class SampleDataUtil {
 
     public static ReadOnlyClubBudgetElementsBook getSampleClubBudgetElementsBook() {
         ClubBudgetElementsBook sampleCBb = new ClubBudgetElementsBook();
+
         /**for (ClubBudgetElements sampleClubBudgetElements : getSampleClubBudgetElements()) {
             sampleCBb.addClub(sampleClubBudgetElements);
         }*/

@@ -118,9 +118,3 @@ using your own login credentials. The `createaccount` command allows you to crea
 |===
 
 include::../DeveloperGuide.adoc[tag=login]
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
