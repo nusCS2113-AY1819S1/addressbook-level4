@@ -514,6 +514,15 @@ e.g. `sendmail 1 s/Solution for Assignment m/Hi Bob, solution has been attached.
 e.g. `sendmail 1,4,6 s/Tutorial Cancelled m/Tutorial class for Friday has been cancelled.`
 * *Send Email (Group)*: `sendmail g/[Group_Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
 e.g. `sendmail g/2 s/Announcement m/Please bring your calculator tomorrow.`
+* *Distribute randomly into _n_ Groups* :
+`distinto INDEX n/GROUP-NAME g/GENDER_FLAG nat/NATIONALITY_FLAG` +
+e.g. distinto 3 n/CS2113- g/0 nat/0
+* *Distribute randomly into _n_ Groups with balanced gender* : +
+`distinto INDEX n/GROUP-NAME g/GENDER_FLAG nat/NATIONALITY_FLAG`
+e.g. distinto 3 n/CS2113- g/1 nat/0
+* *Distribute randomly into _n_ Groups with balanced nationality* :
+`distinto INDEX n/GROUP-NAME g/GENDER_FLAG nat/NATIONALITY_FLAG` +
+e.g. distinto 3 n/CS2113- g/0 nat/1
 * *List* : `list`
 * *Help* : `help`
 * *Select* : `select INDEX` +
