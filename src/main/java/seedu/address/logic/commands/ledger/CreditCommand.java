@@ -25,7 +25,7 @@ public class CreditCommand extends Command {
     public static final String COMMAND_WORD = "credit";
     public static final String MESSAGE_CREDIT_ACCOUNT_SUCCESS = "New amount for date %2$s is $%1$s";
     public static final String MESSAGE_USAGE = COMMAND_WORD + "Credits the amount in a date ledger. Parameters: "
-            + "/d[Date DD/MM] /b[$Balance]";
+            + "d/[Date DD/MM] b/[$Balance]";
 
     private final Logger logger = LogsCenter.getLogger(CreditCommand.class);
     private DateLedger dateLedger;

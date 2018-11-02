@@ -29,7 +29,7 @@ public class HelpWindow extends UiPart<Stage> {
         super(FXML, root);
 
         String userGuideUrl = getClass().getResource(USERGUIDE_FILE_PATH).toString();
-        browser.getEngine().load(userGuideUrl);
+        browser.getEngine().load("https://github.com/CS2113-AY1819S1-T09-3/main/blob/master/docs/UserGuide.adoc");
     }
 
     /**
