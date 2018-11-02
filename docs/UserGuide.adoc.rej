@@ -1,0 +1,43 @@
+diff a/docs/UserGuide.adoc b/docs/UserGuide.adoc	(rejected hunks)
+@@ -137,35 +137,14 @@
+ * `deletegroupstudent g/1 p/1`
+ * `dgs g/1 p/1`
+ 
+-=== Add test and test marks to student: `adt student name tn/ tm/`
+-The system is allowed user to input different test name and test marks for each student by indicate
+-the name of student. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate keyword then need to indicate the full name, otherwise if no duplicate it will just add to the student )
++=== add test and test marks to student: 'adt student name tn/ tm/'
++The system is allowed user to input different testname and test marks for each student by indicate
++the student name. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate then need to indicate the full name, otherwise it will be just add )
+ 
+-Format: `adt student name tn/ tm/` or  `adt student name tm/ tn/`
+-Example: `adt Alex tn/CS2113Midterm tm/77`
+-This will add a test to the student
++Format: adt tn/ tm/ or adt tm/ tn/
++Example: adt
++This will list all the students who score above 56 in a new grade list
+ 
+-=== Edit test marks of student: `edt student name tn/ tm/`
+-The system is allowed user to input different test name and test marks for each student by indicate
+-the student name. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate then need to indicate the full name, otherwise if no duplicate it will just edit the student's mark)
+-
+-Format: `edt student name tn/ tm/` or `edt student name tm/ tn/`
+-Example: `edt Alex tn/CS2113Midterm tm/66`
+-This will edit the student marks for test CS2113Midterm
+-
+-=== Generate grade summary for each test: `tn/ highest/` or `tn/ lowest/` or `tn/ median/` or `tn/ mean/` or `tn/ TTF/` or `tn/ LTF/`
+-The system is allowed user to check any summary he want of each test (highest mark/ lowest mark / median mark / mean mark / generate top/last 25 percen students list)
+-
+-Format: `tn/ highest/` or `tn/ lowest/` or `tn/ median/` or `tn/ mean/` or `tn/ TTF/` or `tn/ LTF/`
+-Example: `tn/CS2113Midterm highest/` gives the highest mark for all student taken the test CS2113Midterm
+-         `tn/CS2113Midterm LTF/` will show a list of students who has fall into the last 25 percentage of this test
+-
+-=== Assign grade to each student taken certain test(Bell_curve): `agpt tn/`
+-The system is allowed user to enter a command to assign grade for all students who has taken certain test base on the bell_curve calculation
+-The user can check student's test and grade on the browser panel after you click on each student's name card.
+-
+-Format: `agpt tn/`
+-Example: `agpt tn/CS2113Midterm`
+ 
+ === Distributed all students into _n_ groups with balanced number of Nationality or Gender: `distinto` `di`
+ This functionality creates _n_ number of groups determined by the user, with a general group name specified and randomly distribute all students in the system into _n_ groups. +
