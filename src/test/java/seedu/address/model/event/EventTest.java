@@ -124,27 +124,90 @@ public class EventTest {
     }
 
     @Test
-    public void hasAttendee_validName_success() {
+    public void hasAttendee_validName_returnTrue() {
         Event event = new EventBuilder(EVENT_1).withAttendee(setOne).build();
         assertTrue(event.hasAttendee("Alice Pauline"));
 
     }
 
     @Test
-    public void hasAttendee_invalidName_fail() {
+    public void hasAttendee_invalidName_returnFalse() {
         Event event = new EventBuilder(EVENT_1).withAttendee(setOne).build();
         assertFalse(event.hasAttendee("Bob Choo"));
     }
 
     @Test
-    public void isAttendeeEmpty_attendeeContainsNoName_success() {
+    public void isAttendeeEmpty_attendeeContainsNoName_returnTrue() {
         Event event = new EventBuilder(EVENT_1).build();
         assertTrue(event.isAttendeeEmpty());
     }
 
     @Test
-    public void isAttendeeEmpty_attendeeContainsNames_success() {
+    public void isAttendeeEmpty_attendeeContainsNames_returnFalse() {
         Event event = new EventBuilder(EVENT_1).withAttendee(setOne).build();
         assertFalse(event.isAttendeeEmpty());
     }
+
+    @Test
+    public void hasClash_sameEvent_returnTrue() {
+        assertTrue(EVENT_1.hasClash(EVENT_1));
+    }
+
+    @Test
+    public void hasClash_eventHasDifferentDateAndTimeClash_returnFalse() {
+        Event event = new EventBuilder(EVENT_1).withDate(VALID_DATE).build();
+        assertFalse(EVENT_1.hasClash(event));
+        assertFalse(event.hasClash(EVENT_1));
+    }
+
+    @Test
+    public void hasClash_differentEventSameStartAndEndTime_returnTrue() {
+        Event event = new EventBuilder(EVENT_2).withStartTime("12:00").withEndTime("16:00").build();
+        assertTrue(EVENT_1.hasClash(event));
+        assertTrue(event.hasClash(EVENT_1));
+    }
+
+    @Test
+    public void hasClash_eventHasSameDateSameStartTimeDifferentEndTime_returnTrue() {
+        //earlier end time
+        Event event = new EventBuilder(EVENT_1).withEndTime("15:59").build();
+        assertTrue(EVENT_1.hasClash(event));
+        assertTrue(event.hasClash(EVENT_1));
+        //later end time
+        event = new EventBuilder(EVENT_1).withEndTime("16:01").build();
+        assertTrue(EVENT_1.hasClash(event));
+        assertTrue(event.hasClash(EVENT_1));
+    }
+
+    @Test
+    public void hasClash_eventHasSameDateSameEndTimeDifferentStartTime_returnTrue() {
+        //earlier start time
+        Event event = new EventBuilder(EVENT_1).withStartTime("11:59").build();
+        assertTrue(EVENT_1.hasClash(event));
+        assertTrue(event.hasClash(EVENT_1));
+        //later start time
+        event = new EventBuilder(EVENT_1).withStartTime("12:01").build();
+        assertTrue(EVENT_1.hasClash(event));
+        assertTrue(event.hasClash(EVENT_1));
+    }
+
+    @Test
+    public void hasClash_eventHasSameDateDifferentTimeWhichOverlap_returnTrue() {
+        Event event = new EventBuilder(EVENT_1).withStartTime("12:01").withEndTime("16:01").build();
+        assertTrue(EVENT_1.hasClash(event));
+        assertTrue(event.hasClash(EVENT_1));
+    }
+
+    @Test
+    public void hasClash_eventHasSameDateDifferentTimeWhichDoesNotOverlap_returnTrue() {
+        // right of event
+        Event event = new EventBuilder(EVENT_1).withStartTime("16:00").withEndTime("23:59").build();
+        assertFalse(EVENT_1.hasClash(event));
+        assertFalse(event.hasClash(EVENT_1));
+        // left of event
+        event = new EventBuilder(EVENT_1).withStartTime("00:00").withEndTime("12:00").build();
+        assertFalse(EVENT_1.hasClash(event));
+        assertFalse(event.hasClash(EVENT_1));
+    }
+
 }

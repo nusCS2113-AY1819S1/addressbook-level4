@@ -29,7 +29,8 @@ public class Attendees {
     }
 
     public Set<String> getAttendeesSet() {
-        return attendeesSet;
+        Set<String> attendeesSetCopy = attendeesSet;
+        return attendeesSetCopy;
     }
 
     /**
