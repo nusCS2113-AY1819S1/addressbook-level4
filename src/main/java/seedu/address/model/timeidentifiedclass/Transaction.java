@@ -112,7 +112,7 @@ public class Transaction extends TimeIdentifiedClass {
         ret.append("PRODUCT NAME: QUANTITY\n");
         while (it.hasNext()) {
             Map.Entry entry = (Map.Entry) it.next();
-            if (entry.getKey() != null && !entry.equals("")) {
+            if (entry.getKey() != null && !entry.getKey().equals("")) {
                 ret.append(entry.getKey() + ": " + entry.getValue() + "\n");
             }
         }

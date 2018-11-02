@@ -34,7 +34,6 @@ import seedu.address.model.product.Product;
 import seedu.address.model.saleshistory.ReadOnlySalesHistory;
 import seedu.address.model.saleshistory.SalesHistory;
 import seedu.address.model.timeidentifiedclass.Reminder;
-import seedu.address.model.timeidentifiedclass.TimeIdentifiedClass;
 import seedu.address.model.timeidentifiedclass.Transaction;
 import seedu.address.model.timeidentifiedclass.exceptions.DuplicateReminderException;
 import seedu.address.model.timeidentifiedclass.exceptions.DuplicateTransactionException;
@@ -507,9 +506,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void addReminder(Reminder reminder) throws InvalidTimeFormatException, DuplicateReminderException {
-        if (!TimeIdentifiedClass.isValidDateAndTime(reminder.getReminderTime())) {
-            throw new InvalidTimeFormatException();
-        }
         try {
             versionedSalesHistory.addReminder(reminder);
         } catch (InvalidTimeFormatException e) {
