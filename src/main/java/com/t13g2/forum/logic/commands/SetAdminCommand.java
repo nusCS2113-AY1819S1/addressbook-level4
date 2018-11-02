@@ -32,6 +32,7 @@ public class SetAdminCommand extends Command {
     public static final String MESSAGE_INVALID_USER = "The user \"%1$s\" does not exist.";
     public static final String MESSAGE_DUPLICATE_SET = "The user \"%1$s\" is already an admin.";
     public static final String MESSAGE_DUPLICATE_REVERT = "%1$s is not an admin, unable to revert.";
+    public static final String MESSAGE_SET_CONSTRAINTS = "set can only take true or false.";
 
     private final String userNametoSetAdmin;
     private final boolean setAdmin;

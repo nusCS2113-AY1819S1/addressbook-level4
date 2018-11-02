@@ -30,7 +30,7 @@ public class CreateModuleCommandParser implements Parser<CreateModuleCommand> {
                 CreateModuleCommand.MESSAGE_USAGE));
         }
 
-        Module module = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE_TITLE).get(),
+        Module module = ParserUtil.parseModuleCodeAndTitle(argMultimap.getValue(PREFIX_MODULE_TITLE).get(),
             argMultimap.getValue(PREFIX_MODULE_CODE).get());
 
         return new CreateModuleCommand(module);

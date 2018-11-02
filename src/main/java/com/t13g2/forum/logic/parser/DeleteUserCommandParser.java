@@ -29,7 +29,7 @@ public class DeleteUserCommandParser implements Parser<DeleteUserCommand> {
                 DeleteUserCommand.MESSAGE_USAGE));
         }
 
-        String userName = argMultimap.getValue(PREFIX_USER_NAME).get();
+        String userName = ParserUtil.parseUserName(argMultimap.getValue(PREFIX_USER_NAME).get());
 
         return new DeleteUserCommand(userName);
     }

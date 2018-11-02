@@ -5,14 +5,16 @@ import com.t13g2.forum.commons.util.CollectionUtil;
 
 /**
  * Represents the announcement in ForumBook.
- * Guarantees: is valid as declared in {@link #isValidAnnouncement(String, String)}
+ * Guarantees: is valid as declared in {@link #isValidAnnouncement(String)}
  */
 public class Announcement extends BaseModel {
     /**
      * Show message if announcement is not valid
      */
-    public static final String MESSAGE_ANNOUNCEMENT_CONSTRAINTS =
-        "Announcement can take any values, and it should not be blank";
+    public static final String MESSAGE_ANNOUNCEMENT_TITLE_CONSTRAINTS =
+        "aTitle can take any values, and they should not be blank";
+    public static final String MESSAGE_ANNOUNCEMENT_CONTENT_CONSTRAINTS =
+        "aContent can take any values, and they should not be blank";
 
     /**
      * The first character of the announcement must not be a whitespace,
@@ -30,7 +32,8 @@ public class Announcement extends BaseModel {
      */
     public Announcement(String title, String content) {
         CollectionUtil.requireAllNonNull(title, content);
-        AppUtil.checkArgument(isValidAnnouncement(title, content), MESSAGE_ANNOUNCEMENT_CONSTRAINTS);
+        AppUtil.checkArgument(isValidAnnouncement(title), MESSAGE_ANNOUNCEMENT_TITLE_CONSTRAINTS);
+        AppUtil.checkArgument(isValidAnnouncement(content), MESSAGE_ANNOUNCEMENT_CONTENT_CONSTRAINTS);
         this.title = title;
         this.content = content;
     }
@@ -38,8 +41,8 @@ public class Announcement extends BaseModel {
     /**
      * Returns true if a given string is a valid email.
      */
-    public static boolean isValidAnnouncement(String testTitle, String testContent) {
-        return (testTitle.matches(ANNOUNCEMENT_VALIDATION_REGEX) || testContent.matches(ANNOUNCEMENT_VALIDATION_REGEX));
+    public static boolean isValidAnnouncement(String testString) {
+        return (testString.matches(ANNOUNCEMENT_VALIDATION_REGEX));
     }
 
     public String getTitle() {
