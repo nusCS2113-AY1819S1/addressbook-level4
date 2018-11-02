@@ -52,7 +52,6 @@ import seedu.address.logic.parser.ledger.AddLedgerCommandParser;
 import seedu.address.logic.parser.ledger.CreditCommandParser;
 import seedu.address.logic.parser.ledger.DebitCommandParser;
 import seedu.address.logic.parser.ledger.DeleteLedgerCommandParser;
-
 /**
  * Parses user input.
  */

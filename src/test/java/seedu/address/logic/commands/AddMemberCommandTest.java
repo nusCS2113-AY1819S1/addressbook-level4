@@ -121,6 +121,11 @@ public class AddMemberCommandTest {
         }
 
         @Override
+        public void deleteEvent(Event event) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
         public void increaseAccount(Account account) {
             throw new AssertionError("This method should not be called.");
         }
