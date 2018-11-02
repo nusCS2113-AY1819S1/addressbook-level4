@@ -12,5 +12,6 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_INVALID_LEDGER_DISPLAYED_DATE = "The ledger date provided is invalid";
     public static final String MESSAGE_INVALID_ITEM_DISPLAYED_INDEX = "The item index provided is invalid";
+    public static final String MESSAGE_NOT_ENOUGH_ITEMS = "Please remove the entry using deleteItem instead";
 
 }

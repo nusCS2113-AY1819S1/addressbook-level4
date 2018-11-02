@@ -409,8 +409,39 @@ Examples:
 
 * `editItem 2 q/1` +
 Edits the quantity of the 2nd item to be `1`.
-* `editItem 1 `n/Soccer Balls q/4` +
+* `editItem 1 n/Soccer Balls q/4` +
 Edits the name and quantity of the 1st item to be `Soccer Balls` and `6` respectively.
+
+==== Increase quantity of an item: `increaseItem`
+
+Increases the quantity of existing item in the ItemList.
+Format: `increaseItem INDEX [q/ITEM_QUANTITY]`
+
+****
+* Increases the quantity of the item at the specified `INDEX`. The index refers to the index number shown in the displayed item list. The index *must be a positive integer* 1, 2, 3, ...
+* Input quantities will be added to the existing quantities.
+****
+
+Examples:
+
+* `increaseItem 2 q/1` +
+Increases the quantity of the 2nd item by `1`.
+
+==== Decrease quantity of an item: `decreaseItem`
+
+Decreases the quantity of existing item in the ItemList.
+Format: `decreaseItem INDEX [q/ITEM_QUANTITY]`
+
+****
+* Decreases the quantity of the item at the specified `INDEX`. The index refers to the index number shown in the displayed item list. The index *must be a positive integer* 1, 2, 3, ...
+* Existing quantities will be subtracted by the input quantities.
+* Input quantities must be lower than the existing quantities.
+****
+
+Examples:
+
+* `decreaseItem 2 q/1` +
+Decreases the quantity of the 2nd item by `1`.
 
 
 == FAQ
@@ -446,4 +477,5 @@ e.g.`select 2`
 * *AddItem* : `addItem n/ITEM_NAME q/ITEM_QUANTITY`
 * *DeleteItem* : `deleteItem INDEX`
 * *EditItem* : `editItem INDEX [n/ITEM_NAME] [q/ITEM_QUANTITY]…​`
-
+* *IncreaseItem* : `increaseItem INDEX q/ITEM_QUANTITY`
+* *DecreaseItem* : `decreaseItem INDEX q/ITEM_QUANTITY`

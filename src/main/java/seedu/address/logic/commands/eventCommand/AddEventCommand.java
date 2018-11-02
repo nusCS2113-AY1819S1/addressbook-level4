@@ -32,7 +32,7 @@ public class AddEventCommand extends Command {
             + PREFIX_DESCRIPTION + "EVENT_DESCRIPTION "
             + PREFIX_DATE + "EVENT_DATE\n"
             + "Example: "
-            + COMMAND_WORD + " n/Basketball training v/MPSH3 d/Bring your own basketball D/01/11\n ";;
+            + COMMAND_WORD + " n/Basketball training v/MPSH3 D/Bring your own basketball d/01/11\n ";;
 
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
 
