@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalEvents.getTypicalEventList;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_EVENT;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -52,11 +53,11 @@ public class InviteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personChosen = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personChosen = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Event eventChosen = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
         String personName = personChosen.getName().toString();
 
-        InviteCommand inviteCommand = new InviteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_EVENT);
+        InviteCommand inviteCommand = new InviteCommand(INDEX_SECOND_PERSON, INDEX_FIRST_EVENT);
 
         String expectedMessage = String.format(InviteCommand.MESSAGE_INVITE_PERSON_SUCCESS,
                 personChosen.getName(), eventChosen.getEventName());

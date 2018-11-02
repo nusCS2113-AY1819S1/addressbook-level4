@@ -2,9 +2,12 @@ package seedu.address.model;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ALICE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalEvents.EVENT_1;
 import static seedu.address.testutil.TypicalEvents.EVENT_2;
+import static seedu.address.testutil.TypicalEvents.EVENT_3;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
@@ -17,6 +20,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.TypicalEvents;
 
 public class ModelManagerTest {
     @Rule
@@ -59,6 +63,31 @@ public class ModelManagerTest {
     @Test
     public void hasEvent_eventNotInEventList_returnsFalse() {
         assertFalse(modelManager.hasEvent(EVENT_1));
+    }
+
+    @Test
+    public void hasClash_nullEvent_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        modelManager.hasClash(null, VALID_NAME_ALICE);
+    }
+
+    @Test
+    public void hasClash_nullString_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        modelManager.hasClash(EVENT_1, null);
+    }
+
+
+    @Test
+    public void hasClash_eventClashWithEventList_returnsFalse() {
+        modelManager.addEvent(TypicalEvents.eventwithAttendee());
+        assertTrue(modelManager.hasClash(EVENT_3, VALID_NAME_ALICE));
+    }
+
+    @Test
+    public void hasClash_eventDoesNotClashWithEventList_returnsFalse() {
+        modelManager.addEvent(TypicalEvents.eventwithAttendee());
+        assertFalse(modelManager.hasClash(EVENT_3, VALID_NAME_BOB));
     }
 
     @Test

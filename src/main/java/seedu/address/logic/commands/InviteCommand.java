@@ -29,6 +29,7 @@ public class InviteCommand extends Command {
 
     public static final String MESSAGE_INVITE_PERSON_SUCCESS = "Invited Person: %1$s to %2$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the event.";
+    public static final String MESSAGE_CLASH_EVENT = "Unable to invite! %1$s clashes with %2$s's schedule.";
 
     private final Index indexEvent;
     private final Index indexPerson;
@@ -59,6 +60,10 @@ public class InviteCommand extends Command {
 
         if (!event.isAttendeeEmpty() && event.hasAttendee(personName)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if (model.hasClash(event, personName)) {
+            throw new CommandException(String.format(MESSAGE_CLASH_EVENT, event.getEventName().fullName));
         }
 
         Event updatedEvent = event.createEventWithUpdatedAttendee(personName);
