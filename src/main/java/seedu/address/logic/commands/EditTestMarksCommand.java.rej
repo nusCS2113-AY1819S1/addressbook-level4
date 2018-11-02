@@ -5,6 +5,4 @@ diff a/src/main/java/seedu/address/logic/commands/EditTestMarksCommand.java b/sr
              + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
 -            + "Example: " + COMMAND_WORD_2 + " alice " + PREFIX_TEST_NAME + "cs2113quiz1 " + PREFIX_TEST_MARK + "67";
 +            + "Example: " + COMMAND_WORD + " alice " + PREFIX_TEST_NAME + "cs2113quiz1 " + PREFIX_TEST_MARK + "67";
- 
- 
      public static final String MESSAGE_NOT_FOUND_TEST = "Test Name is not Found please add first.";
