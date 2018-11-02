@@ -1,7 +1,7 @@
 = Teh Zhi Thon - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
-:stylesDir: ../stylesheets
+:stylesDir: ../stylesheets/material-blue.css
 
 == PROJECT: FinancialPlanner
 
