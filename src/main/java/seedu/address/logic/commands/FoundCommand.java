@@ -15,6 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Loststatus;
 import seedu.address.model.item.Quantity;
+import seedu.address.model.item.Status;
 
 
 //@@author HeHaowei
@@ -81,6 +82,8 @@ public class FoundCommand extends Command {
         Integer updatedLost = currentLoststatus.getLoststatusLost();
         Integer updatedFound = currentLoststatus.getLoststatusFound();
 
+        Integer initialReadyValue = itemToFound.getStatus().getStatusReady();
+
         Integer updatedValue = foundDescriptor.getFoundQuantity();
         Integer initialValue = itemToFound.getQuantity().toInteger();
 
@@ -92,11 +95,14 @@ public class FoundCommand extends Command {
         updatedLoststatus = new Loststatus(updatedLost, updatedFound);
 
         Quantity updatedQuantity = new Quantity(Integer.toString(initialValue + updatedValue));
+        Status updatedStatus = new Status(initialReadyValue + updatedValue,
+                itemToFound.getStatus().getStatusOnLoan(), itemToFound.getStatus().getStatusFaulty());
+
 
 
 
         return new Item(itemToFound.getName(), updatedQuantity,
-                itemToFound.getMinQuantity(), updatedLoststatus, itemToFound.getTags());
+                itemToFound.getMinQuantity(), updatedLoststatus, updatedStatus, itemToFound.getTags());
     }
 
     /**

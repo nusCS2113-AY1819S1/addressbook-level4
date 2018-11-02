@@ -129,7 +129,7 @@ public class ChangeStatusCommand extends Command {
         updatedStatus = new Status(updatedReady, updatedOnLoan, updatedFaulty);
 
         return new Item(itemToUpdate.getName(), itemToUpdate.getQuantity(), itemToUpdate.getMinQuantity(),
-                updatedStatus, itemToUpdate.getTags());
+                itemToUpdate.getLoststatus(), updatedStatus, itemToUpdate.getTags());
     }
     /**
      * Stores the details to update the item with.
