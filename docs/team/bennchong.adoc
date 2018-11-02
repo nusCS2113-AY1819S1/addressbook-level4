@@ -37,11 +37,18 @@ NOTE: More information below in User Guide
 == Summary of contributions
 In this section, I would be briefly telling you about my contributions to this project, and any interesting points that you could find useful.
 
+
+GIVE THE REASON WHY. USE LONGER SENTENCE BELOW
+
 * *Major enhancement*: added *the ability to authenticate users*
 ** What it does: Allows the users to have unique access and control to his own timetable
-** Justification: To prevent malicious users to edit other users' timetable, and to introduce different privacy levels. Other users that you are friends with allows you to view their
-timetables and find common slots with them.
-** Highlights: Other than having the ability to add friends, you are now able to add groups since each users are differentiated from each other
+** Justification: To be able to prevent others from editing your own timetable, and to facilitate different privacy levels.
+Privacy levels are given to users to have control over what they feel comfortable sharing between strangers and friends.
+** Highlights: Not only have I learnt how to implement features, I have to also consider the implications of having some
+of them implemented. For example, to have an extra level of security such as 2FA(Factor Authorization) step might seem beneficial,
+but does this application warrants the extra steps to log in? Not so in my opinion.
+
+Other than having the ability to add friends, you are now able to add groups since each users are differentiated from each other
 
 
 * *Minor enhancement*: Used a hashing feature together with a salt to store user's password

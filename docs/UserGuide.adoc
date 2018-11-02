@@ -59,7 +59,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 The timetable content is locked, and it requires a user to either login with a pre-existing account, or register a new one.
 
-NOTE: The application have a default user with username: *test* and password: *test*
+NOTE: The application has a default user with username: *test* and password: *test*
 
 There are five security related commands that can be entered on this command line:
 
