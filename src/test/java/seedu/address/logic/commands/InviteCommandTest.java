@@ -113,6 +113,21 @@ public class InviteCommandTest {
     }
 
     @Test
+    public void execute_personEventClashesWithEventList_throwsCommandException() {
+
+        Person personChosen = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Event eventChosen = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
+
+        String expectedMessage = String.format(InviteCommand.MESSAGE_CLASH_EVENT,
+                eventChosen.getEventName().toString(), personChosen.getName().toString());
+
+        InviteCommand inviteCommand = new InviteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_EVENT);
+
+        assertCommandFailure(inviteCommand, model, commandHistory, expectedMessage);
+
+    }
+
+    @Test
     public void equals() {
 
         InviteCommand command1 = new InviteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_EVENT);

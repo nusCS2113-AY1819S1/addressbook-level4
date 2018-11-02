@@ -63,7 +63,7 @@ public class InviteCommand extends Command {
         }
 
         if (model.hasClash(event, personName)) {
-            throw new CommandException(String.format(MESSAGE_CLASH_EVENT, event.getEventName().fullName));
+            throw new CommandException(String.format(MESSAGE_CLASH_EVENT, event.getEventName().fullName, personName));
         }
 
         Event updatedEvent = event.createEventWithUpdatedAttendee(personName);
