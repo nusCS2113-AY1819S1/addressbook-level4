@@ -43,7 +43,7 @@ Responsibilities: HR & Roles
 
 === Sanjukta Saha
 image::sanjukta99.png[width="150", align="left"]
-{empty}[http://github.com/sanjukta99[github]]
+{empty}[http://github.com/sanjukta99[github]][<<SanjuktaSaha#, portfolio>>]
 
 Role: Code Quality +
 Responsibilities: Budgeting functionality for NUSSU and club treasurers
