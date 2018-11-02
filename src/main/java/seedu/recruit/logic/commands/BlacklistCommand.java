@@ -36,7 +36,9 @@ public class BlacklistCommand extends Command {
     public static final String MESSAGE_IS_NOT_BLACKLISTED = "This candidate is not blacklisted.";
     public static final String MESSAGE_ALREADY_SHORTLISTED = "This candidate has been shortlisted for a job offer!";
     public static final String MESSAGE_WARNING_BLACKLISTED_PERSON = "The selected candidate has been blacklisted!\n"
-            + "You can remove the blacklist with [ blacklist rm <INDEX>]";
+            + "You can remove the blacklist with [ blacklist rm <INDEX>]!\n"
+            + "NOTE: Once a special interface has been initialised such as addj, shortlist or email, you can only use"
+            + " commands specified in that interface!";
 
     private final Index index;
     private final boolean rmCheck;
