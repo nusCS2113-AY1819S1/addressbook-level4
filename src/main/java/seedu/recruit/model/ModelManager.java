@@ -373,10 +373,7 @@ public class ModelManager extends ComponentManager implements Model {
     public String getFilteredRecipientJobOfferNames() {
         StringBuilder output = new StringBuilder();
         for (JobOffer jobOffer : filteredJobs) {
-            output.append(jobOffer.getCompanyName().toString());
-            output.append(" regarding job offer: ");
-            output.append(jobOffer.getJob().toString());
-            output.append("\n");
+            output.append(getRecipientJobOfferName(jobOffer) + "\n");
         }
         return output.toString();
     }
@@ -399,10 +396,7 @@ public class ModelManager extends ComponentManager implements Model {
                 }
             }
             if (!isDuplicate) {
-                output.append(jobOffer.getCompanyName().toString());
-                output.append(" regarding job offer: ");
-                output.append(jobOffer.getJob().toString());
-                output.append("\n");
+                output.append(getRecipientJobOfferName(jobOffer) + "\n");
             }
         }
         return output.toString();
@@ -415,10 +409,7 @@ public class ModelManager extends ComponentManager implements Model {
     public String getFilteredContentJobOfferNames() {
         StringBuilder output = new StringBuilder();
         for (JobOffer jobOffer : filteredJobs) {
-            output.append(jobOffer.getJob().toString());
-            output.append(" at ");
-            output.append(jobOffer.getCompanyName().toString());
-            output.append("\n");
+            output.append(getContentJobOfferName(jobOffer) + "\n");
         }
         return output.toString();
     }
@@ -442,10 +433,7 @@ public class ModelManager extends ComponentManager implements Model {
                 }
             }
             if (!isDuplicate) {
-                output.append(jobOffer.getJob().toString());
-                output.append(" at ");
-                output.append(jobOffer.getCompanyName().toString());
-                output.append("\n");
+                output.append(getContentJobOfferName(jobOffer) + "\n");
             }
         }
         return output.toString();
@@ -484,6 +472,34 @@ public class ModelManager extends ComponentManager implements Model {
                 output.append(candidate.getName().toString() + "\n");
             }
         }
+        return output.toString();
+    }
+
+    /**
+     * returns a string for job offers as recipients.
+     * @param jobOffer
+     * @return String of company name regarding: job offer
+     */
+    @Override
+    public String getRecipientJobOfferName(JobOffer jobOffer) {
+        StringBuilder output = new StringBuilder();
+        output.append(jobOffer.getCompanyName().toString());
+        output.append(" regarding job offer: ");
+        output.append(jobOffer.getJob().toString());
+        return output.toString();
+    }
+
+    /**
+     * returns a string for job offers as contents
+     * @param jobOffer
+     * @return String of job offer at company
+     */
+    @Override
+    public String getContentJobOfferName(JobOffer jobOffer) {
+        StringBuilder output = new StringBuilder();
+        output.append(jobOffer.getJob().toString());
+        output.append(" at ");
+        output.append(jobOffer.getCompanyName().toString());
         return output.toString();
     }
 }

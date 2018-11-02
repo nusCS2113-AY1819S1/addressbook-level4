@@ -84,7 +84,7 @@ public class EmailRecipientsAddCommand extends EmailRecipientsSelectCommand {
                 }
             } else {
                 for (JobOffer duplicateJobOffer : duplicateJobOffers) {
-                    duplicates += duplicateJobOffer.getJob().toString();
+                    duplicates += model.getRecipientJobOfferName(duplicateJobOffer);
                     duplicates += "\n";
                 }
             }
