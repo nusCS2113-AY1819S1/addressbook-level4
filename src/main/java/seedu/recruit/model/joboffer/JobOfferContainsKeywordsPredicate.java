@@ -20,7 +20,7 @@ public class JobOfferContainsKeywordsPredicate implements Predicate<JobOffer> {
     public boolean test(JobOffer jobOffer) {
         return ((keywords.containsKey("CompanyName")) && (keywords.get("CompanyName").stream().anyMatch(keyword ->
                 StringUtil.containsWordIgnoreCase(jobOffer.getCompanyName().value, keyword))))
-                || ((keywords.containsKey("Job")) && (keywords.get("Job").stream().anyMatch(keyword ->
+                && ((keywords.containsKey("Job")) && (keywords.get("Job").stream().anyMatch(keyword ->
                 StringUtil.containsWordIgnoreCase(jobOffer.getJob().value, keyword))))
                 || ((keywords.containsKey("Age Range")) && (keywords.get("Age Range").stream().anyMatch(keyword ->
                 StringUtil.containsWordIgnoreCase(jobOffer.getAgeRange().value, keyword))))

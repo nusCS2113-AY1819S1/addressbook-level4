@@ -2,6 +2,9 @@ package seedu.recruit.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.logic.CommandHistory;
@@ -11,6 +14,7 @@ import seedu.recruit.model.Model;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.joboffer.JobOffer;
+import seedu.recruit.model.tag.Tag;
 
 /**
  * Deletes a candidate identified using its displayed index
@@ -60,15 +64,33 @@ public class DeleteShortlistedCandidateCommand extends Command {
         }
 
         Candidate selectedCandidate = selectedJob.getObservableCandidateList().get(targetIndex.getZeroBased());
+        Candidate selectedUnshortlistedCandidate = removeShortlistTag(selectedCandidate);
+
         model.deleteShortlistedCandidateFromJobOffer(selectedCandidate, selectedJob);
+        model.updateCandidate(selectedCandidate, selectedUnshortlistedCandidate);
         model.commitCompanyBook();
+        model.commitCandidateBook();
+
         if (DeleteShortlistedCandidateInitializationCommand.isDeleting()) {
             DeleteShortlistedCandidateInitializationCommand.isDoneDeleting();
         }
+
         LogicManager.setLogicState("primary");
         return new CommandResult(String.format(MESSAGE_DELETE_CANDIDATE_SUCCESS,
-                selectedCandidate.getName().fullName, selectedJob.getJob().value,
+                selectedUnshortlistedCandidate.getName().fullName, selectedJob.getJob().value,
                 selectedCompany.getCompanyName().value));
+    }
+
+    /**
+     * Returns the candidate but the "SHORTLISTED" tag has been removed
+     */
+    Candidate removeShortlistTag(Candidate shortlistee) {
+        assert shortlistee != null;
+
+        Set<Tag> tags = new HashSet<Tag>();
+        return new Candidate(shortlistee.getName(), shortlistee.getGender(), shortlistee.getAge(),
+                shortlistee.getPhone(), shortlistee.getEmail(), shortlistee.getAddress(), shortlistee.getJob(),
+                shortlistee.getEducation(), shortlistee.getSalary(), tags);
     }
 
 }

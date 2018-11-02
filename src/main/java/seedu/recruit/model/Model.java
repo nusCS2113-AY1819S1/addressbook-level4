@@ -283,4 +283,14 @@ public interface Model {
      * Returns a concatenated string of names of candidates for email command minus specified candidates
      */
     String getFilteredCandidateNames(ArrayList<Candidate> duplicateCandidates);
+
+    /**
+     * String of company name regarding: job offer
+     */
+    String getRecipientJobOfferName(JobOffer jobOffer);
+
+    /**
+     * String of job offer at company
+     */
+    String getContentJobOfferName(JobOffer jobOffer);
 }
