@@ -270,9 +270,13 @@ Format: `select INDEX`
 * The index refers to the index number shown in your friend list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 * You cannot select someone who is not your friend yet. Try using the `friend` command first!
+* You can select yourself by using the command `select me`
 ****
 
 Examples:
+
+* `select me` +
+Selects yourself.
 
 * `select 2` +
 Selects the 2nd person listed in your friend list.
