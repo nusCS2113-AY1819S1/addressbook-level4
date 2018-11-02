@@ -20,36 +20,22 @@ public class CustomPieChart extends PieChart {
 
     public static final String CSS_FILE = "view/DarkTheme.css";
 
-    public CustomPieChart(ObservableList<ChartData> pieChartData, Double total) {
+    public CustomPieChart(List<ChartData> labelData, List<ChartData> legendData) {
         super();
-        ObservableList<Data> dataAsPercentages = convertToPercentages(pieChartData, total);
+        ObservableList<Data> labelDataWithPercent = FXCollections.observableList(labelData.stream()
+                .map(c -> new Data(c.key, c.value)).collect(Collectors.toList()));
         getStylesheets().add(CSS_FILE);
-        setLegend(new CustomLegend(this, pieChartData));
-        setData(dataAsPercentages);
-        dataAsPercentages.forEach(data ->
+        setLegend(new CustomLegend(this, legendData));
+        setData(labelDataWithPercent);
+        labelDataWithPercent.forEach(data ->
                 data.nameProperty().bind(Bindings.concat(data.getName(), " ", data.pieValueProperty(), "%")));
     }
-
-    /** Converts a given ObservableList containing {@see ChartData} to a list that can be read by {@link PieChart}
-     * */
-    private ObservableList<PieChart.Data> convertToPercentages(ObservableList<ChartData> data, Double total) {
-        List<Data> dataList;
-        if (total > 0.0) {
-            dataList = data.stream().map(d -> new PieChart.Data(d.key, Double.parseDouble(
-                    String.format("%.2f", d.value / total * 100.0))))
-                    .collect(Collectors.toList());
-        } else {
-            dataList = data.stream().map(d -> new PieChart.Data(d.key, d.value)).collect(Collectors.toList());
-        }
-        return FXCollections.observableList(dataList);
-    }
-
     /**
      * This class represents a customized legend panel for the pieChart
      */
     class CustomLegend extends GridPane {
 
-        CustomLegend(PieChart chart, ObservableList<ChartData> pieChartData) {
+        CustomLegend(PieChart chart, List<ChartData> pieChartData) {
             setHgap(10);
             setVgap(10);
             int index = 0;

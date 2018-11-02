@@ -1,11 +1,7 @@
 package seedu.planner.ui;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -13,11 +9,9 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import javafx.util.Pair;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.ui.ShowPieChartStatsEvent;
 import seedu.planner.commons.events.ui.ShowSummaryTableEvent;
-import seedu.planner.model.summary.CategoryStatistic;
 //@@author tenvinc
 /**
  * This UI component is responsible for managing the tabs where the statistics will be displayed
@@ -69,66 +63,25 @@ public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
     }
 
     /** Creates the CategoryBreakdown object with the total expense and tag of each CategoryStatistic */
-    private Node createTotalExpenseBreakdown(ObservableList<CategoryStatistic> data) {
-        Pair< ObservableList<ChartData>, Double> chartData = extractExpenseChartData(data);
-        if (chartData.getKey().size() == 0) {
+    private Node createTotalExpenseBreakdown(MixedPieChartDataList dataList) {
+        if (dataList.isExpenseDataEmpty()) {
             Label label = new Label("Nothing has been found! Please input a more appropriate range:)");
             label.getStyleClass().add("label-bright");
             return new AnchorPane(label);
         }
-        return new CategoryBreakdown(chartData.getKey(), "Total Expense for the period",
-                chartData.getValue()).getRoot();
-    }
-
-
-    /** Extracts the label and expense information and places it in a list of ChartData */
-    private Pair< ObservableList<ChartData>, Double> extractExpenseChartData(ObservableList<CategoryStatistic> data) {
-        List<ChartData> chartDataList = new ArrayList<>();
-        Double totalExpense = 0.0;
-        for (CategoryStatistic d : data) {
-            if (d.getTotalExpense() > 0.0) {
-                String label;
-                if (d.getTags().isEmpty()) {
-                    label = untaggedLabel;
-                } else {
-                    label = d.getTags().toString();
-                }
-                chartDataList.add(new ChartData(label, d.getTotalExpense()));
-                totalExpense += d.getTotalExpense();
-            }
-        }
-        return new Pair<>(FXCollections.observableList(chartDataList), totalExpense);
+        return new CategoryBreakdown(dataList.getExpenseChartLabelData(), dataList.getExpenseChartLegendData(),
+                "Expense Breakdown for the period").getRoot();
     }
 
     /** Creates the CategoryBreakdown object with the total income and tag of each CategoryStatistic */
-    private Node createTotalIncomeBreakdown(ObservableList<CategoryStatistic> data) {
-        Pair< ObservableList<ChartData>, Double> chartData = extractIncomeChartData(data);
-        if (chartData.getKey().size() == 0) {
+    private Node createTotalIncomeBreakdown(MixedPieChartDataList dataList) {
+        if (dataList.isIncomeDataEmpty()) {
             Label label = new Label("Nothing has been found! Please input a more appropriate range:)");
             label.getStyleClass().add("label-bright");
             return new AnchorPane(label);
         }
-        return new CategoryBreakdown(chartData.getKey(), "Total Income for the period",
-                chartData.getValue()).getRoot();
-    }
-
-    /** Extracts the label and income information and places it in a list of ChartData */
-    private Pair< ObservableList<ChartData>, Double> extractIncomeChartData(ObservableList<CategoryStatistic> data) {
-        List<ChartData> chartDataList = new ArrayList<>();
-        Double totalIncome = 0.0;
-        for (CategoryStatistic d : data) {
-            if (d.getTotalIncome() > 0.0) {
-                String label;
-                if (d.getTags().isEmpty()) {
-                    label = untaggedLabel;
-                } else {
-                    label = d.getTags().toString();
-                }
-                chartDataList.add(new ChartData(label, d.getTotalIncome()));
-                totalIncome += d.getTotalIncome();
-            }
-        }
-        return new Pair<>(FXCollections.observableList(chartDataList), totalIncome);
+        return new CategoryBreakdown(dataList.getIncomeChartLabelData(), dataList.getIncomeChartLegendData(),
+                "Income Breakdown for the period").getRoot();
     }
 
     /**
@@ -150,10 +103,11 @@ public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
      */
     public void handleShowPieChartStatsEvent(ShowPieChartStatsEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        MixedPieChartDataList dataList = new MixedPieChartDataList(event.data);
         Tab categoryExpenseTab = new Tab("Category Breakdown For Expenses", createTotalExpenseBreakdown(
-                event.data));
+                dataList));
         Tab categoryIncomeTab = new Tab("Category Breakdown For Income", createTotalIncomeBreakdown(
-                event.data));
+                dataList));
         clearTabs();
         createTabs(categoryExpenseTab, categoryIncomeTab);
         show();

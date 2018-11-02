@@ -1,5 +1,6 @@
 package seedu.planner.ui;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -27,9 +28,9 @@ public class CategoryBreakdown extends UiPart<Region> {
     private ObservableList<PieChart.Data> pieChartData;
     private PieChart pieChart;
 
-    public CategoryBreakdown(ObservableList<ChartData> toDisplay, String label, Double total) {
+    public CategoryBreakdown(List<ChartData> labelData, List<ChartData> legendData, String label) {
         super(FXML);
-        pieChart = new CustomPieChart(toDisplay, total);
+        pieChart = new CustomPieChart(labelData, legendData);
         initPieChart(label);
         categoryBreakdown.setStyle("-fx-background-color: grey");
         categoryBreakdown.getChildren().add(pieChart);

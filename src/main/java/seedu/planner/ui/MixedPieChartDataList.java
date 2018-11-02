@@ -16,6 +16,7 @@ public class MixedPieChartDataList {
     private static final String untaggedLabel = "<<untagged>>";
 
     private List<ChartData> expenseChartLabelData;
+
     private List<ChartData> incomeChartLabelData;
     private List<ChartData> expenseChartLegendData;
     private List<ChartData> incomeChartLegendData;
@@ -89,5 +90,27 @@ public class MixedPieChartDataList {
         }
     }
 
+    public boolean isExpenseDataEmpty() {
+        return expenseChartLabelData.size() == 0 && expenseChartLegendData.size() == 0;
+    }
 
+    public boolean isIncomeDataEmpty() {
+        return incomeChartLabelData.size() == 0 && incomeChartLegendData.size() == 0;
+    }
+
+    public List<ChartData> getExpenseChartLabelData() {
+        return expenseChartLabelData;
+    }
+
+    public List<ChartData> getIncomeChartLabelData() {
+        return incomeChartLabelData;
+    }
+
+    public List<ChartData> getExpenseChartLegendData() {
+        return expenseChartLegendData;
+    }
+
+    public List<ChartData> getIncomeChartLegendData() {
+        return incomeChartLegendData;
+    }
 }
