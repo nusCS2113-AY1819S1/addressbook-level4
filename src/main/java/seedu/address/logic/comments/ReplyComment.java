@@ -13,15 +13,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 public class ReplyComment extends Comments {
 
     /**
-     * Constructor to make sure that used Vector and path is initialised
-     *
-     * @param input
-     */
-    public ReplyComment(String input) {
-        super(input);
-    }
-
-    /**
      *  Replies with the comment to event Comment section of index and line
      */
     public String replyComment(String comment, int line, String username) throws CommandException {
