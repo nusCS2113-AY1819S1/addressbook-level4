@@ -24,7 +24,7 @@ import seedu.planner.model.summary.CategoryStatistic;
  */
 public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
 
-    private static final Logger logger = LogsCenter.getLogger(UiManager.class);
+    private static final Logger logger = LogsCenter.getLogger(StatsDisplayPanel.class);
 
     private static final String FXML = "StatsDisplayPanel.fxml";
 

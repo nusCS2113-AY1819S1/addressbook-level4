@@ -13,6 +13,7 @@ public class MainWindowHandle extends StageHandle {
     private final StatusBarFooterHandle statusBarFooter;
     private final MainMenuHandle mainMenu;
     private final DetailedRecordCardHandle detailedRecordCard;
+    private final StatsDisplayPanelHandle statsDisplayPanelHandle;
 
     public MainWindowHandle(Stage stage) {
         super(stage);
@@ -23,6 +24,8 @@ public class MainWindowHandle extends StageHandle {
         statusBarFooter = new StatusBarFooterHandle(getChildNode(StatusBarFooterHandle.STATUS_BAR_PLACEHOLDER));
         mainMenu = new MainMenuHandle(getChildNode(MainMenuHandle.MENU_BAR_ID));
         detailedRecordCard = new DetailedRecordCardHandle(getChildNode(DetailedRecordCardHandle.DETAILED_CARD_ID));
+        statsDisplayPanelHandle = new StatsDisplayPanelHandle(
+                getChildNode(StatsDisplayPanelHandle.STATS_DISPLAY_HANDLE));
     }
 
     public RecordListPanelHandle getRecordListPanel() {

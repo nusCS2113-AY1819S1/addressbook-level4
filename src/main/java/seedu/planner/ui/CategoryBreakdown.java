@@ -17,12 +17,12 @@ import seedu.planner.commons.core.LogsCenter;
  */
 public class CategoryBreakdown extends UiPart<Region> {
 
-    private static final Logger logger = LogsCenter.getLogger(UiManager.class);
+    private static final Logger logger = LogsCenter.getLogger(CategoryBreakdown.class);
 
     private static final String FXML = "CategoryBreakdown.fxml";
 
     @FXML
-    private AnchorPane root;
+    private AnchorPane categoryBreakdown;
 
     private ObservableList<PieChart.Data> pieChartData;
     private PieChart pieChart;
@@ -31,8 +31,8 @@ public class CategoryBreakdown extends UiPart<Region> {
         super(FXML);
         pieChart = new CustomPieChart(toDisplay, total);
         initPieChart(label);
-        root.setStyle("-fx-background-color: grey");
-        root.getChildren().add(pieChart);
+        categoryBreakdown.setStyle("-fx-background-color: grey");
+        categoryBreakdown.getChildren().add(pieChart);
     }
 
     /** Sets up the pieChart's format */
