@@ -33,6 +33,8 @@ public class BlockUserFromCreatingCommand extends Command {
     public static final String MESSAGE_INVALID_USER = "The user \"%s\" does not exist.";
     public static final String MESSAGE_DUPLICATE_BLOCK = "The user \"%s\" has already been blocked.";
     public static final String MESSAGE_DUPLICATE_UNBLOCK = "The user \"%s\" has not been block.";
+    public static final String MESSAGE_BLOCK_NAME_CONSTRAINTS = "uName cannot be null.";
+    public static final String MESSAGE_BLOCK_CONSTRAINTS = "block can only take true or false.";
 
     private final String userNameToBlock;
     private final boolean block;
@@ -63,7 +65,7 @@ public class BlockUserFromCreatingCommand extends Command {
             if (user.isAdmin()) {
                 throw new CommandException(String.format(MESSAGE_USER_IS_ADMIN, userNameToBlock));
             } else if (block && user.isBlock()) {
-                throw new CommandException(String.format(MESSAGE_DUPLICATE_UNBLOCK, userNameToBlock));
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_BLOCK, userNameToBlock));
             } else if (!block && !user.isBlock()) {
                 throw new CommandException(String.format(MESSAGE_DUPLICATE_UNBLOCK, userNameToBlock));
             } else {

@@ -30,15 +30,14 @@ public class SetAdminCommandParser implements Parser<SetAdminCommand> {
                 SetAdminCommand.MESSAGE_USAGE));
         }
 
-        String userName = argMultimap.getValue(PREFIX_USER_NAME).get();
+        String userName = ParserUtil.parseUserName(argMultimap.getValue(PREFIX_USER_NAME).get());
         boolean setAdmin;
         if (argMultimap.getValue(PREFIX_ADMIN_SET).get().equals("true")) {
             setAdmin = true;
         } else if (argMultimap.getValue(PREFIX_ADMIN_SET).get().equals("false")) {
             setAdmin = false;
         } else {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                SetAdminCommand.MESSAGE_USAGE));
+            throw new ParseException(SetAdminCommand.MESSAGE_SET_CONSTRAINTS);
         }
 
         return new SetAdminCommand(userName, setAdmin);

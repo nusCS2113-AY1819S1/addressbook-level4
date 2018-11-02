@@ -162,8 +162,10 @@ public class ParserUtil {
         requireNonNull(content);
         String trimmedTitle = title.trim();
         String trimmedContent = content.trim();
-        if (!Announcement.isValidAnnouncement(trimmedTitle, trimmedContent)) {
-            throw new ParseException(Announcement.MESSAGE_ANNOUNCEMENT_CONSTRAINTS);
+        if (!Announcement.isValidAnnouncement(trimmedTitle)) {
+            throw new ParseException(Announcement.MESSAGE_ANNOUNCEMENT_TITLE_CONSTRAINTS);
+        } else if (!Announcement.isValidAnnouncement(trimmedContent)) {
+            throw new ParseException(Announcement.MESSAGE_ANNOUNCEMENT_CONTENT_CONSTRAINTS);
         }
         return new Announcement(trimmedTitle, trimmedContent);
     }
@@ -171,15 +173,23 @@ public class ParserUtil {
     /**
      * Parse {@code }
      */
-    public static Module parseModule(String moduleTitle, String moduleCode) throws ParseException {
+    public static Module parseModuleCodeAndTitle(String moduleTitle, String moduleCode) throws ParseException {
         requireNonNull(moduleTitle);
         requireNonNull(moduleCode);
         String trimmedModuleTitle = moduleTitle.trim();
         String trimmedModuleCode = moduleCode.trim();
         if (!isValidModule(trimmedModuleCode)) {
-            throw new ParseException(Module.MESSAGE_MODULE_CONSTRAINTS);
+            throw new ParseException(Module.MESSAGE_MODULE_CODE_CONSTRAINTS);
+        }
+        if (!isValidModuleTitle(trimmedModuleTitle)) {
+            throw new ParseException(Module.MESSAGE_MODULE_TITLE_CONSTRAINTS);
         }
         return new Module(trimmedModuleTitle, trimmedModuleCode);
+    }
+
+    //Returns true if a given strings is a valid module title.
+    public static boolean isValidModuleTitle(String trimmedModuleTitle) {
+        return trimmedModuleTitle.matches(Module.MODULE_TITLE_VALIDATION_REGEX);
     }
 
     //@@author HansKoh
@@ -190,13 +200,13 @@ public class ParserUtil {
         requireNonNull(module);
         String trimmedModule = module.trim();
         if (!isValidModule(trimmedModule)) {
-            throw new ParseException(Module.MESSAGE_MODULE_CONSTRAINTS);
+            throw new ParseException(Module.MESSAGE_MODULE_CODE_CONSTRAINTS);
         }
         return trimmedModule;
     }
     //Returns true if a given string is a valid module.
     public static boolean isValidModule(String trimmedModule) {
-        return trimmedModule.matches(Module.MODULE_VALIDATION_REGEX);
+        return trimmedModule.matches(Module.MODULE_CODE_VALIDATION_REGEX);
     }
 
     /**

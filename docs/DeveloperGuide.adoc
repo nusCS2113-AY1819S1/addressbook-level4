@@ -758,6 +758,25 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
+
+=== Registering and logging in
+
+. Registering a new user
+
+.. Prerequisites: username must not be registered before.
+.. Test case: `addUser uName/john uPass/123`
+   Expected: the user `john` will be added to the UserStorage if there is no duplicate in the UserStorage.
+
+. Loggin in
+
+.. Test case: `login uName/abcd uPass/123`
+   Expected: Log in with a random username and password that has not been registered. An error message will be shown in the result display panel.
+.. Test case: `login uName/john uPass/234`
+   Expected: Log in with a registered username and a wrong password. An error message will be shown in the result display panel.
+.. Test case: `login uName/john uPass/123`
+   Expected: Log in with a registered username and correct password, a success message will be shown in the result display panel.
+
+
 === Announcing new announcement
 
 . Announcing a new announcement by admin.
@@ -944,21 +963,5 @@ These instructions only provide a starting point for testers to work on; testers
 . Dealing with missing/corrupted data files
 
 .. _{explain how to simulate a missing/corrupted file and the expected behavior}_
-
-_{ more test cases ... }_
-
-=== Login
-
-. Login test
-
-.. Log in with a random User Name and Password that has not been registered.
-.. Log in with a registered user name and a random Password.
-.. Log in with a registered user name and password, then log in to the same or other account.
-
-. AddUser test
-
-.. Register a user. Once successful, register the same user again.
-
-
 
 _{ more test cases ... }_

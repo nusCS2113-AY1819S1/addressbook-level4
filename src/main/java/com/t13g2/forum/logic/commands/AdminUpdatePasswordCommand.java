@@ -29,7 +29,7 @@ public class AdminUpdatePasswordCommand extends Command {
         + PREFIX_USER_PASSWORD + "456";
 
     public static final String MESSAGE_SUCCESS = "Password for %1$s is now %2$s";
-    public static final String MESSAGE_INVALID_USER = "No user named %1$s found. Please try again!";
+    public static final String MESSAGE_INVALID_USER = "No user named \"%1$s\" found. Please try again!";
 
 
     private final String userNameToUpdate;
