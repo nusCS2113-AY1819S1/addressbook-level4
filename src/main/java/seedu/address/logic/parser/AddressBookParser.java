@@ -115,6 +115,9 @@ public class AddressBookParser {
         case EditItemCommand.COMMAND_WORD: case EditItemCommand.COMMAND_ALIAS:
             return new EditItemCommandParser().parse(arguments);
 
+        case IncreaseItemCommand.COMMAND_WORD: case IncreaseItemCommand.COMMAND_ALIAS:
+            return new IncreaseItemCommandParser().parse(arguments);
+
         case UndoAllCommand.COMMAND_WORD:
             return new UndoAllCommand();
 
