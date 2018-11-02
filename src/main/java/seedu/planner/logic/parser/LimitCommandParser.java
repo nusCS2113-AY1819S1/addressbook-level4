@@ -26,6 +26,7 @@ public class LimitCommandParser implements Parser<LimitCommand> {
 
     private String [] datesIn; //the string is used to divide two the whole strings into two substrings.
     private String moneyString;
+    private Date dateStart, dateEnd;
 
     @Override
     public LimitCommand parse(String args) throws ParseException {
@@ -44,9 +45,17 @@ public class LimitCommandParser implements Parser<LimitCommand> {
         }
         MoneyFlow money = ParserUtil.parseMoneyFlow(moneyString);
         datesIn = argMultimap.getValue(PREFIX_DATE).get().split("\\s+");
-
-        Date dateStart = ParserUtil.parseDate(datesIn[0]);
-        Date dateEnd = ParserUtil.parseDate(datesIn[1]);
+        if (datesIn.length == 2) {
+            dateStart = ParserUtil.parseDate(datesIn[0]);
+            dateEnd = ParserUtil.parseDate(datesIn[1]);
+        }
+        else if (datesIn.length == 1){
+            dateStart = ParserUtil.parseDate(datesIn[0]);
+            dateEnd = ParserUtil.parseDate(datesIn[0]);
+        }
+        else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LimitCommand.MESSAGE_USAGE));
+        }
 
         if (dateStart.isLaterThan(dateEnd)) {
             throw new ParseException("The dateStart must be earlier than or equals to dateEnd.");

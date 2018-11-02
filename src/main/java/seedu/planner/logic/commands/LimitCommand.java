@@ -32,7 +32,7 @@ public class LimitCommand extends Command {
             + "Your income during the limit period: %.2f\n";
     public static final String MESSAGE_EXCEED = "Your spend exceeded the limit !!! \n";
     public static final String MESSAGE_NOT_EXCEED = "Your spend did not exceed the limit ^o^\n";
-    public static final String MESSAGE_LIMITS_SAME_DATE = "There already a limit for that period of date\n";
+    public static final String MESSAGE_LIMITS_SAME_DATE = "There is already a limit for that period of date\n";
 
 
 

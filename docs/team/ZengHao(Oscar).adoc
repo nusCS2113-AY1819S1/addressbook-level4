@@ -1,15 +1,25 @@
-= Zeng Hao (Oscar) - Project Portfolio
+= (Oscar)Zeng Hao - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: FinancialPlanner - Level 4
+== PROJECT: FinancialPlanner
 
-== Overview
+== Financial Planner Overview
 
-FinancialPlanner - Level 4 is a desktop expense book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+FinancialPlanner is a PC software specially designed for students who love typing. This product helps users better manage their finances.
+Users are able to record their finances and modify these records, set and modify limits, summarize their financial status and export their records into excel file.
+The product is based on Command Line Interface (CLI), users are able input their commands and related information at the TextBox.
+Graphic User Interface is used for displaying statistic and other information, which will provide user with a clear and direct understanding about their financial status.
+
+This project is under the NUS CS2113 module. This module provides students with basic software engineering training.
+A group of four members was formed to develop a production with the base code https://nuscs2113-ay1819s1.github.io/addressbook-level4/[AddressBook Level 4].
+As a group we morph the original product into FinancialPlanner.
 
 == Summary of contributions
+
+To better develop the product, each group member was assigned a main feature to develop. I made significant contribution to the product.
+Detailed information about my contributions is listed below.
 
 === `completed` *Major enhancement #1*: added the ability to set limits for multiple period of time.
 
