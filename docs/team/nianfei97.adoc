@@ -24,8 +24,9 @@ This project portfolio documents my contributions to the FreeTime project.
 == Summary of contributions
 
 * *Major enhancement: Added timetables to FreeTime*
-** What it does: Allows the user to manage their timetables. Additionally, allows users to determine when they can organise meetings such that every person can be present.
-** Highlights: This enhancement requires changes in almost every component of FreeTime, It required a through understanding of the existing codebase.
+** What it does: Implements timetables for each user and allows the user to add and remove timeslots from their own timetables. Additionally, allows users to determine when they can organise meetings such that every person can be present.
+** Highlights: This enhancement requires changes in almost every component of FreeTime, Thus, it required a thorough understanding of the existing codebase. Through this project, I have put into practice key principles of the object-oriented programming paradigm as well as the skills needed for writing technical documentation.
+** Justification: As it is often difficult for students with varied and complex time
 * *Code contributed*: [Functional code] [Test code]
 * *Other contributions*:
 ** Project management: Managed releases `v1.1` - `v1.4` on GitHub (4 releases)
