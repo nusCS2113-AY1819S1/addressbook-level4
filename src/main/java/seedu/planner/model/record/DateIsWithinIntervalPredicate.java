@@ -1,6 +1,8 @@
 package seedu.planner.model.record;
 
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.planner.commons.util.DateUtil.isEarlierThan;
+import static seedu.planner.commons.util.DateUtil.isLaterThan;
 
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -41,14 +43,14 @@ public class DateIsWithinIntervalPredicate implements Predicate<Record> {
      * @return the boolean if StartDate is smaller than/equal to End Date
      */
     public boolean isValidPredicate() {
-        return (startDate.isEarlierThan(endDate) || startDate.equals(endDate));
+        return (isEarlierThan(startDate, endDate) || startDate.equals(endDate));
     }
 
     @Override
     public boolean test(Record record) {
         Date recordDate = record.getDate();
         return recordDate.equals(startDate) || recordDate.equals(endDate)
-            || recordDate.isLaterThan(startDate) && recordDate.isEarlierThan(endDate);
+            || isLaterThan(recordDate, startDate) && isEarlierThan(recordDate, endDate);
     }
 
     @Override

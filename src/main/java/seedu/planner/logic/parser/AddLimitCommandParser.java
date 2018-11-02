@@ -1,6 +1,7 @@
 package seedu.planner.logic.parser;
 
 import static seedu.planner.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.planner.commons.util.DateUtil.isLaterThan;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_MONEYFLOW;
 
@@ -48,7 +49,7 @@ public class AddLimitCommandParser implements Parser<AddLimitCommand> {
         Date dateStart = ParserUtil.parseDate(datesIn[0]);
         Date dateEnd = ParserUtil.parseDate(datesIn[1]);
 
-        if (dateStart.isLaterThan(dateEnd)) {
+        if (isLaterThan(dateStart, dateEnd)) {
             throw new ParseException("The dateStart must be earlier than or equals to dateEnd.");
         }
         Limit limit = new Limit(dateStart, dateEnd, money);
