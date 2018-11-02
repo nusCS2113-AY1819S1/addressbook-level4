@@ -2,6 +2,9 @@ package seedu.recruit.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.events.ui.ShowLastViewedBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
@@ -11,6 +14,7 @@ import seedu.recruit.model.Model;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.joboffer.JobOffer;
+import seedu.recruit.model.tag.Tag;
 
 /**
  * Last stage of Shortlist Command.
@@ -45,8 +49,12 @@ public class ShortlistCandidateCommand extends Command {
                     + MESSAGE_USAGE);
         }
 
-        model.shortlistCandidateToJobOffer(selectedCandidate, selectedJobOffer);
+        Candidate selectedShortlistedCandidate = insertShortlistTag(selectedCandidate);
+
+        model.updateCandidate(selectedCandidate, selectedShortlistedCandidate);
+        model.shortlistCandidateToJobOffer(selectedShortlistedCandidate, selectedJobOffer);
         model.commitCompanyBook();
+        model.commitCandidateBook();
 
         LogicManager.setLogicState("primary");
         EventsCenter.getInstance().post(new ShowLastViewedBookRequestEvent());
@@ -55,5 +63,19 @@ public class ShortlistCandidateCommand extends Command {
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, selectedCandidate.getName().fullName,
                 selectedJobOffer.getJob().value, selectedCompany.getCompanyName().value));
+    }
+
+    /**
+     * Returns the original candidate but the tags have been changed to "SHORTLISTED"
+     */
+    Candidate insertShortlistTag(Candidate shortlistee) {
+        assert shortlistee != null;
+
+        Set<Tag> tags = new HashSet<Tag>();
+        Tag shortlistedTag = new Tag("SHORTLISTED");
+        tags.add(shortlistedTag);
+        return new Candidate(shortlistee.getName(), shortlistee.getGender(), shortlistee.getAge(),
+                shortlistee.getPhone(), shortlistee.getEmail(), shortlistee.getAddress(), shortlistee.getJob(),
+                shortlistee.getEducation(), shortlistee.getSalary(), tags);
     }
 }

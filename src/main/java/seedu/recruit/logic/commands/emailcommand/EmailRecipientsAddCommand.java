@@ -84,14 +84,14 @@ public class EmailRecipientsAddCommand extends EmailRecipientsSelectCommand {
                 }
             } else {
                 for (JobOffer duplicateJobOffer : duplicateJobOffers) {
-                    duplicates += duplicateJobOffer.getJob().toString();
+                    duplicates += model.getRecipientJobOfferName(duplicateJobOffer);
                     duplicates += "\n";
                 }
             }
             hasDuplicates = true;
         }
 
-        //Generate recipients string
+        //Generate recipients string, if there are duplicates, remove them.
         String recipients = "Recipients added:\n";
         if (hasDuplicates) {
             if (emailUtil.isAreRecipientsCandidates()) {
