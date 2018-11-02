@@ -20,6 +20,7 @@ import com.t13g2.forum.model.ForumBook;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.ModelManager;
 import com.t13g2.forum.model.ReadOnlyForumBook;
+import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.model.UserPrefs;
 import com.t13g2.forum.model.util.SampleDataUtil;
 import com.t13g2.forum.storage.ForumBookStorage;
@@ -75,6 +76,10 @@ public class MainApp extends Application {
         ui = new UiManager(logic, config, userPrefs);
 
         initEventsCenter();
+
+        try (UnitOfWork uow = new UnitOfWork()) {
+            uow.init();
+        }
     }
 
     /**

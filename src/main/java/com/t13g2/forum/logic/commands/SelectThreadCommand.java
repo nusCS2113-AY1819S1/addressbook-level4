@@ -9,12 +9,12 @@ import java.util.List;
 
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
+import com.t13g2.forum.logic.util.DisplayFormatter;
 import com.t13g2.forum.model.Context;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
-import com.t13g2.forum.ui.DisplayFormatter;
 
 //@@author HansKoh
 /**
@@ -31,7 +31,9 @@ public class SelectThreadCommand extends Command {
 
     private static String message;
     private static int threadId;
+    private static int moduleId;
     private static String threadTitle;
+    private static String moduleCode;
 
     public SelectThreadCommand(int threadId) {
         requireNonNull(threadId);
@@ -41,21 +43,28 @@ public class SelectThreadCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        String messageSuccess = "Listed all comments under Thread ID(%s) with title: %s"
-                + "\n****************************************************************************\n"
+        String messageSuccess = "Listed all comments under \n"
+                + "Module Code: %s\n"
+                + "Thread ID      : %s\n"
+                + "Thread Title  : %s\n"
+                + "****************************************************************************\n"
+                + "****************************************************************************\n"
                 + "%s";
         if (!Context.getInstance().isLoggedIn()) {
             throw new CommandException(MESSAGE_NOT_LOGIN);
         }
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            moduleId = unitOfWork.getForumThreadRepository().getThread(threadId).getModuleId();
+            moduleCode = unitOfWork.getModuleRepository().getModule(moduleId).getModuleCode();
             List<Comment> commentList = unitOfWork.getCommentRepository().getCommentsByThread(threadId);
             message = DisplayFormatter.displayCommentList(commentList);
             threadTitle = unitOfWork.getForumThreadRepository().getThread(threadId).getTitle();
+            Context.getInstance().setCurrentThreadId(unitOfWork.getForumThreadRepository().getThread(threadId).getId());
         } catch (EntityDoesNotExistException e) {
             throw new CommandException(MESSAGE_INVALID_THREAD_ID);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new CommandResult(String.format(messageSuccess, threadId, threadTitle, message));
+        return new CommandResult(String.format(messageSuccess, moduleCode, threadId, threadTitle, message));
     }
 }

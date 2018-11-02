@@ -5,9 +5,9 @@ package com.t13g2.forum.model.forum;
  */
 public class User extends BaseModel {
     public static final String MESSAGE_USER_NAME_CONSTRAINTS =
-        "User Name can take any values, and it should not be blank";
+        "uName can take any values, and it should not be blank";
     public static final String MESSAGE_USER_PASSWORD_CONSTRAINTS =
-        "User Password can take any values, and it should not be blank";
+        "uPass can take any values, and it should not be blank";
     public static final String MESSAGE_NOT_ADMIN = "You are not an admin!";
     public static final String MESSAGE_NOT_LOGIN = "Please login in order to proceed!";
     /**

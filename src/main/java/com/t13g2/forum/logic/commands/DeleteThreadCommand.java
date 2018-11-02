@@ -1,5 +1,6 @@
 package com.t13g2.forum.logic.commands;
 
+import static com.t13g2.forum.commons.core.Messages.MESSAGE_INVALID_THREAD;
 import static com.t13g2.forum.commons.core.Messages.MESSAGE_INVALID_THREAD_ID;
 import static com.t13g2.forum.commons.core.Messages.MESSAGE_NOT_LOGIN;
 import static com.t13g2.forum.commons.core.Messages.MESSAGE_NOT_THREAD_OWNER;
@@ -21,14 +22,17 @@ import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 public class DeleteThreadCommand extends Command {
     public static final String COMMAND_WORD = "deleteThread";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete a certain thread \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+        + ": Delete a certain thread under corresponding module\n"
         + "Parameters: "
         + PREFIX_THREAD_ID + "THREAD ID \n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_THREAD_ID + "1";
 
-    public static final String MESSAGE_SUCCESS = "Thread deleted: %1$s";
+    public static final String MESSAGE_SUCCESS = "Thread deleted successfully! %1$s";
     private final int threadId;
+    private int moduleId;
+    private String moduleCode;
 
     /**
      * Creates an DeleteThreadCommand to delete the specified {@code ForumThread}
@@ -45,6 +49,11 @@ public class DeleteThreadCommand extends Command {
             throw new CommandException(MESSAGE_NOT_LOGIN);
         }
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            moduleId = unitOfWork.getForumThreadRepository().getThread(threadId).getModuleId();
+            moduleCode = unitOfWork.getModuleRepository().getModule(moduleId).getModuleCode();
+            if (Context.getInstance().getCurrentModuleId() != moduleId) {
+                throw new CommandException(MESSAGE_INVALID_THREAD);
+            }
             if (Context.getInstance().getCurrentUser().getId()
                     == unitOfWork.getForumThreadRepository().getThread(threadId).getCreatedByUserId()
                     || Context.getInstance().isCurrentUserAdmin()) {
@@ -62,10 +71,10 @@ public class DeleteThreadCommand extends Command {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String message = "\n"
-            + "Thread ID: " + threadId + "\n";
+        String deletedMessage = "\n\n"
+                + "Under Module Code: " + moduleCode + "\n"
+                + "Deleted Thread ID: " + threadId + "\n";
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, message));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, deletedMessage));
     }
-
 }

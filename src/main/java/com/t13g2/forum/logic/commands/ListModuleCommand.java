@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
+import com.t13g2.forum.logic.util.DisplayFormatter;
 import com.t13g2.forum.model.Context;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.UnitOfWork;
@@ -22,8 +23,9 @@ public class ListModuleCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": List all the modules in the forum book.\n"
             + "Example: " + COMMAND_WORD + " ";
 
-    public static final String MESSAGE_SUCCESS = "Listed all modules: "
-            + "\n****************************************************************************\n"
+    public static final String MESSAGE_SUCCESS = "Listed all modules: \n"
+            + "****************************************************************************\n"
+            + "****************************************************************************\n"
             + "%s";
     private static String message;
 
@@ -35,11 +37,7 @@ public class ListModuleCommand extends Command {
         }
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             List<Module> moduleList = unitOfWork.getModuleRepository().getAllModule();
-            message = "";
-            for (Module module : moduleList) {
-                message += module.getModuleCode() + ": " + module.getTitle() + "\n";
-                message += "----------------------------------------------------------------------------\n";
-            }
+            message = DisplayFormatter.displayModuleList(moduleList);
         } catch (Exception e) {
             e.printStackTrace();
         }

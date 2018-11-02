@@ -5,6 +5,7 @@ import com.t13g2.forum.storage.forum.ForumBookStorage;
 import com.t13g2.forum.storage.forum.IForumBookStorage;
 import com.t13g2.forum.storage.forum.IStorage;
 import com.t13g2.forum.storage.forum.JsonFileStorage;
+import com.t13g2.forum.storage.forum.SampleDataGenerator;
 
 /**
  *
@@ -12,11 +13,11 @@ import com.t13g2.forum.storage.forum.JsonFileStorage;
 public class UnitOfWork implements IUnitOfWork, AutoCloseable {
     private IForumBookStorage forumBookStorage;
 
-    private AnnouncementRepository announcementRepository;
+    private IAnnouncementRepository announcementRepository;
     private ICommentRepository commentRepository;
     private IForumThreadRepository forumThreadRepository;
-    private ModuleRepository moduleRepository;
-    private UserRepository userRepository;
+    private IModuleRepository moduleRepository;
+    private IUserRepository userRepository;
 
     public UnitOfWork(IStorage storage) {
         forumBookStorage = new ForumBookStorage(storage);
@@ -32,23 +33,28 @@ public class UnitOfWork implements IUnitOfWork, AutoCloseable {
         this(new JsonFileStorage());
     }
 
+    @Override
     public IAnnouncementRepository getAnnouncementRepository() {
         return announcementRepository;
     }
 
+    @Override
     public ICommentRepository getCommentRepository() {
         return commentRepository;
     }
 
+    @Override
     public IForumThreadRepository getForumThreadRepository() {
         return forumThreadRepository;
     }
 
-    public ModuleRepository getModuleRepository() {
+    @Override
+    public IModuleRepository getModuleRepository() {
         return moduleRepository;
     }
 
-    public UserRepository getUserRepository() {
+    @Override
+    public IUserRepository getUserRepository() {
         return userRepository;
     }
 
@@ -67,6 +73,16 @@ public class UnitOfWork implements IUnitOfWork, AutoCloseable {
     @Override
     public void close() throws Exception {
 
+    }
+
+    /**
+     *
+     */
+    public void init() {
+        if (this.forumBookStorage.isFresh()) {
+            new SampleDataGenerator(this).generate();
+            this.commit();
+        }
     }
 }
 

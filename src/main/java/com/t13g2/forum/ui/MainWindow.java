@@ -192,7 +192,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleUserLogin(String userName, boolean isAdmin, boolean isBlocked) {
-        String userType = "(" + (isAdmin ? "Admin" : "User") + "), " + (isBlocked ? "Blocked"  : ":)");
+        String userType = "(" + (isAdmin ? "Admin" : "User") + ")" + (isBlocked ? ", Blocked"  : "");
         lblUserName.setText("");
         if (userName.equals("")) {
             lblUserName.setText("Welcome to Forum Book. Please login to proceed! ");

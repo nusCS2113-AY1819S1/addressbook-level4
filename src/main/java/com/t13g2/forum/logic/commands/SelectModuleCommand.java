@@ -9,13 +9,13 @@ import java.util.List;
 
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
+import com.t13g2.forum.logic.util.DisplayFormatter;
 import com.t13g2.forum.model.Context;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.model.forum.Module;
 import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
-import com.t13g2.forum.ui.DisplayFormatter;
 
 //@@author HansKoh
 /**
@@ -41,8 +41,9 @@ public class SelectModuleCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        String messageSuccess = "Listed all threads under Module Code: " + moduleCode
-                + "\n****************************************************************************\n"
+        String messageSuccess = "Listed all threads under Module Code: " + moduleCode + "\n"
+                + "****************************************************************************\n"
+                + "****************************************************************************\n"
                 + "%s";
         if (!Context.getInstance().isLoggedIn()) {
             throw new CommandException(MESSAGE_NOT_LOGIN);
@@ -51,6 +52,7 @@ public class SelectModuleCommand extends Command {
             Module module = unitOfWork.getModuleRepository().getModuleByCode(moduleCode);
             List<ForumThread> threadList = unitOfWork.getForumThreadRepository().getThreadsByModule(module);
             message = DisplayFormatter.diplayThreadList(threadList);
+            Context.getInstance().setCurrentModuleId(module.getId());
         } catch (EntityDoesNotExistException e) {
             throw new CommandException(MESSAGE_INVALID_MODULE_CODE);
         } catch (Exception e) {

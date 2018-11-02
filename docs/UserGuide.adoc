@@ -12,7 +12,7 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL:https://github.com/CS2113-AY1819S1-T13-2
+:repoURL:https://github.com/CS2113-AY1819S1-T13-2/main/
 
 By: `Team CS2113-AY1819S1-T13-2`      Since: `Aug 2018`      Licence: `MIT`
 
@@ -31,24 +31,55 @@ image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
+.  There are two types of users in ForumBook: **user** and **admin**
+* Without logging in, you could: +
+1. Register using `addUser uName/john uPass/123`
+2. Login using `login uName/john uPass/123`
+* As a user, you could: +
+1. Show help using `help`
+2. List all the modules using `listModule`
+3. Select a module to check the threads under that module using `selectModule mCode/CS2113`
+4. Select a thread among the threads listed using `selectThread tId/1`
+5. Create a comment under a thread using `createComment tId/1 cContent/This is a new comment`
+6. Update a comment created by you using `updateComment cId/1 cContent/This is a new comment`
+7. Delete a comment created by you using `deleteComment cId/1`
+8. Create a thread under a module using `createThread tTitle/About exams? cContent/Is there any exam?`
+9. Update a thread created by you using `updateThread tId/1 tTitle/Is there any midterm?`
+10. Delete a thread created by you using `deleteThread tId/1`
+11. Check for latest announcement using `checkAnnounce`
+12. Logout from ForumBook using `logout`
+13. Exits the app using `exit`
 
-* **`find m/CS2113 java`** : finding threads associated with content, `java`, under module `CS2113`
-* **`create m/CS2113 t/Is there mid-terms?`** : create a forumThread tittled as `Is there mid-terms?` under module `CS2113`.
-* **`like m/CS2113 i/1`** : like the forumThread with `index 1` in module `CS2113`
-* *`exit`* : exits the app
+* As an admin, you could do anything that an ordinary user could do and the following: +
+1. Post new announcement using `announce aTitle/Urgent! aContent/System maintenance from 3pm to 5pm`
+2. Update a given user's password using `updatePass uName/john uPass/456`
+3. Block a given user using `blockUser uName/john block/true`
+4. Create a new module using `createModule mCode/MA1508E mTitle/Linear Algebra`
+5. Delete a module using `deleteModule mCode/MA1508E`
+6. Update a comment created by other user using `updateComment cId/1 cContent/This is a new comment by admin`
+7. Delete a comment created by other user using `deleteComment cId/1`
+8. Update a thread created by other user using `updateThread tId/1 tTitle/This is updated by admin`
+9. Delete a thread created by other user using `deleteThread tId/1`
+10. Set a user as an admin using `setAdmin uName/john set/true`
+11. Delete a given user using `deleteUser uName/john`
 
+. Note that we populate ForumBook with default data:
+1. Default admin: uName/admin uPass/admin
+2. Default user: uName/user1 uPass/user1
+3. Default module: mCode/CS2113 mTitle/Software Eng
+4. Default thread under CS2113: tTitle/Hey How is CS2113
+5. Default content under that thread: cContent/I am taking this module next sem, how is it?
+6. Default announcement: aTitle/Welcome! aContent/Welcome to ForumBook
 .  Refer to <<Features>> for details of each command.
 
-[[Features]]
 == Features
 
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `create m/MODULE_NAME t/THREAD_NAME [c/REPLY_MESSAGE]` can be used as `create m/CS2113 t/what is this module like? c/I heard that the workload is very heavy` or as `create m/CS2113 t/what is this module like?`.
-* Parameters can be in any order e.g. if the command specifies `m/CS2113 t/Is there mid-terms?`, `t/Is there mid-terms? m/CS2113` is also acceptable.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `addUser uName/USER_NAME uPass/USER_PASSWORD`, `NAME` is a parameter which can be used as `addUser uName/john uPass/123`.
+* Parameters can be in any order e.g. if the command specifies `mCode/CS2113 tTitle/Is there mid-terms?`, `tTitle/Is there mid-terms? mCode/CS2113` is also acceptable.
+* Command keywords are case sensitive. e.g. `adduser`, `DELETECOMMENT` is not recognised.
 ====
 
 === Viewing help : `help`
@@ -62,7 +93,7 @@ Format: `addUser uName/USER NAME uPass/USER PASSWORD`
 
 Examples:
 
-* `addUser uName/MyName uPass/password`
+* `addUser uName/user1 uPass/user1`
 ****
 *  User Name and password is unique and case sensitive.
 ****
@@ -74,7 +105,34 @@ Format: `login uName/USER NAME uPass/USER PASSWORD`
 
 Examples:
 
-* `login uName/MyName uPass/password`
+* `login uName/user1 uPass/user1`
+
+=== Listing all the modules : `listModule`
+
+List all the existing modules in the forum book. +
+Format: `listModule`
+
+Examples:
+
+* `listModule`
+
+=== Listing all the forumThreads : `selectModule`
+
+List all the existing forumThreads under a specific module that exists as well. +
+Format: `selectModule mCode/MODULE CODE`
+
+Examples:
+
+* `selectModule mCode/CS2113`
+
+=== Listing all the comments : `selectThread`
+
+List all the existing comments under a specific forumThread that exists as well. +
+Format: `selectThread tId/THREAD ID`
+
+Examples:
+
+* `selectThread tId/123`
 
 === Creating a new forumThread : `createThread`
 
@@ -107,7 +165,7 @@ Examples:
 
 * `updateThread tId/123 tTitle/This is a new title`
 
-=== Updating a comment title : `updateComment`
+=== Updating a comment content : `updateComment`
 
 Update an existing comment title in the forum book. +
 Format: `updateComment cId/COMMENT ID cContent/NEW COMMENT CONTENT`
@@ -146,36 +204,9 @@ Examples:
 
 * `deleteComment cId/1`
 
-=== Listing all the modules : 'listModule'
-
-List all the existing modules in the forum book. +
-Format: `listModule`
-
-Examples:
-
-* `listModule`
-
-=== Listing all the forumThreads : 'selectModule'
-
-List all the existing forumThreads under a specific module that exists as well. +
-Format: `selectModule mCode/MODULE CODE`
-
-Examples:
-
-* `selectModule mCode/CS2113`
-
-=== Listing all the comments : 'selectThread'
-
-List all the existing comments under a specific forumThread that exists as well. +
-Format: `selectThread tId/THREAD ID`
-
-Examples:
-
-* `selectThread tId/123`
-
 === Announcing new command : `announce`
 
-Announce the new announcement created by admin. +
+Announce the new announcement created by admin. The first character of announcement title and content must not be a whitespace. +
 Format: `announce aTitle/ANNOUNCEMENT_TITLE aContent/ANNOUNCEMENT_CONTENT`
 
 Example:
@@ -187,18 +218,20 @@ Example:
 Check for the latest announcement. +
 Format: `checkAnnounce`
 
-=== Blocking a user from creating thread or comment : `block`
+=== Blocking a user from creating thread or comment : `blockUser`
 
-Block a specific user that match the given argument by admin. +
-Format: `block uName/USER_NAME`
+Block a specific user that match the given argument by admin. `block` only takes `true` or `false`  +
+Format: `blockUser uName/USER_NAME block/BLOCK_OR_UNBLOCK`
 
 Example:
 
-* `block uName/john`
+* `blockUser uName/john block/true`
+
+* `blockUser uName/john block/false`
 
 === Setting a user as admin or revert an admin to user : `setAdmin`
 
-Set a user as an admin or revert an admin to user. +
+Set a user as an admin or revert an admin to user. `set` only takes `true` or `false` +
 Format: `setAdmin uName/USER_NAME set/SET_OR_REVERT`
 
 Examples:
@@ -209,7 +242,7 @@ Examples:
 
 === Creating a new module : `createModule`
 
-Create a new module by admin. +
+Create a new module by admin. Module code should follow (2 or 3 capital letters) + (4 numbers) + (0 or 1 capital letter) and it should not be blank. E.g. MA1580E, CS2113 or USP1000A, USP1000. Module title should only contain letters and spaces.+
 Format: `createModule mCode/MODULE_CODE mTitle/MODULE_TITLE`
 
 Example:
@@ -258,11 +291,6 @@ Format: `exit`
 Forum book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
-
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
 
 == FAQ
 
@@ -270,6 +298,28 @@ _{explain how the user can enable/disable data encryption}_
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Forum Book folder.`
 
 == Command Summary
+* *Help*: `help`
+* *RegisterUser* : `addUser uName/USER NAME uPass/USER PASSWORD` +
+e.g `addUser uName/MyName uPass/password`
+* *Login* : `login uName/USER NAME uPass/USER PASSWORD` +
+e.g `login uName/MyName uPass/password`
+* *createThread* : `createThread mCode/MODULE CODE tTitle/THREAD TITLE cContent/COMMENT CONTENT` +
+e.g `createThread mCode/CS2113 tTitle/Exam Information cContent/All the best for the final guys`
+* *createComment* : `createComment tId/THREAD ID cContent/COMMENT CONTENT` +
+e.g `createComment tId/1 cContent/This is a new comment`
+* *updateThread* : `updateThread tId/THREAD ID tTitle/NEW THREAD TITLE` +
+e.g `updateThread tId/123 tTitle/This is a new title`
+* *updateComment* : `updateComment cId/COMMENT ID cContent/NEW COMMENT CONTENT` +
+e.g `updateComment tId/123 tTitle/This is a new title`
+* *deleteThread* : `deleteThread tId/THREAD ID` +
+e.g `deleteThread tId/1`
+* *deleteComment* : `deleteComment cId/COMMENT ID` +
+e.g `deleteComment cId/1`
+* *listModule*: `listModule`
+* *selectModule* : `selectModule mCode/MODULE CODE` +
+e.g `selectModule mCode/CS2113`
+* *selectThread* : `selectThread tId/THREAD ID` +
+e.g `selectThread tId/123`
 * *Announce* : `announce aTitle/ANNOUNCEMENT_TITLE aContent/ANNOUNCEMENT_CONTENT` +
 e.g `announce aTitle/Urgent! aContent/System maintenance from 4pm to 5pm.`
 * *CheckAnnounce* : `checkAnnounce`
@@ -285,26 +335,4 @@ e.g `deleteModule mCode/CS2113`
 e.g `updatePass uName/john uPass/098`
 * *DeleteUser* : `deleteUser uName/USER_NAME` +
 e.g `deleteUser uName/john`
-* *Help*
-* *createThread* : `createThread mCode/MODULE CODE tTitle/THREAD TITLE cContent/COMMENT CONTENT` +
-e.g `createThread mCode/CS2113 tTitle/Exam Information cContent/All the best for the final guys`
-* *createComment* : `createComment tId/THREAD ID cContent/COMMENT CONTENT` +
-e.g `createComment tId/1 cContent/This is a new comment`
-* *updateThread* : `updateThread tId/THREAD ID tTitle/NEW THREAD TITLE` +
-e.g `updateThread tId/123 tTitle/This is a new title`
-* *updateComment* : `updateComment cId/COMMENT ID cContent/NEW COMMENT CONTENT` +
-e.g `updateComment tId/123 tTitle/This is a new title`
-* *deleteThread* : `deleteThread tId/THREAD ID` +
-e.g `deleteThread tId/1`
-* *deleteComment* : `deleteComment cId/COMMENT ID` +
-e.g `deleteComment cId/1`
-* *listModule*
-* *selectModule* : `selectModule mCode/MODULE CODE` +
-e.g `selectModule mCode/CS2113`
-* *selectThread* : `selectThread tId/THREAD ID` +
-e.g `selectThread tId/123`
-* *RegisterUser* : `addUser uName/USER NAME uPass/USER PASSWORD` +
-e.g `addUser uName/MyName uPass/password`
-* *Login* : `login uName/USER NAME uPass/USER PASSWORD` +
-e.g `login uName/MyName uPass/password`
 * *Logout* : `logout`

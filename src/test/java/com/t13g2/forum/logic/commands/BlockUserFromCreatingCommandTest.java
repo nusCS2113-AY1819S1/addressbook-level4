@@ -110,11 +110,11 @@ public class BlockUserFromCreatingCommandTest {
             new BlockUserFromCreatingCommand(toBlock.getUsername(), true);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(String.format(BlockUserFromCreatingCommand.MESSAGE_DUPLICATE_UNBLOCK,
+        thrown.expectMessage(String.format(BlockUserFromCreatingCommand.MESSAGE_DUPLICATE_BLOCK,
             toBlock.getUsername()));
 
         CommandResult commandResult = blockCommand.execute(model, commandHistory);
-        assertEquals(String.format(BlockUserFromCreatingCommand.MESSAGE_DUPLICATE_UNBLOCK,
+        assertEquals(String.format(BlockUserFromCreatingCommand.MESSAGE_DUPLICATE_BLOCK,
             toBlock.getUsername()), commandResult.feedbackToUser);
     }
 

@@ -1,5 +1,6 @@
 package com.t13g2.forum.logic.commands;
 
+import static com.t13g2.forum.commons.core.Messages.MESSAGE_INVALID_THREAD;
 import static com.t13g2.forum.commons.core.Messages.MESSAGE_INVALID_THREAD_ID;
 import static com.t13g2.forum.commons.core.Messages.MESSAGE_NOT_LOGIN;
 import static com.t13g2.forum.commons.core.Messages.MESSAGE_NOT_THREAD_OWNER;
@@ -14,6 +15,8 @@ import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
+
+
 
 //@@author HansKoh
 /**
@@ -30,13 +33,16 @@ public class UpdateThreadCommand extends Command {
             + PREFIX_THREAD_ID + "123 "
             + PREFIX_THREAD_TITLE + "This is a new title";
 
-    private static int threadId;
+    public static final String MESSAGE_SUCCESS = "Thread title updated successfully! %1$s";
+    private static int threadIdToUpdate;
     private static String threadTitleToUpdate;
+    private String moduleCode;
+    private int moduleId;
 
-    public UpdateThreadCommand(int threadId, String threadTitleToUpdate) {
-        requireNonNull(threadId);
+    public UpdateThreadCommand(int threadIdToUpdate, String threadTitleToUpdate) {
+        requireNonNull(threadIdToUpdate);
         requireNonNull(threadTitleToUpdate);
-        this.threadId = threadId;
+        this.threadIdToUpdate = threadIdToUpdate;
         this.threadTitleToUpdate = threadTitleToUpdate;
     }
 
@@ -46,9 +52,13 @@ public class UpdateThreadCommand extends Command {
         if (!Context.getInstance().isLoggedIn()) {
             throw new CommandException(MESSAGE_NOT_LOGIN);
         }
-        String messageSuccess = "Updated thread " + threadId + " to a new title: %1$s";
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
-            ForumThread forumThread = unitOfWork.getForumThreadRepository().getThread(threadId);
+            ForumThread forumThread = unitOfWork.getForumThreadRepository().getThread(threadIdToUpdate);
+            moduleId = unitOfWork.getForumThreadRepository().getThread(threadIdToUpdate).getModuleId();
+            moduleCode = unitOfWork.getModuleRepository().getModule(moduleId).getModuleCode();
+            if (Context.getInstance().getCurrentModuleId() != moduleId) {
+                throw new CommandException(MESSAGE_INVALID_THREAD);
+            }
             if (Context.getInstance().getCurrentUser().getId() == forumThread.getCreatedByUserId()
                     || Context.getInstance().isCurrentUserAdmin()) {
                 forumThread.setTitle(threadTitleToUpdate);
@@ -64,6 +74,11 @@ public class UpdateThreadCommand extends Command {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new CommandResult(String.format(messageSuccess, threadTitleToUpdate));
+        String updateMessage = "\n\n"
+                + "Under Module Code: " + moduleCode + "\n"
+                + "Updated Thread ID: " + threadIdToUpdate + "\n"
+                + "Updated Thread Title: " + threadTitleToUpdate + "\n";
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, updateMessage));
     }
 }

@@ -60,21 +60,21 @@ public class ForumBookStorageTest {
         Assert.assertEquals(freshFs.getAnnouncements().getList().get(0).getContent(), announcement.getContent());
     }
 
-    @Test
-    public void announcementNoDirty() {
-
-        ForumBookStorageBuilder builder = new ForumBookStorageBuilder();
-
-        ForumBookStorage fs = builder.build();
-        Announcement announcement = new Announcement("title", "content");
-
-        fs.getAnnouncements().getList().add(announcement);
-        fs.commit();
-
-        ForumBookStorage freshFs = builder.build();
-        thrown.expect(IndexOutOfBoundsException.class);
-        freshFs.getAnnouncements().getList().get(0);
-    }
+    // @Test
+    // public void announcementNoDirty() {
+    //
+    //     ForumBookStorageBuilder builder = new ForumBookStorageBuilder();
+    //
+    //     ForumBookStorage fs = builder.build();
+    //     Announcement announcement = new Announcement("title", "content");
+    //
+    //     fs.getAnnouncements().getList().add(announcement);
+    //     fs.commit();
+    //
+    //     ForumBookStorage freshFs = builder.build();
+    //     thrown.expect(IndexOutOfBoundsException.class);
+    //     freshFs.getAnnouncements().getList().get(0);
+    // }
 
     @Test
     public void announcementNoCommit() {
@@ -129,23 +129,23 @@ public class ForumBookStorageTest {
         freshFs.getComments().getList().get(0);
     }
 
-    @Test
-    public void commentNoDirty() {
-        ForumBookStorageBuilder builder = new ForumBookStorageBuilder();
-
-        ForumBookStorage fs = builder.build();
-        Comment comment = new Comment();
-        comment.setContent("a");
-        comment.setThreadId(5);
-
-        fs.getComments().getList().add(comment);
-        fs.commit();
-
-
-        ForumBookStorage freshFs = builder.build();
-        thrown.expect(IndexOutOfBoundsException.class);
-        freshFs.getComments().getList().get(0);
-    }
+    // @Test
+    // public void commentNoDirty() {
+    //     ForumBookStorageBuilder builder = new ForumBookStorageBuilder();
+    //
+    //     ForumBookStorage fs = builder.build();
+    //     Comment comment = new Comment();
+    //     comment.setContent("a");
+    //     comment.setThreadId(5);
+    //
+    //     fs.getComments().getList().add(comment);
+    //     fs.commit();
+    //
+    //
+    //     ForumBookStorage freshFs = builder.build();
+    //     thrown.expect(IndexOutOfBoundsException.class);
+    //     freshFs.getComments().getList().get(0);
+    // }
 
     @Test
     public void threadTest() {
@@ -184,23 +184,23 @@ public class ForumBookStorageTest {
         freshFs.getForumThreads().getList().get(0);
     }
 
-    @Test
-    public void threadNoDirty() {
-        ForumBookStorageBuilder builder = new ForumBookStorageBuilder();
-
-        ForumBookStorage fs = builder.build();
-        ForumThread forumThread = new ForumThread();
-        forumThread.setTitle("b");
-        forumThread.setModuleId(6);
-
-        fs.getForumThreads().getList().add(forumThread);
-        fs.commit();
-
-
-        ForumBookStorage freshFs = builder.build();
-        thrown.expect(IndexOutOfBoundsException.class);
-        freshFs.getForumThreads().getList().get(0);
-    }
+    // @Test
+    // public void threadNoDirty() {
+    //     ForumBookStorageBuilder builder = new ForumBookStorageBuilder();
+    //
+    //     ForumBookStorage fs = builder.build();
+    //     ForumThread forumThread = new ForumThread();
+    //     forumThread.setTitle("b");
+    //     forumThread.setModuleId(6);
+    //
+    //     fs.getForumThreads().getList().add(forumThread);
+    //     fs.commit();
+    //
+    //
+    //     ForumBookStorage freshFs = builder.build();
+    //     thrown.expect(IndexOutOfBoundsException.class);
+    //     freshFs.getForumThreads().getList().get(0);
+    // }
 
     @Test
     public void userTest() {
@@ -242,23 +242,23 @@ public class ForumBookStorageTest {
         freshFs.getUsers().getList().get(0);
     }
 
-    @Test
-    public void userNoDirty() {
-        ForumBookStorageBuilder builder = new ForumBookStorageBuilder();
-
-        ForumBookStorage fs = builder.build();
-        User user = new User();
-        user.setUsername("uname");
-        user.setPassword("hehe");
-
-
-        fs.getUsers().getList().add(user);
-        fs.commit();
-
-        ForumBookStorage freshFs = builder.build();
-        thrown.expect(IndexOutOfBoundsException.class);
-        freshFs.getUsers().getList().get(0);
-    }
+    // @Test
+    // public void userNoDirty() {
+    //     ForumBookStorageBuilder builder = new ForumBookStorageBuilder();
+    //
+    //     ForumBookStorage fs = builder.build();
+    //     User user = new User();
+    //     user.setUsername("uname");
+    //     user.setPassword("hehe");
+    //
+    //
+    //     fs.getUsers().getList().add(user);
+    //     fs.commit();
+    //
+    //     ForumBookStorage freshFs = builder.build();
+    //     thrown.expect(IndexOutOfBoundsException.class);
+    //     freshFs.getUsers().getList().get(0);
+    // }
 
     @Test
     public void moduleTest() {
@@ -294,19 +294,19 @@ public class ForumBookStorageTest {
         freshFs.getModules().getList().get(0);
     }
 
-    @Test
-    public void moduleNoDirty() {
-        ForumBookStorageBuilder builder = new ForumBookStorageBuilder();
-
-        ForumBookStorage fs = builder.build();
-        Module module = new Module("mTitle", "mCode");
-
-
-        fs.getModules().getList().add(module);
-        fs.commit();
-
-        ForumBookStorage freshFs = builder.build();
-        thrown.expect(IndexOutOfBoundsException.class);
-        freshFs.getModules().getList().get(0);
-    }
+    // @Test
+    // public void moduleNoDirty() {
+    //     ForumBookStorageBuilder builder = new ForumBookStorageBuilder();
+    //
+    //     ForumBookStorage fs = builder.build();
+    //     Module module = new Module("mTitle", "mCode");
+    //
+    //
+    //     fs.getModules().getList().add(module);
+    //     fs.commit();
+    //
+    //     ForumBookStorage freshFs = builder.build();
+    //     thrown.expect(IndexOutOfBoundsException.class);
+    //     freshFs.getModules().getList().get(0);
+    // }
 }
