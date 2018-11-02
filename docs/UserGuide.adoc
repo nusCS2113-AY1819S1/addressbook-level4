@@ -72,7 +72,6 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 6. Default announcement: aTitle/Welcome! aContent/Welcome to ForumBook
 .  Refer to <<Features>> for details of each command.
 
-[[Features]]
 == Features
 
 ====
@@ -107,6 +106,33 @@ Format: `login uName/USER NAME uPass/USER PASSWORD`
 Examples:
 
 * `login uName/user1 uPass/user1`
+
+=== Listing all the modules : `listModule`
+
+List all the existing modules in the forum book. +
+Format: `listModule`
+
+Examples:
+
+* `listModule`
+
+=== Listing all the forumThreads : `selectModule`
+
+List all the existing forumThreads under a specific module that exists as well. +
+Format: `selectModule mCode/MODULE CODE`
+
+Examples:
+
+* `selectModule mCode/CS2113`
+
+=== Listing all the comments : `selectThread`
+
+List all the existing comments under a specific forumThread that exists as well. +
+Format: `selectThread tId/THREAD ID`
+
+Examples:
+
+* `selectThread tId/123`
 
 === Creating a new forumThread : `createThread`
 
@@ -177,33 +203,6 @@ Format: `deleteComment cId/COMMENT ID`
 Examples:
 
 * `deleteComment cId/1`
-
-=== Listing all the modules : `listModule`
-
-List all the existing modules in the forum book. +
-Format: `listModule`
-
-Examples:
-
-* `listModule`
-
-=== Listing all the forumThreads : `selectModule`
-
-List all the existing forumThreads under a specific module that exists as well. +
-Format: `selectModule mCode/MODULE CODE`
-
-Examples:
-
-* `selectModule mCode/CS2113`
-
-=== Listing all the comments : `selectThread`
-
-List all the existing comments under a specific forumThread that exists as well. +
-Format: `selectThread tId/THREAD ID`
-
-Examples:
-
-* `selectThread tId/123`
 
 === Announcing new command : `announce`
 
