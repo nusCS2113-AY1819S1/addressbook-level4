@@ -334,7 +334,7 @@ Unregisters user from the 1st event of the Event Manager.
 Unregisters User from the 2nd event in the results of the `find` command.
 // end::rsvp[]
 
-=== Set reminders : `setReminder`
+=== Set reminders : `setReminder` [Proposed]
 
 Admin/User: Sets a reminder for the event identified by the index number used in the displayed event list. Reminder will alert the user 1 hour before the commencement time of the event. +
 Format: `setReminder INDEX`
@@ -346,7 +346,7 @@ Sets a reminder for user for event 1
 * `setReminder 5` +
 Sets a reminder for user for event 5
 
-=== Clear reminders : `removeReminder`
+=== Clear reminders : `removeReminder` [Proposed]
 
 Admin/User: Removes the reminder for the event identified by the index number used in the displayed event list. +
 Format: `removeReminder INDEX`
