@@ -91,8 +91,8 @@ public class XmlAdaptedEvent {
         eventName = source.getEventName().fullName;
         description = source.getDescription().value;
         date = source.getDate().toString();
-        startTime = source.getStartTime().startTime;
-        endTime = source.getEndTime().endTime;
+        startTime = source.getStartTime().time;
+        endTime = source.getEndTime().time;
         location = source.getLocation().value;
         attendees = source.getAttendees().getAttendeesSet().stream()
                 .collect(Collectors.toList());

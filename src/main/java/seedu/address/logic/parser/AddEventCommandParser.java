@@ -49,7 +49,7 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         StartTime startTime = ParserUtil.parseStartTime(argMultimap.getValue(PREFIX_START_DATE).get());
         EndTime endTime = ParserUtil.parseEndTime(argMultimap.getValue(PREFIX_END_DATE).get());
 
-        if (startTime.startTime.compareTo(endTime.endTime) > 0) {
+        if (startTime.time.compareTo(endTime.time) > 0) {
             throw new ParseException(String.format(EndTime.MESSAGE_INVALID_END_TIME));
         }
 
