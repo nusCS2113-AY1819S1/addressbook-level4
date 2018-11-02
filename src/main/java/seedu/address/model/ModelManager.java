@@ -20,6 +20,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.item.Item;
+import seedu.address.model.Events.Event;
 import seedu.address.model.ledger.Account;
 import seedu.address.model.ledger.Ledger;
 import seedu.address.model.member.Person;
@@ -33,9 +34,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
-
     private final FilteredList<Ledger> filteredLedgers;
     private final FilteredList<Item> filteredItems;
+    private final FilteredList<Event> filteredEvents;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -50,6 +51,9 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
 
         filteredLedgers = new FilteredList<>(versionedAddressBook.getLedgerList());
+
+        filteredEvents = new FilteredList<>(versionedAddressBook.getEventList());
+
         filteredItems = new FilteredList<>(versionedAddressBook.getItemList());
     }
 
@@ -95,6 +99,25 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         indicateAddressBookChanged();
+    }
+
+    @Override
+    public boolean hasEvent(Event event) {
+        requireAllNonNull(event);
+        return versionedAddressBook.hasEvent(event);
+    }
+
+    @Override
+    public void addEvent(Event event) {
+        requireAllNonNull(event);
+        versionedAddressBook.addEvent(event);
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void deleteEvent(Event event) {
+        versionedAddressBook.removeEvent(event);
     }
 
     @Override
@@ -161,6 +184,14 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+
+    @Override
+    public void updateEvent(Event target, Event editedEvent) {
+        requireAllNonNull(target,editedEvent);
+        versionedAddressBook.updateEvent(target,editedEvent);
+        indicateAddressBookChanged();
+    }
+
     @Override
     public void updateItem(Item target, Item editedItem) {
         requireAllNonNull(target, editedItem);
@@ -200,6 +231,10 @@ public class ModelManager extends ComponentManager implements Model {
         return FXCollections.unmodifiableObservableList(filteredItems);
     }
 
+    public ObservableList<Event> getFilteredEventList() {
+        return FXCollections.unmodifiableObservableList(filteredEvents);
+    }
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
@@ -210,6 +245,11 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredLedgerList(Predicate<Ledger> predicate) {
         requireNonNull(predicate);
         filteredLedgers.setPredicate(predicate);
+    }
+
+    public void updateFilteredEventList(Predicate<Event> predicate) {
+        requireAllNonNull(predicate);
+        filteredEvents.setPredicate(predicate);
     }
 
     @Override
