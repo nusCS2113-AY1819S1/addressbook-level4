@@ -23,7 +23,7 @@ By: `CS2113T-W12-4`      Since: `Jun 2016`      Licence: `MIT`
 == Introduction
 
 *[blue]#_Drink I/O_#* is a desktop application that helps you to manage your drink distribution company.
-You can use *[blue]#_Drink I/O_#* to keep track of your inventory, analyse your company’s sales performance and
+You can use *[blue]#_Drink I/O_#* to keep track of your inventory, analyse your company�s sales performance and
 set reminders to help you import more goods should their stocks fall low.
 *[blue]#_Drink I/O_#* is optimised for Command Line Interface (CLI), allowing you to manage your store
 faster than traditional Graphical User Interface (GUI) apps, while retaining the benefits of a GUI
@@ -148,14 +148,22 @@ If password changes is successful, a message will be shown:
 image::loginPic/password_change_successful.PNG[width="300"]
 ====
 === Create additional account
-As a [red]#manager#, you want to create new account for new employee.
+As a [red]#manager# or [red]#administrator#, you want to create new account for new employee.
 
 Format:`createAccount u/USER_NAME p/PASSWORD a/AUTHENTICATION_LEVEL`
+
+`AUTHENTICATION_LEVEL` must be one of:
+
+* `ADMIN`
+* `MANAGER`
+* `STOCKTAKER`
+* `ACCOUNTANT`
+
 [.example]
 ====
 [example-title]#Examples for create new account:#
 
-* [example]#`createAccount u/tester p/myPassword a/admin`#
+* [example]#`createAccount u/tester p/myPassword a/ADMIN`#
 
 If create account is successful, a message will be shown:
 
@@ -236,8 +244,8 @@ you can record your sales and imports of drinks into *[blue]#_Drink I/O_#*, and 
 handle the updating of the inventory for you in real-time.
 
 
-=== Creating an import transaction
-When you buy and receive new goods, and want to update your stocks, you can enter an import transaction to do so.
+=== Creating a purchase transaction
+When you buy and receive new goods, and want to update your stocks, you can enter a purchase transaction to do so.
 
 [TIP]
 ====
@@ -254,7 +262,7 @@ When you buy and receive new goods, and want to update your stocks, you can ente
 *Step-by-Step Instructions* +
 To record an import transaction,
 
-. Enter `import` into the command box
+. Enter `buy` into the command box
 . Key in `n/`, followed by name of drink (`NAME`)
 . Key in `q/`, followed by quantity imported (`QUANTITY`)
 . Press kbd:[enter]
@@ -279,7 +287,7 @@ Otherwise, the transaction will not be entered into the system.
 
 
 
-=== Creating a sales transaction
+=== Creating a sale transaction
 When you make a sale to your customers, recording the sale in *[blue]#_Drink I/O_#* allows you
 to update your transactions as well as the current stock.
 
@@ -414,10 +422,10 @@ You should see a value displayed in the results panel.
 
 
 === Filtering popular items `[Coming in v1.4]`
-=== Viewing an item’s transactions `[Coming in v1.4]`
-=== Viewing an item’s cost, revenue and profit `[Coming in v1.4]`
+=== Viewing an item�s transactions `[Coming in v1.4]`
+=== Viewing an item�s cost, revenue and profit `[Coming in v1.4]`
 
-== Setting Reminders
+== Setting Reminders `[Coming in v1.4]`
 
 
 
@@ -433,7 +441,7 @@ You should see a value displayed in the results panel.
 == Overview of Role-Specific Commands
 
 ====
-*Command Format*
+*General Command Format*
 
 * Words in UPPER_CASE are the parameters supplied by users
 * Use underscore for spaces
@@ -441,14 +449,14 @@ You should see a value displayed in the results panel.
 ** *e.g.* t/ for item, c/ for characteristic
 * Parameters in square brackets are optional
 ====
-=== Global Command
+=== Global Commands
 
 ==== Exiting Program: `exit`
 Exits program.
 Format: `exit`
 
 ==== Viewing help : `help`
-View help for respective user
+View help for respective users
 Format: `help`
 
 ==== Change password: `changePassword`
@@ -459,7 +467,8 @@ Format: `changePassword o/OLD_PASSWORD n/NEW_PASSWORD`
 This enable user to change their password after manager create a default account.
 ====
 
-==== View stock numbers of an drink based on name: `view`
+////
+==== View stock numbers of an drink based on name: `view` `[Coming in v1.4]`
 
 Format: `view [-d] [n/Drink_NAME] [-b]`
 
@@ -471,7 +480,7 @@ When command -d is added, the list will show an decreasing alphabetical order.
 When command -b is added, the list will show a list based on individually batch.
 ====
 
-==== View stock numbers of an drink based on quantity: `quantity`
+==== View stock numbers of an drink based on quantity: `quantity` `[Coming in v1.4]`
 Displays specifically the quantities left of the ingredient desired.
 	Format: `quantity [-d] [n/Drink_NAME] [-b] [t/tag]`
 [NOTE]
@@ -484,7 +493,7 @@ When command -b is added, the list will show a list based on individually batch.
 When t/tag is added, it will show a list that has all the drinks with that particular tag.
 ====
 
-==== View import dates for a batch of drinks: `importDate`
+==== View import dates for a batch of drinks: `importDate` `[Coming in v1.4]`
 Displays the import dates of batches of the drink desired.
 	Format: `importDate [-d] INGREDIENT_NAME`
 
@@ -493,6 +502,7 @@ Displays the import dates of batches of the drink desired.
 The default order will be a increasing order whereby the earliest importing date will be showed first
 When command -d is added, the list will show an decreasing order
 ====
+////
 
 === Manager
 
@@ -500,14 +510,16 @@ When command -d is added, the list will show an decreasing order
 Shows available commands with brief description of what can manager do.
 Format: `help`
 
-==== Add new drink items: `addItem`
-Add a new drink item to the drink item manager for sales.
-	Format: `addItem n/DrinkItem p/DEFAULT_SELLING_PRICE`
+==== Add new drink into inventory: `add`
+Add a new drink to the drink inventory.
+	Format: `add n/DrinkItem p/DEFAULT_SELLING_PRICE cp/DEFAULT_COST_PRICE`
 [NOTE]
 ====
-All the drink item added will be in a predefined list. As such, stock taker only able to add batches that is in this predefined list.
+All the drinks added will be in a predefined list. As such, stock taker only able to add batches that is in this predefined list.
 ====
 
+
+////
 ==== View history of actions: `history`
 Displays list of actions done by user over a specified time frame.
 	Format: `history START_DATE END_DATE`
@@ -515,7 +527,7 @@ Displays list of actions done by user over a specified time frame.
 ====
 Start date must be earlier than end date
 ====
-
+////
 
 === Stock Taker
 
@@ -523,61 +535,63 @@ Start date must be earlier than end date
 Shows available commands with brief description of what a stock taker can do.
 Format: `help`
 
-==== Import transaction of a drink item: `add`
-Records import of a drink item.
-	Format: `add n/DRINK_NAME  d/DATE_OF_IMPORT  q/QUANTITY_IMPORT p/TOTAL_IMPORT_PRICE`
+==== Increase stock of a drink: `buy`
+Records import of a drink.
+	Format: `buy n/DRINK_NAME q/QUANTITY_IMPORT`
 Examples:
 
-* `Add n/coca cola d/10/06/18 q/12 p/345.68`
+* `Add n/coca cola q/12`
 
 [NOTE]
 ====
-DRINK NAME is predefined by manager, so alert message will appear if the drink name is not in the predefined list. In addition, drink name will be case-insensitive.
+DRINK_NAME is predefined by manager, so alert message will appear if the drink name is not in the predefined list. In addition, drink name will be case-insensitive.
 ====
 
-==== Sale transaction of a drink item: `sell`
-Record sale of a drink item
-           Format: `sell n/DRINK_NAME  d/DATE_SOLD  q/QUANTITY_SOLD p/TOTAL_SELLING_PRICE`
+==== Decrease stock of a drink: `sell`
+Record sale of a drink.
+           Format: `sell n/DRINK_NAME  q/QUANTITY_SOLD`
 Examples:
 
-* `Sell n/coca cola d/12/06/18 q/15 p/758`
+* `Sell n/coca cola q/15`
 
 [NOTE]
 ====
-* DRINK NAME is predefined by manager, so alert message will appear if the drink name is not in the predefined list
-* Quantity sold cannot be more than stock. Or else a warning message will be shown.
+* DRINK_NAME is predefined by manager, so an alert message will appear if the drink name is
+not in the inventory list
+* Quantity sold cannot be more than stock. Otherwise, a warning message will be shown.
 ====
 
 === Accountant
 
 ==== Viewing Help: `help`
-Shows available commands with brief description of what can accountant do.
-Format: `help`
+Shows available commands with brief description of what can accountant do. +
+    Format: `help`
 
-==== Get the total profit of the shop over specified periods: `profit`
+=== Viewing transactions: `viewTrans`
+Shows transactions made since the start of use of Drink I/O. +
+    Format: `viewTrans`
+
+==== Get the total profit of the shop over specified periods: `profit` `[Coming in v1.4]`
 View the total profit earned in time periods of a day, 7 days and 30 days.
 	Format: `profit`
 [NOTE]
 ====
-To view profit earned up to now in the current day, no parameters are used. i.e. just “profit”
-To view profit earned in last 7 days, append “-w”
-To view profit earned in last 30 days, append “-m”
+To view profit earned up to now in the current day, no parameters are used. i.e. just �profit�
+To view profit earned in last 7 days, append �-w�
+To view profit earned in last 30 days, append �-m�
 ====
 
-==== Get the quantities of each drink item sold over specified periods: `sales`
+==== Get the quantities of each drink item sold over specified periods: `sales` `[Coming in v1.4]`
 View the sales number of each drink item in a period specified by the starting date and ending date.
 	Format: `sales STARTING_DATE ENDING_DATE`
 
-==== Get the trend of cost of every ingredient over specified periods: `viewcost`
+==== Get the trend of cost of every drink over specified periods: `viewcost` `[Coming in v1.4]`
 View the variation tendency of the cost of every ingredient in a period specified by the starting date and ending date.
 	Format: `viewcost STARTING_DATE ENDING_DATE`
 
-==== Update the current cost of certain ingredients: `editcost`
+==== Update the current cost of certain drinks: `editcost` `[Coming in v1.4]`
 Update the cost of ingredients every time they change to keep track.
 	Format: `editcost INGREDIENT_NAME UNIT_COST`
-
-=== Original command
-Keep for reference of syntax
 
 ==== Listing entered commands : `history`
 
@@ -641,24 +655,30 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `delete 1` command) +
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
-////
+
 ==== Clearing all entries : `clear`
 
-Clears all data from the FrozenBook. +
+Clears all data from the inventory. +
 Format: `clear`
-
+////
 ==== Exiting the program : `exit`
 
 Exits the program. +
 Format: `exit`
 
-==== Saving the data
+=== Administrator
+==== Creating an account: `createAccount`
+Creates a new Drink I/O account.
+    Format: `createAccount u/USER_NAME p/PASSWORD a/AUTHENTICATION_LEVEL`
+
+
+=== Saving the data `[Coming in v1.4]`
 
 DrinkIO data is saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 // tag::dataencryption[]
-==== Encrypting data files `[coming in v2.0]`
+=== Encrypting data files `[coming in v2.0]`
 
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
@@ -673,31 +693,38 @@ _{explain how the user can enable/disable data encryption}_
 with the file that contains the data of your previous *[blue]#_Drink I/O_#* folder.
 
 == Command Summary
-=== Common Command
+=== Common Commands
 * *logout* : `logout`
 * *exit* : `exit`
 * *help* : `help`
 * *change password* : `changePassword o/OLD_PASSWORD n/NEW_PASSWORD`
+////
 * *view stock by Name* : `view [-d] [n/Drink_NAME] [-b]`
 * *view stock by quantity* : `quantity [-d] [n/Drink_NAME] [-b] [t/tag]`
 * *view stock by import date* : `importDate [-d] INGREDIENT_NAME`
+////
 
 === Manager
 
-* *add new item* : `addItem n/DrinkItem p/DEFAULT_SELLING_PRICE`
-* *view history* : `history START_DATE END_DATE`
+* *add new item* : `add n/DRINK_NAME p/DEFAULT_SELLING_PRICE cp/DEFAULT_COST_PRICE`
+//* *view history* : `history START_DATE END_DATE`
 * *create account* : `createAccount u/USER_NAME p/PASSWORD a/AUTHENTICATION_LEVEL`
 * *delete account* : `deleteAccount u/USER_NAME`
 
 === Stock Taker
 
-* *add new batch of good* : `add n/DRINK_NAME  d/DATE_OF_IMPORT  q/QUANTITY_IMPORT p/TOTAL_IMPORT_PRICE`
-* *record Sale transaction of a drink item* : `sell n/DRINK_NAME  d/DATE_SOLD  q/QUANTITY_SOLD p/TOTAL_SELLING_PRICE`
+* *increase quantity of stock* : `buy n/DRINK_NAME q/QUANTITY`
+* *decrease quantity of stock* : `sell n/DRINK_NAME q/QUANTITY`
 
 === Accountant
 
-* *total profit* : `profit`
-* *sale of item* : `sales`
-* *cost of item* : `costs`
-* *view cost trend* : `viewcost`
-* *edit current cost* : `editcost`
+* *get total profit* : `profit` `[coming in v1.4]`
+* *get total costs* : `analyseCosts`
+* *view transactions* : `viewTrans`
+//* *sale of item* : `sales`
+//* *cost of item* : `costs`
+//* *view cost trend* : `viewcost`
+//* *edit current cost* : `editcost`
+
+=== Administrator
+* *create account* : `createAccount u/USER_NAME p/PASSWORD a/AUTHENTICATION_LEVEL`
