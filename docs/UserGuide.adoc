@@ -96,7 +96,7 @@ Examples:
 Format: `addproduct n/PRODUCT_NAME s/SERIAL_NUMBER d/DISTRIBUTOR i/INFO t/TAGS`
 
 Adds a product to the list of products offered by the store
-and adds the distributor to the list of distributors too if the distributor
+and adds the distributor to the list of distributors if the distributor
 is not yet added. +
 
 *  Distributor's name is the key.
@@ -112,7 +112,7 @@ Format: `findproduct PRODUCT_NAME` or `findproduct SERIAL_NUMBER`
 
 Displays the product and basic information related to it. +
 
-*  The search is case in-sensitive. (e.g `potato` will match `POTATO`)
+*  The search is case insensitive. (e.g `potato` will match `POTATO`)
 *  All products containing the name or serial number that is searched for will appear.
 
 Examples:
@@ -257,5 +257,7 @@ A: We have the pleasure of working with Swedish developer on our team. +
 
 Q: How do I transfer my data to another computer?
 
-A: Install the application on another computer and copy the folder “data”  from the old computer to the new computer and place it in the folder that belong to the program.
+. Install the application on another computer.
+. Copy the folder “data”  from the old computer to the new computer.
+. Place it in the folder that belong to the program.
 
