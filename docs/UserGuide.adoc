@@ -489,6 +489,8 @@ Format: `backup | [GITHUB ACCESS_TOKEN]`
 
 ****
 * For GitHub online backup, a personal access token must be provided in `ACCESS_TOKEN`
+* Proceed to https://github.com/settings/tokens/new[Github Settings] and create a token under
+`Personal Access Token`, allow the `gist` scope to allow Gists Creation. The create token is your authentication token
 ****
 
 Examples:
