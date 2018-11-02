@@ -24,7 +24,7 @@ public class AddLedgerCommand extends Command {
     public static final String MESSAGE_DUPLICATE_LEDGER = "This ledger already exists in the club book";
     public static final String MESSAGE_SUCCESS = "New ledger added: %1$s";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a finance entry into the ledger. "
-            + "parameters: /d[DATE DD/MM]";
+            + "parameters: d/[DATE DD/MM]";
     private final Logger logger = LogsCenter.getLogger(AddLedgerCommand.class);
     private final Ledger addLedger;
 
