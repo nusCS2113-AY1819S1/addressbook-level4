@@ -42,7 +42,9 @@ public class EmailUtil {
      * Global instance of the scopes required by this quickstart.
      * If modifying these scopes, delete your previously saved tokens/ folder.
      */
-    public static final String DEFAULT_FROM = "cs2113.f09.4@gmail.com";
+
+    //DEFAULT_FROM is "me" to work with any gmail account which was authenticated.
+    public static final String DEFAULT_FROM = "me";
     public static final String EMAIL_ADD_COMMAND = "add";
     public static final String EMAIL_NEXT_COMMAND = "next";
     public static final String EMAIL_BACK_COMMAND = "back";

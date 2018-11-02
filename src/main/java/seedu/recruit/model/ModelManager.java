@@ -118,9 +118,10 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateCandidate(Candidate target, Candidate editedCandidate) {
         requireAllNonNull(target, editedCandidate);
-
+        versionedCompanyBook.cascadeJobListWithEditedCandidate(target, editedCandidate);
         versionedCandidateBook.updatePerson(target, editedCandidate);
         indicateCandidateBookChanged();
+        indicateCompanyBookChanged();
     }
 
     @Override

@@ -34,6 +34,7 @@ public class BlacklistCommand extends Command {
     public static final String MESSAGE_UNBLACKLIST_SUCCESS = "Unblacklisted candidate: %1$s";
     public static final String MESSAGE_ALREADY_BLACKLISTED = "This candidate has already been blacklisted!";
     public static final String MESSAGE_IS_NOT_BLACKLISTED = "This candidate is not blacklisted.";
+    public static final String MESSAGE_ALREADY_SHORTLISTED = "This candidate has been shortlisted for a job offer!";
     public static final String MESSAGE_WARNING_BLACKLISTED_PERSON = "The selected candidate has been blacklisted!\n"
             + "You can remove the blacklist with [ blacklist rm <INDEX>]";
 
@@ -69,6 +70,10 @@ public class BlacklistCommand extends Command {
             if (selectedCandidateBlacklist.getTags().contains(blacklistedTag)) {
                 throw new CommandException(MESSAGE_ALREADY_BLACKLISTED);
             }
+            Tag shortlistedTag = new Tag("SHORTLISTED");
+            if (selectedCandidateBlacklist.getTags().contains(shortlistedTag)) {
+                throw new CommandException(MESSAGE_ALREADY_SHORTLISTED);
+            }
 
             updatedCandidate = insertBlacklistTag(selectedCandidateBlacklist);
         } else {
@@ -82,6 +87,7 @@ public class BlacklistCommand extends Command {
 
         model.updateCandidate(selectedCandidateBlacklist, updatedCandidate);
         model.commitCandidateBook();
+        model.commitCompanyBook();
         if  (rmCheck) {
             return new CommandResult(String.format(MESSAGE_BLACKLIST_SUCCESS, updatedCandidate));
         } else {
