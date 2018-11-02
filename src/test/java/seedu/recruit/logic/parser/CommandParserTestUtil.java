@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.LogicState;
+import seedu.recruit.logic.commands.ClearCandidateBookCommand;
 import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.DeleteShortlistedCandidateInitializationCommand;
 import seedu.recruit.logic.commands.ListCandidateCommand;
@@ -196,6 +197,24 @@ public class CommandParserTestUtil {
             EmailUtil emailUtil, String expectedMessage) {
         try {
             parser.parseCommand(ListCompanyCommand.COMMAND_WORD + " " + userInput,
+                    state, emailUtil);
+            throw new AssertionError("The expected ParseException was not thrown.");
+        } catch (ParseException pe) {
+            assertEquals(expectedMessage, pe.getMessage());
+        }
+    }
+
+    // ================================ DELETE CANDIDATE & COMPANY COMMANDS ===================================== //
+
+    /**
+     * Asserts that the parsing of {@code userInput} by {@code parser} is unsuccessful and the error message
+     * equals to {@code expectedMessage}.
+     */
+    public static void assertClearCandidateBookCommandParseFailure(
+            RecruitBookParser parser, String userInput, LogicState state,
+            EmailUtil emailUtil, String expectedMessage) {
+        try {
+            parser.parseCommand(ClearCandidateBookCommand.COMMAND_WORD + " " + userInput,
                     state, emailUtil);
             throw new AssertionError("The expected ParseException was not thrown.");
         } catch (ParseException pe) {

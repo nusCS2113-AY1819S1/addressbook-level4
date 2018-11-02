@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT;
 import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.recruit.logic.parser.CommandParserTestUtil.assertClearCandidateBookCommandParseFailure;
 import static seedu.recruit.logic.parser.CommandParserTestUtil.assertDeleteShortlistedCandidateInitializationCommandParseFailure;
 import static seedu.recruit.logic.parser.CommandParserTestUtil.assertListCandidateCommandParseFailure;
 import static seedu.recruit.logic.parser.CommandParserTestUtil.assertListCompanyCommandParseFailure;
@@ -15,7 +16,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -67,13 +67,18 @@ public class RecruitBookParserTest {
     }
 
     @Test
-    @Ignore
-    public void parseCommand_clear() throws Exception {
+    public void parseCommand_clearCandidateBook() throws Exception {
         assertTrue(parser.parseCommand(ClearCandidateBookCommand.COMMAND_WORD, state, emailUtil)
                 instanceof ClearCandidateBookCommand);
-        assertTrue(parser.parseCommand(ClearCandidateBookCommand.COMMAND_WORD + " 3", state, emailUtil)
-                instanceof ClearCandidateBookCommand);
     }
+
+    @Test
+    public void parseCommand_clearCandidateBook_throwsException() {
+        assertClearCandidateBookCommandParseFailure(parser, "1", state, emailUtil,
+                MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
+                        + ClearCandidateBookCommand.MESSAGE_USAGE);
+    }
+
 
     @Test
     public void parseCommand_delete() throws Exception {

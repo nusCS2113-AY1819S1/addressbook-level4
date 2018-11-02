@@ -69,7 +69,6 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
                     if (newValue != null) {
                         logger.fine("Selection in company list changed to : '" + newValue + "'");
                         raise(new CompanyListDetailsPanelSelectionChangedEvent(newValue));
-                        showJobDetailsOfSelectedCompany(newValue);
                     }
                 });
     }
@@ -80,7 +79,6 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
                     if (newValue != null) {
                         logger.fine("Selection in company's job list changed to : '" + newValue + "'");
                         raise(new CompanyJobListDetailsPanelSelectionChangedEvent(newValue));
-                        showShortlistOfSelectedJob(newValue);
                     }
                 });
     }
@@ -142,6 +140,7 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
                                                                                 event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event,
                 "Selection Changed to " + event.getNewSelection().getCompanyName().value));
+        showJobDetailsOfSelectedCompany(event.getNewSelection());
     }
 
     @Subscribe
@@ -149,6 +148,7 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
                                                                                    event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event,
                 "Selection Changed to " + event.getNewSelection().getJob().value));
+        showShortlistOfSelectedJob(event.getNewSelection());
     }
 
     /**

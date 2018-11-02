@@ -5,6 +5,7 @@ import static seedu.recruit.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
+import seedu.recruit.commons.events.ui.ShowUpdateCompanyJobListRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.model.Model;
 
@@ -24,6 +25,7 @@ public class ListCandidateCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredCandidateList(PREDICATE_SHOW_ALL_PERSONS);
+        EventsCenter.getInstance().post(new ShowUpdateCompanyJobListRequestEvent());
         EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
         return new CommandResult(MESSAGE_SUCCESS);
     }

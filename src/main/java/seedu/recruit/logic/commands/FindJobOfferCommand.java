@@ -12,6 +12,7 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_SALARY;
 import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
+import seedu.recruit.commons.events.ui.ShowUpdateCompanyJobListRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.joboffer.JobOfferContainsKeywordsPredicate;
@@ -45,7 +46,8 @@ public class FindJobOfferCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredCompanyJobList(predicate);
-        EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
+        EventsCenter.getInstance().post(new ShowUpdateCompanyJobListRequestEvent());
+        EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent()); // switches if user isn't on Company Book
         return new CommandResult(
                 String.format(Messages.MESSAGE_JOBS_LISTED_OVERVIEW, model.getFilteredCompanyJobList().size()));
     }
