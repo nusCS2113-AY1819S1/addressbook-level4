@@ -3,9 +3,9 @@ package seedu.address.model.event;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CALVIN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_CALVIN;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -32,10 +32,10 @@ public class AttendeesTest {
         attendeesSetThree = new HashSet<>();
         attendeesSetNull = null;
 
-        attendeesSetOne.add(VALID_NAME_AMY);
-        attendeesSetTwo.add(VALID_NAME_BOB);
-        attendeesSetThree.add(VALID_NAME_BOB);
-        attendeesSetThree.add(VALID_NAME_CALVIN);
+        attendeesSetOne.add(VALID_EMAIL_AMY);
+        attendeesSetTwo.add(VALID_EMAIL_BOB);
+        attendeesSetThree.add(VALID_EMAIL_BOB);
+        attendeesSetThree.add(VALID_EMAIL_CALVIN);
 
         attendeesOne = new Attendees(attendeesSetOne);
         attendeesTwo = new Attendees(attendeesSetTwo);
@@ -70,33 +70,33 @@ public class AttendeesTest {
         assertFalse(attendeesTwo.equals(attendeesThree));
 
         // Attendees equal after adding new person
-        Attendees attendeesTest = attendeesTwo.createAttendeesWithAddedName(VALID_NAME_CALVIN);
+        Attendees attendeesTest = attendeesTwo.createAttendeesWithAddedEmail(VALID_EMAIL_CALVIN);
         assertTrue(attendeesTest.equals(attendeesThree));
     }
 
     @Test
-    public void hasName_presentName_success() {
-        // Attendees has names it contain
-        assertTrue(attendeesOne.hasName(VALID_NAME_AMY));
+    public void hasEmail_presentEmail_success() {
+        // Attendees has emails it contain
+        assertTrue(attendeesOne.hasPerson(VALID_EMAIL_AMY));
 
     }
 
     @Test
-    public void hasName_absentName_success() {
-        // Attendees does not have names absent in list
-        assertFalse(attendeesOne.hasName(VALID_NAME_BOB));
+    public void hasEmail_absentEmail_success() {
+        // Attendees does not have emails absent in list
+        assertFalse(attendeesOne.hasPerson(VALID_EMAIL_BOB));
     }
 
 
     @Test
-    public void createAttendeesWithAddedName() {
-        Attendees attendeesTwoNew = attendeesTwo.createAttendeesWithAddedName(VALID_NAME_CALVIN);
+    public void createAttendeesWithAddedEmail() {
+        Attendees attendeesTwoNew = attendeesTwo.createAttendeesWithAddedEmail(VALID_EMAIL_CALVIN);
         assertEquals(attendeesTwoNew, attendeesThree);
     }
 
     @Test
-    public void createAttendeesWithRemovedName() {
-        Attendees attendeesThreeNew = attendeesThree.createAttendeesWithRemovedName(VALID_NAME_CALVIN);
+    public void createAttendeesWithRemovedEmail() {
+        Attendees attendeesThreeNew = attendeesThree.createAttendeesWithRemovedEmail(VALID_EMAIL_CALVIN);
         assertEquals(attendeesTwo, attendeesThreeNew);
     }
 

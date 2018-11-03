@@ -7,23 +7,23 @@ import java.util.function.Predicate;
  */
 public class EventClashPredicate implements Predicate<Event> {
     private final Event personEvent;
-    private final String personName;
+    private final String personEmail;
 
-    public EventClashPredicate(Event personEvent, String personName) {
+    public EventClashPredicate(Event personEvent, String personEmail) {
         this.personEvent = personEvent;
-        this.personName = personName;
+        this.personEmail = personEmail;
     }
 
     @Override
     public boolean test(Event event) {
-        return !event.isSameEvent(personEvent) && event.hasAttendee(personName) && event.hasClash(personEvent);
+        return !event.isSameEvent(personEvent) && event.hasAttendee(personEmail) && event.hasClash(personEvent);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EventClashPredicate // instanceof handles nulls
-                && personName.equals(((EventClashPredicate) other).personName)
+                && personEmail.equals(((EventClashPredicate) other).personEmail)
                 && personEvent.equals(((EventClashPredicate) other).personEvent)); // state check
     }
 

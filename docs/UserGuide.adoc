@@ -417,6 +417,10 @@ There is no need to save manually.
 
 == Command Summary
 
+* *Help*: `help`
+
+* *Login*: `login IDENTITY`
+
 * *Add*: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT [t/TAG]...`
 
 * *Edit* : `edit PERSON_INDEX [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dep/DEPARTMENT] [t/TAG]…​`
@@ -424,6 +428,8 @@ There is no need to save manually.
 * *Delete* : `delete PERSON_INDEX`
 
 * *List* : `list all` OR `list all people` OR `list all events` or `list dep Admin`
+
+* *Sort* : `sort KEYWORD`
 
 * *addEvent* : `addEvent n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START_TIME e/END_TIME`
 

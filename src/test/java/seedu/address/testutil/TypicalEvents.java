@@ -60,7 +60,7 @@ public class TypicalEvents {
      */
     public static final Event eventwithAttendee() {
         Set<String> attendee = new HashSet<>();
-        attendee.add("Alice Pauline");
+        attendee.add("alice@example.com");
         return new Event(
                 new EventName("Test Event 3"),
                 new Description("Test Description 3"),

@@ -188,9 +188,9 @@ public class UniqueEventListTest {
     }
 
     @Test
-    public void removeAttendee_personNameExistInList_success () {
+    public void removeAttendee_personEmailExistInList_success () {
         uniqueEventList.add(TypicalEvents.eventwithAttendee());
-        uniqueEventList.removeAttendee(VALID_NAME_ALICE);
+        uniqueEventList.removeAttendee("alice@example.com");
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
         expectedUniqueEventList.add(EVENT_3);
         assertEquals(expectedUniqueEventList, uniqueEventList);
@@ -204,13 +204,13 @@ public class UniqueEventListTest {
     @Test
     public void hasClash_clashWithEventInList_returnsTrue() {
         uniqueEventList.add(TypicalEvents.eventwithAttendee());
-        assertTrue(uniqueEventList.hasClash(EVENT_1, VALID_NAME_ALICE));
+        assertTrue(uniqueEventList.hasClash(EVENT_1, "alice@example.com"));
     }
 
     @Test
     public void hasClash_doesNotClashWithEventInList_returnsFalse() {
         uniqueEventList.add(EVENT_1);
         uniqueEventList.add(TypicalEvents.eventwithAttendee());
-        assertFalse(uniqueEventList.hasClash(EVENT_4, VALID_NAME_ALICE));
+        assertFalse(uniqueEventList.hasClash(EVENT_4, "alice@example.com"));
     }
 }

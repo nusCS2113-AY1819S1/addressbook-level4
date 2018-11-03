@@ -307,10 +307,10 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasClash(Event event, String personName) {
+    public boolean hasClash(Event event, String personEmail) {
         requireNonNull(event);
-        requireNonNull(personName);
-        return versionedEventList.hasClash(event, personName);
+        requireNonNull(personEmail);
+        return versionedEventList.hasClash(event, personEmail);
     }
 
     @Override

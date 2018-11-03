@@ -14,7 +14,7 @@ import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.event.AttendeeContainsNamePredicate;
+import seedu.address.model.event.AttendeeContainsEmailPredicate;
 import seedu.address.model.event.EventContainsAttendeeAndDatePredicate;
 import seedu.address.model.event.TimeType;
 import seedu.address.model.person.Person;
@@ -67,15 +67,15 @@ public class SelectCommand extends Command {
         }
 
         Person person = filteredPersonList.get(targetIndex.getZeroBased());
-        String personName = person.getName().toString();
-        AttendeeContainsNamePredicate predicate = new AttendeeContainsNamePredicate(personName);
+        String personEmail = person.getEmail().toString();
+        AttendeeContainsEmailPredicate predicate = new AttendeeContainsEmailPredicate(personEmail);
 
         if (type == TimeType.NONE) {
             model.updateFilteredEventList(predicate);
         } else {
             assert date != null;
             EventContainsAttendeeAndDatePredicate predicate2 =
-                    new EventContainsAttendeeAndDatePredicate(personName, date, type);
+                    new EventContainsAttendeeAndDatePredicate(personEmail, date, type);
             model.updateFilteredEventList(predicate2);
 
         }

@@ -37,6 +37,7 @@ public class RemoveCommandTest {
         Person personChosen = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Event eventChosen = model.getFilteredEventList().get(INDEX_THIRD_EVENT.getZeroBased());
         String personName = personChosen.getName().toString();
+        String personEmail = personChosen.getEmail().toString();
 
         RemoveCommand removeCommand = new RemoveCommand(INDEX_FIRST_PERSON, INDEX_THIRD_EVENT);
 
@@ -44,7 +45,7 @@ public class RemoveCommandTest {
                 personChosen.getName(), eventChosen.getEventName());
 
         Attendees attendeesChosen = eventChosen.getAttendees();
-        Attendees attendeesUpdated = attendeesChosen.createAttendeesWithRemovedName(personName);
+        Attendees attendeesUpdated = attendeesChosen.createAttendeesWithRemovedEmail(personEmail);
         Set<String> setUpdated = attendeesUpdated.getAttendeesSet();
         Event eventUpdated = new EventBuilder(eventChosen).withAttendee(setUpdated).build();
 

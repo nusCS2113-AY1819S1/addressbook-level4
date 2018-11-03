@@ -57,16 +57,17 @@ public class InviteCommand extends Command {
         Event event = lastShownEventList.get(indexEvent.getZeroBased());
 
         String personName = person.getName().toString();
+        String personEmail = person.getEmail().toString();
 
-        if (!event.isAttendeeEmpty() && event.hasAttendee(personName)) {
+        if (!event.isAttendeeEmpty() && event.hasAttendee(personEmail)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        if (model.hasClash(event, personName)) {
+        if (model.hasClash(event, personEmail)) {
             throw new CommandException(String.format(MESSAGE_CLASH_EVENT, event.getEventName().fullName, personName));
         }
 
-        Event updatedEvent = event.createEventWithUpdatedAttendee(personName);
+        Event updatedEvent = event.createEventWithUpdatedAttendee(personEmail);
 
         model.updateEvent(event, updatedEvent);
         model.commitEventList();

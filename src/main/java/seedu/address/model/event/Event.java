@@ -164,40 +164,40 @@ public class Event implements Comparable<Event> {
     }
 
     /**
-     * Create a new event with the new name added to the current attendees list.
+     * Create a new event with the new email added to the current attendees list.
      *
-     * @param personName The person's name to be removed from the attendees list.
-     * @return An updated event with the person's name in the attendees list.
+     * @param personEmail The person's email to be removed from the attendees list.
+     * @return An updated event with the person's email removed from the original attendees list.
      */
-    public Event createEventWithUpdatedAttendee(String personName) {
-        assert personName != null;
-        assert !attendees.hasName(personName);
-        Attendees updatedAttendee = attendees.createAttendeesWithAddedName(personName);
+    public Event createEventWithUpdatedAttendee(String personEmail) {
+        assert personEmail != null;
+        assert !attendees.hasPerson(personEmail);
+        Attendees updatedAttendee = attendees.createAttendeesWithAddedEmail(personEmail);
         return new Event(eventName, description, date, startTime, endTime, location, updatedAttendee);
     }
 
 
     /**
-     * Create a new event with an existing name removed from the current attendees list.
+     * Create a new event with an existing email removed from the current attendees list.
      *
-     * @param personName The person's name to be removed from the attendees list.
-     * @return An updated event with the person's name removed from the attendees list.
+     * @param personEmail The person's email to be removed from the attendees list.
+     * @return An updated event with the person's email removed from the attendees list.
      */
-    public Event removePersonFromAttendee(String personName) {
-        assert personName != null;
-        assert attendees.hasName(personName);
-        Attendees updatedAttendee = attendees.createAttendeesWithRemovedName(personName);
+    public Event removePersonFromAttendee(String personEmail) {
+        assert personEmail != null;
+        assert attendees.hasPerson(personEmail);
+        Attendees updatedAttendee = attendees.createAttendeesWithRemovedEmail(personEmail);
         return new Event(eventName, description, date, startTime, endTime, location, updatedAttendee);
     }
 
     /**
-     * Check if personName is in attendees of Event.
+     * Check if personEmail is in attendees of Event.
      *
-     * @param personName The person's name to be checked from the attendees list.
+     * @param personEmail The person's email to be checked from the attendees list.
      */
-    public boolean hasAttendee(String personName) {
-        assert personName != null;
-        return attendees.hasName(personName);
+    public boolean hasAttendee(String personEmail) {
+        assert personEmail != null;
+        return attendees.hasPerson(personEmail);
     }
 
     /**

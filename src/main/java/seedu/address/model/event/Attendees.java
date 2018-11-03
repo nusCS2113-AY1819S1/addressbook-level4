@@ -22,9 +22,9 @@ public class Attendees {
 
     public Attendees(Set<String>... attendeesSet) {
         this();
-        for (Set<String> names: attendeesSet) {
-            Objects.requireNonNull(names);
-            this.attendeesSet.addAll(names);
+        for (Set<String> emails: attendeesSet) {
+            Objects.requireNonNull(emails);
+            this.attendeesSet.addAll(emails);
         }
     }
 
@@ -34,33 +34,33 @@ public class Attendees {
     }
 
     /**
-     * Add names to attendees list
-     * @param name The new name to be added.
+     * Add email to attendees list
+     * @param email The new email to be added.
      * @return A new copy of updated Attendees.
      */
-    public Attendees createAttendeesWithAddedName(String name) {
+    public Attendees createAttendeesWithAddedEmail(String email) {
         Set<String> updatedAttendees = new HashSet<>(this.attendeesSet);
-        updatedAttendees.add(name);
+        updatedAttendees.add(email);
         return new Attendees(updatedAttendees);
     }
 
     /**
-     * Remove names to attendees list
-     * @param name The name to be removed.
+     * Remove email from attendees list
+     * @param email The email to be removed.
      * @return A new copy of updated Attendees.
      */
-    public Attendees createAttendeesWithRemovedName(String name) {
+    public Attendees createAttendeesWithRemovedEmail(String email) {
         Set<String> updatedAttendees = new HashSet<>(this.attendeesSet);
-        updatedAttendees.remove(name);
+        updatedAttendees.remove(email);
         return new Attendees(updatedAttendees);
     }
 
     /**
-     * Returns whether set contains name.
-     * @param name The name to be checked.
+     * Returns whether set contains email.
+     * @param email The email to be checked.
      */
-    public boolean hasName(String name) {
-        return attendeesSet.contains(name);
+    public boolean hasPerson(String email) {
+        return attendeesSet.contains(email);
     }
 
     /**

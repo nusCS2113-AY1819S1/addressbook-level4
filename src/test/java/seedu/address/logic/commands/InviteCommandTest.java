@@ -45,7 +45,7 @@ public class InviteCommandTest {
     @Before
     public void setup() {
         Set<String> set = new HashSet<>();
-        set.add("Alice");
+        set.add("alice@example.com");
 
         event1 = new EventBuilder().build();
         event2 = new EventBuilder().withAttendee(set).build();
@@ -55,7 +55,7 @@ public class InviteCommandTest {
     public void execute_validIndexUnfilteredList_success() {
         Person personChosen = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Event eventChosen = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
-        String personName = personChosen.getName().toString();
+        String personEmail = personChosen.getEmail().toString();
 
         InviteCommand inviteCommand = new InviteCommand(INDEX_SECOND_PERSON, INDEX_FIRST_EVENT);
 
@@ -66,7 +66,7 @@ public class InviteCommandTest {
                 new EventList(model.getEventList()), new UserPrefs());
 
         Attendees attendeesChosen = eventChosen.getAttendees();
-        Attendees attendeesUpdated = attendeesChosen.createAttendeesWithAddedName(personName);
+        Attendees attendeesUpdated = attendeesChosen.createAttendeesWithAddedEmail(personEmail);
         Set<String> setUpdated = attendeesUpdated.getAttendeesSet();
         Event eventUpdated = new EventBuilder(eventChosen).withAttendee(setUpdated).build();
 
