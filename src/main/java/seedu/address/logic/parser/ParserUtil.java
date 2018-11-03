@@ -17,7 +17,9 @@ import seedu.address.model.course.FacultyName;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModuleName;
 import seedu.address.model.note.NoteDate;
+import seedu.address.model.note.NoteLocation;
 import seedu.address.model.note.NoteTime;
+import seedu.address.model.note.NoteTitle;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.MatricNo;
@@ -240,6 +242,8 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed and
      * spaces in between non-space characters will be reduced to
      * a single space.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
      */
     public static NoteDate parseNoteDate(String date) throws ParseException {
         requireNonNull(date);
@@ -255,6 +259,8 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed and
      * spaces in between non-space characters will be reduced to
      * a single space.
+     *
+     * @throws ParseException if the given {@code time} is invalid.
      */
     public static NoteTime parseNoteTime(String time) throws ParseException {
         requireNonNull(time);
@@ -263,5 +269,35 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_TIME_FORMAT);
         }
         return new NoteTime(trimmedTime);
+    }
+
+    /**
+     * Parses a {@code String title} into a {@code NoteTitle}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code title} is invalid.
+     */
+    public static NoteTitle parseNoteTitle(String title) throws ParseException {
+        requireNonNull(title);
+        String trimmedTitle = title.trim();
+        if (!NoteTitle.isValidTitle(trimmedTitle)) {
+            throw new ParseException(NoteTitle.MESSAGE_TITLE_EXCEED_MAX_CHAR_COUNT);
+        }
+        return new NoteTitle(trimmedTitle);
+    }
+
+    /**
+     * Parses a {@code String location} into a {@code NoteLocation}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code location} is invalid.
+     */
+    public static NoteLocation parseNoteLocation(String location) throws ParseException {
+        requireNonNull(location);
+        String trimmedLocation = location.trim();
+        if (!NoteTitle.isValidTitle(trimmedLocation)) {
+            throw new ParseException(NoteLocation.MESSAGE_LOCATION_EXCEED_MAX_CHAR_COUNT);
+        }
+        return new NoteLocation(trimmedLocation);
     }
 }

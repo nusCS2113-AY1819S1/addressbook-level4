@@ -12,6 +12,8 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Represents a date in a note.
@@ -35,6 +37,11 @@ public class NoteDate {
     public static final String MESSAGE_START_DATE_MISSING_FIELD =
             "The START_DATE field is missing. Please provide the missing field. "
                     + "[" + PREFIX_NOTE_START_DATE + "START_DATE]";
+
+    /**
+     * Used to extract the day of month from a valid date.
+     */
+    private static final Pattern DAY_OF_MONTH = Pattern.compile("^(?<dayOfMonth>[0-9]+).*$");
 
     private LocalDate date;
 
@@ -79,6 +86,25 @@ public class NoteDate {
             }
         }
         return foundMatchIndex;
+    }
+
+    /**
+     * Extracts the day of month from the {@code String date} and
+     * compares it with the {@code int noOfDays}.
+     *
+     * @param date containing the date as string
+     * @param noOfDays actual number of days in the particular month
+     * @return true if {@code dayOfMonth <= noOfDays}, otherwise false
+     */
+    public static boolean isValidDayOfMonth(String date, int noOfDays) {
+        Matcher matcher = DAY_OF_MONTH.matcher(date);
+
+        if (matcher.matches()) {
+            String dayOfMonth = dayOfMonth = matcher.group("dayOfMonth");
+
+            return (Integer.parseInt(dayOfMonth) <= noOfDays);
+        }
+        return false;
     }
 
     public LocalDate getDate() {
