@@ -54,6 +54,7 @@ public class AddTaskCommand extends Command implements CommandParser {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        toAdd.setDeadline(model.getDeadline());
         if (model.hasTask(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         } else if (toAdd.getExpectedNumOfHours() == 0) {
