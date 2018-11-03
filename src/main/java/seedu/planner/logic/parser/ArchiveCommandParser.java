@@ -1,5 +1,6 @@
 package seedu.planner.logic.parser;
 
+import static seedu.planner.commons.util.DateUtil.isEarlierThan;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DIR;
 
@@ -132,6 +133,6 @@ public class ArchiveCommandParser implements Parser<ArchiveCommand> {
      * Check whether the Dates are valid period or not.
      */
     private static boolean isDateOrderValid(Date startDate, Date endDate) {
-        return startDate.isEarlierThan(endDate) || startDate.equals(endDate);
+        return isEarlierThan(startDate, endDate) || startDate.equals(endDate);
     }
 }
