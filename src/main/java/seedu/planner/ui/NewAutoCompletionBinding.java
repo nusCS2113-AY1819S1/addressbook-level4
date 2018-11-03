@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 
+import impl.org.controlsfx.autocompletion.SuggestionProvider;
 import impl.org.controlsfx.skin.AutoCompletePopup;
 import impl.org.controlsfx.skin.AutoCompletePopupSkin;
 import javafx.application.Platform;
@@ -13,7 +14,6 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Skin;
 import javafx.scene.control.TextField;
-import javafx.util.Callback;
 import javafx.util.StringConverter;
 
 /**
@@ -28,32 +28,27 @@ public class NewAutoCompletionBinding<T> {
     private final Object suggestionsTaskLock = new Object();
 
     private FetchSuggestionsTask suggestionsTask = null;
-    private Callback<AutoCompletionBinding.ISuggestionRequest, Collection<T>> suggestionProvider = null;
+    private CustomSuggestionProvider suggestionProvider = new CustomSuggestionProvider();
     private boolean ignoreInputChanges = false;
 
-    private String oldText = "";
+    private String prevText = "";
     private final StringConverter<T> converter;
 
     /**
-     * This listener is responsible for checking the position of the caret in the TextField
-     * and obtaining the most recently typed String of characters to allow updating of the
-     * list of suggestions according to the most recently typed word adds the new suggested
-     * text to the TextField.
+     * This listener observes if there is a change in the text in the command box.
      */
-    private final ChangeListener<Number> caretChangeListener = (obs, oldNumber, newNumber) -> {
-        String text = getCompletionTarget().getText().substring(0, newNumber.intValue());
-        int index;
-        CustomSuggestionProvider.updateSuggestions(text);
-        for (index = text.length() - 1; index >= 0 && !Character.isWhitespace(text.charAt(index)); index--);
-        if (index > 0) {
-            oldText = text.substring(0, index) + " ";
-        } else {
-            oldText = "";
-        }
 
-        String newText = text.substring(index + 1);
+    private final ChangeListener<String> textChangedListener = (obs, oldText, newText) -> {
+        int index;
+        for (index = newText.length() - 1; index >= 0 && !Character.isWhitespace(newText.charAt(index)); index--);
+        if (index > 0) {
+            prevText = newText.substring(0, index) + " ";
+        } else {
+            prevText = "";
+        }
+        String inputText = newText.substring(index + 1);
         if (getCompletionTarget().isFocused()) {
-            setUserInput(newText); // updates the input text to new user input
+            setUserInput(newText, inputText);
         }
     };
 
@@ -62,7 +57,7 @@ public class NewAutoCompletionBinding<T> {
      * popup if not.
      */
     private final ChangeListener<Boolean> focusChangedListener = (obs, oldFocused, newFocused) -> {
-        if (newFocused == false) {
+        if (!newFocused) {
             hidePopup();
         }
     };
@@ -71,17 +66,13 @@ public class NewAutoCompletionBinding<T> {
      * Creates a new NewAutoCompletionBinding
      *
      * @param completionTarget The target node to which auto-completion shall be added
-     * @param suggestionProvider The strategy to retrieve suggestions
      * @param converter The converter to be used to convert suggestions to strings
      */
 
     protected NewAutoCompletionBinding(Node completionTarget,
-                                       Callback<AutoCompletionBinding.ISuggestionRequest,
-                                               Collection<T>> suggestionProvider,
                                        StringConverter<T> converter) {
 
         this.completionTarget = completionTarget;
-        this.suggestionProvider = suggestionProvider;
         this.autoCompletionPopup = new AutoCompletePopup<>();
         this.converter = converter;
         this.autoCompletionPopup.setConverter(converter);
@@ -96,15 +87,12 @@ public class NewAutoCompletionBinding<T> {
             }
         });
 
-        getCompletionTarget().caretPositionProperty().addListener(caretChangeListener);
+        getCompletionTarget().textProperty().addListener(textChangedListener);
         getCompletionTarget().focusedProperty().addListener(focusChangedListener);
     }
 
-    public NewAutoCompletionBinding(TextField textField,
-                                    Callback<AutoCompletionBinding.ISuggestionRequest,
-                                            Collection<T>> suggestionProvider) {
-
-        this(textField, suggestionProvider, defaultStringConverter());
+    public NewAutoCompletionBinding(TextField textField) {
+        this(textField, defaultStringConverter());
     }
 
     /**
@@ -127,7 +115,7 @@ public class NewAutoCompletionBinding<T> {
 
     /**
      * Specifies the number of suggested strings that should appear under the Textfield
-     * @param value
+     * @param value is the maximum number of rows to be displayed.
      */
     public void setVisibleRowCount(int value) {
         autoCompletionPopup.setVisibleRowCount(value);
@@ -146,8 +134,9 @@ public class NewAutoCompletionBinding<T> {
      * Set the current text the user has entered
      * @param userText
      */
-    public final void setUserInput(String userText) {
+    public final void setUserInput(String newText, String userText) {
         if (!isIgnoreInputChanges()) {
+            suggestionProvider.updateSuggestions(newText);
             onUserInputChanged(userText);
         }
     }
@@ -164,7 +153,7 @@ public class NewAutoCompletionBinding<T> {
      * Disposes the binding.
      */
     public void dispose() {
-        getCompletionTarget().caretPositionProperty().removeListener(caretChangeListener);
+        getCompletionTarget().textProperty().removeListener(textChangedListener);
         getCompletionTarget().focusedProperty().removeListener(focusChangedListener);
     }
 
@@ -173,7 +162,7 @@ public class NewAutoCompletionBinding<T> {
      * @param completion
      */
     private void completeUserInput(T completion) {
-        String newText = oldText + converter.toString(completion);
+        String newText = prevText + converter.toString(completion);
         getCompletionTarget().setText(newText);
         getCompletionTarget().positionCaret(newText.length());
     }
@@ -241,8 +230,6 @@ public class NewAutoCompletionBinding<T> {
         ignoreInputChanges = state;
     }
 
-
-
     /**
      * This task is responsible to fetch suggestions asynchronous
      * by using the current defined suggestionProvider
@@ -256,7 +243,7 @@ public class NewAutoCompletionBinding<T> {
 
         @Override
         protected Void call() {
-            Callback<AutoCompletionBinding.ISuggestionRequest, Collection<T>> provider = suggestionProvider;
+            SuggestionProvider provider = suggestionProvider.getSuggestions();
             if (provider != null) {
                 final Collection<T> fetchedSuggestions = provider.call(this);
                 if (!isCancelled()) {

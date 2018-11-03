@@ -1,5 +1,7 @@
 package seedu.planner.ui;
 
+import static seedu.planner.ui.SuggestionClass.newCreate;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -75,20 +77,23 @@ public class CustomSuggestionProvider {
 
     private static Set<String> emptySet = new HashSet<>();
 
+    private static Set<String> testSet = new HashSet<>(Arrays.asList("sort name")); // for debugging uses
+
     private static Map<String, Integer> tagKeywordsMap = new HashMap<>();
 
-    private static SuggestionProvider<String> suggestionProvider = SuggestionProvider.create(commandKeywordsSet);
+    private SuggestionProvider<String> suggestionProvider;
 
-    private static void clearSuggestions() {
-        suggestionProvider.clearSuggestions();
+    public CustomSuggestionProvider() {
+        suggestionProvider = newCreate(emptySet);
     }
 
-    public static SuggestionProvider<String> getSuggestions() {
+    public SuggestionProvider<String> getSuggestions() {
         return suggestionProvider;
     }
 
-    private static void updateSuggestions(Set<String> newSuggestions) {
-        suggestionProvider.addPossibleSuggestions(newSuggestions);
+    private void updateSuggestions(Set<String> suggestions) {
+        suggestionProvider.clearSuggestions();
+        suggestionProvider.addPossibleSuggestions(suggestions);
     }
 
     /**
@@ -97,10 +102,8 @@ public class CustomSuggestionProvider {
      * of the user input.
      * @param userInput is the current word/substring to be automatically completed
      */
-    public static void updateSuggestions(String userInput) {
+    public void updateSuggestions(String userInput) {
         String[] inputs = userInput.split(" ");
-        clearSuggestions();
-
         if (inputs[0].equals(SortCommand.COMMAND_WORD) && inputs.length > 1) {
             if (inputs.length > 3) {
                 updateSuggestions(emptySet);
@@ -130,7 +133,6 @@ public class CustomSuggestionProvider {
         } else {
             updateSuggestions(commandKeywordsSet);
         }
-
     }
 
     public static void updateTagSet(HashMap<String, Integer> newTagKeywordsMap) {
