@@ -18,11 +18,14 @@ import seedu.recruit.model.joboffer.JobOffer;
  */
 public class EmailContentsAddCommand extends EmailContentsSelectCommand {
     @Override
+    @SuppressWarnings("Duplicates")
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         EmailUtil emailUtil = model.getEmailUtil();
         ArrayList<Candidate> duplicateCandidates = new ArrayList<>();
         ArrayList<JobOffer> duplicateJobOffers = new ArrayList<>();
+        ArrayList<Candidate> addedCandidates = new ArrayList<>();
+        ArrayList<JobOffer> addedJobOffers = new ArrayList<>();
 
         //check if objects being added are the same as the initial added objects
         if (emailUtil.isAreRecipientsCandidates()) {
@@ -30,6 +33,8 @@ public class EmailContentsAddCommand extends EmailContentsSelectCommand {
             for (JobOffer content : contents) {
                 if (!emailUtil.addJobOffer(content)) {
                     duplicateJobOffers.add(content);
+                } else {
+                    addedJobOffers.add(content);
                 }
             }
         } else {
@@ -37,6 +42,8 @@ public class EmailContentsAddCommand extends EmailContentsSelectCommand {
             for (Candidate content : contents) {
                 if (!emailUtil.addCandidate(content)) {
                     duplicateCandidates.add(content);
+                } else {
+                    addedCandidates.add(content);
                 }
             }
         }
@@ -52,7 +59,7 @@ public class EmailContentsAddCommand extends EmailContentsSelectCommand {
                 }
             } else {
                 for (JobOffer duplicateJobOffer : duplicateJobOffers) {
-                    duplicates += model.getContentJobOfferName(duplicateJobOffer);
+                    duplicates += emailUtil.getContentJobOfferName(duplicateJobOffer);
                     duplicates += "\n";
                 }
             }
@@ -61,17 +68,15 @@ public class EmailContentsAddCommand extends EmailContentsSelectCommand {
 
         //Generate recipients string
         String contents = "Contents added:\n";
-        if (hasDuplicates) {
-            if (!emailUtil.isAreRecipientsCandidates()) {
-                contents += model.getFilteredCandidateNames(duplicateCandidates);
-            } else {
-                contents += model.getFilteredContentJobOfferNames(duplicateJobOffers);
+        if (emailUtil.isAreRecipientsCandidates()) {
+            for (JobOffer addedJobOffer : addedJobOffers) {
+                contents += emailUtil.getContentJobOfferName(addedJobOffer);
+                contents += "\n";
             }
         } else {
-            if (!emailUtil.isAreRecipientsCandidates()) {
-                contents += model.getFilteredCandidateNames();
-            } else {
-                contents += model.getFilteredContentJobOfferNames();
+            for (Candidate addedCandidate : addedCandidates) {
+                contents += addedCandidate.getName().toString();
+                contents += "\n";
             }
         }
 

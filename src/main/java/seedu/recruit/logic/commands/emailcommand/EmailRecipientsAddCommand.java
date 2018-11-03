@@ -20,11 +20,14 @@ import seedu.recruit.ui.MainWindow;
 public class EmailRecipientsAddCommand extends EmailRecipientsSelectCommand {
 
     @Override
+    @SuppressWarnings("Duplicates")
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         EmailUtil emailUtil = model.getEmailUtil();
         ArrayList<Candidate> duplicateCandidates = new ArrayList<>();
         ArrayList<JobOffer> duplicateJobOffers = new ArrayList<>();
+        ArrayList<Candidate> addedCandidates = new ArrayList<>();
+        ArrayList<JobOffer> addedJobOffers = new ArrayList<>();
 
         //Check if there are already recipients added
         if (!emailUtil.isHasRecipientsAdded()) {
@@ -32,18 +35,20 @@ public class EmailRecipientsAddCommand extends EmailRecipientsSelectCommand {
                 ObservableList<Candidate> recipients = model.getFilteredCandidateList();
                 for (Candidate recipient : recipients) {
                     emailUtil.addCandidate(recipient);
+                    addedCandidates.add(recipient);
                 }
                 emailUtil.setAreRecipientsCandidates(true);
             } else {
                 ObservableList<JobOffer> recipients = model.getFilteredCompanyJobList();
                 for (JobOffer recipient : recipients) {
                     emailUtil.addJobOffer(recipient);
+                    addedJobOffers.add(recipient);
                 }
                 emailUtil.setAreRecipientsCandidates(false);
             }
             emailUtil.setHasRecipientsAdded(true);
+        //else check if objects being added are the same as the initial added objects
         } else {
-            //check if objects being added are the same as the initial added objects
             if (emailUtil.isAreRecipientsCandidates()) {
                 if (MainWindow.getDisplayedBook().equals("candidateBook")) {
                     ObservableList<Candidate> recipients = model.getFilteredCandidateList();
@@ -52,6 +57,8 @@ public class EmailRecipientsAddCommand extends EmailRecipientsSelectCommand {
                         //if not added successfully then object already exists.
                         if (!emailUtil.addCandidate(recipient)) {
                             duplicateCandidates.add(recipient);
+                        } else {
+                            addedCandidates.add(recipient);
                         }
                     }
                 } else {
@@ -65,6 +72,8 @@ public class EmailRecipientsAddCommand extends EmailRecipientsSelectCommand {
                         //if not added successfully then object already exists.
                         if (!emailUtil.addJobOffer(recipient)) {
                             duplicateJobOffers.add(recipient);
+                        } else {
+                            addedJobOffers.add(recipient);
                         }
                     }
                 } else {
@@ -84,26 +93,24 @@ public class EmailRecipientsAddCommand extends EmailRecipientsSelectCommand {
                 }
             } else {
                 for (JobOffer duplicateJobOffer : duplicateJobOffers) {
-                    duplicates += model.getRecipientJobOfferName(duplicateJobOffer);
+                    duplicates += emailUtil.getRecipientJobOfferName(duplicateJobOffer);
                     duplicates += "\n";
                 }
             }
             hasDuplicates = true;
         }
 
-        //Generate recipients string, if there are duplicates, remove them.
+        //Generate added recipients string
         String recipients = "Recipients added:\n";
-        if (hasDuplicates) {
-            if (emailUtil.isAreRecipientsCandidates()) {
-                recipients += model.getFilteredCandidateNames(duplicateCandidates);
-            } else {
-                recipients += model.getFilteredRecipientJobOfferNames(duplicateJobOffers);
+        if (emailUtil.isAreRecipientsCandidates()) {
+            for (Candidate addedCandidate : addedCandidates) {
+                recipients += addedCandidate.getName().toString();
+                recipients += "\n";
             }
         } else {
-            if (emailUtil.isAreRecipientsCandidates()) {
-                recipients += model.getFilteredCandidateNames();
-            } else {
-                recipients += model.getFilteredRecipientJobOfferNames();
+            for (JobOffer addedJobOffer : addedJobOffers) {
+                recipients += emailUtil.getRecipientJobOfferName(addedJobOffer);
+                recipients += "\n";
             }
         }
 
