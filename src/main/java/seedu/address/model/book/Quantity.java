@@ -18,7 +18,7 @@ public class Quantity {
     /**
      * Quantity only accepts from 0 to 999
      */
-    public static final String QUANTITY_VALIDATION_REGEX = "\\d{1,3}";
+    public static final String QUANTITY_VALIDATION_REGEX = "(\\d{1,3})";
 
     private String value;
     /**

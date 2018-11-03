@@ -85,9 +85,10 @@ public class StockCommandParser implements Parser<StockCommand> {
         if (argMultimap.getValue(PREFIX_QUANTITY).isPresent()) {
             stockBookDescriptor.setQuantity(ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get()));
         }
+
         parseTagsForStock(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(stockBookDescriptor::setTags);
 
-        if (!stockBookDescriptor.isAnyFieldStocked()) {
+        if (!stockBookDescriptor.isQuantityFieldStocked()) {
             throw new ParseException(StockCommand.MESSAGE_NOT_STOCKED);
         }
 

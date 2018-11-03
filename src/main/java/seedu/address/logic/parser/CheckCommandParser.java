@@ -33,7 +33,7 @@ public class CheckCommandParser implements Parser<CheckCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_EXCEEDED_QUANTITY));
         }
-        for (Integer i = number; i > 0; i--) {
+        for (Integer i = number; i >= 0; i--) {
             quantities.add(Integer.toString(i));
         }
 
