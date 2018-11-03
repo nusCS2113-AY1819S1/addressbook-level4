@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.EventManagerChangedEvent;
+import seedu.address.model.event.AttendanceContainsUserPredicate;
 import seedu.address.model.event.Event;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -61,6 +62,7 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new EventManagerChangedEvent(versionedEManager));
     }
 
+    //=========== Authentication Accessors  =============================================================
     @Override
     public boolean getLoginStatus() {
         return userSession.getLoginStatus();
@@ -99,6 +101,7 @@ public class ModelManager extends ComponentManager implements Model {
         userSession.clearUser();
     }
 
+    //=========== Event List Accessors and Modifiers =============================================================
     @Override
     public boolean hasEvent(Event event) {
         requireNonNull(event);
@@ -141,6 +144,14 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredEventList(Predicate<Event> predicate) {
         requireNonNull(predicate);
         filteredEvents.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Event> getAttendingEventList(Username currentUser) {
+        requireNonNull(currentUser);
+        updateFilteredEventList(new AttendanceContainsUserPredicate(currentUser));
+
+        return getFilteredEventList();
     }
 
     //=========== Undo/Redo =================================================================================

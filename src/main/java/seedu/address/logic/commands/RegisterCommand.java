@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import static seedu.address.logic.commands.EditCommand.EditEventDescriptor;
 import static seedu.address.logic.commands.EditCommand.createEditedEvent;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
 import java.util.HashSet;
 import java.util.List;
@@ -45,6 +44,10 @@ public class RegisterCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGIN);
+        }
+
         List<Event> filteredEventList = model.getFilteredEventList();
 
         if (targetIndex.getZeroBased() >= filteredEventList.size()) {
@@ -56,10 +59,8 @@ public class RegisterCommand extends Command {
         String attendeeName = model.getUsername().toString();
 
         Set<Attendee> attendeeSet = new HashSet<>(eventToRegister.getAttendance());
-        int numAttendees = attendeeSet.size();
-        attendeeSet.add(new Attendee(attendeeName));
 
-        if (attendeeSet.size() == numAttendees) {
+        if (!attendeeSet.add(new Attendee(attendeeName))) {
             throw new CommandException(MESSAGE_ALREADY_REGISTERED);
         }
 
@@ -68,7 +69,6 @@ public class RegisterCommand extends Command {
         Event registeredEvent = createEditedEvent(eventToRegister, registerEventDescriptor);
 
         model.updateEvent(eventToRegister, registeredEvent);
-        model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         model.commitEventManager();
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));

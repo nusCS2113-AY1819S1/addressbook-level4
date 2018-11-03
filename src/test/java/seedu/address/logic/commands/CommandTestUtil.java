@@ -17,11 +17,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.EventManager;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
@@ -34,6 +37,8 @@ import seedu.address.testutil.EditEventDescriptorBuilder;
 public class CommandTestUtil {
 
     public static final int VALID_LINE = 1;
+    public static final String VALID_ADMIN_USERNAME = "admin";
+    public static final String VALID_ADMIN_PASSWORD = "root";
     public static final String VALID_USERNAME = "Johnny Bravo";
     public static final String VALID_PASSWORD = "pass@12345";
     public static final String VALID_ATTENDEE_TED = "Ted Bacan";
@@ -56,6 +61,8 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_COMMENT = "Hi";
 
+    public static final String ADMIN_USERNAME_DESC = " " + PREFIX_USERNAME + VALID_ADMIN_USERNAME;
+    public static final String ADMIN_PASSWORD_DESC = " " + PREFIX_PASSWORD + VALID_ADMIN_PASSWORD;
     public static final String USERNAME_DESC = " " + PREFIX_USERNAME + VALID_USERNAME;
     public static final String PASSWORD_DESC = " " + PREFIX_PASSWORD + VALID_PASSWORD;
     public static final String ATTENDEE_DESC_TED = " " + PREFIX_ATTENDEE + VALID_ATTENDEE_TED;
@@ -163,8 +170,12 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredEventList().size());
 
         Event event = model.getFilteredEventList().get(targetIndex.getZeroBased());
+
         final String[] splitName = event.getName().fullName.split("\\s+");
-        model.updateFilteredEventList(new EventContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        List<String> nameList = Arrays.asList(splitName[0]);
+        Map<Prefix, List<String> >keywordMap = new HashMap<>();
+        keywordMap.put(PREFIX_NAME, nameList);
+        model.updateFilteredEventList(new EventContainsKeywordsPredicate(keywordMap));
         assertEquals(1, model.getFilteredEventList().size());
     }
 

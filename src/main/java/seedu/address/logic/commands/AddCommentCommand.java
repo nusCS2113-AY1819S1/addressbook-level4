@@ -58,6 +58,11 @@ public class AddCommentCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGIN);
+        }
+
         List<Event> filteredEventList = model.getFilteredEventList();
 
         if (index.getZeroBased() >= filteredEventList.size()) {

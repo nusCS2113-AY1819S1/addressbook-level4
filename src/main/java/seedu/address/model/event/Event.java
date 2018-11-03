@@ -79,7 +79,9 @@ public class Event {
         return status;
     }
 
-    public Comment getComment () { return comment; }
+    public Comment getComment () {
+        return comment;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -113,7 +115,7 @@ public class Event {
      * Returns attendee list formatted as a string to be passed into Event Page HTML as query string parameter
      */
     public String getAttendanceString() {
-        TreeSet<String> attendeesSet = new TreeSet<>();
+        TreeSet<String> attendeesSet = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
         for (Attendee a: attendees) {
             attendeesSet.add(a.attendeeName);
         }
