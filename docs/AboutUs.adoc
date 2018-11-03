@@ -40,7 +40,7 @@ Responsibilities: Data
 
 === Vincent Neo Guo Zhong
 image::tenvinc.png[width="150", align="left"]
-{empty}[http://github.com/tenvinc[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/tenvinc[github]] [<<vincentneo#, portfolio>>]
 
 Role: Developer +
 Responsibilities: UI + Logic
