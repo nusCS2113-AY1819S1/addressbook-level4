@@ -84,10 +84,12 @@ public class EmailContentsAddCommand extends EmailContentsSelectCommand {
         //Generate output string
         StringBuilder output = new StringBuilder();
 
+        //if there are duplicates, add the duplicate string in
         if (hasDuplicates) {
             output.append(duplicates);
         }
 
+        //only include recipients string if it's not empty
         if (!contents.toString().equals("Contents added:\n")) {
             output.append(contents);
         }

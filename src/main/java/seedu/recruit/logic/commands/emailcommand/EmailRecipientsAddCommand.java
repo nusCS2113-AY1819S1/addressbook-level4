@@ -118,10 +118,12 @@ public class EmailRecipientsAddCommand extends EmailRecipientsSelectCommand {
         //Generate output string
         StringBuilder output = new StringBuilder();
 
+        //if there are duplicates, add the duplicate string in
         if (hasDuplicates) {
             output.append(duplicates);
         }
 
+        //only include recipients string if it's not empty
         if (!recipients.toString().equals("Recipients added:\n")) {
             output.append(recipients);
         }
