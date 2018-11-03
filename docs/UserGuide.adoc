@@ -64,6 +64,11 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 Only `select` and `list` commands can be performed without logging in. Also, `add`, `edit`, `delete` and `deleteComment` can only performed by the admin account.
 ====
 
+[IMPORTANT]
+====
+As of now, there is only one admin account, with the username being `admin` and the password being `root`.
+====
+
 // tag::authentication[]
 === Signing up for an account : `signup`
 
