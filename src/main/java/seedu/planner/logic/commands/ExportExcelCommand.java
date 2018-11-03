@@ -22,7 +22,8 @@ import seedu.planner.model.record.Record;
  * Export the data of the records within specific period.
  */
 public class ExportExcelCommand extends Command {
-    public static final String COMMAND_WORD = "export_excel";
+    public static final String COMMAND_WORD = "exportexcel";
+    public static final String COMMAND_WORD_UNDERSCORE = "export_excel";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Export the records data into Excel file within specific period.\n"
             + "The file will be named in format: Financial_Planner_STARTDATE_ENDDATE.\n"
