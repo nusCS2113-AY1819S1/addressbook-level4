@@ -53,18 +53,20 @@ public class RemoveCommand extends Command {
         if (indexEvent.getZeroBased() >= lastShownEventList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
+
         Person person = lastShownPersonList.get(indexPerson.getZeroBased());
         Event event = lastShownEventList.get(indexEvent.getZeroBased());
 
         String personName = person.getName().toString();
+        String personEmail = person.getEmail().toString();
 
         if (event.isAttendeeEmpty()) {
             throw new CommandException(MESSAGE_ATTENDEE_EMPTY);
-        } else if (!event.hasAttendee(personName)) {
+        } else if (!event.hasAttendee(personEmail)) {
             throw new CommandException(MESSAGE_ABSENT_PERSON);
         }
 
-        Event updatedEvent = event.removePersonFromAttendee(personName);
+        Event updatedEvent = event.removePersonFromAttendee(personEmail);
 
         model.updateEvent(event, updatedEvent);
         model.commitEventList();

@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalEvents.getTypicalEventList;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_EVENT;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -20,6 +21,8 @@ import org.junit.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
+import seedu.address.model.AddressBook;
+import seedu.address.model.EventList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -42,7 +45,7 @@ public class InviteCommandTest {
     @Before
     public void setup() {
         Set<String> set = new HashSet<>();
-        set.add("Alice");
+        set.add("alice@example.com");
 
         event1 = new EventBuilder().build();
         event2 = new EventBuilder().withAttendee(set).build();
@@ -50,20 +53,21 @@ public class InviteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personChosen = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personChosen = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Event eventChosen = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
-        String personName = personChosen.getName().toString();
+        String personEmail = personChosen.getEmail().toString();
 
-        InviteCommand inviteCommand = new InviteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_EVENT);
+        InviteCommand inviteCommand = new InviteCommand(INDEX_SECOND_PERSON, INDEX_FIRST_EVENT);
 
         String expectedMessage = String.format(InviteCommand.MESSAGE_INVITE_PERSON_SUCCESS,
                 personChosen.getName(), eventChosen.getEventName());
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getEventList(), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new EventList(model.getEventList()), new UserPrefs());
 
         Attendees attendeesChosen = eventChosen.getAttendees();
-        Attendees attendeesUpdated = attendeesChosen.addName(personName);
-        Set<String> setUpdated = attendeesUpdated.attendeesSet;
+        Attendees attendeesUpdated = attendeesChosen.createAttendeesWithAddedEmail(personEmail);
+        Set<String> setUpdated = attendeesUpdated.getAttendeesSet();
         Event eventUpdated = new EventBuilder(eventChosen).withAttendee(setUpdated).build();
 
         expectedModel.updateEvent(eventChosen, eventUpdated);
@@ -105,6 +109,21 @@ public class InviteCommandTest {
         InviteCommand inviteCommand = new InviteCommand(INDEX_FIRST_PERSON, INDEX_THIRD_EVENT);
 
         assertCommandFailure(inviteCommand, model, commandHistory, InviteCommand.MESSAGE_DUPLICATE_PERSON);
+
+    }
+
+    @Test
+    public void execute_personEventClashesWithEventList_throwsCommandException() {
+
+        Person personChosen = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Event eventChosen = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
+
+        String expectedMessage = String.format(InviteCommand.MESSAGE_CLASH_EVENT,
+                eventChosen.getEventName().toString(), personChosen.getName().toString());
+
+        InviteCommand inviteCommand = new InviteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_EVENT);
+
+        assertCommandFailure(inviteCommand, model, commandHistory, expectedMessage);
 
     }
 

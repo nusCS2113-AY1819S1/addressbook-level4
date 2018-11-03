@@ -98,17 +98,26 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Update events which Attendee contains personName
+     * Update events which Attendee contains personEmail
      */
-    public void removeAttendee(String personName) {
-        requireNonNull(personName);
+    public void removeAttendee(String personEmail) {
+        requireNonNull(personEmail);
         for (Event event: internalList) {
-            if (event.hasAttendee(personName)) {
+            if (event.hasAttendee(personEmail)) {
                 int index = internalList.indexOf(event);
-                Event updatedEvent = event.removePersonFromAttendee(personName);
+                Event updatedEvent = event.removePersonFromAttendee(personEmail);
                 internalList.set(index, updatedEvent);
             }
         }
+    }
+
+    /**
+     * Returns true if the selected event clashes with the person's event list.
+     */
+    public boolean hasClash(Event toCheck, String personEmail) {
+        requireNonNull(toCheck);
+        EventClashPredicate predicate = new EventClashPredicate(toCheck, personEmail);
+        return internalList.stream().anyMatch(predicate);
     }
 
 

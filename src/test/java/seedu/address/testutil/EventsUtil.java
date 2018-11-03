@@ -57,8 +57,8 @@ public class EventsUtil {
         sb.append(PREFIX_DESCRIPTION + event.getDescription().value + " ");
         sb.append(PREFIX_LOCATION + event.getLocation().value + " ");
         sb.append(PREFIX_DATE + event.getDate().toString() + " ");
-        sb.append(PREFIX_START_DATE + event.getStartTime().startTime + " ");
-        sb.append(PREFIX_END_DATE + event.getEndTime().endTime);
+        sb.append(PREFIX_START_DATE + event.getStartTime().time + " ");
+        sb.append(PREFIX_END_DATE + event.getEndTime().time);
         return sb.toString();
     }
 

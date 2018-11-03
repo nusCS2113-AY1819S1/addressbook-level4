@@ -2,9 +2,9 @@ package seedu.address.model.event;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CALVIN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_CALVIN;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,31 +19,28 @@ public class AttendeeContainsNamePredicateTest {
 
     private Set<String> attendeesSetOne;
     private Set<String> attendeesSetTwo;
-    private Set<String> attendeesSetThree;
 
     @Before
     public void setup() {
         attendeesSetOne = new HashSet<>();
         attendeesSetTwo = new HashSet<>();
 
-        attendeesSetOne.add(VALID_NAME_AMY);
-        attendeesSetTwo.add(VALID_NAME_BOB);
-        attendeesSetTwo.add(VALID_NAME_CALVIN);
+        attendeesSetOne.add(VALID_EMAIL_AMY);
+        attendeesSetTwo.add(VALID_EMAIL_BOB);
+        attendeesSetTwo.add(VALID_EMAIL_CALVIN);
     }
 
 
     @Test
     public void equals() {
-        String personNameAlice = "ALICE";
-        String personNameBob = "BOB";
 
-        AttendeeContainsNamePredicate firstPredicate = new AttendeeContainsNamePredicate(personNameAlice);
-        AttendeeContainsNamePredicate secondPredicate = new AttendeeContainsNamePredicate(personNameBob);
+        AttendeeContainsEmailPredicate firstPredicate = new AttendeeContainsEmailPredicate(VALID_EMAIL_AMY);
+        AttendeeContainsEmailPredicate secondPredicate = new AttendeeContainsEmailPredicate(VALID_EMAIL_BOB);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
-        AttendeeContainsNamePredicate firstPredicateCopy = new AttendeeContainsNamePredicate(personNameAlice);
+        AttendeeContainsEmailPredicate firstPredicateCopy = new AttendeeContainsEmailPredicate(VALID_EMAIL_AMY);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -58,32 +55,32 @@ public class AttendeeContainsNamePredicateTest {
     }
 
     @Test
-    public void test_attendeesContainName_returnsTrue() {
+    public void test_attendeesContainEmail_returnsTrue() {
         //event with attendee size one
-        AttendeeContainsNamePredicate predicate = new AttendeeContainsNamePredicate(VALID_NAME_AMY);
+        AttendeeContainsEmailPredicate predicate = new AttendeeContainsEmailPredicate(VALID_EMAIL_AMY);
         assertTrue(predicate.test(new EventBuilder().withAttendee(attendeesSetOne).build()));
 
         //event with attendee size more than one
-        predicate = new AttendeeContainsNamePredicate(VALID_NAME_BOB);
+        predicate = new AttendeeContainsEmailPredicate(VALID_EMAIL_BOB);
         assertTrue(predicate.test(new EventBuilder().withAttendee(attendeesSetTwo).build()));
 
     }
 
     @Test
-    public void test_attendeesContainName_returnsFalse() {
+    public void test_attendeesContainEmail_returnsFalse() {
         //empty name
-        AttendeeContainsNamePredicate predicate = new AttendeeContainsNamePredicate("");
+        AttendeeContainsEmailPredicate predicate = new AttendeeContainsEmailPredicate("");
         assertFalse(predicate.test(new EventBuilder().withAttendee(attendeesSetOne).build()));
 
         //person not in attendee
-        predicate = new AttendeeContainsNamePredicate(VALID_NAME_AMY);
+        predicate = new AttendeeContainsEmailPredicate(VALID_EMAIL_AMY);
         assertFalse(predicate.test(new EventBuilder().withAttendee(attendeesSetTwo).build()));
 
-        predicate = new AttendeeContainsNamePredicate(VALID_NAME_CALVIN);
+        predicate = new AttendeeContainsEmailPredicate(VALID_EMAIL_CALVIN);
         assertFalse(predicate.test(new EventBuilder().withAttendee(attendeesSetOne).build()));
 
         //no attendee in event
-        predicate = new AttendeeContainsNamePredicate(VALID_NAME_CALVIN);
+        predicate = new AttendeeContainsEmailPredicate(VALID_EMAIL_CALVIN);
         assertFalse(predicate.test(new EventBuilder().build()));
 
     }

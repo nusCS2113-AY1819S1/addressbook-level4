@@ -51,6 +51,7 @@ public class EditEventCommand extends Command {
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event name already exists in the address book.";
+    public static final String MESSAGE_EVENT_CLASH = "The updated time will result in clash with %1$s's schedule.";
 
     private final Index index;
     private final EditEventDescriptor editEventDescriptor;
@@ -102,9 +103,17 @@ public class EditEventCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
 
-        if (editedEvent.getStartTime().startTime.compareTo(editedEvent.getEndTime().endTime) > 0) {
+        if (editedEvent.getStartTime().compareTo(editedEvent.getEndTime()) > 0) {
             throw new CommandException(EndTime.MESSAGE_INVALID_END_TIME);
         }
+
+        //TODO: Write tests for EditEvent
+        /*
+        for (String personName: editedEvent.getAttendees().getAttendeesSet()) {
+            if (model.hasClash(editedEvent, personName)) {
+                throw new CommandException(String.format(MESSAGE_EVENT_CLASH, personName));
+            }
+        }*/
 
         model.updateEvent(eventToEdit, editedEvent);
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);

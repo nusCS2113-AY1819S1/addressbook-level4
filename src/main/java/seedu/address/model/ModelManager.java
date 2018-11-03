@@ -307,6 +307,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean hasClash(Event event, String personEmail) {
+        requireNonNull(event);
+        requireNonNull(personEmail);
+        return versionedEventList.hasClash(event, personEmail);
+    }
+
+    @Override
     public ObservableList<Event> getFilteredEventList() {
         return FXCollections.unmodifiableObservableList(filteredEvents);
     }

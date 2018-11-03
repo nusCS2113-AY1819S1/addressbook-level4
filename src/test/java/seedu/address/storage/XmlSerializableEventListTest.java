@@ -25,7 +25,7 @@ public class XmlSerializableEventListTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void toModelType_typicalPersonsFile_success() throws Exception {
+    public void toModelType_typicalEventsFile_success() throws Exception {
         XmlSerializableEventList dataFromFile = XmlUtil.getDataFromFile(TYPICAL_EVENTS_FILE,
                 XmlSerializableEventList.class);
         EventList eventListFromFile = dataFromFile.toModelType();
