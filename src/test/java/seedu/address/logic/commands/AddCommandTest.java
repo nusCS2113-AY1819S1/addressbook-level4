@@ -166,6 +166,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Event> getAttendingEventList(Username currentUser) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean canUndoEventManager() {
             throw new AssertionError("This method should not be called.");
         }
@@ -203,6 +208,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean getLoginStatus() {
+            return true;
+        }
+
+        @Override
+        public boolean getAdminStatus() {
+            return true;
+        }
+
+        @Override
         public boolean hasEvent(Event event) {
             requireNonNull(event);
             return this.event.isSameEvent(event);
@@ -214,6 +229,16 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Event> personsAdded = new ArrayList<>();
+
+        @Override
+        public boolean getLoginStatus() {
+            return true;
+        }
+
+        @Override
+        public boolean getAdminStatus() {
+            return true;
+        }
 
         @Override
         public boolean hasEvent(Event event) {

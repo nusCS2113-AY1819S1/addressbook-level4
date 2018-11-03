@@ -130,6 +130,8 @@ public class EventCardHandle extends NodeHandle<Node> {
                 && getVenue().equals(event.getVenue().value)
                 && getPhone().equals(event.getPhone().value)
                 && getEmail().equals(event.getEmail().value)
+
+
                 && getDatetime().equals(event.getDateTime().toString())
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(event.getTags().stream()
                         .map(tag -> tag.tagName)
