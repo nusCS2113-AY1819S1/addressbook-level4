@@ -35,7 +35,8 @@ public class DeleteCommentCommand extends Command {
 
     public static final String MESSAGE_DELETE_COMMENT = "Comment deleted for Event %1$s at Line %2$s";
     public static final String MESSAGE_LINE_INVALID = "Line is invalid, try again. Example: deleteComment 1 L/2";
-    public static final String MESSAGE_LINE_STRING_INVALID = "Line cannot be a string! Example: deleteComment 1 L/2";
+    public static final String MESSAGE_LINE_STRING_INVALID = "Line cannot be a string!"
+            + " Example: deleteComment 1 L/2";
 
     private final Index index;
     private final EditCommand.EditEventDescriptor editCommentDescriptor = new EditCommand.EditEventDescriptor();

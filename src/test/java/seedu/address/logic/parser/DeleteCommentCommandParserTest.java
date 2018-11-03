@@ -3,9 +3,9 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_LINE_INVALID;
 import static seedu.address.logic.commands.CommandTestUtil.COMMENT_DESC_DELETE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LINE;
-import static seedu.address.logic.commands.DeleteCommentCommand.MESSAGE_LINE_STRING_INVALID;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 
@@ -39,6 +39,6 @@ class DeleteCommentCommandParserTest {
         //No index and no comment specified
         assertParseFailure(parser, "", invalidMessage);
         //Index present, line not integer
-        assertParseFailure(parser, "1 L/Hi", MESSAGE_LINE_STRING_INVALID);
+        assertParseFailure(parser, "1 L/Hi", MESSAGE_LINE_INVALID);
     }
 }

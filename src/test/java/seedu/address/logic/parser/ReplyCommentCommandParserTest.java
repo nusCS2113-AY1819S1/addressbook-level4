@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_EMPTY_COMMENT;
+import static seedu.address.commons.core.Messages.MESSAGE_LINE_INVALID;
 import static seedu.address.logic.commands.CommandTestUtil.COMMENT_DESC_REPLY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COMMENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LINE;
-import static seedu.address.logic.commands.ReplyCommentCommand.MESSAGE_LINE_STRING_INVALID;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 
@@ -51,6 +51,6 @@ class ReplyCommentCommandParserTest {
         //Empty Comment
         assertParseFailure(parser, "1 C/ L/1", emptyMessage);
         //Index present, line not integer
-        assertParseFailure(parser, "1 C/Hi L/Hi", MESSAGE_LINE_STRING_INVALID);
+        assertParseFailure(parser, "1 C/Hi L/Hi", MESSAGE_LINE_INVALID);
     }
 }

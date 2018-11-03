@@ -53,7 +53,9 @@ public class AddCommentCommand extends Command {
         return this.comment;
     }
 
-    public Index getIndex() { return this.index; }
+    public Index getIndex() {
+        return this.index;
+    }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
