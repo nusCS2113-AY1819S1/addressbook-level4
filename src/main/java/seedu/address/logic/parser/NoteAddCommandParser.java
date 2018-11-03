@@ -132,7 +132,7 @@ public class NoteAddCommandParser implements Parser<NoteAddCommand> {
                 timeErrorFound = true;
             }
 
-            if (startDate == null) {
+            if (startDate == null && !dateErrorFound) {
                 messageErrors.append(NoteDate.MESSAGE_START_DATE_MISSING_FIELD);
                 messageErrors.append("\n\n");
                 startDateMissingErrorFound = true;
@@ -153,7 +153,7 @@ public class NoteAddCommandParser implements Parser<NoteAddCommand> {
                 }
             }
 
-            if (startDate == null) {
+            if (startDate == null && !dateErrorFound) {
                 if (!startDateMissingErrorFound) {
                     messageErrors.append(NoteDate.MESSAGE_START_DATE_MISSING_FIELD);
                     messageErrors.append("\n\n");
@@ -176,7 +176,7 @@ public class NoteAddCommandParser implements Parser<NoteAddCommand> {
                 }
             }
 
-            if (startDate == null) {
+            if (startDate == null && !dateErrorFound) {
                 if (!startDateMissingErrorFound) {
                     messageErrors.append(NoteDate.MESSAGE_START_DATE_MISSING_FIELD);
                     messageErrors.append("\n\n");
