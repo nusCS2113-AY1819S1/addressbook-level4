@@ -47,7 +47,7 @@ h6 {
 }
 h1 {
 /*   font-size: 4em;  */
-  font-size: 56px; 
+  font-size: 56px;
 }
 h2 {
   font-size: 45px;
@@ -347,4 +347,4 @@ video {
 table {
   width: 55vw!important;
   font-size: 3vw;
-}
+}}
