@@ -88,7 +88,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addTask(Task task) {
         versionedTaskBook.addTask(task);
-        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        updateFilteredTaskList(predicateShowTasksWithSameDate(task.getDeadline()));
         indicateTaskBookChanged();
     }
 

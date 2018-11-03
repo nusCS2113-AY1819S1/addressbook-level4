@@ -151,7 +151,7 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `complete`, `sort`, `add_milestone`, `defer_deadline`, `delete`, `select` and `clear`).
+Undoable commands: those commands that modify the address book's content (`add`, `complete`, `sort`, `add_milestone`, `defer`, `delete`, `select` and `clear`).
 ====
 
 Examples:
@@ -222,8 +222,8 @@ e.g. `add_milestone t/Complete CS2113 W8 LO m/Complete Sections 8.1 to 8.5 r/1`
 * *Clear* : `clear`
 * *Complete* : `complete i/INDEX h/HOURS_COMPLETED`
 e.g. `complete i/1 h/2`
-* *Defer deadline* : `defer_deadline INDEX de/DEADLINE` +
-e.g. `defer_deadline 1 de/01012018`
+* *Defer deadline* : `defer i/INDEX dd/DAY mm/MONTH yyyy/YEAR` +
+e.g. `defer i/1 dd/01 mm/01 yyyy/2018`
 * *Delete* : `delete INDEX`
 e.g. `delete 1`
 * *List* : `list`
