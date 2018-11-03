@@ -8,14 +8,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_TITLE;
 
-import java.time.LocalDateTime;
-
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.note.Note;
 import seedu.address.model.note.NoteDate;
+import seedu.address.model.note.NoteDateTime;
 import seedu.address.model.note.NoteLocation;
 import seedu.address.model.note.NoteManager;
 import seedu.address.model.note.NoteTime;
@@ -148,14 +147,10 @@ public class NoteEditCommand extends Command {
         }
 
         if (newStartDate != null) {
-            LocalDateTime newStartDateTime = LocalDateTime.of(newStartDate.getDate(), newStartTime.getTime());
-            LocalDateTime newEndDateTime = LocalDateTime.of(newEndDate.getDate(), newEndTime.getTime());
+            NoteDateTime start = new NoteDateTime(newStartDate, newStartTime);
+            NoteDateTime end = new NoteDateTime(newEndDate, newEndTime);
 
-            // result = 0, equal, valid
-            // result > 0, newEndDateTime > newStartDateTime, valid
-            // result < 0, newEndDateTime < newStartDateTime, invalid
-            int result = newEndDateTime.compareTo(newStartDateTime);
-            if (result < 0) {
+            if (!NoteDateTime.hasValidDateTimeDifference(start, end)) {
                 throw new CommandException(MESSAGE_INVALID_DATE_TIME_DIFFERENCE);
             }
         }

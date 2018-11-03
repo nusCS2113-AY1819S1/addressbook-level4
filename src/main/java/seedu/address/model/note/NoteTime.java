@@ -40,17 +40,13 @@ public class NoteTime {
 
     /**
      * Returns true if the input is a valid time.
-     * A valid time should follow the (h:m a) format or
-     * an empty string.
+     * A valid time should follow the (h:mm a) format.
      */
-    public static boolean isValidTime(String date) {
-        requireNonNull(date);
-        if (date.isEmpty()) {
-            return true;
-        }
+    public static boolean isValidTime(String time) {
+        requireNonNull(time);
 
         try {
-            LocalTime.parse(date, TIME_FORMATTER);
+            LocalTime.parse(time, TIME_FORMATTER);
         } catch (DateTimeParseException e) {
             return false;
         }
