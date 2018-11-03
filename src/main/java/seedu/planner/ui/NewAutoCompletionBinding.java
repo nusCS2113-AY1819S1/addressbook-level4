@@ -77,6 +77,11 @@ public class NewAutoCompletionBinding<T> {
         this.converter = converter;
         this.autoCompletionPopup.setConverter(converter);
 
+        autoCompletionPopup.setStyle("-fx-control-inner-background:grey;"
+                + "-fx-accent: #f7f7c3;"
+                + "-fx-selection-bar-non-focused:white;"
+                + "-fx-font:18px 'Georgia';");
+
         autoCompletionPopup.setOnSuggestion(sce -> {
             try {
                 setIgnoreInputChanges(true);
