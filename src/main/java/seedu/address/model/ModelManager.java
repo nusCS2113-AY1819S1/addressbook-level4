@@ -60,9 +60,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasTask(Task person) {
-        requireNonNull(person);
-        return versionedTaskBook.hasTask(person);
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return versionedTaskBook.hasTask(task);
     }
 
     //@@author ChanChunCheong
@@ -88,7 +88,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addTask(Task task) {
         versionedTaskBook.addTask(task);
-        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        updateFilteredTaskList(predicateShowTasksWithSameDate(task.getDeadline()));
         indicateTaskBookChanged();
     }
 

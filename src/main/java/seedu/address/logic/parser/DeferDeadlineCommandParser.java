@@ -54,11 +54,6 @@ public class DeferDeadlineCommandParser implements Parser<DeferDeadlineCommand> 
         String year = argMultimap.getValue(PREFIX_YEAR).orElse("");
         Deadline deadline = new Deadline(day, month, year);
 
-        if (!deadline.isValidDeadline(deadline.toString())) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeferDeadlineCommand.MESSAGE_USAGE));
-        }
-
-
         return new DeferDeadlineCommand(index, deadline);
     }
 
