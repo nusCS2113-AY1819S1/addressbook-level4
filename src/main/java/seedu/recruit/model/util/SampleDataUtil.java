@@ -77,7 +77,7 @@ public class SampleDataUtil {
     public static Company[] getSampleCompanies() {
         return new Company[]{
             new Company(new CompanyName("McDonalds"), new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-            new Email("mcdonalds@gmail.com"), new Phone("61116222"), getSampleJobList())
+            new Email("mcdonalds@gmail.com"), new Phone("61116222"))
         };
     }
 

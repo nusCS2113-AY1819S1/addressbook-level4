@@ -289,23 +289,16 @@ public class ModelManager extends ComponentManager implements Model {
     // ================================== Job Offer functions ========================================== //
 
     @Override
-    public void addJobOffer(CompanyName companyName, JobOffer jobOffer) {
-        requireAllNonNull(companyName, jobOffer);
-        versionedCompanyBook.addJobOfferToCompany(companyName, jobOffer);
+    public void addJobOffer(JobOffer jobOffer) {
+        requireAllNonNull(jobOffer);
+        versionedCompanyBook.addJobOffer(jobOffer);
         indicateCompanyBookChanged();
     }
 
     @Override
-    public boolean hasJobOffer(CompanyName companyName, JobOffer jobOffer) {
-        requireAllNonNull(companyName, jobOffer);
-        return versionedCompanyBook.hasJobOffer(companyName, jobOffer);
-    }
-
-    @Override
-    public void updateJobOfferInSelectedCompany(Company company, JobOffer target, JobOffer editedJobOffer) {
-        requireAllNonNull(company, target, editedJobOffer);
-        versionedCompanyBook.updateJobOfferInCompany(company, target, editedJobOffer);
-        indicateCompanyBookChanged();
+    public boolean hasJobOffer(JobOffer jobOffer) {
+        requireAllNonNull(jobOffer);
+        return versionedCompanyBook.hasJobOffer(jobOffer);
     }
 
     @Override

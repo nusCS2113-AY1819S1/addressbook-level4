@@ -181,7 +181,7 @@ public interface Model {
      * @code companyName has to exist in the CompanyBook
      * @code jobOffer must not already exist inside the job list of companyName
      */
-    void addJobOffer(CompanyName companyName, JobOffer jobOffer);
+    void addJobOffer(JobOffer jobOffer);
 
     /**
      * Sorts the list of job offers in CompanyBook
@@ -191,7 +191,7 @@ public interface Model {
     /**
      * Returns true if a company has a job offer with the same identity as {@code jobOffer} exists in the CompanyBook.
      */
-    boolean hasJobOffer(CompanyName companyName, JobOffer jobOffer);
+    boolean hasJobOffer(JobOffer jobOffer);
 
     /**
      * Replaces the given job offer {@code target} in the list with {@code editedJobOffer}.
@@ -200,14 +200,6 @@ public interface Model {
      * company book.
      */
     void updateJobOfferInCompanyBook(JobOffer target, JobOffer editedJobOffer);
-
-    /**
-     * Replaces the given job offer {@code target} in the list with {@code editedJobOffer}.
-     * {@code target} must exist in the company's job list {@code company}.
-     * The job offer identity of {@code editedJobOffer} must not be the same as another existing job offer in the
-     * same company{@code company}.
-     */
-    void updateJobOfferInSelectedCompany(Company company, JobOffer target, JobOffer editedJobOffer);
 
     /**
      * Deletes the given job offer.

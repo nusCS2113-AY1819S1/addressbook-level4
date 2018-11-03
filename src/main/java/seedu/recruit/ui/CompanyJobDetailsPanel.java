@@ -47,6 +47,7 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
     @FXML
     private ListView<Candidate> companyJobShortlistView;
 
+
     public CompanyJobDetailsPanel(ObservableList<Company> companyList, ObservableList<JobOffer> companyJobList) {
         super(FXML);
         setConnections(companyList, companyJobList);
@@ -81,16 +82,6 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
                         raise(new CompanyJobListDetailsPanelSelectionChangedEvent(newValue));
                     }
                 });
-    }
-
-    /**
-     * Right side of {@code CompanyJobDetailsPanel} shows the list of jobs
-     * and their details {@code JobCard} of the selected Company.
-     */
-    private void showJobDetailsOfSelectedCompany(Company selectedCompany) {
-        companyJobDetailsView.setItems(selectedCompany.getUniqueJobList().getInternalList());
-        companyJobDetailsView.setCellFactory(listView -> new CompanyJobDetailsViewCell());
-        numberOfJobOffers.setText(String.valueOf(selectedCompany.getUniqueJobList().getInternalList().size()));
     }
 
     /**
