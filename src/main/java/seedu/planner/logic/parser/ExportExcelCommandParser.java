@@ -1,9 +1,9 @@
 package seedu.planner.logic.parser;
 
+import static seedu.planner.commons.util.DateUtil.isEarlierThan;
+
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DIR;
-
-import static seedu.planner.commons.util.DateUtil.isEarlierThan;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
