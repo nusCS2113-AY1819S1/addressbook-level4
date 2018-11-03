@@ -37,7 +37,7 @@ public class ParserUtil {
     public static int parseHours(String hours) throws ParseException {
         requireNonNull(hours);
         String trimmedHours = hours.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedHours)) {
+        if (!StringUtil.isUnsignedInteger(trimmedHours)) {
             throw new ParseException(MESSAGE_INVALID_HOURS);
         }
         return Integer.parseInt(trimmedHours);
