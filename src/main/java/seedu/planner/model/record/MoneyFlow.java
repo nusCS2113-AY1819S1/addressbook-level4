@@ -26,7 +26,7 @@ public class MoneyFlow {
 
     // Any form of money flow entered must follow the format defined above
     private static final String MONEYFLOW_WHOLE_NUMBER_ZERO_REGEX = "0";
-    private static final String MONEYFLOW_WHOLE_NUMBER_NONZERO_REGEX = "[1-9]{1}\\d*";
+    private static final String MONEYFLOW_WHOLE_NUMBER_NONZERO_REGEX = "[1-9]\\d*";
     private static final String MONEYFLOW_DECIMAL_PART_REGEX = ".\\d{1,2}";
     private static final String MONEYFLOW_SIGN_PART_REGEX = "[+-]";
 

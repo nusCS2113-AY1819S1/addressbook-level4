@@ -6,6 +6,7 @@
 :sectnums:
 :imagesDir: images
 :stylesDir: stylesheets
+:stylesheet: gh-pages.css
 :xrefstyle: full
 ifdef::env-github[]
 :tip-caption: :bulb:
@@ -14,7 +15,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2113-AY1819S1-T09-4/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team T09-4`      Since: `Aug 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -418,6 +419,67 @@ The update of the UI `RecordListPanel` is done through the event system. `Filter
 implemented by the Java 8 API and it will propagate any changes to the list to any listeners listening to it. This
 listener is present in `RecordListPanel` and will update the UI list automatically.
 
+==== Design Considerations
+===== Aspect: Data structure to support listing of records
+
+* **Alternative 1 (current choice):** Uses a FilteredList that is tracked by the UI. FilteredLIst is a wrapper around the ObservableList<Record> that is stored in UniquePersonList which allows for any changes in the observable list to be propagated to the filtered list automatically.
+** Pros: Easy to implement
+** Cons: May take a significantly longer time to list records if there are many records spanning across a large timeframe.
+
+* **Alternative 2:** Implement a HashMap with Date as the key and Record as the value.
+** Pros: Allows for constant time complexity to access any elements. Hence, listing records can potentially be faster.
+** Cons: Current UI implementation relies on `FilteredList`. In order for UI to be compatible with the new data structure, the UI may need to change its implementation to `ObservableMap` instead. Alternatively, one can utilise a `HashMap` to first generate the list and pass the list reference into `FilteredList`. However, there is a need to code a filter function.
+
+=== View breakdown of total income and expense into categories
+==== Current Implementation
+This feature allows the user to view a pie chart breakdown of all expenses and all income within a date range which the user can specify.
+
+The corresponding command required for this feature is `stats`.For this feature, users have to enter 2 dates, one starting date and one ending date.
+This feature is facilitated by a few key components of FinancialPlanner, `Logic`, `Model`, `UI` and function executions can be split into 2 phases, the `Logic phase` and the `UI phase`.
+The detailed execution sequence of functions used for `Logic phase` are as shown below.
+
+image::StatisticLogicSequenceDiagram.png[width="800"]
+
+Consider the situation where the user enters *"stats d/1-1-2018 12-12-2018"*:
+
+* When user enters the command, the `LogicManager` recognises the command and calls the `FinancialPlannerParser` to process the new command as shown above.
+* The FinancialPlannerParser will then search for the `stats` keyword required and once it is found, the rest of the command minus the keyword is passed in as a
+parameter to StatisticCommandParser.
+* The StatisticCommandParser will then pass its input parameters through another component `ArgumentTokenizer` to split up the command into arguments associated with each
+prefix and store them in a map for reference later.
+* The map is further processed and the specific arguments will be identified in this stage. After the arguments have been obtained, there is a further check to check the
+validity of the arguments before proceeding to split the arguments associated with `d/` into date arguments. These arguments are again checked for validity before being passed to the
+constructor of StatisticCommand.
+* Once `StatisticCommand#execute` is called, it will then search through the in-memory data of FinancialPlanner and return a list containing all records within the date range and including
+both the start dates and end dates. This functionality is facilitated by the `ModelManager` which is the class that manages all interactions between
+`Logic` and `Model` component, by`ModelManager#updateFilteredRecords`. The command then retrieves the filteredList from ModelManager and passes it into
+the constructor of `CategoryStatisticsList`.
+* In this constructor, it will loop through all the records in the list and add them into an internal map. The internal data structure in `CategoryStatisticsList` is a hash map,
+to aid in the adding process, however it only outputs lists and not the map. This functionality is facilitated by `CategoryStatisticsList#addToCategoryStatistics` which checks whether the record
+is in the map.
+* If the record is not present, it creates a new `CategoryStatistic` object and adds that to the map. If the record is present, the record is then added to the existing `CategoryStatistic` object.
+* The flow of control returns to StatisticCommand and StatisticCommand calls the read function of CategoryStatisticsList to obtain a read-only list and passes it into
+an event constructor before posting the event `ShowPieChartStatsEvent`.
+
+After the event is posted, the execution proceeds to the `UI phase` where there is a listener in `MainWindow` listening to this event. This is facilitated by
+the event system in FinancialPlanner. The sequence diagram below details the program flow of the functions executed in `UI phase`.
+
+image::StatisticUiSequenceDiagram.png[width="800"]
+
+When the event is caught by the listener in `MainWindow`, `MainWindow` looks through all children of the `MainWindow#mainUiPanelPlaceholder` and executes the hide function in them.
+This will make all children hidden from view in the UI which allows for the panel switching functionality, which replaces the current panel with the desired panel.
+The program flow is then as shown above where the `CategoryBreakdown` is created and instantiated with 2 lists, one being expenseLabelData and other being expenseLegendData.
+In the current implementation, whenever `stats` is called, 2 tabs will be created, one for total income and one for total expense. Thus, the same program sequence after construction for
+`CategoryBreakdown` is also repeated for total income, and the corresponding parameters would be incomeLabelData and incomeLegendData.
+
+[NOTE]
+Note that the CustomLegend class is located within the CustomPieChart class which inherits from the JavaFX PieChart class. This legend class can
+only be accessed within CustomPieChart for security purposes.
+
+The activity flow diagram below details the mechanism behind the creation of the category breakdown ui,
+starting from the point where the function `StatsDisplayPanel#`handleShowPieChartStatsEvent` is called.
+
+// tag::findtag[]
 === Find records by tag feature
 ==== Current Implementation
 The findtag mechanism is also facilitated by `ModelManager`. FindTagCommand calls `ModelManager#updateFilteredRecords`
@@ -439,6 +501,7 @@ and obtain a new `filteredRecords` based on the predicate, which will also trigg
 The following sequence diagram shows how the limit operation works:
 
 image::FindTagSequenceDiagram.png[width:800]
+// end::findtag[]
 
 === Limit feature
 ==== Current Implementation
@@ -1618,23 +1681,64 @@ Use case ends.
 ** Use case ends.
 
 [discrete]
-=== 12. Use case: Export expenses into another format
+=== 12. Use case: Export expenses into Excel file [Linh Chi]
 
 *MSS*
 
 1.  User requests export format.
 2.  FinancialPlanner shows list of possible formats for export.
 3.  User enters preferred export format.
-4.  FinancialPlanner exports the file in specified format.
+4.  FinancialPlanner exports the records data in Excel file.
 
 *Extensions*
 
-* 3a User input unsupported file format
+* 3a User input wrong directory path that the Excel file will be stored
+** FinancialPlanner throws unsupported format error
+** Use case resumes at step 2.
+
+* 3b User input wrong date format or unreal date.
 ** FinancialPlanner throws unsupported format error
 ** Use case resumes at step 2.
 
 [discrete]
-=== 13. Use case: Freely edit expenses tags
+==== 14. Use case: Import the Excel file into Financial Planner. [Linh Chi]
+
+*MSS*
+
+1. User requests import format.
+2. Financial Planner shows list of possible format for import.
+3. User enters preffered import format.
+4. Financial Planner reads the Excel file and transfer all the data in the Excel file into Record object and add them into current Financial Planner.
+
+*Extensions*
+
+* 3a User input wrong file path that the Excel file is stored
+** FinancialPlanner throws unsupported format error
+** Use case resumes at step 2.
+
+
+[discrete]
+=== 15. Use case: Archive the records data into Excel file. [Linh Chi]
+
+*MSS*
+
+1. User requests archive format.
+2. Financial Planner shows a list of possible format to arhive.
+3. User enters the preffered archive format.
+4. Financial Planner archives the record data into Excel file.
+
+*Extension*
+
+* 3a User input wrong directory path that the Excel file will be stored
+** FinancialPlanner throws unsupported format error
+** Use case resumes at step 2.
+
+* 3b User input wrong date format or unreal date.
+** FinancialPlanner throws unsupported format error
+** Use case resumes at step 2.
+
+[discrete]
+=== 16. Use case: Freely edit expenses tags
 
 *MSS*
 

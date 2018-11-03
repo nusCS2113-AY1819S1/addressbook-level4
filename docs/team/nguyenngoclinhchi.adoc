@@ -2,6 +2,7 @@
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
+:stylesheet: gh-pages.css
 
 == PROJECT: FinancialPlanner - Level 4
 

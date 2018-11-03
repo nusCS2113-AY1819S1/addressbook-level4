@@ -366,7 +366,7 @@ public class ExcelUtil {
         writeDataIntoCell(startingRow, SECOND_COLUMN, INCOME_TITLE);
         writeDataIntoCell(startingRow, THIRD_COLUMN, OUTCOME_TITLE);
         writeDataIntoCell(startingRow, FOURTH_COLUMN, TOTAL_MONEY);
-        daySummaryEntryList.sort(SortUtil.compareTimeStampAttribute());
+        daySummaryEntryList.sort(CompareUtil.compareTimeStampAttribute());
         for (SummaryEntry summaryEntry : daySummaryEntryList) {
             Row row = sheet.createRow(++rowNum);
             writeDataIntoCell(row, FIRST_COLUMN,

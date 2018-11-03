@@ -26,7 +26,8 @@ import seedu.planner.ui.SummaryEntry;
  * Export the data of the records within specific period.
  */
 public class ExportExcelCommand extends Command {
-    public static final String COMMAND_WORD = "export_excel";
+    public static final String COMMAND_WORD = "exportexcel";
+    public static final String COMMAND_WORD_UNDERSCORE = "export_excel";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Exports the records within specific period or all records in the Financial Planner into Excel file .\n"
             + "Parameters: START_DATE END_DATE DIRECTORY_PATH,START_DATE should be equal to or smaller than END_DATE.\n"
