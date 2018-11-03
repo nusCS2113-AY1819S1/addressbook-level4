@@ -7,25 +7,35 @@
 
 == Financial Planner Overview
 
-FinancialPlanner is a PC software specially designed for students who love typing. This product helps users better manage their finances.
+FinancialPlanner is a PC software specially designed for students who love typing.
+This purpose of this product is to help users better manage their finances, including their daily spend and income.
 Users are able to record their finances and modify these records, set and modify limits, summarize their financial status and export their records into excel file.
 The product is based on Command Line Interface (CLI), users are able input their commands and related information at the TextBox.
 Graphic User Interface is used for displaying statistic and other information, which will provide user with a clear and direct understanding about their financial status.
+This product is user-friendly, the command can be automatically completed, limits will check automatically and report any exceeded limits' details.
+It is also an effective and helpful product, users are able to find check their records and limits, generate summary for any period of time and export the record
+to excel file to further manage these data and import excel file back.
 
-This project is under the NUS CS2113 module. This module provides students with basic software engineering training.
-A group of four members was formed to develop a production with the base code https://nuscs2113-ay1819s1.github.io/addressbook-level4/[AddressBook Level 4].
-As a group we morph the original product into FinancialPlanner.
+This project is under the NUS CS2113 (Software Engineering & Object-Oriented Programming) module.
+This module provides students with basic knowledge about Object-Oriented Programming and necessary software engineering training.
+Students were asked to form a group with four members and develop a production with the base code https://nuscs2113-ay1819s1.github.io/addressbook-level4/[AddressBook Level 4] provided.
+As a group we decided to morph the original product into FinancialPlanner.
 
 == Summary of contributions
 
-To better develop the product, each group member was assigned a main feature to develop. I made significant contribution to the product.
+To better develop the product, each group member was assigned a main feature to develop. I made significant contribution to the product by constructing the limit functions.
 Detailed information about my contributions is listed below.
 
-=== `completed` *Major enhancement #1*: added the ability to set limits for multiple period of time.
+=== `completed` *Major enhancement #1*: added the ability to set limits for multiple periods of time.
 
-** What it does: allows the user to set multiple limits for different periods of time to better manage their spend. All the limits will be stored and automaticalky check whether the limit has been exceeded. The user will be reminded if limits have been exceeded. This feature is challenging because it requires me to build a storage for limits to store limits' details and read from the storage. 
+** What it does: allows the user to set multiple limits for different periods of time to better manage their spend.
+All the limits will be stored and automatically check whether the limit has been exceeded.
+The user will be reminded if limits have been exceeded.
+** Justification:This feature improves the product significantly because user will be able to make plan for their expense in advance and store all the limits.
+Since user may need to set limits for multiple periods of time while it is hard to remember all the limits they have set
+This will help user better control their spend and keep their limits updated.
+This feature is challenging because it requires me to build a storage for limits to store limits' details and read from the storage.
 Besides that, I also need to keep limits' information updated whenever there is a change of records and generate output if any limit has been exceeded.
-** Justification:This feature improves the product significantly because user will be able to make plan for their expense in advance and store all the limits. This will help user better control their spend and keep their limits updated. 
 ** Highlights: This enhancement is the foundation of all the features below. It affects existing commands, commands to be added in future, and storage. A new xml file will be created to store all the limits. It required an in-depth analysis of design alternatives.
 
 === `completed` *Minor enhancement #1*: added the ability to delete limits.
