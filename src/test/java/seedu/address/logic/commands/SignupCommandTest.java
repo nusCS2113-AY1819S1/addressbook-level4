@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyEventManager;
 import seedu.address.model.event.Event;
 import seedu.address.model.user.User;
@@ -58,6 +59,17 @@ public class SignupCommandTest {
         thrown.expect(CommandException.class);
         thrown.expectMessage(SignupCommand.MESSAGE_EXISTS);
         signupCommand.execute(modelStubAcceptUser, commandHistory);
+    }
+
+    @Test
+    public void execute_failedSignup_alreadyLogged() throws Exception {
+        User user = new UserBuilder().build();
+        ModelStubAcceptUser modelStubAcceptUser = new ModelStubAcceptUser();
+
+        SignupCommand command = new SignupCommand(user);
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(String.format(SignupCommand.MESSAGE_LOGGED, user.getUsername().toString()));
+        command.execute(modelStubAcceptUser, commandHistory);
     }
 
     /**
@@ -179,6 +191,11 @@ public class SignupCommandTest {
         ModelStubAcceptUser(User user) {
             requireNonNull(user);
             this.user = user;
+            isLogged = false;
+        }
+
+        ModelStubAcceptUser() {
+            isLogged = true;
         }
 
         @Override
