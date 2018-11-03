@@ -433,8 +433,9 @@ listener is present in `RecordListPanel` and will update the UI list automatical
 === View breakdown of total income and expense into categories
 ==== Current Implementation
 This feature allows the user to view a pie chart breakdown of all expenses and all income within a date range which the user can specify.
-The feature is facilitated by a few key components of FinancialPlanner, `Logic`, `Model`, `UI`. The corresponding command required for this feature is `stats`.
-For this feature, users have to enter 2 dates, one starting date and one ending date. This execution of this feature can be split into 2 phases, the `Logic phase` and the `UI phase`.
+
+The corresponding command required for this feature is `stats`.For this feature, users have to enter 2 dates, one starting date and one ending date.
+This feature is facilitated by a few key components of FinancialPlanner, `Logic`, `Model`, `UI` and function executions can be split into 2 phases, the `Logic phase` and the `UI phase`.
 The detailed execution sequence of functions used for `Logic phase` are as shown below.
 
 image::StatisticLogicSequenceDiagram.png[width="800"]
@@ -459,6 +460,24 @@ is in the map.
 * If the record is not present, it creates a new `CategoryStatistic` object and adds that to the map. If the record is present, the record is then added to the existing `CategoryStatistic` object.
 * The flow of control returns to StatisticCommand and StatisticCommand calls the read function of CategoryStatisticsList to obtain a read-only list and passes it into
 an event constructor before posting the event `ShowPieChartStatsEvent`.
+
+After the event is posted, the execution proceeds to the `UI phase` where there is a listener in `MainWindow` listening to this event. This is facilitated by
+the event system in FinancialPlanner. The sequence diagram below details the program flow of the functions executed in `UI phase`.
+
+image::StatisticUiSequenceDiagram.png[width="800"]
+
+When the event is caught by the listener in `MainWindow`, `MainWindow` looks through all children of the `MainWindow#mainUiPanelPlaceholder` and executes the hide function in them.
+This will make all children hidden from view in the UI which allows for the panel switching functionality, which replaces the current panel with the desired panel.
+The program flow is then as shown above where the `CategoryBreakdown` is created and instantiated with 2 lists, one being expenseLabelData and other being expenseLegendData.
+In the current implementation, whenever `stats` is called, 2 tabs will be created, one for total income and one for total expense. Thus, the same program sequence after construction for
+`CategoryBreakdown` is also repeated for total income, and the corresponding parameters would be incomeLabelData and incomeLegendData.
+
+[NOTE]
+Note that the CustomLegend class is located within the CustomPieChart class which inherits from the JavaFX PieChart class. This legend class can
+only be accessed within CustomPieChart for security purposes.
+
+The activity flow diagram below details the mechanism behind the creation of the category breakdown ui,
+starting from the point where the function `StatsDisplayPanel#`handleShowPieChartStatsEvent` is called.
 
 === Find records by tag feature
 ==== Current Implementation
