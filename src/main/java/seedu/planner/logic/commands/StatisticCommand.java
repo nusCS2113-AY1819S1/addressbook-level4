@@ -1,6 +1,7 @@
 package seedu.planner.logic.commands;
 
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -23,14 +24,23 @@ public class StatisticCommand extends Command {
 
     public static final String COMMAND_WORD = "stats";
 
-    public static final String MESSAGE_USAGE = "Provides a statistic based on the summary table displayed.";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Provides a pie chart breakdown of data "
+            + "within a certain time period according to the categories."
+            + " A category is defined as any set of tags assigned to a record.\n"
+            + "Parameters: "
+            + PREFIX_DATE + "START_DATE " + "END_DATE\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_DATE + "1-1-2018 " + "12-12-2018";
 
-    public static final String MESSAGE_SUCCESS = "Stats generated!";
+    public static final String MESSAGE_SUCCESS = "Stats generated for data from %s to %s!";
 
     private final Predicate<Record> predicate;
+    private final Date startDate;
+    private final Date endDate;
 
     public StatisticCommand(Date startDate, Date endDate) {
         requireAllNonNull(startDate, endDate);
+        this.startDate = startDate;
+        this.endDate = endDate;
         predicate = new DateIsWithinIntervalPredicate(startDate, endDate);
     }
 
@@ -40,7 +50,7 @@ public class StatisticCommand extends Command {
         List<Record> filteredList = filterRecordListByPredicate(recordList, predicate);
         CategoryStatisticsList categoryStats = new CategoryStatisticsList(filteredList);
         EventsCenter.getInstance().post(new ShowPieChartStatsEvent(categoryStats.getReadOnlyStatsList()));
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, startDate, endDate));
     }
 
     public List<Record> filterRecordListByPredicate(List<Record> recordList, Predicate<Record> predicate) {
