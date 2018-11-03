@@ -1,10 +1,16 @@
 package seedu.address.ui;
 
+import static seedu.address.logic.parser.CliSyntax.FIRST_COMMAND_KEYWORDS;
+import static seedu.address.logic.parser.CliSyntax.SECOND_COMMAND_KEYWORDS;
+
+import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
@@ -36,6 +42,33 @@ public class CommandBox extends UiPart<Region> {
         this.logic = logic;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.TAB) {
+                event.consume();
+                // System.out.println("You pressed TAB!!!");
+
+                String str = commandTextField.getText();
+                String[] commandWords = str.split("\\s+");
+
+                String lastWord = commandWords[commandWords.length - 1];
+
+                List<String> matches;
+                if (commandWords.length == 1) {
+                    matches = FIRST_COMMAND_KEYWORDS.stream()
+                            .filter(words -> words.indexOf(lastWord) == 0).collect(Collectors.toList());
+                } else {
+                    matches = SECOND_COMMAND_KEYWORDS.stream()
+                            .filter(words -> words.indexOf(lastWord) == 0).collect(Collectors.toList());
+                }
+
+                String newWord;
+                if (matches.size() == 1) {
+                    newWord = matches.get(0).replace(lastWord, "");
+                    // System.out.println(newWord);
+                    commandTextField.appendText(newWord);
+                }
+            }
+        });
         historySnapshot = logic.getHistorySnapshot();
     }
 

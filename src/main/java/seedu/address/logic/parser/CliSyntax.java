@@ -1,5 +1,9 @@
 package seedu.address.logic.parser;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
  */
@@ -47,4 +51,24 @@ public class CliSyntax {
     public static final Prefix PREFIX_NOTE_START_DATE = new Prefix("sd/");
     public static final Prefix PREFIX_NOTE_START_TIME = new Prefix("st/");
     public static final Prefix PREFIX_NOTE_TITLE = new Prefix("tt/");
+
+    /* Existing command keywords (first command word)*/
+    public static final List<String> FIRST_COMMAND_KEYWORDS = new ArrayList<>(Arrays.asList(
+            "course",
+            "student",
+            "module",
+            "class",
+            "gradebook",
+            "note"
+    ));
+
+    /* Existing command keywords (second command word and beyond) */
+    public static final List<String> SECOND_COMMAND_KEYWORDS = new ArrayList<>(Arrays.asList(
+            "add",
+            "addstudent",
+            "edit",
+            "delete",
+            "list",
+            "find"
+    ));
 }
