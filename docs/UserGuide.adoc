@@ -110,12 +110,12 @@ Edits the name, quantity and tags of the 1st item to be `Arduino`, `25` and `Lab
 === Deleting an item : `delete`
 
 Deletes an item from the stock list +
-Format: `delete INDEX q/QUANTITY`
+Format: `delete INDEX
 
 Examples:
 
-* `delete 1 q/20` +
-Decreases the quantity of the 1st item by 20
+* `delete 1` +
+Delete the item with index 1
 
 === Listing all items : `list`
 
