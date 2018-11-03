@@ -52,4 +52,16 @@
         <moneyFlow>-4.50</moneyFlow>
         <tagged>Terrace</tagged>
     </records>
+    <records>
+        <name>Payment from friend</name>
+        <date>1-4-2018</date>
+        <moneyFlow>+20.00</moneyFlow>
+        <tagged>friends</tagged>
+    </records>
+    <records>
+        <name>Payment to Bob</name>
+        <date>10-4-2018</date>
+        <moneyFlow>-199.47</moneyFlow>
+        <tagged>friends</tagged>
+    </records>
 </financialplanner>

@@ -2,6 +2,12 @@ package systemtests;
 
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.planner.testutil.TypicalRecords.CHICKENRICE;
+import static seedu.planner.testutil.TypicalRecords.CLASSMATE;
+import static seedu.planner.testutil.TypicalRecords.FRIEND;
+import static seedu.planner.testutil.TypicalRecords.KOREAN;
+import static seedu.planner.testutil.TypicalRecords.MALA;
+import static seedu.planner.testutil.TypicalRecords.WORK;
 
 import java.util.function.Predicate;
 
@@ -63,6 +69,45 @@ public class StatisticCommandSystemTest extends FinancialPlannerSystemTest {
         assertCommandSuccess(command, model, expectedResultMessage);
         assertExpenseBreakdownEmpty();
         assertIncomeBreakdownEmpty();
+
+        /* -------------------------------------------- Adding records ---------------------------------------------- */
+        /* Case: Add 2 records different tags, both expense -> expense filled, income empty */
+        addRecord(model, KOREAN);
+        addRecord(model, MALA);
+        model.updateFilteredRecordList(predicate);
+        expectedStats = new CategoryStatisticsList(model.getFilteredRecordList()).getReadOnlyStatsList();
+        assertCommandSuccess(command, model, expectedResultMessage);
+        assertExpenseBreakdownNotEmpty(expectedStats);
+        assertIncomeBreakdownEmpty();
+
+        clearModel(model);
+
+        /* Case: Add 2 records different tags, both income -> expense empty, income filled */
+        addRecord(model, WORK);
+        addRecord(model, FRIEND);
+        model.updateFilteredRecordList(predicate);
+        expectedStats = new CategoryStatisticsList(model.getFilteredRecordList()).getReadOnlyStatsList();
+        assertCommandSuccess(command, model, expectedResultMessage);
+        assertExpenseBreakdownEmpty();
+        assertIncomeBreakdownNotEmpty(expectedStats);
+
+        undoModel(model);
+
+        /* Case: Add 2 records same tags, income and expense -> both filled */
+        addRecord(model, CLASSMATE);
+        addRecord(model, FRIEND);
+        model.updateFilteredRecordList(predicate);
+        expectedStats = new CategoryStatisticsList(model.getFilteredRecordList()).getReadOnlyStatsList();
+        assertCommandSuccess(command, model, expectedResultMessage);
+        assertExpenseBreakdownNotEmpty(expectedStats);
+        assertIncomeBreakdownNotEmpty(expectedStats);
+
+        /* Case: Add records outside of date range -> nothing happens */
+        addRecord(model, CHICKENRICE);
+        model.updateFilteredRecordList(predicate);
+        assertCommandSuccess(command, model, expectedResultMessage);
+        assertExpenseBreakdownNotEmpty(expectedStats);
+        assertIncomeBreakdownNotEmpty(expectedStats);
     }
 
     /**

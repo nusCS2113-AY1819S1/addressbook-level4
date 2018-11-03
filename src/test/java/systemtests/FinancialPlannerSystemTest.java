@@ -347,7 +347,7 @@ public abstract class FinancialPlannerSystemTest {
             if (label instanceof Label) {
                 assertEquals(((Label) label).getText(), StatsDisplayPanel.BREAKDOWN_ERROR_MESSAGE);
             } else {
-                fail("Wrong node typed assigned to empty CategoryBreakdown");
+                fail("Wrong node type assigned to empty CategoryBreakdown");
             }
         } else {
             fail("Wrong node assigned to " + StatsDisplayPanelHandle.EXPENSE_BREAKDOWN_LABEL);
@@ -359,14 +359,14 @@ public abstract class FinancialPlannerSystemTest {
      */
     protected void assertIncomeCategoryBreakdownEmpty() {
         StatsDisplayPanelHandle statsDisplayPanel = getStatsDisplayPanel();
-        Tab incomeTab = statsDisplayPanel.getChildTab(StatsDisplayPanelHandle.EXPENSE_BREAKDOWN_LABEL);
+        Tab incomeTab = statsDisplayPanel.getChildTab(StatsDisplayPanelHandle.INCOME_BREAKDOWN_LABEL);
         Node node = incomeTab.getContent();
         if (node instanceof AnchorPane) {
             Node label = ((AnchorPane) node).getChildren().get(0);
             if (label instanceof Label) {
                 assertEquals(((Label) label).getText(), StatsDisplayPanel.BREAKDOWN_ERROR_MESSAGE);
             } else {
-                fail("Wrong node typed assigned to empty CategoryBreakdown");
+                fail("Wrong node type assigned to empty CategoryBreakdown");
             }
         } else {
             fail("Wrong node assigned to " + StatsDisplayPanelHandle.INCOME_BREAKDOWN_LABEL);
@@ -449,14 +449,19 @@ public abstract class FinancialPlannerSystemTest {
      * @param model expectedModel to update
      * @param toAdd record to be added
      */
-    protected void addRecord(Model model, Record toAdd) throws Exception {
-        AddCommand addCommand = new AddCommand(toAdd);
-        addCommand.execute(model, null);
-        String command = "   " + AddCommand.COMMAND_WORD + "  " + PREFIX_NAME + toAdd.getName().fullName
-                + " " + PREFIX_DATE + toAdd.getDate().value + " " + PREFIX_MONEYFLOW + toAdd.getMoneyFlow().value;
-        StringBuilder stringBuilder = new StringBuilder(command);
-        for (Tag t : toAdd.getTags()) {
-            stringBuilder.append(" " + PREFIX_TAG + t.tagName);
+    protected void addRecord(Model model, Record toAdd) {
+        StringBuilder stringBuilder = new StringBuilder();
+        try {
+            AddCommand addCommand = new AddCommand(toAdd);
+            addCommand.execute(model, null);
+            String command = "   " + AddCommand.COMMAND_WORD + "  " + PREFIX_NAME + toAdd.getName().fullName
+                    + " " + PREFIX_DATE + toAdd.getDate().value + " " + PREFIX_MONEYFLOW + toAdd.getMoneyFlow().value;
+            stringBuilder.append(command);
+            for (Tag t : toAdd.getTags()) {
+                stringBuilder.append(" " + PREFIX_TAG + t.tagName);
+            }
+        } catch (Exception e) {
+            fail("Add command should not fail.");
         }
         executeCommand(stringBuilder.toString());
     }

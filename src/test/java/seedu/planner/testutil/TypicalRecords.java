@@ -26,6 +26,10 @@ public class TypicalRecords {
             .withMoneyFlow("-5.6").withDate("28-2-2018").withTags("friends").build();
     public static final Record RANDOM = new RecordBuilder().withName("Random income")
             .withMoneyFlow("+14.50").withDate("31-03-2018").build();
+    public static final Record FRIEND = new RecordBuilder().withName("Payment from friend")
+            .withMoneyFlow("+20.00").withDate("1-4-2018").withTags("friends").build();
+    public static final Record CLASSMATE = new RecordBuilder().withName("Payment to Bob")
+            .withMoneyFlow("-199.47").withDate("10-4-2018").withTags("friends").build();
     public static final Record CAIFAN = new RecordBuilder().withName("caifan")
             .withMoneyFlow("-3.80").withDate("26-4-2018").withTags("owesMoney", "friends").build();
     public static final Record WORK = new RecordBuilder().withName("Income from work")
