@@ -33,12 +33,13 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_ALICE = "Alice Pauline";
     public static final String VALID_NAME_AMY = "Amy Bee";
-    public static final String VALID_NAME_BENSON = "Benson Meier";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_NAME_CALVIN = "Calvin Duu";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
+    public static final String VALID_EMAIL_ALICE = "alice@example.com";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
+    public static final String VALID_EMAIL_BENSON = "johnd@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_EMAIL_CALVIN = "calvin@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
@@ -95,11 +96,11 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder()
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withPhone(VALID_PHONE_AMY).withName(VALID_NAME_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withDepartment(VALID_DEPARTMENT_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder()
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withPhone(VALID_PHONE_BOB).withName(VALID_NAME_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withDepartment(VALID_DEPARTMENT_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
