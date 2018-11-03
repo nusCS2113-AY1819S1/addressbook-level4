@@ -28,8 +28,14 @@ public class TypicalRecords {
             .withMoneyFlow("+14.50").withDate("31-03-2018").build();
     public static final Record FRIEND = new RecordBuilder().withName("Payment from friend")
             .withMoneyFlow("+20.00").withDate("1-4-2018").withTags("friends").build();
-    public static final Record CLASSMATE = new RecordBuilder().withName("Payment to Bob")
+    public static final Record CLASSMATE = new RecordBuilder().withName("PaymentToBob")
             .withMoneyFlow("-199.47").withDate("10-4-2018").withTags("friends").build();
+    public static final Record PART_TIME = new RecordBuilder().withName("Parttime")
+            .withMoneyFlow("+250.00").withDate("15-4-2018").build();
+    public static final Record AA = new RecordBuilder().withName("AA")
+            .withMoneyFlow("-235.96").withDate("17-4-2018").withTags("friends").build();
+    public static final Record BB = new RecordBuilder().withName("BB")
+            .withMoneyFlow("-149.18").withDate("23-4-2018").withTags("BBBB").build();
     public static final Record CAIFAN = new RecordBuilder().withName("caifan")
             .withMoneyFlow("-3.80").withDate("26-4-2018").withTags("owesMoney", "friends").build();
     public static final Record WORK = new RecordBuilder().withName("Income from work")

@@ -59,9 +59,26 @@
         <tagged>friends</tagged>
     </records>
     <records>
-        <name>Payment to Bob</name>
+        <name>PaymentToBob</name>
         <date>10-4-2018</date>
         <moneyFlow>-199.47</moneyFlow>
         <tagged>friends</tagged>
+    </records>
+    <records>
+        <name>Parttime</name>
+        <date>15-4-2018</date>
+        <moneyFlow>-250.00</moneyFlow>
+    </records>
+    <records>
+        <name>AA</name>
+        <date>17-4-2018</date>
+        <moneyFlow>-235.96</moneyFlow>
+        <tagged>friends</tagged>
+    </records>
+    <records>
+        <name>BB</name>
+        <date>23-4-2018</date>
+        <moneyFlow>-149.18</moneyFlow>
+        <tagged>BBBB</tagged>
     </records>
 </financialplanner>

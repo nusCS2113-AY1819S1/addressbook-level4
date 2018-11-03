@@ -460,10 +460,10 @@ public abstract class FinancialPlannerSystemTest {
             for (Tag t : toAdd.getTags()) {
                 stringBuilder.append(" " + PREFIX_TAG + t.tagName);
             }
+            executeCommand(stringBuilder.toString());
         } catch (Exception e) {
             fail("Add command should not fail.");
         }
-        executeCommand(stringBuilder.toString());
     }
 
     /**
@@ -512,11 +512,16 @@ public abstract class FinancialPlannerSystemTest {
      * Deletes record at the given index using the ui and updates the model
      * @param model expectedModel to update
      */
-    protected void deleteRecord(Model model, int indexToDelete) throws Exception {
-        DeleteCommand deleteCommand = new DeleteCommand(Index.fromOneBased(indexToDelete));
-        deleteCommand.execute(model, null);
-        String command = "   " + DeleteCommand.COMMAND_WORD + " " + indexToDelete;
-        executeCommand(command);
+    protected void deleteRecord(Model model, int indexToDelete) {
+        String command;
+        try {
+            DeleteCommand deleteCommand = new DeleteCommand(Index.fromOneBased(indexToDelete));
+            deleteCommand.execute(model, null);
+            command = "   " + DeleteCommand.COMMAND_WORD + " " + indexToDelete;
+            executeCommand(command);
+        } catch (Exception e) {
+            fail("DeleteCommand should not fail");
+        }
     }
 
     /**

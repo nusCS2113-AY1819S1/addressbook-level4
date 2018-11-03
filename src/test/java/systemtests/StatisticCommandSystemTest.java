@@ -2,12 +2,15 @@ package systemtests;
 
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.planner.testutil.TypicalRecords.AA;
+import static seedu.planner.testutil.TypicalRecords.BB;
 import static seedu.planner.testutil.TypicalRecords.CHICKENRICE;
 import static seedu.planner.testutil.TypicalRecords.CLASSMATE;
 import static seedu.planner.testutil.TypicalRecords.FRIEND;
 import static seedu.planner.testutil.TypicalRecords.KOREAN;
 import static seedu.planner.testutil.TypicalRecords.MALA;
-import static seedu.planner.testutil.TypicalRecords.WORK;
+import static seedu.planner.testutil.TypicalRecords.PART_TIME;
+import static seedu.planner.testutil.TypicalRecords.ZT;
 
 import java.util.function.Predicate;
 
@@ -83,7 +86,7 @@ public class StatisticCommandSystemTest extends FinancialPlannerSystemTest {
         clearModel(model);
 
         /* Case: Add 2 records different tags, both income -> expense empty, income filled */
-        addRecord(model, WORK);
+        addRecord(model, PART_TIME);
         addRecord(model, FRIEND);
         model.updateFilteredRecordList(predicate);
         expectedStats = new CategoryStatisticsList(model.getFilteredRecordList()).getReadOnlyStatsList();
@@ -108,6 +111,40 @@ public class StatisticCommandSystemTest extends FinancialPlannerSystemTest {
         assertCommandSuccess(command, model, expectedResultMessage);
         assertExpenseBreakdownNotEmpty(expectedStats);
         assertIncomeBreakdownNotEmpty(expectedStats);
+
+        /* -------------------------------------------- Removing records -------------------------------------------- */
+        /* Case: Add record outside of date range -> nothing happens */
+        findRecord(model, CHICKENRICE);
+        model.updateFilteredRecordList(predicate);
+        assertCommandSuccess(command, model, expectedResultMessage);
+        assertExpenseBreakdownNotEmpty(expectedStats);
+        assertIncomeBreakdownNotEmpty(expectedStats);
+
+        /* Case: Delete record unique tag -> list reduces by 1 */
+        findRecord(model, PART_TIME);
+        deleteRecord(model, 1);
+        model.updateFilteredRecordList(predicate);
+        expectedStats = new CategoryStatisticsList(model.getFilteredRecordList()).getReadOnlyStatsList();
+        assertCommandSuccess(command, model, expectedResultMessage);
+        assertExpenseBreakdownNotEmpty(expectedStats);
+        assertIncomeBreakdownNotEmpty(expectedStats);
+
+        addRecord(model, ZT);
+        addRecord(model, AA);
+        addRecord(model, BB);
+
+        /* Case: Delete record with expense and overlapping tag -> same number of slices */
+        findRecord(model, CLASSMATE);
+        deleteRecord(model, 1);
+        model.updateFilteredRecordList(predicate);
+        expectedStats = new CategoryStatisticsList(model.getFilteredRecordList()).getReadOnlyStatsList();
+        assertCommandSuccess(command, model, expectedResultMessage);
+        assertExpenseBreakdownNotEmpty(expectedStats);
+        assertIncomeBreakdownNotEmpty(expectedStats);
+
+        undoModel(model);
+
+        /* Case: Edit tag of existing record with expense to existing tag -> number of slices reduced by 1 */
     }
 
     /**
