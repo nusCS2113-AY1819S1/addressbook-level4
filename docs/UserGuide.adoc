@@ -359,7 +359,7 @@ Adds a student of the admission number A6942069M to the class T16 of module CG11
 
 ==== Unassigning Student From Class : `class delstudent`
 Unassigns a student from the class in the system. +
-Format: `class delstudent c/CLASS_NAME i/ADMISSION_NO`
+Format: `class delstudent cn/CLASS_NAME mc/MODULE_CODE i/MATRIC_NO`
 
 ****
 * Student must exist in the system
