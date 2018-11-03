@@ -56,14 +56,11 @@ public class NoteDate {
 
     /**
      * Returns true if the input date is valid.
-     * A valid date should follow the pre-defined date formats
-     * or an empty string.
+     * A valid date should follow the pre-defined date formats.
      */
     public static boolean isValidDate(String date) {
         requireNonNull(date);
-        if (date.isEmpty()) {
-            return true;
-        }
+
         int index = findMatchingDateFormat(date);
         return (index != -1);
     }
