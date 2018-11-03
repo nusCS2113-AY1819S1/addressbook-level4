@@ -20,11 +20,18 @@ public class EditLimitCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edit an existing limit according to the dates. "
             + "Parameters: "
             + PREFIX_DATE + "DATE_START " + "DATE_END "
-            + PREFIX_MONEYFLOW + "NEW_LIMIT_MONEY \n"
+            + PREFIX_MONEYFLOW + "NEW_LIMIT_MONEY "
+            + "(Parameters: "
+            + PREFIX_DATE + "DATE "
+            + PREFIX_MONEYFLOW + "NEW_LIMIT_MONEY) \n"
 
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DATE + "18-9-2018 " + "20-9-2018 "
-            + PREFIX_MONEYFLOW + "200";
+            + PREFIX_MONEYFLOW + "200 "
+            + "(" + COMMAND_WORD + " "
+            + PREFIX_DATE + "18-9-2018 "
+            + PREFIX_MONEYFLOW + "200)";
+
 
     public static final String MESSAGE_SUCCESS = "The limit has been edited. \n";
     public static final String MESSAGE_LIMITS_DO_NOT_EXIST = "There is no limit for that period of date";

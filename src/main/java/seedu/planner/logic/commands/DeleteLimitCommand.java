@@ -18,11 +18,14 @@ public class DeleteLimitCommand extends Command {
     public static final String COMMAND_WORD_UNDERSCORE = "delete_limit";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": delete certain limit according to the dates. "
             + "Parameters: "
-            + PREFIX_DATE + "DATE_START " + "DATE_END " + "\n"
+            + PREFIX_DATE + "DATE_START " + "DATE_END "
+            + "(Parameters: "
+            + PREFIX_DATE + "DATE) "+ "\n"
 
             + "Example: " + COMMAND_WORD + " "
-
-            + PREFIX_DATE + "18-9-2018 " + "20-9-2018 ";
+            + PREFIX_DATE + "18-9-2018 " + "20-9-2018 "
+            + "(Example: " + COMMAND_WORD + " "
+            + PREFIX_DATE + "20-9-2018) \n";
 
 
     public static final String MESSAGE_SUCCESS = "The limit has been deleted. ";

@@ -18,7 +18,7 @@ import seedu.planner.model.record.Limit;
 public class AddLimitCommand extends Command {
     public static final String COMMAND_WORD = "addlimit";
     public static final String COMMAND_WORD_UNDERSCORE = "add_limit";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Set a limit for a period of time. or a single day"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Set a limit for a period of time. or a single day. "
 
             + "Parameters: "
             + PREFIX_DATE + "DATE_START " + "DATE_END "
