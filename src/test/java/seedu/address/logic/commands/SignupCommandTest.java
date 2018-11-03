@@ -14,7 +14,6 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyEventManager;
 import seedu.address.model.event.Event;
 import seedu.address.model.user.User;
