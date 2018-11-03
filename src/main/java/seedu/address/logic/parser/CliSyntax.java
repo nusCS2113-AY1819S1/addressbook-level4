@@ -52,23 +52,33 @@ public class CliSyntax {
     public static final Prefix PREFIX_NOTE_START_TIME = new Prefix("st/");
     public static final Prefix PREFIX_NOTE_TITLE = new Prefix("tt/");
 
-    /* Existing command keywords (first command word)*/
+    /* Current existing command keywords (first command word)*/
     public static final List<String> FIRST_COMMAND_KEYWORDS = new ArrayList<>(Arrays.asList(
-            "course",
-            "student",
-            "module",
             "class",
+            "course",
+            "grade",
             "gradebook",
-            "note"
+            "module",
+            "note",
+            "student"
     ));
 
-    /* Existing command keywords (second command word and beyond) */
+    /* Current existing command keywords (second command word and beyond) */
     public static final List<String> SECOND_COMMAND_KEYWORDS = new ArrayList<>(Arrays.asList(
             "add",
             "addstudent",
-            "edit",
             "delete",
+            "delstudent",
+            "edit",
+            "enrol",
+            "export",
+            "find",
+            "graph",
             "list",
-            "find"
+            "listattendance",
+            "liststudents",
+            "markattendance",
+            "modattendance",
+            "view"
     ));
 }

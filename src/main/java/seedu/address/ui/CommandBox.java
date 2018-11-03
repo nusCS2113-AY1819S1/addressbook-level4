@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.SECOND_COMMAND_KEYWORDS;
 
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
@@ -30,6 +32,11 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
 
+    private static final Pattern LAST_WORD_REGEX = Pattern.compile("(?<lastWord>\\S+\\s*$)");
+    private static KeyCode previousKeyPressed;
+    private static String lastWord;
+    private static int index;
+
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
     private ListElementPointer historySnapshot;
@@ -45,29 +52,47 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.TAB) {
                 event.consume();
-                // System.out.println("You pressed TAB!!!");
 
-                String str = commandTextField.getText();
-                String[] commandWords = str.split("\\s+");
+                if (!commandTextField.getText().trim().isEmpty()) {
+                    String str = commandTextField.getText();
+                    String[] commandWords = str.trim().split("\\s+");
 
-                String lastWord = commandWords[commandWords.length - 1];
+                    if (previousKeyPressed != KeyCode.TAB && commandWords.length <= 2) {
+                        Matcher matcher = LAST_WORD_REGEX.matcher(str);
+                        if (matcher.find()) {
+                            lastWord = matcher.group("lastWord");
+                        }
+                    }
 
-                List<String> matches;
-                if (commandWords.length == 1) {
-                    matches = FIRST_COMMAND_KEYWORDS.stream()
-                            .filter(words -> words.indexOf(lastWord) == 0).collect(Collectors.toList());
-                } else {
-                    matches = SECOND_COMMAND_KEYWORDS.stream()
-                            .filter(words -> words.indexOf(lastWord) == 0).collect(Collectors.toList());
-                }
+                    List<String> matches = null;
+                    if (commandWords.length == 1) {
+                        matches = FIRST_COMMAND_KEYWORDS.stream()
+                                .filter(words -> words.indexOf(lastWord) == 0).collect(Collectors.toList());
+                    } else if (commandWords.length == 2) {
+                        matches = SECOND_COMMAND_KEYWORDS.stream()
+                                .filter(words -> words.indexOf(lastWord) == 0).collect(Collectors.toList());
+                    }
 
-                String newWord;
-                if (matches.size() == 1) {
-                    newWord = matches.get(0).replace(lastWord, "");
-                    // System.out.println(newWord);
-                    commandTextField.appendText(newWord);
+                    String wordToAppend;
+                    if (matches != null && matches.size() >= 1) {
+                        if (previousKeyPressed == KeyCode.TAB && !lastWord.isEmpty()) {
+                            index = (index + 1) % matches.size();
+                            wordToAppend = matches.get(index).replace(lastWord, "");
+                            commandTextField.setText(
+                                    commandTextField
+                                            .getText()
+                                            .substring(0, commandTextField
+                                                    .getText()
+                                                    .lastIndexOf(lastWord) + lastWord.length()));
+                        } else {
+                            index = 0;
+                            wordToAppend = matches.get(index).replace(lastWord, "");
+                        }
+                        commandTextField.appendText(wordToAppend);
+                    }
                 }
             }
+            previousKeyPressed = event.getCode();
         });
         historySnapshot = logic.getHistorySnapshot();
     }
