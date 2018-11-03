@@ -10,19 +10,19 @@ import java.util.function.Predicate;
 public class EventContainsAttendeeAndDatePredicate implements Predicate<Event> {
     public static final String DATE_VALIDATION_REGEX = "^(\\d{4})-(0[1-9]|1[012])$";
 
-    private final String personName;
+    private final String personEmail;
     private final String inputDate;
     private final TimeType type;
 
-    public EventContainsAttendeeAndDatePredicate(String personName, String inputDate, TimeType type) {
-        this.personName = personName;
+    public EventContainsAttendeeAndDatePredicate(String personEmail, String inputDate, TimeType type) {
+        this.personEmail = personEmail;
         this.inputDate = inputDate;
         this.type = type;
     }
 
     @Override
     public boolean test(Event event) {
-        boolean eventHasAttendee = event.hasAttendee(personName);
+        boolean eventHasAttendee = event.hasAttendee(personEmail);
         boolean eventMatchesDate;
 
         String eventDate = event.getDate().eventDate;
@@ -53,7 +53,7 @@ public class EventContainsAttendeeAndDatePredicate implements Predicate<Event> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EventContainsAttendeeAndDatePredicate // instanceof handles nulls
-                && personName.equals(((EventContainsAttendeeAndDatePredicate) other).personName) // state check
+                && personEmail.equals(((EventContainsAttendeeAndDatePredicate) other).personEmail) // state check
                 && inputDate.equals(((EventContainsAttendeeAndDatePredicate) other).inputDate))
                 && type.equals(((EventContainsAttendeeAndDatePredicate) other).type);
     }

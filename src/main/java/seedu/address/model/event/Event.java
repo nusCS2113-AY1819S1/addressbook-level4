@@ -130,8 +130,10 @@ public class Event implements Comparable<Event> {
                 && otherEvent.getLocation().equals(getLocation())
                 && otherEvent.getStartTime().equals(getStartTime())
                 && otherEvent.getEndTime().equals(getEndTime())
-                && otherEvent.getDate().equals(getDate());
+                && otherEvent.getDate().equals(getDate())
+                && otherEvent.getAttendees().equals(getAttendees());
     }
+
 
     @Override
     public int hashCode() {
@@ -157,47 +159,45 @@ public class Event implements Comparable<Event> {
                 .append(getStartTime())
                 .append("\n")
                 .append(MESSAGE_END_TIME)
-                .append(getEndTime())
-                .append("\n")
-                .append(attendees.toString());
+                .append(getEndTime());
         return builder.toString();
     }
 
     /**
-     * Add new name to an event attendees list.
+     * Create a new event with the new email added to the current attendees list.
      *
-     * @param personName The person's name to be removed from the attendees list.
-     * @return An updated event with the person's name in the attendees list.
+     * @param personEmail The person's email to be removed from the attendees list.
+     * @return An updated event with the person's email removed from the original attendees list.
      */
-    public Event addPersonToAttendee(String personName) {
-        assert personName != null;
-        assert !attendees.hasName(personName);
-        Attendees updatedAttendee = attendees.addName(personName);
+    public Event createEventWithUpdatedAttendee(String personEmail) {
+        assert personEmail != null;
+        assert !attendees.hasPerson(personEmail);
+        Attendees updatedAttendee = attendees.createAttendeesWithAddedEmail(personEmail);
         return new Event(eventName, description, date, startTime, endTime, location, updatedAttendee);
     }
 
 
     /**
-     * Remove existing name from an event attendees list.
+     * Create a new event with an existing email removed from the current attendees list.
      *
-     * @param personName The person's name to be removed from the attendees list.
-     * @return An updated event with the person's name removed in the attendees list.
+     * @param personEmail The person's email to be removed from the attendees list.
+     * @return An updated event with the person's email removed from the attendees list.
      */
-    public Event removePersonFromAttendee(String personName) {
-        assert personName != null;
-        assert attendees.hasName(personName);
-        Attendees updatedAttendee = attendees.removeName(personName);
+    public Event removePersonFromAttendee(String personEmail) {
+        assert personEmail != null;
+        assert attendees.hasPerson(personEmail);
+        Attendees updatedAttendee = attendees.createAttendeesWithRemovedEmail(personEmail);
         return new Event(eventName, description, date, startTime, endTime, location, updatedAttendee);
     }
 
     /**
-     * Check if personName is in attendees of Event.
+     * Check if personEmail is in attendees of Event.
      *
-     * @param personName The person's name to be checked from the attendees list.
+     * @param personEmail The person's email to be checked from the attendees list.
      */
-    public boolean hasAttendee(String personName) {
-        assert personName != null;
-        return attendees.hasName(personName);
+    public boolean hasAttendee(String personEmail) {
+        assert personEmail != null;
+        return attendees.hasPerson(personEmail);
     }
 
     /**
@@ -205,6 +205,39 @@ public class Event implements Comparable<Event> {
      */
     public boolean isAttendeeEmpty() {
         return attendees.isSetEmpty();
+    }
+
+    /**
+     * Returns true if both event clashes
+     */
+    public boolean hasClash(Event event) {
+        if (!event.date.equals(this.date)) {
+            return false;
+        }
+
+        StartTime startTime1;
+        StartTime startTime2;
+        EndTime endTime1;
+        EndTime endTime2;
+
+        // Let suffix 1 be the time of event with earlier start time, and suffix 2 be the latter.
+        if (event.startTime.compareTo(this.startTime) <= 0) {
+            startTime1 = event.startTime;
+            endTime1 = event.endTime;
+            startTime2 = this.startTime;
+            endTime2 = this.endTime;
+        } else {
+            startTime1 = this.startTime;
+            endTime1 = this.endTime;
+            startTime2 = event.startTime;
+            endTime2 = event.endTime;
+        }
+
+        // Two sufficient conditions to prove overlap of intervals
+        boolean event1BeginsEarlierOrSame = startTime1.compareTo(endTime2) <= 0;
+        boolean event2BeginsBeforeEvent1Ends = startTime2.compareTo(endTime1) < 0;
+
+        return event1BeginsEarlierOrSame && event2BeginsBeforeEvent1Ends;
     }
 
 

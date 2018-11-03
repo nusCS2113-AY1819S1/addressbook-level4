@@ -50,8 +50,8 @@ public class EventCard extends UiPart<Region> {
         description.setText(event.getDescription().value);
         eventLocation.setText(String.format("Location: %s", event.getLocation().value));
         eventDate.setText(String.format("Date: %s", event.getDate().eventDate));
-        startTime.setText(String.format("Start time: %s", event.getStartTime().startTime));
-        endTime.setText(String.format("End time: %s", event.getEndTime().endTime));
+        startTime.setText(String.format("Start time: %s", event.getStartTime().time));
+        endTime.setText(String.format("End time: %s", event.getEndTime().time));
     }
 
     @Override

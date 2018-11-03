@@ -28,22 +28,22 @@ public class SampleEventUtil {
         Set<String> attendeesTwo = new HashSet<>();
         Set<String> attendeesThree = new HashSet<>();
         Set<String> attendeesFour = new HashSet<>();
-        attendeesOne.add("Alex Yeoh");
-        attendeesOne.add("Bernice Yu");
-        attendeesOne.add("Charlotte Oliveiro");
-        attendeesTwo.add("Alex Yeoh");
-        attendeesTwo.add("David Li");
-        attendeesTwo.add("Irfan Ibrahim");
-        attendeesTwo.add("Roy Balakrishnan");
-        attendeesTwo.add("Bernice Yu");
-        attendeesThree.add("Alex Yeoh");
-        attendeesThree.add("Roy Balakrishnan");
-        attendeesThree.add("Bernice Yu");
-        attendeesFour.add("Charlotte Oliveiro");
-        attendeesFour.add("David Li");
-        attendeesFour.add("Irfan Ibrahim");
-        attendeesFour.add("Alex Yeoh");
-        attendeesFour.add("Roy Balakrishnan");
+        attendeesOne.add("alexyeoh@example.com");
+        attendeesOne.add("berniceyu@example.com");
+        attendeesOne.add("charlotte@example.com");
+        attendeesTwo.add("alexyeoh@example.com");
+        attendeesTwo.add("lidavid@example.com");
+        attendeesTwo.add("irfan@example.com");
+        attendeesTwo.add("royb@example.com");
+        attendeesTwo.add("berniceyu@example.com");
+        attendeesThree.add("alexyeoh@example.com");
+        attendeesThree.add("royb@example.com");
+        attendeesThree.add("berniceyu@example.com");
+        attendeesFour.add("charlotte@example.com");
+        attendeesFour.add("lidavid@example.com");
+        attendeesFour.add("irfan@example.com");
+        attendeesFour.add("alexyeoh@example.com");
+        attendeesFour.add("royb@example.com");
 
         return new Event[]{
             new Event(new EventName("Monthly Team Meeting"), new Description("Review monthly progress"),

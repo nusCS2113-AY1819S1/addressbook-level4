@@ -10,11 +10,11 @@
         <tagged>friends</tagged>
     </persons>
 
-    <!-- Person with same identity as Alice Pauline -->
+    <!-- Person with same email as Alice Pauline -->
     <persons>
-        <name>Alice Pauline</name>
+        <name>Christopher Nolan</name>
         <phone>94351253</phone>
-        <email>pauline@example.com</email>
+        <email>alice@example.com</email>
         <address>4th street</address>
         <department>Finance</department>
     </persons>
