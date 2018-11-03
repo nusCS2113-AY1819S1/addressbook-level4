@@ -16,19 +16,28 @@ import seedu.planner.model.record.Limit;
 * */
 public class LimitCommand extends Command {
     public static final String COMMAND_WORD = "limit";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Check the limit for a period of time. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Set a limit for a period of time or a single day. "
             + "Parameters: "
             + PREFIX_DATE + "DATE_START " + "DATE_END "
-            + PREFIX_MONEYFLOW + "LIMIT_MONEY " + "\n"
+            + PREFIX_MONEYFLOW + "LIMIT_MONEY "
+            + "(Parameters: "
+            + PREFIX_DATE + "DATE_START "
+            + PREFIX_MONEYFLOW + "LIMIT_MONEY) " + "\n"
 
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DATE + "18-9-2018 " + "20-9-2018 "
-            + PREFIX_MONEYFLOW + "100 ";
+            + PREFIX_MONEYFLOW + "100 ("
+            + COMMAND_WORD + " "
+            + PREFIX_DATE + "18-9-2018 "
+            + PREFIX_MONEYFLOW + "100) \n";
 
-    public static final String MESSAGE_BASIC_SPEND = "Date Period: %s -- %s.\nThe limit you have set: %.2f \n"
+    public static final String MESSAGE_SINGLE_DATE = "Date: %s\n";
+    public static final String MESSAGE_DOUBLE_DATE = "Date period: %s -- %s\n";
+    public static final String MESSAGE_BASIC_SPEND = "The limit you have set: %.2f \n"
             + "Your spend during the limit period: %.2f\n";
 
-    public static final String MESSAGE_BASIC_EARNED = "Date Period: %s -- %s.\nThe limit you have set: %.2f \n"
+    public static final String MESSAGE_BASIC_EARNED = "The limit you have set: %.2f \n"
             + "Your income during the limit period: %.2f\n";
     public static final String MESSAGE_EXCEED = "Your spend exceeded the limit !!! \n";
     public static final String MESSAGE_NOT_EXCEED = "Your spend did not exceed the limit ^o^\n";
