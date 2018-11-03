@@ -34,7 +34,7 @@ public class StockCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Stocks the book identified "
             + "by the index number used in the displayed book list. "
-            + "Existing values will be overwritten by the input values.\n"
+            + "Existing values will be added by the input values.\n"
             + "Parameters: INDEX(must be a positive integer) "
             + "[" + PREFIX_QUANTITY + "QUANTITY] OR "
             + PREFIX_ISBN + "ISBN13 " + "[" + PREFIX_QUANTITY + "QUANTITY]\n"
@@ -157,8 +157,8 @@ public class StockCommand extends Command {
         /**
          * Returns true if at least one field is stocked.
          */
-        public boolean isAnyFieldStocked() {
-            return CollectionUtil.isAnyNonNull(name, isbn, price, quantity, tags);
+        public boolean isQuantityFieldStocked() {
+            return CollectionUtil.isAnyNonNull(quantity);
         }
 
         public void setName(Name name) {
