@@ -24,21 +24,26 @@ public class SortTaskCommandTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), getTypicalTodoList(), getTypicalExpenditureTracker(), new UserPrefs());
-        expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalTodoList(), getTypicalExpenditureTracker(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), getTypicalTodoList(), getTypicalExpenditureTracker(),
+                new UserPrefs());
+        expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalTodoList(), getTypicalExpenditureTracker(),
+                new UserPrefs());
     }
 
     @Test
     public void execute_sort_showsDeadlineSuccess() {
-        assertCommandSuccess(new SortTaskCommand("date"), model, commandHistory, SortTaskCommand.MESSAGE_SUCCESS_DATE, expectedModel);
+        assertCommandSuccess(new SortTaskCommand("date"), model, commandHistory,
+                SortTaskCommand.MESSAGE_SUCCESS_DATE, expectedModel);
     }
 
     @Test
     public void execute_sort_showsPrioritySuccess() {
-        assertCommandSuccess(new SortTaskCommand("priority"), model, commandHistory, SortTaskCommand.MESSAGE_SUCCESS_PRIORITY, expectedModel);
+        assertCommandSuccess(new SortTaskCommand("priority"), model, commandHistory,
+                SortTaskCommand.MESSAGE_SUCCESS_PRIORITY, expectedModel);
     }
     @Test
     public void execute_sort_showsModuleSuccess() {
-        assertCommandSuccess(new SortTaskCommand("module"), model, commandHistory, SortTaskCommand.MESSAGE_SUCCESS_MODULE, expectedModel);
+        assertCommandSuccess(new SortTaskCommand("module"), model, commandHistory,
+                SortTaskCommand.MESSAGE_SUCCESS_MODULE, expectedModel);
     }
 }

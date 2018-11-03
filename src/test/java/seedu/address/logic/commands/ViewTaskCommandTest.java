@@ -24,17 +24,21 @@ public class ViewTaskCommandTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), getTypicalTodoList(), getTypicalExpenditureTracker(), new UserPrefs());
-        expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalTodoList(), getTypicalExpenditureTracker(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), getTypicalTodoList(), getTypicalExpenditureTracker(),
+                new UserPrefs());
+        expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalTodoList(), getTypicalExpenditureTracker(),
+                new UserPrefs());
     }
 
     @Test
-    public void execute_view_showsCompletedSuccess() {
+    public void executeViewShowsCompletedSuccess() {
 
-        assertCommandSuccess(new ViewTaskCommand("completed"), model, commandHistory, ViewTaskCommand.MESSAGE_SUCCESS_COMPLETED, expectedModel);
+        assertCommandSuccess(new ViewTaskCommand("completed"), model, commandHistory,
+                ViewTaskCommand.MESSAGE_SUCCESS_COMPLETED, expectedModel);
     }
     @Test
-    public void execute_view_shows_UncompletedSuccess() {
-        assertCommandSuccess(new ViewTaskCommand("uncompleted"),model,commandHistory,ViewTaskCommand.MESSAGE_SUCCESS_UNCOMPLETED,expectedModel);
+    public void executeViewShowsUncompletedSuccess() {
+        assertCommandSuccess(new ViewTaskCommand("uncompleted"), model, commandHistory,
+                ViewTaskCommand.MESSAGE_SUCCESS_UNCOMPLETED, expectedModel);
     }
 }
