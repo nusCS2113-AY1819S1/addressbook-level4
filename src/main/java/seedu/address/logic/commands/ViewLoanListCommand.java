@@ -6,6 +6,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import seedu.address.MainApp;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -23,11 +24,10 @@ public class ViewLoanListCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        File loanListFile = new File("C:/Users/ckinw/OneDrive/Documents/JalilEnterprisesCKW/data/LoanList.xml");
-        if (!loanListFile.exists()) {
+        if (!MainApp.getLoanListFile().exists()) {
             throw new CommandException(MESSAGE_EMPTY);
         }
-        String messageOutput = getMessageOutput(loanListFile);
+        String messageOutput = getMessageOutput(MainApp.getLoanListFile());
         return new CommandResult(messageOutput);
     }
 

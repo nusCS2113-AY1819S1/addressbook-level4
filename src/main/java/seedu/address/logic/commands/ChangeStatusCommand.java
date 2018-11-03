@@ -26,13 +26,14 @@ import seedu.address.model.item.Status;
 public class ChangeStatusCommand extends Command {
     public static final String COMMAND_WORD = "changeStatus";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the status of the item identified "
-            + "by the name of the item. "
+            + "by the name of the item.\n"
             + "Parameters: "
-            + PREFIX_NAME + "NAME  "
+            + PREFIX_NAME + "NAME "
             + PREFIX_QUANTITY + "QUANTITY "
             + PREFIX_ORIGINAL_STATUS + "ORIGINAL STATUS "
-            + PREFIX_NEW_STATUS + "NEW STATUS "
+            + PREFIX_NEW_STATUS + "NEW STATUS \n"
             + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "Arduino "
             + PREFIX_QUANTITY + "5 "
             + PREFIX_ORIGINAL_STATUS + "Ready "
             + PREFIX_NEW_STATUS + "Faulty";
@@ -128,7 +129,7 @@ public class ChangeStatusCommand extends Command {
         updatedStatus = new Status(updatedReady, updatedOnLoan, updatedFaulty);
 
         return new Item(itemToUpdate.getName(), itemToUpdate.getQuantity(), itemToUpdate.getMinQuantity(),
-                updatedStatus, itemToUpdate.getTags());
+                itemToUpdate.getLoststatus(), updatedStatus, itemToUpdate.getTags());
     }
     /**
      * Stores the details to update the item with.
