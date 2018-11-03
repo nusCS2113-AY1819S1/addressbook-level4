@@ -8,11 +8,11 @@
 
 :root{
 --maincolor:#FFFFFF;
---primarycolor:#2196F3; /* Blue 500 */
+--primarycolor:#E91E63; /* Pink 500 */
 --secondarycolor:#ba3925;
 --tertiarycolor: #186d7a;
---sidebarbackground:#0D47A1; /* Blue 900 */
---linkcolor:#90CAF9; /* Blue 200 */
+--sidebarbackground:#880E4F; /* Pink 900 */
+--linkcolor:#F48FB1; /* Pink 200 */
 --linkcoloralternate:#f44336;
 --white:#FFFFFF;
 --black:#000000;

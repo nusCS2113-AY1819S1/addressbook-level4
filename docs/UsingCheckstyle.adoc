@@ -2,6 +2,7 @@
 :site-section: DeveloperGuide
 :imagesDir: images
 :stylesDir: stylesheets
+:stylesheet: gh-pages.css
 :experimental:
 ifdef::env-github[]
 :tip-caption: :bulb:
