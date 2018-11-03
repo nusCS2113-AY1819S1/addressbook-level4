@@ -23,8 +23,6 @@ import seedu.recruit.model.commons.Email;
 import seedu.recruit.model.commons.Phone;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
-import seedu.recruit.model.joboffer.JobOffer;
-import seedu.recruit.model.joboffer.UniqueJobList;
 
 /**
  * Edits the details of an existing company in the company book.
@@ -101,28 +99,8 @@ public class EditCompanyCommand extends Command {
         Phone updatedPhone = editCompanyDescriptor.getPhone().orElse(companyToEdit.getPhone());
         Email updatedEmail = editCompanyDescriptor.getEmail().orElse(companyToEdit.getEmail());
         Address updatedAddress = editCompanyDescriptor.getAddress().orElse(companyToEdit.getAddress());
-        UniqueJobList updatedJobList = cascadeToJobOfferList(updatedName, companyToEdit);
 
-        return new Company(updatedName, updatedAddress, updatedEmail, updatedPhone, updatedJobList);
-    }
-
-    /**
-     * Creates and returns a {@code UniqueJobList} with cascaded names if the company name of the job offers
-     * in the list has been updated.
-     */
-    private static UniqueJobList cascadeToJobOfferList (CompanyName updatedName, Company companyToEdit) {
-        if (updatedName == companyToEdit.getCompanyName()) {
-            return companyToEdit.getUniqueJobList();
-        } else {
-            UniqueJobList updatedJobList = new UniqueJobList();
-
-            for (JobOffer offer : companyToEdit.getUniqueJobList()) {
-                JobOffer updatedOffer = new JobOffer(updatedName, offer.getJob(), offer.getGender(),
-                        offer.getAgeRange(), offer.getEducation(), offer.getSalary(), offer.getUniqueCandidateList());
-                updatedJobList.add(updatedOffer);
-            }
-            return updatedJobList;
-        }
+        return new Company(updatedName, updatedAddress, updatedEmail, updatedPhone);
     }
 
     @Override

@@ -1,9 +1,6 @@
 package seedu.recruit.storage;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -13,8 +10,6 @@ import seedu.recruit.model.commons.Email;
 import seedu.recruit.model.commons.Phone;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
-import seedu.recruit.model.joboffer.JobOffer;
-import seedu.recruit.model.joboffer.UniqueJobList;
 
 /**
  * JAXB-friendly version of the Company.
@@ -32,8 +27,6 @@ public class XmlAdaptedCompany {
     private String email;
     @XmlElement(required = true)
     private String phone;
-    @XmlElement(required = true)
-    private List<XmlAdaptedJobOffer> jobList;
 
     /**
      * Constructs an XmlAdaptedCompany.
@@ -45,14 +38,11 @@ public class XmlAdaptedCompany {
      * Constructs an {@code XmlAdaptedCompany} with the given job offer details.
      */
 
-    public XmlAdaptedCompany(String companyName, String address, String email, String phone,
-                             List<XmlAdaptedJobOffer> jobList) {
+    public XmlAdaptedCompany(String companyName, String address, String email, String phone) {
         this.companyName = companyName;
         this.address = address;
         this.email = email;
         this.phone = phone;
-        this.jobList = jobList;
-
     }
 
     /**
@@ -66,8 +56,6 @@ public class XmlAdaptedCompany {
         address = source.getAddress().value;
         email = source.getEmail().value;
         phone = source.getPhone().value;
-        jobList = source.getJobOffers().stream().map(XmlAdaptedJobOffer::new).collect(Collectors.toList());
-
     }
 
     /**
@@ -77,12 +65,6 @@ public class XmlAdaptedCompany {
      */
 
     public Company toModelType() throws IllegalValueException {
-        final List<JobOffer> companyJobOffers = new ArrayList<>();
-        if (jobList != null) {
-            for (XmlAdaptedJobOffer jobOffer : jobList) {
-                companyJobOffers.add(jobOffer.toModelType());
-            }
-        }
 
         if (companyName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -119,12 +101,7 @@ public class XmlAdaptedCompany {
         }
         final Address modelAddress = new Address(address);
 
-        final UniqueJobList modelJobOffers = new UniqueJobList();
-
-        modelJobOffers.setJobOffers(companyJobOffers);
-
-
-        return new Company (modelCompanyName, modelAddress, modelEmail, modelPhone, modelJobOffers);
+        return new Company (modelCompanyName, modelAddress, modelEmail, modelPhone);
     }
 
 

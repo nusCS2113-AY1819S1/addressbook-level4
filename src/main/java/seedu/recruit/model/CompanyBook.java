@@ -80,11 +80,8 @@ public class CompanyBook implements ReadOnlyCompanyBook {
      * Adds a company to the recruit book.
      * The company must not already exist in the recruit book.
      */
-    public void addCompany(Company p) {
-        companyList.add(p);
-        for (JobOffer jobOffer : p.getUniqueJobList()) {
-            companyJobList.add(jobOffer);
-        }
+    public void addCompany(Company company) {
+        companyList.add(company);
     }
 
     /**
@@ -152,29 +149,16 @@ public class CompanyBook implements ReadOnlyCompanyBook {
     /**
      * Adds a job offer to an existing company in the CompanyBook
      */
-    public void addJobOfferToCompany(CompanyName companyName, JobOffer jobOffer) {
-        companyList.addJobOfferToCompany(companyName, jobOffer);
+    public void addJobOffer(JobOffer jobOffer) {
         companyJobList.add(jobOffer);
     }
 
     /**
      * Returns true if a company has a job offer with the same identity as {@code jobOffer} exists in the company book.
      */
-    public boolean hasJobOffer(CompanyName companyName, JobOffer jobOffer) {
-        requireAllNonNull(companyName, jobOffer);
-        Company company = getCompanyFromIndex(getCompanyIndexFromName(companyName));
-        return company.getUniqueJobList().contains(jobOffer);
-    }
-
-    /**
-     * Replaces the given job offer {@code target} in the list with {@code editedJobOffer}.
-     * {@code target} must exist in the company job list{@code company}.
-     * The job offer identity of {@code editedJobOffer} must not be the same as another existing job offer in the
-     * same company{@code company}.
-     */
-    public void updateJobOfferInCompany(Company company, JobOffer target, JobOffer editedJobOffer) {
-        requireAllNonNull(company, target, editedJobOffer);
-        company.getUniqueJobList().setJobOffer(target, editedJobOffer);
+    public boolean hasJobOffer(JobOffer jobOffer) {
+        requireAllNonNull(jobOffer);
+        return companyJobList.contains(jobOffer);
     }
 
     /**
@@ -232,7 +216,6 @@ public class CompanyBook implements ReadOnlyCompanyBook {
      * @param jobOffer must exist inside the CompanyBook
      */
     public void removeJobOffer(JobOffer jobOffer) {
-        companyList.removeJobOffer(jobOffer);
         companyJobList.remove(jobOffer);
 
     }
