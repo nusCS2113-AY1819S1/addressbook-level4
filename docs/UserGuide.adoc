@@ -379,6 +379,7 @@ Format: `addComment INDEX C/STRING`
 ****
 * Adds comment at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index *must be a positive integer* 1, 2, 3, ...
 * Comment cannot be blank,. For C/String, String cannot be empty
+* If a user wants to delete an added comment, use the undo CLI command.
 ****
 
 Examples:
@@ -394,6 +395,7 @@ Adds "What is the attire to wear for this event?" into event 5 comment section w
 so you need to refresh it yourself.
 * Also, you have to log in first to use the functions.
 * Do not use a hash (#) in the Comments, e.g. replyComment 1 L/2 C/#hello - this is a bug we will fix
+* If a user wants to delete an added comment, use the undo CLI command.
 ====
 
 === Reply Comment : `replyComment`
