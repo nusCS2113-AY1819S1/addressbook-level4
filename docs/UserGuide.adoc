@@ -92,7 +92,7 @@ Format: `login u/USERNAME p/PASSWORD` +
 |===
 Examples:
 
-* `login n/Gerald Chua p/password12345` +
+* `login u/Gerald Chua p/password12345` +
 Logs in Gerald Chua +
 
 * `login u/James Yaputra p/drowssap12345` +
