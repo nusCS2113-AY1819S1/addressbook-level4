@@ -18,6 +18,9 @@ import seedu.planner.commons.events.ui.ShowSummaryTableEvent;
  */
 public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
 
+    public static final String BREAKDOWN_ERROR_MESSAGE = "Nothing has been found! "
+            + "Please input a more appropriate range:)";
+
     private static final Logger logger = LogsCenter.getLogger(StatsDisplayPanel.class);
 
     private static final String FXML = "StatsDisplayPanel.fxml";
@@ -65,7 +68,7 @@ public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
     /** Creates the CategoryBreakdown object with the total expense and tag of each CategoryStatistic */
     private Node createTotalExpenseBreakdown(MixedPieChartDataList dataList) {
         if (dataList.isExpenseDataEmpty()) {
-            Label label = new Label("Nothing has been found! Please input a more appropriate range:)");
+            Label label = new Label(BREAKDOWN_ERROR_MESSAGE);
             label.getStyleClass().add("label-bright");
             return new AnchorPane(label);
         }
@@ -76,7 +79,7 @@ public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
     /** Creates the CategoryBreakdown object with the total income and tag of each CategoryStatistic */
     private Node createTotalIncomeBreakdown(MixedPieChartDataList dataList) {
         if (dataList.isIncomeDataEmpty()) {
-            Label label = new Label("Nothing has been found! Please input a more appropriate range:)");
+            Label label = new Label(BREAKDOWN_ERROR_MESSAGE);
             label.getStyleClass().add("label-bright");
             return new AnchorPane(label);
         }

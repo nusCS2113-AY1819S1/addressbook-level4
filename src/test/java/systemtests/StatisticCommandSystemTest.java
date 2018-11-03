@@ -5,6 +5,7 @@ import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 
 import java.util.function.Predicate;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import javafx.collections.ObservableList;
@@ -24,14 +25,44 @@ public class StatisticCommandSystemTest extends FinancialPlannerSystemTest {
     private final Date endDate = new Date(END_DATE);
     private final Predicate<Record> predicate = new DateIsWithinIntervalPredicate(startDate, endDate);
 
+    @Before
+    public void setup() {
+
+    }
+
     @Test
-    public void stats() throws Exception {
+    public void stats() {
         Model model = getModel();
-        model.updateFilteredRecordList(predicate);
         String command = StatisticCommand.COMMAND_WORD + " " + PREFIX_DATE + " " + START_DATE + " " + END_DATE;
         String expectedResultMessage = String.format(StatisticCommand.MESSAGE_SUCCESS, startDate, endDate);
-        assertCommandSuccess(command, model, new CategoryStatisticsList(model.getFilteredRecordList())
-                .getReadOnlyStatsList(), expectedResultMessage);
+
+        /* ------------------------ Check starting state of program ------------------------------------------------- */
+        model.updateFilteredRecordList(predicate);
+        ObservableList<CategoryStatistic> expectedStats = new CategoryStatisticsList(model.getFilteredRecordList())
+                .getReadOnlyStatsList();
+        assertCommandSuccess(command, model, expectedResultMessage);
+        assertExpenseBreakdownNotEmpty(expectedStats);
+        assertIncomeBreakdownNotEmpty(expectedStats);
+
+        /* ------------------------ Clear the appplication ---------------------------------------------------------- */
+        clearModel(model);
+        assertCommandSuccess(command, model, expectedResultMessage);
+        assertIncomeCategoryBreakdownEmpty();
+        assertExpenseCategoryBreakdownEmpty();
+
+        /* -------------------------------------------- Undo and redo ----------------------------------------------- */
+        undoModel(model);
+        model.updateFilteredRecordList(predicate);
+        expectedStats = new CategoryStatisticsList(model.getFilteredRecordList()).getReadOnlyStatsList();
+        assertCommandSuccess(command, model, expectedResultMessage);
+        assertExpenseBreakdownNotEmpty(expectedStats);
+        assertIncomeBreakdownNotEmpty(expectedStats);
+
+        redoModel(model);
+        model.updateFilteredRecordList(predicate);
+        assertCommandSuccess(command, model, expectedResultMessage);
+        assertExpenseBreakdownEmpty();
+        assertIncomeBreakdownEmpty();
     }
 
     /**
@@ -46,13 +77,28 @@ public class StatisticCommandSystemTest extends FinancialPlannerSystemTest {
      * {@code FinancialPlannerSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * @see FinancialPlannerSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
-    private void assertCommandSuccess(String command, Model expectedModel,
-                                      ObservableList<CategoryStatistic> expectedStats, String expectedResultMessage) {
-        requireAllNonNull(command, expectedModel, expectedStats);
+    private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
+        requireAllNonNull(command, expectedModel);
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();
         assertStatusBarUnchanged();
-        assertCategoryBreakdownShownCorrectly(expectedStats);
+        assertCategoryBreakdownsAreShown();
+    }
+
+    private void assertExpenseBreakdownNotEmpty(ObservableList<CategoryStatistic> expectedStats) {
+        assertExpenseCategoryBreakdownDataCorrect(expectedStats);
+    }
+
+    private void assertIncomeBreakdownNotEmpty(ObservableList<CategoryStatistic> expectedStats) {
+        assertIncomeCategoryBreakdownDataCorrect(expectedStats);
+    }
+
+    private void assertExpenseBreakdownEmpty() {
+        assertExpenseCategoryBreakdownEmpty();
+    }
+
+    private void assertIncomeBreakdownEmpty() {
+        assertIncomeCategoryBreakdownEmpty();
     }
 }
