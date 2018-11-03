@@ -80,6 +80,7 @@ public class Person {
             return true;
         }
 
+        // person is identified by their work email, which must be unique
         return otherPerson != null
                 && otherPerson.getEmail().equals(getEmail());
     }

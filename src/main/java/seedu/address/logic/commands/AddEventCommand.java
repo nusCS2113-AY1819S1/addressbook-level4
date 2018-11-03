@@ -38,7 +38,8 @@ public class AddEventCommand extends Command {
             + PREFIX_END_DATE + "23:59 ";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
-    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the event list";
+    public static final String MESSAGE_DUPLICATE_EVENT =
+            "The location has been booked for another event at the selected time";
 
     private final Event toAdd;
 

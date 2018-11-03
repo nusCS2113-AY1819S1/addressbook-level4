@@ -28,8 +28,8 @@ public class SelectCommand extends Command {
     public static final String COMMAND_WORD = "select";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Selects the person identified by the index number used in the displayed person list "
-            + "and display events the person is attending. Show events in selected date/month/year if indicated\n"
+            + ": Selects the employee identified by the index number used in the displayed person list "
+            + "and display events the employee is attending. Show events in selected date/month/year if indicated\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_YEAR + "YEAR] "

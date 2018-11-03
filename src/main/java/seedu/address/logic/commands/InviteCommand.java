@@ -21,14 +21,14 @@ public class InviteCommand extends Command {
 
     public static final String COMMAND_WORD = "invite";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Invites an existing person to an existing event "
-            + "by the index number used in the displayed person list and displayed event list.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Invites an employee to an event "
+            + "by the index number used in the displayed employee list and displayed event list.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_TO + "INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TO + "2";
 
-    public static final String MESSAGE_INVITE_PERSON_SUCCESS = "Invited Person: %1$s to %2$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the event.";
+    public static final String MESSAGE_INVITE_PERSON_SUCCESS = "Invited Employee: %1$s to %2$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This employee already exists in the event.";
     public static final String MESSAGE_CLASH_EVENT = "Unable to invite! %1$s clashes with %2$s's schedule.";
 
     private final Index indexEvent;
