@@ -2,21 +2,16 @@ package systemtests;
 
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.planner.testutil.TypicalRecords.CAIFAN;
-import static seedu.planner.testutil.TypicalRecords.JAP;
-import static seedu.planner.testutil.TypicalRecords.KOREAN;
-import static seedu.planner.testutil.TypicalRecords.RANDOM;
-import static seedu.planner.testutil.TypicalRecords.WORK;
-import static seedu.planner.testutil.TypicalRecords.ZT;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.function.Predicate;
 
 import org.junit.Test;
 
 import javafx.collections.ObservableList;
 import seedu.planner.logic.commands.StatisticCommand;
 import seedu.planner.model.Model;
+import seedu.planner.model.record.Date;
+import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.summary.CategoryStatistic;
 import seedu.planner.model.summary.CategoryStatisticsList;
@@ -25,13 +20,18 @@ public class StatisticCommandSystemTest extends FinancialPlannerSystemTest {
 
     private static final String START_DATE = "25-3-2018";
     private static final String END_DATE = "25-5-2018";
+    private final Date startDate = new Date(START_DATE);
+    private final Date endDate = new Date(END_DATE);
+    private final Predicate<Record> predicate = new DateIsWithinIntervalPredicate(startDate, endDate);
 
     @Test
     public void stats() throws Exception {
         Model model = getModel();
+        model.updateFilteredRecordList(predicate);
         String command = StatisticCommand.COMMAND_WORD + " " + PREFIX_DATE + " " + START_DATE + " " + END_DATE;
-        List<Record> records = Arrays.asList(RANDOM, CAIFAN, WORK, KOREAN, JAP, ZT);
-        assertCommandSuccess(command, model, new CategoryStatisticsList(records).getReadOnlyStatsList());
+        String expectedResultMessage = String.format(StatisticCommand.MESSAGE_SUCCESS, startDate, endDate);
+        assertCommandSuccess(command, model, new CategoryStatisticsList(model.getFilteredRecordList())
+                .getReadOnlyStatsList(), expectedResultMessage);
     }
 
     /**
@@ -47,9 +47,8 @@ public class StatisticCommandSystemTest extends FinancialPlannerSystemTest {
      * @see FinancialPlannerSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(String command, Model expectedModel,
-                                      ObservableList<CategoryStatistic> expectedStats) {
+                                      ObservableList<CategoryStatistic> expectedStats, String expectedResultMessage) {
         requireAllNonNull(command, expectedModel, expectedStats);
-        String expectedResultMessage = StatisticCommand.MESSAGE_SUCCESS;
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();

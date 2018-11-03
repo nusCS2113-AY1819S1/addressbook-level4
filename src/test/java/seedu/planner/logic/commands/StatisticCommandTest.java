@@ -2,12 +2,8 @@ package seedu.planner.logic.commands;
 
 import static org.junit.Assert.assertTrue;
 import static seedu.planner.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.planner.testutil.TypicalRecords.INDO;
-import static seedu.planner.testutil.TypicalRecords.RANDOM;
 import static seedu.planner.testutil.TypicalRecords.getTypicalFinancialPlanner;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -23,7 +19,6 @@ import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.UserPrefs;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
-import seedu.planner.model.record.Record;
 import seedu.planner.testutil.FinancialPlannerBuilder;
 
 /**
@@ -63,26 +58,12 @@ public class StatisticCommandTest {
     }
 
     @Test
-    public void filterRecordListByPredicate_emptyList_givesCorrectList() {
+    public void execute_model_modelFiltered() {
         StatisticCommand command = new StatisticCommand(startDate, endDate);
-        List<Record> inputList = emptyModel.getFinancialPlanner().getRecordList();
-        List<Record> expectedList = Collections.emptyList();
-        assertTwoListsEqualNoOrder(expectedList, command.filterRecordListByPredicate(inputList, datePredicate));
-    }
-
-    @Test
-    public void filterRecordListByPredicate_validList_givesCorrectList() {
-        StatisticCommand command = new StatisticCommand(startDate, endDate);
-        List<Record> inputList = model.getFinancialPlanner().getRecordList();
-        List<Record> expectedList = Arrays.asList(RANDOM, INDO);
-        assertTwoListsEqualNoOrder(expectedList, command.filterRecordListByPredicate(inputList, datePredicate));
-    }
-
-    @Test
-    public void execute_model_modelUnchanged() {
-        StatisticCommand command = new StatisticCommand(startDate, endDate);
-        assertCommandSuccess(command, model, commandHistory, StatisticCommand.MESSAGE_SUCCESS, expectedModel);
-        assertCommandSuccess(command, emptyModel, commandHistory, StatisticCommand.MESSAGE_SUCCESS, expectedEmptyModel);
+        String expectedMessage = String.format(StatisticCommand.MESSAGE_SUCCESS, startDate, endDate);
+        expectedModel.updateFilteredRecordList(datePredicate);
+        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        assertCommandSuccess(command, emptyModel, commandHistory, expectedMessage, expectedEmptyModel);
     }
 
     private void assertTwoListsEqualNoOrder(List expectedList, List listToTest) {

@@ -3,11 +3,8 @@ package seedu.planner.logic.commands;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 
-import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
-import javafx.collections.ObservableList;
 import seedu.planner.commons.core.EventsCenter;
 import seedu.planner.commons.events.ui.ShowPieChartStatsEvent;
 import seedu.planner.logic.CommandHistory;
@@ -46,15 +43,10 @@ public class StatisticCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
-        ObservableList<Record> recordList = model.getFinancialPlanner().getRecordList();
-        List<Record> filteredList = filterRecordListByPredicate(recordList, predicate);
-        CategoryStatisticsList categoryStats = new CategoryStatisticsList(filteredList);
+        model.updateFilteredRecordList(predicate);
+        CategoryStatisticsList categoryStats = new CategoryStatisticsList(model.getFilteredRecordList());
         EventsCenter.getInstance().post(new ShowPieChartStatsEvent(categoryStats.getReadOnlyStatsList()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, startDate, endDate));
-    }
-
-    public List<Record> filterRecordListByPredicate(List<Record> recordList, Predicate<Record> predicate) {
-        return recordList.stream().filter(predicate).collect(Collectors.toList());
     }
 
     @Override
