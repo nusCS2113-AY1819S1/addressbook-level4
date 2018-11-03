@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -55,7 +56,7 @@ public class SelectDeadlineCommandTest {
         ModelStub modelStub = new ModelStubWithDeadline(invalidDeadline);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(SelectDeadlineCommand.MESSAGE_INVALID_DEADLINE);
+        thrown.expectMessage(Messages.MESSAGE_INVALID_DEADLINE);
         selectCommand.execute(modelStub, commandHistory);
     }
 
