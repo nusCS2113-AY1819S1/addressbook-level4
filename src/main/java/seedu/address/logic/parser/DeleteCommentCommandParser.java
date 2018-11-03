@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.DeleteCommentCommand.MESSAGE_LINE_STRING_INVALID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINE;
 
 import seedu.address.commons.core.index.Index;
@@ -15,6 +14,16 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class DeleteCommentCommandParser implements Parser<DeleteCommentCommand> {
 
+    private int line;
+    private Index index;
+
+    public int getLine() {
+        return this.line;
+    }
+
+    public Index getIndex() {
+        return this.index;
+    }
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
@@ -25,10 +34,6 @@ public class DeleteCommentCommandParser implements Parser<DeleteCommentCommand> 
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_LINE);
-
-        int line;
-        Index index;
-
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
@@ -38,11 +43,7 @@ public class DeleteCommentCommandParser implements Parser<DeleteCommentCommand> 
         if (!argMultimap.getValue(PREFIX_LINE).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommentCommand.MESSAGE));
         }
-        try {
-            line = ParserUtil.parseLine(argMultimap.getValue(PREFIX_LINE).get());
-        } catch (ParseException pe) {
-            throw new ParseException(MESSAGE_LINE_STRING_INVALID);
-        }
+        line = ParserUtil.parseLine(argMultimap.getValue(PREFIX_LINE).get());
 
         return new DeleteCommentCommand(index , line);
     }
