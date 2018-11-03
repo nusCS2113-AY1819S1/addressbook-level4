@@ -210,7 +210,11 @@ public class Event implements Comparable<Event> {
 
     @Override
     public int compareTo(Event other) {
-        return this.getEventName().fullName.compareTo(other.getEventName().fullName);
+        int compareValue = this.getEventName().fullName.toLowerCase().compareTo(other.getEventName().fullName.toLowerCase());
+        if (compareValue == 0) {
+            return this.getEventName().fullName.compareTo(other.getEventName().fullName);
+        }
+        return compareValue;
     }
 
 
