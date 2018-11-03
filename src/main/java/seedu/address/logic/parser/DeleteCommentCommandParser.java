@@ -15,6 +15,16 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class DeleteCommentCommandParser implements Parser<DeleteCommentCommand> {
 
+    private int line;
+    private Index index;
+
+    public int getLine() {
+        return this.line;
+    }
+
+    public Index getIndex() {
+        return this.index;
+    }
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
@@ -25,10 +35,6 @@ public class DeleteCommentCommandParser implements Parser<DeleteCommentCommand> 
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_LINE);
-
-        int line;
-        Index index;
-
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {

@@ -38,12 +38,11 @@ public class DeleteCommentCommand extends Command {
     public static final String MESSAGE_LINE_STRING_INVALID = "Line cannot be a string! Example: deleteComment 1 L/2";
 
     private final Index index;
-    private final EditCommand.EditEventDescriptor editCommentDescriptor;
+    private final EditCommand.EditEventDescriptor editCommentDescriptor = new EditCommand.EditEventDescriptor();
     private int line = 0;
 
     /**
      * @param index of the event in the filtered event list to edit
-     * @param editEventDescriptor details to edit the event with
      */
     public DeleteCommentCommand(Index index, int line) {
         requireNonNull(index);
@@ -51,12 +50,12 @@ public class DeleteCommentCommand extends Command {
 
         this.index = index;
         this.line = line;
-        this.editCommentDescriptor = new EditCommand.EditEventDescriptor();
     }
 
     public int getLine() {
         return this.line;
     }
+    public Index getIndex() { return this.index; }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {

@@ -18,6 +18,23 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ReplyCommentCommandParser implements Parser<ReplyCommentCommand> {
 
+    private int line;
+    private String comment;
+    private Index index;
+
+    public int getLine()
+    {
+        return this.line;
+    }
+
+    public String getComment() {
+        return this.comment;
+    }
+
+    public Index getIndex() {
+        return this.index;
+    }
+
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
@@ -28,10 +45,6 @@ public class ReplyCommentCommandParser implements Parser<ReplyCommentCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_LINE, PREFIX_COMMENT, PREFIX_NAME);
-
-        int line;
-        String comment;
-        Index index;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());

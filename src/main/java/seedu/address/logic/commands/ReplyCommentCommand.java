@@ -43,7 +43,7 @@ public class ReplyCommentCommand extends Command {
     private final Index index;
     private final EditCommand.EditEventDescriptor editCommentDescriptor;
     private int line = 0;
-    private String comment = null;
+    private String comment;
 
     /**
      * @param index of the event in the filtered event list to edit
@@ -67,6 +67,8 @@ public class ReplyCommentCommand extends Command {
     public int getLine() {
         return this.line;
     }
+
+    public Index getIndex() { return this.index; }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
