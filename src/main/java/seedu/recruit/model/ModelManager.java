@@ -3,7 +3,6 @@ package seedu.recruit.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.recruit.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 

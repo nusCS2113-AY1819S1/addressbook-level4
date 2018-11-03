@@ -1,6 +1,5 @@
 package seedu.recruit.model;
 
-import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
