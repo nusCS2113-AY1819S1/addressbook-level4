@@ -77,55 +77,56 @@ public class EmailRecipientsAddCommand extends EmailRecipientsSelectCommand {
                         }
                     }
                 } else {
-                    return new CommandResult("ERROR: You can only add job offers!");
+                    return new CommandResult("ERROR: You can only add job offers!\n" + MESSAGE_USAGE);
                 }
             }
         }
 
         //Generate duplicate string (if any)
         boolean hasDuplicates = false;
-        String duplicates = "Unable to add the following because it already has been added before:\n";
+        StringBuilder duplicates = new StringBuilder(
+                "Unable to add the following because it already has been added before:\n");
         if (duplicateCandidates.size() != 0 || duplicateJobOffers.size() != 0) {
             if (emailUtil.isAreRecipientsCandidates()) {
                 for (Candidate duplicateCandidate : duplicateCandidates) {
-                    duplicates += duplicateCandidate.getName().toString();
-                    duplicates += "\n";
+                    duplicates.append(duplicateCandidate.getName().toString());
+                    duplicates.append("\n");
                 }
             } else {
                 for (JobOffer duplicateJobOffer : duplicateJobOffers) {
-                    duplicates += emailUtil.getRecipientJobOfferName(duplicateJobOffer);
-                    duplicates += "\n";
+                    duplicates.append(emailUtil.getRecipientJobOfferName(duplicateJobOffer));
+                    duplicates.append("\n");
                 }
             }
             hasDuplicates = true;
         }
 
         //Generate added recipients string
-        String recipients = "Recipients added:\n";
+        StringBuilder recipients = new StringBuilder("Recipients added:\n");
         if (emailUtil.isAreRecipientsCandidates()) {
             for (Candidate addedCandidate : addedCandidates) {
-                recipients += addedCandidate.getName().toString();
-                recipients += "\n";
+                recipients.append(addedCandidate.getName().toString());
+                recipients.append("\n");
             }
         } else {
             for (JobOffer addedJobOffer : addedJobOffers) {
-                recipients += emailUtil.getRecipientJobOfferName(addedJobOffer);
-                recipients += "\n";
+                recipients.append(emailUtil.getRecipientJobOfferName(addedJobOffer));
+                recipients.append("\n");
             }
         }
 
         //Generate output string
-        String output = "";
+        StringBuilder output = new StringBuilder();
 
         if (hasDuplicates) {
-            output += duplicates;
+            output.append(duplicates);
         }
 
-        if (!recipients.equals("Recipients added:\n")) {
-            output += recipients;
+        if (!recipients.toString().equals("Recipients added:\n")) {
+            output.append(recipients);
         }
 
-        output += EmailRecipientsSelectCommand.MESSAGE_USAGE;
-        return new CommandResult(output);
+        output.append(EmailRecipientsSelectCommand.MESSAGE_USAGE);
+        return new CommandResult(output.toString());
     }
 }

@@ -79,7 +79,7 @@ public class EmailParser {
         //Email command set contents step. Allow certain commands depending whether
         //recipients are candidates or job offers.
         } else if (state.nextCommand.equals(EmailContentsSelectCommand.COMMAND_LOGIC_STATE)
-                && emailUtil.isAreRecipientsCandidates()) {
+                && !emailUtil.isAreRecipientsCandidates()) {
             switch (commandWord) {
 
             case ListCompanyCommand.COMMAND_WORD:
@@ -104,7 +104,7 @@ public class EmailParser {
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
         } else if (state.nextCommand.equals(EmailContentsSelectCommand.COMMAND_LOGIC_STATE)
-                && !emailUtil.isAreRecipientsCandidates()) {
+                && emailUtil.isAreRecipientsCandidates()) {
             switch (commandWord) {
 
             case ListCandidateCommand.COMMAND_WORD:

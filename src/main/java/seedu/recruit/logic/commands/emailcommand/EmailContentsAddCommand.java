@@ -50,48 +50,49 @@ public class EmailContentsAddCommand extends EmailContentsSelectCommand {
 
         //Generate duplicate string (if any)
         boolean hasDuplicates = false;
-        String duplicates = "Unable to add the following because it already has been added before:\n";
+        StringBuilder duplicates = new StringBuilder(
+                "Unable to add the following because it already has been added before:\n");
         if (duplicateCandidates.size() != 0 || duplicateJobOffers.size() != 0) {
             if (!emailUtil.isAreRecipientsCandidates()) {
                 for (Candidate duplicateCandidate : duplicateCandidates) {
-                    duplicates += duplicateCandidate.getName().toString();
-                    duplicates += "\n";
+                    duplicates.append(duplicateCandidate.getName().toString());
+                    duplicates.append("\n");
                 }
             } else {
                 for (JobOffer duplicateJobOffer : duplicateJobOffers) {
-                    duplicates += emailUtil.getContentJobOfferName(duplicateJobOffer);
-                    duplicates += "\n";
+                    duplicates.append(emailUtil.getContentJobOfferName(duplicateJobOffer));
+                    duplicates.append("\n");
                 }
             }
             hasDuplicates = true;
         }
 
         //Generate recipients string
-        String contents = "Contents added:\n";
+        StringBuilder contents = new StringBuilder("Contents added:\n");
         if (emailUtil.isAreRecipientsCandidates()) {
             for (JobOffer addedJobOffer : addedJobOffers) {
-                contents += emailUtil.getContentJobOfferName(addedJobOffer);
-                contents += "\n";
+                contents.append(emailUtil.getContentJobOfferName(addedJobOffer));
+                contents.append("\n");
             }
         } else {
             for (Candidate addedCandidate : addedCandidates) {
-                contents += addedCandidate.getName().toString();
-                contents += "\n";
+                contents.append(addedCandidate.getName().toString());
+                contents.append("\n");
             }
         }
 
         //Generate output string
-        String output = "";
+        StringBuilder output = new StringBuilder();
 
         if (hasDuplicates) {
-            output += duplicates;
+            output.append(duplicates);
         }
 
-        if (!contents.equals("Contents added:\n")) {
-            output += contents;
+        if (!contents.toString().equals("Contents added:\n")) {
+            output.append(contents);
         }
 
-        output += EmailRecipientsSelectCommand.MESSAGE_USAGE;
-        return new CommandResult(output);
+        output.append(EmailRecipientsSelectCommand.MESSAGE_USAGE);
+        return new CommandResult(output.toString());
     }
 }
