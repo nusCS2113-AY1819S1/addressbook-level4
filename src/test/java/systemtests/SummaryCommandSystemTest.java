@@ -47,14 +47,13 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
         /* ------------------------ Check starting state of program ------------------------------------------------- */
 
         /* Case: Perform an initial summaryByDate operation -> Success */
-        summariesByDate = new SummaryByDateList(model.getFinancialPlanner().getRecordList(),
-                new DateIsWithinIntervalPredicate(START_DATE, END_DATE));
+        summariesByDate = computeSummaryByDate(model, START_DATE, END_DATE);
         assertCommandSuccess(defaultSummaryByDateCommand, model, summariesByDate.getSummaryList(), BY_DATE);
 
         /* Case: Perform an initialSummaryByMonthOperation -> Success */
-        summariesByMonth = new SummaryByMonthList(model.getFinancialPlanner().getRecordList(),
-                new DateIsWithinIntervalPredicate(generateFirstOfMonth(new Month(START_MONTH)),
-                        generateLastOfMonth(new Month(END_MONTH))));
+        model.updateFilteredRecordList(new DateIsWithinIntervalPredicate(generateFirstOfMonth(new Month(START_MONTH)),
+                generateLastOfMonth(new Month(END_MONTH))));
+        summariesByMonth = new SummaryByMonthList(model.getFilteredRecordList());
         assertCommandSuccess(defaultSummaryByMonthCommand, model, summariesByMonth.getSummaryList(), BY_MONTH);
 
         /* ------------------------ Clear starting state and check state -------------------------------------------- */
@@ -70,31 +69,28 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
         -> 2 entries in summary table */
         addRecord(model, CAIFAN);
         addRecord(model, ZT);
-        summariesByDate = new SummaryByDateList(model.getFinancialPlanner().getRecordList(),
-                new DateIsWithinIntervalPredicate(START_DATE, END_DATE));
+        summariesByDate = computeSummaryByDate(model, START_DATE, END_DATE);
         assertCommandSuccess(defaultSummaryByDateCommand, model, summariesByDate.getSummaryList(), BY_DATE);
-        summariesByMonth = new SummaryByMonthList(model.getFinancialPlanner().getRecordList(),
-                new DateIsWithinIntervalPredicate(generateFirstOfMonth(new Month(START_MONTH)),
-                        generateLastOfMonth(new Month(END_MONTH))));
+        summariesByMonth = computeSummaryByMonth(model, START_MONTH, END_MONTH);
         assertCommandSuccess(defaultSummaryByMonthCommand, model, summariesByMonth.getSummaryList(), BY_MONTH);
 
         /* Case: Add 2 records with same date as ZT, then do summary by date and by month
         -> 2 entries in summary table */
         addRecord(model, JAP);
         addRecord(model, KOREAN);
-        summariesByDate = new SummaryByDateList(model.getFinancialPlanner().getRecordList(),
-                new DateIsWithinIntervalPredicate(START_DATE, END_DATE));
+        summariesByDate = computeSummaryByDate(model, START_DATE, END_DATE);
         assertCommandSuccess(defaultSummaryByDateCommand, model, summariesByDate.getSummaryList(), BY_DATE);
-        summariesByMonth = new SummaryByMonthList(model.getFinancialPlanner().getRecordList(),
-                new DateIsWithinIntervalPredicate(generateFirstOfMonth(new Month(START_MONTH)),
-                        generateLastOfMonth(new Month(END_MONTH))));
+        summariesByMonth = computeSummaryByMonth(model, START_MONTH, END_MONTH);
         assertCommandSuccess(defaultSummaryByMonthCommand, model, summariesByMonth.getSummaryList(), BY_MONTH);
 
         /* Case: Add 2 records with a date that is not tracked by summary, then do summary by date and by month
          -> no change */
         addRecord(model, IDA);
         addRecord(model, BURSARY);
+        model.updateFilteredRecordList(new DateIsWithinIntervalPredicate(START_DATE, END_DATE));
         assertCommandSuccess(defaultSummaryByDateCommand, model, summariesByDate.getSummaryList(), BY_DATE);
+        model.updateFilteredRecordList(new DateIsWithinIntervalPredicate(generateFirstOfMonth(new Month(START_MONTH)),
+                generateLastOfMonth(new Month(END_MONTH))));
         assertCommandSuccess(defaultSummaryByMonthCommand, model, summariesByMonth.getSummaryList(), BY_MONTH);
 
         /* --------------------- Edit existing records and check state -----------------------------------------------*/
@@ -104,12 +100,9 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
           */
         findRecord(model, CAIFAN);
         editRecord(model, 1, "1-4-2018");
-        summariesByDate = new SummaryByDateList(model.getFinancialPlanner().getRecordList(),
-                new DateIsWithinIntervalPredicate(START_DATE, END_DATE));
+        summariesByDate = computeSummaryByDate(model, START_DATE, END_DATE);
         assertCommandSuccess(defaultSummaryByDateCommand, model, summariesByDate.getSummaryList(), BY_DATE);
-        summariesByMonth = new SummaryByMonthList(model.getFinancialPlanner().getRecordList(),
-                new DateIsWithinIntervalPredicate(generateFirstOfMonth(new Month(START_MONTH)),
-                        generateLastOfMonth(new Month(END_MONTH))));
+        summariesByMonth = computeSummaryByMonth(model, START_MONTH, END_MONTH);
         assertCommandSuccess(defaultSummaryByMonthCommand, model, summariesByMonth.getSummaryList(), BY_MONTH);
 
         /* Case: Finds the ZT record and edit it with another date that is not tracked by summary,
@@ -117,12 +110,9 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
          */
         findRecord(model, ZT);
         editRecord(model, 1, "1-4-2019");
-        summariesByDate = new SummaryByDateList(model.getFinancialPlanner().getRecordList(),
-                new DateIsWithinIntervalPredicate(START_DATE, END_DATE));
+        summariesByDate = computeSummaryByDate(model, START_DATE, END_DATE);
         assertCommandSuccess(defaultSummaryByDateCommand, model, summariesByDate.getSummaryList(), BY_DATE);
-        summariesByMonth = new SummaryByMonthList(model.getFinancialPlanner().getRecordList(),
-                new DateIsWithinIntervalPredicate(generateFirstOfMonth(new Month(START_MONTH)),
-                        generateLastOfMonth(new Month(END_MONTH))));
+        summariesByMonth = computeSummaryByMonth(model, START_MONTH, END_MONTH);
         assertCommandSuccess(defaultSummaryByMonthCommand, model, summariesByMonth.getSummaryList(), BY_MONTH);
 
         /* --------------------- Deletes existing records and check state --------------------------------------------*/
@@ -131,12 +121,9 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
         ->
          */
         deleteRecordByDate(model, KOREAN.getDate().value);
-        summariesByDate = new SummaryByDateList(model.getFinancialPlanner().getRecordList(),
-                new DateIsWithinIntervalPredicate(START_DATE, END_DATE));
+        summariesByDate = computeSummaryByDate(model, START_DATE, END_DATE);
         assertCommandSuccess(defaultSummaryByDateCommand, model, summariesByDate.getSummaryList(), BY_DATE);
-        summariesByMonth = new SummaryByMonthList(model.getFinancialPlanner().getRecordList(),
-                new DateIsWithinIntervalPredicate(generateFirstOfMonth(new Month(START_MONTH)),
-                        generateLastOfMonth(new Month(END_MONTH))));
+        summariesByMonth = computeSummaryByMonth(model, START_MONTH, END_MONTH);
         assertCommandSuccess(defaultSummaryByMonthCommand, model, summariesByMonth.getSummaryList(), BY_MONTH);
 
         /* Case: Removes records not tracked by summary and then do summary
@@ -144,32 +131,55 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
          */
         findRecord(model, BURSARY);
         deleteRecord(model, 1);
+
+        model.updateFilteredRecordList(new DateIsWithinIntervalPredicate(START_DATE, END_DATE));
         assertCommandSuccess(defaultSummaryByDateCommand, model, summariesByDate.getSummaryList(), BY_DATE);
+        model.updateFilteredRecordList(new DateIsWithinIntervalPredicate(generateFirstOfMonth(new Month(START_MONTH)),
+                generateLastOfMonth(new Month(END_MONTH))));
         assertCommandSuccess(defaultSummaryByMonthCommand, model, summariesByMonth.getSummaryList(), BY_MONTH);
 
         findRecord(model, IDA);
         deleteRecord(model, 1);
+
+        model.updateFilteredRecordList(new DateIsWithinIntervalPredicate(START_DATE, END_DATE));
         assertCommandSuccess(defaultSummaryByDateCommand, model, summariesByDate.getSummaryList(), BY_DATE);
+        model.updateFilteredRecordList(new DateIsWithinIntervalPredicate(generateFirstOfMonth(new Month(START_MONTH)),
+                generateLastOfMonth(new Month(END_MONTH))));
         assertCommandSuccess(defaultSummaryByMonthCommand, model, summariesByMonth.getSummaryList(), BY_MONTH);
 
         /* ----------------------------------- Undo, redo and check state --------------------------------------------*/
         undoModel(model);
-        summariesByDate = new SummaryByDateList(model.getFinancialPlanner().getRecordList(),
-                new DateIsWithinIntervalPredicate(START_DATE, END_DATE));
+        summariesByDate = computeSummaryByDate(model, START_DATE, END_DATE);
         assertCommandSuccess(defaultSummaryByDateCommand, model, summariesByDate.getSummaryList(), BY_DATE);
-        summariesByMonth = new SummaryByMonthList(model.getFinancialPlanner().getRecordList(),
-                new DateIsWithinIntervalPredicate(generateFirstOfMonth(new Month(START_MONTH)),
-                        generateLastOfMonth(new Month(END_MONTH))));
+        summariesByMonth = computeSummaryByMonth(model, START_MONTH, END_MONTH);
         assertCommandSuccess(defaultSummaryByMonthCommand, model, summariesByMonth.getSummaryList(), BY_MONTH);
 
         redoModel(model);
-        summariesByDate = new SummaryByDateList(model.getFinancialPlanner().getRecordList(),
-                new DateIsWithinIntervalPredicate(START_DATE, END_DATE));
+        summariesByDate = computeSummaryByDate(model, START_DATE, END_DATE);
         assertCommandSuccess(defaultSummaryByDateCommand, model, summariesByDate.getSummaryList(), BY_DATE);
-        summariesByMonth = new SummaryByMonthList(model.getFinancialPlanner().getRecordList(),
-                new DateIsWithinIntervalPredicate(generateFirstOfMonth(new Month(START_MONTH)),
-                        generateLastOfMonth(new Month(END_MONTH))));
+        summariesByMonth = computeSummaryByMonth(model, START_MONTH, END_MONTH);
         assertCommandSuccess(defaultSummaryByMonthCommand, model, summariesByMonth.getSummaryList(), BY_MONTH);
+    }
+
+    /**
+     * Computes the summary list by month given 2 dates and the model
+     */
+    private SummaryByMonthList computeSummaryByMonth(Model model, String startMonth, String endMonth) {
+        SummaryByMonthList summariesByMonth;
+        model.updateFilteredRecordList(new DateIsWithinIntervalPredicate(generateFirstOfMonth(new Month(startMonth)),
+                generateLastOfMonth(new Month(endMonth))));
+        summariesByMonth = new SummaryByMonthList(model.getFilteredRecordList());
+        return summariesByMonth;
+    }
+
+    /**
+     * Computes the summary list by date given 2 dates and the model
+     */
+    private SummaryByDateList computeSummaryByDate(Model model, String startDate, String endDate) {
+        SummaryByDateList summariesByDate;
+        model.updateFilteredRecordList(new DateIsWithinIntervalPredicate(startDate, endDate));
+        summariesByDate = new SummaryByDateList(model.getFilteredRecordList());
+        return summariesByDate;
     }
 
     /**
