@@ -406,7 +406,7 @@ Format: `replyComment INDEX L/LINE C/STRING`
 ****
 * Replies a comment to the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index *must be a positive integer* 1, 2, 3, ...
 * Comment cannot be blank. For C/String, String cannot be empty
-* Line refers to the number of the comment indicated in  of the comment section. It has to be a non-zero integer and exist within the comment section. E.g. `1. Gerald : Hello` the line here is 1. `5. Gerald: Hi` the line here is 5. 
+* Line refers to the number of the comment indicated in  of the comment section. It has to be a non-zero integer and exist within the comment section. E.g. `1. Gerald : Hello` the line here is 1. `5. Gerald: Hi` the line here is 5.
 * All replied comments will fall under a comment that has no (REPLY) in front. Hence, all replies will be towards the same comment.
 ****
 Examples:
@@ -430,7 +430,7 @@ Format: `deleteComment INDEX L/LINE`
 
 ****
 * Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index *must be a positive integer* 1, 2, 3, ...
-* * Line refers to the number of the comment indicated in  of the comment section. It has to be a non-zero integer and exist within the comment section. E.g. `1. Gerald : Hello` the line here is 1. `5. Gerald: Hi` the line here is 5. 
+* * Line refers to the number of the comment indicated in  of the comment section. It has to be a non-zero integer and exist within the comment section. E.g. `1. Gerald : Hello` the line here is 1. `5. Gerald: Hi` the line here is 5.
 ****
 
 Examples:
