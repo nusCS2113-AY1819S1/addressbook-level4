@@ -9,8 +9,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeferDeadlineCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.task.Deadline;
 //import seedu.address.commons.exceptions.IllegalValueException;
@@ -53,11 +55,6 @@ public class DeferDeadlineCommandParser implements Parser<DeferDeadlineCommand> 
         String month = argMultimap.getValue(PREFIX_MONTH).orElse("");
         String year = argMultimap.getValue(PREFIX_YEAR).orElse("");
         Deadline deadline = new Deadline(day, month, year);
-
-        if (!deadline.isValidDeadline(deadline.toString())) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeferDeadlineCommand.MESSAGE_USAGE));
-        }
-
 
         return new DeferDeadlineCommand(index, deadline);
     }

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTH;
@@ -48,7 +49,6 @@ public class DeferDeadlineCommand extends Command implements CommandParser {
     + PREFIX_YEAR + "2018";
     */
 
-    public static final String MESSAGE_INVALID_DEADLINE = "The date selected does not exist";
     public static final String MESSAGE_NONEXISTENT_TASK = "This task does not exist in the task book";
     public static final String MESSAGE_SUCCESS = "Date deferred for task: %1$s";
     //public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Defer deadline command not implemented yet";
@@ -81,6 +81,8 @@ public class DeferDeadlineCommand extends Command implements CommandParser {
 
         if (taskIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(MESSAGE_NONEXISTENT_TASK);
+        } else if (!model.validDeadline(deadline)) {
+            throw new CommandException(MESSAGE_INVALID_DEADLINE);
         }
 
         Task taskToDefer = lastShownList.get(taskIndex.getZeroBased()); // get the task from the filteredtasklist;
