@@ -23,6 +23,7 @@ public class LogoutCommandTest {
         expectedModel.logUser(user);
         expectedModel.clearUser();
 
-        assertCommandSuccess(new LogoutCommand(), model, commandHistory, LogoutCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new LogoutCommand(), model, commandHistory,
+                String.format(LogoutCommand.MESSAGE_SUCCESS, user.getUsername().toString()), expectedModel);
     }
 }
