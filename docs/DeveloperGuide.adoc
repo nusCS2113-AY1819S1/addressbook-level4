@@ -15,7 +15,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2113-AY1819S1-T09-4/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team T09-4`      Since: `Aug 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -479,6 +479,7 @@ only be accessed within CustomPieChart for security purposes.
 The activity flow diagram below details the mechanism behind the creation of the category breakdown ui,
 starting from the point where the function `StatsDisplayPanel#`handleShowPieChartStatsEvent` is called.
 
+// tag::findtag[]
 === Find records by tag feature
 ==== Current Implementation
 The findtag mechanism is also facilitated by `ModelManager`. FindTagCommand calls `ModelManager#updateFilteredRecords`
@@ -500,6 +501,7 @@ and obtain a new `filteredRecords` based on the predicate, which will also trigg
 The following sequence diagram shows how the limit operation works:
 
 image::FindTagSequenceDiagram.png[width:800]
+// end::findtag[]
 
 === Limit feature
 ==== Current Implementation

@@ -1,5 +1,7 @@
 package seedu.planner.logic.parser;
 
+import static seedu.planner.commons.util.DateUtil.isEarlierThan;
+
 import java.util.Arrays;
 import java.util.logging.Logger;
 
@@ -63,7 +65,7 @@ public class ExportExcelCommandParser implements Parser<ExportExcelCommand> {
     }
 
     private static boolean isDateOrderValid(Date startDate, Date endDate) {
-        return startDate.isEarlierThan(endDate) || startDate.equals(endDate);
+        return isEarlierThan(startDate, endDate) || startDate.equals(endDate);
     }
 
 }
