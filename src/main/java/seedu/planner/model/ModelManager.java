@@ -152,9 +152,11 @@ public class ModelManager extends ComponentManager implements Model {
                 continue;
             }
             versionedFinancialPlanner.addRecord(record);
+            versionedFinancialPlanner.addRecordToTagMap(record);
         }
         updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
         indicateFinancialPlannerChanged();
+        indicateTagMapChanged();
     }
 
     @Override

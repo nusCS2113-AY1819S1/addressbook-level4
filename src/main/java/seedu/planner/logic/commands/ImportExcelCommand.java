@@ -17,7 +17,7 @@ import seedu.planner.model.record.Record;
  * Imports all the records given in the Excel file.
  */
 public class ImportExcelCommand extends Command {
-    public static final String COMMAND_WORD = "import_excel";
+    public static final String COMMAND_WORD = "import";
     public static final String MESSAGE_USAGE =
             ": Imports all the records data in Excel file and add them into the current Financial Planner.\n"
             + "You MUST include your directory path, starting with prefix: " + PREFIX_DIR + "\n"
@@ -43,7 +43,7 @@ public class ImportExcelCommand extends Command {
             if (records.size() > 0) {
                 model.addListUniqueRecord(records);
                 model.commitFinancialPlanner();
-                message = Messages.MESSAGE_RECORD_ADDED_SUCCESSFULLY;
+                message = String.format(Messages.MESSAGE_RECORD_ADDED_SUCCESSFULLY, filePath);
             } else {
                 message = Messages.MESSAGE_IMPORT_COMMAND_ERRORS;
             }

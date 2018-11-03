@@ -27,6 +27,13 @@ public class ArchiveCommandParser implements Parser<ArchiveCommand> {
         if (trimmedArgs.isEmpty()) {
             return new ArchiveCommand();
         }
+        return createArchiveCommand(args);
+    }
+
+    /**
+     * Create Archive Command using args
+     */
+    private static ArchiveCommand createArchiveCommand (String args) throws ParseException {
         String stringDate = whiteSpace;
         String stringPath = whiteSpace;
         boolean isDateExist = true;

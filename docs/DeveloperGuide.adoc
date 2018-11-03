@@ -539,16 +539,16 @@ image::checkLimitSequenceDiagram.png[width:800]
 ==== Current implementation
 The delete by date entry mechanism is facilitated by `ModelManager`.
 It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands and the `VersionedFinancialPlanner`.
-DeleteByDateEntryCommand calls `ModelManager#getFilteredRecordList`.
+
+DeleteByDateEntryCommand calls `ModelManager#getFilteredRecordList` to retrieve the list of all current records in the Financial Planner. Then, it will loop through the list of records and call `ModelManger#deleteRecord(Record record)` to delete the record whose date is required.
+
+If there exists target records, `ModelManager#commitFinancialPlanner` will be called to update the current version of Financial Planner and the message, which states records have been deleted. Then, `ModelManager#autoLimitCheck` will be called to check the current change in limit as we delete some records exceeds the limit or not.
 
 This feature has only one keyword `delete_date` and implements only 1 argument mode.
 The three argument modes are as listed below:
 
-* Single Argument mode -- Requires only one date. It exports all records whose date is required and shows all records exported in the Financial Planner.
-
-The mechanism that facilitates these modes can be found in the `DeleteByDateEntryCommandParser#parse`. Below is a overview of the mechanism:
-
-* The argument mode is determined and is further processed into `Date` objects, before creating and returning a `DeleteByDateEntryCommand` object.
+* Single Argument mode -- Requires only one date. It deletes all records whose date is required.
+The date must follow the format: dd-mm-yyyy, error will be thrown if the format is not correct or the date entered is not real.
 
 The following sequence diagram shows how the list operation works:
 
@@ -559,27 +559,70 @@ image::DeleteByDateEntrySequenceDiagram.png[width:800]
 // tag::export_excel[]
 === Export into Excel file
 ==== Current implementation
-The export into excel file mechanism is facilitated by `ModelManager`.
-It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands and the `VersionedFinancialPlanner`.
-ExportExcelCommand calls `ModelManager#updateFilteredRecords` and passes in different predicates depending on the argument mode.
+The export into excel file mechanism is facilitated by `ModelManager` with the help of `ExcelUtil`, the utility created to handle all methods relating to Excel. It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands, `ExcelUtil` and the `VersionedFinancialPlanner`.
 
-This feature has only one keyword `export_excel` but implements 3 different argument modes to allow users to access multiple versions of the same command.
-The three argument modes are as listed below:
+ExportExcelCommand calls `ModelManager#updateFilteredRecords` and passes in different predicates depending on the argument mode. The List<Record> is retrieved by calling `ModelManager#getFilteredRecordList`.
 
-* No Argument mode -- It requires no arguments and exports the entire list of records in the FinancialPlanner and shows all the records in the Financial Planner.
-* Single Argument mode -- Requires only one date. It exports all records whose date is required and shows all records exported in the Financial Planner.
-* Dual Argument mode -- Requires 2 dates, a `start date` and an `end date`. It exports all records containing dates within the time frame of start date and end date, inclusive of both start date and end date and shows all records exported in the Financial Planner.
+Meanwhile, it also called `ModelManager#getFinancialPlanner` to get the `ReadOnlyFinancialPlanner` Financial Planner.
+
+The SummaryByDateList is constructed after the ReadOnlyFinancialPlanner together with the predicate are passed into the construction of SummaryByDateList. The List<SummaryEntry> is easily retrieved from SummaryByDateList by calling `SummaryByDateList#getSummaryList`.
+
+`ExcelUtil#setNameExcelFile` is called to make the Excel name based on the condition of startDate and endDate.
+
+After that, `ExcelUtil#setPathFile` is called to set the Path file, which is the location of the Excel file stored in future. The Path file is constructed based on the name of the Excel file we retrieve above and the directory Path, it can be either optionally entered by the user or the default User's Home Directory.
+
+With the sufficient information, `List<Record> records`, `List<SummaryByDateEntry> summaryList`, `file path`, `ExportExcelCommand#exportDataIntoExcelSheetWithGivenRecords` is called to start the processing of producing Excel file, containing 2 Excel sheet, namely `RECORD DATA` and `SUMMARY DATA`.
+
+* `RECORD DATA` stores all the data of record the user want to export, there are 4 columns: Name, date, money and tags, the tags names will be separated by ..., for visual benefit.
+
+image::Export_Capture1_LinhChi.png[width:800]
+
+* `SUMMARY DATA` stored the summary statistics for the period you exported, and there is a *Line Chart* next to the table for visual statistic [refer to `Draw line chart` part for more information]. As you can see in the picture, there are 3 series shown:
+** The first blue line named Series1 represents the Timeline (each component is one Date) versus the Income (each component is one income).
+** The second orange line named Series2 represents the Timeline (each component is one Date) versus the Outcome (each component is one outcome).
+** The third grey line named Series3 represents the Timeline (each component is one Date) versus the Net - Sum of income and outcome (each component is one net).
+
+image::Export_Capture2_LinhChi.png[width:800]
+
+This feature has only one keyword `export_excel` but implements 6 different argument modes to allow users to access multiple versions of the same command.
+The six argument modes are as listed below:
+
+* *No argument mode* `export_excel` will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically User's Home Directory*.
+
+* *Single argument Date mode* `export_excel d/DATE` will list down all records with the specified date and exports all shown records to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically user's Home Directory*.
+
+* *Dual argument Date mode* `export_excel d/START_DATE END_DATE` will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically User's Home Directory*.
+
+* *Single argument Directory Path mode* `export_excel dir/DIRECTORY_PATH` will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the chosen Directory Path.
+
+* *Single argument Date mode + Single argument Directory path mode* `export_excel d/DATE dir/DIRECTORY_PATH` will list down all records with the specified date and exports all shown records to an Excel file and store the file in the chosen Directory Path.
+
+* *Dual argument Date mode + Single argument Directory path mode* `export_excel d/START_DATE END_DATE dir/DIRECTORY_PATH` will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the chosen Directory Path.
++
 
 The mechanism that facilitates these modes can be found in the `ExportExcelCommandParser#parse`. Below is a overview of the mechanism:
 
-* The string associated is passed into `ExportExcelCommandParser#splitByWhitespace` for further processing and returns an array.
-* The argument mode is determined by the size of this array and the elements are further processed into `Date` objects, before creating and returning a `ExportExcelCommand` object.
+. Method `ExportExcelCommandParser#createExportExcelCommand` takes the input argument and further analyse it.
+. The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
+. This returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
+. The string associated with `d/`
+.. It is then passed into `ExportExcelCommandParser#splitByWhitespace` for further processing and returns an array. This string will be split into sub-strings and each of them will be construct as a date type variable. The the size of the array exceed 2, error wil be thrown to inform invalid command format.
+.. If the size of the string equals 1, it is constructed as a date type variable after being passed to `ParseUtil#parseDate`, it must follow the format dd-mm-yyyy. Error will be thrown if the format is not correct or the date entered is not real.
+.. If the size of the string equals 2, each sub-string is constructed as a date type variable after being passed to `ParseUtil#parseDate`, and an additional check is conducted to check if the first date entered, known as Start date is smaller than the second date entered, known as End Date.
+. The String associated with `dir/`
+.. It is then passed into `ParseUtil#parseDirectoryString` to check if the Directory path given is existing.
+.. If the Directory is unreal, an error is thrown to inform the user.
+. Please take note that:
+.. If the prefix `d/` is not entered in the input, meaning that all the records will be included in the Excel sheet.
+.. If the prefix `dir/` is not entered in the input, meaning that the Directory Path is default as the *User's Home Directory*.
 
-The `ExportExcelCommand` has two constructors which makes use of overloading to reduce code complexity.
+The `ExportExcelCommand` has four constructors which makes use of overloading to reduce code complexity.
 
 * One constructor has no arguments and assigns default predicate for the `FilteredList` in `ModelManager`,
-`PREDICATE_SHOW_ALL_RECORDS` which will show all items in the list.
-* The second constructor takes in 2 `Date` arguments and assigns the predicate `DateIsWithinDateIntervalPredicate` which will only show items within the date interval.
+`PREDICATE_SHOW_ALL_RECORDS` which will show all items in the list and the Directory path is *User's Home Directory*.
+* The second constructor takes in 2 `Date` arguments and assigns the predicate `DateIsWithinDateIntervalPredicate` which will only show items within the date interval and the Directory path is *User's Home Directory*.
+* The third constructor takes in 1 `Directory Path` argument and assigns the predicate as `PREDICATE_SHOW_ALL_RECORDS`, which will show all items in the list and the Directory path is the entered directory path.
+* The fourth constructor takes in 1 `Directory Path` and 2 `Date` arguments and assigns the predicate as `DateIsWithinDateIntervalPredicate` which will only show items within the date interval and the Directory path is the entered Directory Path.
 
 The following sequence diagram shows how the list operation works:
 
@@ -591,6 +634,149 @@ implemented by the Java 8 API and it will propagate any changes to the list to a
 listener is present in `RecordListPanel` and will update the UI list automatically.
 
 // end::export_excel[]
+
+// tag::import[]
+
+=== Import from Excel file
+==== Current implementation
+The import from Excel file mechanism is facilitated by `ExcelUtil`, the utility created to handle all method relating to Excel.
+
+ImportExcelCommand calls `ExcelUtil#readExcelSheet` to read the Excel file and retrieve data of records from them to create a list of record List<Record>.
+
+After that, `ModelManager#addListUniqueRecord` is called to add the records in the List<Record>. If the record has already existed in the Financial Planner, it will be ignored and not added into the Financial Planner.
+
+Eventually, when all the records are added in the Financial Planner, `ModelManager#commitFinancialPlanner` will be called to update the current version of Financial Planner and the message, which states records have been added.
+
+This feature has only one keyword `archive` but implements 2 different argument modes to allow users to access multiple versions of the same command.
+The two argument modes are as listed below:
+
+* *Single argument File Path mode* `import dir/FILE_PATH` will open the Excel file using the given File Path, import all records in the Financial Planner and check if these records exist in the Financial Planner, then exports all of non-existent records to Financial Planner.
+
+* *Single argument File Path + single argument File name mode* `import dir/DIRECTORY_PATH  n/NAME_FILE` will open the Excel file using the given Directory path and given file name, import all records in the Financial Planner and check if these records exist in the Financial Planner, then exports all of non-existent records to Financial Planner.
++
+
+The mechanism that facilitates these modes can be found in the `ImportExcelCommandParser#parse`. Below is a overview of the mechanism:
+
+. Method `ImportExcelCommandParser#createArchiveCommand` takes the input argument and further analyse it.
+. The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
+. This returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
+
+. The String associated with `dir/`
+.. It is then passed into `ParseUtil#parseDirectoryString` to check if the Directory path given is existing.
+.. If the Directory is unreal, an error is thrown to inform the user.
+
+. The String associated with `n/`
+.. It is then passed into `ExcelUtil#getPathFile` together with the String associated with `dir/` to create the File Path.
+.. The File Path is then passed into `ParseUtil#parseFilePathString` to check if the File path given is existing.
+.. If the File Path is unreal, an error is thrown to inform the user.
+. Please take note that:
+.. The String associated with `dir/` *must* be entered.
+.. The String associated with `n/` is optionally entered.
+.. Please note that User have to add the post-fix `.xlsx` at the end to indicate this is a Excel file.
+
+When performing `import` command to import all the records data from the Excel file to the Financial Planner, user should take note that there are some constraints which helps the `import` command performs smoothly.
+
+* The excel file can have multiple sheets, containing records data. The starting row of the table does not have to be first row of the sheet. This also applies to the column.
+* There can be blank row blending in the table, but there must be *no* blank column.
+* The First row of the table *must* have 4 cells, namely NAME, DATE, MONEY, TAGS. These 4 columns can be case-insensitive. The sheet with records data but does not have the first row, NAME, DATE, MONEY, TAGS will *not* be read.
+* The information of NAME, DATE, MONEY columns should be fully filled, while the TAGS columns is optionally filled.
+* Each tag should be separated by ... (3 *consecutive* dots). Beside ... , numbers and alphabet character, there should be no other character.
+
+
+The picture below shows a good example for the Excel Sheet.
+
+image::Export_Capture1_LinhChi.png[width:800]
+
+
+The `ImportExcelCommand` has only one constructor.
+
+* The constructor takes in file path argument and read the Excel file using that file path. After that, all the record data in the Excel file is retrieved and transform into Record object. The list of records are then added into the Model by using `ModelManager#addListUniqueRecord`
+
+The following sequence diagram shows how the list operation works:
+
+image::ImportExcelSequenceDiagram.png[width="800"]
+
+// end::import[]
+
+// tag::archive[]
+=== Archive into Excel file
+==== Current implementation
+The archive into excel file mechanism is facilitated by `ModelManager` with the help of `ExcelUtil`, the utility created to handle all methods relating to Excel. It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands, `ExcelUtil` and the `VersionedFinancialPlanner`.
+
+ArchiveCommand calls `ModelManager#updateFilteredRecords` and passes in different predicates depending on the argument mode. The List<Record> is retrieved by calling `ModelManager#getFilteredRecordList`.
+
+Meanwhile, it also called `ModelManager#getFinancialPlanner` to get the `ReadOnlyFinancialPlanner` Financial Planner.
+
+The SummaryByDateList is constructed after the ReadOnlyFinancialPlanner together with the predicate are passed into the construction of SummaryByDateList. The List<SummaryEntry> is easily retrieved from SummaryByDateList by calling `SummaryByDateList#getSummaryList`.
+
+`ExcelUtil#setNameExcelFile` is called to make the Excel name based on the condition of startDate and endDate.
+
+After that, `ExcelUtil#setPathFile` is called to set the Path file, which is the location of the Excel file stored in future. The Path file is constructed based on the name of the Excel file we retrieve above and the directory Path, it can be either optionally entered by the user or the default User's Home Directory.
+
+With the sufficient information, `List<Record> records`, `List<SummaryByDateEntry> summaryList`, `file path`, `ArchiveCommand#archiveDataIntoExcelSheetWithGivenRecords` is called to start the processing of producing Excel file, containing 2 Excel sheet, namely `RECORD DATA` and `SUMMARY DATA`.
+
+* `RECORD DATA` stores all the data of record the user want to archive, there are 4 columns: Name, date, money and tags, the tags names will be separated by ..., for visual benefit.
+
+image::Export_Capture1_LinhChi.png[width:800]
+
+* `SUMMARY DATA` stored the summary statistics for the period you archived, and there is a *Line Chart* next to the table for visual statistic [refer to `Draw line chart` part for more information]. As you can see in the picture, there are 3 series shown:
+** The first blue line named Series1 represents the Timeline (each component is one Date) versus the Income (each component is one income).
+** The second orange line named Series2 represents the Timeline (each component is one Date) versus the Outcome (each component is one outcome).
+** The third grey line named Series3 represents the Timeline (each component is one Date) versus the Net - Sum of income and outcome (each component is one net).
+
+image::Export_Capture2_LinhChi.png[width:800]
+
+This feature has only one keyword `archive` but implements 6 different argument modes to allow users to access multiple versions of the same command.
+The six argument modes are as listed below:
+
+* *No argument mode* `archive` will list down all records in the Financial Planner and archives all of them to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically User's Home Directory*.
+
+* *Single argument Date mode* `archive d/DATE` will list down all records with the specified date and archives all shown records to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically user's Home Directory*.
+
+* *Dual argument Date mode* `archive d/START_DATE END_DATE` will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically User's Home Directory*.
+
+* *Single argument Directory Path mode* `archive dir/DIRECTORY_PATH` will list down all records in the Financial Planner and archives all of them to an Excel file and store the file in the chosen Directory Path.
+
+* *Single argument Date mode + Single argument Directory path mode* `archive d/DATE dir/DIRECTORY_PATH` will list down all records with the specified date and archives all shown records to an Excel file and store the file in the chosen Directory Path.
+
+* *Dual argument Date mode + Single argument Directory path mode* `archive d/START_DATE END_DATE dir/DIRECTORY_PATH` will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the chosen Directory Path.
++
+
+The mechanism that facilitates these modes can be found in the `ArchiveCommandParser#parse`. Below is a overview of the mechanism:
+
+. Method `ArchiveCommandParser#createArchiveCommand` takes the input argument and further analyse it.
+. The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
+. This returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
+. The string associated with `d/`
+.. It is then passed into `ArchiveCommandParser#splitByWhitespace` for further processing and returns an array. This string will be split into sub-strings and each of them will be construct as a date type variable. The the size of the array exceed 2, error wil be thrown to inform invalid command format.
+.. If the size of the string equals 1, it is constructed as a date type variable after being passed to `ParseUtil#parseDate`, it must follow the format dd-mm-yyyy. Error will be thrown if the format is not correct or the date entered is not real.
+.. If the size of the string equals 2, each sub-string is constructed as a date type variable after being passed to `ParseUtil#parseDate`, and an additional check is conducted to check if the first date entered, known as Start date is smaller than the second date entered, known as End Date.
+. The String associated with `dir/`
+.. It is then passed into `ParseUtil#parseDirectoryString` to check if the Directory path given is existing.
+.. If the Directory is unreal, an error is thrown to inform the user.
+. Please take note that:
+.. If the prefix `d/` is not entered in the input, meaning that all the records will be included in the Excel sheet.
+.. If the prefix `dir/` is not entered in the input, meaning that the Directory Path is default as the *User's Home Directory*.
+
+The `ArchiveCommand` has four constructors which makes use of overloading to reduce code complexity.
+
+* One constructor has no arguments and assigns default predicate for the `FilteredList` in `ModelManager`,
+`PREDICATE_SHOW_ALL_RECORDS` which will show all items in the list and the Directory path is *User's Home Directory*.
+* The second constructor takes in 2 `Date` arguments and assigns the predicate `DateIsWithinDateIntervalPredicate` which will only show items within the date interval and the Directory path is *User's Home Directory*.
+* The third constructor takes in 1 `Directory Path` argument and assigns the predicate as `PREDICATE_SHOW_ALL_RECORDS`, which will show all items in the list and the Directory path is the entered directory path.
+* The fourth constructor takes in 1 `Directory Path` and 2 `Date` arguments and assigns the predicate as `DateIsWithinDateIntervalPredicate` which will only show items within the date interval and the Directory path is the entered Directory Path.
+
+The following sequence diagram shows how the list operation works:
+
+image::ArchiveSequenceDiagram.png[width="800"]
+
+For simplicity, interactions with the UI is not shown in the diagram above. +
+The update of the UI `RecordListPanel` is done through the event system. `FilteredList` is a type of ObservableList
+implemented by the Java 8 API and it will propagate any changes to the list to any listeners listening to it. This
+listener is present in `RecordListPanel` and will update the UI list automatically.
+
+// end::archive[]
+
 
 === Design Considerations
 ==== Aspect: Data structure to support listing of records

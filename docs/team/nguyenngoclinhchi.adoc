@@ -78,6 +78,10 @@ include::../UserGuide.adoc[tag=delete_by_date_entry]
 
 include::../UserGuide.adoc[tag=export_excel]
 
+include::../UserGuide.adoc[tag=archive]
+
+include::../UserGuide.adoc[tag=import]
+
 == Contributions to the Developer Guide
 
 |===

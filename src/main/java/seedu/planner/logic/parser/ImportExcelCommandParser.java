@@ -22,14 +22,21 @@ public class ImportExcelCommandParser implements Parser<ImportExcelCommand> {
      */
     public ImportExcelCommand parse (String args) throws ParseException {
         String trimmedArgs = args.trim();
-        String directoryPath = " ";
-        String checkedDirectoryPath;
-        String nameFile;
-        boolean isNameExist = true;
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ImportExcelCommand.MESSAGE_USAGE));
         }
+        return createImportExcelCommand(args);
+    }
+
+    /**
+     * Create the Import Command with given String args
+     */
+    private static ImportExcelCommand createImportExcelCommand (String args) throws ParseException {
+        String directoryPath = " ";
+        String checkedDirectoryPath;
+        String nameFile;
+        boolean isNameExist = true;
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DIR);
         if (!arePrefixesPresent(argMultimap, PREFIX_DIR) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
@@ -48,6 +55,7 @@ public class ImportExcelCommandParser implements Parser<ImportExcelCommand> {
         }
         return new ImportExcelCommand(checkedDirectoryPath);
     }
+
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.

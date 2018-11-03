@@ -27,6 +27,13 @@ public class ExportExcelCommandParser implements Parser<ExportExcelCommand> {
         if (trimmedArgs.isEmpty()) {
             return new ExportExcelCommand();
         }
+        return createExportExcelCommand(args);
+    }
+
+    /**
+     * Create Export Excel Command using args.
+     */
+    private static ExportExcelCommand createExportExcelCommand (String args) throws ParseException {
         String stringDate = whiteSpace;
         String stringPath = whiteSpace;
         boolean isDateExist = true;
@@ -53,7 +60,6 @@ public class ExportExcelCommandParser implements Parser<ExportExcelCommand> {
         }
         return parseArgumentsModeIntoCommand(stringDate.trim(), stringPath.trim());
     }
-
     /**
      * Parse the arguments into different argument mode, hence, we will have different command mode.
      */

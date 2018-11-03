@@ -82,22 +82,6 @@ public class ArchiveCommand extends Command {
         this.predicate = new DateIsWithinIntervalPredicate(startDate, endDate);
     }
 
-    /**
-     * Achieve the records into Excel File.
-     */
-    private static Boolean achieveDataIntoExcelSheetWithGivenRecords(
-            List<Record> recordList, List<SummaryEntry> daySummaryEntryList, String filePath) {
-        XSSFWorkbook workbook = new XSSFWorkbook();
-        XSSFSheet recordData = workbook.createSheet("RECORD DATA");
-        XSSFSheet summaryData = workbook.createSheet("SUMMARY DATA");
-        if (recordList.size() > EMPTY_LIST_RECORD_SIZE) {
-            ExcelUtil.writeExcelSheetIntoDirectory(
-                    recordList, daySummaryEntryList, recordData, summaryData, workbook, filePath);
-            return true;
-        }
-        return false;
-    }
-
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) {
         requireNonNull(this);
@@ -118,6 +102,22 @@ public class ArchiveCommand extends Command {
         model.deleteListRecord(recordList);
         model.commitFinancialPlanner();
         return new CommandResult(message);
+    }
+
+    /**
+     * Achieve the records into Excel File.
+     */
+    private static Boolean achieveDataIntoExcelSheetWithGivenRecords(
+            List<Record> recordList, List<SummaryEntry> daySummaryEntryList, String filePath) {
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet recordData = workbook.createSheet("RECORD DATA");
+        XSSFSheet summaryData = workbook.createSheet("SUMMARY DATA");
+        if (recordList.size() > EMPTY_LIST_RECORD_SIZE) {
+            ExcelUtil.writeExcelSheetIntoDirectory(
+                    recordList, daySummaryEntryList, recordData, summaryData, workbook, filePath);
+            return true;
+        }
+        return false;
     }
 
     @Override

@@ -78,7 +78,7 @@ public class ExcelUtil {
     private static final String INCOME_TITLE = "INCOME";
     private static final String OUTCOME_TITLE = "EXPENSE";
     private static final String TOTAL_MONEY = "TOTAL";
-    private static final String TAG_SEPARATOR = " ... ";
+    private static final String TAG_SEPARATOR = "...";
 
     private static Logger logger = LogsCenter.getLogger(ExcelUtil.class);
 
@@ -187,14 +187,14 @@ public class ExcelUtil {
             final int lastRowSheet = sheet.getLastRowNum();
             final int firstColumnSheet = sheet.getRow(firstRowSheet).getFirstCellNum();
             final int lastColumnSheet = firstColumnSheet;
-            final int firstColumnIncome = firstColumnSheet + FIRST_COLUMN;
+            final int firstColumnIncome = firstColumnSheet + SECOND_COLUMN;
             final int lastColumnIncome = firstColumnIncome;
-            final int firstColumnOutcome = firstColumnSheet + SECOND_COLUMN;
+            final int firstColumnOutcome = firstColumnSheet + THIRD_COLUMN;
             final int lastColumnOutcome = firstColumnOutcome;
-            final int firstColumnNet = firstColumnSheet + THIRD_COLUMN;
+            final int firstColumnNet = firstColumnSheet + FOURTH_COLUMN;
             final int lastColumnNet = firstColumnNet;
-            final int widthChart = 12;
-            final int heightChart = 18;
+            final int widthChart = 20;
+            final int heightChart = 30;
 
             if (!DirectoryPath.isValidFilePath(filePath)) {
                 throw new ParseException(Messages.MESSAGE_UNREALISTIC_DIRECTORY);
