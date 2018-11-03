@@ -202,7 +202,7 @@ Finds and lists items whose tags contain any of the given keywords. +
 Format: `tag KEYWORD [MORE_KEYWORDS]
 
 ****
-* The search is case insensitive. e.g `lab1` will match `Lab 1`
+* The search is case insensitive. e.g `lab1` will match `Lab1`
 * Only the tag is searched.
 * Partial words are recognized. e.g. `Lab` will match `Lab1`
 ****
