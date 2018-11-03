@@ -43,6 +43,8 @@ public class AdminModelManager extends ModelManager implements AdminModel {
         recordTransaction(transaction);
 
         inventoryList.decreaseQuantity(transaction.getDrinkTransacted(), transaction.getQuantityTransacted());
+        indicateInventoryListChanged();
+        updateFilteredDrinkList(PREDICATE_SHOW_ALL_DRINKS);
     }
 
     @Override
@@ -55,6 +57,8 @@ public class AdminModelManager extends ModelManager implements AdminModel {
         recordTransaction(transaction);
 
         inventoryList.increaseQuantity(transaction.getDrinkTransacted(), transaction.getQuantityTransacted());
+        indicateInventoryListChanged();
+        updateFilteredDrinkList(PREDICATE_SHOW_ALL_DRINKS);
     }
 
     private void recordTransaction(Transaction transaction) {

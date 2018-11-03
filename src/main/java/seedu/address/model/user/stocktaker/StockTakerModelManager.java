@@ -31,6 +31,7 @@ public class StockTakerModelManager extends ModelManager implements StockTakerMo
         recordTransaction(transaction);
 
         inventoryList.decreaseQuantity(transaction.getDrinkTransacted(), transaction.getQuantityTransacted());
+        indicateInventoryListChanged();
     }
 
     @Override
@@ -42,6 +43,7 @@ public class StockTakerModelManager extends ModelManager implements StockTakerMo
         transaction.setAmountMoney(defaultAmountTransacted);
         recordTransaction(transaction);
         inventoryList.increaseQuantity(transaction.getDrinkTransacted(), transaction.getQuantityTransacted());
+        indicateInventoryListChanged();
     }
 
     private void recordTransaction(Transaction transaction) {

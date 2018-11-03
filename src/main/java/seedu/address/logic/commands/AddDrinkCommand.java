@@ -17,12 +17,12 @@ import seedu.address.model.user.admin.AdminModelManager;
  * Adds a drink to the inventory list.
  */
 public class AddDrinkCommand extends Command {
-    public static final String COMMAND_WORD = "addDrink";
+    public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new drink to Drink I/0. "
             + "Parameters: "
             + PREFIX_DRINK_NAME + "Drink item "
-            + PREFIX_DRINK_DEFAULT_SELLING_PRICE + "Default salling price "
+            + PREFIX_DRINK_DEFAULT_SELLING_PRICE + "Default selling price "
             + PREFIX_DRINK_COST_PRICE + "Cost price \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DRINK_NAME + "Coca Cola Original "

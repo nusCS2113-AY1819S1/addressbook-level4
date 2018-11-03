@@ -24,14 +24,14 @@ public class SellDrinkCommand extends Command {
 
     public static final String COMMAND_WORD = "sell";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sell an drink that is recorded in Drink I/O. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sell an drink that is recorded in Drink I/O. \n"
             + "Parameters: "
             + PREFIX_DRINK_NAME + "DRINK NAME "
             //+ PREFIX_DATE + "DATE SOLD "
-            + PREFIX_QUANTITY + "QUANTITY SOLD "
+            + PREFIX_QUANTITY + "QUANTITY SOLD \n"
             //+ PREFIX_PRICE + "TOTAL REVENUE "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_DRINK_NAME + "coca cola "
+            + PREFIX_DRINK_NAME + "Coca Cola Original "
             //+ PREFIX_DATE + "10/06/18 "
             + PREFIX_QUANTITY + "12 ";
     //+ PREFIX_PRICE + "345.68 ";
