@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.planner.commons.util.CompareUtil;
 import seedu.planner.commons.util.MoneyUtil;
-import seedu.planner.commons.util.SortUtil;
 import seedu.planner.model.Month;
 import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Record;
@@ -37,7 +37,7 @@ public class SummaryByMonthList {
     }
 
     public ObservableList<SummaryEntry> getSummaryList() {
-        List<SummaryEntry> list = summaryMap.keySet().stream().sorted(SortUtil.compareMonth())
+        List<SummaryEntry> list = summaryMap.keySet().stream().sorted(CompareUtil.compareMonth())
                 .map(k -> convertToUiFriendly(summaryMap.get(k)))
                 .collect(Collectors.toList());
         return FXCollections.observableList(list);

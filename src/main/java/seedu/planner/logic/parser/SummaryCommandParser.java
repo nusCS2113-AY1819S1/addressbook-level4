@@ -1,11 +1,12 @@
 package seedu.planner.logic.parser;
 
 import static seedu.planner.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.planner.commons.util.CompareUtil.compareMonth;
+import static seedu.planner.commons.util.DateUtil.isEarlierThan;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 
 import java.util.stream.Stream;
 
-import seedu.planner.commons.util.DateUtil;
 import seedu.planner.logic.commands.SummaryByDateCommand;
 import seedu.planner.logic.commands.SummaryByMonthCommand;
 import seedu.planner.logic.commands.SummaryCommand;
@@ -47,7 +48,7 @@ public class SummaryCommandParser implements Parser<SummaryCommand> {
     }
 
     private static boolean isDateOrderValid(Date startDate, Date endDate) {
-        return startDate.isEarlierThan(endDate) || startDate.equals(endDate);
+        return isEarlierThan(startDate, endDate) || startDate.equals(endDate);
     }
 
     /**
@@ -85,7 +86,7 @@ public class SummaryCommandParser implements Parser<SummaryCommand> {
         } else if (mode.equals("month")) {
             Month startMonth = ParserUtil.parseMonth(arg1);
             Month endMonth = ParserUtil.parseMonth(arg2);
-            if (DateUtil.compareMonth(startMonth, endMonth) > 0) {
+            if (compareMonth().compare(startMonth, endMonth) > 0) {
                 throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         SummaryByMonthCommand.MESSAGE_USAGE)));
             }

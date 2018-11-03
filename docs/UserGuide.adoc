@@ -143,6 +143,7 @@ Returns `dinner with family` and `family party`
 Returns all records having `family`, `food`, or `shopping` in their name
 
 [[findtag]]
+// tag::findtag[]
 === Locating records by tag: `findtag`
 
 Finds records with tags that match any of the given keywords. +
@@ -163,6 +164,7 @@ Examples:
 Returns any record tagged with `friend`
 * `findtag friend food shopping` +
 Returns all records having any of the tags `friend`, `food`, or `shopping`
+// end::findtag[]
 
 === Selecting a record : `select`
 
@@ -183,6 +185,8 @@ Selects the 2nd record in the expense book.
 `select 1` +
 Selects the 1st record in the results of the `find` command.
 
+
+// tag::sort[]
 [[sort]]
 === Sorting displayed records : `sort`
 
@@ -214,6 +218,7 @@ Sorts the list of records by name in ascending order.
 
 * `sort moneyflow desc` +
 Sorts the list of records by moneyflow in descending order.
+// end::sort[]
 
 === Editing a record : `edit`
 

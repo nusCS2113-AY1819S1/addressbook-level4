@@ -1,12 +1,13 @@
 package seedu.planner.logic.parser;
 
 import static seedu.planner.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.planner.commons.util.DateUtil.isLaterThan;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_MONEYFLOW;
 
 import java.util.stream.Stream;
 
-import seedu.planner.logic.commands.LimitCommand;
+import seedu.planner.logic.commands.AddLimitCommand;
 import seedu.planner.logic.parser.exceptions.ParseException;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
@@ -15,9 +16,9 @@ import seedu.planner.model.record.MoneyFlow;
 
 
 /**
-* The Parser will parse those values in one format Limit and return back to LimitCommand.
+* The Parser will parse those values in one format Limit and return back to AddLimitCommand.
 * */
-public class LimitCommandParser implements Parser<LimitCommand> {
+public class AddLimitCommandParser implements Parser<AddLimitCommand> {
     /**
      * Parses the information required for the limit command.
      * and returns a limit object for execution.
@@ -30,13 +31,13 @@ public class LimitCommandParser implements Parser<LimitCommand> {
     private Date dateEnd;
 
     @Override
-    public LimitCommand parse(String args) throws ParseException {
+    public AddLimitCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_MONEYFLOW);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DATE, PREFIX_MONEYFLOW)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LimitCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLimitCommand.MESSAGE_USAGE));
         }
         moneyString = "-" + argMultimap.getValue(PREFIX_MONEYFLOW).get();
 
@@ -53,16 +54,16 @@ public class LimitCommandParser implements Parser<LimitCommand> {
             dateStart = ParserUtil.parseDate(datesIn[0]);
             dateEnd = ParserUtil.parseDate(datesIn[0]);
         } else {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LimitCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLimitCommand.MESSAGE_USAGE));
         }
 
-        if (dateStart.isLaterThan(dateEnd)) {
+        if (isLaterThan(dateStart, dateEnd)) {
             throw new ParseException("The dateStart must be earlier than or equals to dateEnd.");
         }
         Limit limit = new Limit(dateStart, dateEnd, money);
 
 
-        return new LimitCommand(limit);
+        return new AddLimitCommand(limit);
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {

@@ -1,0 +1,106 @@
+= Teh Zhi Thon - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets/
+:stylesheet: ../stylesheets/material-blue.css
+
+== PROJECT: FinancialPlanner
+
+== Overview
+
+FinancialPlanner is a desktop financial planner application used for teaching Software Engineering
+principles. The user interacts with it using a command-line interface (CLI), and it has a graphical
+user interface created using JavaFX.
+
+We worked in groups of 4 - 5 members for the project and were each expected to make contributions to the project by a
+dding both minor enhancements and major features to the software. We were initially provided with the base code which
+is written in Java, and has about 10 kLoC. Our task was to morph the existing code into any other software we opted to.
+
+We would be evaluated based on our ability to work with existing base code and the quality of our new enhancements to
+the existing code. Besides code, we were expected to write a User Guide and Developer Guide as well for the product
+as though we were releasing an official product for public usage to simulate an actual work schedule.
+
+We choose to create our application FinancialPlanner to allow users keep track of their financial status using a
+desktop application and is targeted at users who enjoy typing and are keen on managing their finances responsibly.
+
+The application revolves around usage of the CLI to manage one's finances. Users can store `name`, `moneyflow`, `date`
+and `tags` of any form of financial activity in the application as a `Record`. `Moneyflow` would be the expenditure
+or income of the financial activity, `date` would be the actual date the activity was performed on and `tags` is a
+system for users to label their data for easy access.
+
+== Summary of Contributions
+
+=== `ongoing` *Major Enhancement #1*: added the ability to autocomplete text input
+
+** What it does: displays a popup-box of suggested words to autocomplete with when user inputs parts of a word.
+** Justification: this feature improves the product significantly because users who may not be familiar with
+the software commands can save time using the software by keying in parts of a command word they want to use
+and simply complete the command using the list of suggested words. It also helps users to fill in some command
+parameters which may be commonly used or likely to repeated.
+** Highlights: This enhancement was simple to implement but challenging to perfect in order to maximise the
+convenience it provides to users.
+We needed to accurately read the user input and provide a different range of suggestions depending on the
+command word input by the user as well as any other parameters that may be required by the command.
+** Credits: The Java TextFields (AutoComplete) Library and its inner classes were recreated and tweaked
+to achieve the necessary aims of our product autocomplete functionality.
+
+=== `completed` *Minor Enhancement #1*: added the ability to find data by tags
+
+** What it does: allows users to find and display all data with a specific attribute `tag`.
+** Justification: this feature improves the product by providing another means of filtering data that
+they may wish to hide and show according to their needs.
+** Highlights: this enhancement was simple to implement but was a key enhancement that led to better use of
+every attribute of our data
+
+=== `completed` *Minor Enhancement #2*: added the ability to sort data
+
+** What it does: allows users to sort their data by a specific category and in a specific order
+** Justification: this feature improves the product by providing users with another means of manipulating
+and reorganising their data to display in their desired manner.
+** Highlights: This enhancement was more challenging to implement than expected as it required use of
+multiple comparators as well as a suitable data structure that supported sorting. It sparked evaluation
+of the different ways to implement sorting as some structures used were not suitable or inefficient.
+
+
+* *Code contributed*:
+
+** [https://github.com[Functional Code]] +
+** [https://github.com[Test Code]] +
+
+* *Other contributions*:
+
+** Project management:
+*** Helped to morph existing base code to new financial planner product
+(Pull Request https://github.com/CS2113-AY1819S1-T09-4/main/pull/38[#38])
+
+** Enhancements to existing features:
+*** Added and improved utility methods for comparison and sorting
+(Pull requests https://github.com/CS2113-AY1819S1-T09-4/main/pull/64/files[#64])
+
+** Documentation:
+*** Made large changes to reorganise User Guide user readability
+(Pull Request https://github.com/CS2113-AY1819S1-T09-4/main/pull/114[#114])
+
+** Community:
+*** Pull Requests reviewed (with non-trivial review comments):
+https://github.com/CS2113-AY1819S1-T09-4/main/pull/17[#17]
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=findtag]
+
+include::../UserGuide.adoc[tag=sort]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=findtag]
+
+---

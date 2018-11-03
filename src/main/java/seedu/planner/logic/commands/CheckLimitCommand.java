@@ -10,7 +10,8 @@ import seedu.planner.model.Model;
  * This function will print out all the limit information.
  */
 public class CheckLimitCommand extends Command {
-    public static final String COMMAND_WORD = "checkLimit";
+    public static final String COMMAND_WORD = "checklimit";
+    public static final String COMMAND_WORD_UNDERSCORE = "check_limit";
     public static final String MESSAGE_SUCCESS = "Listed all limits";
     public static final String MESSAGE_FAILURE = "No more limits to list!";
 

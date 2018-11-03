@@ -2,6 +2,8 @@ package seedu.planner.model.record;
 
 import static java.lang.Math.abs;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.planner.commons.util.DateUtil.isEarlierThan;
+import static seedu.planner.commons.util.DateUtil.isLaterThan;
 
 /**
 * Limit used to offer a function as a reminder to user about their money usage.
@@ -55,7 +57,7 @@ public class Limit {
     public boolean isInsideDatePeriod (Record record) {
         Date recordDate;
         recordDate = record.getDate();
-        return ((dateStart.isEarlierThan(recordDate) && dateEnd.isLaterThan(recordDate))
+        return ((isEarlierThan(dateStart, recordDate) && isLaterThan(dateEnd, recordDate))
             || dateEnd.equals(recordDate) || dateStart.equals(recordDate));
     }
 

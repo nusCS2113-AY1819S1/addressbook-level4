@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2113-AY1819S1-T09-4/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team T09-4`      Since: `Aug 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -418,6 +418,7 @@ The update of the UI `RecordListPanel` is done through the event system. `Filter
 implemented by the Java 8 API and it will propagate any changes to the list to any listeners listening to it. This
 listener is present in `RecordListPanel` and will update the UI list automatically.
 
+// tag::findtag[]
 === Find records by tag feature
 ==== Current Implementation
 The findtag mechanism is also facilitated by `ModelManager`. FindTagCommand calls `ModelManager#updateFilteredRecords`
@@ -439,6 +440,7 @@ and obtain a new `filteredRecords` based on the predicate, which will also trigg
 The following sequence diagram shows how the limit operation works:
 
 image::FindTagSequenceDiagram.png[width:800]
+// end::findtag[]
 
 === Limit feature
 ==== Current Implementation
