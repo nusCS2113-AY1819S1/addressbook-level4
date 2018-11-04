@@ -86,8 +86,7 @@ public class ArchiveCommand extends Command {
     public CommandResult execute(Model model, CommandHistory commandHistory) {
         requireNonNull(this);
         model.updateFilteredRecordList(predicate);
-        ReadOnlyFinancialPlanner financialPlanner = model.getFinancialPlanner();
-        SummaryByDateList summaryList = new SummaryByDateList(financialPlanner.getRecordList(), predicate);
+        SummaryByDateList summaryList = new SummaryByDateList(model.getFilteredRecordList());
         List<Record> recordList = model.getFilteredRecordList();
         List<SummaryEntry> daySummaryEntryList = summaryList.getSummaryList();
         String nameFile = ExcelUtil.setNameExcelFile(startDate, endDate);
