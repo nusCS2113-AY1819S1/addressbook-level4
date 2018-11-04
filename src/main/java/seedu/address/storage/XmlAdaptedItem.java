@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Loststatus;
 import seedu.address.model.item.Name;
 import seedu.address.model.item.Quantity;
 import seedu.address.model.item.Status;
@@ -31,6 +32,8 @@ public class XmlAdaptedItem {
     private String minQuantity;
     @XmlElement(required = true)
     private Status status = new Status();
+    @XmlElement(required = true)
+    private Loststatus loststatus = new Loststatus();
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -44,11 +47,14 @@ public class XmlAdaptedItem {
     /**
      * Constructs an {@code XmlAdaptedItem} with the given item details.
      */
-    public XmlAdaptedItem(String name, String quantity, String minQuantity, Status status,
-                          List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedItem(String name, String quantity, String minQuantity,
+                          Loststatus loststatus, Status status, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.quantity = quantity;
         this.minQuantity = minQuantity;
+        if (loststatus != null) {
+            this.loststatus = loststatus;
+        }
         if (status != null) {
             this.status = status;
         }
@@ -66,6 +72,7 @@ public class XmlAdaptedItem {
         name = source.getName().fullName;
         quantity = source.getQuantity().toString();
         minQuantity = source.getMinQuantity().toString();
+        loststatus = source. getLoststatus();
         status = source.getStatus();
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
@@ -110,7 +117,7 @@ public class XmlAdaptedItem {
         final Quantity modelMinQuantity = new Quantity(minQuantity.toString());
 
         final Set<Tag> modelTags = new HashSet<>(itemTags);
-        return new Item(modelName, modelQuantity, modelMinQuantity, status, modelTags);
+        return new Item(modelName, modelQuantity, modelMinQuantity, loststatus, status, modelTags);
     }
 
     @Override
@@ -127,6 +134,7 @@ public class XmlAdaptedItem {
         return Objects.equals(name, otherItem.name)
                 && Objects.equals(quantity, otherItem.quantity)
                 && Objects.equals(minQuantity, otherItem.minQuantity)
+                && Objects.equals(loststatus, otherItem.loststatus)
                 && Objects.equals(status, otherItem.status)
                 && tagged.equals(otherItem.tagged);
     }
