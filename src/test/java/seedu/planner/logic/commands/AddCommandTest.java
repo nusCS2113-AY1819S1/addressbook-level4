@@ -97,6 +97,10 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addListUniqueRecord(List<Record> records) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
         public void deleteRecord(Record target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -108,6 +112,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteListRecord(List<Record> records) {
+            throw new AssertionError("This method should not be called.");
+
+        }
+
         public void updateLimit(Limit target, Limit editedLimit) {
             throw new AssertionError("This method should not be called.");
         }
@@ -117,12 +126,11 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-
-
         @Override
         public ObservableList<Limit> getLimitList() {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public ReadOnlyFinancialPlanner getFinancialPlanner() {
             throw new AssertionError("This method should not be called.");
@@ -147,26 +155,19 @@ public class AddCommandTest {
         public void deleteLimit(Limit limit) {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public boolean hasRecord(Record record) {
             throw new AssertionError("This method should not be called.");
         }
-
 
         @Override
         public boolean hasSameDateLimit(Limit limit) {
             throw new AssertionError("This method should not be called.");
         }
 
-
         @Override
         public boolean isExceededLimit (Limit limit) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-
-
-        public void deleteListRecord(List<Record> targetList) {
             throw new AssertionError("This method should not be called.");
         }
 

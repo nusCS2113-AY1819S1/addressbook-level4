@@ -5,8 +5,10 @@ import static seedu.planner.commons.util.CompareUtil.compareMonth;
 import static seedu.planner.commons.util.DateUtil.isEarlierThan;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.logic.commands.SummaryByDateCommand;
 import seedu.planner.logic.commands.SummaryByMonthCommand;
 import seedu.planner.logic.commands.SummaryCommand;
@@ -20,6 +22,7 @@ import seedu.planner.model.record.Date;
  */
 public class SummaryCommandParser implements Parser<SummaryCommand> {
 
+    private Logger logger = LogsCenter.getLogger(SummaryCommandParser.class);
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
@@ -63,6 +66,7 @@ public class SummaryCommandParser implements Parser<SummaryCommand> {
         }
         String mode = argMultimap.getPreamble().trim();
         String intervalString = argMultimap.getValue(PREFIX_DATE).get();
+        logger.info("Interval String: " + intervalString);
         String[] argList = getArguments(intervalString);
         return createSummaryCommand(mode, argList[0], argList[1]);
     }

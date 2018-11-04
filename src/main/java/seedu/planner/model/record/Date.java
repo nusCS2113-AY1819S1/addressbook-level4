@@ -15,14 +15,14 @@ import seedu.planner.commons.util.DateUtil;
 public class Date {
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Date parameter should be in the format of dd-mm-yyyy "
-            + "with dd and mm being 2 digits, and yyyy being 4 digits."
-            + " Please take note that inappropriate date will result in errors, for example: 30/02/2018";
+                    + "with dd and mm being 2 digits, and yyyy being 4 digits."
+                    + " Please take note that inappropriate date will result in errors, for example: 30/02/2018";
     public static final String MESSAGE_DATE_LOGICAL_CONSTRAINTS =
             "Date should follow the modern calendar. "
-            + "Day parameter must fit within the constraints of each month. \n"
-            + "For e.g, February has only 28 days for the non-Leap year "
-            + "so the day parameter must be less than or equal to 28 if the month "
-            + "parameter is 2.";
+                    + "Day parameter must fit within the constraints of each month. \n"
+                    + "For e.g, February has only 28 days for the non-Leap year "
+                    + "so the day parameter must be less than or equal to 28 if the month "
+                    + "parameter is 2.";
     public static final String DATE_VALIDATION_REGEX = "\\d{1,2}-\\d{1,2}-\\d{4}";
 
     public final String value;
@@ -127,5 +127,4 @@ public class Date {
                 && month == ((Date) other).getMonth()
                 && year == ((Date) other).getYear()); // state check
     }
-
 }

@@ -6,9 +6,11 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.planner.commons.core.Messages;
 import seedu.planner.commons.core.index.Index;
 import seedu.planner.commons.util.StringUtil;
 import seedu.planner.logic.parser.exceptions.ParseException;
+import seedu.planner.model.DirectoryPath;
 import seedu.planner.model.Month;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.MoneyFlow;
@@ -135,4 +137,26 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Parses {@code Directory Path} into a {@code DirectoryPath}
+     */
+    public static String parseDirectoryString(String dirPath) throws ParseException {
+        requireNonNull(dirPath);
+        if (!DirectoryPath.isValidDirectory(dirPath)) {
+            throw new ParseException(Messages.MESSAGE_UNREALISTIC_DIRECTORY);
+        }
+        return dirPath;
+    }
+
+    /**
+     * Parses {@code Directory Path} into a {@code DirectoryPath}
+     */
+    public static String parseFilePathString(String dirPath) throws ParseException {
+        requireNonNull(dirPath);
+        System.out.println(dirPath);
+        if (!DirectoryPath.isValidFilePath(dirPath)) {
+            throw new ParseException(Messages.MESSAGE_UNREALISTIC_DIRECTORY);
+        }
+        return dirPath;
+    }
 }
