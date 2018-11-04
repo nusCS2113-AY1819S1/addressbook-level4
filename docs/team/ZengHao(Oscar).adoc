@@ -28,11 +28,11 @@ Detailed information about my contributions is listed below.
 
 === `completed` *Major enhancement #1*: added the ability to set limits for multiple periods of time.
 
-** What it does: allows the user to set multiple limits for different periods of time to better manage their spend.
-All the limits will be stored and automatically check whether the limit has been exceeded.
+** What it does: allows the user to set multiple limits for different periods of time or a single day to better manage their spend.
+All the limits will be stored and automatically checked whenever the records were updated.
 The user will be reminded if limits have been exceeded.
-** Justification:This feature improves the product significantly because user will be able to make plan for their expense in advance and store all the limits.
-Since user may need to set limits for multiple periods of time while it is hard to remember all the limits they have set
+** Justification:This feature improves the product significantly because user will be able to make plans for their expense in advance and store all the limits.
+Since user may need to set limits for multiple periods of time while it is hard to remember all the limits they have set.
 This will help user better control their spend and keep their limits updated.
 This feature is challenging because it requires me to build a storage for limits to store limits' details and read from the storage.
 Besides that, I also need to keep limits' information updated whenever there is a change of records and generate output if any limit has been exceeded.
@@ -77,11 +77,19 @@ Besides that, I also need to keep limits' information updated whenever there is 
 === *Other contributions*:
 
 ** Project management:
+***
 ** Enhancements to existing features:
 *** Helped combine the storage of the FinancialPlanner.
 *** Fix some of the bugs of tests.
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Update limit related content and some other content of the User Guide
+*** Update limit related content and of Developer Guide.
+Example:
+https://github.com/CS2113-AY1819S1-T09-4/main/blob/master/docs/DeveloperGuide.adoc#addlimit-feature[addlimit]
+https://github.com/CS2113-AY1819S1-T09-4/main/blob/master/docs/DeveloperGuide.adoc#37-deletelimit-feature[deletelimit]
+https://github.com/CS2113-AY1819S1-T09-4/main/blob/master/docs/DeveloperGuide.adoc#38-editlimit-feature[editlimit]
+https://github.com/CS2113-AY1819S1-T09-4/main/blob/master/docs/DeveloperGuide.adoc#39-checklimit-feature[checklimit]
+
 ** Community:
 *** PRs reviewed : https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
 *** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
