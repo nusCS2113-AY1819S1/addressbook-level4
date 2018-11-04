@@ -5,7 +5,7 @@ https://travis-ci.org/CS2113-AY1819S1-T13-3/main[image:https://travis-ci.org/CS2
 https://coveralls.io/github/CS2113-AY1819S1-T13-3/main?branch=master[image:https://coveralls.io/repos/github/CS2113-AY1819S1-T13-3/main/badge.svg?branch=master[Coverage Status]]
 
 ifdef::env-github[]
-image::docs/images/Ui2.png[width="600"]
+image::docs/images/UI2.png[width="600"]
 endif::[]
 
 * Flexible and easy-to-use application that keep your business running smoothly.
