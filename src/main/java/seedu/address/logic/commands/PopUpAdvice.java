@@ -1,12 +1,15 @@
 //@@author SHININGGGG
 package seedu.address.logic.commands;
 
+import javafx.scene.Scene;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+/**
+ * Pop up a window for the advice on how to spend money
+ */
 public class PopUpAdvice {
 
     private final String content;
@@ -15,6 +18,9 @@ public class PopUpAdvice {
         content = x;
     }
 
+    /**
+     * Pop up a window for the advice on how to spend money
+     */
     public void popup() {
         Stage stage = new Stage();
         Label label = new Label();
