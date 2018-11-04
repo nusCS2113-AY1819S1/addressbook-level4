@@ -72,7 +72,7 @@ public class XmlAdaptedItem {
         name = source.getName().fullName;
         quantity = source.getQuantity().toString();
         minQuantity = source.getMinQuantity().toString();
-        loststatus = source. getLoststatus();
+        loststatus = source.getLoststatus();
         status = source.getStatus();
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
