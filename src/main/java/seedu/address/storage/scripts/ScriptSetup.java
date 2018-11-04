@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.ValidCommandList;
+import seedu.address.model.UserPrefs;
 
 /**
  * Load the and add default scripts into in the default directory of the Application.
@@ -30,16 +31,17 @@ public class ScriptSetup {
     /**
      * Creates a script folder and add some sample text files if folder is missing.
      *
-     * @param scriptFolder is the directory of the script folder
+     * @param userPrefs is the UserPrefs of the program
      */
-    public void execute(String scriptFolder) {
-        boolean isScriptFolderPresent = true;
+    public void execute(UserPrefs userPrefs) {
         Path scriptPath;
+        String scriptFolder = userPrefs.getScriptFileDirectory();
         boolean isPathValid = pathName.isValidPath(scriptFolder);
         if (isPathValid) {
             scriptPath = FileUtil.getPath(defaultLocation + scriptFolder);
         } else {
             scriptPath = FileUtil.getPath(defaultLocation + DEFAULT_SCRIPT_FOLDER);
+            userPrefs.setScriptFileDirectory(DEFAULT_SCRIPT_FOLDER);
         }
         try {
             FileUtil.createFolder(scriptPath);
