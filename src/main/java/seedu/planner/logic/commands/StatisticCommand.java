@@ -46,9 +46,11 @@ public class StatisticCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         model.updateFilteredRecordList(predicate);
         CategoryStatisticsList categoryStats = new CategoryStatisticsList(model.getFilteredRecordList());
-        EventsCenter.getInstance().post(new ShowPieChartStatsEvent(categoryStats.getReadOnlyStatsList()));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, DateUtil.formatDate(startDate),
-                DateUtil.formatDate(endDate)));
+        String startDateFormatted = DateUtil.formatDate(startDate);
+        String endDateFormatted = DateUtil.formatDate(endDate);
+        EventsCenter.getInstance().post(new ShowPieChartStatsEvent(categoryStats.getReadOnlyStatsList(),
+                startDateFormatted, endDateFormatted));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, startDateFormatted, endDateFormatted));
     }
 
     @Override
