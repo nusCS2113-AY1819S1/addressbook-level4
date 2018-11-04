@@ -26,6 +26,8 @@ public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
     private static final String FXML = "StatsDisplayPanel.fxml";
 
     private static final String untaggedLabel = "<<untagged>>";
+    private static final String LABEL_FORMAT_EXPENSE = "Expense Breakdown from <%s to %s>";
+    private static final String LABEL_FORMAT_INCOME = "Income Breakdown from <%s to %s>";
 
     @FXML
     private TabPane tabManager;
@@ -66,25 +68,27 @@ public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
     }
 
     /** Creates the CategoryBreakdown object with the total expense and tag of each CategoryStatistic */
-    private Node createTotalExpenseBreakdown(MixedPieChartDataList dataList) {
+    private Node createTotalExpenseBreakdown(MixedPieChartDataList dataList, String startDate, String endDate) {
         if (dataList.isExpenseDataEmpty()) {
-            Label label = new Label(BREAKDOWN_ERROR_MESSAGE);
-            label.getStyleClass().add("label-bright");
-            return new AnchorPane(label);
+            return createPaneWIthErrorMsg();
         }
         return new CategoryBreakdown(dataList.getExpenseChartLabelData(), dataList.getExpenseChartLegendData(),
-                "Expense Breakdown for the period").getRoot();
+                String.format(LABEL_FORMAT_EXPENSE, startDate, endDate)).getRoot();
+    }
+
+    private Node createPaneWIthErrorMsg() {
+        Label label = new Label(BREAKDOWN_ERROR_MESSAGE);
+        label.getStyleClass().add("label-bright");
+        return new AnchorPane(label);
     }
 
     /** Creates the CategoryBreakdown object with the total income and tag of each CategoryStatistic */
-    private Node createTotalIncomeBreakdown(MixedPieChartDataList dataList) {
+    private Node createTotalIncomeBreakdown(MixedPieChartDataList dataList, String startDate, String endDate) {
         if (dataList.isIncomeDataEmpty()) {
-            Label label = new Label(BREAKDOWN_ERROR_MESSAGE);
-            label.getStyleClass().add("label-bright");
-            return new AnchorPane(label);
+            return createPaneWIthErrorMsg();
         }
         return new CategoryBreakdown(dataList.getIncomeChartLabelData(), dataList.getIncomeChartLegendData(),
-                "Income Breakdown for the period").getRoot();
+                String.format(LABEL_FORMAT_INCOME, startDate, endDate)).getRoot();
     }
 
     /**
@@ -108,9 +112,9 @@ public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         MixedPieChartDataList dataList = new MixedPieChartDataList(event.data);
         Tab categoryExpenseTab = new Tab("Category Breakdown For Expenses", createTotalExpenseBreakdown(
-                dataList));
+                dataList, event.startDate, event.endDate));
         Tab categoryIncomeTab = new Tab("Category Breakdown For Income", createTotalIncomeBreakdown(
-                dataList));
+                dataList, event.startDate, event.endDate));
         clearTabs();
         createTabs(categoryExpenseTab, categoryIncomeTab);
         show();

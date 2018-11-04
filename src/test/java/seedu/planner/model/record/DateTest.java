@@ -58,6 +58,7 @@ public class DateTest {
 
         // valid dates
         assertTrue(DateUtil.isValidDate(28, 2, 2018)); // There are 28 days in the month of February
+        assertTrue(DateUtil.isValidDate(29, 2, 2000)); // Special day in a leap year
 
     }
 

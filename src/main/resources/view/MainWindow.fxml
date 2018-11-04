@@ -12,7 +12,7 @@
 <?import javafx.scene.Scene?>
 <?import javafx.stage.Stage?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         minWidth="1400" minHeight="700" onCloseRequest="#handleExit">
+         minWidth="950" minHeight="600" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -46,7 +46,7 @@
           </padding>
         </StackPane>
 
-        <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
+        <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS" >
           <VBox fx:id="recordList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
@@ -54,7 +54,7 @@
             <StackPane fx:id="recordListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
 
-          <StackPane fx:id="mainUiPanelPlaceholder" minWidth="1010.0">
+          <StackPane fx:id="mainUiPanelPlaceholder" minWidth="340" prefWidth="340">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>

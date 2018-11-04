@@ -445,11 +445,11 @@ Consider the situation where the user enters *"stats d/1-1-2018 12-12-2018"*:
 * When user enters the command, the `LogicManager` recognises the command and calls the `FinancialPlannerParser` to process the new command as shown above.
 * The FinancialPlannerParser will then search for the `stats` keyword required and once it is found, the rest of the command minus the keyword is passed in as a
 parameter to StatisticCommandParser.
-* The StatisticCommandParser will then pass its input parameters through another component `ArgumentTokenizer` to split up the command into arguments associated with each
-prefix and store them in a map for reference later.
-* The map is further processed and the specific arguments will be identified in this stage. After the arguments have been obtained, there is a further check to check the
-validity of the arguments before proceeding to split the arguments associated with `d/` into date arguments. These arguments are again checked for validity before being passed to the
-constructor of StatisticCommand.
+* The StatisticCommandParser will then parse the arguments and create a new StatisticCommand object before returning its reference. The activity diagram below details the mechanism
+within the `StatisticCommandParser#parse` method.
+
+image::StatisticParserActivityDiagram.png[width="500"]
+
 * Once `StatisticCommand#execute` is called, it will then search through the in-memory data of FinancialPlanner and return a list containing all records within the date range and including
 both the start dates and end dates. This functionality is facilitated by the `ModelManager` which is the class that manages all interactions between
 `Logic` and `Model` component, by`ModelManager#updateFilteredRecords`. The command then retrieves the filteredList from ModelManager and passes it into
@@ -466,18 +466,26 @@ the event system in FinancialPlanner. The sequence diagram below details the pro
 
 image::StatisticUiSequenceDiagram.png[width="800"]
 
-When the event is caught by the listener in `MainWindow`, `MainWindow` looks through all children of the `MainWindow#mainUiPanelPlaceholder` and executes the hide function in them.
-This will make all children hidden from view in the UI which allows for the panel switching functionality, which replaces the current panel with the desired panel.
+* When the event is caught by the listener in `MainWindow`, `MainWindow` looks through all children of the `MainWindow#mainUiPanelPlaceholder` and executes the hide function in them.
+This will make all children hidden from view in the UI which ensures that the UI is displayed correctly.
+* As shown above, the function `StatsDisplayPanel#handleShowPieChartDataEvent` is called which will call the constructor of `MixedPieChartData`. The detailed execution details within this class is as shown in
+the activity diagram below.
+
+image::StatisticUiActivityDiagram.png[width="800"]
+
 The program flow is then as shown above where the `CategoryBreakdown` is created and instantiated with 2 lists, one being expenseLabelData and other being expenseLegendData.
 In the current implementation, whenever `stats` is called, 2 tabs will be created, one for total income and one for total expense. Thus, the same program sequence after construction for
-`CategoryBreakdown` is also repeated for total income, and the corresponding parameters would be incomeLabelData and incomeLegendData.
+`CategoryBreakdown` is also repeated for total income.
+
+The sequence diagram below details the program flow after the constructor of CategoryBreakdown class is called.
+
+image::StatisticUiDetailedSequenceDiagram.png[width="800"]
 
 [NOTE]
 Note that the CustomLegend class is located within the CustomPieChart class which inherits from the JavaFX PieChart class. This legend class can
 only be accessed within CustomPieChart for security purposes.
 
-The activity flow diagram below details the mechanism behind the creation of the category breakdown ui,
-starting from the point where the function `StatsDisplayPanel#`handleShowPieChartStatsEvent` is called.
+==== Design Considerations
 
 // tag::findtag[]
 === Find records by tag feature

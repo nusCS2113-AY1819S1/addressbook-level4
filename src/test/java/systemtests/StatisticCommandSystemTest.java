@@ -18,6 +18,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javafx.collections.ObservableList;
+import seedu.planner.commons.util.DateUtil;
 import seedu.planner.logic.commands.StatisticCommand;
 import seedu.planner.model.Model;
 import seedu.planner.model.record.Date;
@@ -44,7 +45,8 @@ public class StatisticCommandSystemTest extends FinancialPlannerSystemTest {
     public void stats() {
         Model model = getModel();
         String command = StatisticCommand.COMMAND_WORD + " " + PREFIX_DATE + " " + START_DATE + " " + END_DATE;
-        String expectedResultMessage = String.format(StatisticCommand.MESSAGE_SUCCESS, startDate, endDate);
+        String expectedResultMessage = String.format(StatisticCommand.MESSAGE_SUCCESS, DateUtil.formatDate(startDate),
+                DateUtil.formatDate(endDate));
 
         /* ------------------------ Check starting state of program ------------------------------------------------- */
         /* Case: Starting state -> Income: CAIFAN, JAP, KOREAN; Expense: WORK, ZT, RANDOM */
