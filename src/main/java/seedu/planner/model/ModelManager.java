@@ -5,10 +5,10 @@ import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 
 import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_BASIC_EARNED;
 import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_BASIC_SPEND;
+import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_DOUBLE_DATE;
 import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_EXCEED;
 import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_NOT_EXCEED;
 import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_SINGLE_DATE;
-import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_DOUBLE_DATE;
 
 import java.util.List;
 import java.util.function.Predicate;

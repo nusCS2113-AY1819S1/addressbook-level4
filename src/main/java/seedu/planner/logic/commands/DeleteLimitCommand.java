@@ -20,7 +20,7 @@ public class DeleteLimitCommand extends Command {
             + "Parameters: "
             + PREFIX_DATE + "DATE_START " + "DATE_END "
             + "(Parameters: "
-            + PREFIX_DATE + "DATE) "+ "\n"
+            + PREFIX_DATE + "DATE) " + "\n"
 
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DATE + "18-9-2018 " + "20-9-2018 "
