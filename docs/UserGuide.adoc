@@ -555,7 +555,7 @@ Record sale of a drink.
            Format: `sell n/DRINK_NAME  q/QUANTITY_SOLD`
 Examples:
 
-* `Sell n/coca cola q/15`
+* `sell n/coca cola q/15`
 
 [NOTE]
 ====
