@@ -16,7 +16,6 @@ import seedu.address.model.task.Deadline;
  * Parses input arguments and creates a new SelectDeadlineCommand object
  */
 public class SelectDeadlineCommandParser implements Parser<SelectDeadlineCommand> {
-
     @Override
     public SelectDeadlineCommand parse(String userInput) throws ParseException {
         Deadline deadlineWithoutPrefixes = parseWithoutPrefixes(userInput);
@@ -36,7 +35,6 @@ public class SelectDeadlineCommandParser implements Parser<SelectDeadlineCommand
         String month = ParserUtil.parseMonth(argMultimap.getValue(PREFIX_MONTH).get());
         String year = ParserUtil.parseYear(argMultimap.getValue(PREFIX_YEAR).get());
         Deadline deadline = new Deadline(day, month, year);
-
         return new SelectDeadlineCommand(deadline);
     }
 

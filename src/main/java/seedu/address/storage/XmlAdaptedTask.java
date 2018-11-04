@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Milestone;
@@ -108,8 +109,10 @@ public class XmlAdaptedTask {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Deadline.class.getSimpleName()));
         }
-        if (!Deadline.isValidDeadline(deadline)) {
+        if (!Deadline.isValidFormat(deadline)) {
             throw new IllegalValueException(Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
+        } else if (!Deadline.isValidDeadline(deadline)) {
+            throw new IllegalValueException(Messages.MESSAGE_INVALID_DEADLINE);
         }
         final Deadline modelDeadline = new Deadline(deadline);
 

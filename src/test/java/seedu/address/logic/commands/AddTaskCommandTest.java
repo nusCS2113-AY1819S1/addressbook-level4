@@ -134,11 +134,6 @@ public class AddTaskCommandTest {
         }
 
         @Override
-        public boolean validDeadline(Deadline deadline) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void resetData(ReadOnlyTaskBook newData) {
             throw new AssertionError("This method should not be called.");
         }
