@@ -4,8 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * Handle for the GUI component StatsDisplayPanel
@@ -39,7 +41,15 @@ public class StatsDisplayPanelHandle extends NodeHandle<Node> {
 
     public CategoryBreakdownHandle getCategoryBreakdown(Tab tab) throws NullPointerException {
         requireNonNull(tab);
-        return new CategoryBreakdownHandle(tab.getContent());
+        Node node = tab.getContent();
+        if (node instanceof AnchorPane) {
+            return new CategoryBreakdownHandle(node);
+        } else if (node instanceof ScrollPane) {
+            ScrollPane scrollPane = (ScrollPane) node;
+            return new CategoryBreakdownHandle(scrollPane.getContent());
+        } else {
+            return null;
+        }
     }
 
     public Tab getChildTab(String label) {

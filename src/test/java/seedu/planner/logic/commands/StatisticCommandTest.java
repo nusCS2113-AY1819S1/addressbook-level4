@@ -12,6 +12,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.planner.commons.util.DateUtil;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.model.Model;
 import seedu.planner.model.ModelManager;
@@ -60,7 +61,8 @@ public class StatisticCommandTest {
     @Test
     public void execute_model_modelFiltered() {
         StatisticCommand command = new StatisticCommand(startDate, endDate);
-        String expectedMessage = String.format(StatisticCommand.MESSAGE_SUCCESS, startDate, endDate);
+        String expectedMessage = String.format(StatisticCommand.MESSAGE_SUCCESS, DateUtil.formatDate(startDate),
+                DateUtil.formatDate(endDate));
         expectedModel.updateFilteredRecordList(datePredicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertCommandSuccess(command, emptyModel, commandHistory, expectedMessage, expectedEmptyModel);
