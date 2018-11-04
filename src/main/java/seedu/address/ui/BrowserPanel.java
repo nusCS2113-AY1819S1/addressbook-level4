@@ -41,6 +41,10 @@ public class BrowserPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    /**
+     * Loads page and populates it with variables from the drink object
+     * @param drink a valid drink object
+     */
     private void loadDrinkPage(Drink drink) {
         String name = "?name=" + drink.getName().toString();
         String sellingPrice = "sellingPrice=" + drink.getRetailPrice().toString();
