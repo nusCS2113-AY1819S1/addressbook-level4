@@ -74,7 +74,7 @@ public class FinancialPlannerParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case DeleteCommandByDateEntry.COMMAND_WORD: case DeleteCommandByDateEntry.COMMAND_WORD_UNDERSCORE:
+        case DeleteCommandByDateEntry.COMMAND_WORD:
             return new DeleteCommandByDateEntryParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
@@ -83,7 +83,7 @@ public class FinancialPlannerParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case FindTagCommand.COMMAND_WORD: case FindTagCommand.COMMAND_WORD_UNDERSCORE:
+        case FindTagCommand.COMMAND_WORD:
             return new FindTagCommandParser().parse(arguments.toLowerCase());
 
         case ListCommand.COMMAND_WORD:
@@ -107,16 +107,16 @@ public class FinancialPlannerParser {
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
-        case AddLimitCommand.COMMAND_WORD: case AddLimitCommand.COMMAND_WORD_UNDERSCORE:
+        case AddLimitCommand.COMMAND_WORD:
             return new AddLimitCommandParser().parse(arguments);
 
-        case DeleteLimitCommand.COMMAND_WORD: case DeleteLimitCommand.COMMAND_WORD_UNDERSCORE:
+        case DeleteLimitCommand.COMMAND_WORD:
             return new DeleteLimitCommandParser().parse(arguments);
 
-        case EditLimitCommand.COMMAND_WORD: case EditLimitCommand.COMMAND_WORD_UNDERSCORE:
+        case EditLimitCommand.COMMAND_WORD:
             return new EditLimitCommandParser().parse(arguments);
 
-        case CheckLimitCommand.COMMAND_WORD: case CheckLimitCommand.COMMAND_WORD_UNDERSCORE:
+        case CheckLimitCommand.COMMAND_WORD:
             return new CheckLimitCommand();
 
         case SummaryCommand.COMMAND_WORD:
@@ -125,7 +125,7 @@ public class FinancialPlannerParser {
         case StatisticCommand.COMMAND_WORD:
             return new StatisticCommandParser().parse(arguments);
 
-        case ExportExcelCommand.COMMAND_WORD: case ExportExcelCommand.COMMAND_WORD_UNDERSCORE:
+        case ExportExcelCommand.COMMAND_WORD:
             return new ExportExcelCommandParser().parse(arguments);
 
         case ImportExcelCommand.COMMAND_WORD:

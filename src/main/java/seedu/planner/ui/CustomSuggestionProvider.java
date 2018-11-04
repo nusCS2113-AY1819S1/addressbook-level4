@@ -57,15 +57,6 @@ public class CustomSuggestionProvider {
                     SortCommand.COMMAND_WORD, StatisticCommand.COMMAND_WORD, SummaryCommand.COMMAND_WORD,
                     UndoCommand.COMMAND_WORD));
 
-    private static Set<String> commandKeywordsUnderscoreSet =
-            new HashSet<>(Arrays.asList(AddLimitCommand.COMMAND_WORD_UNDERSCORE,
-                    CheckLimitCommand.COMMAND_WORD_UNDERSCORE, DeleteCommandByDateEntry.COMMAND_WORD_UNDERSCORE,
-                    DeleteLimitCommand.COMMAND_WORD_UNDERSCORE, EditLimitCommand.COMMAND_WORD_UNDERSCORE,
-                    ExportExcelCommand.COMMAND_WORD_UNDERSCORE, FindTagCommand.COMMAND_WORD_UNDERSCORE));
-
-    private static Set<String> fullCommandKeywordsSet = Stream.concat(commandKeywordsSet.stream(),
-            commandKeywordsUnderscoreSet.stream()).collect(Collectors.toSet());
-
     private static Set<String> summaryKeywordsSet = new HashSet<>(Arrays.asList(SummaryByMonthCommand.COMMAND_MODE_WORD,
             SummaryByDateCommand.COMMAND_MODE_WORD));
 
@@ -128,7 +119,7 @@ public class CustomSuggestionProvider {
             }
         } else if (inputs[0].equals(FindTagCommand.COMMAND_WORD) && inputs.length > 1) {
             updateSuggestions(tagKeywordsMap.keySet());
-        } else if (fullCommandKeywordsSet.contains(inputs[0]) || inputs.length > 1) {
+        } else if (commandKeywordsSet.contains(inputs[0]) || inputs.length > 1) {
             updateSuggestions(emptySet);
         } else {
             updateSuggestions(commandKeywordsSet);

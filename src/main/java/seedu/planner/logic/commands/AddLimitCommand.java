@@ -16,7 +16,6 @@ import seedu.planner.model.record.Limit;
 * */
 public class AddLimitCommand extends Command {
     public static final String COMMAND_WORD = "addlimit";
-    public static final String COMMAND_WORD_UNDERSCORE = "add_limit";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Check the limit for a period of time. "
             + "Parameters: "
             + PREFIX_DATE + "DATE_START " + "DATE_END "
