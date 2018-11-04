@@ -35,7 +35,8 @@ public class CommentCommandSystemTest extends EventManagerSystemTest {
 
         Index index = INDEX_FIRST_EVENT;
         command = " " + AddCommentCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_COMMENT + "Hi";
-        Event editedEvent = new EventBuilder(DANIEL).withComment("{span}Comment Section{/span}{ol}{li}admin : Hi{li}{/ol}").build();
+        Event editedEvent = new EventBuilder(DANIEL).withComment("{span}Comment Section{/span}{ol}{li}"
+                + "admin : Hi{li}{/ol}").build();
         assertCommandSuccess(command, index, editedEvent);
 
     }
