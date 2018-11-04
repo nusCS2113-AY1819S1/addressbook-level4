@@ -20,12 +20,11 @@ public class ExportCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "ex";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Exports your timetable at the default location, unless otherwise specified."
+            + ": Exports your timetable to the file (.\\import_export\\[FILENAME].ics). "
             + "Parameters: "
-            + "[FILE_LOCATION] \n"
+            + "FILE_NAME (without .ics extension) \n"
             + "Example: " + COMMAND_WORD
-            + " | Example: " + COMMAND_WORD
-            + " C:\\export_folder\\nusmods.ics";
+            + " my_export_file_name";
 
     public static final String MESSAGE_SUCCESS = "Exported timetable to %1$s.";
     public static final String MESSAGE_EMPTY = "Timetable is empty. Export failed.";
@@ -54,7 +53,7 @@ public class ExportCommand extends Command {
         try {
             IcsUtil.getInstance().saveTimeTableToFile(timeTable, filePath);
         } catch (IOException e) {
-            throw new CommandException(MESSAGE_IO_ERROR + filePath.toString());
+            throw new CommandException(String.format(MESSAGE_IO_ERROR + filePath.toString()));
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, filePath.toString()));
     }

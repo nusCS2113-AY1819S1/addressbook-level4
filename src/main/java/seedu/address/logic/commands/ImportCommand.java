@@ -30,16 +30,15 @@ public class ImportCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "im";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Imports and overwrites your timetable at the default location, unless otherwise specified. "
+            + ": Imports your timetable from the file (.\\import_export\\[FILENAME].ics). "
             + "Parameters: "
-            + "[FILE_LOCATION] \n"
+            + "FILE_NAME (without the .ics extension) \n"
             + "Example: " + COMMAND_WORD
-            + " | Example: " + COMMAND_WORD
-            + " C:\\import_folder\\nusmods.ics";
+            + " my_import_file_name";
 
     public static final String MESSAGE_SUCCESS = "Imported timetable at %1$s.";
     public static final String MESSAGE_EMPTY = "Timetable file empty.";
-    public static final String MESSAGE_IO_ERROR = "Failed to read the file at: ";
+    public static final String MESSAGE_IO_ERROR = "Failed to read the file at %1$s.";
     private final Path filePath;
 
     /**
@@ -64,7 +63,7 @@ public class ImportCommand extends Command {
         try {
             optionalTimeTable = IcsUtil.getInstance().readTimeTableFromFile(filePath);
         } catch (IOException e) {
-            throw new CommandException(MESSAGE_IO_ERROR + filePath.toString());
+            throw new CommandException(String.format(MESSAGE_IO_ERROR, filePath.toString()));
         }
         if (!optionalTimeTable.isPresent()) {
             return new CommandResult(String.format(MESSAGE_EMPTY));
