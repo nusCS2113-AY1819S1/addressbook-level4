@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.item.Name;
 import seedu.address.model.item.Loststatus;
+import seedu.address.model.item.Name;
 import seedu.address.model.item.Quantity;
 import seedu.address.model.item.Status;
 import seedu.address.testutil.Assert;
@@ -45,7 +45,8 @@ public class XmlAdaptedItemTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         XmlAdaptedItem item =
-                new XmlAdaptedItem(INVALID_NAME, VALID_QUANTITY, VALID_MIN_QUANTITY, VALID_LOSTSTATUS, VALID_STATUS, VALID_TAGS);
+                new XmlAdaptedItem(INVALID_NAME, VALID_QUANTITY, VALID_MIN_QUANTITY, VALID_LOSTSTATUS,
+                        VALID_STATUS, VALID_TAGS);
         String expectedMessage = Name.MESSAGE_NAME_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, item::toModelType);
     }
