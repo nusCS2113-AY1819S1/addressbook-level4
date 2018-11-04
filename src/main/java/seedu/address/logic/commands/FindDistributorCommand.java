@@ -31,7 +31,7 @@ public class FindDistributorCommand extends Command {
         requireNonNull(model);
         model.updateFilteredDistributorList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_DISTIRBUTORS_LISTED_OVERVIEW,
+                String.format(Messages.MESSAGE_DISTRIBUTORS_LISTED_OVERVIEW,
                         model.getFilteredDistributorList().size()));
     }
 
