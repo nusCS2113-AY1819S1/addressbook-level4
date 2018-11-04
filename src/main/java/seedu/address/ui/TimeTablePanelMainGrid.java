@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
@@ -27,8 +28,9 @@ public class TimeTablePanelMainGrid extends UiPart<Region> {
     @FXML
     private GridPane mainGrid;
 
-    public TimeTablePanelMainGrid() {
+    public TimeTablePanelMainGrid(int numCol) {
         super(FXML);
+        loadColumns(numCol);
 
         // To prevent triggering events for typing inside the timeTablePanelMainGrid
         getRoot().setOnKeyPressed(Event::consume);
@@ -39,8 +41,21 @@ public class TimeTablePanelMainGrid extends UiPart<Region> {
     }
 
     /**
-     * Adds a timetable to the current timetable displayed
-     * @param input TimeSlot to add
+     * Loads a grid with the specified number of columns
+     * @param numCol Number of columns to be loaded
+     */
+    public void loadColumns(int numCol) {
+        mainGrid.getColumnConstraints().clear();
+
+        for (int i = 0; i < numCol; i++) {
+            ColumnConstraints col = new ColumnConstraints(5.0, 1000.0, 1000.0);
+            mainGrid.getColumnConstraints().add(col);
+        }
+    }
+
+    /**
+     * Adds a {@code TimeSlot} to the current {@code TimeTable} displayed
+     * @param input {@code TimeSlot} to add
      * @param currRowDim Dimensions of the rows in the current grid
      * @param currColDim Dimensions of the columns in the current grid
      * @param currStart Start hour in the grid

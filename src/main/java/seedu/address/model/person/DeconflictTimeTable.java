@@ -56,6 +56,22 @@ public class DeconflictTimeTable extends TimeTable {
 
         merged.setColor(DECONFLICT_TIMESLOT_COLOR);
         timeSlots.add(merged);
+
+        if (earlistSet.containsKey(merged.getStartTime())) {
+            int currCount = earlistSet.get(merged.getStartTime());
+            earlistSet.remove(merged.getStartTime());
+            earlistSet.put(merged.getStartTime(), currCount + 1);
+        } else {
+            earlistSet.put(merged.getStartTime(), 1);
+        }
+
+        if (latestSet.containsKey(merged.getEndTime())) {
+            int currCount = latestSet.get(merged.getEndTime());
+            latestSet.remove(merged.getEndTime());
+            latestSet.put(merged.getEndTime(), currCount + 1);
+        } else {
+            latestSet.put(merged.getEndTime(), 1);
+        }
     }
 
     /**

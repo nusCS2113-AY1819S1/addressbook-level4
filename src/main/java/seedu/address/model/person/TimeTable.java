@@ -1,18 +1,27 @@
 package seedu.address.model.person;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.TreeMap;
 
 import javafx.scene.paint.Color;
 import seedu.address.model.person.exceptions.TimeSlotDoesNotExistException;
 import seedu.address.model.person.exceptions.TimeSlotOverlapException;
+import seedu.address.model.person.exceptions.TimeTableEmptyException;
 
 /**
  * Represents a timetable that is associated with a person
  */
 public class TimeTable {
     private static final ArrayList<Color> COLOR_LIST = new ArrayList<>();
+
+    protected Collection <TimeSlot> timeSlots;
+
+    // Since Java does not have a built-in multiset, a map is used to simulate a multiset
+    protected TreeMap<LocalTime, Integer> earlistSet;
+    protected TreeMap<LocalTime, Integer> latestSet;
 
     static {
         COLOR_LIST.add(Color.BLUE);
@@ -23,17 +32,27 @@ public class TimeTable {
         COLOR_LIST.add(Color.PURPLE);
     }
 
-    protected Collection <TimeSlot> timeSlots;
-
     public TimeTable() {
         timeSlots = new HashSet<>();
+        earlistSet = new TreeMap<>();
+        latestSet = new TreeMap<>();
     }
 
-    public TimeTable(Collection <TimeSlot> input) {
+    public TimeTable(Collection <TimeSlot> input) throws TimeSlotOverlapException {
         this();
-        timeSlots.addAll(input);
+        for (TimeSlot timeSlot : input) {
+            try {
+                addTimeSlot(timeSlot);
+            } catch (TimeSlotOverlapException e) {
+                throw e;
+            }
+        }
     }
 
+    /**
+     * Copy constructor
+     * @param input {@code TimeTable} to be copied
+     */
     public TimeTable(TimeTable input) {
         this(input.getTimeSlots());
     }
@@ -46,14 +65,16 @@ public class TimeTable {
 
     /**
      * Overwrites this {@code TimeTable} with {@code toReplace}
+     * @param toReplace {@code TimeTable} to be copied
      */
     public void updateTimeTable(TimeTable toReplace) {
-        timeSlots.clear();
-        timeSlots.addAll(toReplace.getTimeSlots());
+        timeSlots = toReplace.timeSlots;
+        earlistSet = toReplace.earlistSet;
+        latestSet = toReplace.latestSet;
     }
 
     /**
-     * Adds a TimeSlot to the TimeTable
+     * Adds a {@code TimeSlot} to the {@code TimeTable}
      *
      * @param toAdd {@code TimeSlot} to be added
      * @throws TimeSlotOverlapException if {@code toAdd} overlaps with an existing {@code TimeSlot}
@@ -61,9 +82,25 @@ public class TimeTable {
     public void addTimeSlot(TimeSlot toAdd) throws TimeSlotOverlapException {
         if (hasOverlap(toAdd)) {
             throw new TimeSlotOverlapException();
+        }
+
+        toAdd.setColor(getRandomColor());
+        timeSlots.add(toAdd);
+
+        if (earlistSet.containsKey(toAdd.getStartTime())) {
+            int currCount = earlistSet.get(toAdd.getStartTime());
+            earlistSet.remove(toAdd.getStartTime());
+            earlistSet.put(toAdd.getStartTime(), currCount + 1);
         } else {
-            toAdd.setColor(getRandomColor());
-            timeSlots.add(toAdd);
+            earlistSet.put(toAdd.getStartTime(), 1);
+        }
+
+        if (latestSet.containsKey(toAdd.getEndTime())) {
+            int currCount = latestSet.get(toAdd.getEndTime());
+            latestSet.remove(toAdd.getEndTime());
+            latestSet.put(toAdd.getEndTime(), currCount + 1);
+        } else {
+            latestSet.put(toAdd.getEndTime(), 1);
         }
     }
 
@@ -76,6 +113,20 @@ public class TimeTable {
     public void removeTimeSlot (TimeSlot toRemove) throws TimeSlotDoesNotExistException {
         if (!timeSlots.remove(toRemove)) {
             throw new TimeSlotDoesNotExistException();
+        }
+
+        int currCountEarlist = earlistSet.get(toRemove.getStartTime());
+        earlistSet.remove(toRemove.getStartTime());
+
+        if (currCountEarlist != 1) {
+            earlistSet.put(toRemove.getStartTime(), currCountEarlist - 1);
+        }
+
+        int currCountLatest = latestSet.get(toRemove.getEndTime());
+        latestSet.remove(toRemove.getEndTime());
+
+        if (currCountLatest != 1) {
+            latestSet.put(toRemove.getEndTime(), currCountLatest - 1);
         }
     }
 
@@ -97,6 +148,22 @@ public class TimeTable {
     // TODO: Make it such that it doesn't repeat colors too often
     public Color getRandomColor() {
         return COLOR_LIST.get((int) (Math.random() * COLOR_LIST.size()));
+    }
+
+    public LocalTime getEarlist() throws TimeTableEmptyException {
+        if (earlistSet.isEmpty()) {
+            throw new TimeTableEmptyException();
+        } else {
+            return earlistSet.firstKey();
+        }
+    }
+
+    public LocalTime getLatest() throws TimeTableEmptyException {
+        if (latestSet.isEmpty()) {
+            throw new TimeTableEmptyException();
+        } else {
+            return latestSet.lastKey();
+        }
     }
 
     public boolean isEmpty() {
