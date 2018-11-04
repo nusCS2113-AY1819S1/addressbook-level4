@@ -1,5 +1,6 @@
 package seedu.planner.ui;
 
+import static seedu.planner.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.planner.ui.SuggestionClass.newCreate;
 
 import java.util.Arrays;
@@ -7,17 +8,17 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import impl.org.controlsfx.autocompletion.SuggestionProvider;
 import seedu.planner.logic.commands.AddCommand;
 import seedu.planner.logic.commands.AddLimitCommand;
+import seedu.planner.logic.commands.ArchiveCommand;
 import seedu.planner.logic.commands.CheckLimitCommand;
 import seedu.planner.logic.commands.ClearCommand;
 import seedu.planner.logic.commands.DeleteCommand;
-import seedu.planner.logic.commands.DeleteCommandByDateEntry;
+import seedu.planner.logic.commands.DeleteByDateCommand;
 import seedu.planner.logic.commands.DeleteLimitCommand;
 import seedu.planner.logic.commands.EditCommand;
 import seedu.planner.logic.commands.EditLimitCommand;
@@ -43,13 +44,10 @@ import seedu.planner.logic.commands.UndoCommand;
  */
 public class CustomSuggestionProvider {
 
-    private static String patternStr = "t/(.*)"; // TODO: ZHITHON autocomplete by tags soon
-    private static Pattern pattern = Pattern.compile(patternStr);
-
     private static Set<String> commandKeywordsSet =
             new HashSet<>(Arrays.asList(AddCommand.COMMAND_WORD, AddLimitCommand.COMMAND_WORD,
-                    CheckLimitCommand.COMMAND_WORD, ClearCommand.COMMAND_WORD, DeleteCommand.COMMAND_WORD,
-                    DeleteCommandByDateEntry.COMMAND_WORD, DeleteLimitCommand.COMMAND_WORD,
+                    ArchiveCommand.COMMAND_WORD, CheckLimitCommand.COMMAND_WORD, ClearCommand.COMMAND_WORD,
+                    DeleteCommand.COMMAND_WORD, DeleteByDateCommand.COMMAND_WORD, DeleteLimitCommand.COMMAND_WORD,
                     EditCommand.COMMAND_WORD, EditLimitCommand.COMMAND_WORD,
                     ExitCommand.COMMAND_WORD, ExportExcelCommand.COMMAND_WORD, FindCommand.COMMAND_WORD,
                     FindTagCommand.COMMAND_WORD, HelpCommand.COMMAND_WORD, HistoryCommand.COMMAND_WORD,
@@ -67,8 +65,6 @@ public class CustomSuggestionProvider {
             SortCommand.CATEGORY_SET.stream()).collect(Collectors.toSet());
 
     private static Set<String> emptySet = new HashSet<>();
-
-    private static Set<String> testSet = new HashSet<>(Arrays.asList("sort name")); // for debugging uses
 
     private static Map<String, Integer> tagKeywordsMap = new HashMap<>();
 
@@ -118,6 +114,9 @@ public class CustomSuggestionProvider {
                 updateSuggestions(summaryKeywordsSet);
             }
         } else if (inputs[0].equals(FindTagCommand.COMMAND_WORD) && inputs.length > 1) {
+            updateSuggestions(tagKeywordsMap.keySet());
+        } else if (possibleTagKeywordsSet.contains(inputs[0]) && inputs[inputs.length - 1]
+                .startsWith(PREFIX_TAG.getPrefix()) ) {
             updateSuggestions(tagKeywordsMap.keySet());
         } else if (commandKeywordsSet.contains(inputs[0]) || inputs.length > 1) {
             updateSuggestions(emptySet);

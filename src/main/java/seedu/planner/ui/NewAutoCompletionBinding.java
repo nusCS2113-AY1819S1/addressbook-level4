@@ -1,5 +1,7 @@
 package seedu.planner.ui;
 
+import static seedu.planner.logic.parser.CliSyntax.PREFIX_TAG;
+
 import java.util.Collection;
 
 import org.controlsfx.control.textfield.AutoCompletionBinding;
@@ -47,6 +49,10 @@ public class NewAutoCompletionBinding<T> {
             prevText = "";
         }
         String inputText = newText.substring(index + 1);
+        if (inputText.startsWith(PREFIX_TAG.getPrefix())) {
+            prevText += PREFIX_TAG.getPrefix();
+            inputText = inputText.substring(2);
+        }
         if (getCompletionTarget().isFocused()) {
             setUserInput(newText, inputText);
         }
