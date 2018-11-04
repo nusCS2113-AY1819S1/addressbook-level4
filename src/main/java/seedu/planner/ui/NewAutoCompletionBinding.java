@@ -59,6 +59,14 @@ public class NewAutoCompletionBinding<T> {
     };
 
     /**
+     *
+     */
+    private final ChangeListener<Number> caretChangedListener = (obs, oldPosition, newPosition) -> {
+        if (getCompletionTarget().isFocused()) {
+        }
+    };
+
+    /**
      * This listener checks if the commandBox is currently in focus and hides the autocomplete
      * popup if not.
      */
