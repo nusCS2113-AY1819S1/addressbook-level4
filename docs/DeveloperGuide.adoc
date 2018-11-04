@@ -641,9 +641,9 @@ With the sufficient information, `List<Record> records`, `List<SummaryByDateEntr
 image::Export_Capture1_LinhChi.png[width:800]
 
 * `SUMMARY DATA` stored the summary statistics for the period you exported, and there is a *Line Chart* next to the table for visual statistic [refer to `Draw line chart` part for more information]. As you can see in the picture, there are 3 series shown:
-** The first blue line named Series1 represents the Timeline (each component is one Date) versus the Income (each component is one income).
-** The second orange line named Series2 represents the Timeline (each component is one Date) versus the Outcome (each component is one outcome).
-** The third grey line named Series3 represents the Timeline (each component is one Date) versus the Net - Sum of income and outcome (each component is one net).
+** The first blue line named Income represents the relation between Timeline (each component is one Date) and the Income (each component is one income).
+** The second orange line named Outcome represents the relation between Timeline (each component is one Date) and the Outcome (each component is one outcome).
+** The third grey line named Net represents the relation Timeline (each component is one Date) and the Net - Sum of income and outcome (each component is one net).
 
 image::Export_Capture2_LinhChi.png[width:800]
 
@@ -782,9 +782,9 @@ With the sufficient information, `List<Record> records`, `List<SummaryByDateEntr
 image::Export_Capture1_LinhChi.png[width:800]
 
 * `SUMMARY DATA` stored the summary statistics for the period you archived, and there is a *Line Chart* next to the table for visual statistic [refer to `Draw line chart` part for more information]. As you can see in the picture, there are 3 series shown:
-** The first blue line named Series1 represents the Timeline (each component is one Date) versus the Income (each component is one income).
-** The second orange line named Series2 represents the Timeline (each component is one Date) versus the Outcome (each component is one outcome).
-** The third grey line named Series3 represents the Timeline (each component is one Date) versus the Net - Sum of income and outcome (each component is one net).
+** The first blue line named Income represents the relation between Timeline (each component is one Date) and the Income (each component is one income).
+** The second orange line named Outcome represents the relation between Timeline (each component is one Date) and the Outcome (each component is one outcome).
+** The third grey line named Net represents the relation Timeline (each component is one Date) and the Net - Sum of income and outcome (each component is one net).
 
 After records are archived to Excel file, `ModelManager#deleteListRecord` is called to delete the archived records.If there exists target records, `ModelManager#commitFinancialPlanner` will be called to update the current version of Financial Planner and the message, which states records have been deleted.
 

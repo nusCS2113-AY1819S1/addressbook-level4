@@ -79,9 +79,9 @@ include::../UserGuide.adoc[tag=delete_by_date_entry]
 
 include::../UserGuide.adoc[tag=export_excel]
 
-include::../UserGuide.adoc[tag=archive]
-
 include::../UserGuide.adoc[tag=import]
+
+include::../UserGuide.adoc[tag=archive]
 
 == Contributions to the Developer Guide
 
@@ -93,9 +93,6 @@ include::../DeveloperGuide.adoc[tag=delete_by_date_entry]
 
 include::../DeveloperGuide.adoc[tag=export_excel]
 
+include::../DeveloperGuide.adoc[tag=import]
 
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
+include::../DeveloperGuide.adoc[tag=archive]
