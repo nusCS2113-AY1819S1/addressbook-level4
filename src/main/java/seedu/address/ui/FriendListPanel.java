@@ -19,11 +19,11 @@ import seedu.address.model.person.Person;
  * Displays the friends in the first panel of the app
  */
 public class FriendListPanel extends UiPart<Region> {
-    private static final String FXML = "FriendListPanel.fxml";
+    private static final String FXML = "PersonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(FriendListPanel.class);
 
     @FXML
-    private ListView<Person> friendListView;
+    private ListView<Person> personListView;
 
     public FriendListPanel(ObservableList<Person> personList) {
         super(FXML);
@@ -32,13 +32,13 @@ public class FriendListPanel extends UiPart<Region> {
     }
 
     private void setConnections(ObservableList<Person> personList) {
-        friendListView.setItems(personList);
-        friendListView.setCellFactory(listView -> new FriendListPanel.FriendListViewCell());
+        personListView.setItems(personList);
+        personListView.setCellFactory(listView -> new FriendListPanel.FriendListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        friendListView.getSelectionModel().selectedItemProperty()
+        personListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in person list panel changed to : '" + newValue + "'");
@@ -52,8 +52,8 @@ public class FriendListPanel extends UiPart<Region> {
      */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
-            friendListView.scrollTo(index);
-            friendListView.getSelectionModel().select(index);
+            personListView.scrollTo(index);
+            personListView.getSelectionModel().select(index);
         });
     }
 
