@@ -102,6 +102,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT [t/TAG]...`
 ====
 
 * Each employee must have a unique work email address.
+* Unique email address is case insensitive.
 
 ====
 
@@ -322,14 +323,15 @@ view all events of employee at index 1 in August 2018
 === Locating persons by name: `find`
 Priority level: all
 
-Finds employees whose names contain any of the given keywords. +
+Finds employees whose names contain any of the given keywords or whose email matches any of the given keywords (case-insensitive). +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The search is case insensitive. e.g `hans` will match `Hans`
+* The search is case insensitive. e.g `hans` will match `Hans`, `hans@example.com` will match `Hans@Example.Com`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* Only the name and email is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
+* Only complete email will be matched e.g. `alice` will not match `alice@example.com`
 * Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
