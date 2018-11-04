@@ -143,20 +143,20 @@ public class UniqueBatchList implements Iterable<Batch> {
      * @param quantity a valid quantity value expressed as an integer
      */
     public void updateBatchTransaction(Quantity quantity) throws InsufficientQuantityException {
-        Quantity toDecrease = quantity;
-        decreaseTotalQuantity(toDecrease.getValue());
+        int toDecrease = quantity.getValue();
+        decreaseTotalQuantity(toDecrease);
         sortBatches();
         for (Batch b : internalList) {
             int batchQuantity = b.getBatchQuantity().getValue();
-            if (toDecrease.getValue() == 0) {
+            if (toDecrease == 0) {
                 break;
             }
-            if (toDecrease.getValue() >= batchQuantity) {
+            if (toDecrease >= batchQuantity) {
                 setBatchQuantity(b, 0);
             } else {
-                decreaseBatchQuantity(b, toDecrease.getValue());
+                decreaseBatchQuantity(b, toDecrease);
             }
-            toDecrease.decreaseValue(batchQuantity);
+            toDecrease -= batchQuantity;
         }
     }
 
