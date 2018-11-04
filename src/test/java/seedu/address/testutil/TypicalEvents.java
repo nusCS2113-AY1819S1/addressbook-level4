@@ -40,7 +40,7 @@ public class TypicalEvents {
             .withDateTime("22/10/2018 9:30")
             .withComment("{span}Comment Section{/span}{ol}{/ol}")
             .withTags("friends")
-            .withAttendees("Peter Parker", "admin").build();
+            .withAttendees("admin", "Peter Parker").build();
     public static final Event BENSON = new EventBuilder().withName("Dancing Tryouts")
             .withContact("Benson Meier")
             .withVenue("311, Clementi Ave 2, #02-25")

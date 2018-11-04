@@ -41,7 +41,7 @@ public class BrowserPanelTest extends GuiUnitTest {
 
         // associated web page of a event
         postNow(selectionChangedEventStub);
-        URL expectedPersonUrl = new URL(BrowserPanel.getSearchPageUrlWithoutName().toString()
+        URL expectedPersonUrl = new URL(BrowserPanel.getSearchPageUrlWithoutName()
                 + "?name="
                 + ALICE.getName().fullName.replaceAll(" ", "%20")
                 + "&contact="
@@ -58,6 +58,7 @@ public class BrowserPanelTest extends GuiUnitTest {
                 + ALICE.getTagsString().replaceAll(" ", "%20")
                 + "&attendance="
                 + ALICE.getAttendanceString().replaceAll(" ", "%20")
+                    .replaceAll("<br>", "%3Cbr%3E")
                 + "&comment="
                 + ALICE.getComment().value.replaceAll("[{]", "%3C")
                 .replaceAll("[}]", "%3E").replaceAll(" ", "%20"));

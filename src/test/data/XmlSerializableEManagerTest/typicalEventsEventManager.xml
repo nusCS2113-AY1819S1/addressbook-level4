@@ -10,6 +10,7 @@
         <dateTime>22/10/2018 9:30</dateTime>
         <comment>{span}Comment Section{/span}{ol}{/ol}</comment>
         <tagged>friends</tagged>
+        <attending>admin</attending>
         <attending>Peter Parker</attending>
     </events>
     <events>
