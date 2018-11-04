@@ -78,6 +78,11 @@ public class XmlAdaptedItem {
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
     }
+
+    public Loststatus loststatus() {
+        return loststatus;
+    }
+
     public Status getStatus() {
         return status;
     }
