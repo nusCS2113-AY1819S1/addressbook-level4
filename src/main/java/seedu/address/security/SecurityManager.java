@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.google.common.eventbus.Subscribe;
 
 import seedu.address.commons.core.ComponentManager;
+import seedu.address.commons.events.logic.LoginEvent;
 import seedu.address.commons.events.security.LogoutEvent;
 import seedu.address.commons.events.security.SuccessfulLoginEvent;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
@@ -90,5 +91,10 @@ public class SecurityManager extends ComponentManager implements Security {
     @Subscribe
     public void handleCommandLogoutEvent(LogoutEvent logout) {
         logout();
+    }
+
+    @Subscribe
+    public void handleLoginAttemptEvent(LoginEvent e) {
+        login(e.getUsername(), e.getPassword());
     }
 }
