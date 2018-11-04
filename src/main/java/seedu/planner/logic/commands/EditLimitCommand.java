@@ -3,6 +3,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_MONEYFLOW;
 
+import seedu.planner.commons.core.Messages;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.Model;
@@ -34,7 +35,6 @@ public class EditLimitCommand extends Command {
 
 
     public static final String MESSAGE_SUCCESS = "The limit has been edited. \n";
-    public static final String MESSAGE_LIMITS_DO_NOT_EXIST = "There is no limit for that period of date";
 
     private Limit originalLimit;
     private String output;
@@ -48,7 +48,7 @@ public class EditLimitCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
 
         if (!model.hasSameDateLimit(limit)) {
-            throw new CommandException(MESSAGE_LIMITS_DO_NOT_EXIST);
+            throw new CommandException(Messages.MESSAGE_LIMITS_DO_NOT_EXIST);
         }
         originalLimit = model.getSameDatesLimit(limit.getDateStart(), limit.getDateEnd());
         model.deleteLimit(originalLimit);

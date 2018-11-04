@@ -490,7 +490,7 @@ Examples:
 * `export_excel`
 * `export_excel d/31-3-1999`
 * `export_excel d/31-3-1999 31-03-2019`
-
+[[limit]]
 == Spending Limit Features
 
 This section describes the limit feature that allows users to set values to control their future spending.
@@ -498,6 +498,7 @@ Constraints that apply to records also apply to each limit. Refer to <<constrain
 `All the limit related commands are case insensitive. Users can input ADDlimit, addLimit and so on to execute the command.
 Besides that, in case some of the users who have programming background are used to using `
 
+[[addlimit]]
 === Adding a limit: `addlimit`
 
 Adds a spending limit for a time period or a particular day to the FinancialPlanner. +
@@ -521,6 +522,8 @@ Example:
 * `addlimit d/20-8-2018 30-8-2018 m/632`
 * `addLimit d/20-8-2018 20-8-2018 m/200`
 * `add_limit d/20-8-2018 30-8-2018 m/100`
+
+[[checklimit]]
 === Viewing all limits: `checkLimit`
 
 Displays all limits information stored in FinancialPlanner +
@@ -529,6 +532,8 @@ Example:
 * `checklimit`
 * `checkLimit`
 * `check_limit`
+
+[[deletelimit]]
 === Deleting a limit: `deleteLimit`
 
 Deletes an existing spending limit from the FinancialPlanner +
@@ -550,17 +555,18 @@ Examples:
 * `deletelimit d/20-8-2018 30-8-2018`
 * `delete_Limit d/20-8-2018 30-8-2018`
 
+[[editlimit]]
 === Editing a limit: `editLimit`
 
 Edit a limit to the FinancialPlanner +
 Format: `editLimit d/START_DATE END_DATE m/MONEYFLOW` (`editLimit d/START_DATE END_DATE m/MONEYFLOW`)+
 
-Editlimit similar to <<deletelimit>> command, it is also based on the date period.
+Editlimit is similar to <<deletelimit>> command, it is also based on the date period.
 The editlimit command will check the input date period or the single day and
 replace the original moneyFlow with the new moneyFlow.
 ****
 * `MONEYFLOW` can only be a positive integer, and does not require a "+" or "-".
-* `START_DATE/END_DATE` must be exactly the same as when the limit was created.
+* `START_DATE/END_DATE` must match exactly the same as when the limit was created.
 ****
 
 Examples:

@@ -55,19 +55,19 @@ Besides that, I also need to keep limits' information updated whenever there is 
 
 
 === `ongoing`  *Minor enhancement #1*: added the ability to set limit for weeks and months.
-===== `sub-part of Major enhancement #1`
+==== `sub-part of Major enhancement #1`
 
 ** What it does: allows user to set a limit for weeks and months.
 ** Justification: The implementation may lead to a big modification of the limit command.
 
 === `ongoing` *Minor enhancement #2*: develop a better UI to demo the limitlist .
-===== `sub-part of Minor enhancement #3`
+==== `sub-part of Minor enhancement #3`
 
 ** What it does: provides user a better display of all limits' information.
 ** Justification: This implementation will help the user to have a much clearer overview of their limit details.
 
 === `ongoing` *Minor enhancement #3*: added the ability to change the color of the output when the limit has been exceeded..
-===== `sub-part of Major enhancement #1`
+==== `sub-part of Major enhancement #1`
 ** What it does: allows user to choose the color they want to color for the cells which exceed limit.
 ** Justification: This enhancement make some modification about the UI part.
 
@@ -104,7 +104,7 @@ https://github.com/CS2113-AY1819S1-T09-4/main/blob/master/docs/DeveloperGuide.ad
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=limit]
+include::../UserGuide.adoc[tag=addlimit]
 
 include::../UserGuide.adoc[tag=]
 
