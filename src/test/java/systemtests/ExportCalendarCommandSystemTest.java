@@ -36,6 +36,7 @@ public class ExportCalendarCommandSystemTest extends EventManagerSystemTest {
                 + ADMIN_USERNAME_DESC + "  " + ADMIN_PASSWORD_DESC + "  ";
         assertCommandSuccess(command, toLogin);
 
+        //********************************************Success test cases************************************************
         //valid input test -> accepted
         String filename = "mycal";
         command = "   " + ExportCalendarCommand.COMMAND_WORD + " " + filename;
@@ -79,9 +80,9 @@ public class ExportCalendarCommandSystemTest extends EventManagerSystemTest {
         assertSelectedCardUnchanged();
 
         //filename is too long -> rejected
-        filename = "myCalendarFileNameIsTooLong ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg" +
-                "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg" +
-                "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg";
+        filename = "myCalendarFileNameIsTooLongggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg"
+                + "ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg"
+                + "ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg";
         command = "   " + ExportCalendarCommand.COMMAND_WORD + " " + filename;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 ExportCalendarCommand.MESSAGE_USAGE));
@@ -126,12 +127,27 @@ public class ExportCalendarCommandSystemTest extends EventManagerSystemTest {
         assertStatusBarUnchanged();
     }
 
+    /**
+     * Executes {@code command} and in addition,<br>
+     * 1. Asserts that the command box displays an empty string.<br>
+     * 2. Asserts that the result display box displays {@code expectedResultMessage}.<br>
+     * 3. Asserts that the browser url and selected card update accordingly depending on the card at
+     * {@code expectedSelectedCardIndex}.<br>
+     * 4. Asserts that the status bar's sync status changes.<br>
+     * 5. Asserts that the command box has the default style class.<br>
+     * Verifications 1 and 2 are performed by
+     * {@code EventManagerSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * @see EventManagerSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see EventManagerSystemTest#assertSelectedCardChanged(Index)
+     */
     private void assertCommandSuccess(String command, Model expectedModel, Event registeredEvent,
                                       Index index, String expectedMessage) {
         executeCommand(command);
         expectedModel.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         expectedModel.updateEvent(expectedModel.getFilteredEventList().get(index.getZeroBased()), registeredEvent);
         assertApplicationDisplaysExpected("", expectedMessage, expectedModel);
+        assertCommandBoxShowsDefaultStyle();
+        assertStatusBarUnchangedExceptSyncStatus();
     }
 
 

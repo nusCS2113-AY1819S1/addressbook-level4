@@ -65,7 +65,7 @@ public class ExportCalendarCommandTest {
 
 
     @Test
-    public void execute_exportCommand_with_filteredList_success() {
+    public void execute_exportCommandWithFilteredList_success() {
         String filename = "myCal";
         String expectedMessage = String.format(ExportCalendarCommand.MESSAGE_EXPORT_SUCCESS, 1, filename);
         AttendanceContainsUserPredicate predicate = new AttendanceContainsUserPredicate(user.getUsername());
@@ -80,7 +80,7 @@ public class ExportCalendarCommandTest {
 
     //**********************************************Fail test case***************************************************
     @Test
-    public void execute_exportCommand_IOinput_failure() {
+    public void execute_exportCommandInvalidIOInput_failure() {
         String filename = "C:/myCal";
         String expectedMessage = String.format(ExportCalendarCommand.MESSAGE_FILE_ERROR, filename);
         AttendanceContainsUserPredicate predicate = new AttendanceContainsUserPredicate(user.getUsername());
