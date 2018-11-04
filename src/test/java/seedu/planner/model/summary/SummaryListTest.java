@@ -1,7 +1,6 @@
 package seedu.planner.model.summary;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.planner.model.Model.PREDICATE_SHOW_ALL_RECORDS;
 import static seedu.planner.testutil.Assert.assertThrows;
 import static seedu.planner.testutil.TypicalRecords.CAIFAN;
 import static seedu.planner.testutil.TypicalRecords.CHICKENRICE;
@@ -11,17 +10,15 @@ import static seedu.planner.testutil.TypicalRecords.RANDOM;
 import static seedu.planner.testutil.TypicalRecords.WORK;
 import static seedu.planner.testutil.TypicalRecords.ZT;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Test;
 
-import javafx.collections.FXCollections;
-import javafx.collections.transformation.FilteredList;
 import seedu.planner.model.Month;
 import seedu.planner.model.record.Date;
-import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
 import seedu.planner.testutil.RecordBuilder;
 import seedu.planner.testutil.SummaryBuilder;
@@ -58,19 +55,17 @@ public class SummaryListTest {
     private static final List<Record> recordListAllUniqueDates = Arrays.asList(CAIFAN_JAN, INDO_FEB, RANDOM_MAR,
             WORK_APR, MALA_MAY, ZT_JUN, CHICKEN_RICE_JUL);
 
+    private static final List<Record> recordListAllUniqueMonths = new ArrayList<>(recordListAllUniqueDates);
+
     private static List<Record> recordListOverlappingDates = Arrays.asList(CAIFAN_JAN, INDO_JAN, RANDOM_MAR,
             WORK_APR, MALA_APR, ZT_JUN, CHICKEN_RICE_JUL);
 
+    private static List<Record> recordListOverlappingMonths = new ArrayList<>(recordListOverlappingDates);
+
     @Test
     public void constructor_nullParam_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new SummaryByDateList(null, null));
-        assertThrows(NullPointerException.class, () -> new SummaryByDateList(recordListAllUniqueDates, null));
         assertThrows(NullPointerException.class, () -> new SummaryByDateList(
-                null, PREDICATE_SHOW_ALL_RECORDS));
-        assertThrows(NullPointerException.class, () -> new SummaryByMonthList(null, null));
-        assertThrows(NullPointerException.class, () -> new SummaryByMonthList(recordListAllUniqueDates, null));
-        assertThrows(NullPointerException.class, () -> new SummaryByMonthList(
-                null, PREDICATE_SHOW_ALL_RECORDS));
+                null));
     }
 
     @Test
@@ -79,18 +74,18 @@ public class SummaryListTest {
         for (Record r : recordListAllUniqueDates) {
             expectedMap.put(r.getDate(), new DaySummary(r));
         }
-        assertEquals(new SummaryByDateList(recordListAllUniqueDates, PREDICATE_SHOW_ALL_RECORDS).getSummaryMap(),
+        assertEquals(new SummaryByDateList(recordListAllUniqueDates).getSummaryMap(),
                 expectedMap);
     }
 
     @Test
     public void constructor_recordListWithUniqueMonthsNoFilter_success() {
         HashMap<Month, Summary> expectedMap = new HashMap<>();
-        for (Record r : recordListAllUniqueDates) {
+        for (Record r : recordListAllUniqueMonths) {
             Month month = new Month(r.getDate().getMonth(), r.getDate().getYear());
             expectedMap.put(month, new MonthSummary(r));
         }
-        assertEquals(new SummaryByMonthList(recordListAllUniqueDates, PREDICATE_SHOW_ALL_RECORDS).getSummaryMap(),
+        assertEquals(new SummaryByMonthList(recordListAllUniqueMonths).getSummaryMap(),
                 expectedMap);
     }
 
@@ -109,7 +104,7 @@ public class SummaryListTest {
         for (DaySummary s : summaryListOverLappingDates) {
             expectedMap.put(s.getDate(), s);
         }
-        assertEquals(new SummaryByDateList(recordListOverlappingDates, PREDICATE_SHOW_ALL_RECORDS).getSummaryMap(),
+        assertEquals(new SummaryByDateList(recordListOverlappingDates).getSummaryMap(),
                 expectedMap);
     }
 
@@ -121,51 +116,15 @@ public class SummaryListTest {
         MonthSummary summaryApr = new MonthSummary(WORK_APR);
         summaryApr.add(MALA_APR);
 
-        List<MonthSummary> summaryListOverLappingDates = Arrays.asList(summaryJan, new MonthSummary(RANDOM_MAR),
+        List<MonthSummary> summaryListOverLappingMonths = Arrays.asList(summaryJan, new MonthSummary(RANDOM_MAR),
                 summaryApr, new MonthSummary(ZT_JUN), new MonthSummary(CHICKEN_RICE_JUL));
 
         HashMap<Month, Summary> expectedMap = new HashMap<>();
-        for (MonthSummary s : summaryListOverLappingDates) {
+
+        for (MonthSummary s : summaryListOverLappingMonths) {
             expectedMap.put(s.getMonth(), s);
         }
-        assertEquals(new SummaryByMonthList(recordListOverlappingDates, PREDICATE_SHOW_ALL_RECORDS).getSummaryMap(),
-                expectedMap);
-    }
-
-    /**
-     * This test tests whether the filter method is working as intended.
-     */
-    @Test
-    public void constructor_recordListWithUniqueDatesFilter_success() {
-        Date startTestDate = new Date("1-1-2018");
-        Date endTestDate = new Date("5-6-2018");
-        DateIsWithinIntervalPredicate predicate = new DateIsWithinIntervalPredicate(startTestDate, endTestDate);
-        FilteredList<Record> filteredList = new FilteredList<>(FXCollections.observableList(recordListAllUniqueDates));
-        filteredList.setPredicate(predicate);
-        HashMap<Date, Summary> expectedMap = new HashMap<>();
-        for (Record r : filteredList) {
-            expectedMap.put(r.getDate(), new DaySummary(r));
-        }
-        assertEquals(new SummaryByDateList(recordListAllUniqueDates, predicate).getSummaryMap(),
-                expectedMap);
-    }
-
-    /**
-     * @see #constructor_recordListWithUniqueDatesFilter_success
-     */
-    @Test
-    public void constructor_recordListWithUniqueMonthsFilter_success() {
-        Date startTestDate = new Date("1-1-2018");
-        Date endTestDate = new Date("30-6-2018");
-        DateIsWithinIntervalPredicate predicate = new DateIsWithinIntervalPredicate(startTestDate, endTestDate);
-        FilteredList<Record> filteredList = new FilteredList<>(FXCollections.observableList(recordListAllUniqueDates));
-        filteredList.setPredicate(predicate);
-        HashMap<Month, Summary> expectedMap = new HashMap<>();
-        for (Record r : filteredList) {
-            Month month = new Month(r.getDate().getMonth(), r.getDate().getYear());
-            expectedMap.put(month, new MonthSummary(r));
-        }
-        assertEquals(new SummaryByMonthList(recordListAllUniqueDates, predicate).getSummaryMap(),
+        assertEquals(new SummaryByMonthList(recordListOverlappingMonths).getSummaryMap(),
                 expectedMap);
     }
 }

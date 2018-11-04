@@ -1,5 +1,6 @@
 package seedu.planner.ui;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,29 +20,26 @@ import javafx.scene.shape.Shape;
 public class CustomPieChart extends PieChart {
 
     public static final String CSS_FILE = "view/DarkTheme.css";
+    private ObservableList<String> observableData;
 
-    public CustomPieChart(ObservableList<ChartData> pieChartData, Double total) {
+    public CustomPieChart(List<Data> labelData, List<Data> legendData) {
         super();
-        ObservableList<Data> dataAsPercentages = convertToPercentages(pieChartData, total);
         getStylesheets().add(CSS_FILE);
-        setLegend(new CustomLegend(this, pieChartData));
-        setData(dataAsPercentages);
-        dataAsPercentages.forEach(data ->
+        setLegend(new CustomLegend(this, legendData));
+        setData(FXCollections.observableList(labelData));
+        labelData.forEach(data ->
                 data.nameProperty().bind(Bindings.concat(data.getName(), " ", data.pieValueProperty(), "%")));
+        observableData = FXCollections.observableList(getData().stream()
+                .map(d -> String.format("%s %f", d.getName(), d.getPieValue()))
+                .collect(Collectors.toList()));
     }
 
-    /** Converts a given ObservableList containing {@see ChartData} to a list that can be read by {@link PieChart}
-     * */
-    private ObservableList<PieChart.Data> convertToPercentages(ObservableList<ChartData> data, Double total) {
-        List<Data> dataList;
-        if (total > 0.0) {
-            dataList = data.stream().map(d -> new PieChart.Data(d.key, Double.parseDouble(
-                    String.format("%.2f", d.value / total * 100.0))))
-                    .collect(Collectors.toList());
-        } else {
-            dataList = data.stream().map(d -> new PieChart.Data(d.key, d.value)).collect(Collectors.toList());
-        }
-        return FXCollections.observableList(dataList);
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof CustomPieChart // instanceof handles nulls
+                && getLegend().equals(((CustomPieChart) other).getLegend())
+                && observableData.equals(((CustomPieChart) other).observableData));
     }
 
     /**
@@ -49,14 +47,18 @@ public class CustomPieChart extends PieChart {
      */
     class CustomLegend extends GridPane {
 
-        CustomLegend(PieChart chart, ObservableList<ChartData> pieChartData) {
+        private List<String> labelList;
+
+        CustomLegend(PieChart chart, List<Data> pieChartData) {
+            labelList = new ArrayList<>();
             setHgap(10);
             setVgap(10);
             int index = 0;
-            for (ChartData d : pieChartData) {
-                Label legendText = createLabel(d.key + "   " + convertToMoney(d.value));
+            for (Data d : pieChartData) {
+                Label legendText = createLabel(d.getName() + "   " + convertToMoney(d.getPieValue()));
                 legendText.setWrapText(true);
                 addRow(index, createSymbol(pieChartData.indexOf(d)), legendText);
+                labelList.add(legendText.getText());
                 index++;
             }
         }
@@ -78,6 +80,13 @@ public class CustomPieChart extends PieChart {
             Shape symbol = new Rectangle(10, 10, 10, 10);
             symbol.getStyleClass().add(String.format("default-color%d-chart-pie-legend", index % 8));
             return symbol;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            return other == this // short circuit if same object
+                    || (other instanceof CustomLegend// instanceof handles nulls
+                    && labelList.equals((((CustomLegend) other).labelList)));
         }
 
     }

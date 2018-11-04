@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_MONEYFLOW;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_NAME;
@@ -23,6 +24,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 
+import guitests.guihandles.CategoryBreakdownHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.DetailedRecordCardHandle;
 import guitests.guihandles.MainMenuHandle;
@@ -30,9 +32,14 @@ import guitests.guihandles.MainWindowHandle;
 import guitests.guihandles.RecordCardHandle;
 import guitests.guihandles.RecordListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
+import guitests.guihandles.StatsDisplayPanelHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import guitests.guihandles.SummaryDisplayHandle;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.layout.AnchorPane;
 import seedu.planner.TestApp;
 import seedu.planner.commons.core.EventsCenter;
 import seedu.planner.commons.core.index.Index;
@@ -50,10 +57,13 @@ import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.Model;
 import seedu.planner.model.record.NameContainsKeywordsPredicate;
 import seedu.planner.model.record.Record;
+import seedu.planner.model.summary.CategoryStatistic;
 import seedu.planner.model.tag.Tag;
 import seedu.planner.testutil.EditRecordDescriptorBuilder;
 import seedu.planner.testutil.TypicalRecords;
 import seedu.planner.ui.CommandBox;
+import seedu.planner.ui.MixedPieChartDataList;
+import seedu.planner.ui.StatsDisplayPanel;
 import seedu.planner.ui.SummaryEntry;
 
 /**
@@ -143,6 +153,10 @@ public abstract class FinancialPlannerSystemTest {
 
     public SummaryDisplayHandle getSummaryDisplay() {
         return mainWindowHandle.getSummaryDisplay();
+    }
+
+    public StatsDisplayPanelHandle getStatsDisplayPanel() {
+        return mainWindowHandle.getStatsDisplayPanel();
     }
     /**
      * Executes {@code command} in the application's {@code CommandBox}.
@@ -296,6 +310,92 @@ public abstract class FinancialPlannerSystemTest {
     }
 
     /**
+     * Asserts that the Expense CategoryBreakdown panels is showing as intended.
+     * @param expected list of CategoryStatistic that is expected to be displayed
+     */
+    protected void assertExpenseCategoryBreakdownDataCorrect(ObservableList<CategoryStatistic> expected) {
+        StatsDisplayPanelHandle statsDisplayPanel = getStatsDisplayPanel();
+        MixedPieChartDataList expectedData = new MixedPieChartDataList(expected);
+        CategoryBreakdownHandle expenseBreakdown = statsDisplayPanel.getCategoryBreakdown(
+                StatsDisplayPanelHandle.EXPENSE_BREAKDOWN_LABEL);
+        assertTrue(expenseBreakdown.checkIfDataIsSame(expectedData.getExpenseChartLabelData(),
+                expectedData.getExpenseChartLegendData()));
+    }
+
+    /**
+     * Same as the implementation for expense
+     * @see #assertExpenseCategoryBreakdownDataCorrect(ObservableList)
+     */
+    protected void assertIncomeCategoryBreakdownDataCorrect(ObservableList<CategoryStatistic> expected) {
+        StatsDisplayPanelHandle statsDisplayPanel = getStatsDisplayPanel();
+        MixedPieChartDataList expectedData = new MixedPieChartDataList(expected);
+        CategoryBreakdownHandle incomeBreakdown = statsDisplayPanel.getCategoryBreakdown(
+                StatsDisplayPanelHandle.INCOME_BREAKDOWN_LABEL);
+        assertTrue(incomeBreakdown.checkIfDataIsSame(expectedData.getIncomeChartLabelData(),
+                expectedData.getIncomeChartLegendData()));
+    }
+
+    /**
+     * Asserts that the expense category breakdown should be empty and contain an error string
+     */
+    protected void assertExpenseCategoryBreakdownEmpty() {
+        StatsDisplayPanelHandle statsDisplayPanel = getStatsDisplayPanel();
+        Tab expenseTab = statsDisplayPanel.getChildTab(StatsDisplayPanelHandle.EXPENSE_BREAKDOWN_LABEL);
+        Node node = expenseTab.getContent();
+        if (node instanceof AnchorPane) {
+            Node label = ((AnchorPane) node).getChildren().get(0);
+            if (label instanceof Label) {
+                assertEquals(((Label) label).getText(), StatsDisplayPanel.BREAKDOWN_ERROR_MESSAGE);
+            } else {
+                fail("Wrong node type assigned to empty CategoryBreakdown");
+            }
+        } else {
+            fail("Wrong node assigned to " + StatsDisplayPanelHandle.EXPENSE_BREAKDOWN_LABEL);
+        }
+    }
+
+    /**
+     * @see #assertExpenseCategoryBreakdownEmpty()
+     */
+    protected void assertIncomeCategoryBreakdownEmpty() {
+        StatsDisplayPanelHandle statsDisplayPanel = getStatsDisplayPanel();
+        Tab incomeTab = statsDisplayPanel.getChildTab(StatsDisplayPanelHandle.INCOME_BREAKDOWN_LABEL);
+        Node node = incomeTab.getContent();
+        if (node instanceof AnchorPane) {
+            Node label = ((AnchorPane) node).getChildren().get(0);
+            if (label instanceof Label) {
+                assertEquals(((Label) label).getText(), StatsDisplayPanel.BREAKDOWN_ERROR_MESSAGE);
+            } else {
+                fail("Wrong node type assigned to empty CategoryBreakdown");
+            }
+        } else {
+            fail("Wrong node assigned to " + StatsDisplayPanelHandle.INCOME_BREAKDOWN_LABEL);
+        }
+
+    }
+
+    /**
+     * Asserts that the 2 CategoryBreakdown panels are shown correctly
+     */
+    protected void assertCategoryBreakdownsAreShown() {
+        StatsDisplayPanelHandle statsDisplayPanel = getStatsDisplayPanel();
+        assertTrue(statsDisplayPanel.isVisible());
+        // Asserts that the 1st tab is visible but not selected
+        Tab expenseTab = statsDisplayPanel.getChildTab(StatsDisplayPanelHandle.EXPENSE_BREAKDOWN_LABEL);
+        assertFalse(statsDisplayPanel.isTabSelected(expenseTab));
+        CategoryBreakdownHandle expenseCategoryBreakdown = statsDisplayPanel.getCategoryBreakdown(
+                expenseTab);
+        assertTrue(expenseCategoryBreakdown.isVisible());
+
+        // Asserts that the 2nd tab is visible and selected
+        Tab incomeTab = statsDisplayPanel.getChildTab(StatsDisplayPanelHandle.INCOME_BREAKDOWN_LABEL);
+        assertTrue(statsDisplayPanel.isTabSelected(incomeTab));
+        CategoryBreakdownHandle incomeCategoryBreakdown = statsDisplayPanel.getCategoryBreakdown(
+                incomeTab);
+        assertTrue(incomeCategoryBreakdown.isVisible());
+    }
+
+    /**
      * Asserts that the starting state of the application is correct.
      */
     private void assertApplicationStartingStateIsCorrect() {
@@ -322,8 +422,12 @@ public abstract class FinancialPlannerSystemTest {
      * Executes the UndoCommand on the ui and updates the expected model
      * @param model expectedModel to update
      */
-    protected void undoModel(Model model) throws Exception {
-        new UndoCommand().execute(model, null);
+    protected void undoModel(Model model) {
+        try {
+            new UndoCommand().execute(model, null);
+        } catch (Exception e) {
+            fail("Something is wrong with the Undo function");
+        }
         executeCommand(UndoCommand.COMMAND_WORD);
     }
 
@@ -331,8 +435,12 @@ public abstract class FinancialPlannerSystemTest {
      * Executes the RedoCommand on the ui and updates the expected model
      * @param model expectedModel to update
      */
-    protected void redoModel(Model model) throws Exception {
-        new RedoCommand().execute(model, null);
+    protected void redoModel(Model model) {
+        try {
+            new RedoCommand().execute(model, null);
+        } catch (Exception e) {
+            fail("Something is wrong with the Redo function");
+        }
         executeCommand(RedoCommand.COMMAND_WORD);
     }
 
@@ -341,15 +449,21 @@ public abstract class FinancialPlannerSystemTest {
      * @param model expectedModel to update
      * @param toAdd record to be added
      */
-    protected void addRecord(Model model, Record toAdd) throws Exception {
-        AddCommand addCommand = new AddCommand(toAdd);
-        addCommand.execute(model, null);
-        String command = "   " + AddCommand.COMMAND_WORD + "  " + PREFIX_NAME + toAdd.getName().fullName
-                + " " + PREFIX_DATE + toAdd.getDate().value + " " + PREFIX_MONEYFLOW + toAdd.getMoneyFlow().value;
-        for (Tag t : toAdd.getTags()) {
-            command += " " + PREFIX_TAG + t.tagName;
+    protected void addRecord(Model model, Record toAdd) {
+        StringBuilder stringBuilder = new StringBuilder();
+        try {
+            AddCommand addCommand = new AddCommand(toAdd);
+            addCommand.execute(model, null);
+            String command = "   " + AddCommand.COMMAND_WORD + "  " + PREFIX_NAME + toAdd.getName().fullName
+                    + " " + PREFIX_DATE + toAdd.getDate().value + " " + PREFIX_MONEYFLOW + toAdd.getMoneyFlow().value;
+            stringBuilder.append(command);
+            for (Tag t : toAdd.getTags()) {
+                stringBuilder.append(" " + PREFIX_TAG + t.tagName);
+            }
+            executeCommand(stringBuilder.toString());
+        } catch (Exception e) {
+            fail("Add command should not fail.");
         }
-        executeCommand(command);
     }
 
     /**
@@ -366,19 +480,28 @@ public abstract class FinancialPlannerSystemTest {
     }
 
     /**
-     * Executes the EditCommand with the index to edit and the corresponding date to edit
+     * Executes the EditCommand with the index to edit and the corresponding target
      * @param model expectedModel to update
      * @param toEditIndex index of the record to be editted
-     * @param date the resulting date after editting
+     * @param target the resulting record after editing
      */
-    protected void editRecord(Model model, int toEditIndex, String date) throws Exception {
-        Record target = model.getFilteredRecordList().get(toEditIndex - 1);
-        EditCommand.EditRecordDescriptor editRecordDescriptor = new EditRecordDescriptorBuilder(target)
-                .withDate(date).build();
-        EditCommand editCommand = new EditCommand(Index.fromOneBased(toEditIndex), editRecordDescriptor);
-        editCommand.execute(model, null);
-        String command = "   " + EditCommand.COMMAND_WORD + " " + toEditIndex + " " + PREFIX_DATE + date;
-        executeCommand(command);
+    protected void editRecord(Model model, int toEditIndex, Record target) {
+        try {
+            EditCommand.EditRecordDescriptor editRecordDescriptor = new EditRecordDescriptorBuilder(target).build();
+            EditCommand editCommand = new EditCommand(Index.fromOneBased(toEditIndex), editRecordDescriptor);
+            editCommand.execute(model, null);
+            String command = "   " + EditCommand.COMMAND_WORD + " " + toEditIndex + " "
+                    + PREFIX_NAME + target.getName().fullName + " "
+                    + PREFIX_DATE + target.getDate().value + " "
+                    + PREFIX_MONEYFLOW + target.getMoneyFlow().value + " ";
+            StringBuilder stringBuilder = new StringBuilder(command);
+            for (Tag t : target.getTags()) {
+                stringBuilder.append(PREFIX_TAG + t.tagName + " ");
+            }
+            executeCommand(stringBuilder.toString());
+        } catch (Exception e) {
+            fail("Edit command should not fail");
+        }
     }
 
     /**
@@ -398,11 +521,26 @@ public abstract class FinancialPlannerSystemTest {
      * Deletes record at the given index using the ui and updates the model
      * @param model expectedModel to update
      */
-    protected void deleteRecord(Model model, int indexToDelete) throws Exception {
-        DeleteCommand deleteCommand = new DeleteCommand(Index.fromOneBased(indexToDelete));
-        deleteCommand.execute(model, null);
-        String command = "   " + DeleteCommand.COMMAND_WORD + " " + indexToDelete;
-        executeCommand(command);
+    protected void deleteRecord(Model model, int indexToDelete) {
+        String command;
+        try {
+            DeleteCommand deleteCommand = new DeleteCommand(Index.fromOneBased(indexToDelete));
+            deleteCommand.execute(model, null);
+            command = "   " + DeleteCommand.COMMAND_WORD + " " + indexToDelete;
+            executeCommand(command);
+        } catch (Exception e) {
+            fail("DeleteCommand should not fail");
+        }
+    }
+
+    /**
+     * Executes the ClearCommand on the ui and updates the expected model
+     * @param model expectedModel to update
+     */
+    protected void clearModel(Model model) {
+        executeCommand(ClearCommand.COMMAND_WORD);
+        model.resetData(new FinancialPlanner());
+        model.commitFinancialPlanner();
     }
 
 }

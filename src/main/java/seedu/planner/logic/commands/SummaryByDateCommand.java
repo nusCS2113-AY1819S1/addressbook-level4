@@ -9,7 +9,6 @@ import seedu.planner.commons.core.EventsCenter;
 import seedu.planner.commons.events.ui.ShowSummaryTableEvent;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.model.Model;
-import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
@@ -41,9 +40,8 @@ public class SummaryByDateCommand extends SummaryCommand {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        ReadOnlyFinancialPlanner financialPlanner = model.getFinancialPlanner();
-        SummaryByDateList summaryList = new SummaryByDateList(financialPlanner.getRecordList(),
-                predicate);
+        model.updateFilteredRecordList(predicate);
+        SummaryByDateList summaryList = new SummaryByDateList(model.getFilteredRecordList());
         EventsCenter.getInstance().post(new ShowSummaryTableEvent(summaryList.getSummaryList(),
                 summaryList.getTotalExpense(), summaryList.getTotalIncome(), summaryList.getTotal(), TOTAL_LABEL));
         return new CommandResult(String.format(MESSAGE_SUCCESS, summaryList.size()));

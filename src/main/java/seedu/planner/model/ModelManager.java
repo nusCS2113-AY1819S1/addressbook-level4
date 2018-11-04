@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.planner.commons.core.ComponentManager;
@@ -39,8 +39,6 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedFinancialPlanner versionedFinancialPlanner;
     private final FilteredList<Record> filteredRecords;
     private final FilteredList<Limit> limits;
-
-    private final Month currentMonth;
     private final FilteredList<Record> recordsInCurrentMonth;
 
     /**
@@ -56,11 +54,16 @@ public class ModelManager extends ComponentManager implements Model {
         versionedFinancialPlanner = new VersionedFinancialPlanner(financialPlanner);
         filteredRecords = new FilteredList<>(versionedFinancialPlanner.getRecordList());
         limits = new FilteredList<Limit>(versionedFinancialPlanner.getLimitList());
-        currentMonth = getCurrentMonth();
         recordsInCurrentMonth = new FilteredList<>(versionedFinancialPlanner.getRecordList(),
-                new DateIsWithinIntervalPredicate(DateUtil.generateFirstOfMonth(currentMonth),
-                        DateUtil.generateLastOfMonth(currentMonth)));
-        recordsInCurrentMonth.addListener((InvalidationListener) observable -> {
+                new DateIsWithinIntervalPredicate(DateUtil.generateFirstOfMonth(getCurrentMonth()),
+                        DateUtil.generateLastOfMonth(getCurrentMonth())));
+        recordsInCurrentMonth.addListener((ListChangeListener<Record>) c -> {
+            Predicate<Record> newPredicate = new DateIsWithinIntervalPredicate(
+                    DateUtil.generateFirstOfMonth(getCurrentMonth()),
+                    DateUtil.generateLastOfMonth(getCurrentMonth()));
+            if (!newPredicate.equals(recordsInCurrentMonth.getPredicate())) {
+                recordsInCurrentMonth.setPredicate(newPredicate);
+            }
             CategoryStatisticsList statsList = new CategoryStatisticsList(recordsInCurrentMonth);
             EventsCenter.getInstance().post(new UpdateWelcomePanelEvent(statsList.getReadOnlyStatsList()));
         });

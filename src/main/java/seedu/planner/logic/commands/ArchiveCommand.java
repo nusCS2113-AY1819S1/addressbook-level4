@@ -15,7 +15,6 @@ import seedu.planner.commons.util.ExcelUtil;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.model.DirectoryPath;
 import seedu.planner.model.Model;
-import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
@@ -86,8 +85,7 @@ public class ArchiveCommand extends Command {
     public CommandResult execute(Model model, CommandHistory commandHistory) {
         requireNonNull(this);
         model.updateFilteredRecordList(predicate);
-        ReadOnlyFinancialPlanner financialPlanner = model.getFinancialPlanner();
-        SummaryByDateList summaryList = new SummaryByDateList(financialPlanner.getRecordList(), predicate);
+        SummaryByDateList summaryList = new SummaryByDateList(model.getFilteredRecordList());
         List<Record> recordList = model.getFilteredRecordList();
         List<SummaryEntry> daySummaryEntryList = summaryList.getSummaryList();
         String nameFile = ExcelUtil.setNameExcelFile(startDate, endDate);
