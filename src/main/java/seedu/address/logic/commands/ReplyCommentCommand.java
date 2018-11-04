@@ -37,13 +37,12 @@ public class ReplyCommentCommand extends Command {
 
     public static final String MESSAGE_REPLY_COMMENT = "Comment [%1$s] replied for Event %2$s at Line %3$s";
     public static final String MESSAGE_LINE_INVALID = "Line is invalid, try again. Example: replyComment 1 L/1 C/Hello";
-    public static final String MESSAGE_LINE_STRING_INVALID = "Line cannot be a string!"
-            + " Example: replyComment 1 L/1 C/Hello";
 
-    private final Index index;
     private final EditCommand.EditEventDescriptor editCommentDescriptor;
     private int line = 0;
     private String comment;
+    private String username;
+    private Index index;
 
     /**
      * @param index of the event in the filtered event list to edit
@@ -70,6 +69,16 @@ public class ReplyCommentCommand extends Command {
 
     public Index getIndex() { return this.index; }
 
+    public void setIndex(Index index) { this.index = index; }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
@@ -82,17 +91,21 @@ public class ReplyCommentCommand extends Command {
         if (index.getZeroBased() >= filteredEventList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
-
+        setUsername(model.getUsername().toString());
         Event eventToEdit = filteredEventList.get(index.getZeroBased());
-        CommentFacade comments = new CommentFacade();
-        String repliedComment = comments.replyComment(eventToEdit.getComment().toString(), getComment(),
-                getLine(), model.getUsername().toString());
-        editCommentDescriptor.setComment(new Comment(repliedComment));
-        Event editedEvent = EditCommand.createEditedEvent(eventToEdit, editCommentDescriptor);
+        Event editedEvent = replyComment(eventToEdit, getUsername());
         model.updateEvent(eventToEdit, editedEvent);
         model.commitEventManager();
         EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
         return new CommandResult(String.format(MESSAGE_REPLY_COMMENT, getComment(), index.getOneBased(), getLine()));
+    }
+
+    public Event replyComment(Event eventToEdit, String username) throws CommandException {
+        CommentFacade comments = new CommentFacade();
+        String repliedComment = comments.replyComment(eventToEdit.getComment().toString(), getComment(),
+                getLine(), username);
+        editCommentDescriptor.setComment(new Comment(repliedComment));
+        return EditCommand.createEditedEvent(eventToEdit, editCommentDescriptor);
     }
 
 }

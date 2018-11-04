@@ -1,15 +1,13 @@
-
 //@@author Geraldcdx
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.Command.MESSAGE_LOGIN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMMENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LINE;
-import static seedu.address.logic.commands.DeleteCommentCommand.MESSAGE_DELETE_COMMENT;
+import static seedu.address.logic.commands.ReplyCommentCommand.MESSAGE_REPLY_COMMENT;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
-
-import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -30,17 +28,16 @@ import seedu.address.testutil.UserBuilder;
 /**
  * Integration tests with User, model, undo, redo
  */
-class DeleteCommentCommandTest {
+class ReplyCommentCommandTest {
     private static Model model;
-    private CommentAssertion handle = new CommentAssertion();
     private CommandHistory commandHistory = new CommandHistory();
-    private DeleteCommentCommand deleteCommentCommand = new DeleteCommentCommand(INDEX_FIRST_EVENT, VALID_LINE);
+    private CommentAssertion handle = new CommentAssertion();
+    private ReplyCommentCommand replyCommentCommand =
+            new ReplyCommentCommand(INDEX_FIRST_EVENT, VALID_LINE, VALID_COMMENT);
 
     @BeforeAll
     public static void setUp() {
-        User user = new UserBuilder().build();
-        model = new ModelManager(getTypicalEventManager(), new UserPrefs());
-        model.logUser(user);
+        model = buildModel();
     }
 
     /**
@@ -54,19 +51,15 @@ class DeleteCommentCommandTest {
                 .withEmail("cornelia@example.com")
                 .withVenue("10th street")
                 .withDateTime("22/10/2017 9:30")
-                .withComment("{span}Comment Section{/span}{ol}{li}admin : Hi{/li}{/ol}")
+                .withComment("{span}Comment Section{/span}{ol}{li}admin : Hi{/li}{li} (REPLY) Gerald : Hi{/li}{/ol}")
                 .withTags("friends")
                 .withAttendees("Scarlet Witch").build();
-        String expectedMessage = String.format(DeleteCommentCommand.MESSAGE_DELETE_COMMENT,
-                deleteCommentCommand.getLine(),
-                deleteCommentCommand.getIndex().getOneBased()
-        );
         User user = new UserBuilder().build();
         Model expectedModel = new ModelManager(getTypicalEventManager(), new UserPrefs());
         expectedModel.logUser(user);
         model.updateEvent(model.getFilteredEventList().get(0), editedEvent);
         model.commitEventManager();
-        deleteCommentCommand.execute(model, commandHistory);
+        replyCommentCommand.execute(model, commandHistory);
         handle.assertSuccessModel(expectedModel, model);
         //undo -> the previous event edit
         model.undoEventManager();
@@ -84,25 +77,26 @@ class DeleteCommentCommandTest {
      * Testing addComment function
      */
     @Test
-    public void deleteComment_testingInput() throws CommandException {
+    public void replyComment_testingInput() throws CommandException {
+        model = buildModel();
         Model expectedModel = new ModelManager(getTypicalEventManager(), new UserPrefs());
         expectedModel.logUser(new UserBuilder().build());
-        Event editedEvent = new EventBuilder().withName("Art and Crafts")
+        Event expectedEvent = new EventBuilder().withName("Art and Crafts")
                 .withContact("Daniel Meier")
                 .withPhone("87652533")
                 .withEmail("cornelia@example.com")
                 .withVenue("10th street")
                 .withDateTime("22/10/2017 9:30")
-                .withComment("{span}Comment Section{/span}{ol}{li}admin : Hi{/li}{/ol}")
+                .withComment("{span}Comment Section{/span}{ol}{li}admin : Hi{/li}{li} (REPLY) Gerald : Hi{/li}{/ol}")
                 .withTags("friends")
                 .withAttendees("Scarlet Witch").build();
 
-        List<Event> filteredEventList = expectedModel.getFilteredEventList();
-        Event expectedEvent = filteredEventList.get(INDEX_FIRST_EVENT.getZeroBased());
-        Event deleteComment = deleteCommentCommand.deleteComment(editedEvent);
-        assertEquals(expectedEvent, deleteComment);
-        assertEquals(expectedEvent.getComment(), deleteComment.getComment());
-
+        Event replyComment = replyCommentCommand.replyComment(
+                model.getFilteredEventList().get(0),
+                "Gerald"
+        );
+        assertEquals(expectedEvent, replyComment);
+        assertEquals(expectedEvent.getComment(), replyComment.getComment());
     }
 
     /**
@@ -112,9 +106,9 @@ class DeleteCommentCommandTest {
     @Test
     public void execute_exceptionThrown() throws CommandException {
         //Invalid Index
-        deleteCommentCommand.setIndex(Index.fromOneBased(10));
+        replyCommentCommand.setIndex(Index.fromOneBased(10));
         try {
-            deleteCommentCommand.execute(model, commandHistory);
+            replyCommentCommand.execute(model, commandHistory);
         } catch (Exception e) {
             assertEquals(new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX).toString(), e.toString());
         }
@@ -122,7 +116,7 @@ class DeleteCommentCommandTest {
         //Not logged in
         Model notLoggedIn = new ModelManager(getTypicalEventManager(), new UserPrefs());
         try {
-            deleteCommentCommand.execute(notLoggedIn, commandHistory);
+            replyCommentCommand.execute(notLoggedIn, commandHistory);
         } catch (Exception e) {
             assertEquals(new CommandException(MESSAGE_LOGIN).toString(), e.toString());
         }
@@ -135,7 +129,7 @@ class DeleteCommentCommandTest {
      */
     @Test
     public void execute_commandResult() throws CommandException {
-        DeleteCommentCommand deleteCommentCommand = new DeleteCommentCommand(INDEX_FIRST_EVENT, VALID_LINE);
+        ReplyCommentCommand replyCommentCommand = new ReplyCommentCommand(INDEX_FIRST_EVENT, VALID_LINE, VALID_COMMENT);
         Event editedEvent = new EventBuilder().withName("Art and Crafts")
                 .withContact("Daniel Meier")
                 .withPhone("87652533")
@@ -148,9 +142,35 @@ class DeleteCommentCommandTest {
                 .withAttendees("Scarlet Witch").build();
         model.updateEvent(model.getFilteredEventList().get(0), editedEvent);
         model.commitEventManager();
-        String expectedMessage = String.format(MESSAGE_DELETE_COMMENT, VALID_LINE, INDEX_FIRST_EVENT.getOneBased());
+        String expectedMessage = String.format(
+                MESSAGE_REPLY_COMMENT,
+                VALID_COMMENT,
+                INDEX_FIRST_EVENT.getOneBased(),
+                VALID_LINE
+        );
         //Message correct
-        assertEquals(expectedMessage, deleteCommentCommand.execute(model, commandHistory).getString());
+        assertEquals(expectedMessage, replyCommentCommand.execute(model, commandHistory).getString());
+    }
+
+    /**
+     * Build a sample model to process with commands
+     * @return
+     */
+    public static Model buildModel() {
+        User user = new UserBuilder().build();
+        Model model = new ModelManager(getTypicalEventManager(), new UserPrefs());
+        model.logUser(user);
+        Event event = new EventBuilder().withName("Art and Crafts")
+                .withContact("Daniel Meier")
+                .withPhone("87652533")
+                .withEmail("cornelia@example.com")
+                .withVenue("10th street")
+                .withDateTime("22/10/2017 9:30")
+                .withComment("{span}Comment Section{/span}{ol}{li}admin : Hi{/li}{/ol}")
+                .withTags("friends")
+                .withAttendees("Scarlet Witch").build();
+        model.updateEvent(model.getFilteredEventList().get(0), event);
+        return model;
     }
 
 
