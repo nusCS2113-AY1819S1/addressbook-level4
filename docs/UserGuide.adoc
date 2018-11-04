@@ -514,10 +514,6 @@ Examples:
 * `export_excel`
 * `export_excel d/31-3-1999`
 * `export_excel d/31-3-1999 31-03-2019`
-<<<<<<< HEAD
-[[limit]]
-== Spending Limit Features
-=======
 * `export_excel d/31-3-1999 dir/C:\`
 * `export_excel d/31-3-1999 31-3-2019 dir/C:\`
 
@@ -658,7 +654,6 @@ image::Export_Capture2_LinhChi.png[width:800]
 // end::archive[]
 
 == Spending Limit Feature
->>>>>>> dd33a15222e3d2df401ac988fd1a9424c1b92e2c
 
 This section describes the limit feature that allows users to set values to control their future spending.
 Constraints that apply to records also apply to each limit. Refer to <<constraints>> for more information.
