@@ -256,6 +256,11 @@ public class DeleteGroupCommandTest {
         public void deleteGroupPerson(Group group, Person target) {
             throw new AssertionError("This method should not be called.");
         }
+        
+        @Override
+        public String getScriptFolderLocation() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
