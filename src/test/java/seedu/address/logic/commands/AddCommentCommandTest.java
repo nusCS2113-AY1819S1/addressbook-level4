@@ -11,8 +11,11 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
@@ -25,20 +28,25 @@ import seedu.address.model.user.User;
 import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.UserBuilder;
 
-import java.util.List;
 
+/**
+ * Integration tests with User, model, undo, redo
+ */
 class AddCommentCommandTest {
-    static private Model model;
+    private static Model model;
     private CommandHistory commandHistory = new CommandHistory();
     private AddCommentCommand addCommentCommand = new AddCommentCommand(INDEX_FIRST_EVENT, VALID_COMMENT);
 
     @BeforeAll
-    static public void setUp() {
+    public static void setUp() {
         User user = new UserBuilder().build();
         model = new ModelManager(getTypicalEventManager(), new UserPrefs());
         model.logUser(user);
     }
 
+    /**
+     * Testing addComment function
+     */
     @Test
     public void addComment_testingInput() {
         Event editedEvent = new EventBuilder().withName("Art and Crafts")
@@ -63,6 +71,10 @@ class AddCommentCommandTest {
         assertNotEquals(editedEvent.getComment(), addedComment.getComment());
     }
 
+    /**
+     * Testing for invalid index, not logged it, undo command and redo command
+     * @throws CommandException
+     */
     @Test
     public void execute_exceptionThrown() throws CommandException {
 
@@ -78,15 +90,20 @@ class AddCommentCommandTest {
         //Not logged in
         Model notLoggedIn = new ModelManager(getTypicalEventManager(), new UserPrefs());
         try {
-            addCommentCommand.execute(notLoggedIn, commandHistory );
+            addCommentCommand.execute(notLoggedIn, commandHistory);
         } catch (Exception e) {
             assertEquals(new CommandException(MESSAGE_LOGIN).toString(), e.toString());
         }
-        
+        // Redo is prevented when an exception throws
+        assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
         // Undo is prevented in exception throws
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
     }
 
+    /**
+     * Testing expected String
+     * @throws CommandException
+     */
     @Test
     public void execute_commandResult() throws CommandException {
         AddCommentCommand addCommentCommand = new AddCommentCommand(INDEX_FIRST_EVENT, VALID_COMMENT);
@@ -102,6 +119,9 @@ class AddCommentCommandTest {
         assertNotEquals(expectedMessage, addCommentCommand.execute(model, commandHistory).getString());
     }
 
+    /**
+     * Complete integration test
+     */
     @Test
     public void execute_integrationTest_success() {
         addCommentCommand.setIndex(INDEX_FIRST_EVENT);
