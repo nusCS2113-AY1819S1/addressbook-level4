@@ -120,6 +120,12 @@ Examples:
 * `findproduct Cap`
 * `findproduct 1021`
 
+==== List all products: `listproducts`
+
+Format: `listproducts`
+
+Provides the list of products
+
 // end::inventorymanagement[]
 
 // tag::distributormanagement[]
