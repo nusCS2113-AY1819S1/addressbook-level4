@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.planner.commons.core.ComponentManager;
@@ -56,10 +56,13 @@ public class ModelManager extends ComponentManager implements Model {
         recordsInCurrentMonth = new FilteredList<>(versionedFinancialPlanner.getRecordList(),
                 new DateIsWithinIntervalPredicate(DateUtil.generateFirstOfMonth(getCurrentMonth()),
                         DateUtil.generateLastOfMonth(getCurrentMonth())));
-        recordsInCurrentMonth.addListener((InvalidationListener) observable -> {
-            recordsInCurrentMonth.setPredicate(new DateIsWithinIntervalPredicate(
+        recordsInCurrentMonth.addListener((ListChangeListener<Record>) c -> {
+            Predicate<Record> newPredicate = new DateIsWithinIntervalPredicate(
                     DateUtil.generateFirstOfMonth(getCurrentMonth()),
-                    DateUtil.generateLastOfMonth(getCurrentMonth())));
+                    DateUtil.generateLastOfMonth(getCurrentMonth()));
+            if (!newPredicate.equals(recordsInCurrentMonth.getPredicate())) {
+                recordsInCurrentMonth.setPredicate(newPredicate);
+            }
             CategoryStatisticsList statsList = new CategoryStatisticsList(recordsInCurrentMonth);
             EventsCenter.getInstance().post(new UpdateWelcomePanelEvent(statsList.getReadOnlyStatsList()));
         });

@@ -25,6 +25,7 @@ import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.summary.CategoryStatistic;
 import seedu.planner.model.summary.CategoryStatisticsList;
+import seedu.planner.testutil.RecordBuilder;
 
 public class StatisticCommandSystemTest extends FinancialPlannerSystemTest {
 
@@ -46,6 +47,7 @@ public class StatisticCommandSystemTest extends FinancialPlannerSystemTest {
         String expectedResultMessage = String.format(StatisticCommand.MESSAGE_SUCCESS, startDate, endDate);
 
         /* ------------------------ Check starting state of program ------------------------------------------------- */
+        /* Case: Starting state -> Income: CAIFAN, JAP, KOREAN; Expense: WORK, ZT, RANDOM */
         model.updateFilteredRecordList(predicate);
         ObservableList<CategoryStatistic> expectedStats = new CategoryStatisticsList(model.getFilteredRecordList())
                 .getReadOnlyStatsList();
@@ -54,12 +56,14 @@ public class StatisticCommandSystemTest extends FinancialPlannerSystemTest {
         assertIncomeBreakdownNotEmpty(expectedStats);
 
         /* ------------------------ Clear the appplication ---------------------------------------------------------- */
+        /* Case: Clear the app -> Nothing inside */
         clearModel(model);
         assertCommandSuccess(command, model, expectedResultMessage);
         assertIncomeCategoryBreakdownEmpty();
         assertExpenseCategoryBreakdownEmpty();
 
         /* -------------------------------------------- Undo and redo ----------------------------------------------- */
+        /* Case: Undo -> Income: CAIFAN, JAP, KOREAN; Expense: WORK, ZT, RANDOM */
         undoModel(model);
         model.updateFilteredRecordList(predicate);
         expectedStats = new CategoryStatisticsList(model.getFilteredRecordList()).getReadOnlyStatsList();
@@ -67,6 +71,7 @@ public class StatisticCommandSystemTest extends FinancialPlannerSystemTest {
         assertExpenseBreakdownNotEmpty(expectedStats);
         assertIncomeBreakdownNotEmpty(expectedStats);
 
+        /* Case: Redo -> Nothing inside */
         redoModel(model);
         model.updateFilteredRecordList(predicate);
         assertCommandSuccess(command, model, expectedResultMessage);
@@ -74,7 +79,7 @@ public class StatisticCommandSystemTest extends FinancialPlannerSystemTest {
         assertIncomeBreakdownEmpty();
 
         /* -------------------------------------------- Adding records ---------------------------------------------- */
-        /* Case: Add 2 records different tags, both expense -> expense filled, income empty */
+        /* Case: Add 2 records different tags, both expense -> Expense: KOREAN, MALA */
         addRecord(model, KOREAN);
         addRecord(model, MALA);
         model.updateFilteredRecordList(predicate);
@@ -85,7 +90,7 @@ public class StatisticCommandSystemTest extends FinancialPlannerSystemTest {
 
         clearModel(model);
 
-        /* Case: Add 2 records different tags, both income -> expense empty, income filled */
+        /* Case: Add 2 records different tags, both income -> Income: PART_TIME, FRIEND */
         addRecord(model, PART_TIME);
         addRecord(model, FRIEND);
         model.updateFilteredRecordList(predicate);
@@ -96,7 +101,7 @@ public class StatisticCommandSystemTest extends FinancialPlannerSystemTest {
 
         undoModel(model);
 
-        /* Case: Add 2 records same tags, income and expense -> both filled */
+        /* Case: Add 2 records same tags, income and expense -> Income: PART_TIME, FRIEND; Expense : CLASSMATE */
         addRecord(model, CLASSMATE);
         addRecord(model, FRIEND);
         model.updateFilteredRecordList(predicate);
@@ -105,7 +110,7 @@ public class StatisticCommandSystemTest extends FinancialPlannerSystemTest {
         assertExpenseBreakdownNotEmpty(expectedStats);
         assertIncomeBreakdownNotEmpty(expectedStats);
 
-        /* Case: Add records outside of date range -> nothing happens */
+        /* Case: Add records outside of date range -> Income: PART_TIME, FRIEND; Expense : CLASSMATE */
         addRecord(model, CHICKENRICE);
         model.updateFilteredRecordList(predicate);
         assertCommandSuccess(command, model, expectedResultMessage);
@@ -113,14 +118,15 @@ public class StatisticCommandSystemTest extends FinancialPlannerSystemTest {
         assertIncomeBreakdownNotEmpty(expectedStats);
 
         /* -------------------------------------------- Removing records -------------------------------------------- */
-        /* Case: Add record outside of date range -> nothing happens */
+        /* Case: Delete record outside of date range -> Income: PART_TIME, FRIEND; Expense : CLASSMATE */
         findRecord(model, CHICKENRICE);
+        deleteRecord(model, 1);
         model.updateFilteredRecordList(predicate);
         assertCommandSuccess(command, model, expectedResultMessage);
         assertExpenseBreakdownNotEmpty(expectedStats);
         assertIncomeBreakdownNotEmpty(expectedStats);
 
-        /* Case: Delete record unique tag -> list reduces by 1 */
+        /* Case: Delete record unique tag -> Income: FRIEND; Expense : CLASSMATE */
         findRecord(model, PART_TIME);
         deleteRecord(model, 1);
         model.updateFilteredRecordList(predicate);
@@ -133,7 +139,7 @@ public class StatisticCommandSystemTest extends FinancialPlannerSystemTest {
         addRecord(model, AA);
         addRecord(model, BB);
 
-        /* Case: Delete record with expense and overlapping tag -> same number of slices */
+        /* Case: Delete record with expense and overlapping tag -> Income:  ZT; Expense: AA, BB*/
         findRecord(model, CLASSMATE);
         deleteRecord(model, 1);
         model.updateFilteredRecordList(predicate);
@@ -144,7 +150,28 @@ public class StatisticCommandSystemTest extends FinancialPlannerSystemTest {
 
         undoModel(model);
 
-        /* Case: Edit tag of existing record with expense to existing tag -> number of slices reduced by 1 */
+        /* Case: Edit tag of existing record with expense to existing tag -> Income: FRIEND, ZT;
+        * Expense:  CLASSMATE, AA, BB */
+        Record newAa = new RecordBuilder(AA).withTags("BBBB").build();
+        findRecord(model, AA);
+        editRecord(model, 1, newAa);
+        model.updateFilteredRecordList(predicate);
+        expectedStats = new CategoryStatisticsList(model.getFilteredRecordList()).getReadOnlyStatsList();
+        assertCommandSuccess(command, model, expectedResultMessage);
+        assertExpenseBreakdownNotEmpty(expectedStats);
+        assertIncomeBreakdownNotEmpty(expectedStats);
+
+        /* Case: Edit moneyflow of existing record with expense to that of income -> Income: FRIEND, ZT, AA;
+        * Expense: CLASSMATE, BB */
+
+        newAa = new RecordBuilder(AA).withMoneyFlow("+67.50").build();
+        findRecord(model, AA);
+        editRecord(model, 1, newAa);
+        model.updateFilteredRecordList(predicate);
+        expectedStats = new CategoryStatisticsList(model.getFilteredRecordList()).getReadOnlyStatsList();
+        assertCommandSuccess(command, model, expectedResultMessage);
+        assertExpenseBreakdownNotEmpty(expectedStats);
+        assertIncomeBreakdownNotEmpty(expectedStats);
     }
 
     /**

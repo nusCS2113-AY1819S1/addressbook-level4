@@ -4,9 +4,9 @@ import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.planner.commons.util.DateUtil.generateFirstOfMonth;
 import static seedu.planner.commons.util.DateUtil.generateLastOfMonth;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.planner.testutil.TypicalRecords.BURSARY;
 import static seedu.planner.testutil.TypicalRecords.CAIFAN;
 import static seedu.planner.testutil.TypicalRecords.IDA;
+import static seedu.planner.testutil.TypicalRecords.INCOME_A;
 import static seedu.planner.testutil.TypicalRecords.JAP;
 import static seedu.planner.testutil.TypicalRecords.KOREAN;
 import static seedu.planner.testutil.TypicalRecords.ZT;
@@ -23,8 +23,10 @@ import seedu.planner.logic.commands.SummaryCommand;
 import seedu.planner.model.Model;
 import seedu.planner.model.Month;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
+import seedu.planner.model.record.Record;
 import seedu.planner.model.summary.SummaryByDateList;
 import seedu.planner.model.summary.SummaryByMonthList;
+import seedu.planner.testutil.RecordBuilder;
 import seedu.planner.ui.SummaryEntry;
 //@@author tenvinc
 public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
@@ -86,7 +88,7 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
         /* Case: Add 2 records with a date that is not tracked by summary, then do summary by date and by month
          -> no change */
         addRecord(model, IDA);
-        addRecord(model, BURSARY);
+        addRecord(model, INCOME_A);
         model.updateFilteredRecordList(new DateIsWithinIntervalPredicate(START_DATE, END_DATE));
         assertCommandSuccess(defaultSummaryByDateCommand, model, summariesByDate.getSummaryList(), BY_DATE);
         model.updateFilteredRecordList(new DateIsWithinIntervalPredicate(generateFirstOfMonth(new Month(START_MONTH)),
@@ -99,7 +101,8 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
          then do summary by date and by month -> change is reflected in summary table
           */
         findRecord(model, CAIFAN);
-        editRecord(model, 1, "1-4-2018");
+        Record newCaifan = new RecordBuilder(CAIFAN).withDate("1-4-2018").build();
+        editRecord(model, 1, newCaifan);
         summariesByDate = computeSummaryByDate(model, START_DATE, END_DATE);
         assertCommandSuccess(defaultSummaryByDateCommand, model, summariesByDate.getSummaryList(), BY_DATE);
         summariesByMonth = computeSummaryByMonth(model, START_MONTH, END_MONTH);
@@ -109,7 +112,8 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
          then do summary by date and by month -> change is still reflected in summary table
          */
         findRecord(model, ZT);
-        editRecord(model, 1, "1-4-2019");
+        Record newZt = new RecordBuilder(ZT).withDate("1-4-2018").build();
+        editRecord(model, 1, newZt);
         summariesByDate = computeSummaryByDate(model, START_DATE, END_DATE);
         assertCommandSuccess(defaultSummaryByDateCommand, model, summariesByDate.getSummaryList(), BY_DATE);
         summariesByMonth = computeSummaryByMonth(model, START_MONTH, END_MONTH);
@@ -129,7 +133,7 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
         /* Case: Removes records not tracked by summary and then do summary
         -> No change in summary table
          */
-        findRecord(model, BURSARY);
+        findRecord(model, INCOME_A);
         deleteRecord(model, 1);
 
         model.updateFilteredRecordList(new DateIsWithinIntervalPredicate(START_DATE, END_DATE));
@@ -205,6 +209,7 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
         } else {
             expectedResultMessage = "";
         }
+
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();

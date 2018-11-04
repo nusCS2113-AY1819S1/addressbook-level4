@@ -31,7 +31,7 @@
         <moneyFlow>-10.50</moneyFlow>
     </records>
     <records>
-        <name>Payment for chicken rice</name>
+        <name>chicken rice</name>
         <date>27-5-2018</date>
         <moneyFlow>-0.90</moneyFlow>
     </records>
@@ -51,34 +51,5 @@
         <date>25-5-2018</date>
         <moneyFlow>-4.50</moneyFlow>
         <tagged>Terrace</tagged>
-    </records>
-    <records>
-        <name>Payment from friend</name>
-        <date>1-4-2018</date>
-        <moneyFlow>+20.00</moneyFlow>
-        <tagged>friends</tagged>
-    </records>
-    <records>
-        <name>PaymentToBob</name>
-        <date>10-4-2018</date>
-        <moneyFlow>-199.47</moneyFlow>
-        <tagged>friends</tagged>
-    </records>
-    <records>
-        <name>Parttime</name>
-        <date>15-4-2018</date>
-        <moneyFlow>-250.00</moneyFlow>
-    </records>
-    <records>
-        <name>AA</name>
-        <date>17-4-2018</date>
-        <moneyFlow>-235.96</moneyFlow>
-        <tagged>friends</tagged>
-    </records>
-    <records>
-        <name>BB</name>
-        <date>23-4-2018</date>
-        <moneyFlow>-149.18</moneyFlow>
-        <tagged>BBBB</tagged>
     </records>
 </financialplanner>

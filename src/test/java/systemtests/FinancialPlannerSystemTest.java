@@ -480,19 +480,28 @@ public abstract class FinancialPlannerSystemTest {
     }
 
     /**
-     * Executes the EditCommand with the index to edit and the corresponding date to edit
+     * Executes the EditCommand with the index to edit and the corresponding target
      * @param model expectedModel to update
      * @param toEditIndex index of the record to be editted
-     * @param date the resulting date after editting
+     * @param target the resulting record after editing
      */
-    protected void editRecord(Model model, int toEditIndex, String date) throws Exception {
-        Record target = model.getFilteredRecordList().get(toEditIndex - 1);
-        EditCommand.EditRecordDescriptor editRecordDescriptor = new EditRecordDescriptorBuilder(target)
-                .withDate(date).build();
-        EditCommand editCommand = new EditCommand(Index.fromOneBased(toEditIndex), editRecordDescriptor);
-        editCommand.execute(model, null);
-        String command = "   " + EditCommand.COMMAND_WORD + " " + toEditIndex + " " + PREFIX_DATE + date;
-        executeCommand(command);
+    protected void editRecord(Model model, int toEditIndex, Record target) {
+        try {
+            EditCommand.EditRecordDescriptor editRecordDescriptor = new EditRecordDescriptorBuilder(target).build();
+            EditCommand editCommand = new EditCommand(Index.fromOneBased(toEditIndex), editRecordDescriptor);
+            editCommand.execute(model, null);
+            String command = "   " + EditCommand.COMMAND_WORD + " " + toEditIndex + " "
+                    + PREFIX_NAME + target.getName().fullName + " "
+                    + PREFIX_DATE + target.getDate().value + " "
+                    + PREFIX_MONEYFLOW + target.getMoneyFlow().value + " ";
+            StringBuilder stringBuilder = new StringBuilder(command);
+            for (Tag t : target.getTags()) {
+                stringBuilder.append(PREFIX_TAG + t.tagName + " ");
+            }
+            executeCommand(stringBuilder.toString());
+        } catch (Exception e) {
+            fail("Edit command should not fail");
+        }
     }
 
     /**
