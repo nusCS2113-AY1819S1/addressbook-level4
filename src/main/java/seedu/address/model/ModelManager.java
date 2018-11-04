@@ -25,6 +25,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Group> filteredGroups;
+    private final String scriptFolderLocation;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -38,6 +39,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         filteredGroups = new FilteredList<>(versionedAddressBook.getGroupList());
+        scriptFolderLocation = userPrefs.getScriptFileDirectory();
     }
 
     public ModelManager() {
@@ -189,6 +191,13 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void commitAddressBook() {
         versionedAddressBook.commit();
+    }
+
+    //=========== ScriptCommand Default Folder Directory =====================================================
+
+    @Override
+    public String getScriptFolderLocation() {
+       return scriptFolderLocation;
     }
 
     @Override

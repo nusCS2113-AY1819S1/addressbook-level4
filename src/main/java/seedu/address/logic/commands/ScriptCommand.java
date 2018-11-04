@@ -27,8 +27,6 @@ public class ScriptCommand extends Command {
     public static final String COMMA = ",";
     public static final String SPACE = " ";
 
-    public static final String DEFAULT_FOLDER = "/scripts/";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Run multiple commands based on the text file selected.\n"
             + "Parameters: TEXTFILE CommandType\n"
@@ -37,11 +35,10 @@ public class ScriptCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "All persons from the text file %s has been added";
     public static final String MESSAGE_ADD_ERROR = "Line %s of %s cannot be executed";
-    public static final String MESSAGE_UNABLE_TO_READ_FILE = "%s is not able to be read";
     public static final String MESSAGE_FILE_MISSING = "%s is not present in the folder";
 
+    private String projectLocation;
     private String textFileName;
-    private Path path;
     private CommandType commandType;
 
     public ScriptCommand(TextFile fileName, CommandType commandType) {
@@ -49,8 +46,7 @@ public class ScriptCommand extends Command {
         requireNonNull(commandType);
 
         textFileName = fileName.getTextFile() + TEXT_EXTENSION;
-        String projectLocation = FileUtil.getRootLocation();
-        this.path = FileUtil.getPath(projectLocation + DEFAULT_FOLDER + textFileName);
+        this.projectLocation = FileUtil.getRootLocation();
         this.commandType = commandType;
     }
 
@@ -58,9 +54,12 @@ public class ScriptCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         String multCommandError;
+        String scriptFolderLocation = model.getScriptFolderLocation();
+        Path ScriptPath = FileUtil.getPath(projectLocation + scriptFolderLocation + textFileName);
+
         AddressBookParser scriptParser = new AddressBookParser();
         try {
-            List<String> commandArguments = FileUtil.readEachLineFromFile(path);
+            List<String> commandArguments = FileUtil.readEachLineFromFile(ScriptPath);
             commandArguments.replaceAll(s -> commandType + SPACE + s);
             multCommandError = executeMultipleCommand(scriptParser, commandArguments, model, history);
         } catch (IOException ioe) {
