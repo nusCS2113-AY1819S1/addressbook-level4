@@ -39,24 +39,25 @@ public class SellCommand extends Command {
             + PREFIX_QUANTITY + "5 OR " + COMMAND_WORD + " " + PREFIX_ISBN + "978-3-16-148410-0 "
             + PREFIX_QUANTITY + "5";
 
+    public static final String MESSAGE_QUANTITY_SOLD = "Number of Book Sold: ";
     public static final String MESSAGE_SELL_BOOK_SUCCESS = "Sold Book: %1$s";
     public static final String MESSAGE_NOT_SOLD = "Decrease to stock quantity must be provided.";
     public static final String MESSAGE_INVALID_QUANTITY = "Quantity of books left cannot be less than 0.";
     private final String findBookBy;
     private final String argsType;
-    private final DecreaseQuantity decreaseQuantity;
+    private final SellBookDescriptor sellBookDescriptor;
 
     /**
      * @param findBookBy the index or isbn in the filtered book list to edit
-     * @param decreaseQuantity number to sell the book with
+     * @param sellBookDescriptor number to sell the book with
      */
-    public SellCommand(String findBookBy, String argsType, DecreaseQuantity decreaseQuantity) {
+    public SellCommand(String findBookBy, String argsType, SellBookDescriptor sellBookDescriptor) {
         requireNonNull(findBookBy);
-        requireNonNull(decreaseQuantity);
+        requireNonNull(sellBookDescriptor);
 
         this.findBookBy = findBookBy;
         this.argsType = argsType;
-        this.decreaseQuantity = new DecreaseQuantity(decreaseQuantity);
+        this.sellBookDescriptor = new SellBookDescriptor(sellBookDescriptor);
     }
 
     @Override
@@ -67,34 +68,35 @@ public class SellCommand extends Command {
 
         bookToSell = ArgsUtil.getBookToEdit(model, lastShownList, argsType, findBookBy);
 
-        Book sellBook = createSoldBook(bookToSell, decreaseQuantity);
+        Book sellBook = createSoldBook(bookToSell, sellBookDescriptor);
 
         StatisticCenter.getInstance().getStatistic().sell(
                 bookToSell.getPrice().toString(),
                 bookToSell.getCost().toString(),
-                decreaseQuantity.getQuantity().getValue());
+                sellBookDescriptor.getQuantity().getValue());
 
 
         model.updateBook(bookToSell, sellBook);
         model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
         model.commitBookInventory();
-        return new CommandResult(String.format(MESSAGE_SELL_BOOK_SUCCESS, sellBook));
+        return new CommandResult(MESSAGE_QUANTITY_SOLD + sellBookDescriptor.getQuantity().getValue()
+                + "\n" + String.format(MESSAGE_SELL_BOOK_SUCCESS, sellBook));
 
 
     }
 
     /**
      * Creates and returns a {@code Book} with the details of {@code bookToSell}
-     * edited with {@code decreaseQuantity}
+     * edited with {@code sellBookDescriptor}
      */
-    private static Book createSoldBook(Book bookToSell, DecreaseQuantity decreaseQuantity) throws CommandException {
+    private static Book createSoldBook(Book bookToSell, SellBookDescriptor sellBookDescriptor) throws CommandException {
         assert bookToSell != null;
 
         Name name = bookToSell.getName();
         Isbn isbn = bookToSell.getIsbn();
         Price price = bookToSell.getPrice();
         Cost cost = bookToSell.getCost();
-        Quantity updatedQuantity = bookToSell.deductQuantity(decreaseQuantity.getQuantity());
+        Quantity updatedQuantity = bookToSell.deductQuantity(sellBookDescriptor.getQuantity());
         Set<Tag> tags = bookToSell.getTags();
 
         return new Book(name, isbn, price, cost, updatedQuantity, tags);
@@ -110,21 +112,21 @@ public class SellCommand extends Command {
         // state check
         SellCommand s = (SellCommand) other;
         return findBookBy.equals(s.findBookBy)
-                && decreaseQuantity.equals(s.decreaseQuantity);
+                && sellBookDescriptor.equals(s.sellBookDescriptor);
     }
 
     /**
      * Stores the quantity to edit the book with. Quantity of book will be subtracted.
      */
-    public static class DecreaseQuantity {
+    public static class SellBookDescriptor {
         private Quantity quantity;
 
-        public DecreaseQuantity() {}
+        public SellBookDescriptor() {}
 
         /**
          * Copy constructor.
          */
-        public DecreaseQuantity(DecreaseQuantity toCopy) {
+        public SellBookDescriptor(SellBookDescriptor toCopy) {
             setQuantity(toCopy.quantity);
         }
 
@@ -143,12 +145,12 @@ public class SellCommand extends Command {
         @Override
         public boolean equals(Object other) {
             // instanceof handles nulls
-            if (!(other instanceof DecreaseQuantity)) {
+            if (!(other instanceof SellBookDescriptor)) {
                 return false;
             }
 
             // state check
-            DecreaseQuantity s = (DecreaseQuantity) other;
+            SellBookDescriptor s = (SellBookDescriptor) other;
 
             return getQuantity().equals(s.getQuantity());
         }

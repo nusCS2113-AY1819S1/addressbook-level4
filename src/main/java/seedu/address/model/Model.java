@@ -25,7 +25,7 @@ public interface Model {
     boolean hasBook(Book book);
 
     /**
-     * Returns book if a book has the correspondind isbn
+     * Returns book if a book has the corresponding isbn
      */
     Book getBook(String isbn);
 

@@ -1,5 +1,5 @@
 package seedu.address.logic.parser;
-
+import static seedu.address.commons.core.Messages.MESSAGE_ACCESS_DENIED;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_SIMILARITY_FOUND;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -24,6 +24,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.Role;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SellCommand;
 import seedu.address.logic.commands.StockCommand;
@@ -31,6 +32,7 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewStatisticCommand;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+
 import seedu.address.ui.BookListPanel;
 
 /**
@@ -64,7 +66,8 @@ public class BookInventoryParser {
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
-
+        Command finalCommand;
+        final String finalCommandWord;
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
@@ -85,6 +88,7 @@ public class BookInventoryParser {
         commandList.add(HelpCommand.COMMAND_WORD);
         commandList.add(UndoCommand.COMMAND_WORD);
         commandList.add(RedoCommand.COMMAND_WORD);
+        commandList.add(ViewStatisticCommand.COMMAND_WORD);
 
 
         switch (commandWord) {
@@ -92,54 +96,70 @@ public class BookInventoryParser {
         case AddCommand.COMMAND_ALIAS:
 
         case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
-
+            finalCommandWord = AddCommand.COMMAND_WORD;
+            finalCommand = new AddCommandParser().parse(arguments);
+            break;
         case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
-
+            finalCommandWord = EditCommand.COMMAND_WORD;
+            finalCommand = new EditCommandParser().parse(arguments);
+            break;
         case SellCommand.COMMAND_WORD:
-            return new SellCommandParser().parse(arguments);
-
+            finalCommandWord = SellCommand.COMMAND_WORD;
+            finalCommand = new SellCommandParser().parse(arguments);
+            break;
         case SelectCommand.COMMAND_WORD:
-            return new SelectCommandParser().parse(arguments);
-
+            finalCommandWord = SelectCommand.COMMAND_WORD;
+            finalCommand = new SelectCommandParser().parse(arguments);
+            break;
         case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
-
+            finalCommandWord = DeleteCommand.COMMAND_WORD;
+            finalCommand = new DeleteCommandParser().parse(arguments);
+            break;
         case StockCommand.COMMAND_WORD:
-            return new StockCommandParser().parse(arguments);
+            finalCommandWord = StockCommand.COMMAND_WORD;
+            finalCommand = new StockCommandParser().parse(arguments);
+            break;
         case ClearCommand.COMMAND_ALIAS:
-
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
+            finalCommandWord = ClearCommand.COMMAND_WORD;
+            finalCommand = new ClearCommand();
+            break;
         case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
-
+            finalCommandWord = FindCommand.COMMAND_WORD;
+            finalCommand = new FindCommandParser().parse(arguments);
+            break;
         case CheckCommand.COMMAND_WORD:
-            return new CheckCommandParser().parse(arguments);
-
+            finalCommandWord = CheckCommand.COMMAND_WORD;
+            finalCommand = new CheckCommandParser().parse(arguments);
+            break;
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
-
+            finalCommandWord = ListCommand.COMMAND_WORD;
+            finalCommand = new ListCommand();
+            break;
         case HistoryCommand.COMMAND_WORD:
-            return new HistoryCommand();
-
+            finalCommandWord = HistoryCommand.COMMAND_WORD;
+            finalCommand = new HistoryCommand();
+            break;
         case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
+            finalCommandWord = ExitCommand.COMMAND_WORD;
+            finalCommand = new ExitCommand();
+            break;
         case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
-
+            finalCommandWord = HelpCommand.COMMAND_WORD;
+            finalCommand = new HelpCommand();
+            break;
         case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();
-
+            finalCommandWord = UndoCommand.COMMAND_WORD;
+            finalCommand = new UndoCommand();
+            break;
         case RedoCommand.COMMAND_WORD:
-            return new RedoCommand();
-
+            finalCommandWord = RedoCommand.COMMAND_WORD;
+            finalCommand = new RedoCommand();
+            break;
         case ViewStatisticCommand.COMMAND_WORD:
-            return new ViewStatisticCommand();
-
+            finalCommandWord = ViewStatisticCommand.COMMAND_WORD;
+            finalCommand = new ViewStatisticCommand();
+            break;
         default:
         {
             for (String command : commandList) {
@@ -150,5 +170,16 @@ public class BookInventoryParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
         }
+
+        if (finalCommand != null) {
+            try {
+                Role.checkAccess(finalCommandWord);
+            } catch (IllegalAccessException e) {
+                throw new ParseException(MESSAGE_ACCESS_DENIED + finalCommandWord + ".");
+
+            }
+            return finalCommand;
+        }
+        return null;
     }
 }

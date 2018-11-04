@@ -34,7 +34,7 @@ public class StockCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Stocks the book identified "
             + "by the index number used in the displayed book list. "
-            + "Existing values will be overwritten by the input values.\n"
+            + "Existing values will be added by the input values.\n"
             + "Parameters: INDEX(must be a positive integer) "
             + "[" + PREFIX_QUANTITY + "QUANTITY] OR "
             + PREFIX_ISBN + "ISBN13 " + "[" + PREFIX_QUANTITY + "QUANTITY]\n"
@@ -42,6 +42,8 @@ public class StockCommand extends Command {
             + PREFIX_QUANTITY + "5 OR " + COMMAND_WORD + " " + PREFIX_ISBN + "978-3-16-148410-0 "
             + PREFIX_QUANTITY + "5";
 
+
+    public static final String MESSAGE_QUANTITY_STOCK = "Number of Book Stocked: ";
     public static final String MESSAGE_STOCK_PERSON_SUCCESS = "Stocked Book: %1$s";
     public static final String MESSAGE_NOT_STOCKED = "Increase to stock quantity must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This book already exists in the book inventory.";
@@ -86,7 +88,8 @@ public class StockCommand extends Command {
         model.updateBook(bookToStock, stockedBook);
         model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
         model.commitBookInventory();
-        return new CommandResult(String.format(MESSAGE_STOCK_PERSON_SUCCESS, stockedBook));
+        return new CommandResult(MESSAGE_QUANTITY_STOCK + stockBookDescriptor.getQuantity().getValue()
+                + "\n" + String.format(MESSAGE_STOCK_PERSON_SUCCESS, stockedBook));
     }
 
     /**
@@ -154,8 +157,8 @@ public class StockCommand extends Command {
         /**
          * Returns true if at least one field is stocked.
          */
-        public boolean isAnyFieldStocked() {
-            return CollectionUtil.isAnyNonNull(name, isbn, price, quantity, tags);
+        public boolean isQuantityFieldStocked() {
+            return CollectionUtil.isAnyNonNull(quantity);
         }
 
         public void setName(Name name) {
