@@ -60,7 +60,11 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
         case LoginUserIdPasswordRoleCommand.COMMAND_WORD:
-            return new LoginUserIdPasswordRoleCommandParser().parse(arguments);
+            if (!LoginManager.getIsLoginSuccessful()) {
+                return new LoginUserIdPasswordRoleCommandParser().parse(arguments);
+            } else {
+                throw new ParseException("You have already logged in!");
+            }
 
         case CreateAccountCommand.COMMAND_WORD:
             if (!LoginManager.getIsCurrentlyTesting()) {
