@@ -58,7 +58,7 @@ public class WelcomePanel extends UiPart<Region> implements Switchable {
 
     /** Creates the CategoryBreakdown object with the total expense and tag of each CategoryStatistic */
     private Node createTotalExpenseBreakdown(MixedPieChartDataList dataList) {
-        CategoryBreakdown categoryBreakdown = new CategoryBreakdown(dataList.getExpenseChartLabelData(),
+        CategoryBreakdown categoryBreakdown = new CurrentMonthPieChartDisplay(dataList.getExpenseChartLabelData(),
                 dataList.getExpenseChartLegendData(), "Expense Breakdown for the period");
         categoryBreakdown.setPieChartSize(prefPieChartWidth, prefPieChartHeight);
         categoryBreakdown.disableLegend();
@@ -68,7 +68,7 @@ public class WelcomePanel extends UiPart<Region> implements Switchable {
 
     /** Creates the CategoryBreakdown object with the total income and tag of each CategoryStatistic */
     private Node createTotalIncomeBreakdown(MixedPieChartDataList dataList) {
-        CategoryBreakdown categoryBreakdown = new CategoryBreakdown(dataList.getIncomeChartLabelData(),
+        CategoryBreakdown categoryBreakdown = new CurrentMonthPieChartDisplay(dataList.getIncomeChartLabelData(),
                 dataList.getIncomeChartLegendData(), "Income Breakdown for the period");
         categoryBreakdown.setPieChartSize(prefPieChartWidth, prefPieChartHeight);
         categoryBreakdown.disableLegend();
