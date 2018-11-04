@@ -74,7 +74,7 @@
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableStockList(stockList));
+        XmlFileStorage.saveStockListDataToFile(filePath, new XmlSerializableStockList(stockList));
     }
 }
 ```
