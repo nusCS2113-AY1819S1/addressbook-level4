@@ -15,7 +15,7 @@ import seedu.planner.commons.util.DateUtil;
 public class Date {
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Date parameter should be in the format of dd-mm-yyyy "
-                    + "with dd and mm being 2 digits, and yyyy being 4 digits."
+                    + "with dd and mm being 1 or 2 digits, and yyyy being 4 digits."
                     + " Please take note that inappropriate date will result in errors, for example: 30/02/2018";
     public static final String MESSAGE_DATE_LOGICAL_CONSTRAINTS =
             "Date should follow the modern calendar. "
