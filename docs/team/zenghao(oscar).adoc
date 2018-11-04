@@ -1,0 +1,125 @@
+= (Oscar)Zeng Hao - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: FinancialPlanner
+
+== Financial Planner Overview
+
+FinancialPlanner is a PC software specially designed for students who love typing.
+This purpose of this product is to help users better manage their finances, including their daily spend and income.
+Users are able to record their finances and modify these records, set and modify limits, summarize their financial status and export their records into excel file.
+The product is based on Command Line Interface (CLI), users are able input their commands and related information at the TextBox.
+Graphic User Interface is used for displaying statistic and other information, which will provide user with a clear and direct understanding about their financial status.
+This product is user-friendly, the command can be automatically completed, limits will check automatically and report any exceeded limits' details.
+It is also an effective and helpful product, users are able to find check their records and limits, generate summary for any period of time and export the record
+to excel file to further manage these data and import excel file back.
+
+This project is under the NUS CS2113 (Software Engineering & Object-Oriented Programming) module.
+This module provides students with basic knowledge about Object-Oriented Programming and necessary software engineering training.
+Students were asked to form a group with four members and develop a production with the base code https://nuscs2113-ay1819s1.github.io/addressbook-level4/[AddressBook Level 4] provided.
+As a group we decided to morph the original product into FinancialPlanner.
+
+== Summary of contributions
+
+To better develop the product, each group member was assigned a main feature to develop. I made significant contribution to the product by constructing the limit functions.
+Detailed information about my contributions is listed below.
+
+=== `completed` *Major enhancement #1*: added the ability to set limits for multiple periods of time.
+
+** What it does: allows the user to set multiple limits for different periods of time or a single day to better manage their spend.
+All the limits will be stored and automatically checked whenever the records were updated.
+The user will be reminded if limits have been exceeded.
+** Justification:This feature improves the product significantly because user will be able to make plans for their expense in advance and store all the limits.
+Since user may need to set limits for multiple periods of time while it is hard to remember all the limits they have set.
+This will help user better control their spend and keep their limits updated.
+This feature is challenging because it requires me to build a storage for limits to store limits' details and read from the storage.
+Besides that, I also need to keep limits' information updated whenever there is a change of records and generate output if any limit has been exceeded.
+** Highlights: This enhancement is the foundation of all the features below. It affects existing commands, commands to be added in future, and storage. A new xml file will be created to store all the limits. It required an in-depth analysis of design alternatives.
+
+=== `completed` *Minor enhancement #1*: added the ability to delete limits.
+
+** What it does: allows the user to delete existing limits.
+** Justification: This feature improves the product significantly because the user need to delete the limits that will be no longer used in the future.
+
+=== `completed` *Minor enhancement #2*: added the ability to edit limits.
+
+** What it does: allows the user to change the limit money of existing limits.
+** Justification: This feature improves the product significantly because the user may need to adjust their plan accordingly.
+
+=== `completed` *Minor enhancement #3*: added the ability to list all limits' condition.
+
+** What it does: allows the user to change the limit money of existing limits.
+** Justification: This feature improves the product significantly because the user is able to check all the limit he/she had set.
+
+
+=== `ongoing`  *Minor enhancement #1*: added the ability to set limit for weeks and months.
+==== `sub-part of Major enhancement #1`
+
+** What it does: allows user to set a limit for weeks and months.
+** Justification: The implementation may lead to a big modification of the limit command.
+
+=== `ongoing` *Minor enhancement #2*: develop a better UI to demo the limitlist .
+==== `sub-part of Minor enhancement #3`
+
+** What it does: provides user a better display of all limits' information.
+** Justification: This implementation will help the user to have a much clearer overview of their limit details.
+
+=== `ongoing` *Minor enhancement #3*: added the ability to change the color of the output when the limit has been exceeded..
+==== `sub-part of Major enhancement #1`
+** What it does: allows user to choose the color they want to color for the cells which exceed limit.
+** Justification: This enhancement make some modification about the UI part.
+
+
+* *Code contributed*:
+
+=== *Other contributions*:
+
+** Project management:
+***
+** Enhancements to existing features:
+*** Helped combine the storage of the FinancialPlanner.
+*** Fix some of the bugs of tests.
+** Documentation:
+*** Update limit related content and some other content of the User Guide
+*** Update limit related content and of Developer Guide.
+Example:
+https://github.com/CS2113-AY1819S1-T09-4/main/blob/master/docs/DeveloperGuide.adoc#addlimit-feature[addlimit]
+https://github.com/CS2113-AY1819S1-T09-4/main/blob/master/docs/DeveloperGuide.adoc#37-deletelimit-feature[deletelimit]
+https://github.com/CS2113-AY1819S1-T09-4/main/blob/master/docs/DeveloperGuide.adoc#38-editlimit-feature[editlimit]
+https://github.com/CS2113-AY1819S1-T09-4/main/blob/master/docs/DeveloperGuide.adoc#39-checklimit-feature[checklimit]
+
+** Community:
+*** PRs reviewed : https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
+
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=addlimit]
+
+include::../UserGuide.adoc[tag=]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=undoredo]
+
+include::../DeveloperGuide.adoc[tag=dataencryption]
+
+
+== PROJECT: PowerPointLabs
+
+---
+
