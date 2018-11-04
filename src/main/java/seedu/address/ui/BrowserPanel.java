@@ -54,7 +54,7 @@ public class BrowserPanel extends UiPart<Region> {
         if(drink.getEarliestBatchDate() == null) {
             earliestBatchDate = "earliestBatchDate=" + "Unavailable";
         } else {
-            earliestBatchDate = drink.getEarliestBatchDate().toString();
+            earliestBatchDate = "earliestBatchDate=" + drink.getEarliestBatchDate().toString();
         }
         loadPage(SEARCH_PAGE_URL + name + "&" + sellingPrice + "&" + costPrice + "&" + stock + "&" + earliestBatchDate);
     }

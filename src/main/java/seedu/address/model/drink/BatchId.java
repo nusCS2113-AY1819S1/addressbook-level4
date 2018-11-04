@@ -1,7 +1,7 @@
 //@@author Lunastryke
 package seedu.address.model.drink;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 /**
  * Represents the identification number of a specific batch
@@ -15,7 +15,7 @@ public class BatchId {
      *
      */
     public BatchId() {
-        this.value = Integer.parseInt(LocalDateTime.now().toString());
+        this.value = (int)Instant.now().getEpochSecond();
     }
 
     public BatchId(String input) {
