@@ -22,11 +22,12 @@ import seedu.address.model.user.stocktaker.StockTakerModel;
 public class BuyDrinkCommand extends Command {
     public static final String COMMAND_WORD = "buy";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Import a drink that is recorded in Drink I/O. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Record a purchase of a drink that is recorded in Drink I/O. \n"
             + "Parameters: "
             + PREFIX_DRINK_NAME + "DRINK NAME "
             //+ PREFIX_DATE + "DATE SOLD "
-            + PREFIX_QUANTITY + "QUANTITY IMPORTED \n"
+            + PREFIX_QUANTITY + "QUANTITY PURCHASED \n"
             //+ PREFIX_PRICE + "TOTAL REVENUE "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DRINK_NAME + "Coca Cola Original "
@@ -34,7 +35,8 @@ public class BuyDrinkCommand extends Command {
             + PREFIX_QUANTITY + "12 ";
     //+ PREFIX_PRICE + "345.68 ";
 
-    public static final String MESSAGE_SUCCESS = "%1$s imported on %2$s with quantity: %3$s";
+    public static final String MESSAGE_SUCCESS = "Purchase transaction recorded!\n"
+            + "%1$s purchased on %2$s . Quantity purchased: %3$s";
     public static final String MESSAGE_DRINK_NOT_FOUND = "The drink entered does not exist in the inventory list";
 
     private final Drink drink;
@@ -48,7 +50,7 @@ public class BuyDrinkCommand extends Command {
         requireAllNonNull(drink, quantity);
         this.drink = drink;
         this.quantity = quantity;
-        transaction = new Transaction(TransactionType.IMPORT, drink, quantity);
+        transaction = new Transaction(TransactionType.PURCHASE, drink, quantity);
         // actual amount transacted computed at inventoryList level
     }
 
@@ -62,7 +64,7 @@ public class BuyDrinkCommand extends Command {
             throw new CommandException(MESSAGE_DRINK_NOT_FOUND);
         }
 
-        stockTakerModel.importDrink(transaction);
+        stockTakerModel.buyDrink(transaction);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, drink.getName(), transaction.getTransactionDate(),
                 quantity));

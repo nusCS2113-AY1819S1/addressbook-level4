@@ -24,7 +24,7 @@ By: `CS2113T-W12-4`      Since: `Jun 2016`      Licence: `MIT`
 
 *[blue]#_Drink I/O_#* is a desktop application that helps you to manage your drink distribution company.
 You can use *[blue]#_Drink I/O_#* to keep track of your inventory, analyse your company�s sales performance and
-set reminders to help you import more goods should their stocks fall low.
+set reminders to help you purchase more goods should their stocks fall low.
 *[blue]#_Drink I/O_#* is optimised for Command Line Interface (CLI), allowing you to manage your store
 faster than traditional Graphical User Interface (GUI) apps, while retaining the benefits of a GUI
 
@@ -240,7 +240,7 @@ entered into *[blue]#_Drink I/O_#* +
 
 == Managing Transactions
 Buying and selling likely occurs frequently in your company. To manage the ins and outs of your drinks,
-you can record your sales and imports of drinks into *[blue]#_Drink I/O_#*, and let *[blue]#_Drink I/O_#*
+you can record your sales and purchases of drinks into *[blue]#_Drink I/O_#*, and let *[blue]#_Drink I/O_#*
 handle the updating of the inventory for you in real-time.
 
 
@@ -252,7 +252,7 @@ When you buy and receive new goods, and want to update your stocks, you can ente
 *_Summary_* +
 
 *Command format*:
-`import n/NAME q/QUANTITY`
+`buy n/NAME q/QUANTITY`
 
 * `NAME` is the name of the drink you are entering a transaction for
 ** The desired drink must be recorded in *[blue]#_Drink I/O_#*
@@ -260,21 +260,23 @@ When you buy and receive new goods, and want to update your stocks, you can ente
 
 ====
 *Step-by-Step Instructions* +
-To record an import transaction,
+To record a purchase transaction,
 
 . Enter `buy` into the command box
 . Key in `n/`, followed by name of drink (`NAME`)
-. Key in `q/`, followed by quantity imported (`QUANTITY`)
+. Key in `q/`, followed by quantity purchased (`QUANTITY`)
 . Press kbd:[enter]
 . Check whether the transaction has been recorded successfully
--  If you see the message "import transaction recorded!", the transaction had been successfully
+-  If you see the message "Purchase transaction recorded!", the transaction had been successfully
 entered into *[blue]#_Drink I/O_#* +
 -  If not, follow the instructions displayed in the message display pane, and re-enter the command +
 
 [WARNING]
 ====
 The drink you want to transact must be recorded in *[blue]#_Drink I/O_#*.
-Otherwise, the transaction will not be entered into the system.
+Otherwise,
+// you will see the message "The drink entered does not exist in the inventory list", and
+the transaction will not be entered into the system.
 ====
 
 [NOTE]
@@ -310,7 +312,7 @@ To record a sale transaction,
 . Key in `q/`, followed by quantity transacted in sale (`QUANTITY`)
 . Press kbd:[enter]
 . Check whether the transaction has been recorded successfully,
-* If you see the message "sale transaction recorded!", the transaction had been
+* If you see the message "Sale transaction recorded!", the transaction had been
 successfully entered into *[blue]#_Drink I/O_#*
 * If not, follow the instructions displayed in the message display pane, and re-enter the command +
 
@@ -536,15 +538,16 @@ Shows available commands with brief description of what a stock taker can do.
 Format: `help`
 
 ==== Increase stock of a drink: `buy`
-Records import of a drink.
-	Format: `buy n/DRINK_NAME q/QUANTITY_IMPORT`
+Records purchase of a drink.
+	Format: `buy n/DRINK_NAME q/QUANTITY_PURCHASED`
 Examples:
 
-* `Add n/coca cola q/12`
+* `buy n/coca cola q/12`
 
 [NOTE]
 ====
-DRINK_NAME is predefined by manager, so alert message will appear if the drink name is not in the predefined list. In addition, drink name will be case-insensitive.
+DRINK_NAME is predefined by manager, so an alert message will appear if the drink name is not in the predefined list.
+In addition, drink name is #case-insensitive#.
 ====
 
 ==== Decrease stock of a drink: `sell`

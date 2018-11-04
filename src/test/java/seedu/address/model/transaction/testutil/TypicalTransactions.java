@@ -13,6 +13,6 @@ public class TypicalTransactions {
     public static final Transaction SALE_PEPSI = new TransactionBuilder().withTransactionType("sale")
             .withDate("11/08/2018").withDrink("Pepsi woohoo").withQuantity("19").withAmountMoney("40.05").build();
 
-    public static final Transaction IMPORT_PEPSI = new TransactionBuilder().withTransactionType("import")
+    public static final Transaction BUY_PEPSI = new TransactionBuilder().withTransactionType("import")
             .withDate("11/08/2018").withDrink("Pepsi woohoo").withQuantity("19").withAmountMoney("40.05").build();
 }

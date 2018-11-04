@@ -35,7 +35,7 @@ public class StockTakerModelManager extends ModelManager implements StockTakerMo
     }
 
     @Override
-    public void importDrink(Transaction transaction) {
+    public void buyDrink(Transaction transaction) {
         Price defaultCostPrice = inventoryList.getDefaultCostPrice(transaction.getDrinkTransacted());
 
         Price defaultAmountTransacted = new Price(Float.toString(defaultCostPrice.getValue()

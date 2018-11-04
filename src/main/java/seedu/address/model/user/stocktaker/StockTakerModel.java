@@ -17,7 +17,7 @@ public interface StockTakerModel extends Model {
     /**
      * Increases the quantity of the dirnk in the {@code transaction}
      */
-    void importDrink(Transaction transaction);
+    void buyDrink(Transaction transaction);
 
     /**
      * Returns an unmodifiable view of the transaction list
