@@ -201,7 +201,7 @@ your inventory to let *[blue]#_Drink I/O_#* track them.
 *_Summary_* +
 
 *Command format*:
-`addDrink n/NAME p/SELLING_PRICE cp/COST_PRICE`
+`add n/NAME p/SELLING_PRICE cp/COST_PRICE`
 
 * `NAME` is the name of the drink you wish to record
 ** This name must be unique among the drinks recorded in *[blue]#_Drink I/O_#*
@@ -214,7 +214,7 @@ your inventory to let *[blue]#_Drink I/O_#* track them.
 *Step-by-Step Instructions* +
 To enter a new drink into *[blue]#_Drink I/O_#*,
 
-. Enter `addDrink` into the command box
+. Enter `add` into the command box
 . Key in `n/`, followed by name of drink (`NAME`)
 . Key in `p/`, followed by default selling price of 1 carton of the drink (`SELLING_PRICE`)
 . Key in `cp/`, followed by default cost price of 1 carton of the drink (`COST_PRICE`)
