@@ -138,6 +138,7 @@ public class CommandBox extends UiPart<Region> {
             if (checkCommandConfirmation (commandTextField.getText ())) {
                 handleConfirmCommand();
                 commandEntered = "";
+                commandTextField.setText ("");
             } else {
                 EventsCenter.getInstance ().post (new NewResultAvailableEvent(FAILURE_TO_CONFIRM_COMMAND_MESSAGE));
                 commandEntered = "";

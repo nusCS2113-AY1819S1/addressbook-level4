@@ -9,6 +9,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyInventoryList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.drink.Price;
+import seedu.address.model.drink.exceptions.InsufficientQuantityException;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.TransactionList;
 import seedu.address.model.user.AuthenticationLevel;
@@ -33,7 +34,7 @@ public class AdminModelManager extends ModelManager implements AdminModel {
 
     //=====================Stock taker commands====================
     @Override
-    public void sellDrink(Transaction transaction) {
+    public void sellDrink(Transaction transaction) throws InsufficientQuantityException {
         Price defaultSalePrice = inventoryList.getDefaultSellingPrice(transaction.getDrinkTransacted());
 
         Price defaultAmountTransacted = new Price(Float.toString(defaultSalePrice.getValue()
@@ -42,6 +43,8 @@ public class AdminModelManager extends ModelManager implements AdminModel {
         recordTransaction(transaction);
 
         inventoryList.decreaseQuantity(transaction.getDrinkTransacted(), transaction.getQuantityTransacted());
+        indicateInventoryListChanged();
+        updateFilteredDrinkList(PREDICATE_SHOW_ALL_DRINKS);
     }
 
     @Override
@@ -54,6 +57,8 @@ public class AdminModelManager extends ModelManager implements AdminModel {
         recordTransaction(transaction);
 
         inventoryList.increaseQuantity(transaction.getDrinkTransacted(), transaction.getQuantityTransacted());
+        indicateInventoryListChanged();
+        updateFilteredDrinkList(PREDICATE_SHOW_ALL_DRINKS);
     }
 
     private void recordTransaction(Transaction transaction) {

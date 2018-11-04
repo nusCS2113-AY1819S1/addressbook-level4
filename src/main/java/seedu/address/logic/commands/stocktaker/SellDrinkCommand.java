@@ -11,6 +11,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.drink.Drink;
 import seedu.address.model.drink.Quantity;
+import seedu.address.model.drink.exceptions.InsufficientQuantityException;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.TransactionType;
 import seedu.address.model.user.stocktaker.StockTakerModel;
@@ -23,21 +24,21 @@ public class SellDrinkCommand extends Command {
 
     public static final String COMMAND_WORD = "sell";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sell an drink that is recorded in Drink I/O. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sell an drink that is recorded in Drink I/O. \n"
             + "Parameters: "
             + PREFIX_DRINK_NAME + "DRINK NAME "
             //+ PREFIX_DATE + "DATE SOLD "
-            + PREFIX_QUANTITY + "QUANTITY SOLD "
+            + PREFIX_QUANTITY + "QUANTITY SOLD \n"
             //+ PREFIX_PRICE + "TOTAL REVENUE "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_DRINK_NAME + "coca cola "
+            + PREFIX_DRINK_NAME + "Coca Cola Original "
             //+ PREFIX_DATE + "10/06/18 "
             + PREFIX_QUANTITY + "12 ";
     //+ PREFIX_PRICE + "345.68 ";
 
     public static final String MESSAGE_SUCCESS = "%1$s sold on %2$s with quantity: %3$s";
     public static final String MESSAGE_DRINK_NOT_FOUND = "The drink entered does not exist in the inventory list";
-    public static final String MESSAGE_FAILURE = "The quantity entered exceed the stock";
+    public static final String MESSAGE_FAILURE = "Insufficient quantity in stock to perform operation";
 
     private final Drink drink;
     // private final Date date; // TODO: add date support
@@ -65,7 +66,11 @@ public class SellDrinkCommand extends Command {
             throw new CommandException(MESSAGE_DRINK_NOT_FOUND);
         }
 
-        stockTakerModel.sellDrink(transaction);
+        try {
+            stockTakerModel.sellDrink(transaction);
+        } catch (InsufficientQuantityException e) {
+            throw new CommandException(MESSAGE_FAILURE);
+        }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, drink.getName(), transaction.getTransactionDate(),
                 quantity));
