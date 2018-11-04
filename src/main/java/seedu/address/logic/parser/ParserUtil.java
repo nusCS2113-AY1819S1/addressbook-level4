@@ -49,6 +49,9 @@ public class ParserUtil {
     public static String parseModuleCode(String moduleCode) {
         requireNonNull(moduleCode);
         String trimmedModuleCode = moduleCode.trim();
+        /*if (!StringUtil.hasModuleCodeFormat(moduleCode)) {
+            throw new
+        }*/
         return trimmedModuleCode;
     }
 
@@ -61,8 +64,8 @@ public class ParserUtil {
     public static Deadline parseDeadline(String deadline) throws ParseException {
         requireNonNull(deadline);
         String trimmedDeadline = deadline.trim();
-        //TODO prevent 1/1
-        if (!Deadline.isValidDeadline(trimmedDeadline)) {
+        String[] entries = deadline.split("/");
+        if (entries.length != 3) {
             throw new ParseException(Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
         }
         return new Deadline(trimmedDeadline);
