@@ -19,10 +19,12 @@ public class TypicalDistributors {
 
     public static final Distributor AHBENG = new DistributorBuilder().withName("Ah Beng").withPhone("11111111").build();
     public static final Distributor AHHUAT = new DistributorBuilder().withName("Ah Huat").withPhone("22222222").build();
+    public static final Distributor AHLONG = new DistributorBuilder().withName("Ah Long").withPhone("33333333").build();
+    public static final Distributor AHTING = new DistributorBuilder().withName("Ah Ting").withPhone("44444444").build();
 
     // Manually added
     public static final Distributor AHKUAH = new DistributorBuilder().withName("Ah Kuah").withPhone("55555555").build();
-    public static final Distributor AHMEI = new DistributorBuilder().withName("AH Mei").withPhone("66666666").build();
+    public static final Distributor AHMEI = new DistributorBuilder().withName("Ah Mei").withPhone("66666666").build();
 
     // Manually added - Distributor's details found in {@code CommandTestUtil}
     public static final Distributor AHLEE = new DistributorBuilder().withName(VALID_DIST_NAME_AHLEE)
@@ -30,7 +32,7 @@ public class TypicalDistributors {
     public static final Distributor AHSENG = new DistributorBuilder().withName(VALID_DIST_NAME_AHSENG)
             .withPhone(VALID_DIST_PHONE_AHSENG).build();
 
-    public static final String KEYWORD_MATCHING_SENG = "Seng"; // A keyword that matches MEIER
+    public static final String KEYWORD_MATCHING_SENG = "Seng"; // A keyword that matches SENG
 
     private TypicalDistributors() {} // prevents instantiation
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<distributorbook>
+
+    <distributors>
+        <name>Alice Pauline</name>
+        <phone>94351253</phone>
+    </distributors>
+
+    <!-- Distributor with same identity as Alice Pauline -->
+    <distributors>
+        <name>Alice Pauline</name>
+        <phone>94351253</phone>
+    </distributors>
+
+</distributorbook>
