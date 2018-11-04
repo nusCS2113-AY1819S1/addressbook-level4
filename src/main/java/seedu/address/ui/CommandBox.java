@@ -70,17 +70,17 @@ public class CommandBox extends UiPart<Region> {
                         }
                     }
 
-                    List<String> matches;
+                    List<String> matches = null;
                     if (previousWords.length == 0) {
                         matches = FIRST_COMMAND_KEYWORDS.stream()
                                 .filter(words -> words.indexOf(lastWord) == 0).collect(Collectors.toList());
-                    } else {
+                    } else if (previousWords.length == 1) {
                         matches = SECOND_COMMAND_KEYWORDS.stream()
                                 .filter(words -> words.indexOf(lastWord) == 0).collect(Collectors.toList());
                     }
 
                     String wordToAppend;
-                    if (matches.size() >= 1) {
+                    if (matches != null && matches.size() >= 1) {
                         if (previousKeyPressed == KeyCode.TAB && !lastWord.isEmpty()) {
                             index = (index + 1) % matches.size();
                             wordToAppend = matches.get(index).replace(lastWord, "");
