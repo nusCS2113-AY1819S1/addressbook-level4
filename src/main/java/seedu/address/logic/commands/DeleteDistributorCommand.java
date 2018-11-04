@@ -16,14 +16,14 @@ import seedu.address.model.distributor.Distributor;
  */
 public class DeleteDistributorCommand extends Command {
 
-    public static final String COMMAND_WORD = "deleteDistributor";
+    public static final String COMMAND_WORD = "deletedistributor";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the distributor identified by the index number used in the displayed distributor list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Distributor: %1$s";
+    public static final String MESSAGE_DELETE_DISTRIBUTOR_SUCCESS = "Deleted Distributor: %1$s";
 
     private final Index targetIndex;
 
@@ -43,7 +43,7 @@ public class DeleteDistributorCommand extends Command {
         Distributor distributorToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteDistributor(distributorToDelete);
         model.commitDistributorBook();
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, distributorToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_DISTRIBUTOR_SUCCESS, distributorToDelete));
     }
 
     @Override

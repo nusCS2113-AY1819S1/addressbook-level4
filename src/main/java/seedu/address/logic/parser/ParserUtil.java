@@ -18,8 +18,7 @@ import seedu.address.model.product.Email;
 import seedu.address.model.product.Name;
 import seedu.address.model.product.SerialNumber;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.timeidentifiedclass.shopday.Reminder;
-import seedu.address.model.timeidentifiedclass.transaction.Transaction;
+import seedu.address.model.timeidentifiedclass.Reminder;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -66,7 +65,7 @@ public class ParserUtil {
     public static String parseReminderTime(String reminderTime) throws ParseException {
         requireNonNull(reminderTime);
         String trimmedTime = reminderTime.trim();
-        if (!Transaction.isValidTransactionTime(reminderTime)) {
+        if (!Reminder.isValidReminderTime(reminderTime)) {
             throw new ParseException(Reminder.REMINDER_TIME_CONSTRAINTS);
         }
         return trimmedTime;

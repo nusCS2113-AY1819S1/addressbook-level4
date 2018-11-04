@@ -37,7 +37,7 @@ public class XmlAdaptedProduct {
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * Constructs an XmlAdaptedProduct.
+     * Constructs an {@code XmlAdaptedProduct}.
      * This is the no-arg constructor that is required by JAXB.
      */
     public XmlAdaptedProduct() {}

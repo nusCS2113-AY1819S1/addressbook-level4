@@ -14,7 +14,7 @@ import seedu.address.model.distributor.Distributor;
  */
 public class AddDistributorCommand extends Command {
 
-    public static final String COMMAND_WORD = "addDistributor";
+    public static final String COMMAND_WORD = "adddistributor";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a distributor to the inventarie. "
             + "Parameters: "
@@ -25,7 +25,8 @@ public class AddDistributorCommand extends Command {
             + PREFIX_DIST_PHONE + "60123456 ";
 
     public static final String MESSAGE_SUCCESS = "New distributor added: %1$s";
-    public static final String MESSAGE_DUPLICATE_DISTRIBUTOR = "This distributor already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_DISTRIBUTOR =
+            "This distributor already exists in the distributor book";
 
     private final Distributor toAdd;
 

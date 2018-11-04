@@ -12,7 +12,7 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2113-AY1819S1-T13-3/main
 
 By: `CS2113-AY1819S1-T13-3`      Since: `Sep 2018`      Licence: `MIT`
 
@@ -22,11 +22,13 @@ Inventarie Pro is for self employed business owners who *prefer to use a desktop
 
 == Quick Start
 
-.  Ensure you have Java version 9  installed in your Computer.
-.  Download the latest inventarie.jar here (link will be added later).
+.  Ensure you have Java version 9 installed in your Computer.
+.  Download the latest Inventarie.jar here (link will be added later).
 .  Copy the file to the folder you want to use as the home folder for your Inventarie Pro.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
-.  Once prompted, enter your username and password. This will be your permanent username and password for subsequent uses.
+.  Register a new user account (Jump to `register` in <<Authentication>>.
+.  Login with your username and password.
+.  Refer to <<Features>> for a detailed list of commands.
 
 +
 image::Ui.png[width="790"]
@@ -52,107 +54,149 @@ All commands and information about it is displayed
 
 ==== Register new user : `register`
 
-Creates a new user account in the application. +
 Format: `register u/USERNAME p/PASSWORD` +
-e.g. `register u/John p/pass`
+Creates a new user account in the application. +
+
+Examples:
+
+* `register u/John p/pass`
 
 ==== Login : `login`
 
-Logs the user into the application. +
 Format: `login u/USERNAME p/PASSWORD` +
-e.g. `login u/John p/pass`
+Logs the user into the application. +
+
+*   The password is case-sensitive.
+
+Examples:
+
+* `login u/John p/pass`
 
 ==== Logout: `logout`
 
+Format: `logout` +
 Logs the user out of the application. +
-Format: `logout`
 
 ==== Deregister: `deregister`
 
 Deregister the user account in the application. +
 Format: `deregister u/USERNAME p/PASSWORD` +
-e.g. `deregister u/John p/pass`
+
+Examples:
+
+ * `deregister u/John p/pass`
 
 // end::authentication[]
 
 // tag::inventorymanagement[]
 === Inventory Management
 
-==== Add a product: `add`
+==== Add a product: `addproduct`
 
-Format: `add n/<product name> s/<serial no.> d/<distributor> i/<info.> t/<tags>`
+Format: `addproduct n/PRODUCT_NAME s/SERIAL_NUMBER d/DISTRIBUTOR i/INFO t/TAGS`
 
-Adds a product to the list of products offered by the store, and adds the distributor to the list of distributors too if the distributor is not yet added. Distributors:s name is the Primary key.
+Adds a product to the list of products offered by the store
+and adds the distributor to the list of distributors if the distributor
+is not yet added. +
 
-==== List all products: `inventory`
+*  Distributor's name is the key.
 
-Format: `inventory`
+Examples:
 
-Lists all products offered by the store in alphabetical order
+* `addproduct n/G2 s/08382 d/Pilot Pens i/0.7 t/Stationary`
+* `addproduct n/Black Tea s/10041 d/Lim Siang i/175mg t/Beverages`
 
-==== Search for a product: `find`
+==== Search for a product: `findproduct`
 
-Format: `find <product name>`or <Serial number of product>
+Format: `findproduct PRODUCT_NAME` or `findproduct SERIAL_NUMBER`
 
-Displays the product and basic information related to it
-The search is case insensitive e.g ‘potato’ will match ‘POTATO’
-All products containing the name or having the same serial number that is serached for will appear.
+Displays the product and basic information related to it. +
 
-==== Show best selling product: `top selling`
+*  The search is case insensitive. (e.g `potato` will match `POTATO`)
+*  All products containing the name or serial number that is searched for will appear.
 
-Format: `top selling`
+Examples:
 
-Lists the best selling products in order of the sales revenues from those products.
+* `findproduct Cap`
+* `findproduct 1021`
 
 // end::inventorymanagement[]
 
 // tag::distributormanagement[]
 === Contacts
 
-==== Add a distributor: `addDistributor`
+==== Add a distributor: `adddistributor`
 
-Format: `addDistributor dn/<distributor name> dp/<distributor phone>`
+Format: `adddistributor dn/DISTRIBUTOR_NAME dp/PHONE_NUMBER`
 
-Adds a distributor to the list of distributors engaged with the store. Distributors should have different names. There should not exist 2 distributors with the same name but different phone numbers.
+Adds a distributor to the list of distributors engaged with the store.
 
-==== List all distributors: `listDistributors`
+Examples:
 
-Format: `listDistributors`
+* `adddistributor dn/Ming Kee dp/98761234`
+* `adddistributor dn/Hak Kim dp/65900011`
+
+==== List all distributors: `listdistributors`
+
+Format: `listdistributors`
 
 Provides the list of distributors engaged with the store.
 
-==== Edit a distributor: `editDistributor index`
+==== Edit a distributor: `editdistributor index`
 
-Format: `editDistributor index dn/<distributor name> dp/<distributor serialNumber>`
+Format: `editdistributor index dn/DISTRIBUTOR_NAME dp/PHONE_NUMBER`
 
 Edits details of the indexed distributor from the list of distributors engaged with the store.
 Index should be a positive number.
 
-==== Find a distributor: `findDistributor`
+Examples:
 
-Format: `findDistributor <some relevant field>`
+* `editdistributor 1 dn/Ben Lok dp/93120000`
 
-Finds distributors that are related to the <some relevant field> entered.
+==== Find a distributor: `finddistributor`
 
-==== Delete a distributor: `deleteDistributor`
+Format: `finddistributor DISTRIBUTOR_NAME`
 
-Format: `deleteDistributor index`
+Locates distributors that are related to the DISTRIBUTOR_NAME entered.
+
+Examples:
+
+* `finddistributor Taylor`
+
+==== Delete a distributor: `deletedistributor`
+
+Format: `deletedistributor index`
 
 Deletes the indexed distributor from the list of distributors engaged with the store.
+
+Examples:
+
+* `delete 2` +
+Deletes the 2nd distributor in the contacts panel.
+
+* `find Betsy` +
+  `delete 1` +
+   Deletes the 1st distributor in the results of the find command.
+
+
 
 // end::distributormanagement[]
 
 // tag::journal[]
 
-=== Journal
+=== Sales History
 
 ==== Add a transaction: `transaction`
 
-Format: `Transaction pr/<product name> pr/<product name> ... pr/<product name`
+Format: `transaction pr/PRODUCT_NAME pr/PRODUCT_NAME ... pr/PRODUCT_NAME`
 
 Adds a transaction to the record for the given day.
 The time of the transaction, names of the products, and
 individual product quantities will be stored.
+
+Examples:
+
+* `transaction pr/Apple pr/Banana pr/Cherries`
 
 ==== View the latest transaction: `latest`
 
@@ -162,28 +206,50 @@ Displays the details of the latest transaction.
 
 ==== Add a reminder: `setreminder`
 
-Format: `addreminder time/yyyy/MM/dd HH:mm:ss message/<The reminder message>`
+Format: `addreminder time/ <yyyy/MM/dd HH:mm:ss> message/<The reminder message>`
+Sets and stores a reminder.
 
-Sets and stores a reminder. In v1.2, this is only allowed for the current day.
-In future releases, reminders will be set in the current and future days.
+* All reminders must have unique times.
+* There must only be a single space between "dd" and "HH" in the command format.
+
+Examples:
+
+* `addreminder time/ 2018/07/30 18:20:31 message/Throw rubbish`
+* `addreminder time/ 2019/11/22 21:31:11 message/Milk delivery`
 
 ==== View due reminder notifcations: `duereminders`
 
 Format: `duereminders`
+Displays all reminders that are still due.
 
-Shows all reminders that are still due in the current day.
 
+==== View all reminders: `allreminders`
+
+Format: `allreminders`
+
+Shows all reminders that are in the system.
+
+
+==== Remove a Reminder
+
+Format: `removereminder time/<yyyy/MM/dd HH:mm:ss>`
+
+Removes a reminder in the system. There must only be a single
+space between "dd" and "HH" in the command format.
+
+Examples:
+* `removereminder time/ 2018/10/26 12:30:00`
 // end::journal[]
 
 === Clearing all entries : `clear`
-
-Clears all entries from the address book. +
-Format: `clear`
+Format: `clear` +
+Clears all product from Inventarie Pro. +
 
 === Exiting the program : `exit`
 
+Format: `exit` +
 Exits the program. +
-Format: `exit`
+
 
 === Saving the data
 
@@ -192,54 +258,24 @@ There is no need to save manually.
 
 // tag::dataencryption[]
 === Encrypting data files `[coming in v2.0]`
-
-_{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
 
 == FAQ
+=== Inventarie Pro System Requirements
+Recommended requirements:
 
-Q: Why is the product called Inventarie Pro?
+*   Operating system: Windows 10 64-bit/ Mac OS X +
 
-A: We have Swedish developer on our team. `Inventarie` is the Swedish word for inventory.
+Please ensure the latest version of Java is installed on your system.
+
+
+Q: Why is the software called `Inventarie Pro`?
+
+A: We have the pleasure of working with Swedish developer on our team. +
+`Inventarie` is the Swedish word for inventory.
 
 Q: How do I transfer my data to another computer?
 
-A: Install the application on another computer and copy the folder “data”  from the old computer to the new computer and place it in the folder that belong to the program.
-
-Q: I see your screenshots are from a Windows computer. Will this software work on my Macbook?
-
-A: Yes, because Java is platform independent. However, please ensure that the latest version of Java is installed on your system.
-
-Q: Why can I not just use pen and paper to log my transactions, if I am a small provision store owner?
-
-A: There are numerous advantages to digitization of records. Do google ‘advantages of digitization’ for more information!
-
-
-== Command Summary
-
-* *Add Product* : `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-*  *Add Distributor* : `addD dn/DIST_NAME dp/DIST_PHONE` +
-e.g. `addD dn/Ah Huat Distributors dp/61234567`
-* *Add a Transaction* : `Transaction pr/<product name> pr/<product name> ... pr/<product name` +
-e.g. `transaction pr/Apple pr/Banana pr/Cherry pr/Banana`
-* *View the latest transaction: `latest`
-* *Set a Reminder* : `addreminder time/yyyy/MM/dd HH:mm:ss message/<The reminder message>` +
-e.g `addreminder time/2018/08/16 08:30:00 message/Remove expired milk from aisle 6.`
-* *View due Reminders* : `duereminders`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Edit Distributor* : `editD INDEX [dn/DIST_NAME] [dp/DIST_PHONE]` +
-e.g. `editD 2 dn/Distributors Huat Ah dp/67654321`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *List* : `list`
-* *Help* : `help`
-* *Select* : `select INDEX` +
-e.g.`select 2`
-* *History* : `history`
-* *Undo* : `undo`
-* *Redo* : `redo`
+. Install the application on another computer.
+. Copy the folder “data”  from the old computer to the new computer.
+. Place it in the folder that belong to the program.

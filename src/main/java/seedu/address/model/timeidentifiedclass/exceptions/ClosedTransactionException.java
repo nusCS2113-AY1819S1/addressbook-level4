@@ -1,4 +1,4 @@
-package seedu.address.model.timeidentifiedclass.transaction.exceptions;
+package seedu.address.model.timeidentifiedclass.exceptions;
 
 /**
  * TODO

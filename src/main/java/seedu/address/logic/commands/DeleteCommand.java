@@ -17,7 +17,7 @@ import seedu.address.model.product.Product;
 
 public class DeleteCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "deleteproduct";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the product identified by the index number used in the displayed product list.\n"

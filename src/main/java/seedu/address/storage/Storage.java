@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.DistributorBookChangedEvent;
+import seedu.address.commons.events.model.SalesHistoryChangedEvent;
 import seedu.address.commons.events.model.UserDatabaseChangedEvent;
 import seedu.address.commons.events.model.UserDeletedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
@@ -15,12 +16,13 @@ import seedu.address.model.ReadOnlyDistributorBook;
 import seedu.address.model.ReadOnlyUserDatabase;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.login.User;
+import seedu.address.model.saleshistory.ReadOnlySalesHistory;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends ProductDatabaseStorage, DistributorBookStorage, UserPrefsStorage, UserDatabaseStorage {
-
+public interface Storage extends ProductDatabaseStorage, DistributorBookStorage,
+        UserPrefsStorage, UserDatabaseStorage, SalesHistoryStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -75,6 +77,13 @@ public interface Storage extends ProductDatabaseStorage, DistributorBookStorage,
      */
     void handleUserDeletedEvent(UserDeletedEvent event) throws IOException;
 
+    /**
+     * Saves the current version of the Sales History to the hard disk.
+     * Creates the data file if missing.
+     * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
+     */
+    void handleSalesHistoryChangedEvent(SalesHistoryChangedEvent event);
+
     @Override
     Path getUserDatabaseFilePath();
 
@@ -86,6 +95,18 @@ public interface Storage extends ProductDatabaseStorage, DistributorBookStorage,
 
     @Override
     void deleteAddressBook(User user) throws IOException;
+
+    @Override
+    Path getSalesHistoryFilePath();
+
+    @Override
+    Optional<ReadOnlySalesHistory> readSalesHistory() throws DataConversionException, IOException;
+
+    @Override
+    void saveSalesHistory(ReadOnlySalesHistory salesHistory) throws IOException;
+
+    @Override
+    void deleteSalesHistory() throws IOException;
 
     @Override
     void deleteDistributorBook(User user) throws IOException;

@@ -1,4 +1,4 @@
-package seedu.address.model.timeidentifiedclass.shopday.exceptions;
+package seedu.address.model.timeidentifiedclass.exceptions;
 
 /**
  * This class represents Exceptions that are raised when there is a duplicate transaction.

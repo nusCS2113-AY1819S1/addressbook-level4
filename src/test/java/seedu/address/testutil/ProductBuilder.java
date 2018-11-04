@@ -18,20 +18,20 @@ public class ProductBuilder {
 
     public static final String DEFAULT_NAME = "Apple";
     public static final String DEFAULT_SERIAL_NUMBER = "85355255";
-    public static final String DEFAULT_EMAIL = "Ah Huat";
-    public static final String DEFAULT_ADDRESS = "fruit";
+    public static final String DEFAULT_DIST = "Ah Huat";
+    public static final String DEFAULT_INFO = "fruit";
 
     private Name name;
     private SerialNumber serialNumber;
     private DistributorName distname;
-    private Address address;
+    private Address info;
     private Set<Tag> tags;
 
     public ProductBuilder() {
         name = new Name(DEFAULT_NAME);
         serialNumber = new SerialNumber(DEFAULT_SERIAL_NUMBER);
-        distname = new DistributorName(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
+        distname = new DistributorName(DEFAULT_DIST);
+        info = new Address(DEFAULT_INFO);
         tags = new HashSet<>();
     }
 
@@ -42,7 +42,7 @@ public class ProductBuilder {
         name = productToCopy.getName();
         serialNumber = productToCopy.getSerialNumber();
         distname = productToCopy.getDistributor();
-        address = productToCopy.getProductInfo();
+        info = productToCopy.getProductInfo();
         tags = new HashSet<>(productToCopy.getTags());
     }
 
@@ -65,8 +65,8 @@ public class ProductBuilder {
     /**
      * Sets the {@code Address} of the {@code Product} that we are building.
      */
-    public ProductBuilder withAddress(String address) {
-        this.address = new Address(address);
+    public ProductBuilder withInfo(String address) {
+        this.info = new Address(address);
         return this;
     }
 
@@ -81,13 +81,13 @@ public class ProductBuilder {
     /**
      * Sets the {@code Email} of the {@code Product} that we are building.
      */
-    public ProductBuilder withEmail(String email) {
+    public ProductBuilder withDistributor(String email) {
         this.distname = new DistributorName(email);
         return this;
     }
 
     public Product build() {
-        return new Product(name, serialNumber, distname, address, tags);
+        return new Product(name, serialNumber, distname, info, tags);
     }
 
 }

@@ -8,10 +8,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.timeidentifiedclass.Transaction;
+import seedu.address.model.timeidentifiedclass.exceptions.DuplicateTransactionException;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
-import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
-import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
-import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
 /**
  * Adds a transaction to the address book.
@@ -42,8 +41,6 @@ public class AddTransactionCommand extends Command {
         try {
             model.addTransaction(toAdd);
         } catch (InvalidTimeFormatException e) {
-            return new CommandResult(e.getExceptionMessage() + ". Upon adding this transaction");
-        } catch (ClosedShopDayException e) {
             return new CommandResult(e.getExceptionMessage() + ". Upon adding this transaction");
         } catch (DuplicateTransactionException e) {
             return new CommandResult(e.getLocalizedMessage() + ". Upon adding this transaction");

@@ -51,7 +51,7 @@ jacocoTestReport {
 }
 
 test {
-    useJUnitPlatform()
+    //useJUnitPlatform()
 }
 
 dependencies {

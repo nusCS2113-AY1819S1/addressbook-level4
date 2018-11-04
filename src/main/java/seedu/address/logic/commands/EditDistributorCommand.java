@@ -23,7 +23,7 @@ import seedu.address.model.distributor.DistributorPhone;
  */
 public class EditDistributorCommand extends Command {
 
-    public static final String COMMAND_WORD = "editDistributor";
+    public static final String COMMAND_WORD = "editdistributor";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the distributor identified "
             + "by the index number used in the displayed distributor list. "
