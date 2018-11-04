@@ -7,6 +7,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.task.Deadline;
+import seedu.address.model.task.ModuleCode;
 import seedu.address.model.task.PriorityLevel;
 
 /**
@@ -46,13 +47,10 @@ public class ParserUtil {
     /**
      * Leading and trailing whitespaces will be trimmed from {@code String moduleCode}
      */
-    public static String parseModuleCode(String moduleCode) {
+    public static ModuleCode parseModuleCode(String moduleCode) {
         requireNonNull(moduleCode);
         String trimmedModuleCode = moduleCode.trim();
-        /*if (!StringUtil.hasModuleCodeFormat(moduleCode)) {
-            throw new
-        }*/
-        return trimmedModuleCode;
+        return new ModuleCode(trimmedModuleCode);
     }
 
     /**

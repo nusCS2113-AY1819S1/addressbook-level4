@@ -19,7 +19,7 @@ public class XmlAdaptedTaskTest {
     //private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_DEADLINE = CS2102_HOMEWORK.getDeadline().toString();
-    private static final String VALID_MODULECODE = CS2102_HOMEWORK.getModuleCode();
+    private static final String VALID_MODULECODE = CS2102_HOMEWORK.getModuleCode().toString();
     private static final String VALID_TITLE = CS2102_HOMEWORK.getTitle();
     private static final String VALID_DESCRIPTION = CS2102_HOMEWORK.getDescription();
     private static final String VALID_PRIORITY_LEVEL = CS2102_HOMEWORK.getPriorityLevel().toString();

@@ -81,27 +81,4 @@ public class StringUtil {
             return false;
         }
     }
-
-    /**
-     * Used to check for
-     * @param s string
-     * @return true if it has 2 alphabets at the start
-     * followed by 4 numbers, to resemble the module code format
-     */
-    public static boolean hasModuleCodeFormat(String s) {
-        if (s.length() != 6) {
-            return false;
-        }
-        char firstLetter = s.charAt(0);
-        char secondLetter = s.charAt(1);
-        if (!(firstLetter >= 'A' && firstLetter <= 'Z' && secondLetter >= 'A' && secondLetter <= 'Z')) {
-            return false;
-        }
-        for (int i = 2; i < 6; i++) {
-            if (!(s.charAt(i) >= '0') || !(s.charAt(i) <= '9')) {
-                return false;
-            }
-        }
-        return true;
-    }
 }

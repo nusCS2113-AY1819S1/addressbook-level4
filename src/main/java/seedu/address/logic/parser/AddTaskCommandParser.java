@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.task.ModuleCode;
 import seedu.address.model.task.PriorityLevel;
 import seedu.address.model.task.Task;
 
@@ -41,7 +42,7 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTaskCommand.MESSAGE_USAGE));
         }
 
-        String moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
+        ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
         String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get());
         String description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         PriorityLevel priority = ParserUtil.parsePriorityLevel(argMultimap.getValue(PREFIX_PRIORITY).get());

@@ -13,7 +13,7 @@ public class Task {
 
     //private static final String PLACEHOLDER_MODULECODE = "A2113";
     private Deadline deadline;
-    private String moduleCode;
+    private ModuleCode moduleCode;
     private final String title;
     private final String description;
     private final PriorityLevel priorityLevel;
@@ -21,7 +21,7 @@ public class Task {
     private final int expectedNumOfHours;
     private int completedNumOfHours;
     private final Set<Milestone> milestoneList = new HashSet<>();
-    public Task(Deadline deadline, String moduleCode, String title, String description, PriorityLevel priorityLevel,
+    public Task(Deadline deadline, ModuleCode moduleCode, String title, String description, PriorityLevel priorityLevel,
                 int expectedNumOfHours) {
         this.deadline = deadline;
         this.moduleCode = moduleCode;
@@ -31,7 +31,7 @@ public class Task {
         this.expectedNumOfHours = expectedNumOfHours;
     }
 
-    public Task(Deadline deadline, String moduleCode, String title, String description, PriorityLevel priorityLevel,
+    public Task(Deadline deadline, ModuleCode moduleCode, String title, String description, PriorityLevel priorityLevel,
                 int expectedNumOfHours, int completedNumOfHours, boolean isCompleted, Set<Milestone> milestoneList) {
         this.deadline = deadline;
         this.moduleCode = moduleCode;
@@ -44,7 +44,7 @@ public class Task {
         this.milestoneList.addAll(milestoneList);
     }
 
-    public Task(String moduleCode, String title, String description,
+    public Task(ModuleCode moduleCode, String title, String description,
                 PriorityLevel priorityLevel, int expectedNumOfHours) {
         this.moduleCode = moduleCode;
         this.title = title;
@@ -69,7 +69,7 @@ public class Task {
         return deadline;
     }
 
-    public String getModuleCode() {
+    public ModuleCode getModuleCode() {
         return moduleCode;
     }
 
@@ -125,7 +125,8 @@ public class Task {
         }
         return otherTask != null
                 && otherTask.getDeadline().equals(getDeadline())
-                && otherTask.getTitle().equals(getTitle());
+                && otherTask.getTitle().equals(getTitle())
+                && otherTask.getModuleCode().equals(getModuleCode());
     }
 
     //@@author ChanChunCheong
@@ -177,7 +178,8 @@ public class Task {
                 && otherTask.getPriorityLevel().equals(getPriorityLevel())
                 && otherTask.isCompleted() == isCompleted()
                 && otherTask.getExpectedNumOfHours() == getExpectedNumOfHours()
-                && otherTask.getCompletedNumOfHours() == getCompletedNumOfHours();
+                && otherTask.getCompletedNumOfHours() == getCompletedNumOfHours()
+                && ((Task) other).getModuleCode().equals(getModuleCode());
     }
 
     @Override

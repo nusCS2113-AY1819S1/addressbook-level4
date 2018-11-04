@@ -13,6 +13,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Milestone;
+import seedu.address.model.task.ModuleCode;
 import seedu.address.model.task.PriorityLevel;
 import seedu.address.model.task.Task;
 
@@ -89,7 +90,7 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(Task source) {
         deadline = source.getDeadline().toString();
-        moduleCode = source.getModuleCode();
+        moduleCode = source.getModuleCode().toString();
         title = source.getTitle();
         description = source.getDescription();
         priorityLevel = source.getPriorityLevel().toString();
@@ -119,8 +120,11 @@ public class XmlAdaptedTask {
         if (moduleCode == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Module"));
         }
+        if (!ModuleCode.isValidModuleCode(moduleCode)) {
+            throw new IllegalValueException(String.format(ModuleCode.MESSAGE_MODULE_CODE_CONSTRAINTS));
+        }
 
-        final String modelModuleCode = moduleCode;
+        final ModuleCode modelModuleCode = new ModuleCode(moduleCode);
 
         if (title == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Title"));
