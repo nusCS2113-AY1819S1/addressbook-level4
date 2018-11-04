@@ -111,7 +111,15 @@ public class TimeTablePanel extends UiPart<Region> {
     }
 
     /**
-     * Reloads the last loaded timetable. Used for when the window is resized
+     * Loads a TimeTable from the TimeTable object it is given.
+     */
+    private void loadTimeTable(TimeTable timeTable) {
+        timeTableLastLoaded = timeTable;
+        reloadTimeTable();
+    }
+
+    /**
+     * Loads the {@code TimeTable} stored in this {@code TimeTablePanel}
      */
     private void reloadTimeTable() {
         timeTablePanelMainGrid.clearGrid();
@@ -121,31 +129,7 @@ public class TimeTablePanel extends UiPart<Region> {
             timeTablePanelMainGrid.addTimeSlot(
                     timeSlot, currRowDimensions, currColDimensions, currStartHour, currEndHour);
         }
-
     }
-
-    /**
-     * Loads a TimeTable from the TimeTable object it is given.
-     */
-    private void loadTimeTable(TimeTable timeTable) {
-        timeTableLastLoaded = timeTable;
-        timeTablePanelMainGrid.clearGrid();
-        updateDimensions();
-
-        for (TimeSlot timeSlot : timeTable.getTimeSlots()) {
-            timeTablePanelMainGrid.addTimeSlot(
-                    timeSlot, currRowDimensions, currColDimensions, currStartHour, currEndHour);
-        }
-    }
-
-    public double getCurrRowDimensions() {
-        return currRowDimensions;
-    }
-
-    public double getCurrColDimensions() {
-        return currColDimensions;
-    }
-
 
     @Subscribe
     private void handleTimeTableChangedEvent(TimeTableChangedEvent event) {

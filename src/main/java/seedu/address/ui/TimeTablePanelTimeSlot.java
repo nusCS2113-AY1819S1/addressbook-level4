@@ -17,7 +17,8 @@ public class TimeTablePanelTimeSlot {
     public TimeTablePanelTimeSlot(TimeSlot timeSlot, double currRowDimensions, double currColDimensions) {
         this.timeSlot = timeSlot;
 
-        box = new Rectangle(currColDimensions * timeSlot.getDuration().toHours(), currRowDimensions);
+        box = new Rectangle(currColDimensions * timeSlot.getDuration().toMinutes() / 60.0, currRowDimensions);
+        box.setTranslateX(timeSlot.getStartTime().getMinute() / 60.0 * currColDimensions);
         box.setFill(timeSlot.getColor());
         box.setOpacity(0.5);
         box.setArcHeight(10);
