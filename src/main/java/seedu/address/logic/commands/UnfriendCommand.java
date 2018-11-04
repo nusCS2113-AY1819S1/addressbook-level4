@@ -16,6 +16,7 @@ import seedu.address.model.person.Person;
  */
 public class UnfriendCommand extends Command {
     public static final String COMMAND_WORD = "unfriend";
+    public static final String COMMAND_WORD_ALIAS = "uf";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes the person with the index to from the friends list.\n"

@@ -113,9 +113,11 @@ public class AddressBookParser {
             return new TagCommandParser().parse(arguments);
 
         case FriendCommand.COMMAND_WORD:
+        case FriendCommand.COMMAND_WORD_ALIAS:
             return new FriendCommandParser().parse(arguments);
 
         case UnfriendCommand.COMMAND_WORD:
+        case UnfriendCommand.COMMAND_WORD_ALIAS:
             return new UnfriendCommandParser().parse(arguments);
 
         case ImportCommand.COMMAND_WORD:
