@@ -34,7 +34,7 @@ public class CheckCommandParserTest {
     public void parse_validArgs_returnsCheckCommand () {
         // no leading and trailing whitespaces
         CheckCommand expectedCheckCommand =
-                new CheckCommand(new QuantityContainsNumberPredicate(Arrays.asList("3", "2", "1")));
+                new CheckCommand(new QuantityContainsNumberPredicate(Arrays.asList("3", "2", "1", "0")));
         assertParseSuccess(parser, "3", expectedCheckCommand);
 
         // whitespaces between command and quantity

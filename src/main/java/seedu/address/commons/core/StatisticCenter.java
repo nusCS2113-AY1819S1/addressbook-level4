@@ -55,4 +55,8 @@ public class StatisticCenter implements Serializable {
     public void calibrateInventory(ReadOnlyBookInventory readOnlyBookInventory) {
         statistic.getInventory().calibrate(readOnlyBookInventory);
     }
+
+    public void resetData() {
+        statistic = new Statistic(month, year);
+    }
 }
