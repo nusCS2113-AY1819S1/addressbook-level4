@@ -26,6 +26,7 @@ import org.apache.poi.ss.usermodel.charts.ChartLegend;
 import org.apache.poi.ss.usermodel.charts.DataSources;
 import org.apache.poi.ss.usermodel.charts.LegendPosition;
 import org.apache.poi.ss.usermodel.charts.LineChartData;
+import org.apache.poi.ss.usermodel.charts.LineChartSeries;
 import org.apache.poi.ss.usermodel.charts.ValueAxis;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -225,9 +226,12 @@ public class ExcelUtil {
             ChartDataSource<Number> yNet = DataSources.fromNumericCellRange(
                     sheet, new CellRangeAddress(firstRowSheet, lastRowSheet, firstColumnNet, lastColumnNet));
 
-            data.addSeries(xDate, yIncome);
-            data.addSeries(xDate, yOutcome);
-            data.addSeries(xDate, yNet);
+            LineChartSeries series1 = data.addSeries(xDate, yIncome);
+            series1.setTitle("Income");
+            LineChartSeries series2 = data.addSeries(xDate, yOutcome);
+            series2.setTitle("Outcome");
+            LineChartSeries series3 = data.addSeries(xDate, yNet);
+            series3.setTitle("Net");
 
             chart.plot(data, bottomAxis, leftAxis);
 
