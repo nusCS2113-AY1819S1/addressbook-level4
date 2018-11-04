@@ -494,15 +494,18 @@ Examples:
 
 This section describes the limit feature that allows users to set values to control their future spending.
 Constraints that apply to records also apply to each limit. Refer to <<constraints>> for more information.
+All the limit related commands are case insensitive. Users can input ADDlimit, addLimit and so on.
 
-=== Adding a limit: `limit`
+=== Adding a limit: `addlimit`
 
-Adds a spending limit for a time period to the FinancialPlanner. +
-Format: `limit d/START_DATE END_DATE m/MONEYFLOW` +
+Adds a spending limit for a time period or a particular day to the FinancialPlanner. +
+Format: `addlimit d/START_DATE END_DATE m/MONEYFLOW` (`limit d/DATE m/MONEYFLOW`)+
 
 START_DATE and END_DATE indicates the starting date and ending date for the limit.
+If there is only one date, that day will be the time period
 MONEYFLOW denotes the money limit for that period of time.
-FinancialPlanner will warn the user once the total amount of money spent during this time period exceeds the spending limit.
+once the total amount of money spent during this time period exceeds the spending limit,
+FinancialPlanner will warn the user by sending the warning message.
 ****
 * Moneyflow can only be a positive integer, and does not require a "+" or "-".
 * Any date or period of time can only have at most 1 assigned limit.
@@ -510,18 +513,24 @@ FinancialPlanner will warn the user once the total amount of money spent during 
 
 Example:
 
-* `limit d/20-8-2018 30-8-2018 m/100`
-
+* `addlimit d/20-8-2018 m/100`
+* `addlimit d/20-8-2018 30-8-2018 m/100`
+* `addLimit d/20-8-2018 30-8-2018 m/100`
+* `add_limit d/20-8-2018 30-8-2018 m/100`
 === Viewing all limits: `checkLimit`
 
 Displays all limits information stored in FinancialPlanner +
-Format: `checkLimit`
-
+Format: `checklimit`
+Example:
+* `checklimit`
+* `checkLimit`
+* `check_limit`
 === Deleting a limit: `deleteLimit`
 
-Deletes a spending limit from the FinancialPlanner +
-Format: `deleteLimit d/START_DATE END_DATE` +
+Deletes an existing spending limit from the FinancialPlanner +
+Format: `deleteLimit d/START_DATE END_DATE` (`deleteLimit d/START_DATE`) +
 
+Delete
 ****
 * `START_DATE/END_DATE` must match exactly the same as when the limit was created.
 * Limits cannot be partially deleted with incorrect dates.
@@ -605,9 +614,15 @@ e.g. `select 2`
 e.g. `summary d/20-12-2017 31-09-2018`
 * *Finances Statistics* : `stats` +
 e.g. `stats d/20-12-2017 31-09-2018`
-* *Add limit* : `limit d/START_DATE END_DATE` +
-e.g. `limit d/20-12-2017 31-09-2018`
+* *Add limit* : `addlimit d/START_DATE END_DATE` +
+e.g. +
+`limit d/20-12-2017`
+`limit d/20-12-2017 31-09-2018`
 * *Delete limit* `deleteLimit d/START_DATE END_DATE` +
-e.g. `deleteLimit d/20-12-2017 31-09-2018`
-* *Edit limit* `editLimit d/START_DATE END_DATE` +
-e.g. `editLimit d/20-12-2017 31-09-2018`
+e.g. +
+`deleteLimit d/20-12-2017`
+`deleteLimit d/20-12-2017 31-09-2018`
+* *Edit limit* `editLimit d/START_DATE END_DATE m/MONEYFLOW` +
+e.g. +
+`editLimit d/20-12-2017 m/100`
+`editLimit d/20-12-2017 31-09-2018 m/100`
