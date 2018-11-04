@@ -48,8 +48,8 @@ public class ExportCalendarCommand extends Command {
     public static final String MESSAGE_EXPORT_SUCCESS =
             "%1$d event(s) that you registered for has been successfully exported to your %2$s.ics";
 
-    public static final String MESSAGE_FILE_ERROR = "File %1$s.ics has existed in other folder\n"
-            + "or file has errors and cannot be opened";
+    public static final String MESSAGE_FILE_ERROR = "File %1$s.ics has errors and cannot be opened/created\n"
+            + "or filename is not a current system allowed filename\n";
 
     public static final String MESSAGE_ZERO_EVENT_REGISTERED = "User %1$s has not registered for any event";
 
@@ -78,7 +78,7 @@ public class ExportCalendarCommand extends Command {
         try {
             exportICalenderFile(registeredEventList, fileName);
         } catch (IOException e) {
-            return new CommandResult(String.format(MESSAGE_FILE_ERROR, fileName));
+            throw new CommandException(String.format(MESSAGE_FILE_ERROR, fileName));
         }
 
         return new CommandResult(String.format(MESSAGE_EXPORT_SUCCESS, model.getFilteredEventList().size(), fileName));
@@ -190,6 +190,13 @@ public class ExportCalendarCommand extends Command {
         Calendar calendar = writeToUserCalendar(registeredEventList, fileName);
 
         outPutter.output(calendar, fileOut);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ExportCalendarCommand // instanceof handles nulls
+                && fileName.equals(((ExportCalendarCommand) other).fileName)); // state check
     }
 }
 

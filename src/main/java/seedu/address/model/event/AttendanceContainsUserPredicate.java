@@ -19,4 +19,11 @@ public class AttendanceContainsUserPredicate implements Predicate<Event> {
     public boolean test (Event event) {
         return event.getAttendance().contains(new Attendee(username));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AttendanceContainsUserPredicate // instanceof handles nulls
+                && username.equals(((AttendanceContainsUserPredicate) other).username)); // state check
+    }
 }

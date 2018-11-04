@@ -44,7 +44,6 @@ public class FindCommandSystemTest extends EventManagerSystemTest {
         /* Case: find multiple persons in event manager, command with leading spaces and trailing spaces
          * -> 2 persons found
          */
-
         command = "   " + FindCommand.COMMAND_WORD + " k/" + KEYWORD_MATCHING_TRYOUTS + "   ";
         Model expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, BENSON, ELLE); // event names of Benson and Daniel include "Tryouts"
@@ -150,6 +149,12 @@ public class FindCommandSystemTest extends EventManagerSystemTest {
         List<Tag> tags = new ArrayList<>(DANIEL.getTags());
         command = FindCommand.COMMAND_WORD + " k/" + tags.get(0).tagName;
         ModelHelper.setFilteredList(expectedModel, ALICE, DANIEL, BENSON);
+        assertCommandSuccess(command, expectedModel);
+        assertSelectedCardUnchanged();
+
+        /* Case: find tag and contact of event in event manager -> 2 events found */
+        command = FindCommand.COMMAND_WORD + " k/" + tags.get(0).tagName  + " c/" + DANIEL.getContact();
+        ModelHelper.setFilteredList(expectedModel, DANIEL, BENSON);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
