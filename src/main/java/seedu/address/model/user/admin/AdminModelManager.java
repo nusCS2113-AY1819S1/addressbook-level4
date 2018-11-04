@@ -48,7 +48,7 @@ public class AdminModelManager extends ModelManager implements AdminModel {
     }
 
     @Override
-    public void importDrink(Transaction transaction) {
+    public void buyDrink(Transaction transaction) {
         Price defaultCostPrice = inventoryList.getDefaultCostPrice(transaction.getDrinkTransacted());
 
         Price defaultAmountTransacted = new Price(Float.toString(defaultCostPrice.getValue()

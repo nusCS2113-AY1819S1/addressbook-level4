@@ -3,7 +3,7 @@ package seedu.address.model.transaction;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.model.testutil.Assert.assertThrows;
-import static seedu.address.model.transaction.TransactionType.IMPORT;
+import static seedu.address.model.transaction.TransactionType.PURCHASE;
 import static seedu.address.model.transaction.TransactionType.SALE;
 import static seedu.address.model.transaction.testutil.TypicalTransactions.SALE_COKE_1;
 import static seedu.address.model.transaction.testutil.TypicalTransactions.SALE_COKE_2;
@@ -30,7 +30,7 @@ public class TransactionTest {
         assertThrows(NullPointerException.class, () -> new Transaction(SALE,
                 null, null, null));
 
-        assertThrows(NullPointerException.class, () -> new Transaction(IMPORT,
+        assertThrows(NullPointerException.class, () -> new Transaction(PURCHASE,
                 null, null, null));
 
         assertThrows(NullPointerException.class, () -> new Transaction(null,
