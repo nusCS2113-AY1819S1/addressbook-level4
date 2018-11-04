@@ -41,14 +41,14 @@ class AddCommentCommandTest {
         User user = new UserBuilder().build();
         model = new ModelManager(getTypicalEventManager(), new UserPrefs());
         model.logUser(user);
+
     }
 
     /**
      * Complete integration test with model, undo, redo and login
      */
     @Test
-    public void execute_integrationTest_success() {
-        addCommentCommand.setIndex(INDEX_FIRST_EVENT);
+    public void execute_integrationTest_success() throws CommandException {
         Event editedEvent = new EventBuilder().withName("Art and Crafts")
                 .withContact("Daniel Meier")
                 .withPhone("87652533")
@@ -57,7 +57,8 @@ class AddCommentCommandTest {
                 .withDateTime("22/10/2017 9:30")
                 .withComment("{span}Comment Section{/span}{ol}{li}admin : Hi{/li}{/ol}")
                 .withTags("friends")
-                .withAttendees("Scarlet Witch").build();
+                .withAttendees("Scarlet Witch")
+                .build();
         String expectedMessage = String.format(AddCommentCommand.MESSAGE_ADD_COMMENT, addCommentCommand.getComment(),
                 addCommentCommand.getIndex().getOneBased());
         User user = new UserBuilder().build();
