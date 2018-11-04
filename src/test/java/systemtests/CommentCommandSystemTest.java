@@ -1,74 +1,24 @@
 package systemtests;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-
 import static seedu.address.logic.commands.CommandTestUtil.ADMIN_PASSWORD_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.ADMIN_USERNAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.ATTENDEE_DESC_HAN;
-import static seedu.address.logic.commands.CommandTestUtil.ATTENDEE_DESC_TED;
-import static seedu.address.logic.commands.CommandTestUtil.COMMENT_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.CONTACT_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.CONTACT_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ATTENDEE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_CONTACT_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATETIME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_VENUE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADMIN_PASSWORD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADMIN_USERNAME;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDEE_TED;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_COMMENT_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTACT_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VENUE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VENUE_DESC_BOB;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
-import static seedu.address.testutil.TypicalEvents.*;
+import static seedu.address.testutil.TypicalEvents.DANIEL;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_EVENT;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddCommentCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.LoginCommand;
 import seedu.address.model.Model;
-import seedu.address.model.attendee.Attendee;
-import seedu.address.model.event.Contact;
-import seedu.address.model.event.DateTime;
-import seedu.address.model.event.Email;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.Name;
-import seedu.address.model.event.Phone;
-import seedu.address.model.event.Venue;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.user.User;
 import seedu.address.testutil.EventBuilder;
-import seedu.address.testutil.EventUtil;
 import seedu.address.testutil.UserBuilder;
 
 public class CommentCommandSystemTest extends EventManagerSystemTest {
