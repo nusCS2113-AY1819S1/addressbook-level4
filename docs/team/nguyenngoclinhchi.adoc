@@ -1,0 +1,99 @@
+= Nguyen Ngoc Linh Chi - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: FinancialPlanner - Level 4
+
+== Overview
+
+FinancialPlanner - Level 4 is a desktop expense book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+
+== Summary of contributions
+
+=== `completed` *Major enhancement #1*: added the ability to delete all the records whose date is required.
+
+** What it does: allows the user to delete all records whose date is required at a time.
+** Justification: This feature improves the product significantly because a user can make mistakes in date keyed for records and the app should provide a convenient way to rectify them.
+** Highlights: This enhancement affects existing commands, commands to be added in future, and records stored. It required an in-depth analysis of design alternatives.
+
+=== `completed` *Major enhancement #2*: added the ability to export the data of records into Excel file.
+
+** What it does: allows the user to export data into Excel file for the summary purpose.
+** Justification: This feature improves the product significantly because a user can export data into Excel file and the app should provide a convenient way to rectify them. The implementation was challenging as it required Developer to get used to third-party Library in the short time as this project is time-restricted.
+** Highlights: This enhancement is the foundation for other minor enhancements below. It required in-depth analysis of design alternative.
+** Credits: I would like to extend my thank you to the Third-party library: Apache poi.
+
+=== `ongoing` *Minor enhancement #1*: added the ability to achieve the data into Excel file
+===== `sub-part of Major enhancement #2`
+
+** What it does: In case your Financial planner storage too large, and you want to archive based on year, month or period. This feature is designed specifically for you.
+** Justification: This feature improves the product significantly because a user can export data into Excel file for the purpose of reducing the storage and planning systematically (archive based on year, month, or day).
+
+=== `ongoing`  *Minor enhancement #2*: added the ability to set-directory for the Excel file.
+===== `sub-part of Major enhancement #2`
+
+** What it does: allows user to store Excel file they want to export in directory they want or default Home directory.
+** Justification: The implementation was challenging as it required Developer make global change in the project.
+
+=== `ongoing` *Minor enhancement #3*: added the ability to create Excel sheet.
+===== `sub-part of Major enhancement #2`
+
+** What it does: helps the user to calculate the sum of money spent/received within period/month/year.
+** Justification: This implementation will help the user to manage their expense more effectively and have more overview look for their financial planner by summarizing the data from the exporting Excel file and calculating the sum of money flow (money spent/received) of the records.
+
+=== `ongoing` *Minor enhancement #4*: added the ability to color the cells whose date exceeds the limit of the day.
+===== `sub-part of Major enhancement #2`
+** What it does: allows user to choose the color they want to color for the cells which exceed limit.
+** Justification: This enhancement will combine with Limit Command and help the user to justify their expense for the future as they see the amount of money exceeded.
+
+
+* *Code contributed*:
+
+=== *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+** Enhancements to existing features:
+*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
+*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
+** Tools:
+*** Integrated a third party library (Natty) to the project (https://github.com[#42])
+*** Integrated a new Github plugin (CircleCI) to the team repo
+
+_{you can add/remove categories in the list above}_
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=undoredo]
+
+include::../UserGuide.adoc[tag=dataencryption]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=undoredo]
+
+include::../DeveloperGuide.adoc[tag=dataencryption]
+
+
+== PROJECT: PowerPointLabs
+
+---
+
+_{Optionally, you may include other projects in your portfolio.}_
