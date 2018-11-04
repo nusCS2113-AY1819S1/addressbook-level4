@@ -41,10 +41,19 @@ public class BrowserPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    /**
+     * Loads page and populates it with variables from the drink object
+     * @param drink a valid drink object
+     */
     private void loadDrinkPage(Drink drink) {
         String name = "?name=" + drink.getName().toString();
-        String costPrice = "?costPrice=" + drink.getCostPrice().toString();
-        loadPage(SEARCH_PAGE_URL + name + "&" + costPrice);
+        String sellingPrice = "sellingPrice=" + drink.getRetailPrice().toString();
+        String costPrice = "costPrice=" + drink.getCostPrice().toString();
+        String stock = "stock=" + drink.getQuantity().toString();
+        String earliestBatchDate = "earliestBatchDate="
+                + drink.getUniqueBatchList().getBatch(0).getBatchDate().toString();
+        loadPage(SEARCH_PAGE_URL + name + "&" + sellingPrice + "&" + costPrice + "&" + stock
+                + "&" + earliestBatchDate);
     }
 
     public void loadPage(String url) {
