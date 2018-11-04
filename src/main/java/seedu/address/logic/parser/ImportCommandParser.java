@@ -20,13 +20,10 @@ public class ImportCommandParser implements Parser<ImportCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ImportCommand parse(String args) throws ParseException {
-
-        Index index = Index.fromZeroBased(1); //have to change this to the user after user is implemented.
-
         try {
             Path path;
             path = ParserUtil.parseImportFileLocation(args);
-            return new ImportCommand(index, path);
+            return new ImportCommand(path);
         } catch (NoSuchElementException | ParseException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE), e);
         }

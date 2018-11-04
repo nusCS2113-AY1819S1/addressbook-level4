@@ -8,7 +8,6 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.IcsUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -41,17 +40,14 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Imported timetable at %1$s.";
     public static final String MESSAGE_EMPTY = "Timetable file empty.";
     public static final String MESSAGE_IO_ERROR = "Failed to read the file at: ";
-    private final Index index;
     private final Path filePath;
 
     /**
      * Creates an ImportCommand to import the .ics data, parse it, and add a {@code Person} with this timetable
      */
-    public ImportCommand(Index index, Path filePath) {
-        requireNonNull(index);
+    public ImportCommand(Path filePath) {
         requireNonNull(filePath);
 
-        this.index = index;
         this.filePath = filePath;
     }
 
@@ -85,8 +81,7 @@ public class ImportCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person}
-     * The returned {@code Person} only has their (@code TimeTable) changed!
+     * Creates and returns a {@code Person}, who has their (@code TimeTable) changed. (all else same.)
      */
     private static Person createModifiedPerson(Person personToEdit, TimeTable importedTimeTable) {
         assert personToEdit != null;
@@ -102,7 +97,6 @@ public class ImportCommand extends Command {
 
         return new Person(
                 updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, timeTable, updatedFriends);
-
     }
 
     @Override
@@ -117,10 +111,6 @@ public class ImportCommand extends Command {
             return false;
         }
 
-        //TODO: Not sure if this is good enough?
-        return filePath.equals(((ImportCommand) other).filePath)
-                && index.equals(((ImportCommand) other).index);
+        return filePath.equals(((ImportCommand) other).filePath);
     }
-
-
 }

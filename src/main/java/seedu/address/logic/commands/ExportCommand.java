@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.IcsUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -32,17 +31,14 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_EMPTY = "Timetable is empty. Export failed.";
     public static final String MESSAGE_IO_ERROR =
             "Failed to write the timetable to the path: ";
-    private final Index index;
     private final Path filePath;
 
     /**
      * Creates an ExportCommand to export the specified person's timetable as .ics file
      */
-    public ExportCommand(Index index, Path filePath) {
-        requireNonNull(index);
+    public ExportCommand(Path filePath) {
         requireNonNull(filePath);
 
-        this.index = index;
         this.filePath = filePath;
     }
 
@@ -75,8 +71,6 @@ public class ExportCommand extends Command {
             return false;
         }
 
-        //TODO: Not sure if this is good enough?
-        return filePath.equals(((ExportCommand) other).filePath)
-                && index.equals(((ExportCommand) other).index);
+        return filePath.equals(((ExportCommand) other).filePath);
     }
 }
