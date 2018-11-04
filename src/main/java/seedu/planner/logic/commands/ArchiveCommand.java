@@ -15,7 +15,6 @@ import seedu.planner.commons.util.ExcelUtil;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.model.DirectoryPath;
 import seedu.planner.model.Model;
-import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
