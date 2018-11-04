@@ -20,8 +20,8 @@ import seedu.address.storage.scripts.ScriptSetup;
 
 public class ScriptSetupTest {
     public static final String SCRIPTS_LOCATION = "/scripts/";
-
-    private static final String invalidPath = "/?scripts";
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     private File addGroupsFile;
     private File addPersonsFile;
@@ -31,9 +31,6 @@ public class ScriptSetupTest {
 
     private UserPrefs userPrefs;
     private ScriptSetup scriptSetup;
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @Before
     public void setUp() throws IOException {
@@ -72,7 +69,7 @@ public class ScriptSetupTest {
 
         assertEquals(isTwoEqual, true);
     }
-    
+
     @Test
     public void addSampleTextFile_success() throws IOException {
         scriptSetup.addSampleTextFiles(userPrefs.getScriptFileDirectory(), scriptSetup.getDefaultLocation());
