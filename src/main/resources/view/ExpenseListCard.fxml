@@ -33,15 +33,10 @@
                         <Font name="Wingdings" size="14.0" />
                     </font></Text>
                 <Label fx:id="value" styleClass="cell_big_label" text="\$value" />
+                <Label fx:id="category" styleClass="cell_small_label" text="\$category" textAlignment="CENTER" />
+                <Label fx:id="date" styleClass="cell_small_label" text="\$date" textAlignment="RIGHT" />
             </HBox>
             <FlowPane fx:id="tags" />
-            <HBox>
-                <children>
-                    <Label fx:id="category" styleClass="cell_small_label" text="\$category" />
-                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="    " />
-                    <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
-                </children>
-            </HBox>
         </VBox>
         <rowConstraints>
             <RowConstraints />

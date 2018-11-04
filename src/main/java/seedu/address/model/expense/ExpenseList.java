@@ -41,6 +41,7 @@ public class ExpenseList implements Iterable<Expense> {
         }
 
         internalList.set(index, editedExpense);
+        insertionSort(internalList);
     }
 
     /**

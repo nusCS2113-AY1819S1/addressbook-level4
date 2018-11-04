@@ -77,6 +77,10 @@ public class ExpenseTrendWindow extends UiPart<Stage> {
         AnchorPane anchorPane = new AnchorPane(barChart);
         Scene scene = new Scene(anchorPane);
         getRoot().setScene(scene);
+        getRoot().setMaxHeight(437);
+        getRoot().setMinHeight(437);
+        getRoot().setMinWidth(514);
+        getRoot().setMaxWidth(514);
     }
 
     /**

@@ -53,10 +53,14 @@ public class MonthlyExpenseWindow extends UiPart<Stage> {
      * @return
      */
     public PieChart updatePieChart(HashMap<String, String> monthlyData, String selectedMonth) {
+        double totalValue = 0.0;
+        for (HashMap.Entry<String, String> entry : monthlyData.entrySet()) {
+            totalValue += Double.parseDouble(entry.getValue());
+        }
         ArrayList<PieChart.Data> pieChartDataList = new ArrayList<>();
         for (HashMap.Entry<String, String> entry : monthlyData.entrySet()) {
-            pieChartDataList.add(new PieChart.Data(entry.getKey() + ": $"
-                    + entry.getValue(), Double.parseDouble(entry.getValue())));
+            pieChartDataList.add(new PieChart.Data(entry.getKey() + ": "
+                    + getPercentage(entry.getValue(), totalValue) + "%", Double.parseDouble(entry.getValue())));
         }
         ObservableList<PieChart.Data> observablePieChartDataList = FXCollections.observableList(pieChartDataList);
         PieChart pieChart = new PieChart(observablePieChartDataList);
@@ -76,6 +80,10 @@ public class MonthlyExpenseWindow extends UiPart<Stage> {
         AnchorPane anchorPane = new AnchorPane(pieChart);
         Scene scene = new Scene(anchorPane);
         getRoot().setScene(scene);
+        getRoot().setMaxHeight(437);
+        getRoot().setMinHeight(437);
+        getRoot().setMinWidth(514);
+        getRoot().setMaxWidth(514);
     }
 
     /**
@@ -113,5 +121,25 @@ public class MonthlyExpenseWindow extends UiPart<Stage> {
      */
     public void focus() {
         getRoot().requestFocus();
+    }
+
+    /**
+     *
+     * @param value expense value for current category
+     * @param totalValue total expense value for the month
+     * @return the percentage of the expense value for the category over the total monthly expense
+     */
+    private String getPercentage(String value, double totalValue) {
+        double categoryValue = Double.parseDouble(value);
+        double percentage = categoryValue * 100 / totalValue;
+        if (percentage == 100.0) {
+            return "100";
+        } else if (Double.toString(percentage).length() == 3 || Double.toString(percentage).length() == 4) {
+            return Double.toString(percentage) + "0";
+        } else if (percentage < 10) {
+            return Double.toString(percentage).substring(0, 4);
+        } else {
+            return Double.toString(percentage).substring(0, 5);
+        }
     }
 }

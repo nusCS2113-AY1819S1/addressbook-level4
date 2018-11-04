@@ -1,12 +1,5 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPENSE_CATEGORY_MRT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPENSE_CATEGORY_SHOPPING;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPENSE_DATE_MRT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPENSE_DATE_SHOPPING;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPENSE_VALUE_MRT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPENSE_VALUE_SHOPPING;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,35 +13,21 @@ import seedu.address.model.expense.Expense;
 public class TypicalExpenses {
 
     public static final Expense FOOD = new ExpenseBuilder().withExpenseCategory("food")
-            .withExpenseDate("30/12/2018").withExpenseValue("1.00")
+            .withExpenseDate("30/10/2018").withExpenseValue("5.00")
             .withTags("lunch").build();
     public static final Expense TRANSPORT = new ExpenseBuilder().withExpenseCategory("transport")
-            .withExpenseDate("30/12/2018").withExpenseValue("11.00")
+            .withExpenseDate("30/11/2018").withExpenseValue("2.00")
             .withTags("grab").build();
     public static final Expense DATE = new ExpenseBuilder().withExpenseCategory("date")
-            .withExpenseDate("30/12/2018").withExpenseValue("11.10").build();
+            .withExpenseDate("10/10/2018").withExpenseValue("233.00").build();
     public static final Expense HOTEL = new ExpenseBuilder().withExpenseCategory("hotel")
-            .withExpenseDate("30/12/2018").withExpenseValue("11.11").withTags("friends").build();
+            .withExpenseDate("10/10/2018").withExpenseValue("111.11").withTags("friends").build();
     public static final Expense TRAVEL = new ExpenseBuilder().withExpenseCategory("travel")
-            .withExpenseDate("30/12/2018").withExpenseValue("11.10").build();
-    public static final Expense SCHOOLFEE = new ExpenseBuilder().withExpenseCategory("date")
-            .withExpenseDate("30/12/2018").withExpenseValue("11.10").build();
-    public static final Expense GST = new ExpenseBuilder().withExpenseCategory("date")
-            .withExpenseDate("30/12/2018").withExpenseValue("11.10").build();
-
-    // Manually added
-    public static final Expense JD = new ExpenseBuilder().withExpenseCategory("jd")
-            .withExpenseDate("11/11/2018").withExpenseValue("11.11").build();
-    public static final Expense TAOBAO = new ExpenseBuilder().withExpenseCategory("taobao")
-            .withExpenseDate("11/11/2018").withExpenseValue("11.11").build();
-
-    // Manually added - Expense's details found in {@code CommandTestUtil}
-    public static final Expense SHOPPING = new ExpenseBuilder().withExpenseCategory(VALID_EXPENSE_CATEGORY_SHOPPING)
-            .withExpenseDate(VALID_EXPENSE_DATE_SHOPPING).withExpenseValue(VALID_EXPENSE_VALUE_SHOPPING).build();
-    public static final Expense MRT = new ExpenseBuilder().withExpenseCategory(VALID_EXPENSE_CATEGORY_MRT)
-            .withExpenseDate(VALID_EXPENSE_DATE_MRT).withExpenseValue(VALID_EXPENSE_VALUE_MRT).build();
-
-    public static final String KEYWORD_MATCHING_FOOD = "food"; // A keyword that matches FOOD
+            .withExpenseDate("11/11/2018").withExpenseValue("1500.00").build();
+    public static final Expense SCHOOLFEE = new ExpenseBuilder().withExpenseCategory("fee")
+            .withExpenseDate("17/08/2018").withExpenseValue("4198.95").build();
+    public static final Expense GST = new ExpenseBuilder().withExpenseCategory("others")
+            .withExpenseDate("11/09/2018").withExpenseValue("11.11").build();
 
     private TypicalExpenses() {} // prevents instantiation
 

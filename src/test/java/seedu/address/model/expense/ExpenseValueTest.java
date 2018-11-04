@@ -34,9 +34,10 @@ public class ExpenseValueTest {
         assertFalse(ExpenseValue.isValidExpenseValue("expense value")); // non-numeric
         assertFalse(ExpenseValue.isValidExpenseValue("901p1.41")); // alphabets within digits
         assertFalse(ExpenseValue.isValidExpenseValue("931 2.34")); // spaces within digits
+        assertFalse(ExpenseValue.isValidExpenseValue("100000.00")); // number is too large
 
         // valid expense values
         assertTrue(ExpenseValue.isValidExpenseValue("00000.01")); // can be entered and will be formatted to 0.01
-        assertTrue(ExpenseValue.isValidExpenseValue("1242938420331.23")); // long numbers
+        assertTrue(ExpenseValue.isValidExpenseValue("99999.99")); // largest numbers
     }
 }

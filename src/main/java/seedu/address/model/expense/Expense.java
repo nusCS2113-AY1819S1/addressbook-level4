@@ -81,7 +81,19 @@ public class Expense implements Comparable<Expense> {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date date1 = simpleDateFormat.parse(this.getExpenseDate().toString());
             Date date2 = simpleDateFormat.parse(expense.getExpenseDate().toString());
-            return date2.compareTo(date1);
+            if (date2.compareTo(date1) == 0) {
+                Double value1 = Double.parseDouble(this.getExpenseValue().toString());
+                Double value2 = Double.parseDouble(expense.getExpenseValue().toString());
+                if (value2.compareTo(value1) == 0) {
+                    String category1 = this.getExpenseCategory().toString();
+                    String category2 = expense.getExpenseCategory().toString();
+                    return category2.compareTo(category1);
+                } else {
+                    return value2.compareTo(value1);
+                }
+            } else {
+                return date2.compareTo(date1);
+            }
         } catch (ParseException pe) {
             return 0;
         }
