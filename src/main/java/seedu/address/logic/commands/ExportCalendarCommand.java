@@ -1,7 +1,5 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
@@ -31,7 +29,6 @@ import net.fortuna.ical4j.util.UidGenerator;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.event.AttendanceContainsUserPredicate;
 import seedu.address.model.event.Event;
 import seedu.address.model.user.Username;
 
@@ -88,25 +85,6 @@ public class ExportCalendarCommand extends Command {
     }
 
     //*****************************Method related to the new export calendar command********************************
-    /**
-     * Get the current list of event that the current user
-     * @param  model current Event Manager model
-     * @param  currentUser current User
-     * @return an user registered event list
-     */
-    public static ObservableList<Event> getAttendingEventList(Model model, Username currentUser)
-            throws CommandException {
-        requireAllNonNull(model, currentUser);
-        model.updateFilteredEventList(new AttendanceContainsUserPredicate(currentUser));
-
-        //No events has benn register
-        if (model.getFilteredEventList().size() <= 0) {
-            throw new CommandException(MESSAGE_ZERO_EVENT_REGISTERED);
-        }
-
-        return model.getFilteredEventList();
-    }
-
     /**
      * Convert the Event in Event Manager to VEvent type in ical4j to add to iCalendar file
      * @param  registeredEventList current user registered event
