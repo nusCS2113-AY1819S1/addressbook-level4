@@ -119,7 +119,7 @@ Format: `help`
 
 === Adding a event: `add`
 
-Admin: Adds an event to tthe Event Manager +
+Admin: Adds an event to the Event Manager +
 Adds a event to the Event Manager +
 Format: `add n/EVENT_NAME c/CONTACT_NAME p/PHONE_NUMBER e/EMAIL v/VENUE [t/TAG]...`
 
