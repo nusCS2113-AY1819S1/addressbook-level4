@@ -25,7 +25,7 @@ public class DeleteEventCommand extends Command {
 
     public static final String COMMAND_WORD = "deleteEvent";
 
-    public static final String COMMAND_ALIAS = "de/";
+    public static final String COMMAND_ALIAS = "dE";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the event identified by the event name used in the displayed event list.\n"

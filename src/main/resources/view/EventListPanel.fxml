@@ -3,7 +3,14 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Text?>
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <StackPane prefWidth="Infinity" VBox.vgrow="ALWAYS" prefHeight="NaN">
+        <Text textAlignment="CENTER" text="Club Calendar" fill="darkkhaki" style="-fx-font-size: 25">
+        </Text>
+    </StackPane>
+    <StackPane minHeight="20"/>
     <ListView fx:id="eventListView" VBox.vgrow="ALWAYS" />
 </VBox>
 

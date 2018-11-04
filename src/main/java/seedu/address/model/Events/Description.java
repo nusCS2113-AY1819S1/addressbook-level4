@@ -7,7 +7,7 @@ public class Description {
     public final String ThisDescription;
     public static final String DESCRIPTION_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
     public static final String MESSAGE_DESCRIPTION_CCONSTRAINT =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Description should only contain alphanumeric characters and spaces, and it should not be blank";
     public Description(String description) {
         requireNonNull(description);
         checkArgument(CheckValid(description), MESSAGE_DESCRIPTION_CCONSTRAINT);

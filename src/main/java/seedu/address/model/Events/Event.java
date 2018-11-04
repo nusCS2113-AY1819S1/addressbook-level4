@@ -45,10 +45,21 @@ public class Event {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, venue, description, date, tags);
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getEventName())
+                .append(" Venue: ")
+                .append(getVenue())
+                .append(", Description: ")
+                .append(getDescription())
+                .append(", Date: ")
+                .append(getEventDate());
+        return builder.toString();
+    }
 
 
 
