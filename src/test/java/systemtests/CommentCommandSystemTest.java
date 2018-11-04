@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.ADMIN_USERNAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADMIN_PASSWORD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADMIN_USERNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LINE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 import static seedu.address.testutil.TypicalEvents.DANIEL;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
@@ -15,6 +16,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommentCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.LoginCommand;
+import seedu.address.logic.commands.ReplyCommentCommand;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 import seedu.address.model.user.User;
@@ -33,10 +35,17 @@ public class CommentCommandSystemTest extends EventManagerSystemTest {
                 + ADMIN_USERNAME_DESC + "  " + ADMIN_PASSWORD_DESC + "  ";
         assertCommandSuccess(command, toLogin);
 
+
         Index index = INDEX_FIRST_EVENT;
-        command = " " + AddCommentCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_COMMENT + "Hi";
+        command = "   " + AddCommentCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_COMMENT + "Hi";
         Event editedEvent = new EventBuilder(DANIEL).withComment("{span}Comment Section{/span}{ol}{li}"
-                + "admin : Hi{li}{/ol}").build();
+                + "admin : Hi{/li}{/ol}").build();
+        assertCommandSuccess(command, index, editedEvent);
+
+        command = ReplyCommentCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_COMMENT + "Hello" + " "
+                + PREFIX_LINE + "1";
+        editedEvent = new EventBuilder(DANIEL).withComment("{span}Comment Section{/span}{ol}{li}"
+                + "admin : Hi{/li}{li} (REPLY) admin : Hello{/li}{/ol}").build();
         assertCommandSuccess(command, index, editedEvent);
 
     }
