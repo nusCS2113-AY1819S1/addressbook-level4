@@ -33,7 +33,8 @@ public class NewAutoCompletionBinding<T> {
     private CustomSuggestionProvider suggestionProvider = new CustomSuggestionProvider();
     private boolean ignoreInputChanges = false;
 
-    private String prevText = "";
+    private String prefixText = "";
+    private String suffixText = "";
     private final StringConverter<T> converter = defaultStringConverter();
 
     /**
@@ -41,28 +42,42 @@ public class NewAutoCompletionBinding<T> {
      * and extracts the last word of the input that is to be autocompleted.
      */
     private final ChangeListener<String> textChangedListener = (obs, oldText, newText) -> {
-        int index;
+        /*int index;
         for (index = newText.length() - 1; index >= 0 && !Character.isWhitespace(newText.charAt(index)); index--);
         if (index > 0) {
-            prevText = newText.substring(0, index) + " ";
+            prefixText = newText.substring(0, index) + " ";
         } else {
-            prevText = "";
+            prefixText = "";
         }
         String inputText = newText.substring(index + 1);
         if (inputText.startsWith(PREFIX_TAG.getPrefix())) {
-            prevText += PREFIX_TAG.getPrefix();
+            prefixText += PREFIX_TAG.getPrefix();
             inputText = inputText.substring(2);
         }
         if (getCompletionTarget().isFocused()) {
             setUserInput(newText, inputText);
-        }
+        }*/
     };
 
     /**
      *
      */
     private final ChangeListener<Number> caretChangedListener = (obs, oldPosition, newPosition) -> {
+        int index;
+        String newText = getCompletionTarget().getText();
+        for (index = newText.length() - 1; index >= 0 && !Character.isWhitespace(newText.charAt(index)); index--);
+        if (index > 0) {
+            prefixText = newText.substring(0, index) + " ";
+        } else {
+            prefixText = "";
+        }
+        String inputText = newText.substring(index + 1);
+        if (inputText.startsWith(PREFIX_TAG.getPrefix())) {
+            prefixText += PREFIX_TAG.getPrefix();
+            inputText = inputText.substring(2);
+        }
         if (getCompletionTarget().isFocused()) {
+            setUserInput(newText, inputText);
         }
     };
 
@@ -176,7 +191,7 @@ public class NewAutoCompletionBinding<T> {
      * @param completion
      */
     private void completeUserInput(T completion) {
-        String newText = prevText + converter.toString(completion);
+        String newText = prefixText + converter.toString(completion);
         getCompletionTarget().setText(newText);
         getCompletionTarget().positionCaret(newText.length());
     }
