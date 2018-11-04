@@ -100,6 +100,13 @@ public class ReplyCommentCommand extends Command {
         return new CommandResult(String.format(MESSAGE_REPLY_COMMENT, getComment(), index.getOneBased(), getLine()));
     }
 
+    /**
+     * Replies Comments
+     * @param eventToEdit
+     * @param username
+     * @return
+     * @throws CommandException
+     */
     public Event replyComment(Event eventToEdit, String username) throws CommandException {
         CommentFacade comments = new CommentFacade();
         String repliedComment = comments.replyComment(eventToEdit.getComment().toString(), getComment(),
