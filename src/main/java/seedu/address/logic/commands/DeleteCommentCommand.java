@@ -38,10 +38,9 @@ public class DeleteCommentCommand extends Command {
     public static final String MESSAGE_LINE_STRING_INVALID = "Line cannot be a string!"
             + " Example: deleteComment 1 L/2";
 
-    private final Index index;
     private final EditCommand.EditEventDescriptor editCommentDescriptor = new EditCommand.EditEventDescriptor();
     private int line = 0;
-
+    private Index index;
     /**
      * @param index of the event in the filtered event list to edit
      */
@@ -58,6 +57,10 @@ public class DeleteCommentCommand extends Command {
     }
     public Index getIndex() { return this.index; }
 
+    public void setLine(int line) { this.line = line; }
+
+    public void setIndex(Index index) { this.index = index; }
+
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
@@ -72,21 +75,29 @@ public class DeleteCommentCommand extends Command {
 
         List<Event> filteredEventList = model.getFilteredEventList();
 
-
         if (index.getZeroBased() >= filteredEventList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
         Event eventToEdit = filteredEventList.get(index.getZeroBased());
-        CommentFacade comments = new CommentFacade();
-        String deletedComment = comments.deleteComment(eventToEdit.getComment().toString(), getLine());
-        editCommentDescriptor.setComment(new Comment(deletedComment));
-        Event editedEvent = EditCommand.createEditedEvent(eventToEdit, editCommentDescriptor);
-
+        Event editedEvent = deleteComment(eventToEdit);
         model.updateEvent(eventToEdit, editedEvent);
         model.commitEventManager();
         EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
         return new CommandResult(String.format(MESSAGE_DELETE_COMMENT, index.getOneBased(), getLine()));
+    }
+
+    /**
+     * Removes comment with given line parameter
+     * @param eventToEdit
+     * @return
+     * @throws CommandException
+     */
+    public Event deleteComment(Event eventToEdit) throws CommandException {
+        CommentFacade comments = new CommentFacade();
+        String deletedComment = comments.deleteComment(eventToEdit.getComment().toString(), getLine());
+        editCommentDescriptor.setComment(new Comment(deletedComment));
+        return EditCommand.createEditedEvent(eventToEdit, editCommentDescriptor);
     }
 
 }

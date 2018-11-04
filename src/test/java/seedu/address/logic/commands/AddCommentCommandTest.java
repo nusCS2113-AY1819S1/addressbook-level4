@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.AddCommentCommand.MESSAGE_ADD_COMMENT;
 import static seedu.address.logic.commands.Command.MESSAGE_LOGIN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COMMENT;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
@@ -45,82 +44,7 @@ class AddCommentCommandTest {
     }
 
     /**
-     * Testing addComment function
-     */
-    @Test
-    public void addComment_testingInput() {
-        Event editedEvent = new EventBuilder().withName("Art and Crafts")
-                .withContact("Daniel Meier")
-                .withPhone("87652533")
-                .withEmail("cornelia@example.com")
-                .withVenue("10th street")
-                .withDateTime("22/10/2017 9:30")
-                .withComment("{span}Comment Section{/span}{ol}{li}admin : Hi{/li}{/ol}")
-                .withTags("friends")
-                .withAttendees("Scarlet Witch").build();
-
-        List<Event> filteredEventList = model.getFilteredEventList();
-        Event eventToEdit = filteredEventList.get(INDEX_FIRST_EVENT.getZeroBased());
-        Event addedComment = addCommentCommand.addComment(eventToEdit, "admin");
-        assertEquals(editedEvent, addedComment);
-        assertEquals(editedEvent.getComment(), addedComment.getComment());
-
-        //Testing a failed output
-        addCommentCommand.setComment("LOLOLO");
-        addedComment = addCommentCommand.addComment(eventToEdit, "admins");
-        assertNotEquals(editedEvent.getComment(), addedComment.getComment());
-    }
-
-    /**
-     * Testing for invalid index, not logged it, undo command and redo command
-     * @throws CommandException
-     */
-    @Test
-    public void execute_exceptionThrown() throws CommandException {
-
-        //Invalid Index
-        addCommentCommand.setIndex(Index.fromOneBased(10));
-        try {
-            addCommentCommand.execute(model, commandHistory);
-        } catch (Exception e) {
-            System.out.println(e.toString());
-            assertEquals(new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX).toString(), e.toString());
-        }
-
-        //Not logged in
-        Model notLoggedIn = new ModelManager(getTypicalEventManager(), new UserPrefs());
-        try {
-            addCommentCommand.execute(notLoggedIn, commandHistory);
-        } catch (Exception e) {
-            assertEquals(new CommandException(MESSAGE_LOGIN).toString(), e.toString());
-        }
-        // Redo is prevented when an exception throws
-        assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
-        // Undo is prevented in exception throws
-        assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
-    }
-
-    /**
-     * Testing expected String
-     * @throws CommandException
-     */
-    @Test
-    public void execute_commandResult() throws CommandException {
-        AddCommentCommand addCommentCommand = new AddCommentCommand(INDEX_FIRST_EVENT, VALID_COMMENT);
-        String expectedMessage = String.format(MESSAGE_ADD_COMMENT, VALID_COMMENT, INDEX_FIRST_EVENT.getOneBased());
-        //Message correct
-        assertEquals(expectedMessage, addCommentCommand.execute(model, commandHistory).getString());
-        addCommentCommand.setComment("HELLO");
-        //Comment wrong
-        assertNotEquals(expectedMessage, addCommentCommand.execute(model, commandHistory).getString());
-        addCommentCommand.setComment("Hi");
-        addCommentCommand.setIndex(Index.fromOneBased(5));
-        //Index wrong
-        assertNotEquals(expectedMessage, addCommentCommand.execute(model, commandHistory).getString());
-    }
-
-    /**
-     * Complete integration test
+     * Complete integration test with model, undo, redo and login
      */
     @Test
     public void execute_integrationTest_success() {
@@ -148,6 +72,77 @@ class AddCommentCommandTest {
         // redo -> same first event edited again
         expectedModel.redoEventManager();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    /**
+     * Testing addComment function
+     */
+    @Test
+    public void addComment_testingInput() {
+        Model expectedModel = new ModelManager(getTypicalEventManager(), new UserPrefs());
+        expectedModel.logUser(new UserBuilder().build());
+        Event editedEvent = new EventBuilder().withName("Art and Crafts")
+                .withContact("Daniel Meier")
+                .withPhone("87652533")
+                .withEmail("cornelia@example.com")
+                .withVenue("10th street")
+                .withDateTime("22/10/2017 9:30")
+                .withComment("{span}Comment Section{/span}{ol}{li}admin : Hi{/li}{/ol}")
+                .withTags("friends")
+                .withAttendees("Scarlet Witch").build();
+
+        List<Event> filteredEventList = expectedModel.getFilteredEventList();
+        Event eventToEdit = filteredEventList.get(INDEX_FIRST_EVENT.getZeroBased());
+        Event addedComment = addCommentCommand.addComment(eventToEdit, "admin");
+        assertEquals(editedEvent, addedComment);
+        assertEquals(editedEvent.getComment(), addedComment.getComment());
+
+        //Testing a failed output
+        addCommentCommand.setComment("LOLOLO");
+        addedComment = addCommentCommand.addComment(eventToEdit, "admins");
+        assertNotEquals(editedEvent.getComment(), addedComment.getComment());
+    }
+
+    /**
+     * Testing for invalid index, not logged it
+     * @throws CommandException
+     */
+    @Test
+    public void execute_exceptionThrown() throws CommandException {
+        //Invalid Index
+        addCommentCommand.setIndex(Index.fromOneBased(10));
+        try {
+            addCommentCommand.execute(model, commandHistory);
+        } catch (Exception e) {
+            assertEquals(new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX).toString(), e.toString());
+        }
+
+        //Not logged in
+        Model notLoggedIn = new ModelManager(getTypicalEventManager(), new UserPrefs());
+        try {
+            addCommentCommand.execute(notLoggedIn, commandHistory);
+        } catch (Exception e) {
+            assertEquals(new CommandException(MESSAGE_LOGIN).toString(), e.toString());
+        }
+    }
+
+    /**
+     * Testing expected String
+     * @throws CommandException
+     */
+    @Test
+    public void execute_commandResult() throws CommandException {
+        AddCommentCommand addCommentCommand = new AddCommentCommand(INDEX_FIRST_EVENT, VALID_COMMENT);
+        String expectedMessage = String.format(MESSAGE_ADD_COMMENT, VALID_COMMENT, INDEX_FIRST_EVENT.getOneBased());
+        //Message correct
+        assertEquals(expectedMessage, addCommentCommand.execute(model, commandHistory).getString());
+        addCommentCommand.setComment("HELLO");
+        //Comment wrong
+        assertNotEquals(expectedMessage, addCommentCommand.execute(model, commandHistory).getString());
+        addCommentCommand.setComment("Hi");
+        addCommentCommand.setIndex(Index.fromOneBased(5));
+        //Index wrong
+        assertNotEquals(expectedMessage, addCommentCommand.execute(model, commandHistory).getString());
     }
 
 }
