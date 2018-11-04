@@ -1,9 +1,15 @@
-package seedu.address.model.drink;
+package seedu.address.model.drink.drinktestutil;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.drink.Drink;
+import seedu.address.model.drink.Name;
+import seedu.address.model.drink.Price;
+import seedu.address.model.drink.Quantity;
+import seedu.address.model.drink.UniqueBatchList;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.SampleDataUtil;
 
 public class DrinkBuilder {
     public static final String DEFAULT_NAME = "Alice Pauline";
@@ -45,13 +51,13 @@ public class DrinkBuilder {
         return this;
     }
 
-//    /**
-//     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
-//     */
-//    public DrinkBuilder withTags(String... tags) {
-//        this.tags = SampleDataUtil.getTagSet(tags);
-//        return this;
-//    }
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Drink} that we are building.
+     */
+    public DrinkBuilder withTags(String... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
 
     /**
      * Sets the {@code costPrice} of the {@code Drink} that we are building.
