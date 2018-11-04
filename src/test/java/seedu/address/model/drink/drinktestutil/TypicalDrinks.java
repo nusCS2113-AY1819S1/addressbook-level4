@@ -23,13 +23,20 @@ public class TypicalDrinks {
             .withQuantity("45")
             .withTags("softDrink").build();
 
+    public static final Drink FNN_GRAPE_COPY = new DrinkBuilder().withName("FnN Grape")
+            .withCostPrice("1.50")
+            .withRetailPrice("5.20")
+            .withQuantity("46")
+            .withTags("softDrink").build();
+
+
     public static final Drink PEPSI = new DrinkBuilder().withName("Pepsi")
             .withCostPrice("1.20")
             .withRetailPrice("6.00")
             .withQuantity("40")
             .withTags("softDrink").build();
 
-    public static final Drink GREEN_TEA = new DrinkBuilder().withName("Heaven & Earth Green Tea")
+    public static final Drink GREEN_TEA = new DrinkBuilder().withName("Heaven and Earth Green Tea")
             .withCostPrice("0.80")
             .withRetailPrice("4.00")
             .withQuantity("90")
@@ -55,7 +62,7 @@ public class TypicalDrinks {
             .withQuantity(VALID_DRINK_QUANTITY)
             .withTags(VALID_DRINK_TAG_SOFTDRINK)
             .build();
-    
+
 
     public static final String KEYWORD_MATCHING_TEA = "Tea"; // A keyword that matches Tea
 
