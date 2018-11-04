@@ -139,6 +139,10 @@ public class Drink {
 
         Drink otherDrink = (Drink) other;
         return otherDrink.getName().equals(getName())
+                && otherDrink.getRetailPrice().equals(getRetailPrice())
+                && otherDrink.getCostPrice().equals(getCostPrice())
+                && otherDrink.getQuantity().equals(getQuantity())
+                // && otherDrink.getUniqueBatchList().equals(getUniqueBatchList())
                 && otherDrink.getTags().equals(getTags());
     }
 
