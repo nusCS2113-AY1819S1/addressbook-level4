@@ -15,7 +15,7 @@ public class BatchId {
      *
      */
     public BatchId() {
-        this.value = (int)Instant.now().getEpochSecond();
+        this.value = (int) Instant.now().getEpochSecond();
     }
 
     public BatchId(String input) {

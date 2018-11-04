@@ -83,13 +83,13 @@ public class UniqueBatchList implements Iterable<Batch> {
      * Decreases quantity in the batches by the order of date imported, with the oldest batches first
      * @param quantity a valid quantity value expressed as an integer
      */
-    public void updateBatchTransaction(Quantity quantity) throws InsufficientQuantityException,EmptyBatchListException {
+    public void updateBatchTransaction(Quantity quantity) throws InsufficientQuantityException,
+            EmptyBatchListException {
         int toDecrease = quantity.getValue();
 
         try {
             decreaseTotalQuantity(toDecrease);
-        }
-        catch (InsufficientQuantityException e){
+        } catch (InsufficientQuantityException e) {
             throw e;
         }
         try {
@@ -128,7 +128,7 @@ public class UniqueBatchList implements Iterable<Batch> {
      * Gets the date of the oldest batch
      * @return a BatchDate object
      */
-    public BatchDate getEarliestBatchDate() throws EmptyBatchListException{
+    public BatchDate getEarliestBatchDate() throws EmptyBatchListException {
         return getEarliestBatch().getBatchDate();
     }
 
@@ -167,7 +167,7 @@ public class UniqueBatchList implements Iterable<Batch> {
         setTotalQuantity(0);
         if (!internalList.isEmpty()) {
             for (Batch b : internalList) {
-               increaseTotalQuantity(b.getBatchQuantity().getValue());
+                increaseTotalQuantity(b.getBatchQuantity().getValue());
             }
         }
     }
@@ -266,7 +266,7 @@ public class UniqueBatchList implements Iterable<Batch> {
      * Sorts the Batch list by date
      * The batch list must not be empty
      */
-    public void sortBatches() throws EmptyBatchListException{
+    public void sortBatches() throws EmptyBatchListException {
         if (this.internalList.isEmpty()) {
             throw new EmptyBatchListException();
         }

@@ -51,7 +51,7 @@ public class BrowserPanel extends UiPart<Region> {
         String costPrice = "costPrice=" + drink.getCostPrice().toString();
         String stock = "stock=" + drink.getQuantity().toString();
         String earliestBatchDate;
-        if(drink.getEarliestBatchDate() == null) {
+        if (drink.getEarliestBatchDate() == null) {
             earliestBatchDate = "earliestBatchDate=" + "Unavailable";
         } else {
             earliestBatchDate = "earliestBatchDate=" + drink.getEarliestBatchDate().toString();
