@@ -50,10 +50,13 @@ public class BrowserPanel extends UiPart<Region> {
         String sellingPrice = "sellingPrice=" + drink.getRetailPrice().toString();
         String costPrice = "costPrice=" + drink.getCostPrice().toString();
         String stock = "stock=" + drink.getQuantity().toString();
-        String earliestBatchDate = "earliestBatchDate="
-                + drink.getUniqueBatchList().getBatch(0).getBatchDate().toString();
-        loadPage(SEARCH_PAGE_URL + name + "&" + sellingPrice + "&" + costPrice + "&" + stock
-                + "&" + earliestBatchDate);
+        String earliestBatchDate;
+        if(drink.getEarliestBatchDate() == null) {
+            earliestBatchDate = "earliestBatchDate=" + "Unavailable";
+        } else {
+            earliestBatchDate = drink.getEarliestBatchDate().toString();
+        }
+        loadPage(SEARCH_PAGE_URL + name + "&" + sellingPrice + "&" + costPrice + "&" + stock + "&" + earliestBatchDate);
     }
 
     public void loadPage(String url) {

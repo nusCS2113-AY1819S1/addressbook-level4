@@ -22,7 +22,7 @@ public class BatchBuilder {
     private BatchDate batchDate;
 
     public BatchBuilder() {
-        batchId = new BatchId(DEFAULT_BATCH_ID);
+        batchId = new BatchId();
         batchQuantity = new BatchQuantity(DEFAULT_BATCH_QUANTITY);
         batchPrice = new BatchPrice(DEFAULT_BATCH_PRICE);
         batchDate = new BatchDate(DEFAULT_BATCH_DATE);

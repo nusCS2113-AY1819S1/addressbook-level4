@@ -1,36 +1,25 @@
 //@@author Lunastryke
 package seedu.address.model.drink;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+import java.time.LocalDateTime;
 
 /**
  * Represents the identification number of a specific batch
  */
 
 public class BatchId {
-    public static final String MESSAGE_ID_CONSTRAINTS =
-            "ID should only contain numbers";
-    public static final String ID_VALIDATION_REGEX = "\\d+";
-
     private final int value;
 
     /**
      * Constructs an {@code BatchId}.
      *
-     * @param id A valid ID value expressed as a string.
      */
-    public BatchId(String id) {
-        requireNonNull(id);
-        checkArgument(isValidId(id), MESSAGE_ID_CONSTRAINTS);
-        this.value = Integer.parseInt(id);
+    public BatchId() {
+        this.value = Integer.parseInt(LocalDateTime.now().toString());
     }
 
-    /**
-     * Returns true if a given string is a valid id value.
-     */
-    public static boolean isValidId(String test) {
-        return test.matches(ID_VALIDATION_REGEX);
+    public BatchId(String input) {
+        this.value = Integer.parseInt(input);
     }
 
     public int getValue() {
