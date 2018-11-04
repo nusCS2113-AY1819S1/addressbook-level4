@@ -8,11 +8,11 @@
 
 :root{
 --maincolor:#FFFFFF;
---primarycolor:#2196F3; /* Blue 500 */
+--primarycolor:#009688; /* Teal 500 */
 --secondarycolor:#ba3925;
 --tertiarycolor: #186d7a;
---sidebarbackground:#0D47A1; /* Blue 900 */
---linkcolor:#90CAF9; /* Blue 200 */
+--sidebarbackground:#004d40; /* Teal 900 */
+--linkcolor:#80cbc4; /* Teal 200 */
 --linkcoloralternate:#f44336;
 --white:#FFFFFF;
 --black:#000000;
@@ -40,14 +40,14 @@ a:hover {
 }
 mark {
   color: var(--white);
-  background-color: var(--linkcolor);
+  background-color: #80cbc4;
 }
 
 /* Card styling */
 .sect1{border-bottom:1px solid grey;border-radius:8px;}
 
 /* Table styles */
-th{background-color: var(--linkcolor);color:#FFFFFF;}
+th{background-color: #80cbc4;color:#FFFFFF;}
 
 #toc.toc2{background-color:var(--sidebarbackground);color:white !important;}
 #toc.toc2.a{color:var(--white);}

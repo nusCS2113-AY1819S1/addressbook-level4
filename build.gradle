@@ -225,7 +225,6 @@ asciidoctor {
 
     attributes = [
         linkcss: true,
-        stylesheet: 'gh-pages.css',
         'source-highlighter': 'coderay',
         icons: 'font',
         experimental: true,
