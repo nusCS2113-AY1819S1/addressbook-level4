@@ -103,6 +103,5 @@ public class NameContainsKeywordsPredicateTest {
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("bob@example.com", "alice@example.com", "calvin"));
         assertFalse(predicate.test(new PersonBuilder().withEmail("calvin@example.com").build()));
 
-
     }
 }
