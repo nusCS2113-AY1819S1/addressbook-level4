@@ -448,7 +448,7 @@ parameter to StatisticCommandParser.
 * The StatisticCommandParser will then parse the arguments and create a new StatisticCommand object before returning its reference. The activity diagram below details the mechanism
 within the `StatisticCommandParser#parse` method.
 
-image::StatisticParserActivityDiagram.png[width="800"]
+image::StatisticParserActivityDiagram.png[width="500"]
 
 * Once `StatisticCommand#execute` is called, it will then search through the in-memory data of FinancialPlanner and return a list containing all records within the date range and including
 both the start dates and end dates. This functionality is facilitated by the `ModelManager` which is the class that manages all interactions between
