@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.task.ModuleCode;
 import seedu.address.model.task.PriorityLevel;
 import seedu.address.model.task.Task;
 
@@ -35,18 +36,20 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(userInput, PREFIX_MODULE_CODE, PREFIX_TITLE, PREFIX_DESCRIPTION,
                         PREFIX_PRIORITY, PREFIX_HOURS);
-        if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE, PREFIX_TITLE, PREFIX_DESCRIPTION,
+        if (!arePrefixesPresent(argMultimap, PREFIX_TITLE, PREFIX_DESCRIPTION,
                 PREFIX_PRIORITY, PREFIX_HOURS)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTaskCommand.MESSAGE_USAGE));
         }
-
-        String moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
-        String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get());
+        ModuleCode moduleCode = null;
+        if (argMultimap.getValue(PREFIX_MODULE_CODE).orElse(null) != null) {
+            moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
+        }
+        String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get()).toLowerCase();
         String description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         PriorityLevel priority = ParserUtil.parsePriorityLevel(argMultimap.getValue(PREFIX_PRIORITY).get());
         int expectedNumOfHours = ParserUtil.parseHours(argMultimap.getValue(PREFIX_HOURS).get());
-        Task task = new Task(moduleCode, title.toLowerCase(), description, priority, expectedNumOfHours);
+        Task task = new Task(moduleCode, title, description, priority, expectedNumOfHours);
 
         return new AddTaskCommand(task);
     }

@@ -109,11 +109,6 @@ public class SelectDeadlineCommandTest {
         }
 
         @Override
-        public boolean validDeadline(Deadline deadline) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void resetData(ReadOnlyTaskBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -200,24 +195,12 @@ public class SelectDeadlineCommandTest {
             requireNonNull(deadline);
             this.deadline = deadline;
         }
-
-        @Override
-        public boolean validDeadline(Deadline deadline) {
-            requireNonNull(deadline);
-            return Deadline.isValidDeadline(this.deadline.toString());
-        }
     }
 
     /**
      * A model stub that always accepts the deadline being selected.
      */
     private class ModelStubAcceptingDeadlineSelected extends ModelStub {
-
-        @Override
-        public boolean validDeadline(Deadline deadlineSelected) {
-            requireNonNull(deadlineSelected);
-            return Deadline.isValidDeadline(deadlineSelected.toString());
-        }
 
         @Override
         public void selectDeadline(Deadline deadline) {

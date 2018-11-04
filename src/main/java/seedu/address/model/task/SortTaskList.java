@@ -23,7 +23,8 @@ public class SortTaskList {
             public int compare(Task self, Task other) {
                 switch(method) {
                     case ("modules"): {
-                        return self.getModuleCode().toLowerCase().compareTo(other.getModuleCode().toLowerCase());
+                        return self.getModuleCode().toString().toLowerCase()
+                                .compareTo(other.getModuleCode().toString().toLowerCase());
                     }
                     case ("deadlines"): {
                         return self.getDeadline().toString().compareTo(other.getDeadline().toString());

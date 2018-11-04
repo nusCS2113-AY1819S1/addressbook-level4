@@ -9,9 +9,11 @@ import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Milestone;
+import seedu.address.model.task.ModuleCode;
 import seedu.address.model.task.PriorityLevel;
 import seedu.address.model.task.Task;
 
@@ -23,7 +25,7 @@ public class XmlAdaptedTask {
 
     @XmlElement(required = true)
     private String deadline;
-    @XmlElement(required = true)
+    @XmlElement
     private String moduleCode;
     @XmlElement(required = true)
     private String title;
@@ -64,6 +66,9 @@ public class XmlAdaptedTask {
         if (milestoneList != null) {
             this.milestonelist = new ArrayList<>(milestonelist);
         }
+        if (moduleCode != null) {
+            this.moduleCode = moduleCode;
+        }
     }
     /**
      * Constructs an {@code XmlAdaptedTask} with the given task details.
@@ -71,7 +76,9 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(String deadline, String moduleCode, String title, String description, String priorityLevel,
                           String expectedNumOfHours) {
         this.deadline = deadline;
-        this.moduleCode = moduleCode;
+        if (moduleCode != null) {
+            this.moduleCode = moduleCode;
+        }
         this.title = title;
         this.description = description;
         this.priorityLevel = priorityLevel;
@@ -88,7 +95,9 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(Task source) {
         deadline = source.getDeadline().toString();
-        moduleCode = source.getModuleCode();
+        if (source.getModuleCode() != null) {
+            moduleCode = source.getModuleCode().toString();
+        }
         title = source.getTitle();
         description = source.getDescription();
         priorityLevel = source.getPriorityLevel().toString();
@@ -108,16 +117,20 @@ public class XmlAdaptedTask {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Deadline.class.getSimpleName()));
         }
-        if (!Deadline.isValidDeadline(deadline)) {
+        if (!Deadline.isValidFormat(deadline)) {
             throw new IllegalValueException(Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
+        } else if (!Deadline.isValidDeadline(deadline)) {
+            throw new IllegalValueException(Messages.MESSAGE_INVALID_DEADLINE);
         }
         final Deadline modelDeadline = new Deadline(deadline);
 
-        if (moduleCode == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Module"));
+        if (moduleCode != null && !ModuleCode.isValidModuleCode(moduleCode)) {
+            throw new IllegalValueException(String.format(ModuleCode.MESSAGE_MODULE_CODE_CONSTRAINTS));
         }
-
-        final String modelModuleCode = moduleCode;
+        ModuleCode modelModuleCode = null;
+        if (moduleCode != null) {
+            modelModuleCode = new ModuleCode(moduleCode);
+        }
 
         if (title == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Title"));

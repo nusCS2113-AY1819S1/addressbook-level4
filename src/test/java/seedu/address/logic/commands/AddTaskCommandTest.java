@@ -4,18 +4,19 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.MAX_HOURS;
 import static seedu.address.testutil.TaskBuilder.DEFAULT_DEADLINE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -28,6 +29,7 @@ import seedu.address.testutil.TaskBuilder;
 
 public class AddTaskCommandTest {
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
+    private static final Logger logger = LogsCenter.getLogger(AddTaskCommandTest.class);
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -64,6 +66,94 @@ public class AddTaskCommandTest {
     }
 
     @Test
+    public void execute_taskWithDifferentDeadline_addSuccessful() throws Exception {
+        Task typicalTask = new TaskBuilder().build();
+        ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded();
+        modelStub.addTask(typicalTask);
+
+        Task secondTask = new TaskBuilder().withDeadline("5/5/2018").build();
+        AddTaskCommand addCommand = new AddTaskCommand(secondTask);
+        modelStub.selectDeadline(new Deadline("5/5/2018"));
+        CommandResult commandResult = new AddTaskCommand(secondTask).execute(modelStub, commandHistory);
+
+        assertEquals(String.format(AddTaskCommand.MESSAGE_SUCCESS, secondTask), commandResult.feedbackToUser);
+        assertEquals(Arrays.asList(typicalTask, secondTask), modelStub.tasksAdded);
+        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+    }
+
+    @Test
+    public void execute_taskWithDifferentTitle_addSuccessful() throws Exception {
+        Task typicalTask = new TaskBuilder().build();
+        ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded();
+        modelStub.addTask(typicalTask);
+
+        Task secondTask = new TaskBuilder().withTitle("Different Title").build();
+        AddTaskCommand addCommand = new AddTaskCommand(secondTask);
+        CommandResult commandResult = new AddTaskCommand(secondTask).execute(modelStub, commandHistory);
+
+        assertEquals(String.format(AddTaskCommand.MESSAGE_SUCCESS, secondTask), commandResult.feedbackToUser);
+        assertEquals(Arrays.asList(typicalTask, secondTask), modelStub.tasksAdded);
+        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+    }
+
+    @Test
+    public void execute_taskWithDifferentModuleCode_addSuccessful() throws Exception {
+        Task typicalTask = new TaskBuilder().build();
+        ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded();
+        modelStub.addTask(typicalTask);
+
+        Task secondTask = new TaskBuilder().withModuleCode("CG2271").build();
+        AddTaskCommand addCommand = new AddTaskCommand(secondTask);
+        CommandResult commandResult = new AddTaskCommand(secondTask).execute(modelStub, commandHistory);
+
+        assertEquals(String.format(AddTaskCommand.MESSAGE_SUCCESS, secondTask), commandResult.feedbackToUser);
+        assertEquals(Arrays.asList(typicalTask, secondTask), modelStub.tasksAdded);
+        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+    }
+
+    @Test
+    public void execute_taskWithDifferentDescription_throwsCommandException() throws Exception {
+        Task typicalTask = new TaskBuilder().build();
+        ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded();
+        modelStub.addTask(typicalTask);
+
+        Task secondTask = new TaskBuilder().withDescription("Different description").build();
+        AddTaskCommand addCommand = new AddTaskCommand(secondTask);
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(AddTaskCommand.MESSAGE_DUPLICATE_TASK);
+        addCommand.execute(modelStub, commandHistory);
+    }
+
+    @Test
+    public void execute_taskWithDifferentPriorityLevel_throwsCommandException() throws Exception {
+        Task typicalTask = new TaskBuilder().build();
+        ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded();
+        modelStub.addTask(typicalTask);
+
+        Task secondTask = new TaskBuilder().withPriority("low").build();
+        AddTaskCommand addCommand = new AddTaskCommand(secondTask);
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(AddTaskCommand.MESSAGE_DUPLICATE_TASK);
+        addCommand.execute(modelStub, commandHistory);
+    }
+
+    @Test
+    public void execute_taskWithDifferentHours_throwsCommandException() throws Exception {
+        Task typicalTask = new TaskBuilder().build();
+        ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded();
+        modelStub.addTask(typicalTask);
+
+        Task secondTask = new TaskBuilder().withExpectedNumOfHours(4).build();
+        AddTaskCommand addCommand = new AddTaskCommand(secondTask);
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(AddTaskCommand.MESSAGE_DUPLICATE_TASK);
+        addCommand.execute(modelStub, commandHistory);
+    }
+
+    @Test
     public void execute_taskWithZeroHourCompletion_throwsCommandException() throws Exception {
         Task validTask = new TaskBuilder().withExpectedNumOfHours(0).build();
         AddTaskCommand addCommand = new AddTaskCommand(validTask);
@@ -71,17 +161,6 @@ public class AddTaskCommandTest {
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(Messages.MESSAGE_ZERO_HOURS_COMPLETION);
-        addCommand.execute(modelStub, commandHistory);
-    }
-
-    @Test
-    public void execute_taskWithMaxHourCompletion_throwsCommandException() throws Exception {
-        Task validTask = new TaskBuilder().withExpectedNumOfHours(MAX_HOURS).build();
-        AddTaskCommand addCommand = new AddTaskCommand(validTask);
-        ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded();
-
-        thrown.expect(CommandException.class);
-        thrown.expectMessage(Messages.MESSAGE_MAX_HOURS);
         addCommand.execute(modelStub, commandHistory);
     }
 
@@ -131,11 +210,6 @@ public class AddTaskCommandTest {
         @Override
         public Deadline getDeadline() {
             return new Deadline(DEFAULT_DEADLINE);
-        }
-
-        @Override
-        public boolean validDeadline(Deadline deadline) {
-            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -237,11 +311,22 @@ public class AddTaskCommandTest {
      */
     private class ModelStubAcceptingTaskAdded extends ModelStub {
         final ArrayList<Task> tasksAdded = new ArrayList<>();
+        private Deadline deadline = new Deadline("1/1/2018");
 
         @Override
         public boolean hasTask(Task task) {
             requireNonNull(task);
             return tasksAdded.stream().anyMatch(task::isSameTask);
+        }
+
+        @Override
+        public void selectDeadline(Deadline deadline) {
+            this.deadline = deadline;
+        }
+
+        @Override
+        public Deadline getDeadline() {
+            return this.deadline;
         }
 
         @Override

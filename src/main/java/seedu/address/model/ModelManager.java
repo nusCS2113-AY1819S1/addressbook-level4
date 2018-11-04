@@ -125,11 +125,6 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedTaskBook.getDeadline();
     }
 
-    @Override
-    public boolean validDeadline(Deadline deadline) {
-        return versionedTaskBook.validDeadline(deadline);
-    }
-
     //@@author
     //=========== Filtered Task List Accessors =============================================================
 

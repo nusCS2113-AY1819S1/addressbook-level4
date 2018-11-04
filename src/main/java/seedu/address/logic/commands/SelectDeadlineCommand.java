@@ -52,7 +52,7 @@ public class SelectDeadlineCommand extends Command implements CommandParser {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (!model.validDeadline(toSelect)) {
+        if (!Deadline.isValidDeadline(toSelect.toString())) {
             throw new CommandException(MESSAGE_INVALID_DEADLINE);
         }
 

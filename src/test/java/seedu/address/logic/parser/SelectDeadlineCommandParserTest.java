@@ -1,20 +1,20 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.DAY_DESC_1;
-import static seedu.address.logic.commands.CommandTestUtil.DAY_DESC_2;
-import static seedu.address.logic.commands.CommandTestUtil.MONTH_DESC_1;
-import static seedu.address.logic.commands.CommandTestUtil.MONTH_DESC_2;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DAY_1;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MONTH_JAN;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_YEAR_2018;
-import static seedu.address.logic.commands.CommandTestUtil.YEAR_DESC_2018;
-import static seedu.address.logic.commands.CommandTestUtil.YEAR_DESC_2019;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalDeadlines.DAY_DESC_1;
+import static seedu.address.testutil.TypicalDeadlines.DAY_DESC_2;
+import static seedu.address.testutil.TypicalDeadlines.MONTH_DESC_1;
+import static seedu.address.testutil.TypicalDeadlines.MONTH_DESC_2;
 import static seedu.address.testutil.TypicalDeadlines.VALID_1ST_JAN_2018;
+import static seedu.address.testutil.TypicalDeadlines.VALID_DAY_1;
+import static seedu.address.testutil.TypicalDeadlines.VALID_MONTH_JAN;
+import static seedu.address.testutil.TypicalDeadlines.VALID_YEAR_2018;
+import static seedu.address.testutil.TypicalDeadlines.YEAR_DESC_2018;
+import static seedu.address.testutil.TypicalDeadlines.YEAR_DESC_2019;
 
 import java.util.logging.Logger;
 

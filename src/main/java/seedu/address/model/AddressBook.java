@@ -140,10 +140,6 @@ public class AddressBook implements ReadOnlyTaskBook {
         tasks.setTasks(updateList);
     }
 
-    public boolean validDeadline(Deadline deadline) {
-        return Deadline.isValidDeadline(deadline.toString());
-    }
-
     public Deadline getDeadline() {
         if (currentDate == null) {
             currentDate = PLACEHOLDER_DEADLINE;

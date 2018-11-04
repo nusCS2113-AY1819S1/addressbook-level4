@@ -44,6 +44,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.task.Deadline;
+import seedu.address.model.task.ModuleCode;
 import seedu.address.model.task.PriorityLevel;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.TaskBuilder;
@@ -159,7 +160,7 @@ public class AddTaskCommandParserTest {
             String description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
             PriorityLevel priority = ParserUtil.parsePriorityLevel(argMultimap.getValue(PREFIX_PRIORITY).get());
             int expectedNumOfHours = ParserUtil.parseHours(argMultimap.getValue(PREFIX_HOURS).get());
-            String moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
+            ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
             Task task = new Task(moduleCode, title, description, priority, expectedNumOfHours);
             task.setDeadline(date);
             return new AddTaskCommand(task);
