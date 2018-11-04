@@ -207,7 +207,7 @@ Filters both the others list and the friends list to show only users with both g
 
 Adds a timeslot to your timetable.
 
-Format: `addtime Monday 10:00-12:00`
+Format: `addtime Monday 10:00-12:30`
 
 ****
 * Shortforms for the day of the week are fine too. e.g. You can type `Mon` instead of `Monday`.
@@ -215,18 +215,14 @@ Format: `addtime Monday 10:00-12:00`
 * You cannot add a timeslot that clashes with your timetable.
 ****
 
-[NOTE]
-Currently, FreeTime only accepts timeslots that start and end exactly on the hour, which means that you cannot add timeslots that begin, say, at 10:30. +
-Stay tuned for this extension in v1.4!
-
 Examples:
 
 
-* `addtime Monday 10:00-12:00` +
-Adds the timeslot from 10:00 to 12:00 on Monday to your timetable.
+* `addtime Monday 10:00-12:30` +
+Adds the timeslot from 10:00 to 12:30 on Monday to your timetable.
 
-* `addtime Fri 13:00-14:00` +
-Adds the timeslot from 13:00 to 14:00 on Friday to your timetable.
+* `addtime Fri 13:30-14:00` +
+Adds the timeslot from 13:30 to 14:00 on Friday to your timetable.
 
 * `addtime Wed 17-18` +
 Adds the timeslot from 17:00 to 18:00 on Wednesday to your timetable.
@@ -236,15 +232,11 @@ After adding a timeslot, you should see the following:
 .Timeslot added to your timetable
 image::AddTimeSuccess.png[width="600"]
 
-[NOTE]
-Currently, FreeTime only displays timeslots between 10:00 and 19:00. +
-Stay tuned for timetables that resize automatically in v1.4!
-
 === Delete a timeslot from your timetable: `deletetime` (`dt`)
 
 Delete a timeslot from your timetable.
 
-Format: `deletetime Monday 10:00-12:00`
+Format: `deletetime Monday 10:00-12:30`
 
 ****
 * Shortforms for the day of the week are fine too. e.g. You can type `Mon` instead of `Monday`.
@@ -254,11 +246,11 @@ Format: `deletetime Monday 10:00-12:00`
 
 Examples:
 
-* `deletetime Monday 10:00-12:00` +
+* `deletetime Monday 10:00-12:30` +
 Deletes the timeslot from 10:00 to 12:00 on Monday from your timetable.
 
-* `deletetime Fri 13:00-14:00` +
-Deletes the timeslot from 13:00 to 14:00 on Friday from your timetable.
+* `deletetime Fri 13:30-14:00` +
+Deletes the timeslot from 13:30 to 14:00 on Friday from your timetable.
 
 * `deletetime Wed 17-18` +
 Deletes the timeslot from 17:00 to 18:00 on Wednesday from your timetable.
@@ -341,7 +333,7 @@ Removes the first user from the friends list.
 // tag::freecommand[]
 === Show free slots among selected people: `free`
 
-Highlights timeslots where everyone specified is free.
+Highlights timeslots where you and everyone specified is free.
 
 Format: `free INDEX...`
 
