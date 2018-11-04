@@ -43,9 +43,9 @@ public class DrinkCard extends UiPart<Region> {
         this.drink = drink;
         id.setText(displayedIndex + ". ");
         name.setText(drink.getName().name);
-        stock.setText(Integer.toString(drink.getQuantity().getValue()));
-        costPrice.setText("$" + drink.getCostPrice().toString());
-        retailPrice.setText("$" + drink.getRetailPrice().toString());
+        stock.setText("Quantity in stock: " + Integer.toString(drink.getQuantity().getValue()));
+        costPrice.setText("Cost Price: $" + drink.getCostPrice().toString());
+        retailPrice.setText("Selling Price: $" + drink.getRetailPrice().toString());
         drink.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
