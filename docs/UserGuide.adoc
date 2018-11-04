@@ -146,7 +146,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The search is case insensitive. e.g `arduino` will match `Arduino`
 * The order of the keywords does not matter. e.g. `ESP8226 Chip` will match `Chip ESP8266`
 * Only the name is searched.
-* Only full words will be matched e.g. `Arduino` will not match `Arduinos`
+* Partial words will be matched e.g. `Arduino` will match `Arduinos`
 * Items matching at least one keyword will be returned (i.e. `OR` search). e.g. `Arduino Uno` will return `Arduino Mega`, `Arduino Leonardo`
 ****
 
