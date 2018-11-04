@@ -142,10 +142,14 @@ to your timetable might be lost.
 Displays the userguide from within the app.
 Format: `help`
 
-=== Listing all persons : `list` (`l`)
+=== Listing all persons : `listall` (`l`)
 
 Shows a list of all persons in the address book. +
-Format: `list`
+Format: `listall`
+
+****
+After filtering your results by executing commands such as `group` or `find`, executing `listall` will revert the list back to it's initial state
+****
 
 === Editing a person : `edit` (`e`) (DOES NOT WORK IN V1.3)
 
@@ -183,7 +187,7 @@ Returns `john` and `John Doe`
 Returns any person having names `Betsy`, `Tim`, or `John`
 
 // tag::tagcommand[]
-=== Locating persons by group : `tag` (`t`)
+=== Locating persons by group : `group` (`t`)
 
 Find persons whose group tags match the specified group tags.
 
@@ -270,9 +274,13 @@ Format: `select INDEX`
 * The index refers to the index number shown in your friend list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 * You cannot select someone who is not your friend yet. Try using the `friend` command first!
+* You can select yourself by using the command `select me`
 ****
 
 Examples:
+
+* `select me` +
+Selects yourself.
 
 * `select 2` +
 Selects the 2nd person listed in your friend list.
