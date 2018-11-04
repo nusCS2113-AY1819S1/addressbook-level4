@@ -25,7 +25,7 @@ public class XmlAdaptedTask {
 
     @XmlElement(required = true)
     private String deadline;
-    @XmlElement(required = true)
+    @XmlElement
     private String moduleCode;
     @XmlElement(required = true)
     private String title;
@@ -66,6 +66,9 @@ public class XmlAdaptedTask {
         if (milestoneList != null) {
             this.milestonelist = new ArrayList<>(milestonelist);
         }
+        if (moduleCode != null) {
+            this.moduleCode = moduleCode;
+        }
     }
     /**
      * Constructs an {@code XmlAdaptedTask} with the given task details.
@@ -73,7 +76,9 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(String deadline, String moduleCode, String title, String description, String priorityLevel,
                           String expectedNumOfHours) {
         this.deadline = deadline;
-        this.moduleCode = moduleCode;
+        if (moduleCode != null) {
+            this.moduleCode = moduleCode;
+        }
         this.title = title;
         this.description = description;
         this.priorityLevel = priorityLevel;
@@ -90,7 +95,9 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(Task source) {
         deadline = source.getDeadline().toString();
-        moduleCode = source.getModuleCode().toString();
+        if (source.getModuleCode() != null) {
+            moduleCode = source.getModuleCode().toString();
+        }
         title = source.getTitle();
         description = source.getDescription();
         priorityLevel = source.getPriorityLevel().toString();
@@ -117,14 +124,13 @@ public class XmlAdaptedTask {
         }
         final Deadline modelDeadline = new Deadline(deadline);
 
-        if (moduleCode == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Module"));
-        }
-        if (!ModuleCode.isValidModuleCode(moduleCode)) {
+        if (moduleCode != null && !ModuleCode.isValidModuleCode(moduleCode)) {
             throw new IllegalValueException(String.format(ModuleCode.MESSAGE_MODULE_CODE_CONSTRAINTS));
         }
-
-        final ModuleCode modelModuleCode = new ModuleCode(moduleCode);
+        ModuleCode modelModuleCode = null;
+        if (moduleCode != null) {
+            modelModuleCode = new ModuleCode(moduleCode);
+        }
 
         if (title == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Title"));
