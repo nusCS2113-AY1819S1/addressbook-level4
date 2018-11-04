@@ -1,4 +1,4 @@
-= Financial Planner - User Guide
+== Financial Planner - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -491,32 +491,35 @@ Examples:
 * `export_excel d/31-3-1999`
 * `export_excel d/31-3-1999 31-03-2019`
 
-== Spending Limit Feature
+== Spending Limit Features
 
 This section describes the limit feature that allows users to set values to control their future spending.
 Constraints that apply to records also apply to each limit. Refer to <<constraints>> for more information.
-All the limit related commands are case insensitive. Users can input ADDlimit, addLimit and so on to execute the command.
+`All the limit related commands are case insensitive. Users can input ADDlimit, addLimit and so on to execute the command.
+Besides that, in case some of the users who have programming background are used to using `
 
 === Adding a limit: `addlimit`
 
 Adds a spending limit for a time period or a particular day to the FinancialPlanner. +
 Format: `addlimit d/START_DATE END_DATE m/MONEYFLOW` (`limit d/DATE m/MONEYFLOW`)+
 
-START_DATE and END_DATE indicates the starting date and ending date for the limit.
-If there is only one date, that day will be the time period
-MONEYFLOW denotes the money limit for that period of time.
-once the total amount of money spent during this time period exceeds the spending limit,
+When inputting two days, START_DATE and END_DATE indicates the starting date and ending date for the limit.
+If there is only one date, that day will be the time period.
+MONEYFLOW denotes the money spending limit for that period of time.
+After the limits have been set, Financial Planner will keep checking the latest condition of these limits.
+Once the total amount of money spent during this time period exceeds the spending limit,
 FinancialPlanner will warn the user by sending the warning message.
 ****
-* Moneyflow can only be a positive integer, and does not require a "+" or "-".
+* DATE_START must be earlier or equal than DATE_END. When DATE_START and DATE_END are the same, this will be equivalent to single DATE.
+* Moneyflow for limit features can only be a positive integer, and does not require a "+" or "-".
 * Any date or period of time can only have at most 1 assigned limit.
 ****
 
 Example:
 
 * `addlimit d/20-8-2018 m/100`
-* `addlimit d/20-8-2018 30-8-2018 m/100`
-* `addLimit d/20-8-2018 30-8-2018 m/100`
+* `addlimit d/20-8-2018 30-8-2018 m/632`
+* `addLimit d/20-8-2018 20-8-2018 m/200`
 * `add_limit d/20-8-2018 30-8-2018 m/100`
 === Viewing all limits: `checkLimit`
 
