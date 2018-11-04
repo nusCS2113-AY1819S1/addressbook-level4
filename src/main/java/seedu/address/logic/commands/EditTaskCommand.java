@@ -45,8 +45,9 @@ public class EditTaskCommand extends Command implements CommandParser {
             + PREFIX_PRIORITY + "high";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to be edited must be provided";
+    public static final String MESSAGE_NOT_EDITED = "There is nothing to edit. All the fields are unchanged";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the Task book";
+    public static final String MESSAGE_NO_FIELD_PROVIDED = "At least one field to edit must be provided.";
 
     private final Index index;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -80,8 +81,15 @@ public class EditTaskCommand extends Command implements CommandParser {
         }
         Task taskToEdit = lastShownList.get(index.getZeroBased());
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        System.out.println(taskToEdit.getModuleCode());
+        System.out.println(editTaskDescriptor.getModuleCode());
 
-        if (!taskToEdit.isSameTask(editedTask) && model.hasTask(editedTask)) {
+        if (taskToEdit.equals(editedTask)) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
+        }
+
+        if (model.isTheExactSameTaskAs(editedTask) || (!taskToEdit.isSameTask(editedTask)
+                && model.hasTask(editedTask))) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
@@ -100,9 +108,9 @@ public class EditTaskCommand extends Command implements CommandParser {
         assert taskToEdit != null;
 
         Deadline deadline = taskToEdit.getDeadline();
+        String updatedModuleCode = editTaskDescriptor.getModuleCode().orElse(taskToEdit.getModuleCode());
         String updatedTitle = editTaskDescriptor.getTitle().orElse(taskToEdit.getTitle());
         String updatedDescription = editTaskDescriptor.getDescription().orElse(taskToEdit.getDescription());
-        String updatedModuleCode = editTaskDescriptor.getModuleCode().orElse(taskToEdit.getModuleCode());
         PriorityLevel updatedPriority = editTaskDescriptor.getPriorityLevel().orElse(taskToEdit.getPriorityLevel());
         Integer updatedHours = editTaskDescriptor.getExpectedNumOfHours().orElse(taskToEdit.getExpectedNumOfHours());
 

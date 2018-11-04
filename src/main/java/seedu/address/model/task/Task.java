@@ -136,7 +136,6 @@ public class Task {
                 && otherTask.getDeadline().equals(getDeadline())
                 && otherTask.getTitle().equals(getTitle());
     }
-
     //@@author ChanChunCheong
     /**
      * Defers the task to a later
@@ -186,7 +185,8 @@ public class Task {
                 && otherTask.getPriorityLevel().equals(getPriorityLevel())
                 && otherTask.isCompleted() == isCompleted()
                 && otherTask.getExpectedNumOfHours() == getExpectedNumOfHours()
-                && otherTask.getCompletedNumOfHours() == getCompletedNumOfHours();
+                && otherTask.getCompletedNumOfHours() == getCompletedNumOfHours()
+                && otherTask.getModuleCode().equals(getModuleCode());
     }
 
     @Override

@@ -65,6 +65,13 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedTaskBook.hasTask(person);
     }
 
+    //@@author emobeany
+    @Override
+    public boolean isTheExactSameTaskAs(Task otherTask) {
+        requireNonNull(otherTask);
+        return versionedTaskBook.isTheExactSameTaskAs(otherTask);
+    }
+
     //@@author ChanChunCheong
     @Override
     public void deferTaskDeadline(Task target, Deadline deadline) {

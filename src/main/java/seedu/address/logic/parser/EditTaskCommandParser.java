@@ -62,7 +62,7 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
             editTaskDescriptor.setExpectedNumOfHours(ParserUtil.parseHours(argMultimap.getValue(PREFIX_HOURS).get()));
         }
         if (!editTaskDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditTaskCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditTaskCommand.MESSAGE_NO_FIELD_PROVIDED);
         }
 
         return new EditTaskCommand(index, editTaskDescriptor);

@@ -24,6 +24,12 @@ public interface Model {
      */
     boolean hasTask(Task task);
 
+    //@@author emobeany
+    /**
+     * Returns true if there is a task in task book that has exactly the same fields as input task
+     */
+    boolean isTheExactSameTaskAs(Task task);
+
     void deferTaskDeadline(Task task, Deadline deadline);
     /**
      * Deletes the given task.
