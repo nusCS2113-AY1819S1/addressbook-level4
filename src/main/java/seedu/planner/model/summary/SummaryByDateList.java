@@ -1,10 +1,9 @@
 package seedu.planner.model.summary;
 
-import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
+import static java.util.Objects.requireNonNull;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
@@ -28,13 +27,11 @@ public class SummaryByDateList {
     private MoneyFlow totalIncome = new MoneyFlow("-0");
     private MoneyFlow totalExpense = new MoneyFlow("-0");
 
-    public SummaryByDateList(List<Record> recordList , Predicate<Record> predicate) {
-        requireAllNonNull(recordList, predicate);
+    public SummaryByDateList(List<Record> recordList) {
+        requireNonNull(recordList);
         for (Record r : recordList) {
-            if (predicate.test(r)) {
-                addRecordToMap(r);
-                updateTotals(r);
-            }
+            addRecordToMap(r);
+            updateTotals(r);
         }
     }
 

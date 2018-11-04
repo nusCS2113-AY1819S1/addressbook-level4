@@ -99,10 +99,14 @@ public class AddLimitCommandTest {
         }
 
         @Override
-        public void deleteRecord(Record target) {
+        public void addListUniqueRecord(List<Record> records) {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void deleteRecord(Record target) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public void updateRecord(Record target, Record editedRecord) {
@@ -129,6 +133,7 @@ public class AddLimitCommandTest {
         public ObservableList<Limit> getLimitList() {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public ReadOnlyFinancialPlanner getFinancialPlanner() {
             throw new AssertionError("This method should not be called.");
@@ -143,10 +148,12 @@ public class AddLimitCommandTest {
         public Double getTotalSpend(Limit limit) {
             return 0.0;
         }
+
         @Override
         public void deleteLimit(Limit limit) {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public boolean hasRecord(Record record) {
             throw new AssertionError("This method should not be called.");
@@ -167,8 +174,7 @@ public class AddLimitCommandTest {
             return false;
         }
 
-
-
+        @Override
         public void deleteListRecord(List<Record> targetList) {
             throw new AssertionError("This method should not be called.");
         }

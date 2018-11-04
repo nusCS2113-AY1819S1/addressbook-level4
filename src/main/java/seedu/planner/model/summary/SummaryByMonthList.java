@@ -2,7 +2,6 @@ package seedu.planner.model.summary;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
@@ -27,12 +26,10 @@ public class SummaryByMonthList {
     private MoneyFlow totalIncome = new MoneyFlow("-0");
     private MoneyFlow totalExpense = new MoneyFlow("-0");
 
-    public SummaryByMonthList(List<Record> recordList , Predicate<Record> predicate) {
+    public SummaryByMonthList(List<Record> recordList) {
         for (Record r : recordList) {
-            if (predicate.test(r)) {
-                addRecordToMap(r);
-                updateTotals(r);
-            }
+            addRecordToMap(r);
+            updateTotals(r);
         }
     }
 
