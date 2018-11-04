@@ -17,10 +17,10 @@ public class OtherListPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         Set<Friend> otherList = currentUser.getFriends();
+        if (currentUser.getName().equals(person.getName())) {
+            return false;
+        }
         for (Friend other : otherList) {
-            if (currentUser.getName().equals(person.getName())) {
-                return false;
-            }
             if (person.getName().equals(other.getFriendName())) {
                 return false;
             }

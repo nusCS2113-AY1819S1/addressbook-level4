@@ -17,10 +17,10 @@ public class FriendListPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         Set<Friend> friendList = currentUser.getFriends();
+        if (currentUser.getName().equals(person.getName())) {
+            return false;
+        }
         for (Friend friend : friendList) {
-            if (currentUser.getName().equals(person.getName())) {
-                return false;
-            }
             if (person.getName().equals(friend.getFriendName())) {
                 return true;
             }
