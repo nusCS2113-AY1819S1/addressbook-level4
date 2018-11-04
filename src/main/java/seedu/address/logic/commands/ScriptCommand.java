@@ -55,11 +55,11 @@ public class ScriptCommand extends Command {
         requireNonNull(model);
         String multCommandError;
         String scriptFolderLocation = model.getScriptFolderLocation();
-        Path ScriptPath = FileUtil.getPath(projectLocation + scriptFolderLocation + textFileName);
+        Path scriptPath = FileUtil.getPath(projectLocation + scriptFolderLocation + textFileName);
 
         AddressBookParser scriptParser = new AddressBookParser();
         try {
-            List<String> commandArguments = FileUtil.readEachLineFromFile(ScriptPath);
+            List<String> commandArguments = FileUtil.readEachLineFromFile(scriptPath);
             commandArguments.replaceAll(s -> commandType + SPACE + s);
             multCommandError = executeMultipleCommand(scriptParser, commandArguments, model, history);
         } catch (IOException ioe) {

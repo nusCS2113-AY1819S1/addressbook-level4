@@ -197,7 +197,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public String getScriptFolderLocation() {
-       return scriptFolderLocation;
+        return scriptFolderLocation;
     }
 
     @Override
