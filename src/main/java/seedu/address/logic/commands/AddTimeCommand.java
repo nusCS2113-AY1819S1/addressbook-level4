@@ -11,6 +11,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.TimeSlot;
 import seedu.address.model.person.TimeTable;
 import seedu.address.model.person.exceptions.TimeSlotOverlapException;
+import seedu.address.security.SecurityAuthenticationException;
 
 /**
  * Adds a {@code TimeSlot} to the {@code TimeTable} of person at {@code Index index}
@@ -39,8 +40,13 @@ public class AddTimeCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history)
+            throws CommandException, SecurityAuthenticationException {
         requireNonNull(model);
+
+        if (model.getUser() == null) {
+            throw new SecurityAuthenticationException();
+        }
 
         Person personToEdit = model.getUser();
         Person editedPerson;

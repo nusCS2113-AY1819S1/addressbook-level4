@@ -13,6 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.User;
 import seedu.address.model.person.DeconflictTimeTable;
 import seedu.address.model.person.Person;
+import seedu.address.security.SecurityAuthenticationException;
 
 /**
  * Selects a person identified using it's displayed index from the address book.
@@ -36,8 +37,13 @@ public class FreeCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history)
+            throws CommandException, SecurityAuthenticationException {
         requireNonNull(model);
+
+        if (model.getUser() == null) {
+            throw new SecurityAuthenticationException();
+        }
 
         User user = model.getUser();
         List<Person> friendList = model.getFriendList(user);

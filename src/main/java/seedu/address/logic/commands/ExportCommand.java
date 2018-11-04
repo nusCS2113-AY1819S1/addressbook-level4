@@ -11,6 +11,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.TimeTable;
+import seedu.address.security.SecurityAuthenticationException;
 
 /**
  * Export a timetable as a .ICS file to a user-specified filePath.
@@ -47,8 +48,13 @@ public class ExportCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history)
+            throws CommandException, SecurityAuthenticationException {
         requireNonNull(model);
+
+        if (model.getUser() == null) {
+            throw new SecurityAuthenticationException();
+        }
 
         TimeTable timeTable;
         timeTable = model.getTimeTable();

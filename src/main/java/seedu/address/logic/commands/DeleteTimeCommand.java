@@ -12,6 +12,7 @@ import seedu.address.model.person.TimeSlot;
 import seedu.address.model.person.TimeTable;
 import seedu.address.model.person.exceptions.TimeSlotDoesNotExistException;
 import seedu.address.model.person.exceptions.TimeSlotOverlapException;
+import seedu.address.security.SecurityAuthenticationException;
 
 /**
  * Deletes a {@code TimeSlot} from the {@code TimeTable} of person at {@code Index index}
@@ -40,8 +41,13 @@ public class DeleteTimeCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history)
+            throws CommandException, SecurityAuthenticationException {
         requireNonNull(model);
+
+        if (model.getUser() == null) {
+            throw new SecurityAuthenticationException();
+        }
 
         Person personToEdit = model.getUser();
         Person editedPerson;

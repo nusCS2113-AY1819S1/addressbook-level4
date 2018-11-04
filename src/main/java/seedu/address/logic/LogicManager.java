@@ -32,8 +32,8 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public CommandResult execute(String commandText) throws CommandException, ParseException,
-            SecurityAuthenticationException {
+    public CommandResult execute(String commandText)
+            throws CommandException, ParseException, SecurityAuthenticationException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
             Command command = addressBookParser.parseCommand(commandText);

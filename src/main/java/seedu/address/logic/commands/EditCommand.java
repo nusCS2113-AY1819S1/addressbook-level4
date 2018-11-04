@@ -28,6 +28,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TimeTable;
 import seedu.address.model.tag.Tag;
+import seedu.address.security.SecurityAuthenticationException;
 
 
 /**
@@ -71,8 +72,14 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history)
+            throws CommandException, SecurityAuthenticationException {
         requireNonNull(model);
+
+        if (model.getUser() == null) {
+            throw new SecurityAuthenticationException();
+        }
+
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {

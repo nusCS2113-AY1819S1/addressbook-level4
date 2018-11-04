@@ -49,6 +49,7 @@ public class ModelManager extends ComponentManager implements Model {
         otherList = new FilteredList<>(versionedAddressBook.getPersonList());
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         timeTable = new TimeTable();
+        user = null;
     }
 
     public ModelManager() {

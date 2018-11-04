@@ -152,7 +152,7 @@ public class MainWindow extends UiPart<Stage> {
      * Enables Security CLI
      */
     public void fillSecurityCommandBox() {
-        SecurityBox commandBox = new SecurityBox(security);
+        CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().clear();
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
