@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.commons.core.StatisticCenter;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.BookInventory;
 import seedu.address.model.Model;
@@ -21,6 +22,7 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.resetData(new BookInventory());
+        StatisticCenter.getInstance().resetData();
         model.commitBookInventory();
         return new CommandResult(MESSAGE_SUCCESS);
     }
