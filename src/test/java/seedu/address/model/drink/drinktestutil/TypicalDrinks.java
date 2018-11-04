@@ -48,13 +48,6 @@ public class TypicalDrinks {
             .withQuantity("20")
             .withTags("Tea").build();
 
-
-//    // Manually added
-//    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-//            .withEmail("stefan@example.com").withAddress("little india").build();
-//    public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
-//            .withEmail("hans@example.com").withAddress("chicago ave").build();
-
     // Manually added - Drink's details found in {@code CommandTestUtil}
     public static final Drink COKE = new DrinkBuilder().withName(VALID_DRINK_NAME)
             .withCostPrice(VALID_DRINK_COST_PRICE)

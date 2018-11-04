@@ -11,6 +11,9 @@ import seedu.address.model.drink.UniqueBatchList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
+/**
+ * A utility class to help with building Drink objects.
+ */
 public class DrinkBuilder {
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_COST_PRICE = "1.00";
