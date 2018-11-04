@@ -32,7 +32,8 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
 
-    private static final Pattern LAST_WORD_REGEX = Pattern.compile("(?<lastWord>\\S+\\s*$)");
+    private static final Pattern LAST_WORD_REGEX =
+            Pattern.compile("(?<previousWord>(\\S*\\s+)*)(?<lastWord>\\S+\\s*$)");
     private static KeyCode previousKeyPressed;
     private static String lastWord;
     private static int index;
@@ -54,27 +55,32 @@ public class CommandBox extends UiPart<Region> {
                 event.consume();
 
                 if (!commandTextField.getText().trim().isEmpty()) {
-                    String str = commandTextField.getText();
-                    String[] commandWords = str.trim().split("\\s+");
+                    String commandWord = commandTextField.getText();
 
-                    if (previousKeyPressed != KeyCode.TAB && commandWords.length <= 2) {
-                        Matcher matcher = LAST_WORD_REGEX.matcher(str);
-                        if (matcher.find()) {
+                    String[] previousWords = new String[0];
+                    Matcher matcher = LAST_WORD_REGEX.matcher(commandWord);
+                    if (matcher.find()) {
+                        String previous = matcher.group("previousWord");
+                        if (!previous.trim().isEmpty()) {
+                            previousWords = previous.trim().split("\\s+");
+                        }
+
+                        if (previousKeyPressed != KeyCode.TAB) {
                             lastWord = matcher.group("lastWord");
                         }
                     }
 
-                    List<String> matches = null;
-                    if (commandWords.length == 1) {
+                    List<String> matches;
+                    if (previousWords.length == 0) {
                         matches = FIRST_COMMAND_KEYWORDS.stream()
                                 .filter(words -> words.indexOf(lastWord) == 0).collect(Collectors.toList());
-                    } else if (commandWords.length == 2) {
+                    } else {
                         matches = SECOND_COMMAND_KEYWORDS.stream()
                                 .filter(words -> words.indexOf(lastWord) == 0).collect(Collectors.toList());
                     }
 
                     String wordToAppend;
-                    if (matches != null && matches.size() >= 1) {
+                    if (matches.size() >= 1) {
                         if (previousKeyPressed == KeyCode.TAB && !lastWord.isEmpty()) {
                             index = (index + 1) % matches.size();
                             wordToAppend = matches.get(index).replace(lastWord, "");
