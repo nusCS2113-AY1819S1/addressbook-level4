@@ -538,8 +538,8 @@ Shows available commands with brief description of what a stock taker can do.
 Format: `help`
 
 ==== Increase stock of a drink: `buy`
-Records purchase of a drink.
-	Format: `buy n/DRINK_NAME q/QUANTITY_PURCHASED`
+Records purchase of a drink. +
+	Format: `buy n/DRINK_NAME q/QUANTITY_PURCHASED` +
 Examples:
 
 * `buy n/coca cola q/12`
