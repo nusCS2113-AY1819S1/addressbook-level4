@@ -16,7 +16,6 @@ import seedu.planner.model.record.Limit;
  */
 public class EditLimitCommand extends Command {
     public static final String COMMAND_WORD = "editlimit";
-    public static final String COMMAND_WORD_UNDERSCORE = "edit_limit";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edit an existing limit according to the dates. "
             + "Parameters: "
             + PREFIX_DATE + "DATE_START " + "DATE_END "
