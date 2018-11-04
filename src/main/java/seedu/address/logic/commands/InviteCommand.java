@@ -58,6 +58,7 @@ public class InviteCommand extends Command {
 
         String personName = person.getName().toString();
         String personEmail = person.getEmail().toString();
+        String eventName = event.getEventName().toString();
 
         if (!event.isAttendeeEmpty() && event.hasAttendee(personEmail)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -72,7 +73,7 @@ public class InviteCommand extends Command {
         model.updateEvent(event, updatedEvent);
         model.commitEventList();
 
-        return new CommandResult(String.format(MESSAGE_INVITE_PERSON_SUCCESS, personName, event.getEventName()));
+        return new CommandResult(String.format(MESSAGE_INVITE_PERSON_SUCCESS, personName, eventName));
     }
 
 

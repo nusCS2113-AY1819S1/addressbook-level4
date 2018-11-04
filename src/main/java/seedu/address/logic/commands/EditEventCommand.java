@@ -11,6 +11,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -18,6 +19,8 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Attendees;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.EndTime;
@@ -50,8 +53,8 @@ public class EditEventCommand extends Command {
 
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_EVENT
-            = "The edited location has been booked for another event at the selected time.";
+    public static final String MESSAGE_DUPLICATE_EVENT =
+            "The edited location has been booked for another event at the selected time.";
     public static final String MESSAGE_EVENT_CLASH = "The updated time will result in clash with %1$s's schedule.";
 
     private final Index index;
@@ -109,12 +112,14 @@ public class EditEventCommand extends Command {
         }
 
         //TODO: Write tests for EditEvent
+
         /*
-        Model modelDummy = model;
+        Model modelDummy = new ModelManager(model.getAddressBook(), model.getEventList(), new UserPrefs());
         modelDummy.deleteEvent(eventToEdit);
-        for (String personName: editedEvent.getAttendees().getAttendeesSet()) {
-            if (modelDummy.hasClash(editedEvent, personName)) {
-                throw new CommandException(String.format(MESSAGE_EVENT_CLASH, personName));
+        Set<String> attendeeSet = editedEvent.getAttendees().getAttendeesSet();
+        for (String personEmail: attendeeSet) {
+            if (modelDummy.hasClash(editedEvent, personEmail)) {
+                throw new CommandException(String.format(MESSAGE_EVENT_CLASH, personEmail));
             }
         } */
 

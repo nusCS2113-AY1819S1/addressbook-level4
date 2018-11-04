@@ -36,7 +36,6 @@ public class RemoveCommandTest {
     public void execute_validIndexUnfilteredList_success() {
         Person personChosen = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Event eventChosen = model.getFilteredEventList().get(INDEX_THIRD_EVENT.getZeroBased());
-        String personName = personChosen.getName().toString();
         String personEmail = personChosen.getEmail().toString();
 
         RemoveCommand removeCommand = new RemoveCommand(INDEX_FIRST_PERSON, INDEX_THIRD_EVENT);

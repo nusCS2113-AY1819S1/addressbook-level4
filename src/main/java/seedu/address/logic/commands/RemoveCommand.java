@@ -59,6 +59,7 @@ public class RemoveCommand extends Command {
 
         String personName = person.getName().toString();
         String personEmail = person.getEmail().toString();
+        String eventName = event.getEventName().toString();
 
         if (event.isAttendeeEmpty()) {
             throw new CommandException(MESSAGE_ATTENDEE_EMPTY);
@@ -71,7 +72,7 @@ public class RemoveCommand extends Command {
         model.updateEvent(event, updatedEvent);
         model.commitEventList();
 
-        return new CommandResult(String.format(MESSAGE_REMOVE_PERSON_SUCCESS, personName, event.getEventName()));
+        return new CommandResult(String.format(MESSAGE_REMOVE_PERSON_SUCCESS, personName, eventName));
     }
 
 
