@@ -34,7 +34,8 @@ public class StorageManagerTest {
     public void setUp() {
         XmlStockListStorage stockListStorage = new XmlStockListStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(stockListStorage, userPrefsStorage);
+        XmlAccountListStorage accountListStorage = new XmlAccountListStorage(getTempFilePath("ac"));
+        storageManager = new StorageManager(stockListStorage, userPrefsStorage, accountListStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -78,14 +79,15 @@ public class StorageManagerTest {
     public void handleStockListChangedEvent_exceptionThrown_eventRaised() {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlStockListStorageExceptionThrowingStub(Paths.get("dummy")),
-                                             new JsonUserPrefsStorage(Paths.get("dummy")));
+                                             new JsonUserPrefsStorage(Paths.get("dummy")),
+                new XmlAccountListStorageExceptionThrowingStub(Paths.get("dummy")));
         storage.handleStockListChangedEvent(new StockListChangedEvent(new StockList()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
 
 
     /**
-     * A Stub class to throw an exception when the save method is called
+     * A Stub class to throw an exception when the save method is called for the stock list
      */
     class XmlStockListStorageExceptionThrowingStub extends XmlStockListStorage {
 
@@ -96,6 +98,17 @@ public class StorageManagerTest {
         @Override
         public void saveStockList(ReadOnlyStockList stockList, Path filePath) throws IOException {
             throw new IOException("dummy exception");
+        }
+    }
+
+    /**
+     * A Stub class to throw an exception when the save method is called for the account list
+     * NEEDS WORK
+     */
+    class XmlAccountListStorageExceptionThrowingStub extends XmlAccountListStorage {
+
+        public XmlAccountListStorageExceptionThrowingStub(Path filePath) {
+            super(filePath);
         }
     }
 

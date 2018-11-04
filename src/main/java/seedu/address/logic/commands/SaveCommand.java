@@ -16,6 +16,8 @@ public class SaveCommand extends Command {
 
     public static final String MESSAGE_INVALID_FILE_NAME = "Invalid file name! \n%1$s";
 
+    public static final String MESSAGE_EMPTY_FILE_NAME = "No file name inputted! \n%1$s";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Saves current version of stock list "
             + "as an xml file with the specified file name.\n"
             + "Parameters: FILENAME \n"

@@ -233,6 +233,7 @@ task deployOfflineDocs(type: Copy) {
         include 'stylesheets/*'
         include 'images/*'
         include 'HelpWindow.html'
+        include 'template.xsl'
     }
 }
 

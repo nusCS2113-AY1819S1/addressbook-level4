@@ -13,6 +13,7 @@ public class UserPrefs {
 
     private GuiSettings guiSettings;
     private Path stockListFilePath = Paths.get("data" , "stocklist.xml");
+    private Path accountListFilePath = Paths.get("data" , "accountlist.xml");
 
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
@@ -32,6 +33,10 @@ public class UserPrefs {
 
     public Path getStockListFilePath() {
         return stockListFilePath;
+    }
+
+    public Path getAccountListFilePath() {
+        return accountListFilePath;
     }
 
     public void setStockListFilePath(Path stockListFilePath) {

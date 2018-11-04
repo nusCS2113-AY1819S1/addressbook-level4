@@ -55,7 +55,7 @@ public class XmlStockListStorage implements StockListStorage {
             return Optional.empty();
         }
 
-        XmlSerializableStockList xmlStockList = XmlFileStorage.loadDataFromSaveFile(filePath);
+        XmlSerializableStockList xmlStockList = XmlFileStorage.loadStockListDataFromSaveFile(filePath);
         try {
             return Optional.of(xmlStockList.toModelType());
         } catch (IllegalValueException ive) {
@@ -78,7 +78,7 @@ public class XmlStockListStorage implements StockListStorage {
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableStockList(stockList));
+        XmlFileStorage.saveStockListDataToFile(filePath, new XmlSerializableStockList(stockList));
     }
     //@@author kelvintankaiboon
     @Override
@@ -87,6 +87,6 @@ public class XmlStockListStorage implements StockListStorage {
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableStockList(stockList));
+        XmlFileStorage.saveStockListDataToFile(filePath, new XmlSerializableStockList(stockList));
     }
 }

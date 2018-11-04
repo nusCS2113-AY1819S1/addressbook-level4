@@ -21,6 +21,9 @@
 ``` java
     /** Saves the current version of the StockList */
     void saveStockList(String fileName);
+
+    /** Opens the .xml file indicated by user in the browser pane*/
+    void openStockList(String fileName);
 ```
 ###### \java\seedu\address\model\ModelManager.java
 ``` java
@@ -34,50 +37,15 @@
         indicateSaveStockListVersion(fileName);
     }
 
-    @Override
-    public boolean hasItem(Item item) {
-        requireNonNull(item);
-        return versionedStockList.hasItem(item);
+    /** Raises an event to indicate that OpenCommand has been called */
+    private void indicateOpenStockListVersion(String fileName) {
+        raise(new OpenStockListVersionEvent(versionedStockList, fileName));
     }
 
     @Override
-    public void deleteItem(Item target) {
-        versionedStockList.removeItem(target);
-        indicateStockListChanged();
+    public void openStockList(String fileName) {
+        indicateOpenStockListVersion(fileName);
     }
-
-    @Override
-    public void addItem(Item item) {
-        versionedStockList.addItem(item);
-        updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        indicateStockListChanged();
-    }
-
-    @Override
-    public void updateItem(Item target, Item editedItem) {
-        requireAllNonNull(target, editedItem);
-
-        versionedStockList.updateItem(target, editedItem);
-        indicateStockListChanged();
-    }
-
-    //=========== Filtered Item List Accessors =============================================================
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Item} backed by the internal list of
-     * {@code versionedStockList}
-     */
-    @Override
-    public ObservableList<Item> getFilteredItemList() {
-        return FXCollections.unmodifiableObservableList(filteredItems);
-    }
-
-    @Override
-    public void updateFilteredItemList(Predicate<Item> predicate) {
-        requireNonNull(predicate);
-        filteredItems.setPredicate(predicate);
-    }
-
 ```
 ###### \java\seedu\address\storage\StorageManager.java
 ``` java

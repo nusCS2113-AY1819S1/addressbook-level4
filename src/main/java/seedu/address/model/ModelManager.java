@@ -11,9 +11,11 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.AccountListChangedEvent;
 import seedu.address.commons.events.model.OpenStockListVersionEvent;
 import seedu.address.commons.events.model.SaveStockListVersionEvent;
 import seedu.address.commons.events.model.StockListChangedEvent;
+import seedu.address.model.account.Account;
 import seedu.address.model.item.Item;
 
 /**
@@ -24,11 +26,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedStockList versionedStockList;
     private final FilteredList<Item> filteredItems;
+    private final VersionedAccountList versionedAccountList;
+    private final FilteredList<Account> filteredAccounts;
 
     /**
      * Initializes a ModelManager with the given stockList and userPrefs.
      */
-    public ModelManager(ReadOnlyStockList stockList, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyStockList stockList, UserPrefs userPrefs, ReadOnlyAccountList accountList) {
         super();
         requireAllNonNull(stockList, userPrefs);
 
@@ -36,10 +40,15 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedStockList = new VersionedStockList(stockList);
         filteredItems = new FilteredList<>(versionedStockList.getItemList());
+
+        logger.fine("Initializing with account list: " + accountList);
+
+        versionedAccountList = new VersionedAccountList(accountList);
+        filteredAccounts = new FilteredList<>(versionedAccountList.getAccountList());
     }
 
     public ModelManager() {
-        this(new StockList(), new UserPrefs());
+        this(new StockList(), new UserPrefs(), new AccountList());
     }
 
     @Override
@@ -178,6 +187,68 @@ public class ModelManager extends ComponentManager implements Model {
         ModelManager other = (ModelManager) obj;
         return versionedStockList.equals(other.versionedStockList)
                 && filteredItems.equals(other.filteredItems);
+    }
+
+    //=========== Account List =============================================================
+
+    @Override
+    public void resetAccountData(ReadOnlyAccountList newData) {
+        versionedAccountList.resetData(newData);
+        indicateAccountListChanged();
+    }
+
+    @Override
+    public ReadOnlyAccountList getAccountList() {
+        return versionedAccountList;
+    }
+
+    /** Raises an event to indicate the model has changed */
+    private void indicateAccountListChanged() {
+        raise(new AccountListChangedEvent(versionedAccountList));
+    }
+
+    @Override
+    public boolean hasAccount(Account account) {
+        requireNonNull(account);
+        return versionedAccountList.hasAccount(account);
+    }
+
+    @Override
+    public void deleteAccount(Account target) {
+        versionedAccountList.removeAccount(target);
+        indicateAccountListChanged();
+    }
+
+    @Override
+    public void addAccount(Account account) {
+        versionedAccountList.addAccount(account);
+        updateFilteredAccountList(PREDICATE_SHOW_ALL_ACCOUNTS);
+        indicateAccountListChanged();
+    }
+
+    @Override
+    public void updateAccount(Account target, Account editedAccount) {
+        requireAllNonNull(target, editedAccount);
+
+        versionedAccountList.updateAccount(target, editedAccount);
+        indicateAccountListChanged();
+    }
+
+    //=========== Filtered Account List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Item} backed by the internal list of
+     * {@code versionedAccountList}
+     */
+    @Override
+    public ObservableList<Account> getFilteredAccountList() {
+        return FXCollections.unmodifiableObservableList(filteredAccounts);
+    }
+
+    @Override
+    public void updateFilteredAccountList(Predicate<Account> predicate) {
+        requireNonNull(predicate);
+        filteredAccounts.setPredicate(predicate);
     }
 
 }

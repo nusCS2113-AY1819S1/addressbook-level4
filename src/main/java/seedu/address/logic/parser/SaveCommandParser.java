@@ -17,6 +17,11 @@ public class SaveCommandParser implements Parser<SaveCommand> {
         try {
             String fileName = ParserUtil.parseFileName(args);
             fileName = fileName + ".xml";
+            if (fileName.equalsIgnoreCase(".xml")) {
+                throw new ParseException(
+                        String.format(SaveCommand.MESSAGE_EMPTY_FILE_NAME, SaveCommand.MESSAGE_USAGE)
+                );
+            }
             return new SaveCommand(fileName);
         } catch (ParseException pe) {
             throw new ParseException(

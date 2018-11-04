@@ -16,6 +16,10 @@ public class OpenCommand extends Command {
 
     public static final String MESSAGE_INVALID_FILE_NAME = "Invalid file name! \n%1$s";
 
+    public static final String MESSAGE_EMPTY_FILE_NAME = "No file name inputted! \n%1$s";
+
+    public static final String MESSAGE_FILE_NOT_EXIST = "No such file in directory! \n%1$s";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Opens specified .xml file version of stock list "
             + "\n"
             + "Parameters: FILENAME \n"

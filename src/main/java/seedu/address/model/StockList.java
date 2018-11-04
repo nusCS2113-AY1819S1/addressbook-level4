@@ -52,7 +52,6 @@ public class StockList implements ReadOnlyStockList {
      */
     public void resetData(ReadOnlyStockList newData) {
         requireNonNull(newData);
-
         setItems(newData.getItemList());
     }
 

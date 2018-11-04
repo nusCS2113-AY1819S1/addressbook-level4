@@ -22,8 +22,8 @@ public class LoginCommand extends Command {
             + PREFIX_USERNAME + "USERNAME "
             + PREFIX_PASSWORD + "PASSWORD\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_USERNAME + "jalil "
-            + PREFIX_PASSWORD + "dontworrybrother";
+            + PREFIX_USERNAME + "admin "
+            + PREFIX_PASSWORD + "admin";
 
     public static final String MESSAGE_SUCCESS = "Signed in: %1$s";
     public static final String MESSAGE_FAIL = "Wrong username/password. Try again";
@@ -44,7 +44,7 @@ public class LoginCommand extends Command {
         String password = toLogin.getPassword().toString();
 
         // NEEDS WORK
-        if (!(username.equals("admin")) || !(password.equals("faggot69"))) {
+        if (!(username.equals("admin")) || !(password.equals("admin"))) {
             throw new CommandException(MESSAGE_FAIL);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toLogin));
