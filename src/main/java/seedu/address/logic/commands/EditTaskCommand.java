@@ -106,7 +106,7 @@ public class EditTaskCommand extends Command implements CommandParser {
         PriorityLevel updatedPriority = editTaskDescriptor.getPriorityLevel().orElse(taskToEdit.getPriorityLevel());
         Integer updatedHours = editTaskDescriptor.getExpectedNumOfHours().orElse(taskToEdit.getExpectedNumOfHours());
 
-        return new Task(deadline, updatedTitle, updatedDescription, updatedModuleCode, updatedPriority, updatedHours);
+        return new Task(deadline, updatedModuleCode, updatedTitle, updatedDescription, updatedPriority, updatedHours);
     }
 
     @Override

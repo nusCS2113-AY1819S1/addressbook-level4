@@ -30,8 +30,8 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
     public EditTaskCommand parse(String userInput) throws ParseException {
         requireNonNull(userInput);
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_INDEX, PREFIX_TITLE,
-                PREFIX_DESCRIPTION, PREFIX_MODULE_CODE, PREFIX_PRIORITY, PREFIX_HOURS);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_INDEX, PREFIX_MODULE_CODE, PREFIX_TITLE,
+                PREFIX_DESCRIPTION, PREFIX_PRIORITY, PREFIX_HOURS);
 
         Index index;
 
@@ -43,15 +43,15 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
 
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
 
+        if (argMultimap.getValue(PREFIX_MODULE_CODE).isPresent()) {
+            editTaskDescriptor.setModuleCode(ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE)
+                    .get()));
+        }
         if (argMultimap.getValue(PREFIX_TITLE).isPresent()) {
             editTaskDescriptor.setTitle(ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get()));
         }
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
             editTaskDescriptor.setDescription(ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION)
-                    .get()));
-        }
-        if (argMultimap.getValue(PREFIX_MODULE_CODE).isPresent()) {
-            editTaskDescriptor.setModuleCode(ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE)
                     .get()));
         }
         if (argMultimap.getValue(PREFIX_PRIORITY).isPresent()) {
@@ -61,7 +61,6 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
         if (argMultimap.getValue(PREFIX_HOURS).isPresent()) {
             editTaskDescriptor.setExpectedNumOfHours(ParserUtil.parseHours(argMultimap.getValue(PREFIX_HOURS).get()));
         }
-
         if (!editTaskDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditTaskCommand.MESSAGE_NOT_EDITED);
         }
