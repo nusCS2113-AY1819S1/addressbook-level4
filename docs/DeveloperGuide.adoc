@@ -466,19 +466,26 @@ the event system in FinancialPlanner. The sequence diagram below details the pro
 
 image::StatisticUiSequenceDiagram.png[width="800"]
 
-When the event is caught by the listener in `MainWindow`, `MainWindow` looks through all children of the `MainWindow#mainUiPanelPlaceholder` and executes the hide function in them.
+* When the event is caught by the listener in `MainWindow`, `MainWindow` looks through all children of the `MainWindow#mainUiPanelPlaceholder` and executes the hide function in them.
 This will make all children hidden from view in the UI which ensures that the UI is displayed correctly.
+* As shown above, the function `StatsDisplayPanel#handleShowPieChartDataEvent` is called which will call the constructor of `MixedPieChartData`. The detailed execution details within this class is as shown in
+the activity diagram below.
+
+image::StatisticUiActivityDiagram.png[width="800"]
+
 The program flow is then as shown above where the `CategoryBreakdown` is created and instantiated with 2 lists, one being expenseLabelData and other being expenseLegendData.
 In the current implementation, whenever `stats` is called, 2 tabs will be created, one for total income and one for total expense. Thus, the same program sequence after construction for
-`CategoryBreakdown` is also repeated for total income, and the corresponding parameters would be incomeLabelData and incomeLegendData.
+`CategoryBreakdown` is also repeated for total income.
+
+The sequence diagram below details the program flow after the constructor of CategoryBreakdown class is called.
+
+image::StatisticUiDetailedSequenceDiagram.png[width="800"]
 
 [NOTE]
 Note that the CustomLegend class is located within the CustomPieChart class which inherits from the JavaFX PieChart class. This legend class can
 only be accessed within CustomPieChart for security purposes.
 
-The activity flow diagram below details the mechanism within the MixedPieChartDataList when its constructor is called.
-
-image::StatisticUiActivityDiagram.png[width="800"]
+==== Design Considerations
 
 // tag::findtag[]
 === Find records by tag feature

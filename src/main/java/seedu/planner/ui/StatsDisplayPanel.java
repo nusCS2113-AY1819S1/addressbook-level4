@@ -68,20 +68,22 @@ public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
     /** Creates the CategoryBreakdown object with the total expense and tag of each CategoryStatistic */
     private Node createTotalExpenseBreakdown(MixedPieChartDataList dataList) {
         if (dataList.isExpenseDataEmpty()) {
-            Label label = new Label(BREAKDOWN_ERROR_MESSAGE);
-            label.getStyleClass().add("label-bright");
-            return new AnchorPane(label);
+            return createPaneWIthErrorMsg();
         }
         return new CategoryBreakdown(dataList.getExpenseChartLabelData(), dataList.getExpenseChartLegendData(),
                 "Expense Breakdown for the period").getRoot();
     }
 
+    private Node createPaneWIthErrorMsg() {
+        Label label = new Label(BREAKDOWN_ERROR_MESSAGE);
+        label.getStyleClass().add("label-bright");
+        return new AnchorPane(label);
+    }
+
     /** Creates the CategoryBreakdown object with the total income and tag of each CategoryStatistic */
     private Node createTotalIncomeBreakdown(MixedPieChartDataList dataList) {
         if (dataList.isIncomeDataEmpty()) {
-            Label label = new Label(BREAKDOWN_ERROR_MESSAGE);
-            label.getStyleClass().add("label-bright");
-            return new AnchorPane(label);
+            return createPaneWIthErrorMsg();
         }
         return new CategoryBreakdown(dataList.getIncomeChartLabelData(), dataList.getIncomeChartLegendData(),
                 "Income Breakdown for the period").getRoot();
