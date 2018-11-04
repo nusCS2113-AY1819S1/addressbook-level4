@@ -1,7 +1,7 @@
 package seedu.planner.commons.util;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.planner.commons.util.DateUtil.compareMonth;
+import static seedu.planner.commons.util.CompareUtil.compareMonth;
 
 import org.junit.Test;
 
@@ -16,29 +16,36 @@ public class DateUtilTest {
 
     @Test
     public void compareMonth_year1LessThanYear2_returnEarlier() {
-        assertMonth1EarlierThanMonth2(compareMonth((new Month(monthNov, year2008)), new Month(monthApr, year2018)));
-        assertMonth1EarlierThanMonth2(compareMonth((new Month(monthApr, year2008)), new Month(monthApr, year2018)));
+        assertMonth1EarlierThanMonth2(compareMonth().compare((
+                new Month(monthNov, year2008)), new Month(monthApr, year2018)));
+        assertMonth1EarlierThanMonth2(compareMonth().compare((
+                new Month(monthApr, year2008)), new Month(monthApr, year2018)));
     }
 
     @Test
     public void compareMonth_year1EqualYear2Month1LessThanMonth2_returnEarlier() {
-        assertMonth1EarlierThanMonth2(compareMonth((new Month(monthApr, year2018)), new Month(monthNov, year2018)));
+        assertMonth1EarlierThanMonth2(compareMonth().compare((
+                new Month(monthApr, year2018)), new Month(monthNov, year2018)));
     }
 
     @Test
     public void compareMonth_year1EqualYear2Month1EqualMonth2_returnEqual() {
-        assertMonth1EqualMonth2(compareMonth((new Month(monthNov, year2018)), new Month(monthNov, year2018)));
+        assertMonth1EqualMonth2(compareMonth().compare((
+                new Month(monthNov, year2018)), new Month(monthNov, year2018)));
     }
 
     @Test
     public void compareMonth_year1MoreThanYear2_returnLater() {
-        assertMonth1LaterThanMonth2(compareMonth((new Month(monthApr, year2018)), new Month(monthNov, year2008)));
-        assertMonth1LaterThanMonth2(compareMonth((new Month(monthApr, year2018)), new Month(monthApr, year2008)));
+        assertMonth1LaterThanMonth2(compareMonth().compare((
+                new Month(monthApr, year2018)), new Month(monthNov, year2008)));
+        assertMonth1LaterThanMonth2(compareMonth().compare((
+                new Month(monthApr, year2018)), new Month(monthApr, year2008)));
     }
 
     @Test
     public void compareMonth_year1EqualYear2Month1MoreThanMonth2_returnLater() {
-        assertMonth1LaterThanMonth2(compareMonth(new Month(monthNov, year2018), new Month(monthApr, year2018)));
+        assertMonth1LaterThanMonth2(compareMonth().compare(
+                new Month(monthNov, year2018), new Month(monthApr, year2018)));
     }
 
     private void assertMonth1EarlierThanMonth2(int value) {
