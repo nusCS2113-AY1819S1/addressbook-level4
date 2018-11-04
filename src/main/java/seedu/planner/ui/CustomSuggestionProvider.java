@@ -17,8 +17,8 @@ import seedu.planner.logic.commands.AddLimitCommand;
 import seedu.planner.logic.commands.ArchiveCommand;
 import seedu.planner.logic.commands.CheckLimitCommand;
 import seedu.planner.logic.commands.ClearCommand;
-import seedu.planner.logic.commands.DeleteCommand;
 import seedu.planner.logic.commands.DeleteByDateCommand;
+import seedu.planner.logic.commands.DeleteCommand;
 import seedu.planner.logic.commands.DeleteLimitCommand;
 import seedu.planner.logic.commands.EditCommand;
 import seedu.planner.logic.commands.EditLimitCommand;
@@ -86,7 +86,7 @@ public class CustomSuggestionProvider {
     /**
      * This method is responsible for deciding which collection of Strings is to be used as the reference collection
      * for comparison to the input String by the user. It can autocomplete the command word or when a tag is expected
-     * of the user input.
+     * of the user input. It only predicts autocompletion based on the last word in the input.
      * @param userInput is the current word/substring to be automatically completed
      */
     public void updateSuggestions(String userInput) {
@@ -116,7 +116,7 @@ public class CustomSuggestionProvider {
         } else if (inputs[0].equals(FindTagCommand.COMMAND_WORD) && inputs.length > 1) {
             updateSuggestions(tagKeywordsMap.keySet());
         } else if (possibleTagKeywordsSet.contains(inputs[0]) && inputs[inputs.length - 1]
-                .startsWith(PREFIX_TAG.getPrefix()) ) {
+                .startsWith(PREFIX_TAG.getPrefix())) {
             updateSuggestions(tagKeywordsMap.keySet());
         } else if (commandKeywordsSet.contains(inputs[0]) || inputs.length > 1) {
             updateSuggestions(emptySet);

@@ -34,12 +34,12 @@ public class NewAutoCompletionBinding<T> {
     private boolean ignoreInputChanges = false;
 
     private String prevText = "";
-    private final StringConverter<T> converter;
+    private final StringConverter<T> converter = defaultStringConverter();
 
     /**
-     * This listener observes if there is a change in the text in the command box.
+     * This listener observes if there is a change in the text in the command box
+     * and extracts the last word of the input that is to be autocompleted.
      */
-
     private final ChangeListener<String> textChangedListener = (obs, oldText, newText) -> {
         int index;
         for (index = newText.length() - 1; index >= 0 && !Character.isWhitespace(newText.charAt(index)); index--);
@@ -70,17 +70,13 @@ public class NewAutoCompletionBinding<T> {
 
     /**
      * Creates a new NewAutoCompletionBinding
-     *
      * @param completionTarget The target node to which auto-completion shall be added
-     * @param converter The converter to be used to convert suggestions to strings
      */
 
-    protected NewAutoCompletionBinding(Node completionTarget,
-                                       StringConverter<T> converter) {
+    public NewAutoCompletionBinding(Node completionTarget) {
 
         this.completionTarget = completionTarget;
         this.autoCompletionPopup = new AutoCompletePopup<>();
-        this.converter = converter;
         this.autoCompletionPopup.setConverter(converter);
 
         autoCompletionPopup.setStyle("-fx-control-inner-background:black;"
@@ -98,12 +94,9 @@ public class NewAutoCompletionBinding<T> {
             }
         });
 
+        getCompletionTarget().caretPositionProperty().addListener(caretChangedListener);
         getCompletionTarget().textProperty().addListener(textChangedListener);
         getCompletionTarget().focusedProperty().addListener(focusChangedListener);
-    }
-
-    public NewAutoCompletionBinding(TextField textField) {
-        this(textField, defaultStringConverter());
     }
 
     /**
@@ -142,8 +135,9 @@ public class NewAutoCompletionBinding<T> {
     }
 
     /**
-     * Set the current text the user has entered
-     * @param userText
+     * Updates the current text input by the user.
+     * @param newText is the last word in the input to be autocompleted
+     * @param userText is the entire string input
      */
     public final void setUserInput(String newText, String userText) {
         if (!isIgnoreInputChanges()) {
@@ -161,9 +155,10 @@ public class NewAutoCompletionBinding<T> {
     }
 
     /**
-     * Disposes the binding.
+     * Disposes the binding for listeners.
      */
     public void dispose() {
+        getCompletionTarget().caretPositionProperty().removeListener(caretChangedListener);
         getCompletionTarget().textProperty().removeListener(textChangedListener);
         getCompletionTarget().focusedProperty().removeListener(focusChangedListener);
     }
