@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.MAX_HOURS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
@@ -71,12 +70,6 @@ public class CompleteTaskCommandTest {
     public void execute_taskCompletedZeroHours_throwsCommandException() {
         CompleteTaskCommand completeTaskCommand = new CompleteTaskCommand(INDEX_FIRST_TASK, 0);
         assertCommandFailure(completeTaskCommand, model, commandHistory, Messages.MESSAGE_ZERO_HOURS_COMPLETION);
-    }
-
-    @Test
-    public void execute_taskCompletedMaxHours_throwsCommandException() {
-        CompleteTaskCommand completeTaskCommand = new CompleteTaskCommand(INDEX_FIRST_TASK, MAX_HOURS);
-        assertCommandFailure(completeTaskCommand, model, commandHistory, Messages.MESSAGE_MAX_HOURS);
     }
 
     @Test

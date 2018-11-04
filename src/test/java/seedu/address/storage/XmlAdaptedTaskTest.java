@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MODULE_CODE;
 import static seedu.address.storage.XmlAdaptedTask.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.TypicalTasks.CS2102_HOMEWORK;
 
@@ -8,6 +9,7 @@ import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.task.Deadline;
+import seedu.address.model.task.ModuleCode;
 import seedu.address.model.task.PriorityLevel;
 import seedu.address.testutil.Assert;
 
@@ -67,6 +69,15 @@ public class XmlAdaptedTaskTest {
                 VALID_DESCRIPTION, null, VALID_EXPECTED_NUM_OF_HOURS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, PriorityLevel.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidModuleCode_throwsIllegalValueException() {
+        XmlAdaptedTask task =
+                new XmlAdaptedTask(VALID_DEADLINE, INVALID_MODULE_CODE, VALID_TITLE, VALID_DESCRIPTION,
+                        VALID_PRIORITY_LEVEL, VALID_EXPECTED_NUM_OF_HOURS);
+        String expectedMessage = ModuleCode.MESSAGE_MODULE_CODE_CONSTRAINTS;
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
 
     @Test

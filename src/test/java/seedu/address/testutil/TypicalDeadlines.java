@@ -1,24 +1,8 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DAY_AND_MONTH_0;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DAY_FOR_COMMON_YEAR_FEB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DAY_FOR_LEAP_YEAR_FEB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DAY_FOR_MONTHS_WITH_30_DAYS;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DAY_FOR_MONTHS_WITH_31_DAYS;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_MONTH_13;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_YEAR_10000;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_YEAR_PASSED_2017;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DAY_1;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DAY_FOR_FEB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DAY_FOR_LEAP_YEAR_FEB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DAY_FOR_MONTHS_WITH_30_DAYS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DAY_FOR_MONTHS_WITH_31_DAYS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MONTH_APR;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MONTH_FEB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MONTH_JAN;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_YEAR_2018;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_YEAR_2020;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_YEAR_9999;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTH;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
 import seedu.address.model.task.Deadline;
 
@@ -27,6 +11,34 @@ import seedu.address.model.task.Deadline;
  * A utility class containing a list of {@code Deadline} objects to be used in tests.
  */
 public class TypicalDeadlines {
+
+    public static final String INVALID_DAY_AND_MONTH_0 = "0";
+    public static final String VALID_DAY_1 = "1";
+    public static final String VALID_DAY_FOR_FEB = "28";
+    public static final String VALID_DAY_FOR_LEAP_YEAR_FEB = "29";
+    public static final String INVALID_DAY_FOR_COMMON_YEAR_FEB = "29";
+    public static final String INVALID_DAY_FOR_LEAP_YEAR_FEB = "30";
+    public static final String VALID_DAY_FOR_MONTHS_WITH_30_DAYS = "30";
+    public static final String VALID_DAY_FOR_MONTHS_WITH_31_DAYS = "31";
+    public static final String INVALID_DAY_FOR_MONTHS_WITH_30_DAYS = "31";
+    public static final String INVALID_DAY_FOR_MONTHS_WITH_31_DAYS = "32";
+    public static final String VALID_MONTH_JAN = "1";
+    public static final String VALID_MONTH_FEB = "2";
+    public static final String VALID_MONTH_APR = "4";
+    public static final String INVALID_MONTH_13 = "13";
+    public static final String VALID_YEAR_2018 = "2018";
+    public static final String VALID_YEAR_2020 = "2020";
+    public static final String VALID_YEAR_9999 = "9999";
+    public static final String INVALID_YEAR_PASSED_2017 = "2017";
+    public static final String INVALID_YEAR_10000 = "10000";
+
+    public static final String DAY_DESC_1 = " " + PREFIX_DAY + "1";
+    public static final String DAY_DESC_2 = " " + PREFIX_DAY + "2";
+    public static final String MONTH_DESC_1 = " " + PREFIX_MONTH + "1";
+    public static final String MONTH_DESC_2 = " " + PREFIX_MONTH + "2";
+    public static final String YEAR_DESC_2018 = " " + PREFIX_YEAR + "2018";
+    public static final String YEAR_DESC_2019 = " " + PREFIX_YEAR + "2019";
+
     // For day validity testing
     public static final Deadline INVALID_0_JAN_2018 = new DeadlineBuilder().withDay(INVALID_DAY_AND_MONTH_0)
             .withMonth(VALID_MONTH_JAN).withYear(VALID_YEAR_2018).build();

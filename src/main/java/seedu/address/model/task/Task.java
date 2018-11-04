@@ -11,7 +11,7 @@ import java.util.Set;
  */
 public class Task {
 
-    //private static final String PLACEHOLDER_MODULECODE = "A2113";
+    //private static final Logger logger = LogsCenter.getLogger(Task.class);
     private Deadline deadline;
     private ModuleCode moduleCode;
     private final String title;
