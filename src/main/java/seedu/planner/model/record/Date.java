@@ -15,14 +15,14 @@ import seedu.planner.commons.util.DateUtil;
 public class Date {
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Date parameter should be in the format of dd-mm-yyyy "
-            + "with dd and mm being 2 digits, and yyyy being 4 digits."
-            + " Please take note that inappropriate date will result in errors, for example: 30/02/2018";
+                    + "with dd and mm being 2 digits, and yyyy being 4 digits."
+                    + " Please take note that inappropriate date will result in errors, for example: 30/02/2018";
     public static final String MESSAGE_DATE_LOGICAL_CONSTRAINTS =
             "Date should follow the modern calendar. "
-            + "Day parameter must fit within the constraints of each month. \n"
-            + "For e.g, February has only 28 days for the non-Leap year "
-            + "so the day parameter must be less than or equal to 28 if the month "
-            + "parameter is 2.";
+                    + "Day parameter must fit within the constraints of each month. \n"
+                    + "For e.g, February has only 28 days for the non-Leap year "
+                    + "so the day parameter must be less than or equal to 28 if the month "
+                    + "parameter is 2.";
     public static final String DATE_VALIDATION_REGEX = "\\d{1,2}-\\d{1,2}-\\d{4}";
 
     public final String value;
@@ -43,7 +43,7 @@ public class Date {
         checkArgument(isValidDateFormat(date), MESSAGE_DATE_CONSTRAINTS);
         splitDate(date);
         value = getStandardValue();
-        checkArgument(DateUtil.isValidDate(day, month), MESSAGE_DATE_LOGICAL_CONSTRAINTS);
+        checkArgument(DateUtil.isValidDate(day, month, year), MESSAGE_DATE_LOGICAL_CONSTRAINTS);
     }
 
     /**
@@ -89,108 +89,8 @@ public class Date {
         year = Integer.parseInt(dateParams[2]);
     }
 
-
-    /**
-     * Returns true if a given string is in a valid date format.
-     */
-    public static boolean isValidDate (String test) {
-        if (test.matches(DATE_VALIDATION_REGEX)) {
-            String[] dateParams = test.split("-");
-            int day = Integer.parseInt(dateParams[0]);
-            int month = Integer.parseInt(dateParams[1]);
-            int year = Integer.parseInt(dateParams[2]);
-            if (day <= 0 || day > 31 || month <= 0 || month > 12 || year <= 0) {
-                return false;
-            } else if (month == 2 || month == 4 || month == 6 || month == 9 || month == 11) {
-                if (day <= 30) {
-                    return month != 2 || day <= 28 || !isLeapYear(year);
-                }
-            } else {
-                return false;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Checks if the year is Leap Year or not.
-     * @param year
-     * @return the result whether the year is Leap year.
-     */
-    public static boolean isLeapYear (int year) {
-        if (year % 400 == 0) {
-            return true;
-        } else if (year % 100 == 0) {
-            return false;
-        } else {
-            return year % 4 == 0;
-        }
-    }
-
     public static boolean isValidDateFormat(String test) {
         return test.matches(DATE_VALIDATION_REGEX);
-    }
-
-    /**
-     * Checks whether the current object {@code Date} is later than the given {@code Date}
-     * @param other
-     * @return True if date is later and False if date is earlier
-     */
-    public boolean isLaterThan(Date other) {
-        if (this.year > other.getYear()) {
-            return true;
-        } else if (this.year == other.getYear()) {
-            if (this.month > other.getMonth()) {
-                return true;
-            } else if (this.month == other.getMonth()) {
-                return this.day > other.getDay();
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Checks whether the current object {@code Date} is earlier than the given {@code Date}
-     * @param other
-     * @return True if date is earlier and False if date is later
-     */
-    public boolean isEarlierThan(Date other) {
-        if (this.year < other.getYear()) {
-            return true;
-        } else if (this.year == other.getYear()) {
-            if (this.month < other.getMonth()) {
-                return true;
-            } else if (this.month == other.getMonth()) {
-                return this.day < other.getDay();
-            }
-        }
-        return false;
-    }
-    /**
-     * Compares whether the current object {@code Date} is earlier or later than the given {@code Date}
-     * @param other
-     * @return a positive value if date is later and negative value if date is earlier and zero if dates are the same
-     */
-    public int dateComparator(Date other) {
-        if (this.year < other.getYear()) {
-            return -1;
-        } else if (this.year == other.getYear()) {
-            if (this.month < other.getMonth()) {
-                return -1;
-            } else if (this.month == other.getMonth()) {
-                if (this.day < other.getDay()) {
-                    return -1;
-                } else if (this.day == other.getDay()) {
-                    return 0;
-                } else {
-                    return 1;
-                }
-            } else {
-                return 1;
-            }
-        } else {
-            return 1;
-        }
     }
 
     @Override
@@ -227,5 +127,4 @@ public class Date {
                 && month == ((Date) other).getMonth()
                 && year == ((Date) other).getYear()); // state check
     }
-
 }

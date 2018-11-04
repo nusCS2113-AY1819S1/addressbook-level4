@@ -17,10 +17,11 @@ import seedu.planner.model.record.Record;
  * Delete the records whose date is required.
  */
 public class DeleteCommandByDateEntry extends Command {
-    public static final String COMMAND_WORD = "delete_date";
+    public static final String COMMAND_WORD = "deletedate";
+    public static final String COMMAND_WORD_UNDERSCORE = "delete_date";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the all records identified by the date number used in the displayed record list.\n"
-            + "PARAMERERS: DATE (Must follow the format dd-mm-yyyy).\n"
+            + "PARAMETER: DATE (Must follow the format dd-mm-yyyy).\n"
             + "Example: "
             + COMMAND_WORD
             + " 31-03-1999";
@@ -43,9 +44,6 @@ public class DeleteCommandByDateEntry extends Command {
         List<Record> lastShownList = model.getFilteredRecordList();
         for (int i = lastShownList.size() - 1; i >= 0; i--) {
             Record targetRecord = lastShownList.get(i);
-            logger.info(String.format(
-                    "---------------------------------------------The date required is: %1$s, the date shown is %2$s\n",
-                    targetDate.getValue(), targetRecord.getDate().getValue()));
             if (targetRecord.isSameDateRecord(targetDate)) {
                 model.deleteRecord(targetRecord);
                 targetRecordExist = Boolean.TRUE;

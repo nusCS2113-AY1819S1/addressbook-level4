@@ -6,6 +6,7 @@
 :sectnums:
 :imagesDir: images
 :stylesDir: stylesheets
+:stylesheet: gh-pages.css
 :xrefstyle: full
 :experimental:
 ifdef::env-github[]
@@ -73,6 +74,7 @@ which can be used as `add n/Grocery shopping`.
 * `DATE` entered must also be a valid date, no fake dates e.g. 60-11-2018, 30-02-2018
 * `TAG` is completely optional and can be any alphanumerical word, but limited to only 1 whole word, no whitespaces are allowed.
 * `INDEX` *must be a positive integer* `1, 2, 3, ...`
+
 ====
 
 === Viewing help : `help`
@@ -143,6 +145,7 @@ Returns `dinner with family` and `family party`
 Returns all records having `family`, `food`, or `shopping` in their name
 
 [[findtag]]
+// tag::findtag[]
 === Locating records by tag: `findtag`
 
 Finds records with tags that match any of the given keywords. +
@@ -163,6 +166,7 @@ Examples:
 Returns any record tagged with `friend`
 * `findtag friend food shopping` +
 Returns all records having any of the tags `friend`, `food`, or `shopping`
+// end::findtag[]
 
 === Selecting a record : `select`
 
@@ -183,6 +187,8 @@ Selects the 2nd record in the expense book.
 `select 1` +
 Selects the 1st record in the results of the `find` command.
 
+
+// tag::sort[]
 [[sort]]
 === Sorting displayed records : `sort`
 
@@ -214,6 +220,7 @@ Sorts the list of records by name in ascending order.
 
 * `sort moneyflow desc` +
 Sorts the list of records by moneyflow in descending order.
+// end::sort[]
 
 === Editing a record : `edit`
 
@@ -254,6 +261,8 @@ Deletes the 2nd record in the expense book.
 `delete 1` +
 Deletes the 1st record in the results of the `find` command.
 
+// tag::delete_by_date_entry[]
+
 === Deleting records by date. `delete_date`
 
 Deletes the records with a specified date from the expense book. +
@@ -268,6 +277,8 @@ Examples:
 
 * `delete_date 31-7-2018` +
 Deletes the records with date 31-7-2018.
+
+// end::delete_by_date_entry[]
 
 === Listing entered commands : `history`
 
@@ -300,11 +311,6 @@ Examples:
 `list` +
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
-
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
 
 === Redoing the previously undone command : `redo`
 
@@ -382,9 +388,11 @@ more information on how the `findtag` works.
 
 === Auto Complete for Sort
 
+=== Showing a summary table of all financial activity in a given time: `summary`
 When the command word `sort` is entered, suggestion will display based on the possible keyword inputs for the sort function.
 
 Refer to <<sort>> for the sort function keywords.
+
 ====
 * When a `CATEGORY` has already been entered, the only possible suggestions are `asc` and `desc` as they are the only
 `SORT_ORDER possible.
@@ -393,6 +401,7 @@ Refer to <<sort>> for the sort function keywords.
 ====
 
 [[morefeatures]]
+
 == Data Analysis Features
 
 This section describe features for the user to analyse his/her financial status in greater detail.
@@ -459,24 +468,45 @@ Screenshot of app displaying expense breakdown when `stats d/1-1-2018 12-12-2018
 image::UiPieChartIncome.png[width="790"]
 Screenshot of app displaying income breakdown when `stats d/1-1-2018 12-12-2018` is run
 
+== Data management features:
+
+This section describe features for the user to manage his/her records data in the Financial Planner, with the help of Excel.
+
+// tag::export_excel[]
+
 === Export the records into the Excel file. `export_excel`
 
 Exports the records into an Excel file. +
 
 
-There are 3 modes, default mode, single argument mode and dual argument mode. +
+There are 6 modes, default mode, single argument mode and dual argument mode (for Date) and single argument mode (Directory Path). +
 Format: +
 
 * Default mode: `export_excel` +
-* Single argument mode: `export_excel DATE` +
-* Dual argument mode: `export_excel d/START_DATE END_DATE`
+* Single argument Date mode: `export_excel d/DATE` +
+* Dual argument Date mode: `export_excel d/START_DATE END_DATE`
+* Single argument Directory Path mode: `export_excel dir/DIRECTORY_PATH`
+* Single argument Directory Path + Single argument Date mode: `export_excel d/DATE dir/DIRECTORY_PATH`
+* Single argument Directory Path + Dual argument Date mode: `export_excel d/START_DATE END_DATE dir/DIRECTORY_PATH`
 
 ****
-* Default mode will list down all records in the Financial Planner and exports all of them to an Excel file.
-* Single argument mode will list down all records with the specified date and exports all shown records to an
-Excel file.
-* Dual argument mode will list down all records with the date that fall on either dates or between both dates and
-exports all shown records to an Excel file. +
+* *Default mode* will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically user's Home Directory*.
+
+* *Single argument Date mode* will list down all records with the specified date and exports all shown records to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically user's Home Directory*.
+
+* *Dual argument Date mode* will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically user's Home Directory*.
+
+* *Single argument Directory Path mode* will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the chosen Directory Path.
+
+* *Single argument Date mode + Single argument Directory path mode* will list down all records with the specified date and exports all shown records to an Excel file and store the file in the chosen Directory Path.
+
+* *Dual argument Date mode + Single argument Directory path mode* will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the chosen Directory Path.
++
+****
+
+****
+* Date follow the same configurations as date parameters required when adding records. It is in the form of *dd-mm-yyyy* where *dd* represents day, *mm* represents month and *yyyy* represents the year. *dd* and *mm* both require 1 to 2 digits while
+*yyyy* requires exactly 4 digits.
 ****
 
 Examples:
@@ -484,6 +514,144 @@ Examples:
 * `export_excel`
 * `export_excel d/31-3-1999`
 * `export_excel d/31-3-1999 31-03-2019`
+* `export_excel d/31-3-1999 dir/C:\`
+* `export_excel d/31-3-1999 31-3-2019 dir/C:\`
+
+The Excel file name will be named based on the command, relating to Date: +
+
+* *Default mode*: The Excel file will be named `Financial_Planner_ALL.xlsx`
+* *Single argument Date mode*: The Excel file will be named `Financial_Planner_dd-mm-yyyy.xlsx`
+* *Dual argument Date*: The Excel file will be named `Financial_Planner_dd-mm-yyyy_dd-mm-yyyy.xlsx`
++
+
+There will be two sheets in the Excel file, namely `RECORD DATA` and `SUMMARY DATA`.
+
+* `RECORD DATA` stores all the data of record the user want to export, there are 4 columns: Name, date, money and tags, the tags names will be separated by ..., for visual benefit.
+
+image::Export_Capture1_LinhChi.png[width:800]
+
+* `SUMMARY DATA` stored the summary statistics for the period you exported, and there is a *Line Chart* next to the table for visual statistic [refer to `Draw line chart` part for more information].
+** As you can see in the picture, there are 3 series shown:
+*** The first blue line named Series1 represents the Timeline (each component is one Date) versus the Income (each component is one income).
+*** The second orange line named Series2 represents the Timeline (each component is one Date) versus the Outcome (each component is one outcome).
+*** The third grey line named Series3 represents the Timeline (each component is one Date) versus the Net - Sum of income and outcome (each component is one net).
+
+image::Export_Capture2_LinhChi.png[width:800]
+
+As the size of the Chart is fixed initially. Sometimes, when user exports too many dates, the distance between each date on the chart might be tight. It is suggesting that the user justify the size of the chart by himself/herself.
+
+
+// end::export_excel[]
+
+// tag::import[]
+
+=== Import the records stored from the Excel file. `import`
+
+There are 2 modes, single argument File Path mode and (single argument Directory Path + single argument File Name) mode +
+
+Format: +
+
+* Single argument File Path mode: `import dir/FILE_PATH` +
+* Single argument File Path + single argument File name mode: `import dir/DIRECTORY_PATH  n/NAME_FILE` +
+
+****
+* *Single argument File Path mode* will open the Excel file using the given File Path, import all records in the Financial Planner and check if these records exist in the Financial Planner, then exports all of non-existent records to Financial Planner.
+
+* *Single argument File Path + single argument File name mode* will open the Excel file using the given Directory path and given file name, import all records in the Financial Planner and check if these records exist in the Financial Planner, then exports all of non-existent records to Financial Planner.
+
++
+****
+
+Examples:
+
+* `import dir/C:\Financial_Planner_ALL.xlsx`
+* `import dir/C:\ n/Financial_Planner_All.xlsx`
+
+Please note that User have to add the post-fix `.xlsx` at the end to indicate this is a Excel file.
+
+When performing `import` command to import all the records data from the Excel file to the Financial Planner, user should take note that there are some constraints which may help the `import` command performs smoothly.
+
+* The excel file can have multiple sheets, containing records data. The starting row of the table does not have to be first row of the sheet. This also applies to the column.
+* There can be blank row blending in the table, but there must be *no* blank column.
+* The First row of the table should have 4 cells, namely NAME, DATE, MONEY, TAGS. These 4 columns can be case-insensitive. The sheet with records data but does not have the first row, NAME, DATE, MONEY, TAGS will *not* be read.
+* The information of NAME, DATE, MONEY columns should be fully filled, while the TAGS columns is optionally filled.
+* Each tag should be separated by ... (3 *consecutive* dots). Beside ... , numbers and alphabet character, there should be no other character.
+
+
+The picture below shows a good example for the Excel Sheet.
+
+image::Export_Capture1_LinhChi.png[width:800]
+
+// end::import[]
+
+// tag::archive[]
+
+=== Archive the records into the Excel file. `archive`
+
+Archives the records into an Excel file. +
+
+There are 5 modes, default mode, single argument mode and dual argument mode (for Date) and single argument mode (Directory Path). +
+Format: +
+
+* Default mode: `archive` +
+* Single argument Date mode: `archive d/DATE` +
+* Dual argument Date mode: `archive d/START_DATE END_DATE`
+* Single argument Directory Path mode: `archive dir/DIRECTORY_PATH`
+* Single argument Directory Path + Single argument Date mode: `archive d/DATE dir/DIRECTORY_PATH`
+* Single argument Directory Path + Dual argument Date mode: `archive d/START_DATE END_DATE dir/DIRECTORY_PATH`
+
+****
+* *Default mode* will list down all records in the Financial Planner and archives all of them to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically user's Home Directory*. Then, the records stored in the Excel file will be deleted automatically in the Financial Planner.
+
+* *Single argument Date mode* will list down all records with the specified date and archives all shown records to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically user's Home Directory*.Then, the records stored in the Excel file will be deleted automatically in the Financial Planner.
+
+* *Dual argument Date mode* will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically user's Home Directory*.Then, the records stored in the Excel file will be deleted automatically in the Financial Planner.
+
+* *Single argument Directory Path mode* will list down all records in the Financial Planner and archives all of them to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in the Financial Planner.
+
+* *Single argument Date mode + Single argument Directory path mode* will list down all records with the specified date and archives all shown records to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in the Financial Planner.
+
+* *Dual argument Date mode + Single argument Directory path mode* will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in the Financial Planner.
++
+****
+
+****
+* Date follow the same configurations as date parameters required when adding records. It is in the form of *dd-mm-yyyy* where *dd* represents day, *mm* represents month and *yyyy* represents the year. *dd* and *mm* both require 1 to 2 digits while
+*yyyy* requires exactly 4 digits.
+****
+
+The Excel file name will be named based on the command, relating to Date: +
+
+* *Default mode*: The Excel file will be named `Financial_Planner_ALL.xlsx`
+* *Single argument Date mode*: The Excel file will be named `Financial_Planner_dd-mm-yyyy.xlsx`
+* *Dual argument Date*: The Excel file will be named `Financial_Planner_dd-mm-yyyy_dd-mm-yyyy.xlsx`
++
+
+Examples:
+
+* `archive`
+* `archive d/31-3-1999`
+* `archive d/31-3-1999 31-03-2019`
+* `archive d/31-3-1999 dir/C:\`
+* `archive d/31-3-1999 31-3-2019 dir/C:\`
+
+There will be two sheets in the Excel file, namely `RECORD DATA` and `SUMMARY DATA`.
+
+* `RECORD DATA` stores all the data of record the user want to archive, there are 4 columns: Name, date, money and tags, the tags names will be separated by ..., for visual benefit.
+
+image::Export_Capture1_LinhChi.png[width:800]
+
+* `SUMMARY DATA` stored the summary statistics for the period you archived, and there is a *Line Chart* next to the table for visual statistic [refer to `Draw line chart` part for more information].
+** As you can see in the picture, there are 3 series shown:
+*** The first blue line named Series1 represents the Timeline (each component is one Date) versus the Income (each component is one income).
+*** The second orange line named Series2 represents the Timeline (each component is one Date) versus the Outcome (each component is one outcome).
+*** The third grey line named Series3 represents the Timeline (each component is one Date) versus the Net - Sum of income and outcome (each component is one net).
+
+As the size of the Chart is fixed initially. Sometimes, when user archive too many dates, the distance between each date on the chart might be tight. It is suggesting that the user justify the size of the chart by himself/herself.
+
+image::Export_Capture2_LinhChi.png[width:800]
+
+// end::archive[]
 
 == Spending Limit Feature
 

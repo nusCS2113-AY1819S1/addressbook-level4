@@ -2,10 +2,10 @@ package seedu.planner.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.planner.logic.commands.LimitCommand.MESSAGE_BASIC_EARNED;
-import static seedu.planner.logic.commands.LimitCommand.MESSAGE_BASIC_SPEND;
-import static seedu.planner.logic.commands.LimitCommand.MESSAGE_EXCEED;
-import static seedu.planner.logic.commands.LimitCommand.MESSAGE_NOT_EXCEED;
+import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_BASIC_EARNED;
+import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_BASIC_SPEND;
+import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_EXCEED;
+import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_NOT_EXCEED;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -34,6 +34,7 @@ import seedu.planner.model.summary.CategoryStatisticsList;
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private static final int STARTING_ELEMENT = 0;
 
     private final VersionedFinancialPlanner versionedFinancialPlanner;
     private final FilteredList<Record> filteredRecords;
@@ -130,10 +131,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void deleteListRecord(List<Record> targetList) {
-        for (Record target : targetList) {
-            versionedFinancialPlanner.removeRecord(target);
-        }
+    public void deleteListRecord(List<Record> records) {
+        requireNonNull(records);
+        versionedFinancialPlanner.removeListRecord(records);
         indicateFinancialPlannerChanged();
     }
 
@@ -142,6 +142,21 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(record);
         versionedFinancialPlanner.addRecord(record);
         versionedFinancialPlanner.addRecordToTagMap(record);
+        updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
+        indicateFinancialPlannerChanged();
+        indicateTagMapChanged();
+    }
+
+    @Override
+    public void addListUniqueRecord(List<Record> records) {
+        requireNonNull(records);
+        for (Record record : records) {
+            if (hasRecord(record)) {
+                continue;
+            }
+            versionedFinancialPlanner.addRecord(record);
+            versionedFinancialPlanner.addRecordToTagMap(record);
+        }
         updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
         indicateFinancialPlannerChanged();
         indicateTagMapChanged();

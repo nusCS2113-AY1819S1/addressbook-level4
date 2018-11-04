@@ -9,7 +9,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.planner.commons.util.SortUtil;
+import seedu.planner.commons.util.CompareUtil;
 import seedu.planner.logic.commands.SortCommand;
 import seedu.planner.model.record.exceptions.DuplicateRecordException;
 import seedu.planner.model.record.exceptions.RecordNotFoundException;
@@ -81,6 +81,24 @@ public class UniqueRecordList implements Iterable<Record> {
         }
     }
 
+    /**
+     * Removes the equivalent records from the list.
+     * The record must exist in the list.
+     */
+    public void removeListRecord(List<Record> recordList) {
+        requireNonNull(recordList);
+        for (int i = internalList.size() - 1; i >= 0; i--) {
+            Record record = internalList.get(i);
+            if (recordList.contains(record)) {
+                remove(record);
+                recordList.remove(record);
+            }
+        }
+    }
+
+    /**
+     * Set the new UniqueRecordList.
+     */
     public void setRecords(UniqueRecordList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -109,26 +127,26 @@ public class UniqueRecordList implements Iterable<Record> {
 
         case SortCommand.CATEGORY_NAME:
             if (!ascending) {
-                internalList.sort(SortUtil.compareNameAttribute().reversed());
+                internalList.sort(CompareUtil.compareNameAttribute().reversed());
             } else {
-                internalList.sort(SortUtil.compareNameAttribute());
+                internalList.sort(CompareUtil.compareNameAttribute());
             }
             break;
 
         case SortCommand.CATEGORY_DATE:
             if (!ascending) {
-                internalList.sort(SortUtil.compareDateAttribute().reversed());
+                internalList.sort(CompareUtil.compareDateAttribute().reversed());
             } else {
-                internalList.sort(SortUtil.compareDateAttribute());
+                internalList.sort(CompareUtil.compareDateAttribute());
             }
             break;
 
         case SortCommand.CATEGORY_MONEYFLOW:
         case SortCommand.CATEGORY_MONEY:
             if (!ascending) {
-                internalList.sort(SortUtil.compareMoneyflowAttribute().reversed());
+                internalList.sort(CompareUtil.compareMoneyflowAttribute().reversed());
             } else {
-                internalList.sort(SortUtil.compareMoneyflowAttribute());
+                internalList.sort(CompareUtil.compareMoneyflowAttribute());
             }
             break;
 
