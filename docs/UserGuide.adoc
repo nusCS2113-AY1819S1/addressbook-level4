@@ -31,7 +31,7 @@ Inventarie Pro is for self employed business owners who *prefer to use a desktop
 .  Refer to <<Features>> for a detailed list of commands.
 
 +
-image::Ui.png[width="790"]
+image::UI2.png[width="790"]
 
 == Features
 
@@ -103,7 +103,7 @@ is not yet added. +
 
 Examples:
 
-* `addproduct n/G2 s/08382 d/Pilot Pens i/0.7 t/Stationary`
+* `addproduct n/G2 s/08382 d/Pilot Pens i/Use proper stift t/Stationary`
 * `addproduct n/Black Tea s/10041 d/Lim Siang i/175mg t/Beverages`
 
 ==== Search for a product: `findproduct`
