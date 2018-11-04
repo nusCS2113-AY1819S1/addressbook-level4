@@ -69,7 +69,7 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Raises an event to indicate the model has changed
      */
-    private void indicateInventoryListChanged() {
+    protected void indicateInventoryListChanged() {
         raise(new InventoryListChangedEvent(inventoryList));
     }
 

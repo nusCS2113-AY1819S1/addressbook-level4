@@ -29,7 +29,7 @@ public class BuyDrinkCommand extends Command {
             + PREFIX_QUANTITY + "QUANTITY IMPORTED \n"
             //+ PREFIX_PRICE + "TOTAL REVENUE "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_DRINK_NAME + "coca cola "
+            + PREFIX_DRINK_NAME + "Coca Cola Original "
             //+ PREFIX_DATE + "10/06/18 "
             + PREFIX_QUANTITY + "12 ";
     //+ PREFIX_PRICE + "345.68 ";
@@ -56,6 +56,7 @@ public class BuyDrinkCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireAllNonNull(model);
         assert model instanceof StockTakerModel;
+
         StockTakerModel stockTakerModel = (StockTakerModel) model;
         if (!stockTakerModel.hasDrink(drink)) {
             throw new CommandException(MESSAGE_DRINK_NOT_FOUND);
