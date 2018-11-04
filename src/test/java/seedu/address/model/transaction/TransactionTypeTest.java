@@ -16,8 +16,8 @@ public class TransactionTypeTest {
     }
 
     @Test
-    public void constructor_importLowerCase_returnImport() {
-        Assert.assertEquals(importType, TransactionType.valueOf("import".toUpperCase()));
+    public void constructor_purchaseLowerCase_returnPurchase() {
+        Assert.assertEquals(importType, TransactionType.valueOf("purchase".toUpperCase()));
     }
 
     @Test
