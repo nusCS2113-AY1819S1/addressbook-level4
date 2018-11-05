@@ -435,6 +435,7 @@ Examples:
 * `summary date d/1-1-2018 12-12-2018`
 * `summary month d/apr-2018 sep-2018`
 * `summary month d/APR-2018 SeP-2018`
+* `summary category d/1-1-2018 12-12-2018`
 
 The screenshots below are examples of what you can see once the command has been accepted.
 
@@ -801,7 +802,11 @@ e.g. `select 2`
 * *Undo* : `undo`
 * *Redo* : `redo`
 * *Summary* : `summary` +
-e.g. `summary d/20-12-2017 31-09-2018`
+e.g.
+. `summary date d/1-1-2018 12-12-2018`
+. `summary month d/apr-2018 sep-2018`
+. `summary month d/APR-2018 SeP-2018`
+. `summary category d/1-1-2018 12-12-2018`
 * *Finances Statistics* : `stats` +
 e.g. `stats d/20-12-2017 31-09-2018`
 * *Add limit* : `limit d/START_DATE END_DATE` +
