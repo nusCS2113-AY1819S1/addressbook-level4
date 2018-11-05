@@ -21,6 +21,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Loststatus;
 import seedu.address.model.item.Name;
 import seedu.address.model.item.Quantity;
 import seedu.address.model.tag.Tag;
@@ -97,10 +98,12 @@ public class EditCommand extends Command {
 
         Name updatedName = editItemDescriptor.getName().orElse(itemToEdit.getName());
         Quantity updatedQuantity = editItemDescriptor.getQuantity().orElse(itemToEdit.getQuantity());
+        Loststatus updatedLoststatus = new Loststatus(itemToEdit.getLoststatus().getLoststatusLost(),
+                updatedQuantity.toInteger() - itemToEdit.getLoststatus().getLoststatusLost());
         Quantity updatedMinQuantity = editItemDescriptor.getMinQuantity().orElse(itemToEdit.getMinQuantity());
         Set<Tag> updatedTags = editItemDescriptor.getTags().orElse(itemToEdit.getTags());
 
-        return new Item(updatedName, updatedQuantity, updatedMinQuantity, updatedTags);
+        return new Item(updatedName, updatedQuantity, updatedMinQuantity, updatedLoststatus, itemToEdit.getStatus(), updatedTags);
     }
 
     @Override
@@ -129,7 +132,7 @@ public class EditCommand extends Command {
         private Name name;
         private Quantity quantity;
         private Quantity minQuantity;
-        private List<Integer> loststatus;
+        //private Loststatus loststatus;
         private List<Integer> status;
         private Set<Tag> tags;
 
@@ -143,7 +146,6 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setQuantity(toCopy.quantity);
             setMinQuantity(toCopy.minQuantity);
-            setLoststatus(toCopy.loststatus);
             setStatus(toCopy.status);
             setTags(toCopy.tags);
         }
@@ -163,7 +165,8 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setQuantity(Quantity quantity) {
+        public void setQuantity(Quantity quantity)
+        {
             this.quantity = quantity;
         }
 
@@ -175,17 +178,7 @@ public class EditCommand extends Command {
             this.minQuantity = minQuantity;
         }
 
-        public Optional<Quantity> getMinQuantity() {
-            return Optional.ofNullable(minQuantity);
-        }
-
-        public void setLoststatus(List<Integer> loststatus) {
-            this.loststatus = (loststatus != null) ? new ArrayList<>(loststatus) : null;
-        }
-
-        public Optional<List<Integer>> getLoststatus() {
-            return (loststatus != null) ? Optional.of(Collections.unmodifiableList(loststatus)) : Optional.empty();
-        }
+        public Optional<Quantity> getMinQuantity() { return Optional.ofNullable(minQuantity); }
 
         public void setStatus(List<Integer> status) {
             this.status = (status != null) ? new ArrayList<>(status) : null;
@@ -230,7 +223,6 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getQuantity().equals(e.getQuantity())
                     && getMinQuantity().equals(e.getMinQuantity())
-                    && getLoststatus().equals(e.getLoststatus())
                     && getStatus().equals(e.getStatus())
                     && getTags().equals(e.getTags());
         }
