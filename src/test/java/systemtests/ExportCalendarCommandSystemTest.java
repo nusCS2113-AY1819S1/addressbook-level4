@@ -58,9 +58,7 @@ public class ExportCalendarCommandSystemTest extends EventManagerSystemTest {
         ModelHelper.setFilteredList(expectedModel, ALICE, CARL); // event names of Benson and Daniel include "Tryouts"
         assertCommandSuccess(command, expectedModel, filename);
 
-
         //unregister for an event then export -> accepted
-        index = INDEX_FIRST_EVENT;
         showAllEvents();
         command = UnregisterCommand.COMMAND_WORD + " " + index.getOneBased();
         Event unregisteredEvent = new EventBuilder(DANIEL).withAttendees("Scarlet Witch").build();
@@ -73,11 +71,33 @@ public class ExportCalendarCommandSystemTest extends EventManagerSystemTest {
         assertCommandSuccess(command, expectedModel, filename);
 
         //*********************************************Fail test case***************************************************
-        //invalid system filename input
+        //not register for any event -> rejected
+        index = Index.fromOneBased(5);
+        showAllEvents();
+        command = UnregisterCommand.COMMAND_WORD + " " + index.getOneBased();
+        unregisteredEvent = new EventBuilder(ALICE).withAttendees("Peter Parker").build();
+        assertCommandSuccess(command, expectedModel, unregisteredEvent, index,
+                String.format(UnregisterCommand.MESSAGE_UNREGISTER_EVENT_SUCCESS, index.getOneBased()));
+
+        command = "   " + ExportCalendarCommand.COMMAND_WORD + " " + filename;
+        expectedModel = getModel();
+        ModelHelper.setFilteredList(expectedModel);
+        assertCommandFailure(command, String.format(ExportCalendarCommand.MESSAGE_ZERO_EVENT_REGISTERED,
+                VALID_ADMIN_USERNAME), expectedModel);
+
+        //invalid system filename input with exportable event list -> rejected
+        index = INDEX_FIRST_EVENT;
+        showAllEvents();
+        command = RegisterCommand.COMMAND_WORD + " " + index.getOneBased();
+        registeredEvent = new EventBuilder(DANIEL).withAttendees("admin", "Scarlet Witch").build();
+        assertCommandSuccess(command, expectedModel, registeredEvent, index,
+                String.format(RegisterCommand.MESSAGE_REGISTER_EVENT_SUCCESS, index.getOneBased()));
+
         filename = "C:/mycal";
         command = "   " + ExportCalendarCommand.COMMAND_WORD + " " + filename;
-        assertCommandFailure(command, String.format(ExportCalendarCommand.MESSAGE_FILE_ERROR, filename));
-        assertSelectedCardUnchanged();
+        expectedModel = getModel();
+        ModelHelper.setFilteredList(expectedModel);
+        assertCommandFailure(command, String.format(ExportCalendarCommand.MESSAGE_FILE_ERROR, filename), expectedModel);
 
         //filename is too long -> rejected
         filename = "myCalendarFileNameIsTooLongggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg"
@@ -85,25 +105,22 @@ public class ExportCalendarCommandSystemTest extends EventManagerSystemTest {
                 + "ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg";
         command = "   " + ExportCalendarCommand.COMMAND_WORD + " " + filename;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                ExportCalendarCommand.MESSAGE_USAGE));
-        assertSelectedCardUnchanged();
+                ExportCalendarCommand.MESSAGE_USAGE), expectedModel);
 
         //empty filename -> rejected
         filename = "";
         command = ExportCalendarCommand.COMMAND_WORD + " " + filename;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                ExportCalendarCommand.MESSAGE_USAGE));
-        assertSelectedCardUnchanged();
+                ExportCalendarCommand.MESSAGE_USAGE), expectedModel);
 
         //not login -> rejected
         command = "   " + LogoutCommand.COMMAND_WORD;
         executeCommand(command);
-        assertEquals(LogoutCommand.MESSAGE_SUCCESS, getResultDisplay().getText());
+        assertEquals(String.format(LogoutCommand.MESSAGE_SUCCESS, VALID_ADMIN_USERNAME), getResultDisplay().getText());
 
         filename = "mycal";
         command = "   " + ExportCalendarCommand.COMMAND_WORD + " " + filename;
-        assertCommandFailure(command, Command.MESSAGE_LOGIN);
-        assertSelectedCardUnchanged();
+        assertCommandFailure(command, Command.MESSAGE_LOGIN, expectedModel);
     }
 
     /**
@@ -180,17 +197,14 @@ public class ExportCalendarCommandSystemTest extends EventManagerSystemTest {
      * Executes {@code command} and in addition,<br>
      * 1. Asserts that the command box displays {@code command}.<br>
      * 2. Asserts that result display box displays {@code expectedResultMessage}.<br>
-     * 3. Asserts that the browser url, selected card and status bar remain unchanged.<br>
-     * 4. Asserts that the command box has the error style.<br>
+     * 3. Asserts that the command box has the error style.<br>
      * Verifications 1 and 2 are performed by
      * {@code EventManagerSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * @see EventManagerSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
-    private void assertCommandFailure(String command, String expectedResultMessage) {
-        Model expectedModel = getModel();
+    private void assertCommandFailure(String command, String expectedResultMessage, Model expectedModel) {
         executeCommand(command);
         assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
-        assertSelectedCardUnchanged();
         assertCommandBoxShowsErrorStyle();
         assertStatusBarUnchanged();
     }

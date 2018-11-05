@@ -72,7 +72,7 @@ public class ExportCalendarCommand extends Command {
 
         //Check if no event has been registered
         if (registeredEventList.size() <= 0) {
-            return new CommandResult(String.format(MESSAGE_ZERO_EVENT_REGISTERED, currentUser.value));
+            throw new CommandException(String.format(MESSAGE_ZERO_EVENT_REGISTERED, currentUser.value));
         }
 
         try {

@@ -31,7 +31,7 @@ import seedu.address.model.event.Event;
  */
 public class TypicalEvents {
 
-    //Sorted list in order should be: DANIEL, CARL, ELLE, ALICE, FIONA, BENSON, GEORGE,
+    //Sorted list in order should be: DANIEL, CARL, ELLE, BENSON, ALICE, FIONA, GEORGE
     public static final Event ALICE = new EventBuilder().withName("Inter Neighbourhood Cooking Competition")
             .withContact("Alice Pauline")
             .withVenue("123, Jurong West Ave 6, #08-111")
