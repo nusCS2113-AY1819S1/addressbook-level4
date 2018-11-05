@@ -65,7 +65,7 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
 
     public void setTagMap(HashMap<String, Integer> tagMap) {
         this.tagMap.setTagMap(tagMap);
-        CustomSuggestionProvider.updateTagSet(tagMap);
+        CustomSuggestionProvider.updateTagMap(tagMap);
     }
 
     /**

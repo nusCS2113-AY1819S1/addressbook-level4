@@ -11,7 +11,7 @@ public class TagMapChangedEvent extends BaseEvent {
 
     public TagMapChangedEvent(ReadOnlyFinancialPlanner tagMap) {
         this.data = tagMap;
-        CustomSuggestionProvider.updateTagSet(tagMap.getTagMap());
+        CustomSuggestionProvider.updateTagMap(tagMap.getTagMap());
     }
 
     @Override

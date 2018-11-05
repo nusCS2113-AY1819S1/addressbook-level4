@@ -22,15 +22,15 @@ public class SortCommand extends Command {
     public static final String DESCENDING_CONDITION = "desc";
     public static final String ASCENDING_CONDITION = "asc";
 
-    public static final String MESSAGE_SUCCESS = "Records sorted by ";
+    public static final String MESSAGE_SUCCESS = "Records sorted by %1$s in %2$s order.\n ";
 
     public static final String CATEGORY_NAME = "name";
     public static final String CATEGORY_MONEYFLOW = "moneyflow";
     public static final String CATEGORY_MONEY = "money";
     public static final String CATEGORY_DATE = "date";
 
-    public static final String ORDER_ASCENDING = "in ascending order";
-    public static final String ORDER_DESCENDING = "in descending order";
+    public static final String ORDER_ASCENDING = "ascending";
+    public static final String ORDER_DESCENDING = "descending";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all records in the currently displayed list "
             + "by the specified category and order.\n"
@@ -53,10 +53,8 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.sortFilteredRecordList(category, ascending);
-        String returnMessageCategory = category;
-        String returnMessageOrder = ascending ? ORDER_ASCENDING : ORDER_DESCENDING;
-        return new CommandResult(MESSAGE_SUCCESS + returnMessageCategory + " "
-            + returnMessageOrder + ".\n");
+        return new CommandResult(String.format(MESSAGE_SUCCESS, category,
+                ((ascending) ? ORDER_ASCENDING : ORDER_DESCENDING)));
     }
 
     @Override
