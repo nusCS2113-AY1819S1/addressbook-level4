@@ -35,7 +35,7 @@ public class LogicManager extends ComponentManager implements Logic {
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
-            Command command = proManageParser.parseCommand(commandText);
+            Command command = proManageParser.parseCommand(commandText, model);
             return command.execute(model, history);
         } finally {
             history.add(commandText);
