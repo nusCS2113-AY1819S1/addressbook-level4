@@ -74,7 +74,7 @@ public class CommandTestUtil {
     public static final String DEPARTMENT_DESC_AMY = " " + PREFIX_DEPARTMENT + VALID_DEPARTMENT_AMY;
     public static final String DEPARTMENT_DESC_BOB = " " + PREFIX_DEPARTMENT + VALID_DEPARTMENT_BOB;
     public static final String DESIGNATION_DESC_AMY = " " + PREFIX_DESIGNATION + VALID_DESIGNATION_AMY;
-    public static final String DESIGNATION_DESC_BOB = " " + PREFIX_DESIGNATION+ VALID_DESIGNATION_BOB;
+    public static final String DESIGNATION_DESC_BOB = " " + PREFIX_DESIGNATION + VALID_DESIGNATION_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
