@@ -24,7 +24,7 @@ public class CreateModuleCommand extends Command {
         + "Parameters: "
         + PREFIX_MODULE_CODE + "MODULE CODE "
         + PREFIX_MODULE_TITLE + "MODULE TITLE "
-        + "Example: " + COMMAND_WORD + " "
+        + "\nExample: " + COMMAND_WORD + " "
         + PREFIX_MODULE_CODE + "CS2113 "
         + PREFIX_MODULE_TITLE + "Software Engineering and OOP";
 

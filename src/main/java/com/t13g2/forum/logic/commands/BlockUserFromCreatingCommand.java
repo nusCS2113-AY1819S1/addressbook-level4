@@ -24,7 +24,7 @@ public class BlockUserFromCreatingCommand extends Command {
         + "Parameters: "
         + PREFIX_USER_NAME + "USER NAME "
         + PREFIX_BLOCK + "BLOCK OR UNBLOCK"
-        + "Example: " + COMMAND_WORD + " "
+        + "\nExample: " + COMMAND_WORD + " "
         + PREFIX_USER_NAME + "john"
         + PREFIX_BLOCK + "true";
 

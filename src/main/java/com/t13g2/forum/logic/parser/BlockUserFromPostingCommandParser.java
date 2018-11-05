@@ -5,6 +5,7 @@ import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_USER_NAME;
 
 import java.util.stream.Stream;
 
+import com.t13g2.forum.commons.core.Messages;
 import com.t13g2.forum.logic.commands.BlockUserFromCreatingCommand;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
 
@@ -24,7 +25,8 @@ public class BlockUserFromPostingCommandParser implements Parser<BlockUserFromCr
             ArgumentTokenizer.tokenize(args, PREFIX_USER_NAME, PREFIX_BLOCK);
         if (!arePrefixesPresent(argMultimap, PREFIX_USER_NAME, PREFIX_BLOCK)
             || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(BlockUserFromCreatingCommand.MESSAGE_BLOCK_NAME_CONSTRAINTS);
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                BlockUserFromCreatingCommand.MESSAGE_USAGE));
         }
         String userName = ParserUtil.parseUserName(argMultimap.getValue(PREFIX_USER_NAME).get());
         boolean block;
