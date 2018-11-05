@@ -47,11 +47,11 @@ public class UndoCommandTest {
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // multiple undoable AddressBook states in model
-        expectedModel.undoAddressBook();
+        expectedModel.undoBothState();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // single undoable AddressBook state in model
-        expectedModel.undoAddressBook();
+        expectedModel.undoBothState();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // no undoable states in model
