@@ -30,8 +30,8 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
     public EditTaskCommand parse(String userInput) throws ParseException {
         requireNonNull(userInput);
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_INDEX, PREFIX_MODULE_CODE, PREFIX_TITLE,
-                PREFIX_DESCRIPTION, PREFIX_PRIORITY, PREFIX_HOURS);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_INDEX, PREFIX_MODULE_CODE,
+                PREFIX_TITLE, PREFIX_DESCRIPTION, PREFIX_PRIORITY, PREFIX_HOURS);
 
         Index index;
 

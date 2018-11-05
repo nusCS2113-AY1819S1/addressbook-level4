@@ -124,6 +124,11 @@ public class SelectDeadlineCommandTest {
         }
 
         @Override
+        public boolean isTheExactSameTaskAs(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deferTaskDeadline(Task task, Deadline deadline) {
             throw new AssertionError("This method should not be called.");
         }

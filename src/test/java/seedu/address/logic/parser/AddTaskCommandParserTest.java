@@ -180,7 +180,7 @@ public class AddTaskCommandParserTest {
             if (argMultimap.getValue(PREFIX_MODULE_CODE).orElse(null) != null) {
                 moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
             }
-            Task task = new Task(moduleCode, title, description, priority, expectedNumOfHours);
+            Task task = new Task(null, moduleCode, title, description, priority, expectedNumOfHours);
             task.setDeadline(date);
             return new AddTaskCommand(task);
         }
