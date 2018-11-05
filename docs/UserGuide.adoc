@@ -368,23 +368,17 @@ Removes a reminder for user for event 5
 Admin/User: Show all events with reminders set +
 Format: `showReminders`
 
-[NOTE]
-====
-* For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
-so you need to refresh it yourself.
-* Also, you have to log in first to use the functions.
-* Do not use a hash (#) in the Comments, e.g. addComment 1 C/#hello - this is a bug we will fix
-====
-
 === Adds Comment : `addComment`
 
-Admin/User: Add comment into event comment section with the username (default non-login username is stub) +
+Admin/User: Add comment into event comment section with the username (when you are logged in) +
 Format: `addComment INDEX C/STRING`
 
 ****
 * Adds comment at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index *must be a positive integer* 1, 2, 3, ...
-* Comment cannot be blank,. For C/String, String cannot be empty
-* If a user wants to delete an added comment, use the undo CLI command.
+* Comment cannot be blank. For C/String, String cannot be empty.
+* Undo and Redo command works! However, every time you undo or redo, the BrowserPanel will not refresh itself
+  so you need to refresh it yourself.
+* If you want to revert a comment previously made, use Undo!
 ****
 
 Examples:
@@ -394,25 +388,18 @@ Adds "What is the attire to wear for the event?" into event 1 comment section wi
 * `addComment 5 C/What is the attire to wear for this event?` +
 Adds "What is the attire to wear for this event?" into event 5 comment section with username
 
-[NOTE]
-====
-* For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
-so you need to refresh it yourself.
-* Also, you have to log in first to use the functions.
-* Do not use a hash (#) in the Comments, e.g. replyComment 1 L/2 C/#hello - this is a bug we will fix
-* If a user wants to delete an added comment, use the undo CLI command.
-====
-
 === Reply Comment : `replyComment`
 
-Admin/User: Replies a comment with the username (default non-login username is stub)  +
+Admin/User: Replies a comment with the username (when you are logged in)  +
 Format: `replyComment INDEX L/LINE C/STRING`
 
 ****
 * Replies a comment to the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index *must be a positive integer* 1, 2, 3, ...
 * Comment cannot be blank. For C/String, String cannot be empty
-* Line refers to the number of the comment indicated in  of the comment section. It has to be a non-zero integer and exist within the comment section. E.g. `1. Gerald : Hello` the line here is 1. `5. Gerald: Hi` the line here is 5.
-* All replied comments will fall under a comment that has no (REPLY) in front. Hence, all replies will be towards the same comment.
+* Line has to be a non-zero integer and exist within the comment section. The numbers below the "Comment Section" in the BrowerPanel are for the line parameter to as a comment below the line.
+* Undo and redo works! However, every time you undo or redo, the BrowserPanel will not refresh itself
+  so you need to refresh it yourself.
+* If you want to revert a comment previously made, use Undo!
 ****
 Examples:
 
@@ -421,21 +408,18 @@ Adds the comment "What is the attire to wear for the event?" into event 1 commen
 * `replyComment 2 L/2 C/What is the attire to wear for the event?` +
 Adds the comment "What is the attire to wear for the event?" into event 2 comment section at line 2 with username
 
-[NOTE]
-====
-* For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
-so you need to refresh it yourself.
-* Also, you have to log in first to use the functions.
-====
 
 === Delete Comment : `deleteComment`
 
-Admin: Deletes a comment +
+
+Admin: Deletes a comment (when you are logged in as admin) +
 Format: `deleteComment INDEX L/LINE`
 
 ****
 * Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index *must be a positive integer* 1, 2, 3, ...
-* * Line refers to the number of the comment indicated in  of the comment section. It has to be a non-zero integer and exist within the comment section. E.g. `1. Gerald : Hello` the line here is 1. `5. Gerald: Hi` the line here is 5.
+* Line has to be a non-zero integer and exist within the comment section. The numbers below the "Comment Section" in the BrowerPanel are for the line parameter to delete that comment line.
+* Undo and Redo works! However, every time you undo or redo, the BrowserPanel will not refresh itself
+  so you need to refresh it yourself.
 ****
 
 Examples:

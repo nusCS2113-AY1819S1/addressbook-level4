@@ -12,7 +12,7 @@ import seedu.address.logic.commands.AddCommentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new AddCommentCommand object
  */
 public class AddCommentCommandParser implements Parser<AddCommentCommand> {
 
@@ -29,7 +29,7 @@ public class AddCommentCommandParser implements Parser<AddCommentCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
-     *
+     * @param args arguments to work wit
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommentCommand parse(String args) throws ParseException {
@@ -51,6 +51,4 @@ public class AddCommentCommandParser implements Parser<AddCommentCommand> {
         }
         return new AddCommentCommand(index, comment);
     }
-
-
 }
