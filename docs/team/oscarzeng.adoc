@@ -105,9 +105,7 @@ https://github.com/CS2113-AY1819S1-T09-4/main/blob/master/docs/DeveloperGuide.ad
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=addlimit]
 
-include::../UserGuide.adoc[tag=]
 
 == Contributions to the Developer Guide
 
