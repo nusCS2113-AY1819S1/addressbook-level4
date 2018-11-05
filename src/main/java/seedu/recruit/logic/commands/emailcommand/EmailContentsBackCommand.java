@@ -14,7 +14,7 @@ import seedu.recruit.model.Model;
 /**
  * This class handles the back sub command for email contents phase
  */
-public class EmailContentsBackCommand extends EmailContentsSelectCommand {
+public class EmailContentsBackCommand extends EmailContentsCommand {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
@@ -26,7 +26,7 @@ public class EmailContentsBackCommand extends EmailContentsSelectCommand {
             EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
         }
 
-        LogicManager.setLogicState(EmailRecipientsSelectCommand.COMMAND_LOGIC_STATE);
-        return new CommandResult(EmailRecipientsSelectCommand.MESSAGE_USAGE);
+        LogicManager.setLogicState(EmailRecipientsCommand.COMMAND_LOGIC_STATE);
+        return new CommandResult(EmailRecipientsCommand.MESSAGE_USAGE);
     }
 }

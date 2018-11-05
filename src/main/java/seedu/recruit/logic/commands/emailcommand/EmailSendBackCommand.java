@@ -15,7 +15,7 @@ public class EmailSendBackCommand extends EmailSendCommand {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
 
-        LogicManager.setLogicState(EmailContentsSelectCommand.COMMAND_LOGIC_STATE);
-        return new CommandResult(EmailContentsSelectCommand.MESSAGE_USAGE);
+        LogicManager.setLogicState(EmailContentsCommand.COMMAND_LOGIC_STATE);
+        return new CommandResult(EmailContentsCommand.MESSAGE_USAGE);
     }
 }
