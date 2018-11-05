@@ -34,7 +34,13 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all records in the currently displayed list "
             + "by the specified category and order.\n"
+            + "There are 3 sort categories: "
+            + "\"" + CATEGORY_NAME + "\", " + "\"" + CATEGORY_MONEY + "\\" + CATEGORY_MONEYFLOW + "\", "
+            + "\"" + CATEGORY_DATE + "\"" + "\n"
+            + "and 2 sort orders: " + ORDER_ASCENDING + "(\"" + ASCENDING_CONDITION + "\")"
+            + " and " + ORDER_DESCENDING + "(\"" + DESCENDING_CONDITION+ "\")." + "\n"
             + "Parameters: [CATEGORY] [ORDER]\n"
+            + "Order of parameters is not strict, but must have either one or both.\n"
             + "Example: " + COMMAND_WORD + " " + CATEGORY_NAME + " " + DESCENDING_CONDITION;
 
     public static final Set<String> CATEGORY_SET = new HashSet<>(Arrays.asList(CATEGORY_NAME, CATEGORY_MONEYFLOW,
