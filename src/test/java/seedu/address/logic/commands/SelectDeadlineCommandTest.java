@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -55,7 +56,7 @@ public class SelectDeadlineCommandTest {
         ModelStub modelStub = new ModelStubWithDeadline(invalidDeadline);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(SelectDeadlineCommand.MESSAGE_INVALID_DEADLINE);
+        thrown.expectMessage(Messages.MESSAGE_INVALID_DEADLINE);
         selectCommand.execute(modelStub, commandHistory);
     }
 
@@ -108,11 +109,6 @@ public class SelectDeadlineCommandTest {
         }
 
         @Override
-        public boolean validDeadline(Deadline deadline) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void resetData(ReadOnlyTaskBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -124,6 +120,11 @@ public class SelectDeadlineCommandTest {
 
         @Override
         public boolean hasTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isTheExactSameTaskAs(Task task) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -199,24 +200,12 @@ public class SelectDeadlineCommandTest {
             requireNonNull(deadline);
             this.deadline = deadline;
         }
-
-        @Override
-        public boolean validDeadline(Deadline deadline) {
-            requireNonNull(deadline);
-            return Deadline.isValidDeadline(this.deadline.toString());
-        }
     }
 
     /**
      * A model stub that always accepts the deadline being selected.
      */
     private class ModelStubAcceptingDeadlineSelected extends ModelStub {
-
-        @Override
-        public boolean validDeadline(Deadline deadlineSelected) {
-            requireNonNull(deadlineSelected);
-            return Deadline.isValidDeadline(deadlineSelected.toString());
-        }
 
         @Override
         public void selectDeadline(Deadline deadline) {

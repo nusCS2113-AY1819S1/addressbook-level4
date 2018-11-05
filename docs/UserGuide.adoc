@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+= Task Book - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -12,9 +12,9 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2113-AY1819S1-W13-3/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
 
@@ -23,7 +23,7 @@ Task Book is for students who prefer to use a desktop app for managing their dai
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
+.  Download the latest `taskbook.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your Address Book.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
@@ -65,7 +65,7 @@ Examples:
 === Adding a milestone: `add_milestone`
 
 Adds a milestone to selected task from the task book +
-Format: `add_milestone i/INDEX m/MILESTONE r/RANK...`
+Format: `add_milestone i/INDEX m/MILESTONE r/RANK`
 
 Examples:
 
@@ -93,11 +93,16 @@ Examples:
 === Deferring a deadline: `defer`
 
 Defers a deadline for a task +
-Format: `defer [INDEX] de/deadline`
+Format: `defer i/INDEX dd/DAY mm/MONTH yyyy/YEAR`
+
+[NOTE]
+====
+A valid year _must_ be between 2018 and 9999 (inclusive)
+====
 
 Examples:
 
-* `defer 1 de/04012018`
+* `defer i/1 dd/04 mm/01 yyyy/2018`
 
 === Delete a task : `delete`
 
@@ -108,6 +113,7 @@ Examples:
 
 * `delete 1`
 
+// tag::selectDeadline[]
 === Selecting a date: `select`
 
 Chooses a particular date. +
@@ -115,11 +121,30 @@ Chooses a particular date. +
 Format: `select dd/DAY mm/MONTH yyyy/YEAR` or
 `select DAY/MONTH/YEAR`
 
+[NOTE]
+====
+A valid year _must_ be between 2018 and 9999 (inclusive)
+====
+
 Examples:
 
 //* `select dd/1`
 //* `select dd/1 mm/1`
 * `select dd/1 mm/1 yyyy/2018`
+// end::selectDeadline[]
+
+// tag::editTask[]
+=== Editing a task: `edit`
+
+Edits one or more fields in a selected task. +
+Format: `edit i/INDEX [t/TITLE] [d/DESCRIPTION] [c/MODULE CODE] [p/PRIORITY] [h/HOURS]`
+
+Examples:
+
+* `edit i/1 t/Complete CS2113 tutorial`
+* `edit i/1 d/Edit editTask to fit TaskBook h/4`
+* `edit i/1 t/Complete CS2271 tutorial d/Edit editTask to fit TaskBook c/CS2113 p/high h/4`
+// end::editTask[]
 
 === Tracking productivity : `track`
 Tracks your productivity for all completed tasks, by returning an average productivity (in percentage). +
@@ -143,7 +168,7 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `complete`, `sort`, `add_milestone`, `defer_deadline`, `delete`, `select` and `clear`).
+Undoable commands: those commands that modify the address book's content (`add`, `complete`, `sort`, `add_milestone`, `defer`, `delete`, `select` and `clear`).
 ====
 
 Examples:
@@ -212,12 +237,14 @@ e.g. `add c/CS2113 t/Complete 2113 Tutorial d/with code done p/high h/2`
 * *Add milestone* : `add_milestone t/TASK_TITLE m/MILESTONE r/RANK...` +
 e.g. `add_milestone t/Complete CS2113 W8 LO m/Complete Sections 8.1 to 8.5 r/1`
 * *Clear* : `clear`
-* *Complete* : `complete i/INDEX h/HOURS_COMPLETED`
+* *Complete* : `complete i/INDEX h/HOURS_COMPLETED` +
 e.g. `complete i/1 h/2`
-* *Defer deadline* : `defer_deadline INDEX de/DEADLINE` +
-e.g. `defer_deadline 1 de/01012018`
+* *Defer deadline* : `defer i/INDEX dd/DAY mm/MONTH yyyy/YEAR` +
+e.g. `defer i/1 dd/01 mm/01 yyyy/2018`
 * *Delete* : `delete INDEX`
 e.g. `delete 1`
+* *Edit* : 'edit edit i/INDEX [t/TITLE] [d/DESCRIPTION] [c/MODULE CODE] [p/PRIORITY] [h/HOURS]` +
+e.g. `edit i/1 t/Complete CS2271 tutorial d/Edit editTask to fit TaskBook c/CS2113 p/high h/4`
 * *List* : `list`
 * *Help* : `help`
 * *History* : `history`

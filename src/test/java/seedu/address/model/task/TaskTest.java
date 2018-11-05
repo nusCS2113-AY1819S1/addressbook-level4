@@ -4,6 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_1ST_JAN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CG2271;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_LEVEL_HIGH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TITLE_2;
 import static seedu.address.testutil.TypicalTasks.CS2113_TASK_1;
@@ -18,6 +19,7 @@ import org.junit.rules.ExpectedException;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.testutil.TaskBuilder;
 
+//@@author chelseyong
 public class TaskTest {
     private static final Logger logger = LogsCenter.getLogger(TaskTest.class);
     @Rule
@@ -39,9 +41,13 @@ public class TaskTest {
         editedTask1 = new TaskBuilder(CS2113_TASK_1).withTitle(VALID_TITLE_2).build();
         assertFalse(CS2113_TASK_1.isSameTask(editedTask1));
 
-        // same title, same deadline, different attributes -> returns true
+        // different module code -> returns false
+        editedTask1 = new TaskBuilder(CS2113_TASK_1).withModuleCode(VALID_MODULE_CODE_CG2271).build();
+        assertFalse(CS2113_TASK_1.isSameTask(editedTask1));
+
+        // same title, same deadline, same module code, different attributes -> returns true
         editedTask1 = new TaskBuilder(CS2113_TASK_1).withDescription(VALID_DESCRIPTION_2)
-                .withPriority(VALID_PRIORITY_LEVEL_HIGH).build();
+                .withPriority(VALID_PRIORITY_LEVEL_HIGH).withExpectedNumOfHours(3).build();
         assertTrue(CS2113_TASK_1.isSameTask(editedTask1));
     }
 
@@ -49,8 +55,6 @@ public class TaskTest {
     public void equals() {
         // same values -> returns true
         Task task1Copy = new TaskBuilder(CS2113_TASK_1).build();
-        logger.info("original : " + CS2113_TASK_1);
-        logger.info("copy : " + task1Copy);
 
         assertTrue(CS2113_TASK_1.equals(task1Copy));
 
@@ -68,6 +72,10 @@ public class TaskTest {
 
         // different deadline -> returns false
         Task editedTask1 = new TaskBuilder(CS2113_TASK_1).withDeadline(VALID_DEADLINE_1ST_JAN).build();
+        assertFalse(CS2113_TASK_1.equals(editedTask1));
+
+        // different module code -> returns false
+        editedTask1 = new TaskBuilder(CS2113_TASK_1).withModuleCode(VALID_MODULE_CODE_CG2271).build();
         assertFalse(CS2113_TASK_1.equals(editedTask1));
 
         // different title -> returns false

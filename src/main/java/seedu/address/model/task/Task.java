@@ -42,15 +42,6 @@ public class Task {
         this.milestoneList.addAll(milestoneList);
     }
 
-    public Task(String moduleCode, String title, String description,
-                PriorityLevel priorityLevel, int expectedNumOfHours) {
-        this.moduleCode = moduleCode;
-        this.title = title;
-        this.description = description;
-        this.priorityLevel = priorityLevel;
-        this.expectedNumOfHours = expectedNumOfHours;
-    }
-
     public Task(Task other) {
         this.deadline = other.deadline;
         this.moduleCode = other.moduleCode;
@@ -67,7 +58,7 @@ public class Task {
         return deadline;
     }
 
-    public String getModuleCode() {
+    public ModuleCode getModuleCode() {
         return moduleCode;
     }
 
@@ -123,9 +114,9 @@ public class Task {
         }
         return otherTask != null
                 && otherTask.getDeadline().equals(getDeadline())
-                && otherTask.getTitle().equals(getTitle());
+                && otherTask.getTitle().equals(getTitle())
+                && otherTask.getModuleCode().equals(getModuleCode());
     }
-
     //@@author ChanChunCheong
     /**
      * Defers the task to a later
@@ -177,7 +168,8 @@ public class Task {
                 && otherTask.getPriorityLevel().equals(getPriorityLevel())
                 && otherTask.isCompleted() == isCompleted()
                 && otherTask.getExpectedNumOfHours() == getExpectedNumOfHours()
-                && otherTask.getCompletedNumOfHours() == getCompletedNumOfHours();
+                && otherTask.getCompletedNumOfHours() == getCompletedNumOfHours()
+                && otherTask.getModuleCode().equals(getModuleCode());
     }
 
     @Override

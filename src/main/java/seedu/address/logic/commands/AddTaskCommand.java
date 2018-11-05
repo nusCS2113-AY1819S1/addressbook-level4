@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_MAX_HOURS;
 import static seedu.address.commons.core.Messages.MESSAGE_ZERO_HOURS_COMPLETION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURS;
@@ -38,7 +37,6 @@ public class AddTaskCommand extends Command implements CommandParser {
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task book";
-    public static final int MAX_HOURS_TO_COMPLETE = 24;
     private final Task toAdd;
     public AddTaskCommand() {
         toAdd = null;
@@ -54,12 +52,11 @@ public class AddTaskCommand extends Command implements CommandParser {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        toAdd.setDeadline(model.getDeadline());
         if (model.hasTask(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         } else if (toAdd.getExpectedNumOfHours() == 0) {
             throw new CommandException(MESSAGE_ZERO_HOURS_COMPLETION);
-        } else if (toAdd.getExpectedNumOfHours() >= MAX_HOURS_TO_COMPLETE) {
-            throw new CommandException(MESSAGE_MAX_HOURS);
         }
 
         toAdd.setDeadline(model.getDeadline());

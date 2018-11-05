@@ -1,7 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTH;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
 import java.util.List;
 
@@ -23,12 +27,18 @@ public class DeferDeadlineCommand extends Command implements CommandParser {
 
     public static final String COMMAND_WORD = "defer";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Defers the deadline of the selected task in the taskbook. "
-            + "Existing deadline will be overwritten by the input. "
-            + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_DEADLINE + "deadline \n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DEADLINE + "04011996";
+            + ": Defers the deadline of the selected task in the taskbook. \n"
+            + "Parameters: "
+            + PREFIX_INDEX + "INDEX (must be a positive integer) "
+            + PREFIX_DAY + "DAY "
+            + PREFIX_MONTH + "MONTH "
+            + PREFIX_YEAR + "YEAR (between 2018 and 9999)\n"
+
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_INDEX + "1 "
+            + PREFIX_DAY + "04 "
+            + PREFIX_MONTH + "01 "
+            + PREFIX_YEAR + "2018 ";
     /*
     + PREFIX_DAY + "DAY"
     + PREFIX_MONTH + "MONTH"
@@ -39,7 +49,6 @@ public class DeferDeadlineCommand extends Command implements CommandParser {
     + PREFIX_YEAR + "2018";
     */
 
-    public static final String MESSAGE_INVALID_DEADLINE = "The date selected does not exist";
     public static final String MESSAGE_NONEXISTENT_TASK = "This task does not exist in the task book";
     public static final String MESSAGE_SUCCESS = "Date deferred for task: %1$s";
     //public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Defer deadline command not implemented yet";
@@ -72,6 +81,8 @@ public class DeferDeadlineCommand extends Command implements CommandParser {
 
         if (taskIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(MESSAGE_NONEXISTENT_TASK);
+        } else if (!Deadline.isValidDeadline(deadline.toString())) {
+            throw new CommandException(MESSAGE_INVALID_DEADLINE);
         }
 
         Task taskToDefer = lastShownList.get(taskIndex.getZeroBased()); // get the task from the filteredtasklist;
