@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_UNCOMPLETED_TASK;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
-import static seedu.address.storage.XmlSerializableTodoList.MESSAGE_DUPLICATE_TASK;
 
 import java.util.List;
 
@@ -48,12 +48,13 @@ public class UncompleteTaskCommand extends Command {
         }
 
         Task taskToEdit = lastShownList.get(targetIndex.getZeroBased());
+
+        if (!taskToEdit.getComplete()) {
+            throw new CommandException(MESSAGE_UNCOMPLETED_TASK);
+        }
+
         Task editedTask = taskToEdit;
         editedTask.setAsUncompleted();
-
-        if (!taskToEdit.isSameTask(editedTask) && model.hasTask(editedTask)) {
-            throw new CommandException(MESSAGE_DUPLICATE_TASK);
-        }
 
         model.updateTask(taskToEdit, editedTask);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
