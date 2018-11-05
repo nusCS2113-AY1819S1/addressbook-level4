@@ -65,6 +65,13 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedTaskBook.hasTask(task);
     }
 
+    //@@author emobeany
+    @Override
+    public boolean isTheExactSameTaskAs(Task otherTask) {
+        requireNonNull(otherTask);
+        return versionedTaskBook.isTheExactSameTaskAs(otherTask);
+    }
+
     //@@author ChanChunCheong
     @Override
     public void deferTaskDeadline(Task target, Deadline deadline) {
@@ -100,7 +107,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskBookChanged();
     }
 
-    //@@author
+    //@@author emobeany
     @Override
     public void updateTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
@@ -108,7 +115,6 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskBookChanged();
     }
 
-    //@@author emobeany
     @Override
     public void selectDeadline(Deadline deadline) {
         versionedTaskBook.selectDeadline(deadline);
@@ -123,11 +129,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     public Deadline getDeadline() {
         return versionedTaskBook.getDeadline();
-    }
-
-    @Override
-    public boolean validDeadline(Deadline deadline) {
-        return versionedTaskBook.validDeadline(deadline);
     }
 
     //@@author

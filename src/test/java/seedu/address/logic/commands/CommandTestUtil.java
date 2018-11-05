@@ -1,15 +1,12 @@
 package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,34 +39,6 @@ public class CommandTestUtil {
     public static final String VALID_1_HOUR = "1";
     public static final String VALID_2_HOURS = "2";
 
-    //@@author emobeany
-    public static final String INVALID_DAY_AND_MONTH_0 = "0";
-    public static final String VALID_DAY_1 = "1";
-    public static final String VALID_DAY_FOR_FEB = "28";
-    public static final String VALID_DAY_FOR_LEAP_YEAR_FEB = "29";
-    public static final String INVALID_DAY_FOR_COMMON_YEAR_FEB = "29";
-    public static final String INVALID_DAY_FOR_LEAP_YEAR_FEB = "30";
-    public static final String VALID_DAY_FOR_MONTHS_WITH_30_DAYS = "30";
-    public static final String VALID_DAY_FOR_MONTHS_WITH_31_DAYS = "31";
-    public static final String INVALID_DAY_FOR_MONTHS_WITH_30_DAYS = "31";
-    public static final String INVALID_DAY_FOR_MONTHS_WITH_31_DAYS = "32";
-    public static final String VALID_MONTH_JAN = "1";
-    public static final String VALID_MONTH_FEB = "2";
-    public static final String VALID_MONTH_APR = "4";
-    public static final String INVALID_MONTH_13 = "13";
-    public static final String VALID_YEAR_2018 = "2018";
-    public static final String VALID_YEAR_2020 = "2020";
-    public static final String VALID_YEAR_9999 = "9999";
-    public static final String INVALID_YEAR_PASSED_2017 = "2017";
-    public static final String INVALID_YEAR_10000 = "10000";
-
-    public static final String DAY_DESC_1 = " " + PREFIX_DAY + "1";
-    public static final String DAY_DESC_2 = " " + PREFIX_DAY + "2";
-    public static final String MONTH_DESC_1 = " " + PREFIX_MONTH + "1";
-    public static final String MONTH_DESC_2 = " " + PREFIX_MONTH + "2";
-    public static final String YEAR_DESC_2018 = " " + PREFIX_YEAR + "2018";
-    public static final String YEAR_DESC_2019 = " " + PREFIX_YEAR + "2019";
-
     public static final String DEADLINE_DESC_1ST_JAN = " " + PREFIX_DEADLINE + VALID_DEADLINE_1ST_JAN;
     public static final String DEADLINE_DESC_31ST_MARCH = " " + PREFIX_DEADLINE + VALID_DEADLINE_31ST_MARCH;
     public static final String DEADLINE_DESC_12TH_MAY = " " + PREFIX_DEADLINE + VALID_DEADLINE_12TH_MAY;
@@ -88,8 +57,12 @@ public class CommandTestUtil {
     public static final String HOURS_DESC_2 = " " + PREFIX_HOURS + VALID_2_HOURS;
 
     public static final String INVALID_DEADLINE_DESC = " " + PREFIX_DEADLINE + "31/2"; // No 31st February in calendar
+    public static final String INVALID_TITLE_DESC = " " + PREFIX_TITLE + " "; // Title is empty
+    public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + " "; // Description is empty
     public static final String INVALID_PRIORITY_LEVEL_DESC = " " + PREFIX_PRIORITY + "mid"; // not a priority level
     public static final String INVALID_HOURS_DESC = " " + PREFIX_HOURS + "one"; // not an integer
+    public static final String INVALID_MODULE_CODE_DESC = " " + PREFIX_MODULE_CODE + "2113CS";
+    public static final String EMPTY_MODULE_CODE_DESC = " " + PREFIX_MODULE_CODE + " ";
     public static final int OVERFLOW_INT = Integer.MAX_VALUE;
     public static final String INVALID_HOURS_OVERFLOW = " " + PREFIX_HOURS
             + Long.toString((long) OVERFLOW_INT + 1); // integer overflow

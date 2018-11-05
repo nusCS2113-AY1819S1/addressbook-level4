@@ -33,6 +33,15 @@ public class UniqueTaskList implements Iterable<Task> {
         return internalList.stream().anyMatch(toCheck::isSameTask);
     }
 
+    //@@author emobeany
+    /**
+     * Returns true if the list contains an exact replica of the task as the given argument.
+     */
+    public boolean containsExactCopyOf(Task toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::equals);
+    }
+
     /**
      * Adds a task to the list.
      * The task must not already exist in the list.

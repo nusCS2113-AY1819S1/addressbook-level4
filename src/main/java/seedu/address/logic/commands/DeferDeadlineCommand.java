@@ -81,7 +81,7 @@ public class DeferDeadlineCommand extends Command implements CommandParser {
 
         if (taskIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(MESSAGE_NONEXISTENT_TASK);
-        } else if (!model.validDeadline(deadline)) {
+        } else if (!Deadline.isValidDeadline(deadline.toString())) {
             throw new CommandException(MESSAGE_INVALID_DEADLINE);
         }
 

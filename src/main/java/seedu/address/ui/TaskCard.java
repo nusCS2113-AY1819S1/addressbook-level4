@@ -58,7 +58,11 @@ public class TaskCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         title.setText(task.getTitle().toUpperCase());
         deadline.setText(task.getDeadline().toString());
-        moduleCodes.setText(task.getModuleCode());
+        if (task.getModuleCode() != null) {
+            moduleCodes.setText(task.getModuleCode().toString());
+        } else {
+            moduleCodes.setText("");
+        }
         description.setText(task.getDescription());
         priorityLevel.setText(task.getPriorityLevel().priorityLevel);
         expectedNumOfHours.setText(Integer.toString(task.getExpectedNumOfHours()) + " hours");

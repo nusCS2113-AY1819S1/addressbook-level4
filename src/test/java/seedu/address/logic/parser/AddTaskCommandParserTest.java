@@ -3,11 +3,15 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_1;
 import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_2;
+import static seedu.address.logic.commands.CommandTestUtil.EMPTY_MODULE_CODE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.HOURS_DESC_1;
 import static seedu.address.logic.commands.CommandTestUtil.HOURS_DESC_2;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_HOURS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_HOURS_OVERFLOW;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MODULE_CODE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PRIORITY_LEVEL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TITLE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_CODE_CG2271_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_CODE_CS2113_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
@@ -44,6 +48,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.task.Deadline;
+import seedu.address.model.task.ModuleCode;
 import seedu.address.model.task.PriorityLevel;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.TaskBuilder;
@@ -119,6 +124,18 @@ public class AddTaskCommandParserTest {
         // invalid Priority Level
         assertParseFailure(parser, MODULE_CODE_CS2113_DESC + TITLE_DESC_1 + DESCRIPTION_DESC_1
                 + INVALID_PRIORITY_LEVEL_DESC + HOURS_DESC_1, PriorityLevel.MESSAGE_PRIORITY_CONSTRAINTS);
+        // invalid module code
+        assertParseFailure(parser, INVALID_MODULE_CODE_DESC + TITLE_DESC_1 + DESCRIPTION_DESC_1
+                + PRIORITY_LEVEL_DESC_LOW + HOURS_DESC_1, ModuleCode.MESSAGE_MODULE_CODE_CONSTRAINTS);
+        // empty title
+        assertParseFailure(parser, MODULE_CODE_CS2113_DESC + INVALID_TITLE_DESC + DESCRIPTION_DESC_1
+                + PRIORITY_LEVEL_DESC_LOW + HOURS_DESC_1, ParserUtil.MESSAGE_EMPTY_TITLE);
+        // empty description
+        assertParseFailure(parser, MODULE_CODE_CS2113_DESC + TITLE_DESC_1 + INVALID_DESCRIPTION_DESC
+                + PRIORITY_LEVEL_DESC_LOW + HOURS_DESC_1, ParserUtil.MESSAGE_EMPTY_DESCRIPTION);
+        // empty module code
+        assertParseFailure(parser, EMPTY_MODULE_CODE_DESC + TITLE_DESC_1 + DESCRIPTION_DESC_1
+                + PRIORITY_LEVEL_DESC_LOW + HOURS_DESC_1, ParserUtil.MESSAGE_EMPTY_MODULE_CODE);
         // invalid Hours
         assertParseFailure(parser, MODULE_CODE_CS2113_DESC + TITLE_DESC_1 + DESCRIPTION_DESC_1
                         + PRIORITY_LEVEL_DESC_LOW + INVALID_HOURS_DESC, MESSAGE_INVALID_HOURS);
@@ -146,11 +163,11 @@ public class AddTaskCommandParserTest {
          * @throws ParseException if parsing is invalid
          */
         public Command parse(String userInput, Deadline date) throws ParseException {
-            logger.info(userInput);
+            //logger.info(userInput);
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(userInput, PREFIX_MODULE_CODE, PREFIX_TITLE, PREFIX_DESCRIPTION,
                             PREFIX_PRIORITY, PREFIX_HOURS);
-            if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE, PREFIX_TITLE, PREFIX_DESCRIPTION,
+            if (!arePrefixesPresent(argMultimap, PREFIX_TITLE, PREFIX_DESCRIPTION,
                     PREFIX_PRIORITY, PREFIX_HOURS) || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTaskCommand.MESSAGE_USAGE));
             }
@@ -159,8 +176,11 @@ public class AddTaskCommandParserTest {
             String description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
             PriorityLevel priority = ParserUtil.parsePriorityLevel(argMultimap.getValue(PREFIX_PRIORITY).get());
             int expectedNumOfHours = ParserUtil.parseHours(argMultimap.getValue(PREFIX_HOURS).get());
-            String moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
-            Task task = new Task(moduleCode, title, description, priority, expectedNumOfHours);
+            ModuleCode moduleCode = null;
+            if (argMultimap.getValue(PREFIX_MODULE_CODE).orElse(null) != null) {
+                moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
+            }
+            Task task = new Task(null, moduleCode, title, description, priority, expectedNumOfHours);
             task.setDeadline(date);
             return new AddTaskCommand(task);
         }

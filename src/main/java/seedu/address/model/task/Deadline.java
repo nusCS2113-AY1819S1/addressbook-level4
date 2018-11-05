@@ -1,5 +1,8 @@
 package seedu.address.model.task;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -25,18 +28,17 @@ public class Deadline {
     }
 
     public Deadline(String deadline) {
+        requireNonNull(deadline);
+        checkArgument(isValidFormat(deadline), MESSAGE_DEADLINE_CONSTRAINTS);
         String[] entries = deadline.split("/");
         this.day = entries[0];
         this.month = entries[1];
         this.year = entries[2];
     }
 
-    /*
-    public Deadline(String day, String month) {
-        this.day = day;
-        this.month = month;
+    public static boolean isValidFormat(String deadline) {
+        return deadline.split("/").length == 3;
     }
-    */
 
     public String getDay() {
         return day;
@@ -53,9 +55,8 @@ public class Deadline {
     /**
      * Returns false if any fields are not within the limits (not a valid date).
      */
-
-    public static boolean isValidDeadline(String test) {
-        String[] entries = test.split("/");
+    public static boolean isValidDeadline(String deadline) {
+        String[] entries = deadline.split("/");
         if (entries.length != 3) {
             return false;
         }

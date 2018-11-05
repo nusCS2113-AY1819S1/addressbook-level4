@@ -1,8 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_MAX_HOURS;
-import static seedu.address.logic.commands.AddTaskCommand.MAX_HOURS_TO_COMPLETE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 
@@ -57,8 +55,6 @@ public class CompleteTaskCommand extends Command implements CommandParser {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         } else if (completedNumOfHours == 0) {
             throw new CommandException(Messages.MESSAGE_ZERO_HOURS_COMPLETION);
-        } else if (completedNumOfHours >= MAX_HOURS_TO_COMPLETE) {
-            throw new CommandException(MESSAGE_MAX_HOURS);
         }
         Task taskToComplete = lastShownList.get(targetIndex.getZeroBased());
         if (taskToComplete.isCompleted()) {
