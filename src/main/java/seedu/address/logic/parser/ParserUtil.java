@@ -14,7 +14,6 @@ import seedu.address.model.Events.Description;
 import seedu.address.model.Events.EventName;
 import seedu.address.model.Events.EventDate;
 
-import java.text.DecimalFormat;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -64,7 +63,7 @@ public class ParserUtil {
     public static EventName parseEventName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!EventName.CheckValid(trimmedName)) {
+        if (!EventName.checkValid(trimmedName)) {
             throw new ParseException(EventName.MESSAGE_EVENTNAME_CONSTRAINTS);
         }
         return new EventName(trimmedName);
@@ -79,7 +78,7 @@ public class ParserUtil {
     public static  Description parseDescription(String description) throws ParseException {
         requireNonNull(description);
         String trimmedDescription = description.trim();
-        if (!Venue.CheckValid(trimmedDescription)) {
+        if (!Venue.checkValid(trimmedDescription)) {
             throw new ParseException(Description.MESSAGE_DESCRIPTION_CCONSTRAINT);
         }
         return new Description(trimmedDescription);
@@ -94,7 +93,7 @@ public class ParserUtil {
     public static EventDate parserEventDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        if(!EventDate.CheckValid(trimmedDate)) {
+        if(!EventDate.checkValid(trimmedDate)) {
             throw new  ParseException(EventDate.MESSAGE_EVENTDATE_CONSTRAINTS);
         }
         return new EventDate(trimmedDate);
@@ -108,7 +107,7 @@ public class ParserUtil {
     public static  Venue parseVenue(String venue) throws ParseException {
         requireNonNull(venue);
         String trimmedVenue = venue.trim();
-        if (!Venue.CheckValid(trimmedVenue)) {
+        if (!Venue.checkValid(trimmedVenue)) {
             throw new ParseException(Venue.MESSAGE_VENUE_CONSTRAINT);
         }
         return new Venue(trimmedVenue);

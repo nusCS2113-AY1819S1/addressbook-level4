@@ -8,14 +8,14 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
+import seedu.address.model.Events.Event;
+import seedu.address.model.Events.UniqueEventList;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.UniqueItemList;
 import seedu.address.model.ledger.Ledger;
 import seedu.address.model.ledger.UniqueLedgerList;
 import seedu.address.model.member.Person;
 import seedu.address.model.member.UniquePersonList;
-import seedu.address.model.Events.Event;
-import seedu.address.model.Events.UniqueEventList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -128,7 +128,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a ledger with the same name as {@code event} exists in the club book
      */
-    public boolean hasEvent(Event event){
+    public boolean hasEvent(Event event) {
         requireNonNull(event);
         return events.contains(event);
     }
@@ -150,13 +150,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * add or remove an event.
+     * add an event.
      * @param event
      */
     public void addEvent(Event event) {
         events.add(event);
     }
 
+    /**
+     * remove an event.
+     * @param event
+     */
     public void removeEvent(Event event) {
         requireNonNull(event);
         events.remove(event);
@@ -169,6 +173,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         ledgers.add(ledger);
     }
 
+    /**
+     * Remove a ledger from the ClubHub.
+     * @param ledger
+     */
     public void removeLedger(Ledger ledger) {
         requireNonNull(ledger);
         ledgers.remove(ledger);
@@ -200,11 +208,21 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.setPerson(target, editedPerson);
     }
 
+    /**
+     * Update ledgers.
+     * @param target
+     * @param editedLedger
+     */
     public void updateLedger(Ledger target, Ledger editedLedger) {
         requireNonNull(editedLedger);
         ledgers.setLedger(target, editedLedger);
     }
 
+    /**
+     * Update events.
+     * @param target
+     * @param editedTarget
+     */
     public void updateEvent(Event target, Event editedTarget) {
         requireNonNull(editedTarget);
         events.setEvent(target, editedTarget);

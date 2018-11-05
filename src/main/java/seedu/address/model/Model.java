@@ -4,16 +4,14 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
+import seedu.address.model.Events.Event;
 import seedu.address.model.item.Item;
 import seedu.address.model.ledger.Account;
 import seedu.address.model.ledger.Ledger;
 import seedu.address.model.member.Person;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.Events.Event;
-import seedu.address.model.Events.EventDate;
-import seedu.address.model.Events.Description;
-import seedu.address.model.Events.EventName;
-import seedu.address.model.Events.Venue;
+
+
 /**
  * The API of the Model component.
  */
