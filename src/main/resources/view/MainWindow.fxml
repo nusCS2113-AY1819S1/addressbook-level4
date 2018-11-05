@@ -66,7 +66,7 @@
                     <padding>
                         <Insets top="10" right="10" bottom="10" />
                     </padding>
-            <StackPane fx:id="friendListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
                   </VBox>
               </SplitPane>
 
@@ -76,7 +76,7 @@
                 <padding>
                   <Insets top="10" right="10" bottom="10" />
                 </padding>
-                <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+                <StackPane fx:id="otherListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
               </VBox>
             </SplitPane>
           </VBox>
