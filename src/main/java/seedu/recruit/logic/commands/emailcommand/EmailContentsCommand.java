@@ -11,7 +11,7 @@ import seedu.recruit.model.Model;
 /**
  * 3rd step of the Email command: selecting contents
  */
-public class EmailContentsSelectCommand extends Command {
+public class EmailContentsCommand extends Command {
     public static final String MESSAGE_USAGE = "Find/Filter the contents you intend to email. "
             + "All items listed below will be added into the contents field.\n"
             + "Type \"add\" to add contents to the field.\n"

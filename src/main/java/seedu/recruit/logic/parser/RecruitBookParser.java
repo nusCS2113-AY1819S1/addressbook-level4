@@ -48,9 +48,9 @@ import seedu.recruit.logic.commands.SortJobOfferCommand;
 import seedu.recruit.logic.commands.SwitchBookCommand;
 import seedu.recruit.logic.commands.UndoCandidateBookCommand;
 import seedu.recruit.logic.commands.UndoCompanyBookCommand;
-import seedu.recruit.logic.commands.emailcommand.EmailContentsSelectCommand;
+import seedu.recruit.logic.commands.emailcommand.EmailContentsCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailInitialiseCommand;
-import seedu.recruit.logic.commands.emailcommand.EmailRecipientsSelectCommand;
+import seedu.recruit.logic.commands.emailcommand.EmailRecipientsCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailSendCommand;
 
 import seedu.recruit.logic.parser.exceptions.ParseException;
@@ -101,8 +101,8 @@ public class RecruitBookParser {
             case AddJobDetailsCommand.COMMAND_WORD:
                 return new AddJobDetailsCommandParser().parse(userInput);
 
-            case EmailContentsSelectCommand.COMMAND_LOGIC_STATE:
-            case EmailRecipientsSelectCommand.COMMAND_LOGIC_STATE:
+            case EmailContentsCommand.COMMAND_LOGIC_STATE:
+            case EmailRecipientsCommand.COMMAND_LOGIC_STATE:
             case EmailSendCommand.COMMAND_LOGIC_STATE:
                 return new EmailParser().parseCommand(commandWord, arguments, state, emailUtil);
 

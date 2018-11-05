@@ -19,28 +19,16 @@ public class EmailSendPreviewCommand extends EmailSendCommand {
     public static final String SHOWING_PREVIEW_MESSAGE = "Opened preview.\n" + MESSAGE_USAGE;
 
     @Override
-    @SuppressWarnings("Duplicates")
     public CommandResult execute(Model model, CommandHistory history) {
         EmailUtil emailUtil = model.getEmailUtil();
-        String result;
-        ArrayList<?> recipients;
-        ArrayList<?> contents;
-
-        //Setting recipients and contents based on AreRecipientsCandidates boolean
-        if (emailUtil.isAreRecipientsCandidates()) {
-            recipients = new ArrayList<>(emailUtil.getCandidates());
-            contents = new ArrayList<>(emailUtil.getJobOffers());
-        } else {
-            recipients = new ArrayList<>(emailUtil.getJobOffers());
-            contents = new ArrayList<>(emailUtil.getCandidates());
-        }
+        updateRecipientsAndContents(emailUtil);
 
         //Generating recipients
         Set<String> recipientEmails = new HashSet<>();
-        generateRecipients(recipientEmails, model, emailUtil, recipients, contents);
+        generateRecipients(recipientEmails, model, emailUtil);
 
         //Generate content (bodyText)
-        String bodyText = generateContent(model, emailUtil, recipients, contents);
+        String bodyText = generateContent(emailUtil);
 
         //Generate subject
         String subject = generateSubject(emailUtil);

@@ -17,10 +17,9 @@ import seedu.recruit.ui.MainWindow;
 /**
  * This class handles the add sub command for email recipients phase
  */
-public class EmailRecipientsAddCommand extends EmailRecipientsSelectCommand {
+public class EmailRecipientsAddCommand extends EmailRecipientsCommand {
 
     @Override
-    @SuppressWarnings("Duplicates")
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         EmailUtil emailUtil = model.getEmailUtil();
@@ -128,7 +127,7 @@ public class EmailRecipientsAddCommand extends EmailRecipientsSelectCommand {
             output.append(recipients);
         }
 
-        output.append(EmailRecipientsSelectCommand.MESSAGE_USAGE);
+        output.append(EmailRecipientsCommand.MESSAGE_USAGE);
         return new CommandResult(output.toString());
     }
 }

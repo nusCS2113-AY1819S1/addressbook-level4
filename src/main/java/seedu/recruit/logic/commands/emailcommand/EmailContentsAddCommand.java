@@ -16,9 +16,8 @@ import seedu.recruit.model.joboffer.JobOffer;
 /**
  * This class handles the add sub command for email contents phase
  */
-public class EmailContentsAddCommand extends EmailContentsSelectCommand {
+public class EmailContentsAddCommand extends EmailContentsCommand {
     @Override
-    @SuppressWarnings("Duplicates")
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         EmailUtil emailUtil = model.getEmailUtil();
@@ -94,7 +93,7 @@ public class EmailContentsAddCommand extends EmailContentsSelectCommand {
             output.append(contents);
         }
 
-        output.append(EmailRecipientsSelectCommand.MESSAGE_USAGE);
+        output.append(EmailRecipientsCommand.MESSAGE_USAGE);
         return new CommandResult(output.toString());
     }
 }
