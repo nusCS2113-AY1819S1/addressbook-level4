@@ -40,6 +40,9 @@ public class TaskDateTest {
         assertFalse(TaskDate.isValidDate("00-09")); // day out of minimum logical limit
         assertFalse(TaskDate.isValidDate("15-13")); // month out of maximum logical limit
         assertFalse(TaskDate.isValidDate("15-00")); // month out of minimum logical limit
+        assertFalse(TaskDate.isValidDate("31-04")); // day out of limit for month with 30 days
+        assertFalse(TaskDate.isValidDate("30-02")); // day out of limit for February
+        assertFalse(TaskDate.isValidDate("29-02")); // day out of limit for February on non-leap year
 
         // valid date
         assertTrue(TaskDate.isValidDate("01-07"));
