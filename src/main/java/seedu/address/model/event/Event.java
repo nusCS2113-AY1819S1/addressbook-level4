@@ -276,7 +276,15 @@ public class Event implements Comparable<Event> {
         return compareValue;
     }
 
+    /**
+     * Compare the end time between the events
+     * If both events have the same start time then compare their date
+     **/
     public int compareEndTimeTo(Event other) {
-        return this.getEndTime().compareTo(other.getEndTime());
+        int compareValue = this.getEndTime().compareTo(other.getEndTime());
+        if (compareValue == 0) {
+            return this.getDate().eventDate.compareTo(other.getDate().eventDate);
+        }
+        return compareValue;
     }
 }
