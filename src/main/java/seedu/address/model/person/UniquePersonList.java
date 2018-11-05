@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,6 +33,23 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
+    }
+
+    /**
+     * Returns true if the list contains an equivalent email as the given argument.
+     */
+    public boolean containsEmail(Email email) {
+        requireNonNull(email);
+        return internalList.stream().anyMatch(email::isSameEmail);
+    }
+
+    public Optional<Person> getPerson(Email email) {
+        requireNonNull(email);
+
+        if (internalList.stream().anyMatch(email::isSameEmail)) {
+            return internalList.stream().filter(email::isSameEmail).findFirst();
+        }
+        return Optional.empty();
     }
 
     /**
@@ -132,4 +150,6 @@ public class UniquePersonList implements Iterable<Person> {
         }
         return true;
     }
+
+
 }

@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Department;
+import seedu.address.model.person.Designation;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -36,6 +37,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setAddress(person.getAddress());
         descriptor.setDepartment(person.getDepartment());
+        descriptor.setDesignation(person.getDesignation());
         descriptor.setTags(person.getTags());
     }
 
@@ -69,6 +71,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withDepartment(String department) {
         descriptor.setDepartment(new Department(department));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Designation} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withDesignation(String designation) {
+        descriptor.setDesignation(new Designation(designation));
         return this;
     }
 
