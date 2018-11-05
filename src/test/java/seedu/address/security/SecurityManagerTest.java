@@ -114,8 +114,7 @@ public class SecurityManagerTest {
     @Test
     public void register_existingUser_returnExistingUserExists() {
         boolean testFlag = false;
-        if (securityManager.register("test", "test",
-                "test@test.com", "88888888", "Lucky Road") == RegisterFlag.USER_ALREADY_EXISTS) {
+        if (securityManager.register("test", "test") == RegisterFlag.USER_ALREADY_EXISTS) {
             testFlag = true;
         }
         assertTrue(testFlag);
@@ -124,8 +123,7 @@ public class SecurityManagerTest {
     @Test
     public void register_incompleteAddress_returnIncompleteField() {
         boolean testFlag = false;
-        if (securityManager.register("test1", "test",
-                "test", "8888888", "") == RegisterFlag.INCOMPLETE_FIELD) {
+        if (securityManager.register("test1", "test") == RegisterFlag.INCOMPLETE_FIELD) {
             testFlag = true;
         }
         assertTrue(testFlag);
@@ -134,8 +132,7 @@ public class SecurityManagerTest {
     @Test
     public void register_validCompleteFields_returnSuccess() {
         boolean testFlag = false;
-        if (securityManager.register("test1", "test",
-                "test@test.com", "88888888", "Testy Road") == RegisterFlag.SUCCESS) {
+        if (securityManager.register("test1", "test") == RegisterFlag.SUCCESS) {
             testFlag = true;
         }
         assertTrue(testFlag);
