@@ -1,6 +1,8 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.task.Deadline;
@@ -21,7 +23,7 @@ public class TaskBuilder {
     public static final boolean DEFAULT_COMPLETE = false;
     public static final String DEFAULT_EXPECTED_NUM_OF_HOURS = "1";
     public static final String DEFAULT_COMPLETED_NUM_OF_HOURS = "0";
-    public static final Set<Milestone> DEFAULT_MILESTONES = new HashSet<>();
+    public static final List<Milestone> DEFAULT_MILESTONES = new ArrayList<>();
 
     private Deadline deadline;
     private String moduleCode;
@@ -31,7 +33,7 @@ public class TaskBuilder {
     private boolean isCompleted;
     private int expectedNumOfHours;
     private int completedNumOfHours;
-    private Set<Milestone> milestones;
+    private List<Milestone> milestones;
 
     public TaskBuilder() {
         this.deadline = new Deadline(DEFAULT_DEADLINE);
@@ -119,7 +121,7 @@ public class TaskBuilder {
     /**
      * Sets the milestones of the {@code Task} that we are building.
      */
-    public TaskBuilder withMilestones(Set<Milestone> milestones) {
+    public TaskBuilder withMilestones(List<Milestone> milestones) {
         this.milestones = milestones;
         return this;
     }
