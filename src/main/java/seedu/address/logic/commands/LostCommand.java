@@ -37,8 +37,8 @@ public class LostCommand extends Command {
 
     public static final String MESSAGE_LOST_ITEM_SUCCESS = "Lost Item: %1$s";
     public static final String MESSAGE_INVALID_QUANTITY = "The lost quantity input is invalid";
-    public static final String MESSAGE_LOST_LARGER_THAN_READY = "The lost quantity much be larger than " +
-            "or equal to the quantity of Ready items";
+    public static final String MESSAGE_LOST_LARGER_THAN_READY = "The lost quantity much be larger than "
+            + "or equal to the quantity of Ready items";
 
     private final Index targetIndex;
     private final LostDescriptor lostDescriptor;
