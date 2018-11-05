@@ -28,6 +28,7 @@ public class SummaryByMonthCommand extends SummaryCommand {
             + PREFIX_DATE + "sep-2018 " + "oct-2018 ";
 
     public static final String MESSAGE_SUCCESS = "Listed summary for %d months";
+    public static final String FORMAT_TITLE_SUMMARY = "Summary by month from %s to %s";
 
     private final Date startDate;
     private final Date endDate;
@@ -45,7 +46,8 @@ public class SummaryByMonthCommand extends SummaryCommand {
         model.updateFilteredRecordList(predicate);
         SummaryByMonthList summaryList = new SummaryByMonthList(model.getFilteredRecordList());
         EventsCenter.getInstance().post(new ShowSummaryTableEvent(summaryList.getSummaryList(),
-                summaryList.getTotalExpense(), summaryList.getTotalIncome(), summaryList.getTotal(), TOTAL_LABEL));
+                summaryList.getTotalExpense(), summaryList.getTotalIncome(), summaryList.getTotal(), TOTAL_LABEL,
+                String.format(FORMAT_TITLE_SUMMARY, DateUtil.formatDate(startDate), DateUtil.formatDate(endDate))));
         return new CommandResult(String.format(MESSAGE_SUCCESS, summaryList.size()));
     }
 

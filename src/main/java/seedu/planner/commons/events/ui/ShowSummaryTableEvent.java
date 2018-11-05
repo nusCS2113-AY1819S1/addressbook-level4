@@ -15,14 +15,16 @@ public class ShowSummaryTableEvent extends BaseEvent {
     public final MoneyFlow totalIncome;
     public final MoneyFlow totalExpense;
     public final String totalLabel;
+    public final String tabTitle;
 
     public ShowSummaryTableEvent(ObservableList<SummaryEntry> data, MoneyFlow totalExpense, MoneyFlow totalIncome,
-                                 MoneyFlow total, String totalLabel) {
+                                 MoneyFlow total, String totalLabel, String tabTitle) {
         this.data = data;
         this.totalExpense = totalExpense;
         this.totalIncome = totalIncome;
         this.total = total;
         this.totalLabel = totalLabel;
+        this.tabTitle = tabTitle;
     }
 
     @Override

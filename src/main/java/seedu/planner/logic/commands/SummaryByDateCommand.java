@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 
 import seedu.planner.commons.core.EventsCenter;
 import seedu.planner.commons.events.ui.ShowSummaryTableEvent;
+import seedu.planner.commons.util.DateUtil;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.model.Model;
 import seedu.planner.model.record.Date;
@@ -26,6 +27,7 @@ public class SummaryByDateCommand extends SummaryCommand {
             + PREFIX_DATE + "18-9-2018 " + "20-9-2018 ";
 
     public static final String MESSAGE_SUCCESS = "Listed summary for %d days";
+    public static final String FORMAT_TITLE_SUMMARY = "Summary by date from %s to %s";
 
     private final Date startDate;
     private final Date endDate;
@@ -43,7 +45,8 @@ public class SummaryByDateCommand extends SummaryCommand {
         model.updateFilteredRecordList(predicate);
         SummaryByDateList summaryList = new SummaryByDateList(model.getFilteredRecordList());
         EventsCenter.getInstance().post(new ShowSummaryTableEvent(summaryList.getSummaryList(),
-                summaryList.getTotalExpense(), summaryList.getTotalIncome(), summaryList.getTotal(), TOTAL_LABEL));
+                summaryList.getTotalExpense(), summaryList.getTotalIncome(), summaryList.getTotal(), TOTAL_LABEL,
+                String.format(FORMAT_TITLE_SUMMARY, DateUtil.formatDate(startDate), DateUtil.formatDate(endDate))));
         return new CommandResult(String.format(MESSAGE_SUCCESS, summaryList.size()));
     }
 

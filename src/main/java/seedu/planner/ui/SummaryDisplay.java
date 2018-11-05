@@ -18,8 +18,6 @@ import seedu.planner.model.record.MoneyFlow;
  */
 public class SummaryDisplay extends UiPart<Region> {
 
-    public static final String LABEL = "Summary Table";
-
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
 
     private static final String FXML = "SummaryDisplay.fxml";

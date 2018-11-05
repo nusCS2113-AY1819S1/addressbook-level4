@@ -97,7 +97,7 @@ public class StatsDisplayPanel extends UiPart<Region> implements Switchable {
      */
     public void handleShowSummaryTableEvent(ShowSummaryTableEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        Tab summaryTab = new Tab(SummaryDisplay.LABEL , new SummaryDisplay(event.data, event.totalExpense,
+        Tab summaryTab = new Tab(event.tabTitle , new SummaryDisplay(event.data, event.totalExpense,
                 event.totalIncome, event.total, event.totalLabel).getRoot());
         clearTabs();
         createTabs(summaryTab);
