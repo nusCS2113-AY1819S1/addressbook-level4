@@ -29,8 +29,8 @@ public class CheckExpenditureCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Check expenditures in a specific period\n"
             + "Parameters: "
-            + PREFIX_START + "DATE1 "
-            + PREFIX_END + "DATE2 (must be larger than DATE1)\n"
+            + PREFIX_START + "STARTDATE "
+            + PREFIX_END + "ENDDATE (ENDDATE must be larger than STARTDATE)\n"
             + "Examples: " + COMMAND_WORD + " "
             + PREFIX_START + "27-09-2018 "
             + PREFIX_END + "09-10-2018 ";

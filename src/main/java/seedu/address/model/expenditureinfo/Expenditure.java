@@ -77,7 +77,7 @@ public class Expenditure {
                 .append(getDate())
                 .append(" Money: ")
                 .append(getMoney())
-                .append(" Category ")
+                .append(" Category: ")
                 .append(getCategory());
         return builder.toString();
     }

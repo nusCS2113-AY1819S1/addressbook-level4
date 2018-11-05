@@ -64,9 +64,10 @@ Format: `TDL_add t/TASK m/MODULE d/DATE p/PRIORITY`
 
 ****
 * The format for `m/MODULE` tag is controlled by the list of modules availble in the application. Hence, only valid NUS module codes are allowed. [Coming in v1.4]
-* Currently, the format for `m/MODULE` tag is strictly 2 alphabetic characters (upper or lower case) followed by 4 numbers.
+* Currently, the format for `m/MODULE` tag is strictly 2 alphabetic characters (upper or lower case) followed by 4 numbers. For module codes with an additional character that denotes a variant of a module, do remember to drop this character.
 * The format for `d/DATE` tag must be `DD-MM`, where `DD` refers to the date and `MM` refers to the month in numbers.
 * The `p/PRIORITY` tag only accepts integer 1, 2 or 3, where `1` refers to highest importance and `3` refers to lowest importance.
+* Duplicated tasks with the same name and module code are not allowed.
 ****
 
 Examples:
@@ -82,7 +83,7 @@ Format: `TDL_edit INDEX [t/TASK] [m/MODULE] [d/DATE] [p/PRIORITY]`
 
 ****
 * Edits the task at the specified `INDEX`. The index refers to the index number shown in the displayed tasks list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields should be provided. There will not be any changes made if no optional fields are provided.
+* At least one of the optional fields should be provided. There will not be any changes made if no optional fields are provided and the edit will still be considered as successful.
 * Existing values will be updated to the input values.
 * You can remove any task’s date or priority by typing `d/` or `p/` without specifying any fields after it. [Coming in v2.0]
 ****
@@ -190,7 +191,7 @@ Examples:
 
 * `TDL_sort date` +
 The tasks are now sorted by its due date.
-* `TDL_view uncompleted` + `TDL_sort priority` +
+* `TDL_view uncompleted` and then followed by `TDL_sort priority` +
 All uncompleted tasks will be sorted by their priority level.
 // end::TDLsort[]
 
@@ -276,7 +277,7 @@ The list is now populated with all expenditures regardless of their date or cate
 // tag::ETcheck[]
 === Checking expenditures : `ET_check`
 
-Checks the status of the expenditures in a particular period and generates a graph [coming in v1.4] to demonstrate how much money was spent on each unit period. +
+Checks the status of the expenditures in a particular period and generates a pie-chart to demonstrate how much money was spent on each unit period. +
 Format: `ET_check start/STARTDATE end/ENDDATE`
 
 ****
@@ -286,8 +287,8 @@ Format: `ET_check start/STARTDATE end/ENDDATE`
 
 Examples:
 
-* `ET_check start/01-01-2017 start/01-01-2018` +
-Checks the status of the expenditures from 01-01-2017 to 01-01-2018 and generates a graph [coming in v1.4] to demonstrate how much money was spent on each expenditure.
+* `ET_check start/01-01-2017 end/01-01-2018` +
+Checks the status of the expenditures from 01-01-2017 to 01-01-2018 and generates a pie-chart to illustrate how much money was spent on each expenditure.
 // end::ETcheck[]
 
 // tag::ETadvice[]
