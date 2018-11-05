@@ -57,9 +57,12 @@ public class CommandTestUtil {
     public static final String HOURS_DESC_2 = " " + PREFIX_HOURS + VALID_2_HOURS;
 
     public static final String INVALID_DEADLINE_DESC = " " + PREFIX_DEADLINE + "31/2"; // No 31st February in calendar
+    public static final String INVALID_TITLE_DESC = " " + PREFIX_TITLE + " "; // Title is empty
+    public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + " "; // Description is empty
     public static final String INVALID_PRIORITY_LEVEL_DESC = " " + PREFIX_PRIORITY + "mid"; // not a priority level
     public static final String INVALID_HOURS_DESC = " " + PREFIX_HOURS + "one"; // not an integer
-    public static final String INVALID_MODULE_CODE = "2113CS";
+    public static final String INVALID_MODULE_CODE_DESC = " " + PREFIX_MODULE_CODE + "2113CS";
+    public static final String EMPTY_MODULE_CODE_DESC = " " + PREFIX_MODULE_CODE + " ";
     public static final int OVERFLOW_INT = Integer.MAX_VALUE;
     public static final String INVALID_HOURS_OVERFLOW = " " + PREFIX_HOURS
             + Long.toString((long) OVERFLOW_INT + 1); // integer overflow

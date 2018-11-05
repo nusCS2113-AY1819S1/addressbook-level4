@@ -55,6 +55,8 @@ public class ParserUtil {
         String trimmedModuleCode = moduleCode.trim();
         if (trimmedModuleCode.isEmpty()) {
             throw new ParseException(MESSAGE_EMPTY_MODULE_CODE);
+        } else if (!ModuleCode.isValidModuleCode(trimmedModuleCode)) {
+            throw new ParseException(ModuleCode.MESSAGE_MODULE_CODE_CONSTRAINTS);
         }
         return new ModuleCode(trimmedModuleCode);
     }

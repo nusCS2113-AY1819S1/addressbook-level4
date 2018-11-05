@@ -1,7 +1,6 @@
 package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_MODULE_CODE;
 import static seedu.address.storage.XmlAdaptedTask.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.TypicalTasks.CS2102_HOMEWORK;
 
@@ -18,6 +17,7 @@ public class XmlAdaptedTaskTest {
     private static final String INVALID_DEADLINE = "#$@(";
     private static final String INVALID_PRIORITY_LEVEL = "midhigh";
     private static final String INVALID_EXPECTED_NUM_OF_HOURS = "one";
+    private static final String INVALID_MODULE_CODE = "2113CS";
     //private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_DEADLINE = CS2102_HOMEWORK.getDeadline().toString();
