@@ -393,21 +393,23 @@ The comments feature is facilitated by `Comments` class in the Logic/Comments fo
 
 * `Comments` -- Handles storage of comments, contains `initComments(String input)` to reformat comment section to HTML, `parseCommentSection(String input)` to format the comment section into a vector and `rewrite(Vector commentsVector)` to obtain the edited comment section.
 
-* `AddComment` -- Adds a new comment to the end of the comment section with the `addComment(String comment, String username)` function and inherits from `Comments` to reuse code.
+* `AddComment` -- Adds a new comment to the end of the comment section with the `addComment(String comment, String username)`
 
-* `DeleteComment` -- Deletes a comment given the line parameter in `deleteComment(int line)` function and inherits from `Comments` to reuse code.
+* `DeleteComment` -- Deletes a comment given the line parameter in `deleteComment(int line)`
 
-* `ReplyComment` -- Replies a comment given the line parameter in `replyComment(String comment, int line, String username)` and inherits from `Comments` to reuse code.
+* `ReplyComment` -- Replies a comment given the line parameter in `replyComment(String comment, int line, String username)`
 
 * `CommentFacade` -- An implementation of the Facade design pattern to interact with `AddCommentCommand`, `DeleteCommentCommand` and `ReplyCommentCommand`. It contains `addComment(String input, String comment, String username)` to be used in the `AddCommentCommand` to add a comment, `deleteComment(String input, int line)` to be used in `DeleteCommentCommand` to delete a comment and `deleteComment(String input, int line)` to be used in `ReplyCommentCommand` to reply comments.
 
-The comment features use `AddCommentCommand`, `DeleteCommentCommand` and `ReplyCommentCommand` for the user to interact with the comment section. The features of the following classes are as such:
+The Comand Line Interface uses `AddCommentCommand`, `DeleteCommentCommand`, `ReplyCommentCommand` and `EditCommand` for the user to interact with the comment section. The features of the following classes are as such:
 
 * `AddCommentCommand` -- Adds a comment using `CommentFacade` and `AddCommentCommandParser`
 
 * `DeleteCommentCommand` -- Deletes a comment using `CommentFacade` and `DeleteCommentCommandParser`
 
 * `ReplyCommentCommand` -- Replies a comment using `CommentFacade` and `ReplyCommentCommandParser`
+
+* `EditComamnd` -- Resets the whole comment section using `editEventDescriptor` and `EditCommandParser`
 
 Given below is an example usage scenario and how the Comments mechanism behaves at each step.
 
@@ -419,13 +421,16 @@ Step 3. The user/admin executes `replyComment 1 L/1 C/Athletic attire` to reply 
 
 Step 4. The admin executes `deleteComment 1 L/1` to delete a comment at index 1, line 1 of comment section. `DeleteCommentCommand` command obtains the comment section from `eventmanager.xml` calls `CommentFacade` to delete "Athletic attire" from the comment section and stores the comment section into `eventmanager.xml`
 
-
 [NOTE]
-If a command's syntax is wrong, the application will prompt the user to try again and suggest a relevant format to follow. In the case a false indexed event is not present, the functions will return an invalid index message. In the case a false comment section line is given, the functions will return an invalid line message.
+====
+* If a command's syntax is wrong, the application will prompt the user to try again and suggest a relevant format to follow. 
+* In the case a false indexed event is not present, the functions will return an invalid index message. 
+* In the case a false comment section line is given, the functions will return an invalid line message.
+====
 
 The following sequence diagram shows how the addComment operation works:
 
-image::addCommentSequenceDiagram.png[width="650"]
+image::addCommentSequenceDiagram.png[width="800"]
 
 The `replyComment` and `deleteComment` command does similar methods and need not be elaborated.
 
@@ -434,7 +439,7 @@ If the user uses the `find` command, the following functions will follow the ind
 
 ==== Design Considerations
 
-===== Aspect: How comment functions executes
+===== Aspect: How comment section is stored
 
 * **Alternative 1 (current choice):** Comment section stored in a single field in `eventmanager.xml`
 ** Pros: Easy to parse because one field is used for comment section.
@@ -450,7 +455,7 @@ If the user uses the `find` command, the following functions will follow the ind
 ** Cons: Additional code is needed to parse the comment section into a vector.
 * **Alternative 2:** An arrayList or List
 ** Pros: Library functions can help parse the comment section into the arrayList.
-** Cons: More code is neede to simple insert or delete elements inside the data structure.
+** Cons: More code is needed to simply insert or delete elements inside the data structure.
 // end::comments[]
 
 // tag::rsvp[]
