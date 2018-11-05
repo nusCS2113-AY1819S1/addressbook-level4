@@ -15,13 +15,13 @@ import seedu.planner.ui.SummaryEntry;
 
 //@@author tenvinc
 /**
- * This class represents a list containing all MonthSummary objects computed from a given list of records
+ * This class represents a list containing all Summary objects computed from a given list of records
  * and a predicate criteria. The internal implementation is a HashMap but it returns a list
  * and implements only list functions.
  */
 public class SummaryByMonthList {
 
-    protected HashMap<Month, MonthSummary> summaryMap = new HashMap<>();
+    protected HashMap<Month, Summary<Month>> summaryMap = new HashMap<>();
     private MoneyFlow total = new MoneyFlow("-0");
     private MoneyFlow totalIncome = new MoneyFlow("-0");
     private MoneyFlow totalExpense = new MoneyFlow("-0");
@@ -40,15 +40,15 @@ public class SummaryByMonthList {
         return FXCollections.observableList(list);
     }
 
-    public HashMap<Month, MonthSummary> getSummaryMap() {
+    public HashMap<Month, Summary<Month>> getSummaryMap() {
         return summaryMap;
     }
 
     /**
-     * Converts each {@code MonthSummary} to a UI friendly counterpart for display
+     * Converts each {@code Summary<Month>} to a UI friendly counterpart for display
      */
-    public SummaryEntry convertToUiFriendly(MonthSummary summary) {
-        return new SummaryEntry(summary.getMonth().toString(), summary.getTotalIncome().toString(),
+    public SummaryEntry convertToUiFriendly(Summary<Month> summary) {
+        return new SummaryEntry(summary.getIdentifier().toString(), summary.getTotalIncome().toString(),
                 summary.getTotalExpense().toString(), summary.getTotal().toString());
     }
 
@@ -63,7 +63,7 @@ public class SummaryByMonthList {
         if (summaryMap.containsKey(month)) {
             summaryMap.get(month).add(record);
         } else {
-            summaryMap.put(month, new MonthSummary(record));
+            summaryMap.put(month, new Summary<>(record, month));
         }
     }
 

@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 import seedu.planner.commons.core.LogsCenter;
 //@@author tenvinc
 /**
- * Represents a month of {@code MonthSummary} in the financial planner.
+ * Represents a month with year information in the financial planner.
  */
 public class Month {
 

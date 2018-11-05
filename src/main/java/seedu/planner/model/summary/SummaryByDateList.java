@@ -16,12 +16,12 @@ import seedu.planner.model.record.Record;
 import seedu.planner.ui.SummaryEntry;
 //@@author tenvinc
 /**
- * This class represents a list containing all DaySummary objects computed from a given list of records
+ * This class represents a list containing all Summary objects computed from a given list of records
  * and a predicate criteria. The internal implementation is a HashMap but it returns a list
  * and implements only list functions
  */
 public class SummaryByDateList {
-    private HashMap<Date, DaySummary> summaryMap = new HashMap<>();
+    private HashMap<Date, Summary<Date>> summaryMap = new HashMap<>();
 
     private MoneyFlow total = new MoneyFlow("-0");
     private MoneyFlow totalIncome = new MoneyFlow("-0");
@@ -43,16 +43,16 @@ public class SummaryByDateList {
         return FXCollections.observableList(list);
     }
 
-    public HashMap<Date, DaySummary> getSummaryMap() {
+    public HashMap<Date, Summary<Date>> getSummaryMap() {
         return summaryMap;
     }
 
 
     /**
-     * Converts each {@code DaySummary} to a UI friendly counterpart for display
+     * Converts each {@code Summary} to a UI friendly counterpart for display
      */
-    public SummaryEntry convertToUiFriendly(DaySummary summary) {
-        return new SummaryEntry(summary.getDate().toString(), summary.getTotalIncome().toString(),
+    public SummaryEntry convertToUiFriendly(Summary summary) {
+        return new SummaryEntry(summary.getIdentifier().toString(), summary.getTotalIncome().toString(),
                 summary.getTotalExpense().toString(), summary.getTotal().toString());
     }
 
@@ -67,7 +67,7 @@ public class SummaryByDateList {
         if (summaryMap.containsKey(date)) {
             summaryMap.get(date).add(record);
         } else {
-            summaryMap.put(date, new DaySummary(record));
+            summaryMap.put(date, new Summary<>(record, date));
         }
     }
 
