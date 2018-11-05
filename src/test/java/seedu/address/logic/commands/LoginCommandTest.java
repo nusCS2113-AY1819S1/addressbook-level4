@@ -70,7 +70,7 @@ public class LoginCommandTest {
         LoginCommand loginCommand = new LoginCommand(user);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(LoginCommand.MESSAGE_LOGGED);
+        thrown.expectMessage(String.format(LoginCommand.MESSAGE_LOGGED, user.getUsername().toString()));
         loginCommand.execute(modelStubWithUser, commandHistory);
     }
 
