@@ -54,11 +54,13 @@ public class DateTest {
     public void isValidDate() {
         // invalid dates
         assertFalse(DateUtil.isValidDate(29, 2, 2018)); // The number of days in the specified month is wrong
-        assertFalse((DateUtil.isValidDate(10, 100, 2018))); // The month does not exist
+        assertFalse((DateUtil.isValidDate(10, 13, 2018))); // The month does not exist
+        assertFalse(DateUtil.isValidDate(32, 2, 2019)); // The number of days is wrong
 
         // valid dates
         assertTrue(DateUtil.isValidDate(28, 2, 2018)); // There are 28 days in the month of February
-
+        assertTrue(DateUtil.isValidDate(29, 2, 2000)); // Special day in a leap year
+        assertTrue(DateUtil.isValidDate(30, 11, 2009)); // Last day of November
     }
 
     /**

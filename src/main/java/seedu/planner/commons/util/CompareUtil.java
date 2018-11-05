@@ -1,10 +1,12 @@
 package seedu.planner.commons.util;
 
 import java.util.Comparator;
+import java.util.Set;
 
 import seedu.planner.model.Month;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Record;
+import seedu.planner.model.tag.Tag;
 import seedu.planner.ui.SummaryEntry;
 
 /**
@@ -25,7 +27,7 @@ public class CompareUtil {
     }
 
     public static Comparator<SummaryEntry> compareTimeStampAttribute() {
-        return (a, b) -> compareDate().compare(new Date(a.getTimeStamp()), new Date(b.getTimeStamp()));
+        return (a, b) -> compareDate().compare(new Date(a.getIdentifier()), new Date(b.getIdentifier()));
     }
 
     /**
@@ -82,5 +84,8 @@ public class CompareUtil {
         };
     }
 
+    public static Comparator<Set<Tag>> compareTags() {
+        return Comparator.comparing(Object::toString);
+    }
 }
 

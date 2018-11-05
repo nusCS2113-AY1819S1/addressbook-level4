@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 
 import seedu.planner.commons.core.EventsCenter;
 import seedu.planner.commons.events.ui.ShowPieChartStatsEvent;
+import seedu.planner.commons.util.DateUtil;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.model.Model;
 import seedu.planner.model.record.Date;
@@ -45,8 +46,11 @@ public class StatisticCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         model.updateFilteredRecordList(predicate);
         CategoryStatisticsList categoryStats = new CategoryStatisticsList(model.getFilteredRecordList());
-        EventsCenter.getInstance().post(new ShowPieChartStatsEvent(categoryStats.getReadOnlyStatsList()));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, startDate, endDate));
+        String startDateFormatted = DateUtil.formatDate(startDate);
+        String endDateFormatted = DateUtil.formatDate(endDate);
+        EventsCenter.getInstance().post(new ShowPieChartStatsEvent(categoryStats.getReadOnlyStatsList(),
+                startDateFormatted, endDateFormatted));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, startDateFormatted, endDateFormatted));
     }
 
     @Override

@@ -16,9 +16,6 @@ import seedu.planner.testutil.Assert;
 import seedu.planner.testutil.RecordBuilder;
 import seedu.planner.testutil.SummaryBuilder;
 //@@author tenvinc
-/**
- * This tests both the DaySummary and MonthSummary classes
- */
 public class SummaryTest {
 
     private static final String DEFAULT_DATE = "10-2-2018";
@@ -30,58 +27,55 @@ public class SummaryTest {
     private static final SummaryBuilder summaryBuilder = new SummaryBuilder();
 
     @Test
-    public void constructor_nullRecordDaySummary_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new DaySummary(null));
-    }
-
-    @Test
-    public void constructor_nullRecordMonthSummary_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new MonthSummary(null));
+    public void constructor_nullRecordSummary_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> new Summary<>(null, new Month(DEFAULT_MONTH)));
+        Assert.assertThrows(NullPointerException.class, () -> new Summary<>(new RecordBuilder().build(), null));
+        Assert.assertThrows(NullPointerException.class, () -> new Summary<>(null, new Date(DEFAULT_DATE)));
     }
 
     @Test
     public void constructor_nullParamDaySummary_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new DaySummary(null,
+        Assert.assertThrows(NullPointerException.class, () -> new Summary<Date>(null,
                 new MoneyFlow(DEFAULT_MONEYFLOW_EXPENSE), new MoneyFlow(DEFAULT_MONEYFLOW_INCOME),
                 new MoneyFlow(DEFAULT_MONEYFLOW_TOTAL)));
-        Assert.assertThrows(NullPointerException.class, () -> new DaySummary(new Date(DEFAULT_DATE),
+        Assert.assertThrows(NullPointerException.class, () -> new Summary<>(new Date(DEFAULT_DATE),
                 null, new MoneyFlow(DEFAULT_MONEYFLOW_INCOME),
                 new MoneyFlow(DEFAULT_MONEYFLOW_TOTAL)));
-        Assert.assertThrows(NullPointerException.class, () -> new DaySummary(new Date(DEFAULT_DATE),
+        Assert.assertThrows(NullPointerException.class, () -> new Summary<>(new Date(DEFAULT_DATE),
                 new MoneyFlow(DEFAULT_MONEYFLOW_EXPENSE), null,
                 new MoneyFlow(DEFAULT_MONEYFLOW_TOTAL)));
-        Assert.assertThrows(NullPointerException.class, () -> new DaySummary(new Date(DEFAULT_DATE),
+        Assert.assertThrows(NullPointerException.class, () -> new Summary<>(new Date(DEFAULT_DATE),
                 new MoneyFlow(DEFAULT_MONEYFLOW_EXPENSE), new MoneyFlow(DEFAULT_MONEYFLOW_INCOME),
                 null));
     }
 
     @Test
     public void constructor_nullParamMonthSummary_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new MonthSummary(null,
+        Assert.assertThrows(NullPointerException.class, () -> new Summary<Month>(null,
                 new MoneyFlow(DEFAULT_MONEYFLOW_EXPENSE), new MoneyFlow(DEFAULT_MONEYFLOW_INCOME),
                 new MoneyFlow(DEFAULT_MONEYFLOW_TOTAL)));
-        Assert.assertThrows(NullPointerException.class, () -> new MonthSummary(new Month(DEFAULT_MONTH),
+        Assert.assertThrows(NullPointerException.class, () -> new Summary<>(new Month(DEFAULT_MONTH),
                 null, new MoneyFlow(DEFAULT_MONEYFLOW_INCOME), new MoneyFlow(DEFAULT_MONEYFLOW_TOTAL)));
-        Assert.assertThrows(NullPointerException.class, () -> new MonthSummary(new Month(DEFAULT_MONTH),
+        Assert.assertThrows(NullPointerException.class, () -> new Summary<>(new Month(DEFAULT_MONTH),
                 new MoneyFlow(DEFAULT_MONEYFLOW_EXPENSE), null,
                 new MoneyFlow(DEFAULT_MONEYFLOW_TOTAL)));
-        Assert.assertThrows(NullPointerException.class, () -> new MonthSummary(new Month(DEFAULT_MONTH),
+        Assert.assertThrows(NullPointerException.class, () -> new Summary<>(new Month(DEFAULT_MONTH),
                 new MoneyFlow(DEFAULT_MONEYFLOW_EXPENSE), new MoneyFlow(DEFAULT_MONEYFLOW_INCOME),
                 null));
     }
 
     @Test
     public void add_nullRecord_throwsNullPointerException() {
-        final Summary daySummary = summaryBuilder.buildDaySummary();
+        Summary<Date> daySummary = summaryBuilder.buildDaySummary();
         Assert.assertThrows(NullPointerException.class, () -> daySummary.add(null));
 
-        final Summary monthSummary = summaryBuilder.buildMonthSummary();
+        Summary<Month> monthSummary = summaryBuilder.buildMonthSummary();
         Assert.assertThrows(NullPointerException.class, () -> monthSummary.add(null));
     }
 
     @Test
     public void add_recordWithExpenseMoneyFlowToDaySummary_success() {
-        Summary summary = summaryBuilder.buildDaySummary();
+        Summary<Date> summary = summaryBuilder.buildDaySummary();
         RecordBuilder recordBuilder = new RecordBuilder();
         Record toAdd = recordBuilder.withDate(DEFAULT_DATE).withMoneyFlow(DEFAULT_MONEYFLOW_EXPENSE).build();
         summary.add(toAdd);
@@ -96,7 +90,7 @@ public class SummaryTest {
 
     @Test
     public void add_recordWithExpenseMoneyFlowToMonthSummary_success() {
-        Summary summary = summaryBuilder.buildMonthSummary();
+        Summary<Month> summary = summaryBuilder.buildMonthSummary();
         RecordBuilder recordBuilder = new RecordBuilder();
         Record toAdd = recordBuilder.withDate(DEFAULT_DATE).withMoneyFlow(DEFAULT_MONEYFLOW_EXPENSE).build();
         summary.add(toAdd);
@@ -112,7 +106,7 @@ public class SummaryTest {
 
     @Test
     public void add_recordWithIncomeMoneyFlowToDaySummary_success() {
-        Summary summary = summaryBuilder.buildDaySummary();
+        Summary<Date> summary = summaryBuilder.buildDaySummary();
         RecordBuilder recordBuilder = new RecordBuilder();
         Record toAdd = recordBuilder.withDate(DEFAULT_DATE).withMoneyFlow(DEFAULT_MONEYFLOW_INCOME).build();
         summary.add(toAdd);
@@ -127,7 +121,7 @@ public class SummaryTest {
 
     @Test
     public void add_recordWithIncomeMoneyFlowToMonthSummary_success() {
-        Summary summary = summaryBuilder.buildMonthSummary();
+        Summary<Month> summary = summaryBuilder.buildMonthSummary();
         RecordBuilder recordBuilder = new RecordBuilder();
         Record toAdd = recordBuilder.withDate(DEFAULT_DATE).withMoneyFlow(DEFAULT_MONEYFLOW_INCOME).build();
         summary.add(toAdd);

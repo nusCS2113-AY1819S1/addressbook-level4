@@ -3,6 +3,7 @@ package seedu.planner.commons.util;
 import static seedu.planner.commons.util.CompareUtil.compareDate;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -98,5 +99,14 @@ public class DateUtil {
         String dateToday = LocalDate.now().toString();
         String[] args = dateToday.split("-");
         return new Date(String.format("%s-%s-%s", args[2], args[1], args[0]));
+    }
+
+    /**
+     * Formats a date object into a display complying with
+     */
+    public static String formatDate(Date date) {
+        LocalDate localDate = LocalDate.of(date.getYear(), date.getMonth(), date.getDay());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+        return localDate.format(formatter);
     }
 }

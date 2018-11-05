@@ -18,7 +18,6 @@ import seedu.planner.model.record.Record;
  */
 public class DeleteCommandByDateEntry extends Command {
     public static final String COMMAND_WORD = "deletedate";
-    public static final String COMMAND_WORD_UNDERSCORE = "delete_date";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the all records identified by the date number used in the displayed record list.\n"
             + "PARAMETER: DATE (Must follow the format dd-mm-yyyy).\n"

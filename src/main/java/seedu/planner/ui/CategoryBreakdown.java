@@ -36,6 +36,14 @@ public class CategoryBreakdown extends UiPart<Region> {
         categoryBreakdown.getChildren().add(pieChart);
     }
 
+    public CategoryBreakdown(List<PieChart.Data> labelData, List<PieChart.Data> legendData, String label, String fxml) {
+        super(fxml);
+        pieChart = new CustomPieChart(labelData, legendData);
+        initPieChart(label);
+        categoryBreakdown.setStyle("-fx-background-color: grey");
+        categoryBreakdown.getChildren().add(pieChart);
+    }
+
     /** Sets up the pieChart's format */
     private void initPieChart(String label) {
         pieChart.setTitle(label);
