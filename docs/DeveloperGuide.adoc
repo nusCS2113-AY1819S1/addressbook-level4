@@ -423,15 +423,13 @@ Step 4. The admin executes `deleteComment 1 L/1` to delete a comment at index 1,
 
 [NOTE]
 ====
-* If a command's syntax is wrong, the application will prompt the user to try again and suggest a relevant format to follow. 
-* In the case a false indexed event is not present, the functions will return an invalid index message. 
+* If a command's syntax is wrong, the application will prompt the user to try again and suggest a relevant format to follow.
+* In the case a false indexed event is not present, the functions will return an invalid index message.
 * In the case a false comment section line is given, the functions will return an invalid line message.
 ====
 
 The following sequence diagram shows how the addComment operation works:
-
 image::addCommentSequenceDiagram.png[width="800"]
-
 The `replyComment` and `deleteComment` command does similar methods and need not be elaborated.
 
 [NOTE]
@@ -456,6 +454,7 @@ If the user uses the `find` command, the following functions will follow the ind
 * **Alternative 2:** An arrayList or List
 ** Pros: Library functions can help parse the comment section into the arrayList.
 ** Cons: More code is needed to simply insert or delete elements inside the data structure.
+
 // end::comments[]
 
 // tag::rsvp[]
