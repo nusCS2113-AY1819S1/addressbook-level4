@@ -128,7 +128,6 @@ public class Task {
                 && otherTask.getTitle().equals(getTitle())
                 && otherTask.getModuleCode().equals(getModuleCode());
     }
-
     //@@author ChanChunCheong
     /**
      * Defers the task to a later
@@ -179,7 +178,7 @@ public class Task {
                 && otherTask.isCompleted() == isCompleted()
                 && otherTask.getExpectedNumOfHours() == getExpectedNumOfHours()
                 && otherTask.getCompletedNumOfHours() == getCompletedNumOfHours()
-                && ((Task) other).getModuleCode().equals(getModuleCode());
+                && otherTask.getModuleCode().equals(getModuleCode());
     }
 
     @Override

@@ -64,11 +64,20 @@ public class AddressBook implements ReadOnlyTaskBook {
     //// task-level operations
 
     /**
-     * Returns true if a task with the same identity as {@code task} exists in the address book.
+     * Returns true if there is a task in task book that has exactly the same fields as input task
      */
     public boolean hasTask(Task task) {
         requireNonNull(task);
         return tasks.contains(task);
+    }
+
+    //@@author emobeany
+    /**
+     * Returns true if a task with the same identity as {@code task} exists in the address book.
+     */
+    public boolean isTheExactSameTaskAs(Task task) {
+        requireNonNull(task);
+        return tasks.containsExactCopyOf(task);
     }
 
     /**
@@ -79,15 +88,16 @@ public class AddressBook implements ReadOnlyTaskBook {
         tasks.add(t);
     }
 
+    //@@suthor emobeany
     /**
      * Replaces the given task {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The task identity of {@code editedPerson} must not be the same as another existing task in the address book.
      */
-    public void updateTask(Task target, Task editedPerson) {
-        requireNonNull(editedPerson);
+    public void updateTask(Task target, Task editedTask) {
+        requireNonNull(editedTask);
 
-        tasks.setTask(target, editedPerson);
+        tasks.setTask(target, editedTask);
     }
 
     /**

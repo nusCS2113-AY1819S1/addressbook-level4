@@ -24,6 +24,12 @@ public interface Model {
      */
     boolean hasTask(Task task);
 
+    //@@author emobeany
+    /**
+     * Returns true if there is a task in task book that has exactly the same fields as input task
+     */
+    boolean isTheExactSameTaskAs(Task task);
+
     void deferTaskDeadline(Task task, Deadline deadline);
     /**
      * Deletes the given task.
@@ -47,9 +53,6 @@ public interface Model {
     /** Selects the input date as deadline.*/
     void selectDeadline(Deadline deadline);
 
-    //@@author ChanChunCheong
-    void sortTask(String method);
-
     /** Gets deadline previously selected from the TaskBook.*/
     Deadline getDeadline();
 
@@ -59,6 +62,9 @@ public interface Model {
      * The task identity of {@code editedTask} must not be the same as another existing task in the task book.
      */
     void updateTask(Task target, Task editedTask);
+
+    //@@author ChanChunCheong
+    void sortTask(String method);
 
     /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();
