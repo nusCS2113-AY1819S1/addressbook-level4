@@ -11,19 +11,19 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class ExpectedTurnout {
 
     public static final String MESSAGE_EXPECTED_TURNOUT_CONSTRAINTS =
-            "Expected turnout should only contain numbers, and it can be any number including zero";
+            "Expected turnout should only contain positive numbers, and it can be any number including zero";
     public static final String EXPECTED_TURNOUT_VALIDATION_REGEX = "\\d{1,}";
     public final String value;
 
     /**
      * Constructs a {@code ExpectedTurnout}.
      *
-     * @param expectedturnout A valid phone number.
+     * @param expectedTurnout A valid phone number.
      */
-    public ExpectedTurnout(String expectedturnout) {
-        requireNonNull(expectedturnout);
-        checkArgument(isValidExpectedTurnout(expectedturnout), MESSAGE_EXPECTED_TURNOUT_CONSTRAINTS);
-        value = expectedturnout;
+    public ExpectedTurnout(String expectedTurnout) {
+        requireNonNull(expectedTurnout);
+        checkArgument(isValidExpectedTurnout(expectedTurnout), MESSAGE_EXPECTED_TURNOUT_CONSTRAINTS);
+        value = expectedTurnout;
     }
 
     /**

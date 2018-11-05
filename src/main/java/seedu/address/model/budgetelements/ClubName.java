@@ -23,7 +23,7 @@ public class ClubName {
     public final String clubName;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code ClubName}.
      *
      * @param clubname A valid club name.
      */
