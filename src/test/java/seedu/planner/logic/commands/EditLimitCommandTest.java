@@ -1,6 +1,19 @@
 package seedu.planner.logic.commands;
 
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static seedu.planner.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.planner.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.planner.testutil.TypicalLimits.LIMIT_100;
+import static seedu.planner.testutil.TypicalLimits.LIMIT_500;
+import static seedu.planner.testutil.TypicalLimits.LIMIT_ALL_DIFFERENT;
+import static seedu.planner.testutil.TypicalLimits.LIMIT_SINGLE_DATE_100;
+import static seedu.planner.testutil.TypicalLimits.LIMIT_SINGLE_DATE_500;
+import static seedu.planner.testutil.TypicalLimits.LIMIT_SINGLE_DATE_All_DIFF;
+import static seedu.planner.testutil.TypicalRecords.getTypicalFinancialPlanner;
+
 import org.junit.Test;
+
 import seedu.planner.commons.core.Messages;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.model.FinancialPlanner;
@@ -9,14 +22,6 @@ import seedu.planner.model.ModelManager;
 import seedu.planner.model.UserPrefs;
 import seedu.planner.model.record.Limit;
 import seedu.planner.testutil.LimitBuilder;
-
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static seedu.planner.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.planner.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.planner.testutil.TypicalIndexes.INDEX_SECOND_RECORD;
-import static seedu.planner.testutil.TypicalLimits.*;
-import static seedu.planner.testutil.TypicalRecords.getTypicalFinancialPlanner;
 //@@Author Zeng Hao(Oscar)
 
 public class EditLimitCommandTest {

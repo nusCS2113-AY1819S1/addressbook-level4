@@ -52,7 +52,8 @@ public class MainWindowHandle extends StageHandle {
         return detailedRecordCard;
     }
 
-    public StatsDisplayPanelHandle getStatsDisplayPanel() { return statsDisplayPanel; }
+    public StatsDisplayPanelHandle getStatsDisplayPanel() {
+        return statsDisplayPanel; }
 
     /**
      * Finds the SummaryDisplay node and instantiates the SummaryDisplayHandle before returning its reference

@@ -4,7 +4,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.planner.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.planner.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.planner.testutil.TypicalLimits.*;
+import static seedu.planner.testutil.TypicalLimits.LIMIT_100;
+import static seedu.planner.testutil.TypicalLimits.LIMIT_ALL_DIFFERENT;
+import static seedu.planner.testutil.TypicalLimits.LIMIT_DATE_END_DIFF;
+import static seedu.planner.testutil.TypicalLimits.LIMIT_SINGLE_DATE_100;
+import static seedu.planner.testutil.TypicalLimits.LIMIT_SINGLE_DATE_All_DIFF;
 import static seedu.planner.testutil.TypicalRecords.getTypicalFinancialPlanner;
 
 import org.junit.Test;
