@@ -103,6 +103,10 @@ public class TimeTable {
         return timeSlots.isEmpty();
     }
 
+    public void clear() {
+        timeSlots.clear();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
