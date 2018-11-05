@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.EditTestMarksCommand.createEditedPerson;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TEST_MARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TEST_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -48,7 +47,7 @@ public class AddTestMarksCommand extends Command {
     private final String testName;
     private final String testMarks;
     private final List<String> nameList;
-    private final EditTestMarksCommand.EditPersonDescriptor editPersonDescriptor = null;
+    private final EditCommand.EditPersonDescriptor editPersonDescriptor = null;
 
     public AddTestMarksCommand(NameContainsKeywordsPredicate predicate,
                                String testName, String testMarks, List<String> nameList) {
@@ -117,8 +116,8 @@ public class AddTestMarksCommand extends Command {
      */
     private CommandResult insertIntoPerson(Person person, Model model) throws CommandException {
         Person personToEdit = person;
-        EditTestMarksCommand.EditPersonDescriptor editPersonDescriptor =
-                new EditTestMarksCommand.EditPersonDescriptor();
+        EditCommand.EditPersonDescriptor editPersonDescriptor =
+                new EditCommand.EditPersonDescriptor();
         Test test = null;
         try {
             test = new Test(new TestName(testName), new Marks(testMarks), new Grade("Undefined"));
@@ -138,7 +137,7 @@ public class AddTestMarksCommand extends Command {
         testList.add(test);
         editPersonDescriptor.setTests(testList);
 
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Person editedPerson = EditCommand.createEditedPerson(personToEdit, editPersonDescriptor);
 
 
         model.updatePerson(personToEdit, editedPerson);

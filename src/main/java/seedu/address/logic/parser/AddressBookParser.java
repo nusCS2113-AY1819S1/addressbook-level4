@@ -181,7 +181,7 @@ public class AddressBookParser {
         case AssignGradeCommand.COMMAND_WORD:
         case AssignGradeCommand.COMMAND_WORD_2:
             return new AssignGradeCommandParser().parse(arguments);
-            
+
         case DeleteTestMarksCommand.COMMAND_WORD:
         case DeleteTestMarksCommand.COMMAND_WORD_2:
             return new DeleteTestMarksCommandParser().parse(arguments);
