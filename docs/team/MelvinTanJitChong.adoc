@@ -73,8 +73,6 @@ In this section, you are introduced to two commands, namely the `login` and `cre
 
 include::../UserGuide.adoc[tag=logincreateaccount]
 
-include::../UserGuide.adoc[tag=login]
-
 == Contributions to the Developer Guide
 
 === Preface
