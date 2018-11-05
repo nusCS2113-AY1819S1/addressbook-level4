@@ -1,9 +1,9 @@
 package seedu.address.model.task;
 
-import java.util.Calendar;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.Calendar;
 
 /**
  * Represents a Task's due date in the to-do list.
