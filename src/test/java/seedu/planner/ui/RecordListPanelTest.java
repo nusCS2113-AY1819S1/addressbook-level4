@@ -80,7 +80,6 @@ public class RecordListPanelTest extends GuiUnitTest {
      * Returns a list of records containing {@code recordCount} records that is used to populate the
      * {@code RecordListPanel}.
      */
-    //TODO: @test Rewrite this to not hardcode it. Originally supposed to get FP from reading directly
     private ObservableList<Record> createBackingList(int recordCount) throws Exception {
         Path xmlFile = createXmlFileWithRecords(recordCount);
         XmlSerializableFinancialPlanner xmlFinancialPlanner =

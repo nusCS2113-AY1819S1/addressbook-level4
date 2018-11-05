@@ -60,7 +60,7 @@ public class XmlSerializableFinancialPlanner extends XmlSerializableClass<Unique
         }
         return recordList;
     }
-    // TODO: change this to follow the others
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
