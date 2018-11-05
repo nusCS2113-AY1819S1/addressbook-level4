@@ -17,7 +17,7 @@ public class ForumThread extends BaseModel {
     private int moduleId;
     private String title;
 
-    // Identity Field
+    // Identity FieldAddress
     private List<Comment> comments;
 
     public int getModuleId() {

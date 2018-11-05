@@ -26,7 +26,7 @@ public class AnnounceCommand extends Command {
         + "Parameters: "
         + PREFIX_ANNOUNCE_TITLE + "TITLE "
         + PREFIX_ANNOUNCE_CONTENT + "CONTENT "
-        + "Example: " + COMMAND_WORD + " "
+        + "\nExample: " + COMMAND_WORD + " "
         + PREFIX_ANNOUNCE_TITLE + "Urgent! "
         + PREFIX_ANNOUNCE_CONTENT + "System maintenance from tomorrow 3PM to 5PM.";
 

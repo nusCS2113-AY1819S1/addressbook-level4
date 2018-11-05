@@ -23,7 +23,7 @@ public class SetAdminCommand extends Command {
         + "Parameters: "
         + PREFIX_USER_NAME + "USER NAME "
         + PREFIX_ADMIN_SET + "SET/REVERT "
-        + "Example: " + COMMAND_WORD + " "
+        + "\nExample: " + COMMAND_WORD + " "
         + PREFIX_USER_NAME + "john "
         + PREFIX_ADMIN_SET + "true  ";
 
