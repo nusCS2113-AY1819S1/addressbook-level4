@@ -1,10 +1,12 @@
 package seedu.address.model.task;
 
 //@@author JeremyInElysium
+
+
 /**
  * Represents a Milestone for any Task in the TaskBook
  */
-public class Milestone {
+public class Milestone implements Comparable<Milestone> {
     private final MilestoneDescription milestoneDescription;
     private final Rank rank;
 
@@ -47,7 +49,21 @@ public class Milestone {
                 && otherMilestone.getRank().equals(getRank());
     }
 
-    //need to edit this also
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Milestone // instanceof handles nulls
+                && rank.equals(((Milestone) other).rank));
+    }
+
+    /**
+     * To ensure that the milestoneList is sorted by the rank of each milestone
+     */
+    @Override
+    public int compareTo(Milestone other) {
+        return Integer.compare(this.rank.getRankInteger(), other.rank.getRankInteger());
+    }
+
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

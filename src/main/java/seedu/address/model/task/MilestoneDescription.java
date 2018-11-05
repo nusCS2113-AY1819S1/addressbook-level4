@@ -30,15 +30,18 @@ public class MilestoneDescription {
         this.milestoneDescription = milestoneDescription;
     }
 
+
     /**
      * Checks whether milestone description entered by the user is valid
      * @param milestoneDescription
      * @return true if valid
      */
+    /*
     public static boolean isValidMilestoneDescription(String milestoneDescription) {
         return true;
         //milestoneDescription.matches(MILESTONEDESCRIPTION_VALIDATION_REGEX);
     }
+    */
 
     public String getMilestoneDescription() {
         return this.milestoneDescription;

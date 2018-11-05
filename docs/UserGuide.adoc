@@ -61,6 +61,7 @@ Examples:
 
 * `add c/CS2113 t/Complete 2113 Tutorial d/with code done p/high h/1`
 
+// tag::add_milestone[]
 === Adding a milestone: `add_milestone`
 
 Adds a milestone to selected task from the task book +
@@ -70,6 +71,7 @@ Examples:
 
 * `add_milestone i/1 m/Complete Sections 8.1 to 8.5 r/1`
 
+// end::add_milestone[]
 === Complete a task: `complete`
 
 Complete a task in the task book by providing its index and the actual number of hours taken to complete the task +

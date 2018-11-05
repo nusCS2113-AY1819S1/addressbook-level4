@@ -1,9 +1,9 @@
 package seedu.address.model.task;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * Represents a Task in the address book.
@@ -11,7 +11,7 @@ import java.util.Set;
  */
 public class Task {
 
-    //private static final Logger logger = LogsCenter.getLogger(Task.class);
+    //private static final String PLACEHOLDER_MODULECODE = "A2113";
     private Deadline deadline;
     private ModuleCode moduleCode;
     private final String title;
@@ -20,7 +20,7 @@ public class Task {
     private boolean isCompleted = false;
     private final int expectedNumOfHours;
     private int completedNumOfHours;
-    private final Set<Milestone> milestoneList = new HashSet<>();
+    private final List<Milestone> milestoneList = new ArrayList<Milestone>();
     public Task(Deadline deadline, ModuleCode moduleCode, String title, String description, PriorityLevel priorityLevel,
                 int expectedNumOfHours) {
         this.deadline = deadline;
@@ -32,7 +32,8 @@ public class Task {
     }
 
     public Task(Deadline deadline, ModuleCode moduleCode, String title, String description, PriorityLevel priorityLevel,
-                int expectedNumOfHours, int completedNumOfHours, boolean isCompleted, Set<Milestone> milestoneList) {
+                int expectedNumOfHours, int completedNumOfHours, boolean isCompleted,
+                List<Milestone> milestoneList) {
         this.deadline = deadline;
         this.moduleCode = moduleCode;
         this.title = title;
@@ -138,15 +139,17 @@ public class Task {
     public Task addMilestone(Milestone milestone) {
         Task taskWithMilestones = new Task(this);
         taskWithMilestones.milestoneList.add(milestone);
+        Collections.sort(taskWithMilestones.milestoneList);
         return taskWithMilestones;
     }
 
     /**
      * @return list of milestones for the task.
      */
-    public Set<Milestone> getMilestoneList() {
-        return Collections.unmodifiableSet(milestoneList);
+    public List<Milestone> getMilestoneList() {
+        return Collections.unmodifiableList(milestoneList);
     }
+
     /**
      * Returns true if both tasks have the same data fields.
      * This defines a stronger notion of equality between two tasks.

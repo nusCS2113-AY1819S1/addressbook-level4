@@ -1,10 +1,8 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -169,7 +167,7 @@ public class XmlAdaptedTask {
         //Boolean cannot be checked for null --> if (isCompleted == null)
         final boolean modelIsCompleted = isCompleted;
 
-        final Set<Milestone> milestoneEntries = new HashSet<>();
+        final List<Milestone> milestoneEntries = new ArrayList<Milestone>();
         if (milestonelist != null && !milestonelist.isEmpty()) {
             for (XmlAdaptedMilestone entry : milestonelist) {
                 milestoneEntries.add(entry.toModelType());

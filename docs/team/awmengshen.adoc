@@ -1,0 +1,70 @@
+= Aw Meng Shen - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: TaskBook
+
+---
+
+== Overview
+
+*TaskBook* is a desktop task manager application that is designed for students. It allows users to keep track of the
+progress of their active tasks and manage their workload accordingly. The goal of *TaskBook* is to improve the
+user’s productivity through efficient task management. *TaskBook* is optimized for students who prefer to work with
+a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+
+== Summary of contributions
+
+|===
+|_This section summarises my contributions to the project. These contributions range from simple, minor enhancements
+to complex, major enhancements._
+|===
+
+* *Major enhancement*: Implemented the option to *add multiple milestones a selected task*.
+** What it does: It allows the user to split up a huge task into smaller, manageable subtasks called milestones.
+** Justification: This feature will allow the user to ensure that he/she is on track to complete the task by hitting
+each milestone specified by the user. It enables the user to better manage his time and resources by splitting a task up.
+** Highlights:
+
+
+* *Minor enhancement*: Implemented a sort function for each task such that the milestones for each task are
+sorted by their ranks.
+
+* *Code contributed*: [https://github.com/CS2113-AY1819S1-W13-3/main/blob/master/collated/functional/JeremyInElysium.md[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+** Enhancements to existing features:
+*** Modified the GUI for each task to include a list of the milestones for that particular task (Pull requests https://github.com[#33], https://github.com[#34])
+*** Wrote additional tests for existing features to increase coverage from XX% to XX% (Pull requests https://github.com[#36], https://github.com[#38])
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+
+== Contributions to the User Guide
+
+
+|===
+|_This section highlights the documentation I contributed towards the User Guide with the aim of providing clear and
+concise instructions at a level that is easy for the end-user to follow._
+|===
+
+include::../UserGuide.adoc[tag=add_milestone]
+
+
+== Contributions to the Developer Guide
+
+|===
+|_This section highlights the technical documentation I contributed towards the Developer Guide. It provides the
+technical depth and details required for future developers of this application to maintain/expand it._
+|===
+
+include::../DeveloperGuide.adoc[tag=undoredo]
+
+
+

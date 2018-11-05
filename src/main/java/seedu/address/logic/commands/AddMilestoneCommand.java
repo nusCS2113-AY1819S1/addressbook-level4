@@ -24,7 +24,7 @@ public class AddMilestoneCommand extends Command implements CommandParser {
     public static final String COMMAND_WORD = "add_milestone";
     public static final String MESSAGE_SUCCESS = "New milestone added: %1$s";
     public static final String MESSAGE_TASK_NOT_FOUND = "This task does not exist in the task book";
-    public static final String MESSAGE_DUPLICATE_RANK = "Invalid rank entered.";
+    public static final String MESSAGE_DUPLICATE_RANK = "Duplicate rank entered.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds milestone(s) to selected task. "
             + "Parameters: "
             + PREFIX_INDEX + "INDEX "
@@ -67,7 +67,12 @@ public class AddMilestoneCommand extends Command implements CommandParser {
 
         Task taskToEdit = lastShownList.get(index.getZeroBased());
 
-        //TODO: ensure rank of milestone that is being added does not collide with existing milestones' ranks
+        for (Milestone temp: taskToEdit.getMilestoneList()) {
+            if (temp.getRank().equals(toAdd.getRank())) {
+                throw new CommandException(MESSAGE_DUPLICATE_RANK);
+            }
+        }
+
         /*
         if(taskToEdit.milestoneSet.size() <= rank) {
             throw new CommandException(MESSAGE_DUPLICATE_RANK);

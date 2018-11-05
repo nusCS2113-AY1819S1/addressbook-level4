@@ -27,7 +27,6 @@ public class XmlAdaptedMilestone {
      * Constructs an XmlAdaptedTag.
      * This is the no-arg constructor that is required by JAXB.
      */
-
     public XmlAdaptedMilestone() {}
 
     /**
@@ -60,9 +59,11 @@ public class XmlAdaptedMilestone {
                     MISSING_FIELD_MESSAGE_FORMAT, MilestoneDescription.class.getSimpleName()));
         }
 
+        /*
         if (!MilestoneDescription.isValidMilestoneDescription(descrip)) {
             throw new IllegalValueException(MilestoneDescription.MESSAGE_MILESTONEDESCRIPTION_CONSTRAINTS);
         }
+        */
         final MilestoneDescription modelMilestoneDescription = new MilestoneDescription(descrip);
 
         if (rank == null) {
