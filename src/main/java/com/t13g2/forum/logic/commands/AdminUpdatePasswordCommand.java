@@ -24,7 +24,7 @@ public class AdminUpdatePasswordCommand extends Command {
         + "Parameters: "
         + PREFIX_USER_NAME + "USER NAME "
         + PREFIX_USER_PASSWORD + "USER PASSWORD "
-        + "Example: " + COMMAND_WORD + " "
+        + "\nExample: " + COMMAND_WORD + " "
         + PREFIX_USER_NAME + "john "
         + PREFIX_USER_PASSWORD + "456";
 
