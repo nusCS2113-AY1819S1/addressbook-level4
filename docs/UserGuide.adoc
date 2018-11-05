@@ -90,7 +90,7 @@ User: Logs in to account +
 Format: `login u/USERNAME p/PASSWORD` +
 
 |===
-Examples:
+|Examples:
 
 * `login u/Gerald Chua p/password12345` +
 Logs in Gerald Chua +
@@ -105,7 +105,7 @@ User: Logs out of an account +
 Format: `logout` +
 
 |===
-Examples:
+|Examples:
 
 * `login u/Gerald Chua p/password12345` +
 Logs in Gerald Chua +
