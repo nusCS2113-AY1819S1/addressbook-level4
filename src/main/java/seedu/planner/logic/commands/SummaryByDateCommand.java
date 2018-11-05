@@ -14,6 +14,7 @@ import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.summary.SummaryByDateList;
+import seedu.planner.model.summary.SummaryList;
 
 //@@author tenvinc
 /** List all the summary of records within a period of time specified */
@@ -43,11 +44,10 @@ public class SummaryByDateCommand extends SummaryCommand {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredRecordList(predicate);
-        SummaryByDateList summaryList = new SummaryByDateList(model.getFilteredRecordList());
+        SummaryList summaryList = new SummaryByDateList(model.getFilteredRecordList());
         String tabTitle = String.format(FORMAT_TITLE_SUMMARY, DateUtil.formatDate(startDate),
                 DateUtil.formatDate(endDate));
-        EventsCenter.getInstance().post(new ShowSummaryTableEvent(summaryList.getSummaryList(),
-                summaryList.getTotalExpense(), summaryList.getTotalIncome(), summaryList.getTotal(), TOTAL_LABEL,
+        EventsCenter.getInstance().post(new ShowSummaryTableEvent(summaryList, TOTAL_LABEL,
                 tabTitle));
         return new CommandResult(String.format(MESSAGE_SUCCESS, summaryList.size()));
     }

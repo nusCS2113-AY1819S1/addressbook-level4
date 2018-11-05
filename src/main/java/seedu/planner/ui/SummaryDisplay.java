@@ -11,7 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.planner.commons.core.LogsCenter;
-import seedu.planner.model.record.MoneyFlow;
+import seedu.planner.model.summary.SummaryList;
 //@@author tenvinc
 /**
  * This UI component is responsible for displaying the summary requested by the user
@@ -42,18 +42,19 @@ public class SummaryDisplay extends UiPart<Region> {
     @FXML
     private TableColumn totalColumn;
 
-    public SummaryDisplay(ObservableList<SummaryEntry> toDisplay, MoneyFlow totalExpense, MoneyFlow totalIncome,
-                          MoneyFlow total, String totalLabel) {
+    public SummaryDisplay(SummaryList toDisplay, String totalLabel) {
         super(FXML);
         init(toDisplay);
-        summaryTable.getItems().add(new SummaryEntry(totalLabel, totalIncome.toString(), totalExpense.toString(),
-                total.toString()));
+        summaryTable.getItems().add(new SummaryEntry(totalLabel, toDisplay.getTotalIncome().toString(),
+                toDisplay.getTotalExpense().toString(),
+                toDisplay.getTotal().toString()));
     }
 
     /**
      * This function links up all the columns of {@code TableView} with the parameters of {@code SummaryEntry}
      */
-    private void init(ObservableList<SummaryEntry> toDisplay) {
+    private void init(SummaryList toDisplay) {
+        dateColumn.setText(toDisplay.getIdentifierName().toUpperCase());
         dateColumn.setCellValueFactory(
                 new PropertyValueFactory<SummaryEntry, String>("identifier"));
         totalIncomeColumn.setCellValueFactory(
@@ -62,6 +63,6 @@ public class SummaryDisplay extends UiPart<Region> {
                 new PropertyValueFactory<SummaryEntry, String>("totalExpense"));
         totalColumn.setCellValueFactory(
                 new PropertyValueFactory<SummaryEntry, String>("total"));
-        summaryTable.setItems(toDisplay);
+        summaryTable.setItems(toDisplay.getSummaryList());
     }
 }

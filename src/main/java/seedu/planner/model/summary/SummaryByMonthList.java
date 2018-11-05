@@ -19,7 +19,7 @@ import seedu.planner.ui.SummaryEntry;
  * and a predicate criteria. The internal implementation is a HashMap but it returns a list
  * and implements only list functions.
  */
-public class SummaryByMonthList {
+public class SummaryByMonthList extends SummaryList {
 
     protected HashMap<Month, Summary<Month>> summaryMap = new HashMap<>();
     private MoneyFlow total = new MoneyFlow("-0");
@@ -33,6 +33,7 @@ public class SummaryByMonthList {
         }
     }
 
+    @Override
     public ObservableList<SummaryEntry> getSummaryList() {
         List<SummaryEntry> list = summaryMap.keySet().stream().sorted(CompareUtil.compareMonth())
                 .map(k -> SummaryEntry.convertToUiFriendly(summaryMap.get(k)))
@@ -74,20 +75,34 @@ public class SummaryByMonthList {
         return money.toDouble() < 0;
     }
 
+    @Override
     public MoneyFlow getTotal() {
         return total;
     }
 
+    @Override
     public MoneyFlow getTotalIncome() {
         return totalIncome;
     }
 
+    @Override
     public MoneyFlow getTotalExpense() {
         return totalExpense;
     }
 
+    @Override
+    public String getIdentifierName() {
+        return Month.class.getSimpleName();
+    }
+
+    @Override
     public int size() {
         return summaryMap.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return summaryMap.size() == 0;
     }
 
     @Override

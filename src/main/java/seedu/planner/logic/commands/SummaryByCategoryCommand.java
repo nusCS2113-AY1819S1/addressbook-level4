@@ -14,6 +14,7 @@ import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.summary.SummaryByCategoryList;
+import seedu.planner.model.summary.SummaryList;
 
 //@@author tenvinc
 
@@ -45,11 +46,10 @@ public class SummaryByCategoryCommand extends SummaryCommand {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredRecordList(predicate);
-        SummaryByCategoryList summaryList = new SummaryByCategoryList(model.getFilteredRecordList());
+        SummaryList summaryList = new SummaryByCategoryList(model.getFilteredRecordList());
         String tabTitle = String.format(FORMAT_TITLE_SUMMARY, DateUtil.formatDate(startDate),
                 DateUtil.formatDate(endDate));
-        EventsCenter.getInstance().post(new ShowSummaryTableEvent(summaryList.getSummaryList(),
-                summaryList.getTotalExpense(), summaryList.getTotalIncome(), summaryList.getTotal(), TOTAL_LABEL,
+        EventsCenter.getInstance().post(new ShowSummaryTableEvent(summaryList, TOTAL_LABEL,
                 tabTitle));
         return new CommandResult(String.format(MESSAGE_SUCCESS, summaryList.size()));
     }

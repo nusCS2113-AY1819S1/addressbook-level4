@@ -22,7 +22,7 @@ import seedu.planner.ui.SummaryEntry;
  * and a predicate criteria. The internal implementation is a HashMap but it returns a list
  * and implements only list functions
  */
-public class SummaryByCategoryList {
+public class SummaryByCategoryList extends SummaryList {
     private HashMap<Set<Tag>, Summary<Set<Tag>>> summaryMap = new HashMap<>();
 
     private MoneyFlow total = new MoneyFlow("-0");
@@ -37,6 +37,7 @@ public class SummaryByCategoryList {
         }
     }
 
+    @Override
     public ObservableList<SummaryEntry> getSummaryList() {
 
         List<SummaryEntry> list = summaryMap.keySet().stream().sorted(CompareUtil.compareTags())
@@ -55,7 +56,8 @@ public class SummaryByCategoryList {
      * @param record given record
      * @see Summary#add(Record)
      */
-    private void addRecordToMap(Record record) {
+    @Override
+    protected void addRecordToMap(Record record) {
         Set<Tag> tags = record.getTags();
         if (summaryMap.containsKey(tags)) {
             summaryMap.get(tags).add(record);
@@ -79,20 +81,34 @@ public class SummaryByCategoryList {
         return money.toDouble() < 0;
     }
 
+    @Override
     public int size() {
         return summaryMap.size();
     }
 
+    @Override
+    public boolean isEmpty() {
+        return summaryMap.size() == 0;
+    }
+
+    @Override
     public MoneyFlow getTotal() {
         return total;
     }
 
+    @Override
     public MoneyFlow getTotalIncome() {
         return totalIncome;
     }
 
+    @Override
     public MoneyFlow getTotalExpense() {
         return totalExpense;
+    }
+
+    @Override
+    public String getIdentifierName() {
+        return "Category";
     }
 
     @Override

@@ -20,7 +20,7 @@ import seedu.planner.ui.SummaryEntry;
  * and a predicate criteria. The internal implementation is a HashMap but it returns a list
  * and implements only list functions
  */
-public class SummaryByDateList {
+public class SummaryByDateList extends SummaryList {
     private HashMap<Date, Summary<Date>> summaryMap = new HashMap<>();
 
     private MoneyFlow total = new MoneyFlow("-0");
@@ -35,6 +35,7 @@ public class SummaryByDateList {
         }
     }
 
+    @Override
     public ObservableList<SummaryEntry> getSummaryList() {
 
         List<SummaryEntry> list = summaryMap.keySet().stream().sorted(CompareUtil.compareDate())
@@ -47,13 +48,9 @@ public class SummaryByDateList {
         return summaryMap;
     }
 
-    /** Adds a record to the {@code summaryMap} while following some rules.
-     * If there exists a summary with {@code Date} of record, then record is added to the summary.
-     * Else, it creates a summary with the details of the record.
-     * @param record given record
-     * @see Summary#add(Record)
-     */
-    private void addRecordToMap(Record record) {
+
+    @Override
+    protected void addRecordToMap(Record record) {
         Date date = record.getDate();
         if (summaryMap.containsKey(date)) {
             summaryMap.get(date).add(record);
@@ -77,20 +74,34 @@ public class SummaryByDateList {
         return money.toDouble() < 0;
     }
 
+    @Override
     public int size() {
         return summaryMap.size();
     }
 
+    @Override
+    public boolean isEmpty() {
+        return summaryMap.size() == 0;
+    }
+
+    @Override
     public MoneyFlow getTotal() {
         return total;
     }
 
+    @Override
     public MoneyFlow getTotalIncome() {
         return totalIncome;
     }
 
+    @Override
     public MoneyFlow getTotalExpense() {
         return totalExpense;
+    }
+
+    @Override
+    public String getIdentifierName() {
+        return Date.class.getSimpleName();
     }
 
     @Override
