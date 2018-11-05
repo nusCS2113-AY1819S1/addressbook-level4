@@ -59,7 +59,7 @@
     <persons>
         <name>Martin Mueller</name>
         <phone isPrivate="false">8482131</phone>
-        <email isPrivate="false">hans@example.com</email>
+        <email isPrivate="false">hans2@example.com</email>
         <address isPrivate="false">chicago ave</address>
         <department isPrivate="false">Admin</department>
     </persons>
