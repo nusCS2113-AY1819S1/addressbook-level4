@@ -425,7 +425,7 @@ If a command's syntax is wrong, the application will prompt the user to try agai
 
 The following sequence diagram shows how the addComment operation works:
 
-image::addCommentSequenceDiagram.png[width="650"]
+image::addCommentSequenceDiagram.png[width="800"]
 
 The `replyComment` and `deleteComment` command does similar methods and need not be elaborated.
 
