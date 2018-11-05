@@ -11,8 +11,9 @@ import seedu.address.model.script.CommandType;
  * Create the log file and write commands that cannot be executed.
  */
 public class ScriptLog {
+    public static final String NEXT_LINE = System.lineSeparator();
+
     private static final String UNDERSCORE = "_";
-    private static final String NEXT_LINE = "\n";
     private static final String COLON = ":";
     private static final String LINE = "Line ";
 

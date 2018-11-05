@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.FileUtil;
-import seedu.address.logic.ValidCommandList;
 import seedu.address.model.UserPrefs;
 
 /**
@@ -66,8 +65,8 @@ public class ScriptSetup {
         File file = new File(defaultLocation + scriptFolder + ADD_PERSONS_FILE);
         File file2 = new File(defaultLocation + scriptFolder + ADD_GROUPS_FILE);
         try {
-            FileUtil.writeToTextFile(file, ValidCommandList.getAddCommand());
-            FileUtil.writeToTextFile(file2, ValidCommandList.getGroupCommand());
+            FileUtil.writeToTextFile(file, ScriptsGenerator.getAddCommand());
+            FileUtil.writeToTextFile(file2, ScriptsGenerator.getGroupCommand());
         } catch (IOException ioe) {
             logger.info("Sample Text cannot be created");
         }

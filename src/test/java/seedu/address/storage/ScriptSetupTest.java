@@ -14,9 +14,9 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.FileUtilTest;
-import seedu.address.logic.ValidCommandList;
 import seedu.address.model.UserPrefs;
 import seedu.address.storage.scripts.ScriptSetup;
+import seedu.address.storage.scripts.ScriptsGenerator;
 
 public class ScriptSetupTest {
     public static final String SCRIPTS_LOCATION = "/scripts/";
@@ -47,12 +47,12 @@ public class ScriptSetupTest {
         testAddGroupsFile = new File(FileUtil.getRootLocation() + FileUtilTest.TestFileLocation
                 + scriptSetup.ADD_GROUPS_FILE);
 
-        FileUtil.writeToTextFile(testAddGroupsFile, ValidCommandList.getGroupCommand());
+        FileUtil.writeToTextFile(testAddGroupsFile, ScriptsGenerator.getGroupCommand());
 
         testAddPersonsFile = new File(FileUtil.getRootLocation() + FileUtilTest.TestFileLocation
                 + scriptSetup.ADD_PERSONS_FILE);
 
-        FileUtil.writeToTextFile(testAddPersonsFile, ValidCommandList.getAddCommand());
+        FileUtil.writeToTextFile(testAddPersonsFile, ScriptsGenerator.getAddCommand());
 
         /*Remove the scripts directory
         File dir = new File(scriptSetup.getDefaultLocation() + SCRIPTS_LOCATION);
