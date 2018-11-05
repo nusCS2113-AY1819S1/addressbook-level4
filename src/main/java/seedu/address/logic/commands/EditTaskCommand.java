@@ -20,6 +20,7 @@ import seedu.address.logic.parser.EditTaskCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.task.Deadline;
+import seedu.address.model.task.ModuleCode;
 import seedu.address.model.task.PriorityLevel;
 import seedu.address.model.task.Task;
 
@@ -108,7 +109,7 @@ public class EditTaskCommand extends Command implements CommandParser {
         assert taskToEdit != null;
 
         Deadline deadline = taskToEdit.getDeadline();
-        String updatedModuleCode = editTaskDescriptor.getModuleCode().orElse(taskToEdit.getModuleCode());
+        ModuleCode updatedModuleCode = editTaskDescriptor.getModuleCode().orElse(taskToEdit.getModuleCode());
         String updatedTitle = editTaskDescriptor.getTitle().orElse(taskToEdit.getTitle());
         String updatedDescription = editTaskDescriptor.getDescription().orElse(taskToEdit.getDescription());
         PriorityLevel updatedPriority = editTaskDescriptor.getPriorityLevel().orElse(taskToEdit.getPriorityLevel());
@@ -142,7 +143,7 @@ public class EditTaskCommand extends Command implements CommandParser {
     public static class EditTaskDescriptor {
         private String title;
         private String description;
-        private String moduleCode;
+        private ModuleCode moduleCode;
         private PriorityLevel priorityLevel;
         private Integer expectedNumOfHours;
 
@@ -174,7 +175,7 @@ public class EditTaskCommand extends Command implements CommandParser {
             return Optional.ofNullable(description);
         }
 
-        public Optional<String> getModuleCode() {
+        public Optional<ModuleCode> getModuleCode() {
             return Optional.ofNullable(moduleCode);
         }
 
@@ -194,7 +195,7 @@ public class EditTaskCommand extends Command implements CommandParser {
             this.description = description;
         }
 
-        public void setModuleCode(String moduleCode) {
+        public void setModuleCode(ModuleCode moduleCode) {
             this.moduleCode = moduleCode;
         }
 

@@ -49,7 +49,7 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
         String description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         PriorityLevel priority = ParserUtil.parsePriorityLevel(argMultimap.getValue(PREFIX_PRIORITY).get());
         int expectedNumOfHours = ParserUtil.parseHours(argMultimap.getValue(PREFIX_HOURS).get());
-        Task task = new Task(moduleCode, title, description, priority, expectedNumOfHours);
+        Task task = new Task(null, moduleCode, title, description, priority, expectedNumOfHours);
 
         return new AddTaskCommand(task);
     }

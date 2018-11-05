@@ -44,15 +44,6 @@ public class Task {
         this.milestoneList.addAll(milestoneList);
     }
 
-    public Task(ModuleCode moduleCode, String title, String description,
-                PriorityLevel priorityLevel, int expectedNumOfHours) {
-        this.moduleCode = moduleCode;
-        this.title = title;
-        this.description = description;
-        this.priorityLevel = priorityLevel;
-        this.expectedNumOfHours = expectedNumOfHours;
-    }
-
     public Task(Task other) {
         this.deadline = other.deadline;
         this.moduleCode = other.moduleCode;
