@@ -395,9 +395,9 @@ The comments feature is facilitated by `Comments` class in the Logic/Comments fo
 
 * `AddComment` -- Adds a new comment to the end of the comment section with the `addComment(String comment, String username)` function and inherits from `Comments` to reuse code.
 
-* `DeleteComment` -- Deletes a comment given the line parameter in `deleteComment(int line)` function and inherits from `Comments` to reuse code.
+* `DeleteComment` -- Deletes a comment given the line parameter in `deleteComment(int line)` function.
 
-* `ReplyComment` -- Replies a comment given the line parameter in `replyComment(String comment, int line, String username)` and inherits from `Comments` to reuse code.
+* `ReplyComment` -- Replies a comment given the line parameter in `replyComment(String comment, int line, String username)`.
 
 * `CommentFacade` -- An implementation of the Facade design pattern to interact with `AddCommentCommand`, `DeleteCommentCommand` and `ReplyCommentCommand`. It contains `addComment(String input, String comment, String username)` to be used in the `AddCommentCommand` to add a comment, `deleteComment(String input, int line)` to be used in `DeleteCommentCommand` to delete a comment and `deleteComment(String input, int line)` to be used in `ReplyCommentCommand` to reply comments.
 
