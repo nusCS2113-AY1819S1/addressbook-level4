@@ -76,7 +76,7 @@ public class EditCommandParser implements Parser
                 editEventDescriptor.setComment(new Comment(defaultComments));
             }
             else {
-                throw new ParseException("C/ needs to be C/" + defaultComments + "to reset the comment section.");
+                throw new ParseException("C/ needs to be C/" + defaultComments + " to reset the comment section.");
             }
         }
 

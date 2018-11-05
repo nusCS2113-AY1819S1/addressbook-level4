@@ -5,14 +5,8 @@ import static org.junit.Assert.assertEquals;
 
 import static seedu.address.logic.commands.CommandTestUtil.ADMIN_PASSWORD_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.ADMIN_USERNAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.CONTACT_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADMIN_PASSWORD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADMIN_USERNAME;
-import static seedu.address.logic.commands.CommandTestUtil.VENUE_DESC_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINE;
 import static seedu.address.testutil.TypicalEvents.DANIEL;
@@ -24,7 +18,6 @@ import org.junit.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddCommentCommand;
 import seedu.address.logic.commands.CommentAssertion;
 import seedu.address.logic.commands.DeleteCommentCommand;
