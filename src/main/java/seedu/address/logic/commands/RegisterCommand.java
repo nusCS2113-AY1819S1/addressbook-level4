@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import seedu.address.commons.events.logic.RegisterSuccessEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -16,12 +17,12 @@ import seedu.address.security.SecurityAuthenticationException;
 /**
  * Adds a person to the address book.
  */
-public class AddCommand extends Command {
+public class RegisterCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
-    public static final String COMMAND_WORD_ALIAS = "a";
+    public static final String COMMAND_WORD = "register";
+    public static final String COMMAND_WORD_ALIAS = "re";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Registers a person to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -36,17 +37,19 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New person registered: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Person toAdd;
+    private final String password;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddCommand(Person person) {
+    public RegisterCommand(Person person, String password) {
         requireNonNull(person);
         toAdd = person;
+        this.password = password;
     }
 
     @Override
@@ -54,23 +57,26 @@ public class AddCommand extends Command {
             throws CommandException, SecurityAuthenticationException {
         requireNonNull(model);
 
-        if (model.getUser() == null) {
-            throw new SecurityAuthenticationException();
+        if (model.getUser() != null) {
+            throw new SecurityAuthenticationException("Please logout if you would like register a new account");
         }
 
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+
         model.addPerson(toAdd);
         model.commitAddressBook();
+
+        raise(new RegisterSuccessEvent(toAdd.getName().toString(), password));
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddCommand // instanceof handles nulls
-                && toAdd.equals(((AddCommand) other).toAdd));
+                || (other instanceof RegisterCommand // instanceof handles nulls
+                && toAdd.equals(((RegisterCommand) other).toAdd));
     }
 }
