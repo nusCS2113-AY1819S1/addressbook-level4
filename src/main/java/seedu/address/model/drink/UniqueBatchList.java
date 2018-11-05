@@ -288,11 +288,11 @@ public class UniqueBatchList implements Iterable<Batch> {
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
-    public ObservableList<Batch> asUnmodifiableObservableList() {
+    public ObservableList<Batch> asUnmodifiableObservableList() throws EmptyBatchListException {
         try {
             sortBatches();
         } catch (EmptyBatchListException e) {
-            return FXCollections.unmodifiableObservableList(null);
+            throw e;
         }
         return FXCollections.unmodifiableObservableList(internalList);
     }

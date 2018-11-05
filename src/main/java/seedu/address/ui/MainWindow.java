@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -16,6 +17,7 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.commons.events.ui.InventoryPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
@@ -37,10 +39,10 @@ public class MainWindow extends UiPart<Stage> {
     private BrowserPanel browserPanel;
     //private PersonListPanel personListPanel;
     private DrinkListPanel drinkListPanel;
+    private BatchListPanel batchListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
-
     @FXML
     private StackPane browserPlaceholder;
 
@@ -53,6 +55,9 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     //private StackPane personListPanelPlaceholder;
     private StackPane drinkListPanelPlaceholder;
+
+    @FXML
+    private StackPane batchListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -132,6 +137,8 @@ public class MainWindow extends UiPart<Stage> {
         drinkListPanel = new DrinkListPanel(logic.getFilteredDrinkList());
         drinkListPanelPlaceholder.getChildren().add(drinkListPanel.getRoot());
 
+        batchListPanel = new BatchListPanel(FXCollections.observableArrayList());
+        batchListPanelPlaceholder.getChildren().add(batchListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -141,6 +148,15 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    @Subscribe
+    private void handleInventoryPanelSelectionChangedEvent(InventoryPanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        // insert what to do here
+        batchListPanel = new BatchListPanel(
+                event.getNewSelection().getObservableBatchList());
+        batchListPanelPlaceholder.getChildren().add(batchListPanel.getRoot());
     }
 
     void hide() {
