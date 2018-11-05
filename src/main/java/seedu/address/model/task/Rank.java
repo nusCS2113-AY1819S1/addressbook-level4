@@ -1,7 +1,6 @@
 package seedu.address.model.task;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 //@@author JeremyInElysium
 /**
@@ -10,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Rank {
 
     public static final String MESSAGE_RANK_CONSTRAINTS =
-            "Rank can only contain positive integers greater than zero, and it should not be blank.";
+            "Rank can only contain positive integers.";
 
     /**
      * The input must not be a whitespace, zero or a negative integer
@@ -26,7 +25,6 @@ public class Rank {
      */
     public Rank(String rank) {
         requireNonNull(rank);
-        checkArgument(isValidRank(rank), MESSAGE_RANK_CONSTRAINTS);
         this.rank = rank;
     }
 

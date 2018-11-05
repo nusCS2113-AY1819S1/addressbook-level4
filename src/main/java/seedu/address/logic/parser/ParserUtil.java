@@ -19,6 +19,9 @@ public class ParserUtil {
     public static final String MESSAGE_EMPTY_DESCRIPTION = "Description is empty!";
     public static final String MESSAGE_EMPTY_TITLE = "Title is empty!";
     public static final String MESSAGE_EMPTY_MODULE_CODE = "Module code is empty!";
+    public static final String MESSAGE_EMPTY_MILESTONE = "Milestone description is empty!";
+    public static final String MESSAGE_EMPTY_RANK = "Rank is empty!";
+    public static final String MESSAGE_EMPTY_INDEX = "Index is empty!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -27,7 +30,9 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
-        if (!isNonZeroUnsignedInteger(trimmedIndex)) {
+        if (trimmedIndex.isEmpty()) {
+            throw new ParseException(MESSAGE_EMPTY_INDEX);
+        } else if (!isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
@@ -156,6 +161,9 @@ public class ParserUtil {
     public static String parseMilestoneDescription(String milestoneDescription) throws ParseException {
         requireNonNull(milestoneDescription);
         String trimmedMilestoneDescription = milestoneDescription.trim();
+        if (trimmedMilestoneDescription.isEmpty()) {
+            throw new ParseException(MESSAGE_EMPTY_MILESTONE);
+        }
         return trimmedMilestoneDescription;
     }
 
@@ -165,6 +173,9 @@ public class ParserUtil {
     public static String parseRank(String rank) throws ParseException {
         requireNonNull(rank);
         String trimmedRank = rank.trim();
+        if (trimmedRank.isEmpty()) {
+            throw new ParseException(MESSAGE_EMPTY_RANK);
+        }
         return trimmedRank;
     }
 
