@@ -1,7 +1,9 @@
 package seedu.address.model.task;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Represents a Task in the address book.
@@ -19,7 +21,8 @@ public class Task {
     private final int expectedNumOfHours;
     private int completedNumOfHours;
     private final List<Milestone> milestoneList = new ArrayList<Milestone>();
-    public Task(Deadline deadline, String moduleCode, String title, String description, PriorityLevel priorityLevel,
+
+    public Task(Deadline deadline, ModuleCode moduleCode, String title, String description, PriorityLevel priorityLevel,
                 int expectedNumOfHours) {
         this.deadline = deadline;
         this.moduleCode = moduleCode;
@@ -29,7 +32,7 @@ public class Task {
         this.expectedNumOfHours = expectedNumOfHours;
     }
 
-    public Task(Deadline deadline, String moduleCode, String title, String description, PriorityLevel priorityLevel,
+    public Task(Deadline deadline, ModuleCode moduleCode, String title, String description, PriorityLevel priorityLevel,
                 int expectedNumOfHours, int completedNumOfHours, boolean isCompleted,
                 List<Milestone> milestoneList) {
         this.deadline = deadline;
