@@ -92,11 +92,12 @@ Name denotes the name of the financial activity, moneyflow denotes the money spe
 and date denotes the date the financial activity was completed. Each financial activity can be labelled with any number
 of tags.
 
-****
-* Moneyflow can be either a debit (expense) or a credit (income).
-* To distinguish between an expense and an income, the user will need to enter a plus "+" or minus "-" sign before the
-money amount.
-****
+[NOTE]
+Moneyflow can be either a debit (expense) or a credit (income). +
+To distinguish between an expense and an income, the user will need to enter a plus "+" or minus "-" sign before the
+money amount. +
+Only 1 record of the same name, same date and same moneyflow is allowed in the application. Duplicates of the same record is not
+allowed unless it is of a different date, of a different moneyflow or of a different name.
 
 Examples:
 
