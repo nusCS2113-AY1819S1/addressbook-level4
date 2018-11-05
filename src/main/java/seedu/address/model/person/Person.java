@@ -20,14 +20,12 @@ public class Person {
     public static final String MESSAGE_ADDRESS = " Address: ";
     public static final String MESSAGE_TAG = " Tags: ";
     public static final String MESSAGE_DEPARTMENT = " Department: ";
-    public static final String MESSAGE_DESIGNATION = " Designation: ";
 
     // Identity fields
     private final Name name;
     private final Phone phone;
     private final Email email;
     private final Department department;
-    private final Designation designation;
 
     // Data fields
     private final Address address;
@@ -36,15 +34,13 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Department department,
-              Designation designation, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, department, designation, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Department department, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, department, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.department = department;
-        this.designation = designation;
         this.tags.addAll(tags);
     }
 
@@ -64,12 +60,8 @@ public class Person {
         return address;
     }
 
-    public Department getDepartment() { return department; }
-
-    public Designation getDesignation() { return designation; }
-
-
-
+    public Department getDepartment() {
+        return department; }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -112,14 +104,13 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
-                && otherPerson.getDepartment().equals(getDepartment())
-                && otherPerson.getDesignation().equals(getDesignation());
+                && otherPerson.getDepartment().equals(getDepartment());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, department, designation, tags);
+        return Objects.hash(name, phone, email, address, department, tags);
     }
 
     @Override
@@ -134,8 +125,6 @@ public class Person {
                 .append(getAddress())
                 .append(MESSAGE_DEPARTMENT)
                 .append(getDepartment())
-                .append(MESSAGE_DESIGNATION)
-                .append(getDesignation())
                 .append(MESSAGE_TAG);
         getTags().forEach(builder::append);
         return builder.toString();

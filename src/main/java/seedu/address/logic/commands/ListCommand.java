@@ -39,6 +39,7 @@ public class ListCommand extends Command {
 
     public ListCommand(String sortByParam, DepartmentContainsKeywordsPredicate predicate) {
         requireNonNull(sortByParam);
+        //requireNonNull(predicate);
         this.predicate = predicate;
         listKey = sortByParam;
     }
@@ -51,7 +52,7 @@ public class ListCommand extends Command {
 
         switch (listKey) {
         case (LIST_KEY_DEPARTMENT): model.updateFilteredPersonList(predicate);
-            return new CommandResult(
+           return new CommandResult(
                         String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
 
         case (LIST_KEY_EVENT): model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);

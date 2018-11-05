@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -8,7 +7,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyEventList;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 
 /**
@@ -53,11 +51,6 @@ public class ModelStub implements Model {
     @Override
     public void redoResetData() {
         throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
-    public boolean hasEmail(Email email) {
-        return false;
     }
 
     @Override
@@ -113,11 +106,6 @@ public class ModelStub implements Model {
     @Override
     public void commitAddressBook() {
         throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
-    public Optional<Person> getPerson(Email email) {
-        return Optional.empty();
     }
 
     // Implemented EventList Methods go here
@@ -212,5 +200,4 @@ public class ModelStub implements Model {
         throw new AssertionError("This method should not be called.");
     }
 }
-
 
