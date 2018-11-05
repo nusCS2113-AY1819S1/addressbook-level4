@@ -240,18 +240,48 @@ public class Event implements Comparable<Event> {
 
     @Override
     public int compareTo(Event other) {
-        return this.getEventName().fullName.compareTo(other.getEventName().fullName);
+        int compareValue = this.getEventName().fullName.toLowerCase()
+                .compareTo(other.getEventName().fullName.toLowerCase());
+        if (compareValue == 0) {
+            return this.getEventName().fullName.compareTo(other.getEventName().fullName);
+        }
+        return compareValue;
     }
 
+
+    /**
+     * Compare the date between the events
+     * If both events have the same date then compare their start time
+     **/
     public int compareDateTo(Event other) {
-        return this.getDate().eventDate.compareTo(other.getDate().eventDate);
+        int compareValue = this.getDate().eventDate.compareTo(other.getDate().eventDate);
+        if (compareValue == 0) {
+            return this.getStartTime().compareTo(other.getStartTime());
+        }
+        return compareValue;
     }
 
+    /**
+     * Compare the start time between the events
+     * If both events have the same start time then compare their date
+     **/
     public int compareStartTimeTo(Event other) {
-        return this.getStartTime().compareTo(other.getStartTime());
+        int compareValue = this.getStartTime().compareTo(other.getStartTime());
+        if (compareValue == 0) {
+            return this.getDate().eventDate.compareTo(other.getDate().eventDate);
+        }
+        return compareValue;
     }
 
+    /**
+     * Compare the end time between the events
+     * If both events have the same start time then compare their date
+     **/
     public int compareEndTimeTo(Event other) {
-        return this.getEndTime().compareTo(other.getEndTime());
+        int compareValue = this.getEndTime().compareTo(other.getEndTime());
+        if (compareValue == 0) {
+            return this.getDate().eventDate.compareTo(other.getDate().eventDate);
+        }
+        return compareValue;
     }
 }

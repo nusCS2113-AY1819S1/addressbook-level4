@@ -55,6 +55,16 @@ public class TypicalEvents {
             new Location("Test Location 4")
     );
 
+
+    public static final Event EVENT_5 = new Event(
+            new EventName("Test Event 5"),
+            new Description("Test Description 5"),
+            new EventDate("2018-11-18"),
+            new StartTime("06:00"),
+            new EndTime("12:00"),
+            new Location("Test Location 5")
+    );
+
     /**
      * Returns test event with attendees.
      */
