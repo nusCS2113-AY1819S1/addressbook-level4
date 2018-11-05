@@ -7,10 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
-import java.util.logging.Logger;
 import java.util.stream.Stream;
 
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.task.ModuleCode;
@@ -22,7 +20,6 @@ import seedu.address.model.task.Task;
  * Parses input arguments and creates a new AddTaskCommand object
  */
 public class AddTaskCommandParser implements Parser<AddTaskCommand> {
-    private static final Logger logger = LogsCenter.getLogger(AddTaskCommandParser.class);
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.

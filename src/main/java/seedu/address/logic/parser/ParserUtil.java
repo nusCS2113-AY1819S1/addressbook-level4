@@ -16,6 +16,9 @@ import seedu.address.model.task.PriorityLevel;
 public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_HOURS = "Hour(s) must be an integer!";
+    public static final String MESSAGE_EMPTY_DESCRIPTION = "Description is empty!";
+    public static final String MESSAGE_EMPTY_TITLE = "Title is empty!";
+    public static final String MESSAGE_EMPTY_MODULE_CODE = "Module code is empty!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -47,9 +50,14 @@ public class ParserUtil {
     /**
      * Leading and trailing whitespaces will be trimmed from {@code String moduleCode}
      */
-    public static ModuleCode parseModuleCode(String moduleCode) {
+    public static ModuleCode parseModuleCode(String moduleCode) throws ParseException {
         requireNonNull(moduleCode);
         String trimmedModuleCode = moduleCode.trim();
+        if (trimmedModuleCode.isEmpty()) {
+            throw new ParseException(MESSAGE_EMPTY_MODULE_CODE);
+        } else if (!ModuleCode.isValidModuleCode(trimmedModuleCode)) {
+            throw new ParseException(ModuleCode.MESSAGE_MODULE_CODE_CONSTRAINTS);
+        }
         return new ModuleCode(trimmedModuleCode);
     }
 
@@ -87,7 +95,6 @@ public class ParserUtil {
         if (!PriorityLevel.isValidPriorityLevel(trimmedPriority)) {
             throw new ParseException(PriorityLevel.MESSAGE_PRIORITY_CONSTRAINTS);
         }
-        //        return new PriorityLevel(trimmedPriority);
         return new PriorityLevel(trimmedPriority);
     }
 
@@ -97,6 +104,9 @@ public class ParserUtil {
     public static String parseTitle(String title) throws ParseException {
         requireNonNull(title);
         String trimmedTitle = title.trim();
+        if (trimmedTitle.isEmpty()) {
+            throw new ParseException(MESSAGE_EMPTY_TITLE);
+        }
         return trimmedTitle;
     }
 
@@ -106,6 +116,9 @@ public class ParserUtil {
     public static String parseDescription(String description) throws ParseException {
         requireNonNull(description);
         String trimmedDescription = description.trim();
+        if (trimmedDescription.isEmpty()) {
+            throw new ParseException(MESSAGE_EMPTY_DESCRIPTION);
+        }
         return trimmedDescription;
     }
 
