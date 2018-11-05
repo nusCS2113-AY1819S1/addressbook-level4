@@ -11,7 +11,7 @@ import seedu.planner.commons.core.Messages;
 
 /**
  * File path is used to store the preferable location to store the Excel File when user want to export the Data
- * in Excel or the user want to achieve the data.
+ * in Excel or the user want to archive the data.
  */
 public class DirectoryPath {
     public static final String WORKING_DIRECTORY_STRING = System.getProperty("user.dir");

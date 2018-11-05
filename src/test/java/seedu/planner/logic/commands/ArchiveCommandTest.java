@@ -37,41 +37,40 @@ public class ArchiveCommandTest {
         String directoryPath = HOME_DIRECTORY_STRING;
         String directoryPath1 = DirectoryPath.WORKING_DIRECTORY_STRING;
 
-        ArchiveCommand achieveCommand11 = new ArchiveCommand();
-        ArchiveCommand achieveCommand21 = new ArchiveCommand(directoryPath);
-        ArchiveCommand achieveCommand31 = new ArchiveCommand(startDate1, endDate1);
-        ArchiveCommand achieveCommand41 = new ArchiveCommand(startDate1, endDate1, directoryPath);
+        ArchiveCommand archiveCommand11 = new ArchiveCommand();
+        ArchiveCommand archiveCommand21 = new ArchiveCommand(directoryPath);
+        ArchiveCommand archiveCommand31 = new ArchiveCommand(startDate1, endDate1);
+        ArchiveCommand archiveCommand41 = new ArchiveCommand(startDate1, endDate1, directoryPath);
 
-        ArchiveCommand achieveCommand22 = new ArchiveCommand(directoryPath1);
-        ArchiveCommand achieveCommand32 = new ArchiveCommand(startDate2, endDate2);
-        ArchiveCommand achieveCommand42 = new ArchiveCommand(startDate2, endDate2, directoryPath1);
+        ArchiveCommand archiveCommand32 = new ArchiveCommand(startDate2, endDate2);
+        ArchiveCommand archiveCommand42 = new ArchiveCommand(startDate2, endDate2, directoryPath1);
 
         // same object -> returns true
-        Assert.assertTrue(achieveCommand11.equals(achieveCommand11));
-        Assert.assertTrue(achieveCommand21.equals(achieveCommand21));
-        Assert.assertTrue(achieveCommand31.equals(achieveCommand31));
-        Assert.assertTrue(achieveCommand41.equals(achieveCommand41));
+        Assert.assertTrue(archiveCommand11.equals(archiveCommand11));
+        Assert.assertTrue(archiveCommand21.equals(archiveCommand21));
+        Assert.assertTrue(archiveCommand31.equals(archiveCommand31));
+        Assert.assertTrue(archiveCommand41.equals(archiveCommand41));
 
         // same value -> returns true
-        ArchiveCommand achieveCommand11Copy = new ArchiveCommand();
-        ArchiveCommand achieveExcelCommand21Copy = new ArchiveCommand(directoryPath);
-        ArchiveCommand achieveExcelCommand31Copy = new ArchiveCommand(startDate1, endDate1);
-        ArchiveCommand achieveExcelCommand41Copy = new ArchiveCommand(startDate1, endDate1, directoryPath);
+        ArchiveCommand archiveCommand11Copy = new ArchiveCommand();
+        ArchiveCommand archiveCommand21Copy = new ArchiveCommand(directoryPath);
+        ArchiveCommand archiveCommand31Copy = new ArchiveCommand(startDate1, endDate1);
+        ArchiveCommand archiveCommand41Copy = new ArchiveCommand(startDate1, endDate1, directoryPath);
 
-        Assert.assertTrue(achieveCommand11.equals(achieveCommand11Copy));
-        Assert.assertTrue(achieveCommand21.equals(achieveExcelCommand21Copy));
-        Assert.assertTrue(achieveCommand31.equals(achieveExcelCommand31Copy));
-        Assert.assertTrue(achieveCommand41.equals(achieveExcelCommand41Copy));
+        Assert.assertTrue(archiveCommand11.equals(archiveCommand11Copy));
+        Assert.assertTrue(archiveCommand21.equals(archiveCommand21Copy));
+        Assert.assertTrue(archiveCommand31.equals(archiveCommand31Copy));
+        Assert.assertTrue(archiveCommand41.equals(archiveCommand41Copy));
 
         //different value -> returns false
-        Assert.assertFalse(achieveCommand31.equals(achieveCommand32));
-        Assert.assertFalse(achieveCommand41.equals(achieveCommand42));
+        Assert.assertFalse(archiveCommand31.equals(archiveCommand32));
+        Assert.assertFalse(archiveCommand41.equals(archiveCommand42));
 
         // different types -> returns false
-        Assert.assertFalse(achieveCommand41.equals(Arrays.asList(startDate1, endDate1, directoryPath)));
+        Assert.assertFalse(archiveCommand41.equals(Arrays.asList(startDate1, endDate1, directoryPath)));
 
         // null -> returns false
-        Assert.assertFalse(achieveCommand11.equals(null));
+        Assert.assertFalse(archiveCommand11.equals(null));
     }
 
     @Test
@@ -92,7 +91,7 @@ public class ArchiveCommandTest {
             expectedModel.deleteListRecord(records);
             expectedModel.commitFinancialPlanner();
         } else {
-            expectedMessage = Messages.MESSAGE_ACHIEVE_COMMAND_ERRORS;
+            expectedMessage = Messages.MESSAGE_ARCHIVE_COMMAND_ERRORS;
         }
         expectedModel.getFinancialPlanner();
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
@@ -105,7 +104,7 @@ public class ArchiveCommandTest {
         String nameFile = ExcelUtil.setNameExcelFile(
                 TypicalRecords.TYPICAL_START_FAR_DATE, TypicalRecords.TYPICAL_END_FAR_DATE);
         String expectedMessage = String.format(
-                Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY + Messages.MESSAGE_ACHIEVE_SUCCESSFULLY,
+                Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY + Messages.MESSAGE_ARCHIVE_SUCCESSFULLY,
                 nameFile, HOME_DIRECTORY_STRING);
         ArchiveCommand command = new ArchiveCommand(
                 TypicalRecords.TYPICAL_START_FAR_DATE, TypicalRecords.TYPICAL_END_FAR_DATE, HOME_DIRECTORY_STRING);

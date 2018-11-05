@@ -88,7 +88,7 @@ public class DeleteCommandByDateEntryTest {
         //delete the Records have required date
         deleteCommandByDateEntry.execute(model, commandHistory);
 
-        //undo -> reverts financialPlanner back to the prebious state and filtered record list to show all records
+        //undo -> reverts financialPlanner back to the previous state and filtered record list to show all records
         expectedModel.undoFinancialPlanner();
         CommandTestUtil.assertCommandSuccess(
                 new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
@@ -122,7 +122,7 @@ public class DeleteCommandByDateEntryTest {
      */
 
     @Test
-    public void executeUndoRedo_exsistentDateFilteredList_sameRecordDeleted() throws Exception {
+    public void executeUndoRedo_existentDateFilteredList_sameRecordDeleted() throws Exception {
         DeleteCommandByDateEntry deleteCommandByDateEntry =
                 new DeleteCommandByDateEntry(TypicalDates.DATE_FIRST_INDEX_DATE);
         Model expectedModel = new ModelManager(model.getFinancialPlanner(), new UserPrefs());

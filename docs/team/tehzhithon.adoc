@@ -42,7 +42,7 @@ convenience it provides to users.
 We needed to accurately read the user input and provide a different range of suggestions depending on the
 command word input by the user as well as any other parameters that may be required by the command.
 ** Credits: The Java TextFields (AutoComplete) Library and its inner classes were recreated and tweaked
-to achieve the necessary aims of our product autocomplete functionality.
+to archive the necessary aims of our product autocomplete functionality.
 
 === `completed` *Minor Enhancement #1*: added the ability to find data by tags
 

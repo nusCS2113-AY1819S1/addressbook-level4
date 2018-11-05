@@ -13,7 +13,7 @@ import seedu.planner.logic.parser.exceptions.ParseException;
 import seedu.planner.model.record.Date;
 
 /**
- * Achieve the records, export into  Excel file then delete all records exported.
+ * Archive the records, export into  Excel file then delete all records exported.
  */
 public class ArchiveCommandParser implements Parser<ArchiveCommand> {
     private static String whiteSpace = " ";

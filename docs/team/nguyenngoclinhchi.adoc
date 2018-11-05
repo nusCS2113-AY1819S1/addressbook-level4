@@ -2,6 +2,8 @@
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
+:stylesheet: gh-linhchi-pages.css
+
 
 == PROJECT: FinancialPlanner - Level 4
 
@@ -24,7 +26,7 @@ FinancialPlanner - Level 4 is a desktop expense book application used for teachi
 ** Highlights: This enhancement is the foundation for other minor enhancements below. It required in-depth analysis of design alternative.
 ** Credits: I would like to extend my thank you to the Third-party library: Apache poi.
 
-=== `ongoing` *Minor enhancement #1*: added the ability to achieve the data into Excel file
+=== `ongoing` *Minor enhancement #1*: added the ability to archive the data into Excel file
 ===== `sub-part of Major enhancement #2`
 
 ** What it does: In case your Financial planner storage too large, and you want to archive based on year, month or period. This feature is designed specifically for you.

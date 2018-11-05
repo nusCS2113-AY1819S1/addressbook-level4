@@ -572,8 +572,6 @@ image::deleteLimitSequenceDiagram.png[width:800]
 The editLimit command is similar to limit command, has dateStart, dateEnd and moneyFlow.
 The command will do the replacement by deleting the limit with same dates and add the new limit.
 
-
-
 The user enter two dates after the one "d/" index followed by money with m/ index.
 The user need to input two dates, the first one is dateStart while the second one is dateEnd.
 The dateStart must be earlier or equals to dateEnd, otherwise, the program will throw error.
