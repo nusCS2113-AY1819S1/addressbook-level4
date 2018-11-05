@@ -385,6 +385,8 @@ The following sequence diagram shows how the sort operation works:
 
 image::SortSequenceDiagram.png[width:800]
 
+//tag::list[]
+
 === List history feature
 ==== Current Implementation
 The list mechanism is facilitated by `ModelManager`.
@@ -430,6 +432,8 @@ listener is present in `RecordListPanel` and will update the UI list automatical
 ** Pros: Allows for constant time complexity to access any elements. Hence, listing records can potentially be faster.
 ** Cons: Current UI implementation relies on `FilteredList`. In order for UI to be compatible with the new data structure, the UI may need to change its implementation to `ObservableMap` instead. Alternatively, one can utilise a `HashMap` to first generate the list and pass the list reference into `FilteredList`. However, there is a need to code a filter function.
 
+//end::list[]
+//tag::stats[]
 === View breakdown of total income and expense into categories
 ==== Current Implementation
 This feature allows the user to view a pie chart breakdown of all expenses and all income within a date range which the user can specify.
@@ -486,6 +490,8 @@ Note that the CustomLegend class is located within the CustomPieChart class whic
 only be accessed within CustomPieChart for security purposes.
 
 ==== Design Considerations
+
+//end::stats[]
 
 // tag::findtag[]
 === Find records by tag feature
