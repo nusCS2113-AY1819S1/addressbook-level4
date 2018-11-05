@@ -17,7 +17,7 @@ import seedu.recruit.model.Model;
 import seedu.recruit.model.joboffer.JobOffer;
 
 /**
- * Intermediate Command of AddJobCommand
+ * Intermediate Command of StartAddJobCommand
  * Adds a job offer to the CompanyBook with the relevant fields
  */
 
@@ -26,6 +26,7 @@ public class AddJobDetailsCommand extends Command {
     public static final String COMMAND_WORD = "AddJobDetails";
 
     public static final String MESSAGE_USAGE = "Enter the following details of the job in the format:\n"
+            + "Parameters: "
             + PREFIX_COMPANY_NAME + "COMPANY "
             + PREFIX_JOB + "JOB_TITLE "
             + PREFIX_GENDER + "GENDER "

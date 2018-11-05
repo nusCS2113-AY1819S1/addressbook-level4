@@ -13,7 +13,6 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
-import seedu.recruit.logic.commands.AddCandidateCommand;
 import seedu.recruit.logic.commands.EditCandidateCommand.EditPersonDescriptor;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.tag.Tag;
@@ -21,19 +20,19 @@ import seedu.recruit.model.tag.Tag;
 /**
  * A utility class for Candidate.
  */
-public class PersonUtil {
+public class CandidateUtil {
 
     /**
      * Returns an add command string for adding the {@code candidate}.
      */
     public static String getAddCandidateCommand(Candidate candidate) {
-        return AddCandidateCommand.COMMAND_WORD + " " + getPersonDetails(candidate);
+        return getCandidateDetails(candidate);
     }
 
     /**
      * Returns the part of command string for the given {@code candidate}'s details.
      */
-    public static String getPersonDetails(Candidate candidate) {
+    public static String getCandidateDetails(Candidate candidate) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + candidate.getName().fullName + " ");
         sb.append(PREFIX_GENDER + candidate.getGender().value + " ");
@@ -53,7 +52,7 @@ public class PersonUtil {
     /**
      * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
+    public static String getEditCandidateDescriptorDetails(EditPersonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));

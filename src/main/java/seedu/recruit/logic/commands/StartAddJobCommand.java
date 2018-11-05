@@ -10,15 +10,16 @@ import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 
 /**
- *  Starts the 2-step process of adding a job offer
+ *  Starts the adding job offer interface
+ *  Users can continue adding jobs until in this interface until user inputs 'cancel'
  */
 
-public class AddJobCommand extends Command {
+public class StartAddJobCommand extends Command {
     public static final String COMMAND_WORD = "addj";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a job offer to the RecruitBook. ";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Starts the add job offer interface. ";
 
-    public AddJobCommand() {
+    public StartAddJobCommand() {
 
     }
 

@@ -47,7 +47,7 @@ import seedu.recruit.model.commons.Email;
 import seedu.recruit.model.commons.Phone;
 import seedu.recruit.model.tag.Tag;
 import seedu.recruit.testutil.CandidateBuilder;
-import seedu.recruit.testutil.PersonUtil;
+import seedu.recruit.testutil.CandidateUtil;
 
 @Ignore
 public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
@@ -187,7 +187,7 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
                         + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS);
 
         /* Case: edit a candidate with new values same as another candidate's values -> rejected */
-        executeCommand(PersonUtil.getAddCandidateCommand(BOB));
+        executeCommand(CandidateUtil.getAddCandidateCommand(BOB));
         assertTrue(getModel().getCandidateBook().getCandidateList().contains(BOB));
         index = INDEX_FIRST;
         assertFalse(getModel().getFilteredCandidateList().get(index.getZeroBased()).equals(BOB));

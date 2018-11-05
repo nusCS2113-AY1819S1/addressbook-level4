@@ -25,9 +25,9 @@ import seedu.recruit.model.candidate.Candidate;
  */
 public class AddCandidateCommand extends Command {
 
-    public static final String COMMAND_WORD = "addc";
+    public static final String COMMAND_WORD = "Adding Candidates";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a candidate to the RecruitBook. "
+    public static final String MESSAGE_USAGE = "Enter the following details of the candidate in the format:\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_GENDER + "GENDER "
@@ -39,7 +39,7 @@ public class AddCandidateCommand extends Command {
             + PREFIX_EDUCATION + "HIGHEST_EDUCATION_LEVEL "
             + PREFIX_SALARY + "EXPECTED_SALARY "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: "
             + PREFIX_NAME + "John Doe "
             + PREFIX_GENDER + "M "
             + PREFIX_AGE + "21 "

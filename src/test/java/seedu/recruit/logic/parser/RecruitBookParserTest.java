@@ -15,7 +15,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -24,6 +23,7 @@ import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.LogicState;
 import seedu.recruit.logic.commands.AddCandidateCommand;
 import seedu.recruit.logic.commands.ClearCandidateBookCommand;
+import seedu.recruit.logic.commands.ClearCompanyBookCommand;
 import seedu.recruit.logic.commands.DeleteCandidateCommand;
 import seedu.recruit.logic.commands.DeleteShortlistedCandidateInitializationCommand;
 import seedu.recruit.logic.commands.EditCandidateCommand;
@@ -38,13 +38,15 @@ import seedu.recruit.logic.commands.RedoCandidateBookCommand;
 import seedu.recruit.logic.commands.SelectCandidateCommand;
 import seedu.recruit.logic.commands.SelectCompanyCommand;
 import seedu.recruit.logic.commands.SelectJobCommand;
+import seedu.recruit.logic.commands.StartAddCandidateCommand;
+import seedu.recruit.logic.commands.StartAddJobCommand;
 import seedu.recruit.logic.commands.UndoCandidateBookCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.testutil.CandidateBuilder;
 import seedu.recruit.testutil.CandidateContainsKeywordsPredicateBuilder;
+import seedu.recruit.testutil.CandidateUtil;
 import seedu.recruit.testutil.EditPersonDescriptorBuilder;
-import seedu.recruit.testutil.PersonUtil;
 
 public class RecruitBookParserTest {
 
@@ -57,22 +59,61 @@ public class RecruitBookParserTest {
 
     private final RecruitBookParser parser = new RecruitBookParser();
 
+    // ============================================== Primary Commands ============================================== //
+
+
     @Test
-    public void parseCommand_add() throws Exception {
-        Candidate candidate = new CandidateBuilder().build();
-        AddCandidateCommand command =
-                (AddCandidateCommand) parser.parseCommand(PersonUtil.getAddCandidateCommand(candidate), state,
-                        emailUtil);
-        assertEquals(new AddCandidateCommand(candidate), command);
+    public void parseCommand_start_addcandidates() throws Exception {
+        assertTrue(parser.parseCommand(StartAddCandidateCommand.COMMAND_WORD, state, emailUtil)
+                instanceof StartAddCandidateCommand);
+        try {
+            parser.parseCommand(StartAddCandidateCommand.COMMAND_WORD + " 12", state, emailUtil);
+            throw new AssertionError("The expected ParseException was not thrown.");
+        } catch (ParseException pe) {
+            assertEquals(MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
+                    + StartAddCandidateCommand.MESSAGE_USAGE, pe.getMessage());
+        }
     }
 
     @Test
-    @Ignore
-    public void parseCommand_clear() throws Exception {
+    public void parseCommand_start_addjobs() throws Exception {
+        assertTrue(parser.parseCommand(StartAddJobCommand.COMMAND_WORD, state, emailUtil)
+                instanceof StartAddJobCommand);
+
+        try {
+            parser.parseCommand(StartAddJobCommand.COMMAND_WORD + " lol", state, emailUtil);
+            throw new AssertionError("The expected ParseException was not thrown.");
+        } catch (ParseException pe) {
+            assertEquals(MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
+                    + StartAddJobCommand.MESSAGE_USAGE, pe.getMessage());
+        }
+    }
+
+
+    @Test
+    public void parseCommand_clear_candidatebook() throws Exception {
         assertTrue(parser.parseCommand(ClearCandidateBookCommand.COMMAND_WORD, state, emailUtil)
                 instanceof ClearCandidateBookCommand);
-        assertTrue(parser.parseCommand(ClearCandidateBookCommand.COMMAND_WORD + " 3", state, emailUtil)
-                instanceof ClearCandidateBookCommand);
+        try {
+            parser.parseCommand(ClearCandidateBookCommand.COMMAND_WORD + " nani", state, emailUtil);
+            throw new AssertionError("The expected ParseException was not thrown.");
+        } catch (ParseException pe) {
+            assertEquals(MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
+                    + ClearCandidateBookCommand.MESSAGE_USAGE, pe.getMessage());
+        }
+    }
+
+    @Test
+    public void parseCommand_clear_companybook() throws Exception {
+        assertTrue(parser.parseCommand(ClearCompanyBookCommand.COMMAND_WORD, state, emailUtil)
+                instanceof ClearCompanyBookCommand);
+        try {
+            parser.parseCommand(ClearCompanyBookCommand.COMMAND_WORD + " random", state, emailUtil);
+            throw new AssertionError("The expected ParseException was not thrown.");
+        } catch (ParseException pe) {
+            assertEquals(MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
+                    + ClearCompanyBookCommand.MESSAGE_USAGE, pe.getMessage());
+        }
     }
 
     @Test
@@ -102,7 +143,7 @@ public class RecruitBookParserTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(candidate).build();
         EditCandidateCommand command = (EditCandidateCommand) parser.parseCommand(
                 EditCandidateCommand.COMMAND_WORD + " "
-                + INDEX_FIRST.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor),
+                + INDEX_FIRST.getOneBased() + " " + CandidateUtil.getEditCandidateDescriptorDetails(descriptor),
                 new LogicState("primary"), emailUtil);
         assertEquals(new EditCandidateCommand(INDEX_FIRST, descriptor), command);
     }
@@ -227,5 +268,17 @@ public class RecruitBookParserTest {
         thrown.expect(ParseException.class);
         thrown.expectMessage(MESSAGE_UNKNOWN_COMMAND);
         parser.parseCommand("unknownCommand", state, emailUtil);
+    }
+
+    // =========================================== Intermediate Commands =========================================== //
+
+    @Test
+    public void parseCommand_add_candidate() throws Exception {
+        Candidate candidate = new CandidateBuilder().build();
+        LogicState addCandidateState = new LogicState(AddCandidateCommand.COMMAND_WORD);
+        AddCandidateCommand command =
+                (AddCandidateCommand) parser.parseCommand(CandidateUtil.getAddCandidateCommand(candidate),
+                        addCandidateState, emailUtil);
+        assertEquals(new AddCandidateCommand(candidate), command);
     }
 }
