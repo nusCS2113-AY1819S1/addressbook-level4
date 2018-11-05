@@ -1,6 +1,7 @@
 package seedu.address.model.task;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a Task in the address book.
