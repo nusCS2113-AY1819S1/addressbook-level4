@@ -95,13 +95,13 @@ public class TimeTablePanel extends UiPart<Region> {
      * Updates {@code currStartHour} and {@code currEndHour} according to the currently loaded {@code TimeTable}
      */
     private void updateStartAndEnd() {
-        if (timeTableLastLoaded.getEarlist().isBefore(DEFAULT_START)) {
-            currStartHour = timeTableLastLoaded.getEarlist();
+        if (!timeTableLastLoaded.isEmpty() && timeTableLastLoaded.getEarliest().isBefore(DEFAULT_START)) {
+            currStartHour = timeTableLastLoaded.getEarliest();
         } else {
             currStartHour = DEFAULT_START;
         }
 
-        if (timeTableLastLoaded.getLatest().isAfter(DEFAULT_END)) {
+        if (!timeTableLastLoaded.isEmpty() && timeTableLastLoaded.getLatest().isAfter(DEFAULT_END)) {
             currEndHour = timeTableLastLoaded.getLatest();
         } else {
             currEndHour = DEFAULT_END;

@@ -13,11 +13,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.TimeSlot;
 
 /**
- *
- * This is a visible grid for the timetable.
- * It will contain children: TimeTablePanelTimeSlot(s)
- *
- * Refer to TimeTablePanel class to better understand the relationships
+ * Placeholder grid for {@code TimeTablePanelTimeSlot}s on the center of {@code TimeTablePanel}
  */
 
 public class TimeTablePanelMainGrid extends UiPart<Region> {
@@ -54,25 +50,21 @@ public class TimeTablePanelMainGrid extends UiPart<Region> {
     }
 
     /**
-     * Adds a {@code TimeSlot} to the current {@code TimeTable} displayed
+     * Adds a {@code TimeTablePanelTimeSlot} to the {@code TimeTablePanelMainGrid}
      * @param input {@code TimeSlot} to add
      * @param currRowDim Dimensions of the rows in the current grid
      * @param currColDim Dimensions of the columns in the current grid
      * @param currStart Start hour in the grid
      */
-    public void addTimeSlot(
-            TimeSlot input, double currRowDim, double currColDim, LocalTime currStart) {
+    public void addTimeSlot(TimeSlot input, double currRowDim, double currColDim, LocalTime currStart) {
 
-        TimeSlot trimmedTimeSlot = input;
-
-        // Check for whether the timeslot can be displayed on the current timetable
+        // Currently only supports 5-day work week
         if (input.getDayOfWeek() == DayOfWeek.SATURDAY || input.getDayOfWeek() == DayOfWeek.SUNDAY) {
             return;
         }
 
-        TimeTablePanelTimeSlot panelTimeSlot = new TimeTablePanelTimeSlot(
-                trimmedTimeSlot, currRowDim, currColDim);
-        mainGrid.add(panelTimeSlot.getBox(), getColIndex(trimmedTimeSlot, currStart), getRowIndex(trimmedTimeSlot));
+        TimeTablePanelTimeSlot panelTimeSlot = new TimeTablePanelTimeSlot(input, currRowDim, currColDim);
+        mainGrid.add(panelTimeSlot.getBox(), getColIndex(input, currStart), getRowIndex(input));
     }
 
     private int getColIndex(TimeSlot timeSlot, LocalTime currStartHour) {

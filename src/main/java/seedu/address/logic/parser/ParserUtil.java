@@ -144,9 +144,7 @@ public class ParserUtil {
     }
 
     /**
-     *
-     * Parses a {@code String timeslot} into a {@code timeslot}
-     *
+     * Parses the {@code String} representation of a {@code TimeSlot} into a {@code TimeSlot} object
      */
     public static TimeSlot parseTimeSlot (String timeslot) throws ParseException {
         requireNonNull(timeslot);

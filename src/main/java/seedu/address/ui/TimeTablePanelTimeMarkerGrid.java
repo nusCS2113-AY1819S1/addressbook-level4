@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
 import java.time.LocalTime;
-import java.util.logging.Logger;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -11,23 +10,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
-import seedu.address.commons.core.LogsCenter;
 
 /**
- * TODO ALEXIS: working on this
- *
- * A invisible grid for the TimingMarkers to live in. It contains multiple TimeTablePanelTimingMarker(s)
- *
- * Refer to TimeTablePanel to better understand the relationships
- *
- * Note: we will scale the grid and add/remove columns in order to align with the TimeTablePanelMainGrid.
- * for now just a default size
+ * Displays the time of the day on the top of {@code TimeTablePanel}
  */
 
 public class TimeTablePanelTimeMarkerGrid extends UiPart<Region> {
     private static final String FXML = "TimeTablePanelTimeMarkerGrid.fxml";
-
-    private final Logger logger = LogsCenter.getLogger(getClass());
 
     @FXML
     private GridPane timingGrid;
@@ -64,7 +53,7 @@ public class TimeTablePanelTimeMarkerGrid extends UiPart<Region> {
      */
     private void populateTimings(int startHour, int endHour) {
         for (int currHour = startHour, col = 0; currHour < endHour; currHour++, col += 2) {
-            Label hourLabel = new Label(Integer.toString(currHour));
+            Label hourLabel = new Label(String.format("%02d", currHour));
             GridPane.setHalignment(hourLabel, HPos.RIGHT);
             GridPane.setValignment(hourLabel, VPos.BOTTOM);
             timingGrid.add(hourLabel, col, 0);

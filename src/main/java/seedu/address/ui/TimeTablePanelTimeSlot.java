@@ -5,10 +5,7 @@ import seedu.address.model.person.TimeSlot;
 
 
 /**
- * An UI component that displays information of a {@code TimeSlot}.
- * Lives in the TimeTablePanelMainGrid.
- *
- * Will be used to implement normal TimeSlots, and free-TimeSlots.
+ * A graphical representation of a {@code TimeSlot} to be displayed on the UI
  */
 public class TimeTablePanelTimeSlot {
     public final TimeSlot timeSlot;

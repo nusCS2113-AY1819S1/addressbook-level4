@@ -12,7 +12,7 @@ import seedu.address.model.person.exceptions.TimeSlotOverlapException;
 import seedu.address.model.person.exceptions.TimeTableEmptyException;
 
 /**
- * Represents a timetable that is associated with a person
+ * Represents a {@code TimeTable} that is associated with a {@code Person}
  */
 public class TimeTable {
     private static final ArrayList<Color> COLOR_LIST = new ArrayList<>();
@@ -20,8 +20,8 @@ public class TimeTable {
     protected Collection <TimeSlot> timeSlots;
 
     // Since Java does not have a built-in multiset, a map is used to simulate a multiset
-    protected TreeMap<LocalTime, Integer> earlistSet;
-    protected TreeMap<LocalTime, Integer> latestSet;
+    private TreeMap<LocalTime, Integer> earlistSet;
+    private TreeMap<LocalTime, Integer> latestSet;
 
     static {
         COLOR_LIST.add(Color.BLUE);
@@ -55,10 +55,7 @@ public class TimeTable {
      */
     public TimeTable(TimeTable input) {
         this();
-
-        for (TimeSlot timeSlot : input.getTimeSlots()) {
-            addTimeSlotWithoutColor(timeSlot);
-        }
+        updateTimeTable(input);
     }
 
     /**
@@ -98,14 +95,36 @@ public class TimeTable {
         return toReturn;
     }
 
+    public LocalTime getEarliest() throws TimeTableEmptyException {
+        if (earlistSet.isEmpty()) {
+            throw new TimeTableEmptyException();
+        } else {
+            return earlistSet.firstKey();
+        }
+    }
+
+    public LocalTime getLatest() throws TimeTableEmptyException {
+        if (latestSet.isEmpty()) {
+            throw new TimeTableEmptyException();
+        } else {
+            return latestSet.lastKey();
+        }
+    }
+
+    // TODO: Make it such that it doesn't repeat colors too often
+    public Color getRandomColor() {
+        return COLOR_LIST.get((int) (Math.random() * COLOR_LIST.size()));
+    }
+
     /**
      * Overwrites this {@code TimeTable} with {@code toReplace}
      * @param toReplace {@code TimeTable} to be copied
      */
     public void updateTimeTable(TimeTable toReplace) {
-        timeSlots = toReplace.timeSlots;
-        earlistSet = toReplace.earlistSet;
-        latestSet = toReplace.latestSet;
+        clear();
+        for (TimeSlot timeSlot : toReplace.getTimeSlots()) {
+            addTimeSlotWithoutColor(timeSlot);
+        }
     }
 
     /**
@@ -160,33 +179,17 @@ public class TimeTable {
         return false;
     }
 
-    // TODO: Make it such that it doesn't repeat colors too often
-    public Color getRandomColor() {
-        return COLOR_LIST.get((int) (Math.random() * COLOR_LIST.size()));
-    }
-
-    public LocalTime getEarlist() throws TimeTableEmptyException {
-        if (earlistSet.isEmpty()) {
-            throw new TimeTableEmptyException();
-        } else {
-            return earlistSet.firstKey();
-        }
-    }
-
-    public LocalTime getLatest() throws TimeTableEmptyException {
-        if (latestSet.isEmpty()) {
-            throw new TimeTableEmptyException();
-        } else {
-            return latestSet.lastKey();
-        }
-    }
-
     public boolean isEmpty() {
         return timeSlots.isEmpty();
     }
 
+    /**
+     * Clears this [@code TimeTable} object
+     */
     public void clear() {
-        timeSlots.clear();
+        timeSlots = new HashSet<>();
+        earlistSet = new TreeMap<>();
+        latestSet = new TreeMap<>();
     }
 
     @Override

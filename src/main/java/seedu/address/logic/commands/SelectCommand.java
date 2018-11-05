@@ -14,19 +14,19 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Selects a person identified using it's displayed index from the address book.
+ * Selects a person identified using its displayed index from the address book.
  */
 public class SelectCommand extends Command {
-
     public static final String COMMAND_WORD = "select";
     public static final String COMMAND_WORD_ALIAS = "s";
 
     public static final String ARGS_ME = "me";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Selects the person identified by the index number used in the displayed person list.\n"
+            + ": Selects yourself or the person identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + COMMAND_WORD + " 1"
+            + "Example: " + COMMAND_WORD + " " + ARGS_ME;
 
     public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Selected %1$s";
 
@@ -56,7 +56,8 @@ public class SelectCommand extends Command {
 
             model.updateTimeTable(friendList.get(targetIndex.getZeroBased()).getTimeTable());
             EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
-            String namePerson = model.getFilteredPersonList().get(targetIndex.getZeroBased()).getName().toString();
+            String namePerson = model.getFriendList(model.getUser())
+                    .get(targetIndex.getZeroBased()).getName().toString();
 
             return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, namePerson));
         }
