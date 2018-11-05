@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESIGNATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -22,6 +23,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Department;
+import seedu.address.model.person.Designation;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -43,6 +45,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_DEPARTMENT + "DEPARTMENT] "
+            + "[" + PREFIX_DESIGNATION + "DESIGNATION] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -102,9 +105,11 @@ public class EditCommand extends Command {
         Email email = personToEdit.getEmail();
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Department updatedDepartment = editPersonDescriptor.getDepartment().orElse(personToEdit.getDepartment());
+        Designation updatedDesignation = editPersonDescriptor.getDesignation().orElse(personToEdit.getDesignation());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, email, updatedAddress, updatedDepartment, updatedTags);
+        return new Person(updatedName, updatedPhone, email, updatedAddress, updatedDepartment,
+            updatedDesignation, updatedTags);
     }
 
     @Override
@@ -134,6 +139,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Address address;
         private Department department;
+        private Designation designation;
         private Set<Tag> tags;
 
 
@@ -148,6 +154,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setAddress(toCopy.address);
             setDepartment(toCopy.department);
+            setDesignation(toCopy.designation);
             setTags(toCopy.tags);
 
         }
@@ -156,7 +163,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, address, department, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, address, department, designation, tags);
         }
 
         public void setName(Name name) {
@@ -189,6 +196,14 @@ public class EditCommand extends Command {
 
         public Optional<Department> getDepartment() {
             return Optional.ofNullable(department);
+        }
+
+        public void setDesignation(Designation designation) {
+            this.designation = designation;
+        }
+
+        public Optional<Designation> getDesignation() {
+            return Optional.ofNullable(designation);
         }
 
         /**
@@ -227,6 +242,7 @@ public class EditCommand extends Command {
                     && getName().equals(e.getName())
                     && getAddress().equals(e.getAddress())
                     && getDepartment().equals(e.getDepartment())
+                    && getDesignation().equals(e.getDesignation())
                     && getTags().equals(e.getTags());
         }
     }

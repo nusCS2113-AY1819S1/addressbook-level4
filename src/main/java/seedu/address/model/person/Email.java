@@ -64,4 +64,15 @@ public class Email {
         return value.hashCode();
     }
 
+    /**
+     * Returns true if it contains same email
+     *
+     */
+    public boolean isSameEmail(Person person) {
+        if (person.getEmail() == this) {
+            return true;
+        }
+
+        return person.getEmail() != null && person.getEmail().equals(this);
+    }
 }

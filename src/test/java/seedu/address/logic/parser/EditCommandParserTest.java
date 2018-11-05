@@ -5,8 +5,11 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.DEPARTMENT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DEPARTMENT_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.DESIGNATION_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DESIGNATION_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DEPARTMENT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESIGNATION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
@@ -20,6 +23,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESIGNATION_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESIGNATION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -40,6 +45,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Department;
+import seedu.address.model.person.Designation;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -89,6 +95,8 @@ public class EditCommandParserTest {
         // invalid address
         assertParseFailure(parser, "1" + INVALID_DEPARTMENT_DESC, Department.MESSAGE_DEPARTMENT_CONSTRAINTS);
         // invalid department
+        assertParseFailure(parser, "1" + INVALID_DESIGNATION_DESC, Designation.MESSAGE_DESIGNATION_CONSTRAINTS);
+        // invalid designation
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS); // invalid tag
 
         // invalid phone followed by valid email
@@ -109,18 +117,19 @@ public class EditCommandParserTest {
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + VALID_ADDRESS_AMY
-                + VALID_PHONE_AMY + INVALID_DEPARTMENT_DESC, Name.MESSAGE_NAME_CONSTRAINTS);
+                + VALID_PHONE_AMY + INVALID_DEPARTMENT_DESC + INVALID_DESIGNATION_DESC, Name.MESSAGE_NAME_CONSTRAINTS);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
-                + NAME_DESC_AMY + ADDRESS_DESC_AMY + DEPARTMENT_DESC_AMY + TAG_DESC_FRIEND;
+                + NAME_DESC_AMY + ADDRESS_DESC_AMY + DEPARTMENT_DESC_AMY + DESIGNATION_DESC_AMY + TAG_DESC_FRIEND;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
                 .withPhone(VALID_PHONE_BOB).withName(VALID_NAME_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withDepartment(VALID_DEPARTMENT_AMY).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withDepartment(VALID_DEPARTMENT_AMY).withDesignation(VALID_DESIGNATION_AMY)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -166,6 +175,12 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
+        // designation
+        userInput = targetIndex.getOneBased() + DESIGNATION_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withDesignation(VALID_DESIGNATION_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
         descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
@@ -177,13 +192,13 @@ public class EditCommandParserTest {
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY
-                + DEPARTMENT_DESC_AMY + TAG_DESC_FRIEND + PHONE_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY
-                + DEPARTMENT_DESC_AMY + TAG_DESC_FRIEND + PHONE_DESC_BOB + ADDRESS_DESC_BOB + NAME_DESC_BOB
-                + DEPARTMENT_DESC_BOB + TAG_DESC_HUSBAND;
+                + DEPARTMENT_DESC_AMY + DESIGNATION_DESC_AMY + TAG_DESC_FRIEND + PHONE_DESC_AMY + ADDRESS_DESC_AMY
+                + NAME_DESC_AMY + DEPARTMENT_DESC_AMY + DESIGNATION_DESC_AMY + TAG_DESC_FRIEND + PHONE_DESC_BOB
+                + ADDRESS_DESC_BOB + NAME_DESC_BOB + DEPARTMENT_DESC_BOB + DESIGNATION_DESC_BOB + TAG_DESC_HUSBAND;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withName(VALID_NAME_BOB).withAddress(VALID_ADDRESS_BOB).withDepartment(VALID_DEPARTMENT_BOB)
-                .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
+                .withDesignation(VALID_DESIGNATION_BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -200,9 +215,10 @@ public class EditCommandParserTest {
 
         // other valid values specified
         userInput = targetIndex.getOneBased() + NAME_DESC_BOB + INVALID_PHONE_DESC + ADDRESS_DESC_BOB
-                + DEPARTMENT_DESC_BOB + PHONE_DESC_BOB;
+                + DEPARTMENT_DESC_BOB + DESIGNATION_DESC_BOB + PHONE_DESC_BOB;
         descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB).withName(VALID_NAME_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withDepartment(VALID_DEPARTMENT_BOB).build();
+                .withAddress(VALID_ADDRESS_BOB).withDepartment(VALID_DEPARTMENT_BOB)
+                .withDesignation(VALID_DESIGNATION_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

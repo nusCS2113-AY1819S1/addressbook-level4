@@ -17,6 +17,7 @@ import seedu.address.model.event.Location;
 import seedu.address.model.event.StartTime;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Department;
+import seedu.address.model.person.Designation;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -121,6 +122,21 @@ public class ParserUtil {
             throw new ParseException(Department.MESSAGE_DEPARTMENT_CONSTRAINTS);
         }
         return new Department(trimmedDepartment);
+    }
+
+    /**
+     * Parses a {@code String designation} into a {@code Designation}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code designation} is invalid.
+     */
+    public static Designation parseDesignation(String designation) throws ParseException {
+        requireNonNull(designation);
+        String trimmedDesignation = designation.trim();
+        if (!Designation.isValidDesignation(trimmedDesignation)) {
+            throw new ParseException(Designation.MESSAGE_DESIGNATION_CONSTRAINTS);
+        }
+        return new Designation(trimmedDesignation);
     }
 
     /**

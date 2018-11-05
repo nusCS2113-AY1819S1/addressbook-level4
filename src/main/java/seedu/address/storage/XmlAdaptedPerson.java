@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Department;
+import seedu.address.model.person.Designation;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -35,6 +36,8 @@ public class XmlAdaptedPerson {
     private String address;
     @XmlElement(required = true)
     private String department;
+    @XmlElement(required = true)
+    private String designation;
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
@@ -49,12 +52,13 @@ public class XmlAdaptedPerson {
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
     public XmlAdaptedPerson(String name, String phone, String email, String address, String department,
-                            List<XmlAdaptedTag> tagged) {
+                            String designation, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.department = department;
+        this.designation = designation;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -71,6 +75,7 @@ public class XmlAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         department = source.getDepartment().value;
+        designation = source.getDesignation().value;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -128,8 +133,18 @@ public class XmlAdaptedPerson {
         }
         final Department modelDepartment = new Department(department);
 
+        if (designation == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Designation.class.getSimpleName()));
+        }
+        if (!Designation.isValidDesignation(designation)) {
+            throw new IllegalValueException(Designation.MESSAGE_DESIGNATION_CONSTRAINTS);
+        }
+        final Designation modelDesignation = new Designation(designation);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelDepartment, modelTags);
+        return new Person (
+                modelName, modelPhone, modelEmail, modelAddress, modelDepartment, modelDesignation, modelTags);
     }
 
     @Override
@@ -148,6 +163,7 @@ public class XmlAdaptedPerson {
                 && Objects.equals(email, otherPerson.email)
                 && Objects.equals(address, otherPerson.address)
                 && Objects.equals(department, otherPerson.department)
+                && Objects.equals(designation, otherPerson.designation)
                 && tagged.equals(otherPerson.tagged);
     }
 }
