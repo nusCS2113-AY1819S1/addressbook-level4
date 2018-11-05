@@ -44,6 +44,8 @@ public class EmailSendSendCommand extends EmailSendCommand {
             e.printStackTrace();
             result = EMAIL_FAILURE;
         }
+
+        resetRecipientsAndContents();
         LogicManager.setLogicState("primary");
         return new CommandResult(result);
     }

@@ -30,10 +30,10 @@ public class EmailSendCommand extends Command {
     public static final String EMAIL_SUCCESS = "Successfully sent the email!";
     public static final String EMAIL_FAILURE = "Failed to send the email!";
 
-    private ArrayList<Candidate> candidateRecipients;
-    private ArrayList<JobOffer> jobOfferRecipients;
-    private ArrayList<Candidate> candidateContents;
-    private ArrayList<JobOffer> jobOfferContents;
+    private static ArrayList<Candidate> candidateRecipients;
+    private static ArrayList<JobOffer> jobOfferRecipients;
+    private static ArrayList<Candidate> candidateContents;
+    private static ArrayList<JobOffer> jobOfferContents;
 
     @Override
     public CommandResult execute(Model model, CommandHistory history)
@@ -53,6 +53,16 @@ public class EmailSendCommand extends Command {
             jobOfferRecipients = new ArrayList<>(emailUtil.getJobOffers());
             candidateContents = new ArrayList<>(emailUtil.getCandidates());
         }
+    }
+
+    /**
+     * Resets the array lists in this class, to be used when email has been sent or cancelled
+     */
+    public static void resetRecipientsAndContents() {
+        candidateRecipients = new ArrayList<>();
+        jobOfferRecipients = new ArrayList<>();
+        candidateContents = new ArrayList<>();
+        jobOfferContents = new ArrayList<>();
     }
 
     /**
@@ -84,7 +94,6 @@ public class EmailSendCommand extends Command {
 
     /**
      * Generates bodytext of the email.
-     * @param model
      * @param emailUtil
      * @return bodytext String
      */

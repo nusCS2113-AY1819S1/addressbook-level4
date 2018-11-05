@@ -93,6 +93,8 @@ public class RecruitBookParser {
                     throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
                             + CancelCommand.MESSAGE_USAGE);
                 }
+                
+                EmailSendCommand.resetRecipientsAndContents();
                 return new CancelCommand(state.nextCommand);
             }
 
