@@ -3,12 +3,10 @@ package seedu.planner.testutil;
 import seedu.planner.model.Month;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.MoneyFlow;
-import seedu.planner.model.summary.DaySummary;
-import seedu.planner.model.summary.MonthSummary;
 import seedu.planner.model.summary.Summary;
 //@@author tenvinc
 /**
- * A utility class to help buildDaySummary Summary objects for testing
+ * A utility class to help build Summary objects for testing
  */
 public class SummaryBuilder {
 
@@ -30,20 +28,6 @@ public class SummaryBuilder {
         totalExpense = new MoneyFlow(DEFAULT_TOTAL_EXPENSE);
         totalIncome = new MoneyFlow(DEFAULT_TOTAL_INCOME);
         total = new MoneyFlow(DEFAULT_TOTAL);
-    }
-
-    public SummaryBuilder(DaySummary summaryToCopy) {
-        date = summaryToCopy.getDate();
-        totalExpense = summaryToCopy.getTotalExpense();
-        totalIncome = summaryToCopy.getTotalIncome();
-        total = summaryToCopy.getTotal();
-    }
-
-    public SummaryBuilder(MonthSummary summaryToCopy) {
-        month = summaryToCopy.getMonth();
-        totalExpense = summaryToCopy.getTotalExpense();
-        totalIncome = summaryToCopy.getTotalIncome();
-        total = summaryToCopy.getTotal();
     }
 
     /**
@@ -86,12 +70,12 @@ public class SummaryBuilder {
         return this;
     }
 
-    public Summary buildDaySummary() {
-        return new DaySummary(date, totalExpense, totalIncome, total);
+    public Summary<Date> buildDaySummary() {
+        return new Summary<>(date, totalExpense, totalIncome, total);
     }
 
-    public Summary buildMonthSummary() {
-        return new MonthSummary(month, totalExpense, totalIncome, total);
+    public Summary<Month> buildMonthSummary() {
+        return new Summary<>(month, totalExpense, totalIncome, total);
     }
 
 }

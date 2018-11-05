@@ -374,7 +374,7 @@ public class ExcelUtil {
         for (SummaryEntry summaryEntry : daySummaryEntryList) {
             Row row = sheet.createRow(++rowNum);
             writeDataIntoCell(row, FIRST_COLUMN,
-                    summaryEntry.getTimeStamp());
+                    summaryEntry.getIdentifier());
             writeDataIntoCell(row, SECOND_COLUMN,
                     Double.parseDouble(removeCurrencySign(summaryEntry.getTotalIncome())));
             writeDataIntoCell(row, THIRD_COLUMN,

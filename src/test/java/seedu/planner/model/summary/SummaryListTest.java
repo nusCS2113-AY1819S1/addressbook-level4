@@ -70,9 +70,9 @@ public class SummaryListTest {
 
     @Test
     public void constructor_recordListWithUniqueDatesNoFilter_success() {
-        HashMap<Date, Summary> expectedMap = new HashMap<>();
+        HashMap<Date, Summary<Date>> expectedMap = new HashMap<>();
         for (Record r : recordListAllUniqueDates) {
-            expectedMap.put(r.getDate(), new DaySummary(r));
+            expectedMap.put(r.getDate(), new Summary<>(r, r.getDate()));
         }
         assertEquals(new SummaryByDateList(recordListAllUniqueDates).getSummaryMap(),
                 expectedMap);
@@ -80,10 +80,10 @@ public class SummaryListTest {
 
     @Test
     public void constructor_recordListWithUniqueMonthsNoFilter_success() {
-        HashMap<Month, Summary> expectedMap = new HashMap<>();
+        HashMap<Month, Summary<Month>> expectedMap = new HashMap<>();
         for (Record r : recordListAllUniqueMonths) {
             Month month = new Month(r.getDate().getMonth(), r.getDate().getYear());
-            expectedMap.put(month, new MonthSummary(r));
+            expectedMap.put(month, new Summary<>(r, month));
         }
         assertEquals(new SummaryByMonthList(recordListAllUniqueMonths).getSummaryMap(),
                 expectedMap);
@@ -91,18 +91,19 @@ public class SummaryListTest {
 
     @Test
     public void constructor_recordListWithOverlappingDatesNoFilter_success() {
-        DaySummary summaryJan = new DaySummary(CAIFAN_JAN);
+        Summary<Date> summaryJan = new Summary<>(CAIFAN_JAN, CAIFAN_JAN.getDate());
         summaryJan.add(INDO_JAN);
 
-        DaySummary summaryApr = new DaySummary(WORK_APR);
+        Summary<Date> summaryApr = new Summary<>(WORK_APR, WORK_APR.getDate());
         summaryApr.add(MALA_APR);
 
-        List<DaySummary> summaryListOverLappingDates = Arrays.asList(summaryJan, new DaySummary(RANDOM_MAR), summaryApr,
-                new DaySummary(ZT_JUN), new DaySummary(CHICKEN_RICE_JUL));
+        List<Summary<Date>> summaryListOverLappingDates = Arrays.asList(summaryJan,
+                new Summary<>(RANDOM_MAR, RANDOM_MAR.getDate()), summaryApr, new Summary<>(ZT_JUN, ZT_JUN.getDate()),
+                new Summary<>(CHICKEN_RICE_JUL, CHICKEN_RICE_JUL.getDate()));
 
-        HashMap<Date, Summary> expectedMap = new HashMap<>();
-        for (DaySummary s : summaryListOverLappingDates) {
-            expectedMap.put(s.getDate(), s);
+        HashMap<Date, Summary<Date>> expectedMap = new HashMap<>();
+        for (Summary<Date> s : summaryListOverLappingDates) {
+            expectedMap.put(s.getIdentifier(), s);
         }
         assertEquals(new SummaryByDateList(recordListOverlappingDates).getSummaryMap(),
                 expectedMap);
@@ -110,19 +111,26 @@ public class SummaryListTest {
 
     @Test
     public void constructor_recordListWithOverlappingMonthsNoFilter_success() {
-        MonthSummary summaryJan = new MonthSummary(CAIFAN_JAN);
+        Summary<Month> summaryJan = new Summary<>(CAIFAN_JAN, new Month(CAIFAN_JAN.getDate().getMonth(),
+                CAIFAN_JAN.getDate().getYear()));
         summaryJan.add(INDO_JAN);
 
-        MonthSummary summaryApr = new MonthSummary(WORK_APR);
+        Summary<Month> summaryApr = new Summary<>(WORK_APR, new Month(WORK_APR.getDate().getMonth(),
+                WORK_APR.getDate().getYear()));
         summaryApr.add(MALA_APR);
 
-        List<MonthSummary> summaryListOverLappingMonths = Arrays.asList(summaryJan, new MonthSummary(RANDOM_MAR),
-                summaryApr, new MonthSummary(ZT_JUN), new MonthSummary(CHICKEN_RICE_JUL));
+        List<Summary<Month>> summaryListOverLappingMonths = Arrays.asList(summaryJan,
+                new Summary<>(RANDOM_MAR, new Month(RANDOM.getDate().getMonth(),
+                        RANDOM_MAR.getDate().getYear())),
+                summaryApr, new Summary<>(ZT_JUN, new Month(ZT_JUN.getDate().getMonth(),
+                        ZT_JUN.getDate().getYear())), new Summary<>(CHICKEN_RICE_JUL,
+                        new Month(CHICKEN_RICE_JUL.getDate().getMonth(),
+                        CHICKEN_RICE_JUL.getDate().getYear())));
 
-        HashMap<Month, Summary> expectedMap = new HashMap<>();
+        HashMap<Month, Summary<Month>> expectedMap = new HashMap<>();
 
-        for (MonthSummary s : summaryListOverLappingMonths) {
-            expectedMap.put(s.getMonth(), s);
+        for (Summary<Month> s : summaryListOverLappingMonths) {
+            expectedMap.put(s.getIdentifier(), s);
         }
         assertEquals(new SummaryByMonthList(recordListOverlappingMonths).getSummaryMap(),
                 expectedMap);

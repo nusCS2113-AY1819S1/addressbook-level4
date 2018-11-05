@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import seedu.planner.commons.core.LogsCenter;
+import seedu.planner.logic.commands.SummaryByCategoryCommand;
 import seedu.planner.logic.commands.SummaryByDateCommand;
 import seedu.planner.logic.commands.SummaryByMonthCommand;
 import seedu.planner.logic.commands.SummaryCommand;
@@ -23,6 +24,7 @@ import seedu.planner.model.record.Date;
 public class SummaryCommandParser implements Parser<SummaryCommand> {
 
     private Logger logger = LogsCenter.getLogger(SummaryCommandParser.class);
+
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
@@ -33,6 +35,7 @@ public class SummaryCommandParser implements Parser<SummaryCommand> {
 
     /**
      * Retrieves all arguments from a string
+     *
      * @param args given string
      * @return array of strings
      * @throws ParseException if args cannot be processed
@@ -57,6 +60,7 @@ public class SummaryCommandParser implements Parser<SummaryCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the SummaryCommand
      * and returns an SummaryCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public SummaryCommand parse(String args) throws ParseException {
@@ -73,31 +77,68 @@ public class SummaryCommandParser implements Parser<SummaryCommand> {
 
     /**
      * Creates a SummaryCommand object from 2 strings arg1 and arg2.
+     *
      * @param mode - determines which SummaryCommand is created
      * @param arg1 - 1st argument
      * @param arg2 - 2nd argument
      * @throws ParseException if no SummaryCommand object can be created due to invalid arguments
      */
     private SummaryCommand createSummaryCommand(String mode, String arg1, String arg2) throws ParseException {
-        if (mode.equals("date")) {
-            Date startDate = ParserUtil.parseDate(arg1);
-            Date endDate = ParserUtil.parseDate(arg2);
-            if (!isDateOrderValid(startDate, endDate)) {
-                throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        SummaryByDateCommand.MESSAGE_USAGE)));
-            }
-            return new SummaryByDateCommand(startDate, endDate);
-        } else if (mode.equals("month")) {
-            Month startMonth = ParserUtil.parseMonth(arg1);
-            Month endMonth = ParserUtil.parseMonth(arg2);
-            if (compareMonth().compare(startMonth, endMonth) > 0) {
-                throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        SummaryByMonthCommand.MESSAGE_USAGE)));
-            }
-            return new SummaryByMonthCommand(startMonth, endMonth);
-        } else {
+        switch (mode) {
+        case SummaryByDateCommand.COMMAND_MODE_WORD:
+            return createSummaryByDateCommand(arg1, arg2);
+        case SummaryByMonthCommand.COMMAND_MODE_WORD:
+            return createSummaryByMonthCommand(arg1, arg2);
+        case SummaryByCategoryCommand.COMMAND_MODE_WORD:
+            return createSummaryByCategoryCommand(arg1, arg2);
+        default:
             throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     SummaryCommand.MESSAGE_USAGE)));
         }
+    }
+
+    /**
+     * Creates a summary by category command.
+     * @return SummaryByCategoryCommand object
+     * @throws ParseException if invalid date order
+     */
+    private SummaryCommand createSummaryByCategoryCommand(String arg1, String arg2) throws ParseException {
+        Date startDate = ParserUtil.parseDate(arg1);
+        Date endDate = ParserUtil.parseDate(arg2);
+        if (!isDateOrderValid(startDate, endDate)) {
+            throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SummaryByDateCommand.MESSAGE_USAGE)));
+        }
+        return new SummaryByCategoryCommand(startDate, endDate);
+    }
+
+    /**
+     * Creates a summary by month command.
+     * @return SummaryByMonthCommand object
+     * @throws ParseException if invalid month order
+     */
+    private SummaryCommand createSummaryByMonthCommand(String arg1, String arg2) throws ParseException {
+        Month startMonth = ParserUtil.parseMonth(arg1);
+        Month endMonth = ParserUtil.parseMonth(arg2);
+        if (compareMonth().compare(startMonth, endMonth) > 0) {
+            throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SummaryByMonthCommand.MESSAGE_USAGE)));
+        }
+        return new SummaryByMonthCommand(startMonth, endMonth);
+    }
+
+    /**
+     * Creates a summary by date command.
+     * @return SummaryByDateCommand object
+     * @throws ParseException if invalid date order
+     */
+    private SummaryCommand createSummaryByDateCommand(String arg1, String arg2) throws ParseException {
+        Date startDate = ParserUtil.parseDate(arg1);
+        Date endDate = ParserUtil.parseDate(arg2);
+        if (!isDateOrderValid(startDate, endDate)) {
+            throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SummaryByDateCommand.MESSAGE_USAGE)));
+        }
+        return new SummaryByDateCommand(startDate, endDate);
     }
 }

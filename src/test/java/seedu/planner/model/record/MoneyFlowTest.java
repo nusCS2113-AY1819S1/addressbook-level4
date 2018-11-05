@@ -35,7 +35,4 @@ public class MoneyFlowTest {
         assertTrue(MoneyFlow.isValidMoneyFlow("+12")); // no need for the decimal point
         assertTrue(MoneyFlow.isValidMoneyFlow("-999999999999999")); // moneyflow with 15 digit whole number
     }
-
-    // TODO: Check whether the data has been parsed correctly
-
 }

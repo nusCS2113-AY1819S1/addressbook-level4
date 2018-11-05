@@ -1,7 +1,4 @@
 {
-  "ignoreGlobList": ["about-us/**", "**index.html"],
-  "formats": ["adoc", "cs", "css", "fxml",  "gradle", "html", "java", "js", "json", "jsp", "md", "py", "tag", "xml"],
-  "ignoreCommitList":,
   "authors":
   [
     {
@@ -17,7 +14,7 @@
     {
       "githubId": "Tenvinc",
       "displayName": "VIN...ONG",
-      "authorNames": ["tenvinc", "Vincent"]
+      "authorNames": ["Tenvinc", "Vincent", "tenvinc"]
     },
     {
       "githubId": "oscarzeng",
