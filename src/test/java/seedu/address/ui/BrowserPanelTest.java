@@ -20,7 +20,6 @@ import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 
 public class BrowserPanelTest extends GuiUnitTest {
     private PersonPanelSelectionChangedEvent selectionChangedEventStub;
-    private GroupPanelSelectionChangedEvent selectionChangedEventGroupStub;
 
     private BrowserPanel browserPanel;
     private BrowserPanelHandle browserPanelHandle;
@@ -28,7 +27,6 @@ public class BrowserPanelTest extends GuiUnitTest {
     @Before
     public void setUp() {
         selectionChangedEventStub = new PersonPanelSelectionChangedEvent(ALICE);
-        selectionChangedEventGroupStub = new GroupPanelSelectionChangedEvent(TUT_1);
 
         guiRobot.interact(() -> browserPanel = new BrowserPanel());
         uiPartRule.setUiPart(browserPanel);
@@ -45,13 +43,5 @@ public class BrowserPanelTest extends GuiUnitTest {
         // associated web page of a person
         postNow(selectionChangedEventStub);
 
-
-        // associated web page of a group
-        postNow(selectionChangedEventGroupStub);
-        URL expectedGroupUrl = new URL(BrowserPanel.SEARCH_PAGE_URL
-                + TUT_1.getGroupName().groupName.replaceAll(" ", "%20"));
-
-        waitUntilBrowserLoaded(browserPanelHandle);
-        assertEquals(expectedGroupUrl, browserPanelHandle.getLoadedUrl());
     }
 }
