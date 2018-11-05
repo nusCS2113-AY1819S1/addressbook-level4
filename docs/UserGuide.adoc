@@ -565,9 +565,6 @@ e.g. distinto 3 n/CS2113- g/1 nat/0
 * *Distribute randomly into _n_ Groups with balanced nationality* :
 `distinto INDEX n/GROUP-NAME g/GENDER_FLAG nat/NATIONALITY_FLAG` +
 e.g. distinto 3 n/CS2113- g/0 nat/1
-* *List* : `list`
-* *Help* : `help`
-* *Select* : `select INDEX` +
 * *add test marks* : `adt tn/TESTNAME tm/MARKS` +
 e.g. `adt tn/cs2113 tm/16`
 * *edit test marks* : `edt tn/TESTNAME tm/MARKS` +
@@ -576,7 +573,13 @@ e.g. `edt tn/cs2113 tm/16`
 e.g. disp tn/CS2113 highest/` or `disp tn/CS2113 lowest/` or `disp tn/CS2113 median/` or `disp tn/CS2113 mean/` or `disp tn/CS2113 TTF/` or `disp tn/ LTF/`
 * *assign grade per test* : `agpt tn/TESTNAME ` +
 e.g. `agpt tn/CS2040C`
+* *delete certain test* : `dt tn/TESTNAME ` +
+e.g. `dt tn/CS2040C`
 
+* *List* : `list`
+* *Help* : `help`
+* *Select* : `select INDEX` +
+* *add test marks* : `adt tn/TESTNAME tm/MARKS` +
 e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
