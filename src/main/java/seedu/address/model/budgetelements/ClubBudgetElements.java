@@ -11,33 +11,33 @@ import java.util.Objects;
 public class ClubBudgetElements {
 
     // Identity fields
-    private final ClubName clubname;
+    private final ClubName clubName;
 
     // Data fields
-    private final ExpectedTurnout expectedturnout;
-    private final NumberOfEvents numberofevents;
+    private final ExpectedTurnout expectedTurnout;
+    private final NumberOfEvents numberOfEvents;
 
 
     /**
      * Every field must be present and not null.
      */
-    public ClubBudgetElements(ClubName clubname, ExpectedTurnout expectedturnout, NumberOfEvents numberofevents) {
-        requireAllNonNull(clubname, expectedturnout, numberofevents);
-        this.clubname = clubname;
-        this.expectedturnout = expectedturnout;
-        this.numberofevents = numberofevents;
+    public ClubBudgetElements(ClubName clubName, ExpectedTurnout expectedTurnout, NumberOfEvents numberOfEvents) {
+        requireAllNonNull(clubName, expectedTurnout, numberOfEvents);
+        this.clubName = clubName;
+        this.expectedTurnout = expectedTurnout;
+        this.numberOfEvents = numberOfEvents;
     }
 
     public ClubName getClubName() {
-        return clubname;
+        return clubName;
     }
 
     public ExpectedTurnout getExpectedTurnout() {
-        return expectedturnout;
+        return expectedTurnout;
     }
 
     public NumberOfEvents getNumberOfEvents() {
-        return numberofevents;
+        return numberOfEvents;
     }
 
 
@@ -79,7 +79,7 @@ public class ClubBudgetElements {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(clubname, expectedturnout, numberofevents);
+        return Objects.hash(clubName, expectedTurnout, numberOfEvents);
     }
 
     @Override

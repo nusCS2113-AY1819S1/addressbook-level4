@@ -27,7 +27,7 @@ public class BudgetCalculationCommand extends Command {
             + "clubs in the list of clubs in the address book. "
             + "Parameters:  "
             + PREFIX_TOTAL_BUDGET + "TOTAL BUDGET (IN SGD) "
-            + "Example: " + COMMAND_WORD + " 50000 ";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_TOTAL_BUDGET + "50000 ";
 
     public static final String MESSAGE_CALCULATE_BUDGET_SUCCESS = "The budgets have been calculated.";
     public static final String MESSAGE_INVALID_TOTAL_BUDGET = "Please enter a valid total budget!";

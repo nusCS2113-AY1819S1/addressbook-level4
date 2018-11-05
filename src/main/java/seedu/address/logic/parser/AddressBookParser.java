@@ -135,7 +135,7 @@ public class AddressBookParser {
             }
 
         case ViewClubBudgetsCommand.COMMAND_WORD:
-            if (LoginManager.getIsMember() || LoginManager.getIsTreasurer()) {
+            if (LoginManager.getIsMember() || LoginManager.getIsTreasurer() || LoginManager.getIsPresident()) {
                 return new ViewClubBudgetsCommandParser().parse(arguments);
             } else {
                 throw new ParseException(MESSAGE_VIEW_BUDGET_COMMAND_INVALID_USER);
