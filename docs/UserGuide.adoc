@@ -283,6 +283,11 @@ Format: `addExpense c/CATEGORY v/VALUE d/DATE [t/TAG]...`
 [TIP]
 An expense can have any number of tags (including 0)
 
+****
+The expense book is sorted by date, followed by value, and lastly the category. +
+The sorted expense book will be displayed once the user adds the expense.
+****
+
 Examples:
 
 * `addExpense c/taobao v/1111.11 d/11/11/2018`
@@ -299,6 +304,9 @@ Format: `edit INDEX [c/CATEGORY] [v/VALUE] [d/DATE] [t/TAG]...`
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the expense's tags by typing `t/` without specifying any tags after it.
+
+The expense book is sorted by date, followed by value, and lastly the category. +
+The sorted expense book will be displayed once the user edits the expense.
 ****
 
 Examples:

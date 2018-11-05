@@ -508,6 +508,12 @@ The command then calls `EventsCenter#post(new DisplayExpenseTrendEvent(expenseTr
 
 `ExpenseTrendWindow` creates a bar chart with the data and open a new window to display the bar chart.
 
+The following sequence diagram shows how the expense trend operation works:
+
+image::expenseTrendSequenceDiagramPart1.png[width="800"]
+
+image::expenseTrendSequenceDiagramPart2.png[width="800"]
+
 ==== Monthly expense
 This function displays the expense value of each category for the selected month in a new window.
 This function is facilitated by `MonthlyExpenseCommand`, it extends the `Command`.
@@ -520,6 +526,12 @@ The list of expense will be filtered by the selected month in the `getMonthlyExp
 The command then calls `EventsCenter#post(new DisplayMonthlyExpenseEvent(monthlyData))` to create an display monthly expense event with the monthly expense data, and pass the event to the EventCenter.
 
 The rest are similar to the Expense Trend but the data were represented in a pie chart instead of a bar chart.
+
+The following sequence diagram shows how the monthly expense operation works:
+
+image::monthlyExpenseSequenceDiagramPart1.png[width="800"]
+
+image::monthlyExpenseSequenceDiagramPart2.png[width="800"]
 // end::expensefeature[]
 //@@author
 
