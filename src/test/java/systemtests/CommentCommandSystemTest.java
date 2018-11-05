@@ -15,6 +15,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 
 import org.junit.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 
 import seedu.address.logic.commands.AddCommentCommand;
@@ -97,9 +98,46 @@ public class CommentCommandSystemTest extends EventManagerSystemTest {
         assertCommandSuccess(expectedModel, model, command, successMessage, index);
 
         //index <=0 for AddComment, ReplyComments and DeleteComments
+        command = "   " + AddCommentCommand.COMMAND_WORD + " " + 0 + " " + PREFIX_COMMENT + "Hi";
+        try {
+            executeCommand(command);
+        } catch (Exception e) {
+            assertEquals(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX, e.toString());
+        }
+        command = ReplyCommentCommand.COMMAND_WORD + " " + 0 + " " + PREFIX_COMMENT + "Hello" + " "
+                + PREFIX_LINE + "1";
+        try {
+            executeCommand(command);
+        } catch (Exception e) {
+            assertEquals(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX, e.toString());
+        }
+        command = DeleteCommentCommand.COMMAND_WORD + " " + 0 + " " + PREFIX_LINE + "2";
+        try {
+            executeCommand(command);
+        } catch (Exception e) {
+            assertEquals(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX, e.toString());
+        }
+        command = "   " + AddCommentCommand.COMMAND_WORD + " " + -1 + " " + PREFIX_COMMENT + "Hi";
+        try {
+            executeCommand(command);
+        } catch (Exception e) {
+            assertEquals(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX, e.toString());
+        }
+        command = ReplyCommentCommand.COMMAND_WORD + " " + -1 + " " + PREFIX_COMMENT + "Hello" + " "
+                + PREFIX_LINE + "1";
+        try {
+            executeCommand(command);
+        } catch (Exception e) {
+            assertEquals(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX, e.toString());
+        }
+        command = DeleteCommentCommand.COMMAND_WORD + " " + -1 + " " + PREFIX_LINE + "2";
+        try {
+            executeCommand(command);
+        } catch (Exception e) {
+            assertEquals(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX, e.toString());
+        }
         //Line not valid for AddComment and ReplyComment
         //New Event adding deleting and replying comments
-
     }
 
     /**
