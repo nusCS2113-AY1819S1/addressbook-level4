@@ -3,6 +3,8 @@ package seedu.recruit.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.recruit.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
 
+import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.events.ui.ShowUpdatedCompanyJobListRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
@@ -27,6 +29,8 @@ public class RedoCompanyBookCommand extends Command {
 
         model.redoCompanyBook();
         model.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
+        EventsCenter.getInstance().post(new ShowUpdatedCompanyJobListRequestEvent(
+                model.getFilteredCompanyJobList().size()));
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

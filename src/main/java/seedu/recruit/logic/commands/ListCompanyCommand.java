@@ -6,7 +6,7 @@ import static seedu.recruit.model.Model.PREDICATE_SHOW_ALL_JOBOFFERS;
 
 import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
-import seedu.recruit.commons.events.ui.ShowUpdateCompanyJobListRequestEvent;
+import seedu.recruit.commons.events.ui.ShowUpdatedCompanyJobListRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.model.Model;
 
@@ -27,9 +27,10 @@ public class ListCompanyCommand extends Command {
         requireNonNull(model);
         model.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
         model.updateFilteredCompanyJobList(PREDICATE_SHOW_ALL_JOBOFFERS);
-        //First, update the view even if user is not on Candidate Book.
-        EventsCenter.getInstance().post(new ShowUpdateCompanyJobListRequestEvent());
-        //If user is not on Company Book, switch view. Else, keep the same updated view.
+        //First, update the total number of jobs on the CompanyJobDetailsPanel even if user is not on Company Book.
+        EventsCenter.getInstance().post(new ShowUpdatedCompanyJobListRequestEvent(
+                model.getFilteredCompanyJobList().size()));
+        //If user is not on Company Book, this switches the view.
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
         return new CommandResult(MESSAGE_SUCCESS);
     }

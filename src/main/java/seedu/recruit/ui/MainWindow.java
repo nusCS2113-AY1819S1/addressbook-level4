@@ -18,14 +18,14 @@ import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.GuiSettings;
 import seedu.recruit.commons.core.LogsCenter;
 import seedu.recruit.commons.events.ui.ExitAppRequestEvent;
+import seedu.recruit.commons.events.ui.FocusOnCandidateBookRequestEvent;
+import seedu.recruit.commons.events.ui.FocusOnCompanyBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowEmailPreviewEvent;
 import seedu.recruit.commons.events.ui.ShowHelpRequestEvent;
 import seedu.recruit.commons.events.ui.ShowLastViewedBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowShortlistPanelRequestEvent;
-import seedu.recruit.commons.events.ui.ShowUpdateCandidateListRequestEvent;
-import seedu.recruit.commons.events.ui.ShowUpdateCompanyJobListRequestEvent;
 import seedu.recruit.commons.events.ui.SwitchBookRequestEvent;
 import seedu.recruit.logic.Logic;
 import seedu.recruit.logic.commands.SwitchBookCommand;
@@ -370,34 +370,44 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * If you do NOT wish to change the user's current view, call this handler.
-     * There are cases when user is viewing some information on the Candidate Book,
-     * and your command requires it to be executed on Candidate Book.
-     * In that case, if you forcefully call switchToCandidateBook(), it will overwrite whatever
-     * the user is currently viewing.
-     * @param event
+     * Switches book view.
+     * If you wish to deselect whatever the user has selected on screen, call this handler.
      */
     @Subscribe
     private void handleShowCandidateBookEvent(ShowCandidateBookRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        if (currentBook.contentEquals("companyBook")) {
             switchToCandidateBook();
-        }
     }
 
     /**
-     * If you do NOT wish to change the user's current view, call this handler.
-     * There are cases when user is viewing some information on the Company Book,
-     * and your command requires it to be executed on Company Book.
-     * In that case, if you forcefully call switchToCompanyBook(), it will overwrite whatever
-     * the user is currently viewing.
-     * @param event
+     * Switches book view.
+     * If you wish to deselect whatever the user has selected on screen, call this handler.
      */
     @Subscribe
     private void handleShowCompanyBookEvent(ShowCompanyBookRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        if (currentBook.contentEquals("candidateBook")) {
             switchToCompanyBook();
+    }
+
+    /**
+     * If you DO NOT wish to deselect whatever the user has selected on screen, call this handler.
+     */
+    @Subscribe
+    private void handleFocusOnCompanyBookEvent(FocusOnCompanyBookRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        if (getDisplayedBook().contentEquals("candidateBook")) {
+            switchToCompanyBook();
+        }
+    }
+
+    /**
+     * If you DO NOT wish to deselect whatever the user has selected on screen, call this handler.
+     */
+    @Subscribe
+    private void handleFocusOnCandidateBookEvent(FocusOnCandidateBookRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        if (getDisplayedBook().contentEquals("companyBook")) {
+            switchToCandidateBook();
         }
     }
 
@@ -431,9 +441,9 @@ public class MainWindow extends UiPart<Stage> {
      * This event does NOT check whether user is inside Candidate Book.
      * Hence, it will overwrite whatever the user is currently viewing.
      * @param event that updates candidate list
-     */
+
     @Subscribe
-    private void handleUpdateCandidateListEvent(ShowUpdateCandidateListRequestEvent event) {
+    private void handleUpdateCandidateListEvent(ShowUpdatedCandidateListRequestEvent event) {
         switchToCandidateBook(); //calling this function passes logic's getFilteredLists to UI's companyJobDetailsPanel
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
     }
@@ -444,10 +454,9 @@ public class MainWindow extends UiPart<Stage> {
      * This event does NOT check whether user is inside Company Book.
      * Hence, it will overwrite whatever the user is currently viewing.
      * @param event that updates job list or company list
-     */
     @Subscribe
-    private void handleUpdateCompanyJobListEvent(ShowUpdateCompanyJobListRequestEvent event) {
+    private void handleUpdateCompanyJobListEvent(ShowUpdatedCompanyJobListRequestEvent event) {
         switchToCompanyBook(); //calling this function passes logic's getFilteredLists to UI's companyJobDetailsPanel
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-    }
+    } */
 }

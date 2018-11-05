@@ -19,6 +19,7 @@ import seedu.recruit.commons.events.ui.CompanyJobListDetailsPanelSelectionChange
 import seedu.recruit.commons.events.ui.CompanyListDetailsPanelSelectionChangedEvent;
 import seedu.recruit.commons.events.ui.JumpToCompanyJobListRequestEvent;
 import seedu.recruit.commons.events.ui.JumpToCompanyListRequestEvent;
+import seedu.recruit.commons.events.ui.ShowUpdatedCompanyJobListRequestEvent;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.joboffer.JobOffer;
@@ -127,19 +128,18 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handleCompanyListDetailsPanelSelectionChangedEvent(CompanyListDetailsPanelSelectionChangedEvent
-                                                                                event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event,
-                "Selection Changed to " + event.getNewSelection().getCompanyName().value));
-        showJobDetailsOfSelectedCompany(event.getNewSelection());
-    }
-
-    @Subscribe
     private void handleCompanyJobListDetailsPanelSelectionChangedEvent(CompanyJobListDetailsPanelSelectionChangedEvent
                                                                                    event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event,
                 "Selection Changed to " + event.getNewSelection().getJob().value));
         showShortlistOfSelectedJob(event.getNewSelection());
+    }
+
+    @Subscribe
+    private void handleShowUpdatedCompanyJobListEvent(ShowUpdatedCompanyJobListRequestEvent
+                                                                               event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        numberOfJobOffers.setText(String.valueOf(event.totalNumberOfJobOffersInSelectedCompany));
     }
 
     /**

@@ -337,6 +337,8 @@ public class ModelManager extends ComponentManager implements Model {
         filteredJobs.setPredicate(predicate);
     }
 
+    // ================================== Shortlist Command functions ====================================== //
+
     @Override
     public void shortlistCandidateToJobOffer(Candidate candidate, JobOffer jobOffer) {
         jobOffer.shortlistCandidate(candidate);
