@@ -59,30 +59,15 @@ public class TimeTablePanelMainGrid extends UiPart<Region> {
      * @param currRowDim Dimensions of the rows in the current grid
      * @param currColDim Dimensions of the columns in the current grid
      * @param currStart Start hour in the grid
-     * @param currEnd End hour in the grid
      */
     public void addTimeSlot(
-            TimeSlot input, double currRowDim, double currColDim, LocalTime currStart, LocalTime currEnd) {
-
-        assert(currStart.getMinute() == 0);
-        assert(currEnd.getMinute() == 0);
+            TimeSlot input, double currRowDim, double currColDim, LocalTime currStart) {
 
         TimeSlot trimmedTimeSlot = input;
 
         // Check for whether the timeslot can be displayed on the current timetable
-        if (input.getDayOfWeek() == DayOfWeek.SATURDAY
-                || input.getDayOfWeek() == DayOfWeek.SUNDAY
-                || input.getEndTime().isBefore(currStart) || input.getEndTime().equals(currStart)
-                || input.getStartTime().isAfter(currEnd) || input.getStartTime().equals(currEnd)) {
+        if (input.getDayOfWeek() == DayOfWeek.SATURDAY || input.getDayOfWeek() == DayOfWeek.SUNDAY) {
             return;
-        }
-
-        if (input.getStartTime().isBefore(currStart) && input.getEndTime().isAfter(currEnd)) {
-            trimmedTimeSlot = new TimeSlot(input.getDayOfWeek(), currStart, currEnd, input.getColor());
-        } else if (input.getStartTime().isBefore(currStart)) {
-            trimmedTimeSlot = new TimeSlot(input.getDayOfWeek(), currStart, input.getEndTime(), input.getColor());
-        } else if (input.getEndTime().isAfter(currEnd)) {
-            trimmedTimeSlot = new TimeSlot(input.getDayOfWeek(), input.getStartTime(), currEnd, input.getColor());
         }
 
         TimeTablePanelTimeSlot panelTimeSlot = new TimeTablePanelTimeSlot(

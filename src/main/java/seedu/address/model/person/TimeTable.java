@@ -54,7 +54,42 @@ public class TimeTable {
      * @param input {@code TimeTable} to be copied
      */
     public TimeTable(TimeTable input) {
-        this(input.getTimeSlots());
+        this();
+
+        for (TimeSlot timeSlot : input.getTimeSlots()) {
+            addTimeSlotWithoutColor(timeSlot);
+        }
+    }
+
+    /**
+     * Adds a {@code TimeSlot} to the {@code TimeTable} without assigning it a random color
+     * Only used internally, see {@code addTimeSlot} for outward-facing API
+     *
+     * @param toAdd {@code TimeSlot} to be added
+     * @throws TimeSlotOverlapException if {@code toAdd} overlaps with an existing {@code TimeSlot}
+     */
+    protected void addTimeSlotWithoutColor(TimeSlot toAdd) throws TimeSlotOverlapException {
+        if (hasOverlap(toAdd)) {
+            throw new TimeSlotOverlapException();
+        }
+
+        timeSlots.add(toAdd);
+
+        if (earlistSet.containsKey(toAdd.getStartTime())) {
+            int currCount = earlistSet.get(toAdd.getStartTime());
+            earlistSet.remove(toAdd.getStartTime());
+            earlistSet.put(toAdd.getStartTime(), currCount + 1);
+        } else {
+            earlistSet.put(toAdd.getStartTime(), 1);
+        }
+
+        if (latestSet.containsKey(toAdd.getEndTime())) {
+            int currCount = latestSet.get(toAdd.getEndTime());
+            latestSet.remove(toAdd.getEndTime());
+            latestSet.put(toAdd.getEndTime(), currCount + 1);
+        } else {
+            latestSet.put(toAdd.getEndTime(), 1);
+        }
     }
 
     public Collection <TimeSlot> getTimeSlots() {
@@ -80,28 +115,8 @@ public class TimeTable {
      * @throws TimeSlotOverlapException if {@code toAdd} overlaps with an existing {@code TimeSlot}
      */
     public void addTimeSlot(TimeSlot toAdd) throws TimeSlotOverlapException {
-        if (hasOverlap(toAdd)) {
-            throw new TimeSlotOverlapException();
-        }
-
         toAdd.setColor(getRandomColor());
-        timeSlots.add(toAdd);
-
-        if (earlistSet.containsKey(toAdd.getStartTime())) {
-            int currCount = earlistSet.get(toAdd.getStartTime());
-            earlistSet.remove(toAdd.getStartTime());
-            earlistSet.put(toAdd.getStartTime(), currCount + 1);
-        } else {
-            earlistSet.put(toAdd.getStartTime(), 1);
-        }
-
-        if (latestSet.containsKey(toAdd.getEndTime())) {
-            int currCount = latestSet.get(toAdd.getEndTime());
-            latestSet.remove(toAdd.getEndTime());
-            latestSet.put(toAdd.getEndTime(), currCount + 1);
-        } else {
-            latestSet.put(toAdd.getEndTime(), 1);
-        }
+        addTimeSlotWithoutColor(toAdd);
     }
 
     /**

@@ -128,8 +128,7 @@ public class TimeTablePanel extends UiPart<Region> {
         updateDimensions();
 
         for (TimeSlot timeSlot : timeTableLastLoaded.getTimeSlots()) {
-            timeTablePanelMainGrid.addTimeSlot(
-                    timeSlot, currRowDimensions, currColDimensions, currStartHour, currEndHour);
+            timeTablePanelMainGrid.addTimeSlot(timeSlot, currRowDimensions, currColDimensions, currStartHour);
         }
     }
 
