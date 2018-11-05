@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_MILESTONEDESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MILESTONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RANK;
@@ -42,6 +43,11 @@ public class AddMilestoneCommandParser implements Parser<AddMilestoneCommand> {
         Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
         String milestoneDescription = ParserUtil.parseMilestoneDescription(
                 argMultimap.getValue(PREFIX_MILESTONE).get());
+
+        if (milestoneDescription.length() > 40) {
+            throw new ParseException(String.format(MESSAGE_INVALID_MILESTONEDESCRIPTION,
+                    AddMilestoneCommand.MESSAGE_USAGE));
+        }
 
         milestoneDescription = padMilestoneDescription(milestoneDescription);
 
