@@ -18,11 +18,14 @@ import seedu.recruit.model.joboffer.JobOffer;
  */
 public class EmailContentsAddCommand extends EmailContentsSelectCommand {
     @Override
+    @SuppressWarnings("Duplicates")
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         EmailUtil emailUtil = model.getEmailUtil();
         ArrayList<Candidate> duplicateCandidates = new ArrayList<>();
         ArrayList<JobOffer> duplicateJobOffers = new ArrayList<>();
+        ArrayList<Candidate> addedCandidates = new ArrayList<>();
+        ArrayList<JobOffer> addedJobOffers = new ArrayList<>();
 
         //check if objects being added are the same as the initial added objects
         if (emailUtil.isAreRecipientsCandidates()) {
@@ -30,6 +33,8 @@ public class EmailContentsAddCommand extends EmailContentsSelectCommand {
             for (JobOffer content : contents) {
                 if (!emailUtil.addJobOffer(content)) {
                     duplicateJobOffers.add(content);
+                } else {
+                    addedJobOffers.add(content);
                 }
             }
         } else {
@@ -37,56 +42,59 @@ public class EmailContentsAddCommand extends EmailContentsSelectCommand {
             for (Candidate content : contents) {
                 if (!emailUtil.addCandidate(content)) {
                     duplicateCandidates.add(content);
+                } else {
+                    addedCandidates.add(content);
                 }
             }
         }
 
         //Generate duplicate string (if any)
         boolean hasDuplicates = false;
-        String duplicates = "Unable to add the following because it already has been added before:\n";
+        StringBuilder duplicates = new StringBuilder(
+                "Unable to add the following because it already has been added before:\n");
         if (duplicateCandidates.size() != 0 || duplicateJobOffers.size() != 0) {
             if (!emailUtil.isAreRecipientsCandidates()) {
                 for (Candidate duplicateCandidate : duplicateCandidates) {
-                    duplicates += duplicateCandidate.getName().toString();
-                    duplicates += "\n";
+                    duplicates.append(duplicateCandidate.getName().toString());
+                    duplicates.append("\n");
                 }
             } else {
                 for (JobOffer duplicateJobOffer : duplicateJobOffers) {
-                    duplicates += model.getContentJobOfferName(duplicateJobOffer);
-                    duplicates += "\n";
+                    duplicates.append(emailUtil.getContentJobOfferName(duplicateJobOffer));
+                    duplicates.append("\n");
                 }
             }
             hasDuplicates = true;
         }
 
         //Generate recipients string
-        String contents = "Contents added:\n";
-        if (hasDuplicates) {
-            if (!emailUtil.isAreRecipientsCandidates()) {
-                contents += model.getFilteredCandidateNames(duplicateCandidates);
-            } else {
-                contents += model.getFilteredContentJobOfferNames(duplicateJobOffers);
+        StringBuilder contents = new StringBuilder("Contents added:\n");
+        if (emailUtil.isAreRecipientsCandidates()) {
+            for (JobOffer addedJobOffer : addedJobOffers) {
+                contents.append(emailUtil.getContentJobOfferName(addedJobOffer));
+                contents.append("\n");
             }
         } else {
-            if (!emailUtil.isAreRecipientsCandidates()) {
-                contents += model.getFilteredCandidateNames();
-            } else {
-                contents += model.getFilteredContentJobOfferNames();
+            for (Candidate addedCandidate : addedCandidates) {
+                contents.append(addedCandidate.getName().toString());
+                contents.append("\n");
             }
         }
 
         //Generate output string
-        String output = "";
+        StringBuilder output = new StringBuilder();
 
+        //if there are duplicates, add the duplicate string in
         if (hasDuplicates) {
-            output += duplicates;
+            output.append(duplicates);
         }
 
-        if (!contents.equals("Contents added:\n")) {
-            output += contents;
+        //only include recipients string if it's not empty
+        if (!contents.toString().equals("Contents added:\n")) {
+            output.append(contents);
         }
 
-        output += EmailRecipientsSelectCommand.MESSAGE_USAGE;
-        return new CommandResult(output);
+        output.append(EmailRecipientsSelectCommand.MESSAGE_USAGE);
+        return new CommandResult(output.toString());
     }
 }
