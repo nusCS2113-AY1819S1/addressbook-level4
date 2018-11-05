@@ -14,6 +14,8 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2113-AY1819S1-F09-1/main/
 
+image::NUSSU-ConnectPNGBanner.png[width="680", align=center"]
+
 By: `Team F09-1`      Since: `Sep 2018`      Licence: `MIT`
 
 == Setting up

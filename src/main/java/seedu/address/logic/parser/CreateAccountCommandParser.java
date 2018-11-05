@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.ParserUtil.parseUserRole;
 import java.io.UnsupportedEncodingException;
 import java.util.StringTokenizer;
 
+import seedu.address.logic.LoginManager;
 import seedu.address.logic.commands.CreateAccountCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.login.LoginDetails;
@@ -31,6 +32,8 @@ public class CreateAccountCommandParser implements Parser<CreateAccountCommand> 
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateAccountCommand.MESSAGE_USAGE));
+        } else if (!LoginManager.getIsPresident()) {
+            throw new ParseException("You must log in as president in order to create a new account!");
         }
 
         String[] keywords = trimmedArgs.split("\\s+");

@@ -28,6 +28,7 @@ public class CreateAccountCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() throws UnsupportedEncodingException {
         LoginManager.setIsCurrentlyTesting(true);
+        LoginManager.setIsPresident(true);
         LoginDetails expectedAccount = new LoginDetails(new UserId("A1234567M"), new UserPassword("zaq1xsw2cde3"),
                 new UserRole("member"));
 
@@ -35,10 +36,12 @@ public class CreateAccountCommandParserTest {
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + ID_ACCOUNT_1_DESC
                 + PASSWORD_ACCOUNT_1_DESC + ROLE_ACCOUNT_1_DESC , new CreateAccountCommand(expectedAccount));
         LoginManager.setIsCurrentlyTesting(false);
+        LoginManager.setIsPresident(false);
     }
 
     @Test
     public void parse_invalidValue_failure() {
+        LoginManager.setIsPresident(true);
         // invalid user id
         assertParseFailure(parser, INVALID_USERID + PASSWORD_ACCOUNT_1_DESC + ROLE_ACCOUNT_1_DESC,
                 UserId.MESSAGE_USERID_CONSTRAINTS);
@@ -55,5 +58,6 @@ public class CreateAccountCommandParserTest {
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + ID_ACCOUNT_1_DESC + PASSWORD_ACCOUNT_1_DESC
                         + ROLE_ACCOUNT_1_DESC,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateAccountCommand.MESSAGE_USAGE));
+        LoginManager.setIsPresident(false);
     }
 }

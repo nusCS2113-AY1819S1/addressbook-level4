@@ -66,6 +66,9 @@ public class AddressBookParser {
             if (!LoginManager.getIsCurrentlyTesting()) {
                 LoginManager.setIsCurrentlyCreatingAccount(true);
             }
+            if (!LoginManager.getIsPresident()) {
+                throw new ParseException("You must log in as president in order to create a new account!");
+            }
             return new CreateAccountCommandParser().parse(arguments);
 
         case AddCommand.COMMAND_WORD:
