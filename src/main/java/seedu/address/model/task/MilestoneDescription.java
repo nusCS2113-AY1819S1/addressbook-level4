@@ -48,6 +48,13 @@ public class MilestoneDescription {
     }
 
     @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof MilestoneDescription // instanceof handles nulls
+                && milestoneDescription.equals(((MilestoneDescription) other).milestoneDescription));
+    }
+
+    @Override
     public String toString() {
         return milestoneDescription;
     }
