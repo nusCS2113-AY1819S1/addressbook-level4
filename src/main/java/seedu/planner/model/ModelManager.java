@@ -237,7 +237,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /**
-     * This function is to do the auto check whenever the record changed.
+     * This function is to generate the limit output.
      * @param isExceeded
      * @param limit
      * @return
