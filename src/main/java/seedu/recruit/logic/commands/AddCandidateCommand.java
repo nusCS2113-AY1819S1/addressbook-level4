@@ -25,7 +25,7 @@ import seedu.recruit.model.candidate.Candidate;
  */
 public class AddCandidateCommand extends Command {
 
-    public static final String COMMAND_WORD = "Adding Candidates";
+    public static final String COMMAND_WORD = "Add Candidate Interface";
 
     public static final String MESSAGE_USAGE = "Enter the following details of the candidate in the format:\n"
             + "Parameters: "
@@ -39,6 +39,7 @@ public class AddCandidateCommand extends Command {
             + PREFIX_EDUCATION + "HIGHEST_EDUCATION_LEVEL "
             + PREFIX_SALARY + "EXPECTED_SALARY "
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "(Enter 'cancel' to stop adding candidates)\n"
             + "Example: "
             + PREFIX_NAME + "John Doe "
             + PREFIX_GENDER + "M "
@@ -49,8 +50,8 @@ public class AddCandidateCommand extends Command {
             + PREFIX_JOB + "Waiter "
             + PREFIX_EDUCATION + "OLEVELS "
             + PREFIX_SALARY + "1000 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "diabetic "
+            + PREFIX_TAG + "excuseHeavyLoad";
 
     public static final String MESSAGE_SUCCESS = "New added candidate: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This candidate already exists in the CandidateBook";

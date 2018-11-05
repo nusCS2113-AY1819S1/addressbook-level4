@@ -55,7 +55,7 @@ import seedu.recruit.model.commons.Email;
 import seedu.recruit.model.commons.Phone;
 import seedu.recruit.model.tag.Tag;
 import seedu.recruit.testutil.CandidateBuilder;
-import seedu.recruit.testutil.CandidateUtil;
+import seedu.recruit.testutil.ModelUtil;
 
 @Ignore
 public class AddCandidateCommandSystemTest extends CandidateBookSystemTest {
@@ -97,7 +97,7 @@ public class AddCandidateCommandSystemTest extends CandidateBookSystemTest {
          * -> added
          */
         toAdd = new CandidateBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
-        command = CandidateUtil.getAddCandidateCommand(toAdd);
+        command = ModelUtil.getAddCandidateCommand(toAdd);
         assertCommandSuccess(command, toAdd);
 
 
@@ -130,26 +130,26 @@ public class AddCandidateCommandSystemTest extends CandidateBookSystemTest {
         /* ----------------------------------- Perform invalid add operations --------------------------------------- */
 
         /* Case: add a duplicate candidate -> rejected */
-        command = CandidateUtil.getAddCandidateCommand(HOON);
+        command = ModelUtil.getAddCandidateCommand(HOON);
         assertCommandFailure(command, AddCandidateCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: add a duplicate candidate except with different phone -> rejected */
         toAdd = new CandidateBuilder(HOON).withPhone(VALID_PHONE_BOB).build();
-        command = CandidateUtil.getAddCandidateCommand(toAdd);
+        command = ModelUtil.getAddCandidateCommand(toAdd);
         assertCommandFailure(command, AddCandidateCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: add a duplicate candidate except with different email -> rejected */
         toAdd = new CandidateBuilder(HOON).withEmail(VALID_EMAIL_BOB).build();
-        command = CandidateUtil.getAddCandidateCommand(toAdd);
+        command = ModelUtil.getAddCandidateCommand(toAdd);
         assertCommandFailure(command, AddCandidateCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: add a duplicate candidate except with different recruit -> rejected */
         toAdd = new CandidateBuilder(HOON).withAddress(VALID_ADDRESS_BOB).build();
-        command = CandidateUtil.getAddCandidateCommand(toAdd);
+        command = ModelUtil.getAddCandidateCommand(toAdd);
         assertCommandFailure(command, AddCandidateCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: add a duplicate candidate except with different tags -> rejected */
-        command = CandidateUtil.getAddCandidateCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
+        command = ModelUtil.getAddCandidateCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
         assertCommandFailure(command, AddCandidateCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: missing name -> rejected */
@@ -174,7 +174,7 @@ public class AddCandidateCommandSystemTest extends CandidateBookSystemTest {
 
         /* Case: invalid keyword -> rejected */
         command = "add"
-                + " " + CandidateUtil.getCandidateDetails(toAdd);
+                + " " + ModelUtil.getCandidateDetails(toAdd);
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: invalid name -> rejected */
@@ -219,7 +219,7 @@ public class AddCandidateCommandSystemTest extends CandidateBookSystemTest {
      * @see CandidateBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(Candidate toAdd) {
-        assertCommandSuccess(CandidateUtil.getAddCandidateCommand(toAdd), toAdd);
+        assertCommandSuccess(ModelUtil.getAddCandidateCommand(toAdd), toAdd);
     }
 
     /**

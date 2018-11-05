@@ -22,6 +22,8 @@ import org.junit.rules.ExpectedException;
 import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.LogicState;
 import seedu.recruit.logic.commands.AddCandidateCommand;
+import seedu.recruit.logic.commands.AddCompanyCommand;
+import seedu.recruit.logic.commands.AddJobDetailsCommand;
 import seedu.recruit.logic.commands.ClearCandidateBookCommand;
 import seedu.recruit.logic.commands.ClearCompanyBookCommand;
 import seedu.recruit.logic.commands.DeleteCandidateCommand;
@@ -39,14 +41,19 @@ import seedu.recruit.logic.commands.SelectCandidateCommand;
 import seedu.recruit.logic.commands.SelectCompanyCommand;
 import seedu.recruit.logic.commands.SelectJobCommand;
 import seedu.recruit.logic.commands.StartAddCandidateCommand;
+import seedu.recruit.logic.commands.StartAddCompanyCommand;
 import seedu.recruit.logic.commands.StartAddJobCommand;
 import seedu.recruit.logic.commands.UndoCandidateBookCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.candidate.Candidate;
+import seedu.recruit.model.company.Company;
+import seedu.recruit.model.joboffer.JobOffer;
 import seedu.recruit.testutil.CandidateBuilder;
 import seedu.recruit.testutil.CandidateContainsKeywordsPredicateBuilder;
-import seedu.recruit.testutil.CandidateUtil;
+import seedu.recruit.testutil.CompanyBuilder;
 import seedu.recruit.testutil.EditPersonDescriptorBuilder;
+import seedu.recruit.testutil.JobOfferBuilder;
+import seedu.recruit.testutil.ModelUtil;
 
 public class RecruitBookParserTest {
 
@@ -76,6 +83,20 @@ public class RecruitBookParserTest {
     }
 
     @Test
+    public void parseCommand_start_addcompanies() throws Exception {
+        assertTrue(parser.parseCommand(StartAddCompanyCommand.COMMAND_WORD, state, emailUtil)
+                instanceof StartAddCompanyCommand);
+
+        try {
+            parser.parseCommand(StartAddCompanyCommand.COMMAND_WORD + " lol", state, emailUtil);
+            throw new AssertionError("The expected ParseException was not thrown.");
+        } catch (ParseException pe) {
+            assertEquals(MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
+                    + StartAddCompanyCommand.MESSAGE_USAGE, pe.getMessage());
+        }
+    }
+
+    @Test
     public void parseCommand_start_addjobs() throws Exception {
         assertTrue(parser.parseCommand(StartAddJobCommand.COMMAND_WORD, state, emailUtil)
                 instanceof StartAddJobCommand);
@@ -88,7 +109,6 @@ public class RecruitBookParserTest {
                     + StartAddJobCommand.MESSAGE_USAGE, pe.getMessage());
         }
     }
-
 
     @Test
     public void parseCommand_clear_candidatebook() throws Exception {
@@ -143,7 +163,7 @@ public class RecruitBookParserTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(candidate).build();
         EditCandidateCommand command = (EditCandidateCommand) parser.parseCommand(
                 EditCandidateCommand.COMMAND_WORD + " "
-                + INDEX_FIRST.getOneBased() + " " + CandidateUtil.getEditCandidateDescriptorDetails(descriptor),
+                + INDEX_FIRST.getOneBased() + " " + ModelUtil.getEditCandidateDescriptorDetails(descriptor),
                 new LogicState("primary"), emailUtil);
         assertEquals(new EditCandidateCommand(INDEX_FIRST, descriptor), command);
     }
@@ -277,8 +297,28 @@ public class RecruitBookParserTest {
         Candidate candidate = new CandidateBuilder().build();
         LogicState addCandidateState = new LogicState(AddCandidateCommand.COMMAND_WORD);
         AddCandidateCommand command =
-                (AddCandidateCommand) parser.parseCommand(CandidateUtil.getAddCandidateCommand(candidate),
+                (AddCandidateCommand) parser.parseCommand(ModelUtil.getAddCandidateCommand(candidate),
                         addCandidateState, emailUtil);
         assertEquals(new AddCandidateCommand(candidate), command);
+    }
+
+    @Test
+    public void parseCommand_add_joboffer() throws Exception {
+        JobOffer jobOffer = new JobOfferBuilder().build();
+        LogicState addJobState = new LogicState(AddJobDetailsCommand.COMMAND_WORD);
+        AddJobDetailsCommand command =
+                (AddJobDetailsCommand) parser.parseCommand(ModelUtil.getAddJobCommand(jobOffer),
+                        addJobState, emailUtil);
+        assertEquals(new AddJobDetailsCommand(jobOffer), command);
+    }
+
+    @Test
+    public void parseCommand_add_company() throws Exception {
+        Company company = new CompanyBuilder().build();
+        LogicState addCompanyState = new LogicState(AddCompanyCommand.COMMAND_WORD);
+        AddCompanyCommand command =
+                (AddCompanyCommand) parser.parseCommand(ModelUtil.getAddCompanyCommand(company),
+                        addCompanyState, emailUtil);
+        assertEquals(new AddCompanyCommand(company), command);
     }
 }

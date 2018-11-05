@@ -10,7 +10,7 @@ import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 
 /**
- *  Starts the adding candidate interface
+ *  Starts the add candidate interface
  *  Users can continue adding candidates until in this interface until user inputs 'cancel'
  */
 
@@ -28,7 +28,7 @@ public class StartAddCandidateCommand extends Command {
         requireNonNull(model);
         EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
 
-        LogicManager.setLogicState("Adding Candidates");
+        LogicManager.setLogicState("Add Candidate Interface");
         return new CommandResult(AddCandidateCommand.MESSAGE_USAGE);
     }
 }
