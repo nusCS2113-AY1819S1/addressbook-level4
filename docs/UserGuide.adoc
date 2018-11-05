@@ -177,10 +177,10 @@ Deletes the indexed distributor from the list of distributors engaged with the s
 
 Examples:
 
-* `delete 2` +
+* `deletedistributor 2` +
 Deletes the 2nd distributor in the contacts panel.
 
-* `find Betsy` +
+* `finddistributor Betsy` +
   `delete 1` +
    Deletes the 1st distributor in the results of the find command.
 
