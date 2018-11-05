@@ -21,13 +21,13 @@ public class AddDrinkCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new drink to Drink I/0. "
             + "Parameters: "
-            + PREFIX_DRINK_NAME + "Drink item "
-            + PREFIX_DRINK_DEFAULT_SELLING_PRICE + "Default selling price "
-            + PREFIX_DRINK_COST_PRICE + "Cost price \n"
+            + PREFIX_DRINK_NAME + "DRINK NAME "
+            + PREFIX_DRINK_DEFAULT_SELLING_PRICE + "SELLING PRICE "
+            + PREFIX_DRINK_COST_PRICE + "COST PRICE \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DRINK_NAME + "Coca Cola Original "
             + PREFIX_DRINK_DEFAULT_SELLING_PRICE + "20.00 "
-            + PREFIX_DRINK_COST_PRICE + "20";
+            + PREFIX_DRINK_COST_PRICE + "10.00";
 
     public static final String MESSAGE_SUCCESS = "New drink added: %1$s with default price of %2$s";
     public static final String MESSAGE_DUPLICATE_DRINK = "This drink already exists in the inventory list";
