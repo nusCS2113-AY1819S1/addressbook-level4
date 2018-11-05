@@ -1,9 +1,12 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.TreeMap;
 
 import javafx.scene.paint.Color;
@@ -15,27 +18,20 @@ import seedu.address.model.person.exceptions.TimeTableEmptyException;
  * Represents a {@code TimeTable} that is associated with a {@code Person}
  */
 public class TimeTable {
-    private static final ArrayList<Color> COLOR_LIST = new ArrayList<>();
-
     protected Collection <TimeSlot> timeSlots;
 
     // Since Java does not have a built-in multiset, a map is used to simulate a multiset
     private TreeMap<LocalTime, Integer> earlistSet;
     private TreeMap<LocalTime, Integer> latestSet;
 
-    static {
-        COLOR_LIST.add(Color.BLUE);
-        COLOR_LIST.add(Color.GREEN);
-        COLOR_LIST.add(Color.YELLOW);
-        COLOR_LIST.add(Color.ORANGE);
-        COLOR_LIST.add(Color.PINK);
-        COLOR_LIST.add(Color.PURPLE);
-    }
+    private HashMap<Color, Integer> colorList;
 
     public TimeTable() {
         timeSlots = new HashSet<>();
         earlistSet = new TreeMap<>();
         latestSet = new TreeMap<>();
+        colorList = new HashMap<>();
+        populateColors();
     }
 
     public TimeTable(Collection <TimeSlot> input) throws TimeSlotOverlapException {
@@ -71,6 +67,7 @@ public class TimeTable {
         }
 
         timeSlots.add(toAdd);
+        addColor(toAdd.getColor());
 
         if (earlistSet.containsKey(toAdd.getStartTime())) {
             int currCount = earlistSet.get(toAdd.getStartTime());
@@ -111,11 +108,6 @@ public class TimeTable {
         }
     }
 
-    // TODO: Make it such that it doesn't repeat colors too often
-    public Color getRandomColor() {
-        return COLOR_LIST.get((int) (Math.random() * COLOR_LIST.size()));
-    }
-
     /**
      * Overwrites this {@code TimeTable} with {@code toReplace}
      * @param toReplace {@code TimeTable} to be copied
@@ -134,7 +126,7 @@ public class TimeTable {
      * @throws TimeSlotOverlapException if {@code toAdd} overlaps with an existing {@code TimeSlot}
      */
     public void addTimeSlot(TimeSlot toAdd) throws TimeSlotOverlapException {
-        toAdd.setColor(getRandomColor());
+        toAdd.setColor(getColor());
         addTimeSlotWithoutColor(toAdd);
     }
 
@@ -144,10 +136,19 @@ public class TimeTable {
      * @param toRemove {@code TimeSlot} to be removed
      * @throws TimeSlotDoesNotExistException if {@code toRemove} does not exist in the {@code TimeTable}
      */
-    public void removeTimeSlot (TimeSlot toRemove) throws TimeSlotDoesNotExistException {
-        if (!timeSlots.remove(toRemove)) {
+    public void removeTimeSlot(TimeSlot toRemove) throws TimeSlotDoesNotExistException {
+        if (!timeSlots.contains(toRemove)) {
             throw new TimeSlotDoesNotExistException();
         }
+
+        for (TimeSlot timeSlot : timeSlots) {
+            if (timeSlot.equals(toRemove)) {
+                removeColor(timeSlot.getColor());
+                break;
+            }
+        }
+
+        timeSlots.remove(toRemove);
 
         int currCountEarlist = earlistSet.get(toRemove.getStartTime());
         earlistSet.remove(toRemove.getStartTime());
@@ -190,6 +191,67 @@ public class TimeTable {
         timeSlots = new HashSet<>();
         earlistSet = new TreeMap<>();
         latestSet = new TreeMap<>();
+        colorList = new HashMap<>();
+        populateColors();
+    }
+
+    /**
+     * Initializes the {@code colorList} with pre-set colors
+     */
+    private void populateColors() {
+        colorList.put(Color.YELLOW, 0);
+        colorList.put(Color.ORANGE, 0);
+        colorList.put(Color.PINK, 0);
+        colorList.put(Color.PURPLE, 0);
+        colorList.put(Color.BLUE, 0);
+        colorList.put(Color.CYAN, 0);
+        colorList.put(Color.SILVER, 0);
+    }
+
+    /**
+     * Gets the {@code Color} with the least occurrence in the {@code TimeTable} at the moment
+     * @return A {@code Color} object
+     */
+    private Color getColor() {
+        int minCount = Integer.MAX_VALUE;
+        Color minCountColor = Color.BLACK;
+
+        for (Map.Entry<Color, Integer> entry : colorList.entrySet()) {
+            if (entry.getValue() < minCount) {
+                minCount = entry.getValue();
+                minCountColor = entry.getKey();
+            }
+        }
+
+        return minCountColor;
+    }
+
+    /**
+     * Adds a {@code Color} to the {@code colorList} of the {@code TimeTable} for tracking
+     * @param toAdd {@code Color} to be added
+     */
+    private void addColor(Color toAdd) {
+        requireNonNull(toAdd);
+
+        if (colorList.containsKey(toAdd)) {
+            int lastCount = colorList.get(toAdd);
+            colorList.remove(toAdd);
+            colorList.put(toAdd, lastCount + 1);
+        } else {
+            colorList.put(toAdd, 1);
+        }
+    }
+
+    /**
+     * Removes a {@code Color} from the {@code colorList} of the {@code TimeTable} for tracking
+     * @param toRemove {@code Color} to be removed
+     */
+    private void removeColor(Color toRemove) {
+        requireNonNull(toRemove);
+
+        int lastCount = colorList.get(toRemove);
+        colorList.remove(toRemove);
+        colorList.put(toRemove, lastCount - 1);
     }
 
     @Override
