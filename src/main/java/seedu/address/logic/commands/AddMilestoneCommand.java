@@ -14,6 +14,7 @@ import seedu.address.logic.parser.AddMilestoneCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.task.Milestone;
+import seedu.address.model.task.Rank;
 import seedu.address.model.task.Task;
 
 //@@author JeremyInElysium
@@ -63,6 +64,8 @@ public class AddMilestoneCommand extends Command implements CommandParser {
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(MESSAGE_TASK_NOT_FOUND);
+        } else if (!Rank.isValidRank(toAdd.getRank().toString())) {
+            throw new CommandException(Rank.MESSAGE_RANK_CONSTRAINTS);
         }
 
         Task taskToEdit = lastShownList.get(index.getZeroBased());
