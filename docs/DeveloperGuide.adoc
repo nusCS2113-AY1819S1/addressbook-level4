@@ -389,7 +389,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 === Comments
 ==== Current Implementation
 
-The comments feature is facilitated by `Comments` class in the Logic/Comments folder. `AddComment`, `DeleteComment` and `ReplyComment` classes extend the `Comments` class. The `CommentFacade` class creates objects of `AddComment`, `DeleteComment` and `ReplyComment`. The features of the following classes are as such:
+The comments feature is facilitated by `Comments` class in the Logic/Comments folder. `AddComment`, `DeleteComment` and `ReplyComment` classes extend the `Comments` class. `CommentFacade` class creates objects of `AddComment`, `DeleteComment` and `ReplyComment`. The features of the following classes are as such:
 
 * `Comments` -- Handles storage of comments, contains `initComments(String input)` to reformat comment section to HTML, `parseCommentSection(String input)` to format the comment section into a vector and `rewrite(Vector commentsVector)` to obtain the edited comment section.
 
@@ -401,21 +401,27 @@ The comments feature is facilitated by `Comments` class in the Logic/Comments fo
 
 * `CommentFacade` -- An implementation of the Facade design pattern to interact with `AddCommentCommand`, `DeleteCommentCommand` and `ReplyCommentCommand`. It contains `addComment(String input, String comment, String username)` to be used in the `AddCommentCommand` to add a comment, `deleteComment(String input, int line)` to be used in `DeleteCommentCommand` to delete a comment and `deleteComment(String input, int line)` to be used in `ReplyCommentCommand` to reply comments.
 
-The comment features use `AddCommentCommand`
+The comment features use `AddCommentCommand`, `DeleteCommentCommand` and `ReplyCommentCommand` for the user to interact with the comment section. The features of the following classes are as such:
+
+* `AddCommentCommand` -- Adds a comment using `CommentFacade` and `AddCommentCommandParser`
+
+* `DeleteCommentCommand` -- Deletes a comment using `CommentFacade` and `DeleteCommentCommandParser`
+
+* `ReplyCommentCommand` -- Replies a comment using `CommentFacade` and `ReplyCommentCommandParser`
 
 Given below is an example usage scenario and how the Comments mechanism behaves at each step.
 
 Step 1. The user launches the application, click on an event or types `select INDEX` into the CLI. The comment section will be seen.
 
-Step 2. The user/admin executes `addComment 1 C/May I ask, what is the attire for the event?` to add a comment to the first event in the Event Manager. The addComment command calls `Comments` to parse the comments section from `eventmanager.xml` and runs `addComment("May I ask, what is the attire for the event?")`. The new comment is added to the end of the comment section for event 1 and is stored into `eventmanager.xml`.
+Step 2. The user/admin executes `addComment 1 C/May I ask, what is the attire for the event?` to add a comment to the first event in the Event Manager. `AddCommentCommand` command obtains the comment section from `eventmanager.xml` calls `CommentFacade` to add comment "May I ask, what is the attire for the event", into the comment section and stores the comment section into `eventmanager.xml`
 
-Step 3. The user/admin executes `replyComment 1 L/1 C/Athletic attire` to reply the comment in step 2. The replyComment command calls `Comments` to parse the comments section from `eventmanager.xml` and runs `replyComment("Athletic attire", 1)`. The comment will be added to event 1 at line 1 of the comments section and is stored into `eventmanager.xml`.
+Step 3. The user/admin executes `replyComment 1 L/1 C/Athletic attire` to reply the comment in step 2. `ReplyCommentCommand` command obtains the comment section from `eventmanager.xml` calls `CommentFacade` to reply comment with "Athletic attire", into the comment section and stores the comment section into `eventmanager.xml`
 
-Step 4. The admin executes `deleteComment 1 L/1` to reply the comment in step 2. The deleteComment command calls `Comments` to parse the comments section from `eventmanager.xml` and runs `deleteComment(1)`. The comment at event 1 line 1 will be removed and the comments section is stored in the `eventmanager.xml`.
+Step 4. The admin executes `deleteComment 1 L/1` to delete a comment at index 1, line 1 of comment section. `DeleteCommentCommand` command obtains the comment section from `eventmanager.xml` calls `CommentFacade` to delete "Athletic attire" from the comment section and stores the comment section into `eventmanager.xml`
 
 
 [NOTE]
-If a command's syntax is wrong, the application will prompt the user to try again and suggest a relevant format to follow. In the case a false indexed event is not present, the functions will return an invalid index message.
+If a command's syntax is wrong, the application will prompt the user to try again and suggest a relevant format to follow. In the case a false indexed event is not present, the functions will return an invalid index message. In the case a false comment section line is given, the functions will return an invalid line message.
 
 The following sequence diagram shows how the addComment operation works:
 
@@ -430,11 +436,11 @@ If the user uses the `find` command, the following functions will follow the ind
 
 ===== Aspect: How comment functions executes
 
-* **Alternative 1 (current choice):** Comment section stored in eventmanager.xml.
+* **Alternative 1 (current choice):** Comment section stored in a single field in `eventmanager.xml`
 ** Pros: Easy to parse because one field is used for comment section.
-** Cons: If a developer wants to manipulate specific comments through eventmanager.xml file there is no functions created for it.
+** Cons: If a developer wants to manipulate specific comments through eventmanager.xml file, there is no functions created for it.
 * **Alternative 2:** Store each comment as a seperate field and extract each comment individually.
-** Pros: No html tags will be stored in the field
+** Pros: No HTML tags will be stored in the field.
 ** Cons: New methods will need to be implemented to make many fields for comments.
 
 ===== Aspect: Data structure to support the comment function commands
@@ -1204,9 +1210,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |User |See status of event |-
 
-|`* *` |User | Able to post questions | I clarify any doubts regarding the event
+|`* *` |User | Able to post questions somewhere | I clarify any doubts regarding the event
 
-|`* *` |Admin |Manage comment section | To prevent abuse by users in a comments section
+|`* *` |Admin | Manage comment section | To prevent abuse by users in a comments section
 
 |`*` |user with many events in the Event Manager |sort events by name |locate a event easily
 |=======================================================================
@@ -1261,21 +1267,29 @@ MSS (main system success): +
 6. EventManager removes reminder for the event and displays confirmation message. +
 Use case ends
 
-*Use Case: Comments*: +
-MSS (main system success): +
-1. User views the event information and types in “comment view” on CLI +
-2. EventManager displays a comment section +
-3. User inputs command of “comment x” +
-4. EventManager executes command based on what user keys in +
-5. Repeat 3 and 4 until User types “comment exit” +
+
+[discrete]
+=== Use case: Comments
+*MSS*
+
+. User views the event information by clicking on the event cards or using the select command. +
+. EventManager displays a comment section. +
+. User inputs comment command. +
+. EventManager executes command based on what user keys in. +
+. Repeat 3 and 4 until User types “exit”. +
 Use case ends
 
-Extensions: +
-3a) The commands used in comments: +
-     	   3a1) “comment reply INDEX STRING ” will reply to the comment at INDEX +
-     	   3a2) “comment add STRING “ will adds the STRING to the list of comments +
-   3a3) “comment delete INDEX”  (only for admin) it will delete the comment at            INDEX +
-Resume use case at step 4
+Extensions:
+
+[none]
+
+* 3a. The comment commands are as such:
++
+[none]
+** 3a1. “replyComment INDEX L/LINE C/STRING ” will reply to the comment at event INDEX at LINE of comment section.
+** 3a2. “addComment INDEX C/STRING “ will adds the STRING to the bottom of the comment section at event INDEX.
+** 3a3. “deleteComment INDEX L/LINE”  (only for admin) it will delete the comment at event INDEX and comment at LINE of comment section. +
+Resume use case at step 4.
 
 *Use Case: Export calendar*: +
 MSS (main system success): +
