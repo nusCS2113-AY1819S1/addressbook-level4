@@ -12,6 +12,7 @@ import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.Context;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.ModelManager;
+import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.model.UserPrefs;
 import com.t13g2.forum.model.forum.Announcement;
 import com.t13g2.forum.model.forum.User;
@@ -44,9 +45,12 @@ public class CheckAnnounceCommandTest {
         Context.getInstance().setCurrentUser(admin);
 
         Announcement validAnnouncement = new AnnouncementBuilder().build();
-        CommandResult commandResult = new AnnounceCommand(validAnnouncement).execute(model, commandHistory);
-        assertEquals(String.format(AnnounceCommand.MESSAGE_SUCCESS, validAnnouncement),
-            commandResult.feedbackToUser);
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            unitOfWork.getAnnouncementRepository().addAnnouncement(validAnnouncement);
+            unitOfWork.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         //set the current logged in user as a user.
         User loginUser = TypicalUsers.JANEDOE;
