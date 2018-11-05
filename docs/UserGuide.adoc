@@ -180,12 +180,13 @@ Available prefixes:
 * t: tag search
 
 ****
-* The search is case insensitive. e.g `sports` will match `Sports`
-* The order of the keywords does not matter. e.g. `Sports Day` will match `Day Sports`
-* Only full words will be matched e.g. `Sport` will not match `Sports`
-* Events matching at least one keyword will be returned (i.e. `OR` search). e.g. `Sports Day` will return `Sports games`, `Good Day`
-* Command default prefix (k) will allow to search in any field of an event, while other specific prefix will result in event that must have that keyword in the indicate field
+* The search is case insensitive. e.g `sports` will match `Sports`.
+* The order of the keywords does not matter. e.g. `Sports Day` will match `Day Sports`.
+* Only full words will be matched e.g. `Sport` will not match `Sports`.
+* Events matching at least one keyword will be returned (i.e. `OR` search). e.g. `Sports Day` will return `Sports games`, `Good Day`.
+* Command default prefix (k) will allow to search in any field of an event, while other specific prefix will result in event that must have that keyword in the indicate field.
 * At least one of the available prefix must be presented.
+* When using different prefixes together, _logic AND operator_ is used. This mean if there is one prefix or morev in the combination that don't have any follow keywords, results search will always be zero.
 ****
 
 [NOTE]
@@ -202,7 +203,7 @@ Returns events having name `Sports Competition`, venue `Sci Avenue`, or tag `fri
 * `find d/12/01/2018 04:30`
 Return any event having date `12/01/2018` or time `04:30`
 *  `find k/Day n/Sports d/12/01/2018
-Return any event having keyword `day` with that event name having `Sports` and with that event date having `12/01/2018`
+Return any event having keyword `day` with name must have `Sports` and with date must have `12/01/2018`
 // end::find[]
 
 === Deleting a event : `delete`
