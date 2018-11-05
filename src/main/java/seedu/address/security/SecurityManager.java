@@ -6,9 +6,11 @@ import com.google.common.eventbus.Subscribe;
 
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.events.logic.LoginEvent;
+import seedu.address.commons.events.logic.RegisterSuccessEvent;
 import seedu.address.commons.events.security.LogoutEvent;
 import seedu.address.commons.events.security.SuccessfulLoginEvent;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
+import seedu.address.commons.events.ui.SuccessfulRegisterEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.User;
 
@@ -66,20 +68,13 @@ public class SecurityManager extends ComponentManager implements Security {
     }
 
     @Override
-    public RegisterFlag register(String username, String password, String email, String phone, String address) {
-//        try {
-//            //logic.execute("add n/" + username + " e/" + email + " p/" + phone + " a/" + address);
-//            this.isAuthenticated = true;
-//            logic.matchUserToPerson(username);
-//            userlist = appUsers.getAccountCredentials();
-//            userlist.add(new AccountCredential(username, password));
-//            appUsers.updateAccountCredentials(userlist);
-//            return RegisterFlag.SUCCESS;
-//        } catch (CommandException e) {
-//            return RegisterFlag.USER_ALREADY_EXISTS;
-//        } catch (ParseException e) {
-//            return RegisterFlag.INCOMPLETE_FIELD;
-//        }
+    public RegisterFlag register(String username, String password) {
+        //logic.execute("add n/" + username + " e/" + email + " p/" + phone + " a/" + address);
+        this.isAuthenticated = true;
+        logic.matchUserToPerson(username);
+        userlist = appUsers.getAccountCredentials();
+        userlist.add(new AccountCredential(username, password));
+        appUsers.updateAccountCredentials(userlist);
         return RegisterFlag.SUCCESS;
     }
 
@@ -96,5 +91,17 @@ public class SecurityManager extends ComponentManager implements Security {
     @Subscribe
     public void handleLoginAttemptEvent(LoginEvent e) {
         login(e.getUsername(), e.getPassword());
+    }
+
+    @Subscribe
+    public void handleRegisterSuccessEvent(RegisterSuccessEvent e) {
+        switch (register(e.getUsername(), e.getPassword())) {
+        case SUCCESS:
+            raise(new SuccessfulRegisterEvent());
+            break;
+        default:
+            break;
+
+        }
     }
 }
