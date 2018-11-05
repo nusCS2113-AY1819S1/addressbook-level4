@@ -376,7 +376,7 @@ Format: `addComment INDEX C/STRING`
 
 ****
 * Adds comment at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index *must be a positive integer* 1, 2, 3, ...
-* Comment cannot be blank. For C/String, String cannot be empty.
+* For `C/STRING`, `STRING` cannot be empty. `STRING` is the comment.
 * Undo and Redo command works! However, every time you undo or redo, the BrowserPanel will not refresh itself
   so you need to refresh it yourself.
 * If you want to revert a comment previously made, use Undo!
@@ -398,7 +398,7 @@ Format: `replyComment INDEX L/LINE C/STRING`
 
 ****
 * Replies a comment to the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index *must be a positive integer* 1, 2, 3, ...
-* Comment cannot be blank. For C/String, String cannot be empty
+*  For `C/STRING`, `STRING` cannot be empty. `STRING` is the comment.
 * Line has to be a non-zero integer and exist within the comment section. The numbers below the "Comment Section" in the BrowerPanel are the line parameters to index every comment. The comment will be replied under the line index given.
 * Undo and redo works! However, every time you undo or redo, the BrowserPanel will not refresh itself
   so you need to refresh it yourself.
