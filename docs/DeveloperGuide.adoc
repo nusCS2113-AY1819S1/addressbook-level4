@@ -428,8 +428,11 @@ Step 4. The admin executes `deleteComment 1 L/1` to delete a comment at index 1,
 * In the case a false comment section line is given, the functions will return an invalid line message.
 ====
 
-The following sequence diagram shows how the addComment operation works:
+The following sequence diagram shows how the AddCommentCommand operation works:
+
+.Sequence Diagram for AddCommentCommand
 image::addCommentSequenceDiagram.png[width="800"]
+
 The `replyComment` and `deleteComment` command does similar methods and need not be elaborated.
 
 [NOTE]

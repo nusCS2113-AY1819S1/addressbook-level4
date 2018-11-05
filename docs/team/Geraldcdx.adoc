@@ -25,7 +25,7 @@ endif::[]
 
 [loweralpha]
 . *Introduction* +
-This portfolio is a record of my contribution towards the project, highlighting the features and it’s detailed implementation to show technical competence in software engineering, and soft skills such as stellar writing for documentation. This will be further elaborated in the “Summary of Contributions”, “Contributions to User Guide” and “Contributions to Developer Guide” below.
+This portfolio is a record of my contribution towards this project. It highlights the developed features and it’s detailed implementation to show technical competence in software engineering, and soft skills such as stellar writing for documentation. This will be further elaborated in the “Summary of Contributions”, “Contributions to User Guide” and “Contributions to Developer Guide” below.
 
 . *Product Summary* +
 Event Manager (EM) is a desktop application that a Residential College (RC) in National University of Singapore (NUS) can use to manage events in RCs. Using the Command Line Interface (CLI), the Head of Events of an RC can promote events effectively to RC’s residents. The detailed features will be listed in the “List of Main Features”.
@@ -88,14 +88,14 @@ My team developed the EM so that residents can have a centralised event platform
 .. *Functionality* +
  Admin can add, reply, delete and reset comments. Whereas, Users can only add and reply comments. The relevant commands can be typed out in the CLI to achieve the previous statement.
 .. *Justification* +
-This functionality supports the additional challenged posed in CS2101 such that there is social responsiveness in the project. The interaction through the comments section will allow residents to clarify any doubts with the organisers. Additionally, the organisers can use the comments section as a feedback platform to get information on how to improve events.
+This functionality supports the additional challenged posed in CS2101 such that there is social responsiveness in the project. The interaction through the comments section will allow residents to clarify any doubts with the organisers. Additionally, the organisers can use the comments section as a feedback platform to get feedback on improvements.
 .. *Highlights* +
 This enhancement is tedious as it requires a new field to display the comments in a relevant format and onto the User Interface (UI). Many test cases written by the developers had to be edited to ensure that the testability of the project remained.
 .. *Credits* +
  Jsoup v1.11.3 library was used to manipulate Hyper Text Markup Language (HTML) tags so that we did not need to rewrite code but instead reuse efficient code. Furthermore, online user forums such as Stack Overflow was used to clarify doubts or find our develop code.
 . *Minor enhancement* +
 [lowerroman]
-.. `AddCommand` had to be added to intialise a comment section
+.. `AddCommand` had to be revised to intialise a comment section
 .. `EditCommand` was edited to accomodate a new field for the comments section and the admin would be able to reset the comment section if there is a need.
 .. Added comments into the `BrowserPanel` to be displayed in tht GUI.
 
@@ -134,8 +134,12 @@ include::../UserGuide.adoc[tag=comment]
 
 include::../DeveloperGuide.adoc[tag=comments]
 
-== PROJECT: PowerPointLabs
-
+== Other Projects
 ---
+[quanda]
 
-_{Optionally, you may include other projects in your portfolio.}_
+. [https://github.com/Geraldcdx/IVLEDownloader[Offline IVLE]] - This is an application that will be used by National University of Singapore(NUS) students to access files from the Integrated Virtual Learning Environment(IVLE) offline.
+. [https://github.com/Geraldcdx/HTMLChatbot[HTML ChatBot]] - A Fullstack Webapp hosted on Google to run code for a self-sustainable attendance taking chatbot.
+
+
+
