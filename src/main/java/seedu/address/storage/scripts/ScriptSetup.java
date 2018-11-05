@@ -17,6 +17,7 @@ public class ScriptSetup {
     public static final String ADD_GROUPS_FILE = "AddGroups.txt";
     public static final String ADD_PERSONS_FILE = "AddPersons.txt";
     public static final String DEFAULT_SCRIPT_FOLDER = "/scripts/";
+    public static final String DEFAULT_LOGS_FOLDER = "/logs/";
 
     private static final Logger logger = LogsCenter.getLogger(ScriptSetup.class);
 
@@ -35,16 +36,20 @@ public class ScriptSetup {
      */
     public void execute(UserPrefs userPrefs) {
         Path scriptPath;
+        Path logsPath;
         String scriptFolder = userPrefs.getScriptFileDirectory();
         boolean isPathValid = pathName.isValidPath(scriptFolder);
         if (isPathValid) {
             scriptPath = FileUtil.getPath(defaultLocation + scriptFolder);
+            logsPath = FileUtil.getPath(defaultLocation + scriptFolder + DEFAULT_LOGS_FOLDER);
         } else {
             scriptPath = FileUtil.getPath(defaultLocation + DEFAULT_SCRIPT_FOLDER);
+            logsPath = FileUtil.getPath(defaultLocation + DEFAULT_SCRIPT_FOLDER + DEFAULT_LOGS_FOLDER);
             userPrefs.setScriptFileDirectory(DEFAULT_SCRIPT_FOLDER);
         }
         try {
             FileUtil.createFolder(scriptPath);
+            FileUtil.createFolder(logsPath);
             addSampleTextFiles(scriptFolder, defaultLocation);
         } catch (IOException ioe) {
             logger.info(scriptFolder + " is not a valid directory "
