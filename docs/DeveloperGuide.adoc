@@ -288,8 +288,7 @@ The following is a more detailed description of the class:
 
 Storing only the *email* of `Person` in the `Attendees` object of `Event` saves memory storage and facilitates the `select` feature. As we select a person, we can simply iterate through the event list and check whether the person's email is in the attendees list.
 
-Given below is an illustration to describe the detection of whether two events clash, which is faciliated by the method `hasClash` in `Event`:
-
+Given below is an illustration to describe the detection of whether two events clash, which is facilitated by the method `hasClash` in `Event`:
 
 Implementation of RemoveCommand is similar to InviteCommand, but removes persons from attendees of events instead.
 
