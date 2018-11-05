@@ -3,10 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import seedu.address.commons.events.logic.RegisterSuccessEvent;
 import seedu.address.logic.CommandHistory;
@@ -25,14 +25,14 @@ public class RegisterCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Registers a person to the address book. "
             + "Parameters: "
-            + PREFIX_NAME + "USERNAME "
+            + PREFIX_USERNAME + "USERNAME "
             + PREFIX_PASSWORD + "PASSWORD "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
+            + PREFIX_USERNAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
@@ -46,7 +46,16 @@ public class RegisterCommand extends Command {
     private final String password;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an RegisterCommand without 2nd parameter for tests
+     */
+    public RegisterCommand(Person person) {
+        requireNonNull(person);
+        toAdd = person;
+        this.password = "test";
+    }
+
+    /**
+     * Creates an RegisterCommand to add the specified {@code Person}
      */
     public RegisterCommand(Person person, String password) {
         requireNonNull(person);
