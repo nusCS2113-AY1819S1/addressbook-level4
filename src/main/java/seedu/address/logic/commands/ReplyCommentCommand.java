@@ -46,7 +46,8 @@ public class ReplyCommentCommand extends Command {
 
     /**
      * @param index of the event in the filtered event list to edit
-     * @param editEventDescriptor details to edit the event with
+     * @param line to reply to in the comment section
+     * @param comment to add to comment section
      */
     public ReplyCommentCommand(Index index, int line, String comment) {
         requireNonNull(index);
@@ -79,6 +80,13 @@ public class ReplyCommentCommand extends Command {
         this.username = username;
     }
 
+    /**
+     * Save edited information in model
+     * @param model {@code Model} which the command should operate on.
+     * @param history {@code CommandHistory} which the command should operate on.
+     * @return
+     * @throws CommandException
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
@@ -102,10 +110,9 @@ public class ReplyCommentCommand extends Command {
 
     /**
      * Replies Comments
-     * @param eventToEdit
-     * @param username
-     * @return
-     * @throws CommandException
+     * @param eventToEdit event to edit
+     * @param username username to add to comment
+     * @return event of edited comment section
      */
     public Event replyComment(Event eventToEdit, String username) throws CommandException {
         CommentFacade comments = new CommentFacade();

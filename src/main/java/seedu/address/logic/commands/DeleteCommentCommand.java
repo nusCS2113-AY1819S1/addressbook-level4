@@ -39,8 +39,10 @@ public class DeleteCommentCommand extends Command {
     private final EditCommand.EditEventDescriptor editCommentDescriptor = new EditCommand.EditEventDescriptor();
     private int line = 0;
     private Index index;
+
     /**
      * @param index of the event in the filtered event list to edit
+     * @param line to delete comment section
      */
     public DeleteCommentCommand(Index index, int line) {
         requireNonNull(index);
@@ -59,6 +61,13 @@ public class DeleteCommentCommand extends Command {
 
     public void setIndex(Index index) { this.index = index; }
 
+    /**
+     * Save edited information in model
+     * @param model {@code Model} which the command should operate on.
+     * @param history {@code CommandHistory} which the command should operate on.
+     * @return CommandResult
+     * @throws CommandException login failed, not admin, invalid index
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
@@ -87,9 +96,8 @@ public class DeleteCommentCommand extends Command {
 
     /**
      * Removes comment with given line parameter
-     * @param eventToEdit
-     * @return
-     * @throws CommandException
+     * @param eventToEdit event to edit
+     * @return updated comment section
      */
     public Event deleteComment(Event eventToEdit) throws CommandException {
         CommentFacade comments = new CommentFacade();

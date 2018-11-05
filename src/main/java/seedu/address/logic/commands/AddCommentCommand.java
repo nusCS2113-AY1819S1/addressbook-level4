@@ -40,6 +40,7 @@ public class AddCommentCommand extends Command {
 
     /**
      * @param index of the event in the filtered event list to edit
+     * @param comment comment to add
      */
     public AddCommentCommand(Index index, String comment) {
         requireNonNull(index);
@@ -71,11 +72,11 @@ public class AddCommentCommand extends Command {
     }
 
     /**
-     *
+     * Save edited information in model
      * @param model {@code Model} which the command should operate on.
      * @param history {@code CommandHistory} which the command should operate on.
-     * @return
-     * @throws CommandException
+     * @return CommentResult
+     * @throws CommandException login failed or index invalid
      */
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
@@ -101,9 +102,9 @@ public class AddCommentCommand extends Command {
 
     /**
      *
-     * @param eventToEdit - The event with the given index
-     * @param username - Username of the User
-     * @return - event with added comment
+     * @param eventToEdit event with the given index
+     * @param username of the user
+     * @return event with added comment
      */
     public Event addComment(Event eventToEdit, String username) {
         CommentFacade comments = new CommentFacade();

@@ -14,16 +14,21 @@ public class ReplyComment extends Comments {
 
     /**
      *  Replies with the comment to event Comment section of index and line
+     * @param comment to add to comment section
+     * @param line to add below of in comment section
+     * @param username to add to comment
+     * @return edited comment section
+     * @throws CommandException when line is not in comment section
      */
     public String replyComment(String comment, int line, String username) throws CommandException {
-        Vector comments = new Vector();
+        Vector commentSection;
         try {
-            comments = getComments();
-            comments.add(line,  " (REPLY) " + username + " : " + comment);
+            commentSection = getComments();
+            commentSection.add(line,  " (REPLY) " + username + " : " + comment);
         } catch (Exception e) {
             throw new CommandException(ReplyCommentCommand.MESSAGE_LINE_INVALID);
         }
-        return rewrite(comments);
+        return rewrite(commentSection);
     }
 
 }
