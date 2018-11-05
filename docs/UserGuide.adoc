@@ -389,6 +389,8 @@ Adds "What is the attire to wear for the event?" into event 1 comment section wi
 * `addComment 5 C/What is the attire to wear for this event?` +
 Adds "What is the attire to wear for this event?" into event 5 comment section with username
 
+image:addComment.png[width="790"]
+
 === Reply Comment : `replyComment`
 
 Admin/User: Replies a comment with the username (when you are logged in)  +
@@ -409,6 +411,7 @@ Adds the comment "What is the attire to wear for the event?" into event 1 commen
 * `replyComment 2 L/2 C/What is the attire to wear for the event?` +
 Adds the comment "What is the attire to wear for the event?" into event 2 comment section at line 2 with username
 
+image:replyComment.png[width="790"]
 
 === Delete Comment : `deleteComment`
 
@@ -429,6 +432,8 @@ Examples:
 Deletes comment of event 1 at line 5
 * `deleteComment 2 L/2` +
 Deletes comment of event 2 at line 2
+
+image:deleteComment.png[width="790"]
 
 // tag::exportcalendar[]
 === Export Calendar Command: `export`
