@@ -235,7 +235,7 @@ Deletes tags "Lab1" and "Lab2" from the item with index 1
 === Lost an item: `lost`
 
 Lost an item From the stock list +
-Format: `lost INDEX [q/QUANTITY]`
+Format: `lost INDEX q/QUANTITY`
 
 
 
@@ -246,13 +246,13 @@ Examples:
 === Found an item: `found`
 
 Found an item From the Lost&Found List +
-Format: `found INDEX [q/QUANTITY]`
+Format: `found INDEX q/QUANTITY`
 
 
 
 Examples:
 
-* `found index q/25`
+* `found 1 q/25`
 
 === Listing Lost&Found List: `lost&found`
 
@@ -394,9 +394,9 @@ e.g. `tag Lab1`
 e.g. `addTag 1 t/Lab2`
 * *Delete Tag* `deleteTag INDEX t/TAG [MORE_TAGS]`
 e.g. `deleteTag 1 t/Lab2`
-* *Lost* : `lost INDEX [q/QUANTITY]` +
+* *Lost* : `lost INDEX q/QUANTITY` +
 e.g. `lost 1 q/25`
-* *Found* : `found INDEX [q/QUANTITY]` +
+* *Found* : `found INDEX q/QUANTITY` +
 e.g. `found 1 q/25`
 * *Lost&Found List* : `lost&found`
 * *Undo* : `undo`
