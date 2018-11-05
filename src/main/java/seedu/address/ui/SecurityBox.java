@@ -37,31 +37,7 @@ public class SecurityBox extends UiPart<Region> {
      */
     @FXML
     private void handleCommandEntered() {
-        String[] command = commandTextField.getText().trim().split("\\s+");
-        if (command[0].equals("login") && command.length > 2) {
-            security.login(command[1], command[2]);
-        } else if (command[0].equals("register") && command.length == 6) {
-            switch(security.register(command[1], command[2], command[3], command[4], command[5])) {
-            case SUCCESS:
-                System.out.println("Success");
-                raise(new SuccessfulRegisterEvent());
-                break;
-            case USER_ALREADY_EXISTS:
-                raise(new NewResultAvailableEvent("Username already used"));
-                System.out.println("Failure: Username already used");
-                break;
-            case INCOMPLETE_FIELD:
-                raise(new NewResultAvailableEvent("Incomplete fields"));
-                System.out.println("Failure: Incomplete fields");
-                break;
-            default:
-                break;
-            }
-        } else if (command[0].equals("ui")) {
-            raise(new ShowLoginEvent());
-        } else if (command[0].equals("exit")) {
-            raise (new ExitAppRequestEvent());
-        }
+
     }
 
     /**

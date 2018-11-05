@@ -103,14 +103,14 @@ public class RegistrationWindow extends UiPart<Stage> {
      * Runs whenever the register button is clicked
      */
     public void handleRegister() {
-        switch(user.register(usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(),
-             phoneTextField.getText(), addressTextField.getText())) {
-        case SUCCESS:
-            raise(new SuccessfulRegisterEvent());
-            break;
-        default:
-            break;
-        }
+//        switch(user.register(usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(),
+//             phoneTextField.getText(), addressTextField.getText())) {
+//        case SUCCESS:
+//            raise(new SuccessfulRegisterEvent());
+//            break;
+//        default:
+//            break;
+//        }
     }
 
 
