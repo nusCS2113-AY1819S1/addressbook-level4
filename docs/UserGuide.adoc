@@ -83,15 +83,13 @@ Format: `help`
 === Login the app: `login`
 Priority level: `default`
 
-Login to the app as one of the following identity: `manager` or `employee` or `as EMAIL` +
-The user can only login into ProManage if his/her email has been registered in the ProManage system before. +
-Once login, the user is unable to logout till the app is closed.
+Login to the app as one of the following identity: `manager` or `employee` +
+Once login cannot logout till the app is closed.
 
 Format: login `identity`
 
 Example: +
-`login manager` +
-`login as johnd@example.com`
+`login manager`
 
 === Adding an employee : `add`
 Priority level: `default`,`manager`

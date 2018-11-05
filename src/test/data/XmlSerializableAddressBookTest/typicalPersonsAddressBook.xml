@@ -7,7 +7,6 @@
         <email>alice@example.com</email>
         <address>123, Jurong West Ave 6, #08-111</address>
         <department>Admin</department>
-        <designation>manager</designation>
         <tagged>friends</tagged>
     </persons>
     <persons>
@@ -16,7 +15,6 @@
         <email>johnd@example.com</email>
         <address>311, Clementi Ave 2, #02-25</address>
         <department>Admin</department>
-        <designation>manager</designation>
         <tagged>owesMoney</tagged>
         <tagged>friends</tagged>
     </persons>
@@ -26,7 +24,6 @@
         <email>heinz@example.com</email>
         <address>wall street</address>
         <department>Publicity</department>
-        <designation>manager</designation>
     </persons>
     <persons>
         <name>Daniel Meier</name>
@@ -34,7 +31,6 @@
         <email>cornelia@example.com</email>
         <address>10th street</address>
         <department>Admin</department>
-        <designation>manager</designation>
         <tagged>friends</tagged>
     </persons>
     <persons>
@@ -43,7 +39,6 @@
         <email>werner@example.com</email>
         <address>michegan ave</address>
         <department>Safety</department>
-        <designation>manager</designation>
     </persons>
     <persons>
         <name>Fiona Kunz</name>
@@ -51,7 +46,6 @@
         <email>lydia@example.com</email>
         <address>little tokyo</address>
         <department>Programmes</department>
-        <designation>manager</designation>
     </persons>
     <persons>
         <name>George Best</name>
@@ -59,6 +53,5 @@
         <email>anna@example.com</email>
         <address>4th street</address>
         <department>Admin</department>
-        <designation>manager</designation>
     </persons>
 </addressbook>
