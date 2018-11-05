@@ -51,6 +51,15 @@ public class LimitBuilder {
     }
 
     /**
+     * Sets the {@code date} of the {@code Limit} with single date that we are building.
+     */
+    public LimitBuilder withSingleDate(String date) {
+        this.dateStart = new Date(date);
+        this.dateEnd = new Date(date);
+        return this;
+    }
+
+    /**
      * Sets the {@code MoneyFlow} of the {@code Limit} that we are building.
      */
     public LimitBuilder withMoneyFlow(String moneyFlow) {

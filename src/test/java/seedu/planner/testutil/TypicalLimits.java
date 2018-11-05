@@ -15,6 +15,14 @@ import seedu.planner.model.record.MoneyFlow;
  */
 public class TypicalLimits {
 
+    public static final Limit LIMIT_SINGLE_DATE_100 = new LimitBuilder().withSingleDate("01-02-2018")
+            .withMoneyFlow("-100").build();
+    public static final Limit LIMIT_SINGLE_DATE_500 = new LimitBuilder().withSingleDate("01-02-2018")
+            .withMoneyFlow("-500").build();
+    public static final Limit LIMIT_SINGLE_DIFF_DATE = new LimitBuilder().withSingleDate("08-05-2018")
+            .withMoneyFlow("-100").build();
+    public static final Limit LIMIT_SINGLE_DATE_All_DIFF = new LimitBuilder().withSingleDate("07-03-2018")
+            .withMoneyFlow("-300").build();
     public static final Limit LIMIT_100 = new LimitBuilder().withDateStart("01-02-2018").withDateEnd("5-02-2018")
             .withMoneyFlow("-100").build();
     public static final Limit LIMIT_500 = new LimitBuilder().withDateStart("01-02-2018").withDateEnd("5-02-2018")
