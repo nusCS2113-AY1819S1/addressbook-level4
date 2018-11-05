@@ -324,9 +324,6 @@ Examples:
 Adds a to-do task, the to-do list panel will display the task's title and its content. +
 Format: `todo tt/TITLE c/CONTENT`
 
-[TIP]
-The user is unable to edit the content of the to-do task
-
 Examples:
 
 * `todo tt/Write tests c/Need to write test for this command`
@@ -338,7 +335,7 @@ Adds a Reminder for your next meeting, along with details to be displayed
 
 Format: `reminder d/DDMMYY tm/TIME lc/LOCATION tp/TOPIC`
 
-Examples: 
+Examples:
 
 * `reminder d/031118 tm/1900 lc/COM2 tp/CS2113T Milestone 1.4`
 
