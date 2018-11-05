@@ -3,6 +3,7 @@ package systemtests;
 
 import static org.junit.Assert.assertEquals;
 
+import static seedu.address.logic.commands.Command.MESSAGE_ADMIN;
 import static seedu.address.logic.commands.CommandTestUtil.ADMIN_PASSWORD_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.ADMIN_USERNAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADMIN_PASSWORD;
@@ -173,6 +174,23 @@ public class CommentCommandSystemTest extends EventManagerSystemTest {
         } catch (Exception e) {
             assertEquals(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX, e.toString());
         }
+
+
+        //Testing deleteCommand not as an admin
+        command = "logout";
+        executeCommand(command);
+        command = "signup u/Gerald p/Gerald";
+        executeCommand(command);
+        command = "login u/Gerald p/Gerald";
+        executeCommand(command);
+        command = "deleteComment 1 L/1";
+        try {
+            executeCommand(command);
+        } catch (Exception e) {
+            assertEquals(MESSAGE_ADMIN, e.toString());
+        }
+
+
     }
 
     /**
