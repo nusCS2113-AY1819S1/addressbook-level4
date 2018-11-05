@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.drink.exceptions.EmptyBatchListException;
 import seedu.address.model.drink.exceptions.InsufficientQuantityException;
 import seedu.address.model.tag.Tag;
@@ -133,6 +135,14 @@ public class Drink {
             return uniqueBatchList.getEarliestBatchDate();
         } catch (EmptyBatchListException e) {
             return null;
+        }
+    }
+
+    public ObservableList<Batch> getObservableBatchList() {
+        try {
+            return uniqueBatchList.asUnmodifiableObservableList();
+        } catch (EmptyBatchListException e) {
+            return FXCollections.observableArrayList();
         }
     }
 

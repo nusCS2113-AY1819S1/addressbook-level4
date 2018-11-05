@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -136,8 +137,8 @@ public class MainWindow extends UiPart<Stage> {
         drinkListPanel = new DrinkListPanel(logic.getFilteredDrinkList());
         drinkListPanelPlaceholder.getChildren().add(drinkListPanel.getRoot());
 
-        //batchListPanel = new BatchListPanel(new );
-        //batchListPanelPlaceholder.getChildren().add(batchListPanel.getRoot());
+        batchListPanel = new BatchListPanel(FXCollections.observableArrayList());
+        batchListPanelPlaceholder.getChildren().add(batchListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -154,7 +155,7 @@ public class MainWindow extends UiPart<Stage> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         // insert what to do here
         batchListPanel = new BatchListPanel(
-                event.getNewSelection().getUniqueBatchList().asUnmodifiableObservableList());
+                event.getNewSelection().getObservableBatchList());
         batchListPanelPlaceholder.getChildren().add(batchListPanel.getRoot());
     }
 
