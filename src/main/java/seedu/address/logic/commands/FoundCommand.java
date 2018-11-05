@@ -37,6 +37,8 @@ public class FoundCommand extends Command {
 
     public static final String MESSAGE_FOUND_ITEM_SUCCESS = "Found Item: %1$s";
     public static final String MESSAGE_INVALID_QUANTITY = "The found quantity input is invalid";
+    public static final String MESSAGE_FOUND_LARGER_THAN_LOST = "The quantity of found items " +
+            "must be less than or equal to quantity of lost items";
 
     private final Index targetIndex;
     private final FoundDescriptor foundDescriptor;
@@ -90,7 +92,7 @@ public class FoundCommand extends Command {
         updatedLost -= updatedValue;
         updatedFound += updatedValue;
         if (updatedLost < 0) {
-            throw new CommandException(MESSAGE_INVALID_QUANTITY);
+            throw new CommandException(MESSAGE_FOUND_LARGER_THAN_LOST);
         }
         updatedLoststatus = new Loststatus(updatedLost, updatedFound);
 
