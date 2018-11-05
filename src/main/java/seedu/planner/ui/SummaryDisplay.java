@@ -57,7 +57,7 @@ public class SummaryDisplay extends UiPart<Region> {
      */
     private void init(ObservableList<SummaryEntry> toDisplay) {
         dateColumn.setCellValueFactory(
-                new PropertyValueFactory<SummaryEntry, String>("timeStamp"));
+                new PropertyValueFactory<SummaryEntry, String>("identifier"));
         totalIncomeColumn.setCellValueFactory(
                 new PropertyValueFactory<SummaryEntry, String>("totalIncome"));
         totalExpenseColumn.setCellValueFactory(
