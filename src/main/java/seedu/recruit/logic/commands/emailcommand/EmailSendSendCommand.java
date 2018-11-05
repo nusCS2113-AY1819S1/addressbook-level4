@@ -2,7 +2,6 @@ package seedu.recruit.logic.commands.emailcommand;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import javax.mail.MessagingException;
