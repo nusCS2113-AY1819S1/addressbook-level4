@@ -410,7 +410,7 @@ Format: `deleteComment INDEX L/LINE`
 ****
 * Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index *must be a positive integer* 1, 2, 3, ...
 * Line has to be a non-zero integer and exist within the comment section. The numbers below the "Comment Section" in the BrowerPanel are for the line parameter to delete that comment line.
-* the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
+* Undo and Redo works! However, every time you undo or redo, the BrowserPanel will not refresh itself
   so you need to refresh it yourself.
 ****
 
