@@ -365,17 +365,12 @@ public class CommandTestUtil {
         }
 
         @Override
-        public void addJobOffer(CompanyName companyName, JobOffer jobOffer) {
+        public void addJobOffer(JobOffer jobOffer) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasJobOffer(CompanyName companyName, JobOffer jobOffer) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateJobOfferInSelectedCompany(Company company, JobOffer target, JobOffer editedJobOffer) {
+        public boolean hasJobOffer(JobOffer jobOffer) {
             throw new AssertionError("This method should not be called.");
         }
 

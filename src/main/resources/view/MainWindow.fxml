@@ -50,12 +50,20 @@
           </padding>
         </StackPane>
 
-        <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.5" VBox.vgrow="ALWAYS">
-          <StackPane fx:id="panelViewPlaceholder" prefWidth="340" >
-          </StackPane>
+        <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0" VBox.vgrow="ALWAYS">
+        <VBox minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
+          <padding>
+            <Insets top="10" right="10" bottom="10" left="10" />
+          </padding>
+          <StackPane fx:id="panelViewPlaceholder" VBox.vgrow="ALWAYS"/>
+        </VBox>
         </SplitPane>
 
-        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" >
+          <padding>
+              <Insets bottom="5" />
+          </padding>
+      </StackPane>
       </VBox>
     </Scene>
   </scene>

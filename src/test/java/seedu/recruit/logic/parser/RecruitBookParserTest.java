@@ -3,7 +3,11 @@ package seedu.recruit.logic.parser;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT;
 import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.recruit.logic.parser.CommandParserTestUtil.assertDeleteShortlistedCandidateInitializationCommandParseFailure;
+import static seedu.recruit.logic.parser.CommandParserTestUtil.assertListCandidateCommandParseFailure;
+import static seedu.recruit.logic.parser.CommandParserTestUtil.assertListCompanyCommandParseFailure;
 import static seedu.recruit.testutil.TestUtil.getIndexSet;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
 
@@ -11,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -20,6 +25,7 @@ import seedu.recruit.logic.LogicState;
 import seedu.recruit.logic.commands.AddCandidateCommand;
 import seedu.recruit.logic.commands.ClearCandidateBookCommand;
 import seedu.recruit.logic.commands.DeleteCandidateCommand;
+import seedu.recruit.logic.commands.DeleteShortlistedCandidateInitializationCommand;
 import seedu.recruit.logic.commands.EditCandidateCommand;
 import seedu.recruit.logic.commands.EditCandidateCommand.EditPersonDescriptor;
 import seedu.recruit.logic.commands.ExitCommand;
@@ -27,8 +33,11 @@ import seedu.recruit.logic.commands.FindCandidateCommand;
 import seedu.recruit.logic.commands.HelpCommand;
 import seedu.recruit.logic.commands.HistoryCommand;
 import seedu.recruit.logic.commands.ListCandidateCommand;
+import seedu.recruit.logic.commands.ListCompanyCommand;
 import seedu.recruit.logic.commands.RedoCandidateBookCommand;
 import seedu.recruit.logic.commands.SelectCandidateCommand;
+import seedu.recruit.logic.commands.SelectCompanyCommand;
+import seedu.recruit.logic.commands.SelectJobCommand;
 import seedu.recruit.logic.commands.UndoCandidateBookCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.candidate.Candidate;
@@ -58,6 +67,7 @@ public class RecruitBookParserTest {
     }
 
     @Test
+    @Ignore
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCandidateBookCommand.COMMAND_WORD, state, emailUtil)
                 instanceof ClearCandidateBookCommand);
@@ -70,6 +80,20 @@ public class RecruitBookParserTest {
         DeleteCandidateCommand command = (DeleteCandidateCommand) parser.parseCommand(
                 DeleteCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(), state, emailUtil);
         assertEquals(new DeleteCandidateCommand(getIndexSet(INDEX_FIRST)), command);
+    }
+
+    @Test
+    public void parseCommand_deleteShortlistedCandidateInitialization() throws Exception {
+        assertTrue(parser.parseCommand(DeleteShortlistedCandidateInitializationCommand.COMMAND_WORD + "",
+                new LogicState(DeleteShortlistedCandidateInitializationCommand.COMMAND_LOGIC_STATE), emailUtil)
+                instanceof DeleteShortlistedCandidateInitializationCommand);
+    }
+
+    @Test
+    public void parseCommand_invaidArgsForDeleteShortlistedCandidateInitializationCommand_throwsParseException() {
+        assertDeleteShortlistedCandidateInitializationCommandParseFailure(parser, "1",
+                state, emailUtil, MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
+                        + DeleteShortlistedCandidateInitializationCommand.MESSAGE_USAGE);
     }
 
     @Test
@@ -122,18 +146,57 @@ public class RecruitBookParserTest {
     }
 
     @Test
-    public void parseCommand_list() throws Exception {
+    public void parseCommand_listCandidates() throws Exception {
         assertTrue(parser.parseCommand(ListCandidateCommand.COMMAND_WORD, state, emailUtil)
-                instanceof ListCandidateCommand);
-        assertTrue(parser.parseCommand(ListCandidateCommand.COMMAND_WORD + " 3", state, emailUtil)
                 instanceof ListCandidateCommand);
     }
 
     @Test
-    public void parseCommand_select() throws Exception {
+    public void parseCommand_invalidArgsForListCandidateCommand_throwsParseException() {
+        assertListCandidateCommandParseFailure(parser, "1", state, emailUtil,
+                MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
+                        + ListCandidateCommand.MESSAGE_USAGE);
+    }
+
+    @Test
+    public void parseCommand_listCompaniesAndJobOffers() throws Exception {
+        assertTrue(parser.parseCommand(ListCompanyCommand.COMMAND_WORD, state, emailUtil)
+                instanceof ListCompanyCommand);
+    }
+
+    @Test
+    public void parseCommand_invalidArgsForListCompanyCommand_throwsParseException() throws Exception {
+        assertListCompanyCommandParseFailure(parser, "1", state, emailUtil,
+                MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
+                        + ListCompanyCommand.MESSAGE_USAGE);
+    }
+
+    @Test
+    public void parseCommand_selectCandidate() throws Exception {
         SelectCandidateCommand command = (SelectCandidateCommand) parser.parseCommand(
                 SelectCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(), state, emailUtil);
         assertEquals(new SelectCandidateCommand(INDEX_FIRST), command);
+    }
+
+    @Test
+    public void parseCommand_selectCompany() throws Exception {
+        SelectCompanyCommand command = (SelectCompanyCommand) parser.parseCommand(
+                SelectCompanyCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(), state, emailUtil);
+        assertEquals(new SelectCompanyCommand(INDEX_FIRST), command);
+    }
+
+    @Test
+    public void parseCommand_selectJob() throws Exception {
+        SelectJobCommand command = (SelectJobCommand) parser.parseCommand(
+                SelectJobCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(), state, emailUtil);
+        assertEquals(new SelectJobCommand(INDEX_FIRST), command);
+    }
+
+    @Test
+    public void parseCommand_shortlistCandidate() throws Exception {
+        SelectJobCommand command = (SelectJobCommand) parser.parseCommand(
+                SelectJobCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(), state, emailUtil);
+        assertEquals(new SelectJobCommand(INDEX_FIRST), command);
     }
 
     @Test

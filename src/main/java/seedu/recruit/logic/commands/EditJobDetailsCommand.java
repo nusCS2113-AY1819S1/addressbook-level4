@@ -91,7 +91,7 @@ public class EditJobDetailsCommand extends Command {
         }
 
         Company companyToEdit = model.getCompanyFromIndex(companyIndex);
-        List<JobOffer> companyJobList = companyToEdit.getUniqueJobList().getInternalList();
+        List<JobOffer> companyJobList = model.getFilteredCompanyJobList();
 
         if (index.getZeroBased() >= companyJobList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_JOB_OFFER_DISPLAYED_INDEX);
@@ -100,12 +100,11 @@ public class EditJobDetailsCommand extends Command {
         JobOffer jobOfferToEdit = companyJobList.get(index.getZeroBased());
         JobOffer editedJobOffer = createEditedJobOffer(jobOfferToEdit, editJobOfferDescriptor);
 
-        if (!jobOfferToEdit.isSameJobOffer(editedJobOffer) && model.hasJobOffer(companyName, editedJobOffer)) {
+        if (!jobOfferToEdit.isSameJobOffer(editedJobOffer) && model.hasJobOffer(editedJobOffer)) {
             throw new CommandException(MESSAGE_DUPLICATE_JOB_OFFER);
         }
 
         model.updateJobOfferInCompanyBook(jobOfferToEdit, editedJobOffer);
-        model.updateJobOfferInSelectedCompany(companyToEdit, jobOfferToEdit, editedJobOffer);
         model.updateFilteredCompanyJobList(PREDICATE_SHOW_ALL_JOBOFFERS);
         model.commitCompanyBook();
         return new CommandResult(String.format(MESSAGE_EDIT_JOB_OFFER_SUCCESS, editedJobOffer));

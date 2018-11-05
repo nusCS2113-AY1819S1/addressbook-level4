@@ -14,6 +14,8 @@ import seedu.recruit.model.Model;
 public class SwitchBookCommand extends Command {
     public static final String COMMAND_WORD = "switch";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Switches between books.";
+
     public static final String MESSAGE_SUCCESSFULLY_SWITCHED_TO_CANDIDATE_BOOK =
             "Switched to Candidate Book successfully.";
 

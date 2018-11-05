@@ -14,7 +14,9 @@ import seedu.recruit.model.Model;
 public class CancelCommand extends Command {
     public static final String COMMAND_WORD = "cancel";
 
-    public static final String MESSAGE_SUCCESS = "Cancelled command: %1$s";
+    public static final String MESSAGE_SUCCESS = "Cancelled command: %1$s\n";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Cancels any intermediate commands.\n";
 
     private String cancelledCommand;
 

@@ -1,6 +1,7 @@
 package seedu.recruit.logic.parser;
 
 import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT;
 import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
@@ -88,6 +89,10 @@ public class RecruitBookParser {
 
         if (!state.nextCommand.equals("primary")) {
             if (commandWord.equals(CancelCommand.COMMAND_WORD)) {
+                if (!arguments.isEmpty()) {
+                    throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
+                            + CancelCommand.MESSAGE_USAGE);
+                }
                 return new CancelCommand(state.nextCommand);
             }
 
@@ -122,6 +127,10 @@ public class RecruitBookParser {
                 return new AddCandidateCommandParser().parse(arguments);
 
             case AddJobCommand.COMMAND_WORD:
+                if (!arguments.isEmpty()) {
+                    throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
+                    + AddJobCommand.MESSAGE_USAGE);
+                }
                 return new AddJobCommand();
 
             case AddCompanyCommand.COMMAND_WORD:
@@ -158,12 +167,24 @@ public class RecruitBookParser {
                 return new DeleteJobOfferCommandParser().parse(arguments);
 
             case DeleteShortlistedCandidateInitializationCommand.COMMAND_WORD:
+                if (!arguments.isEmpty()) {
+                    throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
+                            + DeleteShortlistedCandidateInitializationCommand.MESSAGE_USAGE);
+                }
                 return new DeleteShortlistedCandidateInitializationCommand();
 
             case ClearCandidateBookCommand.COMMAND_WORD:
+                if (!arguments.isEmpty()) {
+                    throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
+                            + ClearCandidateBookCommand.MESSAGE_USAGE);
+                }
                 return new ClearCandidateBookCommand();
 
             case ClearCompanyBookCommand.COMMAND_WORD:
+                if (!arguments.isEmpty()) {
+                    throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
+                            + ClearCompanyBookCommand.MESSAGE_USAGE);
+                }
                 return new ClearCompanyBookCommand();
 
             case FindCandidateCommand.COMMAND_WORD:
@@ -188,15 +209,31 @@ public class RecruitBookParser {
                 return new SortJobOfferCommandParser().parse(arguments);
 
             case ListCandidateCommand.COMMAND_WORD:
+                if (!arguments.isEmpty()) {
+                    throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
+                            + ListCandidateCommand.MESSAGE_USAGE);
+                }
                 return new ListCandidateCommand();
 
             case ListCompanyCommand.COMMAND_WORD:
+                if (!arguments.isEmpty()) {
+                    throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
+                            + ListCompanyCommand.MESSAGE_USAGE);
+                }
                 return new ListCompanyCommand();
 
             case SwitchBookCommand.COMMAND_WORD:
+                if (!arguments.isEmpty()) {
+                    throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
+                            + SwitchBookCommand.MESSAGE_USAGE);
+                }
                 return new SwitchBookCommand();
 
             case ShortlistCandidateInitializationCommand.COMMAND_WORD:
+                if (!arguments.isEmpty()) {
+                    throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
+                    + ShortlistCandidateInitializationCommand.MESSAGE_USAGE);
+                }
                 return new ShortlistCandidateInitializationCommand();
 
             case ExitCommand.COMMAND_WORD:
@@ -218,6 +255,10 @@ public class RecruitBookParser {
                 return new RedoCompanyBookCommand();
 
             case EmailInitialiseCommand.COMMAND_WORD:
+                if (!arguments.isEmpty()) {
+                    throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
+                            + EmailInitialiseCommand.MESSAGE_USAGE);
+                }
                 return new EmailInitialiseCommand();
 
             default:
@@ -225,4 +266,5 @@ public class RecruitBookParser {
             }
         }
     }
+
 }
