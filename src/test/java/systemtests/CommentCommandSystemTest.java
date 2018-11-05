@@ -1,3 +1,4 @@
+//@@author Geraldcdx
 package systemtests;
 
 import static org.junit.Assert.assertEquals;
@@ -94,6 +95,10 @@ public class CommentCommandSystemTest extends EventManagerSystemTest {
         successMessage = String.format(
                 DeleteCommentCommand.MESSAGE_DELETE_COMMENT, index.getOneBased(), 2);
         assertCommandSuccess(expectedModel, model, command, successMessage, index);
+
+        //index <=0 for AddComment, ReplyComments and DeleteComments
+        //Line not valid for AddComment and ReplyComment
+        //New Event adding deleting and replying comments
 
     }
 
