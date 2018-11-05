@@ -6,7 +6,7 @@ import java.util.Set;
 
 //@@author: jieliangang
 /**
- * Represents a the attendees in a event.
+ * Represents a the attendees with emails in a event.
  */
 public class Attendees {
     private final Set<String> attendeesSet;
