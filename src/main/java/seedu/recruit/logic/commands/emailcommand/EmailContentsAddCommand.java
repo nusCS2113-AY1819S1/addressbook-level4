@@ -96,6 +96,9 @@ public class EmailContentsAddCommand extends EmailContentsCommand {
 
     /**
      * generates duplicate string
+     * @param emailUtil
+     * @param duplicates
+     * @return boolean value if there is duplicates
      */
     @SuppressWarnings("Duplicates")
     private boolean generateDuplicate(EmailUtil emailUtil, StringBuilder duplicates) {

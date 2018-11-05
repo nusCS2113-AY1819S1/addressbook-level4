@@ -115,6 +115,9 @@ public class EmailRecipientsAddCommand extends EmailRecipientsCommand {
 
     /**
      * generates duplicate string
+     * @param emailUtil
+     * @param duplicates
+     * @return boolean value if there is duplicates
      */
     @SuppressWarnings("Duplicates")
     private boolean generateDuplicate(EmailUtil emailUtil, StringBuilder duplicates) {
