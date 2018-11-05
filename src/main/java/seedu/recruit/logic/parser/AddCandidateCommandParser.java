@@ -1,6 +1,6 @@
 package seedu.recruit.logic.parser;
 
-import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_INTERFACE_COMMAND_FORMAT;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_EDUCATION;
@@ -41,13 +41,14 @@ public class AddCandidateCommandParser implements Parser<AddCandidateCommand> {
      */
     public AddCandidateCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GENDER, PREFIX_AGE, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_JOB, PREFIX_EDUCATION, PREFIX_SALARY, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(" " + args, PREFIX_NAME, PREFIX_GENDER, PREFIX_AGE, PREFIX_PHONE,
+                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_JOB, PREFIX_EDUCATION, PREFIX_SALARY, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GENDER, PREFIX_AGE, PREFIX_ADDRESS, PREFIX_PHONE,
                 PREFIX_JOB, PREFIX_EDUCATION, PREFIX_SALARY, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCandidateCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_INTERFACE_COMMAND_FORMAT,
+                    AddCandidateCommand.COMMAND_WORD, AddCandidateCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());

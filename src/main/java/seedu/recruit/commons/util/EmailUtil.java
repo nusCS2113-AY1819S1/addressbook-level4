@@ -260,4 +260,32 @@ public class EmailUtil {
         message.setRaw(encodedEmail);
         return message;
     }
+
+    /**
+     * returns a string for job offers as recipients.
+     * @param jobOffer
+     * @return String of company name regarding: job offer
+     */
+    public String getRecipientJobOfferName(JobOffer jobOffer) {
+        StringBuilder output = new StringBuilder();
+        output.append(jobOffer.getCompanyName().toString());
+        output.append(" regarding job offer: ");
+        output.append(jobOffer.getJob().toString());
+        return output.toString();
+    }
+
+    /**
+     * returns a string for job offers as contents
+     * @param jobOffer
+     * @return String of job offer at company
+     */
+    public String getContentJobOfferName(JobOffer jobOffer) {
+        StringBuilder output = new StringBuilder();
+        output.append(jobOffer.getJob().toString());
+        output.append(" at ");
+        output.append(jobOffer.getCompanyName().toString());
+        System.out.println(output.toString());
+        return output.toString();
+    }
+
 }

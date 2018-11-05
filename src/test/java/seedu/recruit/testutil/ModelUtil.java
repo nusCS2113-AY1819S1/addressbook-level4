@@ -2,6 +2,8 @@ package seedu.recruit.testutil;
 
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_AGE;
+import static seedu.recruit.logic.parser.CliSyntax.PREFIX_AGE_RANGE;
+import static seedu.recruit.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_GENDER;
@@ -13,27 +15,36 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
-import seedu.recruit.logic.commands.AddCandidateCommand;
 import seedu.recruit.logic.commands.EditCandidateCommand.EditPersonDescriptor;
 import seedu.recruit.model.candidate.Candidate;
+import seedu.recruit.model.company.Company;
+import seedu.recruit.model.joboffer.JobOffer;
 import seedu.recruit.model.tag.Tag;
 
 /**
  * A utility class for Candidate.
  */
-public class PersonUtil {
+public class ModelUtil {
 
     /**
      * Returns an add command string for adding the {@code candidate}.
      */
     public static String getAddCandidateCommand(Candidate candidate) {
-        return AddCandidateCommand.COMMAND_WORD + " " + getPersonDetails(candidate);
+        return getCandidateDetails(candidate);
+    }
+
+    public static String getAddJobCommand(JobOffer jobOffer) {
+        return getJobDetails(jobOffer);
+    }
+
+    public static String getAddCompanyCommand(Company company) {
+        return getCompanyDetails(company);
     }
 
     /**
      * Returns the part of command string for the given {@code candidate}'s details.
      */
-    public static String getPersonDetails(Candidate candidate) {
+    public static String getCandidateDetails(Candidate candidate) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + candidate.getName().fullName + " ");
         sb.append(PREFIX_GENDER + candidate.getGender().value + " ");
@@ -51,9 +62,35 @@ public class PersonUtil {
     }
 
     /**
+     * Returns the part of command string for the given {@code company}'s details.
+     */
+    public static String getCompanyDetails(Company company) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(PREFIX_COMPANY_NAME + company.getCompanyName().value + " ");
+        sb.append(PREFIX_PHONE + company.getPhone().value + " ");
+        sb.append(PREFIX_EMAIL + company.getEmail().value + " ");
+        sb.append(PREFIX_ADDRESS + company.getAddress().value + " ");
+        return sb.toString();
+    }
+
+    /**
+     * Returns the part of command string for the given {@code job offer}'s details.
+     */
+    public static String getJobDetails(JobOffer jobOffer) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(PREFIX_COMPANY_NAME + jobOffer.getCompanyName().value + " ");
+        sb.append(PREFIX_JOB + jobOffer.getJob().value + " ");
+        sb.append(PREFIX_GENDER + jobOffer.getGender().value + " ");
+        sb.append(PREFIX_AGE_RANGE + jobOffer.getAgeRange().value + " ");
+        sb.append(PREFIX_EDUCATION + jobOffer.getEducation().value + " ");
+        sb.append(PREFIX_SALARY + jobOffer.getSalary().value + " ");
+        return sb.toString();
+    }
+
+    /**
      * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
+    public static String getEditCandidateDescriptorDetails(EditPersonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));

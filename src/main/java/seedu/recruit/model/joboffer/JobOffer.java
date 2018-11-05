@@ -94,6 +94,31 @@ public class JobOffer {
                 && otherJobOffer.getSalary().equals(getSalary());
     }
 
+    /**
+     * Returns true if both companies have the same identity and data fields.
+     * This defines a stronger notion of equality between two companies.
+     */
+
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof JobOffer)) {
+            return false;
+        }
+
+        JobOffer otherJob = (JobOffer) other;
+        return otherJob.getCompanyName().equals(getCompanyName())
+                && otherJob.getJob().equals(getJob())
+                && otherJob.getGender().equals(getGender())
+                && otherJob.getAgeRange().equals(getAgeRange())
+                && otherJob.getEducation().equals(getEducation())
+                && otherJob.getSalary().equals(getSalary());
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(companyName, job, gender, ageRange, education, salary);
