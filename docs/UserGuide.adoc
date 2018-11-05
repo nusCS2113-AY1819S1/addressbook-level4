@@ -33,6 +33,7 @@ _FreeTime_ is optimized for those who prefer to work with a Command Line Interfa
 image::StartUpScreen.png[width="790"]
 +
 .  If it is the first time you are using the app, follow the instructions on-screen to create your account and press kbd:[Enter] to execute it. +
++
 ****
 Creating account example: +
 
@@ -40,11 +41,12 @@ Creating account example: +
 
 Creates an account name _Paul_ with password _123_
 ****
-. After registering or logging in, you will be brought into _FreeTime_'s main screen
-
++
+.  After registering or logging in, you will be brought into _FreeTime_'s main screen
++
 .Window of the Main Screen of FreeTime after logging in
 image::FreeTimeMainScreen.png[width="790"]
-
++
 .  Refer to <<Features>> for details of each command.
 
 [[Features]]
@@ -173,9 +175,6 @@ Format: `edit  [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 * You can remove all the person's tags by typing `t/` without specifying any tags after it.
 ****
 
-Examples:
-
-
 === Locating persons by name : `find` (`f`)
 
 Finds persons whose names contain any of the given keywords. +
@@ -211,6 +210,20 @@ Filters both the others list and the friends list to show only users with the gr
 
 * `group CS2101 CS2113T` +
 Filters both the others list and the friends list to show only users with both group tags "CS2101" and "CS2113T".
+
+.  By default, FreeTime shows all the users that are using the application, on both the Friends and Others panel.
++
+.FreeTime before executing group command
+image::TagCommandDefault.png[width="790"]
++
+.  After executing `group CS2113T` all the users with the tag `CS2113T` will be filtered and shown on the respective panels.
++
+.FreeTime after executing group command
+image::TagCommandExecutedPS.png[width="790"]
+.  Commands such as `friend`, `unfriend`, `free`, `select` can now be used on the filtered list.
+[NOTE]
+Use the command `listall` to revert the panels back to its original state.
+
 // end::tagcommand[]
 
 // tag::timeslot[]
@@ -293,7 +306,6 @@ Examples:
 
 * `select me` +
 Selects yourself.
-
 * `select 2` +
 Selects the 2nd person listed in your friend list.
 * `find Betsy` +
@@ -308,7 +320,8 @@ Format: `friend INDEX`
 
 [NOTE]
 ====
-Most commands in this application (like `free` and `select`) can only be executed only after adding someone to your friend list.
+* Personal information of the user will be obscured until you have befriended them.
+* Most commands in this application (like `free` and `select`) can only be executed only after adding someone to your friend list.
 ====
 
 ****
@@ -321,15 +334,17 @@ Examples:
 * `friend 1` +
 Adds the first user in the others list to your list of friends.
 
-Before executing the command, your window might look like the following, without friends:
-
+.  Before executing the command, your window might look like the following, without friends:
++
 .Before adding friend to your friend list.
 image::BeforeAddingFriendsPS.png[width="600"]
-
-After executing `friend 1`, there will be a sucess message and the first person should be added to the friend's list, as follows:
-
++
+.  After executing `friend 1`, there will be a success message and the first person should be added to the friend's list, as follows:
++
 .After adding friend to your friend list.
 image::AfterAddingFriendsPS.png[width="600"]
++
+. More information about the user is now shown and commands such as `free` can now be used.
 // end::friendcommand[]
 
 // tag::unfriendcommand[]
