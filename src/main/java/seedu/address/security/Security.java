@@ -23,7 +23,7 @@ public interface Security {
      * Registers the user
      * Returns 1 if successful, 2 if user exists, 3 if the fields are incomplete
      */
-    RegisterFlag register(String username, String password, String email, String phone, String address);
+    RegisterFlag register(String username, String password);
 
     /***
      *

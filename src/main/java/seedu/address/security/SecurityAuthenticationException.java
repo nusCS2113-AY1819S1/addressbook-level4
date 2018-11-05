@@ -1,11 +1,16 @@
 package seedu.address.security;
 
 /**
- * Represents the unauthenticated {@link Command} call.
+ * Represents the unauthenticated method call.
  */
 public class SecurityAuthenticationException extends Exception {
+
     public SecurityAuthenticationException() {
         super("User is not authenticated");
+    }
+
+    public SecurityAuthenticationException(String message) {
+        super(message);
     }
 
     /**
