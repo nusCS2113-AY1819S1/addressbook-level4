@@ -57,7 +57,7 @@ public class ParserUtil {
      */
     public static ModuleCode parseModuleCode(String moduleCode) throws ParseException {
         requireNonNull(moduleCode);
-        String trimmedModuleCode = moduleCode.trim();
+        String trimmedModuleCode = moduleCode.trim().toUpperCase();
         if (trimmedModuleCode.isEmpty()) {
             throw new ParseException(MESSAGE_EMPTY_MODULE_CODE);
         } else if (!ModuleCode.isValidModuleCode(trimmedModuleCode)) {
