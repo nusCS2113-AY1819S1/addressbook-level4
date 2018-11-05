@@ -21,7 +21,8 @@ import seedu.address.model.Model;
 public class SelectCommandSystemTest extends AddressBookSystemTest {
     @Test
     public void select() {
-        /* ------------------------ Perform select operations on the shown unfiltered list -------------------------- */
+        /* ------------------------ Perform select operations on the shown unfiltered list
+ -------------------------- */
 
         /* Case: select the first card in the person list, command with leading spaces and trailing spaces
          * -> selected
@@ -52,7 +53,8 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
         /* Case: select the current selected card -> selected */
         assertCommandSuccess(command, middleIndex);
 
-        /* ------------------------ Perform select operations on the shown filtered list ---------------------------- */
+        /* ------------------------ Perform select operations on the shown filtered list
+ ---------------------------- */
 
         /* Case: filtered person list, select index within bounds of address book but out of bounds of person list
          * -> rejected
@@ -67,7 +69,8 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
         command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased();
         assertCommandSuccess(command, validIndex);
 
-        /* ----------------------------------- Perform invalid select operations ------------------------------------ */
+        /* ----------------------------------- Perform invalid select operations
+ ------------------------------------ */
 
         /* Case: invalid index (0) -> rejected */
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + 0,

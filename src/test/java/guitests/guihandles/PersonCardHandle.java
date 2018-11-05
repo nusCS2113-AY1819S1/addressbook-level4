@@ -20,7 +20,6 @@ public class PersonCardHandle extends NodeHandle<Node> {
     private static final String PHONE_FIELD_ID = "#phone";
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String TAGS_FIELD_ID = "#tags";
-    private static final String GRADE_FIELD_ID = "#grade";
 
     private final Label idLabel;
     private final Label nameLabel;
@@ -28,7 +27,6 @@ public class PersonCardHandle extends NodeHandle<Node> {
     private final Label phoneLabel;
     private final Label emailLabel;
     private final List<Label> tagLabels;
-    private final Label gradeLabel;
 
     public PersonCardHandle(Node cardNode) {
         super(cardNode);
@@ -38,7 +36,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
         addressLabel = getChildNode(ADDRESS_FIELD_ID);
         phoneLabel = getChildNode(PHONE_FIELD_ID);
         emailLabel = getChildNode(EMAIL_FIELD_ID);
-        gradeLabel = getChildNode(GRADE_FIELD_ID);
+
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
         tagLabels = tagsContainer
@@ -85,9 +83,6 @@ public class PersonCardHandle extends NodeHandle<Node> {
                 .collect(Collectors.toList());
     }
 
-    public String getGrade() {
-        return gradeLabel.getText();
-    }
 
 
     /**
@@ -100,7 +95,6 @@ public class PersonCardHandle extends NodeHandle<Node> {
                 && getEmail().equals(person.getEmail().value)
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(person.getTags().stream()
                 .map(tag -> tag.tagName)
-                .collect(Collectors.toList())))
-                && getGrade().equals(person.getGrade().value);
+                .collect(Collectors.toList())));
     }
 }

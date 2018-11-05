@@ -1,18 +1,17 @@
-package seedu.address.model.person;
+package seedu.address.model.grade;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+
 /**
- * Represents a Person's phone number in the address book.
+ * Represents a grade in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidGrade(String)}
  */
 public class Grade {
-
-
     public static final String MESSAGE_GRADE_CONSTRAINTS =
-            "grade should be <= 100";
-    public static final String GRADE_VALIDATION_REGEX = "^([0-9]|[1-9][0-9]|100)$";
+            "Grades only A,B,....D and F";
+    public static final String GRADE_VALIDATION_REGEX = ".*";
     public final String value;
 
     /**
@@ -45,9 +44,9 @@ public class Grade {
                 && value.equals(((Grade) other).value)); // state check
     }
 
+
     @Override
     public int hashCode() {
         return value.hashCode();
     }
-
 }

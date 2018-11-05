@@ -34,7 +34,6 @@ public class XmlAdaptedPersonTest {
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
-    private static final String VALID_GRADE = BENSON.getGrade().toString();
     private static final List<XmlAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(XmlAdaptedTag::new)
             .collect(Collectors.toList());
@@ -51,7 +50,7 @@ public class XmlAdaptedPersonTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         XmlAdaptedPerson person = new XmlAdaptedPerson(INVALID_NAME, VALID_GENDER, VALID_NATIONALITY,
-                VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_GRADE, VALID_TAGS, VALID_TESTS);
+                VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_TESTS);
         String expectedMessage = Name.MESSAGE_NAME_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -59,7 +58,7 @@ public class XmlAdaptedPersonTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         XmlAdaptedPerson person = new XmlAdaptedPerson(null, VALID_GENDER, VALID_NATIONALITY, VALID_PHONE,
-                VALID_EMAIL, VALID_ADDRESS, VALID_GRADE, VALID_TAGS, VALID_TESTS);
+                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_TESTS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -67,7 +66,7 @@ public class XmlAdaptedPersonTest {
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NAME, VALID_GENDER, VALID_NATIONALITY, INVALID_PHONE,
-                VALID_EMAIL, VALID_ADDRESS, VALID_GRADE, VALID_TAGS, VALID_TESTS);
+                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_TESTS);
         String expectedMessage = Phone.MESSAGE_PHONE_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -75,7 +74,7 @@ public class XmlAdaptedPersonTest {
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
         XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NAME, VALID_GENDER, VALID_NATIONALITY, null,
-                VALID_EMAIL, VALID_ADDRESS, VALID_GRADE, VALID_TAGS, VALID_TESTS);
+                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_TESTS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -84,7 +83,7 @@ public class XmlAdaptedPersonTest {
     @Test
     public void toModelType_invalidGender_throwsIllegalValueException() {
         XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NAME, INVALID_GENDER, VALID_NATIONALITY, VALID_PHONE,
-                VALID_EMAIL, VALID_ADDRESS, VALID_GRADE, VALID_TAGS, VALID_TESTS);
+                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_TESTS);
         String expectedMessage = Gender.MESSAGE_GENDER_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -93,7 +92,7 @@ public class XmlAdaptedPersonTest {
     @Test
     public void toModelType_nullGender_throwsIllegalValueException() {
         XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NAME, null, VALID_NATIONALITY, VALID_PHONE,
-                VALID_EMAIL, VALID_ADDRESS, VALID_GRADE, VALID_TAGS, VALID_TESTS);
+                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_TESTS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -103,7 +102,7 @@ public class XmlAdaptedPersonTest {
     @Test
     public void toModelType_invalidNationality_throwsIllegalValueException() {
         XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NAME, VALID_GENDER, INVALID_NATIONALITY, VALID_PHONE,
-                VALID_EMAIL, VALID_ADDRESS, VALID_GRADE, VALID_TAGS, VALID_TESTS);
+                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_TESTS);
         String expectedMessage = Nationality.MESSAGE_NATIONALITY_CONSTRAINT;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -112,7 +111,7 @@ public class XmlAdaptedPersonTest {
     @Test
     public void toModelType_nullNationality_throwsIllegalValueException() {
         XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NAME, VALID_GENDER, null, VALID_PHONE,
-                VALID_EMAIL, VALID_ADDRESS, VALID_GRADE, VALID_TAGS, VALID_TESTS);
+                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_TESTS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Nationality.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -120,7 +119,7 @@ public class XmlAdaptedPersonTest {
     @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NAME, VALID_GENDER, VALID_NATIONALITY, VALID_PHONE,
-                INVALID_EMAIL, VALID_ADDRESS, VALID_GRADE, VALID_TAGS, VALID_TESTS);
+                INVALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_TESTS);
         String expectedMessage = Email.MESSAGE_EMAIL_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -128,7 +127,7 @@ public class XmlAdaptedPersonTest {
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
         XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NAME, VALID_GENDER, VALID_NATIONALITY,
-                VALID_PHONE, null, VALID_ADDRESS, VALID_GRADE, VALID_TAGS, VALID_TESTS);
+                VALID_PHONE, null, VALID_ADDRESS, VALID_TAGS, VALID_TESTS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -136,7 +135,7 @@ public class XmlAdaptedPersonTest {
     @Test
     public void toModelType_invalidAddress_throwsIllegalValueException() {
         XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NAME, VALID_GENDER, VALID_NATIONALITY,
-                VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS, VALID_GRADE, VALID_TAGS, VALID_TESTS);
+                VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS, VALID_TAGS, VALID_TESTS);
         String expectedMessage = Address.MESSAGE_ADDRESS_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -144,7 +143,7 @@ public class XmlAdaptedPersonTest {
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
         XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NAME, VALID_GENDER, VALID_NATIONALITY,
-                VALID_PHONE, VALID_EMAIL, null, VALID_GRADE, VALID_TAGS, VALID_TESTS);
+                VALID_PHONE, VALID_EMAIL, null, VALID_TAGS, VALID_TESTS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -154,7 +153,7 @@ public class XmlAdaptedPersonTest {
         List<XmlAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new XmlAdaptedTag(INVALID_TAG));
         XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NAME, VALID_GENDER, VALID_NATIONALITY,
-                VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_GRADE, invalidTags, null);
+                VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, invalidTags, null);
         Assert.assertThrows(IllegalValueException.class, person::toModelType);
     }
 

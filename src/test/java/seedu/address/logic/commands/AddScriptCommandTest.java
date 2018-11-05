@@ -27,11 +27,11 @@ public class AddScriptCommandTest {
 
     private Person novin = new PersonBuilder().withName("Novin Tong Yong Kang").withGender("M").withNationality("SG")
             .withAddress("Pasir Ris street 99,#02-25").withEmail("novin@example.com")
-            .withGrade("69").withPhone("99999999").withTags("friends").build();
+            .withPhone("99999999").withTags("friends").build();
 
     private Person weiQuan = new PersonBuilder().withName("Tsu Wei Quan").withGender("F").withNationality("SG")
             .withAddress("Tampines street 82,#02-33").withEmail("TsuTheBoss@gmail.com")
-            .withGrade("99").withPhone("66666666").withTags("owesMoney").build();
+            .withPhone("66666666").withTags("owesMoney").build();
 
     private final String testFilesLocation = "/src/test/data/AddScriptCommandTest/";
     private final String validTextFile = "ValidAddScriptCommand";

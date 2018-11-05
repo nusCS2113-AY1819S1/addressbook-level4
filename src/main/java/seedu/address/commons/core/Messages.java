@@ -14,4 +14,5 @@ public class Messages {
     public static final String MESSAGE_INVALID_GROUP_DISPLAYED_INDEX = "The group index provided is invalid";
     public static final String MESSAGE_ADDED_TEST_LIST = "added Test score";
     public static final String MESSAGE_UPDATED_TEST_LIST = "updated Test score";
+    public static final String MESSAGE_PERSONS_NOT_FOUND = "%1$d persons found!";
 }

@@ -1,16 +1,18 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HIGHEST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOWEST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEAN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDIAN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEVENTY_FIVE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TEST_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TWENTY_FIVE;
 
 import seedu.address.logic.commands.GradeSummaryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments (test name)
  */
 public class GradeSummaryCommandParser implements Parser<GradeSummaryCommand> {
 
@@ -24,15 +26,16 @@ public class GradeSummaryCommandParser implements Parser<GradeSummaryCommand> {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TWENTY_FIVE, PREFIX_SEVENTY_FIVE,
-                        PREFIX_HIGHEST, PREFIX_MEAN, PREFIX_MEDIAN);
+                        PREFIX_HIGHEST, PREFIX_MEAN, PREFIX_MEDIAN, PREFIX_TEST_NAME, PREFIX_LOWEST);
 
         String commandToRun = "";
+        String testName = "";
 
         if (argMultimap.getValue(PREFIX_TWENTY_FIVE).isPresent()) {
-            commandToRun = "25";
+            commandToRun = "TTF";
         }
         if (argMultimap.getValue(PREFIX_SEVENTY_FIVE).isPresent()) {
-            commandToRun = "75";
+            commandToRun = "LTF";
         }
         if (argMultimap.getValue(PREFIX_HIGHEST).isPresent()) {
             commandToRun = "H";
@@ -43,8 +46,13 @@ public class GradeSummaryCommandParser implements Parser<GradeSummaryCommand> {
         if (argMultimap.getValue(PREFIX_MEDIAN).isPresent()) {
             commandToRun = "MEDIAN";
         }
-
-        return new GradeSummaryCommand(commandToRun);
+        if (argMultimap.getValue(PREFIX_LOWEST).isPresent()) {
+            commandToRun = "L";
+        }
+        if (argMultimap.getValue(PREFIX_TEST_NAME).isPresent()) {
+            testName = argMultimap.getValue(PREFIX_TEST_NAME).get();
+        }
+        return new GradeSummaryCommand(commandToRun, testName);
 
     }
 
