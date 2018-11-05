@@ -3,6 +3,8 @@ package seedu.recruit.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.recruit.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
 
+import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
@@ -20,6 +22,7 @@ public class UndoCompanyBookCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
 
         if (!model.canUndoCompanyBook()) {
             throw new CommandException(MESSAGE_FAILURE);

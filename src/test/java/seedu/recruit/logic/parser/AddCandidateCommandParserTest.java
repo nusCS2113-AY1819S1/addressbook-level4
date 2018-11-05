@@ -1,6 +1,6 @@
 package seedu.recruit.logic.parser;
 
-import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_INTERFACE_COMMAND_FORMAT;
 import static seedu.recruit.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.recruit.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.recruit.logic.commands.CommandTestUtil.AGE_DESC_AMY;
@@ -103,7 +103,8 @@ public class AddCandidateCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCandidateCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_INTERFACE_COMMAND_FORMAT,
+                AddCandidateCommand.COMMAND_WORD, AddCandidateCommand.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + GENDER_DESC_BOB + AGE_DESC_BOB + PHONE_DESC_BOB
@@ -167,6 +168,7 @@ public class AddCandidateCommandParserTest {
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + GENDER_DESC_BOB + AGE_DESC_BOB
                 + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + JOB_DESC_BOB + EDUCATION_DESC_BOB
                 + SALARY_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCandidateCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_INTERFACE_COMMAND_FORMAT,
+                        AddCandidateCommand.COMMAND_WORD, AddCandidateCommand.MESSAGE_USAGE));
     }
 }
