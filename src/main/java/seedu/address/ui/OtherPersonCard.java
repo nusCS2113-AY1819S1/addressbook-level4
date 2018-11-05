@@ -39,6 +39,7 @@ public class OtherPersonCard extends UiPart<Region> {
         phone.setText(null);
         address.setText(null);
         email.setText(null);
+        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override
