@@ -38,22 +38,13 @@ public class SummaryByDateList {
     public ObservableList<SummaryEntry> getSummaryList() {
 
         List<SummaryEntry> list = summaryMap.keySet().stream().sorted(CompareUtil.compareDate())
-                .map(k -> convertToUiFriendly(summaryMap.get(k)))
+                .map(k -> SummaryEntry.convertToUiFriendly(summaryMap.get(k)))
                 .collect(Collectors.toList());
         return FXCollections.observableList(list);
     }
 
     public HashMap<Date, Summary<Date>> getSummaryMap() {
         return summaryMap;
-    }
-
-
-    /**
-     * Converts each {@code Summary} to a UI friendly counterpart for display
-     */
-    public SummaryEntry convertToUiFriendly(Summary summary) {
-        return new SummaryEntry(summary.getIdentifier().toString(), summary.getTotalIncome().toString(),
-                summary.getTotalExpense().toString(), summary.getTotal().toString());
     }
 
     /** Adds a record to the {@code summaryMap} while following some rules.

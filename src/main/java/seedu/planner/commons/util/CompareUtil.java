@@ -25,7 +25,7 @@ public class CompareUtil {
     }
 
     public static Comparator<SummaryEntry> compareTimeStampAttribute() {
-        return (a, b) -> compareDate().compare(new Date(a.getTimeStamp()), new Date(b.getTimeStamp()));
+        return (a, b) -> compareDate().compare(new Date(a.getIdentifier()), new Date(b.getIdentifier()));
     }
 
     /**

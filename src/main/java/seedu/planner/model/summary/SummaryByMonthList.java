@@ -35,7 +35,7 @@ public class SummaryByMonthList {
 
     public ObservableList<SummaryEntry> getSummaryList() {
         List<SummaryEntry> list = summaryMap.keySet().stream().sorted(CompareUtil.compareMonth())
-                .map(k -> convertToUiFriendly(summaryMap.get(k)))
+                .map(k -> SummaryEntry.convertToUiFriendly(summaryMap.get(k)))
                 .collect(Collectors.toList());
         return FXCollections.observableList(list);
     }
@@ -44,16 +44,8 @@ public class SummaryByMonthList {
         return summaryMap;
     }
 
-    /**
-     * Converts each {@code Summary<Month>} to a UI friendly counterpart for display
-     */
-    public SummaryEntry convertToUiFriendly(Summary<Month> summary) {
-        return new SummaryEntry(summary.getIdentifier().toString(), summary.getTotalIncome().toString(),
-                summary.getTotalExpense().toString(), summary.getTotal().toString());
-    }
-
     /** Adds a record to the {@code summaryMap} while following some rules.
-     * If there exists a summary with {@code Date} of record, then record is added to the summary.
+     * If there exists a summary with {@code Month} of record, then record is added to the summary.
      * Else, it creates a summary with the details of the record.
      * @param record given record
      * @see Summary#add(Record)
