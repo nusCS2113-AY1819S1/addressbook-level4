@@ -451,6 +451,7 @@ If the user uses the `find` command, the following functions will follow the ind
 * **Alternative 2:** An arrayList or List
 ** Pros: Library functions can help parse the comment section into the arrayList.
 ** Cons: More code is neede to simple insert or delete elements inside the data structure.
+
 // end::comments[]
 
 // tag::rsvp[]

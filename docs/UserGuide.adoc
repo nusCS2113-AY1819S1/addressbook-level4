@@ -368,6 +368,7 @@ Removes a reminder for user for event 5
 Admin/User: Show all events with reminders set +
 Format: `showReminders`
 
+//tag::comment[]
 === Adds Comment : `addComment`
 
 Admin/User: Add comment into event comment section with the username (when you are logged in) +
@@ -433,6 +434,7 @@ Deletes comment of event 1 at line 5
 Deletes comment of event 2 at line 2
 
 image:deleteComment.png[width="790"]
+//end::comment[]
 
 // tag::exportcalendar[]
 === Export Calendar Command: `export`
