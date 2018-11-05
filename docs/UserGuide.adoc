@@ -247,17 +247,6 @@ Examples: +
 * sendmail g/2 s/Announcement m/Please bring your calculator tomorrow. +
 * sm g/2 s/Announcement m/Please bring your calculator tomorrow.
 
-=== Adding/deleting tags automatically: 'addtag/deletetag'
-Add/delete certain tags for certain group of people +
-Format: `addtag GROUP_NAME  tag/` +
-Format: `deletetag  GROUP_NAME  tag/` +
-
-Examples:
-
-* addtag TAG_STRING tag/need more attention
-* deletetag TAG_STRING  tag/need more attention
-
-
 === Viewing help : `help` `h`
 
 Format: `help` +
