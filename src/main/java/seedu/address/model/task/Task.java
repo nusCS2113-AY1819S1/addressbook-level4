@@ -13,7 +13,7 @@ public class Task {
 
     //private static final String PLACEHOLDER_MODULECODE = "A2113";
     private Deadline deadline;
-    private String moduleCode;
+    private ModuleCode moduleCode;
     private final String title;
     private final String description;
     private final PriorityLevel priorityLevel;
