@@ -3,7 +3,6 @@ package seedu.planner.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.planner.logic.commands.CommandTestUtil.VALID_MONEYFLOW_EXPENSE_BOB;
 import static seedu.planner.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.planner.testutil.TypicalRecords.INDO;
 import static seedu.planner.testutil.TypicalRecords.getTypicalFinancialPlanner;
@@ -54,9 +53,8 @@ public class FinancialPlannerTest {
 
     @Test
     public void resetData_withDuplicateRecords_throwsDuplicateRecordException() {
-        // Two records with the same identity fields
-        Record editedIndo = new RecordBuilder(INDO).withMoneyFlow(VALID_MONEYFLOW_EXPENSE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        // Two records with the same compulsory fields
+        Record editedIndo = new RecordBuilder(INDO).withTags(VALID_TAG_HUSBAND).build();
         List<Record> newRecords = Arrays.asList(INDO, editedIndo);
         FinancialPlannerStub newData = new FinancialPlannerStub(newRecords);
 
@@ -82,10 +80,9 @@ public class FinancialPlannerTest {
     }
 
     @Test
-    public void hasRecord_recordWithSameIdentityFieldsInFinancialPlanner_returnsTrue() {
+    public void hasRecord_recordWithSameCompulsoryFieldsInFinancialPlanner_returnsTrue() {
         financialPlanner.addRecord(INDO);
-        Record editedIndo = new RecordBuilder(INDO).withMoneyFlow(VALID_MONEYFLOW_EXPENSE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        Record editedIndo = new RecordBuilder(INDO).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(financialPlanner.hasRecord(editedIndo));
     }
 

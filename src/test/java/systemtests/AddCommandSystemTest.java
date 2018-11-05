@@ -15,7 +15,6 @@ import static seedu.planner.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.planner.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.planner.logic.commands.CommandTestUtil.VALID_DATE_BOB;
 import static seedu.planner.logic.commands.CommandTestUtil.VALID_MONEYFLOW_EXPENSE_BOB;
-import static seedu.planner.logic.commands.CommandTestUtil.VALID_MONEYFLOW_INCOME_AMY;
 import static seedu.planner.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.planner.testutil.TypicalRecords.AMY;
@@ -111,21 +110,6 @@ public class AddCommandSystemTest extends FinancialPlannerSystemTest {
 
         /* Case: add a duplicate record -> rejected */
         command = RecordUtil.getAddCommand(BURSARY);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_RECORD);
-
-        /* Case: add a duplicate record except with different day parameter -> rejected */
-        toAdd = new RecordBuilder(BURSARY).withDate(VALID_DATE_BOB).build();
-        command = RecordUtil.getAddCommand(toAdd);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_RECORD);
-
-        /* Case: add a duplicate record except with different income -> rejected */
-        toAdd = new RecordBuilder(BURSARY).withMoneyFlow(VALID_MONEYFLOW_INCOME_AMY).build();
-        command = RecordUtil.getAddCommand(toAdd);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_RECORD);
-
-        /* Case: add a duplicate record except with different expense -> rejected */
-        toAdd = new RecordBuilder(BURSARY).withMoneyFlow(VALID_MONEYFLOW_EXPENSE_BOB).build();
-        command = RecordUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_RECORD);
 
         /* Case: add a duplicate record except with different tags -> rejected */
