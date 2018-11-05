@@ -373,6 +373,7 @@ Format: `addComment INDEX C/STRING`
 * Comment cannot be blank. For C/String, String cannot be empty.
 * Undo and Redo command works! However, every time you undo or redo, the BrowserPanel will not refresh itself
   so you need to refresh it yourself.
+* If you want to revert a comment previously made, use Undo!
 ****
 
 Examples:
@@ -393,6 +394,7 @@ Format: `replyComment INDEX L/LINE C/STRING`
 * Line has to be a non-zero integer and exist within the comment section. The numbers below the "Comment Section" in the BrowerPanel are for the line parameter to as a comment below the line.
 * Undo and redo works! However, every time you undo or redo, the BrowserPanel will not refresh itself
   so you need to refresh it yourself.
+* If you want to revert a comment previously made, use Undo!
 ****
 Examples:
 
