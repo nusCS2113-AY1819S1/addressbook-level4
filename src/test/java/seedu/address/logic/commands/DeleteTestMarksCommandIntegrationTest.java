@@ -26,12 +26,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
-
-/**
- * Contains integration tests.
- */
-public class AddTestMarksCommandIntegrationTest {
-
+public class DeleteTestMarksCommandIntegrationTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
@@ -43,14 +38,9 @@ public class AddTestMarksCommandIntegrationTest {
         Set<seedu.address.model.grade.Test> testList = new HashSet<>();
         testList.add(VALID_TEST_AMY);
         descriptor.setTests(testList);
-        String[] nameKeywords = editedPerson.getName().fullName.split("\\s+");
-        List<String> nameKeywordsList =
-                new ArrayList<>(Arrays.asList(nameKeywords));
-        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
-                new NameContainsKeywordsPredicate(nameKeywordsList);
+        seedu.address.model.grade.Test testName = new descriptor.getTests(). ;
 
-        AddTestMarksCommand addTestMarksCommand = new AddTestMarksCommand(nameContainsKeywordsPredicate,
-                VALID_TEST_NAME_AMY, VALID_TEST_MARK_AMY, nameKeywordsList);
+        DeleteTestMarksCommand deleteTestMarksCommand = new DeleteTestMarksCommand();
 
         String expectedMessage = String.format(Messages.MESSAGE_ADDED_TEST_LIST, editedPerson);
         editedPerson = EditCommand.createEditedPerson(editedPerson, descriptor);
@@ -58,7 +48,7 @@ public class AddTestMarksCommandIntegrationTest {
         expectedModel.updatePerson(model.getFilteredPersonList().get(0), editedPerson);
         expectedModel.commitAddressBook();
 
-        assertCommandSuccess(addTestMarksCommand, model, commandHistory, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteTestMarksCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     @Test
@@ -124,3 +114,4 @@ public class AddTestMarksCommandIntegrationTest {
     }
 
 }
+

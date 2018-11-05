@@ -16,7 +16,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
  * and returns an FindCommand object for execution.
  * @throws ParseException if the user input does not conform the expected format
  */
-public class EditTestMarksCommandParser {
+public class EditTestMarksCommandParser implements Parser<EditTestMarksCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns an FindCommand object for execution.
