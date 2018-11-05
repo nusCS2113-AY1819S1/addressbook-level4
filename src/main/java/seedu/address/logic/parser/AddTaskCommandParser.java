@@ -43,6 +43,7 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
         }
         ModuleCode moduleCode = null;
         if (argMultimap.getValue(PREFIX_MODULE_CODE).orElse(null) != null) {
+            logger.info(argMultimap.getValue(PREFIX_MODULE_CODE).get());
             moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
         }
         String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get()).toLowerCase();
