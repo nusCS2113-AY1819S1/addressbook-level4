@@ -369,7 +369,7 @@ Removes a reminder for user for event 5
 Admin/User: Show all events with reminders set +
 Format: `showReminders`
 
-=== Adds Comment : `addComment`
+=== Add Comment : `addComment`
 
 Admin/User: Add comment into event comment section with the username (when you are logged in) +
 Format: `addComment INDEX C/STRING`
