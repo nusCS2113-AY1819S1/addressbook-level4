@@ -20,15 +20,16 @@ import seedu.recruit.model.company.Company;
 
 public class AddCompanyCommand extends Command {
 
-    public static final String COMMAND_WORD = "addC";
+    public static final String COMMAND_WORD = "Add Company Interface";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a company to the RecruitBook. "
+    public static final String MESSAGE_USAGE = "Enter the following details of the company in the format:\n"
             + "Parameters: "
             + PREFIX_COMPANY_NAME + "UNIQUE_COMPANY_NAME "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_PHONE + "PHONE \n"
-            + "Example: " + COMMAND_WORD + " "
+            + "(Enter 'cancel' to stop adding companies)\n"
+            + "Example: "
             + PREFIX_COMPANY_NAME + "KFC "
             + PREFIX_ADDRESS + "101, Clementi Ave 2, #01-01 "
             + PREFIX_EMAIL + "kfc@gmail.com "

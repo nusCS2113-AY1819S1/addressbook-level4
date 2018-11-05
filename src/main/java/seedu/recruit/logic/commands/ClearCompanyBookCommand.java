@@ -22,10 +22,10 @@ public class ClearCompanyBookCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
-        EventsCenter.getInstance().post(new ShowUpdatedCompanyJobListRequestEvent(
-                model.getFilteredCompanyJobList().size()));
         model.resetCompanyData(new CompanyBook());
         model.commitCompanyBook();
+        EventsCenter.getInstance().post(new ShowUpdatedCompanyJobListRequestEvent(
+                model.getFilteredCompanyJobList().size()));
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

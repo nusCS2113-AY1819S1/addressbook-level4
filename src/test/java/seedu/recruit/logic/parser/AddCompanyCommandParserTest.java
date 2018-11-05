@@ -1,6 +1,6 @@
 package seedu.recruit.logic.parser;
 
-import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_INTERFACE_COMMAND_FORMAT;
 import static seedu.recruit.logic.commands.CommandTestUtil.ADDRESS_DESC_ALFA;
 import static seedu.recruit.logic.commands.CommandTestUtil.ADDRESS_DESC_BMW;
 import static seedu.recruit.logic.commands.CommandTestUtil.EMAIL_DESC_ALFA;
@@ -63,7 +63,8 @@ public class AddCompanyCommandParserTest {
 
     @Test
     public void parse_fieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCompanyCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_INTERFACE_COMMAND_FORMAT,
+                AddCompanyCommand.COMMAND_WORD, AddCompanyCommand.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BMW + ADDRESS_DESC_BMW + EMAIL_DESC_BMW

@@ -11,7 +11,7 @@ import seedu.recruit.model.Model;
 /**
  * This class handles the next sub command for email contents phase
  */
-public class EmailContentsNextCommand extends EmailContentsSelectCommand {
+public class EmailContentsNextCommand extends EmailContentsCommand {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
@@ -31,7 +31,7 @@ public class EmailContentsNextCommand extends EmailContentsSelectCommand {
 
         if (isEmpty) {
             return new CommandResult("ERROR: There are no contents selected!\n"
-                    + EmailContentsSelectCommand.MESSAGE_USAGE);
+                    + EmailContentsCommand.MESSAGE_USAGE);
         } else {
             LogicManager.setLogicState(EmailSendCommand.COMMAND_LOGIC_STATE);
 
