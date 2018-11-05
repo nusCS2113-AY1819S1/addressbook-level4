@@ -13,18 +13,19 @@ import java.util.regex.Pattern;
 import seedu.planner.commons.core.LogsCenter;
 //@@author tenvinc
 /**
- * Represents a month of {@code MonthSummary} in the financial planner.
+ * Represents a month with year information in the financial planner.
  */
 public class Month {
 
     public static final String MESSAGE_MONTH_CONSTRAINTS =
             "Month parameter should be in the format of month-yyyy "
                     + "with month being the standard 3-letter representations of a month and yyyy as a 4 digit number"
-                    + " Please take note that inappropriate month will result in errors, for example: sev1en-2018";
+                    + "\nPlease take note that inappropriate month will result in errors, for example: sev1en-2018";
     public static final String MESSAGE_MONTH_LOGICAL_CONSTRAINTS =
-            "Month should follow the modern calendar. "
-                    + "month parameter must use the 3-letter representation and is non case-sensitive"
-                    + ", for eg. feb or FeB or FEB are both accepted\n";
+            "Month should follow the modern calendar.\n"
+                    + "Please take note that the month parameter is not case-sensitive but \n"
+                    + "it must use the 3-letter representation.\n"
+                    + "For eg. feb or FeB or FEB are both accepted but February is not accepted.\n";
     public static final String MONTH_VALIDATION_REGEX = "[a-zA-Z]{3}-\\d{4}";
     public static final Pattern MONTH_VALIDATION_PATTERN = Pattern.compile("(?<month>[a-zA-Z]{3})-(?<year>\\d{4})");
 

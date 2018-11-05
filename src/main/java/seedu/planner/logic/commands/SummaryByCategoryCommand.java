@@ -10,34 +10,35 @@ import seedu.planner.commons.events.ui.ShowSummaryTableEvent;
 import seedu.planner.commons.util.DateUtil;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.model.Model;
-import seedu.planner.model.Month;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
-import seedu.planner.model.summary.SummaryByMonthList;
+import seedu.planner.model.summary.SummaryByCategoryList;
 import seedu.planner.model.summary.SummaryList;
 
 //@@author tenvinc
+
 /** List all the summary of records within a period of time specified */
-public class SummaryByMonthCommand extends SummaryCommand {
+public class SummaryByCategoryCommand extends SummaryCommand {
 
-    public static final String COMMAND_MODE_WORD = "month";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists the summary for each month for a period of time."
+    public static final String COMMAND_MODE_WORD = "category";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists the summary for each category for a "
+            + "period of time.\n A category refers to any set of tags that is assigned to a record.\n"
             + " Parameters: "
-            + PREFIX_DATE + "MONTH_START " + "MONTH_END "
+            + PREFIX_DATE + "START_DATE " + "END_DATE "
             + "Example: " + COMMAND_WORD + " " + COMMAND_MODE_WORD + " "
-            + PREFIX_DATE + "sep-2018 " + "oct-2018 ";
+            + PREFIX_DATE + "1-1-2018 " + "12-12-2018 ";
 
-    public static final String MESSAGE_SUCCESS = "Listed summary for %d months";
-    public static final String FORMAT_TITLE_SUMMARY = "Summary by month from %s to %s";
+    public static final String MESSAGE_SUCCESS = "Listed summary for %d categories";
+    public static final String FORMAT_TITLE_SUMMARY = "Summary by category from %s to %s";
 
     private final Date startDate;
     private final Date endDate;
     private final Predicate<Record> predicate;
 
-    public SummaryByMonthCommand(Month startMonth, Month endMonth) {
-        startDate = DateUtil.generateFirstOfMonth(startMonth);
-        endDate = DateUtil.generateLastOfMonth(endMonth);
+    public SummaryByCategoryCommand(Date startDate, Date endDate) {
+        this.startDate = startDate;
+        this.endDate = endDate;
         predicate = new DateIsWithinIntervalPredicate(startDate, endDate);
     }
 
@@ -45,7 +46,7 @@ public class SummaryByMonthCommand extends SummaryCommand {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredRecordList(predicate);
-        SummaryList summaryList = new SummaryByMonthList(model.getFilteredRecordList());
+        SummaryList summaryList = new SummaryByCategoryList(model.getFilteredRecordList());
         String tabTitle = String.format(FORMAT_TITLE_SUMMARY, DateUtil.formatDate(startDate),
                 DateUtil.formatDate(endDate));
         EventsCenter.getInstance().post(new ShowSummaryTableEvent(summaryList, TOTAL_LABEL,
@@ -56,8 +57,8 @@ public class SummaryByMonthCommand extends SummaryCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof SummaryByMonthCommand // instanceof handles nulls
-                && startDate.equals(((SummaryByMonthCommand) other).startDate)
-                && endDate.equals(((SummaryByMonthCommand) other).endDate));
+                || (other instanceof SummaryByCategoryCommand // instanceof handles nulls
+                && startDate.equals(((SummaryByCategoryCommand) other).startDate)
+                && endDate.equals(((SummaryByCategoryCommand) other).endDate));
     }
 }
