@@ -11,19 +11,19 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class NumberOfEvents {
 
     public static final String MESSAGE_NUMBER_OF_EVENTS_CONSTRAINTS =
-            "Number of events should only contain numbers, and it can be any number including zero";
+            "Number of events should only contain positive numbers, and it can be any number including zero";
     public static final String NUMBER_OF_EVENTS_VALIDATION_REGEX = "\\d{1,}";
     public final String value;
 
     /**
      * Constructs a {@code NumberOfEvents}.
      *
-     * @param numberofevents A valid phone number.
+     * @param numberOfEvents A valid phone number.
      */
-    public NumberOfEvents(String numberofevents) {
-        requireNonNull(numberofevents);
-        checkArgument(isValidNumberOfEvents(numberofevents), MESSAGE_NUMBER_OF_EVENTS_CONSTRAINTS);
-        value = numberofevents;
+    public NumberOfEvents(String numberOfEvents) {
+        requireNonNull(numberOfEvents);
+        checkArgument(isValidNumberOfEvents(numberOfEvents), MESSAGE_NUMBER_OF_EVENTS_CONSTRAINTS);
+        value = numberOfEvents;
     }
 
     /**
