@@ -24,6 +24,7 @@ import seedu.address.model.item.Item;
 import seedu.address.model.item.Loststatus;
 import seedu.address.model.item.Name;
 import seedu.address.model.item.Quantity;
+import seedu.address.model.item.Status;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -102,8 +103,13 @@ public class EditCommand extends Command {
                 updatedQuantity.toInteger() - itemToEdit.getLoststatus().getLoststatusLost());
         Quantity updatedMinQuantity = editItemDescriptor.getMinQuantity().orElse(itemToEdit.getMinQuantity());
         Set<Tag> updatedTags = editItemDescriptor.getTags().orElse(itemToEdit.getTags());
-
-        return new Item(updatedName, updatedQuantity, updatedMinQuantity, updatedLoststatus, itemToEdit.getStatus(), updatedTags);
+        Status updatedStatus = new Status(updatedQuantity.toInteger()
+                - itemToEdit.getStatus().getStatusFaulty()
+                - itemToEdit.getStatus().getStatusOnLoan(),
+                itemToEdit.getStatus().getStatusOnLoan(),
+                itemToEdit.getStatus().getStatusFaulty());
+        return new Item(updatedName, updatedQuantity, updatedMinQuantity, updatedLoststatus,
+                updatedStatus, updatedTags);
     }
 
     @Override
@@ -165,8 +171,7 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setQuantity(Quantity quantity)
-        {
+        public void setQuantity(Quantity quantity) {
             this.quantity = quantity;
         }
 
@@ -178,7 +183,9 @@ public class EditCommand extends Command {
             this.minQuantity = minQuantity;
         }
 
-        public Optional<Quantity> getMinQuantity() { return Optional.ofNullable(minQuantity); }
+        public Optional<Quantity> getMinQuantity() {
+            return Optional.ofNullable(minQuantity);
+        }
 
         public void setStatus(List<Integer> status) {
             this.status = (status != null) ? new ArrayList<>(status) : null;
