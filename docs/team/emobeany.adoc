@@ -1,0 +1,63 @@
+= Beh Kha Sim - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: TaskBook
+
+---
+
+== Introduction
+
+This portfolio documents my role and contributions to the CS2113 Software Engineering project.
+
+TASK BOOK (TB) is a desktop schedule-managing application for busy students who prefer to use a desktop application to manage and better plan their daily tasks to ultimately lead a more productive life. More importantly, TB is optimized for those who prefer to work with a Command Line Interface (CLI) while still including the benefits of a Graphical User Interface (GUI). TB can help you manage your tasks faster than traditional paper notebooks or mobile calendar applications.
+
+TB is managed by a dedicated team of 4 members. *Some background info about the project scope and the team?*
+
+
+== Summary of contributions
+
+* *Major enhancement*:
+
+** Added the ability for users to select a specific date for tasks to be added to.
+*** What it does: This feature allows the user to choose a date to be set as the deadline for tasks to be added. It filters out invalid dates such as 29 February on common, non-leap years, so that users will not be able to add tasks to non-existing dates.
+*** Justification: This allows the user to add multiple tasks with the same deadline to the selected date without having to repeatedly type in the same date.
+*** Highlights: This enhancement is further improved with the addition of a date picker in the GUI where users can click on the mini calendar to select date without having to use the CLI. This caters to users who prefer to use the GUI to select a date.
+
+* *Minor enhancement*:
+
+** 1)   Added the ability for TB to filter tasks added based on their deadlines when users select a date.
+*** What it does: This feature allows TB to only show tasks that have the selected date as their deadline in the task panel of the GUI.
+*** Justification: This allows users to view how many tasks with the same deadline have already been added and possibly defer the deadline of some less important tasks.
+** 2)	Modified the edit command to fit the use of TB where task details can be edited by the user.
+
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+
+* *Other contributions*:
+
+** Community:
+
+*** Reported bugs and suggestions for other teams in the class (examples:)
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=selectDeadline]
+
+include::../UserGuide.adoc[tag=editTask]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=select]
+
+include::../DeveloperGuide.adoc[tag=editTask]
+

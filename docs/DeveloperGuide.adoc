@@ -456,6 +456,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |efficient student |complete a task |keep track of my incomplete tasks
 
+|`* * *` |indecisive student |edits a task |change information of my existing tasks
+
 |`* * *` |tidy student |delete a task |remove tasks that I do not intend to complete
 
 |`* * *` |organized student |sort tasks by decreasing importance/categorise in module codes| complete tasks with more urgent deadlines first/ focus on modules with heavier workloads
@@ -554,6 +556,38 @@ Use case ends.
 Use case ends.
 
 [discrete]
+
+// tag::editTask[]
+=== Use case: Edit task
+
+*MSS*
+
+1.  Student requests to edit a selected task by providing its index and the fields with the values to be updated.
+2.  TB checks for validity of the index and updates the fields with the values provided.
++
+Use case ends.
+
+*Extensions*
+
+* 1a. Student provided an invalid index
+** 1a1. TB outputs error message
+** 1a2. Student enters a new Edit command
++
+Use case ends.
+
+* 1b. Student did not provide any field or values to update selected task
+** 1b1. TB returns an error message
+** 1b2. Student enters a new Edit command
++
+Use case ends.
+
+* 1b. Values provided by student results in an edited task exactly the same as another existing task
+** 1b1. TB returns duplicate task info message
++
+Use case ends.
+// end::editTask[]
+
+[discrete]
 === Use case: Sort tasks
 
 *MSS*
@@ -610,7 +644,9 @@ Use case ends.
 * 1a. Student provides an invalid index of the task
 ** 1a1. TB outputs an error message
 
+// tag::select[]
 [discrete]
+
 === Use case: Select a date
 
 *MSS*
@@ -622,10 +658,11 @@ Use case ends.
 
 *Extensions*
 
-* 1a. Date entered by the student is not valid e.g. d/Tues w/5 m/9
+* 1a. Date entered by the student is not valid e.g. dd/29 mm/2 yyyy/2018
 ** 1a1. TB prompts student to enter a correct date
 +
 Use case resumes at step 2.
+// end::select[]
 
 [appendix]
 == Non Functional Requirements
