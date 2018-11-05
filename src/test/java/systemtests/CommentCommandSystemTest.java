@@ -5,8 +5,14 @@ import static org.junit.Assert.assertEquals;
 
 import static seedu.address.logic.commands.CommandTestUtil.ADMIN_PASSWORD_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.ADMIN_USERNAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.CONTACT_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADMIN_PASSWORD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADMIN_USERNAME;
+import static seedu.address.logic.commands.CommandTestUtil.VENUE_DESC_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINE;
 import static seedu.address.testutil.TypicalEvents.DANIEL;
@@ -18,6 +24,7 @@ import org.junit.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddCommentCommand;
 import seedu.address.logic.commands.CommentAssertion;
 import seedu.address.logic.commands.DeleteCommentCommand;
@@ -97,6 +104,7 @@ public class CommentCommandSystemTest extends EventManagerSystemTest {
                 DeleteCommentCommand.MESSAGE_DELETE_COMMENT, index.getOneBased(), 2);
         assertCommandSuccess(expectedModel, model, command, successMessage, index);
 
+
         //index <=0 for AddComment, ReplyComments and DeleteComments
         command = "   " + AddCommentCommand.COMMAND_WORD + " " + 0 + " " + PREFIX_COMMENT + "Hi";
         try {
@@ -137,16 +145,50 @@ public class CommentCommandSystemTest extends EventManagerSystemTest {
             assertEquals(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX, e.toString());
         }
         //Line not valid for AddComment and ReplyComment
-        //New Event adding deleting and replying comments
+        command = DeleteCommentCommand.COMMAND_WORD + " " + 1 + " " + PREFIX_LINE + "12";
+        try {
+            executeCommand(command);
+        } catch (Exception e) {
+            assertEquals(DeleteCommentCommand.MESSAGE_LINE_INVALID, e.toString());
+        }
+        command = ReplyCommentCommand.COMMAND_WORD + " " + 1 + " " + PREFIX_COMMENT + "Hello" + " "
+                + PREFIX_LINE + "10";
+        try {
+            executeCommand(command);
+        } catch (Exception e) {
+            assertEquals(ReplyCommentCommand.MESSAGE_LINE_INVALID, e.toString());
+        }
+
+
+        //Index fails > size
+        command = "   " + AddCommentCommand.COMMAND_WORD + " " + 8 + " " + PREFIX_COMMENT + "Hi";
+        try {
+            executeCommand(command);
+        } catch (Exception e) {
+            assertEquals(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX, e.toString());
+        }
+        command = ReplyCommentCommand.COMMAND_WORD + " " + 8 + " " + PREFIX_COMMENT + "Hello" + " "
+                + PREFIX_LINE + "1";
+        try {
+            executeCommand(command);
+        } catch (Exception e) {
+            assertEquals(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX, e.toString());
+        }
+        command = DeleteCommentCommand.COMMAND_WORD + " " + 8 + " " + PREFIX_LINE + "2";
+        try {
+            executeCommand(command);
+        } catch (Exception e) {
+            assertEquals(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX, e.toString());
+        }
     }
 
     /**
      *
      * @param expectedModel
      * @param model
-     * @param command
-     * @param successMessage
-     * @param index
+     * @param command to run
+     * @param successMessage whether it is successful
+     * @param index of event
      */
     private void assertCommandSuccess(Model expectedModel, Model model, String command, String successMessage,
                                       Index index) {
@@ -162,8 +204,8 @@ public class CommentCommandSystemTest extends EventManagerSystemTest {
      *
      * @param expectedModel
      * @param model
-     * @param command
-     * @param successMessage
+     * @param command to run
+     * @param successMessage whether it is successful
      */
     private void assertCommandSuccess(Model expectedModel, Model model, String command, String successMessage) {
         expectedModel.commitEventManager();
