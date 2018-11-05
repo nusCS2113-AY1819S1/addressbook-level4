@@ -51,7 +51,7 @@ public class EditLimitCommand extends Command {
             throw new CommandException(Messages.MESSAGE_LIMITS_DO_NOT_EXIST);
         }
         originalLimit = model.getSameDatesLimit(limit.getDateStart(), limit.getDateEnd());
-        model.updateLimit(originalLimit,limit);
+        model.updateLimit(originalLimit, limit);
 
         output = MESSAGE_SUCCESS + "Original Limit:\n"
                 + model.generateLimitOutput(model.isExceededLimit(originalLimit),
