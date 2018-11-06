@@ -158,8 +158,8 @@ To stop adding companies and exit from the Add Company Interface, enter `cancel`
 
 Examples:
 
-*	`addC c/KFC a/101, Clementi Ave 2, #01-01 e/kfc@gmail.com p/61231232`
-*	`addC c/McDonalds a/101, Bukit Merah Lane 2, #01-01 e/macs@gmail.com p/61117111`
+*	`c/KFC a/101, Clementi Ave 2, #01-01 e/kfc@gmail.com p/61231232`
+*	`c/McDonalds a/101, Bukit Merah Lane 2, #01-01 e/macs@gmail.com p/61117111`
 
 ==== Adds a job offer to the RecruitBook
 Format: `addj`
@@ -174,7 +174,7 @@ After entering `addj` you will be prompted the following +
 `Example: c/McDonalds j/cashier g/M xr/20-30 h/OLEVELS s/1200`
 
 [NOTE]
-COMPANY specified has to be added to RecruitBook first!
+Company with specified `c/COMPANY_NAME` has to be added to RecruitBook first!
 
 You are now inside the Add Job Interface!
 You can now keep adding job offers by specifying the required fields `c/COMPANY_NAME j/JOB_TITLE g/GENDER xr/AGE_RANGE h/EDUCATION s/SALARY`.
@@ -632,15 +632,21 @@ _{explain how the user can enable/disable data encryption}_
 |=====
 |*Help* | `help`
 |   *Switch* | `switch`
-|	*Add* | `addc n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS …`
-
-            e.g. `addc n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 …`
+|	*Adding Candidates* | `addc`
+|	*Candidate Parameters* | `n/NAME g/GENDER x/AGE p/PHONE_NUMBER e/EMAIL a/ADDRESS j/SEEKING_JOB h/HIGHEST_EDUCATION s/EXPECTED_SALARY_PER_MONTH [t/TAG]...`
+|	*Adding Companies* | `addC`
+|	*Company Parameters* | `c/UNIQUE_COMPANY_NAME a/ADDRESS e/EMAIL p/PHONE`
+|	*Adding Job Offers* | `addj`
+|	*Job Offer Parameters* | `c/COMPANY_NAME j/JOB_TITLE g/GENDER xr/AGE_RANGE h/EDUCATION s/SALARY`
 |	*Edit* | `editc <INDEX> [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` or `editC <INDEX>` +
 
             e.g. `editc 2 e/jameslee@example.com`, `editC 5`
-|	*Delete* | `deletec <INDEX>` or `deletej <INDEX>` +
-
-            e.g. `deletec 1 `, `deletej 5`
+|	*Delete Candidates* | `deletec <INDEX>,<INDEX>-<INDEX>` +
+            e.g. `deletec 1 `, `deletec 1,3-5`
+|	*Delete Companies* | `deleteC <INDEX>,<INDEX>-<INDEX>` +
+            e.g. `deleteC 1 `, `deleteC 1,3-5`
+|	*Delete Job Offers* | `deletej <INDEX>,<INDEX>-<INDEX>` +
+            e.g. `deletej 1 `, `deletej 1,3-5`
 |   *Delete Shortlisted Candidate* | `deleteShortlist`
 |	*List all Candidates* | `listc`
 |   *List all Companies and all Job Offers* | `listC`
@@ -656,5 +662,10 @@ _{explain how the user can enable/disable data encryption}_
 |   *Shortlist Candidate* | `shortlist`
 |   *Email* | `email`
 |   *Cancel* | `cancel`
-|	*Clear* | `clear`
+|	*Clear CandidateBook* | `clearc`
+|	*Clear CompanyBook* | `clearC`
+|	*Undo CandidateBook* | `undoc`
+|	*Undo CompanyBook* | `undoC`
+|	*Redo CandidateBook* | `redoc`
+|	*Redo CompanyBook* | `redoC`
 |	*Exit* | `exit`
