@@ -25,7 +25,7 @@ public class ExportCommandTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "ExportCommandTest");
     private static final Path TEMP_FILE = TestUtil.getFilePathInSandboxFolder("temp.ics");
 
-    private static final TimeTable VALID_TIMETABLE = TypicalTimeSlots.getTypicalTimeTable();
+    private static final TimeTable TYPICAL_TIMETABLE = TypicalTimeSlots.getTypicalTimeTable();
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -56,7 +56,7 @@ public class ExportCommandTest {
     @Test
     public void execute_validFilePath_exportSuccessful() throws Exception {
         ModelStubImportExportCommand actualModelStub = new ModelStubImportExportCommand();
-        actualModelStub.updateTimeTable(VALID_TIMETABLE);
+        actualModelStub.updateTimeTable(TYPICAL_TIMETABLE);
 
         Command command = new ExportCommand(TEMP_FILE);
         CommandResult commandResult = command.execute(actualModelStub, commandHistory);
@@ -74,7 +74,7 @@ public class ExportCommandTest {
     public void execute_exportAndThenImport_successful() throws Exception {
         //attempt export
         ModelStubImportExportCommand exportModelStub = new ModelStubImportExportCommand();
-        exportModelStub.updateTimeTable(VALID_TIMETABLE);
+        exportModelStub.updateTimeTable(TYPICAL_TIMETABLE);
 
         Command command = new ExportCommand(TEMP_FILE);
         CommandResult commandResult = command.execute(exportModelStub, commandHistory);

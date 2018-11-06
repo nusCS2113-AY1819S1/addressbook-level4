@@ -30,8 +30,8 @@ public class ImportCommandTest {
     private static final Path MISSING_FILE = TEST_DATA_FOLDER.resolve("missing.ics"); //totally missing
     private static final Path TEMP_FILE = TestUtil.getFilePathInSandboxFolder("temp.ics");
 
-    private static final Path VALID_FILE = TEST_DATA_FOLDER.resolve("valid.ics"); //has same data as VALID_TIMETABLE
-    private static final TimeTable VALID_TIMETABLE = TypicalTimeSlots.getTypicalTimeTable();
+    private static final Path TYPICAL_FILE = TEST_DATA_FOLDER.resolve("typical.ics"); //has same data as TYPICAL_TIMETABLE
+    private static final TimeTable TYPICAL_TIMETABLE = TypicalTimeSlots.getTypicalTimeTable();
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -95,16 +95,16 @@ public class ImportCommandTest {
      */
     @Test
     public void execute_validFilePath_successful() throws Exception {
-        //VALID_FILE contains the equivalent of VALID_TIMETABLE
-        TimeTable expectedTimeTable = VALID_TIMETABLE;
+        //TYPICAL_FILE contains the equivalent of TYPICAL_TIMETABLE
+        TimeTable expectedTimeTable = TYPICAL_TIMETABLE;
 
         ModelStubImportExportCommand actualModelStub = new ModelStubImportExportCommand();
 
-        Command command = new ImportCommand(VALID_FILE);
+        Command command = new ImportCommand(TYPICAL_FILE);
         CommandResult commandResult = command.execute(actualModelStub, commandHistory);
 
         assertEquals(expectedTimeTable, actualModelStub.getTimeTable());
-        String expectedMessage = String.format(MESSAGE_IMPORT_SUCCESS, VALID_FILE);
+        String expectedMessage = String.format(MESSAGE_IMPORT_SUCCESS, TYPICAL_FILE);
         assertEquals(expectedMessage, commandResult.feedbackToUser);
     }
 
@@ -116,7 +116,7 @@ public class ImportCommandTest {
     public void execute_exportAndThenImport_successful() throws Exception {
 
         ModelStubImportExportCommand actualModelStub = new ModelStubImportExportCommand();
-        actualModelStub.updateTimeTable(VALID_TIMETABLE);
+        actualModelStub.updateTimeTable(TYPICAL_TIMETABLE);
 
         Command exportCommand = new ExportCommand(TEMP_FILE); //export timetable to temp file.
         CommandResult commandResult = exportCommand.execute(actualModelStub, commandHistory);
@@ -129,7 +129,7 @@ public class ImportCommandTest {
         commandResult = importCommand.execute(actualModelStub, commandHistory);
 
         //check import was successful, and timetable is the same
-        assertEquals(VALID_TIMETABLE, actualModelStub.getTimeTable());
+        assertEquals(TYPICAL_TIMETABLE, actualModelStub.getTimeTable());
         String expectedMessageImport = String.format(MESSAGE_IMPORT_SUCCESS, TEMP_FILE);
         assertEquals(expectedMessageImport, commandResult.feedbackToUser);
     }
