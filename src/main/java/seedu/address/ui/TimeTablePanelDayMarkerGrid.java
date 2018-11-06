@@ -36,8 +36,6 @@ public class TimeTablePanelDayMarkerGrid extends UiPart<Region> {
         // To prevent triggering events for typing inside the TimeTablePanelTimeMarkerGrid
         getRoot().setOnKeyPressed(Event::consume);
 
-        //TODO ALEXIS: resizer, add, init functions.
-
         populateDays();
     }
 

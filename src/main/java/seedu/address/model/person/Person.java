@@ -25,7 +25,7 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     //Timetable field (Currently only one)
-    private TimeTable timeTable;
+    private final TimeTable timeTable;
 
     // Friend list of the person
     private Set<Friend> friendList;
