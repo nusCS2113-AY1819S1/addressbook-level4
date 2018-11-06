@@ -160,6 +160,7 @@ public class CommandBox extends UiPart<Region> {
 
         if (listOfCommands.size() == 0) {
             raise(new NewResultAvailableEvent("Invalid command! No suggestions available."));
+
         } else if (listOfCommands.size() == 1) {
             String commandSuggested = listOfCommands.get(0);
             String substringInput = "";
@@ -169,8 +170,8 @@ public class CommandBox extends UiPart<Region> {
             }
 
             textFieldInput = commandSuggested + substringInput;
-
             raise(new NewResultAvailableEvent(ics.getCommandParameters(commandSuggested)));
+
         } else {
             String suggestions = StringUtils.join(listOfCommands, ", ");
             logger.info("Tab Pressed. Suggestions: " + suggestions);

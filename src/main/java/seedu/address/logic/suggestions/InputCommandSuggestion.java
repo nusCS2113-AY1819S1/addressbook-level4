@@ -108,7 +108,6 @@ public class InputCommandSuggestion {
 
     /**
      * Gets a list of suggested commands
-     * TODO: chop off input after whitespace
      * @param userInput the current string to check for suggested commands
      * @return ArrayList of possible commands
      */
@@ -131,7 +130,7 @@ public class InputCommandSuggestion {
             return DeleteCommand.COMMAND_PARAMETERS;
 
         case EditCommand.COMMAND_WORD:
-            return DeleteCommand.COMMAND_PARAMETERS;
+            return EditCommand.COMMAND_PARAMETERS;
 
         case ExportAllCommand.COMMAND_WORD:
             return ExportAllCommand.COMMAND_PARAMETERS;
