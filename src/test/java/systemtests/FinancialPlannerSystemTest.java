@@ -318,8 +318,8 @@ public abstract class FinancialPlannerSystemTest {
         MixedPieChartDataList expectedData = new MixedPieChartDataList(expected);
         CategoryBreakdownHandle expenseBreakdown = statsDisplayPanel.getCategoryBreakdown(
                 StatsDisplayPanelHandle.EXPENSE_BREAKDOWN_LABEL);
-        assertTrue(expenseBreakdown.checkIfDataIsSame(expectedData.getExpenseChartLabelData(),
-                expectedData.getExpenseChartLegendData()));
+        assertTrue(expenseBreakdown.checkIfDataIsSame(expectedData.getExpenseChartLegendData(),
+                expectedData.getExpenseChartLabelData()));
     }
 
     /**
@@ -331,8 +331,8 @@ public abstract class FinancialPlannerSystemTest {
         MixedPieChartDataList expectedData = new MixedPieChartDataList(expected);
         CategoryBreakdownHandle incomeBreakdown = statsDisplayPanel.getCategoryBreakdown(
                 StatsDisplayPanelHandle.INCOME_BREAKDOWN_LABEL);
-        assertTrue(incomeBreakdown.checkIfDataIsSame(expectedData.getIncomeChartLabelData(),
-                expectedData.getIncomeChartLegendData()));
+        assertTrue(incomeBreakdown.checkIfDataIsSame(expectedData.getIncomeChartLegendData(),
+                expectedData.getIncomeChartLabelData()));
     }
 
     /**
