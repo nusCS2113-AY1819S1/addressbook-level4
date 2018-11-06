@@ -1,56 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane styleClass="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="38.0" layoutY="109.0" prefHeight="29.0" prefWidth="110.0" text="Selling Price:">
-         <font>
-            <Font name="Consolas Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="38.0" layoutY="138.0" prefHeight="29.0" prefWidth="144.0" text="Quantity in Stock:">
-         <font>
-            <Font name="Consolas Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="38.0" layoutY="193.0" prefHeight="29.0" prefWidth="144.0" text="Cost Price:">
-         <font>
-            <Font name="Consolas Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="38.0" layoutY="222.0" prefHeight="29.0" prefWidth="163.0" text="Earliest Batch date:">
-         <font>
-            <Font name="Consolas Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="235.0" layoutY="109.0" prefHeight="29.0" prefWidth="163.0" text="&lt;To be filled SP&gt;">
-         <font>
-            <Font name="Consolas Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="235.0" layoutY="138.0" prefHeight="29.0" prefWidth="163.0" text="&lt;To be filled Q&gt;">
-         <font>
-            <Font name="Consolas Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="235.0" layoutY="193.0" prefHeight="29.0" prefWidth="163.0" text="&lt;To be filled CP&gt;">
-         <font>
-            <Font name="Consolas Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="235.0" layoutY="222.0" prefHeight="29.0" prefWidth="163.0" text="&lt;To be filled EBD&gt;">
-         <font>
-            <Font name="Consolas Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutY="28.0" prefHeight="45.0" prefWidth="600.0" text="Name of Drink" textAlignment="CENTER">
-         <font>
-            <Font name="Consolas Bold" size="24.0" />
-         </font>
-      </Label>
+      <HBox layoutX="20.0" layoutY="20.0" prefHeight="37.0">
+         <children>
+            <Label fx:id="name" styleClass="title" text="Select a drink to view details"/>
+         </children>
+      </HBox>
+      <HBox layoutX="20.0" layoutY="90.0" prefHeight="20.0" prefWidth="450.0">
+         <children>
+            <Label styleClass="subtitle" prefWidth="320.0" text="Selling Price:"/>
+            <Label fx:id="sellingPrice" styleClass="content" prefWidth="350.0" text=""/>
+         </children>
+      </HBox>
+      <HBox layoutX="20.0" layoutY="115.0" prefHeight="20.0" prefWidth="450.0">
+         <children>
+            <Label styleClass="subtitle" prefWidth="320.0" text="Quantity in Stock:"/>
+            <Label fx:id="quantity" styleClass="content" prefWidth="350.0" text=""/>
+         </children>
+      </HBox>
+      <HBox layoutX="20.0" layoutY="165.0" prefHeight="37.0" prefWidth="453.0">
+         <children>
+            <Label styleClass="subtitle" prefWidth="320.0" text="Cost Price:"/>
+            <Label fx:id="costPrice" styleClass="content" prefWidth="350.0" text=""/>
+         </children>
+      </HBox>
+      <HBox layoutX="20.0" layoutY="190.0" prefHeight="37.0" prefWidth="453.0">
+         <children>
+            <Label styleClass="subtitle" prefWidth="320.0" text="Batches in Stock:"/>
+            <Label fx:id="batchesInStock" styleClass="content" prefWidth="350.0" text=""/>
+         </children>
+      </HBox>
+      <HBox layoutX="20.0" layoutY="215.0" prefHeight="37.0" prefWidth="453.0">
+         <children>
+            <Label styleClass="subtitle" prefWidth="320.0" text="Earliest Batch Date:"/>
+            <Label fx:id="earliestBatchDate" styleClass="content" prefWidth="350.0" text=""/>
+         </children>
+      </HBox>
+      <HBox layoutX="20.0" layoutY="240.0" prefHeight="37.0" prefWidth="453.0">
+         <children>
+            <Label styleClass="subtitle" prefWidth="320.0" text="Latest Batch Date:"/>
+            <Label fx:id="latestBatchDate" styleClass="content" prefWidth="350.0" text=""/>
+         </children>
+      </HBox>
    </children>
-</Pane>
+</AnchorPane>

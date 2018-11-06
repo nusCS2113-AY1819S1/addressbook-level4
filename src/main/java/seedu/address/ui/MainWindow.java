@@ -21,6 +21,7 @@ import seedu.address.commons.events.ui.InventoryPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.drink.Drink;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -36,7 +37,8 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
+    private DrinkDetailPane drinkDetailPane;
+    //private BrowserPanel browserPanel;
     //private PersonListPanel personListPanel;
     private DrinkListPanel drinkListPanel;
     private BatchListPanel batchListPanel;
@@ -44,7 +46,7 @@ public class MainWindow extends UiPart<Stage> {
     private UserPrefs prefs;
     private HelpWindow helpWindow;
     @FXML
-    private StackPane browserPlaceholder;
+    private StackPane drinkDetailPanePlaceholder;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -127,9 +129,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this loginWindow.
      */
     void fillInnerParts() {
-        browserPanel = new BrowserPanel();
-        browserPlaceholder.getChildren().add(browserPanel.getRoot());
-
+        drinkDetailPane = new DrinkDetailPane(null);
+        drinkDetailPanePlaceholder.getChildren().add(drinkDetailPane.getRoot());
 
         //personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         //personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
@@ -154,6 +155,8 @@ public class MainWindow extends UiPart<Stage> {
     private void handleInventoryPanelSelectionChangedEvent(InventoryPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         // insert what to do here
+        drinkDetailPane = new DrinkDetailPane(event.getNewSelection());
+        drinkDetailPanePlaceholder.getChildren().add(drinkDetailPane.getRoot());
         batchListPanel = new BatchListPanel(
                 event.getNewSelection().getObservableBatchList());
         batchListPanelPlaceholder.getChildren().add(batchListPanel.getRoot());
@@ -219,9 +222,11 @@ public class MainWindow extends UiPart<Stage> {
         return drinkListPanel;
     }
 
+    /*
     void releaseResources() {
         browserPanel.freeResources();
     }
+    */
 
     @Subscribe
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {

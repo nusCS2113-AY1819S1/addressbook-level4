@@ -138,6 +138,18 @@ public class Drink {
         }
     }
 
+    /**
+     * Gets the date of the earliest imported batch
+     * @return a Batch Date object
+     */
+    public BatchDate getLatestBatchDate() {
+        try {
+            return uniqueBatchList.getLatestBatchDate();
+        } catch (EmptyBatchListException e) {
+            return null;
+        }
+    }
+
     public ObservableList<Batch> getObservableBatchList() {
         try {
             return uniqueBatchList.asUnmodifiableObservableList();
