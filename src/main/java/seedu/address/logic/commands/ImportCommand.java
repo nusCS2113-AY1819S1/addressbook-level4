@@ -93,10 +93,8 @@ public class ImportCommand extends Command {
         Set<Tag> updatedTags = personToEdit.getTags();
         Set<Friend> updatedFriends = personToEdit.getFriends();
 
-        TimeTable timeTable = importedTimeTable;
-
         return new Person(
-                updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, timeTable, updatedFriends);
+                updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, importedTimeTable, updatedFriends);
     }
 
     @Override

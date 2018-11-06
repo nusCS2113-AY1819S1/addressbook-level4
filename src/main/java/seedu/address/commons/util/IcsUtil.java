@@ -199,7 +199,7 @@ public class IcsUtil {
 
         //write data to {@code VEvent}: set the recurrence rule
         Recurrence recurrence =
-                new Recurrence.Builder(Frequency.WEEKLY).count(14).byDay(valueOfAbbr(abbreviation)).build();
+                new Recurrence.Builder(Frequency.WEEKLY).count(count).byDay(valueOfAbbr(abbreviation)).build();
         RecurrenceRule recurrenceRule = new RecurrenceRule(recurrence);
         vEvent.setRecurrenceRule(recurrenceRule);
 
@@ -261,7 +261,7 @@ public class IcsUtil {
                     iCalendar.addEvent(event);
                 }
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             //IOException thrown by readNext() - not able to read from stream
             throw new IOException();
         } finally {
