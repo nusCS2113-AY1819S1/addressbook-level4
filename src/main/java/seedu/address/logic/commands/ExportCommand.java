@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.IcsUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -21,28 +20,24 @@ public class ExportCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "ex";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Exports your timetable at the default location, unless otherwise specified."
+            + ": Exports your timetable to the file (.\\import_export\\[FILENAME].ics). "
             + "Parameters: "
-            + "[FILE_LOCATION] \n"
+            + "FILE_NAME (without .ics extension) \n"
             + "Example: " + COMMAND_WORD
-            + " | Example: " + COMMAND_WORD
-            + " C:\\export_folder\\nusmods.ics";
+            + " my_export_file_name";
 
-    public static final String MESSAGE_SUCCESS = "Exported timetable to %1$s.";
+    public static final String MESSAGE_EXPORT_SUCCESS = "Exported timetable to %1$s.";
     public static final String MESSAGE_EMPTY = "Timetable is empty. Export failed.";
     public static final String MESSAGE_IO_ERROR =
             "Failed to write the timetable to the path: ";
-    private final Index index;
     private final Path filePath;
 
     /**
      * Creates an ExportCommand to export the specified person's timetable as .ics file
      */
-    public ExportCommand(Index index, Path filePath) {
-        requireNonNull(index);
+    public ExportCommand(Path filePath) {
         requireNonNull(filePath);
 
-        this.index = index;
         this.filePath = filePath;
     }
 
@@ -58,9 +53,9 @@ public class ExportCommand extends Command {
         try {
             IcsUtil.getInstance().saveTimeTableToFile(timeTable, filePath);
         } catch (IOException e) {
-            throw new CommandException(MESSAGE_IO_ERROR + filePath.toString());
+            throw new CommandException(String.format(MESSAGE_IO_ERROR + filePath.toString()));
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, filePath.toString()));
+        return new CommandResult(String.format(MESSAGE_EXPORT_SUCCESS, filePath.toString()));
     }
 
     @Override
@@ -75,8 +70,6 @@ public class ExportCommand extends Command {
             return false;
         }
 
-        //TODO: Not sure if this is good enough?
-        return filePath.equals(((ExportCommand) other).filePath)
-                && index.equals(((ExportCommand) other).index);
+        return filePath.equals(((ExportCommand) other).filePath);
     }
 }
