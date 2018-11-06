@@ -50,7 +50,7 @@ public class AddTestMarksCommandParser implements Parser<AddTestMarksCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTestMarksCommand.MESSAGE_USAGE));
         }
 
-        if (argMultimap.getValue(PREFIX_TEST_NAME).get().contains(" ")){
+        if (argMultimap.getValue(PREFIX_TEST_NAME).get().contains(" ")) {
             throw new ParseException(MESSAGE_INVI_TEST);
         }
         nameKeywordsList.remove(PREFIX_TEST_NAME + argMultimap.getValue(PREFIX_TEST_NAME).get());

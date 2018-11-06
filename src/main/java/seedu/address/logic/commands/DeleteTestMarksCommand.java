@@ -1,5 +1,9 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TEST_NAME;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -10,10 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.grade.Test;
 import seedu.address.model.person.Person;
 
-import static java.util.Objects.requireNonNull;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TEST_NAME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 
 /**
@@ -56,7 +57,7 @@ public class DeleteTestMarksCommand extends Command {
             for (Person person: personListName) {
                 boolean updateNeeded = false;
                 for (Test test: person.getTests()) {
-                    if (test.getTestName().testName.toUpperCase().equals(testName.toUpperCase())){
+                    if (test.getTestName().testName.toUpperCase().equals(testName.toUpperCase())) {
                         updateNeeded = true;
                     }
                 }
@@ -80,7 +81,7 @@ public class DeleteTestMarksCommand extends Command {
      */
     private boolean editPersonTests(Person person, Model model) throws CommandException {
         Person personToEdit = person;
-       EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
+        EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
 
         Set<Test> testList = new HashSet<>();
         testList.addAll(personToEdit.getTests());
