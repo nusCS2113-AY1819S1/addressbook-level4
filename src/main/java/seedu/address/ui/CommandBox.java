@@ -155,14 +155,30 @@ public class CommandBox extends UiPart<Region> {
     private void handleTabPressed() {
         commandTextField.requestFocus();
         // String prefix = commandTextField.getText();
-        ArrayList<String> listOfCommands = ics.getSuggestedCommands(commandTextField.getText());
-        if (listOfCommands.size() == 1) {
-            commandTextField.setText(listOfCommands.get(0));
+        String textFieldInput = commandTextField.getText();
+        ArrayList<String> listOfCommands = ics.getSuggestedCommands(textFieldInput);
+
+        if (listOfCommands.size() == 0) {
+            raise(new NewResultAvailableEvent("Invalid command! No suggestions available."));
+        } else if (listOfCommands.size() == 1) {
+            String commandSuggested = listOfCommands.get(0);
+            String substringInput = "";
+
+            if (textFieldInput.indexOf(' ') != -1) {
+                substringInput = textFieldInput.substring(textFieldInput.indexOf(' '));
+            }
+
+            textFieldInput = commandSuggested + substringInput;
+
+            raise(new NewResultAvailableEvent(ics.getCommandParameters(commandSuggested)));
         } else {
             String suggestions = StringUtils.join(listOfCommands, ", ");
             logger.info("Tab Pressed. Suggestions: " + suggestions);
-            raise(new NewResultAvailableEvent(suggestions));
+            raise(new NewResultAvailableEvent("Suggested Commands: " + suggestions));
         }
+
+        commandTextField.setText(textFieldInput);
+        commandTextField.positionCaret(textFieldInput.length());
     }
 
     /**

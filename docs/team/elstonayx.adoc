@@ -12,28 +12,38 @@ For this software engineering project, I am a developer and code quality control
 
 Our team, CS2113T-W12-1, consists of 5 students, Bao Lin Ruo, Chun Hong Wei, Elston Aw, Lim Jit Wei and Low Jun Wei.
 We are a team based in the School of Computing, National University of Singapore.
+// about contributions
+// showcase ability to produce code
+// name whatever we learnt
+// 2 sentences
 
 == Project Introduction
 
 JitHub is an application that saves your contacts and helps you schedule meetings through cross-checking the timetable of your group mates.
 It is a CLI (Command Line Interface) application with GUI output so that you can have best of the both worlds.
 JitHub is a Java application that you can run on any machine with Java Runtime Environment installed.
+// condense
+// 1-2 liner
+//meeting organiser
 
 == Summary of contributions
 
 * *Major enhancement*: added *the ability to suggest smart suggestions and corrections while typing*
 ** What it does: It gives the users smart suggestions when the users press tab, to suggest them of the full command name and its relevant syntax.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+** Justification:  a user can make mistakes in commands and the app should provide a convenient way to rectify them.
+// saves time and helps making it convenient etc
+** Highlights: write technical skills i acquired like new algorithm etc
 ** Credits: geekforgeeks.com for their explanation on Trie data structure which was heavily used to implement this feature.
 
 * *Minor enhancement*: Added a wrong command suggestion when the user types in a wrong command and presses enter.
-
+//elaborate
+//justify
+//learning points
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]]
 
 
 == Contributions to the User Guide
-
+//the following contributions are blan blsh
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
