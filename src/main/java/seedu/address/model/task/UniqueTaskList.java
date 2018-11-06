@@ -98,6 +98,9 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.setAll(tasks);
     }
 
+    /**
+     * Get the tasks record on a particular day.
+     */
     public String checkTasksRecordsOnParticularDay (String particularDate) {
 
         String castedDate;
@@ -105,7 +108,7 @@ public class UniqueTaskList implements Iterable<Task> {
         String theDate;
         int index = 0;
         StringBuilder it = new StringBuilder();
-        castedDate = particularDate.substring(0,5);
+        castedDate = particularDate.substring(0, 5);
         it.append("Here's all the task due on this day:\n");
         while (index < internalList.size()) {
             theDate = internalList.get(index).getDate().value;
@@ -114,10 +117,10 @@ public class UniqueTaskList implements Iterable<Task> {
                         .append("Module: " + internalList.get(index).getModule().value + ", ")
                         .append("Date: " + internalList.get(index).getDate().value + ", ")
                         .append("Priority: " + internalList.get(index).getPriority().value + ", ");
-                if (internalList.get(index).getComplete() == false) {
-                    it.append("Status: " + "Uncompleted\n");
-                } else {
+                if (internalList.get(index).getComplete()) {
                     it.append("Status: " + "Completed\n");
+                } else {
+                    it.append("Status: " + "Uncompleted\n");
                 }
             }
             index++;
