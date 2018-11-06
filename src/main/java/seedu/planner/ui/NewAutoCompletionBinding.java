@@ -1,5 +1,7 @@
 package seedu.planner.ui;
 
+import static seedu.planner.logic.parser.CliSyntax.PREFIX_TAG;
+
 import java.util.Collection;
 
 import org.controlsfx.control.textfield.AutoCompletionBinding;
@@ -31,24 +33,68 @@ public class NewAutoCompletionBinding<T> {
     private CustomSuggestionProvider suggestionProvider = new CustomSuggestionProvider();
     private boolean ignoreInputChanges = false;
 
-    private String prevText = "";
-    private final StringConverter<T> converter;
+    private String prefixText = "";
+    private String suffixText = "";
+    private final StringConverter<T> converter = defaultStringConverter();
 
-    /**
-     * This listener observes if there is a change in the text in the command box.
+    /** This listeners observes the position of the caret in the command box and updates the list
+     * of suggestions when there is a change detected. It passes the new input word to the other
+     * methods to compare and match for suggestions.
      */
-
-    private final ChangeListener<String> textChangedListener = (obs, oldText, newText) -> {
-        int index;
-        for (index = newText.length() - 1; index >= 0 && !Character.isWhitespace(newText.charAt(index)); index--);
-        if (index > 0) {
-            prevText = newText.substring(0, index) + " ";
+    private final ChangeListener<Number> caretChangedListener = (obs, oldPosition, newPosition) -> {
+        String newText = getCompletionTarget().getText();
+        String inputText;
+        String prefix = "";
+        int startIndex = newPosition.intValue();
+        int endIndex = newPosition.intValue();
+        if (newPosition.intValue() == newText.length()) {
+            suffixText = "";
+            if (newPosition.intValue() > 0) {
+                startIndex--;
+                for (; startIndex > 0 && !Character.isWhitespace(newText.charAt(startIndex)); startIndex--);
+            }
+            inputText = newText.substring((startIndex == 0) ? startIndex : startIndex + 1);
+            prefixText = newText.substring(0, (startIndex == 0) ? startIndex : startIndex + 1);
         } else {
-            prevText = "";
+            if (newPosition.intValue() == 0) {
+                prefixText = ""; // necessary to reset parameters
+                suffixText = "";
+                inputText = "";
+            } else {
+                if (Character.isWhitespace(newText.charAt(newPosition.intValue()))
+                        && Character.isWhitespace(newText.charAt(newPosition.intValue() - 1))) {
+                    prefixText = "";
+                    suffixText = "";
+                    inputText = "";
+                } else {
+                    if (Character.isWhitespace(newText.charAt(newPosition.intValue()))) {
+                        startIndex--;
+                        for (; startIndex > 0 && !Character.isWhitespace(newText.charAt(startIndex)); startIndex--);
+                        prefixText = (startIndex == 0) ? "" : newText.substring(0, startIndex + 1);
+
+                        for (; endIndex < newText.length()
+                                && !Character.isWhitespace(newText.charAt(endIndex)); endIndex++);
+                        suffixText = (endIndex == newText.length()) ? "" : newText.substring(endIndex);
+
+                        inputText = newText.substring((startIndex == 0) ? startIndex : startIndex + 1, (
+                                endIndex == newText.length()) ? endIndex : endIndex);
+                    } else {
+                        prefixText = "";
+                        suffixText = "";
+                        inputText = "";
+                    }
+                }
+            }
         }
-        String inputText = newText.substring(index + 1);
+
+        if (inputText.startsWith(PREFIX_TAG.getPrefix())) {
+            prefixText += PREFIX_TAG.getPrefix();
+            prefix = PREFIX_TAG.getPrefix();
+            inputText = inputText.substring(2);
+        }
+
         if (getCompletionTarget().isFocused()) {
-            setUserInput(newText, inputText);
+            setUserInput(newText, prefix, inputText);
         }
     };
 
@@ -64,17 +110,13 @@ public class NewAutoCompletionBinding<T> {
 
     /**
      * Creates a new NewAutoCompletionBinding
-     *
      * @param completionTarget The target node to which auto-completion shall be added
-     * @param converter The converter to be used to convert suggestions to strings
      */
 
-    protected NewAutoCompletionBinding(Node completionTarget,
-                                       StringConverter<T> converter) {
+    public NewAutoCompletionBinding(Node completionTarget) {
 
         this.completionTarget = completionTarget;
         this.autoCompletionPopup = new AutoCompletePopup<>();
-        this.converter = converter;
         this.autoCompletionPopup.setConverter(converter);
 
         autoCompletionPopup.setStyle("-fx-control-inner-background:black;"
@@ -91,13 +133,7 @@ public class NewAutoCompletionBinding<T> {
                 setIgnoreInputChanges(false);
             }
         });
-
-        getCompletionTarget().textProperty().addListener(textChangedListener);
-        getCompletionTarget().focusedProperty().addListener(focusChangedListener);
-    }
-
-    public NewAutoCompletionBinding(TextField textField) {
-        this(textField, defaultStringConverter());
+        init();
     }
 
     /**
@@ -136,13 +172,14 @@ public class NewAutoCompletionBinding<T> {
     }
 
     /**
-     * Set the current text the user has entered
-     * @param userText
+     * Updates the current text input by the user.
+     * @param userInput is the entire string input
+     * @param wordInput is the last word in the input to be autocompleted
      */
-    public final void setUserInput(String newText, String userText) {
+    public final void setUserInput(String userInput, String prefix, String wordInput) {
         if (!isIgnoreInputChanges()) {
-            suggestionProvider.updateSuggestions(newText);
-            onUserInputChanged(userText);
+            suggestionProvider.updateSuggestions(userInput, prefix, wordInput);
+            onUserInputChanged(wordInput);
         }
     }
 
@@ -155,10 +192,18 @@ public class NewAutoCompletionBinding<T> {
     }
 
     /**
-     * Disposes the binding.
+     * Initialise the binding for listeners.
+     */
+    private void init() {
+        getCompletionTarget().caretPositionProperty().addListener(caretChangedListener);
+        getCompletionTarget().focusedProperty().addListener(focusChangedListener);
+    }
+
+    /**
+     * Disposes the binding for listeners.
      */
     public void dispose() {
-        getCompletionTarget().textProperty().removeListener(textChangedListener);
+        getCompletionTarget().caretPositionProperty().removeListener(caretChangedListener);
         getCompletionTarget().focusedProperty().removeListener(focusChangedListener);
     }
 
@@ -167,9 +212,11 @@ public class NewAutoCompletionBinding<T> {
      * @param completion
      */
     private void completeUserInput(T completion) {
-        String newText = prevText + converter.toString(completion);
+        dispose();
+        String newText = prefixText + converter.toString(completion) + suffixText;
         getCompletionTarget().setText(newText);
         getCompletionTarget().positionCaret(newText.length());
+        init();
     }
 
     /**

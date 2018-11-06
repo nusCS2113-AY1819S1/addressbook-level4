@@ -24,8 +24,10 @@ public class FindTagCommandParserTest {
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
+        String userInputKeywords = "friends owesmoney";
+        String[] userInputArray = userInputKeywords.split("\\s+");
         FindTagCommand expectedFindTagCommand =
-                new FindTagCommand(new TagsContainsKeywordsPredicate(Arrays.asList("friends", "owesmoney")));
+                new FindTagCommand(new TagsContainsKeywordsPredicate(Arrays.asList(userInputArray)), userInputArray);
         assertParseSuccess(parser, "friends owesmoney", expectedFindTagCommand);
 
         // multiple whitespaces between keywords

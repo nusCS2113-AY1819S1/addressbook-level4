@@ -16,7 +16,7 @@ import seedu.planner.model.record.Record;
 /**
  * Delete the records whose date is required.
  */
-public class DeleteCommandByDateEntry extends Command {
+public class DeleteByDateCommand extends Command {
     public static final String COMMAND_WORD = "deletedate";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the all records identified by the date number used in the displayed record list.\n"
@@ -27,11 +27,11 @@ public class DeleteCommandByDateEntry extends Command {
 
     public static final String MESSAGE_DELETE_RECORDS_SUCCESS = "Deleted all records whose date is %1$s";
 
-    private static final Logger logger = LogsCenter.getLogger(DeleteCommandByDateEntry.class);
+    private static final Logger logger = LogsCenter.getLogger(DeleteByDateCommand.class);
 
     private final Date targetDate;
 
-    public DeleteCommandByDateEntry(Date targetDate) {
+    public DeleteByDateCommand(Date targetDate) {
         this.targetDate = targetDate;
     }
 
@@ -64,7 +64,7 @@ public class DeleteCommandByDateEntry extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteCommandByDateEntry // instanceof handles nulls
-                && targetDate.equals(((DeleteCommandByDateEntry) other).targetDate)); // state check
+                || (other instanceof DeleteByDateCommand // instanceof handles nulls
+                && targetDate.equals(((DeleteByDateCommand) other).targetDate)); // state check
     }
 }

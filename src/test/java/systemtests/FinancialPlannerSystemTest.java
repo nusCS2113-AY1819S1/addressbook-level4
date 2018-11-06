@@ -45,8 +45,8 @@ import seedu.planner.commons.core.EventsCenter;
 import seedu.planner.commons.core.index.Index;
 import seedu.planner.logic.commands.AddCommand;
 import seedu.planner.logic.commands.ClearCommand;
+import seedu.planner.logic.commands.DeleteByDateCommand;
 import seedu.planner.logic.commands.DeleteCommand;
-import seedu.planner.logic.commands.DeleteCommandByDateEntry;
 import seedu.planner.logic.commands.EditCommand;
 import seedu.planner.logic.commands.FindCommand;
 import seedu.planner.logic.commands.ListCommand;
@@ -510,10 +510,10 @@ public abstract class FinancialPlannerSystemTest {
      * @param date date to be deleted
      */
     protected void deleteRecordByDate(Model model, String date) throws Exception {
-        DeleteCommandByDateEntry commandObject = new DeleteCommandByDateEntry(
+        DeleteByDateCommand commandObject = new DeleteByDateCommand(
                 new seedu.planner.model.record.Date(date));
         commandObject.execute(model, null);
-        String command = "   " + DeleteCommandByDateEntry.COMMAND_WORD + " " + date;
+        String command = "   " + DeleteByDateCommand.COMMAND_WORD + " " + date;
         executeCommand(command);
     }
 
