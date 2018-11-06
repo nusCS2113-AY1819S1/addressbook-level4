@@ -51,6 +51,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
+// tag::group[]
 === Creating a group: `creategroup` `cg`
 Creates a group in the student management system +
 Format: `creategroup n/NAME l/LOCATION [t/TAG] ...`  +
@@ -120,6 +121,7 @@ Examples:
 
 * `deletegroup 1`
 * `dg 1`
+// end::group[]
 
 === Deleting student(s) from a group: `deletegroupstudent` `dgs`
 Deletes a student from a group in the student management system +
