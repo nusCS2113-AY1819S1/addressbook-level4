@@ -15,10 +15,9 @@ import seedu.address.model.person.DeconflictTimeTable;
 import seedu.address.model.person.Person;
 
 /**
- * Selects a person identified using it's displayed index from the address book.
+ * Selects a person identified using its displayed index from the address book.
  */
 public class FreeCommand extends Command {
-
     public static final String COMMAND_WORD = "free";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD

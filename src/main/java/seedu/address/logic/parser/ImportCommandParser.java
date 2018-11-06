@@ -3,9 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.nio.file.Path;
-import java.util.NoSuchElementException;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -20,15 +18,11 @@ public class ImportCommandParser implements Parser<ImportCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ImportCommand parse(String args) throws ParseException {
-
-        Index index = Index.fromZeroBased(1); //have to change this to the user after user is implemented.
-
-        try {
-            Path path;
-            path = ParserUtil.parseImportFileLocation(args);
-            return new ImportCommand(index, path);
-        } catch (NoSuchElementException | ParseException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE), e);
+        if (args.trim().length() == 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
+        } else {
+            Path path = ParserUtil.parseImportExportFileName(args);
+            return new ImportCommand(path);
         }
     }
 }

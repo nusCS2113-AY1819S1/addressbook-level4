@@ -17,6 +17,7 @@ import seedu.address.model.person.Person;
  */
 public class FriendCommand extends Command {
     public static final String COMMAND_WORD = "friend";
+    public static final String COMMAND_WORD_ALIAS = "af";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds the person selected with the index to the friends list.\n"

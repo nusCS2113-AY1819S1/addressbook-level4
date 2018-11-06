@@ -77,7 +77,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane mePanelPlaceholder;
 
     @FXML
-    private StackPane friendListPanelPlaceholder;
+    private StackPane otherListPanelPlaceholder;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -170,7 +170,7 @@ public class MainWindow extends UiPart<Stage> {
         mePanelPlaceholder.getChildren().clear();
         timetablePlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().clear();
-        friendListPanelPlaceholder.getChildren().clear();
+        otherListPanelPlaceholder.getChildren().clear();
         statusbarPlaceholder.getChildren().clear();
         friendText.setText("");
         personText.setText("");
@@ -199,10 +199,10 @@ public class MainWindow extends UiPart<Stage> {
         mePanelPlaceholder.getChildren().add(mePanel.getRoot());
 
         friendListPanel = new FriendListPanel(logic.getFriendList(security.getUser()));
-        friendListPanelPlaceholder.getChildren().add(friendListPanel.getRoot());
+        personListPanelPlaceholder.getChildren().add(friendListPanel.getRoot());
 
         otherListPanel = new OtherListPanel(logic.getOtherList(security.getUser()));
-        personListPanelPlaceholder.getChildren().add(otherListPanel.getRoot());
+        otherListPanelPlaceholder.getChildren().add(otherListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().clear();
@@ -311,7 +311,6 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     void releaseResources() {
-        //timetablePanel.freeResources(); TODO: do the equivalent of releasing resources of browserPanel webview?
     }
 
     @Subscribe

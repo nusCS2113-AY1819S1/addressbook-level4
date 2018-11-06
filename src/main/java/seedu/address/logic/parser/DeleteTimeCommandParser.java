@@ -7,13 +7,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.TimeSlot;
 
 /**
- * Parses input arguments and creates a new DeleteTimeCommand object
+ * Parses input arguments and creates a new {@code DeleteTimeCommand} object
  */
 public class DeleteTimeCommandParser implements Parser<DeleteTimeCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteTimeCommand
-     * and returns an DeleteTimeCommand object for execution.
+     * and returns an {@code DeleteTimeCommand} object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteTimeCommand parse (String args) throws ParseException {

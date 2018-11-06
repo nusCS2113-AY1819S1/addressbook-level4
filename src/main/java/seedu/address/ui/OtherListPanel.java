@@ -16,11 +16,11 @@ import seedu.address.model.person.Person;
  * Panel containing the list of persons.
  */
 public class OtherListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
+    private static final String FXML = "OtherListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(OtherListPanel.class);
 
     @FXML
-    private ListView<Person> personListView;
+    private ListView<Person> otherListView;
 
     public OtherListPanel(ObservableList<Person> personList) {
         super(FXML);
@@ -29,13 +29,13 @@ public class OtherListPanel extends UiPart<Region> {
     }
 
     private void setConnections(ObservableList<Person> personList) {
-        personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        otherListView.setItems(personList);
+        otherListView.setCellFactory(listView -> new PersonListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        personListView.getSelectionModel().selectedItemProperty()
+        otherListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in person list panel changed to : '" + newValue + "'");
@@ -49,8 +49,8 @@ public class OtherListPanel extends UiPart<Region> {
      */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
-            personListView.scrollTo(index);
-            personListView.getSelectionModel().clearAndSelect(index);
+            otherListView.scrollTo(index);
+            otherListView.getSelectionModel().clearAndSelect(index);
         });
     }
 
@@ -66,7 +66,7 @@ public class OtherListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                setGraphic(new OtherPersonCard(person, getIndex() + 1).getRoot());
             }
         }
     }

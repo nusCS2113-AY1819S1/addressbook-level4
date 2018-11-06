@@ -118,10 +118,10 @@ public class PersonListPanelTest extends GuiUnitTest {
      * Also shows the {@code Stage} that displays only {@code PersonListPanel}.
      */
     private void initUi(ObservableList<Person> backingList) {
-        OtherListPanel otherListPanel = new OtherListPanel(backingList);
-        uiPartRule.setUiPart(otherListPanel);
+        FriendListPanel friendListPanel = new FriendListPanel(backingList);
+        uiPartRule.setUiPart(friendListPanel);
 
-        personListPanelHandle = new PersonListPanelHandle(getChildNode(otherListPanel.getRoot(),
+        personListPanelHandle = new PersonListPanelHandle(getChildNode(friendListPanel.getRoot(),
                 PersonListPanelHandle.PERSON_LIST_VIEW_ID));
     }
 }

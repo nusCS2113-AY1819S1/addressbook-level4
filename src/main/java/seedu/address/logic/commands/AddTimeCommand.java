@@ -13,7 +13,7 @@ import seedu.address.model.person.TimeTable;
 import seedu.address.model.person.exceptions.TimeSlotOverlapException;
 
 /**
- * Adds a {@code TimeSlot} to the {@code TimeTable} of person at {@code Index index}
+ * Adds a {@code TimeSlot} to the {@code TimeTable} of the currently logged in {@code User}
  */
 public class AddTimeCommand extends Command {
     public static final String COMMAND_WORD = "addtime";

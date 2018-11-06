@@ -51,6 +51,11 @@ public class TypicalTimeSlots {
             LocalTime.parse("08:00"),
             LocalTime.parse("11:00"));
 
+    // Not in typical timetable, for non-zero minute testing
+    public static final TimeSlot MON_830_TO_1030 = new TimeSlot(DayOfWeek.MONDAY,
+            LocalTime.parse("08:30"),
+            LocalTime.parse("10:30"));
+
     public static TimeTable getTypicalTimeTable() {
         TimeTable t = new TimeTable();
         for (TimeSlot timeSlot : getTypicalTimeSlots()) {

@@ -13,8 +13,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.regex.Pattern;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -32,6 +32,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final HashMap<String, DayOfWeek> DAY_OF_WEEK_MAP = new HashMap<>();
+    public static final String IMPORT_EXPORT_FOLDER = "import_export";
 
     static {
         DAY_OF_WEEK_MAP.put("MON", DayOfWeek.MONDAY);
@@ -144,9 +145,7 @@ public class ParserUtil {
     }
 
     /**
-     *
-     * Parses a {@code String timeslot} into a {@code timeslot}
-     *
+     * Parses the {@code String} representation of a {@code TimeSlot} into a {@code TimeSlot} object
      */
     public static TimeSlot parseTimeSlot (String timeslot) throws ParseException {
         requireNonNull(timeslot);
@@ -233,56 +232,32 @@ public class ParserUtil {
         }
     }
 
-    /**
-     * Parses a {@code String filePath} into a {@code Path}
-     */
-    public static Path parseImportFileLocation (String fileLocation) throws ParseException {
-        requireNonNull(fileLocation);
-        String trimmedFileLocation = fileLocation.trim();
-
-        //default import path.
-        if (trimmedFileLocation.length() == 0) {
-            Path path;
-            path = Paths.get("import_export" , "import.ics");
-            return path;
-        }
-
-        //ensure the filePath ends in .ics
-        return parseImportExportFileLocation(trimmedFileLocation);
-    }
 
     /**
-     * Parses a {@code String filePath} into a {@code Path}
+     * Parses a {@code String fileName} into a {@code Path}, for the import and export command.
+     * The returned Path is at .\\import_export\\[fileName].ics, see {@code ImportCommand} and {@code ExportCommand}
      */
-    public static Path parseExportFileLocation (String fileLocation) throws ParseException {
-        requireNonNull(fileLocation);
-        String trimmedFileLocation = fileLocation.trim();
+    public static Path parseImportExportFileName (String fileName) throws ParseException {
+        requireNonNull(fileName);
+        String trimmedFileName = fileName.trim();
+        String fullFileName = trimmedFileName + ".ics";
 
-        //default export path.
-        if (trimmedFileLocation.length() == 0) {
-            Path path;
-            path = Paths.get("import_export" , "export.ics");
-            return path;
-        }
-        return parseImportExportFileLocation(trimmedFileLocation);
-    }
+        // Check destination path length.
+        // throw exception if the created file's directory would be greater than 250 char,
+        // (since windows filesystem has problems with long directories)
+        String applicationPath = System.getProperty("user.dir"); //the location of the .jar
+        String filePath = applicationPath + "\\" + IMPORT_EXPORT_FOLDER + "\\" + fullFileName;
 
-    /**
-     * Parses a (non-empty) {@code String fileLocation} into a {@code Path}
-     */
-    private static Path parseImportExportFileLocation(String trimmedFileLocation) throws ParseException {
-        //ensure the filePath ends in .ics
-        String pattern = "^.+\\.(?:(?:[iI][cC][sS]))$"; //ending in .ics
-        if (!Pattern.matches(pattern, trimmedFileLocation)) {
-            throw new ParseException("The path must end in .ics");
+        if (filePath.length() > 250) {
+            throw new ParseException (Messages.MESSAGE_PATH_TOO_LONG);
         }
 
         //create the Path
         Path path;
         try {
-            path = Paths.get(trimmedFileLocation);
+            path = Paths.get(filePath);
         } catch (InvalidPathException e) {
-            throw new ParseException("The path you entered is invalid.");
+            throw new ParseException(Messages.MESSAGE_INVALID_PATH);
         }
         return path;
     }

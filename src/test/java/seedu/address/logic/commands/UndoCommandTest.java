@@ -21,6 +21,12 @@ public class UndoCommandTest {
 
     @Before
     public void setUp() {
+        model.matchUserToPerson("Alice Pauline");
+        expectedModel.matchUserToPerson("Alice Pauline");
+
+        model.updateTimeTable(model.getUser().getTimeTable());
+        expectedModel.updateTimeTable(expectedModel.getUser().getTimeTable());
+
         // set up of models' undo/redo history
         deleteFirstPerson(model);
         deleteFirstPerson(model);
