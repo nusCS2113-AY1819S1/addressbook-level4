@@ -91,6 +91,7 @@ public class LoginUserIdPasswordRoleCommand extends LoginCommand {
     private void checkUpdatedAccountListSetLoginCondition(Model model) {
         if (model.getFilteredLoginDetailsList().size() != 0) {
             LoginManager.setIsLoginSuccessful(true);
+            logger.log(Level.INFO, "Login successful");
             assert LoginManager.getIsLoginSuccessful() : "LoginManager.getIsLoginSuccessful() should be true";
         } else {
             LoginManager.setAllRolesFalse();
@@ -98,6 +99,7 @@ public class LoginUserIdPasswordRoleCommand extends LoginCommand {
             assert !LoginManager.getIsTreasurer() : "LoginManager.getIsTreasurer() should be false";
             assert !LoginManager.getIsMember() : "LoginManager.getIsMember() should be false";
             LoginManager.setIsLoginSuccessful(false);
+            logger.log(Level.INFO, "Login failed");
             assert !LoginManager.getIsLoginSuccessful() : "LoginManager.getIsLoginSuccessful() should be false";
         }
     }
