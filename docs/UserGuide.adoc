@@ -121,6 +121,22 @@ Examples:
 
 * `deletegroup 1`
 * `dg 1`
+
+=== Deleting student(s) from a group: `deletegroupstudent` `dgs`
+Deletes a student from a group in the student management system +
+Format: `deletegroupstudent g/INDEX p/NDEX`  +
+Shortcut Format: `dgs g/INDEX p/INDEX` +
+****
+* Removes studnet at specifed INDEX from the group at specified INDEX in the student management systsm
+* The index refers to the index number shown in the displayed group/student in group list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* This command is undoable
+****
+
+Examples:
+
+* `deletegroupstudent g/1 p/1`
+* `dgs g/1 p/1`
 // end::group[]
 
 === Add test and test marks to student: `adt student name tn/ tm/`
@@ -155,22 +171,6 @@ The test to be assign grade should be exist in the system record, otherwise, the
 click the person to see the grade .
 Format: `agpt tn/`
 Example: `agpt tn/CS2113Midterm`
-
-=== Deleting student(s) from a group: `deletegroupstudent` `dgs`
-Deletes a student from a group in the student management system +
-Format: `deletegroupstudent g/INDEX p/NDEX`  +
-Shortcut Format: `dgs g/INDEX p/INDEX` +
-****
-* Removes studnet at specifed INDEX from the group at specified INDEX in the student management systsm
-* The index refers to the index number shown in the displayed group/student in group list.
-* The index *must be a positive integer* 1, 2, 3, ...
-* This command is undoable
-****
-
-Examples:
-
-* `deletegroupstudent g/1 p/1`
-* `dgs g/1 p/1`
 
 === Add test and test marks to student: `adt student name tn/ tm/`
 The system is allowed user to input different test name and test marks for each student by indicate
