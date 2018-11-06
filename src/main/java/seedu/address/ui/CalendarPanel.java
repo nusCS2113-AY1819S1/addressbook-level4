@@ -1,13 +1,22 @@
+//@@author SHININGGGG
 package seedu.address.ui;
+
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 import java.util.Calendar;
 import java.util.logging.Logger;
 
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.Text;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-
+import javafx.scene.paint.Color;
 import javafx.scene.layout.Region;
+import javafx.geometry.Pos;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.CalendarInfo;
 
@@ -24,22 +33,87 @@ public class CalendarPanel extends UiPart<Region> {
     private int firstDay;
 
     @FXML
-    private GridPane calendarView = new GridPane();
+    private Text currentDate;
 
     @FXML
-    private Label date1;
+    private GridPane calendarView;
 
     public CalendarPanel() {
         super(FXML);
         calendar = calendarInfo.getCalendar();
-        firstDay = calendarInfo.firstDay;
-        setGridPane(calendar);
+        firstDay = calendarInfo.firstDay - 1;
+        setCurrentDate();
+        //String stringFirstDay = Integer.toString(firstDay);
+        //setCalendar(calendar);
+        //calendar = Calendar.getInstance();
+        setCalendar(calendar);
         registerAsAnEventHandler(this);
     }
 
-    private void setGridPane (Calendar calendar) {
+    private void setCurrentDate () {
+
+        //Text currentDate = new Text();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        currentDate.setText("\n                                           " + dtf.format(now));
+        currentDate.setFont(Font.font("verdana",  FontWeight.BOLD, FontPosture.REGULAR, 15));
+        currentDate.setFill(Color.ORANGE);
+        //currentDate.setLayoutY(20);
+        //currentDate.setLayoutX(0);
+        //currentDate.setLayoutY(0);
+    }
+
+    private void setCalendar (Calendar calendar) {
+        System.out.println("The first day of the whole month is " + firstDay);
+        calendarView.setMinSize(200, 200);
+        calendarView.setVgap(30);
+        calendarView.setHgap(20);
+        calendarView.setAlignment(Pos.CENTER);
+
+
+        //calendarView.add(currentDate, 3, 0);
+
+        for (int j = 0; j < 7; j++) {
+            if (j == 0) {
+                Text text = new Text("Sun");
+                text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+                text.setFill(Color.WHEAT);
+                calendarView.add(text, 0, 0);
+            } else if (j == 1) {
+                Text text = new Text("Mon");
+                text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+                text.setFill(Color.WHEAT);
+                calendarView.add(text, 1, 0);
+            } else if (j == 2) {
+                Text text = new Text("Tue");
+                text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+                text.setFill(Color.WHEAT);
+                calendarView.add(text, 2, 0);
+            } else if (j == 3) {
+                Text text = new Text("Wed");
+                text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+                text.setFill(Color.WHEAT);
+                calendarView.add(text, 3, 0);
+            } else if (j == 4) {
+                Text text = new Text("Thur");
+                text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+                text.setFill(Color.WHEAT);
+                calendarView.add(text, 4, 0);
+            } else if (j == 5) {
+                Text text = new Text("Fri");
+                text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+                text.setFill(Color.WHEAT);
+                calendarView.add(text, 5, 0);
+            } else if (j == 6) {
+                Text text = new Text("Sat");
+                text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+                text.setFill(Color.WHEAT);
+                calendarView.add(text, 6, 0);
+            } else {}
+        }
+
         int numOfDays;
-        int week;
+        int week = 1;
         int day = firstDay;
         if (calendar.get(Calendar.MONTH) == Calendar.JANUARY
             || calendar.get(Calendar.MONTH) == Calendar.MARCH
@@ -54,43 +128,17 @@ public class CalendarPanel extends UiPart<Region> {
         } else {
             numOfDays = 30;
         }
-        //for (int i = 0; i < numOfDays; i++) {
-        week = calendar.get(Calendar.WEEK_OF_MONTH);
-        calendar.set(Calendar.DAY_OF_MONTH, 1);
-        date1.setText(Integer.toString(1));
-        calendarView.add(date1, (day % 7), week);
-        day++;
-        //}
-    }
-    /*
-    private void setEventHandlerForSelectionChangeEvent() {
-        calendarView.getSelectionModel().selectedItemProperty()
-                .addListener((observable, oldValue, newValue) -> {
-                    if (newValue != null) {
-                        logger.fine("Selection in person list panel changed to : '" + newValue + "'");
-                        raise(new PersonPanelSelectionChangedEvent(newValue));
-                    }
-                });
-    }
-    */
 
-    /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
-     */
-    /*
-    class PersonListViewCell extends ListCell<Person> {
-        @Override
-        protected void updateItem(Person person, boolean empty) {
-            super.updateItem(person, empty);
-
-            if (empty || person == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+        for (int i = 1; i <= numOfDays; i++) {
+            Text text = new Text(Integer.toString(i));
+            text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+            text.setFill(Color.WHEAT);
+            calendarView.add(text, day, week);
+            day = (day + 1) % 7;
+            if (day == 0) {
+                week++;
             }
         }
-    }
-    */
 
+    }
 }

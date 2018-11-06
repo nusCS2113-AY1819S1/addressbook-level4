@@ -48,21 +48,21 @@
         </StackPane>
 
         <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
-          <VBox fx:id="taskList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
+          <VBox fx:id="taskList" minWidth="340" maxWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
             <StackPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
 
-          <GridPane fx:id="calendarPlaceholder" prefWidth="340" >
+          <VBox fx:id="calendar" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
+            <StackPane fx:id="calendarPlaceholder" VBox.vgrow="ALWAYS"/>
+          </VBox>
 
-          </GridPane>
-
-          <VBox fx:id="expenditureList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
+          <VBox fx:id="expenditureList" minWidth="340" maxWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
