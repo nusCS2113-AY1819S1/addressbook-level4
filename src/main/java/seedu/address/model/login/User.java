@@ -155,13 +155,12 @@ public class User {
                 .append(getUsername())
                 .append(" Password: ")
                 .append(getPassword())
-                .append(getAddressBookFilePath())
                 .append(" Product File Path: ")
-                .append(getDistributorBookFilePath())
+                .append(getAddressBookFilePath())
                 .append(" Distributor Book File Path: ")
+                .append(getDistributorBookFilePath())
                 .append(" Sales History File Path: ")
                 .append(getSalesHistoryFilePath());
-
         return builder.toString();
     }
 }
