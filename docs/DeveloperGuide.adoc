@@ -365,6 +365,21 @@ from List<>.
 
 // end::sorttask[]
 
+// tag::deadlinenotification[]
+
+=== Deadline Notification
+
+==== Current Implementation
+
+Deadline Notification in the to-do list uses both logic and ui components.
+Generally, 
+
+==== Design Considerations
+
+==== Aspect: Methods to support the deadline notification feature
+
+// end::deadlinenotification[]
+
 // tag::checkexpenditure[]
 === Check Expenditure
 ==== Current Implementation

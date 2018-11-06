@@ -49,6 +49,8 @@ Something Daily is a desktop address book application used for teaching Software
 
 include::../UserGuide.adoc[tag=TDLsort]
 
+include::../UserGuide.adoc[tag=TDLNotification]
+
 == Contributions to the Developer Guide
 
 |===
@@ -56,6 +58,8 @@ include::../UserGuide.adoc[tag=TDLsort]
 |===
 
 include::../DeveloperGuide.adoc[tag=sorttask]
+
+include::../DeveloperGuide.adoc[tag=deadlinenotification]
 
 
 == PROJECT: PowerPointLabs
