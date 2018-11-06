@@ -59,22 +59,21 @@ Our end product, *JitHub*, is a https://en.wikipedia.org/wiki/Command-line_inter
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+*** Managed milestones `v1.1` - `v1.4` (3 milestones) on GitHub
 ** Enhancements to existing features:
+// TODO: edit the following line
 *** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
 *** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+// end edit
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-W12-1/main/pull/4[#4], https://github.com/CS2113-AY1819S1-W12-1/main/pull/27[#27], https://github.com/CS2113-AY1819S1-W12-1/main/pull/29[#29], https://github.com/CS2113-AY1819S1-W12-1/main/pull/73[#73]
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-W13-2/main[1], https://github.com/CS2113-AY1819S1-W12-4/main[2], https://github.com/CS2113-AY1819S1-T12-3/main[3])
 
-_{you can add/remove categories in the list above}_
+** Tools:
+*** Integrated a third party library (OpenCSV) to the project (https://github.com/CS2113-AY1819S1-W12-1/main/pull/62[#62])
+*** Integrated Github plugins (TravisCI and Coveralls) to the team repo
 
 == Contributions to the User Guide
 
