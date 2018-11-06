@@ -13,6 +13,7 @@ import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.parser.Prefix;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 
 /**
  * Sorts all the candidates in the CandidateBook
@@ -40,7 +41,7 @@ public class SortCandidateCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         requireNonNull(model);
         EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
         model.sortCandidates(prefixToSort);

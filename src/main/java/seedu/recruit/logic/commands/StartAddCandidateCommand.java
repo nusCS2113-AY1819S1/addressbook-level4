@@ -8,6 +8,7 @@ import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 
 /**
  *  Starts the add candidate interface
@@ -24,11 +25,11 @@ public class StartAddCandidateCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws CommandException {
         requireNonNull(model);
         EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
 
-        LogicManager.setLogicState("Add Candidate Interface");
+        LogicManager.setLogicState(AddCandidateCommand.COMMAND_WORD);
         return new CommandResult(AddCandidateCommand.MESSAGE_USAGE);
     }
 }

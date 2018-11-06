@@ -41,6 +41,10 @@ public class EditJobDetailsCommandParser implements Parser<EditJobDetailsCommand
 
         EditJobOfferDescriptor editJobOfferDescriptor = new EditJobOfferDescriptor();
 
+        if (argMultimap.getValue(PREFIX_COMPANY_NAME).isPresent()) {
+            editJobOfferDescriptor.setCompanyName(
+                    ParserUtil.parseCompanyName(argMultimap.getValue(PREFIX_COMPANY_NAME).get()));
+        }
         if (argMultimap.getValue(PREFIX_JOB).isPresent()) {
             editJobOfferDescriptor.setJob(ParserUtil.parseJob(argMultimap.getValue(PREFIX_JOB).get()));
         }
@@ -62,8 +66,7 @@ public class EditJobDetailsCommandParser implements Parser<EditJobDetailsCommand
             throw new ParseException(EditJobDetailsCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditJobDetailsCommand(ParserUtil.parseCompanyName(argMultimap.getValue(PREFIX_COMPANY_NAME).get()),
-                index, editJobOfferDescriptor);
+        return new EditJobDetailsCommand(index, editJobOfferDescriptor);
     }
 
 }

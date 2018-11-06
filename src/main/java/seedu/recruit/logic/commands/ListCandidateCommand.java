@@ -7,6 +7,7 @@ import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 
 /**
  * Lists all candidates in the recruit book to the user.
@@ -21,7 +22,7 @@ public class ListCandidateCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all candidates.\n";
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         requireNonNull(model);
         model.updateFilteredCandidateList(PREDICATE_SHOW_ALL_PERSONS);
         EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());

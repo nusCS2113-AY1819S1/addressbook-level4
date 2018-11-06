@@ -11,6 +11,7 @@ import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.company.CompanyContainsKeywordsPredicate;
 
 /**
@@ -37,7 +38,7 @@ public class FindCompanyCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         requireNonNull(model);
         model.updateFilteredCompanyList(predicate);
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());

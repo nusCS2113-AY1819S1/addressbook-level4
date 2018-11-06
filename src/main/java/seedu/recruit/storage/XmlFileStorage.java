@@ -15,10 +15,10 @@ public class XmlFileStorage {
     /**
      * Saves the given CandidateBook data to the specified file.
      */
-    public static void saveCandidateBookToFile(Path file, XmlSerializableCandidateBook candidateBook)
+    public static void saveCandidateBookToFile(Path path, XmlSerializableCandidateBook candidateBook)
             throws FileNotFoundException {
         try {
-            XmlUtil.saveDataToFile(file, candidateBook);
+            XmlUtil.saveDataToFile(path, candidateBook);
         } catch (JAXBException e) {
             throw new AssertionError("Unexpected exception " + e.getMessage(), e);
         }
@@ -26,7 +26,7 @@ public class XmlFileStorage {
 
 
     /**
-     * Returns CandidateBook in the file or an empty recruit book
+     * Returns CandidateBook in the file or an empty CandidateBookgit
      */
     public static XmlSerializableCandidateBook loadCandidateBookFromSaveFile(Path file) throws DataConversionException,
                                                                             FileNotFoundException {
@@ -40,17 +40,17 @@ public class XmlFileStorage {
     /**
      * Saves the given CompanyBook data to the specified file.
      */
-    public static void saveCompanyBookToFile(Path file, XmlSerializableCompanyBook companyBook)
+    public static void saveCompanyBookToFile(Path path, XmlSerializableCompanyBook companyBook)
             throws FileNotFoundException {
         try {
-            XmlUtil.saveDataToFile(file, companyBook);
+            XmlUtil.saveDataToFile(path, companyBook);
         } catch (JAXBException e) {
             throw new AssertionError("Unexpected exception " + e.getMessage(), e);
         }
     }
 
     /**
-     * Returns CandidateNook in the file or an empty recruit book
+     * Returns CompanyBook in the file or an empty CompanyBook
      */
     public static XmlSerializableCompanyBook loadCompanyBookFromSaveFile(Path file) throws DataConversionException,
             FileNotFoundException {

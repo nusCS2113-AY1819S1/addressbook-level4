@@ -8,6 +8,7 @@ import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 
 /**
  * First stage of deleting a candidate from a job offer's list of shortlisted candidates.
@@ -47,7 +48,7 @@ public class DeleteShortlistedCandidateInitializationCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws CommandException {
         requireNonNull(model);
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
         deleteStatus = true;

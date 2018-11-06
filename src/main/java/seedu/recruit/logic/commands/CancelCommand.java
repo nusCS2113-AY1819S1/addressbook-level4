@@ -6,6 +6,7 @@ import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 
 /**
  * Cancels any intermediate commands
@@ -25,7 +26,7 @@ public class CancelCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws CommandException {
         if (ShortlistCandidateInitializationCommand.isShortlisting()) {
             ShortlistCandidateInitializationCommand.isDoneShortlisting();
             this.cancelledCommand = ShortlistCandidateInitializationCommand.COMMAND_WORD;

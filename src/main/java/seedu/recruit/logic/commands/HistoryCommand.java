@@ -7,6 +7,7 @@ import java.util.List;
 
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 
 /**
  * Lists all the commands entered by user from the start of app launch.
@@ -18,7 +19,7 @@ public class HistoryCommand extends Command {
     public static final String MESSAGE_NO_HISTORY = "You have not yet entered any commands.";
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         requireNonNull(history);
         List<String> previousCommands = history.getHistory();
 

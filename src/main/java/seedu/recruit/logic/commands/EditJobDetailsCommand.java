@@ -20,10 +20,10 @@ import seedu.recruit.commons.util.CollectionUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.candidate.Education;
 import seedu.recruit.model.candidate.Gender;
 import seedu.recruit.model.candidate.UniqueCandidateList;
-import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
 import seedu.recruit.model.joboffer.AgeRange;
 import seedu.recruit.model.joboffer.Job;
@@ -37,8 +37,10 @@ public class EditJobDetailsCommand extends Command {
 
     public static final String COMMAND_WORD = "editj";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the job offer identified "
-            + "by the company name and index number used in the displayed job offer list for that specific company. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": NOTE: Enter \"listC\" first to see the full list"
+            + " of job offers to edit!\n"
+            + "Edits the details of the job offer identified "
+            + "by the index number used in the displayed job offer list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_COMPANY_NAME + "Company Name] "
@@ -55,42 +57,31 @@ public class EditJobDetailsCommand extends Command {
 
     public static final String MESSAGE_EDIT_JOB_OFFER_SUCCESS = "Edited job offer: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be included";
-    public static final String MESSAGE_DUPLICATE_JOB_OFFER = "The edited job offer already exists within the company";
+    public static final String MESSAGE_DUPLICATE_JOB_OFFER = "The edited job offer already exists.";
     public static final String MESSAGE_COMPANY_NOT_FOUND = "Company not found in CompanyBook.\n"
             + "Please add the company to CompanyBook first";
 
     private final Index index;
-    private final CompanyName companyName;
     private final EditJobOfferDescriptor editJobOfferDescriptor;
 
     /**
-     * @param companyName of the company
      * @param index of the job offer in the filtered company job list to edit
      * @param editJobOfferDescriptor details to edit the job offer with
      */
-    public EditJobDetailsCommand(CompanyName companyName, Index index,
+    public EditJobDetailsCommand(Index index,
                                  EditJobDetailsCommand.EditJobOfferDescriptor editJobOfferDescriptor) {
-        requireNonNull(companyName);
         requireNonNull(index);
         requireNonNull(editJobOfferDescriptor);
 
-        this.companyName = companyName;
         this.index = index;
         this.editJobOfferDescriptor = new EditJobDetailsCommand.EditJobOfferDescriptor(editJobOfferDescriptor);
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws CommandException {
         requireNonNull(model);
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
 
-        int companyIndex = model.getCompanyIndexFromName(this.companyName);
-
-        if (companyIndex == -1) {
-            throw new CommandException(MESSAGE_COMPANY_NOT_FOUND);
-        }
-
-        Company companyToEdit = model.getCompanyFromIndex(companyIndex);
         List<JobOffer> companyJobList = model.getFilteredCompanyJobList();
 
         if (index.getZeroBased() >= companyJobList.size()) {
@@ -99,6 +90,12 @@ public class EditJobDetailsCommand extends Command {
 
         JobOffer jobOfferToEdit = companyJobList.get(index.getZeroBased());
         JobOffer editedJobOffer = createEditedJobOffer(jobOfferToEdit, editJobOfferDescriptor);
+
+        int companyIndex = model.getCompanyIndexFromName(editedJobOffer.getCompanyName());
+
+        if (companyIndex == -1) {
+            throw new CommandException(MESSAGE_COMPANY_NOT_FOUND);
+        }
 
         if (!jobOfferToEdit.isSameJobOffer(editedJobOffer) && model.hasJobOffer(editedJobOffer)) {
             throw new CommandException(MESSAGE_DUPLICATE_JOB_OFFER);
@@ -118,14 +115,16 @@ public class EditJobDetailsCommand extends Command {
                                                  EditJobOfferDescriptor editJobOfferDescriptor) {
         assert jobOfferToEdit != null;
 
-        CompanyName companyName = jobOfferToEdit.getCompanyName();
+        CompanyName updatedCompanyName =
+                editJobOfferDescriptor.getCompanyName().orElse(jobOfferToEdit.getCompanyName());
         Job updatedJob = editJobOfferDescriptor.getJob().orElse(jobOfferToEdit.getJob());
         Gender updatedGender = editJobOfferDescriptor.getGender().orElse(jobOfferToEdit.getGender());
         AgeRange updatedAgeRange = editJobOfferDescriptor.getAgeRange().orElse(jobOfferToEdit.getAgeRange());
         Education updatedEducation = editJobOfferDescriptor.getEducation().orElse(jobOfferToEdit.getEducation());
         Salary updatedSalary = editJobOfferDescriptor.getSalary().orElse(jobOfferToEdit.getSalary());
         UniqueCandidateList candidateList = jobOfferToEdit.getUniqueCandidateList();
-        return new JobOffer(companyName, updatedJob, updatedGender, updatedAgeRange, updatedEducation, updatedSalary,
+        return new JobOffer(
+                updatedCompanyName, updatedJob, updatedGender, updatedAgeRange, updatedEducation, updatedSalary,
                 candidateList);
     }
 
@@ -153,6 +152,7 @@ public class EditJobDetailsCommand extends Command {
      */
 
     public static class EditJobOfferDescriptor {
+        private CompanyName companyName;
         private Job job;
         private Gender gender;
         private AgeRange ageRange;
@@ -165,6 +165,7 @@ public class EditJobDetailsCommand extends Command {
          * Copy constructor.
          */
         public EditJobOfferDescriptor(EditJobDetailsCommand.EditJobOfferDescriptor toCopy) {
+            setCompanyName(toCopy.companyName);
             setJob(toCopy.job);
             setGender(toCopy.gender);
             setAgeRange(toCopy.ageRange);
@@ -176,7 +177,15 @@ public class EditJobDetailsCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(job, gender, ageRange, education, salary);
+            return CollectionUtil.isAnyNonNull(companyName, gender, ageRange, education, salary);
+        }
+
+        public void setCompanyName(CompanyName companyName) {
+            this.companyName = companyName;
+        }
+
+        public Optional<CompanyName> getCompanyName() {
+            return Optional.ofNullable(companyName);
         }
 
         public void setJob(Job job) {
@@ -234,7 +243,8 @@ public class EditJobDetailsCommand extends Command {
             // state check
             EditJobDetailsCommand.EditJobOfferDescriptor e = (EditJobDetailsCommand.EditJobOfferDescriptor) other;
 
-            return getJob().equals(e.getJob())
+            return getCompanyName().equals(e.getCompanyName())
+                    && getJob().equals(e.getJob())
                     && getGender().equals(e.getGender())
                     && getAgeRange().equals(e.getAgeRange())
                     && getEducation().equals(e.getEducation())

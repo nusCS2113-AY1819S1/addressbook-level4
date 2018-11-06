@@ -7,13 +7,14 @@ import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 
 /**
  * This class handles the next sub command for email contents phase
  */
 public class EmailContentsNextCommand extends EmailContentsCommand {
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         requireNonNull(model);
         EmailUtil emailUtil = model.getEmailUtil();
 
