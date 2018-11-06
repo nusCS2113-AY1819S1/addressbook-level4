@@ -8,10 +8,6 @@ import static seedu.planner.testutil.TypicalRecords.IDA;
 import static seedu.planner.testutil.TypicalRecords.INDO;
 import static seedu.planner.testutil.TypicalRecords.ZT;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
