@@ -1,17 +1,22 @@
 package seedu.planner.logic.parser;
 
+import static seedu.planner.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.planner.logic.parser.CliSyntax.PREFIX_MONEYFLOW;
+
+import java.util.stream.Stream;
+
 import seedu.planner.logic.commands.EditMonthlyLimitCommand;
 import seedu.planner.logic.parser.exceptions.ParseException;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.MoneyFlow;
 
-import java.util.stream.Stream;
 
-import static seedu.planner.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.planner.logic.parser.CliSyntax.PREFIX_MONEYFLOW;
-
-public class EditMonthlyLimitCommandParser implements Parser<EditMonthlyLimitCommand>{
+/**
+ * This parser do the similar function as AddMonthlyLimitCommandParser
+ * generate the limit with the special date.
+ */
+public class EditMonthlyLimitCommandParser implements Parser<EditMonthlyLimitCommand> {
     public static final String DATE_SPECIAL_FOR_MONTHLY = "01-01-9999";
     private String moneyString;
     private Date dateSpecial;

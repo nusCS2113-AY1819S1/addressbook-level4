@@ -1,15 +1,19 @@
 package seedu.planner.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.planner.logic.parser.CliSyntax.PREFIX_MONEYFLOW;
+
 import seedu.planner.commons.core.Messages;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.Model;
 import seedu.planner.model.record.Limit;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.planner.logic.parser.CliSyntax.PREFIX_MONEYFLOW;
 
-public class EditMonthlyLimitCommand extends Command{
+/**
+ * This command is to modify the monthly limit money.
+ */
+public class EditMonthlyLimitCommand extends Command {
     public static final String COMMAND_WORD = "editmonthlylimit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edit the existing monthly limit. "

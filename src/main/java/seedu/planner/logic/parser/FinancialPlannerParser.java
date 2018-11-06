@@ -6,7 +6,6 @@ import static seedu.planner.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 import seedu.planner.logic.commands.AddCommand;
 import seedu.planner.logic.commands.AddLimitCommand;
 import seedu.planner.logic.commands.AddMonthlyLimitCommand;
@@ -123,7 +122,6 @@ public class FinancialPlannerParser {
 
         case DeleteMonthlyLimitCommand.COMMAND_WORD:
             return new DeleteMonthlyLimitCommand();
-            
         case EditLimitCommand.COMMAND_WORD:
             return new EditLimitCommandParser().parse(arguments);
 
