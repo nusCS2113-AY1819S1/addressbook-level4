@@ -69,7 +69,6 @@ public class SecurityManager extends ComponentManager implements Security {
 
     @Override
     public RegisterFlag register(String username, String password) {
-        //logic.execute("add n/" + username + " e/" + email + " p/" + phone + " a/" + address);
         this.isAuthenticated = true;
         logic.matchUserToPerson(username);
         userlist = appUsers.getAccountCredentials();

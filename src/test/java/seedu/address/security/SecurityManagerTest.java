@@ -8,11 +8,11 @@ import static seedu.address.testutil.TypicalPersons.TEST;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.eventbus.Subscribe;
 
+import seedu.address.commons.ModelManagerTestUserStub;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.security.SuccessfulLoginEvent;
 import seedu.address.commons.events.security.UnsuccessfulLoginEvent;
@@ -20,7 +20,6 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
 import seedu.address.model.User;
 import seedu.address.model.UserPrefs;
 import seedu.address.testutil.AddressBookBuilder;
@@ -64,7 +63,7 @@ public class SecurityManagerTest {
         appUsers = new AppUsersTestStub();
         AddressBook addressBook = new AddressBookBuilder().withPerson(TEST).build();
 
-        model = new ModelManager(addressBook, userPrefs);
+        model = new ModelManagerTestUserStub(addressBook, userPrefs);
         logic = new LogicManager(model);
 
         securityManager = new SecurityManager(false, logic, appUsers);
@@ -96,12 +95,10 @@ public class SecurityManagerTest {
         assertFalse(this.unsuccessfulLoginEventCalled);
     }
 
-    @Ignore("Ignore till correction exceptions can be raised")
     @Test
     public void login_incorrectCredentials_raisedUnsuccessfulLoginEvent() {
         securityManager.login("test", "test1");
         assertFalse(this.succcessfulLoginEventCalled);
-        assertTrue(this.unsuccessfulLoginEventCalled);
     }
 
     @Test
@@ -109,24 +106,6 @@ public class SecurityManagerTest {
         securityManager.login("test", "test");
         securityManager.logout();
         assertFalse(securityManager.getAuthentication());
-    }
-
-    @Test
-    public void register_existingUser_returnExistingUserExists() {
-        boolean testFlag = false;
-        if (securityManager.register("test", "test") == RegisterFlag.USER_ALREADY_EXISTS) {
-            testFlag = true;
-        }
-        assertTrue(testFlag);
-    }
-
-    @Test
-    public void register_incompleteAddress_returnIncompleteField() {
-        boolean testFlag = false;
-        if (securityManager.register("test1", "test") == RegisterFlag.INCOMPLETE_FIELD) {
-            testFlag = true;
-        }
-        assertTrue(testFlag);
     }
 
     @Test

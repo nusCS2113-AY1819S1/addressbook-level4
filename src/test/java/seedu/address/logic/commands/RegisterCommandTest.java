@@ -59,7 +59,7 @@ public class RegisterCommandTest {
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(RegisterCommand.MESSAGE_DUPLICATE_PERSON);
-        RegisterCommand.execute(modelStub, commandHistory);
+        registerCommand.execute(modelStub, commandHistory);
     }
 
     @Test
@@ -90,6 +90,12 @@ public class RegisterCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+        private User user;
+
+        public ModelStub() {
+            this.user = null;
+        }
+
         @Override
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
@@ -192,7 +198,7 @@ public class RegisterCommandTest {
 
         @Override
         public User getUser() {
-            throw new AssertionError("This method should not be called.");
+            return user;
         }
 
         @Override

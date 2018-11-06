@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
@@ -22,14 +23,18 @@ public class PersonUtil {
      * Returns an add command string for adding the {@code person}.
      */
     public static String getRegisterCommand(Person person) {
-        return RegisterCommand.COMMAND_WORD + " " + getPersonDetails(person);
+        return RegisterCommand.COMMAND_WORD + " " + PREFIX_USERNAME + person.getName().toString() + " "
+                + PREFIX_PASSWORD + "testtest" + " " + PREFIX_EMAIL + person.getEmail().toString() + " "
+                + PREFIX_PHONE + person.getPhone().toString() + " " + PREFIX_ADDRESS + person.getAddress();
     }
 
     /**
      * Returns an add command alias string for adding the {@code person}.
      */
     public static String getRegisterCommandAlias(Person person) {
-        return RegisterCommand.COMMAND_WORD_ALIAS + " " + getPersonDetails(person);
+        return RegisterCommand.COMMAND_WORD_ALIAS + " " + PREFIX_USERNAME + person.getName().toString() + " "
+                + PREFIX_PASSWORD + "testtest" + " " + PREFIX_EMAIL + person.getEmail().toString() + " "
+                + PREFIX_PHONE + person.getPhone().toString() + " " + PREFIX_ADDRESS + person.getAddress();
     }
 
     /**

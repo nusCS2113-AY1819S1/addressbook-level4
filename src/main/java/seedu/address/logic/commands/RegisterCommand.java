@@ -51,7 +51,7 @@ public class RegisterCommand extends Command {
     public RegisterCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
-        this.password = "test";
+        this.password = "testtest";
     }
 
     /**
