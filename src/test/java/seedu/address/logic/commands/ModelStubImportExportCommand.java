@@ -13,12 +13,12 @@ import seedu.address.testutil.TypicalPersons;
 /**
  * A Model stub explicitly for import-command testing.
  */
-public class ModelStubImportCommandTest extends ModelStub {
+public class ModelStubImportExportCommand extends ModelStub {
     private Person person;
     private User user;
     private final TimeTable timeTable;
 
-    public ModelStubImportCommandTest() {
+    public ModelStubImportExportCommand() {
         person = TypicalPersons.TEST;
         user = new User(person.getData());
         timeTable = new TimeTable();

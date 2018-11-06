@@ -52,7 +52,7 @@ public class ImportCommandTest {
 
     @Test
     public void execute_tooLongFile_throwsCommandException() throws Exception {
-        ModelStubImportCommandTest actualModelStub = new ModelStubImportCommandTest();
+        ModelStubImportExportCommand actualModelStub = new ModelStubImportExportCommand();
 
         Command command = new ImportCommand(INVALID_FILE_PATH_TOO_LONG);
 
@@ -63,7 +63,7 @@ public class ImportCommandTest {
 
     @Test
     public void execute_missingFile_throwsCommandException() throws Exception {
-        ModelStubImportCommandTest actualModelStub = new ModelStubImportCommandTest();
+        ModelStubImportExportCommand actualModelStub = new ModelStubImportExportCommand();
         Command command = new ImportCommand(MISSING_FILE);
 
         thrown.expect(CommandException.class);
@@ -74,7 +74,7 @@ public class ImportCommandTest {
 
     @Test
     public void execute_noICalendarDataFile_showsMessageEmpty() throws Exception {
-        ModelStubImportCommandTest actualModelStub = new ModelStubImportCommandTest();
+        ModelStubImportExportCommand actualModelStub = new ModelStubImportExportCommand();
         Command command = new ImportCommand(NO_DATA_FILE);
 
         CommandResult commandResult = command.execute(actualModelStub, commandHistory);
@@ -85,7 +85,7 @@ public class ImportCommandTest {
 
     @Test
     public void execute_noTimeTableDataFile_showsMessageEmpty() throws Exception {
-        ModelStubImportCommandTest actualModelStub = new ModelStubImportCommandTest();
+        ModelStubImportExportCommand actualModelStub = new ModelStubImportExportCommand();
         Command command = new ImportCommand(NO_TT_DATA_FILE);
 
         CommandResult commandResult = command.execute(actualModelStub, commandHistory);
@@ -95,7 +95,7 @@ public class ImportCommandTest {
 
     @Test
     public void execute_emptyFile_showsMessageEmpty() throws Exception {
-        ModelStubImportCommandTest actualModelStub = new ModelStubImportCommandTest();
+        ModelStubImportExportCommand actualModelStub = new ModelStubImportExportCommand();
         Command command = new ImportCommand(EMPTY_FILE);
 
         CommandResult commandResult = command.execute(actualModelStub, commandHistory);
@@ -111,7 +111,7 @@ public class ImportCommandTest {
     public void execute_validFilePath_importSuccessful() throws Exception {
         TimeTable expectedTimeTable = VALID_TIMETABLE;
 
-        ModelStubImportCommandTest actualModelStub = new ModelStubImportCommandTest();
+        ModelStubImportExportCommand actualModelStub = new ModelStubImportExportCommand();
 
         Command command = new ImportCommand(VALID_FILE); //VALID_FILE contains the equivalent of VALID_TIMETABLE
         CommandResult commandResult = command.execute(actualModelStub, commandHistory);
@@ -129,7 +129,7 @@ public class ImportCommandTest {
     @Test
     public void execute_exportAndThenImport_successful() throws Exception {
 
-        ModelStubImportCommandTest actualModelStub = new ModelStubImportCommandTest();
+        ModelStubImportExportCommand actualModelStub = new ModelStubImportExportCommand();
         actualModelStub.updateTimeTable(VALID_TIMETABLE);
 
         Command exportCommand = new ExportCommand(TEMP_FILE); //export timetable to temp file.
