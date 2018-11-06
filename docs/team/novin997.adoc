@@ -1,0 +1,64 @@
+= Novin Tong Yong Kang - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Student Management System
+
+---
+
+== Overview
+
+*Student Management System (SMS)* is a desktop application which uses CLI for its interactions. SMS allows university lectures
+to easily organise and manage their students and classes by allowing the lectures to easily import student lists given by their department.
+*SMS also provides* neat features such as distributing students into groups, sending emails to them and assigning test grades, SMS makes being a university lecturer more convenient!
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to execute scripts from Text File*
+** What it does: The Text File will contain multiple lines of the commands parameter that the lecturer would like to execute
+** Justification: This feature improves the product significantly because now the lecturer do not need to manually add students into the Student Management System.
+** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+** Credits: FileUtils (Apache Commons IO 2.5 API)
+
+* *Minor enhancement*:
+** The `scripts` folder location can be set in the Preferences.json. If the `scripts` folder in the Preferences.json is not valid, the default scripts location will be used.
+** Upon initializing the program if the scripts folder is missing, the folder will be automatically generated.
+** If the `Script Command` run the Text File with either the wrong command selected or invalid parameters, a log file will be automatically generated to indicate which line, the command has failed to execute
+* *Code contributed*: [https://github.com/novin997/main[GitHub]],[https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=novin997&sort=displayName&since=2018-09-12&until=2018-11-02&timeframe=day&reverse=false&repoSort=true[RepoSense]]
+
+* *Other contributions*:
+** Enhancements to existing features:
+*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
+** Tools:
+*** Integrated a third party library (Natty) to the project (https://github.com[#42])
+*** Integrated a new Github plugin (CircleCI) to the team repo
+
+_{you can add/remove categories in the list above}_
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=ScriptCommand]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=ScriptCommand]
+
+
+
+

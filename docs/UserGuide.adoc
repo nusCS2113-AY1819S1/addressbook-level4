@@ -279,6 +279,7 @@ Examples:
 * `add n/John Doe g/M nat/SG p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `a n/Betsy Crowe g/female nat/MY t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+// tag::ScriptCommand[]
 === Execute multiples of the same Command using text file : `script` `scr`
 
 Get all the commands parameters from a text file and execute them +
@@ -300,6 +301,7 @@ Examples:
 
 * `script txt/addgroups c/creategroup`
 * `scr txt/addpersons c/add`
+// end::ScriptCommand[]
 
 === Listing all persons : `list` `l`
 
