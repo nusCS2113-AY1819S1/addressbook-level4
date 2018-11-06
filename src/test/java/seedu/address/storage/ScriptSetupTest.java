@@ -44,12 +44,12 @@ public class ScriptSetupTest {
 
         scriptSetup = new ScriptSetup();
 
-        testAddGroupsFile = new File(FileUtil.getRootLocation() + FileUtilTest.TestFileLocation
+        testAddGroupsFile = new File(FileUtil.getRootLocation() + FileUtilTest.TEST_FILE_LOCATION
                 + scriptSetup.ADD_GROUPS_FILE);
 
         FileUtil.writeToTextFile(testAddGroupsFile, ScriptsGenerator.getGroupCommand());
 
-        testAddPersonsFile = new File(FileUtil.getRootLocation() + FileUtilTest.TestFileLocation
+        testAddPersonsFile = new File(FileUtil.getRootLocation() + FileUtilTest.TEST_FILE_LOCATION
                 + scriptSetup.ADD_PERSONS_FILE);
 
         FileUtil.writeToTextFile(testAddPersonsFile, ScriptsGenerator.getAddCommand());

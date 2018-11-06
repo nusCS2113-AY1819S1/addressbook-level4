@@ -16,7 +16,7 @@ import org.junit.rules.ExpectedException;
 import seedu.address.testutil.Assert;
 
 public class FileUtilTest {
-    public static final String TestFileLocation = "/src/test/data/ScriptFiles/";
+    public static final String TEST_FILE_LOCATION = "/src/test/data/ScriptFiles/";
 
     private static final String TestMessage = "HelloWorld\n";
     private static final String helloWorldText = "HelloWorld";
@@ -43,7 +43,7 @@ public class FileUtilTest {
         ClassLoader classLoader = getClass().getClassLoader();
 
         File helloWorldTestFile = new File(FileUtil.getRootLocation()
-                + TestFileLocation + helloWorldText + TextExtension);
+                + TEST_FILE_LOCATION + helloWorldText + TextExtension);
         File helloWorldFile = new File(FileUtil.getRootLocation()
                 + SCRIPTS_LOCATION + helloWorldText + TextExtension);
 
@@ -57,7 +57,7 @@ public class FileUtilTest {
     @Test
     public void writeToTextFile_fail_throwException() throws IOException {
         File readOnlyFile = new File(FileUtil.getRootLocation()
-                 + TestFileLocation + ReadOnlyFile + TextExtension);
+                 + TEST_FILE_LOCATION + ReadOnlyFile + TextExtension);
         readOnlyFile.setWritable(false);
         thrown.expect(IOException.class);
         thrown.expectMessage("File '" + readOnlyFile + "' cannot be written to");
