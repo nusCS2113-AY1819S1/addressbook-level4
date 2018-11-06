@@ -100,6 +100,16 @@ public class LogicManager extends ComponentManager implements Logic {
         return new ListElementPointer(history.getHistory());
     }
 
+    @Override
+    public ObservableList<Candidate> getMasterCandidateList() {
+        return model.getMasterCandidateList();
+    }
+
+    @Override
+    public ObservableList<JobOffer> getMasterJobList() {
+        return model.getMasterJobList();
+    }
+
     @Subscribe
     private void handleCompanyListDetailsPanelSelectionChangedEvent(CompanyListDetailsPanelSelectionChangedEvent
                                                                             event) {

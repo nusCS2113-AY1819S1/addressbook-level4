@@ -59,7 +59,14 @@ public interface Model {
      */
     void updateCandidate(Candidate target, Candidate editedCandidate);
 
-    /** Returns an unmodifiable view of the filtered candidate list. */
+    /**
+     * Returns an unmodifiable view of the master candidate list
+     */
+    ObservableList<Candidate> getMasterCandidateList();
+
+    /**
+     * Returns an unmodifiable view of the filtered candidate list.
+     * */
     ObservableList<Candidate> getFilteredCandidateList();
 
     /**
@@ -132,6 +139,10 @@ public interface Model {
      */
     void updateCompany(Company target, Company editedCompany);
 
+    /** Cascade company name changes to job offers
+     */
+    void cascadeToJobOffers(CompanyName targetName, CompanyName editedName);
+
     /** Returns an unmodifiable view of the filtered company list */
     ObservableList<Company> getFilteredCompanyList();
 
@@ -142,7 +153,6 @@ public interface Model {
 
     /** Returns the Company object based on @param index
      */
-
     public Company getCompanyFromIndex(int index);
 
     /**
@@ -209,7 +219,14 @@ public interface Model {
      */
     void deleteJobOffer(JobOffer target);
 
-    /** Returns an unmodifiable view of the filtered job lists of all companies */
+    /**
+     * Returns an unmodifiable view of the master job list
+     */
+    ObservableList<JobOffer> getMasterJobList();
+
+    /**
+     * Returns an unmodifiable view of the filtered job lists of all companies
+     */
     ObservableList<JobOffer> getFilteredCompanyJobList();
 
     /**

@@ -84,6 +84,9 @@ public class EditCompanyCommand extends Command {
         }
 
         model.updateCompany(companyToEdit, editedCompany);
+        if (companyToEdit.getCompanyName() != editedCompany.getCompanyName()) {
+            model.cascadeToJobOffers(companyToEdit.getCompanyName(), editedCompany.getCompanyName());
+        }
         model.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
         model.commitCompanyBook();
         return new CommandResult(String.format(MESSAGE_EDIT_COMPANY_SUCCESS, editedCompany));

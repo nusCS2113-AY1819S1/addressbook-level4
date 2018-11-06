@@ -254,6 +254,11 @@ public class CommandTestUtil {
         }
 
         @Override
+        public ObservableList<Candidate> getMasterCandidateList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Candidate> getFilteredCandidateList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -315,6 +320,11 @@ public class CommandTestUtil {
 
         @Override
         public void updateCompany(Company target, Company editedCompany) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void cascadeToJobOffers(CompanyName targetName, CompanyName editedName) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -390,6 +400,11 @@ public class CommandTestUtil {
 
         @Override
         public void deleteJobOffer(JobOffer jobOffer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<JobOffer> getMasterJobList() {
             throw new AssertionError("This method should not be called.");
         }
 

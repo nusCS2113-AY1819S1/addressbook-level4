@@ -375,7 +375,8 @@ Additionally, it implements the following operations to support the editing of j
 * `UniqueJobList#setJobOffer(JobOffer target, JobOffer editedJobOffer)` — Replaces the Job Offer object(target) in the `internalList` to the newly edited Job Offer object(editedJobOffer) through `List#set(int index, E element)`.
 
 These operations are exposed in the `Model` interface as `Model#hasJobOffer(JobOffer jobOffer)` and `Model#updateJobOffer(JobOffer target, JobOffer editedJobOffer)` respectively.
-
+[NOTE]
+If you try to edit the job offer to have a company name that does not exist in the book, it will trigger a command exception!
 [NOTE]
 The editing of all three entities (Candidate, Company, JobOffer) follow the same mechanism.
 
