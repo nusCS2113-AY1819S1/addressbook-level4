@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -30,6 +31,8 @@ import seedu.recruit.commons.events.ui.SwitchBookRequestEvent;
 import seedu.recruit.logic.Logic;
 import seedu.recruit.logic.commands.SwitchBookCommand;
 import seedu.recruit.model.UserPrefs;
+import seedu.recruit.model.candidate.Candidate;
+import seedu.recruit.model.joboffer.JobOffer;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -43,6 +46,8 @@ public class MainWindow extends UiPart<Stage> {
     private static final String FXML = "MainWindow.fxml";
     private static String currentBook = "candidateBook";
     private final Logger logger = LogsCenter.getLogger(getClass());
+    private final ObservableList<Candidate> masterCandidateList;
+    private final ObservableList<JobOffer> masterJobList;
 
     private Stage primaryStage;
 
@@ -55,6 +60,8 @@ public class MainWindow extends UiPart<Stage> {
     private EmailPreview emailPreview;
     private CandidateDetailsPanel candidateDetailsPanel;
     private CompanyJobDetailsPanel companyJobDetailsPanel;
+    private MasterCandidateListPanel masterCandidateListPanel;
+    private MasterJobListPanel masterJobListPanel;
     private ShortlistPanel shortlistPanel;
 
     @FXML
@@ -71,6 +78,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane panelViewPlaceholder;
+
+    @FXML
+    private StackPane masterListPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -95,6 +105,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
         registerAsAnEventHandler(this);
 
+        masterCandidateList = logic.getMasterCandidateList();
+        masterJobList = logic.getMasterJobList();
         helpWindow = new HelpWindow();
         emailPreview = new EmailPreview();
     }
@@ -143,7 +155,7 @@ public class MainWindow extends UiPart<Stage> {
      * fills up all the other placeholders of this window.
      */
     void fillInnerParts() {
-
+        masterListPlaceholder.getChildren().add(getMasterCandidateListPanel().getRoot());
         panelViewPlaceholder.getChildren().add(getCandidateDetailsPanel().getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
@@ -266,6 +278,16 @@ public class MainWindow extends UiPart<Stage> {
         return companyJobDetailsPanel;
     }
 
+    private MasterCandidateListPanel getMasterCandidateListPanel() {
+        masterCandidateListPanel = new MasterCandidateListPanel(masterCandidateList);
+        return masterCandidateListPanel;
+    }
+
+    private MasterJobListPanel getMasterJobListPanel() {
+        masterJobListPanel = new MasterJobListPanel(masterJobList);
+        return masterJobListPanel;
+    }
+
     private ShortlistPanel getShortlistPanel() {
         shortlistPanel = new ShortlistPanel(logic.getFilteredPersonList(), logic.getFilteredCompanyList(),
                 logic.getFilteredCompanyJobList());
@@ -274,6 +296,10 @@ public class MainWindow extends UiPart<Stage> {
 
     private StackPane getPanelViewPlaceholder() {
         return panelViewPlaceholder;
+    }
+
+    private StackPane getMasterListPlaceholder() {
+        return masterListPlaceholder;
     }
 
     public static String getDisplayedBook() {
@@ -295,6 +321,28 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Switches the view on masterListPlaceholder
+     * from Master Job List to Master Candidate List.
+     */
+    private void switchToMasterCandidateList() {
+        if (!getMasterListPlaceholder().getChildren().isEmpty()) {
+            getMasterListPlaceholder().getChildren().remove(0);
+            getMasterListPlaceholder().getChildren().add(getMasterCandidateListPanel().getRoot());
+        }
+    }
+
+    /**
+     * Switches the view on masterListPlaceholder
+     * from Master Candidate List to Master Job List.
+     */
+    private void switchToMasterJobList() {
+        if (!getMasterListPlaceholder().getChildren().isEmpty()) {
+            getMasterListPlaceholder().getChildren().remove(0);
+            getMasterListPlaceholder().getChildren().add(getMasterJobListPanel().getRoot());
+        }
+    }
+
+    /**
      * Switches the view on panelViewPlaceholder
      * from Company Book to Candidate Book.
      */
@@ -303,6 +351,7 @@ public class MainWindow extends UiPart<Stage> {
             getPanelViewPlaceholder().getChildren().remove(0);
             getPanelViewPlaceholder().getChildren().add(getCandidateDetailsPanel().getRoot());
             setDisplayedBookToCandidateBook();
+            switchToMasterCandidateList();
         }
     }
 
@@ -315,6 +364,7 @@ public class MainWindow extends UiPart<Stage> {
             getPanelViewPlaceholder().getChildren().remove(0);
             getPanelViewPlaceholder().getChildren().add(getCompanyJobDetailsPanel().getRoot());
             setDisplayedBookToCompanyBook();
+            switchToMasterJobList();
         }
     }
 
