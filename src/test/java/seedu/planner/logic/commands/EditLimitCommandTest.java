@@ -97,7 +97,27 @@ public class EditLimitCommandTest {
         assertCommandFailure(editLimitCommand, model, commandHistory, expectedMessage);
     }
 
+    @Test
+    public void executeUndoRedo_validLimitEditedExecution_success() throws Exception {
+        Limit originalLimit = new LimitBuilder(LIMIT_100).build();
+        Limit editedLimit = new LimitBuilder(LIMIT_500).build();
+        model.addLimit(originalLimit);
+        EditLimitCommand editLimitCommand = new EditLimitCommand(editedLimit);
+        Model expectedModel = new ModelManager(model.getFinancialPlanner(), new UserPrefs());
+        expectedModel.updateLimit(originalLimit, editedLimit);
+        expectedModel.commitFinancialPlanner();
 
+        // delete -> first limit deleted
+        editLimitCommand.execute(model, commandHistory);
+
+        // undo -> reverts financialplanner back to previous state.
+        expectedModel.undoFinancialPlanner();
+        assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
+
+        // redo -> same first limit deleted again
+        expectedModel.redoFinancialPlanner();
+        assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
+    }
 
     @Test
     public void equals() {
