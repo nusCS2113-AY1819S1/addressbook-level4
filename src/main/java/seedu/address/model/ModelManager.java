@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -13,10 +15,16 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.export.CsvWriter;
+import seedu.address.export.Export;
+import seedu.address.export.ExportManager;
+import seedu.address.export.ImportManager;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.todo.Todo;
+import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.XmlAddressBookStorage;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -181,6 +189,35 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //=========== Import/ Export ==============================================================================
+    @Override
+    public void importAddressBook() throws IOException, DataConversionException {
+        ImportManager importManager = new ImportManager(Paths.get("data", "export.xml"));
+
+        // TODO: refactor
+        // TODO: dont use null in orElse()
+        ReadOnlyAddressBook roab = importManager.readAddressBook().orElse(null);
+
+        ObservableList<Person> persons = roab.getPersonList();
+        persons.forEach((person) -> {
+            // TODO: explain why this instead of addPerson() above in developer guide (indicate ab changed at the end)
+            versionedAddressBook.addPerson(person);
+        });
+        ObservableList<Todo> todos = roab.getTodoList();
+        todos.forEach((todo) -> {
+            versionedAddressBook.addTodo(todo);
+        });
+
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredTodoList(PREDICATE_SHOW_ALL_TODOS);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void exportFilteredAddressBook() throws IOException {
+        Export export = new ExportManager(filteredPersons, filteredTodos, userPrefs.getExportFilePath());
+        export.saveFilteredAddressBook();
+    }
+
     @Override
     public void exportAddressBook() throws IOException {
         CsvWriter csvWriter = new CsvWriter(versionedAddressBook.getPersonList(), userPrefs.getExportCsvFilePath());

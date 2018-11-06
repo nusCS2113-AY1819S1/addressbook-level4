@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.todo.Todo;
@@ -85,6 +86,18 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+
+    //=========== Import/ Export ==============================================================================
+    // TODO: Update the header below
+    /**
+     * Imports from a xml file.
+     */
+    void importAddressBook() throws IOException, DataConversionException;
+
+    /**
+     * Exports the current filtered person list to a xml file.
+     */
+    void exportFilteredAddressBook() throws IOException;
 
     /**
      * Exports the current address book state to a .csv file.
