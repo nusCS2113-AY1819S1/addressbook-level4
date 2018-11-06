@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.planner.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.planner.logic.commands.FindTagCommand.MESSAGE_SUCCESS;
+import static seedu.planner.logic.commands.FindTagCommand.convertKeywordsToMessage;
 import static seedu.planner.testutil.TypicalRecords.CAIFAN;
 import static seedu.planner.testutil.TypicalRecords.INDO;
 import static seedu.planner.testutil.TypicalRecords.ZT;
@@ -68,7 +69,7 @@ public class FindTagCommandTest {
         FindTagCommand command = new FindTagCommand(predicate, keywords);
         expectedModel.updateFilteredRecordList(predicate);
         String expectedMessage = String.format(MESSAGE_SUCCESS,
-                expectedModel.getFilteredRecordList().size(), command.convertKeywordsToSuccessMessage());
+                expectedModel.getFilteredRecordList().size(), convertKeywordsToMessage(keywords));
         assertCommandSuccess(command, model, commandHistory, expectedMessage , expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredRecordList());
     }
@@ -81,7 +82,7 @@ public class FindTagCommandTest {
         FindTagCommand command = new FindTagCommand(predicate, keywords);
         expectedModel.updateFilteredRecordList(predicate);
         String expectedMessage = String.format(MESSAGE_SUCCESS,
-                expectedModel.getFilteredRecordList().size(), command.convertKeywordsToSuccessMessage());
+                expectedModel.getFilteredRecordList().size(), convertKeywordsToMessage(keywords));
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(INDO, CAIFAN, ZT), model.getFilteredRecordList());
     }

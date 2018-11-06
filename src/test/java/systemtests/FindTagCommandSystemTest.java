@@ -1,11 +1,19 @@
 package systemtests;
 
 import static org.junit.Assert.assertFalse;
-import static seedu.planner.commons.core.Messages.MESSAGE_RECORDS_LISTED_OVERVIEW;
+import static seedu.planner.logic.commands.FindTagCommand.MESSAGE_SUCCESS;
+import static seedu.planner.logic.commands.FindTagCommand.convertKeywordsToMessage;
 import static seedu.planner.testutil.TypicalRecords.CAIFAN;
 import static seedu.planner.testutil.TypicalRecords.IDA;
 import static seedu.planner.testutil.TypicalRecords.INDO;
 import static seedu.planner.testutil.TypicalRecords.ZT;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.junit.Test;
 
@@ -17,6 +25,8 @@ import seedu.planner.logic.commands.UndoCommand;
 import seedu.planner.model.Model;
 
 public class FindTagCommandSystemTest extends FinancialPlannerSystemTest {
+
+    private final static Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     @Test
     public void find() {
@@ -152,9 +162,18 @@ public class FindTagCommandSystemTest extends FinancialPlannerSystemTest {
      * @see FinancialPlannerSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(String command, Model expectedModel) {
-        String expectedResultMessage = String.format(
-                MESSAGE_RECORDS_LISTED_OVERVIEW, expectedModel.getFilteredRecordList().size());
+        /*command = command.trim();
+        command = command.substring(8);
+        String[] keywords = command.split("\\s+");*/
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(command.trim());
+        matcher.matches();
+        final String commandWord = matcher.group("commandWord").toLowerCase();
+        final String arguments = matcher.group("arguments");
 
+        String[] keywords = (arguments.trim()).split("\\s+");
+
+        String expectedResultMessage = String.format(
+                MESSAGE_SUCCESS, expectedModel.getFilteredRecordList().size(), convertKeywordsToMessage(keywords));
 
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);

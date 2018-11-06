@@ -20,6 +20,21 @@ public class FindTagCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "%1$d records listed matching tags: %2$s.\n";
 
+    /**
+     * Convert list of keywords to a string for displaying success message.
+     * @return
+     */
+    public static String convertKeywordsToMessage(String[] keywords) {
+        StringBuilder message = new StringBuilder();
+        for (String keyword: keywords) {
+            message.append("[").append(keyword.toLowerCase()).append("], ");
+        }
+
+        String newMessage = message.toString();
+        newMessage = newMessage.substring(0, newMessage.length() - 2);
+        return newMessage;
+    }
+
     private final String[] keywords;
 
     private final TagsContainsKeywordsPredicate predicate;
@@ -29,27 +44,12 @@ public class FindTagCommand extends Command {
         this.keywords = keywords;
     }
 
-    /**
-     * Convert list of keywords to a string for displaying success message.
-     * @return
-     */
-    protected String convertKeywordsToSuccessMessage() {
-        StringBuilder message = new StringBuilder();
-        for (String keyword: keywords) {
-            message.append("[").append(keyword).append("], ");
-        }
-
-        String newMessage = message.toString();
-        newMessage = newMessage.substring(0, newMessage.length() - 2);
-        return newMessage;
-    }
-
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredRecordList(predicate);
         return new CommandResult(String.format(MESSAGE_SUCCESS,
-                model.getFilteredRecordList().size(), convertKeywordsToSuccessMessage()));
+                model.getFilteredRecordList().size(), convertKeywordsToMessage(keywords)));
     }
 
     @Override
