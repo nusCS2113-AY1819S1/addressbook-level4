@@ -24,7 +24,6 @@ import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.candidate.Education;
 import seedu.recruit.model.candidate.Gender;
 import seedu.recruit.model.candidate.UniqueCandidateList;
-import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
 import seedu.recruit.model.joboffer.AgeRange;
 import seedu.recruit.model.joboffer.Job;
@@ -40,7 +39,7 @@ public class EditJobDetailsCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": NOTE: Enter \"listC\" first to see the full list"
             + " of job offers to edit!\n"
-            +"Edits the details of the job offer identified "
+            + "Edits the details of the job offer identified "
             + "by the index number used in the displayed job offer list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -116,14 +115,16 @@ public class EditJobDetailsCommand extends Command {
                                                  EditJobOfferDescriptor editJobOfferDescriptor) {
         assert jobOfferToEdit != null;
 
-        CompanyName updatedCompanyName = editJobOfferDescriptor.getCompanyName().orElse(jobOfferToEdit.getCompanyName());
+        CompanyName updatedCompanyName =
+                editJobOfferDescriptor.getCompanyName().orElse(jobOfferToEdit.getCompanyName());
         Job updatedJob = editJobOfferDescriptor.getJob().orElse(jobOfferToEdit.getJob());
         Gender updatedGender = editJobOfferDescriptor.getGender().orElse(jobOfferToEdit.getGender());
         AgeRange updatedAgeRange = editJobOfferDescriptor.getAgeRange().orElse(jobOfferToEdit.getAgeRange());
         Education updatedEducation = editJobOfferDescriptor.getEducation().orElse(jobOfferToEdit.getEducation());
         Salary updatedSalary = editJobOfferDescriptor.getSalary().orElse(jobOfferToEdit.getSalary());
         UniqueCandidateList candidateList = jobOfferToEdit.getUniqueCandidateList();
-        return new JobOffer(updatedCompanyName, updatedJob, updatedGender, updatedAgeRange, updatedEducation, updatedSalary,
+        return new JobOffer(
+                updatedCompanyName, updatedJob, updatedGender, updatedAgeRange, updatedEducation, updatedSalary,
                 candidateList);
     }
 
