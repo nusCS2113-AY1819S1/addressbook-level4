@@ -39,6 +39,10 @@ public class FileUtil {
      * @param filename A string representing the file path. Cannot be null.
      */
     public static boolean isValidXmlFilename(String filename) {
+        if (filename.length() <= XML_FILE_EXTENSION.length()) {
+            return false;
+        }
+
         // Compares the filename extension with the expected xml file extension
         return filename.substring(filename.length() - XML_FILE_EXTENSION.length()).equals(XML_FILE_EXTENSION);
     }
