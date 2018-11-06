@@ -324,6 +324,11 @@ public class CommandTestUtil {
         }
 
         @Override
+        public void cascadeToJobOffers(CompanyName targetName, CompanyName editedName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void sortCompanies(Prefix prefix) {
             throw new AssertionError("This method should not be called.");
         }
