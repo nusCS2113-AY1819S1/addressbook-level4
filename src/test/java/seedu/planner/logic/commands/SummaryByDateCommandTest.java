@@ -77,7 +77,8 @@ public class SummaryByDateCommandTest {
 
     @Test
     public void execute_inputDateRangeNotOverlappingWithDataDateRange_noSummaryList() {
-        // Too far in the future -> no summaryList found
+        // sampleFutureStartDate > sampleEndDate & sampleFutureEndDate > sampleFutureStartDate
+        // -> no summaryList found
         SummaryByDateCommand command =
                 new SummaryByDateCommand(sampleFutureStartDate, sampleFutureEndDate);
 
@@ -91,7 +92,8 @@ public class SummaryByDateCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredRecordList());
         assertEquals(summaryList, eventListenerStub.getSummaryList());
 
-        // Too far in the past -> no summaryList found
+        // samplePastEndDate < sampleStartDate & samplePastStartDate < samplePastEndDate
+        // -> no summaryList found
         command = new SummaryByDateCommand(samplePastStartDate, samplePastEndDate);
 
         command.execute(model, commandHistory);
@@ -107,41 +109,14 @@ public class SummaryByDateCommandTest {
 
     @Test
     public void execute_inputDateRangeOverlappingWithDataDateRange_summaryList() {
-        // Start date is within date range but not end date -> summaryList of overlapping records
-        SummaryByDateCommand command =
-                new SummaryByDateCommand(sampleStartDate, sampleFutureEndDate);
-
-        command.execute(model, commandHistory);
-        expectedModel.updateFilteredRecordList(
-                new DateIsWithinIntervalPredicate(sampleStartDate, sampleFutureEndDate));
-        SummaryList summaryList = new SummaryByDateList(expectedModel.getFilteredRecordList());
-        String expectedMessage = String.format(SummaryByDateCommand.MESSAGE_SUCCESS, summaryList.size());
-
-        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(expectedModel.getFilteredRecordList(), model.getFilteredRecordList());
-        assertEquals(summaryList, eventListenerStub.getSummaryList());
-
-        // End date is within date range but not start date -> summaryList of overlapping records
-        command = new SummaryByDateCommand(samplePastStartDate, sampleEndDate);
-
-        command.execute(model, commandHistory);
-        expectedModel.updateFilteredRecordList(
-                new DateIsWithinIntervalPredicate(samplePastStartDate, sampleEndDate));
-        summaryList = new SummaryByDateList(expectedModel.getFilteredRecordList());
-        expectedMessage = String.format(SummaryByDateCommand.MESSAGE_SUCCESS, summaryList.size());
-
-        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(expectedModel.getFilteredRecordList(), model.getFilteredRecordList());
-        assertEquals(summaryList, eventListenerStub.getSummaryList());
-
         // Start date and end date are both within date range -> summaryList of all records in range
-        command = new SummaryByDateCommand(sampleStartDate, sampleEndDate);
+        SummaryByDateCommand command = new SummaryByDateCommand(sampleStartDate, sampleEndDate);
 
         command.execute(model, commandHistory);
         expectedModel.updateFilteredRecordList(
                 new DateIsWithinIntervalPredicate(sampleStartDate, sampleEndDate));
-        summaryList = new SummaryByDateList(expectedModel.getFilteredRecordList());
-        expectedMessage = String.format(SummaryByDateCommand.MESSAGE_SUCCESS, summaryList.size());
+        SummaryList summaryList = new SummaryByDateList(expectedModel.getFilteredRecordList());
+        String expectedMessage = String.format(SummaryByDateCommand.MESSAGE_SUCCESS, summaryList.size());
 
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(expectedModel.getFilteredRecordList(), model.getFilteredRecordList());
