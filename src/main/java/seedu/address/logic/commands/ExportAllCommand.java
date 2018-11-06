@@ -38,7 +38,6 @@ public class ExportAllCommand extends Command {
         requireNonNull(model);
 
         try {
-            // TODO: reset to original form
             model.exportAddressBook();
         } catch (IOException e) {
             throw new CommandException(MESSAGE_FAILURE);
