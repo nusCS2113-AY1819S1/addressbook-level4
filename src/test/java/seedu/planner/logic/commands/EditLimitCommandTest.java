@@ -9,7 +9,7 @@ import static seedu.planner.testutil.TypicalLimits.LIMIT_500;
 import static seedu.planner.testutil.TypicalLimits.LIMIT_ALL_DIFFERENT;
 import static seedu.planner.testutil.TypicalLimits.LIMIT_SINGLE_DATE_100;
 import static seedu.planner.testutil.TypicalLimits.LIMIT_SINGLE_DATE_500;
-import static seedu.planner.testutil.TypicalLimits.LIMIT_SINGLE_DATE_All_DIFF;
+import static seedu.planner.testutil.TypicalLimits.LIMIT_SINGLE_DATE_ALL_DIFF;
 import static seedu.planner.testutil.TypicalRecords.getTypicalFinancialPlanner;
 
 import org.junit.Test;
@@ -80,7 +80,7 @@ public class EditLimitCommandTest {
     @Test
     public void execute_hasNoSameSingleDateLimitInside_fail() {
         Limit editedLimit = new LimitBuilder(LIMIT_SINGLE_DATE_100).build();
-        Limit originalLimit = new LimitBuilder(LIMIT_SINGLE_DATE_All_DIFF).build();
+        Limit originalLimit = new LimitBuilder(LIMIT_SINGLE_DATE_ALL_DIFF).build();
         EditLimitCommand editLimitCommand = new EditLimitCommand(editedLimit);
         String expectedMessage = Messages.MESSAGE_LIMITS_DO_NOT_EXIST;
         model.addLimit(originalLimit);
