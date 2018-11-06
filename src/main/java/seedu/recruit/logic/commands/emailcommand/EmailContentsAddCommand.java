@@ -44,12 +44,17 @@ public class EmailContentsAddCommand extends EmailContentsCommand {
         StringBuilder contents = new StringBuilder("Contents added:\n");
         generateContents(emailUtil, contents);
 
+        //Check if both recipients string and duplicate string is empty
+        if (duplicates.toString().equals("Unable to add the following because it already has been added before:\n")
+            && contents.toString().equals("Recipients added:\n")) {
+            return new CommandResult("ERROR: Nothing was selected!\n" + MESSAGE_USAGE);
+        }
+
         //Generate output string
         StringBuilder output = new StringBuilder();
         generateOutput(hasDuplicates, output, duplicates, contents);
         return new CommandResult(output.toString());
     }
-
 
     /**
      * generates output string
