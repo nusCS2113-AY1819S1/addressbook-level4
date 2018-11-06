@@ -272,6 +272,22 @@ public class DistributeUtil {
         return Index.fromZeroBased(0);
     }
 
+    /**
+     * This method returns the index of the particular person in the address book.
+     * @param person : The person to search for.
+     * @return Return the Index value of the person.
+     */
+    public Index returnPersonIndex(Person person, Model model) {
+        requireAllNonNull(person, model);
+        ObservableList<Person> allPerson = model.getFilteredPersonList();
+        for (int i = 0; i < allPerson.size(); i++) {
+            if (person.isSamePerson(allPerson.get(i))) {
+                return Index.fromZeroBased(i);
+            }
+        }
+        return Index.fromZeroBased(0);
+    }
+
 
     /**
      * This Method Create the require group by the user and add the specific person into the group.
