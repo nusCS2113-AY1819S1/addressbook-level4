@@ -29,8 +29,7 @@ public class UndoableCommandHistory {
     public String getCommand() {
         if (undoableCommandList.empty()) {
             return "EMPTY";
-        }
-        else {
+        } else {
             return undoableCommandList.pop();
         }
     }
