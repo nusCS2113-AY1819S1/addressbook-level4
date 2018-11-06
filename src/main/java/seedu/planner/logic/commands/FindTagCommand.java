@@ -20,6 +20,15 @@ public class FindTagCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "%1$d records listed matching tags: %2$s.\n";
 
+    private final String[] keywords;
+
+    private final TagsContainsKeywordsPredicate predicate;
+
+    public FindTagCommand(TagsContainsKeywordsPredicate predicate, String[] keywords) {
+        this.predicate = predicate;
+        this.keywords = keywords;
+    }
+
     /**
      * Convert list of keywords to a string for displaying success message.
      * @return
@@ -33,15 +42,6 @@ public class FindTagCommand extends Command {
         String newMessage = message.toString();
         newMessage = newMessage.substring(0, newMessage.length() - 2);
         return newMessage;
-    }
-
-    private final String[] keywords;
-
-    private final TagsContainsKeywordsPredicate predicate;
-
-    public FindTagCommand(TagsContainsKeywordsPredicate predicate, String[] keywords) {
-        this.predicate = predicate;
-        this.keywords = keywords;
     }
 
     @Override
