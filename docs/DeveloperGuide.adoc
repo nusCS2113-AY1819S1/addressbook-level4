@@ -521,7 +521,7 @@ Each Algorithm serve different purposes.
 * Distribute Students Randomly with equal numbers
 * Distribute Students Randomly with Balanced Gender
 * Distribute Students Randomly with Balanced Nationality
-* Distribute Students Randomly with Balanced Gender & Nationality (Coming in v1.4)
+* Distribute Students Randomly with Balanced Gender & Nationality (Coming in v2.0)
 
 Every Algorithm will require inputs such as:
 ****
