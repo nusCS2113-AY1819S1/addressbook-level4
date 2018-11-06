@@ -15,49 +15,45 @@ The system also allows for automated processes such as `scripts` to execute any 
 Other notable features include sending of `emails`, adding `tests marks`, assigning `grades` and `automatic group distribution` based on gender or nationality.
 
 == Summary of contributions
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=rajdeepsh[Code]]
+* *Main Feature*: *Groups*
+** *Functionality*: Added *the ability to create groups*
+*** What it does: Allows the lecturer to create a groups in the student management system and displays the groups created on a separate panel.
+*** Justification: This feature is necessary as it allows the lecturer to have a list of all his modules/tutorial groups.
+*** Highlights: This feature required an in-depth analysis of storage alternatives as storing group data in a separate xml file would be more modular but difficult to implement, given our time constraints.
 
-* *New Feature*: Added *the ability to create groups*
-** What it does: Allows the lecturer to create groups in the student management system and displays the groups created on a separate panel.
-** Justification: This feature is necessary as it allows the lecturer to organize the management system.
-** Highlights: This feature required an in-depth analysis of storage alternatives as storing group data in a separate xml file would be more modular but difficult to implement, given our time constraints.
+** *Functionality*: Added *the ability to select groups*
+*** What it does: Allows the lecturer to select groups in the student management system via a CLI command and displays the students in the group selected on a separate panel.
+*** Justification: This feature was implemented to allow for some flexibility when it comes to inputs as some lecturers may prefer typing over clicking.
+*** Highlights: This feature was to be paired later on with a find group feature, but due to time constraints find group was not implemented.
 
-* *New Feature*: Added *the ability to select groups*
-** What it does: Allows the lecturer to create groups in the student management system and displays the groups created on a separate panel.
-** Justification: This feature is necessary as it allows the lecturer to organize the management system.
-** Highlights: This feature required an in-depth analysis of storage alternatives as storing group data in a separate xml file would be more modular but difficult to implement, given our time constraints.
+** *Functionality*: Added *the ability to add students to groups*
+*** What it does: Allows the lecturer to add students to existing groups in the student management system.
+*** Justification: This feature is necessary as it allows the lecturer to have a list of students in a particular module/tutorial group.
+*** Highlights: This feature was to be further improved by synchronizing it with the edit command - e.g. if a person is edited in the
+student management system, that person would also be edited in all the groups he/she is in by simply removing the old person and adding the updated person. However,
+ due to time constraints, it was not further improved.
 
-* *New Feature*: Added *the ability to add students to groups*
-** What it does: Allows the lecturer to create groups in the student management system and displays the groups created on a separate panel.
-** Justification: This feature is necessary as it allows the lecturer to organize the management system.
-** Highlights: This feature required an in-depth analysis of storage alternatives as storing group data in a separate xml file would be more modular but difficult to implement, given our time constraints.
+** *Functionality*: Added *the ability to delete groups*
+*** What it does: Allows the lecturer to remove groups from the student management system.
+*** Justification: This feature is necessary as it allows the lecturer to organize/edit the management system.
 
-* *New Feature*: Added *the ability to delete groups*
-** What it does: Allows the lecturer to create groups in the student management system and displays the groups created on a separate panel.
-** Justification: This feature is necessary as it allows the lecturer to organize the management system.
-** Highlights: This feature required an in-depth analysis of storage alternatives as storing group data in a separate xml file would be more modular but difficult to implement, given our time constraints.
-
-* *New Feature*: Added *the ability to delete students from groups*
-** What it does: Allows the lecturer to create groups in the student management system and displays the groups created on a separate panel.
-** Justification: This feature is necessary as it allows the lecturer to organize the management system.
-** Highlights: This feature required an in-depth analysis of storage alternatives as storing group data in a separate xml file would be more modular but difficult to implement, given our time constraints.
+** *Functionality*: Added *the ability to delete students from groups*
+*** What it does: Allows the lecturer to remove students from groups in the student management system.
+*** Justification: This feature is necessary as it allows the lecturer to organize/edit the management system.
+*** Highlights: This feature was to be further improved by synchronizing it with the delete command - e.g. if a person is deleted in the
+student management system, that person would also be deleted in all the groups he/she is in. However,
+ due to time constraints, it was not further improved.
 
 * *Other contributions*:
 
-** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
 ** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Add command word alias's (shortcut's) to all commands for a small local-impact enhancement (Pull requests https://github.com/CS2113-AY1819S1-T13-4/main/pull/10[#10])
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Add all initial user stories and use cases for all functions  (Pull requests https://github.com/CS2113-AY1819S1-T13-4/main/pull/7[#7])
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-T13-4/main/pull/81[#81], https://github.com/CS2113-AY1819S1-T13-4/main/pull/74[#74], https://github.com/CS2113-AY1819S1-T13-4/main/pull/54[#54], https://github.com/CS2113-AY1819S1-T13-4/main/pull/46[#46], https://github.com/CS2113-AY1819S1-T13-4/main/pull/31[#31]
+*** Reported bugs and suggestions for other teams in the class (https://github.com/CS2113-AY1819S1-W13-3/main/issues/88[1], https://github.com/CS2113-AY1819S1-W13-3/main/issues/81[2], https://github.com/CS2113-AY1819S1-W13-3/main/issues/75[3], https://github.com/CS2113-AY1819S1-W13-3/main/issues/70[4])
 
 == Contributions to the User Guide
 
