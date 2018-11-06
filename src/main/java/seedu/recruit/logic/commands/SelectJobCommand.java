@@ -7,8 +7,8 @@ import java.util.List;
 import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
+import seedu.recruit.commons.events.ui.FocusOnCompanyBookRequestEvent;
 import seedu.recruit.commons.events.ui.JumpToCompanyJobListRequestEvent;
-import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.exceptions.CommandException;
@@ -22,7 +22,7 @@ import seedu.recruit.model.joboffer.JobOffer;
  */
 public class SelectJobCommand extends Command {
 
-    public static final String COMMAND_WORD = "selectJob";
+    public static final String COMMAND_WORD = "selectj";
 
     public static final String COMMAND_LOGIC_STATE_FOR_SHORTLIST = "SelectJobForShortlist";
 
@@ -69,7 +69,6 @@ public class SelectJobCommand extends Command {
          * If user is inside Shortlist command, user can only select jobs from a selected company.
          */
         if (ShortlistCandidateInitializationCommand.isShortlisting()) {
-            //selectedJobOffer = getSelectedJobFromSelectedCompany();
             EventsCenter.getInstance().post(new JumpToCompanyJobListRequestEvent(targetIndex));
             LogicManager.setLogicState(SelectCandidateCommand.COMMAND_LOGIC_STATE);
             return new CommandResult(String.format(MESSAGE_SELECT_JOB_SUCCESS,
@@ -81,7 +80,6 @@ public class SelectJobCommand extends Command {
          * If user is inside DeleteShortlistedCandidate command, user can only select jobs from a selected company.
          */
         if (DeleteShortlistedCandidateInitializationCommand.isDeleting()) {
-            //selectedJobOffer = getSelectedJobFromSelectedCompany();git
             EventsCenter.getInstance().post(new JumpToCompanyJobListRequestEvent(targetIndex));
             LogicManager.setLogicState(DeleteShortlistedCandidateCommand.COMMAND_LOGIC_STATE);
             return new CommandResult(String.format(MESSAGE_SELECT_JOB_SUCCESS,
@@ -89,22 +87,10 @@ public class SelectJobCommand extends Command {
                     + DeleteShortlistedCandidateCommand.MESSAGE_USAGE);
         }
 
-        EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
+        EventsCenter.getInstance().post(new FocusOnCompanyBookRequestEvent());
         EventsCenter.getInstance().post(new JumpToCompanyJobListRequestEvent(targetIndex));
         return new CommandResult(String.format(MESSAGE_SELECT_JOB_SUCCESS, targetIndex.getOneBased()));
     }
-
-    /*public JobOffer getSelectedJobFromSelectedCompany() throws CommandException {
-        List<JobOffer> filteredCompanyJobList =
-                SelectCompanyCommand.getSelectedCompany().getUniqueJobList().getInternalList();
-
-        if (targetIndex.getZeroBased() >= filteredCompanyJobList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_JOB_OFFER_DISPLAYED_INDEX);
-        }
-
-        selectedJobOffer = filteredCompanyJobList.get(targetIndex.getZeroBased());
-        return selectedJobOffer;
-    }*/
 
     @Override
     public boolean equals(Object other) {

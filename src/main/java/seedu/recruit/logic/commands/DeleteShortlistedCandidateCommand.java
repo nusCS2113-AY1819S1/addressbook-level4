@@ -52,22 +52,22 @@ public class DeleteShortlistedCandidateCommand extends Command {
         Company selectedCompany = SelectCompanyCommand.getSelectedCompany();
         JobOffer selectedJob = SelectJobCommand.getSelectedJobOffer();
 
-        // There are no candidates inside the list of shortlisted candidates.
+        // If there are no candidates inside the list of shortlisted candidates.
         if (selectedJob.getObservableCandidateList().isEmpty()) {
             LogicManager.setLogicState("primary");
             return new CommandResult(MESSAGE_EMPTY_LIST);
         }
 
-        // targetIndex exceeds the size of the shortlisted candidate list
+        // If targetIndex exceeds the size of the shortlisted candidate list
         if (targetIndex.getZeroBased() >= selectedJob.getObservableCandidateList().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Candidate selectedCandidate = selectedJob.getObservableCandidateList().get(targetIndex.getZeroBased());
-        Candidate selectedUnshortlistedCandidate = removeShortlistTag(selectedCandidate);
+        Candidate removedShortlistedTagFromCandidate = removeShortlistTag(selectedCandidate);
 
         model.deleteShortlistedCandidateFromJobOffer(selectedCandidate, selectedJob);
-        model.updateCandidate(selectedCandidate, selectedUnshortlistedCandidate);
+        model.updateCandidate(selectedCandidate, removedShortlistedTagFromCandidate);
         model.commitCompanyBook();
         model.commitCandidateBook();
 
@@ -77,7 +77,7 @@ public class DeleteShortlistedCandidateCommand extends Command {
 
         LogicManager.setLogicState("primary");
         return new CommandResult(String.format(MESSAGE_DELETE_CANDIDATE_SUCCESS,
-                selectedUnshortlistedCandidate.getName().fullName, selectedJob.getJob().value,
+                removedShortlistedTagFromCandidate.getName().fullName, selectedJob.getJob().value,
                 selectedCompany.getCompanyName().value));
     }
 

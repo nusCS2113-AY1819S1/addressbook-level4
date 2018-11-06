@@ -11,6 +11,7 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_SALARY;
 
 import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
+import seedu.recruit.commons.events.ui.ShowUpdatedCompanyJobListRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
@@ -71,6 +72,8 @@ public class AddJobDetailsCommand extends Command {
         }
         model.addJobOffer(toAdd);
         model.commitCompanyBook();
+        EventsCenter.getInstance().post(new ShowUpdatedCompanyJobListRequestEvent(
+                model.getFilteredCompanyJobList().size()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

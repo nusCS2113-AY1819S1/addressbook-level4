@@ -27,7 +27,6 @@ public class StartAddJobCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
-
         LogicManager.setLogicState("Add Job Interface");
         return new CommandResult(AddJobDetailsCommand.MESSAGE_USAGE);
     }

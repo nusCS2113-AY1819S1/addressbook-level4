@@ -3,10 +3,9 @@ package seedu.recruit.commons.events.ui;
 import seedu.recruit.commons.events.BaseEvent;
 
 /**
- * An event requesting to view the Company Book.
- * Deselects whatever selection made on screen.
+ * An event requesting to fetch the latest update of job list.
  */
-public class ShowCompanyBookRequestEvent extends BaseEvent {
+public class ShowUpdatedCandidateListRequestEvent extends BaseEvent {
 
     @Override
     public String toString() {
