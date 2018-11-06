@@ -32,10 +32,6 @@ public class JsonLoginInfoStorage implements LoginInfoStorage {
      * @throws DataConversionException if the file format is not as expected.
      */
     public Optional<LoginInfoManager> readLoginInfo(Path prefsFilePath) throws DataConversionException {
-        //delete the 3 line below (just for bug purpose only)
-        LoginInfoManager testing = JsonUtil.readJsonFile(prefsFilePath, LoginInfoManager.class).get ();
-        System.out.println ("this is at JsonLoginInfoStorage");
-        System.out.println (testing);
         return JsonUtil.readJsonFile(prefsFilePath, LoginInfoManager.class);
     }
 

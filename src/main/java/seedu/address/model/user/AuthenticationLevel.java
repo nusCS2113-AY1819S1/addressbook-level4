@@ -5,7 +5,7 @@ import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_ACCO
 import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_ADMIN;
 import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_MANAGER;
 import static seedu.address.authentication.AuthenticationLevelConstant.AUTH_STOCK_TAKER;
-
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 
 /**
@@ -24,17 +24,12 @@ public class AuthenticationLevel {
 
     public AuthenticationLevel(String authenticationLevel) {
         requireNonNull(authenticationLevel);
+        checkArgument(isAuthenticationLevelValid (authenticationLevel), MESSAGE_AUTHENTICATIONLEVEL_CONSTRAINTS);
         this.authenticationLevel = authenticationLevel;
     }
 
     /**
      * Returns true if a given string is a valid name.
-     */
-    /**
-     * Returns true if authentication level is enum.
-     *
-     * @param authenticationLevel User input when create account
-     * @return
      */
     public static boolean isAuthenticationLevelValid(String authenticationLevel) {
         if (authenticationLevel.equals (AUTH_ADMIN)
@@ -49,12 +44,6 @@ public class AuthenticationLevel {
     @Override
     public String toString () {
         return authenticationLevel;
-    }
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AuthenticationLevel // instanceof handles nulls
-                && authenticationLevel.equals(((AuthenticationLevel) other).authenticationLevel)); // state check
     }
     public boolean equals(String userName) {
         return this.authenticationLevel.equals (authenticationLevel);

@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.drink.exceptions.DrinkNotFoundException;
 import seedu.address.model.drink.exceptions.DuplicateDrinkException;
 import seedu.address.model.drink.exceptions.DuplicateNameException;
+import seedu.address.model.drink.exceptions.InsufficientQuantityException;
 
 /**
  * A list of drinks that enforces uniqueness between its elements and does not allow nulls.
@@ -48,6 +49,7 @@ public class UniqueDrinkList implements Iterable<Drink> {
     }
 
 
+    // TODO: check if this is needed
     /**
      * Edits the {@code target} drink's name attribute.
      * {@code target} must exist in the list.
@@ -136,6 +138,7 @@ public class UniqueDrinkList implements Iterable<Drink> {
 
     /**
      * Returns true if {@code drinks} contains only unique drinks.
+     * Unique is defined by the drink's name, as in {@code isSameDrink}.
      */
     private boolean drinksAreUnique(List<Drink> drinks) {
         for (int i = 0; i < drinks.size() - 1; i++) {
@@ -152,7 +155,7 @@ public class UniqueDrinkList implements Iterable<Drink> {
      * Returns the reference to drink in inventory as specified by {@code drink}
      * Pre-condition: drink must exit in inventory list.
      */
-    public Drink find(Drink drink) {
+    public Drink findByName(Drink drink) {
         requireNonNull(drink);
         for (Drink d : internalList) {
             if (d.isSameDrink(drink)) {
@@ -162,4 +165,31 @@ public class UniqueDrinkList implements Iterable<Drink> {
 
         throw new DrinkNotFoundException();
     }
+
+    /**
+     * Increases the quantity of the {@code drink} by {@code quantityToUpdate}
+     */
+    public void increaseQuantity(Drink drink, Quantity quantityToUpdate) {
+        Drink actualDrink = findByName(drink);
+        actualDrink.increaseQuantity(quantityToUpdate);
+    }
+
+    /**
+     * Decreases the quantity of the {@code drink} by {@code quantityToUpdate}
+     */
+    public void decreaseQuantity(Drink drink, Quantity quantityToUpdate) throws InsufficientQuantityException {
+        Drink actualDrink = findByName(drink);
+        actualDrink.decreaseQuantity(quantityToUpdate);
+    }
+
+    public Price getSellingPrice(Drink drink) {
+        Drink actualDrink = findByName(drink);
+        return actualDrink.getRetailPrice();
+    }
+
+    public Price getCostPrice(Drink drink) {
+        Drink actualDrink = findByName(drink);
+        return actualDrink.getCostPrice();
+    }
+
 }

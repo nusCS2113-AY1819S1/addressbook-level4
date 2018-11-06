@@ -26,7 +26,6 @@ import seedu.address.commons.events.ui.LogoutEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.controller.LoginController;
 import seedu.address.init.InventoryListInitializer;
 import seedu.address.logic.Logic;
 import seedu.address.model.LoginInfoManager;
@@ -42,6 +41,7 @@ import seedu.address.storage.logininfo.JsonLoginInfoStorage;
 import seedu.address.storage.logininfo.LoginInfoStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiPart;
+import seedu.address.ui.controller.LoginController;
 
 
 
@@ -52,7 +52,6 @@ public class MainApp extends Application {
 
     public static final Version VERSION = new Version(0, 7, 0, true);
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
-
 
     protected Ui ui;
     protected Logic logic;

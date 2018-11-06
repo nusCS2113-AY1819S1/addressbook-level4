@@ -57,7 +57,7 @@ public class LogicManager extends ComponentManager implements Logic {
                 command = managerParser.parseCommand(commandText);
             } else {
                 command = null; //TODO: CHANGE
-                //command = addressBookParser.parseCommand(commandText);
+                //command = addressBookParser.isCommandNeedToConfirm(commandText);
             }
             return command.execute(model, history);
         } finally {

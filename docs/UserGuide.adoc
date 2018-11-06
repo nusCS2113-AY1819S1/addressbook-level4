@@ -424,8 +424,8 @@ You should see a value displayed in the results panel.
 
 
 === Filtering popular items `[Coming in v1.4]`
-=== Viewing an item�s transactions `[Coming in v1.4]`
-=== Viewing an item�s cost, revenue and profit `[Coming in v1.4]`
+=== Viewing an item's transactions `[Coming in v1.4]`
+=== Viewing an item's cost, revenue and profit `[Coming in v1.4]`
 
 == Setting Reminders `[Coming in v1.4]`
 
@@ -579,9 +579,9 @@ View the total profit earned in time periods of a day, 7 days and 30 days.
 	Format: `profit`
 [NOTE]
 ====
-To view profit earned up to now in the current day, no parameters are used. i.e. just �profit�
-To view profit earned in last 7 days, append �-w�
-To view profit earned in last 30 days, append �-m�
+To view profit earned up to now in the current day, no parameters are used. i.e. just `profit`
+To view profit earned in last 7 days, append `-w`
+To view profit earned in last 30 days, append `-m`
 ====
 
 ==== Get the quantities of each drink item sold over specified periods: `sales` `[Coming in v1.4]`

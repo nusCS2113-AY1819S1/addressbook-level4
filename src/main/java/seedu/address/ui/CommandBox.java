@@ -14,6 +14,7 @@ import seedu.address.logic.ListElementPointer;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.ConfirmCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -128,23 +129,31 @@ public class CommandBox extends UiPart<Region> {
      * Handles the Enter button pressed event.
      */
     @FXML
-    private void handleCommandEntered() {
+    private void handleCommandEntered() throws ParseException {
         if (commandEntered.isEmpty ()) {
             commandEntered = commandTextField.getText ();
-            EventsCenter.getInstance ().post (new NewResultAvailableEvent(
-                                                String.format (CONFIRMATION_OF_COMMAND_MESSAGE , commandEntered)));
+            ConfirmCommandParser confirmCommandParser = new ConfirmCommandParser ();
+            if (!confirmCommandParser.isCommandNeedToConfirm (commandEntered)) {
+                handleConfirmCommand ();
+                commandEntered = "";
+                commandTextField.setText ("");
+                return;
+            }
+            EventsCenter.getInstance ().post (new NewResultAvailableEvent (
+                    String.format (CONFIRMATION_OF_COMMAND_MESSAGE , commandEntered)));
             commandTextField.setText ("");
         } else {
             if (checkCommandConfirmation (commandTextField.getText ())) {
-                handleConfirmCommand();
+                handleConfirmCommand ();
                 commandEntered = "";
                 commandTextField.setText ("");
             } else {
-                EventsCenter.getInstance ().post (new NewResultAvailableEvent(FAILURE_TO_CONFIRM_COMMAND_MESSAGE));
+                EventsCenter.getInstance ().post (new NewResultAvailableEvent (FAILURE_TO_CONFIRM_COMMAND_MESSAGE));
                 commandEntered = "";
                 commandTextField.setText ("");
             }
         }
+
     }
     //=============uncomment this if u find comfirmation is annoying and c
     // comment out the above two method handleCommandEntered and handleConfirmCommand============

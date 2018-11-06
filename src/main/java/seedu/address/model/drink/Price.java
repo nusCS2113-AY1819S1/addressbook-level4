@@ -41,7 +41,7 @@ public class Price {
      * Returns true if a given string is a valid price.
      */
     public static boolean isValidPrice(String test) {
-        return test.matches(PRICE_VALIDATION_REGEX) && Float.parseFloat(test) < Float.MAX_VALUE;
+        return test.matches(PRICE_VALIDATION_REGEX) && Double.parseDouble(test) < Float.MAX_VALUE;
     }
 
     @Override

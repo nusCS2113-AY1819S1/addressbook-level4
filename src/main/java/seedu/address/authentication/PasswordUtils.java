@@ -1,5 +1,5 @@
 package seedu.address.authentication;
-//@@author tianhang
+//@@author liu-tianhang
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
@@ -21,10 +21,8 @@ public class PasswordUtils {
 
 
     /**
-     * It hash password
-     * @param password
-     * @param salt complexity of hashed password
-     * @return
+     * Return {@code hashedPassword} after {@code password} is hashed with
+     *  {@code salt}
      */
     private static byte[] hash(char[] password, byte[] salt) {
         PBEKeySpec spec = new PBEKeySpec(password, salt, ITERATIONS, KEY_LENGTH);
@@ -40,34 +38,27 @@ public class PasswordUtils {
     }
 
     /**
-     *
-     * @param password
-     * @return hashed password
+     * Return {@code hashedPassword} base on {@code password}
      */
     public static String generateSecurePassword(String password) {
-        String returnValue = null;
+        String hashedPassword = null;
         byte[] securePassword = hash(password.toCharArray(), salt.getBytes());
 
-        returnValue = Base64.getEncoder().encodeToString(securePassword);
+        hashedPassword = Base64.getEncoder().encodeToString(securePassword);
 
-        return returnValue;
+        return hashedPassword;
     }
 
     /**
-     * Verify password Input
-     * @param providedPassword
-     * @param securedPassword
-     * @return
+     * Returns true of providedPassword is equal to securedPassword after hashing.
      */
     public static boolean verifyUserPassword(String providedPassword,
                                              String securedPassword) {
         boolean returnValue = false;
 
-        // Generate New secure password with the same salt
         String newSecurePassword = generateSecurePassword(providedPassword);
 
-        // Check if two passwords are equal
-        returnValue = newSecurePassword.equalsIgnoreCase(securedPassword);
+        returnValue = newSecurePassword.equals(securedPassword);
 
         return returnValue;
     }

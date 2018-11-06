@@ -20,7 +20,7 @@ public class AnalysisManager extends ComponentManager implements Analysis {
 
     @Override
     public Price analyseProfit() {
-        // TODO: stub
+        List<Transaction> transactions = transactionList.getTransactions();
         return null;
 
     }
