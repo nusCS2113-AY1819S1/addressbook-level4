@@ -13,9 +13,7 @@ import seedu.planner.logic.CommandHistory;
 import seedu.planner.model.Model;
 import seedu.planner.model.ModelManager;
 import seedu.planner.model.UserPrefs;
-import seedu.planner.model.record.Record;
 import seedu.planner.testutil.FinancialPlannerBuilder;
-import seedu.planner.testutil.RecordBuilder;
 
 public class SortCommandTest {
 
@@ -53,40 +51,36 @@ public class SortCommandTest {
     public void execute_emptyList_listIsUnchanged() {
         SortCommand command = new SortCommand("name", true);
         String expectedMessage = String.format(MESSAGE_SUCCESS,  "name", "ascending");
+
         assertCommandSuccess(command, emptyModel, commandHistory, expectedMessage, expectedEmptyModel);
     }
 
     @Test
     public void execute_listIsNotSorted_listIsSorted() {
-        String category = CATEGORY_DATE;
-        String order = ORDER_DESCENDING;
-        SortCommand command = new SortCommand(category, false);
-        String expectedMessage = String.format(MESSAGE_SUCCESS, category, order);
-        Model expectedSortedModel = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());
-        expectedSortedModel.sortFilteredRecordList(category, false);
+        SortCommand command = new SortCommand(CATEGORY_DATE, false);
+        String expectedMessage = String.format(MESSAGE_SUCCESS, CATEGORY_DATE, ORDER_DESCENDING);
+
+        // sort the initial model
+        Model expectedSortedModel = getSortedModel(model, CATEGORY_DATE, ORDER_DESCENDING);
+
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedSortedModel);
     }
 
     @Test
     public void execute_listIsSorted_listIsUnchanged() {
-        String category = CATEGORY_MONEY;
-        String order = ORDER_ASCENDING;
-        SortCommand command = new SortCommand(category, true);
-        String expectedMessage = String.format(MESSAGE_SUCCESS, category, order);
-        Model expectedSortedModel = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());
-        expectedSortedModel.sortFilteredRecordList(category, true);
-        assertCommandSuccess(command, expectedSortedModel, commandHistory, expectedMessage, expectedSortedModel);
+        SortCommand command = new SortCommand(CATEGORY_MONEY, true);
+        String expectedMessage = String.format(MESSAGE_SUCCESS, CATEGORY_MONEY, ORDER_ASCENDING);
+
+        // obtain a sorted model
+        Model initialSortedModel = getSortedModel(model, CATEGORY_MONEY, ORDER_ASCENDING);
+        /// try to sorted it again, result should be identical model
+        Model expectedModel = getSortedModel(initialSortedModel, CATEGORY_MONEY, ORDER_ASCENDING);
+
+        assertCommandSuccess(command, initialSortedModel, commandHistory, expectedMessage, expectedModel);
     }
 
-    @Test
-    public void execute_filteredListIsSorted_listIsUnchanged() {
-        String category = CATEGORY_NAME;
-        String order = ORDER_DESCENDING;
-        SortCommand command = new SortCommand(category, false);
-        String expectedMessage = String.format(MESSAGE_SUCCESS,  category, order);
-        Model expectedSortedModel = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());
-        expectedSortedModel.sortFilteredRecordList(category, false);
-        assertCommandSuccess(command, expectedSortedModel, commandHistory, expectedMessage, expectedSortedModel);
+    public Model getSortedModel(Model preSortedModel, String category, String order) {
+        preSortedModel.sortFilteredRecordList(category, (order == ORDER_ASCENDING));
+        return model;
     }
-
 }
