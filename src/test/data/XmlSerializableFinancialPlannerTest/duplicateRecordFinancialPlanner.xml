@@ -8,11 +8,11 @@
         <tagged>friends</tagged>
     </records>
 
-    <!-- Record with same identity as Payment for Indo -->
+    <!-- Record with same compulsory fields as Payment for Indo -->
     <records>
         <name>Payment for Indo</name>
         <date>10-3-2000</date>
-        <moneyFlow>+40.60</moneyFlow>
+        <moneyFlow>-5.80</moneyFlow>
     </records>
 
 </financialplanner>

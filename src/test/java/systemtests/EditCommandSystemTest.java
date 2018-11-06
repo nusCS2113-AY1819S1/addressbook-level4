@@ -73,7 +73,7 @@ public class EditCommandSystemTest extends FinancialPlannerSystemTest {
                 getModel().getFilteredRecordList().get(INDEX_FIRST_RECORD.getZeroBased()), editedRecord);
         assertCommandSuccess(command, model, expectedResultMessage);
 
-        /* Case: edit a record with new values same as existing values -> edited */
+        /* Case: edit a record with new values same as existing values but with different tags -> edited */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DATE_DESC_BOB
                 + MONEYFLOW_EXPENSE_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandSuccess(command, index, BOB);
@@ -87,14 +87,22 @@ public class EditCommandSystemTest extends FinancialPlannerSystemTest {
         editedRecord = new RecordBuilder(BOB).withName(VALID_NAME_AMY).build();
         assertCommandSuccess(command, index, editedRecord);
 
-        /* Case: edit a record with new values same as another record's values but with different date and income
+        /* Case: edit a record with new values same as another record's values but with different date
          * -> edited
          */
         index = INDEX_SECOND_RECORD;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DATE_DESC_AMY
+                + MONEYFLOW_EXPENSE_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+        editedRecord = new RecordBuilder(BOB).withDate(VALID_DATE_AMY).build();
+        assertCommandSuccess(command, index, editedRecord);
+
+        /* Case: edit a record with new values same as another record's values but with different moneyflow
+         * -> edited
+         */
+        index = INDEX_SECOND_RECORD;
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DATE_DESC_BOB
                 + MONEYFLOW_INCOME_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        editedRecord = new RecordBuilder(BOB).withDate(VALID_DATE_AMY)
-                .withMoneyFlow(VALID_MONEYFLOW_INCOME_AMY).build();
+        editedRecord = new RecordBuilder(BOB).withMoneyFlow(VALID_MONEYFLOW_INCOME_AMY).build();
         assertCommandSuccess(command, index, editedRecord);
 
         /* Case: clear tags -> cleared */
@@ -185,24 +193,9 @@ public class EditCommandSystemTest extends FinancialPlannerSystemTest {
                 + MONEYFLOW_EXPENSE_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_RECORD);
 
-        /* Case: edit a record with new values same as another record's values but with different tags -> rejected */
+        /* Case: edit a record with new values same as another record's values -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DATE_DESC_BOB
                 + MONEYFLOW_EXPENSE_DESC_BOB + TAG_DESC_HUSBAND;
-        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_RECORD);
-
-        /* Case: edit a record with new values same as another record's values but with different expense -> rejected */
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DATE_DESC_BOB
-                + MONEYFLOW_INCOME_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_RECORD);
-
-        /* Case: edit a record with new values same as another record's values but with different date -> rejected */
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DATE_DESC_AMY
-                + MONEYFLOW_EXPENSE_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_RECORD);
-
-        /* Case: edit a record with new values same as another record's values but with different income -> rejected */
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DATE_DESC_BOB
-                + MONEYFLOW_INCOME_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_RECORD);
     }
 
