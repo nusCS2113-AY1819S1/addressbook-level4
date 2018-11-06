@@ -169,6 +169,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addToAddressBook(ReadOnlyAddressBook addressBookToImported) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void exportFilteredAddressBook(Path exportFilePath) throws IOException {
             throw new AssertionError("This method should not be called.");
         }
