@@ -63,14 +63,12 @@ public class CalendarPanel extends UiPart<Region> {
         //currentDate.setLayoutY(0);
     }
 
-    private void setCalendar (Calendar calendar) {
-        System.out.println("The first day of the whole month is " + firstDay);
+    private void setOverview() {
+        //System.out.println("The first day of the whole month is " + firstDay);
         calendarView.setMinSize(200, 200);
         calendarView.setVgap(30);
         calendarView.setHgap(20);
         calendarView.setAlignment(Pos.CENTER);
-
-
         //calendarView.add(currentDate, 3, 0);
 
         for (int j = 0; j < 7; j++) {
@@ -111,6 +109,9 @@ public class CalendarPanel extends UiPart<Region> {
                 calendarView.add(text, 6, 0);
             }
         }
+    }
+
+    private void setDays () {
 
         int numOfDays;
         int week = 1;
@@ -139,6 +140,10 @@ public class CalendarPanel extends UiPart<Region> {
                 week++;
             }
         }
+    }
 
+    private void setCalendar (Calendar calendar) {
+        setOverview();
+        setDays();
     }
 }
