@@ -15,6 +15,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
+import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
 import seedu.recruit.model.joboffer.JobOffer;
@@ -31,6 +32,7 @@ public class AddJobDetailsCommandTest {
     public ExpectedException thrown = ExpectedException.none();
 
     private CommandHistory commandHistory = new CommandHistory();
+    private UserPrefs userPrefs = new UserPrefs();
 
     @Test
     public void constructor_nullJobOffer_throwsNullPointerException() {
@@ -46,7 +48,7 @@ public class AddJobDetailsCommandTest {
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddJobDetailsCommand.MESSAGE_COMPANY_NOT_FOUND);
-        addJobDetailsCommand.execute(modelStub, commandHistory);
+        addJobDetailsCommand.execute(modelStub, commandHistory, userPrefs);
     }
 
     @Test
@@ -56,7 +58,7 @@ public class AddJobDetailsCommandTest {
         ModelStubWithCompany modelStub = new ModelStubWithCompany(new CompanyBuilder()
                 .withCompanyName(jobOffer.getCompanyName().toString()).build(), new ArrayList<>());
 
-        CommandResult commandResult = new AddJobDetailsCommand(jobOffer).execute(modelStub, commandHistory);
+        CommandResult commandResult = new AddJobDetailsCommand(jobOffer).execute(modelStub, commandHistory, userPrefs);
 
         Company expectedCompany = new CompanyBuilder().withCompanyName(jobOffer.getCompanyName().toString()).build();
 
@@ -77,7 +79,7 @@ public class AddJobDetailsCommandTest {
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddJobDetailsCommand.MESSAGE_DUPLICATE_JOB_OFFER);
-        addJobDetailsCommand.execute(modelStub, commandHistory);
+        addJobDetailsCommand.execute(modelStub, commandHistory, userPrefs);
     }
 
     @Test

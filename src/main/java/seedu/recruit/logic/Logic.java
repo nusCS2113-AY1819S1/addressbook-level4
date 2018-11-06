@@ -25,7 +25,7 @@ public interface Logic {
     CommandResult execute(String commandText)
             throws CommandException, ParseException, IOException, GeneralSecurityException;
 
-    /** Returns an unmodifiable view of the filtered list of persons */
+    /** Returns an unmodifiable view of the filtered list of candidates */
     ObservableList<Candidate> getFilteredPersonList();
 
     /** Returns an unmodifiable view of the filtered list of companies */
@@ -33,6 +33,12 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of jobs offers */
     ObservableList<JobOffer> getFilteredCompanyJobList();
+
+    /** Returns an unmodifiable view of the master list of candidates */
+    ObservableList<Candidate> getMasterCandidateList();
+
+    /** Returns an unmodifiable view of the master list of jobs offers */
+    ObservableList<JobOffer> getMasterJobList();
 
     /** Returns the list of input entered by the user, encapsulated in a {@code ListElementPointer} object */
     ListElementPointer getHistorySnapshot();
