@@ -92,8 +92,14 @@ public class FinancialPlannerParser {
         case DeleteLimitCommand.COMMAND_WORD:
             return new DeleteLimitCommandParser().parse(arguments);
 
+        case DeleteMonthlyLimitCommand.COMMAND_WORD:
+            return new DeleteMonthlyLimitCommand();
+
         case EditLimitCommand.COMMAND_WORD:
             return new EditLimitCommandParser().parse(arguments);
+
+        case EditMonthlyLimitCommand.COMMAND_WORD:
+            return new EditMonthlyLimitCommandParser().parse(arguments);
 
         case CheckLimitCommand.COMMAND_WORD:
             return new CheckLimitCommand();
