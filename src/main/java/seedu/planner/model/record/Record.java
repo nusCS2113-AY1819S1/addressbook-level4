@@ -55,7 +55,7 @@ public class Record {
     }
 
     /**
-     * Returns true if both records of the same name have at least one other identity field that is the same.
+     * Returns true if both records of the same name have all 3 fields name, date and moneyflow to be the same
      * This defines a weaker notion of equality between two records.
      */
     public boolean isSameRecord(Record otherRecord) {
@@ -65,7 +65,8 @@ public class Record {
 
         return otherRecord != null
                 && otherRecord.getName().equals(getName())
-                && (otherRecord.getDate().equals(getDate()) || otherRecord.getMoneyFlow().equals(getMoneyFlow()));
+                && otherRecord.getDate().equals(getDate())
+                && otherRecord.getMoneyFlow().equals(getMoneyFlow());
     }
 
     /**

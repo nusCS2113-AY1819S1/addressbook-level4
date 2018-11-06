@@ -44,10 +44,9 @@ public class UniqueRecordListTest {
     }
 
     @Test
-    public void contains_recordWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_recordWithSameCompulsoryFieldsInList_returnsTrue() {
         uniqueRecordList.add(INDO);
-        Record editedAlice = new RecordBuilder(INDO).withMoneyFlow(VALID_MONEYFLOW_EXPENSE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        Record editedAlice = new RecordBuilder(INDO).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(uniqueRecordList.contains(editedAlice));
     }
 
@@ -92,18 +91,18 @@ public class UniqueRecordListTest {
     }
 
     @Test
-    public void setRecord_editedRecordHasSameIdentity_success() {
+    public void setRecord_editedRecordHasAtLeastOneDifferentField_success() {
         uniqueRecordList.add(INDO);
-        Record editedAlice = new RecordBuilder(INDO).withMoneyFlow(VALID_MONEYFLOW_EXPENSE_BOB)
+        Record editedIndo = new RecordBuilder(INDO).withMoneyFlow(VALID_MONEYFLOW_EXPENSE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
-        uniqueRecordList.setRecord(INDO, editedAlice);
+        uniqueRecordList.setRecord(INDO, editedIndo);
         UniqueRecordList expectedUniqueRecordList = new UniqueRecordList();
-        expectedUniqueRecordList.add(editedAlice);
+        expectedUniqueRecordList.add(editedIndo);
         assertEquals(expectedUniqueRecordList, uniqueRecordList);
     }
 
     @Test
-    public void setRecord_editedRecordHasDifferentIdentity_success() {
+    public void setRecord_editedRecordHasDifferentCompulsoryFields_success() {
         uniqueRecordList.add(INDO);
         uniqueRecordList.setRecord(INDO, BOB);
         UniqueRecordList expectedUniqueRecordList = new UniqueRecordList();

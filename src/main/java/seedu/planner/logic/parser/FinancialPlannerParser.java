@@ -6,7 +6,36 @@ import static seedu.planner.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.planner.logic.commands.*;
+
+import seedu.planner.logic.commands.AddCommand;
+import seedu.planner.logic.commands.AddLimitCommand;
+import seedu.planner.logic.commands.AddMonthlyLimitCommand;
+import seedu.planner.logic.commands.ArchiveCommand;
+import seedu.planner.logic.commands.CheckLimitCommand;
+import seedu.planner.logic.commands.ClearCommand;
+import seedu.planner.logic.commands.Command;
+import seedu.planner.logic.commands.DeleteByDateCommand;
+import seedu.planner.logic.commands.DeleteCommand;
+import seedu.planner.logic.commands.DeleteLimitCommand;
+import seedu.planner.logic.commands.DeleteMonthlyLimitCommand;
+import seedu.planner.logic.commands.EditCommand;
+import seedu.planner.logic.commands.EditLimitCommand;
+import seedu.planner.logic.commands.EditMonthlyLimitCommand;
+import seedu.planner.logic.commands.ExitCommand;
+import seedu.planner.logic.commands.ExportExcelCommand;
+import seedu.planner.logic.commands.FindCommand;
+import seedu.planner.logic.commands.FindTagCommand;
+import seedu.planner.logic.commands.HelpCommand;
+import seedu.planner.logic.commands.HistoryCommand;
+import seedu.planner.logic.commands.ImportExcelCommand;
+import seedu.planner.logic.commands.ListCommand;
+import seedu.planner.logic.commands.RedoCommand;
+import seedu.planner.logic.commands.SelectCommand;
+import seedu.planner.logic.commands.SortCommand;
+import seedu.planner.logic.commands.StatisticCommand;
+import seedu.planner.logic.commands.SummaryCommand;
+import seedu.planner.logic.commands.UndoCommand;
+
 import seedu.planner.logic.parser.exceptions.ParseException;
 
 
@@ -50,7 +79,7 @@ public class FinancialPlannerParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case DeleteCommandByDateEntry.COMMAND_WORD:
+        case DeleteByDateCommand.COMMAND_WORD:
             return new DeleteCommandByDateEntryParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:

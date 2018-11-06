@@ -16,8 +16,8 @@ import org.junit.rules.ExpectedException;
 
 import seedu.planner.logic.commands.AddCommand;
 import seedu.planner.logic.commands.ClearCommand;
+import seedu.planner.logic.commands.DeleteByDateCommand;
 import seedu.planner.logic.commands.DeleteCommand;
-import seedu.planner.logic.commands.DeleteCommandByDateEntry;
 import seedu.planner.logic.commands.EditCommand;
 import seedu.planner.logic.commands.ExitCommand;
 import seedu.planner.logic.commands.FindCommand;
@@ -63,9 +63,9 @@ public class FinancialPlannerParserTest {
 
     @Test
     public void parseCommand_deleteByDateEntry() throws Exception {
-        DeleteCommandByDateEntry command = (DeleteCommandByDateEntry) parser.parseCommand(
-                DeleteCommandByDateEntry.COMMAND_WORD + " " + TypicalDates.DATE_FIRST_INDEX_DATE.value);
-        assertEquals(new DeleteCommandByDateEntry(TypicalDates.DATE_FIRST_INDEX_DATE), command);
+        DeleteByDateCommand command = (DeleteByDateCommand) parser.parseCommand(
+                DeleteByDateCommand.COMMAND_WORD + " " + TypicalDates.DATE_FIRST_INDEX_DATE.value);
+        assertEquals(new DeleteByDateCommand(TypicalDates.DATE_FIRST_INDEX_DATE), command);
     }
 
     @Test
