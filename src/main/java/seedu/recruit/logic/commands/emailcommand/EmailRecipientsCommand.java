@@ -7,6 +7,7 @@ import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 
 /**
  * 2nd step of the Email command: selecting recipients
@@ -27,7 +28,8 @@ public class EmailRecipientsCommand extends Command {
     public static final String NEXT_RECIPIENTS_ERROR_NO_RECIPIENTS = "ERROR: There are no recipients selected!\n";
 
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory) throws ParseException {
+    public CommandResult execute(Model model, CommandHistory commandHistory, UserPrefs userPrefs)
+            throws ParseException {
         throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
     }
 }

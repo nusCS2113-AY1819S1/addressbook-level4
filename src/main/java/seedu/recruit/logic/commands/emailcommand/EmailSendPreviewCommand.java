@@ -9,6 +9,7 @@ import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 
 /**
  * This class handles the preview sub command of the send phase
@@ -16,7 +17,7 @@ import seedu.recruit.model.Model;
 public class EmailSendPreviewCommand extends EmailSendCommand {
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         EmailUtil emailUtil = model.getEmailUtil();
         updateRecipientsAndContents(emailUtil);
 

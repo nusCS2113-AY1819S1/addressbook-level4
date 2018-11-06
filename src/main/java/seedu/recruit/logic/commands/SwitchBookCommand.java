@@ -7,6 +7,7 @@ import seedu.recruit.commons.events.ui.SwitchBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 
 /**
  * Switches view between Candidate Book and Company Book
@@ -22,16 +23,20 @@ public class SwitchBookCommand extends Command {
     public static final String MESSAGE_SUCCESSFULLY_SWITCHED_TO_COMPANY_BOOK =
             "Switched to Company Book successfully.";
 
-    private static String MESSAGE_SUCCESS = " ";
+    private static String messageSuccess = " ";
+
+    public static String getMessage() {
+        return messageSuccess;
+    }
 
     public static void setMessage(String message) {
-        MESSAGE_SUCCESS = message;
+        messageSuccess = message;
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws CommandException {
         requireNonNull(model);
         EventsCenter.getInstance().post(new SwitchBookRequestEvent());
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(messageSuccess);
     }
 }

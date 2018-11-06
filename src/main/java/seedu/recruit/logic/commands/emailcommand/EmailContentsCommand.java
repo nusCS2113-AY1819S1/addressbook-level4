@@ -7,6 +7,7 @@ import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 
 /**
  * 3rd step of the Email command: selecting contents
@@ -26,7 +27,7 @@ public class EmailContentsCommand extends Command {
     public static final String NEXT_CONTENTS_ERROR_NO_CONTENTS = "ERROR: There are no contents selected!\n";
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws ParseException {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws ParseException {
         throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
     }
 }

@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -18,17 +19,21 @@ import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.GuiSettings;
 import seedu.recruit.commons.core.LogsCenter;
 import seedu.recruit.commons.events.ui.ExitAppRequestEvent;
+import seedu.recruit.commons.events.ui.FocusOnCandidateBookRequestEvent;
+import seedu.recruit.commons.events.ui.FocusOnCompanyBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowEmailPreviewEvent;
 import seedu.recruit.commons.events.ui.ShowHelpRequestEvent;
 import seedu.recruit.commons.events.ui.ShowLastViewedBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowShortlistPanelRequestEvent;
-import seedu.recruit.commons.events.ui.ShowUpdateJobListRequestEvent;
 import seedu.recruit.commons.events.ui.SwitchBookRequestEvent;
 import seedu.recruit.logic.Logic;
+import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.SwitchBookCommand;
 import seedu.recruit.model.UserPrefs;
+import seedu.recruit.model.candidate.Candidate;
+import seedu.recruit.model.joboffer.JobOffer;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -39,9 +44,16 @@ public class MainWindow extends UiPart<Stage> {
     //Tracks whether an instance of MainWindow exists
     private static boolean exists = false;
 
+    private static final String WELCOME_MESSAGE = "Welcome to RecruitBook!";
+
+    private static final String WELCOME_AUTHENTICATE_MESSAGE = "RecruitBook is password-protected.\n"
+            + "Enter admin password to continue.";
+
     private static final String FXML = "MainWindow.fxml";
     private static String currentBook = "candidateBook";
     private final Logger logger = LogsCenter.getLogger(getClass());
+    private final ObservableList<Candidate> masterCandidateList;
+    private final ObservableList<JobOffer> masterJobList;
 
     private Stage primaryStage;
 
@@ -54,6 +66,8 @@ public class MainWindow extends UiPart<Stage> {
     private EmailPreview emailPreview;
     private CandidateDetailsPanel candidateDetailsPanel;
     private CompanyJobDetailsPanel companyJobDetailsPanel;
+    private MasterCandidateListPanel masterCandidateListPanel;
+    private MasterJobListPanel masterJobListPanel;
     private ShortlistPanel shortlistPanel;
 
     @FXML
@@ -70,6 +84,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane panelViewPlaceholder;
+
+    @FXML
+    private StackPane masterListPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -94,6 +111,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
         registerAsAnEventHandler(this);
 
+        masterCandidateList = logic.getMasterCandidateList();
+        masterJobList = logic.getMasterJobList();
         helpWindow = new HelpWindow();
         emailPreview = new EmailPreview();
     }
@@ -142,10 +161,12 @@ public class MainWindow extends UiPart<Stage> {
      * fills up all the other placeholders of this window.
      */
     void fillInnerParts() {
-
+        masterListPlaceholder.getChildren().add(getMasterCandidateListPanel().getRoot());
         panelViewPlaceholder.getChildren().add(getCandidateDetailsPanel().getRoot());
 
-        ResultDisplay resultDisplay = new ResultDisplay();
+        ResultDisplay resultDisplay =
+                LogicManager.getState().nextCommand.equals("authenticate")
+                        ? new ResultDisplay(WELCOME_AUTHENTICATE_MESSAGE) : new ResultDisplay(WELCOME_MESSAGE);
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(
@@ -186,7 +207,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void clearResultDisplay() {
-        ResultDisplay resultDisplay = new ResultDisplay();
+        ResultDisplay resultDisplay = new ResultDisplay("");
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
     }
 
@@ -265,6 +286,16 @@ public class MainWindow extends UiPart<Stage> {
         return companyJobDetailsPanel;
     }
 
+    private MasterCandidateListPanel getMasterCandidateListPanel() {
+        masterCandidateListPanel = new MasterCandidateListPanel(masterCandidateList);
+        return masterCandidateListPanel;
+    }
+
+    private MasterJobListPanel getMasterJobListPanel() {
+        masterJobListPanel = new MasterJobListPanel(masterJobList);
+        return masterJobListPanel;
+    }
+
     private ShortlistPanel getShortlistPanel() {
         shortlistPanel = new ShortlistPanel(logic.getFilteredPersonList(), logic.getFilteredCompanyList(),
                 logic.getFilteredCompanyJobList());
@@ -273,6 +304,10 @@ public class MainWindow extends UiPart<Stage> {
 
     private StackPane getPanelViewPlaceholder() {
         return panelViewPlaceholder;
+    }
+
+    private StackPane getMasterListPlaceholder() {
+        return masterListPlaceholder;
     }
 
     public static String getDisplayedBook() {
@@ -294,6 +329,28 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Switches the view on masterListPlaceholder
+     * from Master Job List to Master Candidate List.
+     */
+    private void switchToMasterCandidateList() {
+        if (!getMasterListPlaceholder().getChildren().isEmpty()) {
+            getMasterListPlaceholder().getChildren().remove(0);
+            getMasterListPlaceholder().getChildren().add(getMasterCandidateListPanel().getRoot());
+        }
+    }
+
+    /**
+     * Switches the view on masterListPlaceholder
+     * from Master Candidate List to Master Job List.
+     */
+    private void switchToMasterJobList() {
+        if (!getMasterListPlaceholder().getChildren().isEmpty()) {
+            getMasterListPlaceholder().getChildren().remove(0);
+            getMasterListPlaceholder().getChildren().add(getMasterJobListPanel().getRoot());
+        }
+    }
+
+    /**
      * Switches the view on panelViewPlaceholder
      * from Company Book to Candidate Book.
      */
@@ -302,6 +359,7 @@ public class MainWindow extends UiPart<Stage> {
             getPanelViewPlaceholder().getChildren().remove(0);
             getPanelViewPlaceholder().getChildren().add(getCandidateDetailsPanel().getRoot());
             setDisplayedBookToCandidateBook();
+            switchToMasterCandidateList();
         }
     }
 
@@ -314,6 +372,7 @@ public class MainWindow extends UiPart<Stage> {
             getPanelViewPlaceholder().getChildren().remove(0);
             getPanelViewPlaceholder().getChildren().add(getCompanyJobDetailsPanel().getRoot());
             setDisplayedBookToCompanyBook();
+            switchToMasterJobList();
         }
     }
 
@@ -368,18 +427,46 @@ public class MainWindow extends UiPart<Stage> {
         handleEmailPreview(event.getEmailPreview());
     }
 
+    /**
+     * Switches book view.
+     * If you wish to deselect whatever the user has selected on screen, call this handler.
+     */
     @Subscribe
     private void handleShowCandidateBookEvent(ShowCandidateBookRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        if (currentBook.contentEquals("companyBook")) {
-            switchToCandidateBook();
-        }
+        switchToCandidateBook();
     }
 
+    /**
+     * Switches book view.
+     * If you wish to deselect whatever the user has selected on screen, call this handler.
+     */
     @Subscribe
     private void handleShowCompanyBookEvent(ShowCompanyBookRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         switchToCompanyBook();
+    }
+
+    /**
+     * If you DO NOT wish to deselect whatever the user has selected on screen, call this handler.
+     */
+    @Subscribe
+    private void handleFocusOnCompanyBookEvent(FocusOnCompanyBookRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        if (getDisplayedBook().contentEquals("candidateBook")) {
+            switchToCompanyBook();
+        }
+    }
+
+    /**
+     * If you DO NOT wish to deselect whatever the user has selected on screen, call this handler.
+     */
+    @Subscribe
+    private void handleFocusOnCandidateBookEvent(FocusOnCandidateBookRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        if (getDisplayedBook().contentEquals("companyBook")) {
+            switchToCandidateBook();
+        }
     }
 
     @Subscribe
@@ -406,9 +493,28 @@ public class MainWindow extends UiPart<Stage> {
         switchToLastViewedBook();
     }
 
+    /**
+     * If you wish to change the user's current view, call this handler.
+     * Handles the update of candidate list in Model Manager.
+     * This event does NOT check whether user is inside Candidate Book.
+     * Hence, it will overwrite whatever the user is currently viewing.
+     * @param event that updates candidate list
+
     @Subscribe
-    private void handleUpdateJobListEvent(ShowUpdateJobListRequestEvent event) {
-        switchToCompanyBook();
+    private void handleUpdateCandidateListEvent(ShowUpdatedCandidateListRequestEvent event) {
+        switchToCandidateBook(); //calling this function passes logic's getFilteredLists to UI's companyJobDetailsPanel
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
     }
+
+    /**
+     * If you wish to change the user's current view, call this handler.
+     * Handles the update of job list and company list in Model Manager.
+     * This event does NOT check whether user is inside Company Book.
+     * Hence, it will overwrite whatever the user is currently viewing.
+     * @param event that updates job list or company list
+    @Subscribe
+    private void handleUpdateCompanyJobListEvent(ShowUpdatedCompanyJobListRequestEvent event) {
+        switchToCompanyBook(); //calling this function passes logic's getFilteredLists to UI's companyJobDetailsPanel
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+    } */
 }
