@@ -10,15 +10,16 @@ import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 
 /**
- *  Starts the 2-step process of adding a job offer
+ *  Starts the add company interface
+ *  Users can continue adding companies until in this interface until user inputs 'cancel'
  */
 
-public class AddJobCommand extends Command {
-    public static final String COMMAND_WORD = "addj";
+public class StartAddCompanyCommand extends Command {
+    public static final String COMMAND_WORD = "addC";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a job offer to the RecruitBook. ";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Starts the add company interface. ";
 
-    public AddJobCommand() {
+    public StartAddCompanyCommand() {
 
     }
 
@@ -27,10 +28,8 @@ public class AddJobCommand extends Command {
         requireNonNull(model);
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
 
-        LogicManager.setLogicState("AddJobDetails");
-        return new CommandResult(AddJobDetailsCommand.MESSAGE_USAGE);
+        LogicManager.setLogicState("Add Company Interface");
+        return new CommandResult(AddCompanyCommand.MESSAGE_USAGE);
     }
-
-
 
 }
