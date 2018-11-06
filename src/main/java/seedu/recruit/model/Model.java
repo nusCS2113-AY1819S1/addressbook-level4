@@ -129,6 +129,10 @@ public interface Model {
      */
     void updateCompany(Company target, Company editedCompany);
 
+    /** Cascade company name changes to job offers
+     */
+    void cascadeToJobOffers(CompanyName targetName, CompanyName editedName);
+
     /** Returns an unmodifiable view of the filtered company list */
     ObservableList<Company> getFilteredCompanyList();
 

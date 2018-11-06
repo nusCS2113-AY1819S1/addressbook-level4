@@ -185,6 +185,21 @@ public class CompanyBook implements ReadOnlyCompanyBook {
         }
     }
 
+    /** Cascading company name changes to job offers
+     */
+    public void cascadeJobListWithEditedCompanyName(CompanyName targetName, CompanyName editedName) {
+        requireAllNonNull(targetName, editedName);
+
+        for (JobOffer jobOffer: companyJobList) {
+            if (jobOffer.getCompanyName().equals(targetName)) {
+                JobOffer editedJobOffer = new JobOffer(editedName, jobOffer.getJob(),
+                        jobOffer.getGender(), jobOffer.getAgeRange(), jobOffer.getEducation(),
+                        jobOffer.getSalary(), jobOffer.getUniqueCandidateList());
+                companyJobList.setJobOffer(jobOffer, editedJobOffer);
+            }
+        }
+    }
+
     /**
      * Sorts the company job list
      */

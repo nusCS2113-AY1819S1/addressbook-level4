@@ -239,6 +239,12 @@ public class ModelManager extends ComponentManager implements Model {
         indicateCompanyBookChanged();
     }
 
+    @Override
+    public void cascadeToJobOffers(CompanyName targetName, CompanyName editedName) {
+        versionedCompanyBook.cascadeJobListWithEditedCompanyName(targetName, editedName);
+        indicateCompanyBookChanged();
+    }
+
     // =========== Filtered Company List Accessors ===================================================== //
 
     /**
