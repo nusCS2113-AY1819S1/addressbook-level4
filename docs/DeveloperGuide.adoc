@@ -313,7 +313,7 @@ It implements the following operations to support the checking of keywords with 
 * `keywordsMap#add(String arg)` - Adds a keyword into the `keywordMap` based on the preceding prefix
 
 ===== Candidates
-The `findCandidateCommand` is facilitated by the `CandidateContainsKeywordsPredicate` which implements `Predicate<Candidate>`
+The `findCandidateCommand` is facilitated by the `CandidateContainsFindKeywordsPredicate` which implements `Predicate<Candidate>`
 and overrides the `test` and `equal` methods so that more fields can be searched at the same time.
 
 ===== Companies

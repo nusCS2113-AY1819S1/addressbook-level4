@@ -37,7 +37,7 @@ import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
 import seedu.recruit.model.joboffer.JobOffer;
-import seedu.recruit.testutil.CandidateContainsKeywordsPredicateBuilder;
+import seedu.recruit.testutil.CandidateContainsFindKeywordsPredicateBuilder;
 import seedu.recruit.testutil.EditCompanyDescriptorBuilder;
 import seedu.recruit.testutil.EditPersonDescriptorBuilder;
 
@@ -199,7 +199,7 @@ public class CommandTestUtil {
         Candidate candidate = model.getFilteredCandidateList().get(targetIndex.getZeroBased());
         final String[] splitName = candidate.getName().fullName.split("\\s+");
         model.updateFilteredCandidateList(
-                new CandidateContainsKeywordsPredicateBuilder(" n/" + splitName[0]).getCandidatePredicate());
+                new CandidateContainsFindKeywordsPredicateBuilder(" n/" + splitName[0]).getCandidatePredicate());
         assertEquals(1, model.getFilteredCandidateList().size());
     }
 

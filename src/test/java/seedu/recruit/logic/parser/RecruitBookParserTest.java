@@ -51,7 +51,7 @@ import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.joboffer.JobOffer;
 import seedu.recruit.testutil.CandidateBuilder;
-import seedu.recruit.testutil.CandidateContainsKeywordsPredicateBuilder;
+import seedu.recruit.testutil.CandidateContainsFindKeywordsPredicateBuilder;
 import seedu.recruit.testutil.CompanyBuilder;
 import seedu.recruit.testutil.EditPersonDescriptorBuilder;
 import seedu.recruit.testutil.JobOfferBuilder;
@@ -200,7 +200,7 @@ public class RecruitBookParserTest {
         FindCandidateCommand command = (FindCandidateCommand) parser.parseCommand(
                 FindCandidateCommand.COMMAND_WORD + " " + keywords, state, emailUtil, userPrefs);
         assertEquals(new FindCandidateCommand(
-                new CandidateContainsKeywordsPredicateBuilder(" " + keywords).getCandidatePredicate()), command);
+                new CandidateContainsFindKeywordsPredicateBuilder(" " + keywords).getCandidatePredicate()), command);
     }
 
     @Test

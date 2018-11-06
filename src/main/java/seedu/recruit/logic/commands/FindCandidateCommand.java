@@ -18,7 +18,7 @@ import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
-import seedu.recruit.model.candidate.CandidateContainsKeywordsPredicate;
+import seedu.recruit.model.candidate.CandidateContainsFindKeywordsPredicate;
 
 
 /**
@@ -44,9 +44,9 @@ public class FindCandidateCommand extends Command {
             + PREFIX_TAG + "TAG " + "\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + " alice" + PREFIX_SALARY + " 2500";
 
-    private final CandidateContainsKeywordsPredicate candidatePredicate;
+    private final CandidateContainsFindKeywordsPredicate candidatePredicate;
 
-    public FindCandidateCommand(CandidateContainsKeywordsPredicate candidatePredicate) {
+    public FindCandidateCommand(CandidateContainsFindKeywordsPredicate candidatePredicate) {
         this.candidatePredicate = candidatePredicate;
     }
 
