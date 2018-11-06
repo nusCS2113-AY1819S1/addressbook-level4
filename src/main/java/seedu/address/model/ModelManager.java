@@ -190,23 +190,26 @@ public class ModelManager extends ComponentManager implements Model {
     public void importAddressBook(Path importFilePath) throws IOException, DataConversionException {
         ImportManager importManager = new ImportManager(importFilePath);
 
-        // TODO: refactor to importManager
         // TODO: dont use null in orElse()
-        ReadOnlyAddressBook roab = importManager.readAddressBook().orElse(null);
-
-        ObservableList<Person> persons = roab.getPersonList();
-        persons.forEach((person) -> {
-            // TODO: explain why this instead of addPerson() above in developer guide (indicate ab changed at the end)
-            versionedAddressBook.addPerson(person);
-        });
-        ObservableList<Todo> todos = roab.getTodoList();
-        todos.forEach((todo) -> {
-            versionedAddressBook.addTodo(todo);
-        });
+        ReadOnlyAddressBook addressBookToImport = importManager.readAddressBook().orElse(null);
+        addToAddressBook(addressBookToImport);
 
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         updateFilteredTodoList(PREDICATE_SHOW_ALL_TODOS);
         indicateAddressBookChanged();
+    }
+
+    @Override
+    public void addToAddressBook(ReadOnlyAddressBook addressBookImported) {
+        ObservableList<Person> persons = addressBookImported.getPersonList();
+        persons.forEach((person) -> {
+            // TODO: explain why this instead of addPerson() above in developer guide (indicate ab changed at the end)
+            versionedAddressBook.addPerson(person);
+        });
+        ObservableList<Todo> todos = addressBookImported.getTodoList();
+        todos.forEach((todo) -> {
+            versionedAddressBook.addTodo(todo);
+        });
     }
 
     @Override
