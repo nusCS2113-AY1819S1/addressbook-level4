@@ -9,9 +9,11 @@ import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
+import seedu.recruit.commons.events.ui.ShowUpdatedCompanyJobListRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.company.Company;
 
 /**
@@ -36,7 +38,7 @@ public class DeleteCompanyCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws CommandException {
         requireNonNull(model);
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
 
@@ -57,6 +59,8 @@ public class DeleteCompanyCommand extends Command {
         }
 
         model.commitCompanyBook();
+        EventsCenter.getInstance().post(new ShowUpdatedCompanyJobListRequestEvent(
+                model.getFilteredCompanyJobList().size()));
         return new CommandResult(String.format(MESSAGE_DELETE_COMPANY_SUCCESS, deletedCompanies));
     }
 

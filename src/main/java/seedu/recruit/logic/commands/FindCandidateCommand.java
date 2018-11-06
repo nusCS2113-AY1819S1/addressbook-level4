@@ -17,6 +17,7 @@ import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.candidate.CandidateContainsKeywordsPredicate;
 
 
@@ -50,7 +51,7 @@ public class FindCandidateCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         requireNonNull(model);
         model.updateFilteredCandidateList(candidatePredicate);
         EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());

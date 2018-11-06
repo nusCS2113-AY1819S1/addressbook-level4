@@ -13,6 +13,7 @@ import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.joboffer.JobOffer;
@@ -30,10 +31,39 @@ public class EmailSendCommand extends Command {
     public static final String EMAIL_SUCCESS = "Successfully sent the email!";
     public static final String EMAIL_FAILURE = "Failed to send the email!";
 
+    private static ArrayList<Candidate> candidateRecipients;
+    private static ArrayList<JobOffer> jobOfferRecipients;
+    private static ArrayList<Candidate> candidateContents;
+    private static ArrayList<JobOffer> jobOfferContents;
+
     @Override
-    public CommandResult execute(Model model, CommandHistory history)
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs)
             throws ParseException, IOException, GeneralSecurityException {
         throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+    }
+
+    /**
+     * Updates the recipients and contents array list in this class from emailUtil
+     * @param emailUtil
+     */
+    protected void updateRecipientsAndContents(EmailUtil emailUtil) {
+        if (emailUtil.isAreRecipientsCandidates()) {
+            candidateRecipients = new ArrayList<>(emailUtil.getCandidates());
+            jobOfferContents = new ArrayList<>(emailUtil.getJobOffers());
+        } else {
+            jobOfferRecipients = new ArrayList<>(emailUtil.getJobOffers());
+            candidateContents = new ArrayList<>(emailUtil.getCandidates());
+        }
+    }
+
+    /**
+     * Resets the array lists in this class, to be used when email has been sent or cancelled
+     */
+    public static void resetRecipientsAndContents() {
+        candidateRecipients = new ArrayList<>();
+        jobOfferRecipients = new ArrayList<>();
+        candidateContents = new ArrayList<>();
+        jobOfferContents = new ArrayList<>();
     }
 
     /**
@@ -41,23 +71,17 @@ public class EmailSendCommand extends Command {
      * @param recipientEmails hashset of emails
      * @param model
      * @param emailUtil
-     * @param recipients
-     * @param contents
      */
-    public void generateRecipients(Set<String> recipientEmails, Model model, EmailUtil emailUtil,
-                                    ArrayList<?> recipients, ArrayList<?> contents) {
+    public void generateRecipients(Set<String> recipientEmails, Model model, EmailUtil emailUtil) {
         if (emailUtil.isAreRecipientsCandidates()) {
             //recipients are candidates
-            for (Object recipient : recipients) {
-                Candidate candidate = (Candidate) recipient;
-                recipientEmails.add(candidate.getEmail().toString());
+            for (Candidate candidateRecipient : candidateRecipients) {
+                recipientEmails.add(candidateRecipient.getEmail().toString());
             }
         } else {
             //recipients are companies
-            for (Object recipient : recipients) {
-                JobOffer jobOffer = (JobOffer) recipient;
-
-                int index = model.getCompanyIndexFromName(jobOffer.getCompanyName());
+            for (JobOffer jobOfferRecipient : jobOfferRecipients) {
+                int index = model.getCompanyIndexFromName(jobOfferRecipient.getCompanyName());
                 //Company not found in CompanyBook
                 if (index == -1) {
                     continue;
@@ -71,42 +95,35 @@ public class EmailSendCommand extends Command {
 
     /**
      * Generates bodytext of the email.
-     * @param model
      * @param emailUtil
-     * @param recipients
-     * @param contents
      * @return bodytext String
      */
-    public String generateContent(Model model, EmailUtil emailUtil,
-                                   ArrayList<?> recipients, ArrayList<?> contents) {
+    public String generateContent(EmailUtil emailUtil) {
         String bodyText;
         if (emailUtil.isAreRecipientsCandidates()) {
             bodyText = emailUtil.getEmailSettings().getBodyTextCandidateAsRecipient();
             //contents are companies
-            for (Object content : contents) {
-                JobOffer jobOffer = (JobOffer) content;
-                bodyText = bodyText + '\n' + "Company: " + jobOffer.getCompanyName().toString();
-                bodyText = bodyText + '\n' + "Job: " + jobOffer.getJob().toString();
-                bodyText = bodyText + '\n' + "Salary offered: " + jobOffer.getSalary().toString();
+            for (JobOffer jobOfferContent : jobOfferContents) {
+                bodyText = bodyText + '\n' + "Company: " + jobOfferContent.getCompanyName().toString();
+                bodyText = bodyText + '\n' + "Job: " + jobOfferContent.getJob().toString();
+                bodyText = bodyText + '\n' + "Salary offered: " + jobOfferContent.getSalary().toString();
                 bodyText += '\n';
             }
         } else {
             ArrayList<String> jobNames = new ArrayList<>();
-            for (Object recipient : recipients) {
-                JobOffer jobOffer = (JobOffer) recipient;
-                jobNames.add(jobOffer.getJob().toString());
+            for (JobOffer jobOfferRecipient : jobOfferRecipients) {
+                jobNames.add(jobOfferRecipient.getJob().toString());
             }
 
             bodyText = emailUtil.getEmailSettings().getBodyTextCompanyAsRecipient()
                     + jobNames.toString() + '\n';
             //contents are candidates
-            for (Object content : contents) {
-                Candidate candidate = (Candidate) content;
-                bodyText = bodyText + '\n' + "Name: " + candidate.getName().toString();
-                bodyText = bodyText + '\n' + "Age: " + candidate.getAge().toString();
-                bodyText = bodyText + '\n' + "Education: " + candidate.getEducation().toString();
-                bodyText = bodyText + '\n' + "Email: " + candidate.getEmail().toString();
-                bodyText = bodyText + '\n' + "Phone Number: " + candidate.getPhone().toString();
+            for (Candidate candidateContent : candidateContents) {
+                bodyText = bodyText + '\n' + "Name: " + candidateContent.getName().toString();
+                bodyText = bodyText + '\n' + "Age: " + candidateContent.getAge().toString();
+                bodyText = bodyText + '\n' + "Education: " + candidateContent.getEducation().toString();
+                bodyText = bodyText + '\n' + "Email: " + candidateContent.getEmail().toString();
+                bodyText = bodyText + '\n' + "Phone Number: " + candidateContent.getPhone().toString();
                 bodyText += '\n';
             }
         }

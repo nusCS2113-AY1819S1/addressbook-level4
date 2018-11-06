@@ -26,8 +26,9 @@ public class ResultDisplay extends UiPart<Region> {
     @FXML
     private TextArea resultDisplay;
 
-    public ResultDisplay() {
+    public ResultDisplay(String welcomeMessage) {
         super(FXML);
+        displayed.setValue(welcomeMessage);
         resultDisplay.textProperty().bind(displayed);
         registerAsAnEventHandler(this);
     }

@@ -8,6 +8,7 @@ import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 
 /**
  * Starts the 4-step process of Email
@@ -18,13 +19,13 @@ public class EmailInitialiseCommand extends Command {
             + "or specified companies about specified candidates.";
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         requireNonNull(model);
 
         //Initiailising a fresh instance of EmailUtil
         EmailUtil emailUtil = new EmailUtil();
         model.setEmailUtil(emailUtil);
-        LogicManager.setLogicState(EmailRecipientsSelectCommand.COMMAND_LOGIC_STATE);
-        return new CommandResult(EmailRecipientsSelectCommand.MESSAGE_USAGE);
+        LogicManager.setLogicState(EmailRecipientsCommand.COMMAND_LOGIC_STATE);
+        return new CommandResult(EmailRecipientsCommand.MESSAGE_USAGE);
     }
 }

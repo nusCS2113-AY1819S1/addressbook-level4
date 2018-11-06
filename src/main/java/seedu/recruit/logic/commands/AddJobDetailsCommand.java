@@ -11,22 +11,25 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_SALARY;
 
 import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
+import seedu.recruit.commons.events.ui.ShowUpdatedCompanyJobListRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.joboffer.JobOffer;
 
 /**
- * Intermediate Command of AddJobCommand
+ * Intermediate Command of StartAddJobCommand
  * Adds a job offer to the CompanyBook with the relevant fields
  */
 
 public class AddJobDetailsCommand extends Command {
 
-    public static final String COMMAND_WORD = "AddJobDetails";
+    public static final String COMMAND_WORD = "Add Job Interface";
 
     public static final String MESSAGE_USAGE = "Enter the following details of the job in the format:\n"
-            + PREFIX_COMPANY_NAME + "COMPANY "
+            + "Parameters: "
+            + PREFIX_COMPANY_NAME + "COMPANY_NAME "
             + PREFIX_JOB + "JOB_TITLE "
             + PREFIX_GENDER + "GENDER "
             + PREFIX_AGE_RANGE + "AGE_RANGE "
@@ -46,7 +49,7 @@ public class AddJobDetailsCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New added job offer: %1$s";
     public static final String MESSAGE_DUPLICATE_JOB_OFFER = "This job offer already exists in the Company";
     public static final String MESSAGE_COMPANY_NOT_FOUND = "Company not found in CompanyBook.\n"
-            + "Please add the company to CompanyBook first";
+            + "Please add the company to CompanyBook first!";
 
     private final JobOffer toAdd;
 
@@ -57,7 +60,7 @@ public class AddJobDetailsCommand extends Command {
     };
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws CommandException {
         requireNonNull(model);
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
 
@@ -70,6 +73,8 @@ public class AddJobDetailsCommand extends Command {
         }
         model.addJobOffer(toAdd);
         model.commitCompanyBook();
+        EventsCenter.getInstance().post(new ShowUpdatedCompanyJobListRequestEvent(
+                model.getFilteredCompanyJobList().size()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

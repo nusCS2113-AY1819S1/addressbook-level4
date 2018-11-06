@@ -7,11 +7,12 @@ import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 
 /**
  * 3rd step of the Email command: selecting contents
  */
-public class EmailContentsSelectCommand extends Command {
+public class EmailContentsCommand extends Command {
     public static final String MESSAGE_USAGE = "Find/Filter the contents you intend to email. "
             + "All items listed below will be added into the contents field.\n"
             + "Type \"add\" to add contents to the field.\n"
@@ -21,7 +22,7 @@ public class EmailContentsSelectCommand extends Command {
     public static final String COMMAND_LOGIC_STATE = "EmailSelectContents";
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws ParseException {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws ParseException {
         throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
     }
 }

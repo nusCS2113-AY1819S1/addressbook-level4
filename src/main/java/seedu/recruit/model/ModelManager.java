@@ -3,15 +3,17 @@ package seedu.recruit.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.recruit.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+
+import com.google.common.eventbus.Subscribe;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.recruit.commons.core.ComponentManager;
 import seedu.recruit.commons.core.LogsCenter;
+import seedu.recruit.commons.events.logic.UserAuthenticatedEvent;
 import seedu.recruit.commons.events.model.CandidateBookChangedEvent;
 import seedu.recruit.commons.events.model.CompanyBookChangedEvent;
 import seedu.recruit.commons.util.EmailUtil;
@@ -50,10 +52,30 @@ public class ModelManager extends ComponentManager implements Model {
         filteredCompanies = new FilteredList<>(versionedCompanyBook.getCompanyList());
         filteredJobs = new FilteredList<>(versionedCompanyBook.getCompanyJobList());
         emailUtil = new EmailUtil();
+        if (userPrefs.getHashedPassword() != null) {
+            hideAll();
+        }
     }
 
     public ModelManager() {
         this(new CandidateBook(), new CompanyBook(), new UserPrefs());
+    }
+
+    private void hideAll() {
+        filteredCompanies.setPredicate(PREDICATE_HIDE_ALL_COMPANIES);
+        filteredCandidates.setPredicate(PREDICATE_HIDE_ALL_PERSONS);
+        filteredJobs.setPredicate(PREDICATE_HIDE_ALL_JOBOFFERS);
+    }
+
+    private void showAll() {
+        filteredCompanies.setPredicate(PREDICATE_SHOW_ALL_COMPANIES);
+        filteredCandidates.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
+        filteredJobs.setPredicate(PREDICATE_SHOW_ALL_JOBOFFERS);
+    }
+
+    @Subscribe
+    public void handleUserAuthenticatedEvent(UserAuthenticatedEvent event) {
+        showAll();
     }
 
     @Override
@@ -128,6 +150,11 @@ public class ModelManager extends ComponentManager implements Model {
     public void sortCandidates(Prefix prefix) {
         versionedCandidateBook.sortCandidates(prefix);
         indicateCandidateBookChanged();
+    }
+
+    @Override
+    public ObservableList<Candidate> getMasterCandidateList() {
+        return versionedCandidateBook.getCandidateList();
     }
 
     // =========== Filtered Candidate List Accessors =================================================== //
@@ -240,6 +267,12 @@ public class ModelManager extends ComponentManager implements Model {
         indicateCompanyBookChanged();
     }
 
+    @Override
+    public void cascadeToJobOffers(CompanyName targetName, CompanyName editedName) {
+        versionedCompanyBook.cascadeJobListWithEditedCompanyName(targetName, editedName);
+        indicateCompanyBookChanged();
+    }
+
     // =========== Filtered Company List Accessors ===================================================== //
 
     /**
@@ -320,6 +353,11 @@ public class ModelManager extends ComponentManager implements Model {
         indicateCompanyBookChanged();
     }
 
+    @Override
+    public ObservableList<JobOffer> getMasterJobList() {
+        return versionedCompanyBook.getCompanyJobList();
+    }
+
     // =========== Filtered Company Job List Accessors ===================================================== //
 
     /**
@@ -336,6 +374,8 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(predicate);
         filteredJobs.setPredicate(predicate);
     }
+
+    // ================================== Shortlist Command functions ====================================== //
 
     @Override
     public void shortlistCandidateToJobOffer(Candidate candidate, JobOffer jobOffer) {
@@ -357,142 +397,5 @@ public class ModelManager extends ComponentManager implements Model {
 
     public void setEmailUtil(EmailUtil emailUtil) {
         this.emailUtil = emailUtil;
-    }
-
-    /**
-     * Returns a concatenated string of names of job offers for email select recipients command
-     */
-    @Override
-    public String getFilteredRecipientJobOfferNames() {
-        StringBuilder output = new StringBuilder();
-        for (JobOffer jobOffer : filteredJobs) {
-            output.append(getRecipientJobOfferName(jobOffer) + "\n");
-        }
-        return output.toString();
-    }
-
-    /**
-     * @param duplicateJobOffers arraylist of duplicate job offers
-     * @return concatenated string of names of job offers for
-     * email select recipients command minus specified job offers
-     */
-    @Override
-    public String getFilteredRecipientJobOfferNames(ArrayList<JobOffer> duplicateJobOffers) {
-        boolean isDuplicate;
-        StringBuilder output = new StringBuilder();
-        for (JobOffer jobOffer : filteredJobs) {
-            isDuplicate = false;
-            for (JobOffer duplicateJobOffer : duplicateJobOffers) {
-                if (jobOffer.isSameJobOffer(duplicateJobOffer)) {
-                    isDuplicate = true;
-                    break;
-                }
-            }
-            if (!isDuplicate) {
-                output.append(getRecipientJobOfferName(jobOffer) + "\n");
-            }
-        }
-        return output.toString();
-    }
-
-    /**
-     * Returns a concatenated string of names of job offers for email select contents command
-     */
-    @Override
-    public String getFilteredContentJobOfferNames() {
-        StringBuilder output = new StringBuilder();
-        for (JobOffer jobOffer : filteredJobs) {
-            output.append(getContentJobOfferName(jobOffer) + "\n");
-        }
-        return output.toString();
-    }
-
-    /**
-     * @param duplicateJobOffers arraylist of duplicate joboffers
-     * @return a concatenated string of names of job offers
-     * for email select contents command minus specified job offers
-     */
-
-    @Override
-    public String getFilteredContentJobOfferNames(ArrayList<JobOffer> duplicateJobOffers) {
-        boolean isDuplicate;
-        StringBuilder output = new StringBuilder();
-        for (JobOffer jobOffer : filteredJobs) {
-            isDuplicate = false;
-            for (JobOffer duplicateJobOffer : duplicateJobOffers) {
-                if (jobOffer.isSameJobOffer(duplicateJobOffer)) {
-                    isDuplicate = true;
-                    break;
-                }
-            }
-            if (!isDuplicate) {
-                output.append(getContentJobOfferName(jobOffer) + "\n");
-            }
-        }
-        return output.toString();
-    }
-
-    /**
-     * Returns a concatenated string of names of candidates for email command
-     */
-    @Override
-    public String getFilteredCandidateNames() {
-        StringBuilder output = new StringBuilder();
-        for (Candidate candidate : filteredCandidates) {
-            output.append(candidate.getName().toString());
-            output.append("\n");
-        }
-        return output.toString();
-    }
-
-    /**
-     * @param duplicateCandidates Arraylist of duplicate candidates
-     * @return a concatenated string of names of candidates for email command minus duplicate candidates
-     */
-    @Override
-    public String getFilteredCandidateNames(ArrayList<Candidate> duplicateCandidates) {
-        boolean isDuplicate;
-        StringBuilder output = new StringBuilder();
-        for (Candidate candidate : filteredCandidates) {
-            isDuplicate = false;
-            for (Candidate duplicateCandidate : duplicateCandidates) {
-                if (candidate.isSameCandidate(duplicateCandidate)) {
-                    isDuplicate = true;
-                    break;
-                }
-            }
-            if (!isDuplicate) {
-                output.append(candidate.getName().toString() + "\n");
-            }
-        }
-        return output.toString();
-    }
-
-    /**
-     * returns a string for job offers as recipients.
-     * @param jobOffer
-     * @return String of company name regarding: job offer
-     */
-    @Override
-    public String getRecipientJobOfferName(JobOffer jobOffer) {
-        StringBuilder output = new StringBuilder();
-        output.append(jobOffer.getCompanyName().toString());
-        output.append(" regarding job offer: ");
-        output.append(jobOffer.getJob().toString());
-        return output.toString();
-    }
-
-    /**
-     * returns a string for job offers as contents
-     * @param jobOffer
-     * @return String of job offer at company
-     */
-    @Override
-    public String getContentJobOfferName(JobOffer jobOffer) {
-        StringBuilder output = new StringBuilder();
-        output.append(jobOffer.getJob().toString());
-        output.append(" at ");
-        output.append(jobOffer.getCompanyName().toString());
-        return output.toString();
     }
 }

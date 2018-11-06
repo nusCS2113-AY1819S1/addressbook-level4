@@ -1,5 +1,6 @@
 package seedu.recruit.storage;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -40,7 +41,10 @@ public class JsonUserPrefsStorage implements UserPrefsStorage {
 
     @Override
     public void saveUserPrefs(UserPrefs userPrefs) throws IOException {
+        File file = new File(filePath.toString());
+        file.setWritable(true);
         JsonUtil.saveJsonFile(userPrefs, filePath);
+        file.setReadOnly();
     }
 
 }

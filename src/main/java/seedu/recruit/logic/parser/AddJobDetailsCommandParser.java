@@ -1,6 +1,6 @@
 package seedu.recruit.logic.parser;
 
-import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_INTERFACE_COMMAND_FORMAT;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_AGE_RANGE;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_EDUCATION;
@@ -40,7 +40,8 @@ public class AddJobDetailsCommandParser implements Parser<AddJobDetailsCommand> 
         if (!arePrefixesPresent(argMultimap, PREFIX_COMPANY_NAME, PREFIX_JOB, PREFIX_GENDER, PREFIX_AGE_RANGE,
                 PREFIX_EDUCATION, PREFIX_SALARY)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddJobDetailsCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_INTERFACE_COMMAND_FORMAT,
+                    AddJobDetailsCommand.COMMAND_WORD, AddJobDetailsCommand.MESSAGE_USAGE));
         }
 
         CompanyName companyName = ParserUtil.parseCompanyName(argMultimap.getValue(PREFIX_COMPANY_NAME).get());

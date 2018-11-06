@@ -18,6 +18,7 @@ import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.candidate.Candidate;
 
 /**
@@ -25,9 +26,9 @@ import seedu.recruit.model.candidate.Candidate;
  */
 public class AddCandidateCommand extends Command {
 
-    public static final String COMMAND_WORD = "addc";
+    public static final String COMMAND_WORD = "Add Candidate Interface";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a candidate to the RecruitBook. "
+    public static final String MESSAGE_USAGE = "Enter the following details of the candidate in the format:\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_GENDER + "GENDER "
@@ -39,7 +40,8 @@ public class AddCandidateCommand extends Command {
             + PREFIX_EDUCATION + "HIGHEST_EDUCATION_LEVEL "
             + PREFIX_SALARY + "EXPECTED_SALARY "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "(Enter 'cancel' to stop adding candidates)\n"
+            + "Example: "
             + PREFIX_NAME + "John Doe "
             + PREFIX_GENDER + "M "
             + PREFIX_AGE + "21 "
@@ -49,8 +51,8 @@ public class AddCandidateCommand extends Command {
             + PREFIX_JOB + "Waiter "
             + PREFIX_EDUCATION + "OLEVELS "
             + PREFIX_SALARY + "1000 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "diabetic "
+            + PREFIX_TAG + "excuseHeavyLoad";
 
     public static final String MESSAGE_SUCCESS = "New added candidate: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This candidate already exists in the CandidateBook";
@@ -67,7 +69,7 @@ public class AddCandidateCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws CommandException {
         requireNonNull(model);
         EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
 

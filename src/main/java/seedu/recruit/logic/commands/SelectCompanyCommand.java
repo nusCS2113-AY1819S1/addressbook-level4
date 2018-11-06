@@ -13,6 +13,7 @@ import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.company.Company;
 
 /**
@@ -20,7 +21,7 @@ import seedu.recruit.model.company.Company;
  */
 public class SelectCompanyCommand extends Command {
 
-    public static final String COMMAND_WORD = "selectCompany";
+    public static final String COMMAND_WORD = "selectC";
 
     public static final String COMMAND_LOGIC_STATE_FOR_SHORTLIST = "SelectCompanyForShortlist";
 
@@ -49,7 +50,7 @@ public class SelectCompanyCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws CommandException {
         requireNonNull(model);
 
         List<Company> filteredCompanyList = model.getFilteredCompanyList();
@@ -64,7 +65,7 @@ public class SelectCompanyCommand extends Command {
             EventsCenter.getInstance().post(new JumpToCompanyListRequestEvent(targetIndex));
             LogicManager.setLogicState(SelectJobCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST);
             return new CommandResult(String.format(MESSAGE_SELECT_COMPANY_SUCCESS,
-                    targetIndex.getOneBased()) + MESSAGE_SELECT_COMPANY_SUCCESS_NEXT_STEP
+                    selectedCompany.getCompanyName()) + MESSAGE_SELECT_COMPANY_SUCCESS_NEXT_STEP
                     + SelectJobCommand.MESSAGE_USAGE);
         }
 
@@ -72,13 +73,13 @@ public class SelectCompanyCommand extends Command {
             EventsCenter.getInstance().post(new JumpToCompanyListRequestEvent(targetIndex));
             LogicManager.setLogicState(SelectJobCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST_DELETE);
             return new CommandResult(String.format(MESSAGE_SELECT_COMPANY_SUCCESS,
-                    targetIndex.getOneBased()) + MESSAGE_SELECT_COMPANY_SUCCESS_NEXT_STEP
+                    selectedCompany.getCompanyName()) + MESSAGE_SELECT_COMPANY_SUCCESS_NEXT_STEP
                     + SelectJobCommand.MESSAGE_USAGE);
         }
 
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
         EventsCenter.getInstance().post(new JumpToCompanyListRequestEvent(targetIndex));
-        return new CommandResult(String.format(MESSAGE_SELECT_COMPANY_SUCCESS, targetIndex.getOneBased()));
+        return new CommandResult(String.format(MESSAGE_SELECT_COMPANY_SUCCESS, selectedCompany.getCompanyName()));
     }
 
     @Override

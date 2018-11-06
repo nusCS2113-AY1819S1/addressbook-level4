@@ -1,6 +1,6 @@
 @font-face {
-    -fx-font-family: 'Nixie One';
-    src: url('NixieOne-Regular.otf');
+    -fx-font-family: 'Quicksand';
+    src: url('Quicksand-Regular.ttf');
 }
 
 .background {
@@ -10,28 +10,28 @@
 
 .label {
     -fx-font-size: 11pt;
-    -fx-font-family: "Nixie One";
+    -fx-font-family: "Quicksand";
     -fx-text-fill: #555555;
     -fx-opacity: 0.9;
 }
 
 .label-bright {
     -fx-font-size: 11pt;
-    -fx-font-family: "Nixie One";
+    -fx-font-family: "Quicksand";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .label-header {
     -fx-font-size: 32pt;
-    -fx-font-family: "Nixie One";
+    -fx-font-family: "Quicksand";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .text-field {
     -fx-font-size: 12pt;
-    -fx-font-family: "Nixie One";
+    -fx-font-family: "Quicksand";
 }
 
 .tab-pane {
@@ -71,7 +71,7 @@
 
 .table-view .column-header .label {
     -fx-font-size: 20pt;
-    -fx-font-family: "Nixie One";
+    -fx-font-family: "Quicksand";
     -fx-text-fill: white;
     -fx-alignment: center-left;
     -fx-opacity: 1;
@@ -126,13 +126,13 @@
 }
 
 .cell_big_label {
-    -fx-font-family: "Nixie One";
+    -fx-font-family: "Quicksand";
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
 }
 
 .cell_small_label {
-    -fx-font-family: "Nixie One";
+    -fx-font-family: "Quicksand";
     -fx-font-size: 11px;
     -fx-text-fill: #010504;
 }
@@ -154,7 +154,7 @@
 
 .result-display {
     -fx-background-color: transparent;
-    -fx-font-family: "Nixie One";
+    -fx-font-family: "Quicksand";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
 }
@@ -164,7 +164,7 @@
 }
 
 .status-bar .label {
-    -fx-font-family: "Nixie One";
+    -fx-font-family: "Quicksand";
     -fx-text-fill: white;
 }
 
@@ -202,7 +202,7 @@
 
 .menu-bar .label {
     -fx-font-size: 14pt;
-    -fx-font-family: "Nixie One";
+    -fx-font-family: "Quicksand";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
 }
@@ -222,7 +222,7 @@
     -fx-border-width: 2;
     -fx-background-radius: 0;
     -fx-background-color: #1d1d1d;
-    -fx-font-family: "Nixie One", Helvetica, Arial, sans-serif;
+    -fx-font-family: "Quicksand", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
     -fx-text-fill: #d8d8d8;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;

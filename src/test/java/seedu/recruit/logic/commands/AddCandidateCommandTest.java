@@ -16,6 +16,7 @@ import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.CandidateBook;
 import seedu.recruit.model.ReadOnlyCandidateBook;
+import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.testutil.CandidateBuilder;
 
@@ -23,10 +24,14 @@ public class AddCandidateCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
+
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     private CommandHistory commandHistory = new CommandHistory();
+
+    private UserPrefs userPrefs = new UserPrefs();
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
@@ -39,7 +44,8 @@ public class AddCandidateCommandTest {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Candidate validCandidate = new CandidateBuilder().build();
 
-        CommandResult commandResult = new AddCandidateCommand(validCandidate).execute(modelStub, commandHistory);
+        CommandResult commandResult = new AddCandidateCommand(validCandidate).execute(modelStub, commandHistory,
+                userPrefs);
 
         assertEquals(String.format(AddCandidateCommand.MESSAGE_SUCCESS, validCandidate), commandResult.feedbackToUser);
         assertEquals(Arrays.asList(validCandidate), modelStub.candidatesAdded);
@@ -54,7 +60,7 @@ public class AddCandidateCommandTest {
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddCandidateCommand.MESSAGE_DUPLICATE_PERSON);
-        addCommand.execute(modelStub, commandHistory);
+        addCommand.execute(modelStub, commandHistory, userPrefs);
     }
 
     @Test

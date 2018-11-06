@@ -110,7 +110,7 @@ and does the switch to the other book for you when you enter the `switch` comman
 
 .GUI of Switch Book on Menu Bar
 image::switchBook.png[width="390"]
-// tag::switch[]
+// end::switch[]
 
 // tag::add[]
 === Adding a candidate / company / job  : `addc` `addC` `addj`
@@ -119,18 +119,42 @@ image::switchBook.png[width="390"]
 Format: `addc` +
 Supported tags: `n/`, `p/`, `e/`, `a/`, `g/`, `x/`, `j/`, `h/`, `s/`, `y/`, `c/`
 
-Entering this command will prompt you the following: +
+To start adding candidates in RecruitBook, enter `addc` in the command line to the start the Add Candidate Interface. +
+
+After entering `addc` you will be prompted the following +
 *`Enter the following details of the candidate in the format:`* +
-`n/NAME g/GENDER x/AGE p/PHONE_NUMBER e/EMAIL a/ADDRESS j/SEEKING_JOB h/HIGHEST_EDUCATION s/EXPECTED_SALARY_PER_MONTH`
+`Parameters: n/NAME g/GENDER x/AGE p/PHONE_NUMBER e/EMAIL a/ADDRESS j/SEEKING_JOB h/HIGHEST_EDUCATION s/EXPECTED_SALARY_PER_MONTH [t/TAG]...`
+`(Enter 'cancel' to stop adding candidates)` +
+`Example: n/John Doe g/M x/21 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 j/Waiter h/OLEVELS s/1000 t/diabetic t/excuseHeavyLoad`
+
+You are now inside the Add Candidate Interface!
+You can now keep adding candidates by specifying the required fields `n/NAME g/GENDER x/AGE p/PHONE_NUMBER e/EMAIL a/ADDRESS j/SEEKING_JOB h/HIGHEST_EDUCATION s/EXPECTED_SALARY_PER_MONTH`.
+Below are some examples for your reference.
+
+To stop adding candidates and exit from the Add Candidate Interface, enter `cancel`.
 
 Examples:
 
-* `n/John Doe g/M x/18 p/91238123 e/johndoe@gmail.com a/123, Central Boulevard, #01-111, 600123 j/WAITER h/ALEVELS s/1200`
-* `n/Mary Loe g/M x/18 p/82238123 e/maryloe@gmail.com a/113, South Boulevard, #01-111, 600123 j/WAITER h/OLEVELS s/1000`
+* `n/Susy Roe g/M x/18 p/91238123 e/susyroe@gmail.com a/123, Central Boulevard, #01-111, 600123 j/WAITER h/ALEVELS s/1200 t/dyslexic` +
+* `n/Mary Loe g/M x/18 p/82238123 e/maryloe@gmail.com a/113, South Boulevard, #01-111, 600123 j/WAITER h/OLEVELS s/1000` +
 
 
 ==== Adds a company to the RecruitBook
 Format: `addC c/UNIQUE_COMPANY_NAME a/ADDRESS e/EMAIL p/PHONE` +
+
+To start adding companies in RecruitBook, enter `addC` in the command line to the start the Add Company Interface. +
+
+After entering `addC` you will be prompted the following +
+`Enter the following details of the company in the format:` +
+`Parameters: c/UNIQUE_COMPANY_NAME a/ADDRESS e/EMAIL p/PHONE` +
+`(Enter 'cancel' to stop adding companies)` +
+`Example: c/KFC a/101, Clementi Ave 2, #01-01 e/kfc@gmail.com p/61231232` +
+
+You are now inside the Add Company Interface!
+You can now keep adding companies by specifying the required fields `c/UNIQUE_COMPANY_NAME a/ADDRESS e/EMAIL p/PHONE`.
+Below are some examples for your reference.
+
+To stop adding companies and exit from the Add Company Interface, enter `cancel`.
 
 Examples:
 
@@ -140,14 +164,23 @@ Examples:
 ==== Adds a job offer to the RecruitBook
 Format: `addj`
 
-Entering this command will prompt you the following: +
+To start adding job offers in RecruitBook, enter `addj` in the command line to the start the Add Job Interface. +
+
+
+After entering `addj` you will be prompted the following +
 *`Enter the following details of the job in the format:`* +
-`c/COMPANY j/JOB_TITLE g/GENDER xr/AGE_RANGE h/EDUCATION s/SALARY` +
+`Parameters: c/COMPANY_NAME j/JOB_TITLE g/GENDER xr/AGE_RANGE h/EDUCATION s/SALARY` +
 `(Enter 'cancel' to stop adding jobs)` +
 `Example: c/McDonalds j/cashier g/M xr/20-30 h/OLEVELS s/1200`
 
 [NOTE]
 COMPANY specified has to be added to RecruitBook first!
+
+You are now inside the Add Job Interface!
+You can now keep adding job offers by specifying the required fields `c/COMPANY_NAME j/JOB_TITLE g/GENDER xr/AGE_RANGE h/EDUCATION s/SALARY`.
+Below are some examples for your reference.
+
+To stop adding job offers and exit from the Add Job Interface, enter `cancel`.
 
 Examples:
 
@@ -369,7 +402,7 @@ image::companyPanel3.png[width="790", align="left"]
 // end::list[]
 
 // tag::select[]
-=== Selecting a candidate / company / job offer: `select` `selectCompany` `selectJob`
+=== Selecting a candidate / company / job offer: `selectc` `selectC` `selectj`
 
 ==== Selecting a candidate :
 Format: `select` `<INDEX>`
@@ -378,13 +411,13 @@ Format: `select` `<INDEX>`
 . This index must be an index number shown in the displayed candidate list.
 
 ==== Selecting a company :
-Format: `selectCompany` `<INDEX>`
+Format: `selectC` `<INDEX>`
 
 . Selects the company with the specified INDEX
 . This index must be an index number shown in the displayed company list.
 
 ==== Selecting a job offer :
-Format: `selectJob` `<INDEX>`
+Format: `selectj` `<INDEX>`
 
 . Selects the job offer with the specified INDEX
 . This index must be an index number shown in the displayed job offer list.
@@ -557,7 +590,7 @@ Examples:
 Format : `cancel`
 
 // tag::clear[]
-=== Clearing all entries : `clear`
+=== Clearing all entries : `clearc` `clearC`
 
 Clears all entries from the Candidate Book. +
 Format: `clearc`

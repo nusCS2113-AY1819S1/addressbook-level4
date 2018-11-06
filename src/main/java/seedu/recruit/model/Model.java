@@ -1,6 +1,5 @@
 package seedu.recruit.model;
 
-import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -19,6 +18,9 @@ public interface Model {
     Predicate<Candidate> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Company> PREDICATE_SHOW_ALL_COMPANIES = unused -> true;
     Predicate<JobOffer> PREDICATE_SHOW_ALL_JOBOFFERS = unused -> true;
+    Predicate<Candidate> PREDICATE_HIDE_ALL_PERSONS = unused -> false;
+    Predicate<Company> PREDICATE_HIDE_ALL_COMPANIES = unused -> false;
+    Predicate<JobOffer> PREDICATE_HIDE_ALL_JOBOFFERS = unused -> false;
 
     // ================================== CandidateBook functions ====================================== //
     /** Clears existing backing model and replaces with the provided new data. */
@@ -57,7 +59,14 @@ public interface Model {
      */
     void updateCandidate(Candidate target, Candidate editedCandidate);
 
-    /** Returns an unmodifiable view of the filtered candidate list. */
+    /**
+     * Returns an unmodifiable view of the master candidate list
+     */
+    ObservableList<Candidate> getMasterCandidateList();
+
+    /**
+     * Returns an unmodifiable view of the filtered candidate list.
+     * */
     ObservableList<Candidate> getFilteredCandidateList();
 
     /**
@@ -130,6 +139,10 @@ public interface Model {
      */
     void updateCompany(Company target, Company editedCompany);
 
+    /** Cascade company name changes to job offers
+     */
+    void cascadeToJobOffers(CompanyName targetName, CompanyName editedName);
+
     /** Returns an unmodifiable view of the filtered company list */
     ObservableList<Company> getFilteredCompanyList();
 
@@ -140,7 +153,6 @@ public interface Model {
 
     /** Returns the Company object based on @param index
      */
-
     public Company getCompanyFromIndex(int index);
 
     /**
@@ -207,7 +219,14 @@ public interface Model {
      */
     void deleteJobOffer(JobOffer target);
 
-    /** Returns an unmodifiable view of the filtered job lists of all companies */
+    /**
+     * Returns an unmodifiable view of the master job list
+     */
+    ObservableList<JobOffer> getMasterJobList();
+
+    /**
+     * Returns an unmodifiable view of the filtered job lists of all companies
+     */
     ObservableList<JobOffer> getFilteredCompanyJobList();
 
     /**
@@ -241,48 +260,4 @@ public interface Model {
      * Setter for emailUtil in model
      */
     void setEmailUtil(EmailUtil emailUtil);
-
-    /**
-     * Returns a concatenated string of names of job offers for email select recipients command
-     */
-    String getFilteredRecipientJobOfferNames();
-
-    /**
-     * @param duplicateJobOffers arraylist of duplicate joboffers
-     * @return a concatenated string of names of job offers
-     *         for email select recipients command minus specified job offers
-     */
-    String getFilteredRecipientJobOfferNames(ArrayList<JobOffer> duplicateJobOffers);
-
-    /**
-     * Returns a concatendated string of names of job offers for email select contents command
-     */
-    String getFilteredContentJobOfferNames();
-
-    /**
-     * @param duplicateJobOffers arraylist of duplicate joboffers
-     * @return a concatenated string of names of job offers
-     *         for email select contents command minus specified job offers
-     */
-    String getFilteredContentJobOfferNames(ArrayList<JobOffer> duplicateJobOffers);
-
-    /**
-     * Returns a concatenated string of names of candidates for email command
-     */
-    String getFilteredCandidateNames();
-
-    /**
-     * Returns a concatenated string of names of candidates for email command minus specified candidates
-     */
-    String getFilteredCandidateNames(ArrayList<Candidate> duplicateCandidates);
-
-    /**
-     * String of company name regarding: job offer
-     */
-    String getRecipientJobOfferName(JobOffer jobOffer);
-
-    /**
-     * String of job offer at company
-     */
-    String getContentJobOfferName(JobOffer jobOffer);
 }
