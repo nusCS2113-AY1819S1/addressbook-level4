@@ -194,7 +194,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void importAddressBook(Path importFilePath) throws IOException, DataConversionException {
         ImportManager importManager = new ImportManager(importFilePath);
 
-        // TODO: refactor
+        // TODO: refactor to importManager
         // TODO: dont use null in orElse()
         ReadOnlyAddressBook roab = importManager.readAddressBook().orElse(null);
 
