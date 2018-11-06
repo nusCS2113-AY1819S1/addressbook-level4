@@ -431,18 +431,83 @@ listener is present in `RecordListPanel` and will update the UI list automatical
 * **Alternative 2:** Implement a HashMap with Date as the key and Record as the value.
 ** Pros: Allows for constant time complexity to access any elements. Hence, listing records can potentially be faster.
 ** Cons: Current UI implementation relies on `FilteredList`. In order for UI to be compatible with the new data structure, the UI may need to change its implementation to `ObservableMap` instead. Alternatively, one can utilise a `HashMap` to first generate the list and pass the list reference into `FilteredList`. However, there is a need to code a filter function.
-
 //end::list[]
+
+//tag::summary[]
+=== View summary feature
+This feature allows the user to view a summary table of all their financial activity within a period of time. There are 3 different ways the user can
+view the summary, one is summary by date which means the summary of each day in the period will be provided, summary by month or summary by category.
+
+The corresponding command required for this feature is `summary` and the user will have to supply 2 dates and a compulsory parameter `mode` which determines whether
+they are viewing *summary by date, by month or by category*. This feature involves most components of FinancialPlanner with the exception of `Storage`. It can also be broadly split into
+2 phases, the logic phase which generates the summary and the UI phase which allows users to view the summary in a table.
+
+The sequence diagram below details the sequence of program executions for the logic phase.
+
+image::SummarySequenceDiagram.png[width="790"]
+
+. When the user types in the command "summary date d/1-1-2018 12-12-2018", the command is passed fron LogicManager to FinancialPlannerParser. In here,
+the system chooses which parser to use which is SummaryCommandParser and calls its parse method which is polymorphic, meaning that every parser has the same function but use different
+implementation.
+. In this class, based on the `mode` parameter given, the system chooses a SummaryCommand to instantiate and pass the reference back to the Logic Manager. The various checks for the validity of the
+parameters also occur during this stage.
+. After the SummaryCommandObject is created, `SummaryByDateCommand#execute` is called. The responsibility of SummaryByDateCommand is a manager that has retrieves information from model and passes it to other components.
+SummaryByDateCommand gets the filtered list from Model using `Model#getFilteredRecordList` and passes it to the constructor of SummaryByDateList. The creates `SummaryList` object which is then
+passed into a `ShowSummaryTableEvent` before trigger.
+. The entire logic process is the same for SummaryByMonthCommand and SummaryByCategoryCommand but uses different lists.
+
+The next phase of the program execution is performed in the UI components.
+
+. `MainWindow` will listen out of the `ShowSummaryTableEvent` and render all Main UI panels invisible before rendering `StatsDisplayPanel` visible.
+. It then calls the handler function in `StatsDisplayPanel` which will create tabs and call the constructor of `SummaryDisplay`.
+. Within the constructor of `SummaryDisplay`, the table is created and the SummaryList is converted into a Ui friendly list.
+
+==== Design Considerations
+===== Aspect: Method of generating the summary
+
+* **Alternative 1 (current choice):** Generate the summary list whenever the summary command is called.
+** Pros: Easier to implement and maintain. Sufficient for the intended target audience of FinancialPlanner.
+** Cons: This requires looping through each record in the filtered record list obtained from the `Model`.
+To aid in the time complexity, the internal implementation of SummaryList was done using hash maps instead with allowed for
+constant time random access unlike list. However, the initial filtering is close to linear time complexity which could slow down the app if many records are inside.
+Also, the list had to be created every time `summary` is called which could be slow if the command is called multiple times.
+
+* **Alternative 2:** Morph the record list into a record hash map of record lists instead
+** Pros: A hash map allows for constant random access to a record list of a particular date assuming the key for the hash map is using dates.
+Thus, the filtering function does not need to loop through as many records and the time taken would be lower especially when the database in the application is large.
+** Cons: Might be too specific to only 1 type of category like categorising by date. If any other types are required, another map may have to be added. This implementation may make the
+system rigid and hard to modify in the future. Also, the summary list still had to be generated every time command is called.
+
+* **Alternative 3:** Cache the summary list in financial planner
+** Pros: By caching the summary list in the financial planner and assigning a boolean variable along with information on the filter predicate to it to determine if it is modified, we can
+reduce the number of times summary list is recreated every time the `summary` command is called. When the `summary` command is called, it checks the
+boolean variable to see if summary list needs to be modified. If it doesn't need to be regenerated, the system will simply read directly from `ModelManager`.
+** Cons: This implementation involves tracking of the state of the summary list. If it is not done systematically, it may have some hidden bugs which can be hard to test.
+Also, if the sequence of commands is as follows, *summary, add, summary*, the time required is still long.
+
+==== Aspect: Method of switching UI panels
+* **Alternative 1(current choice):** Disable all UI panels within the Main UI placeholder before enabling the desired one
+** Pros: Easy to implement and apply it to other newly created panels. To make use of the current implementation, the panel can simply be the children of
+the main Ui placeholder and the event handler can be placed in main window.
+** Cons: Might be inefficient when there are many panels or many switching as the same process must be repeated for all panels.
+However, this is unrealistic and it is unlikely that there are a lot of UI panels for it to make a significant impact.
+
+* **Alternative 2:** Track which UI panel is visible and only hide that panel
+** Pros: Might have some benefits if the amount of resources available is low
+** Cons: Slightly harder to implement but unlikely to have visible benefits.
+//end::summary[]
+
 //tag::stats[]
-=== View breakdown of total income and expense into categories
+=== View category breakdown feature
 ==== Current Implementation
-This feature allows the user to view a pie chart breakdown of all expenses and all income within a date range which the user can specify.
+This feature allows the user to view a pie chart breakdown o
+f all expenses and all income within a date range which the user can specify.
 
 The corresponding command required for this feature is `stats`.For this feature, users have to enter 2 dates, one starting date and one ending date.
 This feature is facilitated by a few key components of FinancialPlanner, `Logic`, `Model`, `UI` and function executions can be split into 2 phases, the `Logic phase` and the `UI phase`.
 The detailed execution sequence of functions used for `Logic phase` are as shown below.
 
-image::StatisticLogicSequenceDiagram.png[width="800"]
+image::StatisticLogicSequenceDiagram.png[width="790"]
 
 Consider the situation where the user enters *"stats d/1-1-2018 12-12-2018"*:
 
