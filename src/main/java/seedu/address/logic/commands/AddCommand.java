@@ -62,7 +62,9 @@ public class AddCommand extends Command {
 
         model.addPerson(toAdd);
 
-        if (!(model.hasDistributor(distToAdd))) {
+        if (model.hasDistributor(distToAdd)) {
+        }
+        else {
             model.addDistributor(distToAdd);
         }
 
