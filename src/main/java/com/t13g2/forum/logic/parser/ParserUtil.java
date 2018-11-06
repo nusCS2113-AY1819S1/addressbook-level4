@@ -1,5 +1,11 @@
 package com.t13g2.forum.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
 import com.t13g2.forum.commons.core.index.Index;
 import com.t13g2.forum.commons.util.StringUtil;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
@@ -13,12 +19,6 @@ import com.t13g2.forum.model.person.Email;
 import com.t13g2.forum.model.person.Name;
 import com.t13g2.forum.model.person.Phone;
 import com.t13g2.forum.model.tag.Tag;
-
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -207,7 +207,7 @@ public class ParserUtil {
     //Returns true if a given string is a valid module.
     public static boolean isValidModule(String trimmedModule) {
         return trimmedModule.matches(Module.MODULE_CODE_VALIDATION_REGEX);
-    }u
+    }
 
     /**
      * threadTitle
