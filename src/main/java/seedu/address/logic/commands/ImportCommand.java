@@ -36,9 +36,9 @@ public class ImportCommand extends Command {
             + "Example: " + COMMAND_WORD
             + " my_import_file_name";
 
-    public static final String MESSAGE_SUCCESS = "Imported timetable at %1$s.";
-    public static final String MESSAGE_EMPTY = "Timetable file empty.";
-    public static final String MESSAGE_IO_ERROR = "Failed to read the file at %1$s.";
+    public static final String MESSAGE_SUCCESS = "Imported timetable at: %1$s.";
+    public static final String MESSAGE_EMPTY = "Timetable file empty at: %1$s.";
+    public static final String MESSAGE_IO_ERROR = "Failed to read the file at: %1$s.\nPlease check the file exists.";
     private final Path filePath;
 
     /**
@@ -65,8 +65,9 @@ public class ImportCommand extends Command {
         } catch (IOException e) {
             throw new CommandException(String.format(MESSAGE_IO_ERROR, filePath.toString()));
         }
+
         if (!optionalTimeTable.isPresent()) {
-            return new CommandResult(String.format(MESSAGE_EMPTY));
+            return new CommandResult(String.format(MESSAGE_EMPTY, filePath.toString()));
         }
         timeTable = optionalTimeTable.get();
 

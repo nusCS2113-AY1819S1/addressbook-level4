@@ -4,6 +4,7 @@ import static biweekly.util.DayOfWeek.valueOfAbbr;
 import static java.util.Objects.requireNonNull;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.text.DateFormat;
@@ -18,6 +19,7 @@ import java.util.logging.Logger;
 import biweekly.Biweekly;
 import biweekly.ICalendar;
 import biweekly.component.VEvent;
+import biweekly.io.text.ICalReader;
 import biweekly.property.DateEnd;
 import biweekly.property.DateStart;
 import biweekly.property.RecurrenceRule;
@@ -118,7 +120,7 @@ public class IcsUtil {
             logger.info("No timeslots found in file.");
             return Optional.empty();
         } else {
-            logger.info("Some (>1) timeslots have been read from file.");
+            logger.info("At least 1 timeslot has been read from file.");
             return Optional.of(timeTable);
         }
     }
@@ -224,38 +226,48 @@ public class IcsUtil {
 
         File file = filePath.toFile();
         try {
-            file.getParentFile().mkdirs();
+            file.getParentFile().mkdirs(); //create parent folder if it does not exist.
             file.createNewFile(); //biweekly will throw IOException if the file does not exist already
             Biweekly.write(iCalendar).go(file);
-        } catch (IOException e) {
+        } catch (IOException e) { //catch IOException thrown by .createNewFile() or .go()
             throw new IOException();
         }
     }
 
     /**
-     * Reads {@code ICalendar} object from {@code Path} specified
-     *
-     * Will return an empty {@code ICalendar} if the .ics file is empty or has no related information.
-     *
+     * @return {@code ICalendar} object from reading the {@code Path} specified
      * @throws IOException if any IO error occurs during read.
      *
-     * TODO: This function currently only reads the 1st {@code ICalendar} in an .ics file
-     * the other {@code ICalendar} are simply not read! (silent failure)
-     * NUSMODS export only has 1 VCalendar in an .ics file; all good for now.
+     * Will return an empty {@code ICalendar} if the file is empty, or has no related information.
      */
     private ICalendar readICalendarFromFile(Path filePath) throws IOException {
         requireNonNull(filePath);
-        ICalendar iCalendar;
+
+        ICalendar iCalendar = new ICalendar();
+
+        File file = filePath.toFile();
+        ICalReader reader;
         try {
-            iCalendar = Biweekly.parse(filePath.toFile()).first();
-        } catch (IOException e) {
-            throw new IOException(e);
+            reader = new ICalReader(file);
+        } catch (FileNotFoundException e) {
+            throw new IOException(); //throw IOException to indicate file-not-found.
         }
 
-        if (iCalendar == null) { //either file not found, or no timetable data in file.
+        try {
+            //for each event found, add them to the iCalendar
+            ICalendar tempICalendar;
+            while ((tempICalendar = reader.readNext()) != null) {
+                for (VEvent event : tempICalendar.getEvents()) {
+                    iCalendar.addEvent(event);
+                }
+            }
+        } catch (IOException e){
+            //IOException thrown by readNext() - not able to read from stream
             throw new IOException();
-        } else {
-            return iCalendar;
+        } finally {
+            reader.close();
         }
+
+        return iCalendar;
     }
 }
