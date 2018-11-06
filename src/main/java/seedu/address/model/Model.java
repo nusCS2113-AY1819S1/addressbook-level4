@@ -96,9 +96,9 @@ public interface Model {
     void importAddressBook(Path importFilePath) throws IOException, DataConversionException;
 
     /**
-     * Exports the current filtered person list to a xml file.
+     * Exports the current filtered person list to a xml file at {@code exportFilePath}.
      */
-    void exportFilteredAddressBook() throws IOException;
+    void exportFilteredAddressBook(Path exportFilePath) throws IOException;
 
     /**
      * Exports the current address book state to a .csv file.

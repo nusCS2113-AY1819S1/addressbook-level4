@@ -214,8 +214,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void exportFilteredAddressBook() throws IOException {
-        Export export = new ExportManager(filteredPersons, filteredTodos, userPrefs.getExportFilePath());
+    public void exportFilteredAddressBook(Path exportFilePath) throws IOException {
+        Export export = new ExportManager(filteredPersons, filteredTodos, exportFilePath);
         export.saveFilteredAddressBook();
     }
 

@@ -38,7 +38,7 @@ public class ExportCommand extends Command {
         requireNonNull(model);
 
         try {
-            model.exportFilteredAddressBook();
+            model.exportFilteredAddressBook(filePath);
         } catch (IOException e) {
             throw new CommandException(MESSAGE_FAILURE);
         }
