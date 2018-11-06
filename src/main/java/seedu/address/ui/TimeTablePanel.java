@@ -17,26 +17,7 @@ import seedu.address.model.person.TimeSlot;
 import seedu.address.model.person.TimeTable;
 
 /**
- * TODO ALEXIS: currently morphing this from BrowserPanel into a TimeTablePanel.
- *
- * This is TimeTablePanel, it is a panel where the TimeTable elements reside in:
- * Contains these Classes: (where * represents any number of)
- *
- * TimeTablePanel
- *  |-PanelTop (just a divider in javafx )
- *  |   |-TimeTablePanelTimeMarkerGrid (invisible grid to hold the timing objects)
- *  |       |-*TimeTablePanelTimingMarker (visually the timing markers at the top of the grid; eg: 0900 or 1500)
- *  |
- *  |-PanelBottom (just a divider in javafx )
- *  |   |-TimeTablePanelMainGrid (visually the gridlines in the timetable)
- *  |       |---*TimeTablePanelTimeSlot
- *  |       |       (represents a timeSlot; visually a square inside the timetable, just like in NUSMODS)
- *  |       |---*TimeTablePanelDaySlot
- *  |               (represents a daySlot on the leftmost column of timetable; visually a square)
- *  |
- *  |-UI logic:  (handles logic such as: SCALING of grid, ADDING/REMOVAL of timeslots, HANDLING TIMESLOT INDEXES, etc)
- *
- *____________________
+ * A panel for the TimeTable and its components.
  */
 
 public class TimeTablePanel extends UiPart<Region> {
@@ -49,7 +30,6 @@ public class TimeTablePanel extends UiPart<Region> {
 
     private TimeTable timeTableLastLoaded;
 
-    // TODO: remove hardcoding here
     private LocalTime currStartHour = LocalTime.parse("10:00");
     private LocalTime currEndHour = LocalTime.parse("19:00");
     private int currNumRow = 5;

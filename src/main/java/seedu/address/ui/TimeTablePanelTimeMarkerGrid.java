@@ -12,14 +12,8 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 
 /**
- * TODO ALEXIS: working on this
- *
  * A invisible grid for the TimingMarkers to live in. It contains multiple TimeTablePanelTimingMarker(s)
  *
- * Refer to TimeTablePanel to better understand the relationships
- *
- * Note: we will scale the grid and add/remove columns in order to align with the TimeTablePanelMainGrid.
- * for now just a default size
  */
 
 public class TimeTablePanelTimeMarkerGrid extends UiPart<Region> {
@@ -35,8 +29,6 @@ public class TimeTablePanelTimeMarkerGrid extends UiPart<Region> {
 
         // To prevent triggering events for typing inside the TimeTablePanelTimeMarkerGrid
         getRoot().setOnKeyPressed(Event::consume);
-
-        //TODO ALEXIS: resizer, add, init functions.
 
         populateTimings(startHour, endHour);
     }
