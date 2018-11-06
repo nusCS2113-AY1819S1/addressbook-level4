@@ -71,6 +71,7 @@ public class DeleteThreadCommand extends Command {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Context.getInstance().setCurrentThreadId(-1);
         String deletedMessage = "\n\n"
                 + "Under Module Code: " + moduleCode + "\n"
                 + "Deleted Thread ID: " + threadId + "\n";
