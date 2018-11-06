@@ -3,9 +3,10 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +16,6 @@ import seedu.address.model.Filetype;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
 
 //@@author jitwei98
 /**
@@ -23,33 +23,33 @@ import seedu.address.model.person.Person;
  */
 public class ExportCommandTest {
 
-    private static final Filetype FILETYPE_CSV = new Filetype("csv");
-    private static final Filetype FILETYPE_VCF = new Filetype("vcf");
-
     private Model model;
     private Model expectedModel;
+    private Path exportFilePath;
 
     @Before
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        exportFilePath = Paths.get("src", "test", "data", "sandbox", "testExportCommand.xml");
     }
 
     @Test
     public void execute() {
-        Person personToExport = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        String expectedMessage = String.format(ExportCommand.MESSAGE_EXPORT_PERSON_SUCCESS, personToExport);
-        ExportCommand expectedCommand = new ExportCommand(INDEX_FIRST_PERSON, FILETYPE_CSV);
+        String expectedMessage = String.format(ExportCommand.MESSAGE_EXPORT_SUCCESS, exportFilePath);
+        ExportCommand expectedCommand = new ExportCommand(exportFilePath);
 
         assertCommandSuccess(expectedCommand, model, new CommandHistory(), expectedMessage, expectedModel);
     }
 
     @Test
     public void equals() {
-        ExportCommand standardCommand = new ExportCommand(INDEX_FIRST_PERSON, FILETYPE_CSV);
+        ExportCommand standardCommand = new ExportCommand(exportFilePath);
+        final Filetype FILETYPE_CSV = new Filetype("csv");
+        final Path differentFilePath = Paths.get("src", "test", "data", "testExportCommandDifferent.xml");
 
         // same value -> returns true
-        ExportCommand commandWithSameArgument = new ExportCommand(INDEX_FIRST_PERSON, FILETYPE_CSV);
+        ExportCommand commandWithSameArgument = new ExportCommand(exportFilePath);
         assertTrue(standardCommand.equals(commandWithSameArgument));
 
         // same object -> returns true
@@ -61,10 +61,7 @@ public class ExportCommandTest {
         // different types -> returns false
         assertFalse(standardCommand.equals(new ExportAllCommand(FILETYPE_CSV)));
 
-        // different index -> returns false
-        assertFalse(standardCommand.equals(new ExportCommand(INDEX_SECOND_PERSON, FILETYPE_CSV)));
-
-        // different filetype -> returns false
-        assertFalse(standardCommand.equals(new ExportCommand(INDEX_FIRST_PERSON, FILETYPE_VCF)));
+        // different filename -> returns false
+        assertFalse(standardCommand.equals(new ExportCommand(differentFilePath)));
     }
 }

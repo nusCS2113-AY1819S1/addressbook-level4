@@ -90,7 +90,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_export() throws Exception {
-        assertTrue(parser.parseCommand(ExportCommand.COMMAND_WORD + " 3 vcf") instanceof ExportCommand);
+        assertTrue(parser.parseCommand(ExportCommand.COMMAND_WORD + " some_filename.xml") instanceof ExportCommand);
     }
 
     @Test
