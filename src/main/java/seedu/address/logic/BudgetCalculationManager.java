@@ -20,4 +20,13 @@ public class BudgetCalculationManager {
         haveBudgetsBeenCalculated = (listOfBudgets.size() != 0);
         return haveBudgetsBeenCalculated;
     }
+
+    /**
+     * @param model the ClubBudgetElementsBook stored in {@code Model}
+     * @return true if ClubBudgetElementsBook is empty
+     */
+    public boolean isClubBudgetElementsBookEmpty(Model model) {
+        List<FinalClubBudget> listOfBudgets = model.getFilteredClubBudgetsList();
+        return (listOfBudgets.size() == 0);
+    }
 }

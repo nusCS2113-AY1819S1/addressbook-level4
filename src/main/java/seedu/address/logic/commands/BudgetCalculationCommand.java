@@ -55,7 +55,7 @@ public class BudgetCalculationCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_TOTAL_BUDGET);
         } else if (budgetCalculationManager.getHaveBudgetsBeenCalculated(model)) {
             return new CommandResult(String.format(MESSAGE_BUDGETS_ALREADY_CALCULATED));
-        } else if (!budgetCalculationManager.getHaveBudgetsBeenCalculated(model)) {
+        } else if (budgetCalculationManager.isClubBudgetElementsBookEmpty(model)) {
             return new CommandResult(String.format(MESSAGE_BUDGETS_NOT_CALCULATED));
         } else {
             int i;
