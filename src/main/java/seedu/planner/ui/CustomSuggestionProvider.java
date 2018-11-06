@@ -35,6 +35,7 @@ import seedu.planner.logic.commands.RedoCommand;
 import seedu.planner.logic.commands.SelectCommand;
 import seedu.planner.logic.commands.SortCommand;
 import seedu.planner.logic.commands.StatisticCommand;
+import seedu.planner.logic.commands.SummaryByCategoryCommand;
 import seedu.planner.logic.commands.SummaryByDateCommand;
 import seedu.planner.logic.commands.SummaryByMonthCommand;
 import seedu.planner.logic.commands.SummaryCommand;
@@ -62,7 +63,8 @@ public class CustomSuggestionProvider {
                     SummaryCommand.COMMAND_WORD, UndoCommand.COMMAND_WORD));
 
     private static final Set<String> summaryKeywordsSet = new HashSet<>(Arrays.asList(
-            SummaryByMonthCommand.COMMAND_MODE_WORD, SummaryByDateCommand.COMMAND_MODE_WORD));
+            SummaryByMonthCommand.COMMAND_MODE_WORD, SummaryByDateCommand.COMMAND_MODE_WORD,
+            SummaryByCategoryCommand.COMMAND_MODE_WORD));
     private static final Set<String> possibleTagKeywordsSet = new HashSet<>(
             Arrays.asList(AddCommand.COMMAND_WORD, EditCommand.COMMAND_WORD));
 
