@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.book.Isbn.MESSAGE_ISBN_CONSTRAINTS;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -49,7 +50,7 @@ public class StockCommandParser implements Parser<StockCommand> {
             try {
                 isbn = ParserUtil.parseIsbn(argMultimap.getValue(PREFIX_ISBN).get());
             } catch (ParseException pe) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, StockCommand.MESSAGE_USAGE), pe);
+                throw new ParseException(String.format(MESSAGE_ISBN_CONSTRAINTS, StockCommand.MESSAGE_USAGE), pe);
             }
             findBookBy = isbn.value;
             break;
@@ -88,7 +89,7 @@ public class StockCommandParser implements Parser<StockCommand> {
 
         parseTagsForStock(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(stockBookDescriptor::setTags);
 
-        if (!stockBookDescriptor.isQuantityFieldStocked()) {
+        if (!stockBookDescriptor.isQuantityFieldStocked() || stockBookDescriptor.getQuantity().getValue().equals("0")) {
             throw new ParseException(StockCommand.MESSAGE_NOT_STOCKED);
         }
 

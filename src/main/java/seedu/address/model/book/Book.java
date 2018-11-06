@@ -62,10 +62,9 @@ public class Book {
      * @param amount number of books stock
      * @return the updated quantity for books
      */
-    public Quantity increaseQuantity(Quantity amount) {
+    public Quantity increaseQuantity(Quantity amount) throws CommandException {
         this.quantity.increase(amount.toInteger());
         return quantity;
-
     }
 
     /**
