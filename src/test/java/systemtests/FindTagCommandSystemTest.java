@@ -156,8 +156,8 @@ public class FindTagCommandSystemTest extends FinancialPlannerSystemTest {
      * @see FinancialPlannerSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(String command, Model expectedModel) {
-        final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
-        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(command.trim());
+        final Pattern basicCommandFormatPattern = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+        final Matcher matcher = basicCommandFormatPattern.matcher(command.trim());
         matcher.matches();
         final String commandWord = matcher.group("commandWord").toLowerCase();
         final String arguments = matcher.group("arguments");
