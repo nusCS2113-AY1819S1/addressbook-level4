@@ -40,6 +40,7 @@ import seedu.recruit.logic.commands.RedoCompanyBookCommand;
 import seedu.recruit.logic.commands.SelectCandidateCommand;
 import seedu.recruit.logic.commands.SelectCompanyCommand;
 import seedu.recruit.logic.commands.SelectJobCommand;
+import seedu.recruit.logic.commands.SetPasswordCommand;
 import seedu.recruit.logic.commands.ShortlistCandidateCommand;
 import seedu.recruit.logic.commands.ShortlistCandidateInitializationCommand;
 import seedu.recruit.logic.commands.SortCandidateCommand;
@@ -48,6 +49,7 @@ import seedu.recruit.logic.commands.SortJobOfferCommand;
 import seedu.recruit.logic.commands.StartAddCandidateCommand;
 import seedu.recruit.logic.commands.StartAddCompanyCommand;
 import seedu.recruit.logic.commands.StartAddJobCommand;
+import seedu.recruit.logic.commands.StartSetPasswordCommand;
 import seedu.recruit.logic.commands.SwitchBookCommand;
 import seedu.recruit.logic.commands.UndoCandidateBookCommand;
 import seedu.recruit.logic.commands.UndoCompanyBookCommand;
@@ -57,6 +59,7 @@ import seedu.recruit.logic.commands.emailcommand.EmailRecipientsCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailSendCommand;
 
 import seedu.recruit.logic.parser.exceptions.ParseException;
+import seedu.recruit.model.UserPrefs;
 
 /**
  * Parses user input.
@@ -76,7 +79,8 @@ public class RecruitBookParser {
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseCommand(String userInput, LogicState state, EmailUtil emailUtil) throws ParseException {
+    public Command parseCommand(String userInput, LogicState state, EmailUtil emailUtil, UserPrefs userPref
+    ) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
 
         if (!matcher.matches()) {
@@ -111,6 +115,9 @@ public class RecruitBookParser {
 
             case AddCompanyCommand.COMMAND_WORD:
                 return new AddCompanyCommandParser().parse(userInput);
+
+            case SetPasswordCommand.COMMAND_WORD:
+                return new SetPasswordCommand(userInput);
 
             case EmailContentsCommand.COMMAND_LOGIC_STATE:
             case EmailRecipientsCommand.COMMAND_LOGIC_STATE:
@@ -154,6 +161,12 @@ public class RecruitBookParser {
                             + StartAddCompanyCommand.MESSAGE_USAGE);
                 }
                 return new StartAddCompanyCommand();
+            case StartSetPasswordCommand.COMMAND_WORD:
+                if (!arguments.isEmpty()) {
+                    throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
+                            + StartSetPasswordCommand.MESSAGE_USAGE);
+                }
+                return new StartSetPasswordCommand();
 
             case BlacklistCommand.COMMAND_WORD:
                 return new BlacklistCommandParser().parse(arguments);

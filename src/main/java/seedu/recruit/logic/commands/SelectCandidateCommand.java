@@ -13,6 +13,7 @@ import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.joboffer.JobOffer;
@@ -23,7 +24,7 @@ import seedu.recruit.model.tag.Tag;
  */
 public class SelectCandidateCommand extends Command {
 
-    public static final String COMMAND_WORD = "select";
+    public static final String COMMAND_WORD = "selectc";
 
     public static final String COMMAND_LOGIC_STATE = "SelectCandidate";
 
@@ -33,6 +34,10 @@ public class SelectCandidateCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Selected Candidate: %1$s\n";
+
+    public static final String MESSAGE_SELECT_PERSON_FAILURE_DUE_TO_BLACKLIST_TAG =
+            "Sorry! You can't shortlist a blacklisted candidate. \n"
+            + "Please select again!";
 
     public static final String MESSAGE_CONFIRMATION_FOR_SHORTLIST =
             "for job offer: %1$s, for company: %2$s.\n";
@@ -50,7 +55,7 @@ public class SelectCandidateCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws CommandException {
         requireNonNull(model);
 
         List<Candidate> filteredCandidateList = model.getFilteredCandidateList();
@@ -61,18 +66,21 @@ public class SelectCandidateCommand extends Command {
 
         selectedCandidate = filteredCandidateList.get(targetIndex.getZeroBased());
 
-        Tag blacklistTag = new Tag("BLACKLISTED");
-        if (selectedCandidate.getTags().contains(blacklistTag)) {
-            throw new CommandException(BlacklistCommand.MESSAGE_WARNING_BLACKLISTED_PERSON);
-        }
-
         if (ShortlistCandidateInitializationCommand.isShortlisting()) {
             EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
+
+            // If selected candidate is blacklisted
+            Tag blacklistTag = new Tag("BLACKLISTED");
+            if (selectedCandidate.getTags().contains(blacklistTag)) {
+                throw new CommandException(MESSAGE_SELECT_PERSON_FAILURE_DUE_TO_BLACKLIST_TAG
+                + MESSAGE_USAGE);
+            }
+
             Company selectedCompany = SelectCompanyCommand.getSelectedCompany();
             JobOffer selectedJobOffer = SelectJobCommand.getSelectedJobOffer();
             LogicManager.setLogicState(ShortlistCandidateCommand.COMMAND_LOGIC_STATE);
             return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS,
-                    targetIndex.getOneBased())
+                    selectedCandidate.getName())
                     + String.format(MESSAGE_CONFIRMATION_FOR_SHORTLIST,
                     selectedJobOffer.getJob().value, selectedCompany.getCompanyName().value)
                     + ShortlistCandidateCommand.MESSAGE_USAGE);
@@ -80,7 +88,7 @@ public class SelectCandidateCommand extends Command {
 
         EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
-        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex.getOneBased()));
+        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, selectedCandidate.getName()));
     }
 
     @Override

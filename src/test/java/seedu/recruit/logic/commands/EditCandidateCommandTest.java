@@ -40,6 +40,8 @@ public class EditCandidateCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new CompanyBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
+    private UserPrefs userPrefs = new UserPrefs();
+
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -177,7 +179,7 @@ public class EditCandidateCommandTest {
         expectedModel.commitCandidateBook();
 
         // edit -> first candidate edited
-        editCandidateCommand.execute(model, commandHistory);
+        editCandidateCommand.execute(model, commandHistory, userPrefs);
 
         // undo -> reverts Candidatebook back to previous state and filtered candidate list to show all persons
         expectedModel.undoCandidateBook();
@@ -229,7 +231,7 @@ public class EditCandidateCommandTest {
         expectedModel.commitCandidateBook();
 
         // edit -> edits second candidate in unfiltered candidate list / first candidate in filtered candidate list
-        editCandidateCommand.execute(model, commandHistory);
+        editCandidateCommand.execute(model, commandHistory, userPrefs);
 
         // undo -> reverts candidatebook back to previous state and filtered candidate list to show all persons
         expectedModel.undoCandidateBook();

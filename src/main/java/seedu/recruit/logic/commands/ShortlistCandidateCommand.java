@@ -11,6 +11,7 @@ import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.joboffer.JobOffer;
@@ -37,12 +38,13 @@ public class ShortlistCandidateCommand extends Command {
             + "Please cancel the current shortlisting process.\n";
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws CommandException {
         requireNonNull(model);
         Company selectedCompany = SelectCompanyCommand.getSelectedCompany();
         JobOffer selectedJobOffer = SelectJobCommand.getSelectedJobOffer();
         Candidate selectedCandidate = SelectCandidateCommand.getSelectedCandidate();
 
+        // If selected candidate already exists in shortlisted candidate list of the selected job offer
         if (selectedJobOffer.getUniqueCandidateList().contains(selectedCandidate)) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_CANDIDATE_SHORTLISTED,
                     selectedJobOffer.getJob().value, selectedCompany.getCompanyName().value)

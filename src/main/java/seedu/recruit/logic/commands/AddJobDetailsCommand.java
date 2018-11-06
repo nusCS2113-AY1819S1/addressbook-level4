@@ -11,9 +11,11 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_SALARY;
 
 import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
+import seedu.recruit.commons.events.ui.ShowUpdatedCompanyJobListRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.joboffer.JobOffer;
 
 /**
@@ -44,7 +46,8 @@ public class AddJobDetailsCommand extends Command {
 
 
 
-    public static final String MESSAGE_SUCCESS = "New added job offer: %1$s";
+    public static final String MESSAGE_SUCCESS = "New added job offer: %1$s\n"
+            + "(Enter details of another job offer to add or enter 'cancel' to stop adding.)";;
     public static final String MESSAGE_DUPLICATE_JOB_OFFER = "This job offer already exists in the Company";
     public static final String MESSAGE_COMPANY_NOT_FOUND = "Company not found in CompanyBook.\n"
             + "Please add the company to CompanyBook first!";
@@ -58,7 +61,7 @@ public class AddJobDetailsCommand extends Command {
     };
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws CommandException {
         requireNonNull(model);
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
 
@@ -71,6 +74,8 @@ public class AddJobDetailsCommand extends Command {
         }
         model.addJobOffer(toAdd);
         model.commitCompanyBook();
+        EventsCenter.getInstance().post(new ShowUpdatedCompanyJobListRequestEvent(
+                model.getFilteredCompanyJobList().size()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

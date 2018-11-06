@@ -13,6 +13,7 @@ import seedu.recruit.commons.core.LogsCenter;
 import seedu.recruit.commons.events.model.CandidateBookChangedEvent;
 import seedu.recruit.commons.events.model.CompanyBookChangedEvent;
 import seedu.recruit.commons.events.storage.DataSavingExceptionEvent;
+import seedu.recruit.commons.events.storage.UserPrefsChangedEvent;
 import seedu.recruit.commons.exceptions.DataConversionException;
 import seedu.recruit.model.ReadOnlyCandidateBook;
 import seedu.recruit.model.ReadOnlyCompanyBook;
@@ -76,6 +77,17 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     public void saveUserPrefs(UserPrefs userPrefs) throws IOException {
         userPrefsStorage.saveUserPrefs(userPrefs);
+    }
+
+    @Subscribe
+    public void handleUserPrefsChangedEvent(UserPrefsChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event,
+                "User preferences changed, saving to file"));
+        try {
+            saveUserPrefs(event.data);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
     }
 
 

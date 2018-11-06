@@ -18,6 +18,7 @@ import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.candidate.Candidate;
 
 /**
@@ -53,7 +54,8 @@ public class AddCandidateCommand extends Command {
             + PREFIX_TAG + "diabetic "
             + PREFIX_TAG + "excuseHeavyLoad";
 
-    public static final String MESSAGE_SUCCESS = "New added candidate: %1$s";
+    public static final String MESSAGE_SUCCESS = "New added candidate: %1$s\n"
+                                 + "(Enter details of another candidate to add or enter 'cancel' to stop adding.)";
     public static final String MESSAGE_DUPLICATE_PERSON = "This candidate already exists in the CandidateBook";
 
     private final Candidate toAdd;
@@ -68,7 +70,7 @@ public class AddCandidateCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws CommandException {
         requireNonNull(model);
         EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
 
