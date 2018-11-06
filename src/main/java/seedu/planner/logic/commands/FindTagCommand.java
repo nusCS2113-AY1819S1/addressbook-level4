@@ -2,7 +2,6 @@ package seedu.planner.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.planner.commons.core.Messages;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.model.Model;
 import seedu.planner.model.record.TagsContainsKeywordsPredicate;
@@ -30,6 +29,10 @@ public class FindTagCommand extends Command {
         this.keywords = keywords;
     }
 
+    /**
+     * Convert list of keywords to a string for displaying success message.
+     * @return
+     */
     private String convertKeywordsToSuccessMessage() {
         StringBuilder message = new StringBuilder();
         for (String keyword: keywords) {

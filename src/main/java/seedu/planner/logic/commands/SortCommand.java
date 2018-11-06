@@ -38,7 +38,7 @@ public class SortCommand extends Command {
             + "\"" + CATEGORY_NAME + "\", " + "\"" + CATEGORY_MONEY + "\\" + CATEGORY_MONEYFLOW + "\", "
             + "\"" + CATEGORY_DATE + "\"" + "\n"
             + "and 2 sort orders: " + ORDER_ASCENDING + "(\"" + ASCENDING_CONDITION + "\")"
-            + " and " + ORDER_DESCENDING + "(\"" + DESCENDING_CONDITION+ "\")." + "\n"
+            + " and " + ORDER_DESCENDING + "(\"" + DESCENDING_CONDITION + "\")." + "\n"
             + "Parameters: [CATEGORY] [ORDER]\n"
             + "Order of parameters is not strict, but must have either one or both.\n"
             + "Example: " + COMMAND_WORD + " " + CATEGORY_NAME + " " + DESCENDING_CONDITION;
@@ -59,8 +59,8 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.sortFilteredRecordList(category, ascending);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, category,
-                ((ascending) ? ORDER_ASCENDING : ORDER_DESCENDING)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, category, ((ascending)
+                ? ORDER_ASCENDING : ORDER_DESCENDING)));
     }
 
     @Override

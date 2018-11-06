@@ -50,7 +50,7 @@ public class CustomSuggestionProvider {
             new HashSet<>(Arrays.asList(
                     AddCommand.COMMAND_WORD, AddLimitCommand.COMMAND_WORD,
                     ArchiveCommand.COMMAND_WORD, CheckLimitCommand.COMMAND_WORD,
-                    ClearCommand.COMMAND_WORD,DeleteByDateCommand.COMMAND_WORD,
+                    ClearCommand.COMMAND_WORD, DeleteByDateCommand.COMMAND_WORD,
                     DeleteCommand.COMMAND_WORD, DeleteLimitCommand.COMMAND_WORD,
                     EditCommand.COMMAND_WORD, EditLimitCommand.COMMAND_WORD,
                     ExitCommand.COMMAND_WORD, ExportExcelCommand.COMMAND_WORD,
@@ -84,6 +84,10 @@ public class CustomSuggestionProvider {
         return suggestionProvider;
     }
 
+    /**
+     * Clears the current set of suggestions and insert the new set of suggestions
+     * @param suggestions is the complete list of strings that can be suggested to the user
+     */
     private void updateSuggestions(Set<String> suggestions) {
         suggestionProvider.clearSuggestions();
         suggestionProvider.addPossibleSuggestions(suggestions);
@@ -92,43 +96,66 @@ public class CustomSuggestionProvider {
     /**
      * This method is responsible for deciding which collection of Strings is to be used as the reference collection
      * for comparison to the input String by the user. It can autocomplete the command word or when a tag is expected
-     * of the user input. It only predicts autocompletion based on the last word in the input.
+     * of the user input or when a sort parameter is expected.
      * @param userInput is the current word/substring to be automatically completed
      */
-    public void updateSuggestions(String userInput, String wordInput) {
+    public void updateSuggestions(String userInput, String prefix, String wordInput) {
         String[] inputs = userInput.split(" ");
-        if (inputs[0].equals(SortCommand.COMMAND_WORD) && inputs.length > 1) {
-            if (inputs.length > 3) {
-                updateSuggestions(emptySet);
-            } else if (SortCommand.ORDER_SET.contains(inputs[1])) {
-                updateSuggestions(SortCommand.CATEGORY_SET);
-            } else if (SortCommand.CATEGORY_SET.contains(inputs[1])) {
-                updateSuggestions(SortCommand.ORDER_SET);
-            } else if (inputs.length > 2 && !inputs[2].isEmpty()) {
-                updateSuggestions(emptySet);
-            } else {
-                updateSuggestions(sortKeywordsSet);
-            }
-        } else if (inputs[0].equals(SummaryCommand.COMMAND_WORD) && inputs.length > 1) {
-            if (inputs.length > 2) {
-                updateSuggestions(emptySet);
-            } else {
-                updateSuggestions(summaryKeywordsSet);
-            }
-        } else if (inputs[0].equals(FindTagCommand.COMMAND_WORD) && inputs.length > 1) {
-            updateSuggestions(tagsSuggestionSet);
-        } else if (possibleTagKeywordsSet.contains(inputs[0]) && inputs[inputs.length - 1]
-                .startsWith(PREFIX_TAG.getPrefix())) {
-            updateSuggestions(tagsSuggestionSet);
-        } else if (commandKeywordsSet.contains(inputs[0]) || inputs.length > 1) {
-            updateSuggestions(emptySet);
-        } else {
+        wordInput = prefix + wordInput;
+        int strIndex = 0;
+        for (; strIndex < inputs.length && !inputs[strIndex].equals(wordInput); strIndex++);
+
+        if (strIndex == 0) {
             updateSuggestions(commandKeywordsSet);
+        } else if (inputs[0].equals(SortCommand.COMMAND_WORD)) {
+            if (inputs.length == 2) {
+                updateSuggestions(sortKeywordsSet);
+            } else if (inputs.length == 3) {
+                if (strIndex == 1) {
+                    if (SortCommand.ORDER_SET.contains(inputs[2])) {
+                        updateSuggestions(SortCommand.CATEGORY_SET);
+                    } else if (SortCommand.CATEGORY_SET.contains(inputs[2])) {
+                        updateSuggestions(SortCommand.ORDER_SET);
+                    } else {
+                        updateSuggestions(sortKeywordsSet);
+                    }
+                } else { // strIndex = 2
+                    if (SortCommand.ORDER_SET.contains(inputs[1])) {
+                        updateSuggestions(SortCommand.CATEGORY_SET);
+                    } else if (SortCommand.CATEGORY_SET.contains(inputs[1])) {
+                        updateSuggestions(SortCommand.ORDER_SET);
+                    } else {
+                        updateSuggestions(emptySet);
+                    }
+                }
+            } else {
+                updateSuggestions(emptySet);
+            }
+        } else if (possibleTagKeywordsSet.contains(inputs[0])) {
+            if (wordInput.startsWith(PREFIX_TAG.getPrefix())) {
+                updateSuggestions(tagsSuggestionSet);
+            } else {
+                updateSuggestions(emptySet);
+            }
+        } else if (inputs[0].equals(SummaryCommand.COMMAND_WORD)) {
+            if (inputs.length == 2) {
+                updateSuggestions(summaryKeywordsSet);
+            } else {
+                updateSuggestions(emptySet);
+            }
+        } else if (inputs[0].equals(FindTagCommand.COMMAND_WORD)) {
+            updateSuggestions(tagsSuggestionSet);
+        } else {
+            updateSuggestions(emptySet);
         }
     }
 
-    public static void updateTagMap(HashMap<String, Integer> newTagKeywordsMap) { // TODO: convert to non-static using
-        tagKeywordsMap = newTagKeywordsMap;                                       // TODO: storage for tags
+    /**
+     * Updates the TagMap in this class whenever the TagMap in the Model is updated.
+     * @param newTagKeywordsMap is the new TagMap object that is to replace the old TagMap
+     */
+    public static void updateTagMap(HashMap<String, Integer> newTagKeywordsMap) {
+        tagKeywordsMap = newTagKeywordsMap;
         updateTagSet();
     }
 

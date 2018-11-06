@@ -4,6 +4,10 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Contains a set of pre-defined tags that the user may use to their convenience and will
+ * always be in the suggested list of tags.
+ */
 public class DefaultTags {
 
     private static final Tag TAG_CLOTHES = new Tag("clothes");
@@ -40,7 +44,7 @@ public class DefaultTags {
     private static final Tag TAG_TECHNO = new Tag("techno");
     private static final Tag TAG_DECK = new Tag("deck");
 
-    public static Set<Tag> defaultTagSet = new HashSet<>(Arrays.asList(TAG_CLOTHES, TAG_SHOPPING, TAG_GROCERIES,
+    private static Set<Tag> defaultTagSet = new HashSet<>(Arrays.asList(TAG_CLOTHES, TAG_SHOPPING, TAG_GROCERIES,
             TAG_FAMILY, TAG_FURNITURE, TAG_APPLIANCES, TAG_ELECTRONICS, TAG_PHONE, TAG_BILL, TAG_RENT, TAG_SCHOOL,
             TAG_GIRLFRIEND, TAG_BOYFRIEND, TAG_SALARY, TAG_LOTTERY, TAG_ALLOWANCE, TAG_TRAVEL, TAG_CAB, TAG_PETROL,
             TAG_CAR, TAG_FOOD, TAG_MACS, TAG_KFC, TAG_CAIFAN, TAG_CHICKENRICE, TAG_LAKSA, TAG_PRATA, TAG_TECHNO,

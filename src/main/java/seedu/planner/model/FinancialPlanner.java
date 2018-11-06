@@ -222,6 +222,10 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     public void removeLimit(Limit limitLn) {
         limits.remove(limitLn); }
 
+    public HashMap<String, Integer> fetchTagMap() {
+        return tagMap.getAsReadOnlyTagMap();
+    }
+
     public void addRecordToTagMap(Record record) {
         tagMap.addRecordToTagMap(record);
     }
