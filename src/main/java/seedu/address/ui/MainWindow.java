@@ -125,8 +125,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this loginWindow.
      */
     void fillInnerParts() {
-        drinkDetailPane = new DrinkDetailPane(null);
-        drinkDetailPanePlaceholder.getChildren().add(drinkDetailPane.getRoot());
+        // drinkDetailPane = new DrinkDetailPane(null);
+        // drinkDetailPanePlaceholder.getChildren().add(drinkDetailPane.getRoot());
 
         drinkListPanel = new DrinkListPanel(logic.getFilteredDrinkList());
         drinkListPanelPlaceholder.getChildren().add(drinkListPanel.getRoot());
