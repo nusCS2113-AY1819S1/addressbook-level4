@@ -1,8 +1,6 @@
 package seedu.planner.logic.commands;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.planner.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.planner.logic.commands.FindTagCommand.MESSAGE_SUCCESS;
 import static seedu.planner.logic.commands.FindTagCommand.convertKeywordsToMessage;
@@ -14,6 +12,7 @@ import static seedu.planner.testutil.TypicalRecords.getTypicalFinancialPlanner;
 import java.util.Arrays;
 import java.util.Collections;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import seedu.planner.logic.CommandHistory;
@@ -45,20 +44,20 @@ public class FindTagCommandTest {
         FindTagCommand findSecondCommand = new FindTagCommand(secondPredicate, inputSecondStringArray);
 
         // same object -> returns true
-        assertTrue(findFirstCommand.equals(findFirstCommand));
+        Assert.assertEquals(findFirstCommand, findFirstCommand);
 
         // same values -> returns true
         FindTagCommand findFirstCommandCopy = new FindTagCommand(firstPredicate, inputFirstStringArray);
-        assertTrue(findFirstCommand.equals(findFirstCommandCopy));
+        assertEquals(findFirstCommand, findFirstCommandCopy);
 
         // different types -> returns false
-        assertFalse(findFirstCommand.equals(1));
+        Assert.assertNotEquals(1, findFirstCommand);
 
         // null -> returns false
-        assertFalse(findFirstCommand.equals(null));
+        Assert.assertNotEquals(null, findFirstCommand);
 
         // different record -> returns false
-        assertFalse(findFirstCommand.equals(findSecondCommand));
+        Assert.assertNotEquals(findFirstCommand, findSecondCommand);
     }
 
     @Test
