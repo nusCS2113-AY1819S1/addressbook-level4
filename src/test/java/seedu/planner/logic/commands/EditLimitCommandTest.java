@@ -22,7 +22,7 @@ import seedu.planner.model.ModelManager;
 import seedu.planner.model.UserPrefs;
 import seedu.planner.model.record.Limit;
 import seedu.planner.testutil.LimitBuilder;
-//@@Author Zeng Hao(Oscar)
+//@@Author OscarZeng
 
 public class EditLimitCommandTest {
     private Model model = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());

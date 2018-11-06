@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.Model;
-//@@author Zeng Hao(Oscar)
+//@@Author OscarZeng
 /**
  * This function will print out all the limit information.
  */

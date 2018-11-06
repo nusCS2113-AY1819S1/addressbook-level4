@@ -12,7 +12,7 @@ import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.record.Limit;
 import seedu.planner.storage.xmljaxb.XmlSerializableClass;
-//@@author Zeng Hao(Oscar)
+//@@Author OscarZeng
 
 
 

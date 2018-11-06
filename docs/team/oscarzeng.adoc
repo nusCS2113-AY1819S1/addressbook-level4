@@ -31,7 +31,7 @@ Detailed information about my contributions is listed below.
 
 ** What it does: allows the user to set multiple limits for different periods of time or a single day to better manage their spend.
 All the limits will be stored and automatically checked whenever the records were updated.
-The user will be reminded if limits have been exceeded.
+The user will be reminded if any of the limits have been exceeded.
 ** Justification:This feature improves the product significantly because user will be able to make plans for their expense in advance and store all the limits.
 Since user may need to set limits for multiple periods of time while it is hard to remember all the limits they have set.
 This will help user better control their spend and keep their limits updated.
@@ -41,7 +41,7 @@ Besides that, I also need to keep limits' information updated whenever there is 
 
 === `completed` *Minor enhancement #1*: added the ability to delete limits.
 
-** What it does: allows the user to delete existing limits.
+** What it does: allows the user to delete existing limits. User
 ** Justification: This feature improves the product significantly because the user need to delete the limits that will be no longer used in the future.
 
 === `completed` *Minor enhancement #2*: added the ability to edit limits.
@@ -55,13 +55,8 @@ Besides that, I also need to keep limits' information updated whenever there is 
 ** Justification: This feature improves the product significantly because the user is able to check all the limit he/she had set.
 
 
-=== `ongoing`  *Minor enhancement #1*: added the ability to set limit for weeks and months.
-==== `sub-part of Major enhancement #1`
 
-** What it does: allows user to set a limit for weeks and months.
-** Justification: The implementation may lead to a big modification of the limit command.
-
-=== `ongoing` *Minor enhancement #2*: develop a better UI to demo the limitlist .
+=== `ongoing` *Minor enhancement #2*: develop a better UI to demo the checklimit .
 ==== `sub-part of Minor enhancement #3`
 
 ** What it does: provides user a better display of all limits' information.
@@ -78,12 +73,14 @@ Besides that, I also need to keep limits' information updated whenever there is 
 === *Other contributions*:
 
 ** Project management:
-***
+*** Provide teammates with suggestions about their features.
+*** Arrange team meetings and discussion.
 ** Enhancements to existing features:
 *** Helped combine the storage of the FinancialPlanner.
 *** Fix some of the bugs of tests.
 ** Documentation:
-*** Update limit related content and some other content of the User Guide
+*** Update limit related content and some other content of the User Guide.
+Examples:
 *** Update limit related content and of Developer Guide.
 Example:
 https://github.com/CS2113-AY1819S1-T09-4/main/blob/master/docs/DeveloperGuide.adoc#addlimit-feature[addlimit]

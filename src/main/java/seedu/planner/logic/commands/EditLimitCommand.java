@@ -8,7 +8,7 @@ import seedu.planner.logic.CommandHistory;
 import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.Model;
 import seedu.planner.model.record.Limit;
-//@@author Zeng Hao(Oscar)
+//@@Author OscarZeng
 
 
 /**

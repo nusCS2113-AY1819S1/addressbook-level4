@@ -8,7 +8,7 @@ import seedu.planner.logic.CommandHistory;
 import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.Model;
 import seedu.planner.model.record.Limit;
-//@@author Zeng Hao(Oscar)
+//@@Author OscarZeng
 /**
 * This Command is used as a limit function, Currently the user can input two Dates and one MoneyFlow,
 * and the command will check whether the the total expense during this period has exceeded the limit.
