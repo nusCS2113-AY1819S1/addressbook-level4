@@ -652,7 +652,7 @@ As the size of the Chart is fixed initially. Sometimes, when user archive too ma
 image::Export_Capture2_LinhChi.png[width:800]
 
 // end::archive[]
-
+// tag::limitfeatures[]
 == Spending Limit Feature
 
 This section describes the limit feature that allows users to set values to control their future spending.
@@ -737,6 +737,7 @@ Examples:
 * `editlimit d/20-8-2018 30-8-2018 m/200`
 * `editLimit d/20-8-2018 30-8-2018 m/200`
 * `edit_limit d/20-8-2018 30-8-2018 m/200`
+// end::limitfeatures[]
 == Upcoming Features
 
 === Showing a visual representation of daily/monthly summary `[Coming in v1.4]`

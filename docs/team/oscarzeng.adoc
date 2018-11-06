@@ -41,34 +41,24 @@ Besides that, I also need to keep limits' information updated whenever there is 
 
 === `completed` *Minor enhancement #1*: added the ability to delete limits.
 
-** What it does: allows the user to delete existing limits. User
+** What it does: allows the user to delete existing limits. Users are able to delete certain limits by according to the
+two dates.
 ** Justification: This feature improves the product significantly because the user need to delete the limits that will be no longer used in the future.
 
 === `completed` *Minor enhancement #2*: added the ability to edit limits.
 
-** What it does: allows the user to change the limit money of existing limits.
+** What it does: allows the user to change the limit money of existing limits. Users are able to edit certain limits by according to the two dates they.
 ** Justification: This feature improves the product significantly because the user may need to adjust their plan accordingly.
 
-=== `completed` *Minor enhancement #3*: added the ability to list all limits' condition.
+=== `completed` *Minor enhancement #3*: added the ability to check all limits' condition.
 
-** What it does: allows the user to change the limit money of existing limits.
+** What it does: allows the user to check all the existing limits' condition.
 ** Justification: This feature improves the product significantly because the user is able to check all the limit he/she had set.
 
 
-
-=== `ongoing` *Minor enhancement #2*: develop a better UI to demo the checklimit .
-==== `sub-part of Minor enhancement #3`
-
-** What it does: provides user a better display of all limits' information.
-** Justification: This implementation will help the user to have a much clearer overview of their limit details.
-
-=== `ongoing` *Minor enhancement #3*: added the ability to change the color of the output when the limit has been exceeded..
-==== `sub-part of Major enhancement #1`
-** What it does: allows user to choose the color they want to color for the cells which exceed limit.
-** Justification: This enhancement make some modification about the UI part.
-
-
 * *Code contributed*:
+Example:
+https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[codes]
 
 === *Other contributions*:
 
@@ -77,22 +67,15 @@ Besides that, I also need to keep limits' information updated whenever there is 
 *** Arrange team meetings and discussion.
 ** Enhancements to existing features:
 *** Helped combine the storage of the FinancialPlanner.
-*** Fix some of the bugs of tests.
+*** Fix bugs of tests.
 ** Documentation:
-*** Update limit related content and some other content of the User Guide.
-Examples:
+*** Update limit related content and some other content of the User Guide and some other contents.
 *** Update limit related content and of Developer Guide.
-Example:
-https://github.com/CS2113-AY1819S1-T09-4/main/blob/master/docs/DeveloperGuide.adoc#addlimit-feature[addlimit]
-https://github.com/CS2113-AY1819S1-T09-4/main/blob/master/docs/DeveloperGuide.adoc#37-deletelimit-feature[deletelimit]
-https://github.com/CS2113-AY1819S1-T09-4/main/blob/master/docs/DeveloperGuide.adoc#38-editlimit-feature[editlimit]
-https://github.com/CS2113-AY1819S1-T09-4/main/blob/master/docs/DeveloperGuide.adoc#39-checklimit-feature[checklimit]
 
 ** Community:
-*** PRs reviewed : https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
+*** PRs reviewed.
+*** Contributed to forum discussions in Whatsapp group.
+*** Reported bugs and suggestions for other teams in the class both in Whatsapp and Github.(examples:  https://github.com[1], https://github.com[2], https://github.com[3])
 
 
 == Contributions to the User Guide
@@ -102,7 +85,7 @@ https://github.com/CS2113-AY1819S1-T09-4/main/blob/master/docs/DeveloperGuide.ad
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-
+include::../UserGuide.adoc[tag=limitfeatures]
 
 == Contributions to the Developer Guide
 
@@ -110,12 +93,11 @@ https://github.com/CS2113-AY1819S1-T09-4/main/blob/master/docs/DeveloperGuide.ad
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=addlimit]
+include::../DeveloperGuide.adoc[tag=deletelimit]
+include::../DeveloperGuide.adoc[tag=editlimit]
+include::../DeveloperGuide.adoc[tag=checklimit]
 
-include::../DeveloperGuide.adoc[tag=dataencryption]
-
-
-== PROJECT: PowerPointLabs
 
 ---
 
