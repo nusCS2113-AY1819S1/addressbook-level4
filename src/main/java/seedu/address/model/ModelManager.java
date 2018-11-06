@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -190,8 +191,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Import/ Export ==============================================================================
     @Override
-    public void importAddressBook() throws IOException, DataConversionException {
-        ImportManager importManager = new ImportManager(Paths.get("data", "export.xml"));
+    public void importAddressBook(Path importFilePath) throws IOException, DataConversionException {
+        ImportManager importManager = new ImportManager(importFilePath);
 
         // TODO: refactor
         // TODO: dont use null in orElse()

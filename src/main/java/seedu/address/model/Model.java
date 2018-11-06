@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -92,7 +93,7 @@ public interface Model {
     /**
      * Imports from a xml file.
      */
-    void importAddressBook() throws IOException, DataConversionException;
+    void importAddressBook(Path importFilePath) throws IOException, DataConversionException;
 
     /**
      * Exports the current filtered person list to a xml file.
