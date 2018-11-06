@@ -12,7 +12,7 @@ import seedu.planner.logic.parser.exceptions.ParseException;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.MoneyFlow;
-
+//@@author Zeng Hao(Oscar)
 
 
 /**
@@ -27,6 +27,8 @@ public class AddLimitCommandParser implements Parser<AddLimitCommand> {
 
     private String [] datesIn; //the string is used to divide two the whole strings into two substrings.
     private String moneyString;
+    private Date dateStart;
+    private Date dateEnd;
 
     @Override
     public AddLimitCommand parse(String args) throws ParseException {
@@ -45,9 +47,15 @@ public class AddLimitCommandParser implements Parser<AddLimitCommand> {
         }
         MoneyFlow money = ParserUtil.parseMoneyFlow(moneyString);
         datesIn = argMultimap.getValue(PREFIX_DATE).get().split("\\s+");
-
-        Date dateStart = ParserUtil.parseDate(datesIn[0]);
-        Date dateEnd = ParserUtil.parseDate(datesIn[1]);
+        if (datesIn.length == 2) {
+            dateStart = ParserUtil.parseDate(datesIn[0]);
+            dateEnd = ParserUtil.parseDate(datesIn[1]);
+        } else if (datesIn.length == 1) {
+            dateStart = ParserUtil.parseDate(datesIn[0]);
+            dateEnd = ParserUtil.parseDate(datesIn[0]);
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLimitCommand.MESSAGE_USAGE));
+        }
 
         if (isLaterThan(dateStart, dateEnd)) {
             throw new ParseException("The dateStart must be earlier than or equals to dateEnd.");

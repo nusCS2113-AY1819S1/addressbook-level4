@@ -6,6 +6,9 @@ import static seedu.planner.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.planner.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.planner.testutil.TypicalLimits.LIMIT_100;
 import static seedu.planner.testutil.TypicalLimits.LIMIT_ALL_DIFFERENT;
+import static seedu.planner.testutil.TypicalLimits.LIMIT_DATE_END_DIFF;
+import static seedu.planner.testutil.TypicalLimits.LIMIT_SINGLE_DATE_100;
+import static seedu.planner.testutil.TypicalLimits.LIMIT_SINGLE_DATE_All_DIFF;
 import static seedu.planner.testutil.TypicalRecords.getTypicalFinancialPlanner;
 
 import org.junit.Test;
@@ -17,7 +20,7 @@ import seedu.planner.model.ModelManager;
 import seedu.planner.model.UserPrefs;
 import seedu.planner.model.record.Limit;
 import seedu.planner.testutil.LimitBuilder;
-
+//@@Author OscarZeng
 
 
 /**
@@ -44,8 +47,51 @@ public class DeleteLimitCommandTest {
     }
 
     @Test
+    public void execute_validLimitSingleDateInList_success() {
+        Limit limitToDelete = LIMIT_SINGLE_DATE_100;
+        model.addLimit(limitToDelete);
+        DeleteLimitCommand deleteLimitCommand =
+                new DeleteLimitCommand(limitToDelete);
+
+        String expectedMessage = DeleteLimitCommand.MESSAGE_SUCCESS;
+
+        ModelManager expectedModel = new ModelManager(model.getFinancialPlanner(), new UserPrefs());
+        expectedModel.deleteLimit(limitToDelete);
+        expectedModel.commitFinancialPlanner();
+
+        assertCommandSuccess(deleteLimitCommand, model, commandHistory, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_limitDatesNotInList_throwCommandException() {
+        Limit limit = new LimitBuilder(LIMIT_100).build();
         Limit limitNotInside = new LimitBuilder(LIMIT_ALL_DIFFERENT).build();
+        DeleteLimitCommand deleteLimitCommand = new DeleteLimitCommand(limitNotInside);
+        model.addLimit(limit);
+        assertCommandFailure(deleteLimitCommand, model, commandHistory, Messages.MESSAGE_LIMITS_DO_NOT_EXIST);
+    }
+
+    @Test
+    public void execute_limitDatesPartiallySame_throwCommandException() {
+        Limit limit = new LimitBuilder(LIMIT_100).build();
+        Limit limitNotInside = new LimitBuilder(LIMIT_DATE_END_DIFF).build();
+        DeleteLimitCommand deleteLimitCommand = new DeleteLimitCommand(limitNotInside);
+        model.addLimit(limit);
+        assertCommandFailure(deleteLimitCommand, model, commandHistory, Messages.MESSAGE_LIMITS_DO_NOT_EXIST);
+    }
+
+    @Test
+    public void execute_limitSingleDateNotInList_throwCommandException() {
+        Limit limit = new LimitBuilder(LIMIT_SINGLE_DATE_100).build();
+        Limit limitNotInside = new LimitBuilder(LIMIT_SINGLE_DATE_All_DIFF).build();
+        DeleteLimitCommand deleteLimitCommand = new DeleteLimitCommand(limitNotInside);
+        model.addLimit(limit);
+        assertCommandFailure(deleteLimitCommand, model, commandHistory, Messages.MESSAGE_LIMITS_DO_NOT_EXIST);
+    }
+
+    @Test
+    public void execute_noLimitInList_throwCommandException() {
+        Limit limitNotInside = new LimitBuilder(LIMIT_100).build();
         DeleteLimitCommand deleteLimitCommand = new DeleteLimitCommand(limitNotInside);
 
         assertCommandFailure(deleteLimitCommand, model, commandHistory, Messages.MESSAGE_LIMITS_DO_NOT_EXIST);
@@ -90,6 +136,7 @@ public class DeleteLimitCommandTest {
     public void equals() {
         DeleteLimitCommand deleteFirstCommand = new DeleteLimitCommand(LIMIT_100);
         DeleteLimitCommand deleteSecondCommand = new DeleteLimitCommand(LIMIT_ALL_DIFFERENT);
+        DeleteLimitCommand deleteThirdCommand = new DeleteLimitCommand(LIMIT_SINGLE_DATE_100);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
@@ -100,6 +147,9 @@ public class DeleteLimitCommandTest {
 
         // different types -> returns false
         assertFalse(deleteFirstCommand.equals(1));
+
+        // single date & double dates -> returns false
+        assertFalse(deleteFirstCommand.equals(deleteThirdCommand));
 
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
