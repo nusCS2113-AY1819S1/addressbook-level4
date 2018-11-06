@@ -34,8 +34,8 @@ import seedu.address.model.person.TimeTable;
 /**
  * Utility functions for the reading and writing of {@code TimeTable} objects to disk as .ics file. (and vice versa)
  * Classes available for public access:
- * 1) readTimeTableFromFile ()
- * 2) saveTimeTableToFile ()
+ * 1) readTimeTableFromFile (Path filePath)
+ * 2) saveTimeTableToFile (TimeTable timeTable, Path filePath)
  */
 public class IcsUtil {
     private static final Logger logger = LogsCenter.getLogger(IcsUtil.class);
@@ -53,11 +53,11 @@ public class IcsUtil {
     }
 
     /**
-     * Returns the {@code TimeTable} from the .ics file specified.
-     * Returns {@code Optional.empty()} object if the file did not contain iCalendar data.
+     * Obtains the {@code Optional<TimeTable>} from the .ics file specified.
+     * @returns {@code Optional.empty()} object if the file did not contain any {@code TimeTable} data.
      *
      * @param filePath cannot be null.
-     * @throws IOException if the file format is not as expected, or file is not found.
+     * @throws IOException if any IO error occurs, or file is not found.
      *
      */
     public Optional<TimeTable> readTimeTableFromFile(Path filePath)
@@ -81,8 +81,7 @@ public class IcsUtil {
      * Saves {@code TimeTable} data to the .ics file specified.
      *
      * @param filePath Location to save the file to. Cannot be null.
-     * @throws IOException  Thrown if there is an error during converting the data
-     *                                  into .ics or writing to the file.
+     * @throws IOException  Thrown if there is an error writing to the file.
      */
     public void saveTimeTableToFile(TimeTable timeTable, Path filePath)
             throws IOException {
@@ -99,9 +98,10 @@ public class IcsUtil {
 
     /**
      * Converts {@code ICalendar} to {@code TimeTable}
-     *
+     * @param iCalendar {@code ICalendar} to convert. Cannot be null.
      */
     private Optional<TimeTable> iCalendarToTimeTable(ICalendar iCalendar) {
+        requireNonNull(iCalendar);
         TimeTable timeTable = new TimeTable();
         /*
         In the forloop, we go through all the VEvents (logically equivalent to TimeSlots)
@@ -128,8 +128,10 @@ public class IcsUtil {
     /**
      * Converts {@code VEvent} to {@code Optional<TimeSlot>}.
      * Only allow VEvents that are recurring to be added.
+     * @param vEvent {@code VEvent} to convert. Cannot be null.
      */
     private Optional<TimeSlot> vEventToTimeSlot(VEvent vEvent) {
+        requireNonNull(vEvent);
         //formatter
         DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
         DateFormat timeFormat = new SimpleDateFormat("HHmmss");
@@ -169,8 +171,10 @@ public class IcsUtil {
 
     /**
      * Converts {@code TimeTable} to {@code ICalendar}.
+     * @param timeTable {@code TimeTable} to convert. Cannot be null.
      */
     private ICalendar timeTableToICalendar(TimeTable timeTable) {
+        requireNonNull(timeTable);
         Collection<TimeSlot> timeSlots = timeTable.getTimeSlots();
 
         ICalendar iCalendar = new ICalendar();
@@ -179,14 +183,17 @@ public class IcsUtil {
             iCalendar.addEvent(vEvent);
         }
         return iCalendar;
-
     }
 
     /**
-     * Converts {@code TimeSlot} to a {@code VEvent} that has a {@code Recurrence} of {@code Frequency.WEEKLY}.
-     * Note that the exported data will only stretch for 1 week, the current week. (as of now)
+     * Converts a {@code TimeSlot} to a {@code VEvent} that recur weekly, for {@code count} times.
+     *
+     * @param timeSlot {@code TimeSlot} to convert. Cannot be null.
+     * @param count {@code int} number of recurrences.
      */
     private VEvent timeSlotToWeeklyVEvent(TimeSlot timeSlot, int count) {
+        //TODO: protect against people who pass count < 0
+
         //extract data from {@code TimeSlot}
         LocalTime startTime = timeSlot.getStartTime();
         LocalTime endTime = timeSlot.getEndTime();
@@ -217,7 +224,7 @@ public class IcsUtil {
 
 
     /**
-     * Writes {@code ICalendar} object to file specified
+     * Writes {@code ICalendar} object to {@code Path} specified
      * @throws IOException if any error occurs during write.
      */
     private void writeICalendarToFile(ICalendar iCalendar, Path filePath) throws IOException {
@@ -236,9 +243,8 @@ public class IcsUtil {
 
     /**
      * @return {@code ICalendar} object from reading the {@code Path} specified
+     * Will return an empty {@code ICalendar} if the file has no iCalendar information.
      * @throws IOException if any IO error occurs during read.
-     *
-     * Will return an empty {@code ICalendar} if the file is empty, or has no related information.
      */
     private ICalendar readICalendarFromFile(Path filePath) throws IOException {
         requireNonNull(filePath);
