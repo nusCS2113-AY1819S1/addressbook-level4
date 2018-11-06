@@ -26,7 +26,7 @@ public class ExportCommand extends Command {
             + "Example: " + COMMAND_WORD
             + " my_export_file_name";
 
-    public static final String MESSAGE_SUCCESS = "Exported timetable to %1$s.";
+    public static final String MESSAGE_EXPORT_SUCCESS = "Exported timetable to %1$s.";
     public static final String MESSAGE_EMPTY = "Timetable is empty. Export failed.";
     public static final String MESSAGE_IO_ERROR =
             "Failed to write the timetable to the path: ";
@@ -55,7 +55,7 @@ public class ExportCommand extends Command {
         } catch (IOException e) {
             throw new CommandException(String.format(MESSAGE_IO_ERROR + filePath.toString()));
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, filePath.toString()));
+        return new CommandResult(String.format(MESSAGE_EXPORT_SUCCESS, filePath.toString()));
     }
 
     @Override
