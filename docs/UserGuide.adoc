@@ -494,7 +494,7 @@ image::importics.png[width="250", align="left"]
 Exports the currently-displayed timetable to the specified (.ics) file.
 
 ****
-* Your timetable will export as an (.ics) file
+* Your timetable will export as an (.ics) file. This file is currently only compatible with FreeTime.
 * Do not include the (.ics) file extension when typing the command.
 * Existing file with the same name will be overwritten. Use with care!
 * The file will be imported to the folder `import_export`, which is located in the same folder as the `FreeTime.jar` file. Please see the image below:
