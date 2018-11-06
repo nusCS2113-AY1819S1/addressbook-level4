@@ -317,7 +317,7 @@ The `findCandidateCommand` is facilitated by the `CandidateContainsFindKeywordsP
 and overrides the `test` and `equal` methods so that more fields can be searched at the same time.
 
 ===== Companies
-The `findCompanyCommand` is facilitated by the `CompanyContainsKeywordsPredicate` which implements `Predicate<Company>`
+The `findCompanyCommand` is facilitated by the `CompanyContainsFindKeywordsPredicate` which implements `Predicate<Company>`
 and overrides the `test` and `equal` methods so that more fields can be searched at the same time.
 
 ===== Job Offers

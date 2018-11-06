@@ -9,10 +9,10 @@ import seedu.recruit.commons.util.StringUtil;
 /**
  * Tests that a {@code Company}'s {@code Name} matches any of the keywords given.
  */
-public class CompanyContainsKeywordsPredicate implements Predicate<Company> {
+public class CompanyContainsFindKeywordsPredicate implements Predicate<Company> {
     private final HashMap<String, List<String>> keywords;
 
-    public CompanyContainsKeywordsPredicate(HashMap<String, List<String>> keywords) {
+    public CompanyContainsFindKeywordsPredicate(HashMap<String, List<String>> keywords) {
         this.keywords = keywords;
     }
 
@@ -31,9 +31,9 @@ public class CompanyContainsKeywordsPredicate implements Predicate<Company> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof seedu.recruit.model.company.CompanyContainsKeywordsPredicate
+                || (other instanceof seedu.recruit.model.company.CompanyContainsFindKeywordsPredicate
                 // instanceof handles nulls
-                && keywords.equals(((seedu.recruit.model.company.CompanyContainsKeywordsPredicate)
+                && keywords.equals(((seedu.recruit.model.company.CompanyContainsFindKeywordsPredicate)
                 other).keywords)); // state check
     }
 
