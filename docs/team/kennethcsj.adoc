@@ -1,0 +1,59 @@
+= Kenneth Chua Song Jye - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+:experimental:
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+endif::[]
+
+== PROJECT: Book Inventory
+
+---
+
+== Overview
+
+BookInventory is a desktop application catered primarily for store owners to manage their book supplies. It includes many basic and advance functions such as adding, deleting and requesting books from the inventory. The user interacts with it using a CLI, and it has a GUI created with JavaFX. This portfolio demonstrates my ability to write documentation for both User Guide and Developer Guide.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to conveniently stock, sell and delete books* from the inventory
+** What it does: allows user to execute `stock`/`sell`/`delete` commands by selecting the target book either from a list or with their unique ISBN. To facilitate the typing of ISBN, users can cycle through the existing ISBNs in the inventory using their incompleted ISBN entry by pressing kbd:[Tab].
+** Justification: These features improve the product significantly because stocking up and selling of books are done daily which make them the core functions of the app. As such, the app should provide a convenient way to address them.
+** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+
+* *Minor enhancement*: added *the ability to display a list of books less than or equal to a given quantity* using the `check` command.
+
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.1` - `v1.3` (4 releases) on GitHub
+** Additional enhancement to existing features:
+*** Added a new cost field to the `add` command
+*** Updated the identifier for books to ISBN
+*** Updated the `edit` command to prevent edits to `quantity`
+*** Updated `find` command to allow substrings as an input to find for books
+** Documentation:
+*** Updated the User Guide to be a representation of the app
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+*** Contributed to forum discussions (examples:  https://github.com/nusCS2113-AY1819S1/forum/issues/58[1])
+*** Some parts of the kbd:[Tab] feature I added was adopted by several other class mates
+
+== Contributions to the User Guide
+
+_This part shows the sections that I contributed to the User Guide. My ability to write documentation targeting end-users are showcased here._
+
+include::../UserGuide.adoc[tag=check]
+
+include::../UserGuide.adoc[tag=sell]
+
+== Contributions to the Developer Guide
+
+_This part shows the sections that I contributed to the Developer Guide. My ability to write technical documentation and the technical depth of my contributions are showcased here._
+
+include::../DeveloperGuide.adoc[tag=sellcommand]
