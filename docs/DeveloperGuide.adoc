@@ -480,10 +480,14 @@ Similar to the other commands; see <<Events-Driven-Nature,*`Events-Driven nature
 ==== Design Considerations
 ===== Aspect: Which Classes (and which system(s)) should parse the ics file format?
 * **Alternative 1 (current choice):** All code related to parsing _.ics_ timetable files are inside 'IcsUtil' class. When executing ImportCommand/ExportCommand, it directly calls a method in IcsUtil.
-** Pros: All functions that have to do with _.ics_ parsing is in one class.
-** Cons: Single responsibility principle is broken.
+** Pros:
+*** All methods that have to do with _.ics_ parsing are in one class. Easier to implement and manage, given that there are only a few methods for now.
+*** Less dependencies. (directly call IcsUtil to read/write .ics files; compared to having to call IcsStorage which then calls IcsUtil).
+** Cons:
+*** Single responsibility principle is broken. Also, difficult to manage if the class expands and has more methods.
 * **Alternative 2 (Go through the <<Design-Storage,*`Storage`*>> subsystem):** Follow the existing IO implementation of the other files: `addressbook.xml` and `preferences.json`; create an IcsTimeTableStorage class to access the ics file in hard disk.
-** Pros: Classes that have to do with IO are in the storage subsystem.
+** Pros:
+*** Similar implementation to existing: Classes that have to do with IO are accessed using the Storage Interface.
 ** Cons:
 *** Increased dependency: LogicManager will then have dependency on Storage.
 *** More difficult to implement: Current implementation of <<Design-Storage,*`Storage`*>> does not favor 'on-demand' instantiation (as in the import and export command).
