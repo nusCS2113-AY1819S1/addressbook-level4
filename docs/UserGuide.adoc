@@ -286,8 +286,12 @@ Format: `editj <INDEX>`
 Edits the job with the specified `INDEX`.
 This index must be an index number shown in the displayed job list.
 
+[NOTE]
+You need to enter `listC` first to see the full list of job offers! The `<INDEX>` is based on `listC`!
+
 Examples:
 
+*   `listC`
 *	`editj 1 xr/20-30` +
 (Edits the `MIN_AGE-MAX_AGE` attribute of the 1st job offer to be of 20 to 30 years of age)
 
