@@ -160,8 +160,13 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        model.matchUserToPerson("Alice Pauline");
+        expectedModel.matchUserToPerson("Alice Pauline");
+
         expectedModel.updatePerson(personToEdit, editedPerson);
         expectedModel.commitAddressBook();
+        expectedModel.updateTimeTable(expectedModel.getUser().getTimeTable());
 
         // edit -> first person edited
         editCommand.execute(model, commandHistory);
@@ -205,8 +210,13 @@ public class EditCommandTest {
 
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        model.matchUserToPerson("Alice Pauline");
+        expectedModel.matchUserToPerson("Alice Pauline");
+
         expectedModel.updatePerson(personToEdit, editedPerson);
         expectedModel.commitAddressBook();
+        expectedModel.updateTimeTable(expectedModel.getUser().getTimeTable());
 
         // edit -> edits second person in unfiltered person list / first person in filtered person list
         editCommand.execute(model, commandHistory);

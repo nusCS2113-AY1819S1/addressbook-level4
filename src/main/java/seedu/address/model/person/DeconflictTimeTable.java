@@ -15,7 +15,6 @@ import seedu.address.model.person.exceptions.TimeSlotNotOverlapException;
  * As such, the overwritten method {@code addTimeSlot()} does not throw {@code TimeSlotOverlapException}
  */
 public class DeconflictTimeTable extends TimeTable {
-
     public static final Color DECONFLICT_TIMESLOT_COLOR = Color.RED;
 
     public DeconflictTimeTable() {
@@ -55,7 +54,7 @@ public class DeconflictTimeTable extends TimeTable {
         }
 
         merged.setColor(DECONFLICT_TIMESLOT_COLOR);
-        timeSlots.add(merged);
+        addTimeSlotWithoutColor(merged);
     }
 
     /**

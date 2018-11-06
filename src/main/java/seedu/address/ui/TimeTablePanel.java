@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.time.Duration;
 import java.time.LocalTime;
 import java.util.logging.Logger;
 
@@ -17,12 +18,11 @@ import seedu.address.model.person.TimeSlot;
 import seedu.address.model.person.TimeTable;
 
 /**
- * A panel for the TimeTable and its components.
+ * Contains all elements related to timetables
  */
-
 public class TimeTablePanel extends UiPart<Region> {
-    public static final int DEFAULT_START_HOUR = 10;
-    public static final int DEFAULT_END_HOUR = 19;
+    public static final LocalTime DEFAULT_START = LocalTime.parse("10:00");
+    public static final LocalTime DEFAULT_END = LocalTime.parse("19:00");
 
     private static final String FXML = "TimeTablePanel.fxml";
 
@@ -30,10 +30,8 @@ public class TimeTablePanel extends UiPart<Region> {
 
     private TimeTable timeTableLastLoaded;
 
-    private LocalTime currStartHour = LocalTime.parse("10:00");
-    private LocalTime currEndHour = LocalTime.parse("19:00");
-    private int currNumRow = 5;
-    private int currNumCol = 9;
+    private LocalTime currStartHour;
+    private LocalTime currEndHour;
 
     private double currRowDimensions;
     private double currColDimensions;
@@ -57,6 +55,9 @@ public class TimeTablePanel extends UiPart<Region> {
         // To prevent triggering events for typing inside the loaded Web page.
         getRoot().setOnKeyPressed(Event::consume);
 
+        currStartHour = DEFAULT_START;
+        currEndHour = DEFAULT_END;
+
         timeTableLastLoaded = new TimeTable();
         fillInnerParts();
         updateDimensions();
@@ -75,33 +76,36 @@ public class TimeTablePanel extends UiPart<Region> {
      * Fills up all the placeholders of this TimeTablePanel.
      */
     private void fillInnerParts() {
-        timeTablePanelTimeMarkerGrid = new TimeTablePanelTimeMarkerGrid();
+        timeTablePanelTimeMarkerGrid = new TimeTablePanelTimeMarkerGrid(DEFAULT_START, DEFAULT_END, getCurrNumCol());
         timeTablePanelTimeMarkerGridPlaceholder.getChildren().add(timeTablePanelTimeMarkerGrid.getRoot());
 
         timeTablePanelDayMarkerGrid = new TimeTablePanelDayMarkerGrid();
         timeTablePanelDayMarkerGridPlaceholder.getChildren().add(timeTablePanelDayMarkerGrid.getRoot());
 
-        timeTablePanelMainGrid = new TimeTablePanelMainGrid();
+        timeTablePanelMainGrid = new TimeTablePanelMainGrid(getCurrNumCol());
         timeTablePanelMainGridPlaceholder.getChildren().add(timeTablePanelMainGrid.getRoot());
     }
 
     private void updateDimensions() {
-        currRowDimensions = timeTablePanelMainGrid.getRoot().getHeight() / currNumRow;
-        currColDimensions = timeTablePanelMainGrid.getRoot().getWidth() / currNumCol;
+        currRowDimensions = timeTablePanelMainGrid.getRoot().getHeight() / getCurrNumRow();
+        currColDimensions = timeTablePanelMainGrid.getRoot().getWidth() / getCurrNumCol();
     }
 
     /**
-     * Reloads the last loaded timetable. Used for when the window is resized
+     * Updates {@code currStartHour} and {@code currEndHour} according to the currently loaded {@code TimeTable}
      */
-    private void reloadTimeTable() {
-        timeTablePanelMainGrid.clearGrid();
-        updateDimensions();
-
-        for (TimeSlot timeSlot : timeTableLastLoaded.getTimeSlots()) {
-            timeTablePanelMainGrid.addTimeSlot(
-                    timeSlot, currRowDimensions, currColDimensions, currStartHour, currEndHour);
+    private void updateStartAndEnd() {
+        if (!timeTableLastLoaded.isEmpty() && timeTableLastLoaded.getEarliest().isBefore(DEFAULT_START)) {
+            currStartHour = timeTableLastLoaded.getEarliest();
+        } else {
+            currStartHour = DEFAULT_START;
         }
 
+        if (!timeTableLastLoaded.isEmpty() && timeTableLastLoaded.getLatest().isAfter(DEFAULT_END)) {
+            currEndHour = timeTableLastLoaded.getLatest();
+        } else {
+            currEndHour = DEFAULT_END;
+        }
     }
 
     /**
@@ -109,23 +113,34 @@ public class TimeTablePanel extends UiPart<Region> {
      */
     private void loadTimeTable(TimeTable timeTable) {
         timeTableLastLoaded = timeTable;
+        updateStartAndEnd();
+
+        timeTablePanelMainGrid.loadColumns(getCurrNumCol());
+        timeTablePanelTimeMarkerGrid.loadColumns(currStartHour, currEndHour, getCurrNumCol());
+        reloadTimeTable();
+    }
+
+    /**
+     * Loads the {@code TimeTable} stored in this {@code TimeTablePanel}
+     */
+    private void reloadTimeTable() {
         timeTablePanelMainGrid.clearGrid();
         updateDimensions();
 
-        for (TimeSlot timeSlot : timeTable.getTimeSlots()) {
-            timeTablePanelMainGrid.addTimeSlot(
-                    timeSlot, currRowDimensions, currColDimensions, currStartHour, currEndHour);
+        for (TimeSlot timeSlot : timeTableLastLoaded.getTimeSlots()) {
+            timeTablePanelMainGrid.addTimeSlot(timeSlot, currRowDimensions, currColDimensions, currStartHour);
         }
     }
 
-    public double getCurrRowDimensions() {
-        return currRowDimensions;
+    // To be changed if 7-day week is desired
+    private int getCurrNumRow() {
+        return 5;
     }
 
-    public double getCurrColDimensions() {
-        return currColDimensions;
-    }
 
+    private int getCurrNumCol() {
+        return (int) Duration.between(currStartHour, currEndHour).toHours();
+    }
 
     @Subscribe
     private void handleTimeTableChangedEvent(TimeTableChangedEvent event) {
