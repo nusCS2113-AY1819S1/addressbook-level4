@@ -48,7 +48,8 @@ public class ExportManager implements Export {
      * @param filePath location of the data. Cannot be null
      */
     @Override
-    public void saveFilteredAddressBook(FilteredList<Person> filteredPersons, FilteredList<Todo> filteredTodos, Path filePath) throws IOException {
+    public void saveFilteredAddressBook(FilteredList<Person> filteredPersons, FilteredList<Todo> filteredTodos,
+                                        Path filePath) throws IOException {
         requireNonNull(filteredPersons);
         requireNonNull(filteredTodos);
         requireNonNull(filePath);
