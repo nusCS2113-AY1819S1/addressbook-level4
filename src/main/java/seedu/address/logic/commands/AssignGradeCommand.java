@@ -10,6 +10,7 @@ import seedu.address.model.grade.Test;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.AssignGrades;
 //@@clara1234566
+
 /**
  * AssignGrade Command for Students, to assign grades to each student who has token certain
  * test(use bell_curve calculate method)
