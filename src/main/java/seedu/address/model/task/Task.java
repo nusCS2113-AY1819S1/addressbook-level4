@@ -2,6 +2,10 @@ package seedu.address.model.task;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Objects;
 
 /**
@@ -70,6 +74,15 @@ public class Task {
 
     public String getNameString() {
         return name.toString().toLowerCase();
+    }
+
+    public Date getDayInTypeDate() {
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        String strDate = formatter.format(date);
+        Calendar calendar = new GregorianCalendar(Integer.parseInt(strDate.substring(6,10)),
+                Integer.parseInt(getMonth()), Integer.parseInt(getDay()));
+        return calendar.getTime();
     }
 
     /**

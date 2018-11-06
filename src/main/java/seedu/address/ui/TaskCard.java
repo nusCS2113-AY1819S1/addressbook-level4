@@ -1,8 +1,10 @@
+//@@author XiaoYunhan
 package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
+import seedu.address.logic.DeadlineNotification;
 import seedu.address.model.task.Task;
 
 /**
@@ -22,6 +24,8 @@ public class TaskCard extends UiPart<Region> {
 
     public final Task task;
 
+    private final DeadlineNotification deadlineNotification;
+
     //@FXML
     //private HBox cardPane;
     @FXML
@@ -40,6 +44,7 @@ public class TaskCard extends UiPart<Region> {
     public TaskCard(Task task, int displayedIndex) {
         super(FXML);
         this.task = task;
+        deadlineNotification = new DeadlineNotification();
         id.setText(displayedIndex + ". ");
         taskname.setText(task.getName().fullName);
         taskmodule.setText(task.getModule().value);
@@ -57,6 +62,14 @@ public class TaskCard extends UiPart<Region> {
             taskstate.setText("Status: Completed");
         } else {
             taskstate.setText("Status: Uncompleted");
+        }
+
+        /**
+         * Modify color based on intervals between the deadline of the task and current time
+         * Testing feature
+         */
+        if (deadlineNotification.notifyOrNot(task.getDayInTypeDate())) {
+            taskname.setStyle("-fx-text-fill: #EEDD82");
         }
     }
 
