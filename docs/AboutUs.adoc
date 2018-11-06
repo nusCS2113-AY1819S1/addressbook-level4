@@ -39,6 +39,10 @@ image::e0176882.png[width="150", align="left"]
 
 Role: Lead Developer + Quality Assurance +
 Responsibilities: Development of features and ensuring good quality of application
+Email Feature - Send email to single index of Person +
+Email Feature - Send email to multiple index of Person(s) +
+Email Feature - Send email to a Group +
+Email Feature - Supports multiple popular SMTP Domains +
 
 '''
 
