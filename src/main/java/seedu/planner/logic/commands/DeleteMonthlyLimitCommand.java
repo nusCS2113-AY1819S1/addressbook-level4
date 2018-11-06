@@ -1,5 +1,7 @@
 package seedu.planner.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.Model;
@@ -7,7 +9,9 @@ import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.MoneyFlow;
 
-import static java.util.Objects.requireNonNull;
+/**
+ * This command is to remove the monthly limit stored inside the limitList.
+ */
 
 public class DeleteMonthlyLimitCommand extends Command {
     public static final String COMMAND_WORD = "deletemonthlylimit";
