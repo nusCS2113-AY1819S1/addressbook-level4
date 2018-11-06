@@ -21,10 +21,14 @@ public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Export the selected person in the address book"
-            + "\nParameters: INDEX (must be a positive integer)"
-            + "\nParameters: FILETYPE (must be either \"csv\" or \"vcf\") "
-            + "\nExample: " + COMMAND_WORD + " 1 csv ";
+
+    public static final String COMMAND_PARAMETERS = "Parameters: INDEX (must be a positive integer) "
+        + "FILETYPE (must be either \"csv\" or \"vcf\")\n";
+
+    public static final String COMMAND_EXAMPLE = "Example: " + COMMAND_WORD + " 1 csv ";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Export the selected person in the address book.\n"
+        + COMMAND_PARAMETERS
+        + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_EXPORT_PERSON_SUCCESS = "Exported Person: %1$s";
     private static final String MESSAGE_FAILURE = "Export failed!";
