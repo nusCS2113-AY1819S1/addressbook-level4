@@ -424,7 +424,7 @@ image::TimeTableSequenceDiagram.png[width="800"]
 // tag::import_export_timetable[]
 === Import and Export timetable feature
 
-The import and export timetable feature allows users to import and export their timetables from/to external applications as .ics files.
+The import and export timetable feature allows users to import and export their timetables from/to external applications as _.ics_ files.
 
 The currently supported applications are: +
 
@@ -442,7 +442,7 @@ Export:
 
 The import and export feature consists of two parts: +
 
-1. The backend, which handles the reading and writing of _.ics_ files, and the conversion between the .ics format and the TimeTable object. +
+1. The backend, which handles the reading and writing of _.ics_ files, and the conversion between the _.ics_ format and the TimeTable object. +
 2. The frontend, which parses user input, and informs the user of success or failure.
 
 
@@ -468,10 +468,10 @@ image::ImportSequenceDiagrsssam.png[width = 600]
 
 ===== Backend implementation - IcsUtil Class
 
-The `IcsUtil` class implements two key utility methods for handling .ics files: +
+The `IcsUtil` class implements two key utility methods for handling _.ics_ files: +
 
-1. `IcsUtil#readTimeTableFromFile()` - to read an `Optional<TimeTable>` from an .ics file; accepts the `filePath` of the .ics file as parameter +
-2. `IcsUtil#saveTimeTableToFile()` - to write a `TimeTable` to disk; accepts the `TimeTable` and `filePath` of the .ics file as parameter +
+1. `IcsUtil#readTimeTableFromFile()` - to read an `Optional<TimeTable>` from an _.ics_ file; accepts the `filePath` of the _.ics_ file as parameter +
+2. `IcsUtil#saveTimeTableToFile()` - to write a `TimeTable` to disk; accepts the `TimeTable` and `filePath` of the _.ics_ file as parameter +
 
 
 ===== Frontend implementation
@@ -479,8 +479,8 @@ Similar to the other commands; see <<Events-Driven-Nature,*`Events-Driven nature
 
 ==== Design Considerations
 ===== Aspect: Which Classes (and which system(s)) should parse the ics file format?
-* **Alternative 1 (current choice):** All code related to parsing .ics timetable files are inside 'IcsUtil' class. When executing ImportCommand/ExportCommand, it directly calls a method in IcsUtil.
-** Pros: All functions that have to do with .ics parsing is in one class.
+* **Alternative 1 (current choice):** All code related to parsing _.ics_ timetable files are inside 'IcsUtil' class. When executing ImportCommand/ExportCommand, it directly calls a method in IcsUtil.
+** Pros: All functions that have to do with _.ics_ parsing is in one class.
 ** Cons: Single responsibility principle is broken.
 * **Alternative 2 (Go through the <<Design-Storage,*`Storage`*>> subsystem):** Follow the existing IO implementation of the other files: `addressbook.xml` and `preferences.json`; create an IcsTimeTableStorage class to access the ics file in hard disk.
 ** Pros: Classes that have to do with IO are in the storage subsystem.

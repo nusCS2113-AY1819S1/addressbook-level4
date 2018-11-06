@@ -465,11 +465,11 @@ Format: `clear`
 // tag::import[]
 === Import Timetable : `import` (`im`)
 
-Imports a timetable for the current user from a specified (.ics) file. +
+Imports a timetable for the current user from a specified (_.ics_) file. +
 
 ****
-* Only supports (.ics) files exported from NUSMODS.
-* Do *not* include the (.ics) file extension when typing the command.
+* Only supports (_.ics_) files exported from NUSMODS.
+* Do *not* include the (_.ics_) file extension when typing the command.
 * The file will be imported from the folder `import_export`, which is located in the same folder as the `FreeTime.jar` file. Please see the image below: +
 ****
 
@@ -483,7 +483,7 @@ Imports the timetable at `(root_folder)\import_export\my_file.ics` +
 (where 'root_folder' is the folder that the application is in.) +
 
 [TIP]
-You can obtain your timetable on NUSMODS as an .ics file, as shown in the picture below:
+You can obtain your timetable on NUSMODS as an (_.ics_) file, as shown in the picture below:
 
 image::importics.png[width="250", align="left"]
 // end::import[]
@@ -491,11 +491,11 @@ image::importics.png[width="250", align="left"]
 // tag::export[]
 === Export Timetable : `export` (`ex`)
 
-Exports the currently-displayed timetable to the specified (.ics) file.
+Exports the currently-displayed timetable to the specified (_.ics_) file.
 
 ****
-* Your timetable will export as an (.ics) file. This file is currently only compatible with FreeTime.
-* Do not include the (.ics) file extension when typing the command.
+* Your timetable will export as an (_.ics_) file. This file is currently only compatible with FreeTime.
+* Do not include the (_.ics_) file extension when typing the command.
 * Existing file with the same name will be overwritten. Use with care!
 * The file will be imported to the folder `import_export`, which is located in the same folder as the `FreeTime.jar` file. Please see the image below:
 ****
