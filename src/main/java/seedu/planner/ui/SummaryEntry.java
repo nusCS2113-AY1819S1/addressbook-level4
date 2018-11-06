@@ -1,31 +1,36 @@
 package seedu.planner.ui;
 
 import javafx.beans.property.SimpleStringProperty;
+import seedu.planner.model.summary.Summary;
 
 //@@author tenvinc
 /**
- * This represents a UI friendly summary entry.
+ * This represents a UI friendly summary entry and methods to convert a summary into a summary entry.
  */
 public class SummaryEntry {
 
-    private final SimpleStringProperty timeStamp;
+    private final SimpleStringProperty identifier;
     private final SimpleStringProperty totalIncome;
     private final SimpleStringProperty totalExpense;
     private final SimpleStringProperty total;
 
     public SummaryEntry(String timeStamp, String totalIncome, String totalExpense, String total) {
-        this.timeStamp = new SimpleStringProperty(timeStamp);
+        this.identifier = new SimpleStringProperty(timeStamp);
         this.totalIncome = new SimpleStringProperty(totalIncome);
         this.totalExpense = new SimpleStringProperty(totalExpense);
         this.total = new SimpleStringProperty(total);
     }
 
-    public String getTimeStamp() {
-        return timeStamp.get();
+    /**
+     * Converts each {@code Summary} to a UI friendly counterpart for display
+     */
+    public static SummaryEntry convertToUiFriendly(Summary summary) {
+        return new SummaryEntry(summary.getIdentifier().toString(), summary.getTotalIncome().toString(),
+                summary.getTotalExpense().toString(), summary.getTotal().toString());
     }
 
-    public void setTimeStamp(String timeStamp) {
-        this.timeStamp.set(timeStamp);
+    public String getIdentifier() {
+        return identifier.get();
     }
 
     public String getTotalIncome() {
@@ -52,11 +57,15 @@ public class SummaryEntry {
         this.total.set(total);
     }
 
+    public void setIdentifier(String identifier) {
+        this.identifier.set(identifier);
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof SummaryEntry // instanceof handles nulls
-                && timeStamp.toString().equals(((SummaryEntry) other).timeStamp.toString())
+                && identifier.toString().equals(((SummaryEntry) other).identifier.toString())
                 && totalIncome.toString().equals(((SummaryEntry) other).totalIncome.toString())
                 && totalExpense.toString().equals(((SummaryEntry) other).totalExpense.toString())
                 && total.toString().equals(((SummaryEntry) other).total.toString()));

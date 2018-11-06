@@ -7,12 +7,14 @@ import java.util.function.Predicate;
 
 import seedu.planner.commons.core.EventsCenter;
 import seedu.planner.commons.events.ui.ShowSummaryTableEvent;
+import seedu.planner.commons.util.DateUtil;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.model.Model;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.summary.SummaryByDateList;
+import seedu.planner.model.summary.SummaryList;
 
 //@@author tenvinc
 /** List all the summary of records within a period of time specified */
@@ -25,7 +27,8 @@ public class SummaryByDateCommand extends SummaryCommand {
             + "Example: " + COMMAND_WORD + " " + COMMAND_MODE_WORD + " "
             + PREFIX_DATE + "18-9-2018 " + "20-9-2018 ";
 
-    public static final String MESSAGE_SUCCESS = "Listed summary for %d days ";
+    public static final String MESSAGE_SUCCESS = "Listed summary for %d days";
+    public static final String FORMAT_TITLE_SUMMARY = "Summary by date from %s to %s";
 
     private final Date startDate;
     private final Date endDate;
@@ -41,9 +44,11 @@ public class SummaryByDateCommand extends SummaryCommand {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredRecordList(predicate);
-        SummaryByDateList summaryList = new SummaryByDateList(model.getFilteredRecordList());
-        EventsCenter.getInstance().post(new ShowSummaryTableEvent(summaryList.getSummaryList(),
-                summaryList.getTotalExpense(), summaryList.getTotalIncome(), summaryList.getTotal(), TOTAL_LABEL));
+        SummaryList summaryList = new SummaryByDateList(model.getFilteredRecordList());
+        String tabTitle = String.format(FORMAT_TITLE_SUMMARY, DateUtil.formatDate(startDate),
+                DateUtil.formatDate(endDate));
+        EventsCenter.getInstance().post(new ShowSummaryTableEvent(summaryList, TOTAL_LABEL,
+                tabTitle));
         return new CommandResult(String.format(MESSAGE_SUCCESS, summaryList.size()));
     }
 
