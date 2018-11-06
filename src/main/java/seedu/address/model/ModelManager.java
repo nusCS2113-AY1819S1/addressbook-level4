@@ -190,9 +190,9 @@ public class ModelManager extends ComponentManager implements Model {
     public void importAddressBook(Path importFilePath) throws IOException, DataConversionException {
         ImportManager importManager = new ImportManager(importFilePath);
 
-        // TODO: dont use null in orElse()
-        ReadOnlyAddressBook addressBookToImport = importManager.readAddressBook().orElse(null);
-        addToAddressBook(addressBookToImport);
+        // TODO: dont use null in orElse(), use orElseThrow()
+        ReadOnlyAddressBook addressBookImported = importManager.readAddressBook().orElse(null);
+        addToAddressBook(addressBookImported);
 
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         updateFilteredTodoList(PREDICATE_SHOW_ALL_TODOS);
