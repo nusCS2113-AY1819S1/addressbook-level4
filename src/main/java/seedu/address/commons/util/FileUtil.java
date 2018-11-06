@@ -44,7 +44,8 @@ public class FileUtil {
         }
 
         // Compares the filename extension with the expected xml file extension
-        return filename.substring(filename.length() - XML_FILE_EXTENSION.length()).equals(XML_FILE_EXTENSION);
+        String filenameExtension = filename.substring(filename.length() - XML_FILE_EXTENSION.length());
+        return filenameExtension.equals(XML_FILE_EXTENSION);
     }
 
     /**
