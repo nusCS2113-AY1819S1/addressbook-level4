@@ -1,5 +1,6 @@
 package systemtests;
 
+import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT;
 import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.recruit.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
@@ -18,42 +19,49 @@ public class ClearCandidateBookCommandSystemTest extends CandidateBookSystemTest
     public void clear() {
         final Model defaultModel = getModel();
 
-        /* Case: clear non-empty recruit book, command with leading spaces and trailing alphanumeric characters and
-         * spaces -> cleared
+        /* Case: clear non-empty candidate book, command with leading spaces and trailing alphanumeric characters and
+         * spaces -> rejected due to unexpected arguments added.
          */
-        assertCommandSuccess("   " + ClearCandidateBookCommand.COMMAND_WORD + " ab12   ");
+        assertCommandFailure("   " + ClearCandidateBookCommand.COMMAND_WORD + " ab12   ",
+                MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
+                        + ClearCandidateBookCommand.MESSAGE_USAGE);
         assertSelectedCardUnchanged();
 
-        /* Case: undo clearing recruit book -> original recruit book restored */
+        /* Case: clear non-empty candidate book -> cleared */
+        executeCommand(ClearCandidateBookCommand.COMMAND_WORD);
+        assertSelectedCardUnchanged();
+
+        /* Case: undo clearing candidate book -> original candidate book restored */
         String command = UndoCandidateBookCommand.COMMAND_WORD;
         String expectedResultMessage = UndoCandidateBookCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command,  expectedResultMessage, defaultModel);
         assertSelectedCardUnchanged();
 
+        /* Case: selects first card in candidate list and clears candidate book -> cleared and no card selected */
+        selectPerson(Index.fromOneBased(1));
+        assertCommandSuccess(ClearCandidateBookCommand.COMMAND_WORD);
+        assertSelectedCardDeselected();
+
+        /* Case: filters the candidate list before clearing -> entire candidate book cleared */
+        executeCommand(UndoCandidateBookCommand.COMMAND_WORD); // restores the original candidate book
+        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        assertCommandSuccess(ClearCandidateBookCommand.COMMAND_WORD);
+        assertSelectedCardUnchanged();
+
         /* Case: redo clearing recruit book -> cleared */
+        executeCommand(UndoCandidateBookCommand.COMMAND_WORD); // restores the original candidate book
         command = RedoCandidateBookCommand.COMMAND_WORD;
         expectedResultMessage = RedoCandidateBookCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, expectedResultMessage, new ModelManager());
         assertSelectedCardUnchanged();
 
-        /* Case: selects first card in candidate list and clears recruit book -> cleared and no card selected */
-        executeCommand(UndoCandidateBookCommand.COMMAND_WORD); // restores the original recruit book
-        selectPerson(Index.fromOneBased(1));
-        assertCommandSuccess(ClearCandidateBookCommand.COMMAND_WORD);
-        assertSelectedCardDeselected();
-
-        /* Case: filters the candidate list before clearing -> entire recruit book cleared */
-        executeCommand(UndoCandidateBookCommand.COMMAND_WORD); // restores the original recruit book
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        assertCommandSuccess(ClearCandidateBookCommand.COMMAND_WORD);
+        /* Case: mixed case command word -> rejected */
+        assertCommandFailure("ClEaRc", MESSAGE_UNKNOWN_COMMAND);
         assertSelectedCardUnchanged();
 
         /* Case: clear empty recruit book -> cleared */
         assertCommandSuccess(ClearCandidateBookCommand.COMMAND_WORD);
         assertSelectedCardUnchanged();
-
-        /* Case: mixed case command word -> rejected */
-        assertCommandFailure("ClEaR", MESSAGE_UNKNOWN_COMMAND);
     }
 
     /**

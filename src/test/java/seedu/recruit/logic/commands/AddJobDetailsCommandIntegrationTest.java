@@ -3,9 +3,7 @@ package seedu.recruit.logic.commands;
 import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.recruit.testutil.TypicalCompanies.getTypicalCompanyBook;
-import static seedu.recruit.testutil.TypicalCompanies.resetTypicalCompaniesJobList;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,7 +13,6 @@ import seedu.recruit.model.CompanyBook;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.ModelManager;
 import seedu.recruit.model.UserPrefs;
-import seedu.recruit.model.company.CompanyName;
 import seedu.recruit.model.joboffer.JobOffer;
 import seedu.recruit.testutil.CompanyBuilder;
 import seedu.recruit.testutil.JobOfferBuilder;
@@ -34,10 +31,6 @@ public class AddJobDetailsCommandIntegrationTest {
         model = new ModelManager(new CandidateBook(), getTypicalCompanyBook(), new UserPrefs());
     }
 
-    @After
-    public void cleanUp() {
-        resetTypicalCompaniesJobList();
-    }
 
     @Test
     public void execute_newJobOfferWithExistingCompany_success() {
@@ -47,7 +40,7 @@ public class AddJobDetailsCommandIntegrationTest {
 
         Model expectedModel = new ModelManager(new CandidateBook(), getTypicalCompanyBook(), new UserPrefs());
         expectedModel.addCompany(new CompanyBuilder().withCompanyName("Dummy").build());
-        expectedModel.addJobOffer(new CompanyName("Dummy"), jobOffer);
+        expectedModel.addJobOffer(jobOffer);
         expectedModel.commitCompanyBook();
 
         assertCommandSuccess(new AddJobDetailsCommand(jobOffer), model, commandHistory,
@@ -58,7 +51,7 @@ public class AddJobDetailsCommandIntegrationTest {
     public void execute_duplicateJobOffer_throwsCommandException() {
         JobOffer jobOffer = new JobOfferBuilder().withCompanyName(model.getCompanyFromIndex(0)
                 .getCompanyName().toString()).build();
-        model.addJobOffer(model.getCompanyFromIndex(0).getCompanyName(), jobOffer);
+        model.addJobOffer(jobOffer);
 
         assertCommandFailure(new AddJobDetailsCommand(jobOffer), model, commandHistory,
                 AddJobDetailsCommand.MESSAGE_DUPLICATE_JOB_OFFER);

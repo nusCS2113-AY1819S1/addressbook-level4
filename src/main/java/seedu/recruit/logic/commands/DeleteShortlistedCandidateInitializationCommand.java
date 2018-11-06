@@ -21,7 +21,7 @@ public class DeleteShortlistedCandidateInitializationCommand extends Command {
     public static final String COMMAND_LOGIC_STATE = "primary";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the candidate(s) identified by the index number(s) used in the shortlisted candidate list.\n";
+            + ": Deletes the candidate identified by the index number used in the shortlisted candidate list.\n";
 
     public static final String MESSAGE_ENTERING_DELETE_PROCESS =
             "Entering delete process for shortlisted candidates...\n"

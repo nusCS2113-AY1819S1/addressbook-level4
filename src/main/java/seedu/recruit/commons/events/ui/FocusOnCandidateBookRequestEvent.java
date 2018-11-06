@@ -3,10 +3,10 @@ package seedu.recruit.commons.events.ui;
 import seedu.recruit.commons.events.BaseEvent;
 
 /**
- * An event requesting to view the Company Book.
- * Deselects whatever selection made on screen.
+ * An event requesting to focus on the Candidate Book.
+ * Does not deselect what the user has selected on screen.
  */
-public class ShowCompanyBookRequestEvent extends BaseEvent {
+public class FocusOnCandidateBookRequestEvent extends BaseEvent {
 
     @Override
     public String toString() {

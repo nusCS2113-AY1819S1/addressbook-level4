@@ -19,6 +19,7 @@ import seedu.recruit.commons.events.ui.CompanyJobListDetailsPanelSelectionChange
 import seedu.recruit.commons.events.ui.CompanyListDetailsPanelSelectionChangedEvent;
 import seedu.recruit.commons.events.ui.JumpToCompanyJobListRequestEvent;
 import seedu.recruit.commons.events.ui.JumpToCompanyListRequestEvent;
+import seedu.recruit.commons.events.ui.ShowUpdatedCompanyJobListRequestEvent;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.joboffer.JobOffer;
@@ -47,6 +48,7 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
     @FXML
     private ListView<Candidate> companyJobShortlistView;
 
+
     public CompanyJobDetailsPanel(ObservableList<Company> companyList, ObservableList<JobOffer> companyJobList) {
         super(FXML);
         setConnections(companyList, companyJobList);
@@ -69,7 +71,6 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
                     if (newValue != null) {
                         logger.fine("Selection in company list changed to : '" + newValue + "'");
                         raise(new CompanyListDetailsPanelSelectionChangedEvent(newValue));
-                        showJobDetailsOfSelectedCompany(newValue);
                     }
                 });
     }
@@ -80,19 +81,8 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
                     if (newValue != null) {
                         logger.fine("Selection in company's job list changed to : '" + newValue + "'");
                         raise(new CompanyJobListDetailsPanelSelectionChangedEvent(newValue));
-                        showShortlistOfSelectedJob(newValue);
                     }
                 });
-    }
-
-    /**
-     * Right side of {@code CompanyJobDetailsPanel} shows the list of jobs
-     * and their details {@code JobCard} of the selected Company.
-     */
-    private void showJobDetailsOfSelectedCompany(Company selectedCompany) {
-        companyJobDetailsView.setItems(selectedCompany.getUniqueJobList().getInternalList());
-        companyJobDetailsView.setCellFactory(listView -> new CompanyJobDetailsViewCell());
-        numberOfJobOffers.setText(String.valueOf(selectedCompany.getUniqueJobList().getInternalList().size()));
     }
 
     /**
@@ -138,17 +128,18 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handleCompanyListDetailsPanelSelectionChangedEvent(CompanyListDetailsPanelSelectionChangedEvent
-                                                                                event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event,
-                "Selection Changed to " + event.getNewSelection().getCompanyName().value));
-    }
-
-    @Subscribe
     private void handleCompanyJobListDetailsPanelSelectionChangedEvent(CompanyJobListDetailsPanelSelectionChangedEvent
                                                                                    event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event,
                 "Selection Changed to " + event.getNewSelection().getJob().value));
+        showShortlistOfSelectedJob(event.getNewSelection());
+    }
+
+    @Subscribe
+    private void handleShowUpdatedCompanyJobListEvent(ShowUpdatedCompanyJobListRequestEvent
+                                                                               event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        numberOfJobOffers.setText(String.valueOf(event.totalNumberOfJobOffersInSelectedCompany));
     }
 
     /**

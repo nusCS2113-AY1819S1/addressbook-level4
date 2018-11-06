@@ -89,11 +89,11 @@ https://github.com/CS2113-AY1819S1-F09-4/main/pull/61[here]
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-* include::../UserGuide.adoc[tag=switch]
-* include::../UserGuide.adoc[tag=select]
-* include::../UserGuide.adoc[tag=deleteShortlist]
-* include::../UserGuide.adoc[tag=shortlist]
-* include::../UserGuide.adoc[tag=list]
+include::../UserGuide.adoc[tag=switch]
+include::../UserGuide.adoc[tag=select]
+include::../UserGuide.adoc[tag=deleteShortlist]
+include::../UserGuide.adoc[tag=shortlist]
+include::../UserGuide.adoc[tag=list]
 
 
 == Contributions to the Developer Guide
@@ -102,7 +102,7 @@ https://github.com/CS2113-AY1819S1-F09-4/main/pull/61[here]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-* include::../DeveloperGuide.adoc[tag=switch]
-* include::../DeveloperGuide.adoc[tag=shortlist]
+include::../DeveloperGuide.adoc[tag=switch]
+include::../DeveloperGuide.adoc[tag=shortlist]
 
 

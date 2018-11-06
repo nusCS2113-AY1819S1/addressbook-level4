@@ -71,11 +71,9 @@ public class CandidateCard extends UiPart<Region> {
 
         if (tagName.equals("BLACKLISTED")) {
             label.setStyle("-fx-background-color: #111122;");
-        }
-        else if (tagName.equals("SHORTLISTED")) {
+        } else if (tagName.equals("SHORTLISTED")) {
             label.setStyle("-fx-background-color: rgba(52,255,65,0.99);");
             label.setTextFill(Color.rgb(0, 0, 0));
-
         }
         return label;
     }

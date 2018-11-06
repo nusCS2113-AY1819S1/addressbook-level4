@@ -22,24 +22,24 @@ public class ModelManagerTest {
     private ModelManager modelManager = new ModelManager();
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasCandidate_nullCandidate_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         modelManager.hasCandidate(null);
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasCandidate_candidateNotInCandidateBook_returnsFalse() {
         assertFalse(modelManager.hasCandidate(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasCandidate_candidateInCandidateBook_returnsTrue() {
         modelManager.addCandidate(ALICE);
         assertTrue(modelManager.hasCandidate(ALICE));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredCandidateList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         modelManager.getFilteredCandidateList().remove(0);
     }
@@ -81,5 +81,23 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setCandidateBookFilePath(Paths.get("differentFilePath"));
         assertTrue(modelManager.equals(new ModelManager(candidateBook, new CompanyBook(), differentUserPrefs)));
+    }
+
+    // ================================== Shortlist functions ====================================== //
+
+    @Test
+    public void shortlistCandidateToJobOffer_candidateInAddressBook_returnsTrue() {
+
+        //modelManager.shortlistCandidateToJobOffer(ALICE,);
+    }
+
+    @Test
+    public void deleteShortlistedCandidateFromJobOffer_candidateInShortlistedCandidateList_returnsTrue() {
+
+    }
+
+    @Test
+    public void deleteShortlistedCandidateFromJobOffer_candidateInShortlistedCandidateList_returnsFalse() {
+
     }
 }

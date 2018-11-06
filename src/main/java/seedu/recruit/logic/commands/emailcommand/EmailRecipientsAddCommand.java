@@ -17,108 +17,180 @@ import seedu.recruit.ui.MainWindow;
 /**
  * This class handles the add sub command for email recipients phase
  */
-public class EmailRecipientsAddCommand extends EmailRecipientsSelectCommand {
+public class EmailRecipientsAddCommand extends EmailRecipientsCommand {
+
+    private ArrayList<Candidate> duplicateCandidates = new ArrayList<>();
+    private ArrayList<JobOffer> duplicateJobOffers = new ArrayList<>();
+    private ArrayList<Candidate> addedCandidates = new ArrayList<>();
+    private ArrayList<JobOffer> addedJobOffers = new ArrayList<>();
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         EmailUtil emailUtil = model.getEmailUtil();
-        ArrayList<Candidate> duplicateCandidates = new ArrayList<>();
-        ArrayList<JobOffer> duplicateJobOffers = new ArrayList<>();
 
         //Check if there are already recipients added
         if (!emailUtil.isHasRecipientsAdded()) {
             if (MainWindow.getDisplayedBook().equals("candidateBook")) {
-                ObservableList<Candidate> recipients = model.getFilteredCandidateList();
-                for (Candidate recipient : recipients) {
-                    emailUtil.addCandidate(recipient);
+                if (addCandidates(model, emailUtil)) {
+                    emailUtil.setAreRecipientsCandidates(true);
+                    emailUtil.setHasRecipientsAdded(true);
                 }
-                emailUtil.setAreRecipientsCandidates(true);
             } else {
-                ObservableList<JobOffer> recipients = model.getFilteredCompanyJobList();
-                for (JobOffer recipient : recipients) {
-                    emailUtil.addJobOffer(recipient);
+                if (addJobOffers(model, emailUtil)) {
+                    emailUtil.setAreRecipientsCandidates(false);
+                    emailUtil.setHasRecipientsAdded(true);
                 }
-                emailUtil.setAreRecipientsCandidates(false);
             }
-            emailUtil.setHasRecipientsAdded(true);
+        //else check if objects being added are the same as the initial added objects
         } else {
-            //check if objects being added are the same as the initial added objects
             if (emailUtil.isAreRecipientsCandidates()) {
                 if (MainWindow.getDisplayedBook().equals("candidateBook")) {
-                    ObservableList<Candidate> recipients = model.getFilteredCandidateList();
-                    for (Candidate recipient : recipients) {
-                        //if added successfully into linkedhashset, means it was not there.
-                        //if not added successfully then object already exists.
-                        if (!emailUtil.addCandidate(recipient)) {
-                            duplicateCandidates.add(recipient);
-                        }
-                    }
+                    addCandidates(model, emailUtil);
                 } else {
-                    return new CommandResult("ERROR: You can only add candidates!");
+                    return new CommandResult("ERROR: You can only add candidates!\n" + MESSAGE_USAGE);
                 }
             } else {
                 if (MainWindow.getDisplayedBook().equals("companyBook")) {
-                    ObservableList<JobOffer> recipients = model.getFilteredCompanyJobList();
-                    for (JobOffer recipient : recipients) {
-                        //if added successfully into linkedhashset, means it was not there.
-                        //if not added successfully then object already exists.
-                        if (!emailUtil.addJobOffer(recipient)) {
-                            duplicateJobOffers.add(recipient);
-                        }
-                    }
+                    addJobOffers(model, emailUtil);
                 } else {
-                    return new CommandResult("ERROR: You can only add job offers!");
+                    return new CommandResult("ERROR: You can only add job offers!\n" + MESSAGE_USAGE);
                 }
             }
         }
 
         //Generate duplicate string (if any)
+        StringBuilder duplicates = new StringBuilder(
+                "Unable to add the following because it already has been added before:\n");
+        boolean hasDuplicates = generateDuplicate(emailUtil, duplicates);
+
+        //Generate added recipients string
+        StringBuilder recipients = new StringBuilder("Recipients added:\n");
+        generateRecipients(emailUtil, recipients);
+
+        //Check if both recipients string and duplicate string is empty
+        if (duplicates.toString().equals("Unable to add the following because it already has been added before:\n")
+            && recipients.toString().equals("Recipients added:\n")) {
+            return new CommandResult("ERROR: Nothing was selected!\n" + MESSAGE_USAGE);
+        }
+
+        //Generate output string
+        StringBuilder output = new StringBuilder();
+        generateOutput(hasDuplicates, output, duplicates, recipients);
+        return new CommandResult(output.toString());
+    }
+
+    /**
+     * generates output string
+     * @param hasDuplicates
+     * @param output
+     * @param duplicates
+     * @param recipients
+     */
+    private void generateOutput(boolean hasDuplicates,
+                                StringBuilder output,
+                                StringBuilder duplicates,
+                                StringBuilder recipients) {
+        //if there are duplicates, add the duplicate string in
+        if (hasDuplicates) {
+            output.append(duplicates);
+        }
+        //only include recipients string if it's not empty
+        if (!recipients.toString().equals("Recipients added:\n")) {
+            output.append(recipients);
+        }
+        output.append(EmailRecipientsCommand.MESSAGE_USAGE);
+    }
+
+    /**
+     * generates recipients string
+     * @param emailUtil
+     * @param recipients
+     */
+    @SuppressWarnings("Duplicates")
+    private void generateRecipients(EmailUtil emailUtil, StringBuilder recipients) {
+        if (emailUtil.isAreRecipientsCandidates()) {
+            for (Candidate addedCandidate : addedCandidates) {
+                recipients.append(addedCandidate.getName().toString());
+                recipients.append("\n");
+            }
+        } else {
+            for (JobOffer addedJobOffer : addedJobOffers) {
+                recipients.append(emailUtil.getRecipientJobOfferName(addedJobOffer));
+                recipients.append("\n");
+            }
+        }
+    }
+
+    /**
+     * generates duplicate string
+     * @param emailUtil
+     * @param duplicates
+     * @return boolean value if there is duplicates
+     */
+    @SuppressWarnings("Duplicates")
+    private boolean generateDuplicate(EmailUtil emailUtil, StringBuilder duplicates) {
         boolean hasDuplicates = false;
-        String duplicates = "Unable to add the following because it already has been added before:\n";
         if (duplicateCandidates.size() != 0 || duplicateJobOffers.size() != 0) {
             if (emailUtil.isAreRecipientsCandidates()) {
                 for (Candidate duplicateCandidate : duplicateCandidates) {
-                    duplicates += duplicateCandidate.getName().toString();
-                    duplicates += "\n";
+                    duplicates.append(duplicateCandidate.getName().toString());
+                    duplicates.append("\n");
                 }
             } else {
                 for (JobOffer duplicateJobOffer : duplicateJobOffers) {
-                    duplicates += model.getRecipientJobOfferName(duplicateJobOffer);
-                    duplicates += "\n";
+                    duplicates.append(emailUtil.getRecipientJobOfferName(duplicateJobOffer));
+                    duplicates.append("\n");
                 }
             }
             hasDuplicates = true;
         }
+        return hasDuplicates;
+    }
 
-        //Generate recipients string, if there are duplicates, remove them.
-        String recipients = "Recipients added:\n";
-        if (hasDuplicates) {
-            if (emailUtil.isAreRecipientsCandidates()) {
-                recipients += model.getFilteredCandidateNames(duplicateCandidates);
+    /**
+     * adds candidates into the candidates arrays
+     * @param model
+     * @param emailUtil
+     * @return boolean if there was anything present getFilteredCandidateList()
+     */
+    private boolean addCandidates(Model model, EmailUtil emailUtil) {
+        ObservableList<Candidate> recipients = model.getFilteredCandidateList();
+        if (recipients.size() == 0) {
+            return false;
+        }
+        for (Candidate recipient : recipients) {
+            //if added successfully into linkedhashset, means it was not there.
+            //if not added successfully then object already exists.
+            if (!emailUtil.addCandidate(recipient)) {
+                duplicateCandidates.add(recipient);
             } else {
-                recipients += model.getFilteredRecipientJobOfferNames(duplicateJobOffers);
+                addedCandidates.add(recipient);
             }
-        } else {
-            if (emailUtil.isAreRecipientsCandidates()) {
-                recipients += model.getFilteredCandidateNames();
+        }
+        return true;
+    }
+
+    /**
+     * adds job offers into the job offers arrays
+     * @param model
+     * @param emailUtil
+     * @return boolean if there was anything present getFilteredCandidateList()
+     */
+    private boolean addJobOffers(Model model, EmailUtil emailUtil) {
+        ObservableList<JobOffer> recipients = model.getFilteredCompanyJobList();
+        if (recipients.size() == 0) {
+            return false;
+        }
+        for (JobOffer recipient : recipients) {
+            //if added successfully into linkedhashset, means it was not there.
+            //if not added successfully then object already exists.
+            if (!emailUtil.addJobOffer(recipient)) {
+                duplicateJobOffers.add(recipient);
             } else {
-                recipients += model.getFilteredRecipientJobOfferNames();
+                addedJobOffers.add(recipient);
             }
         }
-
-        //Generate output string
-        String output = "";
-
-        if (hasDuplicates) {
-            output += duplicates;
-        }
-
-        if (!recipients.equals("Recipients added:\n")) {
-            output += recipients;
-        }
-
-        output += EmailRecipientsSelectCommand.MESSAGE_USAGE;
-        return new CommandResult(output);
+        return true;
     }
 }

@@ -1,6 +1,6 @@
 package seedu.recruit.logic.parser;
 
-import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_INTERFACE_COMMAND_FORMAT;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -15,8 +15,6 @@ import seedu.recruit.model.commons.Email;
 import seedu.recruit.model.commons.Phone;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
-import seedu.recruit.model.joboffer.UniqueJobList;
-
 
 /**
  * Parses input arguments and creates a new AddCompanyCommand object
@@ -31,11 +29,12 @@ public class AddCompanyCommandParser implements Parser<AddCompanyCommand> {
      */
     public AddCompanyCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_COMPANY_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE);
+                ArgumentTokenizer.tokenize(" " + args, PREFIX_COMPANY_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_COMPANY_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCompanyCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_INTERFACE_COMMAND_FORMAT,
+                    AddCompanyCommand.COMMAND_WORD, AddCompanyCommand.MESSAGE_USAGE));
 
         }
 
@@ -44,7 +43,7 @@ public class AddCompanyCommandParser implements Parser<AddCompanyCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
 
-        Company company = new Company(companyName, address, email, phone, new UniqueJobList());
+        Company company = new Company(companyName, address, email, phone);
         return new AddCompanyCommand(company);
     }
 

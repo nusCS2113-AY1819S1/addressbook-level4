@@ -11,16 +11,17 @@ import seedu.recruit.logic.LogicState;
 import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.FindCandidateCommand;
 import seedu.recruit.logic.commands.FindCompanyCommand;
+import seedu.recruit.logic.commands.FindJobOfferCommand;
 import seedu.recruit.logic.commands.ListCandidateCommand;
 import seedu.recruit.logic.commands.ListCompanyCommand;
 import seedu.recruit.logic.commands.SwitchBookCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailContentsAddCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailContentsBackCommand;
+import seedu.recruit.logic.commands.emailcommand.EmailContentsCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailContentsNextCommand;
-import seedu.recruit.logic.commands.emailcommand.EmailContentsSelectCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailRecipientsAddCommand;
+import seedu.recruit.logic.commands.emailcommand.EmailRecipientsCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailRecipientsNextCommand;
-import seedu.recruit.logic.commands.emailcommand.EmailRecipientsSelectCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailSendBackCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailSendCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailSendPreviewCommand;
@@ -44,7 +45,7 @@ public class EmailParser {
     public Command parseCommand(String commandWord, String arguments, LogicState state, EmailUtil emailUtil)
             throws ParseException {
         //Email command set recipients step
-        if (state.nextCommand.equals(EmailRecipientsSelectCommand.COMMAND_LOGIC_STATE)) {
+        if (state.nextCommand.equals(EmailRecipientsCommand.COMMAND_LOGIC_STATE)) {
             switch (commandWord) {
 
             case ListCandidateCommand.COMMAND_WORD:
@@ -58,6 +59,9 @@ public class EmailParser {
 
             case FindCompanyCommand.COMMAND_WORD:
                 return new FindCompanyCommandParser().parse(arguments);
+
+            case FindJobOfferCommand.COMMAND_WORD:
+                return new FindJobOfferCommandParser().parse(arguments);
 
             case SwitchBookCommand.COMMAND_WORD:
                 return new SwitchBookCommand();
@@ -74,7 +78,7 @@ public class EmailParser {
 
         //Email command set contents step. Allow certain commands depending whether
         //recipients are candidates or job offers.
-        } else if (state.nextCommand.equals(EmailContentsSelectCommand.COMMAND_LOGIC_STATE)
+        } else if (state.nextCommand.equals(EmailContentsCommand.COMMAND_LOGIC_STATE)
                 && emailUtil.isAreRecipientsCandidates()) {
             switch (commandWord) {
 
@@ -83,6 +87,9 @@ public class EmailParser {
 
             case FindCompanyCommand.COMMAND_WORD:
                 return new FindCompanyCommandParser().parse(arguments);
+
+            case FindJobOfferCommand.COMMAND_WORD:
+                return new FindJobOfferCommandParser().parse(arguments);
 
             case EMAIL_NEXT_COMMAND:
                 return new EmailContentsNextCommand();
@@ -96,7 +103,7 @@ public class EmailParser {
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
-        } else if (state.nextCommand.equals(EmailContentsSelectCommand.COMMAND_LOGIC_STATE)
+        } else if (state.nextCommand.equals(EmailContentsCommand.COMMAND_LOGIC_STATE)
                 && !emailUtil.isAreRecipientsCandidates()) {
             switch (commandWord) {
 

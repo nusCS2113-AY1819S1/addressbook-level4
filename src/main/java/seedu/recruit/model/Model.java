@@ -1,6 +1,5 @@
 package seedu.recruit.model;
 
-import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -181,7 +180,7 @@ public interface Model {
      * @code companyName has to exist in the CompanyBook
      * @code jobOffer must not already exist inside the job list of companyName
      */
-    void addJobOffer(CompanyName companyName, JobOffer jobOffer);
+    void addJobOffer(JobOffer jobOffer);
 
     /**
      * Sorts the list of job offers in CompanyBook
@@ -191,7 +190,7 @@ public interface Model {
     /**
      * Returns true if a company has a job offer with the same identity as {@code jobOffer} exists in the CompanyBook.
      */
-    boolean hasJobOffer(CompanyName companyName, JobOffer jobOffer);
+    boolean hasJobOffer(JobOffer jobOffer);
 
     /**
      * Replaces the given job offer {@code target} in the list with {@code editedJobOffer}.
@@ -200,14 +199,6 @@ public interface Model {
      * company book.
      */
     void updateJobOfferInCompanyBook(JobOffer target, JobOffer editedJobOffer);
-
-    /**
-     * Replaces the given job offer {@code target} in the list with {@code editedJobOffer}.
-     * {@code target} must exist in the company's job list {@code company}.
-     * The job offer identity of {@code editedJobOffer} must not be the same as another existing job offer in the
-     * same company{@code company}.
-     */
-    void updateJobOfferInSelectedCompany(Company company, JobOffer target, JobOffer editedJobOffer);
 
     /**
      * Deletes the given job offer.
@@ -249,48 +240,4 @@ public interface Model {
      * Setter for emailUtil in model
      */
     void setEmailUtil(EmailUtil emailUtil);
-
-    /**
-     * Returns a concatenated string of names of job offers for email select recipients command
-     */
-    String getFilteredRecipientJobOfferNames();
-
-    /**
-     * @param duplicateJobOffers arraylist of duplicate joboffers
-     * @return a concatenated string of names of job offers
-     *         for email select recipients command minus specified job offers
-     */
-    String getFilteredRecipientJobOfferNames(ArrayList<JobOffer> duplicateJobOffers);
-
-    /**
-     * Returns a concatendated string of names of job offers for email select contents command
-     */
-    String getFilteredContentJobOfferNames();
-
-    /**
-     * @param duplicateJobOffers arraylist of duplicate joboffers
-     * @return a concatenated string of names of job offers
-     *         for email select contents command minus specified job offers
-     */
-    String getFilteredContentJobOfferNames(ArrayList<JobOffer> duplicateJobOffers);
-
-    /**
-     * Returns a concatenated string of names of candidates for email command
-     */
-    String getFilteredCandidateNames();
-
-    /**
-     * Returns a concatenated string of names of candidates for email command minus specified candidates
-     */
-    String getFilteredCandidateNames(ArrayList<Candidate> duplicateCandidates);
-
-    /**
-     * String of company name regarding: job offer
-     */
-    String getRecipientJobOfferName(JobOffer jobOffer);
-
-    /**
-     * String of job offer at company
-     */
-    String getContentJobOfferName(JobOffer jobOffer);
 }
