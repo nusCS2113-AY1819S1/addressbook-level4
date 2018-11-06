@@ -10,6 +10,7 @@ import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.joboffer.JobOffer;
 
@@ -24,7 +25,7 @@ public class EmailContentsAddCommand extends EmailContentsCommand {
     private ArrayList<JobOffer> addedJobOffers = new ArrayList<>();
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         requireNonNull(model);
         EmailUtil emailUtil = model.getEmailUtil();
 

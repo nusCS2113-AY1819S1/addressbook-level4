@@ -7,6 +7,7 @@ import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.model.CompanyBook;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 
 /**
  * Clears the CompanyBook.
@@ -18,7 +19,7 @@ public class ClearCompanyBookCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears Company Book.";
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         requireNonNull(model);
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
         model.resetCompanyData(new CompanyBook());

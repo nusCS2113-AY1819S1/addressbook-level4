@@ -7,6 +7,7 @@ import seedu.recruit.commons.events.ui.SwitchBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 
 /**
  * Switches view between Candidate Book and Company Book
@@ -29,7 +30,7 @@ public class SwitchBookCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws CommandException {
         requireNonNull(model);
         EventsCenter.getInstance().post(new SwitchBookRequestEvent());
         return new CommandResult(MESSAGE_SUCCESS);

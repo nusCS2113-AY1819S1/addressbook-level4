@@ -7,6 +7,7 @@ import java.util.Optional;
 import seedu.recruit.commons.events.model.CandidateBookChangedEvent;
 import seedu.recruit.commons.events.model.CompanyBookChangedEvent;
 import seedu.recruit.commons.events.storage.DataSavingExceptionEvent;
+import seedu.recruit.commons.events.storage.UserPrefsChangedEvent;
 import seedu.recruit.commons.exceptions.DataConversionException;
 import seedu.recruit.model.ReadOnlyCandidateBook;
 import seedu.recruit.model.ReadOnlyCompanyBook;
@@ -28,6 +29,8 @@ public interface Storage extends CandidateBookStorage, CompanyBookStorage, UserP
 
     @Override
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
+
+    void handleUserPrefsChangedEvent(UserPrefsChangedEvent event);
 
     // ================ CandidateBook methods ============================== //
 
