@@ -17,6 +17,7 @@ public class UserPrefs {
     private Path candidateBookFilePath = Paths.get("data" , "candidatebook.xml");
     private Path companyBookFilePath = Paths.get("data" , "companybook.xml");
 
+
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
     }
