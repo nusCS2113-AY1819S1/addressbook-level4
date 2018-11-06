@@ -25,32 +25,37 @@ This enhancement itself is a new command and it does not affect existing command
 group command features to allow Distribute command to be completed. The implementation started off easy as I added the nationality and gender fields into the person profile. However, the most challenging part was creating the algorithm for
 the distribution process. In order to make it modular and reduce duplicate code, much time was utilized in planning and designing the algorithm.
 
-** Credits: 3rd Party libraries were not used in this implementation. However, I have inferred a snippet of code provided on Stack Overflow.
-The code that was adapted from Stack Overflow was from [https://stackoverflow.com/a/22132422/3818748[Sort a Map<Key, Value> by values]]. The code was used int `DistributeUtil.java` file,
+** Credits: 3rd party libraries were not used in this implementation. However, I have inferred a snippet of code provided on Stack Overflow.
+The code that was adapted from Stack Overflow was from [https://stackoverflow.com/a/22132422/3818748[Sort a Map<Key, Value> by values]]. The code was used in `DistributeUtil.java` file,
 in the `numberOfDifferentNationality` method.
 
-* *Minor enhancement*: Added the Nationality and Gender Field into Person Object, Fixed Undo/Redo feature for Distribute Command.
-* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=tsuweiquan[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+//* *Minor enhancement*: Added the Nationality and Gender Field into Person Object, Fixed Undo/Redo feature for Distribute Command.
+//* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=tsuweiquan[Functional code]]
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+*** Managed releases from `v1.1` - `v1.4` (6 releases) on GitHub
 ** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Assist in Create Group Command feature with location and tags field (Pull requests https://github.com/CS2113-AY1819S1-T13-4/main/pull/19[#19])
+*** Add Nationality and Gender field into Person Object. (Pull requests https://github.com/CS2113-AY1819S1-T13-4/main/pull/31[#31])
+*** Update add command to include the nationality and gender field to be included. (Pull requests https://github.com/CS2113-AY1819S1-T13-4/main/pull/31[#31])
+*** Update edit command to include the nationality and gender field to be included. (Pull requests https://github.com/CS2113-AY1819S1-T13-4/main/pull/31[#31])
+*** Update UI to display nationality and gender field.
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Did cosmetic tweaks to existing contents of the User Guide, DeveloperGuide and README.adoc (Pull Request: https://github.com/CS2113-AY1819S1-T13-4/main/pull/5[#5], https://github.com/CS2113-AY1819S1-T13-4/main/pull/63[#63], https://github.com/CS2113-AY1819S1-T13-4/main/pull/82[#82], https://github.com/CS2113-AY1819S1-T13-4/main/pull/94[#94], https://github.com/CS2113-AY1819S1-T13-4/main/pull/95[#95])
+*** Responsible for updating App version (Pull request: https://github.com/CS2113-AY1819S1-T13-4/main/pull/102[#102])
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
-
-_{you can add/remove categories in the list above}_
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-T13-4/main/pull/78[#78], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+*** Contributed to forum discussions (Questions:  https://github.com/nusCS2113-AY1819S1/forum/issues/101[#101])
+*** Reported bugs and suggestions for other teams in the class (Tested on T09-3:  https://github.com/CS2113-AY1819S1-T09-3/main/issues/75[1], https://github.com/CS2113-AY1819S1-T09-3/main/issues/79[2], https://github.com/CS2113-AY1819S1-T09-3/main/issues/82[3], https://github.com/CS2113-AY1819S1-T09-3/main/issues/86[4], https://github.com/CS2113-AY1819S1-T09-3/main/issues/91[5])
+*** Responsible for the setup of Travis, Appveyor and Coveralls.
+*** Setup branch protection rules on master branch in `CS2113-AY1819S1-T13-4/main` repository. (Effective from v1.3) +
+- Every Pull Request require 1 approval. +
+- Require Appveyor and Travis status check to pass before merging +
+- Require Branches to be up to date before merging
+- Applies to administrators too
+- Restrict anyone who can push to matching branches
 
 == Contributions to the User Guide
 
@@ -59,9 +64,7 @@ _{you can add/remove categories in the list above}_
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
-
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=distribute]
 
 == Contributions to the Developer Guide
 
@@ -69,13 +72,5 @@ include::../UserGuide.adoc[tag=dataencryption]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=distribute]
 
-include::../DeveloperGuide.adoc[tag=dataencryption]
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_

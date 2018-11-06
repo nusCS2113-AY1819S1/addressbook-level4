@@ -468,7 +468,7 @@ Future Implementation:
 // end::ScriptCommand[]
 
 // tag::distribute[]
-=== Distribute All Students feature
+=== Distribute All Students Feature
 ==== Current Implementation
 The Distribute feature assist the user in distributing all students in the address book to specific number of groups randomly.
 The user is able to control if the distribution process should take into consideration of balanced gender or balanced nationality.

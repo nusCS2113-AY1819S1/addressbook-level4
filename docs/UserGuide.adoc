@@ -173,7 +173,7 @@ The test to be assign grade should be exist in the system record, otherwise, the
 click the person to see the grade .
 Format: `agpt tn/`
 Example: `agpt tn/CS2113Midterm`
-
+// tag::distribute[]
 === Distributed all students into _n_ groups with balanced number of Nationality or Gender: `distinto` `di`
 This functionality creates _n_ number of groups determined by the user, with a general group name specified and randomly distribute all students in the system into _n_ groups. +
  +
@@ -215,7 +215,7 @@ Examples:
 * `distinto 5 n/CS2113-T13-0 g/true nat/false`
 * `di 3 n/CS2113-T09- g/1 nat/0`
 * `di 2 n/CS2113-T14- g/true nat/0`
-
+// end::distribute[]
 === Entering email credential into the Student Management System: `login`
 Enters account credential for sending email +
 Format: `login e/EmailAddress pw/Password`
