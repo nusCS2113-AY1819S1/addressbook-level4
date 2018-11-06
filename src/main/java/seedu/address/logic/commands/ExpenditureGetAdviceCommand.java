@@ -97,8 +97,8 @@ public class ExpenditureGetAdviceCommand extends Command {
 
         advice = x.toString();
 
-        PopUpAdvice ppa = new PopUpAdvice(advice);
-        ppa.popup();
+        PopUpString pps = new PopUpString(advice);
+        pps.popup();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, advice));
 

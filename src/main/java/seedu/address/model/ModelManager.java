@@ -166,6 +166,18 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public String checkRecords(String date) {
+        String records;
+        StringBuilder builder = new StringBuilder();
+        //builder.append("hahahah");
+        builder.append(versionedExpenditureTracker.checkExpenditureRecordsOnParticularDay(date))
+                .append("\n\n")
+                .append(versionedTodoList.checkTasksRecordsOnParticularDay(date));
+        records = builder.toString();
+        return records;
+    }
+
+    @Override
     public void updatePerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
