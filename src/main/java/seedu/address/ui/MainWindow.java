@@ -6,11 +6,11 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
@@ -53,7 +53,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane browserPlaceholder;
 
     @FXML
-    private GridPane calendarPlaceholder;
+    private StackPane calendarPlaceholder;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -141,7 +141,8 @@ public class MainWindow extends UiPart<Stage> {
         //browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
         calendarPanel = new CalendarPanel();
-        calendarPlaceholder.getChildren().add(calendarPanel.getRoot());
+        Node x = calendarPanel.getRoot();
+        calendarPlaceholder.getChildren().add(x);
 
         expenditureListPanel = new ExpenditureListPanel(logic.getFilteredExpenditureList());
         expenditureListPanelPlaceholder.getChildren().add(expenditureListPanel.getRoot());
@@ -226,6 +227,10 @@ public class MainWindow extends UiPart<Stage> {
 
     public ExpenditureListPanel getExpenditureListPanel() {
         return expenditureListPanel;
+    }
+
+    public CalendarPanel getCalendarPanel() {
+        return calendarPanel;
     }
 
     void releaseResources() {
