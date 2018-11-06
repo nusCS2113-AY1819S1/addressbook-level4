@@ -7,15 +7,15 @@ import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.logging.Logger;
 
+import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.Text;
-import javafx.fxml.FXML;
-import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.scene.layout.Region;
-import javafx.geometry.Pos;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.CalendarInfo;
@@ -56,7 +56,7 @@ public class CalendarPanel extends UiPart<Region> {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDateTime now = LocalDateTime.now();
         currentDate.setText("\n                                           " + dtf.format(now));
-        currentDate.setFont(Font.font("verdana",  FontWeight.BOLD, FontPosture.REGULAR, 15));
+        currentDate.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
         currentDate.setFill(Color.ORANGE);
         //currentDate.setLayoutY(20);
         //currentDate.setLayoutX(0);
@@ -104,12 +104,12 @@ public class CalendarPanel extends UiPart<Region> {
                 text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
                 text.setFill(Color.WHEAT);
                 calendarView.add(text, 5, 0);
-            } else if (j == 6) {
+            } else {
                 Text text = new Text("Sat");
                 text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
                 text.setFill(Color.WHEAT);
                 calendarView.add(text, 6, 0);
-            } else {}
+            }
         }
 
         int numOfDays;
