@@ -2,7 +2,8 @@ package seedu.address.model.book;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.logic.commands.SellCommand.MESSAGE_INVALID_QUANTITY;
+import static seedu.address.logic.commands.SellCommand.MESSAGE_MIN_QUANTITY;
+import static seedu.address.logic.commands.StockCommand.MESSAGE_MAX_QUANTITY;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 
@@ -20,6 +21,9 @@ public class Quantity {
      */
     public static final String QUANTITY_VALIDATION_REGEX = "(\\d{1,3})";
 
+    private static final Integer MAX_QUANTITY_BOOKS = 999;
+    private static final Integer MIN_QUANTITY_BOOKS = 0;
+
     private String value;
     /**
      * Constructs an {@code Quantity}.
@@ -36,8 +40,16 @@ public class Quantity {
         return value;
     }
 
-    public void increase(int amount) {
-        this.value = Integer.toString(Integer.parseInt(value) + amount);
+    /**
+     * Increases the number of books by amount without exceeding 999
+     * @param amount number of books to increase by
+     */
+    public void increase(int amount) throws CommandException {
+        if (Integer.parseInt(value) + amount <= MAX_QUANTITY_BOOKS) {
+            this.value = Integer.toString(Integer.parseInt(value) + amount);
+        } else {
+            throw new CommandException(MESSAGE_MAX_QUANTITY);
+        }
     }
 
     /**
@@ -47,10 +59,10 @@ public class Quantity {
      */
     public void decrease(int selling) throws CommandException {
         Integer after = Integer.parseInt(value) - selling;
-        if (after >= 0) {
+        if (after >= MIN_QUANTITY_BOOKS) {
             this.value = Integer.toString(after);
         } else {
-            throw new CommandException(MESSAGE_INVALID_QUANTITY);
+            throw new CommandException(MESSAGE_MIN_QUANTITY);
         }
     }
 

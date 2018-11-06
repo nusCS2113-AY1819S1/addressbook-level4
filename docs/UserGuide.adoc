@@ -84,6 +84,8 @@ A book can have any number of tags (including 0) +
 ****
 * ISBNs are calculated using a specific mathematical formula and include a check digit to validate the number. Random invalid 10 to 13 digit values will produce an error
 * ISBN field allows input with and without dashes
+* PRICE field is the selling price of the book
+* COST field is the cost price of the book
 ****
 
 Examples:
@@ -95,6 +97,10 @@ Examples:
 
 Finds books with quantity less than or equal to the given input value. List of books displayed in ascending order based on quantity left +
 Format: `check QUANTITY`
+
+****
+* QUANTITY only accepts input between 0 and 999, inclusive
+****
 
 Example:
 
@@ -177,7 +183,7 @@ Deletes the 2nd book in the displayed list.
 * `delete i/978-2-12-345680-3` +
 Deletes the book with the corresponding iSBN13 from the inventory list.
 
-=== Editing a person : `edit`
+=== Editing a book : `edit`
 
 Edits an existing book in the inventory book. +
 Format: `edit INDEX [n/NAME] [i/ISBN] [p/PRICE] [c/COST] [t/TAG]...`
@@ -215,6 +221,7 @@ Format: `request i/ISBN13 e/EMAIL q/QUANTITY`
 
 ****
 * The email is for owner to confirm the order with requester.
+* Isbn does not need to exist in the inventory but needs to be valid for owners to get the book
 ****
 
 Examples:

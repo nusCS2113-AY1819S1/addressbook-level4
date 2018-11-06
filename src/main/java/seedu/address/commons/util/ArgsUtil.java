@@ -3,6 +3,7 @@ package seedu.address.commons.util;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.book.Book;
@@ -15,7 +16,11 @@ public class ArgsUtil {
     public static Book getBookToEdit (Model model, List<Book> lastShownList, String argsType, String findBookBy)
             throws CommandException {
         if (argsType.equals("Isbn")) {
-            return model.getBook(findBookBy);
+            if (model.getBook(findBookBy) != null) {
+                return model.getBook(findBookBy);
+            } else {
+                throw new CommandException(Messages.MESSAGE_ISBN_NOT_IN_BOOK);
+            }
         } else if (argsType.equals("Index") && Integer.parseInt(findBookBy) < lastShownList.size()) {
             return lastShownList.get(Integer.parseInt(findBookBy));
         } else {
