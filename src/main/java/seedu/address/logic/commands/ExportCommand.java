@@ -16,11 +16,13 @@ import seedu.address.model.Model;
 public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
-
+    public static final String COMMAND_PARAMETERS = "Parameters: FILENAME (must end with .xml)\n";
+    public static final String COMMAND_EXAMPLE = "Example: " + COMMAND_WORD + " export.xml";
+  
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Export the persons and todos listed "
             + "in the address book.\n"
-            + "Parameters: FILENAME (must end with .xml)\n"
-            + "Example: " + COMMAND_WORD + " export.xml ";
+            + COMMAND_PARAMETERS
+            + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_EXPORT_SUCCESS = "Exported persons and todos listed to %1$s";
     public static final String MESSAGE_FAILURE = "Export failed!";
