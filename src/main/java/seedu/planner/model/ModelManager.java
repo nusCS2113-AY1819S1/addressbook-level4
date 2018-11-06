@@ -217,6 +217,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
     @Override
     public Double getTotalSpend (Limit limitIn) {
+        if (limitIn.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
+            limitIn = generateThisMonthLimit(limitIn);
+        }
         requireNonNull(limitIn);
         return versionedFinancialPlanner.getTotalSpend(limitIn);
     }
@@ -225,7 +228,12 @@ public class ModelManager extends ComponentManager implements Model {
         String output = "";
         int count = 1;
         for (Limit i: limits) {
-            if (isExceededLimit(i)) {
+            if (isExceededLimit(i) && i.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
+                output += "\n" + String.format("%d.", count++) + generateLimitOutput(true, getTotalSpend(i), i);
+            }
+        }
+        for (Limit i: limits) {
+            if (isExceededLimit(i) && !i.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
                 output += "\n" + String.format("%d.", count++) + generateLimitOutput(true, getTotalSpend(i), i);
             }
         }
@@ -237,12 +245,28 @@ public class ModelManager extends ComponentManager implements Model {
         String output = "";
         int count = 1;
         for (Limit i: limits) {
+            if (i.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
+                output += "\n" + "Monthly Limit:\n"
+                        + generateLimitOutput(isExceededLimit(i), getTotalSpend(i), i);
+            }
+        }
+        output += "Normal limits:";
+        for (Limit i: limits) {
+            if (i.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
+                continue;
+            }
             output += "\n" + String.format("%d.", count++)
                     + generateLimitOutput(isExceededLimit(i), getTotalSpend(i), i);
         }
         return output;
     }
 
+    /**
+     * This function is to generate the limit for this month when the according to the
+     * monthly limit.
+     * @param limitIn
+     * @return
+     */
     public Limit generateThisMonthLimit (Limit limitIn) {
         Date today = DateUtil.getDateToday();
         Date dateStart = new Date("01-" + today.getMonth() + "-" + today.getYear());
@@ -264,7 +288,7 @@ public class ModelManager extends ComponentManager implements Model {
         Date dateEnd;
         dateStart = limit.getDateStart();
         dateEnd = limit.getDateEnd();
-        if (limit.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
+        if (dateStart.equals(DATE_SPECIAL_FOR_MONTHLY)) {
             output = String.format(MESSAGE_MONTHLY, DateUtil.getDateToday().getMonth());
         } else if (dateEnd.equals(dateStart)) {
             output = String.format(MESSAGE_SINGLE_DATE, dateStart);
