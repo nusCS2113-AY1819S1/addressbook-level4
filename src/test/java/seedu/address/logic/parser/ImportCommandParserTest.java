@@ -55,21 +55,16 @@ public class ImportCommandParserTest {
 
     @Test
     public void parse_invalidArgsBlank_failure() {
-        String applicationPath = System.getProperty("user.dir");
         String userInput = "   ";
 
         assertParseFailure(parser, userInput,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
     }
 
-
     @Test
     public void parse_invalidArgsPathTooLong_failure() {
-        String applicationPath = System.getProperty("user.dir");
         String userInput = INVALID_USER_INPUT_PATH_TOO_LONG;
 
         assertParseFailure(parser, userInput, MESSAGE_PATH_TOO_LONG);
     }
-
-
 }
