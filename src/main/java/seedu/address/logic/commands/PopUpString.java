@@ -8,13 +8,13 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
- * Pop up a window for the advice on how to spend money
+ * Pop up a window for a particular string
  */
-public class PopUpAdvice {
+public class PopUpString {
 
     private final String content;
 
-    PopUpAdvice(String x) {
+    PopUpString(String x) {
         content = x;
     }
 
