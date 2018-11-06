@@ -44,7 +44,9 @@ public class UserPrefs {
         return exportCsvFilePath;
     }
 
-    public Path getExportFilePath() { return exportFilePath; }
+    public Path getExportFilePath() {
+        return exportFilePath;
+    }
 
     @Override
     public boolean equals(Object other) {

@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 
-import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Filetype;
@@ -41,12 +40,6 @@ public class ExportAllCommand extends Command {
         try {
             // TODO: reset to original form
             model.exportAddressBook();
-            // model.exportFilteredAddressBook();
-            /* try {
-                model.importAddressBook();
-            } catch (DataConversionException e) {
-                throw new CommandException("oh nonononono");
-            } */
         } catch (IOException e) {
             throw new CommandException(MESSAGE_FAILURE);
         }

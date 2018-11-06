@@ -5,8 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -24,8 +22,6 @@ import seedu.address.export.ImportManager;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.todo.Todo;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.XmlAddressBookStorage;
 
 /**
  * Represents the in-memory model of the address book data.
