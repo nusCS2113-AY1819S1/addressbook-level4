@@ -11,7 +11,7 @@ import seedu.address.model.person.TimeTable;
 import seedu.address.testutil.TypicalPersons;
 
 /**
- * A Model stub explicitly for import-command testing.
+ * A Model stub explicitly for import and export command testing.
  */
 public class ModelStubImportExportCommand extends ModelStub {
     private Person person;

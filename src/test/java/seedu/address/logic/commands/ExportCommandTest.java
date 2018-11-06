@@ -66,7 +66,7 @@ public class ExportCommandTest {
 
     /**
      * tests if you can export a typical timetable.
-     * then attempts to import back the timetable
+     * then attempts to import back the timetable (to a fresh ModelStub that has no TimeTable)
      * Tests if the imported timetable data is same as the exported timetable's data
      */
     @Test
@@ -87,7 +87,7 @@ public class ExportCommandTest {
         Command importCommand = new ImportCommand(TEMP_FILE);
         commandResult = importCommand.execute(importModelStub, commandHistory);
 
-        assertEquals(VALID_TIMETABLE, importModelStub.getTimeTable());
+        assertEquals(importModelStub.getTimeTable(), exportModelStub.getTimeTable());
         String expectedMessageImport = String.format(MESSAGE_IMPORT_SUCCESS, TEMP_FILE);
         assertEquals(expectedMessageImport, commandResult.feedbackToUser);
         //import is successful

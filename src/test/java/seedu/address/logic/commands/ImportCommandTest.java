@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 
+import static seedu.address.logic.commands.ExportCommand.MESSAGE_EXPORT_SUCCESS;
 import static seedu.address.logic.commands.ImportCommand.MESSAGE_IMPORT_SUCCESS;
 
 import java.nio.file.Path;
@@ -23,7 +24,7 @@ import seedu.address.testutil.TypicalTimeSlots;
 public class ImportCommandTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "ImportCommandTest");
-    private static final Path EMPTY_FILE = TEST_DATA_FOLDER.resolve("empty.ics"); //totally blank
+    private static final Path EMPTY_FILE = TEST_DATA_FOLDER.resolve("empty.ics"); //totally blank file
     private static final Path NO_DATA_FILE = TEST_DATA_FOLDER.resolve("no_data.ics"); //no calendar data
     private static final Path NO_TT_DATA_FILE = TEST_DATA_FOLDER.resolve("no_timetable_data.ics"); //no timetable data
     private static final Path MISSING_FILE = TEST_DATA_FOLDER.resolve("missing.ics"); //totally missing
@@ -43,6 +44,7 @@ public class ImportCommandTest {
         new ImportCommand(null);
     }
 
+    //Trying to import non-existent file; tell user it is missing.
     @Test
     public void execute_missingFile_throwsCommandException() throws Exception {
         ModelStubImportExportCommand actualModelStub = new ModelStubImportExportCommand();
@@ -54,6 +56,7 @@ public class ImportCommandTest {
         command.execute(actualModelStub, commandHistory);
     }
 
+    //Trying to import file with no iCalendar data; tell user it is empty.
     @Test
     public void execute_noICalendarDataFile_showsMessageEmpty() throws Exception {
         ModelStubImportExportCommand actualModelStub = new ModelStubImportExportCommand();
@@ -65,6 +68,7 @@ public class ImportCommandTest {
         assertEquals(expectedMessage, commandResult.feedbackToUser);
     }
 
+    //Trying to import file that has iCalendar data, but has no Timetable data; tell user it is empty.
     @Test
     public void execute_noTimeTableDataFile_showsMessageEmpty() throws Exception {
         ModelStubImportExportCommand actualModelStub = new ModelStubImportExportCommand();
@@ -75,6 +79,7 @@ public class ImportCommandTest {
         assertEquals(expectedMessage, commandResult.feedbackToUser);
     }
 
+    //Trying to import completely empty file; tell user it is empty.
     @Test
     public void execute_emptyFile_showsMessageEmpty() throws Exception {
         ModelStubImportExportCommand actualModelStub = new ModelStubImportExportCommand();
@@ -86,16 +91,16 @@ public class ImportCommandTest {
     }
 
     /**
-     * tests if you can import a typical timetable.
-     * Immediately then tests that the imported timetable is identical to the expected timetable.
+     * Tests if an imported timetable is identical to the expected timetable.
      */
     @Test
     public void execute_validFilePath_successful() throws Exception {
+        //VALID_FILE contains the equivalent of VALID_TIMETABLE
         TimeTable expectedTimeTable = VALID_TIMETABLE;
 
         ModelStubImportExportCommand actualModelStub = new ModelStubImportExportCommand();
 
-        Command command = new ImportCommand(VALID_FILE); //VALID_FILE contains the equivalent of VALID_TIMETABLE
+        Command command = new ImportCommand(VALID_FILE);
         CommandResult commandResult = command.execute(actualModelStub, commandHistory);
 
         assertEquals(expectedTimeTable, actualModelStub.getTimeTable());
@@ -104,7 +109,7 @@ public class ImportCommandTest {
     }
 
     /**
-     * tests if you can export a typical timetable and then immediate import this timetable
+     * tests if you can export a typical timetable and then immediately import this timetable
      * Immediately then tests that the data is still the same.
      */
     @Test
@@ -114,14 +119,19 @@ public class ImportCommandTest {
         actualModelStub.updateTimeTable(VALID_TIMETABLE);
 
         Command exportCommand = new ExportCommand(TEMP_FILE); //export timetable to temp file.
-        exportCommand.execute(actualModelStub, commandHistory);
+        CommandResult commandResult = exportCommand.execute(actualModelStub, commandHistory);
+
+        //check export was successful
+        String expectedMessageExport = String.format(MESSAGE_EXPORT_SUCCESS, TEMP_FILE);
+        assertEquals(expectedMessageExport, commandResult.feedbackToUser);
 
         Command importCommand = new ImportCommand(TEMP_FILE); //import timetable from temp file.
-        CommandResult commandResult = importCommand.execute(actualModelStub, commandHistory);
+        commandResult = importCommand.execute(actualModelStub, commandHistory);
 
+        //check import was successful, and timetable is the same
         assertEquals(VALID_TIMETABLE, actualModelStub.getTimeTable());
-        String expectedMessage = String.format(MESSAGE_IMPORT_SUCCESS, TEMP_FILE);
-        assertEquals(expectedMessage, commandResult.feedbackToUser);
+        String expectedMessageImport = String.format(MESSAGE_IMPORT_SUCCESS, TEMP_FILE);
+        assertEquals(expectedMessageImport, commandResult.feedbackToUser);
     }
 }
 

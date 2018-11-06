@@ -37,7 +37,7 @@ public class ImportCommand extends Command {
             + " my_import_file_name";
 
     public static final String MESSAGE_IMPORT_SUCCESS = "Imported timetable at: %1$s.";
-    public static final String MESSAGE_EMPTY = "Timetable file empty at: %1$s.";
+    public static final String MESSAGE_EMPTY = "Could not obtain any TimeTable data from: %1$s\nPlease check that the file is not empty, and contains timetable data.";
     public static final String MESSAGE_IO_ERROR = "Failed to read the file at: %1$s.\nPlease check the file exists.";
     private final Path filePath;
 
