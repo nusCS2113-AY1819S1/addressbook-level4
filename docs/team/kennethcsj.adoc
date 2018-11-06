@@ -26,7 +26,7 @@ BookInventory is a desktop application catered primarily for store owners to man
 
 * *Minor enhancement*: added *the ability to display a list of books less than or equal to a given quantity* using the `check` command.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]]
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=kennethcsj[Functional/Test code]]
 
 * *Other contributions*:
 
