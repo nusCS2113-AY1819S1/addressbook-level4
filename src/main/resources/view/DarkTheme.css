@@ -1,3 +1,28 @@
+.anchorPane{
+    -fx-background-color: #303030;
+}
+
+.anchorPane .title{
+    -fx-font-size: 26pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #ffffff;
+}
+
+.anchorPane .subtitle{
+    -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+}
+
+.anchorPane .content{
+    -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-weight: normal;
+    -fx-text-fill: #ffffff;
+    -fx-opacity: 0.85;
+}
+
 .background {
     -fx-background-color: derive(#1d1d1d, 20%);
     background-color: #0074D9; /* Used in the default.html file */

@@ -125,11 +125,36 @@ public class UniqueBatchList implements Iterable<Batch> {
     }
 
     /**
+     * Gets the batch with the newest date
+     * @return a Batch object
+     */
+    public Batch getLatestBatch() throws EmptyBatchListException {
+        try {
+            sortBatches();
+        } catch (EmptyBatchListException e) {
+            throw e;
+        }
+        return internalList.get(internalList.size() - 1);
+    }
+
+    public int getNumberBatches() {
+        return internalList.size();
+    }
+
+    /**
      * Gets the date of the oldest batch
      * @return a BatchDate object
      */
     public BatchDate getEarliestBatchDate() throws EmptyBatchListException {
         return getEarliestBatch().getBatchDate();
+    }
+
+    /**
+     * Gets the date of the newest batch
+     * @return a BatchDate object
+     */
+    public BatchDate getLatestBatchDate() throws EmptyBatchListException {
+        return getLatestBatch().getBatchDate();
     }
 
     // Quantity Related Methods
