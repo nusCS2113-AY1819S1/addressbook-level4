@@ -1,4 +1,4 @@
-package logic;
+package seedu.address.testutil.logic.commands;
 
 /**
  * Contains helper methods for testing commands.

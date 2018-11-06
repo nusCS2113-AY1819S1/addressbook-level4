@@ -9,8 +9,8 @@ import java.util.List;
 
 import org.junit.Test;
 
-import model.testutil.DrinkBuilder;
 import seedu.address.model.drink.NameContainsKeywordsPredicate;
+import seedu.address.testutil.drinks.DrinkBuilder;
 
 public class NameContainsKeywordsPredicateTest {
     @Test

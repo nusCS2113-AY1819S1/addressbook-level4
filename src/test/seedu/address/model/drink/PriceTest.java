@@ -1,17 +1,16 @@
-package model.drink;
+package seedu.address.model.drink;
 
-import static logic.CommandTestUtil.VALID_DRINK_COST_PRICE;
-import static logic.CommandTestUtil.VALID_DRINK_RETAIL_PRICE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.testutil.logic.commands.CommandTestUtil.VALID_DRINK_COST_PRICE;
+import static seedu.address.testutil.logic.commands.CommandTestUtil.VALID_DRINK_RETAIL_PRICE;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import model.testutil.Assert;
-import seedu.address.model.drink.Price;
+import seedu.address.testutil.Assert;
 
 public class PriceTest {
     @Rule

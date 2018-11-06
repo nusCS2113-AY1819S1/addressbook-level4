@@ -1,4 +1,4 @@
-package logic.commands;
+package seedu.address.logic.commands;
 //@@author liu-tianhang
 import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
@@ -14,12 +14,10 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
-import model.testutil.DrinkBuilder;
 import seedu.address.commons.core.LoginInfo;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.AddDrinkCommand;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.manager.AddDrinkCommand;
 import seedu.address.model.InventoryList;
 import seedu.address.model.ReadOnlyInventoryList;
 import seedu.address.model.drink.Drink;
@@ -27,7 +25,7 @@ import seedu.address.model.user.AuthenticationLevel;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.UserName;
 import seedu.address.model.user.manager.ManagerModel;
-
+import seedu.address.testutil.drinks.DrinkBuilder;
 
 public class AddDrinkCommandTest {
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();

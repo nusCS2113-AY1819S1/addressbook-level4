@@ -1,4 +1,4 @@
-package model.testutil;
+package seedu.address.testutil.batch;
 
 import seedu.address.model.drink.Batch;
 import seedu.address.model.drink.BatchDate;

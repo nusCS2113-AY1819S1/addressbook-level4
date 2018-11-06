@@ -101,4 +101,29 @@ public class Date {
     public int hashCode() {
         return date.hashCode();
     }
+
+    private void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+
+    public Date getDateSixDaysBefore() {
+        setDate(date.minusDays(6));
+
+        return this;
+    }
+
+    public Date getDateTwentyNineDaysBefore() {
+        setDate(date.minusDays(29));
+
+        return this;
+    }
+
+    /**
+     * Returns true is this date is between the {@code start} and {@code end} Dates, inclusive
+     */
+    public boolean between(Date start, Date end) {
+        return (this.compareTo(start) >= 0) && (this.compareTo(end) <= 0);
+    }
+
 }

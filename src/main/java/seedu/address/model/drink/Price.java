@@ -4,8 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Price in DrinkIO
+ * Represents a Price in Drink I/O.
  * Guarantees: Is valid as declared in {@link #isValidPrice(String)}
+ * Note that Price value is limited to Float.MAX_VALUE
  */
 public class Price {
 

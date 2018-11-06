@@ -6,10 +6,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddDrinkCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -18,20 +16,26 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.ViewTransactionsCommand;
 import seedu.address.logic.commands.accountant.AnalyseCostsCommand;
+import seedu.address.logic.commands.accountant.AnalyseProfitCommand;
+import seedu.address.logic.commands.accountant.AnalyseRevenueCommand;
+import seedu.address.logic.commands.manager.AddDrinkCommand;
+import seedu.address.logic.commands.manager.DeleteCommand;
 import seedu.address.logic.commands.stocktaker.BuyDrinkCommand;
 import seedu.address.logic.commands.stocktaker.SellDrinkCommand;
 import seedu.address.logic.commands.user.ChangePasswordCommand;
 import seedu.address.logic.commands.user.CreateAccountCommand;
 import seedu.address.logic.commands.user.DeleteAccountCommand;
 import seedu.address.logic.commands.user.LogoutCommand;
-import seedu.address.logic.parser.AddDrinkCommandParser;
-import seedu.address.logic.parser.BuyDrinkCommandParser;
 import seedu.address.logic.parser.DeleteCommandParser;
 import seedu.address.logic.parser.FindCommandParser;
 import seedu.address.logic.parser.SelectCommandParser;
-import seedu.address.logic.parser.SellDrinkCommandParser;
+import seedu.address.logic.parser.accountant.AnalyseCostsCommandParser;
+import seedu.address.logic.parser.accountant.AnalyseProfitCommandParser;
+import seedu.address.logic.parser.accountant.AnalyseRevenueCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-
+import seedu.address.logic.parser.manager.AddDrinkCommandParser;
+import seedu.address.logic.parser.stocktaker.BuyDrinkCommandParser;
+import seedu.address.logic.parser.stocktaker.SellDrinkCommandParser;
 /**
  * Parses user input.
  */
@@ -57,7 +61,6 @@ public class AdminParser {
 
         String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-
         switch (commandWord) {
         // ========= manager commands ==================
         case AddDrinkCommand.COMMAND_WORD:
@@ -75,10 +78,16 @@ public class AdminParser {
 
         // ========= accountant commands ==================
 
+
+
         case AnalyseCostsCommand.COMMAND_WORD:
-            return new AnalyseCostsCommand();
+            return new AnalyseCostsCommandParser ().parse (arguments);
 
+        case AnalyseProfitCommand.COMMAND_WORD:
+            return new AnalyseProfitCommandParser ().parse (arguments);
 
+        case AnalyseRevenueCommand.COMMAND_WORD:
+            return new AnalyseRevenueCommandParser ().parse (arguments);
 
         // ==========login related command===============//
 

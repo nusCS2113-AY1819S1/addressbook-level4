@@ -239,7 +239,6 @@ public class MainApp extends Application {
      * @return root of primary stage
      */
     private Parent loadFxmlFile(URL location, Stage stage) {
-        System.out.println(location);
         requireNonNull(location);
         fxmlLoader.setLocation(location);
         Parent root = null;

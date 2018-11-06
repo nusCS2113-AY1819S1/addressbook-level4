@@ -4,6 +4,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.analysis.AnalysisPeriodType;
 import seedu.address.commons.events.model.DrinkAttributeChangedEvent;
 import seedu.address.model.LoginInfoManager;
 import seedu.address.model.ModelManager;
@@ -37,6 +38,19 @@ public class AdminModelManager extends ModelManager implements AdminModel {
      */
     protected void indicateDrinkAttributesChanged(Drink drink) {
         raise(new DrinkAttributeChangedEvent(drink));
+    }
+    //===============manager command====================//
+    @Override
+    public void deleteDrink(Drink target) {
+        inventoryList.removeDrink(target);
+        indicateInventoryListChanged();
+    }
+
+    @Override
+    public void addDrink(Drink drink) {
+        inventoryList.addDrink(drink);
+        updateFilteredDrinkList(PREDICATE_SHOW_ALL_DRINKS);
+        indicateInventoryListChanged();
     }
 
     //=====================Stock taker commands====================
@@ -96,8 +110,17 @@ public class AdminModelManager extends ModelManager implements AdminModel {
 
     //=====================Accountant command======================
     @Override
-    public Price analyseCosts() {
-        return analysis.analyseCost();
+    public Price analyseCosts(AnalysisPeriodType period) {
+        return analysis.analyseCost(period);
     }
-
+    /*
+        @Override
+        public Price analyseRevenue() {
+            return analysis.analyseRevenue();
+        }
+        @Override
+        public Price analyseProfit() {
+            return analysis.analyseProfit();
+        }
+    */
 }

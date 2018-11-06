@@ -1,4 +1,4 @@
-package model.testutil;
+package seedu.address.testutil.inventory;
 
 import seedu.address.model.InventoryList;
 import seedu.address.model.drink.Drink;

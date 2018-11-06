@@ -1,22 +1,22 @@
-package model.drink;
+package seedu.address.model.drink;
 
-import static logic.CommandTestUtil.VALID_DRINK_COST_PRICE;
-import static logic.CommandTestUtil.VALID_DRINK_NAME_COCA_COLA;
-import static logic.CommandTestUtil.VALID_DRINK_QUANTITY;
-import static logic.CommandTestUtil.VALID_DRINK_RETAIL_PRICE;
-import static logic.CommandTestUtil.VALID_DRINK_TAG_SOFTDRINK;
-import static logic.CommandTestUtil.VALID_DRINK_TAG_TEA;
-import static model.testutil.TypicalDrinks.FNN_GRAPE;
-import static model.testutil.TypicalDrinks.FNN_GRAPE_COPY;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import static seedu.address.testutil.drinks.TypicalDrinks.FNN_GRAPE;
+import static seedu.address.testutil.drinks.TypicalDrinks.FNN_GRAPE_COPY;
+import static seedu.address.testutil.logic.commands.CommandTestUtil.VALID_DRINK_COST_PRICE;
+import static seedu.address.testutil.logic.commands.CommandTestUtil.VALID_DRINK_NAME_COCA_COLA;
+import static seedu.address.testutil.logic.commands.CommandTestUtil.VALID_DRINK_QUANTITY;
+import static seedu.address.testutil.logic.commands.CommandTestUtil.VALID_DRINK_RETAIL_PRICE;
+import static seedu.address.testutil.logic.commands.CommandTestUtil.VALID_DRINK_TAG_SOFTDRINK;
+import static seedu.address.testutil.logic.commands.CommandTestUtil.VALID_DRINK_TAG_TEA;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import model.testutil.DrinkBuilder;
-import seedu.address.model.drink.Drink;
+import seedu.address.testutil.drinks.DrinkBuilder;
 
 public class DrinkTest {
     @Rule

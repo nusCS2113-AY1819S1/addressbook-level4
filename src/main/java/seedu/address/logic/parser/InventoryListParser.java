@@ -6,10 +6,11 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddDrinkCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.manager.AddDrinkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.manager.AddDrinkCommandParser;
 
 /**
  * Parses user input.
@@ -39,7 +40,7 @@ public class InventoryListParser {
         switch (commandWord) {
 
         case AddDrinkCommand.COMMAND_WORD:
-            return new AddDrinkCommandParser().parse(arguments);
+            return new AddDrinkCommandParser ().parse(arguments);
         /*
             case SellDrinkCommand.COMMAND_WORD:
                 return new SellDrinkCommandParser ().parse (arguments);

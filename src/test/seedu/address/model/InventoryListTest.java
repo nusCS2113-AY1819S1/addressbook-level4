@@ -1,12 +1,13 @@
-package model;
+package seedu.address.model;
 
-import static logic.CommandTestUtil.VALID_DRINK_COST_PRICE;
-import static model.testutil.TypicalDrinks.GREEN_TEA;
-import static model.testutil.TypicalDrinks.PEPSI;
-import static model.testutil.TypicalDrinks.getTypicalInventoryList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import static seedu.address.testutil.drinks.TypicalDrinks.GREEN_TEA;
+import static seedu.address.testutil.drinks.TypicalDrinks.PEPSI;
+import static seedu.address.testutil.drinks.TypicalDrinks.getTypicalInventoryList;
+import static seedu.address.testutil.logic.commands.CommandTestUtil.VALID_DRINK_COST_PRICE;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,11 +20,9 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.testutil.DrinkBuilder;
-import seedu.address.model.InventoryList;
-import seedu.address.model.ReadOnlyInventoryList;
 import seedu.address.model.drink.Drink;
 import seedu.address.model.drink.exceptions.DuplicateDrinkException;
+import seedu.address.testutil.drinks.DrinkBuilder;
 
 
 public class InventoryListTest {

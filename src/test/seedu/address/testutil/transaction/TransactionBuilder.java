@@ -1,4 +1,4 @@
-package model.transaction.testutil;
+package seedu.address.testutil.transaction;
 
 import seedu.address.model.drink.Date;
 import seedu.address.model.drink.Drink;

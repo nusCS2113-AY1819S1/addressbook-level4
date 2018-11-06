@@ -1,6 +1,7 @@
 //@@author Lunastryke
-package model.drink;
+package seedu.address.model.drink;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -9,8 +10,8 @@ import java.time.format.DateTimeParseException;
 
 import org.junit.jupiter.api.Test;
 
-import model.testutil.Assert;
-import seedu.address.model.drink.Date;
+import seedu.address.testutil.Assert;
+
 
 class DateTest {
 
@@ -91,5 +92,39 @@ class DateTest {
 
         // is after
         assertTrue(date.isAfter(dateBefore));
+    }
+
+    @Test
+    void getDateSixDaysBefore() {
+        Date currentDate = new Date();
+        LocalDate expectedSixDaysBeforeDate = currentDate.getDate().minusDays(6);
+        Date modifiedDate = new Date();
+        Date actualSixDaysBeforeDate = modifiedDate.getDateSixDaysBefore();
+        assertEquals(expectedSixDaysBeforeDate, actualSixDaysBeforeDate.getDate());
+    }
+
+    @Test
+    void getDateThirtyDaysBefore() {
+        Date currentDate = new Date();
+        LocalDate expectedThirtyDaysBeforeDate = currentDate.getDate().minusDays(29);
+        Date modifiedDate = new Date();
+        Date actualThirtyDaysBeforeDate = modifiedDate.getDateTwentyNineDaysBefore();
+        assertEquals(expectedThirtyDaysBeforeDate, actualThirtyDaysBeforeDate.getDate());
+    }
+
+    @Test
+    void between_notBetweenTwoDates_returnsFalse() {
+        Date dateToTest = new Date().getDateTwentyNineDaysBefore();
+        Date endDate = new Date();
+        Date startDate = new Date().getDateSixDaysBefore();
+        assertFalse(dateToTest.between(startDate, endDate));
+    }
+
+    @Test
+    void between_isBetweenTwoDates_returnsTrue() {
+        Date dateToTest = new Date().getDateSixDaysBefore();
+        Date endDate = new Date();
+        Date startDate = new Date().getDateTwentyNineDaysBefore();
+        assertTrue(dateToTest.between(startDate, endDate));
     }
 }

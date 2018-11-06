@@ -1,12 +1,12 @@
-package model.drink;
+package seedu.address.model.drink;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import model.testutil.Assert;
-import seedu.address.model.drink.Quantity;
+import seedu.address.testutil.Assert;
+
 
 public class QuantityTest {
     @Test

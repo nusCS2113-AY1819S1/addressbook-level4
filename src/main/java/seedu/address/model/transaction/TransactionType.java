@@ -24,5 +24,6 @@ public enum TransactionType {
         return value;
     }
 
+    // TODO: implement a predicate to filter based on type
 
 }
