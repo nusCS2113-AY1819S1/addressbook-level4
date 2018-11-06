@@ -57,6 +57,11 @@ public interface Model {
     Deadline getDeadline();
 
     /**
+     * Gets year of previously selected year from the TaskBook
+     */
+    String getYear();
+
+    /**
      * Replaces the given task {@code target} with {@code editedTask}.
      * {@code target} must exist in the task book.
      * The task identity of {@code editedTask} must not be the same as another existing task in the task book.

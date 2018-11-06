@@ -17,7 +17,6 @@ import seedu.address.model.task.UniqueTaskList;
 public class AddressBook implements ReadOnlyTaskBook {
 
     private static final Deadline PLACEHOLDER_DEADLINE = new Deadline("1/1/2018");
-    //private static final Logger logger = LogsCenter.getLogger(AddressBook.class);
     private final UniqueTaskList tasks;
     private Deadline currentDate;
 
@@ -126,14 +125,20 @@ public class AddressBook implements ReadOnlyTaskBook {
         tasks.remove(key);
     }
 
-    //@@author
+    //@@author emobeany
     /**
      * Selects the date for Task Book.
      * Update the list.
      */
     public void selectDeadline(Deadline deadline) {
-        //TODO: @emobeany handle cases where year or month is not specified
         currentDate = deadline;
+    }
+
+    public String getYear() {
+        if (currentDate == null) {
+            currentDate = PLACEHOLDER_DEADLINE;
+        }
+        return currentDate.getYear();
     }
 
     //@@ ChanChunCheong
