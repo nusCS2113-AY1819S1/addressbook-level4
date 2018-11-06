@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import com.oracle.tools.packager.Log;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,11 +17,13 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.DrinkAttributeChangedEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.InventoryPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.drink.Drink;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -153,6 +156,13 @@ public class MainWindow extends UiPart<Stage> {
         batchListPanel = new BatchListPanel(
                 event.getNewSelection().getObservableBatchList());
         batchListPanelPlaceholder.getChildren().add(batchListPanel.getRoot());
+    }
+
+    @Subscribe
+    private void handleDrinkAttributeChangedEvent(DrinkAttributeChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        drinkListPanel = new DrinkListPanel(logic.getFilteredDrinkList());
+        drinkListPanelPlaceholder.getChildren().add(drinkListPanel.getRoot());
     }
 
     void hide() {

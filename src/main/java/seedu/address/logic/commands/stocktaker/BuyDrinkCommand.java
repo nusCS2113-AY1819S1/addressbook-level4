@@ -4,6 +4,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DRINK_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 
+import com.google.common.eventbus.Subscribe;
+import seedu.address.commons.events.model.DrinkAttributeChangedEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;

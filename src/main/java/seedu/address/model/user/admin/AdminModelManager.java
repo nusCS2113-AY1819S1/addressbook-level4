@@ -4,10 +4,12 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.events.model.DrinkAttributeChangedEvent;
 import seedu.address.model.LoginInfoManager;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyInventoryList;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.drink.Drink;
 import seedu.address.model.drink.Price;
 import seedu.address.model.drink.exceptions.InsufficientQuantityException;
 import seedu.address.model.transaction.Transaction;
@@ -30,34 +32,35 @@ public class AdminModelManager extends ModelManager implements AdminModel {
         return false;
     }
 
-
+    /**
+     * Raises an event to indicate the model has changed
+     */
+    protected void indicateDrinkAttributesChanged(Drink drink) {
+        raise(new DrinkAttributeChangedEvent(drink));
+    }
 
     //=====================Stock taker commands====================
     @Override
     public void sellDrink(Transaction transaction) throws InsufficientQuantityException {
         Price defaultSalePrice = inventoryList.getDefaultSellingPrice(transaction.getDrinkTransacted());
-
+        inventoryList.decreaseQuantity(transaction.getDrinkTransacted(), transaction.getQuantityTransacted());
         Price defaultAmountTransacted = new Price(Float.toString(defaultSalePrice.getValue()
                 * transaction.getQuantityTransacted().getValue()));
         transaction.setAmountMoney(defaultAmountTransacted);
         recordTransaction(transaction);
-
-        inventoryList.decreaseQuantity(transaction.getDrinkTransacted(), transaction.getQuantityTransacted());
-        indicateInventoryListChanged();
-        updateFilteredDrinkList(PREDICATE_SHOW_ALL_DRINKS);
+        indicateDrinkAttributesChanged(transaction.getDrinkTransacted());
     }
 
     @Override
     public void buyDrink(Transaction transaction) {
         Price defaultCostPrice = inventoryList.getDefaultCostPrice(transaction.getDrinkTransacted());
-
+        inventoryList.increaseDrinkQuantity(transaction.getDrinkTransacted(), transaction.getQuantityTransacted());
         Price defaultAmountTransacted = new Price(Float.toString(defaultCostPrice.getValue()
                 * transaction.getQuantityTransacted().getValue()));
         transaction.setAmountMoney(defaultAmountTransacted);
         recordTransaction(transaction);
-        inventoryList.increaseDrinkQuantity(transaction.getDrinkTransacted(), transaction.getQuantityTransacted());
-        indicateInventoryListChanged();
-        updateFilteredDrinkList(PREDICATE_SHOW_ALL_DRINKS);
+
+        indicateDrinkAttributesChanged(transaction.getDrinkTransacted());
     }
 
     private void recordTransaction(Transaction transaction) {
