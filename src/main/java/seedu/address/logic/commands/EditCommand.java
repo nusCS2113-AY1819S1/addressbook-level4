@@ -32,6 +32,7 @@ import seedu.address.model.event.Email;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
+import seedu.address.model.event.Status;
 import seedu.address.model.event.Venue;
 import seedu.address.model.tag.Tag;
 
@@ -124,12 +125,13 @@ public class EditCommand extends Command {
         Email updatedEmail = editEventDescriptor.getEmail().orElse(eventToEdit.getEmail());
         Venue updatedVenue = editEventDescriptor.getVenue().orElse(eventToEdit.getVenue());
         DateTime updatedDateTime = editEventDescriptor.getDateTime().orElse(eventToEdit.getDateTime());
+        Status eventStatus = eventToEdit.getStatus();
         Comment updatedComment = editEventDescriptor.getComment().orElse(eventToEdit.getComment());
         Set<Tag> updatedTags = editEventDescriptor.getTags().orElse(eventToEdit.getTags());
         Set<Attendee> updatedAttendees = editEventDescriptor.getAttendees().orElse(eventToEdit.getAttendance());
 
         return new Event(updatedName, updatedContact, updatedPhone, updatedEmail, updatedVenue, updatedDateTime,
-                updatedComment, updatedTags, updatedAttendees);
+                eventStatus, updatedComment, updatedTags, updatedAttendees);
     }
 
     @Override
