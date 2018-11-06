@@ -3,7 +3,6 @@ package seedu.address.commons.util;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.book.Book;
