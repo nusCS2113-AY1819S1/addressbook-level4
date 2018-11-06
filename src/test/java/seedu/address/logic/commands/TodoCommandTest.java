@@ -6,6 +6,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -15,6 +16,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -159,6 +161,21 @@ public class TodoCommandTest {
 
         @Override
         public void commitAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void importAddressBook(Path importFilePath) throws IOException, DataConversionException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addToAddressBook(ReadOnlyAddressBook addressBookToImported) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void exportFilteredAddressBook(Path exportFilePath) throws IOException {
             throw new AssertionError("This method should not be called.");
         }
 
