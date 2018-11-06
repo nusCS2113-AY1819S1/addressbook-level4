@@ -89,11 +89,15 @@ public interface Model {
     void commitAddressBook();
 
     //=========== Import/ Export ==============================================================================
-    // TODO: Update the header below
     /**
-     * Imports from a xml file.
+     * Imports the persons and todos from a xml at {@code importFilePath}.
      */
     void importAddressBook(Path importFilePath) throws IOException, DataConversionException;
+
+    /**
+     * Adds all the persons and todos in {@code addressBookImported} to the current address book.
+     */
+    void addToAddressBook(ReadOnlyAddressBook addressBookToImported);
 
     /**
      * Exports the current filtered person list to a xml file at {@code exportFilePath}.
