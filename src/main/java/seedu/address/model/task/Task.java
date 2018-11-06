@@ -69,7 +69,7 @@ public class Task {
     }
 
     public String getNameString() {
-        return name.toString();
+        return name.toString().toLowerCase();
     }
 
     /**
