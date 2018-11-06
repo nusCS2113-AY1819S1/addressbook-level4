@@ -76,7 +76,7 @@ public class ParserUtil {
         requireNonNull(deadline);
         String trimmedDeadline = deadline.trim();
         String[] entries = deadline.split("/");
-        if (entries.length != 3) {
+        if (!(entries.length == 2 || entries.length == 3)) {
             throw new ParseException(Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
         }
         // Command Exception is thrown to handle 1/mm/yyyy etc.

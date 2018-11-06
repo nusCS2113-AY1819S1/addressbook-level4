@@ -24,7 +24,7 @@ public class SelectDeadlineCommand extends Command implements CommandParser {
             + "Parameters: "
             + PREFIX_DAY + "DAY "
             + PREFIX_MONTH + "MONTH "
-            + PREFIX_YEAR + "YEAR "
+            + "[" + PREFIX_YEAR + "YEAR ]"
             + " or DAY/MONTH/YEAR\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DAY + "01 "
@@ -52,6 +52,9 @@ public class SelectDeadlineCommand extends Command implements CommandParser {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
+        if (toSelect.getYear() == null) {
+            toSelect.setYear(model.getYear());
+        }
         if (!Deadline.isValidDeadline(toSelect.toString())) {
             throw new CommandException(MESSAGE_INVALID_DEADLINE);
         }

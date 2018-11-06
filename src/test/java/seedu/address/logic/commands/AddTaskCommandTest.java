@@ -291,6 +291,11 @@ public class AddTaskCommandTest {
         public void trackProductivity() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public String getYear() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

@@ -12,7 +12,6 @@ import static seedu.address.testutil.TypicalDeadlines.MONTH_DESC_2;
 import static seedu.address.testutil.TypicalDeadlines.VALID_1ST_JAN_2018;
 import static seedu.address.testutil.TypicalDeadlines.VALID_DAY_1;
 import static seedu.address.testutil.TypicalDeadlines.VALID_MONTH_JAN;
-import static seedu.address.testutil.TypicalDeadlines.VALID_YEAR_2018;
 import static seedu.address.testutil.TypicalDeadlines.YEAR_DESC_2018;
 import static seedu.address.testutil.TypicalDeadlines.YEAR_DESC_2019;
 
@@ -60,9 +59,6 @@ public class SelectDeadlineCommandParserTest {
 
         // missing month prefix
         assertParseFailure(parser, DAY_DESC_1 + VALID_MONTH_JAN + YEAR_DESC_2018, expectedMessage);
-
-        // missing year prefix
-        assertParseFailure(parser, DAY_DESC_1 + MONTH_DESC_1 + VALID_YEAR_2018, expectedMessage);
     }
 
     @Test

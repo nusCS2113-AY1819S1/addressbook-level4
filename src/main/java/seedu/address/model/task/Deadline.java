@@ -19,12 +19,17 @@ public class Deadline {
 
     private final String day;
     private final String month;
-    private final String year;
+    private String year;
 
     public Deadline(String day, String month, String year) {
         this.day = day;
         this.month = month;
         this.year = year;
+    }
+
+    public Deadline(String day, String month) {
+        this.day = day;
+        this.month = month;
     }
 
     public Deadline(String deadline) {
@@ -33,11 +38,13 @@ public class Deadline {
         String[] entries = deadline.split("/");
         this.day = entries[0];
         this.month = entries[1];
-        this.year = entries[2];
+        if (deadline.split("/").length != 2) {
+            this.year = entries[2];
+        }
     }
 
     public static boolean isValidFormat(String deadline) {
-        return deadline.split("/").length == 3;
+        return deadline.split("/").length >= 2;
     }
 
     public String getDay() {
@@ -50,6 +57,10 @@ public class Deadline {
 
     public String getYear() {
         return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
     }
 
     /**

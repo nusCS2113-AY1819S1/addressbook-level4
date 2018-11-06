@@ -127,8 +127,14 @@ public class ModelManager extends ComponentManager implements Model {
         return task -> task.getDeadline().equals(deadline);
     }
 
+    @Override
     public Deadline getDeadline() {
         return versionedTaskBook.getDeadline();
+    }
+
+    @Override
+    public String getYear() {
+        return versionedTaskBook.getYear();
     }
 
     //@@author
