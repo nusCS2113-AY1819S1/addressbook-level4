@@ -16,11 +16,30 @@ Other notable features include sending of `emails`, adding `tests marks`, assign
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+* *New Feature*: Added *the ability to create groups*
+** What it does: Allows the lecturer to create groups in the student management system and displays the groups created on a separate panel.
+** Justification: This feature is necessary as it allows the lecturer to organize the management system.
+** Highlights: This feature required an in-depth analysis of storage alternatives as storing group data in a separate xml file would be more modular but difficult to implement, given our time constraints.
+
+* *New Feature*: Added *the ability to select groups*
+** What it does: Allows the lecturer to create groups in the student management system and displays the groups created on a separate panel.
+** Justification: This feature is necessary as it allows the lecturer to organize the management system.
+** Highlights: This feature required an in-depth analysis of storage alternatives as storing group data in a separate xml file would be more modular but difficult to implement, given our time constraints.
+
+* *New Feature*: Added *the ability to add students to groups*
+** What it does: Allows the lecturer to create groups in the student management system and displays the groups created on a separate panel.
+** Justification: This feature is necessary as it allows the lecturer to organize the management system.
+** Highlights: This feature required an in-depth analysis of storage alternatives as storing group data in a separate xml file would be more modular but difficult to implement, given our time constraints.
+
+* *New Feature*: Added *the ability to delete groups*
+** What it does: Allows the lecturer to create groups in the student management system and displays the groups created on a separate panel.
+** Justification: This feature is necessary as it allows the lecturer to organize the management system.
+** Highlights: This feature required an in-depth analysis of storage alternatives as storing group data in a separate xml file would be more modular but difficult to implement, given our time constraints.
+
+* *New Feature*: Added *the ability to delete students from groups*
+** What it does: Allows the lecturer to create groups in the student management system and displays the groups created on a separate panel.
+** Justification: This feature is necessary as it allows the lecturer to organize the management system.
+** Highlights: This feature required an in-depth analysis of storage alternatives as storing group data in a separate xml file would be more modular but difficult to implement, given our time constraints.
 
 * *Other contributions*:
 
