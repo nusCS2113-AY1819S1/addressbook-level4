@@ -60,8 +60,8 @@ public class EventCard extends UiPart<Region> {
         email.setText(event.getEmail().value);
         comment.setText(event.getComment().value);
         dateTime.setText(event.getDateTime().toString());
-        event.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         status.setText(event.getStatus().currentStatus);
+        event.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         event.getAttendance().forEach(attendee -> attendance.getChildren().add(new Label(attendee.attendeeName)));
     }
 

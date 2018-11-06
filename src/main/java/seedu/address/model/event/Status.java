@@ -10,27 +10,40 @@ import java.util.Date;
  */
 public class Status {
     public static final String MESSAGE_STATUS_CONSTRAINTS =
-            "Status should either be '[UPCOMING]', '[ONGOING]' or '[COMPLETED]' or 'NULL'.";
+            "Status should either be 'UPCOMING', 'ONGOING' or 'COMPLETED' or 'NULL'.";
 
-    public final String currentStatus;
+    public static final String STATUS_VALIDATION_REGEX = "((\bUPCOMING\b)|(\bONGOING\b)|(\bCOMPLETED\b)|(\bNULL\b))";
+
+    public String currentStatus;
+
+    /**
+     * Constructs a {@code Status}.
+     *
+     * @param status A valid status.
+     */
+    public Status(String status) {
+        requireNonNull(status);
+        checkArgument(isValidStatus(status), MESSAGE_STATUS_CONSTRAINTS);
+        currentStatus = status;
+    }
 
     /**
      * Constructs a {@code Status}.
      *
      * @param datetime A datetime.
      */
-    public Status(DateTime datetime) {
+    /*public Status(DateTime datetime) {
         requireNonNull(datetime);
         String status = setStatus(datetime);
         checkArgument(isValidStatus(status), MESSAGE_STATUS_CONSTRAINTS);
         currentStatus = status;
-    }
+    }*/
 
     /**
      * Returns true if a given string is a valid status.
      */
     public static boolean isValidStatus(String test) {
-        return test == "UPCOMING" || test == "ONGOING" || test == "COMPLETED" || test == "NULL";
+        return ( test.equals("UPCOMING") || test.equals("ONGOING") || test.equals("COMPLETED") || test.equals("NULL") );
     }
 
     /**
@@ -42,17 +55,29 @@ public class Status {
         requireNonNull(datetime);
         Date currentDate = new Date();
         Date eventDate = datetime.dateTime;
-        String currentStatus;
+        //String currentStatus;
 
         if (eventDate.before(currentDate)) {
-            currentStatus = "COMPLETED";
+            this.currentStatus = "COMPLETED";
         } else if (eventDate.after(currentDate)) {
-            currentStatus = "UPCOMING";
+            this.currentStatus = "UPCOMING";
         } else {
-            currentStatus = "NULL";
+            this.currentStatus = "NULL";
         }
 
         return currentStatus;
+    }
+
+    @Override
+    public String toString() {
+        return currentStatus;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Status // instanceof handles nulls
+                && currentStatus.equals(((Status) other).currentStatus)); // state check
     }
 
     @Override
