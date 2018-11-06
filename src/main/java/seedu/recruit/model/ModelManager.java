@@ -6,11 +6,14 @@ import static seedu.recruit.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.recruit.commons.core.ComponentManager;
 import seedu.recruit.commons.core.LogsCenter;
+import seedu.recruit.commons.events.logic.UserAuthenticatedEvent;
 import seedu.recruit.commons.events.model.CandidateBookChangedEvent;
 import seedu.recruit.commons.events.model.CompanyBookChangedEvent;
 import seedu.recruit.commons.util.EmailUtil;
@@ -49,10 +52,30 @@ public class ModelManager extends ComponentManager implements Model {
         filteredCompanies = new FilteredList<>(versionedCompanyBook.getCompanyList());
         filteredJobs = new FilteredList<>(versionedCompanyBook.getCompanyJobList());
         emailUtil = new EmailUtil();
+        if (userPrefs.getHashedPassword() != null) {
+            hideAll();
+        }
     }
 
     public ModelManager() {
         this(new CandidateBook(), new CompanyBook(), new UserPrefs());
+    }
+
+    private void hideAll() {
+        filteredCompanies.setPredicate(PREDICATE_HIDE_ALL_COMPANIES);
+        filteredCandidates.setPredicate(PREDICATE_HIDE_ALL_PERSONS);
+        filteredJobs.setPredicate(PREDICATE_HIDE_ALL_JOBOFFERS);
+    }
+
+    private void showAll() {
+        filteredCompanies.setPredicate(PREDICATE_SHOW_ALL_COMPANIES);
+        filteredCandidates.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
+        filteredJobs.setPredicate(PREDICATE_SHOW_ALL_JOBOFFERS);
+    }
+
+    @Subscribe
+    public void handleUserAuthenticatedEvent(UserAuthenticatedEvent event) {
+        showAll();
     }
 
     @Override
@@ -127,6 +150,11 @@ public class ModelManager extends ComponentManager implements Model {
     public void sortCandidates(Prefix prefix) {
         versionedCandidateBook.sortCandidates(prefix);
         indicateCandidateBookChanged();
+    }
+
+    @Override
+    public ObservableList<Candidate> getMasterCandidateList() {
+        return versionedCandidateBook.getCandidateList();
     }
 
     // =========== Filtered Candidate List Accessors =================================================== //
@@ -317,6 +345,11 @@ public class ModelManager extends ComponentManager implements Model {
     public void sortJobOffers(Prefix prefix) {
         versionedCompanyBook.sortJobOffers(prefix);
         indicateCompanyBookChanged();
+    }
+
+    @Override
+    public ObservableList<JobOffer> getMasterJobList() {
+        return versionedCompanyBook.getCompanyJobList();
     }
 
     // =========== Filtered Company Job List Accessors ===================================================== //

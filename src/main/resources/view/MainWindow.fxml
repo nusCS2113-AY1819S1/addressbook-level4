@@ -51,14 +51,13 @@
         </StackPane>
 
         <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.5" VBox.vgrow="ALWAYS">
-          <VBox fx:id="personList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
+        <StackPane fx:id="panelViewPlaceholder" VBox.vgrow="ALWAYS">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
-            <StackPane fx:id="panelViewPlaceholder" VBox.vgrow="ALWAYS"/>
-          </VBox>
+        </StackPane>
 
-          <StackPane prefWidth="340" >
+          <StackPane fx:id="masterListPlaceholder" VBox.vgrow="ALWAYS" >
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>

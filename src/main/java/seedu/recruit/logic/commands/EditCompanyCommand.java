@@ -18,6 +18,7 @@ import seedu.recruit.commons.util.CollectionUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.commons.Address;
 import seedu.recruit.model.commons.Email;
 import seedu.recruit.model.commons.Phone;
@@ -65,7 +66,7 @@ public class EditCompanyCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws CommandException {
         requireNonNull(model);
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
 
