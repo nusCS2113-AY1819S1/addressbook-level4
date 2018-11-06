@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
@@ -183,8 +184,12 @@ public class ExportCalendarCommand extends Command {
      * @throws IOException when file stream have problems
      */
     public void exportICalenderFile(ObservableList<Event> registeredEventList, String fileName) throws IOException {
-        FileOutputStream fileOut = new FileOutputStream(CALENDAR_FILE_PATH
-                + String.format("%1$s.ics", fileName), false);
+        String outputFilename = CALENDAR_FILE_PATH + String.format("%1$s.ics", fileName);
+        File outputFile = new File(outputFilename);
+
+        //FileOutputStream fileOut = new FileOutputStream(outputFilename, false);
+        FileOutputStream fileOut = new FileOutputStream(outputFile, false);
+
         CalendarOutputter outPutter = new CalendarOutputter();
 
         Calendar calendar = writeToUserCalendar(registeredEventList, fileName);
