@@ -12,8 +12,10 @@ import com.google.common.eventbus.Subscribe;
 import javafx.collections.ObservableList;
 
 import seedu.recruit.commons.core.ComponentManager;
+import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.LogsCenter;
 import seedu.recruit.commons.events.ui.CompanyListDetailsPanelSelectionChangedEvent;
+import seedu.recruit.commons.events.ui.ShowUpdatedCompanyJobListRequestEvent;
 import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.commands.AuthenticateUserCommand;
 import seedu.recruit.logic.commands.Command;
@@ -70,6 +72,14 @@ public class LogicManager extends ComponentManager implements Logic {
         }
     }
 
+    public static void setLogicState(String newState) {
+        state = new LogicState(newState);
+    }
+
+    public static LogicState getState() {
+        return state;
+    }
+
     @Override
     public ObservableList<Candidate> getFilteredPersonList() {
         return model.getFilteredCandidateList();
@@ -85,27 +95,23 @@ public class LogicManager extends ComponentManager implements Logic {
         return model.getFilteredCompanyJobList();
     }
 
-
-    @Subscribe
-    private void handleCompanyListDetailsPanelSelectionChangedEvent(CompanyListDetailsPanelSelectionChangedEvent
-                                                                                event) {
-        HashMap<String, List<String>> keywordsList = new HashMap<>();
-        List<String> companyName = new ArrayList<>();
-        companyName.add(event.getNewSelection().getCompanyName().toString());
-        keywordsList.put("CompanyName", companyName);
-        model.updateFilteredCompanyJobList(new JobOfferContainsKeywordsPredicate(keywordsList));
-    }
-
     @Override
     public ListElementPointer getHistorySnapshot() {
         return new ListElementPointer(history.getHistory());
     }
 
-    public static LogicState getState() {
-        return state;
+    @Subscribe
+    private void handleCompanyListDetailsPanelSelectionChangedEvent(CompanyListDetailsPanelSelectionChangedEvent
+                                                                            event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event,
+                "Selection Changed to " + event.getNewSelection().getCompanyName().value));
+        HashMap<String, List<String>> keywordsList = new HashMap<>();
+        List<String> companyName = new ArrayList<>();
+        companyName.add(event.getNewSelection().getCompanyName().toString());
+        keywordsList.put("CompanyName", companyName);
+        model.updateFilteredCompanyJobList(new JobOfferContainsKeywordsPredicate(keywordsList));
+        EventsCenter.getInstance().post(new ShowUpdatedCompanyJobListRequestEvent(
+                model.getFilteredCompanyJobList().size()));
     }
 
-    public static void setLogicState(String newState) {
-        state = new LogicState(newState);
-    }
 }

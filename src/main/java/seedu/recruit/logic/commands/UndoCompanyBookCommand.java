@@ -4,7 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.recruit.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
 
 import seedu.recruit.commons.core.EventsCenter;
-import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
+import seedu.recruit.commons.events.ui.FocusOnCompanyBookRequestEvent;
+import seedu.recruit.commons.events.ui.ShowUpdatedCompanyJobListRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
@@ -23,7 +24,7 @@ public class UndoCompanyBookCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws CommandException {
         requireNonNull(model);
-        EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
+        EventsCenter.getInstance().post(new FocusOnCompanyBookRequestEvent());
 
         if (!model.canUndoCompanyBook()) {
             throw new CommandException(MESSAGE_FAILURE);
@@ -31,6 +32,9 @@ public class UndoCompanyBookCommand extends Command {
 
         model.undoCompanyBook();
         model.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
+        EventsCenter.getInstance().post(new ShowUpdatedCompanyJobListRequestEvent(
+                model.getFilteredCompanyJobList().size()
+        ));
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

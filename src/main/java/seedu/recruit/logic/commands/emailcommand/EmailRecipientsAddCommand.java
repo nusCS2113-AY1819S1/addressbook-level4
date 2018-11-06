@@ -33,13 +33,16 @@ public class EmailRecipientsAddCommand extends EmailRecipientsCommand {
         //Check if there are already recipients added
         if (!emailUtil.isHasRecipientsAdded()) {
             if (MainWindow.getDisplayedBook().equals("candidateBook")) {
-                addCandidates(model, emailUtil);
-                emailUtil.setAreRecipientsCandidates(true);
+                if (addCandidates(model, emailUtil)) {
+                    emailUtil.setAreRecipientsCandidates(true);
+                    emailUtil.setHasRecipientsAdded(true);
+                }
             } else {
-                addJobOffers(model, emailUtil);
-                emailUtil.setAreRecipientsCandidates(false);
+                if (addJobOffers(model, emailUtil)) {
+                    emailUtil.setAreRecipientsCandidates(false);
+                    emailUtil.setHasRecipientsAdded(true);
+                }
             }
-            emailUtil.setHasRecipientsAdded(true);
         //else check if objects being added are the same as the initial added objects
         } else {
             if (emailUtil.isAreRecipientsCandidates()) {
@@ -65,6 +68,12 @@ public class EmailRecipientsAddCommand extends EmailRecipientsCommand {
         //Generate added recipients string
         StringBuilder recipients = new StringBuilder("Recipients added:\n");
         generateRecipients(emailUtil, recipients);
+
+        //Check if both recipients string and duplicate string is empty
+        if (duplicates.toString().equals("Unable to add the following because it already has been added before:\n")
+            && recipients.toString().equals("Recipients added:\n")) {
+            return new CommandResult("ERROR: Nothing was selected!\n" + MESSAGE_USAGE);
+        }
 
         //Generate output string
         StringBuilder output = new StringBuilder();
@@ -144,9 +153,13 @@ public class EmailRecipientsAddCommand extends EmailRecipientsCommand {
      * adds candidates into the candidates arrays
      * @param model
      * @param emailUtil
+     * @return boolean if there was anything present getFilteredCandidateList()
      */
-    private void addCandidates(Model model, EmailUtil emailUtil) {
+    private boolean addCandidates(Model model, EmailUtil emailUtil) {
         ObservableList<Candidate> recipients = model.getFilteredCandidateList();
+        if (recipients.size() == 0) {
+            return false;
+        }
         for (Candidate recipient : recipients) {
             //if added successfully into linkedhashset, means it was not there.
             //if not added successfully then object already exists.
@@ -156,15 +169,20 @@ public class EmailRecipientsAddCommand extends EmailRecipientsCommand {
                 addedCandidates.add(recipient);
             }
         }
+        return true;
     }
 
     /**
      * adds job offers into the job offers arrays
      * @param model
      * @param emailUtil
+     * @return boolean if there was anything present getFilteredCandidateList()
      */
-    private void addJobOffers(Model model, EmailUtil emailUtil) {
+    private boolean addJobOffers(Model model, EmailUtil emailUtil) {
         ObservableList<JobOffer> recipients = model.getFilteredCompanyJobList();
+        if (recipients.size() == 0) {
+            return false;
+        }
         for (JobOffer recipient : recipients) {
             //if added successfully into linkedhashset, means it was not there.
             //if not added successfully then object already exists.
@@ -174,5 +192,6 @@ public class EmailRecipientsAddCommand extends EmailRecipientsCommand {
                 addedJobOffers.add(recipient);
             }
         }
+        return true;
     }
 }

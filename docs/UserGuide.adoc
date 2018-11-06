@@ -110,7 +110,7 @@ and does the switch to the other book for you when you enter the `switch` comman
 
 .GUI of Switch Book on Menu Bar
 image::switchBook.png[width="390"]
-// tag::switch[]
+// end::switch[]
 
 // tag::add[]
 === Adding a candidate / company / job  : `addc` `addC` `addj`
@@ -402,7 +402,7 @@ image::companyPanel3.png[width="790", align="left"]
 // end::list[]
 
 // tag::select[]
-=== Selecting a candidate / company / job offer: `select` `selectCompany` `selectJob`
+=== Selecting a candidate / company / job offer: `selectc` `selectC` `selectj`
 
 ==== Selecting a candidate :
 Format: `select` `<INDEX>`
@@ -411,13 +411,13 @@ Format: `select` `<INDEX>`
 . This index must be an index number shown in the displayed candidate list.
 
 ==== Selecting a company :
-Format: `selectCompany` `<INDEX>`
+Format: `selectC` `<INDEX>`
 
 . Selects the company with the specified INDEX
 . This index must be an index number shown in the displayed company list.
 
 ==== Selecting a job offer :
-Format: `selectJob` `<INDEX>`
+Format: `selectj` `<INDEX>`
 
 . Selects the job offer with the specified INDEX
 . This index must be an index number shown in the displayed job offer list.
@@ -590,7 +590,7 @@ Examples:
 Format : `cancel`
 
 // tag::clear[]
-=== Clearing all entries : `clear`
+=== Clearing all entries : `clearc` `clearC`
 
 Clears all entries from the Candidate Book. +
 Format: `clearc`

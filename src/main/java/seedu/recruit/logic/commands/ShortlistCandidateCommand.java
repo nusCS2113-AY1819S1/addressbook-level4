@@ -44,6 +44,7 @@ public class ShortlistCandidateCommand extends Command {
         JobOffer selectedJobOffer = SelectJobCommand.getSelectedJobOffer();
         Candidate selectedCandidate = SelectCandidateCommand.getSelectedCandidate();
 
+        // If selected candidate already exists in shortlisted candidate list of the selected job offer
         if (selectedJobOffer.getUniqueCandidateList().contains(selectedCandidate)) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_CANDIDATE_SHORTLISTED,
                     selectedJobOffer.getJob().value, selectedCompany.getCompanyName().value)

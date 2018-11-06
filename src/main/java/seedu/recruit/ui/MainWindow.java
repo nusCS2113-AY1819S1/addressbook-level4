@@ -18,13 +18,14 @@ import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.GuiSettings;
 import seedu.recruit.commons.core.LogsCenter;
 import seedu.recruit.commons.events.ui.ExitAppRequestEvent;
+import seedu.recruit.commons.events.ui.FocusOnCandidateBookRequestEvent;
+import seedu.recruit.commons.events.ui.FocusOnCompanyBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowEmailPreviewEvent;
 import seedu.recruit.commons.events.ui.ShowHelpRequestEvent;
 import seedu.recruit.commons.events.ui.ShowLastViewedBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowShortlistPanelRequestEvent;
-import seedu.recruit.commons.events.ui.ShowUpdateJobListRequestEvent;
 import seedu.recruit.commons.events.ui.SwitchBookRequestEvent;
 import seedu.recruit.logic.Logic;
 import seedu.recruit.logic.LogicManager;
@@ -194,7 +195,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void clearResultDisplay() {
-        ResultDisplay resultDisplay = new ResultDisplay(null);
+        ResultDisplay resultDisplay = new ResultDisplay("");
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
     }
 
@@ -376,18 +377,46 @@ public class MainWindow extends UiPart<Stage> {
         handleEmailPreview(event.getEmailPreview());
     }
 
+    /**
+     * Switches book view.
+     * If you wish to deselect whatever the user has selected on screen, call this handler.
+     */
     @Subscribe
     private void handleShowCandidateBookEvent(ShowCandidateBookRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        if (currentBook.contentEquals("companyBook")) {
-            switchToCandidateBook();
-        }
+        switchToCandidateBook();
     }
 
+    /**
+     * Switches book view.
+     * If you wish to deselect whatever the user has selected on screen, call this handler.
+     */
     @Subscribe
     private void handleShowCompanyBookEvent(ShowCompanyBookRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         switchToCompanyBook();
+    }
+
+    /**
+     * If you DO NOT wish to deselect whatever the user has selected on screen, call this handler.
+     */
+    @Subscribe
+    private void handleFocusOnCompanyBookEvent(FocusOnCompanyBookRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        if (getDisplayedBook().contentEquals("candidateBook")) {
+            switchToCompanyBook();
+        }
+    }
+
+    /**
+     * If you DO NOT wish to deselect whatever the user has selected on screen, call this handler.
+     */
+    @Subscribe
+    private void handleFocusOnCandidateBookEvent(FocusOnCandidateBookRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        if (getDisplayedBook().contentEquals("companyBook")) {
+            switchToCandidateBook();
+        }
     }
 
     @Subscribe
@@ -414,9 +443,28 @@ public class MainWindow extends UiPart<Stage> {
         switchToLastViewedBook();
     }
 
+    /**
+     * If you wish to change the user's current view, call this handler.
+     * Handles the update of candidate list in Model Manager.
+     * This event does NOT check whether user is inside Candidate Book.
+     * Hence, it will overwrite whatever the user is currently viewing.
+     * @param event that updates candidate list
+
     @Subscribe
-    private void handleUpdateJobListEvent(ShowUpdateJobListRequestEvent event) {
-        switchToCompanyBook();
+    private void handleUpdateCandidateListEvent(ShowUpdatedCandidateListRequestEvent event) {
+        switchToCandidateBook(); //calling this function passes logic's getFilteredLists to UI's companyJobDetailsPanel
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
     }
+
+    /**
+     * If you wish to change the user's current view, call this handler.
+     * Handles the update of job list and company list in Model Manager.
+     * This event does NOT check whether user is inside Company Book.
+     * Hence, it will overwrite whatever the user is currently viewing.
+     * @param event that updates job list or company list
+    @Subscribe
+    private void handleUpdateCompanyJobListEvent(ShowUpdatedCompanyJobListRequestEvent event) {
+        switchToCompanyBook(); //calling this function passes logic's getFilteredLists to UI's companyJobDetailsPanel
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+    } */
 }
