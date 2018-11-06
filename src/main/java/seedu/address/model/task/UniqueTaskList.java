@@ -105,24 +105,39 @@ public class UniqueTaskList implements Iterable<Task> {
         return FXCollections.unmodifiableObservableList(internalList);
     }
 
+    /**
+     * Sort the to-do list based on their deadline.
+     */
     public void sortDate() {
         Collections.sort(internalList, Comparator.comparing(Task::getMonth).thenComparing(Task::getDay));
     }
 
+    /**
+     * Sort the to-do list based on their module code.
+     */
     public void sortModule() {
         internalList.sort(SortComparator.compareModule());
     }
 
+    /**
+     * Sort the to-do list based on their priority.
+     */
     public void sortPriority() {
         internalList.sort(SortComparator.comparePriority());
     }
 
+    /**
+     * Reverse the sequence of to-do list.
+     */
     public void reverseTask() {
         Collections.reverse(internalList);
     }
 
+    /**
+     * Sort the to-do list based on their task name.
+     */
     public void sortDefault() {
-        Collections.sort(internalList, Comparator.comparing(Task::getNameString));
+        internalList.sort(SortComparator.compareName());
     }
 
     @Override
