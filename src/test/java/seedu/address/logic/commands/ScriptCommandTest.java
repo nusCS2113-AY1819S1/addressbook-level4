@@ -81,7 +81,7 @@ public class ScriptCommandTest {
 
     @Test
     public void execute_wrongCommand_throwsParseException() {
-        String expectedMessage = String.format(ScriptCommand.MESSAGE_ADD_ERROR,
+        String expectedMessage = String.format(ScriptCommand.MESSAGE_EXECUTE_ERROR,
                 invalidLinesNumbers, validAddTextFile + ScriptCommand.TEXT_EXTENSION);
 
         ScriptCommand scriptCommand = new ScriptCommand(new TextFile(validAddTextFile), new CommandType(deleteCommand));
@@ -92,7 +92,7 @@ public class ScriptCommandTest {
 
     @Test
     public void execute_fileMissing_throwsParseException() {
-        String expectedMessage = String.format(ScriptCommand.MESSAGE_ADD_ERROR,
+        String expectedMessage = String.format(ScriptCommand.MESSAGE_EXECUTE_ERROR,
                 invalidLinesNumbers, validAddTextFile + ScriptCommand.TEXT_EXTENSION);
 
         ScriptCommand scriptCommand = new ScriptCommand(new TextFile(validAddTextFile), new CommandType(deleteCommand));
