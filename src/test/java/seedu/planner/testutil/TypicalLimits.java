@@ -21,7 +21,7 @@ public class TypicalLimits {
             .withMoneyFlow("-500").build();
     public static final Limit LIMIT_SINGLE_DIFF_DATE = new LimitBuilder().withSingleDate("08-05-2018")
             .withMoneyFlow("-100").build();
-    public static final Limit LIMIT_SINGLE_DATE_All_DIFF = new LimitBuilder().withSingleDate("07-03-2018")
+    public static final Limit LIMIT_SINGLE_DATE_ALL_DIFF = new LimitBuilder().withSingleDate("07-03-2018")
             .withMoneyFlow("-300").build();
     public static final Limit LIMIT_100 = new LimitBuilder().withDateStart("01-02-2018").withDateEnd("5-02-2018")
             .withMoneyFlow("-100").build();
