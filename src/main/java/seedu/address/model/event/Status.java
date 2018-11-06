@@ -3,7 +3,7 @@ package seedu.address.model.event;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.Date;
+//import java.util.Date;
 
 /**
  * Represents an Event's status in the event manager.
