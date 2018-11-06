@@ -102,10 +102,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
     */
 
-    private Drink findDrinkByName(Drink drink) {
-        Drink actualDrinkRef = inventoryList.findDrinkByName(drink);
-        return actualDrinkRef;
-    }
 
     //=========== Filtered Drink List Accessors =============================================================
 

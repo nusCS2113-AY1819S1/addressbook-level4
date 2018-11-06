@@ -1,7 +1,7 @@
-package seedu.address.model.drink.drinktestutil;
+package seedu.address.model.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DRINK_COST_PRICE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DRINK_NAME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DRINK_NAME_COCA_COLA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DRINK_QUANTITY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DRINK_RETAIL_PRICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DRINK_TAG_SOFTDRINK;
@@ -49,7 +49,7 @@ public class TypicalDrinks {
             .withTags("Tea").build();
 
     // Manually added - Drink's details found in {@code CommandTestUtil}
-    public static final Drink COKE = new DrinkBuilder().withName(VALID_DRINK_NAME)
+    public static final Drink COKE = new DrinkBuilder().withName(VALID_DRINK_NAME_COCA_COLA)
             .withCostPrice(VALID_DRINK_COST_PRICE)
             .withRetailPrice(VALID_DRINK_RETAIL_PRICE)
             .withQuantity(VALID_DRINK_QUANTITY)
@@ -66,11 +66,11 @@ public class TypicalDrinks {
      * Returns an {@code InventoryList} with all the typical drinks.
      */
     public static InventoryList getTypicalInventoryList() {
-        InventoryList ab = new InventoryList();
+        InventoryList list = new InventoryList();
         for (Drink drink : getTypicalDrinks()) {
-            ab.addDrink(drink);
+            list.addDrink(drink);
         }
-        return ab;
+        return list;
     }
 
     public static List<Drink> getTypicalDrinks() {

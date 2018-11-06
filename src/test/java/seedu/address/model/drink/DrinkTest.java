@@ -3,19 +3,19 @@ package seedu.address.model.drink;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DRINK_COST_PRICE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DRINK_NAME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DRINK_NAME_COCA_COLA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DRINK_QUANTITY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DRINK_RETAIL_PRICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DRINK_TAG_SOFTDRINK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DRINK_TAG_TEA;
-import static seedu.address.model.drink.drinktestutil.TypicalDrinks.FNN_GRAPE;
-import static seedu.address.model.drink.drinktestutil.TypicalDrinks.FNN_GRAPE_COPY;
+import static seedu.address.model.testutil.TypicalDrinks.FNN_GRAPE;
+import static seedu.address.model.testutil.TypicalDrinks.FNN_GRAPE_COPY;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.drink.drinktestutil.DrinkBuilder;
+import seedu.address.model.testutil.DrinkBuilder;
 
 public class DrinkTest {
     @Rule
@@ -58,7 +58,7 @@ public class DrinkTest {
         assertFalse(FNN_GRAPE.equals(null));
 
         // different name, else same attributes -> return false
-        Drink editedGrape = new DrinkBuilder(FNN_GRAPE).withName(VALID_DRINK_NAME).build();
+        Drink editedGrape = new DrinkBuilder(FNN_GRAPE).withName(VALID_DRINK_NAME_COCA_COLA).build();
         assertFalse(FNN_GRAPE.equals(editedGrape));
 
         // different retail price, else same attributes -> return false
@@ -79,7 +79,7 @@ public class DrinkTest {
     }
 
     //@Test
-    //public void increaseQuantity_() {}
+    //public void increaseQuantity_
 
 
 }

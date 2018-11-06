@@ -30,7 +30,7 @@ public class Quantity {
      * Returns true if a given string is a valid quantity value.
      */
     public static boolean isValidQuantity(String test) {
-        return test.matches(STOCK_VALIDATION_REGEX);
+        return test.matches(STOCK_VALIDATION_REGEX) && Long.parseLong(test) <= Integer.MAX_VALUE;
     }
 
     public int getValue() {

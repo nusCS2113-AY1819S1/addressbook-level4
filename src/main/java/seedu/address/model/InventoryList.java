@@ -9,7 +9,6 @@ import seedu.address.model.drink.Drink;
 import seedu.address.model.drink.Price;
 import seedu.address.model.drink.Quantity;
 import seedu.address.model.drink.UniqueDrinkList;
-import seedu.address.model.drink.exceptions.DrinkNotFoundException;
 import seedu.address.model.drink.exceptions.InsufficientQuantityException;
 
 /**
@@ -59,7 +58,7 @@ public class InventoryList implements ReadOnlyInventoryList {
         setDrinks(newData.getDrinkList());
     }
 
-    //// person-level operations
+    /// drinks-level methods
 
     /**
      * Returns true if a drink with the same identity as {@code drinks} exists in the inventory list.
@@ -124,38 +123,26 @@ public class InventoryList implements ReadOnlyInventoryList {
         return drinks.hashCode();
     }
 
-    /**
-     * Returns reference to actual drink stored in inventory, using {@code drink}
-     */
-    public Drink findDrinkByName(Drink drink) {
-        if (hasDrink(drink)) {
-            return drinks.find(drink);
-        }
-        throw new DrinkNotFoundException();
-    }
 
     /**
      * Increases the quantity of the {@code drink} specified.
      */
-    public void increaseQuantity(Drink drink, Quantity quantity) {
-        findDrinkByName(drink).increaseQuantity(quantity);
+    public void increaseDrinkQuantity(Drink drink, Quantity quantity) {
+        drinks.increaseQuantity(drink, quantity);
     }
 
     /**
      * Decreases the quantity of the {@code drink} specified.
      */
     public void decreaseQuantity(Drink drink, Quantity quantity) throws InsufficientQuantityException {
-        Drink actualDrink = findDrinkByName(drink);
-        actualDrink.decreaseQuantity(quantity);
+        drinks.decreaseQuantity(drink, quantity);
     }
 
     public Price getDefaultSellingPrice(Drink drink) {
-        Drink actualDrink = findDrinkByName(drink);
-        return actualDrink.getRetailPrice();
+        return drinks.getSellingPrice(drink);
     }
 
     public Price getDefaultCostPrice(Drink drink) {
-        Drink actualDrink = findDrinkByName(drink);
-        return actualDrink.getCostPrice();
+        return drinks.getCostPrice(drink);
     }
 }
