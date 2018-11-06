@@ -2,7 +2,7 @@ package seedu.planner.commons.events.model;
 
 import seedu.planner.commons.events.BaseEvent;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
-
+//@@Author OscarZeng
 
 /**indicates that the limitList has been changed*/
 public class LimitListChangedEvent extends BaseEvent {

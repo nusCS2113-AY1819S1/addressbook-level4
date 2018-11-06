@@ -56,6 +56,7 @@ public class MainWindowHandle extends StageHandle {
         return statsDisplayPanel;
     }
 
+
     /**
      * Finds the SummaryDisplay node and instantiates the SummaryDisplayHandle before returning its reference
      * @return SummaryDisplayHandle

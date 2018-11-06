@@ -1,4 +1,4 @@
-= Financial Planner - User Guide
+== Financial Planner - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -652,39 +652,60 @@ As the size of the Chart is fixed initially. Sometimes, when user archive too ma
 image::Export_Capture2_LinhChi.png[width:800]
 
 // end::archive[]
-
+// tag::limitfeatures[]
 == Spending Limit Feature
 
 This section describes the limit feature that allows users to set values to control their future spending.
 Constraints that apply to records also apply to each limit. Refer to <<constraints>> for more information.
+`All the limit related commands are case insensitive. Users can input ADDlimit, addLimit and so on to execute the command.
+Besides that, in case some of the users who have programming background are used to using `
 
-=== Adding a limit: `limit`
+[[addlimit]]
+=== Adding a limit: `addlimit`
 
-Adds a spending limit for a time period to the FinancialPlanner. +
-Format: `limit d/START_DATE END_DATE m/MONEYFLOW` +
+Adds a spending limit for a time period or a particular day to the FinancialPlanner. +
+Format: `addlimit d/START_DATE END_DATE m/MONEYFLOW` (`limit d/DATE m/MONEYFLOW`)+
 
-START_DATE and END_DATE indicates the starting date and ending date for the limit.
-MONEYFLOW denotes the money limit for that period of time.
-FinancialPlanner will warn the user once the total amount of money spent during this time period exceeds the spending limit.
+When inputting two days, START_DATE and END_DATE indicates the starting date and ending date for the limit.
+If there is only one date, that day will be the time period.
+MONEYFLOW denotes the money spending limit for that period of time.
+After the limits have been set, Financial Planner will keep checking the latest condition of these limits.
+Once the total amount of money spent during this time period exceeds the spending limit,
+FinancialPlanner will warn the user by sending the warning message.
 ****
-* Moneyflow can only be a positive integer, and does not require a "+" or "-".
+* DATE_START must be earlier or equal than DATE_END. When DATE_START and DATE_END are the same, this will be equivalent to single DATE.
+* Moneyflow for limit features can only be a positive integer, and does not require a "+" or "-".
 * Any date or period of time can only have at most 1 assigned limit.
 ****
 
 Example:
 
-* `limit d/20-8-2018 30-8-2018 m/100`
+* `addlimit d/20-8-2018 m/100`
+* `addlimit d/20-8-2018 30-8-2018 m/632`
+* `addLimit d/20-8-2018 20-8-2018 m/200`
+* `add_limit d/20-8-2018 30-8-2018 m/100`
 
+[[checklimit]]
 === Viewing all limits: `checkLimit`
 
 Displays all limits information stored in FinancialPlanner +
-Format: `checkLimit`
+Format: `checklimit`
+Example:
+* `checklimit`
+* `checkLimit`
+* `check_limit`
 
+[[deletelimit]]
 === Deleting a limit: `deleteLimit`
 
-Deletes a spending limit from the FinancialPlanner +
-Format: `deleteLimit d/START_DATE END_DATE` +
+Deletes an existing spending limit from the FinancialPlanner +
+Format: `deleteLimit d/START_DATE END_DATE` (`deleteLimit d/START_DATE`) +
 
+The deleting command is based on the date period, since there will be at most one limit
+for one period of time, user only need to enter a period of time or a single date. The limit
+with the same dates will be deleted. If there is no limit for that period, the program will
+throw errors.
+Delete
 ****
 * `START_DATE/END_DATE` must match exactly the same as when the limit was created.
 * Limits cannot be partially deleted with incorrect dates.
@@ -692,22 +713,31 @@ Format: `deleteLimit d/START_DATE END_DATE` +
 
 Examples:
 
-* `deleteLimit d/20-8-2018 30-8-2018`
+* `deletelimit d/20-8-2018`
+* `deletelimit d/20-8-2018 30-8-2018`
+* `delete_Limit d/20-8-2018 30-8-2018`
 
+[[editlimit]]
 === Editing a limit: `editLimit`
 
 Edit a limit to the FinancialPlanner +
-Format: `editLimit d/START_DATE END_DATE m/MONEYFLOW` +
+Format: `editLimit d/START_DATE END_DATE m/MONEYFLOW` (`editLimit d/START_DATE END_DATE m/MONEYFLOW`)+
 
+Editlimit is similar to <<deletelimit>> command, it is also based on the date period.
+The editlimit command will check the input date period or the single day and
+replace the original moneyFlow with the new moneyFlow.
 ****
 * `MONEYFLOW` can only be a positive integer, and does not require a "+" or "-".
-* `START_DATE/END_DATE` must be exactly the same as when the limit was created.
+* `START_DATE/END_DATE` must match exactly the same as when the limit was created.
 ****
 
 Examples:
 
+* `editlimit d/20-8-2018 m/200`
+* `editlimit d/20-8-2018 30-8-2018 m/200`
 * `editLimit d/20-8-2018 30-8-2018 m/200`
-
+* `edit_limit d/20-8-2018 30-8-2018 m/200`
+// end::limitfeatures[]
 == Upcoming Features
 
 === Showing a visual representation of daily/monthly summary `[Coming in v1.4]`
@@ -768,9 +798,15 @@ e.g. `select 2`
 e.g. `summary d/20-12-2017 31-09-2018`
 * *Finances Statistics* : `stats` +
 e.g. `stats d/20-12-2017 31-09-2018`
-* *Add limit* : `limit d/START_DATE END_DATE` +
-e.g. `limit d/20-12-2017 31-09-2018`
+* *Add limit* : `addlimit d/START_DATE END_DATE` +
+e.g. +
+`limit d/20-12-2017`
+`limit d/20-12-2017 31-09-2018`
 * *Delete limit* `deleteLimit d/START_DATE END_DATE` +
-e.g. `deleteLimit d/20-12-2017 31-09-2018`
-* *Edit limit* `editLimit d/START_DATE END_DATE` +
-e.g. `editLimit d/20-12-2017 31-09-2018`
+e.g. +
+`deleteLimit d/20-12-2017`
+`deleteLimit d/20-12-2017 31-09-2018`
+* *Edit limit* `editLimit d/START_DATE END_DATE m/MONEYFLOW` +
+e.g. +
+`editLimit d/20-12-2017 m/100`
+`editLimit d/20-12-2017 31-09-2018 m/100`
