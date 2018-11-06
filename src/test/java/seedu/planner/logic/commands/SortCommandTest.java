@@ -41,14 +41,14 @@ public class SortCommandTest {
         assertNotEquals(sortCommandOne, sortCommandTwo);
 
         // different kind of objects -> return false
-        assertNotEquals(sortCommandOne,null);
+        assertNotEquals(sortCommandOne, null);
         assertNotEquals(sortCommandOne, "not_equal_string");
     }
 
     @Test
     public void execute_emptyList_listIsUnchanged() {
         SortCommand command = new SortCommand("name", true);
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS,  "name", "ascending");
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "name", "ascending");
 
         assertCommandSuccess(command, emptyModel, commandHistory, expectedMessage, expectedEmptyModel);
     }
@@ -56,9 +56,10 @@ public class SortCommandTest {
     @Test
     public void execute_unsortedList_listIsSorted() {
         SortCommand command = new SortCommand(SortCommand.CATEGORY_DATE, false);
-        String expectedMessage = String.format(MESSAGE_SUCCESS, SortCommand.CATEGORY_DATE, SortCommand.ORDER_DESCENDING);
+        String expectedMessage = String.format(MESSAGE_SUCCESS, SortCommand.CATEGORY_DATE,
+                SortCommand.ORDER_DESCENDING);
         // sort the initial model
-        Model expectedSortedModel = getSortedModel(model,SortCommand.CATEGORY_DATE, SortCommand.ORDER_DESCENDING);
+        Model expectedSortedModel = getSortedModel(model, SortCommand.CATEGORY_DATE, SortCommand.ORDER_DESCENDING);
 
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedSortedModel);
     }
