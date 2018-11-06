@@ -37,8 +37,6 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private DrinkDetailPane drinkDetailPane;
-    //private BrowserPanel browserPanel;
-    //private PersonListPanel personListPanel;
     private DrinkListPanel drinkListPanel;
     private BatchListPanel batchListPanel;
     private Config config;
@@ -54,7 +52,6 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    //private StackPane personListPanelPlaceholder;
     private StackPane drinkListPanelPlaceholder;
 
     @FXML
@@ -130,9 +127,6 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         drinkDetailPane = new DrinkDetailPane(null);
         drinkDetailPanePlaceholder.getChildren().add(drinkDetailPane.getRoot());
-
-        //personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        //personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         drinkListPanel = new DrinkListPanel(logic.getFilteredDrinkList());
         drinkListPanelPlaceholder.getChildren().add(drinkListPanel.getRoot());
@@ -213,19 +207,9 @@ public class MainWindow extends UiPart<Stage> {
         raise(new ExitAppRequestEvent());
     }
 
-    //public PersonListPanel getPersonListPanel() {
-    //    return personListPanel;
-    //}
-
     public DrinkListPanel getDrinkListPanel() {
         return drinkListPanel;
     }
-
-    /*
-    void releaseResources() {
-        browserPanel.freeResources();
-    }
-    */
 
     @Subscribe
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {

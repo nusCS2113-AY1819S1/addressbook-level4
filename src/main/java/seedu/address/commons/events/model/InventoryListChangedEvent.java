@@ -10,8 +10,8 @@ public class InventoryListChangedEvent extends BaseEvent {
 
     public final ReadOnlyInventoryList data;
 
-    public InventoryListChangedEvent(ReadOnlyInventoryList data) {
-        this.data = data;
+    public InventoryListChangedEvent(ReadOnlyInventoryList input) {
+        this.data = input;
     }
 
     @Override
