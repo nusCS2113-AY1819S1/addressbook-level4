@@ -14,6 +14,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.script.CommandType;
 import seedu.address.model.script.TextFile;
+import seedu.address.storage.scripts.ScriptLog;
 
 /**
  * Execute multiple same using a text file to the address book.
@@ -27,8 +28,6 @@ public class ScriptCommand extends Command {
     public static final String COMMA = ",";
     public static final String SPACE = " ";
 
-    public static final String DEFAULT_FOLDER = "/scripts/";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Run multiple commands based on the text file selected.\n"
             + "Parameters: TEXTFILE CommandType\n"
@@ -36,12 +35,12 @@ public class ScriptCommand extends Command {
             + "Example: " + COMMAND_WORD_2 + " txt/Studentlist c/group";
 
     public static final String MESSAGE_SUCCESS = "All persons from the text file %s has been added";
-    public static final String MESSAGE_ADD_ERROR = "Line %s of %s cannot be executed";
-    public static final String MESSAGE_UNABLE_TO_READ_FILE = "%s is not able to be read";
+    public static final String MESSAGE_EXECUTE_ERROR = "Line %s of %s cannot be executed";
     public static final String MESSAGE_FILE_MISSING = "%s is not present in the folder";
+    public static final String MESSAGE_LOG_CANNOT_WRITE = "The log file cannot be written";
 
+    private String projectLocation;
     private String textFileName;
-    private Path path;
     private CommandType commandType;
 
     public ScriptCommand(TextFile fileName, CommandType commandType) {
@@ -49,8 +48,7 @@ public class ScriptCommand extends Command {
         requireNonNull(commandType);
 
         textFileName = fileName.getTextFile() + TEXT_EXTENSION;
-        String projectLocation = FileUtil.getRootLocation();
-        this.path = FileUtil.getPath(projectLocation + DEFAULT_FOLDER + textFileName);
+        this.projectLocation = FileUtil.getRootLocation();
         this.commandType = commandType;
     }
 
@@ -58,17 +56,26 @@ public class ScriptCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         String multCommandError;
+        String scriptFolderLocation = model.getScriptFolderLocation();
+        Path scriptPath = FileUtil.getPath(projectLocation + scriptFolderLocation + textFileName);
+        List<String> commandArguments;
         AddressBookParser scriptParser = new AddressBookParser();
+
         try {
-            List<String> commandArguments = FileUtil.readEachLineFromFile(path);
-            commandArguments.replaceAll(s -> commandType + SPACE + s);
-            multCommandError = executeMultipleCommand(scriptParser, commandArguments, model, history);
+            commandArguments = FileUtil.readEachLineFromFile(scriptPath);
         } catch (IOException ioe) {
             return new CommandResult(String.format(MESSAGE_FILE_MISSING, textFileName));
         }
 
+        try {
+            commandArguments.replaceAll(s -> commandType + SPACE + s);
+            multCommandError = executeMultipleCommand(scriptParser, commandArguments, model, history);
+        } catch (IOException ioe) {
+            return new CommandResult(String.format(MESSAGE_LOG_CANNOT_WRITE, textFileName));
+        }
+
         if (!multCommandError.isEmpty()) {
-            return new CommandResult(String.format(MESSAGE_ADD_ERROR, multCommandError , textFileName));
+            return new CommandResult(String.format(MESSAGE_EXECUTE_ERROR, multCommandError , textFileName));
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, textFileName));
@@ -78,17 +85,20 @@ public class ScriptCommand extends Command {
      * This method will execute multiple commands.
      */
     public String executeMultipleCommand(AddressBookParser scriptParser, List<String> commandArguments,
-                                         Model model, CommandHistory history) {
-        String lineNumbers = new String();
+                                         Model model, CommandHistory history) throws IOException {
+        String errorMessage = new String();
+        ScriptLog scriptLog = new ScriptLog(commandType, textFileName, model);
         for (String fullCommands : commandArguments) {
             try {
                 Command command = scriptParser.parseCommand(fullCommands);
                 command.execute(model, history);
             } catch (ParseException | CommandException pe) {
-                lineNumbers = lineNumbers + (commandArguments.indexOf(fullCommands) + 1) + COMMA;
+                String lineNumber = Integer.toString(commandArguments.indexOf(fullCommands) + 1);
+                errorMessage = errorMessage + lineNumber + COMMA;
+                scriptLog.write(lineNumber, pe.getMessage());
             }
         }
-        lineNumbers = lineNumbers.replaceAll(".$", "");
-        return lineNumbers;
+        errorMessage = errorMessage.replaceAll(".$", "");
+        return errorMessage;
     }
 }

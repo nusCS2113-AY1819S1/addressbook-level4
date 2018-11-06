@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.EditTestMarksCommand.createEditedPerson;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TEST_MARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TEST_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -23,7 +22,7 @@ import seedu.address.model.grade.Test;
 import seedu.address.model.grade.TestName;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-
+//@@clara1234566
 /**
  * A command to add person test name and marks
  */
@@ -34,10 +33,9 @@ public class AddTestMarksCommand extends Command {
     public static final String COMMAND_WORD = "add_testmarks";
     public static final String COMMAND_WORD_2 = "adt";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": invalid command Add to add test and marks "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": invalid command to add test and marks \n"
             + "the command format should be .\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice " + PREFIX_TEST_NAME + "cs2113quiz1 " + PREFIX_TEST_MARK + "67";
+            + "Example: " + COMMAND_WORD_2 + " alice " + PREFIX_TEST_NAME + "cs2113quiz1 " + PREFIX_TEST_MARK + "67";
 
 
     public static final String MESSAGE_DUPLICATE_TEST = "This test already exists in the system";
@@ -49,11 +47,15 @@ public class AddTestMarksCommand extends Command {
     private final String testName;
     private final String testMarks;
     private final List<String> nameList;
-    private final EditTestMarksCommand.EditPersonDescriptor editPersonDescriptor = null;
+
 
     public AddTestMarksCommand(NameContainsKeywordsPredicate predicate,
                                String testName, String testMarks, List<String> nameList) {
-        requireNonNull(testMarks, testName);
+        requireNonNull(testMarks);
+        requireNonNull(testName);
+        requireNonNull(predicate);
+        requireNonNull(nameList);
+
         this.predicate = predicate;
         this.testName = testName;
         this.testMarks = testMarks;
@@ -93,6 +95,7 @@ public class AddTestMarksCommand extends Command {
                 if (!checked && duplicate) {
                     model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
                     throw new CommandException(MESSAGE_PERSON_DUPLICATE_FOUND);
+
                 } else if (checked && !duplicate) {
                     model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
                     throw new CommandException(MESSAGE_PERSONNAME_NOT_FOUND);
@@ -118,8 +121,8 @@ public class AddTestMarksCommand extends Command {
      */
     private CommandResult insertIntoPerson(Person person, Model model) throws CommandException {
         Person personToEdit = person;
-        EditTestMarksCommand.EditPersonDescriptor editPersonDescriptor =
-                new EditTestMarksCommand.EditPersonDescriptor();
+        EditCommand.EditPersonDescriptor editPersonDescriptor =
+                new EditCommand.EditPersonDescriptor();
         Test test = null;
         try {
             test = new Test(new TestName(testName), new Marks(testMarks), new Grade("Undefined"));
@@ -139,7 +142,7 @@ public class AddTestMarksCommand extends Command {
         testList.add(test);
         editPersonDescriptor.setTests(testList);
 
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Person editedPerson = EditCommand.createEditedPerson(personToEdit, editPersonDescriptor);
 
 
         model.updatePerson(personToEdit, editedPerson);

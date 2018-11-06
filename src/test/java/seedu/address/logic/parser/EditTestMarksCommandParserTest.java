@@ -15,17 +15,15 @@ import java.util.List;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.AddTestMarksCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditTestMarksCommand;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
-public class AddTestMarksCommandParserTest {
-
+public class EditTestMarksCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTestMarksCommand.MESSAGE_USAGE);
-    private AddTestMarksCommandParser parser = new AddTestMarksCommandParser();
-
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTestMarksCommand.MESSAGE_USAGE);
+    private EditTestMarksCommandParser parser = new EditTestMarksCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -34,7 +32,6 @@ public class AddTestMarksCommandParserTest {
         assertParseFailure(parser, VALID_NAME_AMY + TEST_NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
         assertParseFailure(parser, VALID_NAME_AMY + TEST_NAME_DESC_AMY + TEST_NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
         assertParseFailure(parser, VALID_NAME_AMY + TEST_MARK_DESC_AMY + TEST_MARK_DESC_AMY, MESSAGE_INVALID_FORMAT);
-
     }
 
     @Test
@@ -47,9 +44,10 @@ public class AddTestMarksCommandParserTest {
         nameList.add("Choo");
         NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
                 new NameContainsKeywordsPredicate(nameList);
-        AddTestMarksCommand expectedCommand = new AddTestMarksCommand(nameContainsKeywordsPredicate,
-                TEST_NAME_DESC_BOB, TEST_MARK_DESC_BOB, nameList);
+        EditTestMarksCommand expectedCommand = new EditTestMarksCommand(nameContainsKeywordsPredicate,
+                TEST_NAME_DESC_BOB, TEST_MARK_DESC_BOB, null, nameList);
 
     }
+
 
 }

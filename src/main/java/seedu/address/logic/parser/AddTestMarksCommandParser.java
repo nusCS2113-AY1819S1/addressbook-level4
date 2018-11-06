@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVI_TEST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TEST_MARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TEST_NAME;
 
@@ -11,6 +12,7 @@ import java.util.List;
 import seedu.address.logic.commands.AddTestMarksCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+//@@clara1234566
 /**
  * Parses the given {@code String} of arguments in the context of the FindCommand
  * and returns an FindCommand object for execution.
@@ -33,7 +35,10 @@ public class AddTestMarksCommandParser implements Parser<AddTestMarksCommand> {
 
         List<String> nameKeywordsList =
                 new ArrayList<>(Arrays.asList(nameKeywords));
-
+        if (nameKeywordsList.contains("tn/") || nameKeywordsList.contains("tm/")) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVI_TEST));
+        }
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TEST_NAME, PREFIX_TEST_MARK);
         if (!argMultimap.getValue(PREFIX_TEST_NAME).isPresent()) {
@@ -44,6 +49,10 @@ public class AddTestMarksCommandParser implements Parser<AddTestMarksCommand> {
         if (!argMultimap.getValue(PREFIX_TEST_MARK).isPresent()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTestMarksCommand.MESSAGE_USAGE));
+        }
+
+        if (argMultimap.getValue(PREFIX_TEST_NAME).get().contains(" ")) {
+            throw new ParseException(MESSAGE_INVI_TEST);
         }
         nameKeywordsList.remove(PREFIX_TEST_NAME + argMultimap.getValue(PREFIX_TEST_NAME).get());
         nameKeywordsList.remove(PREFIX_TEST_MARK + argMultimap.getValue(PREFIX_TEST_MARK).get());

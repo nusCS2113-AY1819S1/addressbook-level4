@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level4
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team T13-4`      Since: `Jun 2016`      Licence: `MIT`
 
 == Introduction
 
@@ -27,7 +27,7 @@ AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for mana
 .  Copy the file to the folder you want to use as the home folder for your Address Book.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
-image::Ui.png.jpg[width="790"]
+image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -37,6 +37,8 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
 * *`exit`* : exits the app
+
+. Please kindly refer to <<ScriptSetup Function>> to understand on how to setup the `Student Management System` to use the `scripts` function properly
 
 .  Refer to <<Features>> for details of each command.
 
@@ -121,6 +123,39 @@ Examples:
 * `deletegroup 1`
 * `dg 1`
 
+=== Add test and test marks to student: `adt student name tn/ tm/`
+The system is allowed user to input different test name and test marks for each student by indicate
+the name of student. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate keyword then need to indicate the full name, otherwise if no duplicate it will just add to the student ),
+the marks should be 1 digit double numbers or integers within 0-100.
+Each student should not have duplicate test name.
+Format: `adt student name tn/ tm/` or  `adt student name tm/ tn/`
+Example: `adt Alex tn/CS2113Midterm tm/77`
+This will add a test to the student
+
+=== Edit test marks of student: `edt student name tn/ tm/`
+The system is allowed user to input different test name and test marks for each student by indicate
+the student name. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate then need to indicate the full name, otherwise if no duplicate it will just edit the student's mark),
+the marks should be 1 digit double numbers or integers within 0-100.
+The test to be edited should be exist in the system record, otherwise, the user should add the test first.
+Format: `edt student name tn/ tm/` or `edt student name tm/ tn/`
+Example: `edt Alex tn/CS2113Midterm tm/66`
+This will edit the student marks for test CS2113Midterm
+
+=== Generate grade summary for each test: `disp tn/ highest/` or `disp tn/ lowest/` or `disp tn/ median/` or `disp tn/ mean/` or `disp tn/ TTF/` or `disp tn/ LTF/`
+The system is allowed user to check any summary he want of each test (highest mark/ lowest mark / median mark / mean mark / generate top/last 25 percen students list)
+
+Format: `disp tn/ highest/` or `disp tn/ lowest/` or `disp tn/ median/` or `disp tn/ mean/` or `disp tn/ TTF/` or `disp tn/ LTF/`
+Example: `disp tn/CS2113Midterm highest/` gives the highest mark for all student taken the test CS2113Midterm
+         `disp tn/CS2113Midterm LTF/` will show a list of students who has fall into the last 25 percentage of this test
+
+=== Assign grade to each student taken certain test(Bell_curve): `agpt tn/`
+The system is allowed user to enter a command to assign grade for all students who has taken certain test base on the bell_curve calculation
+The user can check student's test and grade on the browser panel after you click on each student's name card.
+The test to be assign grade should be exist in the system record, otherwise, the user should add the test first.
+click the person to see the grade .
+Format: `agpt tn/`
+Example: `agpt tn/CS2113Midterm`
+
 === Deleting student(s) from a group: `deletegroupstudent` `dgs`
 Deletes a student from a group in the student management system +
 Format: `deletegroupstudent g/INDEX p/NDEX`  +
@@ -137,14 +172,47 @@ Examples:
 * `deletegroupstudent g/1 p/1`
 * `dgs g/1 p/1`
 
-=== add test and test marks to student: 'adt student name tn/ tm/'
-The system is allowed user to input different testname and test marks for each student by indicate
-the student name. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate then need to indicate the full name, otherwise it will be just add )
+=== Add test and test marks to student: `adt student name tn/ tm/`
+The system is allowed user to input different test name and test marks for each student by indicate
+the name of student. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate keyword then need to indicate the full name, otherwise if no duplicate it will just add to the student ),
+the marks should be 1 digit double numbers or integers within 0-100.
+Each student should not have duplicate test name.
+This command is undoable and redoable.
+Format: `adt student name tn/ tm/` or  `adt student name tm/ tn/`
+Example: `adt Alex tn/CS2113Midterm tm/77`
+This will add a test to the student
 
-Format: adt tn/ tm/ or adt tm/ tn/
-Example: adt
-This will list all the students who score above 56 in a new grade list
+=== Edit test marks of student: `edt student name tn/ tm/`
+The system is allowed user to edit test marks for each student by indicate the student name and the test name. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate then need to indicate the full name, otherwise if no duplicate it will just edit the student's mark),
+the marks should be 1 digit double numbers or integers within 0-100.
+The test to be edited should be exist in the system record, otherwise, the user should add the test first.
+This command is undoable and redoable.
+Format: `edt student name tn/ tm/` or `edt student name tm/ tn/`
+Example: `edt Alex tn/CS2113Midterm tm/66`
+This will edit the student marks for test CS2113Midterm
 
+=== Generate grade summary for each test: `disp tn/ highest/` or `disp tn/ lowest/` or `disp tn/ median/` or `disp tn/ mean/` or `disp tn/ TTF/` or `disp tn/ LTF/`
+The system is allowed user to check any summary he want of each test (highest mark/ lowest mark / median mark / mean mark / generate top/last 25 percen students list)
+
+Format: `disp tn/ highest/` or `disp tn/ lowest/` or `disp tn/ median/` or `disp tn/ mean/` or `disp tn/ TTF/` or `disp tn/ LTF/`
+Example: `disp tn/CS2113Midterm highest/` gives the highest mark for all student taken the test CS2113Midterm
+         `disp tn/CS2113Midterm LTF/` will show a list of students who has fall into the last 25 percentage of this test
+
+=== Assign grade to each student taken certain test(Bell_curve): `agpt tn/`
+The system is allowed user to enter a command to assign grade for all students who has taken certain test base on the bell_curve calculation
+The user can check student's test and grade on the browser panel after you click on each student's name card.
+The test to be assign grade should be exist in the system record, otherwise, the user should add the test first.
+click the person to see the grade.
+This command is undoable and redoable.
+Format: `agpt tn/`
+Example: `agpt tn/CS2113Midterm`
+
+=== delete certain test from students who has taken it: `dt tn/`
+The system is allowed user to enter a command to delete certain test from all students who has taken it.
+The test to be assign grade should be exist in the system record, otherwise, the user should add the test first.
+click the student to see the result after delete. This command is undoable and redoable.
+Format: `dt tn/`
+Example: `dt tn/CS2113Midterm`
 
 === Distributed all students into _n_ groups with balanced number of Nationality or Gender: `distinto` `di`
 This functionality creates _n_ number of groups determined by the user, with a general group name specified and randomly distribute all students in the system into _n_ groups. +
@@ -228,22 +296,6 @@ Examples: +
 * sm g/2 s/Announcement m/Please bring your calculator tomorrow.
 // end::sendmail[]
 
-=== List a group of students: `scorefilter`
-List out the standard deviation of the score data set from all students +
-Format: `scoreFilter [filter_standard]` +
-
-Examples:
-* scorefilter 56
-
-=== Summary of students' grade: 'summaryGrade'
-
-show highest, lowest, mean, median, 25th 75th percentiles, %passes* of certain test.
-Example: summaryGrade
-
-Format: summaryGrade
-Example: summaryGrade
-show highest, lowest, mean, median, 25th 75th percentiles, %passes* of certain test
-
 === Adding/deleting tags automatically: 'addtag/deletetag'
 Add/delete certain tags for certain group of people +
 Format: `addtag GROUP_NAME  tag/` +
@@ -276,27 +328,64 @@ Examples:
 * `add n/John Doe g/M nat/SG p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `a n/Betsy Crowe g/female nat/MY t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-=== Execute multiples of the same Command using text file : `script` `scr`
+// tag::ScriptSetup[]
+=== ScriptSetup Function
+
+`Student Management System` provide the user with the option of choosing their own directory path for the `scripts` folder
+
+User will be able to change their scripts folder in the `preferences.json` of the main directory of the project
+
+The parameter `"scriptFileDirectory"` : `"/scripts/test/"` represent the script folder location in the `preferences.json`
+
+* There are restriction on how the user can change the `scriptFileDirectory`
+** The `/` must be included  at the front of the String and at the end of the String
+*** Valid : `/scripts/test/` `/scripts/`
+*** Invalid : `/scripts` `tests/`
+** There must not be two consective `/`
+*** Invalid: `//scripts` `/scripts//test`
+** `"` `<` `>` `?` `:` `*` are characters that will automatically be rejected if it exists
+*** Invalid `/?scripts/` `/test:*/`
+
+[NOTE]
+If the `scriptFileDirectory` is invalid, the program will automatically generate a default script folder which is `/scripts/`
+
+If the script folder path is valid, the program will automatically create the folder for the user if the folder is missing
+
+Sample Text File are also automatically included in the script folder for user to test the scripts
+
+// end::ScriptSetup[]
+
+// tag::ScriptCommand[]
+=== Script Function : `script` `scr`
 
 Get all the commands parameters from a text file and execute them +
 Format: `script txt/TextFile c/CommandType` +
 Shortcut Format: `scr txt/TextFile c/CommandType` +
 
+Prerequisites :
+
+* Please kindly refer to <<ScriptSetup Function>> to understand on how to setup the `Student Management System` to use the `scripts` function properly
+* Please ensure that there are Text File in the scripts folder configured in <<ScriptSetup Function>>
+
 ****
-* Default scripts folder is located at the /scripts/ where the main program is located at.
-* If the scripts folder is missing, the program will automatically generate the folder when the program starts
 * txt/ is the TextFile Prefix which is used to indicate the following parameter is a TextFile parameter
-** TextFile is the text file which contains all the command arguments that you want to execute.
-** TextFile should consist of the name of the file without the extension E.g "StudentList" is a valid TextFile but
-"StudentList.txt" is also valid TextFile but it will search for "StudentList.txt.txt" in the folder.
-* c/ is the CommandType Prefix which is used to indicate the following parameter is a CommandType parameter
+** TextFile is the text file which the script command will extract all its command from
+** TextFile should consist of the name of the file without the extension E.g "txt/StudentList" means that the program will look
+for StudentList.txt in the script folder
+* c/ is the CommandType Prefix which is used to indicate that the command that you want to execute with the Text File
 ** CommandType is the command that you want to execute E.g add, delete, creategroup, etc
 ****
+
+image::SampleScriptFile.png[width="800"]
+.Example of a ScriptFile for executing the `add` Command
+Please refer to <<Adding a person: `add` `a`>> for more information about `add` command
+
 
 Examples:
 
 * `script txt/addgroups c/creategroup`
 * `scr txt/addpersons c/add`
+// end::ScriptCommand[]
 
 === Listing all persons : `list` `l`
 
@@ -490,6 +579,7 @@ e.g. `add n/James Ho g/M nat/CN p/22224444 e/jamesho@example.com a/123, Clementi
 e.g. `delete 3`
 * *Create Group* : `creategroup n/NAME l/LOCATION [t/TAG] ...` +
 e.g. `creategroup n/CS2040C l/LT15 t/cpp`
+
 * *Select Group* : `selectgroup INDEX` +
 e.g. `selectgroup 1`
 * *Add to Group* : `addgroup g/INDEX p/INDEX ...` +
@@ -510,10 +600,30 @@ e.g. `sendmail 1 s/Solution for Assignment m/Hi Bob, solution has been attached.
 e.g. `sendmail 1,4,6 s/Tutorial Cancelled m/Tutorial class for Friday has been cancelled.`
 * *Send Email (Group)*: `sendmail g/[Group_Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
 e.g. `sendmail g/2 s/Announcement m/Please bring your calculator tomorrow.`
+* *Distribute randomly into _n_ Groups* :
+`distinto INDEX n/GROUP-NAME g/GENDER_FLAG nat/NATIONALITY_FLAG` +
+e.g. distinto 3 n/CS2113- g/0 nat/0
+* *Distribute randomly into _n_ Groups with balanced gender* : +
+`distinto INDEX n/GROUP-NAME g/GENDER_FLAG nat/NATIONALITY_FLAG`
+e.g. distinto 3 n/CS2113- g/1 nat/0
+* *Distribute randomly into _n_ Groups with balanced nationality* :
+`distinto INDEX n/GROUP-NAME g/GENDER_FLAG nat/NATIONALITY_FLAG` +
+e.g. distinto 3 n/CS2113- g/0 nat/1
 * *List* : `list`
 * *Help* : `help`
 * *Select* : `select INDEX` +
-e.g.`select 2`
+* *Executescripts* : `script txt/TextFile c/CommandType` +
+e.g. `script txt/addpersons c/add`
+* *add test marks* : `adt tn/TESTNAME tm/MARKS` +
+e.g. `adt tn/cs2113 tm/16`
+* *edit test marks* : `edt tn/TESTNAME tm/MARKS` +
+e.g. `edt tn/cs2113 tm/16`
+* *display test summary* : `disp tn/TESTNAME INSTRUCTION/` +
+e.g. disp tn/CS2113 highest/` or `disp tn/CS2113 lowest/` or `disp tn/CS2113 median/` or `disp tn/CS2113 mean/` or `disp tn/CS2113 TTF/` or `disp tn/ LTF/`
+* *assign grade per test* : `agpt tn/TESTNAME ` +
+e.g. `agpt tn/CS2040C`
+* *delete certain test* : `dt tn/TESTNAME ` +
+e.g. `dt tn/CS2040C`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`

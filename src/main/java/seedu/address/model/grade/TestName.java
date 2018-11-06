@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class TestName {
     public static final String MESSAGE_TEST_NAME_CONSTRAINTS =
             " Test names should only contain alphanumeric characters and "
-            + "certain characters such as '[', ']' and '-' and should it not be blank";
+            + "certain characters such as '[', ']' and '-' and should it not be blank or contain space";
 
     public static final String TEST_NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
     public final String testName;

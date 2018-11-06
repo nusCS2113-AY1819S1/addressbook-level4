@@ -17,7 +17,7 @@ import seedu.address.model.util.Median;
 import seedu.address.model.util.TopTwentyFivePercen;
 import seedu.address.ui.DisplayGrade;
 
-
+//@@clara1234566
 /**
  * GradeSummary Command for Students, to display the highest, lowest, mean, median of certain test
  * also it can display top25 percentage ,last 25 percentage students for the lecture.
@@ -30,7 +30,7 @@ public class GradeSummaryCommand extends Command {
             + "Parameters: "
             + PREFIX_MEAN
             + "\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + COMMAND_WORD_2 + " "
             + PREFIX_MEAN;
 
     public static final String MESSAGE_SUCCESS = "Success Showing List";
