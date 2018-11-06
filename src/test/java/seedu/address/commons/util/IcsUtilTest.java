@@ -38,8 +38,8 @@ public class IcsUtilTest {
 
     @Test
     public void readTimeTableFromFile_emptyFile_dataFormatMismatchException() throws Exception {
-        thrown.expect(IOException.class);
-        IcsUtil.getInstance().readTimeTableFromFile(EMPTY_FILE);
+        Optional<TimeTable> dataFromFile = IcsUtil.getInstance().readTimeTableFromFile(EMPTY_FILE);
+        assert (!dataFromFile.isPresent());
     }
 
     @Test

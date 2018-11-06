@@ -54,10 +54,10 @@ public class IcsUtil {
 
     /**
      * Returns the {@code TimeTable} from the .ics file specified.
-     * Returns {@code Optional.empty()} object if the file is not found, or it did not contain iCalendar data.
+     * Returns {@code Optional.empty()} object if the file did not contain iCalendar data.
      *
      * @param filePath cannot be null.
-     * @throws IOException if the file format is not as expected.
+     * @throws IOException if the file format is not as expected, or file is not found.
      *
      */
     public Optional<TimeTable> readTimeTableFromFile(Path filePath)

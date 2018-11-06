@@ -32,6 +32,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final HashMap<String, DayOfWeek> DAY_OF_WEEK_MAP = new HashMap<>();
+    public static final String IMPORT_EXPORT_FOLDER = "import_export";
 
     static {
         DAY_OF_WEEK_MAP.put("MON", DayOfWeek.MONDAY);
@@ -239,8 +240,6 @@ public class ParserUtil {
      * The returned Path is at .\\import_export\\[fileName].ics, see {@code ImportCommand} and {@code ExportCommand}
      */
     public static Path parseImportExportFileName (String fileName) throws ParseException {
-        String importExportFolderName = "import_export";
-
         requireNonNull(fileName);
         String trimmedFileName = fileName.trim();
         String fullFileName = trimmedFileName + ".ics";
@@ -249,7 +248,7 @@ public class ParserUtil {
         // throw exception if the created file's directory would be greater than 250 char,
         // (since windows filesystem has problems with long directories)
         String applicationPath = System.getProperty("user.dir"); //the location of the .jar
-        String filePath = applicationPath + "\\" + importExportFolderName + "\\" + fullFileName;
+        String filePath = applicationPath + "\\" + IMPORT_EXPORT_FOLDER + "\\" + fullFileName;
 
         if (filePath.length() > 250) {
             throw new ParseException (Messages.MESSAGE_PATH_TOO_LONG);

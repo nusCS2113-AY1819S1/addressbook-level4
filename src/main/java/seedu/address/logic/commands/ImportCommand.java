@@ -36,7 +36,7 @@ public class ImportCommand extends Command {
             + "Example: " + COMMAND_WORD
             + " my_import_file_name";
 
-    public static final String MESSAGE_SUCCESS = "Imported timetable at: %1$s.";
+    public static final String MESSAGE_IMPORT_SUCCESS = "Imported timetable at: %1$s.";
     public static final String MESSAGE_EMPTY = "Timetable file empty at: %1$s.";
     public static final String MESSAGE_IO_ERROR = "Failed to read the file at: %1$s.\nPlease check the file exists.";
     private final Path filePath;
@@ -77,7 +77,7 @@ public class ImportCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         model.updateTimeTable(modifiedPerson.getTimeTable());
-        return new CommandResult(String.format(MESSAGE_SUCCESS, filePath.toString()));
+        return new CommandResult(String.format(MESSAGE_IMPORT_SUCCESS, filePath.toString()));
     }
 
     /**
