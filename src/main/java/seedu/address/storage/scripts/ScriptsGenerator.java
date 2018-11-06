@@ -14,7 +14,7 @@ public class ScriptsGenerator {
             + "a/Bedok street 32 d/82 t/rich" + NEXT_LINE
             + "n/Joel g/M nat/SG p/9784230 e/joeltan98@hotmail.com "
             + "a/Jurong West Street 52 d/76 t/pro" + NEXT_LINE
-            + "n/JoelTan g/M nat/SG p/9784230 e/joel.twh@u.nus.edu"
+            + "n/JoelTan g/M nat/SG p/9784230 e/joel.twh@u.nus.edu "
             + "a/Jurong West Street 52 d/76 t/pro" + NEXT_LINE;
 
     private static final String GROUP_COMMAND = "n/tut[01] l/e1-11-20 t/ma1301" + NEXT_LINE
