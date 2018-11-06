@@ -129,4 +129,6 @@ developers the architecture of my product._
 
 include::../DeveloperGuide.adoc[tag=list]
 
+include::../DeveloperGuide.adoc[tag=summary]
+
 include::../DeveloperGuide.adoc[tag=stats]
