@@ -1,0 +1,69 @@
+= Koh Jun Kiat - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Book Inventory
+
+---
+
+== Overview
+
+BookInventory is a desktop application used for small to medium book owners. It can be used to track activities such as revenue and stock of the books. The user mainly interacts with the application using Command Line Interface (CLI), and it also has a built-in GUI created with JavaFX. The main code is written in Java and contains approximately 10,000 Lines of Code (LoC).
+
+== Summary of contributions
+
+* *Major enhancement*: added a password field for security
+** What it does: allow users to key in a password before using the application. This is to prevent unauthorized users from using the application.
+** Justification: This is to prevent unauthorized users from using the application because they might temper with the data.
+** Highlights: The code is written before the application starts, this is to prevent any unnecessary load-up from the application, freeing space and data for the user. The implementation was challenging at first as you require a basic knowledge of JavaFX.
+
+* *Minor enhancement*: change regular expressions (regex) in the code
+
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.0` - `v1.1` (2 releases) on GitHub
+** Project morphing:
+*** Morphed model portion of addressbook 4.
+** Enhancements to existing features:
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+*** Contributed to forum discussions (examples:  https://github.com/nusCS2113-AY1819S1/forum/issues/58[1])
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** Some parts of the stock feature I added was adopted by several other class mates
+** Tools:
+
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+=== Key-in password
+
+****
+* A password will be required by the application to use it.
+* If you do not know the password, please contact us using github directly.
+* For the sake of this early development of the program, the password for the admin: "owner"; student: "password"; accountant: "accountant".
+* Different roles have different sets of permission ie commands.
+****
+
+Examples:
+
+* `list` +
+`stock 2 q/6` +
+Increase the quantity available of the 2nd book by 6.
+* `stock i/978-2-12-345680-3 q/5` +
+Increase the quantity available for the book with the corresponding ISBN13 by 5.
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+
