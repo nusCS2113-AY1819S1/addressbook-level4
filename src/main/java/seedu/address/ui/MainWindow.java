@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.DrinkAttributeChangedEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.InventoryPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
@@ -153,6 +154,13 @@ public class MainWindow extends UiPart<Stage> {
         batchListPanel = new BatchListPanel(
                 event.getNewSelection().getObservableBatchList());
         batchListPanelPlaceholder.getChildren().add(batchListPanel.getRoot());
+    }
+
+    @Subscribe
+    private void handleDrinkAttributeChangedEvent(DrinkAttributeChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        drinkListPanel = new DrinkListPanel(logic.getFilteredDrinkList());
+        drinkListPanelPlaceholder.getChildren().add(drinkListPanel.getRoot());
     }
 
     void hide() {
