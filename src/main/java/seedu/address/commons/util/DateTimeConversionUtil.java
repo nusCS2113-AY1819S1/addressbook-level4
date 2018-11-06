@@ -88,15 +88,17 @@ public class DateTimeConversionUtil {
     }
 
     /**
-     * Get the {@code Date} of the previous {@code DayOfWeek} from the given {@code LocalTime}.
-     * ie: if dayOfWeek is monday, then the return last monday's Date.
+     * @return the next {@code Date} of the {@code DayOfWeek} requested
+     *
+     * ie: if {@code DayOfWeek} requested is monday, then the return the Date of the next monday from now.
+     * if today is monday, then return today's date.
      */
-    public Date getPreviousDateOfDay(LocalTime startTime, DayOfWeek dayOfWeek) {
-        LocalDate previousDay =
+    public Date getNextDateOfDay(LocalTime startTime, DayOfWeek dayOfWeek) {
+        LocalDate nextDay =
                 LocalDate.now(ZoneId.of(DEFAULT_ZONE_ID))
-                        .with(TemporalAdjusters.previous(dayOfWeek));
+                        .with(TemporalAdjusters.nextOrSame(dayOfWeek));
 
-        LocalDateTime localDateTime = startTime.atDate(previousDay);
+        LocalDateTime localDateTime = startTime.atDate(nextDay);
         return DateTimeConversionUtil.getInstance().localDateTimeToDate(localDateTime);
     }
 

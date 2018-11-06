@@ -179,7 +179,7 @@ public class IcsUtil {
 
         ICalendar iCalendar = new ICalendar();
         for (TimeSlot timeSlot : timeSlots) {
-            VEvent vEvent = timeSlotToWeeklyVEvent(timeSlot, 14);
+            VEvent vEvent = timeSlotToWeeklyVEvent(timeSlot, 1);
             iCalendar.addEvent(vEvent);
         }
         return iCalendar;
@@ -211,10 +211,10 @@ public class IcsUtil {
         vEvent.setRecurrenceRule(recurrenceRule);
 
         //write data to {@code VEvent}: set the DateStart
-        vEvent.setDateStart(DateTimeConversionUtil.getInstance().getPreviousDateOfDay(startTime, dayOfWeek));
+        vEvent.setDateStart(DateTimeConversionUtil.getInstance().getNextDateOfDay(startTime, dayOfWeek));
 
         //write data to {@code VEvent}: set the DateEnd
-        vEvent.setDateEnd(DateTimeConversionUtil.getInstance().getPreviousDateOfDay(endTime, dayOfWeek));
+        vEvent.setDateEnd(DateTimeConversionUtil.getInstance().getNextDateOfDay(endTime, dayOfWeek));
 
         //write data to {@code VEvent}: set summary (Module Name)
         vEvent.setSummary(label);
