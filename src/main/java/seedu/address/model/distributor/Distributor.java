@@ -86,7 +86,7 @@ public class Distributor {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(distname, distphone);
+        return Objects.hash(distname, distphone, tags);
     }
 
     @Override
@@ -95,7 +95,7 @@ public class Distributor {
         builder.append(getDistName())
                 .append(" Phone: ")
                 .append(getDistPhone())
-                .append(tags);
+                .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
