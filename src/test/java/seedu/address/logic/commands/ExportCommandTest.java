@@ -45,7 +45,7 @@ public class ExportCommandTest {
     @Test
     public void equals() {
         ExportCommand standardCommand = new ExportCommand(exportFilePath);
-        final Filetype FILETYPE_CSV = new Filetype("csv");
+        final Filetype filetypeCsv = new Filetype("csv");
         final Path differentFilePath = Paths.get("src", "test", "data", "testExportCommandDifferent.xml");
 
         // same value -> returns true
@@ -59,7 +59,7 @@ public class ExportCommandTest {
         assertFalse(standardCommand.equals(null));
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ExportAllCommand(FILETYPE_CSV)));
+        assertFalse(standardCommand.equals(new ExportAllCommand(filetypeCsv)));
 
         // different filename -> returns false
         assertFalse(standardCommand.equals(new ExportCommand(differentFilePath)));
