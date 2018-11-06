@@ -21,7 +21,6 @@ import seedu.address.commons.events.ui.InventoryPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.drink.Drink;
 
 /**
  * The Main Window. Provides the basic application layout containing
