@@ -4,7 +4,6 @@ import static seedu.planner.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.planner.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.planner.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import org.apache.tools.ant.types.resources.Sort;
 import org.junit.Test;
 
 import seedu.planner.logic.commands.Command;
