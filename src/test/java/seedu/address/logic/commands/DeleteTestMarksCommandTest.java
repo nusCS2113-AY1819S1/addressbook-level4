@@ -5,16 +5,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TEST_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TEST_AMY_MARKS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TEST_GRADE_UNDEFINED;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TEST_MARK_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TEST_MARK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TEST_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TEST_NAME_BOB;
+import static seedu.address.logic.commands.DeleteTestMarksCommand.MESSAGE_SUCCESSFUL_DELETE_TEST;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -22,134 +16,82 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
+
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.group.AddGroup;
 import seedu.address.model.group.Group;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
-public class EditTestMarksCommandTest {
+public class DeleteTestMarksCommandTest {
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     private CommandHistory commandHistory = new CommandHistory();
-    //TODO
-    //    @Test
-    //    public void constructor_nullTest_throwsNullPointerException() {
-    //        thrown.expect(NullPointerException.class);
-    //        new EditTestMarksCommand(null,null,null,null,null);
-    //    }
+
+    @Test
+    public void constructor_nullTest_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        new DeleteTestMarksCommand(null);
+    }
 
     @Test
     public void execute_testAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingTestAdded modelStub = new ModelStubAcceptingTestAdded();
+        ModelStubAcceptingTestDeleted modelStub = new ModelStubAcceptingTestDeleted();
         modelStub.validPerson = new PersonBuilder().withTests(VALID_TEST_AMY).build();
-        Person validPerson = new PersonBuilder().build();
-        String[] nameKeywords = validPerson.getName().fullName.split("\\s+");
-        List<String> nameKeywordsList =
-                new ArrayList<>(Arrays.asList(nameKeywords));
-        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
-                new NameContainsKeywordsPredicate(nameKeywordsList);
 
-        CommandResult commandResult = new EditTestMarksCommand(nameContainsKeywordsPredicate,
-                VALID_TEST_NAME_AMY, VALID_TEST_AMY_MARKS, VALID_TEST_GRADE_UNDEFINED, nameKeywordsList)
-                .execute(modelStub, commandHistory);
+        CommandResult commandResult = new
+                DeleteTestMarksCommand(VALID_TEST_NAME_AMY).execute(modelStub, commandHistory);
 
-        assertEquals(Messages.MESSAGE_UPDATED_TEST_LIST, commandResult.feedbackToUser);
+        assertEquals(String.format(MESSAGE_SUCCESSFUL_DELETE_TEST, VALID_TEST_NAME_AMY), commandResult.feedbackToUser);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
     public void execute_notFoundTest_throwsCommandException() throws Exception {
 
-        ModelStubAcceptingTestAdded modelStub = new ModelStubAcceptingTestAdded();
-        Person validPerson = new PersonBuilder().build();
-        String[] nameKeywords = validPerson.getName().fullName.split("\\s+");
-        List<String> nameKeywordsList =
-                new ArrayList<>(Arrays.asList(nameKeywords));
-        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
-                new NameContainsKeywordsPredicate(nameKeywordsList);
-        EditTestMarksCommand editTestMarksCommand = new EditTestMarksCommand(nameContainsKeywordsPredicate,
-                VALID_TEST_NAME_AMY, VALID_TEST_AMY_MARKS, VALID_TEST_GRADE_UNDEFINED, nameKeywordsList);
+        ModelStubAcceptingTestDeleted modelStub = new ModelStubAcceptingTestDeleted();
+        DeleteTestMarksCommand deleteTestMarksCommand = new DeleteTestMarksCommand("TEST24");
         thrown.expect(CommandException.class);
-        thrown.expectMessage(EditTestMarksCommand.MESSAGE_NOT_FOUND_TEST);
-        editTestMarksCommand.execute(modelStub, commandHistory);
+        thrown.expectMessage(String.format(DeleteTestMarksCommand.MESSAGE_NOT_FOUND_TEST, "TEST24"));
+        deleteTestMarksCommand.execute(modelStub, commandHistory);
 
     }
-
-    @Test
-    public void execute_noPerson_throwsCommandException() throws Exception {
-
-        ModelStubAcceptingTestAdded modelStub = new ModelStubAcceptingTestAdded();
-        Person validPerson = new PersonBuilder().withName("Jenny").build();
-        String[] nameKeywords = validPerson.getName().fullName.split("\\s+");
-        List<String> nameKeywordsList =
-                new ArrayList<>(Arrays.asList(nameKeywords));
-        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
-                new NameContainsKeywordsPredicate(nameKeywordsList);
-        EditTestMarksCommand editTestMarksCommand = new EditTestMarksCommand(nameContainsKeywordsPredicate,
-                VALID_TEST_NAME_AMY, VALID_TEST_AMY_MARKS, VALID_TEST_GRADE_UNDEFINED, nameKeywordsList);
-        thrown.expect(CommandException.class);
-        thrown.expectMessage(AddTestMarksCommand.MESSAGE_PERSONNAME_NOT_FOUND);
-        editTestMarksCommand.execute(modelStub, commandHistory);
-
-    }
-
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
 
-        String[] nameKeywordsAlice = alice.getName().fullName.split("\\s+");
-        List<String> nameKeywordsListAlice =
-                new ArrayList<>(Arrays.asList(nameKeywordsAlice));
-        NameContainsKeywordsPredicate nameContainsKeywordsPredicateAlice =
-                new NameContainsKeywordsPredicate(nameKeywordsListAlice);
-
-        String[] nameKeywordsBob = bob.getName().fullName.split("\\s+");
-        List<String> nameKeywordsListBob =
-                new ArrayList<>(Arrays.asList(nameKeywordsBob));
-        NameContainsKeywordsPredicate nameContainsKeywordsPredicateBob =
-                new NameContainsKeywordsPredicate(nameKeywordsListBob);
-
-        EditTestMarksCommand editTestMarksCommandAlice = new EditTestMarksCommand(nameContainsKeywordsPredicateAlice,
-                        VALID_TEST_NAME_AMY, VALID_TEST_MARK_AMY, VALID_TEST_GRADE_UNDEFINED, nameKeywordsListAlice);
-        EditTestMarksCommand editTestMarksCommandBob = new EditTestMarksCommand(nameContainsKeywordsPredicateBob,
-                VALID_TEST_NAME_BOB, VALID_TEST_MARK_BOB, VALID_TEST_GRADE_UNDEFINED, nameKeywordsListBob);
+        DeleteTestMarksCommand deleteTestMarksCommandTest1 = new DeleteTestMarksCommand("Test1");
+        DeleteTestMarksCommand deleteTestMarksCommandTest2 = new DeleteTestMarksCommand("Test2");
 
         // same object -> returns true
-        assertTrue(editTestMarksCommandAlice.equals(editTestMarksCommandAlice));
+        assertTrue(deleteTestMarksCommandTest1.equals(deleteTestMarksCommandTest1));
 
         // same values -> returns true
-        EditTestMarksCommand editTestMarksCommandAliceCopy = new
-                EditTestMarksCommand(nameContainsKeywordsPredicateAlice,
-                VALID_TEST_NAME_AMY, VALID_TEST_MARK_AMY, VALID_TEST_GRADE_UNDEFINED, nameKeywordsListAlice);
-        assertTrue(editTestMarksCommandAlice.equals(editTestMarksCommandAliceCopy));
+        DeleteTestMarksCommand deleteTestMarksCommandTest1Copy = new DeleteTestMarksCommand("Test1");
+        assertTrue(deleteTestMarksCommandTest1.equals(deleteTestMarksCommandTest1Copy));
 
         // different types -> returns false
-        assertFalse(editTestMarksCommandAlice.equals(1));
+        assertFalse(deleteTestMarksCommandTest1.equals(1));
 
         // null -> returns false
-        assertFalse(editTestMarksCommandAlice.equals(null));
+        assertFalse(deleteTestMarksCommandTest1.equals(null));
 
         // different person -> returns false
-        assertFalse(editTestMarksCommandAlice.equals(editTestMarksCommandBob));
+        assertFalse(deleteTestMarksCommandTest1.equals(deleteTestMarksCommandTest2));
     }
 
 
     /**
      * A Model stub that always accept the Test being added.
      */
-    private class ModelStubAcceptingTestAdded extends ModelStub {
+    private class ModelStubAcceptingTestDeleted extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
         private Person validPerson = new PersonBuilder().build();
         private Person validPerson2 = new PersonBuilder().withName("Jeff").build();
@@ -177,7 +119,6 @@ public class EditTestMarksCommandTest {
         }
 
     }
-
     /**
      * A default model stub that have all of the methods failing.
      */
@@ -283,14 +224,8 @@ public class EditTestMarksCommandTest {
         }
 
         @Override
-        public void deleteGroupPerson(Group group, Person targetPerson) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public String getScriptFolderLocation() {
+        public void deleteGroupPerson(Group group, Person target) {
             throw new AssertionError("This method should not be called.");
         }
     }
-
 }
