@@ -13,7 +13,7 @@ import seedu.address.model.ProductDatabase;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clearproducts";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Inventory has been cleared!";
 
 
     @Override

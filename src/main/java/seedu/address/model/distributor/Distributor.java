@@ -92,7 +92,8 @@ public class Distributor {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getDistName())
+        builder.append("Name: ")
+                .append(getDistName())
                 .append(" Phone: ")
                 .append(getDistPhone())
                 .append(" Tags: ");
