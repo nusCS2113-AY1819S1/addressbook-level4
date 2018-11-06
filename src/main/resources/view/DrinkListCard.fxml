@@ -29,8 +29,8 @@
             </HBox>
             <FlowPane fx:id="tags" />
             <Label fx:id="stock" styleClass="cell_small_label" text="\$stock" />
-            <Label fx:id="costPrice" styleClass="cell_small_label" text="\$costPrice" />
             <Label fx:id="retailPrice" styleClass="cell_small_label" text="\$retailPrice" />
+            <Label fx:id="costPrice" styleClass="cell_small_label" text="\$costPrice" />
         </VBox>
     </GridPane>
 </HBox>
