@@ -34,18 +34,23 @@ public class ScheduleCommand extends Command {
     public static final String COMMAND_WORD = "schedule";
     public static final String COMMAND_ALIAS = "sc";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a schedule to a person. "
-            + "Parameters: INDEX (must be a positive integer) "
+
+    public static final String COMMAND_PARAMETERS = "Parameters: INDEX (must be a positive integer) "
             + PREFIX_DATE + "DATE(DDMMYYYY) "
             + PREFIX_START_TIME + "TIME(24HRS) "
             + PREFIX_END_TIME + "TIME(24HRS) "
-            + PREFIX_EVENT_NAME + "EVENT NAME \n"
-            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_EVENT_NAME + "EVENT NAME \n";
+
+    public static final String COMMAND_EXAMPLE = "Example: " + COMMAND_WORD + " "
             + "1 "
             + PREFIX_DATE + "08112018 "
             + PREFIX_START_TIME + "1000 "
             + PREFIX_END_TIME + "1200 "
             + PREFIX_EVENT_NAME + "GER1000 Class ";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a schedule to a person. \n"
+        + COMMAND_PARAMETERS
+        + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_SUCCESS = "Schedule Added!";
     public static final String MESSAGE_FAILURE = "Unable to add schedule";
