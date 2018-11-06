@@ -12,10 +12,11 @@ import org.junit.Test;
 import seedu.address.logic.commands.ImportCommand;
 
 public class ImportCommandParserTest {
-    private static final String INVALID_USER_INPUT_PATH_TOO_LONG = "longlonglonglonglonglonglonglonglonglong" +
-            "longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong" +
-            "longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong" +
-            "longlonglonglonglonglonglonglonglonglonglonglonglon"; //this string is 251 char long; enough to cause the ParseException.
+    //this string is 251 char long; enough to cause the ParseException.
+    private static final String INVALID_USER_INPUT_PATH_TOO_LONG = "longlonglonglonglonglonglonglonglonglong"
+            + "longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong"
+            + "longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong"
+            + "longlonglonglonglonglonglonglonglonglonglonglonglon";
     private ImportCommandParser parser = new ImportCommandParser();
 
     @Test
@@ -34,7 +35,8 @@ public class ImportCommandParserTest {
         String userInput = "parent_folder/filename";
         String parentFolder = "parent_folder";
         String fullFileName = "filename.ics";
-        String filePath = applicationPath + "\\" + ParserUtil.IMPORT_EXPORT_FOLDER + "\\" + parentFolder + "\\" + fullFileName;
+        String filePath =
+                applicationPath + "\\" + ParserUtil.IMPORT_EXPORT_FOLDER + "\\" + parentFolder + "\\" + fullFileName;
 
         assertParseSuccess(parser, userInput, new ImportCommand(Paths.get(filePath)));
     }
@@ -45,7 +47,8 @@ public class ImportCommandParserTest {
         String userInput = "parent_folder\\filename";
         String parentFolder = "parent_folder";
         String fullFileName = "filename.ics";
-        String filePath = applicationPath + "\\" + ParserUtil.IMPORT_EXPORT_FOLDER + "\\" + parentFolder + "\\" + fullFileName;
+        String filePath =
+                applicationPath + "\\" + ParserUtil.IMPORT_EXPORT_FOLDER + "\\" + parentFolder + "\\" + fullFileName;
 
         assertParseSuccess(parser, userInput, new ImportCommand(Paths.get(filePath)));
     }
@@ -55,7 +58,8 @@ public class ImportCommandParserTest {
         String applicationPath = System.getProperty("user.dir");
         String userInput = "   ";
 
-        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInput,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
     }
 
 

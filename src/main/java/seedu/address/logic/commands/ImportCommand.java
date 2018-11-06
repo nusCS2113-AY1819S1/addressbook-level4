@@ -94,7 +94,8 @@ public class ImportCommand extends Command {
         Set<Friend> updatedFriends = personToEdit.getFriends();
 
         return new Person(
-                updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, importedTimeTable, updatedFriends);
+                updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                importedTimeTable, updatedFriends);
     }
 
     @Override
