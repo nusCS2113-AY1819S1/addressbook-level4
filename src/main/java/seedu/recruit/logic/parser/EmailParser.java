@@ -14,6 +14,9 @@ import seedu.recruit.logic.commands.FindCompanyCommand;
 import seedu.recruit.logic.commands.FindJobOfferCommand;
 import seedu.recruit.logic.commands.ListCandidateCommand;
 import seedu.recruit.logic.commands.ListCompanyCommand;
+import seedu.recruit.logic.commands.SelectCandidateCommand;
+import seedu.recruit.logic.commands.SelectCompanyCommand;
+import seedu.recruit.logic.commands.SelectJobCommand;
 import seedu.recruit.logic.commands.SwitchBookCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailContentsAddCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailContentsBackCommand;
@@ -79,7 +82,7 @@ public class EmailParser {
         //Email command set contents step. Allow certain commands depending whether
         //recipients are candidates or job offers.
         } else if (state.nextCommand.equals(EmailContentsCommand.COMMAND_LOGIC_STATE)
-                && !emailUtil.isAreRecipientsCandidates()) {
+                && emailUtil.isAreRecipientsCandidates()) {
             switch (commandWord) {
 
             case ListCompanyCommand.COMMAND_WORD:
@@ -104,7 +107,7 @@ public class EmailParser {
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
         } else if (state.nextCommand.equals(EmailContentsCommand.COMMAND_LOGIC_STATE)
-                && emailUtil.isAreRecipientsCandidates()) {
+                && !emailUtil.isAreRecipientsCandidates()) {
             switch (commandWord) {
 
             case ListCandidateCommand.COMMAND_WORD:
