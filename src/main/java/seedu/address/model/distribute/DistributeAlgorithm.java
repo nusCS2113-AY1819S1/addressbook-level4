@@ -40,8 +40,8 @@ public class DistributeAlgorithm {
 
         int numOfGroups = distribute.getIndex();
         String groupName = distribute.getGroupName().toString();
-        boolean genderFlag = distribute.getGender();
-        boolean nationalityFlag = distribute.getNationality();
+        boolean isGenderFlagSet = distribute.getGender();
+        boolean isNationalityFlagSet = distribute.getNationality();
         ArrayList<ArrayList<Person>> groupArrayList = new ArrayList<>();
 
         // Get all person data via ObservableList
@@ -58,11 +58,11 @@ public class DistributeAlgorithm {
         //Randomizer function
         Instant instant = Instant.now();
         distUtil.shuffle(personLinkedList, new Random(instant.getEpochSecond()));
-        if (!genderFlag && !nationalityFlag) {
+        if (!isGenderFlagSet && !isNationalityFlagSet) {
             normalDistribution(numOfGroups, groupArrayList, personLinkedList, groupName);
-        } else if (!genderFlag && nationalityFlag) {
+        } else if (!isGenderFlagSet && isNationalityFlagSet) {
             nationalityDistribution(numOfGroups, groupArrayList, personLinkedList, groupName);
-        } else if (genderFlag && !nationalityFlag) {
+        } else if (isGenderFlagSet && !isNationalityFlagSet) {
             genderDistribution(numOfGroups, groupArrayList, personLinkedList, groupName);
         } else {
             strictDistribution(numOfGroups, groupArrayList, personLinkedList, groupName);

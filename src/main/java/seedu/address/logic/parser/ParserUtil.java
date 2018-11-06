@@ -319,9 +319,9 @@ public class ParserUtil {
     /**
      * Checks if input value by the user is not Null or not 0
      *
-     * @param value
-     * @return
-     * @throws ParseException
+     * @param value : an integer value with the string data type.
+     * @return an Integer which was parsed from a string.
+     * @throws ParseException if the given {@code value} is invalid.
      */
     public static int parseInteger(String value) throws ParseException {
         String trimmedInt = value.trim();
@@ -337,9 +337,9 @@ public class ParserUtil {
      * Accepts "true" or '1' to assert true
      * Accepts "false" or '0' to assert false
      *
-     * @param isFlagged
-     * @return
-     * @throws ParseException
+     * @param isFlagged a string input to determine true or false.
+     * @return a boolean type based on the {@code isFlagged} value.
+     * @throws ParseException if the given {@code isFlagged} is invalid.
      */
     public static Boolean parseIsFlagged(String isFlagged) throws ParseException {
         requireNonNull(isFlagged);

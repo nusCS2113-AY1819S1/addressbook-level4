@@ -28,6 +28,7 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.CreateGroupCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -218,9 +219,9 @@ public class DistributeUtilTest {
         Group stubGroup = new GroupBuilder().withGroupName("TestGroup").build();
         CreateGroupCommand createGroupCommand = new CreateGroupCommand(stubGroup);
         createGroupCommand.execute(model, commandHistory);
-        assertTrue(distUtil.existDuplicateGroup("TestGroup", model));
+        assertTrue(distUtil.doesDuplicateGroupExist("TestGroup", model));
 
-        assertFalse(distUtil.existDuplicateGroup("CS2113Group", model));
+        assertFalse(distUtil.doesDuplicateGroupExist("CS2113Group", model));
     }
 
     @Test
@@ -302,13 +303,15 @@ public class DistributeUtilTest {
         Group stubGroup = new GroupBuilder().build();
         CreateGroupCommand createGroupCommand = new CreateGroupCommand(stubGroup);
         createGroupCommand.execute(model, commandHistory);
+        //Creating the Person Object
+        Person stubPerson = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(stubPerson);
+        addCommand.execute(model, commandHistory);
 
         VersionedAddressBook currentVersion = ((ModelManager) model).getVersionedAddressBook();
         //copyOfCurrentVersion should store the pointer where only group is created.
         VersionedAddressBook copyOfCurrentVersion = new VersionedAddressBook(currentVersion);
         Index groupIndex = distUtil.returnGroupIndex(stubGroup, model);
-        //Creating the Person Object and add into a Set.
-        Person stubPerson = new PersonBuilder().build();
         Index personIndex = distUtil.returnPersonIndex(stubPerson, model);
         Set<Index> personIndices = new HashSet<>();
         personIndices.add(personIndex);
@@ -321,7 +324,8 @@ public class DistributeUtilTest {
         //Check if pointer is still the same.
         assertEquals(expectedVersion.toString(), copyOfCurrentVersion.toString());
 
-        //Test if add using the default way
+        // New Test Case:
+        // Test if add using the default way(commit) will result in different results.
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         VersionedAddressBook version = ((ModelManager) model).getVersionedAddressBook();
         VersionedAddressBook updatedVersion = new VersionedAddressBook(version);
@@ -332,6 +336,8 @@ public class DistributeUtilTest {
         groupIndex = distUtil.returnGroupIndex(stubGroup, model);
         Person newPerson = new PersonBuilder().withName("TsuTsuWeiKuan").withNationality("CN").withGender("M")
                 .withEmail("tsuweikuan@zoho.com").build();
+        addCommand = new AddCommand(newPerson);
+        addCommand.execute(model, commandHistory);
         personIndex = distUtil.returnPersonIndex(newPerson, model);
         personIndices = new HashSet<>();
         personIndices.add(personIndex);

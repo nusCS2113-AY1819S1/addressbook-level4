@@ -510,7 +510,7 @@ image::DistributeSequenceDiagram.png[width="800"]
 .(Part 2) Interactions Inside the Commons and Logic Component for the `distinto 3 n/CS2113- g/0 nat/0` Command
 image::DistributeSequenceDiagram_2.png[width="800"]
 
-==== FlowDiagram Diagrams
+==== Flow Diagram
 
 ==== UML Diagrams
 
