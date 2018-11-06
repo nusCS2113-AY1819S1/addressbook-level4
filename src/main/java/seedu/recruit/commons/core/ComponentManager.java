@@ -1,6 +1,5 @@
 package seedu.recruit.commons.core;
 
-
 import seedu.recruit.commons.events.BaseEvent;
 
 /**

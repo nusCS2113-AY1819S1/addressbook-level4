@@ -6,10 +6,10 @@ import seedu.recruit.model.UserPrefs;
 /** Indicates the UserPrefs has changed*/
 
 public class UserPrefsChangedEvent extends BaseEvent {
-    public UserPrefs data;
+    public final UserPrefs data;
 
     public UserPrefsChangedEvent(UserPrefs userPrefs) {
-        data = userPrefs;
+        this.data = userPrefs;
     }
 
     @Override

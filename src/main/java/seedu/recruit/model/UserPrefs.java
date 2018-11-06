@@ -4,7 +4,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
-import seedu.recruit.commons.core.ComponentManager;
 import seedu.recruit.commons.core.EmailSettings;
 import seedu.recruit.commons.core.GuiSettings;
 

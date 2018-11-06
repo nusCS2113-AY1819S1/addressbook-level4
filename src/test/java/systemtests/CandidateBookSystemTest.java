@@ -309,7 +309,7 @@ public abstract class CandidateBookSystemTest {
      */
     private void assertApplicationStartingStateIsCorrect() {
         assertEquals("", getCommandBox().getInput());
-        assertEquals("", getResultDisplay().getText());
+        assertEquals("Welcome to RecruitBook!", getResultDisplay().getText());
         assertListMatching(getCandidateDetailsPanel(), getModel().getFilteredCandidateList());
         assertEquals(Paths.get(".").resolve(testApp.getCandidateStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());

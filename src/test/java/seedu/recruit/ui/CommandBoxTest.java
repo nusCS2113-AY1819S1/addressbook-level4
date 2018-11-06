@@ -14,6 +14,7 @@ import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.ListCandidateCommand;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.ModelManager;
+import seedu.recruit.model.UserPrefs;
 
 public class CommandBoxTest extends GuiUnitTest {
 
@@ -28,7 +29,8 @@ public class CommandBoxTest extends GuiUnitTest {
     @Before
     public void setUp() {
         Model model = new ModelManager();
-        Logic logic = new LogicManager(model);
+        UserPrefs userPrefs = new UserPrefs();
+        Logic logic = new LogicManager(model, userPrefs);
 
         CommandBox commandBox = new CommandBox(logic);
         commandBoxHandle = new CommandBoxHandle(getChildNode(commandBox.getRoot(),

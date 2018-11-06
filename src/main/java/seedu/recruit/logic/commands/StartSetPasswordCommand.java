@@ -1,13 +1,16 @@
 package seedu.recruit.logic.commands;
 
-import seedu.recruit.commons.core.EventsCenter;
+import static java.util.Objects.requireNonNull;
+
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
 
-import static java.util.Objects.requireNonNull;
+/**
+ * Starts the Set Password Interface
+ */
 
 public class StartSetPasswordCommand extends Command {
 

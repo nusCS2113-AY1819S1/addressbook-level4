@@ -15,6 +15,7 @@ import seedu.recruit.commons.core.ComponentManager;
 import seedu.recruit.commons.core.LogsCenter;
 import seedu.recruit.commons.events.ui.CompanyListDetailsPanelSelectionChangedEvent;
 import seedu.recruit.commons.util.EmailUtil;
+import seedu.recruit.logic.commands.AuthenticateUserCommand;
 import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.logic.commands.exceptions.CommandException;
@@ -32,7 +33,7 @@ import seedu.recruit.model.joboffer.JobOfferContainsKeywordsPredicate;
  */
 public class LogicManager extends ComponentManager implements Logic {
 
-    private static LogicState state = new LogicState("primary");
+    private static LogicState state = new LogicState("authenticate");
 
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
@@ -48,6 +49,10 @@ public class LogicManager extends ComponentManager implements Logic {
         history = new CommandHistory();
         recruitBookParser = new RecruitBookParser();
         emailUtil = model.getEmailUtil();
+
+        if (userPrefs.getHashedPassword() == null) {
+            state = new LogicState("primary");
+        }
     }
 
     @Override
@@ -55,6 +60,9 @@ public class LogicManager extends ComponentManager implements Logic {
             throws CommandException, ParseException, IOException, GeneralSecurityException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
+            if (state.nextCommand == "authenticate") {
+                return new AuthenticateUserCommand(commandText).execute(model, history, userPrefs);
+            }
             Command command = recruitBookParser.parseCommand(commandText, state, emailUtil, userPrefs);
             return command.execute(model, history, userPrefs);
         } finally {
@@ -91,6 +99,10 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ListElementPointer getHistorySnapshot() {
         return new ListElementPointer(history.getHistory());
+    }
+
+    public static LogicState getState() {
+        return state;
     }
 
     public static void setLogicState(String newState) {
