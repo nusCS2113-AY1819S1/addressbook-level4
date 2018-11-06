@@ -76,7 +76,7 @@ User: Creates a *user* account +
 Format: `signup u/USERNAME p/PASSWORD` +
 
 |===
-Examples:
+|Examples:
 
 * `signup u/Gerald Chua p/password12345` +
 Creates account with the username Gerald Chua +
