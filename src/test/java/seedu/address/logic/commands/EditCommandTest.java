@@ -57,8 +57,8 @@ public class EditCommandTest {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredBookList().size());
         Book lastBook = model.getFilteredBookList().get(indexLastPerson.getZeroBased());
 
-        BookBuilder bookInList = new BookBuilder(lastBook);
-        Book editedBook = bookInList.withName(VALID_NAME_BIOLOGY).withIsbn(VALID_ISBN_BIOLOGY)
+        BookBuilder personInList = new BookBuilder(lastBook);
+        Book editedBook = personInList.withName(VALID_NAME_BIOLOGY).withIsbn(VALID_ISBN_BIOLOGY)
                 .withTags(VALID_TAG_SCIENCE).build();
 
         EditCommand.EditBookDescriptor descriptor = new EditBookDescriptorBuilder().withName(VALID_NAME_BIOLOGY)

@@ -41,9 +41,8 @@ public class SellCommand extends Command {
 
     public static final String MESSAGE_QUANTITY_SOLD = "Number of Book Sold: ";
     public static final String MESSAGE_SELL_BOOK_SUCCESS = "Sold Book: %1$s";
-    public static final String MESSAGE_NOT_SOLD = "Quantity provided must be a non-zero integer of max. 999.";
-    public static final String MESSAGE_MIN_QUANTITY =
-            "Quantity of books left cannot be less than 0.";
+    public static final String MESSAGE_NOT_SOLD = "Decrease to stock quantity must be provided.";
+    public static final String MESSAGE_INVALID_QUANTITY = "Quantity of books left cannot be less than 0.";
     private final String findBookBy;
     private final String argsType;
     private final SellBookDescriptor sellBookDescriptor;

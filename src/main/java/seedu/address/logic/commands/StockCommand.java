@@ -45,10 +45,8 @@ public class StockCommand extends Command {
 
     public static final String MESSAGE_QUANTITY_STOCK = "Number of Book Stocked: ";
     public static final String MESSAGE_STOCK_PERSON_SUCCESS = "Stocked Book: %1$s";
-    public static final String MESSAGE_NOT_STOCKED = "Quantity provided must be a non-zero integer of max. 999.";
+    public static final String MESSAGE_NOT_STOCKED = "Increase to stock quantity must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This book already exists in the book inventory.";
-    public static final String MESSAGE_MAX_QUANTITY =
-            "Quantity of books cannot be more than 999.";
 
     private final String findBookBy;
     private final String argsType;
@@ -98,8 +96,7 @@ public class StockCommand extends Command {
      * Creates and returns a {@code Book} with the details of {@code bookToStock}
      * stocked with {@code stockBookDescriptor}.
      */
-    private static Book createStockedBook(Book bookToStock, StockBookDescriptor stockBookDescriptor)
-            throws CommandException {
+    private static Book createStockedBook(Book bookToStock, StockBookDescriptor stockBookDescriptor) {
         assert bookToStock != null;
 
         Name updatedName = (bookToStock.getName());

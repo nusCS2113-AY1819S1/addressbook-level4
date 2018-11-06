@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
-import static seedu.address.model.book.Isbn.MESSAGE_ISBN_CONSTRAINTS;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.SellCommand;
@@ -40,7 +39,7 @@ public class SellCommandParser implements Parser<SellCommand> {
             try {
                 isbn = ParserUtil.parseIsbn(argMultimap.getValue(PREFIX_ISBN).get());
             } catch (ParseException pe) {
-                throw new ParseException(String.format(MESSAGE_ISBN_CONSTRAINTS, SellCommand.MESSAGE_USAGE), pe);
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SellCommand.MESSAGE_USAGE), pe);
             }
             findBookBy = isbn.value;
             break;
@@ -66,7 +65,7 @@ public class SellCommandParser implements Parser<SellCommand> {
             sellBookDescriptor.setQuantity(quantity);
         }
 
-        if (!sellBookDescriptor.isQuantityFieldSpecified() || sellBookDescriptor.getQuantity().getValue().equals("0")) {
+        if (!sellBookDescriptor.isQuantityFieldSpecified()) {
             throw new ParseException(SellCommand.MESSAGE_NOT_SOLD);
         }
 
