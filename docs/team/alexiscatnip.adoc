@@ -1,8 +1,10 @@
 = Khoo Yuan Hui - Project Portfolio
+:site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
+:sectnums:
 
-== PROJECT: FreeTime
+= PROJECT: FreeTime
 
 ---
 
@@ -28,12 +30,12 @@ FreeTime: https://github.com/CS2113-AY1819S1-W13-1/main
 
 == Summary of contributions
 |===
-*Here are the items that I have contributed to the project.*
+This section summarises my personal contributions to this team project.
 |===
 
-* *Major enhancement*: *Added Command to import and export timetable*
+* *Major enhancement*: *Import and Export Commands*
 ** What it does: allows the user to import and export timetables that are in the .ics format.
-** Justification: Users need to add their pre-existing timetables from other software easily.
+** Justification: It was a painful process for users to manually add their timeslots using the [https://github.com<TODO>[AddTime Command]].
 ** Highlights: This enhancement makes use of a third party library to correctly format the .ics file format (given in RFC 5545; https://tools.ietf.org/html/rfc5545). Thus, the project now has an extra dependency. The alternative to a third-party library is writing the code for the formatting by myself; which would be too time consuming.
 ** Credits: *biweekly third-party library* (https://github.com/mangstadt/biweekly)
 
@@ -60,7 +62,7 @@ _{you can add/remove categories in the list above}_
 == Contributions to the User Guide
 
 |===
-*Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.*
+Here are my contributions to the User Guide. They showcase my ability to write user documentation.
 |===
 
 include::../UserGuide.adoc[tag=import]
@@ -70,7 +72,7 @@ include::../UserGuide.adoc[tag=export]
 == Contributions to the Developer Guide
 
 |===
-*Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.*
+Here are my contributions to the Developer Guide. They showcase my ability to write technical documentation and my technical contributions to the project.
 |===
 
 include::../DeveloperGuide.adoc[tag=import_export_timetable]
