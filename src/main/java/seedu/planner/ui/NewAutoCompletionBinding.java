@@ -37,11 +37,6 @@ public class NewAutoCompletionBinding<T> {
     private String suffixText = "";
     private final StringConverter<T> converter = defaultStringConverter();
 
-    /**
-     * This listener observes if there is a change in the text in the command box
-     * and extracts the last word of the input that is to be autocompleted.
-     */
-
     /** This listeners observes the position of the caret in the command box and updates the list
      * of suggestions when there is a change detected. It passes the new input word to the other
      * methods to compare and match for suggestions.
