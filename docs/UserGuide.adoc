@@ -445,7 +445,7 @@ Format: `export filename`
 Examples:
 
 * `export myCalendar` +
-export the iCalendar file with name myCalendar to *src/data* folder
+export the iCalendar file with name myCalendar to your *src/data* folder
 
 [NOTE]
 ====
