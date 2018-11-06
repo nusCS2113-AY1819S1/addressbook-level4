@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -38,6 +39,9 @@ public class DeleteExpenditureCommand extends Command {
         requireNonNull(model);
         List<Expenditure> lastShownList = model.getFilteredExpenditureList();
 
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_EXPENDITURE_DISPLAYED_INDEX);
+        }
 
         Expenditure expenditureToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteExpenditure(expenditureToDelete);

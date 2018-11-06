@@ -11,7 +11,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Category {
 
     public static final String MESSAGE_CATEGORY_CONSTRAINTS =
-            "Category can only take few values, and it should not be blank";
+            "Category can only take few values, and it should not be blank.\n"
+                    + "It must be one of the following: Food, Drink, Clothing, Electronics, DailyNecessities, Sports, "
+                    + "Communications, Travels, Study, Office, Pets, Gifts, Entertainment, Traffic, Shopping, "
+                    + "Beauty, Furniture.";
 
     /*
      * The first character of the address must not be a whitespace,

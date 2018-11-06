@@ -17,7 +17,6 @@ import seedu.address.model.Model;
  */
 public class ExpenditureGetAdviceCommand extends Command {
     public static final String COMMAND_WORD = "ET_advice";
-    //public static final String COMMAND_ALIAS = "a";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gives user advice on "
             + "how to save money based on past records.\n"
@@ -28,7 +27,7 @@ public class ExpenditureGetAdviceCommand extends Command {
             + PREFIX_MONEY + "1000 "
             + PREFIX_PERIOD + "30 ";
 
-    public static final String MESSAGE_SUCCESS = "Here's the advice on how to "
+    public static final String MESSAGE_SUCCESS = "Get advice successfully. Here's the advice on how to "
             + "spend your money in the following period:\n\n%s";
 
     private String advice;
@@ -98,8 +97,15 @@ public class ExpenditureGetAdviceCommand extends Command {
 
         advice = x.toString();
 
+        PopUpAdvice ppa = new PopUpAdvice(advice);
+        ppa.popup();
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, advice));
 
+    }
+
+    public String getAdvice() {
+        return advice;
     }
 
     /*
