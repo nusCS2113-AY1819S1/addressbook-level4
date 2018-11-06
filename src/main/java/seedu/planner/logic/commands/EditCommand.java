@@ -47,6 +47,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_RECORD_SUCCESS = "Edited Record: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_RECORD = "This record already exists in the financial planner.";
+    public static final String MESSAGE_EDIT_DESCRIPTOR_UNCHANGED =
+            "Details to edit the record with is the same as record to be edited.";
 
     private final Index index;
     private final EditRecordDescriptor editRecordDescriptor;
@@ -74,6 +76,10 @@ public class EditCommand extends Command {
 
         Record recordToEdit = lastShownList.get(index.getZeroBased());
         Record editedRecord = createEditedRecord(recordToEdit, editRecordDescriptor);
+
+        if (recordToEdit.equals(editedRecord)) {
+            throw new CommandException(MESSAGE_EDIT_DESCRIPTOR_UNCHANGED);
+        }
 
         if (!recordToEdit.isSameRecord(editedRecord) && model.hasRecord(editedRecord)) {
             throw new CommandException(MESSAGE_DUPLICATE_RECORD);

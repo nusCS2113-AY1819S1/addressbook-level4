@@ -2,10 +2,13 @@ package seedu.planner.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
+
 import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_BASIC_EARNED;
 import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_BASIC_SPEND;
+import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_DOUBLE_DATE;
 import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_EXCEED;
 import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_NOT_EXCEED;
+import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_SINGLE_DATE;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -229,32 +232,39 @@ public class ModelManager extends ComponentManager implements Model {
         for (Limit i: limits) {
             output += "\n" + String.format("%d.", count++)
                     + generateLimitOutput(isExceededLimit(i), getTotalSpend(i), i);
-
         }
         return output;
     }
 
     /**
-     * This function is to do the auto check whenever the record changed.
+     * This function is to generate the limit output.
      * @param isExceeded
      * @param limit
      * @return
      */
     public String generateLimitOutput (boolean isExceeded, Double totalMoney, Limit limit) {
         String output;
-        if (totalMoney > 0) {
-            output = String.format(MESSAGE_BASIC_EARNED,
-                    limit.getDateStart(), limit.getDateEnd(),
+        Date dateStart;
+        Date dateEnd;
+        dateStart = limit.getDateStart();
+        dateEnd = limit.getDateEnd();
+
+        if (dateEnd.equals(dateStart)) {
+            output = String.format(MESSAGE_SINGLE_DATE, dateStart);
+        } else {
+            output = String.format(MESSAGE_DOUBLE_DATE, dateStart, dateEnd);
+        }
+
+        if (totalMoney >= 0) {
+            output += String.format(MESSAGE_BASIC_EARNED,
                     -1 * limit.getLimitMoneyFlow().toDouble(), totalMoney)
                     + MESSAGE_NOT_EXCEED;
         } else if (isExceeded) {
-            output = String.format(MESSAGE_BASIC_SPEND,
-                    limit.getDateStart(), limit.getDateEnd(),
+            output += String.format(MESSAGE_BASIC_SPEND,
                     -1 * limit.getLimitMoneyFlow().toDouble(), -1 * totalMoney)
                     + MESSAGE_EXCEED;
         } else {
-            output = String.format(MESSAGE_BASIC_SPEND,
-                    limit.getDateStart(), limit.getDateEnd(),
+            output += String.format(MESSAGE_BASIC_SPEND,
                     -1 * limit.getLimitMoneyFlow().toDouble(), -1 * totalMoney)
                     + MESSAGE_NOT_EXCEED;
         }

@@ -2,27 +2,27 @@ package seedu.planner.logic.parser;
 
 import static seedu.planner.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.planner.logic.commands.DeleteCommandByDateEntry;
+import seedu.planner.logic.commands.DeleteByDateCommand;
 import seedu.planner.logic.parser.exceptions.ParseException;
 import seedu.planner.model.record.Date;
 
 /**
- * Parses input arguments and creates a new DeleteCommandByDateEntry object
+ * Parses input arguments and creates a new DeleteByDateCommand object
  */
-public class DeleteCommandByDateEntryParser implements Parser<DeleteCommandByDateEntry> {
+public class DeleteCommandByDateEntryParser implements Parser<DeleteByDateCommand> {
     /**
-     * Parses the date and create a new command DeleteCommandByDateEntry
+     * Parses the date and create a new command DeleteByDateCommand
      * @param args
-     * @return new command DeleteCommandByDateEntry
+     * @return new command DeleteByDateCommand
      * @throws ParseException if the Date is invalid
      */
-    public DeleteCommandByDateEntry parse (String args) throws ParseException {
+    public DeleteByDateCommand parse (String args) throws ParseException {
         try {
             Date date = ParserUtil.parseDate(args);
-            return new DeleteCommandByDateEntry(date);
+            return new DeleteByDateCommand(date);
         } catch (ParseException pe) {
             throw new ParseException (
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommandByDateEntry.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteByDateCommand.MESSAGE_USAGE), pe);
         }
     }
 }

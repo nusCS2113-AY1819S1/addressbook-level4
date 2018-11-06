@@ -3,7 +3,7 @@ package seedu.planner.testutil;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.MoneyFlow;
-
+//@@Author OscarZeng
 
 /**
  * A utility class to help with building Limit objects.
@@ -47,6 +47,15 @@ public class LimitBuilder {
      */
     public LimitBuilder withDateEnd(String dateEnd) {
         this.dateEnd = new Date(dateEnd);
+        return this;
+    }
+
+    /**
+     * Sets the {@code date} of the {@code Limit} with single date that we are building.
+     */
+    public LimitBuilder withSingleDate(String date) {
+        this.dateStart = new Date(date);
+        this.dateEnd = new Date(date);
         return this;
     }
 

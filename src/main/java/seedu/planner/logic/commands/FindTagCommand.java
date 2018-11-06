@@ -2,7 +2,6 @@ package seedu.planner.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.planner.commons.core.Messages;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.model.Model;
 import seedu.planner.model.record.TagsContainsKeywordsPredicate;
@@ -19,18 +18,38 @@ public class FindTagCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " food clothes shopping";
 
+    public static final String MESSAGE_SUCCESS = "%1$d records listed matching tags: %2$s.\n";
+
+    private final String[] keywords;
+
     private final TagsContainsKeywordsPredicate predicate;
 
-    public FindTagCommand(TagsContainsKeywordsPredicate predicate) {
+    public FindTagCommand(TagsContainsKeywordsPredicate predicate, String[] keywords) {
         this.predicate = predicate;
+        this.keywords = keywords;
+    }
+
+    /**
+     * Convert list of keywords to a string for displaying success message.
+     * @return
+     */
+    public static String convertKeywordsToMessage(String[] keywords) {
+        StringBuilder message = new StringBuilder();
+        for (String keyword: keywords) {
+            message.append("[").append(keyword.toLowerCase()).append("], ");
+        }
+
+        String newMessage = message.toString();
+        newMessage = newMessage.substring(0, newMessage.length() - 2);
+        return newMessage;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredRecordList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_RECORDS_LISTED_OVERVIEW, model.getFilteredRecordList().size()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS,
+                model.getFilteredRecordList().size(), convertKeywordsToMessage(keywords)));
     }
 
     @Override

@@ -36,6 +36,8 @@ public class SummaryByCategoryCommand extends SummaryCommand {
     private final Date endDate;
     private final Predicate<Record> predicate;
 
+    private SummaryList summaryList;
+
     public SummaryByCategoryCommand(Date startDate, Date endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
@@ -46,12 +48,16 @@ public class SummaryByCategoryCommand extends SummaryCommand {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredRecordList(predicate);
-        SummaryList summaryList = new SummaryByCategoryList(model.getFilteredRecordList());
+        summaryList = new SummaryByCategoryList(model.getFilteredRecordList());
         String tabTitle = String.format(FORMAT_TITLE_SUMMARY, DateUtil.formatDate(startDate),
                 DateUtil.formatDate(endDate));
         EventsCenter.getInstance().post(new ShowSummaryTableEvent(summaryList, TOTAL_LABEL,
                 tabTitle));
         return new CommandResult(String.format(MESSAGE_SUCCESS, summaryList.size()));
+    }
+
+    public SummaryList getSummaryList() {
+        return summaryList;
     }
 
     @Override

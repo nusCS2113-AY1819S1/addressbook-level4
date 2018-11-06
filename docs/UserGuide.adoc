@@ -1,4 +1,4 @@
-= Financial Planner - User Guide
+== Financial Planner - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -92,20 +92,22 @@ Name denotes the name of the financial activity, moneyflow denotes the money spe
 and date denotes the date the financial activity was completed. Each financial activity can be labelled with any number
 of tags.
 
-****
-* Moneyflow can be either a debit (expense) or a credit (income).
-* To distinguish between an expense and an income, the user will need to enter a plus "+" or minus "-" sign before the
-money amount.
-****
+[NOTE]
+Moneyflow can be either a debit (expense) or a credit (income). +
+To distinguish between an expense and an income, the user will need to enter a plus "+" or minus "-" sign before the
+money amount. +
+Only 1 record of the same name, same date and same moneyflow is allowed in the application. Duplicates of the same record is not
+allowed unless it is of a different date, of a different moneyflow or of a different name.
 
 Examples:
 
 * `add n/Payment To John d/20-8-2018 m/-10`
 * `add n/PaymentFromBetty t/friend m/+10 d/10-11-2018 t/classmate`
 
-=== Listing all records satisfying a criteria : `list`
+// tag::list[]
+=== Listing all records within a date range : `list`
 
-Shows a list of all records in the financial planner which fulfill a given criteria. +
+Shows a list of all records in the financial planner which is within a certain date range. +
 There are 3 modes, default mode, single argument mode and dual argument mode. +
 Format: +
 Default mode: `list` +
@@ -123,6 +125,7 @@ Examples:
 * `list`
 * `list d/10-11-2018`
 * `list d/10-11-2018 11-11-2018`
+// end::list[]
 
 === Locating records by name: `find`
 
@@ -388,7 +391,6 @@ more information on how the `findtag` works.
 
 === Auto Complete for Sort
 
-=== Showing a summary table of all financial activity in a given time: `summary`
 When the command word `sort` is entered, suggestion will display based on the possible keyword inputs for the sort function.
 
 Refer to <<sort>> for the sort function keywords.
@@ -402,27 +404,29 @@ Refer to <<sort>> for the sort function keywords.
 
 [[morefeatures]]
 
+// tag::summary[]
 == Data Analysis Features
 
 This section describe features for the user to analyse his/her financial status in greater detail.
 
 === Showing a summary table of all financial activity in a time period: `summary`
 
-Shows a summary table listing each day or month within a given time specified by the user. +
+Shows a summary table listing by day, month or categories within a given time specified by the user. +
 A `summary` is an item that contains information on the *date or month that is represented*, the *total expense calculated*, the *total income calculated* and
-the *net money flow calculated.* +
+the *net money flow calculated.* A `category` refers to any `set of tags` that are assigned to any records in the application. +
 
-The summary command supports both listing by date and by month. +
+The summary command supports both listing by date, by month and by categories. +
 Format: +
 
 * By Date: `summary date d/START_DATE END_DATE`
-* By Month: `summary month d/START_MONTH END_MONTh`
+* By Month: `summary month d/START_MONTH END_MONTH`
+* By Category: `summary category d/START_DATE END_DATE`
 
 ****
 * Note that there are specific formats required for the dates and months entered.
-* For *summary by date*, START_DATE/END_DATE must be in the format of
+* For the commands *"summary date"* and *"summary category"*, START_DATE/END_DATE must be in the format of
 `dd-mm-yyyy` where `dd` represents day, `mm` represents month, `yyyy` represents year. All parameters should be specified in numerical form.
-* For *summary by month*, START_MONTH/END_MONTH must in the format of `mmm-yyyy`, `mmm` represents the month with its three letter representations, and
+* For command *"summary month"*, START_MONTH/END_MONTH must in the format of `mmm-yyyy`, `mmm` represents the month with its three letter representations, and
 `yyyy` represents the year in its numerical form.
 * Note that for mmm, it is case-insensitive, meaning both *"APR"* and *"apr"* are accepted
 ****
@@ -432,15 +436,21 @@ Examples:
 * `summary date d/1-1-2018 12-12-2018`
 * `summary month d/apr-2018 sep-2018`
 * `summary month d/APR-2018 SeP-2018`
+* `summary category d/1-1-2018 12-12-2018`
 
 The screenshots below are examples of what you can see once the command has been accepted.
 
 image::UiSummaryByDateTable.png[width="790"]
-Screenshot of app when `summary date d/1-1-2018 12-12-2018` is run
+*Screenshot of app when `summary date d/1-1-2018 12-12-2018` is run*
 
 image::UiSummaryByMonthTable.png[width="790"]
-Screenshot of app when `summary month d/apr-2018 sep-2018` is run
+*Screenshot of app when `summary month d/jan-2018 dec-2018` is run*
 
+image::UiSummaryByCategoryTable.png[width="790"]
+*Screenshot of app when `summary category d/1-1-2018 12-12-2018` is run*
+
+// end::summary[]
+// tag::stats[]
 === Showing a breakdown of total expenses and income into categories: `stats`
 
 Shows a breakdown of total expenses and income into categories and displays these information in a pie chart. +
@@ -453,8 +463,12 @@ Format:`stats d/START_DATE END_DATE`
 ****
 
 Once the command has been executed, 2 tabs will appear showing a pie chart containing data that is relevant in the range. +
-Note that due to label constraints, some labels may not be displaying correctly if they are overlapping with other labels. This happens when the pie slice
-is too small. To improve readability, we have decided to hide some labels in such scenarios.
+
+[NOTE]
+Due to label constraints, some labels may not be displaying correctly if they are overlapping with other labels. This happens when the pie slice
+is too small. To improve readability, we have decided to hide some labels in such scenarios. Also, when the label is too long, since the pie charts
+need to fit the labels, the pie chart may become small as a result. To prevent such situations, please keep your labels short. This will be improved in
+later versions of the product to remove the labels completely and use a mouse over input instead.
 
 Examples:
 
@@ -463,10 +477,34 @@ Examples:
 Below are some screenshots of what you can see when the command has been accepted.
 
 image::UiPieChartExpense.png[width="790"]
-Screenshot of app displaying expense breakdown when `stats d/1-1-2018 12-12-2018` is run
+*Screenshot of app displaying expense breakdown when `stats d/1-1-2018 12-12-2018` is run*
 
 image::UiPieChartIncome.png[width="790"]
-Screenshot of app displaying income breakdown when `stats d/1-1-2018 12-12-2018` is run
+*Screenshot of app displaying income breakdown when `stats d/1-1-2018 12-12-2018` is run*
+
+// end::stats[]
+// end::welcomepanel[]
+=== Showing a breakdown of total expenses and income into categories of this month: `NO COMMAND REQUIRED`
+
+Shows a breakdown of total expenses and income into categories using data of this month. +
+No format is required for this feature as the feature is automatically triggered when there is any changes to the list of records within the application.
+
+This feature automatically tracks the current date and ensures that the data presented is updated regardless regardless of whether the application is off or on for
+prolonged periods of time. +
+
+Even in the event where the user is using the application at close to 12 midnight of the last day of a particular month and the clocks strikes 12,
+the application will update the data whenever it detects any record data modifications in the app to reflect the next month.
+
+[NOTE]
+The data used to represent the pie charts in the welcome panel is *only updated* whenever there are any changes to records within the FinancialPlanner. +
+This includes adding records, deleting records and editing records in the FinancialPlanner.
+
+Below shows a snapshot of what the user can see when there are records available of the current month
+
+image::WelcomePanelWithPieCharts.png[width="790"]
+*Screenshot of app on startup when records of current month are available*
+
+// end::welcomepanel[]
 
 == Data management features:
 
@@ -671,38 +709,61 @@ As you can see the screenshot below, in the `SUMMARY DATA` sheet, next to the su
 
 image::Export_Capture2_LinhChi.png[width:800]
 
+// tag::limitfeatures[]
+
 == Spending Limit Feature
 
 This section describes the limit feature that allows users to set values to control their future spending.
 Constraints that apply to records also apply to each limit. Refer to <<constraints>> for more information.
+`All the limit related commands are case insensitive. Users can input ADDlimit, addLimit and so on to execute the command.
+Besides that, in case some of the users who have programming background are used to using `
 
-=== Adding a limit: `limit`
+[[addlimit]]
+=== Adding a limit: `addlimit`
 
-Adds a spending limit for a time period to the FinancialPlanner. +
-Format: `limit d/START_DATE END_DATE m/MONEYFLOW` +
+Adds a spending limit for a time period or a particular day to the FinancialPlanner. +
+Format: `addlimit d/START_DATE END_DATE m/MONEYFLOW` (`limit d/DATE m/MONEYFLOW`)+
 
-START_DATE and END_DATE indicates the starting date and ending date for the limit.
-MONEYFLOW denotes the money limit for that period of time.
-FinancialPlanner will warn the user once the total amount of money spent during this time period exceeds the spending limit.
+When inputting two days, START_DATE and END_DATE indicates the starting date and ending date for the limit.
+If there is only one date, that day will be the time period.
+MONEYFLOW denotes the money spending limit for that period of time.
+After the limits have been set, Financial Planner will keep checking the latest condition of these limits.
+Once the total amount of money spent during this time period exceeds the spending limit,
+FinancialPlanner will warn the user by sending the warning message.
 ****
-* Moneyflow can only be a positive integer, and does not require a "+" or "-".
+* DATE_START must be earlier or equal than DATE_END. When DATE_START and DATE_END are the same, this will be equivalent to single DATE.
+* Moneyflow for limit features can only be a positive integer, and does not require a "+" or "-".
 * Any date or period of time can only have at most 1 assigned limit.
 ****
 
 Example:
 
-* `limit d/20-8-2018 30-8-2018 m/100`
+* `addlimit d/20-8-2018 m/100`
+* `addlimit d/20-8-2018 30-8-2018 m/632`
+* `addLimit d/20-8-2018 20-8-2018 m/200`
+* `add_limit d/20-8-2018 30-8-2018 m/100`
 
+[[checklimit]]
 === Viewing all limits: `checkLimit`
 
 Displays all limits information stored in FinancialPlanner +
-Format: `checkLimit`
+Format: `checklimit`
+Example:
+* `checklimit`
+* `checkLimit`
+* `check_limit`
 
+[[deletelimit]]
 === Deleting a limit: `deleteLimit`
 
-Deletes a spending limit from the FinancialPlanner +
-Format: `deleteLimit d/START_DATE END_DATE` +
+Deletes an existing spending limit from the FinancialPlanner +
+Format: `deleteLimit d/START_DATE END_DATE` (`deleteLimit d/START_DATE`) +
 
+The deleting command is based on the date period, since there will be at most one limit
+for one period of time, user only need to enter a period of time or a single date. The limit
+with the same dates will be deleted. If there is no limit for that period, the program will
+throw errors.
+Delete
 ****
 * `START_DATE/END_DATE` must match exactly the same as when the limit was created.
 * Limits cannot be partially deleted with incorrect dates.
@@ -710,21 +771,32 @@ Format: `deleteLimit d/START_DATE END_DATE` +
 
 Examples:
 
-* `deleteLimit d/20-8-2018 30-8-2018`
+* `deletelimit d/20-8-2018`
+* `deletelimit d/20-8-2018 30-8-2018`
+* `delete_Limit d/20-8-2018 30-8-2018`
+
+[[editlimit]]
 
 === Editing a limit: `editLimit`
 
 Edit a limit to the FinancialPlanner +
-Format: `editLimit d/START_DATE END_DATE m/MONEYFLOW` +
+Format: `editLimit d/START_DATE END_DATE m/MONEYFLOW` (`editLimit d/START_DATE END_DATE m/MONEYFLOW`)+
 
+Editlimit is similar to <<deletelimit>> command, it is also based on the date period.
+The editlimit command will check the input date period or the single day and
+replace the original moneyFlow with the new moneyFlow.
 ****
 * `MONEYFLOW` can only be a positive integer, and does not require a "+" or "-".
-* `START_DATE/END_DATE` must be exactly the same as when the limit was created.
+* `START_DATE/END_DATE` must match exactly the same as when the limit was created.
 ****
 
 Examples:
 
+* `editlimit d/20-8-2018 m/200`
+* `editlimit d/20-8-2018 30-8-2018 m/200`
 * `editLimit d/20-8-2018 30-8-2018 m/200`
+* `edit_limit d/20-8-2018 30-8-2018 m/200`
+// end::limitfeatures[]
 
 == Upcoming Features
 
@@ -783,12 +855,22 @@ e.g. `select 2`
 * *Undo* : `undo`
 * *Redo* : `redo`
 * *Summary* : `summary` +
-e.g. `summary d/20-12-2017 31-09-2018`
+e.g.
+. `summary date d/1-1-2018 12-12-2018`
+. `summary month d/apr-2018 sep-2018`
+. `summary month d/APR-2018 SeP-2018`
+. `summary category d/1-1-2018 12-12-2018`
 * *Finances Statistics* : `stats` +
 e.g. `stats d/20-12-2017 31-09-2018`
-* *Add limit* : `limit d/START_DATE END_DATE` +
-e.g. `limit d/20-12-2017 31-09-2018`
+* *Add limit* : `addlimit d/START_DATE END_DATE` +
+e.g. +
+`limit d/20-12-2017`
+`limit d/20-12-2017 31-09-2018`
 * *Delete limit* `deleteLimit d/START_DATE END_DATE` +
-e.g. `deleteLimit d/20-12-2017 31-09-2018`
-* *Edit limit* `editLimit d/START_DATE END_DATE` +
-e.g. `editLimit d/20-12-2017 31-09-2018`
+e.g. +
+`deleteLimit d/20-12-2017`
+`deleteLimit d/20-12-2017 31-09-2018`
+* *Edit limit* `editLimit d/START_DATE END_DATE m/MONEYFLOW` +
+e.g. +
+`editLimit d/20-12-2017 m/100`
+`editLimit d/20-12-2017 31-09-2018 m/100`

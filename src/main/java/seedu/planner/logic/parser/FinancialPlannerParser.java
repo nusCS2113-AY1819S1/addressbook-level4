@@ -12,8 +12,8 @@ import seedu.planner.logic.commands.ArchiveCommand;
 import seedu.planner.logic.commands.CheckLimitCommand;
 import seedu.planner.logic.commands.ClearCommand;
 import seedu.planner.logic.commands.Command;
+import seedu.planner.logic.commands.DeleteByDateCommand;
 import seedu.planner.logic.commands.DeleteCommand;
-import seedu.planner.logic.commands.DeleteCommandByDateEntry;
 import seedu.planner.logic.commands.DeleteLimitCommand;
 import seedu.planner.logic.commands.EditCommand;
 import seedu.planner.logic.commands.EditLimitCommand;
@@ -74,7 +74,7 @@ public class FinancialPlannerParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case DeleteCommandByDateEntry.COMMAND_WORD:
+        case DeleteByDateCommand.COMMAND_WORD:
             return new DeleteCommandByDateEntryParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:

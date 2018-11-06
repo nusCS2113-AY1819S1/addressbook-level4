@@ -15,12 +15,12 @@ public class Tag {
     public final String tagName;
 
     /**
-     * Constructs a {@code Tag}.
-     *
+     * Constructs a {@code Tag} after converting it to lowercase.
      * @param tagName A valid tag name.
      */
     public Tag(String tagName) {
         requireNonNull(tagName);
+        tagName = tagName.toLowerCase();
         checkArgument(isValidTagName(tagName), MESSAGE_TAG_CONSTRAINTS);
         this.tagName = tagName;
     }

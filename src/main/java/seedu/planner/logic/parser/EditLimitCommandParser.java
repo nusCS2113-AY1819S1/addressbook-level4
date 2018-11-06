@@ -1,16 +1,18 @@
 package seedu.planner.logic.parser;
 import static seedu.planner.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.planner.commons.util.DateUtil.isLaterThan;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_MONEYFLOW;
 
 import java.util.stream.Stream;
 
+import seedu.planner.logic.commands.AddLimitCommand;
 import seedu.planner.logic.commands.EditLimitCommand;
 import seedu.planner.logic.parser.exceptions.ParseException;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.MoneyFlow;
-
+//@@author Zeng Hao(Oscar)
 
 /**
  * This command Parser is very similar to the @AddLimitCommandParser.
@@ -23,7 +25,8 @@ public class EditLimitCommandParser implements Parser <EditLimitCommand> {
      */
 
     private String [] datesIn; //the string is used to divide two the whole strings into two substrings.
-
+    private Date dateStart;
+    private Date dateEnd;
     @Override
     public EditLimitCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
@@ -35,9 +38,19 @@ public class EditLimitCommandParser implements Parser <EditLimitCommand> {
         }
         MoneyFlow money = ParserUtil.parseMoneyFlow("-" + argMultimap.getValue(PREFIX_MONEYFLOW).get());
         datesIn = argMultimap.getValue(PREFIX_DATE).get().split("\\s+");
+        if (datesIn.length == 2) {
+            dateStart = ParserUtil.parseDate(datesIn[0]);
+            dateEnd = ParserUtil.parseDate(datesIn[1]);
+        } else if (datesIn.length == 1) {
+            dateStart = ParserUtil.parseDate(datesIn[0]);
+            dateEnd = ParserUtil.parseDate(datesIn[0]);
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLimitCommand.MESSAGE_USAGE));
+        }
 
-        Date dateStart = ParserUtil.parseDate(datesIn[0]);
-        Date dateEnd = ParserUtil.parseDate(datesIn[1]);
+        if (isLaterThan(dateStart, dateEnd)) {
+            throw new ParseException("The dateStart must be earlier than or equals to dateEnd.");
+        }
         Limit limit = new Limit(dateStart, dateEnd, money);
 
 

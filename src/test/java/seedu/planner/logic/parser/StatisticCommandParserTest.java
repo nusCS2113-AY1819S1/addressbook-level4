@@ -46,6 +46,30 @@ public class StatisticCommandParserTest {
     }
 
     @Test
+    public void parse_incorrectFormatDate_throwParseException() {
+        String argsIncorrectFormat = " " + PREFIX_DATE + incorrectFormatDate + PREAMBLE_WHITESPACE + sampleEndDate;
+        assertParseFailure(parser, argsIncorrectFormat, Date.MESSAGE_DATE_CONSTRAINTS);
+
+        argsIncorrectFormat = " " + PREFIX_DATE + sampleStartDate + PREAMBLE_WHITESPACE + incorrectFormatDate;
+        assertParseFailure(parser, argsIncorrectFormat, Date.MESSAGE_DATE_CONSTRAINTS);
+
+        argsIncorrectFormat = " " + PREFIX_DATE + incorrectFormatDate + PREAMBLE_WHITESPACE + incorrectFormatDate;
+        assertParseFailure(parser, argsIncorrectFormat, Date.MESSAGE_DATE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidArg_throwParseException() {
+        String argsInvalid = " " + PREFIX_DATE + invalidDate + PREAMBLE_WHITESPACE + sampleEndDate;
+        assertParseFailure(parser, argsInvalid, Date.MESSAGE_DATE_LOGICAL_CONSTRAINTS);
+
+        argsInvalid = " " + PREFIX_DATE + sampleStartDate + PREAMBLE_WHITESPACE + invalidDate;
+        assertParseFailure(parser, argsInvalid, Date.MESSAGE_DATE_LOGICAL_CONSTRAINTS);
+
+        argsInvalid = " " + PREFIX_DATE + invalidDate + PREAMBLE_WHITESPACE + invalidDate;
+        assertParseFailure(parser, argsInvalid, Date.MESSAGE_DATE_LOGICAL_CONSTRAINTS);
+    }
+
+    @Test
     public void parse_nonEmptyArgNotSize2_throwParseException() {
         String argsWithLessThan2 = " " + PREFIX_DATE + PREAMBLE_WHITESPACE + sampleStartDate;
         assertParseFailure(parser, argsWithLessThan2, defaultParseErrorMessage);

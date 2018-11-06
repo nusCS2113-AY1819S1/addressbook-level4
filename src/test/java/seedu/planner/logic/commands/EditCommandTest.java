@@ -76,16 +76,24 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_RECORD, new EditRecordDescriptor());
-        Record editedRecord = model.getFilteredRecordList().get(INDEX_FIRST_RECORD.getZeroBased());
+    public void execute_onlyTagFieldSpecifiedUnfilteredList_success() {
+        Index indexLastRecord = Index.fromOneBased(model.getFilteredRecordList().size());
+        Record lastRecord = model.getFilteredRecordList().get(indexLastRecord.getZeroBased());
+
+        RecordBuilder recordInList = new RecordBuilder(lastRecord);
+        Record editedRecord = recordInList.withTags(VALID_TAG_HUSBAND).build();
+
+        EditRecordDescriptor descriptor = new EditRecordDescriptorBuilder().withTags(VALID_TAG_HUSBAND).build();
+        EditCommand editCommand = new EditCommand(indexLastRecord, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RECORD_SUCCESS, editedRecord);
 
         Model expectedModel = new ModelManager(new FinancialPlanner(model.getFinancialPlanner()), new UserPrefs());
+        expectedModel.updateRecord(lastRecord, editedRecord);
         expectedModel.commitFinancialPlanner();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
+
     }
 
     @Test
@@ -104,6 +112,15 @@ public class EditCommandTest {
         expectedModel.commitFinancialPlanner();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_noFieldSpecifiedUnfilteredList_failure() {
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_RECORD, new EditRecordDescriptor());
+
+        String expectedMessage = EditCommand.MESSAGE_EDIT_DESCRIPTOR_UNCHANGED;
+
+        assertCommandFailure(editCommand, model, commandHistory, expectedMessage);
     }
 
     @Test
