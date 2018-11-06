@@ -15,6 +15,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.StatisticCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
@@ -79,6 +80,12 @@ public class EditCommand extends Command {
 
         Book bookToEdit = lastShownList.get(index.getZeroBased());
         Book editedBook = createEditedPerson(bookToEdit, editBookDescriptor);
+
+        StatisticCenter.getInstance().getStatistic().getInventory().decrease(
+                Float.toString(Float.parseFloat(bookToEdit.getCost().toString())
+                        - Float.parseFloat(editedBook.getCost().toString())),
+                bookToEdit.getQuantity().toString()
+        );
 
         if (!bookToEdit.isSameBook(editedBook) && model.hasBook(editedBook)) {
             throw new CommandException(MESSAGE_DUPLICATE_BOOK);

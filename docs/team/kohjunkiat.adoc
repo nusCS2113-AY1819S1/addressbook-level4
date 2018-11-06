@@ -1,0 +1,90 @@
+= Koh Jun Kiat - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Book Inventory
+
+---
+
+== Overview
+
+Book Inventory is a desktop application cater for small and medium bookstore owners. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+
+== Summary of contributions
+
+* *Major enhancement*: added *statistic feature*
+** What it does: allows the user to view the monthly performance of the store through key financial datas like revenue, expense and inventory.
+** Justification: This feature helps value-add the product significantly because financial datas are tedious to record and can be prone to human error. With the help of automation, financial datas are more reliable and accurate, further owners can access them swiftly.
+** Highlights: This enhancement requires a singleton class StatisticCenter which interacts with most of the existing commands and possibly future commands.
+** Credits: Singleton implementation - https://medium.com/exploring-code/how-to-make-the-perfect-singleton-de6b951dfdb0
+
+* *Minor enhancement*: added a stock command that allows the user to stock books.
+
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.0` - `v1.1` (2 releases) on GitHub
+** Project morphing:
+*** Morphed model portion of addressbook 4.
+** Enhancements to existing features:
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+*** Contributed to forum discussions (examples:  https://github.com/nusCS2113-AY1819S1/forum/issues/58[1])
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** Some parts of the stock feature I added was adopted by several other class mates
+** Tools:
+
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+=== Increase Book Quantity (Ordered more books): `stock`
+
+Increase an existing book quantity in the inventory list. +
+Format: `stock INDEX q/QUANTITY` OR `stock i/ISBN13 q/QUANTITY`
+
+****
+* Increase the stock at the specified `INDEX`. The index refers to the index number shown in the displayed inventory list. The index *must be a positive integer* 1, 2, 3, ...
+* Increase the quantity of the book with the respective ISBN. ISBN is *unique* to each book
+* Existing quantity will be increase by the input value.
+****
+
+Examples:
+
+* `list` +
+`stock 2 q/6` +
+Increase the quantity available of the 2nd book by 6.
+* `stock i/978-2-12-345680-3 q/5` +
+Increase the quantity available for the book with the corresponding ISBN13 by 5.
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+// tag::stockcommand[]
+=== Stock feature
+==== Current implementation
+The sell command utilises both the `Model` and `Logic` component to fulfil its function.
+
+The stock operation is similar to the sell operation, refer to sell command for sequence diagram:
+
+==== Design Considerations
+
+===== Aspect: How stock command is implemented
+
+* **Alternative 1 (current choice):** Increases quantity in the Quantity Class.
+** Pros: Code is more cohesive.
+** Cons: Adds more code to Quantity Class.
+* **Alternative 2:** Replace quantity in the Book Class.
+** Pros: Does not need to edit Quantity Class.
+** Cons: Code becomes less cohesive.
+// end::stockcommand[]
+
