@@ -469,6 +469,7 @@ Similar to the other commands; see <<Events-Driven-Nature,*`Events-Driven nature
 // end::import_export_timetable[]
 
 {nbsp}
+
 // tag::securityImplementation[]
 === Security Implementation
 To begin this section, we would need to introduce the idea of a Authenticated User instance.
