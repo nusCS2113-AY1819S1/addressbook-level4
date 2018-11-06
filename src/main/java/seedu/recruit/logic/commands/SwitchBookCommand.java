@@ -22,16 +22,20 @@ public class SwitchBookCommand extends Command {
     public static final String MESSAGE_SUCCESSFULLY_SWITCHED_TO_COMPANY_BOOK =
             "Switched to Company Book successfully.";
 
-    private static String message_success = " ";
+    private static String messageSuccess = " ";
+
+    public static String getMessage() {
+        return messageSuccess;
+    }
 
     public static void setMessage(String message) {
-        message_success = message;
+        messageSuccess = message;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         EventsCenter.getInstance().post(new SwitchBookRequestEvent());
-        return new CommandResult(message_success);
+        return new CommandResult(messageSuccess);
     }
 }

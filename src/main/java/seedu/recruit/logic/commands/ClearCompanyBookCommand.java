@@ -3,7 +3,7 @@ package seedu.recruit.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.recruit.commons.core.EventsCenter;
-import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
+import seedu.recruit.commons.events.ui.FocusOnCompanyBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowUpdatedCompanyJobListRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.model.CompanyBook;
@@ -21,7 +21,7 @@ public class ClearCompanyBookCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
+        EventsCenter.getInstance().post(new FocusOnCompanyBookRequestEvent());
         model.resetCompanyData(new CompanyBook());
         model.commitCompanyBook();
         EventsCenter.getInstance().post(new ShowUpdatedCompanyJobListRequestEvent(

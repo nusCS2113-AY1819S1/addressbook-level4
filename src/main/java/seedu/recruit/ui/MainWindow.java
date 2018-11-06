@@ -376,7 +376,7 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleShowCandidateBookEvent(ShowCandidateBookRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-            switchToCandidateBook();
+        switchToCandidateBook();
     }
 
     /**
@@ -386,7 +386,7 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleShowCompanyBookEvent(ShowCompanyBookRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-            switchToCompanyBook();
+        switchToCompanyBook();
     }
 
     /**
