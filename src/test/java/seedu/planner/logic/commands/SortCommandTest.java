@@ -56,10 +56,9 @@ public class SortCommandTest {
     }
 
     @Test
-    public void execute_listIsNotSorted_listIsSorted() {
+    public void execute_unsortedList_listIsSorted() {
         SortCommand command = new SortCommand(CATEGORY_DATE, false);
         String expectedMessage = String.format(MESSAGE_SUCCESS, CATEGORY_DATE, ORDER_DESCENDING);
-
         // sort the initial model
         Model expectedSortedModel = getSortedModel(model, CATEGORY_DATE, ORDER_DESCENDING);
 
@@ -67,10 +66,9 @@ public class SortCommandTest {
     }
 
     @Test
-    public void execute_listIsSorted_listIsUnchanged() {
+    public void execute_sortedList_listIsUnchanged() {
         SortCommand command = new SortCommand(CATEGORY_MONEY, true);
         String expectedMessage = String.format(MESSAGE_SUCCESS, CATEGORY_MONEY, ORDER_ASCENDING);
-
         // obtain a sorted model
         Model initialSortedModel = getSortedModel(model, CATEGORY_MONEY, ORDER_ASCENDING);
         /// try to sorted it again, result should be identical model
