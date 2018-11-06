@@ -29,6 +29,7 @@ import seedu.planner.model.summary.CategoryStatisticsList;
  * Represents the in-memory model of the financial planner data.
  */
 public class ModelManager extends ComponentManager implements Model {
+    public static final String MESSAGE_MONTHLY = "This month: %s\n";
     public static final String MESSAGE_SINGLE_DATE = "Date: %s\n";
     public static final String MESSAGE_DOUBLE_DATE = "Date period: %s -- %s\n";
     public static final String MESSAGE_BASIC_SPEND = "The limit you have set: %.2f \n"
@@ -38,6 +39,7 @@ public class ModelManager extends ComponentManager implements Model {
             + "Your income during the limit period: %.2f\n";
     public static final String MESSAGE_EXCEED = "Your spend exceeded the limit !!! \n";
     public static final String MESSAGE_NOT_EXCEED = "Your spend did not exceed the limit ^o^\n";
+    public static final Date DATE_SPECIAL_FOR_MONTHLY = new Date("01-01-9999");
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private static final int STARTING_ELEMENT = 0;
 
@@ -195,6 +197,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
     @Override
     public boolean isExceededLimit (Limit limitIn) {
+        if (limitIn.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
+            limitIn = generateThisMonthLimit(limitIn);
+        }
         requireNonNull(limitIn);
         return (versionedFinancialPlanner.isExceededLimit(limitIn));
     }
@@ -238,6 +243,15 @@ public class ModelManager extends ComponentManager implements Model {
         return output;
     }
 
+    public Limit generateThisMonthLimit (Limit limitIn) {
+        Date today = DateUtil.getDateToday();
+        Date dateStart = new Date("01-" + today.getMonth() + "-" + today.getYear());
+        Month thisMonth = new Month(today.getMonth(), today.getYear());
+        Date dateEnd = new Date(thisMonth.getLastDay() + "-" + today.getMonth() + "-" + today.getYear());
+        Limit thisMonthLimit = new Limit(dateStart, dateEnd, limitIn.getLimitMoneyFlow());
+
+        return thisMonthLimit;
+    }
     /**
      * This function is to generate the limit output.
      * @param isExceeded
@@ -250,8 +264,9 @@ public class ModelManager extends ComponentManager implements Model {
         Date dateEnd;
         dateStart = limit.getDateStart();
         dateEnd = limit.getDateEnd();
-
-        if (dateEnd.equals(dateStart)) {
+        if (limit.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
+            output = String.format(MESSAGE_MONTHLY, DateUtil.getDateToday().getMonth());
+        } else if (dateEnd.equals(dateStart)) {
             output = String.format(MESSAGE_SINGLE_DATE, dateStart);
         } else {
             output = String.format(MESSAGE_DOUBLE_DATE, dateStart, dateEnd);

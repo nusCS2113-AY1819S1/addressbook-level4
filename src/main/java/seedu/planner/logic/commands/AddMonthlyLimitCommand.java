@@ -19,13 +19,13 @@ public class AddMonthlyLimitCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Set a limit for continuous months. "
             + "Parameters: "
             + PREFIX_MONEYFLOW + "LIMIT_MONEY " + "\n"
-            + "Example:"
+            + "Example: "
             + COMMAND_WORD + " "
             + PREFIX_MONEYFLOW + "500" + "\n";
 
     public static final String MESSAGE_HAS_LIMIT = "There is already a monthly limit. \n";
-    public static final String MESSAGE_SUCCESS = "The monthly limit has been added";
-    public static final String DATE_SPECIAL_FOR_MONTHLY = "01-01-0001";
+    public static final String MESSAGE_SUCCESS = "The monthly limit has been added. \n";
+    public static final String DATE_SPECIAL_FOR_MONTHLY = "01-01-9999";
 
 
 
