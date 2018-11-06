@@ -129,6 +129,11 @@ public class ModelManager extends ComponentManager implements Model {
         indicateCandidateBookChanged();
     }
 
+    @Override
+    public ObservableList<Candidate> getMasterCandidateList() {
+        return versionedCandidateBook.getCandidateList();
+    }
+
     // =========== Filtered Candidate List Accessors =================================================== //
 
     /**
@@ -317,6 +322,11 @@ public class ModelManager extends ComponentManager implements Model {
     public void sortJobOffers(Prefix prefix) {
         versionedCompanyBook.sortJobOffers(prefix);
         indicateCompanyBookChanged();
+    }
+
+    @Override
+    public ObservableList<JobOffer> getMasterJobList() {
+        return versionedCompanyBook.getCompanyJobList();
     }
 
     // =========== Filtered Company Job List Accessors ===================================================== //
