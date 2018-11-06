@@ -1,8 +1,13 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.address.model.distributor.Distributor;
 import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.distributor.DistributorPhone;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.util.SampleDistributorsUtil;
 
 /**
  * A utility class to help with building Distributor objects.
@@ -15,12 +20,13 @@ public class DistributorBuilder {
 
     private DistributorName name;
     private DistributorPhone phone;
+    private Set<Tag> tags;
 
 
     public DistributorBuilder() {
         name = new DistributorName(DEFAULT_NAME);
         phone = new DistributorPhone(DEFAULT_PHONE);
-
+        tags = new HashSet<>();
     }
 
     /**
@@ -29,10 +35,11 @@ public class DistributorBuilder {
     public DistributorBuilder(Distributor distributorToCopy) {
         name = distributorToCopy.getDistName();
         phone = distributorToCopy.getDistPhone();
+        tags = new HashSet<>(distributorToCopy.getTags());
     }
 
     /**
-     * Sets the {@code Name} of the {@code Distributor} that we are building.
+     * Sets the {@code DistributorName} of the {@code Distributor} that we are building.
      */
     public DistributorBuilder withName(String name) {
         this.name = new DistributorName(name);
@@ -41,16 +48,24 @@ public class DistributorBuilder {
 
 
     /**
-     * Sets the {@code SerialNumber} of the {@code Distributor} that we are building.
+     * Sets the {@code DistributorPhone} of the {@code Distributor} that we are building.
      */
     public DistributorBuilder withPhone(String phone) {
         this.phone = new DistributorPhone(phone);
         return this;
     }
 
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Product} that we are building.
+     */
+    public DistributorBuilder withTags(String ... tags) {
+        this.tags = SampleDistributorsUtil.getTagSet(tags);
+        return this;
+    }
+
 
     public Distributor build() {
-        return new Distributor(name, phone);
+        return new Distributor(name, phone, tags);
     }
 
 }

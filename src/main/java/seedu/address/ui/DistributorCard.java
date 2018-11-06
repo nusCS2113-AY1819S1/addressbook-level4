@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.distributor.Distributor;
@@ -31,6 +32,8 @@ public class DistributorCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label phone;
+    @FXML
+    private FlowPane tags;
 
     public DistributorCard(Distributor distributor, int displayedIndex) {
         super(FXML);
@@ -38,6 +41,7 @@ public class DistributorCard extends UiPart<Region> {
         id.setText(displayedIndex + "." + "\n");
         name.setText("Name: " + distributor.getDistName().fullDistName);
         phone.setText("Phone: " + distributor.getDistPhone().value);
+        distributor.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override

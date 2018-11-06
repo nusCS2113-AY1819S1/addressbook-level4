@@ -56,13 +56,13 @@ public class CommandTestUtil {
     public static final String VALID_DIST_NAME_AHBENG = "Ah Beng";
     public static final String VALID_DIST_NAME_AHHUAT = "Ah Huat";
     public static final String VALID_DIST_NAME_AHLEE = "Ah Lee";
+    public static final String VALID_DIST_NAME_AHLONG = "Ah Long";
     public static final String VALID_DIST_NAME_AHSENG = "Ah Seng";
     public static final String VALID_DIST_PHONE_AHBENG = "11111111";
     public static final String VALID_DIST_PHONE_AHHUAT = "22222222";
     public static final String VALID_DIST_PHONE_AHLEE = "33333333";
+    public static final String VALID_DIST_PHONE_AHLONG = "55555555";
     public static final String VALID_DIST_PHONE_AHSENG = "44444444";
-
-
 
     public static final String NAME_DESC_APPLE = " " + PREFIX_NAME + VALID_NAME_APPLE;
     public static final String NAME_DESC_BANANA = " " + PREFIX_NAME + VALID_NAME_BANANA;
