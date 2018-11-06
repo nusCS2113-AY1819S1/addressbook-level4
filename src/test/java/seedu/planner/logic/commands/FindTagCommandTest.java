@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.planner.commons.core.Messages.MESSAGE_RECORDS_LISTED_OVERVIEW;
 import static seedu.planner.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.planner.logic.commands.FindTagCommand.MESSAGE_SUCCESS;
 import static seedu.planner.testutil.TypicalRecords.CAIFAN;
 import static seedu.planner.testutil.TypicalRecords.INDO;
 import static seedu.planner.testutil.TypicalRecords.ZT;
@@ -31,19 +32,23 @@ public class FindTagCommandTest {
 
     @Test
     public void equals() {
+        String inputFirstString = "first";
+        String inputSecondString = "second";
         TagsContainsKeywordsPredicate firstPredicate =
-                new TagsContainsKeywordsPredicate(Collections.singletonList("first"));
+                new TagsContainsKeywordsPredicate(Collections.singletonList(inputFirstString));
         TagsContainsKeywordsPredicate secondPredicate =
-                new TagsContainsKeywordsPredicate(Collections.singletonList("second"));
+                new TagsContainsKeywordsPredicate(Collections.singletonList(inputSecondString));
+        String[] inputFirstStringArray = inputFirstString.split("\\s+");
+        String[] inputSecondStringArray = inputSecondString.split("\\s+");
 
-        FindTagCommand findFirstCommand = new FindTagCommand(firstPredicate);
-        FindTagCommand findSecondCommand = new FindTagCommand(secondPredicate);
+        FindTagCommand findFirstCommand = new FindTagCommand(firstPredicate, inputFirstStringArray);
+        FindTagCommand findSecondCommand = new FindTagCommand(secondPredicate, inputSecondStringArray);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindTagCommand findFirstCommandCopy = new FindTagCommand(firstPredicate);
+        FindTagCommand findFirstCommandCopy = new FindTagCommand(firstPredicate, inputFirstStringArray);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -57,21 +62,27 @@ public class FindTagCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noRecordFound() {
-        String expectedMessage = String.format(MESSAGE_RECORDS_LISTED_OVERVIEW, 0);
-        TagsContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindTagCommand command = new FindTagCommand(predicate);
+    public void execute_singleKeywords_noRecordFound() {
+        String inputKeywords = "salary";
+        TagsContainsKeywordsPredicate predicate = preparePredicate(inputKeywords);
+        String[] keywords = inputKeywords.split("\\s+");
+        FindTagCommand command = new FindTagCommand(predicate, keywords);
         expectedModel.updateFilteredRecordList(predicate);
-        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        String expectedMessage = String.format(MESSAGE_SUCCESS,
+                expectedModel.getFilteredRecordList().size(), command.convertKeywordsToSuccessMessage());
+        assertCommandSuccess(command, model, commandHistory, expectedMessage , expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredRecordList());
     }
 
     @Test
     public void execute_multipleKeywords_multipleRecordsFound() {
-        String expectedMessage = String.format(MESSAGE_RECORDS_LISTED_OVERVIEW, 3);
-        TagsContainsKeywordsPredicate predicate = preparePredicate("friends owesmoney");
-        FindTagCommand command = new FindTagCommand(predicate);
+        String inputKeywords = "friends owesmoney";
+        TagsContainsKeywordsPredicate predicate = preparePredicate(inputKeywords);
+        String[] keywords = inputKeywords.split("\\s+");
+        FindTagCommand command = new FindTagCommand(predicate, keywords);
         expectedModel.updateFilteredRecordList(predicate);
+        String expectedMessage = String.format(MESSAGE_SUCCESS,
+                expectedModel.getFilteredRecordList().size(), command.convertKeywordsToSuccessMessage());
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(INDO, CAIFAN, ZT), model.getFilteredRecordList());
     }

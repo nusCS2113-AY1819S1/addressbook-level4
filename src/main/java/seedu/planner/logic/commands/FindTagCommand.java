@@ -33,7 +33,7 @@ public class FindTagCommand extends Command {
      * Convert list of keywords to a string for displaying success message.
      * @return
      */
-    private String convertKeywordsToSuccessMessage() {
+    protected String convertKeywordsToSuccessMessage() {
         StringBuilder message = new StringBuilder();
         for (String keyword: keywords) {
             message.append("[").append(keyword).append("], ");
