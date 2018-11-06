@@ -14,6 +14,7 @@ import org.junit.rules.ExpectedException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.TimeTable;
+import seedu.address.testutil.TestUtil;
 import seedu.address.testutil.TypicalTimeSlots;
 
 /**
@@ -22,7 +23,7 @@ import seedu.address.testutil.TypicalTimeSlots;
 public class ExportCommandTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "ExportCommandTest");
-    private static final Path TEMP_FILE = TEST_DATA_FOLDER.resolve("temp.ics");
+    private static final Path TEMP_FILE = TestUtil.getFilePathInSandboxFolder("temp.ics");
 
     private static final TimeTable VALID_TIMETABLE = TypicalTimeSlots.getTypicalTimeTable();
 
