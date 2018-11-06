@@ -14,7 +14,7 @@ public class Rank {
     /**
      * The input must not be a whitespace, zero or a negative integer
      */
-    public static final String RANK_VALIDATION_REGEX = "[1-9]{1,2}";
+    public static final String RANK_VALIDATION_REGEX = "^^\\d*[1-9]\\d*$";
 
     public final String rank;
 

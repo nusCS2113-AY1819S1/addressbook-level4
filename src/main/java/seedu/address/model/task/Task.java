@@ -21,6 +21,7 @@ public class Task {
     private final int expectedNumOfHours;
     private int completedNumOfHours;
     private final List<Milestone> milestoneList = new ArrayList<Milestone>();
+
     public Task(Deadline deadline, ModuleCode moduleCode, String title, String description, PriorityLevel priorityLevel,
                 int expectedNumOfHours) {
         this.deadline = deadline;

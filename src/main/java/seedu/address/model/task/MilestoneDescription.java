@@ -47,6 +47,24 @@ public class MilestoneDescription {
         return this.milestoneDescription;
     }
 
+    /**
+     * Pads milestone description to fill up 40 characters for neater layout in the UI
+     * @param milestoneDescription
+     * @return padded milestoneDescription
+     */
+    public static String padMilestoneDescription(String milestoneDescription) {
+        int milestoneDescriptionLength = milestoneDescription.length();
+        int toPad = 41 - milestoneDescriptionLength;
+        return String.format("%1$-" + toPad + "s", milestoneDescription);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof MilestoneDescription // instanceof handles nulls
+                && milestoneDescription.equals(((MilestoneDescription) other).milestoneDescription));
+    }
+
     @Override
     public String toString() {
         return milestoneDescription;
