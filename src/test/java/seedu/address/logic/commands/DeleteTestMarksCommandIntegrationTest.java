@@ -4,7 +4,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIENDS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TEST_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TEST_MARK_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TEST_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.EditCommand.createEditedPerson;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -69,7 +68,8 @@ public class DeleteTestMarksCommandIntegrationTest {
         expectedModelDelete.commitAddressBook();
 
 
-        assertCommandSuccess(deleteTestMarksCommand, expectedModel, commandHistory, expectedMessage, expectedModelDelete);
+        assertCommandSuccess(deleteTestMarksCommand, expectedModel, commandHistory, expectedMessage,
+                expectedModelDelete);
 
     }
 

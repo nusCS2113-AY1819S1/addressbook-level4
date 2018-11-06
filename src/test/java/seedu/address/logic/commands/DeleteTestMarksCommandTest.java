@@ -46,7 +46,8 @@ public class DeleteTestMarksCommandTest {
         ModelStubAcceptingTestDeleted modelStub = new ModelStubAcceptingTestDeleted();
         modelStub.validPerson = new PersonBuilder().withTests(VALID_TEST_AMY).build();
 
-        CommandResult commandResult = new DeleteTestMarksCommand(VALID_TEST_NAME_AMY).execute(modelStub, commandHistory);
+        CommandResult commandResult = new
+                DeleteTestMarksCommand(VALID_TEST_NAME_AMY).execute(modelStub, commandHistory);
 
         assertEquals(String.format(MESSAGE_SUCCESSFUL_DELETE_TEST, VALID_TEST_NAME_AMY), commandResult.feedbackToUser);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
@@ -92,8 +93,8 @@ public class DeleteTestMarksCommandTest {
      */
     private class ModelStubAcceptingTestDeleted extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
-        Person validPerson = new PersonBuilder().build();
-        Person validPerson2 = new PersonBuilder().withName("Jeff").build();
+        private Person validPerson = new PersonBuilder().build();
+        private Person validPerson2 = new PersonBuilder().withName("Jeff").build();
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
 
