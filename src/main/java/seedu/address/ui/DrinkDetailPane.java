@@ -34,24 +34,27 @@ public class DrinkDetailPane extends UiPart<Region> {
     @FXML
     private Label latestBatchDate;
 
+    /**
+     * Constructs a drink detail pane with the input drink
+     * For drinks with no batches, "No batches available" will be printed
+     * @param input a Drink object
+     */
     public DrinkDetailPane(Drink input) {
         super(FXML);
         this.drink = input;
-        if (drink == null) {
-        } else {
+        if (drink != null) {
             name.setText(drink.getName().toString());
             sellingPrice.setText("$ " + drink.getRetailPrice().toString());
             quantity.setText(Integer.toString(drink.getQuantity().getValue()));
             costPrice.setText("$ " + drink.getCostPrice().toString());
-            /*
-            try {
+            batchesInStock.setText(Integer.toString(drink.getNumberBatches()));
+            if (drink.getNumberBatches() == 0) {
+                earliestBatchDate.setText("No batches available");
+                latestBatchDate.setText("No batches available");
+            } else {
                 earliestBatchDate.setText(drink.getEarliestBatchDate().toString());
                 latestBatchDate.setText(drink.getLatestBatchDate().toString());
-            } catch (EmptyBatchListException e) {
-                earliestBatchDate.setText("No available batches");
-                latestBatchDate.setText("No available batches");
             }
-            */
         }
 
     }

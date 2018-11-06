@@ -134,7 +134,11 @@ public class UniqueBatchList implements Iterable<Batch> {
         } catch (EmptyBatchListException e) {
             throw e;
         }
-        return internalList.get(internalList.size()-1);
+        return internalList.get(internalList.size() - 1);
+    }
+
+    public int getNumberBatches() {
+        return internalList.size();
     }
 
     /**

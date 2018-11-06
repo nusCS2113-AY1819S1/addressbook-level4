@@ -150,6 +150,14 @@ public class Drink {
         }
     }
 
+    /**
+     * Gets the number of batches of the current drink
+     * @return a quantity expressed as an integer
+     */
+    public int getNumberBatches() {
+        return uniqueBatchList.getNumberBatches();
+    }
+
     public ObservableList<Batch> getObservableBatchList() {
         try {
             return uniqueBatchList.asUnmodifiableObservableList();
