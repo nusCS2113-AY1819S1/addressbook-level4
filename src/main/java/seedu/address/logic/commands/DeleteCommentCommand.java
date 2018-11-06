@@ -55,11 +55,18 @@ public class DeleteCommentCommand extends Command {
     public int getLine() {
         return this.line;
     }
-    public Index getIndex() { return this.index; }
 
-    public void setLine(int line) { this.line = line; }
+    public Index getIndex() {
+        return this.index;
+    }
 
-    public void setIndex(Index index) { this.index = index; }
+    public void setLine(int line) {
+        this.line = line;
+    }
+
+    public void setIndex(Index index) {
+        this.index = index;
+    }
 
     /**
      * Save edited information in model

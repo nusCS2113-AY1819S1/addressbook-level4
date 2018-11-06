@@ -54,6 +54,7 @@ class DeleteCommentCommandTest {
                 .withEmail("cornelia@example.com")
                 .withVenue("10th street")
                 .withDateTime("22/10/2017 9:30")
+                .withStatus("NULL")
                 .withComment("{span}Comment Section{/span}{ol}{li}admin : Hi{/li}{/ol}")
                 .withTags("friends")
                 .withAttendees("Scarlet Witch").build();
@@ -93,6 +94,7 @@ class DeleteCommentCommandTest {
                 .withEmail("cornelia@example.com")
                 .withVenue("10th street")
                 .withDateTime("22/10/2017 9:30")
+                .withStatus("NULL")
                 .withComment("{span}Comment Section{/span}{ol}{li}admin : Hi{/li}{/ol}")
                 .withTags("friends")
                 .withAttendees("Scarlet Witch").build();
@@ -142,6 +144,7 @@ class DeleteCommentCommandTest {
                 .withEmail("cornelia@example.com")
                 .withVenue("10th street")
                 .withDateTime("22/10/2017 9:30")
+                .withStatus("NULL")
                 .withComment("{span}Comment Section{/span}{ol}{li}admin : Hi{/li}{li}comment 2{/li}"
                         + "{li}comment 3{li}{/ol}")
                 .withTags("friends")

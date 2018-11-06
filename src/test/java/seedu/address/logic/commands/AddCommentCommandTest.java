@@ -55,6 +55,7 @@ class AddCommentCommandTest {
                 .withEmail("cornelia@example.com")
                 .withVenue("10th street")
                 .withDateTime("22/10/2017 9:30")
+                .withStatus("NULL")
                 .withComment("{span}Comment Section{/span}{ol}{li}admin : Hi{/li}{/ol}")
                 .withTags("friends")
                 .withAttendees("Scarlet Witch")
@@ -88,6 +89,7 @@ class AddCommentCommandTest {
                 .withEmail("cornelia@example.com")
                 .withVenue("10th street")
                 .withDateTime("22/10/2017 9:30")
+                .withStatus("NULL")
                 .withComment("{span}Comment Section{/span}{ol}{li}admin : Hi{/li}{/ol}")
                 .withTags("friends")
                 .withAttendees("Scarlet Witch").build();
