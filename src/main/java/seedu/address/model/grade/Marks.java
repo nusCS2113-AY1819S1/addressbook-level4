@@ -11,7 +11,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Marks {
 
     public static final String MESSAGE_MARKS_CONSTRAINTS =
-            "marks should be >=0 && <= 100";
+            "marks should be >=0 && <= 100 and does not  contain any space";
     public static final String MARKS_VALIDATION_REGEX = "^(?:100(?:\\.00?)?|\\d?\\d(?:\\.\\d\\d?)?)$";
     public final String value;
 

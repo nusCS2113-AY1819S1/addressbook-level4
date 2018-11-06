@@ -661,6 +661,97 @@ Coming in v1.4
 
 // end::distribute[]
 
+// tag::grademanagement[]
+=== Grade_management feature
+==== Current Implementation
+The grade management feature is to help university lecturer to manage students grade. It includes to add Test (test name test marks) and edit test marks for each student, grade summary
+command to show summary of each test(highest/lowest/median/mean score of this test, show a list of students who has fallen into top/last twenty five percent of this test), assign grade command
+to assign grade to all students who has taken certain test and delete test command to allow user to delete a certain test record from all students.
+Since every student will have many different tests during the semester. Our grade management feature will allow user to add and store multiple tests for each students. A table of
+student's test grade will be displayed in the browser panel of each student. The user can have a overview of each student's different tests and grade by click the student's card at the left most.
+
+In the current version, the following operations have been implemented:
+
+* `AddTestMarksCommand` -- Execute the command to add test into a student.(each student can store many different tests)
+* `EditTestMarksCommand` --  Execute the command to edit test mark of a student.
+* `GradeSummaryCommand` -- show grade summary of each test.
+* `AssignGradeCommand` -- assign grade base on bell curve calculation of each test(the grading is base on the test name input, only grading the students who has taken that test).
+* `deleteTestMarksCommand` -- delete certain test from all students(who has this test name in their test list).
+
+Given below is an example usage scenario and how the grade management mechanism behaves at each step.
+
+Step 1. User inputs `adt studentname tn/CS1231 tm/66` to add test into a student in the student management system.
+The `AddressBookParser` detects `adt` as a command word to use `AddTestMarksCommandParser` to parse the input given.
+`AddTestMarksCommandParser` will then pass studentname, testname,testmarks to `AddTestMarksCommand` which will then
+execute adding the test to the student.
+  +
+[NOTE]
+If a duplicate tests are found in the student management system during its execution, it will not add the test , it will throw a `DuplicateTestException`
+If a duplicate name keywords are found in the student management system during its execution,
+it will not add the test , it will throw a `DuplicatePersonException` to ask user to indicate the full name
+which will then notify the user of the issue.
+
+The following sequence diagram shows how the add test operation works within both `Model` and `Logic` components:
+
+.Interactions Inside the Logic and Model Component for the `adt studentname tn/CS1231 tm/66` Command +
+image::AddTestMarks.png[width="800"]
+
+
+Step 2. User inputs `edt studentname tn/CS1231 tm/77` to edit test marks of a student in the student management system.
+        The `AddressBookParser` detects `edt` as a command word to use `EditTestMarksCommandParser` to parse the input given.
+        `EditTestMarksCommandParser` will then pass studentname, testname,testmarks to `editTestMarksCommand` which will then
+        execute editing the test of the student.
+ +
+[NOTE]
+If a duplicate tests are found in the student management system during its execution, it will not add the test , it will throw a `DuplicateTestException`
+If a duplicate name keywords are found in the student management system during its execution,
+it will not add the test , it will throw a `DuplicatePersonException` to ask user to indicate the full name
+which will then notify the user of the issue.
+
+The sequence diagram is similar to the adt command above, just the command name changed.
+
+Step 3. The user inputs `disp tn/ highest/` or `disp tn/ lowest/` or `disp tn/ median/` or `disp tn/ mean/` or `disp tn/ TTF/` or `disp tn/ LTF/` to show grade summary of certain test.
+The `AddressBookParser` detects `disp` as a command word will use `GradeSummaryCommandParser`
+to parse the input given. `GradeSummaryCommandParser` will pass test name to `GradeSummaryCommand`
+which will then execute display the grade summary.
+ +
+
+The following sequence diagram shows how the grade summary command works within both `logic` and `UI` components:
+
+.Interactions Inside the Logic and UI Component for the `disp tn/ highest/` or `disp tn/ lowest/` or `disp tn/ median/` or `disp tn/ mean/` or `disp tn/ TTF/` or `disp tn/ LTF/` Command +
+image::GradeSummary.png[width="800"]
+
+Step 4. The user inputs `agpt` grading students who has taken certain test. The `AddressBookParser` detects `agpt` as a command word and will use `AssignGradeCommandParser`
+to parse the input given. `AssignGradeCommandParser` will then  pass test name to `AssignGradeCommand`
+which will then execute grading students of certain test in the student management system.
+The sequence diagram is similar to the adt command above.
+ +
+
+Step 5. The user inputs `dt` to delete certain test in the student management system. The `AddressBookParser` detects `dt` as a command word and will use `DeleteTestMarksCommandParser`
+to parse the input given. `DeleteTestMarksCommandParser` will then  pass test name to `DeleteTestMarksCommand`
+which will then execute deleting the test from the student management system.
+The sequence diagram is similar to the adt command above.
+ +
+
+The sequence diagram will be similar to addTestMarksComand.
+
+==== Design Considerations
+===== Aspect: Input
+* **Alternative 1 (current choice):** input is name but not indix.
+** Pros: Easy for user to use. If user has many students in the system and when user want to
+add test marks its very inconvenient if user use index cause you have to find the index of each student
+before you add test. use name as input save a lot of time for user.
+** Cons: hard to implement.
+
+===== Aspect: Storage
+
+* **Alternative 1 (current choice):** Stores test in Person as a list.
+** Pros: Easy to link test to each person,cause it is part of person.
+** Cons: need to add test in every part relate to person,hard to implement.
+
+// end::grademanagement[]
+
+
 // tag::sendemail[]
 === Send Email feature
 ==== Current Implementation
@@ -1325,7 +1416,15 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |university lecturer |automatically distribute students into groups via criteria-based user options (gender/nationality) |efficiently form random groups
 
-|`* *` |university lecturer |filter student contacts by their scores |generate a list of students who need my help
+|`* *` |university lecturer |add test for each student |
+
+|`* *` |university lecturer |edit test marks for each student |
+
+|`* *` |university lecturer |show grade summary of certain test |
+
+|`* *` |university lecturer |assign grade for certain test |
+
+|`* *` |university lecturer |delete certain test |
 
 |`* *` |university lecturer |automatically add tags for specific student groups |efficiently mark out weak students
 
@@ -1507,39 +1606,149 @@ Use case ends
 
 
 [discrete]
-=== Use case: Grading Filter
+=== Use case: Add test marks to student
 *Precondition*
 
-1.  Student scores exist in the AddressBook
+1.  Student management system has student(s)
 
 *MSS*
 
-1.  User requests AddressBook to generate a list of students that need extra help
-2.  AddressBook displays standard deviation of marks
-3.  User enters the filter standard
-4.  AddressBook outputs results
+1.  Lecturer adds test for a student
+2.  AddressBook confirms test are added
 +
 Use case ends
 
 *Extensions*
 
 [none]
-* 1a. AddressBook detects error in data entered.
+* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
 +
 
 [none]
-** 1a1. AddressBook rejects command.
+** 1a1. Student management system rejects command entered with relevant error message.
+[none]
+* 1b. Student management system detects test is already in the system.
++
+
+[none]
+** 1b1. Student management system rejects command entered with relevant error message.
++
+
+[discrete]
+=== Use case: edit test marks to student
+*Precondition*
+
+1.  Student management system has student(s) and test
+
+*MSS*
+
+1.  Lecturer edit test mark for a student
+2.  AddressBook confirms test are edited
 +
 Use case ends
 
+*Extensions*
+
 [none]
-* 3a. AddressBook detects wrong standard set by user.
+* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
 +
 
 [none]
-** 3a1. AddressBook rejects command and displays error message.
+** 1a1. Student management system rejects command entered with relevant error message.
+[none]
+* 1b. Student management system detects test is not in the system.
++
+
+[none]
+** 1b1. Student management system rejects command entered with relevant error message.
++
+
+[discrete]
+=== Use case: delete test from students
+*Precondition*
+
+1.  Student management system has student(s) and test
+
+*MSS*
+
+1.  Lecturer delete test from  students
+2.  AddressBook confirms test are deleted
 +
 Use case ends
+
+*Extensions*
+
+[none]
+* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
++
+
+[none]
+** 1a1. Student management system rejects command entered with relevant error message.
+[none]
+* 1b. Student management system detects test is not in the system.
++
+
+[none]
+** 1b1. Student management system rejects command entered with relevant error message.
++
+
+[discrete]
+=== Use case: grade summary
+*Precondition*
+
+1.  Student management system has student(s) and test
+
+*MSS*
+
+1.  Lecturer enter display grade summary command
+2.  AddressBook confirms summary are displayed
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
++
+
+[none]
+** 1a1. Student management system rejects command entered with relevant error message.
+[none]
+* 1b. Student management system detects test is not in the system.
++
+
+[none]
+** 1b1. Student management system rejects command entered with relevant error message.
++
+
+[discrete]
+=== Use case: assign grade
+*Precondition*
+
+1.  Student management system has student(s) and test
+
+*MSS*
+
+1.  Lecturer enter command to assign grade
+2.  AddressBook confirms grade are assigned
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
++
+
+[none]
+** 1a1. Student management system rejects command entered with relevant error message.
+[none]
+* 1b. Student management system detects test is not in the system.
++
+
+[none]
+** 1b1. Student management system rejects command entered with relevant error message.
++
 
 [discrete]
 === Use case: Mass Email Communication
@@ -1737,17 +1946,7 @@ Use case ends
 
 
 [discrete]
-=== Use case: Automatically Adding/Deleting Tags
-*Precondition*
 
-1.  AddressBook has generated a list of students
-
-*MSS*
-
-1.  User requests tags to be added
-2.  AddressBook confirms tags has been added
-+
-Use case ends
 
 _{More to be added}_
 

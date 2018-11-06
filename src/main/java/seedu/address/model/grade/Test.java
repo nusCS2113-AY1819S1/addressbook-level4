@@ -19,7 +19,9 @@ public class Test {
     final ArrayList<Test> testAdded = new ArrayList<>();
 
     public Test(TestName testName, Marks marks, Grade grade) {
-        requireAllNonNull(testName, marks, grade);
+        requireAllNonNull(testName);
+        requireAllNonNull(marks);
+        requireAllNonNull(grade);
         this.testName = testName;
         this.marks = marks;
         this.grade = grade;
