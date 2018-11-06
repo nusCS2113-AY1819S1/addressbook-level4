@@ -20,6 +20,7 @@ public class AddMonthlyLimitCommand extends Command {
             + "Parameters: "
             + PREFIX_MONEYFLOW + "LIMIT_MONEY " + "\n"
             + "Example:"
+            + COMMAND_WORD + " "
             + PREFIX_MONEYFLOW + "500" + "\n";
 
     public static final String MESSAGE_HAS_LIMIT = "There is already a monthly limit. \n";

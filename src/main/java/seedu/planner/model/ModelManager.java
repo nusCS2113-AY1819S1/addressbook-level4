@@ -3,13 +3,6 @@ package seedu.planner.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 
-import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_BASIC_EARNED;
-import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_BASIC_SPEND;
-import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_DOUBLE_DATE;
-import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_EXCEED;
-import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_NOT_EXCEED;
-import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_SINGLE_DATE;
-
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -36,6 +29,15 @@ import seedu.planner.model.summary.CategoryStatisticsList;
  * Represents the in-memory model of the financial planner data.
  */
 public class ModelManager extends ComponentManager implements Model {
+    public static final String MESSAGE_SINGLE_DATE = "Date: %s\n";
+    public static final String MESSAGE_DOUBLE_DATE = "Date period: %s -- %s\n";
+    public static final String MESSAGE_BASIC_SPEND = "The limit you have set: %.2f \n"
+            + "Your spend during the limit period: %.2f\n";
+
+    public static final String MESSAGE_BASIC_EARNED = "The limit you have set: %.2f \n"
+            + "Your income during the limit period: %.2f\n";
+    public static final String MESSAGE_EXCEED = "Your spend exceeded the limit !!! \n";
+    public static final String MESSAGE_NOT_EXCEED = "Your spend did not exceed the limit ^o^\n";
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private static final int STARTING_ELEMENT = 0;
 
