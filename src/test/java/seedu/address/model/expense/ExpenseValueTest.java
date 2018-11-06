@@ -37,7 +37,7 @@ public class ExpenseValueTest {
         assertFalse(ExpenseValue.isValidExpenseValue("100000.00")); // number is too large
 
         // valid expense values
-        assertTrue(ExpenseValue.isValidExpenseValue("00000.01")); // can be entered and will be formatted to 0.01
+        assertTrue(ExpenseValue.isValidExpenseValue("00000000000.01")); // can be entered and will be formatted to 0.01
         assertTrue(ExpenseValue.isValidExpenseValue("99999.99")); // largest numbers
     }
 }

@@ -32,6 +32,7 @@ public class ExpenseValue {
      */
     public static boolean isValidExpenseValue(String test) {
         if (test.matches(EXPENSE_VALUE_VALIDATION_REGEX)) {
+            test = eliminateLeadingZero(test);
             if (test.length() > (MAX_EXPENSE_VALUE_DIGIT + 3)) {
                 return false;
             } else {
