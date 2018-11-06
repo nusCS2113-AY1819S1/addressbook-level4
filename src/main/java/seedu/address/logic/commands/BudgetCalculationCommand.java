@@ -30,7 +30,8 @@ public class BudgetCalculationCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_TOTAL_BUDGET + "50000 ";
 
     public static final String MESSAGE_CALCULATE_BUDGET_SUCCESS = "The budgets have been calculated.";
-    public static final String MESSAGE_INVALID_TOTAL_BUDGET = "Please enter a valid total budget!";
+    public static final String MESSAGE_INVALID_TOTAL_BUDGET =
+            "Please enter a valid total budget! Total Budget can only be positive numbers, even zero.";
     public static final String MESSAGE_DUPLICATE_CLUB = "This is a duplicate club";
 
     private final TotalBudget totalBudget;
@@ -50,7 +51,7 @@ public class BudgetCalculationCommand extends Command {
         List<ClubBudgetElements> listOfClubs = model.getFilteredClubsList();
         BudgetCalculationManager budgetCalculationManager = new BudgetCalculationManager();
 
-        if (Integer.parseInt(totalBudget.toString()) <= 0) {
+        if (Integer.parseInt(totalBudget.toString()) < 0) {
             throw new CommandException(MESSAGE_INVALID_TOTAL_BUDGET);
         } else if (budgetCalculationManager.getHaveBudgetsBeenCalculated(model)) {
             return new CommandResult(String.format(MESSAGE_BUDGETS_ALREADY_CALCULATED));
