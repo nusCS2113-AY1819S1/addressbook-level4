@@ -37,6 +37,8 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New product added: %1$s";
     public static final String MESSAGE_DUPLICATE_PRODUCT = "This product already exists in the address book";
+    public static final String MESSAGE_EDIT_DIST_PHONE = "Please edit the distributor number " +
+            "with the default 00000000 before adding this product.";
 
 
     private final Product toAdd;
@@ -63,6 +65,7 @@ public class AddCommand extends Command {
         model.addPerson(toAdd);
 
         if (model.hasDistributor(distToAdd)) {
+            throw new CommandException(MESSAGE_EDIT_DIST_PHONE);
         }
         else {
             model.addDistributor(distToAdd);

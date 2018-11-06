@@ -53,7 +53,8 @@ public class Distributor {
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSameDistributor(seedu.address.model.distributor.Distributor otherDistributor) {
-        if (otherDistributor == this) {
+        if (otherDistributor.getDistName() == this.getDistName()
+                || otherDistributor.getDistPhone() == this.getDistPhone()) {
             return true;
         }
 
@@ -92,11 +93,10 @@ public class Distributor {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Name: ")
-                .append(getDistName())
-                .append(" Phone: ")
+        builder.append(getDistName())
+                .append("\nPhone: ")
                 .append(getDistPhone())
-                .append(" Tags: ");
+                .append("\nTags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }

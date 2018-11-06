@@ -153,13 +153,13 @@ public class User {
         final StringBuilder builder = new StringBuilder();
         builder.append(" Username: ")
                 .append(getUsername())
-                .append(" Password: ")
+                .append("\nPassword: ")
                 .append(getPassword())
+                .append("\nProduct File Path: ")
                 .append(getAddressBookFilePath())
-                .append(" Product File Path: ")
+                .append("\nDistributor Book File Path: ")
                 .append(getDistributorBookFilePath())
-                .append(" Distributor Book File Path: ")
-                .append(" Sales History File Path: ")
+                .append("\nSales History File Path: ")
                 .append(getSalesHistoryFilePath());
 
         return builder.toString();
