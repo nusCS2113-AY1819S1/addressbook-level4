@@ -30,7 +30,7 @@ public class ImportCommandTest {
     private static final Path MISSING_FILE = TEST_DATA_FOLDER.resolve("missing.ics"); //totally missing
     private static final Path TEMP_FILE = TestUtil.getFilePathInSandboxFolder("temp.ics");
 
-    private static final Path TYPICAL_FILE = TEST_DATA_FOLDER.resolve("typical.ics"); //has same data as TYPICAL_TIMETABLE
+    private static final Path TYPICAL_FILE = TEST_DATA_FOLDER.resolve("typical.ics"); //same data as TYPICAL_TIMETABLE
     private static final TimeTable TYPICAL_TIMETABLE = TypicalTimeSlots.getTypicalTimeTable();
 
     @Rule

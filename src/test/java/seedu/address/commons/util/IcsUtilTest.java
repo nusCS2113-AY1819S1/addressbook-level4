@@ -35,7 +35,7 @@ public class IcsUtilTest {
     }
 
     @Test
-    public void readTimeTableFromFile_missingFile_throwsIOException() throws Exception {
+    public void readTimeTableFromFile_missingFile_throwsIoException() throws Exception {
         thrown.expect(IOException.class);
         IcsUtil.getInstance().readTimeTableFromFile(MISSING_FILE);
     }
@@ -62,7 +62,7 @@ public class IcsUtilTest {
     }
 
     @Test
-    public void saveTimeTableToFile_nullTimeTable_throwsIOException() throws Exception {
+    public void saveTimeTableToFile_nullTimeTable_throwsIoException() throws Exception {
         thrown.expect(NullPointerException.class);
         IcsUtil.getInstance().saveTimeTableToFile(null, TEMP_FILE);
     }
