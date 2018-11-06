@@ -43,10 +43,7 @@ public class CalendarPanel extends UiPart<Region> {
         calendar = calendarInfo.getCalendar();
         firstDay = calendarInfo.firstDay - 1;
         setCurrentDate();
-        //String stringFirstDay = Integer.toString(firstDay);
-        //setCalendar(calendar);
-        //calendar = Calendar.getInstance();
-        setCalendar(calendar);
+        setCalendar();
         registerAsAnEventHandler(this);
     }
 
@@ -142,7 +139,7 @@ public class CalendarPanel extends UiPart<Region> {
         }
     }
 
-    private void setCalendar (Calendar calendar) {
+    private void setCalendar () {
         setOverview();
         setDays();
     }
