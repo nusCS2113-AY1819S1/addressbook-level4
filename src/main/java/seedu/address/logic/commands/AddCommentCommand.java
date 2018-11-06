@@ -55,13 +55,17 @@ public class AddCommentCommand extends Command {
         return this.comment;
     }
 
-    public void setComment(String comment) { this.comment = comment; }
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 
     public Index getIndex() {
         return this.index;
     }
 
-    public void setIndex(Index index) { this.index = index; }
+    public void setIndex(Index index) {
+        this.index = index;
+    }
 
     public void setUsername(String username) {
         this.username = username;

@@ -14,7 +14,7 @@ public class Status {
 
     public static final String STATUS_VALIDATION_REGEX = "((\bUPCOMING\b)|(\bONGOING\b)|(\bCOMPLETED\b)|(\bNULL\b))";
 
-    public String currentStatus;
+    public final String currentStatus;
 
     /**
      * Constructs a {@code Status}.
@@ -28,45 +28,33 @@ public class Status {
     }
 
     /**
-     * Constructs a {@code Status}.
-     *
-     * @param datetime A datetime.
-     */
-    /*public Status(DateTime datetime) {
-        requireNonNull(datetime);
-        String status = setStatus(datetime);
-        checkArgument(isValidStatus(status), MESSAGE_STATUS_CONSTRAINTS);
-        currentStatus = status;
-    }*/
-
-    /**
      * Returns true if a given string is a valid status.
      */
     public static boolean isValidStatus(String test) {
-        return ( test.equals("UPCOMING") || test.equals("ONGOING") || test.equals("COMPLETED") || test.equals("NULL") );
+        return (test.equals("UPCOMING") || test.equals("ONGOING") || test.equals("COMPLETED") || test.equals("NULL"));
     }
 
     /**
      * Gets the status of the event based on current date {@code Date()}.
      *
-     * @param datetime Datetime of event.
+     * //@param datetime Datetime of event.
      */
-    public final String setStatus(DateTime datetime) {
+    /*public final String setStatus(DateTime datetime) {
         requireNonNull(datetime);
         Date currentDate = new Date();
         Date eventDate = datetime.dateTime;
         //String currentStatus;
 
         if (eventDate.before(currentDate)) {
-            this.currentStatus = "COMPLETED";
+            currentStatus = "COMPLETED";
         } else if (eventDate.after(currentDate)) {
-            this.currentStatus = "UPCOMING";
+            currentStatus = "UPCOMING";
         } else {
             this.currentStatus = "NULL";
         }
 
         return currentStatus;
-    }
+    }*/
 
     @Override
     public String toString() {
