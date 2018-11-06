@@ -66,7 +66,7 @@ public class DistributeUtil {
 
     /**
      * This method does an exhaustive search in the all person list to find any person with the same nationality
-     * @param key : The nationality to search for in all personlist
+     * @param key : The nationality field to search for in all personlist
      * @param randomAllPersonArrayList : Holds all person data.
      * @return return the Person object when nationality matches.
      */

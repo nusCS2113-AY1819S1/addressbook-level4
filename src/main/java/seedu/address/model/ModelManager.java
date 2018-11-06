@@ -55,6 +55,10 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedAddressBook;
     }
 
+    public VersionedAddressBook getVersionedAddressBook() {
+        return versionedAddressBook;
+    }
+
     /**
      * Raises an event to indicate the model has changed
      */

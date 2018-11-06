@@ -27,11 +27,13 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.CreateGroupCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.VersionedAddressBook;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupLocation;
 import seedu.address.model.group.GroupName;
@@ -40,6 +42,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.Assert;
 import seedu.address.testutil.GroupBuilder;
+import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalPersons;
 
 public class DistributeUtilTest {
@@ -275,21 +278,55 @@ public class DistributeUtilTest {
         //check if model is null
         Group expectedGroup = new Group(new GroupName("TestGroup"), new GroupLocation("UNKNOWN"), new HashSet<>());
         Assert.assertThrows(NullPointerException.class, () -> distUtil.createGroupWithoutCommit(expectedGroup, null));
-        //TODO
+
+        //check if VersionAddressBook updates if createGroupWithoutCommit is ran
+        //it should not update
+        Model actualModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        VersionedAddressBook currentVersion = ((ModelManager) actualModel).getVersionedAddressBook();
+        Group stubGroup = new GroupBuilder().build();
+        distUtil.createGroupWithoutCommit(stubGroup, actualModel);
+        VersionedAddressBook expectedVersion = ((ModelManager) actualModel).getVersionedAddressBook();
+        assertEquals(expectedVersion, currentVersion);
+
+        //add a new group with commit
+        //it should update and fail.
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        currentVersion = ((ModelManager) model).getVersionedAddressBook();
+        VersionedAddressBook copyOfCurrentVersion = new VersionedAddressBook(currentVersion);
+        Group commitGroup = new GroupBuilder().withGroupName("CommitedGroup").build();
+        CreateGroupCommand createGroupCommand = new CreateGroupCommand(commitGroup);
+        createGroupCommand.execute(model, commandHistory);
+        expectedVersion = ((ModelManager) model).getVersionedAddressBook();
+        System.out.println("Current :" + copyOfCurrentVersion.toString());
+        System.out.println("Expected :" + expectedVersion.toString());
+        assertNotEquals(expectedVersion, copyOfCurrentVersion);
+
+        //if undo is ran, the version should be the same.
+        expectedVersion.undo();
+        assertEquals(expectedVersion.toString(), copyOfCurrentVersion.toString());
     }
 
     @Test
-    public void addPersonIntoGroupWithoutCommitTest() {
+    public void addPersonIntoGroupWithoutCommitTest() throws CommandException {
         //check if addGroup is null
         Assert.assertThrows(NullPointerException.class, () -> distUtil.addPersonIntoGroupWithoutCommit(null, model));
 
-        //check if model is null
-        //Group newGroup = distUtil.groupBuilder();
-        //AddGroup expectedGroup = new AddGroup(distUtil.returnGroupIndex(newGroup, model)
-        // , new HashSet<>().add(Index.fromZeroBased(3)));
-        //Assert.assertThrows(NullPointerException.class, () -> distUtil
-        // .addPersonIntoGroupWithoutCommit(expectedGroup, null));
-        //TODO
+        //check if VersionAddressBook updates if addPersonIntoGroupWithoutCommit
+        //It should not update.
+        Model actualModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        CommandHistory commandHistory = new CommandHistory();
+
+        AddressBook addressBook = new AddressBook();
+        VersionedAddressBook actualVersionedAddressBook = new VersionedAddressBook(addressBook);
+        VersionedAddressBook expectedVersionedAddressBook = new VersionedAddressBook(addressBook);
+        Group stubGroup = new GroupBuilder().build();
+        Person stubPerson = new PersonBuilder().build();
+        distUtil.createGroupWithoutCommit(stubGroup, actualModel);
+        distUtil.returnGroupIndex(stubGroup, actualModel);
+
+
+
     }
 
     @Test
