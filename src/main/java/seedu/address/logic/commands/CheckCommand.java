@@ -23,7 +23,6 @@ public class CheckCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Expenditures and tasks on %s listed. \n%s";
 
-    private String information;
     private String theDate;
 
 
@@ -37,6 +36,7 @@ public class CheckCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        String information;
         requireNonNull(model);
         information = model.checkRecords(theDate);
         model.commitAddressBook();
