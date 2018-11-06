@@ -31,12 +31,12 @@ public class GradeSummaryCommandParser implements Parser<GradeSummaryCommand> {
 
         String commandToRun = "";
         String testName = "";
-        if (!argMultimap.getValue(PREFIX_TWENTY_FIVE).isPresent()&&
-                !argMultimap.getValue(PREFIX_SEVENTY_FIVE).isPresent() &&
-                !argMultimap.getValue(PREFIX_MEAN).isPresent() &&
-                !argMultimap.getValue(PREFIX_MEDIAN).isPresent() &&
-                !argMultimap.getValue(PREFIX_HIGHEST).isPresent() &&
-                !argMultimap.getValue(PREFIX_LOWEST).isPresent()) {
+        if (!argMultimap.getValue(PREFIX_TWENTY_FIVE).isPresent()
+                && !argMultimap.getValue(PREFIX_SEVENTY_FIVE).isPresent()
+                && !argMultimap.getValue(PREFIX_MEAN).isPresent()
+                && !argMultimap.getValue(PREFIX_MEDIAN).isPresent()
+                && !argMultimap.getValue(PREFIX_HIGHEST).isPresent()
+                && !argMultimap.getValue(PREFIX_LOWEST).isPresent()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT));
         }

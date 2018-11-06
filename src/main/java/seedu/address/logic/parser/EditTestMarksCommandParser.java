@@ -34,7 +34,7 @@ public class EditTestMarksCommandParser implements Parser<EditTestMarksCommand> 
         String[] nameKeywords = trimmedArgs.split("\\s+");
         List<String> nameKeywordsList =
                 new ArrayList<String>(Arrays.asList(nameKeywords));
-        if(nameKeywordsList.contains("tn/")||nameKeywordsList.contains("tm/")){
+        if (nameKeywordsList.contains("tn/") || nameKeywordsList.contains("tm/")) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTestMarksCommand.MESSAGE_USAGE));
         }

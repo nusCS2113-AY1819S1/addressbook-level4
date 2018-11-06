@@ -11,8 +11,10 @@ import seedu.address.model.grade.Test;
 import seedu.address.model.person.Person;
 
 import static java.util.Objects.requireNonNull;
+
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TEST_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
 
 /**
  * A command to delete certain test from student.
@@ -58,13 +60,15 @@ public class DeleteTestMarksCommand extends Command {
                         updateNeeded = true;
                     }
                 }
-                if (updateNeeded)
-                    anyUpdate = editPersonTests(person,model);
+                if (updateNeeded) {
+                    anyUpdate = editPersonTests(person, model);
+                }
             }
 
-            if (anyUpdate)
+            if (anyUpdate) {
                 return new CommandResult(
                         String.format(MESSAGE_SUCCESSFUL_DELETE_TEST, testName));
+            }
         }
 
         throw new CommandException(

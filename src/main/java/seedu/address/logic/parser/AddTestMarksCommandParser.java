@@ -34,7 +34,7 @@ public class AddTestMarksCommandParser implements Parser<AddTestMarksCommand> {
 
         List<String> nameKeywordsList =
                 new ArrayList<>(Arrays.asList(nameKeywords));
-        if(nameKeywordsList.contains("tn/")||nameKeywordsList.contains("tm/")){
+        if (nameKeywordsList.contains("tn/") || nameKeywordsList.contains("tm/")) {
             throw new ParseException(
                     String.format(MESSAGE_INVI_TEST));
         }
