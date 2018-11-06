@@ -9,8 +9,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.DistributeUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -28,10 +31,10 @@ import seedu.address.model.person.Person;
 public class DistributeAlgorithm {
 
     public static final String MESSAGE_INVALID_SIZE = "Number of Groups should not be more than Number of Persons";
-    public static final String MESSAGE_TO_BE_IMPLEMENTED = "Currently under development. Stay tuned in v.20";
+    public static final String MESSAGE_TO_BE_IMPLEMENTED = "Currently under development. Stay tuned in v2.0";
     public static final String MESSAGE_FLAG_ERROR = "Gender and Nationality flags only accept "
             + "'1' or '0' or \"true\" or \"false\"";
-
+    private static final Logger logger = LogsCenter.getLogger(DistributeAlgorithm.class);
     private DistributeUtil distUtil = new DistributeUtil();
 
     public DistributeAlgorithm(Model model, Distribute distribute) throws CommandException {
@@ -59,14 +62,19 @@ public class DistributeAlgorithm {
         Instant instant = Instant.now();
         distUtil.shuffle(personLinkedList, new Random(instant.getEpochSecond()));
         if (!isGenderFlagSet && !isNationalityFlagSet) {
+            logger.log(Level.INFO, "Normal Distribution will be executed.");
             normalDistribution(numOfGroups, groupArrayList, personLinkedList, groupName);
         } else if (!isGenderFlagSet && isNationalityFlagSet) {
+            logger.log(Level.INFO, "Distribution by Nationality will be executed.");
             nationalityDistribution(numOfGroups, groupArrayList, personLinkedList, groupName);
         } else if (isGenderFlagSet && !isNationalityFlagSet) {
+            logger.log(Level.INFO, "Distribution by Gender will be executed.");
             genderDistribution(numOfGroups, groupArrayList, personLinkedList, groupName);
         } else {
+            logger.log(Level.INFO, "Distribution by Nationality and Gender will be executed.");
             strictDistribution(numOfGroups, groupArrayList, personLinkedList, groupName);
         }
+        logger.log(Level.INFO, "Distribution has been completed.");
     }
 
     /**
@@ -162,6 +170,7 @@ public class DistributeAlgorithm {
     private void strictDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList,
                                     LinkedList<Person> personLinkedList, String groupName)
             throws CommandException {
+        logger.log(Level.WARNING, "Distribution by Nationality and Gender will be implemented in v2.0");
         throw new CommandException(MESSAGE_TO_BE_IMPLEMENTED);
     }
 

@@ -13,9 +13,12 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.AddGroupCommand;
@@ -38,6 +41,7 @@ public class DistributeUtil {
     public static final String MESSAGE_DUPLICATE_GROUP = "There exist another group with the same name.";
     public static final String MESSAGE_INDEX_NEGATIVE = "Index should be positive.";
     public static final String GROUP_LOCATION = "UNKNOWN";
+    private static final Logger logger = LogsCenter.getLogger(DistributeUtil.class);
     private Model model;
     private CommandHistory commandHistory = new CommandHistory();
 
@@ -195,11 +199,13 @@ public class DistributeUtil {
     public String groupNameConcatenation (int index, String groupName, Model model) throws CommandException {
         requireAllNonNull(index, groupName, model);
         if (index < 0) {
+            logger.log(Level.WARNING, "Received a Negative value for Index.");
             throw new CommandException(MESSAGE_INDEX_NEGATIVE);
         }
         index = index + 1;
         groupName = groupName + String.valueOf(index);
         if (doesDuplicateGroupExist(groupName, model)) {
+            logger.log(Level.WARNING, "Another Group Exist in the Management System.");
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
         return groupName;
@@ -328,10 +334,13 @@ public class DistributeUtil {
             createGroupWithoutCommit(newGroup, model);
             Index groupIndex = returnGroupIndex(newGroup, model);
             requireNonNull(groupIndex);
-            System.out.println(groupIndex.getOneBased());
-            System.out.println(toCreateGroupName);
+            logger.log(Level.INFO, "Preparing distribution of Students into Group " + toCreateGroupName
+                    + " with the Index of " + groupIndex.getOneBased());
+            logger.log(Level.INFO, toCreateGroupName + " will contain " + groupArrayList.get(i).size()
+                    + " person.");
             for (int j = 0; j < groupArrayList.get(i).size(); j++) {
-                System.out.println(groupArrayList.get(i).get(j));
+                logger.log(Level.INFO, "Adding Person " + groupArrayList.get(i).get(j) + " into Group "
+                        + toCreateGroupName);
                 for (int k = 0; k < allPerson.size(); k++) {
                     if (allPerson.get(k).equals(groupArrayList.get(i).get(j))) {
                         Set<Index> personIndices = new HashSet<>();
