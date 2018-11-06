@@ -33,8 +33,7 @@ public class EmailRecipientsNextCommand extends EmailRecipientsCommand {
         }
 
         if (isEmpty) {
-            return new CommandResult("ERROR: There are no recipients selected!\n"
-                    + EmailRecipientsCommand.MESSAGE_USAGE);
+            return new CommandResult(NEXT_RECIPIENTS_ERROR_NO_RECIPIENTS + EmailRecipientsCommand.MESSAGE_USAGE);
         } else {
             if (emailUtil.isAreRecipientsCandidates()) {
                 EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());

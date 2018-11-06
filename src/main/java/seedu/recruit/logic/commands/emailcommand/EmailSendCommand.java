@@ -29,6 +29,7 @@ public class EmailSendCommand extends Command {
     public static final String COMMAND_LOGIC_STATE = "EmailSend";
     public static final String EMAIL_SUCCESS = "Successfully sent the email!";
     public static final String EMAIL_FAILURE = "Failed to send the email!";
+    public static final String EMAIL_SEND_SHOWING_PREVIEW_MESSAGE = "Opened preview.\n";
 
     private static ArrayList<Candidate> candidateRecipients;
     private static ArrayList<JobOffer> jobOfferRecipients;
