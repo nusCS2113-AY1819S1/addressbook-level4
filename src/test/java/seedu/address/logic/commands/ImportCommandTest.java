@@ -18,18 +18,12 @@ import seedu.address.testutil.TestUtil;
 import seedu.address.testutil.TypicalTimeSlots;
 
 /**
- * A system test that uses a model stub. Most are testing the result of various paths the user has entered.
+ * A system test that uses a model stub.
  */
 public class ImportCommandTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "ImportCommandTest");
     private static final Path EMPTY_FILE = TEST_DATA_FOLDER.resolve("empty.ics"); //totally blank
-    private static final Path INVALID_FILE_PATH_TOO_LONG = TEST_DATA_FOLDER.resolve(
-            "longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong"
-                    + "longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong"
-                    + "longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglon.ics");
-    //this string is 251 char long; enough to cause the ParseException.
-
     private static final Path NO_DATA_FILE = TEST_DATA_FOLDER.resolve("no_data.ics"); //no calendar data
     private static final Path NO_TT_DATA_FILE = TEST_DATA_FOLDER.resolve("no_timetable_data.ics"); //no timetable data
     private static final Path MISSING_FILE = TEST_DATA_FOLDER.resolve("missing.ics"); //totally missing
@@ -43,22 +37,10 @@ public class ImportCommandTest {
 
     private CommandHistory commandHistory = new CommandHistory();
 
-    //Import tests
     @Test
     public void constructor_nullPath_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         new ImportCommand(null);
-    }
-
-    @Test
-    public void execute_tooLongFile_throwsCommandException() throws Exception {
-        ModelStubImportExportCommand actualModelStub = new ModelStubImportExportCommand();
-
-        Command command = new ImportCommand(INVALID_FILE_PATH_TOO_LONG);
-
-        thrown.expectMessage(String.format(ImportCommand.MESSAGE_IO_ERROR, INVALID_FILE_PATH_TOO_LONG));
-        thrown.expect(CommandException.class);
-        command.execute(actualModelStub, commandHistory);
     }
 
     @Test
@@ -108,7 +90,7 @@ public class ImportCommandTest {
      * Immediately then tests that the imported timetable is identical to the expected timetable.
      */
     @Test
-    public void execute_validFilePath_importSuccessful() throws Exception {
+    public void execute_validFilePath_successful() throws Exception {
         TimeTable expectedTimeTable = VALID_TIMETABLE;
 
         ModelStubImportExportCommand actualModelStub = new ModelStubImportExportCommand();
@@ -120,7 +102,6 @@ public class ImportCommandTest {
         String expectedMessage = String.format(MESSAGE_IMPORT_SUCCESS, VALID_FILE);
         assertEquals(expectedMessage, commandResult.feedbackToUser);
     }
-
 
     /**
      * tests if you can export a typical timetable and then immediate import this timetable
