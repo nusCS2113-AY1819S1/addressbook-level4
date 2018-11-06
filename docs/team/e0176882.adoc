@@ -1,0 +1,54 @@
+= E0176882 - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Student Management System
+
+---
+
+== Overview
+
+Student Management System (SMS) is a desktop application which uses CLI for its interactions. SMS allows university lectures to easily organise and manage their students and classes by allowing the lectures to easily import student lists given by their department. SMS also provides neat features such as distributing students into groups, sending emails to them and assigning test grades, SMS makes being a university lecturer more convenient!
+
+== Summary of contributions
+
+* *Code Contributed* [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=e0176882[E0176882]]
+* *Major enhancement*: added *the ability to send emails.*
+** What it does: allows university lecturers to send email to single student, multiple students or students belonging to a group using an email account that is supported.
+** Justification: This feature offers university lecturers a convenient way to communicate to their students, such as announcements, instructions or anything that they would like to convey without going through the hassle of looking up a particular student as long as the student is already added into the system.
+** Highlights: This enhancements works well with other features that are implemented, such as Groups (allow sending email to group), Distribute Groups (upon groups being formed, send an email to inform the students of their allocated groups) and Test Score (possibly send a warning to students who may require more effort). All these could potentially be done with a single stroke of command!
+** Credits:
+*** [https://www.oracle.com/technetwork/java/javamail/index.html[JavaMail API by Oracle]] for the API to send emails programmatically.
+*** [https://stackoverflow.com/questions/3649014/send-email-using-java[stackoverflow]] reference to understanding how to use JavaMail to send emails.
+
+* *Other contributions*:
+
+** Enhancements to existing features:
+*** Updated the TAG to have colors (https://github.com/CS2113-AY1819S1-T13-4/main/pull/44[#44])
+*** Added StatusBarFooter displays total number of persons in list. (Pull requests https://github.com/CS2113-AY1819S1-T13-4/main/pull/44[#44])
+
+** Community:
+*** Solved an issue faced by team member https://github.com/CS2113-AY1819S1-T13-4/main/issues/52[#52]
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-T09-4/main/issues/130[1], https://github.com/CS2113-AY1819S1-T09-4/main/issues/134[2], https://github.com/CS2113-AY1819S1-T09-4/main/issues/142[3], https://github.com/CS2113-AY1819S1-T09-4/main/issues/145[4], https://github.com/CS2113-AY1819S1-T09-4/main/issues/139[5], https://github.com/CS2113-AY1819S1-T09-4/main/issues/128[6])
+** Tools:
+*** Integrated a third party library (JavaMail) to the project (https://github.com/CS2113-AY1819S1-T13-4/main/pull/13[#13])
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=login]
+
+include::../UserGuide.adoc[tag=sendmail]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=sendmail]

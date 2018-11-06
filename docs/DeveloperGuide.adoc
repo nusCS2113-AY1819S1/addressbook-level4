@@ -661,7 +661,7 @@ Coming in v1.4
 
 // end::distribute[]
 
-// tag::sendemail[]
+// tag::sendmail[]
 === Send Email feature
 ==== Current Implementation
 The send email feature is facilitated by `JavaMail` API. It provides a platform-independent and protocol-independent framework to build mail and messaging applications.
