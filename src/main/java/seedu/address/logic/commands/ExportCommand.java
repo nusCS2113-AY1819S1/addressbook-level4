@@ -18,7 +18,6 @@ public class ExportCommand extends Command {
     public static final String COMMAND_WORD = "export";
     public static final String COMMAND_PARAMETERS = "Parameters: FILENAME (must end with .xml)\n";
     public static final String COMMAND_EXAMPLE = "Example: " + COMMAND_WORD + " export.xml";
-  
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Export the persons and todos listed "
             + "in the address book.\n"
             + COMMAND_PARAMETERS
