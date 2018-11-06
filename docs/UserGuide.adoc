@@ -80,6 +80,7 @@ Examples:
 
 * `signup u/Gerald Chua p/password12345` +
 Creates account with the username Gerald Chua +
+
 * `signup u/James Yaputra p/drowssap12345` +
 Creates account with the username James Yaputra
 |===
