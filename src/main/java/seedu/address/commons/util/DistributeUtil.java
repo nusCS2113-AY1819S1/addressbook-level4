@@ -37,7 +37,6 @@ public class DistributeUtil {
 
     public static final String MESSAGE_DUPLICATE_GROUP = "There exist another group with the same name.";
     public static final String MESSAGE_INDEX_NEGATIVE = "Index should be positive.";
-    public static final String MESSAGE_MISSING_GROUP = "Group is not found.";
     public static final String GROUP_LOCATION = "UNKNOWN";
     private Model model;
     private CommandHistory commandHistory = new CommandHistory();
@@ -285,7 +284,7 @@ public class DistributeUtil {
                 return Index.fromZeroBased(i);
             }
         }
-        return Index.fromZeroBased(0);
+        return null;
     }
 
 
@@ -304,9 +303,7 @@ public class DistributeUtil {
             Group newGroup = groupBuilder(toCreateGroupName);
             createGroupWithoutCommit(newGroup, model);
             Index groupIndex = returnGroupIndex(newGroup, model);
-            if (groupIndex.getOneBased() == 0) {
-                throw new CommandException(MESSAGE_MISSING_GROUP);
-            }
+            requireNonNull(groupIndex);
             System.out.println(groupIndex.getOneBased());
             System.out.println(toCreateGroupName);
             for (int j = 0; j < groupArrayList.get(i).size(); j++) {

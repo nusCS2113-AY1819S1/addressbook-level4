@@ -34,14 +34,14 @@ public class DistributeAlgorithm {
 
     private DistributeUtil distUtil = new DistributeUtil();
 
-    public DistributeAlgorithm(Model model, Distribute dist) throws CommandException {
-        requireNonNull(dist);
+    public DistributeAlgorithm(Model model, Distribute distribute) throws CommandException {
+        requireNonNull(distribute);
         distUtil.setModel(model);
 
-        int numOfGroups = dist.getIndex();
-        String groupName = dist.getGroupName().toString();
-        boolean genderFlag = dist.getGender();
-        boolean nationalityFlag = dist.getNationality();
+        int numOfGroups = distribute.getIndex();
+        String groupName = distribute.getGroupName().toString();
+        boolean genderFlag = distribute.getGender();
+        boolean nationalityFlag = distribute.getNationality();
         ArrayList<ArrayList<Person>> groupArrayList = new ArrayList<>();
 
         // Get all person data via ObservableList
@@ -53,14 +53,11 @@ public class DistributeAlgorithm {
             throw new CommandException(MESSAGE_INVALID_SIZE);
         }
         distUtil.doesGroupNameExist(numOfGroups, groupName, model);
-
         //Convert ObservableList into ArrayList to use Randomizer via Collections
         LinkedList<Person> personLinkedList = new LinkedList<>(allPerson);
-
         //Randomizer function
         Instant instant = Instant.now();
         distUtil.shuffle(personLinkedList, new Random(instant.getEpochSecond()));
-
         if (!genderFlag && !nationalityFlag) {
             normalDistribution(numOfGroups, groupArrayList, personLinkedList, groupName);
         } else if (!genderFlag && nationalityFlag) {
@@ -160,6 +157,7 @@ public class DistributeAlgorithm {
     /**
      * This Method distribute all students into n number of groups
      * Distribution will try to include balanced gender and include multi-national students.
+     * To be completed in v2.0
      */
     private void strictDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList,
                                     LinkedList<Person> personLinkedList, String groupName)
