@@ -1,27 +1,36 @@
-= John Doe - Project Portfolio
+= Tsu Wei Quan - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: AddressBook - Level 4
+== PROJECT: Student Management System
 
 ---
 
 == Overview
 
-AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+*Student Management System (SMS)* is a desktop application which uses CLI for its interactions.
+SMS allows university lectures to easily organise and manage their students and classes by allowing the lectures to easily import student lists given by their department.
+SMS also provides neat features such as distributing students into groups, sending emails to them and assigning test grades.
+SMS makes being a university lecturer more convenient!
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+* *Major enhancement*: added *the ability to distribute all students into groups*
+** What it does: This feature automatically create _n_ number of groups with balanced number of students in each group from the Management System. The user is able to distribute all students into groups with balanced gender or with balanced nationality.
+** Justification: This feature proves to be useful when a lecturer wish to form students into _n_ groups for any project wor. The user can also select the condition of having balanced gender in every group if he wish to do so.
+This feature was inspired during the group formation in CS2113 module where the lecturer wish to have a balanced number of a gender in every group.
+** Highlights:
+This enhancement itself is a new command and it does not affect existing commands. It also requires the features of creating group and adding students into group to be complete. Hence this require in-depth analysis of
+group command features to allow Distribute command to be completed. The implementation started off easy as I added the nationality and gender fields into the person profile. However, the most challenging part was creating the algorithm for
+the distribution process. In order to make it modular and reduce duplicate code, much time was utilized in planning and designing the algorithm.
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+** Credits: 3rd Party libraries were not used in this implementation. However, I have inferred a snippet of code provided on Stack Overflow.
+The code that was adapted from Stack Overflow was from [https://stackoverflow.com/a/22132422/3818748[Sort a Map<Key, Value> by values]]. The code was used int `DistributeUtil.java` file,
+in the `numberOfDifferentNationality` method.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Minor enhancement*: Added the Nationality and Gender Field into Person Object, Fixed Undo/Redo feature for Distribute Command.
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=tsuweiquan[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
 * *Other contributions*:
 

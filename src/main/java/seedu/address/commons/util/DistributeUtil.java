@@ -94,7 +94,7 @@ public class DistributeUtil {
         return allPerson;
     }
 
-
+    //Solution below adapted from https://stackoverflow.com/a/22132422/3818748
     /**
      * This function takes in the list of all person and calculate the total number of different nationalities.
      * Returns a integer value which represent the number of different nationalities
