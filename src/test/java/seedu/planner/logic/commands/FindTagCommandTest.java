@@ -3,7 +3,6 @@ package seedu.planner.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.planner.commons.core.Messages.MESSAGE_RECORDS_LISTED_OVERVIEW;
 import static seedu.planner.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.planner.logic.commands.FindTagCommand.MESSAGE_SUCCESS;
 import static seedu.planner.testutil.TypicalRecords.CAIFAN;
