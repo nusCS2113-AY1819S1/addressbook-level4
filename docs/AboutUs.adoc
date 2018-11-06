@@ -44,7 +44,7 @@ Responsibilities: Development of features and ensuring good quality of applicati
 
 === Tsu Wei Quan
 image::tsuweiquan.png[width="150", align="left"]
-{empty}[https://github.com/Tsuweiquan[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/Tsuweiquan[github]] [<<tsuweiquan#, portfolio>>]
 
 Role: Developer + Integration +
 Responsibilities: Development of features, maintainance of github site and other administrative duties
