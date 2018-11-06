@@ -16,6 +16,7 @@ import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.CompanyBook;
 import seedu.recruit.model.ReadOnlyCompanyBook;
+import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.testutil.CompanyBuilder;
 
@@ -28,6 +29,8 @@ public class AddCompanyCommandTest {
     public ExpectedException thrown = ExpectedException.none();
 
     private CommandHistory commandHistory = new CommandHistory();
+    private UserPrefs userPrefs = new UserPrefs();
+
 
     @Test
     public void constructor_nullCompany_throwsNullPointerException() {
@@ -40,7 +43,7 @@ public class AddCompanyCommandTest {
         ModelStubAcceptingCompanyAdded modelStub = new ModelStubAcceptingCompanyAdded();
         Company validCompany = new CompanyBuilder().build();
 
-        CommandResult commandResult = new AddCompanyCommand(validCompany).execute(modelStub, commandHistory);
+        CommandResult commandResult = new AddCompanyCommand(validCompany).execute(modelStub, commandHistory, userPrefs);
 
         assertEquals(String.format(AddCompanyCommand.MESSAGE_SUCCESS, validCompany), commandResult.feedbackToUser);
         assertEquals(Arrays.asList(validCompany), modelStub.companiesAdded);
@@ -55,7 +58,7 @@ public class AddCompanyCommandTest {
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddCompanyCommand.MESSAGE_DUPLICATE_COMPANY);
-        addCommand.execute(modelStub, commandHistory);
+        addCommand.execute(modelStub, commandHistory, userPrefs);
     }
 
     @Test

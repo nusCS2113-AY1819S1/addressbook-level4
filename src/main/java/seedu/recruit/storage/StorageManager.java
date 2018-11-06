@@ -1,5 +1,6 @@
 package seedu.recruit.storage;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -12,6 +13,7 @@ import seedu.recruit.commons.core.LogsCenter;
 import seedu.recruit.commons.events.model.CandidateBookChangedEvent;
 import seedu.recruit.commons.events.model.CompanyBookChangedEvent;
 import seedu.recruit.commons.events.storage.DataSavingExceptionEvent;
+import seedu.recruit.commons.events.storage.UserPrefsChangedEvent;
 import seedu.recruit.commons.exceptions.DataConversionException;
 import seedu.recruit.model.ReadOnlyCandidateBook;
 import seedu.recruit.model.ReadOnlyCompanyBook;
@@ -36,7 +38,31 @@ public class StorageManager extends ComponentManager implements Storage {
         this.userPrefsStorage = userPrefsStorage;
     }
 
-    // ================ UserPrefs methods ==============================
+    // ============================= File Permission methods ============================= //
+
+    @Override
+    public void initialiseFilePermissions() {
+        File userPrefFile = new File(getUserPrefsFilePath().toString());
+        File candidateBookFile = new File(getCandidateBookFilePath().toString());
+        File companyBookFile = new File(getCompanyBookFilePath().toString());
+
+        userPrefFile.setWritable(true);
+        candidateBookFile.setWritable(true);
+        companyBookFile.setWritable(true);
+    }
+
+    @Override
+    public void removeFilePermissions() {
+        File userPrefFile = new File(getUserPrefsFilePath().toString());
+        File candidateBookFile = new File(getCandidateBookFilePath().toString());
+        File companyBookFile = new File(getCompanyBookFilePath().toString());
+
+        userPrefFile.setReadOnly();
+        candidateBookFile.setReadOnly();
+        companyBookFile.setReadOnly();
+    }
+
+    // ============================= UserPrefs methods ============================= //
 
     @Override
     public Path getUserPrefsFilePath() {
@@ -51,6 +77,17 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     public void saveUserPrefs(UserPrefs userPrefs) throws IOException {
         userPrefsStorage.saveUserPrefs(userPrefs);
+    }
+
+    @Subscribe
+    public void handleUserPrefsChangedEvent(UserPrefsChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event,
+                "User preferences changed, saving to file"));
+        try {
+            saveUserPrefs(event.data);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
     }
 
 

@@ -15,6 +15,7 @@ import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowUpdatedCompanyJobListRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.joboffer.JobOfferContainsKeywordsPredicate;
 
 /**
@@ -43,7 +44,7 @@ public class FindJobOfferCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         requireNonNull(model);
         model.updateFilteredCompanyJobList(predicate);
         EventsCenter.getInstance().post(new ShowUpdatedCompanyJobListRequestEvent(

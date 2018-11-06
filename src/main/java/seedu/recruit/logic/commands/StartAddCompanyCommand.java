@@ -8,6 +8,7 @@ import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 
 /**
  *  Starts the add company interface
@@ -24,11 +25,11 @@ public class StartAddCompanyCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws CommandException {
         requireNonNull(model);
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
 
-        LogicManager.setLogicState("Add Company Interface");
+        LogicManager.setLogicState(AddCompanyCommand.COMMAND_WORD);
         return new CommandResult(AddCompanyCommand.MESSAGE_USAGE);
     }
 

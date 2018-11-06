@@ -16,6 +16,8 @@ public class UserPrefs {
     private final EmailSettings emailSettings = new EmailSettings();
     private Path candidateBookFilePath = Paths.get("data" , "candidatebook.xml");
     private Path companyBookFilePath = Paths.get("data" , "companybook.xml");
+    private String hashedPassword = null;
+
 
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
@@ -51,6 +53,14 @@ public class UserPrefs {
 
     public void setCompanyBookFilePath(Path companyBookFilePath) {
         this.companyBookFilePath = companyBookFilePath;
+    }
+
+    public String getHashedPassword() {
+        return hashedPassword;
+    }
+
+    public void setHashedPassword(String hashedPassword) {
+        this.hashedPassword = hashedPassword;
     }
 
     @Override

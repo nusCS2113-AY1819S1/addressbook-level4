@@ -7,6 +7,7 @@ import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.
@@ -23,7 +24,7 @@ public abstract class Command {
      * @throws IOException Something to do with the email command
      * @throws GeneralSecurityException Something to do with email command
      */
-    public abstract CommandResult execute(Model model, CommandHistory history)
+    public abstract CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs)
             throws CommandException, IOException, GeneralSecurityException, ParseException;
 
 }

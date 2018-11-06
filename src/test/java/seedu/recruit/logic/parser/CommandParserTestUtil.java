@@ -14,11 +14,14 @@ import seedu.recruit.logic.commands.SelectCompanyCommand;
 import seedu.recruit.logic.commands.SelectJobCommand;
 import seedu.recruit.logic.commands.ShortlistCandidateCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
+import seedu.recruit.model.UserPrefs;
 
 /**
  * Contains helper methods for testing command parsers.
  */
 public class CommandParserTestUtil {
+
+    private static UserPrefs userPrefs = new UserPrefs();
 
     /**
      * Asserts that the parsing of {@code userInput} by {@code parser} is successful and the command created
@@ -163,7 +166,7 @@ public class CommandParserTestUtil {
             EmailUtil emailUtil, String expectedMessage) {
         try {
             parser.parseCommand(DeleteShortlistedCandidateInitializationCommand.COMMAND_WORD + " " + userInput,
-                    state, emailUtil);
+                    state, emailUtil, userPrefs);
             throw new AssertionError("The expected ParseException was not thrown.");
         } catch (ParseException pe) {
             assertEquals(expectedMessage, pe.getMessage());
@@ -181,7 +184,7 @@ public class CommandParserTestUtil {
             EmailUtil emailUtil, String expectedMessage) {
         try {
             parser.parseCommand(ListCandidateCommand.COMMAND_WORD + " " + userInput,
-                    state, emailUtil);
+                    state, emailUtil, userPrefs);
             throw new AssertionError("The expected ParseException was not thrown.");
         } catch (ParseException pe) {
             assertEquals(expectedMessage, pe.getMessage());
@@ -197,7 +200,7 @@ public class CommandParserTestUtil {
             EmailUtil emailUtil, String expectedMessage) {
         try {
             parser.parseCommand(ListCompanyCommand.COMMAND_WORD + " " + userInput,
-                    state, emailUtil);
+                    state, emailUtil, userPrefs);
             throw new AssertionError("The expected ParseException was not thrown.");
         } catch (ParseException pe) {
             assertEquals(expectedMessage, pe.getMessage());
@@ -215,7 +218,7 @@ public class CommandParserTestUtil {
             EmailUtil emailUtil, String expectedMessage) {
         try {
             parser.parseCommand(ClearCandidateBookCommand.COMMAND_WORD + " " + userInput,
-                    state, emailUtil);
+                    state, emailUtil, userPrefs);
             throw new AssertionError("The expected ParseException was not thrown.");
         } catch (ParseException pe) {
             assertEquals(expectedMessage, pe.getMessage());

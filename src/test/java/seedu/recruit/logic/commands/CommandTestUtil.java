@@ -32,6 +32,7 @@ import seedu.recruit.model.CompanyBook;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.ReadOnlyCandidateBook;
 import seedu.recruit.model.ReadOnlyCompanyBook;
+import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
@@ -122,6 +123,9 @@ public class CommandTestUtil {
     public static final EditCompanyCommand.EditCompanyDescriptor DESC_ALFA;
     public static final EditCompanyCommand.EditCompanyDescriptor DESC_BMW;
 
+    private static UserPrefs userPrefs = new UserPrefs();
+
+
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -146,7 +150,7 @@ public class CommandTestUtil {
             String expectedMessage, Model expectedModel) {
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
         try {
-            CommandResult result = command.execute(actualModel, actualCommandHistory);
+            CommandResult result = command.execute(actualModel, actualCommandHistory, userPrefs);
             assertEquals(expectedMessage, result.feedbackToUser);
             assertEquals(expectedModel, actualModel);
             assertEquals(expectedCommandHistory, actualCommandHistory);
@@ -174,7 +178,7 @@ public class CommandTestUtil {
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
 
         try {
-            command.execute(actualModel, actualCommandHistory);
+            command.execute(actualModel, actualCommandHistory, userPrefs);
             throw new AssertionError("The expected CommandException was not thrown.");
         } catch (IOException | GeneralSecurityException | CommandException | ParseException e) {
             assertEquals(expectedMessage, e.getMessage());
