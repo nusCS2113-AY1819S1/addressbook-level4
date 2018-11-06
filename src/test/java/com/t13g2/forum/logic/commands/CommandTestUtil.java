@@ -2,6 +2,8 @@ package com.t13g2.forum.logic.commands;
 
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_MODULE_TITLE;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_NAME;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_PHONE;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_TAG;
@@ -35,6 +37,22 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+
+    public static final String VALID_MODULE_CODE_MA1508E = "MA1508E";
+    public static final String VALID_MODULE_TITLE_MA1508E = "Linear Algebra for Engineering";
+    public static final String VALID_MODULE_CODE_GET1020 = "GET1020";
+    public static final String VALID_MODULE_TITLE_GET1020 = "Darwin and Evolution";
+    public static final String VALID_MODULE_CODE_CS1231 = "CS1231";
+    public static final String VALID_MODULE_TITLE_CS1231 = "Discrete Math";
+
+    public static final String MODULE_CODE_DESC_MA1508E = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_MA1508E;
+    public static final String MODULE_TITLE_DESC_MA1508E = " " + PREFIX_MODULE_TITLE + VALID_MODULE_TITLE_MA1508E;
+    public static final String MODULE_CODE_DESC_GET1020 = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_GET1020;
+    public static final String MODULE_TITLE_DESC_GET1020 = " " + PREFIX_MODULE_TITLE + VALID_MODULE_TITLE_GET1020;
+    public static final String MODULE_CODE_DESC_CS1231 = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_CS1231;
+    public static final String MODULE_TITLE_DESC_CS1231 = " " + PREFIX_MODULE_TITLE + VALID_MODULE_TITLE_CS1231;
+    public static final String INVALID_MODULE_CODE_DESC = " " + PREFIX_MODULE_CODE + "A1508";
+    public static final String INVALID_MODULE_TITLE_DESC = " " + PREFIX_MODULE_TITLE + "";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
