@@ -74,7 +74,7 @@ public class DeleteTestMarksCommandTest {
 
         // same values -> returns true
         DeleteTestMarksCommand deleteTestMarksCommandTest1Copy = new DeleteTestMarksCommand("Test1");
-        assertTrue(deleteTestMarksCommandTest1Copy.equals(deleteTestMarksCommandTest1));
+        assertTrue(deleteTestMarksCommandTest1.equals(deleteTestMarksCommandTest1Copy));
 
         // different types -> returns false
         assertFalse(deleteTestMarksCommandTest1.equals(1));

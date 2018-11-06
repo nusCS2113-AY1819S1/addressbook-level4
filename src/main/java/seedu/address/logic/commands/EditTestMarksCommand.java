@@ -46,11 +46,22 @@ public class EditTestMarksCommand extends Command {
 
     public EditTestMarksCommand(NameContainsKeywordsPredicate predicate, String testName,
                                 String testMarks, String testGrade, List<String> nameList) {
+        requireNonNull(testMarks);
+        requireNonNull(testName);
+        requireNonNull(predicate);
+        requireNonNull(nameList);
+
         this.predicate = predicate;
         this.testName = testName;
         this.testMarks = testMarks;
         this.testGrade = testGrade;
         this.nameList = nameList;
+    }
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof EditTestMarksCommand // instanceof handles nulls
+                && predicate.equals(((EditTestMarksCommand) other).predicate)); // state check
     }
 
     @Override

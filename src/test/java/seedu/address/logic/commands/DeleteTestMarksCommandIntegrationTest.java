@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TEST_MARK_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TEST_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.EditCommand.createEditedPerson;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
@@ -38,43 +39,6 @@ public class DeleteTestMarksCommandIntegrationTest {
         Set<seedu.address.model.grade.Test> testList = new HashSet<>();
         testList.add(VALID_TEST_AMY);
         descriptor.setTests(testList);
-        seedu.address.model.grade.Test testName = new descriptor.getTests(). ;
-
-        DeleteTestMarksCommand deleteTestMarksCommand = new DeleteTestMarksCommand();
-
-        String expectedMessage = String.format(Messages.MESSAGE_ADDED_TEST_LIST, editedPerson);
-        editedPerson = EditCommand.createEditedPerson(editedPerson, descriptor);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.updatePerson(model.getFilteredPersonList().get(0), editedPerson);
-        expectedModel.commitAddressBook();
-
-        assertCommandSuccess(deleteTestMarksCommand, model, commandHistory, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_duplicatePersonFilteredList_failure() {
-        List<String> nameKeywordsList = new ArrayList<>();
-        nameKeywordsList.add("Alice");
-        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
-                new NameContainsKeywordsPredicate(nameKeywordsList);
-
-        AddTestMarksCommand addTestMarksCommand = new AddTestMarksCommand(nameContainsKeywordsPredicate,
-                VALID_TEST_NAME_AMY, VALID_TEST_MARK_AMY, nameKeywordsList);
-        Person newPerson = new PersonBuilder().withName("Alice Yang").build();
-        model.addPerson(newPerson);
-        assertCommandFailure(addTestMarksCommand, model, commandHistory,
-                AddTestMarksCommand.MESSAGE_PERSON_DUPLICATE_FOUND);
-    }
-
-    @Test
-    public void execute_duplicateTest_failure() {
-        Person editedPerson = new PersonBuilder().withTags(VALID_TAG_FRIENDS)
-                .withPhone("94351253").withEmail("alice@example.com").build();
-        EditCommand.EditPersonDescriptor descriptor =
-                new EditCommand.EditPersonDescriptor();
-        Set<seedu.address.model.grade.Test> testList = new HashSet<>();
-        testList.add(VALID_TEST_AMY);
-        descriptor.setTests(testList);
         String[] nameKeywords = editedPerson.getName().fullName.split("\\s+");
         List<String> nameKeywordsList =
                 new ArrayList<>(Arrays.asList(nameKeywords));
@@ -85,32 +49,28 @@ public class DeleteTestMarksCommandIntegrationTest {
                 VALID_TEST_NAME_AMY, VALID_TEST_MARK_AMY, nameKeywordsList);
 
         String expectedMessage = String.format(Messages.MESSAGE_ADDED_TEST_LIST, editedPerson);
-        editedPerson = EditCommand.createEditedPerson(editedPerson, descriptor);
+        editedPerson = createEditedPerson(editedPerson, descriptor);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updatePerson(model.getFilteredPersonList().get(0), editedPerson);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(addTestMarksCommand, model, commandHistory, expectedMessage, expectedModel);
 
-        addTestMarksCommand = new AddTestMarksCommand(nameContainsKeywordsPredicate,
-                VALID_TEST_NAME_AMY, VALID_TEST_MARK_AMY, nameKeywordsList);
-        assertCommandFailure(addTestMarksCommand, model, commandHistory,
-                AddTestMarksCommand.MESSAGE_DUPLICATE_TEST);
+        descriptor = new EditCommand.EditPersonDescriptor();
+        testList = new HashSet<>();
+        testList.add(VALID_TEST_AMY);
+        descriptor.setTests(testList);
 
-    }
+        DeleteTestMarksCommand deleteTestMarksCommand = new DeleteTestMarksCommand(VALID_TEST_NAME_AMY);
+        expectedMessage = String.format(DeleteTestMarksCommand.MESSAGE_SUCCESSFUL_DELETE_TEST, VALID_TEST_NAME_AMY);
+        editedPerson = createEditedPerson(editedPerson, descriptor);
+        Model expectedModelDelete = expectedModel;
+        expectedModelDelete.updatePerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModelDelete.commitAddressBook();
 
-    @Test
-    public void execute_personNotFound_failure() {
-        List<String> nameKeywordsList =
-                new ArrayList<>();
-        nameKeywordsList.add("Test");
-        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
-                new NameContainsKeywordsPredicate(nameKeywordsList);
-        AddTestMarksCommand addTestMarksCommand =
-                new AddTestMarksCommand(nameContainsKeywordsPredicate,
-                        VALID_TEST_NAME_AMY, VALID_TEST_MARK_AMY, nameKeywordsList);
-        assertCommandFailure(addTestMarksCommand, model, commandHistory,
-                AddTestMarksCommand.MESSAGE_PERSONNAME_NOT_FOUND);
+
+        assertCommandSuccess(deleteTestMarksCommand, expectedModel, commandHistory, expectedMessage, expectedModelDelete);
+
     }
 
 }

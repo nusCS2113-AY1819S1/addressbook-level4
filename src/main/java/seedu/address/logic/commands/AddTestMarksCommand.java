@@ -47,11 +47,15 @@ public class AddTestMarksCommand extends Command {
     private final String testName;
     private final String testMarks;
     private final List<String> nameList;
-    private final EditCommand.EditPersonDescriptor editPersonDescriptor = null;
+
 
     public AddTestMarksCommand(NameContainsKeywordsPredicate predicate,
                                String testName, String testMarks, List<String> nameList) {
-        requireNonNull(testMarks, testName);
+        requireNonNull(testMarks);
+        requireNonNull(testName);
+        requireNonNull(predicate);
+        requireNonNull(nameList);
+
         this.predicate = predicate;
         this.testName = testName;
         this.testMarks = testMarks;
@@ -91,6 +95,7 @@ public class AddTestMarksCommand extends Command {
                 if (!checked && duplicate) {
                     model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
                     throw new CommandException(MESSAGE_PERSON_DUPLICATE_FOUND);
+
                 } else if (checked && !duplicate) {
                     model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
                     throw new CommandException(MESSAGE_PERSONNAME_NOT_FOUND);

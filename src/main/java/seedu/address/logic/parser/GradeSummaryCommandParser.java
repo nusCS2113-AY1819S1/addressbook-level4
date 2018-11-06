@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HIGHEST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOWEST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEAN;
@@ -30,6 +31,15 @@ public class GradeSummaryCommandParser implements Parser<GradeSummaryCommand> {
 
         String commandToRun = "";
         String testName = "";
+        if (!argMultimap.getValue(PREFIX_TWENTY_FIVE).isPresent()&&
+                !argMultimap.getValue(PREFIX_SEVENTY_FIVE).isPresent() &&
+                !argMultimap.getValue(PREFIX_MEAN).isPresent() &&
+                !argMultimap.getValue(PREFIX_MEDIAN).isPresent() &&
+                !argMultimap.getValue(PREFIX_HIGHEST).isPresent() &&
+                !argMultimap.getValue(PREFIX_LOWEST).isPresent()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT));
+        }
 
         if (argMultimap.getValue(PREFIX_TWENTY_FIVE).isPresent()) {
             commandToRun = "TTF";

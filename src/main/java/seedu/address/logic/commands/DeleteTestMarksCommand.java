@@ -68,6 +68,7 @@ public class DeleteTestMarksCommand extends Command {
         }
 
         throw new CommandException(
+
                 String.format(MESSAGE_NOT_FOUND_TEST, testName));
     }
     /**
@@ -93,4 +94,11 @@ public class DeleteTestMarksCommand extends Command {
         return true;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DeleteTestMarksCommand // instanceof handles nulls
+                && testName.equals(((DeleteTestMarksCommand) other).testName)); // state check
     }
+
+}
