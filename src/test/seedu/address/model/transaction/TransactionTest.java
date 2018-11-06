@@ -1,28 +1,26 @@
-package model.transaction;
+package seedu.address.model.transaction;
 
-import static logic.CommandTestUtil.VALID_DRINK_QUANTITY;
-import static logic.CommandTestUtil.VALID_TRANSACTION_AMOUNT_MONEY;
-import static logic.CommandTestUtil.VALID_TRANSACTION_QUANTITY;
-import static model.transaction.testutil.TypicalTransactions.SALE_COKE_1;
-import static model.transaction.testutil.TypicalTransactions.SALE_COKE_2;
-import static model.transaction.testutil.TypicalTransactions.SALE_PEPSI;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static seedu.address.model.transaction.TransactionType.PURCHASE;
 import static seedu.address.model.transaction.TransactionType.SALE;
-import static testutil.Assert.assertThrows;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.logic.commands.CommandTestUtil.VALID_DRINK_QUANTITY;
+import static seedu.address.testutil.logic.commands.CommandTestUtil.VALID_TRANSACTION_AMOUNT_MONEY;
+import static seedu.address.testutil.logic.commands.CommandTestUtil.VALID_TRANSACTION_QUANTITY;
+import static seedu.address.testutil.transaction.TypicalTransactions.SALE_COKE_1;
+import static seedu.address.testutil.transaction.TypicalTransactions.SALE_COKE_2;
+import static seedu.address.testutil.transaction.TypicalTransactions.SALE_PEPSI;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import model.testutil.DrinkBuilder;
-import model.transaction.testutil.TransactionBuilder;
-
 import seedu.address.model.drink.Drink;
 import seedu.address.model.drink.Price;
 import seedu.address.model.drink.Quantity;
-import seedu.address.model.transaction.Transaction;
+import seedu.address.testutil.drinks.DrinkBuilder;
+import seedu.address.testutil.transaction.TransactionBuilder;
 
 public class TransactionTest {
     @Rule

@@ -1,4 +1,4 @@
-package model.testutil;
+package seedu.address.testutil.batch;
 
 import java.util.ArrayList;
 import java.util.Arrays;

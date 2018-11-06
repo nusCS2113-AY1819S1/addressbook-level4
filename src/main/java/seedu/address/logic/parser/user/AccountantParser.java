@@ -1,3 +1,4 @@
+//@@author liu-tianhang
 package seedu.address.logic.parser.user;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -10,8 +11,13 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.accountant.AnalyseCostsCommand;
+import seedu.address.logic.commands.accountant.AnalyseProfitCommand;
+import seedu.address.logic.commands.accountant.AnalyseRevenueCommand;
 import seedu.address.logic.commands.user.ChangePasswordCommand;
 import seedu.address.logic.commands.user.LogoutCommand;
+import seedu.address.logic.parser.accountant.AnalyseCostsCommandParser;
+import seedu.address.logic.parser.accountant.AnalyseProfitCommandParser;
+import seedu.address.logic.parser.accountant.AnalyseRevenueCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -47,8 +53,13 @@ public class AccountantParser {
         //===========accountant only command=============//
 
         case AnalyseCostsCommand.COMMAND_WORD:
-            return new AnalyseCostsCommand();
+            return new AnalyseCostsCommandParser ().parse (arguments);
 
+        case AnalyseProfitCommand.COMMAND_WORD:
+            return new AnalyseProfitCommandParser ().parse (arguments);
+
+        case AnalyseRevenueCommand.COMMAND_WORD:
+            return new AnalyseRevenueCommandParser ().parse (arguments);
         //=======general command=================//
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

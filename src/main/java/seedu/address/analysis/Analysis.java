@@ -6,11 +6,11 @@ import seedu.address.model.drink.Price;
  * APIs for AnalysisManager (analyses of profit, revenue, cost, quantity sold)
  */
 public interface Analysis {
-    public Price analyseProfit();
+    Price analyseProfit(AnalysisPeriodType period);
 
-    public Price analyseCost();
+    Price analyseCost(AnalysisPeriodType period);
 
-    public Price analyseRevenue();
+    Price analyseRevenue(AnalysisPeriodType period);
 
     // public Stock analyseQuantitiesSold();
 

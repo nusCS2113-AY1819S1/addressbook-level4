@@ -123,7 +123,7 @@ public class InventoryListInitializer {
                     new TransactionList());
         }
 
-        //TODO: need change InventoryList () to storage when storage is done
+        //TODO: need change inventoryList () to storage when storage is done
         return new ModelManager (new InventoryList () , userPrefs, loginInfoManager, new TransactionList());
     }
 

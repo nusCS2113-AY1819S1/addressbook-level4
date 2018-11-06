@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.manager;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -7,6 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DRINK_DEFAULT_SELLING_
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DRINK_NAME;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.drink.Drink;
@@ -43,14 +45,16 @@ public class AddDrinkCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        assert model instanceof ManagerModel;
-        requireNonNull(model);
 
-        if (model.hasDrink(toAdd)) {
+        requireNonNull(model);
+        assert model instanceof ManagerModel;
+        ManagerModel managerModel = (ManagerModel) model;
+
+        if (managerModel.hasDrink(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_DRINK);
         }
 
-        model.addDrink(toAdd);
+        managerModel.addDrink(toAdd);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 toAdd.getName().toString(), toAdd.getRetailPrice().toString()));

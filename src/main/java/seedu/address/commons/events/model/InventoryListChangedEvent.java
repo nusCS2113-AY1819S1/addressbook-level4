@@ -4,7 +4,7 @@ import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.ReadOnlyInventoryList;
 
 /**
- * Indicates the InventoryList in the model has changed
+ * Indicates the inventoryList in the model has changed
  */
 public class InventoryListChangedEvent extends BaseEvent {
 

@@ -42,7 +42,7 @@
                 <Image url="@../images/login_page_pic_2.jpg" />
             </image>
         </ImageView>
-        <Label fx:id="loginError" layoutX="361.0" layoutY="293.0" prefHeight="18.0" prefWidth="7.0" textFill="#fa0c0c" />
+        <Label fx:id="loginError" layoutX="356.0" layoutY="293.0" prefHeight="18.0" prefWidth="156.0" textFill="#fa0c0c" />
         <PasswordField fx:id="passwordField" layoutX="357.0" layoutY="263.0" onKeyPressed="#handleEnterPressed" />
         <Label layoutX="576.0" layoutY="28.0" onMouseClicked="#handleClose" prefHeight="18.0" prefWidth="19.0" text="x" textFill="#e20505">
             <font>

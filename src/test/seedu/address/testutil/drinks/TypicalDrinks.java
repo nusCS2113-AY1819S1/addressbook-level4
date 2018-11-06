@@ -1,10 +1,10 @@
-package model.testutil;
+package seedu.address.testutil.drinks;
 
-import static logic.CommandTestUtil.VALID_DRINK_COST_PRICE;
-import static logic.CommandTestUtil.VALID_DRINK_NAME_COCA_COLA;
-import static logic.CommandTestUtil.VALID_DRINK_QUANTITY;
-import static logic.CommandTestUtil.VALID_DRINK_RETAIL_PRICE;
-import static logic.CommandTestUtil.VALID_DRINK_TAG_SOFTDRINK;
+import static seedu.address.testutil.logic.commands.CommandTestUtil.VALID_DRINK_COST_PRICE;
+import static seedu.address.testutil.logic.commands.CommandTestUtil.VALID_DRINK_NAME_COCA_COLA;
+import static seedu.address.testutil.logic.commands.CommandTestUtil.VALID_DRINK_QUANTITY;
+import static seedu.address.testutil.logic.commands.CommandTestUtil.VALID_DRINK_RETAIL_PRICE;
+import static seedu.address.testutil.logic.commands.CommandTestUtil.VALID_DRINK_TAG_SOFTDRINK;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,6 +12,7 @@ import java.util.List;
 
 import seedu.address.model.InventoryList;
 import seedu.address.model.drink.Drink;
+
 
 
 /**
@@ -64,7 +65,7 @@ public class TypicalDrinks {
     } // prevents instantiation
 
     /**
-     * Returns an {@code InventoryList} with all the typical drinks.
+     * Returns an {@code inventoryList} with all the typical drinks.
      */
     public static InventoryList getTypicalInventoryList() {
         InventoryList list = new InventoryList();

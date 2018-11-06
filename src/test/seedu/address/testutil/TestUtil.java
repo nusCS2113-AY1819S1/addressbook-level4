@@ -1,4 +1,4 @@
-package model.testutil;
+package seedu.address.testutil;
 
 import java.io.IOException;
 import java.nio.file.Files;

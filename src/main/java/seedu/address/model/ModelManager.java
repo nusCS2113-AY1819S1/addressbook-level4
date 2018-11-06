@@ -79,18 +79,6 @@ public class ModelManager extends ComponentManager implements Model {
         return inventoryList.hasDrink(drink);
     }
 
-    @Override
-    public void deleteDrink(Drink target) {
-        inventoryList.removeDrink(target);
-        indicateInventoryListChanged();
-    }
-
-    @Override
-    public void addDrink(Drink drink) {
-        inventoryList.addDrink(drink);
-        updateFilteredDrinkList(PREDICATE_SHOW_ALL_DRINKS);
-        indicateInventoryListChanged();
-    }
 
     /*
     @Override

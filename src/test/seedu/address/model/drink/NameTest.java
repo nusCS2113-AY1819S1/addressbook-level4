@@ -1,12 +1,11 @@
-package model.drink;
+package seedu.address.model.drink;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import model.testutil.Assert;
-import seedu.address.model.drink.Name;
+import seedu.address.testutil.Assert;
 
 public class NameTest {
     @Test

@@ -1,5 +1,5 @@
 //@@author liu-tianhang
-package authentication;
+package seedu.address.authentication;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -7,7 +7,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.address.authentication.LoginUtils;
 import seedu.address.model.LoginInfoManager;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.UserName;

@@ -6,6 +6,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.drink.Date;
 
 /**
@@ -51,11 +53,15 @@ public class TransactionList {
         return transactions;
     }
 
+    public ObservableList<Transaction> getTransactionsAsObservableList() {
+        return FXCollections.observableList(transactions);
+    }
+
     /**
      * Adds {@code transaction} to the list of transactions
-     * Guarantees: transaction is accurately generated.
      */
     public void addTransaction(Transaction transaction) {
+        requireNonNull(transaction);
         transactions.add(transaction);
         updateLastUpdateDate();
     }
@@ -65,7 +71,10 @@ public class TransactionList {
      */
     private void updateLastUpdateDate() {
         lastUpdateDate = new Date();
-        // TODO: STUB
+    }
+
+    public Date getLastUpdateDate() {
+        return lastUpdateDate;
     }
 
     @Override
@@ -74,4 +83,47 @@ public class TransactionList {
         transactions.forEach(builder::append);
         return builder.toString();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TransactionList // instanceof handles nulls
+                && transactions.equals(((TransactionList) other).transactions));
+    }
+
+
+    //    /**
+    //     * Calculates the total revenue of all the transactions.
+    //     * @return total revenue earned for all transactions
+    //     */
+    //    public Price calculateTotalRevenue() {
+    //        float totalRevenue = 0;
+    //        for (Transaction transaction : transactions) {
+    //            if (transaction.getTransactionType() == TransactionType.SALE) {
+    //                totalRevenue += transaction.getAmountMoney().getValue();
+    //            }
+    //        }
+    //
+    //        return new Price(Float.toString(totalRevenue));
+    //    }
+    //
+    //
+    //    /**
+    //     * Calculates the total profit of all the transactions, using formula: total revenue - total cost
+    //     * @return total profit earned for all transactions
+    //     */
+    //    public Price calculateTotalProfit() {
+    //        float totalRevenue = 0;
+    //        float totalCost = 0;
+    //        for (Transaction transaction : transactions) {
+    //            if (transaction.getTransactionType() == TransactionType.SALE) {
+    //                totalRevenue += transaction.getAmountMoney().getValue();
+    //            } else {
+    //                totalCost += transaction.getAmountMoney().getValue();
+    //            }
+    //        }
+    //
+    //        float totalProfit = totalRevenue - totalCost;
+    //        return new Price(Float.toString(totalProfit));
+    //    }
 }

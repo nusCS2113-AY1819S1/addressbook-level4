@@ -169,8 +169,8 @@ public class LoginController {
             changeStageToMainUi();
             clearLoginInput();
         } else {
-            loginError.setText(WRONG_USERNAME_AND_PASSWORD_MESSAGE);
             clearLoginInput();
+            loginError.setText(WRONG_USERNAME_AND_PASSWORD_MESSAGE);
         }
     }
 

@@ -32,7 +32,7 @@ public class InventoryList implements ReadOnlyInventoryList {
     }
 
     /**
-     * Creates an InventoryList using the Drinks in the {@code toBeCopied}
+     * Creates an inventoryList using the Drinks in the {@code toBeCopied}
      */
     public InventoryList(ReadOnlyInventoryList toBeCopied) {
         this();
@@ -50,7 +50,7 @@ public class InventoryList implements ReadOnlyInventoryList {
     }
 
     /**
-     * Resets the existing data of this {@code InventoryList} with {@code newData}.
+     * Resets the existing data of this {@code inventoryList} with {@code newData}.
      */
     public void resetData(ReadOnlyInventoryList newData) {
         requireNonNull(newData);
@@ -91,7 +91,7 @@ public class InventoryList implements ReadOnlyInventoryList {
     */
 
     /**
-     * Removes {@code key} from this {@code InventoryList}.
+     * Removes {@code key} from this {@code inventoryList}.
      * {@code key} must exist in the inventory list.
      */
     public void removeDrink(Drink key) {

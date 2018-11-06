@@ -1,5 +1,6 @@
 package seedu.address.model.user.accountant;
 
+import seedu.address.analysis.AnalysisPeriodType;
 import seedu.address.model.Model;
 import seedu.address.model.drink.Price;
 
@@ -10,6 +11,16 @@ public interface AccountantModel extends Model {
     /**
      * Returns the total cost incurred.
      */
-    Price analyseCosts();
+    Price analyseCosts(AnalysisPeriodType period);
+
+    /**
+     * Returns the total revenue earned.
+     */
+    //    Price analyseRevenue();
+
+    /**
+     * Returns the total profit earned.
+     */
+    //    Price analyseProfit();
 
 }
