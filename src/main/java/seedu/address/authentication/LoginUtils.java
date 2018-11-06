@@ -1,5 +1,7 @@
+//@@author liu-tianhang
 package seedu.address.authentication;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.CurrentUser;
@@ -14,61 +16,55 @@ import seedu.address.model.user.UserName;
  */
 public class LoginUtils {
     private LoginInfoManager loginInfoManager;
-
+    private LoginInfo userInfoInStorage;
     private UserName username;
     private Password password;
     private final Logger logger = LogsCenter.getLogger(LoginUtils.class);
 
-    public LoginUtils(String username, String password, LoginInfoManager loginInfoManager) {
-        this.username = new UserName (username);
-        this.password = new Password (password);
+    public LoginUtils(UserName username, Password password, LoginInfoManager loginInfoManager) {
+        this.username = username;
+        this.password = password;
         this.loginInfoManager = loginInfoManager;
     }
-    /**
-     * Returns validity of username
-     * If usernameField is empty, return false.
-     *
-     * @return boolean value
-     */
-    public boolean isUsernameEmpty () {
-        if (username.equals ("")) {
-            return false;
-        }
-        return true;
-    }
-    /**
-     * Returns validity of password.
-     * If passwordField is empty, return false else return true.
-     *
-     * @return boolean value
-     */
-    public boolean isPasswordEmpty () {
-        if (password.equals ("")) {
-            return false;
-        }
-        return true;
-    }
-
     /**
      * Check the password and username with logininfo list
      */
     public boolean isPasswordAndUserNameValid () {
-        LoginInfo userInfoInStorage = loginInfoManager.getLoginInfo (username);
-        if (userInfoInStorage == null) {
+        if (getLoginInfoFromStorage ().isPresent ()) {
+            userInfoInStorage = getLoginInfoFromStorage().get();
+        } else {
             return false;
         }
-        boolean usernameMatch = username.toString ().matches (userInfoInStorage.getUserNameString ());
-
-        String securePassword = userInfoInStorage.getPasswordString ();
-        boolean passwordMatch = PasswordUtils.verifyUserPassword(password.toString (), securePassword);
-
-        if (passwordMatch && usernameMatch) {
-            CurrentUser.setLoginInfo (username, userInfoInStorage.getAuthenticationLevel ());
-            logger.info (String.format ("User has login with user name : " + CurrentUser.getUserName ()));
+        if (isPasswordCorrect()) {
+            setCurrentUser();
             return true;
         }
         return false;
     }
 
+    /**
+     * Returns true if able to find same username in storage
+     */
+    private Optional<LoginInfo> getLoginInfoFromStorage() {
+        LoginInfo userInfoInStorage = loginInfoManager.getLoginInfo (username);
+        if (userInfoInStorage == null) {
+            return Optional.empty ();
+        }
+        return Optional.of(userInfoInStorage);
+    }
 
+    /**
+     * Return true is password is correct
+     */
+    private boolean isPasswordCorrect() {
+        String securePassword = userInfoInStorage.getPasswordString ();
+        return PasswordUtils.verifyUserPassword(password.toString (), securePassword);
+    }
+    /**
+     * Set current User
+     */
+    private void setCurrentUser() {
+        CurrentUser.setLoginInfo (username, userInfoInStorage.getAuthenticationLevel ());
+        logger.info (String.format ("User has login with user name : " + CurrentUser.getUserName ()));
+    }
 }

@@ -65,12 +65,6 @@ public class LoginInfoManager {
             }
         }
     }
-    //    private boolean checkUserName (LoginInfo listItem, String userNameWanted){
-    //        if (listItem.getUserNameString ().equals (userNameWanted)){
-    //            return true;
-    //        }
-    //        return false;
-    //    }
 
     /**
      * Add in a new account to the list

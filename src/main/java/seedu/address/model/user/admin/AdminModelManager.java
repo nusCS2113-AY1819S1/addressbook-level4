@@ -55,7 +55,6 @@ public class AdminModelManager extends ModelManager implements AdminModel {
                 * transaction.getQuantityTransacted().getValue()));
         transaction.setAmountMoney(defaultAmountTransacted);
         recordTransaction(transaction);
-
         inventoryList.increaseDrinkQuantity(transaction.getDrinkTransacted(), transaction.getQuantityTransacted());
         indicateInventoryListChanged();
         updateFilteredDrinkList(PREDICATE_SHOW_ALL_DRINKS);

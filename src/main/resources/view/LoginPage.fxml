@@ -10,8 +10,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.address.controller.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="407.0" prefWidth="589.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.address.ui.controller.LoginController">
     <children>
         <TextField fx:id="usernameField" layoutX="357.0" layoutY="197.0" onKeyPressed="#handleEnterPressed" />
         <Label layoutX="373.0" layoutY="82.0" text="Welcome to" textFill="#ed0505">
@@ -35,13 +36,13 @@
                 <Font name="Arial Black" size="12.0" />
             </font>
         </Label>
-        <Button layoutX="396.0" layoutY="308.0" mnemonicParsing="false" onAction="#handleLoginButtonClick" prefHeight="26.0" prefWidth="54.0" style="-fx-background-color: #6fa1f2;" text="Login" />
+        <Button layoutX="391.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleLoginButtonClick" prefHeight="26.0" prefWidth="54.0" style="-fx-background-color: #6fa1f2;" text="Login" />
         <ImageView fitHeight="109.0" fitWidth="54.0" layoutX="509.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: -20;">
             <image>
                 <Image url="@../images/login_page_pic_2.jpg" />
             </image>
         </ImageView>
-        <Label fx:id="loginError" layoutX="460.0" layoutY="234.0" textFill="#fa0c0c" />
+        <Label fx:id="loginError" layoutX="361.0" layoutY="293.0" prefHeight="18.0" prefWidth="7.0" textFill="#fa0c0c" />
         <PasswordField fx:id="passwordField" layoutX="357.0" layoutY="263.0" onKeyPressed="#handleEnterPressed" />
         <Label layoutX="576.0" layoutY="28.0" onMouseClicked="#handleClose" prefHeight="18.0" prefWidth="19.0" text="x" textFill="#e20505">
             <font>
@@ -59,5 +60,6 @@
             <Image url="@../images/login_page_pic_4.jpg" />
          </image>
       </ImageView>
+      <Text layoutX="314.0" layoutY="45.0" onMouseClicked="#handleHelpButtonClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="HELP" />
     </children>
 </AnchorPane>

@@ -42,7 +42,6 @@ public class StockTakerModelManager extends ModelManager implements StockTakerMo
                 * transaction.getQuantityTransacted().getValue()));
         transaction.setAmountMoney(defaultAmountTransacted);
         recordTransaction(transaction);
-
         inventoryList.increaseDrinkQuantity(transaction.getDrinkTransacted(), transaction.getQuantityTransacted());
         indicateInventoryListChanged();
     }
