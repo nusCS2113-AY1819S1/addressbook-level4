@@ -23,7 +23,7 @@ public class ImportCommand extends Command {
             + "Example: " + COMMAND_WORD + " export.xml ";
 
     // TODO: do the same for todos
-    public static final String MESSAGE_IMPORT_SUCCESS = "Imported %1$s persons and %2$s todos!";
+    public static final String MESSAGE_IMPORT_SUCCESS = "Imported %1$s persons and %2$s todos.";
     // = "Imported Persons: %1$s, Imported Todos: %1$s";
     private static final String MESSAGE_FAILURE = "Import failed!";
 
