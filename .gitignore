@@ -9,6 +9,8 @@ lib/*
 *.log.*
 *.csv
 src/test/data/sandbox/
+src/test/data/sandboxmanyPersons.xml
+src/test/data/sandboxmanyGroups.xml
 preferences.json
 .DS_Store
 ./screenshot*.png
