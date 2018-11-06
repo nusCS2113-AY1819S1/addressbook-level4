@@ -2,6 +2,11 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static seedu.address.commons.core.Messages.MESSAGE_BOOKS_LISTED_OVERVIEW;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalBooks.ART;
+import static seedu.address.testutil.TypicalBooks.BIOLOGY;
+import static seedu.address.testutil.TypicalBooks.CHEMISTRY;
 import static seedu.address.testutil.TypicalBooks.getTypicalBookInventory;
 
 import java.util.Arrays;
@@ -48,6 +53,16 @@ public class CheckCommandTest {
 
         // different quantity -> returns not equal
         assertNotEquals(checkFirstCommand, checkSecondCommand);
+    }
+
+    @Test
+    public void execute_nonZeroValue_booksFound () {
+        String expectedMessage = String.format(MESSAGE_BOOKS_LISTED_OVERVIEW, 3);
+        QuantityContainsNumberPredicate predicate = preparePredicate("15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0");
+        CheckCommand command = new CheckCommand(predicate);
+        expectedModel.updateFilteredBookList(predicate);
+        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ART, BIOLOGY, CHEMISTRY), model.getFilteredBookList());
     }
 
     private QuantityContainsNumberPredicate preparePredicate(String userInput) {
