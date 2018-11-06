@@ -69,6 +69,7 @@ public class MainApp extends Application {
         CandidateBookStorage candidateBookStorage = new XmlCandidateBookStorage(userPrefs.getCandidateBookFilePath());
         CompanyBookStorage companyBookStorage = new XmlCompanyBookStorage(userPrefs.getCompanyBookFilePath());
         storage = new StorageManager(candidateBookStorage, companyBookStorage, userPrefsStorage);
+        storage.initialiseFilePermissions();
 
         initLogging(config);
 
@@ -210,6 +211,7 @@ public class MainApp extends Application {
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);
+            storage.removeFilePermissions();
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }

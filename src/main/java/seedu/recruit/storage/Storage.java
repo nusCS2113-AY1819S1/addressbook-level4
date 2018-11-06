@@ -17,13 +17,19 @@ import seedu.recruit.model.UserPrefs;
  */
 public interface Storage extends CandidateBookStorage, CompanyBookStorage, UserPrefsStorage {
 
+    // ================ File Permission methods ============================== //
+
+    void initialiseFilePermissions();
+
+    void removeFilePermissions();
+
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
 
     @Override
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
 
-    // ================ CandidateBook methods ==============================
+    // ================ CandidateBook methods ============================== //
 
     @Override
     Path getCandidateBookFilePath();

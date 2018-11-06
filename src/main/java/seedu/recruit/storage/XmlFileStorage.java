@@ -1,6 +1,5 @@
 package seedu.recruit.storage;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
 
@@ -20,8 +19,6 @@ public class XmlFileStorage {
             throws FileNotFoundException {
         try {
             XmlUtil.saveDataToFile(path, candidateBook);
-            File file = new File(path.toString());
-            file.setReadOnly();
         } catch (JAXBException e) {
             throw new AssertionError("Unexpected exception " + e.getMessage(), e);
         }
@@ -47,8 +44,6 @@ public class XmlFileStorage {
             throws FileNotFoundException {
         try {
             XmlUtil.saveDataToFile(path, companyBook);
-            File file = new File(path.toString());
-            file.setReadOnly();
         } catch (JAXBException e) {
             throw new AssertionError("Unexpected exception " + e.getMessage(), e);
         }

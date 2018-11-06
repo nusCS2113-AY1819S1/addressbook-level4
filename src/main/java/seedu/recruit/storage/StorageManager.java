@@ -1,5 +1,6 @@
 package seedu.recruit.storage;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -36,7 +37,31 @@ public class StorageManager extends ComponentManager implements Storage {
         this.userPrefsStorage = userPrefsStorage;
     }
 
-    // ================ UserPrefs methods ==============================
+    // ============================= File Permission methods ============================= //
+
+    @Override
+    public void initialiseFilePermissions() {
+        File userPrefFile = new File(getUserPrefsFilePath().toString());
+        File candidateBookFile = new File(getCandidateBookFilePath().toString());
+        File companyBookFile = new File(getCompanyBookFilePath().toString());
+
+        userPrefFile.setWritable(true);
+        candidateBookFile.setWritable(true);
+        companyBookFile.setWritable(true);
+    }
+
+    @Override
+    public void removeFilePermissions() {
+        File userPrefFile = new File(getUserPrefsFilePath().toString());
+        File candidateBookFile = new File(getCandidateBookFilePath().toString());
+        File companyBookFile = new File(getCompanyBookFilePath().toString());
+
+        userPrefFile.setReadOnly();
+        candidateBookFile.setReadOnly();
+        companyBookFile.setReadOnly();
+    }
+
+    // ============================= UserPrefs methods ============================= //
 
     @Override
     public Path getUserPrefsFilePath() {
