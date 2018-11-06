@@ -15,9 +15,9 @@ public class Messages {
     public static final String MESSAGE_NOT_THREAD_OWNER = "Sorry! You are not the owner of this thread.";
     public static final String MESSAGE_NOT_COMMENT_OWNER = "Sorry! You are not the owner of this comment.";
 
-    public static final String MESSAGE_INVALID_MODULE_CODE = "Invalid Module Code!";
-    public static final String MESSAGE_INVALID_THREAD_ID = "Invalid Thread ID!";
-    public static final String MESSAGE_INVALID_COMMENT_ID = "Invalid Comment ID!";
+    public static final String MESSAGE_INVALID_MODULE_CODE = "Module Code does not exist in the forum book!";
+    public static final String MESSAGE_INVALID_THREAD_ID = "Thread ID does not exist in the forum book!";
+    public static final String MESSAGE_INVALID_COMMENT_ID = "Comment ID does not exist in the forum book!";
 
     public static final String MESSAGE_INVALID_THREAD =
             "Sorry! The entity you requested is not under the current scope";
