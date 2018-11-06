@@ -35,7 +35,7 @@ Development of features and ensuring document correctness
 
 === Tan Wei Hao Joel
 image::e0176882.png[width="150", align="left"]
-{empty}[https://github.com/E0176882[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/E0176882[github]] [<<e0176882#, portfolio>>]
 
 Role: Lead Developer + Quality Assurance +
 Responsibilities: Development of features and ensuring good quality of application
