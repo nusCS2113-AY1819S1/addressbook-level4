@@ -4,7 +4,6 @@ import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static seedu.planner.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.planner.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.planner.testutil.TypicalLimits;
 import static seedu.planner.testutil.TypicalRecords.getTypicalFinancialPlanner;
 
 import org.junit.Test;
