@@ -68,7 +68,7 @@ public class MainApp extends Application {
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         scriptSetup = new ScriptSetup();
-        scriptSetup.execute(userPrefs.getScriptFileDirectory());
+        scriptSetup.execute(userPrefs);
 
         initLogging(config);
 

@@ -38,6 +38,8 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
 * *`exit`* : exits the app
 
+. Please kindly refer to <<ScriptSetup Function>> to understand on how to setup the `Student Management System` to use the `scripts` function properly
+
 .  Refer to <<Features>> for details of each command.
 
 [[Features]]
@@ -321,27 +323,64 @@ Examples:
 * `add n/John Doe g/M nat/SG p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `a n/Betsy Crowe g/female nat/MY t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-=== Execute multiples of the same Command using text file : `script` `scr`
+// tag::ScriptSetup[]
+=== ScriptSetup Function
+
+`Student Management System` provide the user with the option of choosing their own directory path for the `scripts` folder
+
+User will be able to change their scripts folder in the `preferences.json` of the main directory of the project
+
+The parameter `"scriptFileDirectory"` : `"/scripts/test/"` represent the script folder location in the `preferences.json`
+
+* There are restriction on how the user can change the `scriptFileDirectory`
+** The `/` must be included  at the front of the String and at the end of the String
+*** Valid : `/scripts/test/` `/scripts/`
+*** Invalid : `/scripts` `tests/`
+** There must not be two consective `/`
+*** Invalid: `//scripts` `/scripts//test`
+** `"` `<` `>` `?` `:` `*` are characters that will automatically be rejected if it exists
+*** Invalid `/?scripts/` `/test:*/`
+
+[NOTE]
+If the `scriptFileDirectory` is invalid, the program will automatically generate a default script folder which is `/scripts/`
+
+If the script folder path is valid, the program will automatically create the folder for the user if the folder is missing
+
+Sample Text File are also automatically included in the script folder for user to test the scripts
+
+// end::ScriptSetup[]
+
+// tag::ScriptCommand[]
+=== Script Function : `script` `scr`
 
 Get all the commands parameters from a text file and execute them +
 Format: `script txt/TextFile c/CommandType` +
 Shortcut Format: `scr txt/TextFile c/CommandType` +
 
+Prerequisites :
+
+* Please kindly refer to <<ScriptSetup Function>> to understand on how to setup the `Student Management System` to use the `scripts` function properly
+* Please ensure that there are Text File in the scripts folder configured in <<ScriptSetup Function>>
+
 ****
-* Default scripts folder is located at the /scripts/ where the main program is located at.
-* If the scripts folder is missing, the program will automatically generate the folder when the program starts
 * txt/ is the TextFile Prefix which is used to indicate the following parameter is a TextFile parameter
-** TextFile is the text file which contains all the command arguments that you want to execute.
-** TextFile should consist of the name of the file without the extension E.g "StudentList" is a valid TextFile but
-"StudentList.txt" is also valid TextFile but it will search for "StudentList.txt.txt" in the folder.
-* c/ is the CommandType Prefix which is used to indicate the following parameter is a CommandType parameter
+** TextFile is the text file which the script command will extract all its command from
+** TextFile should consist of the name of the file without the extension E.g "txt/StudentList" means that the program will look
+for StudentList.txt in the script folder
+* c/ is the CommandType Prefix which is used to indicate that the command that you want to execute with the Text File
 ** CommandType is the command that you want to execute E.g add, delete, creategroup, etc
 ****
+
+image::SampleScriptFile.png[width="800"]
+.Example of a ScriptFile for executing the `add` Command
+Please refer to <<Adding a person: `add` `a`>> for more information about `add` command
+
 
 Examples:
 
 * `script txt/addgroups c/creategroup`
 * `scr txt/addpersons c/add`
+// end::ScriptCommand[]
 
 === Listing all persons : `list` `l`
 
@@ -565,6 +604,11 @@ e.g. distinto 3 n/CS2113- g/1 nat/0
 * *Distribute randomly into _n_ Groups with balanced nationality* :
 `distinto INDEX n/GROUP-NAME g/GENDER_FLAG nat/NATIONALITY_FLAG` +
 e.g. distinto 3 n/CS2113- g/0 nat/1
+* *List* : `list`
+* *Help* : `help`
+* *Select* : `select INDEX` +
+* *Executescripts* : `script txt/TextFile c/CommandType` +
+e.g. `script txt/addpersons c/add`
 * *add test marks* : `adt tn/TESTNAME tm/MARKS` +
 e.g. `adt tn/cs2113 tm/16`
 * *edit test marks* : `edt tn/TESTNAME tm/MARKS` +
@@ -575,12 +619,6 @@ e.g. disp tn/CS2113 highest/` or `disp tn/CS2113 lowest/` or `disp tn/CS2113 med
 e.g. `agpt tn/CS2040C`
 * *delete certain test* : `dt tn/TESTNAME ` +
 e.g. `dt tn/CS2040C`
-
-* *List* : `list`
-* *Help* : `help`
-* *Select* : `select INDEX` +
-* *add test marks* : `adt tn/TESTNAME tm/MARKS` +
-e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`

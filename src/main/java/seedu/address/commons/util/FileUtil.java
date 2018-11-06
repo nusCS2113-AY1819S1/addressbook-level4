@@ -139,4 +139,13 @@ public class FileUtil {
     public static void writeToTextFile(File file, String text) throws IOException {
         FileUtils.writeStringToFile(file, text, CHARSET);
     }
+
+    /**
+     * Write String to Text File by appending it to current file
+     * @file is the location of the file
+     * @text is the string to be written to the text file
+     */
+    public static void appendToTextFile(File file, String text) throws IOException {
+        FileUtils.writeStringToFile(file, text, CHARSET, true);
+    }
 }

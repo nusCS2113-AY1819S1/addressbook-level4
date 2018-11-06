@@ -436,8 +436,6 @@ Before the `ScriptCommand` can be executed, there are some prerequisites:
 * All scripts must be of `Text File Format/txt`
 
 ==== ScriptSetup feature
-If the scripts folder is missing whenever the program run, the program will automatically generate the folder through
-the `ScriptSetup` Class
 
 .Sequence Diagram for the `ScriptSetup` Function
 image::ScriptSetupSequenceDiagram.png[width="800"]
