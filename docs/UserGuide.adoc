@@ -43,7 +43,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 5. Create a comment under a thread using `createComment tId/1 cContent/This is a new comment`
 6. Update a comment created by you using `updateComment cId/1 cContent/This is a new comment`
 7. Delete a comment created by you using `deleteComment cId/1`
-8. Create a thread under a module using `createThread tTitle/About exams? cContent/Is there any exam?`
+8. Create a thread under a module using `createThread mCode/CS2113 tTitle/About exams? cContent/Is there any exam?`
 9. Update a thread created by you using `updateThread tId/1 tTitle/Is there any midterm?`
 10. Delete a thread created by you using `deleteThread tId/1`
 11. Check for latest announcement using `checkAnnounce`

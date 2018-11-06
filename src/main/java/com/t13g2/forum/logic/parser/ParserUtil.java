@@ -215,14 +215,7 @@ public class ParserUtil {
     public static String parseThread(String threadTitle) throws ParseException {
         requireNonNull(threadTitle);
         String trimmedThreadTitle = threadTitle.trim();
-        if (!isValidThreadTitle(trimmedThreadTitle)) {
-            throw new ParseException(ForumThread.MESSAGE_THREAD_CONSTRAINTS);
-        }
         return trimmedThreadTitle;
-    }
-    //Returns true if a given string is a valid thread title.
-    public static boolean isValidThreadTitle(String trimmedThreadTitle) {
-        return trimmedThreadTitle.matches(ForumThread.THREAD_VALIDATION_REGEX);
     }
 
     /**
@@ -263,14 +256,6 @@ public class ParserUtil {
     public static String parseComment(String comment) throws ParseException {
         requireNonNull(comment);
         String trimmedComment = comment.trim();
-        // if (!isValidComment(trimmedComment)) {
-        //    throw new ParseException(Comment.MESSAGE_COMMENT_CONSTRAINTS);
-        // }
         return trimmedComment;
     }
-    //Returns true if a given string is a valid comment content.
-    public static boolean isValidComment(String trimmedComment) {
-        return trimmedComment.matches(Comment.COMMENT_VALIDATION_REGEX);
-    }
-
 }
