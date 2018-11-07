@@ -22,6 +22,7 @@ import seedu.address.logic.commands.EditDistributorCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindDistributorCommand;
+import seedu.address.logic.commands.FindTagDistributorCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -99,6 +100,9 @@ public class AllCommandsParser {
 
         case FindDistributorCommand.COMMAND_WORD:
             return new FindDistributorsCommandParser().parse(arguments);
+
+        case FindTagDistributorCommand.COMMAND_WORD:
+            return new FindTagDistributorsCommandParser().parse(arguments);
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
