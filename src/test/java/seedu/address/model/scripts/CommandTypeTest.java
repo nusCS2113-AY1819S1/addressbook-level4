@@ -41,21 +41,25 @@ public class CommandTypeTest {
         assertTrue(CommandType.isValidCommand("add"));
         assertTrue(CommandType.isValidCommand("a"));
         assertTrue(CommandType.isValidCommand("addgroup"));
-        assertTrue(CommandType.isValidCommand("addgrp"));
+        assertTrue(CommandType.isValidCommand("ag"));
         assertTrue(CommandType.isValidCommand("add_testmarks"));
-        assertTrue(CommandType.isValidCommand("addt"));
+        assertTrue(CommandType.isValidCommand("adt"));
         assertTrue(CommandType.isValidCommand("clear"));
         assertTrue(CommandType.isValidCommand("c"));
         assertTrue(CommandType.isValidCommand("creategroup"));
         assertTrue(CommandType.isValidCommand("cg"));
         assertTrue(CommandType.isValidCommand("delete"));
         assertTrue(CommandType.isValidCommand("d"));
+        assertTrue(CommandType.isValidCommand("deletegroup"));
+        assertTrue(CommandType.isValidCommand("dg"));
+        assertTrue(CommandType.isValidCommand("deletegroupstudent"));
+        assertTrue(CommandType.isValidCommand("dgs"));
         assertTrue(CommandType.isValidCommand("distinto"));
         assertTrue(CommandType.isValidCommand("di"));
         assertTrue(CommandType.isValidCommand("edit"));
         assertTrue(CommandType.isValidCommand("e"));
+        assertTrue(CommandType.isValidCommand("edt"));
         assertTrue(CommandType.isValidCommand("edit_test"));
-        assertTrue(CommandType.isValidCommand("et"));
         assertTrue(CommandType.isValidCommand("sendmail"));
         assertTrue(CommandType.isValidCommand("sm"));
         assertTrue(CommandType.isValidCommand("exit"));
@@ -78,6 +82,8 @@ public class CommandTypeTest {
         assertTrue(CommandType.isValidCommand("r"));
         assertTrue(CommandType.isValidCommand("select"));
         assertTrue(CommandType.isValidCommand("s"));
+        assertTrue(CommandType.isValidCommand("selectgroup"));
+        assertTrue(CommandType.isValidCommand("sg"));
         assertTrue(CommandType.isValidCommand("undo"));
         assertTrue(CommandType.isValidCommand("u"));
     }

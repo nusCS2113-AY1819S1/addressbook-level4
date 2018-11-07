@@ -8,13 +8,17 @@ import static seedu.address.model.email.Message.MESSAGE_MESSAGE_CONSTRAINTS;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.mail.AuthenticationFailedException;
 import javax.mail.MessagingException;
 import javax.mail.SendFailedException;
 
+import com.google.common.base.Throwables;
 import com.sun.mail.smtp.SMTPSendFailedException;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.EmailUtil;
@@ -52,6 +56,7 @@ public class EmailCommand extends Command {
     public static final String MESSAGE_NO_LOGIN = "No login credentials found. Please login using 'login' command";
     public static final String MESSAGE_AUTHENTICATION_FAIL = "Invalid login credentials entered";
     public static final String SMTP_FAIL_EXCEPTION_MESSAGE = "Unable to send any more emails due to spam";
+    private static final Logger logger = LogsCenter.getLogger(EmailCommand.class);
 
     private boolean isSingleTarget = false;
     private boolean isMultipleTarget = false;
@@ -97,49 +102,64 @@ public class EmailCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         if (!EmailUtil.hasLoginCredentials()) {
+            logger.log(Level.WARNING, "No Login Credentials In System For EmailCommand");
             throw new CommandException(MESSAGE_NO_LOGIN);
         }
 
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (isSingleTarget) {
+            logger.log(Level.INFO, "Creating a single target EmailCommand...");
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                logger.log(Level.WARNING, "EmailCommand Received Invalid Index For Single Target Email");
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             Person personToSend = lastShownList.get(targetIndex.getZeroBased());
+            logger.log(Level.INFO, "Recipient: " + personToSend.getName() + "is added to recipient list");
             toSend.add(personToSend);
         }
 
         if (isMultipleTarget) {
+            logger.log(Level.INFO, "Creating a multiple target EmailCommand...");
             for (Index targetIndex : targetMultipleIndex) {
                 try {
                     Person personToSend = lastShownList.get(targetIndex.getZeroBased());
+                    logger.log(Level.INFO, "Recipient: " + personToSend.getName() + "is added to recipient list");
                     toSend.add(personToSend);
                 } catch (IndexOutOfBoundsException e) {
+                    logger.log(Level.WARNING, "EmailCommand Received An Invalid Index For Multiple Target Email");
                     throw new CommandException(Messages.MESSAGE_INVALID_MULTIPLE_DISPLAYED_INDEX);
                 }
             }
         }
 
         if (isGroupTarget) {
+            logger.log(Level.INFO, "Creating a group target EmailCommand...");
             List<Group> groupList = model.getFilteredGroupList();
             if (targetGroup.getZeroBased() >= groupList.size()) {
+                logger.log(Level.WARNING, "EmailCommand Received Invalid Index For Group Email");
                 throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
             }
             Group groupToSend = groupList.get(targetGroup.getZeroBased());
             Set<Person> personsInGroup = groupToSend.getPersons();
+            for (Person person : personsInGroup) {
+                logger.log(Level.INFO, "Recipient: " + person.getName() + "is added to recipient list");
+            }
             toSend.addAll(personsInGroup);
         }
 
         try {
             EmailUtil.sendEmail(toSend, toSubject, toMessage);
         } catch (AuthenticationFailedException afe) {
+            logger.log(Level.WARNING, "Email Credentials Entered But Incorrect");
             throw new CommandException(MESSAGE_AUTHENTICATION_FAIL);
         } catch (SMTPSendFailedException ssfe) {
             throw new CommandException(setErrorMessageForSendFailedException(ssfe.getMessage()));
         } catch (SendFailedException sfe) {
             throw new CommandException(setErrorMessageForSendFailedException(sfe.getMessage()));
         } catch (MessagingException e) {
+            logger.log(Level.WARNING, "General Failure, Please Refer To Stacktrace\n"
+                    + Throwables.getStackTraceAsString(e));
             throw new CommandException(MESSAGE_FAIL);
         }
 
@@ -148,12 +168,16 @@ public class EmailCommand extends Command {
 
     public static String setErrorMessageForSendFailedException(String e) {
         if (e.contains("MessageSubmissionExceededException")) {
+            logger.log(Level.WARNING, "Message Size Limit Exceeded");
             return MESSAGE_FAIL + ": " + MESSAGE_MESSAGE_CONSTRAINTS;
         } else if (e.contains("OutboundSpamException")) {
+            logger.log(Level.WARNING, "Email Blocked For Spam");
             return MESSAGE_FAIL + ": " + SMTP_FAIL_EXCEPTION_MESSAGE;
         } else if (e.contains("Invalid Addresses")) {
+            logger.log(Level.WARNING, "An Invalid Recipient Is Found");
             return MESSAGE_FAIL + ": " + MESSAGE_INVALID_ADDRESSES;
         } else if (e.contains("No recipient addresses")) {
+            logger.log(Level.WARNING, "No Recipients Specified");
             return MESSAGE_FAIL + ": " + MESSAGE_NO_RECIPIENT;
         } else {
             return MESSAGE_FAIL;

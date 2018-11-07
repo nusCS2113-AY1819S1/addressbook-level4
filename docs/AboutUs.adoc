@@ -20,7 +20,7 @@ Responsibilities: Development of features, scheduling and tracking of tasks
 
 === Rajdeep Singh Hundal
 image::rajdeepsh.png[width="150", align="left"]
-{empty}[https://github.com/rajdeepsh[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/rajdeepsh[github]] [<<rajdeepsh#, portfolio>>]
 
 Role: Team Leader + Documentation +
 Responsibilities: +
@@ -35,10 +35,14 @@ Development of features and ensuring document correctness
 
 === Tan Wei Hao Joel
 image::e0176882.png[width="150", align="left"]
-{empty}[https://github.com/E0176882[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/E0176882[github]] [<<e0176882#, portfolio>>]
 
 Role: Lead Developer + Quality Assurance +
 Responsibilities: Development of features and ensuring good quality of application
+Email Feature - Send email to single index of Person +
+Email Feature - Send email to multiple index of Person(s) +
+Email Feature - Send email to a Group +
+Email Feature - Supports multiple popular SMTP Domains +
 
 '''
 

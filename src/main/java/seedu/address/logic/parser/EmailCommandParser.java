@@ -7,8 +7,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MESSAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EmailCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -21,6 +24,7 @@ import seedu.address.model.email.Subject;
  */
 public class EmailCommandParser implements Parser<EmailCommand> {
 
+    private static final Logger logger = LogsCenter.getLogger(EmailCommandParser.class);
     /**
      * Parses the given {@code String} of arguments in the context of the EmailCommand
      * and returns an EmailCommand object for execution.
@@ -33,6 +37,7 @@ public class EmailCommandParser implements Parser<EmailCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_SUBJECT, PREFIX_MESSAGE);
         if (!arePrefixesPresent(argMultimap, PREFIX_SUBJECT, PREFIX_MESSAGE)) {
+            logger.log(Level.WARNING, "User Entered Command With Invalid Format: " + args);
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EmailCommand.MESSAGE_USAGE));
         }
         boolean isGroupCommand = isGroup(args);
@@ -45,6 +50,7 @@ public class EmailCommandParser implements Parser<EmailCommand> {
             try {
                 index = ParserUtil.parseIndex(argMultimap.getPreamble());
             } catch (ParseException pe) {
+                logger.log(Level.WARNING, "User Entered Command With Invalid Format: " + args);
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EmailCommand.MESSAGE_USAGE), pe);
             }
             return new EmailCommand(index, subject, message);
@@ -53,6 +59,7 @@ public class EmailCommandParser implements Parser<EmailCommand> {
             try {
                 indexList = ParserUtil.parseMultipleIndex(argMultimap.getPreamble());
             } catch (ParseException pe) {
+                logger.log(Level.WARNING, "User Entered Command With Invalid Format: " + args);
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EmailCommand.MESSAGE_USAGE), pe);
             }
             return new EmailCommand(indexList, subject, message);
@@ -61,6 +68,7 @@ public class EmailCommandParser implements Parser<EmailCommand> {
             try {
                 index = ParserUtil.parseGroupIndex(argMultimap.getPreamble());
             } catch (ParseException pe) {
+                logger.log(Level.WARNING, "User Entered Command With Invalid Format: " + args);
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EmailCommand.MESSAGE_USAGE), pe);
             }
             return new EmailCommand(index, subject, message, isGroupCommand);

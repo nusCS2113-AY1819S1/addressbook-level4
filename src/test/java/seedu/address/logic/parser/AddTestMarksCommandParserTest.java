@@ -1,7 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.TEST_MARK_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TEST_MARK_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.TEST_NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TEST_NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -28,7 +30,11 @@ public class AddTestMarksCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
-        //        assertParseFailure(parser, );
+        assertParseFailure(parser, VALID_NAME_AMY + TEST_MARK_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_NAME_AMY + TEST_NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_NAME_AMY + TEST_NAME_DESC_AMY + TEST_NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_NAME_AMY + TEST_MARK_DESC_AMY + TEST_MARK_DESC_AMY, MESSAGE_INVALID_FORMAT);
+
     }
 
     @Test

@@ -141,4 +141,9 @@ public interface Model {
      */
     void updateFilteredGroupList(Predicate<Group> predicate);
 
+    /**
+     * Get the default scripts location from the model
+     */
+    String getScriptFolderLocation();
+
 }
