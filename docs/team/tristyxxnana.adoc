@@ -1,0 +1,86 @@
+= Nur Tristy Erna - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Trajectory
+
+---
+
+== Overview
+
+Trajectory is a lightweight management system for those who need a no-frills solution for managing students, modules and classes. It is built for users who prefer typing (CLI) over GUI interaction.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to display a graph command for student grades*
+** What it does: Allows the teacher to display a graph to show results of all students of a particular grade component in a module.
+** Justification: This feature allows the teacher to monitor the progress of students conveniently through the use of a graph instead of a list of numbers.
+** Highlights: This enhancement requires an in-depth analysis of design as it gathers information from several features like Student Management, Module Management and Gradebook Management. Additionally, the data for the x and y axis (marks and number of students) respectively involves the use of a hash-map which involves comprehensive coding.
+** Credits: http://tutorials.jenkov.com/javafx/linechart.html
+            https://docs.oracle.com/javase/8/javafx/api/javafx/scene/chart/LineChart.html
+
+* *Minor enhancement*: Added features for Gradebook Management and Grade Management
+** Gradebook Management
+*** Create gradebook component
+*** Read/Find gradebook component
+*** Update gradebook component
+*** Delete gradebook component
+** Grade Management
+*** Create student grade
+*** Delete student grade
+
+* *Code contributed*: TO BE UPDATED
+
+* *Other contributions*:
+
+** Project management:
+*** Managed documentation-related files (User Guide, Developer Guide) in pull request on GitHub.
+** Enhancements to existing features:
+*** Wrote additional tests for existing features to increase coverage(Pull requests https://github.com[#149], https://github.com[#175])
+** Documentation:
+*** Did modifications to existing contents of the About Us, Developer Guide and User Guide: https://github.com[#38], https://github.com[#47]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com[#2127], https://github.com[#226], https://github.com[#234], https://github.com[#238]
+*** Contributed to forum discussions (TO BE UPDATED)
+*** Reported bugs and suggestions for other teams in the class (examples:  TO BE UPDATED)
+** Tools:
+*** TO BE UPDATED
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=gradebook]
+
+include::../UserGuide.adoc[tag=grade]
+
+include::../UserGuide.adoc[tag=gradebookcommandsummary]
+
+include::../UserGuide.adoc[tag=gradecommandsummary]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=graph]
+
+include::../DeveloperGuide.adoc[tag=gradebookuserstories]
+
+include::../DeveloperGuide.adoc[tag=gradeuserstories]
+
+include::../DeveloperGuide.adoc[tag=gradebookusecase]
+
+include::../DeveloperGuide.adoc[tag=gradeusecase]
+
+
+== PROJECT: PowerPointLabs
+
+---
+
+_{Optionally, you may include other projects in your portfolio.}_
