@@ -1,0 +1,139 @@
+= Lee Gui Yong - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Book Inventory
+
+---
+
+== Overview
+
+BookInventory is a desktop application to assist store managers in managing their books stock supply and engaging a larger market to customers who do not frequently visit book stores. This 3 in 1 application offers utilities for three parties, the bookstore owner, bookstore in-house accountants and potential customers. Bookstore in-house accountants may assist the managers with a separate set of privileges specifically to manage profit margins and make subsequent plans. Lastly, students may access the app to browse the book of their choice and issue requests to the store owners to express interest. This application is optimized for those who prefer to work with Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). In this paper, I will elaborate on my ability to illustrate a clear documentation of the thought process as well as the implementation procedure.
+== Summary of contributions
+
+* *Major enhancement* Added a command for students to request for books.*
+** What it does: Students may request for any book by typing the command in the format given in the user guide. Students may request for any book, regardless of whether the book exists in the book store.
+** Justification: This feature brings about convenience for students who can demand a book at the comfort of their homes. This is also advantageous for bookstore owners to track popular books and manage their book supply more efficiently.
+** Highlights: The implementation of an additional panel requires a separated segment from the original code. In the course of implementation, it is only necessary for me to be well-versed in JavaFX. The design approach and precautions taken required careful analysis and a considerably long period of time. Thorough checking and elaborate lengthy testings were also necessary to minimise undesirable bugs surfacing. 
+** Credits: 
+
+* *Minor enhancement*: added a stock command that allows the user to stock books.
+
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.0` - `v1.1` (2 releases) on GitHub
+** Project morphing:
+*** Morphed model portion of addressbook 4.
+** Enhancements to existing features:
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+*** Contributed to forum discussions (examples:  https://github.com/nusCS2113-AY1819S1/forum/issues/58[1])
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** Some parts of the stock feature I added was adopted by several other class mates
+** Tools:
+
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+// tag::sellcommand[]
+=== Sell feature
+==== Current implementation
+The sell command utilises both the `Model` and `Logic` component to fulfil its function.
+
+The following sequence diagram shows how the sell operation is implemented
+
+image::SellSequenceDiagram.png[width="800"]
+
+After SoldBook is created, the inventory book will be updated through `Model#updateBook()`, `Model#updateFilteredBookList()` and `Model#commitBookInventory()` to store the latest quantity of books left.
+
+==== Design Considerations
+
+===== Aspect: How sell command is implemented
+
+* **Alternative 1 (current choice):** Decreases quantity in the Quantity Class.
+** Pros: Code is more cohesive.
+** Cons: Adds more code to Quantity Class
+* **Alternative 2:** Decreases quantity in the Book Class.
+** Pros: Does not need to edit Quantity Class.
+** Cons: Code becomes less cohesive.
+// end::sellcommand[]
+
+// tag::Request[]
+=== Request feature
+==== Current implementation
+The Request command utilises both the `RequestModel` and `Logic` component to fulfil its function.
+This is accessible for all users.
+
+==== Design Considerations
+===== Aspect: Request command is implemented in a different category
+As mentioned above, Request is called in RequestModel and RequestStorage.
+A request object consists of three objects, Isbn, Email, and Quantity.
+
+===== RequestModel component
+
+.Structure of the RequestModel Component
+image::RequestModelClassDiagram.jpg[width="800"]
+
+The implementation is similar to 2.4. Model component.
+Note that XmlAdaptedTag class is removed as request has no tags.
+
+===== RequestStorage component
+
+.Structure of the RequestStorage Component
+image::RequestStorageClassDiagram.jpg[width="800"]
+
+Likewise, this implementation is similar to 2.5. Storage component.
+
+===== Aspect: How Request command is implemented
+
+.Structure of Request (High Level Sequence Diagram)
+image::HighLevelRequestSequenceDiagram.png[width="800"]
+
+* **Similar to Add Command**
+** After request command is called by the user, it gets parsed through a RequestListParser.
+** The UI also prompts to EventCenter and logs out that the Request List has changed.
+** Request object is created and added to the model.
+** The storage then receives the request and returns message to model, which is then transferred to the UI.
+** This notifies the user that the request is successfully submitted.
+
+* **Similar to Delete Command**
+** The bookstore owner may decide whether to accept or reject a request offer.
+** After deciding, he or she can type deleterequest to remove Request from the RequestList.
+
+// end::Request[]
+
+// tag::commandprediction[]
+=== Command Prediction
+
+==== Current Implementation
+To maximize user friendliness, we have implemented predictive text which will appear
+familiar for phone users. BookInventory users may inadvertently misspell command words,
+e.g. lis (Expected command: list). This will now prompt a GUI log stating, "Did you mean,
+list?". To achieve this, we have utilized the Dice Coefficient.
+
+==== Design Considerations
+
+===== Aspect: How does Dice Coefficient works?
+
+Dice's coefficient measures the similarity between two sets. It can also be used to help measure how
+similar two strings are in terms of the number of common bigrams (a bigram is a pair of adjacent
+letters in the string).The Coefficient result of 1 indicates identical vectors (completely equal strings) as
+where a 0 equals orthogonal vectors (completely unequal strings).
+
+Formula: Dice's coefficient = (2 * Common Terms) / (Number of terms in String1 + Number of terms in String2)
+
+===== Aspect: How well does this algorithm predicts?
+
+Our current implementation sets Dice's Coefficient to 0.5. Through our testing, this appears
+fine for most spelling errors. However, it will not predict too ridiculous errors because we
+do not wish to face a scenario where the suggestion offers another command word which is
+unintended by the user.
+
+// end::commandprediction[]
