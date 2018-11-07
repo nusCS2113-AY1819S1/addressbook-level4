@@ -691,7 +691,7 @@ image::Export_Capture2_LinhChi.png[width:800]
 
 // end::archive[]
 // tag::limitfeatures[]
-== Spending Limit Feature
+== Spending Limit Features
 
 * This section describes the limit feature that allows users to set values to control their future spending.
 Constraints that apply to records also apply to each limit. Refer to <<constraints>> for more information.
@@ -743,7 +743,7 @@ with the same dates will be deleted. If there is no limit for that period, the p
 throw errors.
 Delete
 ****
-* `START_DATE/END_DATE` must match exactly the same as when the limit was created.
+* There must be a limit with the same dates.
 * Limits cannot be partially deleted with incorrect dates.
 ****
 
@@ -764,7 +764,7 @@ The editlimit command will check the input date period or the single day and
 replace the original moneyFlow with the new moneyFlow.
 ****
 * `MONEYFLOW` can only be a positive integer, and does not require a "+" or "-".
-* `START_DATE/END_DATE` must match exactly the same as when the limit was created.
+* There must be a limit with the same dates.
 ****
 
 Examples:
@@ -882,8 +882,8 @@ e.g.
 e.g. `stats d/20-12-2017 31-09-2018`
 * *Add limit* : `addlimit d/START_DATE END_DATE` +
 e.g. +
-`limit d/20-12-2017`
-`limit d/20-12-2017 31-09-2018`
+`addlimit d/20-12-2017`
+`addlimit d/20-12-2017 31-09-2018`
 * *Delete limit* `deleteLimit d/START_DATE END_DATE` +
 e.g. +
 `deleteLimit d/20-12-2017`
@@ -891,4 +891,12 @@ e.g. +
 * *Edit limit* `editLimit d/START_DATE END_DATE m/MONEYFLOW` +
 e.g. +
 `editLimit d/20-12-2017 m/100`
-`editLimit d/20-12-2017 31-09-2018 m/100`
+`editLimit d/20-12-2017 31-09-2018 m/100` +
+* *Check limit* : `checklimit`
+* *Add monthly limit* : `addmonthlylimit m/MONEYFLOW` +
+e.g. +
+`addmonthlylimit m/500` +
+* *Edit monthly limit* : `editmonthlylimit m/MONEYFLOW` +
+e.g. +
+`editmonthlylimit m/300` +
+* *Delete monthly limit* : `deletemonthlylimit`
