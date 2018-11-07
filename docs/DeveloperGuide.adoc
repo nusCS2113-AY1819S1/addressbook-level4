@@ -421,6 +421,15 @@ image::SelectGroupSequenceDiagram.png[width="800"]
 ** Pros: Modular as groups are stored in a different file, makes data extraction easier.
 ** Cons: Harder to implement.
 
+===== Aspect: Data
+
+* **Alternative 1 (current choice):** Editing/deleting a student in the system will **not** edit/delete that student from the groups he/she is in.
+** Pros: Easy to implement.
+** Cons: Student's data is not uniform throughout.
+* **Alternative 2:** Editing/deleting a student in the system **will** edit/delete that student from the groups he/she is in.
+** Pros: Student's data is uniform.
+** Cons: Additional time required for implementation purposes.
+
 // end::group[]
 
 // tag::ScriptSetup[]
