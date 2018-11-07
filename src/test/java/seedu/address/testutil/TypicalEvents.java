@@ -40,7 +40,7 @@ public class TypicalEvents {
     public static final Event EVENT_3 = new Event(
             new EventName("Test Event 3"),
             new Description("Test Description 3"),
-            new EventDate("2018-08-18"),
+            new EventDate("2018-09-18"),
             new StartTime("09:00"),
             new EndTime("21:00"),
             new Location("Test Location 3")
@@ -118,8 +118,8 @@ public class TypicalEvents {
     public static EventList getSortByDateEventList() {
         EventList eventList = new EventList();
         eventList.addEvent(EVENT_2);
-        eventList.addEvent(EVENT_3);
         eventList.addEvent(EVENT_4);
+        eventList.addEvent(EVENT_3);
         eventList.addEvent(EVENT_1);
         eventList.addEvent(EVENT_5);
 
