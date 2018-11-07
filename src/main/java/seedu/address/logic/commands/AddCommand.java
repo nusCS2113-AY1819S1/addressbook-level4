@@ -39,8 +39,9 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New product added: %1$s";
     public static final String MESSAGE_DUPLICATE_PRODUCT = "This product already exists in the product database";
-    public static final String MESSAGE_EDIT_DIST_PHONE = "Please edit the distributor number "
-            + "with the default 00000000, then add the distributor manually.";
+    public static final String MESSAGE_EDIT_DIST_PHONE = "Either the distributor has not been added because"
+            + "\n 1. The distributor already exists"
+            + "\n or 2. Another distributor with the default 00000000 phone number exists.";
 
 
     private final Product toAdd;
