@@ -68,13 +68,13 @@ public class EmailParser {
                 return new FindJobOfferCommandParser(userInput).parse(arguments);
 
             case FilterCandidateCommand.COMMAND_WORD:
-                return new FilterCandidateCommandParser().parse(arguments);
+                return new FilterCandidateCommandParser(userInput).parse(arguments);
 
             case FilterCompanyCommand.COMMAND_WORD:
-                return new FilterCompanyCommandParser().parse(arguments);
+                return new FilterCompanyCommandParser(userInput).parse(arguments);
 
             case FilterJobOfferCommand.COMMAND_WORD:
-                return new FilterJobOfferCommandParser().parse(arguments);
+                return new FilterJobOfferCommandParser(userInput).parse(arguments);
 
             case SwitchBookCommand.COMMAND_WORD:
                 return new SwitchBookCommand();
@@ -105,10 +105,10 @@ public class EmailParser {
                 return new FindJobOfferCommandParser(userInput).parse(arguments);
 
             case FilterCompanyCommand.COMMAND_WORD:
-                return new FilterCompanyCommandParser().parse(arguments);
+                return new FilterCompanyCommandParser(userInput).parse(arguments);
 
             case FilterJobOfferCommand.COMMAND_WORD:
-                return new FilterJobOfferCommandParser().parse(arguments);
+                return new FilterJobOfferCommandParser(userInput).parse(arguments);
 
             case EMAIL_NEXT_COMMAND:
                 return new EmailContentsNextCommand();
@@ -133,7 +133,7 @@ public class EmailParser {
                 return new FindCandidateCommandParser(userInput).parse(arguments);
 
             case FilterCandidateCommand.COMMAND_WORD:
-                return new FilterCandidateCommandParser().parse(arguments);
+                return new FilterCandidateCommandParser(userInput).parse(arguments);
 
             case EMAIL_NEXT_COMMAND:
                 return new EmailContentsNextCommand();
