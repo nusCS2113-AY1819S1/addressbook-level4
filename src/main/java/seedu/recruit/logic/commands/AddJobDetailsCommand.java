@@ -46,7 +46,8 @@ public class AddJobDetailsCommand extends Command {
 
 
 
-    public static final String MESSAGE_SUCCESS = "New added job offer: %1$s";
+    public static final String MESSAGE_SUCCESS = "New added job offer: %1$s\n"
+            + "(Enter details of another job offer to add or enter 'cancel' to stop adding.)";;
     public static final String MESSAGE_DUPLICATE_JOB_OFFER = "This job offer already exists in the Company";
     public static final String MESSAGE_COMPANY_NOT_FOUND = "Company not found in CompanyBook.\n"
             + "Please add the company to CompanyBook first!";

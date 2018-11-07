@@ -18,7 +18,7 @@ public class SetPasswordCommand extends Command {
 
     public static final String COMMAND_WORD = "Set Password Interface";
 
-    public static final String MESSAGE_USAGE = "Enter your new password.\n"
+    public static final String MESSAGE_USAGE = "Enter your new password (case-sensitive).\n"
                                                + "Enter 'cancel' to exit this interface.";
 
     public static final String MESSAGE_CONFIRM_PASSWORD = "Renter your new password to confirm change.";
