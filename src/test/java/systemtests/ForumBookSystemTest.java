@@ -137,7 +137,6 @@ public abstract class ForumBookSystemTest {
     protected void assertApplicationDisplaysExpected(String expectedCommandInput, String expectedResultMessage,
                                                      Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
-        assertEquals(new ForumBook(expectedModel.getForumBook()), testApp.readStorageAddressBook());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
     }
 
