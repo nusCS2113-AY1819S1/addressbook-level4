@@ -9,7 +9,7 @@
 
 == Overview
 
-Trajectory is a lightweight management system for those who need a no-frills solution for managing students, modules and classes. It is built for users who prefer typing (CLI) over GUI interaction.
+Trajectory is a lightweight management system for those who need a no-frills solution for managing students, modules, grades, classes and notes. It is built for users who prefer typing (CLI) over GUI interaction and has a GUI created with JavaFX.
 
 == Summary of contributions
 
