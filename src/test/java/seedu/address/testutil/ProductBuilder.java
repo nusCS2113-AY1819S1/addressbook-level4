@@ -4,9 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.distributor.DistributorName;
-import seedu.address.model.product.ProductInfo;
 import seedu.address.model.product.Name;
 import seedu.address.model.product.Product;
+import seedu.address.model.product.ProductInfo;
 import seedu.address.model.product.SerialNumber;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
