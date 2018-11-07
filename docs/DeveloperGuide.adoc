@@ -316,7 +316,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 * **Alternative 2:** Use `HistoryManager` for undo/redo
 ** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
-
+// tag::umsimplementation[]
 === User Authentication feature
 ==== Proposed Implementation
 Trajectory will evolve into a full-fledged LMS, and will come equipped with a user authentication system that supports role-based access control for usage by students, faculty members, administrators and guests.
@@ -350,7 +350,7 @@ image::UserLoginActivityDiagram.png[width="650"]
 ** Pros: Allows for fine-grained permissions control. Can apply the need-to-know, and need-to-use principle to assign required permissions. For example, the module owner may want to see the gradebook
 but prevent TAs from seeing it, although TAs can assign marks.
 ** Cons: Harder to implement.
-
+// end::umsimplementation[]
 // tag::classmanagementbrief[]
 === Class Add feature
 ==== Current Implementation
@@ -1140,6 +1140,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 (For all use cases below, the *System* is `Trajectory` and the *Actor* is the `teacher`, unless specified otherwise)
 
 [discrete]
+// tag::studcourseusecases[]
 === Use case: Add Student
 *Precondition(s)* :
 
@@ -1498,7 +1499,7 @@ Use case resumes at step 1.
 ** 2c1. System shows 'no courses in system' message.
 +
 Use case resumes at step 1.
-
+// end::studcourseusecases[]
 
 [discrete]
 === Use case: Add module

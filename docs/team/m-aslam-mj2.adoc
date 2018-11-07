@@ -1,0 +1,64 @@
+= Mohd Aslam - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Trajectory
+
+---
+
+== Overview
+
+Trajectory is a lightweight management system for those who need a no-frills solution for managing students, modules, grades, classes and notes. It is built for users who prefer typing (CLI) over GUI interaction and has a GUI created with JavaFX.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the capability for faculty members to manage courses and students.*
+** What it does: allows a faculty member to manage courses and students.
+** Justification: This feature improves the product significantly because it is specially built for an educational institution. Unlike AB4, which is a general address book app -- Trajectory has support for student-specific fields.
+** Highlights: Cohesiveness with other features as they make use of the student/course APIs for their own use.
+
+* *Minor enhancement*: built an utility class for the rendering of data into HTML (Bootstrap).
+
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+
+* *Other contributions*:
+
+** Project management:
+*** Initial setup of continuous integration platforms (Travis, AppVeyor), coverage platform (Coveralls) and code quality platform (Codacy).
+*** Initial setup of GitHub issue tracker.
+*** Setup of somewhat-strict code review system, which requires sign-off by Travis, AppVeyor and Codacy and additionally requires another team member to personally perform peer review before code may be merged into the organization repository.
+*** Managed milestones for the project, and ensured that required deliverables are ready.
+*** Managed releases `v1.2` - `v1.3.2` (5 releases) on GitHub
+** Enhancements to existing features:
+*** WIP
+** Documentation:
+*** Updated project-wide sections for both the UG and the DG.
+** Community:
+*** PRs reviewed and approved.
+** Tools:
+*** WIP
+
+_{you can add/remove categories in the list above}_
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=studandcoursemanagement]
+
+include::../UserGuide.adoc[tag=studandcoursemanagementsummary]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=umsimplementation]
+
+include::../DeveloperGuide.adoc[tag=studcourseusecases]
+
