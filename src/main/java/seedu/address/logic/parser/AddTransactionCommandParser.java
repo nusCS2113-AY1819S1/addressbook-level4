@@ -25,6 +25,11 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
         Transaction transaction = new Transaction();
         for (int i = 0; i < productList.length; i++) {
             try {
+                productList[i].trim();
+                if (productList[i].length() == 0) {
+                    throw new ParseException("Some products in the transaction have no name!"
+                            + "Press the up arrow and enter their names before trying again";
+                }
                 transaction.addProduct(productList[i].trim());
             } catch (ClosedTransactionException e) {
                 // TODO: Exception handling in AddTransaction command parse. Closed transaction not possible as of yet.
