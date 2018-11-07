@@ -54,7 +54,7 @@ public class UpdateStatusCommand extends Command {
                  e.printStackTrace();
              }
         }
-        
         return new CommandResult(MESSAGE_SUCCESS);
     }
+    
 }
