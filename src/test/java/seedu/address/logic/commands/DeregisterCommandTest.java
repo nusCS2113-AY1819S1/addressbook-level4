@@ -302,7 +302,7 @@ public class DeregisterCommandTest {
             return null;
         }
 
-        public String getDaysTransactions(String day) {
+        public String getDaysTransactionsAsString(String day) {
             fail("This method should not be called.");
             return null;
         }
@@ -339,6 +339,16 @@ public class DeregisterCommandTest {
         }
 
         @Override
+        public String getTransactionAsString(String date) throws InvalidTimeFormatException {
+            return null;
+        }
+
+        @Override
+        public void commitSalesHistory() {
+            fail("This should not be called");
+        }
+
+        @Override
         public void deleteUser(User user) throws UserNotFoundException {
             usersAdded.add(registerValidUser());
             requireNonNull(user);
@@ -366,6 +376,16 @@ public class DeregisterCommandTest {
         }
 
         @Override
+        public String getTransactionAsString(String date) throws InvalidTimeFormatException {
+            return null;
+        }
+
+        @Override
+        public void commitSalesHistory() {
+            fail("This should not be called.");
+        }
+
+        @Override
         public void deleteUser(User user) throws UserNotFoundException {
             throw new UserNotFoundException();
         }
@@ -388,6 +408,16 @@ public class DeregisterCommandTest {
         @Override
         public ArrayList<Reminder> getOverdueRemindersForThread() {
             return null;
+        }
+
+        @Override
+        public String getTransactionAsString(String date) throws InvalidTimeFormatException {
+            return null;
+        }
+
+        @Override
+        public void commitSalesHistory() {
+            fail("This should not be called.");
         }
 
         @Override

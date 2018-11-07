@@ -20,6 +20,7 @@ public class Product {
     private final Name name;
     private final SerialNumber serialNumber;
     private final DistributorName distname;
+    private final RemainingItems remainingItems;
 
     // Data fields
     private final ProductInfo productInfo;
@@ -29,12 +30,13 @@ public class Product {
      * Every field must be present and not null.
      */
     public Product(Name name, SerialNumber serialNumber, DistributorName distname,
-                   ProductInfo productInfo, Set<Tag> tags) {
-        requireAllNonNull(name, serialNumber, distname, productInfo, tags);
+                   ProductInfo productInfo, RemainingItems remainingItems, Set<Tag> tags) {
+        requireAllNonNull(name, serialNumber, distname, productInfo, remainingItems, tags);
         this.name = name;
         this.serialNumber = serialNumber;
         this.distname = distname;
         this.productInfo = productInfo;
+        this.remainingItems = remainingItems;
         this.tags.addAll(tags);
     }
 
@@ -52,6 +54,10 @@ public class Product {
 
     public ProductInfo getProductInfo() {
         return productInfo;
+    }
+
+    public RemainingItems getRemainingItems() {
+        return remainingItems;
     }
 
     /**
@@ -94,25 +100,28 @@ public class Product {
                 && otherProduct.getSerialNumber().equals(getSerialNumber())
                 && otherProduct.getDistributor().equals(getDistributor())
                 && otherProduct.getProductInfo().equals(getProductInfo())
+                && otherProduct.getRemainingItems().equals(getRemainingItems())
                 && otherProduct.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, serialNumber, distname, productInfo, tags);
+        return Objects.hash(name, serialNumber, distname, productInfo, tags, remainingItems);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" Serial number: ")
+                .append("\nSerial number: ")
                 .append(getSerialNumber())
-                .append(" Distributor: ")
+                .append("\nDistributor: ")
                 .append(getDistributor())
-                .append(" Product info: ")
+                .append("\nProduct info: ")
                 .append(getProductInfo())
+                .append (" Remaining products: ")
+                .append(getRemainingItems())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DISTRIBUTOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT_INFO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMAINING_ITEMS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SERIAL_NR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -12,6 +13,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.product.Product;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * A utility class for Product.
@@ -34,6 +36,7 @@ public class PersonUtil {
         sb.append(PREFIX_SERIAL_NR + product.getSerialNumber().value + " ");
         sb.append(PREFIX_DISTRIBUTOR + product.getDistributor().fullDistName + " ");
         sb.append(PREFIX_PRODUCT_INFO + product.getProductInfo().value + " ");
+        sb.append(PREFIX_REMAINING_ITEMS + product.getRemainingItems().value + " ");
         product.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -51,6 +54,8 @@ public class PersonUtil {
                 sb.append(PREFIX_DISTRIBUTOR).append(email.fullDistName).append(" "));
         descriptor.getProductInfo().ifPresent(address -> sb.append(PREFIX_PRODUCT_INFO).append(address.value)
                 .append(" "));
+        descriptor.getRemainingItems().ifPresent(remainingItems ->
+                sb.append(PREFIX_REMAINING_ITEMS).append(remainingItems.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

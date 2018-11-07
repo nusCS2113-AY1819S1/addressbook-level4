@@ -69,8 +69,6 @@ public interface Model {
      */
     void addDistributor(Distributor distributor);
 
-    //void getDistributor(Distributor distributor);
-
     /**
      * Adds the given product.
      * {@code product} must not already exist in the address book.
@@ -201,12 +199,22 @@ public interface Model {
     /**
      * Returns a given day's transaction history
      */
-    String getDaysTransactions(String day) throws InvalidTimeFormatException;
+    String getDaysTransactionsAsString(String date) throws InvalidTimeFormatException;
+
+    /**
+     * Finds and returns a transaction
+     */
+    String getTransactionAsString(String date) throws InvalidTimeFormatException;
 
     /**
      * Returns the latest transaction.
      */
     Transaction getLastTransaction();
+
+    /**
+     * Saves the newest SalesHistory.
+     */
+    void commitSalesHistory();
 
     /**
     * Sets the user list
@@ -245,5 +253,4 @@ public interface Model {
 
     /** Returns the DistributorBook */
     ReadOnlyDistributorBook getDistributorBook();
-
 }

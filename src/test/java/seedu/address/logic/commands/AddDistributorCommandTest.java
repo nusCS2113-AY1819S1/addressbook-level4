@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -230,23 +229,27 @@ public class AddDistributorCommandTest {
 
         @Override
         public void addTransaction(Transaction transaction) {
-            fail("This method should not be called.");
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public Transaction getLastTransaction() {
-            fail("This method should not be called.");
-            return null;
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitSalesHistory() {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addReminder(Reminder reminder) {
-            fail("This method should not be called.");
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -265,7 +268,12 @@ public class AddDistributorCommandTest {
         }
 
         @Override
-        public String getDaysTransactions(String day) throws InvalidTimeFormatException {
+        public String getDaysTransactionsAsString(String date) throws InvalidTimeFormatException {
+            return null;
+        }
+
+        @Override
+        public String getTransactionAsString(String date) throws InvalidTimeFormatException {
             return null;
         }
 

@@ -53,7 +53,8 @@ public class Distributor {
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSameDistributor(seedu.address.model.distributor.Distributor otherDistributor) {
-        if (otherDistributor == this) {
+        if (otherDistributor.getDistName() == this.getDistName()
+                || otherDistributor.getDistPhone() == this.getDistPhone()) {
             return true;
         }
 
@@ -86,16 +87,16 @@ public class Distributor {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(distname, distphone);
+        return Objects.hash(distname, distphone, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDistName())
-                .append(" Phone: ")
+                .append("\nPhone: ")
                 .append(getDistPhone())
-                .append(tags);
+                .append("\nTags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }

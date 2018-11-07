@@ -66,8 +66,10 @@ public class SalesHistoryManager extends SalesHistory {
 
         StringBuilder ret = new StringBuilder();
         ret.append("TIMINGS FOR TRANSACTIONS ON " + day + "\n");
+        int i = 1;
         for (Transaction transaction : daysTransactions) {
-            ret.append(transaction.getTransactionTime() + "\n");
+            ret.append(i + ") " + transaction.getTransactionTime() + "\n");
+            i++;
         }
 
         return ret.toString();
@@ -170,4 +172,5 @@ public class SalesHistoryManager extends SalesHistory {
         }
         return remindersToReturn;
     }
+
 }

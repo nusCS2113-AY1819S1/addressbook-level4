@@ -294,7 +294,7 @@ public class RegisterCommandTest {
             return null;
         }
 
-        public String getDaysTransactions(String day) {
+        public String getDaysTransactionsAsString(String day) {
             fail("This method should not be called.");
             return null;
         }
@@ -331,6 +331,16 @@ public class RegisterCommandTest {
         }
 
         @Override
+        public String getTransactionAsString(String date) throws InvalidTimeFormatException {
+            return null;
+        }
+
+        @Override
+        public void commitSalesHistory() {
+            fail("This method should not be called");
+        }
+
+        @Override
         public void addUser(User user) throws DuplicateUserException {
             requireNonNull(user);
             usersAdded.add(user);
@@ -354,6 +364,16 @@ public class RegisterCommandTest {
         @Override
         public ArrayList<Reminder> getOverdueRemindersForThread() {
             return null;
+        }
+
+        @Override
+        public String getTransactionAsString(String date) throws InvalidTimeFormatException {
+            return null;
+        }
+
+        @Override
+        public void commitSalesHistory() {
+            fail("This method should not be called.");
         }
 
         @Override

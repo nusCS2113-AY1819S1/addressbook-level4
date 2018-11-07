@@ -37,6 +37,8 @@ public class ProductCard extends UiPart<Region> {
     @FXML
     private Label distributor;
     @FXML
+    private Label remainingItems;
+    @FXML
     private FlowPane tags;
 
     public ProductCard(Product product, int displayedIndex) {
@@ -47,6 +49,8 @@ public class ProductCard extends UiPart<Region> {
         serialNumber.setText("Serial Number: " + product.getSerialNumber().value);
         info.setText("Product Info: " + product.getProductInfo().value);
         distributor.setText("Distributor: " + product.getDistributor().fullDistName);
+        remainingItems.setText("Remaining Items: " + product.getRemainingItems().value);
+
         product.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
