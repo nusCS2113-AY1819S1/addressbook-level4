@@ -410,6 +410,27 @@ The stock operation is similar to the sell operation, refer to sell command for 
 ** Cons: Code becomes less cohesive.
 // end::stockcommand[]
 
+// tag::statistic[]
+=== Statistic feature
+==== Current implementation
+The statistic feature is facilitated by a singleton class StatisticCenter. It is called directly from many existing commands and is stored in Json format.
+
+The following sequence diagram shows how the StatisticCenter interact with sell command:
+
+image::statisticSequenceDiagram.png[width="800"] 
+
+==== Design Considerations
+
+===== Aspect: How stock command is implemented
+
+* **Alternative 1 (current choice):** Increases quantity in the Quantity Class.
+** Pros: Code is more cohesive.
+** Cons: Adds more code to Quantity Class.
+* **Alternative 2:** Replace quantity in the Book Class.
+** Pros: Does not need to edit Quantity Class.
+** Cons: Code becomes less cohesive.
+// end::statistic[]
+
 // tag::dataencryption[]
 === Password Protection
 
