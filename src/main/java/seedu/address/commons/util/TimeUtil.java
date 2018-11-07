@@ -43,7 +43,7 @@ public class TimeUtil {
      * Convert the Date-type input to String-type
      *  in the form of "dd/MM/yyyy"
      */
-    public String DateToStringConverter(Date inputDate) {
+    public String dateToStringConverter(Date inputDate) {
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         return df.format(inputDate);
     }
@@ -52,7 +52,7 @@ public class TimeUtil {
      * Convert the input String-type to Date-type
      *  in the form of "dd/MM/yyyy"
      */
-    public Date StringToDateConverter(String inputDate) {
+    public Date stringToDateConverter(String inputDate) {
         //int year = Integer.parseInt(inputDate.substring(6, 10));
         //int month = Integer.parseInt(inputDate.substring(3, 5));
         //int day = Integer.parseInt(inputDate.substring(0, 2));

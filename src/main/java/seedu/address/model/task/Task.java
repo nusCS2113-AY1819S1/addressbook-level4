@@ -4,11 +4,7 @@ import seedu.address.commons.util.TimeUtil;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.sql.Time;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Objects;
 
 /**
@@ -81,9 +77,9 @@ public class Task {
 
     public Date getDayInTypeDate() {
         TimeUtil timeUtil = new TimeUtil();
-        String date = timeUtil.DateToStringConverter(new Date());
+        String date = timeUtil.dateToStringConverter(new Date());
         String currentYear = date.substring(6, 10);
-        return timeUtil.StringToDateConverter( getDay() + '/' + getMonth() + '/' + currentYear);
+        return timeUtil.stringToDateConverter( getDay() + '/' + getMonth() + '/' + currentYear);
     }
 
     /**

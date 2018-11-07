@@ -46,6 +46,8 @@ public class TaskCard extends UiPart<Region> {
         taskmodule.setText(task.getModule().value);
         taskdate.setText(task.getDate().value);
 
+        // task state show red for uncompleted
+        // green for completed
         if (task.getComplete()) {
             taskstate.setStyle("-fx-text-fill: #7fce92");
         }
