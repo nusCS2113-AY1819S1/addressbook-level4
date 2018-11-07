@@ -33,13 +33,16 @@ public class CreateModuleCommandSystemTest extends ForumBookSystemTest {
         //set the current logged in user as an admin.
         User validAdmin = new UserBuilder().build();
         Context.getInstance().setCurrentUser(validAdmin);
-        Model model = getModel();
 
         /* Case: add a new module to forum book, command with leading spaces and trailing spaces
          * -> added
          */
+        /* Case: missing code -> rejected */
+        String command = CreateModuleCommand.COMMAND_WORD + MODULE_TITLE_DESC_MA1508E;
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateModuleCommand.MESSAGE_USAGE));
+
         Module toAdd = MA1508E;
-        String command = "   " + CreateModuleCommand.COMMAND_WORD + "  " + MODULE_CODE_DESC_MA1508E + "  "
+        command = "   " + CreateModuleCommand.COMMAND_WORD + "  " + MODULE_CODE_DESC_MA1508E + "  "
             + MODULE_TITLE_DESC_MA1508E + " ";
         assertCommandSuccess(command, toAdd);
 
@@ -65,10 +68,6 @@ public class CreateModuleCommandSystemTest extends ForumBookSystemTest {
         command = ModuleUtil.getCreateCommand(toAdd);
         assertCommandFailure(command, String.format(CreateModuleCommand.MESSAGE_DUPLICATE_MODULE,
             CS1231.getModuleCode()));
-
-        /* Case: missing code -> rejected */
-        command = CreateModuleCommand.COMMAND_WORD + MODULE_TITLE_DESC_MA1508E;
-        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateModuleCommand.MESSAGE_USAGE));
 
         /* Case: missing title -> rejected */
         command = CreateModuleCommand.COMMAND_WORD + MODULE_CODE_DESC_MA1508E;
@@ -130,7 +129,6 @@ public class CreateModuleCommandSystemTest extends ForumBookSystemTest {
         assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
         assertSelectedCardUnchanged();
         assertCommandBoxShowsDefaultStyle();
-        assertStatusBarUnchangedExceptSyncStatus();
     }
 
     /**

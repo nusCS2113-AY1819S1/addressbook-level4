@@ -12,7 +12,6 @@ import com.t13g2.forum.model.ReadOnlyForumBook;
 import guitests.guihandles.MainWindowHandle;
 import javafx.stage.Stage;
 
-//@@author xllx1
 /**
  * Contains helper methods that system tests require.
  */

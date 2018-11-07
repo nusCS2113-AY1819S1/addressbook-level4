@@ -7,7 +7,6 @@ import static com.t13g2.forum.ui.UiPart.FXML_FILE_FOLDER;
 import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -23,7 +22,6 @@ import org.junit.ClassRule;
 import com.t13g2.forum.MainApp;
 import com.t13g2.forum.TestApp;
 import com.t13g2.forum.commons.core.EventsCenter;
-import com.t13g2.forum.logic.commands.FindCommand;
 import com.t13g2.forum.model.ForumBook;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.testutil.TypicalPersons;
@@ -37,7 +35,6 @@ import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 
-//@@author xllx1
 /**
  * A system test class for AddressBook, which provides access to handles of GUI components and helper methods
  * for test verification.
@@ -130,14 +127,6 @@ public abstract class ForumBookSystemTest {
         mainWindowHandle.getCommandBox().run(command);
 
         waitUntilBrowserLoaded(getBrowserPanel());
-    }
-
-    /**
-     * Displays all persons with any parts of their names matching {@code keyword} (case-insensitive).
-     */
-    protected void showPersonsWithName(String keyword) {
-        executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
-        assertTrue(getModel().getFilteredPersonList().size() < getModel().getForumBook().getPersonList().size());
     }
 
     /**

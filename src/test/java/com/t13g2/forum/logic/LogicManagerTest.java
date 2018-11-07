@@ -10,16 +10,14 @@ import org.junit.rules.ExpectedException;
 import com.t13g2.forum.logic.commands.CommandResult;
 import com.t13g2.forum.logic.commands.DeleteUserCommand;
 import com.t13g2.forum.logic.commands.HistoryCommand;
-import com.t13g2.forum.logic.commands.ListModuleCommand;
+import com.t13g2.forum.logic.commands.LogoutCommand;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
 import com.t13g2.forum.model.Context;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.ModelManager;
 import com.t13g2.forum.model.UserPrefs;
-import com.t13g2.forum.model.forum.Module;
 import com.t13g2.forum.model.forum.User;
-import com.t13g2.forum.testutil.TypicalModules;
 import com.t13g2.forum.testutil.UserBuilder;
 
 
@@ -54,12 +52,9 @@ public class LogicManagerTest {
         User loginUser = new UserBuilder().build();
         Context.getInstance().setCurrentUser(loginUser);
 
-        String listModuleCommand = ListModuleCommand.COMMAND_WORD;
-        Module defaultModule = TypicalModules.CS2113;
-        String message = defaultModule.getModuleCode() + ": " + defaultModule.getTitle() + "\n";
-        message += "----------------------------------------------------------------------------------\n";
-        assertCommandSuccess(listModuleCommand, String.format(ListModuleCommand.MESSAGE_SUCCESS, message), model);
-        assertHistoryCorrect(listModuleCommand);
+        String logoutCommand = LogoutCommand.COMMAND_WORD;
+        assertCommandSuccess(logoutCommand, String.format(LogoutCommand.MESSAGE_SUCCESS, "testAdmin"), model);
+        assertHistoryCorrect(logoutCommand);
     }
 
     @Test
