@@ -65,10 +65,26 @@ public class SummaryCommandParser implements Parser<SummaryCommand> {
      */
     public SummaryCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE);
-        if (!arePrefixesPresent(argMultimap, PREFIX_DATE) || argMultimap.getPreamble().isEmpty()) {
+        if (argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryCommand.MESSAGE_USAGE));
         }
         String mode = argMultimap.getPreamble().trim();
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATE)) {
+            switch(mode) {
+            case SummaryByDateCommand.COMMAND_MODE_WORD:
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        SummaryByDateCommand.MESSAGE_USAGE));
+            case SummaryByMonthCommand.COMMAND_MODE_WORD:
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        SummaryByMonthCommand.MESSAGE_USAGE));
+            case SummaryByCategoryCommand.COMMAND_MODE_WORD:
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        SummaryByCategoryCommand.MESSAGE_USAGE));
+            default:
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        SummaryCommand.MESSAGE_USAGE));
+            }
+        }
         String intervalString = argMultimap.getValue(PREFIX_DATE).get();
         logger.info("Interval String: " + intervalString);
         String[] argList = getArguments(intervalString);
