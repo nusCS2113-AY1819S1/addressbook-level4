@@ -5,9 +5,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_PUNCTUAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_ALICE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EVENT_NAME_BIRTHDAY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_LT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_MORNING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_NOON;
 import static seedu.address.testutil.TypicalEvents.EVENT_1;
@@ -34,7 +35,7 @@ public class EventTest {
     @Before
     public void setup() {
         setOne = new HashSet<>();
-        setOne.add(VALID_NAME_ALICE);
+        setOne.add(VALID_EMAIL_ALICE);
     }
 
     @Test
@@ -45,17 +46,18 @@ public class EventTest {
         // null -> returns false
         assertFalse(EVENT_1.isSameEvent(null));
 
-
-        // different location and -> returns false
-        Event editedEvent = new EventBuilder(EVENT_1).withLocation(VALID_LOCATION_LT)
-                .withDescription(VALID_DESCRIPTION_PUNCTUAL).withStartTime(VALID_TIME_MORNING)
-                .withEndTime(VALID_TIME_NOON).build();
+        // different location and clash  returns false
+        Event editedEvent = new EventBuilder(EVENT_1).withLocation(VALID_LOCATION_LT).build();
         assertFalse(EVENT_1.isSameEvent(editedEvent));
 
-        // different name -> returns false
-        editedEvent = new EventBuilder(EVENT_1).withEventName(VALID_EVENT_NAME_BIRTHDAY).build();
+        // same location and does not clash -> returns false
+        editedEvent = new EventBuilder(EVENT_1).withStartTime(VALID_TIME_MORNING).withEndTime(VALID_TIME_NOON).build();
         assertFalse(EVENT_1.isSameEvent(editedEvent));
 
+        // different name and description -> returns true
+        editedEvent = new EventBuilder(EVENT_1).withEventName(VALID_EVENT_NAME_BIRTHDAY)
+                .withDescription(VALID_DESCRIPTION_PUNCTUAL).build();
+        assertTrue(EVENT_1.isSameEvent(editedEvent));
     }
 
     @Test
@@ -73,7 +75,7 @@ public class EventTest {
         // different type -> returns false
         assertFalse(EVENT_1.equals(5));
 
-        // different person -> returns false
+        // different event -> returns false
         assertFalse(EVENT_1.equals(EVENT_2));
 
         // different name -> returns false
@@ -107,7 +109,7 @@ public class EventTest {
         Event eventUpdated = new EventBuilder(EVENT_1).withAttendee(setOne).build();
 
         //add name
-        Event event = eventToUpdate.createEventWithUpdatedAttendee(VALID_NAME_ALICE);
+        Event event = eventToUpdate.createEventWithUpdatedAttendee(VALID_EMAIL_ALICE);
 
         assertEquals(event, eventUpdated);
     }
@@ -118,32 +120,32 @@ public class EventTest {
         Event eventUpdated = new EventBuilder(EVENT_1).build();
 
         //remove name
-        Event event = eventToUpdate.removePersonFromAttendee(VALID_NAME_ALICE);
+        Event event = eventToUpdate.removePersonFromAttendee(VALID_EMAIL_ALICE);
 
         assertEquals(event, eventUpdated);
     }
 
     @Test
-    public void hasAttendee_validName_returnsTrue() {
+    public void hasAttendee_invitedPerson_returnsTrue() {
         Event event = new EventBuilder(EVENT_1).withAttendee(setOne).build();
-        assertTrue(event.hasAttendee("Alice Pauline"));
+        assertTrue(event.hasAttendee(VALID_EMAIL_ALICE));
 
     }
 
     @Test
-    public void hasAttendee_invalidName_returnsFalse() {
+    public void hasAttendee_uninvitedPerson_returnsFalse() {
         Event event = new EventBuilder(EVENT_1).withAttendee(setOne).build();
-        assertFalse(event.hasAttendee("Bob Choo"));
+        assertFalse(event.hasAttendee(VALID_EMAIL_BOB));
     }
 
     @Test
-    public void isAttendeeEmpty_attendeeContainsNoName_returnsTrue() {
+    public void isAttendeeEmpty_attendeeContainsNoEmail_returnsTrue() {
         Event event = new EventBuilder(EVENT_1).build();
         assertTrue(event.isAttendeeEmpty());
     }
 
     @Test
-    public void isAttendeeEmpty_attendeeContainsNames_returnsFalse() {
+    public void isAttendeeEmpty_attendeeContainsEmails_returnsFalse() {
         Event event = new EventBuilder(EVENT_1).withAttendee(setOne).build();
         assertFalse(event.isAttendeeEmpty());
     }

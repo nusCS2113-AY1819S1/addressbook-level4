@@ -50,7 +50,8 @@ public class EditEventCommand extends Command {
 
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_EVENT = "This event name already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_EVENT =
+            "The edited location has been booked for another event at the selected time.";
     public static final String MESSAGE_EVENT_CLASH = "The updated time will result in clash with %1$s's schedule.";
 
     private final Index index;
@@ -99,26 +100,30 @@ public class EditEventCommand extends Command {
         Event eventToEdit = lastShownList.get(index.getZeroBased());
         Event editedEvent = createEditedEvent(eventToEdit, editEventDescriptor);
 
-        if (!eventToEdit.isSameEvent(editedEvent) && model.hasEvent(editedEvent)) {
-            throw new CommandException(MESSAGE_DUPLICATE_EVENT);
-        }
-
         if (editedEvent.getStartTime().compareTo(editedEvent.getEndTime()) > 0) {
             throw new CommandException(EndTime.MESSAGE_INVALID_END_TIME);
         }
 
+        if (!eventToEdit.isSameEvent(editedEvent) && model.hasEvent(editedEvent)) {
+            throw new CommandException(MESSAGE_DUPLICATE_EVENT);
+        }
+
         //TODO: Write tests for EditEvent
+
         /*
-        for (String personName: editedEvent.getAttendees().getAttendeesSet()) {
-            if (model.hasClash(editedEvent, personName)) {
-                throw new CommandException(String.format(MESSAGE_EVENT_CLASH, personName));
+        Model modelDummy = new ModelManager(model.getAddressBook(), model.getEventList(), new UserPrefs());
+        modelDummy.deleteEvent(eventToEdit);
+        Set<String> attendeeSet = editedEvent.getAttendees().getAttendeesSet();
+        for (String personEmail: attendeeSet) {
+            if (modelDummy.hasClash(editedEvent, personEmail)) {
+                throw new CommandException(String.format(MESSAGE_EVENT_CLASH, personEmail));
             }
-        }*/
+        } */
 
         model.updateEvent(eventToEdit, editedEvent);
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         model.commitEventList();
-        return new CommandResult(String.format(MESSAGE_EDIT_EVENT_SUCCESS, editedEvent.getEventName()));
+        return new CommandResult(String.format(MESSAGE_EDIT_EVENT_SUCCESS, editedEvent));
     }
 
     @Override

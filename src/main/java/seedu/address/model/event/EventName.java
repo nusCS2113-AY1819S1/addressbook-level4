@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class EventName {
 
     public static final String MESSAGE_EVENT_CONSTRAINTS =
-            "Event can take any values, and it should not be blank";
+            "Event name can take any values, and it should not be blank";
 
     /*
      * The first character of the event name must not be a whitespace,

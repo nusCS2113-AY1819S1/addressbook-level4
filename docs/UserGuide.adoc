@@ -98,6 +98,14 @@ Priority level: `default`,`manager`
 Adds an employee to ProManage +
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT [t/TAG]...`
 
+[NOTE]
+====
+
+* Each employee must have a unique work email address.
+* Email address is case insensitive.
+
+====
+
 [TIP]
 An employee can have any number of tags (including 0)
 
@@ -113,13 +121,13 @@ Priority level: `default`,`manager`
 
 Edits the details of the employee: +
 Format:
-`edit PERSON_INDEX [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dep/DEPARTMENT] [t/TAG]…​`
+`edit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [dep/DEPARTMENT] [t/TAG]…​`
 
 ****
 * Edits the employee at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The
 index *must be a positive integer* 1, 2, 3, ... +
 * At least one of the optional fields must be provided.
-* Name is not editable
+* *Email is not editable*
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the employee will be removed i.e adding of tags is not cumulative.
 * You can remove all the employee’s tags by typing t/ without specifying any tags after it.
@@ -127,8 +135,8 @@ index *must be a positive integer* 1, 2, 3, ... +
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+* `edit 1 p/91234567 a/The Vision` +
+Edits the phone number and address of the 1st person to be `91234567` and `The Vision` respectively.
 
 === Deleting an employee : `delete`
 Priority level: `default`,`manager`
@@ -176,17 +184,18 @@ Format: `addEvent n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START_TIME e/END_T
 
 [NOTE]
 ====
-* Leap years are not considered during date validation.
+* One location can only hold one event at any time.
 * Events created cannot span multiple days.
+* Leap years are not considered during date validation.
 ====
 
 Example:
 
 * `addEvent n/Board Meeting d/Weekly Meeting l/Conference Room 1 date/2018-09-28 s/12:00 e/23:59` +
-Creates an event named Board Meeting.
+Creates an event named Board Meeting at Conference Room 1 at 2018-09-28, 12:00 to 23:59.
 
 
-=== Modifying an event: `editEvent`
+=== Editing an event: `editEvent`
 Priority level: `default`,`manager`
 
 Edits the details of the events: +
@@ -200,6 +209,7 @@ index *must be a positive integer* 1, 2, 3, ... +
 * TIME needs to be in 00:00 format
 * START_TIME must not be later than END_TIME
 * Existing values will be updated to the input values.
+* One location can only hold one event at any time.
 ****
 
 Examples:
@@ -232,7 +242,7 @@ Sort the event listing based on the key words provided. +
 Able to sort with event's name, event's date, event's starttime, event's endtime.  +
 *Key word:* +
 1) event's name: `name` +
-2) event's data: `date` +
+2) event's date: `date` +
 3) event's starttime: `starttime` +
 4) event's endtime: `endtime`
 
@@ -313,14 +323,15 @@ view all events of employee at index 1 in August 2018
 === Locating persons by name: `find`
 Priority level: all
 
-Finds employees whose names contain any of the given keywords. +
+Finds employees whose names contain any of the given keywords or whose email matches any of the given keywords (case-insensitive). +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The search is case insensitive. e.g `hans` will match `Hans`
+* The search is case insensitive. e.g `hans` will match `Hans`, `hans@example.com` will match `Hans@Example.Com`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* Only the name and email is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
+* Only complete email will be matched e.g. `alice` will not match `alice@example.com`
 * Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
@@ -433,7 +444,7 @@ There is no need to save manually.
 
 * *addEvent* : `addEvent n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START_TIME e/END_TIME`
 
-* *editEvent* : `editEvent EVENT_INDEX [n/NAME] [d/DESCRIPTION] [l/LOCATION] [date/DATE] [s/START_TIME [e/END_TIME]`
+* *editEvent* : `editEvent EVENT_INDEX [n/NAME] [d/DESCRIPTION] [l/LOCATION] [date/DATE] [s/START_TIME] [e/END_TIME]`
 
 * *deleteEvent* : `deleteEvent EVENT_INDEX`
 

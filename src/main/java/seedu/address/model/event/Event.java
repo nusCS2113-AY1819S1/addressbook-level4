@@ -94,7 +94,7 @@ public class Event implements Comparable<Event> {
 
 
     /**
-     * Returns true if both event of the same name have at least one other identity field that is the same.
+     * Returns true if both event are at the same location and clashes.
      * This defines a weaker notion of equality between two events.
      */
     public boolean isSameEvent(Event event) {
@@ -102,11 +102,8 @@ public class Event implements Comparable<Event> {
             return true;
         }
         return event != null
-                && event.getEventName().equals(getEventName())
-                && (event.getDescription().equals(getDescription())
-                || event.getLocation().equals(getLocation())
-                || event.getStartTime().equals(getStartTime())
-                || event.getEndTime().equals(getEndTime()));
+                && event.getLocation().equals(getLocation())
+                && event.hasClash(this);
     }
 
     /**
@@ -165,8 +162,8 @@ public class Event implements Comparable<Event> {
     /**
      * Create a new event with the new email added to the current attendees list.
      *
-     * @param personEmail The person's email to be removed from the attendees list.
-     * @return An updated event with the person's email removed from the original attendees list.
+     * @param personEmail The person's email to be added to the attendees list.
+     * @return An updated event with the person's email added to the original attendees list.
      */
     public Event createEventWithUpdatedAttendee(String personEmail) {
         assert personEmail != null;

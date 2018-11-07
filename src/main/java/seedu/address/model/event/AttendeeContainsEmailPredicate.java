@@ -4,7 +4,7 @@ import java.util.function.Predicate;
 
 //@@author jieliangang
 /**
- * Tests that a {@code Event}'s {@code Attendee} contains the person name given.
+ * Tests that a {@code Event}'s {@code Attendee} contains the person email given.
  */
 public class AttendeeContainsEmailPredicate implements Predicate<Event> {
     private final String personEmail;

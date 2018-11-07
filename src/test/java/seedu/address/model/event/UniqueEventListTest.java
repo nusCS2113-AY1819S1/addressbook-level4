@@ -50,7 +50,7 @@ public class UniqueEventListTest {
     @Test
     public void contains_eventWithSameIdentityFieldsInList_returnsTrue() {
         uniqueEventList.add(EVENT_1);
-        Event editedEvent = new EventBuilder(EVENT_1).withLocation(VALID_LOCATION_LT).build();
+        Event editedEvent = new EventBuilder(EVENT_1).withDescription(VALID_DESCRIPTION_PUNCTUAL).build();
         assertTrue(uniqueEventList.contains(editedEvent));
     }
 

@@ -28,8 +28,8 @@ public class SelectCommand extends Command {
     public static final String COMMAND_WORD = "select";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Selects the person identified by the index number used in the displayed person list "
-            + "and display events the person is attending. Show events in selected date/month/year if indicated\n"
+            + ": Selects the employee identified by the index number used in the displayed person list "
+            + "and display events the employee is attending. Show events in selected date/month/year if indicated\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_YEAR + "YEAR] "
@@ -68,16 +68,15 @@ public class SelectCommand extends Command {
 
         Person person = filteredPersonList.get(targetIndex.getZeroBased());
         String personEmail = person.getEmail().toString();
-        AttendeeContainsEmailPredicate predicate = new AttendeeContainsEmailPredicate(personEmail);
 
         if (type == TimeType.NONE) {
-            model.updateFilteredEventList(predicate);
+            AttendeeContainsEmailPredicate predicateNoDateFilter = new AttendeeContainsEmailPredicate(personEmail);
+            model.updateFilteredEventList(predicateNoDateFilter);
         } else {
             assert date != null;
-            EventContainsAttendeeAndDatePredicate predicate2 =
+            EventContainsAttendeeAndDatePredicate predicateWithDateFilter =
                     new EventContainsAttendeeAndDatePredicate(personEmail, date, type);
-            model.updateFilteredEventList(predicate2);
-
+            model.updateFilteredEventList(predicateWithDateFilter);
         }
 
         model.sortByDate();
@@ -94,7 +93,7 @@ public class SelectCommand extends Command {
                 && targetIndex.equals(((SelectCommand) other).targetIndex) // state check
                 && (((date == null && (((SelectCommand) other).date) == null)) // short circuit if both are null
                     || ((date != null && (((SelectCommand) other).date) != null)
-                && date.equals(((SelectCommand) other).date)))
+                    && date.equals(((SelectCommand) other).date)))
                 && type.equals(((SelectCommand) other).type));
     }
 }

@@ -44,12 +44,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void undoResetData() {
+    public void undoBothState() {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public void redoResetData() {
+    public void redoBothState() {
         throw new AssertionError("This method should not be called.");
     }
 
