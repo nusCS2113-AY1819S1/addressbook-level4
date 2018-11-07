@@ -24,7 +24,3 @@ out/
 reposense-report/
 !build.gradle
 scripts/
-src/test/ScriptCommandTest/
-src/test/ScriptFiles/
-
-
