@@ -269,9 +269,9 @@ public class ModelManager extends ComponentManager implements Model {
      */
     public Limit generateThisMonthLimit (Limit limitIn) {
         Date today = DateUtil.getDateToday();
-        Date dateStart = new Date("01-" + today.getMonth() + "-" + today.getYear());
         Month thisMonth = new Month(today.getMonth(), today.getYear());
-        Date dateEnd = new Date(thisMonth.getLastDay() + "-" + today.getMonth() + "-" + today.getYear());
+        Date dateStart = DateUtil.generateFirstOfMonth(thisMonth);
+        Date dateEnd = DateUtil.generateLastOfMonth(thisMonth);
         Limit thisMonthLimit = new Limit(dateStart, dateEnd, limitIn.getLimitMoneyFlow());
 
         return thisMonthLimit;
