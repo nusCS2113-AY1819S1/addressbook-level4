@@ -334,11 +334,16 @@ Format: `unregister INDEX`
 Examples:
 
 * `list` +
-`register 1` +
+`unregister 1` +
 Unregisters user from the 1st event of the Event Manager.
 * `find Sports` +
-`register 2` +
+`unregister 2` +
 Unregisters User from the 2nd event in the results of the `find` command.
+
+=== List all registered events : `attending`
+
+User: Lists all events that the user has registered for. +
+Format: `attending`
 // end::rsvp[]
 
 === Set reminders : `setReminder` [Proposed]

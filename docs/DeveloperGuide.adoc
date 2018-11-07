@@ -514,10 +514,6 @@ image::registerSD.png[width="800"]
 * **Alternative 2:** Attendance stored in sorted order.
 ** Pros: No need to sort each time an event is reloaded.
 ** Cons: More complexity for inserting in correct location.
-
-==== Future Improvements
-===== Adding `attending` command.
-* Allows users to view all events they have registered for.
 // end::rsvp[]
 
 // tag::sorting[]
