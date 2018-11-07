@@ -196,6 +196,7 @@ Examples:
 * `deleteLoanList 1` +
 The first entry as shown on the viewLoanList command will be deleted. The status of the item will be automatically changed back to ready
 
+// tag::tag[]
 === Listing items under specific tags: `tag`
 
 Finds and lists items whose tags contain any of the given keywords. +
@@ -231,6 +232,7 @@ Examples:
 
 * `deleteTag 1 t/ Lab1 t/ Lab2` +
 Deletes tags "Lab1" and "Lab2" from the item with index 1
+// end::tag[]
 
 === Lost an item: `lost`
 
