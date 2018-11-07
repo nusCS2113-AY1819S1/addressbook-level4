@@ -1,8 +1,11 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -10,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.distributor.Distributor;
 import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.distributor.DistributorPhone;
+import seedu.address.model.tag.Tag;
 
 /**
  * JAXB-friendly version of the Distributor.
@@ -48,6 +52,9 @@ public class XmlAdaptedDistributor {
     public XmlAdaptedDistributor(Distributor source) {
         name = source.getDistName().fullDistName;
         phone = source.getDistPhone().value;
+        tagged = source.getTags().stream()
+                .map(XmlAdaptedTag::new)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -56,6 +63,10 @@ public class XmlAdaptedDistributor {
      * @throws IllegalValueException if there were any data constraints violated in the adapted distributor
      */
     public Distributor toModelType() throws IllegalValueException {
+        final List<Tag> distributorTags = new ArrayList<>();
+        for (XmlAdaptedTag tag : tagged) {
+            distributorTags.add(tag.toModelType());
+        }
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -74,8 +85,9 @@ public class XmlAdaptedDistributor {
             throw new IllegalValueException(DistributorPhone.MESSAGE_PHONE_CONSTRAINTS);
         }
         final DistributorPhone modelPhone = new DistributorPhone(phone);
+        final Set<Tag> modelTags = new HashSet<>(distributorTags);
 
-        return new Distributor(modelName, modelPhone);
+        return new Distributor(modelName, modelPhone, modelTags);
     }
 
     @Override
