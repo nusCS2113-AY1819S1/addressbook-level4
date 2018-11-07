@@ -41,7 +41,6 @@ public class AddDistributorCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
         if (model.hasDistributor(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_DISTRIBUTOR);
         }

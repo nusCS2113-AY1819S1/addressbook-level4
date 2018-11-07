@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMAINING_ITEMS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SERIAL_NR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -56,8 +57,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         System.out.print("\"Hello\""); // <-- We come all the way here. Neither distro or product is created
 
         Product product = new Product(name, serialNumber, distname, productInfo, remainingItems, tagList);
-        Distributor distributor = new Distributor(distname, distphone, null);
-
+        Distributor distributor = new Distributor(distname, distphone, new HashSet<>());
+        System.out.print(product.getRemainingItems());
         return new AddCommand(product, distributor);
 
     }
