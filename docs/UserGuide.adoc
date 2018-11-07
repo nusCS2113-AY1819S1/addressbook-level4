@@ -146,7 +146,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The search is case insensitive. e.g `arduino` will match `Arduino`
 * The order of the keywords does not matter. e.g. `ESP8226 Chip` will match `Chip ESP8266`
 * Only the name is searched.
-* Partial words will be matched e.g. `Arduino` will match `Arduinos`
+* Partial words will be matched e.g. `Ard` will match `Arduino`
 * Items matching at least one keyword will be returned (i.e. `OR` search). e.g. `Arduino Uno` will return `Arduino Mega`, `Arduino Leonardo`
 ****
 
@@ -307,8 +307,6 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `delete 1` command) +
 `redo` (reapplies the `clear` command) +
 
-// tag::savecommand[]
-
 === Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
@@ -319,6 +317,7 @@ Format: `history`
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
 
+// tag::savecommand[]
 === Save current version of stock list : `save`
 
 An xml file recording current stocks will be created and named. +
@@ -330,7 +329,7 @@ Examples:
 This would save the stock list at the time when the command is inputted, and the name for this xml file is
 `ForAugust.xml`, under a /versions/ folder in main.
 // end::savecommand[]
-
+// tag::opencommand[]
 === Open a saved stock list : `open`
 
 An xml file recording current stocks will be opened. +
@@ -340,7 +339,7 @@ Examples:
 
 * `open ForAugust` +
 This would open the saved stock list under /versions/ folder in main at the time when the command is inputted
-
+// end::opencommand[]
 
 === Exiting the program : `exit`
 

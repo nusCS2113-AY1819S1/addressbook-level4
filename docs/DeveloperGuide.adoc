@@ -321,19 +321,20 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
-// tag::savecommand[]
-=== SaveCommand feature
+// tag::saveopen[]
+=== Save/Open feature
 ==== Current Implementation
 
-The saveStockListVersion mechanism is facilitated by `SaveCommand`. It extends `Command` and implements the following operation:
+The save/open mechanism is facilitated by `SaveCommand` and `OpenCommand`. It extends `Command` and implements the following operation:
 
 * `Command#SaveCommand()` -- Saves the current version of the stock list as an XML file in a /versions/ folder.
+* `Command#OpenCommand()` -- Opens the saved XML file as a table in the browser panel.
 
 The operation is exposed in the `Model` interface as `Model#saveStockList()`.
 
 Given below is an example usage scenario and how the saveCommand mechanism behaves at each step.
 
-Step 1. The user executes `save lab1` command to save the current version of the stock list as an xml file named `lab1.xml`.
+Step 1. The user executes `save april_18` command to save the current version of the stock list as an xml file named `april_18.xml`.
 
 Step 2. The `save` command calls `Model#saveStockList()`, which initiates a `saveStockListVersionEvent`. The `fileName` and `ReadOnlyStockList` are saved as public final variables in the event.
 
@@ -341,18 +342,38 @@ Step 3. The `handleSaveStockListVersionEvent` handler calls the `saveStockListVe
 
 Step 4. The `ReadOnlyStockList` is saved as an xml file.
 
+Step 5. The user executes `open april_18` command to open the saved april_18.xml file.
+
+Step 6. The `open` command calls `Model#openStockList()`, which initiates a `openStockListVersionEvent`. The `fileName` is saved as a public final variable in the event.
+
+Step 7. The `handleOpenStockListVersionEvent` handler calls the `loadFileAsPage()` method from the `BrowserPanel` class.
+
+Step 8. The `loadFileAsPage()` method takes in the fileName and passes the directories of the `april_18.xml` and `template.xsl` files into `transformXml()` method.
+
+Step 9. The `april_18.xml` file is transformed with the `template.xsl` stylesheet into a table format and is displayed by the browser engine on the browser panel.
+
 ==== Design Considerations
 
-===== Aspect: How SaveCommand executes
+===== Aspect: How save executes
 
-* **Alternative 1** (current choice) Save the entire stock list.
-** Pros: Able to reload the particular version on the application.
-** Cons: May have performance issues in terms of usage.
+* **Alternative 1** (current choice) Save as .xml file.
+** Pros: Able to display the inventory as a table by using XML transformation with XSLT. The .xml file can also be opened in Excel.
+** Cons: -
 
 * **Alternative 2** Save as .csv file.
-** Pros: Less memory usage
-** Cons: Unable to edit fields using the application upon creation of the .csv file.
-// end::savecommand[]
+** Pros: File can be imported or exported.
+** Cons: Unable to style the displayed table in the application.
+
+===== Aspect: How open executes
+
+* **Alternative 1** (current choice) Transform .xml file into a table with a .xsl stylesheet.
+** Pros: Able to display the inventory in a table format for ease of view.
+** Cons: A template.xsl file must be included in the application.
+
+* **Alternative 2** Open the .xml file as it is
+** Pros: Does not require transforming the .xml file with XSLT.
+** Cons: The displayed inventory is in XML format and hard to decipher.
+// end::saveopen[]
 
 // tag::changestatus[]
 === Change Status command
