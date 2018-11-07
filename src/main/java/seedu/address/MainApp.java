@@ -24,8 +24,8 @@ import seedu.address.model.DistributorBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ProductDatabase;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyDistributorBook;
+import seedu.address.model.ReadOnlyProductDatabase;
 import seedu.address.model.ReadOnlyUserDatabase;
 import seedu.address.model.UserDatabase;
 import seedu.address.model.UserPrefs;
@@ -103,8 +103,8 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyProductDatabase> addressBookOptional;
+        ReadOnlyProductDatabase initialData;
         Optional<ReadOnlyUserDatabase> userDatabaseOptional;
         ReadOnlyUserDatabase initialUsers;
         Optional<ReadOnlyDistributorBook> distributorBookOptional;
@@ -127,7 +127,7 @@ public class MainApp extends Application {
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample ProductDatabase");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleProductDatabase);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty ProductDatabase");
             initialData = new ProductDatabase();

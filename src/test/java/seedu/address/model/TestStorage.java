@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.core.ComponentManager;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.ProductDatabaseChangedEvent;
 import seedu.address.commons.events.model.DistributorBookChangedEvent;
 import seedu.address.commons.events.model.SalesHistoryChangedEvent;
 import seedu.address.commons.events.model.UserDatabaseChangedEvent;
@@ -50,12 +50,12 @@ public class TestStorage extends ComponentManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
+    public Optional<ReadOnlyProductDatabase> readAddressBook() throws DataConversionException, IOException {
         return null;
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) {
+    public Optional<ReadOnlyProductDatabase> readAddressBook(Path filePath) {
         return null;
     }
 
@@ -70,11 +70,11 @@ public class TestStorage extends ComponentManager implements Storage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+    public void saveAddressBook(ReadOnlyProductDatabase addressBook) throws IOException {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveAddressBook(ReadOnlyProductDatabase addressBook, Path filePath) throws IOException {
     }
 
     @Override
@@ -91,7 +91,7 @@ public class TestStorage extends ComponentManager implements Storage {
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     @Override
-    public void handleAddressBookChangedEvent(AddressBookChangedEvent abce) {
+    public void handleAddressBookChangedEvent(ProductDatabaseChangedEvent abce) {
     }
 
     @Override

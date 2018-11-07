@@ -31,13 +31,13 @@ public interface Model {
     Predicate<Product> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyAddressBook newData);
+    void resetData(ReadOnlyProductDatabase newData);
 
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyDistributorBook newData);
 
     /** Returns the AddressBook */
-    ReadOnlyAddressBook getProductInfoBook();
+    ReadOnlyProductDatabase getProductInfoBook();
 
     /** Returns the DistributorBook */
     ReadOnlyDistributorBook getDistributorInfoBook();
@@ -214,7 +214,7 @@ public interface Model {
     void setUsersList(UniqueUserList uniqueUserList);
 
     /** Returns the UserDatabase */
-    ReadOnlyAddressBook getUserDatabase();
+    ReadOnlyProductDatabase getUserDatabase();
 
     /**
      * Deletes the given user.
@@ -241,7 +241,7 @@ public interface Model {
     void updateUserPassword(User target, User userWithNewPassword) throws UserNotFoundException;
 
     /** Returns the ProductDatabase */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyProductDatabase getAddressBook();
 
     /** Returns the DistributorBook */
     ReadOnlyDistributorBook getDistributorBook();
