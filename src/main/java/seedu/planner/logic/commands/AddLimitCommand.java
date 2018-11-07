@@ -33,15 +33,7 @@ public class AddLimitCommand extends Command {
             + PREFIX_DATE + "18-9-2018 "
             + PREFIX_MONEYFLOW + "100) \n";
 
-    public static final String MESSAGE_SINGLE_DATE = "Date: %s\n";
-    public static final String MESSAGE_DOUBLE_DATE = "Date period: %s -- %s\n";
-    public static final String MESSAGE_BASIC_SPEND = "The limit you have set: %.2f \n"
-            + "Your spend during the limit period: %.2f\n";
-
-    public static final String MESSAGE_BASIC_EARNED = "The limit you have set: %.2f \n"
-            + "Your income during the limit period: %.2f\n";
-    public static final String MESSAGE_EXCEED = "Your spend exceeded the limit !!! \n";
-    public static final String MESSAGE_NOT_EXCEED = "Your spend did not exceed the limit ^o^\n";
+    public static final String MESSAGE_SUCCESS = "The limit has been added.\n";
     public static final String MESSAGE_LIMITS_SAME_DATE = "There is already a limit for that period of date\n";
 
 
@@ -65,7 +57,7 @@ public class AddLimitCommand extends Command {
         }
 
         model.addLimit(limit);
-        output = model.generateLimitOutput(model.isExceededLimit(limit),
+        output = MESSAGE_SUCCESS + model.generateLimitOutput(model.isExceededLimit(limit),
                 model.getTotalSpend(limit), limit);
         model.commitFinancialPlanner();
         return new CommandResult(output);

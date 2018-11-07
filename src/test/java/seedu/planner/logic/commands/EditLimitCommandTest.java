@@ -74,8 +74,10 @@ public class EditLimitCommandTest {
 
     @Test
     public void execute_hasNoSameSingleDateLimitInside_fail() {
+
         Limit editedLimit = new LimitBuilder(TypicalLimits.LIMIT_SINGLE_DATE_100).build();
         Limit originalLimit = new LimitBuilder(TypicalLimits.LIMIT_SINGLE_DATE_ALL_DIFF).build();
+
         EditLimitCommand editLimitCommand = new EditLimitCommand(editedLimit);
         String expectedMessage = Messages.MESSAGE_LIMITS_DO_NOT_EXIST;
         model.addLimit(originalLimit);
