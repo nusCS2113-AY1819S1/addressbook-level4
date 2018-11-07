@@ -4,6 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.EmailUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
@@ -27,6 +31,7 @@ public class EmailLoginCommand extends Command {
             + PREFIX_PASSWORD + "password123";
 
     public static final String MESSAGE_SUCCESS = "Login credentials entered";
+    private static final Logger logger = LogsCenter.getLogger(EmailLoginCommand.class);
 
     private String userEmail;
     private String userPassword;
@@ -40,7 +45,9 @@ public class EmailLoginCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
 
+        logger.log(Level.WARNING, "User Email Is Entered");
         EmailUtil.setUserEmailAddress(userEmail);
+        logger.log(Level.WARNING, "User Password Is Entered");
         EmailUtil.setUserEmailPassword(userPassword);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS));
