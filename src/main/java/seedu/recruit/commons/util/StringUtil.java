@@ -21,13 +21,13 @@ public class StringUtil {
      *       containsWordIgnoreCase("ABc def", "AB") == false //not a full word match
      *       </pre>
      * @param sentence cannot be null
-     * @param word cannot be null, cannot be empty, can have more than one word
+     * @param keyword cannot be null, cannot be empty, can have more than one word
      */
-    public static boolean containsWordIgnoreCase(String sentence, String word) {
+    public static boolean containsWordIgnoreCase(String sentence, String keyword) {
         requireNonNull(sentence);
-        requireNonNull(word);
+        requireNonNull(keyword);
 
-        String preppedWord = word.trim();
+        String preppedWord = keyword.trim();
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
         if (preppedWord.equalsIgnoreCase(sentence)) {
             return true;
