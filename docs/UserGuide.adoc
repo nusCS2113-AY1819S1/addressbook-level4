@@ -443,6 +443,31 @@ Examples:
 * `decreaseItem 2 q/1` +
 Decreases the quantity of the 2nd item by `1`.
 
+==== Locating items by name: `findItem`
+
+Finds items whose names contain any of the given keywords. +
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `balls` will match `Balls`
+* The order of the keywords does not matter. e.g. `Soccer Balls` will match `Balls Soccer`
+* Only the name is searched.
+* Only full words will be matched e.g. `Ball` will not match `Balls`
+* Items matching at least one keyword will be returned (i.e. `OR` search). e.g. `Soccer Balls` will return `Soccer Boots`, `Tennis Balls`
+****
+
+Examples:
+
+* `find Balls` +
+Returns `balls` and `Soccer Balls`
+* `find White Soccer Balls` +
+Returns any item having names `White`, `Soccer`, or `Balls`
+
+=== Listing all items : `listItems`
+
+Shows a list of all items in the ClubHub. +
+Format: `listItems`
+
 
 == FAQ
 
@@ -479,3 +504,5 @@ e.g.`select 2`
 * *EditItem* : `editItem INDEX [n/ITEM_NAME] [q/ITEM_QUANTITY]…​`
 * *IncreaseItem* : `increaseItem INDEX q/ITEM_QUANTITY`
 * *DecreaseItem* : `decreaseItem INDEX q/ITEM_QUANTITY`
+* *FindItem* : `findItem KEYWORD`
+* *ListItem* : `listItems`
