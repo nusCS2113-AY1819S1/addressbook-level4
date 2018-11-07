@@ -589,43 +589,63 @@ image::FindTagSequenceDiagram.png[width:800]
 
 // tag::limitfeatures[]
 === Limit features
-. `Limit Storage`:
-The limit features are based on the data type "Limit", which includes two dates and "moneyFlow".
+===== Limit features' storage:
+** The limit features are based on the data type `Limit`, which includes two `Date` s and one `moneyFlow`.
 When entering only one date, the parser will let the date be both dateStart and dateEnd.
 It is equivalent to entering two same dates.
-The limit storage is based on the dates, which means there
-should be at most one limit for one period of time.
+** DateStart will always be earlier than or equal to dateEnd.
+** The limit storage is based on the `Date` . More than one limit for the same
+period of time is not allowed.
 
-. `Limit check`:
-Whenever the user change the recordList information, including adding a record, deleting a record
-and editing a record, all the limits will be checked automatically by calling the function model.autoLimitCheck().
-The function will look through all the records and calculate the total money for each limit inside using a loop which will
-execute the isExceeded().
-This function will generate a string which contains all the exceeded limits' information will be printed
-out to warn the user that they have overspent.
+===== Limit features's check:
+** Whenever the user change the recordList information, including adding a record, deleting a record
+and editing a record, all the limits will be checked automatically by calling the function `autoLimitCheck()`.
+** The `autoCheckLimit()` function will look through all the records, calculate the total money for each limit
+, generate a string which contains all the exceeded limits' information and print the string
+out to warn the user.
+** To get the output, the function will execute a loop, which will
+execute the `isExceeded()`, `getTotalSpend()` and `generateLimitOutput()` for every limit
+and combine all the limits' output into one string.
 
-. ``
-Unlike the moneyFlow used by addCommand, the limit moneyFlow can only be normal real number, which does not have "-" or
-"+" in front of the number. After user input the normal real number, the parser will add a "-"
+===== Limit features' MoneyFlow:
+** Unlike the moneyFlow used by addCommand, the limit moneyFlow input can only be normal real number, which does not have "-" or
+"+" in front of the number. For example, `m/500`.
+** After user input the normal real number, the parser will add a "-"
 at the beginning of the real number, which makes it a normal moneyFlow.
-If user input wrong form of limit moneyFlow, the program will throw an error.
+** If user input wrong form of limit moneyFlow, the program will throw an error.
+
+===== Limit features' parsers:
+** `All the limitCommand Parsers are similar to each other. However, there are some differences between different commands.
+Detailed information will be provided in specific commands.`
+. The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
+. This returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
+. The string associated with `m/` will be checked. If the form is correct. If the form is wrong, the program will throw an error,
+otherwise it will be constructed as a `MoneyFlow` type.
+. The string associated with `d/` is then passed into `xxxLimitCommandParser#splitByWhitespace` for further processing and returns an array.
+This string will be split into two strings and each of them will be constructed as a `Date` type variable.
+If there is only one date string, this date will be set to both dateStart and dateEnd.
+. After parsing the two dates, the parser will check whether the dateStart is earlier than dateEnd.
+. Lastly a new limit will be generated with the dateStart, dateEnd and money and return the xxxLimitCommand with the limit.
+
+===== Monthly Limit:
+** The addMonthlyLimit command is to add a continuous limit always for the current month. The limit will always check
+the spend of the month according to the current time. For example, if the limit was set to be 200 at April, the
+limit will check the total spend for April. When the time comes to May, the limit will no longer check April, instead, the limit
+will check the total spend of May until the last second of May.
+** The user will input only the money they want to set.
+** The parser will make the limit with a special date `01-01-9999`, which is not likely to be used.
+** Once the monthly limit is going to be checked, the function `generateThisMonthLimit()` will be called, which
+will generate a temporary limit according to the current date. Then use this temporary limit to do the limit check and generate output.
+
 // tag::addlimit[]
 ==== addLimit feature
 ===== Current Implementation
-Once the user execute the addLimit command, the Limit will be stored inside the LimitList.xml file by
-calling the function model.addLimit(limit). The input limit will be serialized and stored.
+This command is to add a new limit according to the dates input.
+The command will read in a limit and store the limit by calling the `addLimit()` function.
 
+The user enters two dates (or one date) after the one "d/" index followed by money with m/ index.
 
-The user enters two dates after the one "d/" index followed by money with m/ index.
-The dateStart must be earlier or equals to dateEnd, otherwise, the program will throw an error.
-The user also need to input the limit money they want to set.
-
-The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
-. This returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
-. The string associated with `d/` is then passed into `LimitCommandParser#splitByWhitespace` for further processing and returns an array.
-This string will be split into two strings and each of them will be construct as a date type variable.
-. After parsing the two dates, the parser will check whether the dateStart is earlier than dateEnd.
-. The argument mode is determined by the size of this array and the elements are further processed into `Date` objects, before creating and returning a `ListCommand` object.
+* If there is already a limit with the exactly same dates, the program will throw an error and the limit can not be added.
 
 The following sequence diagram shows how the limit operation works:
 
@@ -634,24 +654,14 @@ image::LimitSequenceDiagram.png[width:800]
 // tag::deleteLimit[]
 === deleteLimit feature
 ==== Current Implementation
-deleteLimit will delete the limit inside the limitList according to the dates input. The user inputs
-two dates, dateStart and dateEnd, and the parser will make it a limit which has a dummy money.
-Similar to the addLimit feature, the parser will set the dateStart and dateEnd same date if the user input only one date.
-Then call the getSameDatesLimit() to get the limit with the same dates. Afterwards, the command will
-call deleteLimit(sameDatesLimit) to delete the limit.
+This command is to delete an existing limit.
+The command will read in a limit with the input dates and delete the limit with the same dates by calling the `deleteLimit` function.
 
-The user enter two dates (or one date) after the one "d/" index.
-The user need to input two dates, the first one is dateStart while the second one is dateEnd.
-The dateStart must be earlier or equal to dateEnd, otherwise, the program will throw an error.
-If there is no limits inside the limitList has the same dates, the program will throw an error.
+The user enters two dates (or one date) after the one "d/" index.
 
+* The deleteLimitCommandParser will use the dates and a dummy valid moneyFlow to make it a complete limit.
 
-The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
-. This returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
-. The string associated with `d/` is then passed into `deleteLimitCommandParser#splitByWhitespace` for further processing and returns an array.
-This string will be split into two strings and each of them will be construct as a date type variable.
-. After parsing the two dates, the parser will check whether the dateStart is small
-. The argument mode is determined by the size of this array and the elements are further processed into `Date` objects, before creating and returning a `ListCommand` object.
+* If there is no limit with the same dates, the program will throw an error.
 
 The following sequence diagram shows how the deleteLimit operation works:
 
@@ -660,26 +670,12 @@ image::deleteLimitSequenceDiagram.png[width:800]
 // tag::editLimit[]
 === editLimit feature
 ==== Current Implementation
-The editLimit command is similar to limit command, has dateStart, dateEnd and moneyFlow.
-The command will do the replacement by deleting the limit with same dates and add the new limit by calling model.updateLimit().
-The parser will return the new limit and check whether there is a limit sharing the same dates. If there is a limit, it will
-change the replace the original limit with the new limit. If there is no limit with the same date, the program will throw error.
-
+The editLimit command is to edit an existing limit.
+The command will read in a limit and replace the limit with the same dates by calliing the `updateLimit()` function.
 
 The user enter two dates after the one "d/" index followed by money with m/ index.
-The user need to input two dates, the first one is dateStart while the second one is dateEnd.
-Similar to the addLimit feature, the parser will set the dateStart and dateEnd same date if the user input only one date.
-The dateStart must be earlier or equals to dateEnd, otherwise, the program will throw error.
-If there is no limits inside the limitList has the same dates, the program will throw an error.
-The user also need to input the limit money they want to reset. The money has the same requirement as addLimit command.
 
-
-The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
-. This returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
-. The string associated with `d/` is then passed into `editLimitCommandParser#splitByWhitespace` for further processing and returns an array.
-This string will be split into two strings and each of them will be construct as a date type variable.
-. After parsing the two dates, the parser will check whether the dateStart is small
-. The argument mode is determined by the size of this array and the elements are further processed into `Date` objects, before creating and returning a `ListCommand` object.
+* If there is no limit with the same dates, the program will throw an error.
 
 The following sequence diagram shows how the limit operation works:
 
@@ -688,46 +684,58 @@ image::editLimitSequenceDiagram.png[width:800]
 // tag::addMonthlyLimit[]
 === addMonthlyLimit feature
 ==== Current Implementation
-The addMonthlyLimit command is to add a continuous limit always for this month. The limit will always check
-the spend of the month according to the current time. For example, if the limit was set to be 200 at April, the
-limit will check the total spend for April. When the time comes to May, the limit will no longer check April, instead, the limit
-will check the total spend of May until the last second of May. The user will input only the money they want to set.
-The parser will make the limit with a special date "01-01-9999", which is not likely to be used. Then call the model.addLimit() function
-to add the limit. Once the limit is going to be checked, the function generateThisMonthLimit() will be called, which
-will generate a new limit according to the current date. Then use this date to do the limit check and generate output.
+The addMonthlyLimit command is to add a monthly limit.
+The command will read in the monthly limit and store it by calling the `addLimit()` function.
 
-Unlike the moneyFlow used by addCommand, the limit moneyFlow can only be normal real number, which does not have "-" or
-"+" in front of the number. After user input the normal real number, the parser will add a "-"
-at the beginning of the real number, which makes it a normal moneyFlow.
-If user input wrong form of limit moneyFlow, the program will throw error.
+The user only enter money after the one "m/" index.
 
-The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
-This returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
-The parser will generate the limit with special date and the moneyFlow according to the user input.
+* The parser will use the special date and the input money to make a complete limit.
+
+* If there is already a monthly limit, the program will throw an error.
+
+The following sequence diagram shows how the limit operation works:
+
+image::addMonthlyLimitSequenceDiagram.png[width:800]
 // end::addMonthlyLimit[]
 // tag::editMonthlyLimit[]
 === editMonthlyLimit feature
 ==== Current Implementation
-The editMonthlyLimit command it to edit the monthly limit money. The command function is similar to the
-editLimit command. The parser is similar to the addMonthlyLimit command parser, which will generate the
-limit with the special date.
+The editMonthlyLimit command is to edit the monthly limit.
+The command will read in the monthly limit and update the monthly limit by calling the `updateLimit()` function.
 
-Unlike the moneyFlow used by addCommand, the limit moneyFlow can only be normal real number, which does not have "-" or
-"+" in front of the number. After user input the normal real number, the parser will add a "-"
-at the beginning of the real number, which makes it a normal moneyFlow.
-If user input wrong form of limit moneyFlow, the program will throw error.
+The user only enter money after the one "m/" index.
 
-The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
-This returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
-The parser will generate the limit with special date and the moneyFlow according to the user input.
+* The parser will use the special date and the input money to make a complete limit.
+
+* If there is no monthly limit, the program will throw an error.
+
+The following sequence diagram shows how the limit operation works:
+
+image::editMonthlyLimitSequenceDiagram.png[width:800]
 // end::editMonthlyLimit[]
+// tag::deleteMonthlyLimit[]
+=== deleteMonthlyLimit feature
+==== Current Implementation
+The deleteMonthlyLimit command is to delete the monthly limit.
+The command will read in the monthly limit and update the monthly limit by calling the `deleteLimit()` function.
+
+The user will only enter the command word.
+
+* The parser will use the special date and a dummy moneyFlow to make a complete limit.
+
+* If there is no monthly limit, the program will throw an error.
+
+The following sequence diagram shows how the limit operation works:
+
+image::deleteMonthlyLimitSequenceDiagram.png[width:800]
+// end::deleteMonthlyLimit[]
 // tag::checkLimit[]
 === checkLimit feature
 ==== Current Implementation
 This feature is to help the user to check all the limits stored inside the limitList. The function will call
 manualLimitCheck(), which will generate a string that contains all limits' information.
 
-When there is no limits inside the limitList, the program will throw an error.
+* When there is no limits inside the limitList, the program will throw an error.
 
 The following sequence diagram shows how the limit operation works:
 
