@@ -1,4 +1,4 @@
-= John Doe - Project Portfolio
+= Gian Zhi Cai - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
