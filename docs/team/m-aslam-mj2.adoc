@@ -15,9 +15,10 @@ Trajectory is a lightweight management system for those who need a no-frills sol
 
 * *Major enhancement*: added *the capability for faculty members to manage courses and students.*
 ** What it does: allows a faculty member to manage courses and students.
-** Justification: This feature improves the product significantly because it is specially built for an educational institution. Unlike AB4, which is a general address book app -- Trajectory has support for student-specific fields.
+** Justification: This feature improves the product significantly because it is specially built for users of an educational institution.
 ** Highlights: Cohesiveness with other features as they make use of the student/course APIs for their own use.
 
+* *Minor enhancement*: wrote a custom implementation of the storage-level layer for the team to use.
 * *Minor enhancement*: built an utility class for the rendering of data into HTML (Bootstrap).
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
