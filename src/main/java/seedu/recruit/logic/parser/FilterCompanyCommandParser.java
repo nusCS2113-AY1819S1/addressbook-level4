@@ -10,21 +10,21 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_PHONE;
 import java.util.HashMap;
 import java.util.List;
 
-import seedu.recruit.logic.commands.FindCompanyCommand;
+import seedu.recruit.logic.commands.FilterCompanyCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
-import seedu.recruit.model.company.CompanyContainsFindKeywordsPredicate;
+import seedu.recruit.model.company.CompanyContainsFilterKeywordsPredicate;
 
 /**
- * Parses input arguments and creates a new FindCompanyCommand object
+ * Parses input arguments and creates a new FilterCompanyCommand object
  */
-public class FindCompanyCommandParser implements Parser<FindCompanyCommand> {
+public class FilterCompanyCommandParser implements Parser<FilterCompanyCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCompanyCommand
-     * and returns an FindCompanyCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the FilterCompanyCommand
+     * and returns an FilterCompanyCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public FindCompanyCommand parse(String args) throws ParseException {
+    public FilterCompanyCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_COMPANY_NAME, PREFIX_PHONE, PREFIX_EMAIL,
@@ -46,10 +46,10 @@ public class FindCompanyCommandParser implements Parser<FindCompanyCommand> {
 
         if (keywordsList.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCompanyCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCompanyCommand.MESSAGE_USAGE));
         }
 
-        return new FindCompanyCommand(new CompanyContainsFindKeywordsPredicate(keywordsList));
+        return new FilterCompanyCommand(new CompanyContainsFilterKeywordsPredicate(keywordsList));
     }
 
 }

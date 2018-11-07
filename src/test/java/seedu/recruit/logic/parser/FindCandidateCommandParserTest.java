@@ -8,7 +8,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.recruit.logic.commands.FindCandidateCommand;
-import seedu.recruit.testutil.CandidateContainsKeywordsPredicateBuilder;
+import seedu.recruit.testutil.CandidateContainsFindKeywordsPredicateBuilder;
 
 public class FindCandidateCommandParserTest {
 
@@ -25,7 +25,7 @@ public class FindCandidateCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCandidateCommand expectedFindCommand = new FindCandidateCommand(
-                new CandidateContainsKeywordsPredicateBuilder("n/Alice n/Bob").getCandidatePredicate());
+                new CandidateContainsFindKeywordsPredicateBuilder("n/Alice n/Bob").getCandidatePredicate());
         assertParseSuccess(parser, "n/Alice n/Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords

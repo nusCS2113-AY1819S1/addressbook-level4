@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.recruit.testutil.AddressBookBuilder;
-import seedu.recruit.testutil.CandidateContainsKeywordsPredicateBuilder;
+import seedu.recruit.testutil.CandidateContainsFindKeywordsPredicateBuilder;
 
 public class ModelManagerTest {
     @Rule
@@ -71,7 +71,7 @@ public class ModelManagerTest {
         // different filteredList -> returns false
         String keywords = ALICE.getName().fullName;
         modelManager.updateFilteredCandidateList(
-                new CandidateContainsKeywordsPredicateBuilder(keywords).getCandidatePredicate());
+                new CandidateContainsFindKeywordsPredicateBuilder(keywords).getCandidatePredicate());
         assertFalse(modelManager.equals(new ModelManager(candidateBook, new CompanyBook(), userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

@@ -28,7 +28,7 @@ import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.joboffer.JobOffer;
-import seedu.recruit.model.joboffer.JobOfferContainsKeywordsPredicate;
+import seedu.recruit.model.joboffer.JobOfferContainsFindKeywordsPredicate;
 
 /**
  * The main LogicManager of the app.
@@ -117,7 +117,7 @@ public class LogicManager extends ComponentManager implements Logic {
         List<String> companyName = new ArrayList<>();
         companyName.add(event.getNewSelection().getCompanyName().toString());
         keywordsList.put("CompanyName", companyName);
-        model.updateFilteredCompanyJobList(new JobOfferContainsKeywordsPredicate(keywordsList));
+        model.updateFilteredCompanyJobList(new JobOfferContainsFindKeywordsPredicate(keywordsList));
         EventsCenter.getInstance().post(new ShowUpdatedCompanyJobListRequestEvent(
                 model.getFilteredCompanyJobList().size()));
     }
