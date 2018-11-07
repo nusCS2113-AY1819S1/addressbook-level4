@@ -21,8 +21,7 @@ public class ReplyCommentCommandParser implements Parser<ReplyCommentCommand> {
     private String comment;
     private Index index;
 
-    public int getLine()
-    {
+    public int getLine() {
         return this.line;
     }
 

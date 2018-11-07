@@ -254,7 +254,8 @@ Additionally, a `JsonUserStorage` class has been created to handle the reading, 
 
 Given below is an example usage scenario and how authentication behaves at each step.
 
-Step 1. The user launches the application for the first time. The `JsonUserStorage` class will create a default JSON file in `data/users.json` that stores the basic `admin` account information.
+|===
+|Step 1. The user launches the application for the first time. The `JsonUserStorage` class will create a default JSON file in `data/users.json` that stores the basic `admin` account information.
 
 Step 2. The user has the option to create a new account using the command `signup u/USERNAME p/PASSWORD`. This will trigger the method `createUser(user)` in the `Model Manager` class, which is linked to `UserAccount`.
 
@@ -269,6 +270,7 @@ Step 6. The `currentUser` in the `Command` class will then be set and the login 
 Step 7. After authentication, the user can now start using the application.
 
 Step 8. The user can choose to log out of the application as well with the `logout` command. This command sets the login flag to false and clears `currentUser`.
+|===
 
 The sequence diagram below describes the steps elaborated above.
 
