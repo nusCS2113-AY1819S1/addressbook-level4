@@ -3,13 +3,13 @@
   [
     {
       "githubId": "andrewome",
-      "displayName": "AND... EN",
-      "authorNames": ["andrewome"]
+      "displayName": "Andrew Ong Ming En",
+      "authorNames": ["andrewome", "Andrew Ong"]
     },
     {
       "githubId": "leerachel",
       "displayName": "RAC...ING",
-      "authorNames": ["leerachel"]
+      "authorNames": ["leerachel", "Rachel Lee Wang Ling"]
     },
     {
       "githubId": "MingXunSeah",
@@ -19,12 +19,12 @@
     {
       "githubId": "sxqnicholas96",
       "displayName": "SEA...LAS",
-      "authorNames": ["sxqnicholas96"]
+      "authorNames": ["sxqnicholas96", "Seah Xi Qi, Nicholas"]
     },
     {
       "githubId": "kianmengtan",
       "displayName": "TAN...ENG",
-      "authorNames": ["kianmengtan"]
+      "authorNames": ["kianmengtan", "kianmeng"]
     }
   ]
 }
