@@ -8,7 +8,7 @@ import static seedu.planner.testutil.TypicalLimits.LIMIT_100;
 import static seedu.planner.testutil.TypicalLimits.LIMIT_ALL_DIFFERENT;
 import static seedu.planner.testutil.TypicalLimits.LIMIT_DATE_END_DIFF;
 import static seedu.planner.testutil.TypicalLimits.LIMIT_SINGLE_DATE_100;
-import static seedu.planner.testutil.TypicalLimits.LIMIT_SINGLE_DATE_All_DIFF;
+import static seedu.planner.testutil.TypicalLimits.LIMIT_SINGLE_DATE_ALL_DIFF;
 import static seedu.planner.testutil.TypicalRecords.getTypicalFinancialPlanner;
 
 import org.junit.Test;
@@ -83,7 +83,7 @@ public class DeleteLimitCommandTest {
     @Test
     public void execute_limitSingleDateNotInList_throwCommandException() {
         Limit limit = new LimitBuilder(LIMIT_SINGLE_DATE_100).build();
-        Limit limitNotInside = new LimitBuilder(LIMIT_SINGLE_DATE_All_DIFF).build();
+        Limit limitNotInside = new LimitBuilder(LIMIT_SINGLE_DATE_ALL_DIFF).build();
         DeleteLimitCommand deleteLimitCommand = new DeleteLimitCommand(limitNotInside);
         model.addLimit(limit);
         assertCommandFailure(deleteLimitCommand, model, commandHistory, Messages.MESSAGE_LIMITS_DO_NOT_EXIST);

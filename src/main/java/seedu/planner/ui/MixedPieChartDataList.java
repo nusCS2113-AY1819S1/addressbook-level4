@@ -11,38 +11,39 @@ import seedu.planner.model.summary.CategoryStatistic;
 /**
  * This class is responsible for converting data as a {@code ObservableList<CategoryStatistic>} into data that can be
  * easily read by the custom pieChart implementation which requires different values for the label and the legend
+ * Label refers to the value after converting to percentages and legend is the original value.
  */
 public class MixedPieChartDataList {
 
     private static final String untaggedLabel = "<<untagged>>";
 
-    private List<PieChart.Data> expenseChartLabelData;
-
-    private List<PieChart.Data> incomeChartLabelData;
     private List<PieChart.Data> expenseChartLegendData;
+
     private List<PieChart.Data> incomeChartLegendData;
+    private List<PieChart.Data> expenseChartLabelData;
+    private List<PieChart.Data> incomeChartLabelData;
 
     private Double totalIncome = 0.0;
     private Double totalExpense = 0.0;
 
     public MixedPieChartDataList(ObservableList<CategoryStatistic> data) {
-        expenseChartLabelData = new ArrayList<>();
-        incomeChartLabelData = new ArrayList<>();
+        expenseChartLegendData = new ArrayList<>();
+        incomeChartLegendData = new ArrayList<>();
         for (CategoryStatistic d : data) {
-            addToExpenseLabelData(d);
-            addToIncomeLabelData(d);
+            addToExpenseLegendData(d);
+            addToIncomeLegendData(d);
         }
-        expenseChartLegendData = expenseChartLabelData.stream().map(d -> convertToPercentages(d, totalExpense))
+        expenseChartLabelData = expenseChartLegendData.stream().map(d -> convertToPercentages(d, totalExpense))
                 .collect(Collectors.toList());
-        incomeChartLegendData = incomeChartLabelData.stream().map(d -> convertToPercentages(d, totalIncome))
+        incomeChartLabelData = incomeChartLegendData.stream().map(d -> convertToPercentages(d, totalIncome))
                 .collect(Collectors.toList());
     }
 
     /**
-     * Process given data and adds new PieChart.Data to the incomeChartLabelData
+     * Process given data and adds new PieChart.Data to the incomeChartLegendData
      * @param data data to be added
      */
-    private void addToIncomeLabelData(CategoryStatistic data) {
+    private void addToIncomeLegendData(CategoryStatistic data) {
         if (data.getTotalIncome() > 0.0) {
             String label;
             if (data.getTags().isEmpty()) {
@@ -50,7 +51,7 @@ public class MixedPieChartDataList {
             } else {
                 label = data.getTags().toString();
             }
-            incomeChartLabelData.add(new PieChart.Data(label, data.getTotalIncome()));
+            incomeChartLegendData.add(new PieChart.Data(label, data.getTotalIncome()));
             totalIncome += data.getTotalIncome();
         } else {
             return;
@@ -58,10 +59,10 @@ public class MixedPieChartDataList {
     }
 
     /**
-     * Process given data and adds new PieChart.Data to the expenseChartLabelData
+     * Process given data and adds new PieChart.Data to the expenseChartLegendData
      * @param data data to be added
      */
-    private void addToExpenseLabelData(CategoryStatistic data) {
+    private void addToExpenseLegendData(CategoryStatistic data) {
         if (data.getTotalExpense() > 0.0) {
             String label;
             if (data.getTags().isEmpty()) {
@@ -69,7 +70,7 @@ public class MixedPieChartDataList {
             } else {
                 label = data.getTags().toString();
             }
-            expenseChartLabelData.add(new PieChart.Data(label, data.getTotalExpense()));
+            expenseChartLegendData.add(new PieChart.Data(label, data.getTotalExpense()));
             totalExpense += data.getTotalExpense();
         } else {
             return;
@@ -92,19 +93,11 @@ public class MixedPieChartDataList {
     }
 
     public boolean isExpenseDataEmpty() {
-        return expenseChartLabelData.size() == 0 && expenseChartLegendData.size() == 0;
+        return expenseChartLegendData.size() == 0 && expenseChartLabelData.size() == 0;
     }
 
     public boolean isIncomeDataEmpty() {
-        return incomeChartLabelData.size() == 0 && incomeChartLegendData.size() == 0;
-    }
-
-    public List<PieChart.Data> getExpenseChartLabelData() {
-        return expenseChartLabelData;
-    }
-
-    public List<PieChart.Data> getIncomeChartLabelData() {
-        return incomeChartLabelData;
+        return incomeChartLegendData.size() == 0 && incomeChartLabelData.size() == 0;
     }
 
     public List<PieChart.Data> getExpenseChartLegendData() {
@@ -113,5 +106,13 @@ public class MixedPieChartDataList {
 
     public List<PieChart.Data> getIncomeChartLegendData() {
         return incomeChartLegendData;
+    }
+
+    public List<PieChart.Data> getExpenseChartLabelData() {
+        return expenseChartLabelData;
+    }
+
+    public List<PieChart.Data> getIncomeChartLabelData() {
+        return incomeChartLabelData;
     }
 }

@@ -16,7 +16,7 @@ public class MoneyFlow {
                     + "There must be at least 1 digit in this field.\n"
                     + "2. At most 1 decimal point can be present. Decimal point is optional."
                     + "If decimal point is present, it must have at least 1 digit and at most 2 digits after it.\n"
-                    + "3. The maximum whole number allowed is 1e16 - 1. Anything more than this is not allowed. ";
+                    + "3. The maximum whole number allowed is 1e12 - 1. Anything more than this is not allowed. ";
 
     public static final String SIGN_REGEX = ("(?<sign>[-+])");
     public static final String MONEYFLOW_NO_SIGN_REGEX = ("(?<money>.*)");
@@ -24,7 +24,7 @@ public class MoneyFlow {
     public static final String POSITIVE_SIGN = "+";
     public static final String NEGATIVE_SIGN = "-";
 
-    private static final String MONEYFLOW_VALIDATION_REGEX = "^[+-](0|[1-9]\\d{0,14})(\\.\\d{1,2})?";
+    private static final String MONEYFLOW_VALIDATION_REGEX = "^[+-](0|[1-9]\\d{0,11})(\\.\\d{1,2})?";
 
     public final String value;
     public final double valueDouble;

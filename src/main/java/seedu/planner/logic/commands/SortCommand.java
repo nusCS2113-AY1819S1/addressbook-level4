@@ -44,7 +44,7 @@ public class SortCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + CATEGORY_NAME + " " + DESCENDING_CONDITION;
 
     public static final Set<String> CATEGORY_SET = new HashSet<>(Arrays.asList(CATEGORY_NAME, CATEGORY_MONEYFLOW,
-            CATEGORY_MONEY, CATEGORY_DATE));
+            CATEGORY_MONEY, SortCommand.CATEGORY_DATE));
     public static final Set<String> ORDER_SET = new HashSet<>(Arrays.asList(DESCENDING_CONDITION, ASCENDING_CONDITION));
 
     private final String category;
