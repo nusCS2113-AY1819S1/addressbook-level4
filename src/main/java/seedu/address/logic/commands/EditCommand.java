@@ -21,10 +21,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.distributor.DistributorName;
-import seedu.address.model.product.Name;
-import seedu.address.model.product.Product;
-import seedu.address.model.product.ProductInfo;
-import seedu.address.model.product.SerialNumber;
+import seedu.address.model.product.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -103,9 +100,11 @@ public class EditCommand extends Command {
                 editPersonDescriptor.getSerialNumber().orElse(productToEdit.getSerialNumber());
         DistributorName updatedDistName = editPersonDescriptor.getDistributor().orElse(productToEdit.getDistributor());
         ProductInfo updatedProductInfo = editPersonDescriptor.getProductInfo().orElse(productToEdit.getProductInfo());
+        RemainingItems updatedRemainingItems =
+                editPersonDescriptor.getRemainingItems().orElse(productToEdit.getRemainingItems());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(productToEdit.getTags());
-
-        return new Product(updatedName, updatedSerialNumber, updatedDistName, updatedProductInfo, updatedTags);
+        return new Product(updatedName, updatedSerialNumber,
+                updatedDistName, updatedProductInfo, updatedRemainingItems, updatedTags);
     }
 
     @Override
@@ -136,6 +135,7 @@ public class EditCommand extends Command {
         private SerialNumber serialNumber;
         private DistributorName distname;
         private ProductInfo productInfo;
+        private RemainingItems remainingItems;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -149,6 +149,7 @@ public class EditCommand extends Command {
             setSerialNumber(toCopy.serialNumber);
             setEmail(toCopy.distname);
             setProductInfo(toCopy.productInfo);
+            setRemainingItems(toCopy.remainingItems);
             setTags(toCopy.tags);
         }
 
@@ -156,7 +157,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
         */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, serialNumber, distname, productInfo, tags);
+            return CollectionUtil.isAnyNonNull(name, serialNumber, distname, productInfo, remainingItems, tags);
         }
 
         public void setName(Name name) {
@@ -183,12 +184,18 @@ public class EditCommand extends Command {
             return Optional.ofNullable(distname);
         }
 
-        public void setProductInfo(ProductInfo productInfo) {
-            this.productInfo = productInfo;
-        }
+        public void setProductInfo(ProductInfo productInfo) { this.productInfo = productInfo; }
 
         public Optional<ProductInfo> getProductInfo() {
             return Optional.ofNullable(productInfo);
+        }
+
+        public void setRemainingItems(RemainingItems remainingItems) {
+            this.remainingItems = remainingItems;
+         }
+
+        public Optional<RemainingItems> getRemainingItems() {
+            return Optional.ofNullable(remainingItems);
         }
 
         /**
@@ -227,6 +234,7 @@ public class EditCommand extends Command {
                     && getSerialNumber().equals(e.getSerialNumber())
                     && getDistributor().equals(e.getDistributor())
                     && getProductInfo().equals(e.getProductInfo())
+                    && getRemainingItems().equals(e.getRemainingItems())
                     && getTags().equals(e.getTags());
         }
     }

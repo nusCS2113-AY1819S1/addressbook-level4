@@ -10,11 +10,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.distributor.DistributorName;
-import seedu.address.model.product.Email;
-import seedu.address.model.product.Name;
-import seedu.address.model.product.Product;
-import seedu.address.model.product.ProductInfo;
-import seedu.address.model.product.SerialNumber;
+import seedu.address.model.product.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -32,6 +28,9 @@ public class XmlAdaptedProduct {
     private String distributor;
     @XmlElement(required = true)
     private String info;
+    @XmlElement(required = true)
+    private String remainingItems;
+
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -46,11 +45,12 @@ public class XmlAdaptedProduct {
      * Constructs an {@code XmlAdaptedProduct} with the given product details.
      */
     public XmlAdaptedProduct(String name, String serialNumber, String distributor,
-                             String info, List<XmlAdaptedTag> tagged) {
+                             String info, List<XmlAdaptedTag> tagged, String remainingItems) {
         this.name = name;
         this.serialNumber = serialNumber;
         this.distributor = distributor;
         this.info = info;
+        this.remainingItems = remainingItems;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -66,6 +66,7 @@ public class XmlAdaptedProduct {
         serialNumber = source.getSerialNumber().value;
         distributor = source.getDistributor().fullDistName;
         info = source.getProductInfo().value;
+        remainingItems = source.getRemainingItems().value;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -116,8 +117,18 @@ public class XmlAdaptedProduct {
         }
         final ProductInfo modelProductInfo = new ProductInfo(info);
 
+        if (remainingItems == null) {
+            throw new IllegalValueException(String.format
+                    (MISSING_FIELD_MESSAGE_FORMAT, RemainingItems.class.getSimpleName()));
+        }
+        if (!RemainingItems.isValidRemainingItems(remainingItems)) {
+            throw new IllegalValueException(RemainingItems.MESSAGE_REMAINING_ITEMS_CONSTRAINTS);
+        }
+        final RemainingItems modelRemainingItems = new RemainingItems(remainingItems);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Product(modelName, modelSerialNumber, modelDistName, modelProductInfo, modelTags);
+        return new Product(modelName, modelSerialNumber,
+                modelDistName, modelProductInfo, modelRemainingItems, modelTags);
     }
 
     @Override
@@ -135,6 +146,7 @@ public class XmlAdaptedProduct {
                 && Objects.equals(serialNumber, otherPerson.serialNumber)
                 && Objects.equals(distributor, otherPerson.distributor)
                 && Objects.equals(info, otherPerson.info)
-                && tagged.equals(otherPerson.tagged);
+                && tagged.equals(otherPerson.tagged)
+              && Objects.equals(remainingItems, otherPerson.remainingItems);
     }
 }

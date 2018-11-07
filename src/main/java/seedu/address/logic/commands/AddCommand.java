@@ -1,11 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DISTRIBUTOR;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT_INFO;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SERIAL_NR;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -33,10 +29,11 @@ public class AddCommand extends Command {
             + PREFIX_SERIAL_NR + "98765432 "
             + PREFIX_DISTRIBUTOR + "Alfred "
             + PREFIX_PRODUCT_INFO + "Contains chicken etc "
-            + PREFIX_TAG + "fruit ";
+            + PREFIX_TAG + "fruit "
+            + PREFIX_REMAINING_ITEMS + "12";
 
     public static final String MESSAGE_SUCCESS = "New product added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PRODUCT = "This product already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PRODUCT = "This product already exists in the product database";
 
 
     private final Product toAdd;
