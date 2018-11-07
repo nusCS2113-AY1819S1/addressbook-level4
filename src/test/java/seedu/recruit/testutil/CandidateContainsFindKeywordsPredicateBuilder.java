@@ -17,14 +17,14 @@ import java.util.List;
 
 import seedu.recruit.logic.parser.ArgumentMultimap;
 import seedu.recruit.logic.parser.ArgumentTokenizer;
-import seedu.recruit.model.candidate.CandidateContainsKeywordsPredicate;
+import seedu.recruit.model.candidate.CandidateContainsFindKeywordsPredicate;
 
 /**
- * A utility class that helps with building predicate for {@Code CandidateContainsKeywordsPredicate}
+ * A utility class that helps with building predicate for {@Code CandidateContainsFindKeywordsPredicate}
  * from a string of input arguments
  */
 
-public class CandidateContainsKeywordsPredicateBuilder {
+public class CandidateContainsFindKeywordsPredicateBuilder {
 
     public static final String KEY_NAME = "Name";
     public static final String KEY_GENDER = "Gender";
@@ -38,13 +38,13 @@ public class CandidateContainsKeywordsPredicateBuilder {
 
 
     private HashMap<String, List<String>> keywordsList = new HashMap<>();
-    private CandidateContainsKeywordsPredicate candidatePredicate;
+    private CandidateContainsFindKeywordsPredicate candidatePredicate;
 
-    public CandidateContainsKeywordsPredicateBuilder (String userInput) {
+    public CandidateContainsFindKeywordsPredicateBuilder (String userInput) {
         this.candidatePredicate = preparePredicate(userInput);
     }
 
-    public CandidateContainsKeywordsPredicate getCandidatePredicate() {
+    public CandidateContainsFindKeywordsPredicate getCandidatePredicate() {
         return candidatePredicate;
     }
 
@@ -54,9 +54,9 @@ public class CandidateContainsKeywordsPredicateBuilder {
 
     /**
      * Parses the @param userInput and
-     * @return CandidateContainsKeywordsPredicate as a predicate
+     * @return CandidateContainsFindKeywordsPredicate as a predicate
      */
-    public CandidateContainsKeywordsPredicate preparePredicate (String userInput) {
+    public CandidateContainsFindKeywordsPredicate preparePredicate (String userInput) {
         requireNonNull(userInput);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_GENDER, PREFIX_AGE, PREFIX_PHONE,
@@ -94,6 +94,6 @@ public class CandidateContainsKeywordsPredicateBuilder {
 
         System.out.println(keywordsList);
 
-        return new CandidateContainsKeywordsPredicate(keywordsList);
+        return new CandidateContainsFindKeywordsPredicate(keywordsList);
     }
 }

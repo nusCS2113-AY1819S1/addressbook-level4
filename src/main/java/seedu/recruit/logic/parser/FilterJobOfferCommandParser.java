@@ -12,21 +12,21 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_SALARY;
 import java.util.HashMap;
 import java.util.List;
 
-import seedu.recruit.logic.commands.FindJobOfferCommand;
+import seedu.recruit.logic.commands.FilterJobOfferCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
-import seedu.recruit.model.joboffer.JobOfferContainsFindKeywordsPredicate;
+import seedu.recruit.model.joboffer.JobOfferContainsFilterKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindJobOfferCommand object
  */
-public class FindJobOfferCommandParser implements Parser<FindJobOfferCommand> {
+public class FilterJobOfferCommandParser implements Parser<FilterJobOfferCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindJobOfferCommand
      * and returns an FindJobCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public FindJobOfferCommand parse(String args) throws ParseException {
+    public FilterJobOfferCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_COMPANY_NAME, PREFIX_JOB, PREFIX_GENDER,
@@ -54,9 +54,9 @@ public class FindJobOfferCommandParser implements Parser<FindJobOfferCommand> {
 
         if (keywordsList.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindJobOfferCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterJobOfferCommand.MESSAGE_USAGE));
         }
 
-        return new FindJobOfferCommand(new JobOfferContainsFindKeywordsPredicate(keywordsList));
+        return new FilterJobOfferCommand(new JobOfferContainsFilterKeywordsPredicate(keywordsList));
     }
 }

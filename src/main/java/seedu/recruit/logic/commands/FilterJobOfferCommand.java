@@ -16,17 +16,17 @@ import seedu.recruit.commons.events.ui.ShowUpdatedCompanyJobListRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
-import seedu.recruit.model.joboffer.JobOfferContainsFindKeywordsPredicate;
+import seedu.recruit.model.joboffer.JobOfferContainsFilterKeywordsPredicate;
 
 /**
- * Finds and lists all jobs in job offers whose job details contains any of the argument keywords.
+ * Filters and lists all jobs in job offers whose job details contains all of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindJobOfferCommand extends Command {
+public class FilterJobOfferCommand extends Command {
 
-    public static final String COMMAND_WORD = "findj";
+    public static final String COMMAND_WORD = "filterj";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all job offers whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all job offers whose names contain all of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: "
             + PREFIX_COMPANY_NAME + "COMPANY NAME "
@@ -35,11 +35,11 @@ public class FindJobOfferCommand extends Command {
             + PREFIX_SALARY + "SALARY "
             + PREFIX_AGE_RANGE + "AGE RANGE "
             + PREFIX_EDUCATION + "EDUCATION \n"
-            + "Example: " + COMMAND_WORD + PREFIX_COMPANY_NAME + "Cashier";
+            + "Example: " + COMMAND_WORD + PREFIX_COMPANY_NAME + "KFC " + PREFIX_JOB + "Cashier";
 
-    private final JobOfferContainsFindKeywordsPredicate predicate;
+    private final JobOfferContainsFilterKeywordsPredicate predicate;
 
-    public FindJobOfferCommand(JobOfferContainsFindKeywordsPredicate predicate) {
+    public FilterJobOfferCommand(JobOfferContainsFilterKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -57,7 +57,7 @@ public class FindJobOfferCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FindJobOfferCommand // instanceof handles nulls
-                && predicate.equals(((FindJobOfferCommand) other).predicate)); // state check
+                || (other instanceof FilterJobOfferCommand // instanceof handles nulls
+                && predicate.equals(((FilterJobOfferCommand) other).predicate)); // state check
     }
 }

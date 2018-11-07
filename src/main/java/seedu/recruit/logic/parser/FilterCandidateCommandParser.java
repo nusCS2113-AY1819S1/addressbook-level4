@@ -16,23 +16,23 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.HashMap;
 import java.util.List;
 
-import seedu.recruit.logic.commands.FindCandidateCommand;
+import seedu.recruit.logic.commands.FilterCandidateCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
-import seedu.recruit.model.candidate.CandidateContainsFindKeywordsPredicate;
+import seedu.recruit.model.candidate.CandidateContainsFilterKeywordsPredicate;
 
 
 /**
- * Parses input arguments and creates a new FindCandidateCommand object
+ * Parses input arguments and creates a new FilterCandidateCommand object
  */
-public class FindCandidateCommandParser implements Parser<FindCandidateCommand> {
+public class FilterCandidateCommandParser implements Parser<FilterCandidateCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCandidateCommand
-     * and returns an FindCandidateCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the FilterCandidateCommand
+     * and returns an FilterCandidateCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public FindCandidateCommand parse(String args) throws ParseException {
+    public FilterCandidateCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GENDER, PREFIX_AGE, PREFIX_PHONE, PREFIX_EMAIL,
@@ -69,9 +69,9 @@ public class FindCandidateCommandParser implements Parser<FindCandidateCommand> 
 
         if (keywordsMap.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCandidateCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCandidateCommand.MESSAGE_USAGE));
         }
 
-        return new FindCandidateCommand(new CandidateContainsFindKeywordsPredicate(keywordsMap));
+        return new FilterCandidateCommand(new CandidateContainsFilterKeywordsPredicate(keywordsMap));
     }
 }

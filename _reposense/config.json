@@ -3,28 +3,28 @@
   [
     {
       "githubId": "andrewome",
-      "displayName": "AND... EN",
-      "authorNames": ["andrewome"]
+      "displayName": "Andrew Ong Ming En",
+      "authorNames": ["andrewome", "Andrew Ong"]
     },
     {
       "githubId": "leerachel",
-      "displayName": "RAC...ING",
-      "authorNames": ["leerachel"]
+      "displayName": "Rachel Lee Wang Ling",
+      "authorNames": ["leerachel", "Rachel Lee Wang Ling"]
     },
     {
       "githubId": "MingXunSeah",
-      "displayName": "SEA...XUN",
+      "displayName": "Seah Ming Xun",
       "authorNames": ["MingXunSeah"]
     },
     {
       "githubId": "sxqnicholas96",
-      "displayName": "SEA...LAS",
-      "authorNames": ["sxqnicholas96"]
+      "displayName": "Seah Xi Qi, Nicholas",
+      "authorNames": ["sxqnicholas96", "Seah Xi Qi, Nicholas"]
     },
     {
       "githubId": "kianmengtan",
-      "displayName": "TAN...ENG",
-      "authorNames": ["kianmengtan"]
+      "displayName": "Tan Kian Meng",
+      "authorNames": ["kianmengtan", "kianmeng"]
     }
   ]
 }

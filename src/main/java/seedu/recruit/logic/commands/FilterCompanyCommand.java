@@ -12,28 +12,28 @@ import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
-import seedu.recruit.model.company.CompanyContainsFindKeywordsPredicate;
+import seedu.recruit.model.company.CompanyContainsFilterKeywordsPredicate;
 
 /**
- * Finds and lists all companies in company book whose company name contains any of the argument keywords.
+ * Filters and lists all companies in company book whose company name contains all of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindCompanyCommand extends Command {
+public class FilterCompanyCommand extends Command {
 
-    public static final String COMMAND_WORD = "findC";
+    public static final String COMMAND_WORD = "filterC";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all companies whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all companies whose names contain all of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: "
             + PREFIX_COMPANY_NAME + "COMPANY NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS \n"
-            + "Example: " + COMMAND_WORD + PREFIX_COMPANY_NAME + "Hanbaobao Pte Ltd";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_COMPANY_NAME + "Hanbaobao Pte Ltd " + PREFIX_PHONE + "63336222";
 
-    private final CompanyContainsFindKeywordsPredicate predicate;
+    private final CompanyContainsFilterKeywordsPredicate predicate;
 
-    public FindCompanyCommand(CompanyContainsFindKeywordsPredicate predicate) {
+    public FilterCompanyCommand(CompanyContainsFilterKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -49,7 +49,7 @@ public class FindCompanyCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FindCompanyCommand // instanceof handles nulls
-                && predicate.equals(((FindCompanyCommand) other).predicate)); // state check
+                || (other instanceof FilterCompanyCommand // instanceof handles nulls
+                && predicate.equals(((FilterCompanyCommand) other).predicate)); // state check
     }
 }

@@ -193,6 +193,7 @@ Examples:
 //tag::find[]
 === Finding candidates/companies/job offers : `findc` `findC` `findj` +
 Each `find` command is differentiated by the letter that comes right after the `find` word.
+By using the `find` command, you can search for candidates/companies/job offers that contains *any* of the searched parameters.
 
 Our app’s GUI provides two different views where the Candidate Book view and the Company Book view shows the details of all the candidates and companies respectively. +
 
@@ -201,7 +202,6 @@ Entering commands in the other book will automatically switch your view to the c
 ****
 * Each search field has to come with a preceding prefix e.g. `n/NAME`, `p/PHONE`
 * The search is case insensitive e.g `n/hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `n/Hans n/Bo` will match `Bo Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Candidates matching at least one keyword will be returned (i.e. `OR` search). e.g. `n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`
 ****
@@ -213,13 +213,13 @@ Supported tags: `n/NAME`, `p/PHONE`, `e/EMAIL`, `a/ADDRESS`, `x/AGE`, `h/HIGHEST
 Examples:
 
 * `findc n/john` +
-(Returns any candidate having the name John)
+(Returns all candidates with the name `John`)
 
 * `findc n/alice p/91234567` +
-(Returns any candidate with the name alice or any candidate that has phone number 91234567)
+(Returns all candidates with the name `alice` or candidates with phone number `91234567`)
 
 * `findc e/helloworld@example.com` +
-(Returns any candidates having email helloworld@example.com)
+(Returns all candidates with the email `helloworld@example.com`)
 
 ==== Finds names of companies from RecruitBook based on searched fields that you have entered.
 Format: `findC <tag>/KEYWORD` +
@@ -228,29 +228,85 @@ Supported tags: `c/COMPANY NAME`, `p/PHONE`, `e/EMAIL`, `a/ADDRESS`
 Examples:
 
 * `findC c/KFC c/McDonalds` +
-(Returns any company having either the name `KFC` or `McDonalds`)
+(Returns all companies with the name either `KFC` or `McDonalds`)
 
 * `findC n/HanBaoBao Pte Ltd a/Yishun MRT` +
-(Returns any company having the name `HanBaoBao Pte Ltd` or with address saved as `Yishun MRT`)
+(Returns all companies with the name `HanBaoBao Pte Ltd` or with address saved as `Yishun MRT`)
 
-==== Finds job offers from a selected company based on searched fields that you have entered.
+==== Finds job offers from RecruitBook based on searched fields that you have entered.
 Format: `findj <tag>/KEYWORD` +
 Supported tags: `c/COMPANY NAME`, `j/JOB OFFER`, `g/GENDER`, `s/SALARY`, `xr/AGE RANGE`, `h/HIGHEST EDUCATION`
 
+Examples:
+
+* `findj j/cashier` +
+(Returns all `cashier` job offers)
+* `findj c/KFC s/1500 +
+(Returns all job offers either listed by `KFC` or job offers that has a pay of $`1500`
+
+//end::find[]
+
+//tag::filter[]
+=== Filter candidates/companies/job offers : `filterc` `filterC` `filterj` +
+Each `filter` command is differentiated by the letter that comes right after the `filter` word.
+By using the `filter` command, you can search for candidates/companies/job offers that contains *all* of the searched parameters.
+
+Our app’s GUI provides two different views where the Candidate Book view and the Company Book view shows the details of all the candidates and companies respectively. +
+
+Entering commands in the other book will automatically switch your view to the correct book and still display the details of the results that you are searching for. +
+
 ****
-* If you wish to search for job offers from only one company, you should include the name of that particular company in the searched field together with the other search fields.
+* Each search field has to come with a preceding prefix e.g. `n/NAME`, `p/PHONE`
+* The search is case insensitive e.g `n/hans` will match `Hans`
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Candidates matching at least one keyword will be returned (i.e. `OR` search). e.g. `n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`
+****
+
+==== Filters names of candidates from RecruitBook based on search fields that you have entered.
+Format: `filterc <tag>/KEYWORD` +
+Supported tags: `n/NAME`, `p/PHONE`, `e/EMAIL`, `a/ADDRESS`, `x/AGE`, `h/HIGHEST EDUCATION`, `g/GENDER`, `j/JOB INTERESTED`, `s/EXPECTED SALARY)`, `t/TAGS`
+
+Examples:
+
+* `filterc n/john` +
+(Returns all candidates with the name `John`)
+
+* `filterc n/alice p/91234567` +
+(Returns all candidates with the name `alice` *and* phone number `91234567`)
+
+* `filterc e/helloworld@example.com` +
+(Returns all candidates with the email `helloworld@example.com`)
+
+==== Filters names of companies from RecruitBook based on searched fields that you have entered.
+Format: `filterC <tag>/KEYWORD` +
+Supported tags: `c/COMPANY NAME`, `p/PHONE`, `e/EMAIL`, `a/ADDRESS`
+
+Examples:
+
+* `filterC c/KFC c/McDonalds` +
+(Returns all companies with the name `KFC` or `McDonalds`)
+
+* `filterC n/HanBaoBao Pte Ltd a/Yishun MRT` +
+(Returns all companies with the name `HanBaoBao Pte Ltd` *and* address saved as `Yishun MRT`)
+
+==== Filters job offers from a selected company based on searched fields that you have entered.
+Format: `filterj <tag>/KEYWORD` +
+Supported tags: `c/COMPANY NAME`, `j/JOB OFFER`, `g/GENDER`, `s/SALARY`, `xr/AGE RANGE`, `h/HIGHEST EDUCATION`
+
+****
+* To search for job offers from only one company, you should include the name of that particular company in the searched field together with the other search fields.
 ****
 
 Examples:
 
 To look for job offers listed by KFC only, include the name of company in the searched field.
 
-* `findj c/KFC j/cashier` +
-(Returns any cashier job offer listed by KFC)
-* `findj c/KFC s/1500 h/SECONDARY` +
-(Returns any job offer listed by KFC that has a pay of $1500 and requires highest education level attained to be `SECONDARY` level)
+* `filterj c/KFC j/cashier` +
+(Returns all `cashier` job offers listed by `KFC`)
+* `filterj c/KFC s/1500 h/SECONDARY` +
+(Returns all job offers listed by `KFC` that has a pay of $`1500` *and* requires highest education level attained to be `SECONDARY` level)
 
-//end::find[]
+//end::filter[]
 
 // tag::edit[]
 === Editing a candidate / company / job : `editc` `editC` `editj`

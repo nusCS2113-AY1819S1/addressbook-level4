@@ -11,28 +11,28 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.recruit.testutil.CandidateBuilder;
-import seedu.recruit.testutil.CandidateContainsKeywordsPredicateBuilder;
+import seedu.recruit.testutil.CandidateContainsFindKeywordsPredicateBuilder;
 
-public class CandidateContainsKeywordsPredicateTest {
+public class CandidateContainsFindKeywordsPredicateTest {
 
     @Test
     public void equals() {
         HashMap<String, List<String>> firstPredicateKeywordList =
-                new CandidateContainsKeywordsPredicateBuilder("n/first").getKeywordsList();
+                new CandidateContainsFindKeywordsPredicateBuilder("n/first").getKeywordsList();
         HashMap<String, List<String>> secondPredicateKeywordList =
-                new CandidateContainsKeywordsPredicateBuilder("n/first n/second").getKeywordsList();
+                new CandidateContainsFindKeywordsPredicateBuilder("n/first n/second").getKeywordsList();
 
-        CandidateContainsKeywordsPredicate firstPredicate = new
-                CandidateContainsKeywordsPredicate(firstPredicateKeywordList);
-        CandidateContainsKeywordsPredicate secondPredicate = new
-                CandidateContainsKeywordsPredicate(secondPredicateKeywordList);
+        CandidateContainsFindKeywordsPredicate firstPredicate = new
+                CandidateContainsFindKeywordsPredicate(firstPredicateKeywordList);
+        CandidateContainsFindKeywordsPredicate secondPredicate = new
+                CandidateContainsFindKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        CandidateContainsKeywordsPredicate firstPredicateCopy = new
-                CandidateContainsKeywordsPredicate(firstPredicateKeywordList);
+        CandidateContainsFindKeywordsPredicate firstPredicateCopy = new
+                CandidateContainsFindKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -49,20 +49,20 @@ public class CandidateContainsKeywordsPredicateTest {
     @Ignore
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        CandidateContainsKeywordsPredicate predicate =
-                new CandidateContainsKeywordsPredicateBuilder("n/Alice").getCandidatePredicate();
+        CandidateContainsFindKeywordsPredicate predicate =
+                new CandidateContainsFindKeywordsPredicateBuilder("n/Alice").getCandidatePredicate();
         assertTrue(predicate.test(new CandidateBuilder().withName("Alice Bob").build()));
 
         // Multiple keywords
-        predicate = new CandidateContainsKeywordsPredicateBuilder("n/Alice n/Bob").getCandidatePredicate();
+        predicate = new CandidateContainsFindKeywordsPredicateBuilder("n/Alice n/Bob").getCandidatePredicate();
         assertTrue(predicate.test(new CandidateBuilder().withName("Alice Bob").build()));
 
         // Only one matching keyword
-        predicate = new CandidateContainsKeywordsPredicateBuilder("n/Bob n/Carol").getCandidatePredicate();
+        predicate = new CandidateContainsFindKeywordsPredicateBuilder("n/Bob n/Carol").getCandidatePredicate();
         assertTrue(predicate.test(new CandidateBuilder().withName("Alice Carol").build()));
 
         // Mixed-case keywords
-        predicate = new CandidateContainsKeywordsPredicateBuilder("n/aLIce n/bOB").getCandidatePredicate();
+        predicate = new CandidateContainsFindKeywordsPredicateBuilder("n/aLIce n/bOB").getCandidatePredicate();
         assertTrue(predicate.test(new CandidateBuilder().withName("Alice Bob").build()));
     }
 
@@ -70,16 +70,16 @@ public class CandidateContainsKeywordsPredicateTest {
     @Ignore
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        CandidateContainsKeywordsPredicate predicate =
-                new CandidateContainsKeywordsPredicate((HashMap<String, List<String>> ) Collections.EMPTY_MAP);
+        CandidateContainsFindKeywordsPredicate predicate =
+                new CandidateContainsFindKeywordsPredicate((HashMap<String, List<String>> ) Collections.EMPTY_MAP);
         assertFalse(predicate.test(new CandidateBuilder().withName("Alice").build()));
 
         // Non-matching keyword
-        predicate = new CandidateContainsKeywordsPredicateBuilder("n/Carol").getCandidatePredicate();
+        predicate = new CandidateContainsFindKeywordsPredicateBuilder("n/Carol").getCandidatePredicate();
         assertFalse(predicate.test(new CandidateBuilder().withName("Alice Bob").build()));
 
         // Keywords match phone, email and recruit, but does not match name
-        predicate = new CandidateContainsKeywordsPredicateBuilder(
+        predicate = new CandidateContainsFindKeywordsPredicateBuilder(
                 "p/12345 e/alice@email.com a/Main Street").getCandidatePredicate();
         assertFalse(predicate.test(new CandidateBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
