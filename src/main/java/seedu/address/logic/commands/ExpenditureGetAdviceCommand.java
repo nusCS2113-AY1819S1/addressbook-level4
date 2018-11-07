@@ -64,7 +64,8 @@ public class ExpenditureGetAdviceCommand extends Command {
             }
 
             for (Map.Entry m : map.entrySet()) {
-                percentageMap.put(m.getKey().toString(), (int) Math.round(100 * map.get(m.getKey()) / totalExpenditure));
+                percentageMap.put(m.getKey().toString(),
+                        (int) Math.round(100 * map.get(m.getKey()) / totalExpenditure));
                 x.append(m.getValue())
                         .append(" SGD on ")
                         .append(m.getKey())
