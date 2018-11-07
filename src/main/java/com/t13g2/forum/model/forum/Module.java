@@ -7,10 +7,10 @@ import java.util.List;
  */
 public class Module extends BaseModel {
     public static final String MESSAGE_MODULE_CODE_CONSTRAINTS =
-        "mCode should follow (2 or 3 capital letters)+(4 numbers)+(0 or 1 capital letter)"
+        "Invalid parameter: mCode should follow (2 or 3 capital letters)+(4 numbers)+(0 or 1 capital letter)"
             + "\nand it should not be blank. E.g. MA1580E, CS2113 or USP1000A, USP1000";
     public static final String MESSAGE_MODULE_TITLE_CONSTRAINTS =
-        "mTitle should not be blank";
+        "Invalid parameter: mTitle should not be blank";
     public static final String MODULE_CODE_VALIDATION_REGEX = "[A-Z]{2,3}[0-9]{4}[A-Z]{0,1}";
     public static final String MODULE_TITLE_VALIDATION_REGEX = "[^\\s].*";
 

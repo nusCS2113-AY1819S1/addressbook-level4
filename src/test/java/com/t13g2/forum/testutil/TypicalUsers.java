@@ -1,7 +1,7 @@
 package com.t13g2.forum.testutil;
 
 import com.t13g2.forum.model.forum.User;
-
+//@@author xllx1
 /**
  * A utility class containing a list of {@code User} objects to be used in tests.
  */

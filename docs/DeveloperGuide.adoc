@@ -239,7 +239,7 @@ Classes used by multiple components are in the `t13g2.forum.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-// tag::CURD feature
+// tag::curd[]
 === CURD feature
 ==== Current Implementation
 CURD refers to `create`, `update`, `read` and `delete`. This feature is implemented to achieve the basic functionalities of the Forum Book. It extends `ForumBook` with various commands and supports the following operations:
@@ -276,7 +276,7 @@ Step 9. The user executes `deleteComment cId/123` to delete/remove the comment w
 
 [NOTE]
 If the syntax of a command is wrong, the program will prompt the user to try again and show a suggested command format.
-//end of CURD feature
+// end::curd[]
 
 === Storage
 
@@ -352,10 +352,10 @@ Step 3. The user executes `logout` to exit the forum or to switch user, logout c
 
 ToDo:
 Step 4. The user executes `updateUserComment ` to update the uPass.
-// tag::dataencryption[]
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------- +
 
+// tag::adminManagement[]
 === Admin management
 
 ==== Current Implementation
@@ -388,7 +388,7 @@ Step 2. The admin/user executes `checkAnnounce` to check for the latest announce
 
 image::SDCheckAnnounce.png[width="800"]
 
-Step 3. The admin executes `block uName/john` to block john from creating new threads or comments. The `block` calls `User.setIsBlock(true)` and then `UnitOfWork.commit()`, causing another modified forum book state to be saved into `ForumBookStorage`.
+Step 3. The admin executes `blockUser uName/john block/true` to block john from creating new threads or comments. The `block` calls `User.setIsBlock(true)` and then `UnitOfWork.commit()`, causing another modified forum book state to be saved into `ForumBookStorage`.
 
 image::SDBlockUserFromCreating.png[width="800"]
 
@@ -414,6 +414,7 @@ image::SDDeleteUser.png[width="800"]
 
 [NOTE]
 If the syntax of a command is wrong, the program will prompt the user to try again and show a suggested command format.
+// end::adminManagement[]
 
 // tag::dataencryption[]
 === Data Encryption

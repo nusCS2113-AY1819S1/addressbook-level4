@@ -38,6 +38,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
+    //@@author xllx1
     public static final String VALID_MODULE_CODE_MA1508E = "MA1508E";
     public static final String VALID_MODULE_TITLE_MA1508E = "Linear Algebra for Engineering";
     public static final String VALID_MODULE_CODE_GET1020 = "GET1020";
@@ -54,6 +55,7 @@ public class CommandTestUtil {
     public static final String INVALID_MODULE_CODE_DESC = " " + PREFIX_MODULE_CODE + "A1508";
     public static final String INVALID_MODULE_TITLE_DESC = " " + PREFIX_MODULE_TITLE + "";
 
+    //@@author
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;

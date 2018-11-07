@@ -10,7 +10,7 @@ import org.junit.rules.ExpectedException;
 import com.t13g2.forum.logic.commands.CommandResult;
 import com.t13g2.forum.logic.commands.DeleteUserCommand;
 import com.t13g2.forum.logic.commands.HistoryCommand;
-import com.t13g2.forum.logic.commands.ListModuleCommand;
+import com.t13g2.forum.logic.commands.LogoutCommand;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
 import com.t13g2.forum.model.Context;
@@ -52,9 +52,9 @@ public class LogicManagerTest {
         User loginUser = new UserBuilder().build();
         Context.getInstance().setCurrentUser(loginUser);
 
-        String listModuleCommand = ListModuleCommand.COMMAND_WORD;
-        assertCommandSuccess(listModuleCommand, String.format(ListModuleCommand.MESSAGE_SUCCESS, ""), model);
-        assertHistoryCorrect(listModuleCommand);
+        String logoutCommand = LogoutCommand.COMMAND_WORD;
+        assertCommandSuccess(logoutCommand, String.format(LogoutCommand.MESSAGE_SUCCESS, "testAdmin"), model);
+        assertHistoryCorrect(logoutCommand);
     }
 
     @Test

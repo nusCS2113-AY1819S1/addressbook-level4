@@ -6,11 +6,13 @@ import static com.t13g2.forum.logic.commands.CommandTestUtil.VALID_MODULE_TITLE_
 import static com.t13g2.forum.logic.commands.CommandTestUtil.VALID_MODULE_TITLE_MA1508E;
 
 import com.t13g2.forum.model.forum.Module;
-
+//@@author xllx1
 /**
  * A utility class containing a list of {@code Module} objects to be used in tests.
  */
 public class TypicalModules {
+    public static final Module CS2113 = new ModuleBuilder().withCode("CS2113")
+        .withTitle("Software Eng").build();
     public static final Module GET1020 = new ModuleBuilder().withCode("GET1020")
         .withTitle("Darwin and Revolution").build();
 
