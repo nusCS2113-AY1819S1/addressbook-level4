@@ -27,6 +27,7 @@ public class EditDistributorDescriptorBuilder {
         descriptor = new EditDistributorDescriptor();
         descriptor.setDistName(distributor.getDistName());
         descriptor.setDistPhone(distributor.getDistPhone());
+        descriptor.setTags(distributor.getTags());
     }
 
     /**

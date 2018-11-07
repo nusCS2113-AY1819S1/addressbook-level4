@@ -17,10 +17,14 @@ import seedu.address.model.distributor.Distributor;
  */
 public class TypicalDistributors {
 
-    public static final Distributor AHBENG = new DistributorBuilder().withName("Ah Beng").withPhone("11111111").build();
-    public static final Distributor AHHUAT = new DistributorBuilder().withName("Ah Huat").withPhone("22222222").build();
-    public static final Distributor AHLONG = new DistributorBuilder().withName("Ah Long").withPhone("55555555").build();
-    public static final Distributor AHTING = new DistributorBuilder().withName("Ah Ting").withPhone("66666666").build();
+    public static final Distributor AHBENG = new DistributorBuilder().withName("Ah Beng").withPhone("11111111")
+            .withTags("fruits").build();
+    public static final Distributor AHHUAT = new DistributorBuilder().withName("Ah Huat").withPhone("22222222")
+            .withTags("meat").build();
+    public static final Distributor AHLONG = new DistributorBuilder().withName("Ah Long").withPhone("55555555")
+            .withTags("bread").build();
+    public static final Distributor AHTING = new DistributorBuilder().withName("Ah Ting").withPhone("66666666")
+            .withTags("snacks").build();
 
     // Manually added
     public static final Distributor AHKUAH = new DistributorBuilder().withName("Ah Kuah").withPhone("77777777").build();

@@ -19,7 +19,7 @@ public class DTagContainsKeywordsPredicate implements Predicate<Distributor> {
     public boolean test(Distributor distributor) {
         return keywords.stream()
                 .anyMatch(keyword
-                        -> StringUtil.containsWordIgnoreCase(distributor.getTags().toString()
+                    -> StringUtil.containsWordIgnoreCase(distributor.getTags().toString()
                         .replace("[", "").replace("]", ""), keyword));
     }
 

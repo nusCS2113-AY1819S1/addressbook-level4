@@ -55,11 +55,12 @@ public class Distributor {
         String[] tagArray = new String[this.getTags().size()];
 
         int i = 0;
-        for (Tag s : this.getTags())
+        for (Tag s : this.getTags()) {
             tagArray[i++] = s.toString();
+        }
 
         String tagString = new String(tagArray.toString());
-        System.out.println("getTagString: "+ tagString);
+        System.out.println("getTagString: " + tagString);
 
         return tagString;
     }
