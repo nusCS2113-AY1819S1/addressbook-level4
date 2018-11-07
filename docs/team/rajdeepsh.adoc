@@ -48,7 +48,9 @@ student management system, that person would also be deleted in all the groups h
 * *Other contributions*:
 
 ** Enhancements to existing features:
-*** Add command word alias's (shortcut's) to all commands for a small local-impact enhancement (Pull requests https://github.com/CS2113-AY1819S1-T13-4/main/pull/10[#10])
+*** Add command word alias's (shortcut's) to all commands for a local-impact enhancement (Pull requests https://github.com/CS2113-AY1819S1-T13-4/main/pull/10[#10])
+*** Add label's to existing GUI panels for a local-impact enhancement (Pull requests https://github.com/CS2113-AY1819S1-T13-4/main/pull/135[#135])
+*** Add panel order description to status bar footer for a local-impact enhancement (Pull requests https://github.com/CS2113-AY1819S1-T13-4/main/pull/89[#89])
 ** Documentation:
 *** Add all initial user stories and use cases for all functions  (Pull requests https://github.com/CS2113-AY1819S1-T13-4/main/pull/7[#7])
 ** Community:
