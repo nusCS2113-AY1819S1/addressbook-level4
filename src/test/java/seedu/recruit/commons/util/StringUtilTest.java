@@ -80,12 +80,6 @@ public class StringUtilTest {
     }
 
     @Test
-    public void containsWordIgnoreCase_multipleWords_throwsIllegalArgumentException() {
-        assertExceptionThrown(IllegalArgumentException.class, "typical sentence", "aaa BBB",
-                Optional.of("Word parameter should be a single word"));
-    }
-
-    @Test
     public void containsWordIgnoreCase_nullSentence_throwsNullPointerException() {
         assertExceptionThrown(NullPointerException.class, null, "abc", Optional.empty());
     }

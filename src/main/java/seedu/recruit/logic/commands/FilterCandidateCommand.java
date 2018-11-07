@@ -18,18 +18,17 @@ import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
-import seedu.recruit.model.candidate.CandidateContainsFindKeywordsPredicate;
-
+import seedu.recruit.model.candidate.CandidateContainsFilterKeywordsPredicate;
 
 /**
- * Finds and lists all persons in recruit book whose name contains any of the argument keywords.
+ * Filters and lists all persons in recruit book whose name contains all of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindCandidateCommand extends Command {
+public class FilterCandidateCommand extends Command {
 
-    public static final String COMMAND_WORD = "findc";
+    public static final String COMMAND_WORD = "filterc";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all persons whose names contain all of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
@@ -42,11 +41,11 @@ public class FindCandidateCommand extends Command {
             + PREFIX_JOB + "JOB "
             + PREFIX_SALARY + "SALARY "
             + PREFIX_TAG + "TAG " + "\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + " alice" + PREFIX_SALARY + " 2500";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "alice " + PREFIX_SALARY + "2500";
 
-    private final CandidateContainsFindKeywordsPredicate candidatePredicate;
+    private final CandidateContainsFilterKeywordsPredicate candidatePredicate;
 
-    public FindCandidateCommand(CandidateContainsFindKeywordsPredicate candidatePredicate) {
+    public FilterCandidateCommand(CandidateContainsFilterKeywordsPredicate candidatePredicate) {
         this.candidatePredicate = candidatePredicate;
     }
 
@@ -62,7 +61,7 @@ public class FindCandidateCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FindCandidateCommand // instanceof handles nulls
-                && candidatePredicate.equals(((FindCandidateCommand) other).candidatePredicate)); // state check
+                || (other instanceof FilterCandidateCommand // instanceof handles nulls
+                && candidatePredicate.equals(((FilterCandidateCommand) other).candidatePredicate)); // state check
     }
 }
