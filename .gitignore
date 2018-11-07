@@ -23,5 +23,4 @@ out/
 /config.json
 reposense-report/
 !build.gradle
-
-
+scripts/
