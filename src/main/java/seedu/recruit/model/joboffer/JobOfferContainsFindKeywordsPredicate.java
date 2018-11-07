@@ -28,7 +28,7 @@ public class JobOfferContainsFindKeywordsPredicate implements Predicate<JobOffer
                 || ((keywords.containsKey("Education")) && (keywords.get("Education").stream().anyMatch(keyword ->
                 StringUtil.containsWordIgnoreCase(jobOffer.getEducation().value, keyword))))
                 || ((keywords.containsKey("Salary")) && (keywords.get("Salary").stream().anyMatch(keyword ->
-                StringUtil.containsWordIgnoreCase(jobOffer.getSalary().value, keyword))))
+                StringUtil.isMoreThanOrEqualTo(jobOffer.getSalary().value, keyword))))
                 || ((keywords.containsKey("Gender")) && (keywords.get("Gender").stream().anyMatch(keyword ->
                 StringUtil.containsWordIgnoreCase(jobOffer.getGender().value, keyword))));
     }
