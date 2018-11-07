@@ -11,7 +11,7 @@ public class StatusTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new Status((String) null));
+        Assert.assertThrows(NullPointerException.class, () -> new Status(null));
     }
 
     @Test
@@ -23,7 +23,7 @@ public class StatusTest {
     @Test
     public void isValidStatus() {
         // null status
-        //Assert.assertThrows(NullPointerException.class, () -> Status.isValidStatus(null));
+        Assert.assertThrows(NullPointerException.class, () -> Status.isValidStatus(null));
 
         // invalid Status
         assertFalse(Status.isValidStatus("")); // empty string
@@ -34,7 +34,6 @@ public class StatusTest {
 
         // valid status
         assertTrue(Status.isValidStatus("UPCOMING")); // UPCOMING
-        assertTrue(Status.isValidStatus("ONGOING")); // ONGOING
         assertTrue(Status.isValidStatus("COMPLETED")); // COMPLETED
         assertTrue(Status.isValidStatus("NULL")); // NULL
     }

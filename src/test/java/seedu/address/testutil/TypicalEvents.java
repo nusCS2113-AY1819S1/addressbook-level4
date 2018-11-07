@@ -40,7 +40,7 @@ public class TypicalEvents {
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withDateTime("22/10/2018 9:30")
-            .withStatus("NULL")
+            .withStatus("COMPLETED")
             .withComment("{span}Comment Section{/span}{ol}{/ol}")
             .withTags("friends")
             .withAttendees("admin", "Peter Parker").build();
@@ -50,7 +50,7 @@ public class TypicalEvents {
             .withEmail("johnd@example.com")
             .withPhone("98765432")
             .withDateTime("2/10/2018 19:30")
-            .withStatus("NULL")
+            .withStatus("COMPLETED")
             .withComment("{span}Comment Section{/span}{ol}{/ol}")
             .withTags("owesMoney", "friends")
             .withAttendees("Mary Kate").build();
@@ -60,7 +60,7 @@ public class TypicalEvents {
             .withEmail("heinz@example.com")
             .withVenue("wall street")
             .withDateTime("22/1/2018 9:30")
-            .withStatus("NULL")
+            .withStatus("COMPLETED")
             .withComment("{span}Comment Section{/span}{ol}{/ol}").build();
     public static final Event DANIEL = new EventBuilder().withName("Art and Crafts")
             .withContact("Daniel Meier")
@@ -68,7 +68,7 @@ public class TypicalEvents {
             .withEmail("cornelia@example.com")
             .withVenue("10th street")
             .withDateTime("22/10/2017 9:30")
-            .withStatus("NULL")
+            .withStatus("COMPLETED")
             .withComment("{span}Comment Section{/span}{ol}{/ol}")
             .withTags("friends")
             .withAttendees("Scarlet Witch").build();
@@ -78,7 +78,7 @@ public class TypicalEvents {
             .withEmail("werner@example.com")
             .withVenue("michegan ave")
             .withDateTime("12/8/2018 17:30")
-            .withStatus("NULL")
+            .withStatus("COMPLETED")
             .withComment("{span}Comment Section{/span}{ol}{/ol}").build();
     public static final Event FIONA = new EventBuilder().withName("Dining In The Dark")
             .withContact("Fiona Kunz")
@@ -86,7 +86,7 @@ public class TypicalEvents {
             .withEmail("lydia@example.com")
             .withVenue("little tokyo")
             .withDateTime("22/10/2018 15:15")
-            .withStatus("NULL")
+            .withStatus("COMPLETED")
             .withComment("{span}Comment Section{/span}{ol}{/ol}").build();
     public static final Event GEORGE = new EventBuilder().withName("College Games")
             .withContact("George Best")
@@ -94,7 +94,7 @@ public class TypicalEvents {
             .withEmail("anna@example.com")
             .withVenue("4th street")
             .withDateTime("30/10/2018 14:30")
-            .withStatus("NULL")
+            .withStatus("COMPLETED")
             .withComment("{span}Comment Section{/span}{ol}{/ol}").build();
 
     // Manually added
@@ -104,7 +104,7 @@ public class TypicalEvents {
             .withEmail("stefan@example.com")
             .withVenue("little india")
             .withDateTime("1/9/2019 20:00")
-            .withStatus("NULL")
+            //.withStatus("UPCOMING") TODO
             .withComment("{span}Comment Section{/span}{ol}{/ol}").build();
     public static final Event IDA = new EventBuilder().withName("Yoga Session")
             .withContact("Ida Mueller")
@@ -112,7 +112,7 @@ public class TypicalEvents {
             .withEmail("hans@example.com")
             .withVenue("chicago ave")
             .withDateTime("18/10/2018 10:45")
-            .withStatus("NULL")
+            //.withStatus("COMPLETED") TODO
             .withComment("{span}Comment Section{/span}{ol}{/ol}").build();
 
     // Manually added - Event's details found in {@code CommandTestUtil}
