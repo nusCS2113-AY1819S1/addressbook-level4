@@ -240,6 +240,11 @@ public class AddDistributorCommandTest {
         }
 
         @Override
+        public void commitSalesHistory() {
+
+        }
+
+        @Override
         public void addReminder(Reminder reminder) {
             fail("This method should not be called.");
         }
@@ -265,7 +270,12 @@ public class AddDistributorCommandTest {
         }
 
         @Override
-        public String getDaysTransactions(String day) throws InvalidTimeFormatException {
+        public String getDaysTransactionsAsString(String date) throws InvalidTimeFormatException {
+            return null;
+        }
+
+        @Override
+        public String getTransactionAsString(String date) throws InvalidTimeFormatException {
             return null;
         }
 
