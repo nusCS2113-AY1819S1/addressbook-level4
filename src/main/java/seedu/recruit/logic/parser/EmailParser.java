@@ -9,6 +9,9 @@ import static seedu.recruit.commons.util.EmailUtil.EMAIL_SEND_COMMAND;
 import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.LogicState;
 import seedu.recruit.logic.commands.Command;
+import seedu.recruit.logic.commands.FilterCandidateCommand;
+import seedu.recruit.logic.commands.FilterCompanyCommand;
+import seedu.recruit.logic.commands.FilterJobOfferCommand;
 import seedu.recruit.logic.commands.FindCandidateCommand;
 import seedu.recruit.logic.commands.FindCompanyCommand;
 import seedu.recruit.logic.commands.FindJobOfferCommand;
@@ -64,6 +67,15 @@ public class EmailParser {
             case FindJobOfferCommand.COMMAND_WORD:
                 return new FindJobOfferCommandParser(userInput).parse(arguments);
 
+            case FilterCandidateCommand.COMMAND_WORD:
+                return new FilterCandidateCommandParser().parse(arguments);
+
+            case FilterCompanyCommand.COMMAND_WORD:
+                return new FilterCompanyCommandParser().parse(arguments);
+
+            case FilterJobOfferCommand.COMMAND_WORD:
+                return new FilterJobOfferCommandParser().parse(arguments);
+
             case SwitchBookCommand.COMMAND_WORD:
                 return new SwitchBookCommand();
 
@@ -92,6 +104,12 @@ public class EmailParser {
             case FindJobOfferCommand.COMMAND_WORD:
                 return new FindJobOfferCommandParser(userInput).parse(arguments);
 
+            case FilterCompanyCommand.COMMAND_WORD:
+                return new FilterCompanyCommandParser().parse(arguments);
+
+            case FilterJobOfferCommand.COMMAND_WORD:
+                return new FilterJobOfferCommandParser().parse(arguments);
+
             case EMAIL_NEXT_COMMAND:
                 return new EmailContentsNextCommand();
 
@@ -105,7 +123,7 @@ public class EmailParser {
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
         } else if (state.nextCommand.equals(EmailContentsCommand.COMMAND_LOGIC_STATE)
-                && !emailUtil.isAreRecipientsCandidates()) {
+                        && !emailUtil.isAreRecipientsCandidates()) {
             switch (commandWord) {
 
             case ListCandidateCommand.COMMAND_WORD:
@@ -113,6 +131,9 @@ public class EmailParser {
 
             case FindCandidateCommand.COMMAND_WORD:
                 return new FindCandidateCommandParser(userInput).parse(arguments);
+
+            case FilterCandidateCommand.COMMAND_WORD:
+                return new FilterCandidateCommandParser().parse(arguments);
 
             case EMAIL_NEXT_COMMAND:
                 return new EmailContentsNextCommand();

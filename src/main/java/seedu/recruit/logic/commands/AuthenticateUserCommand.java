@@ -19,7 +19,7 @@ public class AuthenticateUserCommand extends Command {
     public static final String MESSAGE_USAGE = "RecruitBook is password-protected.\n"
                                                 + "Enter administrator password to continue.";
 
-    public static final String MESSAGE_SUCCESS = "Password verified. Welcome back!";
+    public static final String MESSAGE_SUCCESS = "Password verified. Welcome to RecruitBook!";
     public static final String MESSAGE_WRONG_PASSWORD = "You've entered an invalid password.\n"
                                                         + "Please try again.";
     private static int numTries = 0;
