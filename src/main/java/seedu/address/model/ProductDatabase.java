@@ -7,15 +7,15 @@ import java.util.List;
 import javafx.collections.ObservableList;
 
 import seedu.address.model.product.Product;
-import seedu.address.model.product.UniquePersonList;
+import seedu.address.model.product.UniqueProductList;
 
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameProduct comparison)
  */
-public class ProductDatabase implements ReadOnlyAddressBook {
+public class ProductDatabase implements ReadOnlyProductDatabase {
 
-    private final UniquePersonList products;
+    private final UniqueProductList products;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -26,7 +26,7 @@ public class ProductDatabase implements ReadOnlyAddressBook {
      */
 
     {
-        products = new UniquePersonList();
+        products = new UniqueProductList();
     }
 
     public ProductDatabase() {}
@@ -34,7 +34,7 @@ public class ProductDatabase implements ReadOnlyAddressBook {
     /**
      * Creates an ProductDatabase using the Persons in the {@code toBeCopied}
      */
-    public ProductDatabase(ReadOnlyAddressBook toBeCopied) {
+    public ProductDatabase(ReadOnlyProductDatabase toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -55,7 +55,7 @@ public class ProductDatabase implements ReadOnlyAddressBook {
     /**
      * Resets the existing data of this {@code ProductDatabase} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyProductDatabase newData) {
         requireNonNull(newData);
         setProducts(newData.getProductList());
     }
@@ -72,7 +72,7 @@ public class ProductDatabase implements ReadOnlyAddressBook {
      * Adds a product to the address book.
      * The product must not already exist in the address book.
      */
-    public void addPerson(Product p) {
+    public void addProduct(Product p) {
         products.add(p);
     }
 

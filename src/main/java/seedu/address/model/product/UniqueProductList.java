@@ -15,7 +15,7 @@ import seedu.address.model.product.exceptions.PersonNotFoundException;
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
  * A product is considered unique by comparing using {@code Product#isSameProduct(Product)}.
  * As such, adding and updating of persons uses Product#isSameProduct(Product) for equality so
- * as to ensure that the product being added or updated is unique in terms of identity in the UniquePersonList.
+ * as to ensure that the product being added or updated is unique in terms of identity in the UniqueProductList.
  * However, the removal of a product uses Product#equals(Object) so as to
  * ensure that the product with exactly the same fields will be removed.
  *
@@ -23,7 +23,7 @@ import seedu.address.model.product.exceptions.PersonNotFoundException;
  *
  * @see Product#isSameProduct(Product)
  */
-public class UniquePersonList implements Iterable<Product> {
+public class UniqueProductList implements Iterable<Product> {
 
     private final ObservableList<Product> internalList = FXCollections.observableArrayList();
 
@@ -78,7 +78,7 @@ public class UniquePersonList implements Iterable<Product> {
         }
     }
 
-    public void setPersons(UniquePersonList replacement) {
+    public void setPersons(UniqueProductList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -111,8 +111,8 @@ public class UniquePersonList implements Iterable<Product> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniquePersonList // instanceof handles nulls
-                        && internalList.equals(((UniquePersonList) other).internalList));
+                || (other instanceof UniqueProductList // instanceof handles nulls
+                        && internalList.equals(((UniqueProductList) other).internalList));
     }
 
     @Override

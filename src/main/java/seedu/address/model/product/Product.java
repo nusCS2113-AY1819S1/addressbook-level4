@@ -11,7 +11,7 @@ import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Product in the address book.
+ * Represents a Product in the productInfo book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Product {
@@ -22,18 +22,19 @@ public class Product {
     private final DistributorName distname;
 
     // Data fields
-    private final Address address;
+    private final ProductInfo productInfo;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Product(Name name, SerialNumber serialNumber, DistributorName distname, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, serialNumber, distname, address, tags);
+    public Product(Name name, SerialNumber serialNumber, DistributorName distname,
+                   ProductInfo productInfo, Set<Tag> tags) {
+        requireAllNonNull(name, serialNumber, distname, productInfo, tags);
         this.name = name;
         this.serialNumber = serialNumber;
         this.distname = distname;
-        this.address = address;
+        this.productInfo = productInfo;
         this.tags.addAll(tags);
     }
 
@@ -49,8 +50,8 @@ public class Product {
         return distname;
     }
 
-    public Address getProductInfo() {
-        return address;
+    public ProductInfo getProductInfo() {
+        return productInfo;
     }
 
     /**
@@ -99,7 +100,7 @@ public class Product {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, serialNumber, distname, address, tags);
+        return Objects.hash(name, serialNumber, distname, productInfo, tags);
     }
 
     @Override

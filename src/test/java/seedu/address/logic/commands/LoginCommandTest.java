@@ -17,8 +17,8 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyDistributorBook;
+import seedu.address.model.ReadOnlyProductDatabase;
 import seedu.address.model.distributor.Distributor;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.UniqueUserList;
@@ -90,7 +90,7 @@ public class LoginCommandTest {
     private abstract class ModelStub implements Model {
 
         @Override
-        public void resetData(ReadOnlyAddressBook newData) {
+        public void resetData(ReadOnlyProductDatabase newData) {
             fail("This method should not be called.");
         }
 
@@ -100,7 +100,7 @@ public class LoginCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyProductDatabase getAddressBook() {
             fail("This method should not be called.");
             return null;
         }
@@ -156,7 +156,7 @@ public class LoginCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getUserDatabase() {
+        public ReadOnlyProductDatabase getUserDatabase() {
             fail("This method should not be called.");
             return null;
         }
@@ -167,7 +167,7 @@ public class LoginCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getProductInfoBook() {
+        public ReadOnlyProductDatabase getProductInfoBook() {
             fail("This method should not be called.");
             return null;
         }
