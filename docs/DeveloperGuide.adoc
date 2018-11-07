@@ -321,7 +321,7 @@ The `findCompanyCommand` is facilitated by the `CompanyContainsFindKeywordsPredi
 and overrides the `test` and `equal` methods so that more fields can be searched at the same time.
 
 ===== Job Offers
-The `findJobOfferCommand` is facilitated by the `JobOfferContainsKeywordsPredicate` which implements `Predicate<JobOffer>`
+The `findJobOfferCommand` is facilitated by the `JobOfferContainsFindKeywordsPredicate` which implements `Predicate<JobOffer>`
 and overrides the `test` and `equal` methods so that more fields can be searched at the same time.
 
 [NOTE]

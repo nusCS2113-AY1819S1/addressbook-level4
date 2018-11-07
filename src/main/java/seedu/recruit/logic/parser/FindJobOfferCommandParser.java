@@ -14,7 +14,7 @@ import java.util.List;
 
 import seedu.recruit.logic.commands.FindJobOfferCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
-import seedu.recruit.model.joboffer.JobOfferContainsKeywordsPredicate;
+import seedu.recruit.model.joboffer.JobOfferContainsFindKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindJobOfferCommand object
@@ -57,6 +57,6 @@ public class FindJobOfferCommandParser implements Parser<FindJobOfferCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindJobOfferCommand.MESSAGE_USAGE));
         }
 
-        return new FindJobOfferCommand(new JobOfferContainsKeywordsPredicate(keywordsList));
+        return new FindJobOfferCommand(new JobOfferContainsFindKeywordsPredicate(keywordsList));
     }
 }
