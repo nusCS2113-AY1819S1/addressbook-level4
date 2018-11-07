@@ -69,6 +69,7 @@ public class SalesHistoryManager extends SalesHistory {
         int i = 1;
         for (Transaction transaction : daysTransactions) {
             ret.append(i + ") " + transaction.getTransactionTime() + "\n");
+            i++;
         }
 
         return ret.toString();
@@ -171,4 +172,5 @@ public class SalesHistoryManager extends SalesHistory {
         }
         return remindersToReturn;
     }
+
 }

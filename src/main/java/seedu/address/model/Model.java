@@ -201,7 +201,12 @@ public interface Model {
     /**
      * Returns a given day's transaction history
      */
-    String getDaysTransactionsAsString(String day) throws InvalidTimeFormatException;
+    String getDaysTransactionsAsString(String date) throws InvalidTimeFormatException;
+
+    /**
+     * Finds and returns a transaction
+     */
+    String getTransactionAsString(String date) throws InvalidTimeFormatException;
 
     /**
      * Returns the latest transaction.

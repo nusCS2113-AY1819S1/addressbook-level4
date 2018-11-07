@@ -61,7 +61,7 @@ public class ParserUtil {
      * Returns the time entered by the user for a given reminder.
      * @param reminderTime
      * @return trimmed reminder time (removing trailing whitespaces).
-     * @throws ParseException if {@code reminderTime} is in the wrong format.
+     * @throws ParseException if {@code reminderTime} is in the wrong format or invalid.
      */
 
     public static String parseReminderTime(String reminderTime) throws ParseException {
@@ -70,6 +70,20 @@ public class ParserUtil {
             throw new ParseException(Reminder.REMINDER_TIME_CONSTRAINTS);
         }
         return reminderTime.trim();
+    }
+
+    /**
+     * Returns the date and time entered by the user
+     * @param dateAndTime
+     * @return trimmed {@code dateAndTime}
+     * @throws ParseException if {@code dateAndTime} is in the wrong format or invalid.
+     */
+    public static String parseDateAndTime(String dateAndTime) throws ParseException {
+        requireNonNull(dateAndTime);
+        if (!TimeIdentifiedClass.isValidDateAndTime(dateAndTime)) {
+            throw new ParseException("Time must be in yyyy/MM/dd HH:mm:ss format and must be a valid time");
+        }
+        return dateAndTime.trim();
     }
 
     /**
