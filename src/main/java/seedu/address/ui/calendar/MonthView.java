@@ -51,8 +51,8 @@ public class MonthView extends UiPart<Region> {
      */
     public void getMonthView(YearMonth yearMonth) {
         viewYearMonth = yearMonth;
-
-        int year = yearMonth.getYear();
+        YearMonth y = YearMonth.now();
+        int year = y.getYear();
 
         setMonthCalendarTitle(year, yearMonth.getMonth().toString());
         setMonthCalendarDatesAndEntries(year, yearMonth.getMonthValue());

@@ -17,7 +17,7 @@ public class CalendarPanel extends UiPart<Region> {
     private static final String FXML = "CalendarPanel.fxml";
 
     private MonthView monthView;
-    private YearMonth currentYearMonth;
+    private YearMonth currentYearMonth = YearMonth.now();
 
     @FXML
     private StackPane calendar;
