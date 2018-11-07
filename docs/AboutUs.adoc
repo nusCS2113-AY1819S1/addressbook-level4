@@ -25,7 +25,7 @@ Responsibilities:
 
 === Rajdeep Singh Hundal
 image::rajdeepsh.png[width="150", align="left"]
-{empty}[https://github.com/rajdeepsh[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/rajdeepsh[github]] [<<rajdeepsh#, portfolio>>]
 
 Role: Team Leader + Documentation +
 Responsibilities: +
