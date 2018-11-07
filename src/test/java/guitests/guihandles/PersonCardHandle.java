@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import seedu.address.model.product.Product;
 
+//@@author Gara
 /**
  * Provides a handle to a product card in the product list panel.
  */

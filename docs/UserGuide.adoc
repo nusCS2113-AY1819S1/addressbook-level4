@@ -124,7 +124,7 @@ Examples:
 
 Format: `findtag PRODUCT_TAG`
 
-Locates products that are related to the PRODUCT_TAG entered.
+Locates products./ that are related to the PRODUCT_TAG entered.
 
 Examples:
 

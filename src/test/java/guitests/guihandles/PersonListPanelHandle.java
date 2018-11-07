@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import seedu.address.model.product.Product;
 
+//@@author Gara
 /**
  * Provides a handle for {@code ProductListPanel} containing the list of {@code ProductCard}.
  */
