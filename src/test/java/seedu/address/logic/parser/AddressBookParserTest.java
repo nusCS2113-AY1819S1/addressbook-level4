@@ -55,12 +55,6 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
-    }
-
-    @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
@@ -122,17 +116,6 @@ public class AddressBookParserTest {
         assertEquals(new SelectCommand(INDEX_FIRST_PERSON), command);
     }
 
-    @Test
-    public void parseCommand_redoCommandWord_returnsRedoCommand() throws Exception {
-        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD) instanceof RedoCommand);
-        assertTrue(parser.parseCommand("redo 1") instanceof RedoCommand);
-    }
-
-    @Test
-    public void parseCommand_undoCommandWord_returnsUndoCommand() throws Exception {
-        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD) instanceof UndoCommand);
-        assertTrue(parser.parseCommand("undo 3") instanceof UndoCommand);
-    }
 
     @Test
     public void parseCommand_classAdd() throws Exception {
