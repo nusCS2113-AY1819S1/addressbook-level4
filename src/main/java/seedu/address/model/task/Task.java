@@ -1,7 +1,10 @@
 package seedu.address.model.task;
 
+import seedu.address.commons.util.TimeUtil;
+
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -77,12 +80,10 @@ public class Task {
     }
 
     public Date getDayInTypeDate() {
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-        String strDate = formatter.format(date);
-        Calendar calendar = new GregorianCalendar(Integer.parseInt(strDate.substring(6, 10)),
-                Integer.parseInt(getMonth()), Integer.parseInt(getDay()));
-        return calendar.getTime();
+        TimeUtil timeUtil = new TimeUtil();
+        String date = timeUtil.DateToStringConverter(new Date());
+        String currentYear = date.substring(6, 10);
+        return timeUtil.StringToDateConverter( getDay() + '/' + getMonth() + '/' + currentYear);
     }
 
     /**
@@ -97,6 +98,23 @@ public class Task {
         return otherTask != null
                 && otherTask.getName().equals(getName())
                 && otherTask.getModule().equals(getModule());
+    }
+
+    /**
+     * return -1 for deadline has passed
+     * return 0 for deadline is not urgent (not in the following 7 days)
+     * return 1 for "urgent" deadline (within the following 7 days)
+     */
+    public int notification() {
+        TimeUtil timeUtil = new TimeUtil();
+        int interval = timeUtil.getDayInterval(timeUtil.getCurrentDate(), getDayInTypeDate());
+        if (interval < 0) {
+            return -1;
+        }
+        else if (interval > 7) {
+            return 0;
+        }
+        else return 1;
     }
 
     /**

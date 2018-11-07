@@ -4,7 +4,6 @@ package seedu.address.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import seedu.address.logic.DeadlineNotification;
 import seedu.address.model.task.Task;
 
 /**
@@ -42,11 +41,46 @@ public class TaskCard extends UiPart<Region> {
     public TaskCard(Task task, int displayedIndex) {
         super(FXML);
         this.task = task;
-        DeadlineNotification deadlineNotification = new DeadlineNotification();
         id.setText(displayedIndex + ". ");
         taskname.setText(task.getName().fullName);
         taskmodule.setText(task.getModule().value);
         taskdate.setText(task.getDate().value);
+
+        if (task.getComplete()) {
+            taskstate.setStyle("-fx-text-fill: #7fce92");
+        }
+        else {
+            taskstate.setStyle("-fx-text-fill: #c05d61");
+        }
+
+        int notification = task.notification();
+
+        //deadline of task has passed or will come within 7 days
+        if (notification != 0) {
+            //deadline of task has passed
+            if (notification == -1) {
+                //task is marked as "uncompleted"
+                if (!task.getComplete()) {
+                    id.setStyle("-fx-text-fill: #c05d61");
+                    taskname.setStyle("-fx-text-fill: #c05d61");
+                    taskdate.setStyle("-fx-text-fill: #c05d61");
+                    taskmodule.setStyle("-fx-text-fill: #c05d61");
+                    taskpriority.setStyle("-fx-text-fill: #c05d61");
+                }
+            }
+            //task will come within 7 days
+            else {
+                //task is marked as uncompleted
+                if (!task.getComplete()) {
+                    id.setStyle("-fx-text-fill: #fbf8af");
+                    taskname.setStyle("-fx-text-fill: #fbf8af");
+                    taskdate.setStyle("-fx-text-fill: #fbf8af");
+                    taskmodule.setStyle("-fx-text-fill: #fbf8af");
+                    taskpriority.setStyle("-fx-text-fill: #fbf8af");
+                }
+            }
+        }
+
 
         if (task.getPriority().value.equals("1")) {
             taskpriority.setText("High priority (1)");
@@ -66,9 +100,6 @@ public class TaskCard extends UiPart<Region> {
          * Modify color based on intervals between the deadline of the task and current time
          * Testing feature
          */
-        if (deadlineNotification.notifyOrNot(task.getDayInTypeDate())) {
-            taskname.setStyle("-fx-text-fill: #EEDD82");
-        }
     }
 
     @Override
