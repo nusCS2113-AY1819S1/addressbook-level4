@@ -79,7 +79,7 @@ public class Task {
         TimeUtil timeUtil = new TimeUtil();
         String date = timeUtil.dateToStringConverter(new Date());
         String currentYear = date.substring(6, 10);
-        return timeUtil.stringToDateConverter( getDay() + '/' + getMonth() + '/' + currentYear);
+        return timeUtil.stringToDateConverter(getDay() + '/' + getMonth() + '/' + currentYear);
     }
 
     /**
