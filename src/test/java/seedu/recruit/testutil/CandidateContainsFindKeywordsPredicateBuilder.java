@@ -59,7 +59,7 @@ public class CandidateContainsFindKeywordsPredicateBuilder {
      * Parses the {@code userInput} and returns a predicate
      * @param userInput should not be null, should have a preceding prefix
      */
-    public CandidateContainsFindKeywordsPredicate preparePredicate (String userInput) throws ParseException {
+    private CandidateContainsFindKeywordsPredicate preparePredicate (String userInput) throws ParseException {
         requireNonNull(userInput);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_GENDER, PREFIX_AGE, PREFIX_PHONE,
