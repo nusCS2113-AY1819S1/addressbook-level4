@@ -1,9 +1,7 @@
 package seedu.address.ui;
 
-import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.testutil.EventsUtil.postNow;
-import static seedu.address.testutil.TypicalGroups.TUT_1;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.ui.BrowserPanel.DEFAULT_PAGE;
 import static seedu.address.ui.UiPart.FXML_FILE_FOLDER;
@@ -15,7 +13,6 @@ import org.junit.Test;
 
 import guitests.guihandles.BrowserPanelHandle;
 import seedu.address.MainApp;
-import seedu.address.commons.events.ui.GroupPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 
 public class BrowserPanelTest extends GuiUnitTest {
