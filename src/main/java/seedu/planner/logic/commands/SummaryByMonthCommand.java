@@ -22,7 +22,8 @@ import seedu.planner.model.summary.SummaryList;
 public class SummaryByMonthCommand extends SummaryCommand {
 
     public static final String COMMAND_MODE_WORD = "month";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists the summary for each month for a period of time."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_MODE_WORD
+            + ": Lists the summary for each month for a period of time."
             + " Parameters: "
             + PREFIX_DATE + "MONTH_START " + "MONTH_END "
             + "Example: " + COMMAND_WORD + " " + COMMAND_MODE_WORD + " "
