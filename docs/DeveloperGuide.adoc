@@ -162,6 +162,7 @@ Note how the event is propagated through the `EventsCenter` to the `Storage` and
 The sections below give more details of each component.
 
 [[Design-Ui]]
+// tag::2.2[]
 === UI component
 
 .Structure of the UI Component
@@ -179,6 +180,7 @@ The `UI` component,
 * Binds itself to some data in the `Model` component so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
+// end::2.2[]
 [[Design-Logic]]
 === Logic component
 
