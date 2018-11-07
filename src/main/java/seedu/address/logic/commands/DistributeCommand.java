@@ -47,7 +47,7 @@ public class DistributeCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        new DistributeAlgorithm(model, distribute);
+        model.executeDistributeAlgorithm(model, distribute);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         return new CommandResult(MESSAGE_SUCCESS);

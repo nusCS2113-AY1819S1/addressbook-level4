@@ -119,14 +119,12 @@ public class DistributeCommandTest {
         DistributeCommand differentNationalityFlagCommand = new DistributeCommand(differentNationalityFlagDistribution);
         DistributeCommand allDifferentCommand = new DistributeCommand(allDifferent);
 
-
         // same object -> returns true
         assertTrue(distributeFirstCommand.equals(distributeFirstCommand));
 
         // same values -> returns true
         DistributeCommand differentIndexCommandCopy = new DistributeCommand(differentIndexDistribution);
         assertTrue(differentIndexCommandCopy.equals(differentIndexCommand));
-
 
         // different Index
         assertFalse(distributeFirstCommand.equals(differentIndexCommand));

@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.function.Predicate;
@@ -11,7 +12,12 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.distribute.Distribute;
+import seedu.address.model.distribute.DistributeAlgorithm;
 import seedu.address.model.group.AddGroup;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
@@ -202,6 +208,12 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public String getScriptFolderLocation() {
         return scriptFolderLocation;
+    }
+
+    @Override
+    public void executeDistributeAlgorithm(Model model, Distribute distribute) throws CommandException {
+        new DistributeAlgorithm(model, distribute);
+        indicateAddressBookChanged();
     }
 
     @Override
