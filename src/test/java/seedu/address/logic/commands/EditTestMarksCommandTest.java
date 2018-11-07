@@ -103,25 +103,6 @@ public class EditTestMarksCommandTest {
 
     }
 
-    //    @Test
-    //    public void execute_duplicatePerson_throwsCommandException() throws Exception {
-    //
-    //        ModelStubAcceptingTestAdded modelStub = new ModelStubAcceptingTestAdded();
-    //
-    //        Person validPerson = new PersonBuilder().withName("Jeff Alice").build();
-    //        String[] nameKeywords = validPerson.getName().fullName.split("\\s+");
-    //        List<String> nameKeywordsList =
-    //                new ArrayList<>(Arrays.asList(nameKeywords));
-    //        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
-    // new NameContainsKeywordsPredicate(nameKeywordsList);
-    //        EditTestMarksCommand editTestMarksCommand =
-    // new EditTestMarksCommand(nameContainsKeywordsPredicate,VALID_TEST_NAME_AMY,
-    // VALID_TEST_AMY_MARKS,VALID_TEST_GRADE_UNDEFINED,nameKeywordsList);
-    //        thrown.expect(CommandException.class);
-    //        thrown.expectMessage(AddTestMarksCommand.MESSAGE_PERSON_DUPLICATE_FOUND);
-    //        editTestMarksCommand.execute(modelStub, commandHistory);
-    //
-    //    }
 
     @Test
     public void equals() {
@@ -303,6 +284,11 @@ public class EditTestMarksCommandTest {
 
         @Override
         public void deleteGroupPerson(Group group, Person targetPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getScriptFolderLocation() {
             throw new AssertionError("This method should not be called.");
         }
     }

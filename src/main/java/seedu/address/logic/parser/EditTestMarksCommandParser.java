@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVI_TEST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TEST_MARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TEST_NAME;
 
@@ -11,12 +12,13 @@ import java.util.List;
 import seedu.address.logic.commands.EditTestMarksCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+//@@clara1234566
 /**
  * Parses the given {@code String} of arguments in the context of the FindCommand
  * and returns an FindCommand object for execution.
  * @throws ParseException if the user input does not conform the expected format
  */
-public class EditTestMarksCommandParser {
+public class EditTestMarksCommandParser implements Parser<EditTestMarksCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns an FindCommand object for execution.
@@ -32,6 +34,10 @@ public class EditTestMarksCommandParser {
         String[] nameKeywords = trimmedArgs.split("\\s+");
         List<String> nameKeywordsList =
                 new ArrayList<String>(Arrays.asList(nameKeywords));
+        if (nameKeywordsList.contains("tn/") || nameKeywordsList.contains("tm/")) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVI_TEST));
+        }
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TEST_NAME, PREFIX_TEST_MARK);
@@ -44,6 +50,9 @@ public class EditTestMarksCommandParser {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTestMarksCommand.MESSAGE_USAGE));
         }
+        if (argMultimap.getValue(PREFIX_TEST_NAME).get().contains(" ")) {
+            throw new ParseException(MESSAGE_INVI_TEST);
+        }
         nameKeywordsList.remove(PREFIX_TEST_NAME + argMultimap.getValue(PREFIX_TEST_NAME).get());
         nameKeywordsList.remove(PREFIX_TEST_MARK + argMultimap.getValue(PREFIX_TEST_MARK).get());
 
@@ -52,3 +61,4 @@ public class EditTestMarksCommandParser {
                 null, nameKeywordsList);
     }
 }
+
