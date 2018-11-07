@@ -501,7 +501,7 @@ In the current version, the following operations have been implemented:
 
 * `DistributeCommand` -- Execute the command to start the Distribution process.
 * `DistributeAlgorithm` -- Handles the different types of algorithm depending on the user input flags.
-* `DistributeUtils` -- Contains the methods that work closely with DistributeAlgorithm class.
+* `DistributeUtil` -- Contains the methods that work closely with DistributeAlgorithm class.
 
 This feature also work with `CreateGroupCommand` and `AddGroupCommand` as Distribute functionality consist of creating groups and adding person into groups.
 
