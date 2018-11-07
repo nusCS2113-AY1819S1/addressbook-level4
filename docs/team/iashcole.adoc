@@ -1,4 +1,4 @@
-= Koh Jun Kiat - Project Portfolio
+= Ashley Teo - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
@@ -54,11 +54,6 @@ BookInventory is a desktop application used for small to medium book owners. It 
 
 Examples:
 
-* `list` +
-`stock 2 q/6` +
-Increase the quantity available of the 2nd book by 6.
-* `stock i/978-2-12-345680-3 q/5` +
-Increase the quantity available for the book with the corresponding ISBN13 by 5.
 
 == Contributions to the Developer Guide
 
