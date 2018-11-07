@@ -294,7 +294,8 @@ public class ParserUtil {
     public static AgeRange parseAgeRange (String ageRange) throws ParseException {
         requireNonNull(ageRange);
         String trimmedAgeRange = ageRange.trim();
-        int minAge, maxAge;
+        int minAge;
+        int maxAge;
         int [] minAndMaxAge = AgeRange.getMinAndMaxAgeFromAgeRange(trimmedAgeRange);
         minAge = minAndMaxAge[0];
         maxAge = minAndMaxAge[1];

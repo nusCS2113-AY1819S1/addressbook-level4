@@ -39,7 +39,8 @@ public class XmlAdaptedJobOffer {
     private String salary;
     @XmlElement(required = true)
     private List<XmlAdaptedCandidate> candidateList;
-    private int minAge, maxAge;
+    private int minAge;
+    private int maxAge;
 
 
     /**

@@ -9,7 +9,6 @@ import static seedu.recruit.commons.util.EmailUtil.EMAIL_SEND_COMMAND;
 import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.LogicState;
 import seedu.recruit.logic.commands.Command;
-import seedu.recruit.logic.commands.FilterJobOfferCommand;
 import seedu.recruit.logic.commands.FindCandidateCommand;
 import seedu.recruit.logic.commands.FindCompanyCommand;
 import seedu.recruit.logic.commands.FindJobOfferCommand;

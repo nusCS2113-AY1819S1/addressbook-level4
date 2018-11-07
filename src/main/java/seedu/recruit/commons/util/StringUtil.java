@@ -50,16 +50,20 @@ public class StringUtil {
      * </pre>
      * @param minAge cannot be null
      * @param maxAge cannot be null
-     * @param age cannot be null
+     * @param userAge cannot be null
      */
 
-    public static boolean isWithinRange(int minAge, int maxAge, int age) {
-        requireNonNull(age);
+    public static boolean isWithinRange(int minAge, int maxAge, int userAge) {
+        requireNonNull(userAge);
         requireNonNull(minAge);
         requireNonNull(maxAge);
 
-        return ((age>=minAge) && (age<=maxAge));
+        return ((userAge >= minAge) && (userAge <= maxAge));
     }
+
+    /**
+     * Returns true if the
+     */
 
     /**
      * Returns a detailed message of the t, including the stack trace.

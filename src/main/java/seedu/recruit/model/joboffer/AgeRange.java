@@ -17,7 +17,8 @@ public class AgeRange {
 
     public final String value;
 
-    private Integer minAge, maxAge;
+    private int minAge;
+    private int maxAge;
 
     public AgeRange(String ageRangeInput) {
         requireNonNull(ageRangeInput);
@@ -32,8 +33,7 @@ public class AgeRange {
      * Returns true if a given string is a valid ageRange.
      */
     public static boolean isValidAgeRange(String test, int minAge, int maxAge) {
-        return (test.matches(AGE_RANGE_VALIDATION_REGEX) &&
-                ((minAge>=16)||(maxAge<=60)));
+        return (test.matches(AGE_RANGE_VALIDATION_REGEX) && ((minAge >= 16) || (maxAge <= 60)));
     }
 
     public static int[] getMinAndMaxAgeFromAgeRange (String test) {

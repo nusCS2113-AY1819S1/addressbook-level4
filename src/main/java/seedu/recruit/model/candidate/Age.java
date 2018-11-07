@@ -26,7 +26,7 @@ public class Age {
      * Returns true if a given string is a valid age.
      */
     public static boolean isValidAge(String test) {
-        return ((test.matches(AGE_VALIDATION_REGEX)) && (Integer.parseInt(test)>=16));
+        return ((test.matches(AGE_VALIDATION_REGEX)) && (Integer.parseInt(test) >= 16));
     }
 
     @Override

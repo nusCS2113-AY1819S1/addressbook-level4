@@ -23,7 +23,8 @@ public class JobOfferContainsFilterKeywordsPredicate implements Predicate<JobOff
                 && ((!keywords.containsKey("Job")) || (keywords.get("Job").stream().anyMatch(keyword ->
                 StringUtil.containsWordIgnoreCase(jobOffer.getJob().value, keyword))))
                 && ((!keywords.containsKey("Age Range")) || (keywords.get("Age Range").stream().anyMatch(keyword ->
-                StringUtil.containsWordIgnoreCase(jobOffer.getAgeRange().value, keyword))))
+                StringUtil.isWithinRange(jobOffer.getAgeRange().getMinAge(), jobOffer.getAgeRange().getMaxAge(),
+                        Integer.parseInt(keyword)))))
                 && ((!keywords.containsKey("Education")) || (keywords.get("Education").stream().anyMatch(keyword ->
                 StringUtil.containsWordIgnoreCase(jobOffer.getEducation().value, keyword))))
                 && ((!keywords.containsKey("Salary")) || (keywords.get("Salary").stream().anyMatch(keyword ->

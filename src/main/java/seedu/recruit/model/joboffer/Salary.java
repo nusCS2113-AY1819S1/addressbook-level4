@@ -26,7 +26,7 @@ public class Salary {
      * Returns true if a given string is a valid salary.
      */
     public static boolean isValidSalary(String test) {
-        return ((test.matches(SALARY_VALIDATION_REGEX)) && (Integer.parseInt(test)>0));
+        return ((test.matches(SALARY_VALIDATION_REGEX)) && (Integer.parseInt(test) > 0));
     }
 
     @Override
