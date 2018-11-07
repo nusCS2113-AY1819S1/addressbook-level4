@@ -423,24 +423,27 @@ image::SelectGroupSequenceDiagram.png[width="800"]
 
 // end::group[]
 
-// tag::ScriptCommand[]
-=== ScriptCommand feature
+// tag::ScriptSetup[]
+=== ScriptSetup feature
 ==== Current Implementation
-The `ScriptCommand` Feature allows the user to run `scripts` that execute the same command multiples time by importing
-all Command arguments from a specific text file.
+The `ScriptSetup` feature will automatically help the lecturers to generate the `scripts` folders and it
+can also provide the lecturers a option to choose their own script folder location through the `preferences.json`
 
-Before the `ScriptCommand` can be executed, there are some prerequisites:
+`preferences.json` contains a parameter called `scriptFileDirectory` which is used to indicate the scripts folder in
+the main program
 
-* There must be a default folder for which all the scripts need to be stored
-* The default location of scripts folder is `root program location` + `/scripts/`
-* All scripts must be of `Text File Format/txt`
+* Procedure of ScriptSetup
 
-==== ScriptSetup feature
+** When the `execute` method is called, the program will get the `scriptFolder` from the `getScriptFileDirectory` function
+and it will then check whether `scriptFolder` is a valid Path name
+
+*** If `scriptFolder` is valid, the program will automatically proceed to generate the path of the `scriptFolder`
+
 
 .Sequence Diagram for the `ScriptSetup` Function
 image::ScriptSetupSequenceDiagram.png[width="800"]
 
-* Procedure for ScriptSetup
+
 
 Step 1: ScriptSetup will be executed by `MainApp` when the program is initialized and the `ScriptSetup` will be
 execute with the parameter containing the default `scripts` folder location.
@@ -457,6 +460,20 @@ if it is not present inside the project folder
 
 Step 4: If `isScriptFolderPresent` is false, `scriptSetup` will call `addSampleTextFile` which will add some Sample
 Text Files into the scripts folder
+
+// end::ScriptSetup[]
+
+// tag::ScriptCommand[]
+=== ScriptCommand feature
+==== Current Implementation
+The `ScriptCommand` Feature allows the user to run `scripts` that execute the same command multiples time by importing
+all Command arguments from a specific text file.
+
+Before the `ScriptCommand` can be executed, there are some prerequisites:
+
+* There must be a default folder for which all the scripts need to be stored
+* The default location of scripts folder is `root program location` + `/scripts/`
+* All scripts must be of `Text File Format/txt`
 
 Future Implementation:
 ****
