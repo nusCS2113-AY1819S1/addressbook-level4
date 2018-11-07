@@ -42,7 +42,6 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Model model;
     private final CommandHistory history;
     private final RecruitBookParser recruitBookParser;
-    private final EmailUtil emailUtil;
     private final UserPrefs userPrefs;
 
     public LogicManager(Model model, UserPrefs userPrefs) {
@@ -50,8 +49,6 @@ public class LogicManager extends ComponentManager implements Logic {
         this.userPrefs = userPrefs;
         history = new CommandHistory();
         recruitBookParser = new RecruitBookParser();
-        emailUtil = model.getEmailUtil();
-
         if (userPrefs.getHashedPassword() == null) {
             state = new LogicState("primary");
         }
@@ -62,6 +59,7 @@ public class LogicManager extends ComponentManager implements Logic {
             throws CommandException, ParseException, IOException, GeneralSecurityException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
+            EmailUtil emailUtil = model.getEmailUtil();
             if (state.nextCommand == "authenticate") {
                 return new AuthenticateUserCommand(commandText).execute(model, history, userPrefs);
             }
