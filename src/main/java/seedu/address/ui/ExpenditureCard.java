@@ -45,7 +45,11 @@ public class ExpenditureCard extends UiPart<Region> {
         category.setText(expenditure.getCategory().categoryName);
         date.setText(expenditure.getDate().addingDate);
         money.setText(expenditure.getMoney().addingMoney);
+
+        description.setStyle("-fx-text-fill: #BC8F8F");
+
     }
+
 
     @Override
     public boolean equals(Object other) {
