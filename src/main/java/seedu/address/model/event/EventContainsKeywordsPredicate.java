@@ -60,9 +60,9 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                             || StringUtil.containsWordIgnoreCase(event.getVenue().value, keyword)
                             || StringUtil.containsWordIgnoreCase(event.getDateTime().toString(), keyword)
                             || event.getTags().stream()
-                .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword)))
+                .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword))
                             || event.getAttendance().stream()
-                .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.attendeeName, keyword)));
+                .anyMatch(attendee -> StringUtil.containsWordIgnoreCase(attendee.attendeeName, keyword))));
     }
 
     /**
