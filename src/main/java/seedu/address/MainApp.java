@@ -1,7 +1,9 @@
 package seedu.address;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -219,6 +221,7 @@ public class MainApp extends Application {
         try {
             Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
+            initializedPrefs = userPrefsSanityCheck(initializedPrefs);
         } catch (DataConversionException e) {
             logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. "
                     + "Using default user prefs");
@@ -237,6 +240,40 @@ public class MainApp extends Application {
 
         return initializedPrefs;
     }
+
+    //@@author QzSG
+    /**
+     * Performs sanity check of userprefs and update them if invalid fields provided
+     * @param initializedPrefs
+     * @return verified userprefs
+     */
+    private UserPrefs userPrefsSanityCheck(UserPrefs initializedPrefs) {
+        UserPrefs verifiedPrefs;
+        verifiedPrefs = validateBackupPaths(initializedPrefs);
+        return verifiedPrefs;
+    }
+
+    /**
+     * Validates and sets correct backup paths for userprefs
+     * @param initializedPrefs
+     * @return userprefs with validated backup paths
+     */
+    private UserPrefs validateBackupPaths(UserPrefs initializedPrefs) {
+        if (Files.isDirectory(initializedPrefs.getAddressBookBackupFilePath())) {
+            initializedPrefs.setAddressBookBackupFilePath(Paths.get("data", "addressbook.bak"));
+        }
+        if (Files.isDirectory(initializedPrefs.getEventBookBackupFilePath())) {
+            initializedPrefs.setEventBookBackupFilePath(Paths.get("data", "eventbook.bak"));
+        }
+        if (Files.isDirectory(initializedPrefs.getExpenseBookBackupFilePath())) {
+            initializedPrefs.setExpenseBookBackupFilePath(Paths.get("data", "expensebook.bak"));
+        }
+        if (Files.isDirectory(initializedPrefs.getTaskBookBackupFilePath())) {
+            initializedPrefs.setTaskBookBackupFilePath(Paths.get("data", "taskbook.bak"));
+        }
+        return initializedPrefs;
+    }
+    //@@author
 
     private void initEventsCenter() {
         EventsCenter.getInstance().registerHandler(this);

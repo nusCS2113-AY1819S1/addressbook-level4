@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= Student Planner - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -378,8 +378,8 @@ Step 6. The user now decides that the task added was a mistake, and decides to r
 ==== Backups Types
 The application supports both local and online backups
 
-==== Backup Implementation
-A `OnlineStorage` interface must be implemented by all forms of Online backup services. This allows developers to easily add and extend the list of supported backup services by implementing a common set of methods.
+==== Backup and Restore Storage Implementation
+A `OnlineStorage` interface must be implemented by all forms of Online backup and restore services. This allows developers to easily add and extend the list of supported backup services by implementing a common set of methods.
 The current minimum set of methods that must be implemented are
 
 * `OnlineStorage#saveContentToStorage`.
@@ -395,6 +395,22 @@ because of the following reason.
 Backup requires the current in memory book data inside the `Model`, however the `execute` function is actually passed our `model` containing the required books data. We can raise a backup event directly with the books data provided in the model we have access too
 
 The raised event is observed and handled by the storage manager which performs the backup (either local or through supported online services) using the books from the `model` passed in through the `OnlineBackupEvent` or `LocalBackupEvent`
+
+The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the local backup command `backup`.
+
+.Component interactions for `backup` command (local backup)
+image::SDforBackupLocalwithEventHandling.png[width="800"]
+
+[NOTE]
+Note how `Logic` simply raises a `LocalBackupEvent` instead of posting the backup request from the `Model`. This is because `logic` has the `model`
+and can simply pass the required data along in the event to `storage` directly.
+The event is propagated through the `EventsCenter` to the `Storage` and `UI` bypassing the `Model`
+
+The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the online github backup command `backup GITHUB AUTH_TOKEN`.
+
+image::SDforBackupOnlinewithEventHandlingPart1.png[width="800"]
+.Component interactions for `backup GITHUB AUTH_TOKEN` command (online github backup)
+image::SDforBackupOnlinewithEventHandlingPart2.png[width="800"]
 
 ===== Aspect: Implementation of performing backup
 
@@ -458,8 +474,37 @@ In this example, `GithubStorage#saveContentToStorage` is called for the respecti
 . A `UserPrefsChangedEvent` is fired which is handled by `Storage` which saves the updated `UserPrefs` to storage.
 . A `NewNotificationAvailableEvent` is also fired. This event is handled by the `UiManager` which calls `showNotification` that creates a new notification and shows
  it to the user.
+
+=== Restore Feature
+==== Restore Types
+The application supports both local and online restore of backup made using the `backup` feature
+
+* For local restore, the backup book files specified in `preferences.json` will be used.
+* For online restore, for example Github restore, the gist ids in `preferences.json` which represent the reference url to the backup data files will be used.
+
+==== Design Considerations
+===== Aspect: How is the restore command initiated
+The restore feature is similar to backup feature in terms of both features using an event driven approach to reduce coupling and increase cohesion of the different components, specifically
+the `model` and `storage` components.
+
+Restore commands sends either a `LocalRestoreEvent` or a `OnlineRestoreEvent` event
+The raised event is observed and handled by the storage manager which performs the reading of the local or online files into the appropriate data book objects such as `ReadOnlyAddressBook`
+An event is then triggered by `storage` on successful restore which informs `model` that an update to the in memory state is required.
+
+The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the local restore command `restore` and valid local backup exists.
+
+image::SDforRestoreLocalwithEventHandlingPart1.png[width="800"]
+.Component interactions for `backup` command (local backup)
+image::SDforRestoreLocalwithEventHandlingPart2.png[width="800"]
+
+[NOTE]
+Note how `Logic` simply raises a `LocalRestoreEvent`
+The event is propagated through the `EventsCenter` to the `Storage` component
+
+Online Restoration is similar to Local Restore but utilising the same `ExecutorService` used in `backup` to retrieve the online backup data books concurrently.
+
 // end::backuprestore[]
-//author
+//@@author
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
@@ -1015,8 +1060,6 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 [appendix]
 == User Stories
 
-== User Stories
-
 Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (unlikely to have) - `*`
 
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
@@ -1026,7 +1069,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |add a new task | track the tasks
 
-|`* * *` |user |list the tasks | view all the tasks avaiable
+|`* * *` |user |list the tasks | view all the tasks available
 
 |`* * *` |user |update the task | change the task information where necessary
 
@@ -1389,10 +1432,83 @@ _{ more test cases ... }_
 
 _{ more test cases ... }_
 
-=== Saving data
+//@@author QzSG
+// tag::manualTestBackupRestore[]
+=== Backup of data
 
-. Dealing with missing/corrupted data files
+. Backup of data to local storage
 
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
+.. Prerequisites: Backup file paths in `preferences.json` has default file path values before application is started +
+   Test case: `backup` +
+   Expected: All books data is backup to file paths located from `preferences.json`.
+   Notification is shown to user that local backup is successful.
 
-_{ more test cases ... }_
+.. Prerequisites: Backup file paths in `preferences.json` is `null` before application is started +
+   Test case: `backup` +
+   Expected: All books data is backup to default file paths located under `data` directory. `preferences.json` will also be updated with default backup file paths.
+   Notification is shown to user that local backup is successful.
+
+.. Prerequisites: Backup file paths in `preferences.json` are directories before application is started +
+   Test case: `backup` +
+   Expected: All books data is backup to default file paths located under `data` directory. `preferences.json` will also be updated with default backup file paths.
+   Notification is shown to user that local backup is successful.
+
+. Backup of data to online storage service
+
+.. Test case: `backup GITHUB VALID_AUTH_TOKEN` +
+   Expected: Book data is saved to Github gists. Status message updates to show successful backup.
+   Success notifications with the corresponding data backup urls will be created and shown to user.
+
+.. Test case: `backup INVALID` +
+   Expected: No backup is performed. Invalid online service or command details shown in status message with command usage.
+
+.. Test case: `backup GITHUB` +
+   Expected: No backup is performed. Invalid github backup command details shown in status message as no authentication token is provided.
+
+.. Test case: `backup GITHUB invalidToken` +
+   Expected: Command is executed but error popup with "Could not save data to file" appears due to invalid auth token provided. Status bar updates to show backup failed.
+
+.. Test case: `backup service invalid invalid` +
+   Expected: No backup is performed. Invalid command details shown in status message with command usage.
+
+. Restore of data from local backup
+
+.. Prerequisites: `backup` command has been run before and all files are valid and exists in `preferences.json` +
+   Test case: `restore` +
+   Expected: Restore success status message is displayed. Local Restore notification is also created and shown to user
+
+.. Prerequisites: `backup` command has not been run before +
+   Test case: `restore` +
+   Expected: Status message displayed to prompt user to first do a backup or set relevant backup file paths in `preferences.json`.
+
+.. Prerequisites: Certain backup file/s indicated in `preferences.json` has been deleted. +
+   Test case: `restore` +
+   Expected: Status message displayed to prompt user to first do a backup or set relevant backup file paths in `preferences.json` and also check if all file paths are existing files.
+
+.. Prerequisites: `backup` command has been run before and all files are valid and exists in `preferences.json` +
+   Test case: `restore INVALID` +
+   Expected: No restore is performed. Invalid online service or command details shown in status message with command usage.
+
+. Restore of data from online backup
+
+.. Prerequisites: Online backup command has been run before and all gist ids in `preferences.json` are valid +
+   Test case: `restore GITHUB` +
+   Expected: Success status message displayed. Notification is created and shown to user about successful online restore.
+
+.. Prerequisites: Online backup command has not been run before +
+   Test case: `restore GITHUB` +
+   Expected: Status message displayed to prompt user to first do an online backup or set relevant backup gist ids in `preferences.json`.
+
+.. Prerequisites: Certain backup gists who's ids are indicated in `preferences.json` has been deleted. +
+   Test case: `restore GITHUB` +
+   Expected: Error popup will appear for said data books. While any valid gists will still be restored, no success notification will be showed, however, status message will show restore succeeded as long as one of the book gists are valid and exists.
+
+.. Prerequisites: All backup gists who's ids are indicated in `preferences.json` has been deleted.
+   Test case: `restore GITHUB` +
+   Expected: Error popup will appear for all data books. Status message will show restore failed.
+
+.. Prerequisites: Online backup command has been run before and all gist ids in `preferences.json` are valid +
+   Test case: `restore GITHUB VALID_AUTH_TOKEN` +
+   Expected: No restore is performed. Invalid command status message is shown to user with correct usage.
+// end::manualTestBackupRestore[]
+//@@author

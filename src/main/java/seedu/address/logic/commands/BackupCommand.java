@@ -20,6 +20,7 @@ public class BackupCommand extends Command {
 
     public static final String COMMAND_WORD = "backup";
 
+    public static final String MESSAGE_NOAUTH = "No authentication provided for online backup.";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Backups student planner data to location specified (backups to default data path if not provided)\n"
             + "Parameters: [github authToken]\n"

@@ -31,9 +31,12 @@ public class RestoreCommand extends Command {
             + "Note: Github restore does not require authentication token";
 
     public static final String MESSAGE_SUCCESS = "Restoring Backup from %s";
-    public static final String MESSAGE_FAILURE = "Please perform an online backup using %s first or set relevant"
-             + " settings in user prefs";
-    public static final String MESSAGE_FAILURE_SAMPLE = ": backup github";
+    public static final String MESSAGE_FAILURE_LOCAL = "Please perform a local backup using %s first or set paths to "
+            + "existing backup files in user prefs. Additionally, make sure all backup files exists.";
+    public static final String MESSAGE_FAILURE_LOCAL_SAMPLE = ": backup";
+    public static final String MESSAGE_FAILURE_ONLINE = "Please perform an online backup using %s first or set relevant"
+            + " settings in user prefs";
+    public static final String MESSAGE_FAILURE_ONLINE_SAMPLE = ": backup github";
     public static final String MESSAGE_INVALID = "Invalid online service provided";
     public static final String MESSAGE_SHOW_SUPPORTED = "Supported online services: Github."
             + " for local restore no arguments are needed";
@@ -78,6 +81,9 @@ public class RestoreCommand extends Command {
      * @return
      */
     private CommandResult localRestoreCommand(Model model) {
+        if (model.getUserPrefs().hasNonExistingBackupFile()) {
+            return new CommandResult(String.format(MESSAGE_FAILURE_LOCAL, MESSAGE_FAILURE_LOCAL_SAMPLE));
+        }
         EventsCenter.getInstance().post(new LocalRestoreEvent(
                 retrieveAddressBookPath(model), retrieveEventBookPath(model),
                 retrieveExpenseBookPath(model), retrieveTaskBookPath(model)));
@@ -92,7 +98,7 @@ public class RestoreCommand extends Command {
     private CommandResult onlineRestoreCommand(Model model) throws CommandException {
         if (target == OnlineStorage.Type.GITHUB) {
             if (model.getUserPrefs().hasNullGistId()) {
-                return new CommandResult(String.format(MESSAGE_FAILURE, MESSAGE_FAILURE_SAMPLE));
+                return new CommandResult(String.format(MESSAGE_FAILURE_ONLINE, MESSAGE_FAILURE_ONLINE_SAMPLE));
             }
             EventsCenter.getInstance().post(new OnlineRestoreEvent(target, UserPrefs.TargetBook.AddressBook,
                     model.getUserPrefs().getAddressBookGistId(), authToken));

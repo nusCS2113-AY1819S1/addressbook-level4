@@ -5,10 +5,9 @@
 
 == Role: Team Lead, Developer, Git Expert
 
-Responsibilities: Devops, Integration, Scheduling and tracking
+Responsibilities: DevOps, Integration, Scheduling and tracking
 
 == PROJECT: Student Planner
-
 ---
 
 == Overview
@@ -17,26 +16,23 @@ Student Planner is a all-in-one desktop manager application that allows students
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to backup/restore user data*
+* *Major enhancement*: added *the ability to backup and restore user data*
 ** What it does: allows the user to backup current user data both online and locally. Backups can be restored by using the restore command.
-** Justification: This feature improves the product significantly because a user may have the app on many desktops and this provides a convenient way to synchronise them among many devices.
+** Justification: This feature improves the product significantly because our target users have the app on many desktops and this provides a convenient way to synchronise them among many devices.
 ** Highlights: This enhancement enables a generic class that can be easily extended by developers to support more types of online backup services in future. It requires an in-depth analysis of design alternatives.
-The implementation too was challenging as the backing up of data online may take a long time, existing implementation will cause the application to freeze until any backup is completed.
-The current implementation exhibits a working knowledge of multithreading applications, concurrency as well as event driven programming.
+The implementation too was challenging as the backing up and restoring of online data may take a long time, existing implementation will cause the application to freeze until any backup is completed.
+The current implementation exhibits a working knowledge of multithreaded applications, concurrency, event driven programming as well as GUI application design.
 ** Credits: GitHub Api by kohsuke.
-
-* *Minor enhancement*: added a user preferences command that allows the user to customise their application preferences such as default backup locations, online backup data location and other application settings.
-
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
 * *Other contributions*:
 
 ** Project management:
 *** Managed all releases on GitHub
-*** Setup and modified most of the initial documentation prior to v1.1
+*** Configure and added coveralls and related DevOps tools
 ** Enhancements to existing features:
-*** Wrote additional tests for existing features (Pull requests https://github.com[#36], https://github.com[#38])
+*** Modified/added additional tests for existing features
 ** Documentation:
+*** Setup, refactored and modified most of the initial documentation prior to v1.1
 *** Did cosmetic tweaks to existing contents of the User Guide
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-T13-1/main/pull/42[1], https://github.com/CS2113-AY1819S1-T13-1/main/pull/72[2]
@@ -56,8 +52,6 @@ The current implementation exhibits a working knowledge of multithreading applic
 
 include::../UserGuide.adoc[tag=databackup]
 
-include::../UserGuide.adoc[tag=datarestore]
-
 == Contributions to the Developer Guide
 
 |===
@@ -66,4 +60,7 @@ include::../UserGuide.adoc[tag=datarestore]
 
 include::../DeveloperGuide.adoc[tag=backuprestore]
 
-include::../DeveloperGuide.adoc[tag=dataencryption]
+**************************************************
+* Note: Manual Testing portion below
+**************************************************
+include::../DeveloperGuide.adoc[tag=manualTestBackupRestore]

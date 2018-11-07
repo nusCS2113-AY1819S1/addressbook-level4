@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.util.FileUtil;
 
 /**
  * Represents User's preferences.
@@ -123,6 +124,17 @@ public class UserPrefs {
                 || (getEventBookGistId() == null || getEventBookGistId().isEmpty())
                 || (getExpenseBookGistId() == null || getExpenseBookGistId().isEmpty())
                 || (getTaskBookGistId() == null || getTaskBookGistId().isEmpty());
+    }
+
+    /**
+     * Helper method to check if any of the backup filepaths do not actually exists
+     * @return True if any of the backup file paths do not exists
+     */
+    public boolean hasNonExistingBackupFile() {
+        return (!FileUtil.isFileExists(getAddressBookBackupFilePath()))
+                || (!FileUtil.isFileExists(getEventBookBackupFilePath()))
+                || (!FileUtil.isFileExists(getExpenseBookBackupFilePath()))
+                || (!FileUtil.isFileExists(getTaskBookBackupFilePath()));
     }
 
     @Override

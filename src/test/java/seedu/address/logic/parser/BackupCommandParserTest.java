@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_BACKUP_SERVICE_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -53,7 +53,7 @@ public class BackupCommandParserTest {
 
     @Test
     public void parse_invalidArgs_parsesFails() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, BackupCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_BACKUP_SERVICE_FORMAT , BackupCommand.MESSAGE_USAGE);
 
         Path tempBackupFilePath = testFolder.getRoot().toPath().resolve("Temp.bak");
         // invalid arguments

@@ -22,7 +22,9 @@ import seedu.address.model.TaskBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.storage.OnlineStorage;
 import seedu.address.storage.XmlAddressBookStorage;
+import seedu.address.storage.XmlEventBookStorage;
 import seedu.address.storage.XmlExpenseBookStorage;
+import seedu.address.storage.XmlTaskBookStorage;
 
 //@@author QzSG
 
@@ -44,9 +46,13 @@ public class RestoreCommandTest {
     public void setUp() throws Exception {
         Path tempAddressBookBackupFilePath = testFolder.getRoot().toPath().resolve("AddressBook.bak");
         Path tempExpenseBookBackupFilePath = testFolder.getRoot().toPath().resolve("ExpenseBook.bak");
+        Path tempEventBookBackupFilePath = testFolder.getRoot().toPath().resolve("EventBook.bak");
+        Path tempTaskBookBackupFilePath = testFolder.getRoot().toPath().resolve("TaskBook.bak");
 
         Path tempAddressBookFilePath = testFolder.getRoot().toPath().resolve("AddressBook.xml");
         Path tempExpenseBookFilePath = testFolder.getRoot().toPath().resolve("ExpenseBook.xml");
+        Path tempEventBookFilePath = testFolder.getRoot().toPath().resolve("EventBook.xml");
+        Path tempTaskBookFilePath = testFolder.getRoot().toPath().resolve("TaskBook.xml");
 
         ExpenseBook expenseBook = new ExpenseBook();
         EventBook eventBook = new EventBook();
@@ -55,8 +61,13 @@ public class RestoreCommandTest {
 
         userPrefs.setAddressBookBackupFilePath(tempAddressBookBackupFilePath);
         userPrefs.setExpenseBookBackupFilePath(tempExpenseBookBackupFilePath);
+        userPrefs.setEventBookBackupFilePath(tempEventBookBackupFilePath);
+        userPrefs.setTaskBookBackupFilePath(tempTaskBookBackupFilePath);
+
         userPrefs.setAddressBookFilePath(tempAddressBookFilePath);
         userPrefs.setExpenseBookFilePath(tempExpenseBookFilePath);
+        userPrefs.setEventBookFilePath(tempEventBookFilePath);
+        userPrefs.setTaskBookFilePath(tempTaskBookFilePath);
 
         UserPrefs noBackupUserPrefs = new UserPrefs();
 
@@ -71,6 +82,10 @@ public class RestoreCommandTest {
         xmlAddressBookStorage.saveAddressBook(model.getAddressBook());
         XmlExpenseBookStorage xmlExpenseBookStorage = new XmlExpenseBookStorage(tempExpenseBookBackupFilePath);
         xmlExpenseBookStorage.saveExpenseBook(model.getExpenseBook());
+        XmlEventBookStorage xmlEventBookStorage = new XmlEventBookStorage(tempEventBookBackupFilePath);
+        xmlEventBookStorage.saveEventBook(model.getEventBook());
+        XmlTaskBookStorage xmlTaskBookStorage = new XmlTaskBookStorage(tempTaskBookBackupFilePath);
+        xmlTaskBookStorage.saveTaskBook(model.getTaskBook());
         noBackupModel = new ModelManager(getTypicalAddressBook(), expenseBook, eventBook, taskBook, noBackupUserPrefs);
     }
 
@@ -103,8 +118,8 @@ public class RestoreCommandTest {
         RestoreCommand command = new RestoreCommand(Optional.empty(), false,
                 Optional.ofNullable(OnlineStorage.Type.GITHUB), Optional.empty());
         CommandResult result = command.execute(noBackupModel, new CommandHistory());
-        assertEquals(String.format(RestoreCommand.MESSAGE_FAILURE,
-                RestoreCommand.MESSAGE_FAILURE_SAMPLE), result.feedbackToUser);
+        assertEquals(String.format(RestoreCommand.MESSAGE_FAILURE_ONLINE,
+                RestoreCommand.MESSAGE_FAILURE_ONLINE_SAMPLE), result.feedbackToUser);
     }
 
     @Test
