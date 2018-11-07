@@ -5,8 +5,11 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.EmailLoginCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
@@ -17,6 +20,7 @@ import seedu.address.model.person.Email;
  */
 public class EmailLoginCommandParser implements Parser<EmailLoginCommand> {
 
+    private static final Logger logger = LogsCenter.getLogger(EmailLoginCommandParser.class);
     /**
      * Parses the given {@code String} of arguments in the context of the EmailLoginCommand
      * and returns an EmailLoginCommand object for execution.
@@ -30,6 +34,7 @@ public class EmailLoginCommandParser implements Parser<EmailLoginCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_EMAIL, PREFIX_PASSWORD);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_EMAIL, PREFIX_PASSWORD)) {
+            logger.log(Level.WARNING, "User Entered Command With Invalid Format: " + args);
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EmailLoginCommand.MESSAGE_USAGE));
         }
 

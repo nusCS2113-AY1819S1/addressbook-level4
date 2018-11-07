@@ -258,6 +258,8 @@ Examples:
 * `di 3 n/CS2113-T09- g/1 nat/0`
 * `di 2 n/CS2113-T14- g/true nat/0`
 
+
+// tag::login[]
 === Entering email credential into the Student Management System: `login`
 Enters account credential for sending email +
 Format: `login e/EmailAddress pw/Password`
@@ -271,7 +273,9 @@ if you do not wish to use your personal account.
 
 Email Address: tsurajovin@hotmail.com +
 Password: password!@#
+// end::login[]
 
+// tag::sendmail[]
 === Sending Email to Single, Multiple or Group of Person(s): `sendmail` `sm`
 Sends an email to a single person in list +
 Format: `sendmail [Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
@@ -293,6 +297,7 @@ Examples: +
 * sm 1,4,6 s/Tutorial Cancelled m/Tutorial Class for Friday has been cancelled. +
 * sendmail g/2 s/Announcement m/Please bring your calculator tomorrow. +
 * sm g/2 s/Announcement m/Please bring your calculator tomorrow.
+// end::sendmail[]
 
 === Viewing help : `help` `h`
 
