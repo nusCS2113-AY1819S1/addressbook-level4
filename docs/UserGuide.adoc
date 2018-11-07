@@ -171,6 +171,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 // tag:aslUser[]
+
 === Adding person's skill: `asl`
 
 Edits a person's skill in NUSSU-Connect.
@@ -185,6 +186,7 @@ Examples:
 * `asl 2 s/Photography l/30`
 * `asl 4 s/Java l/40`
 // end:aslUser[]
+
 === Editing a person : `edit`
 
 Edits an existing person in NUSSU-Connect. +
@@ -329,13 +331,13 @@ image::SearchPruning10th.png[align="left"]
 === Deleting : `delete`
 
 Deletes a specific person from NUSSU-Connect. +
-Format: `delete [-a all] [INDEX]`
+Format: `delete [INDEX]`
 
 ****
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
-* If -a option is selected, all contacts on the list will be deleted and INDEX will be ignored.
+* delete -a will delete all contacts in the displayed list (to be released in v2.0)
 ****
 
 Examples:
@@ -346,10 +348,6 @@ Deletes the 2nd person in NUSSU-Connect.
 * `find Betsy` +
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
-* `list` +
-`delete -a` +
-Deletes everyone in the results of the `find` command.
-
 
 === Selecting a person : `select`
 
@@ -531,7 +529,7 @@ e.g. `login A1234567M zaq1xsw2cde3 member`
 e.g. `createaccount A1234567M zaq1xsw2cde3 member`
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
 * *Clear* : `clear`
-* *Delete* : `delete [-a all][INDEX]` +
+* *Delete* : `delete [INDEX]` +
 e.g. `delete 3`
 * *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
