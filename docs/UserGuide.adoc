@@ -268,7 +268,7 @@ Examples:
 Assigns the student with matric no. `A0171234B` as a TA.
 * `module assign mc/CS2113 e/e0191234@u.nus.edu` +
 Assigns the student with email `e0191234@u.nus.edu` as a TA.
-
+// tag::classmanagementdepth[]
 === Class Management
 ==== Add Class : `class add`
 Creates a class and assigns it to a module for the system. +
@@ -402,7 +402,7 @@ Examples:
 
 * `class listattendance cn/T16 mc/CG1111` +
 Displays the class attendance list for the class T16 for the module CG1111
-
+// end::classmanagementdepth[]
 === Grade Management
 ==== Add Grade Component : `gradebook add`
 Creates a grade item to a module code. +
