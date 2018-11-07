@@ -36,7 +36,7 @@ public class TimeUtil {
      */
     public int getDayInterval(Date earlyDay, Date lateDay) {
         long interval = lateDay.getTime() - earlyDay.getTime();
-        return (int) (interval / (1000*60*60*24));
+        return (int) (interval / (1000 * 60 * 60 * 24));
     }
 
     /**

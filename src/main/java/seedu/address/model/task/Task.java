@@ -110,7 +110,9 @@ public class Task {
         else if (interval > 7) {
             return 0;
         }
-        else return 1;
+        else {
+            return 1;
+        }
     }
 
     /**
