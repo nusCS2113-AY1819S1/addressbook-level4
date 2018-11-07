@@ -99,6 +99,37 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
+     * Get the tasks record on a particular day.
+     */
+    public String checkTasksRecordsOnParticularDay (String particularDate) {
+
+        String castedDate;
+        String records;
+        String theDate;
+        int index = 0;
+        StringBuilder it = new StringBuilder();
+        castedDate = particularDate.substring(0, 5);
+        it.append("Here's all the task due on this day:\n");
+        while (index < internalList.size()) {
+            theDate = internalList.get(index).getDate().value;
+            if (theDate.equals(castedDate)) {
+                it.append("Task name: " + internalList.get(index).getName().fullName + ", ")
+                        .append("Module: " + internalList.get(index).getModule().value + ", ")
+                        .append("Date: " + internalList.get(index).getDate().value + ", ")
+                        .append("Priority: " + internalList.get(index).getPriority().value + ", ");
+                if (internalList.get(index).getComplete()) {
+                    it.append("Status: " + "Completed\n");
+                } else {
+                    it.append("Status: " + "Uncompleted\n");
+                }
+            }
+            index++;
+        }
+        records = it.toString();
+        return records;
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Task> asUnmodifiableObservableList() {

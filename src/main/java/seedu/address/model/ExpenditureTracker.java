@@ -84,6 +84,13 @@ public class ExpenditureTracker implements ReadOnlyExpenditureTracker {
     }
 
     /**
+     * Get the expenditure records
+     */
+    public String checkExpenditureRecordsOnParticularDay(String particularDay) {
+        return expenditures.checkExpenditureRecordsOnParticularDay(particularDay);
+    }
+
+    /**
      * Removes a person to the address book.
      */
     public void removeExpenditure(Expenditure key) {

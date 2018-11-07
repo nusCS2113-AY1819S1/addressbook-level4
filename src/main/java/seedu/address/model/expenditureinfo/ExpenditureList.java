@@ -107,6 +107,32 @@ public class ExpenditureList implements Iterable<Expenditure> {
     }
 
     /**
+     * Get the expenditure records on a particular day.
+     */
+    public String checkExpenditureRecordsOnParticularDay(String particularDate) {
+
+        String records;
+        String theDate;
+        int index = 0;
+        StringBuilder it = new StringBuilder();
+        it.append("Here's the expenditure record:\n");
+        while (index < internalList.size()) {
+            theDate = internalList.get(index).getDate().addingDate;
+            if (theDate.equals(particularDate)) {
+                System.out.println(theDate + "printing...");
+                it.append("Expenditure description: " + internalList.get(index).getDescription().descriptionName + ", ")
+                        .append("Category: " + internalList.get(index).getCategory().categoryName + ", ")
+                        .append("Money: " + internalList.get(index).getMoney().addingMoney + ", ")
+                        .append("Date: " + internalList.get(index).getDate().addingDate)
+                        .append("\n");
+            }
+            index++;
+        }
+        records = it.toString();
+        return records;
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Expenditure> asUnmodifiableObservableList() {

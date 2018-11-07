@@ -64,6 +64,13 @@ public class TodoList implements ReadOnlyTodoList {
     }
 
     /**
+     * Get the records of tasks on a particular day
+     */
+    public String checkTasksRecordsOnParticularDay(String date) {
+        return tasks.checkTasksRecordsOnParticularDay(date);
+    }
+
+    /**
      * Replaces the given task {@code target} in the list with {@code editedTask}.
      * {@code target} must exist in the to-do list.
      * The task identity of {@code editedTask} must not be the same as another existing task in the to-do list.

@@ -106,6 +106,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public String checkRecords(String date) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
