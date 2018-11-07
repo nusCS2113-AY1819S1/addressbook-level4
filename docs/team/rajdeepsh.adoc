@@ -52,6 +52,7 @@ student management system, that person would also be deleted in all the groups h
 ** Documentation:
 *** Add all initial user stories and use cases for all functions  (Pull requests https://github.com/CS2113-AY1819S1-T13-4/main/pull/7[#7])
 ** Community:
+*** Contributed to forum discussions (https://github.com/nusCS2113-AY1819S1/forum/issues/104[1])
 *** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-T13-4/main/pull/81[#81], https://github.com/CS2113-AY1819S1-T13-4/main/pull/74[#74], https://github.com/CS2113-AY1819S1-T13-4/main/pull/54[#54], https://github.com/CS2113-AY1819S1-T13-4/main/pull/46[#46], https://github.com/CS2113-AY1819S1-T13-4/main/pull/31[#31]
 *** Reported bugs and suggestions for other teams in the class (https://github.com/CS2113-AY1819S1-W13-3/main/issues/88[1], https://github.com/CS2113-AY1819S1-W13-3/main/issues/81[2], https://github.com/CS2113-AY1819S1-W13-3/main/issues/75[3], https://github.com/CS2113-AY1819S1-W13-3/main/issues/70[4])
 
