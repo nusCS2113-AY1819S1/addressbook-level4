@@ -21,6 +21,7 @@ Responsibilities:
 * ScriptCommand Feature - Provide logs to the user if the scripts files cannot be executed
 * ScriptSetup Feature - Create script folder if missing
 * ScriptSetup Feature - Allows user to set their preferred scripts location
+
 '''
 
 === Rajdeep Singh Hundal
