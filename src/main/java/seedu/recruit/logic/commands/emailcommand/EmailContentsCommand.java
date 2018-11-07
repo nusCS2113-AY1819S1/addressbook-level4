@@ -20,6 +20,11 @@ public class EmailContentsCommand extends Command {
             + "Type \"back\" to return to select recipients command.\n"
             + "Type \"cancel\" to cancel the email command.";
     public static final String COMMAND_LOGIC_STATE = "EmailSelectContents";
+    public static final String ADD_CONTENTS_DUPLICATE_MESSAGE =
+            "Unable to add the following because it already has been added before:\n";
+    public static final String ADD_CONTENTS_CONTENTS_ADDED = "Contents added:\n";
+    public static final String ADD_CONTENTS_NOTHING_SELECTED = "ERROR: Nothing was selected!";
+    public static final String NEXT_CONTENTS_ERROR_NO_CONTENTS = "ERROR: There are no contents selected!\n";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws ParseException {
