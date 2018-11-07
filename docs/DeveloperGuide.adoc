@@ -236,7 +236,7 @@ The `Storage` component,
 [[Design-Commons]]
 === Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.planner.commons` package.
 
 == Implementation
 
@@ -786,6 +786,12 @@ The import from Excel file mechanism is facilitated by `ExcelUtil`, the utility 
 
 ImportExcelCommand calls `ExcelUtil#readExcelSheet` to read the Excel file and retrieve data of records from them to create a list of record List<Record>.
 
+In `ExcelUtil#readExcelSheet`, by using method `XSSFWorkbook#setMissingCellPolicy`, every missing cell will be considered as Null cell, quite useful when you export or archive the record data if the record does not have tag.
+
+If blank row is found, the `ExcelUtil#readExcelSheet` will ignore and read the next line, until the last line is read. This concept also applies to read multiple sheets until all sheets have been read.
+
+However, please take note that in order to prevent errors, every sheet that user want to read have to set the First row of the table *must* have 4 cells, namely NAME, DATE, MONEY, TAGS. These 4 columns can be case-insensitive. The sheet with records data but does not have the first row, NAME, DATE, MONEY, TAGS will *not* be read.
+
 After that, `ModelManager#addListUniqueRecord` is called to add the records in the List<Record>. If the record has already existed in the Financial Planner, it will be ignored and not added into the Financial Planner.
 
 Eventually, when all the records are added in the Financial Planner, `ModelManager#commitFinancialPlanner` will be called to update the current version of Financial Planner and the message, which states records have been added.
@@ -921,6 +927,28 @@ listener is present in `RecordListPanel` and will update the UI list automatical
 
 // end::archive[]
 
+// tag::draw_line_chart[]
+
+=== Draw a line chart automatically inside the Excel sheet
+==== Current implementation
+
+This feature will automatically uses the the summary data from the `SUMMARY DATA` sheet in the Excel sheet after the command `archive` or `export_excel` is called.
+
+The feature mechanism is facilitated by `ExcelUtil`, the utility created to handle all methods relating to Excel. It is the component which manages the interactions between the ExportExcelCommand or the ArchiveCommand with `ExcelUtil#drawChart`.
+
+As you can see the screenshot below, in the `SUMMARY DATA` sheet (refer to Export Excel or Archive feature), next to the summary table:
+
+* The size of the line chart (based on default column width and default row height) is:
+** The width is 15 columns
+** The height is 30 rows.
+* On the top left of the chart, the legend shows 3 lines, namely Income, Outcome, and Net.
+** The first blue line shows the Income based on Date.
+** The second orange line shows the Outcome based on Date
+** The third grey line shows the Net (total of income and outcome) based on Date.
+
+image::Export_Capture2_LinhChi.png[width:800]
+
+// end::draw_line_chart[]
 
 === Design Considerations
 ==== Aspect: Data structure to support listing of records
