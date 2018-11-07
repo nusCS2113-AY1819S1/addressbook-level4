@@ -2,12 +2,16 @@
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
+:stylesheet: gh-linhchi-pages.css
 
-== PROJECT: FinancialPlanner - Level 4
 
-== Overview
+== PROJECT: FinancialPlanner
 
-FinancialPlanner - Level 4 is a desktop expense book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+== FinancialPlanner - Overview:
+
+In semester 1 year 2, I had a chance to learn NUS CS2113T - Software Engineering and Object Oriented Programming module. Thanks to this module, I had an hand-on experience to develop a desktop application with my teammate. Guidelines are given during 10 weeks to assist us create the application focusing on a particular group of users.
+
+
 
 == Summary of contributions
 
@@ -24,7 +28,7 @@ FinancialPlanner - Level 4 is a desktop expense book application used for teachi
 ** Highlights: This enhancement is the foundation for other minor enhancements below. It required in-depth analysis of design alternative.
 ** Credits: I would like to extend my thank you to the Third-party library: Apache poi.
 
-=== `ongoing` *Minor enhancement #1*: added the ability to achieve the data into Excel file
+=== `ongoing` *Minor enhancement #1*: added the ability to archive the data into Excel file
 ===== `sub-part of Major enhancement #2`
 
 ** What it does: In case your Financial planner storage too large, and you want to archive based on year, month or period. This feature is designed specifically for you.

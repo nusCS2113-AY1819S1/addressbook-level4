@@ -44,18 +44,18 @@ public class Messages {
     public static final String MESSAGE_EXPORT_COMMAND_ERRORS = "There is error, "
             + "it can either be no record found to export or the Excel file you want to write is opened.";
 
-    public static final String MESSAGE_ACHIEVE_COMMAND_ERRORS = "There is error, "
-            + "it can either be no record found to achieve or the Excel file you want to write is opened.";
+    public static final String MESSAGE_ARCHIVE_COMMAND_ERRORS = "There is error, "
+            + "it can either be no record found to archive or the Excel file you want to write is opened.";
 
     public static final String MESSAGE_IMPORT_COMMAND_ERRORS = "There is error, "
             + "it can either be no record found to import or the Excel file you want to read is opened.";
 
-    public static final String MESSAGE_ACHIEVE_SUCCESSFULLY =
+    public static final String MESSAGE_ARCHIVE_SUCCESSFULLY =
             " The records in the Excel file will be no longer in the current Financial Planner.\n";
 
     public static final String MESSAGE_LIMITS_DO_NOT_EXIST =
             "There is no limit for that period of date";
 
     public static final String MESSAGE_FILE_OPENED =
-            "The file is being opened, please close it before performing Export/Achieve/Import command\n";
+            "The file is being opened, please close it before performing Export/Archive/Import command\n";
 }

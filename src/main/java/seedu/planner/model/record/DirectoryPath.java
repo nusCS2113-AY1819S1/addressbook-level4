@@ -2,13 +2,10 @@ package seedu.planner.model.record;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.logging.Logger;
-
-import seedu.planner.commons.core.LogsCenter;
-
+//@author nguyenngoclinhchi
 /**
  * File path is used to store the preferable location to store the Excel File when user want to export the Data
- * in Excel or the user want to achieve the data.
+ * in Excel or the user want to archive the data.
  */
 public class DirectoryPath {
     public static final String DEFAULT_USER_DIRECTORY = System.getProperty("user.dir");
@@ -26,7 +23,6 @@ public class DirectoryPath {
             + DEFAULT_USER_DIRECTORY;
 
     private String dirPath;
-    private Logger logger = LogsCenter.getLogger(DirectoryPath.class);
 
     public DirectoryPath(String dirPath) {
         requireNonNull(dirPath);
@@ -42,15 +38,6 @@ public class DirectoryPath {
         requireNonNull(dirPath);
         return dirPath.replace("\\s", "");
     }
-    //TODO: CLAIM YOUR EFFORT FIRST (diagram, github)
-
-    //TODO 1: remove all whitespace for the path file before checking the regrex
-    //TODO 2: check whether directories exist or not, if not then dont have to check regrex.
-    //TODO 2: create a path file class and make a global change
-    //TODO 3: read the excel files
-    //TODO 4: delete the period of time records
-    //TODO 5: archieve
-    //TODO 6: if you have time, please implement to draw graph for the summary
 
     public static Boolean isValidFormat (String dirPath) {
         return dirPath.matches(DIRECTORY_REGREX);

@@ -528,11 +528,11 @@ Format: +
 * Single argument Directory Path + Dual argument Date mode: `export_excel d/START_DATE END_DATE dir/DIRECTORY_PATH`
 
 ****
-* *Default mode* will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically user's Home Directory*.
+* *Default mode* will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.
 
-* *Single argument Date mode* will list down all records with the specified date and exports all shown records to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically user's Home Directory*.
+* *Single argument Date mode* will list down all records with the specified date and exports all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.
 
-* *Dual argument Date mode* will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically user's Home Directory*.
+* *Dual argument Date mode* will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the default *Working DIRECTORY*, it will *detect automatically user's Working Directory*.
 
 * *Single argument Directory Path mode* will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the chosen Directory Path.
 
@@ -639,11 +639,11 @@ Format: +
 * Single argument Directory Path + Dual argument Date mode: `archive d/START_DATE END_DATE dir/DIRECTORY_PATH`
 
 ****
-* *Default mode* will list down all records in the Financial Planner and archives all of them to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically user's Home Directory*. Then, the records stored in the Excel file will be deleted automatically in the Financial Planner.
+* *Default mode* will list down all records in the Financial Planner and archives all of them to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*. Then, the records stored in the Excel file will be deleted automatically in the Financial Planner.
 
-* *Single argument Date mode* will list down all records with the specified date and archives all shown records to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically user's Home Directory*.Then, the records stored in the Excel file will be deleted automatically in the Financial Planner.
+* *Single argument Date mode* will list down all records with the specified date and archives all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.Then, the records stored in the Excel file will be deleted automatically in the Financial Planner.
 
-* *Dual argument Date mode* will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically user's Home Directory*.Then, the records stored in the Excel file will be deleted automatically in the Financial Planner.
+* *Dual argument Date mode* will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.Then, the records stored in the Excel file will be deleted automatically in the Financial Planner.
 
 * *Single argument Directory Path mode* will list down all records in the Financial Planner and archives all of them to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in the Financial Planner.
 
@@ -690,7 +690,27 @@ As the size of the Chart is fixed initially. Sometimes, when user archive too ma
 image::Export_Capture2_LinhChi.png[width:800]
 
 // end::archive[]
+
+=== Draw a line chart automatically inside the Excel sheet
+
+Automatically uses the the summary data from the `SUMMARY DATA` sheet in the Excel sheet after the command `archive` or `export_excel` is called.
+
+This feature does not require user typing the command. It is automatically done if the user type in command `archive` or `export_excel`.
+
+As you can see the screenshot below, in the `SUMMARY DATA` sheet, next to the summary table:
+
+* The size of the line chart (based on default column width and default row height) is:
+** The width is 15 columns
+** The height is 30 rows.
+* On the top left of the chart, the legend shows 3 lines, namely Income, Outcome, and Net.
+** The first blue line shows the Income based on Date.
+** The second orange line shows the Outcome based on Date
+** The third grey line shows the Net (total of income and outcome) based on Date.
+
+image::Export_Capture2_LinhChi.png[width:800]
+
 // tag::limitfeatures[]
+
 == Spending Limit Feature
 
 This section describes the limit feature that allows users to set values to control their future spending.
@@ -756,6 +776,7 @@ Examples:
 * `delete_Limit d/20-8-2018 30-8-2018`
 
 [[editlimit]]
+
 === Editing a limit: `editLimit`
 
 Edit a limit to the FinancialPlanner +
@@ -776,6 +797,7 @@ Examples:
 * `editLimit d/20-8-2018 30-8-2018 m/200`
 * `edit_limit d/20-8-2018 30-8-2018 m/200`
 // end::limitfeatures[]
+
 == Upcoming Features
 
 === Showing a visual representation of daily/monthly summary `[Coming in v1.4]`

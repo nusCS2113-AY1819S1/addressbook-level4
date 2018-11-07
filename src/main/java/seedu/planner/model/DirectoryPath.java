@@ -9,9 +9,10 @@ import java.util.logging.Logger;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.core.Messages;
 
+//@author nguyenngoclinhchi
 /**
  * File path is used to store the preferable location to store the Excel File when user want to export the Data
- * in Excel or the user want to achieve the data.
+ * in Excel or the user want to archive the data.
  */
 public class DirectoryPath {
     public static final String WORKING_DIRECTORY_STRING = System.getProperty("user.dir");
@@ -32,8 +33,8 @@ public class DirectoryPath {
                     + "Please take note that inappropriate Directory format "
                     + "or unrealistic directory will result errors.\n"
                     + "If the user has not set the Directory Path for the Excel file, "
-                    + "the Directory will be set to the User's Home Directory, named "
-                    + HOME_DIRECTORY_STRING + "\n"
+                    + "the Directory will be set to the User's Working Directory, named "
+                    + WORKING_DIRECTORY_STRING + "\n"
                     + "For e.g., the appropriate directory is "
                     + HOME_DIRECTORY_STRING
                     + "  or  "
@@ -111,7 +112,8 @@ public class DirectoryPath {
     public String removeDirectoryPath() {
         value = null;
         return String.format("The User's choose Directory path has been removed, "
-                + "hence, we will use the Default User's Home Directory, named %1$s", getDefaultHomeDirectoryValue());
+                        + "hence, we will use the Default User's Working Directory, named %1$s",
+                getDefaultWorkingDirectoryValue());
     }
 
     /**
@@ -174,11 +176,11 @@ public class DirectoryPath {
     }
 
     public DirectoryPath getDirectoryPath() {
-        return (value == null) ? HOME_DIRECTORY : new DirectoryPath(value);
+        return (value == null) ? WORKING_DIRECTORY : new DirectoryPath(value);
     }
 
     public String getDirectoryPathValue() {
-        return (value == null) ? HOME_DIRECTORY_STRING : value;
+        return (value == null) ? WORKING_DIRECTORY_STRING : value;
     }
 
     public static String getDefaultWorkingDirectoryValue() {
@@ -201,7 +203,7 @@ public class DirectoryPath {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DirectoryPath // instanceof handles nulls
-                && this.getDirectoryPath().getDirectoryPathValue()
-                == ((DirectoryPath) other).getDirectoryPath().getDirectoryPathValue());
+                && (this.getDirectoryPath().getDirectoryPathValue())
+                .equals(((DirectoryPath) other).getDirectoryPath().getDirectoryPathValue()));
     }
 }
