@@ -398,7 +398,7 @@ image::classaddlist.PNG[width="800"]
 
 // end::classmanagementbrief[]
 
-// tag::datatograph[]
+// tag::graph[]
 === Gradebook Graph feature
 ==== Current Implementation
 
@@ -448,7 +448,7 @@ image::dataToGraphActivityDiagram.png[width="650"]
 * **Alternative 2:** Use `GradebookManager' for data-to-graph export
 ** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
 ** Cons: Requires dealing with commands that needs to interact with storage controller or xml adapters directly but command should not have direct interaction from StorageController.
-// end::datatograph[]
+// end::graph[]
 
 // tag::modulebidding[]
 === [Proposed] Module bidding feature
@@ -1098,23 +1098,24 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |teacher |mark class attendance list |mark the attendance for every present student
 
 |`* * *` |teacher |modify class attendance list |alter a wrongly-marked attendance for a specific student
+// tag::gradebookuserstories[]
+|`* * *` |teacher |add gradebook components |differentiate the grade components in a module (E.g. mid term test, finals examination)
 
-|`* * *` |teacher |add grade components |differentiate the grade components in a module (E.g. mid term test, finals examination)
+|`* * *` |teacher | edit gradebook components |modifications is possible to reflect the grade component properly.
 
-|`* * *` |teacher | edit grade components |modifications is possible to reflect the grade component properly.
+|`* * *` |teacher | delete gradebook components |incorrect grade components in the module can be removed.
 
-|`* * *` |teacher | delete grade components |incorrect grade components in the module can be removed.
+|`* * *` |teacher |list gradebook components |view the grade components available in the module.
 
-|`* * *` |teacher |list grade components |view the grade components available in the module.
-
-|`* * *` |teacher | find grade components |view the information for a specific grade component.
-
+|`* * *` |teacher | find gradebook components |view the information for a specific grade component.
+// end::gradebookuserstories[]
+// tag::gradeuserstories[]
 |`* * *` |teacher | add students grades |store the marks for students enrolled in module
 
 |`* * *` |teacher | list students grades |view all grades keyed in to the students
 
-|`* * *` |teacher | display students grades in a graph |keep track of the progress of students for a particular grade component
-
+|`* * *` |teacher | display students grades in a graph |keep track of the progress of students for a particular grade component.
+// end::gradeuserstories[]
 |`* * *` |teacher |add notes |keep track of important things and also my own teaching progress
 
 |`* * *` |teacher |delete notes |remove completed tasks or discard those that are no longer needed
@@ -1881,15 +1882,15 @@ Use case resumes at step 1.
 +
 Use case resumes at step 1.
 
-
 [discrete]
-=== Use case: Add Grade Component
+// tag::gradebookusecase[]
+=== Use case: Add Gradebook Component
 *Precondition(s)* :
 
 * Module code must exist
 * Component name must not already exist in Trajectory.
-* Accumulated weightage for grade components in module cannot exceed 100%.
-* Weightage can be 0 for grade components like Mock Practical Exam.
+* Accumulated weightage for gradebook components in module cannot exceed 100%.
+* Weightage can be 0 for gradebook components like Mock Practical Exam.
 
 *Guarantees* :
 
@@ -1897,7 +1898,7 @@ Use case resumes at step 1.
 
 *MSS* :
 
-1. Teacher creates grade component.
+1. Teacher creates gradebook component.
 2. System indicates success message.
 +
 Use case ends.
@@ -1936,10 +1937,10 @@ Use case resumes at step 1.
 
 
 [discrete]
-=== Use case: Update Grade Component
+=== Use case: Update Gradebook Component
 *Precondition(s)* :
 
-* Grade component name must exist in existing module.
+* Gradebook component name must exist in existing module.
 * Accumulated weightage including the updated weightage must not exceed 100%.
 * At least one optional parameter must be included in command.
 
@@ -1949,7 +1950,7 @@ Use case resumes at step 1.
 
 *MSS* :
 
-1. Teacher updates grade component.
+1. Teacher updates gradebook component.
 2. System indicates success message.
 +
 Use case ends.
@@ -1967,18 +1968,18 @@ Use case resumes from step 1.
 
 
 [discrete]
-=== Use case: Remove Grade Component
+=== Use case: Remove Gradebook Component
 *Precondition(s)* :
 
-* Grade component name must exist in existing module.
+* Gradebook component name must exist in existing module.
 
 *Guarantees* :
 
-* Deleting grade component will also delete any student marks associated to it.
+* Deleting gradebook component will also delete any student marks associated to it.
 
 *MSS* :
 
-1. Teacher removes grade component.
+1. Teacher removes gradebook component.
 2. System indicates success message.
 +
 Use case ends.
@@ -1993,10 +1994,10 @@ Use case resumes at step 1.
 
 
 [discrete]
-=== Use case: Find Grade Component
+=== Use case: Find Gradebook Component
 *Precondition(s)* :
 
-* Grade component name must exist in existing module.
+* Gradebook component name must exist in existing module.
 
 *Guarantees* :
 
@@ -2004,8 +2005,8 @@ Use case resumes at step 1.
 
 *MSS* :
 
-1. Teacher finds grade component.
-2. System displays details on selected grade component.
+1. Teacher finds gradebook component.
+2. System displays details on selected gradebook component.
 +
 Use case ends.
 
@@ -2023,12 +2024,11 @@ Use case resumes at step 1.
 +
 Use case resumes at step 1.
 
-
 [discrete]
-=== Use case: List Grade Components
+=== Use case: List Gradebook Components
 *Precondition(s)* :
 
-* Grade component name must exist in existing module.
+* Gradebook component name must exist in existing module.
 
 *Guarantees* :
 
@@ -2036,7 +2036,7 @@ Use case resumes at step 1.
 
 *MSS* :
 
-1. Teacher lists grade component.
+1. Teacher lists gradebook component.
 2. System displays list.
 +
 Use case ends.
@@ -2048,9 +2048,10 @@ Use case ends.
 ** 1a1. System displays message and format corresponding to error.
 +
 Use case resumes from step 1.
-
+// end::gradebookusecase[]
 
 [discrete]
+// tag::gradeusecase[]
 === Use case: List Students Grades
 *Precondition(s)* :
 
@@ -2138,6 +2139,7 @@ Use case ends.
 Steps 1a1-1a2 are repeated until the data entered is correct.
 +
 Use case resumes from step 1.
+// end::gradeusecase[]
 
 // tag::classmanagementdepth[]
 [discrete]
