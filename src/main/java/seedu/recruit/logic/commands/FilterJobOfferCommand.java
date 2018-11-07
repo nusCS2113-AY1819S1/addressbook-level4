@@ -35,7 +35,7 @@ public class FilterJobOfferCommand extends Command {
             + PREFIX_SALARY + "SALARY "
             + PREFIX_AGE_RANGE + "AGE RANGE "
             + PREFIX_EDUCATION + "EDUCATION \n"
-            + "Example: " + COMMAND_WORD + PREFIX_COMPANY_NAME + "KFC " + PREFIX_JOB + "Cashier" ;
+            + "Example: " + COMMAND_WORD + PREFIX_COMPANY_NAME + "KFC " + PREFIX_JOB + "Cashier";
 
     private final JobOfferContainsFilterKeywordsPredicate predicate;
 

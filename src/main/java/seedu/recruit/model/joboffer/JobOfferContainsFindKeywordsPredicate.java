@@ -2,7 +2,6 @@ package seedu.recruit.model.joboffer;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import seedu.recruit.commons.util.StringUtil;
@@ -12,8 +11,6 @@ import seedu.recruit.commons.util.StringUtil;
  */
 public class JobOfferContainsFindKeywordsPredicate implements Predicate<JobOffer> {
     private final HashMap<String, List<String>> keywords;
-
-    private final List<String> tags = new ArrayList<>();
 
     public JobOfferContainsFindKeywordsPredicate(HashMap<String, List<String>> keywords) {
         this.keywords = keywords;

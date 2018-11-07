@@ -213,13 +213,13 @@ Supported tags: `n/NAME`, `p/PHONE`, `e/EMAIL`, `a/ADDRESS`, `x/AGE`, `h/HIGHEST
 Examples:
 
 * `findc n/john` +
-(Returns any candidate having the name `John`)
+(Returns all candidates with the name `John`)
 
 * `findc n/alice p/91234567` +
-(Returns any candidate with the name `alice` or any candidate that has phone number `91234567`)
+(Returns all candidates with the name `alice` or candidates with phone number `91234567`)
 
 * `findc e/helloworld@example.com` +
-(Returns any candidates having email `helloworld@example.com`)
+(Returns all candidates with the email `helloworld@example.com`)
 
 ==== Finds names of companies from RecruitBook based on searched fields that you have entered.
 Format: `findC <tag>/KEYWORD` +
@@ -228,10 +228,10 @@ Supported tags: `c/COMPANY NAME`, `p/PHONE`, `e/EMAIL`, `a/ADDRESS`
 Examples:
 
 * `findC c/KFC c/McDonalds` +
-(Returns any company having either the name `KFC` or `McDonalds`)
+(Returns all companies with the name either `KFC` or `McDonalds`)
 
 * `findC n/HanBaoBao Pte Ltd a/Yishun MRT` +
-(Returns any company having the name `HanBaoBao Pte Ltd` or with address saved as `Yishun MRT`)
+(Returns all companies with the name `HanBaoBao Pte Ltd` or with address saved as `Yishun MRT`)
 
 ==== Finds job offers from RecruitBook based on searched fields that you have entered.
 Format: `findj <tag>/KEYWORD` +
@@ -240,9 +240,9 @@ Supported tags: `c/COMPANY NAME`, `j/JOB OFFER`, `g/GENDER`, `s/SALARY`, `xr/AGE
 Examples:
 
 * `findj j/cashier` +
-(Returns all `cashier` job offer)
-* `findj c/KFC s/1500 h/SECONDARY` +
-(Returns all job offers listed by `KFC` or job offers that has a pay of $`1500` or requires highest education level attained to be `SECONDARY` level)
+(Returns all `cashier` job offers)
+* `findj c/KFC s/1500 +
+(Returns all job offers either listed by `KFC` or job offers that has a pay of $`1500`
 
 //end::find[]
 
@@ -269,13 +269,13 @@ Supported tags: `n/NAME`, `p/PHONE`, `e/EMAIL`, `a/ADDRESS`, `x/AGE`, `h/HIGHEST
 Examples:
 
 * `filterc n/john` +
-(Returns any candidate having the name `John`)
+(Returns all candidates with the name `John`)
 
 * `filterc n/alice p/91234567` +
-(Returns any candidate with the name `alice` and phone number `91234567`)
+(Returns all candidates with the name `alice` *and* phone number `91234567`)
 
 * `filterc e/helloworld@example.com` +
-(Returns any candidates having email `helloworld@example.com`)
+(Returns all candidates with the email `helloworld@example.com`)
 
 ==== Filters names of companies from RecruitBook based on searched fields that you have entered.
 Format: `filterC <tag>/KEYWORD` +
@@ -284,10 +284,10 @@ Supported tags: `c/COMPANY NAME`, `p/PHONE`, `e/EMAIL`, `a/ADDRESS`
 Examples:
 
 * `filterC c/KFC c/McDonalds` +
-(Returns any company having either the name `KFC` or `McDonalds`)
+(Returns all companies with the name `KFC` or `McDonalds`)
 
 * `filterC n/HanBaoBao Pte Ltd a/Yishun MRT` +
-(Returns any company having the name `HanBaoBao Pte Ltd` with address saved as `Yishun MRT`)
+(Returns all companies with the name `HanBaoBao Pte Ltd` *and* address saved as `Yishun MRT`)
 
 ==== Filters job offers from a selected company based on searched fields that you have entered.
 Format: `filterj <tag>/KEYWORD` +
@@ -302,9 +302,9 @@ Examples:
 To look for job offers listed by KFC only, include the name of company in the searched field.
 
 * `filterj c/KFC j/cashier` +
-(Returns any `cashier` job offer listed by `KFC`)
+(Returns all `cashier` job offers listed by `KFC`)
 * `filterj c/KFC s/1500 h/SECONDARY` +
-(Returns any job offer listed by `KFC` that has a pay of $`1500` and requires highest education level attained to be `SECONDARY` level)
+(Returns all job offers listed by `KFC` that has a pay of $`1500` *and* requires highest education level attained to be `SECONDARY` level)
 
 //end::filter[]
 

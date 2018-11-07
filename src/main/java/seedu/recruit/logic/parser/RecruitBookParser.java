@@ -235,10 +235,10 @@ public class RecruitBookParser {
                 return new FilterCandidateCommandParser().parse(arguments);
 
             case FilterCompanyCommand.COMMAND_WORD:
-                 return new FilterCompanyCommandParser().parse(arguments);
+                return new FilterCompanyCommandParser().parse(arguments);
 
             case FilterJobOfferCommand.COMMAND_WORD:
-                 return new FilterJobOfferCommandParser().parse(arguments);
+                return new FilterJobOfferCommandParser().parse(arguments);
 
             case HistoryCommand.COMMAND_WORD:
                 return new HistoryCommand();
