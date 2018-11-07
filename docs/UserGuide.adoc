@@ -1,4 +1,4 @@
-== Financial Planner - User Guide
+= Financial Planner - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -6,7 +6,6 @@
 :sectnums:
 :imagesDir: images
 :stylesDir: stylesheets
-:stylesheet: gh-pages.css
 :xrefstyle: full
 :experimental:
 ifdef::env-github[]
@@ -30,7 +29,7 @@ Before a user is able to use our software, he/she is required to do the followin
 that is required.
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
+.  Download the latest `financialplanner.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your Financial Planner.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
@@ -41,7 +40,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : lists all records
-* **`add`**`n/Grocery shoppings m/-70 d/20-9-2018 t/Shopping` : adds a contact named `Grocery shopping` to the Financial Planner.
+* **`add`**`n/Grocery shopping m/-70 d/20-9-2018 t/Shopping` : adds a contact named `Grocery shopping` to the Financial Planner.
 * **`delete`**`3` : deletes the 3rd record shown in the current list
 * *`exit`* : exits the app
 
@@ -68,11 +67,15 @@ which can be used as `add n/Grocery shopping`.
 *Parameter Constraints* [[constraints]]
 
 * `NAME` can be any word, phrase or sentence.
-* `MONEYFLOW` must be made up of only digits, a single "+" or "-" and at most one decimal point.
+* `MONEYFLOW` must be made up of only digits, a single "+" or "-" and at most one decimal point. Also, note that the maximum number of
+digits the whole number part of this parameter can have is 12 digits.
 * `DATE` is in the form of *dd-mm-yyyy* where *dd* represents day, *mm* represents month and *yyyy* represents the year.
 *dd* and *mm* both require 1 to 2 digits while *yyyy* requires exactly 4 digits.
-* `DATE` entered must also be a valid date, no fake dates e.g. 60-11-2018, 30-02-2018
-* `TAG` is completely optional and can be any alphanumerical word, but limited to only 1 whole word, no whitespaces are allowed.
+* `DATE` entered must also be a valid date, no fake dates e.g. *60-11-2018*, *30-02-2018*. Leap years are also accounted for, meaning that you
+can enter *29-2-2016* and it will still be accepted.
+* `TAG` is completely optional and can be any alphanumerical word, but limited to only 1 whole word, no whitespaces are allowed. Also,
+the maximum character length of the tag is 50 characters long. The maximum allowed tags is 2 as these tags will be used to categorise each
+record, to reduce effort on user's part in specifying another field.
 * `INDEX` *must be a positive integer* `1, 2, 3, ...`
 
 ====
@@ -89,8 +92,8 @@ Adds a record of a financial activity to the FinancialPlanner with the given nam
 Format: `add n/NAME d/DATE m/MONEYFLOW [t/TAG]...` +
 
 Name denotes the name of the financial activity, moneyflow denotes the money spent or gained in the financial activity
-and date denotes the date the financial activity was completed. Each financial activity can be labelled with any number
-of tags.
+and date denotes the date the financial activity was completed. Each financial activity can be labelled with maximum of 2
+of tags as these tags will be used to categorise each record to remove the need for user to specify another field.
 
 [NOTE]
 Moneyflow can be either a debit (expense) or a credit (income). +
@@ -133,11 +136,11 @@ Finds records whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Records matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The search is case insensitive. e.g `grocery` will match `Grocery`
+* The order of the keywords does not matter. e.g. `Grocery Shopping` will match `Shopping Grocery`
+* Only the name of the record is searched.
+* Only full words will be matched e.g. `Grocer` will not match `Grocery`
+* Records matching at least one keyword will be returned (i.e. `OR` search). e.g. `Grocery Shopping` will return `Grocery`, `Shirt Shopping`
 ****
 
 Examples:
@@ -265,7 +268,6 @@ Deletes the 2nd record in the expense book.
 Deletes the 1st record in the results of the `find` command.
 
 // tag::delete_by_date_entry[]
-
 === Deleting records by date. `delete_date`
 
 Deletes the records with a specified date from the expense book. +
@@ -282,7 +284,6 @@ Examples:
 Deletes the records with date 31-7-2018.
 
 // end::delete_by_date_entry[]
-
 === Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
@@ -296,12 +297,13 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 // tag::undoredo[]
 === Undoing previous command : `undo`
 
-Restores the expense book to the state before the previous _undoable_ command was executed. +
+Restores the FinancialPlanner to the state before the previous _undoable_ command was executed. +
 Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the expense book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the FinancialPlanner's stored content (
+`add`, `delete`, `deletedate`, `edit`, `addlimit`, `deletelimit`, `editlimit` and `clear`).
 ====
 
 Examples:
@@ -340,7 +342,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 === Clearing all records : `clear`
 
-Clears all records from the expense book. +
+Clears all records from the FinancialPlanner. +
 Format: `clear`
 
 === Exiting the program : `exit`
@@ -438,7 +440,8 @@ Examples:
 * `summary month d/APR-2018 SeP-2018`
 * `summary category d/1-1-2018 12-12-2018`
 
-The screenshots below are examples of what you can see once the command has been accepted.
+The screenshots below are examples of what you can see once the command has been accepted. The commands entered have been left
+in for visualisation purposes.
 
 image::UiSummaryByDateTable.png[width="790"]
 *Screenshot of app when `summary date d/1-1-2018 12-12-2018` is run*
@@ -474,7 +477,8 @@ Examples:
 
 * `stats d/1-1-2018 12-12-2018`
 
-Below are some screenshots of what you can see when the command has been accepted.
+Below are some screenshots of what you can see when the command has been accepted. The commands entered have been left
+in for visualisation purposes.
 
 image::UiPieChartExpense.png[width="790"]
 *Screenshot of app displaying expense breakdown when `stats d/1-1-2018 12-12-2018` is run*
@@ -483,7 +487,7 @@ image::UiPieChartIncome.png[width="790"]
 *Screenshot of app displaying income breakdown when `stats d/1-1-2018 12-12-2018` is run*
 
 // end::stats[]
-// end::welcomepanel[]
+// tag::welcomepanel[]
 === Showing a breakdown of total expenses and income into categories of this month: `NO COMMAND REQUIRED`
 
 Shows a breakdown of total expenses and income into categories using data of this month. +
@@ -690,7 +694,6 @@ As the size of the Chart is fixed initially. Sometimes, when user archive too ma
 image::Export_Capture2_LinhChi.png[width:800]
 
 // end::archive[]
-// tag::limitfeatures[]
 == Spending Limit Feature
 
 This section describes the limit feature that allows users to set values to control their future spending.
@@ -775,7 +778,6 @@ Examples:
 * `editlimit d/20-8-2018 30-8-2018 m/200`
 * `editLimit d/20-8-2018 30-8-2018 m/200`
 * `edit_limit d/20-8-2018 30-8-2018 m/200`
-// end::limitfeatures[]
 == Upcoming Features
 
 === Showing a visual representation of daily/monthly summary `[Coming in v1.4]`
