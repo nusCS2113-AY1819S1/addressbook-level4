@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.recruit.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.recruit.commons.core.EventsCenter;
-import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
+import seedu.recruit.commons.events.ui.FocusOnCandidateBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
@@ -25,7 +25,7 @@ public class ListCandidateCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         requireNonNull(model);
         model.updateFilteredCandidateList(PREDICATE_SHOW_ALL_PERSONS);
-        EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
+        EventsCenter.getInstance().post(new FocusOnCandidateBookRequestEvent());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

@@ -148,17 +148,24 @@ image::UiClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/recruit/ui/Ui.java[`Ui.java`]
 
-As illustrated in Figure 5, the UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CandidateDetailsPanel`, `CompanyJobDetailsPanel`, `ShortlistPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+As illustrated in Figure 5, the UI consists of a `MainWindow` that is made up of parts
+e.g.`CommandBox`, `ResultDisplay`, `CandidateDetailsPanel`, `CompanyJobDetailsPanel`,
+`ShortlistPanel`, `MasterCandidateListPanel`, `MasterJobListPanel`, `StatusBarFooter`. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-There are 4 placeholders inside `MainWindow` that fills the screen along with the menu bar.
+There are 5 placeholders inside `MainWindow` that fills the screen along with the menu bar.
 
 |============
 |Placeholder | Parts of `MainWindow`
 |commandBoxPlaceholder | `CommandBox`
 | resultDisplayPlaceholder | `ResultDisplay`
 | panelViewPlaceholder | `CandidateDetailsPanel` `CompanyJobDetailsPanel` `ShortlistPanel`
+| masterListPlaceholder | `MasterCandidateListPanel` `MasterJobListPanel`
 | statusbarPlaceholder | `StatusBarFooter`
 |============
+
+In `Company Book`, panelViewPlaceholder holds `CompanyJobDetailsPanel` and `masterListPlaceholder`
+holds `MasterJobListPanel`, while in `Candidate Book`, panelViewPlaceholder holds `CandidateDetailsPanel`
+and masterListPlaceholder holds `MasterCandidateListPanel`.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/recruit/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -576,7 +583,9 @@ Unblacklisting a candidate who is not blacklisted will do likewise.
 ==== Current Implementation
 ===== Shortlisting a Candidate
 
-The shortlist mechanism is facilitated by `select`, `selectCompany` and `selectJob` command.
+The shortlist mechanism is facilitated by `selectc`, `selectC` and `selectj` command. The parsing of these commands
+is facilitated by `ShortlistParser`.
+
 It extends `CompanyBook` with a list of shortlisted candidate(s) for each job offer, stored internally as a
 Unique Candidate List called `candidateList`. The reason for storing as a unique list is to prevent duplicated
 candidates from being added into the same `candidateList`.
@@ -606,13 +615,25 @@ Since RecruitBook opens up Candidate Book by default, adding a job offer will au
 [NOTE]
 `candidateList` is empty upon creation of the `Cashier` object.
 
-. User executes `shortlist` command. RecruitBook enters Stage 2 of the shortlisting process to shortlist a candidate for a job offer.
+. User executes `shortlist` command. The view changes from `Company Book` to `ShortlistPanel`.
+`ShortlistPanel` lists out all the candidates, companies and job offers.
+
+. RecruitBook enters Stage 2 of the shortlisting process to shortlist a candidate for a job offer.
 This is implemented by `LogicManager` where `setLogicState` is called in each stage to connect one after another. User will need to execute
 `cancel` command to exit from the shortlist process. The 5-stage process is described in order below.
 .. `shortlist` -> User initializes the shortlisting process.
-.. `selectCompany x` -> User selects the company of the job offer.
-.. `selectJob x` -> User selects the job offer.
-.. `select x` -> User selects the candidate to shortlist.
+.. `selectC x` -> User selects the company of the job offer.
+[TIP]
+`sortC`, `findC` and `filterC` commands can be used to easily locate the company before selecting it.
+
+.. `selectj x` -> User selects the job offer.
+[TIP]
+`sortj` command can be used to easily locate the job offer before selecting it.
+
+.. `selectc x` -> User selects the candidate to shortlist.
+[TIP]
+`sortc`, `findc` and `filterc` commands can be used to easily locate the candidate before selecting.
+
 .. `confirm` -> User confirms the above inputs.
 
 . RecruitBook proceeds to add shortlisted candidate through `Model`.
@@ -626,12 +647,25 @@ You can access this list by calling `selectedJob.getUniqueCandidateList()`.
 . `model.commitCompanyBook()` is then called to indicate that Company Book has been changed.
 . RecruitBook exits the shortlisting process and returns your view to your last viewed book.
 
+The following sequence diagram shows how the shortlist operation works:
+
+image::shortlistSequenceDiagram.png[width="800"]
+
+The following activity diagram summarizes what happens when a user executes `shortlist` command:
+
+image::shortlistActivityDiagram.png[width="650"]
+
 ===== Deleting a Shortlisted Candidate
 
 Deletion of a shortlisted candidate uses similar implementation as <<Shortlisting a Candidate>>.
 
-The shortlist mechanism is facilitated by `selectCompany` and `selectJob` command.
+The shortlist mechanism is facilitated by `selectC` and `selectj` command. The parsing of these commands
+is facilitated by `ShortlistParser`.
+
 It deletes a shortlisted candidate from the `candidateList` through `Model`.
+[NOTE]
+Deleting a shortlisted candidate does not delete the candidate from `Candidate Book`. It simply
+removes the candidate from the list of shortlisted candidates for that particular job offer.
 
 It is a 4-stage process supported by `LogicManager` by keeping track of the `LogicState`.
 
@@ -658,8 +692,14 @@ will automatically switch the view to Company Book.
 This is implemented by `LogicManager` where `setLogicState` is called in each stage to connect one after another. User will need to execute
 `cancel` command to exit from the shortlist process. The 4-stage process is described in order below.
 .. `deleteShortlist` -> User initializes the deleting process.
-.. `selectCompany x` -> User selects the company of the job offer.
-.. `selectJob x` -> User selects the job offer.
+.. `selectC x` -> User selects the company of the job offer.
+[TIP]
+`sortC`, `findC` and `filterC` commands can be used to easily locate the company before selecting it.
+
+.. `selectj x` -> User selects the job offer.
+[TIP]
+`sortj` command can be used to easily locate the job offer before selecting it.
+
 .. `delete x` -> User selects the candidate to delete.
 
 . RecruitBook proceeds to delete the shortlisted candidate through `Model`.
@@ -674,11 +714,15 @@ this command returns a message to be displayed to inform the user.
 . `model.commitCompanyBook()` is then called to indicate that Company Book has been changed.
 . RecruitBook exits the deleting process.
 
+The following activity diagram summarizes what happens when a user executes `deleteShortlist` command:
+
+image::deleteShortlistActivityDiagram.png[width="650"]
+
 ==== Design Considerations
 
 ===== Aspect: How shortlist feature executes
 
-* **Alternative 1 (current choice):** Use existing `select`, `selectCompany` and `selectJob` commands.
+* **Alternative 1 (current choice):** Use existing `selectc`, `selectC` and `selectj` commands.
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Shortlist command executes the 5-stage process by itself.
@@ -713,7 +757,8 @@ MainWindow knows an event is posted because it is subscribed to the event bus `c
 handle any event that matches the parameter of the handling methods in `MainWindow` class.
 For example, `SwitchBookRequestEvent` will match with the `handleSwitchBookEvent(*SwitchBookRequestEvent* event)` as the parameter matches.
 
-As mentioned <<UI component, above>>, inside MainWindow, there are 4 placeholders and the panelViewPlaceholder holds the panels `CandidateDetailsPanel` and `CompanyJobDetailsPanel`.
+As mentioned <<UI component, above>>, inside MainWindow, there are 5 placeholders and
+the panelViewPlaceholder can hold either `CandidateDetailsPanel`, `CompanyJobDetailsPanel` or `ShortlistPanel`.
 
 The methods `switchToCandidateBook` and `switchToCompanyBook` work by placing the desired panel in panelViewPlaceholder, to be shown on the MainWindow.
 
@@ -758,7 +803,7 @@ for better integrity purposes.
 and returning false if the current book is Company Book.
 ** Pros: Eliminates the possibility of misspelling the books.
 ** Cons: Can be confusing for multiple contributors. There is also an assumption that there are only 2 distinct
-cases of the view of `panelViewPlaceholder`, which is not the case as we introduced another view `shortlistPanel`.
+cases of the view of `panelViewPlaceholder`, which is not the case as we introduced another view `ShortlistPanel`.
 // end::switch[]
 
 // tag::email[]

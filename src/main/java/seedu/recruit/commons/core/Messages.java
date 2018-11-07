@@ -6,6 +6,7 @@ package seedu.recruit.commons.core;
 public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command.\n";
+    public static final String MESSAGE_UNKNOWN_COMMAND_DUE_TO_INTERFACE = "Unknown command in current interface!\n";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT =
             "Multiple command words detected!\n";

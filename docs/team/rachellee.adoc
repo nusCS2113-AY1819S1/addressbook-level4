@@ -19,7 +19,23 @@ work on building the application while documenting on our progress and milestone
 The project requirement was to morph an AddressBook application into something that responds to social needs and
 offers sustainable solutions. My team morphed it into a RecruitBook application to address the limited tools of
 the HumanResource(HR) departments and various free-lance job agents. Our application provides a sustainable solution
-as it eliminates the need for paperwork and application forms.
+as it eliminates the need for paperwork and application forms. Furthermore, we ensured our developer guide explained the
+implementation well enough for a beginner to change up the data fields to easily adapt our application to organise data
+of their choice. This made our application flexible to change, which provides a long-term sustainable solution for data management.
+
+My role in this project is a developer and my responsibilities are ensuring code quality and updating documentation.
+I believe that documentation is as important as coding, because chunks of code do not make sense without proper explanation and justification.
+It is essential in a group project to update our teammates with the changes, to keep everyone on the same page.
+
+Other than gaining more knowledge on developing an application, I have learnt the importance of integrating the team's code,
+setting the same coding standards, as well as communicating with my teammates about the various
+features and ideas on integrating them together. As a result, my problem-solving skills have improved.
+Moreover, I worked on my conflict resolution skills when inevitable conflicts arose throughout this project.
+I took extra caution in my words and actions to ensure conflicts are resolved professionally, without hurting the other
+party.
+
+By setting weekly tasks to complete, I followed my schedule strictly so as to not delay the team's progress.
+This is essential as my teammates required my features to be functional before they were able to work on theirs.
 
 RecruitBook is an offline desktop application that allows you to manage candidates and job offers
 throughout the process of recruiting. The user interacts with it using a CLI, and it has a GUI created with JavaFX.
@@ -58,7 +74,7 @@ as well as their last updated time and locations of the files saved.
 ** Credits: https://github.com/se-edu/addressbook-level4/pull/803[StatusFooterBar]
 
 * *Code contributed*:
-Navigate under Commits, and click _leerachel_ filter to see commits by me.
+Under the username of https://github.com/CS2113-AY1819S1-F09-4/main/commits?author=leerachel[leerachel].
 . https://github.com/CS2113-AY1819S1-F09-4/main/tree/master/src/main[Functional Code]
 . https://github.com/CS2113-AY1819S1-F09-4/main/tree/master/src/test[Test Code]
 
@@ -90,19 +106,24 @@ https://github.com/CS2113-AY1819S1-F09-4/main/pull/61[here]
 |===
 
 include::../UserGuide.adoc[tag=switch]
+
 include::../UserGuide.adoc[tag=select]
-include::../UserGuide.adoc[tag=deleteShortlist]
+
 include::../UserGuide.adoc[tag=shortlist]
+
+include::../UserGuide.adoc[tag=deleteShortlist]
+
 include::../UserGuide.adoc[tag=list]
 
 
 == Contributions to the Developer Guide
 
 |===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project. I have also edited the other parts to make sure they are coherent._
 |===
 
 include::../DeveloperGuide.adoc[tag=switch]
+
 include::../DeveloperGuide.adoc[tag=shortlist]
 
 

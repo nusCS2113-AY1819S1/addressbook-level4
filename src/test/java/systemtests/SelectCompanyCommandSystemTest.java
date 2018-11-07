@@ -10,7 +10,6 @@ import static seedu.recruit.testutil.TestUtil.getCompanyMidIndex;
 import static seedu.recruit.testutil.TypicalCompanies.KEYWORD_MATCHING_AUDI;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.recruit.commons.core.index.Index;
@@ -19,7 +18,6 @@ import seedu.recruit.logic.commands.SelectCompanyCommand;
 import seedu.recruit.logic.commands.UndoCompanyBookCommand;
 import seedu.recruit.model.Model;
 
-@Ignore
 public class SelectCompanyCommandSystemTest extends CompanyBookSystemTest {
     @Test
     public void select() {
@@ -108,8 +106,8 @@ public class SelectCompanyCommandSystemTest extends CompanyBookSystemTest {
      * 2. Command box has the default style class.<br>
      * 3. Result display box displays the success message of executing select command with the
      * {@code expectedSelectedCardIndex} of the selected company.<br>
-     * 4. {@code Storage} and {@code PersonListPanel} remain unchanged.<br>
-     * 5. Selected card is at {@code expectedSelectedCardIndex} and the browser url is updated accordingly.<br>
+     * 4. {@code Storage} and {@code CompanyJobDetailsPanel} remain unchanged.<br>
+     * 5. Selected card is at {@code expectedSelectedCardIndex} and the company job list is updated accordingly.<br>
      * 6. Status bar remains unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
      * {@code CompanyBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
@@ -140,8 +138,8 @@ public class SelectCompanyCommandSystemTest extends CompanyBookSystemTest {
      * 1. Command box displays {@code command}.<br>
      * 2. Command box has the error style class.<br>
      * 3. Result display box displays {@code expectedResultMessage}.<br>
-     * 4. {@code Storage} and {@code PersonListPanel} remain unchanged.<br>
-     * 5. Browser url, selected card and status bar remain unchanged.<br>
+     * 4. {@code Storage} and {@code CompanyJobDetailsPanel} remain unchanged.<br>
+     * 5. Selected card and status bar remain unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
      * {@code CompanyBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * @see CompanyBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)

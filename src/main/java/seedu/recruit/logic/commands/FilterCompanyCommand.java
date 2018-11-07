@@ -10,6 +10,7 @@ import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
+import seedu.recruit.logic.LogicManager;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.company.CompanyContainsFilterKeywordsPredicate;
@@ -41,6 +42,23 @@ public class FilterCompanyCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         requireNonNull(model);
         model.updateFilteredCompanyList(predicate);
+
+        if (ShortlistCandidateInitializationCommand.isShortlisting()) {
+            LogicManager.setLogicState(SelectCompanyCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST);
+            return new CommandResult(String.format(Messages.MESSAGE_COMPANIES_LISTED_OVERVIEW,
+                    model.getFilteredCompanyList().size())
+                    + ShortlistCandidateInitializationCommand.MESSAGE_NEXT_STEP
+                    + SelectCompanyCommand.MESSAGE_USAGE);
+        }
+
+        if (DeleteShortlistedCandidateInitializationCommand.isDeleting()) {
+            LogicManager.setLogicState(SelectCompanyCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST_DELETE);
+            return new CommandResult(String.format(Messages.MESSAGE_COMPANIES_LISTED_OVERVIEW,
+                    model.getFilteredCompanyList().size())
+                    + DeleteShortlistedCandidateInitializationCommand.MESSAGE_NEXT_STEP
+                    + SelectCompanyCommand.MESSAGE_USAGE);
+        }
+
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
         return new CommandResult(
                 String.format(Messages.MESSAGE_COMPANIES_LISTED_OVERVIEW, model.getFilteredCompanyList().size()));
