@@ -110,6 +110,26 @@ public class SampleDataUtil {
         for (Group sampleGroup : getSampleGroups()) {
             sampleAb.createGroup(sampleGroup);
         }
+
+        return setPersonsInGroups(sampleAb);
+    }
+
+    /**
+     * Adds persons from sampleAb to groups in sampleAb
+     * @param sampleAb
+     * @return
+     */
+    public static AddressBook setPersonsInGroups (AddressBook sampleAb) {
+        int count = 0;
+        for (Group abGroup : sampleAb.getGroupList()) {
+            for (Person abPerson : sampleAb.getPersonList()) {
+                if (++count == 4) {
+                    count = 0;
+                    continue;
+                }
+                abGroup.addPersons(abPerson);
+            }
+        }
         return sampleAb;
     }
 
