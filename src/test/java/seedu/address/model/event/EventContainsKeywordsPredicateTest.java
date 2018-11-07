@@ -7,15 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 class EventContainsKeywordsPredicateTest {
+
     private Event event;
     private EventContainsKeywordsPredicate predicate;
     private List<String> keywords;
 
-    @BeforeAll
+    @Before
     public void setup() {
         EventName eventName = new EventName("SE team meeting");
         Description description = new Description("Weekly meeting with software project");
