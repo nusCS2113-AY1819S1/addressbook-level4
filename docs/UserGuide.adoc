@@ -195,6 +195,23 @@ The tasks are now sorted by its due date.
 All uncompleted tasks will be sorted by their priority level.
 // end::TDLsort[]
 
+// tag::TDLNotification[]
+=== Deadline notification : (default by system)
+
+Notify when the deadline of tasks come in the following seven days +
+No commands required
+
+****
+* The name of "urgent" tasks will turn yellow.
+* The sum of "urgent" tasks will form a notification sentence after each operation.
+****
+
+Example:
+
+* (Unavailable for this feature)
+
+// end::TDLNotification[]
+
 // tag::ETadd[]
 === Adding an expenditure : `ET_add`
 

@@ -1,3 +1,4 @@
+//@@author XiaoYunhan
 package seedu.address.ui;
 
 import javafx.fxml.FXML;
@@ -45,6 +46,44 @@ public class TaskCard extends UiPart<Region> {
         taskmodule.setText(task.getModule().value);
         taskdate.setText(task.getDate().value);
 
+        // task state show red for uncompleted
+        // green for completed
+        if (task.getComplete()) {
+            taskstate.setStyle("-fx-text-fill: #7fce92");
+        }
+        else {
+            taskstate.setStyle("-fx-text-fill: #c05d61");
+        }
+
+        int notification = task.notification();
+
+        //deadline of task has passed or will come within 7 days
+        if (notification != 0) {
+            //deadline of task has passed
+            if (notification == -1) {
+                //task is marked as "uncompleted"
+                if (!task.getComplete()) {
+                    id.setStyle("-fx-text-fill: #c05d61");
+                    taskname.setStyle("-fx-text-fill: #c05d61");
+                    taskdate.setStyle("-fx-text-fill: #c05d61");
+                    taskmodule.setStyle("-fx-text-fill: #c05d61");
+                    taskpriority.setStyle("-fx-text-fill: #c05d61");
+                }
+            }
+            //task will come within 7 days
+            else {
+                //task is marked as uncompleted
+                if (!task.getComplete()) {
+                    id.setStyle("-fx-text-fill: #fbf8af");
+                    taskname.setStyle("-fx-text-fill: #fbf8af");
+                    taskdate.setStyle("-fx-text-fill: #fbf8af");
+                    taskmodule.setStyle("-fx-text-fill: #fbf8af");
+                    taskpriority.setStyle("-fx-text-fill: #fbf8af");
+                }
+            }
+        }
+
+
         if (task.getPriority().value.equals("1")) {
             taskpriority.setText("High priority (1)");
         } else if (task.getPriority().value.equals("2")) {
@@ -58,6 +97,11 @@ public class TaskCard extends UiPart<Region> {
         } else {
             taskstate.setText("Status: Uncompleted");
         }
+
+        /**
+         * Modify color based on intervals between the deadline of the task and current time
+         * Testing feature
+         */
     }
 
     @Override

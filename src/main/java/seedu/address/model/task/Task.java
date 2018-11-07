@@ -2,7 +2,10 @@ package seedu.address.model.task;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Date;
 import java.util.Objects;
+
+import seedu.address.commons.util.TimeUtil;
 
 /**
  * Represents a Task in the to-do list.
@@ -72,6 +75,13 @@ public class Task {
         return name.toString().toLowerCase();
     }
 
+    public Date getDayInTypeDate() {
+        TimeUtil timeUtil = new TimeUtil();
+        String date = timeUtil.dateToStringConverter(new Date());
+        String currentYear = date.substring(6, 10);
+        return timeUtil.stringToDateConverter( getDay() + '/' + getMonth() + '/' + currentYear);
+    }
+
     /**
      * Returns true if both tasks are totally the same.
      * This defines a weaker notion of equality between two tasks.
@@ -84,6 +94,25 @@ public class Task {
         return otherTask != null
                 && otherTask.getName().equals(getName())
                 && otherTask.getModule().equals(getModule());
+    }
+
+    /**
+     * return -1 for deadline has passed
+     * return 0 for deadline is not urgent (not in the following 7 days)
+     * return 1 for "urgent" deadline (within the following 7 days)
+     */
+    public int notification() {
+        TimeUtil timeUtil = new TimeUtil();
+        int interval = timeUtil.getDayInterval(timeUtil.getCurrentDate(), getDayInTypeDate());
+        if (interval < 0) {
+            return -1;
+        }
+        else if (interval > 7) {
+            return 0;
+        }
+        else {
+            return 1;
+        }
     }
 
     /**
