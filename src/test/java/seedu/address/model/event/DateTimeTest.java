@@ -38,7 +38,13 @@ public class DateTimeTest {
 
     @Test
     public void equals() {
+        DateTime dateTime = new DateTime("10/10/2010 10:10");
+        DateTime dateTimeEqual = new DateTime("10/10/2010 10:10");
+        DateTime dateTimeNotEqual = new DateTime("10/10/2018 10:10");
 
+        assertTrue(dateTime.equals(dateTime));
+        assertTrue(dateTime.equals(dateTimeEqual));
+        assertFalse(dateTime.equals(dateTimeNotEqual));
     }
 
 }
