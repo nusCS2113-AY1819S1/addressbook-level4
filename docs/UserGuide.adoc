@@ -50,7 +50,7 @@ image::Ui.png[width="790"]
 Format: `help`
 
 === Student and Course Management
-
+// tag::studandcoursemanagement[]
 ==== Add a course : `course add`
 Adds a student to the system. +
 Format: course_add n/COURSE_NAME c/COURSE_CODE f/FACULTY_NAME
@@ -145,7 +145,7 @@ Examples:
 * `student export C:\export`
 Exports all students in .csv format to the 'export' folder in C drive.
 
-
+// end::studandcoursemanagement[]
 
 
 === Module Management
@@ -679,6 +679,7 @@ _{explain how the user can enable/disable data encryption}_
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
 
 == Command Summary
+// tag::studandcoursemanagementsummary[]
 * *Add course* : `course add c/COURSE_CODE n/COURSE_NAME f/FACULTY_NAME` +
 e.g. `course add c/CEG n/Computer Engineering f/FoE`
 * *Delete course* : `course delete c/COURSE_CODE` +
@@ -696,7 +697,7 @@ e.g. `student find Megan Nicole`
 e.g. `student delete 2`
 * *Export students [COMING IN V1.4]* : `student export` +
 e.g. `student export C:\export`
-
+// end::studandcoursemanagementsummary[]
 * *Add module* : `module add mc/MODULE_CODE mn/MODULE_NAME` +
 e.g. `module add mc/CS2113 mn/Software Engineering`
 * *Update module* : `module edit mc/MODULE_CODE​ mn/MODULE_NAME` +
