@@ -183,8 +183,6 @@ public class Event {
                 .append(getVenue())
                 .append(" Time: ")
                 .append(getDateTime())
-                .append(" Status: ")
-                .append(getStatus())
                 .append(" Comment: ")
                 .append(getComment())
                 .append(" Tags: ");
