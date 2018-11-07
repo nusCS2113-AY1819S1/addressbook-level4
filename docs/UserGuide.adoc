@@ -693,10 +693,9 @@ image::Export_Capture2_LinhChi.png[width:800]
 // tag::limitfeatures[]
 == Spending Limit Feature
 
-This section describes the limit feature that allows users to set values to control their future spending.
+* This section describes the limit feature that allows users to set values to control their future spending.
 Constraints that apply to records also apply to each limit. Refer to <<constraints>> for more information.
-`All the limit related commands are case insensitive. Users can input ADDlimit, addLimit and so on to execute the command.
-Besides that, in case some of the users who have programming background are used to using `
+
 
 [[addlimit]]
 === Adding a limit: `addlimit`
@@ -707,7 +706,8 @@ Format: `addlimit d/START_DATE END_DATE m/MONEYFLOW` (`limit d/DATE m/MONEYFLOW`
 When inputting two days, START_DATE and END_DATE indicates the starting date and ending date for the limit.
 If there is only one date, that day will be the time period.
 MONEYFLOW denotes the money spending limit for that period of time.
-After the limits have been set, Financial Planner will keep checking the latest condition of these limits.
+
+* After the limits have been added, Financial Planner will keep checking the latest condition of these limits.
 Once the total amount of money spent during this time period exceeds the spending limit,
 FinancialPlanner will warn the user by sending the warning message.
 ****
@@ -720,8 +720,7 @@ Example:
 
 * `addlimit d/20-8-2018 m/100`
 * `addlimit d/20-8-2018 30-8-2018 m/632`
-* `addLimit d/20-8-2018 20-8-2018 m/200`
-* `add_limit d/20-8-2018 30-8-2018 m/100`
+* `addlimit d/20-8-2018 30-8-2018 m/100`
 
 [[checklimit]]
 === Viewing all limits: `checkLimit`
@@ -730,8 +729,7 @@ Displays all limits information stored in FinancialPlanner +
 Format: `checklimit`
 Example:
 * `checklimit`
-* `checkLimit`
-* `check_limit`
+
 
 [[deletelimit]]
 === Deleting a limit: `deleteLimit`
@@ -753,7 +751,7 @@ Examples:
 
 * `deletelimit d/20-8-2018`
 * `deletelimit d/20-8-2018 30-8-2018`
-* `delete_Limit d/20-8-2018 30-8-2018`
+
 
 [[editlimit]]
 === Editing a limit: `editLimit`
@@ -773,9 +771,51 @@ Examples:
 
 * `editlimit d/20-8-2018 m/200`
 * `editlimit d/20-8-2018 30-8-2018 m/200`
-* `editLimit d/20-8-2018 30-8-2018 m/200`
-* `edit_limit d/20-8-2018 30-8-2018 m/200`
+
+
+=== Adding a monthly limit: `addmonthlylimit`
+
+Add a continuous monthly limit always for the current month.
+Format: `addmonthlylimit m/MONEYFLOW`
+
+The monthly limit will always check the spend of the current month according to the current time.
+For example, if the limit was set to be 200 at April, the limit will check the total spend for April.
+When the time comes to May, the limit will no longer check April, instead, the limit
+will check the total spend of May until the last second of May.
+
+****
+* `MONEYFLOW` can only be a positive integer, and does not require a "+" or "-".
+****
+Examples:
+* `addmonthlylimit m/200`
+
+=== Editing the monthly limit: `editmonthlylimit`
+
+Edit an existing monthly limit.
+Format: `editmonthlylimit m/MONEYFLOW`
+
+The monthly limit will be replaced by the new monthly limit.
+****
+* `MONEYFLOW` can only be a positive integer, and does not require a "+" or "-".
+* There must be an existing monthly limit.
+****
+Examples:
+* `editmonthlylimit m/200`
+
+=== Deleting the monthly limit: `deletemonthlylimit`
+
+Delete the monthly limit.
+Format: `deletemonthlylimit`
+
+The monthly limit will be deleted and no longer check the spend of the current month.
+****
+* There must be an existing monthly limit.
+****
+Examples:
+* `deletemonthlylimit`
+
 // end::limitfeatures[]
+
 == Upcoming Features
 
 === Showing a visual representation of daily/monthly summary `[Coming in v1.4]`
