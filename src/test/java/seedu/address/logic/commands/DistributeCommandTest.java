@@ -12,7 +12,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.distribute.DistributeUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -21,6 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.distribute.Distribute;
+import seedu.address.model.distribute.DistributeUtil;
 import seedu.address.model.group.Group;
 import seedu.address.testutil.DistributeBuilder;
 import seedu.address.testutil.GroupBuilder;
