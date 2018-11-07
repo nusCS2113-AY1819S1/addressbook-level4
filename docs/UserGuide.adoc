@@ -504,5 +504,5 @@ e.g.`select 2`
 * *EditItem* : `editItem INDEX [n/ITEM_NAME] [q/ITEM_QUANTITY]…​`
 * *IncreaseItem* : `increaseItem INDEX q/ITEM_QUANTITY`
 * *DecreaseItem* : `decreaseItem INDEX q/ITEM_QUANTITY`
-* *FindItem* : `findItem KEYWORD`
+* *FindItem* : `findItem KEYWORD [MORE_KEYWORDS]`
 * *ListItem* : `listItems`
