@@ -1,11 +1,11 @@
 package seedu.address.model.task;
 
-import seedu.address.commons.util.TimeUtil;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Date;
 import java.util.Objects;
+
+import seedu.address.commons.util.TimeUtil;
 
 /**
  * Represents a Task in the to-do list.
