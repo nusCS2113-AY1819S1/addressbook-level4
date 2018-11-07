@@ -21,7 +21,7 @@ Student Management System (SMS) is a desktop application which uses CLI for its 
 ** Credits:
 *** [https://www.oracle.com/technetwork/java/javamail/index.html[JavaMail API by Oracle]] for the API to send emails programmatically.
 *** [https://stackoverflow.com/questions/3649014/send-email-using-java[stackoverflow]] reference to understanding how to use JavaMail to send emails.
-
+*** DeveloperGuide by [https://github.com/se-edu/addressbook-level4[se-edu]] for the guide to adding colors to TAG and StatusBarFooter.
 * *Other contributions*:
 
 ** Enhancements to existing features:
