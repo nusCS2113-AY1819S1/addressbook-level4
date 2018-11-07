@@ -7,7 +7,7 @@ public class LoginManager {
 
     private static boolean isCurrentlyCreatingAccount = false;
     private static boolean isCurrentlyTesting = false;
-    private static boolean isLoginSuccessful = false;
+    private static boolean isLoginSuccessful = true;
     private static boolean isMember = false;
     private static boolean isPresident = false;
     private static boolean isTreasurer = false;
