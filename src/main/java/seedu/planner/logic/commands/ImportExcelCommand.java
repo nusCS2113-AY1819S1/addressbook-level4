@@ -13,6 +13,7 @@ import seedu.planner.model.DirectoryPath;
 import seedu.planner.model.Model;
 import seedu.planner.model.record.Record;
 
+//@author nguyenngoclinhchi
 /**
  * Imports all the records given in the Excel file.
  */
@@ -25,9 +26,10 @@ public class ImportExcelCommand extends Command {
             + Messages.MESSAGE_INVALID_ENTRY_EXCEL_FILE
             + "Parameters: (FILE_PATH) or (DIRECTORY PATH and FILE NAME)\n"
             + "Example 1: " + COMMAND_WORD + " " + PREFIX_DIR
-            + DirectoryPath.HOME_DIRECTORY_STRING + DirectoryPath.FILE_SEPERATOR + "Book1.xlsx (MUST end with .xlsx)\n"
+                    + DirectoryPath.WORKING_DIRECTORY_STRING + DirectoryPath.FILE_SEPERATOR
+                    + "Book1.xlsx (MUST end with .xlsx)\n"
             + "Example 2: " + COMMAND_WORD + " " + PREFIX_DIR
-            + DirectoryPath.HOME_DIRECTORY_STRING + " " + PREFIX_NAME + " Book1\n";
+                    + DirectoryPath.WORKING_DIRECTORY_STRING + " " + PREFIX_NAME + " Book1\n";
     private String directoryPath;
 
     public ImportExcelCommand(String directoryPath) {
