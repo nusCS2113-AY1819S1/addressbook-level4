@@ -1,0 +1,66 @@
+= Mario Gustavo Gonzalez Munoz - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== Role: Developer
+
+Responsibilities: Development
+
+== PROJECT: Student Planner
+
+---
+
+== Overview
+
+As a student, managing your everyday life can be challenging. From making sure your tasks are completed in time, keeping track of your budget and making sure you don't miss out on the activites in your surroundings.
+
+Student Planner is a all-in-one desktop manager application that allows students to manage their day-to-day life. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+
+Student Planner can:
+
+* Manage their contacts
+* Manage their tasks
+* Manage their expenses
+* Manage their events
+
+== Summary of contributions
+
+* *Major enhancement*: Added *findaddress command and findphone command*
+** What it does: Allows the user to search thorugh the user's contacts by their address and phone number.
+** Justification: Searching for contacts by name may not be enough for a user. A user might need to find persons in a certain area or check who is the owner of the missing phone call. These features make the product more user friendly and provide the user with functionality.
+** Highlights: The implemenation was challenging since it requiered a deep understanding of how the commands are related to parsers and how they are connected to the logic of the program and also knowledge of predicates. Adding these commands also involved adding parser and predicate classes.
+
+* *Minor enhancement*: Changed find command to findname command in order to be consistent with the naming of the other find commands.
+
+* *Code contributed*: [https://github.com/CS2113-AY1819S1-T13-1/main/blob/master/src/main/java/seedu/address/logic/commands/FindAddressCommand.java[FindAddress code]] [https://github.com/CS2113-AY1819S1-T13-1/main/blob/master/src/main/java/seedu/address/logic/commands/FindPhoneCommand.java[FindPhone code]] [https://github.com/CS2113-AY1819S1-T13-1/main/blob/master/src/test/java/seedu/address/logic/commands/FindAddressCommandTest.java[FindAddress test code]] [https://github.com/CS2113-AY1819S1-T13-1/main/blob/master/src/test/java/seedu/address/logic/commands/FindPhoneCommandTest.java[FindPhone test code]] [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=t0roloco[All code contributed]]
+
+* *Other contributions*:
+
+** Project management:
+** Documentation:
+*** Contributed with user stories at the start of development
+** Community:
+*** Reported bugs and suggestions for other teams in the class (examples: https://github.com/CS2113-AY1819S1-F10-1/main/issues/190[190], https://github.com/CS2113-AY1819S1-F10-1/main/issues/196[196])
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+https://github.com/CS2113-AY1819S1-T13-1/main/blob/master/docs/UserGuide.adoc#locating-contacts-by-address-code-findaddress-code[FindAddress command]
+
+https://github.com/CS2113-AY1819S1-T13-1/main/blob/master/docs/UserGuide.adoc#locating-contacts-by-name-code-findname-code[FindName command]
+
+https://github.com/CS2113-AY1819S1-T13-1/main/blob/master/docs/UserGuide.adoc#locating-contacts-by-phone-code-findphone-code[FindPhone command]
+
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+
