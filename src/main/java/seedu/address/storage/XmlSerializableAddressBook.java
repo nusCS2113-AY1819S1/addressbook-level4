@@ -48,12 +48,11 @@ public class XmlSerializableAddressBook {
     }
 
     /**
-     * Conversion with filtered Persons and Todos instead of the whole address book.
+     * Conversion with filtered Persons instead of the whole address book.
      */
-    public XmlSerializableAddressBook(FilteredList<Person> filteredPersons, FilteredList<Todo> filteredTodos) {
+    public XmlSerializableAddressBook(FilteredList<Person> filteredPersons) {
         this();
         persons.addAll(filteredPersons.stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
-        todoTasks.addAll(filteredTodos.stream().map(XmlAdaptedTodo::new).collect(Collectors.toList()));
     }
 
     /**

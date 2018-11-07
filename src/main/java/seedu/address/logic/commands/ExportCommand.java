@@ -11,19 +11,19 @@ import seedu.address.model.Model;
 
 //@@author jitwei98
 /**
- * Exports the selected person in the address book to a csv/vcf file.
+ * Exports the listed persons in the address book to a xml file.
  */
 public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
     public static final String COMMAND_PARAMETERS = "Parameters: FILENAME (must end with .xml)\n";
     public static final String COMMAND_EXAMPLE = "Example: " + COMMAND_WORD + " export.xml";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Export the persons and todos listed "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Export the persons listed "
             + "in the address book.\n"
             + COMMAND_PARAMETERS
             + COMMAND_EXAMPLE;
 
-    public static final String MESSAGE_EXPORT_SUCCESS = "Exported persons and todos listed to %1$s";
+    public static final String MESSAGE_EXPORT_SUCCESS = "Exported persons listed to %1$s";
     public static final String MESSAGE_FAILURE = "Export failed!";
 
     private final Path filePath;

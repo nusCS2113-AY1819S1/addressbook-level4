@@ -21,7 +21,7 @@ public interface Export {
     /**
      * @see #saveFilteredAddressBook()
      */
-    void saveFilteredAddressBook(FilteredList<Person> filteredPersons, FilteredList<Todo> filteredTodos, Path filePath)
+    void saveFilteredAddressBook(FilteredList<Person> filteredPersons, Path filePath)
             throws IOException;
 
 }
