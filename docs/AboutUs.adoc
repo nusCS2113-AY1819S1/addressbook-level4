@@ -22,7 +22,7 @@ Responsibilities: DevOps, Integration, Scheduling and tracking
 
 === Chen Songjian
 image::chensongjian.png[width="150", align="left"]
-{empty}[http://github.com/ChenSongJian[github]][<<songjian#, portfolio>>]
+{empty}[http://github.com/ChenSongJian[github]][<<chensongjian#, portfolio>>]
 
 Role: Developer +
 Responsibilities: UI
