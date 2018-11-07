@@ -177,7 +177,7 @@ public class EditJobDetailsCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(companyName, gender, ageRange, education, salary);
+            return CollectionUtil.isAnyNonNull(companyName, job, gender, ageRange, education, salary);
         }
 
         public void setCompanyName(CompanyName companyName) {
