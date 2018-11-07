@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.recruit.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
 
 import seedu.recruit.commons.core.EventsCenter;
-import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
+import seedu.recruit.commons.events.ui.FocusOnCompanyBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowUpdatedCompanyJobListRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
@@ -24,7 +24,7 @@ public class RedoCompanyBookCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws CommandException {
         requireNonNull(model);
-        EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
+        EventsCenter.getInstance().post(new FocusOnCompanyBookRequestEvent());
 
         if (!model.canRedoCompanyBook()) {
             throw new CommandException(MESSAGE_FAILURE);

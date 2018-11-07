@@ -9,9 +9,6 @@ import static seedu.recruit.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_THIRD;
-import static seedu.recruit.testutil.TypicalPersons.ALICE;
-import static seedu.recruit.testutil.TypicalPersons.CARL;
-import static seedu.recruit.testutil.TypicalPersons.GEORGE;
 import static seedu.recruit.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Rule;
@@ -102,19 +99,9 @@ public class SelectCandidateCommandTest {
      */
     private void assertExecutionSuccess(Index index) {
         SelectCandidateCommand selectCandidateCommand = new SelectCandidateCommand(index);
-        String expectedMessage = "";
-        Index lastPersonIndex = Index.fromOneBased(model.getFilteredCandidateList().size());
 
-        if (index.getOneBased() == 1) {
-            expectedMessage = String.format
-                    (SelectCandidateCommand.MESSAGE_SELECT_PERSON_SUCCESS, ALICE.getName());
-        } else if (index.getOneBased() == 3) {
-            expectedMessage = String.format
-                    (SelectCandidateCommand.MESSAGE_SELECT_PERSON_SUCCESS, CARL.getName());
-        } else if (index.getOneBased() == lastPersonIndex.getOneBased()) {
-            expectedMessage = String.format
-                    (SelectCandidateCommand.MESSAGE_SELECT_PERSON_SUCCESS, GEORGE.getName());
-        }
+        String expectedMessage = String.format(SelectCandidateCommand.MESSAGE_SELECT_PERSON_SUCCESS,
+                index.getOneBased());
         assertCommandSuccess(selectCandidateCommand, model, commandHistory, expectedMessage, expectedModel);
 
         JumpToListRequestEvent lastEvent = (JumpToListRequestEvent) eventsCollectorRule.eventsCollector.getMostRecent();
