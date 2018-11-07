@@ -80,7 +80,7 @@ public class Task {
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         String strDate = formatter.format(date);
-        Calendar calendar = new GregorianCalendar(Integer.parseInt(strDate.substring(6,10)),
+        Calendar calendar = new GregorianCalendar(Integer.parseInt(strDate.substring(6, 10)),
                 Integer.parseInt(getMonth()), Integer.parseInt(getDay()));
         return calendar.getTime();
     }

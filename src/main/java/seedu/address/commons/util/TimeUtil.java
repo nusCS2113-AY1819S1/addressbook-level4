@@ -21,7 +21,7 @@ public class TimeUtil {
      */
     public int getDayInterval(Date firstDay, Date secondDay) {
         long interval = firstDay.getTime() - secondDay.getTime();
-        return (int) interval/1440000;
+        return (int) interval/ 1440000;
     }
 
 }

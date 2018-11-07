@@ -24,8 +24,6 @@ public class TaskCard extends UiPart<Region> {
 
     public final Task task;
 
-    private final DeadlineNotification deadlineNotification;
-
     //@FXML
     //private HBox cardPane;
     @FXML
@@ -44,7 +42,7 @@ public class TaskCard extends UiPart<Region> {
     public TaskCard(Task task, int displayedIndex) {
         super(FXML);
         this.task = task;
-        deadlineNotification = new DeadlineNotification();
+        DeadlineNotification deadlineNotification = new DeadlineNotification();
         id.setText(displayedIndex + ". ");
         taskname.setText(task.getName().fullName);
         taskmodule.setText(task.getModule().value);
