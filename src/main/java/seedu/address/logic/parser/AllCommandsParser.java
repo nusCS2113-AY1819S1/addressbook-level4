@@ -37,8 +37,10 @@ import seedu.address.logic.commands.ThreadDueRemindersCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UndoDistributorCommand;
 import seedu.address.logic.commands.ViewAllRemindersCommand;
+import seedu.address.logic.commands.ViewAllTransactionsInDayCommand;
 import seedu.address.logic.commands.ViewDueRemindersCommand;
 import seedu.address.logic.commands.ViewLastTransactionCommand;
+import seedu.address.logic.commands.ViewTransactionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -163,6 +165,12 @@ public class AllCommandsParser {
 
         case ViewAllRemindersCommand.COMMAND_WORD:
             return new ViewAllRemindersCommand();
+
+        case ViewAllTransactionsInDayCommand.COMMAND_WORD:
+            return new ViewAllTransactionsInDayCommandParser().parse(arguments);
+
+        case ViewTransactionCommand.COMMAND_WORD:
+            return new ViewTransactionCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

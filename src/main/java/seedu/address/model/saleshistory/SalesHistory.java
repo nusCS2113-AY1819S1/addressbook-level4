@@ -107,16 +107,16 @@ public class SalesHistory implements ReadOnlySalesHistory {
         return reminderRecord;
     }
 
-    public ArrayList<Transaction> getDaysTransactions(String day) throws InvalidTimeFormatException {
-        requireNonNull(day);
-        day = day.trim();
+    public ArrayList<Transaction> getDaysTransactions(String date) throws InvalidTimeFormatException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
 
-        if (!TimeIdentifiedClass.isValidDay(day)) {
+        if (!TimeIdentifiedClass.isValidDate(trimmedDate)) {
             throw new InvalidTimeFormatException();
         }
 
-        final String initialTime = day + " 00:00:00";
-        final String finalTime = day + " 24:00:00";
+        final String initialTime = trimmedDate + " 00:00:00";
+        final String finalTime = trimmedDate + " 24:00:00";
 
         // To get the day's transactions...
         ArrayList<Transaction> daysTransactions = new ArrayList<>();
@@ -188,6 +188,22 @@ public class SalesHistory implements ReadOnlySalesHistory {
         Reminder toRemove = reminderRecord.get(reminderTime);
         reminderRecord.remove(reminderTime);
         reminderObservableList.remove(toRemove);
+    }
+
+    /**
+     * Returns the transaction details as a string.
+     * @param time
+     * @return the transaction details
+     * @throws InvalidTimeFormatException if {@param time} is invalid
+     */
+    public String getTransactionAsString(String time) throws InvalidTimeFormatException {
+        if (!Transaction.isValidTransactionTime(time)) {
+            throw new InvalidTimeFormatException();
+        }
+        if (!transactionRecord.containsKey(time)) {
+            return "No transaction found at the specified time";
+        }
+        return transactionRecord.get(time).getTransactionRecordAsString();
     }
 
     /**

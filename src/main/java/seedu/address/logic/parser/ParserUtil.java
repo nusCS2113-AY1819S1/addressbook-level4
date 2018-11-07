@@ -19,6 +19,7 @@ import seedu.address.model.product.ProductInfo;
 import seedu.address.model.product.SerialNumber;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.timeidentifiedclass.Reminder;
+import seedu.address.model.timeidentifiedclass.TimeIdentifiedClass;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -59,18 +60,44 @@ public class ParserUtil {
      * Returns the time entered by the user for a given reminder.
      * @param reminderTime
      * @return trimmed reminder time (removing trailing whitespaces).
-     * @throws ParseException if {@code String}reminder time is in the wrong format.
+     * @throws ParseException if {@code reminderTime} is in the wrong format or invalid.
      */
 
     public static String parseReminderTime(String reminderTime) throws ParseException {
         requireNonNull(reminderTime);
-        String trimmedTime = reminderTime.trim();
         if (!Reminder.isValidReminderTime(reminderTime)) {
             throw new ParseException(Reminder.REMINDER_TIME_CONSTRAINTS);
         }
-        return trimmedTime;
+        return reminderTime.trim();
     }
 
+    /**
+     * Returns the date and time entered by the user
+     * @param dateAndTime
+     * @return trimmed {@code dateAndTime}
+     * @throws ParseException if {@code dateAndTime} is in the wrong format or invalid.
+     */
+    public static String parseDateAndTime(String dateAndTime) throws ParseException {
+        requireNonNull(dateAndTime);
+        if (!TimeIdentifiedClass.isValidDateAndTime(dateAndTime)) {
+            throw new ParseException("Time must be in yyyy/MM/dd HH:mm:ss format and must be a valid time");
+        }
+        return dateAndTime.trim();
+    }
+
+    /**
+     * The following method parses the date from user input
+     * @param date
+     * @return date (removing trailing whitespaces)
+     * @throws ParseException if {@code date} is in the wrong format or is invalid.
+     */
+    public static String parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        if (!TimeIdentifiedClass.isValidDate(date)) {
+            throw new ParseException("Dates must be valid and in yyyy/MM/dd format");
+        }
+        return date.trim();
+    }
     /**
      * Parses a {@code String name} into a {@code DistributorName}.
      * Leading and trailing whitespaces will be trimmed.
