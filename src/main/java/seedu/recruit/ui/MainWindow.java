@@ -58,7 +58,6 @@ public class MainWindow extends UiPart<Stage> {
     private Stage primaryStage;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
     private Config config;
     private Logic logic;
     private UserPrefs prefs;
@@ -409,10 +408,6 @@ public class MainWindow extends UiPart<Stage> {
      */
     public static boolean isExisting() {
         return exists;
-    }
-
-    void releaseResources() {
-        browserPanel.freeResources();
     }
 
     @Subscribe
