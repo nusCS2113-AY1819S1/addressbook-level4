@@ -15,9 +15,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.distributor.Distributor;
 import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.distributor.DistributorPhone;
-import seedu.address.model.product.ProductInfo;
 import seedu.address.model.product.Name;
 import seedu.address.model.product.Product;
+import seedu.address.model.product.ProductInfo;
 import seedu.address.model.product.SerialNumber;
 import seedu.address.model.tag.Tag;
 

@@ -105,7 +105,8 @@ public class XmlAdaptedProduct {
         final DistributorName modelDistName = new DistributorName(distributor);
 
         if (info == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ProductInfo.class.getSimpleName()));
+            throw new IllegalValueException(String.format
+                    (MISSING_FIELD_MESSAGE_FORMAT, ProductInfo.class.getSimpleName()));
         }
         if (!ProductInfo.isValidAddress(info)) {
             throw new IllegalValueException(ProductInfo.MESSAGE_ADDRESS_CONSTRAINTS);

@@ -28,7 +28,8 @@ public class Product {
     /**
      * Every field must be present and not null.
      */
-    public Product(Name name, SerialNumber serialNumber, DistributorName distname, ProductInfo productInfo, Set<Tag> tags) {
+    public Product(Name name, SerialNumber serialNumber, DistributorName distname,
+                   ProductInfo productInfo, Set<Tag> tags) {
         requireAllNonNull(name, serialNumber, distname, productInfo, tags);
         this.name = name;
         this.serialNumber = serialNumber;
