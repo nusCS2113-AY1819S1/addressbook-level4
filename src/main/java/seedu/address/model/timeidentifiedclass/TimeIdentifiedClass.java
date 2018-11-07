@@ -147,11 +147,8 @@ public abstract class TimeIdentifiedClass {
             splitDateAndTime[i].trim();
         }
         // checks on the different components of the given date and time.
-        if (isValidDate(splitDateAndTime[0], splitDateAndTime[1], splitDateAndTime[2])
-                && isValidTime(splitDateAndTime[3], splitDateAndTime[4], splitDateAndTime[5])) {
-            return true;
-        }
-        return false;
+        return (isValidDate(splitDateAndTime[0], splitDateAndTime[1], splitDateAndTime[2])
+                && isValidTime(splitDateAndTime[3], splitDateAndTime[4], splitDateAndTime[5]));
     }
 
     /**
@@ -164,10 +161,7 @@ public abstract class TimeIdentifiedClass {
             return false;
         }
         int yearNumber = Integer.parseInt(year);
-        if (yearNumber % 4 == 0) {
-            return true;
-        }
-        return false;
+        return (yearNumber % 4 == 0);
     }
 
     /**
@@ -178,12 +172,7 @@ public abstract class TimeIdentifiedClass {
      * @return true if and only if time is valid
      */
     private static boolean isValidTime(String hour, String minute, String second) {
-        if (isValidHour(hour)
-                && isValidMinute(minute)
-                && isValidSecond(second)) {
-            return true;
-        }
-        return false;
+        return (isValidHour(hour) && isValidMinute(minute) && isValidSecond(second));
     }
 
     /**
@@ -214,10 +203,7 @@ public abstract class TimeIdentifiedClass {
         }
 
         // For a non leap year.
-        if (dayNumber > DAYS_IN_MONTH_NON_LEAP_YEAR[monthNumber - 1]) {
-            return false;
-        }
-        return true;
+        return (dayNumber <= DAYS_IN_MONTH_NON_LEAP_YEAR[monthNumber - 1]);
     }
 
     /**

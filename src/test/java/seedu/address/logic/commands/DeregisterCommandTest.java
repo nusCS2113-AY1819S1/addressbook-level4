@@ -345,7 +345,7 @@ public class DeregisterCommandTest {
 
         @Override
         public void commitSalesHistory() {
-
+            fail("This should not be called");
         }
 
         @Override
@@ -382,7 +382,7 @@ public class DeregisterCommandTest {
 
         @Override
         public void commitSalesHistory() {
-
+            fail("This should not be called.");
         }
 
         @Override
@@ -417,7 +417,7 @@ public class DeregisterCommandTest {
 
         @Override
         public void commitSalesHistory() {
-
+            fail("This should not be called.");
         }
 
         @Override

@@ -26,12 +26,9 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
         if (argLength < 3) {
             return false;
         }
-        if (args.charAt(argLength - 1) == '/'
+        return (args.charAt(argLength - 1) == '/'
                 && args.charAt(argLength - 2) == 'r'
-                && args.charAt(argLength - 3) == 'p') {
-            return true;
-        }
-        return false;
+                && args.charAt(argLength - 3) == 'p');
     }
 
     /**
@@ -40,14 +37,14 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddTransactionCommand parse(String args) throws ParseException {
-        args = args.trim();
+        String trimmedArgs = args.trim();
 
-        if (containsEmptyProductAtEnd(args)) {
+        if (containsEmptyProductAtEnd(trimmedArgs)) {
             throw new ParseException("Some products in the transaction have no name! "
                     + "Please enter their names before trying again");
         }
 
-        ArrayList<String> productsToAdd = new ArrayList<>(Arrays.asList(args.split(PREFIX_PRODUCT.toString())));
+        ArrayList<String> productsToAdd = new ArrayList<>(Arrays.asList(trimmedArgs.split(PREFIX_PRODUCT.toString())));
         // removing empty string from split function
         if (productsToAdd.size() > 0 && productsToAdd.get(0).equals("")) {
             productsToAdd.remove(0);
@@ -60,14 +57,14 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
 
         Transaction transaction = new Transaction();
 
-        for (String product : productsToAdd) {
-            product = product.trim();
+        for (String productName : productsToAdd) {
+            productName = productName.trim();
             try {
-                if (product.length() == 0) {
+                if (productName.length() == 0) {
                     throw new ParseException("Some products in the transaction have no name! "
                             + "Please enter their names before trying again");
                 }
-                transaction.addProduct(product);
+                transaction.addProduct(productName);
             } catch (ClosedTransactionException e) {
                 // TODO: Exception handling in AddTransaction command parse. Closed transaction not possible as of yet.
             }

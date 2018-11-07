@@ -103,31 +103,20 @@ public class SalesHistory implements ReadOnlySalesHistory {
         return transactionRecord;
     }
 
-    public String getTransaction(String date) throws InvalidTimeFormatException {
-        if (!Transaction.isValidTransactionTime(date)) {
-            throw new InvalidTimeFormatException();
-        }
-        date = date.trim();
-        if (!transactionRecord.containsKey(date)) {
-            return "No transaction on the specified time";
-        }
-        return transactionRecord.get(date).toString();
-    }
-
     public TreeMap<String, Reminder> getReminderRecord() {
         return reminderRecord;
     }
 
     public ArrayList<Transaction> getDaysTransactions(String date) throws InvalidTimeFormatException {
         requireNonNull(date);
-        date = date.trim();
+        String trimmedDate = date.trim();
 
-        if (!TimeIdentifiedClass.isValidDate(date)) {
+        if (!TimeIdentifiedClass.isValidDate(trimmedDate)) {
             throw new InvalidTimeFormatException();
         }
 
-        final String initialTime = date + " 00:00:00";
-        final String finalTime = date + " 24:00:00";
+        final String initialTime = trimmedDate + " 00:00:00";
+        final String finalTime = trimmedDate + " 24:00:00";
 
         // To get the day's transactions...
         ArrayList<Transaction> daysTransactions = new ArrayList<>();
