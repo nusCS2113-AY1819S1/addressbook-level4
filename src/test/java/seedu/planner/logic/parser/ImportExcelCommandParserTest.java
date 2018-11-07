@@ -10,6 +10,7 @@ import seedu.planner.commons.util.ExcelUtil;
 import seedu.planner.logic.commands.ImportExcelCommand;
 import seedu.planner.model.DirectoryPath;
 
+//@author nguyenngoclinhchi
 public class ImportExcelCommandParserTest {
     private static final String WHITE_SPACE = " ";
     private static final String directoryPath = DirectoryPath.HOME_DIRECTORY_STRING;

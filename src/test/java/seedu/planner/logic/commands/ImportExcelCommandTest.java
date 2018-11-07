@@ -12,6 +12,7 @@ import seedu.planner.model.Model;
 import seedu.planner.model.ModelManager;
 import seedu.planner.model.UserPrefs;
 
+//@author nguyenngoclinhchi
 public class ImportExcelCommandTest {
     private static final String directoryPath1 = DirectoryPath.HOME_DIRECTORY_STRING;
     private static final String directoryPath2 = DirectoryPath.WORKING_DIRECTORY_STRING;

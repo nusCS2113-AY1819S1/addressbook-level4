@@ -24,6 +24,7 @@ import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
 import seedu.planner.testutil.TypicalRecords;
 
+//@author nguyenngoclinhchi
 public class ExportExcelCommandTest {
     private Model model = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());

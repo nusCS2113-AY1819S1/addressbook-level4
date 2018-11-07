@@ -23,6 +23,7 @@ import seedu.planner.testutil.TypicalDates;
 import seedu.planner.testutil.TypicalIndexes;
 import seedu.planner.testutil.TypicalRecords;
 
+//@author nguyenngoclinhchi
 public class DeleteByDateCommandTest {
     private Model model = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
@@ -122,15 +123,9 @@ public class DeleteByDateCommandTest {
      */
 
     @Test
-<<<<<<< HEAD:src/test/java/seedu/planner/logic/commands/DeleteCommandByDateEntryTest.java
-    public void executeUndoRedo_existentDateFilteredList_sameRecordDeleted() throws Exception {
-        DeleteCommandByDateEntry deleteCommandByDateEntry =
-                new DeleteCommandByDateEntry(TypicalDates.DATE_FIRST_INDEX_DATE);
-=======
     public void executeUndoRedo_exsistentDateFilteredList_sameRecordDeleted() throws Exception {
         DeleteByDateCommand deleteByDateCommand =
                 new DeleteByDateCommand(TypicalDates.DATE_FIRST_INDEX_DATE);
->>>>>>> 44f84d43006ea721f19294a8c8db5898ef7b893c:src/test/java/seedu/planner/logic/commands/DeleteByDateCommandTest.java
         Model expectedModel = new ModelManager(model.getFinancialPlanner(), new UserPrefs());
 
         Date date = TypicalDates.DATE_FIRST_INDEX_DATE;

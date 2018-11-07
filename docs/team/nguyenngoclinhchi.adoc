@@ -5,11 +5,13 @@
 :stylesheet: gh-linhchi-pages.css
 
 
-== PROJECT: FinancialPlanner - Level 4
+== PROJECT: FinancialPlanner
 
-== Overview
+== FinancialPlanner - Overview:
 
-FinancialPlanner - Level 4 is a desktop expense book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+In semester 1 year 2, I had a chance to learn NUS CS2113T - Software Engineering and Object Oriented Programming module. Thanks to this module, I had an hand-on experience to develop a desktop application with my teammate. Guidelines are given during 10 weeks to assist us create the application focusing on a particular group of users.
+
+
 
 == Summary of contributions
 

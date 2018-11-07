@@ -13,6 +13,7 @@ import seedu.planner.model.DirectoryPath;
 import seedu.planner.model.record.Date;
 import seedu.planner.testutil.TypicalRecords;
 
+//@author nguyenngoclinhchi
 public class ArchiveCommandParserTest {
     public static final String WHITE_SPACE = " ";
     private ArchiveCommandParser parser = new ArchiveCommandParser();
