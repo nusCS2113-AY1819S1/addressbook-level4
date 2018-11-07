@@ -8,9 +8,8 @@ import seedu.address.model.event.EventContainsKeywordsPredicate;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords
- * or email equals the keyword.
- * Keyword and email matching is case insensitive.
+ * Finds and lists all events in address book whose name contains any of the argument keywords
+ * Keyword matching is case insensitive.
  */
 public class FindEventCommand extends Command {
 
