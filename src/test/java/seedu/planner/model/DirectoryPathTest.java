@@ -22,7 +22,6 @@ public class DirectoryPathTest {
 
         assertFalse(DirectoryPath.isValidDirectory("Hello"));
         assertFalse(DirectoryPath.isValidFilePath("Hello"));
-        assertTrue(DirectoryPath.isValidDirectory("C:\\\\"));
         assertFalse(DirectoryPath.isValidFilePath("C:\\\\"));
         assertFalse(DirectoryPath.isValidDirectory("C:\\\\Hello\\Kitty"));
         assertFalse(DirectoryPath.isValidFilePath("C:\\\\Hello\\Kitty"));
