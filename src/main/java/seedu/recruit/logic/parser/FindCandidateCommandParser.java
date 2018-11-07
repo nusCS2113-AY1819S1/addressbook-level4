@@ -72,6 +72,6 @@ public class FindCandidateCommandParser implements Parser<FindCandidateCommand> 
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCandidateCommand.MESSAGE_USAGE));
         }
 
-        return new FindCandidateCommand(new CandidateContainsFindKeywordsPredicate(keywordsMap));
+        return new FindCandidateCommand(new CandidateContainsFindKeywordsPredicate(keywordsMap), args);
     }
 }

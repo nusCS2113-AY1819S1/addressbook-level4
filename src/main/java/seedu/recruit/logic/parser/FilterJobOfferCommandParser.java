@@ -57,6 +57,6 @@ public class FilterJobOfferCommandParser implements Parser<FilterJobOfferCommand
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterJobOfferCommand.MESSAGE_USAGE));
         }
 
-        return new FilterJobOfferCommand(new JobOfferContainsFilterKeywordsPredicate(keywordsList));
+        return new FilterJobOfferCommand(new JobOfferContainsFilterKeywordsPredicate(keywordsList), args);
     }
 }

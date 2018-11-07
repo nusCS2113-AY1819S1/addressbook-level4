@@ -72,6 +72,6 @@ public class FilterCandidateCommandParser implements Parser<FilterCandidateComma
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCandidateCommand.MESSAGE_USAGE));
         }
 
-        return new FilterCandidateCommand(new CandidateContainsFilterKeywordsPredicate(keywordsMap));
+        return new FilterCandidateCommand(new CandidateContainsFilterKeywordsPredicate(keywordsMap), args);
     }
 }

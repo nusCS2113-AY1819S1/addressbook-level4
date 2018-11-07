@@ -29,12 +29,14 @@ public class FindCompanyCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS \n"
-            + "Example: " + COMMAND_WORD + PREFIX_COMPANY_NAME + "Hanbaobao Pte Ltd";
+            + "Example: " + COMMAND_WORD + PREFIX_COMPANY_NAME + " Hanbaobao Pte Ltd";
 
     private final CompanyContainsFindKeywordsPredicate predicate;
+    private final String args;
 
-    public FindCompanyCommand(CompanyContainsFindKeywordsPredicate predicate) {
+    public FindCompanyCommand(CompanyContainsFindKeywordsPredicate predicate, String args) {
         this.predicate = predicate;
+        this.args = args;
     }
 
     @Override
@@ -42,7 +44,7 @@ public class FindCompanyCommand extends Command {
         requireNonNull(model);
         model.updateFilteredCompanyList(predicate);
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
-        return new CommandResult(
+        return new CommandResult("Company Book showing: " + COMMAND_WORD + args + "\n" +
                 String.format(Messages.MESSAGE_COMPANIES_LISTED_OVERVIEW, model.getFilteredCompanyList().size()));
     }
 

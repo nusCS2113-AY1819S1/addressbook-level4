@@ -49,7 +49,7 @@ public class FindCompanyCommandParser implements Parser<FindCompanyCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCompanyCommand.MESSAGE_USAGE));
         }
 
-        return new FindCompanyCommand(new CompanyContainsFindKeywordsPredicate(keywordsList));
+        return new FindCompanyCommand(new CompanyContainsFindKeywordsPredicate(keywordsList), args);
     }
 
 }

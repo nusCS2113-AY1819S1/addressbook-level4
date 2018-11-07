@@ -38,9 +38,11 @@ public class FilterJobOfferCommand extends Command {
             + "Example: " + COMMAND_WORD + PREFIX_COMPANY_NAME + "KFC " + PREFIX_JOB + "Cashier";
 
     private final JobOfferContainsFilterKeywordsPredicate predicate;
+    private final String args;
 
-    public FilterJobOfferCommand(JobOfferContainsFilterKeywordsPredicate predicate) {
+    public FilterJobOfferCommand(JobOfferContainsFilterKeywordsPredicate predicate, String args) {
         this.predicate = predicate;
+        this.args = args;
     }
 
     @Override
@@ -50,7 +52,7 @@ public class FilterJobOfferCommand extends Command {
         EventsCenter.getInstance().post(new ShowUpdatedCompanyJobListRequestEvent(
                 model.getFilteredCompanyJobList().size()));
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent()); // switches if user isn't on Company Book
-        return new CommandResult(
+        return new CommandResult("Company Book showing: " + COMMAND_WORD + args + "\n" +
                 String.format(Messages.MESSAGE_JOBS_LISTED_OVERVIEW, model.getFilteredCompanyJobList().size()));
     }
 
