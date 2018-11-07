@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NUMBER_OF_EVENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TOTAL_BUDGET;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -103,6 +104,12 @@ public class CommandTestUtil {
             + "10a"; // 'a' not allowed in expected turnout
     public static final String INVALID_NUMBER_OF_EVENTS_DESC = " " + PREFIX_NUMBER_OF_EVENTS
             + "5!"; // '!' not allowed in number of events
+
+    public static final String VALID_TOTAL_BUDGET = "50000";
+    public static final String VALID_TOTAL_BUDGET_DESC = " " + PREFIX_TOTAL_BUDGET + VALID_TOTAL_BUDGET;
+    public static final String INVALID_TOTAL_BUDGET_DESC = " " + PREFIX_TOTAL_BUDGET
+            + "$5000"; //'$' not allowed in total budet
+
     public static final String VALID_ALLOCATED_BUDGET_COMPUTING = "1000";
     public static final String VALID_ALLOCATED_BUDGET_ECE = "2100";
 

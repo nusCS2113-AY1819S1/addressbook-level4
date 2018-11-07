@@ -5,8 +5,8 @@
 
 == PROJECT: NUSSU Connect
 
-
 == Introduction
+image::longdivider.png[align="center", width = "1000"]
 
 This Portfolio is a documentation of the contributions that I have made for this project, titled NUSSU Connect.
 
@@ -19,6 +19,7 @@ The original source code of this project is the https://github.com/se-edu/[Addre
 it also comes with some features from the AB4 project.
 
 == Summary of contributions
+image::longdivider.png[align="center", width = "1000"]
 My main contribution to this project is the Budgeting Feature. This intended purpose of this feature is to help the NUSSU treasurers allocate budgets fairly and equitably to all the clubs under the NUSSU based on the budget calculation data collected from the clubs.
 
 I will further elaborate on my contributions in the following sections.
@@ -50,6 +51,7 @@ I will further elaborate on my contributions in the following sections.
 *** Helped a classmate from another project group implement a way to list items according to categories.
 
 == Contributions to the User Guide
+image::longdivider.png[align="center", width = "1000"]
 The following sections will detail the budget allocation process while providing guidance to the users on how to use the commands that I have implemented.
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
@@ -57,7 +59,9 @@ The following sections will detail the budget allocation process while providing
 
 include::../UserGuide.adoc[tag=budget]
 
+
 == Contributions to the Developer Guide
+image::longdivider.png[align="center", width = "1000"]
 
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
