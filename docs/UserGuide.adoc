@@ -23,7 +23,7 @@ Inventarie Pro is for self employed business owners who *prefer to use a desktop
 == Quick Start
 
 .  Ensure you have Java version 9 installed in your Computer.
-.  Download the latest Inventarie.jar here (link will be added later).
+.  Download the latest `Inventarie.jar` link:https://github.com/CS2113-AY1819S1-T13-3/main/releases/download/v1.3.2/inventariepro.jar[here].
 .  Copy the file to the folder you want to use as the home folder for your Inventarie Pro.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 .  Register a new user account (Jump to `register` in <<Authentication>>.
