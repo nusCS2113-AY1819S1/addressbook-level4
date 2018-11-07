@@ -26,6 +26,16 @@ import seedu.recruit.model.candidate.CandidateContainsFilterKeywordsPredicate;
  */
 public class FilterCandidateCommandParser implements Parser<FilterCandidateCommand> {
 
+    private static String userInput;
+
+    public FilterCandidateCommandParser (String userInput) {
+        this.userInput = userInput;
+    }
+
+    public static String getUserInput() {
+        return userInput;
+    }
+
     /**
      * Parses the given {@code String} of arguments in the context of the FilterCandidateCommand
      * and returns an FilterCandidateCommand object for execution.

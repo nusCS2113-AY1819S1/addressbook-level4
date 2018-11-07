@@ -56,8 +56,8 @@ public class FilterCandidateCommand extends Command {
         requireNonNull(model);
         model.updateFilteredCandidateList(candidatePredicate);
         EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
-        return new CommandResult("Candidate Book showing: " + COMMAND_WORD + args + "\n" +
-                (String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredCandidateList().size())));
+        return new CommandResult("Candidate Book showing: " + COMMAND_WORD + args + "\n"
+                + String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredCandidateList().size()));
     }
 
     @Override

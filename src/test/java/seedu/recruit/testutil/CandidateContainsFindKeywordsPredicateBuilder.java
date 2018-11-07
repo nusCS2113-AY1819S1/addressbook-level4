@@ -15,8 +15,11 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.HashMap;
 import java.util.List;
 
+import seedu.recruit.commons.core.Messages;
+import seedu.recruit.logic.commands.FindCandidateCommand;
 import seedu.recruit.logic.parser.ArgumentMultimap;
 import seedu.recruit.logic.parser.ArgumentTokenizer;
+import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.candidate.CandidateContainsFindKeywordsPredicate;
 
 /**
@@ -37,10 +40,10 @@ public class CandidateContainsFindKeywordsPredicateBuilder {
     public static final String KEY_SALARY = "Salary";
 
 
-    private HashMap<String, List<String>> keywordsList = new HashMap<>();
+    private static HashMap<String, List<String>> keywordsList = new HashMap<>();
     private CandidateContainsFindKeywordsPredicate candidatePredicate;
 
-    public CandidateContainsFindKeywordsPredicateBuilder (String userInput) {
+    public CandidateContainsFindKeywordsPredicateBuilder (String userInput) throws ParseException {
         this.candidatePredicate = preparePredicate(userInput);
     }
 
@@ -53,46 +56,47 @@ public class CandidateContainsFindKeywordsPredicateBuilder {
     }
 
     /**
-     * Parses the @param userInput and
-     * @return CandidateContainsFindKeywordsPredicate as a predicate
+     * Parses the {@code userInput} and returns a predicate
+     * @param userInput should not be null, should have a preceding prefix
      */
-    public CandidateContainsFindKeywordsPredicate preparePredicate (String userInput) {
+    public CandidateContainsFindKeywordsPredicate preparePredicate (String userInput) throws ParseException {
         requireNonNull(userInput);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_GENDER, PREFIX_AGE, PREFIX_PHONE,
                         PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_JOB, PREFIX_EDUCATION, PREFIX_SALARY, PREFIX_TAG);
 
-        //HashMap<String,List<String>> keywordsList = new HashMap<>();
-
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            this.keywordsList.put(KEY_NAME, (argMultimap.getAllValues(PREFIX_NAME)));
+            keywordsList.put(KEY_NAME, (argMultimap.getAllValues(PREFIX_NAME)));
         }
         if (argMultimap.getValue(PREFIX_GENDER).isPresent()) {
-            this.keywordsList.put(KEY_GENDER, (argMultimap.getAllValues(PREFIX_GENDER)));
+            keywordsList.put(KEY_GENDER, (argMultimap.getAllValues(PREFIX_GENDER)));
         }
         if (argMultimap.getValue(PREFIX_AGE).isPresent()) {
-            this.keywordsList.put(KEY_AGE, (argMultimap.getAllValues(PREFIX_AGE)));
+            keywordsList.put(KEY_AGE, (argMultimap.getAllValues(PREFIX_AGE)));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            this.keywordsList.put(KEY_PHONE, (argMultimap.getAllValues(PREFIX_PHONE)));
+            keywordsList.put(KEY_PHONE, (argMultimap.getAllValues(PREFIX_PHONE)));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            this.keywordsList.put(KEY_EMAIL, (argMultimap.getAllValues(PREFIX_EMAIL)));
+            keywordsList.put(KEY_EMAIL, (argMultimap.getAllValues(PREFIX_EMAIL)));
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            this.keywordsList.put(KEY_ADDRESS, (argMultimap.getAllValues(PREFIX_ADDRESS)));
+            keywordsList.put(KEY_ADDRESS, (argMultimap.getAllValues(PREFIX_ADDRESS)));
         }
         if (argMultimap.getValue(PREFIX_JOB).isPresent()) {
-            this.keywordsList.put(KEY_JOB, (argMultimap.getAllValues(PREFIX_JOB)));
+            keywordsList.put(KEY_JOB, (argMultimap.getAllValues(PREFIX_JOB)));
         }
         if (argMultimap.getValue(PREFIX_EDUCATION).isPresent()) {
-            this.keywordsList.put(KEY_EDUCATION, (argMultimap.getAllValues(PREFIX_EDUCATION)));
+            keywordsList.put(KEY_EDUCATION, (argMultimap.getAllValues(PREFIX_EDUCATION)));
         }
         if (argMultimap.getValue(PREFIX_SALARY).isPresent()) {
-            this.keywordsList.put(KEY_SALARY, (argMultimap.getAllValues(PREFIX_SALARY)));
+            keywordsList.put(KEY_SALARY, (argMultimap.getAllValues(PREFIX_SALARY)));
         }
 
-        System.out.println(keywordsList);
+        if (keywordsList.isEmpty()) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    FindCandidateCommand.MESSAGE_USAGE));
+        }
 
         return new CandidateContainsFindKeywordsPredicate(keywordsList);
     }

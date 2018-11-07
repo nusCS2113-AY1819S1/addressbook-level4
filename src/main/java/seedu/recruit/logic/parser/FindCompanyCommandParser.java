@@ -19,6 +19,16 @@ import seedu.recruit.model.company.CompanyContainsFindKeywordsPredicate;
  */
 public class FindCompanyCommandParser implements Parser<FindCompanyCommand> {
 
+    private static String userInput;
+
+    public FindCompanyCommandParser (String userInput) {
+        this.userInput = userInput;
+    }
+
+    public static String getUserInput() {
+        return userInput;
+    }
+
     /**
      * Parses the given {@code String} of arguments in the context of the FindCompanyCommand
      * and returns an FindCompanyCommand object for execution.
@@ -49,7 +59,7 @@ public class FindCompanyCommandParser implements Parser<FindCompanyCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCompanyCommand.MESSAGE_USAGE));
         }
 
-        return new FindCompanyCommand(new CompanyContainsFindKeywordsPredicate(keywordsList), args);
+        return new FindCompanyCommand(new CompanyContainsFindKeywordsPredicate(keywordsList));
     }
 
 }

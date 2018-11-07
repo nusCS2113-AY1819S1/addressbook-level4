@@ -194,12 +194,12 @@ public class CommandTestUtil {
      * Updates {@code model}'s filtered list to show only the candidate at the given {@code targetIndex} in the
      * {@code model}'s recruit book.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
+    public static void showPersonAtIndex(Model model, Index targetIndex) throws ParseException {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredCandidateList().size());
         Candidate candidate = model.getFilteredCandidateList().get(targetIndex.getZeroBased());
         final String[] splitName = candidate.getName().fullName.split("\\s+");
-        model.updateFilteredCandidateList(
-                new CandidateContainsFindKeywordsPredicateBuilder(" n/" + splitName[0]).getCandidatePredicate());
+        model.updateFilteredCandidateList(new CandidateContainsFindKeywordsPredicateBuilder(" n/"
+                + splitName[0]).getCandidatePredicate());
         assertEquals(1, model.getFilteredCandidateList().size());
     }
 

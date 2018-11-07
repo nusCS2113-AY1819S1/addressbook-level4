@@ -16,6 +16,7 @@ import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
+import seedu.recruit.logic.parser.FindCandidateCommandParser;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.candidate.CandidateContainsFindKeywordsPredicate;
@@ -45,11 +46,11 @@ public class FindCandidateCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + " alice" + PREFIX_SALARY + " 2500";
 
     private final CandidateContainsFindKeywordsPredicate candidatePredicate;
-    private final String args;
+    private final String userInput;
 
-    public FindCandidateCommand(CandidateContainsFindKeywordsPredicate candidatePredicate, String args) {
+    public FindCandidateCommand(CandidateContainsFindKeywordsPredicate candidatePredicate) {
         this.candidatePredicate = candidatePredicate;
-        this.args = args;
+        this.userInput = FindCandidateCommandParser.getUserInput();
     }
 
     @Override
@@ -57,8 +58,8 @@ public class FindCandidateCommand extends Command {
         requireNonNull(model);
         model.updateFilteredCandidateList(candidatePredicate);
         EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
-        return new CommandResult("Candidate Book showing: " + COMMAND_WORD + args + "\n" +
-                (String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredCandidateList().size())));
+        return new CommandResult("Candidate Book showing: " + userInput + "\n"
+                + (String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredCandidateList().size())));
     }
 
     @Override

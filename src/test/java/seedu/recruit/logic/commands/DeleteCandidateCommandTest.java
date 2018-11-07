@@ -19,6 +19,7 @@ import org.junit.Test;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.logic.CommandHistory;
+import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.CompanyBook;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.ModelManager;
@@ -89,7 +90,7 @@ public class DeleteCandidateCommandTest {
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
+    public void execute_validIndexFilteredList_success() throws ParseException {
         showPersonAtIndex(model, INDEX_FIRST);
 
         Candidate candidateToDelete = model.getFilteredCandidateList().get(INDEX_FIRST.getZeroBased());
@@ -107,7 +108,7 @@ public class DeleteCandidateCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
+    public void execute_invalidIndexFilteredList_throwsCommandException() throws ParseException {
         showPersonAtIndex(model, INDEX_FIRST);
 
         Index outOfBoundIndex = INDEX_SECOND;

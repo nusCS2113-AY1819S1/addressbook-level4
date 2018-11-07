@@ -21,6 +21,16 @@ import seedu.recruit.model.joboffer.JobOfferContainsFindKeywordsPredicate;
  */
 public class FindJobOfferCommandParser implements Parser<FindJobOfferCommand> {
 
+    private static String userInput;
+
+    public FindJobOfferCommandParser(String userInput) {
+        this.userInput = userInput;
+    }
+
+    public static String getUserInput() {
+        return userInput;
+    }
+
     /**
      * Parses the given {@code String} of arguments in the context of the FindJobOfferCommand
      * and returns an FindJobCommand object for execution.
@@ -57,6 +67,6 @@ public class FindJobOfferCommandParser implements Parser<FindJobOfferCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindJobOfferCommand.MESSAGE_USAGE));
         }
 
-        return new FindJobOfferCommand(new JobOfferContainsFindKeywordsPredicate(keywordsList), args);
+        return new FindJobOfferCommand(new JobOfferContainsFindKeywordsPredicate(keywordsList));
     }
 }

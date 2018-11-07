@@ -10,6 +10,7 @@ import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
+import seedu.recruit.logic.parser.FindCompanyCommandParser;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.company.CompanyContainsFindKeywordsPredicate;
@@ -32,11 +33,11 @@ public class FindCompanyCommand extends Command {
             + "Example: " + COMMAND_WORD + PREFIX_COMPANY_NAME + " Hanbaobao Pte Ltd";
 
     private final CompanyContainsFindKeywordsPredicate predicate;
-    private final String args;
+    private final String userInput;
 
-    public FindCompanyCommand(CompanyContainsFindKeywordsPredicate predicate, String args) {
+    public FindCompanyCommand(CompanyContainsFindKeywordsPredicate predicate) {
         this.predicate = predicate;
-        this.args = args;
+        this.userInput = FindCompanyCommandParser.getUserInput();
     }
 
     @Override
@@ -44,8 +45,8 @@ public class FindCompanyCommand extends Command {
         requireNonNull(model);
         model.updateFilteredCompanyList(predicate);
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
-        return new CommandResult("Company Book showing: " + COMMAND_WORD + args + "\n" +
-                String.format(Messages.MESSAGE_COMPANIES_LISTED_OVERVIEW, model.getFilteredCompanyList().size()));
+        return new CommandResult("Company Book showing: " + userInput + "\n"
+                + String.format(Messages.MESSAGE_COMPANIES_LISTED_OVERVIEW, model.getFilteredCompanyList().size()));
     }
 
     @Override

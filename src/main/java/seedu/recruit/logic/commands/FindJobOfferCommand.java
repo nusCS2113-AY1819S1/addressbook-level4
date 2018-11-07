@@ -14,6 +14,7 @@ import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowUpdatedCompanyJobListRequestEvent;
 import seedu.recruit.logic.CommandHistory;
+import seedu.recruit.logic.parser.FindJobOfferCommandParser;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.joboffer.JobOfferContainsFindKeywordsPredicate;
@@ -38,11 +39,11 @@ public class FindJobOfferCommand extends Command {
             + "Example: " + COMMAND_WORD + PREFIX_COMPANY_NAME + "Cashier";
 
     private final JobOfferContainsFindKeywordsPredicate predicate;
-    private final String args;
+    private final String userInput;
 
-    public FindJobOfferCommand(JobOfferContainsFindKeywordsPredicate predicate, String args) {
+    public FindJobOfferCommand(JobOfferContainsFindKeywordsPredicate predicate) {
         this.predicate = predicate;
-        this.args = args;
+        this.userInput = FindJobOfferCommandParser.getUserInput();
     }
 
     @Override
@@ -52,8 +53,8 @@ public class FindJobOfferCommand extends Command {
         EventsCenter.getInstance().post(new ShowUpdatedCompanyJobListRequestEvent(
                 model.getFilteredCompanyJobList().size()));
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent()); // switches if user isn't on Company Book
-        return new CommandResult("Company Book showing: " + COMMAND_WORD + args + "\n" +
-                String.format(Messages.MESSAGE_JOBS_LISTED_OVERVIEW, model.getFilteredCompanyJobList().size()));
+        return new CommandResult("Company Book showing: " + userInput + "\n"
+                + String.format(Messages.MESSAGE_JOBS_LISTED_OVERVIEW, model.getFilteredCompanyJobList().size()));
     }
 
     @Override
