@@ -6,6 +6,7 @@
 :sectnums:
 :imagesDir: images
 :stylesDir: stylesheets
+:stylesheet: gh-pages.css
 :xrefstyle: full
 :experimental:
 ifdef::env-github[]
@@ -694,6 +695,7 @@ As the size of the Chart is fixed initially. Sometimes, when user archive too ma
 image::Export_Capture2_LinhChi.png[width:800]
 
 // end::archive[]
+// tag::limitfeatures[]
 == Spending Limit Feature
 
 This section describes the limit feature that allows users to set values to control their future spending.
@@ -778,9 +780,10 @@ Examples:
 * `editlimit d/20-8-2018 30-8-2018 m/200`
 * `editLimit d/20-8-2018 30-8-2018 m/200`
 * `edit_limit d/20-8-2018 30-8-2018 m/200`
+//end::limitfeatures[]
 == Upcoming Features
 
-=== Showing a visual representation of daily/monthly summary `[Coming in v1.4]`
+=== Showing a visual representation of daily/monthly summary `[Coming in v2.0]`
 
 // tag::dataencryption[]
 === Encrypting data files `[coming in v2.0]`
@@ -805,52 +808,95 @@ Examples:
 
 == Command Summary
 
-* *Add* `add n/NAME d/DATE m/MONEYFLOW [t/TAG]...` +
+* *Help* : `help`
+
+* *Add* : `add n/NAME d/DATE m/MONEYFLOW [t/TAG]...` +
 e.g. `add n/Dinner with family d/20-12-2017 m/-10 t/food t/family`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *Find Tag* : `findtag KEYWORD [MORE_KEYWORDS]` +
-e.g. `findtag friend`
-* *sort* : `sort [CATEGORY] [ORDER]` +
-e.g. `sort name asc`
+
 * *List* : `list [d/DATE] [DATE]` +
 e.g. +
 .  `list`
 . `list d/20-12-2017`
 . `list d/20-12-2017 31-09-2018`
-* *Export into Excel* : `export_excel` +
-e.g. +
-. `export_excel`
-. `export_excel d/20-12-2017`
-. `export_excel d/20-12-2017 31-09-2018`
-* *Help* : `help`
+
+* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
+e.g. `find James Jake`
+
+* *Find tag* : `findtag KEYWORD [MORE_KEYWORDS]` +
+e.g. `findtag friend`
+
 * *Select* : `select INDEX` +
 e.g. `select 2`
+
+* *Sort* : `sort [CATEGORY] [ORDER]` +
+e.g. `sort name asc`
+
+* *Edit* : `edit INDEX [n/NAME] [d/DATE] [m/MONEYFLOW] [t/TAG]...` +
+e.g. `edit 2 n/Present d/12-11-2018`
+
+* *Delete* : `delete INDEX` +
+e.g. `delete 3`
+
+* *Delete by date* : `deletedate DATE` +
+e.g. `delete 31-7-2018`
+
 * *History* : `history`
+
 * *Undo* : `undo`
+
 * *Redo* : `redo`
-* *Summary* : `summary` +
+
+* *Clear* : `clear`
+
+* *Exit* : `exit`
+
+* *View summary* : multiple modes of `summary` +
 e.g.
 . `summary date d/1-1-2018 12-12-2018`
 . `summary month d/apr-2018 sep-2018`
 . `summary month d/APR-2018 SeP-2018`
 . `summary category d/1-1-2018 12-12-2018`
-* *Finances Statistics* : `stats` +
+
+* *View pie chart breakdown* : `stats d/DATE DATE` +
 e.g. `stats d/20-12-2017 31-09-2018`
-* *Add limit* : `addlimit d/START_DATE END_DATE` +
+
+* *Export into Excel* : multiple modes of `exportexcel` +
 e.g. +
-`limit d/20-12-2017`
-`limit d/20-12-2017 31-09-2018`
-* *Delete limit* `deleteLimit d/START_DATE END_DATE` +
+. `export_excel`
+. `export_excel d/31-3-1999`
+. `export_excel d/31-3-1999 31-03-2019`
+. `export_excel d/31-3-1999 dir/C:\`
+. `export_excel d/31-3-1999 31-3-2019 dir/C:\`
+
+* *Import into app* : multiple modes of `import` +
 e.g. +
-`deleteLimit d/20-12-2017`
-`deleteLimit d/20-12-2017 31-09-2018`
-* *Edit limit* `editLimit d/START_DATE END_DATE m/MONEYFLOW` +
+. `import dir/C:\Financial_Planner_ALL.xlsx`
+. `import dir/C:\ n/Financial_Planner_All.xlsx`
+
+* *Archive records* : multiple modes of `archive` +
 e.g. +
-`editLimit d/20-12-2017 m/100`
-`editLimit d/20-12-2017 31-09-2018 m/100`
+. `archive`
+. `archive d/31-3-1999`
+. `archive d/31-3-1999 31-03-2019`
+. `archive d/31-3-1999 dir/C:\`
+. `archive d/31-3-1999 31-3-2019 dir/C:\`
+
+* *Add limit* : `addlimit d/DATE [DATE]` +
+e.g. +
+. `addlimit d/20-12-2017`
+. `addlimit d/20-12-2017 31-09-2018`
+
+* *Check limit* : `checklimit d/DATE [DATE]` +
+e.g. +
+. `checklimit d/20-12-2017`
+. `checklimit d/20-12-2018 31-09-2018`
+
+* *Delete limit* `deletelimit d/DATE [DATE]` +
+e.g. +
+. `deleteLimit d/20-12-2017`
+. `deleteLimit d/20-12-2017 31-09-2018`
+
+* *Edit limit* `editlimit d/DATE [DATE] m/MONEYFLOW` +
+e.g. +
+`editlimit d/20-12-2017 m/100`
+`editlimit d/20-12-2017 31-09-2018 m/100`
