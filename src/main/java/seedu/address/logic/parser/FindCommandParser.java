@@ -27,7 +27,7 @@ import seedu.address.model.event.EventContainsKeywordsPredicate;
  */
 public class FindCommandParser implements Parser<FindCommand> {
     private static final List<Prefix> PREFIXES = Arrays.asList(PREFIX_KEYWORD, PREFIX_NAME, PREFIX_CONTACT,
-            PREFIX_EMAIL, PREFIX_PHONE, PREFIX_VENUE, PREFIX_DATETIME, PREFIX_TAG, PREFIX_ATTENDEE);
+            PREFIX_EMAIL, PREFIX_PHONE, PREFIX_VENUE, PREFIX_DATETIME, PREFIX_TAG);
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -36,10 +36,10 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_KEYWORD, PREFIX_NAME,
-                PREFIX_CONTACT, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_VENUE, PREFIX_DATETIME, PREFIX_TAG, PREFIX_ATTENDEE);
+                PREFIX_CONTACT, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_VENUE, PREFIX_DATETIME, PREFIX_TAG);
 
         if (!anyPrefixesPresent(argMultimap, PREFIX_KEYWORD, PREFIX_NAME, PREFIX_CONTACT,
-                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_VENUE, PREFIX_DATETIME, PREFIX_TAG, PREFIX_ATTENDEE)) {
+                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_VENUE, PREFIX_DATETIME, PREFIX_TAG)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
