@@ -203,7 +203,7 @@ public class DirectoryPath {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DirectoryPath // instanceof handles nulls
-                && this.getDirectoryPath().getDirectoryPathValue()
-                == ((DirectoryPath) other).getDirectoryPath().getDirectoryPathValue());
+                && (this.getDirectoryPath().getDirectoryPathValue())
+                .equals(((DirectoryPath) other).getDirectoryPath().getDirectoryPathValue()));
     }
 }
