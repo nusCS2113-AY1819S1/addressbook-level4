@@ -126,6 +126,12 @@ Format: `listproducts`
 
 Provides the list of products
 
+==== Clear the inventory: `clearproducts`
+
+Format: `clearproducts`
+
+Deletes all products from the product database.
+
 // end::inventorymanagement[]
 
 // tag::distributormanagement[]
@@ -184,7 +190,11 @@ Deletes the 2nd distributor in the contacts panel.
   `delete 1` +
    Deletes the 1st distributor in the results of the find command.
 
+==== Clear the distributor book: `cleardistributors`
 
+Format: `cleardistributors`
+
+Deletes all distributors from the distributor book.
 
 // end::distributormanagement[]
 
