@@ -41,6 +41,27 @@ public class StringUtil {
     }
 
     /**
+     * Returns true if the {@code age} falls within the {@code ageRange}.
+     * {@code minAge}, {@code maxAge} and {@code age} should be an integer >= 16 and <60
+     * <br>examples:<pre>
+     *     isWithinRange("18", "16-30") == true
+     *     isWithinRange("10", "20-35") == false
+     *     isWithinRange("62", "20-35") == false
+     * </pre>
+     * @param minAge cannot be null
+     * @param maxAge cannot be null
+     * @param age cannot be null
+     */
+
+    public static boolean isWithinRange(int minAge, int maxAge, int age) {
+        requireNonNull(age);
+        requireNonNull(minAge);
+        requireNonNull(maxAge);
+
+        return ((age>=minAge) && (age<=maxAge));
+    }
+
+    /**
      * Returns a detailed message of the t, including the stack trace.
      */
     public static String getDetails(Throwable t) {
