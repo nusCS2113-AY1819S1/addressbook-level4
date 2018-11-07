@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.ProductDatabase;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyProductDatabase;
 import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.product.Name;
 import seedu.address.model.product.Product;
@@ -21,7 +21,7 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
 
 
-    public static Product[] getSamplePersons() {
+    public static Product[] getSampleProducts() {
         return new Product[] {
             new Product(new Name("Apple"), new SerialNumber("001"),
                     new DistributorName("Farm"), new ProductInfo("fruit"),
@@ -44,11 +44,11 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
+    public static ReadOnlyProductDatabase getSampleProductDatabase() {
         ProductDatabase sampleAb = new ProductDatabase();
 
-        for (Product sampleProduct : getSamplePersons()) {
-            sampleAb.addPerson(sampleProduct);
+        for (Product sampleProduct : getSampleProducts()) {
+            sampleAb.addProduct(sampleProduct);
         }
         return sampleAb;
     }

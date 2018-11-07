@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ProductDatabase;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyProductDatabase;
 import seedu.address.model.product.Product;
 
 /**
@@ -34,7 +34,7 @@ public class XmlSerializableProductDatabase {
     /**
      * Conversion
      */
-    public XmlSerializableProductDatabase(ReadOnlyAddressBook src) {
+    public XmlSerializableProductDatabase(ReadOnlyProductDatabase src) {
         this();
         products.addAll(src.getProductList().stream().map(XmlAdaptedProduct::new).collect(Collectors.toList()));
     }
@@ -54,7 +54,7 @@ public class XmlSerializableProductDatabase {
             if (productDatabase.hasPerson(product)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PRODUCT);
             }
-            productDatabase.addPerson(product);
+            productDatabase.addProduct(product);
         }
         return productDatabase;
     }

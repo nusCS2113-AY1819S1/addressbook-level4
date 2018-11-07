@@ -61,7 +61,7 @@ public class TypicalProducts {
     public static ProductDatabase getTypicalAddressBook() {
         ProductDatabase ab = new ProductDatabase();
         for (Product product : getTypicalPersons()) {
-            ab.addPerson(product);
+            ab.addProduct(product);
         }
         return ab;
     }
