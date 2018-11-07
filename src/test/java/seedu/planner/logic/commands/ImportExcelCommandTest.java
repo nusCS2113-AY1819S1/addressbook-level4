@@ -14,8 +14,8 @@ import seedu.planner.model.UserPrefs;
 
 //@author nguyenngoclinhchi
 public class ImportExcelCommandTest {
-    private static final String directoryPath1 = DirectoryPath.HOME_DIRECTORY_STRING;
-    private static final String directoryPath2 = DirectoryPath.WORKING_DIRECTORY_STRING;
+    private static final String directoryPath1 = DirectoryPath.WORKING_DIRECTORY_STRING;
+    private static final String directoryPath2 = DirectoryPath.HOME_DIRECTORY_STRING;
     private static final String nameFile = "Financial_Planner_ALL";
     private static final String directoryPathName1 = ExcelUtil.setPathFile(nameFile, directoryPath1);
     private static final String directoryPathName2 = ExcelUtil.setPathFile(nameFile, directoryPath2);

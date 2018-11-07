@@ -2,7 +2,7 @@ package seedu.planner.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.planner.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.planner.model.DirectoryPath.HOME_DIRECTORY_STRING;
+import static seedu.planner.model.DirectoryPath.WORKING_DIRECTORY_STRING;
 import static seedu.planner.testutil.TypicalRecords.getTypicalFinancialPlanner;
 
 import java.util.Arrays;
@@ -35,8 +35,8 @@ public class ArchiveCommandTest {
         Date startDate2 = TypicalRecords.TYPICAL_START_DATE1;
         Date endDate1 = TypicalRecords.TYPICAL_END_DATE;
         Date endDate2 = TypicalRecords.TYPICAL_END_DATE1;
-        String directoryPath = HOME_DIRECTORY_STRING;
-        String directoryPath1 = DirectoryPath.WORKING_DIRECTORY_STRING;
+        String directoryPath = WORKING_DIRECTORY_STRING;
+        String directoryPath1 = DirectoryPath.HOME_DIRECTORY_STRING;
 
         ArchiveCommand archiveCommand11 = new ArchiveCommand();
         ArchiveCommand archiveCommand21 = new ArchiveCommand(directoryPath);
@@ -88,7 +88,7 @@ public class ArchiveCommandTest {
         if (records.size() > 0) {
             expectedMessage = String.format(
                     Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY,
-                    nameFile, DirectoryPath.HOME_DIRECTORY_STRING);
+                    nameFile, DirectoryPath.WORKING_DIRECTORY_STRING);
             expectedModel.deleteListRecord(records);
             expectedModel.commitFinancialPlanner();
         } else {
@@ -106,9 +106,9 @@ public class ArchiveCommandTest {
                 TypicalRecords.TYPICAL_START_FAR_DATE, TypicalRecords.TYPICAL_END_FAR_DATE);
         String expectedMessage = String.format(
                 Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY + Messages.MESSAGE_ARCHIVE_SUCCESSFULLY,
-                nameFile, HOME_DIRECTORY_STRING);
+                nameFile, WORKING_DIRECTORY_STRING);
         ArchiveCommand command = new ArchiveCommand(
-                TypicalRecords.TYPICAL_START_FAR_DATE, TypicalRecords.TYPICAL_END_FAR_DATE, HOME_DIRECTORY_STRING);
+                TypicalRecords.TYPICAL_START_FAR_DATE, TypicalRecords.TYPICAL_END_FAR_DATE, WORKING_DIRECTORY_STRING);
         expectedModel.updateFilteredRecordList(new DateIsWithinIntervalPredicate(
                 TypicalRecords.TYPICAL_START_FAR_DATE, TypicalRecords.TYPICAL_END_FAR_DATE));
         List<Record> records = expectedModel.getFilteredRecordList();

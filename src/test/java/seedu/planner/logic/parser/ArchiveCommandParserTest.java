@@ -3,7 +3,6 @@ package seedu.planner.logic.parser;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DIR;
 import static seedu.planner.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.planner.model.DirectoryPath.HOME_DIRECTORY_STRING;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +21,7 @@ public class ArchiveCommandParserTest {
     public void parse_invalidArgs_throwsParseException() {
         Date startDate = TypicalRecords.TYPICAL_START_DATE;
         Date endDate = TypicalRecords.TYPICAL_END_DATE;
-        DirectoryPath directoryPath = DirectoryPath.HOME_DIRECTORY;
+        DirectoryPath directoryPath = DirectoryPath.WORKING_DIRECTORY;
 
         CommandParserTestUtil.assertParseFailure(parser, WHITE_SPACE + PREFIX_DATE + " 3A-3B-19C9    ",
                 String.format(Date.MESSAGE_DATE_CONSTRAINTS, ArchiveCommand.MESSAGE_USAGE));
@@ -38,7 +37,7 @@ public class ArchiveCommandParserTest {
         CommandParserTestUtil.assertParseFailure(parser, WHITE_SPACE + PREFIX_DIR + " unrealistic\\directory",
                 String.format(Messages.MESSAGE_UNREALISTIC_DIRECTORY, ArchiveCommand.MESSAGE_USAGE));
 
-        CommandParserTestUtil.assertParseFailure(parser, WHITE_SPACE + HOME_DIRECTORY_STRING,
+        CommandParserTestUtil.assertParseFailure(parser, WHITE_SPACE + DirectoryPath.WORKING_DIRECTORY_STRING,
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ArchiveCommand.MESSAGE_USAGE));
 
         CommandParserTestUtil.assertParseFailure(parser, WHITE_SPACE + startDate.value + " " + endDate.value,
@@ -53,7 +52,7 @@ public class ArchiveCommandParserTest {
     public void parse_validArgs_returnsArchiveExcelCommand() {
         String startDate = TypicalRecords.TYPICAL_START_DATE.getValue();
         String endDate = TypicalRecords.TYPICAL_END_DATE.getValue();
-        String directoryPath = HOME_DIRECTORY_STRING;
+        String directoryPath = DirectoryPath.WORKING_DIRECTORY_STRING;
         //Case 1: return ArchiveCommand()
         ArchiveCommand expectedArchiveCommand1 = new ArchiveCommand();
         assertParseSuccess(parser,
@@ -100,7 +99,7 @@ public class ArchiveCommandParserTest {
 
         //Case 4: return ArchiveCommand (Date startDate, Date endDate, String directory)
         ArchiveCommand expectedArchiveCommand4 = new ArchiveCommand(TypicalRecords.TYPICAL_START_DATE,
-                TypicalRecords.TYPICAL_END_DATE, DirectoryPath.HOME_DIRECTORY_STRING);
+                TypicalRecords.TYPICAL_END_DATE, DirectoryPath.WORKING_DIRECTORY_STRING);
         assertParseSuccess(parser,
                 WHITE_SPACE + PREFIX_DATE + startDate + WHITE_SPACE + endDate + WHITE_SPACE + PREFIX_DIR
                 + directoryPath,

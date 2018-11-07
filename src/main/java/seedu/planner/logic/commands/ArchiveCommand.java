@@ -30,17 +30,20 @@ public class ArchiveCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Archive the records within specific period or all records in the Financial Planner into Excel file.\n"
             + "All the records exported into Excel file will be deleted in the current Financial Planner.\n"
-            + "Parameters: START_DATE END_DATE DIRECTORY_PATH,START_DATE should be equal to or smaller than END_DATE.\n"
+            + "Parameters: START_DATE END_DATE DIRECTORY_PATH,"
+            + "START_DATE should be equal to or smaller than END_DATE.\n"
             + "You can specifically type what you want to conform. Date/period start with d/ "
             + "and Directory path start with dir/.\n"
-            + "Example 1: You want to set Directory: "
-            + COMMAND_WORD + " dir/" + DirectoryPath.HOME_DIRECTORY_STRING + "\n"
-            + "Example 2: You want to set records have only 1 date: " + COMMAND_WORD + " d/31-3-1999\n"
-            + "Example 3: You want to set records whose date lies within the period: "
+            + "Example 1: You want to archive all the records to Excel file and store them in the Working Directory: "
+            + DirectoryPath.WORKING_DIRECTORY_STRING
+            + "Example 2: You want to set Directory: "
+            + COMMAND_WORD + " dir/" + DirectoryPath.WORKING_DIRECTORY_STRING + "\n"
+            + "Example 3: You want to set records have only 1 date: " + COMMAND_WORD + " d/31-3-1999\n"
+            + "Example 4: You want to set records whose date lies within the period: "
             + COMMAND_WORD + "d/31-3-1999 31-3-2019\n"
-            + "Example 4: You want to archive all the records in the Financial Planner: " + COMMAND_WORD + "\n"
-            + "Example 5: You want to archive records lies within the period and set specific Directory: "
-            + COMMAND_WORD + " d/31-3-1999 31-3-2019" + " dir/" + DirectoryPath.HOME_DIRECTORY_STRING + "\n";
+            + "Example 5: You want to archive all the records in the Financial Planner: " + COMMAND_WORD + "\n"
+            + "Example 6: You want to archive records lies within the period and set specific Directory: "
+            + COMMAND_WORD + " d/31-3-1999 31-3-2019" + " dir/" + DirectoryPath.WORKING_DIRECTORY_STRING + "\n";
 
     public static final int SINGLE_MODE = 1;
     public static final int DUO_MODE = 2;
@@ -57,7 +60,7 @@ public class ArchiveCommand extends Command {
     public ArchiveCommand() {
         this.startDate = null;
         this.endDate = null;
-        this.directoryPath = DirectoryPath.HOME_DIRECTORY_STRING;
+        this.directoryPath = DirectoryPath.WORKING_DIRECTORY_STRING;
         this.predicate = PREDICATE_SHOW_ALL_RECORDS;
     }
 
@@ -71,7 +74,7 @@ public class ArchiveCommand extends Command {
     public ArchiveCommand(Date startDate, Date endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
-        this.directoryPath = DirectoryPath.HOME_DIRECTORY_STRING;
+        this.directoryPath = DirectoryPath.WORKING_DIRECTORY_STRING;
         this.predicate = new DateIsWithinIntervalPredicate(startDate, endDate);
     }
 

@@ -528,11 +528,11 @@ Format: +
 * Single argument Directory Path + Dual argument Date mode: `export_excel d/START_DATE END_DATE dir/DIRECTORY_PATH`
 
 ****
-* *Default mode* will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically user's Home Directory*.
+* *Default mode* will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.
 
-* *Single argument Date mode* will list down all records with the specified date and exports all shown records to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically user's Home Directory*.
+* *Single argument Date mode* will list down all records with the specified date and exports all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.
 
-* *Dual argument Date mode* will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically user's Home Directory*.
+* *Dual argument Date mode* will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the default *Working DIRECTORY*, it will *detect automatically user's Working Directory*.
 
 * *Single argument Directory Path mode* will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the chosen Directory Path.
 
@@ -639,11 +639,11 @@ Format: +
 * Single argument Directory Path + Dual argument Date mode: `archive d/START_DATE END_DATE dir/DIRECTORY_PATH`
 
 ****
-* *Default mode* will list down all records in the Financial Planner and archives all of them to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically user's Home Directory*. Then, the records stored in the Excel file will be deleted automatically in the Financial Planner.
+* *Default mode* will list down all records in the Financial Planner and archives all of them to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*. Then, the records stored in the Excel file will be deleted automatically in the Financial Planner.
 
-* *Single argument Date mode* will list down all records with the specified date and archives all shown records to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically user's Home Directory*.Then, the records stored in the Excel file will be deleted automatically in the Financial Planner.
+* *Single argument Date mode* will list down all records with the specified date and archives all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.Then, the records stored in the Excel file will be deleted automatically in the Financial Planner.
 
-* *Dual argument Date mode* will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the default *HOME DIRECTORY*, it will *detect automatically user's Home Directory*.Then, the records stored in the Excel file will be deleted automatically in the Financial Planner.
+* *Dual argument Date mode* will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.Then, the records stored in the Excel file will be deleted automatically in the Financial Planner.
 
 * *Single argument Directory Path mode* will list down all records in the Financial Planner and archives all of them to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in the Financial Planner.
 

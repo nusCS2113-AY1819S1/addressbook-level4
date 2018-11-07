@@ -1,0 +1,5 @@
+{
+  "appTitle" : "Financial Planner",
+  "logLevel" : "INFO",
+  "userPrefsFilePath" : "preferences.json"
+}
