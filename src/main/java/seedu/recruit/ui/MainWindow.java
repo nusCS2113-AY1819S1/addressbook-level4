@@ -29,6 +29,7 @@ import seedu.recruit.commons.events.ui.ShowLastViewedBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowShortlistPanelRequestEvent;
 import seedu.recruit.commons.events.ui.SwitchBookRequestEvent;
 import seedu.recruit.logic.Logic;
+import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.SwitchBookCommand;
 import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.candidate.Candidate;
@@ -42,6 +43,11 @@ public class MainWindow extends UiPart<Stage> {
 
     //Tracks whether an instance of MainWindow exists
     private static boolean exists = false;
+
+    private static final String WELCOME_MESSAGE = "Welcome to RecruitBook!";
+
+    private static final String WELCOME_AUTHENTICATE_MESSAGE = "RecruitBook is password-protected.\n"
+            + "Enter admin password to continue.";
 
     private static final String FXML = "MainWindow.fxml";
     private static String currentBook = "candidateBook";
@@ -158,7 +164,9 @@ public class MainWindow extends UiPart<Stage> {
         masterListPlaceholder.getChildren().add(getMasterCandidateListPanel().getRoot());
         panelViewPlaceholder.getChildren().add(getCandidateDetailsPanel().getRoot());
 
-        ResultDisplay resultDisplay = new ResultDisplay();
+        ResultDisplay resultDisplay =
+                LogicManager.getState().nextCommand.equals("authenticate")
+                        ? new ResultDisplay(WELCOME_AUTHENTICATE_MESSAGE) : new ResultDisplay(WELCOME_MESSAGE);
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(
@@ -199,7 +207,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void clearResultDisplay() {
-        ResultDisplay resultDisplay = new ResultDisplay();
+        ResultDisplay resultDisplay = new ResultDisplay("");
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
     }
 

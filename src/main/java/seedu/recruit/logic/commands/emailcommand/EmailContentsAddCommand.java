@@ -10,6 +10,7 @@ import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.joboffer.JobOffer;
 
@@ -24,7 +25,7 @@ public class EmailContentsAddCommand extends EmailContentsCommand {
     private ArrayList<JobOffer> addedJobOffers = new ArrayList<>();
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         requireNonNull(model);
         EmailUtil emailUtil = model.getEmailUtil();
 
@@ -36,18 +37,17 @@ public class EmailContentsAddCommand extends EmailContentsCommand {
         }
 
         //Generate duplicate string (if any)
-        StringBuilder duplicates = new StringBuilder(
-                "Unable to add the following because it already has been added before:\n");
+        StringBuilder duplicates = new StringBuilder(ADD_CONTENTS_DUPLICATE_MESSAGE);
         boolean hasDuplicates = generateDuplicate(emailUtil, duplicates);
 
         //Generate contents string
-        StringBuilder contents = new StringBuilder("Contents added:\n");
+        StringBuilder contents = new StringBuilder(ADD_CONTENTS_CONTENTS_ADDED);
         generateContents(emailUtil, contents);
 
         //Check if both recipients string and duplicate string is empty
-        if (duplicates.toString().equals("Unable to add the following because it already has been added before:\n")
-            && contents.toString().equals("Recipients added:\n")) {
-            return new CommandResult("ERROR: Nothing was selected!\n" + MESSAGE_USAGE);
+        if (duplicates.toString().equals(ADD_CONTENTS_DUPLICATE_MESSAGE)
+            && contents.toString().equals(ADD_CONTENTS_CONTENTS_ADDED)) {
+            return new CommandResult(ADD_CONTENTS_NOTHING_SELECTED + MESSAGE_USAGE);
         }
 
         //Generate output string

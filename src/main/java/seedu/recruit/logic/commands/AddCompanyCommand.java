@@ -12,6 +12,7 @@ import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.company.Company;
 
 /**
@@ -50,7 +51,7 @@ public class AddCompanyCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws CommandException {
         requireNonNull(model);
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
 

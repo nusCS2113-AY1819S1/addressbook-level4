@@ -18,7 +18,7 @@ import java.util.List;
 
 import seedu.recruit.logic.commands.FindCandidateCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
-import seedu.recruit.model.candidate.CandidateContainsKeywordsPredicate;
+import seedu.recruit.model.candidate.CandidateContainsFindKeywordsPredicate;
 
 
 /**
@@ -72,6 +72,8 @@ public class FindCandidateCommandParser implements Parser<FindCandidateCommand> 
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCandidateCommand.MESSAGE_USAGE));
         }
 
-        return new FindCandidateCommand(new CandidateContainsKeywordsPredicate(keywordsMap));
+        System.out.println(keywordsMap);
+
+        return new FindCandidateCommand(new CandidateContainsFindKeywordsPredicate(keywordsMap));
     }
 }

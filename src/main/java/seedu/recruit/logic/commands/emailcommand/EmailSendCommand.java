@@ -13,6 +13,7 @@ import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.joboffer.JobOffer;
@@ -29,6 +30,7 @@ public class EmailSendCommand extends Command {
     public static final String COMMAND_LOGIC_STATE = "EmailSend";
     public static final String EMAIL_SUCCESS = "Successfully sent the email!";
     public static final String EMAIL_FAILURE = "Failed to send the email!";
+    public static final String EMAIL_SEND_SHOWING_PREVIEW_MESSAGE = "Opened preview.\n";
 
     private static ArrayList<Candidate> candidateRecipients;
     private static ArrayList<JobOffer> jobOfferRecipients;
@@ -36,7 +38,7 @@ public class EmailSendCommand extends Command {
     private static ArrayList<JobOffer> jobOfferContents;
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history)
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs)
             throws ParseException, IOException, GeneralSecurityException {
         throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
     }

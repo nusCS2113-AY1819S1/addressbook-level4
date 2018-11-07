@@ -313,15 +313,15 @@ It implements the following operations to support the checking of keywords with 
 * `keywordsMap#add(String arg)` - Adds a keyword into the `keywordMap` based on the preceding prefix
 
 ===== Candidates
-The `findCandidateCommand` is facilitated by the `CandidateContainsKeywordsPredicate` which implements `Predicate<Candidate>`
+The `findCandidateCommand` is facilitated by the `CandidateContainsFindKeywordsPredicate` which implements `Predicate<Candidate>`
 and overrides the `test` and `equal` methods so that more fields can be searched at the same time.
 
 ===== Companies
-The `findCompanyCommand` is facilitated by the `CompanyContainsKeywordsPredicate` which implements `Predicate<Company>`
+The `findCompanyCommand` is facilitated by the `CompanyContainsFindKeywordsPredicate` which implements `Predicate<Company>`
 and overrides the `test` and `equal` methods so that more fields can be searched at the same time.
 
 ===== Job Offers
-The `findJobOfferCommand` is facilitated by the `JobOfferContainsKeywordsPredicate` which implements `Predicate<JobOffer>`
+The `findJobOfferCommand` is facilitated by the `JobOfferContainsFindKeywordsPredicate` which implements `Predicate<JobOffer>`
 and overrides the `test` and `equal` methods so that more fields can be searched at the same time.
 
 [NOTE]
@@ -375,7 +375,8 @@ Additionally, it implements the following operations to support the editing of j
 * `UniqueJobList#setJobOffer(JobOffer target, JobOffer editedJobOffer)` — Replaces the Job Offer object(target) in the `internalList` to the newly edited Job Offer object(editedJobOffer) through `List#set(int index, E element)`.
 
 These operations are exposed in the `Model` interface as `Model#hasJobOffer(JobOffer jobOffer)` and `Model#updateJobOffer(JobOffer target, JobOffer editedJobOffer)` respectively.
-
+[NOTE]
+If you try to edit the job offer to have a company name that does not exist in the book, it will trigger a command exception!
 [NOTE]
 The editing of all three entities (Candidate, Company, JobOffer) follow the same mechanism.
 
@@ -1038,11 +1039,11 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |New user |See usage instructions |Refer to instructions when I forget how to use the App
 
-|`* * *` |User |Add a new candidate |
+|`* * *` |User |Add a new candidate
 
-|`* * *` |User |Add a new company |
+|`* * *` |User |Add a new company
 
-|`* * *` |User |Add a new job offer to a company |
+|`* * *` |User |Add a new job offer to a company
 
 |`* * *` |User |Delete a candidate |Remove entries that I no longer need
 
@@ -1066,21 +1067,23 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |User |Find relevant details to a specific job candidate |Assign the most suitable job to the candidate.
 
+|`* * *` |User |Ensure data integrity and confidentiality of candidates and job offers |Protect the privacy rights of stakeholders
+
 |`* *` |User |Undo/Redo changes to CompanyBook and CandidateBook |Revert unwanted changes job candidates and offers
+
+|`* *` |User |See the undone/redone command |Be aware of the undo/redo changes made to RecruitBook
 
 |`* *` |User |Hide <<private-contact-detail,private contact details>> by default |Minimize chance of someone else seeing them by accident
 
 |`* *` |User |Add relevant job experience/history of candidate |Useful when recommending candidates for jobs requiring relevant experience
 
-|`* *`|User|Shortlist the best candidates for a specific job offer|See the best available candidates
+|`* *`|User |Shortlist the best candidates for a specific job offer|See the best available candidates
 
-|`* *`|User|Share profiles of prospective candidates with employers|Recommend employees to the respective companies
+|`* *`|User |Share profiles of prospective candidates with employers|Recommend employees to the respective companies
 
-|`* *`|User|Edit the details of listed candidates|Update changes of the details
+|`* *`|User |Edit the details of listed candidates|Update changes of the details
 
-|`* *`|User|Delete candidate|
-
-|`*`|User|List the best employees for each sector|I can recommend them to potential employers
+|`*` |User |List the best employees for each sector|I can recommend them to potential employers
 
 |`*` |User with many candidates in the candidate book |Sort candidates by name |Locate a candidate easily
 |=======================================================================

@@ -10,13 +10,14 @@ import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.UserPrefs;
 
 /**
  * This class handles the next sub command for email recipients phase
  */
 public class EmailRecipientsNextCommand extends EmailRecipientsCommand {
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         requireNonNull(model);
         EmailUtil emailUtil = model.getEmailUtil();
 
@@ -33,8 +34,7 @@ public class EmailRecipientsNextCommand extends EmailRecipientsCommand {
         }
 
         if (isEmpty) {
-            return new CommandResult("ERROR: There are no recipients selected!\n"
-                    + EmailRecipientsCommand.MESSAGE_USAGE);
+            return new CommandResult(NEXT_RECIPIENTS_ERROR_NO_RECIPIENTS + EmailRecipientsCommand.MESSAGE_USAGE);
         } else {
             if (emailUtil.isAreRecipientsCandidates()) {
                 EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());

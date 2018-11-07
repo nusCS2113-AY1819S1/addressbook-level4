@@ -18,6 +18,9 @@ public interface Model {
     Predicate<Candidate> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Company> PREDICATE_SHOW_ALL_COMPANIES = unused -> true;
     Predicate<JobOffer> PREDICATE_SHOW_ALL_JOBOFFERS = unused -> true;
+    Predicate<Candidate> PREDICATE_HIDE_ALL_PERSONS = unused -> false;
+    Predicate<Company> PREDICATE_HIDE_ALL_COMPANIES = unused -> false;
+    Predicate<JobOffer> PREDICATE_HIDE_ALL_JOBOFFERS = unused -> false;
 
     // ================================== CandidateBook functions ====================================== //
     /** Clears existing backing model and replaces with the provided new data. */
@@ -136,9 +139,11 @@ public interface Model {
      */
     void updateCompany(Company target, Company editedCompany);
 
-    /**
-     * Returns an unmodifiable view of the filtered company list
+    /** Cascade company name changes to job offers
      */
+    void cascadeToJobOffers(CompanyName targetName, CompanyName editedName);
+
+    /** Returns an unmodifiable view of the filtered company list */
     ObservableList<Company> getFilteredCompanyList();
 
     /** Returns index of Company using @param companyName

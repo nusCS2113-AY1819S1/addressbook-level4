@@ -33,6 +33,8 @@ public class DeleteCandidateCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new CompanyBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
+    private UserPrefs userPrefs = new UserPrefs();
+
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -127,7 +129,7 @@ public class DeleteCandidateCommandTest {
         expectedModel.commitCandidateBook();
 
         // delete -> first candidate deleted
-        deleteCandidateCommand.execute(model, commandHistory);
+        deleteCandidateCommand.execute(model, commandHistory, userPrefs);
 
         // undo -> reverts Candidatebook back to previous state and filtered candidate list to show all persons
         expectedModel.undoCandidateBook();
@@ -176,7 +178,7 @@ public class DeleteCandidateCommandTest {
         expectedModel.commitCandidateBook();
 
         // delete -> deletes second candidate in unfiltered candidate list / first candidate in filtered candidate list
-        deleteCandidateCommand.execute(model, commandHistory);
+        deleteCandidateCommand.execute(model, commandHistory, userPrefs);
 
         // undo -> reverts addressbook back to previous state and filtered candidate list to show all persons
         expectedModel.undoCandidateBook();

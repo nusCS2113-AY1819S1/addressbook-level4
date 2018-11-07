@@ -11,7 +11,8 @@ import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.model.Model;
-import seedu.recruit.model.company.CompanyContainsKeywordsPredicate;
+import seedu.recruit.model.UserPrefs;
+import seedu.recruit.model.company.CompanyContainsFindKeywordsPredicate;
 
 /**
  * Finds and lists all companies in company book whose company name contains any of the argument keywords.
@@ -30,14 +31,14 @@ public class FindCompanyCommand extends Command {
             + PREFIX_ADDRESS + "ADDRESS \n"
             + "Example: " + COMMAND_WORD + PREFIX_COMPANY_NAME + "Hanbaobao Pte Ltd";
 
-    private final CompanyContainsKeywordsPredicate predicate;
+    private final CompanyContainsFindKeywordsPredicate predicate;
 
-    public FindCompanyCommand(CompanyContainsKeywordsPredicate predicate) {
+    public FindCompanyCommand(CompanyContainsFindKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         requireNonNull(model);
         model.updateFilteredCompanyList(predicate);
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());

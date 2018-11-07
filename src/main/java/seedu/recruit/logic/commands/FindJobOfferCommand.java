@@ -15,7 +15,8 @@ import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowUpdatedCompanyJobListRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.model.Model;
-import seedu.recruit.model.joboffer.JobOfferContainsKeywordsPredicate;
+import seedu.recruit.model.UserPrefs;
+import seedu.recruit.model.joboffer.JobOfferContainsFindKeywordsPredicate;
 
 /**
  * Finds and lists all jobs in job offers whose job details contains any of the argument keywords.
@@ -36,14 +37,14 @@ public class FindJobOfferCommand extends Command {
             + PREFIX_EDUCATION + "EDUCATION \n"
             + "Example: " + COMMAND_WORD + PREFIX_COMPANY_NAME + "Cashier";
 
-    private final JobOfferContainsKeywordsPredicate predicate;
+    private final JobOfferContainsFindKeywordsPredicate predicate;
 
-    public FindJobOfferCommand(JobOfferContainsKeywordsPredicate predicate) {
+    public FindJobOfferCommand(JobOfferContainsFindKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         requireNonNull(model);
         model.updateFilteredCompanyJobList(predicate);
         EventsCenter.getInstance().post(new ShowUpdatedCompanyJobListRequestEvent(
