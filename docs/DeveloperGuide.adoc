@@ -372,7 +372,6 @@ from List<>.
 ==== Current Implementation
 
 Deadline Notification in the to-do list uses both logic and ui components.
-Generally, 
 
 ==== Design Considerations
 
