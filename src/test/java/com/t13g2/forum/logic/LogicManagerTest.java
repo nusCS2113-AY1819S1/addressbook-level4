@@ -17,7 +17,9 @@ import com.t13g2.forum.model.Context;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.ModelManager;
 import com.t13g2.forum.model.UserPrefs;
+import com.t13g2.forum.model.forum.Module;
 import com.t13g2.forum.model.forum.User;
+import com.t13g2.forum.testutil.TypicalModules;
 import com.t13g2.forum.testutil.UserBuilder;
 
 
@@ -53,7 +55,10 @@ public class LogicManagerTest {
         Context.getInstance().setCurrentUser(loginUser);
 
         String listModuleCommand = ListModuleCommand.COMMAND_WORD;
-        assertCommandSuccess(listModuleCommand, String.format(ListModuleCommand.MESSAGE_SUCCESS, ""), model);
+        Module defaultModule = TypicalModules.CS2113;
+        String message = defaultModule.getModuleCode() + ": " + defaultModule.getTitle() + "\n";
+        message += "----------------------------------------------------------------------------------\n";
+        assertCommandSuccess(listModuleCommand, String.format(ListModuleCommand.MESSAGE_SUCCESS, message), model);
         assertHistoryCorrect(listModuleCommand);
     }
 
