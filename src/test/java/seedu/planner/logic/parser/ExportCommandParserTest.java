@@ -3,7 +3,7 @@ package seedu.planner.logic.parser;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DIR;
 import static seedu.planner.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.planner.model.DirectoryPath.HOME_DIRECTORY_STRING;
+import static seedu.planner.model.DirectoryPath.WORKING_DIRECTORY_STRING;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +13,7 @@ import seedu.planner.model.DirectoryPath;
 import seedu.planner.model.record.Date;
 import seedu.planner.testutil.TypicalRecords;
 
+//@author nguyenngoclinhchi
 public class ExportCommandParserTest {
     private static final String WHITE_SPACE = " ";
     private ExportExcelCommandParser parser = new ExportExcelCommandParser();
@@ -21,7 +22,7 @@ public class ExportCommandParserTest {
     public void parse_invalidArgs_throwsParseException() {
         Date startDate = TypicalRecords.TYPICAL_START_DATE;
         Date endDate = TypicalRecords.TYPICAL_END_DATE;
-        DirectoryPath directoryPath = DirectoryPath.HOME_DIRECTORY;
+        DirectoryPath directoryPath = DirectoryPath.WORKING_DIRECTORY;
 
         CommandParserTestUtil.assertParseFailure(parser, WHITE_SPACE + PREFIX_DATE + " 3A-3B-19C9    ",
                 String.format(Date.MESSAGE_DATE_CONSTRAINTS, ExportExcelCommand.MESSAGE_USAGE));
@@ -38,7 +39,7 @@ public class ExportCommandParserTest {
                 WHITE_SPACE + PREFIX_DIR + " unrealistic\\directory",
                 String.format(Messages.MESSAGE_UNREALISTIC_DIRECTORY, ExportExcelCommand.MESSAGE_USAGE));
 
-        CommandParserTestUtil.assertParseFailure(parser, WHITE_SPACE + HOME_DIRECTORY_STRING,
+        CommandParserTestUtil.assertParseFailure(parser, WHITE_SPACE + WORKING_DIRECTORY_STRING,
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ExportExcelCommand.MESSAGE_USAGE));
 
         CommandParserTestUtil.assertParseFailure(parser, WHITE_SPACE + startDate.value + " " + endDate.value,
@@ -53,7 +54,7 @@ public class ExportCommandParserTest {
     public void parse_validArgs_returnsExportExcelCommand() {
         String startDate = TypicalRecords.TYPICAL_START_DATE.getValue();
         String endDate = TypicalRecords.TYPICAL_END_DATE.getValue();
-        String directoryPath = HOME_DIRECTORY_STRING;
+        String directoryPath = WORKING_DIRECTORY_STRING;
         //Case 1: return ExportExcelCommand()
         ExportExcelCommand expectedExportExcelCommand1 = new ExportExcelCommand();
         assertParseSuccess(parser,
