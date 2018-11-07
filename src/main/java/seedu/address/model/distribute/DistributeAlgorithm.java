@@ -1,6 +1,7 @@
 package seedu.address.model.distribute;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.person.Gender.VALID_GENDER_FEMALE;
 import static seedu.address.model.person.Gender.VALID_GENDER_MALE;
 
@@ -38,7 +39,7 @@ public class DistributeAlgorithm {
     private DistributeUtil distUtil = new DistributeUtil();
 
     public DistributeAlgorithm(Model model, Distribute distribute) throws CommandException {
-        requireNonNull(distribute);
+        requireAllNonNull(model, distribute);
         distUtil.setModel(model);
 
         int numOfGroups = distribute.getIndex();
@@ -84,6 +85,7 @@ public class DistributeAlgorithm {
     private void normalDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList,
                                     LinkedList<Person> personLinkedList,
                                     String groupName) throws CommandException {
+        requireAllNonNull(index, groupArrayList, personLinkedList, groupName);
         for (int i = index; i > 0; i--) { //number of groups to add into the groupArrayList
             ArrayList<Person> addPerson = new ArrayList<>();
             int paxInAGroup = personLinkedList.size() / i;
@@ -106,6 +108,7 @@ public class DistributeAlgorithm {
     private void genderDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList,
                                     LinkedList<Person> allPersonLinkList, String groupName)
             throws CommandException {
+        requireAllNonNull(index, groupArrayList, allPersonLinkList, groupName);
         LinkedList<Person> maleLinkList = new LinkedList<>();
         LinkedList<Person> femaleLinkList = new LinkedList<>();
         int loopCounter = 0;
@@ -148,6 +151,7 @@ public class DistributeAlgorithm {
     private void nationalityDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList,
                                          LinkedList<Person> personLinkedList, String groupName)
             throws CommandException {
+        requireAllNonNull(index, groupArrayList, personLinkedList, groupName);
         Map<Nationality, Integer> nationalityMap = distUtil.createNationalityMap(personLinkedList);
         int loopCounter = 0;
         for (Map.Entry<Nationality, Integer> entry : nationalityMap.entrySet()) {
@@ -170,6 +174,7 @@ public class DistributeAlgorithm {
     private void strictDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList,
                                     LinkedList<Person> personLinkedList, String groupName)
             throws CommandException {
+        requireAllNonNull(index, groupArrayList, personLinkedList, groupName);
         logger.log(Level.WARNING, "Distribution by Nationality and Gender will be implemented in v2.0");
         throw new CommandException(MESSAGE_TO_BE_IMPLEMENTED);
     }
