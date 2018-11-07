@@ -652,8 +652,8 @@ The following sequence diagram shows how the limit operation works:
 image::LimitSequenceDiagram.png[width:800]
 // end::addlimit[]
 // tag::deleteLimit[]
-=== deleteLimit feature
-==== Current Implementation
+==== deleteLimit feature
+===== Current Implementation
 This command is to delete an existing limit.
 The command will read in a limit with the input dates and delete the limit with the same dates by calling the `deleteLimit` function.
 
@@ -668,8 +668,8 @@ The following sequence diagram shows how the deleteLimit operation works:
 image::deleteLimitSequenceDiagram.png[width:800]
 // end::deleteLimit[]
 // tag::editLimit[]
-=== editLimit feature
-==== Current Implementation
+==== editLimit feature
+===== Current Implementation
 The editLimit command is to edit an existing limit.
 The command will read in a limit and replace the limit with the same dates by calliing the `updateLimit()` function.
 
@@ -682,8 +682,8 @@ The following sequence diagram shows how the limit operation works:
 image::editLimitSequenceDiagram.png[width:800]
 // end::editLimit[]
 // tag::addMonthlyLimit[]
-=== addMonthlyLimit feature
-==== Current Implementation
+==== addMonthlyLimit feature
+===== Current Implementation
 The addMonthlyLimit command is to add a monthly limit.
 The command will read in the monthly limit and store it by calling the `addLimit()` function.
 
@@ -698,8 +698,8 @@ The following sequence diagram shows how the limit operation works:
 image::addMonthlyLimitSequenceDiagram.png[width:800]
 // end::addMonthlyLimit[]
 // tag::editMonthlyLimit[]
-=== editMonthlyLimit feature
-==== Current Implementation
+==== editMonthlyLimit feature
+===== Current Implementation
 The editMonthlyLimit command is to edit the monthly limit.
 The command will read in the monthly limit and update the monthly limit by calling the `updateLimit()` function.
 
@@ -714,8 +714,8 @@ The following sequence diagram shows how the limit operation works:
 image::editMonthlyLimitSequenceDiagram.png[width:800]
 // end::editMonthlyLimit[]
 // tag::deleteMonthlyLimit[]
-=== deleteMonthlyLimit feature
-==== Current Implementation
+==== deleteMonthlyLimit feature
+===== Current Implementation
 The deleteMonthlyLimit command is to delete the monthly limit.
 The command will read in the monthly limit and update the monthly limit by calling the `deleteLimit()` function.
 
@@ -730,8 +730,8 @@ The following sequence diagram shows how the limit operation works:
 image::deleteMonthlyLimitSequenceDiagram.png[width:800]
 // end::deleteMonthlyLimit[]
 // tag::checkLimit[]
-=== checkLimit feature
-==== Current Implementation
+==== checkLimit feature
+===== Current Implementation
 This feature is to help the user to check all the limits stored inside the limitList. The function will call
 manualLimitCheck(), which will generate a string that contains all limits' information.
 
