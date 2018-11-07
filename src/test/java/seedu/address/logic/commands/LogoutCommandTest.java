@@ -15,8 +15,8 @@ import javafx.collections.ObservableList;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyProductDatabase;
 import seedu.address.model.ReadOnlyDistributorBook;
+import seedu.address.model.ReadOnlyProductDatabase;
 import seedu.address.model.distributor.Distributor;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.UniqueUserList;
