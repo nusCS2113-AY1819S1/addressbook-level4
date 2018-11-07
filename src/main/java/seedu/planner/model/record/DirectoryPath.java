@@ -2,10 +2,6 @@ package seedu.planner.model.record;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.logging.Logger;
-
-import seedu.planner.commons.core.LogsCenter;
-
 //@author nguyenngoclinhchi
 /**
  * File path is used to store the preferable location to store the Excel File when user want to export the Data
