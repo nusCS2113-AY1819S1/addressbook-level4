@@ -524,6 +524,7 @@ Examples:
 Displays graph which shows result of 'Finals' grade component of all CS2113 students.
 // end::grade[]
 
+// tag::notesmanagementdepth[]
 === Notes Management
 ==== Add Note : `note add`
 Adds a note to a module. +
@@ -632,10 +633,11 @@ This will list all notes saved in CS1231 module.
 Converts all exportable notes to CSV. +
 Format: `note export fn/FILE_NAME`
 
-- This command creates a <FILE_NAME>.csv file in the user directory. +
-- Directory: C:\Users\<UserName>\<FILE_NAME>.csv +
+- This command creates a <FILE_NAME>.csv file in the local storage. +
+- Directory: [Trajectory's path]\data\CSVexport\<FILE_NAME>.csv +
 - The format follows the Google Calendar's CSV import formatting. Hence, the user can import their notes to Google Calendar with this command.
 - Only notes with dates are exportable.
+// end::notesmanagementdepth[]
 
 === Viewing help : `help`
 
@@ -774,4 +776,3 @@ e.g. `note find k/bubble k/queue`
 * *Export notes* `note export fn/FILE_NAME` +
 e.g. `note export fn/notes`
 * *History* : `history`
-
