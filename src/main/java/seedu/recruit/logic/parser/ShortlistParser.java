@@ -10,12 +10,14 @@ import seedu.recruit.logic.commands.FilterCandidateCommand;
 import seedu.recruit.logic.commands.FilterCompanyCommand;
 import seedu.recruit.logic.commands.FindCandidateCommand;
 import seedu.recruit.logic.commands.FindCompanyCommand;
-import seedu.recruit.logic.commands.FindJobOfferCommand;
 import seedu.recruit.logic.commands.SelectCandidateCommand;
 import seedu.recruit.logic.commands.SelectCompanyCommand;
 import seedu.recruit.logic.commands.SelectJobCommand;
 import seedu.recruit.logic.commands.ShortlistCandidateCommand;
 import seedu.recruit.logic.commands.ShortlistCandidateInitializationCommand;
+import seedu.recruit.logic.commands.SortCandidateCommand;
+import seedu.recruit.logic.commands.SortCompanyCommand;
+import seedu.recruit.logic.commands.SortJobOfferCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 
 /**
@@ -35,6 +37,7 @@ public class ShortlistParser {
             throws ParseException {
         if (state.nextCommand.equals(ShortlistCandidateCommand.COMMAND_LOGIC_STATE)) {
             switch (commandWord) {
+
             case ShortlistCandidateCommand.COMMAND_WORD:
                 // prevents invalid arguments as confirm should not be accompanied with further arguments
                 if (!arguments.isEmpty()) {
@@ -50,6 +53,9 @@ public class ShortlistParser {
 
         } else if (state.nextCommand.equals(SelectCompanyCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST)) {
             switch (commandWord) {
+
+            case SortCompanyCommand.COMMAND_WORD:
+                return new SortCompanyCommandParser().parse(arguments);
 
             case FindCompanyCommand.COMMAND_WORD:
                 return new FindCompanyCommandParser().parse(arguments);
@@ -70,6 +76,9 @@ public class ShortlistParser {
         } else if (state.nextCommand.equals(SelectJobCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST)) {
             switch (commandWord) {
 
+            case SortJobOfferCommand.COMMAND_WORD:
+                return new SortJobOfferCommandParser().parse(arguments);
+
             case SelectJobCommand.COMMAND_WORD:
                 Index index = ParserUtil.parseIndex(arguments);
                 return new SelectJobCommand(index);
@@ -82,6 +91,9 @@ public class ShortlistParser {
 
         } else if (state.nextCommand.equals(SelectCandidateCommand.COMMAND_LOGIC_STATE)) {
             switch (commandWord) {
+
+            case SortCandidateCommand.COMMAND_WORD:
+                return new SortCandidateCommandParser().parse(arguments);
 
             case FindCandidateCommand.COMMAND_WORD:
                 return new FindCandidateCommandParser().parse(arguments);

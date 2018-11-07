@@ -10,6 +10,7 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_SALARY;
 import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
+import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.parser.Prefix;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
@@ -21,7 +22,7 @@ public class SortJobOfferCommand extends Command {
 
     public static final String COMMAND_WORD = "sortj";
 
-    public static final String MESSAGE_SUCCESS = "Sorted all job offers";
+    public static final String MESSAGE_SUCCESS = "Sorted all job offers.\n";
 
     public static final String MESSAGE_TAG_USAGE = "Please sort by using one of the available tags: "
             + "Company Name " + PREFIX_COMPANY_NAME
@@ -41,9 +42,23 @@ public class SortJobOfferCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         requireNonNull(model);
-        EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
         model.sortJobOffers(prefixToSort);
         model.commitCompanyBook();
+        if (ShortlistCandidateInitializationCommand.isShortlisting()) {
+            LogicManager.setLogicState(SelectJobCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST);
+            return new CommandResult(MESSAGE_SUCCESS
+                    + SelectCompanyCommand.MESSAGE_SELECT_COMPANY_SUCCESS_NEXT_STEP
+                    + SelectJobCommand.MESSAGE_USAGE);
+        }
+
+        if (DeleteShortlistedCandidateInitializationCommand.isDeleting()) {
+            LogicManager.setLogicState(SelectJobCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST_DELETE);
+            return new CommandResult(MESSAGE_SUCCESS
+                    + SelectCompanyCommand.MESSAGE_SELECT_COMPANY_SUCCESS_NEXT_STEP
+                    + SelectJobCommand.MESSAGE_USAGE);
+        }
+
+        EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

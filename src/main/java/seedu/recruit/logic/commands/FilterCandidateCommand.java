@@ -58,7 +58,9 @@ public class FilterCandidateCommand extends Command {
         if (ShortlistCandidateInitializationCommand.isShortlisting()) {
             LogicManager.setLogicState(SelectCandidateCommand.COMMAND_LOGIC_STATE);
             return new CommandResult(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
-                    model.getFilteredCandidateList().size()) + SelectCandidateCommand.MESSAGE_USAGE);
+                    model.getFilteredCandidateList().size())
+                    + SelectJobCommand.MESSAGE_SELECT_JOB_SUCCESS_NEXT_STEP_IN_SHORTLIST
+                    + SelectCandidateCommand.MESSAGE_USAGE);
         }
 
         EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());

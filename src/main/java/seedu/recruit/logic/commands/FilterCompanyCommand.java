@@ -46,7 +46,17 @@ public class FilterCompanyCommand extends Command {
         if (ShortlistCandidateInitializationCommand.isShortlisting()) {
             LogicManager.setLogicState(SelectCompanyCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST);
             return new CommandResult(String.format(Messages.MESSAGE_COMPANIES_LISTED_OVERVIEW,
-                    model.getFilteredCompanyList().size()) + SelectCompanyCommand.MESSAGE_USAGE);
+                    model.getFilteredCompanyList().size())
+                    + ShortlistCandidateInitializationCommand.MESSAGE_NEXT_STEP
+                    + SelectCompanyCommand.MESSAGE_USAGE);
+        }
+
+        if (DeleteShortlistedCandidateInitializationCommand.isDeleting()) {
+            LogicManager.setLogicState(SelectCompanyCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST_DELETE);
+            return new CommandResult(String.format(Messages.MESSAGE_COMPANIES_LISTED_OVERVIEW,
+                    model.getFilteredCompanyList().size())
+                    + DeleteShortlistedCandidateInitializationCommand.MESSAGE_NEXT_STEP
+                    + SelectCompanyCommand.MESSAGE_USAGE);
         }
 
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
