@@ -25,30 +25,31 @@ public class TypicalProducts {
 
     public static final Product ORANGE = new ProductBuilder().withName("Orange")
             .withInfo("fruit").withDistributor("Ah Huat")
-            .withSerialNumber("001")
+            .withSerialNumber("001").withRemainingItems("12")
             .withTags("healthy").build();
     public static final Product GRAPE = new ProductBuilder().withName("Grape")
-            .withInfo("fruit")
-            .withDistributor("Ah Beng").withSerialNumber("002")
+            .withInfo("fruit").withDistributor("Ah Beng").withSerialNumber("002").withRemainingItems("2")
             .withTags("healthy").build();
     public static final Product CHOCOLATE = new ProductBuilder().withName("Chocolate").withSerialNumber("003")
-            .withDistributor("Ahmad").withInfo("snack").build();
+            .withDistributor("Ahmad").withRemainingItems("22").withInfo("snack").build();
     public static final Product DORITOS = new ProductBuilder().withName("Doritos").withSerialNumber("004")
-            .withDistributor("Snack Shack").withInfo("snack").withTags("unhealthy").build();
+            .withDistributor("Snack Shack").withInfo("snack").withRemainingItems("10").withTags("unhealthy").build();
 
     // Manually added
     public static final Product MILO = new ProductBuilder().withName("Milo").withSerialNumber("005")
-            .withDistributor("Ali").withInfo("morning").build();
+            .withDistributor("Ali").withInfo("morning").withRemainingItems("10").build();
     public static final Product KOPI = new ProductBuilder().withName("Kopi").withSerialNumber("006")
-            .withDistributor("Ah Seng").withInfo("morning").build();
+            .withDistributor("Ah Seng").withInfo("morning").withRemainingItems("10").build();
 
     // Manually added - Product's details found in {@code CommandTestUtil}
     public static final Product APPLE =
             new ProductBuilder().withName(VALID_NAME_APPLE).withSerialNumber(VALID_SN_APPLE)
-            .withDistributor(VALID_DIST_APPLE).withInfo(VALID_INFO_APPLE).withTags(VALID_TAG_HEALTHY).build();
+            .withDistributor(VALID_DIST_APPLE).withInfo(VALID_INFO_APPLE).withRemainingItems("11")
+    .withTags(VALID_TAG_HEALTHY).build();
     public static final Product BANANA =
             new ProductBuilder().withName(VALID_NAME_BANANA).withSerialNumber(VALID_SN_BANANA)
-            .withDistributor(VALID_DIST_BANANA).withInfo(VALID_INFO_BANANA).withTags(VALID_TAG_HEALTHY, VALID_TAG_SWEET)
+            .withDistributor(VALID_DIST_BANANA).withInfo(VALID_INFO_BANANA).withRemainingItems("1")
+                    .withTags(VALID_TAG_HEALTHY, VALID_TAG_SWEET)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

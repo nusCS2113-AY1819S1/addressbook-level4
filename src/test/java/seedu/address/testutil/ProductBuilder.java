@@ -80,9 +80,17 @@ public class ProductBuilder {
     }
 
     /**
+     * Sets the {@code Email} of the {@code Product} that we are building.
+     */
+    public ProductBuilder withDistributor(String email) {
+        this.distname = new DistributorName(email);
+        return this;
+    }
+
+    /**
      * Sets the {@code RemainingItems} of the {@code Product} that we are building.
      */
-    public ProductBuilder withDistributor(String remainingItems) {
+    public ProductBuilder withRemainingItems(String remainingItems) {
         this.remainingItems = new RemainingItems(remainingItems);
         return this;
     }
