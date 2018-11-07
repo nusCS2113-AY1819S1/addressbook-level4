@@ -42,7 +42,7 @@ public class AddReminderCommand extends Command {
         } catch (DuplicateReminderException e) {
             return new CommandResult(e.getExceptionMessage());
         }
-        model.commitAddressBook();
+        model.commitSalesHistory();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getReminderMessage(), toAdd.getReminderTime()));
     }
 

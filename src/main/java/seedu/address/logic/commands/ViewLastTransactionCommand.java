@@ -6,7 +6,7 @@ import seedu.address.model.Model;
 import seedu.address.model.timeidentifiedclass.Transaction;
 
 /**
- * Javadoc
+ * This command enables us to quickly view the last transaction
  */
 public class ViewLastTransactionCommand extends Command {
 

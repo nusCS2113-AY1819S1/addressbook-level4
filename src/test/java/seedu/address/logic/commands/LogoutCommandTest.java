@@ -27,6 +27,7 @@ import seedu.address.model.login.exceptions.UserNotFoundException;
 import seedu.address.model.product.Product;
 import seedu.address.model.timeidentifiedclass.Reminder;
 import seedu.address.model.timeidentifiedclass.Transaction;
+import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
 
 //@@author Amirul
 public class LogoutCommandTest {
@@ -271,7 +272,7 @@ public class LogoutCommandTest {
             return null;
         }
 
-        public String getDaysTransactions(String day) {
+        public String getDaysTransactionsAsString(String day) {
             fail("This method should not be called.");
             return null;
         }
@@ -303,6 +304,16 @@ public class LogoutCommandTest {
         @Override
         public ArrayList<Reminder> getOverdueRemindersForThread() {
             return null;
+        }
+
+        @Override
+        public String getTransactionAsString(String date) throws InvalidTimeFormatException {
+            return null;
+        }
+
+        @Override
+        public void commitSalesHistory() {
+            fail("This method should not be called.");
         }
 
         @Override
