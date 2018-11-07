@@ -345,7 +345,7 @@ public class LoginCommandTest {
 
         @Override
         public void commitSalesHistory() {
-
+            fail("This method should not be called");
         }
 
         @Override
@@ -392,7 +392,7 @@ public class LoginCommandTest {
 
         @Override
         public void commitSalesHistory() {
-
+            fail("This should not be called.");
         }
 
         @Override

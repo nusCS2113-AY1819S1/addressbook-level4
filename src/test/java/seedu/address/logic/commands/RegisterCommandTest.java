@@ -337,7 +337,7 @@ public class RegisterCommandTest {
 
         @Override
         public void commitSalesHistory() {
-
+            fail("This method should not be called");
         }
 
         @Override
@@ -373,7 +373,7 @@ public class RegisterCommandTest {
 
         @Override
         public void commitSalesHistory() {
-
+            fail("This method should not be called.");
         }
 
         @Override

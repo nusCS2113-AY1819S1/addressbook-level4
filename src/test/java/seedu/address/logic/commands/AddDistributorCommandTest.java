@@ -230,28 +230,27 @@ public class AddDistributorCommandTest {
 
         @Override
         public void addTransaction(Transaction transaction) {
-            fail("This method should not be called.");
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public Transaction getLastTransaction() {
-            fail("This method should not be called.");
-            return null;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void commitSalesHistory() {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addReminder(Reminder reminder) {
-            fail("This method should not be called.");
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override

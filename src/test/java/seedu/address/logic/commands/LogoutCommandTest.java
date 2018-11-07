@@ -313,7 +313,7 @@ public class LogoutCommandTest {
 
         @Override
         public void commitSalesHistory() {
-
+            fail("This method should not be called.");
         }
 
         @Override
