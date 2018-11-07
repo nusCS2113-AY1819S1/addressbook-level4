@@ -23,7 +23,7 @@ public class TimeIdentifiedClassTest {
     }
 
     @Test
-    public void isValidMonth_invalidMonths() {
+    public void isValidMonthInvalid() {
         // null, empty, and whitespaces-only months
         assertFalse(TimeIdentifiedClass.isValidMonth(null));
         assertFalse(TimeIdentifiedClass.isValidMonth(""));
@@ -41,7 +41,7 @@ public class TimeIdentifiedClassTest {
     }
 
     @Test
-    public void isValidMonth_validMonths() {
+    public void isValidMonthValid() {
         // 1st month
         assertTrue(TimeIdentifiedClass.isValidMonth("01"));
         // 12th month
@@ -51,7 +51,7 @@ public class TimeIdentifiedClassTest {
     }
 
     @Test
-    public void isValidDay_invalidDays() {
+    public void isValidDayInvalid() {
         // null, empty, and whitespace-only days
         assertFalse(TimeIdentifiedClass.isValidDay(null));
         assertFalse(TimeIdentifiedClass.isValidDay(""));
@@ -69,7 +69,7 @@ public class TimeIdentifiedClassTest {
     }
 
     @Test
-    public void isValidDay_validDays() {
+    public void isValidDayValid() {
         // day 1
         assertTrue(TimeIdentifiedClass.isValidDay("01"));
         // day 31
@@ -79,7 +79,7 @@ public class TimeIdentifiedClassTest {
     }
 
     @Test
-    public void isValidYear_invalidYears() {
+    public void isValidYearInvalid() {
         // null, empty and whitespace-only years
         assertFalse(TimeIdentifiedClass.isValidYear(null));
         assertFalse(TimeIdentifiedClass.isValidYear(""));
@@ -93,7 +93,7 @@ public class TimeIdentifiedClassTest {
     }
 
     @Test
-    public void isValidYear_validYears() {
+    public void isValidYearValid() {
         // year 0000
         assertTrue(TimeIdentifiedClass.isValidYear("0000"));
         // year 9999
@@ -103,7 +103,7 @@ public class TimeIdentifiedClassTest {
     }
 
     @Test
-    public void isValidDate_invalid() {
+    public void isValidDateInvalid() {
         // null, empty, whitespace-only dates
         assertFalse(TimeIdentifiedClass.isValidDate(null));
         assertFalse(TimeIdentifiedClass.isValidDate(""));
@@ -129,7 +129,7 @@ public class TimeIdentifiedClassTest {
     }
 
     @Test
-    public void isValidDate_valid() {
+    public void isValidDateValid() {
         // 1st jan
         assertTrue(TimeIdentifiedClass.isValidDate("2018/01/01"));
         // 31st december
@@ -143,7 +143,7 @@ public class TimeIdentifiedClassTest {
     }
 
     @Test
-    public void isValidDateAndTime_invalid() {
+    public void isValidDateAndTimeInvalid() {
         // null, empty, and whitespace only date and time
         assertFalse(TimeIdentifiedClass.isValidDateAndTime(null));
         assertFalse(TimeIdentifiedClass.isValidDateAndTime(""));
@@ -163,7 +163,7 @@ public class TimeIdentifiedClassTest {
     }
 
     @Test
-    public void isValidDateAndTime_valid() {
+    public void isValidDateAndTimeValid() {
         // typical date and time
         assertTrue(TimeIdentifiedClass.isValidDateAndTime("2018/07/23 12:53:54"));
         // new year's eve
