@@ -15,6 +15,12 @@ import seedu.address.model.timeidentifiedclass.exceptions.ClosedTransactionExcep
  */
 public class AddTransactionCommandParser implements Parser<AddTransactionCommand> {
 
+    /**
+     * This method checks if the args contains an empty product name.
+     * This method is to be called on a args with no trailing whitespaces.
+     * @param args the argument itself
+     * @return true if and only if the args ends with "pr/"
+     */
     private boolean containsEmptyProductAtEnd(String args) {
         int argLength = args.length();
         if (argLength < 3) {
@@ -27,6 +33,7 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
         }
         return false;
     }
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddTransactionCommand
      * and returns an AddTransactionCommand object for execution.

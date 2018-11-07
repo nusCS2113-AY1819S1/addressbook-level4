@@ -30,7 +30,7 @@ public class ViewAllTransactionsCommand extends Command {
         try {
             return new CommandResult(model.getDaysTransactionsAsString(date));
         } catch (InvalidTimeFormatException e) {
-            throw new CommandException("");
+            throw new CommandException("Date is invalid!");
         }
     }
 }
