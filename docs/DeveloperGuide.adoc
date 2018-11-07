@@ -351,7 +351,7 @@ image::UserLoginActivityDiagram.png[width="650"]
 but prevent TAs from seeing it, although TAs can assign marks.
 ** Cons: Harder to implement.
 
-//zcstart
+// tag::classmanagementbrief[]
 === Class Add feature
 ==== Current Implementation
 
@@ -396,7 +396,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 image::classaddlist.PNG[width="800"]
 
-//zcend
+// end::classmanagementbrief[]
 
 // tag::datatograph[]
 === Gradebook Graph feature
@@ -2141,7 +2141,7 @@ Steps 1a1-1a2 are repeated until the data entered is correct.
 +
 Use case resumes from step 1.
 
-
+// tag::classmanagementdepth[]
 [discrete]
 === Use case: Add Class
 
@@ -2432,6 +2432,7 @@ Use case ends.
 ** 1a1. System shows ‘invalid format’ error.
 +
 Use case resumes at step 1.
+// end::classmanagementdepth[]
 
 // tag::notesmanagementdepth[]
 [discrete]

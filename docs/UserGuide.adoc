@@ -51,6 +51,39 @@ Format: `help`
 
 === Student and Course Management
 
+==== Add a course : `course add`
+Adds a student to the system. +
+Format: course_add n/COURSE_NAME c/COURSE_CODE f/FACULTY_NAME
+****
+* Course code must be unique.
+* Course code may contain letters only.
+****
+Examples:
+
+* `course add n/Computer Engineering c/CEG f/School of Computing`
+* `course add n/Computer Science c/CS f/School of Computing`
+
+==== List all courses : `course list`
+Shows a list of all courses in the system. +
+Format: course list
+
+==== List all courses : `course liststudents`
+Shows a list of all students ordered by course. +
+Format: course liststudent
+
+==== Remove course : `course delete`
+Deletes the specified course from the system +
+Format: course delete c/COURSE_CODE
+
+****
+* Course must exist.
+****
+
+Examples:
+
+* `course delete c/CEG`
+Deletes CEG from the course directory, if it exists.
+
 ==== Add Student : `student add`
 Adds a student to the system. +
 Format: student add n/NAME i/ADMIN_NUMBER c/COURSE_CODE p/MOBILE_NUMBER e/EMAIL a/ADDRESS
@@ -112,38 +145,7 @@ Examples:
 * `student export C:\export`
 Exports all students in .csv format to the 'export' folder in C drive.
 
-==== Add a course : `course add`
-Adds a student to the system. +
-Format: course_add n/COURSE_NAME c/COURSE_CODE f/FACULTY_NAME
-****
-* Course code must be unique.
-* Course code may contain letters only.
-****
-Examples:
 
-* `course add n/Computer Engineering c/CEG f/School of Computing`
-* `course add n/Computer Science c/CS f/School of Computing`
-
-==== List all courses : `course list`
-Shows a list of all courses in the system. +
-Format: course list
-
-==== List all courses : `course liststudents`
-Shows a list of all students ordered by course. +
-Format: course liststudent
-
-==== Remove course : `course delete`
-Deletes the specified course from the system +
-Format: course delete c/COURSE_CODE
-
-****
-* Course must exist/
-****
-
-Examples:
-
-* `course delete CEG`
-Deletes CEG from the course directory, if it exists.
 
 
 === Module Management
@@ -268,7 +270,7 @@ Examples:
 Assigns the student with matric no. `A0171234B` as a TA.
 * `module assign mc/CS2113 e/e0191234@u.nus.edu` +
 Assigns the student with email `e0191234@u.nus.edu` as a TA.
-
+// tag::classmanagementdepth[]
 === Class Management
 ==== Add Class : `class add`
 Creates a class and assigns it to a module for the system. +
@@ -402,7 +404,7 @@ Examples:
 
 * `class listattendance cn/T16 mc/CG1111` +
 Displays the class attendance list for the class T16 for the module CG1111
-
+// end::classmanagementdepth[]
 === Grade Management
 ==== Add Grade Component : `gradebook add`
 Creates a grade item to a module code. +
