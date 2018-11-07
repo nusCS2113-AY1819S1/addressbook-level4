@@ -33,7 +33,7 @@ import seedu.address.model.event.Event;
  */
 public class TypicalEvents {
 
-    //Sorted list in order should be: CARL, ELLE, ALICE, DANIEL, FIONA, BENSON, GEORGE,
+    //Sorted list in order should be: DANIEL, CARL, ELLE, BENSON, ALICE, FIONA, GEORGE
     public static final Event ALICE = new EventBuilder().withName("Inter Neighbourhood Cooking Competition")
             .withContact("Alice Pauline")
             .withVenue("123, Jurong West Ave 6, #08-111")
@@ -43,7 +43,7 @@ public class TypicalEvents {
             .withStatus("NULL")
             .withComment("{span}Comment Section{/span}{ol}{/ol}")
             .withTags("friends")
-            .withAttendees("Peter Parker").build();
+            .withAttendees("admin", "Peter Parker").build();
     public static final Event BENSON = new EventBuilder().withName("Dancing Tryouts")
             .withContact("Benson Meier")
             .withVenue("311, Clementi Ave 2, #02-25")
@@ -54,7 +54,6 @@ public class TypicalEvents {
             .withComment("{span}Comment Section{/span}{ol}{/ol}")
             .withTags("owesMoney", "friends")
             .withAttendees("Mary Kate").build();
-
     public static final Event CARL = new EventBuilder().withName("Frisbee Competition")
             .withContact("Carl Kurz")
             .withPhone("95352563")

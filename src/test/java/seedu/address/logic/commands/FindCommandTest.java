@@ -64,7 +64,7 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        Map<Prefix, List<String>> keywordsMap1 = new HashMap<>();
+        Map<Prefix, List<String> > keywordsMap1 = new HashMap<>();
         Map<Prefix, List<String> > keywordsMap2 = new HashMap<>();
         keywordsMap1.put(PREFIX_KEYWORD, Collections.singletonList("first"));
         keywordsMap2.put(PREFIX_KEYWORD, Collections.singletonList("second"));

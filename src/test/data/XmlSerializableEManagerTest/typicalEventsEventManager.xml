@@ -11,6 +11,7 @@
         <status>NULL</status>
         <comment>{span}Comment Section{/span}{ol}{/ol}</comment>
         <tagged>friends</tagged>
+        <attending>admin</attending>
         <attending>Peter Parker</attending>
     </events>
     <events>

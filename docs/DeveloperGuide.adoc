@@ -555,7 +555,8 @@ Step 4: The event page is reloaded and display the newly added event in the corr
 `find` can search for any data with the default keywords and . If specific prefix is added, find can search for event that must contain that keyword in that specific field
 
 [NOTE]
-If there are more than 1 prefix of the same type, for example, `find n/new n/dark n/meeting`, this will be automatically combined together, which means this command will be assumed to be the same as `find n/new dark meeting`
+If there are more than 1 prefix of the same type, for example, `find n/new n/dark n/meeting`, this will be automatically combined together, which means this command will be assumed to be the same as `find n/new dark meeting` +
+Current version implementation using logic AND operator for different prefixes choice.
 
 ==== Aspect: How to improve search
 * **Alternative 1 (current choice):** Modify the predicate to display the event that date contains one of the keywords
@@ -564,7 +565,7 @@ If there are more than 1 prefix of the same type, for example, `find n/new n/dar
 
 ==== Future enhancement:
 * Search for contained or exact keywords option
-* Search can include option
+* Search with  both `logic AND and OR operator` with different prefixes
 * Search for time range
 //end::findEnhancement[]
 
