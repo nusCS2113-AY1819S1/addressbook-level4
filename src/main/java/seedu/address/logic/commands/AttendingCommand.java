@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEE;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,7 @@ public class AttendingCommand extends Command {
 
         String currUsername = model.getUsername().toString();
         List<String> currUsernameList = new ArrayList<>();
-        currUsernameList.add(currUsername);
+        currUsernameList.addAll(Arrays.asList(currUsername.trim().split("\\s+")));
         Map<Prefix, List<String> > keywordsMap = new HashMap<>();
         keywordsMap.put(PREFIX_ATTENDEE, currUsernameList);
         EventContainsKeywordsPredicate predicate = new EventContainsKeywordsPredicate(keywordsMap);
