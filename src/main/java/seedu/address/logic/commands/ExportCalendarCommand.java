@@ -54,7 +54,7 @@ public class ExportCalendarCommand extends Command {
 
     public static final String MESSAGE_ZERO_EVENT_REGISTERED = "User %1$s has not registered for any event";
 
-    private static final String CALENDAR_FILE_PATH = "data/";
+    private static final String CALENDAR_FILE_PATH = "data\\";
 
     private final String fileName;
 
