@@ -684,7 +684,7 @@ After exhausting all person from the same nationality, we can repeat the same pr
 We will now be able to achieve _n_ groups with all students distributed randomly with balanced nationality. +
 
 ===== Aspect: Distribute Students Equally with Balanced Gender & Nationality Explanation
-Coming in v1.4
+Coming in v2.0
 
 // end::distribute[]
 

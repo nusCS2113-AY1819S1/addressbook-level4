@@ -1,13 +1,13 @@
-package seedu.address.commons.util;
+package seedu.address.model.distribute;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.util.DistributeUtil.GROUP_LOCATION;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GENDER_FLAG_WORD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_FEMALE;
+import static seedu.address.model.distribute.DistributeUtil.GROUP_LOCATION;
 import static seedu.address.model.person.Gender.VALID_GENDER_MALE;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.DANIEL;

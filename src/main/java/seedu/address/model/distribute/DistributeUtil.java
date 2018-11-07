@@ -1,4 +1,4 @@
-package seedu.address.commons.util;
+package seedu.address.model.distribute;
 
 import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.toMap;
