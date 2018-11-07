@@ -26,6 +26,7 @@ public class DateTime {
 
     //Create DateTime from the input
     public DateTime(String dateTimeAsString) {
+        dateFormat.setLenient(false);
         Date dateTime1 = new Date();
         //Check error
         requireNonNull(dateTimeAsString);
