@@ -16,6 +16,7 @@ preferences.json
 classes/
 /data/
 /bin/
+/import_export/
 src/main/resources/docs/
 out/
 config.json
