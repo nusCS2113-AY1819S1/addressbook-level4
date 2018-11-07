@@ -170,7 +170,7 @@ Example: +
 `list dep Admin` +
 `list dep Admin Finance`
 
-// tag:: addevent[]
+// tag::addevent[]
 === Adding an event: `addEvent`
 Priority level: `default`,`manager`
 
@@ -194,9 +194,9 @@ Example:
 
 * `addEvent n/Board Meeting d/Weekly Meeting l/Conference Room 1 date/2018-09-28 s/12:00 e/23:59` +
 Creates an event named Board Meeting at Conference Room 1 at 2018-09-28, 12:00 to 23:59.
-// end:: addevent[]
+// end::addevent[]
 
-// tag:: editevent[]
+// tag::editevent[]
 === Editing an event: `editEvent`
 Priority level: `default`,`manager`
 
@@ -217,7 +217,7 @@ index *must be a positive integer* 1, 2, 3, ... +
 Examples:
 
 * `editEvent 10 n/Weekly Meeting d/Check on progress l/Conference Room 2 date/2018-09-10 s/12:00 e/14:00`
-// end:: editevent[]
+// end::editevent[]
 
 === Deleting an event : `deleteEvent`
 Priority level: `default`,`manager`
@@ -255,7 +255,7 @@ Example:
 
 * `sort name`
 
-// tag:: invite[]
+// tag::invite[]
 === Inviting employee to event: `invite`
 
 Priority level: `all` +
@@ -275,9 +275,9 @@ image::InviteCommandGuide.png[width="800"]
 * Employee should not have already been invited to the selected event.
 * Event invited to should not clash with the selected employee's schedule or other events at the same location and time.
 ****
-// end:: invite[]
+// end::invite[]
 
-// tag:: remove[]
+// tag::remove[]
 === Removing employee from event: `remove`
 Priority level: `default`,`manager`
 
@@ -294,9 +294,9 @@ Remove 1st employee at employee list from 2nd event at event list
 * The index *must be a positive integer* 1, 2, 3, ...
 * The employee to be remove must be previously invited to an event in order to be removed.
 ****
-// end:: remove[]
+// end::remove[]
 
-// tag:: select[]
+// tag::select[]
 === Selecting a person: `select`
 Priority level: `all`
 
@@ -327,7 +327,7 @@ view all events of employee at index 1 in August
 view all events of employee at index 1 in 2018
 * `select 1 y/2018 m/08` +
 view all events of employee at index 1 in August 2018
-// end:: select[]
+// end::select[]
 
 === Locating persons by name: `find`
 Priority level: all

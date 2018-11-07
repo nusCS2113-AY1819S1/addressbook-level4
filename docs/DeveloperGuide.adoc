@@ -267,7 +267,7 @@ image::SortSequenceDiagram.png[width="650"]
 // end::Sorting[]
 
 
-// tag:: Invite[]
+// tag::Invite[]
 === Invite feature
 
 ==== Current Implementation
@@ -361,7 +361,7 @@ The same concept can also be applied to events, being able to invite one person 
 Implementation of this additional feature would require changes to both `InviteCommandParser` and `InviteCommand#execute`. Additionally, handling of clashing events needs to be considered as it now involves more than one participants.
 // end::Invite[]
 
-// tag:: Select[]
+// tag::Select[]
 === Select feature
 
 ==== Current Implementation
@@ -401,7 +401,7 @@ Step 10. The `SelectCommand#execute` finally returns a `CommandResult` with a su
 The sequence diagram below illustrates the execution of the `invite` command.
 
 
-// end:: Select[]
+// end::Select[]
 
 
 === List Feature
