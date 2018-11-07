@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +19,7 @@ import seedu.recruit.commons.core.Config;
 import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.GuiSettings;
 import seedu.recruit.commons.core.LogsCenter;
+import seedu.recruit.commons.events.logic.UserAuthenticatedEvent;
 import seedu.recruit.commons.events.ui.ExitAppRequestEvent;
 import seedu.recruit.commons.events.ui.FocusOnCandidateBookRequestEvent;
 import seedu.recruit.commons.events.ui.FocusOnCompanyBookRequestEvent;
@@ -29,7 +31,6 @@ import seedu.recruit.commons.events.ui.ShowLastViewedBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowShortlistPanelRequestEvent;
 import seedu.recruit.commons.events.ui.SwitchBookRequestEvent;
 import seedu.recruit.logic.Logic;
-import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.SwitchBookCommand;
 import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.candidate.Candidate;
@@ -44,16 +45,14 @@ public class MainWindow extends UiPart<Stage> {
     //Tracks whether an instance of MainWindow exists
     private static boolean exists = false;
 
-    private static final String WELCOME_MESSAGE = "Welcome to RecruitBook!";
-
     private static final String WELCOME_AUTHENTICATE_MESSAGE = "RecruitBook is password-protected.\n"
             + "Enter admin password to continue.";
 
     private static final String FXML = "MainWindow.fxml";
     private static String currentBook = "candidateBook";
     private final Logger logger = LogsCenter.getLogger(getClass());
-    private final ObservableList<Candidate> masterCandidateList;
-    private final ObservableList<JobOffer> masterJobList;
+    private ObservableList<Candidate> masterCandidateList = FXCollections.observableArrayList();
+    private ObservableList<JobOffer> masterJobList = FXCollections.observableArrayList();
 
     private Stage primaryStage;
 
@@ -110,8 +109,6 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
         registerAsAnEventHandler(this);
 
-        masterCandidateList = logic.getMasterCandidateList();
-        masterJobList = logic.getMasterJobList();
         helpWindow = new HelpWindow();
         emailPreview = new EmailPreview();
     }
@@ -163,9 +160,7 @@ public class MainWindow extends UiPart<Stage> {
         masterListPlaceholder.getChildren().add(getMasterCandidateListPanel().getRoot());
         panelViewPlaceholder.getChildren().add(getCandidateDetailsPanel().getRoot());
 
-        ResultDisplay resultDisplay =
-                LogicManager.getState().nextCommand.equals("authenticate")
-                        ? new ResultDisplay(WELCOME_AUTHENTICATE_MESSAGE) : new ResultDisplay(WELCOME_MESSAGE);
+        ResultDisplay resultDisplay = new ResultDisplay(WELCOME_AUTHENTICATE_MESSAGE);
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(
@@ -209,6 +204,8 @@ public class MainWindow extends UiPart<Stage> {
         ResultDisplay resultDisplay = new ResultDisplay("");
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
     }
+
+
 
     /**
      * Handles the menu Switch Book from Company Book to Candidate Book.
@@ -486,6 +483,21 @@ public class MainWindow extends UiPart<Stage> {
     private void handleShowLastViewedBookEvent (ShowLastViewedBookRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         switchToLastViewedBook();
+    }
+
+    /**
+     * Handles user authentication event to show master candidate list and master job list
+     */
+
+    @Subscribe
+    private void handleUserAuthenticatedEvent(UserAuthenticatedEvent event) {
+        StatusBarFooter statusBarFooter = new StatusBarFooter(
+                prefs.getCandidateBookFilePath(), prefs.getCompanyBookFilePath(),
+                logic.getFilteredPersonList().size(), logic.getFilteredCompanyList().size());
+        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+        masterJobList = logic.getMasterJobList();
+        masterCandidateList = logic.getMasterCandidateList();
+        switchToMasterCandidateList();
     }
 
     /**

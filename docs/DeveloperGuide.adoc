@@ -307,6 +307,13 @@ Step 3. The user executes ...
 ===== Aspect: How add/delete feature executes
 
 ===== Aspect: Data structure to support the add/delete feature
+* **Alternative 1 (current choice):** Create a new list object to store objects e.g. `UniqueCompanyList`
+** Pros: Easy to implement, allows for manipulation of data within the data structure (e.g) sorting.
+Also allows us to define a stricter form duplicity between objects.
+** Cons: Storing objects in a list makes certain operations O(n) e.g. delete operation searches the whole list to find the exact object to remove from list.
+* **Alternative 2:** Use a HashTable to store objects
+** Pros: Delete operation is O(1). Checking for duplicates before adding is also O(1) since HashTable does not allow duplicates
+** Cons: Can't really manipulate data in the HashTable.
 
 // end::add/delete[]
 
@@ -875,8 +882,8 @@ In `EmailContentSelectionCommand` phase, depending on `EmailUtil#areRecipientsCa
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
-
-The undo/redo mechanism is facilitated by `VersionedCandidateBook`.
+===== CandidateBook
+The undo/redo mechanism for changes made to CandidateBook is facilitated by `VersionedCandidateBook`.
 It extends `CandidateBook` with an undo/redo history, stored internally as an `candidateBookStateList` and `currentStatePointer`.
 Additionally, it implements the following operations:
 
@@ -886,24 +893,36 @@ Additionally, it implements the following operations:
 
 These operations are exposed in the `Model` interface as `Model#commitCandidateBook()`, `Model#undoCandidateBook()` and `Model#redoCandidateBook()` respectively.
 
+===== CompanyBook
+
+The undo/redo mechanism for changes made to CompanyBook is facilitated by `VersionedCompanyBook`.
+It extends `CompanyBook` with an undo/redo history, stored internally as an `companyBookStateList` and `currentStatePointer`.
+Additionally, it implements the following operations:
+
+* `VersionedCompanyBook#commit()` -- Saves the current company book state in its history.
+* `VersionedCompanyBook#undo()` -- Restores the previous company book state from its history.
+* `VersionedCompanyBook#redo()` -- Restores a previously undone company book state from its history.
+
+These operations are exposed in the `Model` interface as `Model#commitCompanyBook()`, `Model#undoCompanyBook()`
+
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. The `VersionedCandidateBook` will be initialized with the initial candidate book state, and the `currentStatePointer` pointing to that single candidate book state.
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `delete 5` command to delete the 5th candidate in the candidate book. The `delete` command calls `Model#commitCandidateBook()`, causing the modified state of the candidate book after the `delete 5` command executes to be saved in the `candidateBookStateList`, and the `currentStatePointer` is shifted to the newly inserted candidate book state.
+Step 2. The user executes `deletec 5` command to delete the 5th candidate in the candidate book. The `deletec` command calls `Model#commitCandidateBook()`, causing the modified state of the candidate book after the `deletec 5` command executes to be saved in the `candidateBookStateList`, and the `currentStatePointer` is shifted to the newly inserted candidate book state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `addc n/David ...` to add a new candidate. The `add` command also calls `Model#commitCandidateBook()`, causing another modified candidate book state to be saved into the `candidateBookStateList`.
+Step 3. The user executes `addc`, `n/David ...` to add a new candidate. The `addc` command also calls `Model#commitCandidateBook()`, causing another modified candidate book state to be saved into the `candidateBookStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
 If a command fails its execution, it will not call `Model#commitCandidateBook()`, so the candidate book state will not be saved into the `candidateBookStateList`.
 
-Step 4. The user now decides that adding the candidate was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoCandidateBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous candidate book state, and restores the candidate book to that state.
+Step 4. The user now decides that adding the candidate was a mistake, and decides to undo that action by executing the `undoc` command. The `undoc` command will call `Model#undoCandidateBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous candidate book state, and restores the candidate book to that state.
 
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
@@ -914,16 +933,16 @@ The following sequence diagram shows how the undo operation works:
 
 image::UndoRedoSequenceDiagram.png[width="800"]
 
-The `redo` command does the opposite -- it calls `Model#redoCandidateBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the candidate book to that state.
+The `redoc` command does the opposite -- it calls `Model#redoCandidateBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the candidate book to that state.
 
 [NOTE]
-If the `currentStatePointer` is at index `candidateBookStateList.size() - 1`, pointing to the latest candidate book state, then there are no undone candidate book states to restore. The `redo` command uses `Model#canRedoCandidateBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+If the `currentStatePointer` is at index `candidateBookStateList.size() - 1`, pointing to the latest candidate book state, then there are no undone candidate book states to restore. The `redoc` command uses `Model#canRedoCandidateBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the candidate book, such as `list`, will usually not call `Model#commitCandidateBook()`, `Model#undoCandidateBook()` or `Model#redoCandidateBook()`. Thus, the `candidateBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `listc`. Commands that do not modify the candidate book, such as `listc`, will usually not call `Model#commitCandidateBook()`, `Model#undoCandidateBook()` or `Model#redoCandidateBook()`. Thus, the `candidateBookStateList` remains unchanged.
 
 image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
 
-Step 6. The user executes `clear`, which calls `Model#commitCandidateBook()`. Since the `currentStatePointer` is not pointing at the end of the `candidateBookStateList`, all candidate book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clearc`, which calls `Model#commitCandidateBook()`. Since the `currentStatePointer` is not pointing at the end of the `candidateBookStateList`, all candidate book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
 
 image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
 
