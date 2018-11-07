@@ -34,19 +34,25 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
      */
     public AddTransactionCommand parse(String args) throws ParseException {
         args = args.trim();
+
         if (containsEmptyProductAtEnd(args)) {
             throw new ParseException("Some products in the transaction have no name! "
                     + "Please enter their names before trying again");
         }
+
         ArrayList<String> productsToAdd = new ArrayList<>(Arrays.asList(args.split(PREFIX_PRODUCT.toString())));
+        // removing empty string from split function
         if (productsToAdd.size() > 0 && productsToAdd.get(0).equals("")) {
             productsToAdd.remove(0);
         }
+
         productsToAdd.trimToSize();
         if (productsToAdd.size() == 0) {
             throw new ParseException("Transaction entered has no products!");
         }
+
         Transaction transaction = new Transaction();
+
         for (String product : productsToAdd) {
             product = product.trim();
             try {
