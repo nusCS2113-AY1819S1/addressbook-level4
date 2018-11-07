@@ -16,30 +16,32 @@ import java.util.Objects;
 public class Deadline {
     public static final String MESSAGE_DEADLINE_CONSTRAINTS =
         "Deadline can only have dd/mm/yyyy format";
+    public static final String MESSAGE_CONTAINS_ILLEGAL_CHARACTERS =
+            "Deadline can only have dd/mm/yyyy format";
 
     private final String day;
     private final String month;
     private String year;
 
     public Deadline(String day, String month, String year) {
-        this.day = day;
-        this.month = month;
-        this.year = year;
+        this.day = day.replaceFirst("^0+(?!$)", "");
+        this.month = month.replaceFirst("^0+(?!$)", "");
+        this.year = year.replaceFirst("^0+(?!$)", "");
     }
 
     public Deadline(String day, String month) {
-        this.day = day;
-        this.month = month;
+        this.day = day.replaceFirst("^0+(?!$)", "");
+        this.month = month.replaceFirst("^0+(?!$)", "");
     }
 
     public Deadline(String deadline) {
         requireNonNull(deadline);
         checkArgument(isValidFormat(deadline), MESSAGE_DEADLINE_CONSTRAINTS);
         String[] entries = deadline.split("/");
-        this.day = entries[0];
-        this.month = entries[1];
-        if (deadline.split("/").length != 2) {
-            this.year = entries[2];
+        this.day = entries[0].replaceFirst("^0+(?!$)", "");
+        this.month = entries[1].replaceFirst("^0+(?!$)", "");
+        if (entries.length == 3) {
+            this.year = entries[2].replaceFirst("^0+(?!$)", "");
         }
     }
 
@@ -64,6 +66,19 @@ public class Deadline {
     }
 
     /**
+     * Returns false if any fields contains illegal characters.
+     */
+    public static boolean containsIllegalCharacters(String deadline) {
+        String[] entries = deadline.split("/");
+
+        String day = entries[0];
+        String month = entries[1];
+        String year = entries[2];
+
+        return (!isNumeric(day) || !isNumeric(month) || !isNumeric(year));
+    }
+
+    /**
      * Returns false if any fields are not within the limits (not a valid date).
      */
     public static boolean isValidDeadline(String deadline) {
@@ -78,9 +93,7 @@ public class Deadline {
         ArrayList<Integer> monthsWith30Days = new ArrayList<>(Arrays.asList(4, 6, 9, 11));
         ArrayList<Integer> monthsWith31Days = new ArrayList<>(Arrays.asList(1, 3, 5, 7, 8, 10, 12));
 
-        if (!isNumeric(day) || !isNumeric(month) || !isNumeric(year)) {
-            return false;
-        } else if (Integer.parseInt(month) < 1 || Integer.parseInt(month) > 12) {
+        if (Integer.parseInt(month) < 1 || Integer.parseInt(month) > 12) {
             return false;
         } else if (Integer.parseInt(year) < 2018 || Integer.parseInt(year) > 9999) {
             return false;

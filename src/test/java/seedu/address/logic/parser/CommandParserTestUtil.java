@@ -51,4 +51,20 @@ public class CommandParserTestUtil {
             assertEquals(expectedMessage, pe.getMessage());
         }
     }
+
+    //@@author emobeany
+    /**
+     * Asserts that the parsing of {@code userInput} by {@code parser} is successful and the command created
+     * equals to {@code expectedCommand}.
+     * Only applicable for SelectDeadlineCommandParserTest
+     */
+    public static void assertParseSuccessWithoutYear(SelectDeadlineCommandParserTest.ParserWithoutYear parser,
+                                                     String year, String userInput, Command expectedCommand) {
+        try {
+            Command command = parser.parse(userInput, year);
+            assertEquals(expectedCommand, command);
+        } catch (ParseException pe) {
+            throw new IllegalArgumentException("Invalid userInput.", pe);
+        }
+    }
 }

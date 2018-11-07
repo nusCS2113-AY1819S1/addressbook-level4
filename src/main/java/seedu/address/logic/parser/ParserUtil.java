@@ -1,10 +1,13 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_DEADLINE_CONTAINS_ILLEGAL_CHARACTERS;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.util.StringUtil.isNonZeroUnsignedInteger;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.SelectDeadlineCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.ModuleCode;
@@ -76,13 +79,18 @@ public class ParserUtil {
         requireNonNull(deadline);
         String trimmedDeadline = deadline.trim();
         String[] entries = deadline.split("/");
-        if (!(entries.length == 2 || entries.length == 3)) {
+
+        if (entries.length < 2) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SelectDeadlineCommand.MESSAGE_USAGE));
+        }
+        if (entries.length > 3) {
             throw new ParseException(Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
         }
         // Command Exception is thrown to handle 1/mm/yyyy etc.
         for (String s: entries) {
             if (!isNonZeroUnsignedInteger(s.trim())) {
-                throw new ParseException(Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
+                throw new ParseException(MESSAGE_DEADLINE_CONTAINS_ILLEGAL_CHARACTERS);
             }
         }
         return new Deadline(trimmedDeadline);

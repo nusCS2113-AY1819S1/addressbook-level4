@@ -18,13 +18,17 @@ import seedu.address.model.task.Deadline;
 public class SelectDeadlineCommandParser implements Parser<SelectDeadlineCommand> {
     @Override
     public SelectDeadlineCommand parse(String userInput) throws ParseException {
+
         Deadline deadlineWithoutPrefixes = parseWithoutPrefixes(userInput);
         if (deadlineWithoutPrefixes != null) {
             return new SelectDeadlineCommand(deadlineWithoutPrefixes);
         }
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(userInput, PREFIX_DAY, PREFIX_MONTH, PREFIX_YEAR);
-
+        // shows correct error message when illegal character is used in dd/mm/yyyy format
+        if (noPrefixesPresent(argMultimap, PREFIX_DAY, PREFIX_MONTH, PREFIX_YEAR)) {
+            ParserUtil.parseDeadline(userInput);
+        }
         if (!arePrefixesPresent(argMultimap, PREFIX_DAY, PREFIX_MONTH)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -45,6 +49,14 @@ public class SelectDeadlineCommandParser implements Parser<SelectDeadlineCommand
     }
 
     /**
+     * Returns true if all of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    protected static boolean noPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).noneMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */
@@ -57,7 +69,7 @@ public class SelectDeadlineCommandParser implements Parser<SelectDeadlineCommand
      * @param userInput without date, month and year prefixes
      * @return the parsed Deadline
      */
-    public Deadline parseWithoutPrefixes(String userInput) {
+    protected static Deadline parseWithoutPrefixes(String userInput) {
         try {
             return ParserUtil.parseDeadline(userInput);
         } catch (ParseException e) {
