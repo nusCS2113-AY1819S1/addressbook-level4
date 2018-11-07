@@ -466,8 +466,13 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new SalesHistoryChangedEvent(versionedSalesHistory));
     }
 
+    @Override
+    public void commitSalesHistory() {
+        versionedSalesHistory.commit();
+    }
+
     public SalesHistory getSalesHistory() {
-        return versionedSalesHistory;
+        return new SalesHistory(versionedSalesHistory);
     }
 
     @Override
@@ -513,6 +518,7 @@ public class ModelManager extends ComponentManager implements Model {
         } catch (DuplicateReminderException e) {
             throw e;
         }
+        commitSalesHistory();
         indicateSalesHistoryChanged();
     }
 
@@ -525,6 +531,7 @@ public class ModelManager extends ComponentManager implements Model {
         } catch (NoSuchElementException e) {
             throw e;
         }
+        commitSalesHistory();
         indicateSalesHistoryChanged();
     }
 

@@ -1,10 +1,13 @@
 package seedu.address.model.timeidentifiedclass;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Some of the classes, such as Reminder and Transaction, are identified using time.
+ * This is a template class for classes which are identified using time.
+ * Some of the classes, such as {@link Reminder} and {@link Transaction}, are identified using time.
  */
 public abstract class TimeIdentifiedClass {
     private static final int NUMBER_OF_MONTHS_IN_YEAR = 12;
@@ -12,6 +15,9 @@ public abstract class TimeIdentifiedClass {
     private static final int NUMBER_OF_HOURS_IN_DAY = 24;
     private static final int NUMBER_OF_MINUTES_IN_HOUR = 60;
     private static final int NUMBER_OF_SECONDS_IN_HOUR = 60;
+    private static final int FEBRUARY_MONTH_NUMBER = 2;
+    private static final int[] DAYS_IN_MONTH_NON_LEAP_YEAR = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    private static final int FEBRUARY_LEAP_YEAR_DAYS = 29;
 
     private static DateTimeFormatter dateAndTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     private static DateTimeFormatter dayFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -35,6 +41,7 @@ public abstract class TimeIdentifiedClass {
 
     /**
      * Checks if a given month is valid
+     *
      * @param month
      * @return true if the month is valid
      */
@@ -50,6 +57,7 @@ public abstract class TimeIdentifiedClass {
 
     /**
      * Checks if a given day is valid
+     *
      * @param day
      * @return true if the day is valid
      */
@@ -65,6 +73,7 @@ public abstract class TimeIdentifiedClass {
 
     /**
      * Checks if a year is valid
+     *
      * @param year
      * @return true if the year is valid.
      */
@@ -77,6 +86,7 @@ public abstract class TimeIdentifiedClass {
 
     /**
      * Checks if the given hour is valid and follows the 24 hour format.
+     *
      * @param hour
      * @return true if the hour is valid
      */
@@ -92,6 +102,7 @@ public abstract class TimeIdentifiedClass {
 
     /**
      * checks if a given minute is valid
+     *
      * @param minute
      * @return true if the minute is valid
      */
@@ -107,6 +118,7 @@ public abstract class TimeIdentifiedClass {
 
     /**
      * checks if the given second is valid
+     *
      * @param second
      * @return true if the second is valid.
      */
@@ -122,27 +134,53 @@ public abstract class TimeIdentifiedClass {
 
     /**
      * This method checks if a given string is a valid date and time in the form dd/MM/yyyy HH:mm:ss
+     *
      * @param dateAndTime
      * @return true if the string is in valid day and time format
      */
-    public static boolean isValidDateAndTime (String dateAndTime) {
-        String[] times = dateAndTime.split("[/ \\s+ :]");
-
-        if (times.length != 6) {
+    public static boolean isValidDateAndTime(String dateAndTime) {
+        String[] splitDateAndTime = dateAndTime.split("[/ \\s+ :]");
+        if (splitDateAndTime.length != 6) {
             return false;
         }
-
-        for (int i = 0; i < times.length; i++) {
-            times[i].trim();
+        for (int i = 0; i < splitDateAndTime.length; i++) {
+            splitDateAndTime[i].trim();
         }
+        // checks on the different components of the given date and time.
+        if (isValidDate(splitDateAndTime[0], splitDateAndTime[1], splitDateAndTime[2])
+                && isValidTime(splitDateAndTime[3], splitDateAndTime[4], splitDateAndTime[5])) {
+            return true;
+        }
+        return false;
+    }
 
-        // checks on the different components of the transaction time.
-        if (isValidYear(times[0])
-                && isValidMonth(times[1])
-                && isValidDay(times[2])
-                && isValidHour(times[3])
-                && isValidMinute(times[4])
-                && isValidSecond(times[5])) {
+    /**
+     * The following method checks if a given year is a leap year
+     * @param year
+     * @return true if and only if the year is in the correct format and is a leap year
+     */
+    private static boolean isLeapYear(String year) {
+        if (!isValidYear(year)) {
+            return false;
+        }
+        int yearNumber = Integer.parseInt(year);
+        if (yearNumber % 4 == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * The following method checks if the given time is valid.
+     * @param hour
+     * @param minute
+     * @param second
+     * @return true if and only if time is valid
+     */
+    public static boolean isValidTime(String hour, String minute, String second) {
+        if (isValidHour(hour)
+                && isValidMinute(minute)
+                && isValidSecond(second)) {
             return true;
         }
         return false;
@@ -150,22 +188,35 @@ public abstract class TimeIdentifiedClass {
 
     /**
      * The following method checks whether a string is in the correct date format of dd/MM/yyyy
-     * @param date
+     * @param year
+     * @param month
+     * @param day
      * @return true if valid format, false otherwise.
      */
-    public static boolean isValidDate(String date) {
-        String[] splitDate = date.split("/");
+    public static boolean isValidDate(String year, String month, String day) {
+        requireAllNonNull(year, month, day);
 
-        if (splitDate.length != 3) {
+        // Checking the individual components of the date
+        if (!isValidYear(year)
+                || !isValidMonth(month)
+                || !isValidDay(day)) {
             return false;
         }
 
-        // checking the individual components of the date
-        if (isValidYear(splitDate[0])
-                && isValidMonth(splitDate[1])
-                && isValidDay(splitDate[2])) {
+        int monthNumber = Integer.parseInt(month);
+        int dayNumber = Integer.parseInt(day);
+
+        // Checking for feb 29th case on a leap year.
+        if (isLeapYear(year)
+                && monthNumber == FEBRUARY_MONTH_NUMBER
+                && dayNumber <= FEBRUARY_LEAP_YEAR_DAYS) {
             return true;
         }
-        return false;
+
+        // For a non leap year.
+        if (dayNumber > DAYS_IN_MONTH_NON_LEAP_YEAR[monthNumber - 1]) {
+            return false;
+        }
+        return true;
     }
 }

@@ -209,6 +209,11 @@ public interface Model {
     Transaction getLastTransaction();
 
     /**
+     * Saves the newest SalesHistory.
+     */
+    void commitSalesHistory();
+
+    /**
     * Sets the user list
     */
     void setUsersList(UniqueUserList uniqueUserList);
@@ -245,5 +250,4 @@ public interface Model {
 
     /** Returns the DistributorBook */
     ReadOnlyDistributorBook getDistributorBook();
-
 }
