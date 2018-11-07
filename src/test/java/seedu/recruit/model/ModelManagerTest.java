@@ -14,7 +14,6 @@ import org.junit.rules.ExpectedException;
 
 import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.testutil.AddressBookBuilder;
-import seedu.recruit.testutil.CandidateContainsFindKeywordsPredicateBuilder;
 
 public class ModelManagerTest {
     @Rule
