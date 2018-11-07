@@ -273,7 +273,7 @@ public class LogoutCommandTest {
             return null;
         }
 
-        public String getDaysTransactions(String day) {
+        public String getDaysTransactionsAsString(String day) {
             fail("This method should not be called.");
             return null;
         }

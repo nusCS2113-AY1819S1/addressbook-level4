@@ -19,6 +19,9 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
      */
     public AddTransactionCommand parse(String args) throws ParseException {
         String[] productList = args.split(PREFIX_PRODUCT.toString());
+        if (productList.length == 0) {
+            throw new ParseException("Transaction entered has no products!");
+        }
         Transaction transaction = new Transaction();
         for (int i = 0; i < productList.length; i++) {
             try {

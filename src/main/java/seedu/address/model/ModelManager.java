@@ -487,7 +487,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public String getDaysTransactions(String day) throws InvalidTimeFormatException {
+    public String getDaysTransactionsAsString(String day) throws InvalidTimeFormatException {
         try {
             return versionedSalesHistory.getDaysTransactionsAsString(day);
         } catch (InvalidTimeFormatException e) {

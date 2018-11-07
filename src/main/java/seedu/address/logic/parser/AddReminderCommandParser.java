@@ -33,7 +33,8 @@ public class AddReminderCommandParser implements Parser<AddReminderCommand> {
             reminder = new Reminder(ParserUtil.parseReminderTime(argMultimap.getValue(PREFIX_TIME).get()),
                     argMultimap.getValue(PREFIX_REMINDER_MESSAGE).get());
         } catch (InvalidTimeFormatException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, Reminder.REMINDER_TIME_CONSTRAINTS));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, Reminder.REMINDER_TIME_CONSTRAINTS)
+            + "If entered in the correct format, the date entered may be invalid (for example: 30th february).");
         }
 
         return new AddReminderCommand(reminder);
