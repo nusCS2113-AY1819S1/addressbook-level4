@@ -73,7 +73,8 @@ public class CandidateContainsFindKeywordsPredicateTest {
     public void test_nameDoesNotContainKeywords_returnsFalse() throws ParseException {
         // Zero keywords
         CandidateContainsFindKeywordsPredicate predicate =
-                new CandidateContainsFindKeywordsPredicate((HashMap<String, List<String>> ) Collections.EMPTY_MAP);
+                new CandidateContainsFindKeywordsPredicate((
+                        HashMap<String, List<String>> ) Collections.<String, List<String>>emptyMap());
         assertFalse(predicate.test(new CandidateBuilder().withName("Alice").build()));
 
         // Non-matching keyword
