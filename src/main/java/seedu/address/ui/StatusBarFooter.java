@@ -23,7 +23,8 @@ public class StatusBarFooter extends UiPart<Region> {
 
     public static final String SYNC_STATUS_INITIAL = "Not updated yet in this session";
     public static final String SYNC_STATUS_UPDATED = "Last Updated: %s";
-    public static final String LIST_ORDER = "panel order: students  |  groups  |  students in selected group";
+    public static final String LIST_ORDER = "Panel Order: PersonListPanel  |  GroupListPanel  |  "
+            + "GroupPersonListPanel  |  Browser Panel";
     public static final String TOTAL_PERSONS_GROUPS_STATUS = "%d student(s) total  |  %d group(s) total    ";
 
     /**

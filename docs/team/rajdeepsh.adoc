@@ -1,0 +1,264 @@
+= Rajdeep Singh Hundal - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Student Management System
+
+---
+
+== Overview
+
+Student Management System is a desktop system used primarily by university lecturers, interacting with it via CLI commands on a GUI created by JavaFX.
+Lecturers are able to manually `add` their students to the management system and also to `groups created` within the system.
+The system also allows for automated processes such as `scripts` to execute any command, removing the need for manual entry when facing large amounts od data.
+Other notable features include sending of `emails`, adding `tests marks`, assigning `grades` and `automatic group distribution` based on gender or nationality.
+
+== Summary of contributions
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=rajdeepsh[Code]]
+* *Main Feature*: *Groups*
+** *Functionality*: Added *the ability to create groups*
+*** What it does: Allows the lecturer to create a groups in the student management system and displays the groups created on a separate panel.
+*** Justification: This feature is necessary as it allows the lecturer to have a list of all his modules/tutorial groups.
+*** Highlights: This feature required an in-depth analysis of storage alternatives as storing group data in a separate xml file would be more modular but difficult to implement, given our time constraints.
+
+** *Functionality*: Added *the ability to select groups*
+*** What it does: Allows the lecturer to select groups in the student management system via a CLI command and displays the students in the group selected on a separate panel.
+*** Justification: This feature was implemented to allow for some flexibility when it comes to inputs as some lecturers may prefer typing over clicking.
+*** Highlights: This feature was to be paired later on with a find group feature, but due to time constraints find group was not implemented.
+
+** *Functionality*: Added *the ability to add students to groups*
+*** What it does: Allows the lecturer to add students to existing groups in the student management system.
+*** Justification: This feature is necessary as it allows the lecturer to have a list of students in a particular module/tutorial group.
+*** Highlights: This feature was to be further improved by synchronizing it with the edit command - e.g. if a person is edited in the
+student management system, that person would also be edited in all the groups he/she is in by simply removing the old person and adding the updated person. However,
+ due to time constraints, it was not further improved.
+
+** *Functionality*: Added *the ability to delete groups*
+*** What it does: Allows the lecturer to remove groups from the student management system.
+*** Justification: This feature is necessary as it allows the lecturer to organize/edit the management system.
+
+** *Functionality*: Added *the ability to delete students from groups*
+*** What it does: Allows the lecturer to remove students from groups in the student management system.
+*** Justification: This feature is necessary as it allows the lecturer to organize/edit the management system.
+*** Highlights: This feature was to be further improved by synchronizing it with the delete command - e.g. if a person is deleted in the
+student management system, that person would also be deleted in all the groups he/she is in. However,
+ due to time constraints, it was not further improved.
+
+* *Other contributions*:
+
+** Enhancements to existing features:
+*** Add command word alias's (shortcut's) to all commands for a local-impact enhancement (Pull requests https://github.com/CS2113-AY1819S1-T13-4/main/pull/10[#10])
+*** Add label's to existing GUI panels for a local-impact enhancement (Pull requests https://github.com/CS2113-AY1819S1-T13-4/main/pull/135[#135])
+*** Add panel order description to status bar footer for a local-impact enhancement (Pull requests https://github.com/CS2113-AY1819S1-T13-4/main/pull/89[#89])
+** Documentation:
+*** Add all initial user stories and use cases for all functions  (Pull requests https://github.com/CS2113-AY1819S1-T13-4/main/pull/7[#7])
+** Community:
+*** Contributed to forum discussions (https://github.com/nusCS2113-AY1819S1/forum/issues/104[1])
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-T13-4/main/pull/81[#81], https://github.com/CS2113-AY1819S1-T13-4/main/pull/74[#74], https://github.com/CS2113-AY1819S1-T13-4/main/pull/54[#54], https://github.com/CS2113-AY1819S1-T13-4/main/pull/46[#46], https://github.com/CS2113-AY1819S1-T13-4/main/pull/31[#31]
+*** Reported bugs and suggestions for other teams in the class (https://github.com/CS2113-AY1819S1-W13-3/main/issues/88[1], https://github.com/CS2113-AY1819S1-W13-3/main/issues/81[2], https://github.com/CS2113-AY1819S1-W13-3/main/issues/75[3], https://github.com/CS2113-AY1819S1-W13-3/main/issues/70[4])
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+image::Ui.png[width="790"]
+
+include::../UserGuide.adoc[tag=group]
+
+=== Command Summary
+
+* *Create Group* : `creategroup n/NAME l/LOCATION [t/TAG] ...` +
+e.g. `creategroup n/CS2040C l/LT15 t/cpp`
+
+* *Select Group* : `selectgroup INDEX` +
+e.g. `selectgroup 1`
+* *Add to Group* : `addgroup g/INDEX p/INDEX ...` +
+e.g. `addgroup g/1 p/1 p/2`
+* *Delete Group* : `deletegroup INDEX` +
+e.g. `deletegroup 1`
+* *Delete Student from Group* : `deletegroupstudent g/INDEX p/INDEX` +
+e.g. `deletegroupstudent g/1 p/1`
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+.Structure of the UI Component
+image::UiClassDiagram.png[width="800"]
+
+.Structure of the Model Component
+image::ModelClassDiagram.png[width="800"]
+
+.Structure of the Storage Component
+image::StorageClassDiagram.png[width="800"]
+
+include::../DeveloperGuide.adoc[tag=group]
+
+=== User Stories
+
+Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (unlikely to have) - `*`
+
+[width="59%",cols="22%,<23%,<25%,<30%",options="header",]
+|=======================================================================
+|Priority |As a ... |I want to ... |So that I can...
+
+|`* * *` |university lecturer |create groups |have a list of all my modules/tutorial classes
+
+|`* * *` |university lecturer |add students to groups |have a list of all my students in a particular module/group
+
+|`* * *` |university lecturer |delete students from groups |edit my student management system
+
+|`* * *` |university lecturer |delete groups |edit my student management system
+
+|`* * *` |university lecturer |view all students in a group by typing a command to select a group instead of clicking |have flexibility over input methods
+
+|=======================================================================
+
+[discrete]
+=== Use case: Create Groups
+
+
+*MSS*
+
+1.  Lecturer creates a group
+2.  Student management system confirms that group is created
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
++
+
+[none]
+** 1a1. Student management system rejects command entered with relevant error message.
+[none]
+* 1b. Student management system detects duplicate group.
++
+
+[none]
+** 1b1. Student management system rejects command entered with relevant error message.
++
+
+
+[discrete]
+=== Use case: Add Students To Groups
+*Precondition*
+
+1.  Student management system has student(s)
+
+*MSS*
+
+1.  Lecturer adds student(s) to a group
+2.  AddressBook confirms student(s) are added
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
++
+
+[none]
+** 1a1. Student management system rejects command entered with relevant error message.
+[none]
+* 1b. Student management system detects student(s) is already in the group.
++
+
+[none]
+** 1b1. Student management system rejects command entered with relevant error message.
++
+
+
+[discrete]
+=== Use case: Delete Students From Groups
+*Precondition*
+
+1.  Student management system has group(s)
+
+*MSS*
+
+1.  Lecturer deletes student from a group
+2.  AddressBook confirms student is deleted
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
++
+
+[none]
+** 1a1. Student management system rejects command entered with relevant error message.
+[none]
+* 1b. Student management system detects student not in the group.
++
+
+[none]
+** 1b1. Student management system rejects command entered with relevant error message.
++
+
+
+[discrete]
+=== Use case: Delete Groups
+*Precondition*
+
+1.  Student management system has group(s)
+
+*MSS*
+
+1.  Lecturer deletes group
+2.  Student management system confirms group is deleted
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
++
+
+[none]
+** 1a1. Student management system rejects command entered with relevant error message.
++
+
+
+[discrete]
+=== Use case: Select Group
+*Precondition*
+
+1.  Student management system has group(s)
+
+*MSS*
+
+1.  Lecturer selects group
+2.  Student management system confirms group is selected
+3.  Student management system displays students in group selected on the *students in group panel*
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
++
+
+[none]
+** 1a1. Student management system rejects command entered with relevant error message.
++
+
+
+
+
+
+
+
