@@ -11,13 +11,13 @@ public class ProductInfoTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new Address(null));
+        Assert.assertThrows(NullPointerException.class, () -> new ProductInfo(null));
     }
 
     @Test
     public void constructor_invalidAddress_throwsIllegalArgumentException() {
         String invalidAddress = "";
-        Assert.assertThrows(IllegalArgumentException.class, () -> new Address(invalidAddress));
+        Assert.assertThrows(IllegalArgumentException.class, () -> new ProductInfo(invalidAddress));
     }
 
 }

@@ -50,14 +50,14 @@ public interface Storage extends ProductDatabaseStorage, DistributorBookStorage,
 
 
     /**
-     * Saves the current version of the Address Book to the hard disk.
+     * Saves the current version of the ProductInfo Book to the hard disk.
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleAddressBookChangedEvent(AddressBookChangedEvent abce);
 
     /**
-     * Saves the current version of the Address Book to the hard disk.
+     * Saves the current version of the ProductInfo Book to the hard disk.
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */

@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Product's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
-public class Address {
+public class ProductInfo {
 
     public static final String MESSAGE_ADDRESS_CONSTRAINTS =
             "Product Info can only take alphanumerical values, and it should not be blank";
@@ -21,11 +21,11 @@ public class Address {
     public final String value;
 
     /**
-     * Constructs an {@code Address}.
+     * Constructs an {@code ProductInfo}.
      *
      * @param address A valid address.
      */
-    public Address(String address) {
+    public ProductInfo(String address) {
         requireNonNull(address);
         checkArgument(isValidAddress(address), MESSAGE_ADDRESS_CONSTRAINTS);
         value = address;
@@ -46,8 +46,8 @@ public class Address {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Address // instanceof handles nulls
-                && value.equals(((Address) other).value)); // state check
+                || (other instanceof ProductInfo // instanceof handles nulls
+                && value.equals(((ProductInfo) other).value)); // state check
     }
 
     @Override

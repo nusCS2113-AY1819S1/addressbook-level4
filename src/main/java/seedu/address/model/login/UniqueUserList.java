@@ -40,7 +40,7 @@ public class UniqueUserList implements Iterable<User> {
      */
     public void add(User toAdd) throws DuplicateUserException {
         requireNonNull(toAdd);
-        for ( User user : internalList ) {
+        for (User user : internalList) {
             if (user.getUsername().equals(toAdd.getUsername())) {
                 throw new DuplicateUserException();
             }
