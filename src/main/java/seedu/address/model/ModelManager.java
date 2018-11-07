@@ -221,15 +221,15 @@ public class ModelManager extends ComponentManager implements Model {
         try {
             distributorBookOptional = storage.readDistributorBook();
             if (!distributorBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+                logger.info("Data file not found. Will be starting with a sample DistributorBook");
             }
             newData = distributorBookOptional.orElseGet(SampleDistributorsUtil::getSampleDistributorBook);
         } catch (DataConversionException e) {
             newData = new DistributorBook();
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            logger.warning("Data file not in the correct format. Will be starting with an empty DistributorBook");
         } catch (IOException e) {
             newData = new DistributorBook();
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty DistributorBook");
         }
         versionedDistributorBook.resetData(newData);
     }
@@ -468,8 +468,13 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new SalesHistoryChangedEvent(versionedSalesHistory));
     }
 
+    @Override
+    public void commitSalesHistory() {
+        versionedSalesHistory.commit();
+    }
+
     public SalesHistory getSalesHistory() {
-        return versionedSalesHistory;
+        return new SalesHistory(versionedSalesHistory);
     }
 
     @Override
@@ -484,9 +489,18 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public String getDaysTransactions(String day) throws InvalidTimeFormatException {
+    public String getDaysTransactionsAsString(String date) throws InvalidTimeFormatException {
         try {
-            return versionedSalesHistory.getDaysTransactionsAsString(day);
+            return versionedSalesHistory.getDaysTransactionsAsString(date);
+        } catch (InvalidTimeFormatException e) {
+            throw e;
+        }
+    }
+
+    @Override
+    public String getTransactionAsString(String date) throws InvalidTimeFormatException {
+        try {
+            return versionedSalesHistory.getTransactionAsString(date);
         } catch (InvalidTimeFormatException e) {
             throw e;
         }
@@ -515,6 +529,7 @@ public class ModelManager extends ComponentManager implements Model {
         } catch (DuplicateReminderException e) {
             throw e;
         }
+        commitSalesHistory();
         indicateSalesHistoryChanged();
     }
 
@@ -527,6 +542,7 @@ public class ModelManager extends ComponentManager implements Model {
         } catch (NoSuchElementException e) {
             throw e;
         }
+        commitSalesHistory();
         indicateSalesHistoryChanged();
     }
 

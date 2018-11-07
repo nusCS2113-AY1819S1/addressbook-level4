@@ -54,13 +54,10 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         DistributorPhone distphone = new DistributorPhone("00000000");
 
-        System.out.print("\"Hello\""); // <-- We come all the way here. Neither distro or product is created
-
         Product product = new Product(name, serialNumber, distname, productInfo, remainingItems, tagList);
         Distributor distributor = new Distributor(distname, distphone, new HashSet<>());
         System.out.print(product.getRemainingItems());
         return new AddCommand(product, distributor);
-
     }
 
     /**

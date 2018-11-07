@@ -59,7 +59,7 @@ public class DistributorBook implements ReadOnlyDistributorBook {
     //// product-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code distributor} exists in the address book.
      */
     public boolean hasDistributor(Distributor distributor) {
         requireNonNull(distributor);

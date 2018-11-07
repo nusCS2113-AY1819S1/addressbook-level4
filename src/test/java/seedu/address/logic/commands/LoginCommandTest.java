@@ -299,7 +299,7 @@ public class LoginCommandTest {
             return null;
         }
 
-        public String getDaysTransactions(String day) {
+        public String getDaysTransactionsAsString(String day) {
             fail("This method should not be called.");
             return null;
         }
@@ -339,6 +339,16 @@ public class LoginCommandTest {
         }
 
         @Override
+        public String getTransactionAsString(String date) throws InvalidTimeFormatException {
+            return null;
+        }
+
+        @Override
+        public void commitSalesHistory() {
+            fail("This method should not be called");
+        }
+
+        @Override
         public boolean checkAuthentication(Username username, Password password) {
             requireNonNull(username);
             requireNonNull(password);
@@ -373,6 +383,16 @@ public class LoginCommandTest {
         @Override
         public ArrayList<Reminder> getOverdueRemindersForThread() {
             return null;
+        }
+
+        @Override
+        public String getTransactionAsString(String date) throws InvalidTimeFormatException {
+            return null;
+        }
+
+        @Override
+        public void commitSalesHistory() {
+            fail("This should not be called.");
         }
 
         @Override
