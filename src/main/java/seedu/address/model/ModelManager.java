@@ -442,9 +442,13 @@ public class ModelManager extends ComponentManager implements Model {
     public void commitTaskBook() {
         versionedTaskBook.commit();
     }
-    //@@author
 
     //@@author ian-tjahjono
+    //==================Events=====================================================
+    @Override
+    public ReadOnlyEventBook getEventBook() {
+        return versionedEventBook;
+    }
 
     @Override
     public boolean hasEvent(Event event) {
@@ -453,30 +457,35 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void addEvent(Event event) {
+    public void updateFilteredEventList(Predicate<Event> predicate) {
+        requireNonNull(predicate);
+        filteredEvents.setPredicate(predicate);
+    }
 
+    @Override
+    public void addEvent(Event event) {
+        versionedEventBook.addEvent(event);
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+        indicateEventBookChanged();
     }
 
     @Override
     public void deleteEvent(Event target) {
-
+        versionedEventBook.removeEvent(target);
+        indicateEventBookChanged();
     }
 
     @Override
     public ObservableList<Event> getFilteredEventList() {
-        return null;
+        return FXCollections.unmodifiableObservableList(filteredEvents);
     }
-
 
     @Override
     public void commitEventBook() {
         versionedEventBook.commit();
     }
 
-    @Override
-    public ReadOnlyEventBook getEventBook() {
-        return versionedEventBook;
-    }
+
 
     /** Raises an event to indicate the model has changed */
     private void indicateEventBookChanged() {

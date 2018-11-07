@@ -1,3 +1,4 @@
+//@@author ian-tjahjono
 package seedu.address.model.eventContacts;
 
 import static java.util.Objects.requireNonNull;

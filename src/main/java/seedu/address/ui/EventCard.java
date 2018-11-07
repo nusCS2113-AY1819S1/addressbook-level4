@@ -1,3 +1,4 @@
+//@@author ian-tjahjono
 package seedu.address.ui;
 
 import javafx.fxml.FXML;
@@ -31,6 +32,8 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private Label Date;
     @FXML
+    private Label id;
+    @FXML
     private Label Time;
     @FXML
     private FlowPane eventContacts;
@@ -38,6 +41,7 @@ public class EventCard extends UiPart<Region> {
     public EventCard(Event event, int displayedIndex) {
         super(FXML);
         this.event = event;
+        id.setText(displayedIndex + ". ");
         EventName.setText(event.getEventName().fullName);
         Date.setText(event.getEventDate().value);
         Time.setText(event.getEventTime().value);

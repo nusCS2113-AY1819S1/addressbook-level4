@@ -21,8 +21,10 @@ public interface Model {
     //@@author luhan02
     /** {@code Predicate} that always evaluate to true */
     Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
-    //@@author
 
+    //@@author ian-tjahjono
+    Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
+    //@@author
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
 
@@ -164,10 +166,8 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTaskList(Predicate<Task> predicate);
-    //@@author
 
     //@@author ian-tjahjono
-
     /**
      * Returns true if an event with the same identity as {@code event} exists in the student planner.
      */
@@ -195,6 +195,12 @@ public interface Model {
 
     /** Returns the EventBook */
     ReadOnlyEventBook getEventBook();
+
+    /**
+     * Updates the filter of the filtered event list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredEventList(Predicate<Event> predicate);
 
     //@@author ChenSongJian
 

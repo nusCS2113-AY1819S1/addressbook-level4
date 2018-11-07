@@ -65,8 +65,8 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane personListPanelPlaceholder;
 
-    //@FXML
-    //private StackPane eventListPanelPlaceholder;
+    @FXML
+    private StackPane eventListPanelPlaceholder;
 
     @FXML
     private StackPane taskListPanelPlaceholder;
@@ -153,8 +153,8 @@ public class MainWindow extends UiPart<Stage> {
         taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
-        //eventListPanel = new EventListPanel(logic.getFilteredEventList());
-        //eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+        eventListPanel = new EventListPanel(logic.getFilteredEventList());
+        eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -222,7 +222,9 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
-    //public EventListPanel getEventListPanel() {return  eventListPanel;}
+    public EventListPanel getEventListPanel() {
+        return eventListPanel;
+    }
 
     public ExpenseListPanel getExpenseListPanel() {
         return expenseListPanel;
