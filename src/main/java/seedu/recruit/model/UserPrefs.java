@@ -16,7 +16,7 @@ public class UserPrefs {
     private final EmailSettings emailSettings = new EmailSettings();
     private Path candidateBookFilePath = Paths.get("data" , "candidatebook.xml");
     private Path companyBookFilePath = Paths.get("data" , "companybook.xml");
-    private String hashedPassword = null;
+    private String hashedPassword = "password";
 
 
     public UserPrefs() {

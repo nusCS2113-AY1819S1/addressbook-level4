@@ -52,9 +52,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredCompanies = new FilteredList<>(versionedCompanyBook.getCompanyList());
         filteredJobs = new FilteredList<>(versionedCompanyBook.getCompanyJobList());
         emailUtil = new EmailUtil();
-        if (userPrefs.getHashedPassword() != null) {
-            hideAll();
-        }
+        hideAll();
     }
 
     public ModelManager() {

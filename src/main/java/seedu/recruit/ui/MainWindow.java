@@ -1,9 +1,11 @@
 package seedu.recruit.ui;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +20,7 @@ import seedu.recruit.commons.core.Config;
 import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.GuiSettings;
 import seedu.recruit.commons.core.LogsCenter;
+import seedu.recruit.commons.events.logic.UserAuthenticatedEvent;
 import seedu.recruit.commons.events.ui.ExitAppRequestEvent;
 import seedu.recruit.commons.events.ui.FocusOnCandidateBookRequestEvent;
 import seedu.recruit.commons.events.ui.FocusOnCompanyBookRequestEvent;
@@ -52,8 +55,8 @@ public class MainWindow extends UiPart<Stage> {
     private static final String FXML = "MainWindow.fxml";
     private static String currentBook = "candidateBook";
     private final Logger logger = LogsCenter.getLogger(getClass());
-    private final ObservableList<Candidate> masterCandidateList;
-    private final ObservableList<JobOffer> masterJobList;
+    private ObservableList<Candidate> masterCandidateList = FXCollections.observableArrayList();
+    private ObservableList<JobOffer> masterJobList = FXCollections.observableArrayList();
 
     private Stage primaryStage;
 
@@ -111,8 +114,6 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
         registerAsAnEventHandler(this);
 
-        masterCandidateList = logic.getMasterCandidateList();
-        masterJobList = logic.getMasterJobList();
         helpWindow = new HelpWindow();
         emailPreview = new EmailPreview();
     }
@@ -210,6 +211,8 @@ public class MainWindow extends UiPart<Stage> {
         ResultDisplay resultDisplay = new ResultDisplay("");
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
     }
+
+
 
     /**
      * Handles the menu Switch Book from Company Book to Candidate Book.
@@ -491,6 +494,17 @@ public class MainWindow extends UiPart<Stage> {
     private void handleShowLastViewedBookEvent (ShowLastViewedBookRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         switchToLastViewedBook();
+    }
+
+    /**
+     * Handles user authentication event to show master candidate list and master job list
+     */
+
+    @Subscribe
+    private void handleUserAuthenticatedEvent(UserAuthenticatedEvent event) {
+        masterJobList = logic.getMasterJobList();
+        masterCandidateList = logic.getMasterCandidateList();
+        switchToMasterCandidateList();
     }
 
     /**
