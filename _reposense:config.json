@@ -1,0 +1,17 @@
+{
+  "ignoreGlobList": ["about-us/**", "**index.html"],
+  "formats": ["html", "css","xml","adoc","java"],
+  "ignoreCommitList": [],
+  "authors":
+  [
+    {
+      "githubId": "garagaristahir",
+      "displayName": "Gara Tahir",
+      "authorNames": ["GT", "garagaristahir"],
+      "ignoreGlobList": ["**.css"]
+    },
+    {
+      "githubId": "bob"
+    }
+  ]
+}

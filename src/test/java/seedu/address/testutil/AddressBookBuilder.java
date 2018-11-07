@@ -24,7 +24,7 @@ public class AddressBookBuilder {
      * Adds a new {@code Product} to the {@code ProductDatabase} that we are building.
      */
     public AddressBookBuilder withPerson(Product product) {
-        productDatabase.addPerson(product);
+        productDatabase.addProduct(product);
         return this;
     }
 

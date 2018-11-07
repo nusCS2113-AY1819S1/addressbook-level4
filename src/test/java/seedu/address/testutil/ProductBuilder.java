@@ -4,9 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.distributor.DistributorName;
-import seedu.address.model.product.Address;
 import seedu.address.model.product.Name;
 import seedu.address.model.product.Product;
+import seedu.address.model.product.ProductInfo;
 import seedu.address.model.product.SerialNumber;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -24,14 +24,14 @@ public class ProductBuilder {
     private Name name;
     private SerialNumber serialNumber;
     private DistributorName distname;
-    private Address info;
+    private ProductInfo info;
     private Set<Tag> tags;
 
     public ProductBuilder() {
         name = new Name(DEFAULT_NAME);
         serialNumber = new SerialNumber(DEFAULT_SERIAL_NUMBER);
         distname = new DistributorName(DEFAULT_DIST);
-        info = new Address(DEFAULT_INFO);
+        info = new ProductInfo(DEFAULT_INFO);
         tags = new HashSet<>();
     }
 
@@ -63,10 +63,10 @@ public class ProductBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Product} that we are building.
+     * Sets the {@code ProductInfo} of the {@code Product} that we are building.
      */
     public ProductBuilder withInfo(String address) {
-        this.info = new Address(address);
+        this.info = new ProductInfo(address);
         return this;
     }
 

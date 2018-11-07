@@ -161,7 +161,6 @@ public class User {
                 .append(getDistributorBookFilePath())
                 .append("\nSales History File Path: ")
                 .append(getSalesHistoryFilePath());
-
         return builder.toString();
     }
 }
