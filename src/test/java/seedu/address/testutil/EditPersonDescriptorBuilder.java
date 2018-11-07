@@ -36,6 +36,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setSerialNumber(product.getSerialNumber());
         descriptor.setEmail(product.getDistributor());
         descriptor.setProductInfo(product.getProductInfo());
+        descriptor.setRemainingItems(product.getRemainingItems());
         descriptor.setTags(product.getTags());
     }
 

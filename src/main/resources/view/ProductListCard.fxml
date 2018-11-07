@@ -28,6 +28,7 @@
         <Label fx:id="name" text="\$name" styleClass="cell_big_label" />
       </HBox>
       <FlowPane fx:id="tags" />
+      <Label fx:id="remainingItems" styleClass="cell_small_label" text="\$remainingItems" />
       <Label fx:id="serialNumber" styleClass="cell_small_label" text="\$serialNumber" />
       <Label fx:id="distributor" styleClass="cell_small_label" text="\$distributor" />
       <Label fx:id="info" styleClass="cell_small_label" text="\$info" />

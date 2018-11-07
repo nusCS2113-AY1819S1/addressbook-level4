@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DISTRIBUTOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT_INFO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMAINING_ITEMS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SERIAL_NR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -33,12 +34,14 @@ public class AddCommand extends Command {
             + PREFIX_SERIAL_NR + "98765432 "
             + PREFIX_DISTRIBUTOR + "Alfred "
             + PREFIX_PRODUCT_INFO + "Contains chicken etc "
-            + PREFIX_TAG + "fruit ";
+            + PREFIX_TAG + "fruit "
+            + PREFIX_REMAINING_ITEMS + "12";
 
     public static final String MESSAGE_SUCCESS = "New product added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PRODUCT = "This product already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PRODUCT = "This product already exists in the product database";
     public static final String MESSAGE_EDIT_DIST_PHONE = "Please edit the distributor number "
             + "with the default 00000000, then add the distributor manually.";
+
 
     private final Product toAdd;
     private final Distributor distToAdd;

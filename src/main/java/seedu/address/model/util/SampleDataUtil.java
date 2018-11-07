@@ -10,6 +10,7 @@ import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.product.Name;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.ProductInfo;
+import seedu.address.model.product.RemainingItems;
 import seedu.address.model.product.SerialNumber;
 import seedu.address.model.saleshistory.ReadOnlySalesHistory;
 import seedu.address.model.saleshistory.SalesHistory;
@@ -24,23 +25,23 @@ public class SampleDataUtil {
     public static Product[] getSampleProducts() {
         return new Product[] {
             new Product(new Name("Apple"), new SerialNumber("001"),
-                    new DistributorName("Farm"), new ProductInfo("fruit"),
-                getTagSet("healthy")),
+                    new DistributorName("Farm"), new ProductInfo("fruit"), new RemainingItems("12"),
+                    getTagSet("healthy")),
             new Product(new Name("Beef"), new SerialNumber("002"),
-                    new DistributorName("Butcher"), new ProductInfo("meat"),
-                getTagSet("redmeat")),
+                    new DistributorName("Butcher"), new ProductInfo("meat"), new RemainingItems("12"),
+                    getTagSet("redmeat")),
             new Product(new Name("Cheezles"), new SerialNumber("003"),
                     new DistributorName("Snack Shack"), new ProductInfo("snack"),
-                getTagSet("unhealthy")),
+                    new RemainingItems("12"), getTagSet("unhealthy")),
             new Product(new Name("Dog Biscuits"), new SerialNumber("004"),
                     new DistributorName("Pet Store"), new ProductInfo("pets"),
-                getTagSet("food")),
+                    new RemainingItems("12"), getTagSet("food")),
             new Product(new Name("Toilet Paper"), new SerialNumber("005"),
                     new DistributorName("Toiletries"), new ProductInfo("toilet"),
-                getTagSet("tolet")),
+                    new RemainingItems("12"), getTagSet("tolet")),
             new Product(new Name("Ice Cream"), new SerialNumber("006"),
                     new DistributorName("Ben Harrys"), new ProductInfo("snack"),
-                getTagSet("cold"))
+                    new RemainingItems("12"), getTagSet("cold"))
         };
     }
 
