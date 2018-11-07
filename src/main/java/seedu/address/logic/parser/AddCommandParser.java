@@ -50,7 +50,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         DistributorPhone distphone = new DistributorPhone("00000000");
 
         Product product = new Product(name, serialNumber, distname, productInfo, tagList);
-        Distributor distributor = new Distributor(distname, distphone, null);
+        Distributor distributor = new Distributor(distname, distphone, tagList);
 
         return new AddCommand(product, distributor);
 

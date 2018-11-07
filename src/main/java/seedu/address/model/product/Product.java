@@ -107,13 +107,13 @@ public class Product {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" Serial number: ")
+                .append("\nSerial number: ")
                 .append(getSerialNumber())
-                .append(" Distributor: ")
+                .append("\nDistributor: ")
                 .append(getDistributor())
-                .append(" Product info: ")
+                .append("\nProduct info: ")
                 .append(getProductInfo())
-                .append(" Tags: ");
+                .append("\nTags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }

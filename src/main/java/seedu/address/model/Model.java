@@ -69,8 +69,6 @@ public interface Model {
      */
     void addDistributor(Distributor distributor);
 
-    //void getDistributor(Distributor distributor);
-
     /**
      * Adds the given product.
      * {@code product} must not already exist in the address book.

@@ -12,6 +12,7 @@ import seedu.address.logic.commands.AddReminderCommand;
 import seedu.address.logic.commands.AddTransactionCommand;
 import seedu.address.logic.commands.ChangePasswordCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearDistributorsCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteDistributorCommand;
@@ -90,6 +91,9 @@ public class AllCommandsParser {
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
+
+        case ClearDistributorsCommand.COMMAND_WORD:
+            return new ClearDistributorsCommand();
 
         case FindDistributorCommand.COMMAND_WORD:
             return new FindDistributorsCommandParser().parse(arguments);

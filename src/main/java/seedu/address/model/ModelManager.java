@@ -221,15 +221,15 @@ public class ModelManager extends ComponentManager implements Model {
         try {
             distributorBookOptional = storage.readDistributorBook();
             if (!distributorBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+                logger.info("Data file not found. Will be starting with a sample DistributorBook");
             }
             newData = distributorBookOptional.orElseGet(SampleDistributorsUtil::getSampleDistributorBook);
         } catch (DataConversionException e) {
             newData = new DistributorBook();
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            logger.warning("Data file not in the correct format. Will be starting with an empty DistributorBook");
         } catch (IOException e) {
             newData = new DistributorBook();
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty DistributorBook");
         }
         versionedDistributorBook.resetData(newData);
     }
