@@ -52,7 +52,7 @@
 //         command = CreateModuleCommand.COMMAND_WORD + MODULE_TITLE_DESC_CS1231 + MODULE_CODE_DESC_CS1231;
 //         assertCommandSuccess(command, toAdd);
 //
-//         /* ----------------------------------- Perform invalid add operations --------------------------------------- */
+//         /* ------------------------------- Perform invalid add operations ----------------------------------- */
 //
 //         /* Case: add a duplicate module -> rejected */
 //         command = ModuleUtil.getCreateCommand(CS1231);
@@ -67,11 +67,13 @@
 //
 //         /* Case: missing code -> rejected */
 //         command = CreateModuleCommand.COMMAND_WORD + MODULE_TITLE_DESC_MA1508E;
-//         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateModuleCommand.MESSAGE_USAGE));
+//         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+//              CreateModuleCommand.MESSAGE_USAGE));
 //
 //         /* Case: missing title -> rejected */
 //         command = CreateModuleCommand.COMMAND_WORD + MODULE_CODE_DESC_MA1508E;
-//         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateModuleCommand.MESSAGE_USAGE));
+//         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+//              CreateModuleCommand.MESSAGE_USAGE));
 //
 //         /* Case: invalid keyword -> rejected */
 //         command = "creates " + ModuleUtil.getModuleDetails(toAdd);
@@ -90,7 +92,8 @@
 //      * Executes the {@code CreateModuleCommand} that adds {@code toAdd} to the model and asserts that the,<br>
 //      * 1. Command box displays an empty string.<br>
 //      * 2. Command box has the default style class.<br>
-//      * 3. Result display box displays the success message of executing {@code CreateModuleCommand} with the details of
+//      * 3. Result display box displays the success message of executing
+//      * {@code CreateModuleCommand} with the details of
 //      * {@code toAdd}.<br>
 //      * 4. {@code Storage} and {@code PersonListPanel} equal to the corresponding components in
 //      * the current model added with {@code toAdd}.<br>
