@@ -194,7 +194,7 @@ public class ExportCalendarCommand extends Command {
 
         Calendar calendar = writeToUserCalendar(registeredEventList, fileName);
 
-        //outPutter.output(calendar, fileOut);
+        outPutter.output(calendar, fileOut);
     }
 
     @Override
