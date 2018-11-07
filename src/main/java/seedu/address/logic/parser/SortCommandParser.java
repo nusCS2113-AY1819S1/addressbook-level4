@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT;
 
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Parameter;
 
 
 /**
@@ -28,7 +29,7 @@ public class SortCommandParser implements Parser<SortCommand> {
         SortCommand.MESSAGE_USAGE), ive);
         }
         */
-        String param = argMultimap.getValue(PREFIX_SORT).orElse("");
-        return new SortCommand(param);
+        Parameter parameter = new Parameter(argMultimap.getValue(PREFIX_SORT).orElse(""));
+        return new SortCommand(parameter);
     }
 }
