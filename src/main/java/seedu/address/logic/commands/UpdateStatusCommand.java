@@ -57,4 +57,5 @@ public class UpdateStatusCommand extends Command {
 
         return new CommandResult(MESSAGE_SUCCESS);
     }
+    
 }
