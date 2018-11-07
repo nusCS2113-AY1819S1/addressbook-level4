@@ -38,9 +38,10 @@ public class MasterCandidateListPanel extends UiPart<Region> {
     private void setConnectionsForCandidateList(ObservableList<Candidate> candidateList) {
         candidateListView.setItems(candidateList);
         candidateListView.setCellFactory(listView -> new CandidateListViewCell());
-        setEventHandlerForCandidateListSelectionChangeEvent();
+        //setEventHandlerForCandidateListSelectionChangeEvent();
     }
 
+    /**
     private void setEventHandlerForCandidateListSelectionChangeEvent() {
         candidateListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
@@ -49,11 +50,11 @@ public class MasterCandidateListPanel extends UiPart<Region> {
                         raise(new CandidateDetailsPanelSelectionChangedEvent(newValue));
                     }
                 });
-    }
+    } */
 
     /**
      * Scrolls to the {@code CandidateCard} at the {@code index} and selects it.
-     */
+
     private void scrollToCandidateCard(int index) {
         Platform.runLater(() -> {
             candidateListView.scrollTo(index);
@@ -71,7 +72,7 @@ public class MasterCandidateListPanel extends UiPart<Region> {
     private void handleCandidateDetailsPanelSelectionChangedEvent(CandidateDetailsPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event,
                 "Selection Changed to " + event.getNewSelection().getName().fullName));
-    }
+    } */
 
     /**
      * Custom {@code ListCell} that displays the graphics of a Candidate using a {@code CandidateCard}.

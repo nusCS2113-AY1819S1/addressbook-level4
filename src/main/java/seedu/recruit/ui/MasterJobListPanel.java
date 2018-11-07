@@ -32,15 +32,16 @@ public class MasterJobListPanel extends UiPart<Region> {
     public MasterJobListPanel(ObservableList<JobOffer> jobList) {
         super(FXML);
         setConnectionsForJobList(jobList);
-        registerAsAnEventHandler(this);
+        //registerAsAnEventHandler(this);
     }
 
     private void setConnectionsForJobList(ObservableList<JobOffer> jobList) {
         jobListView.setItems(jobList);
         jobListView.setCellFactory(listView -> new JobListViewCell());
-        setEventHandlerForJobListSelectionChangeEvent();
+        //setEventHandlerForJobListSelectionChangeEvent();
     }
 
+    /**
     private void setEventHandlerForJobListSelectionChangeEvent() {
         jobListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
@@ -49,11 +50,11 @@ public class MasterJobListPanel extends UiPart<Region> {
                         raise(new CompanyJobListDetailsPanelSelectionChangedEvent(newValue));
                     }
                 });
-    }
+    } */
 
     /**
      * Scrolls to the {@code JobCard} at the {@code index} and selects it.
-     */
+
     private void scrollToJobCard(int index) {
         Platform.runLater(() -> {
             jobListView.scrollTo(index);
@@ -72,7 +73,7 @@ public class MasterJobListPanel extends UiPart<Region> {
                                                                                event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event,
                 "Selection Changed to " + event.getNewSelection().getJob().value));
-    }
+    } */
 
     /**
      * Custom {@code ListCell} that displays the graphics of a job using a {@code JobCard}.
