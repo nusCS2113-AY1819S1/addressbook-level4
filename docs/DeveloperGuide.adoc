@@ -524,7 +524,7 @@ The user is able to export notes from this application to a CSV file that follow
 * Invoking the command above by itself will convert all exportable notes data saved in the application to CSV format.
 * [_Coming in V2.0_] It can be extended to perform more specific instructions. The following optional arguments may be used:
 ** `note export fn/FILE_NAME [fr/START_DATE to/END_DATE]`
- The following command allows the user to exported notes from a specific date range.
+ The following command allows the user to export notes from a specific date range.
 
 Implementation of exporting to CSV is provided below. +
 1. Assuming that notes data are currently present in Trajectory, the user can invoke the `note export` command to begin exporting. +
