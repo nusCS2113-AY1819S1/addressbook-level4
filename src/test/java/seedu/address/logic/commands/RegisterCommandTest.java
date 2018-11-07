@@ -333,6 +333,16 @@ public class RegisterCommandTest {
         }
 
         @Override
+        public String getTransactionAsString(String date) throws InvalidTimeFormatException {
+            return null;
+        }
+
+        @Override
+        public void commitSalesHistory() {
+
+        }
+
+        @Override
         public void addUser(User user) throws DuplicateUserException {
             requireNonNull(user);
             usersAdded.add(user);
@@ -356,6 +366,16 @@ public class RegisterCommandTest {
         @Override
         public ArrayList<Reminder> getOverdueRemindersForThread() {
             return null;
+        }
+
+        @Override
+        public String getTransactionAsString(String date) throws InvalidTimeFormatException {
+            return null;
+        }
+
+        @Override
+        public void commitSalesHistory() {
+
         }
 
         @Override

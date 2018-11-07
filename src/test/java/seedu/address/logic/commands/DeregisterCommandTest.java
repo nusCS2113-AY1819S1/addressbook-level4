@@ -341,6 +341,16 @@ public class DeregisterCommandTest {
         }
 
         @Override
+        public String getTransactionAsString(String date) throws InvalidTimeFormatException {
+            return null;
+        }
+
+        @Override
+        public void commitSalesHistory() {
+
+        }
+
+        @Override
         public void deleteUser(User user) throws UserNotFoundException {
             usersAdded.add(registerValidUser());
             requireNonNull(user);
@@ -368,6 +378,16 @@ public class DeregisterCommandTest {
         }
 
         @Override
+        public String getTransactionAsString(String date) throws InvalidTimeFormatException {
+            return null;
+        }
+
+        @Override
+        public void commitSalesHistory() {
+
+        }
+
+        @Override
         public void deleteUser(User user) throws UserNotFoundException {
             throw new UserNotFoundException();
         }
@@ -390,6 +410,16 @@ public class DeregisterCommandTest {
         @Override
         public ArrayList<Reminder> getOverdueRemindersForThread() {
             return null;
+        }
+
+        @Override
+        public String getTransactionAsString(String date) throws InvalidTimeFormatException {
+            return null;
+        }
+
+        @Override
+        public void commitSalesHistory() {
+
         }
 
         @Override

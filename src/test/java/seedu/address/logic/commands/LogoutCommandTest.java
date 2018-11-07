@@ -27,6 +27,7 @@ import seedu.address.model.login.exceptions.UserNotFoundException;
 import seedu.address.model.product.Product;
 import seedu.address.model.timeidentifiedclass.Reminder;
 import seedu.address.model.timeidentifiedclass.Transaction;
+import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
 
 /**
  * @author Amirul
@@ -305,6 +306,16 @@ public class LogoutCommandTest {
         @Override
         public ArrayList<Reminder> getOverdueRemindersForThread() {
             return null;
+        }
+
+        @Override
+        public String getTransactionAsString(String date) throws InvalidTimeFormatException {
+            return null;
+        }
+
+        @Override
+        public void commitSalesHistory() {
+
         }
 
         @Override

@@ -8,6 +8,9 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.ViewAllTransactionsInDayCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * This class is the parser for the ViewAllTransactionsInDay command
+ */
 public class ViewAllTransactionsInDayCommandParser implements Parser<ViewAllTransactionsInDayCommand> {
 
     @Override

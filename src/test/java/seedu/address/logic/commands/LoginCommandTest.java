@@ -341,6 +341,16 @@ public class LoginCommandTest {
         }
 
         @Override
+        public String getTransactionAsString(String date) throws InvalidTimeFormatException {
+            return null;
+        }
+
+        @Override
+        public void commitSalesHistory() {
+
+        }
+
+        @Override
         public boolean checkAuthentication(Username username, Password password) {
             requireNonNull(username);
             requireNonNull(password);
@@ -375,6 +385,16 @@ public class LoginCommandTest {
         @Override
         public ArrayList<Reminder> getOverdueRemindersForThread() {
             return null;
+        }
+
+        @Override
+        public String getTransactionAsString(String date) throws InvalidTimeFormatException {
+            return null;
+        }
+
+        @Override
+        public void commitSalesHistory() {
+
         }
 
         @Override
