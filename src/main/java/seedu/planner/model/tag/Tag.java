@@ -9,8 +9,11 @@ import static seedu.planner.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_TAG_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String TAG_VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_TAG_CONSTRAINTS = "Tags names should be alphanumeric,"
+            + " less than 50 characters long.";
+    public static final String MESSAGE_TAG_NUM_CONSTRAINTS = "Number of tags should not exceed %d.";
+    public static final String TAG_VALIDATION_REGEX = "\\p{Alnum}{1,50}";
+    public static final int NUM_MAX_TAGS = 2;
 
     public final String tagName;
 
