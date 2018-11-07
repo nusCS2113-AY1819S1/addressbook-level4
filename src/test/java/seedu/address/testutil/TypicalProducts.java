@@ -45,7 +45,7 @@ public class TypicalProducts {
     public static final Product APPLE =
             new ProductBuilder().withName(VALID_NAME_APPLE).withSerialNumber(VALID_SN_APPLE)
             .withDistributor(VALID_DIST_APPLE).withInfo(VALID_INFO_APPLE).withRemainingItems("11")
-    .withTags(VALID_TAG_HEALTHY).build();
+            .withTags(VALID_TAG_HEALTHY).build();
     public static final Product BANANA =
             new ProductBuilder().withName(VALID_NAME_BANANA).withSerialNumber(VALID_SN_BANANA)
             .withDistributor(VALID_DIST_BANANA).withInfo(VALID_INFO_BANANA).withRemainingItems("1")

@@ -69,7 +69,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
 
     public String getRemainingItems() {
         return remainingItemsLabel.getText();
-     }
+    }
 
     public List<String> getTags() {
         return tagLabels
