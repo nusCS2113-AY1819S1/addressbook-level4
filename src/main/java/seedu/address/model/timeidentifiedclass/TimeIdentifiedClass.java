@@ -177,7 +177,7 @@ public abstract class TimeIdentifiedClass {
      * @param second
      * @return true if and only if time is valid
      */
-    public static boolean isValidTime(String hour, String minute, String second) {
+    private static boolean isValidTime(String hour, String minute, String second) {
         if (isValidHour(hour)
                 && isValidMinute(minute)
                 && isValidSecond(second)) {
@@ -193,7 +193,7 @@ public abstract class TimeIdentifiedClass {
      * @param day
      * @return true if valid format, false otherwise.
      */
-    public static boolean isValidDate(String year, String month, String day) {
+    private static boolean isValidDate(String year, String month, String day) {
         requireAllNonNull(year, month, day);
 
         // Checking the individual components of the date
@@ -218,5 +218,18 @@ public abstract class TimeIdentifiedClass {
             return false;
         }
         return true;
+    }
+
+    /**
+     * The following method splits a given date and checks if it is valid.
+     * @param date
+     * @return true if and only if the date is valid.
+     */
+    public static boolean isValidDate(String date) {
+        String[] splitDate = date.split("/");
+        if (splitDate.length != 3) {
+            return false;
+        }
+        return isValidDate(splitDate[0], splitDate[1], splitDate[2]);
     }
 }

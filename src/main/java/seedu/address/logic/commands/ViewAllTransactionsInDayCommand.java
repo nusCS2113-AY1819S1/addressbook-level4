@@ -10,7 +10,7 @@ import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatExcep
 /**
  * This command allows users to view all transactions on a specified day
  */
-public class ViewAllTransactionsCommand extends Command {
+public class ViewAllTransactionsInDayCommand extends Command {
 
     public static final String COMMAND_WORD = "alltransactions";
     public static final String MESSAGE_USAGE = ": Shows all transactions on a specified day in chronological order\n"
@@ -21,7 +21,7 @@ public class ViewAllTransactionsCommand extends Command {
 
     private final String date;
 
-    public ViewAllTransactionsCommand(String date) {
+    public ViewAllTransactionsInDayCommand(String date) {
         this.date = date;
     }
 

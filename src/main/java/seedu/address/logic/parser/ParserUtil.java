@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.sql.Time;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,6 +20,7 @@ import seedu.address.model.product.Name;
 import seedu.address.model.product.SerialNumber;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.timeidentifiedclass.Reminder;
+import seedu.address.model.timeidentifiedclass.TimeIdentifiedClass;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -59,18 +61,30 @@ public class ParserUtil {
      * Returns the time entered by the user for a given reminder.
      * @param reminderTime
      * @return trimmed reminder time (removing trailing whitespaces).
-     * @throws ParseException if {@code String}reminder time is in the wrong format.
+     * @throws ParseException if {@code reminderTime} is in the wrong format.
      */
 
     public static String parseReminderTime(String reminderTime) throws ParseException {
         requireNonNull(reminderTime);
-        String trimmedTime = reminderTime.trim();
         if (!Reminder.isValidReminderTime(reminderTime)) {
             throw new ParseException(Reminder.REMINDER_TIME_CONSTRAINTS);
         }
-        return trimmedTime;
+        return reminderTime.trim();
     }
 
+    /**
+     * The following method parses the date from user input
+     * @param date
+     * @return date (removing trailing whitespaces)
+     * @throws ParseException if {@code date} is in the wrong format or is invalid.
+     */
+    public static String parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        if (!TimeIdentifiedClass.isValidDate(date)) {
+            throw new ParseException("Dates must be valid and in yyyy/MM/dd format");
+        }
+        return date.trim();
+    }
     /**
      * Parses a {@code String name} into a {@code DistributorName}.
      * Leading and trailing whitespaces will be trimmed.
