@@ -13,7 +13,7 @@ import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.distributor.DistributorPhone;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.Username;
-import seedu.address.model.product.Address;
+import seedu.address.model.product.ProductInfo;
 import seedu.address.model.product.Email;
 import seedu.address.model.product.Name;
 import seedu.address.model.product.SerialNumber;
@@ -117,19 +117,19 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String address} into an {@code ProductInfo}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code address} is invalid.
 
      */
-    public static Address parseAddress(String address) throws ParseException {
+    public static ProductInfo parseAddress(String address) throws ParseException {
         requireNonNull(address);
         String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_ADDRESS_CONSTRAINTS);
+        if (!ProductInfo.isValidAddress(trimmedAddress)) {
+            throw new ParseException(ProductInfo.MESSAGE_ADDRESS_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new ProductInfo(trimmedAddress);
     }
 
     /**

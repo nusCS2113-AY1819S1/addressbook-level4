@@ -10,11 +10,8 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.distributor.DistributorName;
-import seedu.address.model.product.Address;
-import seedu.address.model.product.Email;
-import seedu.address.model.product.Name;
-import seedu.address.model.product.Product;
-import seedu.address.model.product.SerialNumber;
+import seedu.address.model.product.*;
+import seedu.address.model.product.ProductInfo;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -108,15 +105,15 @@ public class XmlAdaptedProduct {
         final DistributorName modelDistName = new DistributorName(distributor);
 
         if (info == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ProductInfo.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(info)) {
-            throw new IllegalValueException(Address.MESSAGE_ADDRESS_CONSTRAINTS);
+        if (!ProductInfo.isValidAddress(info)) {
+            throw new IllegalValueException(ProductInfo.MESSAGE_ADDRESS_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(info);
+        final ProductInfo modelProductInfo = new ProductInfo(info);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Product(modelName, modelSerialNumber, modelDistName, modelAddress, modelTags);
+        return new Product(modelName, modelSerialNumber, modelDistName, modelProductInfo, modelTags);
     }
 
     @Override
