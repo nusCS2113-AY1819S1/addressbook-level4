@@ -9,9 +9,11 @@
 
 == Overview
 
-*Student Management System (SMS)* is a desktop application which uses CLI for its interactions. SMS allows university lectures
-to easily organise and manage their students and classes by allowing the lectures to easily import student lists given by their department.
-*SMS also provides* neat features such as distributing students into groups, sending emails to them and assigning test grades, SMS makes being a university lecturer more convenient!
+*Student Management System (SMS)* is a program which allows lectures to easily plan modules for their students. Firstly,
+we have a script function that allow lecturers to add students into the SMS directly without any hassle. Furthermore, SMS
+provide lecturers the flexibility to sort students into to their respectively tutorial through the automatic distribution
+algorithm within SMS. SMS also stored students grade into the system and allows lecturers to send emails to those student
+that scored badly for their midterms for extra supplementary classes
 
 == Summary of contributions
 
@@ -28,6 +30,7 @@ to easily organise and manage their students and classes by allowing the lecture
 * *Code contributed*: [https://github.com/novin997/main[GitHub]],[https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=novin997&sort=displayName&since=2018-09-12&until=2018-11-02&timeframe=day&reverse=false&repoSort=true[RepoSense]]
 
 * *Other contributions*:
+** Managed releases from `v1.3.2` (1 release) on GitHub
 ** Enhancements to existing features:
 *** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
 ** Documentation:
