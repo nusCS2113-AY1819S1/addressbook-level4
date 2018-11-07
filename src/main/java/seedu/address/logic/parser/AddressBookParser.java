@@ -122,7 +122,7 @@ public class AddressBookParser {
             return new UndoFindCommand();
 
         case SortCommand.COMMAND_WORD:
-            return new SortCommand();
+            return new SortCommandParser().parse(arguments);
 
         case BudgetCommand.COMMAND_WORD:
             if (LoginManager.getIsMember()) {
