@@ -580,11 +580,14 @@ to specified companies about specified candidates that are suitable for specifie
 [NOTE]
 Only Gmail is supported at this point in time. +
 If it is your first time running RecruitBook, a Gmail log in authorisation page will open on your browser. +
-**While the authorisation page is open, RecruitBook will be unresponsive while waiting for an authentication response. +
-This is part of google's API and is intended.** +
 The Gmail account that you log in with will be the email account used to send emails. +
 To use another Gmail account, delete `tokens` folder which is in the same directory of the
-program.
+program. +
+**While the authorisation page is open, RecruitBook will be unresponsive while waiting for an authentication response. +
+_This also means that if RecruitBook never receives the authentication response, (by closing the authorisation page, or
+not having an internet connection), RecruitBook will stay unresponsive, and the only way out of this is by force closing
+it and reopening RecruitBook._ +
+This is part of Google's API and is intended.**
 
 Format: `email`
 
@@ -594,8 +597,8 @@ Email process is a 4-stage process. To exit from this process, enter `cancel` co
 . *Initialisation.* Type `email` and press kbd:[Enter] to initialise the email command.
 . *Choose your recipients.* On the RecruitBook application, what's shown on the main window
    will be taken in as the recipients. +
-.. You can use commands such as `listc` and `findc` to change the candidate shown.
-.. You can also use commands such as `listj` and `findj` to change the job offer shown.
+.. You can use commands such as `listc`, `filterc` and `findc` to change the candidate shown.
+.. You can also use commands such as `listC`, `findC`, `filterC`, `filterj` and `findj` to change the job offer or company shown.
 .. Type `next` and press kbd:[Enter] to move on to the next step.
 
 [start=3]
