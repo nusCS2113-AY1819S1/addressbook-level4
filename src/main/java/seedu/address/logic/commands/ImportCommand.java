@@ -18,13 +18,14 @@ public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Import the persons and todos to the address book.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Import the persons in the file specified to the "
+            + "address book.\n"
             + "Parameters: FILENAME (required)\n"
             + "Example: " + COMMAND_WORD + " export.xml ";
 
-    public static final String MESSAGE_IMPORT_SUCCESS = "Imported %1$s persons and %2$s todos.";
-    // = "Imported Persons: %1$s, Imported Todos: %1$s";
-    private static final String MESSAGE_FAILURE = "Import failed!";
+    public static final String MESSAGE_IMPORT_SUCCESS = "Imported %1$s persons.";
+    private static final String MESSAGE_FAILURE = "Import failed! Error: %1$s";
+    private static final String MESSAGE_INVALID_LIST_SIZE = "Invalid list size.";
 
     private final Path filePath;
 
@@ -39,24 +40,20 @@ public class ImportCommand extends Command {
         requireNonNull(model);
 
         int initialNumberOfPersons = model.getFilteredPersonList().size();
-        int initialNumberOfTodos = model.getFilteredTodoList().size();
 
         // TODO: Write better Exception messages
         try {
-            model.importAddressBook(filePath);
-        } catch (IOException e) {
-            throw new CommandException("IOException");
-        } catch (DataConversionException e) {
-            throw new CommandException("DataConversionException");
+            model.importPersonsFromAddressBook(filePath);
+        } catch (IOException ioe) {
+            throw new CommandException(String.format(MESSAGE_FAILURE, ioe));
+        } catch (DataConversionException dce) {
+            throw new CommandException(String.format(MESSAGE_FAILURE, dce));
         }
 
         int finalNumberOfPersons = model.getFilteredPersonList().size();
-        int finalNumberOfTodos = model.getFilteredTodoList().size();
-
         int personsImported = calculateImportedEntries(initialNumberOfPersons, finalNumberOfPersons);
-        int todosImported = calculateImportedEntries(initialNumberOfTodos, finalNumberOfTodos);
 
-        return new CommandResult(String.format(MESSAGE_IMPORT_SUCCESS, personsImported, todosImported));
+        return new CommandResult(String.format(MESSAGE_IMPORT_SUCCESS, personsImported));
     }
 
     /**
@@ -70,7 +67,7 @@ public class ImportCommand extends Command {
         int importedEntries = finalListSize - initialListSize;
         if (!isValidSize(importedEntries)) {
             // TODO: Write better Exception message
-            throw new CommandException("Invalid imported person list size");
+            throw new CommandException(String.format(MESSAGE_FAILURE, MESSAGE_INVALID_LIST_SIZE));
         }
         return importedEntries;
     }

@@ -90,14 +90,14 @@ public interface Model {
 
     //=========== Import/ Export ==============================================================================
     /**
-     * Imports the persons and todos from a xml at {@code importFilePath}.
+     * Imports the persons from a xml at {@code importFilePath}.
      */
-    void importAddressBook(Path importFilePath) throws IOException, DataConversionException;
+    void importPersonsFromAddressBook(Path importFilePath) throws IOException, DataConversionException;
 
     /**
-     * Adds all the persons and todos in {@code addressBookImported} to the current address book.
+     * Adds all the persons in {@code addressBookImported} to the current address book.
      */
-    void addToAddressBook(ReadOnlyAddressBook addressBookToImported);
+    void addPersonsToAddressBook(ReadOnlyAddressBook addressBookToImported);
 
     /**
      * Exports the current filtered person list to a xml file at {@code exportFilePath}.
