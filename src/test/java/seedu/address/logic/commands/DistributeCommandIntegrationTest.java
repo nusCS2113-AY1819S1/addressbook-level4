@@ -2,9 +2,9 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.util.DistributeUtil.MESSAGE_DUPLICATE_GROUP;
 import static seedu.address.model.distribute.DistributeAlgorithm.MESSAGE_INVALID_SIZE;
 import static seedu.address.model.distribute.DistributeAlgorithm.MESSAGE_TO_BE_IMPLEMENTED;
+import static seedu.address.model.distribute.DistributeUtil.MESSAGE_DUPLICATE_GROUP;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 
 import org.junit.Before;
