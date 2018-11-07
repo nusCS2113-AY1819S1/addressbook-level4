@@ -5,9 +5,9 @@ package com.t13g2.forum.model.forum;
  */
 public class User extends BaseModel {
     public static final String MESSAGE_USER_NAME_CONSTRAINTS =
-        "uName can take any values, and it should not be blank";
+        "Invalid parameter: uName can take any values, and it should not be blank";
     public static final String MESSAGE_USER_PASSWORD_CONSTRAINTS =
-        "uPass can take any values, and it should not be blank";
+        "Invalid parameter: uPass can take any values, and it should not be blank";
     public static final String MESSAGE_NOT_ADMIN = "You are not an admin!";
     public static final String MESSAGE_NOT_LOGIN = "Please login in order to proceed!";
     /**
@@ -45,11 +45,6 @@ public class User extends BaseModel {
 
     public static boolean isValidUserPassword(String testUserName) {
         return (testUserName.matches(USER_PASSWORD_VALIDATION_REGEX));
-    }
-
-
-    public void setIsBlock(boolean block) {
-        isBlock = block;
     }
 
     public String getUsername() {

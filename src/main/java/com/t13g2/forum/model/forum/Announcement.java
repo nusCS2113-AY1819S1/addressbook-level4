@@ -12,9 +12,9 @@ public class Announcement extends BaseModel {
      * Show message if announcement is not valid
      */
     public static final String MESSAGE_ANNOUNCEMENT_TITLE_CONSTRAINTS =
-        "aTitle can take any values, and they should not be blank";
+        "Invalid parameter: aTitle can take any values, and they should not be blank";
     public static final String MESSAGE_ANNOUNCEMENT_CONTENT_CONSTRAINTS =
-        "aContent can take any values, and they should not be blank";
+        "Invalid parameter: aContent can take any values, and they should not be blank";
 
     /**
      * The first character of the announcement must not be a whitespace,

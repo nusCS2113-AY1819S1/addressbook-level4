@@ -30,9 +30,11 @@ public class SetAdminCommand extends Command {
     public static final String MESSAGE_SUCCESS = "%1$s now is %2$s.";
     public static final String MESSAGE_FAILED = "You cannot set/revert yourself.";
     public static final String MESSAGE_INVALID_USER = "The user \"%1$s\" does not exist.";
+    public static final String MESSAGE_USER_BLOCKED =
+        "The user \"%1$s\" is blocked, please unblock in order to set admin.";
     public static final String MESSAGE_DUPLICATE_SET = "The user \"%1$s\" is already an admin.";
     public static final String MESSAGE_DUPLICATE_REVERT = "%1$s is not an admin, unable to revert.";
-    public static final String MESSAGE_SET_CONSTRAINTS = "set can only take true or false.";
+    public static final String MESSAGE_SET_CONSTRAINTS = "Invalid parameter: set can only take true or false.";
 
     private final String userNametoSetAdmin;
     private final boolean setAdmin;
@@ -64,6 +66,9 @@ public class SetAdminCommand extends Command {
         }
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             userToSet = unitOfWork.getUserRepository().getUserByUsername(userNametoSetAdmin);
+            if (setAdmin && userToSet.isBlock()) {
+                throw new CommandException(String.format(MESSAGE_USER_BLOCKED, userNametoSetAdmin));
+            }
             if (setAdmin && userToSet.isAdmin()) {
                 throw new CommandException(String.format(MESSAGE_DUPLICATE_SET, userNametoSetAdmin));
             } else if (!setAdmin && !userToSet.isAdmin()) {

@@ -25,7 +25,7 @@ public class BlockUserFromCreatingCommand extends Command {
         + PREFIX_USER_NAME + "USER NAME "
         + PREFIX_BLOCK + "BLOCK OR UNBLOCK"
         + "\nExample: " + COMMAND_WORD + " "
-        + PREFIX_USER_NAME + "john"
+        + PREFIX_USER_NAME + "john "
         + PREFIX_BLOCK + "true";
 
     public static final String MESSAGE_SUCCESS = "User %1$s successfully: %2$s";
@@ -33,8 +33,7 @@ public class BlockUserFromCreatingCommand extends Command {
     public static final String MESSAGE_INVALID_USER = "The user \"%s\" does not exist.";
     public static final String MESSAGE_DUPLICATE_BLOCK = "The user \"%s\" has already been blocked.";
     public static final String MESSAGE_DUPLICATE_UNBLOCK = "The user \"%s\" has not been block.";
-    public static final String MESSAGE_BLOCK_NAME_CONSTRAINTS = "uName cannot be null.";
-    public static final String MESSAGE_BLOCK_CONSTRAINTS = "block can only take true or false.";
+    public static final String MESSAGE_BLOCK_CONSTRAINTS = "Invalid parameter: block can only take true or false.";
 
     private final String userNameToBlock;
     private final boolean block;
@@ -69,7 +68,7 @@ public class BlockUserFromCreatingCommand extends Command {
             } else if (!block && !user.isBlock()) {
                 throw new CommandException(String.format(MESSAGE_DUPLICATE_UNBLOCK, userNameToBlock));
             } else {
-                user.setIsBlock(block);
+                user.setBlock(block);
                 unitOfWork.getUserRepository().updateUser(user);
                 unitOfWork.commit();
             }

@@ -6,6 +6,7 @@ import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_MODULE_TITLE;
 import com.t13g2.forum.logic.commands.CreateModuleCommand;
 import com.t13g2.forum.model.forum.Module;
 
+//@@author xllx1
 /**
  * A utility class for Module.
  */

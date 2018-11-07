@@ -4,7 +4,7 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-AddressBook - Level 4 was developed by CS2113 T13 Group 2 team. +
+ForumBook was developed by CS2113 T13 Group 2 team. +
 {empty}
 
 == Project Team
@@ -13,36 +13,37 @@ AddressBook - Level 4 was developed by CS2113 T13 Group 2 team. +
 
 === Zhao Mingda
 image::meowzz95.png[width="150", align="left"]
-{empty}[https://github.com/Meowzz95[github]]
+{empty}[https://github.com/Meowzz95[github]] [https://github.com/CS2113-AY1819S1-T13-2/main/tree/master/docs/team/meowzz95.adoc[Project Portfolio page]]
 
 Role: Project Leader +
-Responsibility
+Responsibility: storage implementation
 
 '''
 
 === Xu Hanhui
 image::hanskoh.png[width="150", align="left"]
-{empty}[https://github.com/HansKoh[github]]
+{empty}[https://github.com/HansKoh[github]] [https://github.com/CS2113-AY1819S1-T13-2/main/tree/master/docs/team/hanskoh.adoc[Project Portfolio page]]
 
 Role: Developer +
-Responsibilities:
+Responsibilities: CRUD feature
 
 '''
 
 === Dinesh Mangalanathadurai
 image::e0191729.png[width="150", align="left"]
-{empty}[http://github.com/E0191729[github]]
+{empty}[http://github.com/E0191729[github]] [https://github.com/CS2113-AY1819S1-T13-2/main/tree/master/docs/team/E0191729.adoc[Project Portfolio page]]
 
 Role: Developer +
 Responsibilities:
  Key focus on user management
+
 '''
 
 === Cai Xiaolin
 image::xllx1.png[width="150", align="left"]
-{empty}[https://github.com/xllx1[github]]
+{empty}[https://github.com/xllx1[github]] [https://github.com/CS2113-AY1819S1-T13-2/main/tree/master/docs/team/xllx1.adoc[Project Portfolio page]]
 
 Role: Developer +
-Responsibilities:
+Responsibilities: admin management feature
 
 '''

@@ -204,6 +204,7 @@ Examples:
 
 * `deleteComment cId/1`
 
+// tag::adminManagement[]
 === Announcing new command : `announce`
 
 Announce the new announcement created by admin. The first character of announcement title and content must not be a whitespace. +
@@ -231,7 +232,7 @@ Example:
 
 === Setting a user as admin or revert an admin to user : `setAdmin`
 
-Set a user as an admin or revert an admin to user. `set` only takes `true` or `false` +
+Set a user as an admin or revert an admin to user. The user to set as admin must not be blocked. `set` only takes `true` or `false` +
 Format: `setAdmin uName/USER_NAME set/SET_OR_REVERT`
 
 Examples:
@@ -275,6 +276,7 @@ Format: `deleteUser uName/USER_NAME`
 Example:
 
 * `deleteUser uName/john`
+// end::adminManagement[]
 
 === Logout from the forum : `logout`
 
@@ -323,8 +325,8 @@ e.g `selectThread tId/123`
 * *Announce* : `announce aTitle/ANNOUNCEMENT_TITLE aContent/ANNOUNCEMENT_CONTENT` +
 e.g `announce aTitle/Urgent! aContent/System maintenance from 4pm to 5pm.`
 * *CheckAnnounce* : `checkAnnounce`
-* *Block* : `block uName/USER_NAME` +
-e.g `block uName/john`
+* *BlockUser* : `blockUser uName/USER_NAME block/BLOCK_UNBLOCK` +
+e.g `blockUser uName/john block/false`
 * *SetAdmin* : `setAdmin uName/USER_NAME set/SET_OR_REVERT` +
 e.g `setAdmin uName/john set/true`
 * *CreateModule* : `createModule mCode/MODULE_CODE mTitle/MODULE_TITLE` +
