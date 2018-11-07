@@ -901,10 +901,10 @@ e.g.
 . `summary category d/1-1-2018 12-12-2018`
 * *Finances Statistics* : `stats` +
 e.g. `stats d/20-12-2017 31-09-2018`
-* *Add limit* : `addlimit d/START_DATE END_DATE` +
+* *Add limit* : `addlimit d/START_DATE END_DATE m/MONEYFLOW` +
 e.g. +
-`addlimit d/20-12-2017`
-`addlimit d/20-12-2017 31-09-2018`
+`addlimit d/20-12-2017 m/100`
+`addlimit d/20-12-2017 31-09-2018 m/100`
 * *Delete limit* `deleteLimit d/START_DATE END_DATE` +
 e.g. +
 `deleteLimit d/20-12-2017`
