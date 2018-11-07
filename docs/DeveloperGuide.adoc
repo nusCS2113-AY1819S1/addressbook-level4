@@ -472,24 +472,73 @@ Step 3: The program will add some Sample Scripts File into the scripts folder th
 
 .Sequence Diagram for the `addSampleTextFile` Function
 image::AddSampleTextFileSequenceDiagram.png[width="800"]
+
+Future Implementation:
+****
+* Provide the user with more options of reading other file types such as csv
+* Allow the user to select a folder outside of the project main directory
+****
 // end::ScriptSetup[]
 
 // tag::ScriptCommand[]
 === ScriptCommand feature
 ==== Current Implementation
 The `ScriptCommand` Feature allows the user to run `scripts` that execute the same command multiples time by importing
-all Command arguments from a specific text file.
+all Command arguments from a specific Text File.
 
-Before the `ScriptCommand` can be executed, there are some prerequisites:
+Prerequisites for `ScriptCommand` :
 
-* There must be a default folder for which all the scripts need to be stored
-* The default location of scripts folder is `root program location` + `/scripts/`
-* All scripts must be of `Text File Format/txt`
+* There must be a default folder for which all the scripts need to be stored.
+* All scripts must be of `Text File Format` or `txt` Extension.
+
+Typical ScriptCommand `script txt/addpersons c/add`
+
+* `script` is the `CommandWord` that is used to differentiate between the different command.
+
+[NOTE]
+`scr` is also a valid `CommandWord`.
+
+* `txt/addpersons` consists two components
+** `txt/` represent the `TextFileName` Prefix which is used to parse the parameter
+** `addpersons` represent the `TextFileName` that you want to execute
+*** `TextFileName` does not include the file extensions E.g `addpersons` not `addpersons.txt`
+*** `Text File` must also be in the script folder if a error will be thrown to the user
+* `c/add` represent the `CommandType` that the user want to run with the scripts
+** `c/` represent the `CommandType` Prefix which is indicate the command to run
+** `add` represent any valid commands that the Student Management System have E.g `delete`,`addgroup`
+
+Procedure of ScriptCommand
+
+[NOTE]
+For the following example below we will be using the `script txt/addpersons c/add` to demonstrate the sequence of the
+ScriptCommand.
+
+Step 1: The user input `script txt/addpersons c/add` into the `CommandBox` of the UI.
+
+Step 2: The `LogicManager` will run the `execute(script txt/addpersons c/add)` and then the `AddressBookParser` will run
+the `parseCommand` function to parse the arguments of the Command.
+
+Step 3: After the program have determined that the `ScriptCommand` is
+selected, the `ScriptCommandParser` will then `parse` the remaining
+arguments `txt/addpersons c/add`.
+
+Step 4: The program check whether the `TextFileName` `addpersons` and `CommandType` `add` is valid before
+calling the `ScriptCommand("addpersons","add")`.
+
+Step 5: `ScriptCommand` will tend run the `execute` function and create a instance of `AddressBookParser` called `scriptParser`
+
+* The scriptParser is used to parse all the commands that are in the `addpersons` Text File
+
+
+
+.Sequence Diagram for the `ScriptCommand` Function
+image::ScriptCommandSequenceDiagram.png[width="800"]
+
 
 Future Implementation:
 ****
-* Provide feedback and logging to users on which command has failed to executed
-* Allow the program to change the scripts default location
+* Provide the user with more options of reading other file types such as csv
+*
 ****
 // end::ScriptCommand[]
 
