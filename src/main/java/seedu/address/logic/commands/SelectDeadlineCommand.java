@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_DEADLINE_CONTAINS_ILLEGAL_CHARACTERS;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTH;
@@ -25,12 +26,12 @@ public class SelectDeadlineCommand extends Command implements CommandParser {
             + PREFIX_DAY + "DAY "
             + PREFIX_MONTH + "MONTH "
             + "[" + PREFIX_YEAR + "YEAR ]"
-            + " or DAY/MONTH/YEAR\n"
+            + " or DAY/MONTH/{YEAR]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DAY + "01 "
             + PREFIX_MONTH + "01 "
             + PREFIX_YEAR + "2018 "
-            + "or 1/1/2018";
+            + "or 1/1/{2018]";
 
     public static final String MESSAGE_SUCCESS = "New date selected: %1$s";
 
@@ -54,6 +55,9 @@ public class SelectDeadlineCommand extends Command implements CommandParser {
 
         if (toSelect.getYear() == null) {
             toSelect.setYear(model.getYear());
+        }
+        if (Deadline.containsIllegalCharacters(toSelect.toString())) {
+            throw new CommandException(MESSAGE_DEADLINE_CONTAINS_ILLEGAL_CHARACTERS);
         }
         if (!Deadline.isValidDeadline(toSelect.toString())) {
             throw new CommandException(MESSAGE_INVALID_DEADLINE);

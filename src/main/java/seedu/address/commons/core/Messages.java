@@ -14,4 +14,6 @@ public class Messages {
     public static final String MESSAGE_TASKS_LISTED_OVERVIEW = "%1$d tasks listed!";
     public static final String MESSAGE_ZERO_HOURS_COMPLETION = "It is impossible to complete it in 0 hours ;)";
     public static final String MESSAGE_INVALID_DEADLINE = "The date selected does not exist";
+    public static final String MESSAGE_DEADLINE_CONTAINS_ILLEGAL_CHARACTERS = "Input deadline "
+            + "contains illegal characters";
 }
