@@ -48,7 +48,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         DistributorPhone distphone = new DistributorPhone("00000000");
-        
+
         Product product = new Product(name, serialNumber, distname, productInfo, tagList);
         Distributor distributor = new Distributor(distname, distphone, tagList);
 
