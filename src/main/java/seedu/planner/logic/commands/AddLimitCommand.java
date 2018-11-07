@@ -18,7 +18,7 @@ import seedu.planner.model.record.Limit;
 public class AddLimitCommand extends Command {
     public static final String COMMAND_WORD = "addlimit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Set a limit for a period of time. or a single day. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Set a limit for a period of time or a single day. "
             + "Parameters: "
             + PREFIX_DATE + "DATE_START " + "DATE_END "
             + PREFIX_MONEYFLOW + "LIMIT_MONEY "
@@ -34,7 +34,7 @@ public class AddLimitCommand extends Command {
             + PREFIX_MONEYFLOW + "100) \n";
 
     public static final String MESSAGE_SUCCESS = "The limit has been added.\n";
-    public static final String MESSAGE_LIMITS_SAME_DATE = "There is already a limit for that period of date\n";
+    public static final String MESSAGE_LIMITS_SAME_DATE = "There is already a limit for that period of time\n";
 
     public static final String MESSAGE_MONTHLY = "This month: %s\n";
     public static final String MESSAGE_SINGLE_DATE = "Date: %s\n";
