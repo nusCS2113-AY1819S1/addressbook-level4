@@ -432,35 +432,37 @@ can also provide the lecturers a option to choose their own script folder locati
 `preferences.json` contains a parameter called `scriptFileDirectory` which is used to indicate the scripts folder in
 the main program
 
-* Procedure of ScriptSetup
+Procedure of ScriptSetup
 
-** When the `execute` method is called, the program will get the `scriptFolder` from the `getScriptFileDirectory` function
+Step 1: When the `execute` method is called, the program will get the `scriptFolder` from the `getScriptFileDirectory` function
 and it will then check whether `scriptFolder` is a valid Path name
 
-*** If `scriptFolder` is valid, the program will automatically proceed to generate the path of the `scriptFolder`
+* If `scriptFolder` is valid, the program will automatically proceed to generate the path of the `scriptFolder` and
+the `logsPath` which is the logs folder for the scripts
 
+[NOTE]
+`logsPath` contains all the log files that are generated when there are commands that failed to execute due to the script
+Command
+
+* If `scriptFolder` is invalid, the program will instead use the `defaultScriptFolder` to generate the path of the `scriptFolder` and
+the `logsPath` which is the logs folder for the scripts
+
+* Similarly, if the `preferences.json` is not present, a new preferences.json will be automatically generated with the
+`defaultScriptFolder`
+
+[NOTE]
+`defaultScriptFolder` = `"/scripts/"`
+
+Step 2: The program will execute `createFolder(scriptPath)` and `createFolder(logPath)` to create the scripts folder and
+logs folder respectively if the folder is missing
 
 .Sequence Diagram for the `ScriptSetup` Function
 image::ScriptSetupSequenceDiagram.png[width="800"]
 
+Step 3: The program will add some Sample Scripts File into the scripts folder through `addSampleTextFile` function
 
-
-Step 1: ScriptSetup will be executed by `MainApp` when the program is initialized and the `ScriptSetup` will be
-execute with the parameter containing the default `scripts` folder location.
-
-[NOTE]
- The default scripts folder location is
- obtained from the `preferences.json` file in the main directory
-
-Step 2: `ScriptSetup` will obtain the path of the default script folder by calling `getPath` from the `FileUtil`
-
-Step 3: The `createFolder` function will be called to create a new folder if the `path` does not exist.
-A boolean `isScriptFolderPresent` will be return true if the script folder is present in the project folder and false
-if it is not present inside the project folder
-
-Step 4: If `isScriptFolderPresent` is false, `scriptSetup` will call `addSampleTextFile` which will add some Sample
-Text Files into the scripts folder
-
+.Sequence Diagram for the `addSampleTextFile` Function
+image::AddSampleTextFileSequenceDiagram.png[width="800"]
 // end::ScriptSetup[]
 
 // tag::ScriptCommand[]
