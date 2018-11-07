@@ -4,12 +4,6 @@ import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static seedu.planner.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.planner.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.planner.testutil.TypicalLimits.LIMIT_100;
-import static seedu.planner.testutil.TypicalLimits.LIMIT_500;
-import static seedu.planner.testutil.TypicalLimits.LIMIT_ALL_DIFFERENT;
-import static seedu.planner.testutil.TypicalLimits.LIMIT_SINGLE_DATE_100;
-import static seedu.planner.testutil.TypicalLimits.LIMIT_SINGLE_DATE_500;
-import static seedu.planner.testutil.TypicalLimits.LIMIT_SINGLE_DATE_All_DIFF;
 import static seedu.planner.testutil.TypicalRecords.getTypicalFinancialPlanner;
 
 import org.junit.Test;
@@ -22,6 +16,7 @@ import seedu.planner.model.ModelManager;
 import seedu.planner.model.UserPrefs;
 import seedu.planner.model.record.Limit;
 import seedu.planner.testutil.LimitBuilder;
+import seedu.planner.testutil.TypicalLimits;
 //@@Author OscarZeng
 
 public class EditLimitCommandTest {
@@ -30,8 +25,8 @@ public class EditLimitCommandTest {
 
     @Test
     public void execute_hasSameDatesLimitInside_success() {
-        Limit editedLimit = new LimitBuilder(LIMIT_100).build();
-        Limit originalLimit = new LimitBuilder(LIMIT_500).build();
+        Limit editedLimit = new LimitBuilder(TypicalLimits.LIMIT_100).build();
+        Limit originalLimit = new LimitBuilder(TypicalLimits.LIMIT_500).build();
         EditLimitCommand editLimitCommand = new EditLimitCommand(editedLimit);
         String expectedMessage = EditLimitCommand.MESSAGE_SUCCESS + "Original Limit:\n"
                 + model.generateLimitOutput(model.isExceededLimit(originalLimit),
@@ -49,8 +44,8 @@ public class EditLimitCommandTest {
 
     @Test
     public void execute_singleDateLimitInList_success() {
-        Limit editedLimit = new LimitBuilder(LIMIT_SINGLE_DATE_100).build();
-        Limit originalLimit = new LimitBuilder(LIMIT_SINGLE_DATE_500).build();
+        Limit editedLimit = new LimitBuilder(TypicalLimits.LIMIT_SINGLE_DATE_100).build();
+        Limit originalLimit = new LimitBuilder(TypicalLimits.LIMIT_SINGLE_DATE_500).build();
         EditLimitCommand editLimitCommand = new EditLimitCommand(editedLimit);
         String expectedMessage = EditLimitCommand.MESSAGE_SUCCESS + "Original Limit:\n"
                 + model.generateLimitOutput(model.isExceededLimit(originalLimit),
@@ -68,8 +63,8 @@ public class EditLimitCommandTest {
 
     @Test
     public void execute_hasNoSameDatesLimitInside_fail() {
-        Limit editedLimit = new LimitBuilder(LIMIT_100).build();
-        Limit originalLimit = new LimitBuilder(LIMIT_ALL_DIFFERENT).build();
+        Limit editedLimit = new LimitBuilder(TypicalLimits.LIMIT_100).build();
+        Limit originalLimit = new LimitBuilder(TypicalLimits.LIMIT_ALL_DIFFERENT).build();
         EditLimitCommand editLimitCommand = new EditLimitCommand(editedLimit);
         String expectedMessage = Messages.MESSAGE_LIMITS_DO_NOT_EXIST;
         model.addLimit(originalLimit);
@@ -79,8 +74,10 @@ public class EditLimitCommandTest {
 
     @Test
     public void execute_hasNoSameSingleDateLimitInside_fail() {
-        Limit editedLimit = new LimitBuilder(LIMIT_SINGLE_DATE_100).build();
-        Limit originalLimit = new LimitBuilder(LIMIT_SINGLE_DATE_All_DIFF).build();
+
+        Limit editedLimit = new LimitBuilder(TypicalLimits.LIMIT_SINGLE_DATE_100).build();
+        Limit originalLimit = new LimitBuilder(TypicalLimits.LIMIT_SINGLE_DATE_ALL_DIFF).build();
+
         EditLimitCommand editLimitCommand = new EditLimitCommand(editedLimit);
         String expectedMessage = Messages.MESSAGE_LIMITS_DO_NOT_EXIST;
         model.addLimit(originalLimit);
@@ -90,7 +87,7 @@ public class EditLimitCommandTest {
 
     @Test
     public void execute_emptyLimitList_fail() {
-        Limit editedLimit = new LimitBuilder(LIMIT_100).build();
+        Limit editedLimit = new LimitBuilder(TypicalLimits.LIMIT_100).build();
         EditLimitCommand editLimitCommand = new EditLimitCommand(editedLimit);
         String expectedMessage = Messages.MESSAGE_LIMITS_DO_NOT_EXIST;
 
@@ -99,8 +96,8 @@ public class EditLimitCommandTest {
 
     @Test
     public void executeUndoRedo_validLimitEditedExecution_success() throws Exception {
-        Limit originalLimit = new LimitBuilder(LIMIT_100).build();
-        Limit editedLimit = new LimitBuilder(LIMIT_500).build();
+        Limit originalLimit = new LimitBuilder(TypicalLimits.LIMIT_100).build();
+        Limit editedLimit = new LimitBuilder(TypicalLimits.LIMIT_500).build();
         model.addLimit(originalLimit);
         EditLimitCommand editLimitCommand = new EditLimitCommand(editedLimit);
         Model expectedModel = new ModelManager(model.getFinancialPlanner(), new UserPrefs());
@@ -121,15 +118,15 @@ public class EditLimitCommandTest {
 
     @Test
     public void equals() {
-        final EditLimitCommand editLimitCommand2 = new EditLimitCommand(LIMIT_100);
-        final EditLimitCommand editLimitCommand1 = new EditLimitCommand(LIMIT_SINGLE_DATE_100);
+        final EditLimitCommand editLimitCommand2 = new EditLimitCommand(TypicalLimits.LIMIT_100);
+        final EditLimitCommand editLimitCommand1 = new EditLimitCommand(TypicalLimits.LIMIT_SINGLE_DATE_100);
 
         // same limits -> returns true
-        EditLimitCommand sameLimitCommand = new EditLimitCommand(LIMIT_100);
+        EditLimitCommand sameLimitCommand = new EditLimitCommand(TypicalLimits.LIMIT_100);
         assertTrue(editLimitCommand2.equals(sameLimitCommand));
 
         // same limits -> returns true
-        EditLimitCommand differentLimitCommand = new EditLimitCommand(LIMIT_ALL_DIFFERENT);
+        EditLimitCommand differentLimitCommand = new EditLimitCommand(TypicalLimits.LIMIT_ALL_DIFFERENT);
         assertFalse(editLimitCommand2.equals(differentLimitCommand));
 
         // same object -> returns true

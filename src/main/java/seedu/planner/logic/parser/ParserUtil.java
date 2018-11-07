@@ -1,6 +1,8 @@
 package seedu.planner.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.planner.model.tag.Tag.MESSAGE_TAG_NUM_CONSTRAINTS;
+import static seedu.planner.model.tag.Tag.NUM_MAX_TAGS;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -133,6 +135,9 @@ public class ParserUtil {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
+        }
+        if (tagSet.size() > NUM_MAX_TAGS) {
+            throw new ParseException(String.format(MESSAGE_TAG_NUM_CONSTRAINTS, NUM_MAX_TAGS));
         }
         return tagSet;
     }

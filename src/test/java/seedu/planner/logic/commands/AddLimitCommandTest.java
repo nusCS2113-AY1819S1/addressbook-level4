@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_SUCCESS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,7 +49,7 @@ public class AddLimitCommandTest {
 
         CommandResult commandResult = new AddLimitCommand(validLimit).execute(modelStub, commandHistory);
 
-        assertEquals(modelStub.generateLimitOutput(false,
+        assertEquals(MESSAGE_SUCCESS + modelStub.generateLimitOutput(false,
                 modelStub.getTotalSpend(validLimit), validLimit), commandResult.feedbackToUser);
         assertEquals(Arrays.asList(validLimit), modelStub.limitsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);

@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.planner.logic.commands.AddCommand;
 import seedu.planner.logic.commands.AddLimitCommand;
+import seedu.planner.logic.commands.AddMonthlyLimitCommand;
 import seedu.planner.logic.commands.ArchiveCommand;
 import seedu.planner.logic.commands.CheckLimitCommand;
 import seedu.planner.logic.commands.ClearCommand;
@@ -15,8 +16,10 @@ import seedu.planner.logic.commands.Command;
 import seedu.planner.logic.commands.DeleteByDateCommand;
 import seedu.planner.logic.commands.DeleteCommand;
 import seedu.planner.logic.commands.DeleteLimitCommand;
+import seedu.planner.logic.commands.DeleteMonthlyLimitCommand;
 import seedu.planner.logic.commands.EditCommand;
 import seedu.planner.logic.commands.EditLimitCommand;
+import seedu.planner.logic.commands.EditMonthlyLimitCommand;
 import seedu.planner.logic.commands.ExitCommand;
 import seedu.planner.logic.commands.ExportExcelCommand;
 import seedu.planner.logic.commands.FindCommand;
@@ -31,6 +34,7 @@ import seedu.planner.logic.commands.SortCommand;
 import seedu.planner.logic.commands.StatisticCommand;
 import seedu.planner.logic.commands.SummaryCommand;
 import seedu.planner.logic.commands.UndoCommand;
+
 import seedu.planner.logic.parser.exceptions.ParseException;
 
 
@@ -110,11 +114,19 @@ public class FinancialPlannerParser {
         case AddLimitCommand.COMMAND_WORD:
             return new AddLimitCommandParser().parse(arguments);
 
+        case AddMonthlyLimitCommand.COMMAND_WORD:
+            return new AddMonthlyLimitCommandParser().parse(arguments);
+
         case DeleteLimitCommand.COMMAND_WORD:
             return new DeleteLimitCommandParser().parse(arguments);
 
+        case DeleteMonthlyLimitCommand.COMMAND_WORD:
+            return new DeleteMonthlyLimitCommand();
         case EditLimitCommand.COMMAND_WORD:
             return new EditLimitCommandParser().parse(arguments);
+
+        case EditMonthlyLimitCommand.COMMAND_WORD:
+            return new EditMonthlyLimitCommandParser().parse(arguments);
 
         case CheckLimitCommand.COMMAND_WORD:
             return new CheckLimitCommand();

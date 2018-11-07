@@ -3,13 +3,6 @@ package seedu.planner.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 
-import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_BASIC_EARNED;
-import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_BASIC_SPEND;
-import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_DOUBLE_DATE;
-import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_EXCEED;
-import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_NOT_EXCEED;
-import static seedu.planner.logic.commands.AddLimitCommand.MESSAGE_SINGLE_DATE;
-
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -36,6 +29,17 @@ import seedu.planner.model.summary.CategoryStatisticsList;
  * Represents the in-memory model of the financial planner data.
  */
 public class ModelManager extends ComponentManager implements Model {
+    public static final String MESSAGE_MONTHLY = "This month: %s\n";
+    public static final String MESSAGE_SINGLE_DATE = "Date: %s\n";
+    public static final String MESSAGE_DOUBLE_DATE = "Date period: %s -- %s\n";
+    public static final String MESSAGE_BASIC_SPEND = "The limit you have set: %.2f \n"
+            + "Your spend during the limit period: %.2f\n";
+
+    public static final String MESSAGE_BASIC_EARNED = "The limit you have set: %.2f \n"
+            + "Your income during the limit period: %.2f\n";
+    public static final String MESSAGE_EXCEED = "Your spend exceeded the limit !!! \n";
+    public static final String MESSAGE_NOT_EXCEED = "Your spend did not exceed the limit ^o^\n";
+    public static final Date DATE_SPECIAL_FOR_MONTHLY = new Date("01-01-9999");
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private static final int STARTING_ELEMENT = 0;
 
@@ -193,6 +197,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
     @Override
     public boolean isExceededLimit (Limit limitIn) {
+        if (limitIn.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
+            limitIn = generateThisMonthLimit(limitIn);
+        }
         requireNonNull(limitIn);
         return (versionedFinancialPlanner.isExceededLimit(limitIn));
     }
@@ -210,6 +217,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
     @Override
     public Double getTotalSpend (Limit limitIn) {
+        if (limitIn.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
+            limitIn = generateThisMonthLimit(limitIn);
+        }
         requireNonNull(limitIn);
         return versionedFinancialPlanner.getTotalSpend(limitIn);
     }
@@ -218,7 +228,12 @@ public class ModelManager extends ComponentManager implements Model {
         String output = "";
         int count = 1;
         for (Limit i: limits) {
-            if (isExceededLimit(i)) {
+            if (isExceededLimit(i) && i.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
+                output += "\n" + String.format("%d.", count++) + generateLimitOutput(true, getTotalSpend(i), i);
+            }
+        }
+        for (Limit i: limits) {
+            if (isExceededLimit(i) && !i.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
                 output += "\n" + String.format("%d.", count++) + generateLimitOutput(true, getTotalSpend(i), i);
             }
         }
@@ -230,12 +245,37 @@ public class ModelManager extends ComponentManager implements Model {
         String output = "";
         int count = 1;
         for (Limit i: limits) {
+            if (i.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
+                output += "\n" + "Monthly Limit:\n"
+                        + generateLimitOutput(isExceededLimit(i), getTotalSpend(i), i);
+            }
+        }
+        output += "Normal limits:";
+        for (Limit i: limits) {
+            if (i.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
+                continue;
+            }
             output += "\n" + String.format("%d.", count++)
                     + generateLimitOutput(isExceededLimit(i), getTotalSpend(i), i);
         }
         return output;
     }
 
+    /**
+     * This function is to generate the limit for this month when the according to the
+     * monthly limit.
+     * @param limitIn
+     * @return
+     */
+    public Limit generateThisMonthLimit (Limit limitIn) {
+        Date today = DateUtil.getDateToday();
+        Month thisMonth = new Month(today.getMonth(), today.getYear());
+        Date dateStart = DateUtil.generateFirstOfMonth(thisMonth);
+        Date dateEnd = DateUtil.generateLastOfMonth(thisMonth);
+        Limit thisMonthLimit = new Limit(dateStart, dateEnd, limitIn.getLimitMoneyFlow());
+
+        return thisMonthLimit;
+    }
     /**
      * This function is to generate the limit output.
      * @param isExceeded
@@ -248,8 +288,9 @@ public class ModelManager extends ComponentManager implements Model {
         Date dateEnd;
         dateStart = limit.getDateStart();
         dateEnd = limit.getDateEnd();
-
-        if (dateEnd.equals(dateStart)) {
+        if (dateStart.equals(DATE_SPECIAL_FOR_MONTHLY)) {
+            output = String.format(MESSAGE_MONTHLY, DateUtil.getDateToday().getMonth());
+        } else if (dateEnd.equals(dateStart)) {
             output = String.format(MESSAGE_SINGLE_DATE, dateStart);
         } else {
             output = String.format(MESSAGE_DOUBLE_DATE, dateStart, dateEnd);
