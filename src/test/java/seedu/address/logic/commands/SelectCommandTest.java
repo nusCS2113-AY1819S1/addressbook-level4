@@ -88,6 +88,12 @@ public class SelectCommandTest {
     }
 
     @Test
+    public void execute_invalidTimeTypeUnfilteredList_failure() {
+        assertExecutionFailureWithDateFilter(INDEX_FIRST_PERSON,
+                VALID_DATE, null, Messages.MESSAGE_UNKNOWN_COMMAND);
+    }
+
+    @Test
     public void equals_noDateFilter() {
         SelectCommand selectFirstCommand = new SelectCommand(INDEX_FIRST_PERSON);
         SelectCommand selectSecondCommand = new SelectCommand(INDEX_SECOND_PERSON);
@@ -198,6 +204,8 @@ public class SelectCommandTest {
         assertCommandFailure(selectCommand, model, commandHistory, expectedMessage);
         assertTrue(eventsCollectorRule.eventsCollector.isEmpty());
     }
+
+
 
 
 }
