@@ -1,0 +1,38 @@
+= Cruz Jomari Evangelista - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Trajectory
+
+---
+
+== Overview
+
+Trajectory is a lightweight management system for those who need a no-frills solution for managing students, modules, grades, classes and notes. It is built for users who prefer typing (CLI) over GUI interaction and has a GUI created with JavaFX.
+
+== Summary of contributions
+* *Code contributed*: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=jomcruz93[Link to Project Code Dashboard]
+* *Main feature implemented*: Notes Management
+** What it does: It allows the user to manage notes within the application.
+** Justification: This feature improves the product's utility as users would sometimes need to take notes about important things. It serves to make Trajectory a step closer to becoming a one-stop app for users so that they would not need to rely on several other applications to accomplish their needs.
+** Highlights: Notes saved in Trajectory can be of two types: a plain sticky note or a calendar event. Those of the latter type are exportable to CSV, which may then be imported to Google Calendar.
+** Credits: https://cs2113-ay1819s1-t16-1.github.io/main/AboutUs.html and https://github.com/nusCS2113-AY1819S1/addressbook-level4
+
+* *Other contributions*:
+
+== Contributions to the User Guide
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=notesmanagementdepth]
+
+== Contributions to the Developer Guide
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=notesmanagementbrief]
+
+include::../DeveloperGuide.adoc[tag=notesmanagementdepth]

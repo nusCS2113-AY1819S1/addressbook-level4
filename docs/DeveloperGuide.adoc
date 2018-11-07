@@ -511,24 +511,26 @@ to the students.
 ** Cons: More difficult to implement; Handling date objects is tricky because there are many popular date formats.
 // end::modulebidding[]
 
-// tag::noteimportexport[]
-=== Notes data to/from Google Calendar feature
+// tag::notesmanagementbrief[]
+=== Notes data to Google Calendar feature
 ==== Feature Description:
 *EXPORT :* +
-The user will be able to export notes from this application to a CSV file that follows the formatting required for importing calendar files to Google Calendar. The exporting process can be invoked by the user by entering the command below.
+The user is able to export notes from this application to a CSV file that follows the formatting required for importing calendar files to Google Calendar. The exporting process can be invoked by the user by entering the command below.
 
-*Command: `note export`*
+*Command: `note export fn/FILE_NAME`*
 
 * The command `note export` will create a file with a .csv extension on the local storage.
-* Invoking the command above by itself will convert all notes data saved in the application to CSV format.
-* It can be extended to perform more specific instructions. The following arguments may be used:
-** `note export fn/FILE_NAME`
+*
+* Invoking the command above by itself will convert all exportable notes data saved in the application to CSV format.
+* [_Coming in V2.0_] It can be extended to perform more specific instructions. The following optional arguments may be used:
+** `note export fn/FILE_NAME [fr/START_DATE to/END_DATE]`
+ The following command allows the user to exported notes from a specific date range.
 
-A possible implementation of exporting to CSV is provided below. +
+Implementation of exporting to CSV is provided below. +
 1. Assuming that notes data are currently present in Trajectory, the user can invoke the `note export` command to begin exporting. +
-2. A parser class will be used to generate the correct formatting for the Google Calendar. +
-3. A CSV API will then be used to handle the writing to CSV. The file will be saved to a default directory in the user's local storage. +
-// end::noteimportexport[]
+2. For each Note object to be exported, a corresponding CsvAdaptedNote object will be created. It is used to generate the correct formatting for the Google Calendar. +
+3. A CSV utility class will then be used to handle the writing to CSV. The file is saved to "/data/CSVexport" folder in the application's directory. +
+// end::notesmanagementbrief[]
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
@@ -2431,7 +2433,7 @@ Use case ends.
 +
 Use case resumes at step 1.
 
-
+// tag::notesmanagementdepth[]
 [discrete]
 === Use case: Add Note
 
@@ -2653,7 +2655,7 @@ Use case resumes at step 1.
 ** 2b1. System displays a message that no entries are found.
 +
 Use case ends.
-
+// end::notesmanagementdepth[]
 
 [appendix]
 == Non Functional Requirements
