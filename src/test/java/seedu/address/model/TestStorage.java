@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.events.model.DistributorBookChangedEvent;
-import seedu.address.commons.events.model.ProductDatabaseChangedEvent;s
+import seedu.address.commons.events.model.ProductDatabaseChangedEvent;
 import seedu.address.commons.events.model.SalesHistoryChangedEvent;
 import seedu.address.commons.events.model.UserDatabaseChangedEvent;
 import seedu.address.commons.events.model.UserDeletedEvent;
