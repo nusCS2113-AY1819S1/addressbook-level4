@@ -14,6 +14,9 @@ public class UserPrefs {
     private GuiSettings guiSettings;
     private Path addressBookFilePath = Paths.get("data" , "addressbook.xml");
     private Path loginBookFilePath = Paths.get("data" , "loginbook.xml");
+    private Path clubBudgetElementsBookFilePath = Paths.get("data" , "budgetelementsbook.xml");
+    private Path finalBudgetsBookFilePath = Paths.get("data" , "budgetsbook.xml");
+
 
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
@@ -39,8 +42,24 @@ public class UserPrefs {
         return addressBookFilePath;
     }
 
+    public Path getClubBudgetElementsBookFilePath() {
+        return clubBudgetElementsBookFilePath;
+    }
+
+    public Path getFinalBudgetsBookFilePath() {
+        return finalBudgetsBookFilePath;
+    }
+
     public void setAddressBookFilePath(Path addressBookFilePath) {
         this.addressBookFilePath = addressBookFilePath;
+    }
+
+    public void setClubBudgetElementsBookFilePath(Path clubBudgetElementsBookFilePath) {
+        this.clubBudgetElementsBookFilePath = clubBudgetElementsBookFilePath;
+    }
+
+    public void setFinalBudgetsBookFilePath(Path finalBudgetsBookFilePath) {
+        this.finalBudgetsBookFilePath = finalBudgetsBookFilePath;
     }
 
     @Override
@@ -55,12 +74,15 @@ public class UserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return Objects.equals(guiSettings, o.guiSettings)
-                && Objects.equals(addressBookFilePath, o.addressBookFilePath);
+                && Objects.equals(addressBookFilePath, o.addressBookFilePath)
+                && Objects.equals(clubBudgetElementsBookFilePath, o.clubBudgetElementsBookFilePath)
+                && Objects.equals(finalBudgetsBookFilePath, o.finalBudgetsBookFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath);
+        return Objects.hash(guiSettings, addressBookFilePath, clubBudgetElementsBookFilePath,
+                finalBudgetsBookFilePath);
     }
 
     @Override
@@ -68,6 +90,8 @@ public class UserPrefs {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings.toString());
         sb.append("\nLocal data file location : " + addressBookFilePath);
+        sb.append("\nLocal data file location : " + clubBudgetElementsBookFilePath);
+        sb.append("\nLocal data file location : " + finalBudgetsBookFilePath);
         return sb.toString();
     }
 

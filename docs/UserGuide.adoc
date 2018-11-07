@@ -14,19 +14,24 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2113-AY1819S1-F09-1/main
 
-
+image::NUSSU-ConnectPNGBanner.png[width="680", align=center"]
 By: `Team F09-1`      Since: `Sept 2018`
 
 == Introduction
 
-NUSSU-Connect is an application for executive committee (exco) members of the NUS Student Union (NUSSU) to help them perform their daily tasks including managing recruitment, contacts, budgets and projects efficiently.
+NUSSU-Connect is an application designed and created specifically for executive committee (exco) members of the NUS Student Union (NUSSU). It enables you, as a committee member, to reduce your daily workload and your organisation to potentially minimize manpower and logistics issues during peak periods of activity by providing them a convenient platform to manage recruitment, contacts, budgets and projects efficiently. The application can also be used by every organisation with a clearly defined hierarchy of roles and responsibilities of each and every member belonging to the organisation.
+The aim of this application is to digitise any company’s or organisation’s standard operating procedures, through the process of streamlining workflow to essentially solve, or at least minimize, any manpower and logistics issues that can happen during any peak periods of business activities.
 
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
+.  Download the latest `NUSSU-Connect.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your NUSSU-Connect.
+.  Double-click on the jar file to start the app and wait for a few seconds for the loading to complete. You will then see a login pop up window appears as shown in the image below. You will need to head over to section 3.1, "Logging into system" and follow the steps detailed carefully in order to log into the application successfully.
++
+image::BlankLoginInput.PNG[width="400"]
++
+. Upon a successful attempt, you should see the main window of the application load up, as shown in the image below.
 +
 image::Ui.png[width="790"]
 +
@@ -35,11 +40,12 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
+* **`createaccount`**`A1234568M zaq1xsw2cde3 member` : creates a new account with `A1234568M` as the user id, `zaq1xsw2cde3` as the user password, and `member` as the user role of the account to be created.
+* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to NUSSU-Connect.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
 * *`exit`* : exits the app
 
-.  Refer to <<Features>> for details of each command.
+.  You can refer to Section 3, <<Features>> subsection to see more detailed documentation of the features that are built in this application.
 
 [[Features]]
 == Features
@@ -53,6 +59,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
+// tag::logincreateaccount[]
 === Logging into system: `login`
 
 Logs into application using relevant credentials. +
@@ -62,8 +69,9 @@ Format: `login USERID PASSWORD ROLE`
 * USERID refers to student matriculation number
 * PASSWORD refers to the password associated with the existing account
 * ROLE refers to the role in NUSSU associated with the existing account
-* The USERID must be in the `X1234567X` format, where X can be any lower or upper case letter alphabet, and there must be exactly 7 digits between the two `X`
+* The USERID must be in the `X1234567X` format, where X can only be upper case letter alphabets, and there must be exactly 7 digits between the two `X`
 * USERID must belong to an existing account
+* ROLE can only contain lower-case letter alphabets, and be only either `member`, `president` or `treasurer`
 * There must be at least 1 space between USERID and PASSWORD, and between PASSWORD and ROLE
 * There must be at least 1 space between `login` keyword and USERID
 * The 3 parameters, USERID, PASSWORD and ROLE must be present in user input during the login process
@@ -73,31 +81,61 @@ Format: `login USERID PASSWORD ROLE`
 
 Examples:
 
-* `login X1234567X zaq1xsw2cde3 member` +
-Logs into Address book with user ID as X1234567X, password as zaq1xsw2cde3 and role as member.
+* `login A1234567M zaq1xsw2cde3 president` +
+Logs into NUSSU-Connect with user ID as A1234567M, password as zaq1xsw2cde3 and role as president.
 
-image::CorrectIdPasswordRole.PNG[width="300"]
-image::LoginSuccessMessage.PNG[width="300"]
+image::DefaultAccountDetails.PNG[width="300"]
 
 [NOTE]
 ====
-Password is case-sensitive!
+The default account login details for logging in when the application is launched for the very first time, can be illustrated in the picture below. You must enter the login details shown in the picture exactly, as all the login parameters are case-sensitive. Thus, any difference in casing between the actual and expected input characters will lead to failure in logging into the application.
 ====
+image::DefaultAccountDetails.PNG[width="300"]
+
+[NOTE]
+====
+After you log in successfully, you should expect to see the main window of the application as shown below.
+====
+image::LoginSuccess.PNG[width="300"]
+
+[NOTE]
+====
+If you are unable to log in successfully, you should expect to see the login input field in a pop-up box again, asking you to input your login credentials again.
+====
+image::BlankLoginInput.PNG[width="300"]
+
+[NOTE]
+====
+User Id, Password and Role inputs are all case-sensitive!
+====
+
+[NOTE]
+====
+If you attempt to minimize the application before logging in to do other things, only to come back to the application later, and you want to close the application, you should not click on the cross button on the top right hand corner of the application, as shown in the image below. Look at the next note below to see the correct step to safely close the application.
+====
+image::WrongCloseApplication.PNG[width="300"]
+
+[NOTE]
+====
+It is not recommended to close the application as shown in the image above, as this would cause the application to become unresponsive. You should switch windows repeatedly with the Alt + Tab keys on your keyboard until you can see the login dialog box shown in the image below. Once that is done, you can then safely click on the cross button found on the top right hand corner of the dialog box to close the application.
+====
+image::CorrectCloseApplication.PNG[width="300"]
+
 
 === Creating a new user account: `createaccount`
 
-Creates a new user account in the address book. +
+Creates a new user account in the NUSSU-Connect. +
 Format: `createaccount USERID PASSWORD ROLE`
 
 ****
 * USERID refers to student matriculation number
 * PASSWORD refers to any desired passphrases the new user wishes to have
 * ROLE refers to the role in NUSSU associated with the existing account
-* The USERID must be in the `X1234567X` format, where X can only be upper-case letter alphabet, and there must be exactly 7 digits between the two `X`
+* The USERID must be in the `X1234567X` format, where X can only be upper-case letter alphabets, and there must be exactly 7 digits between the two `X`
 * USERID must not belong to an existing account
 * ROLE can only contain lower-case letter alphabets, and be only either `member`, `president` or `treasurer`
 * There must be at least 1 space between USERID and PASSWORD, and between PASSWORD and ROLE
-* There must be at least 1 space between `login` keyword and USERID
+* There must be at least 1 space between `createaccount` keyword and USERID
 * The 3 parameters, USERID, PASSWORD and ROLE must be present in user input during the account creation process
 * There must not be any additional unnecessary parameters in user input during the account creation process
 * There must not be any spaces in USERID, PASSWORD and ROLE
@@ -105,10 +143,16 @@ Format: `createaccount USERID PASSWORD ROLE`
 
 Examples:
 
-* `createaccount X1234567X aq1xsw2cde3 member` +
-Creates a new account with user ID as X1234567X, password as zaq1xsw2cde3 and role as member in the address book.
+* `createaccount A1234569M zaq1xsw2cde3 member` +
+Creates a new account with user ID as A1234569M, password as zaq1xsw2cde3 and role as member in the NUSSU-Connect.
+The image below shows the outcome of a successful creation of a new account.
 
 image::CreateAccountSuccess.PNG[width="300"]
+
+The image below shows the outcome of an unsuccessful creation of a new account due to an account already existing.
+
+image::CreateAccountFailure.PNG[width="300"]
+// end::logincreateaccount[]
 
 === Viewing help : `help`
 
@@ -116,7 +160,7 @@ Format: `help`
 
 === Adding a person: `add`
 
-Adds a person to the address book +
+Adds a person to NUSSU-Connect+
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 
 [TIP]
@@ -126,27 +170,24 @@ Examples:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
+// tag:aslUser[]
 === Adding person's skill: `asl`
 
-Edits a person's skill in the address book.
+Edits a person's skill in NUSSU-Connect.
 
 Format: `asl INDEX s/SKILL l/SKILL_LEVEL`
+
+[TIP]
+A skill level must be an integer from 0 to 100 (inclusive).
 
 Examples:
 
 * `asl 2 s/Photography l/30`
 * `asl 4 s/Java l/40`
-
-
-=== Listing all persons : `list`
-
-Shows a list of all persons in the address book. +
-Format: `list`
-
+// end:aslUser[]
 === Editing a person : `edit`
 
-Edits an existing person in the address book. +
+Edits an existing person in NUSSU-Connect. +
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 ****
@@ -164,17 +205,28 @@ Edits the phone number and email address of the 1st person to be `91234567` and 
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+=== Listing all persons : `list`
+
+Shows a list of all persons in the NUSSU-Connect. +
+Format: `list`
+
+// tag::find[]
 === Locating persons: `find`
 
 Finds persons in the displayed list whose names/tags contain any of the given keywords. +
+If the `\exclude` option is enabled, the matched person will be excluded from the list instead. +
+
 Format: `find [\tag] [\exclude] KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The search is case insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* For back-to-back find commands, the most recent find command will search according to the previous find command
-* The `\exclude` option will exclude any names/tags with the specified keywords
+* If `\tag` option is specified, find command will search according to names.
+* If `\exclude` option is specified, find command will exclude any names/tags with the specified keywords
+* The order of `\tag` and `\exclude` options can be swapped
+* Back-to-back find commands utilizes the Search Pruning feature which will be further explained under the Search Pruning
+Feature section.
 ****
 
 Examples:
@@ -189,48 +241,94 @@ Returns any person without the name `Tom`.
 
 * `find \tag President` +
 Returns any person with the tag `President`
-* `find \tag President Vice_President` +
-Returns any person with the tag `President` OR `Vice_President`.
+* `find \tag President VicePresident` +
+Returns any person with the tag `President` OR `VicePresident`.
 * `find \tag \exclude President` +
 Returns any person without the tag `President`.
-====
-**Search Pruning feature with find commands:**
 
-With the introduction of v1.1, NUSSU Connect now includes a Search Pruning feature that helps you
+=== Undoing Find Commands: `undofind`
+
+Reverts the displayed list to the state before you perform your most recent find command +
+Format: `undofind`
+****
+* To be used in Search Pruning feature
+****
+
+=== Search Pruning Feature with list, find and undofind commands
+
+Since v1.1, the Search Pruning feature was introduced to NUSSU Connect that helps you
 trim the list of contacts with every successive find command. This lets you search through the list
 of contacts in a much more intuitive manner without the hassle of typing a long single line command that is
 usually error-prone.
 
-The concept of the Search Pruning feature will be further illustrated below.
+The concept of the Search Pruning feature will be illustrated below. +
+
+**1. Search Pruning with Find Commands**
+
 ****
-*Assume that the original list of contacts contains the following 3 persons.*
+Assume that the original list of contacts contains the following six persons and you wanted to search for all persons
+with the science tag. You could do this by executing the command `find \tag science`. +
 
-image::InitialList.png[align="left"]
+image::SearchPruning1st.png[align="left"]
 
-*After executing the command `find \tag VIP`* +
-*the displayed list will now contain 2 persons, both with the tag 'VIP'*
+After executing the command the displayed list will now contain 2 persons,
+both with the science tag.
 
-image::SecondList.png[align="left"]
+image::SearchPruning2nd.png[align="left"]
 
-*Executing another command `find \tag President`* +
-*will filter according to the previous displayed list instead of the original list* +
-*The displayed list now contains only 1 person with the tag 'President'* +
+The following message will be displayed in the Command Result Box to tell you the keywords that you have previously executed.
+The "+" prefix before a keyword is used to denote that you chose to include all persons with the relevant keyword in
+the displayed list. +
 
-image::ThirdList.png[align="left"]
+image::SearchPruning3rd.png[align="left"]
+
+Next, you wanted to exclude everyone that has the tag `VPresident` and you could do that by executing the command +
+`find \tag \exclude VPresident`. +
+
+image::SearchPruning4th.png[align="left"]
+
+The command will filter according to the previous displayed list instead of the original contacts list and the
+displayed list now contains only 1 person with the President Tag as everyone with the VPresident tag have been excluded. +
+
+image::SearchPruning5th.png[align="left"]
+
+The Command Result Box will now display an extra vpresident keyword with the "-" prefix, denoting that all persons
+with the vpresident tag has been excluded from the list +
+
+image::SearchPruning6th.png[align="left"]
 ****
-====
 
-=== Undoing Search Commands: `undosearch`
+**2 . Making a mistake and undoing it with undofind command**
 
-Restores the displayed list to the state before you perform your most recent find command +
-Format: `undosearch`
 ****
-* To be used together with Search Pruning feature
+Now assume that you have made a mistake and you want to revert to the list before you execute your most
+recent find command. You can do so with the undofind command +
+
+image::SearchPruning7th.png[align="left"]
+
+After executing the undofind command, the displayed list is reverted to the state before the +
+`find \tag \exclude VPresident` command was executed +
+
+image::SearchPruning8th.png[align="left"]
 ****
+
+**3 . Reverting to initial state with list command**
+
+****
+You can revert to the initial state before any find commands are executed with the list command
+
+image::SearchPruning9th.png[align="left"]
+
+After executing the list command, all search history is cleared and the displayed list now contains all six persons.
+
+image::SearchPruning10th.png[align="left"]
+****
+
+// end::find[]
 
 === Deleting : `delete`
 
-Deletes a specific person from the address book. +
+Deletes a specific person from NUSSU-Connect. +
 Format: `delete [-a all] [INDEX]`
 
 ****
@@ -244,7 +342,7 @@ Examples:
 
 * `list` +
 `delete 2` +
-Deletes the 2nd person in the address book.
+Deletes the 2nd person in NUSSU-Connect.
 * `find Betsy` +
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
@@ -268,7 +366,7 @@ Examples:
 
 * `list` +
 `select 2` +
-Selects the 2nd person in the address book.
+Selects the 2nd person in NUSSU-Connect.
 * `find Betsy` +
 `select 1` +
 Selects the 1st person in the results of the `find` command.
@@ -286,12 +384,12 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 // tag::undoredo[]
 === Undoing previous command : `undo`
 
-Restores the address book to the state before the previous _undoable_ command was executed. +
+Restores NUSSU-Connect to the state before the previous _undoable_ command was executed. +
 Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify NUSSU-Connect's content (`add`, `delete`, `edit` and `clear`).
 ====
 
 Examples:
@@ -335,61 +433,74 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 === Clearing all entries : `clear`
 
-Clears all entries from the address book. +
+Clears all entries from NUSSU-Connect. +
 Format: `clear`
 
-=== Submitting data for budget allocation: `budget`
+// tag::budget[]
 
-Submits the data about number of events, expected turnout etc. +
-Format: `budget c/CLUB NAME t/TURNOUT e/NUMBER OF EVENTS`
+=== Budgeting feature: `budget`, `calculatebudget` and `viewbudget`
+
+The budgeting process has 3 steps and involves club members and NUSSU treasurers as the users in the different steps
+
+Step 1: Submitting the data for budget allocation which is to be done by *club members*. +
+
+Step 2: Calculating the budgets to be allocated which is to be done by *NUSSU treasurers*. +
+
+Step 3: Viewing the allocated budget of a club which can be done by either *club members* or *NUSSU treasurers*.
+
+==== Submitting data for budget allocation: `budget`
+This is the first step in the budgeting process!
+
+This command allows club members to submit budget calculation data - the name of their club, number of events the club is planning to hold and the expected turnout of the events  +
+Format: `budget c/CLUB NAME t/EXPECTED TURNOUT e/NUMBER OF EVENTS`
 
 Example: +
 `budget c/Computing Club t/200 e/5`
 
-=== Calculating the budgets : `calculatebudget`
+[NOTE]
+====
+CLUB NAME is case sensitive. Hence `c/Computing Club` and `c/computing club` will be treated as unique entries.
+====
 
-Calculates the budgets for all the clubs in the address book using the total available budget
+[NOTE]
+====
+EXPECTED TURNOUT and NUMBER OF EVENTS must be postive whole numbers.
+====
+
+==== Calculating the budgets : `calculatebudget`
+This is the second step in the budgeting process!
+
+After all the clubs' budget calculation data has been submitted by the club members, NUSSU treasurers must use this command to calculate and allocate budgets to all the clubs based on the total available budget +
 Format: `calculatebudget b/TOTAL AVAILABLE BUDGET IN SGD`
 
 Example: +
 `calculatebudget b/50000`
 
-=== Viewing the allocated budget : `viewbudget`
+[NOTE]
+====
+Ensure that TOTAL AVAILABLE BUDGET is a positive whole number.
+====
 
-Shows all the allocated budgets to the user +
-Format: `viewbudget`
+[NOTE]
+====
+Remember to only use the `calculatebudget` command once ALL the clubs' data has been collected since NUSSU-Connect only supports a one-time calculation of budgets in v1.3
+====
 
-=== Submitting grant request : `request`
+==== Viewing the allocated budget for a club : `viewbudget`
+This is the third and final step in the budgeting process!
 
-Submits data about amount of grant needed, the reason and tags the importance level
-Format: `request m/AMOUNT r/REASON t/IMPORTANCE LEVEL`
+This command shows the budget allocated to that particular club to the user. Both club members and NUSSU treasurers have access to this command.
+Format: `viewbudget c/CLUB NAME`
 
 Example: +
-`request m/1000 r/for booking auditorium t/medium` +
+`viewbudget c/Computing Club`
 
-=== Viewing grant request : `viewrequest`
-Shows a list of all the grant request sorted by order of importance, and if there is a tie, by descending order of amount requested. +
-Format: `viewrequest`
+[NOTE]
+====
+If the TOTAL AVAILABLE BUDGET specified by the treasurer using the `calculatebudget` command is a very small number, the budget allocated to the clubs may even be 0.
+====
 
-=== Accepting grant request: `accept`
-
-Approves a specific grant request from the list of grants.
-Format: `accept [-a all] [INDEX]`
-
-****
-* Approves the request at the specified `INDEX`.
-* The index refers to the index number shown in the displayed requests list.
-* The index *must be a positive integer* 1, 2, 3, ...
-* If -a option is selected, all requests on the list will be approved and INDEX will be ignored.
-****
-Example:
-
-* `viewrequest` +
-`accept 2` +
-Approves the 2nd request in the list of grant requests.
-* `viewrequest` +
-`accept -a` +
-Approves all the requests in the list.
+// end::budget[]
 
 === Exiting the program : `exit`
 
@@ -398,7 +509,7 @@ Format: `exit`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+NUSSU-Connect data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 // tag::dataencryption[]
@@ -410,7 +521,7 @@ _{explain how the user can enable/disable data encryption}_
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous NUSSU-Connect folder.
 
 == Command Summary
 
@@ -427,6 +538,7 @@ e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find [\tag] [\exclude] KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake` +
 e.g `find \tag President`
+* *Undo Find* : `undofind`
 * *List* : `list`
 * *Help* : `help`
 * *Select* : `select INDEX` +
@@ -438,13 +550,7 @@ e.g.`select 2`
 e.g. `budget c/Computing Club t/200 e/5`
 * *Calculating budgets* : `calculatebudget b/TOTAL AVAILABLE BUDGET IN SGD` +
 e.g. `calculatebudget b/50000`
-* *Viewing all the budgets* : `viewbudget`
-* *Submitting grant request* : request m/AMOUNT r/REASON t/IMPORTANCE LEVEL` +
-e.g. `request m/1000 r/for booking auditorium t/medium`
-* *Viewing grant request* : `viewrequest`
-* *Accepting a grant request* : `accept [-a all] [INDEX]` +
-e.g. `viewrequest` +
-       `accept 2` +
-e.g. `viewrequest` +
-     `accept -a`
+* *Viewing the budget for a club* : `viewbudget c/CLUB NAME` +
+e.g. `viewbudget c/Computing Club`
+
 

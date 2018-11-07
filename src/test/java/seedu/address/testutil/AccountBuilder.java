@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.io.UnsupportedEncodingException;
+
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.login.UserId;
 import seedu.address.model.login.UserPassword;
@@ -19,9 +21,21 @@ public class AccountBuilder {
     private UserRole userRole;
 
     public AccountBuilder() {
-        userId = new UserId(DEFAULT_USERID);
-        userPassword = new UserPassword(DEFAULT_USERPASSWORD);
-        userRole = new UserRole(DEFAULT_ROLE);
+        try {
+            userId = new UserId(DEFAULT_USERID);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        try {
+            userPassword = new UserPassword(DEFAULT_USERPASSWORD);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        try {
+            userRole = new UserRole(DEFAULT_ROLE);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -37,7 +51,11 @@ public class AccountBuilder {
      * Sets the {@code UserId} of the {@code LoginDetails} that we are building.
      */
     public AccountBuilder withUserId(String userid) {
-        this.userId = new UserId(userid);
+        try {
+            this.userId = new UserId(userid);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         return this;
     }
 
@@ -45,7 +63,11 @@ public class AccountBuilder {
      * Sets the {@code UserPassword} of the {@code LoginDetails} that we are building.
      */
     public AccountBuilder withUserPassword(String userpassword) {
-        this.userPassword = new UserPassword(userpassword);
+        try {
+            this.userPassword = new UserPassword(userpassword);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         return this;
     }
 
@@ -53,7 +75,11 @@ public class AccountBuilder {
      * Sets the {@code UserRole} of the {@code LoginDetails} that we are building.
      */
     public AccountBuilder withUserRole(String userrole) {
-        this.userRole = new UserRole(userrole);
+        try {
+            this.userRole = new UserRole(userrole);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         return this;
     }
 

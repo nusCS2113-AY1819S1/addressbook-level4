@@ -3,6 +3,11 @@ package seedu.address.model.login;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Base64;
+
+import seedu.address.logic.LoginManager;
+
 /**
  * Represents an account's user password in the login book.
  * Guarantees: immutable; is valid as declared in {@link #isValidUserPassword(String)}
@@ -22,12 +27,18 @@ public class UserPassword {
     /**
      * Constructs a {@code UserPassword}.
      *
-     * @param pass A valid userpassword.
+     * @param pass A valid user password.
      */
-    public UserPassword(String pass) {
+    public UserPassword(String pass) throws UnsupportedEncodingException {
         requireNonNull(pass);
-        checkArgument(isValidUserPassword(pass), MESSAGE_USERPASSWORD_CONSTRAINTS);
-        fullUserPassword = pass;
+        if (LoginManager.getIsCurrentlyCreatingAccount() && !LoginManager.getIsCurrentlyTesting()) {
+            checkArgument(isValidUserPassword(pass), MESSAGE_USERPASSWORD_CONSTRAINTS);
+        }
+        if (LoginManager.getIsCurrentlyCreatingAccount()) {
+            fullUserPassword = Base64.getEncoder().encodeToString(pass.getBytes("utf-8"));
+        } else {
+            fullUserPassword = pass;
+        }
     }
 
     /**

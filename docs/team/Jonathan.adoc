@@ -1,0 +1,52 @@
+= Jonathan Ng - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: NUSSU Connect
+
+
+== Introduction
+
+This Portfolio is a documentation of the contributions that I have made for this project, titled NUSSU Connect.
+
+NUSSU Connect is a CLI application mainly targeted towards executive committee (exco) members of the NUS Student Union (NUSSU).
+Being representatives of the NUS student body, the exco members has a part in many projects and initiatives.
+This application therefore aims to help them perform some of these miscellaneous tasks that often comes from these projects much more easily,
+and to deliver value by requiring less manhours from each NUSSU members to perform a given task, saving on costs.
+
+To do so, the application comes with several features. This includes budgets/expenses management, human resource allocation and managing of important contacts.
+The original source code of this project is the https://github.com/se-edu/[AddressBook-Level4] project created by SE-EDU initiative, and hence,
+it also comes with some features from the AB4 project.
+
+== Summary of contributions
+
+In this project, my main contribution is the Add Skill Command, which augments the main Person class with two additional
+properties: the Skill and SkillLevel. This aids in Human Resource Management and committee recruitment as
+the best people for a particular role can be quickly identified and selected.
+
+* *Major enhancement*: added the AddSkillLevelCommand (keyword: "asl")
+
+** What it does: Modifies a Person's Skill and SkillLevel.
+
+** Justification: There is a need to track people and their skills, often being their most valuable
+assets, are especially critical to track. A project manager may now easily find any new people that
+the organization tracks, and given adequete talent pool, will be able to identify what they want.
+
+** Highlights: In order to implement this, all aspects of the application were touched on,
+namely UI, Storage, Logic and Model. The implementation was loosely based on the `remark` command that
+was implemented.
+
+
+
+== Contributions to the User Guide
+include::../UserGuide.adoc[tag=aslUser]
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+== Contributions to the Developer Guide
+include::../DeveloperGuide.adoc[tag=asl]
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===

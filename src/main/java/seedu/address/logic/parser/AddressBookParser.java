@@ -1,11 +1,15 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_BUDGET_COMMAND_INVALID_USER;
+import static seedu.address.commons.core.Messages.MESSAGE_CALCULATE_BUDGET_COMMAND_INVALID_USER;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.commons.core.Messages.MESSAGE_VIEW_BUDGET_COMMAND_INVALID_USER;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.LoginManager;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddSkillCommand;
 import seedu.address.logic.commands.AddSkillLevelCommand;
@@ -21,11 +25,11 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.LoginCommand;
+import seedu.address.logic.commands.LoginUserIdPasswordRoleCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.commands.UndoSearchCommand;
+import seedu.address.logic.commands.UndoFindCommand;
 import seedu.address.logic.commands.ViewClubBudgetsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -55,10 +59,20 @@ public class AddressBookParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
-        case LoginCommand.COMMAND_WORD:
-            return new LoginUserIdPasswordRoleCommandParser().parse(arguments);
+        case LoginUserIdPasswordRoleCommand.COMMAND_WORD:
+            if (!LoginManager.getIsLoginSuccessful()) {
+                return new LoginUserIdPasswordRoleCommandParser().parse(arguments);
+            } else {
+                throw new ParseException("You have already logged in!");
+            }
 
         case CreateAccountCommand.COMMAND_WORD:
+            if (!LoginManager.getIsCurrentlyTesting()) {
+                LoginManager.setIsCurrentlyCreatingAccount(true);
+            }
+            if (!LoginManager.getIsPresident()) {
+                throw new ParseException("You must log in as president in order to create a new account!");
+            }
             return new CreateAccountCommandParser().parse(arguments);
 
         case AddCommand.COMMAND_WORD:
@@ -97,29 +111,35 @@ public class AddressBookParser {
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
-<<<<<<< HEAD
-        case UndoSearchCommand.COMMAND_WORD:
-            return new UndoSearchCommand();
-=======
         case AddSkillCommand.COMMAND_WORD:
             return new AddSkillCommandParser().parse(arguments);
-
 
         case AddSkillLevelCommand.COMMAND_WORD:
             return new AddSkillLevelCommandParser().parse(arguments);
 
-        case UndoSearchCommand.COMMAND_WORD:
-            return new UndoSearchCommand();
+        case UndoFindCommand.COMMAND_WORD:
+            return new UndoFindCommand();
 
         case BudgetCommand.COMMAND_WORD:
-            return new BudgetCommandParser().parse(arguments);
+            if (LoginManager.getIsMember()) {
+                return new BudgetCommandParser().parse(arguments);
+            } else {
+                throw new ParseException(MESSAGE_BUDGET_COMMAND_INVALID_USER);
+            }
 
         case BudgetCalculationCommand.COMMAND_WORD:
-            return new BudgetCalculationCommandParser().parse(arguments);
->>>>>>> f9374283a72493067a0bda36ce277c57c3445d3c
+            if (LoginManager.getIsTreasurer()) {
+                return new BudgetCalculationCommandParser().parse(arguments);
+            } else {
+                throw new ParseException(MESSAGE_CALCULATE_BUDGET_COMMAND_INVALID_USER);
+            }
 
         case ViewClubBudgetsCommand.COMMAND_WORD:
-            return new ViewClubBudgetsCommandParser().parse(arguments);
+            if (LoginManager.getIsMember() || LoginManager.getIsTreasurer() || LoginManager.getIsPresident()) {
+                return new ViewClubBudgetsCommandParser().parse(arguments);
+            } else {
+                throw new ParseException(MESSAGE_VIEW_BUDGET_COMMAND_INVALID_USER);
+            }
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

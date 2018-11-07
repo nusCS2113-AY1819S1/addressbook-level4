@@ -38,6 +38,7 @@ public class AddSkillCommand extends Command {
 
     public static final String MESSAGE_ADD_SKILL_SUCCESS = "Added skill to person: %1$s";
     public static final String MESSAGE_DELETE_SKILL_SUCCESS = "Remove skill to person: %1$s";
+    public static final String MESSAGE_INVALID_LEVEL = "Level %1$s is not valid, please enter an number (1..100).";
     public final SkillLevel dummySkillLevel = new SkillLevel(0);
     private final Index index;
     private final Skill skill;

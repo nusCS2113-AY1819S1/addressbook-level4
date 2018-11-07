@@ -9,7 +9,7 @@ import java.util.Arrays;
 import org.junit.Test;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindPersonSubCommand;
+import seedu.address.logic.commands.FindNameSubCommand;
 import seedu.address.logic.commands.FindTagSubCommand;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
@@ -27,7 +27,7 @@ public class FindCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindPersonSubCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")), false);
+                new FindNameSubCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")), false);
         assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
@@ -35,7 +35,7 @@ public class FindCommandParserTest {
 
         // parsing with exclude option enabled
         FindCommand expectedFindCommand2 =
-                new FindPersonSubCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")), true);
+                new FindNameSubCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")), true);
         assertParseSuccess(parser, "\\exclude Alice Bob", expectedFindCommand2);
 
         // parsing with tag option enabled
@@ -46,7 +46,8 @@ public class FindCommandParserTest {
         // parsing with tag and exclude options enabled
         FindCommand expectedFindCommand4 =
                 new FindTagSubCommand(new TagContainsKeywordsPredicate(Arrays.asList("friends", "colleagues")), true);
-        assertParseSuccess(parser, "\\tag friends colleagues", expectedFindCommand4);
+        assertParseSuccess(parser, "\\tag \\exclude friends colleagues", expectedFindCommand4);
+        assertParseSuccess(parser, "\\exclude \\tag friends colleagues", expectedFindCommand4);
     }
 
     @Test
@@ -59,6 +60,8 @@ public class FindCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         //parse tags with exclude option enabled without keywords
         assertParseFailure(parser, "\\tag \\exclude",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "\\exclude \\tag",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 

@@ -12,6 +12,7 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.budgetelements.ClubBudgetElements;
+import seedu.address.model.clubbudget.FinalClubBudget;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.person.Person;
 
@@ -59,5 +60,10 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ListElementPointer getHistorySnapshot() {
         return new ListElementPointer(history.getHistory());
+    }
+
+    @Override
+    public ObservableList<FinalClubBudget> getFilteredClubBudgetsList() {
+        return model.getFilteredClubBudgetsList();
     }
 }

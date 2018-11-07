@@ -5,6 +5,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.budgetelements.ClubBudgetElements;
+import seedu.address.model.clubbudget.FinalClubBudget;
 import seedu.address.model.person.Person;
 
 /**
@@ -25,6 +26,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of clubs */
     ObservableList<ClubBudgetElements> getFilteredClubsList();
+
+    /** Returns an unmodifiable view of the filtered list of club budgets */
+    ObservableList<FinalClubBudget> getFilteredClubBudgetsList();
 
     /** Returns the list of input entered by the user, encapsulated in a {@code ListElementPointer} object */
     ListElementPointer getHistorySnapshot();

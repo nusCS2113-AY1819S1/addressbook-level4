@@ -31,19 +31,19 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-    public static final String VALID_ID_ACCOUNT1 = "A1234567M";
-    public static final String VALID_ID_ACCOUNT2 = "A1234568M";
-    public static final String VALID_PASSWORD_ACCOUNT1 = "zaq1xsw2cde3";
-    public static final String VALID_PASSWORD_ACCOUNT2 = "1qaz2wsx3edc";
-    public static final String VALID_ROLE_ACCOUNT1 = "member";
-    public static final String VALID_ROLE_ACCOUNT2 = "treasurer";
+    public static final String VALID_ID_ACCOUNT_1 = "A1234567M";
+    public static final String VALID_ID_ACCOUNT_2 = "A1234568M";
+    public static final String VALID_PASSWORD_ACCOUNT_1 = "zaq1xsw2cde3";
+    public static final String VALID_PASSWORD_ACCOUNT_2 = "1qaz2wsx3edc";
+    public static final String VALID_ROLE_ACCOUNT_1 = "member";
+    public static final String VALID_ROLE_ACCOUNT_2 = "treasurer";
 
-    public static final String ID_ACCOUNT1_DESC = " " + VALID_ID_ACCOUNT1;
-    public static final String ID_ACCOUNT2_DESC = " " + VALID_ID_ACCOUNT2;
-    public static final String PASSWORD_ACCOUNT1_DESC = " " + VALID_PASSWORD_ACCOUNT1;
-    public static final String PASSWORD_ACCOUNT2_DESC = " " + VALID_PASSWORD_ACCOUNT2;
-    public static final String ROLE_ACCOUNT1_DESC = " " + VALID_ROLE_ACCOUNT1;
-    public static final String ROLE_ACCOUNT2_DESC = " " + VALID_ROLE_ACCOUNT2;
+    public static final String ID_ACCOUNT_1_DESC = " " + VALID_ID_ACCOUNT_1;
+    public static final String ID_ACCOUNT_2_DESC = " " + VALID_ID_ACCOUNT_2;
+    public static final String PASSWORD_ACCOUNT_1_DESC = " " + VALID_PASSWORD_ACCOUNT_1;
+    public static final String PASSWORD_ACCOUNT_2_DESC = " " + VALID_PASSWORD_ACCOUNT_2;
+    public static final String ROLE_ACCOUNT_1_DESC = " " + VALID_ROLE_ACCOUNT_1;
+    public static final String ROLE_ACCOUNT_2_DESC = " " + VALID_ROLE_ACCOUNT_2;
 
     public static final String INVALID_USERID = " " + "AA234567M"; // 'A' not allowed where it is supposed to be a digit
     public static final String INVALID_USERROLE = " " + "janitor"; // no such role as a 'janitor'
@@ -62,6 +62,7 @@ public class CommandTestUtil {
     public static final String VALID_SKILL_BOB = "Stage Manager";
     public static final int VALID_SKILL_LEVEL_AMY = 5;
     public static final int VALID_SKILL_LEVEL_BOB = 37;
+    public static final int INVALID_SKILL_LEVEL_AMY = 137;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -102,6 +103,8 @@ public class CommandTestUtil {
             + "10a"; // 'a' not allowed in expected turnout
     public static final String INVALID_NUMBER_OF_EVENTS_DESC = " " + PREFIX_NUMBER_OF_EVENTS
             + "5!"; // '!' not allowed in number of events
+    public static final String VALID_ALLOCATED_BUDGET_COMPUTING = "1000";
+    public static final String VALID_ALLOCATED_BUDGET_ECE = "2100";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

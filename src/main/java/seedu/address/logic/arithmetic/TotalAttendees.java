@@ -10,12 +10,12 @@ import seedu.address.model.budgetelements.ClubBudgetElements;
  * Calculates the total number of attendees across all events, based on the club budget elements entered by club
  * treasure.
  */
-public class CalculateTotalAttendees {
+public class TotalAttendees {
     private final List<ClubBudgetElements> listOfClubs;
     /**
      * @param listOfClubs is the filtered list with which to calculate totalAttendees
      */
-    public CalculateTotalAttendees(List<ClubBudgetElements> listOfClubs) {
+    public TotalAttendees(List<ClubBudgetElements> listOfClubs) {
         requireNonNull(listOfClubs);
         this.listOfClubs = listOfClubs;
     }
@@ -23,7 +23,7 @@ public class CalculateTotalAttendees {
     /**
      * @return the totalAttendees
      */
-    public int arithmeticTotalAttendees() {
+    public int calculateTotalAttendees() {
 
         int totalAttendees = 0;
 

@@ -20,6 +20,8 @@ import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.model.AddressBook;
 import seedu.address.model.LoginBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyClubBudgetElementsBook;
+import seedu.address.model.ReadOnlyFinalBudgetBook;
 import seedu.address.model.ReadOnlyLoginBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.ui.testutil.EventsCollectorRule;
@@ -37,8 +39,13 @@ public class StorageManagerTest {
     public void setUp() {
         XmlLoginBookStorage loginBookStorage = new XmlLoginBookStorage(getTempFilePath("lb"));
         XmlAddressBookStorage addressBookStorage = new XmlAddressBookStorage(getTempFilePath("ab"));
+        XmlClubBudgetElementsBookStorage clubBudgetElementsBookStorage =
+                new XmlClubBudgetElementsBookStorage(getTempFilePath("cbeb"));
+        XmlFinalBudgetsBookStorage finalBudgetsBookStorage =
+                new XmlFinalBudgetsBookStorage(getTempFilePath("fbb"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(loginBookStorage, addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(loginBookStorage, addressBookStorage, clubBudgetElementsBookStorage,
+                finalBudgetsBookStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -87,8 +94,10 @@ public class StorageManagerTest {
     public void handleAddressBookChangedEvent_exceptionThrown_eventRaised() {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlLoginBookStorageExceptionThrowingStub(Paths.get("dummy")),
-                                             new XmlAddressBookStorageExceptionThrowingStub(Paths.get("dummy")),
-                                             new JsonUserPrefsStorage(Paths.get("dummy")));
+                new XmlAddressBookStorageExceptionThrowingStub(Paths.get("dummy")),
+                new XmlClubBudgetElementsBookStorageExceptionThrowingStub(Paths.get("dummy")),
+                new XmlFinalBudgetsBookStorageExceptionThrowingStub(Paths.get("dummy")),
+                new JsonUserPrefsStorage(Paths.get("dummy")));
         storage.handleLoginBookChangedEvent(new LoginBookChangedEvent(new LoginBook()));
         storage.handleAddressBookChangedEvent(new AddressBookChangedEvent(new AddressBook()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
@@ -120,6 +129,38 @@ public class StorageManagerTest {
 
         @Override
         public void saveLoginBook(ReadOnlyLoginBook loginBook, Path filePath) throws IOException {
+            throw new IOException("dummy exception");
+        }
+    }
+
+    /**
+     * A Stub class to throw an exception when the save method is called
+     */
+    class XmlClubBudgetElementsBookStorageExceptionThrowingStub extends XmlClubBudgetElementsBookStorage {
+
+        public XmlClubBudgetElementsBookStorageExceptionThrowingStub(Path filePath) {
+            super(filePath);
+        }
+
+        @Override
+        public void saveClubBudgetElementsBook(ReadOnlyClubBudgetElementsBook clubBudgetElementsBook,
+                                               Path filePath) throws IOException {
+            throw new IOException("dummy exception");
+        }
+    }
+
+    /**
+     * A Stub class to throw an exception when the save method is called
+     */
+    class XmlFinalBudgetsBookStorageExceptionThrowingStub extends XmlFinalBudgetsBookStorage {
+
+        public XmlFinalBudgetsBookStorageExceptionThrowingStub(Path filePath) {
+            super(filePath);
+        }
+
+        @Override
+        public void saveFinalBudgetsBook(ReadOnlyFinalBudgetBook finalBudgetsBook,
+                                             Path filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

@@ -15,6 +15,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.logic.LoginManager;
 import seedu.address.model.AddressBook;
 import seedu.address.model.LoginBook;
 import seedu.address.storage.XmlAccount;
@@ -91,6 +92,7 @@ public class XmlUtilTest {
 
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
+        LoginManager.setIsCurrentlyTesting(true);
         LoginBook dataFromLoginFile = XmlUtil.getDataFromFile(VALID_LOGIN_FILE,
                 XmlSerializableLoginBook.class).toModelType();
         assertEquals(2, dataFromLoginFile.getLoginDetailsList().size());

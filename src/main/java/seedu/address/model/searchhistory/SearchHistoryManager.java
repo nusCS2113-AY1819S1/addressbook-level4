@@ -11,8 +11,8 @@ import seedu.address.model.searchhistory.exceptions.EmptyHistoryException;
  */
 public class SearchHistoryManager<T> {
 
+    protected Stack<Predicate<T>> searchHistoryStack = new Stack<>();
     private final Predicate<T> emptyStackPredicate = predicate -> true;
-    private Stack<Predicate<T>> searchHistoryStack = new Stack<>();
 
     /** Returns Predicate at top of search history stack if stack is non-empty.
      * If search history stack is empty, a predicate that defaults to true is returned.
@@ -30,6 +30,9 @@ public class SearchHistoryManager<T> {
      * @param newPredicate a Predicate containing user-defined search logic.
      **/
     private void addNewPredicateToStack(Predicate<T> newPredicate) {
+        if (newPredicate == null) {
+            return;
+        }
         if (searchHistoryStack.isEmpty()) {
             searchHistoryStack.push(newPredicate);
         } else {
@@ -63,7 +66,6 @@ public class SearchHistoryManager<T> {
      **/
     public Predicate<T> executeNewSearch(Predicate<T> predicate) {
         addNewPredicateToStack(predicate);
-        assert !searchHistoryStack.empty();
         return retrievePredicateAtTopOfStack();
     }
 

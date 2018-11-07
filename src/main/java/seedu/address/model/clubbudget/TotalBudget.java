@@ -26,7 +26,7 @@ public class TotalBudget {
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Returns true if a given string is a valid budget.
      */
     public static boolean isValidTotalBudget(String test) {
         return test.matches(TOTAL_BUDGET_VALIDATION_REGEX);

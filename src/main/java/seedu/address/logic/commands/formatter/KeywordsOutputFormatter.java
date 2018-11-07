@@ -1,5 +1,6 @@
 package seedu.address.logic.commands.formatter;
 
+import seedu.address.model.searchhistory.KeywordType;
 import seedu.address.model.searchhistory.ReadOnlyKeywordsRecord;
 
 /**
@@ -33,12 +34,12 @@ public class KeywordsOutputFormatter {
         if (hasNameKeywords()) {
             currentStringWidth = 0;
             outputString.append(NAME_KEYWORDS_HEADING);
-            for (String keyword: record.getIncludedNames()) {
+            for (String keyword: record.getKeywordSet(KeywordType.IncludeNames)) {
                 ensureStringWidthWithinLimit();
                 appendIncludedKeyword(keyword);
                 recalculateCurrentStringWidth(keyword);
             }
-            for (String keyword: record.getExcludedNames()) {
+            for (String keyword: record.getKeywordSet(KeywordType.ExcludeNames)) {
                 ensureStringWidthWithinLimit();
                 appendExcludedKeyword(keyword);
                 recalculateCurrentStringWidth(keyword);
@@ -53,12 +54,12 @@ public class KeywordsOutputFormatter {
         if (hasTagKeywords()) {
             currentStringWidth = 0;
             outputString.append(TAG_KEYWORDS_HEADING);
-            for (String keyword: record.getIncludedTags()) {
+            for (String keyword: record.getKeywordSet(KeywordType.IncludeTags)) {
                 ensureStringWidthWithinLimit();
                 appendIncludedKeyword(keyword);
                 recalculateCurrentStringWidth(keyword);
             }
-            for (String keyword: record.getExcludedTags()) {
+            for (String keyword: record.getKeywordSet(KeywordType.ExcludeTags)) {
                 ensureStringWidthWithinLimit();
                 appendExcludedKeyword(keyword);
                 recalculateCurrentStringWidth(keyword);
@@ -77,13 +78,13 @@ public class KeywordsOutputFormatter {
     }
 
     private boolean hasTagKeywords() {
-        return !record.getIncludedTags().isEmpty()
-                || !record.getExcludedTags().isEmpty();
+        return !record.getKeywordSet(KeywordType.IncludeTags).isEmpty()
+                || !record.getKeywordSet(KeywordType.ExcludeTags).isEmpty();
     }
 
     private boolean hasNameKeywords() {
-        return !record.getIncludedNames().isEmpty()
-                || !record.getExcludedNames().isEmpty();
+        return !record.getKeywordSet(KeywordType.IncludeNames).isEmpty()
+                || !record.getKeywordSet(KeywordType.ExcludeNames).isEmpty();
     }
 
     private void appendIncludedKeyword(String keyword) {

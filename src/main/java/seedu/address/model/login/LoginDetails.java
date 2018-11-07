@@ -17,7 +17,7 @@ public class LoginDetails {
      * Every field must be present and not null.
      */
     public LoginDetails(UserId userId, UserPassword userPassword, UserRole userRole) {
-        requireAllNonNull(userId, userPassword);
+        requireAllNonNull(userId, userPassword, userRole);
         this.userId = userId;
         this.userPassword = userPassword;
         this.userRole = userRole;

@@ -28,6 +28,9 @@ public class LoginUserIdPasswordRoleCommand extends LoginCommand {
                                           UserPasswordContainsKeywordsPredicate passwordPredicate,
                                           UserRoleContainsKeywordsPredicate rolePredicate) {
         super();
+        requireNonNull(idPredicate);
+        requireNonNull(passwordPredicate);
+        requireNonNull(rolePredicate);
         this.idPredicate = idPredicate;
         this.passwordPredicate = passwordPredicate;
         this.rolePredicate = rolePredicate;

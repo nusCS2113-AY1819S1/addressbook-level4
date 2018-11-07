@@ -1,12 +1,14 @@
 package seedu.address.model.clubbudget;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.clubbudget.exceptions.DuplicateFinalClubBudgetException;
 
 /**
  * A list of final club budgets that enforces uniqueness between its elements and does not allow nulls.
@@ -36,12 +38,24 @@ public class UniqueClubBudgetList implements Iterable<FinalClubBudget> {
         requireNonNull(toAdd);
 
         if (contains(toAdd)) {
-            //throw new DuplicateFinalClubBudgetException();
+            throw new DuplicateFinalClubBudgetException();
         }
 
         internalList.add(toAdd);
     }
 
+    /**
+     * Replaces the contents of this list with {@code final budgets}.
+     * {@code final budgets} must not contain duplicate final budgets.
+     */
+    public void setFinalClubBudget(List<FinalClubBudget> clubBudgets) {
+        requireAllNonNull(clubBudgets);
+        if (!clubsAreUnique(clubBudgets)) {
+            throw new DuplicateFinalClubBudgetException();
+        }
+
+        internalList.setAll(clubBudgets);
+    }
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */

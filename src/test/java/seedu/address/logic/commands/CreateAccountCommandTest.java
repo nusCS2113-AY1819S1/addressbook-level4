@@ -20,6 +20,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.LoginBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyClubBudgetElementsBook;
+import seedu.address.model.ReadOnlyFinalBudgetBook;
 import seedu.address.model.ReadOnlyLoginBook;
 import seedu.address.model.budgetelements.ClubBudgetElements;
 import seedu.address.model.clubbudget.FinalClubBudget;
@@ -130,6 +132,15 @@ public class CreateAccountCommandTest {
         }
 
         @Override
+        public ReadOnlyClubBudgetElementsBook getClubBudgetElementsBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyFinalBudgetBook getFinalBudgetsBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
@@ -170,6 +181,11 @@ public class CreateAccountCommandTest {
         }
 
         @Override
+        public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredClubBudgetsList(Predicate<FinalClubBudget> predicate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -199,6 +215,55 @@ public class CreateAccountCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public boolean canUndoClubBudgetElementsBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoClubBudgetElementsBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoClubBudgetElementsBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoClubBudgetElementsBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitClubBudgetElementsBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndoFinalBudgetsBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoFinalBudgetsBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoFinalBudgetsBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoFinalBudgetsBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitFinalBudgetsBook() {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public boolean hasClub(ClubBudgetElements club) {
             throw new AssertionError("This method should not be called.");

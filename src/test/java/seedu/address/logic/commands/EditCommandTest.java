@@ -12,6 +12,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalAccounts.getTypicalLoginBook;
+import static seedu.address.testutil.TypicalClubBudgetElements.getTypicalClubBudgetElementsBook;
+import static seedu.address.testutil.TypicalFinalClubBudget.getTypicalFinalBudgetsBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -23,6 +25,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.AddressBook;
+import seedu.address.model.ClubBudgetElementsBook;
+import seedu.address.model.FinalBudgetsBook;
 import seedu.address.model.LoginBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -36,7 +40,8 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalLoginBook(), getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalLoginBook(), getTypicalAddressBook(),
+            getTypicalClubBudgetElementsBook(), getTypicalFinalBudgetsBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -47,7 +52,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
         Model expectedModel = new ModelManager(new LoginBook(model.getLoginBook()),
-                                               new AddressBook(model.getAddressBook()), new UserPrefs());
+                new AddressBook(model.getAddressBook()), new ClubBudgetElementsBook(model.getClubBudgetElementsBook()),
+                new FinalBudgetsBook(model.getFinalBudgetsBook()), new UserPrefs());
         expectedModel.updatePerson(model.getFilteredPersonList().get(0), editedPerson);
         expectedModel.commitAddressBook();
 
@@ -70,7 +76,8 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new LoginBook(model.getLoginBook()),
-                                               new AddressBook(model.getAddressBook()), new UserPrefs());
+                new AddressBook(model.getAddressBook()), new ClubBudgetElementsBook(model.getClubBudgetElementsBook()),
+                new FinalBudgetsBook(model.getFinalBudgetsBook()), new UserPrefs());
         expectedModel.updatePerson(lastPerson, editedPerson);
         expectedModel.commitAddressBook();
 
@@ -85,7 +92,8 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new LoginBook(model.getLoginBook()),
-                                               new AddressBook(model.getAddressBook()), new UserPrefs());
+                new AddressBook(model.getAddressBook()), new ClubBudgetElementsBook(model.getClubBudgetElementsBook()),
+                new FinalBudgetsBook(model.getFinalBudgetsBook()), new UserPrefs());
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -103,7 +111,8 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new LoginBook(model.getLoginBook()),
-                                               new AddressBook(model.getAddressBook()), new UserPrefs());
+                new AddressBook(model.getAddressBook()), new ClubBudgetElementsBook(model.getClubBudgetElementsBook()),
+                new FinalBudgetsBook(model.getFinalBudgetsBook()), new UserPrefs());
         expectedModel.updatePerson(model.getFilteredPersonList().get(0), editedPerson);
         expectedModel.commitAddressBook();
 
@@ -164,7 +173,8 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
         Model expectedModel = new ModelManager(new LoginBook(model.getLoginBook()),
-                                               new AddressBook(model.getAddressBook()), new UserPrefs());
+                new AddressBook(model.getAddressBook()), new ClubBudgetElementsBook(model.getClubBudgetElementsBook()),
+                new FinalBudgetsBook(model.getFinalBudgetsBook()), new UserPrefs());
         expectedModel.updatePerson(personToEdit, editedPerson);
         expectedModel.commitAddressBook();
 
@@ -207,7 +217,8 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
         Model expectedModel = new ModelManager(new LoginBook(model.getLoginBook()),
-                                               new AddressBook(model.getAddressBook()), new UserPrefs());
+                new AddressBook(model.getAddressBook()), new ClubBudgetElementsBook(model.getClubBudgetElementsBook()),
+                new FinalBudgetsBook(model.getFinalBudgetsBook()), new UserPrefs());
 
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
