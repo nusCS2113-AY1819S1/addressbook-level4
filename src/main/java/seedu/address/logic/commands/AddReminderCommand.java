@@ -12,7 +12,7 @@ import seedu.address.model.timeidentifiedclass.exceptions.DuplicateReminderExcep
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
 
 /**
- * Adds a reminder to the Address Book.
+ * Adds a reminder to the ProductInfo Book.
  */
 
 public class AddReminderCommand extends Command {

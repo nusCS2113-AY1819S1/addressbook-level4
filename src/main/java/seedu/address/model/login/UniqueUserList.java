@@ -36,13 +36,14 @@ public class UniqueUserList implements Iterable<User> {
 
     /**
      * Adds a user to the list.
-     *
      * @throws DuplicateUserException if the user to add is a duplicate of an existing user in the list.
      */
     public void add(User toAdd) throws DuplicateUserException {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
-            throw new DuplicateUserException();
+        for (User user : internalList) {
+            if (user.getUsername().equals(toAdd.getUsername())) {
+                throw new DuplicateUserException();
+            }
         }
         internalList.add(toAdd);
     }

@@ -8,10 +8,10 @@ import java.util.List;
  */
 public class VersionedProductDatabase extends ProductDatabase {
 
-    private final List<ReadOnlyAddressBook> addressBookStateList;
+    private final List<ReadOnlyProductDatabase> addressBookStateList;
     private int currentStatePointer;
 
-    public VersionedProductDatabase(ReadOnlyAddressBook initialState) {
+    public VersionedProductDatabase(ReadOnlyProductDatabase initialState) {
         super(initialState);
 
         addressBookStateList = new ArrayList<>();

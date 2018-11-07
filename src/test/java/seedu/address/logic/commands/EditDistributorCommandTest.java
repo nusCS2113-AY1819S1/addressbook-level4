@@ -4,11 +4,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AHLEE;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AHSENG;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DIST_NAME_AHHUAT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DIST_NAME_AHBENG;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DIST_PHONE_AHBENG;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showDistributorAtIndex;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalDistributors.getTypicalDistributorBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
@@ -84,9 +84,9 @@ public class EditDistributorCommandTest {
         Distributor distributorInFilteredList = model.getFilteredDistributorList()
                 .get(INDEX_FIRST.getZeroBased());
         Distributor editedDistributor = new DistributorBuilder(distributorInFilteredList)
-                .withName(VALID_DIST_NAME_AHHUAT).build();
+                .withName(VALID_DIST_NAME_AHBENG).build();
         EditDistributorCommand editDistributorCommand = new EditDistributorCommand(INDEX_FIRST,
-                new EditDistributorDescriptorBuilder().withName(VALID_DIST_NAME_AHHUAT).build());
+                new EditDistributorDescriptorBuilder().withPhone(VALID_DIST_PHONE_AHBENG).build());
 
         String expectedMessage =
                 String.format(EditDistributorCommand.MESSAGE_EDIT_DISTRIBUTOR_SUCCESS, editedDistributor);
@@ -95,7 +95,6 @@ public class EditDistributorCommandTest {
                 new DistributorBook(model.getDistributorInfoBook()), new UserPrefs(),
                 new UserDatabase(), new TestStorage());
         expectedModel.updateDistributor(model.getFilteredDistributorList().get(0), editedDistributor);
-        expectedModel.commitDistributorBook();
 
         assertCommandSuccess(editDistributorCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -112,7 +111,7 @@ public class EditDistributorCommandTest {
 
     @Test
     public void execute_duplicatePersonFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST);
+        showDistributorAtIndex(model, INDEX_FIRST);
 
         // edit product in filtered list into a duplicate in address book
         Distributor distributorInList = model.getDistributorInfoBook().getDistributorList()
@@ -128,7 +127,7 @@ public class EditDistributorCommandTest {
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredDistributorList().size() + 1);
         EditDistributorDescriptor descriptor =
-                new EditDistributorDescriptorBuilder().withName(VALID_DIST_NAME_AHHUAT).build();
+                new EditDistributorDescriptorBuilder().withName(VALID_DIST_NAME_AHBENG).build();
         EditDistributorCommand editDistributorCommand = new EditDistributorCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editDistributorCommand, model, commandHistory,
@@ -165,7 +164,7 @@ public class EditDistributorCommandTest {
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredDistributorList().size() + 1);
         EditDistributorDescriptor descriptor =
-                new EditDistributorDescriptorBuilder().withName(VALID_DIST_NAME_AHHUAT).build();
+                new EditDistributorDescriptorBuilder().withName(VALID_DIST_NAME_AHBENG).build();
         EditDistributorCommand editDistributorCommand = new EditDistributorCommand(outOfBoundIndex, descriptor);
 
         // execution failed -> address book state not added into model

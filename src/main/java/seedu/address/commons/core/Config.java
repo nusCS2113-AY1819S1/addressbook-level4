@@ -13,7 +13,7 @@ public class Config {
     public static final Path DEFAULT_CONFIG_FILE = Paths.get("config.json");
 
     // Config values customizable through config file
-    private String appTitle = "Inventarie PRO";
+    private String appTitle = "Inventarie Pro";
     private Level logLevel = Level.INFO;
     private Path userPrefsFilePath = Paths.get("preferences.json");
 

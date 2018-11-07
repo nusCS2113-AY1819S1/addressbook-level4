@@ -16,8 +16,8 @@ import javafx.collections.transformation.FilteredList;
 
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.DistributorBookChangedEvent;
+import seedu.address.commons.events.model.ProductDatabaseChangedEvent;
 import seedu.address.commons.events.model.SalesHistoryChangedEvent;
 import seedu.address.commons.events.model.UserDatabaseChangedEvent;
 import seedu.address.commons.events.model.UserDeletedEvent;
@@ -62,7 +62,8 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyDistributorBook distributorBook, UserPrefs userPrefs,
+    public ModelManager(ReadOnlyProductDatabase addressBook,
+                        ReadOnlyDistributorBook distributorBook, UserPrefs userPrefs,
                         ReadOnlyUserDatabase userDatabase, ReadOnlySalesHistory salesHistory, Storage storage) {
         super();
         requireAllNonNull(addressBook, userPrefs, userDatabase);
@@ -85,7 +86,8 @@ public class ModelManager extends ComponentManager implements Model {
      * Initializes a {@code ModelManager} without sales history.
      * Needed as {@code SalesHistory} file is read after login.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyDistributorBook distributorBook, UserPrefs userPrefs,
+    public ModelManager(ReadOnlyProductDatabase addressBook,
+                        ReadOnlyDistributorBook distributorBook, UserPrefs userPrefs,
                         ReadOnlyUserDatabase userDatabase, Storage storage) {
         this(addressBook, distributorBook, userPrefs, userDatabase, new SalesHistory(), storage);
     }
@@ -106,13 +108,13 @@ public class ModelManager extends ComponentManager implements Model {
     // ============== ProductDatabase Modifiers =============================================================
 
     @Override
-    public ReadOnlyAddressBook getProductInfoBook() {
+    public ReadOnlyProductDatabase getProductInfoBook() {
         return versionedAddressBook;
     }
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(versionedAddressBook));
+        raise(new ProductDatabaseChangedEvent(versionedAddressBook));
     }
 
     @Override
@@ -131,15 +133,15 @@ public class ModelManager extends ComponentManager implements Model {
      * Updates the addressBook and its storage path.
      */
     private void reloadAddressBook() {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook newAddressBook;
+        Optional<ReadOnlyProductDatabase> addressBookOptional;
+        ReadOnlyProductDatabase newAddressBook;
 
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample ProductDatabase");
             }
-            newAddressBook = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            newAddressBook = addressBookOptional.orElseGet(SampleDataUtil::getSampleProductDatabase);
         } catch (DataConversionException e) {
             newAddressBook = new ProductDatabase();
             logger.warning("Data file not in the correct format. Will be starting with an empty ProductDatabase");
@@ -177,7 +179,7 @@ public class ModelManager extends ComponentManager implements Model {
     // ============== DistributorBook Modifiers =============================================================
 
     @Override
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyProductDatabase newData) {
         versionedAddressBook.resetData(newData);
         indicateAddressBookChanged();
     }
@@ -235,7 +237,7 @@ public class ModelManager extends ComponentManager implements Model {
     //============== UserDatabase Modifiers =============================================================
 
     @Override
-    public ReadOnlyAddressBook getUserDatabase() {
+    public ReadOnlyProductDatabase getUserDatabase() {
         return versionedAddressBook;
     }
 
@@ -289,7 +291,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyProductDatabase getAddressBook() {
         return null;
     }
 
@@ -323,7 +325,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void addPerson(Product product) {
-        versionedAddressBook.addPerson(product);
+        versionedAddressBook.addProduct(product);
         updateFilteredProductList(PREDICATE_SHOW_ALL_PERSONS);
         indicateAddressBookChanged();
     }

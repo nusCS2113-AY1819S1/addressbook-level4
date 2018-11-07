@@ -4,15 +4,15 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
-import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.DistributorBookChangedEvent;
+import seedu.address.commons.events.model.ProductDatabaseChangedEvent;
 import seedu.address.commons.events.model.SalesHistoryChangedEvent;
 import seedu.address.commons.events.model.UserDatabaseChangedEvent;
 import seedu.address.commons.events.model.UserDeletedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyDistributorBook;
+import seedu.address.model.ReadOnlyProductDatabase;
 import seedu.address.model.ReadOnlyUserDatabase;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.login.User;
@@ -37,27 +37,27 @@ public interface Storage extends ProductDatabaseStorage, DistributorBookStorage,
     Path getDistributorBookFilePath();
 
     @Override
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyProductDatabase> readAddressBook() throws DataConversionException, IOException;
 
     @Override
     Optional<ReadOnlyDistributorBook> readDistributorBook() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveAddressBook(ReadOnlyProductDatabase addressBook) throws IOException;
 
     @Override
     void saveDistributorBook(ReadOnlyDistributorBook distributorBook) throws IOException;
 
 
     /**
-     * Saves the current version of the Address Book to the hard disk.
+     * Saves the current version of the ProductInfo Book to the hard disk.
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleAddressBookChangedEvent(AddressBookChangedEvent abce);
+    void handleAddressBookChangedEvent(ProductDatabaseChangedEvent abce);
 
     /**
-     * Saves the current version of the Address Book to the hard disk.
+     * Saves the current version of the ProductInfo Book to the hard disk.
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */

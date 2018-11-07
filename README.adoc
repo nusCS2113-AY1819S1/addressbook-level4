@@ -2,13 +2,17 @@
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 https://travis-ci.org/CS2113-AY1819S1-T13-3/main[image:https://travis-ci.org/CS2113-AY1819S1-T13-3/main.svg?branch=master[Build Status]]
+https://ci.appveyor.com/project/amirulmaricar/main[image:https://ci.appveyor.com/api/projects/status/nk7ushp4sh76jdsd?svg=true[Build Status]]
 https://coveralls.io/github/CS2113-AY1819S1-T13-3/main?branch=master[image:https://coveralls.io/repos/github/CS2113-AY1819S1-T13-3/main/badge.svg?branch=master[Coverage Status]]
+https://www.codacy.com/app/amirulmaricar/main?utm_source=github.com&utm_medium=referral&utm_content=CS2113-AY1819S1-T13-3/main&utm_campaign=Badge_Grade[image:https://api.codacy.com/project/badge/Grade/d186291aa9c24d799f29d962d4d7212b[Codacy code quality]]
 
 ifdef::env-github[]
-image::docs/images/Ui.png[width="600"]
+image::docs/images/UI2.png[width="600"]
 endif::[]
 
-* This is a desktop Inventory Management application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
+* Flexible and easy-to-use application that keep your business running smoothly.
+* This is a desktop Inventory Management application. The user interactions happen using a CLI (Command Line Interface).
+* Our Inventory Management application is tailored for small business owners.
 * It is a Java sample application intended for students learning Software Engineering in Java.
 
 == Site Map

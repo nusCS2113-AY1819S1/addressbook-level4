@@ -2,7 +2,12 @@ package seedu.address.model.distributor;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Distributor in the address book.
@@ -14,13 +19,17 @@ public class Distributor {
     private final DistributorName distname;
     private final DistributorPhone distphone;
 
+    // Data fields
+    private final Set<Tag> tags = new HashSet<>();
+
     /**
      * Only name must be present and not null.
      */
-    public Distributor(DistributorName distname, DistributorPhone distphone) {
+    public Distributor(DistributorName distname, DistributorPhone distphone, Set<Tag> tags) {
         requireAllNonNull(distname);
         this.distname = distname;
         this.distphone = distphone;
+        this.tags.addAll(tags);
     }
 
     public DistributorName getDistName() {
@@ -29,6 +38,14 @@ public class Distributor {
 
     public DistributorPhone getDistPhone() {
         return distphone;
+    }
+
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
     }
 
     /**
@@ -41,8 +58,8 @@ public class Distributor {
         }
 
         return otherDistributor != null
-                && otherDistributor.getDistName().equals(getDistName())
-                && otherDistributor.getDistPhone().equals(getDistPhone());
+                && otherDistributor.getDistPhone().equals(getDistPhone())
+                || otherDistributor.getDistName().equals(getDistName());
     }
 
     /**
@@ -62,7 +79,8 @@ public class Distributor {
         seedu.address.model.distributor.Distributor otherDistributor =
                 (seedu.address.model.distributor.Distributor) other;
         return otherDistributor.getDistName().equals(getDistName())
-                && otherDistributor.getDistPhone().equals(getDistPhone());
+                && otherDistributor.getDistPhone().equals(getDistPhone())
+                && otherDistributor.getTags().equals(getTags());
     }
 
     @Override
@@ -76,7 +94,9 @@ public class Distributor {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDistName())
                 .append(" Phone: ")
-                .append(getDistPhone());
+                .append(getDistPhone())
+                .append(tags);
+        getTags().forEach(builder::append);
         return builder.toString();
     }
 

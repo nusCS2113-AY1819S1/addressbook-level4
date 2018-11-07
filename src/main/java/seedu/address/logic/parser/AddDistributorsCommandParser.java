@@ -3,7 +3,9 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIST_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIST_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddDistributorCommand;
@@ -11,6 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.distributor.Distributor;
 import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.distributor.DistributorPhone;
+import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddDistributorCommand object
@@ -24,7 +27,7 @@ public class AddDistributorsCommandParser implements Parser<AddDistributorComman
      */
     public AddDistributorCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DIST_NAME, PREFIX_DIST_PHONE);
+                ArgumentTokenizer.tokenize(args, PREFIX_DIST_NAME, PREFIX_DIST_PHONE, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DIST_NAME, PREFIX_DIST_PHONE)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -34,8 +37,9 @@ public class AddDistributorsCommandParser implements Parser<AddDistributorComman
 
         DistributorName name = ParserUtil.parseDistName(argMultimap.getValue(PREFIX_DIST_NAME).get());
         DistributorPhone phone = ParserUtil.parseDistPhone(argMultimap.getValue(PREFIX_DIST_PHONE).get());
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Distributor distributor = new Distributor(name, phone);
+        Distributor distributor = new Distributor(name, phone, tagList);
 
         return new AddDistributorCommand(distributor);
 
