@@ -1,6 +1,5 @@
 package seedu.recruit.ui;
 
-import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -32,7 +31,6 @@ import seedu.recruit.commons.events.ui.ShowLastViewedBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowShortlistPanelRequestEvent;
 import seedu.recruit.commons.events.ui.SwitchBookRequestEvent;
 import seedu.recruit.logic.Logic;
-import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.SwitchBookCommand;
 import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.candidate.Candidate;
@@ -46,8 +44,6 @@ public class MainWindow extends UiPart<Stage> {
 
     //Tracks whether an instance of MainWindow exists
     private static boolean exists = false;
-
-    private static final String WELCOME_MESSAGE = "Welcome to RecruitBook!";
 
     private static final String WELCOME_AUTHENTICATE_MESSAGE = "RecruitBook is password-protected.\n"
             + "Enter admin password to continue.";
@@ -165,9 +161,7 @@ public class MainWindow extends UiPart<Stage> {
         masterListPlaceholder.getChildren().add(getMasterCandidateListPanel().getRoot());
         panelViewPlaceholder.getChildren().add(getCandidateDetailsPanel().getRoot());
 
-        ResultDisplay resultDisplay =
-                LogicManager.getState().nextCommand.equals("authenticate")
-                        ? new ResultDisplay(WELCOME_AUTHENTICATE_MESSAGE) : new ResultDisplay(WELCOME_MESSAGE);
+        ResultDisplay resultDisplay = new ResultDisplay(WELCOME_AUTHENTICATE_MESSAGE);
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(
@@ -502,6 +496,10 @@ public class MainWindow extends UiPart<Stage> {
 
     @Subscribe
     private void handleUserAuthenticatedEvent(UserAuthenticatedEvent event) {
+        StatusBarFooter statusBarFooter = new StatusBarFooter(
+                prefs.getCandidateBookFilePath(), prefs.getCompanyBookFilePath(),
+                logic.getFilteredPersonList().size(), logic.getFilteredCompanyList().size());
+        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
         masterJobList = logic.getMasterJobList();
         masterCandidateList = logic.getMasterCandidateList();
         switchToMasterCandidateList();
