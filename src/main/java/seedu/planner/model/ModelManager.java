@@ -183,17 +183,20 @@ public class ModelManager extends ComponentManager implements Model {
     }
     @Override
     public void deleteLimit(Limit target) {
+        requireNonNull(target);
         versionedFinancialPlanner.removeLimit(target);
         indicateLimitListChanged();
     }
 
     @Override
     public void addLimit(Limit limitIn) {
+        requireNonNull(limitIn);
         versionedFinancialPlanner.addLimit(limitIn);
         indicateLimitListChanged();
     }
     @Override
     public boolean isExceededLimit (Limit limitIn) {
+        requireNonNull(limitIn);
         if (limitIn.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
             limitIn = generateThisMonthLimit(limitIn);
         }
@@ -214,6 +217,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
     @Override
     public Double getTotalSpend (Limit limitIn) {
+        requireNonNull(limitIn);
         if (limitIn.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
             limitIn = generateThisMonthLimit(limitIn);
         }
@@ -265,6 +269,7 @@ public class ModelManager extends ComponentManager implements Model {
      * @return
      */
     public Limit generateThisMonthLimit (Limit limitIn) {
+        requireNonNull(limitIn);
         Date today = DateUtil.getDateToday();
         Month thisMonth = new Month(today.getMonth(), today.getYear());
         Date dateStart = DateUtil.generateFirstOfMonth(thisMonth);

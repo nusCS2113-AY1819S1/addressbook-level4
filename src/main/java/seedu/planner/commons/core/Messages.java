@@ -54,7 +54,7 @@ public class Messages {
             " The records in the Excel file will be no longer in the current Financial Planner.\n";
 
     public static final String MESSAGE_LIMITS_DO_NOT_EXIST =
-            "There is no limit for that period of date";
+            "There is no limit for that period of time";
 
     public static final String MESSAGE_FILE_OPENED =
             "The file is being opened, please close it before performing Export/Achieve/Import command\n";
