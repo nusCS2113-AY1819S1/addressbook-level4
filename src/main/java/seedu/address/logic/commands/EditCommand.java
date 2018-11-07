@@ -21,7 +21,11 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.distributor.DistributorName;
-import seedu.address.model.product.*;
+import seedu.address.model.product.Name;
+import seedu.address.model.product.Product;
+import seedu.address.model.product.ProductInfo;
+import seedu.address.model.product.RemainingItems;
+import seedu.address.model.product.SerialNumber;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -184,7 +188,9 @@ public class EditCommand extends Command {
             return Optional.ofNullable(distname);
         }
 
-        public void setProductInfo(ProductInfo productInfo) { this.productInfo = productInfo; }
+        public void setProductInfo(ProductInfo productInfo) {
+            this.productInfo = productInfo;
+        }
 
         public Optional<ProductInfo> getProductInfo() {
             return Optional.ofNullable(productInfo);
@@ -192,7 +198,7 @@ public class EditCommand extends Command {
 
         public void setRemainingItems(RemainingItems remainingItems) {
             this.remainingItems = remainingItems;
-         }
+        }
 
         public Optional<RemainingItems> getRemainingItems() {
             return Optional.ofNullable(remainingItems);

@@ -13,7 +13,11 @@ import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.distributor.DistributorPhone;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.Username;
-import seedu.address.model.product.*;
+import seedu.address.model.product.Email;
+import seedu.address.model.product.Name;
+import seedu.address.model.product.ProductInfo;
+import seedu.address.model.product.RemainingItems;
+import seedu.address.model.product.SerialNumber;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.timeidentifiedclass.Reminder;
 

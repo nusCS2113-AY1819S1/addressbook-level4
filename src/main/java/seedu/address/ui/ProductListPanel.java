@@ -75,7 +75,7 @@ public class ProductListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new ProductCard(product,getIndex() + 1).getRoot());
+                setGraphic(new ProductCard(product, getIndex() + 1).getRoot());
             }
         }
     }

@@ -17,7 +17,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.distributor.Distributor;
 import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.distributor.DistributorPhone;
-import seedu.address.model.product.*;
+import seedu.address.model.product.Name;
+import seedu.address.model.product.Product;
+import seedu.address.model.product.ProductInfo;
+import seedu.address.model.product.RemainingItems;
+import seedu.address.model.product.SerialNumber;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,11 +37,11 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_SERIAL_NR, PREFIX_DISTRIBUTOR, PREFIX_PRODUCT_INFO,
-                        PREFIX_REMAINING_ITEMS, PREFIX_TAG);
+                         PREFIX_REMAINING_ITEMS, PREFIX_TAG);
         // The problem is not here becuase the error does not occur....
         if (!arePrefixesPresent(argMultimap,
                 PREFIX_NAME, PREFIX_PRODUCT_INFO, PREFIX_SERIAL_NR,
-                PREFIX_DISTRIBUTOR,PREFIX_REMAINING_ITEMS)
+                PREFIX_DISTRIBUTOR, PREFIX_REMAINING_ITEMS)
                 || !argMultimap.getPreamble().isEmpty()) {
             System.out.print("\"Vi fel inne\"");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
@@ -47,8 +51,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         SerialNumber serialNumber = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_SERIAL_NR).get());
         DistributorName distname = ParserUtil.parseDistName(argMultimap.getValue(PREFIX_DISTRIBUTOR).get());
         ProductInfo productInfo = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_PRODUCT_INFO).get());
-        RemainingItems remainingItems = ParserUtil.
-                parseRemainingItems(argMultimap.getValue(PREFIX_REMAINING_ITEMS).get());
+        RemainingItems remainingItems = ParserUtil
+                .parseRemainingItems(argMultimap.getValue(PREFIX_REMAINING_ITEMS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
 
