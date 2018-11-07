@@ -7,7 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 
 import seedu.address.model.product.Product;
-import seedu.address.model.product.UniquePersonList;
+import seedu.address.model.product.UniqueProductList;
 
 /**
  * Wraps all data at the address-book level
@@ -15,7 +15,7 @@ import seedu.address.model.product.UniquePersonList;
  */
 public class ProductDatabase implements ReadOnlyProductDatabase {
 
-    private final UniquePersonList products;
+    private final UniqueProductList products;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -26,7 +26,7 @@ public class ProductDatabase implements ReadOnlyProductDatabase {
      */
 
     {
-        products = new UniquePersonList();
+        products = new UniqueProductList();
     }
 
     public ProductDatabase() {}
