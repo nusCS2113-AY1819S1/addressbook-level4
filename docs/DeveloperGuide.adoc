@@ -452,7 +452,7 @@ Step 2. The `tag` command calls `updateFilteredItemListByTag()`, which shows the
 
 // end::tag[]
 
-// tag::addTtag[]
+// tag::addTag[]
 === AddTag/DeleteTag feature
 ==== Current Implementation
 

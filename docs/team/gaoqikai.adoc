@@ -1,0 +1,62 @@
+= Gao Qikai - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Jalil Enterprises Stock List
+
+---
+
+== Overview
+
+This Project Portfolio is to illustrate the contribution of me, Gao Qikai (GitHub: gaoqikai) to the JalilEnterprises project. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java. +
+This project is completed by team T12-3 of module CS2113T in National University of Singapore, in the first semester of academic year 2018/2019.
+
+
+== Summary of contributions
+
+* *Major enhancements:* +
+
+* Added the ability to list items in our stock list by tags.
+** What it does: List out all the items the user will need for specifically one or multiple labs (under specific tags).
+** Justification: This feature improves the usability of the program, as our program is intended to be used by real life laboratory technicians.
+
+* Added the ability to add tags to a specific item.
+** What it does: Add some tags to a specific item and keep the existing tags as well.
+** Justification: Although the user can use the “edit” command to modify an item’s tags, it would be complicated to add tags while keeping the existing tags because the “edit” command was implemented for you to replace the existing tags with new ones.
+
+* Added the ability to delete some of the tags of a specific item.
+** What it does: Delete accidentally added tags or unwanted tags of an item.
+** Justification: The "edit" command does this in an different way. “deleteTag” command allows the user to delete tags by choosing which tags to remove, but “edit” command is doing so by choosing which tags to keep.
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=gaoqikai[Functional Code]]
+
+* *Other contributions*:
+
+** Documentation:
+*** Did some tweaks to the existing Program parser, User guide and Developer guide: https://github.com/CS2113-AY1819S1-T12-3/main/pull/134[#134], https://github.com/CS2113-AY1819S1-T12-3/main/pull/167[#167].
+** Community:
+*** Reported bugs and suggestions for other teams in the class.
+
+** Tools:
+
+*** Integrated new Github plugins (https://travis-ci.org/CS2113-AY1819S1-T12-3/main[Travis CI], https://ci.appveyor.com/project/gaoqikai/main[AppVeyor], and https://app.codacy.com/project/CS2113-AY1819S1-T12-3/main/dashboard[Codacy]) to the team repo.
+*** Implemented auto-documenting and auto-publishing function to our project. https://cs2113-ay1819s1-t12-3.github.io/main/[Project Page].
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=tag]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=tag]
+include::../DeveloperGuide.adoc[tag=addTag]
