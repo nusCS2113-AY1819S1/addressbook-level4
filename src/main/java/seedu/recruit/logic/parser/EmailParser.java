@@ -104,7 +104,7 @@ public class EmailParser {
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
         } else if (state.nextCommand.equals(EmailContentsCommand.COMMAND_LOGIC_STATE)
-                && !emailUtil.isAreRecipientsCandidates()) {
+                        && !emailUtil.isAreRecipientsCandidates()) {
             switch (commandWord) {
 
             case ListCandidateCommand.COMMAND_WORD:
