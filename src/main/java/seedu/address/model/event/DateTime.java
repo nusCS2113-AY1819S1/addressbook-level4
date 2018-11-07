@@ -15,7 +15,6 @@ public class DateTime {
     public static final String MESSAGE_DATETIME_CONSTRAINTS =
             "Date should have all value and should be in the format\n"
                     + "dd/MM/yyyy HH:mm with each is a number within\n"
-                    + "Year: 0 - 3000\n"
                     + "Month: 1 - 12\n"
                     + "Date: 1 - 31\n"
                     + "Hour: 0-23\n"
@@ -45,7 +44,12 @@ public class DateTime {
      * @return boolean
      */
     public static boolean isValidDateTime (String dateTimeAsString) {
+        if(dateTimeAsString == null) {
+            throw new NullPointerException();
+        }
+
         try {
+            dateFormat.setLenient(false);
             dateFormat.parse(dateTimeAsString);
             return true;
         } catch (Exception e) {
