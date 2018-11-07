@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.planner.commons.util.CompareUtil;
-import seedu.planner.commons.util.MoneyUtil;
 import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.tag.Tag;
@@ -25,11 +24,8 @@ import seedu.planner.ui.SummaryEntry;
 public class SummaryByCategoryList extends SummaryList {
     private HashMap<Set<Tag>, Summary<Set<Tag>>> summaryMap = new HashMap<>();
 
-    private MoneyFlow total = new MoneyFlow("-0");
-    private MoneyFlow totalIncome = new MoneyFlow("-0");
-    private MoneyFlow totalExpense = new MoneyFlow("-0");
-
     public SummaryByCategoryList(List<Record> recordList) {
+        super();
         requireNonNull(recordList);
         for (Record r : recordList) {
             addRecordToMap(r);
@@ -66,19 +62,9 @@ public class SummaryByCategoryList extends SummaryList {
         }
     }
 
-    /** Update the total moneyflow, total income and total expense */
-    private void updateTotals(Record record) {
-        MoneyFlow money = record.getMoneyFlow();
-        if (isExpense(money)) {
-            totalExpense = MoneyUtil.add(totalExpense, money);
-        } else {
-            totalIncome = MoneyUtil.add(totalIncome, money);
-        }
-        total = MoneyUtil.add(total, money);
-    }
-
-    private boolean isExpense(MoneyFlow money) {
-        return money.toDouble() < 0;
+    @Override
+    protected void updateTotals(Record record) {
+        super.updateTotals(record);
     }
 
     @Override

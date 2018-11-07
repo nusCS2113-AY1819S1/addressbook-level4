@@ -21,9 +21,10 @@ import seedu.planner.model.summary.SummaryList;
 public class SummaryByDateCommand extends SummaryCommand {
 
     public static final String COMMAND_MODE_WORD = "date";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists the summary for each day for a period of time. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_MODE_WORD
+            + ": Lists the summary for each day for a period of time. "
             + "Parameters: "
-            + PREFIX_DATE + "DATE_START " + "DATE_END "
+            + PREFIX_DATE + "START_DATE " + "END_DATE "
             + "Example: " + COMMAND_WORD + " " + COMMAND_MODE_WORD + " "
             + PREFIX_DATE + "18-9-2018 " + "20-9-2018 ";
 

@@ -1,4 +1,4 @@
-== Financial Planner - User Guide
+﻿= Financial Planner - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -30,7 +30,7 @@ Before a user is able to use our software, he/she is required to do the followin
 that is required.
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
+.  Download the latest `financialplanner.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your Financial Planner.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
@@ -41,7 +41,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : lists all records
-* **`add`**`n/Grocery shoppings m/-70 d/20-9-2018 t/Shopping` : adds a contact named `Grocery shopping` to the Financial Planner.
+* **`add`**`n/Grocery shopping m/-70 d/20-9-2018 t/Shopping` : adds a contact named `Grocery shopping` to the Financial Planner.
 * **`delete`**`3` : deletes the 3rd record shown in the current list
 * *`exit`* : exits the app
 
@@ -68,11 +68,15 @@ which can be used as `add n/Grocery shopping`.
 *Parameter Constraints* [[constraints]]
 
 * `NAME` can be any word, phrase or sentence.
-* `MONEYFLOW` must be made up of only digits, a single "+" or "-" and at most one decimal point.
+* `MONEYFLOW` must be made up of only digits, a single "+" or "-" and at most one decimal point. Also, note that the maximum number of
+digits the whole number part of this parameter can have is 12 digits.
 * `DATE` is in the form of *dd-mm-yyyy* where *dd* represents day, *mm* represents month and *yyyy* represents the year.
 *dd* and *mm* both require 1 to 2 digits while *yyyy* requires exactly 4 digits.
-* `DATE` entered must also be a valid date, no fake dates e.g. 60-11-2018, 30-02-2018
-* `TAG` is completely optional and can be any alphanumerical word, but limited to only 1 whole word, no whitespaces are allowed.
+* `DATE` entered must also be a valid date, no fake dates e.g. *60-11-2018*, *30-02-2018*. Leap years are also accounted for, meaning that you
+can enter *29-2-2016* and it will still be accepted.
+* `TAG` is completely optional and can be any alphanumerical word, but limited to only 1 whole word, no whitespaces are allowed. Also,
+the maximum character length of the tag is 50 characters long. The maximum allowed tags is 2 as these tags will be used to categorise each
+record, to reduce effort on user's part in specifying another field.
 * `INDEX` *must be a positive integer* `1, 2, 3, ...`
 
 ====
@@ -89,8 +93,8 @@ Adds a record of a financial activity to the FinancialPlanner with the given nam
 Format: `add n/NAME d/DATE m/MONEYFLOW [t/TAG]...` +
 
 Name denotes the name of the financial activity, moneyflow denotes the money spent or gained in the financial activity
-and date denotes the date the financial activity was completed. Each financial activity can be labelled with any number
-of tags.
+and date denotes the date the financial activity was completed. Each financial activity can be labelled with maximum of 2
+of tags as these tags will be used to categorise each record to remove the need for user to specify another field.
 
 [NOTE]
 Moneyflow can be either a debit (expense) or a credit (income). +
@@ -133,11 +137,11 @@ Finds records whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Records matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The search is case insensitive. e.g `grocery` will match `Grocery`
+* The order of the keywords does not matter. e.g. `Grocery Shopping` will match `Shopping Grocery`
+* Only the name of the record is searched.
+* Only full words will be matched e.g. `Grocer` will not match `Grocery`
+* Records matching at least one keyword will be returned (i.e. `OR` search). e.g. `Grocery Shopping` will return `Grocery`, `Shirt Shopping`
 ****
 
 Examples:
@@ -265,7 +269,6 @@ Deletes the 2nd record in the expense book.
 Deletes the 1st record in the results of the `find` command.
 
 // tag::delete_by_date_entry[]
-
 === Deleting records by date. `delete_date`
 
 Deletes the records with a specified date from the expense book. +
@@ -282,7 +285,6 @@ Examples:
 Deletes the records with date 31-7-2018.
 
 // end::delete_by_date_entry[]
-
 === Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
@@ -296,12 +298,13 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 // tag::undoredo[]
 === Undoing previous command : `undo`
 
-Restores the expense book to the state before the previous _undoable_ command was executed. +
+Restores the FinancialPlanner to the state before the previous _undoable_ command was executed. +
 Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the expense book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the FinancialPlanner's stored content (
+`add`, `delete`, `deletedate`, `edit`, `addlimit`, `deletelimit`, `editlimit` and `clear`).
 ====
 
 Examples:
@@ -340,7 +343,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 === Clearing all records : `clear`
 
-Clears all records from the expense book. +
+Clears all records from the FinancialPlanner. +
 Format: `clear`
 
 === Exiting the program : `exit`
@@ -438,7 +441,8 @@ Examples:
 * `summary month d/APR-2018 SeP-2018`
 * `summary category d/1-1-2018 12-12-2018`
 
-The screenshots below are examples of what you can see once the command has been accepted.
+The screenshots below are examples of what you can see once the command has been accepted. The commands entered have been left
+in for visualisation purposes.
 
 image::UiSummaryByDateTable.png[width="790"]
 *Screenshot of app when `summary date d/1-1-2018 12-12-2018` is run*
@@ -474,7 +478,8 @@ Examples:
 
 * `stats d/1-1-2018 12-12-2018`
 
-Below are some screenshots of what you can see when the command has been accepted.
+Below are some screenshots of what you can see when the command has been accepted. The commands entered have been left
+in for visualisation purposes.
 
 image::UiPieChartExpense.png[width="790"]
 *Screenshot of app displaying expense breakdown when `stats d/1-1-2018 12-12-2018` is run*
@@ -483,7 +488,7 @@ image::UiPieChartIncome.png[width="790"]
 *Screenshot of app displaying income breakdown when `stats d/1-1-2018 12-12-2018` is run*
 
 // end::stats[]
-// end::welcomepanel[]
+// tag::welcomepanel[]
 === Showing a breakdown of total expenses and income into categories of this month: `NO COMMAND REQUIRED`
 
 Shows a breakdown of total expenses and income into categories using data of this month. +
@@ -715,12 +720,11 @@ image::Export_Capture2_LinhChi.png[width:800]
 
 // tag::limitfeatures[]
 
-== Spending Limit Feature
+== Spending Limit Features
 
-This section describes the limit feature that allows users to set values to control their future spending.
+* This section describes the limit feature that allows users to set values to control their future spending.
 Constraints that apply to records also apply to each limit. Refer to <<constraints>> for more information.
-`All the limit related commands are case insensitive. Users can input ADDlimit, addLimit and so on to execute the command.
-Besides that, in case some of the users who have programming background are used to using `
+
 
 [[addlimit]]
 === Adding a limit: `addlimit`
@@ -731,7 +735,8 @@ Format: `addlimit d/START_DATE END_DATE m/MONEYFLOW` (`limit d/DATE m/MONEYFLOW`
 When inputting two days, START_DATE and END_DATE indicates the starting date and ending date for the limit.
 If there is only one date, that day will be the time period.
 MONEYFLOW denotes the money spending limit for that period of time.
-After the limits have been set, Financial Planner will keep checking the latest condition of these limits.
+
+* After the limits have been added, Financial Planner will keep checking the latest condition of these limits.
 Once the total amount of money spent during this time period exceeds the spending limit,
 FinancialPlanner will warn the user by sending the warning message.
 ****
@@ -744,8 +749,7 @@ Example:
 
 * `addlimit d/20-8-2018 m/100`
 * `addlimit d/20-8-2018 30-8-2018 m/632`
-* `addLimit d/20-8-2018 20-8-2018 m/200`
-* `add_limit d/20-8-2018 30-8-2018 m/100`
+* `addlimit d/20-8-2018 30-8-2018 m/100`
 
 [[checklimit]]
 === Viewing all limits: `checkLimit`
@@ -754,8 +758,7 @@ Displays all limits information stored in FinancialPlanner +
 Format: `checklimit`
 Example:
 * `checklimit`
-* `checkLimit`
-* `check_limit`
+
 
 [[deletelimit]]
 === Deleting a limit: `deleteLimit`
@@ -769,7 +772,7 @@ with the same dates will be deleted. If there is no limit for that period, the p
 throw errors.
 Delete
 ****
-* `START_DATE/END_DATE` must match exactly the same as when the limit was created.
+* There must be a limit with the same dates.
 * Limits cannot be partially deleted with incorrect dates.
 ****
 
@@ -777,7 +780,7 @@ Examples:
 
 * `deletelimit d/20-8-2018`
 * `deletelimit d/20-8-2018 30-8-2018`
-* `delete_Limit d/20-8-2018 30-8-2018`
+
 
 [[editlimit]]
 
@@ -791,20 +794,60 @@ The editlimit command will check the input date period or the single day and
 replace the original moneyFlow with the new moneyFlow.
 ****
 * `MONEYFLOW` can only be a positive integer, and does not require a "+" or "-".
-* `START_DATE/END_DATE` must match exactly the same as when the limit was created.
+* There must be a limit with the same dates.
 ****
 
 Examples:
 
 * `editlimit d/20-8-2018 m/200`
 * `editlimit d/20-8-2018 30-8-2018 m/200`
-* `editLimit d/20-8-2018 30-8-2018 m/200`
-* `edit_limit d/20-8-2018 30-8-2018 m/200`
-// end::limitfeatures[]
 
+
+
+=== Adding a monthly limit: `addmonthlylimit`
+
+Add a continuous monthly limit always for the current month.
+Format: `addmonthlylimit m/MONEYFLOW`
+
+The monthly limit will always check the spend of the current month according to the current time.
+For example, if the limit was set to be 200 at April, the limit will check the total spend for April.
+When the time comes to May, the limit will no longer check April, instead, the limit
+will check the total spend of May until the last second of May.
+
+****
+* `MONEYFLOW` can only be a positive integer, and does not require a "+" or "-".
+****
+Examples:
+* `addmonthlylimit m/200`
+
+=== Editing the monthly limit: `editmonthlylimit`
+
+Edit an existing monthly limit.
+Format: `editmonthlylimit m/MONEYFLOW`
+
+The monthly limit will be replaced by the new monthly limit.
+****
+* `MONEYFLOW` can only be a positive integer, and does not require a "+" or "-".
+* There must be an existing monthly limit.
+****
+Examples:
+* `editmonthlylimit m/200`
+
+=== Deleting the monthly limit: `deletemonthlylimit`
+
+Delete the monthly limit.
+Format: `deletemonthlylimit`
+
+The monthly limit will be deleted and no longer check the spend of the current month.
+****
+* There must be an existing monthly limit.
+****
+Examples:
+* `deletemonthlylimit`
+//end::limitfeatures[]
 == Upcoming Features
 
-=== Showing a visual representation of daily/monthly summary `[Coming in v1.4]`
+=== Showing a visual representation of daily/monthly summary `[Coming in v2.0]`
 
 // tag::dataencryption[]
 === Encrypting data files `[coming in v2.0]`
@@ -829,52 +872,108 @@ Examples:
 
 == Command Summary
 
-* *Add* `add n/NAME d/DATE m/MONEYFLOW [t/TAG]...` +
+* *Help* : `help`
+
+* *Add* : `add n/NAME d/DATE m/MONEYFLOW [t/TAG]...` +
 e.g. `add n/Dinner with family d/20-12-2017 m/-10 t/food t/family`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *Find Tag* : `findtag KEYWORD [MORE_KEYWORDS]` +
-e.g. `findtag friend`
-* *sort* : `sort [CATEGORY] [ORDER]` +
-e.g. `sort name asc`
+
 * *List* : `list [d/DATE] [DATE]` +
 e.g. +
 .  `list`
 . `list d/20-12-2017`
 . `list d/20-12-2017 31-09-2018`
-* *Export into Excel* : `export_excel` +
-e.g. +
-. `export_excel`
-. `export_excel d/20-12-2017`
-. `export_excel d/20-12-2017 31-09-2018`
-* *Help* : `help`
+
+* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
+e.g. `find James Jake`
+
+* *Find tag* : `findtag KEYWORD [MORE_KEYWORDS]` +
+e.g. `findtag friend`
+
 * *Select* : `select INDEX` +
 e.g. `select 2`
+
+* *Sort* : `sort [CATEGORY] [ORDER]` +
+e.g. `sort name asc`
+
+* *Edit* : `edit INDEX [n/NAME] [d/DATE] [m/MONEYFLOW] [t/TAG]...` +
+e.g. `edit 2 n/Present d/12-11-2018`
+
+* *Delete* : `delete INDEX` +
+e.g. `delete 3`
+
+* *Delete by date* : `deletedate DATE` +
+e.g. `delete 31-7-2018`
+
 * *History* : `history`
+
 * *Undo* : `undo`
+
 * *Redo* : `redo`
-* *Summary* : `summary` +
+
+* *Clear* : `clear`
+
+* *Exit* : `exit`
+
+* *View summary* : multiple modes of `summary` +
 e.g.
 . `summary date d/1-1-2018 12-12-2018`
 . `summary month d/apr-2018 sep-2018`
 . `summary month d/APR-2018 SeP-2018`
 . `summary category d/1-1-2018 12-12-2018`
-* *Finances Statistics* : `stats` +
+
+* *View pie chart breakdown* : `stats d/DATE DATE` +
 e.g. `stats d/20-12-2017 31-09-2018`
-* *Add limit* : `addlimit d/START_DATE END_DATE` +
+
+* *Export into Excel* : multiple modes of `exportexcel` +
 e.g. +
-`limit d/20-12-2017`
-`limit d/20-12-2017 31-09-2018`
-* *Delete limit* `deleteLimit d/START_DATE END_DATE` +
+. `export_excel`
+. `export_excel d/31-3-1999`
+. `export_excel d/31-3-1999 31-03-2019`
+. `export_excel d/31-3-1999 dir/C:\`
+. `export_excel d/31-3-1999 31-3-2019 dir/C:\`
+
+* *Import into app* : multiple modes of `import` +
 e.g. +
-`deleteLimit d/20-12-2017`
-`deleteLimit d/20-12-2017 31-09-2018`
-* *Edit limit* `editLimit d/START_DATE END_DATE m/MONEYFLOW` +
+. `import dir/C:\Financial_Planner_ALL.xlsx`
+. `import dir/C:\ n/Financial_Planner_All.xlsx`
+
+* *Archive records* : multiple modes of `archive` +
 e.g. +
-`editLimit d/20-12-2017 m/100`
-`editLimit d/20-12-2017 31-09-2018 m/100`
+. `archive`
+. `archive d/31-3-1999`
+. `archive d/31-3-1999 31-03-2019`
+. `archive d/31-3-1999 dir/C:\`
+. `archive d/31-3-1999 31-3-2019 dir/C:\`
+
+* *Add limit* : `addlimit d/DATE [DATE] m/MONEYFLOW` +
+e.g. +
+. `addlimit d/20-12-2017`
+. `addlimit d/20-12-2017 31-09-2018`
+
+* *Check limit* : `checklimit d/DATE [DATE]` +
+
+* *Delete limit* `deletelimit d/DATE [DATE]` +
+e.g. +
+. `deleteLimit d/20-12-2017`
+. `deleteLimit d/20-12-2017 31-09-2018`
+
+* *Edit limit* `editlimit d/DATE [DATE] m/MONEYFLOW` +
+e.g. +
+. `editLimit d/20-12-2017 m/100`
+. `editLimit d/20-12-2017 31-09-2018 m/100`
+
+* *Check limit* : `checklimit`
+e.g. +
+. `checklimit d/20-12-2017`
+. `checklimit d/20-12-2018 31-09-2018`
+
+* *Add monthly limit* : `addmonthlylimit m/MONEYFLOW` +
+e.g. +
+`addmonthlylimit m/500` +
+
+* *Edit monthly limit* : `editmonthlylimit m/MONEYFLOW` +
+e.g. +
+`editmonthlylimit m/300` +
+
+* *Delete monthly limit* : `deletemonthlylimit`
+

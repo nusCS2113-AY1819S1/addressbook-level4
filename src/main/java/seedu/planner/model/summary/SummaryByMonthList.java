@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.planner.commons.util.CompareUtil;
-import seedu.planner.commons.util.MoneyUtil;
 import seedu.planner.model.Month;
 import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Record;
@@ -60,19 +59,9 @@ public class SummaryByMonthList extends SummaryList {
         }
     }
 
-    /** Update the total moneyflow, total income and total expense */
-    private void updateTotals(Record record) {
-        MoneyFlow money = record.getMoneyFlow();
-        if (isExpense(money)) {
-            totalExpense = MoneyUtil.add(totalExpense, money);
-        } else {
-            totalIncome = MoneyUtil.add(totalIncome, money);
-        }
-        total = MoneyUtil.add(total, money);
-    }
-
-    private boolean isExpense(MoneyFlow money) {
-        return money.toDouble() < 0;
+    @Override
+    protected void updateTotals(Record record) {
+        super.updateTotals(record);
     }
 
     @Override

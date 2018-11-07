@@ -22,7 +22,8 @@ import seedu.planner.model.summary.SummaryList;
 public class SummaryByCategoryCommand extends SummaryCommand {
 
     public static final String COMMAND_MODE_WORD = "category";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists the summary for each category for a "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_MODE_WORD
+            + ": Lists the summary for each category for a "
             + "period of time.\n A category refers to any set of tags that is assigned to a record.\n"
             + " Parameters: "
             + PREFIX_DATE + "START_DATE " + "END_DATE "
