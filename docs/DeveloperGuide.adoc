@@ -417,7 +417,7 @@ The statistic feature is facilitated by a singleton class StatisticCenter. It is
 
 The following sequence diagram shows how the StatisticCenter interact with sell command:
 
-image::statisticSequenceDiagram.png[width="800"] 
+image::statisticSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 
