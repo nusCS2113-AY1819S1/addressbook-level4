@@ -4,7 +4,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-
 /**
  * Represents a Event in the event list.
  * Guarantees: details are present and not null, field values are validated, immutable.
