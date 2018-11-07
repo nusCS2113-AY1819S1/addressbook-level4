@@ -12,7 +12,7 @@ public class Salary {
     public static final String SALARY_VALIDATION_REGEX = "[\\d]+";
 
     public static final String MESSAGE_SALARY_CONSTRAINTS =
-            "Desired salary should contain digits only and it should not be blank ";
+            "Desired salary should contain numbers greater than 0 and it should not be blank ";
 
     public final String value;
 
@@ -26,7 +26,7 @@ public class Salary {
      * Returns true if a given string is a valid salary.
      */
     public static boolean isValidSalary(String test) {
-        return test.matches(SALARY_VALIDATION_REGEX);
+        return ((test.matches(SALARY_VALIDATION_REGEX)) && (Integer.parseInt(test)>0));
     }
 
     @Override
