@@ -120,6 +120,16 @@ Examples:
 * `findproduct Cap`
 * `findproduct 1021`
 
+==== Find a product by tag: `findtag`
+
+Format: `findtag PRODUCT_TAG`
+
+Locates products that are related to the PRODUCT_TAG entered.
+
+Examples:
+
+* `findtag snack`
+
 ==== List all products: `listproducts`
 
 Format: `listproducts`
@@ -174,6 +184,16 @@ Locates distributors that are related to the DISTRIBUTOR_NAME entered.
 Examples:
 
 * `finddistributor Taylor`
+
+==== Find a distributor by tag: `findtagdistributor`
+
+Format: `findtagdistributor DISTRIBUTOR_TAG`
+
+Locates distributors that are related to the DISTRIBUTOR_TAG entered.
+
+Examples:
+
+* `findtagdistributor snack`
 
 ==== Delete a distributor: `deletedistributor`
 

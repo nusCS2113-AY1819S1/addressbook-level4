@@ -48,23 +48,6 @@ public class Distributor {
         return Collections.unmodifiableSet(tags);
     }
 
-    public String getTagString() {
-
-        String tagNewString = new String(this.getTags().toString());
-
-        String[] tagArray = new String[this.getTags().size()];
-
-        int i = 0;
-        for (Tag s : this.getTags()) {
-            tagArray[i++] = s.toString();
-        }
-
-        String tagString = new String(tagArray.toString());
-        System.out.println("getTagString: " + tagString);
-
-        return tagString;
-    }
-
     /**
      * Returns true if both persons of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two persons.
