@@ -47,7 +47,7 @@ public class ClubBudgetElementsTest {
     public void equals() {
         // same values -> returns true
         ClubBudgetElements computingClubCopy = new ClubBudgetElementsBuilder(COMPUTING_CLUB).build();
-        assertTrue(COMPUTING_CLUB.equals(COMPUTING_CLUB));
+        assertTrue(COMPUTING_CLUB.equals(computingClubCopy));
 
         // same object -> returns true
         assertTrue(COMPUTING_CLUB.equals(COMPUTING_CLUB));

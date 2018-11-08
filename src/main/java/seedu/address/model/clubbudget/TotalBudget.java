@@ -10,8 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class TotalBudget {
 
-    public static final String MESSAGE_TOTAL_BUDGET_CONSTRAINTS = "Total budget should only contain numbers "
-            + "including zero. It should be given in SGD";
+    public static final String MESSAGE_TOTAL_BUDGET_CONSTRAINTS =
+            "Please enter a valid total budget! Total Budget can only be positive numbers, even zero.";
     public static final String TOTAL_BUDGET_VALIDATION_REGEX = "\\d{1,}";
     public final String value;
 
