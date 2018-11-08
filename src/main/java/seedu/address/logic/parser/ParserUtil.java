@@ -13,6 +13,7 @@ import seedu.address.model.Events.Description;
 import seedu.address.model.Events.EventDate;
 import seedu.address.model.Events.EventName;
 import seedu.address.model.Events.Venue;
+import seedu.address.model.item.ItemLocation;
 import seedu.address.model.item.ItemName;
 import seedu.address.model.item.ItemQuantity;
 import seedu.address.model.ledger.Account;
@@ -251,6 +252,21 @@ public class ParserUtil {
             throw new ParseException(ItemQuantity.MESSAGE_ITEM_QUANTITY_CONSTRAINTS);
         }
         return new ItemQuantity(trimmedItemQuantity);
+    }
+
+    /**
+     * Parses a {@code String ItemLocation} into a {@code ItemLocation}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code itemLocation} is invalid.
+     */
+    public static ItemLocation parseItemLocation(String itemLocation) throws ParseException {
+        requireNonNull(itemLocation);
+        String trimmedItemLocation = itemLocation.trim();
+        if (!ItemLocation.isValidItemLocation(trimmedItemLocation)) {
+            throw new ParseException(ItemLocation.MESSAGE_ITEM_LOCATION_CONSTRAINTS);
+        }
+        return new ItemLocation(trimmedItemLocation);
     }
 
     /**

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_QUANTITY;
 
@@ -22,7 +23,8 @@ public class AddItemCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an item into the inventory."
             + "parameters: "
             + PREFIX_ITEM_NAME + "ITEM NAME "
-            + PREFIX_ITEM_QUANTITY + "ITEM QUANTITY ";
+            + PREFIX_ITEM_QUANTITY + "ITEM QUANTITY "
+            + PREFIX_ITEM_LOCATION + "ITEM LOCATION";
 
     public static final String MESSAGE_SUCCESS = "New item added: %1$s";
     public static final String MESSAGE_DUPLICATE_ITEM = "This item already exists in the item list";
