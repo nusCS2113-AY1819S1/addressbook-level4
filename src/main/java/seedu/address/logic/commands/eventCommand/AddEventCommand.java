@@ -34,7 +34,7 @@ public class AddEventCommand extends Command {
             + "Example: "
             + COMMAND_WORD + " n/Basketball training v/MPSH3 D/Bring your own basketball d/01/11\n ";;
 
-    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the event list";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
 
@@ -63,8 +63,8 @@ public class AddEventCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AddEventCommand // instanceof handles nulls
+        return other == this
+                || (other instanceof AddEventCommand
                 && newEvent.equals(((AddEventCommand) other).newEvent));
     }
 }

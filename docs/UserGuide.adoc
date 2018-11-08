@@ -351,18 +351,48 @@ Example: `debit d/ 10/10 b/ 100`
 Lists all the events sorted by date. +
 Format: `listEvents`
 
+Example:
+* `listEvent`
+List all the events in the ClubHub.
+
 ==== Adding an event: `addEvent`
 Adds an event to the calendar. +
 Format: `addEvent n/EVENT_NAME v/VENUE d/DESCRIPTION D/EVENT_DATE`
 
-==== Editing an event: `editEvent`(This will be implemented in v1.4)
-Edits an event on the calendar. +
-Format: `editEvent EVENT_NAME to EVENT_NAME EVENT_DATE EVENT_LOCATION EVENT_DESCRIPTION`
+[TIP]
+The Event name cannot be the same as an existing one.
+
+Example:
+
+* `addEvent n/Basketball training v/MPSH3 D/Bring your own basketball d/10/12
+
+==== Editing an event: `editEvent`
+
+Edits an existing event in the ClubHub. +
+Format: `editEvent INDEX n/EVENT_NAME v/EVENT_VENUE D/EVENT_DESCRIPTION d/EVENT_DATE`
+
+****
+* Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+****
+
+Example:
+
+* `editEvent 1 n/Basketball training v/Sports Center D/bring your own basketball d/12/12`
+Edit the venue and the date of the 1st event to `Sports Center` and `12/12` respectively.
 
 ==== Deleting event: `deleteEvent`
-Deletes an event from the calendar. +
+Deletes an existing event from the ClubHub. +
 Format: `deleteEvent n/EVENT_NAME`.
 
+[TIP]
+The event name must be exactly the same as the one you want to delete.
+
+Example:
+
+* `deleteEvent n/Basketball training`
+Delete the event named `Basketball training`.
 
 === ItemList
 

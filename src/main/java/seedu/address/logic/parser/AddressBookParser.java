@@ -36,6 +36,7 @@ import seedu.address.logic.commands.UndoAllCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.eventCommand.AddEventCommand;
 import seedu.address.logic.commands.eventCommand.DeleteEventCommand;
+import seedu.address.logic.commands.eventCommand.EditEventCommand;
 import seedu.address.logic.commands.eventCommand.ListEventCommand;
 import seedu.address.logic.commands.ledger.AddLedgerCommand;
 import seedu.address.logic.commands.ledger.CreditCommand;
@@ -51,12 +52,12 @@ import seedu.address.logic.parser.Member.FindPhoneCommandParser;
 import seedu.address.logic.parser.Member.FindPostalcodeCommandParser;
 import seedu.address.logic.parser.event.AddEventCommandParser;
 import seedu.address.logic.parser.event.DeleteEventCommandParser;
+import seedu.address.logic.parser.event.EditEventCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.ledger.AddLedgerCommandParser;
 import seedu.address.logic.parser.ledger.CreditCommandParser;
 import seedu.address.logic.parser.ledger.DebitCommandParser;
 import seedu.address.logic.parser.ledger.DeleteLedgerCommandParser;
-
 /**
  * Parses user input.
  */
@@ -88,10 +89,15 @@ public class AddressBookParser {
         switch(commandWord) {
         case AddEventCommand.COMMAND_WORD: case AddEventCommand.COMMAND_ALIAS:
             return new AddEventCommandParser().parse(arguments);
+
         case DeleteEventCommand.COMMAND_WORD: case DeleteEventCommand.COMMAND_ALIAS:
             return new DeleteEventCommandParser().parse(arguments);
+
         case ListEventCommand.COMMAND_WORD: case ListEventCommand.COMMAND_ALIAS:
             return new ListEventCommand();
+
+            case EditEventCommand.COMMAND_WORD: case EditEventCommand.COMMAND_ALIAS:
+                return new EditEventCommandParser().parse(arguments);
 
         case AddMemberCommand.COMMAND_WORD: case AddMemberCommand.COMMAND_ALIAS:
             return new AddCommandParser().parse(arguments);
