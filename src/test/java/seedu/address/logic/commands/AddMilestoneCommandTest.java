@@ -1,5 +1,11 @@
 package seedu.address.logic.commands;
+
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+import static seedu.address.testutil.TypicalTasks.getTypicalTaskBook;
+
 import org.junit.Test;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -8,11 +14,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.task.Milestone;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.MilestoneBuilder;
-import seedu.address.testutil.TaskBuilder;
-
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
-import static seedu.address.testutil.TypicalTasks.getTypicalTaskBook;
 
 //@@author JeremyInElysium
 public class AddMilestoneCommandTest {
