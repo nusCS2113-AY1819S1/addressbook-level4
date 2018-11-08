@@ -50,7 +50,6 @@ public class UpdateStatusCommand extends Command {
             model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
             EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
         }
-        
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
