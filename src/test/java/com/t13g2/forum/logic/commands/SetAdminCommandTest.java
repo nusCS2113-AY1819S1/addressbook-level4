@@ -60,7 +60,25 @@ public class SetAdminCommandTest {
     }
 
     @Test
-    public void execute_adminAndLoggedIn_setAdminSuccess() {
+    public void execute_adminAndRevertYourself_setAdminFailed() {
+        //set the current logged in user as an admin.
+        User validAdmin = new UserBuilder().build();
+        Context.getInstance().setCurrentUser(validAdmin);
+
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            unitOfWork.getUserRepository().addUser(validAdmin);
+            unitOfWork.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        SetAdminCommand setAdminCommand = new SetAdminCommand(validAdmin.getUsername(), false);
+
+        CommandTestUtil.assertCommandSuccess(setAdminCommand, model, commandHistory,
+            SetAdminCommand.MESSAGE_FAILED, expectedModel);
+    }
+
+    @Test
+    public void execute_adminAndValidUser_setAdminSuccess() {
         //set the current logged in user as an admin.
         User validAdmin = new UserBuilder().build();
         Context.getInstance().setCurrentUser(validAdmin);

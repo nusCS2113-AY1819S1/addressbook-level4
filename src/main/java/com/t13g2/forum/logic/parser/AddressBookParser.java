@@ -30,6 +30,7 @@ import com.t13g2.forum.logic.commands.SelectModuleCommand;
 import com.t13g2.forum.logic.commands.SelectThreadCommand;
 import com.t13g2.forum.logic.commands.SetAdminCommand;
 import com.t13g2.forum.logic.commands.UpdateCommentCommand;
+import com.t13g2.forum.logic.commands.UpdateModuleCommand;
 import com.t13g2.forum.logic.commands.UpdateThreadCommand;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
 
@@ -119,6 +120,9 @@ public class AddressBookParser {
 
         case DeleteUserCommand.COMMAND_WORD:
             return new DeleteUserCommandParser().parse(arguments);
+
+        case UpdateModuleCommand.COMMAND_WORD:
+            return new UpdateModuleCommandParser().parse(arguments);
 
         //@@author HansKoh
         case CreateThreadCommand.COMMAND_WORD:

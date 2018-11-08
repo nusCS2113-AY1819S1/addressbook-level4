@@ -11,6 +11,8 @@ public class Module extends BaseModel {
             + "\nand it should not be blank. E.g. MA1580E, CS2113 or USP1000A, USP1000";
     public static final String MESSAGE_MODULE_TITLE_CONSTRAINTS =
         "Invalid parameter: mTitle should not be blank";
+    public static final String MESSAGE_MODULE_ID_OUT_OF_BOUND = "mId is outside of Integer range!";
+    public static final String MESSAGE_MODULE_ID_NEGATIVE = "mId should be in the range of 0 ~ INT_MAX";
     public static final String MODULE_CODE_VALIDATION_REGEX = "[A-Z]{2,3}[0-9]{4}[A-Z]{0,1}";
     public static final String MODULE_TITLE_VALIDATION_REGEX = "[^\\s].*";
 

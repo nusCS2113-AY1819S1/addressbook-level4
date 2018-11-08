@@ -26,7 +26,8 @@ public class DisplayFormatter {
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             message = "";
             for (Module module : moduleList) {
-                message += module.getModuleCode() + ": " + module.getTitle() + "\n";
+                message += "[Module id: " + module.getId() + "] "
+                    + module.getModuleCode() + ": " + module.getTitle() + "\n";
                 message += "----------------------------------------------------------------------------------\n";
             }
         } catch (Exception e) {

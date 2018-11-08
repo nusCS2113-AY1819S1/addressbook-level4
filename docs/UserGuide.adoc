@@ -250,6 +250,17 @@ Example:
 
 * `createModule mCode/CS2113 mTitle/Software Engineering and OOP`
 
+=== Updating a module : `updateModule`
+
+Update an existing module by admin. Note that either one of mCode and mTitle has to be specified +
+Format: `updateModule mId/MODULE_ID [mCode/MODULE_CODE] [mTitle/MODULE_TITLE]`
+
+Examples:
+
+* `updateModule mId/3 mCode/CS1221`
+* `updateModule mId/3 mTitle/Random CS module`
+* `updateModule mId/3 mCode/CS1221 mTitle/Random CS module`
+
 === Deleting a module : `deleteModule`
 
 Delete an existing module by admin. +
@@ -331,6 +342,10 @@ e.g `blockUser uName/john block/false`
 e.g `setAdmin uName/john set/true`
 * *CreateModule* : `createModule mCode/MODULE_CODE mTitle/MODULE_TITLE` +
 e.g `createModule mCode/CS2113 mTitle/Software Engineering and OOP`
+* *UpdateModule* : `updateModule mId/MODULE_ID [mCode/MODULE_CODE] [mTitle/MODULE_TITLE]` +
+e.g `updateModule mId/3 mCode/CS1221` +
+e.g `updateModule mId/3 mTitle/Random CS module` +
+e.g `updateModule mId/3 mCode/CS1221 mTitle/Random CS module`
 * *DeleteModule* : `deleteModule mCode/MODULE_CODE` +
 e.g `deleteModule mCode/CS2113`
 * *UpdatePass* : `updatePass uName/USER_NAME uPass/USER_PASSWORD` +

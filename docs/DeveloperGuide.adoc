@@ -365,17 +365,19 @@ The admin management is facilitated by various commands. It extends `ForumBook` 
 
 * `CheckAnnouncementCommand`: Checks for latest announcement.
 
-* `BlockUserFromCreatingCommand`: Blocks a user from posting either new threads or comments.
+* `BlockUserFromCreatingCommand`: Blocks an existing user from posting either new threads or comments.
 
-* `SetAdminCommand`: Sets a user as admin or reverts an admin to user.
+* `SetAdminCommand`: Sets an existing user as admin or reverts an existing admin to user.
 
 * `CreateModuleCommand`: Creates a module by admin.
 
-* `DeleteModuleCommand`: Deletes a specific module by admin.
+* `UpdateModuleCommand`: Updates an existing module by admin.
 
-* `AdminUpdatePasswordCommand`: Updates a certain user's password by admin.
+* `DeleteModuleCommand`: Deletes an existing module by admin.
 
-* `DeleteUserCommand`: Deletes a certain user by admin.
+* `AdminUpdatePasswordCommand`: Updates an existing user's password by admin.
+
+* `DeleteUserCommand`: Deletes an existing user by admin.
 
 Given below is an example usage scenario and how the admin management behaves at each step.
 
@@ -400,15 +402,19 @@ Step 5. The admin executes `createModule mCode/CS2113 mTitle/Software Engineerin
 
 image::SDCreateModule.png[width="800"]
 
-Step 6. The admin executes `deleteModule mCode/CS2113` to delete specific module. The `deleteModule` calls the `UnitOfWork.getModuleRepository().removeModule(module);` and then `UnitOfWork.commit()`, causing another modified forum book state to be save into `ForumBookStorage`.
+Step 6. The admin executes `updateModule mId/3 mTitle/Software Eng and OOP` to update the specific module. The `updateModule` calls the `UnitOfWork.getModuleRepository().updateModule(module)` and then `UnitOfWork.commit()`, causing another modified forum book state to be save into `ForumBookStorage`.
+
+image::SDUpdateModule.png[width="800"]
+
+Step 7. The admin executes `deleteModule mCode/CS2113` to delete specific module. The `deleteModule` calls the `UnitOfWork.getModuleRepository().removeModule(module);` and then `UnitOfWork.commit()`, causing another modified forum book state to be save into `ForumBookStorage`.
 
 image::SDDeleteModule.png[width="800"]
 
-Step 7. The admin executes `updatePass uName/john uPass/098` to update the user john's password. The `updatePass` calls the `UnitOfWork.getUserRepository().updateUser(user)` and then `UnitOfWork.commit()`, causing another modified forum book state to be save into `ForumBookStorage`.
+Step 8. The admin executes `updatePass uName/john uPass/098` to update the user john's password. The `updatePass` calls the `UnitOfWork.getUserRepository().updateUser(user)` and then `UnitOfWork.commit()`, causing another modified forum book state to be save into `ForumBookStorage`.
 
 image::SDUpdatePass.png[width="800"]
 
-Step 8. The admin executes `deleteUser uName/john` to delete the user john. The `deleteUser` calls the ` UnitOfWork.getUserRepository().deleteUser(userToDelete)` and then `UnitOfWork.commit()`, causing another modified forum book state to be save into `ForumBookStorage`.
+Step 9. The admin executes `deleteUser uName/john` to delete the user john. The `deleteUser` calls the ` UnitOfWork.getUserRepository().deleteUser(userToDelete)` and then `UnitOfWork.commit()`, causing another modified forum book state to be save into `ForumBookStorage`.
 
 image::SDDeleteUser.png[width="800"]
 
@@ -929,6 +935,16 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: A list of comments under thread ID 123 in the ForumThreadStorage will be shown in the result display panel.
 .. Test case: `selectModule tId/` +
    Expected: No comment will be listed out. Error details shown in the result display panel.
+
+=== Updating a module
+
+. Updating a module by admin.
+
+.. Prerequisites: Current user must login as an admin. The module must be in ModuleStorage.
+.. Test case: `updateModule mId/3 mCode/CS1223` +
+   Expected: The module `CS2113` will be updated to take the module code `CS1223`, and an success message will be shown in the result display panel.
+.. Test case: `updateModule mCode/CS1223` +
+   Expected: Since the module id was not specified, The module will not be updated. This command should raise an error and show in the result display panel.
 
 === Deleting a module
 
