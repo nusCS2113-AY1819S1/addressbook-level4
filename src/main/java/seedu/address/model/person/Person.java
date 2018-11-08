@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -39,6 +40,14 @@ public class Person {
         this.skill = skill;
         this.skillLevel = skillLevel;
         this.tags.addAll(tags);
+    }
+
+    public static Comparator<Person> getByName() {
+        return byName;
+    }
+
+    public static Comparator<Person> getBySkillLevel() {
+        return bySkillLevel;
     }
 
     public Name getName() {
@@ -129,4 +138,11 @@ public class Person {
         return builder.toString();
     }
 
+    private static Comparator<Person> bySkillLevel = Comparator.comparingInt(p -> p.getSkillLevel().skillLevel);
+
+    private static Comparator<Person> byName = (p1, p2) -> {
+        String name1 = p1.toString();
+        String name2 = p2.toString();
+        return name1.compareTo(name2);
+    };
 }

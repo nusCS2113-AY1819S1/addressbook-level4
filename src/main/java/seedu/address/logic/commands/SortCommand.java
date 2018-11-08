@@ -29,7 +29,7 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         List<Person> filteredPersonList = new ArrayList<>(model.getFilteredPersonList());
-        filteredPersonList.sort(Comparator.comparingInt(o -> o.getSkillLevel().skillLevel));
+        filteredPersonList.sort(Person.getByName());
         for (Person person: filteredPersonList) {
             model.deletePerson(person);
         }
