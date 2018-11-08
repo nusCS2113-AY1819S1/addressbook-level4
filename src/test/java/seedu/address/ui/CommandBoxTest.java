@@ -125,6 +125,23 @@ public class CommandBoxTest extends GuiUnitTest {
         assertInputHistory(KeyCode.UP, thirdCommand);
     }
 
+    @Test
+    public void commandBox_handleTabPressed_forSingleSuggestion() {
+        commandBoxHandle.pressTab("a");
+        assertEquals("add", commandBoxHandle.getInput());
+    }
+
+    @Test
+    public void commandBox_handleTabPressed_forMultipleSuggestion() {
+        commandBoxHandle.pressTab("e");
+        assertEquals("e", commandBoxHandle.getInput());
+    }
+
+    @Test
+    public void commandBox_handleTabPressed_forInvalidCommand() {
+        commandBoxHandle.pressTab("z");
+        assertEquals("z", commandBoxHandle.getInput());
+    }
     /**
      * Runs a command that fails, then verifies that <br>
      *      - the text remains <br>
@@ -154,4 +171,6 @@ public class CommandBoxTest extends GuiUnitTest {
         guiRobot.push(keycode);
         assertEquals(expectedCommand, commandBoxHandle.getInput());
     }
+
+
 }

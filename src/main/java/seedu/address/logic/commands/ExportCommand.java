@@ -3,59 +3,48 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
-import java.util.List;
+import java.nio.file.Path;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Filetype;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 
 //@@author jitwei98
 /**
- * Exports the selected person in the address book to a csv/vcf file.
+ * Exports the listed persons in the address book to a xml file.
  */
 public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
+    public static final String COMMAND_PARAMETERS = "Parameters: FILENAME (must end with .xml)\n";
+    public static final String COMMAND_EXAMPLE = "Example: " + COMMAND_WORD + " export.xml";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Export the persons listed "
+            + "in the address book.\n"
+            + COMMAND_PARAMETERS
+            + COMMAND_EXAMPLE;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Export the selected person in the address book"
-            + "\nParameters: INDEX (must be a positive integer)"
-            + "\nParameters: FILETYPE (must be either \"csv\" or \"vcf\") "
-            + "\nExample: " + COMMAND_WORD + " 1 csv ";
+    public static final String MESSAGE_EXPORT_SUCCESS = "Exported persons listed to %1$s";
+    public static final String MESSAGE_FAILURE = "Export failed!";
 
-    public static final String MESSAGE_EXPORT_PERSON_SUCCESS = "Exported Person: %1$s";
-    private static final String MESSAGE_FAILURE = "Export failed!";
+    private final Path filePath;
 
-    private final Index targetIndex;
-    private final Filetype filetype;
+    public ExportCommand(Path filePath) {
+        requireNonNull(filePath);
 
-    public ExportCommand(Index index, Filetype filetype) {
-        requireNonNull(index);
-        requireNonNull(filetype);
-
-        this.targetIndex = index;
-        this.filetype = filetype;
+        this.filePath = filePath;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person personToExport = lastShownList.get(targetIndex.getZeroBased());
         try {
-            model.exportPerson(personToExport);
+            model.exportFilteredAddressBook(filePath);
         } catch (IOException e) {
             throw new CommandException(MESSAGE_FAILURE);
         }
-        return new CommandResult(String.format(MESSAGE_EXPORT_PERSON_SUCCESS, personToExport));
+
+        return new CommandResult(String.format(MESSAGE_EXPORT_SUCCESS, filePath));
     }
 
     @Override
@@ -72,6 +61,6 @@ public class ExportCommand extends Command {
 
         // checks state
         ExportCommand e = (ExportCommand) other;
-        return targetIndex.equals(e.targetIndex) && filetype.equals(e.filetype);
+        return filePath.equals(e.filePath);
     }
 }
