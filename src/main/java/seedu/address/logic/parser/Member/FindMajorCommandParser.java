@@ -1,10 +1,10 @@
 package seedu.address.logic.parser.Member;
 
+import java.util.Arrays;
+
 import seedu.address.logic.commands.MemberCommand.FindMajorCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.member.MajorContainsKeywordsPredicate;
-
-import java.util.Arrays;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
